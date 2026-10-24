@@ -11419,21 +11419,23 @@
       "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-mymaps-kml",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e7bde42641443d0988af2f73e9d909af1f1b7bdc73a82ea547daa383769b3a83",
-          "files": 5,
-          "bytes": 257952,
-          "savedAt": "2026-10-17T07:35:22.314Z"
+          "sha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8",
+          "files": 6,
+          "bytes": 260065,
+          "savedAt": "2026-10-24T04:51:02.813Z"
         },
-        "verifiedAt": "2026-10-17T07:35:22.314Z"
+        "verifiedAt": "2026-10-24T04:51:02.813Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0c132ee7d825",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-mymaps-share",
@@ -11465,21 +11467,23 @@
       "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-excel-filled-map",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "12d6b7b4d380fd537f00e262cc1252668074d48bd527fafcb9bd1da64a28398c",
-          "files": 4,
-          "bytes": 29572,
-          "savedAt": "2026-10-17T23:22:27.112Z"
+          "sha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
+          "files": 5,
+          "bytes": 31582,
+          "savedAt": "2026-10-24T04:59:41.767Z"
         },
-        "verifiedAt": "2026-10-17T23:22:27.112Z"
+        "verifiedAt": "2026-10-24T04:59:41.767Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "publishedAt": "2026-10-24"
     }
   ]
 }

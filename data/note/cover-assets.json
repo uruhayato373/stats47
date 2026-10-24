@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T04:35:41.729Z",
+  "updatedAt": "2026-10-24T04:59:47.636Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -30498,22 +30498,103 @@
     },
     {
       "articleKey": "h-howto-excel-filled-map",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "revisions": [
+        {
+          "sha256": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-excel-filled-map/revisions/c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796.png"
+          },
+          "bytes": 1711544,
+          "id": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-eae039a818b4",
+          "createdAt": "2026-10-24T04:53:25.865Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a8983ea7cb98f229a04468c4e324297c10de90cffe3234cb152f9ec70599bb63"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と320pxで全指定文字を確認。誤字・欠字・重なりなし。人物・架空の地図なし。Excel操作結果は描いていない。",
+            "reviewedAt": "2026-10-24T04:53:39.211Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a8983ea7cb98f229a04468c4e324297c10de90cffe3234cb152f9ec70599bb63",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/h-howto-excel-filled-map/inputs/a8983ea7cb98f229a04468c4e324297c10de90cffe3234cb152f9ec70599bb63.json"
+              },
+              "bytes": 7337
+            },
+            "production": {
+              "id": "NCI-00504",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "eae039a818b44c8ab871b925f43b66c34394d0bf50f6f26fa2df3c8e47cf2c03"
+            }
+          }
+        },
+        {
+          "sha256": "ceed3fe92a4f4e6a37e84c4d0d000483eb054164c7663e98d1fc463877737f03",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-excel-filled-map/revisions/ceed3fe92a4f4e6a37e84c4d0d000483eb054164c7663e98d1fc463877737f03.png"
+          },
+          "bytes": 396130,
+          "id": "ceed3fe92a4f4e6a37e84c4d0d000483eb054164c7663e98d1fc463877737f03",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T04:59:43.819Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327848844/rectangle_large_type_2_c521a42a3d5db55eed30b3f8572660d2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "ceed3fe92a4f4e6a37e84c4d0d000483eb054164c7663e98d1fc463877737f03"
+          }
+        }
+      ],
+      "candidateRevisionId": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
+      "approvedRevisionId": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327848844/rectangle_large_type_2_c521a42a3d5db55eed30b3f8572660d2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T04:59:43.819Z",
+        "revisionId": "ceed3fe92a4f4e6a37e84c4d0d000483eb054164c7663e98d1fc463877737f03"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00504",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "Excelで県別地図を作る",
+          "subline": "統計CSVから色分け図へ",
+          "subject": "机上のノートPCと無地の表計算シートの紙を大きく描く。画面や紙に文字・数字・色分け済みの日本地図を入れない。ExcelやMicrosoftのロゴを描かない。",
+          "evidence": "原稿 h-howto-excel-filled-map はstats47のCSVから国・都道府県名・値を用意し、Excelの塗りつぶされたマップ機能に進む手順を説明。Excel実機での結果は未確認のため、カバーには完成結果を描かない。"
+        }
       }
     },
     {
       "articleKey": "h-howto-mymaps-kml",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0c132ee7d825",
       "revisions": [
         {
           "sha256": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
@@ -30559,11 +30640,41 @@
               "planSha256": "0b8dd2416ca612799541d995104e7a99d55756688146ba7c6aff680763e1ca55"
             }
           }
+        },
+        {
+          "sha256": "75453162f392356722289f7f129893b1e1fb61304c3391bc935106dd68a435d6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-mymaps-kml/revisions/75453162f392356722289f7f129893b1e1fb61304c3391bc935106dd68a435d6.png"
+          },
+          "bytes": 409975,
+          "id": "75453162f392356722289f7f129893b1e1fb61304c3391bc935106dd68a435d6",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T04:51:05.269Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327846553/rectangle_large_type_2_3b6a447fccfb1ccbfb535af9ffe8f503.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "75453162f392356722289f7f129893b1e1fb61304c3391bc935106dd68a435d6"
+          }
         }
       ],
       "candidateRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
       "approvedRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327846553/rectangle_large_type_2_3b6a447fccfb1ccbfb535af9ffe8f503.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T04:51:05.269Z",
+        "revisionId": "75453162f392356722289f7f129893b1e1fb61304c3391bc935106dd68a435d6"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00503",

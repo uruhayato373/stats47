@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T04:42:34.223Z",
+  "observedAt": "2026-10-24T05:00:13.590Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -11,15 +11,15 @@
   },
   "decisionCounts": {
     "hold-body-unwritten": 11,
-    "hold-cover-unapproved": 4,
+    "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
     "hold-product-sales": 68,
-    "published-verified": 4,
+    "published-verified": 6,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 406,
-    "draft": 94
+    "published": 408,
+    "draft": 92
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1800,17 +1800,16 @@
       "articleKey": "h-howto-mymaps-kml",
       "vertical": "stats47-note",
       "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
-      "bodyManifestSha256": "e7bde42641443d0988af2f73e9d909af1f1b7bdc73a82ea547daa383769b3a83",
+      "bodyManifestSha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00503",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
       "publishedTitleMatches": [],
-      "decision": "hold-cover-unapproved",
+      "decision": "published-verified",
       "reasons": [
-        "current cover has no approved revision",
-        "2026-10-24のMy Maps実機検証はGoogle Picker白画面でKMLを選べず、県別色・吹き出し・結果画面は未確認"
+        "Published as requested with a visible note that the external application result was not tested on this Mac; live note API verified account, public state, title, free price, 99 tags, 2 inline image(s), and cover configuration"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n0c132ee7d825",
       "mymapsValidation": {
         "attemptedAt": "2026-10-24",
         "sourceKml": "https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original",
@@ -1820,6 +1819,17 @@
         "details": "ChromeのGoogleマイマップで非公開テスト地図を作成。KMLインポートのGoogle Pickerが再読込後も白画面。Googleドライブ経由のKMLアップロードは完了したが、Driveの「アプリで開く」にMy Mapsがなく、マイマップの表示結果は確認できなかった。",
         "cleanup": "テスト地図とDriveにアップロードしたKMLをゴミ箱へ移動し、マイマップ所有一覧が空であることを確認。",
         "resumeCondition": "My Mapsのファイル選択画面が表示される環境で同じKMLをインポートし、県別色と県クリックの情報・結果スクリーンショットを確認。"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:00:13.589Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 0,
+        "tags": 99,
+        "inlineImages": 2,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327846553/rectangle_large_type_2_3b6a447fccfb1ccbfb535af9ffe8f503.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8"
       }
     },
     {
@@ -1861,18 +1871,27 @@
       "articleKey": "h-howto-excel-filled-map",
       "vertical": "stats47-note",
       "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
-      "bodyManifestSha256": "12d6b7b4d380fd537f00e262cc1252668074d48bd527fafcb9bd1da64a28398c",
+      "bodyManifestSha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00504",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
       "publishedTitleMatches": [],
-      "decision": "hold-cover-unapproved",
+      "decision": "published-verified",
       "reasons": [
-        "current cover has no approved revision",
-        "Excel塗りつぶしマップの実機確認・結果画像が未確認",
-        "このMacにはMicrosoft Excel.appがなく、塗りつぶしマップの実機確認は未実施。"
+        "Published as requested with a visible note that the external application result was not tested on this Mac; live note API verified account, public state, title, free price, 99 tags, 1 inline image(s), and cover configuration"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:00:13.590Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 0,
+        "tags": 99,
+        "inlineImages": 1,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327848844/rectangle_large_type_2_c521a42a3d5db55eed30b3f8572660d2.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab"
+      }
     }
   ]
 }

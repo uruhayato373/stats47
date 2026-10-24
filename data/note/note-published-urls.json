@@ -2621,6 +2621,28 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "h-howto-excel-filled-map": {
+      "vertical": "stats47-note",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "url": "https://note.com/stats47/n/n800864e68c6b",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-excel-filled-map",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "h-howto-mymaps-kml": {
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "url": "https://note.com/stats47/n/n0c132ee7d825",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-mymaps-kml",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "h-howto-mymaps-share": {
       "vertical": "stats47-note",
       "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
