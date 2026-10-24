@@ -1,0 +1,1700 @@
+{
+  "schemaVersion": 1,
+  "kind": "note-draft-publication-audit",
+  "account": "stats47",
+  "observedAt": "2026-10-24T00:26:08.846906+00:00",
+  "startingDrafts": 100,
+  "bodyStorage": {
+    "deepVerified": 89,
+    "failed": 0,
+    "unwritten": 11
+  },
+  "decisionCounts": {
+    "hold-body-unwritten": 11,
+    "hold-cover-unapproved": 6,
+    "hold-duplicate-title": 13,
+    "hold-product-sales": 68,
+    "published-verified": 2
+  },
+  "currentCatalog": {
+    "published": 404,
+    "draft": 98
+  },
+  "noteComDrafts": {
+    "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
+    "observedCount": 3,
+    "rows": [
+      {
+        "noteId": "n125f816e76cf",
+        "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+        "sameTitlePublishedKey": "12-fiscal-peer-comparison",
+        "decision": "hold-duplicate"
+      },
+      {
+        "noteId": "ne54b77ee1c68",
+        "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+        "sameTitlePublishedKey": "12-fiscal-peer-comparison",
+        "decision": "hold-duplicate"
+      },
+      {
+        "noteId": "ndd6577272515",
+        "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
+        "sameTitlePublishedKey": "a-maximum-temperature",
+        "decision": "hold-duplicate"
+      }
+    ]
+  },
+  "articles": [
+    {
+      "articleKey": "d-geo-region-code-checklist",
+      "vertical": "stats47-note",
+      "title": "地域コード結合の完全チェックリスト",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00251",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-ksj-qgis-guide",
+      "vertical": "stats47-note",
+      "title": "国土数値情報をQGISで扱う",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00245",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-x-ogp-map-automation",
+      "vertical": "stats47-note",
+      "title": "X/OGP地図カード自動生成",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00254",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-medical-access-analysis",
+      "vertical": "stats47-note",
+      "title": "医療アクセス分析",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00247",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-geopackage-parquet-pmtiles",
+      "vertical": "stats47-note",
+      "title": "GeoPackage/Parquet/PMTiles",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00243",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-data-quality-management",
+      "vertical": "stats47-note",
+      "title": "stats47型データ品質管理",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00241",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-trade-area-analysis",
+      "vertical": "stats47-note",
+      "title": "商圏分析の基本",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00253",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-poi-license-practice",
+      "vertical": "stats47-note",
+      "title": "POIデータのライセンスと実務",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00249",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-natural-language-region-filter",
+      "vertical": "stats47-note",
+      "title": "自然言語→地域フィルタJSON",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00248",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-pyqgis-ai-verification",
+      "vertical": "stats47-note",
+      "title": "AIにPyQGISを書かせる検証法",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00250",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-analysis-template-compendium",
+      "vertical": "stats47-note",
+      "title": "1年分の地域分析テンプレ総集編",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00240",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
+      "vertical": "stats47-note",
+      "title": "【2026年版】有給休暇取得率ランキング｜休める県・休めない県",
+      "bodyManifestSha256": "fc33f97762237e6b29c3045de846f97ab319c5a60cf3599c42f2d5e1dcad545a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00109",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "A-laborwage-wages-by-industry-prefecture",
+      "vertical": "stats47-note",
+      "title": "【2026年版】産業別平均賃金ランキング｜稼げる業界の地域差",
+      "bodyManifestSha256": "ad32b27d6df64329c668e0fd80589c141089fe9c7859cc1a118dcdca95653664",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00111",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-number-of-hotel-rooms",
+      "vertical": "stats47-note",
+      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
+      "bodyManifestSha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00116",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n91e82ac3b13c",
+          "noteUrl": "https://note.com/stats47/n/n91e82ac3b13c"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-overseas-travel-annual-participation-rate-10plus",
+      "vertical": "stats47-note",
+      "title": "【2021年版・10歳以上】海外旅行をした人が多い県は？ 1位は京都府｜都道府県ランキング",
+      "bodyManifestSha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00117",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n827191af8c1c",
+          "noteUrl": "https://note.com/stats47/n/n827191af8c1c"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-population-density-per-km2-total-area",
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
+      "bodyManifestSha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00119",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-nd5f8b5072cdb",
+          "noteUrl": "https://note.com/stats47/n/nd5f8b5072cdb"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-volunteer-activity-annual-participation-rate-15plus",
+      "vertical": "stats47-note",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "bodyManifestSha256": "e6f5ef23b58b38e1f529fd9ad9d565951e137e688e97802aca70738d8d7c828f",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00128",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d1-kakei-prefecture-consumption",
+      "vertical": "stats47-note",
+      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
+      "bodyManifestSha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00257",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n68f5e09c8d62",
+          "noteUrl": "https://note.com/stats47/n/n68f5e09c8d62"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "22-monthly-routine-skills",
+      "vertical": "koumuin-claude-code",
+      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
+      "bodyManifestSha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00037",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n2207f3039fd3",
+          "noteUrl": "https://note.com/stats47/n/n2207f3039fd3"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "23-mcp-internal-system",
+      "vertical": "koumuin-claude-code",
+      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
+      "bodyManifestSha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00038",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-nbead1fe772c7",
+          "noteUrl": "https://note.com/stats47/n/nbead1fe772c7"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "24-subagents-parallel-research",
+      "vertical": "koumuin-claude-code",
+      "title": "Subagents で「複数案件の並行調査」を回す",
+      "bodyManifestSha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00039",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n68eafab07946",
+          "noteUrl": "https://note.com/stats47/n/n68eafab07946"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "25-excel-vba-to-python",
+      "vertical": "koumuin-claude-code",
+      "title": "既存の Excel マクロを Claude Code で Python 移植する",
+      "bodyManifestSha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00040",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-nfd3ab8213e1f",
+          "noteUrl": "https://note.com/stats47/n/nfd3ab8213e1f"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "26-boss-approval-deck",
+      "vertical": "koumuin-claude-code",
+      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
+      "bodyManifestSha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00041",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n2c2df066e865",
+          "noteUrl": "https://note.com/stats47/n/n2c2df066e865"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "27-internal-study-30min",
+      "vertical": "koumuin-claude-code",
+      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
+      "bodyManifestSha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00042",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n9f666946d105",
+          "noteUrl": "https://note.com/stats47/n/n9f666946d105"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "28-ai-skeptic-qa",
+      "vertical": "koumuin-claude-code",
+      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
+      "bodyManifestSha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00043",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-ncab0d7b04228",
+          "noteUrl": "https://note.com/stats47/n/ncab0d7b04228"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "29-evaluated-without-side-job",
+      "vertical": "koumuin-claude-code",
+      "title": "公務員が副業せずに Claude Code スキルで評価される 5 つの場",
+      "bodyManifestSha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00044",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-nc18fa33ec65e",
+          "noteUrl": "https://note.com/stats47/n/nc18fa33ec65e"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "30-post-retirement-career",
+      "vertical": "koumuin-claude-code",
+      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
+      "bodyManifestSha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00045",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n8558c1a6503a",
+          "noteUrl": "https://note.com/stats47/n/n8558c1a6503a"
+        }
+      ],
+      "decision": "hold-duplicate-title",
+      "reasons": [
+        "published article with identical title; body/version reconciliation required"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-japan-map-assets",
+      "vertical": "product-sales",
+      "title": "PowerPointで使える47都道府県の白地図・色分け地図素材",
+      "bodyManifestSha256": "77731b19acb06f1295f03ef8ff177d0579f918b3612fe6573737564ecd15904e",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00353",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-ranking-chart-assets",
+      "vertical": "product-sales",
+      "title": "都道府県ランキング・散布図・時系列チャートのPowerPointテンプレート集",
+      "bodyManifestSha256": "3e5cae76a4244753c0a7fdac1e64976073ba479ad24a977d9830a7488c4892d2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00357",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-onepager-sns-assets",
+      "vertical": "product-sales",
+      "title": "1枚資料・SNS図版・動画画面向けの都道府県データ素材",
+      "bodyManifestSha256": "8f284669bc49777ec447dfdf829b3f0901fc640cf5163b7d2e170d8b188a3944",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00356",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-data-explainer-deck",
+      "vertical": "product-sales",
+      "title": "都道府県データ説明スライド20枚セット",
+      "bodyManifestSha256": "f0909d6e9fc50e6531642386ae6091e7bafcb7564b754c307839e6348f858107",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00350",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-region-intro-deck",
+      "vertical": "product-sales",
+      "title": "県勢・市勢紹介と地域企業向け商圏説明のスライド雛形",
+      "bodyManifestSha256": "aac81d3fcef413dde86b04475c55d2f39f1b033fd211e64d196fcdc0f1efa9aa",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00358",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-market-proposal-deck",
+      "vertical": "product-sales",
+      "title": "市場調査・出店提案・営業に使う地域比較スライド",
+      "bodyManifestSha256": "01cbd35aa2b2ebbc97172a4c291730f10d3a2da58c53423c490b6abed7d792c8",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00354",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-relocation-hiring-deck",
+      "vertical": "product-sales",
+      "title": "移住候補地・採用賃金の地域比較スライド",
+      "bodyManifestSha256": "00e0115b7327c7c2112bc9d1a5a497d8cf83c88cb4ce21e7bafc53b4e18a4dca",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00359",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-tourism-demand-deck",
+      "vertical": "product-sales",
+      "title": "観光・宿泊市場分析スライド雛形",
+      "bodyManifestSha256": "f5e8811ec209893cafb3f7532f788891df26ec0e9ffcc90b8eee70fe74abe558",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00361",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-healthcare-education-deck",
+      "vertical": "product-sales",
+      "title": "医療・介護・教育・子育て環境の地域比較スライド",
+      "bodyManifestSha256": "fb7a06d9e7b15f3fd418c3165498e2cd443fca10edabd75e772b1c1270b96ab3",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00352",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-government-policy-deck",
+      "vertical": "product-sales",
+      "title": "政策立案・議会説明・地方創生のプレゼン雛形",
+      "bodyManifestSha256": "da278b440cec67116dfafbad3d5886e516e052947080485089e680ff9e285122",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00351",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-media-report-deck",
+      "vertical": "product-sales",
+      "title": "企画会議・記者発表・アンケート報告のスライド雛形",
+      "bodyManifestSha256": "e8128fcefd6a556e1de2e3881f787ec3b7be91c1dd464a27adc2a2b915a87a40",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00355",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-seminar-research-deck",
+      "vertical": "product-sales",
+      "title": "セミナー研修・卒論発表向けの統計図表テンプレート",
+      "bodyManifestSha256": "ff3038d76d90d316d663ba85e3a2bc1904246a4dd40e6cd301f00c175f766df1",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00360",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-choropleth-map",
+      "vertical": "product-sales",
+      "title": "数値を貼るだけの47都道府県コロプレス地図Excel",
+      "bodyManifestSha256": "6393d39f8012fae37548da3b7da84e5c23c20e03a5ca6e596074d84f5cb955f0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00269",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-ranking-auto",
+      "vertical": "product-sales",
+      "title": "47都道府県ランキングを自動作成するExcel",
+      "bodyManifestSha256": "dce168b6895eb106690964c5494085518ba29485a16a48a5fc6980d36c23c0e0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00275",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-integrated-dashboard",
+      "vertical": "product-sales",
+      "title": "地図・ランキング・スコアリング統合Excelダッシュボード",
+      "bodyManifestSha256": "85170b2ba11d3ccee5e5c1fe08820f034c437ffc4a136a393d64a20663428c18",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00273",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-gap-timeseries-analysis",
+      "vertical": "product-sales",
+      "title": "全国平均との差・時系列・相関を見るExcel分析テンプレート",
+      "bodyManifestSha256": "dcf1c7a87730519d15f39fbdeeba480eaba4a30cf3f3f85dbdf96a6f7d265ba0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00272",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-population-migration",
+      "vertical": "product-sales",
+      "title": "人口構成・人口移動を分析するExcelテンプレート",
+      "bodyManifestSha256": "b67337c7528a5b75372c36b59e7e906d3c43dc2378194b5e3ec1d781e9410b01",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00274",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-business-location",
+      "vertical": "product-sales",
+      "title": "商圏・採用・移住候補をスコアリングするExcel",
+      "bodyManifestSha256": "ecec0116d66ec9c75512b94fbd9bc31b2221d25be740060036cfd0b7aec06457",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00268",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-domain-comparison",
+      "vertical": "product-sales",
+      "title": "観光・財政・医療・教育・防災の地域比較Excel",
+      "bodyManifestSha256": "949649ab777dd8f12c21c5a6eb15a9f652e9f251efd4b1d9cb9563943a0903da",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00271",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-data-utilities",
+      "vertical": "product-sales",
+      "title": "e-Stat整形・都道府県コード変換・年度統合の実務Excelツール",
+      "bodyManifestSha256": "a88e1659cd315f0f76e96a7373dc60dc38e0a9f9e31a8b84330803b621a18730",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00270",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-basic",
+      "vertical": "product-sales",
+      "title": "47都道府県 基礎統計データブック",
+      "bodyManifestSha256": "86cb60b96c65c2c19a2530e7bbfd44361ba5cd3f09bc70d7211f8de699276812",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00259",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-population-economy",
+      "vertical": "product-sales",
+      "title": "人口・所得・物価のテーマ別データパック",
+      "bodyManifestSha256": "28283d1709cdd0b9da305c826047c89f4459cc81813715f1e82748037c9f39fd",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00264",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-living-infrastructure",
+      "vertical": "product-sales",
+      "title": "住宅・医療・教育・交通のテーマ別データパック",
+      "bodyManifestSha256": "4194f37d2af9452eb45109dcbd70bb127eaafbc85cbacc5ed397f94cc113143b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00263",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-industry-tourism",
+      "vertical": "product-sales",
+      "title": "観光・産業・農林水産のテーマ別データパック",
+      "bodyManifestSha256": "6722b4bc55854f1e09507e1e5bea8641ff2dc27a45a23015b86aefa40354ebc7",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00262",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-government-safety",
+      "vertical": "product-sales",
+      "title": "財政・環境・安全防災のテーマ別データパック",
+      "bodyManifestSha256": "36a5bc2c6641634e4259836a3772dc8476ff437547e3983b28672a730caacdf2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00261",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-culture-demographics",
+      "vertical": "product-sales",
+      "title": "文化・スポーツ・属性別のテーマ別データパック",
+      "bodyManifestSha256": "d7fdae95572b72059a36e76ac437282ff89f9065e58efffd4168955fc45d1c89",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00260",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-advanced",
+      "vertical": "product-sales",
+      "title": "市区町村内格差・人口移動・100図表の上級データパック",
+      "bodyManifestSha256": "37534226c39aee7f299802c491cc6305e39a08e2c2dd446c50947272bc1fe92d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00258",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-retail-food-location",
+      "vertical": "product-sales",
+      "title": "飲食店・小売店の出店候補地分析パック",
+      "bodyManifestSha256": "77dc060e5cc5153ff1a2eb84b74f78205e4d1c92f7d0d02a19a85abb5f3135e9",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00287",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-service-location",
+      "vertical": "product-sales",
+      "title": "学習塾・介護・クリニックの開業地域比較パック",
+      "bodyManifestSha256": "d758ce5ce94c0a6c120d802e685838a925fa1a2eda67d9676fa7617169e7201c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00288",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-tourism-realestate",
+      "vertical": "product-sales",
+      "title": "宿泊施設・不動産営業の地域比較パック",
+      "bodyManifestSha256": "f57c736171e19e78a4c41701ac3679d5f94be8303bba137adf2234902e5c07b6",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00289",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-hiring-branch",
+      "vertical": "product-sales",
+      "title": "採用拠点・支店候補地の比較パック",
+      "bodyManifestSha256": "1b648c81da14cddc00e7fb0ce1814979727290243a25aecb0d94aac43992b142",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00284",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-marketing-furusato",
+      "vertical": "product-sales",
+      "title": "EC地域マーケティング・ふるさと納税・地域金融の企画パック",
+      "bodyManifestSha256": "1f7e76697011049d5d28075ab3b1a72c97156ad09beaf17ef62c6f9ce8221d57",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00285",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-government-promotion",
+      "vertical": "product-sales",
+      "title": "シティプロモーション・地方創生プロジェクト企画パック",
+      "bodyManifestSha256": "7da40369da62d692e947575a8dc6512dc1463c1b4e820ef5aa65ae06c869f260",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00283",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-media-sns",
+      "vertical": "product-sales",
+      "title": "地域メディア記事・YouTube・SNS運用の制作パック",
+      "bodyManifestSha256": "ed3dfd0a822088327a8b35ba0752282a1d227ce2ba4b852f5323045f3c9230ac",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00286",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-estat-workflow",
+      "vertical": "product-sales",
+      "title": "e-Stat検索・出典管理・オープンデータ公開を時短する自治体Excel一式",
+      "bodyManifestSha256": "3bb3eeb52a4641ad8757c728fde382ab7f098a7e08282270ee2302be69cca801",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00277",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-similar-municipality",
+      "vertical": "product-sales",
+      "title": "類似団体比較・人口ビジョン・総合戦略の指標整理テンプレート",
+      "bodyManifestSha256": "57750ecda445872da17662460a6c7b34d18788b295dcdbebcdf4c6b1e59d88dc",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00281",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-kpi-ebpm",
+      "vertical": "product-sales",
+      "title": "総合計画KPI管理・EBPMロジックモデルのダッシュボード",
+      "bodyManifestSha256": "f86b5580df0874bc66efab16c185a9d478852f70981b58c819b6f7581d22e962",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00279",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-presentation-decks",
+      "vertical": "product-sales",
+      "title": "予算要求・議会答弁・県勢要覧の説明図表セット",
+      "bodyManifestSha256": "6c702ca0cbf1793f37a38c7568e25794bfe212ba3a96a6d4da74fab9299f7193",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00280",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-koho-visuals",
+      "vertical": "product-sales",
+      "title": "自治体広報向けの統計図版セット",
+      "bodyManifestSha256": "96d8b044840de4985cc4bb71a06f802893ed9c07570518624d8f14439149fb38",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00278",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-training-materials",
+      "vertical": "product-sales",
+      "title": "公務員向け統計グラフ・PowerPoint改善・AI統計加工の研修教材",
+      "bodyManifestSha256": "3542f5fc73906549d42a9b198fe4a5f71f3ac450ff8acc9c62f2a51ba0df5d0d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00282",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-ranking-visuals",
+      "vertical": "product-sales",
+      "title": "記事・ニュース・note向けの都道府県ランキング図版セット",
+      "bodyManifestSha256": "3174b5b113df2d8b512d8feca0bb741f98f7730eb149d32ad3a950add375ef8c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00297",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-video-social-visuals",
+      "vertical": "product-sales",
+      "title": "YouTube・ショート・Instagram・X向けの統計図版テンプレート",
+      "bodyManifestSha256": "a38829cfeb5affe30f2bc11b97a134a38d49a02398651c92cc840b89e61c4538",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00298",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-editorial-toolkit",
+      "vertical": "product-sales",
+      "title": "編集部向けネタカレンダー・構成テンプレ・ファクトチェック台帳",
+      "bodyManifestSha256": "a0dbd46f5e13fd28ff9501cbcd2c314cbd7edf256c34c9e01428e79703148ef6",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00296",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-classroom-materials",
+      "vertical": "product-sales",
+      "title": "中高生向け47都道府県の統計授業スライド・クイズ教材",
+      "bodyManifestSha256": "4b68b951948addc8f221d6d3d7437f2e386acbc1adb38d175818f5debb7f2447",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00265",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-inquiry-worksheets",
+      "vertical": "product-sales",
+      "title": "探究学習・オープンデータ調査・自県研究のワークシート",
+      "bodyManifestSha256": "6a10349f2e7543bdff3e1735d73a7341fc7ea8213dda6abffdf7d4974b26dd0e",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00267",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-excel-stats-literacy",
+      "vertical": "product-sales",
+      "title": "Excelグラフ演習・相関と因果・レポート管理の統計リテラシー教材",
+      "bodyManifestSha256": "f322fbd4e9c18722c6ea978b39ca5bfb750ab448879f7b3be642d0e0ff5e939d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00266",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-relocation-comparison",
+      "vertical": "product-sales",
+      "title": "移住・引越し・二拠点・UIターンの候補地比較シート",
+      "bodyManifestSha256": "9ea5a5d50c2c5f5a3bf50c6d02d697533ab9ac54b6dffe4f153e8e32342b5c24",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00294",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-family-career-comparison",
+      "vertical": "product-sales",
+      "title": "子育て・転職勤務地・大学進学先の地域比較シート",
+      "bodyManifestSha256": "17147d4d64b58bc575cb51b8741ed3ede333713e389914d7454f091528045376",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00293",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-retirement-weighting",
+      "vertical": "product-sales",
+      "title": "退職後の居住地選びと自分用の都道府県重み付け診断シート",
+      "bodyManifestSha256": "5029d484eb138c9c63527b0e5ff9b3054f324affd5d87f688be0eb2998e10a4b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00295",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-map-chart-creation",
+      "vertical": "product-sales",
+      "title": "顧客データの地図化・ランキング化・資料化を代行します",
+      "bodyManifestSha256": "2b032b1291ad8659a669e871fdfc05bbe632b18c7540f478f395d3cbc23e7c53",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00493",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-regional-report",
+      "vertical": "product-sales",
+      "title": "公的統計の調査・地域比較レポート・統計資料監査を承ります",
+      "bodyManifestSha256": "c1fb00cf55c70a0358456c99c8a10b29cc773ed44c010da31773857238632553",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00494",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-business-comparison",
+      "vertical": "product-sales",
+      "title": "出店・移住・採用の地域比較を条件別に作成します",
+      "bodyManifestSha256": "139b372dfecf8537a10573a73740902bd797892ffca1fc66a80f57a31c008193",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00491",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-dashboard-build",
+      "vertical": "product-sales",
+      "title": "Excelダッシュボード化・自治体資料・定期更新・Web構築を承ります",
+      "bodyManifestSha256": "49be7d6c69de677de752c66f480dc370a878ef700b53b8c861b733658e09e0e3",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00492",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "license-guide",
+      "vertical": "product-sales",
+      "title": "都道府県データ商品のライセンス・版の違いガイド",
+      "bodyManifestSha256": "0ea55b01585be7825812de9e6a13c149c978b4856c4498e42dcf332945d000fc",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00292",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "free-samples",
+      "vertical": "product-sales",
+      "title": "都道府県地図・テンプレート・比較チェックリストの無料サンプル",
+      "bodyManifestSha256": "a0e778c50573b7defbf7a8ad0200abffab799c49edc6a7bae7ccc3605304a54d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00276",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-population-household-pack",
+      "vertical": "product-sales",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "bodyManifestSha256": "8e27e75a7287ae333041d5e8df339fbe772cb601e379bc9492a91d1d798e9738",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00373",
+      "approvedCoverRevisionId": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-income-wage-hiring-pack",
+      "vertical": "product-sales",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "bodyManifestSha256": "ae327c6e8ddd904b8d8fa4b7488ce10f1f68ceb696c34b9ac31ab4ef34b2c2ac",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00368",
+      "approvedCoverRevisionId": "d966ced088cbab141ed5b9f6b135de05507408355a3a5f7ca8b77386e39f965f",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-tourism-lodging-pack",
+      "vertical": "product-sales",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "bodyManifestSha256": "8ba6b76c1a9a75503b001e86d980547dca5dbfdbbc0b3b4e1d79fa7badba7416",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00375",
+      "approvedCoverRevisionId": "0f54033a45798d0c236a0a870649c0ea197f005ca7cf9c585cd3d0e7a9691392",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-municipal-finance-pack",
+      "vertical": "product-sales",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "bodyManifestSha256": "368d3142642d381c8c0b823954fe08bb5e72fe2474aae069c2f8c1118efa12c1",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00372",
+      "approvedCoverRevisionId": "8928a2c447d626e350bf1c9849366a93491d5d7baa086e43a8428b525a88744b",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-healthcare-nursing-pack",
+      "vertical": "product-sales",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "bodyManifestSha256": "0e98930e0c0b8466eca8d2705072db30671063a28e22af24ad21ed8c7a803c90",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00366",
+      "approvedCoverRevisionId": "bdccb93d51e701acb9245cbb36c380cc3965b539ed737a7df3bca442b159e9fd",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-education-childcare-pack",
+      "vertical": "product-sales",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "bodyManifestSha256": "6d397ec9e70ccd9c282ee66f876f75b2d6409aa066bc76abebf35c4a5e5774bb",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00364",
+      "approvedCoverRevisionId": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-migration-living-pack",
+      "vertical": "product-sales",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "bodyManifestSha256": "5cb91744509878ec564f3904ca8d449e89c8e1b765bf1d8ee9cea7b48e437d6b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00371",
+      "approvedCoverRevisionId": "b111963e56200cb24042f1fc0f034986e4410f88d152ca26b13870255c8446cb",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-retail-trade-area-pack",
+      "vertical": "product-sales",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "bodyManifestSha256": "401f9627745622ed1f8d2157b04ad2d8544eccac3f860af10c17e8327b76ed50",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00374",
+      "approvedCoverRevisionId": "a6f775e8abfcc0a3058a93456fb2271d8f730ae9f40f5784d2c26826c77bc242",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-industry-economy-pack",
+      "vertical": "product-sales",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "bodyManifestSha256": "48ef9e34eb5c4c1a2a9a3fa7956a48dfcd44a9d46c34cb61290bab0be30aef36",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00369",
+      "approvedCoverRevisionId": "a7521a81fd0e741d66fc059e87c58b90fcac2841cc30035437a71743b31bae31",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-disaster-infrastructure-pack",
+      "vertical": "product-sales",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "bodyManifestSha256": "a3a6a59943324eebe61913a38bfd987bef3bea8ddcec348a283adb836f496c16",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00363",
+      "approvedCoverRevisionId": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-map-chart-assets-pack",
+      "vertical": "product-sales",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "bodyManifestSha256": "f411b3be03e783429b11ac81312f884fa39d5a81148757dac451e67a3d0c2137",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00370",
+      "approvedCoverRevisionId": "345a0301d65bfa711c45320ef6ddc71eeeab76c1504bf5e0505ad0a2159720fb",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-all-in-one-pack",
+      "vertical": "product-sales",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "bodyManifestSha256": "8b6f2894a9531830a78c0517511527c9dad92334c874f4828058d1a23700d7d5",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00362",
+      "approvedCoverRevisionId": "934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-household-consumption-pack",
+      "vertical": "product-sales",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "bodyManifestSha256": "2a9bb774833746c8955e965f84cee213e9e4c64f1840376353cc8f966a74acbe",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00367",
+      "approvedCoverRevisionId": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-annual-paid-leave-11-days-or-more-ratio",
+      "vertical": "stats47-note",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "bodyManifestSha256": "b48ce1cd24c585ebaa721320930703438be0371ef7c1d5ce98532e62f5bf324a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00500",
+      "approvedCoverRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nfb6a7a246b12",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 9,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true
+      }
+    },
+    {
+      "articleKey": "a-manufacturing-industry-annual-income",
+      "vertical": "stats47-note",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "bodyManifestSha256": "ff5c58da739bad6cd11130784d2c4afbaada77c9a868375d21b31be627772c49",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00501",
+      "approvedCoverRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nb09980b2ef49",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 9,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true
+      }
+    },
+    {
+      "articleKey": "h-howto-mymaps-kml",
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "bodyManifestSha256": "e7bde42641443d0988af2f73e9d909af1f1b7bdc73a82ea547daa383769b3a83",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00503",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "h-howto-mymaps-share",
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
+      "bodyManifestSha256": "e77b536d6778040837635b53fd85f5c6d2fa5ef804659cc6358602bcc093bbe4",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00505",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "h-howto-excel-filled-map",
+      "vertical": "stats47-note",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "bodyManifestSha256": "12d6b7b4d380fd537f00e262cc1252668074d48bd527fafcb9bd1da64a28398c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00504",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision"
+      ],
+      "publishedUrl": null
+    }
+  ]
+}

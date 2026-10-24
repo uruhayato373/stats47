@@ -8,7 +8,7 @@
 # 使い方: bash publish-new-note.sh <slug> <vertical> [--publish] [magazine表示名]
 set -uo pipefail
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
-ROOT=/Users/minamidaisuke/stats47
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 SLUG="$1"; VERT="$2"; PUBLISH="${3:-}"; MAGAZINE="${4:-}"
 J="/tmp/note-data-$SLUG.json"
 ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
@@ -200,7 +200,7 @@ NOTE_KEY=$(BU eval "location.pathname.match(/\\/notes\\/(n[0-9a-f]+)\\//)?.[1]||
 EXPECTED_EMBEDS=$(( $(jq -r '.urlCount' "$J") + NIMG ))
 EXPECTED_PRICE=0
 [ "$IS_PAID" = "true" ] && EXPECTED_PRICE="$PRICE"
-NOTE_KEY="$NOTE_KEY" EXPECTED_TITLE="$TITLE" EXPECTED_PRICE="$EXPECTED_PRICE" EXPECTED_EMBEDS="$EXPECTED_EMBEDS" node - <<'NODE'
+NOTE_KEY="$NOTE_KEY" EXPECTED_TITLE="$TITLE" EXPECTED_PRICE="$EXPECTED_PRICE" EXPECTED_EMBEDS="$EXPECTED_EMBEDS" node - <<'NODE' || exit 1
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 let note;
 for (let attempt = 1; attempt <= 5; attempt += 1) {

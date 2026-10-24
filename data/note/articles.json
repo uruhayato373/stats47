@@ -11387,7 +11387,7 @@
       "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
       "body": {
         "store": "r2-public",
@@ -11401,7 +11401,9 @@
       },
       "stats47Targets": [
         "/ranking/annual-paid-leave-11-days-or-more-ratio"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nfb6a7a246b12",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "a-manufacturing-industry-annual-income",
@@ -11410,7 +11412,7 @@
       "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-manufacturing-industry-annual-income",
       "body": {
         "store": "r2-public",
@@ -11424,7 +11426,9 @@
       },
       "stats47Targets": [
         "/ranking/manufacturing-industry-annual-income"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb09980b2ef49",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-csv-mojibake",

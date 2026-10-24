@@ -50,11 +50,6 @@
       "r2_path": "note/koumuin-claude-code/30-post-retirement-career",
       "status": "draft"
     },
-    "a-annual-paid-leave-11-days-or-more-ratio": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
-      "status": "draft"
-    },
     "A-laborwage-paid-leave-utilization-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",
@@ -63,11 +58,6 @@
     "A-laborwage-wages-by-industry-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
-      "status": "draft"
-    },
-    "a-manufacturing-industry-annual-income": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
       "status": "draft"
     },
     "a-number-of-hotel-rooms": {

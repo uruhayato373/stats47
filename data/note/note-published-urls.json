@@ -482,6 +482,17 @@
       "r2_access": "none",
       "status": "note_only"
     },
+    "a-annual-paid-leave-11-days-or-more-ratio": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nfb6a7a246b12",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "a-average-temperature": {
       "vertical": "stats47-note",
       "title": "【2024年版】年平均気温が最も高い県は？ 1位は沖縄県｜都道府県ランキング",
@@ -1127,6 +1138,17 @@
       "is_paid": false,
       "published_at": "2026-10-15",
       "r2_path": "note/stats47-note/a-main-household-ratio-main-earner-employee-commute-90min",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "a-manufacturing-industry-annual-income": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nb09980b2ef49",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
