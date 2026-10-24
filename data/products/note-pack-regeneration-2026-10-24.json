@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "note-paid-pack-regeneration-evidence",
-  "observedAt": "2026-10-24T05:15:55.382Z",
+  "observedAt": "2026-10-24T05:29:26.332Z",
   "version": "v4-20261024-mac-r2",
   "scope": "13 paid note pack articles (P-01..P-12, P-14); P-13 is the published free sample",
   "summary": {
@@ -10,7 +10,7 @@
     "totalBytes": 638847041,
     "officeValidated": 0,
     "publicationReady": 0,
-    "publishedWithDeferredOfficeValidation": 1,
+    "publishedWithDeferredOfficeValidation": 2,
     "noteArchivesPrepared": 13,
     "noteArchivesR2Verified": 13,
     "noteArchiveBytes": 145581718
@@ -67,7 +67,9 @@
         "entries": 7,
         "readbackVerified": true,
         "localPath": ".local/note-product-archives/P-02-v4-20261024-mac-r2.zip"
-      }
+      },
+      "notePublishedUrl": "https://note.com/stats47/n/n46d68c153502",
+      "notePublishedAt": "2026-10-24T05:29:26.332Z"
     },
     {
       "productId": "P-03",

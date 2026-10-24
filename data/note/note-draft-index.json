@@ -405,11 +405,6 @@
       "r2_path": "note/product-sales/prefecture-household-consumption-pack",
       "status": "draft"
     },
-    "prefecture-income-wage-hiring-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-income-wage-hiring-pack",
-      "status": "draft"
-    },
     "prefecture-industry-economy-pack": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/prefecture-industry-economy-pack",

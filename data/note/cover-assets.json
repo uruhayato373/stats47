@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T05:12:17.119Z",
+  "updatedAt": "2026-10-24T05:28:40.442Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43319,7 +43319,7 @@
     },
     {
       "articleKey": "prefecture-income-wage-hiring-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n46d68c153502",
       "revisions": [
         {
           "sha256": "d966ced088cbab141ed5b9f6b135de05507408355a3a5f7ca8b77386e39f965f",
@@ -43359,17 +43359,97 @@
               "bytes": 1207
             }
           }
+        },
+        {
+          "sha256": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-income-wage-hiring-pack/revisions/e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f.png"
+          },
+          "bytes": 1839482,
+          "id": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-da00a6a9551f",
+          "createdAt": "2026-10-24T05:18:50.689Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "eed4888ca16d3e86e305a7dff44b54a226f2ae8145a45433234dd113a3a9bca8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定4文言を確認。誤字・欠字・文字切れ・重なりなし。人物・架空の統計図なし。資料とPCの題材が本文に一致。",
+            "reviewedAt": "2026-10-24T05:19:28.328Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "eed4888ca16d3e86e305a7dff44b54a226f2ae8145a45433234dd113a3a9bca8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-income-wage-hiring-pack/inputs/eed4888ca16d3e86e305a7dff44b54a226f2ae8145a45433234dd113a3a9bca8.json"
+              },
+              "bytes": 7312
+            },
+            "production": {
+              "id": "NCI-00368",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "da00a6a9551fff2953439d779c09f15be1dc2e6bb9103cae35d9e6db4c36f603"
+            }
+          }
+        },
+        {
+          "sha256": "89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-income-wage-hiring-pack/revisions/89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b.png"
+          },
+          "bytes": 379557,
+          "id": "89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T05:28:37.373Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b"
+          }
         }
       ],
-      "candidateRevisionId": "d966ced088cbab141ed5b9f6b135de05507408355a3a5f7ca8b77386e39f965f",
-      "approvedRevisionId": "d966ced088cbab141ed5b9f6b135de05507408355a3a5f7ca8b77386e39f965f",
-      "published": null,
+      "candidateRevisionId": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
+      "approvedRevisionId": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T05:28:37.373Z",
+        "revisionId": "89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00368",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "賃金・求人データ集",
+          "subline": "47都道府県・107指標",
+          "subject": "都道府県別の賃金・求人データをまとめた無地の資料ファイルとノートPCを大きく描く。紙や画面に文字・数字・地図・グラフは描かず、提供ファイルの見た目を再現しない。人物やロゴなし。",
+          "evidence": "P-02 v4-20261024-mac-r2 のデータ集は47都道府県107指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので画面に完成結果を描かない。"
+        }
       }
     },
     {

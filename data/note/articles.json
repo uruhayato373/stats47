@@ -8536,18 +8536,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-income-wage-hiring-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "ae327c6e8ddd904b8d8fa4b7488ce10f1f68ceb696c34b9ac31ab4ef34b2c2ac",
+          "sha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
           "files": 4,
           "bytes": 101826,
-          "savedAt": "2026-10-12T22:05:33.285Z"
+          "savedAt": "2026-10-24T05:28:49.148Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:28:49.148Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n46d68c153502",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-tourism-lodging-pack",

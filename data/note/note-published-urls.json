@@ -3295,6 +3295,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-income-wage-hiring-pack": {
+      "vertical": "product-sales",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "url": "https://note.com/stats47/n/n46d68c153502",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-income-wage-hiring-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-population-household-pack": {
       "vertical": "product-sales",
       "title": "人口・世帯を47都道府県で比べる134指標のデータ集",

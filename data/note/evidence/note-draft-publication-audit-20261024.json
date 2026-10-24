@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T05:12:35.484Z",
+  "observedAt": "2026-10-24T05:29:26.332Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 67,
-    "published-verified": 7,
+    "hold-product-sales": 66,
+    "published-verified": 8,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 409,
-    "draft": 91
+    "published": 410,
+    "draft": 90
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1586,17 +1586,43 @@
       "articleKey": "prefecture-income-wage-hiring-pack",
       "vertical": "product-sales",
       "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
-      "bodyManifestSha256": "ae327c6e8ddd904b8d8fa4b7488ce10f1f68ceb696c34b9ac31ab4ef34b2c2ac",
+      "bodyManifestSha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00368",
-      "approvedCoverRevisionId": "d966ced088cbab141ed5b9f6b135de05507408355a3a5f7ca8b77386e39f965f",
+      "approvedCoverRevisionId": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-02 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n46d68c153502",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:29:26.332Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-02/v4-20261024-mac-r2/c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974.zip",
+          "sha256": "c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974",
+          "bytes": 10072977,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-tourism-lodging-pack",
