@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T07:48:43.317301Z",
+  "observedAt": "2026-10-24T08:07:12.995443Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -2030,17 +2030,30 @@
       "articleKey": "prefecture-map-chart-assets-pack",
       "vertical": "product-sales",
       "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
-      "bodyManifestSha256": "f411b3be03e783429b11ac81312f884fa39d5a81148757dac451e67a3d0c2137",
+      "bodyManifestSha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00370",
-      "approvedCoverRevisionId": "345a0301d65bfa711c45320ef6ddc71eeeab76c1504bf5e0505ad0a2159720fb",
+      "approvedCoverRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
       "publishedTitleMatches": [],
       "decision": "hold-product-sales",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "P-11 v4 seven-file ZIP exists in private R2 with verified SHA; manuscript and imagegen cover are prepared",
+        "note.com rejected attachment upload with daily limit: 1日にアップロードできるのは10回までです",
+        "A private note editor draft was saved; publication remains blocked until the paid ZIP is visibly attached after the paid boundary"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "publicationAttempt": {
+        "checkedAt": "2026-10-24T08:07:12.995443Z",
+        "status": "blocked-daily-attachment-quota",
+        "account": "stats47",
+        "noteDraftEditorUrl": "https://editor.note.com/notes/n0f5dafef7fa8/edit/",
+        "noteDraftSaved": true,
+        "attachmentVisible": false,
+        "archiveSha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+        "error": "1日にアップロードできるのは10回までです",
+        "uploadAttempts": 3,
+        "resume": "Open the existing private editor draft. Do not create a second article or repeat the upload until the note.com daily limit resets. Verify ZIP after the paid boundary before publishing."
+      }
     },
     {
       "articleKey": "prefecture-all-in-one-pack",

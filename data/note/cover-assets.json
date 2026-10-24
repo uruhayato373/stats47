@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T07:53:37.026Z",
+  "updatedAt": "2026-10-24T07:59:36.542Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43908,17 +43908,67 @@
               "bytes": 1183
             }
           }
+        },
+        {
+          "sha256": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-map-chart-assets-pack/revisions/5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9.png"
+          },
+          "bytes": 1725331,
+          "id": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-f6c4b2faf884",
+          "createdAt": "2026-10-24T07:59:21.798Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a4c1fe5edcfecf4648b0a27278b16593e61c13c45791bdcbcb784a18a6b3fa22"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言を確認。未検証の地図形は編集で除去済み。資料と無地の図形は商品用途に合い、架空データ・人物・実在UIなし。",
+            "reviewedAt": "2026-10-24T07:59:36.539Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a4c1fe5edcfecf4648b0a27278b16593e61c13c45791bdcbcb784a18a6b3fa22",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-map-chart-assets-pack/inputs/a4c1fe5edcfecf4648b0a27278b16593e61c13c45791bdcbcb784a18a6b3fa22.json"
+              },
+              "bytes": 8254
+            },
+            "production": {
+              "id": "NCI-00370",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "f6c4b2faf88400e5e1838615357ad51ef98d348e6864449bce610292ad0e8473"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "345a0301d65bfa711c45320ef6ddc71eeeab76c1504bf5e0505ad0a2159720fb",
-      "approvedRevisionId": "345a0301d65bfa711c45320ef6ddc71eeeab76c1504bf5e0505ad0a2159720fb",
+      "candidateRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
+      "approvedRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00370",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "地図・ランキング素材集",
+          "subline": "47都道府県・28指標",
+          "subject": "資料に貼る編集可能な図版素材を、白い企画書と青いスライドカードの束、無地の丸・四角の図形で示す。地図の輪郭、実際の県別統計、順位数値、グラフ、人物、実在UIは描かない。",
+          "evidence": "P-11 v4-20261024-mac-r2は47都道府県28指標の地図・ランキング素材集。private R2に7ファイルのZIPを保全しSHA読み戻し済み。PowerPoint 90枚・PDF 62ページは商品manifest値。Office実機確認は未了。"
+        }
       }
     },
     {
