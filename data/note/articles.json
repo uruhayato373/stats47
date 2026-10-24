@@ -966,26 +966,6 @@
       }
     },
     {
-      "key": "d1-kakei-prefecture-consumption",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/d1-kakei-prefecture-consumption",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
-          "files": 21,
-          "bytes": 1142022,
-          "savedAt": "2026-10-12T22:06:08.454Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "koumuin-shigoto-kouritsuka-ai",
       "vertical": "stats47-note",
       "series": "A",

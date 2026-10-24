@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T08:57:57.169Z",
+  "observedAt": "2026-10-24T09:01:06.825Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -12,14 +12,14 @@
   "decisionCounts": {
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
-    "hold-duplicate-title": 10,
+    "hold-duplicate-title": 9,
     "hold-product-sales": 58,
     "published-verified": 16,
-    "merged-existing": 3
+    "merged-existing": 4
   },
   "currentCatalog": {
     "published": 418,
-    "draft": 81
+    "draft": 80
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -423,16 +423,32 @@
           "noteUrl": "https://note.com/stats47/n/n68f5e09c8d62"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "既存公開記事と全10節・5図・本文段落が一致。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n68f5e09c8d62",
       "duplicateTextComparison": {
         "publishedKey": "recovered-n68f5e09c8d62",
         "normalizedTwelveCharacterOverlap": 0.585,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n68f5e09c8d62",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T09:01:06.825Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 5,
+        "liveBodySha256": "a0427a45b0fa6413c0c37c6426ece8fff7d9712bed8470b738cde4c3d08fe2cb",
+        "archivedDraftR2Path": "note/stats47-note/d1-kakei-prefecture-consumption",
+        "archivedDraftManifestSha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
+        "publishedManifestSha256": "ad7224c2cdb107b691af4e699b5ead55ee45ba195583898b51f9afe65a4bd899",
+        "normalizedProseSimilarity": 0.996669,
+        "method": "R2両原稿の前付・画像行・リンクカード・空白を除去し、本文文字列をSequenceMatcherで比較。差分はMarkdown装飾とリンク表示。",
+        "sectionCount": 10,
+        "imageCount": 5
       }
     },
     {

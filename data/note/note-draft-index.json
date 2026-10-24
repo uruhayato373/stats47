@@ -115,11 +115,6 @@
       "r2_path": null,
       "status": "draft"
     },
-    "d1-kakei-prefecture-consumption": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/d1-kakei-prefecture-consumption",
-      "status": "draft"
-    },
     "data-packs-advanced": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/data-packs-advanced",

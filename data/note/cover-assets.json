@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T08:58:03.512Z",
+  "updatedAt": "2026-10-24T09:01:12.663Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29993,21 +29993,6 @@
           "subject": "緑とクリームと明るい黄色。大きなラーメンの器と、ぎょうざの小皿を右側に親しみやすい食卓として描く。生活雑誌の食特集のような温かい手描き。食べている人物は不要。金額、ランキング、県境地図、データ図は描かない。",
           "evidence": "https://note.com/stats47/n/n94cd84139a45 公開本文を2026-10-14確認。家計調査の県庁所在市別、二人以上の世帯の年間支出額を主に食で比較する記事。県全体の消費量・生産量と誤認させず、690品目や特定の順位をカバーでは断定しない。"
         }
-      }
-    },
-    {
-      "articleKey": "d1-kakei-prefecture-consumption",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00257",
-        "policyId": "NCP-005",
-        "policyVersion": 3,
-        "brief": null
       }
     },
     {
