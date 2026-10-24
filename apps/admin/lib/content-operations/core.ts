@@ -88,6 +88,8 @@ export interface ContentOperationsInput {
   kindleBuildBooks: SourceKindleBuildBook[];
   noteArticles: SourceNoteArticle[];
   noteDraftStatuses: Record<string, string>;
+  noteCoverApprovals?: Record<string, boolean>;
+  noteCoverProductionIds?: Record<string, string>;
   backlogText: string;
   kdpPolicy: {
     mode: "active" | "paused";
@@ -385,6 +387,7 @@ export function buildContentOperations(
     }
   }
 
+  const publishedTitles = new Set(input.noteArticles.filter((article) => article.status === "published").map((article) => article.title));
   const note: NoteContentDTO[] = input.noteArticles.map((article) => {
     const operationalStatus = input.noteDraftStatuses[article.key] ?? null;
     if (!new Set(["draft", "published"]).has(article.status)) {
@@ -414,10 +417,23 @@ export function buildContentOperations(
         message: "publishedAt が未記録です（回収スタブでは許容）",
       });
     }
+    const publicationGate: NoteContentDTO["publicationGate"] = article.status === "published"
+      ? null
+      : article.r2Body === false
+        ? "body"
+        : publishedTitles.has(article.title)
+          ? "duplicate"
+          : article.vertical === "product-sales"
+            ? "product"
+            : !input.noteCoverApprovals?.[article.key]
+              ? "cover"
+              : "review";
     const stage: ContentStageDTO =
       article.status === "published"
         ? "published"
-        : operationalStatus === "ready-to-publish"
+        : publicationGate !== "review"
+          ? "blocked"
+          : operationalStatus === "ready-to-publish"
           ? "ready"
           : "draft";
     const nextAction =
@@ -426,8 +442,16 @@ export function buildContentOperations(
           ? "note.com本文をR2へ復元"
           : "流入・回遊を計測"
         : stage === "ready"
-          ? "オーナー承認後に /publish-note"
-          : "R2原稿を編集・レビュー";
+          ? "公開前照合後に /publish-note"
+          : publicationGate === "body"
+            ? "本文を完成しR2に保存"
+            : publicationGate === "duplicate"
+              ? "同題の公開記事と本文を照合して統合"
+              : publicationGate === "product"
+                ? "商品本体・価格・有料境界を確認"
+                : publicationGate === "cover"
+                  ? "カバーを制作・採用"
+                  : "本文・出典・画像をレビュー";
     return {
       key: article.key,
       title: article.title,
@@ -443,6 +467,8 @@ export function buildContentOperations(
       publishedAt: article.publishedAt ?? null,
       r2Path: article.r2Path,
       r2Body: article.r2Body !== false,
+      publicationGate,
+      coverProductionId: input.noteCoverProductionIds?.[article.key] ?? null,
       stats47Targets: article.stats47Targets ?? [],
       nextAction,
       sourcePaths: [

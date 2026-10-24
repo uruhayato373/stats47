@@ -317,6 +317,8 @@ export interface NoteContentDTO {
   publishedAt: string | null;
   r2Path: string;
   r2Body: boolean;
+  publicationGate: "body" | "duplicate" | "product" | "cover" | "review" | null;
+  coverProductionId: string | null;
   stats47Targets: string[];
   nextAction: string;
   sourcePaths: string[];
