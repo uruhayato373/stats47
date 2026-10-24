@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T01:55:17.502Z",
+  "updatedAt": "2026-10-24T02:51:30.526Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -30544,16 +30544,67 @@
     {
       "articleKey": "h-howto-mymaps-kml",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-mymaps-kml/revisions/6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104.png"
+          },
+          "bytes": 1834152,
+          "id": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-0b8dd2416ca6",
+          "createdAt": "2026-10-24T02:50:58.943Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "2789fb4ed74557497a6bddf9ba9130751cf0cf0ec2857ab35a63887f17009b50"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4行の文字を確認。誤字・欠字・重なり・裁ち落としなし。ノートPCと無地の紙が原稿の操作説明に一致し、地図や実行結果を捏造していない。",
+            "reviewedAt": "2026-10-24T02:51:30.511Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "2789fb4ed74557497a6bddf9ba9130751cf0cf0ec2857ab35a63887f17009b50",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/h-howto-mymaps-kml/inputs/2789fb4ed74557497a6bddf9ba9130751cf0cf0ec2857ab35a63887f17009b50.json"
+              },
+              "bytes": 8305
+            },
+            "production": {
+              "id": "NCI-00503",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "0b8dd2416ca612799541d995104e7a99d55756688146ba7c6aff680763e1ca55"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
+      "approvedRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00503",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "KMLをマイマップで開く",
+          "subline": "都道府県の統計地図を読み込む手順",
+          "subject": "ノートPCと無地の紙ファイルを大きく描く。紙や画面に文字を入れず、架空の地図・県別の塗り分け結果・実在サービスのロゴを描かない。",
+          "evidence": "原稿 h-howto-mymaps-kml の「手順1～3」にKMLダウンロードとGoogleマイマップへのインポートを記載。Google公式ヘルプはKMLファイルのインポートを案内する。実際の色分け・吹き出し結果は未確認なので画像に描かない。"
+        }
       }
     },
     {
