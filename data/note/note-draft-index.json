@@ -385,11 +385,6 @@
       "r2_path": "note/product-sales/prefecture-all-in-one-pack",
       "status": "draft"
     },
-    "prefecture-disaster-infrastructure-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-disaster-infrastructure-pack",
-      "status": "draft"
-    },
     "prefecture-household-consumption-pack": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/prefecture-household-consumption-pack",

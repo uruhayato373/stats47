@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T07:27:39.408Z",
+  "updatedAt": "2026-10-24T07:53:37.026Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -42847,7 +42847,7 @@
     },
     {
       "articleKey": "prefecture-disaster-infrastructure-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
       "revisions": [
         {
           "sha256": "f5a8d6aeb67da261ab7d460f37ff18ee526aee2e5a3b27175416644e3d9df26c",
@@ -42926,17 +42926,97 @@
               "bytes": 1200
             }
           }
+        },
+        {
+          "sha256": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36.png"
+          },
+          "bytes": 1965716,
+          "id": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-ffa3cf906f0d",
+          "createdAt": "2026-10-24T07:32:10.645Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。道・橋・管と資料は本文の対象に整合し、危険区域地図・人物・実在UIなし。",
+            "reviewedAt": "2026-10-24T07:32:21.571Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-disaster-infrastructure-pack/inputs/1cfd1e9899ef672e056e10516d34ed8fb1a1ddc3f42b622cf99d7607583a7a5f.json"
+              },
+              "bytes": 7155
+            },
+            "production": {
+              "id": "NCI-00363",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "ffa3cf906f0d6c90918cbab9d0ee16aed740821f891bbf19c958e192f4611385"
+            }
+          }
+        },
+        {
+          "sha256": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-disaster-infrastructure-pack/revisions/6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8.png"
+          },
+          "bytes": 451274,
+          "id": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T07:46:34.108Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "6cebc2fc50b14bfea8acddb42d741e136fce6f01d268ffea165f6d9342c94bd8"
+          }
         }
       ],
-      "candidateRevisionId": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
-      "approvedRevisionId": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
-      "published": null,
+      "candidateRevisionId": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+      "approvedRevisionId": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T07:53:36.979Z",
+        "revisionId": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00363",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "防災・交通・インフラデータ集",
+          "subline": "47都道府県・230指標",
+          "subject": "防災・交通・インフラを調べる用途を、無地の資料ファイル、道路を示すシンプルな道、橋と水道管の抽象的なアイコンで表す。実際の危険区域や災害被害の地図、数値、グラフ、人物、実在UIは描かない。",
+          "evidence": "P-10 v4-20261024-mac-r2は47都道府県230指標のデータ集。実在するZIP7ファイルとprivate R2読み戻しSHAを確認。Office実機確認は未了。"
+        }
       }
     },
     {
@@ -43098,7 +43178,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T06:54:58.722Z",
-        "revisionId": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5"
+        "revisionId": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c"
       },
       "missingVersions": [],
       "production": {
@@ -43407,7 +43487,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T06:03:23.197Z",
-        "revisionId": "09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c"
+        "revisionId": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72"
       },
       "missingVersions": [],
       "production": {
@@ -43597,7 +43677,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T05:28:37.373Z",
-        "revisionId": "89c70ba1d104061b502ab5c69a2bdc6b4643e46195b6f0ca063de1a396cfc42b"
+        "revisionId": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f"
       },
       "missingVersions": [],
       "production": {
@@ -43961,7 +44041,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T07:05:49.105Z",
-        "revisionId": "1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1"
+        "revisionId": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d"
       },
       "missingVersions": [],
       "production": {
@@ -44309,7 +44389,7 @@
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
         "observedAt": "2026-10-24T05:12:14.384Z",
-        "revisionId": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba"
+        "revisionId": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad"
       },
       "missingVersions": [],
       "production": {

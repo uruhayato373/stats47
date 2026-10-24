@@ -3284,6 +3284,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-disaster-infrastructure-pack": {
+      "vertical": "product-sales",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "url": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-disaster-infrastructure-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-education-childcare-pack": {
       "vertical": "product-sales",
       "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",

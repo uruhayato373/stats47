@@ -8712,18 +8712,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-disaster-infrastructure-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "a3a6a59943324eebe61913a38bfd987bef3bea8ddcec348a283adb836f496c16",
+          "sha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
           "files": 4,
           "bytes": 108964,
-          "savedAt": "2026-10-12T22:05:38.941Z"
+          "savedAt": "2026-10-24T07:47:00.285Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:47:00.285Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-map-chart-assets-pack",

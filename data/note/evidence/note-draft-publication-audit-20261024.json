@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T07:28:10.860780Z",
+  "observedAt": "2026-10-24T07:48:43.317301Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 59,
-    "published-verified": 15,
+    "hold-product-sales": 58,
+    "published-verified": 16,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 417,
-    "draft": 83
+    "published": 418,
+    "draft": 82
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1579,7 +1579,14 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 3.9655266635572137,
+          "largeDeltaFraction": 0.006574549129353234
+        }
       }
     },
     {
@@ -1621,7 +1628,14 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.495740827114428,
+          "largeDeltaFraction": 0.00759833644278607
+        }
       }
     },
     {
@@ -1663,7 +1677,13 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.033741837686567, largeDelta=0.009795942164179105"
+        }
       }
     },
     {
@@ -1705,7 +1725,13 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.129964629975125, largeDelta=0.011221626243781094"
+        }
       }
     },
     {
@@ -1747,7 +1773,14 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.3850361473880595,
+          "largeDeltaFraction": 0.008512126865671642
+        }
       }
     },
     {
@@ -1789,7 +1822,14 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.784521144278607,
+          "largeDeltaFraction": 0.009890391791044777
+        }
       }
     },
     {
@@ -1831,7 +1871,14 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 3.876691930970149,
+          "largeDeltaFraction": 0.0069053171641791046
+        }
       }
     },
     {
@@ -1873,7 +1920,13 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.269438743781095, largeDelta=0.01054415422885572"
+        }
       }
     },
     {
@@ -1915,24 +1968,63 @@
         "deferred": [
           "Office 365 real-device display/edit/recalculation",
           "source/license detail review"
-        ]
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.047595615671642, largeDelta=0.00999922263681592"
+        }
       }
     },
     {
       "articleKey": "prefecture-disaster-infrastructure-pack",
       "vertical": "product-sales",
       "title": "防災・交通・インフラを県別に比べる 230指標データ集",
-      "bodyManifestSha256": "a3a6a59943324eebe61913a38bfd987bef3bea8ddcec348a283adb836f496c16",
+      "bodyManifestSha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00363",
-      "approvedCoverRevisionId": "0d127d398a780f48a96698812af1c8f4315ad5843a6792d3f5878f29fba94821",
+      "approvedCoverRevisionId": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-10 manifest and private R2 ZIP readback matched SHA; PDF has 495 pages per manifest",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:48:43.317301Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-10/v4-20261024-mac-r2/5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2.zip",
+          "sha256": "5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2",
+          "bytes": 10713676,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.621483597636816,
+          "largeDeltaFraction": 0.00845848880597015
+        }
+      }
     },
     {
       "articleKey": "prefecture-map-chart-assets-pack",
