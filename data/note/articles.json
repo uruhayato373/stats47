@@ -8514,18 +8514,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-population-household-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "8e27e75a7287ae333041d5e8df339fbe772cb601e379bc9492a91d1d798e9738",
+          "sha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
           "files": 4,
           "bytes": 107830,
-          "savedAt": "2026-10-12T22:05:32.865Z"
+          "savedAt": "2026-10-24T05:12:12.602Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:12:12.602Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-income-wage-hiring-pack",

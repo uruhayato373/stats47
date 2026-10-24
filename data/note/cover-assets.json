@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T04:59:47.636Z",
+  "updatedAt": "2026-10-24T05:12:17.119Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43672,7 +43672,7 @@
     },
     {
       "articleKey": "prefecture-population-household-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
       "revisions": [
         {
           "sha256": "37ad8f4520e2ed9b3db7a168843909cbbad66e785cbc19160ec25abc4fc09c88",
@@ -43751,17 +43751,97 @@
               "bytes": 1177
             }
           }
+        },
+        {
+          "sha256": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-population-household-pack/revisions/52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad.png"
+          },
+          "bytes": 1754267,
+          "id": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-e555baa53876",
+          "createdAt": "2026-10-24T05:05:01.324Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と320pxで指定4文言・47都道府県・134指標を確認。資料とPCのみで未検証の地図結果なし。",
+            "reviewedAt": "2026-10-24T05:05:10.729Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-population-household-pack/inputs/016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b.json"
+              },
+              "bytes": 6215
+            },
+            "production": {
+              "id": "NCI-00373",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "e555baa538763269ef7701418a0db8919bb5079610fe50844b339c956a2b3123"
+            }
+          }
+        },
+        {
+          "sha256": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-population-household-pack/revisions/9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba.png"
+          },
+          "bytes": 371910,
+          "id": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T05:12:14.384Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba"
+          }
         }
       ],
-      "candidateRevisionId": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
-      "approvedRevisionId": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
-      "published": null,
+      "candidateRevisionId": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+      "approvedRevisionId": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T05:12:14.384Z",
+        "revisionId": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00373",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "人口・世帯データ集",
+          "subline": "47都道府県・134指標",
+          "subject": "都道府県別データをまとめた無地の資料ファイルとノートPCを大きく描く。紙や画面に文字・数字・地図・グラフは描かず、提供ファイルの見た目を再現しない。人物やロゴなし。",
+          "evidence": "P-01 v4-20261024-mac-r2 のデータ集は47都道府県134指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので画面に完成結果を描かない。"
+        }
       }
     },
     {

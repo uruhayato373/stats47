@@ -3295,6 +3295,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-population-household-pack": {
+      "vertical": "product-sales",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "url": "https://note.com/stats47/n/ne47eb45f8a15",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-population-household-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 4000
+    },
     "recovered-n023501038bd5": {
       "vertical": "stats47-note",
       "title": "なぜ埼玉が「日照時間日本一」なのか — 意外な答えは地形にあった",

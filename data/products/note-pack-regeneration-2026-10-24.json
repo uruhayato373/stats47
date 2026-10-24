@@ -9,7 +9,8 @@
     "verifiedManifestFiles": 118,
     "totalBytes": 638847041,
     "officeValidated": 0,
-    "publicationReady": 0
+    "publicationReady": 0,
+    "publishedWithDeferredOfficeValidation": 1
   },
   "remainingChecks": [
     "Office 365 real-device display/edit/recalculation",
@@ -29,7 +30,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "notePublishedUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "notePublishedAt": "2026-10-24T05:12:35.484Z",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+        "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933",
+        "bytes": 10208853,
+        "entries": 7,
+        "readbackVerified": true
+      }
     },
     {
       "productId": "P-02",

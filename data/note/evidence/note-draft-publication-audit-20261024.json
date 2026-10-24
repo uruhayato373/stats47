@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T05:00:13.590Z",
+  "observedAt": "2026-10-24T05:12:35.484Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 68,
-    "published-verified": 6,
+    "hold-product-sales": 67,
+    "published-verified": 7,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 408,
-    "draft": 92
+    "published": 409,
+    "draft": 91
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1544,17 +1544,43 @@
       "articleKey": "prefecture-population-household-pack",
       "vertical": "product-sales",
       "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
-      "bodyManifestSha256": "8e27e75a7287ae333041d5e8df339fbe772cb601e379bc9492a91d1d798e9738",
+      "bodyManifestSha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00373",
-      "approvedCoverRevisionId": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
+      "approvedCoverRevisionId": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-01 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 4000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:12:35.483Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+          "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933",
+          "bytes": 10208853,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-income-wage-hiring-pack",

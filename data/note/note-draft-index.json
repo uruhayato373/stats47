@@ -430,11 +430,6 @@
       "r2_path": "note/product-sales/prefecture-municipal-finance-pack",
       "status": "draft"
     },
-    "prefecture-population-household-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-population-household-pack",
-      "status": "draft"
-    },
     "prefecture-retail-trade-area-pack": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
