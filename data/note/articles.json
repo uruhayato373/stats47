@@ -133,12 +133,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-x-ogp-map-automation",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+          "files": 4,
+          "bytes": 77269,
+          "savedAt": "2026-10-24T20:15:14.302Z"
+        },
+        "verifiedAt": "2026-10-24T20:15:14.302Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n78a43a4c53a4",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-medical-access-analysis",

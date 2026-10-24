@@ -2623,6 +2623,18 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-geo-x-ogp-map-automation": {
+      "vertical": "stats47-note",
+      "title": "X/OGP地図カード自動生成",
+      "url": "https://note.com/stats47/n/n78a43a4c53a4",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-x-ogp-map-automation",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
     "d-kakei-category-dataset": {
       "vertical": "stats47-note",
       "title": "教育費は8.7倍違う ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）",

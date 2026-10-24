@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T19:22:01.396Z",
+  "observedAt": "2026-10-24T20:16:07.447Z",
   "startingDrafts": 100,
   "bodyStorage": {
-    "deepVerified": 91,
+    "deepVerified": 93,
     "failed": 0,
-    "unwritten": 9
+    "unwritten": 7
   },
   "decisionCounts": {
-    "hold-body-unwritten": 8,
+    "hold-body-unwritten": 7,
     "hold-cover-unapproved": 2,
     "hold-product-sales": 54,
     "merged-existing": 13,
-    "published-verified": 23
+    "published-verified": 24
   },
   "currentCatalog": {
-    "published": 425,
-    "draft": 64
+    "published": 426,
+    "draft": 63
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -116,16 +116,56 @@
       "articleKey": "d-geo-x-ogp-map-automation",
       "vertical": "stats47-note",
       "title": "X/OGP地図カード自動生成",
-      "bodyManifestSha256": null,
-      "bodyVerifiedDeep": false,
+      "bodyManifestSha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+      "bodyVerifiedDeep": true,
       "productionId": "NCI-00254",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
       "publishedTitleMatches": [],
-      "decision": "hold-body-unwritten",
+      "decision": "published-verified",
       "reasons": [
-        "body manifest absent"
+        "地図カード生成キットZIP内の8ファイルのSHA・サンプル2画像の寸法を照合した",
+        "note公開APIでstats47名義・公開状態・1980円・99タグを確認した",
+        "認証済み本文でZIPが有料見出し後に1件あり、公開本文にはZIP名が出ないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差3.598で一致を確認した"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n78a43a4c53a4",
+      "productEvidence": {
+        "archiveSha256": "efaf08a6de7f86a32cf3e4ac23bf00f4a382999842eadbb9f846c9394aeec946",
+        "archivePath": ".local/geo-products/d-geo-x-ogp-map-automation/d-geo-x-ogp-map-automation.zip",
+        "privateR2Path": "note/stats47-note/d-geo-x-ogp-map-automation/attachments/d-geo-x-ogp-map-automation.zip",
+        "unitTests": "sample render: 1080x1080 and 1200x630 verified",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T20:16:07.447Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 1980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328129913/rectangle_large_type_2_5d908ee623066f08c2eb3a90bdfc0494.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+          "publishedRevisionId": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f",
+          "rgbMae": 3.598,
+          "channelsWithin20": 0.9777,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-x-ogp-map-automation/attachments/d-geo-x-ogp-map-automation.zip",
+          "sha256": "efaf08a6de7f86a32cf3e4ac23bf00f4a382999842eadbb9f846c9394aeec946"
+        }
+      }
     },
     {
       "articleKey": "d-geo-medical-access-analysis",

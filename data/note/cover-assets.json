@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T19:21:06.984Z",
+  "updatedAt": "2026-10-24T20:15:35.805Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29793,17 +29793,98 @@
     },
     {
       "articleKey": "d-geo-x-ogp-map-automation",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n78a43a4c53a4",
+      "revisions": [
+        {
+          "sha256": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-x-ogp-map-automation/revisions/188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364.png"
+          },
+          "bytes": 1884294,
+          "id": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-79b79b59b9cd",
+          "createdAt": "2026-10-24T20:03:17.054Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c53c73036f84423cb6393e1505d2c546caa9160fd3bf6b98ff457255e7c95dd5"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸・320px・管理画面で全文読取。X用とOGP用の2形状が示され、架空の統計値や実在県輪郭はない。本文と納品キットの範囲に一致。",
+            "reviewedAt": "2026-10-24T20:05:57.946Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c53c73036f84423cb6393e1505d2c546caa9160fd3bf6b98ff457255e7c95dd5",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-x-ogp-map-automation/inputs/c53c73036f84423cb6393e1505d2c546caa9160fd3bf6b98ff457255e7c95dd5.json"
+              },
+              "bytes": 8127
+            },
+            "production": {
+              "id": "NCI-00254",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "79b79b59b9cde633181f71fd6f39863412817aff7adc2ed5ecddcc531baad614"
+            }
+          }
+        },
+        {
+          "sha256": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-x-ogp-map-automation/revisions/c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f.png"
+          },
+          "bytes": 422337,
+          "id": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T20:15:29.695Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328129913/rectangle_large_type_2_5d908ee623066f08c2eb3a90bdfc0494.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f"
+          }
+        }
+      ],
+      "candidateRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+      "approvedRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328129913/rectangle_large_type_2_5d908ee623066f08c2eb3a90bdfc0494.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T20:15:29.695Z",
+        "revisionId": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00254",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "1枚の地図から\n2種類の画像へ",
+          "subline": "X用・OGP用を一括生成",
+          "subject": "机上の1枚の抽象的な地図カードから、正方形カードと横長カードへ二本の青緑の流れが分かれる構図。地図は実在の県輪郭や統計地図ではなく、架空の中立的な四角形で示す。コード片や数値を描かない。紺・青緑・生成り。",
+          "evidence": "同梱のrender.mjsは入力画像1枚を比率を保って1080×1080のX用PNGと1200×630のOGP用PNGに変換しSHA-256 manifestを出力する。見出しはユーザー指定で、投稿やWebサイト設定は自動化しない。サンプルは架空図形。"
+        }
       }
     },
     {
