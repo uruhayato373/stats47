@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-24T14:19:28.333Z",
+  "generatedAt": "2026-10-24T15:17:04.045Z",
   "status": "pass",
   "articles": [
     {
-      "key": "license-guide",
+      "key": "prefecture-map-chart-assets-pack",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/328078716/rectangle_large_type_2_4fa7ae15c11ffd71ab6394544d11aa43.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-24T14:19:27.999Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/328096609/rectangle_large_type_2_d9ab6507430978c166503a1f2248f9ef.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-24T15:17:03.955Z"
     }
   ]
 }

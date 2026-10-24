@@ -330,11 +330,6 @@
       "r2_path": "note/product-sales/prefecture-household-consumption-pack",
       "status": "draft"
     },
-    "prefecture-map-chart-assets-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-map-chart-assets-pack",
-      "status": "draft"
-    },
     "service-business-comparison": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/service-business-comparison",

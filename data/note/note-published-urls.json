@@ -3366,6 +3366,18 @@
       "status": "r2_ready",
       "price_jpy": 5000
     },
+    "prefecture-map-chart-assets-pack": {
+      "vertical": "product-sales",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "url": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-map-chart-assets-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 4000
+    },
     "prefecture-migration-living-pack": {
       "vertical": "product-sales",
       "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",

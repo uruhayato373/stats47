@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T14:20:22.639Z",
+  "observedAt": "2026-10-24T15:17:36.903Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 10,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 0,
-    "hold-product-sales": 58,
-    "published-verified": 17,
+    "hold-product-sales": 57,
+    "published-verified": 18,
     "merged-existing": 13
   },
   "currentCatalog": {
-    "published": 419,
-    "draft": 70
+    "published": 420,
+    "draft": 69
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -2236,13 +2236,14 @@
       "productionId": "NCI-00370",
       "approvedCoverRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "P-11 v4 seven-file ZIP exists in private R2 with verified SHA; manuscript and imagegen cover are prepared",
-        "note.com rejected attachment upload with daily limit: 1日にアップロードできるのは10回までです",
-        "A private note editor draft was saved; publication remains blocked until the paid ZIP is visibly attached after the paid boundary"
+        "Existing private draft n0f5dafef7fa8 was published after the daily attachment quota reset; no duplicate article was created",
+        "Private R2 archive readback matched SHA; one ZIP was visible after the paid boundary in the authenticated editor, while the public body excluded it",
+        "Published note API verified stats47 account, title, JPY 4000 price, separator and cover; approved cover pixels and body invariants passed after cover-only update",
+        "Office real-device and source/license detail reviews remain deferred under the user’s publish-first instruction"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
       "publicationAttempt": {
         "checkedAt": "2026-10-24T08:07:12.995443Z",
         "status": "blocked-daily-attachment-quota",
@@ -2254,6 +2255,34 @@
         "error": "1日にアップロードできるのは10回までです",
         "uploadAttempts": 3,
         "resume": "Open the existing private editor draft. Do not create a second article or repeat the upload until the note.com daily limit resets. Verify ZIP after the paid boundary before publishing."
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T15:17:36.903Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4000,
+        "tags": 100,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-ba04cf0d037e3fca.json",
+        "bodyManifestSha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-11/v4-20261024-mac-r2/137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548.zip",
+          "sha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+          "bytes": 9510267,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review",
+          "one extra #指標 tag added in editor; review post-publication"
+        ]
       }
     },
     {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T14:19:28.168Z",
+  "updatedAt": "2026-10-24T15:17:04.001Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43935,7 +43935,7 @@
     },
     {
       "articleKey": "prefecture-map-chart-assets-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
       "revisions": [
         {
           "sha256": "345a0301d65bfa711c45320ef6ddc71eeeab76c1504bf5e0505ad0a2159720fb",
@@ -44020,11 +44020,41 @@
               "planSha256": "f6c4b2faf88400e5e1838615357ad51ef98d348e6864449bce610292ad0e8473"
             }
           }
+        },
+        {
+          "sha256": "b34764a372dc991938954aa642a5ead84047835cf4305cf307898ff769745b7f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-map-chart-assets-pack/revisions/b34764a372dc991938954aa642a5ead84047835cf4305cf307898ff769745b7f.png"
+          },
+          "bytes": 391719,
+          "id": "b34764a372dc991938954aa642a5ead84047835cf4305cf307898ff769745b7f",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T15:14:39.296Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327915377/rectangle_large_type_2_eb628dea5cd266825f04d978fbe1220e.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "b34764a372dc991938954aa642a5ead84047835cf4305cf307898ff769745b7f"
+          }
         }
       ],
       "candidateRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
       "approvedRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328096609/rectangle_large_type_2_d9ab6507430978c166503a1f2248f9ef.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T15:17:03.955Z",
+        "revisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00370",

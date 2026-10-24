@@ -8531,7 +8531,7 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-map-chart-assets-pack",
       "body": {
         "store": "r2-private",
@@ -8539,10 +8539,12 @@
           "sha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
           "files": 4,
           "bytes": 97349,
-          "savedAt": "2026-10-24T07:57:01.966Z"
+          "savedAt": "2026-10-24T15:17:44.214Z"
         },
-        "verifiedAt": "2026-10-24T07:57:01.966Z"
-      }
+        "verifiedAt": "2026-10-24T15:17:44.214Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "prefecture-all-in-one-pack",
