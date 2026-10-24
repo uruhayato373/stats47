@@ -6840,25 +6840,6 @@
       }
     },
     {
-      "key": "29-evaluated-without-side-job",
-      "vertical": "koumuin-claude-code",
-      "title": "公務員が副業せずに Claude Code スキルで評価される 5 つの場",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/29-evaluated-without-side-job",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
-          "files": 13,
-          "bytes": 548635,
-          "savedAt": "2026-10-12T22:04:44.309Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "30-post-retirement-career",
       "vertical": "koumuin-claude-code",
       "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
@@ -6957,9 +6938,9 @@
           "sha256": "a6ca990ffb7a7ce4f267266ece650b5eb8933a1ab1b1fbb1483c1eb8dd04ef18",
           "files": 5,
           "bytes": 344510,
-          "savedAt": "2026-10-12T22:07:58.145Z"
+          "savedAt": "2026-10-24T10:59:00.508Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T10:59:00.508Z"
       }
     },
     {

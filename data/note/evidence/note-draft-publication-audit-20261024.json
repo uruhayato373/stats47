@@ -12,14 +12,14 @@
   "decisionCounts": {
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
-    "hold-duplicate-title": 9,
+    "hold-duplicate-title": 8,
     "hold-product-sales": 58,
     "published-verified": 16,
-    "merged-existing": 4
+    "merged-existing": 5
   },
   "currentCatalog": {
     "published": 418,
-    "draft": 80
+    "draft": 79
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -647,17 +647,31 @@
           "noteUrl": "https://note.com/stats47/n/nc18fa33ec65e"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required",
-        "draft includes numerical and career-outcome claims presented as reported cases without source evidence; do not update live article or post a duplicate before evidence review"
+        "既存公開記事と主題・5つの評価場・主要本文段落が一致。新規投稿を避け既存記事へ統合。",
+        "導入・まとめの文体と図の差分は公開後の品質点検で扱う。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/nc18fa33ec65e",
       "duplicateTextComparison": {
         "publishedKey": "recovered-nc18fa33ec65e",
         "normalizedTwelveCharacterOverlap": 0.227,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-nc18fa33ec65e",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T10:59:21+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "f53daaf9a0e71e0e32e280004d4bee3b627576a8363c1deb81c8132a58d822d6",
+        "archivedDraftR2Path": "note/koumuin-claude-code/29-evaluated-without-side-job",
+        "archivedDraftManifestSha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
+        "publishedManifestSha256": "a6ca990ffb7a7ce4f267266ece650b5eb8933a1ab1b1fbb1483c1eb8dd04ef18",
+        "sectionComparison": "同名の5つの評価場が一致。背景と5節の正規化文字列のSequenceMatcher比率は0.9053–0.9804。導入・まとめ・図の差分は公開後品質点検。",
+        "method": "R2両原稿をcheckoutし、見出しごとに前付・画像行・Markdown記号を除いた文字列を比較。note公開APIでアカウント・公開状態・価格・本文画像を再照合。"
       }
     },
     {

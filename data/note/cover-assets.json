@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T10:00:17.622Z",
+  "updatedAt": "2026-10-24T10:59:40.660Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -5253,21 +5253,6 @@
       "missingVersions": [],
       "production": {
         "id": "NCI-00043",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "29-evaluated-without-side-job",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00044",
         "policyId": "NCP-007",
         "policyVersion": 4,
         "brief": null
