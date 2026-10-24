@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T10:59:40.660Z",
+  "updatedAt": "2026-10-24T12:04:40.034Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43549,17 +43549,67 @@
               "bytes": 1212
             }
           }
+        },
+        {
+          "sha256": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-household-consumption-pack/revisions/888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7.png"
+          },
+          "bytes": 1795781,
+          "id": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-317776e48ea9",
+          "createdAt": "2026-10-24T12:02:01.116Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定5文言を確認。誤字・欠字・文字切れ・重なりなし。家計の食料品・日用品と調査票・汎用表計算画面は題材に一致し、人物・地図・架空の統計値なし。",
+            "reviewedAt": "2026-10-24T12:04:40.034Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-household-consumption-pack/inputs/5cfe3f95e312e71d41b8c22b0f35982fae21eb5611488b1cc04e6c08b251abe8.json"
+              },
+              "bytes": 8012
+            },
+            "production": {
+              "id": "NCI-00367",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "317776e48ea928689741ef29beefd477aa7819a01dbc4d119e487936ee9620c0"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
-      "approvedRevisionId": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
+      "candidateRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+      "approvedRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00367",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "685指標の\n家計データ集",
+          "subline": "47地域・2024年固定",
+          "subject": "家計調査のデータ集を示す。机上の整理された調査票、食料品と日用品の控えめなイラスト、表計算シートのタブを描く。架空の統計値、県別地図、読めない細字、人物は描かない。",
+          "evidence": "P-14 v4-20261024-mac-r2 の READINESS と private R2 ZIP 読み戻しで、685指標、47地域、家計調査2024年、CSV・Excel・PowerPoint・PDF・地図PNG・出典/許諾文を確認。原稿の収録内容と一致。"
+        }
       }
     },
     {

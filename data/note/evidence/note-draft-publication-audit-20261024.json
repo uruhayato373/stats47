@@ -2128,17 +2128,26 @@
       "articleKey": "prefecture-household-consumption-pack",
       "vertical": "product-sales",
       "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
-      "bodyManifestSha256": "2a9bb774833746c8955e965f84cee213e9e4c64f1840376353cc8f966a74acbe",
+      "bodyManifestSha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00367",
-      "approvedCoverRevisionId": "ba4017b595bdfaeca47b43fbe8185962eb2beae7d4c8213427de636eddc9bb9f",
+      "approvedCoverRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
       "publishedTitleMatches": [],
       "decision": "hold-product-sales",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "P-14 v4 archive SHA and private R2 readback verified; manuscript map sample updated to current 2024 beef expenditure map; imagegen cover approved in admin at 320px",
+        "note.com daily file upload limit active after 10 attachments; publish after reset and verify ZIP after paid boundary"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "publicationPreparation": {
+        "archiveSha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+        "archiveBytes": 13129305,
+        "archiveFiles": 7,
+        "privateR2ReadbackVerified": true,
+        "coverApproved": true,
+        "bodySavedAt": "2026-10-24T12:00:05.203Z",
+        "status": "ready-awaiting-note-upload-quota"
+      }
     },
     {
       "articleKey": "a-annual-paid-leave-11-days-or-more-ratio",
