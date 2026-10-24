@@ -1932,6 +1932,12 @@ updated: 2026-10-19
 - **自治体ペルソナ向けの候補（2026-10-17 オーナーと壁打ち）**: (A) 生成 AI × e-Stat で類似団体比較表を作る手順（庁内で許される範囲の AI 利用。売れた唯一の系統と、元自治体職員という信頼を重ねる。既存マガジン「公務員 × Claude Code」¥1,980 の改訂でも出せる）を第一候補とする。(B) 議会答弁・計画の現状分析に使う統計の探し方と出典の書き方（AI を使わない。「e-Stat 7 つの技」の記事は職場からの読者が多く、Teams 経由の共有もある）は、Q9 で庁内の AI 利用ができない人が多い場合の切り替え先にする。(C) 介護保険事業支援計画（第 10 期）の現状分析のデータ集めは、`ADMIN-STAT-PILOT-01` のデータ商品検証へ回し、ノウハウとしては後回しにする。開発者向けの第一候補（e-Stat × Claude Code の初期設定）とどちらを先に出すかは、聞き取り 3 件の後に決める（複数商品を同時に出さない）。
 - **雑学の読者から拾う導線 (2026-10-07 検討)**: オーナー案「サイト管理者が独立して年収1000万円」を入口に実務記事へつなぐ形は、そのままでは採らない。運営者の実績ではなく (サイトの収益は判定不能・商品は ¥0)、事実でない収益の主張は下の禁止と収益化戦略 §8 に当たり、公的統計サイトの信頼も損なうため。事実に基づく代わりの形を、計測付きで 1 つずつ試す: (a) 閲覧の多い雑学ランキング数ページの末尾に「このランキングの作り方 (Claude Code × e-Stat)」の 1 行を置き、無料の Claude Code 連載を経てノウハウ記事へつなぐ。`nav_click` で 4 週のクリックを測る (b) 年収・所得の統計そのもの (例: 高額給与所得者の多い県。W41 の週次計画でトレンド候補) を雑学として出し、所得に関心のある読者を集める (c) 運営の収支を実数で公開する連載 (成果は取得日と取得方法のある計測値だけ)。年収 1000 万円などの数字は、実際に達成して証拠を示せるまで使わない。
 - **停止条件・禁止**: 「稼げる」「収益化できる」を売り文句にしない (stats47 自体の収益実績がまだ無く、証拠のない収益の主張は収益化戦略 §8 が広告でも扱わない情報商材と同じになる)。成果として書くのは取得日と取得方法を示せる計測値だけ。複数の商品を同時に出さない。note への公開・価格変更はオーナー承認と人手ログインを経てから。
+- **テーマ候補の追加 (2026-10-24 オーナーと壁打ち)**: (D) **note の有料記事運用の自動化 (Claude Code × Playwright)**。売れた唯一の系統 (Claude Code の実務記事) に入る。統計の権威は乗らないので、e-Stat × Claude Code (第一候補) と比べて 1 つだけ出す。
+  - **読者の課題 / HARM**: note で有料記事を出す人・運営代行が、本数が増えると本文の差し替え・PDF 配布・マガジン収録の手作業が回らず、更新の事故 (添付やリンクカードの消失・有料境界のずれ・反映されない偽の成功) に気づけない (M: 収入、A: 技能)。
+  - **支払う理由**: 投稿の自動化そのものは無料で出回っている (Claude Code × Playwright の解説記事・note 投稿の MCP サーバー)。空白は「公開後も壊さず回す」検査と事故の事例で、ここを有料にする。
+  - **出せる実数 (取得日と取得方法つき)**: doboku-note の note 運用で、原稿 959 本 (公開 763)・マガジン 109 を管理 (2026-10-23 の `check-magazine-membership` と公開 API の取得)。2026-10-23 に配布 PDF 72 本を作り直して貼り直し、公開 API と添付の実在検査で 72/72 を確認。売上の多寡を成果として書かない。
+  - **規約 (2026-10-24 に note ご利用規約を確認)**: 自動化を名指しで禁じる条文は無い。ただし「当社のサービスの障害となる行為」と「ID・パスワードの譲渡・貸与」が禁止なので、(i) 高頻度の操作は避ける手順を必ず含め、(ii) 他人のアカウントにログインして代行する形 (ココナラの運用代行など) は採らず、買った人が自分の PC で動かす形に限る。
+  - **入口**: kazu-note の公務員ノートに「元公務員が note の有料記事を一人で回す仕組み」の無料記事を置き、反応 (スキ・コメントの「ほしい」) を測ってから有料にするか決める (kazu-note リポ `memos/kazu-note_公務員ノート展開計画.md`)。
 - **完了条件**: 1 商品の 4 週の実売 (0 件なら 0 件と、考えられる理由) が台帳にあり、継続・改訂・撤退のどれかをオーナーが決めた。
 
 ### [KNOWHOW-QA-BOARD-01] 公開の質問掲示板で統計・地図・e-Stat の困りごとを集めて無料で答え、3 回以上繰り返す質問だけをノウハウ商品にする
@@ -2144,7 +2150,7 @@ updated: 2026-10-19
 - **事象**: stats47 の配信先は Cloudflare Workers (OpenNext) だが、`cc-estat-18-cache-r2` と `cc-estat-19-skill-pipeline` の本文に「Cloudflare Pages」の表記が残っている (2026-10-07、連載の最終回 cc-estat-20 を書き直した writer が報告)。cc-estat-19 のトークン作成例には、使っていない D1 の Edit 権限も含まれている (cc-estat-20 の critic が報告)。cc-estat-18 の `wrangler r2 object put` の例には `--remote` が無く、wrangler 4.148.0 ではローカルに書いてしまう。`remote = true` のときは `preview_bucket_name` を外す注意も要る (cc-estat-20 の writer がローカルで再現)。cc-estat-20 も本文は Workers に直したが、タグは未登録の `CloudflareWorkers` にすると 410 になるため `CloudflarePages` のままにしてある。記事の tags の `CloudflarePages` を `CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成が要る (未登録のタグは 410 になる)。
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
-- **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/{cc-estat-18-cache-r2,cc-estat-19-skill-pipeline}/` (未コミット)。Pages → Workers (OpenNext)、`wrangler r2 object put/get` に `--remote`、`preview_bucket_name` と `remote = true` の注意、D1 の権限をトークン例から削除、`claude -p` の起動例、cron の曜日の誤りを直した。2 本とも quality-gate blocker 0・critic PASS (BLOCK・MAJOR 0)。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。**残り**: 最終回 cc-estat-20 のタグが `CloudflarePages` のまま (差し替えには known-tag-keys の再生成が要る)、cc-estat-20 にも次回予告などの食い違いが残っていないか確認する。
+- **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/{cc-estat-18-cache-r2,cc-estat-19-skill-pipeline}/` (未コミット)。Pages → Workers (OpenNext)、`wrangler r2 object put/get` に `--remote`、`preview_bucket_name` と `remote = true` の注意、D1 の権限をトークン例から削除、`claude -p` の起動例、cron の曜日の誤りを直した。2 本とも quality-gate blocker 0・critic PASS (BLOCK・MAJOR 0)。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。**残り**: 最終回 cc-estat-20 のタグが `CloudflarePages` のまま (差し替えには known-tag-keys の再生成が要る)、cc-estat-20 にも次回予告などの食い違いが残っていないか確認する。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
@@ -2202,7 +2208,7 @@ updated: 2026-10-19
 - **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
 - **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
 - **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
-- **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/<slug>/` (未コミット)。3 本とも quality-gate blocker 0・critic PASS。
+- **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/<slug>/` (未コミット)。3 本とも quality-gate blocker 0・critic PASS。
   - alcohol: 2018 年度の都道府県値は一次資料で再現できず、2023 年度の R2 値 (46 都道府県) で図と本文を作り直した。焼酎は 9.5% に直した。全国の酒類別構成比は 2018 年度のまま (年は明記)。
   - birth-death: 東京の自然減・社会増減との取り違えを直し、図を合計特殊出生率に作り直した。critic の MAJOR が 6 件残る (うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認)。公開前に MAJOR を直すかを決める。
   - automotive: 輸送用機械の図 4 枚は e-Stat から取り直せず (app id が CI 専任) 外し、全業種合計の製造品出荷額等で書き直した。**本文に自動車の数値が無く、title「自動車産業の県別勢力図」とずれる** (title を変えると背景画像の作り直しが要るので据え置き)。CI の app id で輸送用機械の県別出荷額を取り直すか、title と背景を作り直すかを決めてから公開する。
@@ -4882,6 +4888,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   誤値を注入して監査が発火することを実測する
 - **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
 - **済 (2026-10-22・オーナー指示「全てやりきって」で trigger 3 成立)**: 試験 1 指標 `census-population-change-rate-5y` で完了条件を満たした。本文は `data/municipalities/ai-content/<key>.json` (JSON Schema 付き)、監査は `packages/ranking/src/municipalities/municipality-ai-content.ts`、デプロイ時の市区町村ランキング生成が監査に通ったときだけ `ai-content.json` を書き、ページは values.json の generatedAt が一致するときだけ「データの考察」と FAQ を描く。本番の配信値で監査 blocker 0 (`"aiContent": "written"`)、富岡町の値を 36.0→38.0 に変えると `根拠の無い数「38.0」` で書かない (実測)、ranking-content-critic は 1 回目 REVISE (FAQ の質問が増減率と食い違う等 5 件) → 反映後 PASS、localhost で描画を確認。契約は `ranking-content-standards.md`「市区町村の解説」。本番 (デプロイ run 39763716073 の後) で `ai-content.json` は 200、ページに「データの考察」と FAQPage が出て、解説の無い指標 (`elderly-population-ratio`) には出ないことを確認した。指標を増やす作業は `MUNI-AI-CONTENT-EXPAND-01`。カードは完了。
+
+### [DEPS-ZOD-BODYPARSER-ADVISORY-01] zod と body-parser の high 脆弱性で Security Scan が全 PR で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-24] [領域:サイト]
+
+- **証拠 (2026-10-24・PR #1174 の Security Scan)**: `GHSA-mrhx-c7xc-m3w5` (zod < 4.6.6・2026-10-01 公開・大きすぎる制約付きコレクションの検証でメモリを使い切る) と `GHSA-27r3-jxmh-p828` (body-parser < 2.4.0・2026-10-23 公開・圧縮した本文の後ろのバイトで DoS)。zod 4.4.3 は `apps/remotion` (固定)・`@remotion/{media,studio,studio-server,bundler,cli}`・`@cloudflare/vitest-pool-workers`・`knip` の入れ子。body-parser は root の overrides で 2.3.0 に固定 (express 5.2.1 経由)。Security Scan は main の必須チェック (Code Quality Check の needs) ではないのでマージは止まらない。
+- **上流**: 最新の `@remotion/studio` 4.0.538 は zod 4.5.4、`@cloudflare/vitest-pool-workers` 0.23.0 は zod 4.4.3 を固定していて、まだ修正版を使っていない (2026-10-24 `npm view`)。
+- **試して戻したこと (2026-10-24)**: ① root overrides で上の各パッケージ配下の zod を 4.6.7 にすると、vitest-pool-workers・studio-server の zod が root の zod 3.25.76 へ dedupe されて invalid になった ② body-parser の overrides を 2.4.0 にして lock の該当行を消して入れ直すと、body-parser が lock と node_modules から消えた (express の依存が欠ける)。どちらも元に戻した。
+- **次**: body-parser は express の更新 (express 5 系の body-parser 2.4.0 を取り込む版) か、`npm install body-parser@2.4.0` を明示してから overrides を合わせる手順を試し、`npm ls body-parser` が 2.4.0 で invalid 0 になることを確かめる。zod は上流 (Remotion・workers-sdk) の修正待ちか、apps/remotion だけ 4.6.7 にして Remotion の bundle とスチルのレンダが通るかを試す。runtime 依存の advisory は例外台帳では通らない。
+- **完了条件**: `node .claude/scripts/lib/check-dependency-audit.mjs` が high/critical 0、`npm ls zod body-parser` に invalid が無い、Remotion Bundle と web の build が通る。
 
 ### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]
