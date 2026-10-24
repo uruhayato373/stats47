@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T18:25:05.706Z",
+  "observedAt": "2026-10-24T19:22:01.396Z",
   "startingDrafts": 100,
   "bodyStorage": {
-    "deepVerified": 90,
+    "deepVerified": 91,
     "failed": 0,
-    "unwritten": 10
+    "unwritten": 9
   },
   "decisionCounts": {
-    "hold-body-unwritten": 9,
+    "hold-body-unwritten": 8,
     "hold-cover-unapproved": 2,
     "hold-product-sales": 54,
     "merged-existing": 13,
-    "published-verified": 22
+    "published-verified": 23
   },
   "currentCatalog": {
-    "published": 424,
-    "draft": 65
+    "published": 425,
+    "draft": 64
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -249,16 +249,56 @@
       "articleKey": "d-geo-natural-language-region-filter",
       "vertical": "stats47-note",
       "title": "自然言語→地域フィルタJSON",
-      "bodyManifestSha256": null,
-      "bodyVerifiedDeep": false,
+      "bodyManifestSha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+      "bodyVerifiedDeep": true,
       "productionId": "NCI-00248",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
       "publishedTitleMatches": [],
-      "decision": "hold-body-unwritten",
+      "decision": "published-verified",
       "reasons": [
-        "body manifest absent"
+        "変換キットZIPのSHAを照合し、地方区分coverageを含むPythonテスト7件が合格した",
+        "note公開APIでstats47名義・公開状態・2980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後にあり、公開本文からは見えないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差4.012で一致を確認した"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/na9ba449d2c8b",
+      "productEvidence": {
+        "archiveSha256": "1aae4368b3afcfed32f1e4202004c766f1031212e5c2a5a7ffdf58fb1f04efc6",
+        "archivePath": ".local/geo-products/d-geo-natural-language-region-filter/d-geo-natural-language-region-filter.zip",
+        "privateR2Path": "note/stats47-note/d-geo-natural-language-region-filter/attachments/d-geo-natural-language-region-filter.zip",
+        "unitTests": "7 passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T19:22:01.388Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 2980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328126212/rectangle_large_type_2_b9e4c2ba0c9ddb38755267c1e48d4fbd.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+          "publishedRevisionId": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716",
+          "rgbMae": 4.012,
+          "channelsWithin20": 0.9737,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-natural-language-region-filter/attachments/d-geo-natural-language-region-filter.zip",
+          "sha256": "1aae4368b3afcfed32f1e4202004c766f1031212e5c2a5a7ffdf58fb1f04efc6"
+        }
+      }
     },
     {
       "articleKey": "d-geo-pyqgis-ai-verification",

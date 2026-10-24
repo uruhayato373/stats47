@@ -186,9 +186,9 @@
           "sha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
           "files": 6,
           "bytes": 18950,
-          "savedAt": "2026-10-24T18:24:34.810Z"
+          "savedAt": "2026-10-24T19:01:14.259Z"
         },
-        "verifiedAt": "2026-10-24T18:24:34.810Z"
+        "verifiedAt": "2026-10-24T19:01:14.259Z"
       },
       "stats47Targets": [
         "/geo/data-catalog",
@@ -262,12 +262,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-natural-language-region-filter",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+          "files": 4,
+          "bytes": 14419,
+          "savedAt": "2026-10-24T19:20:35.225Z"
+        },
+        "verifiedAt": "2026-10-24T19:20:35.225Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/na9ba449d2c8b",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-pyqgis-ai-verification",

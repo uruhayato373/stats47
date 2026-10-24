@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T18:20:42.945Z",
+  "updatedAt": "2026-10-24T19:21:06.984Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29394,17 +29394,98 @@
     },
     {
       "articleKey": "d-geo-natural-language-region-filter",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/na9ba449d2c8b",
+      "revisions": [
+        {
+          "sha256": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-natural-language-region-filter/revisions/a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15.png"
+          },
+          "bytes": 1812807,
+          "id": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-f9e31cc28ea4",
+          "createdAt": "2026-10-24T19:05:20.447Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "e22b797938c260bdc38d8683fe3032c08045f8b38f6d7004aecf299d606167db"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで5文言を確認。誤字・欠字・文字切れ・重なりなし。JSONの括弧と無地カードは原稿と付属キットに一致し、地図輪郭・架空の統計値・人物なし。",
+            "reviewedAt": "2026-10-24T19:09:40.971Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "e22b797938c260bdc38d8683fe3032c08045f8b38f6d7004aecf299d606167db",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-natural-language-region-filter/inputs/e22b797938c260bdc38d8683fe3032c08045f8b38f6d7004aecf299d606167db.json"
+              },
+              "bytes": 8344
+            },
+            "production": {
+              "id": "NCI-00248",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "f9e31cc28ea45dd6b7db70cc4616e9247a41204e70ece301f8f692517394b21c"
+            }
+          }
+        },
+        {
+          "sha256": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-natural-language-region-filter/revisions/36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716.png"
+          },
+          "bytes": 371211,
+          "id": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T19:21:03.444Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328126212/rectangle_large_type_2_b9e4c2ba0c9ddb38755267c1e48d4fbd.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716"
+          }
+        }
+      ],
+      "candidateRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+      "approvedRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328126212/rectangle_large_type_2_b9e4c2ba0c9ddb38755267c1e48d4fbd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T19:21:03.444Z",
+        "revisionId": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00248",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "地域の指定を\n検証できるJSONへ",
+          "subline": "47都道府県・明示した地方区分",
+          "subject": "左に日本語の地域条件を表す無地のメモ用紙、右にJSONの括弧を示す抽象的な図形、机上に輪郭や文字の無い長方形の単色カード。カードは地図や県の形状に見えない単純な長方形。実在しない数値、地図輪郭、コード断片の文字は描かない。紺・青緑・生成りの編集的な構図。",
+          "evidence": "原稿は「関東から東京都を除く」を6県のコード集合に変換する。添付は47都道府県辞書、固定8地方の規約、Python変換CLIと7件のテストを含む。統計値や地図は生成しない。"
+        }
       }
     },
     {
