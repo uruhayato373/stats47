@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T17:08:05.745Z",
+  "updatedAt": "2026-10-24T18:20:42.945Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -28917,17 +28917,98 @@
     },
     {
       "articleKey": "d-geo-data-quality-management",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "revisions": [
+        {
+          "sha256": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-data-quality-management/revisions/8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876.png"
+          },
+          "bytes": 1797546,
+          "id": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-cfb567618f9d",
+          "createdAt": "2026-10-24T18:08:23.592Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "a5dad055b091650abfa4c9b73682763a1acdd098522e3da847120e505648c101"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxの比較で指定5行が正確に読め、文字切れ・重なりなし。紙のCSVと4つの印は本文・添付の4ゲートを表し、架空の統計値や地図は描いていません。",
+            "reviewedAt": "2026-10-24T18:09:45.167Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "a5dad055b091650abfa4c9b73682763a1acdd098522e3da847120e505648c101",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-data-quality-management/inputs/a5dad055b091650abfa4c9b73682763a1acdd098522e3da847120e505648c101.json"
+              },
+              "bytes": 7959
+            },
+            "production": {
+              "id": "NCI-00241",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "cfb567618f9dfef9b9ba1950e6a89a38d460da1d42c7deddb7a3bfd1e1118aa6"
+            }
+          }
+        },
+        {
+          "sha256": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-data-quality-management/revisions/8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87.png"
+          },
+          "bytes": 413000,
+          "id": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T18:20:39.177Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328121243/rectangle_large_type_2_8a4a434cb9ff1727c54043524015a4b2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87"
+          }
+        }
+      ],
+      "candidateRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+      "approvedRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328121243/rectangle_large_type_2_8a4a434cb9ff1727c54043524015a4b2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T18:20:39.177Z",
+        "revisionId": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00241",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "都道府県データ\n品質管理",
+          "subline": "出典・単位・分布・47県の確認",
+          "subject": "中央に47県のCSVを表す整然とした紙の表と、検査済みのチェック印4つ。画面や架空の地図を描かず、印は文字や数値を持たない。紺・青緑・生成りの編集的な構図。",
+          "evidence": "原稿「4つの確認は役割が違う」に出典、単位、値分布、47県coverageの説明。添付のCSV検査キットはこの4項目を点検し、架空データで動作確認する。統計値や県別の実測地図は掲載しない。"
+        }
       }
     },
     {

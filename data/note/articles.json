@@ -178,16 +178,24 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-data-quality-management",
       "body": {
         "store": "r2-private",
-        "manifest": null
+        "manifest": {
+          "sha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+          "files": 6,
+          "bytes": 18950,
+          "savedAt": "2026-10-24T18:24:34.810Z"
+        },
+        "verifiedAt": "2026-10-24T18:24:34.810Z"
       },
       "stats47Targets": [
         "/geo/data-catalog",
         "/geo/method"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-station-access-analysis",

@@ -2539,6 +2539,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "d-geo-data-quality-management": {
+      "vertical": "stats47-note",
+      "title": "stats47型データ品質管理",
+      "url": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-data-quality-management",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
       "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",

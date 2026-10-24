@@ -20,11 +20,6 @@
       "r2_path": null,
       "status": "draft"
     },
-    "d-geo-data-quality-management": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
     "d-geo-geopackage-parquet-pmtiles": {
       "vertical": "stats47-note",
       "r2_path": null,

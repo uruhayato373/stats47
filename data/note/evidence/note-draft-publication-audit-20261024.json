@@ -2,24 +2,23 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T17:07:55.287Z",
+  "observedAt": "2026-10-24T18:25:05.706Z",
   "startingDrafts": 100,
   "bodyStorage": {
-    "deepVerified": 89,
+    "deepVerified": 90,
     "failed": 0,
-    "unwritten": 11
+    "unwritten": 10
   },
   "decisionCounts": {
-    "hold-body-unwritten": 10,
+    "hold-body-unwritten": 9,
     "hold-cover-unapproved": 2,
-    "hold-duplicate-title": 0,
     "hold-product-sales": 54,
-    "published-verified": 21,
-    "merged-existing": 13
+    "merged-existing": 13,
+    "published-verified": 22
   },
   "currentCatalog": {
-    "published": 423,
-    "draft": 66
+    "published": 424,
+    "draft": 65
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -162,16 +161,59 @@
       "articleKey": "d-geo-data-quality-management",
       "vertical": "stats47-note",
       "title": "stats47型データ品質管理",
-      "bodyManifestSha256": null,
-      "bodyVerifiedDeep": false,
+      "bodyManifestSha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+      "bodyVerifiedDeep": true,
       "productionId": "NCI-00241",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
       "publishedTitleMatches": [],
-      "decision": "hold-body-unwritten",
+      "decision": "published-verified",
       "reasons": [
-        "body manifest absent"
+        "架空の47県CSVを使った品質検査キットと4テストが合格し、ZIPのSHA・内部構造を照合した",
+        "note公開APIでstats47名義・公開状態・2980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後にあり、公開本文からは見えないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差3.607で一致を確認した"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "productEvidence": {
+        "archiveSha256": "78377b583d59524008ede7680df1a555149799e53bed8adb080b6cc30ccc9dbc",
+        "archivePath": ".local/geo-products/d-geo-data-quality-management/d-geo-data-quality-management.zip",
+        "privateR2Path": "note/stats47-note/d-geo-data-quality-management/attachments/d-geo-data-quality-management.zip",
+        "unitTests": "4 passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T18:25:05.706Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 2980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328121243/rectangle_large_type_2_8a4a434cb9ff1727c54043524015a4b2.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+          "publishedRevisionId": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87",
+          "rgbMae": 3.607,
+          "channelsWithin20": 0.9757,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-data-quality-management/attachments/d-geo-data-quality-management.zip",
+          "sha256": "78377b583d59524008ede7680df1a555149799e53bed8adb080b6cc30ccc9dbc",
+          "bytes": 4916,
+          "readbackVerified": true,
+          "unitTests": "4 passed"
+        }
+      }
     },
     {
       "articleKey": "d-geo-trade-area-analysis",
