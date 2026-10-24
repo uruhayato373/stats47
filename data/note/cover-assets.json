@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T09:01:12.663Z",
+  "updatedAt": "2026-10-24T10:00:17.622Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -42802,17 +42802,67 @@
               "bytes": 1160
             }
           }
+        },
+        {
+          "sha256": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-all-in-one-pack/revisions/e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4.png"
+          },
+          "bytes": 1692049,
+          "id": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-421be49e7b6a",
+          "createdAt": "2026-10-24T09:58:59.432Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定5文言を確認。誤字・欠字・文字切れ・重なりなし。資料束と汎用の表計算画面は用途に一致し、人物・地図・架空の統計値なし。",
+            "reviewedAt": "2026-10-24T10:00:17.622Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-all-in-one-pack/inputs/781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13.json"
+              },
+              "bytes": 8008
+            },
+            "production": {
+              "id": "NCI-00362",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "421be49e7b6a784dffd39d792f03c1c9886b3b1d6bb93bd8627dec263c9ee54a"
+            }
+          }
         }
       ],
-      "candidateRevisionId": "934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6",
-      "approvedRevisionId": "934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6",
+      "candidateRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+      "approvedRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00362",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "2,073指標の\n総合データ集",
+          "subline": "47都道府県・年次固定",
+          "subject": "机上に整理したデータ集の紙束、表計算シートのタブ、資料ファイルを描く。収録物の用途が分かる実務資料の構図。架空の統計グラフや行政界地図、読めない細字、人物は描かない。",
+          "evidence": "P-12 v4-20261024-mac-r2 の READINESS と ZIP 読み戻しで、47都道府県・2,073指標、CSV・Excel・PowerPoint・PDF・地図SVG/PNG・出典/許諾文を確認。原稿の収録内容と一致。"
+        }
       }
     },
     {
