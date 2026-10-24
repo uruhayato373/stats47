@@ -8646,18 +8646,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4500,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-migration-living-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "5cb91744509878ec564f3904ca8d449e89c8e1b765bf1d8ee9cea7b48e437d6b",
+          "sha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
           "files": 4,
           "bytes": 104931,
-          "savedAt": "2026-10-12T22:05:37.565Z"
+          "savedAt": "2026-10-24T07:06:07.909Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:06:07.909Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-retail-trade-area-pack",

@@ -10,7 +10,7 @@
     "totalBytes": 638847041,
     "officeValidated": 0,
     "publicationReady": 0,
-    "publishedWithDeferredOfficeValidation": 6,
+    "publishedWithDeferredOfficeValidation": 7,
     "noteArchivesPrepared": 13,
     "noteArchivesR2Verified": 13,
     "noteArchiveBytes": 145581718
@@ -192,7 +192,9 @@
         "entries": 7,
         "readbackVerified": true,
         "localPath": ".local/note-product-archives/P-07-v4-20261024-mac-r2.zip"
-      }
+      },
+      "notePublishedUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "notePublishedAt": "2026-10-24T07:06:21.317913Z"
     },
     {
       "productId": "P-08",

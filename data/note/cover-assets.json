@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T06:55:06.993Z",
+  "updatedAt": "2026-10-24T07:05:52.878Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43763,7 +43763,7 @@
     },
     {
       "articleKey": "prefecture-migration-living-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n323af74c09cc",
       "revisions": [
         {
           "sha256": "b111963e56200cb24042f1fc0f034986e4410f88d152ca26b13870255c8446cb",
@@ -43803,17 +43803,97 @@
               "bytes": 1202
             }
           }
+        },
+        {
+          "sha256": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-migration-living-pack/revisions/d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d.png"
+          },
+          "bytes": 1745131,
+          "id": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-0a2eb0431776",
+          "createdAt": "2026-10-24T06:58:04.347Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "4f453628d565b27f5b7791611672866048ebd48347351cdbfe0f1631f1530794"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。家・資料・天候の抽象アイコンは本文の住居費・物価・気候の用途と一致し、人物・地図・実在UIなし。",
+            "reviewedAt": "2026-10-24T06:58:15.410Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "4f453628d565b27f5b7791611672866048ebd48347351cdbfe0f1631f1530794",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-migration-living-pack/inputs/4f453628d565b27f5b7791611672866048ebd48347351cdbfe0f1631f1530794.json"
+              },
+              "bytes": 7065
+            },
+            "production": {
+              "id": "NCI-00371",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "0a2eb043177631b2b4ab7dd2b7502c1374aadd17c8e30e9d663422ee6b4281e4"
+            }
+          }
+        },
+        {
+          "sha256": "1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-migration-living-pack/revisions/1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1.png"
+          },
+          "bytes": 401715,
+          "id": "1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T07:05:49.105Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1"
+          }
         }
       ],
-      "candidateRevisionId": "b111963e56200cb24042f1fc0f034986e4410f88d152ca26b13870255c8446cb",
-      "approvedRevisionId": "b111963e56200cb24042f1fc0f034986e4410f88d152ca26b13870255c8446cb",
-      "published": null,
+      "candidateRevisionId": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
+      "approvedRevisionId": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T07:05:49.105Z",
+        "revisionId": "1a7f98b615836091cf343db7764360b367e29fde9855b08976f04d9078f0c9f1"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00371",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "住居費・物価・気候データ集",
+          "subline": "47都道府県・76指標",
+          "subject": "移住候補地の暮らしを調べる用途を、無地の資料ファイル、家のシンプルな形、温度計と雨雲の抽象的なアイコンで示す。数値・グラフ・地図・人物・実在UIを描かない。",
+          "evidence": "P-07 v4-20261024-mac-r2 のデータ集は47都道府県76指標。7ファイルのZIPとprivate R2読み戻しSHAを確認。PowerPointとExcelの実機確認は未了なので実在画面を描かない。"
+        }
       }
     },
     {

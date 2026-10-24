@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T06:55:42.324223Z",
+  "observedAt": "2026-10-24T07:06:21.317913Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 62,
-    "published-verified": 12,
+    "hold-product-sales": 61,
+    "published-verified": 13,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 414,
-    "draft": 86
+    "published": 415,
+    "draft": 85
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1796,17 +1796,43 @@
       "articleKey": "prefecture-migration-living-pack",
       "vertical": "product-sales",
       "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
-      "bodyManifestSha256": "5cb91744509878ec564f3904ca8d449e89c8e1b765bf1d8ee9cea7b48e437d6b",
+      "bodyManifestSha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00371",
-      "approvedCoverRevisionId": "b111963e56200cb24042f1fc0f034986e4410f88d152ca26b13870255c8446cb",
+      "approvedCoverRevisionId": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-07 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 4500 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:06:21.317913Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4500,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-07/v4-20261024-mac-r2/f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab.zip",
+          "sha256": "f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab",
+          "bytes": 9932503,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-retail-trade-area-pack",
