@@ -8602,18 +8602,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-healthcare-nursing-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "0e98930e0c0b8466eca8d2705072db30671063a28e22af24ad21ed8c7a803c90",
+          "sha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
           "files": 4,
           "bytes": 107206,
-          "savedAt": "2026-10-12T22:05:36.120Z"
+          "savedAt": "2026-10-24T06:03:33.928Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T06:03:33.928Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-education-childcare-pack",

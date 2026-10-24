@@ -3295,6 +3295,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-healthcare-nursing-pack": {
+      "vertical": "product-sales",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-healthcare-nursing-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-income-wage-hiring-pack": {
       "vertical": "product-sales",
       "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",

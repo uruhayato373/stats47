@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T05:52:47.717Z",
+  "observedAt": "2026-10-24T06:03:46.907Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 64,
-    "published-verified": 10,
+    "hold-product-sales": 63,
+    "published-verified": 11,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 412,
-    "draft": 88
+    "published": 413,
+    "draft": 87
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1712,17 +1712,43 @@
       "articleKey": "prefecture-healthcare-nursing-pack",
       "vertical": "product-sales",
       "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
-      "bodyManifestSha256": "0e98930e0c0b8466eca8d2705072db30671063a28e22af24ad21ed8c7a803c90",
+      "bodyManifestSha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00366",
-      "approvedCoverRevisionId": "bdccb93d51e701acb9245cbb36c380cc3965b539ed737a7df3bca442b159e9fd",
+      "approvedCoverRevisionId": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-05 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T06:03:46.907Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-05/v4-20261024-mac-r2/530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0.zip",
+          "sha256": "530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0",
+          "bytes": 10734585,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-education-childcare-pack",

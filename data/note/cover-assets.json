@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T05:52:27.762Z",
+  "updatedAt": "2026-10-24T06:03:27.224Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43170,7 +43170,7 @@
     },
     {
       "articleKey": "prefecture-healthcare-nursing-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
       "revisions": [
         {
           "sha256": "47b8748cfea7e96b350002370626432121c8495bdad96dea142041fc0bb2c7a7",
@@ -43249,17 +43249,97 @@
               "bytes": 1186
             }
           }
+        },
+        {
+          "sha256": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-healthcare-nursing-pack/revisions/7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72.png"
+          },
+          "bytes": 1857453,
+          "id": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-98de32467ef3",
+          "createdAt": "2026-10-24T05:54:56.665Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "8cc59fa6b45ee52d76a5975db308233fa9b095db548104c372c0bdfbccee77d2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定4文言を確認。誤字・欠字・文字切れ・重なりなし。人物・架空の統計図なし。資料と聴診器の題材が本文に一致。",
+            "reviewedAt": "2026-10-24T05:55:09.676Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "8cc59fa6b45ee52d76a5975db308233fa9b095db548104c372c0bdfbccee77d2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-healthcare-nursing-pack/inputs/8cc59fa6b45ee52d76a5975db308233fa9b095db548104c372c0bdfbccee77d2.json"
+              },
+              "bytes": 7060
+            },
+            "production": {
+              "id": "NCI-00366",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "98de32467ef301a6616a1e2b518d5f3308a12eee7bc7603ee7c166ee5e086b0a"
+            }
+          }
+        },
+        {
+          "sha256": "09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-healthcare-nursing-pack/revisions/09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c.png"
+          },
+          "bytes": 391867,
+          "id": "09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T06:03:23.197Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c"
+          }
         }
       ],
-      "candidateRevisionId": "bdccb93d51e701acb9245cbb36c380cc3965b539ed737a7df3bca442b159e9fd",
-      "approvedRevisionId": "bdccb93d51e701acb9245cbb36c380cc3965b539ed737a7df3bca442b159e9fd",
-      "published": null,
+      "candidateRevisionId": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
+      "approvedRevisionId": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T06:03:23.197Z",
+        "revisionId": "09a5877ce23f9cd1145133a9c4f8879c813559ce5e48554dd4eb627feb30f66c"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00366",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "医療・介護データ集",
+          "subline": "47都道府県・237指標",
+          "subject": "地域の医療・介護体制の比較に使う無地の資料ファイル、ノートPC、聴診器を大きく描く。紙や画面に文字・数値・グラフ・地図を描かず、実在の資料やUIを再現しない。人物・ロゴなし。",
+          "evidence": "P-05 v4-20261024-mac-r2 のデータ集は47都道府県237指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので完成画面を描かない。"
+        }
       }
     },
     {
