@@ -390,11 +390,6 @@
       "r2_path": "note/product-sales/prefecture-disaster-infrastructure-pack",
       "status": "draft"
     },
-    "prefecture-education-childcare-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-education-childcare-pack",
-      "status": "draft"
-    },
     "prefecture-household-consumption-pack": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/prefecture-household-consumption-pack",

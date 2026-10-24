@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T06:03:46.907Z",
+  "observedAt": "2026-10-24T06:55:42.324223Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 63,
-    "published-verified": 11,
+    "hold-product-sales": 62,
+    "published-verified": 12,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 413,
-    "draft": 87
+    "published": 414,
+    "draft": 86
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1754,17 +1754,43 @@
       "articleKey": "prefecture-education-childcare-pack",
       "vertical": "product-sales",
       "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
-      "bodyManifestSha256": "6d397ec9e70ccd9c282ee66f876f75b2d6409aa066bc76abebf35c4a5e5774bb",
+      "bodyManifestSha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00364",
-      "approvedCoverRevisionId": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
+      "approvedCoverRevisionId": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-06 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T06:55:42.324223Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-06/v4-20261024-mac-r2/fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114.zip",
+          "sha256": "fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114",
+          "bytes": 10729980,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-migration-living-pack",

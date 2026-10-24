@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T06:03:27.224Z",
+  "updatedAt": "2026-10-24T06:55:06.993Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -42941,7 +42941,7 @@
     },
     {
       "articleKey": "prefecture-education-childcare-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
       "revisions": [
         {
           "sha256": "1eb309e71e6846ddf11454b5dbbfd2da63309f108f6b11006571ec09bd72c55a",
@@ -43020,17 +43020,97 @@
               "bytes": 1198
             }
           }
+        },
+        {
+          "sha256": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-education-childcare-pack/revisions/3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c.png"
+          },
+          "bytes": 1852718,
+          "id": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-c3704d136113",
+          "createdAt": "2026-10-24T06:46:09.080Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。資料・PC・鉛筆は学校保育の用途と一致し、人物・地図・架空の画面なし。",
+            "reviewedAt": "2026-10-24T06:46:21.911Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-education-childcare-pack/inputs/78810b6090087c711090eee47434af52adce2fe859c38fdf3189ebe519fc02f2.json"
+              },
+              "bytes": 7049
+            },
+            "production": {
+              "id": "NCI-00364",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "c3704d13611396b2395c680426cdad5015b555e9e96aa4db6b12f30ed2072595"
+            }
+          }
+        },
+        {
+          "sha256": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-education-childcare-pack/revisions/72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5.png"
+          },
+          "bytes": 391675,
+          "id": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T06:54:58.722Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5"
+          }
         }
       ],
-      "candidateRevisionId": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
-      "approvedRevisionId": "5bf44be10a5fcb9d425ee62d5bbad9c2920a828886cff08336e5ff86825cf17d",
-      "published": null,
+      "candidateRevisionId": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+      "approvedRevisionId": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T06:54:58.722Z",
+        "revisionId": "72ad9bd97287603d820437031f97a0cd5df30e011e1eb05f22517f0e898979a5"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00364",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "学校・保育データ集",
+          "subline": "47都道府県・244指標",
+          "subject": "学校・保育・社会教育を調べる用途を、無地の教材資料ファイル、ノートPC、鉛筆で大きく描く。紙や画面に文字・数字・グラフ・地図を描かず、実在資料やUIを再現しない。人物・ロゴなし。",
+          "evidence": "P-06 v4-20261024-mac-r2 のデータ集は47都道府県244指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので完成画面を描かない。"
+        }
       }
     },
     {

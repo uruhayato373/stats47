@@ -8624,18 +8624,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-education-childcare-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "6d397ec9e70ccd9c282ee66f876f75b2d6409aa066bc76abebf35c4a5e5774bb",
+          "sha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
           "files": 4,
           "bytes": 108451,
-          "savedAt": "2026-10-12T22:05:36.387Z"
+          "savedAt": "2026-10-24T06:55:29.285Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T06:55:29.285Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-migration-living-pack",

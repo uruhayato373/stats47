@@ -3284,6 +3284,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-education-childcare-pack": {
+      "vertical": "product-sales",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-education-childcare-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-free-trial-pack": {
       "vertical": "product-sales",
       "title": "都道府県データの無料お試しサンプル 総人口2024",
