@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T01:44:40.829Z",
+  "observedAt": "2026-10-24T04:35:29.474Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -12,13 +12,14 @@
   "decisionCounts": {
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 4,
-    "hold-duplicate-title": 13,
+    "hold-duplicate-title": 11,
     "hold-product-sales": 68,
-    "published-verified": 4
+    "published-verified": 4,
+    "merged-existing": 2
   },
   "currentCatalog": {
     "published": 406,
-    "draft": 96
+    "draft": 94
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -262,16 +263,30 @@
           "noteUrl": "https://note.com/stats47/n/n91e82ac3b13c"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "既存公開記事の本文と一致。重複投稿せず既存記事に統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n91e82ac3b13c",
       "duplicateTextComparison": {
         "publishedKey": "recovered-n91e82ac3b13c",
         "normalizedTwelveCharacterOverlap": 0.995,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n91e82ac3b13c",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T04:35:29.474Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "81604e6a33adc8b8bddb5b0203b7a3c4aca9ffbd6c5b2addfccbb81512b4846b",
+        "archivedDraftR2Path": "note/stats47-note/a-number-of-hotel-rooms",
+        "archivedDraftManifestSha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
+        "publishedManifestSha256": "60c474840076e9e09771ce641141d6196640a10f0706eeda7a694b482fcc9990",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "substantiveProse": "本文の統計値・説明段落は公開API本文に一致。差分は前付、画像記法、リンクカード表示、Markdown装飾。"
       }
     },
     {
@@ -288,16 +303,30 @@
           "noteUrl": "https://note.com/stats47/n/n827191af8c1c"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "既存公開記事の本文と一致。重複投稿せず既存記事に統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n827191af8c1c",
       "duplicateTextComparison": {
         "publishedKey": "recovered-n827191af8c1c",
         "normalizedTwelveCharacterOverlap": 0.995,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n827191af8c1c",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T04:35:29.474Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "b95d0983a7c4b6bf31766144b6584cdd0a0f7744fbd8943e4248e8b01149e54c",
+        "archivedDraftR2Path": "note/stats47-note/a-overseas-travel-annual-participation-rate-10plus",
+        "archivedDraftManifestSha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
+        "publishedManifestSha256": "9fdf74e25b727ecdfcb756e661b6f8e55f146b01c7d13ac2aa3a8a083c61f76d",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "substantiveProse": "本文の統計値・説明段落は公開API本文に一致。差分は前付、画像記法、リンクカード表示、Markdown装飾。"
       }
     },
     {

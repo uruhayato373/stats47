@@ -627,49 +627,6 @@
       }
     },
     {
-      "key": "a-number-of-hotel-rooms",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-number-of-hotel-rooms",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
-          "files": 10,
-          "bytes": 482187,
-          "savedAt": "2026-10-12T22:05:59.318Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "a-overseas-travel-annual-participation-rate-10plus",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2021年版・10歳以上】海外旅行をした人が多い県は？ 1位は京都府｜都道府県ランキング",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-overseas-travel-annual-participation-rate-10plus",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
-          "files": 11,
-          "bytes": 422826,
-          "savedAt": "2026-10-12T22:06:00.389Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      },
-      "stats47Targets": [
-        "/ranking/overseas-travel-annual-participation-rate-10plus"
-      ]
-    },
-    {
       "key": "a-overseas-travel-annual-participation-rate-15plus",
       "vertical": "stats47-note",
       "series": "A",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T02:51:30.526Z",
+  "updatedAt": "2026-10-24T04:35:41.729Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -17970,36 +17970,6 @@
           "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の小さな工場建屋の模型を1点。煙や労働者、企業数・生産額の棒グラフは描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
           "evidence": "https://note.com/stats47/n/nf28da95897e0 2026-10-23公開API本文照合。東京都は49,238所で1位。2014年の製造業事業所の数で、企業数・生産額とは異なる。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
         }
-      }
-    },
-    {
-      "articleKey": "a-number-of-hotel-rooms",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00116",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "a-overseas-travel-annual-participation-rate-10plus",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00117",
-        "policyId": "NCP-003",
-        "policyVersion": 3,
-        "brief": null
       }
     },
     {
