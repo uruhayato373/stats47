@@ -2151,6 +2151,7 @@ updated: 2026-10-19
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
 - **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/{cc-estat-18-cache-r2,cc-estat-19-skill-pipeline}/` (未コミット)。Pages → Workers (OpenNext)、`wrangler r2 object put/get` に `--remote`、`preview_bucket_name` と `remote = true` の注意、D1 の権限をトークン例から削除、`claude -p` の起動例、cron の曜日の誤りを直した。2 本とも quality-gate blocker 0・critic PASS (BLOCK・MAJOR 0)。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。**残り**: 最終回 cc-estat-20 のタグが `CloudflarePages` のまま (差し替えには known-tag-keys の再生成が要る)、cc-estat-20 にも次回予告などの食い違いが残っていないか確認する。
+- **2026-10-24 デプロイ (PR #1174 マージ・deploy run 40043185828、09:05 JST 開始) の後に本番で確かめる**: 2 記事が 200 で、本文に「Cloudflare Pages」が残っていないこと (0 件)。確認: `for s in cc-estat-18-cache-r2 cc-estat-19-skill-pipeline; do curl -s "https://stats47.jp/blog/$s?v=$(date +%s)" > /tmp/p.html; echo "$s $(grep -c 'Cloudflare Pages' /tmp/p.html)"; done`。0 件ならカードは完了 (残りは cc-estat-20 のタグと次回予告の確認)。残っていれば `x-nextjs-prerender` を見て、旧ビルドの配信かデプロイの失敗かを切り分ける。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
@@ -2213,6 +2214,7 @@ updated: 2026-10-19
   - birth-death: 東京の自然減・社会増減との取り違えを直し、図を合計特殊出生率に作り直した。critic の MAJOR が 6 件残る (うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認)。公開前に MAJOR を直すかを決める。
   - automotive: 輸送用機械の図 4 枚は e-Stat から取り直せず (app id が CI 専任) 外し、全業種合計の製造品出荷額等で書き直した。**本文に自動車の数値が無く、title「自動車産業の県別勢力図」とずれる** (title を変えると背景画像の作り直しが要るので据え置き)。CI の app id で輸送用機械の県別出荷額を取り直すか、title と背景を作り直すかを決めてから公開する。
   - **見つかった食い違い**: `manufacturing-shipment-amount`・`manufacturing-employees` の config は `yearFormat: "calendar"` だが R2 の yearName は「年度」。`unmarried-ratio-male-45-49` の東京 24.6%・大阪 24.4% が全国の 50 歳時未婚割合 28.3% より低く、指標の定義の確認が要る。
+- **2026-10-24 デプロイ (PR #1174 マージ・deploy run 40043185828) の後に本番で確かめる**: 3 記事が 200 で、alcohol に「9.5%」がある・birth-death に東京の「微増」が無い・automotive が製造業全体の出荷額の版になっていること。確認: `for s in alcohol-prefecture-map birth-death-gap-decline automotive-industry-transformation-map; do curl -s "https://stats47.jp/blog/$s?v=$(date +%s)" > /tmp/p.html; echo "$s $(grep -c '9\.5%\|微増\|製造品出荷額' /tmp/p.html)"; done` (alcohol は 9.5% が 1 件以上、birth-death は「微増」0 件)。確かめたらカードは完了 (automotive の title と中身のずれ・birth-death の MAJOR 6 件は別に残る)。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
