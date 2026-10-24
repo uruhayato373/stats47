@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T05:39:19.327Z",
+  "updatedAt": "2026-10-24T05:52:27.762Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43658,7 +43658,7 @@
     },
     {
       "articleKey": "prefecture-municipal-finance-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n5da8a99b3506",
       "revisions": [
         {
           "sha256": "8ea8ec0ea28739a2c2516a95cbc6e9c0ec93ed97fef7c2b593be991cae32933a",
@@ -43737,17 +43737,97 @@
               "bytes": 1204
             }
           }
+        },
+        {
+          "sha256": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-municipal-finance-pack/revisions/f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54.png"
+          },
+          "bytes": 1869082,
+          "id": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-3f7a6c8fdf26",
+          "createdAt": "2026-10-24T05:43:47.365Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "ca8b95a7ae9ba048e418640b7627e58d64c7c7840252b06ec759f91a4524f1d3"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定4文言を確認。誤字・欠字・文字切れ・重なりなし。人物・架空の統計図なし。資料とPCの題材が本文に一致。",
+            "reviewedAt": "2026-10-24T05:43:56.474Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "ca8b95a7ae9ba048e418640b7627e58d64c7c7840252b06ec759f91a4524f1d3",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-municipal-finance-pack/inputs/ca8b95a7ae9ba048e418640b7627e58d64c7c7840252b06ec759f91a4524f1d3.json"
+              },
+              "bytes": 7109
+            },
+            "production": {
+              "id": "NCI-00372",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "3f7a6c8fdf261e3e23e96c3513a7012f51c74816a952115e797ef64817bd6f6f"
+            }
+          }
+        },
+        {
+          "sha256": "c8baa21e76fc1a7e17d7cdf09b68d1e98c198ac26ce84eafdc72cff72361ac0d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-municipal-finance-pack/revisions/c8baa21e76fc1a7e17d7cdf09b68d1e98c198ac26ce84eafdc72cff72361ac0d.png"
+          },
+          "bytes": 406213,
+          "id": "c8baa21e76fc1a7e17d7cdf09b68d1e98c198ac26ce84eafdc72cff72361ac0d",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T05:52:20.903Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327863352/rectangle_large_type_2_47c65477c27dcdf3f4bb97c4ab5faa33.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "c8baa21e76fc1a7e17d7cdf09b68d1e98c198ac26ce84eafdc72cff72361ac0d"
+          }
         }
       ],
-      "candidateRevisionId": "8928a2c447d626e350bf1c9849366a93491d5d7baa086e43a8428b525a88744b",
-      "approvedRevisionId": "8928a2c447d626e350bf1c9849366a93491d5d7baa086e43a8428b525a88744b",
-      "published": null,
+      "candidateRevisionId": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
+      "approvedRevisionId": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327863352/rectangle_large_type_2_47c65477c27dcdf3f4bb97c4ab5faa33.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T05:52:20.903Z",
+        "revisionId": "c8baa21e76fc1a7e17d7cdf09b68d1e98c198ac26ce84eafdc72cff72361ac0d"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00372",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "自治体財政データ集",
+          "subline": "47都道府県・119指標",
+          "subject": "自治体財政と職員給与の比較に使う無地の資料ファイル、クリップボードとノートPCを大きく描く。紙や画面に文字・数値・グラフ・地図を描かず、実在する資料やUIを再現しない。人物・ロゴなし。",
+          "evidence": "P-04 v4-20261024-mac-r2 のデータ集は47都道府県119指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので完成画面を描かない。"
+        }
       }
     },
     {

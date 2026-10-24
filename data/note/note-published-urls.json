@@ -3307,6 +3307,18 @@
       "status": "r2_ready",
       "price_jpy": 5000
     },
+    "prefecture-municipal-finance-pack": {
+      "vertical": "product-sales",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "url": "https://note.com/stats47/n/n5da8a99b3506",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-municipal-finance-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 6000
+    },
     "prefecture-population-household-pack": {
       "vertical": "product-sales",
       "title": "人口・世帯を47都道府県で比べる134指標のデータ集",

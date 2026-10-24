@@ -8580,18 +8580,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 6000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-municipal-finance-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "368d3142642d381c8c0b823954fe08bb5e72fe2474aae069c2f8c1118efa12c1",
+          "sha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
           "files": 4,
           "bytes": 28285,
-          "savedAt": "2026-10-12T22:05:34.785Z"
+          "savedAt": "2026-10-24T05:52:33.033Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:52:33.033Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-healthcare-nursing-pack",

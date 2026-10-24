@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T05:39:35.648Z",
+  "observedAt": "2026-10-24T05:52:47.717Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 65,
-    "published-verified": 9,
+    "hold-product-sales": 64,
+    "published-verified": 10,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 411,
-    "draft": 89
+    "published": 412,
+    "draft": 88
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1670,17 +1670,43 @@
       "articleKey": "prefecture-municipal-finance-pack",
       "vertical": "product-sales",
       "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
-      "bodyManifestSha256": "368d3142642d381c8c0b823954fe08bb5e72fe2474aae069c2f8c1118efa12c1",
+      "bodyManifestSha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00372",
-      "approvedCoverRevisionId": "8928a2c447d626e350bf1c9849366a93491d5d7baa086e43a8428b525a88744b",
+      "approvedCoverRevisionId": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-04 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 6000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:52:47.717Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 6000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327863352/rectangle_large_type_2_47c65477c27dcdf3f4bb97c4ab5faa33.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-04/v4-20261024-mac-r2/d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3.zip",
+          "sha256": "d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3",
+          "bytes": 10192410,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-healthcare-nursing-pack",

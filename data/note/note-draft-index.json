@@ -420,11 +420,6 @@
       "r2_path": "note/product-sales/prefecture-migration-living-pack",
       "status": "draft"
     },
-    "prefecture-municipal-finance-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-municipal-finance-pack",
-      "status": "draft"
-    },
     "prefecture-retail-trade-area-pack": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
