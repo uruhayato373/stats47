@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "note-paid-pack-regeneration-evidence",
-  "observedAt": "2026-10-24T02:17:16.203420+00:00",
+  "observedAt": "2026-10-24T05:15:55.382Z",
   "version": "v4-20261024-mac-r2",
   "scope": "13 paid note pack articles (P-01..P-12, P-14); P-13 is the published free sample",
   "summary": {
@@ -10,7 +10,10 @@
     "totalBytes": 638847041,
     "officeValidated": 0,
     "publicationReady": 0,
-    "publishedWithDeferredOfficeValidation": 1
+    "publishedWithDeferredOfficeValidation": 1,
+    "noteArchivesPrepared": 13,
+    "noteArchivesR2Verified": 13,
+    "noteArchiveBytes": 145581718
   },
   "remainingChecks": [
     "Office 365 real-device display/edit/recalculation",
@@ -40,7 +43,8 @@
         "bytes": 10208853,
         "entries": 7,
         "readbackVerified": true
-      }
+      },
+      "noteArticleKey": "prefecture-population-household-pack"
     },
     {
       "productId": "P-02",
@@ -53,7 +57,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-income-wage-hiring-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-02/v4-20261024-mac-r2/c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974.zip",
+        "sha256": "c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974",
+        "bytes": 10072977,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-02-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-03",
@@ -66,7 +80,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-tourism-lodging-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-03/v4-20261024-mac-r2/4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1.zip",
+        "sha256": "4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1",
+        "bytes": 9769834,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-03-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-04",
@@ -79,7 +103,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-municipal-finance-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-04/v4-20261024-mac-r2/d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3.zip",
+        "sha256": "d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3",
+        "bytes": 10192410,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-04-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-05",
@@ -92,7 +126,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-healthcare-nursing-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-05/v4-20261024-mac-r2/530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0.zip",
+        "sha256": "530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0",
+        "bytes": 10734585,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-05-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-06",
@@ -105,7 +149,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-education-childcare-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-06/v4-20261024-mac-r2/fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114.zip",
+        "sha256": "fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114",
+        "bytes": 10729980,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-06-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-07",
@@ -118,7 +172,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-migration-living-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-07/v4-20261024-mac-r2/f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab.zip",
+        "sha256": "f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab",
+        "bytes": 9932503,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-07-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-08",
@@ -131,7 +195,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-retail-trade-area-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-08/v4-20261024-mac-r2/c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb.zip",
+        "sha256": "c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb",
+        "bytes": 9903237,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-08-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-09",
@@ -144,7 +218,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-industry-economy-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-09/v4-20261024-mac-r2/4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1.zip",
+        "sha256": "4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1",
+        "bytes": 10229618,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-09-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-10",
@@ -157,7 +241,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-disaster-infrastructure-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-10/v4-20261024-mac-r2/5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2.zip",
+        "sha256": "5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2",
+        "bytes": 10713676,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-10-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-11",
@@ -170,7 +264,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-map-chart-assets-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-11/v4-20261024-mac-r2/137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548.zip",
+        "sha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+        "bytes": 9510267,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-11-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-12",
@@ -183,7 +287,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-all-in-one-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-12/v4-20261024-mac-r2/833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379.zip",
+        "sha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
+        "bytes": 20454473,
+        "entries": 8,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-12-v4-20261024-mac-r2.zip"
+      }
     },
     {
       "productId": "P-14",
@@ -196,7 +310,17 @@
       "filesShaVerified": true,
       "ooxmlZipVerified": true,
       "officeValidation": "owner-pending",
-      "publicationReady": false
+      "publicationReady": false,
+      "noteArticleKey": "prefecture-household-consumption-pack",
+      "noteProductArchive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
+        "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+        "bytes": 13129305,
+        "entries": 7,
+        "readbackVerified": true,
+        "localPath": ".local/note-product-archives/P-14-v4-20261024-mac-r2.zip"
+      }
     }
   ]
 }
