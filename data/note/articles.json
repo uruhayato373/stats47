@@ -11482,21 +11482,23 @@
       "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-mymaps-share",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e77b536d6778040837635b53fd85f5c6d2fa5ef804659cc6358602bcc093bbe4",
-          "files": 4,
-          "bytes": 37883,
-          "savedAt": "2026-10-17T23:22:23.576Z"
+          "sha256": "788743d7a71f36621f1cf3d88b6e685f99fb8c8a45e2a561d289956bf02cd23d",
+          "files": 5,
+          "bytes": 39731,
+          "savedAt": "2026-10-24T01:20:50.766Z"
         },
-        "verifiedAt": "2026-10-17T23:22:23.576Z"
+        "verifiedAt": "2026-10-24T01:20:50.766Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-excel-filled-map",

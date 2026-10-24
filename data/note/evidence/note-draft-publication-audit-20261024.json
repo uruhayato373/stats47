@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T00:26:08.846906+00:00",
+  "observedAt": "2026-10-24T01:21:54.725782+00:00",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -11,14 +11,14 @@
   },
   "decisionCounts": {
     "hold-body-unwritten": 11,
-    "hold-cover-unapproved": 6,
+    "hold-cover-unapproved": 5,
     "hold-duplicate-title": 13,
     "hold-product-sales": 68,
-    "published-verified": 2
+    "published-verified": 3
   },
   "currentCatalog": {
-    "published": 404,
-    "draft": 98
+    "published": 405,
+    "draft": 97
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -221,7 +221,8 @@
       "publishedTitleMatches": [],
       "decision": "hold-cover-unapproved",
       "reasons": [
-        "current cover has no approved revision"
+        "current cover has no approved revision",
+        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある"
       ],
       "publishedUrl": null
     },
@@ -236,7 +237,8 @@
       "publishedTitleMatches": [],
       "decision": "hold-cover-unapproved",
       "reasons": [
-        "current cover has no approved revision"
+        "current cover has no approved revision",
+        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある"
       ],
       "publishedUrl": null
     },
@@ -311,7 +313,8 @@
       "publishedTitleMatches": [],
       "decision": "hold-cover-unapproved",
       "reasons": [
-        "current cover has no approved revision"
+        "current cover has no approved revision",
+        "本文の因果・背景推測に根拠が不足。原稿の意味レビューと修正が必要"
       ],
       "publishedUrl": null
     },
@@ -1662,7 +1665,8 @@
       "publishedTitleMatches": [],
       "decision": "hold-cover-unapproved",
       "reasons": [
-        "current cover has no approved revision"
+        "current cover has no approved revision",
+        "GoogleマイマップでのKML読込を実機で完了した証拠・画面が未確認"
       ],
       "publishedUrl": null
     },
@@ -1670,16 +1674,25 @@
       "articleKey": "h-howto-mymaps-share",
       "vertical": "stats47-note",
       "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
-      "bodyManifestSha256": "e77b536d6778040837635b53fd85f5c6d2fa5ef804659cc6358602bcc093bbe4",
+      "bodyManifestSha256": "788743d7a71f36621f1cf3d88b6e685f99fb8c8a45e2a561d289956bf02cd23d",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00505",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
       "publishedTitleMatches": [],
-      "decision": "hold-cover-unapproved",
-      "reasons": [
-        "current cover has no approved revision"
-      ],
-      "publishedUrl": null
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 1,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      }
     },
     {
       "articleKey": "h-howto-excel-filled-map",
@@ -1692,7 +1705,8 @@
       "publishedTitleMatches": [],
       "decision": "hold-cover-unapproved",
       "reasons": [
-        "current cover has no approved revision"
+        "current cover has no approved revision",
+        "Excel塗りつぶしマップの実機確認・結果画像が未確認"
       ],
       "publishedUrl": null
     }

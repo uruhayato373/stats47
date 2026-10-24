@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T00:30:00.231Z",
+  "updatedAt": "2026-10-24T01:21:42.274Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -30477,17 +30477,98 @@
     },
     {
       "articleKey": "h-howto-mymaps-share",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "revisions": [
+        {
+          "sha256": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-mymaps-share/revisions/b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6.png"
+          },
+          "bytes": 1906921,
+          "id": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+          "kind": "candidate",
+          "version": "pop-NCP-007-v4-2748b0cd0dab",
+          "createdAt": "2026-10-24T01:10:32.155Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "f44d7f1a97fb1ab14200e590d4fddf038d7a21e1923d591e1463b650a67d7f18"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸・幅320pxで4文言を確認。誤字・欠字・文字切れ・重なりなし。人物・実在ロゴ・架空の統計図なし。本文の共有と埋め込みに題材が一致。",
+            "reviewedAt": "2026-10-24T01:11:21.192Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "f44d7f1a97fb1ab14200e590d4fddf038d7a21e1923d591e1463b650a67d7f18",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/h-howto-mymaps-share/inputs/f44d7f1a97fb1ab14200e590d4fddf038d7a21e1923d591e1463b650a67d7f18.json"
+              },
+              "bytes": 7832
+            },
+            "production": {
+              "id": "NCI-00505",
+              "policyId": "NCP-007",
+              "policyVersion": 4,
+              "planSha256": "2748b0cd0dab42254d4fd1498ad38b0878d9bfc2c379b9ad90b4cbb173482312"
+            }
+          }
+        },
+        {
+          "sha256": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/h-howto-mymaps-share/revisions/a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3.png"
+          },
+          "bytes": 427105,
+          "id": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T01:21:39.300Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327779403/rectangle_large_type_2_ef468439c8d16f797e7eb1043c2890e1.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3"
+          }
+        }
+      ],
+      "candidateRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+      "approvedRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327779403/rectangle_large_type_2_ef468439c8d16f797e7eb1043c2890e1.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T01:21:39.300Z",
+        "revisionId": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00505",
         "policyId": "NCP-007",
         "policyVersion": 4,
-        "brief": null
+        "brief": {
+          "headline": "マイマップを共有する",
+          "subline": "公開範囲と埋め込みの手順",
+          "subject": "大きな地図カードと、共有リンクを表す小さな鎖アイコン、ウェブサイトに埋め込むブラウザー枠を紙の立体コラージュ風に配置。地図は抽象的な色面にし、実在する地域の境界やGoogleの実画面は描かない。人物・手は描かない。",
+          "evidence": "本文はGoogleマイマップの「リンクの共有を許可する」「地図を公開する」の違いと、自分のサイトに埋め込む手順を説明。Googleマイマップ公式ヘルプ https://support.google.com/mymaps/answer/3109452?co=GENIE.Platform%3DDesktop&hl=ja を2026-10-24に照合。統計値や実際の地図の塗り分けは表紙に描かない。"
+        }
       }
     },
     {

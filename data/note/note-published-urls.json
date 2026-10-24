@@ -2610,6 +2610,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "h-howto-mymaps-share": {
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
+      "url": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-mymaps-share",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
