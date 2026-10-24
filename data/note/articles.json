@@ -37,7 +37,7 @@
       "magazine": "s47-population",
       "isPaid": true,
       "priceJpy": 980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-region-code-checklist",
       "body": {
         "store": "r2-private",
@@ -45,14 +45,16 @@
           "sha256": "8123101fef6f01fbaf3cd75e8fee3c022f6e4aa56dc25ce449606ddaf54082db",
           "files": 6,
           "bytes": 19876,
-          "savedAt": "2026-10-24T12:58:58.589Z"
+          "savedAt": "2026-10-24T17:07:59.322Z"
         },
-        "verifiedAt": "2026-10-24T12:58:58.589Z"
+        "verifiedAt": "2026-10-24T17:07:59.322Z"
       },
       "stats47Targets": [
         "/geo",
         "/geo/method"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-flood-population-mesh",

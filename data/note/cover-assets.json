@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T16:25:58.290Z",
+  "updatedAt": "2026-10-24T17:08:05.745Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29358,7 +29358,7 @@
     },
     {
       "articleKey": "d-geo-region-code-checklist",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/nfb3e5e44f7ed",
       "revisions": [
         {
           "sha256": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
@@ -29404,11 +29404,41 @@
               "planSha256": "75c8c0c9850fb969d4110df5a03814e58db4d43cdf9f1ee401c56754c18cbf01"
             }
           }
+        },
+        {
+          "sha256": "a8baec5a768c4294aa961042eda10568a08e35bc358b59df676ddc67dc9a0a7f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-region-code-checklist/revisions/a8baec5a768c4294aa961042eda10568a08e35bc358b59df676ddc67dc9a0a7f.png"
+          },
+          "bytes": 398613,
+          "id": "a8baec5a768c4294aa961042eda10568a08e35bc358b59df676ddc67dc9a0a7f",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T17:06:00.936Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328113772/rectangle_large_type_2_f50daf6edf9577948b66ca82d06be0b3.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "a8baec5a768c4294aa961042eda10568a08e35bc358b59df676ddc67dc9a0a7f"
+          }
         }
       ],
       "candidateRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
       "approvedRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
-      "published": null,
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328114882/rectangle_large_type_2_d2f26ba7eb9167a52532db3824b9e8e1.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T17:08:05.713Z",
+        "revisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00251",

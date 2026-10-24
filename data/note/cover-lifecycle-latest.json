@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "generatedAt": "2026-10-24T16:25:58.344Z",
+  "generatedAt": "2026-10-24T17:08:05.785Z",
   "status": "pass",
   "articles": [
     {
-      "key": "prefecture-household-consumption-pack",
+      "key": "d-geo-region-code-checklist",
       "status": "pass",
-      "publicCover": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
-      "observedAt": "2026-10-24T16:25:58.254Z"
+      "publicCover": "https://assets.st-note.com/production/uploads/images/328114882/rectangle_large_type_2_d2f26ba7eb9167a52532db3824b9e8e1.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-24T17:08:05.713Z"
     }
   ]
 }

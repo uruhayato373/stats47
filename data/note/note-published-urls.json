@@ -2575,6 +2575,18 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-geo-region-code-checklist": {
+      "vertical": "stats47-note",
+      "title": "地域コード結合の完全チェックリスト",
+      "url": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-region-code-checklist",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 980
+    },
     "d-geo-station-access-analysis": {
       "vertical": "stats47-note",
       "title": "駅代表点から直線800m×2050年人口｜47都道府県を再現",
