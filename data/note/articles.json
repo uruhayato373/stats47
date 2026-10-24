@@ -8270,18 +8270,20 @@
       "title": "都道府県データ商品のライセンス・版の違いガイド",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/license-guide",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "0ea55b01585be7825812de9e6a13c149c978b4856c4498e42dcf332945d000fc",
+          "sha256": "0c25ec3f6be7c8f93b8328b72d0cde345878c963fb938f3cebb76cf87db216c8",
           "files": 5,
-          "bytes": 63874,
-          "savedAt": "2026-10-12T22:05:31.517Z"
+          "bytes": 68284,
+          "savedAt": "2026-10-24T14:21:09.603Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T14:21:09.603Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nadc627790bb6",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "free-samples",

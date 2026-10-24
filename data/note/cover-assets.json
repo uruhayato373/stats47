@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T13:04:06.217Z",
+  "updatedAt": "2026-10-24T14:19:28.168Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -31108,17 +31108,98 @@
     },
     {
       "articleKey": "license-guide",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/nadc627790bb6",
+      "revisions": [
+        {
+          "sha256": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/license-guide/revisions/f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da.png"
+          },
+          "bytes": 1887838,
+          "id": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-a76f1709d2b0",
+          "createdAt": "2026-10-24T14:04:09.200Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3fe7ef8fef4f0b7fc548751a8d90215b33a5b201453e895f121ce238e9fbef1e"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで指定全文を照合。誤字・欠字・文字切れ・重なりなし。利用条件と出典の紙・年次を示す図は本文と一致し、実在の統計値や商品内容を描いていません。",
+            "reviewedAt": "2026-10-24T14:05:38.662Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3fe7ef8fef4f0b7fc548751a8d90215b33a5b201453e895f121ce238e9fbef1e",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/license-guide/inputs/3fe7ef8fef4f0b7fc548751a8d90215b33a5b201453e895f121ce238e9fbef1e.json"
+              },
+              "bytes": 7783
+            },
+            "production": {
+              "id": "NCI-00292",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "a76f1709d2b0d2e3f772fae3708a04fce6b540cadc014a2df016b106f00ec89d"
+            }
+          }
+        },
+        {
+          "sha256": "0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/license-guide/revisions/0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6.png"
+          },
+          "bytes": 414998,
+          "id": "0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T14:16:27.819Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328074855/rectangle_large_type_2_cf929ac72ec3d3d877f672a31425a8a9.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6"
+          }
+        }
+      ],
+      "candidateRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+      "approvedRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328078716/rectangle_large_type_2_4fa7ae15c11ffd71ab6394544d11aa43.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T14:19:27.999Z",
+        "revisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00292",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "データ商品の\nライセンスと版",
+          "subline": "使える範囲・調査年・更新条件",
+          "subject": "机の上に置いたLICENSE-ja.txtを表す利用条件の紙、SOURCES.csvを表す出典一覧の紙、年次を示す小さなカレンダー。実在商品の中身や統計値、地図を描かない。人物なし。青と淡いクリーム色のポップな編集イラスト。",
+          "evidence": "無料ガイド本文の「まず確認する三つのファイル」「利用範囲の読み方」「最新版と調査年は別」に対応。ライセンス条件はpackages/product-factory/src/catalog/licenses.ts、同梱文はpackages/product-factory/src/licenses/license-text.ts、年の列はpackages/product-factory/src/data/sources.tsに照合。"
+        }
       }
     },
     {

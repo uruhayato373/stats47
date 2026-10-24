@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T09:01:06.825Z",
+  "observedAt": "2026-10-24T14:20:22.639Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 10,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 0,
-    "hold-product-sales": 59,
-    "published-verified": 16,
+    "hold-product-sales": 58,
+    "published-verified": 17,
     "merged-existing": 13
   },
   "currentCatalog": {
-    "published": 418,
-    "draft": 71
+    "published": 419,
+    "draft": 70
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1692,17 +1692,37 @@
       "articleKey": "license-guide",
       "vertical": "product-sales",
       "title": "都道府県データ商品のライセンス・版の違いガイド",
-      "bodyManifestSha256": "0ea55b01585be7825812de9e6a13c149c978b4856c4498e42dcf332945d000fc",
+      "bodyManifestSha256": "0c25ec3f6be7c8f93b8328b72d0cde345878c963fb938f3cebb76cf87db216c8",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00292",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
-      "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
-      ],
-      "publishedUrl": null
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nadc627790bb6",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 0,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "license-guide",
+        "url": "https://note.com/stats47/n/nadc627790bb6",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/328078716/rectangle_large_type_2_4fa7ae15c11ffd71ab6394544d11aa43.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6",
+        "approvedRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+        "sourceSha256": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+        "meanPixelError": 3.734375,
+        "largeDeltaFraction": 0.0028020055970149256,
+        "verifiedAt": "2026-10-24T14:19:05.109Z"
+      }
     },
     {
       "articleKey": "free-samples",

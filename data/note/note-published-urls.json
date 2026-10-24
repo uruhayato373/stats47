@@ -2676,6 +2676,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "license-guide": {
+      "vertical": "product-sales",
+      "title": "都道府県データ商品のライセンス・版の違いガイド",
+      "url": "https://note.com/stats47/n/nadc627790bb6",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/license-guide",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "paid-n0135c75ca76c": {
       "vertical": "stats47-note",
       "title": "高校2年の体重格差、最大5.6kg！男女とも青森がトップ、岐阜が最下位",
