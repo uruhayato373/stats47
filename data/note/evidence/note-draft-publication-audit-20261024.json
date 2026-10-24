@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T20:16:07.447Z",
+  "observedAt": "2026-10-24T21:22:08Z",
   "startingDrafts": 100,
   "bodyStorage": {
-    "deepVerified": 93,
+    "deepVerified": 94,
     "failed": 0,
-    "unwritten": 7
+    "unwritten": 6
   },
   "decisionCounts": {
-    "hold-body-unwritten": 7,
+    "hold-body-unwritten": 6,
     "hold-cover-unapproved": 2,
     "hold-product-sales": 54,
     "merged-existing": 13,
-    "published-verified": 24
+    "published-verified": 25
   },
   "currentCatalog": {
-    "published": 426,
-    "draft": 63
+    "published": 427,
+    "draft": 62
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -101,16 +101,58 @@
       "articleKey": "d-geo-ksj-qgis-guide",
       "vertical": "stats47-note",
       "title": "国土数値情報をQGISで扱う",
-      "bodyManifestSha256": null,
-      "bodyVerifiedDeep": false,
+      "bodyManifestSha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+      "bodyVerifiedDeep": true,
       "productionId": "NCI-00245",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
       "publishedTitleMatches": [],
-      "decision": "hold-body-unwritten",
+      "decision": "published-verified",
       "reasons": [
-        "body manifest absent"
+        "架空4地域のGeoJSON/CSV結合を検証し、ZIPとmanifestのSHAを照合した",
+        "公式の国土数値情報・QGIS資料を参照し、QGIS実機未確認を本文に明記した",
+        "note公開APIでstats47名義・公開状態・1980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後に1件あり、公開本文からZIPが隠れることを確認した",
+        "採用カバーとnote配信画像の画素MAE 3.79、R2本文のdeep verifyが合格した"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n346d566772a1",
+      "productEvidence": {
+        "archiveSha256": "6920547f1524da0c9752ab305eb2b3ae7ea100f643bd03e1ab55b25ad98b8fca",
+        "archivePath": ".local/geo-products/d-geo-ksj-qgis-guide/d-geo-ksj-qgis-guide.zip",
+        "privateR2Path": "note/stats47-note/d-geo-ksj-qgis-guide/attachments/d-geo-ksj-qgis-guide.zip",
+        "unitTests": "4 synthetic regions; joined value sum 56; duplicate/unmatched rejection passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T21:22:08Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 1980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328139833/rectangle_large_type_2_0fd428bd67558da430effb66190a2a1b.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "width": 1280,
+          "height": 670,
+          "mae": 3.790694962686567,
+          "threshold": 25,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-ksj-qgis-guide/attachments/d-geo-ksj-qgis-guide.zip",
+          "sha256": "6920547f1524da0c9752ab305eb2b3ae7ea100f643bd03e1ab55b25ad98b8fca",
+          "bytes": 4180,
+          "readbackVerified": true,
+          "unitTests": "4 synthetic regions; joined value sum 56; duplicate/unmatched rejection passed"
+        }
+      }
     },
     {
       "articleKey": "d-geo-x-ogp-map-automation",

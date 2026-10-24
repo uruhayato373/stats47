@@ -91,12 +91,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-ksj-qgis-guide",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+          "files": 4,
+          "bytes": 14452,
+          "savedAt": "2026-10-24T21:20:35.587Z"
+        },
+        "verifiedAt": "2026-10-24T21:20:35.587Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n346d566772a1",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-land-price-future-population",

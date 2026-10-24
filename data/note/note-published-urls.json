@@ -2575,6 +2575,18 @@
       "status": "r2_ready",
       "price_jpy": 1980
     },
+    "d-geo-ksj-qgis-guide": {
+      "vertical": "stats47-note",
+      "title": "国土数値情報をQGISで扱う",
+      "url": "https://note.com/stats47/n/n346d566772a1",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-ksj-qgis-guide",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
     "d-geo-land-price-future-population": {
       "vertical": "stats47-note",
       "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T20:15:35.805Z",
+  "updatedAt": "2026-10-24T21:21:34.570Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29277,17 +29277,98 @@
     },
     {
       "articleKey": "d-geo-ksj-qgis-guide",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n346d566772a1",
+      "revisions": [
+        {
+          "sha256": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-ksj-qgis-guide/revisions/476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6.png"
+          },
+          "bytes": 1884718,
+          "id": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-043bf1ef4230",
+          "createdAt": "2026-10-24T21:10:39.036Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "d9c1e40346e5cdbdcdeb1b7ef03d9c9d52a163fabc980e6c9942e98105487a0a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸1280pxと幅320pxで全指定文言を目視確認。誤字・欠字・文字切れなし。実在の行政界やQGIS画面は描かず、本文の架空4地域キットと整合。採用。",
+            "reviewedAt": "2026-10-24T21:13:02.801Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "d9c1e40346e5cdbdcdeb1b7ef03d9c9d52a163fabc980e6c9942e98105487a0a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-ksj-qgis-guide/inputs/d9c1e40346e5cdbdcdeb1b7ef03d9c9d52a163fabc980e6c9942e98105487a0a.json"
+              },
+              "bytes": 8170
+            },
+            "production": {
+              "id": "NCI-00245",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "043bf1ef4230f447bdf0a5c1257e8b8f6102f96524b3a6b379dd9285f8e6d159"
+            }
+          }
+        },
+        {
+          "sha256": "f625bfafaa655e4eaadbacdc683f9f0422882dfd558ca58ac288680db2e45f58",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-ksj-qgis-guide/revisions/f625bfafaa655e4eaadbacdc683f9f0422882dfd558ca58ac288680db2e45f58.png"
+          },
+          "bytes": 402740,
+          "id": "f625bfafaa655e4eaadbacdc683f9f0422882dfd558ca58ac288680db2e45f58",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T21:21:26.160Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328139833/rectangle_large_type_2_0fd428bd67558da430effb66190a2a1b.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "f625bfafaa655e4eaadbacdc683f9f0422882dfd558ca58ac288680db2e45f58"
+          }
+        }
+      ],
+      "candidateRevisionId": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
+      "approvedRevisionId": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328139833/rectangle_large_type_2_0fd428bd67558da430effb66190a2a1b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T21:21:26.160Z",
+        "revisionId": "f625bfafaa655e4eaadbacdc683f9f0422882dfd558ca58ac288680db2e45f58"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00245",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "国土数値情報を\nQGISで扱う",
+          "subline": "読込・結合・出力を点検",
+          "subject": "データのZIPを示す無地の封筒、4つの架空の四角形の紙、文字のないCSV表を示す格子紙を作業机に配置。実在の行政界、架空の分析結果、実在のQGIS画面は描かない。落ち着いた紺・青緑・生成り。",
+          "evidence": "国土交通省の国土数値情報・行政区域データの公式ページとQGIS公式のデータ読込・結合・レイアウト出力手順を根拠にしたガイド。添付は架空4地域のGeoJSONとCSV、Python結合検査、チェックリスト。実在の国土数値情報は同梱しない。QGIS実機操作はこのMacで未検証と本文に明記。"
+        }
       }
     },
     {
