@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T12:04:40.034Z",
+  "updatedAt": "2026-10-24T12:33:45.504Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -5148,126 +5148,6 @@
       ],
       "production": {
         "id": "NCI-00036",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "22-monthly-routine-skills",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00037",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "23-mcp-internal-system",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00038",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "24-subagents-parallel-research",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00039",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "25-excel-vba-to-python",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00040",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "26-boss-approval-deck",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00041",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "27-internal-study-30min",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00042",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "28-ai-skeptic-qa",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00043",
-        "policyId": "NCP-007",
-        "policyVersion": 4,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "30-post-retirement-career",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00045",
         "policyId": "NCP-007",
         "policyVersion": 4,
         "brief": null

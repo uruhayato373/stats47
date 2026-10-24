@@ -5,46 +5,6 @@
     "note": "派生インデックス。手編集しない。"
   },
   "drafts": {
-    "22-monthly-routine-skills": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/22-monthly-routine-skills",
-      "status": "draft"
-    },
-    "23-mcp-internal-system": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/23-mcp-internal-system",
-      "status": "draft"
-    },
-    "24-subagents-parallel-research": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/24-subagents-parallel-research",
-      "status": "draft"
-    },
-    "25-excel-vba-to-python": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/25-excel-vba-to-python",
-      "status": "draft"
-    },
-    "26-boss-approval-deck": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/26-boss-approval-deck",
-      "status": "draft"
-    },
-    "27-internal-study-30min": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/27-internal-study-30min",
-      "status": "draft"
-    },
-    "28-ai-skeptic-qa": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/28-ai-skeptic-qa",
-      "status": "draft"
-    },
-    "30-post-retirement-career": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/30-post-retirement-career",
-      "status": "draft"
-    },
     "A-laborwage-paid-leave-utilization-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",

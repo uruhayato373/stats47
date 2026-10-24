@@ -1097,9 +1097,9 @@
           "sha256": "b062494d395b2560835fa99520abb81d14460532a97f61813fbc7c39ed19fbf8",
           "files": 4,
           "bytes": 124626,
-          "savedAt": "2026-10-12T22:06:05.131Z"
+          "savedAt": "2026-10-24T12:32:10.553Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:10.553Z"
       }
     },
     {
@@ -1143,9 +1143,9 @@
           "sha256": "1734665e84a875b441d73a6236000971256e4cb9d3c59c793db7cf88dd65ac9b",
           "files": 4,
           "bytes": 133923,
-          "savedAt": "2026-10-12T22:06:04.984Z"
+          "savedAt": "2026-10-24T12:32:44.852Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:44.852Z"
       }
     },
     {
@@ -1348,9 +1348,9 @@
           "sha256": "bc1b43c69e2ac841de592ded9fce719a240324c28ba924ee86154a5ed41ffe33",
           "files": 4,
           "bytes": 123064,
-          "savedAt": "2026-10-12T22:06:09.840Z"
+          "savedAt": "2026-10-24T12:32:21.069Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:21.069Z"
       }
     },
     {
@@ -1486,9 +1486,9 @@
           "sha256": "9e191797c09d39aa4f16ecafb042ca577c8b5292313dbb96f14857d536f2e266",
           "files": 4,
           "bytes": 126545,
-          "savedAt": "2026-10-12T22:06:12.201Z"
+          "savedAt": "2026-10-24T12:33:10.558Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:33:10.558Z"
       }
     },
     {
@@ -1784,9 +1784,9 @@
           "sha256": "3b575790e272c32b9f3b41657ac921df1da11299eeea0ce2700f1200a186ba1a",
           "files": 4,
           "bytes": 130227,
-          "savedAt": "2026-10-12T22:06:17.119Z"
+          "savedAt": "2026-10-24T12:32:15.917Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:15.917Z"
       }
     },
     {
@@ -1807,9 +1807,9 @@
           "sha256": "b305f2773ddf37f074b5dc2350fc1efab392fb17c576c2f824f9a467052fda59",
           "files": 4,
           "bytes": 125100,
-          "savedAt": "2026-10-12T22:06:18.203Z"
+          "savedAt": "2026-10-24T12:33:04.524Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:33:04.524Z"
       }
     },
     {
@@ -2037,9 +2037,9 @@
           "sha256": "9af443d2208b662a14dd864f0480ab4fd231e72815a86a4a75bac55046e22a48",
           "files": 4,
           "bytes": 124329,
-          "savedAt": "2026-10-12T22:06:21.130Z"
+          "savedAt": "2026-10-24T12:32:26.699Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:26.699Z"
       }
     },
     {
@@ -6707,158 +6707,6 @@
       }
     },
     {
-      "key": "22-monthly-routine-skills",
-      "vertical": "koumuin-claude-code",
-      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/22-monthly-routine-skills",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
-          "files": 19,
-          "bytes": 885920,
-          "savedAt": "2026-10-12T22:04:34.314Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "23-mcp-internal-system",
-      "vertical": "koumuin-claude-code",
-      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/23-mcp-internal-system",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
-          "files": 23,
-          "bytes": 1479082,
-          "savedAt": "2026-10-12T22:04:35.318Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "24-subagents-parallel-research",
-      "vertical": "koumuin-claude-code",
-      "title": "Subagents で「複数案件の並行調査」を回す",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/24-subagents-parallel-research",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
-          "files": 21,
-          "bytes": 939604,
-          "savedAt": "2026-10-12T22:04:35.896Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "25-excel-vba-to-python",
-      "vertical": "koumuin-claude-code",
-      "title": "既存の Excel マクロを Claude Code で Python 移植する",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/25-excel-vba-to-python",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
-          "files": 19,
-          "bytes": 799091,
-          "savedAt": "2026-10-12T22:04:37.382Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "26-boss-approval-deck",
-      "vertical": "koumuin-claude-code",
-      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/26-boss-approval-deck",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
-          "files": 21,
-          "bytes": 1137942,
-          "savedAt": "2026-10-12T22:04:41.476Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "27-internal-study-30min",
-      "vertical": "koumuin-claude-code",
-      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/27-internal-study-30min",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
-          "files": 19,
-          "bytes": 932363,
-          "savedAt": "2026-10-12T22:04:41.730Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "28-ai-skeptic-qa",
-      "vertical": "koumuin-claude-code",
-      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/28-ai-skeptic-qa",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
-          "files": 17,
-          "bytes": 872186,
-          "savedAt": "2026-10-12T22:04:42.155Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "30-post-retirement-career",
-      "vertical": "koumuin-claude-code",
-      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/30-post-retirement-career",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
-          "files": 17,
-          "bytes": 893528,
-          "savedAt": "2026-10-12T22:04:47.908Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "31-claude-code-how-to-ask",
       "vertical": "koumuin-claude-code",
       "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
@@ -6917,9 +6765,9 @@
           "sha256": "16db7895efdaa411248726f0102090a2fd2294e88201204726b28a91879b37c7",
           "files": 3,
           "bytes": 125555,
-          "savedAt": "2026-10-12T22:07:55.775Z"
+          "savedAt": "2026-10-24T12:32:55.454Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:55.454Z"
       }
     },
     {

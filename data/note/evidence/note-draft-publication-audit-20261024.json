@@ -12,14 +12,14 @@
   "decisionCounts": {
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
-    "hold-duplicate-title": 8,
+    "hold-duplicate-title": 0,
     "hold-product-sales": 58,
     "published-verified": 16,
-    "merged-existing": 5
+    "merged-existing": 13
   },
   "currentCatalog": {
     "published": 418,
-    "draft": 79
+    "draft": 71
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -465,16 +465,32 @@
           "noteUrl": "https://note.com/stats47/n/n2207f3039fd3"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n2207f3039fd3",
       "duplicateTextComparison": {
         "publishedKey": "paid-n2207f3039fd3",
         "normalizedTwelveCharacterOverlap": 0.273,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n2207f3039fd3",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "f332e284c3cf5741be4d54b12a37c709c1ca0bc50de90a09be99ac9577b7070b",
+        "liveBodyBytes": 30290,
+        "archivedDraftR2Path": "note/koumuin-claude-code/22-monthly-routine-skills",
+        "archivedDraftManifestSha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
+        "publishedManifestSha256": "b062494d395b2560835fa99520abb81d14460532a97f61813fbc7c39ed19fbf8",
+        "normalizedFreePartSimilarity": 0.9479,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -491,16 +507,32 @@
           "noteUrl": "https://note.com/stats47/n/nbead1fe772c7"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/nbead1fe772c7",
       "duplicateTextComparison": {
         "publishedKey": "paid-nbead1fe772c7",
         "normalizedTwelveCharacterOverlap": 0.369,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-nbead1fe772c7",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "56770a442c805659002a0655a94403b06e50ea6f0c99f62da31f1fffd5eaa672",
+        "liveBodyBytes": 28031,
+        "archivedDraftR2Path": "note/koumuin-claude-code/23-mcp-internal-system",
+        "archivedDraftManifestSha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
+        "publishedManifestSha256": "3b575790e272c32b9f3b41657ac921df1da11299eeea0ce2700f1200a186ba1a",
+        "normalizedFreePartSimilarity": 0.9621,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -517,16 +549,32 @@
           "noteUrl": "https://note.com/stats47/n/n68eafab07946"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n68eafab07946",
       "duplicateTextComparison": {
         "publishedKey": "paid-n68eafab07946",
         "normalizedTwelveCharacterOverlap": 0.245,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n68eafab07946",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "3091770dfcf24e62fc75f3ee137045b5259d0fa140afabae64ef240bab804bae",
+        "liveBodyBytes": 28888,
+        "archivedDraftR2Path": "note/koumuin-claude-code/24-subagents-parallel-research",
+        "archivedDraftManifestSha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
+        "publishedManifestSha256": "bc1b43c69e2ac841de592ded9fce719a240324c28ba924ee86154a5ed41ffe33",
+        "normalizedFreePartSimilarity": 0.9563,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -543,16 +591,32 @@
           "noteUrl": "https://note.com/stats47/n/nfd3ab8213e1f"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/nfd3ab8213e1f",
       "duplicateTextComparison": {
         "publishedKey": "paid-nfd3ab8213e1f",
         "normalizedTwelveCharacterOverlap": 0.47,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-nfd3ab8213e1f",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "120682da003b2412f61af70e16ee89f5f6c18dca4353a2a6db1d26dbda33eeee",
+        "liveBodyBytes": 31104,
+        "archivedDraftR2Path": "note/koumuin-claude-code/25-excel-vba-to-python",
+        "archivedDraftManifestSha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
+        "publishedManifestSha256": "9af443d2208b662a14dd864f0480ab4fd231e72815a86a4a75bac55046e22a48",
+        "normalizedFreePartSimilarity": 0.9742,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -569,16 +633,32 @@
           "noteUrl": "https://note.com/stats47/n/n2c2df066e865"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n2c2df066e865",
       "duplicateTextComparison": {
         "publishedKey": "paid-n2c2df066e865",
         "normalizedTwelveCharacterOverlap": 0.286,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n2c2df066e865",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "86f1fee76b1111b98632b68f4d193292ee90d091e6dbecccbd186fa54178520f",
+        "liveBodyBytes": 31062,
+        "archivedDraftR2Path": "note/koumuin-claude-code/26-boss-approval-deck",
+        "archivedDraftManifestSha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
+        "publishedManifestSha256": "1734665e84a875b441d73a6236000971256e4cb9d3c59c793db7cf88dd65ac9b",
+        "normalizedFreePartSimilarity": 0.9545,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -595,16 +675,32 @@
           "noteUrl": "https://note.com/stats47/n/n9f666946d105"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n9f666946d105",
       "duplicateTextComparison": {
         "publishedKey": "paid-n9f666946d105",
         "normalizedTwelveCharacterOverlap": 0.158,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n9f666946d105",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "6bee965d21b5d292261950403bcc1fa784c19102787a41cfd6b7bdeb7c10f44b",
+        "liveBodyBytes": 30347,
+        "archivedDraftR2Path": "note/koumuin-claude-code/27-internal-study-30min",
+        "archivedDraftManifestSha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
+        "publishedManifestSha256": "16db7895efdaa411248726f0102090a2fd2294e88201204726b28a91879b37c7",
+        "normalizedFreePartSimilarity": 0.9788,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -621,16 +717,32 @@
           "noteUrl": "https://note.com/stats47/n/ncab0d7b04228"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/ncab0d7b04228",
       "duplicateTextComparison": {
         "publishedKey": "paid-ncab0d7b04228",
         "normalizedTwelveCharacterOverlap": 0.214,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-ncab0d7b04228",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "1773d5d14f7108e2a4cafed56a3e61ac88b279aa7f4a092a19156fbaf4ea1bd3",
+        "liveBodyBytes": 32584,
+        "archivedDraftR2Path": "note/koumuin-claude-code/28-ai-skeptic-qa",
+        "archivedDraftManifestSha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
+        "publishedManifestSha256": "b305f2773ddf37f074b5dc2350fc1efab392fb17c576c2f824f9a467052fda59",
+        "normalizedFreePartSimilarity": 0.9594,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
@@ -688,16 +800,32 @@
           "noteUrl": "https://note.com/stats47/n/n8558c1a6503a"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; body/version reconciliation required"
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/n8558c1a6503a",
       "duplicateTextComparison": {
         "publishedKey": "paid-n8558c1a6503a",
         "normalizedTwelveCharacterOverlap": 0.181,
         "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
         "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n8558c1a6503a",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "4178e83375092ee39394e93ce37e0538f10025b4fa6b9b41abc1afc89b3670ae",
+        "liveBodyBytes": 36760,
+        "archivedDraftR2Path": "note/koumuin-claude-code/30-post-retirement-career",
+        "archivedDraftManifestSha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
+        "publishedManifestSha256": "9e191797c09d39aa4f16ecafb042ca577c8b5292313dbb96f14857d536f2e266",
+        "normalizedFreePartSimilarity": 0.9528,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
       }
     },
     {
