@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T03:46:16.013Z",
+  "generatedAt": "2026-10-24T22:23:05.914Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -236,7 +236,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:17:59.742Z"
+      "checkedAt": "2026-10-24T22:22:23.682Z"
     },
     "adult-class-lecture-count-per-million": {
       "key": "adult-class-lecture-count-per-million",
@@ -770,7 +770,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:14.745Z"
+      "checkedAt": "2026-10-24T22:22:24.558Z"
     },
     "amusement-industry-establishments": {
       "key": "amusement-industry-establishments",
@@ -781,7 +781,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:15.636Z"
+      "checkedAt": "2026-10-24T22:22:25.298Z"
     },
     "anma-massage-count": {
       "key": "anma-massage-count",
@@ -929,7 +929,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:22.010Z"
+      "checkedAt": "2026-10-24T22:22:26.247Z"
     },
     "annual-minimum-relative-humidity": {
       "key": "annual-minimum-relative-humidity",
@@ -1326,7 +1326,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:32.661Z"
+      "checkedAt": "2026-10-24T22:22:26.928Z"
     },
     "area-ratio-of-total": {
       "key": "area-ratio-of-total",
@@ -1397,7 +1397,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:34.431Z"
+      "checkedAt": "2026-10-24T22:22:27.622Z"
     },
     "artificial-forest-area": {
       "key": "artificial-forest-area",
@@ -1596,6 +1596,15 @@
       "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:40.430Z"
     },
+    "autolock-apartment-main-households": {
+      "key": "autolock-apartment-main-households",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:42.599Z"
+    },
     "autolock-apartment-rate": {
       "key": "autolock-apartment-rate",
       "statsDataId": "0004021535",
@@ -1605,7 +1614,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:41.512Z"
+      "checkedAt": "2026-10-24T22:22:28.473Z"
     },
     "average-age-of-first-marriage-husband": {
       "key": "average-age-of-first-marriage-husband",
@@ -2057,7 +2066,7 @@
         "2024"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:18:50.776Z"
+      "checkedAt": "2026-10-24T22:22:29.374Z"
     },
     "average-life-expectancy-female-20": {
       "key": "average-life-expectancy-female-20",
@@ -3326,7 +3335,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:19:18.243Z"
+      "checkedAt": "2026-10-24T22:22:30.232Z"
     },
     "barrier-free-housing-rate": {
       "key": "barrier-free-housing-rate",
@@ -3337,7 +3346,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:19:19.431Z"
+      "checkedAt": "2026-10-24T22:22:31.200Z"
     },
     "bathroom-housing-ratio": {
       "key": "bathroom-housing-ratio",
@@ -3365,7 +3374,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:19:21.212Z"
+      "checkedAt": "2026-10-24T22:22:32.002Z"
     },
     "bed-utilization-rate": {
       "key": "bed-utilization-rate",
@@ -3376,7 +3385,7 @@
         "2024"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:19:21.920Z"
+      "checkedAt": "2026-10-24T22:22:32.784Z"
     },
     "births-first-child": {
       "key": "births-first-child",
@@ -3700,7 +3709,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-19T22:19:35.084Z"
+      "checkedAt": "2026-10-24T22:22:33.888Z"
     },
     "broadcast-media-time-all": {
       "key": "broadcast-media-time-all",
@@ -4080,7 +4089,7 @@
         "2025"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:27.982Z"
+      "checkedAt": "2026-10-24T22:22:59.863Z"
     },
     "census-population-change-5y": {
       "key": "census-population-change-5y",
@@ -4091,7 +4100,7 @@
         "2025"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:28.696Z"
+      "checkedAt": "2026-10-24T22:23:00.492Z"
     },
     "census-population-change-rate-5y": {
       "key": "census-population-change-rate-5y",
@@ -4102,7 +4111,7 @@
         "2025"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:29.334Z"
+      "checkedAt": "2026-10-24T22:23:01.121Z"
     },
     "certified-childcare-center-count-per-100k-0-5": {
       "key": "certified-childcare-center-count-per-100k-0-5",
@@ -4494,7 +4503,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:36.391Z"
+      "checkedAt": "2026-10-24T22:22:34.786Z"
     },
     "city-gas-meter-count": {
       "key": "city-gas-meter-count",
@@ -4830,6 +4839,15 @@
       "verdict": "config-covers",
       "checkedAt": "2026-09-26T22:36:45.961Z"
     },
+    "cohabiting-household-members": {
+      "key": "cohabiting-household-members",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:43.841Z"
+    },
     "community-building-volunteer-participation-rate-10plus": {
       "key": "community-building-volunteer-participation-rate-10plus",
       "statsDataId": "0003455937",
@@ -4839,7 +4857,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:47.062Z"
+      "checkedAt": "2026-10-24T22:22:35.843Z"
     },
     "comprehensive-park-count": {
       "key": "comprehensive-park-count",
@@ -4910,7 +4928,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:49.760Z"
+      "checkedAt": "2026-10-24T22:22:36.983Z"
     },
     "construction-employed-age55plus": {
       "key": "construction-employed-age55plus",
@@ -4921,7 +4939,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:50.919Z"
+      "checkedAt": "2026-10-24T22:22:38.365Z"
     },
     "construction-employed-female": {
       "key": "construction-employed-female",
@@ -4932,7 +4950,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:51.772Z"
+      "checkedAt": "2026-10-24T22:22:39.060Z"
     },
     "construction-employed-residents": {
       "key": "construction-employed-residents",
@@ -4943,7 +4961,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:52.437Z"
+      "checkedAt": "2026-10-24T22:22:39.774Z"
     },
     "construction-employed-under30": {
       "key": "construction-employed-under30",
@@ -4954,7 +4972,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:36:53.014Z"
+      "checkedAt": "2026-10-24T22:22:40.397Z"
     },
     "construction-industry-count": {
       "key": "construction-industry-count",
@@ -5431,7 +5449,7 @@
         "2025"
       ],
       "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:08.341Z"
+      "checkedAt": "2026-10-24T22:22:41.231Z"
     },
     "convenience-store-sales-monthly": {
       "key": "convenience-store-sales-monthly",
@@ -5474,7 +5492,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:11.236Z"
+      "checkedAt": "2026-10-24T22:22:42.169Z"
     },
     "cpi-change-rate-excl-food-energy": {
       "key": "cpi-change-rate-excl-food-energy",
@@ -5614,7 +5632,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:16.168Z"
+      "checkedAt": "2026-10-24T22:22:43.221Z"
     },
     "culture-recreation-expenditure-ratio-multi-person-households": {
       "key": "culture-recreation-expenditure-ratio-multi-person-households",
@@ -5660,7 +5678,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:18.047Z"
+      "checkedAt": "2026-10-24T22:22:43.974Z"
     },
     "current-liabilities-balance-multi-person-households-per-household": {
       "key": "current-liabilities-balance-multi-person-households-per-household",
@@ -5671,7 +5689,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:18.740Z"
+      "checkedAt": "2026-10-24T22:22:44.683Z"
     },
     "current-life-insurance-balance-ratio-multi-person-households": {
       "key": "current-life-insurance-balance-ratio-multi-person-households",
@@ -5682,7 +5700,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:19.721Z"
+      "checkedAt": "2026-10-24T22:22:45.904Z"
     },
     "current-securities-balance-ratio-multi-person-households": {
       "key": "current-securities-balance-ratio-multi-person-households",
@@ -5693,7 +5711,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:20.834Z"
+      "checkedAt": "2026-10-24T22:22:46.759Z"
     },
     "dairy-cattle-count": {
       "key": "dairy-cattle-count",
@@ -5705,17 +5723,6 @@
       "checkedAt": "2026-10-08T11:41:11.682Z",
       "scope": "all-prefectures",
       "prefectureCountsByYear": {}
-    },
-    "daytime-population-ratio": {
-      "key": "daytime-population-ratio",
-      "statsDataId": "0003454499",
-      "configYears": 1,
-      "estatNonNullYears": 1,
-      "availableYearCodes": [
-        "2020"
-      ],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:22.272Z"
     },
     "densely-populated-area": {
       "key": "densely-populated-area",
@@ -5759,7 +5766,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:27.841Z"
+      "checkedAt": "2026-10-24T22:22:48.012Z"
     },
     "dental-guidance-persons-per-1000": {
       "key": "dental-guidance-persons-per-1000",
@@ -5783,7 +5790,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:30.759Z"
+      "checkedAt": "2026-10-24T22:22:48.683Z"
     },
     "dental-hygienist-rate": {
       "key": "dental-hygienist-rate",
@@ -5794,7 +5801,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:31.417Z"
+      "checkedAt": "2026-10-24T22:22:49.385Z"
     },
     "dental-technician-rate": {
       "key": "dental-technician-rate",
@@ -5805,7 +5812,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:32.245Z"
+      "checkedAt": "2026-10-24T22:22:50.644Z"
     },
     "department-store-count-per-100k": {
       "key": "department-store-count-per-100k",
@@ -5834,18 +5841,18 @@
         "2025"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:34.586Z"
+      "checkedAt": "2026-10-24T22:22:51.508Z"
     },
     "designated-difficult-disease": {
       "key": "designated-difficult-disease",
-      "statsDataId": "0004026904",
+      "statsDataId": "0004048079",
       "configYears": 1,
       "estatNonNullYears": 1,
       "availableYearCodes": [
-        "2020"
+        "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:35.255Z"
+      "checkedAt": "2026-10-24T22:22:52.576Z"
     },
     "detached-house-ratio": {
       "key": "detached-house-ratio",
@@ -5876,7 +5883,34 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:36.775Z"
+      "checkedAt": "2026-10-24T22:22:53.400Z"
+    },
+    "dwellings-built-2016-2018-sep": {
+      "key": "dwellings-built-2016-2018-sep",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:44.586Z"
+    },
+    "dwellings-built-2016-2020": {
+      "key": "dwellings-built-2016-2020",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:45.721Z"
+    },
+    "dwellings-built-2021-2023-sep": {
+      "key": "dwellings-built-2021-2023-sep",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:46.359Z"
     },
     "earthquake-renovation-rate": {
       "key": "earthquake-renovation-rate",
@@ -5887,7 +5921,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:37.532Z"
+      "checkedAt": "2026-10-24T22:22:54.184Z"
     },
     "earthquake-retrofit-housing": {
       "key": "earthquake-retrofit-housing",
@@ -6040,7 +6074,16 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:44.743Z"
+      "checkedAt": "2026-10-24T22:22:55.046Z"
+    },
+    "elderly-friendly-apartment-dwellings": {
+      "key": "elderly-friendly-apartment-dwellings",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:47.123Z"
     },
     "elderly-general-worker-old-population-ratio": {
       "key": "elderly-general-worker-old-population-ratio",
@@ -6066,7 +6109,7 @@
         "2018"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:46.822Z"
+      "checkedAt": "2026-10-24T22:22:55.755Z"
     },
     "electricity-demand": {
       "key": "electricity-demand",
@@ -6180,7 +6223,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:53.332Z"
+      "checkedAt": "2026-10-24T22:22:57.238Z"
     },
     "employees-weekly-hours-60plus-rate": {
       "key": "employees-weekly-hours-60plus-rate",
@@ -6191,7 +6234,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:37:54.128Z"
+      "checkedAt": "2026-10-24T22:22:58.256Z"
     },
     "establishment-ratio-5-9-employees-private": {
       "key": "establishment-ratio-5-9-employees-private",
@@ -6519,7 +6562,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-09-26T22:38:04.901Z"
+      "checkedAt": "2026-10-24T22:22:59.106Z"
     },
     "financial-debt-balance": {
       "key": "financial-debt-balance",
@@ -6530,7 +6573,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:31.332Z"
+      "checkedAt": "2026-10-24T22:23:02.877Z"
     },
     "fire-dispatch-for-building-fire-count-per-100k": {
       "key": "fire-dispatch-for-building-fire-count-per-100k",
@@ -6762,7 +6805,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:44.907Z"
+      "checkedAt": "2026-10-24T22:23:03.873Z"
     },
     "five-year-residence-same-address": {
       "key": "five-year-residence-same-address",
@@ -6773,7 +6816,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:46.097Z"
+      "checkedAt": "2026-10-24T22:23:04.635Z"
     },
     "flood-affected-municipalities": {
       "key": "flood-affected-municipalities",
@@ -6946,7 +6989,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:55.691Z"
+      "checkedAt": "2026-10-24T22:23:05.614Z"
     },
     "food-sanitation-inspection": {
       "key": "food-sanitation-inspection",
@@ -7690,6 +7733,15 @@
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-03T22:49:59.944Z"
     },
+    "household-members-outside-dwellings": {
+      "key": "household-members-outside-dwellings",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:47.791Z"
+    },
     "household-ratio-main-earner-employee-commute-90min": {
       "key": "household-ratio-main-earner-employee-commute-90min",
       "statsDataId": "0000010208",
@@ -7962,6 +8014,15 @@
       ],
       "verdict": "config-covers",
       "checkedAt": "2026-10-03T22:50:18.631Z"
+    },
+    "integrated-ece-center-enrolled-children": {
+      "key": "integrated-ece-center-enrolled-children",
+      "statsDataId": "0000020210",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:48.543Z"
     },
     "intellectual-disability-support-facility-staff-per-100k": {
       "key": "intellectual-disability-support-facility-staff-per-100k",
@@ -8301,6 +8362,15 @@
         "2017": 47
       }
     },
+    "nursery-type-ece-center-enrolled-children": {
+      "key": "nursery-type-ece-center-enrolled-children",
+      "statsDataId": "0000020210",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:49.237Z"
+    },
     "nurses-per-100k-population": {
       "key": "nurses-per-100k-population",
       "statsDataId": "0004026841",
@@ -8311,6 +8381,15 @@
       ],
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-18T03:45:08.734Z"
+    },
+    "ordinary-household-members-outside-dwellings": {
+      "key": "ordinary-household-members-outside-dwellings",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:49.898Z"
     },
     "outpatient-rate-per-100k": {
       "key": "outpatient-rate-per-100k",
@@ -8351,6 +8430,15 @@
       ],
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-18T03:45:12.441Z"
+    },
+    "projected-population-2050-city": {
+      "key": "projected-population-2050-city",
+      "statsDataId": "0000020201",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:50.603Z"
     },
     "public-hall-count": {
       "key": "public-hall-count",
@@ -8551,6 +8639,24 @@
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-18T03:45:23.000Z"
     },
+    "seismic-retrofit-owner-houses-since-2014": {
+      "key": "seismic-retrofit-owner-houses-since-2014",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:51.283Z"
+    },
+    "seismic-retrofit-owner-houses-since-2019": {
+      "key": "seismic-retrofit-owner-houses-since-2019",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:51.915Z"
+    },
     "sewage-treatment-coverage-rate": {
       "key": "sewage-treatment-coverage-rate",
       "statsDataId": "0000010108",
@@ -8748,6 +8854,15 @@
       ],
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-18T03:45:38.220Z"
+    },
+    "specified-small-moped-count": {
+      "key": "specified-small-moped-count",
+      "statsDataId": "0000020208",
+      "configYears": 1,
+      "estatNonNullYears": null,
+      "availableYearCodes": [],
+      "verdict": "fetch-failed",
+      "checkedAt": "2026-10-24T22:21:52.588Z"
     },
     "sports-facility-count": {
       "key": "sports-facility-count",
@@ -9186,6 +9301,383 @@
       ],
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-10-18T03:46:15.713Z"
+    },
+    "travel-participation-rate-domestic-tourism": {
+      "key": "travel-participation-rate-domestic-tourism",
+      "statsDataId": "0003456093",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:21:53.739Z"
+    },
+    "travel-participation-rate-homecoming": {
+      "key": "travel-participation-rate-homecoming",
+      "statsDataId": "0003456093",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:21:54.722Z"
+    },
+    "travel-participation-rate-overnight": {
+      "key": "travel-participation-rate-overnight",
+      "statsDataId": "0003456093",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:21:55.787Z"
+    },
+    "travel-participation-rate-overseas": {
+      "key": "travel-participation-rate-overseas",
+      "statsDataId": "0003456093",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:21:57.052Z"
+    },
+    "treatment-rate-arthrosis-inpatient": {
+      "key": "treatment-rate-arthrosis-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:21:57.928Z"
+    },
+    "treatment-rate-arthrosis-outpatient": {
+      "key": "treatment-rate-arthrosis-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:21:58.785Z"
+    },
+    "treatment-rate-asthma-inpatient": {
+      "key": "treatment-rate-asthma-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:21:59.451Z"
+    },
+    "treatment-rate-asthma-outpatient": {
+      "key": "treatment-rate-asthma-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:00.176Z"
+    },
+    "treatment-rate-cancer-inpatient": {
+      "key": "treatment-rate-cancer-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:00.883Z"
+    },
+    "treatment-rate-cancer-outpatient": {
+      "key": "treatment-rate-cancer-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:01.569Z"
+    },
+    "treatment-rate-cerebrovascular-inpatient": {
+      "key": "treatment-rate-cerebrovascular-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:02.251Z"
+    },
+    "treatment-rate-cerebrovascular-outpatient": {
+      "key": "treatment-rate-cerebrovascular-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:03.023Z"
+    },
+    "treatment-rate-circulatory-inpatient": {
+      "key": "treatment-rate-circulatory-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:03.762Z"
+    },
+    "treatment-rate-circulatory-outpatient": {
+      "key": "treatment-rate-circulatory-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:04.514Z"
+    },
+    "treatment-rate-diabetes-inpatient": {
+      "key": "treatment-rate-diabetes-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:05.198Z"
+    },
+    "treatment-rate-diabetes-outpatient": {
+      "key": "treatment-rate-diabetes-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:05.875Z"
+    },
+    "treatment-rate-hypertension-inpatient": {
+      "key": "treatment-rate-hypertension-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:06.605Z"
+    },
+    "treatment-rate-hypertension-outpatient": {
+      "key": "treatment-rate-hypertension-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:07.354Z"
+    },
+    "treatment-rate-mental-disorder-inpatient": {
+      "key": "treatment-rate-mental-disorder-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:08.068Z"
+    },
+    "treatment-rate-mental-disorder-outpatient": {
+      "key": "treatment-rate-mental-disorder-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:08.770Z"
+    },
+    "treatment-rate-mood-disorder-inpatient": {
+      "key": "treatment-rate-mood-disorder-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:09.489Z"
+    },
+    "treatment-rate-mood-disorder-outpatient": {
+      "key": "treatment-rate-mood-disorder-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:10.180Z"
+    },
+    "treatment-rate-musculoskeletal-inpatient": {
+      "key": "treatment-rate-musculoskeletal-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:10.819Z"
+    },
+    "treatment-rate-musculoskeletal-outpatient": {
+      "key": "treatment-rate-musculoskeletal-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:11.441Z"
+    },
+    "treatment-rate-neurosis-inpatient": {
+      "key": "treatment-rate-neurosis-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:12.062Z"
+    },
+    "treatment-rate-neurosis-outpatient": {
+      "key": "treatment-rate-neurosis-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:12.805Z"
+    },
+    "treatment-rate-osteoporosis-inpatient": {
+      "key": "treatment-rate-osteoporosis-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:13.435Z"
+    },
+    "treatment-rate-osteoporosis-outpatient": {
+      "key": "treatment-rate-osteoporosis-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:14.064Z"
+    },
+    "treatment-rate-schizophrenia-inpatient": {
+      "key": "treatment-rate-schizophrenia-inpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:14.704Z"
+    },
+    "treatment-rate-schizophrenia-outpatient": {
+      "key": "treatment-rate-schizophrenia-outpatient",
+      "statsDataId": "0004026105",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "no-sample-values",
+      "checkedAt": "2026-10-24T22:22:15.915Z"
+    },
+    "vacant-housing-excluding-rental-sale-secondary": {
+      "key": "vacant-housing-excluding-rental-sale-secondary",
+      "statsDataId": "0004021660",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:16.858Z"
+    },
+    "vacant-housing-for-rent": {
+      "key": "vacant-housing-for-rent",
+      "statsDataId": "0004021660",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:17.499Z"
+    },
+    "vacant-housing-for-sale": {
+      "key": "vacant-housing-for-sale",
+      "statsDataId": "0004021660",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:18.145Z"
+    },
+    "vacant-housing-rate": {
+      "key": "vacant-housing-rate",
+      "statsDataId": "0004021440",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:18.977Z"
+    },
+    "vacant-housing-secondary-residences": {
+      "key": "vacant-housing-secondary-residences",
+      "statsDataId": "0004021660",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:19.653Z"
+    },
+    "vaccination-recipients-disease": {
+      "key": "vaccination-recipients-disease",
+      "statsDataId": "0004027806",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:20.470Z"
+    },
+    "vegetable-cultivation-area": {
+      "key": "vegetable-cultivation-area",
+      "statsDataId": "0003423836",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:21.260Z"
+    },
+    "wooden-housing-ratio": {
+      "key": "wooden-housing-ratio",
+      "statsDataId": "0004015760",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2023"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:22.016Z"
+    },
+    "zoo-count": {
+      "key": "zoo-count",
+      "statsDataId": "0003348770",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2015"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-24T22:22:22.807Z"
     }
   }
 }
