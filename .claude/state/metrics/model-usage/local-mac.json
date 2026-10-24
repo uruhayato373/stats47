@@ -1,28 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T01:37:54.478Z",
+  "generatedAt": "2026-10-24T22:10:13.726Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "observedAt": "2026-10-02"
   },
   "scan": {
-    "dirs": 5,
-    "transcripts": 68,
+    "dirs": 0,
+    "transcripts": 0,
     "skipped": 0,
-    "weeks": [
-      "2026-W29",
-      "2026-W30",
-      "2026-W32",
-      "2026-W35",
-      "2026-W36",
-      "2026-W37",
-      "2026-W38",
-      "2026-W39",
-      "2026-W40",
-      "2026-W41",
-      "2026-W42"
-    ]
+    "weeks": []
   },
   "rows": [
     {

@@ -19,7 +19,7 @@ function deliverableLines(formats: readonly ProductFormat[]): string[] {
     csv: "data.csv（UTF-8 BOM・差し替え / 取り込み用）",
     svg: "地図（SVG・都道府県ごとに色を変えられる編集可能な図形）",
     png: "地図（PNG・高解像度ラスター）",
-    pdf: "PDF（データブック本体 / 使い方マニュアル）",
+    pdf: "PDF（.pdf）",
   };
   const lines: string[] = [];
   for (const f of formats) {

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-be8f5c18def64e60",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "d-geo-region-code-checklist",
+      "sha256": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6"
+    }
+  ],
+  "startedAt": "2026-10-24T17:06:21.778Z",
+  "articles": [
+    {
+      "key": "d-geo-region-code-checklist",
+      "noteId": "nfb3e5e44f7ed",
+      "action": "improve",
+      "sourceSha256": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
+      "previousUrl": "https://assets.st-note.com/production/uploads/images/328113772/rectangle_large_type_2_f50daf6edf9577948b66ca82d06be0b3.png?fit=bounds&quality=85&width=1280",
+      "contentFingerprint": {
+        "id": "d474e92fedd429df8d5e382d7fa1b6241c698c23de05f65557ccca8f5a2f9e67",
+        "key": "183b8cf151535b95a45280964284bbfd0e35c94b16cb6442b46a50bb63beb272",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "7ca2cd36f52a79316944ca585ffd9d4e1ac1c560a043d72624e9ffdc061d012a",
+        "body": "9813323e929e9dac71d53937bbabc3ceb126517ac2045419dd63c4e209b4be44",
+        "separator": "957fe5d7af1ecb41dc92621859aa656c59bf5b1e0a27b17656cbe12148116594",
+        "price": "38879b6376fbabdc8fbfb85f6b11a296aca6de14093a54881b73528b62848d8c",
+        "hashtag_notes": "8929fb57106e5fce6edf8e35f2ac4b8f60c3863b51b884af02fdc4fb61b14405",
+        "belonging_magazine_keys": "8023f55fb0bbbe40d3fce8cad9dacbe8200b8bc9ff4b8f973df3c262cf2df78a",
+        "publish_at": "3d7f737084b0d9c1d395569480be303622a801f015121fac63ca7c505e5c57c7",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-24T17:06:27.529Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/328114882/rectangle_large_type_2_d2f26ba7eb9167a52532db3824b9e8e1.png",
+      "uploadedAt": "2026-10-24T17:07:35.825Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "9b6f76a79324b78d5d106e765d0015ae94afb290059d893c0c8f6975a791f33b",
+        "meanPixelError": 2.9434441075870645,
+        "largeDeltaFraction": 0.002689676616915423
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/328114882/rectangle_large_type_2_d2f26ba7eb9167a52532db3824b9e8e1.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-24T17:07:36.573Z"
+    }
+  ],
+  "updatedAt": "2026-10-24T17:07:36.573Z"
+}

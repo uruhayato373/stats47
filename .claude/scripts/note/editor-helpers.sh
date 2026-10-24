@@ -12,6 +12,7 @@
 
 # NOTE_BU_CDP=http://127.0.0.1:<port> drives an already-running Chrome (e.g. the logged-in Playwright note profile)
 # instead of Profile 5, for hosts where Profile 5 cannot be read (macOS privacy protection, 2026-10-12).
+NOTE_HELPERS_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 BU(){ if [ -n "${NOTE_BU_CDP:-}" ]; then browser-use --cdp-url "$NOTE_BU_CDP" "$@"; else browser-use --headed --profile "Profile 5" "$@"; fi; }
 
 # ---- 画像挿入: 本文中のアンカーテキストへ eval-scroll → 直後段落に画像を挿入 ----
@@ -225,11 +226,11 @@ do_update(){
 process_article(){
   local SLUG="$1" NOTEID="$2" VERT="$3"
   local J="/tmp/note-data-$SLUG.json"
-  local ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
-  [ -d "$ARTICLE_DIR" ] || ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
+  local ARTICLE_DIR="$NOTE_HELPERS_ROOT/docs/31_note記事原稿/$VERT/$SLUG"
+  [ -d "$ARTICLE_DIR" ] || ARTICLE_DIR="$NOTE_HELPERS_ROOT/docs/31_note記事原稿/$SLUG"
   local ADIR="$ARTICLE_DIR/images"
-  node /Users/minamidaisuke/stats47/.claude/scripts/note/ensure-note-images.mjs "$ARTICLE_DIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
-  node /Users/minamidaisuke/stats47/.claude/scripts/note/build-body.cjs "$SLUG" >/dev/null
+  node "$NOTE_HELPERS_ROOT/.claude/scripts/note/ensure-note-images.mjs" "$ARTICLE_DIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
+  node "$NOTE_HELPERS_ROOT/.claude/scripts/note/build-body.cjs" "$SLUG" >/dev/null
   BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 6
   BU state 2>&1 > /tmp/ns.txt
   if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] editor not loaded for $SLUG"; return 1; fi
@@ -269,7 +270,7 @@ process_article(){
     for i in $(seq 0 $((NAFF-1))); do
       local AFF_ID=$(jq -r ".affiliateBanners[$i].id" "$J")
       local AFF_ANCHOR=$(jq -r ".affiliateBanners[$i].anchor" "$J")
-      local AFF_PNG="/Users/minamidaisuke/stats47/assets/affiliate-banners/${AFF_ID}.png"
+      local AFF_PNG="$NOTE_HELPERS_ROOT/assets/affiliate-banners/${AFF_ID}.png"
       local AFF_URL
       AFF_URL=$(get_affiliate_url "$AFF_ID")
       if [ -z "$AFF_URL" ]; then echo "  [WARN] unknown affiliate id: $AFF_ID"; continue; fi
@@ -301,12 +302,12 @@ process_article(){
 # ============================================================================
 new_post_cover_title(){
   local SLUG="$1" VERT="$2" TITLE="$3"
-  local ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
-  [ -d "$ADIR" ] || ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
+  local ADIR="$NOTE_HELPERS_ROOT/docs/31_note記事原稿/$VERT/$SLUG"
+  [ -d "$ADIR" ] || ADIR="$NOTE_HELPERS_ROOT/docs/31_note記事原稿/$SLUG"
   # カバーが無いまま黙って公開しない (旧: cover が無ければ設定を飛ばしていた)
-  node /Users/minamidaisuke/stats47/.claude/scripts/note/ensure-note-images.mjs "$ADIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
+  node "$NOTE_HELPERS_ROOT/.claude/scripts/note/ensure-note-images.mjs" "$ADIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
   local COVER_FILE
-  COVER_FILE=$(node /Users/minamidaisuke/stats47/.claude/scripts/note/materialize-cover.mjs "$SLUG") || { echo "  [FAIL] 台帳に確認済みのカバーがありません"; return 1; }
+  COVER_FILE=$(node "$NOTE_HELPERS_ROOT/.claude/scripts/note/materialize-cover.mjs" "$SLUG") || { echo "  [FAIL] 台帳に確認済みのカバーがありません"; return 1; }
   BU open "https://editor.note.com/new" >/dev/null 2>&1; sleep 5
   BU state 2>&1 > /tmp/ns.txt
   # The editor can take longer than 5 s to mount (2026-10-12: /new had redirected but the textbox was not yet there).

@@ -425,6 +425,9 @@ export function loadContentOperations(
   const noteDraftIndex = ContentNoteDraftIndex.parse(
     readJson(root, datasetPath("note.draft-index"))
   );
+  const noteCoverAssets = readJson(root, datasetPath("note.cover-assets")) as {
+    articles: Array<{ articleKey: string; approvedRevisionId: string | null; production?: { id?: string | null } }>;
+  };
   const inventories = REFERENCE_SOURCE_POLICIES.flatMap((policy) => {
     const raw = readOptionalJson(root, policy.statePath);
     if (!raw) return [];
@@ -573,6 +576,12 @@ export function loadContentOperations(
         key,
         value.status,
       ])
+    ),
+    noteCoverApprovals: Object.fromEntries(
+      noteCoverAssets.articles.map((article) => [article.articleKey, Boolean(article.approvedRevisionId)])
+    ),
+    noteCoverProductionIds: Object.fromEntries(
+      noteCoverAssets.articles.flatMap((article) => article.production?.id ? [[article.articleKey, article.production.id]] : [])
     ),
     backlogText: fs.existsSync(path.join(root, '.claude/todo/backlog.md'))
       ? fs.readFileSync(path.join(root, '.claude/todo/backlog.md'), 'utf8')

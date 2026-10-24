@@ -5,56 +5,6 @@
     "note": "派生インデックス。手編集しない。"
   },
   "drafts": {
-    "22-monthly-routine-skills": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/22-monthly-routine-skills",
-      "status": "draft"
-    },
-    "23-mcp-internal-system": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/23-mcp-internal-system",
-      "status": "draft"
-    },
-    "24-subagents-parallel-research": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/24-subagents-parallel-research",
-      "status": "draft"
-    },
-    "25-excel-vba-to-python": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/25-excel-vba-to-python",
-      "status": "draft"
-    },
-    "26-boss-approval-deck": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/26-boss-approval-deck",
-      "status": "draft"
-    },
-    "27-internal-study-30min": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/27-internal-study-30min",
-      "status": "draft"
-    },
-    "28-ai-skeptic-qa": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/28-ai-skeptic-qa",
-      "status": "draft"
-    },
-    "29-evaluated-without-side-job": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/29-evaluated-without-side-job",
-      "status": "draft"
-    },
-    "30-post-retirement-career": {
-      "vertical": "koumuin-claude-code",
-      "r2_path": "note/koumuin-claude-code/30-post-retirement-career",
-      "status": "draft"
-    },
-    "a-annual-paid-leave-11-days-or-more-ratio": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
-      "status": "draft"
-    },
     "A-laborwage-paid-leave-utilization-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",
@@ -65,37 +15,7 @@
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
       "status": "draft"
     },
-    "a-manufacturing-industry-annual-income": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
-      "status": "draft"
-    },
-    "a-number-of-hotel-rooms": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-number-of-hotel-rooms",
-      "status": "draft"
-    },
-    "a-overseas-travel-annual-participation-rate-10plus": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-overseas-travel-annual-participation-rate-10plus",
-      "status": "draft"
-    },
-    "a-population-density-per-km2-total-area": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-population-density-per-km2-total-area",
-      "status": "draft"
-    },
-    "a-volunteer-activity-annual-participation-rate-15plus": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
-      "status": "draft"
-    },
     "d-geo-analysis-template-compendium": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
-    "d-geo-data-quality-management": {
       "vertical": "stats47-note",
       "r2_path": null,
       "status": "draft"
@@ -105,22 +25,7 @@
       "r2_path": null,
       "status": "draft"
     },
-    "d-geo-ksj-qgis-guide": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
     "d-geo-medical-access-analysis": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
-    "d-geo-natural-language-region-filter": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
-    "d-geo-poi-license-practice": {
       "vertical": "stats47-note",
       "r2_path": null,
       "status": "draft"
@@ -130,24 +35,9 @@
       "r2_path": null,
       "status": "draft"
     },
-    "d-geo-region-code-checklist": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
     "d-geo-trade-area-analysis": {
       "vertical": "stats47-note",
       "r2_path": null,
-      "status": "draft"
-    },
-    "d-geo-x-ogp-map-automation": {
-      "vertical": "stats47-note",
-      "r2_path": null,
-      "status": "draft"
-    },
-    "d1-kakei-prefecture-consumption": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/d1-kakei-prefecture-consumption",
       "status": "draft"
     },
     "data-packs-advanced": {
@@ -275,21 +165,6 @@
       "r2_path": "note/product-sales/gov-training-materials",
       "status": "draft"
     },
-    "h-howto-excel-filled-map": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/h-howto-excel-filled-map",
-      "status": "draft"
-    },
-    "h-howto-mymaps-kml": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/h-howto-mymaps-kml",
-      "status": "draft"
-    },
-    "h-howto-mymaps-share": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/h-howto-mymaps-share",
-      "status": "draft"
-    },
     "industry-government-promotion": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/industry-government-promotion",
@@ -323,11 +198,6 @@
     "industry-tourism-realestate": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/industry-tourism-realestate",
-      "status": "draft"
-    },
-    "license-guide": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/license-guide",
       "status": "draft"
     },
     "life-family-career-comparison": {
@@ -418,71 +288,6 @@
     "ppt-tourism-demand-deck": {
       "vertical": "product-sales",
       "r2_path": "note/product-sales/ppt-tourism-demand-deck",
-      "status": "draft"
-    },
-    "prefecture-all-in-one-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-all-in-one-pack",
-      "status": "draft"
-    },
-    "prefecture-disaster-infrastructure-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-disaster-infrastructure-pack",
-      "status": "draft"
-    },
-    "prefecture-education-childcare-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-education-childcare-pack",
-      "status": "draft"
-    },
-    "prefecture-healthcare-nursing-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-healthcare-nursing-pack",
-      "status": "draft"
-    },
-    "prefecture-household-consumption-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-household-consumption-pack",
-      "status": "draft"
-    },
-    "prefecture-income-wage-hiring-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-income-wage-hiring-pack",
-      "status": "draft"
-    },
-    "prefecture-industry-economy-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-industry-economy-pack",
-      "status": "draft"
-    },
-    "prefecture-map-chart-assets-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-map-chart-assets-pack",
-      "status": "draft"
-    },
-    "prefecture-migration-living-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-migration-living-pack",
-      "status": "draft"
-    },
-    "prefecture-municipal-finance-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-municipal-finance-pack",
-      "status": "draft"
-    },
-    "prefecture-population-household-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-population-household-pack",
-      "status": "draft"
-    },
-    "prefecture-retail-trade-area-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
-      "status": "draft"
-    },
-    "prefecture-tourism-lodging-pack": {
-      "vertical": "product-sales",
-      "r2_path": "note/product-sales/prefecture-tourism-lodging-pack",
       "status": "draft"
     },
     "service-business-comparison": {

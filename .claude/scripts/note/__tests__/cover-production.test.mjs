@@ -142,3 +142,18 @@ test('新記事と未着手記事には最新方針を適用し、編集中の�
   assert.equal(f.row.production.policyVersion, latestCoverPolicy(f.policies, f.article.category).version);
   assert.equal(f.row.production.id, 'NCI-00001');
 });
+
+test('下書きで採用したカバーはnote URL付与後も同じ制作内容として表示する', () => {
+  const f = fixture();
+  f.article = { ...f.article, noteUrl: undefined };
+  f.row.noteUrl = null;
+  const revision = candidate(f);
+  addCoverRevision(f.row, revision, { candidate: true });
+  reviewCoverRevision(f.row, revision.id, 'pass', '原寸と縮小版を確認');
+  f.article.noteUrl = 'https://note.com/stats47/n/n123';
+  f.row.noteUrl = f.article.noteUrl;
+  f.row.published = { status: 'configured', url: 'https://assets.st-note.com/cover.png', observedAt: new Date().toISOString(), revisionId: revision.id };
+  assert.equal(coverProductionView(f.row, f.article, f.policies).stage, 'published');
+  f.row.production.brief.headline = '別の見出し';
+  assert.equal(coverProductionView(f.row, f.article, f.policies).stage, 'stale');
+});

@@ -27,7 +27,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/product/coconala`               | ココナラの出品状況 (`coconala-listings.json` × product-factory カタログ)                                                                                                                           |
 | `/content`                        | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ                                                                                                                 |
 | `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示                                                                                                                        |
-| `/content/note`                   | 記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー                                                                                                        |
+| `/content/note`                   | Git記事台帳 (`data/note/articles.json`)・R2本文所在・公開URL・公開ゲートの読み取り専用ミラー。未公開レコードを本文未作成・同題重複・販売条件・カバー・内容レビューで絞り込む。note.comエディタの下書き件数とは区別する |
 | `/content/note/covers`            | カテゴリ別方針・固定の制作ID・制作状況・公開画像/候補の比較。制作内容を保存してプロンプトと制作仕様を取得し、候補の採用/修正を記録して次の記事へ進む。画像はprivate R2からGET proxyでSHA確認し配信 |
 | `/content/kindle`                 | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー                                                                |
 | `/content/references`             | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示         |

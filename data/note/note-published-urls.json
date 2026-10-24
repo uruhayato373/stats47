@@ -482,6 +482,17 @@
       "r2_access": "none",
       "status": "note_only"
     },
+    "a-annual-paid-leave-11-days-or-more-ratio": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nfb6a7a246b12",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "a-average-temperature": {
       "vertical": "stats47-note",
       "title": "【2024年版】年平均気温が最も高い県は？ 1位は沖縄県｜都道府県ランキング",
@@ -1131,6 +1142,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-manufacturing-industry-annual-income": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/nb09980b2ef49",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-manufacturing-industry-annual-income",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "a-maximum-temperature": {
       "vertical": "stats47-note",
       "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
@@ -1281,6 +1303,17 @@
       "is_paid": false,
       "published_at": "2026-10-12",
       "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-10plus",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "a-volunteer-activity-annual-participation-rate-15plus": {
+      "vertical": "stats47-note",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人の割合が高い県は？ 1位は島根県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n5bf048142f66",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
@@ -2506,6 +2539,18 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "d-geo-data-quality-management": {
+      "vertical": "stats47-note",
+      "title": "stats47型データ品質管理",
+      "url": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-data-quality-management",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
       "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
@@ -2530,6 +2575,18 @@
       "status": "r2_ready",
       "price_jpy": 1980
     },
+    "d-geo-ksj-qgis-guide": {
+      "vertical": "stats47-note",
+      "title": "国土数値情報をQGISで扱う",
+      "url": "https://note.com/stats47/n/n346d566772a1",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-ksj-qgis-guide",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
     "d-geo-land-price-future-population": {
       "vertical": "stats47-note",
       "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
@@ -2542,6 +2599,42 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-geo-natural-language-region-filter": {
+      "vertical": "stats47-note",
+      "title": "自然言語→地域フィルタJSON",
+      "url": "https://note.com/stats47/n/na9ba449d2c8b",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-natural-language-region-filter",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
+    "d-geo-poi-license-practice": {
+      "vertical": "stats47-note",
+      "title": "POIデータのライセンスと実務",
+      "url": "https://note.com/stats47/n/n502188b7d2c9",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-poi-license-practice",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
+    "d-geo-region-code-checklist": {
+      "vertical": "stats47-note",
+      "title": "地域コード結合の完全チェックリスト",
+      "url": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-region-code-checklist",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 980
+    },
     "d-geo-station-access-analysis": {
       "vertical": "stats47-note",
       "title": "駅代表点から直線800m×2050年人口｜47都道府県を再現",
@@ -2553,6 +2646,18 @@
       "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 2980
+    },
+    "d-geo-x-ogp-map-automation": {
+      "vertical": "stats47-note",
+      "title": "X/OGP地図カード自動生成",
+      "url": "https://note.com/stats47/n/n78a43a4c53a4",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-x-ogp-map-automation",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
     },
     "d-kakei-category-dataset": {
       "vertical": "stats47-note",
@@ -2588,6 +2693,39 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "h-howto-excel-filled-map": {
+      "vertical": "stats47-note",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "url": "https://note.com/stats47/n/n800864e68c6b",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-excel-filled-map",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "h-howto-mymaps-kml": {
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "url": "https://note.com/stats47/n/n0c132ee7d825",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-mymaps-kml",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "h-howto-mymaps-share": {
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
+      "url": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/h-howto-mymaps-share",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
@@ -2606,6 +2744,17 @@
       "is_paid": false,
       "published_at": "2026-10-12",
       "r2_path": "note/stats47-note/koumuin-shigoto-kouritsuka-ai",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
+    "license-guide": {
+      "vertical": "product-sales",
+      "title": "都道府県データ商品のライセンス・版の違いガイド",
+      "url": "https://note.com/stats47/n/nadc627790bb6",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/license-guide",
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
@@ -3218,6 +3367,42 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "prefecture-all-in-one-pack": {
+      "vertical": "product-sales",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "url": "https://note.com/stats47/n/nfa7d235eba85",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-all-in-one-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 9800
+    },
+    "prefecture-disaster-infrastructure-pack": {
+      "vertical": "product-sales",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "url": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-disaster-infrastructure-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-education-childcare-pack": {
+      "vertical": "product-sales",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-education-childcare-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-free-trial-pack": {
       "vertical": "product-sales",
       "title": "都道府県データの無料お試しサンプル 総人口2024",
@@ -3228,6 +3413,126 @@
       "r2_body": true,
       "r2_access": "public",
       "status": "r2_ready"
+    },
+    "prefecture-healthcare-nursing-pack": {
+      "vertical": "product-sales",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-healthcare-nursing-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-household-consumption-pack": {
+      "vertical": "product-sales",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "url": "https://note.com/stats47/n/n554a047cf5be",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-household-consumption-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-income-wage-hiring-pack": {
+      "vertical": "product-sales",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "url": "https://note.com/stats47/n/n46d68c153502",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-income-wage-hiring-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-industry-economy-pack": {
+      "vertical": "product-sales",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "url": "https://note.com/stats47/n/n2ced199ed715",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-industry-economy-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
+    "prefecture-map-chart-assets-pack": {
+      "vertical": "product-sales",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "url": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/product-sales/prefecture-map-chart-assets-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 4000
+    },
+    "prefecture-migration-living-pack": {
+      "vertical": "product-sales",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "url": "https://note.com/stats47/n/n323af74c09cc",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-migration-living-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 4500
+    },
+    "prefecture-municipal-finance-pack": {
+      "vertical": "product-sales",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "url": "https://note.com/stats47/n/n5da8a99b3506",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-municipal-finance-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 6000
+    },
+    "prefecture-population-household-pack": {
+      "vertical": "product-sales",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "url": "https://note.com/stats47/n/ne47eb45f8a15",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-population-household-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 4000
+    },
+    "prefecture-retail-trade-area-pack": {
+      "vertical": "product-sales",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "url": "https://note.com/stats47/n/n973c3f8478f5",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 6000
+    },
+    "prefecture-tourism-lodging-pack": {
+      "vertical": "product-sales",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "url": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-tourism-lodging-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
     },
     "recovered-n023501038bd5": {
       "vertical": "stats47-note",
@@ -3660,7 +3965,7 @@
     },
     "recovered-n4e1e67f70686": {
       "vertical": "stats47-note",
-      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n4e1e67f70686",
       "is_paid": false,
       "published_at": "2026-03-22",
@@ -4441,7 +4746,7 @@
     },
     "recovered-nf5b4ced7a736": {
       "vertical": "stats47-note",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nf5b4ced7a736",
       "is_paid": false,
       "published_at": "2026-05-10",

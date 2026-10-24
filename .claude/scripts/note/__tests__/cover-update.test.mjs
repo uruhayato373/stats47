@@ -9,6 +9,7 @@ import {
   uploadInBrowser,
   coverOperationVersion,
   findCoverOperation,
+  assertPublicCoverPixels,
 } from '../lib/cover-update.mjs';
 import fs from 'node:fs';
 import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
@@ -172,6 +173,19 @@ test('delivery query parameters do not disguise a cover change', () => {
     assetPath('https://assets.st-note.com/b.png')
   );
   assert.equal(assetPath(null), null);
+});
+test('note PNG optimization passes, but a different or locally changed image stops', () => {
+  const expected = Buffer.alloc(3000, 100);
+  const optimized = Buffer.alloc(3000, 104);
+  assert.deepEqual(assertPublicCoverPixels(optimized, expected), {
+    meanPixelError: 4,
+    largeDeltaFraction: 0,
+  });
+  assert.throws(() => assertPublicCoverPixels(Buffer.alloc(3000, 180), expected), /public image differs/);
+  const changedTextArea = Buffer.from(expected);
+  changedTextArea.fill(150, 0, 60);
+  assert.throws(() => assertPublicCoverPixels(changedTextArea, expected), /public image differs/);
+  assert.throws(() => assertPublicCoverPixels(Buffer.alloc(2999), expected), /image channels/);
 });
 test('upload contract sends only the four observed image fields, never the article body', async () => {
   const requests = [];

@@ -43,6 +43,20 @@ test('県の輪郭だけでは制作せず、都市・年・世帯区分と県�
   assert.equal(plan(), null);
 });
 
+test('公開題名の根拠付き是正では生成時の画像計画を保持し、別題名への変更は拒否する', () => {
+  const f = fixture();
+  const original = buildCoverPlan(f.row, f.article, f.policies);
+  f.row.production.titleCorrection = {
+    generatedTitle: f.article.title,
+    publishedTitle: '甲府市の家計（対象を訂正）',
+    reason: '本文と一次データで対象を確認した',
+  };
+  f.article.title = f.row.production.titleCorrection.publishedTitle;
+  assert.equal(buildCoverPlan(f.row, f.article, f.policies).planSha256, original.planSha256);
+  f.article.title = '別の記事題名';
+  assert.throws(() => buildCoverPlan(f.row, f.article, f.policies), /title correction mismatch/);
+});
+
 test('地図は記事キーから県を決め、別県や改変した参照を拒否する', async () => {
   const f = fixture(), plan = buildCoverPlan(f.row, f.article, f.policies);
   assert.equal(prefectureCoverReference('a-kakei-tokyo').reference.code, '13');

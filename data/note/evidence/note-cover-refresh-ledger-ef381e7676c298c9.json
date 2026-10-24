@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "ledger-ef381e7676c298c9",
+  "account": "stats47",
+  "kind": "cover-remediation",
+  "scope": [
+    {
+      "key": "a-new-graduate-starting-salary-university-male",
+      "sha256": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86"
+    }
+  ],
+  "startedAt": "2026-10-23T04:13:39.736Z",
+  "articles": [
+    {
+      "key": "a-new-graduate-starting-salary-university-male",
+      "noteId": "nf067364b58fb",
+      "action": "improve",
+      "sourceSha256": "d541d9e54f5dac290285d591bd173e66b0d0411e56b11e65c4f5b4ee7d536a86",
+      "previousUrl": "https://assets.st-note.com/production/uploads/images/324724934/rectangle_large_type_2_09f81774172a72f7abdb74b2f8325af2.png?fit=bounds&quality=85&width=1280",
+      "contentFingerprint": {
+        "id": "7c3b8dcb97dc35aa9bacb692ac8419781b1d8e27be22c7b904b7efca5945cd6f",
+        "key": "118dabb8686e2cbe0d4ff4c941528801d6c84c80a49129a548eff231c5be2e1a",
+        "user_id": "f67b0aff8c44638d9f68f26eb90065f5ca87002011f272bed8fb18611cdd03ef",
+        "status": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+        "type": "703aadee3cce3a4b2b1e1d26b959583a6a7c0d38d44341c8e4b95a0ee737e203",
+        "name": "802573802b8e5bd55a7393c2b829210a01d11bd7a1a322961b77982156f37706",
+        "body": "80a5a32fade699be9024243875e7da2ea783926fffdada45cd33f6c31189f1fb",
+        "separator": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "price": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "hashtag_notes": "336b96e8853251922ce30528744e76a99281e54a731dab5bcf576a6f76199331",
+        "belonging_magazine_keys": "dfce9d3c46ce48f6e071caafdbefbc4c4b4c385533137869c554544f665cfb96",
+        "publish_at": "b10f8bf3de8687742b41bccee2a3a0f2a9f6c6b19516b0e3b28a42f148119305",
+        "is_pinned": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_profiled": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_r18": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "disable_comment": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_refund": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "is_limited": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      },
+      "hasDraftBefore": false,
+      "startedAt": "2026-10-23T04:13:45.962Z",
+      "status": "verified",
+      "transport": "cover-only-api",
+      "uploadedUrl": "https://assets.st-note.com/production/uploads/images/327481889/rectangle_large_type_2_98a7326b20ed454c6f5e76a4b27af46c.png",
+      "uploadedAt": "2026-10-23T04:14:17.435Z",
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "bd1486f88b2a6b006d90d2ff0d019a8f7420f4db0e89ae20a3942498ca7971b4",
+        "meanPixelError": 2.7235684856965174
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/327481889/rectangle_large_type_2_98a7326b20ed454c6f5e76a4b27af46c.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-23T04:14:18.031Z"
+    }
+  ],
+  "updatedAt": "2026-10-23T04:14:18.031Z"
+}

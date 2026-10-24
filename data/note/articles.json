@@ -37,16 +37,24 @@
       "magazine": "s47-population",
       "isPaid": true,
       "priceJpy": 980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-region-code-checklist",
       "body": {
         "store": "r2-private",
-        "manifest": null
+        "manifest": {
+          "sha256": "8123101fef6f01fbaf3cd75e8fee3c022f6e4aa56dc25ce449606ddaf54082db",
+          "files": 6,
+          "bytes": 19876,
+          "savedAt": "2026-10-24T17:07:59.322Z"
+        },
+        "verifiedAt": "2026-10-24T17:07:59.322Z"
       },
       "stats47Targets": [
         "/geo",
         "/geo/method"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-flood-population-mesh",
@@ -83,12 +91,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-ksj-qgis-guide",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+          "files": 4,
+          "bytes": 14452,
+          "savedAt": "2026-10-24T22:05:26.150Z"
+        },
+        "verifiedAt": "2026-10-24T22:05:26.150Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n346d566772a1",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-land-price-future-population",
@@ -125,12 +141,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-x-ogp-map-automation",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+          "files": 4,
+          "bytes": 77269,
+          "savedAt": "2026-10-24T20:15:14.302Z"
+        },
+        "verifiedAt": "2026-10-24T20:15:14.302Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n78a43a4c53a4",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-medical-access-analysis",
@@ -170,16 +194,24 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-data-quality-management",
       "body": {
         "store": "r2-private",
-        "manifest": null
+        "manifest": {
+          "sha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+          "files": 6,
+          "bytes": 18950,
+          "savedAt": "2026-10-24T19:01:14.259Z"
+        },
+        "verifiedAt": "2026-10-24T19:01:14.259Z"
       },
       "stats47Targets": [
         "/geo/data-catalog",
         "/geo/method"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-station-access-analysis",
@@ -231,12 +263,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-poi-license-practice",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "53682a2f69fecb2bac59eab30d67ee868f5b2e39a29cee1c60cb9d2bfdf40f2e",
+          "files": 4,
+          "bytes": 16448,
+          "savedAt": "2026-10-24T22:18:27.138Z"
+        },
+        "verifiedAt": "2026-10-24T22:18:27.138Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n502188b7d2c9",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-natural-language-region-filter",
@@ -246,12 +286,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 2980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-natural-language-region-filter",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+          "files": 4,
+          "bytes": 14419,
+          "savedAt": "2026-10-24T19:20:35.225Z"
+        },
+        "verifiedAt": "2026-10-24T19:20:35.225Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/na9ba449d2c8b",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-pyqgis-ai-verification",
@@ -323,9 +371,9 @@
           "sha256": "ad32b27d6df64329c668e0fd80589c141089fe9c7859cc1a118dcdca95653664",
           "files": 5,
           "bytes": 100273,
-          "savedAt": "2026-10-12T22:05:57.821Z"
+          "savedAt": "2026-10-24T11:59:24.493Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T11:59:24.493Z"
       }
     },
     {
@@ -627,49 +675,6 @@
       }
     },
     {
-      "key": "a-number-of-hotel-rooms",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-number-of-hotel-rooms",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
-          "files": 10,
-          "bytes": 482187,
-          "savedAt": "2026-10-12T22:05:59.318Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "a-overseas-travel-annual-participation-rate-10plus",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2021年版・10歳以上】海外旅行をした人が多い県は？ 1位は京都府｜都道府県ランキング",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-overseas-travel-annual-participation-rate-10plus",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
-          "files": 11,
-          "bytes": 422826,
-          "savedAt": "2026-10-12T22:06:00.389Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      },
-      "stats47Targets": [
-        "/ranking/overseas-travel-annual-participation-rate-10plus"
-      ]
-    },
-    {
       "key": "a-overseas-travel-annual-participation-rate-15plus",
       "vertical": "stats47-note",
       "series": "A",
@@ -693,26 +698,6 @@
       "stats47Targets": [
         "/ranking/overseas-travel-annual-participation-rate-15plus"
       ]
-    },
-    {
-      "key": "a-population-density-per-km2-total-area",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
-      "magazine": "s47-population",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-population-density-per-km2-total-area",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
-          "files": 10,
-          "bytes": 472566,
-          "savedAt": "2026-10-12T22:05:59.825Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
     },
     {
       "key": "a-volunteer-activity-annual-participation-rate-10plus",
@@ -743,24 +728,26 @@
       "key": "a-volunteer-activity-annual-participation-rate-15plus",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人の割合が高い県は？ 1位は島根県｜都道府県ランキング",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e6f5ef23b58b38e1f529fd9ad9d565951e137e688e97802aca70738d8d7c828f",
-          "files": 11,
-          "bytes": 435427,
-          "savedAt": "2026-10-12T22:06:02.239Z"
+          "sha256": "96876c8bc2d6613cd92230a2f67eb851e9738477f3549cdb14f3b51382abaf2a",
+          "files": 12,
+          "bytes": 474888,
+          "savedAt": "2026-10-24T01:44:06.754Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T01:44:06.754Z"
       },
       "stats47Targets": [
         "/ranking/volunteer-activity-annual-participation-rate-15plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n5bf048142f66",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "b-expenditure-structure",
@@ -1027,26 +1014,6 @@
       }
     },
     {
-      "key": "d1-kakei-prefecture-consumption",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
-      "magazine": null,
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/d1-kakei-prefecture-consumption",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
-          "files": 21,
-          "bytes": 1142022,
-          "savedAt": "2026-10-12T22:06:08.454Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "koumuin-shigoto-kouritsuka-ai",
       "vertical": "stats47-note",
       "series": "A",
@@ -1178,9 +1145,9 @@
           "sha256": "b062494d395b2560835fa99520abb81d14460532a97f61813fbc7c39ed19fbf8",
           "files": 4,
           "bytes": 124626,
-          "savedAt": "2026-10-12T22:06:05.131Z"
+          "savedAt": "2026-10-24T12:32:10.553Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:10.553Z"
       }
     },
     {
@@ -1224,9 +1191,9 @@
           "sha256": "1734665e84a875b441d73a6236000971256e4cb9d3c59c793db7cf88dd65ac9b",
           "files": 4,
           "bytes": 133923,
-          "savedAt": "2026-10-12T22:06:04.984Z"
+          "savedAt": "2026-10-24T12:32:44.852Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:44.852Z"
       }
     },
     {
@@ -1429,9 +1396,9 @@
           "sha256": "bc1b43c69e2ac841de592ded9fce719a240324c28ba924ee86154a5ed41ffe33",
           "files": 4,
           "bytes": 123064,
-          "savedAt": "2026-10-12T22:06:09.840Z"
+          "savedAt": "2026-10-24T12:32:21.069Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:21.069Z"
       }
     },
     {
@@ -1567,9 +1534,9 @@
           "sha256": "9e191797c09d39aa4f16ecafb042ca577c8b5292313dbb96f14857d536f2e266",
           "files": 4,
           "bytes": 126545,
-          "savedAt": "2026-10-12T22:06:12.201Z"
+          "savedAt": "2026-10-24T12:33:10.558Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:33:10.558Z"
       }
     },
     {
@@ -1865,9 +1832,9 @@
           "sha256": "3b575790e272c32b9f3b41657ac921df1da11299eeea0ce2700f1200a186ba1a",
           "files": 4,
           "bytes": 130227,
-          "savedAt": "2026-10-12T22:06:17.119Z"
+          "savedAt": "2026-10-24T12:32:15.917Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:15.917Z"
       }
     },
     {
@@ -1888,9 +1855,9 @@
           "sha256": "b305f2773ddf37f074b5dc2350fc1efab392fb17c576c2f824f9a467052fda59",
           "files": 4,
           "bytes": 125100,
-          "savedAt": "2026-10-12T22:06:18.203Z"
+          "savedAt": "2026-10-24T12:33:04.524Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:33:04.524Z"
       }
     },
     {
@@ -2118,9 +2085,9 @@
           "sha256": "9af443d2208b662a14dd864f0480ab4fd231e72815a86a4a75bac55046e22a48",
           "files": 4,
           "bytes": 124329,
-          "savedAt": "2026-10-12T22:06:21.130Z"
+          "savedAt": "2026-10-24T12:32:26.699Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:26.699Z"
       }
     },
     {
@@ -3093,7 +3060,7 @@
       "key": "recovered-n4e1e67f70686",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
       "magazine": "s47-sports-culture",
       "isPaid": false,
       "status": "published",
@@ -3103,12 +3070,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "c360eb7d07790e0587ff3707a0af1148155b6c569c1c6ec77e3f11d8ddd23253",
+          "sha256": "d50b2f9919ded8a70d09d3e5f721be6a1ee7d1b78049f991eee28d13419e511b",
           "files": 7,
-          "bytes": 445223,
-          "savedAt": "2026-10-12T22:06:58.110Z"
+          "bytes": 445271,
+          "savedAt": "2026-10-23T18:48:34.371Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-23T18:48:34.371Z"
       },
       "stats47Targets": [
         "/ranking/sports-participation-rate-gym-training"
@@ -4730,7 +4697,7 @@
       "key": "recovered-nf5b4ced7a736",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "magazine": "s47-sports-culture",
       "isPaid": false,
       "status": "published",
@@ -4740,15 +4707,15 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9238933331fbbb4abd5d7835333d20efdea4a519b102285617eb53206b447ef8",
+          "sha256": "f2239df5843403e8dba593562f612d8a4765560dab344456c61710c51b8de4c9",
           "files": 6,
           "bytes": 320125,
-          "savedAt": "2026-10-12T22:07:53.373Z"
+          "savedAt": "2026-10-23T18:48:36.644Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-23T18:48:36.644Z"
       },
       "stats47Targets": [
-        "/ranking/volunteer-activity-annual-participation-rate-15plus"
+        "/ranking/volunteer-activity-annual-participation-rate-10plus"
       ]
     },
     {
@@ -6788,177 +6755,6 @@
       }
     },
     {
-      "key": "22-monthly-routine-skills",
-      "vertical": "koumuin-claude-code",
-      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/22-monthly-routine-skills",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
-          "files": 19,
-          "bytes": 885920,
-          "savedAt": "2026-10-12T22:04:34.314Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "23-mcp-internal-system",
-      "vertical": "koumuin-claude-code",
-      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/23-mcp-internal-system",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
-          "files": 23,
-          "bytes": 1479082,
-          "savedAt": "2026-10-12T22:04:35.318Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "24-subagents-parallel-research",
-      "vertical": "koumuin-claude-code",
-      "title": "Subagents で「複数案件の並行調査」を回す",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/24-subagents-parallel-research",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
-          "files": 21,
-          "bytes": 939604,
-          "savedAt": "2026-10-12T22:04:35.896Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "25-excel-vba-to-python",
-      "vertical": "koumuin-claude-code",
-      "title": "既存の Excel マクロを Claude Code で Python 移植する",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/25-excel-vba-to-python",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
-          "files": 19,
-          "bytes": 799091,
-          "savedAt": "2026-10-12T22:04:37.382Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "26-boss-approval-deck",
-      "vertical": "koumuin-claude-code",
-      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/26-boss-approval-deck",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
-          "files": 21,
-          "bytes": 1137942,
-          "savedAt": "2026-10-12T22:04:41.476Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "27-internal-study-30min",
-      "vertical": "koumuin-claude-code",
-      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/27-internal-study-30min",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
-          "files": 19,
-          "bytes": 932363,
-          "savedAt": "2026-10-12T22:04:41.730Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "28-ai-skeptic-qa",
-      "vertical": "koumuin-claude-code",
-      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/28-ai-skeptic-qa",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
-          "files": 17,
-          "bytes": 872186,
-          "savedAt": "2026-10-12T22:04:42.155Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "29-evaluated-without-side-job",
-      "vertical": "koumuin-claude-code",
-      "title": "公務員が副業せずに Claude Code スキルで評価される 5 つの場",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/29-evaluated-without-side-job",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
-          "files": 13,
-          "bytes": 548635,
-          "savedAt": "2026-10-12T22:04:44.309Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "30-post-retirement-career",
-      "vertical": "koumuin-claude-code",
-      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
-      "magazine": "koumuin-claude-code",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/koumuin-claude-code/30-post-retirement-career",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
-          "files": 17,
-          "bytes": 893528,
-          "savedAt": "2026-10-12T22:04:47.908Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "31-claude-code-how-to-ask",
       "vertical": "koumuin-claude-code",
       "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
@@ -7017,9 +6813,9 @@
           "sha256": "16db7895efdaa411248726f0102090a2fd2294e88201204726b28a91879b37c7",
           "files": 3,
           "bytes": 125555,
-          "savedAt": "2026-10-12T22:07:55.775Z"
+          "savedAt": "2026-10-24T12:32:55.454Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T12:32:55.454Z"
       }
     },
     {
@@ -7038,9 +6834,9 @@
           "sha256": "a6ca990ffb7a7ce4f267266ece650b5eb8933a1ab1b1fbb1483c1eb8dd04ef18",
           "files": 5,
           "bytes": 344510,
-          "savedAt": "2026-10-12T22:07:58.145Z"
+          "savedAt": "2026-10-24T10:59:00.508Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T10:59:00.508Z"
       }
     },
     {
@@ -8516,18 +8312,20 @@
       "title": "都道府県データ商品のライセンス・版の違いガイド",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/license-guide",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "0ea55b01585be7825812de9e6a13c149c978b4856c4498e42dcf332945d000fc",
+          "sha256": "0c25ec3f6be7c8f93b8328b72d0cde345878c963fb938f3cebb76cf87db216c8",
           "files": 5,
-          "bytes": 63874,
-          "savedAt": "2026-10-12T22:05:31.517Z"
+          "bytes": 68284,
+          "savedAt": "2026-10-24T14:21:09.603Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T14:21:09.603Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nadc627790bb6",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "free-samples",
@@ -8555,18 +8353,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-population-household-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "8e27e75a7287ae333041d5e8df339fbe772cb601e379bc9492a91d1d798e9738",
+          "sha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
           "files": 4,
           "bytes": 107830,
-          "savedAt": "2026-10-12T22:05:32.865Z"
+          "savedAt": "2026-10-24T05:12:12.602Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:12:12.602Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-income-wage-hiring-pack",
@@ -8575,18 +8375,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-income-wage-hiring-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "ae327c6e8ddd904b8d8fa4b7488ce10f1f68ceb696c34b9ac31ab4ef34b2c2ac",
+          "sha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
           "files": 4,
           "bytes": 101826,
-          "savedAt": "2026-10-12T22:05:33.285Z"
+          "savedAt": "2026-10-24T05:28:49.148Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:28:49.148Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n46d68c153502",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-tourism-lodging-pack",
@@ -8595,18 +8397,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-tourism-lodging-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "8ba6b76c1a9a75503b001e86d980547dca5dbfdbbc0b3b4e1d79fa7badba7416",
+          "sha256": "2f836560fd83bdaa675dca10ea09bff68172ba09d878a621fa8ea8a26c85ee6a",
           "files": 4,
           "bytes": 103827,
-          "savedAt": "2026-10-12T22:05:34.662Z"
+          "savedAt": "2026-10-24T05:39:22.724Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:39:22.724Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-municipal-finance-pack",
@@ -8615,18 +8419,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 6000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-municipal-finance-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "368d3142642d381c8c0b823954fe08bb5e72fe2474aae069c2f8c1118efa12c1",
+          "sha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
           "files": 4,
           "bytes": 28285,
-          "savedAt": "2026-10-12T22:05:34.785Z"
+          "savedAt": "2026-10-24T05:52:33.033Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T05:52:33.033Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-healthcare-nursing-pack",
@@ -8635,18 +8441,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-healthcare-nursing-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "0e98930e0c0b8466eca8d2705072db30671063a28e22af24ad21ed8c7a803c90",
+          "sha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
           "files": 4,
           "bytes": 107206,
-          "savedAt": "2026-10-12T22:05:36.120Z"
+          "savedAt": "2026-10-24T06:03:33.928Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T06:03:33.928Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-education-childcare-pack",
@@ -8655,18 +8463,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-education-childcare-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "6d397ec9e70ccd9c282ee66f876f75b2d6409aa066bc76abebf35c4a5e5774bb",
+          "sha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
           "files": 4,
           "bytes": 108451,
-          "savedAt": "2026-10-12T22:05:36.387Z"
+          "savedAt": "2026-10-24T06:55:29.285Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T06:55:29.285Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-migration-living-pack",
@@ -8675,18 +8485,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4500,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-migration-living-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "5cb91744509878ec564f3904ca8d449e89c8e1b765bf1d8ee9cea7b48e437d6b",
+          "sha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
           "files": 4,
           "bytes": 104931,
-          "savedAt": "2026-10-12T22:05:37.565Z"
+          "savedAt": "2026-10-24T07:06:07.909Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:06:07.909Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-retail-trade-area-pack",
@@ -8695,18 +8507,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 6000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-retail-trade-area-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "401f9627745622ed1f8d2157b04ad2d8544eccac3f860af10c17e8327b76ed50",
+          "sha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
           "files": 4,
           "bytes": 105554,
-          "savedAt": "2026-10-12T22:05:37.845Z"
+          "savedAt": "2026-10-24T07:16:14.763Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:16:14.763Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-industry-economy-pack",
@@ -8715,18 +8529,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-industry-economy-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "48ef9e34eb5c4c1a2a9a3fa7956a48dfcd44a9d46c34cb61290bab0be30aef36",
+          "sha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
           "files": 4,
           "bytes": 102097,
-          "savedAt": "2026-10-12T22:05:37.905Z"
+          "savedAt": "2026-10-24T07:27:56.318Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:27:56.318Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-disaster-infrastructure-pack",
@@ -8735,18 +8551,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-disaster-infrastructure-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "a3a6a59943324eebe61913a38bfd987bef3bea8ddcec348a283adb836f496c16",
+          "sha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
           "files": 4,
           "bytes": 108964,
-          "savedAt": "2026-10-12T22:05:38.941Z"
+          "savedAt": "2026-10-24T07:47:00.285Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:47:00.285Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-map-chart-assets-pack",
@@ -8755,18 +8573,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 4000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-map-chart-assets-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "f411b3be03e783429b11ac81312f884fa39d5a81148757dac451e67a3d0c2137",
+          "sha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
           "files": 4,
           "bytes": 97349,
-          "savedAt": "2026-10-12T22:05:38.948Z"
+          "savedAt": "2026-10-24T15:17:44.214Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T15:17:44.214Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "prefecture-all-in-one-pack",
@@ -8775,18 +8595,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 9800,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-all-in-one-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "8b6f2894a9531830a78c0517511527c9dad92334c874f4828058d1a23700d7d5",
+          "sha256": "cc572e00e7b5595eafcbbd4fae63d081d3cc0431b26bf0e46075ddb3b26e26c7",
           "files": 4,
-          "bytes": 101637,
-          "savedAt": "2026-10-12T22:05:39.150Z"
+          "bytes": 217090,
+          "savedAt": "2026-10-24T16:17:16.324Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T16:17:16.324Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "prefecture-free-trial-pack",
@@ -8816,18 +8638,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-household-consumption-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "2a9bb774833746c8955e965f84cee213e9e4c64f1840376353cc8f966a74acbe",
+          "sha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
           "files": 4,
-          "bytes": 28547,
-          "savedAt": "2026-10-12T22:05:40.460Z"
+          "bytes": 241703,
+          "savedAt": "2026-10-24T16:25:50.138Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T16:25:50.138Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "b-ref-inc-a05",
@@ -11387,7 +11211,7 @@
       "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-annual-paid-leave-11-days-or-more-ratio",
       "body": {
         "store": "r2-public",
@@ -11401,7 +11225,9 @@
       },
       "stats47Targets": [
         "/ranking/annual-paid-leave-11-days-or-more-ratio"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nfb6a7a246b12",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "a-manufacturing-industry-annual-income",
@@ -11410,7 +11236,7 @@
       "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
       "magazine": "s47-labor",
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-manufacturing-industry-annual-income",
       "body": {
         "store": "r2-public",
@@ -11424,7 +11250,9 @@
       },
       "stats47Targets": [
         "/ranking/manufacturing-industry-annual-income"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/nb09980b2ef49",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-csv-mojibake",
@@ -11456,21 +11284,23 @@
       "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-mymaps-kml",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e7bde42641443d0988af2f73e9d909af1f1b7bdc73a82ea547daa383769b3a83",
-          "files": 5,
-          "bytes": 257952,
-          "savedAt": "2026-10-17T07:35:22.314Z"
+          "sha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8",
+          "files": 6,
+          "bytes": 260065,
+          "savedAt": "2026-10-24T04:51:02.813Z"
         },
-        "verifiedAt": "2026-10-17T07:35:22.314Z"
+        "verifiedAt": "2026-10-24T04:51:02.813Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n0c132ee7d825",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-mymaps-share",
@@ -11478,21 +11308,23 @@
       "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-mymaps-share",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e77b536d6778040837635b53fd85f5c6d2fa5ef804659cc6358602bcc093bbe4",
-          "files": 4,
-          "bytes": 37883,
-          "savedAt": "2026-10-17T23:22:23.576Z"
+          "sha256": "d5f4be44c5a421af228e08696cbd43b225a4fd6b9f74b904537ac3dff0174464",
+          "files": 5,
+          "bytes": 39814,
+          "savedAt": "2026-10-24T01:44:23.008Z"
         },
-        "verifiedAt": "2026-10-17T23:22:23.576Z"
+        "verifiedAt": "2026-10-24T01:44:23.008Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "h-howto-excel-filled-map",
@@ -11500,21 +11332,23 @@
       "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/h-howto-excel-filled-map",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "12d6b7b4d380fd537f00e262cc1252668074d48bd527fafcb9bd1da64a28398c",
-          "files": 4,
-          "bytes": 29572,
-          "savedAt": "2026-10-17T23:22:27.112Z"
+          "sha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
+          "files": 5,
+          "bytes": 31582,
+          "savedAt": "2026-10-24T04:59:41.767Z"
         },
-        "verifiedAt": "2026-10-17T23:22:27.112Z"
+        "verifiedAt": "2026-10-24T04:59:41.767Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "publishedAt": "2026-10-24"
     }
   ]
 }
