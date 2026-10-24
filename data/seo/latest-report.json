@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "period": {
-    "periodStart": "2026-10-14",
-    "periodEnd": "2026-10-20",
+    "periodStart": "2026-10-15",
+    "periodEnd": "2026-10-21",
     "windowDays": 7
   },
-  "inputHash": "405909cb338c6a053418f899955774013fc5054197998a71ddccdee88c765121",
+  "inputHash": "d91e649a0e18675fd267d387ac088b01a5146d909a1024f3b962c1dfec6a0dfa",
   "movements": [
     {
       "keyword": "徳島県",
@@ -27,15 +27,6 @@
       "change": 63
     },
     {
-      "keyword": "広島建設 シェア",
-      "targetPath": "/areas/34000/construction-industry",
-      "before": 23,
-      "after": 78,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -55
-    },
-    {
       "keyword": "高校教師年収",
       "targetPath": "/ranking/high-school-teacher-annual-income",
       "before": 10.666666666666666,
@@ -45,31 +36,40 @@
       "change": -52.333333333333336
     },
     {
-      "keyword": "小学校 児童",
-      "targetPath": "/ranking/elementary-school-children-count",
-      "before": 46,
-      "after": 10,
-      "beforeImpressions": 1,
+      "keyword": "離婚率 日本",
+      "targetPath": "/blog/divorces-per-total-population",
+      "before": 64,
+      "after": 24,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": 36
+      "change": 40
     },
     {
-      "keyword": "北海道 人口",
-      "targetPath": "/areas/01000/cities/01100/population",
-      "before": 49,
-      "after": 78.5,
+      "keyword": "牛乳 産地 ランキング",
+      "targetPath": "/ranking/raw-milk-production",
+      "before": 47,
+      "after": 8.666666666666668,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": -29.5
+      "impressions": 3,
+      "change": 38.33333333333333
+    },
+    {
+      "keyword": "日照時間 日本一",
+      "targetPath": "/ranking/annual-sunshine-duration",
+      "before": 37,
+      "after": 7,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 30
     },
     {
       "keyword": "餃子 日本一 消費量",
       "targetPath": "/blog/frozen-gyoza-spending-prefecture-gap",
-      "before": 9.5,
+      "before": 9,
       "after": 39,
-      "beforeImpressions": 2,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -29.5
+      "change": -30
     },
     {
       "keyword": "水道 統計",
@@ -81,22 +81,22 @@
       "change": -27
     },
     {
-      "keyword": "餃子 消費 量 ランキング",
-      "targetPath": "/ranking/gyoza-frozen-consumption-expenditure",
-      "before": 32.5,
-      "after": 7.25,
-      "beforeImpressions": 2,
-      "impressions": 4,
-      "change": 25.25
-    },
-    {
-      "keyword": "カツオ 一本釣り ランキング 2026",
-      "targetPath": "/blog/bonito-catch-prefecture",
-      "before": 35,
-      "after": 10,
+      "keyword": "コンビニ数ランキング",
+      "targetPath": "/ranking/convenience-store-count-commercial",
+      "before": 29,
+      "after": 3,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 25
+      "change": 26
+    },
+    {
+      "keyword": "米の消費量ランキング",
+      "targetPath": "/blog/rice-consumption-quantity-ranking",
+      "before": 2.333333333333333,
+      "after": 28,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": -25.666666666666668
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "介護サービス施設・事業所調査",
-    "targetPath": "/survey/care-service-facility-survey",
-    "rank": 9.547058823529412,
-    "impressions": 170,
-    "clicks": 0,
+    "keyword": "漁港が多い県",
+    "targetPath": "/ranking/fishing-port-count-by-type",
+    "rank": 5.946515397082658,
+    "impressions": 617,
+    "clicks": 2,
     "group": 5,
     "previousMethod": null,
-    "editableFile": "apps/web/src/features/survey/survey-editorial.ts"
+    "editableFile": "data/metrics/fishing-port-count-by-type.ts"
   },
   "observing": [
     {
