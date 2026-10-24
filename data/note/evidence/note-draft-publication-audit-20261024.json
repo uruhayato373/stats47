@@ -222,9 +222,15 @@
       "decision": "hold-cover-unapproved",
       "reasons": [
         "current cover has no approved revision",
-        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある"
+        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある",
+        "2025年就労条件総合調査の年休取得率表は企業規模・産業・性別で集計し、e-Statの集計地域区分は「該当なし」。原稿が求める47都道府県の順位はこの一次表から作れない。"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "sourceCheck": {
+        "url": "https://www.e-stat.go.jp/stat-search/files?layout=dataset&page=1&stat_infid=000040389671&toukei=00450099&tstat=000001014004",
+        "checkedAt": "2026-10-24",
+        "finding": "published table 8 has no prefecture aggregation; title and 10 placeholder cells cannot be grounded to this survey"
+      }
     },
     {
       "articleKey": "A-laborwage-wages-by-industry-prefecture",
@@ -1793,7 +1799,8 @@
       "decision": "hold-cover-unapproved",
       "reasons": [
         "current cover has no approved revision",
-        "Excel塗りつぶしマップの実機確認・結果画像が未確認"
+        "Excel塗りつぶしマップの実機確認・結果画像が未確認",
+        "このMacにはMicrosoft Excel.appがなく、塗りつぶしマップの実機確認は未実施。"
       ],
       "publishedUrl": null
     }
