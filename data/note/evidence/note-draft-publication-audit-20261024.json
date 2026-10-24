@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T07:06:21.317913Z",
+  "observedAt": "2026-10-24T07:16:28.620904Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 61,
-    "published-verified": 13,
+    "hold-product-sales": 60,
+    "published-verified": 14,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 415,
-    "draft": 85
+    "published": 416,
+    "draft": 84
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1838,17 +1838,43 @@
       "articleKey": "prefecture-retail-trade-area-pack",
       "vertical": "product-sales",
       "title": "出店候補の県を比べる 商業・小売69指標データ集",
-      "bodyManifestSha256": "401f9627745622ed1f8d2157b04ad2d8544eccac3f860af10c17e8327b76ed50",
+      "bodyManifestSha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00374",
-      "approvedCoverRevisionId": "a6f775e8abfcc0a3058a93456fb2271d8f730ae9f40f5784d2c26826c77bc242",
+      "approvedCoverRevisionId": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-08 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 6000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:16:28.620904Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 6000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327892069/rectangle_large_type_2_8a0b3ef48c7ce4ae9be9ceed6aed7fe5.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-08/v4-20261024-mac-r2/c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb.zip",
+          "sha256": "c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb",
+          "bytes": 9903237,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-industry-economy-pack",

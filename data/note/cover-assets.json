@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T07:05:52.878Z",
+  "updatedAt": "2026-10-24T07:16:03.983Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -44246,7 +44246,7 @@
     },
     {
       "articleKey": "prefecture-retail-trade-area-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n973c3f8478f5",
       "revisions": [
         {
           "sha256": "640a8017837379b2a9ff3f633815ef9942cce7c51ae4a28c8693db9264889ed1",
@@ -44325,17 +44325,97 @@
               "bytes": 1210
             }
           }
+        },
+        {
+          "sha256": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-retail-trade-area-pack/revisions/9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8.png"
+          },
+          "bytes": 1999915,
+          "id": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-278fe826f156",
+          "createdAt": "2026-10-24T07:08:20.185Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "b35d7852cce34102ee33044825aeca3c0165f85c6854b84c7da26b91dc51c55a"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。無地の店舗と資料は本文の出店比較に整合し、人物・地図・実在UIなし。",
+            "reviewedAt": "2026-10-24T07:08:30.866Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "b35d7852cce34102ee33044825aeca3c0165f85c6854b84c7da26b91dc51c55a",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-retail-trade-area-pack/inputs/b35d7852cce34102ee33044825aeca3c0165f85c6854b84c7da26b91dc51c55a.json"
+              },
+              "bytes": 7028
+            },
+            "production": {
+              "id": "NCI-00374",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "278fe826f1564c2405366dfee707baf5073667f62638c39395b49e9b5eee7b37"
+            }
+          }
+        },
+        {
+          "sha256": "ad5050518bf6dc5a8831ac07fd3c58fec640dd218bb70e59806d2f26c53f43f8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-retail-trade-area-pack/revisions/ad5050518bf6dc5a8831ac07fd3c58fec640dd218bb70e59806d2f26c53f43f8.png"
+          },
+          "bytes": 428491,
+          "id": "ad5050518bf6dc5a8831ac07fd3c58fec640dd218bb70e59806d2f26c53f43f8",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T07:15:58.213Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327892069/rectangle_large_type_2_8a0b3ef48c7ce4ae9be9ceed6aed7fe5.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "ad5050518bf6dc5a8831ac07fd3c58fec640dd218bb70e59806d2f26c53f43f8"
+          }
         }
       ],
-      "candidateRevisionId": "a6f775e8abfcc0a3058a93456fb2271d8f730ae9f40f5784d2c26826c77bc242",
-      "approvedRevisionId": "a6f775e8abfcc0a3058a93456fb2271d8f730ae9f40f5784d2c26826c77bc242",
-      "published": null,
+      "candidateRevisionId": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
+      "approvedRevisionId": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327892069/rectangle_large_type_2_8a0b3ef48c7ce4ae9be9ceed6aed7fe5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T07:15:58.213Z",
+        "revisionId": "ad5050518bf6dc5a8831ac07fd3c58fec640dd218bb70e59806d2f26c53f43f8"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00374",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "商業・小売データ集",
+          "subline": "47都道府県・69指標",
+          "subject": "出店候補県を比較する用途を、無地の店舗外観、資料ファイル、クリップボードと鉛筆で表す。店舗に看板の文字や架空の数値、グラフ、地図、ブランドを描かない。人物なし。",
+          "evidence": "P-08 v4-20261024-mac-r2の商業・小売データ集は47都道府県69指標。実在する7ファイルのZIPとprivate R2読み戻しSHAを確認。PowerPointとExcelの実機確認は未了なので実在画面を描かない。"
+        }
       }
     },
     {

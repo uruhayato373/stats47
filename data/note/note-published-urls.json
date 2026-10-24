@@ -3367,6 +3367,18 @@
       "status": "r2_ready",
       "price_jpy": 4000
     },
+    "prefecture-retail-trade-area-pack": {
+      "vertical": "product-sales",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "url": "https://note.com/stats47/n/n973c3f8478f5",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-retail-trade-area-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 6000
+    },
     "prefecture-tourism-lodging-pack": {
       "vertical": "product-sales",
       "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",

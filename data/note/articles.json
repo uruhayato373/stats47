@@ -8668,18 +8668,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 6000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-retail-trade-area-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "401f9627745622ed1f8d2157b04ad2d8544eccac3f860af10c17e8327b76ed50",
+          "sha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
           "files": 4,
           "bytes": 105554,
-          "savedAt": "2026-10-12T22:05:37.845Z"
+          "savedAt": "2026-10-24T07:16:14.763Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:16:14.763Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-industry-economy-pack",
