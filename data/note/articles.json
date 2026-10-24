@@ -99,9 +99,9 @@
           "sha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
           "files": 4,
           "bytes": 14452,
-          "savedAt": "2026-10-24T21:20:35.587Z"
+          "savedAt": "2026-10-24T22:05:26.150Z"
         },
-        "verifiedAt": "2026-10-24T21:20:35.587Z"
+        "verifiedAt": "2026-10-24T22:05:26.150Z"
       },
       "noteUrl": "https://note.com/stats47/n/n346d566772a1",
       "publishedAt": "2026-10-25"
@@ -263,12 +263,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 1980,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/d-geo-poi-license-practice",
       "body": {
         "store": "r2-private",
-        "manifest": null
-      }
+        "manifest": {
+          "sha256": "53682a2f69fecb2bac59eab30d67ee868f5b2e39a29cee1c60cb9d2bfdf40f2e",
+          "files": 4,
+          "bytes": 16448,
+          "savedAt": "2026-10-24T22:18:27.138Z"
+        },
+        "verifiedAt": "2026-10-24T22:18:27.138Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n502188b7d2c9",
+      "publishedAt": "2026-10-25"
     },
     {
       "key": "d-geo-natural-language-region-filter",

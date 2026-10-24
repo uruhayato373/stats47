@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T21:21:34.570Z",
+  "updatedAt": "2026-10-24T22:19:25.334Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29571,17 +29571,98 @@
     },
     {
       "articleKey": "d-geo-poi-license-practice",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n502188b7d2c9",
+      "revisions": [
+        {
+          "sha256": "a074341db38a2f1e4260e6db229bfd3802e1ce7444c6309d15909f49c38f1c67",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-poi-license-practice/revisions/a074341db38a2f1e4260e6db229bfd3802e1ce7444c6309d15909f49c38f1c67.png"
+          },
+          "bytes": 1938877,
+          "id": "a074341db38a2f1e4260e6db229bfd3802e1ce7444c6309d15909f49c38f1c67",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-554460ff26d1",
+          "createdAt": "2026-10-24T22:09:56.066Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "3153186c399d621c61f11dd5cc443827a75bcf8bed37bcba8a23721fb7675001"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxを目視確認。全指定文言に誤字・欠字・追加文字・切れなし。地図状の紙は編集で除去し、抽象ピン3つと無地カード、チェックリストのみ。本文のキット内容と整合。採用。",
+            "reviewedAt": "2026-10-24T22:11:02.698Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "3153186c399d621c61f11dd5cc443827a75bcf8bed37bcba8a23721fb7675001",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-poi-license-practice/inputs/3153186c399d621c61f11dd5cc443827a75bcf8bed37bcba8a23721fb7675001.json"
+              },
+              "bytes": 8377
+            },
+            "production": {
+              "id": "NCI-00249",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "554460ff26d1e12569f60413549da1ac2426407315dc25f9978d0d3521514353"
+            }
+          }
+        },
+        {
+          "sha256": "20589831782c1815a6dc0e26d6a1463c00f5708c1a20610d6c40e0a78681acae",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-poi-license-practice/revisions/20589831782c1815a6dc0e26d6a1463c00f5708c1a20610d6c40e0a78681acae.png"
+          },
+          "bytes": 436306,
+          "id": "20589831782c1815a6dc0e26d6a1463c00f5708c1a20610d6c40e0a78681acae",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T22:19:21.297Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/328149822/rectangle_large_type_2_79a6e804e03bbc726a217a2587b910e2.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "20589831782c1815a6dc0e26d6a1463c00f5708c1a20610d6c40e0a78681acae"
+          }
+        }
+      ],
+      "candidateRevisionId": "a074341db38a2f1e4260e6db229bfd3802e1ce7444c6309d15909f49c38f1c67",
+      "approvedRevisionId": "a074341db38a2f1e4260e6db229bfd3802e1ce7444c6309d15909f49c38f1c67",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/328149822/rectangle_large_type_2_79a6e804e03bbc726a217a2587b910e2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T22:19:21.297Z",
+        "revisionId": "20589831782c1815a6dc0e26d6a1463c00f5708c1a20610d6c40e0a78681acae"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00249",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "POIデータの\nライセンスと実務",
+          "subline": "出典・用途・配布を点検",
+          "subject": "抽象的な地点を示す丸いピン3つ、利用条件を確認する紙のチェックリスト、データの束を作業机に配置。実在の地図・施設名・地理データ・企業ロゴ・許諾済みを示す印章は描かない。青緑と生成りの配色。",
+          "evidence": "本文はOSM Foundation・国土地理院などの一次資料を確認して、背景地図とPOIの条件を分ける。添付は空欄の台帳・判断記録・出典表示テンプレートと記入漏れ検査スクリプトで、実在POIや許諾証を含まない。利用可否は自動判定しない。"
+        }
       }
     },
     {

@@ -2611,6 +2611,18 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-geo-poi-license-practice": {
+      "vertical": "stats47-note",
+      "title": "POIデータのライセンスと実務",
+      "url": "https://note.com/stats47/n/n502188b7d2c9",
+      "is_paid": true,
+      "published_at": "2026-10-25",
+      "r2_path": "note/stats47-note/d-geo-poi-license-practice",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
     "d-geo-region-code-checklist": {
       "vertical": "stats47-note",
       "title": "地域コード結合の完全チェックリスト",
