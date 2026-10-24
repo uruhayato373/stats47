@@ -652,26 +652,6 @@
       ]
     },
     {
-      "key": "a-population-density-per-km2-total-area",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
-      "magazine": "s47-population",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/a-population-density-per-km2-total-area",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
-          "files": 10,
-          "bytes": 472566,
-          "savedAt": "2026-10-12T22:05:59.825Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
       "key": "a-volunteer-activity-annual-participation-rate-10plus",
       "vertical": "stats47-note",
       "series": "A",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T07:59:36.542Z",
+  "updatedAt": "2026-10-24T08:58:03.512Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -18150,21 +18150,6 @@
           "subject": "水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に文字やロゴのない旅客機を1機だけ大きく描き、空と雲を背景にする。左側に問いを大きく2行、下に補足を太い帯で2行。2001年が現在の順位に見えないよう対象年を明瞭にする。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・国旗・空港名・航空会社ロゴ・架空のグラフ・表彰台・メダル・指定外の文字と数字を描かない。",
           "evidence": "https://storage.stats47.jp/note/stats47-note/a-overseas-travel-annual-participation-rate-15plus/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」2001年、過去1年間に海外旅行をした15歳以上の人の割合。東京都18.2％で1位、秋田県5.0％で47位。現在のランキングや空港・所得による原因断定は掲載しない。"
         }
-      }
-    },
-    {
-      "articleKey": "a-population-density-per-km2-total-area",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00119",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
       }
     },
     {

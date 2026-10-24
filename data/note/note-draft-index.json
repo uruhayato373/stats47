@@ -60,11 +60,6 @@
       "r2_path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
       "status": "draft"
     },
-    "a-population-density-per-km2-total-area": {
-      "vertical": "stats47-note",
-      "r2_path": "note/stats47-note/a-population-density-per-km2-total-area",
-      "status": "draft"
-    },
     "d-geo-analysis-template-compendium": {
       "vertical": "stats47-note",
       "r2_path": null,

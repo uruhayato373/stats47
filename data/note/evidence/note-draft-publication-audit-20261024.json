@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T08:07:12.995443Z",
+  "observedAt": "2026-10-24T08:57:57.169Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -12,14 +12,14 @@
   "decisionCounts": {
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
-    "hold-duplicate-title": 11,
+    "hold-duplicate-title": 10,
     "hold-product-sales": 58,
     "published-verified": 16,
-    "merged-existing": 2
+    "merged-existing": 3
   },
   "currentCatalog": {
     "published": 418,
-    "draft": 82
+    "draft": 81
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -343,13 +343,12 @@
           "noteUrl": "https://note.com/stats47/n/nd5f8b5072cdb"
         }
       ],
-      "decision": "hold-duplicate-title",
+      "decision": "merged-existing",
       "reasons": [
-        "published article with identical title; live note body has no inline images although text refers to a map",
-        "draft includes 3 chart PNGs; boxplot has clipped and overlapping labels and cannot be uploaded as-is",
-        "reconcile body/figures in existing note before retiring the draft; do not publish duplicate"
+        "既存公開記事と統計値・本文段落が一致。重複投稿せず既存記事へ統合。",
+        "公開本文に図が0枚。地図・上位図の追加とクリップした箱ひげ図の修正は公開後の品質課題。"
       ],
-      "publishedUrl": null,
+      "publishedUrl": "https://note.com/stats47/n/nd5f8b5072cdb",
       "duplicateTextComparison": {
         "publishedKey": "recovered-nd5f8b5072cdb",
         "normalizedTwelveCharacterOverlap": 0.962,
@@ -357,6 +356,21 @@
         "scope": "text only; article claims, figures, paid boundary and live version still require review",
         "liveCheckedAt": "2026-10-24T04:37:27.067Z",
         "liveInlineImages": 0
+      },
+      "mergedIntoKey": "recovered-nd5f8b5072cdb",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T08:57:57.169Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 0,
+        "liveBodySha256": "672e03e55383c0013d97e9adb1f5ffdd9dd36a0ae39ab5a95d819d523e940362",
+        "archivedDraftR2Path": "note/stats47-note/a-population-density-per-km2-total-area",
+        "archivedDraftManifestSha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
+        "publishedManifestSha256": "16d9431c7d0ff3a95577c6af77d34b547594ab0268f651eda9385d90f82938af",
+        "normalizedProseSimilarity": 0.997826,
+        "method": "R2原稿の前付・画像行・リンクカード・空白を除去し、本文文字列をSequenceMatcherで比較。差分は末尾のMarkdown装飾のみ。",
+        "figureFollowUp": "既存noteの地図・上位図は未掲載。箱ひげ図はラベルが欠けているため修正後に既存記事へ追加する。"
       }
     },
     {
