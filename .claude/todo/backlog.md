@@ -326,6 +326,32 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CRITIC-PATTERN-YEAR] critic の指摘「年の食い違い」が 5 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「年の食い違い」(`year`) の BLOCK/MAJOR を 5 本の記事で 5 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-10-07 sixth-industry-direct-sales: seoTitle「農業産出額1位は北海道1兆4,817億・最下位東京226億｜農家総所得は北海道8位、大阪1位 2024年」は、末尾の「2024年」が農家総所得にもかかる読み方になります。
+  - 2026-10-23 manufacturing-aichi-dominance: 調査の切り替わりの注意が、問題の年とずれている。
+  - 2026-10-23 livable-prefecture-composite-ranking: 所得は 2020 年度を使っていますが、R2 `per-capita-prefectural-income-h27` の最新は 2021 年度です (東京都 5,761 千円、愛知県 3,597 千円)。
+  - 2026-10-23 alcohol-prefecture-map: 「何を飲んでいるのか」の節で、年のそろえ方が読者に伝わりにくい。
+  - 2026-10-23 automotive-industry-transformation-map: 調査切り替えの注意が、位置と影響範囲の両面で足りない。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `year` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+
+### [CRITIC-PATTERN-SOURCE] critic の指摘「出典・統計表」が 6 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「出典・統計表」(`source`) の BLOCK/MAJOR を 6 本の記事で 7 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-10-08 bonito-catch-prefecture: data/bonito-two-poles.source.json の来歴が実態と合わない。
+  - 2026-10-08 school-teacher-annual-income: 警告 callout の「集計対象や方法が完全には統一されておらず、政令指定都市の教員を含むか否かで数値が変わる場合があります」は、この統計の注意点として根拠が無い。
+  - 2026-10-23 manufacturing-aichi-dominance: 産業構成比の節を削除した穴が、「地方の製造業は今──産業構造の変化」節に残っている。
+  - 2026-10-23 manufacturing-aichi-dominance: 工業地帯の範囲の出典(確認事項 d)は、京浜に千葉を含むか否かの根拠だけが十分である。
+  - 2026-10-23 livable-prefecture-composite-ranking: 数値の根拠が読者に追える形になっていません。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `source` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+
 ### [KABEUCHI-AGENT-01] サイトと収益化をエージェント相手に「公開壁打ち」できる型を作り、1回目をやる
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:戦略]
 
