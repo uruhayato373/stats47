@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T12:33:45.504Z",
+  "updatedAt": "2026-10-24T13:04:06.217Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -29359,16 +29359,67 @@
     {
       "articleKey": "d-geo-region-code-checklist",
       "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
+      "revisions": [
+        {
+          "sha256": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-region-code-checklist/revisions/9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6.png"
+          },
+          "bytes": 1760163,
+          "id": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-75c8c0c9850f",
+          "createdAt": "2026-10-24T13:02:07.790Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "c9b79eb137e26e8a2b4e7e154e215edd8dc57a5b611c07cad5e140daedf9c203"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸1734×907と幅320pxを確認。『使えるデータと成果物』『地域コード結合』『公開前の確認』『県・市区町村の桁と基準日を点検』『stats47』に誤字・欠字・切れなし。人物や架空の地図・数値なし。",
+            "reviewedAt": "2026-10-24T13:03:20.263Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "c9b79eb137e26e8a2b4e7e154e215edd8dc57a5b611c07cad5e140daedf9c203",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/d-geo-region-code-checklist/inputs/c9b79eb137e26e8a2b4e7e154e215edd8dc57a5b611c07cad5e140daedf9c203.json"
+              },
+              "bytes": 7996
+            },
+            "production": {
+              "id": "NCI-00251",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "75c8c0c9850fb969d4110df5a03814e58db4d43cdf9f1ee401c56754c18cbf01"
+            }
+          }
+        }
+      ],
+      "candidateRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
+      "approvedRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
       "published": null,
       "missingVersions": [],
       "production": {
         "id": "NCI-00251",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "地域コード結合\n公開前の確認",
+          "subline": "県・市区町村の桁と基準日を点検",
+          "subject": "机上に置かれたCSVの表と五桁コードのチェック欄を抽象的な紙資料として表現。実在しない地図・数値のグラフは描かない。人物・手は描かない。",
+          "evidence": "原稿「地域コード結合の完全チェックリスト」の無料部と有料部。先頭0、5桁、重複、県と市区町村の階層、基準日、有効期間の点検。付属Python検査キットは5件の単体テストを通過。"
+        }
       }
     },
     {

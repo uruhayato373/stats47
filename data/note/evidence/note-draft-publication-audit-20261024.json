@@ -10,10 +10,10 @@
     "unwritten": 11
   },
   "decisionCounts": {
-    "hold-body-unwritten": 11,
+    "hold-body-unwritten": 10,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 0,
-    "hold-product-sales": 58,
+    "hold-product-sales": 59,
     "published-verified": 16,
     "merged-existing": 13
   },
@@ -50,16 +50,25 @@
       "articleKey": "d-geo-region-code-checklist",
       "vertical": "stats47-note",
       "title": "地域コード結合の完全チェックリスト",
-      "bodyManifestSha256": null,
-      "bodyVerifiedDeep": false,
+      "bodyManifestSha256": "8123101fef6f01fbaf3cd75e8fee3c022f6e4aa56dc25ce449606ddaf54082db",
+      "bodyVerifiedDeep": true,
       "productionId": "NCI-00251",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
       "publishedTitleMatches": [],
-      "decision": "hold-body-unwritten",
+      "decision": "hold-product-sales",
       "reasons": [
-        "body manifest absent"
+        "原稿・検査キットZIP・カバーを作成しprivate R2でSHA照合済み",
+        "note.comの当日添付上限がP-11で確認されているため、同日中の新規添付投稿は実行していない",
+        "次回はZIPを有料境界後に添付して公開配信を照合する"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "productEvidence": {
+        "archiveSha256": "b71c81746bd29bc611ed866d2e65e0691508d229c4fd6d2bde5609ea089a4a96",
+        "archivePath": ".local/geo-products/d-geo-region-code-checklist/d-geo-region-code-checklist.zip",
+        "privateR2Path": "note/stats47-note/d-geo-region-code-checklist/attachments/d-geo-region-code-checklist.zip",
+        "unitTests": "5 passed",
+        "preparedAt": "2026-10-24"
+      }
     },
     {
       "articleKey": "d-geo-ksj-qgis-guide",

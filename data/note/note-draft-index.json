@@ -57,7 +57,7 @@
     },
     "d-geo-region-code-checklist": {
       "vertical": "stats47-note",
-      "r2_path": null,
+      "r2_path": "note/stats47-note/d-geo-region-code-checklist",
       "status": "draft"
     },
     "d-geo-trade-area-analysis": {
