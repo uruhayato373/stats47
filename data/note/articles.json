@@ -743,24 +743,26 @@
       "key": "a-volunteer-activity-annual-participation-rate-15plus",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人の割合が高い県は？ 1位は島根県｜都道府県ランキング",
       "magazine": null,
       "isPaid": false,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "e6f5ef23b58b38e1f529fd9ad9d565951e137e688e97802aca70738d8d7c828f",
-          "files": 11,
-          "bytes": 435427,
-          "savedAt": "2026-10-12T22:06:02.239Z"
+          "sha256": "96876c8bc2d6613cd92230a2f67eb851e9738477f3549cdb14f3b51382abaf2a",
+          "files": 12,
+          "bytes": 474888,
+          "savedAt": "2026-10-24T01:44:06.754Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-10-24T01:44:06.754Z"
       },
       "stats47Targets": [
         "/ranking/volunteer-activity-annual-participation-rate-15plus"
-      ]
+      ],
+      "noteUrl": "https://note.com/stats47/n/n5bf048142f66",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "b-expenditure-structure",
@@ -11487,12 +11489,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "788743d7a71f36621f1cf3d88b6e685f99fb8c8a45e2a561d289956bf02cd23d",
+          "sha256": "d5f4be44c5a421af228e08696cbd43b225a4fd6b9f74b904537ac3dff0174464",
           "files": 5,
-          "bytes": 39731,
-          "savedAt": "2026-10-24T01:20:50.766Z"
+          "bytes": 39814,
+          "savedAt": "2026-10-24T01:44:23.008Z"
         },
-        "verifiedAt": "2026-10-24T01:20:50.766Z"
+        "verifiedAt": "2026-10-24T01:44:23.008Z"
       },
       "stats47Targets": [
         "/ranking/total-population"

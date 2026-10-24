@@ -1307,6 +1307,17 @@
       "r2_access": "public",
       "status": "r2_ready"
     },
+    "a-volunteer-activity-annual-participation-rate-15plus": {
+      "vertical": "stats47-note",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人の割合が高い県は？ 1位は島根県｜都道府県ランキング",
+      "url": "https://note.com/stats47/n/n5bf048142f66",
+      "is_paid": false,
+      "published_at": "2026-10-24",
+      "r2_path": "note/stats47-note/a-volunteer-activity-annual-participation-rate-15plus",
+      "r2_body": true,
+      "r2_access": "public",
+      "status": "r2_ready"
+    },
     "b-expenditure-structure": {
       "vertical": "stats47-note",
       "title": "あなたの県は教育重視？産業重視？都道府県の「歳出構造」で見えるお金の使い方",

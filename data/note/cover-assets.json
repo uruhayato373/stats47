@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T01:21:42.274Z",
+  "updatedAt": "2026-10-24T01:43:35.874Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -19618,17 +19618,98 @@
     },
     {
       "articleKey": "a-volunteer-activity-annual-participation-rate-15plus",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
+      "noteUrl": "https://note.com/stats47/n/n5bf048142f66",
+      "revisions": [
+        {
+          "sha256": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-15plus/revisions/0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d.png"
+          },
+          "bytes": 1789911,
+          "id": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+          "kind": "candidate",
+          "version": "pop-NCP-003-v3-cb416a932e11",
+          "createdAt": "2026-10-24T01:30:50.971Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "345a0dc0bd4ef6c08855485abe1f3d355ee08d5ebe79cbab1b400d4e0c37e9fa"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸・幅320pxで全5文言と島根県26.1％を確認。補足2行まで判読可能。誤字・欠字・文字切れなし。人物・手・地図・表彰台なし。本文の15歳以上の行動者率と一致。",
+            "reviewedAt": "2026-10-24T01:31:52.371Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "345a0dc0bd4ef6c08855485abe1f3d355ee08d5ebe79cbab1b400d4e0c37e9fa",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/a-volunteer-activity-annual-participation-rate-15plus/inputs/345a0dc0bd4ef6c08855485abe1f3d355ee08d5ebe79cbab1b400d4e0c37e9fa.json"
+              },
+              "bytes": 8406
+            },
+            "production": {
+              "id": "NCI-00128",
+              "policyId": "NCP-003",
+              "policyVersion": 3,
+              "planSha256": "cb416a932e113c3f39b261692aac04ef12d71db81d98ccb2a66f1e1e66f841bb"
+            }
+          }
+        },
+        {
+          "sha256": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-15plus/revisions/40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1.png"
+          },
+          "bytes": 487957,
+          "id": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T01:43:32.883Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327785564/rectangle_large_type_2_6848aeb153428f250813a7e62192e4c9.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1"
+          }
+        }
+      ],
+      "candidateRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+      "approvedRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327785564/rectangle_large_type_2_6848aeb153428f250813a7e62192e4c9.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T01:43:32.883Z",
+        "revisionId": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00128",
         "policyId": "NCP-003",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "ボランティア活動はどの県で多い？",
+          "subline": "2021年・15歳以上の行動者率\n1位 島根県 26.1％",
+          "subject": "ボランティア活動を示す抽象的なハート型の紙片と手伝い・清掃を連想させる小さな道具の紙の立体コラージュ。水色と黄色を基調に、活動の割合を問う明るい構図。県境・日本地図・人物・手・顔・表彰台・メダルは描かない。",
+          "evidence": "本文およびchart-data.jsonの2021年の15歳以上年間行動者率。島根県は26.1％で47都道府県の1位。出典は総務省令和3年社会生活基本調査・生活行動編（地域）ボランティア活動。人数ではなく割合。"
+        }
       }
     },
     {

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T01:21:54.725782+00:00",
+  "observedAt": "2026-10-24T01:44:40.829Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -11,14 +11,14 @@
   },
   "decisionCounts": {
     "hold-body-unwritten": 11,
-    "hold-cover-unapproved": 5,
+    "hold-cover-unapproved": 4,
     "hold-duplicate-title": 13,
     "hold-product-sales": 68,
-    "published-verified": 3
+    "published-verified": 4
   },
   "currentCatalog": {
-    "published": 405,
-    "draft": 97
+    "published": 406,
+    "draft": 96
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -260,7 +260,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n91e82ac3b13c",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "a-overseas-travel-annual-participation-rate-10plus",
@@ -280,7 +286,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n827191af8c1c",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "a-population-density-per-km2-total-area",
@@ -300,23 +312,38 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-nd5f8b5072cdb",
+        "normalizedTwelveCharacterOverlap": 0.962,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "a-volunteer-activity-annual-participation-rate-15plus",
       "vertical": "stats47-note",
       "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
-      "bodyManifestSha256": "e6f5ef23b58b38e1f529fd9ad9d565951e137e688e97802aca70738d8d7c828f",
+      "bodyManifestSha256": "96876c8bc2d6613cd92230a2f67eb851e9738477f3549cdb14f3b51382abaf2a",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00128",
-      "approvedCoverRevisionId": null,
+      "approvedCoverRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
       "publishedTitleMatches": [],
-      "decision": "hold-cover-unapproved",
-      "reasons": [
-        "current cover has no approved revision",
-        "本文の因果・背景推測に根拠が不足。原稿の意味レビューと修正が必要"
-      ],
-      "publishedUrl": null
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/n5bf048142f66",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 3,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      }
     },
     {
       "articleKey": "d1-kakei-prefecture-consumption",
@@ -336,7 +363,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n68f5e09c8d62",
+        "normalizedTwelveCharacterOverlap": 0.585,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "22-monthly-routine-skills",
@@ -356,7 +389,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n2207f3039fd3",
+        "normalizedTwelveCharacterOverlap": 0.273,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "23-mcp-internal-system",
@@ -376,7 +415,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-nbead1fe772c7",
+        "normalizedTwelveCharacterOverlap": 0.369,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "24-subagents-parallel-research",
@@ -396,7 +441,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n68eafab07946",
+        "normalizedTwelveCharacterOverlap": 0.245,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "25-excel-vba-to-python",
@@ -416,7 +467,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-nfd3ab8213e1f",
+        "normalizedTwelveCharacterOverlap": 0.47,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "26-boss-approval-deck",
@@ -436,7 +493,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n2c2df066e865",
+        "normalizedTwelveCharacterOverlap": 0.286,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "27-internal-study-30min",
@@ -456,7 +519,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n9f666946d105",
+        "normalizedTwelveCharacterOverlap": 0.158,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "28-ai-skeptic-qa",
@@ -476,7 +545,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-ncab0d7b04228",
+        "normalizedTwelveCharacterOverlap": 0.214,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "29-evaluated-without-side-job",
@@ -496,7 +571,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-nc18fa33ec65e",
+        "normalizedTwelveCharacterOverlap": 0.227,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "30-post-retirement-career",
@@ -516,7 +597,13 @@
       "reasons": [
         "published article with identical title; body/version reconciliation required"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n8558c1a6503a",
+        "normalizedTwelveCharacterOverlap": 0.181,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      }
     },
     {
       "articleKey": "ppt-japan-map-assets",
@@ -1674,7 +1761,7 @@
       "articleKey": "h-howto-mymaps-share",
       "vertical": "stats47-note",
       "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
-      "bodyManifestSha256": "788743d7a71f36621f1cf3d88b6e685f99fb8c8a45e2a561d289956bf02cd23d",
+      "bodyManifestSha256": "d5f4be44c5a421af228e08696cbd43b225a4fd6b9f74b904537ac3dff0174464",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00505",
       "approvedCoverRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
