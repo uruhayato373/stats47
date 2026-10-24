@@ -36,7 +36,7 @@ export const ContentKdpListing = z
   .passthrough();
 
 export const ContentKdpListingsState = z.object({
-  listings: z.record(ContentKdpListing),
+  listings: z.record(z.string(), ContentKdpListing),
 });
 
 export const ContentKindleBuildState = z.object({
@@ -58,6 +58,7 @@ export const ContentKindleArchiveState = z.object({
   prefix: z.string(),
   generatedAt: z.string(),
   books: z.record(
+    z.string(),
     z
       .object({
         id: z.string(),
@@ -90,6 +91,7 @@ export const ContentKindleArchiveState = z.object({
 
 export const ContentNoteDraftIndex = z.object({
   drafts: z.record(
+    z.string(),
     z
       .object({
         status: z.string(),
