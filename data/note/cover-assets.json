@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T07:16:03.983Z",
+  "updatedAt": "2026-10-24T07:27:39.408Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -43614,7 +43614,7 @@
     },
     {
       "articleKey": "prefecture-industry-economy-pack",
-      "noteUrl": null,
+      "noteUrl": "https://note.com/stats47/n/n2ced199ed715",
       "revisions": [
         {
           "sha256": "ea7710f96203f05fa7f8d89893c952f485dfb129b31bf4a1343fe225a0481571",
@@ -43693,17 +43693,97 @@
               "bytes": 1188
             }
           }
+        },
+        {
+          "sha256": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-industry-economy-pack/revisions/dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63.png"
+          },
+          "bytes": 1915306,
+          "id": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
+          "kind": "candidate",
+          "version": "pop-NCP-006-v3-fe9b048a43d3",
+          "createdAt": "2026-10-24T07:18:42.198Z",
+          "width": 1280,
+          "height": 670,
+          "quality": {
+            "textBounds": "pass",
+            "textOverlap": "pass",
+            "evidenceSha256": "9a8ddbe8267d571fcaafe414109005a7cb14166a237ce661403518b0005071e3"
+          },
+          "review": {
+            "status": "pass",
+            "reason": "原寸と幅320pxで4文言の誤字・切れ・重なりなし。工場・田畑・資料は本文の用途に整合し、人物・地図・実在UIなし。",
+            "reviewedAt": "2026-10-24T07:18:55.660Z"
+          },
+          "provenance": {
+            "renderer": "note-imagegen-cover-v1",
+            "sourceUrl": null,
+            "sourceSha256": null,
+            "input": {
+              "sha256": "9a8ddbe8267d571fcaafe414109005a7cb14166a237ce661403518b0005071e3",
+              "storage": {
+                "provider": "r2-private",
+                "bucket": "stats47-private",
+                "key": "note/covers/prefecture-industry-economy-pack/inputs/9a8ddbe8267d571fcaafe414109005a7cb14166a237ce661403518b0005071e3.json"
+              },
+              "bytes": 7065
+            },
+            "production": {
+              "id": "NCI-00369",
+              "policyId": "NCP-006",
+              "policyVersion": 3,
+              "planSha256": "fe9b048a43d3132ca1421776ef744cb4e092c7e25136342ac665ef6202687e13"
+            }
+          }
+        },
+        {
+          "sha256": "dd790a9f79fb07fecf49807b9a7cec5516dd717028692207ab1b9ce026c47f99",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-industry-economy-pack/revisions/dd790a9f79fb07fecf49807b9a7cec5516dd717028692207ab1b9ce026c47f99.png"
+          },
+          "bytes": 436248,
+          "id": "dd790a9f79fb07fecf49807b9a7cec5516dd717028692207ab1b9ce026c47f99",
+          "kind": "published-original",
+          "version": "public-cover-archive",
+          "createdAt": "2026-10-24T07:27:36.306Z",
+          "width": 1280,
+          "height": 670,
+          "review": {
+            "status": "not-required",
+            "reason": "Existing public image preserved",
+            "reviewedAt": null
+          },
+          "provenance": {
+            "renderer": null,
+            "sourceUrl": "https://assets.st-note.com/production/uploads/images/327896437/rectangle_large_type_2_98a3986f90264806883eb5d2b6ade8b4.png?fit=bounds&quality=85&width=1280",
+            "sourceSha256": "dd790a9f79fb07fecf49807b9a7cec5516dd717028692207ab1b9ce026c47f99"
+          }
         }
       ],
-      "candidateRevisionId": "a7521a81fd0e741d66fc059e87c58b90fcac2841cc30035437a71743b31bae31",
-      "approvedRevisionId": "a7521a81fd0e741d66fc059e87c58b90fcac2841cc30035437a71743b31bae31",
-      "published": null,
+      "candidateRevisionId": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
+      "approvedRevisionId": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
+      "published": {
+        "status": "configured",
+        "url": "https://assets.st-note.com/production/uploads/images/327896437/rectangle_large_type_2_98a3986f90264806883eb5d2b6ade8b4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-24T07:27:36.306Z",
+        "revisionId": "dd790a9f79fb07fecf49807b9a7cec5516dd717028692207ab1b9ce026c47f99"
+      },
       "missingVersions": [],
       "production": {
         "id": "NCI-00369",
         "policyId": "NCP-006",
         "policyVersion": 3,
-        "brief": null
+        "brief": {
+          "headline": "産業・農業・家計データ集",
+          "subline": "47都道府県・132指標",
+          "subject": "地域の産業・農業・家計を調べる用途を、無地の工場建物、農地を表す田畑、資料ファイル、鉛筆で象徴的に示す。実在企業、数値、グラフ、地図、人物、商品完成画面を描かない。",
+          "evidence": "P-09 v4-20261024-mac-r2は47都道府県132指標のデータ集。7ファイルのZIPとprivate R2読み戻しSHAを確認。databook.pdfは実ファイルで286ページと照合。Office実機は未了。"
+        }
       }
     },
     {

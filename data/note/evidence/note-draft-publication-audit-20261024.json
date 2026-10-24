@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "note-draft-publication-audit",
   "account": "stats47",
-  "observedAt": "2026-10-24T07:16:28.620904Z",
+  "observedAt": "2026-10-24T07:28:10.860780Z",
   "startingDrafts": 100,
   "bodyStorage": {
     "deepVerified": 89,
@@ -13,13 +13,13 @@
     "hold-body-unwritten": 11,
     "hold-cover-unapproved": 2,
     "hold-duplicate-title": 11,
-    "hold-product-sales": 60,
-    "published-verified": 14,
+    "hold-product-sales": 59,
+    "published-verified": 15,
     "merged-existing": 2
   },
   "currentCatalog": {
-    "published": 416,
-    "draft": 84
+    "published": 417,
+    "draft": 83
   },
   "noteComDrafts": {
     "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
@@ -1880,17 +1880,43 @@
       "articleKey": "prefecture-industry-economy-pack",
       "vertical": "product-sales",
       "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
-      "bodyManifestSha256": "48ef9e34eb5c4c1a2a9a3fa7956a48dfcd44a9d46c34cb61290bab0be30aef36",
+      "bodyManifestSha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
       "bodyVerifiedDeep": true,
       "productionId": "NCI-00369",
-      "approvedCoverRevisionId": "a7521a81fd0e741d66fc059e87c58b90fcac2841cc30035437a71743b31bae31",
+      "approvedCoverRevisionId": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
       "publishedTitleMatches": [],
-      "decision": "hold-product-sales",
+      "decision": "published-verified",
       "reasons": [
-        "product-sales publication frozen in NOTE-MAGAZINE backlog",
-        "current production brief and approved imagegen cover absent"
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-09 manifest and private R2 ZIP readback matched SHA; actual PDF was checked at 286 pages and copy corrected",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
       ],
-      "publishedUrl": null
+      "publishedUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:28:10.860780Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327896437/rectangle_large_type_2_98a3986f90264806883eb5d2b6ade8b4.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-09/v4-20261024-mac-r2/4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1.zip",
+          "sha256": "4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1",
+          "bytes": 10229618,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
     },
     {
       "articleKey": "prefecture-disaster-infrastructure-pack",

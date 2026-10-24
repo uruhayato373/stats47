@@ -3331,6 +3331,18 @@
       "status": "r2_ready",
       "price_jpy": 5000
     },
+    "prefecture-industry-economy-pack": {
+      "vertical": "product-sales",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "url": "https://note.com/stats47/n/n2ced199ed715",
+      "is_paid": true,
+      "published_at": "2026-10-24",
+      "r2_path": "note/product-sales/prefecture-industry-economy-pack",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 5000
+    },
     "prefecture-migration-living-pack": {
       "vertical": "product-sales",
       "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",

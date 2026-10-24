@@ -8690,18 +8690,20 @@
       "magazine": null,
       "isPaid": true,
       "priceJpy": 5000,
-      "status": "draft",
+      "status": "published",
       "r2Path": "note/product-sales/prefecture-industry-economy-pack",
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "48ef9e34eb5c4c1a2a9a3fa7956a48dfcd44a9d46c34cb61290bab0be30aef36",
+          "sha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
           "files": 4,
           "bytes": 102097,
-          "savedAt": "2026-10-12T22:05:37.905Z"
+          "savedAt": "2026-10-24T07:27:56.318Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+        "verifiedAt": "2026-10-24T07:27:56.318Z"
+      },
+      "noteUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "publishedAt": "2026-10-24"
     },
     {
       "key": "prefecture-disaster-infrastructure-pack",
