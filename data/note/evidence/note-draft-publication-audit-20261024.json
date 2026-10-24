@@ -1770,9 +1770,19 @@
       "decision": "hold-cover-unapproved",
       "reasons": [
         "current cover has no approved revision",
-        "GoogleマイマップでのKML読込を実機で完了した証拠・画面が未確認"
+        "2026-10-24のMy Maps実機検証はGoogle Picker白画面でKMLを選べず、県別色・吹き出し・結果画面は未確認"
       ],
-      "publishedUrl": null
+      "publishedUrl": null,
+      "mymapsValidation": {
+        "attemptedAt": "2026-10-24",
+        "sourceKml": "https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original",
+        "sourceKmlBytes": 2515638,
+        "sourceKmlPlacemarks": 47,
+        "result": "blocked-picker-blank",
+        "details": "ChromeのGoogleマイマップで非公開テスト地図を作成。KMLインポートのGoogle Pickerが再読込後も白画面。Googleドライブ経由のKMLアップロードは完了したが、Driveの「アプリで開く」にMy Mapsがなく、マイマップの表示結果は確認できなかった。",
+        "cleanup": "テスト地図とDriveにアップロードしたKMLをゴミ箱へ移動し、マイマップ所有一覧が空であることを確認。",
+        "resumeCondition": "My Mapsのファイル選択画面が表示される環境で同じKMLをインポートし、県別色と県クリックの情報・結果スクリーンショットを確認。"
+      }
     },
     {
       "articleKey": "h-howto-mymaps-share",
