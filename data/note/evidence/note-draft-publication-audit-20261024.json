@@ -1,0 +1,2736 @@
+{
+  "schemaVersion": 1,
+  "kind": "note-draft-publication-audit",
+  "account": "stats47",
+  "observedAt": "2026-10-24T21:22:08Z",
+  "startingDrafts": 100,
+  "bodyStorage": {
+    "deepVerified": 94,
+    "failed": 0,
+    "unwritten": 6
+  },
+  "decisionCounts": {
+    "hold-body-unwritten": 6,
+    "hold-cover-unapproved": 2,
+    "hold-product-sales": 54,
+    "merged-existing": 13,
+    "published-verified": 25
+  },
+  "currentCatalog": {
+    "published": 427,
+    "draft": 62
+  },
+  "noteComDrafts": {
+    "method": "authenticated note.com/notes?status=draft UI, Profile 5 account ID stats47",
+    "observedCount": 3,
+    "rows": [
+      {
+        "noteId": "n125f816e76cf",
+        "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+        "sameTitlePublishedKey": "12-fiscal-peer-comparison",
+        "decision": "hold-duplicate"
+      },
+      {
+        "noteId": "ne54b77ee1c68",
+        "title": "財政指標の同規模団体比較を e-Stat × Claude Code で作る — 「－」の扱いひとつで中央値が 4 倍変わる",
+        "sameTitlePublishedKey": "12-fiscal-peer-comparison",
+        "decision": "hold-duplicate"
+      },
+      {
+        "noteId": "ndd6577272515",
+        "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
+        "sameTitlePublishedKey": "a-maximum-temperature",
+        "decision": "hold-duplicate"
+      }
+    ]
+  },
+  "articles": [
+    {
+      "articleKey": "d-geo-region-code-checklist",
+      "vertical": "stats47-note",
+      "title": "地域コード結合の完全チェックリスト",
+      "bodyManifestSha256": "8123101fef6f01fbaf3cd75e8fee3c022f6e4aa56dc25ce449606ddaf54082db",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00251",
+      "approvedCoverRevisionId": "9231b9a13cc88515af59dc6f29cfa8d6d283690021771fb74926db722c58cad6",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "検査キットZIPのSHAを照合し、同梱Pythonテスト5件が合格した",
+        "note公開APIでstats47名義・公開状態・980円・99タグ・有料境界・人口世帯マガジンを確認した",
+        "認証済み本文でZIPが有料境界後に1件あり、公開本文にはZIPが出ないことを確認した",
+        "採用カバーの1280×670画素照合と本文不変ゲートが合格した"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "productEvidence": {
+        "archiveSha256": "b71c81746bd29bc611ed866d2e65e0691508d229c4fd6d2bde5609ea089a4a96",
+        "archivePath": ".local/geo-products/d-geo-region-code-checklist/d-geo-region-code-checklist.zip",
+        "privateR2Path": "note/stats47-note/d-geo-region-code-checklist/attachments/d-geo-region-code-checklist.zip",
+        "unitTests": "5 passed",
+        "preparedAt": "2026-10-24",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T17:07:55.287Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "magazineKey": "s47-population",
+        "noteMagazineId": "meacbafeb15a1",
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328114882/rectangle_large_type_2_d2f26ba7eb9167a52532db3824b9e8e1.png?fit=bounds&quality=85&width=1280",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-be8f5c18def64e60.json",
+        "bodyManifestSha256": "8123101fef6f01fbaf3cd75e8fee3c022f6e4aa56dc25ce449606ddaf54082db",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-region-code-checklist/attachments/d-geo-region-code-checklist.zip",
+          "sha256": "b71c81746bd29bc611ed866d2e65e0691508d229c4fd6d2bde5609ea089a4a96",
+          "bytes": 4698,
+          "readbackVerified": true,
+          "unitTests": "5 passed"
+        }
+      }
+    },
+    {
+      "articleKey": "d-geo-ksj-qgis-guide",
+      "vertical": "stats47-note",
+      "title": "国土数値情報をQGISで扱う",
+      "bodyManifestSha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00245",
+      "approvedCoverRevisionId": "476de4c551aba6727ea0c951876ab96214f034cc183d9f847cc2ea5e869786c6",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "架空4地域のGeoJSON/CSV結合を検証し、ZIPとmanifestのSHAを照合した",
+        "公式の国土数値情報・QGIS資料を参照し、QGIS実機未確認を本文に明記した",
+        "note公開APIでstats47名義・公開状態・1980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後に1件あり、公開本文からZIPが隠れることを確認した",
+        "採用カバーとnote配信画像の画素MAE 3.79、R2本文のdeep verifyが合格した"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n346d566772a1",
+      "productEvidence": {
+        "archiveSha256": "6920547f1524da0c9752ab305eb2b3ae7ea100f643bd03e1ab55b25ad98b8fca",
+        "archivePath": ".local/geo-products/d-geo-ksj-qgis-guide/d-geo-ksj-qgis-guide.zip",
+        "privateR2Path": "note/stats47-note/d-geo-ksj-qgis-guide/attachments/d-geo-ksj-qgis-guide.zip",
+        "unitTests": "4 synthetic regions; joined value sum 56; duplicate/unmatched rejection passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T21:22:08Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 1980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328139833/rectangle_large_type_2_0fd428bd67558da430effb66190a2a1b.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "width": 1280,
+          "height": 670,
+          "mae": 3.790694962686567,
+          "threshold": 25,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-ksj-qgis-guide/attachments/d-geo-ksj-qgis-guide.zip",
+          "sha256": "6920547f1524da0c9752ab305eb2b3ae7ea100f643bd03e1ab55b25ad98b8fca",
+          "bytes": 4180,
+          "readbackVerified": true,
+          "unitTests": "4 synthetic regions; joined value sum 56; duplicate/unmatched rejection passed"
+        }
+      }
+    },
+    {
+      "articleKey": "d-geo-x-ogp-map-automation",
+      "vertical": "stats47-note",
+      "title": "X/OGP地図カード自動生成",
+      "bodyManifestSha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00254",
+      "approvedCoverRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "地図カード生成キットZIP内の8ファイルのSHA・サンプル2画像の寸法を照合した",
+        "note公開APIでstats47名義・公開状態・1980円・99タグを確認した",
+        "認証済み本文でZIPが有料見出し後に1件あり、公開本文にはZIP名が出ないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差3.598で一致を確認した"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n78a43a4c53a4",
+      "productEvidence": {
+        "archiveSha256": "efaf08a6de7f86a32cf3e4ac23bf00f4a382999842eadbb9f846c9394aeec946",
+        "archivePath": ".local/geo-products/d-geo-x-ogp-map-automation/d-geo-x-ogp-map-automation.zip",
+        "privateR2Path": "note/stats47-note/d-geo-x-ogp-map-automation/attachments/d-geo-x-ogp-map-automation.zip",
+        "unitTests": "sample render: 1080x1080 and 1200x630 verified",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T20:16:07.447Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 1980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328129913/rectangle_large_type_2_5d908ee623066f08c2eb3a90bdfc0494.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "188cc19b4e9b58ce8d9505fa530b813223e5e91a48030baa950650e17af05364",
+          "publishedRevisionId": "c521f56a301edad13a71ce93e14bc90f8390dd34705a77632e5445b39e60f31f",
+          "rgbMae": 3.598,
+          "channelsWithin20": 0.9777,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "e37ed1e7a111f917465ebe74de36c773ff3f073e9069c038b8499d573824e760",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-x-ogp-map-automation/attachments/d-geo-x-ogp-map-automation.zip",
+          "sha256": "efaf08a6de7f86a32cf3e4ac23bf00f4a382999842eadbb9f846c9394aeec946"
+        }
+      }
+    },
+    {
+      "articleKey": "d-geo-medical-access-analysis",
+      "vertical": "stats47-note",
+      "title": "医療アクセス分析",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00247",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-geopackage-parquet-pmtiles",
+      "vertical": "stats47-note",
+      "title": "GeoPackage/Parquet/PMTiles",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00243",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-data-quality-management",
+      "vertical": "stats47-note",
+      "title": "stats47型データ品質管理",
+      "bodyManifestSha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00241",
+      "approvedCoverRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "架空の47県CSVを使った品質検査キットと4テストが合格し、ZIPのSHA・内部構造を照合した",
+        "note公開APIでstats47名義・公開状態・2980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後にあり、公開本文からは見えないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差3.607で一致を確認した"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "productEvidence": {
+        "archiveSha256": "78377b583d59524008ede7680df1a555149799e53bed8adb080b6cc30ccc9dbc",
+        "archivePath": ".local/geo-products/d-geo-data-quality-management/d-geo-data-quality-management.zip",
+        "privateR2Path": "note/stats47-note/d-geo-data-quality-management/attachments/d-geo-data-quality-management.zip",
+        "unitTests": "4 passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T18:25:05.706Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 2980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328121243/rectangle_large_type_2_8a4a434cb9ff1727c54043524015a4b2.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "8b362bb062e2e69e3b245eb675c261b39d7cb219f5d8f2e3131488e4046ad876",
+          "publishedRevisionId": "8bd7f476510f1f1ef2a060934254e1670a6457ab83dc412bac8dd6347b642d87",
+          "rgbMae": 3.607,
+          "channelsWithin20": 0.9757,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "7ce6926d96631c7b2f007cdb23e9a719dca3b513f995b4afea05aebdfea8d9c4",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-data-quality-management/attachments/d-geo-data-quality-management.zip",
+          "sha256": "78377b583d59524008ede7680df1a555149799e53bed8adb080b6cc30ccc9dbc",
+          "bytes": 4916,
+          "readbackVerified": true,
+          "unitTests": "4 passed"
+        }
+      }
+    },
+    {
+      "articleKey": "d-geo-trade-area-analysis",
+      "vertical": "stats47-note",
+      "title": "商圏分析の基本",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00253",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-poi-license-practice",
+      "vertical": "stats47-note",
+      "title": "POIデータのライセンスと実務",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00249",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-natural-language-region-filter",
+      "vertical": "stats47-note",
+      "title": "自然言語→地域フィルタJSON",
+      "bodyManifestSha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00248",
+      "approvedCoverRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "変換キットZIPのSHAを照合し、地方区分coverageを含むPythonテスト7件が合格した",
+        "note公開APIでstats47名義・公開状態・2980円・99タグを確認した",
+        "認証済み本文でZIPが有料境界後にあり、公開本文からは見えないことを確認した",
+        "採用カバーと配信画像を1280×670で画素比較しRGB平均絶対差4.012で一致を確認した"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/na9ba449d2c8b",
+      "productEvidence": {
+        "archiveSha256": "1aae4368b3afcfed32f1e4202004c766f1031212e5c2a5a7ffdf58fb1f04efc6",
+        "archivePath": ".local/geo-products/d-geo-natural-language-region-filter/d-geo-natural-language-region-filter.zip",
+        "privateR2Path": "note/stats47-note/d-geo-natural-language-region-filter/attachments/d-geo-natural-language-region-filter.zip",
+        "unitTests": "7 passed",
+        "preparedAt": "2026-10-25",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T19:22:01.388Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 2980,
+        "tags": 99,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328126212/rectangle_large_type_2_b9e4c2ba0c9ddb38755267c1e48d4fbd.png?fit=bounds&quality=85&width=1280",
+        "coverPixelVerification": {
+          "approvedRevisionId": "a2ab6ff5aacfffa56771879dca658632d3b7f91af95159e256f17807b6604e15",
+          "publishedRevisionId": "36dfd0475421a724375db589c2da2efec329b6eccb3d554897f54f71fa3ff716",
+          "rgbMae": 4.012,
+          "channelsWithin20": 0.9737,
+          "normalizedWidth": 1280,
+          "normalizedHeight": 670,
+          "status": "pass"
+        },
+        "bodyManifestSha256": "58c7ed76d72cb1cc8bbfb7924042a1323f4ba4152a3a3224c21e076c2f376c7f",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/stats47-note/d-geo-natural-language-region-filter/attachments/d-geo-natural-language-region-filter.zip",
+          "sha256": "1aae4368b3afcfed32f1e4202004c766f1031212e5c2a5a7ffdf58fb1f04efc6"
+        }
+      }
+    },
+    {
+      "articleKey": "d-geo-pyqgis-ai-verification",
+      "vertical": "stats47-note",
+      "title": "AIにPyQGISを書かせる検証法",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00250",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "d-geo-analysis-template-compendium",
+      "vertical": "stats47-note",
+      "title": "1年分の地域分析テンプレ総集編",
+      "bodyManifestSha256": null,
+      "bodyVerifiedDeep": false,
+      "productionId": "NCI-00240",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-body-unwritten",
+      "reasons": [
+        "body manifest absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
+      "vertical": "stats47-note",
+      "title": "【2026年版】有給休暇取得率ランキング｜休める県・休めない県",
+      "bodyManifestSha256": "fc33f97762237e6b29c3045de846f97ab319c5a60cf3599c42f2d5e1dcad545a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00109",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision",
+        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある",
+        "2025年就労条件総合調査の年休取得率表は企業規模・産業・性別で集計し、e-Statの集計地域区分は「該当なし」。原稿が求める47都道府県の順位はこの一次表から作れない。"
+      ],
+      "publishedUrl": null,
+      "sourceCheck": {
+        "url": "https://www.e-stat.go.jp/stat-search/files?layout=dataset&page=1&stat_infid=000040389671&toukei=00450099&tstat=000001014004",
+        "checkedAt": "2026-10-24",
+        "finding": "published table 8 has no prefecture aggregation; title and 10 placeholder cells cannot be grounded to this survey"
+      }
+    },
+    {
+      "articleKey": "A-laborwage-wages-by-industry-prefecture",
+      "vertical": "stats47-note",
+      "title": "【2026年版】産業別平均賃金ランキング｜稼げる業界の地域差",
+      "bodyManifestSha256": "ad32b27d6df64329c668e0fd80589c141089fe9c7859cc1a118dcdca95653664",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00111",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-cover-unapproved",
+      "reasons": [
+        "current cover has no approved revision",
+        "原稿に {TODO: 実データ} が10箇所あり、統計値・断定を再接地する必要がある"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "a-number-of-hotel-rooms",
+      "vertical": "stats47-note",
+      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
+      "bodyManifestSha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00116",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n91e82ac3b13c",
+          "noteUrl": "https://note.com/stats47/n/n91e82ac3b13c"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "既存公開記事の本文と一致。重複投稿せず既存記事に統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n91e82ac3b13c",
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n91e82ac3b13c",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n91e82ac3b13c",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T04:35:29.474Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "81604e6a33adc8b8bddb5b0203b7a3c4aca9ffbd6c5b2addfccbb81512b4846b",
+        "archivedDraftR2Path": "note/stats47-note/a-number-of-hotel-rooms",
+        "archivedDraftManifestSha256": "eebc0060a099fce1d823657b3e3e0fbedc753aec4f334376e7bf3c2c7e6bb954",
+        "publishedManifestSha256": "60c474840076e9e09771ce641141d6196640a10f0706eeda7a694b482fcc9990",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "substantiveProse": "本文の統計値・説明段落は公開API本文に一致。差分は前付、画像記法、リンクカード表示、Markdown装飾。"
+      }
+    },
+    {
+      "articleKey": "a-overseas-travel-annual-participation-rate-10plus",
+      "vertical": "stats47-note",
+      "title": "【2021年版・10歳以上】海外旅行をした人が多い県は？ 1位は京都府｜都道府県ランキング",
+      "bodyManifestSha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00117",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n827191af8c1c",
+          "noteUrl": "https://note.com/stats47/n/n827191af8c1c"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "既存公開記事の本文と一致。重複投稿せず既存記事に統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n827191af8c1c",
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n827191af8c1c",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n827191af8c1c",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T04:35:29.474Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "b95d0983a7c4b6bf31766144b6584cdd0a0f7744fbd8943e4248e8b01149e54c",
+        "archivedDraftR2Path": "note/stats47-note/a-overseas-travel-annual-participation-rate-10plus",
+        "archivedDraftManifestSha256": "276c397d646aa1ab5f8cdf9e55d73256b7d17af5cdec3f6225989c15c0d206c5",
+        "publishedManifestSha256": "9fdf74e25b727ecdfcb756e661b6f8e55f146b01c7d13ac2aa3a8a083c61f76d",
+        "normalizedTwelveCharacterOverlap": 0.995,
+        "substantiveProse": "本文の統計値・説明段落は公開API本文に一致。差分は前付、画像記法、リンクカード表示、Markdown装飾。"
+      }
+    },
+    {
+      "articleKey": "a-population-density-per-km2-total-area",
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
+      "bodyManifestSha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00119",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-nd5f8b5072cdb",
+          "noteUrl": "https://note.com/stats47/n/nd5f8b5072cdb"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "既存公開記事と統計値・本文段落が一致。重複投稿せず既存記事へ統合。",
+        "公開本文に図が0枚。地図・上位図の追加とクリップした箱ひげ図の修正は公開後の品質課題。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nd5f8b5072cdb",
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-nd5f8b5072cdb",
+        "normalizedTwelveCharacterOverlap": 0.962,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review",
+        "liveCheckedAt": "2026-10-24T04:37:27.067Z",
+        "liveInlineImages": 0
+      },
+      "mergedIntoKey": "recovered-nd5f8b5072cdb",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T08:57:57.169Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 0,
+        "liveBodySha256": "672e03e55383c0013d97e9adb1f5ffdd9dd36a0ae39ab5a95d819d523e940362",
+        "archivedDraftR2Path": "note/stats47-note/a-population-density-per-km2-total-area",
+        "archivedDraftManifestSha256": "864c6196cca2c60e30db8b3ab5518ef2b825188b70caa03b7ac1552d51187cae",
+        "publishedManifestSha256": "16d9431c7d0ff3a95577c6af77d34b547594ab0268f651eda9385d90f82938af",
+        "normalizedProseSimilarity": 0.997826,
+        "method": "R2原稿の前付・画像行・リンクカード・空白を除去し、本文文字列をSequenceMatcherで比較。差分は末尾のMarkdown装飾のみ。",
+        "figureFollowUp": "既存noteの地図・上位図は未掲載。箱ひげ図はラベルが欠けているため修正後に既存記事へ追加する。"
+      }
+    },
+    {
+      "articleKey": "a-volunteer-activity-annual-participation-rate-15plus",
+      "vertical": "stats47-note",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "bodyManifestSha256": "96876c8bc2d6613cd92230a2f67eb851e9738477f3549cdb14f3b51382abaf2a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00128",
+      "approvedCoverRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/n5bf048142f66",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 3,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "a-volunteer-activity-annual-participation-rate-15plus",
+        "url": "https://note.com/stats47/n/n5bf048142f66",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/327785564/rectangle_large_type_2_6848aeb153428f250813a7e62192e4c9.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+        "approvedRevisionId": "0fa9f987a9ed52cd39b1e675d1cb69f836651ab6bd57efa56076b705ea10c71d",
+        "sourceSha256": "40f8f2c712cf5d3fa4b60f6492f1014aac72d96e7481e63b8ed56eefd027b7a1",
+        "meanPixelError": 2.7270743936567166,
+        "largeDeltaFraction": 0.006226679104477612,
+        "verifiedAt": "2026-10-24T01:55:17.479Z"
+      }
+    },
+    {
+      "articleKey": "d1-kakei-prefecture-consumption",
+      "vertical": "stats47-note",
+      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
+      "bodyManifestSha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00257",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-n68f5e09c8d62",
+          "noteUrl": "https://note.com/stats47/n/n68f5e09c8d62"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "既存公開記事と全10節・5図・本文段落が一致。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n68f5e09c8d62",
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-n68f5e09c8d62",
+        "normalizedTwelveCharacterOverlap": 0.585,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-n68f5e09c8d62",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T09:01:06.825Z",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 5,
+        "liveBodySha256": "a0427a45b0fa6413c0c37c6426ece8fff7d9712bed8470b738cde4c3d08fe2cb",
+        "archivedDraftR2Path": "note/stats47-note/d1-kakei-prefecture-consumption",
+        "archivedDraftManifestSha256": "c3d48ee00a3195b77ac1d8df08faa17fdfff839cd870c9d9e431a56fbeaf29b1",
+        "publishedManifestSha256": "ad7224c2cdb107b691af4e699b5ead55ee45ba195583898b51f9afe65a4bd899",
+        "normalizedProseSimilarity": 0.996669,
+        "method": "R2両原稿の前付・画像行・リンクカード・空白を除去し、本文文字列をSequenceMatcherで比較。差分はMarkdown装飾とリンク表示。",
+        "sectionCount": 10,
+        "imageCount": 5
+      }
+    },
+    {
+      "articleKey": "22-monthly-routine-skills",
+      "vertical": "koumuin-claude-code",
+      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
+      "bodyManifestSha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00037",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n2207f3039fd3",
+          "noteUrl": "https://note.com/stats47/n/n2207f3039fd3"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n2207f3039fd3",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n2207f3039fd3",
+        "normalizedTwelveCharacterOverlap": 0.273,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n2207f3039fd3",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "f332e284c3cf5741be4d54b12a37c709c1ca0bc50de90a09be99ac9577b7070b",
+        "liveBodyBytes": 30290,
+        "archivedDraftR2Path": "note/koumuin-claude-code/22-monthly-routine-skills",
+        "archivedDraftManifestSha256": "e52eadf7e3537613fc4d16a88828075817dfeb3324fe87a4eb8ee753970b8493",
+        "publishedManifestSha256": "b062494d395b2560835fa99520abb81d14460532a97f61813fbc7c39ed19fbf8",
+        "normalizedFreePartSimilarity": 0.9479,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "23-mcp-internal-system",
+      "vertical": "koumuin-claude-code",
+      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
+      "bodyManifestSha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00038",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-nbead1fe772c7",
+          "noteUrl": "https://note.com/stats47/n/nbead1fe772c7"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nbead1fe772c7",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-nbead1fe772c7",
+        "normalizedTwelveCharacterOverlap": 0.369,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-nbead1fe772c7",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "56770a442c805659002a0655a94403b06e50ea6f0c99f62da31f1fffd5eaa672",
+        "liveBodyBytes": 28031,
+        "archivedDraftR2Path": "note/koumuin-claude-code/23-mcp-internal-system",
+        "archivedDraftManifestSha256": "3b1f634d5ae6ecbad4c6eadb52d423b64f196a90e7ce7bd689a15b029da524dd",
+        "publishedManifestSha256": "3b575790e272c32b9f3b41657ac921df1da11299eeea0ce2700f1200a186ba1a",
+        "normalizedFreePartSimilarity": 0.9621,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "24-subagents-parallel-research",
+      "vertical": "koumuin-claude-code",
+      "title": "Subagents で「複数案件の並行調査」を回す",
+      "bodyManifestSha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00039",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n68eafab07946",
+          "noteUrl": "https://note.com/stats47/n/n68eafab07946"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n68eafab07946",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n68eafab07946",
+        "normalizedTwelveCharacterOverlap": 0.245,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n68eafab07946",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "3091770dfcf24e62fc75f3ee137045b5259d0fa140afabae64ef240bab804bae",
+        "liveBodyBytes": 28888,
+        "archivedDraftR2Path": "note/koumuin-claude-code/24-subagents-parallel-research",
+        "archivedDraftManifestSha256": "b6d66745526aa46c9bb132de6ef72296e63eb4e377113e1cc3a2e6853d7a20c2",
+        "publishedManifestSha256": "bc1b43c69e2ac841de592ded9fce719a240324c28ba924ee86154a5ed41ffe33",
+        "normalizedFreePartSimilarity": 0.9563,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "25-excel-vba-to-python",
+      "vertical": "koumuin-claude-code",
+      "title": "既存の Excel マクロを Claude Code で Python 移植する",
+      "bodyManifestSha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00040",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-nfd3ab8213e1f",
+          "noteUrl": "https://note.com/stats47/n/nfd3ab8213e1f"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nfd3ab8213e1f",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-nfd3ab8213e1f",
+        "normalizedTwelveCharacterOverlap": 0.47,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-nfd3ab8213e1f",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "120682da003b2412f61af70e16ee89f5f6c18dca4353a2a6db1d26dbda33eeee",
+        "liveBodyBytes": 31104,
+        "archivedDraftR2Path": "note/koumuin-claude-code/25-excel-vba-to-python",
+        "archivedDraftManifestSha256": "42048ff14a98e7f34158f864ee2906ea3d5947b3b402be3467bf1b99528a6866",
+        "publishedManifestSha256": "9af443d2208b662a14dd864f0480ab4fd231e72815a86a4a75bac55046e22a48",
+        "normalizedFreePartSimilarity": 0.9742,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "26-boss-approval-deck",
+      "vertical": "koumuin-claude-code",
+      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
+      "bodyManifestSha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00041",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n2c2df066e865",
+          "noteUrl": "https://note.com/stats47/n/n2c2df066e865"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n2c2df066e865",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n2c2df066e865",
+        "normalizedTwelveCharacterOverlap": 0.286,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n2c2df066e865",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "86f1fee76b1111b98632b68f4d193292ee90d091e6dbecccbd186fa54178520f",
+        "liveBodyBytes": 31062,
+        "archivedDraftR2Path": "note/koumuin-claude-code/26-boss-approval-deck",
+        "archivedDraftManifestSha256": "6473e70af581f2aedfe9ec8a236f4f55670ae23acfb1b49e88dc0b774109b959",
+        "publishedManifestSha256": "1734665e84a875b441d73a6236000971256e4cb9d3c59c793db7cf88dd65ac9b",
+        "normalizedFreePartSimilarity": 0.9545,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "27-internal-study-30min",
+      "vertical": "koumuin-claude-code",
+      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
+      "bodyManifestSha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00042",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n9f666946d105",
+          "noteUrl": "https://note.com/stats47/n/n9f666946d105"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n9f666946d105",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n9f666946d105",
+        "normalizedTwelveCharacterOverlap": 0.158,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n9f666946d105",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "6bee965d21b5d292261950403bcc1fa784c19102787a41cfd6b7bdeb7c10f44b",
+        "liveBodyBytes": 30347,
+        "archivedDraftR2Path": "note/koumuin-claude-code/27-internal-study-30min",
+        "archivedDraftManifestSha256": "492404a97750e1bc0157d300797e16467726d85886edf95b7df8ba543587ec45",
+        "publishedManifestSha256": "16db7895efdaa411248726f0102090a2fd2294e88201204726b28a91879b37c7",
+        "normalizedFreePartSimilarity": 0.9788,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "28-ai-skeptic-qa",
+      "vertical": "koumuin-claude-code",
+      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
+      "bodyManifestSha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00043",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-ncab0d7b04228",
+          "noteUrl": "https://note.com/stats47/n/ncab0d7b04228"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/ncab0d7b04228",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-ncab0d7b04228",
+        "normalizedTwelveCharacterOverlap": 0.214,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-ncab0d7b04228",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "1773d5d14f7108e2a4cafed56a3e61ac88b279aa7f4a092a19156fbaf4ea1bd3",
+        "liveBodyBytes": 32584,
+        "archivedDraftR2Path": "note/koumuin-claude-code/28-ai-skeptic-qa",
+        "archivedDraftManifestSha256": "a34d57bebef71e7c8f34301d0d048085d775656e88c1cea1211f782fb5eef11b",
+        "publishedManifestSha256": "b305f2773ddf37f074b5dc2350fc1efab392fb17c576c2f824f9a467052fda59",
+        "normalizedFreePartSimilarity": 0.9594,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "29-evaluated-without-side-job",
+      "vertical": "koumuin-claude-code",
+      "title": "公務員が副業せずに Claude Code スキルで評価される 5 つの場",
+      "bodyManifestSha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00044",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "recovered-nc18fa33ec65e",
+          "noteUrl": "https://note.com/stats47/n/nc18fa33ec65e"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "既存公開記事と主題・5つの評価場・主要本文段落が一致。新規投稿を避け既存記事へ統合。",
+        "導入・まとめの文体と図の差分は公開後の品質点検で扱う。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nc18fa33ec65e",
+      "duplicateTextComparison": {
+        "publishedKey": "recovered-nc18fa33ec65e",
+        "normalizedTwelveCharacterOverlap": 0.227,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "recovered-nc18fa33ec65e",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T10:59:21+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 0,
+        "liveBodyImages": 3,
+        "liveBodySha256": "f53daaf9a0e71e0e32e280004d4bee3b627576a8363c1deb81c8132a58d822d6",
+        "archivedDraftR2Path": "note/koumuin-claude-code/29-evaluated-without-side-job",
+        "archivedDraftManifestSha256": "d3f5477a58ad36dece4a4cc0dbdc91406bea4f474dcfeb65489fac824b15db78",
+        "publishedManifestSha256": "a6ca990ffb7a7ce4f267266ece650b5eb8933a1ab1b1fbb1483c1eb8dd04ef18",
+        "sectionComparison": "同名の5つの評価場が一致。背景と5節の正規化文字列のSequenceMatcher比率は0.9053–0.9804。導入・まとめ・図の差分は公開後品質点検。",
+        "method": "R2両原稿をcheckoutし、見出しごとに前付・画像行・Markdown記号を除いた文字列を比較。note公開APIでアカウント・公開状態・価格・本文画像を再照合。"
+      }
+    },
+    {
+      "articleKey": "30-post-retirement-career",
+      "vertical": "koumuin-claude-code",
+      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
+      "bodyManifestSha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00045",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [
+        {
+          "key": "paid-n8558c1a6503a",
+          "noteUrl": "https://note.com/stats47/n/n8558c1a6503a"
+        }
+      ],
+      "decision": "merged-existing",
+      "reasons": [
+        "原稿の前付は有料300円で、記事台帳の無料フラグが旧値。既存公開記事も同題・同価格。",
+        "主要な無料部の章立てと本文が一致し、既存公開原稿には追加の有料部がある。重複投稿せず既存記事へ統合。"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n8558c1a6503a",
+      "duplicateTextComparison": {
+        "publishedKey": "paid-n8558c1a6503a",
+        "normalizedTwelveCharacterOverlap": 0.181,
+        "method": "R2 draft.md text normalized by removing front matter, first heading, image lines and Markdown punctuation; 12-character shingles sampled every 3 characters, shared shingles divided by smaller set",
+        "scope": "text only; article claims, figures, paid boundary and live version still require review"
+      },
+      "mergedIntoKey": "paid-n8558c1a6503a",
+      "mergeEvidence": {
+        "checkedAt": "2026-10-24T12:33:38+00:00",
+        "liveNoteStatus": "published",
+        "liveAccount": "stats47",
+        "livePriceJpy": 300,
+        "liveBodySha256": "4178e83375092ee39394e93ce37e0538f10025b4fa6b9b41abc1afc89b3670ae",
+        "liveBodyBytes": 36760,
+        "archivedDraftR2Path": "note/koumuin-claude-code/30-post-retirement-career",
+        "archivedDraftManifestSha256": "074488f064bded7a75f681a459dfc8ea553e5191cea8b9d94e9195ec47018605",
+        "publishedManifestSha256": "9e191797c09d39aa4f16ecafb042ca577c8b5292313dbb96f14857d536f2e266",
+        "normalizedFreePartSimilarity": 0.9528,
+        "method": "R2の下書き・公開原稿をcheckoutし、有料部前の本文から画像行・Markdown記号を除去してSequenceMatcherで照合。下書き前付のis_paid:true/price_jpy:300と公開APIのstats47/300円/公開状態を確認。",
+        "scope": "有料部の全文差分と公開画面の図は公開後品質確認。"
+      }
+    },
+    {
+      "articleKey": "ppt-japan-map-assets",
+      "vertical": "product-sales",
+      "title": "PowerPointで使える47都道府県の白地図・色分け地図素材",
+      "bodyManifestSha256": "77731b19acb06f1295f03ef8ff177d0579f918b3612fe6573737564ecd15904e",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00353",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-ranking-chart-assets",
+      "vertical": "product-sales",
+      "title": "都道府県ランキング・散布図・時系列チャートのPowerPointテンプレート集",
+      "bodyManifestSha256": "3e5cae76a4244753c0a7fdac1e64976073ba479ad24a977d9830a7488c4892d2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00357",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-onepager-sns-assets",
+      "vertical": "product-sales",
+      "title": "1枚資料・SNS図版・動画画面向けの都道府県データ素材",
+      "bodyManifestSha256": "8f284669bc49777ec447dfdf829b3f0901fc640cf5163b7d2e170d8b188a3944",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00356",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-data-explainer-deck",
+      "vertical": "product-sales",
+      "title": "都道府県データ説明スライド20枚セット",
+      "bodyManifestSha256": "f0909d6e9fc50e6531642386ae6091e7bafcb7564b754c307839e6348f858107",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00350",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-region-intro-deck",
+      "vertical": "product-sales",
+      "title": "県勢・市勢紹介と地域企業向け商圏説明のスライド雛形",
+      "bodyManifestSha256": "aac81d3fcef413dde86b04475c55d2f39f1b033fd211e64d196fcdc0f1efa9aa",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00358",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-market-proposal-deck",
+      "vertical": "product-sales",
+      "title": "市場調査・出店提案・営業に使う地域比較スライド",
+      "bodyManifestSha256": "01cbd35aa2b2ebbc97172a4c291730f10d3a2da58c53423c490b6abed7d792c8",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00354",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-relocation-hiring-deck",
+      "vertical": "product-sales",
+      "title": "移住候補地・採用賃金の地域比較スライド",
+      "bodyManifestSha256": "00e0115b7327c7c2112bc9d1a5a497d8cf83c88cb4ce21e7bafc53b4e18a4dca",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00359",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-tourism-demand-deck",
+      "vertical": "product-sales",
+      "title": "観光・宿泊市場分析スライド雛形",
+      "bodyManifestSha256": "f5e8811ec209893cafb3f7532f788891df26ec0e9ffcc90b8eee70fe74abe558",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00361",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-healthcare-education-deck",
+      "vertical": "product-sales",
+      "title": "医療・介護・教育・子育て環境の地域比較スライド",
+      "bodyManifestSha256": "fb7a06d9e7b15f3fd418c3165498e2cd443fca10edabd75e772b1c1270b96ab3",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00352",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-government-policy-deck",
+      "vertical": "product-sales",
+      "title": "政策立案・議会説明・地方創生のプレゼン雛形",
+      "bodyManifestSha256": "da278b440cec67116dfafbad3d5886e516e052947080485089e680ff9e285122",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00351",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-media-report-deck",
+      "vertical": "product-sales",
+      "title": "企画会議・記者発表・アンケート報告のスライド雛形",
+      "bodyManifestSha256": "e8128fcefd6a556e1de2e3881f787ec3b7be91c1dd464a27adc2a2b915a87a40",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00355",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "ppt-seminar-research-deck",
+      "vertical": "product-sales",
+      "title": "セミナー研修・卒論発表向けの統計図表テンプレート",
+      "bodyManifestSha256": "ff3038d76d90d316d663ba85e3a2bc1904246a4dd40e6cd301f00c175f766df1",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00360",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-choropleth-map",
+      "vertical": "product-sales",
+      "title": "数値を貼るだけの47都道府県コロプレス地図Excel",
+      "bodyManifestSha256": "6393d39f8012fae37548da3b7da84e5c23c20e03a5ca6e596074d84f5cb955f0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00269",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-ranking-auto",
+      "vertical": "product-sales",
+      "title": "47都道府県ランキングを自動作成するExcel",
+      "bodyManifestSha256": "dce168b6895eb106690964c5494085518ba29485a16a48a5fc6980d36c23c0e0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00275",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-integrated-dashboard",
+      "vertical": "product-sales",
+      "title": "地図・ランキング・スコアリング統合Excelダッシュボード",
+      "bodyManifestSha256": "85170b2ba11d3ccee5e5c1fe08820f034c437ffc4a136a393d64a20663428c18",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00273",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-gap-timeseries-analysis",
+      "vertical": "product-sales",
+      "title": "全国平均との差・時系列・相関を見るExcel分析テンプレート",
+      "bodyManifestSha256": "dcf1c7a87730519d15f39fbdeeba480eaba4a30cf3f3f85dbdf96a6f7d265ba0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00272",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-population-migration",
+      "vertical": "product-sales",
+      "title": "人口構成・人口移動を分析するExcelテンプレート",
+      "bodyManifestSha256": "b67337c7528a5b75372c36b59e7e906d3c43dc2378194b5e3ec1d781e9410b01",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00274",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-business-location",
+      "vertical": "product-sales",
+      "title": "商圏・採用・移住候補をスコアリングするExcel",
+      "bodyManifestSha256": "ecec0116d66ec9c75512b94fbd9bc31b2221d25be740060036cfd0b7aec06457",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00268",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-domain-comparison",
+      "vertical": "product-sales",
+      "title": "観光・財政・医療・教育・防災の地域比較Excel",
+      "bodyManifestSha256": "949649ab777dd8f12c21c5a6eb15a9f652e9f251efd4b1d9cb9563943a0903da",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00271",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "excel-data-utilities",
+      "vertical": "product-sales",
+      "title": "e-Stat整形・都道府県コード変換・年度統合の実務Excelツール",
+      "bodyManifestSha256": "a88e1659cd315f0f76e96a7373dc60dc38e0a9f9e31a8b84330803b621a18730",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00270",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-basic",
+      "vertical": "product-sales",
+      "title": "47都道府県 基礎統計データブック",
+      "bodyManifestSha256": "86cb60b96c65c2c19a2530e7bbfd44361ba5cd3f09bc70d7211f8de699276812",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00259",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-population-economy",
+      "vertical": "product-sales",
+      "title": "人口・所得・物価のテーマ別データパック",
+      "bodyManifestSha256": "28283d1709cdd0b9da305c826047c89f4459cc81813715f1e82748037c9f39fd",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00264",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-living-infrastructure",
+      "vertical": "product-sales",
+      "title": "住宅・医療・教育・交通のテーマ別データパック",
+      "bodyManifestSha256": "4194f37d2af9452eb45109dcbd70bb127eaafbc85cbacc5ed397f94cc113143b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00263",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-industry-tourism",
+      "vertical": "product-sales",
+      "title": "観光・産業・農林水産のテーマ別データパック",
+      "bodyManifestSha256": "6722b4bc55854f1e09507e1e5bea8641ff2dc27a45a23015b86aefa40354ebc7",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00262",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-government-safety",
+      "vertical": "product-sales",
+      "title": "財政・環境・安全防災のテーマ別データパック",
+      "bodyManifestSha256": "36a5bc2c6641634e4259836a3772dc8476ff437547e3983b28672a730caacdf2",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00261",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-culture-demographics",
+      "vertical": "product-sales",
+      "title": "文化・スポーツ・属性別のテーマ別データパック",
+      "bodyManifestSha256": "d7fdae95572b72059a36e76ac437282ff89f9065e58efffd4168955fc45d1c89",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00260",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "data-packs-advanced",
+      "vertical": "product-sales",
+      "title": "市区町村内格差・人口移動・100図表の上級データパック",
+      "bodyManifestSha256": "37534226c39aee7f299802c491cc6305e39a08e2c2dd446c50947272bc1fe92d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00258",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-retail-food-location",
+      "vertical": "product-sales",
+      "title": "飲食店・小売店の出店候補地分析パック",
+      "bodyManifestSha256": "77dc060e5cc5153ff1a2eb84b74f78205e4d1c92f7d0d02a19a85abb5f3135e9",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00287",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-service-location",
+      "vertical": "product-sales",
+      "title": "学習塾・介護・クリニックの開業地域比較パック",
+      "bodyManifestSha256": "d758ce5ce94c0a6c120d802e685838a925fa1a2eda67d9676fa7617169e7201c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00288",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-tourism-realestate",
+      "vertical": "product-sales",
+      "title": "宿泊施設・不動産営業の地域比較パック",
+      "bodyManifestSha256": "f57c736171e19e78a4c41701ac3679d5f94be8303bba137adf2234902e5c07b6",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00289",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-hiring-branch",
+      "vertical": "product-sales",
+      "title": "採用拠点・支店候補地の比較パック",
+      "bodyManifestSha256": "1b648c81da14cddc00e7fb0ce1814979727290243a25aecb0d94aac43992b142",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00284",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-marketing-furusato",
+      "vertical": "product-sales",
+      "title": "EC地域マーケティング・ふるさと納税・地域金融の企画パック",
+      "bodyManifestSha256": "1f7e76697011049d5d28075ab3b1a72c97156ad09beaf17ef62c6f9ce8221d57",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00285",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-government-promotion",
+      "vertical": "product-sales",
+      "title": "シティプロモーション・地方創生プロジェクト企画パック",
+      "bodyManifestSha256": "7da40369da62d692e947575a8dc6512dc1463c1b4e820ef5aa65ae06c869f260",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00283",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "industry-media-sns",
+      "vertical": "product-sales",
+      "title": "地域メディア記事・YouTube・SNS運用の制作パック",
+      "bodyManifestSha256": "ed3dfd0a822088327a8b35ba0752282a1d227ce2ba4b852f5323045f3c9230ac",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00286",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-estat-workflow",
+      "vertical": "product-sales",
+      "title": "e-Stat検索・出典管理・オープンデータ公開を時短する自治体Excel一式",
+      "bodyManifestSha256": "3bb3eeb52a4641ad8757c728fde382ab7f098a7e08282270ee2302be69cca801",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00277",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-similar-municipality",
+      "vertical": "product-sales",
+      "title": "類似団体比較・人口ビジョン・総合戦略の指標整理テンプレート",
+      "bodyManifestSha256": "57750ecda445872da17662460a6c7b34d18788b295dcdbebcdf4c6b1e59d88dc",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00281",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-kpi-ebpm",
+      "vertical": "product-sales",
+      "title": "総合計画KPI管理・EBPMロジックモデルのダッシュボード",
+      "bodyManifestSha256": "f86b5580df0874bc66efab16c185a9d478852f70981b58c819b6f7581d22e962",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00279",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-presentation-decks",
+      "vertical": "product-sales",
+      "title": "予算要求・議会答弁・県勢要覧の説明図表セット",
+      "bodyManifestSha256": "6c702ca0cbf1793f37a38c7568e25794bfe212ba3a96a6d4da74fab9299f7193",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00280",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-koho-visuals",
+      "vertical": "product-sales",
+      "title": "自治体広報向けの統計図版セット",
+      "bodyManifestSha256": "96d8b044840de4985cc4bb71a06f802893ed9c07570518624d8f14439149fb38",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00278",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "gov-training-materials",
+      "vertical": "product-sales",
+      "title": "公務員向け統計グラフ・PowerPoint改善・AI統計加工の研修教材",
+      "bodyManifestSha256": "3542f5fc73906549d42a9b198fe4a5f71f3ac450ff8acc9c62f2a51ba0df5d0d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00282",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-ranking-visuals",
+      "vertical": "product-sales",
+      "title": "記事・ニュース・note向けの都道府県ランキング図版セット",
+      "bodyManifestSha256": "3174b5b113df2d8b512d8feca0bb741f98f7730eb149d32ad3a950add375ef8c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00297",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-video-social-visuals",
+      "vertical": "product-sales",
+      "title": "YouTube・ショート・Instagram・X向けの統計図版テンプレート",
+      "bodyManifestSha256": "a38829cfeb5affe30f2bc11b97a134a38d49a02398651c92cc840b89e61c4538",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00298",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "media-editorial-toolkit",
+      "vertical": "product-sales",
+      "title": "編集部向けネタカレンダー・構成テンプレ・ファクトチェック台帳",
+      "bodyManifestSha256": "a0dbd46f5e13fd28ff9501cbcd2c314cbd7edf256c34c9e01428e79703148ef6",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00296",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-classroom-materials",
+      "vertical": "product-sales",
+      "title": "中高生向け47都道府県の統計授業スライド・クイズ教材",
+      "bodyManifestSha256": "4b68b951948addc8f221d6d3d7437f2e386acbc1adb38d175818f5debb7f2447",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00265",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-inquiry-worksheets",
+      "vertical": "product-sales",
+      "title": "探究学習・オープンデータ調査・自県研究のワークシート",
+      "bodyManifestSha256": "6a10349f2e7543bdff3e1735d73a7341fc7ea8213dda6abffdf7d4974b26dd0e",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00267",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "edu-excel-stats-literacy",
+      "vertical": "product-sales",
+      "title": "Excelグラフ演習・相関と因果・レポート管理の統計リテラシー教材",
+      "bodyManifestSha256": "f322fbd4e9c18722c6ea978b39ca5bfb750ab448879f7b3be642d0e0ff5e939d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00266",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-relocation-comparison",
+      "vertical": "product-sales",
+      "title": "移住・引越し・二拠点・UIターンの候補地比較シート",
+      "bodyManifestSha256": "9ea5a5d50c2c5f5a3bf50c6d02d697533ab9ac54b6dffe4f153e8e32342b5c24",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00294",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-family-career-comparison",
+      "vertical": "product-sales",
+      "title": "子育て・転職勤務地・大学進学先の地域比較シート",
+      "bodyManifestSha256": "17147d4d64b58bc575cb51b8741ed3ede333713e389914d7454f091528045376",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00293",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "life-retirement-weighting",
+      "vertical": "product-sales",
+      "title": "退職後の居住地選びと自分用の都道府県重み付け診断シート",
+      "bodyManifestSha256": "5029d484eb138c9c63527b0e5ff9b3054f324affd5d87f688be0eb2998e10a4b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00295",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-map-chart-creation",
+      "vertical": "product-sales",
+      "title": "顧客データの地図化・ランキング化・資料化を代行します",
+      "bodyManifestSha256": "2b032b1291ad8659a669e871fdfc05bbe632b18c7540f478f395d3cbc23e7c53",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00493",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "existing draft promises customer-data mapping, rankings and PowerPoint work, but the only live GEO-SERVICE-01 listing is a fixed land-price × 2020–2050 population analysis for one prefecture",
+        "live Coconala listing https://coconala.com/services/4387096 displays 受付休止中 on 2026-10-24; publication as an available service would mislead readers",
+        "rewrite against actual offer, reopen listing, review final manuscript and approve a new imagegen cover before posting"
+      ],
+      "publishedUrl": null,
+      "liveListingCheckedAt": "2026-10-24T04:42:34.223Z",
+      "liveListingStatus": "受付休止中"
+    },
+    {
+      "articleKey": "service-regional-report",
+      "vertical": "product-sales",
+      "title": "公的統計の調査・地域比較レポート・統計資料監査を承ります",
+      "bodyManifestSha256": "c1fb00cf55c70a0358456c99c8a10b29cc773ed44c010da31773857238632553",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00494",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-business-comparison",
+      "vertical": "product-sales",
+      "title": "出店・移住・採用の地域比較を条件別に作成します",
+      "bodyManifestSha256": "139b372dfecf8537a10573a73740902bd797892ffca1fc66a80f57a31c008193",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00491",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "service-dashboard-build",
+      "vertical": "product-sales",
+      "title": "Excelダッシュボード化・自治体資料・定期更新・Web構築を承ります",
+      "bodyManifestSha256": "49be7d6c69de677de752c66f480dc370a878ef700b53b8c861b733658e09e0e3",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00492",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "product-sales publication frozen in NOTE-MAGAZINE backlog",
+        "current production brief and approved imagegen cover absent"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "license-guide",
+      "vertical": "product-sales",
+      "title": "都道府県データ商品のライセンス・版の違いガイド",
+      "bodyManifestSha256": "0c25ec3f6be7c8f93b8328b72d0cde345878c963fb938f3cebb76cf87db216c8",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00292",
+      "approvedCoverRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nadc627790bb6",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 0,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "license-guide",
+        "url": "https://note.com/stats47/n/nadc627790bb6",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/328078716/rectangle_large_type_2_4fa7ae15c11ffd71ab6394544d11aa43.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "0feb25c9d7c2476aa68d6d5363ae22e3bbfd1a1fad519f4b49f0e11caa0c42f6",
+        "approvedRevisionId": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+        "sourceSha256": "f4b25e3e2efaba1fdcb511e422cd30175696649aed5dfcb552feb8c7e5e475da",
+        "meanPixelError": 3.734375,
+        "largeDeltaFraction": 0.0028020055970149256,
+        "verifiedAt": "2026-10-24T14:19:05.109Z"
+      }
+    },
+    {
+      "articleKey": "free-samples",
+      "vertical": "product-sales",
+      "title": "都道府県地図・テンプレート・比較チェックリストの無料サンプル",
+      "bodyManifestSha256": "a0e778c50573b7defbf7a8ad0200abffab799c49edc6a7bae7ccc3605304a54d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00276",
+      "approvedCoverRevisionId": null,
+      "publishedTitleMatches": [],
+      "decision": "hold-product-sales",
+      "reasons": [
+        "draft offers seven downloadable samples but has no corresponding downloadable assets or links",
+        "existing published P-13 trial-pack article https://note.com/stats47/n/n584098246188 provides a real ZIP but covers a narrower product; reconcile scope before publication",
+        "review final manuscript and approve a new imagegen cover after promised assets are verified"
+      ],
+      "publishedUrl": null
+    },
+    {
+      "articleKey": "prefecture-population-household-pack",
+      "vertical": "product-sales",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "bodyManifestSha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00373",
+      "approvedCoverRevisionId": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-01 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 4000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:12:35.483Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "2fd86ffa5a480025bc23bca3c004eb08bc7614b5dd610ef220623af29cd2cbe9",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+          "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933",
+          "bytes": 10208853,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 3.9655266635572137,
+          "largeDeltaFraction": 0.006574549129353234
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-income-wage-hiring-pack",
+      "vertical": "product-sales",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "bodyManifestSha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00368",
+      "approvedCoverRevisionId": "e773455fb86fc968bb10a2c6ab56f0160be8816b4b0216b5829377c1f7fc9b3f",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-02 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n46d68c153502",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:29:26.332Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327856740/rectangle_large_type_2_b5fb8a2a3e30547c5496bbd6799dfe53.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "84f952dfce8a113681a39a5b60ae73a211e74f1010e41dddd26ae230af99b2b7",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-02/v4-20261024-mac-r2/c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974.zip",
+          "sha256": "c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974",
+          "bytes": 10072977,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.495740827114428,
+          "largeDeltaFraction": 0.00759833644278607
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-tourism-lodging-pack",
+      "vertical": "product-sales",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "bodyManifestSha256": "2f836560fd83bdaa675dca10ea09bff68172ba09d878a621fa8ea8a26c85ee6a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00375",
+      "approvedCoverRevisionId": "eb4963410fc506b69e93bfcbcb9a96112144061b609cde8ecbf3772f06cb7b77",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-03 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:39:35.648Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327860122/rectangle_large_type_2_12dc8af8294fe9865a47f0c34bcaefc9.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "2f836560fd83bdaa675dca10ea09bff68172ba09d878a621fa8ea8a26c85ee6a",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-03/v4-20261024-mac-r2/4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1.zip",
+          "sha256": "4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1",
+          "bytes": 9769834,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.033741837686567, largeDelta=0.009795942164179105"
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-municipal-finance-pack",
+      "vertical": "product-sales",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "bodyManifestSha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00372",
+      "approvedCoverRevisionId": "f1fba598be6f7586648a1806d9e36be7dd936475b0193b4219404d4fd00cbd54",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-04 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 6000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:52:47.717Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 6000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327863352/rectangle_large_type_2_47c65477c27dcdf3f4bb97c4ab5faa33.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "ac93edb60bd1cbade018158335dba6c8c9f5515a5271f1f4a89e2ffdd808e541",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-04/v4-20261024-mac-r2/d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3.zip",
+          "sha256": "d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3",
+          "bytes": 10192410,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.129964629975125, largeDelta=0.011221626243781094"
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-healthcare-nursing-pack",
+      "vertical": "product-sales",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "bodyManifestSha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00366",
+      "approvedCoverRevisionId": "7956be8e8b1a760a787d362cfc5fc4bfcb720354894eb8a016b9cbb7dd121d72",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-05 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T06:03:46.907Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327866695/rectangle_large_type_2_f8824e0d379bc6d8b55f8d15a4559f7f.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "4fd9ddb2e05c9142dc56a4b1d50d4a1a07bc9a9da3724264e92c591deedb6cc3",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-05/v4-20261024-mac-r2/530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0.zip",
+          "sha256": "530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0",
+          "bytes": 10734585,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.3850361473880595,
+          "largeDeltaFraction": 0.008512126865671642
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-education-childcare-pack",
+      "vertical": "product-sales",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "bodyManifestSha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00364",
+      "approvedCoverRevisionId": "3be8cb3113aac0d9116776d3a3213ae5f39783b51795283c388f5d2ef9bbd44c",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-06 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T06:55:42.324223Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327884421/rectangle_large_type_2_da2953b07fcf070247c692d68cd7c50b.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "a85f4bf091fc8dd3221a0d7d2ed5d8902d6a27709b817fba1a77cc122293583d",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-06/v4-20261024-mac-r2/fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114.zip",
+          "sha256": "fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114",
+          "bytes": 10729980,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.784521144278607,
+          "largeDeltaFraction": 0.009890391791044777
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-migration-living-pack",
+      "vertical": "product-sales",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "bodyManifestSha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00371",
+      "approvedCoverRevisionId": "d2a48003829b9eec655e5a2445a837c3df79f2746daf45d4ab3f6a88c654c64d",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-07 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 4500 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:06:21.317913Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4500,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327888189/rectangle_large_type_2_bd106c7f2e77404a07abb96967e5f273.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "de00cc8e92f85146238ac2f1454b38550f69d444b34739608cb450208d238fd8",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-07/v4-20261024-mac-r2/f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab.zip",
+          "sha256": "f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab",
+          "bytes": 9932503,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 3.876691930970149,
+          "largeDeltaFraction": 0.0069053171641791046
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-retail-trade-area-pack",
+      "vertical": "product-sales",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "bodyManifestSha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00374",
+      "approvedCoverRevisionId": "9c23960f9b2c8ab8f217cd6bf915c6aac1b904a4c6515f495cd6f2384cea2cf8",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-08 manifest and private R2 ZIP readback matched SHA",
+        "Published note API verified stats47, published state, title, JPY 6000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:16:28.620904Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 6000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327892069/rectangle_large_type_2_8a0b3ef48c7ce4ae9be9ceed6aed7fe5.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "3f95db3fb3fa649751f73fd5458a6715184d0ff25ce6031c770208c45c05a17b",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-08/v4-20261024-mac-r2/c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb.zip",
+          "sha256": "c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb",
+          "bytes": 9903237,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.269438743781095, largeDelta=0.01054415422885572"
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-industry-economy-pack",
+      "vertical": "product-sales",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "bodyManifestSha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00369",
+      "approvedCoverRevisionId": "dc2cae75140ce897803f11f69b51f33804814a7e4c9abc17384aec0d1091fd63",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-09 manifest and private R2 ZIP readback matched SHA; actual PDF was checked at 286 pages and copy corrected",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:28:10.860780Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327896437/rectangle_large_type_2_98a3986f90264806883eb5d2b6ade8b4.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "da499b927290f039fa143aaab6a0259cba500e4ca12a185c2d19191b47b1932c",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-09/v4-20261024-mac-r2/4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1.zip",
+          "sha256": "4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1",
+          "bytes": 10229618,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "fail",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "reason": "public image differs: MAE=5.047595615671642, largeDelta=0.00999922263681592"
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-disaster-infrastructure-pack",
+      "vertical": "product-sales",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "bodyManifestSha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00363",
+      "approvedCoverRevisionId": "6539179bb6a97326bb79651abbcbe4846db8580875c41442f1d2a17eb9c87d36",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "User prioritized publication before detailed quality review; sales copy explicitly discloses that Office display/edit/recalculation is not yet tested",
+        "ZIP contains seven advertised files; each file SHA matched P-10 manifest and private R2 ZIP readback matched SHA; PDF has 495 pages per manifest",
+        "Published note API verified stats47, published state, title, JPY 5000 price, non-null separator and cover; authenticated editor verified ZIP after paid boundary; Office and license/source detail review remains"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T07:48:43.317301Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 100,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327904763/rectangle_large_type_2_9fee30f49a8956331f44c2f3ccfcf7ff.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "92d5ffe9d2a41fb4a08bd1cb4359d7c2caa469f1ba0fa814ffdbe74f0488daf0",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-10/v4-20261024-mac-r2/5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2.zip",
+          "sha256": "5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2",
+          "bytes": 10713676,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ],
+        "coverPixelVerification": {
+          "status": "pass",
+          "checkedAt": "2026-10-24T07:53:07.914Z",
+          "method": "private approved 1280x670 RGB vs public note CDN 1280x670 RGB",
+          "meanPixelError": 4.621483597636816,
+          "largeDeltaFraction": 0.00845848880597015
+        }
+      }
+    },
+    {
+      "articleKey": "prefecture-map-chart-assets-pack",
+      "vertical": "product-sales",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "bodyManifestSha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00370",
+      "approvedCoverRevisionId": "5b127779fba8f97ac9b34ffd3118b55871cdaa68662cb0a502f083cad249dbc9",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "Existing private draft n0f5dafef7fa8 was published after the daily attachment quota reset; no duplicate article was created",
+        "Private R2 archive readback matched SHA; one ZIP was visible after the paid boundary in the authenticated editor, while the public body excluded it",
+        "Published note API verified stats47 account, title, JPY 4000 price, separator and cover; approved cover pixels and body invariants passed after cover-only update",
+        "Office real-device and source/license detail reviews remain deferred under the user’s publish-first instruction"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "publicationAttempt": {
+        "checkedAt": "2026-10-24T08:07:12.995443Z",
+        "status": "blocked-daily-attachment-quota",
+        "account": "stats47",
+        "noteDraftEditorUrl": "https://editor.note.com/notes/n0f5dafef7fa8/edit/",
+        "noteDraftSaved": true,
+        "attachmentVisible": false,
+        "archiveSha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+        "error": "1日にアップロードできるのは10回までです",
+        "uploadAttempts": 3,
+        "resume": "Open the existing private editor draft. Do not create a second article or repeat the upload until the note.com daily limit resets. Verify ZIP after the paid boundary before publishing."
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T15:17:36.903Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 4000,
+        "tags": 100,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-ba04cf0d037e3fca.json",
+        "bodyManifestSha256": "c6407e28e85d28819a2deeb699219608c3fd910463826fdf77926aca5ffbd3ae",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-11/v4-20261024-mac-r2/137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548.zip",
+          "sha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+          "bytes": 9510267,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review",
+          "one extra #指標 tag added in editor; review post-publication"
+        ]
+      }
+    },
+    {
+      "articleKey": "prefecture-all-in-one-pack",
+      "vertical": "product-sales",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "bodyManifestSha256": "cc572e00e7b5595eafcbbd4fae63d081d3cc0431b26bf0e46075ddb3b26e26c7",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00362",
+      "approvedCoverRevisionId": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "P-12 archive has eight advertised files, verified SHA and private R2 readback; manuscript discloses Office real-device testing is pending",
+        "Published note API verified stats47 account, title, JPY 9800 price, 99 tags and paid separator",
+        "Authenticated article body contains the ZIP once after the paid boundary; public body excludes it; approved cover pixels and body invariants passed"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "publicationPreparation": {
+        "archiveSha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
+        "archiveBytes": 20454473,
+        "archiveFiles": 8,
+        "privateR2ReadbackVerified": true,
+        "coverApproved": true,
+        "bodySavedAt": "2026-10-24T09:57:08.985Z",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T16:17:02.841Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 9800,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328108626/rectangle_large_type_2_a20b7efd70ea5453e06527827d8cc689.png?fit=bounds&quality=85&width=1280",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-a91314940851f6f1.json",
+        "bodyManifestSha256": "cc572e00e7b5595eafcbbd4fae63d081d3cc0431b26bf0e46075ddb3b26e26c7",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-12/v4-20261024-mac-r2/833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379.zip",
+          "sha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
+          "bytes": 20454473,
+          "entries": 8,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
+    },
+    {
+      "articleKey": "prefecture-household-consumption-pack",
+      "vertical": "product-sales",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "bodyManifestSha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00367",
+      "approvedCoverRevisionId": "888c923b04334da4c81b74712db6f038d3950c93e1ff409f257ac23c7f5f99a7",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "P-14 archive has seven advertised files, verified SHA and private R2 readback; manuscript discloses Office real-device testing is pending",
+        "Published note API verified stats47 account, title, JPY 5000 price, 99 tags and paid separator",
+        "Authenticated article body contains the ZIP once after the paid boundary; public body excludes it; approved cover pixels and body invariants passed"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "publicationPreparation": {
+        "archiveSha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+        "archiveBytes": 13129305,
+        "archiveFiles": 7,
+        "privateR2ReadbackVerified": true,
+        "coverApproved": true,
+        "bodySavedAt": "2026-10-24T12:00:05.203Z",
+        "status": "published-verified"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T16:25:46.205Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 5000,
+        "tags": 99,
+        "publicInlineImages": 1,
+        "paidSeparator": true,
+        "paidZipVisibleInAuthenticatedEditor": true,
+        "paidZipCount": 1,
+        "paidZipAfterSeparator": true,
+        "publicBodyExcludedZip": true,
+        "coverStatus": "verified-approved-imagegen",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/328109605/rectangle_large_type_2_3b2aa0eb69bbac8716e24beaae2009b7.png?fit=bounds&quality=85&width=1280",
+        "coverVerificationJournal": "data/note/evidence/note-cover-refresh-ledger-5967013781b32eb0.json",
+        "bodyManifestSha256": "1cd7fddce20d094e92f8112f9b32b8b455621ced59a7b2a356c65e0add936e30",
+        "productArchive": {
+          "bucket": "stats47-private",
+          "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
+          "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+          "bytes": 13129305,
+          "entries": 7,
+          "readbackVerified": true
+        },
+        "deferred": [
+          "Office 365 real-device display/edit/recalculation",
+          "source/license detail review"
+        ]
+      }
+    },
+    {
+      "articleKey": "a-annual-paid-leave-11-days-or-more-ratio",
+      "vertical": "stats47-note",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "bodyManifestSha256": "b48ce1cd24c585ebaa721320930703438be0371ef7c1d5ce98532e62f5bf324a",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00500",
+      "approvedCoverRevisionId": "adcf1f4e800a74f3e7add83dab7fa0ffe6ba6a7fd4e371f4fbaf5e9bd98b393a",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nfb6a7a246b12",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 9,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true
+      }
+    },
+    {
+      "articleKey": "a-manufacturing-industry-annual-income",
+      "vertical": "stats47-note",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "bodyManifestSha256": "ff5c58da739bad6cd11130784d2c4afbaada77c9a868375d21b31be627772c49",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00501",
+      "approvedCoverRevisionId": "700938de288d09e3e07e39f9f968f072d0d0292c91d74dd8f38d147af9227cce",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/nb09980b2ef49",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 9,
+        "misplacedFigureCount": 0,
+        "eyecatchConfigured": true
+      }
+    },
+    {
+      "articleKey": "h-howto-mymaps-kml",
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "bodyManifestSha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00503",
+      "approvedCoverRevisionId": "6dda67d39b8b2915fcec6131ef7cb81d7831829a21b89f3483c34c633d6fc104",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "Published as requested with a visible note that the external application result was not tested on this Mac; live note API verified account, public state, title, free price, 99 tags, 2 inline image(s), and cover configuration"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n0c132ee7d825",
+      "mymapsValidation": {
+        "attemptedAt": "2026-10-24",
+        "sourceKml": "https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original",
+        "sourceKmlBytes": 2515638,
+        "sourceKmlPlacemarks": 47,
+        "result": "blocked-picker-blank",
+        "details": "ChromeのGoogleマイマップで非公開テスト地図を作成。KMLインポートのGoogle Pickerが再読込後も白画面。Googleドライブ経由のKMLアップロードは完了したが、Driveの「アプリで開く」にMy Mapsがなく、マイマップの表示結果は確認できなかった。",
+        "cleanup": "テスト地図とDriveにアップロードしたKMLをゴミ箱へ移動し、マイマップ所有一覧が空であることを確認。",
+        "resumeCondition": "My Mapsのファイル選択画面が表示される環境で同じKMLをインポートし、県別色と県クリックの情報・結果スクリーンショットを確認。"
+      },
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:00:13.589Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 0,
+        "tags": 99,
+        "inlineImages": 2,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327846553/rectangle_large_type_2_3b6a447fccfb1ccbfb535af9ffe8f503.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8"
+      }
+    },
+    {
+      "articleKey": "h-howto-mymaps-share",
+      "vertical": "stats47-note",
+      "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
+      "bodyManifestSha256": "d5f4be44c5a421af228e08696cbd43b225a4fd6b9f74b904537ac3dff0174464",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00505",
+      "approvedCoverRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [],
+      "publishedUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "publicChecks": {
+        "httpStatus": 200,
+        "account": "stats47",
+        "status": "published",
+        "titleMatches": true,
+        "priceJpy": 0,
+        "hashtagCount": 99,
+        "embeddedFigureCount": 1,
+        "eyecatchConfigured": true,
+        "r2BodyDeepVerified": true
+      },
+      "publicCoverVerification": {
+        "key": "h-howto-mymaps-share",
+        "url": "https://note.com/stats47/n/n08d8b24bf9c5",
+        "publicImage": "https://assets.st-note.com/production/uploads/images/327779403/rectangle_large_type_2_ef468439c8d16f797e7eb1043c2890e1.png?fit=bounds&quality=85&width=1280",
+        "archiveRevisionId": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+        "approvedRevisionId": "b86f591bf9a3c9d309db5258ae1c9302ccfd4252163cd61b39215af8eff57ad6",
+        "sourceSha256": "a58c7c93c0049d64f8527b9b78615cbd6b8bab4c1cf6c2ce7488cdf96c70eee3",
+        "meanPixelError": 3.1272819496268656,
+        "largeDeltaFraction": 0.004900497512437811,
+        "verifiedAt": "2026-10-24T01:55:16.082Z"
+      }
+    },
+    {
+      "articleKey": "h-howto-excel-filled-map",
+      "vertical": "stats47-note",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "bodyManifestSha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
+      "bodyVerifiedDeep": true,
+      "productionId": "NCI-00504",
+      "approvedCoverRevisionId": "c92785b0e470a9ebf4026aff423d045b7085290ba4b8805ac3199a7cba50a796",
+      "publishedTitleMatches": [],
+      "decision": "published-verified",
+      "reasons": [
+        "Published as requested with a visible note that the external application result was not tested on this Mac; live note API verified account, public state, title, free price, 99 tags, 1 inline image(s), and cover configuration"
+      ],
+      "publishedUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "publishedEvidence": {
+        "checkedAt": "2026-10-24T05:00:13.590Z",
+        "account": "stats47",
+        "status": "published",
+        "priceJpy": 0,
+        "tags": 99,
+        "inlineImages": 1,
+        "coverStatus": "configured",
+        "coverUrl": "https://assets.st-note.com/production/uploads/images/327848844/rectangle_large_type_2_c521a42a3d5db55eed30b3f8572660d2.png?fit=bounds&quality=85&width=1280",
+        "bodyManifestSha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab"
+      }
+    }
+  ]
+}

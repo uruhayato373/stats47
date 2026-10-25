@@ -34,7 +34,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の所得・賃金データ集をお渡しします",
-    "description": "県民所得・賃金・求人・採用市場をまとめて把握・比較する",
+    "description": "賃金・求人・採用市場の指標をまとめて把握・比較する",
     "priceYen": 5000,
     "externalUrl": "https://coconala.com/services/4323916",
     "included": [
@@ -56,7 +56,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の観光・交通データ集をお渡しします",
-    "description": "宿泊・訪日・観光消費の地域差をまとめて把握・比較する",
+    "description": "宿泊・訪日・観光関連指標の地域差を把握・比較する",
     "priceYen": 5000,
     "externalUrl": "https://coconala.com/services/4323937",
     "included": [
@@ -78,7 +78,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の自治体財政データ集をお渡しします",
-    "description": "歳入歳出・財政指標・類似団体比較をまとめて把握する",
+    "description": "歳入歳出・財政指標の都道府県差を把握する",
     "priceYen": 6000,
     "externalUrl": "https://coconala.com/services/4324057",
     "included": [
@@ -122,7 +122,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の教育・文化データ集をお渡しします",
-    "description": "学校・保育・進学・出生・子育て環境をまとめて把握する",
+    "description": "学校・保育・進学・子育て環境の指標を把握する",
     "priceYen": 6500,
     "externalUrl": "https://coconala.com/services/4324062",
     "included": [
@@ -145,7 +145,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の気候・土地データ集をお渡しします",
-    "description": "住宅・物価・人口移動など移住候補地の生活データを比較する",
+    "description": "住宅・物価など移住候補地の生活データを比較する",
     "priceYen": 4500,
     "externalUrl": "https://coconala.com/services/4324065",
     "included": [
@@ -168,7 +168,7 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "coconala",
     "channelLabel": "編集可能データ",
     "title": "47都道府県の商業・小売データ集をお渡しします",
-    "description": "出店候補地の商圏・人口・購買力を点数化して比較する",
+    "description": "出店候補地の商業・人口・購買に関する指標を比較する",
     "priceYen": 5000,
     "externalUrl": "https://coconala.com/services/4324067",
     "included": [

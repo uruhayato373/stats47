@@ -1,16 +1,16 @@
 {
-  "total": 1619,
+  "total": 1627,
   "staged": false,
   "byStatus": {
-    "both": 1535,
+    "both": 1551,
     "jsonOnly": 0,
-    "neither": 84
+    "neither": 76
   },
   "byMethod": {
-    "done": 1535,
-    "manual": 34,
-    "ssot-restore": 22,
-    "ssot-restore-new": 28
+    "done": 1551,
+    "manual": 33,
+    "ssot-restore": 17,
+    "ssot-restore-new": 26
   },
   "autoRecoverableCount": 0,
   "entries": [
@@ -524,23 +524,23 @@
       "slug": "alcohol-prefecture-map",
       "base": "alcohol-consumption-ranking",
       "chartType": "ranking",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "alcohol-prefecture-map",
       "base": "alcohol-consumption-map",
       "chartType": "tilemap",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "TILEMAP-LINEAGE-01"
+      "residualCard": null
     },
     {
       "slug": "alcohol-prefecture-map",
@@ -555,14 +555,25 @@
     },
     {
       "slug": "alcohol-prefecture-map",
+      "base": "shochu-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "alcohol-prefecture-map",
       "base": "beer-tax-reform-comparison",
       "chartType": "ranking",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "allocation-tax-area",
@@ -755,6 +766,39 @@
       "slug": "area-ratio-prefecture-gap",
       "base": "area-ratio-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "automotive-industry-transformation-map",
+      "base": "manufacturing-shipment-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "automotive-industry-transformation-map",
+      "base": "manufacturing-shipment-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "automotive-industry-transformation-map",
+      "base": "manufacturing-shipment-timeseries",
+      "chartType": "line",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -1193,8 +1237,8 @@
     },
     {
       "slug": "birth-death-gap-decline",
-      "base": "inline-chart-1",
-      "chartType": "unknown",
+      "base": "natural-increase-rate-ranking",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8970,14 +9014,14 @@
     },
     {
       "slug": "livable-prefecture-composite-ranking",
-      "base": "radar-comparison",
-      "chartType": "ranking",
-      "hasJson": false,
+      "base": "top3-radar",
+      "chartType": "unknown",
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "local-allocation-tax-prefecture-vs-agriculture-forestry",
@@ -9511,12 +9555,23 @@
       "slug": "manufacturing-aichi-dominance",
       "base": "manufacturing-trend",
       "chartType": "line",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "manufacturing-employees-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
     },
     {
       "slug": "manufacturing-aichi-dominance",
@@ -9533,34 +9588,23 @@
       "slug": "manufacturing-aichi-dominance",
       "base": "manufacturing-heatmap",
       "chartType": "unknown",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "manufacturing-aichi-dominance",
       "base": "industrial-zone-ranking",
       "chartType": "ranking",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
-    },
-    {
-      "slug": "manufacturing-aichi-dominance",
-      "base": "industry-composition-stacked",
-      "chartType": "stacked",
-      "hasJson": false,
-      "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
-      "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "manufacturing-aichi-dominance",
@@ -10258,6 +10302,50 @@
     {
       "slug": "municipality-count-prefecture-gap",
       "base": "municipality-count-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "municipality-population-change-census-2025",
+      "base": "prefecture-population-change-rate-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "municipality-population-change-census-2025",
+      "base": "municipality-population-change-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "municipality-population-change-census-2025",
+      "base": "municipality-population-change-count-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "municipality-population-change-census-2025",
+      "base": "tokyo-23-wards-population-change-rate-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,

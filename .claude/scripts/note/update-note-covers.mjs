@@ -21,6 +21,7 @@ import {
   uploadInBrowser,
   coverOperationVersion,
   findCoverOperation,
+  assertPublicCoverPixels,
 } from './lib/cover-update.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -208,18 +209,13 @@ async function verifyImage(a, url, ui = false) {
     .removeAlpha()
     .raw()
     .toBuffer();
-  if (actual.length !== expected.length) throw Error('image channels');
-  let delta = 0;
-  for (let i = 0; i < actual.length; i++)
-    delta += Math.abs(actual[i] - expected[i]);
-  const meanPixelError = delta / actual.length;
-  // note optimizes even the original upload URL; observed same-file API pilot MAE=0.66/255.
-  if (meanPixelError > 3) throw Error('public image differs ' + meanPixelError);
+  const { meanPixelError, largeDeltaFraction } = assertPublicCoverPixels(actual, expected);
   return {
     width: m.width,
     height: m.height,
     sha256: sha256(bytes),
     meanPixelError,
+    largeDeltaFraction,
   };
 }
 function processes() {

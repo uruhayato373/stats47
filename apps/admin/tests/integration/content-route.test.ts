@@ -57,6 +57,7 @@ describe("GET /api/content", () => {
           },
         }),
         "data/note/note-draft-index.json": JSON.stringify({ drafts: {} }),
+        "data/note/cover-assets.json": JSON.stringify({ articles: [] }),
       },
     });
     process.env.STATS47_PROJECT_ROOT = root;

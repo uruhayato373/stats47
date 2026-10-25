@@ -1,6 +1,6 @@
 # 再取り込みキュー (LATEST)
 
-- 生成: 2026-10-17T21:39:59.410Z
+- 生成: 2026-10-24T21:49:11.836Z
 - 対象: 形状 allowlist の `known-broken` 0 件
 - 判定: config の最終更新 (git) と 配信データの書き込み日 (R2 Last-Modified) の前後
 - ★全 metric には広げない。一括コミットが全 config に触れるため日付では

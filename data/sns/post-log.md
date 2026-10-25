@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**739 件** (最終更新: 2026-10-23)
+**742 件** (最終更新: 2026-10-24)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-24 | 📸 Instagram | area-carousel/15000 | 【都道府県データ】新潟県、全国で何位？  全国トップクラス: 水稲収穫量（水稲・子実用の収穫量） 1位（646100t・… | [🔗](https://www.instagram.com/p/De4Sw8GFW6n/) |
+| 2026-10-24 | 🧵 Threads | area/area-31000-profile | 鳥取を1位・47位だけで語らない。 県木はダイセンキャラボク、県鳥はオシドリ。人口・産業・暮らしの県データブックへ。 続… | [🔗](https://www.threads.com/@stats47jp/post/De3rB8SAo7g) |
+| 2026-10-24 | 🧵 Threads | ranking/annual-precipitation | 3,754mm・3,069mm・3,065mm。  年間降水量の上位3県は静岡・沖縄・鹿児島。 最も少ない宮城は1,02… | [🔗](https://www.threads.com/@stats47jp/post/De29LzkgnsG) |
 | 2026-10-23 | 📸 Instagram | compare-carousel/26000-vs-28000 | 【県どうしの比較】京都府 vs 兵庫県  海面漁業漁獲量: 兵庫県が大きい（2023年・出典: 社会・人口統計体系） 交… | [🔗](https://www.instagram.com/p/De10owrILJa/) |
 | 2026-10-23 | 🧵 Threads | area/area-30000-profile | 和歌山のデータブックを公開中。 メジロとみかん、うめ（南高梅）を入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/De1JqU1kwVq) |
 | 2026-10-23 | 🧵 Threads | ranking/grilled-eel-consumption-expenditure | うなぎのかば焼き、和歌山と北海道で4.3倍差。  和歌山 4,776円 北海道 1,108円  2位静岡3,921円、3… | [🔗](https://www.threads.com/@stats47jp/post/De0asiFEW-m) |

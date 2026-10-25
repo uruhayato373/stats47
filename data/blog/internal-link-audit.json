@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-17T21:11:32.753Z",
+  "generatedAt": "2026-10-24T21:23:34.860Z",
   "site": "https://stats47.jp",
-  "articles": 608,
-  "totalLinks": 3516,
+  "articles": 609,
+  "totalLinks": 3534,
   "absoluteLinks": 126,
-  "uniqueLinks": 982,
+  "uniqueLinks": 994,
   "byType": {
     "areas": {
-      "total": 47,
+      "total": 50,
       "broken": 0
     },
     "blog": {
-      "total": 194,
+      "total": 196,
       "broken": 0
     },
     "category": {
@@ -23,7 +23,7 @@
       "broken": 0
     },
     "ranking": {
-      "total": 704,
+      "total": 711,
       "broken": 3
     },
     "survey": {

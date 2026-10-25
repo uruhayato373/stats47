@@ -5,6 +5,22 @@ export const sha256 = (value) =>
 export const assetPath = (url) =>
   url ? new URL(url).origin + new URL(url).pathname : null;
 
+/** Accept note's PNG optimization while rejecting large or concentrated changes. */
+export function assertPublicCoverPixels(actual, expected) {
+  if (actual.length !== expected.length) throw Error('image channels');
+  let delta = 0, largeDelta = 0;
+  for (let i = 0; i < actual.length; i++) {
+    const difference = Math.abs(actual[i] - expected[i]);
+    delta += difference;
+    if (difference >= 30) largeDelta++;
+  }
+  const meanPixelError = delta / actual.length;
+  const largeDeltaFraction = largeDelta / actual.length;
+  if (meanPixelError > 5 || largeDeltaFraction > 0.01)
+    throw Error(`public image differs: MAE=${meanPixelError}, largeDelta=${largeDeltaFraction}`);
+  return { meanPixelError, largeDeltaFraction };
+}
+
 /** Include already delivered revisions so a partial batch keeps the same journal. */
 export const coverOperationVersion = (articles) =>
   `ledger-${sha256(articles.map((a) => `${a.key}:${a.sha256}`).sort().join('\n')).slice(0, 16)}`;

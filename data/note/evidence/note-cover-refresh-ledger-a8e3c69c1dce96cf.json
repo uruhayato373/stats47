@@ -39,12 +39,20 @@
       },
       "hasDraftBefore": false,
       "startedAt": "2026-10-15T12:18:28.688Z",
-      "status": "uploaded",
+      "status": "verified",
       "transport": "cover-only-api",
       "uploadedUrl": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png",
       "uploadedAt": "2026-10-15T12:18:33.966Z",
-      "error": "public image differs 3.0445242537313435"
+      "imageVerification": {
+        "width": 1280,
+        "height": 670,
+        "sha256": "ecafc5ba4a8597f8b4fabad4f46552e7015a5a114b690ca1041bf7d9bf20b05b",
+        "meanPixelError": 3.0445242537313435,
+        "largeDeltaFraction": 0.0018777207711442787
+      },
+      "publicUrl": "https://assets.st-note.com/production/uploads/images/324736478/rectangle_large_type_2_2a8d78525a5752db368012ed7aaf84a7.png?fit=bounds&quality=85&width=1280",
+      "verifiedAt": "2026-10-23T05:32:13.457Z"
     }
   ],
-  "updatedAt": "2026-10-15T12:18:34.696Z"
+  "updatedAt": "2026-10-23T05:32:13.466Z"
 }

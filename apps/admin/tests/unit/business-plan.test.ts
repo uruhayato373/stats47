@@ -92,7 +92,7 @@ describe("business plan admin server", () => {
     expect(result.m1.note).toMatchObject({
       planned: 15,
       registered: 15,
-      withBody: 4,
+      withBody: 10,
     });
     expect(result.m1.note.products).toHaveLength(15);
     expect(result.m1.note.products[0]).toMatchObject({

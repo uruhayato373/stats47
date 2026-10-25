@@ -8606,9 +8606,9 @@
         }
       ],
       "lastError": {
-        "step": "check-approval",
+        "step": "harvest",
         "error": "session-expired",
-        "at": "2026-10-17T22:00:09.571Z"
+        "at": "2026-10-24T22:01:55.487Z"
       }
     },
     "s00000019877001": {
@@ -9382,7 +9382,7 @@
       "a8mat": null,
       "vertical": "energy",
       "score": 0.4185000000000001,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9414,6 +9414,13 @@
           "to": "approved",
           "at": "2026-10-19T07:29:26.683Z",
           "note": "register-held:提供が九州のみで掲載面を地域で絞れない"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-10-24T22:01:50.012Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 9000,
@@ -9421,7 +9428,8 @@
       "rewardType": "fixed",
       "_priority": 10,
       "_ce": 0,
-      "priority": 10
+      "priority": 10,
+      "selectedForRegister": true
     },
     "s00000020563001": {
       "programId": "s00000020563001",
@@ -11032,7 +11040,7 @@
       "rewardYen": 10000,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -11048,8 +11056,19 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-10-19T06:37:15.976Z"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-10-24T22:01:41.284Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000020819003": {
       "programId": "s00000020819003",
@@ -11444,7 +11463,9 @@
           "to": "approved",
           "at": "2026-10-19T06:37:16.117Z"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000027683001": {
       "programId": "s00000027683001",
@@ -11456,7 +11477,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -11482,9 +11503,19 @@
           "to": "approved",
           "at": "2026-10-19T07:29:26.690Z",
           "note": "register-held:対象が関東・関西13都府県のみで掲載面を地域で絞れない"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-10-24T22:01:46.132Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
-      "priority": 10
+      "priority": 10,
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true
     },
     "s00000027771001": {
       "programId": "s00000027771001",
@@ -11833,7 +11864,7 @@
       "a8mat": null,
       "vertical": "housing",
       "score": 0.04000000000000001,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -11849,8 +11880,19 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-10-19T06:37:16.324Z"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-10-24T22:01:55.504Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000009633001": {
       "programId": "s00000009633001",
@@ -13083,7 +13125,7 @@
       "score": 0.30000000000000004,
       "rewardYen": 6500,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -13099,8 +13141,19 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-10-19T06:37:16.208Z"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-10-24T22:01:52.743Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000027363001": {
       "programId": "s00000027363001",
@@ -14631,5 +14684,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-19T07:31:21.519Z"
+  "updatedAt": "2026-10-24T22:01:55.504Z"
 }

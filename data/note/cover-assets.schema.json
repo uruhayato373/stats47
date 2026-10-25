@@ -142,6 +142,16 @@
           "type": "integer",
           "minimum": 1
         },
+        "titleCorrection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["generatedTitle", "publishedTitle", "reason"],
+          "properties": {
+            "generatedTitle": { "type": "string", "minLength": 1 },
+            "publishedTitle": { "type": "string", "minLength": 1 },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        },
         "brief": {
           "type": [
             "object",

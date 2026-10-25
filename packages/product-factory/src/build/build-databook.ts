@@ -139,8 +139,8 @@ export async function buildDatabook(
   files.push("data.csv");
   if (has("csv")) built.push("csv");
 
-  // 代表指標 (先頭 = 人口) のコロプレスをサムネイルに使う
-  const primary = datasets[0];
+  // パック定義の代表指標を優先する。snapshot の並びは主題順とは限らない。
+  const primary = product.datasets.map((key) => datasets.find((d) => d.rankingKey === key)).find((d) => d !== undefined) ?? datasets[0];
   const choropleth = classifyChoropleth(primary, { classes: 5, paletteId: "blues-sequential" });
   const svg = renderChoroplethSvg(geo, choropleth, {
     width: 620,

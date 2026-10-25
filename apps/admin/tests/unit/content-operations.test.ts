@@ -46,6 +46,7 @@ function fixture(overrides: Partial<ContentOperationsInput> = {}): ContentOperat
       },
     ],
     noteDraftStatuses: { "ready-note": "ready-to-publish" },
+    noteCoverApprovals: { "ready-note": true },
     backlogText: "# backlog\n\n### [SYSTEM-CONTENT-01] 運用基盤の改善\n",
     kdpPolicy: {
       mode: "active",
@@ -75,6 +76,29 @@ describe("content operations core", () => {
       ["ready-note", "ready"],
       ["live-note", "published"],
     ]);
+  });
+
+  it("Gitの未公開レコードをnote.com下書きと誤認せず、公開条件ごとに止める", () => {
+    const source = fixture();
+    const drafts = [
+      { key: "no-body", title: "本文なし", vertical: "stats47-note", r2Body: false },
+      { key: "same-title", title: "公開済み記事", vertical: "stats47-note", r2Body: true },
+      { key: "product", title: "販売記事", vertical: "product-sales", r2Body: true },
+      { key: "no-cover", title: "カバーなし", vertical: "stats47-note", r2Body: true },
+    ].map((article) => ({ ...article, magazine: null, isPaid: false, status: "draft", r2Path: `note/${article.vertical}/${article.key}` }));
+    const result = buildContentOperations({
+      ...source,
+      noteArticles: [...drafts, source.noteArticles[1]],
+      noteDraftStatuses: { "no-body": "ready-to-publish" },
+    });
+
+    expect(result.note.filter((article) => article.stage === "blocked").map((article) => [article.key, article.publicationGate]).sort()).toEqual([
+      ["no-body", "body"],
+      ["no-cover", "cover"],
+      ["product", "product"],
+      ["same-title", "duplicate"],
+    ]);
+    expect(result.channels.find((channel) => channel.channel === "note")).toMatchObject({ blocked: 4, ready: 0, published: 1 });
   });
 
   it("商品別の表紙分類と最新版を読み取りモデルへ渡す", () => {

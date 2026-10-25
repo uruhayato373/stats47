@@ -12,8 +12,16 @@ import { Input } from "@/components/ui/input";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "note運用 — stats47 admin" };
 
-type Query = { stage?: string; vertical?: string; q?: string };
-const STAGES = ["ready", "draft", "published"] as const;
+type Query = { stage?: string; gate?: string; vertical?: string; q?: string };
+const STAGES = ["ready", "draft", "blocked", "published"] as const;
+const STAGE_LABELS = { ready: "公開準備完了", draft: "内容レビュー中", blocked: "公開条件未充足", published: "公開済み" } as const;
+const GATE_LABELS = {
+  body: "本文未作成",
+  duplicate: "同題の公開記事あり",
+  product: "販売条件の確認待ち",
+  cover: "カバー未採用",
+  review: "内容レビュー待ち",
+} as const;
 
 function href(query: Query, patch: Partial<Query>) {
   const params = new URLSearchParams();
@@ -34,12 +42,14 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
     );
   }
   const stage = STAGES.includes(query.stage as (typeof STAGES)[number]) ? query.stage : undefined;
+  const gate = Object.keys(GATE_LABELS).includes(query.gate ?? "") ? query.gate : undefined;
   const verticals = [...new Set(data.note.map((x) => x.vertical))].sort();
   const vertical = verticals.includes(query.vertical ?? "") ? query.vertical : undefined;
   const word = query.q?.trim().toLowerCase() ?? "";
   const articles = data.note.filter(
     (article) =>
       (!stage || article.stage === stage) &&
+      (!gate || article.publicationGate === gate) &&
       (!vertical || article.vertical === vertical) &&
       (!word || `${article.key} ${article.title}`.toLowerCase().includes(word)),
   );
@@ -49,10 +59,10 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
     <div className="space-y-8">
       <PageHeading
         title="note運用"
-        source={`${datasetPath("note.articles")} (記事台帳) + R2 note/<vertical>/<slug>/ (本文)`}
+        source={`${datasetPath("note.articles")} (Git記事台帳) + R2 note/<vertical>/<slug>/ (本文)`}
       >
         <p className="text-xs text-console-muted">
-          原稿本文を複製せず、記事台帳の編集メタとR2本文の所在、note.com公開状態をまとめて確認します。
+          Git記事台帳の公開記録と制作中の記事を確認します。本文はR2に保存します。この画面の「未公開」はnote.com管理画面の下書き件数ではありません。
         </p>
         <Link href="/content/note/covers" className="text-xs text-console-accent hover:underline">カバー画像を分類別に確認する →</Link>
         <Link href="/product/content-quality?channel=note" className="text-sm text-console-accent hover:underline">本文・画像の改善方針を管理する →</Link>
@@ -63,12 +73,21 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
           <FilterLink href={href(query, { stage: undefined })} active={!stage}>すべて {data.note.length}</FilterLink>
           {STAGES.map((value) => (
             <FilterLink key={value} href={href(query, { stage: value })} active={stage === value}>
-              {value} {data.note.filter((x) => x.stage === value).length}
+              {STAGE_LABELS[value]} {data.note.filter((x) => x.stage === value).length}
+            </FilterLink>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <FilterLink href={href(query, { gate: undefined })} active={!gate}>公開条件すべて</FilterLink>
+          {Object.entries(GATE_LABELS).map(([value, label]) => (
+            <FilterLink key={value} href={href(query, { gate: value })} active={gate === value}>
+              {label} {data.note.filter((article) => article.publicationGate === value).length}
             </FilterLink>
           ))}
         </div>
         <form className="flex flex-wrap gap-2" action="/content/note">
           {stage ? <input type="hidden" name="stage" value={stage} /> : null}
+          {gate ? <input type="hidden" name="gate" value={gate} /> : null}
           <NativeSelect
             name="vertical"
             defaultValue={vertical}
@@ -93,7 +112,10 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
                 <Link className="font-medium text-console-accent hover:underline" href={'/product/content-quality?owner='+encodeURIComponent('note/'+article.key)}>{article.title}</Link>
                 <div className="font-mono text-[10px] text-console-muted">{article.key}</div>
               </Cell>
-              <Cell nowrap><StageBadge stage={article.stage} /></Cell>
+              <Cell nowrap>
+                <StageBadge stage={article.stage} />
+                {article.publicationGate ? <div className="text-[10px] text-console-muted">{GATE_LABELS[article.publicationGate]}</div> : null}
+              </Cell>
               <Cell nowrap muted>
                 <div>{article.vertical}</div>
                 <div>{article.series ?? "—"} / {article.magazine ?? "未割当"}</div>
@@ -110,7 +132,14 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
                 )}
                 <div className="text-[10px]">{article.r2Path}</div>
               </Cell>
-              <Cell>{article.nextAction}</Cell>
+              <Cell>
+                <div>{article.nextAction}</div>
+                {article.publicationGate === "cover" && article.coverProductionId ? (
+                  <Link href={`/content/note/covers?scope=all&ids=${encodeURIComponent(article.coverProductionId)}`} className="text-xs text-console-accent hover:underline">カバーを管理する →</Link>
+                ) : article.publicationGate === "product" ? (
+                  <Link href="/product/status" className="text-xs text-console-accent hover:underline">商品状態を確認する →</Link>
+                ) : null}
+              </Cell>
             </Row>
           ))}
         </DataTable>
