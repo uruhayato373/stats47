@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "40167993253-1",
+  "status": "implementation-needed",
+  "keyword": "漁港が多い県",
+  "targetPath": "/ranking/fishing-port-count-by-type",
+  "needs": "都道府県別に、どこに漁港が多いかを現在の数字で知りたい人が検索する。北海道と長崎県が上位という大枠に加え、直近の漁港数、数え方(第1〜4種)、その理由まで確かめたい。",
+  "gap": "対象ページは2003年度の漁業センサス値(長崎県372港・北海道356港)を、年の表示なしで出している。競合は水産庁の2022年4月時点値(北海道243港・長崎県228港)を載せ、種別の説明や離島・海岸線の理由も添える。ページ内では本文が2003年度、FAQが2018年度と食い違い、平均も102港と84.77港で食い違う。2026年4月時点の最新値は別ページ fishing-port-count-ksj が持つ。",
+  "done": "自動置換できる既存文字列がない。このファイルには seoTitle・seoDescription・description がなく、title は年や注記を入れる規約に反するため、置換はしなかった。残る実装は3点。(1) data/metrics/fishing-port-count-by-type.ts に seoTitle/seoDescription を新設し、2003年度の漁業センサス値であると明記して、最新値は fishing-port-count-ksj(水産庁 2026年4月1日現在)へ誘導する。(2) このページのAI解説FAQの2018年度・平均84.77港・最下位0港と本文の2003年度との食い違いを ranking-content-standards.md の生成パイプラインで再生成して直す。(3) 完了条件は validate:config が通り、公開ページで年表記がそろうこと。",
+  "method": "description",
+  "competitors": [
+    {
+      "url": "https://fishing-port.jp/ranking-list/prefectures/",
+      "findings": "検索ニーズの「漁港が多い県」に、水産庁データを加工した2022年4月時点の都道府県ランキングで直接答える。1位北海道243港、2位長崎県228港、3位愛媛県189港。第1〜4種の定義、漁港がない県の注記、北海道と長崎が多い理由(面積・海岸線・離島)、推移表を備える。全47都道府県を対象とし、出典と基準日を明記している。"
+    },
+    {
+      "url": "https://nlab.itmedia.co.jp/research/articles/1471340/",
+      "findings": "「漁港が多い都道府県ランキングTOP30」を、水産庁の漁港一覧に基づく2022年4月1日時点で示す。全国2,780港を示し、長崎県は離島に135港あり、うち102港が第1種という理由づけがある。ランキング形式と読み物の解説の組み合わせで、検索意図に合う。本文では上位2県以外の順位は確認できなかった。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/ranking/fishing-port-count-by-type",
+      "status": 200,
+      "fetchedAt": "2026-10-25T06:08:40.749Z",
+      "inputHash": "8836d4dc3dea37439e37ab5e21927863ab3b58210e7160fe6e463cc698e87722",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "d968cfb34696ddc39bfe13f17724593966a075794605de5a9d15d553d56db975",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "4739e6111eaa4cb06c76d995e9bc399994f2c77b6daad8881fe6700a0fa19e25"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "漁港が多い県"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/ranking/fishing-port-count-by-type"
+      },
+      {
+        "name": "WebSearch",
+        "target": "漁港数 都道府県別 ランキング 漁港が多い県"
+      },
+      {
+        "name": "WebSearch",
+        "target": "都道府県別 漁港数 ランキング 長崎県 北海道 漁港の数が多い都道府県"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://fishing-port.jp/ranking-list/prefectures/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://nlab.itmedia.co.jp/research/articles/1471340/"
+      }
+    ]
+  },
+  "selectedAt": "2026-10-25",
+  "inputHash": "8836d4dc3dea37439e37ab5e21927863ab3b58210e7160fe6e463cc698e87722",
+  "methods": [],
+  "files": []
+}
