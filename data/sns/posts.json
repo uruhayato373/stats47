@@ -39691,7 +39691,7 @@
     },
     {
       "id": 1186,
-      "status": "scheduled",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -39700,7 +39700,7 @@
         "note": "2026-10-12 オーナーがこの6本の予約投稿と予約日時の台帳反映を明示依頼。"
       },
       "created_at": "2026-10-12T01:54:01.899Z",
-      "updated_at": "2026-10-16T01:04:39.378Z",
+      "updated_at": "2026-10-25T14:17:46.351Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "tile-change",
@@ -39771,7 +39771,10 @@
             "key": "sns-assets/instagram/1186/image-3/771f662d6774023f0f6f57e6fdaf4a6fde9c0705c453aa361f839d543254a948.png"
           }
         }
-      ]
+      ],
+      "posted_at": "2026-10-25T14:17:46.337Z",
+      "post_url": "https://www.instagram.com/p/De65zdkEbk-/",
+      "external_id": "17891220480617887"
     },
     {
       "id": 1187,
