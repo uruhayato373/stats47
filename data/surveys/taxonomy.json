@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T03:09:57.022Z",
+  "generatedAt": "2026-10-25T18:33:19.582Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2603,
@@ -753,11 +753,11 @@
     }
   },
   "blog": {
-    "articles": 608,
-    "charts": 1617,
-    "applicableCharts": 1491,
+    "articles": 609,
+    "charts": 1625,
+    "applicableCharts": 1499,
     "byStatus": {
-      "resolved": 1491,
+      "resolved": 1499,
       "unresolved": 0,
       "not-applicable": 126,
       "missing-lineage": 0
@@ -769,10 +769,8 @@
       "legacySectionArticles": [
         "aging-solo-living-crisis",
         "assembly-answer-chatgpt-5steps",
-        "automotive-industry-transformation-map",
         "black-tea-income-gap",
         "cc-estat-17-edu-slope-graph",
-        "cc-estat-19-skill-pipeline",
         "commercial-land-price-trend",
         "communication-cost-burden",
         "convenience-store-density-map",
@@ -802,7 +800,6 @@
         "library-museum-cultural-capital",
         "local-tax-revenue-gap",
         "mackerel-expenditure-ranking",
-        "manufacturing-aichi-dominance",
         "manufacturing-productivity",
         "miso-consumption-quantity-prefecture-gap",
         "mobile-contracts-over-population",
@@ -995,6 +992,7 @@
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-change-census-2025",
         "municipality-population-decline-tiers",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
@@ -1070,6 +1068,7 @@
         "rice-harvest-volume-prefecture-gap"
       ],
       "economic-census-activity": [
+        "automotive-industry-transformation-map",
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
@@ -1099,6 +1098,7 @@
         "telework-rate-tokyo-gap"
       ],
       "economic-structure-survey": [
+        "automotive-industry-transformation-map",
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
@@ -1798,7 +1798,6 @@
         "forest-coverage-woodland-economy",
         "it-industry-concentration",
         "livable-prefecture-composite-ranking",
-        "manufacturing-aichi-dominance",
         "per-capita-income-gap",
         "prefectural-income-gdp-ranking",
         "price-index-high-low-prefecture",
@@ -2385,6 +2384,7 @@
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
+        "municipality-population-change-census-2025",
         "municipality-population-decline-tiers",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
@@ -2544,6 +2544,7 @@
         "retail-commerce"
       ],
       "blogSlugs": [
+        "automotive-industry-transformation-map",
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
@@ -2587,6 +2588,7 @@
         "manufacturing"
       ],
       "blogSlugs": [
+        "automotive-industry-transformation-map",
         "cc-estat-08-bar-chart-race",
         "cc-estat-16-commerce-bubble",
         "commercial-sales-productivity-gap",
@@ -3902,7 +3904,6 @@
         "forest-coverage-woodland-economy",
         "it-industry-concentration",
         "livable-prefecture-composite-ranking",
-        "manufacturing-aichi-dominance",
         "per-capita-income-gap",
         "prefectural-income-gdp-ranking",
         "price-index-high-low-prefecture",

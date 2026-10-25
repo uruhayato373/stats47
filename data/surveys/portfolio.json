@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22",
+  "generatedAt": "2026-10-25",
   "linkage": {
-    "auditedAt": "2026-10-22",
+    "auditedAt": "2026-10-25",
     "metrics": 2603,
     "resolved": 2514,
     "unresolved": 0,
@@ -29,36 +29,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 99,
-          "clicks": 2
+          "impressions": 135,
+          "clicks": 4,
+          "ctr": 0.0296,
+          "averagePosition": 12.33
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 16
+          "landingPageViews": 24
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 3
+          "rankingOutboundClicks": 6
         }
       },
       "currentHypothesis": null,
@@ -81,25 +83,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 25,
+          "impressions": 30,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 8
         },
@@ -107,8 +109,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -134,25 +136,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 9,
-          "clicks": 1
+          "impressions": 11,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 6
         },
@@ -160,10 +162,10 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 3
+          "rankingOutboundClicks": 4
         }
       },
       "currentHypothesis": null,
@@ -188,15 +190,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -205,8 +207,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -214,8 +216,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -241,38 +243,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 267,
-          "clicks": 3,
-          "ctr": 0.0112,
-          "averagePosition": 9.86
+          "impressions": 352,
+          "clicks": 5,
+          "ctr": 0.0142,
+          "averagePosition": 9.68
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 10
+          "landingPageViews": 13
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 4
+          "rankingOutboundClicks": 5
         }
       },
       "currentHypothesis": null,
@@ -295,25 +297,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 7,
+          "impressions": 9,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -321,8 +323,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -348,25 +350,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 3,
+          "impressions": 12,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -374,8 +376,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -402,27 +404,27 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 182,
+          "impressions": 194,
           "clicks": 2,
-          "ctr": 0.011,
-          "averagePosition": 8.42
+          "ctr": 0.0103,
+          "averagePosition": 8.44
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 7
         },
@@ -430,8 +432,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -456,36 +458,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 18,
+          "impressions": 36,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 7
+          "landingPageViews": 9
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -509,25 +511,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 14,
+          "impressions": 22,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 6
         },
@@ -535,8 +537,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -563,15 +565,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -580,8 +582,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -589,8 +591,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -615,27 +617,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 631,
+          "impressions": 1252,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 9.23
+          "averagePosition": 9.11
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 7
         },
@@ -643,8 +645,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -670,17 +672,17 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 1568,
+          "impressions": 1567,
           "clicks": 0,
           "ctr": 0,
           "averagePosition": 4.38
@@ -689,17 +691,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 53
+          "landingPageViews": 58
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -728,27 +730,27 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 431,
+          "impressions": 504,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 8.73
+          "averagePosition": 8.74
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -756,8 +758,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -782,25 +784,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 0,
+          "impressions": 51,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 7
         },
@@ -808,8 +810,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -836,34 +838,34 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 16,
-          "clicks": 0
+          "impressions": 27,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 2
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -888,34 +890,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 90,
-          "clicks": 1
+          "impressions": 126,
+          "clicks": 1,
+          "ctr": 0.0079,
+          "averagePosition": 9
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 14
+          "landingPageViews": 15
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -941,25 +945,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 23,
+          "impressions": 25,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -967,8 +971,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -994,25 +998,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 6,
+          "impressions": 10,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 10
         },
@@ -1020,8 +1024,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -1047,34 +1051,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 2,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 4,
+          "impressions": 3,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 5
+          "landingPageViews": 6
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -1100,15 +1104,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 14,
           "clicks": 0
@@ -1117,17 +1121,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 0
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1153,25 +1157,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 6,
+          "impressions": 8,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 3
         },
@@ -1179,8 +1183,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -1206,36 +1210,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 31,
-          "clicks": 1
+          "impressions": 76,
+          "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -1259,38 +1263,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 279,
-          "clicks": 2,
-          "ctr": 0.0072,
-          "averagePosition": 10.74
+          "impressions": 272,
+          "clicks": 3,
+          "ctr": 0.011,
+          "averagePosition": 10.78
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 15
+          "landingPageViews": 19
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 4
+          "rankingOutboundClicks": 5
         }
       },
       "currentHypothesis": null,
@@ -1314,15 +1318,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1331,8 +1335,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -1340,8 +1344,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1368,38 +1372,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 329,
-          "clicks": 5,
-          "ctr": 0.0152,
-          "averagePosition": 8.07
+          "impressions": 382,
+          "clicks": 7,
+          "ctr": 0.0183,
+          "averagePosition": 7.85
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 15
+          "landingPageViews": 17
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 4
+          "rankingOutboundClicks": 5
         }
       },
       "currentHypothesis": null,
@@ -1423,25 +1427,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 50,
+          "impressions": 60,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -1449,8 +1453,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1476,25 +1480,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 55,
+          "impressions": 75,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -1502,8 +1506,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1528,34 +1532,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 44,
+          "impressions": 66,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 5
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -1582,25 +1586,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 11,
+          "impressions": 14,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -1608,8 +1612,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1634,15 +1638,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 1,
           "clicks": 0
@@ -1651,17 +1655,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 7
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1687,25 +1691,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 19,
+          "impressions": 17,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -1713,8 +1717,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1741,25 +1745,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 14,
+          "impressions": 18,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -1767,8 +1771,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1794,15 +1798,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1811,8 +1815,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -1820,8 +1824,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1846,15 +1850,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 1,
           "clicks": 0
@@ -1863,8 +1867,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -1872,8 +1876,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -1899,36 +1903,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 152,
+          "impressions": 200,
           "clicks": 4,
-          "ctr": 0.0263,
-          "averagePosition": 7.96
+          "ctr": 0.02,
+          "averagePosition": 8
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 40
+          "landingPageViews": 42
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 7
         }
@@ -1955,36 +1959,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 36,
+          "impressions": 50,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -2008,25 +2012,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 18,
+          "impressions": 24,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -2034,8 +2038,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2060,25 +2064,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 20,
+          "impressions": 21,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 4
         },
@@ -2086,8 +2090,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -2113,15 +2117,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 9,
           "clicks": 0
@@ -2130,17 +2134,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2167,36 +2171,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 135,
-          "clicks": 8,
-          "ctr": 0.0593,
-          "averagePosition": 8.68
+          "impressions": 168,
+          "clicks": 9,
+          "ctr": 0.0536,
+          "averagePosition": 8.5
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 19
+          "landingPageViews": 21
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 5
         }
@@ -2222,25 +2226,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 2,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 59,
+          "impressions": 91,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -2248,8 +2252,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2275,15 +2279,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 2,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2292,8 +2296,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 4
         },
@@ -2301,8 +2305,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2328,36 +2332,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 60,
+          "impressions": 70,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 5
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -2380,25 +2384,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 6,
+          "impressions": 7,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 6
         },
@@ -2406,8 +2410,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -2434,34 +2438,34 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 2,
+          "impressions": 3,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2487,38 +2491,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 313,
-          "clicks": 6,
-          "ctr": 0.0192,
-          "averagePosition": 8.96
+          "impressions": 439,
+          "clicks": 9,
+          "ctr": 0.0205,
+          "averagePosition": 8.85
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 10
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -2541,15 +2545,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2558,19 +2562,19 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -2594,38 +2598,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 187,
-          "clicks": 4,
-          "ctr": 0.0214,
-          "averagePosition": 8.34
+          "impressions": 256,
+          "clicks": 7,
+          "ctr": 0.0273,
+          "averagePosition": 8.31
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 29
+          "landingPageViews": 35
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 6
+          "rankingOutboundClicks": 7
         }
       },
       "currentHypothesis": null,
@@ -2650,15 +2654,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 5,
           "clicks": 0
@@ -2667,8 +2671,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -2676,8 +2680,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2702,34 +2706,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 23,
+          "impressions": 20,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 14
+          "landingPageViews": 12
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -2755,25 +2759,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 10,
+          "impressions": 5,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 3
         },
@@ -2781,8 +2785,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -2809,15 +2813,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2826,19 +2830,19 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 5
+          "landingPageViews": 7
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 3
         }
       },
       "currentHypothesis": null,
@@ -2861,15 +2865,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 7,
           "clicks": 2
@@ -2878,8 +2882,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 4
         },
@@ -2887,8 +2891,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2914,34 +2918,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 2,
+          "impressions": 13,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 0
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -2967,15 +2971,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 1,
           "clicks": 0
@@ -2984,8 +2988,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -2993,8 +2997,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3021,15 +3025,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 0,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -3038,8 +3042,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -3047,8 +3051,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3073,25 +3077,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 47,
+          "impressions": 95,
           "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 11
         },
@@ -3099,8 +3103,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -3127,36 +3131,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 93,
-          "clicks": 1
+          "impressions": 110,
+          "clicks": 2,
+          "ctr": 0.0182,
+          "averagePosition": 6.11
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 6
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 3
         }
       },
       "currentHypothesis": null,
@@ -3179,41 +3185,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 122,
+          "impressions": 134,
           "clicks": 2,
-          "ctr": 0.0164,
-          "averagePosition": 8.02
+          "ctr": 0.0149,
+          "averagePosition": 8.06
         },
         "ga4": {
-          "status": "measured",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 102,
-          "activeUsersLast28d": 27,
-          "engagementRatePvWeighted": 0.8488,
-          "avgSessionDurationSecPvWeighted": 145.8
+          "landingPageViews": 90
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 20
+          "rankingOutboundClicks": 21
         }
       },
       "currentHypothesis": null,
@@ -3239,25 +3242,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 90,
+          "impressions": 95,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -3265,8 +3268,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3293,36 +3296,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 64,
-          "clicks": 0
+          "impressions": 90,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 2
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -3346,15 +3349,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -3363,8 +3366,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -3372,8 +3375,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3399,15 +3402,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -3416,8 +3419,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -3425,8 +3428,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3451,34 +3454,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 98,
-          "clicks": 1
+          "impressions": 154,
+          "clicks": 2,
+          "ctr": 0.013,
+          "averagePosition": 10.63
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 13
+          "landingPageViews": 14
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 7
         }
@@ -3505,34 +3510,34 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 9,
+          "impressions": 22,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3558,34 +3563,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 20,
-          "clicks": 2
+          "impressions": 31,
+          "clicks": 3
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -3610,15 +3615,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 3,
           "clicks": 0
@@ -3627,17 +3632,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3664,15 +3669,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 45,
           "clicks": 2
@@ -3681,8 +3686,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 4
         },
@@ -3690,8 +3695,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -3717,25 +3722,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 57,
+          "impressions": 64,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -3743,8 +3748,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3769,34 +3774,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 53,
+          "impressions": 46,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 17
+          "landingPageViews": 11
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -3824,36 +3829,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 95,
+          "impressions": 94,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 5
+          "landingPageViews": 9
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 3
         }
       },
       "currentHypothesis": null,
@@ -3878,36 +3883,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 204,
-          "clicks": 1,
-          "ctr": 0.0049,
-          "averagePosition": 6.76
+          "impressions": 257,
+          "clicks": 2,
+          "ctr": 0.0078,
+          "averagePosition": 6.9
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -3933,34 +3938,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 29,
+          "impressions": 36,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 6
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -3986,34 +3991,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 98,
-          "clicks": 0
+          "impressions": 155,
+          "clicks": 1,
+          "ctr": 0.0065,
+          "averagePosition": 9.83
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 4
+          "landingPageViews": 7
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -4038,34 +4045,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 11,
+          "impressions": 24,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 5
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -4092,25 +4099,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 38,
+          "impressions": 61,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 7
         },
@@ -4118,8 +4125,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -4144,15 +4151,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 3,
           "clicks": 0
@@ -4161,17 +4168,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 4
+          "landingPageViews": 7
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -4198,36 +4205,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 97,
-          "clicks": 3
+          "impressions": 109,
+          "clicks": 3,
+          "ctr": 0.0275,
+          "averagePosition": 7.72
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 9
+          "landingPageViews": 12
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 5
+          "rankingOutboundClicks": 6
         }
       },
       "currentHypothesis": null,
@@ -4250,15 +4259,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -4267,8 +4276,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -4276,8 +4285,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4304,25 +4313,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 52,
+          "impressions": 55,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -4330,8 +4339,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4357,15 +4366,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 11,
           "clicks": 0
@@ -4374,19 +4383,19 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 4
+          "landingPageViews": 6
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -4409,27 +4418,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 215,
+          "impressions": 256,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 7.79
+          "averagePosition": 7.44
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 6
         },
@@ -4437,8 +4446,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4465,34 +4474,34 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 17,
-          "clicks": 0
+          "impressions": 18,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4518,38 +4527,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 189,
-          "clicks": 10,
-          "ctr": 0.0529,
-          "averagePosition": 7.96
+          "impressions": 253,
+          "clicks": 11,
+          "ctr": 0.0435,
+          "averagePosition": 8.05
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 21
+          "landingPageViews": 35
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 6
+          "rankingOutboundClicks": 12
         }
       },
       "currentHypothesis": null,
@@ -4573,15 +4582,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -4590,8 +4599,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -4599,8 +4608,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4626,15 +4635,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -4643,8 +4652,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -4652,8 +4661,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4679,25 +4688,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 63,
+          "impressions": 90,
           "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 7
         },
@@ -4705,8 +4714,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -4731,15 +4740,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 13,
           "clicks": 2
@@ -4748,17 +4757,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 12
+          "landingPageViews": 13
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -4785,25 +4794,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 53,
+          "impressions": 64,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -4811,8 +4820,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -4838,25 +4847,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 15,
+          "impressions": 26,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -4864,8 +4873,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4890,34 +4899,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 22,
-          "clicks": 1
+          "impressions": 23,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 2
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -4944,25 +4953,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 0,
+          "impressions": 5,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -4970,8 +4979,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -4997,15 +5006,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -5014,8 +5023,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -5023,8 +5032,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5050,25 +5059,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 14,
+          "impressions": 18,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -5076,8 +5085,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5102,25 +5111,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 46,
+          "impressions": 74,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -5128,8 +5137,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -5156,25 +5165,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 9,
+          "impressions": 17,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -5182,8 +5191,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5208,36 +5217,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 246,
+          "impressions": 272,
           "clicks": 1,
-          "ctr": 0.0041,
-          "averagePosition": 6.81
+          "ctr": 0.0037,
+          "averagePosition": 6.9
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 15
+          "landingPageViews": 16
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -5264,27 +5273,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 114,
+          "impressions": 157,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 6.8
+          "averagePosition": 6.77
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -5292,8 +5301,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5319,25 +5328,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 56,
+          "impressions": 62,
           "clicks": 3
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 14
         },
@@ -5345,8 +5354,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -5371,15 +5380,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -5388,8 +5397,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 3
         },
@@ -5397,8 +5406,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5424,27 +5433,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 238,
-          "clicks": 6,
-          "ctr": 0.0252,
-          "averagePosition": 14.81
+          "impressions": 250,
+          "clicks": 4,
+          "ctr": 0.016,
+          "averagePosition": 13.05
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 15
         },
@@ -5452,8 +5461,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5479,38 +5488,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 127,
+          "impressions": 188,
           "clicks": 2,
-          "ctr": 0.0157,
-          "averagePosition": 8.54
+          "ctr": 0.0106,
+          "averagePosition": 7.82
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 31
+          "landingPageViews": 40
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 3
         }
       },
       "currentHypothesis": null,
@@ -5534,36 +5543,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 2,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 174,
+          "impressions": 205,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 11.09
+          "averagePosition": 10.88
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 4
+          "landingPageViews": 8
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5592,15 +5601,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 29,
           "clicks": 0
@@ -5609,17 +5618,17 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5645,15 +5654,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -5662,8 +5671,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -5671,8 +5680,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5698,25 +5707,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 43,
+          "impressions": 50,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 14
         },
@@ -5724,8 +5733,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -5750,36 +5759,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 120,
-          "clicks": 5,
-          "ctr": 0.0417,
-          "averagePosition": 7.91
+          "impressions": 166,
+          "clicks": 7,
+          "ctr": 0.0422,
+          "averagePosition": 7.81
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 24
+          "landingPageViews": 25
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 5
         }
@@ -5806,36 +5815,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 240,
+          "impressions": 283,
           "clicks": 5,
-          "ctr": 0.0208,
-          "averagePosition": 5.27
+          "ctr": 0.0177,
+          "averagePosition": 5.19
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 15
+          "landingPageViews": 17
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -5861,36 +5870,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 0,
-          "clicks": 0
+          "impressions": 436,
+          "clicks": 13,
+          "ctr": 0.0298,
+          "averagePosition": 7.06
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 20
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 10
         }
       },
       "currentHypothesis": null,
@@ -5913,34 +5924,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 33,
+          "impressions": 55,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -5966,25 +5977,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 13,
+          "impressions": 12,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 28
         },
@@ -5992,8 +6003,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -6019,25 +6030,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 23,
+          "impressions": 27,
           "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 17
         },
@@ -6045,8 +6056,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 7
         }
@@ -6073,25 +6084,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 63,
+          "impressions": 95,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -6099,8 +6110,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6126,27 +6137,27 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 152,
+          "impressions": 200,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 9.33
+          "averagePosition": 9.31
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6154,8 +6165,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6181,27 +6192,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 558,
+          "impressions": 690,
           "clicks": 5,
-          "ctr": 0.009,
-          "averagePosition": 6.7
+          "ctr": 0.0072,
+          "averagePosition": 6.9
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 12
         },
@@ -6209,8 +6220,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -6236,25 +6247,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 37,
+          "impressions": 41,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6262,8 +6273,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6288,25 +6299,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 8,
+          "impressions": 7,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6314,8 +6325,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6341,38 +6352,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 120,
+          "impressions": 119,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 7.39
+          "averagePosition": 6.92
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 8
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -6396,34 +6407,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 2,
+          "impressions": 3,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 10
+          "landingPageViews": 15
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -6449,34 +6460,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 29,
+          "impressions": 24,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6502,15 +6513,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 1,
           "clicks": 0
@@ -6519,8 +6530,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -6528,8 +6539,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6556,34 +6567,34 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 0,
+          "impressions": 26,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 2
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6608,25 +6619,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 24,
-          "clicks": 0
+          "impressions": 28,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 17
         },
@@ -6634,8 +6645,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -6661,34 +6672,34 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 38,
+          "impressions": 49,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 51
+          "landingPageViews": 49
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 9
         }
@@ -6716,25 +6727,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 14,
+          "impressions": 15,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 12
         },
@@ -6742,8 +6753,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 4
         }
@@ -6769,25 +6780,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 16,
+          "impressions": 15,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6795,8 +6806,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6823,25 +6834,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 9,
+          "impressions": 16,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6849,8 +6860,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6876,25 +6887,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 31,
+          "impressions": 54,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -6902,8 +6913,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6929,25 +6940,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 23,
+          "impressions": 30,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -6955,8 +6966,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -6982,25 +6993,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 2,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 18,
+          "impressions": 51,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 4
         },
@@ -7008,8 +7019,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 2
         }
@@ -7035,25 +7046,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 26,
+          "impressions": 30,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -7061,8 +7072,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -7087,36 +7098,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 95,
-          "clicks": 0
+          "impressions": 116,
+          "clicks": 0,
+          "ctr": 0,
+          "averagePosition": 21.79
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -7141,38 +7154,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 1,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 137,
+          "impressions": 183,
           "clicks": 1,
-          "ctr": 0.0073,
-          "averagePosition": 8.23
+          "ctr": 0.0055,
+          "averagePosition": 8.41
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 8
+          "landingPageViews": 11
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 3
+          "rankingOutboundClicks": 4
         }
       },
       "currentHypothesis": null,
@@ -7196,36 +7209,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 60,
+          "impressions": 67,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 6
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -7248,27 +7261,27 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 261,
+          "impressions": 284,
           "clicks": 2,
-          "ctr": 0.0077,
-          "averagePosition": 8.07
+          "ctr": 0.007,
+          "averagePosition": 7.91
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 32
         },
@@ -7276,8 +7289,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 9
         }
@@ -7304,25 +7317,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 28,
+          "impressions": 43,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -7330,8 +7343,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7356,25 +7369,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 61,
+          "impressions": 92,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 20
         },
@@ -7382,8 +7395,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -7410,25 +7423,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 17,
-          "clicks": 0
+          "impressions": 18,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 2
         },
@@ -7436,8 +7449,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 1
         }
@@ -7462,36 +7475,36 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 819,
+          "impressions": 743,
           "clicks": 1,
-          "ctr": 0.0012,
-          "averagePosition": 8.3
+          "ctr": 0.0013,
+          "averagePosition": 8.25
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 15
+          "landingPageViews": 16
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7520,25 +7533,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 39,
-          "clicks": 2
+          "impressions": 38,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 11
         },
@@ -7546,8 +7559,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 3
         }
@@ -7574,15 +7587,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 4,
           "clicks": 1
@@ -7591,8 +7604,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -7600,8 +7613,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7627,25 +7640,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 15,
+          "impressions": 19,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -7653,8 +7666,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7679,25 +7692,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 13,
+          "impressions": 16,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -7705,8 +7718,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7732,38 +7745,38 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 129,
-          "clicks": 0,
-          "ctr": 0,
-          "averagePosition": 9.65
+          "impressions": 164,
+          "clicks": 1,
+          "ctr": 0.0061,
+          "averagePosition": 9.41
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 3
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -7787,15 +7800,15 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "impressions": 0,
           "clicks": 0
@@ -7804,8 +7817,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 14
         },
@@ -7813,10 +7826,10 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 1
+          "rankingOutboundClicks": 2
         }
       },
       "currentHypothesis": null,
@@ -7840,25 +7853,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 4,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 17,
+          "impressions": 18,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 1
         },
@@ -7866,8 +7879,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -7894,38 +7907,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 250,
-          "clicks": 6,
-          "ctr": 0.024,
-          "averagePosition": 5.86
+          "impressions": 333,
+          "clicks": 10,
+          "ctr": 0.03,
+          "averagePosition": 5.67
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 16
+          "landingPageViews": 24
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 4
+          "rankingOutboundClicks": 8
         }
       },
       "currentHypothesis": null,
@@ -7949,36 +7962,36 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 38,
-          "clicks": 0
+          "impressions": 51,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 7
         },
         "internalNav": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "rankingOutboundClicks": 0
+          "rankingOutboundClicks": 1
         }
       },
       "currentHypothesis": null,
@@ -8002,25 +8015,25 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 38,
+          "impressions": 46,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -8028,8 +8041,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
@@ -8054,25 +8067,25 @@
       "editorialContentExists": true,
       "readerQuestionCount": 3,
       "relatedArticleCount": null,
-      "gscSnapshotRef": "data/gsc/snapshots/2026-W41/pages.csv",
-      "ga4SnapshotRef": "data/ga4/snapshots/2026-W41/pages.csv",
+      "gscSnapshotRef": "data/gsc/snapshots/2026-W42/pages.csv",
+      "ga4SnapshotRef": "data/ga4/snapshots/2026-W42/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
-          "impressions": 11,
+          "impressions": 23,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "landingPageViews": 0
         },
@@ -8080,8 +8093,8 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W37",
-            "2026-W41"
+            "2026-W38",
+            "2026-W42"
           ],
           "rankingOutboundClicks": 0
         }
