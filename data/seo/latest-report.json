@@ -1,22 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-24",
+  "date": "2026-10-25",
   "period": {
-    "periodStart": "2026-10-15",
-    "periodEnd": "2026-10-21",
+    "periodStart": "2026-10-16",
+    "periodEnd": "2026-10-22",
     "windowDays": 7
   },
-  "inputHash": "210756c67d1bf63ca913aa2058be0f68d389e34e7d72513f2dc1363a94c15dbe",
+  "inputHash": "74f64c37bcfcf05d755f57edef7f55d6387fe11e32cb794a9b49dd0a91326b58",
   "movements": [
-    {
-      "keyword": "徳島県",
-      "targetPath": "/areas/36000",
-      "before": 165,
-      "after": 89,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 76
-    },
     {
       "keyword": "出生率 ランキング 日本",
       "targetPath": "/ranking/total-fertility-rate",
@@ -25,6 +16,24 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 63
+    },
+    {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 13,
+      "after": 67,
+      "beforeImpressions": 2,
+      "impressions": 2,
+      "change": -54
+    },
+    {
+      "keyword": "警察 官 年収 ランキング",
+      "targetPath": "/ranking/avg-salary-police-prefecture",
+      "before": 15,
+      "after": 68,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -53
     },
     {
       "keyword": "高校教師年収",
@@ -36,6 +45,42 @@
       "change": -52.333333333333336
     },
     {
+      "keyword": "小学校 人数 ランキング",
+      "targetPath": "/blog/elementary-school-children-count",
+      "before": 53,
+      "after": 5,
+      "beforeImpressions": 1,
+      "impressions": 4,
+      "change": 48
+    },
+    {
+      "keyword": "サンマ 漁獲量",
+      "targetPath": "/ranking/fishery-species-catch-pacific-saury",
+      "before": 6.5,
+      "after": 54,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -47.5
+    },
+    {
+      "keyword": "jr 乗降客数",
+      "targetPath": "/blog/railway-theme-overview",
+      "before": 66,
+      "after": 23,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 43
+    },
+    {
+      "keyword": "牛乳 産地 ランキング",
+      "targetPath": "/ranking/raw-milk-production",
+      "before": 47,
+      "after": 6.75,
+      "beforeImpressions": 1,
+      "impressions": 4,
+      "change": 40.25
+    },
+    {
       "keyword": "離婚率 日本",
       "targetPath": "/blog/divorces-per-total-population",
       "before": 64,
@@ -45,58 +90,13 @@
       "change": 40
     },
     {
-      "keyword": "牛乳 産地 ランキング",
-      "targetPath": "/ranking/raw-milk-production",
-      "before": 47,
-      "after": 8.666666666666668,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 38.33333333333333
-    },
-    {
-      "keyword": "日照時間 日本一",
-      "targetPath": "/ranking/annual-sunshine-duration",
-      "before": 37,
-      "after": 7,
+      "keyword": "漁獲 量",
+      "targetPath": "/japan/fishery-marine",
+      "before": 89,
+      "after": 53,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 30
-    },
-    {
-      "keyword": "餃子 日本一 消費量",
-      "targetPath": "/blog/frozen-gyoza-spending-prefecture-gap",
-      "before": 9,
-      "after": 39,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -30
-    },
-    {
-      "keyword": "水道 統計",
-      "targetPath": "/survey/waterworks-statistics",
-      "before": 7,
-      "after": 34,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -27
-    },
-    {
-      "keyword": "コンビニ数ランキング",
-      "targetPath": "/ranking/convenience-store-count-commercial",
-      "before": 29,
-      "after": 3,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 26
-    },
-    {
-      "keyword": "米の消費量ランキング",
-      "targetPath": "/blog/rice-consumption-quantity-ranking",
-      "before": 2.333333333333333,
-      "after": 28,
-      "beforeImpressions": 3,
-      "impressions": 2,
-      "change": -25.666666666666668
+      "change": 36
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "漁港が多い県",
     "targetPath": "/ranking/fishing-port-count-by-type",
-    "rank": 5.946515397082658,
-    "impressions": 617,
+    "rank": 5.949685534591195,
+    "impressions": 636,
     "clicks": 2,
     "group": 5,
     "previousMethod": null,

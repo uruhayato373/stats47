@@ -200,6 +200,11 @@
       "date": "2026-10-24",
       "file": "data/seo/rank-history/2026-10-24.json",
       "sha256": "ab0fb79b8135e23d749b990deade9ead6dd32d375a552b779bd535234db0e9ff"
+    },
+    {
+      "date": "2026-10-25",
+      "file": "data/seo/rank-history/2026-10-25.json",
+      "sha256": "a2c132c9073a806b7770f03de5f00b05518366bd48fcf6358d6416a4c4c62145"
     }
   ]
 }
