@@ -8,18 +8,29 @@ name: 🛟 PR head skip-ci guard
 # (https://docs.github.com/en/actions/concepts/security/github_token)。
 # PR のコードは checkout しない (pull_request_target で外部のコードを実行しないため)。
 # pull_request_target は base (main) の定義で動くので、main にマージされてから効く。
+#
+# もう一つの経路: CI が GITHUB_TOKEN で develop へ push した記録コミット ([skip ci] なし) が先頭になると、
+# pull_request の run は「承認待ち (action_required)」で作られて実行されず、pull_request_target の run は作られない
+# (https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow。
+# 2026-10-25 確認。同日 PR #1176 で先頭 569a88c44 の品質チェックが承認待ちのまま止まった)。
+# 品質チェックが承認待ちで完了したことを workflow_run で受け、それが open な develop→main PR の先頭なら
+# 同じく workflow_dispatch で起動し直す。workflow_run も default branch (main) の定義で動く。
 
 on:
   pull_request_target:
     branches: [main]
     types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ["🔍 Pull Request Quality Check"]
+    types: [completed]
 
 permissions:
   actions: write
   contents: read
+  pull-requests: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.workflow_run.head_sha }}
   cancel-in-progress: true
 
 jobs:
@@ -43,4 +54,34 @@ jobs:
             exit 0
           fi
           echo "先頭 ${HEAD_SHA} が skip 指定。pr-quality-check.yml を develop で起動する (PR #${PR_NUMBER})"
+          gh workflow run pr-quality-check.yml --repo "$REPO" --ref develop -f pr_number="$PR_NUMBER" -f base_sha="$BASE_SHA"
+
+  redispatch-approval-required:
+    name: Re-run a quality check left waiting for approval
+    if: >-
+      github.event_name == 'workflow_run'
+      && github.event.workflow_run.event == 'pull_request'
+      && github.event.workflow_run.conclusion == 'action_required'
+      && github.event.workflow_run.head_branch == 'develop'
+      && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🔁 Dispatch the quality check for the develop→main PR at this head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          PR=$(gh api "repos/$REPO/pulls?state=open&base=main&head=${REPO%%/*}:develop" --jq '.[0] | select(. != null) | "\(.number) \(.base.sha) \(.head.sha)"')
+          if [ -z "$PR" ]; then
+            echo "open な develop→main の PR が無い。何もしない"
+            exit 0
+          fi
+          read -r PR_NUMBER BASE_SHA PR_HEAD <<<"$PR"
+          if [ "$PR_HEAD" != "$HEAD_SHA" ]; then
+            echo "PR #${PR_NUMBER} の先頭 ${PR_HEAD} は承認待ちの ${HEAD_SHA} と違う。新しい先頭の run に任せる"
+            exit 0
+          fi
+          echo "先頭 ${HEAD_SHA} の品質チェックが承認待ち。pr-quality-check.yml を develop で起動する (PR #${PR_NUMBER})"
           gh workflow run pr-quality-check.yml --repo "$REPO" --ref develop -f pr_number="$PR_NUMBER" -f base_sha="$BASE_SHA"

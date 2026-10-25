@@ -44,6 +44,8 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 
 **自動の手当て (2026-10-20〜)**: `pr-skip-ci-head-guard.yml` が `pull_request_target` (これは `[skip ci]` で止まらない) で PR の更新を受け、先頭コミットが `[skip ci]` 系なら `pr-quality-check.yml` を `workflow_dispatch` で develop に起動する (PR 番号と base SHA を inputs で渡す。GITHUB_TOKEN でも workflow_dispatch は run を作れる)。必須チェック「Code Quality Check」が先頭の SHA に付くので、手で push し直す必要は無い。`pull_request_target` は main の定義で動くので、**この見張り役は main にマージされてから効く**。契約テストは `pr-skip-ci-head-guard.test.cjs`。仕様の出典: [Skipping workflow runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)・[GITHUB_TOKEN](https://docs.github.com/en/actions/concepts/security/github_token) (2026-10-20 確認)。
 
+**`[skip ci]` の無い bot コミットが先頭のとき (2026-10-25〜)**: CI が `GITHUB_TOKEN` で push した記録コミットが先頭になると、`pull_request` の品質チェックは「承認待ち (`action_required`)」で作られて実行されず、`pull_request_target` の run は作られない ([Triggering a workflow](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow)、2026-10-25 確認。同日 PR #1176 で先頭 `569a88c44` の GSC 日次記録が止めた)。同じ見張り役が `workflow_run` で品質チェックの承認待ち完了を受け、それが open な develop→main PR の先頭なら `pr-quality-check.yml` を `workflow_dispatch` で起動し直す。これも main の定義で動くので main マージ後に効く。効く前に止まったら、承認待ちの run を `gh api -X POST repos/uruhayato373/stats47/actions/runs/<id>/approve` で承認する。
+
 **見張り役が効かないときの対処**: PR 作成後に `get_check_runs` が 0 件なら、まず develop の HEAD が `[skip ci]` かを疑う
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
 空コミットで済ませず、その時点で残っている本来の作業 (規約の追記・是正など) を載せるとよい。
