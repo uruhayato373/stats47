@@ -383,17 +383,6 @@ updated: 2026-10-19
 - **完了条件**: 本番の `app/affiliate-ads/all.json` で moshimo・afi-b・valuecommerce の広告が配信中 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新され、使わなくなった Secrets が削除されている。
 
 
-### [NOTE-PACKS-REPLACE-COCONALA-01] [進行中] 公開済み有料noteへ商品ハブの販売先を切り替える
-タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:商品]
-
-- **owner / status**: Codex / in-progress。ココナラ撤退、noteへの販売集約はオーナー指示済み。
-- **現在の正典**: 有料パック13本は公開済み。公開URL・価格・境界・添付の確認記録は `data/note/evidence/note-paid-pack-publication-verification-2026-10-26.json`、公開状態は `data/note/articles.json`、商品の対応は product-factory の `NOTE_PRODUCT_MAPPINGS`。古いローカル準備版・下書き記録を公開状態の根拠にしない。
-- **反映済みの準備**: 出品台帳14行（有料パック13＋Geo受託1）は `withdrawn`。商品ハブ生成・販売カタログは記事台帳の公開情報を参照する。`data-p-XX` のURLを保持して有料noteへ案内する。P-13は無料見本で、有料商品ページの対象外。旧readinessに残ったGeoの公開記録も現行出品台帳の撤退状態を優先する。
-- **次**: 商品ハブの差分と検査を終え、まとまった本番反映の承認後に1回だけデプロイし、13商品ページの購入先が対応する有料noteであることを本番で確認する。note記事側の全件付け替え・公開表示確認は `NOTE-CARD-REPAIR-01` が担当する。
-- **停止条件・承認境界**: 今回のnote修復・付け替えは指示済み。サイト本番デプロイは2026-10-26に明示承認済み。価格・商品本文・納品物をこの導線変更で変更しない。
-- **完了条件**: 公開済み13商品の記事台帳・派生販売カタログ・本番商品ページが一致し、旧ココナラの購入先が残らない。
-
-
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト]
 
@@ -490,7 +479,7 @@ updated: 2026-10-19
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS]
 
-- **事象**: note 回遊の週次監査 #1149 (2026-10-18・run 39094551255)。error 5 件はリンク切れ (`broken_site_link`): `b-hotel-rooms-nara`・`d-engel-coefficient-income`・`d-kakei-spending-personality`・`koumuin-shigoto-kouritsuka-ai` ほか。warning 225 件は http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空行 (173 記事、`NOTE-CARD-REPAIR-01` が担当)。
+- **事象**: note 回遊の週次監査 #1149 (2026-10-18・run 39094551255)。error 5 件はリンク切れ (`broken_site_link`): `b-hotel-rooms-nara`・`d-engel-coefficient-income`・`d-kakei-spending-personality`・`koumuin-shigoto-kouritsuka-ai` ほか。warning 225 件は http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空行 (当時173記事)。空白カードの修復は2026-10-26に完了し、現在残る余分な空段落は47記事・175件 (`data/note/card-visibility-latest.json`) として本カードで管理する。
 - **次**: リンク切れの行き先を stats47 の現行 URL で引き直し、置換案をオーナーに見せる。公開済み記事の本文変更は note への外部変更なので、承認後に PUT パッチで直す。この Mac からは 2026-10-18 時点で note が HTTP 403 のため、解けてから行う。
 - **完了条件**: 週次監査の note-circulation で error 0 件 (2026-10-26 から Issue は作らないので #1149 は手で閉じる)。
 - **2026-10-26 観測** (週次監査 `npm run weekly:audits -- --only note-circulation` の初回のローカル全量実行): 428 記事で error 24 / warning 232。サイトへのリンク 372/428・関連 note 251/428・マガジン 220/428・タグ 427/428・マガジン所属 19/20・有料記事の無料部分 35/41 (error 16)。明細は `data/note/evidence/note-circulation-audit-2026-10-26.json`。
@@ -926,7 +915,7 @@ updated: 2026-10-19
 - **SOURCES.csv の残り (2026-10-12 再レビュー)**: 職種別平均年収 (`0003445758`) の行の調査名欄に指標名が入り、URL が社会・人口統計体系の案内ページを指す (P-09 ほか)。調査名欄に指標名が入る行は P-01「腎不全による死亡者数」・P-05「患者調査 第37表…」など多数。P-07「家賃差引の参考額（月額）」は 2 表を組み合わせた値なのに加工式が「R2 から抽出」だけ (§3 の加工式要件を満たさない)。P-04・P-11 の LICENSE は地方公務員給与実態調査の URL を 1 件しか載せない。
 - **次**: 目的文を実データに合わせて直すか指標を足す (packs.ts)、見本画像の題名を折り返す (生成器)、listing.md とライセンスの記載を揃える。ココナラの出品文 (`config/coconala-listings.json`) にも同じ記載があれば同時に直す (outward はオーナー承認)。
 - **完了条件**: 14 パックの目的文・listing・LICENSE・見本画像が実物と一致し、note 販売記事の「収録外」の断り書きが不要になる。
-- **2026-10-19 ココナラ撤退**: ココナラの出品文は直さなくてよい (14 件とも受付休止)。目的文・見本画像の食い違いは、note 版を公開する前に直す (`NOTE-PACKS-REPLACE-COCONALA-01`)。
+- **2026-10-19 ココナラ撤退**: ココナラの出品文は直さなくてよい (14 件とも受付休止)。目的文・見本画像の残る食い違いは本カードで管理する。note版13商品は公開済みで、公開前提ではなく現在の添付版の品質を照合する。
 - **2026-10-24**: 目的文の収録外表現6件、PDF納品表記、見本の代表指標選択・長題名の折返しを修正。残りはSOURCESの調査名/加工式、P-06/07の許諾範囲、Office実機確認。
 
 ### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
@@ -1215,15 +1204,6 @@ updated: 2026-10-19
 - **次**: `/quality/page-audit` か R2 `state/page-quality/latest.json` で error を種類別に数え、既存カードに載るものは振り分け、載らない種類はカードにする。誤検知なら閾値を直す。
 - **完了条件**: error の各種類に行き先 (カード ID か閾値修正) があり、#1014 にその表がコメントされている。
 - **2026-10-23 振り分け (R2 `state/page-quality/latest.json`・2026-10-17 の週次・error 2,901 件)**: `duplicate_link_ratio` 2,836 件 (県ページ 1,457・ランキング 613・ブログ 607・調査 57・Geo 54・テーマ 32 ほか) → `SITEWIDE-DUPLICATE-LINK-RATIO-01`。`html_bytes` の前回比 +30% 超 49 件は土砂災害の Geo 復旧 (`09b6ed756`) で県×土砂災害 47 ページ (約 325KB → 560KB)・`/geo/population-landslide-exposure`・`/themes/landslide-exposure` が増えたもの。絶対値は 900KB 未満で、内容の復旧による一度きりの増加なので閾値は変えず翌週の比較で消える見込み (`rsc_bytes` 1 件・`dom_nodes` 1 件も同じ扱い)。`http_status` 503 の 12 件 (市区町村 11・県×外国人住民 1) は 2026-10-23 に全件 200 で再現せず、監査の巡回中の一時的な失敗 (Workers の CPU は `CF-CPU-SURGE-01`)。`page_errors` 2 件 (`/areas`・`/category/landweather`) と `console_errors` 1 件 (`/geo`) は 2026-10-23 にブラウザで再現せず。#1014 へのコメントは外部への書き込みなので未投稿。
-
-### [NOTE-PRODUCT-CARD-MISMATCH-01] note 記事の商品カードの題名が実商品の題名と食い違う
-タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:商品]
-
-- **事象**: note 商品カードの週次監査 #1064 (2026-10-03) で a-kakei 系の記事 (fukui・fukuoka・fukushima・gifu・gunma ほか) のカードが「消費量日本一の食卓 — …」を表示し、実商品 (storefront.generated.ts) の「食卓の支出と購入数量 — 家計調査の地域差を読む」と一致しない。
-- **状態 (2026-10-18)**: 10-17 の監査で 288 記事中 109 件が不一致。うち 38 件は末尾の「 | stats47」だけの差で、監査側で無視するよう直した (`audit-note-product-cards.mjs`)。残る約 71 件は題名そのものが違う: 食卓 52 件 (「消費量日本一の食卓…」→ 正本「食卓の支出と購入数量…」)・実質手取り 9 件 (「実質手取りの地図…」→ 正本「年収が高い県は、暮らしも豊かなのか」)・教育と子育て 5 件 (待機児童 → 子育て指標)・エネルギー 5 件 (水道 → ガス)・産業 5 件 (農林 → 地価)。
-- **次**: 商品の題名を変えたのが先か、カードが古いのかを確かめる。カードはマガジンではなく実商品の正本から解決する (memory `feedback_note_product_card_ssot`)。直すときは公開済み記事のカードを PUT で差し替える手順を使う。公開済み記事の書き換えは note への外部変更なのでオーナーの承認を得てから行う。2026-10-18 時点でこの Mac からの note へのアクセスは記事ページも API も HTTP 403 (CloudFront) で、CI からは取得できている。差し替えは 403 が解けてから行う。
-- **完了条件**: 週次監査の note-product-cards で不一致 0 件・未設置 0 件 (product-navigation の pending 0)。
-- **2026-10-26 観測** (週次監査 note-product-cards・note-circulation の product-navigation): 対象の無料記事 290 件中、題名の不一致 16 件・**商品カード自体が本文に無い 240 件** (例 `a-annual-paid-leave-11-days-or-more-ratio` の本文の外部カードはランキングとサイトだけ。note の公開 API で確認)。`npm run note:navigation:products:check` は planned 292 / pending 290 で、商品カードの一括設置がほぼ未適用。設置は公開済み記事の本文変更 (note への外部変更) なのでオーナー承認後に行う。
 
 ### [NSM-GUARD-EMPTY-CSV-01] 週次収益 (NSM) のガードが GA4 の CSV 0 行で失敗した原因を確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
@@ -2251,7 +2231,7 @@ updated: 2026-10-19
 - **再開点（2026-09-06）**: 現行候補は`CURRENT_SALES_REVISIONS`で固定。最終EPUB検査は`kindle-v3-20260906-r4-verification.json`で実本文全章SHAを保持。S2-01だけは当該版の独立review.jsonがあり、他巻へ流用しない。最初の公開前に、固定bytes送信・旧draft再投入・公開直前再照合を認証済み下書きで実測する（コード/モック検査のみでは実UI動作を合格にしない）。新規公開は実機・権利/申告・保全・オーナー承認がそろってから。
 - **次（実行順）**: ①Kindle改訂版を全章で独立意味レビューする。書き下ろしだけでなくブログ/ランキング由来の本文・図を含め、未根拠因果・対象年/地域/分母の違いを是正し、内部比率を再計測する。②確定版のEPUB検査・Previewer・全章SHAに結び付いたreview.json・入稿bundle照合後、明示版指定のarchiveで旧版を保持して暗号化保全する。③note14パックの準備原稿に固有の使い方・図例を追加し、独立レビュー・価格/添付/利用条件確認へ進める。無料P13を含めた固定入力はfree-sample-delivery.jsonと納品manifestで照合する。未制作Geo11企画は原典・再現テスト・読者成果を満たすものから制作する。④商品別の残ゲートが解消してから、承認された対象だけを専用公開フローへ渡す。入稿提案JSONを公開済み記録と扱わない。
 - **Kindle再接地の具体対象**: S1-01のブログ9章は全章の再編集が必要。`per-capita-income-gap`の本文と図の採用年・数値不一致、`heating-cost-vs-disposable-income`の名目支出/実質所得・世帯範囲の不一致、`communication-cost-burden`の交通通信費/通信費混同、`expenditure-structure-comparison`の性質別/目的別混在と因果主張、`black-tea-income-gap`の購入量/飲用量・相関/説明割合混同を残さない。S1-02も食品の支出・購入数量と調査対象都市を元記事の本文・図まで照合する。`editorial-corrections.ts`の部分校訂だけで当該章全体を合格にしない。他冊にも同種の旧断定があるため全章レビューを省略しない。
-- **関連の別owner工程**: Office の実機確認は `NOTE-PACKS-REPLACE-COCONALA-01` (ココナラの本人確認は 2026-10-19 の撤退で不要)、歴史2指標は 2026-09-24 に原典 (社会生活統計指標2023 表7) と 47 県すべて一致を確認済み (`coconala-packs-2026-09-06.json` の `officialDefinitions.historicalSourceReconciliation`。`historicalNotReverified` の解除と納品 SOURCES の注記更新は商品担当の判断で未実施)。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
+- **関連の別owner工程**: Officeの実機確認は本カードの品質工程としてオーナーが行う (ココナラの本人確認は 2026-10-19 の撤退で不要)、歴史2指標は 2026-09-24 に原典 (社会生活統計指標2023 表7) と 47 県すべて一致を確認済み (`coconala-packs-2026-09-06.json` の `officialDefinitions.historicalSourceReconciliation`。`historicalNotReverified` の解除と納品 SOURCES の注記更新は商品担当の判断で未実施)。公開済みGeo noteの本文・添付再確認は認証済み画面が必要。売上/需要の不明を0扱いしない。
 - **再利用本文の追加是正対象**: S1-03高齢単身の分母・通勤流入と移住、04介護必要数と不足数・化学工業と医薬品・相談窓口の時間、05大学収容力と入学定員・保育利用率と希望充足率、06財政指標の控除/平均期間・目的別と性質別、07宿泊施設範囲/人泊と人数・国籍から嗜好の断定、08供給契約と世帯普及率、09産業出荷/利益/用水効率、10火災地震合算/強度率の労働時間分母、11行動者率/稼働率、12有業者/雇用者を元ブログ・図まで直す。fresh訂正だけでは完了しない。
 - **S1-01 の是正 (2026-09-19 実施)**: v3-20260919-r1 を blog-critic (opus) が全 15 章で独立レビュー → REVISE (BLOCK 8 / MAJOR 19 / MINOR 13。大半が本文と図の年次不一致・名目/実質・世帯範囲・相関→因果)。40 件 + 追加 6 件 (2014 年の別指標図の除外・要約図の見出し誤りの除外・重複節の置換・年度→年) を `editorial-corrections.ts` (ブログ由来章・書籍版のみ) と `manuscripts/K-S1-01/` (書き下ろし) に反映し、`v3-20260919-r3` を生成 (15 章・図 35・書き下ろし 32.7%・verify-epub 3 層 error 0 / warn 0)。findings の記録は `.local/kindle-books/K-S1-01/v3-20260919-r3/review-r1-findings.md`、delta 再審査は同 dir の `review.md`。**同じ誤りは公開ブログ 9 本 (real-disposable-income-reversal / heating-cost-vs-disposable-income / per-capita-income-gap / savings-balance-gap / engel-coefficient-prefecture-ranking / household-spending-prefecture-gap / communication-cost-burden / expenditure-structure-comparison / black-tea-income-gap) に残っている** → blog remediation (`/blog-revise-fix`) で review-r1-findings.md の before/after を must-fix として直す (図の再生成: savings-ranking を 2019 年 financial-assets-balance に、income-summary-findings の heading「約200万円」→「約20万円」)。残り: R2 暗号化保全 (鍵のある環境でオーナー) → `kdp-publish --update` (書名変更 + 本文差替) → オーナー承認で `--commit`。
 - **書籍側では直せず残るもの (ブログ側 chart-author 工程)**: ①K-S1-06 財政力指数ランキング図の小数 1 桁表示 (F-003-17: 島根 0.25 と徳島 0.31 が図で同じ「0.3」。`resolveValuePrecision` で再生成) ②図データの年・指標の差し替え (K-S1-01 savings-ranking は 2014 年の別指標のため書籍から除外済み。ブログ側は 2019 年 financial-assets-balance で再生成) ③**data-configs の `yearFormat` が 家計調査・国勢調査・社会生活基本調査まで一律 fiscal** (2026-09-19 実測: S1 12 冊の図 120 枚のうち calendar は 家計調査の一部と将来推計だけ)。書籍は critic が本文で確定した型に図を合わせたが、根は config 側 → `METRIC-YEARFORMAT-KAKEI-01` を家計調査以外にも広げる。図の校訂は config が直ったら不要になる (before が消えて生成が止まるので、そのとき外す)。
@@ -2259,7 +2239,7 @@ updated: 2026-10-19
 - **S2/S3/S4 の販売中 10 冊は 2026-09-19 に KDP で出版停止を実行済み** (オーナー指示 → `kdp-unpublish.mjs --all-withdrawn --commit`。本棚 read-back 10/10 が「下書き」、listing は `status: "withdrawn"` + `withdrawal.unpublishedAt/readBack/evidence`)。ストアの商品ページ消滅は数時間〜72 時間後に `curl` か本棚で確認する。
 - **残るオーナー工程 (2026-09-19 時点の `verify-publishable` 全冊の blocker と同じ)**: ①R2 暗号化保全 `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <版>` → `--audit --deep --record` (鍵のある環境。これが無いと `kdp-publish --update` の archive gate で止まる) ②Kindle Previewer で対象 EPUB (SHA) の表示確認 ③`kdp-publish --update --id K-S1-NN` ×12 (S1-01 は書名変更を含む・入稿提案 `.local/kindle-listing-revisions/`) → 承認後 `--commit` ④kdpreports.amazon.co.jp の冊別 export → `products:sales` ⑤ブログ側の同一誤り是正 (上記) と図データ再生成。
 - **ランキング再利用の境界**: S2-01旧版全章レビューでDID可住地分母、死亡率/件数、従属人口指数/就労者、都道府県率の合算、単純平均/全国値、相関からの因果・算術誤りを検出。商品版のランキング章は未レビューAI解説を外して同順位の全県表・決定的集計へ再構成した。公開サイト本文は未変更のため、原典再計算とサイトownerへの是正引渡しが必要。旧版レビューを新版PASSへ流用しない。
-- **noteデータパックの現状**: 公開状態・販売先は `data/note/articles.json` と `NOTE-PACKS-REPLACE-COCONALA-01` を参照する。2026-10-12のローカル生成未完了を現在の未公開判断に使わない。原稿は記事台帳とR2、添付ZIP保全の未完了確認は `NOTE-PRODUCT-ZIP-ARCHIVE-01` が担当する。Office実機確認・Kindleの入稿前検査は、公開済みnoteの状態とは別の品質工程として扱う。
+- **noteデータパックの現状**: 公開状態・販売先は `data/note/articles.json` と `data/note/evidence/note-product-storefront-live-2026-10-26.json` を参照する。2026-10-12のローカル生成未完了を現在の未公開判断に使わない。原稿は記事台帳とR2、添付ZIP保全の未完了確認は `NOTE-PRODUCT-ZIP-ARCHIVE-01` が担当する。Office実機確認・Kindleの入稿前検査は、公開済みnoteの状態とは別の品質工程として扱う。
 - **停止条件**: 生成/形式検査だけで販売準備完了にしない。内部30%をAmazonの合法性・受理保証と説明しない。字数水増し・収録指標の黙った削減をしない。税務・銀行・本人認証・規約同意を代行せず、KDP Select独占を他チャネル展開と両立済みと扱わない。旧公開版・原稿を上書きしない。公開stateを機械品質の結果で書き換えない。
 - **完了条件**: 全offerが対象版の実検証・独立レビュー・必要な人間確認を満たすか、採用見送り理由と再開条件が明記される。販売を選んだofferは価格・納品物・権利・公開証跡が一致する。未完了が1件でもあれば「全商品販売可能」と報告しない。
 

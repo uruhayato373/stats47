@@ -271,6 +271,7 @@ export function buildPlans(source, views, options) {
   const remediation = auditRemediation();
   return source.articles
     .filter((article) => {
+      if (options.products) return !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget || magazines.get(article.magazine)?.paidProductId);
       const liveRepair = remediation.get(article.key);
       return article.nextBestArticle
         || article.publishedLinkRepairs?.length
@@ -281,9 +282,10 @@ export function buildPlans(source, views, options) {
         || (options.repairRedirects && (liveRepair?.forceNormalizeLegacy || liveRepair?.repairs.length));
     })
     .map((article) => {
-      const includeFooter = (options.allFree || options.slug === article.key || options.magazine === article.magazine)
-        && !article.isPaid
-        || Boolean(article.nextBestArticle);
+      const includeFooter = !options.products && (
+        (options.allFree || options.slug === article.key || options.magazine === article.magazine)
+          && !article.isPaid || Boolean(article.nextBestArticle)
+      );
       const next = includeFooter ? chooseRelatedArticle(article, source, views) : null;
       const magazineRecord = magazines.get(article.magazine);
       const magazine = includeFooter ? magazineRecord : null;
@@ -302,7 +304,7 @@ export function buildPlans(source, views, options) {
       const productUrl = paidProduct?.noteUrl || (productTarget ? buildNoteProductCardUrl(productTarget, article.noteUrl) : null);
       const productCardText = paidProduct ? { title: paidProduct.title, description: `「${paidProduct.title}」で、収録内容・サンプル・価格を確認できます。` }
         : productTarget ? resolveProductCardText(productTarget) : null;
-      if (article.nextBestArticle && !next?.noteUrl)
+      if (includeFooter && article.nextBestArticle && !next?.noteUrl)
         throw new Error(`${article.key}: nextBestArticle が未公開`);
       // マガジンが note 上で未公開 (noteUrl null) なら footer からマガジンカードを省くだけ。
       // 未知のマガジン id だけを止める (a-kakei 47 本は s47-kakei-reading が未公開のまま運用中)。
@@ -310,7 +312,7 @@ export function buildPlans(source, views, options) {
         throw new Error(`${article.key}: magazine が catalog に無い (${article.magazine})`);
       const liveRepair = remediation.get(article.key) || { forceNormalizeLegacy: false, repairs: [] };
       const repairs = [
-        ...(article.publishedLinkRepairs || []),
+        ...(options.products ? [] : article.publishedLinkRepairs || []),
         ...(options.repairRedirects ? liveRepair.repairs : []),
         // あるべき商品カード状態を常に計算し、公開済み本文との差分だけを直す。
         // catalog へ記事ごとに手書きしない (是正対象は productTarget を持つ記事すべて)。
@@ -331,6 +333,7 @@ export function buildPlans(source, views, options) {
       const siteUrl = target ? `${SITE_ORIGIN}${target}` : SITE_ORIGIN;
       return {
         article,
+        productOnly: Boolean(options.products),
         next,
         magazine,
         repairs,
@@ -345,7 +348,7 @@ export function buildPlans(source, views, options) {
               magazineUrl: magazine?.noteUrl || null,
               magazineName: magazine?.name || null,
               magazineDescription: magazine?.description || null,
-              siteUrl,
+              siteUrl: options.products ? null : siteUrl,
               siteTitle: target ? `${article.title}｜47都道府県データ` : "統計で見る都道府県 stats47",
               siteDescription: target
                 ? "47都道府県の順位・数値・グラフを無料で確認できます。"
@@ -367,6 +370,11 @@ export function buildPlans(source, views, options) {
 
 export function applyPlanBody(body, plan) {
   const productBody = rewriteProductCards(body, plan.paidProduct);
+  if (plan.productOnly && plan.paidProduct) {
+    return { body: productBody, changed: productBody !== body, normalizedLegacyLinks: false,
+      addedNextNote: false, addedMagazine: false, addedSite: false,
+      addedProduct: productBody !== body, addedDataset: false, dedupedFooterHeading: false, repairs: [] };
+  }
   const repaired = applyPublishedLinkRepairs(productBody, plan.repairs, {
     forceRegenerateCards: FORCE_REGENERATE_CARDS,
   });
@@ -715,7 +723,7 @@ async function main() {
       site: "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
       noteToNote: "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
       magazine: "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
-      product: "カードは /products/<slug>/from/note/<noteId> の素URL。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計",
+      product: "有料noteへの直接カードはnote内遷移（記事間clickは取得不可）。サイト商品ページ経由のカードは /products/<slug>/from/note/<noteId> からGA4標準UTMへ転送し、記事単位で集計",
     },
     articles: [],
   };

@@ -8426,6 +8426,76 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:36:16.524Z"
+    },
+    "NOTE-PACKS-REPLACE-COCONALA-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:00:17.312Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node C:/tmp/stats47-note-card-investigation-20261026/verify-products-live.mjs",
+              "node .claude/scripts/note/audit-note-product-cards.mjs --live --browser-fetch",
+              "node .claude/scripts/note/repair-note-cards-native.mjs --all --output data/note/evidence/note-native-card-final-audit-2026-10-26.json",
+              "npm run note:circulation:test"
+            ],
+            "pass": true
+          },
+          "evidence": "PR1185本番反映・画像生成・purge・公開後smoke成功。本番13商品HTTP200/価格/題名/note購入先一致・ココナラ購入先0。公開290記事の商品カード一致・未設置/未登録/更新未適用0。全428記事の最終read-only audit pending/failed0。証拠data/note/evidence/note-product-storefront-live-2026-10-26.jsonおよびnote-card-repair-result-2026-10-26.json",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:00:17.312Z"
+    },
+    "NOTE-PRODUCT-CARD-MISMATCH-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:00:17.579Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/note/audit-note-product-cards.mjs --live --browser-fetch",
+              "node --test .claude/scripts/note/__tests__/update-published-navigation.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "新しい公開済み有料note13商品へ再配線。290記事の公開商品カード監査で不一致/未設置/未登録/更新未適用0、題名は公開noteのnative embedから表示。週次台本も公開台帳/標準登録情報を監査するよう修正。証拠note-card-repair-result-2026-10-26.jsonのdirectPaidNoteAudit",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:00:17.579Z"
     }
   }
 }

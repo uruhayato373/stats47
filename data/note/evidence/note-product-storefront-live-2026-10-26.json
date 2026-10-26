@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-26T05:35:13.521Z",
+  "summary": {
+    "checked": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "products": [
+    {
+      "productId": "P-01",
+      "url": "https://stats47.jp/products/data-p-01",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "purchaseHref": "https://note.com/stats47/n/ne47eb45f8a15",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-02",
+      "url": "https://stats47.jp/products/data-p-02",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n46d68c153502",
+      "purchaseHref": "https://note.com/stats47/n/n46d68c153502",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-03",
+      "url": "https://stats47.jp/products/data-p-03",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "purchaseHref": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-04",
+      "url": "https://stats47.jp/products/data-p-04",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "purchaseHref": "https://note.com/stats47/n/n5da8a99b3506",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-05",
+      "url": "https://stats47.jp/products/data-p-05",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "purchaseHref": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-06",
+      "url": "https://stats47.jp/products/data-p-06",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "purchaseHref": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-07",
+      "url": "https://stats47.jp/products/data-p-07",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "purchaseHref": "https://note.com/stats47/n/n323af74c09cc",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-08",
+      "url": "https://stats47.jp/products/data-p-08",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "purchaseHref": "https://note.com/stats47/n/n973c3f8478f5",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-09",
+      "url": "https://stats47.jp/products/data-p-09",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "purchaseHref": "https://note.com/stats47/n/n2ced199ed715",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-10",
+      "url": "https://stats47.jp/products/data-p-10",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "purchaseHref": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-11",
+      "url": "https://stats47.jp/products/data-p-11",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "purchaseHref": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-12",
+      "url": "https://stats47.jp/products/data-p-12",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "purchaseHref": "https://note.com/stats47/n/nfa7d235eba85",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    },
+    {
+      "productId": "P-14",
+      "url": "https://stats47.jp/products/data-p-14",
+      "httpStatus": 200,
+      "expectedNoteUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "purchaseHref": "https://note.com/stats47/n/n554a047cf5be",
+      "purchaseLabel": "noteで内容を確認する",
+      "obsoleteCoconalaLinks": 0,
+      "titleMatches": true,
+      "priceMatches": true
+    }
+  ]
+}
