@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:32:36.569Z",
+  "updatedAt": "2026-10-26T07:37:07.818Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8665,6 +8665,105 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:32:36.569Z"
+    },
+    "BLOG-SCATTER-LABELS-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.643Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --root packages/svg-builder"
+            ],
+            "pass": true
+          },
+          "evidence": "機能は 10-09 から scatter.ts の labelPoints→labelNames に実装済みでテストだけ欠けていた。指定県だけに名前が出る・指定なしは出力不変・重なり回避のテスト 5 件を追加 (ラベル処理を外すと 3 件 fail)。svg-builder 107 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.643Z"
+    },
+    "BLOG-SEOTITLE-MIXED-YEAR-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.734Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "title-year-lint.mjs を quality-gate に warning で配線。公開 609+outbox 11 本で 13 件該当 (意図的な比較を含む) のため blocker 化はオーナー判断。テスト 9 pass、条件を外すと 2 fail",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.734Z"
+    },
+    "BLOG-METRIC-NAME-GATE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.818Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "metric-name-lint.mjs (上位語の呼び名・最低年を基準年にする比較) を quality-gate に warning で配線。コーパス 0 件 (誤検知 8 件を規則で除外しテストで固定)。各検出を外すと fail",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.818Z"
     }
   }
 }

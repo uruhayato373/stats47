@@ -38,6 +38,8 @@ import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
 import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { lintMixedYearTitle } from '../lib/title-year-lint.mjs';
+import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
 import {
   lintSvgContent,
   lintSvgSize,
@@ -592,6 +594,7 @@ if (sizeBlockers.length > 0) {
 // (安全/危険 等) が json の legendLabels 明示なしに焼き込まれていないか ②findings カードの
 // json heading/text が SVG に全て描画されているか (renderer の heading 脱落バグの再発防止)。
 const pairBlockers = [];
+const articleCharts = []; // 本文が参照する図の data JSON (下の本文×図の照合で使う)
 for (const base of svgRefs) {
   const svgFile = path.join(dataDir, `${base}.svg`);
   const jsonFile = path.join(dataDir, `${base}.json`);
@@ -622,6 +625,7 @@ for (const base of svgRefs) {
       );
     }
   }
+  articleCharts.push({ base, json: jsonData, source: sourceData });
   const svg = fs.readFileSync(svgFile, 'utf8');
   pairBlockers.push(
     ...lintChoroplethLegend(`${base}.svg`, svg, jsonData).errors
@@ -644,6 +648,19 @@ if (pairBlockers.length > 0) {
       `${pairBlockers.slice(0, 2).join(' / ')}${pairBlockers.length > 2 ? ' 他' : ''}`
   );
 }
+
+// 本文×図の data JSON 照合 (2026-10-26 追加、warning のみ)。critic の目視でしか見つからなかった 3 つの誤り。
+// 公開済み 609 + 送り箱 11 記事の実測: 年の混在 13 件 (公開済み 11・送り箱 2) / 呼び名 0 件 / 基準年 0 件。
+// 年の混在は正当な並べ方も含むため blocker にしない (BLOG-SEOTITLE-MIXED-YEAR-01 / BLOG-METRIC-NAME-GATE-01)。
+const mixedYear = lintMixedYearTitle(content, articleCharts);
+checks.mixedYearTitle = mixedYear.warnings.length;
+warnings.push(...mixedYear.warnings);
+const hypernym = lintHypernymMetricNames(content, articleCharts);
+checks.hypernymMetricNames = hypernym.warnings.length;
+warnings.push(...hypernym.warnings);
+const extremeBase = lintExtremeBaseYear(content, articleCharts);
+checks.extremeBaseYear = extremeBase.warnings.length;
+warnings.push(...extremeBase.warnings);
 
 if (sizeWarnings.length > 0) {
   warnings.push(
