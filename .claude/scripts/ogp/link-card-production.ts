@@ -158,7 +158,10 @@ async function main() {
     const plan=read(required('--plan')) as ImageGenerationPublishPlan;
     const runUrl=required('--run-url');
     if(plan.kind!=='stats47-image-publish-plan'||plan.schemaVersion!==1||!Array.isArray(plan.items)||!/^https:\/\/github.com\/uruhayato373\/stats47\/actions\/runs\/\d+$/.test(runUrl))throw Error('Invalid publication evidence');
-    for(const item of plan.items){
+    let nextItem=0;
+    async function verifyNext(){
+    while(nextItem<plan.items.length){
+      const item=plan.items[nextItem++];
       const asset=item.assets.find(a=>a.variant==='ogp');
       if(!asset||!/^app\/(ranking|blog|areas|products|themes|default)\/[a-z0-9-]+\/ogp\/ogp.png$/.test(asset.key))throw Error('Unexpected OGP key');
       const manifestBytes=await fetchPublicMediaSource(`${site.R2_PUBLIC_BASE_URL}/${item.manifestKey}?v=${item.manifestSha256}`);
@@ -173,6 +176,10 @@ async function main() {
       for(const id of ids){const e=target(id);e.sitePublication={manifestKey:item.manifestKey,fingerprint:item.fingerprint,manifestSha256:item.manifestSha256,imageKey:asset.key,sha256:asset.sha256,url:`${site.R2_PUBLIC_BASE_URL}/${asset.key}`,verifiedAt:new Date().toISOString(),runUrl};e.status='published';}
       storeLedger();console.log(`${asset.key}: public bytes verified`);
     }
+    }
+    const results=await Promise.allSettled(Array.from({length:Math.min(6,plan.items.length)},verifyNext));
+    const failure=results.find((result):result is PromiseRejectedResult=>result.status==='rejected');
+    if(failure)throw failure.reason;
     summary();return;
   }
   if(command==='status'){summary();return;}
@@ -221,6 +228,6 @@ async function main() {
     for(const item of review.entries){const e=target(item.id);save(path.join(root,datasetDir('note.operation-evidence'),`note-magazine-cover-${e.key}.json`),e.publication);}
     summary();return;
   }
-  throw Error('Use sync [--site], export --out [--limit 5], ingest --request --source --out, review --id --review, status');
+  throw Error('Use sync [--site], export --out [--limit 5], ingest --request --source --out --generation, review --id --review, restore --id --out, verify-live, confirm-live --review, record-site --plan --run-url, status');
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});
