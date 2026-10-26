@@ -81,24 +81,16 @@ async function updateProfile(page) {
 }
 
 async function updateMagazine(page, magazine, before) {
-  const asset = join(ASSET_DIR, `magazine-${magazine.key}-1920x1006.png`);
-  const needsCover = before.defaultCover;
+  if (before.defaultCover) throw new Error('Magazine images require archived review and --reviewed-covers --keys');
   const replaceDescription = needsDescriptionUpdate(before.description);
   const needsText = before.name !== magazine.name || replaceDescription;
-  if (needsCover && !existsSync(asset)) throw new Error(`magazine cover asset がありません: ${asset}`);
   await page.goto(`${magazine.noteUrl}/edit`, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForTimeout(1_500);
-  if (needsCover) {
-    await page.locator('input[type="file"]').setInputFiles(asset);
-    await page.getByRole("button", { name: "この画像を使う", exact: true }).click();
-    await page.waitForTimeout(700);
-  }
   if (before.name !== magazine.name) await page.locator('input[type="text"]').last().fill(magazine.name);
   if (replaceDescription) await page.locator("textarea").first().fill(magazine.description);
-  if (needsCover || needsText) {
+  if (needsText) {
     await page.getByRole("button", { name: "更新", exact: true }).click();
-    // 1920px画像の crop → upload → magazine PUT は10秒超かかることがある。
-    // 「処理中」が消え「更新」へ戻る前に context を閉じると upload が中断される。
+    // Wait for the native update before closing the browser context.
     await page.getByRole("button", { name: "更新", exact: true }).waitFor({
       state: "visible",
       timeout: 45_000,
@@ -146,6 +138,7 @@ async function main() {
   console.log(`audit: profile=${report.profile.needsHeader ? "missing" : "ok"} covers=${entries.filter((entry) => entry.needsCover).length} text=${entries.filter((entry) => entry.needsName || entry.needsDescription).length}`);
   console.log(`report: ${REPORT_PATH}`);
   if (!COMMIT) return;
+  if (entries.some((entry) => entry.needsCover)) throw new Error('未設定のマガジンカバーは、画像台帳で採用後に --reviewed-covers --keys で公開してください');
 
   const ctx = await launchContext({ headless: true });
   try {

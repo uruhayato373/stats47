@@ -59,6 +59,8 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 - 自動の寸法・SHA・fingerprint・文字サイズチェックと、試作時の文字境界チェックと、人が読む実寸カードでの確認を両方残す。
   画像HTTP200やURL登録だけをデザイン品質PASSの根拠にしない。候補は採用版/公開版と分けて保管する。
 
+通常の `update-note-branding.mjs` は名称・説明の整備だけを行い、未設定カバーを旧ローカル画像で補完しない。カバーは採用画像のSHA・レビューを確認する `--reviewed-covers --keys` の経路を必須とする。
+
 ### 全件更新・再開の正典
 - マガジンのコピー/プロンプト: `apps/web/scripts/data/link-card-design.ts`。制作・公開状態: `data/ogp/link-card-rollout.json`。
 - 制作CLI: `.claude/scripts/ogp/link-card-production.ts` の sync → export → ingest → review → 公開 → verify-live → confirm-live。

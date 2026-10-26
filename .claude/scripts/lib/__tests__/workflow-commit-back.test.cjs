@@ -41,9 +41,14 @@ for (const thumbnailExit of [20, 21, 1]) {
       const stubs = `
 node() { return 0; }
 npx() {
-  case "$2" in
+  local script="$2" slug="$4"
+  if [ "$2" = --tsconfig ]; then
+    [ "$3" = apps/web/scripts/tsconfig.ogp.json ] || return 97
+    script="$4"; slug="$6"
+  fi
+  case "$script" in
     *generate-blog-thumbnails.ts)
-      if [ "$4" = missing ]; then return ${thumbnailExit}; fi
+      if [ "$slug" = missing ]; then return ${thumbnailExit}; fi
       test -f "$BLOG_DIR/ready/article.md" || return 99
       mkdir -p .local
       printf '{}' > .local/image-generation-publish-plan-blog.json

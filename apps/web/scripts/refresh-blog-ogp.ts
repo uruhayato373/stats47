@@ -13,7 +13,9 @@ const base=process.env.R2_PUBLIC_FETCH_URL??SITE.r2PublicBaseUrl;
 const args=process.argv.slice(2);
 const arg=(name:string)=>args.includes(name)?args[args.indexOf(name)+1]:undefined;
 const limit=Number(arg('--limit')??500);
-if(!Number.isInteger(limit)||limit<1||limit>1000)throw Error('limit must be 1..1000');
+const maxGenerate=Number(arg('--max-generate')??500);
+if(!Number.isInteger(maxGenerate)||maxGenerate<1||maxGenerate>500)throw Error('max-generate must be 1..500');
+if(!Number.isInteger(limit)||limit<1||limit>maxGenerate)throw Error(`limit must be 1..${maxGenerate}`);
 async function get(key:string){
   for(let attempt=0;attempt<3;attempt++){
     try{
