@@ -346,7 +346,7 @@ test('実在の workflow で scheduled 判定が妥当な件数になる', async
   // ★ai-content / blog の日次生成ループは 2026-08-21 に削除した。列挙は readdirSync なので
   //   監視対象は自動で追従するが、この allowlist だけは実在する cron に差し替える。
   //   backlog-loop は 2026-09-27 に日次 cron をやめた (手動起動のみ)。
-  for (const known of ['improvement-cycle-weekly.yml', 'blog-remediation-daily.yml', 'sync-rakuten-catalog.yml']) {
+  for (const known of ['fetch-metrics-weekly.yml', 'blog-remediation-daily.yml', 'sync-rakuten-catalog.yml']) {
     assert.ok(scheduled.includes(known), `${known} が scheduled から漏れている`);
   }
 });

@@ -6,8 +6,8 @@
  *   node .claude/scripts/metrics/build-measurement-cycle.mjs --week 2026-W38 [--admin-audit /tmp/api-latest.json]
  *
  * 出力: data/measurement-cycle/{latest.json,LATEST.md,history.csv}
- * 呼び出し元: fetch-metrics-weekly.yml (日曜) → improvement-cycle-weekly.yml (月曜の無人 triage) と
- *            generate-weekly-metrics-issue.mjs (月曜の週次 Issue) が読む。
+ * 呼び出し元: refresh-measurement-cycle.sh (fetch-metrics-weekly.yml の土曜 02:00 と、土曜の /weekly-review Phase 0b)。
+ *            週次レビューの improvement-triage と generate-weekly-metrics-issue.mjs (週次要約) が読む。
  * --admin-audit は google-admin audit-api の api-latest.json。README の規約で監査 state 自体は commit しないため、
  * CI は /tmp へ退避したものを渡し、ここでは登録済みパラメータ名だけを使う。
  */

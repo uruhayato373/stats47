@@ -209,7 +209,6 @@ export const DATASETS = [
   d("revenue.authenticated", "data/authenticated/latest.json", "state", "strategy", "data", "認証付き計測 (土曜の Mac) の取得元ごとの最新の成否", { schema: "config/schema/revenue.authenticated.schema.json" }),
   d("revenue.authenticated-history", "data/authenticated/revenue-history.json", "series", "strategy", "data", "認証付き計測が取る売上の推移", { schema: "config/schema/revenue.authenticated-history.schema.json" }),
   d("business.measurement-cycle", "data/measurement-cycle/latest.json", "state", "strategy", "data", "週次の計測→記録→改善サイクルのまとめ", { schema: "config/schema/business.measurement-cycle.schema.json" }),
-  d("business.measurement-cycle-triage", "data/measurement-cycle/triage-latest.json", "state", "strategy", "data", "週次サイクルの無人 triage の記録"),
   d("business.measurement-cycle-summary", "data/measurement-cycle/LATEST.md", "report", "strategy", "data", "週次サイクルのまとめの要約"),
   d("business.measurement-cycle-history", "data/measurement-cycle/history.csv", "series", "strategy", "data", "週次サイクルの推移"),
   d("ai-content.history", "data/ai-content/history.csv", "series", "data", "data", "ランキング AI 解説の生成の推移"),

@@ -118,7 +118,7 @@ visible output量、token/cost、所要時間。保存する場合は
 
 | 段 | 何をするか | 実体 |
 |---|---|---|
-| 計測 | 対話・agent の使用量を transcript から集計 (agent × モデル × effort × 週)。CI の無人実行は 1 run 1 行 | `npm run model-usage:collect` (`npm run admin` 起動時にも走る) / `record-claude-usage-ci.sh` (5 workflow) |
+| 計測 | 対話・agent の使用量を transcript から集計 (agent × モデル × effort × 週)。CI の無人実行は 1 run 1 行 | `npm run model-usage:collect` (`npm run admin` 起動時にも走る) / `record-claude-usage-ci.sh` (Claude を無人実行する workflow すべて) |
 | 記録 | 集計と提案を 1 ファイルにまとめる | `npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json`、表示は管理画面 `/ops/agents` |
 | 改善 | 決定的な規則で「試す価値がある変更」を出し、canary (答えの分かっている課題) の recall と費用で合否を決める | `proposeChanges` (usage-core.mjs) / `npm run model-usage:canary -- --agent <name> --model <候補>` |
 

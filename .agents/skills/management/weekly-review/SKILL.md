@@ -14,7 +14,7 @@ primary_agent: strategy-advisor
 
 `$ARGUMENTS`は`YYYY-Www`。省略時は期限が来ている週 (`node .claude/scripts/management/check-review-cadence.mjs` の「期限が来ている週次レビュー」。土曜からは直前に終わった週)。終わっていない週は受け付けない。
 
-**毎週土曜に実行する** (2026-10-10 オーナー決定)。同じ土曜の 02:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、07:00 に Mac が認証付き計測を取り、08:00 に無人 triage が出たあとに書く (2026-10-26 に金曜から土曜の朝へ集約)。認証付き計測で失敗した取得元があれば、最初にオーナーに入り直してもらって取り直す。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
+**毎週土曜に実行する** (2026-10-10 オーナー決定)。同じ土曜の 02:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、07:00 に Mac が認証付き計測を取ったあとに書く (2026-10-26 に金曜から土曜の朝へ集約)。計測 state の作り直しと改善施策の記録 (旧 CI の無人 triage) もこのレビューの中で行う (Phase 0b)。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
 
 ## Phase 0: NSM snapshot
 
@@ -42,6 +42,30 @@ node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week 
 
 FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成前なので、この段階ではreview/planの欠落自体は検査しない。
 
+## Phase 0b: 計測 state の作り直しと施策の記録
+
+2026-10-26 に CI の無人 triage (`improvement-cycle-weekly.yml`) と週次要約 (`weekly-metrics-issue.yml`) をやめ、
+同じ処理をここで行う。対話のセッションは `.claude/` に書けるので、提案ファイルを経由せずに台帳を直接更新する。
+
+1. 認証付き計測の成否を見る (`npm run measurement:status`)。失敗した取得元があれば、オーナーにその場で入り直してもらい、
+   `bash scripts/scheduled/measurement-session-refresh.sh` で取り直す。取り直せない取得元は判定不能として Blockers へ。
+2. 計測 state を作り直す。02:00 の計測の後に入った認証付き計測を state に入れるため。
+
+   ```bash
+   git pull --rebase --autostash origin develop   # Mac が 07:00 に push した記録を取り込む
+   bash .claude/scripts/metrics/refresh-measurement-cycle.sh [YYYY-Www]
+   ```
+
+   `data/measurement-cycle/latest.json` の `week` が対象週であることを確かめる。違えば土曜 02:00 の
+   `fetch-metrics-weekly` が失敗しているので、手動起動してから作り直す。
+3. `improvement-triage` agent に施策の記録を渡す。対象は `latest.json` の `improvements.overdue` と、
+   `data/effect-verdict/verdicts-<week>.json` で `effect/pending` 以外になった施策 (判断の規則は agent 定義の
+   「週次レビューでの記録」)。agent は improvements.md・詳細ログ・backlog を直接更新する。
+4. `npm run docs:check` で DG079 / DG080 (施策の KPI と目標値) を確かめる。閉じた・更新した・起票した施策の ID は
+   レビュー本文の「計測→記録→改善サイクル」節に書く。
+5. 週次要約を出す: `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>`。
+   以下の Phase で「週次メトリクス Issue」と呼ぶのはこの出力である (CI は 2026-10-26 から作らない)。
+
 ## Phase 1: 実績収集
 
 収集専用subagentは起動せず、以下のtrackを同一セッションの並列tool callで読む。
@@ -58,7 +82,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | AdSense の配置 | `data/adsense/LATEST.md`・`history-units.csv`・`impact-LATEST.md` と KPI `ad-yield`。運用は `/adsense-improvement`。再開後 4 週 (W42〜W45) はベースライン期間で配置を変えない。取得が 0 行 (`manifest.json` の `status: error`) なら Blockers へ (`ADSENSE-RESTART-01` 手順⑤) |
 | 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週土曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
-| 計測→記録→改善サイクル | `data/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
+| 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
 | データ品質キュー | `data/data-quality/checks/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (`docs31Tracked` = docs/31 に紛れ込んだ追跡ファイル数。0 以外は違反)。週次CIの `note-circulation-audit` artifact の `note-image-assets.json` は `--verify-r2` 付きで、公開 R2 の本文・生成 AI 背景の欠落 (`NOTE_R2_BODY_MISSING` / `NOTE_BACKGROUND_MISSING`) を示す。正典 `.claude/rules/note-image-assets.md` |
@@ -121,7 +145,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - NSM（週次収益）/ GA4 / GSC / SNS
 - KPIツリー（重点KPIの今週値・非重複比較・判定、ガードレールの悪化、判定不能のKPIと理由、施策の配線状況）
 - 🔴 の着手順（上位 3 枚の今週の進み具合と、止まっている理由）
-- 計測→記録→改善サイクル（回遊率・業務文脈の着地・無人記録で閉じた/更新した施策・オーナー作業）
+- 計測→記録→改善サイクル（回遊率・業務文脈の着地・Phase 0b で閉じた/更新した施策・オーナー作業）
 - 同節のGSC技術是正（作業対象週の修正/本番反映と、観測日時付きのGoogle検証状態・残カードID・次回確認日・証拠。検証開始を合格や登録済みと扱わない）
 - search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び

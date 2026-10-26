@@ -171,11 +171,11 @@ test('★Claude を使う workflow どうしが実時間で重ならない (利�
     .filter(({ source }) => source.includes('claude-code-base-action'))
     .filter(({ source }) => /- cron: "/.test(source));
 
-  // 列挙が空 = 何も検査していない、を防ぐ (2026-09-27 に backlog-loop の cron を止めたので、
-  // 週次で cron を持つ improvement-cycle を錨にする)
+  // 列挙が空 = 何も検査していない、を防ぐ (2026-09-27 に backlog-loop の cron を止め、2026-10-26 に improvement-cycle を
+  // 週次レビューへ移したので、週次で cron を持つ page-quality-audit を錨にする)
   assert.ok(
-    claudeWorkflows.some(({ file }) => file === 'improvement-cycle-weekly.yml'),
-    'improvement-cycle が Claude workflow として拾えていない = 列挙が壊れている',
+    claudeWorkflows.some(({ file }) => file === 'page-quality-audit-weekly.yml'),
+    'page-quality-audit が Claude workflow として拾えていない = 列挙が壊れている',
   );
 
   const crons = (source) => [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);

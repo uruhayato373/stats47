@@ -2,7 +2,7 @@
  * 計測→記録→改善サイクルの週次状態 (pure)。
  *
  * 週次 snapshot (GA4 journey slice) と GA4 custom dimension の登録状況、改善バックログを突き合わせ、
- * 週次メトリクス Issue / weekly-review / CI の improvement-triage run が同じ事実を読むための 1 つの state にする。
+ * 週次メトリクス Issue / weekly-review / レビュー中の improvement-triage が同じ事実を読むための 1 つの state にする。
  * 欠けた入力は 0 に丸めず status で区別する (evidence-based-judgment)。
  */
 import { describeChannel, weeklyProductRevenue } from "./product-revenue.mjs";

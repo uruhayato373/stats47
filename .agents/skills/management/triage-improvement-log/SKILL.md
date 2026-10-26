@@ -13,7 +13,7 @@ primary_agent: improvement-triage
 
 ## いつ使うか
 
-- 週次の無人記録 (`.github/workflows/improvement-cycle-weekly.yml`、1 回最大 8 件) が扱わなかった施策を人が棚卸しするとき
+- 週次レビュー (`/weekly-review` Phase 0b) の記録が扱わなかった施策を棚卸しするとき (Phase 0b は期日超過と閾値エンジンの確定分だけを扱う)
 - weekly-plan で「今週どの改善施策に着手するか」決める前
 - effect 判定が遅延している施策の一括棚卸し
 - CSV に書き出して Notion / スプレッドシートで管理したいとき
@@ -97,7 +97,7 @@ Tier × 期日カテゴリの集計マトリクス。
 
 ## 典型ワークフロー
 
-### 無人記録の後に残りを棚卸しするとき
+### 週次レビューの記録の後に残りを棚卸しするとき
 
 ```bash
 # 1. matrix で全体感を把握
@@ -119,7 +119,7 @@ node .claude/scripts/lib/triage-matrix.mjs --format markdown
 ## 関連
 
 - `.claude/scripts/lib/triage-matrix.mjs` — 本スキルの実装
-- `.github/workflows/improvement-cycle-weekly.yml` — 期日超過・閾値エンジン確定分の週次の無人記録 (本スキルは人手の棚卸し用)
+- `.claude/skills/management/weekly-review/SKILL.md` Phase 0b — 期日超過・閾値エンジン確定分の週次の記録 (本スキルは全体の棚卸し用)
 - `.claude/todo/improvements.md` — 改善バックログ全体 (TODO 真実源)
 - `.claude/rules/docs-vs-issues.md` — 改善施策の置き場所
 - `.claude/rules/evidence-based-judgment.md` — effect 判定の実証ベース原則
