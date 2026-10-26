@@ -5,14 +5,9 @@ const test = require("node:test");
 
 const ROOT = path.resolve(__dirname, "../../../..");
 const WORKFLOWS = [
-  "psi-audit-daily.yml",
+  "fetch-metrics-weekly.yml", // PSI (2026-10-26 に psi-audit-daily.yml から job として移した) とカバレッジ
   "cloudflare-usage-daily.yml",
-  "ranking-integrity-audit-weekly.yml",
-  "ogp-image-audit-weekly.yml",
   "data-refresh.yml",
-  "provenance-audit-weekly.yml",
-  "internal-link-audit-weekly.yml",
-  "workflow-health-daily.yml",
   "gsc-operations-cycle-weekly.yml",
   "quality-suite-weekly.yml",
   "post-deploy-smoke.yml", // 2026-09-18: 7 デプロイ連続失敗が無通知だった (CI-POST-DEPLOY-SMOKE-ALERT-01)
@@ -39,7 +34,7 @@ test("domain alert は固定タイトルでupsertし、正常復帰時に自動C
 
 test("PSI alert は日付単位ではなくlabel単位で既存Issueを検索する", () => {
   const source = fs.readFileSync(
-    path.join(ROOT, ".github/workflows/psi-audit-daily.yml"),
+    path.join(ROOT, ".github/workflows/fetch-metrics-weekly.yml"),
     "utf8",
   );
   assert.match(source, /--label psi-alert/);
@@ -48,7 +43,6 @@ test("PSI alert は日付単位ではなくlabel単位で既存Issueを検索す
 
 test("作業候補と運用queueはIssue台帳を作らずWorkflow Summaryへ出す", () => {
   for (const filename of [
-    "blog-remediation-daily.yml",
     "ctr-improvement-monthly.yml",
   ]) {
     const source = fs.readFileSync(

@@ -4,11 +4,11 @@ name: 🧭 Backlog Routing Policy (weekly)
 # minSamples 未満は policy を変えず、変更時も develop への提案 commit まで。
 # agent frontmatter、日次件数、escalation ladder は自動変更しない。
 # 正典: .claude/rules/backlog-loop.md §3
+#
+# 定期実行はしない (2026-10-26 に外した)。評価する ledger を書くバックログ自動処理 (backlog-loop-daily.yml) が
+# 2026-09-26 から止まっていて入力が増えないため。自動処理を再開するときに schedule を戻す。
 
 on:
-  schedule:
-    # 毎週土曜 JST 06:45 (= 金曜 21:45 UTC)。週次 GSC 後、整合監査の前。
-    - cron: "45 21 * * 5"
   workflow_dispatch: {}
 
 permissions:

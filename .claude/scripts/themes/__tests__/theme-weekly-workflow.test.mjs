@@ -9,19 +9,19 @@ import yaml from 'js-yaml';
 const workflow = yaml.load(
   fs.readFileSync(
     new URL(
-      '../../../../.github/workflows/theme-chart-audit-weekly.yml',
+      '../../../../.github/workflows/quality-suite-weekly.yml', // 2026-10-26 から theme job
       import.meta.url
     ),
     'utf8'
   )
 );
-const commitStep = workflow.jobs.audit.steps.find((step) =>
+const commitStep = workflow.jobs.theme.steps.find((step) =>
   step.name.includes('Commit observations')
 );
 
 test('weekly planner gates heavy work, while failure artifacts and exit codes survive', () => {
   assert.equal(workflow.on.schedule[0].cron, '0 16 * * 5'); // 土曜 01:00 JST の週 1 回 (2026-10-26)
-  const steps = workflow.jobs.audit.steps;
+  const steps = workflow.jobs.theme.steps;
   assert.ok(
     steps.findIndex((s) => s.id === 'plan') <
       steps.findIndex((s) => s.name === 'Install audit dependencies')
@@ -48,7 +48,7 @@ test('weekly planner gates heavy work, while failure artifacts and exit codes su
 });
 
 test('review publishes only after guards and never deploys or auto-merges', () => {
-  const steps = workflow.jobs.audit.steps;
+  const steps = workflow.jobs.theme.steps;
   const verify = steps.findIndex((s) => s.id === 'review_check');
   const publish = steps.findIndex((s) => s.name === 'Publish verified review');
   assert.ok(verify < publish);
@@ -110,7 +110,7 @@ test('weekly observation commit preserves experiment checkpoints without staging
 });
 
 test('model results use typed structured output instead of prose JSON parsing', () => {
-  const args = workflow.jobs.audit.steps.find(s => s.id === 'review').with.claude_args;
+  const args = workflow.jobs.theme.steps.find(s => s.id === 'review').with.claude_args;
   const schema = JSON.parse(args.match(/--json-schema '([^']+)'/)[1]);
   assert.equal(schema.type, 'object');
   assert.deepEqual(schema.required, ['status', 'summary', 'findings', 'sourceReviews', 'tests']);
@@ -118,7 +118,7 @@ test('model results use typed structured output instead of prose JSON parsing', 
 });
 
 test('saved review retry is explicit, restores only evidence and uses the same publication guards', () => {
-  const steps = workflow.jobs.audit.steps;
+  const steps = workflow.jobs.theme.steps;
   assert.equal(workflow.on.workflow_dispatch.inputs.review_run.required, false);
   assert.match(steps.find(s => s.id === 'plan').run, /echo "run=false"/);
   const replay = steps.find(s => s.id === 'replay');
@@ -130,7 +130,7 @@ test('saved review retry is explicit, restores only evidence and uses the same p
 });
 
 test('a fresh review cannot silently reuse an old report when execution output is missing', () => {
-  const verify = workflow.jobs.audit.steps.find(s => s.id === 'review_check');
+  const verify = workflow.jobs.theme.steps.find(s => s.id === 'review_check');
   const prefix = verify.run.slice(0, verify.run.indexOf('node .claude/scripts/themes/check-theme-review.mjs'));
   const script = 'git() { return 0; }; node() { return 77; };\n' + prefix;
   const run = replay => spawnSync('bash', ['-e', '-c', script], {env:{...process.env, CLAUDE_EXECUTION_FILE:'', REPLAY_MODE:replay}}).status;
@@ -139,7 +139,7 @@ test('a fresh review cannot silently reuse an old report when execution output i
 });
 
 test('skipped or replay-only observations cannot publish observations or resolve an alert', () => {
-  const alert = workflow.jobs.audit.steps.find(s => s.name === 'Update actionable alert');
+  const alert = workflow.jobs.theme.steps.find(s => s.name === 'Update actionable alert');
   for (const step of [commitStep, alert]) {
     assert.match(step.if, /steps\.plan\.outputs\.run == 'true'/);
     assert.match(step.if, /steps\.check\.outcome == 'success'/);
@@ -147,7 +147,7 @@ test('skipped or replay-only observations cannot publish observations or resolve
 });
 
 test('only an explicit healthy alert result can close an existing issue', (t) => {
-  const alert = workflow.jobs.audit.steps.find(s => s.name === 'Update actionable alert');
+  const alert = workflow.jobs.theme.steps.find(s => s.name === 'Update actionable alert');
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'theme-alert-state-'));
   t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
   // Exercise the workflow shell without contacting GitHub or altering files.

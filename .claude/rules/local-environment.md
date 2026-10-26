@@ -385,8 +385,8 @@ skill には詳細を複製せず本節への参照だけを置く。
    `left-rail-layout-contract.test.tsx` / `article-shell-left-rail-contract.test.tsx`)。
    **47都道府県を個別にブラウザ表示して確認しない**。
 3. **公開前・定期監査**: 全体ビルド・全テスト・全URL/47都道府県/リンク/構造化データ/広告DOM/
-   表示速度の横断検査。CI (`pr-quality-check.yml`)・定期監査 (`page-quality-audit-weekly.yml` /
-   `psi-audit-daily.yml` 等)・明示的なリリース確認で実施する。ユーザーが明示した場合や、
+   表示速度の横断検査。CI (`pr-quality-check.yml`)・定期監査 (`quality-suite-weekly.yml` の page-quality job /
+   `fetch-metrics-weekly.yml` の psi job 等)・明示的なリリース確認で実施する。ユーザーが明示した場合や、
    本番・ブラウザでしか確認できない問題 (Cloudflare Workers ランタイム固有の挙動等) では
    個別に実施してよい。
 
@@ -436,7 +436,7 @@ background + Ready polling。Windows では `next build` が完走せず `type-c
 read-only で、必要な検査を「提案」するに留め、無条件に全検査を自ら実行しない (現状の
 Output Contract・担当外欄で既に明記済み)。実装 agent は自分が変更した箇所に対応する最小限の
 検査までを担当する。同じ検査を別 agent へ再委譲しない。ブラウザ監査・全URL監査は
-page-quality (週次 `page-quality-audit-weekly.yml`) / PSI (日次 `psi-audit-daily.yml`) など
+page-quality (週次 `quality-suite-weekly.yml` の page-quality job) / PSI (週次 `fetch-metrics-weekly.yml` の psi job) など
 専任スキル・定期処理へ渡す。
 
 ## ローカル資源の予算と保持

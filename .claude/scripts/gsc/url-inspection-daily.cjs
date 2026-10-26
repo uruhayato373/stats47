@@ -763,7 +763,7 @@ function writeCoverageDrilldown(rows, dateStr) {
   mdLines.push(`- 今週の URL リスト: \`${week}/\` 配下`);
   mdLines.push(`- 時系列集約: \`history.csv\``);
   mdLines.push("- 自動取得スクリプト: `node .claude/scripts/gsc/url-inspection-daily.cjs`");
-  mdLines.push("- GitHub Actions: `.github/workflows/gsc-url-inspection-daily.yml` (毎朝 JST 06:00)");
+  mdLines.push("- GitHub Actions: `.github/workflows/fetch-metrics-weekly.yml` の url-inspection job (毎週土曜 00:00 JST)");
   mdLines.push("");
   fs.writeFileSync(path.join(drilldownBase, "LATEST.md"), mdLines.join("\n"));
   log(`[drilldown] LATEST.md updated`);

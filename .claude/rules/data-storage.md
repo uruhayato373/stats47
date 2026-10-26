@@ -240,7 +240,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 計測→記録→改善サイクルの週次まとめ | `data/measurement-cycle/{latest.json,LATEST.md,history.csv}`（`build-measurement-cycle.mjs` が土曜 02:00 の `fetch-metrics-weekly.yml` で作り、土曜の `/weekly-review` が Mac の認証付き計測の後に作り直す。施策の記録と週次要約もレビューの中で行う。2026-10-26 に CI の無人 triage と週次要約 workflow を撤去） |
 | 改善施策の詳細ログ・効果判定・実験 | `data/improvement/<施策>/improvement-log.md`、`data/effect-verdict/verdicts-<week>.json`、`data/business/experiments.json` |
 | NSM 週次 JSON snapshot・レビュー | `data/nsm/weekly-snapshots/YYYY-Www.json`、`data/reviews/{weekly,monthly}/` |
-| e-Stat 年カバレッジ監査キュー | `data/estat/year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で巡回生成） |
+| e-Stat 年カバレッジ監査キュー | `data/estat/year-coverage/{queue.json,LATEST.md}`（週次レビューの `npm run weekly:audits` の estat-year-coverage が週次で巡回生成） |
 | 整合性監査マーカー | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook がこのハッシュと現在の変更を比較） |
 | **Claude routine のトークン実績** (日次生成 1 run 1 行) | `.claude/state/metrics/claude-usage/history.csv`（書込: `.claude/scripts/lib/record-claude-usage.mjs` のみ・追記専用。**4 種を合計しない** — cache_read は割引されるため。`token_source=none` は 0 ではなく未取得。読み方は同ディレクトリの README） |
 | **モデル使用量と最適化提案** | `.claude/state/metrics/model-usage/{local-<platform>.json,latest.json,canary/*.json}`（`local-*` は transcript から集計した値だけで prompt・本文は書かない。正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」） |

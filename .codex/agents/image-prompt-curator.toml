@@ -16,7 +16,7 @@ developer_instructions = '''
   `assets/blog-codex-backgrounds/*.jpg`)
 - Claude Code → Codex MCP `$imagegen` 生成・決定的ingest (`/generate-blog-images`)
 - OGP / note 表紙 / SNS 静止素材の用途別プロンプト選定
-- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager / areas OGP・県シルエットカード=ranking-ui-manager) に委譲し、curator は監査と提案に留める。反映経路は各 generator (`generate-ogp-images.ts` 等) が変更 bundle のみを `.local/image-staging/<type>/` に生成 → exact plan → `push-generated-image-set.ts --plan` (r2-publisher) で反映。監査は手動 `/audit-ogp-images` に加え、週次 self-heal (`ogp-image-audit-weekly.yml`) が陳腐化/欠落を自動修復し、修復後も残存すれば Issue 起票する (`.claude/rules/ogp-image-standards.md` §5.0)
+- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager / areas OGP・県シルエットカード=ranking-ui-manager) に委譲し、curator は監査と提案に留める。反映経路は各 generator (`generate-ogp-images.ts` 等) が変更 bundle のみを `.local/image-staging/<type>/` に生成 → exact plan → `push-generated-image-set.ts --plan` (r2-publisher) で反映。監査は手動 `/audit-ogp-images` に加え、週次 self-heal (`quality-suite-weekly.yml` の ogp-images job) が陳腐化/欠落を自動修復し、修復後も残存すれば Issue 起票する (`.claude/rules/ogp-image-standards.md` §5.0)
 
 note記事カバーは `/image-prompt --use-case note-header` の専用経路に統一する。
 全8カテゴリの最新版方針からCodex built-in imagegenで文字込み生成する。Claude自身は描画・代作しない。

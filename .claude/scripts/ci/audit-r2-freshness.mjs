@@ -53,7 +53,7 @@ export const WATCHED = [
   {
     key: "state/page-quality/screenshots/latest/index.json",
     maxAgeDays: 10,
-    why: "page-quality-audit-weekly.yml (週次)。止まると翌週のスクショ比較元と UI 確認が古いまま",
+    why: "quality-suite-weekly.yml の page-quality job (週次)。止まると翌週のスクショ比較元と UI 確認が古いまま",
   },
 ];
 

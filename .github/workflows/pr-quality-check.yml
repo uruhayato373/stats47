@@ -33,7 +33,7 @@ permissions:
 #   - Web buildは1回だけ作り、代表E2Eが同じartifactを再利用する。
 #   - page-quality (代表URL) は 2026-09-18 に PR 必須から外した (CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01):
 #     本番 R2 依存とサイト横断の既知違反 (duplicate_link_ratio) で PR の差分と独立に赤になり、
-#     PR #974 で 5 連続失敗・#977 でも赤。週次 page-quality-audit-weekly.yml が全 URL を監査し
+#     PR #974 で 5 連続失敗・#977 でも赤。週次 quality-suite-weekly.yml の page-quality job が全 URL を監査し
 #     alert Issue で通知する。リリース前の明示確認は `npm run check:release-local`。
 #   - coverage・全E2E・全workspace型検査は週次full suiteでも全件実行する。
 #   - 集約 job `quality-check` (name: Code Quality Check) が全 job を needs + if:always() で
@@ -1293,7 +1293,7 @@ jobs:
         run: |
           # PRのコードだけでは本番R2と必ず差分が生じるため、ここで公開R2 freshnessを
           # 判定しない。レンダラー入力・AI prompt・asset contract は決定的テストで保証する。
-          # 本番画像の欠落/鮮度監査は ogp-image-audit-weekly と post-deploy smoke test が担当する。
+          # 本番画像の欠落/鮮度監査は quality-suite-weekly の ogp-images job と post-deploy smoke test が担当する。
           npx vitest run apps/web/scripts/lib/__tests__/blog-ogp-visual.test.ts
         continue-on-error: false
 

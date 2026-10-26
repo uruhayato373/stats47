@@ -20,7 +20,7 @@ co_agents: [estat-researcher]
 
 ## いつ使うか
 
-- 週次監査 (`ranking-integrity-audit-weekly.yml`) の check (l) が未検証の増加で失敗したとき
+- 週次レビューの `npm run weekly:audits` (ranking-integrity) の check (l) が未検証の増加で失敗したとき
 - `[Ranking Alert]` Issue に `profile-violated` が出たとき (**最優先** — 検証済みの予測をデータが破った)
 - 未検証キューを計画的に消化したいとき
 

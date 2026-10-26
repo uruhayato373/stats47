@@ -131,16 +131,8 @@ test('どの workflow も main へ直接 push しない (main へは PR 経由�
   );
 });
 
-test('blog-remediation-daily がラチェット 3 種と verdict を保持している', () => {
-  const doc = yaml.load(
-    fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-remediation-daily.yml'), 'utf8')
-  );
-  const ids = doc.jobs.daily.steps.filter((s) => s.id).map((s) => s.id);
-  for (const id of ['lineage_ratchet', 'value_ratchet', 'provenance_ratchet']) {
-    assert.ok(ids.includes(id), `${id} が消えている (ラチェットが外された?)`);
-  }
-  assert.deepEqual(auditRatchetCommitContract(doc), []);
-});
+// ブログ是正キューのラチェット 3 種は、2026-10-26 に週次レビューへ移した台本 blog-remediation.sh が持つ
+// (.claude/scripts/management/__tests__/weekly-audits.test.mjs)。
 
 // ── ゲート自体の検証 (全 PASS が「何も見ていない」と区別できるように) ──────
 
@@ -328,14 +320,16 @@ test('develop へ切り替えた後に、退避した別 ref のファイルを�
 });
 
 test('共有 state を書く計測 workflow は develop を checkout して、その上で生成する', () => {
-  for (const file of ['fetch-metrics-weekly.yml', 'psi-audit-daily.yml', 'cloudflare-usage-daily.yml']) {
+  // PSI と URL 検査は 2026-10-26 から fetch-metrics-weekly.yml の job (checkout が job ごとにある)
+  for (const file of ['fetch-metrics-weekly.yml', 'cloudflare-usage-daily.yml']) {
     const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8'));
     const refs = Object.values(doc.jobs).flatMap((job) =>
       (job.steps || [])
         .filter((s) => String(s.uses || '').startsWith('actions/checkout@'))
         .map((s) => s.with && s.with.ref)
     );
-    assert.deepEqual(refs, ['develop'], `${file}: checkout ref が develop ではない`);
+    assert.ok(refs.length > 0, `${file}: checkout が無い`);
+    assert.deepEqual([...new Set(refs)], ['develop'], `${file}: checkout ref が develop ではない`);
   }
 });
 

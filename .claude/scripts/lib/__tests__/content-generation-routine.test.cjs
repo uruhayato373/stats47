@@ -255,20 +255,5 @@ test('public data contract audit is wired after every R2 publication path', () =
   }
 });
 
-test('weekly public contract audit opens, closes, and fails visibly', () => {
-  const doc = YAML.parse(read('.github/workflows/ranking-integrity-audit-weekly.yml'));
-  const steps = doc.jobs.audit.steps;
-  const idx = (needle) => steps.findIndex((step) => String(step.name ?? '').includes(needle));
-  const audit = steps[idx('Audit public data contracts')];
-  const open = steps[idx('Open issue on public data contract')];
-  const close = steps[idx('Close recovered public data contract')];
-  const reflect = steps[idx('Reflect public data contract result')];
-
-  assert.equal(audit.id, 'public_contract');
-  assert.equal(audit['continue-on-error'], true, 'Issue 起票前に監査失敗で job が止まる');
-  assert.match(String(open.if), /public_contract\.outputs\.exit_code != '0'/);
-  assert.match(String(close.if), /public_contract\.outputs\.exit_code == '0'/);
-  assert.match(String(reflect.if), /always\(\)/);
-  assert.ok(idx('Upload public data contract report') < idx('Open issue on public data contract'));
-  assert.match(String(open.run), /public-data-contract-alert/);
-});
+// 週次の公開データ契約の監査が失敗を伝えることは、2026-10-26 に週次レビューへ移した台本 ranking-integrity.sh の
+// 振る舞いテスト (.claude/scripts/management/__tests__/weekly-audits.test.mjs) が持つ。

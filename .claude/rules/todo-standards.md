@@ -100,7 +100,7 @@ doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこ�
 | 対象 | 書き手 |
 |---|---|
 | `backlog.md` の起票・タグ付与・整形 | `todo-curator` (行削除はしない) |
-| `backlog.md` の**行削除** | `backlog-loop` (CI)。gate 証拠が ledger に要る → `.claude/rules/backlog-loop.md` |
+| `backlog.md` の**行削除** | `backlog-loop` (CI)。gate 証拠が ledger に要る → `.claude/rules/backlog-loop.md`。加えて週次レビュー (`/weekly-review`) は、本文に完了の証拠 (検証コマンドの結果・PR / commit・読み戻しの確認) があるカードを消してよい (2026-10-26 オーナー決定。backlog-loop が 9/26 から止まり、完了カードが溜まって 1 MiB の上限に達したため) |
 | `improvements.md` | `improvement-triage` (排他) |
 | `monthly.md` | `/monthly-plan` skill (Write 上書き) |
 | `weekly.md` | `/weekly-plan` skill (Write 上書き) |

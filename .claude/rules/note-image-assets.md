@@ -161,7 +161,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 | `NOTE_R2_BODY_MISSING` | 台帳が保存済みとする公開本文が R2 に無い / 公開済みなのに未保存 (`--verify-r2`・週次。通信失敗は 0 件扱いにせず exit 2) |
 
 配線: pre-commit (`apps/web/scripts/pre-commit-checks.sh`)・PR (`pr-quality-check.yml`)・`.claude/config/quality-gates.json` の
-`note-image-assets`・週次 (`note-circulation-audit-weekly.yml` の artifact `note-image-assets.json`)。
+`note-image-assets`・週次 (週次レビューの `npm run weekly:audits` の note-circulation。結果は `${TMPDIR}/note-image-assets.json`)。
 `/weekly-review` は `npm run note:images:audit -- --json` の `summary` を読む。
 
 ## ランキング記事の本文画像 3 枚 (choropleth / chart / boxplot)

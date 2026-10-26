@@ -51,7 +51,7 @@ if (res.status === 1) {
   console.error(
     "[check-published-drafts] ❌ 公開済み (R2 と内容一致) の下書きが contents/blog に残っています。\n" +
       "  対応: node .claude/scripts/blog/prune-published-outbox.mjs --apply で掃除\n" +
-      "        (または日次 cron blog-remediation-daily.yml が翌朝処理)。",
+      "        (または週次レビューの npm run weekly:audits が処理)。",
   );
   process.exit(1);
 }

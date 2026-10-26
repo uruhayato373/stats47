@@ -253,7 +253,7 @@ const labels = values.map((v) => formatValueWithPrecision(v, precision));
 **再生成の byte 比較からはこの行を外す**（2026-08-12）。`generated` は実行のたびに変わるので、
 生バイトで比べると**内容が同一でも必ず「不一致」**になる。実測では公開 78 散布図のうち
 provenance 付き 9 枚だけが恒久的に rerender 判定になっており、日次 cron
-(`blog-remediation-daily.yml`) がそれを上書きすると **provenance が消えて劣化する**構図だった
+(当時の日次 `blog-remediation-daily.yml`。今は週次レビューの `weekly:audits`) がそれを上書きすると **provenance が消えて劣化する**構図だった
 （gate の役目は「点や軸が変わったか」= 内容ドリフトの検出なので metadata は比較対象外）。
 
 扱いは `.claude/scripts/lib/svg-provenance.mjs` に一本化する（`stripProvenance` /
@@ -415,7 +415,7 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 7. `chart-provenance.mjs`: source manifest が既知 kind で再取得に必要な参照を持つ
 8. JSON / source JSON の解析失敗はスキップせず blocker にする
 
-公開後は `blog-remediation-daily.yml` の `rerender-scatter-canonical.mts --probe-only
+公開後は 週次レビューの `npm run weekly:audits` (blog-remediation) の `rerender-scatter-canonical.mts --probe-only
 --require-canonical --verify-sources` が全件を再生成して公開 SVG との完全一致を要求する。
 既知7件は一次ソースから点集合も再計算する。ゲートの感度は
 `.claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs` と

@@ -108,7 +108,7 @@ function auditContracts(prSource, scheduledSource) {
 function main() {
   const pr = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-quality-check.yml'), 'utf8');
   const scheduled = fs.readFileSync(
-    path.join(ROOT, '.github/workflows/visualization-render-weekly.yml'),
+    path.join(ROOT, '.github/workflows/quality-suite-weekly.yml'),
     'utf8',
   );
   const acceptance = JSON.parse(
@@ -134,7 +134,7 @@ function main() {
     process.exitCode = 1;
     return;
   }
-  process.stdout.write('render CI contract: PR required + weekly scheduled\n');
+  process.stdout.write('render CI contract: PR required + weekly scheduled (quality-suite-weekly の render ジョブ)\n');
 }
 
 if (require.main === module) main();

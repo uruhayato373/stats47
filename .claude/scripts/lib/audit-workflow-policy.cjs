@@ -329,11 +329,14 @@ function auditFile(file) {
     });
   }
   if (imageWriters.length > 0) {
-    const concurrencyGroup =
-      workflow?.concurrency && typeof workflow.concurrency === 'object'
-        ? workflow.concurrency.group
-        : null;
-    if (concurrencyGroup !== 'r2-write') {
+    // workflow 全体か、画像を書く job に付けた group を見る (2026-10-26 に OGP の週次監査を
+    // quality-suite-weekly.yml の 1 job にしたため。他の job まで r2-write で待たせない)
+    const groupOf = (value) =>
+      value && typeof value === 'object' ? value.group : null;
+    const writerGroups = imageWriters.map(
+      ({ jobId }) => groupOf(jobs[jobId]?.concurrency) ?? groupOf(workflow?.concurrency)
+    );
+    if (writerGroups.some((group) => group !== 'r2-write')) {
       findings.push({
         code: 'IMAGE_WRITE_NO_SHARED_CONCURRENCY',
         file: relative,

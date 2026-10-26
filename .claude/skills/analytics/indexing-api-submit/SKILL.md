@@ -42,7 +42,7 @@ coverageState 遷移の実測を欠いたまま effect/pending だった)、公�
    `coverageState` / `lastCrawlTime` / `googleCanonical` の遷移を実測する
    (`.claude/rules/evidence-based-judgment.md` 準拠。「送ったから登録される」ではなく実測で判定)。
 
-この観測は `gsc-url-inspection-daily.yml` (毎日) と統合 search-growth 基盤
+この観測は `fetch-metrics-weekly.yml` の url-inspection job (毎週土曜) と統合 search-growth 基盤
 (`.claude/skills/analytics/search-growth/`) の `observe-after-fix` フローが担います。
 coverage 是正キュー (`build-coverage-queue.mjs`) の旧 `resubmit` action は `observe-after-fix` に改名済みです。
 

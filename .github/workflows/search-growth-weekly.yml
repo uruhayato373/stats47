@@ -4,7 +4,7 @@ name: 🔎 Search Growth (weekly candidate rebuild)
 # 正典: .claude/skills/analytics/search-growth/reference/{platform-contract,weekly-cycle-contract}.md
 #
 # 責務分離:
-# - blocker 観測: 既存 psi-audit-daily / gsc-url-inspection-daily (土曜 00:00 の週次) / cloudflare-usage-daily (日次) が
+# - blocker 観測: 既存 fetch-metrics-weekly の psi job・url-inspection job (土曜 00:00 の週次) / cloudflare-usage-daily (日次) が
 #   snapshot を更新する。本 workflow はそれらを巨大化せず、shared script (search-growth pipeline) で
 #   committed snapshot を normalize/analyze する。
 # - weekly (本 workflow): fetch-metrics-weekly (GSC/GA4 snapshot) の後に candidate を再構築する。

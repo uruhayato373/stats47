@@ -1,9 +1,27 @@
 name: 🧪 Full Quality Suite (weekly)
 
+# 2026-10-26 から土曜未明の監査 3 本 (旧 theme-chart-audit-weekly.yml・page-quality-audit-weekly.yml・
+# ogp-image-audit-weekly.yml) を job として持つ。各監査の Issue はこれまでどおり監査ごとに開閉し、
+# 下の report (型検査・テスト・E2E・render の Quality Alert) には混ぜない。
 on:
   schedule:
-    - cron: "30 22 * * 5" # JST 土曜 07:30。visualization render (06:30) の後
+    - cron: "0 16 * * 5" # 土曜 01:00 JST (金 16:00 UTC)。theme → page-quality の Claude 2 本を順に走らせる
   workflow_dispatch:
+    inputs:
+      only:
+        description: "手動起動で走らせる部分 (schedule は全部)"
+        required: false
+        type: choice
+        default: all
+        options: [all, checks, theme, page-quality, ogp-images]
+      max_generate:
+        description: "OGP: 1 回で再生成する上限 (種類ごと。既定 500。溜まった古い画像を一度に解消するときだけ上げる)"
+        required: false
+        default: "500"
+      review_run:
+        description: "テーマ: 保存済みレビューの再検証 run ID (未指定なら全量監査)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -16,6 +34,7 @@ concurrency:
 jobs:
   type-check:
     name: All workspace type checks
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -35,6 +54,7 @@ jobs:
 
   tests:
     name: Full unit tests and coverage
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -73,6 +93,7 @@ jobs:
 
   admin-e2e:
     name: Full admin build and E2E
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -114,6 +135,7 @@ jobs:
 
   web-e2e:
     name: Full web build and E2E
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -175,10 +197,674 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
+  # 共有チャート 9 種の golden PNG 比較 (2026-10-26 に visualization-render-weekly.yml から移した。PR 側は
+  # pr-quality-check.yml の visualization-render が必須。両方の配線は check-render-ci-contract.cjs が検査する)
+  render:
+    name: Visualization Render Golden
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Compare deterministic chart renders
+        env:
+          RUN_RENDER_TESTS: "1"
+          RENDER_ARTIFACT_DIR: /tmp/stats47-render-artifacts
+        run: npm run test:run --workspace=@stats47/visualization
+        continue-on-error: false
+
+      - name: 📊 Upload render differences
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: visualization-render-diff
+          path: /tmp/stats47-render-artifacts/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # テーマの全量監査 (旧 theme-chart-audit-weekly.yml)。未観測の d7/d28/d56 は次の土曜に拾う。
+  # 新規/変化した異常だけ theme-alert Issue を更新し、同じ警告は再通知しない。
+  theme:
+    name: Theme quality audit
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'theme' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: read
+    concurrency:
+      group: theme-chart-audit
+      cancel-in-progress: false
+    env:
+      # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+      CLAUDE_EFFORT: high
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+      - name: Decide whether observations are due
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
+        run: |
+          if [ -n "$REVIEW_RUN_ID" ]; then
+            test "$EVENT_NAME" = workflow_dispatch
+            [[ "$REVIEW_RUN_ID" =~ ^[0-9]+$ ]]
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "replay=true" >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT_NAME" = workflow_dispatch ]; then
+            node .claude/scripts/themes/theme-followup.mjs --plan --force
+          else
+            node .claude/scripts/themes/theme-followup.mjs --plan
+          fi
+      - name: 🟢 Setup Node.js
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install audit dependencies
+        if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
+        run: npm ci --ignore-scripts
+      - name: Install browser
+        if: steps.plan.outputs.run == 'true'
+        run: npx playwright install --with-deps chromium
+      - name: 🔎 Audit catalog and public data
+        if: steps.plan.outputs.run == 'true'
+        id: check
+        run: |
+          set +e
+          timeout --kill-after=20s 300s node .claude/scripts/audit/theme-chart-live-audit.mjs --json data/themes/charts/live-audit.json 2>&1 | tee /tmp/theme-live.log
+          live_code=${PIPESTATUS[0]}
+          timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
+          quality_code=${PIPESTATUS[0]}
+          timeout --kill-after=20s 900s node --import tsx .claude/scripts/themes/audit-theme-runtime.ts 2>&1 | tee .local/ci/theme-followup/runtime.log
+          runtime_code=${PIPESTATUS[0]}
+          node .claude/scripts/themes/theme-followup.mjs --live-code "$live_code" --quality-code "$quality_code" --runtime-code "$runtime_code" >> "$GITHUB_OUTPUT"
+          summary_code=$?
+          {
+            echo "live_code=$live_code"
+            echo "quality_code=$quality_code"
+            echo "runtime_code=$runtime_code"
+            echo "summary_code=$summary_code"
+            node .claude/scripts/themes/build-theme-alert.mjs --output /tmp/theme-alert.md --live-code "$live_code" --quality-code "$quality_code" --followup-code "$summary_code"
+            alert_code=$?
+            echo "alert_code=$alert_code"
+          } >> "$GITHUB_OUTPUT"
+          cat /tmp/theme-alert.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve evidence including initial failures
+        if: always() && steps.plan.outputs.run == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: theme-followup-evidence
+          path: |
+            .local/ci/theme-followup/
+            data/themes/ci-followup.json
+            /tmp/theme-live.log
+            /tmp/theme-quality.log
+            /tmp/theme-alert.md
+          include-hidden-files: true
+          retention-days: 30
+      - name: 📤 Commit observations to develop
+        id: commit
+        if: steps.plan.outputs.run == 'true' && steps.check.outcome == 'success' && steps.check.outputs.alert_code == '0' && steps.check.outputs.summary_code == '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/quality.definitions.json data/themes/quality.observations.json data/themes/quality.lastGoodObservations.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
+            if [ -f "$observation" ]; then git add -- "$observation"; fi
+          done
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "chore(theme): quality and runtime observations [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop
+      - name: Update actionable alert
+        if: always() && steps.plan.outputs.run == 'true' && steps.check.outcome == 'success' && steps.check.outputs.alert_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_OPEN: ${{ steps.check.outputs.alert_open }}
+        run: |
+          test "$ALERT_OPEN" = true || test "$ALERT_OPEN" = false
+          gh label create theme-alert --description "テーマのデータ・構成監査" --color b60205 --force
+          gh label create auto-generated --description "機械監査アラート" --color ededed --force
+          existing=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
+          if [ "$ALERT_OPEN" = true ]; then
+            if [ -n "$existing" ]; then
+              gh issue view "$existing" --json body --jq '.body' > /tmp/theme-existing.md
+              if ! diff -q /tmp/theme-existing.md /tmp/theme-alert.md > /dev/null; then
+                gh issue edit "$existing" --title "[Theme Alert] テーマ品質の確認が必要です" --body-file /tmp/theme-alert.md
+              fi
+            else
+              gh issue create --title "[Theme Alert] テーマ品質の確認が必要です" --label theme-alert --label auto-generated --body-file /tmp/theme-alert.md
+            fi
+          elif [ "$ALERT_OPEN" = false ] && [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "テーマ品質監査の異常が解消しました。"
+          fi
+      - name: Check for a pending improvement PR
+        id: review_plan
+        if: always() && steps.commit.outcome == 'success' && steps.check.outputs.review_required == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create theme-improvement --description "テーマの証拠付き改善案" --color 0e8a16 --force
+          existing=$(gh pr list --base develop --label theme-improvement --state open --json number --jq 'length')
+          if [ "$existing" = 0 ]; then echo "run=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Review evidence and prepare one improvement
+        id: review
+        if: always() && steps.review_plan.outputs.run == 'true'
+        timeout-minutes: 20
+        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        env:
+          NODE_VERSION: '20.x'
+        with:
+          prompt_file: .claude/prompts/ci/theme-followup.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: 'false'
+          settings: '{"disableAllHooks":true}'
+          claude_args: |
+            --model sonnet
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","blocked"]},"summary":{"type":"string","minLength":20,"maxLength":1000},"findings":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false},"maxItems":10},"tests":{"type":"array","items":{"type":"string"}},"sourceReviews":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false}}},"required":["status","summary","findings","sourceReviews","tests"],"additionalProperties":false}'
+            --effort ${{ env.CLAUDE_EFFORT }}
+            --max-turns 80
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Bash,WebFetch,WebSearch"
+            --allowedTools "Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Bash(node *),Bash(npx tsx *),Bash(npx vitest run *),Bash(npm run *)"
+            --disallowedTools "Bash(git *),Bash(gh *),Bash(npm run deploy*),Bash(npm run push*),Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+      - name: Summarize review execution
+        if: always() && steps.review_plan.outputs.run == 'true'
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" > .local/ci/theme-followup/review-diagnosis.txt
+          cat .local/ci/theme-followup/review-diagnosis.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Restore saved review for verification
+        id: replay
+        if: steps.plan.outputs.replay == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEW_RUN_ID: ${{ inputs.review_run }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$REVIEW_RUN_ID" --jq .path)" = .github/workflows/quality-suite-weekly.yml
+          gh run download "$REVIEW_RUN_ID" -n theme-followup-evidence -D /tmp/theme-replay-followup
+          gh run download "$REVIEW_RUN_ID" -n theme-review-evidence -D /tmp/theme-replay-review
+          node .claude/scripts/themes/record-theme-review.mjs --replay /tmp/theme-replay-review/data/themes/ci-review.json "/tmp/theme-replay-followup/${GITHUB_WORKSPACE#/}/.local/ci/theme-followup" "$REVIEW_RUN_ID"
+      - name: Verify review and changed files
+        id: review_check
+        if: always() && (steps.review.outcome == 'success' || steps.replay.outcome == 'success')
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+          REPLAY_MODE: ${{ steps.plan.outputs.replay }}
+        run: |
+          git diff --exit-code HEAD -- .claude/scripts/themes/check-theme-review.mjs .claude/scripts/themes/validate-theme-state.mjs
+          git diff --exit-code HEAD -- .claude/scripts/themes/record-theme-review.mjs
+          if [ "$REPLAY_MODE" != true ]; then
+            test -s "$CLAUDE_EXECUTION_FILE"
+            node .claude/scripts/themes/record-theme-review.mjs "$CLAUDE_EXECUTION_FILE"
+          fi
+          node .claude/scripts/themes/check-theme-review.mjs
+          node .claude/scripts/themes/validate-theme-state.mjs
+          npm run theme:quality:test
+      - name: Verify implementation
+        if: always() && steps.review_check.outcome == 'success' && steps.review_check.outputs.code_changed == 'true'
+        run: |
+          npm run type-check
+          npm run test:run --workspace apps/web -- src/features/theme-dashboard
+          npm run build --workspace apps/web
+      - name: Publish verified review
+        if: success() && steps.review_check.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROPOSAL_CHANGES: ${{ steps.review_check.outputs.proposal_changes }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$PROPOSAL_CHANGES" = true ]; then
+            branch="codex/theme-followup-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            git switch -c "$branch"
+            while IFS= read -r file; do git add -- "$file"; done < .local/ci/theme-followup/review-paths.txt
+            git commit -m "fix(theme): propose evidence-based follow-up"
+            git fetch origin develop
+            git push origin "HEAD:$branch"
+            gh pr create --draft --base develop --head "$branch" --label theme-improvement --title "テーマ計測に基づく改善案" --body-file .local/ci/theme-followup/review-body.md
+          else
+            git add -- data/themes/ci-review.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "chore(theme): record evidence review [skip ci]"
+            git pull --rebase origin develop
+            git push origin develop
+          fi
+      - name: Preserve review evidence
+        if: always() && (steps.review_plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true')
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: theme-review-evidence
+          path: |
+            .local/ci/theme-followup/review*
+            data/themes/ci-review.json
+          include-hidden-files: true
+          retention-days: 30
+      - name: Propagate audit failures
+        if: always() && steps.plan.outputs.run == 'true'
+        env:
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+          LIVE_CODE: ${{ steps.check.outputs.live_code }}
+          QUALITY_CODE: ${{ steps.check.outputs.quality_code }}
+          ALERT_CODE: ${{ steps.check.outputs.alert_code }}
+          SUMMARY_CODE: ${{ steps.check.outputs.summary_code }}
+          RUNTIME_CODE: ${{ steps.check.outputs.runtime_code }}
+        run: |
+          test "$CHECK_OUTCOME" = success && test "$LIVE_CODE" = 0 && test "$QUALITY_CODE" = 0 && test "$ALERT_CODE" = 0 && test "$SUMMARY_CODE" = 0 && test "$RUNTIME_CODE" = 0
+
+      # 計測のみ (失敗しても本体の成否を変えない)。model / effort ごとの費用を比べるため history.csv に 1 行足す。
+      # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+      - name: 📊 Record token usage
+        if: ${{ always() && (steps.review.outcome == 'success' || steps.review.outcome == 'failure') }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" theme-chart-review 1 1 "$CLAUDE_EFFORT"
+
+  # ページ品質の週次監査 (旧 page-quality-audit-weekly.yml)。Claude の確認を theme の Claude と重ねないため
+  # theme の後に走らせる (同じ利用枠を共有する。backlog-loop-routine.test.cjs が needs を検査する)。
+  # ページの肥大化・重複・画像切れを公開対象の全URLで、文字の切れ・要素の重なり・アクセシビリティを
+  # 代表URL 12 件とデータの型の違い (variants) 32 件だけブラウザで週次に検知する (templates.ts)。7 幅のスクショを R2
+  # `state/page-quality/screenshots/` へ保存して先週と比べ、Claude (読み取り専用) が代表URLと variants の 1/4 を確認する
+  # (variants は 4 週で 1 巡。reviewPageKeys)。
+  # 新しく出た UI 違反と agent の指摘は `ui-review-alert` Issue 1 件へまとめる (無ければ閉じる)。
+  # 肥大化・重複・画像切れの error は従来どおり `page-quality-alert` Issue。
+  #
+  # 週次の PSI (fetch-metrics-weekly.yml の psi job) ・Cloudflare監視とは責務が別 (それらは変更・削除しない)。
+  # 正典: .claude/rules/page-quality-standards.md
+  page-quality:
+    name: Page quality audit
+    needs: [theme]
+    if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'page-quality') }}
+    runs-on: ubuntu-latest
+    # 2026-09-23 の実測: 全 6,227 URL の静的検査が CI では並列 8 で 54.5 分 (手元の約 3.5 倍)。
+    # スクショ・agent 確認を足しても収まるよう 120 分。
+    timeout-minutes: 120
+    permissions:
+      contents: write
+      issues: write
+    concurrency:
+      group: page-quality-audit-weekly
+      cancel-in-progress: false
+    env:
+      # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+      CLAUDE_EFFORT: medium
+      # スクショを R2 state/page-quality/ へ push する diff-push-r2.ts の認証 (affiliate-ga4-weekly.yml と同じ導出)
+      R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+      CLOUDFLARE_R2_BUCKET_NAME: stats47
+      R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "20"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Chromium (代表URLのUI検査用)
+        run: npx playwright install --with-deps chromium
+
+      - name: 🔍 Run full page-quality audit (production)
+        id: audit
+        run: |
+          set +e
+          npm run page-quality:audit-weekly -- --base-url https://stats47.jp --concurrency 12 --skip-rsc --browser-representative 2>&1 | tee /tmp/page-quality-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 🧹 Prune old snapshots
+        if: always()
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope page-quality
+
+      - name: 🖼️ Push raw results and screenshots to R2 state/page-quality/
+        # 全 URL の結果 (latest.json 約 10MB)・URL ごとの履歴・スクショは R2 に置き、git には集約だけを残す
+        # (2026-09-23 の初回完了で git に 20MB 書き戻し、リポジトリ衛生の 1MB 上限を超えた)。
+        id: shots
+        if: always() && hashFiles('.local/r2/state/page-quality/latest.json') != ''
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/page-quality/"
+
+      - name: 🤖 Review screenshots (Claude・読み取り専用)
+        id: review
+        if: always() && hashFiles('.local/ci/page-quality/review-input.json') != ''
+        # 代表URL 12 件 + データの型の違い (variants) 8 件 = 約 20 ページ。2026-09-23 の試行は 11 ページで 73 回のやり取り
+        timeout-minutes: 30
+        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        env:
+          NODE_VERSION: '20.x'
+        with:
+          prompt_file: .claude/prompts/ci/page-ui-review.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: 'false'
+          settings: '{"disableAllHooks":true}'
+          claude_args: |
+            --model sonnet
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":20,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile-390","tablet-768","desktop-1440"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
+            --effort ${{ env.CLAUDE_EFFORT }}
+            --max-turns 200
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Glob"
+            --allowedTools "Read,Glob"
+            --disallowedTools "Bash,Write,Edit,WebFetch,WebSearch,Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: 📝 Record UI review
+        id: uireview
+        if: always() && hashFiles('.local/ci/page-quality/ui-new-violations.json') != ''
+        env:
+          REVIEW_OUTCOME: ${{ steps.review.outcome }}
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          if [ "$REVIEW_OUTCOME" = success ] && [ -s "$CLAUDE_EXECUTION_FILE" ]; then
+            node .claude/scripts/lib/summarize-claude-execution.mjs "$CLAUDE_EXECUTION_FILE" >> "$GITHUB_STEP_SUMMARY" || true
+            npx tsx .claude/scripts/page-quality/record-ui-review.ts --execution "$CLAUDE_EXECUTION_FILE" --alert-out /tmp/ui-review-alert.md >> "$GITHUB_OUTPUT"
+          else
+            npx tsx .claude/scripts/page-quality/record-ui-review.ts --no-review "agent step: ${REVIEW_OUTCOME:-not-run}" --alert-out /tmp/ui-review-alert.md >> "$GITHUB_OUTPUT"
+          fi
+          if [ -f /tmp/ui-review-alert.md ]; then cat /tmp/ui-review-alert.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      # UI の指摘を週をまたいで追跡し、未対応のものを UI-FIX-* カードとして backlog へ起票する。
+      # 修正は backlog-loop-daily (CI の Claude) が行い、本番確認は次の週次がここで行う (消えていれば done、
+      # 本番反映後も残っていれば pending に戻して再起票)。本番反映の判定に origin/main の最新マージ時刻を使う。
+      # 失敗は握りつぶさない (job を赤にして、週次レビューの CI の健全性 (ci-health.sh) の週次契約で知らせる)。
+      # 正典: .claude/rules/page-quality-standards.md「UI 指摘のループ」
+      - name: 🗂 Track UI findings and file backlog cards
+        if: always() && hashFiles('.local/r2/state/page-quality/latest.json') != ''
+        run: |
+          git fetch --quiet --depth=1 origin main
+          ARGS=(--sync --run .local/r2/state/page-quality/latest.json)
+          ARGS+=(--review data/page-quality/metrics/ui-review-latest.json)
+          ARGS+=(--main-deployed-at "$(git log -1 --format=%cI origin/main)")
+          npx tsx .claude/scripts/page-quality/ui-findings.ts "${ARGS[@]}"
+
+      - name: 📤 Commit audit result to develop
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/page-quality/metrics/
+          # UI 指摘キューと起票したカード (live/ は .gitignore 済み)
+          git add data/page-quality/ .claude/todo/backlog.md
+          # ボットのコミットは pre-commit を通らない。1MB 超のファイルが develop に入ると全員のコミットが止まる
+          # (2026-10-04 に ui-findings-queue.json 1.96MB で発生)。stage したファイルだけを同じ検査に掛ける
+          node .claude/scripts/lib/check-repo-hygiene.cjs --staged --baseline
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+            exit 0
+          fi
+          git commit -m "chore(page-quality): weekly full audit $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop
+
+      - name: 🚨 Open issue on regressions
+        if: always() && steps.audit.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Page Quality Alert] ページ肥大化・重複の週次監査で退行を検出"
+          {
+            echo "## ページ品質 週次監査 ($DATE)"
+            echo ""
+            echo "HTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常・画像切れのerror違反を検出しました。"
+            echo "詳細は管理コンソール \`/quality/page-audit\` または以下を参照。"
+            echo ""
+            echo '```'
+            sed -n '/\[page-quality\] 違反/,$p' /tmp/page-quality-audit.log | head -80
+            echo '```'
+            echo ""
+            echo "正典: .claude/rules/page-quality-standards.md"
+          } > /tmp/page-quality-issue.md
+
+          gh label create page-quality-alert --description "ページ肥大化・重複・速度の週次監査アラート" --color "d93f0b" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label page-quality-alert --search "\"[Page Quality Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — replacing with latest audit"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/page-quality-issue.md
+          else
+            gh issue create --title "$TITLE" --label "page-quality-alert,auto-generated" --body-file /tmp/page-quality-issue.md
+          fi
+
+      - name: ✅ Close recovered page-quality alert
+        if: always() && steps.audit.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label page-quality-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "ページ品質監査が正常へ復旧したため自動Closeします。"
+            done
+
+      - name: 🔔 Update UI review alert
+        if: always() && steps.uireview.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_OPEN: ${{ steps.uireview.outputs.alert_open }}
+        run: |
+          test "$ALERT_OPEN" = true || test "$ALERT_OPEN" = false
+          gh label create ui-review-alert --description "ページ UI の週次確認 (新しい UI 違反と agent の指摘)" --color "fbca04" --force 2>/dev/null || true
+          gh label create auto-generated --description "機械監査アラート" --color ededed --force 2>/dev/null || true
+          TITLE="[UI Review] ページ UI の確認が必要です"
+          EXISTING=$(gh issue list --state open --label ui-review-alert --json number --jq '.[0].number // empty')
+          if [ "$ALERT_OPEN" = true ]; then
+            if [ -n "$EXISTING" ]; then
+              gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/ui-review-alert.md
+            else
+              gh issue create --title "$TITLE" --label "ui-review-alert,auto-generated" --body-file /tmp/ui-review-alert.md
+            fi
+          elif [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --reason completed --comment "新しい UI 違反も agent の指摘も無くなったため自動Closeします。"
+          fi
+
+      # 計測のみ (失敗しても本体の成否を変えない)。model / effort ごとの費用を比べるため history.csv に 1 行足す。
+      # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+      - name: 📊 Record token usage
+        if: ${{ always() && (steps.review.outcome == 'success' || steps.review.outcome == 'failure') }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" page-quality-review 1 1 "$CLAUDE_EFFORT"
+
+  # OGP・リンクカード・note カバーの生成漏れを週次で機械チェックし、欠落を自動修復する。
+  # 検知も生成もすべて決定的スクリプト (Node fetch + Satori、LLM 不使用)。費用は Actions
+  # 分数 + R2 HEAD のみ (LLM API 課金ゼロ)。正典: .claude/rules/ogp-image-standards.md。
+  #
+  # 流れ: fingerprint 差分だけ生成 (--max-generate で blast radius 制限) → exact plan push →
+  #       freshness + inventory 最終監査 → inventory を develop に commit-back →
+  #       それでも陳腐化/欠落が残るときは Issue 起票して workflow も失敗させる。
+  #
+  # 新規 ranking 公開時は sync-snapshots.yml のフックが即生成するため、この job は
+  # セーフティネット (漏れ・note 新規・再生成漏れの回収)。
+  ogp-images:
+    name: OGP image audit (self-heal)
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'ogp-images' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+      issues: write
+    # R2 へ書く workflow どうしの排他 (sync-snapshots ほかと同じグループ)
+    concurrency:
+      group: r2-write
+      cancel-in-progress: false
+    env:
+      R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+      SITE_ORIGIN: https://stats47.jp
+      CLOUDFLARE_R2_BUCKET_NAME: stats47
+      # S3 API 経由 R2 書き込み (exact image publisher)
+      R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+      # schedule は inputs が空なので既定 500。手動で溜まった古い画像を解消するときだけ上げる
+      MAX_GENERATE: ${{ inputs.max_generate || '500' }}
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ♻️ Self-heal changed images (fingerprint差分のみ生成→R2)
+        id: image_repair
+        run: |
+          TSC="apps/web/scripts/tsconfig.ogp.json"
+          SC="apps/web/scripts/generate-ogp-images.ts"
+          for TYPE in ranking ranking-cards areas pref-silhouette; do
+            echo "=== self-heal $TYPE ==="
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
+            PLAN=".local/image-generation-publish-plan-${TYPE}.json"
+            test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+          done
+
+      - name: 🖼 Self-heal changed blog thumbnails/OGP
+        id: blog_repair
+        run: |
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
+            --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
+          PLAN=".local/image-generation-publish-plan-blog.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: blog"; exit 1; }
+          npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+
+      - name: 🔍 Final audit (fingerprint鮮度 + 欠落)
+        if: always()
+        id: check
+        run: |
+          set +e
+          STATUS=0
+          TSC="apps/web/scripts/tsconfig.ogp.json"
+          SC="apps/web/scripts/generate-ogp-images.ts"
+          for TYPE in ranking ranking-cards areas pref-silhouette; do
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --audit \
+              2>&1 | tee -a /tmp/ogp-freshness-audit.log
+            [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          done
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit \
+            2>&1 | tee -a /tmp/ogp-freshness-audit.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          node .claude/scripts/ogp/build-image-gallery.mjs --audit --all 2>&1 | tee /tmp/ogp-audit.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          if [ "${{ steps.image_repair.outcome }}" != "success" ] || \
+             [ "${{ steps.blog_repair.outcome }}" != "success" ]; then
+            STATUS=1
+          fi
+          echo "exit_code=$STATUS" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: 📤 Commit inventory to develop
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ogp/inventory.json
+          if git diff --cached --quiet; then
+            echo "No inventory changes"
+            exit 0
+          fi
+          git commit -m "chore(ogp): weekly image audit inventory $(date -u +%Y-%m-%d) [skip ci]"
+          # ★2026-08-16 是正: pull せずに push していたため、develop が 1 コミットでも進んでいると
+          # `! [rejected] (fetch first)` で必ず落ちていた (2 週連続・inventory が commit されない)。
+          git pull --rebase origin develop
+          git push origin develop
+
+      - name: 🚨 Open issue on unresolved image drift
+        if: always() && steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[OGP Alert] OGP画像の欠落・陳腐化 (自動修復後も残存)"
+          {
+            echo "## OGP画像 週次監査 ($DATE)"
+            echo ""
+            echo "自動修復 (fingerprint差分の生成→R2 push) 後も、欠落・陳腐化・repair失敗のいずれかが残っています。"
+            echo "対象キー判定、入力データ、または renderer の失敗を確認してください。"
+            echo ""
+            echo '```'
+            {
+              grep -E "^\[missing\]|欠落|❌|missing" /tmp/ogp-audit.log
+              grep -E "更新必要|fingerprint|required|陳腐化" /tmp/ogp-freshness-audit.log
+            } | head -60
+            echo '```'
+            echo ""
+            echo "手動調査: \`OGP_DEBUG=1 npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type <type> --key <欠落key> --force\`"
+            echo "正典: .claude/rules/ogp-image-standards.md / skill: /audit-ogp-images"
+          } > /tmp/ogp-issue.md
+
+          # ラベル自己プロビジョニング (初回起票で label 不在エラーを避ける)
+          gh label create ogp-alert --description "OGP画像の生成漏れ (自動修復後も残存)" --color "d93f0b" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label ogp-alert --search "\"[OGP Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — replacing with latest audit"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/ogp-issue.md
+          else
+            gh issue create --title "$TITLE" --label "ogp-alert,auto-generated" --body-file /tmp/ogp-issue.md
+          fi
+
+      - name: ✅ Close recovered OGP alert
+        if: always() && steps.check.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label ogp-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "OGPのfingerprint鮮度・inventory・repairがすべて正常へ復旧したため自動Closeします。"
+            done
+
+      - name: ❌ Fail on unresolved image drift
+        if: always() && steps.check.outputs.exit_code != '0'
+        run: |
+          echo "画像の陳腐化・欠落・repair失敗が残っています"
+          exit 1
+
   report:
     name: Update weekly quality alert
-    if: always()
-    needs: [type-check, tests, admin-e2e, web-e2e]
+    if: ${{ always() && (github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks') }}
+    needs: [type-check, tests, admin-e2e, web-e2e, render]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -189,13 +875,14 @@ jobs:
           TEST_RESULT: ${{ needs.tests.result }}
           ADMIN_RESULT: ${{ needs.admin-e2e.result }}
           E2E_RESULT: ${{ needs.web-e2e.result }}
+          RENDER_RESULT: ${{ needs.render.result }}
         run: |
           TITLE="[Quality Alert] 週次フル検査に失敗があります"
           # この job は checkout しないので、gh には必ず --repo を渡す。無いと "not a git repository" で落ち、
           # 失敗が Issue にならず誰にも知らされない (2026-09-20 に実際にそうなった)
           gh label create quality-suite-alert --repo "$GITHUB_REPOSITORY" --description "週次フル品質検査" --color b60205 --force
           existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label quality-suite-alert --json number --jq '.[0].number // empty')
-          if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ]; then
+          if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ] && [ "$RENDER_RESULT" = success ]; then
             if [ -n "$existing" ]; then
               gh issue close "$existing" --repo "$GITHUB_REPOSITORY" --reason completed --comment "週次フル検査が正常に戻りました。"
             fi
@@ -208,6 +895,7 @@ jobs:
           - 単体テスト・カバレッジ・Remotion bundle: $TEST_RESULT
           - Admin build・全E2E: $ADMIN_RESULT
           - Webビルド・全E2E: $E2E_RESULT
+          - 共有チャートの golden PNG 比較: $RENDER_RESULT
           - 実行: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
           同じ障害ではこのIssueを更新し、全検査の回復時に自動で閉じます。

@@ -1,7 +1,7 @@
 /**
  * 週次 UI 検査の指摘を週をまたいで追跡し、未対応のものをバックログカードにする (純粋関数)。
  *
- * 検査 (page-quality-audit-weekly) → 起票 (UI-FIX-* カード) → 修正 (backlog-loop-daily) → 本番確認 (次の週次)
+ * 検査 (quality-suite-weekly の page-quality job) → 起票 (UI-FIX-* カード) → 修正 (backlog-loop-daily) → 本番確認 (次の週次)
  * を 1 本のループにするための状態。以前は検査結果が Issue に載るだけで、カードは人が手で起こしていた
  * (2026-09-23 の Claude の指摘 6 件のうち 4 件はカードにならないまま残った)。
  * 形は GSC カバレッジ是正キュー (`.claude/scripts/gsc/lib/coverage-queue-state.mjs`) と同じ。
@@ -346,7 +346,7 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
     "",
     `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
-    `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
+    `- **自動起票**: 週次のページ品質監査 (\`quality-suite-weekly.yml の page-quality job\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`${datasetDir("page-quality.metrics")}/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),

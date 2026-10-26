@@ -1,11 +1,11 @@
 ---
 name: project-measurement-cycle-ci
-description: 計測→記録→改善サイクル。2026-10-26から土曜02:00にCIが前週を計測、07:00にMacが認証付き計測、レビューの中でstate作り直し・improvement-triage・週次要約。CIの無人triageと週次要約workflowは撤去。scheduleはmainの定義で動く
+description: 計測→記録→改善サイクル。2026-10-26から土曜02:00にCIが前週を計測、07:00にMacが認証付き計測、レビューの中でstate作り直し・improvement-triage・週次要約。CIの無人triageと週次要約workflowは撤去。週次監査11本もnpm run weekly:auditsへ移した。scheduleはmainの定義で動く
 metadata:
   node_type: memory
   type: project
   originSessionId: cfc716c2-3e72-4829-9d06-bc9944616b5a
-  modified: 2026-10-26T01:40:00.000000Z
+  modified: 2026-10-26T03:10:00.000000Z
 ---
 
 GA4 実測で止まっていた判定待ちを処理した手順 (計測→improvements.md へ記録→計測基盤の改善) を 2026-09-24 に CI 化し、
@@ -14,13 +14,17 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 
 - **曜日**: 前週 (月〜日) を土曜に計測し、同じ土曜にレビュー・来週の計画を書く (2026-10-10 に金曜計測・土曜レビューを決め、2026-10-26 に計測も土曜の朝へ寄せた)。
   レビューの期限は `review-wiring.json` (`dueWeekday: 6`・`graceDays: 1`) が正本で、土曜当日は催促、日曜の朝から review-cadence-guard が Issue にする。
-- 計測: 土曜 02:00 JST `fetch-metrics-weekly.yml` が前週の GA4 / GSC / AdSense snapshot と、
+- 計測: 土曜 00:00 JST `fetch-metrics-weekly.yml` が psi job と url-inspection job (2026-10-26 に別 workflow から取り込んだ) を先に走らせ、両方の後に前週の GA4 / GSC / AdSense snapshot と、
   `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` で `data/measurement-cycle/{latest.json,LATEST.md,history.csv}` を作る。
   PSI / Cloudflare / SNS も同じ state に入る。
 - 記録: 土曜の `/weekly-review` Phase 0b。Mac が 07:00 に取った認証付き計測を入れるため state をローカルで作り直し、
   `improvement-triage` agent が期日超過と閾値エンジンの確定分を台帳に直接書く。週次要約 (`generate-weekly-metrics-issue.mjs`) もレビューで出す。
   撤去したもの: `improvement-cycle-weekly.yml` (無人 Claude + 提案 JSON + `verify-improvement-cycle-run.mjs` のゲート)・`weekly-metrics-issue.yml`・`triage-latest.json`。
   無人 run の実績は 1 回 $0.2〜$2・処理 0〜8 件で、10-16 は提案 0 件のまま期日超過を処理しなかった。
+- 監査: CI の週次監査 11 本 (サイト内リンク・出典・ランキング整合・e-Stat 年カバレッジ・SSDS・調査分類・note 2 本・ブログ是正・
+  CI の健全性・整合) も 2026-10-26 にレビューの Phase 0b step 0 `npm run weekly:audits` へ移した (第 3 段階)。台本は
+  `.claude/scripts/management/weekly-audits/<id>.sh`、Issue は作らず結果をレビュー本文とカードへ書く。backlog.md を書く監査が
+  2 本あるので順に走らせ、consistency を最後に置く。Mac からだと internal-links だけで 1 時間前後かかる (東京の edge にキャッシュが無い)。
 
 **Why:** ログインが要る計測を土曜に寄せると、認証付き計測 (07:00) の後に記録する必要があり、CI で順序を保つより
 オーナーが居るレビューの中で行うほうが単純だった。無人 Claude は `.claude/` (保護パス) に書けず、提案 JSON を経由する回り道が要っていた。

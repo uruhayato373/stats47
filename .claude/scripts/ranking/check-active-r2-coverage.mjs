@@ -13,7 +13,7 @@
  *   node .claude/scripts/ranking/check-active-r2-coverage.mjs --limit 100
  *
  * exit code: 欠落 >0 で 1 (週次 CI が Issue 起票に使う) / 0 = 欠落なし
- * 配線: .github/workflows/agent-consistency-weekly.yml
+ * 配線: 週次レビューの npm run weekly:audits (.claude/scripts/management/weekly-audits/consistency.sh)
  */
 import fs from "node:fs";
 import { datasetDir } from "../../../config/datasets.mjs";

@@ -14,8 +14,7 @@ export const fireDamageAmount: MetricConfig = {
     "url": "https://www.stat.go.jp/data/ssds/index.htm"
   },
   "entities": [
-    "prefecture",
-    "city"
+    "prefecture"
   ],
   "years": "all",
   "yearFormat": "calendar",

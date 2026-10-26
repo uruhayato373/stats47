@@ -59,7 +59,7 @@ npm run note:article -- adopt <key>                # 台帳の外で R2 に置�
 | 台帳の Schema・参照整合・title 重複 | `npm run note:catalog:validate` | PR (note Catalog Contract Gate) |
 | 派生インデックスが台帳と一致 | `npm run note:catalog:check` | PR・pre-commit |
 | docs/31 に追跡ファイルが無い | `npm run note:images:audit` | PR・pre-commit |
-| 公開 R2 の本文・生成 AI 背景の実在 | `npm run note:images:audit -- --verify-r2` | 週次 (`note-circulation-audit-weekly.yml`) |
+| 公開 R2 の本文・生成 AI 背景の実在 | `npm run note:images:audit -- --verify-r2` | 週次 (週次レビューの `npm run weekly:audits` の note-circulation) |
 | 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | ローカル (R2 の S3 認証が要る) |
 | 保存・衝突・退避の仕組み | `npm run note:article:test` | PR |
 

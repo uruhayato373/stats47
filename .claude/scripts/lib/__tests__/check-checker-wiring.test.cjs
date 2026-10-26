@@ -249,3 +249,25 @@ test("未宣言criticalはbaselineへ入れても拒否する", (t) => {
     (finding) => finding.code === "UNDECLARED_CRITICAL_CHECKER" && finding.file === checker,
   ));
 });
+
+test("週次レビューの監査台本から npm run 経由で呼ぶ checker は定期実行の止める gate に数え、|| true は数えない", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const checker = ".claude/scripts/audit/audit-weekly.mjs";
+  add(item.root, checker);
+  add(item.root, "package.json", `${JSON.stringify({ scripts: { "audit:weekly": `node ${checker}` } })}\n`);
+  writeRegistry(item.root, [gate("weekly", checker, { trigger: ["schedule"], blocking: true })]);
+  const script = ".claude/scripts/management/weekly-audits/example.sh";
+
+  add(item.root, script, "set -uo pipefail\nnpm run --silent audit:weekly || failed+=(weekly)\n");
+  const wired = run(item);
+  assert.equal(wired.status, 0, wired.stdout);
+  assert.deepEqual(
+    wired.output.classifications.find((entry) => entry.file === checker),
+    { file: checker, declared: true, invoked: true, blocking: true, scheduled: true },
+  );
+
+  add(item.root, script, "set -uo pipefail\nnpm run --silent audit:weekly || true\n");
+  const failOpen = run(item);
+  assert.equal(failOpen.status, 1, "失敗を握りつぶす行を止める gate に数えた"); assert.ok(failOpen.output.findings.some((f) => f.code === "NON_BLOCKING_GATE"), JSON.stringify(failOpen.output.findings));
+});

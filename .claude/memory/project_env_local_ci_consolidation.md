@@ -11,7 +11,7 @@ metadata:
 
 ## 削除済み (`.env.local` から)
 - AdSense 4: `GOOGLE_ADSENSE_{CLIENT_ID,CLIENT_SECRET,ACCOUNT_ID,REFRESH_TOKEN}` — CI(fetch-metrics-weekly)が取得。正本=GitHub Secrets
-- PSI 1: `PSI_API_KEY` — CI(psi-audit-daily)。正本=GitHub Secrets
+- PSI 1: `PSI_API_KEY` — CI(fetch-metrics-weekly の psi job)。正本=GitHub Secrets
 - META 3: `META_APP_ID/APP_SECRET/PAGE_ACCESS_TOKEN` — 投稿経路で未使用(break-glass削除ユーティリティ専用)。Metaダッシュボードで再取得可
 - GA 1: `NEXT_PUBLIC_GA_MEASUREMENT_ID` — 公開ID(秘匿不要)。本番はCloudflare PagesがGitHub Secretから取得。ローカルはGA無効化でPV混入も防げる
 

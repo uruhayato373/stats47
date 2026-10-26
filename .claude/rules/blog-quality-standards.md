@@ -368,7 +368,7 @@ HTTP 200 を返し、タイトルだけ「ランキングが見つかりませ�
 | 層 | 実装 | 発火箇所 | 判定できるもの |
 |---|---|---|---|
 | ① オフライン (ネットワーク不要) | `.claude/scripts/lib/internal-link-lint.mjs` | `quality-gate.mjs` (pre-commit + 公開 CI) / `audit-article-structure.mjs` / `audit-published-blog.mjs` | ranking (GONE / KNOWN∪config 外) / category / areas / themes / blog (GONE・呼び元が公開 slug 集合を渡した場合) → **blocker** |
-| ② live 実測 (週次) | `.claude/scripts/blog/audit-internal-links.mjs` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れがあれば `link-alert` Issue | 全種別。**KNOWN に載っているが R2 データが無いキー**など①が確定できない壊れ方 |
+| ② live 実測 (週次) | `.claude/scripts/blog/audit-internal-links.mjs` (週次レビューの `npm run weekly:audits` の internal-links) | 土曜の週次レビュー。壊れがあればレビュー本文の課題とバックログへ | 全種別。**KNOWN に載っているが R2 データが無いキー**など①が確定できない壊れ方 |
 | ③ サイト横断 live 実測 (週次) | `.claude/scripts/site/audit-site-links.mjs` (同 workflow) | 同上 | **ページ側コンポーネントが生成するリンク** (タグ・パンくず・サイドバー・県データブックの KPI グリッド等)。記事本文に現れないため①②では原理的に検知できない |
 
 **③ が要る理由 (2026-07-24 実測)**: リンクの大半は article.md ではなくコンポーネントが生成する。

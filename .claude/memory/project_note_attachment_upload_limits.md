@@ -34,6 +34,6 @@ figure にならなかった。fetch/XHR を hook して実 API 応答を取る�
 backlog `[NOTE-KAKEI-DATASET-PAID-UPDATE-01]` (枠明けに 1 回実行)。
 
 **再発防止 (2026-09-20 同日)**: 有料記事の無料部分の着地検査 `paid_*` を `audit-note-circulation.mjs` に追加し、週次
-`note-circulation-audit-weekly.yml` の gate に `paidLandingErrors` を足した。¥1,000 以上は error、それ未満は出典のみ error。
+週次の note 循環監査 (当時は `note-circulation-audit-weekly.yml`、2026-10-26 から週次レビューの `weekly:audits` の note-circulation) の gate に `paidLandingErrors` を足した。¥1,000 以上は error、それ未満は出典のみ error。
 同じ監査で **a-kakei 47 本の catalog `stats47Targets` が 09-15 の本文テンプレ改訂から乖離**していた (47 error) のを見つけ、
 draft の実リンクから同期した。footer は「もう一歩深掘りする」ラベルで冪等化 (views で次の 1 本が変わると 2 枚目を積んでいた)。

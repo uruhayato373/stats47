@@ -13,7 +13,7 @@ primary_agent: open-data-curator
 ## いつ使うか
 - 「出典・再現情報が十分か監査したい」「provenance が薄い指標を直したい」
 - 新規 metric 投入後の provenance 確認 (data-ingester からの引き継ぎ)
-- 週次 cron (`provenance-audit-weekly.yml`) が起票した Issue の消化
+- 週次レビューの `npm run weekly:audits` (provenance) が見つけた error の消化
 
 ## 手順
 
@@ -65,5 +65,5 @@ npx tsx .claude/scripts/provenance/audit-provenance-queue.ts # 是正対象が�
 - 正典: `.claude/rules/data-provenance-standards.md`
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - queue: `.claude/scripts/provenance/audit-provenance-queue.ts` → `data/provenance/`
-- cron: `.github/workflows/provenance-audit-weekly.yml`
+- 定期実行: `.claude/scripts/management/weekly-audits/provenance.sh` (週次レビューの `npm run weekly:audits`)
 - 手本 (blog): `.claude/scripts/blog/build-lineage-queue.mjs`
