@@ -46,7 +46,9 @@ export function rewriteProductCards(body, product) {
     const attrs = opening.replace(/\s+(?:data-src|data-identifier|embedded-service|embedded-content-key)="[^"]*"/g, '');
     return `${attrs} data-src="${escapeHtml(product.noteUrl)}" data-identifier="${product.noteUrl.split('/').pop()}" embedded-service="note" embedded-content-key="pending${randomUUID().replaceAll('-', '')}"></figure>`;
   });
-  return applyNavigationFooter(head + tail, {
+  const output = head + tail;
+  if (cardEntries(output).some((card) => card.url === product.noteUrl && card.service === 'note')) return output;
+  return applyNavigationFooter(output, {
     productNoteUrl: product.noteUrl,
     productDescription: `「${product.title}」で、収録内容・サンプル・価格を確認できます。`,
   }).body;

@@ -4,4 +4,4 @@
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。カードの差し替えは note への外部変更なのでオーナー承認が要る。
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-node .claude/scripts/note/audit-note-product-cards.mjs --live
+node .claude/scripts/note/audit-note-product-cards.mjs --live --browser-fetch
