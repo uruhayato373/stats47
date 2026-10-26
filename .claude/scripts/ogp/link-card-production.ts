@@ -8,6 +8,7 @@ import type {ImageGenerationPublishPlan} from '@stats47/types';
 import { LINK_CARD_DESIGN, MAGAZINE_CARD_DESIGNS, magazineCardPrompt } from '../../../apps/web/scripts/data/link-card-design';
 import site from '../lib/site-config.cjs';
 import {datasetDir,datasetPath} from '../../../config/datasets.mjs';
+import {readLinkCardLedger,writeLinkCardLedger} from './lib/link-card-ledger.mjs';
 
 interface StoredImage {key:string;sha256:string;bytes:number}
 interface Candidate {source:string;sourceSha256:string;file:string;sha256:string;input:string}
@@ -39,10 +40,10 @@ const args = process.argv.slice(2);
 const value = (flag: string) => args[args.indexOf(flag)+1];
 const required = (flag: string) => { if (!args.includes(flag) || !value(flag) || value(flag).startsWith('--')) throw Error(`${flag} required`); return value(flag); };
 const command = args[0];
-const ledger:Ledger = fs.existsSync(ledgerFile) ? read(ledgerFile) : {schemaVersion:1, policyVersion:LINK_CARD_DESIGN.version, entries:[]};
+const ledger:Ledger = fs.existsSync(ledgerFile) ? readLinkCardLedger<Ledger>(ledgerFile) : {schemaVersion:1, policyVersion:LINK_CARD_DESIGN.version, entries:[]};
 if(ledger.schemaVersion!==1||!Array.isArray(ledger.entries)||ledger.entries.some(e=>!e.id||!e.key||!e.status)||new Set(ledger.entries.map(e=>e.id)).size!==ledger.entries.length)throw Error('Invalid/duplicate rollout ledger');
 if (ledger.policyVersion !== LINK_CARD_DESIGN.version) throw Error('Policy version changed; explicit migration required');
-function storeLedger() { ledger.updatedAt=new Date().toISOString(); save(ledgerFile,ledger); }
+function storeLedger() { ledger.updatedAt=new Date().toISOString(); writeLinkCardLedger(ledgerFile,ledger); }
 function target(id: string) { const entry=ledger.entries.find((v:Entry)=>v.id===id); if(!entry)throw Error(`Unknown target ${id}`); return entry; }
 function summary() { const counts:Record<string,number>={}; for(const e of ledger.entries)counts[e.status]=(counts[e.status]??0)+1; console.log(JSON.stringify({targets:ledger.entries.length,counts})); }
 

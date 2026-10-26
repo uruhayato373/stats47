@@ -86,6 +86,7 @@ import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
 import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
 import { buildExternalCard } from './lib/external-card-render';
 import { prefNameOf } from './lib/pref-silhouette-render';
+import { fetchPublicImageInput } from './lib/public-image-input';
 
 import type { StorefrontProduct } from '../src/features/products/types';
 import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
@@ -202,23 +203,7 @@ async function fetchRequiredJson<T>(url: string): Promise<T> {
 }
 
 async function fetchRequiredText(url: string): Promise<string> {
-  let response: Response;
-  try {
-    response = await fetch(url, {
-      cache: 'no-store',
-      signal: AbortSignal.timeout(20_000),
-    });
-  } catch (error) {
-    throw new Error(
-      `画像生成入力の取得に失敗しました: ${url}: ${String(error)}`
-    );
-  }
-  if (!response.ok) {
-    throw new Error(
-      `画像生成入力の取得に失敗しました: ${url}: HTTP ${response.status}`
-    );
-  }
-  return response.text();
+  return fetchPublicImageInput(url);
 }
 
 /**

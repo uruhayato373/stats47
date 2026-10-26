@@ -1,0 +1,4005 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "site:/ranking/commute-by-car",
+      "key": "commute-by-car",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commute-by-car",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commute-by-motorcycle",
+      "key": "commute-by-motorcycle",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commute-by-motorcycle",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commute-by-train",
+      "key": "commute-by-train",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commute-by-train",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commute-on-foot",
+      "key": "commute-on-foot",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commute-on-foot",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commuter-ratio-from-other-municipalities",
+      "key": "commuter-ratio-from-other-municipalities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commuter-ratio-from-other-municipalities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commuter-ratio-to-other-municipalities",
+      "key": "commuter-ratio-to-other-municipalities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commuter-ratio-to-other-municipalities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/commuters-total",
+      "key": "commuters-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/commuters-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/company-housing-rent-consumption-expenditure",
+      "key": "company-housing-rent-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/company-housing-rent-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/company-housing-rent-consumption-quantity",
+      "key": "company-housing-rent-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/company-housing-rent-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/complainant-count",
+      "key": "complainant-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/complainant-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/complainant-rate-per-1000",
+      "key": "complainant-rate-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/complainant-rate-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/comprehensive-park-count",
+      "key": "comprehensive-park-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/comprehensive-park-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/compulsory-education-school-count-per-100k-6-14",
+      "key": "compulsory-education-school-count-per-100k-6-14",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/compulsory-education-school-count-per-100k-6-14",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/confectionery-consumption-expenditure",
+      "key": "confectionery-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/confectionery-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-employed-age30to54",
+      "key": "construction-employed-age30to54",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-employed-age30to54",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-employed-age55plus",
+      "key": "construction-employed-age55plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-employed-age55plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-employed-female",
+      "key": "construction-employed-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-employed-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-employed-residents",
+      "key": "construction-employed-residents",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-employed-residents",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-employed-under30",
+      "key": "construction-employed-under30",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-employed-under30",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-industry-count",
+      "key": "construction-industry-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-industry-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/construction-private-employees",
+      "key": "construction-private-employees",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/construction-private-employees",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-consultation-accepted-cases",
+      "key": "consumer-consultation-accepted-cases",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-consultation-accepted-cases",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-clothing-footwear",
+      "key": "consumer-price-difference-index-clothing-footwear",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-clothing-footwear",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-culture-recreation",
+      "key": "consumer-price-difference-index-culture-recreation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-culture-recreation",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-education",
+      "key": "consumer-price-difference-index-education",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-education",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-food",
+      "key": "consumer-price-difference-index-food",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-food",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-furniture-household",
+      "key": "consumer-price-difference-index-furniture-household",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-furniture-household",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-healthcare",
+      "key": "consumer-price-difference-index-healthcare",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-healthcare",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-housing",
+      "key": "consumer-price-difference-index-housing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-housing",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-miscellaneous",
+      "key": "consumer-price-difference-index-miscellaneous",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-miscellaneous",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-overall",
+      "key": "consumer-price-difference-index-overall",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-overall",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-overall-excl-rent",
+      "key": "consumer-price-difference-index-overall-excl-rent",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-overall-excl-rent",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-transport-communication",
+      "key": "consumer-price-difference-index-transport-communication",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-transport-communication",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumer-price-difference-index-utilities",
+      "key": "consumer-price-difference-index-utilities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumer-price-difference-index-utilities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumption-expenditure-multi-person-households-per-month",
+      "key": "consumption-expenditure-multi-person-households-per-month",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumption-expenditure-multi-person-households-per-month",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/consumption-expenditure-total",
+      "key": "consumption-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/consumption-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/contact-lens-consumption-expenditure",
+      "key": "contact-lens-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/contact-lens-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-count",
+      "key": "convenience-store-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-count-commercial",
+      "key": "convenience-store-count-commercial",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-count-commercial",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-count-per-100k",
+      "key": "convenience-store-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-sales",
+      "key": "convenience-store-sales",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-sales",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-sales-monthly",
+      "key": "convenience-store-sales-monthly",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-sales-monthly",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/convenience-store-sales-yoy",
+      "key": "convenience-store-sales-yoy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/convenience-store-sales-yoy",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cook-annual-income",
+      "key": "cook-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cook-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cook-licensees-by-prefecture",
+      "key": "cook-licensees-by-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cook-licensees-by-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cooking-appliance-consumption-expenditure",
+      "key": "cooking-appliance-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cooking-appliance-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cooking-appliance-consumption-quantity",
+      "key": "cooking-appliance-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cooking-appliance-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cooking-oil-consumption-expenditure",
+      "key": "cooking-oil-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cooking-oil-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cooking-oil-consumption-quantity",
+      "key": "cooking-oil-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cooking-oil-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/core-agricultural-workers",
+      "key": "core-agricultural-workers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/core-agricultural-workers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cosmetic-cream-consumption-expenditure",
+      "key": "cosmetic-cream-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cosmetic-cream-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-clothing",
+      "key": "cpi-change-rate-clothing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-clothing",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-culture-recreation",
+      "key": "cpi-change-rate-culture-recreation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-culture-recreation",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-education",
+      "key": "cpi-change-rate-education",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-education",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-excl-food-energy",
+      "key": "cpi-change-rate-excl-food-energy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-excl-food-energy",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-excl-fresh-food",
+      "key": "cpi-change-rate-excl-fresh-food",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-excl-fresh-food",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-excl-fresh-food-energy",
+      "key": "cpi-change-rate-excl-fresh-food-energy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-excl-fresh-food-energy",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-excl-owner-rent",
+      "key": "cpi-change-rate-excl-owner-rent",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-excl-owner-rent",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-food",
+      "key": "cpi-change-rate-food",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-food",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-furniture",
+      "key": "cpi-change-rate-furniture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-furniture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-healthcare",
+      "key": "cpi-change-rate-healthcare",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-healthcare",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-housing",
+      "key": "cpi-change-rate-housing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-housing",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-miscellaneous",
+      "key": "cpi-change-rate-miscellaneous",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-miscellaneous",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-total",
+      "key": "cpi-change-rate-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-transport-communication",
+      "key": "cpi-change-rate-transport-communication",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-transport-communication",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-change-rate-utilities",
+      "key": "cpi-change-rate-utilities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-change-rate-utilities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-regional-difference-index-food-51cities100",
+      "key": "cpi-regional-difference-index-food-51cities100",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-regional-difference-index-food-51cities100",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-regional-difference-index-food-tokyo100",
+      "key": "cpi-regional-difference-index-food-tokyo100",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-regional-difference-index-food-tokyo100",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-regional-difference-index-total-51cities100",
+      "key": "cpi-regional-difference-index-total-51cities100",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-regional-difference-index-total-51cities100",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cpi-regional-difference-index-total-tokyo100",
+      "key": "cpi-regional-difference-index-total-tokyo100",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cpi-regional-difference-index-total-tokyo100",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/crab-consumption-expenditure",
+      "key": "crab-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/crab-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/crab-consumption-quantity",
+      "key": "crab-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/crab-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/craft-materials-consumption-expenditure",
+      "key": "craft-materials-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/craft-materials-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cram-school-establishment-count",
+      "key": "cram-school-establishment-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cram-school-establishment-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-arrest-rate",
+      "key": "criminal-arrest-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-arrest-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-recognition-count",
+      "key": "criminal-recognition-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-recognition-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-recognition-count-of-prostitution-crime-rate",
+      "key": "criminal-recognition-count-of-prostitution-crime-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-recognition-count-of-prostitution-crime-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-recognition-count-of-serious-crime-rate",
+      "key": "criminal-recognition-count-of-serious-crime-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-recognition-count-of-serious-crime-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-recognition-count-of-theft-crime-rate",
+      "key": "criminal-recognition-count-of-theft-crime-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-recognition-count-of-theft-crime-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/criminal-recognition-count-of-violent-crime-rate",
+      "key": "criminal-recognition-count-of-violent-crime-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/criminal-recognition-count-of-violent-crime-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/croquette-consumption-expenditure",
+      "key": "croquette-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/croquette-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/crude-birth-rate",
+      "key": "crude-birth-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/crude-birth-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/crude-death-rate",
+      "key": "crude-death-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/crude-death-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cucumber-consumption-expenditure",
+      "key": "cucumber-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cucumber-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cucumber-consumption-quantity",
+      "key": "cucumber-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cucumber-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cultivated-area",
+      "key": "cultivated-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cultivated-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cultivated-land-area-per-household",
+      "key": "cultivated-land-area-per-household",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cultivated-land-area-per-household",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cultivated-land-area-ratio",
+      "key": "cultivated-land-area-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cultivated-land-area-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cultural-facility-admission-consumption-expenditure",
+      "key": "cultural-facility-admission-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cultural-facility-admission-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/culture-recreation-cost-all-households",
+      "key": "culture-recreation-cost-all-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/culture-recreation-cost-all-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/culture-recreation-expenditure-ratio-multi-person-households",
+      "key": "culture-recreation-expenditure-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/culture-recreation-expenditure-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/culture-recreation-expenditure-total",
+      "key": "culture-recreation-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/culture-recreation-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cup-noodles-consumption-expenditure",
+      "key": "cup-noodles-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cup-noodles-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cup-noodles-consumption-quantity",
+      "key": "cup-noodles-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cup-noodles-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cupboard-consumption-expenditure",
+      "key": "cupboard-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cupboard-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cupboard-consumption-quantity",
+      "key": "cupboard-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cupboard-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-balance-ratio",
+      "key": "current-balance-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-balance-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-deposit-balance-ratio-multi-person-households",
+      "key": "current-deposit-balance-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-deposit-balance-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-liabilities-balance-multi-person-households-per-household",
+      "key": "current-liabilities-balance-multi-person-households-per-household",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-liabilities-balance-multi-person-households-per-household",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-life-insurance-balance-ratio-multi-person-households",
+      "key": "current-life-insurance-balance-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-life-insurance-balance-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-savings-balance-multi-person-households",
+      "key": "current-savings-balance-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-savings-balance-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/current-securities-balance-ratio-multi-person-households",
+      "key": "current-securities-balance-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/current-securities-balance-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/curry-roux-consumption-expenditure",
+      "key": "curry-roux-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/curry-roux-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/curry-roux-consumption-quantity",
+      "key": "curry-roux-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/curry-roux-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/curtain-consumption-expenditure",
+      "key": "curtain-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/curtain-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cut-flowers-consumption-expenditure",
+      "key": "cut-flowers-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cut-flowers-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/cutlet-consumption-expenditure",
+      "key": "cutlet-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/cutlet-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/daikon-consumption-expenditure",
+      "key": "daikon-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/daikon-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/daikon-consumption-quantity",
+      "key": "daikon-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/daikon-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/daily-steps-female-20to64-age-adjusted",
+      "key": "daily-steps-female-20to64-age-adjusted",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/daily-steps-female-20to64-age-adjusted",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/daily-steps-male-20to64-age-adjusted",
+      "key": "daily-steps-male-20to64-age-adjusted",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/daily-steps-male-20to64-age-adjusted",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dairy-cattle-count",
+      "key": "dairy-cattle-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dairy-cattle-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dairy-cattle-holdings",
+      "key": "dairy-cattle-holdings",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dairy-cattle-holdings",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/day-time-population",
+      "key": "day-time-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/day-time-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/day-time-population-ratio",
+      "key": "day-time-population-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/day-time-population-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/death-accident",
+      "key": "death-accident",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/death-accident",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/death-count",
+      "key": "death-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/death-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-cerebral-infarction-per-100k",
+      "key": "deaths-cerebral-infarction-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-cerebral-infarction-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-cerebrovascular-disease",
+      "key": "deaths-cerebrovascular-disease",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-cerebrovascular-disease",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-cerebrovascular-disease-per-100k",
+      "key": "deaths-cerebrovascular-disease-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-cerebrovascular-disease-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-diabetes",
+      "key": "deaths-diabetes",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-diabetes",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-diabetes-per-100k",
+      "key": "deaths-diabetes-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-diabetes-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-heart-disease-excl-hypertensive-per-100k",
+      "key": "deaths-heart-disease-excl-hypertensive-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-heart-disease-excl-hypertensive-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-hypertensive-diseases",
+      "key": "deaths-hypertensive-diseases",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-hypertensive-diseases",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-hypertensive-diseases-per-100k",
+      "key": "deaths-hypertensive-diseases-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-hypertensive-diseases-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-lifestyle-diseases",
+      "key": "deaths-lifestyle-diseases",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-lifestyle-diseases",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-lifestyle-diseases-per-100k",
+      "key": "deaths-lifestyle-diseases-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-lifestyle-diseases-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deaths-malignant-neoplasms-per-100k",
+      "key": "deaths-malignant-neoplasms-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deaths-malignant-neoplasms-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/debris-flow-special-warning-zone-count",
+      "key": "debris-flow-special-warning-zone-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/debris-flow-special-warning-zone-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/debris-flow-warning-zone-count",
+      "key": "debris-flow-warning-zone-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/debris-flow-warning-zone-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deep-fried-fish-cake-consumption-expenditure",
+      "key": "deep-fried-fish-cake-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deep-fried-fish-cake-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/delivery-clinic-count",
+      "key": "delivery-clinic-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/delivery-clinic-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/delivery-fee-consumption-expenditure",
+      "key": "delivery-fee-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/delivery-fee-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/delivery-hospital-count",
+      "key": "delivery-hospital-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/delivery-hospital-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dementia-death-rate",
+      "key": "dementia-death-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dementia-death-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-inhabited-district-population",
+      "key": "densely-inhabited-district-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-inhabited-district-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-inhabited-district-population-density",
+      "key": "densely-inhabited-district-population-density",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-inhabited-district-population-density",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-inhabited-district-population-ratio",
+      "key": "densely-inhabited-district-population-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-inhabited-district-population-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-populated-area",
+      "key": "densely-populated-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-populated-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-populated-area-change-rate",
+      "key": "densely-populated-area-change-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-populated-area-change-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/densely-populated-area-ratio",
+      "key": "densely-populated-area-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/densely-populated-area-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-checkup-guidance-persons",
+      "key": "dental-checkup-guidance-persons",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-checkup-guidance-persons",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-checkup-guidance-persons-per-1000",
+      "key": "dental-checkup-guidance-persons-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-checkup-guidance-persons-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-checkup-persons",
+      "key": "dental-checkup-persons",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-checkup-persons",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-checkup-persons-per-1000",
+      "key": "dental-checkup-persons-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-checkup-persons-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-checkup-recipients",
+      "key": "dental-checkup-recipients",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-checkup-recipients",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-clinic-count",
+      "key": "dental-clinic-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-clinic-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-clinic-count-per-100k",
+      "key": "dental-clinic-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-clinic-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-clinic-count-per-100km2",
+      "key": "dental-clinic-count-per-100km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-clinic-count-per-100km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-fee-consumption-expenditure",
+      "key": "dental-fee-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-fee-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-guidance-persons",
+      "key": "dental-guidance-persons",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-guidance-persons",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-guidance-persons-per-1000",
+      "key": "dental-guidance-persons-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-guidance-persons-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-hygienist-annual-income",
+      "key": "dental-hygienist-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-hygienist-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-hygienist-by-prefecture",
+      "key": "dental-hygienist-by-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-hygienist-by-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-hygienist-rate",
+      "key": "dental-hygienist-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-hygienist-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dental-technician-rate",
+      "key": "dental-technician-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dental-technician-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dentist-annual-income",
+      "key": "dentist-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dentist-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dentists-in-medical-facilities",
+      "key": "dentists-in-medical-facilities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dentists-in-medical-facilities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dentists-in-medical-facilities-per-100k",
+      "key": "dentists-in-medical-facilities-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dentists-in-medical-facilities-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/department-store-count-per-100k",
+      "key": "department-store-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/department-store-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/department-supermarket-count",
+      "key": "department-supermarket-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/department-supermarket-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/department-supermarket-count-per-100k",
+      "key": "department-supermarket-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/department-supermarket-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/department-supermarket-sales",
+      "key": "department-supermarket-sales",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/department-supermarket-sales",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dependent-population-index",
+      "key": "dependent-population-index",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dependent-population-index",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deposit-balance",
+      "key": "deposit-balance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deposit-balance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/deposit-balance-per-person",
+      "key": "deposit-balance-per-person",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/deposit-balance-per-person",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/design-application-count",
+      "key": "design-application-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/design-application-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/design-registration-count",
+      "key": "design-registration-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/design-registration-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/designated-difficult-disease",
+      "key": "designated-difficult-disease",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/designated-difficult-disease",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/designated-museum-visitors",
+      "key": "designated-museum-visitors",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/designated-museum-visitors",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/designer-annual-income",
+      "key": "designer-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/designer-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/detached-house-ratio",
+      "key": "detached-house-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/detached-house-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dietitian-annual-income",
+      "key": "dietitian-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dietitian-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dining-out-consumption-expenditure",
+      "key": "dining-out-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dining-out-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disabled-employment-rate",
+      "key": "disabled-employment-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disabled-employment-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disabled-job-ratio-per-1000",
+      "key": "disabled-job-ratio-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disabled-job-ratio-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-damage-amount",
+      "key": "disaster-damage-amount",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-damage-amount",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-damage-amount-per-person",
+      "key": "disaster-damage-amount-per-person",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-damage-amount-per-person",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "key": "disaster-recovery-expenditure-ratio-pref-finance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-recovery-expenditure-ratio-pref-finance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-recovery-expenses-prefecture",
+      "key": "disaster-recovery-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-recovery-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-recovery-project-expenses-prefecture",
+      "key": "disaster-recovery-project-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-recovery-project-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disaster-relief-expenses-prefecture",
+      "key": "disaster-relief-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disaster-relief-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/discharged-patients",
+      "key": "discharged-patients",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/discharged-patients",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disposable-income-after-rent",
+      "key": "disposable-income-after-rent",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disposable-income-after-rent",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/disposable-income-worker-households",
+      "key": "disposable-income-worker-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/disposable-income-worker-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/divorces",
+      "key": "divorces",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/divorces",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/divorces-per-total-population",
+      "key": "divorces-per-total-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/divorces-per-total-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/doctor-annual-income",
+      "key": "doctor-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/doctor-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dog-registration-count",
+      "key": "dog-registration-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dog-registration-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/domestic-bank-deposit-balance",
+      "key": "domestic-bank-deposit-balance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/domestic-bank-deposit-balance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/domestic-package-tour-consumption-expenditure",
+      "key": "domestic-package-tour-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/domestic-package-tour-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/domestic-student-remittance-consumption-expenditure",
+      "key": "domestic-student-remittance-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/domestic-student-remittance-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/domestic-travel-consumption-by-destination",
+      "key": "domestic-travel-consumption-by-destination",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/domestic-travel-consumption-by-destination",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/donations-consumption-expenditure",
+      "key": "donations-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/donations-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/donations-prefecture",
+      "key": "donations-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/donations-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dress-shirt-consumption-expenditure",
+      "key": "dress-shirt-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dress-shirt-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dress-shirt-consumption-quantity",
+      "key": "dress-shirt-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dress-shirt-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dressing-consumption-expenditure",
+      "key": "dressing-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dressing-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dressing-consumption-quantity",
+      "key": "dressing-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dressing-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-mackerel-consumption-expenditure",
+      "key": "dried-mackerel-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-mackerel-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-mackerel-consumption-quantity",
+      "key": "dried-mackerel-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-mackerel-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-nori-consumption-expenditure",
+      "key": "dried-nori-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-nori-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-shiitake-consumption-expenditure",
+      "key": "dried-shiitake-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-shiitake-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-shiitake-consumption-quantity",
+      "key": "dried-shiitake-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-shiitake-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-soup-consumption-expenditure",
+      "key": "dried-soup-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-soup-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-udon-soba-consumption-expenditure",
+      "key": "dried-udon-soba-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-udon-soba-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dried-udon-soba-consumption-quantity",
+      "key": "dried-udon-soba-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dried-udon-soba-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/drinking-out-consumption-expenditure",
+      "key": "drinking-out-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/drinking-out-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/driving-school-consumption-expenditure",
+      "key": "driving-school-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/driving-school-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/drug-enforcement-arrest-count",
+      "key": "drug-enforcement-arrest-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/drug-enforcement-arrest-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/drug-enforcement-arrest-count-per-population",
+      "key": "drug-enforcement-arrest-count-per-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/drug-enforcement-arrest-count-per-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/dual-income-household-ratio",
+      "key": "dual-income-household-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/dual-income-household-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/early-neonatal-deaths",
+      "key": "early-neonatal-deaths",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/early-neonatal-deaths",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/earmarked-tax-local",
+      "key": "earmarked-tax-local",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/earmarked-tax-local",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/earthquake-renovation-rate",
+      "key": "earthquake-renovation-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/earthquake-renovation-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/earthquake-retrofit-housing",
+      "key": "earthquake-retrofit-housing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/earthquake-retrofit-housing",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-cost-all-households",
+      "key": "education-cost-all-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-cost-all-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-department-staff",
+      "key": "education-department-staff",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-department-staff",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-expenditure-ratio-multi-person-households",
+      "key": "education-expenditure-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-expenditure-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-expenditure-ratio-pref-finance",
+      "key": "education-expenditure-ratio-pref-finance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-expenditure-ratio-pref-finance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-expenditure-total",
+      "key": "education-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-expense-municipal",
+      "key": "education-expense-municipal",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-expense-municipal",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/education-expenses-prefecture",
+      "key": "education-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/education-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/eggplant-consumption-expenditure",
+      "key": "eggplant-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/eggplant-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/eggplant-consumption-quantity",
+      "key": "eggplant-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/eggplant-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-care-employment-rate",
+      "key": "elderly-care-employment-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-care-employment-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-class-lecture-count-per-million",
+      "key": "elderly-class-lecture-count-per-million",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-class-lecture-count-per-million",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-couple-only-household-ratio",
+      "key": "elderly-couple-only-household-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-couple-only-household-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-general-worker-old-population-ratio",
+      "key": "elderly-general-worker-old-population-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-general-worker-old-population-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "key": "elderly-general-worker-old-population-ratio-pre2019",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-general-worker-old-population-ratio-pre2019",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-household-detail",
+      "key": "elderly-household-detail",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-household-detail",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-living-alone-rate",
+      "key": "elderly-living-alone-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-living-alone-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-on-public-assistance-per-1000-65plus",
+      "key": "elderly-on-public-assistance-per-1000-65plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-on-public-assistance-per-1000-65plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-single-person-households",
+      "key": "elderly-single-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-single-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-welfare-expenditure-ratio-pref-finance",
+      "key": "elderly-welfare-expenditure-ratio-pref-finance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-welfare-expenditure-ratio-pref-finance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-welfare-expenses-prefecture",
+      "key": "elderly-welfare-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-welfare-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elderly-workers-ratio",
+      "key": "elderly-workers-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elderly-workers-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/electrician-annual-income",
+      "key": "electrician-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/electrician-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/electricity-consumption-expenditure",
+      "key": "electricity-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/electricity-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/electricity-consumption-quantity",
+      "key": "electricity-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/electricity-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/electricity-demand",
+      "key": "electricity-demand",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/electricity-demand",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/electricity-generation-capacity",
+      "key": "electricity-generation-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/electricity-generation-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-long-term-absent-students",
+      "key": "elementary-long-term-absent-students",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-long-term-absent-students",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-children-1-per",
+      "key": "elementary-school-children-1-per",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-children-1-per",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-children-count",
+      "key": "elementary-school-children-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-children-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-classes",
+      "key": "elementary-school-classes",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-classes",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-count",
+      "key": "elementary-school-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-count-per-100k-6-11",
+      "key": "elementary-school-count-per-100k-6-11",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-count-per-100k-6-11",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-count-per-100km2-habitable",
+      "key": "elementary-school-count-per-100km2-habitable",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-count-per-100km2-habitable",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-education-cost-per-student",
+      "key": "elementary-school-education-cost-per-student",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-education-cost-per-student",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-expenses-prefecture",
+      "key": "elementary-school-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-gymnasium-count",
+      "key": "elementary-school-gymnasium-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-gymnasium-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "key": "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-long-absence-ratio-over-30days-per-1000",
+      "key": "elementary-school-long-absence-ratio-over-30days-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-long-absence-ratio-over-30days-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-students-per-teacher",
+      "key": "elementary-school-students-per-teacher",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-students-per-teacher",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-teachers",
+      "key": "elementary-school-teachers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-teachers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-school-teachers-ratio-female",
+      "key": "elementary-school-teachers-ratio-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-school-teachers-ratio-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary-tutoring-consumption-expenditure",
+      "key": "elementary-tutoring-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary-tutoring-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary5-fitness-score-female",
+      "key": "elementary5-fitness-score-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary5-fitness-score-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary5-fitness-score-male",
+      "key": "elementary5-fitness-score-male",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary5-fitness-score-male",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary5-weekly-exercise-420min-rate-female",
+      "key": "elementary5-weekly-exercise-420min-rate-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary5-weekly-exercise-420min-rate-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/elementary5-weekly-exercise-420min-rate-male",
+      "key": "elementary5-weekly-exercise-420min-rate-male",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/elementary5-weekly-exercise-420min-rate-male",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/emergency-hospital-general-clinic-count-per-100k",
+      "key": "emergency-hospital-general-clinic-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/emergency-hospital-general-clinic-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-outside-the-prefecture",
+      "key": "employed-outside-the-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-outside-the-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-outside-the-prefecture-pre2018",
+      "key": "employed-outside-the-prefecture-pre2018",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-outside-the-prefecture-pre2018",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-people-ratio",
+      "key": "employed-people-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-people-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-people-ratio-primary",
+      "key": "employed-people-ratio-primary",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-people-ratio-primary",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-people-ratio-secondary",
+      "key": "employed-people-ratio-secondary",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-people-ratio-secondary",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employed-people-ratio-tertiary",
+      "key": "employed-people-ratio-tertiary",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employed-people-ratio-tertiary",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio",
+      "key": "employee-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio-1-4-employee-establishments-private",
+      "key": "employee-ratio-1-4-employee-establishments-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio-1-4-employee-establishments-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio-10-29-employee-establishments-private",
+      "key": "employee-ratio-10-29-employee-establishments-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio-10-29-employee-establishments-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio-100-299-employee-establishments-private",
+      "key": "employee-ratio-100-299-employee-establishments-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio-100-299-employee-establishments-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio-300plus-employee-establishments-private",
+      "key": "employee-ratio-300plus-employee-establishments-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio-300plus-employee-establishments-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employee-ratio-5-9-employee-establishments-private",
+      "key": "employee-ratio-5-9-employee-establishments-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employee-ratio-5-9-employee-establishments-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employees-weekly-hours-60plus-count",
+      "key": "employees-weekly-hours-60plus-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employees-weekly-hours-60plus-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employees-weekly-hours-60plus-rate",
+      "key": "employees-weekly-hours-60plus-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employees-weekly-hours-60plus-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-insurance-basic-benefit-average",
+      "key": "employment-insurance-basic-benefit-average",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-insurance-basic-benefit-average",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-insurance-daily-basic-benefit-average",
+      "key": "employment-insurance-daily-basic-benefit-average",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-insurance-daily-basic-benefit-average",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-insurance-daily-receipt-rate",
+      "key": "employment-insurance-daily-receipt-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-insurance-daily-receipt-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-insurance-receipt-rate",
+      "key": "employment-insurance-receipt-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-insurance-receipt-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-location-quotient-health-welfare",
+      "key": "employment-location-quotient-health-welfare",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-location-quotient-health-welfare",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-location-quotient-information-communication",
+      "key": "employment-location-quotient-information-communication",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-location-quotient-information-communication",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-location-quotient-manufacturing",
+      "key": "employment-location-quotient-manufacturing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-location-quotient-manufacturing",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-mobility-rate",
+      "key": "employment-mobility-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-mobility-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/employment-rate",
+      "key": "employment-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/employment-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/engel-coefficient",
+      "key": "engel-coefficient",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/engel-coefficient",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/enoki-consumption-expenditure",
+      "key": "enoki-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/enoki-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/enoki-consumption-quantity",
+      "key": "enoki-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/enoki-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/enterprise-net-value-added-all-industries",
+      "key": "enterprise-net-value-added-all-industries",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/enterprise-net-value-added-all-industries",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/entertainment-durables-repair-consumption-expenditure",
+      "key": "entertainment-durables-repair-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/entertainment-durables-repair-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/entertainment-goods-repair-consumption-expenditure",
+      "key": "entertainment-goods-repair-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/entertainment-goods-repair-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/entertainment-rental-consumption-expenditure",
+      "key": "entertainment-rental-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/entertainment-rental-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/environmental-sanitation-expenses-prefecture",
+      "key": "environmental-sanitation-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/environmental-sanitation-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/establishment-ratio-1-4-employees-private",
+      "key": "establishment-ratio-1-4-employees-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/establishment-ratio-1-4-employees-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/establishment-ratio-10-29-employees-private",
+      "key": "establishment-ratio-10-29-employees-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/establishment-ratio-10-29-employees-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/establishment-ratio-100-299-employees-private",
+      "key": "establishment-ratio-100-299-employees-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/establishment-ratio-100-299-employees-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/establishment-ratio-300plus-employees-private",
+      "key": "establishment-ratio-300plus-employees-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/establishment-ratio-300plus-employees-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/establishment-ratio-5-9-employees-private",
+      "key": "establishment-ratio-5-9-employees-private",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/establishment-ratio-5-9-employees-private",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/exterior-construction-consumption-expenditure",
+      "key": "exterior-construction-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/exterior-construction-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/eyeglasses-consumption-expenditure",
+      "key": "eyeglasses-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/eyeglasses-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fabric-consumption-expenditure",
+      "key": "fabric-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fabric-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fabric-softener-consumption-expenditure",
+      "key": "fabric-softener-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fabric-softener-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/facility-equipment-consumption-expenditure",
+      "key": "facility-equipment-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/facility-equipment-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/factory-establishment-count",
+      "key": "factory-establishment-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/factory-establishment-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/factory-industrial-park-rate",
+      "key": "factory-industrial-park-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/factory-industrial-park-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/factory-location-area-annual",
+      "key": "factory-location-area-annual",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/factory-location-area-annual",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/farm-household-expenditure-per-month",
+      "key": "farm-household-expenditure-per-month",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/farm-household-expenditure-per-month",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-class-lecture-count-per-million-female",
+      "key": "female-class-lecture-count-per-million-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-class-lecture-count-per-million-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-part-time-hourly-wage",
+      "key": "female-part-time-hourly-wage",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-part-time-hourly-wage",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-part-time-hourly-wage-pre2019",
+      "key": "female-part-time-hourly-wage-pre2019",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-part-time-hourly-wage-pre2019",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-parttime-workers",
+      "key": "female-parttime-workers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-parttime-workers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-parttime-workers-upto2019",
+      "key": "female-parttime-workers-upto2019",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-parttime-workers-upto2019",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/female-scheduled-earnings",
+      "key": "female-scheduled-earnings",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/female-scheduled-earnings",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-disposal-site-remaining-capacity",
+      "key": "final-disposal-site-remaining-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-disposal-site-remaining-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-education-elementary-junior-high-ratio",
+      "key": "final-education-elementary-junior-high-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-education-elementary-junior-high-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-education-highschool-old-junior-high-ratio",
+      "key": "final-education-highschool-old-junior-high-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-education-highschool-old-junior-high-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-education-junior-college-technical-college-ratio",
+      "key": "final-education-junior-college-technical-college-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-education-junior-college-technical-college-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-education-university-graduate-school-ratio",
+      "key": "final-education-university-graduate-school-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-energy-consumption",
+      "key": "final-energy-consumption",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-energy-consumption",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/final-energy-consumption-per-capita",
+      "key": "final-energy-consumption-per-capita",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/final-energy-consumption-per-capita",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/financial-assets-balance-multi-person-households",
+      "key": "financial-assets-balance-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/financial-assets-balance-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/financial-debt-balance",
+      "key": "financial-debt-balance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/financial-debt-balance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/financial-literacy-correct-rate",
+      "key": "financial-literacy-correct-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/financial-literacy-correct-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-affected-persons-count",
+      "key": "fire-affected-persons-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-affected-persons-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-damage-amount",
+      "key": "fire-damage-amount",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-damage-amount",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-damage-casualties-per-accident",
+      "key": "fire-damage-casualties-per-accident",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-damage-casualties-per-accident",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-damage-casualties-per-population",
+      "key": "fire-damage-casualties-per-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-damage-casualties-per-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-damage-household-count-per-100-building-fires",
+      "key": "fire-damage-household-count-per-100-building-fires",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-damage-household-count-per-100-building-fires",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-deaths-per-100k",
+      "key": "fire-deaths-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-deaths-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-branch-count-per-100-km2",
+      "key": "fire-department-branch-count-per-100-km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-branch-count-per-100-km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-count-per-100-km2",
+      "key": "fire-department-count-per-100-km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-count-per-100-km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-dispatch-count-per-100-thousand-people",
+      "key": "fire-department-dispatch-count-per-100-thousand-people",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-dispatch-count-per-100-thousand-people",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-emergency-car-count-per-100k",
+      "key": "fire-department-emergency-car-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-emergency-car-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-employees",
+      "key": "fire-department-employees",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-employees",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-member-count-per-100-thousand-people",
+      "key": "fire-department-member-count-per-100-thousand-people",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-member-count-per-100-thousand-people",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "key": "fire-department-pump-car-count-per-100-thousand-people",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-pump-car-count-per-100-thousand-people",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-department-water-count-per-100-thousand-people",
+      "key": "fire-department-water-count-per-100-thousand-people",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-department-water-count-per-100-thousand-people",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-dispatch-for-building-fire-count-per-100k",
+      "key": "fire-dispatch-for-building-fire-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-dispatch-for-building-fire-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-earthquake-insurance-consumption-expenditure",
+      "key": "fire-earthquake-insurance-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-earthquake-insurance-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-insurance-amount-received-per-contract",
+      "key": "fire-insurance-amount-received-per-contract",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-insurance-amount-received-per-contract",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fire-related-personnel-count-per-100k",
+      "key": "fire-related-personnel-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fire-related-personnel-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/firefighting-expenditure-ratio-pref-municipal",
+      "key": "firefighting-expenditure-ratio-pref-municipal",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/firefighting-expenditure-ratio-pref-municipal",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/firefighting-expenses-prefecture",
+      "key": "firefighting-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/firefighting-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fiscal-strength-index-prefecture",
+      "key": "fiscal-strength-index-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fiscal-strength-index-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fish-canned-consumption-expenditure",
+      "key": "fish-canned-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fish-canned-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fish-catch",
+      "key": "fish-catch",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fish-catch",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fish-paste-consumption-expenditure",
+      "key": "fish-paste-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fish-paste-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fish-pickled-consumption-expenditure",
+      "key": "fish-pickled-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fish-pickled-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fish-tsukudani-type2-consumption-expenditure",
+      "key": "fish-tsukudani-type2-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fish-tsukudani-type2-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-household-sex-age",
+      "key": "fishery-household-sex-age",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-household-sex-age",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-management-orgs",
+      "key": "fishery-management-orgs",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-management-orgs",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-output-value",
+      "key": "fishery-output-value",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-output-value",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-bonito",
+      "key": "fishery-species-catch-bonito",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-bonito",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-japanese-squid",
+      "key": "fishery-species-catch-japanese-squid",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-japanese-squid",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-kelp",
+      "key": "fishery-species-catch-kelp",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-kelp",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-mackerel",
+      "key": "fishery-species-catch-mackerel",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-mackerel",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-pacific-saury",
+      "key": "fishery-species-catch-pacific-saury",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-pacific-saury",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-pollock",
+      "key": "fishery-species-catch-pollock",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-pollock",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-sardine",
+      "key": "fishery-species-catch-sardine",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-sardine",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-scallop",
+      "key": "fishery-species-catch-scallop",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-scallop",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-sea-bream",
+      "key": "fishery-species-catch-sea-bream",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-sea-bream",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-snow-crab",
+      "key": "fishery-species-catch-snow-crab",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-snow-crab",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-tuna",
+      "key": "fishery-species-catch-tuna",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-tuna",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-species-catch-yellowtail",
+      "key": "fishery-species-catch-yellowtail",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-species-catch-yellowtail",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-workers",
+      "key": "fishery-workers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-workers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishery-workers-coastal-offshore",
+      "key": "fishery-workers-coastal-offshore",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishery-workers-coastal-offshore",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishing-port-count-by-type",
+      "key": "fishing-port-count-by-type",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishing-port-count-by-type",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishing-port-count-ksj",
+      "key": "fishing-port-count-ksj",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishing-port-count-ksj",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishing-vessel-crew",
+      "key": "fishing-vessel-crew",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishing-vessel-crew",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fishing-vessel-tonnage-class",
+      "key": "fishing-vessel-tonnage-class",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fishing-vessel-tonnage-class",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fit-fip-installed-capacity",
+      "key": "fit-fip-installed-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fit-fip-installed-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fit-fip-new-approved-installed-capacity",
+      "key": "fit-fip-new-approved-installed-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fit-fip-new-approved-installed-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fit-transition-installed-capacity",
+      "key": "fit-transition-installed-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fit-transition-installed-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/five-year-residence-other-prefecture",
+      "key": "five-year-residence-other-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/five-year-residence-other-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/five-year-residence-same-address",
+      "key": "five-year-residence-same-address",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/five-year-residence-same-address",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flavor-seasoning-consumption-expenditure",
+      "key": "flavor-seasoning-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flavor-seasoning-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-affected-municipalities",
+      "key": "flood-affected-municipalities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-affected-municipalities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-affected-rivers",
+      "key": "flood-affected-rivers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-affected-rivers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-casualties-total",
+      "key": "flood-casualties-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-casualties-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-damage-bridge",
+      "key": "flood-damage-bridge",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-damage-bridge",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-damage-general-assets",
+      "key": "flood-damage-general-assets",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-damage-general-assets",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-damage-public-infrastructure",
+      "key": "flood-damage-public-infrastructure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-damage-public-infrastructure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-damage-road",
+      "key": "flood-damage-road",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-damage-road",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-damage-total",
+      "key": "flood-damage-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-damage-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flood-deaths",
+      "key": "flood-deaths",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flood-deaths",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/floor-area-new-owner-dwelling",
+      "key": "floor-area-new-owner-dwelling",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/floor-area-new-owner-dwelling",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/floor-area-new-rented-dwelling",
+      "key": "floor-area-new-rented-dwelling",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/floor-area-new-rented-dwelling",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/floor-area-per-dwelling-owner",
+      "key": "floor-area-per-dwelling-owner",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/floor-area-per-dwelling-owner",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/floor-area-per-dwelling-rented",
+      "key": "floor-area-per-dwelling-rented",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/floor-area-per-dwelling-rented",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/floor-covering-consumption-expenditure",
+      "key": "floor-covering-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/floor-covering-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flounder-consumption-expenditure",
+      "key": "flounder-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flounder-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flounder-consumption-quantity",
+      "key": "flounder-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flounder-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flush-toilet-housing-ratio",
+      "key": "flush-toilet-housing-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flush-toilet-housing-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/flush-toilet-population-ratio",
+      "key": "flush-toilet-population-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/flush-toilet-population-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-business-establishments",
+      "key": "food-business-establishments",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-business-establishments",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-business-facility-penalties",
+      "key": "food-business-facility-penalties",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-business-facility-penalties",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-business-facility-penalties-per-1000",
+      "key": "food-business-facility-penalties-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-business-facility-penalties-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-expenditure-ratio-multi-person-households",
+      "key": "food-expenditure-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-expenditure-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-expenditure-total",
+      "key": "food-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-manufacturing-employees",
+      "key": "food-manufacturing-employees",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-manufacturing-employees",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-manufacturing-establishments",
+      "key": "food-manufacturing-establishments",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-manufacturing-establishments",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-manufacturing-shipment-amount",
+      "key": "food-manufacturing-shipment-amount",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-manufacturing-shipment-amount",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-retail-store-count-per-1000",
+      "key": "food-retail-store-count-per-1000",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-retail-store-count-per-1000",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-sanitation-inspection",
+      "key": "food-sanitation-inspection",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-sanitation-inspection",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/food-self-sufficiency-rate-calorie",
+      "key": "food-self-sufficiency-rate-calorie",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/food-self-sufficiency-rate-calorie",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-employing-establishment-count",
+      "key": "foreign-employing-establishment-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-employing-establishment-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count",
+      "key": "foreign-resident-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-china",
+      "key": "foreign-resident-count-china",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-china",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-china-per-100k",
+      "key": "foreign-resident-count-china-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-china-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-korea",
+      "key": "foreign-resident-count-korea",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-korea",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-korea-per-100k",
+      "key": "foreign-resident-count-korea-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-korea-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-per-100k",
+      "key": "foreign-resident-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-usa",
+      "key": "foreign-resident-count-usa",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-usa",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-count-usa-per-100k",
+      "key": "foreign-resident-count-usa-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-count-usa-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-resident-population",
+      "key": "foreign-resident-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-resident-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foreign-worker-count",
+      "key": "foreign-worker-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foreign-worker-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forest-area",
+      "key": "forest-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forest-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forest-area-ratio",
+      "key": "forest-area-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forest-area-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forest-road-length",
+      "key": "forest-road-length",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forest-road-length",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-hired-workers",
+      "key": "forestry-hired-workers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-hired-workers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-internal-workers",
+      "key": "forestry-internal-workers",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-internal-workers",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-management-entities",
+      "key": "forestry-management-entities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-management-entities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-mushroom-output-value",
+      "key": "forestry-mushroom-output-value",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-mushroom-output-value",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-output-value",
+      "key": "forestry-output-value",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-output-value",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/forestry-timber-output-value",
+      "key": "forestry-timber-output-value",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/forestry-timber-output-value",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/foundation-consumption-expenditure",
+      "key": "foundation-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/foundation-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/freelance-count",
+      "key": "freelance-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/freelance-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/frequency-of-occupational-accidents",
+      "key": "frequency-of-occupational-accidents",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/frequency-of-occupational-accidents",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-fruit-consumption-quantity",
+      "key": "fresh-fruit-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-fruit-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-seafood-consumption-quantity",
+      "key": "fresh-seafood-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-seafood-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-shiitake-consumption-expenditure",
+      "key": "fresh-shiitake-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-shiitake-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-shiitake-consumption-quantity",
+      "key": "fresh-shiitake-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-shiitake-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-udon-soba-consumption-expenditure",
+      "key": "fresh-udon-soba-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-udon-soba-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-udon-soba-consumption-quantity",
+      "key": "fresh-udon-soba-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-udon-soba-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-vegetables-consumption-expenditure",
+      "key": "fresh-vegetables-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-vegetables-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fresh-vegetables-consumption-quantity",
+      "key": "fresh-vegetables-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fresh-vegetables-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/freshwater-clam-consumption-expenditure",
+      "key": "freshwater-clam-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/freshwater-clam-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/freshwater-clam-consumption-quantity",
+      "key": "freshwater-clam-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/freshwater-clam-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fried-tofu-consumption-expenditure",
+      "key": "fried-tofu-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fried-tofu-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/frozen-food-consumption-expenditure",
+      "key": "frozen-food-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/frozen-food-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fruit-vegetable-juice-consumption-expenditure",
+      "key": "fruit-vegetable-juice-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fruit-vegetable-juice-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fulfillment-rate",
+      "key": "fulfillment-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fulfillment-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/fulltime-physicians-general-hospital-per-100beds",
+      "key": "fulltime-physicians-general-hospital-per-100beds",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/fulltime-physicians-general-hospital-per-100beds",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/funeral-expense-consumption-expenditure",
+      "key": "funeral-expense-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/funeral-expense-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furikake-consumption-expenditure",
+      "key": "furikake-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furikake-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furniture-household-expenditure-total",
+      "key": "furniture-household-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furniture-household-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
+      "key": "furniture-household-goods-expenditure-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furniture-household-service-consumption-expenditure",
+      "key": "furniture-household-service-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furniture-household-service-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-donation-amount-prefecture",
+      "key": "furusato-donation-amount-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-donation-amount-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-donation-count-prefecture",
+      "key": "furusato-donation-count-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-donation-count-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-fundraising-cost-prefecture",
+      "key": "furusato-fundraising-cost-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-fundraising-cost-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-return-gift-procurement-cost-prefecture",
+      "key": "furusato-return-gift-procurement-cost-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-return-gift-procurement-cost-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-return-gift-shipping-cost-prefecture",
+      "key": "furusato-return-gift-shipping-cost-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-return-gift-shipping-cost-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-tax-deduction-municipal-prefecture",
+      "key": "furusato-tax-deduction-municipal-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-tax-deduction-municipal-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/furusato-tax-deduction-prefectural-prefecture",
+      "key": "furusato-tax-deduction-prefectural-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/furusato-tax-deduction-prefectural-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/futon-consumption-expenditure",
+      "key": "futon-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/futon-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/futon-consumption-quantity",
+      "key": "futon-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/futon-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/future-burden-ratio",
+      "key": "future-burden-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/future-burden-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/future-population",
+      "key": "future-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/future-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/future-population-change-rate-2050",
+      "key": "future-population-change-rate-2050",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/future-population-change-rate-2050",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/game-console-consumption-expenditure",
+      "key": "game-console-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/game-console-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/game-console-consumption-quantity",
+      "key": "game-console-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/game-console-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/game-software-consumption-expenditure",
+      "key": "game-software-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/game-software-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garbage-collection-population",
+      "key": "garbage-collection-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garbage-collection-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garbage-final-disposal",
+      "key": "garbage-final-disposal",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garbage-final-disposal",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garbage-landfill-rate",
+      "key": "garbage-landfill-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garbage-landfill-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garbage-total-output",
+      "key": "garbage-total-output",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garbage-total-output",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garden-maintenance-consumption-expenditure",
+      "key": "garden-maintenance-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garden-maintenance-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/garden-plants-consumption-expenditure",
+      "key": "garden-plants-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/garden-plants-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gardening-supplies-consumption-expenditure",
+      "key": "gardening-supplies-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gardening-supplies-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gas-consumption-expenditure",
+      "key": "gas-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gas-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gas-cooking-appliance-consumption-expenditure",
+      "key": "gas-cooking-appliance-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gas-cooking-appliance-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gas-station-count-per-100km",
+      "key": "gas-station-count-per-100km",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gas-station-count-per-100km",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gasoline-consumption-expenditure",
+      "key": "gasoline-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gasoline-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gasoline-consumption-quantity",
+      "key": "gasoline-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gasoline-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gasoline-sales-volume",
+      "key": "gasoline-sales-volume",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gasoline-sales-volume",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gdp-growth-rate-pref-h17",
+      "key": "gdp-growth-rate-pref-h17",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gdp-growth-rate-pref-h17",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gdp-growth-rate-pref-h23",
+      "key": "gdp-growth-rate-pref-h23",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gdp-growth-rate-pref-h23",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/gender-wage-gap",
+      "key": "gender-wage-gap",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/gender-wage-gap",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-affairs-expenses-prefecture",
+      "key": "general-affairs-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-affairs-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-clinic-count",
+      "key": "general-clinic-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-clinic-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-clinic-count-per-100k",
+      "key": "general-clinic-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-clinic-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-clinic-count-per-100km2",
+      "key": "general-clinic-count-per-100km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-clinic-count-per-100km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-dust-emission-facility-count",
+      "key": "general-dust-emission-facility-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-dust-emission-facility-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-funds-prefecture",
+      "key": "general-funds-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-funds-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-avg-length-of-stay",
+      "key": "general-hospital-avg-length-of-stay",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-avg-length-of-stay",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-bed-count",
+      "key": "general-hospital-bed-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-bed-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-bed-count-per-100k",
+      "key": "general-hospital-bed-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-bed-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-bed-occupancy-rate",
+      "key": "general-hospital-bed-occupancy-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-bed-occupancy-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-count",
+      "key": "general-hospital-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-count-per-100k",
+      "key": "general-hospital-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-hospital-count-per-100km2",
+      "key": "general-hospital-count-per-100km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-hospital-count-per-100km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-households",
+      "key": "general-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-perinatal-center-count",
+      "key": "general-perinatal-center-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-perinatal-center-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-project-investment-agriculture-forestry-fisheries",
+      "key": "general-project-investment-agriculture-forestry-fisheries",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-agriculture-forestry-fisheries",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-project-investment-disaster-recovery",
+      "key": "general-project-investment-disaster-recovery",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-disaster-recovery",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-project-investment-educational-facilities",
+      "key": "general-project-investment-educational-facilities",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-educational-facilities",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-project-investment-environmental-sanitation",
+      "key": "general-project-investment-environmental-sanitation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-environmental-sanitation",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/general-project-investment-erosion-flood-control",
+      "key": "general-project-investment-erosion-flood-control",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-erosion-flood-control",
+      "priority": 100,
+      "status": "input-pending"
+    }
+  ]
+}

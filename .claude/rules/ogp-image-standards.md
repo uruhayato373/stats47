@@ -63,6 +63,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 
 ### 全件更新・再開の正典
 - マガジンのコピー/プロンプト: `apps/web/scripts/data/link-card-design.ts`。制作・公開状態: `data/ogp/link-card-rollout.json`。
+  サイトの全件記録は同directoryの`link-card-sites-NNN.json`へ500件ずつ分割する。共通の`link-card-ledger.mjs`で読み書きし、公開SHA・manifest指紋・run URLを省略せず、各ファイルを1MiB以内に保つ。
 - 制作CLI: `.claude/scripts/ogp/link-card-production.ts` の sync → export → ingest → review → 公開 → verify-live → confirm-live。
   生成済みは再生成しない。元画像・実際の入力/参照画像・完成版・目視記録をprivate R2へimmutableに保存してread-back照合する。
   公開は `update-note-branding.mjs --reviewed-covers --keys ... --commit`。account・公開URL・採用SHAを照合し、名前と説明を維持する。
@@ -74,7 +75,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
   画像更新workflowは `type=blog, external_only=true`。通常のブログ生成も同じ外部rendererを使う。
 - 判定: 全件の生成・配信SHAと文字サイズ、各種別/最長見出しの原寸・220×150・150正方形の目視結果を区別して記録する。
   サイトの共通テンプレート変更は代表と例外を目視し、機械の全件照合を人の全件目視と呼ばない。
-- noteの既存カード画像: 全画像の公開SHA照合後に `repair-note-cards-native.mjs --refresh-external-images --all --commit`。同じURLのカードを正規APIで再登録し、本文は登録キーだけ差し替える。価格・有料境界・タグ・下書きを既存publish guardで保持し、公開カードを再検査する。台帳は `note-card-image-refresh.json`、再開状態は `.local/note-card-image-refresh-journal.json`。
+- noteの既存カード画像: 全画像の公開SHA照合と本番metadata検証後に `repair-note-cards-native.mjs --refresh-external-images --all --commit`。noteは同じURLの再登録でも旧OGPを返す（2026-10-26実測）。所有する外部カードのURLに画像版`s47_ogp`を付け、取得画像を採用版と照合してから登録キーを差し替える。本文の文章・リンク先ページ・既存UTM・価格・有料境界・タグ・下書きを保持する。台帳の`siteMetadataVerification`には実配信HTML検査のversion/passed/failedを記録し、未検証や不一致では停止する。台帳は `note-card-image-refresh.json`、再開状態は `.local/note-card-image-refresh-journal.json`。
 
 ## 1. 画像資産カタログ (全種別)
 

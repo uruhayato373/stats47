@@ -1,0 +1,2447 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "site:/ranking/university-graduates-job-ratio",
+      "key": "university-graduates-job-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/university-graduates-job-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/university-new-graduates-unemployment-rate",
+      "key": "university-new-graduates-unemployment-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/university-new-graduates-unemployment-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/university-professor-annual-income",
+      "key": "university-professor-annual-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/university-professor-annual-income",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-female-25-29",
+      "key": "unmarried-ratio-female-25-29",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-female-25-29",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-female-30-34",
+      "key": "unmarried-ratio-female-30-34",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-female-30-34",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-female-35-39",
+      "key": "unmarried-ratio-female-35-39",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-female-35-39",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-female-40-44",
+      "key": "unmarried-ratio-female-40-44",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-female-40-44",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-female-45-49",
+      "key": "unmarried-ratio-female-45-49",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-female-45-49",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-male-25-29",
+      "key": "unmarried-ratio-male-25-29",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-male-25-29",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-male-30-34",
+      "key": "unmarried-ratio-male-30-34",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-male-30-34",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-male-35-39",
+      "key": "unmarried-ratio-male-35-39",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-male-35-39",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-male-40-44",
+      "key": "unmarried-ratio-male-40-44",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-male-40-44",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/unmarried-ratio-male-45-49",
+      "key": "unmarried-ratio-male-45-49",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/unmarried-ratio-male-45-49",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-park-area-per-person",
+      "key": "urban-park-area-per-person",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-park-area-per-person",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-park-count-per-100km2",
+      "key": "urban-park-count-per-100km2",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-park-count-per-100km2",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-parks",
+      "key": "urban-parks",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-parks",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-parks-area",
+      "key": "urban-parks-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-parks-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-planning-area",
+      "key": "urban-planning-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-planning-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urban-planning-expenses-prefecture",
+      "key": "urban-planning-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urban-planning-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/urbanization-control-area-ratio",
+      "key": "urbanization-control-area-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/urbanization-control-area-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/usage-fees-prefecture",
+      "key": "usage-fees-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/usage-fees-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/utilities-expenditure-ratio-multi-person-households",
+      "key": "utilities-expenditure-ratio-multi-person-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/utilities-expenditure-ratio-multi-person-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/utilities-expenditure-total",
+      "key": "utilities-expenditure-total",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/utilities-expenditure-total",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-excluding-rental-sale-secondary",
+      "key": "vacant-housing-excluding-rental-sale-secondary",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-excluding-rental-sale-secondary",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-for-rent",
+      "key": "vacant-housing-for-rent",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-for-rent",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-for-sale",
+      "key": "vacant-housing-for-sale",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-for-sale",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-rate",
+      "key": "vacant-housing-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-ratio",
+      "key": "vacant-housing-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacant-housing-secondary-residences",
+      "key": "vacant-housing-secondary-residences",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacant-housing-secondary-residences",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vaccination-recipients-disease",
+      "key": "vaccination-recipients-disease",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vaccination-recipients-disease",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacuum-cleaner-consumption-expenditure",
+      "key": "vacuum-cleaner-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacuum-cleaner-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vacuum-cleaner-consumption-quantity",
+      "key": "vacuum-cleaner-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vacuum-cleaner-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vegetable-cultivation-area",
+      "key": "vegetable-cultivation-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vegetable-cultivation-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vegetable-intake-female-age-adjusted",
+      "key": "vegetable-intake-female-age-adjusted",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vegetable-intake-female-age-adjusted",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vegetable-intake-male-age-adjusted",
+      "key": "vegetable-intake-male-age-adjusted",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vegetable-intake-male-age-adjusted",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vegetable-seaweed-tsukudani-consumption-expenditure",
+      "key": "vegetable-seaweed-tsukudani-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vegetable-seaweed-tsukudani-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vehicle-kilometers-traveled",
+      "key": "vehicle-kilometers-traveled",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vehicle-kilometers-traveled",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vet-fee-consumption-expenditure",
+      "key": "vet-fee-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vet-fee-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/video-recorder-consumption-expenditure",
+      "key": "video-recorder-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/video-recorder-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/video-recorder-consumption-quantity",
+      "key": "video-recorder-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/video-recorder-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vinegar-consumption-expenditure",
+      "key": "vinegar-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vinegar-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vinegar-consumption-quantity",
+      "key": "vinegar-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vinegar-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/violent-crime-per-100k",
+      "key": "violent-crime-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/violent-crime-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vocational-school-consumption-expenditure",
+      "key": "vocational-school-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vocational-school-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/vocational-training-expenses-prefecture",
+      "key": "vocational-training-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/vocational-training-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "key": "voluntary-car-insurance-rate-bodily-injury",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voluntary-car-insurance-rate-property",
+      "key": "voluntary-car-insurance-rate-property",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voluntary-car-insurance-rate-property",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voluntary-car-insurance-rate-vehicle",
+      "key": "voluntary-car-insurance-rate-vehicle",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voluntary-car-insurance-rate-vehicle",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/volunteer-activity-annual-participation-rate-10plus",
+      "key": "volunteer-activity-annual-participation-rate-10plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/volunteer-activity-annual-participation-rate-10plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/volunteer-activity-annual-participation-rate-15plus",
+      "key": "volunteer-activity-annual-participation-rate-15plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/volunteer-activity-annual-participation-rate-15plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-list-registrants",
+      "key": "voter-list-registrants",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-list-registrants",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-city-assembly",
+      "key": "voter-turnout-city-assembly",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-city-assembly",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-council-district",
+      "key": "voter-turnout-council-district",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-council-district",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-council-proportional",
+      "key": "voter-turnout-council-proportional",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-council-proportional",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-governor",
+      "key": "voter-turnout-governor",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-governor",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-house-proportional",
+      "key": "voter-turnout-house-proportional",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-house-proportional",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-house-single",
+      "key": "voter-turnout-house-single",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-house-single",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-mayor",
+      "key": "voter-turnout-mayor",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-mayor",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/voter-turnout-pref-assembly",
+      "key": "voter-turnout-pref-assembly",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/voter-turnout-pref-assembly",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wakame-consumption-expenditure",
+      "key": "wakame-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wakame-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wakame-consumption-quantity",
+      "key": "wakame-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wakame-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/washing-machine-consumption-expenditure",
+      "key": "washing-machine-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/washing-machine-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/washing-machine-consumption-quantity",
+      "key": "washing-machine-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/washing-machine-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/waste-recycling-rate",
+      "key": "waste-recycling-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/waste-recycling-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-pollution-control-law-facility-count",
+      "key": "water-pollution-control-law-facility-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-pollution-control-law-facility-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-sewer-consumption-expenditure",
+      "key": "water-sewer-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-sewer-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-supply-annual-volume",
+      "key": "water-supply-annual-volume",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-supply-annual-volume",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-supply-capacity",
+      "key": "water-supply-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-supply-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-supply-population",
+      "key": "water-supply-population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-supply-population",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-supply-population-ratio-2012on",
+      "key": "water-supply-population-ratio-2012on",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-supply-population-ratio-2012on",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/water-supply-population-ratio-pre2011",
+      "key": "water-supply-population-ratio-pre2011",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/water-supply-population-ratio-pre2011",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/watermelon-consumption-expenditure",
+      "key": "watermelon-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/watermelon-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/watermelon-consumption-quantity",
+      "key": "watermelon-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/watermelon-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wedding-expense-consumption-expenditure",
+      "key": "wedding-expense-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wedding-expense-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-commissioner-consultations-per-person",
+      "key": "welfare-commissioner-consultations-per-person",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-commissioner-consultations-per-person",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-commissioner-count-per-100k",
+      "key": "welfare-commissioner-count-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-commissioner-count-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-expenditure",
+      "key": "welfare-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-expenditure-ratio-pref-finance",
+      "key": "welfare-expenditure-ratio-pref-finance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-expenditure-ratio-pref-finance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-expense-municipal",
+      "key": "welfare-expense-municipal",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-expense-municipal",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-expenses-prefecture",
+      "key": "welfare-expenses-prefecture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-expenses-prefecture",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "key": "welfare-facilities-count-per-100k-on-assistance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-facilities-count-per-100k-on-assistance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-facility-staff-per-1000-on-assistance",
+      "key": "welfare-facility-staff-per-1000-on-assistance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-facility-staff-per-1000-on-assistance",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-office-intellectual-disability-consultations",
+      "key": "welfare-office-intellectual-disability-consultations",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-office-intellectual-disability-consultations",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-office-intellectual-disability-consultations-per-100k",
+      "key": "welfare-office-intellectual-disability-consultations-per-100k",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-office-intellectual-disability-consultations-per-100k",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/welfare-office-public-assistance-applications-per-1000-households",
+      "key": "welfare-office-public-assistance-applications-per-1000-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/welfare-office-public-assistance-applications-per-1000-households",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/western-food-dining-consumption-expenditure",
+      "key": "western-food-dining-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/western-food-dining-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wheat-flour-consumption-expenditure",
+      "key": "wheat-flour-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wheat-flour-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wheat-flour-consumption-quantity",
+      "key": "wheat-flour-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wheat-flour-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/whisky-consumption-expenditure",
+      "key": "whisky-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/whisky-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/whisky-consumption-quantity",
+      "key": "whisky-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/whisky-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/white-bread-consumption-expenditure",
+      "key": "white-bread-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/white-bread-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/white-bread-consumption-quantity",
+      "key": "white-bread-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/white-bread-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/whitebait-consumption-expenditure",
+      "key": "whitebait-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/whitebait-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/whitebait-consumption-quantity",
+      "key": "whitebait-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/whitebait-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wholesale-annual-sales-amount",
+      "key": "wholesale-annual-sales-amount",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wholesale-annual-sales-amount",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/widowed-ratio-female-60plus",
+      "key": "widowed-ratio-female-60plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/widowed-ratio-female-60plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/widowed-ratio-male-60plus",
+      "key": "widowed-ratio-male-60plus",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/widowed-ratio-male-60plus",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wind-power-capacity",
+      "key": "wind-power-capacity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wind-power-capacity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wind-power-turbine-count",
+      "key": "wind-power-turbine-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wind-power-turbine-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wine-consumption-expenditure",
+      "key": "wine-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wine-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wine-consumption-quantity",
+      "key": "wine-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wine-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-clothing-consumption-expenditure",
+      "key": "womens-clothing-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-clothing-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-coat-consumption-expenditure",
+      "key": "womens-coat-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-coat-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-coat-consumption-quantity",
+      "key": "womens-coat-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-coat-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-dress-consumption-expenditure",
+      "key": "womens-dress-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-dress-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-dress-consumption-quantity",
+      "key": "womens-dress-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-dress-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-foundation-garment-consumption-expenditure",
+      "key": "womens-foundation-garment-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-foundation-garment-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-jacket-consumption-expenditure",
+      "key": "womens-jacket-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-jacket-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-jacket-consumption-quantity",
+      "key": "womens-jacket-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-jacket-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-pants-consumption-expenditure",
+      "key": "womens-pants-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-pants-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-pants-consumption-quantity",
+      "key": "womens-pants-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-pants-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-shoes-consumption-expenditure",
+      "key": "womens-shoes-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-shoes-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-shoes-consumption-quantity",
+      "key": "womens-shoes-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-shoes-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-sleepwear-consumption-expenditure",
+      "key": "womens-sleepwear-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-sleepwear-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-socks-consumption-expenditure",
+      "key": "womens-socks-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-socks-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-socks-consumption-quantity",
+      "key": "womens-socks-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-socks-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-stockings-consumption-expenditure",
+      "key": "womens-stockings-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-stockings-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-stockings-consumption-quantity",
+      "key": "womens-stockings-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-stockings-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-sweater-consumption-expenditure",
+      "key": "womens-sweater-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-sweater-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/womens-sweater-consumption-quantity",
+      "key": "womens-sweater-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/womens-sweater-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wooden-housing-ratio",
+      "key": "wooden-housing-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wooden-housing-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/woodland-area",
+      "key": "woodland-area",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/woodland-area",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/work-accident-severity",
+      "key": "work-accident-severity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/work-accident-severity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/work-avg-time-employed-female",
+      "key": "work-avg-time-employed-female",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/work-avg-time-employed-female",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/work-avg-time-employed-male",
+      "key": "work-avg-time-employed-male",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/work-avg-time-employed-male",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/workers-agriculture-forestry-fishery",
+      "key": "workers-agriculture-forestry-fishery",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/workers-agriculture-forestry-fishery",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/workers-compensation-insurance-benefits-rate",
+      "key": "workers-compensation-insurance-benefits-rate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/workers-compensation-insurance-benefits-rate",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/wristwatch-consumption-expenditure",
+      "key": "wristwatch-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/wristwatch-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/writing-drawing-tools-consumption-expenditure",
+      "key": "writing-drawing-tools-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/writing-drawing-tools-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yakiniku-consumption-expenditure",
+      "key": "yakiniku-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yakiniku-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yakitori-consumption-expenditure",
+      "key": "yakitori-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yakitori-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yellowtail-consumption-expenditure",
+      "key": "yellowtail-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yellowtail-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yellowtail-consumption-quantity",
+      "key": "yellowtail-consumption-quantity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yellowtail-consumption-quantity",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yogurt-consumption-expenditure",
+      "key": "yogurt-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yogurt-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/yokan-consumption-expenditure",
+      "key": "yokan-consumption-expenditure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/yokan-consumption-expenditure",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/young-population-index",
+      "key": "young-population-index",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/young-population-index",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/young-population-ratio",
+      "key": "young-population-ratio",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/young-population-ratio",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/youth-class-lecture-count-per-million",
+      "key": "youth-class-lecture-count-per-million",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/youth-class-lecture-count-per-million",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/youth-education-facility-count-per-million",
+      "key": "youth-education-facility-count-per-million",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/youth-education-facility-count-per-million",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/ranking/zoo-count",
+      "key": "zoo-count",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/ranking/zoo-count",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/themes/aging-society",
+      "key": "aging-society",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/aging-society",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/aging-society/ogp/generation.json",
+        "fingerprint": "ba9dd9b3262e78e6791cfdaf161cfe5f2564cb5f4fb49848b28ff5d1f1f0f1df",
+        "manifestSha256": "6d6e93d84bbc6c2cfaa907311f529addf746ed58417ccb64a02a434bc8ad5bd5",
+        "imageKey": "app/themes/aging-society/ogp/ogp.png",
+        "sha256": "8771430ab819dc62d9f2fa2b0e5bd895c7202d08f84f05f274ae0d7c529bd41e",
+        "url": "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:50.459Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/agriculture-production",
+      "key": "agriculture-production",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/agriculture-production",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/agriculture-production/ogp/generation.json",
+        "fingerprint": "8d928247ca13486b5d6f02b4e4f581e0f2e93bb6cd7de53655fbec16e7b9cd14",
+        "manifestSha256": "f137d2cfa9fad45c2ecf8766f1237e739e3a84e2b4e9f845a3bebfaed80ee3ba",
+        "imageKey": "app/themes/agriculture-production/ogp/ogp.png",
+        "sha256": "07a374e8cc80e776ada4a03d5faa5fb7d855056febea17176bf5ed63ea12406d",
+        "url": "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:50.601Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/business-demography",
+      "key": "business-demography",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/business-demography",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/business-demography/ogp/generation.json",
+        "fingerprint": "4f42e98dec3bd83daa0280c959f08dc72172ae5bd008ce5c4e0c84b580446330",
+        "manifestSha256": "338581aa12912b33474e973656d161345097b30e37a5ebc842edcd5e84c00c53",
+        "imageKey": "app/themes/business-demography/ogp/ogp.png",
+        "sha256": "019423b10e61c8f31df23c01e574e12a697b5476fad6cb00ecc873b4b1a01dc4",
+        "url": "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:50.093Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/childcare-services",
+      "key": "childcare-services",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/childcare-services",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/childcare-services/ogp/generation.json",
+        "fingerprint": "17c05f763cf46e021044feee82e3159c08220390c8e370e073cee24bbb2820e8",
+        "manifestSha256": "6ab536fdc1742afc2b1b5fd7310e55f1e6c5460aa7aeb021d47b23354480e7df",
+        "imageKey": "app/themes/childcare-services/ogp/ogp.png",
+        "sha256": "0e541359758907000dadafed87e1f4048d397acbe1b4083f43b68066ef8c8280",
+        "url": "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:51.530Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/climate",
+      "key": "climate",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/climate",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/climate/ogp/generation.json",
+        "fingerprint": "dfc914311f0e89e55abb95b30cfdd4394686d6697d771c4ae10e17354f1e6038",
+        "manifestSha256": "f537ad949556d78e802aa65469660fb240c4551da0033c89b2e573319b73657d",
+        "imageKey": "app/themes/climate/ogp/ogp.png",
+        "sha256": "4a420bdb6a307a3c02a5d66a6dcfb344eb18b71c9b09c426d0aba30ef481a1c5",
+        "url": "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:50.619Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/communication-access",
+      "key": "communication-access",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/communication-access",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/communication-access/ogp/generation.json",
+        "fingerprint": "ac7e09b3f2ed07acbc5b00b868fead4b574b023dce6c764ddf9cb12c51e5da9b",
+        "manifestSha256": "f69bc20c5e1a203d9709cac5411b97b0c4e8219471f643162be0addbf69420bd",
+        "imageKey": "app/themes/communication-access/ogp/ogp.png",
+        "sha256": "61d81c5ebbd86784f655083ff7f2b409dbfb7e9402cb9e14be0ccf09f40b4381",
+        "url": "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:50.251Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/community-participation",
+      "key": "community-participation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/community-participation",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/community-participation/ogp/generation.json",
+        "fingerprint": "24a8badfb36853d3be9f7dc9aa1f034c34d620d8c3aad02156f347263bbb86be",
+        "manifestSha256": "4d6d65a02bf92437d70374071fe880b24480710b6f263ced735ceb91afbb02e3",
+        "imageKey": "app/themes/community-participation/ogp/ogp.png",
+        "sha256": "6c26962e49de53ccb3fa2b656357018e250a8f950e3dc381eddc02b7ab08decd",
+        "url": "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:51.269Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/construction-industry",
+      "key": "construction-industry",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/construction-industry",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/construction-industry/ogp/generation.json",
+        "fingerprint": "19d6525b1243810e8d5770be7e96f8745ce93bc6222ec4dfaeb74aadcc4e88d4",
+        "manifestSha256": "22862bd53a54b82fa1940e44bdfccd496d089ba47de713fb0142b60d1e913231",
+        "imageKey": "app/themes/construction-industry/ogp/ogp.png",
+        "sha256": "e26db9b44123740a68cba51bff73c800f4b62029ee20e450f7a37a0fced2ada0",
+        "url": "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:52.931Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/consumer-prices",
+      "key": "consumer-prices",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/consumer-prices",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/consumer-prices/ogp/generation.json",
+        "fingerprint": "723979e99c46d0ae84e55f34ccc710264440f2eefeb64ce54afaaea837382275",
+        "manifestSha256": "308c9d23efffb16032c8a97815776a120b17a45a993fa0884bc5a511e94a1519",
+        "imageKey": "app/themes/consumer-prices/ogp/ogp.png",
+        "sha256": "bf8c4bf1e68c1482405c676dba47554a6bd21d7e98d48517bf1732feae47bffa",
+        "url": "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:51.637Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/cultural-participation",
+      "key": "cultural-participation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/cultural-participation",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/cultural-participation/ogp/generation.json",
+        "fingerprint": "67fe6ee15430e911ba30cec3b5b7c981648b874089b51bd77dd051db45ddf5dc",
+        "manifestSha256": "4587a3fb1ad00404bd81b1af9862da2d0132b540a7d355190511c4d37e613214",
+        "imageKey": "app/themes/cultural-participation/ogp/ogp.png",
+        "sha256": "08930ed75ab0987d94b7ae08be8348a3e312b74f3635b3062e8b2c3cdbaf7057",
+        "url": "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:51.710Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/daily-time-use",
+      "key": "daily-time-use",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/daily-time-use",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/daily-time-use/ogp/generation.json",
+        "fingerprint": "804d12deb445c0bb0bb6423eb789dd0714aa513342010a2a6620e969a7e9189f",
+        "manifestSha256": "3eef6531decaad07adb326980f606ec12ba34c1ff5a7603761f529c5cab94bfa",
+        "imageKey": "app/themes/daily-time-use/ogp/ogp.png",
+        "sha256": "83dee5012517ede8ca5c35a80415cbd7f7313bd5a0daa1db335176478d077441",
+        "url": "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:51.864Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/disability-support",
+      "key": "disability-support",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/disability-support",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/disability-support/ogp/generation.json",
+        "fingerprint": "6706309346257c0c19438fd538b3182302539d29ca49e1bfac13ef8470d1f769",
+        "manifestSha256": "6d70fcde42bb0b1a51172492e9c2d7f1cd431ed73c603fa4b4deeedba60dcfed",
+        "imageKey": "app/themes/disability-support/ogp/ogp.png",
+        "sha256": "f4b80a470e39b6e5418deeb2d2129ec2573e9cdc214501a72b5eddf615e6d718",
+        "url": "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:52.800Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/earthquake-exposure",
+      "key": "earthquake-exposure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/earthquake-exposure",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/earthquake-exposure/ogp/generation.json",
+        "fingerprint": "2f20830c9895d822d29831e0d1e850c59a2c11212007cd984bb2824ffd317fce",
+        "manifestSha256": "cbbb2d5fae3d6c1de0c3df615a7131194bd1cf07f9da7e05c40fda15a8bbd906",
+        "imageKey": "app/themes/earthquake-exposure/ogp/ogp.png",
+        "sha256": "ebf58a57efd0f66d57247c1f1f8fc835e5c003a80fb5fd6dab0cbc6eeb8ebccf",
+        "url": "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:53.204Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/education-culture",
+      "key": "education-culture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/education-culture",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/education-culture/ogp/generation.json",
+        "fingerprint": "77966cd0d894b938532990df25e4518f18c91f831bf10608f89661816f42bc00",
+        "manifestSha256": "da6c0964d7ae6befe3a616e9e24feba8aec87998e94ca6429b19f12ae65ea0ab",
+        "imageKey": "app/themes/education-culture/ogp/ogp.png",
+        "sha256": "d0819bfa98f209047e4cf08180bc3b6ea6b4bc20a08f8d2e9cf459105c91d762",
+        "url": "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:55.545Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/environmental-quality",
+      "key": "environmental-quality",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/environmental-quality",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/environmental-quality/ogp/generation.json",
+        "fingerprint": "6740e426d4fadc8529de082a37298652004f89601fd1c31e4be125e63c7252ca",
+        "manifestSha256": "52a4ffff619f1c790f838e13581cd042153c8fa15d983d083f3dac4e958e8ba3",
+        "imageKey": "app/themes/environmental-quality/ogp/ogp.png",
+        "sha256": "d6982113d2739525a24c3ed0ce82de155607685f6c80b9c4c6a7189b08709f2c",
+        "url": "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:53.094Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/fishery-marine",
+      "key": "fishery-marine",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/fishery-marine",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/fishery-marine/ogp/generation.json",
+        "fingerprint": "c81559b05c54d9769efec494f9947767990b705b189d989e860d89d4e083a1d3",
+        "manifestSha256": "db0040aa66fcb9a58c72ace185d13693e84f3782f801313612ffe38538a38e6c",
+        "imageKey": "app/themes/fishery-marine/ogp/ogp.png",
+        "sha256": "e4ed075d5e03afe027d0063cb0814f40e430eef5a8a1adbd93fb2f77ebbc264a",
+        "url": "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:53.329Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/foreign-residents",
+      "key": "foreign-residents",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/foreign-residents",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/foreign-residents/ogp/generation.json",
+        "fingerprint": "3b3a28cd990690aafec39f9162a411b0c2040718d17d8903bce0984c3be6e807",
+        "manifestSha256": "2bda80107035db090368a0a3c3c852214af09a6b44534f4d8c7611418be32440",
+        "imageKey": "app/themes/foreign-residents/ogp/ogp.png",
+        "sha256": "21bbbe272eacc46f3eae6613d04085f63528ca079a6943e3d7acc0f6c2077e5b",
+        "url": "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:54.220Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/forestry-timber",
+      "key": "forestry-timber",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/forestry-timber",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/forestry-timber/ogp/generation.json",
+        "fingerprint": "d77e279dfb08fd8dc7fea698858db939a7e4ea03bc29d02a66b7f5a9bb6a051c",
+        "manifestSha256": "1240aad87b7192e6aaa80089f249c5d217544bb915109c61a8aaa2663105e37b",
+        "imageKey": "app/themes/forestry-timber/ogp/ogp.png",
+        "sha256": "c09b65374576bf9f415a0c396a574bd9da7a0769f23d791f7c935b13fd4682f7",
+        "url": "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:54.161Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/freight-logistics",
+      "key": "freight-logistics",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/freight-logistics",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/freight-logistics/ogp/generation.json",
+        "fingerprint": "642fb01b187b3cc4986747df72fce2f0c540eb9c7f4b7f1d4534610e8f658aeb",
+        "manifestSha256": "57fa27bf17913bb7699c31d1a435f303dd9ea97f3c794e45033731ff2ede2bdd",
+        "imageKey": "app/themes/freight-logistics/ogp/ogp.png",
+        "sha256": "5dac03272fa6e30920d604fe7c91edfd768eb20d4b7943eedcc94fc304847c38",
+        "url": "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:54.112Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/gender-participation",
+      "key": "gender-participation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/gender-participation",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/gender-participation/ogp/generation.json",
+        "fingerprint": "bd3d7086ab38bcaf726c392183d59b13d975579065ec68858f1b09c3844b4802",
+        "manifestSha256": "d28f2ee8563438d9d694eb92fde7a26588f45421eaed19fac592d420a26f626b",
+        "imageKey": "app/themes/gender-participation/ogp/ogp.png",
+        "sha256": "679ad6bd679ed203245975c4098bf58b30d0d5cfc43faf021b6a613fcfa09c63",
+        "url": "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:54.380Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/geographic-access",
+      "key": "geographic-access",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/geographic-access",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/geographic-access/ogp/generation.json",
+        "fingerprint": "f0578df87d0ad71da34949c3dbb90c4becea13219e51ee994d0391901b2a4020",
+        "manifestSha256": "a41b7173c4c634d26c47997182d8bed4b3600b4cb438ea9bcf5834fed4e3cda8",
+        "imageKey": "app/themes/geographic-access/ogp/ogp.png",
+        "sha256": "31b8a7b6a49469eb3eb62030b887aec91a30becc019af830bf36725360c8b919",
+        "url": "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:54.454Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/health-checkups",
+      "key": "health-checkups",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/health-checkups",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/health-checkups/ogp/generation.json",
+        "fingerprint": "a2949c70957477cca6d80e4cc1104f6008c5c8b59db29ca3e8f019b4f952a22c",
+        "manifestSha256": "789ea1dbf6558c7b9a8d6b590addeb70e2300ce210db23ba7f0b13cb634b9e83",
+        "imageKey": "app/themes/health-checkups/ogp/ogp.png",
+        "sha256": "40d3d49d3d7bb63b79b4eacdc05f76191581eb584d4d3742ad7261a2a9a56a10",
+        "url": "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:55.522Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/healthcare",
+      "key": "healthcare",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/healthcare",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/healthcare/ogp/generation.json",
+        "fingerprint": "767373b5d642d53a92a4df291e62e00316ac4eb29a3334d9c94019054da7728f",
+        "manifestSha256": "0d722b5460b368c06b252451d9cb22ee2a83a983e51c409ddc6dc58f40d002ec",
+        "imageKey": "app/themes/healthcare/ogp/ogp.png",
+        "sha256": "e58c4d30cbe401776f37889233000b332850eae52421ede9d7a875b0ffe43e70",
+        "url": "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:55.677Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/household-assets-debt",
+      "key": "household-assets-debt",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/household-assets-debt",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/household-assets-debt/ogp/generation.json",
+        "fingerprint": "be9821cda0c67666ee1175b9d7b55dbd106c4bd17c0684f7970921c25ec01cf0",
+        "manifestSha256": "418dbc490a197f2b8a085890b7baea5dd4095e54f84b5e754000ff580e26a593",
+        "imageKey": "app/themes/household-assets-debt/ogp/ogp.png",
+        "sha256": "19a070a056ff03d59f2c5625daaba7333bb884997e2d9ed5f73959acc0c23f6a",
+        "url": "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:55.410Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/household-food-spending",
+      "key": "household-food-spending",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/household-food-spending",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/household-food-spending/ogp/generation.json",
+        "fingerprint": "5c59219e8a7df727839e3b6e31c97de9ed64bdb69cda84bae0a1fe12d59a7f62",
+        "manifestSha256": "15393e48624934f4c714448b0487bfb937ed5515133dff09c73e54092bb34bbd",
+        "imageKey": "app/themes/household-food-spending/ogp/ogp.png",
+        "sha256": "0241f38ce69054ee6c6567caceb0a6fd08901a354df52025464a76289dc80bb5",
+        "url": "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:58.905Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/information-industry",
+      "key": "information-industry",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/information-industry",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/information-industry/ogp/generation.json",
+        "fingerprint": "73c3b1ee7d32d8cce1940d72edb95b88d74d91a70ec54d655519bff5177e745f",
+        "manifestSha256": "2abd3a0e9982c10b0d318e289cb9148c46a11b1688247ebd0772ac61ca610724",
+        "imageKey": "app/themes/information-industry/ogp/ogp.png",
+        "sha256": "b1398ea2a951d057cb59c5e7fa0dfb69b1cf4db79d6d795579388936a2877b20",
+        "url": "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:56.760Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/innovation-patents",
+      "key": "innovation-patents",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/innovation-patents",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/innovation-patents/ogp/generation.json",
+        "fingerprint": "810b9ae5ecf2b8a4a1a3da355a4f97e8495349e2645f7c3c1a87e5b314c49325",
+        "manifestSha256": "6bda9338a6e15c0a0ff35963a2446b74444b9ab6ae36d19c8838d06abd3cbd0d",
+        "imageKey": "app/themes/innovation-patents/ogp/ogp.png",
+        "sha256": "4da98c66cf7e3b24e3c3c824e8c0feaa6fca8b04ed6dc769a21017adbd1cd137",
+        "url": "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:56.614Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/labor-mobility",
+      "key": "labor-mobility",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/labor-mobility",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/labor-mobility/ogp/generation.json",
+        "fingerprint": "6903332fc73ba2feeee25d2d9a082b46922a680004c3b95e25ea0d3e66ed32f9",
+        "manifestSha256": "c744112e34fbeeb06d764f343d8f2e8a856c25a81ee14519f45560b3584f1459",
+        "imageKey": "app/themes/labor-mobility/ogp/ogp.png",
+        "sha256": "053d6a22b2c80b36a524d719ada416b866aefd8bfdb54e594686ca9045b85d73",
+        "url": "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:56.485Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/labor-wages",
+      "key": "labor-wages",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/labor-wages",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/labor-wages/ogp/generation.json",
+        "fingerprint": "754283db7b2a1180a2c9743c246f880c9ec741538a09440d5411a15833dd1ff0",
+        "manifestSha256": "a0de6a992fb6213d7c74956e3074eb84220502d6495799e4b8f96ce928e94f67",
+        "imageKey": "app/themes/labor-wages/ogp/ogp.png",
+        "sha256": "a6e373d3903493e0fa1106cbeffc2feb4910cfab4961e38b7b198fc268886e4c",
+        "url": "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:13.672Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/land-property-market",
+      "key": "land-property-market",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/land-property-market",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/land-property-market/ogp/generation.json",
+        "fingerprint": "6115dc8f06be330e403be16409bf87f2c35456f07de45d50d7316cd1414599b1",
+        "manifestSha256": "f95f8cc26756d3914caed206d05aa7e7d1e227f59bb2f97a4cbf652439edcdbb",
+        "imageKey": "app/themes/land-property-market/ogp/ogp.png",
+        "sha256": "8d0eacdc7ac3f618b65447eb150b5931475d34fa9f7c58a94c773948e77ced03",
+        "url": "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:57.371Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/landslide-exposure",
+      "key": "landslide-exposure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/landslide-exposure",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/landslide-exposure/ogp/generation.json",
+        "fingerprint": "058437d57694758ca908d239d8855f3d628933e6c9120fe3e61c1c3b9f3861a4",
+        "manifestSha256": "e55c258dcfdc23882fcb18f51309985ccbc5902026bbad2602bdff22d5e81a95",
+        "imageKey": "app/themes/landslide-exposure/ogp/ogp.png",
+        "sha256": "7ad6faa18a0124cfcbbf1a7c40aad2fee299570544c8d1a0ec31786c534524a3",
+        "url": "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:57.906Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/living-housing",
+      "key": "living-housing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/living-housing",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/living-housing/ogp/generation.json",
+        "fingerprint": "499d2582365d94d16d20ade0b944212c32a81031b11c0b26c9f657d48a0783d6",
+        "manifestSha256": "2b26cf2605363c0bc562ffed53e1e6de5b0f1ba527eb352cd9823e61d241be93",
+        "imageKey": "app/themes/living-housing/ogp/ogp.png",
+        "sha256": "196ed66d334c3c93bc718853d66b20bb3081e8fbf93f4cb579011abf64ac9e56",
+        "url": "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:57.924Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/local-economy",
+      "key": "local-economy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/local-economy",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/local-economy/ogp/generation.json",
+        "fingerprint": "ec4129991001991c39d380491b0b76be2e24d8560e3bf50a9e3e9bc4d0b8a3b7",
+        "manifestSha256": "d3e5be06f4b8537e005073b585df3162ad93d0896c343eac73258080e488082e",
+        "imageKey": "app/themes/local-economy/ogp/ogp.png",
+        "sha256": "356358b6a0ce8eec82ce7a1ea8db2cc7da5772199692a0bb3a8add8da613587f",
+        "url": "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:58.045Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/local-finance",
+      "key": "local-finance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/local-finance",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/local-finance/ogp/generation.json",
+        "fingerprint": "22dda9b5b2c191b3dbc660e4670300b165aaf0f7676c2b3911aa69a2a5b4e7c4",
+        "manifestSha256": "a41a84e479635f10d09ab5bcb202f2faa02df439b08a808535f9932749fb2b8e",
+        "imageKey": "app/themes/local-finance/ogp/ogp.png",
+        "sha256": "69594c6818c114bdce16b9710253383d0405865ad7ae9cdbf6bcabc5ccc23380",
+        "url": "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:59.664Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/local-government-digital",
+      "key": "local-government-digital",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/local-government-digital",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/local-government-digital/ogp/generation.json",
+        "fingerprint": "7fa7da93bf8be61d65217f4245761e99de33400e3552a46642ff800081ad6c7b",
+        "manifestSha256": "5d52d594f76df45e9ce4898a31701a70cac2022222b9ae772652c0c1ad71e748",
+        "imageKey": "app/themes/local-government-digital/ogp/ogp.png",
+        "sha256": "6847e2be0cff2deb4b69f56a13e01cef291f31fc256a9742d2f6734f8df3f92a",
+        "url": "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:59.039Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/local-services",
+      "key": "local-services",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/local-services",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/local-services/ogp/generation.json",
+        "fingerprint": "93498d44851fb53479235602857532643e12faaded629e185d6dd1e817aa624d",
+        "manifestSha256": "c97abacad36e0c98c237d0e4a99eb97c002a4c5016f9703682dd0f418ff2eca9",
+        "imageKey": "app/themes/local-services/ogp/ogp.png",
+        "sha256": "92fc0b7c890727a94fb07b70eaadaf6f7b019216adbfb066e046daa3d1ac397a",
+        "url": "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:59.388Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/long-term-care",
+      "key": "long-term-care",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/long-term-care",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/long-term-care/ogp/generation.json",
+        "fingerprint": "84bd44d3f9ab3eb2610b96d35f2de91bfaf894274720d35ae12738beeb3641d4",
+        "manifestSha256": "6cc6dc75561574eea157a4c8d332c067d68e4fb339212b2cebfb944f7ea0921b",
+        "imageKey": "app/themes/long-term-care/ogp/ogp.png",
+        "sha256": "edc9ccd872469556bb8cdf7f29cfcedd442d5c029dc9084e24edf700233343e3",
+        "url": "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:59.177Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/manufacturing",
+      "key": "manufacturing",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/manufacturing",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/manufacturing/ogp/generation.json",
+        "fingerprint": "edf4df04974a9a34c2ef077b5de86b4cb709276be4503d19eec957747ba57dd0",
+        "manifestSha256": "bf62acc6f7ed7d2ed987902dd098daf437d1c1c58680b1964391885962279307",
+        "imageKey": "app/themes/manufacturing/ogp/ogp.png",
+        "sha256": "afa9dcd30255fc33a3ad61f28618ce51278950b36caff3570d3fb06779554de1",
+        "url": "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:26:59.957Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/natural-environment",
+      "key": "natural-environment",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/natural-environment",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/natural-environment/ogp/generation.json",
+        "fingerprint": "6706872099dc27359201f75945f89154a766a0ce8775e952c9648adc21fa54e2",
+        "manifestSha256": "7c22e2e09029d7d5295bc93e26db5187613049841da78607c768f4d2e60ab9ab",
+        "imageKey": "app/themes/natural-environment/ogp/ogp.png",
+        "sha256": "36379ef638280d96ba7081357ca8d2b3d40574ffc6fc3c23e3a1be51025eadc8",
+        "url": "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:00.603Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/occupation-salary",
+      "key": "occupation-salary",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/occupation-salary",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/occupation-salary/ogp/generation.json",
+        "fingerprint": "12496fcb2d9d5b4ce52d6ec831ddc62acde8aed2111f0b8f5daeca05e6f45b2b",
+        "manifestSha256": "81dcfc8be8fc49186a5abed49e3171ccd909254e6119a3e603b37ada890149fc",
+        "imageKey": "app/themes/occupation-salary/ogp/ogp.png",
+        "sha256": "d478f6d1b6a8f5115524d1fbc1c978d44e3ac2cb64b4177bca73edd3a1003494",
+        "url": "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:02.419Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/population-dynamics",
+      "key": "population-dynamics",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/population-dynamics",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/population-dynamics/ogp/generation.json",
+        "fingerprint": "4b0daec2c9b429591c48cd26e49f5831ccda416541dc76a6db663124785ea50b",
+        "manifestSha256": "ade777683ecdd8175b91e1818c48d1b80949eeda50b103e8ac1301d775ee4d0f",
+        "imageKey": "app/themes/population-dynamics/ogp/ogp.png",
+        "sha256": "90b545a0d928f7e65ea4e3b54ab9caac842f489c82a3922fed4c22ae4f05b17e",
+        "url": "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:00.483Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/ports",
+      "key": "ports",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/ports",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/ports/ogp/generation.json",
+        "fingerprint": "96a6ebcd162887d91e8068c779132d09ee426df9acdaa6e5677876f70124caa3",
+        "manifestSha256": "b1c3a3f4aeb618708e5d45dc139275a5a2e8075ee489103f03b7d15af3559524",
+        "imageKey": "app/themes/ports/ogp/ogp.png",
+        "sha256": "d9a3f7b724f762bb023961d4ae2098ead0eb208098e61795a593fa1e1d5de48a",
+        "url": "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:00.713Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/public-assistance",
+      "key": "public-assistance",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/public-assistance",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/public-assistance/ogp/generation.json",
+        "fingerprint": "35dddaabf2afcf9a7141da314fc6a400c0feb6495a6be8aed747a8186a8be887",
+        "manifestSha256": "8e8264be41773829992a90bad99149fbbf2f5e0ecc3d411fb9698130938a7f7c",
+        "imageKey": "app/themes/public-assistance/ogp/ogp.png",
+        "sha256": "534d5abdcf975c6f66e56be120db2527c5766c6a2abbff198737a7eb24c25156",
+        "url": "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:00.817Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/railway",
+      "key": "railway",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/railway",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/railway/ogp/generation.json",
+        "fingerprint": "39b2677a32bed0cea4475325147257c745946d622e29f499566b7d1959ca0a99",
+        "manifestSha256": "988d0534023f314165d536b71a0b89ea710923301de4427b8c742356de0b5a35",
+        "imageKey": "app/themes/railway/ogp/ogp.png",
+        "sha256": "8db28247f69cf252689fa27adc83cb70491a528ceae78288e459398718e912a9",
+        "url": "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:01.433Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/real-income",
+      "key": "real-income",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/real-income",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/real-income/ogp/generation.json",
+        "fingerprint": "afc246319ce1fc7621619c451d1deb07b3f24c7e0823a880b7ed6ac766d4d0e0",
+        "manifestSha256": "555f9048c5c7e2cd228ca8f5598a6b702fd570154ab42bc2bb2cf88812e7b3db",
+        "imageKey": "app/themes/real-income/ogp/ogp.png",
+        "sha256": "3744e81464fb402b967b8245b040232fb70dc165c92c25191ceea1be633923a2",
+        "url": "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:02.129Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/regional-energy",
+      "key": "regional-energy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/regional-energy",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/regional-energy/ogp/generation.json",
+        "fingerprint": "4332157a1dc77803619b8f0f257998a413464bd5d1538c8a4bc14852ffad06a9",
+        "manifestSha256": "8e77cba5bd35156b9ad6d8eb14cbf1048c9872b4d8781b2088c9c5cc30b1928c",
+        "imageKey": "app/themes/regional-energy/ogp/ogp.png",
+        "sha256": "a1a501daf019c804f9f46b814e40b200929d11a92aba118e03a683b8a6627ce0",
+        "url": "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:01.927Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/regional-transport",
+      "key": "regional-transport",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/regional-transport",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/regional-transport/ogp/generation.json",
+        "fingerprint": "a3265887cab1a561018d65387747b202d2b4ff891beb305729bbac82018d5867",
+        "manifestSha256": "13c81fdad4a931dd3df589c48e3df7c9dd2542ed16c940d5e1cdf9f4f876bbd9",
+        "imageKey": "app/themes/regional-transport/ogp/ogp.png",
+        "sha256": "34301d8ea20664340d61dadce93b72fda071769a175ff0e39a88e151d3898a61",
+        "url": "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:02.142Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/retail-commerce",
+      "key": "retail-commerce",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/retail-commerce",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/retail-commerce/ogp/generation.json",
+        "fingerprint": "776414f1866fd8ab9f31835b279422fc79e64129823180729992d9599dbb4de1",
+        "manifestSha256": "d341091c97875402a93812b5a3dedc17b7c5694e4d079d89f980446f1382e0a6",
+        "imageKey": "app/themes/retail-commerce/ogp/ogp.png",
+        "sha256": "3731dc95fe08e3542c154e06c8e870b9a148fc3b165981057bef70a27dce75d9",
+        "url": "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:02.489Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/roads",
+      "key": "roads",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/roads",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/roads/ogp/generation.json",
+        "fingerprint": "d09f42647e865b5dc93cbe874ca72b908fbd3dc21b1f6f2c0eb018b5343079b2",
+        "manifestSha256": "454f7323dd2db04ca5cbf72f71197cb27a07f802c1954190afa0067afde9ad43",
+        "imageKey": "app/themes/roads/ogp/ogp.png",
+        "sha256": "4e55d02e41a35d8d2c960d720648483000699e924df2e15b1e1ba89edb596d25",
+        "url": "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:03.337Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/safety",
+      "key": "safety",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/safety",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/safety/ogp/generation.json",
+        "fingerprint": "0abdbe1e9246e5332bdd14d1fe0c45fb1718757726a796f59f373e52b0721b46",
+        "manifestSha256": "2dfb8e1b55b07a00565a85b47f46b8f2403b32b218d99bcddaed531999a6b2df",
+        "imageKey": "app/themes/safety/ogp/ogp.png",
+        "sha256": "b53252dd3d2a09d728626e107e4a7232501a9030cf8af3f00a33ffaf0a2cf1af",
+        "url": "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:03.233Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/single-parent-households",
+      "key": "single-parent-households",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/single-parent-households",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/single-parent-households/ogp/generation.json",
+        "fingerprint": "47b7c238e3f08233f4f5b2e322759b294165feb01cf8dddccd13f974ceb95010",
+        "manifestSha256": "d6d30abeecb010abf9524b9377c341223ccb384ade7d326ff0c66614d9757e67",
+        "imageKey": "app/themes/single-parent-households/ogp/ogp.png",
+        "sha256": "1ee9e6c697497e6f8c3b04eb082acec27daa2ff9e437e91a29c4b0c89040e6cb",
+        "url": "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:03.733Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/sports-participation",
+      "key": "sports-participation",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/sports-participation",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/sports-participation/ogp/generation.json",
+        "fingerprint": "10eeb72009912f618fe6271e3f65d36e70252d62f767ff14c1df453c6516aea5",
+        "manifestSha256": "6d38ccc1061e26fb64c6e93a9aba6d94b5641e8e98dc7f59cd23551a1b183e2f",
+        "imageKey": "app/themes/sports-participation/ogp/ogp.png",
+        "sha256": "fb9503d5f374bb1e2194a2e9e97fc67b16e04bd04ae51c796344ea10cec3e168",
+        "url": "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:03.544Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/tourism",
+      "key": "tourism",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/tourism",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/tourism/ogp/generation.json",
+        "fingerprint": "61e7427fbe6dadd3e9de6306cd37fea7c79b2d88140ff15548892e35bb6b3f7a",
+        "manifestSha256": "d653d35072c418c1c5339425907d4b8df2819917ff04e0eaf88257032c508a7d",
+        "imageKey": "app/themes/tourism/ogp/ogp.png",
+        "sha256": "87f332641961f518f47ecaf4c9824b62954ed1a3b00cd3da9233ec6ed1264d86",
+        "url": "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:03.617Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/tsunami-exposure",
+      "key": "tsunami-exposure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/tsunami-exposure",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/tsunami-exposure/ogp/generation.json",
+        "fingerprint": "92b363b61fd8ea1e0ff19f767e4916008a03e6fa9ca749d054a177eb2b5b6171",
+        "manifestSha256": "9e8b40381eb253928d49558e7b401f43a2fd910946a1a79f02e227ef501a781b",
+        "imageKey": "app/themes/tsunami-exposure/ogp/ogp.png",
+        "sha256": "9cf10115a9629e09316829677d953b11ba2ac7ac9153a65426a39566a7aa1e9c",
+        "url": "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:04.363Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/waste-recycling",
+      "key": "waste-recycling",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/waste-recycling",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/waste-recycling/ogp/generation.json",
+        "fingerprint": "774665f6ccf9c71d07b1ae836232833baa4138d7f4d68d9462caabf3073dba96",
+        "manifestSha256": "4bff9cd759921ee2974da8365af6b615a7a98c77d6efbec48dfa8e278b276759",
+        "imageKey": "app/themes/waste-recycling/ogp/ogp.png",
+        "sha256": "0365662c684b5d7686bf2f7c6fdf68842811140f88b56478a21593a1b8400944",
+        "url": "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:04.967Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/themes/water-services",
+      "key": "water-services",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/themes/water-services",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/themes/water-services/ogp/generation.json",
+        "fingerprint": "f949e173b7ae73adabf0d63d73b0c36d6c4ccf6160e22065ca40fa71d4102a5f",
+        "manifestSha256": "008549e595516e0647e0b654511612bdb322d063b0f4c5b09279c37c8302a520",
+        "imageKey": "app/themes/water-services/ogp/ogp.png",
+        "sha256": "a65b144d13980e56b4ecde1931fc289d673e0301654b9ebfe41096a8353bf461",
+        "url": "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:27:04.447Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330068695"
+      }
+    },
+    {
+      "id": "site:/blog/sewerage-water-supply-gap",
+      "key": "sewerage-water-supply-gap",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/blog/sewerage-water-supply-gap",
+      "priority": 100,
+      "status": "input-pending"
+    },
+    {
+      "id": "site:/category/administrativefinancial",
+      "key": "administrativefinancial",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/administrativefinancial",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/agriculture",
+      "key": "agriculture",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/agriculture",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/commercial",
+      "key": "commercial",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/commercial",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/construction",
+      "key": "construction",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/construction",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/economy",
+      "key": "economy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/economy",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/educationsports",
+      "key": "educationsports",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/educationsports",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/energy",
+      "key": "energy",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/energy",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/ict",
+      "key": "ict",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/ict",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/infrastructure",
+      "key": "infrastructure",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/infrastructure",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/international",
+      "key": "international",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/international",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.778Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/laborwage",
+      "key": "laborwage",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/laborwage",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/landweather",
+      "key": "landweather",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/landweather",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/miningindustry",
+      "key": "miningindustry",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/miningindustry",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/population",
+      "key": "population",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/population",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/safetyenvironment",
+      "key": "safetyenvironment",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/safetyenvironment",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/socialsecurity",
+      "key": "socialsecurity",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/socialsecurity",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    },
+    {
+      "id": "site:/category/tourism",
+      "key": "tourism",
+      "kind": "site-ogp",
+      "pageUrl": "https://stats47.jp/category/tourism",
+      "priority": 100,
+      "status": "published",
+      "sitePublication": {
+        "manifestKey": "app/default/stats47/ogp/generation.json",
+        "fingerprint": "6ed5b5f4cc044a8926c4623fde373d6d8a37d919d3b63c624637ec080c34063d",
+        "manifestSha256": "1622d685f1956e8687d1a5be9e158cd2b1472c2d92227cc3a62414ebe696b1e4",
+        "imageKey": "app/default/stats47/ogp/ogp.png",
+        "sha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+        "url": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png",
+        "verifiedAt": "2026-10-26T13:29:43.779Z",
+        "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40330698305"
+      }
+    }
+  ]
+}

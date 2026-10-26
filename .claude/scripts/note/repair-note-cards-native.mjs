@@ -8,6 +8,8 @@ import { assertAccount, launchContext, pruneProfileCaches } from './lib/note-ses
 import { assertRegisteredCards, cardEntries, noteRequest, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { bodyHash, publishCardBody } from './lib/publish-card-body.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
+import { createCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { readLinkCardLedger } from '../ogp/lib/link-card-ledger.mjs';
 import { datasetDir } from '../../../config/datasets.mjs';
 import { SITE_ORIGIN } from '../lib/site-config.cjs';
 
@@ -16,9 +18,10 @@ const args = process.argv.slice(2);
 const option = (flag, fallback) => args.includes(flag) ? args[args.indexOf(flag) + 1] : fallback;
 const commit = args.includes('--commit');
 const refreshImages = args.includes('--refresh-external-images');
-const rollout = refreshImages ? JSON.parse(readFileSync(resolve(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'), 'utf8')) : null;
+const rollout = refreshImages ? readLinkCardLedger(resolve(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json')) : null;
 if (rollout && rollout.entries.some((entry) => entry.pageUrl && entry.status !== 'published')) throw Error('Finish and verify all card images before refreshing note embeds');
-const imageRevision = rollout ? bodyHash(JSON.stringify(rollout.entries.filter((entry) => entry.pageUrl).map((entry) => [entry.pageUrl, entry.sitePublication?.sha256 ?? entry.publication?.ogImage?.sha256]))) : null;
+const imageRefresh = rollout ? createCardImageRefresh(rollout) : null;
+const imageRevision = imageRefresh?.revision ?? null;
 const imageTargets = new Set(rollout?.entries.filter((entry) => entry.pageUrl).map((entry) => new URL(entry.pageUrl).href) ?? []);
 const slug = option('--slug', null);
 const max = Number(option('--max-articles', args.includes('--all') ? '10000' : '5'));
@@ -78,7 +81,7 @@ try {
       const before = await noteRequest(apiPage, `/api/v3/notes/${key}`);
       if (before.user?.urlname !== 'stats47' || before.status !== 'published') throw Error('article account/status mismatch');
       const product = refreshImages ? null : resolvePaidProduct(article, source);
-      const rewritten = rewriteProductCards(before.body, product);
+      const rewritten = imageRefresh ? imageRefresh.rewriteBody(before.body) : rewriteProductCards(before.body, product);
       const prior = journal.articles[key];
       const refreshed = prior?.imageRevision === imageRevision && ((prior.stage === 'verified' && prior.afterBodySha256 === bodyHash(before.body)) || (prior.stage === 'published' && prior.expectedBody === before.body));
       const refreshKeys = new Set(refreshImages && !refreshed ? cardEntries(rewritten).filter((card) => {
@@ -90,12 +93,14 @@ try {
       const missing = unregisteredCards(rewritten, registry);
       row.unregisteredBefore = missing.length;
       row.productNoteUrl = product?.noteUrl || null;
-      row.productLinkChanged = rewritten !== before.body;
+      row.productLinkChanged = !refreshImages && rewritten !== before.body;
+      row.imageUrlVersionChanged = refreshImages && rewritten !== before.body;
       if (prior?.stage === 'sending') throw Error('unconfirmed previous publish; inspect journal, backup and saved draft before resuming');
       if (!missing.length && !row.productLinkChanged) {
         // Publication can succeed before a reader-side check times out. Confirm it without sending another update.
         if (commit && prior?.stage === 'published') {
           assertRegisteredCards(before.body, before.embedded_contents);
+          if (imageRefresh) for (const entry of prior.registrations) imageRefresh.assertFresh(before.embedded_contents.find((native) => native.key === entry.key) || {}, entry.url);
           const publicLive = await publicNote(apiPage, key);
           const visibleKeys = new Set(cardEntries(publicLive.body).map((card) => card.key));
           await verifyPublicCards(publicContext, article.noteUrl, prior.registrations.map((entry) => entry.key).filter((key) => visibleKeys.has(key)));
@@ -113,7 +118,7 @@ try {
       const attempt = { stage: 'registering', startedAt: new Date().toISOString(), articleKey: article.key, beforeBodySha256: bodyHash(before.body), imageRevision, registrations: [] };
       journal.articles[key] = attempt;
       save();
-      const registered = await registerMissingCards(apiPage, key, rewritten, registry, (entry) => { attempt.registrations.push(entry); save(); });
+      const registered = await registerMissingCards(apiPage, key, rewritten, registry, (entry) => { attempt.registrations.push(entry); save(); }, (native, card) => imageRefresh?.assertFresh(native, card.url));
       const publicBefore = await publicNote(apiPage, key);
       const fresh = await noteRequest(apiPage, `/api/v3/notes/${key}`);
       if (fresh.body !== before.body || fresh.has_draft !== before.has_draft) throw Error('article changed during card preparation');
@@ -121,6 +126,7 @@ try {
       const backup = resolve(ROOT, '.local/note-card-repair/backups', `${key}-${Date.now()}.json`);
       const published = await publishCardBody(ctx, apiPage, before, publicBefore, registered.body, backup, (stage) => { attempt.stage = stage; save(); });
       assertRegisteredCards(published.after.body, published.after.embedded_contents);
+      if (imageRefresh) for (const entry of attempt.registrations) imageRefresh.assertFresh(published.after.embedded_contents.find((native) => native.key === entry.key) || {}, entry.url);
       const publicAfter = await publicNote(apiPage, key);
       const visibleKeys = new Set(cardEntries(publicAfter.body).map((card) => card.key));
       await verifyPublicCards(publicContext, article.noteUrl, registered.registered.filter((key) => visibleKeys.has(key)));

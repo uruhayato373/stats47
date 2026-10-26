@@ -34,3 +34,13 @@ note記事の販売カードは `data/note/magazines.json` の `paidProductId`�
   チェックがある場合はそちらを正とし、per-repairの部分チェックは該当modeを除外する。
 
 **関連**: [[project_note_ins_img_heading_placement_bug]] (画像挿入位置の別バグ、こちらは未解決)
+
+## OGP画像のURLキャッシュ（2026-10-26実測）
+
+**問題**: カバーを公開更新しても、カードの新規登録キーが古いOGP画像を参照した。
+
+**原因**: 同一マガジンURLのnative GETは旧画像を返し、同じページに画像版クエリを付けたnative GETは採用済みの新画像を返した。登録キーの新規発行だけでは画像の鮮度を保証できない。
+
+**対策**: 全画像の公開SHAと本番metadataを確認後、`card-image-refresh.mjs`で所有する外部カードURLの`s47_ogp`だけを版更新する。native応答の画像URLが採用版と一致することを公開前・公開後に検査する。本文・有料境界・既存UTM・リンク先ページは保持する。正典は`.claude/rules/ogp-image-standards.md`。
+
+**証拠**: `data/note/evidence/note-card-image-cache-probe.json`（同一URL/画像版URLの比較）。回帰検査は`.claude/scripts/note/__tests__/card-image-refresh.test.mjs`。
