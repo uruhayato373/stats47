@@ -601,24 +601,5 @@ export const STOREFRONT_PRODUCTS = [
       "telework-gap-tokyo-6x",
       "convenience-store-density-map"
     ]
-  },
-  {
-    "id": "GEO-SERVICE-01",
-    "slug": "service-geo-service-01",
-    "channel": "coconala",
-    "channelLabel": "個別分析サービス",
-    "title": "地価と将来人口の重なりを県別に資料化します",
-    "description": "住宅地の標準地点と1km人口メッシュの対応を、根拠と除外理由付きで説明できる",
-    "priceYen": 5000,
-    "externalUrl": "https://coconala.com/services/4387096",
-    "included": [
-      "説明付きHTMLレポート",
-      "地点・メッシュCSV",
-      "出典・検算結果"
-    ],
-    "audience": [
-      "自治体・地域メディア・調査担当者"
-    ],
-    "sourceBlogSlugs": []
   }
 ] as const satisfies readonly StorefrontProduct[];
