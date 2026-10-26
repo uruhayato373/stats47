@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:26:20.042Z",
+  "updatedAt": "2026-10-26T07:28:18.716Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8564,6 +8564,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:26:20.042Z"
+    },
+    "UNPUSHED-COMMIT-STOP-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:28:18.716Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-unpushed-on-stop.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "Stop hook check-unpushed-on-stop.js を追加し settings.json に登録。自分の author・セッション開始後・upstream より先の commit で同じ HEAD につき 1 回 block、push 後・他人・開始前は黙るテスト 3 件 (絞り込みを外すと fail 1)。この会話の記録で実行し未push 5 件を検出",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:28:18.716Z"
     }
   }
 }
