@@ -105,3 +105,22 @@ test("ブログ是正キュー: 縮小専用ラチェット 3 種と散布図の
   assert.match(src, /rerender-scatter-canonical\.mts --probe-only --require-canonical --verify-sources \|\| failed\+=/);
   assert.match(src, /exit 1; fi\s*$/, "ラチェットの失敗が終了コードに伝わらない");
 });
+
+test("土曜ランナー: 認証付き計測の後に週次監査を回し、各監査が書く記録をすべてコミットの対象にする", () => {
+  const runnerSh = readFileSync(join(ROOT, "scripts/scheduled/weekly-saturday.sh"), "utf8");
+  const steps = [...runnerSh.matchAll(/^step ([a-z-]+) /gm)].map((m) => m[1]);
+  assert.deepEqual(steps, ["measurement", "note-metrics", "scout-asp", "weekly-audits"]);
+  const records = runnerSh.match(/AUDIT_RECORDS=\(([\s\S]*?)\n\)/)[1].split(/\s+/).filter(Boolean);
+  // 各台本の「出力:」に書いたパスが、どれかの記録パスの下にある (無いと監査の結果がコミットされず消える)
+  for (const id of readdirSync(join(ROOT, DIR)).filter((f) => f.endsWith(".sh"))) {
+    // 「出力:」の後ろの最初の文 (「。」まで) だけを出力とみなす (後ろの文は正典などの案内)
+    const out = (script(id.replace(/\.sh$/, "")).match(/^# .*出力: (.*)$/m)?.[1] ?? "").split("。")[0];
+    for (const path of out.match(/(?:data|contents|packages|\.claude)\/[^\s・(){},*]+/g) ?? []) {
+      assert.ok(records.some((r) => path === r || path.startsWith(r.endsWith("/") ? r : `${r}/`)), `${id}: ${path} がコミットの対象に無い`);
+    }
+  }
+  assert.ok(records.includes(".claude/todo/backlog.md"), "backlog を書く監査 (年カバレッジ・ブログ是正) の起票がコミットされない");
+  // どれかの段が落ちたら最後に exit 1 (落ちた段を飛ばして成功に見せない)
+  assert.match(runnerSh, /log_run "\$name" "\$@" \|\| failed\+=\("\$name"\)/);
+  assert.match(runnerSh, /if \[ "\$\{#failed\[@\]\}" -gt 0 \]; then[\s\S]*?exit 1/);
+});

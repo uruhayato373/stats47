@@ -64,7 +64,7 @@ export const FRESHNESS_STALE_DEFAULT_DAYS = Object.freeze({
   sitemap: 8,
   ga4: 10,
   crux: 10,
-  psi: 8, // 週次 (土曜 00:00。2026-10-26 に日次から変更) + 1 日
+  psi: 8, // 週次 (土曜 01:00。2026-10-26 に日次から変更) + 1 日
   lighthouse: 30,
   cloudflare: 3,
   http: 2,

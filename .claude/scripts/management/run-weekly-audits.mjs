@@ -7,8 +7,9 @@
  *   npm run weekly:audits -- --only ci-health,provenance
  *   npm run weekly:audits -- --list
  *
- * 各監査の手順は weekly-audits/<id>.sh (旧 workflow の監査部分だけを移したもの)。Issue の作成と develop への push は
- * しない。監査が書いた data/ の記録は、週次レビューのセッションがレビュー本文と一緒にコミットする。
+ * 各監査の手順は weekly-audits/<id>.sh (旧 workflow の監査部分だけを移したもの)。Issue の作成と push はしない。
+ * 毎週は土曜ランナー (scripts/scheduled/weekly-saturday.sh) が専用 clone で走らせ、監査が書いた記録をコミットする。
+ * 手で走らせたときは、監査が書いた data/ の記録を週次レビューのセッションがレビュー本文と一緒にコミットする。
  * 1 本ずつ順に走らせるのは、backlog.md を書く監査が 2 本 (estat-year-coverage・blog-remediation) あり、
  * 文書を検査する consistency は他の監査が書き終えた後に走らせる必要があるため。
  * 出力: .local/weekly-audits/<YYYY-MM-DD>/{<id>.log,summary.md,summary.json}。1 本でも落ちたら exit 1。

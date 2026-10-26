@@ -41,7 +41,7 @@ npm run psi-audit:check                 # = node .claude/scripts/psi/psi-thresho
 #    レポート出力: npm run psi-audit:check -- --output /tmp/psi-report.md
 ```
 
-CI（`.github/workflows/fetch-metrics-weekly.yml` の psi job、毎週土曜 00:00 JST）は上記を fetch → digest → check の順で自動実行し、
+CI（`.github/workflows/fetch-metrics-weekly.yml` の psi job、毎週土曜 01:00 JST）は上記を fetch → digest → check の順で自動実行し、
 閾値違反時に `[PSI Alert]`（`psi-alert,auto-generated`）Issue を起票する。手動計測は本スキルで同じ流れを回す。
 
 ## バジェット閾値（`budgets.json`）

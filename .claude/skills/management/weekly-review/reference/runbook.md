@@ -148,7 +148,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    承認後も翌週計画への採用は最大1〜2件。効果は`search-growth:measure`が14/28/56日の判定日を返す。
 
    **URL Inspection 日次データ**:
-   GitHub Actions `fetch-metrics-weekly.yml` の url-inspection job が毎週土曜 00:00 JST に自動取得・集計している（API 視点・自サイト把握 URL のみ）。
+   GitHub Actions `fetch-metrics-weekly.yml` の url-inspection job が毎週土曜 01:00 JST に自動取得・集計している（API 視点・自サイト把握 URL のみ）。
    レビュー本文「パフォーマンス → GSC」セクションに以下を埋め込む:
    - `data/gsc/url-inspection/LATEST.md` の verdict / coverageState 表
    - 時系列: `data/gsc/url-inspection/history.csv`、詳細: 最新日付CSV

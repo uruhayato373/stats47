@@ -5,9 +5,9 @@ on:
     # 土曜 02:00 JST に前週 (月〜日) を計測し、同じ土曜にレビューする (2026-10-10 オーナー決定・2026-10-26 に金曜 05:00 から移動)。
     # 日曜に当週を取ると GSC の取得遅延 (約 3 日) で直近数日が欠け、W40 は 9/30・10/1 が欠落して取り直した。
     # GitHub の schedule は数時間遅れて発火する (実測で最大 4.5 時間) ので、土曜のレビューまで余裕を置く。
-    # 2026-10-26 から 00:00 に PSI と URL 検査 (旧 psi-audit-daily.yml・gsc-url-inspection-daily.yml) を先に走らせ、
+    # 2026-10-26 から 01:00 に PSI と URL 検査 (旧 psi-audit-daily.yml・gsc-url-inspection-daily.yml) を先に走らせ、
     # 両方が終わってから週次計測を始める (URL 検査は約 60 分なので、計測の開始は従来の 02:00 前後のまま)。
-    - cron: "0 15 * * 5" # 土曜 00:00 JST (金 15:00 UTC)
+    - cron: "0 16 * * 5" # 土曜 01:00 JST (金 16:00 UTC)
   workflow_dispatch:
     inputs:
       only:
