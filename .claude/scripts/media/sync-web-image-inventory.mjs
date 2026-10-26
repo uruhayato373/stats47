@@ -100,8 +100,8 @@ await Promise.all(Array.from({length:8},async()=>{while(queue.length){
   }else if(page.kind==='product'){
     const base='app/products/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'product-ogp');item.indexComplete=true;
   }else{
-    const url=page.kind==='category'?SITE+'/og-image.jpg':item.url+'/opengraph-image';
-    addImage(item,url,{provider:'site',url},{usage:'ogp',templateId:'ogp',collection:page.kind+'-ogp',generation:{generator:page.kind==='theme'?'satori-route':'static',renderer:'apps/web/src/features/ogp/'}});item.indexComplete=true;
+    const base=page.kind==='category'?'app/default/stats47':'app/themes/'+item.key;
+    await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],page.kind+'-ogp');item.indexComplete=true;
   }
   done++;if(done%100===0)console.log(JSON.stringify({pages:done,total:targets.length,images:images.length}));
 }}));

@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:39:38.467Z",
+  "before": {
+    "name": "家計調査の読み方｜47都道府県の家計を読み解く",
+    "description": "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
+    "cover": "https://assets.st-note.com/production/uploads/images/315553594/magazine_cover_large_2d0aa345219967bf10175238c92b899f.png"
+  },
+  "expectedSha256": "fd0d8d6d2189b67d5445f4f60a677639e51ce0534f1be239c1f38c5d9369fe63",
+  "status": "verified",
+  "after": {
+    "name": "家計調査の読み方｜47都道府県の家計を読み解く",
+    "description": "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757834/magazine_cover_large_9982bb48e50f38ee5130e08b15ec3187.png"
+  },
+  "verifiedAt": "2026-10-26T08:39:47.157Z",
+  "servedSha256": "a8d201f3c90640c3be785f04381cbc0d06630582500f946601e065dffde15ed7",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757834/9982bb48e50f38ee5130e08b15ec3187.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757834/9982bb48e50f38ee5130e08b15ec3187.png",
+    "sha256": "c0073ae83cb1dc09f776d78cef7770f8a28c16760cc6e193429858e2f7551a5f",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4681372549019607,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-kakei-reading-live.png",
+    "checkedAt": "2026-10-26T08:43:22.860Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-kakei-reading",
+    "sha256": "c0073ae83cb1dc09f776d78cef7770f8a28c16760cc6e193429858e2f7551a5f",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:11.560Z"
+  }
+}

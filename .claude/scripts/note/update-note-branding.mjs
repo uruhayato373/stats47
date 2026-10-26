@@ -4,12 +4,13 @@
  * note.com/stats47 のプロフィールヘッダーとマガジン基本情報を catalog に同期する。
  * 既定は audit-only。外部書き込みは --commit が必須。
  */
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir,datasetPath } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -24,11 +25,7 @@ function needsDescriptionUpdate(value) {
 }
 
 function catalog() {
-  return JSON.parse(execFileSync(
-    "npx",
-    ["tsx", join(SCRIPT_DIR, "catalog/dump-magazines-json.ts")],
-    { cwd: ROOT, encoding: "utf8" },
-  ));
+  return JSON.parse(readFileSync(join(ROOT,datasetPath('note.magazines')),'utf8')).magazines;
 }
 
 function magazineNoteKey(url) {
@@ -121,6 +118,7 @@ async function verifyWithRetry(fetcher, predicate) {
 }
 
 async function main() {
+  if (process.argv.includes('--reviewed-covers')) return replaceReviewedCovers();
   const magazines = catalog().filter((magazine) => magazine.noteUrl);
   const profile = await fetchProfile();
   const entries = [];
@@ -196,6 +194,73 @@ async function main() {
     await ctx.close();
   }
   if (entries.some((entry) => entry.status === "failed")) process.exitCode = 1;
+}
+
+/** Replace only reviewed magazine images; names, descriptions and profile are untouched. */
+async function replaceReviewedCovers() {
+  const ledgerPath=join(ROOT,datasetDir('ogp.inventory'),'link-card-rollout.json');
+  const ledger=JSON.parse(readFileSync(ledgerPath,'utf8'));
+  const keyIndex=process.argv.indexOf('--keys');
+  if(keyIndex<0 || !process.argv[keyIndex+1]) throw Error('--reviewed-covers requires explicit --keys');
+  const keys=process.argv[keyIndex+1].split(',');
+  if(new Set(keys).size!==keys.length)throw Error('Duplicate keys');
+  const magazines=catalog();
+  const hash=(b)=>createHash('sha256').update(b).digest('hex');
+  const entries=keys.map(key=>{
+    const e=ledger.entries.find(e=>e.id===`magazine:${key}`);
+    const m=magazines.find(m=>m.key===key);
+    if(!e||!m?.noteUrl||e.pageUrl!==m.noteUrl)throw Error(`Unknown target ${key}`);
+    if(e.status==='published')return {entry:e,magazine:m,skip:true};
+    if(e.publication?.status==='uploading')throw Error(`Uncertain prior upload: reconcile ${key} before retrying`);
+    if(e.status!=='reviewed'||!e.revision?.image||!e.revision?.review||!e.revision?.input)throw Error(`Unreviewed target ${key}`);
+    const asset=e.candidate?.file;
+    if(!asset||hash(readFileSync(asset))!==e.revision.image.sha256)throw Error(`Asset SHA mismatch ${key}`);
+    return {entry:e,magazine:m,asset};
+  });
+  console.log(JSON.stringify({mode:COMMIT?'commit':'audit-only',keys:entries.map(v=>v.entry.key),skipped:entries.filter(v=>v.skip).length}));
+  if(!COMMIT)return;
+  const ctx=await launchContext({headless:true});
+  const saveLedger=()=>{ledger.updatedAt=new Date().toISOString();writeFileSync(`${ledgerPath}.pending`,JSON.stringify(ledger,null,2)+'\n');};
+  try {
+    console.log(`account gate: ${await assertAccount(ctx)}`);
+    const page=ctx.pages()[0]||await ctx.newPage();
+    const live=async(m)=>{
+      if(new URL(page.url()).origin!=='https://note.com')await page.goto(m.noteUrl,{waitUntil:'domcontentloaded'});
+      return page.evaluate(async(key)=>{
+        const response=await fetch(`/api/v1/magazines/${key}/notes?page=1&coverCheck=${Date.now()}`);
+        if(!response.ok)throw Error(`HTTP ${response.status}`);
+        const d=(await response.json()).data;
+        return {name:d.name,description:d.description,cover:d.cover};
+      },magazineNoteKey(m.noteUrl));
+    };
+    for(const item of entries) {
+      if(item.skip)continue;
+      const {entry:e,magazine:m,asset}=item;
+      const before=await live(m);
+      if(!before.cover||!before.name)throw Error('Incomplete before state');
+      e.publication={startedAt:new Date().toISOString(),before,expectedSha256:e.revision.image.sha256,status:'uploading'};
+      saveLedger();
+      // Journal before the external mutation. A failed/unknown upload is never auto-retried.
+      const {renameSync}=await import('node:fs'); renameSync(`${ledgerPath}.pending`,ledgerPath);
+      await page.goto(`${m.noteUrl}/edit`,{waitUntil:'domcontentloaded',timeout:30000});
+      await page.locator('input[type="file"]').setInputFiles(asset);
+      await page.getByRole('button',{name:'この画像を使う',exact:true}).click();
+      await page.getByRole('button',{name:'更新',exact:true}).click();
+      await page.getByRole('button',{name:'更新',exact:true}).waitFor({state:'visible',timeout:45000});
+      const after=await verifyWithRetry(()=>live(m),v=>v.cover!==before.cover&&v.name===before.name&&v.description===before.description);
+      const {fetchCoverSource}=await import('./lib/cover-storage.mjs');
+      const published=await fetchCoverSource(after.cover);
+      const sharp=(await import('sharp')).default;
+      const dimensions=await sharp(published).metadata();
+      if(!dimensions.width||!dimensions.height)throw Error('Published image unreadable');
+      e.publication={...e.publication,status:'uploaded-awaiting-visual-check',after,verifiedAt:new Date().toISOString(),servedSha256:hash(published),width:dimensions.width,height:dimensions.height};
+      e.status='published-pending-visual'; saveLedger();renameSync(`${ledgerPath}.pending`,ledgerPath);
+      const evidenceDir=join(ROOT,datasetDir('note.operation-evidence'));
+      mkdirSync(evidenceDir,{recursive:true});
+      writeFileSync(join(evidenceDir,`note-magazine-cover-${e.key}.json`),JSON.stringify(e.publication,null,2)+'\n');
+      console.log(`${e.key}: image URL changed; name/description preserved; visual verification pending`);
+    }
+  } finally {await ctx.close();}
 }
 
 await main();

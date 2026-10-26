@@ -78,7 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: SITE_ALTERNATE_NAME,
       images: [
         {
-          url: `${baseUrl}${DEFAULT_OGP_IMAGE_PATH}`,
+          url: new URL(DEFAULT_OGP_IMAGE_PATH, baseUrl).href,
           width: 1200,
           height: 630,
           alt: 'stats47 - 日本の地域データを探す・比べる・分析する',
@@ -90,7 +90,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}${DEFAULT_OGP_IMAGE_PATH}`],
+      images: [new URL(DEFAULT_OGP_IMAGE_PATH, baseUrl).href],
     },
     alternates: {
       canonical: '/',

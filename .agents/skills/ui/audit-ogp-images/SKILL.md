@@ -104,3 +104,10 @@ Cell content: ≤ 10 words each.
 - スクリプト: `.claude/scripts/ogp/build-image-gallery.mjs`
 - 棚卸し state: `data/ogp/inventory.json`
 - OGP コンポーネント: `apps/web/src/features/ogp/`
+
+## 外部リンクカードの確認
+
+公開マガジンは `data/ogp/link-card-rollout.json` の採用SHAと公開wide画像・正方形表示を照合する。
+サイトは共通rendererの原寸・220×150・150正方形を代表種別と長い見出しで確認する。
+画像HTTP200・寸法だけを可読性PASSとしない。内部サムネイルの更新前後SHAを保持し、
+全件の機械検証と代表の目視確認を分けて記録する。更新手順は画像標準の「全件更新・再開の正典」を参照。

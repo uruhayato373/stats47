@@ -38,7 +38,7 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 
 import { createElement as h } from 'react';
 
@@ -59,7 +59,6 @@ import {
   type ImageGeneratorType,
 } from './data/image-generator-registry';
 import {
-  PREF_CARD_OGP_THEME,
   PREF_CARD_PUSH_THEMES,
   PREF_CARD_RATIOS,
   PREF_CARD_RATIO_KEYS,
@@ -84,6 +83,9 @@ import { resolveRankingImageVisualization } from './lib/ranking-image-visualizat
 import { selectRankingImagePartition } from './lib/ranking-image-year';
 import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
+import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
+import { buildExternalCard } from './lib/external-card-render';
+import { prefNameOf } from './lib/pref-silhouette-render';
 
 import type { StorefrontProduct } from '../src/features/products/types';
 import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
@@ -480,6 +482,10 @@ async function main() {
     ids = listAreaCodes().map((c) => c.slice(0, 2));
   } else if (opts.type === 'products') {
     ids = STOREFRONT_PRODUCTS.map((product) => product.slug);
+  } else if (opts.type === 'themes') {
+    ids = ALL_THEMES.map(theme=>theme.themeKey);
+  } else if (opts.type === 'default') {
+    ids = ['stats47'];
   } else {
     ids = opts.keys ?? (await listRankingKeys(opts.source));
   }
@@ -506,7 +512,7 @@ async function main() {
       throw new Error(`画像 staging key が不正です: ${key}`);
     }
     const path = resolve(stageRoot, key);
-    if (!path.startsWith(`${resolve(stageRoot)}/`)) {
+    if (!path.startsWith(`${resolve(stageRoot)}${sep}`)) {
       throw new Error(`画像 staging外を指すkeyです: ${key}`);
     }
     mkdirSync(dirname(path), { recursive: true });
@@ -514,6 +520,7 @@ async function main() {
   };
 
   const assetContractsFor = (id: string) => {
+    if (opts.type === 'themes' || opts.type === 'default') return [{key:`app/${opts.type}/${id}/ogp/ogp.png`,variant:'ogp',contentType:'image/png' as const,width:1200,height:630}];
     if (opts.type === 'ranking') {
       return [
         {
@@ -588,6 +595,7 @@ async function main() {
   };
 
   const manifestKeyFor = (id: string): string => {
+    if (opts.type === 'themes' || opts.type === 'default') return `app/${opts.type}/${id}/ogp/generation.json`;
     if (opts.type === 'ranking') return `app/ranking/${id}/ogp/generation.json`;
     if (opts.type === 'areas') return `app/areas/${id}/ogp/generation.json`;
     if (opts.type === 'ranking-cards') return rankingThumbnailKeys(id).manifest;
@@ -646,8 +654,10 @@ async function main() {
               size: RANKING_THUMBNAIL_SIZE,
               version: RANKING_THUMBNAIL_VERSION,
             };
+    } else if (opts.type === 'themes' || opts.type === 'default') {
+      input = {title:opts.type==='themes'?ALL_THEMES.find(theme=>theme.themeKey===id)!.title:'統計で見る都道府県'};
     } else if (opts.type === 'areas') {
-      input = { areaCode: id, theme: PREF_CARD_OGP_THEME };
+      input = { areaCode: id, design: 'note-family-20261026-v1' };
     } else if (opts.type === 'pref-silhouette') {
       input = {
         prefectureCode: id,
@@ -802,12 +812,10 @@ async function main() {
 
   // 既存 OGP コンポーネント (satori 描画用)。areas は 2026-07 からシルエットカード方式
   // (lib/pref-silhouette-render.ts) に置き換え、AreaOgp は使わない。
-  let RankingOgp: unknown;
   let buildRankingOgpFallbackElement:
     | typeof import('./lib/ranking-ogp-fallback-render').buildRankingOgpFallbackElement
     | null = null;
   if (opts.type === 'ranking') {
-    RankingOgp = (await import('../src/features/ogp/RankingOgp')).RankingOgp;
     buildRankingOgpFallbackElement = (
       await import('./lib/ranking-ogp-fallback-render')
     ).buildRankingOgpFallbackElement;
@@ -847,7 +855,7 @@ async function main() {
         const out = stagePath(plan.assets[0].key);
         try {
           await renderToPng(
-            h(RankingOgp as never, { data: built.ogp }) as never,
+            buildExternalCard({title:built.ogp.title,eyebrow:'都道府県ランキング',detail:`${built.latestYearName} · stats47`}),
             fonts,
             out
           );
@@ -872,19 +880,20 @@ async function main() {
             values: `app/ranking/${id}/values.json`,
           },
         };
+      } else if (opts.type === 'themes' || opts.type === 'default') {
+        const title=opts.type==='themes'?ALL_THEMES.find(theme=>theme.themeKey===id)!.title:'統計で見る都道府県';
+        const out=stagePath(plan.assets[0].key);
+        await renderToPng(buildExternalCard({title,eyebrow:opts.type==='themes'?'テーマで比べる':'47都道府県を知る',detail:'stats47.jp'}),fonts,out);
+        assetFiles.set(plan.assets[0].key,out);
+        metadata={title};
       } else if (opts.type === 'areas') {
         // 県シルエットカード (blue / ogp 比率) で置き換え (2026-07 決定)
         const out = stagePath(plan.assets[0].key);
-        await renderPrefCardPng!({
-          projectRoot: PROJECT_ROOT,
-          code2: id.slice(0, 2),
-          ratio: 'ogp',
-          theme: PREF_CARD_OGP_THEME,
-          fonts,
-          outPath: out,
-        });
+        const name=prefNameOf(PROJECT_ROOT,id.slice(0,2));
+        if(!name)throw Error(`Unknown prefecture ${id}`);
+        await renderToPng(buildExternalCard({title:name,eyebrow:'県データブック',detail:'stats47.jp'}),fonts,out);
         assetFiles.set(plan.assets[0].key, out);
-        metadata = { areaCode: id, ratio: 'ogp', theme: PREF_CARD_OGP_THEME };
+        metadata = { areaCode: id, ratio: 'ogp', design: 'note-family-20261026-v1' };
       } else if (opts.type === 'pref-silhouette') {
         // 素材ライブラリ: 5 比率 × push テーマ (asset contract と同順)
         for (const theme of PREF_CARD_PUSH_THEMES) {

@@ -9,6 +9,7 @@
     "generate-ogp-images.ts",
     "generate-blog-thumbnails.ts",
     "generate-blog-thumbnails-cloud.ts",
+    "refresh-blog-ogp.ts",
     "manage-blog-codex-backgrounds.ts",
     "data/image-generator-registry.ts",
     "data/blog-codex-background-catalog.ts",

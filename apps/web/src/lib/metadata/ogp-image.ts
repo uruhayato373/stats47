@@ -25,7 +25,8 @@ export const BLOG_THUMBNAIL_CACHE_VERSION = "20260822-v3";
 
 /** R2 キー (先頭スラッシュ無し) から静的 OGP 画像の絶対 URL を作る。 */
 export function ogpImageUrl(r2Key: string): string {
-  return `${R2_PUBLIC_URL}/${r2Key}`;
+  const version=r2Key.endsWith('/ogp/ogp.png')?'?v=20261026-pop':'';
+  return `${R2_PUBLIC_URL}/${r2Key}${version}`;
 }
 
 export function blogThumbnailUrl(
@@ -37,6 +38,8 @@ export function blogThumbnailUrl(
 }
 
 export const ogpImageKeys = {
+  theme: (key: string) => `app/themes/${key}/ogp/ogp.png`,
+  default: () => 'app/default/stats47/ogp/ogp.png',
   blog: (slug: string) => blogR2Key(slug, "ogp/ogp.png"),
   ranking: (rankingKey: string) => `app/ranking/${rankingKey}/ogp/ogp.png`,
   area: (areaCode: string) => `app/areas/${areaCode}/ogp/ogp.png`,

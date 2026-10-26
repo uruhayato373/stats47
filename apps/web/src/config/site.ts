@@ -29,9 +29,9 @@ export const SITE_DESCRIPTION =
 export const SITE_TAGLINE = "あなたの県は何位？1,800以上の統計で47都道府県をランキング・比較・分析";
 
 /**
- * 既定の OGP 画像。ブランド素材 `public/brand/atlas-v1/ogp-default-1200x630.jpg` から書き出す。
+ * 既定の OGP 画像。generate-ogp-images.ts --type default で生成する。
  */
-export const DEFAULT_OGP_IMAGE_PATH = "/og-image.jpg";
+export const DEFAULT_OGP_IMAGE_PATH = `${R2_PUBLIC_BASE_URL}/app/default/stats47/ogp/ogp.png?v=20261026-pop`;
 
 /** お問い合わせフォーム (Google フォーム)。 */
 export const CONTACT_FORM_URL = "https://forms.gle/ZYi7Rmk4Kt9qZCXB8";

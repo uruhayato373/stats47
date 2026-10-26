@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:04:52.392Z",
+  "before": {
+    "name": "都道府県ランキング｜気候・自然",
+    "description": "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832597/magazine_cover_large_5056eb81c0d46042f772b12866c0cd36.png"
+  },
+  "expectedSha256": "65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜気候・自然",
+    "description": "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328745631/magazine_cover_large_0537c3cb9dc9368879901a96bc1cf78e.png"
+  },
+  "verifiedAt": "2026-10-26T08:05:05.371Z",
+  "servedSha256": "1fdc107185b26a92fb2d85e4db6b912a20702278ee620388a5c1ccca78b55778",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png",
+    "sha256": "7756fb8c9c1cbf1eabe03137a270580c61de565ef2403d3c8f6d59f634483910",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.423406862745098,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-climate-live.png",
+    "checkedAt": "2026-10-26T08:15:34.250Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-climate",
+    "sha256": "7756fb8c9c1cbf1eabe03137a270580c61de565ef2403d3c8f6d59f634483910",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:22:32.190Z"
+  }
+}

@@ -23,10 +23,18 @@ export const GEO_THUMBNAIL_GENERATOR_SPEC = {
   ],
 } as const;
 
+export const EXTERNAL_CARD_SOURCES = [
+  'apps/web/src/features/ogp/LinkCardOgp.tsx',
+  'apps/web/scripts/lib/external-card-render.ts',
+  'apps/web/scripts/data/link-card-copy.ts',
+  'assets/ogp/link-card-pop-20261026.jpg',
+] as const;
+
 export const BLOG_IMAGE_GENERATOR_SPEC = {
   generator: 'blog-ogp',
   rendererSources: [
     ...SATORI_RENDERER_SOURCES,
+    ...EXTERNAL_CARD_SOURCES,
     'apps/web/scripts/lib/blog-ai-background-normalizer.ts',
     'apps/web/scripts/lib/blog-thumbnail-render.ts',
     'apps/web/scripts/lib/blog-image-render.ts',
@@ -62,6 +70,7 @@ export const IMAGE_GENERATOR_SPECS = {
     generator: 'ranking-ogp',
     rendererSources: [
       ...SATORI_RENDERER_SOURCES,
+      ...EXTERNAL_CARD_SOURCES,
       'apps/web/src/features/ogp/RankingOgp.tsx',
       'apps/web/src/features/ogp/JapanMapSvg.tsx',
       'apps/web/src/features/ogp/brand.ts',
@@ -73,6 +82,7 @@ export const IMAGE_GENERATOR_SPECS = {
     generator: 'area-ogp',
     rendererSources: [
       ...SATORI_RENDERER_SOURCES,
+      ...EXTERNAL_CARD_SOURCES,
       'apps/web/scripts/lib/pref-silhouette-render.ts',
       'apps/web/scripts/data/pref-silhouette-tokens.ts',
       'apps/remotion/public/prefecture.topojson',
@@ -105,6 +115,7 @@ export const IMAGE_GENERATOR_SPECS = {
     generator: 'note-cover',
     rendererSources: [
       ...SATORI_RENDERER_SOURCES,
+      ...EXTERNAL_CARD_SOURCES,
       'apps/web/scripts/lib/blog-thumbnail-render.ts',
       'apps/web/scripts/lib/note-cover-render.ts',
     ],
@@ -124,6 +135,7 @@ export const IMAGE_GENERATOR_SPECS = {
     generator: 'product-ogp',
     rendererSources: [
       ...SATORI_RENDERER_SOURCES,
+      ...EXTERNAL_CARD_SOURCES,
       'apps/web/src/features/ogp/ProductOgp.tsx',
       'apps/web/src/features/ogp/brand.ts',
       'apps/web/scripts/lib/product-ogp-render.ts',
@@ -133,6 +145,14 @@ export const IMAGE_GENERATOR_SPECS = {
       // 表紙の内容 SHA は各商品の input (entity fingerprint) へ入れる。
       'assets/ogp/ogp-bg-brand-light.jpg',
     ],
+  },
+  themes: {
+    generator:'theme-ogp',
+    rendererSources:[...SATORI_RENDERER_SOURCES,...EXTERNAL_CARD_SOURCES],
+  },
+  default: {
+    generator:'default-ogp',
+    rendererSources:[...SATORI_RENDERER_SOURCES,...EXTERNAL_CARD_SOURCES],
   },
 } as const;
 

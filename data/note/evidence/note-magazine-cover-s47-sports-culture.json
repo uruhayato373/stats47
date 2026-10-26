@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:39:21.011Z",
+  "before": {
+    "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+    "description": "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310831562/magazine_cover_large_0ce4363bdaa97b3fcab8d076437a1993.png"
+  },
+  "expectedSha256": "9597f10b7a59a506a89172718306e226e8db574c25c853aee55e0400bfcece7c",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+    "description": "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757708/magazine_cover_large_7d6fa49268985f8db9696cf3e3002023.png"
+  },
+  "verifiedAt": "2026-10-26T08:39:29.196Z",
+  "servedSha256": "c6c537bfb6119845d1f76ee9fce434affae66c2f2d5fba711226b255698e8b98",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757708/7d6fa49268985f8db9696cf3e3002023.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757708/7d6fa49268985f8db9696cf3e3002023.png",
+    "sha256": "0eda796b7f9f96d8fe8d61e7c9e924aeaaa3ae5af2df2acd550541948e10ba52",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.7622549019607843,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-sports-culture-live.png",
+    "checkedAt": "2026-10-26T08:43:20.398Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-sports-culture",
+    "sha256": "0eda796b7f9f96d8fe8d61e7c9e924aeaaa3ae5af2df2acd550541948e10ba52",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:44:32.822Z"
+  }
+}

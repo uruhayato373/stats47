@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:39:47.319Z",
+  "before": {
+    "name": "都道府県ランキング｜農林水産",
+    "description": "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832668/magazine_cover_large_91f2173a5301b115c3aea0a078096f3b.png"
+  },
+  "expectedSha256": "946c1207c681f8588253c34055ad34a06c3555df4f7a6d87e01dcf3e6749572b",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜農林水産",
+    "description": "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757878/magazine_cover_large_414b30c788c7167fdbfca57c0b41c525.png"
+  },
+  "verifiedAt": "2026-10-26T08:39:56.178Z",
+  "servedSha256": "dc5e8e9093e526e8f514d24700eae7c3c77a2f2a4eeaf3cf9aa974906665c238",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757878/414b30c788c7167fdbfca57c0b41c525.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757878/414b30c788c7167fdbfca57c0b41c525.png",
+    "sha256": "0c0fe048e13bf1a56256d8be11885aa7abf7d9bd96cbf54a08b75837622005fc",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.6035539215686274,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-agriculture-live.png",
+    "checkedAt": "2026-10-26T08:43:25.393Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-agriculture",
+    "sha256": "0c0fe048e13bf1a56256d8be11885aa7abf7d9bd96cbf54a08b75837622005fc",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:11.560Z"
+  }
+}

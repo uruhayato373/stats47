@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:05:23.747Z",
+  "before": {
+    "name": "都道府県ランキング｜人口・世帯",
+    "description": "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832411/magazine_cover_large_88d81e48f961aa6d13b3fdbb077a8714.png"
+  },
+  "expectedSha256": "b14522a675190d4924493fc46e935a7f8a0dafe6616743e5d9759ee68ca21de8",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜人口・世帯",
+    "description": "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328745767/magazine_cover_large_8e553f5e17b3e3e591ed32ed9ba60431.png"
+  },
+  "verifiedAt": "2026-10-26T08:05:34.005Z",
+  "servedSha256": "c806c6a30c54dc09f00298139e4d68decc18ec143bc07e51890ea89cc944862f",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328745767/8e553f5e17b3e3e591ed32ed9ba60431.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328745767/8e553f5e17b3e3e591ed32ed9ba60431.png",
+    "sha256": "e49f3627094822fc0e277b7b46bf633990cad6e092a7a64d004439be2c5581d1",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.6072303921568627,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-population-live.png",
+    "checkedAt": "2026-10-26T08:15:32.175Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-population",
+    "sha256": "e49f3627094822fc0e277b7b46bf633990cad6e092a7a64d004439be2c5581d1",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:22:32.190Z"
+  }
+}

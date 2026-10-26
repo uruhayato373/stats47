@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:39:56.363Z",
+  "before": {
+    "name": "都道府県ランキング｜安全・環境",
+    "description": "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310831955/magazine_cover_large_bd91227b366efcf05d0fcdfadbdf67f6.png"
+  },
+  "expectedSha256": "63353decfdeb365e5e3f7b11438ee9244738a51c37bb9be0b4eb43882b4e1454",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜安全・環境",
+    "description": "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757953/magazine_cover_large_2eea19e3771225e298eed154295bff9a.png"
+  },
+  "verifiedAt": "2026-10-26T08:40:09.676Z",
+  "servedSha256": "e0266035c25708a51fee8168fe5b3e1eb0ef60398a7b464186d25c2b7fc82e51",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757953/2eea19e3771225e298eed154295bff9a.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757953/2eea19e3771225e298eed154295bff9a.png",
+    "sha256": "65ef8a150621fb685fae1574aa447b5ed64b1d2ccfff11b2b0e7877dc5d55960",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.3970588235294117,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-safety-live.png",
+    "checkedAt": "2026-10-26T08:43:26.540Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-safety",
+    "sha256": "65ef8a150621fb685fae1574aa447b5ed64b1d2ccfff11b2b0e7877dc5d55960",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:11.560Z"
+  }
+}

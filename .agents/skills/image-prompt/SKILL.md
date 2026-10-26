@@ -157,3 +157,11 @@ use-case に応じて以下の推奨パスを出力する:
 - `reference/formats.md` — 用途別のサイズ・セーフエリア・制約
 - `.claude/rules/ogp-image-standards.md` — OGP / カバー / リンクカード画像の種別カタログ SSOT・棚卸し・生成方式
 - `apps/web/src/features/ogp/` — Satori 製 OGP コンポーネント実体（`DefaultOgp` / `BlogOgp` / `RankingOgp` ほか）
+
+## マガジン・外部OGPの一括更新
+
+マガジンの共通コピー/プロンプトは `apps/web/scripts/data/link-card-design.ts`、再開台帳は `data/ogp/link-card-rollout.json`。
+`.claude/scripts/ogp/link-card-production.ts` を使い、確定したrequestだけをbuilt-in imagegenへ渡す。
+採用SHA・入力・参照画像・目視結果をprivate R2へ保存後、専用公開処理で反映する。
+サイトは `apps/web/scripts/refresh-blog-ogp.ts` と `generate-ogp-images.ts` の共通外部rendererを使う。
+内部サムネイルを変えず、具体的な生成・検証・公開手順は画像標準の「全件更新・再開の正典」に従う。

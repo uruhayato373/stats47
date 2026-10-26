@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:41:21.569Z",
+  "before": {
+    "name": "D3.js 地図可視化のための配色完全ガイド",
+    "description": "D3.jsでの地図可視化、最大の悩みである「配色」の正解を網羅した完全ガイドです。\n\nデータ可視化において色は単なる装飾ではなく「情報」です。本マガジンでは、適切な色の選び方（理論）から、TypeScriptですぐに動かせる全98パターンの実装コード（実践）までを体系化しました。\n\n「順序データ」「発散データ」「カテゴリデータ」など、データの性質に合わせた最適なグラデーション選びに迷うことはもうありません。プロのエンジニアやデータアナリストが、辞書代わりに使える「保存版」のリファレンスとしてお届けします。\n\n＼ 実際のアプリで配色を体験できます ／ 本マガジンで解説している配色スキームが、実際の日本地図上でどのように見えるかを確認できる「インタラクティブ・デモサイト」を公開しています。\n\nhttps://nextjs-d3-map.vercel.app/",
+    "cover": "https://assets.st-note.com/production/uploads/images/236478727/magazine_cover_large_37b1624e469520ff7c422057311c8c15.png"
+  },
+  "expectedSha256": "83195fb659cd8b6779b00625a0d694853eb06d29b8e70f5f63515d56ab812872",
+  "status": "verified",
+  "after": {
+    "name": "D3.js 地図可視化のための配色完全ガイド",
+    "description": "D3.jsでの地図可視化、最大の悩みである「配色」の正解を網羅した完全ガイドです。\n\nデータ可視化において色は単なる装飾ではなく「情報」です。本マガジンでは、適切な色の選び方（理論）から、TypeScriptですぐに動かせる全98パターンの実装コード（実践）までを体系化しました。\n\n「順序データ」「発散データ」「カテゴリデータ」など、データの性質に合わせた最適なグラデーション選びに迷うことはもうありません。プロのエンジニアやデータアナリストが、辞書代わりに使える「保存版」のリファレンスとしてお届けします。\n\n＼ 実際のアプリで配色を体験できます ／ 本マガジンで解説している配色スキームが、実際の日本地図上でどのように見えるかを確認できる「インタラクティブ・デモサイト」を公開しています。\n\nhttps://nextjs-d3-map.vercel.app/",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758433/magazine_cover_large_3338d7fca2b7eac83faf19b163b35f35.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:30.898Z",
+  "servedSha256": "f0928f796c9766e12263e58351dfde44227674bc4c99fad1d0ca17a97a888935",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758433/3338d7fca2b7eac83faf19b163b35f35.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758433/3338d7fca2b7eac83faf19b163b35f35.png",
+    "sha256": "c258ae903732e3dd98d5ba2f0bce5af8df34603ab3242c0d0e24de7b5e4ce066",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.5968137254901962,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\product-d3-colors-live.png",
+    "checkedAt": "2026-10-26T08:43:19.205Z"
+  },
+  "visualReview": {
+    "id": "magazine:product-d3-colors",
+    "sha256": "c258ae903732e3dd98d5ba2f0bce5af8df34603ab3242c0d0e24de7b5e4ce066",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:44:32.822Z"
+  }
+}

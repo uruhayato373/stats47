@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, sep } from 'node:path';
 
 import type { OgpVisualType } from '@stats47/types';
 
@@ -203,7 +203,7 @@ export function stageBlogImagePath(
   }
   const root = resolve(projectRoot, BLOG_IMAGE_STAGE_ROOT);
   const path = resolve(root, key);
-  if (!path.startsWith(`${root}/`)) {
+  if (!path.startsWith(`${root}${sep}`)) {
     throw new Error(`blog image staging外を指すkeyです: ${key}`);
   }
   mkdirSync(dirname(path), { recursive: true });

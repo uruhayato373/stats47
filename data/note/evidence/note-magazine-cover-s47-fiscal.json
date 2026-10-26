@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:39:29.483Z",
+  "before": {
+    "name": "都道府県ランキング｜自治体財政",
+    "description": "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832271/magazine_cover_large_80e4a7a70b7ab4e2d271d91ab502b076.png"
+  },
+  "expectedSha256": "0df47f2bf8ac4f1db68c6007e2c544cd46db1c48650095ef81efb7767f993545",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜自治体財政",
+    "description": "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757796/magazine_cover_large_cbf376a7327fed95aeb65d2c1bf18f2e.png"
+  },
+  "verifiedAt": "2026-10-26T08:39:37.803Z",
+  "servedSha256": "d9ba04ff555dea03d94bf2eee57163eeb3606304b5682c76a3f63b6e1b0070cd",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757796/cbf376a7327fed95aeb65d2c1bf18f2e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757796/cbf376a7327fed95aeb65d2c1bf18f2e.png",
+    "sha256": "2c8155d39012cabc235778c567a6e2aaa84d41430ebfe1b6bb738ac84fd83bc1",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4822303921568627,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-fiscal-live.png",
+    "checkedAt": "2026-10-26T08:43:21.601Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-fiscal",
+    "sha256": "2c8155d39012cabc235778c567a6e2aaa84d41430ebfe1b6bb738ac84fd83bc1",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:11.560Z"
+  }
+}

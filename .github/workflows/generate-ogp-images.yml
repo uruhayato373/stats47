@@ -20,6 +20,8 @@ on:
           - ranking
           - areas
           - products
+          - themes
+          - default
           - ranking-cards
           - pref-silhouette
           - blog
@@ -32,6 +34,10 @@ on:
         description: 'blogのみ: 対象slugのカンマ区切り (空なら全公開記事)'
         required: false
         default: ''
+      external_only:
+        description: 'blog: 外部OGPのみ更新し内部サムネイル・背景のSHAを保持する'
+        type: boolean
+        default: false
       ranking_keys:
         description: 'ranking / ranking-cards のみ: 対象キーのカンマ区切り (最大50件)'
         required: false
@@ -90,6 +96,7 @@ jobs:
           IMAGE_TYPE: ${{ inputs.type }}
           IMAGE_LIMIT: ${{ inputs.limit }}
           BLOG_SLUGS: ${{ inputs.slugs }}
+          EXTERNAL_ONLY: ${{ inputs.external_only }}
           RANKING_KEYS: ${{ inputs.ranking_keys }}
         run: |
           # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
@@ -117,7 +124,11 @@ jobs:
               FLAGS+=(--slug "$BLOG_SLUGS")
             fi
             echo "Running: generate-blog-thumbnails-cloud.ts ${FLAGS[*]}"
-            npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
+            if [ "$EXTERNAL_ONLY" = "true" ]; then
+              npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/refresh-blog-ogp.ts "${FLAGS[@]}"
+            else
+              npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
+            fi
           else
             FLAGS=(--type "$TYPE" "${FLAGS[@]}")
             echo "Running: generate-ogp-images.ts ${FLAGS[*]}"
@@ -149,6 +160,15 @@ jobs:
           PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
           npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+
+      - name: Preserve exact publication evidence
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: image-plan-${{ inputs.type }}-${{ github.run_id }}
+          path: .local/image-generation-publish-plan-*.json
+          include-hidden-files: true
+          retention-days: 14
 
   publish-geo-thumbnails:
     if: inputs.type == 'geo-thumbnails'
