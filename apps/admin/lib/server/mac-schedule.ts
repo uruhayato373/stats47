@@ -91,9 +91,33 @@ function intOf(dict: string, key: string): number | null {
   return m ? Number(m[1]) : null;
 }
 
+function stripCommentsOnce(xml: string): string {
+  let out = "";
+  let from = 0;
+  for (;;) {
+    const open = xml.indexOf("<!--", from);
+    if (open < 0) return out + xml.slice(from);
+    out += xml.slice(from, open);
+    const close = xml.indexOf("-->", open + 4);
+    if (close < 0) return out;
+    from = close + 3;
+  }
+}
+
+/** `<!--` から `-->` までを切り落とす (閉じていないコメントは残りごと落とす)。1 回では消した跡に `<!--` が
+ *  組み上がる形 (`<!<!-- x -->-- y -->`) が残るので、変化が無くなるまで繰り返す (CodeQL の incomplete multi-character sanitization) */
+export function stripXmlComments(xml: string): string {
+  let current = xml;
+  for (;;) {
+    const next = stripCommentsOnce(current);
+    if (next === current) return next;
+    current = next;
+  }
+}
+
 /** plist の必要な項目だけを読む (コメントは除いてから読む。コメントに書いた手順の <key> を拾わない) */
 export function parsePlist(xml: string): PlistDef {
-  const body = xml.replace(/<!--[\s\S]*?-->/g, "");
+  const body = stripXmlComments(xml);
   const label = body.match(/<key>Label<\/key>\s*<string>([^<]+)<\/string>/)?.[1] ?? "";
   const args = body.match(/<key>ProgramArguments<\/key>\s*<array>([\s\S]*?)<\/array>/)?.[1] ?? "";
   const strings = [...args.matchAll(/<string>([^<]+)<\/string>/g)].map((m) => m[1]);

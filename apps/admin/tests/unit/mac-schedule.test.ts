@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { parseLog, parsePlist, slotLabel } from "@/lib/server/mac-schedule";
+import { parseLog, parsePlist, slotLabel, stripXmlComments } from "@/lib/server/mac-schedule";
 import { cadenceOf, scheduleSortKey } from "@/lib/server/workflows";
 
 /**
@@ -38,6 +38,15 @@ describe("parsePlist", () => {
     expect(def.label).toBe("com.stats47.x");
     expect(def.slots.map(slotLabel)).toEqual(["毎日 09:30", "毎日 21:30"]);
     expect(def.runAtLoad).toBe(true);
+  });
+});
+
+describe("stripXmlComments", () => {
+  it("コメントを前から順に落とし、落とした跡に <!-- を組み上げない・閉じていないコメントは残りごと落とす", () => {
+    expect(stripXmlComments("a<!-- x -->b<!-- y -->c")).toBe("abc");
+    expect(stripXmlComments("<!<!-- x -->-- y -->z")).toBe("z");
+    expect(stripXmlComments("<<!-- -->!-- k -->")).toBe("");
+    expect(stripXmlComments("a<!-- never closed <key>Label</key>")).toBe("a");
   });
 });
 
