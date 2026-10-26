@@ -81,7 +81,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -125,7 +125,7 @@ jobs:
         # actionは `@40桁commit SHA # vN`で固定し、サプライチェーン回帰を止める。
         run: |
           node .claude/scripts/lib/audit-workflow-policy.cjs --strict
-          node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs
+          node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs .claude/scripts/lib/__tests__/workflow-node-version.test.cjs
         continue-on-error: false
 
       - name: 🧯 Quality Gate Ratchet Contracts
@@ -451,7 +451,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -709,7 +709,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -899,7 +899,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -941,7 +941,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1011,7 +1011,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1083,7 +1083,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1129,7 +1129,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1181,7 +1181,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1280,7 +1280,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
@@ -1322,7 +1322,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Restore node_modules cache
