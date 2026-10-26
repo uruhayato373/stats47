@@ -147,7 +147,8 @@ function main() {
   if (!cli) {
     try { input = JSON.parse(readStdin() || "{}"); } catch { input = {}; }
   }
-  const myId = value("--session") || input.session_id || process.env.CODEX_THREAD_ID || process.env.CLAUDE_SESSION_ID;
+  const myId = value("--session") || input.session_id || process.env.CODEX_THREAD_ID || process.env.CLAUDE_SESSION_ID
+    || process.env.CLAUDE_CODE_SESSION_ID; // デスクトップアプリの Claude セッションはこちらだけを持つ
   const event = input.hook_event_name || "";
   const key = cwdKey(input);
   const task = value("--task");
@@ -157,7 +158,7 @@ function main() {
     return 0;
   }
   if (args.includes("--register") || args.includes("--release")) {
-    if (!myId) { console.error("--session または CODEX_THREAD_ID / CLAUDE_SESSION_ID が必要です"); return 1; }
+    if (!myId) { console.error("--session <任意の固定 ID> か、環境変数 CODEX_THREAD_ID / CLAUDE_SESSION_ID / CLAUDE_CODE_SESSION_ID が必要です"); return 1; }
   }
   const others = listOtherFresh(myId, key, task);
   const write = !cli || args.includes("--register") || args.includes("--release");

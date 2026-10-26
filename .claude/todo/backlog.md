@@ -311,15 +311,6 @@ updated: 2026-10-19
 - **禁止**: ライブ DOM の実物を見ずに正規表現だけを推測で直さない (今回の失敗の再発)。
 - **完了条件**: 見出し直前アンカーを含む記事で `audit-note-figure-split.mjs` の misplaced が 0。
 
-### [THEME-TEST-ENTRY-NODE22-01] テーマのテストの入口 (theme:quality:test) が Node 22 で 1 件も走らない
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run theme:quality:test] [起票:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-26 実測・Mac の Node 22.23)**: `npm run theme:quality:test` (`node --import tsx --test .claude/scripts/themes/__tests__/`) が
-  `ERR_UNSUPPORTED_DIR_IMPORT` で落ち、`# pass 0`。ディレクトリを引数に渡す形を tsx の解決が import として扱っている。ファイルを直接渡すと通る
-  (`node --import tsx --test .claude/scripts/themes/__tests__/theme-weekly-workflow.test.mjs` は 16 件 pass)。CI は Node 20 なので見え方が違う可能性がある。
-- **次**: package.json の入口を glob (`.claude/scripts/themes/__tests__/*.test.mjs`) に変え、Node 20 と 22 の両方で件数が 0 でないことを確かめる。
-- **完了条件**: `npm run theme:quality:test` が Mac (Node 22) で全件を走らせ、失敗 0。
-
 ### [SNS-WEEKLY-REPORT-MIRROR-01] SNS 週次レポートの workflow が Codex ミラーのリンクを足さず develop の品質ゲートを落とす
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan] [起票:2026-10-26]
 
@@ -564,13 +555,6 @@ updated: 2026-10-19
 - **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。確かめたのは自宅の Mac だけ。会社 PC は i-FILTER の TLS 傍受があり、R2 を読むために dev-server が Windows の R2 gateway を起動して `R2_PUBLIC_FETCH_URL` を差し替える (`.claude/rules/local-environment.md`)。この経路と Turbopack の組み合わせは未確認。
 - **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
 - **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
-
-### [SMOKE-SCRIPT-BASH3-01] ルートのスモーク検査が Mac の bash 3 で動かないのに「passed」と出る
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-21] [領域:管理]
-
-- **事象 (2026-10-21)**: Mac で `bash .github/scripts/smoke-test-routes.sh http://localhost:3001` を実行すると、41 行目の `declare -A` が bash 3.2 で失敗し、157 行目でも構文エラーが出た。それでも最後は「Smoke test passed: 2/2 representative routes OK.」で終了コード 0 になった。CI (Linux の bash 5) では正しく動くが、手元で使うと検査していないのに合格と表示される。
-- **次**: 先頭で bash 4 以上を要求して止める (`BASH_VERSINFO`) か、連想配列を使わない書き方にする。途中の構文エラーで合格を出さないよう `set -e` 相当か件数の照合を入れる。
-- **完了条件**: Mac の bash 3 で実行すると明示的に失敗するか正しく検査し、合格の件数が検査した URL の数と一致する。
 
 ### [LOCAL-RELEASE-BUILD-R2-TIMEOUT-01] ローカルの本番ビルドが静的生成で R2 の読み込み 10 秒制限に引っかかって落ちることがある
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
@@ -1291,14 +1275,6 @@ updated: 2026-10-19
 - **次**: Stop hook で、`git log origin/develop..develop` にそのセッションが作ったコミットがあれば 1 回だけ差し戻し、push するか、push しない理由を返答に書くよう促す。他のセッションのコミットで誤って止めないよう、セッションの開始時刻以降の自分の author のコミットに限る。fetch はしない (hook を遅くしない)。
 - **優先度の根拠**: 起きると develop の検査が赤のまま残り、後の作業者が原因の切り分けに時間を使う。ただし CI 自体は検出しているので、🔴 ではなく 🟡 とする。
 - **完了条件**: 未 push のコミットがある状態で Stop すると 1 回差し戻され、push 後は差し戻されないことをテストで固定した。
-
-### [CHECKER-WIRING-PRECOMMIT-01] 配線されていない検査スクリプトを push 前に止めるため、pre-commit でも check-checker-wiring を走らせる
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-10] [領域:管理]
-
-- **事象**: 2026-10-10、`.claude/scripts/sns/check-post-trace.mjs` が CI に blocking でつながれないまま develop に push され (5c08d6c0a)、Develop Quality Gate が `[NON_BLOCKING_GATE]` / `[MISSING_GATE_TRIGGER]` で落ちた。`check-checker-wiring.cjs --baseline` は `pr-quality-check.yml` / `backlog-loop-daily.yml` / `agent-consistency-weekly.yml` と develop の Quality Gate でしか動かず、pre-commit (`apps/web/scripts/pre-commit-checks.sh`) では動かない。
-- **次**: staged に検査スクリプト (`check-*` / `audit-*`) か `.github/workflows/*.yml` が含まれるときだけ、pre-commit で `check-checker-wiring.cjs --baseline` を走らせる。所要時間を測り、遅ければ対象を staged ファイルに絞る。
-- **優先度の根拠**: CI では検出できているので被害は「push 後に赤になる」までに限られる。🟡 とする。
-- **完了条件**: 未配線の検査スクリプトを staged にすると commit が止まり、配線済みなら通ることを確認した。
 
 ### [SNS-TRACE-YT-LEGACY-01] YouTube の URL の無い投稿 42 行と content_key 不明の 2 本を Studio で確定する
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-09] [領域:SNS]
@@ -4616,16 +4592,6 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
   違いの理由はどこにも書かれていない。二重管理はいずれずれる (`feedback_hand_synced_duplication`)。
 - **次**: リリース対象のパスの定義を 1 つのモジュールに置き、デプロイの inline script とオーバーレイの両方がそれを import する。オーバーレイで返さない種類は理由と一緒に定義に書く。
 - **完了条件**: 定義からパスを 1 種類消すとデプロイ側とオーバーレイ側の両方のテストが落ちる。
-
-### [AGENT-SESSION-ID-MISSING-01] agent:session の登録が、デスクトップアプリの Claude セッションでは ID が無くて使えない
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-23] [領域:管理]
-
-- **証拠**: 2026-10-21 に `npm run agent:session -- --register --agent claude --task DEPS-VITE-AUDIT --note ...` が
-  「--session または CODEX_THREAD_ID / CLAUDE_SESSION_ID が必要です」で失敗した。`.claude/hooks/session-guard.js` 150 行は `CLAUDE_SESSION_ID` を読むが、
-  デスクトップアプリのセッションの環境にあるのは `CLAUDE_CODE_SESSION_ID` (2026-10-23 に変数名だけ確認)。CLAUDE.md は編集前の登録を求め、install の排他もこの登録に頼るので、
-  登録できないと並行セッションの検知が効かない。
-- **次**: `CLAUDE_CODE_SESSION_ID` も読む (Codex の `CODEX_THREAD_ID` と同じ扱い)。どちらも無いときの案内に `--session <任意の固定 ID>` を出す。
-- **完了条件**: `CLAUDE_CODE_SESSION_ID` だけがある環境で `--register` が通り、`--status` に載ることをテストで固定する。
 
 ### [MUNI-PAGE-SEO-REGISTER-01] 市区町村ページの効果観測 MUNI-PAGE-SEO-01 を active 施策の一覧に登録する
 タグ: [インフラ・計測] [種類:改善] [実行:機械] [起票:2026-10-23] [期日:2026-10-30] [領域:サイト]

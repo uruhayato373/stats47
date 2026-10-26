@@ -215,7 +215,7 @@
     "evidence:pilot:data:write-local": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs --write-local",
     "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/ && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs",
     "theme:quality:check": "node --import tsx .claude/scripts/themes/audit-theme-quality.ts",
-    "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/",
+    "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/*.test.mjs",
     "theme:py:test": "python3 .claude/scripts/themes/cultural-heritage-source.test.py && python3 .claude/scripts/themes/test_extract_bridge_inspection_age.py && python3 .claude/scripts/themes/property-prices/test_aggregate.py",
     "theme:portfolio:audit": "bash .claude/scripts/themes/run-theme-portfolio-audit.sh",
     "geo:build-public-facility-access": "node --import tsx packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts",

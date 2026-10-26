@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T03:40:11.254Z",
+  "updatedAt": "2026-10-26T06:23:48.915Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7989,6 +7989,139 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T03:40:11.254Z"
+    },
+    "THEME-TEST-ENTRY-NODE22-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:23:39.685Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run theme:quality:test"
+            ],
+            "pass": true
+          },
+          "evidence": "入口をglob (*.test.mjs) に変更。Node 22.23 で tests 551 / pass 550 / fail 0 (変更前は ERR_UNSUPPORTED_DIR_IMPORT で pass 0)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:23:39.685Z"
+    },
+    "AGENT-SESSION-ID-MISSING-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:23:48.791Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/session-guard.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "CLAUDE_CODE_SESSION_ID を読むよう修正し、案内に --session を追加。新テストは修正前 fail 1 → 修正後 pass 4 / fail 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:23:48.791Z"
+    },
+    "SMOKE-SCRIPT-BASH3-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:23:48.853Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "/bin/bash .github/scripts/smoke-test-routes.sh http://127.0.0.1:9"
+            ],
+            "pass": true
+          },
+          "evidence": "先頭で BASH_VERSINFO<4 を exit 2 で止める。Mac の bash 3.2.57 で実行すると「bash 4 以上が必要」で exit 2 (以前は passed で exit 0)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:23:48.853Z"
+    },
+    "CHECKER-WIRING-PRECOMMIT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:23:48.915Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline",
+              "node --test .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "pre-commit に検査スクリプト/workflow が staged のときだけ配線検査を追加。未配線の probe を置くと exit 1・消すと exit 0、pre-commit 関連テスト 34 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:23:48.915Z"
     }
   }
 }

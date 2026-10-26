@@ -139,6 +139,24 @@ if [ -n "$STAGED_DISPATCH" ]; then
   fi
 fi
 
+# 2.1d2 検査スクリプトの配線 (CHECKER-WIRING-PRECOMMIT-01)
+# 検査スクリプトを CI の blocking gate につながないまま push すると、Develop Quality Gate が
+# [NON_BLOCKING_GATE] / [MISSING_GATE_TRIGGER] で落ちる (2026-10-10 に check-post-trace.mjs で踏んだ)。
+# 全体を読むので約 9 秒かかる。検査スクリプト (名前の判定は check-checker-wiring.cjs の CHECKER_NAME と同じ)
+# か workflow を staged にした commit だけで走らせる。
+STAGED_CHECKER_WIRING=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
+  '(^|/)([^/]*[-_.])?(check|audit|validate|verify|lint|guard)([-_.][^/]*)?\.(c?js|mjs|ts|sh|py)$|^\.github/workflows/[^/]+\.ya?ml$' || true)
+if [ -n "$STAGED_CHECKER_WIRING" ]; then
+  echo -e "${GREEN}🔌 検査スクリプトの CI 配線...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline; then
+    echo -e "${RED}❌ CI の blocking gate につながっていない検査スクリプトがあります。${NC}"
+    echo -e "${YELLOW}💡 workflow か preflight から blocking で呼ぶ (詳細は上の出力)${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ 検査スクリプトの CI 配線チェック成功${NC}"
+  fi
+fi
+
 # 2.1e import.meta.dirname ガード
 # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
 # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと

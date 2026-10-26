@@ -30,6 +30,12 @@
 # Exit: 1 件でも notFound / og:image 非200 / 非200 があれば exit 1。
 
 set -uo pipefail
+# 連想配列 (declare -A) に bash 4 以上が要る。Mac 標準の bash 3.2 では途中で構文エラーになっても
+# 最後に「passed」と出て exit 0 になっていたので、走らせる前に止める (2026-10-21 SMOKE-SCRIPT-BASH3-01)。
+if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+  echo "❌ bash 4 以上が必要です (今の bash は ${BASH_VERSION})。Mac では brew の bash で実行してください。" >&2
+  exit 2
+fi
 BASE_URL="${1:-https://stats47.jp}"
 UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 # notFound を示すタイトル断片 (各 route の generateMetadata fallback)
