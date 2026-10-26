@@ -13,6 +13,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { getMetricConfig } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   scopeHrefsForMunicipalityRanking,
@@ -97,7 +98,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/municipalities/ranking/${item.rankingKey}` },
+    alternates: { canonical: hrefFor("municipality-ranking", { rankingKey: item.rankingKey }) },
     ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
@@ -333,7 +334,7 @@ export default async function MunicipalityRankingPage({
         </p>
         {(query || prefectureCode) && (
           <Link
-            href={`/municipalities/ranking/${item.rankingKey}`}
+            href={hrefFor("municipality-ranking", { rankingKey: item.rankingKey })}
             className="text-xs text-primary hover:underline"
           >
             条件を解除

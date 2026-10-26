@@ -313,7 +313,19 @@ export const PR_GATES = [
         const r = await tryRun("npx", ["tsx", `.claude/scripts/ads/${script}`, "--check"]);
         if (!r.ok) return { ...r, hint: `npx tsx .claude/scripts/ads/${script} --check` };
       }
-      return { ok: true, output: "affiliate compliance / relevance OK" };
+      // pr-quality-check.yml の Affiliate Compliance step と同じ在庫整合 (vertical・実験・offer profile)。R2 には書かない
+      const inventory = await tryRun(
+        "npx",
+        ["tsx", "apps/web/scripts/export-affiliate-ads-snapshot.ts", "--validate-only"],
+        { env: { ...process.env, NODE_OPTIONS: "--conditions react-server" } },
+      );
+      if (!inventory.ok) {
+        return {
+          ...inventory,
+          hint: 'NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only',
+        };
+      }
+      return { ok: true, output: "affiliate compliance / relevance / inventory OK" };
     },
   },
   {

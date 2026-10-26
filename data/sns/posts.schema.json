@@ -1,131 +1,631 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "stats47 SNS 投稿台帳",
-  "description": "1 投稿 = 1 行 = 1 id。id から台本・状態・承認・外部 ID・素材・観測値・確認画面をたどる。契約は .claude/rules/sns-content-standards.md §3。旧来の項目は残したまま、ここで形を決めた項目だけを厳密に検査する。",
+  "description": "1 投稿 = 1 行 = 1 id。id から台本・状態・承認・外部 ID・素材・観測値・確認画面をたどる。契約は .claude/rules/sns-content-standards.md §3。2026-10-26 に行の項目を閉じた (additionalProperties: false)。書き手が新しい項目を足すときは同じ差分でここに足す。SQLite 時代の行が残すゆれ (日時の形・metric_keys の 3 形式) は型で受け、新しい行もそのまま書ける。投稿の参照 (parent_post_id・指標) は config/datasets.mjs の refs が検査する。",
   "type": "object",
   "additionalProperties": false,
-  "required": ["_meta", "posts"],
+  "required": [
+    "_meta",
+    "posts"
+  ],
   "properties": {
     "_meta": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["count", "nextId"],
+      "required": [
+        "count",
+        "nextId"
+      ],
       "properties": {
-        "description": { "type": "string" },
-        "count": { "type": "integer", "minimum": 0 },
-        "nextId": { "type": "integer", "minimum": 1 }
+        "description": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nextId": {
+          "type": "integer",
+          "minimum": 1
+        }
       }
     },
-    "posts": { "type": "array", "items": { "$ref": "#/definitions/post" } }
+    "posts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/post"
+      }
+    }
   },
   "definitions": {
     "post": {
       "type": "object",
-      "required": ["id", "platform", "post_type", "domain", "status", "created_at", "updated_at", "approval"],
+      "required": [
+        "id",
+        "platform",
+        "post_type",
+        "domain",
+        "status",
+        "created_at",
+        "updated_at",
+        "approval"
+      ],
       "properties": {
-        "id": { "type": "integer", "minimum": 1 },
-        "platform": { "enum": ["x", "instagram", "threads", "youtube", "tiktok", "note"] },
-        "post_type": { "type": "string", "minLength": 1 },
-        "domain": { "type": "string", "minLength": 1 },
-        "status": { "enum": ["draft", "scheduled", "posted", "deleted"] },
-        "created_at": { "type": "string", "minLength": 10 },
-        "updated_at": { "type": "string", "minLength": 10 },
-        "post_url": { "type": ["string", "null"], "pattern": "^https://" },
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "platform": {
+          "$ref": "common.schema.json#/$defs/platform"
+        },
+        "post_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "post_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https://"
+        },
+        "quote_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https://"
+        },
+        "media_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "thumbnail_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "has_link": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "utm_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https://"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "scheduled",
+            "posted",
+            "deleted"
+          ]
+        },
+        "scheduled_at": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/legacyTimestamp"
+            }
+          ]
+        },
+        "scheduled_for": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}(:\\d{2})?$"
+        },
+        "posted_at": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/legacyTimestamp"
+            }
+          ]
+        },
+        "deleted_at": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/legacyTimestamp"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "common.schema.json#/$defs/legacyTimestamp"
+        },
+        "updated_at": {
+          "$ref": "common.schema.json#/$defs/legacyTimestamp"
+        },
+        "impressions": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "likes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reposts": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "replies": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bookmarks": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "metrics_updated_at": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/legacyTimestamp"
+            }
+          ]
+        },
+        "template": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "template_inferred": {
+          "type": "boolean"
+        },
+        "metric_keys": {
+          "description": "投稿が使った指標の key。配列・JSON 配列の文字列・カンマ区切りの文字列が混在する (書き手ごとの差。refs は parse: list で読む)",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          ]
+        },
+        "parent_post_id": {
+          "description": "引用・続きの元の投稿 (同じ台帳の id)",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "source_timecode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "survey_ids": {
+          "description": "調査 ID の JSON 配列の文字列か単独の ID",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provenance_urls": {
+          "description": "出典 URL の JSON 配列の文字列",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geo_role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "analysis_ids": {
+          "description": "Geo 分析の ID (カンマ区切り)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "claim_metric_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attribution": {
+          "enum": [
+            "direct"
+          ]
+        },
+        "media_format": {
+          "enum": [
+            "carousel",
+            "image"
+          ]
+        },
+        "slide_copies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slide",
+              "text"
+            ],
+            "properties": {
+              "slide": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "needs_text_cards": {
+          "type": "boolean"
+        },
+        "angle": {
+          "type": "string"
+        },
+        "trend_keyword": {
+          "type": "string"
+        },
         "external_id": {
           "description": "post_url から導出できない外部 ID だけを持つ (Instagram の media_id)。他の媒体は externalIdOf() が post_url から導出する",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[0-9]+$"
         },
         "script_path": {
           "description": "長尺 (YouTube 等) の台本。短文・カルーセルの台本は caption",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^data/sns/scripts/[0-9]+\\.json$"
         },
-        "material_keys": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^(x|instagram)/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+$" } },
-        "planning": {
-          "type": "object", "additionalProperties": false,
-          "required": ["origin", "batch", "title", "preview_only", "note"],
-          "properties": {
-            "origin": { "enum": ["material-import", "new-format"] },
-            "batch": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-            "title": { "type": "string", "minLength": 1 },
-            "preview_only": { "type": "boolean" },
-            "note": { "type": "string" }
+        "material_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(x|instagram)/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+$"
           }
         },
-        "approval": { "$ref": "#/definitions/approval" },
-        "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } },
-        "production": {
-          "type": "object", "additionalProperties": false,
-          "required": ["version", "renderer", "rendererHash", "input"],
+        "planning": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "origin",
+            "batch",
+            "title",
+            "preview_only",
+            "note"
+          ],
           "properties": {
-            "version": { "type": "string", "minLength": 1 },
-            "renderer": { "type": "string", "pattern": "^apps/remotion/src/[A-Za-z0-9_./-]+$" },
-            "rendererHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "origin": {
+              "enum": [
+                "material-import",
+                "new-format"
+              ]
+            },
+            "batch": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "preview_only": {
+              "type": "boolean"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "approval": {
+          "$ref": "#/definitions/approval"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/asset"
+          }
+        },
+        "production": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "renderer",
+            "rendererHash",
+            "input"
+          ],
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "renderer": {
+              "type": "string",
+              "pattern": "^apps/remotion/src/[A-Za-z0-9_./-]+$"
+            },
+            "rendererHash": {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
             "input": {
-              "type": "object", "additionalProperties": false,
-              "required": ["provider", "bucket", "key", "sha256", "bytes"],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "provider",
+                "bucket",
+                "key",
+                "sha256",
+                "bytes"
+              ],
               "properties": {
-                "provider": { "const": "r2-private" },
-                "bucket": { "const": "stats47-private" },
-                "key": { "type": "string", "pattern": "^media-workspace/inputs/[a-f0-9]{64}\\.json$" },
-                "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-                "bytes": { "type": "integer", "minimum": 1 }
+                "provider": {
+                  "const": "r2-private"
+                },
+                "bucket": {
+                  "const": "stats47-private"
+                },
+                "key": {
+                  "type": "string",
+                  "pattern": "^media-workspace/inputs/[a-f0-9]{64}\\.json$"
+                },
+                "sha256": {
+                  "$ref": "common.schema.json#/$defs/sha256"
+                },
+                "bytes": {
+                  "type": "integer",
+                  "minimum": 1
+                }
               }
             }
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "approval": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["state"],
+      "required": [
+        "state"
+      ],
       "properties": {
         "state": {
           "description": "unrecorded = 承認の記録を始める前の行 (承認された証拠が無いので approved にしない)",
-          "enum": ["pending", "approved", "rejected", "unrecorded"]
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "unrecorded"
+          ]
         },
-        "by": { "type": ["string", "null"] },
-        "at": { "type": ["string", "null"] },
-        "via": { "type": ["string", "null"] },
-        "note": { "type": ["string", "null"] }
+        "by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "via": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
-      "if": { "properties": { "state": { "enum": ["approved", "rejected"] } } },
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "approved",
+              "rejected"
+            ]
+          }
+        }
+      },
       "then": {
-        "required": ["by", "at"],
-        "properties": { "by": { "type": "string", "minLength": 1 }, "at": { "type": "string", "minLength": 10 } }
+        "required": [
+          "by",
+          "at"
+        ],
+        "properties": {
+          "by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "at": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
       }
     },
     "asset": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["role", "order", "state"],
+      "required": [
+        "role",
+        "order",
+        "state"
+      ],
       "properties": {
-        "role": { "enum": ["image", "slide", "video", "thumbnail"] },
-        "order": { "type": "integer", "minimum": 1 },
-        "state": { "enum": ["archived", "missing"] },
-        "r2": {"type":"object","additionalProperties":false,"required":["bucket","key"],"properties":{"bucket":{"const":"stats47-private"},"key":{"type":"string","pattern":"^sns-assets/(x|instagram|threads|youtube|tiktok)/[0-9]+/(image|slide|thumbnail)-[0-9]+/[0-9a-f]{64}\\.(png|jpg|webp|gif)$"}}},
+        "role": {
+          "enum": [
+            "image",
+            "slide",
+            "video",
+            "thumbnail"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "state": {
+          "enum": [
+            "archived",
+            "missing"
+          ]
+        },
+        "r2": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "bucket",
+            "key"
+          ],
+          "properties": {
+            "bucket": {
+              "const": "stats47-private"
+            },
+            "key": {
+              "type": "string",
+              "pattern": "^sns-assets/(x|instagram|threads|youtube|tiktok)/[0-9]+/(image|slide|thumbnail)-[0-9]+/[0-9a-f]{64}\\.(png|jpg|webp|gif)$"
+            }
+          }
+        },
         "drive_path": {
           "description": "Google Drive の stats47 フォルダ起点の相対パス。fileId・URL・端末のマウント先は書かない",
           "type": "string",
           "pattern": "^SNS素材/(x|instagram|threads|youtube|tiktok)/[0-9]+/[A-Za-z0-9._-]+$"
         },
-        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "bytes": { "type": "integer", "minimum": 1 },
-        "mime": { "type": "string", "pattern": "^(image|video)/[a-z0-9.+-]+$" },
-        "width": { "type": "integer", "minimum": 1 },
-        "height": { "type": "integer", "minimum": 1 },
+        "sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mime": {
+          "type": "string",
+          "pattern": "^(image|video)/[a-z0-9.+-]+$"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
         "source": {
           "description": "保全したときの取得元 (repo 相対パス・R2 key・公開 URL)。絶対パスは書かない",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^(?!/)(?![A-Za-z]:)"
         },
-        "reason": { "type": "string", "minLength": 1 }
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
       },
-      "if": { "properties": { "state": { "const": "archived" } } },
-      "then": { "required": ["sha256", "bytes", "mime"], "anyOf":[{"required":["r2"]},{"required":["drive_path"]}] },
-      "else": { "required": ["reason"] }
+      "if": {
+        "properties": {
+          "state": {
+            "const": "archived"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "sha256",
+          "bytes",
+          "mime"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "r2"
+            ]
+          },
+          {
+            "required": [
+              "drive_path"
+            ]
+          }
+        ]
+      },
+      "else": {
+        "required": [
+          "reason"
+        ]
+      }
     }
   }
 }

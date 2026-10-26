@@ -19,6 +19,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
@@ -402,7 +403,7 @@ function IndicatorGrid({
             return (
               <SurfaceLinkCard
                 key={key}
-                href={`/ranking/${key}`}
+                href={hrefFor("ranking", { rankingKey: key })}
                 className="block p-3"
               >
                 <div className="text-sm font-medium mb-2 line-clamp-2">

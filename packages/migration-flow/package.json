@@ -10,6 +10,11 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts",
       "require": "./src/index.ts"
+    },
+    "./focus-file": {
+      "types": "./src/lib/focus-file.ts",
+      "import": "./src/lib/focus-file.ts",
+      "require": "./src/lib/focus-file.ts"
     }
   },
   "scripts": {

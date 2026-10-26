@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { getMetricConfig } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildEstatTableUrl } from '@stats47/data-configs/data-source';
 import {
   getJapanCatalogTheme,
@@ -156,7 +157,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
                 <ChartFooter
                   source={`e-Stat 統計表 ${m.sourceId} (公式全国値)`}
                   sourceLink={buildEstatTableUrl(m.sourceId)}
-                  rankingLink={`/ranking/${m.metricKey}`}
+                  rankingLink={hrefFor("ranking", { rankingKey: m.metricKey })}
                   rankingLabel="都道府県ランキングを見る"
                 />
               }

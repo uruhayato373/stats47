@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ListTree } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
@@ -68,7 +69,7 @@ export function SurveySideNav({
               {representativeRankings.map((item) => (
                 <RailNavRow
                   key={item.rankingKey}
-                  href={`/ranking/${item.rankingKey}`}
+                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                   chevron={false}
                 >
                   {item.label}

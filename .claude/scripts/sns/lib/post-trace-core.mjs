@@ -12,6 +12,7 @@
 import Ajv from "ajv";
 import postsSchema from "../../../../data/sns/posts.schema.json" with { type: "json" };
 import scriptsSchema from "../../../../data/sns/scripts.schema.json" with { type: "json" };
+import { addCommonSchema } from "../../lib/dataset-shape.mjs";
 
 /**
  * この時刻以降に作られた行は承認の記録が必須 (2026-10-09 オーナー決定: 新規投稿は承認必須)。
@@ -19,7 +20,8 @@ import scriptsSchema from "../../../../data/sns/scripts.schema.json" with { type
  */
 export const TRACE_CUTOVER = "2026-10-10T00:00:00.000Z";
 
-const ajv = new Ajv({ allErrors: true });
+// 台帳の schema は共通の型 (config/schema/common.schema.json) を $ref で参照する
+const ajv = addCommonSchema(new Ajv({ allErrors: true }));
 const validateLedgerShape = ajv.compile(postsSchema);
 const validateScriptShape = ajv.compile(scriptsSchema);
 

@@ -32,3 +32,21 @@ describe("PREFECTURE_LIST_2DIGIT", () => {
     expect(PREFECTURE_LIST_2DIGIT[46]).toEqual({ code: "47", name: "沖縄県" });
   });
 });
+
+describe("先頭ゼロ落ち・数値のコード (remotion 等の局所実装を吸収)", () => {
+  it("1 桁・数値・4 桁 (5 桁の先頭ゼロ落ち) を 2 桁へそろえる", () => {
+    expect(to2DigitPrefCode("1")).toBe("01");
+    expect(to2DigitPrefCode(1)).toBe("01");
+    expect(to2DigitPrefCode(47)).toBe("47");
+    expect(to2DigitPrefCode("1000")).toBe("01");
+    expect(to2DigitPrefCode(1000)).toBe("01");
+    expect(to2DigitPrefCode(13000)).toBe("13");
+    expect(to2DigitPrefCode("00000")).toBe("00");
+  });
+
+  it("5 桁化も同じ規則に従う", () => {
+    expect(to5DigitPrefCode("1")).toBe("01000");
+    expect(to5DigitPrefCode(1000)).toBe("01000");
+    expect(to5DigitPrefCode(" 13 ")).toBe("13000");
+  });
+});

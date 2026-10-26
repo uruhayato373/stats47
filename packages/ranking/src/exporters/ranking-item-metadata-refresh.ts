@@ -17,9 +17,9 @@ import type { RankingItem } from "../types/ranking-item";
  * SSOT** なので以下を item.json に反映する:
  *   - `title`       → item.title       (正準名。年・※を除去した clean な値)
  *   - `subtitle`    → item.subtitle    (定義補足。未定義なら消す)
- *   - `note`        → item.annotation  (データ注釈。UI のキャプション)
+ *   - `note`        → item.annotation  (データ注釈。UI のキャプション。未定義なら消す)
  *   - `category`    → item.categoryKey (誤分類修正をカテゴリページに反映)
- *   - `additionalCategories` → item.additionalCategories
+ *   - `additionalCategories` → item.additionalCategories (未定義なら null)
  * seoTitle/seoDescription は `ranking-item-seo-refresh` が別途担う。
  *
  * ★実行順: 本 refresh は **master (exportRankingItemsPerUrl) の前**に走らせること。
@@ -107,17 +107,14 @@ export async function refreshRankingItemMetadata(
 
         const item = snapshot.item;
 
-        // title / category は必須 → 常に config を SSOT として上書き。
+        // 全項目 config が SSOT。builder (build-ranking-item-from-metric.ts) と同じく
+        // config に無い値は消す。既存値を温存すると config から消した注釈・副カテゴリが
+        // item.json に残り続ける (2026-10-26 是正)。
         const nextTitle = metric.title;
         const nextCategoryKey = metric.category;
-        // subtitle は config 定義を SSOT (未定義 → 消す)。
         const nextSubtitle = strOrNull(metric.subtitle);
-        // note → annotation。config に無ければ既存 annotation を温存。
-        const nextAnnotation = strOrNull(metric.note) ?? strOrNull(item.annotation);
-        // additionalCategories は config 定義があれば優先、無ければ既存温存。
-        const nextAdditional = metric.additionalCategories
-          ? normalizeAdditional(metric.additionalCategories)
-          : normalizeAdditional(item.additionalCategories);
+        const nextAnnotation = strOrNull(metric.note);
+        const nextAdditional = normalizeAdditional(metric.additionalCategories);
 
         const curSubtitle = strOrNull(item.subtitle);
         const curAnnotation = strOrNull(item.annotation);

@@ -17,6 +17,7 @@ import {
   getMagazine,
 } from "./index";
 import { NOTE_PRODUCT_MAPPINGS } from "../../../../packages/product-factory/src/channels/note/product-note-mapping";
+import { NOTE_URL_PATTERN } from "../../lib/dataset-shape.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -48,8 +49,10 @@ try {
   const body = src.slice(src.indexOf("new Set(["));
   for (const m of body.matchAll(/"([a-z0-9-]{3,})"/g)) knownKeys.add(m[1]);
 } catch {
-  warns.push("KNOWN_RANKING_KEYS を読めず stats47Targets の実在検証をスキップ");
+  // 読めないまま通すと参照切れを見逃すので止める (2026-10-26 に warn から error へ)
+  errors.push("KNOWN_RANKING_KEYS を読めず stats47Targets の実在を検証できない");
 }
+if (!knownKeys.size) errors.push("KNOWN_RANKING_KEYS から key を 1 件も読めない (stats47Targets の実在を検証できない)");
 
 // Web商品ハブの生成物から、noteカードに出してよい公開商品だけを読む。
 let storefrontTargets = new Set<string>();
@@ -184,10 +187,8 @@ for (const a of NOTE_ARTICLES) {
   // 5. published は noteUrl 必須
   if (a.status === "published" && !a.noteUrl)
     errors.push(`${a.key}: status=published だが noteUrl なし`);
-  if (
-    a.noteUrl &&
-    !/^https:\/\/note\.com\/stats47\/n\/n[0-9a-f]+$/i.test(a.noteUrl)
-  ) {
+  // noteUrl の形は config/schema/common.schema.json の noteUrl が唯一の定義 (schema と同じ正規表現を使う)
+  if (a.noteUrl && !NOTE_URL_PATTERN.test(a.noteUrl)) {
     errors.push(`${a.key}: noteUrl が stats47 公開記事URL形式ではない (${a.noteUrl})`);
   }
 
@@ -195,13 +196,14 @@ for (const a of NOTE_ARTICLES) {
   if (a.isPaid && (!a.priceJpy || a.priceJpy <= 0))
     warns.push(`${a.key}: isPaid=true だが priceJpy 未設定`);
 
-  // 7. ranking target のキー実在 (warn)。Geo/テーマ/area等の公開面はこの検査の責務外。
+  // 7. ranking target のキー実在 (error。2026-10-26 に warn から上げた: 公開記事の誘導先が無いランキングを
+  //    指していても検査が通っていた)。Geo/テーマ/area等の公開面はこの検査の責務外。
   if (a.stats47Targets && knownKeys.size) {
     for (const t of a.stats47Targets) {
       if (!t.startsWith("/ranking/")) continue;
       const key = t.replace(/^\/ranking\//, "").split(/[/?#]/)[0];
       if (!knownKeys.has(key))
-        warns.push(`${a.key}: stats47Targets "${t}" は KNOWN_RANKING_KEYS に不在`);
+        errors.push(`${a.key}: stats47Targets "${t}" は KNOWN_RANKING_KEYS に不在`);
     }
   }
 

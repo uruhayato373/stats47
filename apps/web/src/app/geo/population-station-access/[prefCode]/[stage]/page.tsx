@@ -39,8 +39,8 @@ export async function generateMetadata({
   return {
     title:
       prefecture && isValidStage
-        ? prefecture.name + 'の' + STAGE_LABELS[stage] + ' | stats47地域分析'
-        : '人口×駅アクセスの途中地図 | stats47地域分析',
+        ? prefecture.name + 'の' + STAGE_LABELS[stage] + ' | 地域分析'
+        : '人口×駅アクセスの途中地図 | 地域分析',
     description:
       '1km将来人口、駅800m圏との重なり、集計検算から最終結果までを都道府県別に確認します。',
     alternates: {

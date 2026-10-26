@@ -1,4 +1,5 @@
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
 import { RankBadge } from '@/components/atoms/RankBadge';
@@ -45,7 +46,7 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
           <span className="sr-only">{rankScope}</span>
           <div className="min-w-0 flex-1">
             <Link
-              href={item.href ?? `/ranking/${item.rankingKey}`}
+              href={item.href ?? hrefFor("ranking", { rankingKey: item.rankingKey })}
               data-nav-label={item.rankingKey}
               className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
             >

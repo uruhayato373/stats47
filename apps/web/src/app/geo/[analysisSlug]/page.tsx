@@ -27,7 +27,7 @@ export async function generateMetadata({
   if (!isGeoCrossAnalysisSlug(analysisSlug)) return {};
   const config = GEO_CROSS_ANALYSIS_CONFIGS[analysisSlug];
   return {
-    title: `${config.shortTitle} | stats47地域分析`,
+    title: `${config.shortTitle} | 地域分析`,
     description: config.description,
     alternates: { canonical: `/geo/${analysisSlug}` },
   };

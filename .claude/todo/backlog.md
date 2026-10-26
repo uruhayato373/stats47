@@ -4085,6 +4085,13 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **trigger**: 上のどれかを触る改修が入るとき、または同じ値の不一致で不具合が出たとき。
 - **停止条件**: 寄せると出力 (表示文言・ファイル名・URL・画像ハッシュ) が変わるものは、変えてよいとオーナーが決めるまで寄せない。
 - **完了条件**: 候補ごとに「正本へ寄せた」か「寄せない理由を正本の近くに書いた」かが決まっている。
+- **2026-10-26 の進捗 (オーナー承認の配線監査で実施)**: 候補 2 は `@stats47/area` の `prefectureShortName` へ寄せた (北海道は落とさない)。
+  単一実装の検査 `packages/area/src/utils/__tests__/prefecture-short-name-single-impl.test.ts` は、まだ寄せていない 6 件を許可リストに持つ (縮小のみ)。
+  そのうち `packages/svg-builder/src/charts/bar-chart.ts:192` は `(都|道|府|県)$` で北海道を「北海」にする。`.claude/scripts` の .mjs 18 ファイルにも独自の実装があり、TS の正本を import できない。
+  候補 4 は databook のカテゴリ名 (シート名が CATEGORY_DEFS の表示名に変わった。配布済みの xlsx は再生成していない) と migration-flow の FocusFile 変換 (`@stats47/migration-flow` の `focus-file.ts`) を寄せた。
+  候補 5 は svg-builder と product-factory の package.json に `@stats47/area` を宣言した。
+  調査名は解決時にマスタ (`packages/ranking/src/data/surveys.json`) の name で上書きしているが、生成スクリプト `build-estat-provenance.ts` の出力にはまだ旧表記が残る。
+  Kindle の単位検査 (`content-invariants.ts`) は単位の次元を `parseUnit` で判定するようになり、千人・万円なども検出するようになった。既存の版の `verify-epub` は再実行していない。
 
 ### [CHART-SOURCE-DERIVE-01] 図ごとの出典 (ブログの `<data-source>` タグ・機能別 ChartFooter の固定値) をデータから導出する
 
@@ -4314,6 +4321,9 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 色・トーン・見た目の約束を決める。言葉のほうは `STP-MESSAGE-ROLLOUT-01`。（出典: 2026-09-28 の手書きメモ・vault dairy/2026-09-28）
 
+- **2026-10-26 追記 (配線監査)**: ブランドの主色が媒体で 2 つある。サイトの OGP は `apps/web/src/features/ogp/brand.ts` の `#304BC6`、動画は `apps/remotion/src/shared/themes/brand.ts` の `#1E40AF`。
+  色を決めたら、片方を packages に移してもう片方が import する (どちらを正にするかがこのカードの決定事項)。
+
 ### [DOCS-CHECK-CI-SPEED-01] docs のチェック CI に時間がかかっているのを短くする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-12] [領域:管理]
 
@@ -4484,6 +4494,36 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **次**: リリース対象のパスの定義を 1 つのモジュールに置き、デプロイの inline script とオーバーレイの両方がそれを import する。オーバーレイで返さない種類は理由と一緒に定義に書く。
 - **完了条件**: 定義からパスを 1 種類消すとデプロイ側とオーバーレイ側の両方のテストが落ちる。
 
+### [WIRING-URL-HREF-REST-01] URL の直書き 141 件を `hrefFor` に置き換え、旧 URL 転送の残りの不整合を直す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run src/__tests__/href-builder-ratchet.test.ts] [起票:2026-10-26] [領域:サイト]
+
+- **背景**: 2026-10-26 の配線監査で、`data/content/routes.json` から URL を作る `hrefFor` (`packages/data-configs/src/content/href.ts`) を作り、ranking・themes・municipalities の直書き 61 か所を置き換えた。
+  残り 141 件 (`/areas/`・`/blog/`・`/tag/`・`/category/`・`/geo/` など) は `apps/web/src/__tests__/href-builder-ratchet.test.ts` が件数で固定している (増えると落ち、減らすだけを許す)。
+- **次 (実行順)**: ①route の種類ごとに置き換え、ratchet の上限をその分だけ下げる ②`/ports/` が末尾スラッシュの正規化を挟んで 301 を 2 回返す件を 1 回にする ③`apps/web/src/config/legacy-theme-redirects.ts` の `/areas/{県}/administrativefinancial` の行は、先の規則が `/themes/local-finance?pref=` へ転送するので使われていない。消すか規則の順を直す。
+- **停止条件**: 置き換えで URL の文字列が変わるものは止める (`hrefFor` は routes.json の pattern と同じ文字列を返す前提)。
+- **完了条件**: ratchet の上限が 0 で、`middleware.test.ts` の 301 がすべて 1 回で着地する。
+
+### [LEDGER-DUPLICATE-FACTS-01] 2 つの台帳が同じ事実を持つ箇所で、どちらを正本にするかを決めて片方を導出にする
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-26] [領域:商品]
+
+- **背景**: 2026-10-26 の配線監査で、台帳間の参照は `config/datasets.mjs` の `refs` と `npm run check-datasets` で検査するようになった。ただし、外部の公開状態や価格に効く写しは値を変えずに残した。
+- **残っている重複 (証拠)**:
+  1. ココナラの公開状態: `packages/product-factory` の `packs.ts` は P-01 を listed、`config/coconala-listings.json` は withdrawn (2026-10-19 撤退)。note の商品カードが packs を読むので、先に変えるとリンク切れになりうる (memory `project_coconala_withdrawal`)。
+  2. 価格: `sales-catalog.ts` は listing の価格が無いときカタログの値を使う。listing の価格がカタログの価格帯に入るかの検査が無い。
+  3. KDP の状態: `config/kdp-listings.json` の 1 レコードに `status`・`kdpStatus`・`publicationStage` の 3 つがあり、組み合わせが 4 通りある。
+  4. Kindle のタイトル: `data/products/kindle-status.json` (2026-09-06 生成) が `book-catalog.ts` と 5 冊食い違う。派生の状態なので、鮮度の検査が要る。
+- **次**: 項目ごとに正本を決め (1 と 3 はオーナー判断)、写しを生成にするか `refs` の `copies` で照合する。
+- **停止条件**: 公開状態・価格を変える変更はオーナーの承認を得てから。
+- **完了条件**: 4 項目それぞれで正本が決まり、写しの不一致を `check-datasets` が error で止める。
+
+### [TEST-BOUNDARY-WINDOWS-CONTROL-01] クライアント境界テストの陽性対照が Windows で落ち、Windows では境界を検査できていない
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:cd apps/web && npx vitest run src/__tests__/client-bundle-boundary.test.ts] [起票:2026-10-26] [領域:管理]
+
+- **事象 (2026-10-26、Windows で実測)**: `apps/web/src/__tests__/client-bundle-boundary.test.ts` と `packages/ranking/src/__tests__/client-entry-registry-boundary.test.ts` が、`path.join` で作ったパスの末尾一致で registry への到達を判定する。
+  Windows では区切りが `\` になるので陽性対照が落ち、「registry に届かない」側の判定も実質何も見ていない。同じ回に `packages/product-factory` の free-sample (`free-sample-delivery.ts:22`) と sns の `material-reconciliation.test.mjs:31` も `\` で落ちた。
+- **次**: 比較の前にパスを `/` にそろえる。Linux の CI では通るので、Windows で陽性対照が赤→緑になることを確かめる。
+- **完了条件**: Windows で 4 本のテストが通り、陽性対照を壊すと赤になる。
+
 ## 🟢 低 — 再開条件を満たしたら着手する
 
 ### [VITE-CONFIG-ESM-WARN-01] vitest.config.ts が CommonJS として読まれ、Vite の次の major で読めなくなる警告が出ている
@@ -4518,6 +4558,15 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **判断・再開条件**: 2026-10-19のユーザー指示でSNS展開は後回し。note・サイトの既存公開分は維持し、SNSはユーザーが再開を指示するまで保留する。note・サイトの拡充は `CONTENT-KAKEI-EXPANSION-01`。
 - **次・担当**: 再開時にx-strategist / instagram-strategistが既存note・サイトから家計支出の10分類・個別品目比較・都市ごとの特徴品目の候補を選び、共通4:5・1枚型で管理画面のnote・X・Instagramを比較して確認する。既存の試作素材を維持する。
 - **停止条件・完了条件**: 今は制作・レンダリング・投稿を行わない。候補の3媒体比較・確認ができれば制作準備完了とし、投稿・予約は別途ユーザーの明示指示を得る。
+
+### [SNS-POSTS-METRIC-REFS-01] 投稿台帳の指標参照 92 件の warning を、投稿の種類ごとの参照先に分けて error に上げる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets -- --refs] [起票:2026-10-26] [領域:SNS]
+
+- **背景**: 2026-10-26 から `check-datasets` が `data/sns/posts.json` の `metric_keys` と ranking 投稿の `content_key` を指標の正本と照合する。投稿済みの記録は書き換えないので warn にした。
+- **内訳 (92 件・50 種)**: 棒グラフレース `bcr-*` 31、SSDS 旧キー `ssdse-*` 30、Geo の指標名 28、id=1194 の下書き (ブログの slug を ranking として登録) 2、ほか 2。
+- **trigger**: 新しい投稿で参照切れが増えたとき、または投稿の種類 (domain) を見直すとき。
+- **次**: domain ごとに参照先 (指標・Geo 分析・ブログ) を `refs` の `where` で分け、指標を指す domain だけを error にする。id=1194 は下書きなので直してよい。
+- **完了条件**: 指標を指す投稿の参照切れが error で、warning は過去の記録だけになっている。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 

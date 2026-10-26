@@ -9,6 +9,7 @@ import {
 import { getRequiredBaseUrl } from "@/lib/env";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import type { Metadata } from "next";
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = findStorefrontProduct(slug);
   if (!product || !isValidNoteKey(noteKey)) return { robots: ROBOTS };
 
-  const title = `${product.title} | stats47`;
+  const title = product.title;
   const baseUrl = getRequiredBaseUrl();
   const url = `${baseUrl}/products/${product.slug}/from/note/${noteKey}`;
 
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: product.description,
     robots: ROBOTS,
     ...generateOGMetadata({
-      title,
+      title: formatOgpTitle(title),
       description: product.description,
       imageUrl: ogpImageUrl(ogpImageKeys.product(product.slug)),
       url,

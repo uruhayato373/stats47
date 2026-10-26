@@ -365,6 +365,15 @@ async function run() {
     isKnownMetric: (key) => Boolean(METRICS_REGISTRY[key]),
     idFromHref: contentIdFromHref,
   });
+  // 指標の正本に無い key は関係を張らない。黙って捨てず件数を出す (違反の一覧と warn の理由は
+  // config/datasets.mjs の sns.posts の refs。npm run check-datasets -- --refs で全件)
+  if (external.unknownMetricKeys.length)
+    console.warn(
+      `external: 指標の正本に無い key ${external.unknownMetricKeys.length} 件は関係を張らない (例: ${external.unknownMetricKeys
+        .slice(0, 3)
+        .map((u) => `${u.id}→${u.key}`)
+        .join(', ')})`
+    );
   const externalLinks = external.links
     .filter((edge) => allIds.has(edge.to))
     .sort((a, b) => `${a.from}:${a.to}`.localeCompare(`${b.from}:${b.to}`));

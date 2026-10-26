@@ -14,7 +14,7 @@ import type { Metadata } from 'next';
 // 固定パスでもR2を実行時に読む。ビルド時の取得失敗を出典欠落のまま固定しない。
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
-  title: '空間分析で使うデータ・出典 | stats47',
+  title: '空間分析で使うデータ・出典',
   description: '住宅地点、洪水、駅と将来人口の分析に使う一次資料、対象年度、空間粒度、利用条件を確認できます。',
   alternates: { canonical: '/geo/data-catalog' },
 };

@@ -8,6 +8,7 @@ import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared/themes/bran
 import type { RankingEntry } from "@/shared/types/ranking";
 import { SITE } from "@stats47/types";
 import { LANDSCAPE_TILE_LAYOUT } from "../../shared/utils/video-tile-layout";
+import { to2DigitPrefCode } from "@stats47/area";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -42,10 +43,8 @@ const GRID_ROWS = GRID_MAX_Y;
 // Helpers
 // ---------------------------------------------------------------------------
 
-function normalizePrefId(code: string | number): string {
-  const s = String(code).replace(/0{3}$/, "");
-  return s.padStart(2, "0");
-}
+/** `@stats47/area` の単一実装 ("01000" / "13" / 1 → "01" / "13" / "01") */
+const normalizePrefId = to2DigitPrefCode;
 
 function buildEntryMap(entries: RankingEntry[]): Map<string, RankingEntry> {
   const map = new Map<string, RankingEntry>();

@@ -1,4 +1,5 @@
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
 
@@ -67,7 +68,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
           ) : (
             <Link
               {...navSurfaceProps("category_ranking_list")}
-              href={`/ranking/${primary.rankingKey}`}
+              href={hrefFor("ranking", { rankingKey: primary.rankingKey })}
               className="min-w-0 flex-1 truncate text-[13px] hover:text-primary hover:underline"
             >
               {readerLabel}
@@ -96,7 +97,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
               <Link
                 {...navSurfaceProps("category_ranking_list")}
                 key={variant.rankingKey}
-                href={`/ranking/${variant.rankingKey}`}
+                href={hrefFor("ranking", { rankingKey: variant.rankingKey })}
                 className="border border-border px-1.5 text-[11px] leading-[18px] text-muted-foreground hover:border-primary hover:text-primary"
               >
                 {variant.subtitle ?? "総数"}

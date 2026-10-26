@@ -393,3 +393,43 @@ describe('動的コンテンツの soft-404 防止', () => {
     expect(middleware(request('/blog/beer-peak-month-july-to-december')).status).not.toBe(410);
   });
 });
+
+describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は config/legacy-theme-redirects.ts)', () => {
+  // vitest.shims.ts の redirect は第 2 引数に数値しか受けない。本物の Next は { status } も受けるので合わせる。
+  const originalRedirect = NextResponse.redirect;
+  beforeAll(() => {
+    NextResponse.redirect = ((url: string | URL, init?: number | ResponseInit) =>
+      originalRedirect(url, typeof init === 'number' ? init : init?.status)) as typeof NextResponse.redirect;
+  });
+  afterAll(() => {
+    NextResponse.redirect = originalRedirect;
+  });
+
+  function legacyRequest(pathWithQuery: string): NextRequest {
+    const req = new NextRequest(`https://stats47.jp${pathWithQuery}`);
+    Object.defineProperty(req, 'nextUrl', { value: new URL(req.url) });
+    return req;
+  }
+
+  test.each([
+    ['/ports', '/themes/ports'],
+    // 末尾スラッシュは先に正規化される (/ports/ → /ports → /themes/ports の 2 段)
+    ['/ports/', '/ports'],
+    ['/fishing-ports?x=1', '/themes/fishery-marine?x=1'],
+    ['/station-passengers/13000', '/themes/railway'],
+    ['/maps/highway-timeline/2020', '/themes/roads'],
+    ['/gis-cross/migration-flow', '/themes/population-dynamics'],
+    ['/gis-cross/depopulation-medical/x', '/themes/healthcare'],
+    ['/gis-cross/sunshine-map?y=2', '/themes/climate?y=2'],
+    ['/gis-cross/unknown', '/themes'],
+    ['/gis-cross', '/themes'],
+    ['/areas/13000/laborwage', '/areas/13000/labor-wages'],
+    // 地方財政は県別テーマを持たず、先の規則で /themes/local-finance?pref= へ転送される
+    ['/areas/13000/administrativefinancial', '/themes/local-finance?pref=13000'],
+    ['/areas/13000/energy', '/areas/13000'],
+  ])('%s を %s へ301する', (source, destination) => {
+    const response = middleware(legacyRequest(source));
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(`https://stats47.jp${destination}`);
+  });
+});

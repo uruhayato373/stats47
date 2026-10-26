@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "common.schema.json",
+  "title": "台帳どうしで共有する型",
+  "description": "config/ と data/ の台帳の JSON Schema が $ref で参照する共通の型 (2026-10-26)。同じ値の形を台帳ごとに書き分けない。コードから使うときは .claude/scripts/lib/dataset-shape.mjs の addCommonSchema(ajv) で Ajv に登録し、正規表現は commonPattern(name) で同じ定義から作る。",
+  "$defs": {
+    "sha256": {
+      "description": "小文字 16 進の SHA-256",
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "date": {
+      "description": "暦日 (YYYY-MM-DD)",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "datetime": {
+      "description": "ISO 8601 の日時 (秒まで・時差付き)。新しく書く記録はこれを使う",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,3})?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "legacyTimestamp": {
+      "description": "SQLite 時代から残る日時を含む台帳用。暦日・空白区切り・時差なしも受ける (SNS 投稿台帳の 2026-10 以前の行)",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([ T]\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,3})?)?(Z|[+-]\\d{2}:\\d{2})?)?$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$"
+    },
+    "noteUrl": {
+      "description": "stats47 の note 公開記事の URL。記事キーは n + 小文字 16 進 12 桁 (2026-10-26 時点の公開 428 件すべてがこの形)",
+      "type": "string",
+      "pattern": "^https://note\\.com/stats47/n/n[0-9a-f]{12}$"
+    },
+    "noteMagazineUrl": {
+      "type": "string",
+      "pattern": "^https://note\\.com/stats47/m/m[a-f0-9]+$"
+    },
+    "noteVertical": {
+      "description": "note 記事・マガジンの系統",
+      "enum": ["stats47-note", "koumuin-claude-code", "koumuin-estat-claude-code", "koumuin-gis", "product-sales", "membership"]
+    },
+    "platform": {
+      "description": "SNS 投稿台帳の媒体",
+      "enum": ["x", "instagram", "threads", "youtube", "tiktok", "note"]
+    },
+    "salesChannel": {
+      "description": "販売台帳の販路",
+      "enum": ["kdp", "coconala"]
+    },
+    "coconalaListingId": {
+      "description": "ココナラの出品台帳のキー (商品ファクトリーのテーマパック P-NN と Geo サービス)",
+      "type": "string",
+      "pattern": "^(P-\\d{2}|GEO-[A-Z]+-\\d{2})$"
+    },
+    "kindleBookId": {
+      "type": "string",
+      "pattern": "^K-S\\d-\\d{2}$"
+    },
+    "asin": {
+      "type": "string",
+      "pattern": "^B0[A-Z0-9]{8}$"
+    },
+    "yen": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
 import { StatisticsScopeNav, type StatisticsScopeHrefs } from '@/components/navigation';
@@ -107,7 +108,7 @@ export function ThemeSideNav({
             {metrics.map((metric) => (
               <RailNavRow
                 key={metric.rankingKey}
-                href={`/ranking/${metric.rankingKey}`}
+                href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
                 chevron={false}
               >
                 {metric.label}

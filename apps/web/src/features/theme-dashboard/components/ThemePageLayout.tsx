@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -317,7 +318,7 @@ export async function ThemePageLayout({
                           {themeMetrics.map((metric) => (
                             <RailNavRow
                               key={metric.rankingKey}
-                              href={`/ranking/${metric.rankingKey}`}
+                              href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
                               chevron={false}
                               className="px-0"
                             >

@@ -11,6 +11,7 @@ import { UrlPolicy } from '@/lib/url-policy';
 import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
 import { GEO_BASELINE_REDIRECTS } from '@/config/geo-redirects';
 import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
+import { AREA_CATEGORY_TO_THEME, resolveLegacyThemePathRedirect } from '@/config/legacy-theme-redirects';
 import { RANKING_SLUG_REDIRECTS } from '@/config/ranking-redirects';
 import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
 
@@ -356,27 +357,8 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
 
   // /areas/{prefCode}/{categoryKey} → /areas/{prefCode}/{themeSlug} (301)
   // 旧カテゴリ別ページを対応するテーマページへリダイレクト
-  const CATEGORY_TO_THEME: Record<string, string> = {
-    population: 'population-dynamics',
-    laborwage: 'labor-wages',
-    economy: 'local-economy',
-    agriculture: 'local-economy',
-    miningindustry: 'manufacturing',
-    construction: 'living-housing',
-    commercial: 'local-economy',
-    // tourism は旧 categoryKey と現行 themeSlug が同一なので転送しない。
-    // ここへ含めると同一 URL への 301 ループになる。
-    socialsecurity: 'healthcare',
-    educationsports: 'education-culture',
-    safetyenvironment: 'safety',
-    landweather: 'climate',
-    international: 'foreign-residents',
-    administrativefinancial: 'local-finance',
-    // テーマ未対応カテゴリ → エリアプロフィールへ
-    energy: '',
-    ict: '',
-    infrastructure: '',
-  };
+  // 対応表は config/legacy-theme-redirects.ts (転送先の実在をテストで照合する)
+  const CATEGORY_TO_THEME = AREA_CATEGORY_TO_THEME;
   if (
     seg.length === 3 &&
     /^\d{5}$/.test(seg[1]) &&
@@ -568,65 +550,12 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // /ports・/fishing-ports (廃止 2026-05-28) → /themes に統合
-  //  - /ports → /themes/ports (港湾テーマ新設)
-  //  - /fishing-ports → /themes/fishery-marine (既存「漁業（水産業）」テーマ、漁港数を含む)
-  // 独立ページを廃止し theme に一本化。クエリは保持。
-  if (pathname === '/ports' || pathname === '/ports/') {
+  // 廃止ページ (/ports・/fishing-ports・/station-passengers・/maps/highway-timeline・/gis-cross) → テーマへ 301。
+  // 表と照合順は config/legacy-theme-redirects.ts。クエリは保持。
+  const legacyThemeDestination = resolveLegacyThemePathRedirect(pathname);
+  if (legacyThemeDestination) {
     return NextResponse.redirect(
-      new URL(`/themes/ports${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (pathname === '/fishing-ports' || pathname === '/fishing-ports/') {
-    return NextResponse.redirect(
-      new URL(`/themes/fishery-marine${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /station-passengers・/station-passengers/[prefCode] (廃止 2026-05-28) → /themes/railway に統合
-  // 駅別乗降客数の県別バブルマップは鉄道テーマに集約。API (/api/station-passengers/*) も廃止。
-  if (/^\/station-passengers(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/railway${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /maps/highway-timeline・/maps/highway-timeline/[year] (廃止 2026-05-28) → /themes/roads に統合
-  // 高速道路時系列マップは道路テーマに集約。
-  if (/^\/maps\/highway-timeline(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/roads${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /gis-cross・/gis-cross/* (廃止 2026-05-29) → /themes に統合
-  //  - migration-flow → /themes/population-dynamics (人口移動フローを人口動態テーマに埋め込み)
-  //  - depopulation-medical → /themes/healthcare (過疎×医療マップを医療テーマに埋め込み)
-  //  - sunshine-map → /themes/climate (気候テーマ新設、日照地図を埋め込み)
-  //  - hub → /themes
-  // 具体 path を先に判定し、最後にハブをフォールバック。クエリは保持。
-  if (/^\/gis-cross\/migration-flow(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/population-dynamics${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross\/depopulation-medical(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/healthcare${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross\/sunshine-map(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/climate${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes${req.nextUrl.search}`, req.url),
+      new URL(`${legacyThemeDestination}${req.nextUrl.search}`, req.url),
       { status: 301 }
     );
   }

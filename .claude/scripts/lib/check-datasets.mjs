@@ -17,10 +17,14 @@
  *     当たるファイルが schema に合わない (SCHEMA_REQUIRED_KINDS。台帳の正本が形の契約を持たないと、書き手の差分で黙って壊れる)。
  *     それ以外の種類でも schema を宣言した行は同じく検証する (判断に使う state・series の記録。2026-10-20)
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
- * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
+ *   - 台帳の行の refs (と REGISTRY_REFS) が指す ID が参照先の台帳・registry に無い / 写しの項目が参照先と違う /
+ *     refs の宣言の不備 (2026-10-26。書き方は config/datasets.mjs の REFS の説明)
+ * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。severity: "warn" の参照の違反
+ * (既存データの違反を理由付きで残している参照。先頭 10 件、--refs で全件)。
  *
  *   npm run check-datasets             # 検査 (error があれば exit 1)
  *   npm run check-datasets -- --moves  # 移行対象の行も一覧する
+ *   npm run check-datasets -- --refs   # warn の参照の違反を全件出す
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
@@ -29,8 +33,9 @@ import Ajv from "ajv";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, REGISTRIES, REGISTRY_REFS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
+import { addCommonSchema } from "./dataset-shape.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
@@ -73,7 +78,7 @@ export function needsSchema(ds) {
  */
 export function checkSchemas({ datasets, files, readJson, exists }) {
   const errors = [];
-  const ajv = new Ajv({ allErrors: true });
+  const ajv = addCommonSchema(new Ajv({ allErrors: true }));
   for (const ds of datasets) {
     if (ds.schema !== undefined && !SCHEMA_FILE.test(ds.schema)) errors.push(`${ds.id}: schema は *.schema.json を指す (${ds.schema})`);
     // config / ledger は schema が必須。それ以外の種類も、schema を宣言した行は当たるファイルを検証する
@@ -106,6 +111,209 @@ export function checkSchemas({ datasets, files, readJson, exists }) {
     }
   }
   return errors;
+}
+
+// ── 台帳どうしの参照 (外部キー相当) ── 2026-10-26。宣言の書き方は config/datasets.mjs の REFS の説明
+
+const REGISTRY_PREFIX = "registry:";
+const REF_KEYS = new Set(["field", "to", "key", "where", "parse", "copies", "severity", "why"]);
+
+/**
+ * JSON の値をたどる。path は "." 区切り。`name[]` は配列の各要素、`*` はオブジェクトの各値、末尾の `$keys` はオブジェクトのキー。
+ * 返す parent は値を持つオブジェクト (where と copies が兄弟の項目を見るのに使う。`$keys` ではキーの指す値)。
+ * 途中で無い項目 (undefined / null) は黙って飛ばす (任意項目の参照は、値があるときだけ検査する)。
+ * @param {unknown} doc
+ * @param {string} path
+ * @returns {{ value: unknown, parent: any }[]}
+ */
+export function selectPath(doc, path) {
+  /** @type {{ value: any, parent: any }[]} */
+  let nodes = [{ value: doc, parent: null }];
+  const segments = path.split(".");
+  segments.forEach((segment, i) => {
+    /** @type {{ value: any, parent: any }[]} */
+    const next = [];
+    const isObject = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
+    for (const node of nodes) {
+      if (segment === "$keys") {
+        if (i !== segments.length - 1) throw new Error(`$keys は path の末尾にだけ置く: ${path}`);
+        if (isObject(node.value)) for (const [k, v] of Object.entries(node.value)) next.push({ value: k, parent: v });
+      } else if (segment === "*") {
+        if (isObject(node.value)) for (const v of Object.values(node.value)) next.push({ value: v, parent: node.value });
+      } else {
+        const iterate = segment.endsWith("[]");
+        const name = iterate ? segment.slice(0, -2) : segment;
+        const value = name === "" ? node.value : isObject(node.value) ? node.value[name] : undefined;
+        const parent = name === "" ? node.parent : node.value;
+        if (value === undefined || value === null) continue;
+        if (iterate) {
+          if (Array.isArray(value)) for (const item of value) next.push({ value: item, parent });
+        } else next.push({ value, parent });
+      }
+    }
+    nodes = next;
+  });
+  return nodes;
+}
+
+/**
+ * 参照の値を ID の並びにする。parse: "list" は配列・JSON 配列の文字列・カンマ区切りの文字列を受ける
+ * (SNS 投稿台帳の metric_keys は書き手ごとに 3 通りで入っている)。
+ * @param {unknown} value
+ * @param {string | undefined} parse
+ * @returns {unknown[]}
+ */
+export function refValues(value, parse) {
+  if (parse !== "list") return [value];
+  if (Array.isArray(value)) return value;
+  if (typeof value !== "string") return [value];
+  const text = value.trim();
+  if (text === "") return [];
+  if (text.startsWith("[")) {
+    try {
+      const parsed = JSON.parse(text);
+      if (Array.isArray(parsed)) return parsed;
+    } catch {
+      // JSON として読めない文字列はカンマ区切りとして扱う
+    }
+  }
+  return text.split(",").map((s) => s.trim()).filter(Boolean);
+}
+
+/**
+ * TS 側の正本 (指標の registry・商品カタログなど) から ID の集合を作る。check-datasets は素の node で動くので
+ * TS を import せず、宣言した正規表現で本文から読む。読んだ件数が 0 なら読み方の取り違えとして例外にする
+ * (0 件の集合で照合すると、全件が参照切れに見えるか、照合そのものが消える)。
+ * @param {{ files: string[], pattern: string, between?: [string, string] }} registry
+ * @param {(path: string) => string} readText
+ */
+export function resolveRegistry(registry, readText) {
+  const ids = new Set();
+  for (const file of registry.files) {
+    let text = readText(file);
+    if (registry.between) {
+      const [start, end] = registry.between;
+      const from = text.indexOf(start);
+      const to = text.indexOf(end, from + 1);
+      if (from < 0 || to < 0) throw new Error(`${file} に区切り ${start} … ${end} が無い`);
+      text = text.slice(from, to);
+    }
+    for (const m of text.matchAll(new RegExp(registry.pattern, "gm"))) ids.add(m[1]);
+  }
+  if (ids.size === 0) throw new Error(`registry から ID を 1 件も読めない (${registry.files.join(", ")})`);
+  return ids;
+}
+
+const show = (v) => (typeof v === "string" ? v : JSON.stringify(v));
+/** 違反の要素を人が探せるように、要素の識別子 (id / key / slug) を添える */
+const where = (parent) => {
+  const label = ["id", "key", "slug"].find((k) => parent && (typeof parent[k] === "string" || typeof parent[k] === "number"));
+  return label ? ` (${label}=${parent[label]})` : "";
+};
+
+/**
+ * 台帳の行の refs と REGISTRY_REFS を検査する。参照先に無い ID は error (severity: "warn" を宣言した参照だけ warning)。
+ * readJson / readText は repo root 相対で読む。
+ * @param {{ datasets: any[], files: string[], readJson: (p: string) => any, readText: (p: string) => string, registries?: Record<string, any>, registryRefs?: any[] }} input
+ */
+export function checkRefs({ datasets, files, readJson, readText, registries = {}, registryRefs = [] }) {
+  const errors = [];
+  const warnings = [];
+  const byId = new Map(datasets.map((d) => [d.id, d]));
+  const registryCache = new Map();
+  const docCache = new Map();
+  const filesOf = (ds) => {
+    const re = patternToRegExp(ds.path);
+    return files.filter((f) => re.test(f));
+  };
+  const docOf = (file) => {
+    if (!docCache.has(file)) docCache.set(file, readJson(file));
+    return docCache.get(file);
+  };
+  /** 参照先の ID → 要素 (copies の比較に使う)。registry は要素を持たない */
+  const targetOf = (owner, ref) => {
+    if (typeof ref.to !== "string") throw new Error(`${owner}: refs の to が無い`);
+    if (ref.to.startsWith(REGISTRY_PREFIX)) {
+      const name = ref.to.slice(REGISTRY_PREFIX.length);
+      if (!registries[name]) throw new Error(`${owner}: REGISTRIES に無い参照先 ${ref.to}`);
+      if (ref.key || ref.copies) throw new Error(`${owner}: registry を参照先にするときは key / copies を書かない (${ref.to})`);
+      if (!registryCache.has(name)) registryCache.set(name, new Map([...resolveRegistry(registries[name], readText)].map((id) => [id, null])));
+      return registryCache.get(name);
+    }
+    const target = byId.get(ref.to);
+    if (!target) throw new Error(`${owner}: 台帳に無い参照先 ${ref.to}`);
+    if (!ref.key) throw new Error(`${owner}: 台帳を参照先にするときは key (参照先の ID の path) が要る (${ref.to})`);
+    const map = new Map();
+    for (const file of filesOf(target)) for (const { value, parent } of selectPath(docOf(file), ref.key)) map.set(value, parent);
+    if (map.size === 0) throw new Error(`${owner}: 参照先 ${ref.to} の ${ref.key} から ID を 1 件も読めない`);
+    return map;
+  };
+  const declare = (owner, ref) => {
+    for (const k of Object.keys(ref)) if (!REF_KEYS.has(k)) throw new Error(`${owner}: refs に知らない項目 ${k}`);
+    if (ref.severity !== undefined && ref.severity !== "warn") throw new Error(`${owner}: severity は "warn" だけ (既定は error)`);
+    if (ref.severity === "warn" && !(typeof ref.why === "string" && ref.why.length >= 10)) {
+      throw new Error(`${owner}: severity: "warn" には理由 (why) を書く`);
+    }
+    if (ref.parse !== undefined && ref.parse !== "list") throw new Error(`${owner}: parse は "list" だけ`);
+  };
+
+  for (const ds of datasets) {
+    for (const ref of ds.refs ?? []) {
+      const owner = `${ds.id} → ${ref.to} (${ref.field})`;
+      const sink = ref.severity === "warn" ? warnings : errors;
+      let target;
+      try {
+        declare(owner, ref);
+        target = targetOf(owner, ref);
+      } catch (e) {
+        errors.push(e instanceof Error ? e.message : String(e));
+        continue;
+      }
+      for (const file of filesOf(ds)) {
+        let doc;
+        try {
+          doc = docOf(file);
+        } catch (e) {
+          errors.push(`${owner}: JSON として読めない ${file}: ${e instanceof Error ? e.message : String(e)}`);
+          continue;
+        }
+        for (const { value, parent } of selectPath(doc, ref.field)) {
+          if (ref.where && !Object.entries(ref.where).every(([k, v]) => parent?.[k] === v)) continue;
+          for (const id of refValues(value, ref.parse)) {
+            if (!target.has(id)) {
+              sink.push(`参照切れ: ${ds.id} ${file}${where(parent)} の ${ref.field}=${show(id)} が ${ref.to}${ref.key ? ` の ${ref.key}` : ""} に無い`);
+              continue;
+            }
+            for (const field of ref.copies ?? []) {
+              const expected = target.get(id)?.[field];
+              if (parent?.[field] !== expected) {
+                sink.push(`写しの不一致: ${ds.id} ${file} の ${field}=${show(parent?.[field])} が ${ref.to} (${show(id)}) の ${show(expected)} と違う`);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  for (const ref of registryRefs) {
+    const owner = `${ref.from} → ${ref.to}`;
+    try {
+      if (typeof ref.from !== "string" || !ref.from.startsWith(REGISTRY_PREFIX) || !registries[ref.from.slice(REGISTRY_PREFIX.length)]) {
+        throw new Error(`${owner}: REGISTRY_REFS の from は REGISTRIES の registry:<名前>`);
+      }
+      const { from: _from, ...rest } = ref;
+      declare(owner, { field: "", ...rest });
+      const target = targetOf(owner, ref);
+      const sink = ref.severity === "warn" ? warnings : errors;
+      for (const id of resolveRegistry(registries[ref.from.slice(REGISTRY_PREFIX.length)], readText)) {
+        if (!target.has(id)) sink.push(`参照切れ: ${ref.from} の ${show(id)} が ${ref.to} の ${ref.key} に無い`);
+      }
+    } catch (e) {
+      errors.push(e instanceof Error ? e.message : String(e));
+    }
+  }
+  return { errors, warnings };
 }
 
 export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null, agentState = null }) {
@@ -303,17 +511,30 @@ function main() {
     readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
     exists: (p) => existsSync(resolve(ROOT, p)),
   }));
+  const refs = checkRefs({
+    datasets: DATASETS,
+    files: trackedFiles(),
+    readJson: (p) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8")),
+    readText: (p) => readFileSync(resolve(ROOT, p), "utf8"),
+    registries: REGISTRIES,
+    registryRefs: REGISTRY_REFS,
+  });
+  result.errors.push(...refs.errors);
   result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
   const tops = dataTops(DATASETS);
   result.errors.push(...findDataPathLiterals(tops, dataLiteralHits(tops)));
   for (const e of result.errors) console.error(`✗ ${e}`);
+  // warn の参照は既存データの違反を一覧する (理由は台帳の refs の why)。既定は先頭 10 件、--refs で全件
+  const listAll = process.argv.includes("--refs");
+  for (const w of listAll ? refs.warnings : refs.warnings.slice(0, 10)) console.warn(`! ${w}`);
+  if (!listAll && refs.warnings.length > 10) console.warn(`! … 参照の warning 他 ${refs.warnings.length - 10} 件 (--refs で全件)`);
   const moveFiles = result.moves.reduce((n, m) => n + m.files, 0);
   if (process.argv.includes("--moves")) {
     for (const m of result.moves) console.log(`  → ${m.target}: ${m.id} (${m.files} files) ${m.path}`);
   }
   const mark = result.errors.length ? "✗" : "✓";
   console.log(
-    `${mark} check-datasets: 台帳 ${result.datasetCount} 行 / 対象ファイル ${result.governedCount} 件 / error ${result.errors.length}` +
+    `${mark} check-datasets: 台帳 ${result.datasetCount} 行 / 対象ファイル ${result.governedCount} 件 / error ${result.errors.length} / 参照の warning ${refs.warnings.length}` +
       ` (本来の置き場と違う行 ${result.moves.length} 行・${moveFiles} 件 — --moves で一覧)`,
   );
   if (result.errors.length) process.exit(1);

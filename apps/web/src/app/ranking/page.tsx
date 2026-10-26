@@ -16,6 +16,7 @@
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { metricDisplayName } from "@stats47/ranking";
 import { ChevronRight } from 'lucide-react';
@@ -150,7 +151,7 @@ export default function RankingIndexPage() {
                         ・
                       </span>
                       <Link
-                        href={`/ranking/${representative.rankingKey}`}
+                        href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
                         className="hover:text-primary hover:underline"
                       >
                         {metricDisplayName(representative)}

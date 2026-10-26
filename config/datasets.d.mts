@@ -21,6 +21,8 @@ export declare const SLOTS: Record<string, string>;
 export declare const IMAGE_ROOTS: RegExp[];
 export declare const IMAGE_EXT: RegExp;
 export declare const DATASETS: Dataset[];
+export declare const REGISTRIES: Record<string, DatasetRegistry>;
+export declare const REGISTRY_REFS: { from: string; to: string; key: string; severity?: "warn"; why?: string }[];
 export declare const RETIRED: { from: string; to: string; since: string }[];
 export declare function datasetPath(id: string): string;
 export declare function datasetDir(id: string): string;

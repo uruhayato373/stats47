@@ -12,6 +12,7 @@ import type { RankingEntry } from '@/shared';
 
 import { GEO_X_LAYOUT, GEO_X_MAP_TRANSFORMS } from './layout';
 import { SITE } from '@stats47/types';
+import { to5DigitPrefCode } from '@stats47/area';
 
 export type GeoInsightRole =
   'baseline' | 'cross-analysis' | 'method' | 'decision';
@@ -45,9 +46,8 @@ const HIGHLIGHT_COLORS = [
   '#e07b39',
   '#805ad5',
 ];
-function normalizePrefCode(code: string): string {
-  return code.length === 5 ? code : `${code.padStart(2, '0')}000`;
-}
+/** 都道府県コードを5桁に正規化 (`@stats47/area` の単一実装) */
+const normalizePrefCode = to5DigitPrefCode;
 
 function formatValue(value: number, unit: string, format: string): string {
   if (format === 'integer')

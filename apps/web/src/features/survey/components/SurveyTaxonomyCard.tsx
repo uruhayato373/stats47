@@ -1,5 +1,6 @@
 "use client";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { FileText } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -77,7 +78,7 @@ export function SurveyTaxonomyCard({
               {relatedItems.map((item) => (
                 <Link
                   key={item.rankingKey}
-                  href={`/ranking/${item.rankingKey}`}
+                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                   className="py-1 text-xs transition-colors hover:text-primary"
                 >
                   {item.title}
@@ -123,7 +124,7 @@ export function SurveyTaxonomyCard({
             {relatedItems.map((item) => (
               <Link
                 key={item.rankingKey}
-                href={`/ranking/${item.rankingKey}`}
+                href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                 className="py-1 text-xs transition-colors hover:text-primary"
               >
                 {item.title}

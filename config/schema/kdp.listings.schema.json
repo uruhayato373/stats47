@@ -1,180 +1,159 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "KDP の出品内容と公開・審査状態",
-  "description": "config/kdp-listings.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "config/kdp-listings.json の形状契約。項目は packages/product-factory/src/channels/kindle/export-kdp-listings.ts の KdpListing と、本棚の read-back を書き戻す .claude/scripts/kdp/lib/kdp-{status,publication-stage,session}.mjs が持つもの。2026-10-26 に推論版 (anyOf の入れ子) から厳格化した (項目の追加は properties に足してから書く)。",
   "type": "object",
+  "additionalProperties": false,
+  "required": ["listings"],
   "properties": {
-    "_note": {
-      "type": "string"
-    },
+    "_note": { "type": "string" },
     "listings": {
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "additionalProperties": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object",
-                    "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "array",
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "object",
-                                "properties": {
-                                  "top": {
-                                    "type": "string"
-                                  },
-                                  "sub": {
-                                    "type": "string"
-                                  },
-                                  "place": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "used": {
-                              "type": "boolean"
-                            },
-                            "text": {
-                              "type": "string"
-                            },
-                            "images": {
-                              "type": "string"
-                            },
-                            "translations": {
-                              "type": "string"
-                            },
-                            "textTools": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "imageTools": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "type": "number"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "used": {
-                  "type": "boolean"
-                },
-                "text": {
-                  "type": "string"
-                },
-                "images": {
-                  "type": "string"
-                },
-                "translations": {
-                  "type": "string"
-                },
-                "textTools": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "imageTools": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "live": {
-                  "type": "object",
-                  "properties": {
-                    "at": {
-                      "type": "string"
-                    },
-                    "statusLabel": {
-                      "type": "string"
-                    },
-                    "asin": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "requestedAt": {
-                  "type": "string"
-                },
-                "reason": {
-                  "type": "string"
-                },
-                "unpublishedAt": {
-                  "type": "string"
-                },
-                "unpublishedVia": {
-                  "type": "string"
-                },
-                "readBack": {
-                  "type": "string"
-                },
-                "evidence": {
-                  "type": "string"
-                }
-              }
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
+      "propertyNames": { "$ref": "common.schema.json#/$defs/kindleBookId" },
+      "additionalProperties": { "$ref": "#/definitions/listing" }
+    }
+  },
+  "definitions": {
+    "nullableString": { "type": ["string", "null"] },
+    "nullableDate": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/date" }] },
+    "publicationStage": {
+      "description": "出版工程の状態機械 (一方向)。KDP_PUBLICATION_STAGES と同じ並び",
+      "enum": ["prepared", "details_filled", "files_processed", "verified", "submitted", "live", "previous_unpublished"]
+    },
+    "edition": {
+      "description": "書誌と出品状態 (現行版と previousEditions の旧版で共通)",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kindleBookId" },
+        "title": { "$ref": "common.schema.json#/$defs/nonEmptyString" },
+        "subtitle": { "$ref": "#/definitions/nullableString" },
+        "author": { "type": "string" },
+        "authorLastName": { "type": "string" },
+        "authorFirstName": { "type": "string" },
+        "authorKana": { "type": "string" },
+        "authorRomaji": { "type": "string" },
+        "titleKana": { "type": "string" },
+        "titleRomaji": { "type": "string" },
+        "subtitleKana": { "$ref": "#/definitions/nullableString" },
+        "subtitleRomaji": { "$ref": "#/definitions/nullableString" },
+        "readingSourceTitle": { "type": "string" },
+        "readingSourceSubtitle": { "$ref": "#/definitions/nullableString" },
+        "language": { "const": "ja" },
+        "description": { "type": "string" },
+        "keywords": { "type": "array", "maxItems": 7, "items": { "type": "string" } },
+        "categoryPaths": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["top", "sub", "place"],
+            "properties": { "top": { "type": "string" }, "sub": { "type": "string" }, "place": { "type": "string" } }
+          }
+        },
+        "applyDrm": { "type": "boolean" },
+        "aiDisclosure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["used", "text", "images", "translations", "textTools", "imageTools"],
+          "properties": {
+            "used": { "type": "boolean" },
+            "text": { "type": "string" },
+            "images": { "type": "string" },
+            "translations": { "type": "string" },
+            "textTools": { "type": "array", "items": { "type": "string" } },
+            "imageTools": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "blockReason": { "type": "string" },
+        "priceYen": { "$ref": "common.schema.json#/$defs/yen" },
+        "royaltyPlan": { "enum": [70, 35] },
+        "kuEnrolled": { "type": "boolean" },
+        "epubPath": { "type": "string", "pattern": "^\\.local/kindle-books/" },
+        "coverPath": { "type": "string", "pattern": "^\\.local/kindle-books/" },
+        "status": { "enum": ["draft", "listed", "blocked-thin", "blocked-design", "withdrawn"] },
+        "withdrawal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["requestedAt", "reason"],
+          "properties": {
+            "requestedAt": { "$ref": "common.schema.json#/$defs/date" },
+            "reason": { "type": "string" },
+            "unpublishedAt": { "$ref": "common.schema.json#/$defs/datetime" },
+            "unpublishedVia": { "type": "string" },
+            "readBack": { "type": "string" },
+            "evidence": { "type": "string" }
+          }
+        },
+        "draftId": { "type": "string", "pattern": "^[A-Z0-9]+$" },
+        "asin": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/asin" }] },
+        "publishedAt": { "$ref": "#/definitions/nullableDate" },
+        "lastSubmittedAt": { "$ref": "#/definitions/nullableDate" },
+        "salesStartedAt": { "$ref": "#/definitions/nullableDate" },
+        "kdpStatus": { "enum": ["draft", "in_review", "live", "unknown"] },
+        "kdpStatusLabel": { "$ref": "#/definitions/nullableString" },
+        "kdpStatusCheckedAt": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/datetime" }] },
+        "publicationStage": { "$ref": "#/definitions/publicationStage" },
+        "publicationStageUpdatedAt": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/datetime" }] },
+        "publicationStageEvidence": {
+          "description": "工程ごとの read-back の証拠。中身は工程により異なるので at だけを必須にする",
+          "type": "object",
+          "propertyNames": { "$ref": "#/definitions/publicationStage" },
+          "additionalProperties": {
+            "type": "object",
+            "required": ["at"],
+            "properties": { "at": { "$ref": "common.schema.json#/$defs/datetime" } }
+          }
+        },
+        "publicationStageLastAttempt": {
+          "description": "後退する工程を試みて保持した記録 (advancePublicationStage)",
+          "type": "object",
+          "required": ["at", "attemptedStage", "retainedStage"],
+          "properties": {
+            "at": { "$ref": "common.schema.json#/$defs/datetime" },
+            "attemptedStage": { "$ref": "#/definitions/publicationStage" },
+            "retainedStage": { "$ref": "#/definitions/publicationStage" }
+          }
+        },
+        "editionNumber": { "type": "integer", "minimum": 1 },
+        "replacesAsin": { "$ref": "common.schema.json#/$defs/asin" },
+        "supersededAt": { "$ref": "common.schema.json#/$defs/datetime" },
+        "unpublishAfterReplacementLive": { "type": "boolean" },
+        "unpublishedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}" }
+      }
+    },
+    "listing": {
+      "allOf": [{ "$ref": "#/definitions/edition" }],
+      "required": ["id", "title", "priceYen", "status", "epubPath", "coverPath", "asin", "publishedAt"],
+      "propertyNames": {
+        "enum": [
+          "id", "title", "subtitle", "author", "authorLastName", "authorFirstName", "authorKana", "authorRomaji",
+          "titleKana", "titleRomaji", "subtitleKana", "subtitleRomaji", "readingSourceTitle", "readingSourceSubtitle",
+          "language", "description", "keywords", "categoryPaths", "applyDrm", "aiDisclosure", "blockReason", "priceYen",
+          "royaltyPlan", "kuEnrolled", "epubPath", "coverPath", "status", "withdrawal", "draftId", "asin", "publishedAt",
+          "lastSubmittedAt", "salesStartedAt", "kdpStatus", "kdpStatusLabel", "kdpStatusCheckedAt", "publicationStage",
+          "publicationStageUpdatedAt", "publicationStageEvidence", "publicationStageLastAttempt", "editionNumber",
+          "replacesAsin", "previousEditions"
+        ]
+      },
+      "properties": {
+        "previousEditions": {
+          "type": "array",
+          "items": {
+            "allOf": [{ "$ref": "#/definitions/edition" }],
+            "required": ["id", "title", "asin", "status"],
+            "propertyNames": {
+              "enum": [
+                "id", "title", "subtitle", "author", "authorLastName", "authorFirstName", "authorKana", "authorRomaji",
+                "titleKana", "titleRomaji", "subtitleKana", "subtitleRomaji", "readingSourceTitle", "readingSourceSubtitle",
+                "language", "description", "keywords", "categoryPaths", "applyDrm", "aiDisclosure", "priceYen", "royaltyPlan",
+                "kuEnrolled", "epubPath", "coverPath", "draftId", "status", "asin", "publishedAt", "salesStartedAt", "kdpStatus",
+                "kdpStatusLabel", "kdpStatusCheckedAt", "supersededAt", "unpublishAfterReplacementLive", "unpublishedAt", "withdrawal"
+              ]
             }
-          ]
+          }
         }
       }
     }
-  },
-  "required": [
-    "_note",
-    "listings"
-  ]
+  }
 }

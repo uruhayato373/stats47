@@ -8,6 +8,7 @@
 import { notFound } from 'next/navigation';
 
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   readRankingItemsBySurveyFromR2,
@@ -48,6 +49,7 @@ import {
   SurveySideNav,
   type SurveyPageNavLink,
 } from '@/features/survey';
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -387,7 +389,7 @@ export default async function SurveyPage({ params }: PageProps) {
                   {readerQuestions.map((item) => (
                     <SurfaceLinkCard
                       key={item.rankingKey}
-                      href={`/ranking/${item.rankingKey}`}
+                      href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                       className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                     >
                       {item.question}
@@ -436,7 +438,7 @@ export default async function SurveyPage({ params }: PageProps) {
               {relatedThemes.map((theme) => (
                 <SurfaceLinkCard
                   key={theme.key}
-                  href={`/themes/${theme.key}`}
+                  href={themeHref(theme.key)}
                   className="text-sm font-medium text-foreground hover:bg-accent/50"
                 >
                   {theme.title}

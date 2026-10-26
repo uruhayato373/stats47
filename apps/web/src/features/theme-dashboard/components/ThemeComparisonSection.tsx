@@ -21,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName } from "@stats47/ranking";
 
@@ -184,13 +185,13 @@ export function ThemeComparisonSection({
                     <div className="flex flex-wrap justify-between gap-2">
                       <span>県を選択して比較</span>
                       <Link
-                        href={`/ranking/${current.key}`}
+                        href={hrefFor("ranking", { rankingKey: current.key })}
                         className="text-primary underline"
                         onClick={() =>
                           trackNavClick({
                             surface: 'theme_ranking',
                             label: `${themeConfig.themeKey}:comparison-map:${current.key}`,
-                            href: `/ranking/${current.key}`,
+                            href: hrefFor("ranking", { rankingKey: current.key }),
                           })
                         }
                       >
@@ -356,13 +357,13 @@ export function ThemeComparisonSection({
                   <TableRow key={key}>
                     <TableCell>
                       <Link
-                        href={`/ranking/${key}`}
+                        href={hrefFor("ranking", { rankingKey: key })}
                         className="text-primary underline underline-offset-4"
                         onClick={() =>
                           trackNavClick({
                             surface: 'theme_ranking',
                             label: `${themeConfig.themeKey}:comparison-table:${key}`,
-                            href: `/ranking/${key}`,
+                            href: hrefFor("ranking", { rankingKey: key }),
                           })
                         }
                       >

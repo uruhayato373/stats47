@@ -1574,7 +1574,25 @@
     "additionalCategories": {
       "type": "array",
       "items": {
-        "type": "string"
+        "enum": [
+          "landweather",
+          "population",
+          "laborwage",
+          "agriculture",
+          "miningindustry",
+          "commercial",
+          "economy",
+          "construction",
+          "energy",
+          "tourism",
+          "educationsports",
+          "administrativefinancial",
+          "safetyenvironment",
+          "socialsecurity",
+          "international",
+          "infrastructure",
+          "ict"
+        ]
       }
     },
     "groupKey": {

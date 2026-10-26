@@ -5,6 +5,7 @@ import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
+import { to5DigitPrefCode } from "@stats47/area";
 
 // ---------------------------------------------------------
 // 型定義
@@ -51,15 +52,12 @@ export interface ChoroplethOptions {
 // ---------------------------------------------------------
 
 /**
- * 都道府県コードを5桁に正規化
+ * 都道府県コードを5桁に正規化 (`@stats47/area` の単一実装。未指定は全国 "00000")
  * "01" → "01000", "13" → "13000", "13000" → "13000"
  */
 function normalizePrefCode(code: string | number | undefined): string {
-  if (!code) return "00000";
-  const s = String(code);
-  if (s.length === 5) return s;
-  if (s.length <= 2) return `${s.padStart(2, "0")}000`;
-  return s;
+  if (code === undefined || code === "") return "00000";
+  return to5DigitPrefCode(code);
 }
 
 /**

@@ -9,6 +9,7 @@ import {
 } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
 
@@ -38,14 +39,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pref = prefectures.find((p) => p.prefCode === areaCode);
   if (!theme || !pref) return {};
 
-  const title = `${pref.prefName}の${theme.title} | stats47`;
+  const title = `${pref.prefName}の${theme.title}`;
   const description = `${pref.prefName}における${theme.description}全国47都道府県との比較で${pref.prefName}の位置づけを確認できます。`;
 
   return {
     title,
     description,
     alternates: { canonical: `/areas/${areaCode}/${themeSlug}` },
-    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
+    ...generateOGMetadata({ title: formatOgpTitle(title), description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

@@ -44,7 +44,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { analysisSlug } = await params;
   return {
-    title: '地域分析の県別地図・検算データ | stats47',
+    title: '地域分析の県別地図・検算データ',
     description:
       '選択県の人口メッシュ、地点の空間判定、集計の分母と出典を確認できます。',
     alternates: {

@@ -20,6 +20,7 @@ import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared";
 import { SITE } from "@stats47/types";
 import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
+import { prefectureShortName } from "@stats47/area/short-name";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -62,10 +63,8 @@ const CELL_SIZE = 1080 / GRID_COLS;
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** "東京都" → "東京", "北海道" → "北海道" */
-function stripSuffix(name: string): string {
-  return name.replace(/(都|府|県)$/, "");
-}
+/** "東京都" → "東京", "北海道" → "北海道" (`@stats47/area` の単一実装) */
+const stripSuffix = prefectureShortName;
 
 function buildValueMap(items: { name: string; value: number }[]): Map<string, number> {
   const map = new Map<string, number>();

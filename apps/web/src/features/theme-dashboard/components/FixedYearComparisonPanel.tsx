@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 import { lookupArea } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -78,7 +79,7 @@ export function FixedYearComparisonPanel({
           source={metric.sourceName}
           sourceLink={metric.sourceLink}
           sourceLinks={metric.sourceLinks}
-          rankingLink={`/ranking/${metric.metricKey}`}
+          rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
           rankingLabel="指標の定義・ランキング"
         />
       }

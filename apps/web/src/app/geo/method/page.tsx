@@ -10,7 +10,7 @@ import { GeoAnalysisTracker } from '@/features/geo-analysis';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'GeoAI地域分析の方法・限界 | stats47',
+  title: 'GeoAI地域分析の方法・限界',
   description:
     '人口メッシュ、地価地点、洪水ポリゴン、駅代表点をどう重ね、何を判定できないのかを分析別に説明します。',
   alternates: { canonical: '/geo/method' },

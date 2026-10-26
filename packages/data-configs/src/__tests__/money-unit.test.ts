@@ -7,6 +7,7 @@ import {
   moneyUnitExponent,
   resolvePinnedSourceUnit,
 } from "../money-unit";
+import { KNOWN_UNIT_SAMPLES, parseUnit } from "../unit/unit-semantics";
 
 /**
  * 金額単位ラダー判定の感度と非感度を両方向で固定する。
@@ -218,5 +219,28 @@ describe("resolvePinnedSourceUnit", () => {
     });
     expect(v.kind).toBe("mismatch");
     if (v.kind === "mismatch") expect(v.expectedScale).toBe(1_000_000);
+  });
+});
+
+describe("moneyUnitExponent は単位の正典 (unit-semantics) から導出する", () => {
+  it("旧来の金額族 8 単位の指数が変わらない", () => {
+    const legacy: Record<string, number> = { 円: 0, 千円: 3, 万円: 4, 十万円: 5, 百万円: 6, 千万円: 7, 億円: 8, 兆円: 12 };
+    for (const [unit, exp] of Object.entries(legacy)) expect(moneyUnitExponent(unit)).toBe(exp);
+  });
+
+  it("parseUnit が金額 (分母なし) と解釈する語彙すべてで指数が一致する", () => {
+    for (const unit of KNOWN_UNIT_SAMPLES) {
+      const p = parseUnit(unit);
+      const expected = p.dimension === "currency" && !p.hasDenominator ? p.scaleExponent : null;
+      expect(moneyUnitExponent(unit)).toBe(expected);
+    }
+  });
+
+  it("分母つき・金額以外・空は族外 (null)", () => {
+    expect(moneyUnitExponent("円（1人当たり）")).toBeNull();
+    expect(moneyUnitExponent("人")).toBeNull();
+    expect(moneyUnitExponent("十人")).toBeNull();
+    expect(moneyUnitExponent("")).toBeNull();
+    expect(moneyUnitExponent(null)).toBeNull();
   });
 });

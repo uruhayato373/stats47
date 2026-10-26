@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const meta = GIS_DATASETS_BY_ID.get(dataId);
   const content = findGeoSourcePage(dataId, meta?.latestVersion);
   return {
-    title: meta ? `${meta.name}のGIS地図 | stats47` : 'GISが見つかりません',
+    title: meta ? `${meta.name}のGIS地図` : 'GISが見つかりません',
     description: content?.summary,
     alternates: { canonical: `/geo/datasets/${dataId}` },
   };

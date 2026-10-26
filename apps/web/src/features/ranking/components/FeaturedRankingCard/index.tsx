@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import {
@@ -28,7 +29,7 @@ export function FeaturedRankingCard({
 }: FeaturedRankingCardProps) {
   return (
     <SurfaceLinkCard
-      href={`/ranking/${rankingKey}`}
+      href={hrefFor("ranking", { rankingKey: rankingKey })}
       className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group flex flex-col overflow-hidden`}
     >
       {/* hook を常に2行分の高さで確保し、下の flex-1 地図領域を全カードで同じ高さに揃える

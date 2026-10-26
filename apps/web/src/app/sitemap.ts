@@ -13,6 +13,7 @@ import { PREFECTURE_AREA_CODES } from '@stats47/area';
 import { readCategoriesFromR2 } from '@stats47/category/server';
 import { CATEGORY_KEYS } from '@stats47/data-configs';
 import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
@@ -134,12 +135,12 @@ const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [
     priority: 0.6,
   },
   ...[...KNOWN_MUNICIPALITY_THEME_SLUGS].map((slug) => ({
-    url: `${BASE_URL}/municipalities/themes/${slug}`,
+    url: `${BASE_URL}${hrefFor("municipality-theme", { themeSlug: slug })}`,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   })),
   ...[...KNOWN_MUNICIPALITY_RANKING_KEYS].map((key) => ({
-    url: `${BASE_URL}/municipalities/ranking/${key}`,
+    url: `${BASE_URL}${hrefFor("municipality-ranking", { rankingKey: key })}`,
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   })),
@@ -192,7 +193,7 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
           ? rowUpdated
           : SITEMAP_BASELINE;
       return {
-        url: `${BASE_URL}/ranking/${row.rankingKey}`,
+        url: `${BASE_URL}${hrefFor("ranking", { rankingKey: row.rankingKey })}`,
         lastModified,
         changeFrequency: 'monthly' as const,
         priority: 0.9,
@@ -212,26 +213,39 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
 async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
   const rows = await listLatestArticles(10000).catch(() => []);
 
-  const redirected = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
   const live = rows
-    .filter((row) => row.publishedAt && !redirected.has(row.slug) && !UrlPolicy.blog.isGone(row.slug))
+    .filter((row) => row.publishedAt && isSitemapBlogSlug(row.slug))
     .map((row) => ({
       slug: row.slug,
       lastModified: row.publishedAt as string,
     }));
-  const entries =
-    live.length > 0
-      ? live
-      : SITEMAP_BLOG_ENTRIES.filter((e) => !redirected.has(e.slug) && !UrlPolicy.blog.isGone(e.slug));
+  return blogSitemapEntries(live.length > 0 ? live : SITEMAP_BLOG_ENTRIES);
+}
 
+const REDIRECTED_BLOG_SLUGS: ReadonlySet<string> = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
+
+/**
+ * sitemap に載せるブログ slug か (301 の転送元と 410 を除く)。
+ * 通常経路・R2 が空のときの git 定数・例外時のフォールバックの 3 経路で同じ条件を使う
+ * (2026-10-26 まで例外時だけ 301 元を除いていなかった)。
+ */
+function isSitemapBlogSlug(slug: string): boolean {
+  return !REDIRECTED_BLOG_SLUGS.has(slug) && !UrlPolicy.blog.isGone(slug);
+}
+
+function blogSitemapEntries(
+  entries: readonly { slug: string; lastModified?: string | null }[],
+): MetadataRoute.Sitemap {
   return [
     { url: `${BASE_URL}/blog`, changeFrequency: 'daily', priority: 0.8 },
-    ...entries.map((e) => ({
-      url: `${BASE_URL}/blog/${e.slug}`,
-      lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
+    ...entries
+      .filter((e) => isSitemapBlogSlug(e.slug))
+      .map((e) => ({
+        url: `${BASE_URL}/blog/${e.slug}`,
+        lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      })),
   ];
 }
 
@@ -424,15 +438,7 @@ export default async function sitemap({
       case 'cities':
         return getCityPages();
       case 'blog':
-        return [
-          { url: `${BASE_URL}/blog`, changeFrequency: 'daily', priority: 0.8 },
-          ...SITEMAP_BLOG_ENTRIES.filter((e) => !UrlPolicy.blog.isGone(e.slug)).map((e) => ({
-            url: `${BASE_URL}/blog/${e.slug}`,
-            lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
-            changeFrequency: 'monthly' as const,
-            priority: 0.7,
-          })),
-        ];
+        return blogSitemapEntries(SITEMAP_BLOG_ENTRIES);
       case 'categories':
         return [...CATEGORY_KEYS].map((categoryKey) => ({
           url: `${BASE_URL}/category/${categoryKey}`,

@@ -18,6 +18,7 @@ import {
 import { getRequiredBaseUrl } from "@/lib/env";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import type { Metadata } from "next";
 
@@ -40,11 +41,11 @@ export async function generateMetadata({
   const canonicalPath = `/products/${product.slug}`;
 
   return {
-    title: `${product.title} | stats47`,
+    title: product.title,
     description: product.description,
     alternates: { canonical: canonicalPath },
     ...generateOGMetadata({
-      title: `${product.title} | stats47`,
+      title: formatOgpTitle(product.title),
       description: product.description,
       imageUrl: ogpImageUrl(ogpImageKeys.product(product.slug)),
       url: `${baseUrl}${canonicalPath}`,

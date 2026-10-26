@@ -44,6 +44,15 @@ describe("checkBookContent", () => {
     expect(checkBookContent([good])).toEqual([]);
   });
 
+  it("率系の判定は単位の正典で行う: 桁つき実数単位も error、分母つき・％は通す", () => {
+    const scaled = chapterTextFromXhtml("chap007.xhtml", rankingXhtml("持ち家比率", "持ち家比率（2023年）の1位は秋田県で12（千人）です。"));
+    const perPop = chapterTextFromXhtml("chap008.xhtml", rankingXhtml("死亡率", "死亡率（2023年）の1位は秋田県で1,500（人（人口10万対））です。"));
+    const pct = chapterTextFromXhtml("chap009.xhtml", rankingXhtml("持ち家比率", "持ち家比率（2023年）の1位は秋田県で77.3（%）です。"));
+    expect(checkBookContent([scaled]).map((x) => x.code)).toEqual(["rate-with-count-unit"]);
+    expect(checkBookContent([perPop])).toEqual([]);
+    expect(checkBookContent([pct])).toEqual([]);
+  });
+
   it("括弧違いだけの同じ指標が 2 章あれば warn", () => {
     const a = chapterTextFromXhtml("chap010.xhtml", rankingXhtml("昼夜間人口比率", "昼夜間人口比率（2020年）の1位は東京都で119.2（%）です。"));
     const b = chapterTextFromXhtml("chap011.xhtml", rankingXhtml("昼夜間人口比率（国勢調査）", "昼夜間人口比率（国勢調査）（2020年）の1位は東京都で119.2（%）です。"));
