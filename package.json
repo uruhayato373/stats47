@@ -114,7 +114,7 @@
     "note:covers:test": "node --test .claude/scripts/note/__tests__/cover-audit.test.mjs .claude/scripts/note/__tests__/cover-update.test.mjs",
     "note:metrics:fetch": "node .claude/scripts/note/fetch-note-metrics.mjs",
     "note:metrics:test": "node --test .claude/scripts/note/__tests__/dashboard-metrics.test.mjs",
-    "note:circulation:test": "node --test .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs",
+    "note:circulation:test": "node --test .claude/scripts/note/__tests__/native-cards.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs",
     "note:brand-assets": "node .claude/scripts/note/generate-note-brand-headers.mjs",
     "note:branding:update": "node .claude/scripts/note/update-note-branding.mjs",
     "note:navigation:pilot": "node .claude/scripts/note/update-published-navigation.mjs",
@@ -235,7 +235,8 @@
     "media:prepare": "node .claude/scripts/media/prepare-image.mjs",
     "media:state:pull": "node .claude/scripts/media/sync-r2-state.mjs pull",
     "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push",
-    "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs"
+    "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs",
+    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

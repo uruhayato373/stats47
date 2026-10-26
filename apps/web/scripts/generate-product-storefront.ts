@@ -1,22 +1,27 @@
 /**
- * 公開済み KDP / ココナラ商品から Web 商品ハブの静的カタログを生成する。
+ * 公開済み KDP / note 商品から Web 商品ハブの静的カタログを生成する。
  *
  * 真実源:
  * - 商品内容: packages/product-factory の型付きカタログ
- * - 公開状態・販売 URL: config/{kdp,coconala}-listings.json
+ * - 公開状態・販売 URL: config/kdp-listings.json / data/note/articles.json
+ * - ココナラ撤退済みのデータパックを旧出品URLから復活させない
  *
  * 下書き・審査中・ASIN/URL 未確定の商品は fail-closed で出力しない。
  */
 import fs from "node:fs";
 import path from "node:path";
 
+import { readArticleLedger } from "../../../.claude/scripts/note/lib/article-ledger.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
 import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
+import { NOTE_PRODUCT_MAPPINGS } from "../../../packages/product-factory/src/channels/note/product-note-mapping";
 
-import type { StorefrontProduct } from "../src/features/products/types";
 import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
+
+import type { NoteArticle } from "../../../.claude/scripts/note/catalog/types";
+import type { StorefrontProduct } from "../src/features/products/types";
 
 const ROOT = path.resolve(__dirname, "../../..");
 const KDP_LISTINGS_PATH = path.join(ROOT, KDP_LISTINGS);
@@ -78,6 +83,7 @@ function buildStorefrontProducts(): StorefrontProduct[] {
     });
 
   const dataProducts = Object.entries(coconala)
+    .filter(([id]) => id === GEO_SERVICE_OFFER.id)
     .filter(([, listing]) => listing.status === "listed" && Boolean(listing.serviceUrl))
     .map(([id, listing]): StorefrontProduct => {
       const product = productsById.get(id);
@@ -115,7 +121,18 @@ function buildStorefrontProducts(): StorefrontProduct[] {
       };
     });
 
-  return [...kindleProducts, ...dataProducts].sort((a, b) =>
+  const noteArticles = readArticleLedger().articles as readonly NoteArticle[];
+  const noteProducts: StorefrontProduct[] = NOTE_PRODUCT_MAPPINGS.flatMap((mapping): StorefrontProduct[] => {
+    const article = noteArticles.find((item) => item.key === mapping.canonicalSlug);
+    if (!article || article.status !== 'published' || !article.isPaid || !article.noteUrl) return [];
+    if (!/^https:\/\/note\.com\/stats47\/n\/n[a-f0-9]{12}$/.test(article.noteUrl) || !article.priceJpy) throw Error(`Invalid published note product: ${mapping.productId}`);
+    const product = productsById.get(mapping.productId);
+    if (!product) throw Error(`Unknown note product: ${mapping.productId}`);
+    return [{ id: product.id, slug: `data-${product.id.toLowerCase()}`, channel: 'note', channelLabel: 'note有料データ集',
+      title: article.title, description: product.jobToBeDone, priceYen: article.priceJpy, externalUrl: article.noteUrl,
+      included: product.formats.map((format) => format.toUpperCase()), audience: [...product.audience], sourceBlogSlugs: [] }];
+  });
+  return [...kindleProducts, ...dataProducts, ...noteProducts].sort((a, b) =>
     a.slug.localeCompare(b.slug),
   );
 }

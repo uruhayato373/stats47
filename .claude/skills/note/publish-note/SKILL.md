@@ -260,6 +260,14 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - **Phase 8.5（有料原稿保全）**: 公開済み有料原稿はgitにも公開R2にも置かない。台帳の`body.store`が`r2-private`の記事は、`npm run note:article -- save <slug>`が記事ディレクトリの全ファイル（原稿・画像）を`stats47-private`へ保存し、読み戻したSHAを照合してから台帳の`body.manifest`を更新する。公開R2には販売メタ`public.json`も新規に作らない。`product_archive`が指す商品ZIP（`.local/geo-products/`）は記事ディレクトリの外にあるため、`save`の保存対象に含まれない
 - **有料原稿の取り出し**: `npm run note:article -- checkout <slug>`。台帳の`body.store`が`r2-private`なら private R2 から全ファイルを作業コピーへ取り出す
 
+### 公開済みカードの修復と商品導線
+
+- 商品の公開状態・販売URLは最新の `data/note/articles.json` を読む。作業前に共有ブランチの更新を確認し、古いローカル台帳の下書き判定で再公開しない。
+- 商品対応は `magazines.json` の `paidProductId` → product-factory の note mapping → 公開済み有料記事で解決する。旧ココナラページや手書きURLへ戻さない。
+- 空白カードと旧商品カードは `npm run note:cards:repair-native -- --slug <key> --commit` で修復する。全件は `--all --commit`。既定は変更しない検査で、日照時間→記録済みPV順に処理する。
+- `lib/native-cards.mjs` がnote標準の埋め込み登録を行う。HTML内のURL・figure・独自キーだけでは成功としない。公開後は対応キーの登録と匿名ブラウザの表示を検査する。
+- 既存下書きは公開本文と別にバックアップし、公開済み本文だけを修正した後に復元・一致照合する。応答不明はjournalと公開本文のSHAを照合し、再送しない。
+
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
 詳細手順は **[references/scheduling.md](references/scheduling.md)** を参照。

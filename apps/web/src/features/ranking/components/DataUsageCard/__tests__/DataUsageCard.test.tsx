@@ -2,6 +2,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { findStorefrontProduct } from "@/features/products";
+
 import { DataUsageCard } from "../DataUsageCard";
 
 const baseProps = {
@@ -28,7 +30,7 @@ describe("DataUsageCard", () => {
     fireEvent.click(screen.getByRole("button", { name: "業務の資料" }));
     const product = screen.getByRole("link", { name: "内容と条件を確認する" });
     expect(product.getAttribute("href")).toBe("/products/data-p-04");
-    expect(screen.getByText(/自治体財政データ集/)).toBeTruthy();
+    expect(screen.getByText(findStorefrontProduct('data-p-04')!.title, { exact: false })).toBeTruthy();
   });
 
   it("「学習・研究」と答えた人には出典の書き方を示し、商品は出さない", () => {

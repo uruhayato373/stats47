@@ -64,6 +64,19 @@ test("buildPlans does not resolve a product card when --products is not requeste
   assert.ok(!plan.repairs.some((entry) => entry.mode === "regenerate-card"));
 });
 
+test('ordinary footer updates and explicit product updates keep the current paid note destination', () => {
+  const source = baseSource();
+  source.magazines[0].paidProductId = 'P-01';
+  source.productNotes = [{ productId: 'P-01', canonicalSlug: 'paid-pack' }];
+  source.articles.push({ key: 'paid-pack', title: '県別データ集', isPaid: true, magazine: null, noteUrl: 'https://note.com/stats47/n/ne47eb45f8a15' });
+  for (const options of [{ products: true }, { allFree: true }, { slug: 'article-a' }]) {
+    const plan = buildPlans(source, new Map(), options).find((plan) => plan.article.key === 'article-a');
+    assert.equal(plan.footer.productNoteUrl, 'https://note.com/stats47/n/ne47eb45f8a15');
+    assert.equal(plan.footer.productUrl, plan.footer.productNoteUrl);
+    assert.ok(!plan.repairs.some((entry) => entry.mode === 'regenerate-card'));
+  }
+});
+
 function kakeiSource({ datasetPublished = true } = {}) {
   return {
     articles: [

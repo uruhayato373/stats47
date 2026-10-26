@@ -5,12 +5,12 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 902b7af2-f468-4f78-a3e6-254dd9831f7e
-  modified: 2026-09-16T00:28:43.350Z
+  modified: 2026-10-26T04:00:00.000Z
 ---
 
-note.com記事の商品カード(embedded-service="external-article"でproductを指すfigure)は、
-表示title/descriptionを必ず実商品SSOT(`apps/web/src/features/products/storefront.generated.ts`
-のSTOREFRONT_PRODUCTS)から解決する。マガジンのname/descriptionを流用しない。
+note記事の販売カードは `data/note/magazines.json` の `paidProductId`、product-factory の `NOTE_PRODUCT_MAPPINGS`、`data/note/articles.json` の公開状態から `resolvePaidProduct()` で解決する。公開済み有料noteへ直接案内し、価格・題名は記事台帳に従う。旧ココナラ出品台帳やローカル下書き版を販売先の根拠にしない。サイト商品ページはこの情報からの派生であり、noteの販売状態の正典ではない。
+
+2026-10-26追記: figureの独自キーやHTMLだけではnote側のカード登録にならない。`native-cards.mjs` で登録してから公開し、キーと匿名ブラウザの表示を確認する。回遊更新はこの処理を組み込んだ `update-published-navigation.mjs`、既存空欄の復旧は `repair-note-cards-native.mjs` を使う。
 
 **Why**: 2026-09-16、`update-published-navigation.mjs`のbuildPlansが
 `${magazineRecord.name}の商品・書籍`という固定文言でカードtitleを生成しており、
@@ -20,7 +20,7 @@ note.com記事の商品カード(embedded-service="external-article"でproduct�
 
 **How to apply**:
 - カード生成(新規追加)とカード訂正(既存の間違ったカードを直す)は**同じ解決関数**
-  (`resolveProductCardText(productTarget)`)を共有する設計にする。生成専用と修正専用で
+  (note販売は `resolvePaidProduct()`、サイトカード文言は `resolveProductCardText(productTarget)`)を共有する設計にする。生成専用と修正専用で
   別ロジックを持つと今回のような二重管理ドリフトが起きる。
 - 「URLは変えず表示文言だけ直す」修正(regenerate-card相当)を設計するときは、
   対象カードが**まだ存在しない**場合(本文差し替え直後など)にthrowしない設計にする。

@@ -70,6 +70,36 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 8,
   },
+  "note-card-repair-results": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-card-repair-result-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  "note-native-card-audits": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-native-card-final-audit-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  "note-native-card-repairs": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-native-card-repair-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  "note-navigation-diagnoses": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-navigation-diagnosis-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  "note-paid-pack-publication-checks": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-paid-pack-publication-verification-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
+  "note-product-storefront-checks": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-product-storefront-live-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
   releases: {
     directory: datasetDir("ops.releases"),
     pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,

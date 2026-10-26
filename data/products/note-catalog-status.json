@@ -1,5 +1,5 @@
 {
-  "generatedNote": "note 展開の機械状態。draft は .local (git 管理外)。公開は人間承認後 (N4+)。この JSON は products:note:report で再生成する。",
+  "generatedNote": "note展開の派生台帳。公開状態・価格・URLは記事台帳、ローカル準備物の有無はdraftGeneratedとして別に記録する。products:note:reportで再生成する。",
   "totals": {
     "products": 14,
     "canonicalArticles": 14,
@@ -14,7 +14,9 @@
     "validationOk": true,
     "errors": 0,
     "warnings": 3,
-    "draftsGenerated": 14
+    "draftsGenerated": 14,
+    "publishedArticles": 14,
+    "publishedPaidArticles": 13
   },
   "articles": [
     {
@@ -23,6 +25,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 4000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -32,6 +37,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n46d68c153502",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -41,6 +49,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -50,6 +61,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 6000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -59,6 +73,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -68,6 +85,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -77,6 +97,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 4500,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -86,6 +109,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 6000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -95,6 +121,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -104,6 +133,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -113,6 +145,9 @@
       "access": "paid",
       "role": "how-to",
       "priceJpy": 4000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -122,6 +157,9 @@
       "access": "paid",
       "role": "pillar",
       "priceJpy": 9800,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -131,6 +169,9 @@
       "access": "free",
       "role": "sample",
       "priceJpy": 0,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n584098246188",
+      "publicationVerifiedAt": null,
       "memberCount": 1,
       "draftGenerated": true
     },
@@ -140,6 +181,9 @@
       "access": "paid",
       "role": "use-case",
       "priceJpy": 5000,
+      "publicationStatus": "published-recorded",
+      "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "publicationVerifiedAt": "2026-10-26T02:20:20.443Z",
       "memberCount": 1,
       "draftGenerated": true
     }

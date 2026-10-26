@@ -35,6 +35,7 @@ import { randomUUID } from "node:crypto";
 import { externalCard } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { assertRegisteredCards, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -222,9 +223,10 @@ async function processArticle(ctx, article, options) {
   const { path: specPath, spec } = loadSpec(article.key);
   if (spec.key !== article.key) throw new Error(`${article.key}: spec.key 不一致 (${spec.key})`);
 
-  // 公開版 (所有者 API) を基準にする。下書きが残っていても影響しない (下書きは今回の PUT で上書きされる)。
+  // 公開版を基準にする。別の未公開編集をこのlanding変更で上書きしない。
   const published = await fetchOwnerNote(ctx, noteKey);
   if (published.user?.urlname !== "stats47" || published.status !== "published") throw new Error(`${article.key}: 帰属または公開状態が不正`);
+  if (published.has_draft && options.commit) throw new Error(`${article.key}: 未公開下書きがあるためlanding更新を停止`);
   if (Number(published.price || 0) !== Number(article.priceJpy || 0)) throw new Error(`${article.key}: 価格が catalog と不一致 (${published.price})`);
   const { free, pay } = splitPublishedBody(String(published.body || ""), published.separator);
   const publicBefore = await fetchPublicNote(noteKey);
@@ -255,14 +257,23 @@ async function processArticle(ctx, article, options) {
     }
     throw error;
   }
-  if (composed.changes.length === 0) {
+  if (composed.changes.length === 0 && unregisteredCards(composed.html, published.embedded_contents).length === 0) {
     console.log(`  ${article.key}: already compliant (intro/source ともに本文にある)`);
     return { status: "already_compliant", key: article.key };
   }
   const newSeparator = composed.separatorId || published.separator;
-  const newBody = composed.html + pay;
   console.log(`  ${article.key}: changes=${composed.changes.join("+")} free ${free.length}→${composed.html.length} chars, pay ${pay.length} (attachments ${attachmentsBefore}), separator ${published.separator}→${newSeparator}`);
   if (!options.commit) return { status: "dry-run", key: article.key, changes: composed.changes };
+
+  // HTML figures alone do not create note's embed records. Register before publishing a new free-area card.
+  const apiPage = await ctx.newPage();
+  let registered;
+  try {
+    await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
+    const native = await registerMissingCards(apiPage, noteKey, composed.html, published.embedded_contents);
+    composed.html = native.body;
+    registered = native.registered;
+  } finally { await apiPage.close(); }
 
   // editor を開いて「公開に進む」→ 更新する。PUT を横取りして本文 / separator だけ差し替える。
   const page = await ctx.newPage();
@@ -330,6 +341,7 @@ async function processArticle(ctx, article, options) {
   }
   const liveBody = String(live.body || "");
   const publicBody = String(publicAfter.body || "");
+  assertRegisteredCards(publicBody, publicAfter.embedded_contents);
   const checks = {
     status: live.status === "published" && live.user?.urlname === "stats47",
     price: Number(live.price || 0) === Number(published.price || 0),
@@ -343,6 +355,9 @@ async function processArticle(ctx, article, options) {
   };
   const failed = Object.entries(checks).filter(([, ok]) => !ok).map(([name]) => name);
   if (failed.length) throw new Error(`${article.key}: live 検証失敗 ${failed.join(",")} ${JSON.stringify({ sent: state.sent, liveSeparator: live.separator, publicLen: publicBody.length, liveLen: liveBody.length })}`);
+  const readers = await ctx.browser().newContext();
+  try { await verifyPublicCards(readers, article.noteUrl, registered); }
+  finally { await readers.close(); }
   spec.appliedAt = new Date().toISOString();
   saveSpec(specPath, spec);
   console.log(`  ${article.key}: UPDATED ${article.noteUrl} checks=${Object.keys(checks).length} ok`);

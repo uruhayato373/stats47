@@ -16,6 +16,7 @@ import {
   NOTE_MAGAZINE_KEYS,
   getMagazine,
 } from "./index";
+import { NOTE_PRODUCT_MAPPINGS } from "../../../../packages/product-factory/src/channels/note/product-note-mapping";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -65,6 +66,11 @@ try {
 }
 
 for (const magazine of NOTE_MAGAZINES) {
+  if (magazine.paidProductId) {
+    const mapping = NOTE_PRODUCT_MAPPINGS.find((item) => item.productId === magazine.paidProductId);
+    const target = NOTE_ARTICLES.find((item) => item.key === mapping?.canonicalSlug);
+    if (!target?.isPaid || target.status !== 'published' || !target.noteUrl) errors.push(`${magazine.key}: paidProductId の公開済み有料noteがありません (${magazine.paidProductId})`);
+  }
   if (!magazine.productTarget) continue;
   if (!/^\/products\/[a-z0-9-]+$/.test(magazine.productTarget)) {
     errors.push(`${magazine.key}: productTarget は query/hash 無しの商品パス必須 (${magazine.productTarget})`);

@@ -29,3 +29,7 @@ docs/31 は gitignore された作業場で、`npm run note:article -- checkout 
 7. **ハザード**: browser-use の `$TMPDIR/browser-use-user-data-dir-*`(各数百MB)でディスク満杯→ハーネス出力不能。5-10本ごとに `rm -rf`。daemon ハング後は再ログイン要 → **アカウント照合ゲート(settings/account=stats47)** 必須
 
 関連: [[feedback_note_publish_automation]]（paste方式）/ [[project_note_internal_link_breaks_on_publish]]。手順正典 `.claude/skills/note/publish-note/references/editor-operations.md`「実機検証済 update バッチ運用メモ」。
+
+**カード修復 (2026-10-26 実測)**: URL付きfigureの保存だけでは埋め込みは登録されない。note標準の外部カードは `GET /api/v2/embed_by_external_api`、note記事カードは `POST /api/v1/embed` で登録し、サーバーが返すキーを使う。共通実装とgateは `lib/native-cards.mjs`。既存下書きを保つ `draft_save` は `is_temp_saved=true` とbooleanの `index` が必要。`publish-card-body.mjs` が公開本文のカードだけを変更し下書きを復元する。検査は `native-cards.test.mjs` と `product-cards.test.mjs`。
+
+**表示検証の境界**: note記事カードは遅延読み込みiframe。figureの高さとiframeの存在だけで完了にせず、`iframe.note-embed[data-ready="true"]` とiframe本文の表示を待つ。初期1秒では空白でも約8秒後に正常表示する実測がある。

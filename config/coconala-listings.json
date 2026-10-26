@@ -4,7 +4,7 @@
     "<PRODUCT_ID>": {
       "title": "サービスタイトル (★表示25字以内。末尾『ます』はフォーム側で自動付与=その2字も25字に含む。超過は記入エラーで保存拒否)",
       "priceYen": "価格 (円・¥10,000以下=500円刻み / 超=1,000円刻み。★カテゴリごとに最低額が別途あり=例 資料作成は最低4,000円。低すぎると選択肢に無く警告になる)",
-      "status": "draft | listed",
+      "status": "draft | listed | withdrawn",
       "serviceUrl": "公開後に自動書き戻し",
       "listedAt": "公開日 (自動)",
       "catchphrase": "キャッチコピー (15〜30字)",
@@ -40,45 +40,20 @@
     "GEO-SERVICE-01": {
       "title": "地価と将来人口の重なりを県別に資料化します",
       "priceYen": 5000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4387096",
-      "draftId": "4387096",
-      "_thumbnail": "config/coconala/assets/geo-main.png",
-      "_images": [
-        "config/coconala/assets/geo-main.png",
-        ".local/coconala-products/GEO-SERVICE-01/pref-14-draft-tHcZsk/sample-map.png",
-        ".local/coconala-profile/2026-09-06/report-evidence.png"
-      ],
-      "sellerUserId": "6198620",
-      "catchphrase": "地点と人口メッシュの対応を根拠付きで説明します",
-      "category": {
-        "master": "13",
-        "sub": "427",
-        "type": "482"
-      },
-      "genreFacets": [
-        "23",
-        "320",
-        "446",
-        "447",
-        "366"
-      ],
-      "provisionFormat": "2",
-      "body": "地価が上がる地点でも、周囲の人口は減るのか。国土数値情報の住宅地の標準地点と1km人口メッシュを、位置の包含関係で照合した資料をお渡しします。ランキング同士の相関ではありません。\n\n【対象】ご指定の1都道府県。地価2026年・前年比2025→2026、人口2020→2050年。既存の計算条件・形式に固定します。\n\n【納品物】ZIP形式。説明付きHTMLレポート、SVG模式図、地点対応CSV、重複のないメッシュCSV（WKT）、原データ加工結果JSON、列辞書、出典・利用条件、検算結果を同梱。地点ID・メッシュID・欠測や除外の理由から根拠をたどれます。\n\n【このサービスの価値】結論や途中結果はstats47の無料サイトでも確認できます。料金は指定県の抽出・資料化・説明対応への対価です。\n\n【納期・対応】必要事項の確定後5営業日。同一条件での表記修正1回。納品後7日間、列定義・開封・集計条件の質問に対応します。\n\n【限界】経緯度の模式図で、距離・面積測定用ではありません。個別物件の鑑定、売買推奨、将来価格予測、住所検索、徒歩時間、任意商圏、独自条件での再分析、継続更新は含みません。安全性・収益を保証しません。\n\n【利用条件】原典2種はCC BY 4.0。出典表示によりデータの商用利用・再利用が可能です。独自の説明・レイアウトの再販売禁止を、CC BYデータや公知の事実へ適用しません。官公庁の公認ではありません。Office編集ファイル・PDFは含みません。\n\n1枚目はサービス案内のイメージで、実際の分析図ではありません。2・3枚目は神奈川県の自主制作見本（地図・レポート抜粋）です。受注実績ではありません。納品対象はご指定の1都道府県になります。",
-      "purchaseNote": "購入前に、対象都道府県1つ・資料の用途・開封環境をご相談ください。個人情報・顧客データは不要です。\n対象年・包含結合条件・納品形式は固定。HTML対応ブラウザ、SVG閲覧環境、UTF-8 BOM対応の表計算ソフトを想定します。Office・QGIS実機での互換性保証はありません。\n地点CSVでは同じメッシュの人口が繰り返されるため人口列の合計は禁止です。人口集計はメッシュCSVを使用します。\n追加地域・新指標・独自条件は対象外です。",
-      "deliveryDays": 5,
-      "fixLimit": "1",
-      "faq": [],
-      "options": [],
-      "_source": "packages/product-factory/src/channels/geo/service-offer.ts",
-      "_approval": "2026-09-06: 5,000円の条件承認、全て出品指示、stats47(6198620)への出品承認",
-      "_sampleArchiveSha256": "e9afe1e72c59e1b0bc321630debb9327d1ce1c1b3f29df2c31bce3f1cf20d751",
-      "listedAt": "2026-09-06"
+      "listedAt": "2026-09-06",
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラ全面撤退。旧Geo公開記録を現行の販売中状態へ復活させない。",
+        "historicalPublicationEvidence": "data/products/geo-service-readiness-2026-09-06.json"
+      }
     },
     "P-01": {
       "title": "47都道府県の人口・世帯データ集をお渡しします",
       "priceYen": 4000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4323722",
       "listedAt": "2026-07-22",
       "catchphrase": "47都道府県の人口・世帯129指標を収録したデータ集",
@@ -129,12 +104,17 @@
         "previewHeader": "総人口（人・2025）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-02": {
       "title": "47都道府県の所得・賃金データ集をお渡しします",
       "priceYen": 5000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4323916",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の所得・賃金・雇用98指標を収録したデータ集",
@@ -184,12 +164,17 @@
         "previewHeader": "有効求人倍率（倍・2022）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-03": {
       "title": "47都道府県の観光・交通データ集をお渡しします",
       "priceYen": 5000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4323937",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の観光・交通47指標を収録したデータ集",
@@ -239,12 +224,17 @@
         "previewHeader": "延べ宿泊者数（人泊・2024）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-04": {
       "title": "47都道府県の自治体財政データ集をお渡しします",
       "priceYen": 6000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324057",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の自治体財政110指標を収録したデータ集",
@@ -294,12 +284,17 @@
         "previewHeader": "財政力指数（都道府県財政）（指数・2022）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-05": {
       "title": "47都道府県の医療・介護データ集をお渡しします",
       "priceYen": 7000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324061",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の医療・介護240指標を収録したデータ集",
@@ -349,12 +344,17 @@
         "previewHeader": "医師数（人・2022）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-06": {
       "title": "47都道府県の教育・文化データ集をお渡しします",
       "priceYen": 6500,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324062",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の教育・文化241指標を収録したデータ集",
@@ -404,12 +404,17 @@
         "previewHeader": "図書館数（人口100万人当たり）（館・2021）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-07": {
       "title": "47都道府県の気候・土地データ集をお渡しします",
       "priceYen": 4500,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324065",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の気候・土地77指標を収録したデータ集",
@@ -459,12 +464,17 @@
         "previewHeader": "年平均気温（℃・2024）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-08": {
       "title": "47都道府県の商業・小売データ集をお渡しします",
       "priceYen": 5000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324067",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の商業・小売71指標を収録したデータ集",
@@ -514,12 +524,17 @@
         "previewHeader": "商業年間商品販売額（卸売業＋小売業）（百万円・2022）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-09": {
       "title": "47都道府県の農業・産業データ集をお渡しします",
       "priceYen": 6000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324069",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の農業・産業127指標を収録したデータ集",
@@ -569,12 +584,17 @@
         "previewHeader": "耕地放棄面積（ｈａ・2014）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-10": {
       "title": "47都道府県の防災・インフラデータ集をお渡しします",
       "priceYen": 6500,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324073",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の防災・インフラ251指標を収録したデータ集",
@@ -624,12 +644,17 @@
         "previewHeader": "道路実延長（高速道路）（km・2023）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-11": {
       "title": "47都道府県 汎用統計データ集をお渡しします",
       "priceYen": 4000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324076",
       "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の基本統計28指標を収録した汎用素材集",
@@ -679,12 +704,17 @@
         "previewHeader": "総人口（人・2025）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-14": {
       "title": "県庁所在市の家計消費データ集をお渡しします",
       "priceYen": 9000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4323941",
       "listedAt": "2026-07-23",
       "catchphrase": "2024年の支出額・購入量685指標を47地域で比較",
@@ -734,12 +764,17 @@
         "previewHeader": "アクセサリー消費支出額（都道府県庁所在市の二人以上世帯の年間アクセサリー消費支出額）（円・2024）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     },
     "P-12": {
       "title": "47都道府県の統計データ総合集をお渡しします",
       "priceYen": 15000,
-      "status": "listed",
+      "status": "withdrawn",
       "serviceUrl": "https://coconala.com/services/4324231",
       "listedAt": "2026-07-23",
       "catchphrase": "基準年固定の2076指標を収録した分野横断データ集",
@@ -789,6 +824,11 @@
         "previewHeader": "総人口（人・2025）",
         "labelRevision": "2026-10-12",
         "_note": "note販売用に2026-10-12にMacで再生成した版。ココナラの_deliveryとは別 (指標数が異なる)。Office実機確認はオーナー待ち。"
+      },
+      "_withdrawal": {
+        "decisionDate": "2026-10-19",
+        "recordedAt": "2026-10-26",
+        "reason": "ココナラの受付は休止済み。販売先は商品ファクトリーのnote対応表と記事台帳を参照。"
       }
     }
   }
