@@ -369,7 +369,7 @@ jobs:
         id: review
         if: always() && steps.review_plan.outputs.run == 'true'
         timeout-minutes: 20
-        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@c301760f1412f3e4caac6476445385252700a500 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -558,7 +558,7 @@ jobs:
         if: always() && hashFiles('.local/ci/page-quality/review-input.json') != ''
         # 代表URL 12 件 + データの型の違い (variants) 8 件 = 約 20 ページ。2026-09-23 の試行は 11 ページで 73 回のやり取り
         timeout-minutes: 30
-        uses: anthropics/claude-code-base-action@19324d6ae01311cf3112de059679b41348bdc770 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@c301760f1412f3e4caac6476445385252700a500 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
