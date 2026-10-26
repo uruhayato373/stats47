@@ -78,6 +78,8 @@ export interface NoteArticle {
   noteUrl?: string;
   /** 公開日 (YYYY-MM-DD) */
   publishedAt?: string;
+  /** Last direct check of the public publication, separately from body storage verification. */
+  publicationVerifiedAt?: string;
   /** クリエイターページ先頭への固定表示を監査する。 */
   pinned?: boolean;
   /** note のプロフィール記事としての設定を監査する。 */
@@ -130,6 +132,8 @@ export interface NoteMagazine {
   noteUrl: string | null;
   /** 同テーマの販売導線。noteカード化のため query/hash なしの stats47 固定URLだけを許可する。 */
   productTarget?: `/products/${string}`;
+  /** Current paid note product. The product factory mapping resolves its published article URL. */
+  paidProductId?: string;
   /** フッター注入で使うプレースホルダ (既存 inject-magazine-url.cjs 互換) */
   placeholder?: string;
 }

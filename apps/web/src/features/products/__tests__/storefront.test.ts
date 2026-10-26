@@ -18,9 +18,9 @@ describe("product storefront", () => {
       findDataProductForBlog("local-government-debt-burden")
     ).toMatchObject({
       id: "P-04",
-      channel: "coconala",
+      channel: "note",
       priceYen: 6000,
-      externalUrl: "https://coconala.com/services/4324057",
+      externalUrl: "https://note.com/stats47/n/n5da8a99b3506",
     });
     expect(findDataProductForBlog("other")).toBeNull();
     expect(findDataProductUseCase("other")).toBeNull();
@@ -43,7 +43,7 @@ describe("product storefront", () => {
     for (const [slug, productId] of cases) {
       const product = findDataProductForBlog(slug);
       expect(product?.id).toBe(productId);
-      expect(product?.channel).toBe("coconala");
+      expect(product?.channel).toBe("note");
       expect(findDataProductUseCase(slug)).toMatch(/方へ。$/);
     }
     expect(findFiscalCompanionProduct("kindle-k-s1-06")?.id).toBe("P-04");
@@ -55,7 +55,7 @@ describe("product storefront", () => {
       (product) => product.channel === "kindle"
     );
     const coconala = STOREFRONT_PRODUCTS.filter(
-      (product) => product.channel === "coconala"
+      (product) => product.channel === "note"
     );
 
     expect(kindle.length).toBeGreaterThan(0);
@@ -69,7 +69,7 @@ describe("product storefront", () => {
     ).toBe(true);
     expect(
       coconala.every((product) =>
-        /^https:\/\/coconala\.com\/services\/\d+$/.test(product.externalUrl)
+        /^https:\/\/note\.com\/stats47\/n\/n[a-f0-9]{12}$/.test(product.externalUrl)
       )
     ).toBe(true);
   });
@@ -95,12 +95,9 @@ describe("product storefront", () => {
     expect(findKindleProductForBlog("not-in-a-book")).toBeNull();
   });
 
-  it("商品slugから詳細を引け、未知slugはnullになる", () => {
+  it("商品slugから詳細を引け、撤退済みと未知の商品はnullになる", () => {
     expect(findStorefrontProduct("data-p-04")).toMatchObject({ id: "P-04" });
-    expect(findStorefrontProduct("service-geo-service-01")).toMatchObject({
-      id: "GEO-SERVICE-01",
-      channelLabel: "個別分析サービス",
-    });
+    expect(findStorefrontProduct("service-geo-service-01")).toBeNull();
     expect(findStorefrontProduct("unknown")).toBeNull();
   });
 

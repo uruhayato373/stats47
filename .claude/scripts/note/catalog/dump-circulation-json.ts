@@ -4,6 +4,7 @@
  * Usage: npx tsx .claude/scripts/note/catalog/dump-circulation-json.ts
  */
 import { NOTE_ARTICLES, NOTE_MAGAZINES } from "./index";
+import { NOTE_PRODUCT_MAPPINGS } from "../../../../packages/product-factory/src/channels/note/product-note-mapping";
 
 const articles = NOTE_ARTICLES.filter(
   // 公開URL欠損も監査側へ渡し、不正な公開済みエントリを黙って除外しない。
@@ -34,4 +35,4 @@ const magazines = NOTE_MAGAZINES.map((magazine) => ({
     .map((article) => article.key),
 }));
 
-console.log(JSON.stringify({ account: "stats47", articles, magazines }));
+console.log(JSON.stringify({ account: "stats47", articles, magazines, productNotes: NOTE_PRODUCT_MAPPINGS.map(({ productId, canonicalSlug }) => ({ productId, canonicalSlug })) }));

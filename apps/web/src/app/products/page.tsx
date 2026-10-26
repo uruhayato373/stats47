@@ -12,7 +12,7 @@ const kindleProducts = STOREFRONT_PRODUCTS.filter(
   (product) => product.channel === "kindle",
 );
 const dataProducts = STOREFRONT_PRODUCTS.filter(
-  (product) => product.channel === "coconala",
+  (product) => product.channel !== "kindle",
 );
 
 export const metadata: Metadata = {
@@ -83,7 +83,7 @@ export default function ProductsPage() {
       <section className="mt-12">
         <SectionHeader
           title="編集可能な都道府県データ"
-          description="ココナラで公開中のデータ集です。基準年、形式、利用条件を各商品ページで確認してから購入してください。"
+          description="noteで公開中のデータ集です。基準年、形式、利用条件を各商品ページで確認してから購入してください。"
         />
         <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {dataProducts.map((product) => (

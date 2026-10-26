@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T04:13:37.545Z",
+  "updatedAt": "2026-10-26T03:40:11.254Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7952,6 +7952,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-20T04:13:37.545Z"
+    },
+    "NOTE-CARD-REPAIR-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T03:40:11.254Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run note:circulation:test",
+              "npm run type-check:scripts",
+              "node .claude/scripts/note/repair-note-cards-native.mjs --all --output data/note/evidence/note-native-card-final-audit-2026-10-26.json"
+            ],
+            "pass": true
+          },
+          "evidence": "全428記事を公開面・所有者全文で検査し空白/未登録/未確認0。173記事646枚を修復、有料note導線と既存下書きを保持。証拠:data/note/evidence/note-card-repair-result-2026-10-26.json。サイト本番切替はNOTE-PACKS-REPLACE-COCONALA-01。",
+          "failReason": null,
+          "followUps": [
+            "NOTE-PACKS-REPLACE-COCONALA-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T03:40:11.254Z"
     }
   }
 }

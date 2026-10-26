@@ -48,9 +48,16 @@ export async function currentUrlname(ctx) {
     const r = await ctx.request.get("https://note.com/api/v2/current_user", { headers: { "User-Agent": UA } });
     const d = (await r.json())?.data;
     return d && typeof d === "object" ? d.urlname ?? null : null;
-  } catch {
-    return null;
-  }
+  } catch { /* Browser TLS can use the OS trust store when APIRequestContext cannot. */ }
+  const page = await ctx.newPage();
+  try {
+    await page.goto('https://note.com', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    return await page.evaluate(async () => {
+      const response = await fetch('/api/v2/current_user', { credentials: 'include' });
+      return response.ok ? (await response.json())?.data?.urlname ?? null : null;
+    });
+  } catch { return null; }
+  finally { await page.close(); }
 }
 
 /**

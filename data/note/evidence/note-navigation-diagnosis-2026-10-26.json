@@ -1,0 +1,988 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-26T01:52:19.182Z",
+  "account": "stats47",
+  "scope": "Root-cause investigation; no note editor or external write requests",
+  "sources": {
+    "publicApi": "https://note.com/api/v3/notes/nf962c6702b93",
+    "ciRun": "https://github.com/uruhayato373/stats47/actions/runs/40138729510",
+    "ciArtifact": "note-circulation-audit/tmp/note-card-visibility.json",
+    "localBrowserRaw": "C:/tmp/stats47-note-card-investigation-20261026/public-sample.json",
+    "screenshot": "C:/tmp/stats47-note-card-investigation-20261026/sunshine-footer.png"
+  },
+  "latestFullAudit": {
+    "generatedAt": "2026-10-24T23:03:09.908Z",
+    "summary": {
+      "catalogArticles": 402,
+      "checked": 402,
+      "fetchFailed": 0,
+      "browserVerifyFailedArticles": 0,
+      "affectedArticles": 207,
+      "emptyCards": 609,
+      "unknownCards": 0,
+      "unverifiableCards": 0,
+      "missingCards": 0,
+      "footerWithoutCards": 0,
+      "spacingIssues": 173,
+      "newIssues": 0,
+      "continuedIssues": 782,
+      "resolvedIssues": 0
+    },
+    "localPath": "data/note/card-visibility-latest.json"
+  },
+  "sample": {
+    "selection": "Top 10 articles by pageViews from the recorded dashboard snapshot",
+    "metricsFetchedAt": "2026-10-19T11:33:52.388Z",
+    "metricsPeriod": {
+      "start": "2026-09-21",
+      "end": "2026-10-18",
+      "timeZone": "Asia/Tokyo",
+      "inclusive": true,
+      "label": "カスタム",
+      "display": "2026/9/21〜2026/10/18",
+      "aggregatedAt": "2026-10-19T19:58:00+09:00",
+      "summaryAggregatedAt": "2026-10-19T19:58:00+09:00"
+    },
+    "checked": 10,
+    "fetchFailures": 0,
+    "affectedFooterArticles": 6,
+    "blankFooterCards": 28,
+    "blankFooterCardsWithoutRegistryEntry": 28,
+    "topFiveAffected": 5,
+    "topFiveBlankFooterCards": 21,
+    "articles": [
+      {
+        "key": "recovered-nf962c6702b93",
+        "noteId": "nf962c6702b93",
+        "title": "【2023年版】都道府県「年間日照時間」ランキング！1位埼玉と最下位青森に「1.4倍」の差",
+        "noteUrl": "https://note.com/stats47/n/nf962c6702b93",
+        "recordedPageViews": 772,
+        "bodySha256": "4e16a82cb15d53ca53b427e39c99121d4728e0aa03f20257500faa87569f7416",
+        "hasFooter": true,
+        "registeredEmbeds": 7,
+        "cards": [
+          {
+            "key": "emb53e0a4b375c2",
+            "url": "https://www.e-stat.go.jp/stat-search/database?page=1&layout=datalist&toukei=00200502&tstat=000001111375&cycle=8&tclass1=000001111377&collect_area=100&result_page=1&tclass2val=0&metadata=1&data=1",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-15T11:14:33.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embe22e293d4ab1",
+            "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:21:10.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb1db607407076",
+            "url": "https://stats47.jp/ranking/annual-clear-days",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:40:38.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embedfd46b301ab",
+            "url": "https://stats47.jp/ranking/annual-cloudy-days",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:40:41.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb54bc1cdeaa4f",
+            "url": "https://stats47.jp/ranking/annual-snow-days",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:40:46.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb89c8786ab89c",
+            "url": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:40:50.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb43adb82443d6",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T09:15:42.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb1eed0d653b8c",
+            "url": "https://note.com/stats47/n/n023501038bd5",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb2c02fd11372c",
+            "url": "https://note.com/stats47/m/me574f67ac47f",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb873541eb9e6e",
+            "url": "https://stats47.jp/products/data-p-07/from/note/nf962c6702b93",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "recovered-n80e58a01f660",
+        "noteId": "n80e58a01f660",
+        "title": "【都道府県ランキング】1人当たり県民所得1位は東京都5,214千円｜47位の沖縄県と2.4倍の格差",
+        "noteUrl": "https://note.com/stats47/n/n80e58a01f660",
+        "recordedPageViews": 408,
+        "bodySha256": "1947ab5b83e3e5dfc22e22fdd3261db48e19c13bce7b985376caa6eff8a2fc8f",
+        "hasFooter": true,
+        "registeredEmbeds": 1,
+        "cards": [
+          {
+            "key": "emb2eeca0b74290",
+            "url": "https://stats47.jp/ranking/per-capita-prefectural-income-h27",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-11T04:55:38.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb4f65f182a574",
+            "url": "https://note.com/stats47/n/n03844512d58a",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb5928f504f415",
+            "url": "https://note.com/stats47/m/m2604e003aac4",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb4ff775b57244",
+            "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n80e58a01f660",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embe6789c66d7b7",
+            "url": "https://note.com/stats47/n/n317c673b1e81",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "recovered-n03e45e40d3a7",
+        "noteId": "n03e45e40d3a7",
+        "title": "【保存版】GoogleマップでKMLファイルを利用する方法",
+        "noteUrl": "https://note.com/stats47/n/n03e45e40d3a7",
+        "recordedPageViews": 374,
+        "bodySha256": "b233aab2cf3f6b16c06475883e31624a04ea35bf88de50896639a447cbba73f1",
+        "hasFooter": true,
+        "registeredEmbeds": 3,
+        "cards": [
+          {
+            "key": "emb1f9eada1561b",
+            "service": "attachment",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-11T14:24:47.000+09:00",
+            "visible": true,
+            "renderedHeight": 102
+          },
+          {
+            "key": "emb2302b51f4d04",
+            "url": "https://www.google.com/maps/d/u/1/edit?mid=1NLJ3q9XLLZQL3qjS4S47ROi0WNhZ2f0&usp=sharing",
+            "service": "googlemap",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-11T14:27:39.000+09:00",
+            "visible": true,
+            "renderedHeight": 467
+          },
+          {
+            "key": "emb57869d3b712a",
+            "url": "https://www.google.com/intl/ja/earth/versions/#earth-pro",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-05T15:10:19.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb5c572abc06a2",
+            "url": "https://stats47.jp/ranking/total-population",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb619002576f9f",
+            "url": "https://note.com/stats47/m/m599831c3769e",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embcc8ac2111f77",
+            "url": "https://stats47.jp",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embfa251b7fb7e1",
+            "url": "https://note.com/stats47/n/nc884a0a01b71",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "recovered-n144d350fc14e",
+        "noteId": "n144d350fc14e",
+        "title": "なぜ沖縄の出生率は高いのか — 東京との差1.6倍を生む「見えない力」",
+        "noteUrl": "https://note.com/stats47/n/n144d350fc14e",
+        "recordedPageViews": 245,
+        "bodySha256": "609d47b53096c78018507f6a8f7fe7d096ce26d03af98ea79aa40826d8c1f748",
+        "hasFooter": true,
+        "registeredEmbeds": 11,
+        "cards": [
+          {
+            "key": "emb35fd5109a6d0",
+            "url": "https://stats47.jp/ranking/total-fertility-rate",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:23:16.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embb2ec6e92011f",
+            "url": "https://stats47.jp/ranking/crude-birth-rate",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:23:38.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embc1a8d6d502e8",
+            "url": "https://stats47.jp/ranking/average-age-of-first-marriage-wife",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:24:02.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embe86a02bd0359",
+            "url": "https://stats47.jp/ranking/marriages-per-total-population",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:24:23.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embc877ab67767a",
+            "url": "https://stats47.jp/ranking/young-population-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:24:37.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb005f06b7e2b0",
+            "url": "https://stats47.jp/ranking/population-growth-rate",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:24:58.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb89d918842d26",
+            "url": "https://stats47.jp/ranking/total-fertility-rate",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:25:15.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb94fe397d5f34",
+            "url": "https://stats47.jp/blog/fertility-rate-prefecture-gap",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:25:17.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb05c49fb2aab1",
+            "url": "https://stats47.jp/blog/fertility-rate-prefecture-gap",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:25:20.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb3a22898bf617",
+            "url": "https://stats47.jp/blog/fertility-fiscal-nexus",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:25:23.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embc6a45a98e304",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-18T10:25:25.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb320ccbc6a57e",
+            "url": "https://note.com/stats47/n/n93a6656b2096",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb782d542b9116",
+            "url": "https://note.com/stats47/m/meacbafeb15a1",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb8e07c930a9d6",
+            "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/n144d350fc14e",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb7b19940aa052",
+            "url": "https://note.com/stats47/n/n137cfc540d23",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embf42cd0ac8c5c",
+            "url": "https://note.com/stats47/n/nd2fd5adb4bed",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embcd9d74f98f73",
+            "url": "https://note.com/stats47/n/nafcc04dcd988",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb3e3151c680a2",
+            "url": "https://note.com/stats47/n/nef7e875ba364",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embe0cac083fe6c",
+            "url": "https://stats47.jp",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "recovered-ne0d53bfef7ed",
+        "noteId": "ne0d53bfef7ed",
+        "title": "【都道府県ランキング】持ち家比率1位は秋田県77.1％｜47位の沖縄県と1.8倍の格差",
+        "noteUrl": "https://note.com/stats47/n/ne0d53bfef7ed",
+        "recordedPageViews": 239,
+        "bodySha256": "44235a60f47aef4c369fe37d461f33aa57780f2ea4f3c4363c95a976fb99a53e",
+        "hasFooter": true,
+        "registeredEmbeds": 1,
+        "cards": [
+          {
+            "key": "emb51ce142a619d",
+            "url": "https://stats47.jp/ranking/owner-occupied-housing-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-11T04:58:01.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embbfe0423e3486",
+            "url": "https://note.com/stats47/m/m940fb189a4c0",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb50afbbcc9fea",
+            "url": "https://note.com/stats47/n/n27d2efa9bcfb",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emba845529ba717",
+            "url": "https://stats47.jp/products/data-p-07/from/note/ne0d53bfef7ed",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "paid-n2ed31d721531",
+        "noteId": "n2ed31d721531",
+        "title": "財政健全化法の4指標で見る都道府県ランキング｜赤字比率は全県クリア、差がつくのは借金の重さ",
+        "noteUrl": "https://note.com/stats47/n/n2ed31d721531",
+        "recordedPageViews": 208,
+        "bodySha256": "60ef96b6de7b8e70e9a3f3bb9069ba095bbc81168291169ececea1b1add8b912",
+        "hasFooter": false,
+        "registeredEmbeds": 7,
+        "cards": [
+          {
+            "key": "embb698db420233",
+            "url": "https://note.com/stats47/n/n04d95ae14bc1",
+            "service": "note",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:12:00.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emb5afbccc41a9b",
+            "url": "https://note.com/stats47/n/n5f183fcf5b97",
+            "service": "note",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:12:02.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emb5720fc265a31",
+            "url": "https://stats47.jp/ranking/real-public-debt-service-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:12:06.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb26aa9cc42a9d",
+            "url": "https://stats47.jp/ranking/future-burden-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:12:08.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb4f322bbb7884",
+            "service": "attachment",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:15:27.000+09:00",
+            "visible": true,
+            "renderedHeight": 102
+          },
+          {
+            "key": "embf70eb4cced4a",
+            "url": "https://www.e-stat.go.jp/regional-statistics/ssdsview",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:13:48.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb5f3cdc4e01e0",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-13T10:14:02.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          }
+        ]
+      },
+      {
+        "key": "paid-nba8bf272cc2b",
+        "noteId": "nba8bf272cc2b",
+        "title": "【格差2.5歳】都道府県「初婚年齢（夫・妻）」ランキング2022：東京と山口の「2.5歳」の差と性別による違い",
+        "noteUrl": "https://note.com/stats47/n/nba8bf272cc2b",
+        "recordedPageViews": 147,
+        "bodySha256": "5c49072f1ccc7e1e804acde5cedb746034a57441552b21ce21f542f45131d6e7",
+        "hasFooter": false,
+        "registeredEmbeds": 3,
+        "cards": [
+          {
+            "key": "emb6f314ba9596e",
+            "url": "https://www.e-stat.go.jp/stat-search/database?page=1&layout=datalist&toukei=00200502&tstat=000001111375&cycle=8&tclass1=000001111377&collect_area=100&result_page=1&tclass2val=0&metadata=1&data=1",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-11T12:41:15.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb887b7308bd7a",
+            "url": "https://note.com/stats47/n/ncbed56eb7c3d",
+            "service": "note",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-11T15:48:09.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emb479f1b0ba66f",
+            "service": "attachment",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2025-12-11T16:00:29.000+09:00",
+            "visible": true,
+            "renderedHeight": 102
+          }
+        ]
+      },
+      {
+        "key": "recovered-n16950238dfd8",
+        "noteId": "n16950238dfd8",
+        "title": "【2022年度】都道府県「財政力指数」ランキング｜唯一の1.0超え東京都、茨城8位の意外",
+        "noteUrl": "https://note.com/stats47/n/n16950238dfd8",
+        "recordedPageViews": 94,
+        "bodySha256": "9a723e1c078252c41047349e63ffb9dcd14422cae131209a5b49f00d9c4ac122",
+        "hasFooter": true,
+        "registeredEmbeds": 10,
+        "cards": [
+          {
+            "key": "emb22eeb47ecba1",
+            "url": "https://stats47.jp/ranking/fiscal-strength-index-prefecture",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:12:52.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb83d6d20996c6",
+            "url": "https://stats47.jp/ranking/standard-fiscal-revenue",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:13:09.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb982201a53994",
+            "url": "https://stats47.jp/ranking/standard-fiscal-expenditure",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:13:05.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb54450b213078",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:13:00.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb01545ad09c4c",
+            "url": "https://note.com/stats47/n/n2ed31d721531",
+            "service": "note",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:38:03.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emb55e135d2fa0d",
+            "url": "https://note.com/stats47/m/m30bb1cee28f7",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:39:11.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb7ed9859dda6d",
+            "url": "https://stats47.jp/products/kindle-k-s1-06/from/note/n16950238dfd8",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:40:10.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emb55023475fc03",
+            "url": "https://note.com/stats47/n/n2406ded99484",
+            "service": "note",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:41:01.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emb7d9f61a4ee9d",
+            "url": "https://note.com/stats47/n/nefecfbe76bd2",
+            "service": "note",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:41:45.000+09:00",
+            "visible": true,
+            "renderedHeight": 234
+          },
+          {
+            "key": "emba0a68f37543f",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": true,
+            "registeredCreatedAt": "2026-10-12T17:42:20.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          }
+        ]
+      },
+      {
+        "key": "recovered-ne31a2574e231",
+        "noteId": "ne31a2574e231",
+        "title": "【2022年度】都道府県「経常収支比率」ランキング｜100%超えの大阪府、東京都は全国最低の79.5%",
+        "noteUrl": "https://note.com/stats47/n/ne31a2574e231",
+        "recordedPageViews": 77,
+        "bodySha256": "78824d7c7eca3ee9419299606e8cde7ffa7f928d35ad457e36cf529a061b1993",
+        "hasFooter": true,
+        "registeredEmbeds": 4,
+        "cards": [
+          {
+            "key": "emb4d92ad6f6610",
+            "url": "https://stats47.jp/ranking/current-balance-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:35:07.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embad08bcf0ddb0",
+            "url": "https://stats47.jp/ranking/fiscal-strength-index-prefecture",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:35:08.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embb97f780691dd",
+            "url": "https://stats47.jp/ranking/local-debt-current-ratio",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:35:09.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "embeb19f7e68833",
+            "url": "https://stats47.jp/",
+            "service": "external-article",
+            "inFooter": false,
+            "registered": true,
+            "registeredCreatedAt": "2026-03-12T13:35:13.000+09:00",
+            "visible": true,
+            "renderedHeight": 152
+          },
+          {
+            "key": "emba813cc381575",
+            "url": "https://note.com/stats47/n/n2ed31d721531",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb8c1a4a95fe08",
+            "url": "https://note.com/stats47/m/m30bb1cee28f7",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embb7145b964f05",
+            "url": "https://stats47.jp/products/kindle-k-s1-06/from/note/ne31a2574e231",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb5018a19705d0",
+            "url": "https://note.com/stats47/n/nb8f3e05d244b",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb9edb6fefc848",
+            "url": "https://note.com/stats47/n/nb216c5776aab",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "emb56d8823c5d9d",
+            "url": "https://note.com/stats47/n/na16afa534c77",
+            "service": "note",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          },
+          {
+            "key": "embed335e5b1b3c",
+            "url": "https://stats47.jp",
+            "service": "external-article",
+            "inFooter": true,
+            "registered": false,
+            "registeredCreatedAt": null,
+            "visible": false,
+            "renderedHeight": 0
+          }
+        ]
+      },
+      {
+        "key": "13-ollama-offline-local-llm",
+        "noteId": "n1e72ba0b4a43",
+        "title": "ローカル LLM (Ollama) × Claude Code で完全オフライン業務",
+        "noteUrl": "https://note.com/stats47/n/n1e72ba0b4a43",
+        "recordedPageViews": 74,
+        "bodySha256": "7e7b1a00ae370bf3314ae98bf73574f1883d956fb9d0014c88c2e0cc9c2d41e6",
+        "hasFooter": false,
+        "registeredEmbeds": 0,
+        "cards": []
+      }
+    ]
+  },
+  "findings": [
+    {
+      "code": "footer_embed_keys_not_registered",
+      "evidence": "The target has 7 registered visible cards and 3 footer figures whose keys do not exist in embedded_contents; all 3 have rendered height 0.",
+      "source": ".claude/scripts/note/lib/navigation-footer.mjs",
+      "functions": [
+        "noteCard",
+        "externalCard"
+      ],
+      "mechanism": "The footer generator invents embedded-content-key values and supplies HTML figures. update-published-navigation patches free_body in the outgoing update without creating the corresponding native embed records."
+    },
+    {
+      "code": "update_verification_checks_saved_html_only",
+      "source": ".claude/scripts/note/update-published-navigation.mjs",
+      "evidence": "The success conditions check URL inclusion and bodySignature equality; they do not require the added keys to be present in embedded_contents or cards to render."
+    },
+    {
+      "code": "idempotence_preserves_broken_cards",
+      "source": ".claude/scripts/note/lib/navigation-footer.mjs",
+      "evidence": "hasUrl checks data-src/href; hasNextBlock checks lead text. A saved invisible figure is treated as already installed."
+    },
+    {
+      "code": "registered_footer_control_visible",
+      "article": "https://note.com/stats47/n/n16950238dfd8",
+      "evidence": "All six footer cards have native embed records created on 2026-10-12 and render in the same browser environment."
+    }
+  ],
+  "alternativeChecks": {
+    "destinationUrls": [
+      {
+        "url": "https://note.com/stats47/n/n023501038bd5",
+        "httpStatus": 200,
+        "ogTitle": true,
+        "ogImage": true
+      },
+      {
+        "url": "https://note.com/stats47/m/me574f67ac47f",
+        "httpStatus": 200,
+        "ogTitle": true,
+        "ogImage": true
+      },
+      {
+        "url": "https://stats47.jp/products/data-p-07/from/note/nf962c6702b93",
+        "httpStatus": 200,
+        "ogTitle": true,
+        "ogImage": true
+      }
+    ],
+    "browserControls": "The same target article renders its seven older cards; the finance index article renders six footer cards.",
+    "historicalLimit": "Current destination health does not establish the health at original insertion. The current failure is the missing embed registry entries."
+  },
+  "followup": {
+    "backlogId": "NOTE-CARD-REPAIR-01",
+    "priority": "Recreate the target three cards and the top-five footer cards through native note embedding after a fresh audit; replace saved-HTML-only success conditions with registry and browser rendering verification.",
+    "externalRepairPerformed": false
+  }
+}

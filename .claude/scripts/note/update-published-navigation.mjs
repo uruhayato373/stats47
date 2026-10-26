@@ -31,6 +31,8 @@ import {
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
+import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
@@ -275,7 +277,7 @@ export function buildPlans(source, views, options) {
         || (options.slug === article.key && !article.isPaid)
         || (options.allFree && !article.isPaid)
         || (options.magazine && article.magazine === options.magazine && !article.isPaid && Boolean(article.noteUrl))
-        || (options.products && !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget))
+        || (options.products && !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget || magazines.get(article.magazine)?.paidProductId))
         || (options.repairRedirects && (liveRepair?.forceNormalizeLegacy || liveRepair?.repairs.length));
     })
     .map((article) => {
@@ -296,8 +298,10 @@ export function buildPlans(source, views, options) {
       // マガジン名の代用ではなく、実商品SSOT (storefront.generated.ts) からnote商品カードの
       // title/descriptionを解決する。マガジン単位ではなく商品単位の事実 (2026-09-16: 全189本で
       // カードがマガジン名を表示し実商品と不一致だったことを実測)。
-      const productUrl = productTarget ? buildNoteProductCardUrl(productTarget, article.noteUrl) : null;
-      const productCardText = productTarget ? resolveProductCardText(productTarget) : null;
+      const paidProduct = (includeFooter || options.products) ? resolvePaidProduct(article, source) : null;
+      const productUrl = paidProduct?.noteUrl || (productTarget ? buildNoteProductCardUrl(productTarget, article.noteUrl) : null);
+      const productCardText = paidProduct ? { title: paidProduct.title, description: `「${paidProduct.title}」で、収録内容・サンプル・価格を確認できます。` }
+        : productTarget ? resolveProductCardText(productTarget) : null;
       if (article.nextBestArticle && !next?.noteUrl)
         throw new Error(`${article.key}: nextBestArticle が未公開`);
       // マガジンが note 上で未公開 (noteUrl null) なら footer からマガジンカードを省くだけ。
@@ -310,7 +314,7 @@ export function buildPlans(source, views, options) {
         ...(options.repairRedirects ? liveRepair.repairs : []),
         // あるべき商品カード状態を常に計算し、公開済み本文との差分だけを直す。
         // catalog へ記事ごとに手書きしない (是正対象は productTarget を持つ記事すべて)。
-        ...(productUrl
+        ...(productUrl && !paidProduct
           ? [{
               mode: "regenerate-card",
               fromUrl: productUrl,
@@ -332,7 +336,8 @@ export function buildPlans(source, views, options) {
         repairs,
         forceNormalizeLegacy: options.repairRedirects && liveRepair.forceNormalizeLegacy,
         desiredSeparator: article.publishedSeparator ?? null,
-        footer: includeFooter || productTarget
+        paidProduct,
+        footer: includeFooter || productTarget || paidProduct
           ? {
               nextNoteUrl: next?.noteUrl || null,
               nextNoteKey: next?.noteUrl ? noteKeyFromUrl(next.noteUrl) : null,
@@ -346,6 +351,7 @@ export function buildPlans(source, views, options) {
                 ? "47都道府県の順位・数値・グラフを無料で確認できます。"
                 : "公的統計を47都道府県のランキング・地図・グラフで確認できます。",
               productUrl,
+              productNoteUrl: paidProduct?.noteUrl || null,
               productTitle: productCardText?.title ?? null,
               productDescription: productCardText?.description ?? null,
               datasets: datasets.map((dataset) => ({
@@ -359,8 +365,9 @@ export function buildPlans(source, views, options) {
     });
 }
 
-function applyPlanBody(body, plan) {
-  const repaired = applyPublishedLinkRepairs(body, plan.repairs, {
+export function applyPlanBody(body, plan) {
+  const productBody = rewriteProductCards(body, plan.paidProduct);
+  const repaired = applyPublishedLinkRepairs(productBody, plan.repairs, {
     forceRegenerateCards: FORCE_REGENERATE_CARDS,
   });
   const navigation = plan.footer
@@ -378,7 +385,7 @@ function applyPlanBody(body, plan) {
       };
   return {
     body: navigation.body,
-    changed: repaired.changed || navigation.changed,
+    changed: navigation.body !== body,
     normalizedLegacyLinks: repaired.normalizedLegacyLinks || navigation.normalizedLegacyLinks,
     addedNextNote: navigation.addedNextNote,
     addedMagazine: navigation.addedMagazine,
@@ -518,13 +525,13 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   }
   let application;
   if (source.price === 0 && source.separator && plan.footer) {
-    const repaired = applyPublishedLinkRepairs(source.body, plan.repairs, {
+    const repaired = applyPublishedLinkRepairs(rewriteProductCards(source.body, plan.paidProduct), plan.repairs, {
       forceRegenerateCards: FORCE_REGENERATE_CARDS,
     });
     const publicRepairs = plan.repairs.filter(
       (repair) => publicBefore.body.includes(repair.fromUrl) || publicBefore.body.includes(repair.toUrl),
     );
-    const repairedPublic = applyPublishedLinkRepairs(publicBefore.body, publicRepairs, {
+    const repairedPublic = applyPublishedLinkRepairs(rewriteProductCards(publicBefore.body, plan.paidProduct), publicRepairs, {
       forceRegenerateCards: FORCE_REGENERATE_CARDS,
     });
     const visible = applyVisibleNavigationBeforeSeparator(
@@ -546,7 +553,16 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   if (plan.desiredSeparator && source.separator !== plan.desiredSeparator && !application.changed) {
     application = { ...application, changed: true };
   }
-  if (!application.changed) return { status: "already_compliant", ...application };
+  const missingEmbeds = unregisteredCards(application.body, source.embeddedContents);
+  if (!application.changed && !missingEmbeds.length) return { status: "already_compliant", ...application };
+
+  const apiPage = await ctx.newPage();
+  let native;
+  try {
+    await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
+    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents);
+    application = { ...application, body: native.body, changed: true };
+  } finally { await apiPage.close(); }
 
   const noteKey = noteKeyFromUrl(plan.article.noteUrl);
   const page = await ctx.newPage();
@@ -655,6 +671,14 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       throw new Error(`更新後本文に非HTTPSのstats47リンクが残存: api=${JSON.stringify(patch)}`);
     }
     if (live.bodySignature !== fnv1a(application.body)) throw new Error("送信した無料本文と公開本文が一致しません");
+    assertRegisteredCards(live.body, live.embeddedContents);
+    const readers = await ctx.browser().newContext();
+    try {
+      const publicLive = await fetchNote(noteKey, 5, readers.request);
+      const visibleKeys = new Set(cardEntries(publicLive.body).map((card) => card.key));
+      await verifyPublicCards(readers, plan.article.noteUrl, native.registered.filter((key) => visibleKeys.has(key)));
+    }
+    finally { await readers.close(); }
     return {
       status: "updated",
       beforeBodySignature: before.bodySignature,
@@ -724,7 +748,7 @@ async function main() {
         separator: before.separator,
         hasDraft: before.hasDraft,
       },
-      pending: application.changed,
+      pending: application.changed || unregisteredCards(application.body, before.embeddedContents).length > 0,
       wouldAddNextNote: application.addedNextNote,
       wouldAddMagazine: application.addedMagazine,
       wouldAddSite: application.addedSite,

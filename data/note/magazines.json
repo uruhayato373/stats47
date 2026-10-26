@@ -56,7 +56,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/mef7c42c1c86c",
-      "productTarget": "/products/data-p-06"
+      "productTarget": "/products/data-p-06",
+      "paidProductId": "P-06"
     },
     {
       "key": "s47-fiscal",
@@ -67,7 +68,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m30bb1cee28f7",
-      "productTarget": "/products/kindle-k-s1-06"
+      "productTarget": "/products/kindle-k-s1-06",
+      "paidProductId": "P-04"
     },
     {
       "key": "s47-kakei-reading",
@@ -78,7 +80,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m8603c96e8466",
-      "productTarget": "/products/kindle-k-s1-02"
+      "productTarget": "/products/kindle-k-s1-02",
+      "paidProductId": "P-14"
     },
     {
       "key": "s47-economy",
@@ -89,7 +92,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m2604e003aac4",
-      "productTarget": "/products/kindle-k-s1-01"
+      "productTarget": "/products/kindle-k-s1-01",
+      "paidProductId": "P-01"
     },
     {
       "key": "s47-population",
@@ -100,7 +104,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/meacbafeb15a1",
-      "productTarget": "/products/kindle-k-s1-03"
+      "productTarget": "/products/kindle-k-s1-03",
+      "paidProductId": "P-01"
     },
     {
       "key": "s47-education",
@@ -111,7 +116,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m72e6b89b155e",
-      "productTarget": "/products/kindle-k-s1-05"
+      "productTarget": "/products/kindle-k-s1-05",
+      "paidProductId": "P-06"
     },
     {
       "key": "s47-health",
@@ -122,7 +128,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m83c357247e0c",
-      "productTarget": "/products/kindle-k-s1-04"
+      "productTarget": "/products/kindle-k-s1-04",
+      "paidProductId": "P-05"
     },
     {
       "key": "s47-climate",
@@ -133,7 +140,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/me574f67ac47f",
-      "productTarget": "/products/data-p-07"
+      "productTarget": "/products/data-p-07",
+      "paidProductId": "P-07"
     },
     {
       "key": "s47-agriculture",
@@ -144,7 +152,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/md6aa26278129",
-      "productTarget": "/products/kindle-k-s1-09"
+      "productTarget": "/products/kindle-k-s1-09",
+      "paidProductId": "P-09"
     },
     {
       "key": "s47-safety",
@@ -155,7 +164,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/md7d4906a40ac",
-      "productTarget": "/products/kindle-k-s1-10"
+      "productTarget": "/products/kindle-k-s1-10",
+      "paidProductId": "P-10"
     },
     {
       "key": "s47-labor",
@@ -166,7 +176,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m4709a61adf77",
-      "productTarget": "/products/data-p-02"
+      "productTarget": "/products/data-p-02",
+      "paidProductId": "P-02"
     },
     {
       "key": "s47-tourism",
@@ -177,7 +188,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m87e6a79d821b",
-      "productTarget": "/products/kindle-k-s1-07"
+      "productTarget": "/products/kindle-k-s1-07",
+      "paidProductId": "P-03"
     },
     {
       "key": "s47-industry",
@@ -188,7 +200,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m8c84e9e6e4bd",
-      "productTarget": "/products/kindle-k-s1-09"
+      "productTarget": "/products/kindle-k-s1-09",
+      "paidProductId": "P-09"
     },
     {
       "key": "s47-housing",
@@ -199,7 +212,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/m940fb189a4c0",
-      "productTarget": "/products/data-p-07"
+      "productTarget": "/products/data-p-07",
+      "paidProductId": "P-07"
     },
     {
       "key": "s47-infrastructure",
@@ -210,7 +224,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/md9ab5cabf8f8",
-      "productTarget": "/products/kindle-k-s1-08"
+      "productTarget": "/products/kindle-k-s1-08",
+      "paidProductId": "P-10"
     },
     {
       "key": "s47-ict",
@@ -221,7 +236,8 @@
         "stats47-note"
       ],
       "noteUrl": null,
-      "productTarget": "/products/kindle-k-s1-12"
+      "productTarget": "/products/kindle-k-s1-12",
+      "paidProductId": "P-12"
     },
     {
       "key": "s47-international",
@@ -232,7 +248,8 @@
         "stats47-note"
       ],
       "noteUrl": null,
-      "productTarget": "/products/kindle-k-s1-07"
+      "productTarget": "/products/kindle-k-s1-07",
+      "paidProductId": "P-03"
     },
     {
       "key": "s47-energy",
@@ -243,7 +260,8 @@
         "stats47-note"
       ],
       "noteUrl": "https://note.com/stats47/m/mc659ce45528f",
-      "productTarget": "/products/kindle-k-s1-08"
+      "productTarget": "/products/kindle-k-s1-08",
+      "paidProductId": "P-10"
     }
   ]
 }

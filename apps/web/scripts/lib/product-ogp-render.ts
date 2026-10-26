@@ -14,13 +14,15 @@ import { join } from 'node:path';
 
 import { createElement as h } from 'react';
 
-import { ProductOgp, type ProductOgpData } from '../../src/features/ogp/ProductOgp';
 import {
   KINDLE_COVER_BACKGROUND_BY_ID,
   KINDLE_COVER_DESIGN_BY_ID,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
+import { ProductOgp, type ProductOgpData } from '../../src/features/ogp/ProductOgp';
 
-export type ProductOgpChannel = 'kindle' | 'coconala';
+import type { StorefrontChannel } from '../../src/features/products/types';
+
+export type ProductOgpChannel = StorefrontChannel;
 
 const BRAND_BACKGROUND_RELATIVE_PATH = 'assets/ogp/ogp-bg-brand-light.jpg';
 const DEFAULT_R2_BASE = 'https://storage.stats47.jp';

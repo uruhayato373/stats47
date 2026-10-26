@@ -383,18 +383,15 @@ updated: 2026-10-19
 - **完了条件**: 本番の `app/affiliate-ads/all.json` で moshimo・afi-b・valuecommerce の広告が配信中 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新され、使わなくなった Secrets が削除されている。
 
 
-### [NOTE-PACKS-REPLACE-COCONALA-01] ココナラ撤退の後始末: データパックの有料 note 版 13 本を公開し、サイトの商品ページの行き先を note へ付け替える
-タグ: [収益化] [種類:制作] [実行:windows] [起票:2026-10-19] [領域:商品]
+### [NOTE-PACKS-REPLACE-COCONALA-01] [進行中] 公開済み有料noteへ商品ハブの販売先を切り替える
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:商品]
 
-- **経緯 (2026-10-19 オーナー判断)**: ココナラから撤退し、データ販売は note に集約する。同日、ココナラの 14 件を受付休止にした (ココナラに非公開の操作は無い。公開ページで「受付休止中」・「購入画面に進む」0 件を確認)。計測と週次収益の集計からもココナラを外した。ただし note でデータパックを買える状態にはまだない (有料の note 版 13 本は下書き。公開済みは無料の体験版 1 本だけ)。
-- **なぜサイト側をまだ変えないか**: 出品台帳 (`config/coconala-listings.json`) を `withdrawn` にすると、`generate-product-storefront.ts` が商品ハブからココナラ商品を外し、`/products/data-p-XX` が無くなる。公開済みの note 記事のカードの多くがこのページへリンクしている (`data/note/card-visibility-latest.json` 等) ので、note 版の公開前に変えるとリンクが切れる。それまでは商品ページはココナラ (受付休止中) を指したままにする。
-- **次 (実行順)**:
-  1. **Windows PC** (販売中の納品版 `.local/coconala-products/P-XX/v2-20260906-r1/` があり、出品記録とハッシュが一致する PC。Mac で作り直すとハッシュ一致は 18 → 5 件に落ちる) で、13 パックを Windows / Mac の Office 365 で開き、表示・県図形の編集・チャートの編集・再計算を確認して記録する (旧 `COCONALA-PROFILE-OWNER-01` から移した作業)。
-  2. `npm run products:note:validate` と、`note/cli.ts revision --revision <新版> --all` で販売準備の版を作り、記事ごとに価格・無料と有料の境界・添付をオーナーが確認する (規約 `.claude/rules/coconala-product-standards.md` の公開ゲート。一括公開しない)。
-  3. 有料の note 版を公開する。添付の upload は 1 日 10 回までなので、2 日に分ける。
-  4. 公開した note の URL を、商品ハブの行き先にする。`generate-product-storefront.ts` にデータパックの note 版の経路を足し、`/products/data-p-XX` と、ブログ・ランキングのデータ集の案内 (`storefront.ts`) が note を指すようにする。そのうえで出品台帳を `withdrawn` にし、`storefront.test.ts` を直してデプロイする。
-- **禁止**: note 版の公開前に出品台帳を `withdrawn` にしない (サイトの商品ページが消え、note 記事のリンクが切れる)。下書きのまま販売準備完了と扱わない。
-- **完了条件**: 有料の note 版 13 本が公開され、本番の `/products/data-p-01`〜`data-p-14` が note の記事へ案内し、`config/coconala-listings.json` の 14 件が `withdrawn`。
+- **owner / status**: Codex / in-progress。ココナラ撤退、noteへの販売集約はオーナー指示済み。
+- **現在の正典**: 有料パック13本は公開済み。公開URL・価格・境界・添付の確認記録は `data/note/evidence/note-paid-pack-publication-verification-2026-10-26.json`、公開状態は `data/note/articles.json`、商品の対応は product-factory の `NOTE_PRODUCT_MAPPINGS`。古いローカル準備版・下書き記録を公開状態の根拠にしない。
+- **反映済みの準備**: 出品台帳14行（有料パック13＋Geo受託1）は `withdrawn`。商品ハブ生成・販売カタログは記事台帳の公開情報を参照する。`data-p-XX` のURLを保持して有料noteへ案内する。P-13は無料見本で、有料商品ページの対象外。旧readinessに残ったGeoの公開記録も現行出品台帳の撤退状態を優先する。
+- **次**: 商品ハブの差分と検査を終え、まとまった本番反映の承認後に1回だけデプロイし、13商品ページの購入先が対応する有料noteであることを本番で確認する。note記事側の全件付け替え・公開表示確認は `NOTE-CARD-REPAIR-01` が担当する。
+- **停止条件・承認境界**: 今回のnote修復・付け替えは指示済み。サイト本番デプロイは2026-10-26に明示承認済み。価格・商品本文・納品物をこの導線変更で変更しない。
+- **完了条件**: 公開済み13商品の記事台帳・派生販売カタログ・本番商品ページが一致し、旧ココナラの購入先が残らない。
 
 
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
@@ -2183,27 +2180,6 @@ updated: 2026-10-19
 - **やること**: 完了・superseded の操作履歴を `data/note/evidence/` の月別ファイルへ移すなど、正本 (採用版と未完了の操作) と履歴を分ける。読み手 (`lib/cover-update.mjs`・`generate-cover-refresh.ts`・`verify-cover-refresh.mjs`・管理画面) を同時に直し、JSON Schema も更新する。
 - **完了条件**: 正本が 1MB 未満になり、baseline から `data/note/cover-assets.json` の行を消しても `check-repo-hygiene.cjs --baseline` が通る。`node --test .claude/scripts/note/__tests__/cover-update.test.mjs` が通る。
 
-### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27] [領域:商品]
-
-- **現在地 (2026-09-27)**: 一括修正前の全286記事監査は空白785枚・未確認0枚・カード前の空段落29箇所。修復記録では71枚・17記事が`verified`（今回65枚）。**785枚は現在の残数ではない**。一括修正後の全量再監査は未実施。記事単位の公開後監査は各修復時に実施済み。
-- **正確な再開位置**: 同じMacの`.local/note-card-repair-journal.json`がカード単位の進捗記録。`attempts`を`slug + key`で最後の試行に絞り、`verified`を再処理しない。`data/note/card-visibility-latest.json`は修復前の全量スナップショットで、再監査までは現在の残数とみなさない。ローカルjournalが無い環境では推測で修復せず、全量監査を作り直す。
-- **再開手順**:
-  1. `npm run agent:session -- --status`で作業共有を確認し、note編集の同時実行を避ける。`npm run note:session:check`でstats47のログインを確認する。
-  2. `npm run note:cards:audit -- --browser-verify --output data/note/card-visibility-latest.json`で286記事を再監査する。空白が残ればexit 1でもレポートを読む。`unknownCards`または`browserVerifyFailedArticles`があれば、`npm run note:cards:audit -- --browser-verify --retry-unknown-from data/note/card-visibility-latest.json --output data/note/card-visibility-latest.json`で再検証し、未確認0を確認する。
-  3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
-  4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
-- **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
-- **2026-10-11 再開**: 全量再監査は空白 720 枚・206 記事・未確認 0・空段落 83 (`data/note/card-visibility-latest.json`、11:56Z)。修復ループを再開した。`repair-note-blank-card.mjs` は挿入直後のカードの `data-src` が空のまま比較して落ちていたので、全カードの URL が入るまで最大 20 秒待つようにした。
-- **オーナー作業 (下書きの破棄)**: `recovered-n03e45e40d3a7` (`https://note.com/stats47/n/n03e45e40d3a7`、KML×Google マップ) は、リンク先 `n686dcc017bbe` のカードが 20 秒待っても埋め込まれず、エディタの自動保存で `has_draft=true` が残った (公開本文は不変)。note の編集画面で下書きを破棄するまで、この記事の空白 6 枚は journal で `repair_failed` / `blocked_by_draft` にして修復対象から外している。破棄後は journal の該当 6 件を消してから再実行する。
-- **2026-10-12 の進捗と停止**: 全量監査 (17:22) は 304 記事・空白 689 枚・空段落 107。修復は 75 枚 verified。修復手順を 2 回直した: (1) 右矢印でカードを選べない場合のクリック経路を足したが、非表示の空白カードはクリックできず、その間に「カード未選択のまま押した Delete」が自動保存されて下書きを 3 件作った → (2) Delete はカードが選択状態 (`ProseMirror-selectednode`) のときだけ押し、未選択なら編集せず止める形に直した。その後 note の公開 API が 403 を返し始め (短時間の大量操作による制限とみられる)、`recovered-n3a4efa70c02a` は「更新する」が出ずタイムアウトした (下書きが残った可能性あり・403 で未確認)。自動処理はすべて停止。
-- **オーナー作業 (下書きの破棄、2026-10-12 時点で 9〜10 本)**: 修復やタグ更新の停止で未公開の下書きが残った記事 — `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`・`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29`・(未確認) `n3a4efa70c02a`、有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8`。`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29` の下書きには意図しない削除が入っているので**公開せず破棄**する。破棄後に journal の当該記事の `blocked_by_draft` を消して再開する。
-- **再開手順**: 数時間おいて `curl -s -o /dev/null -w "%{http_code}" https://note.com/api/v3/notes/n3a4efa70c02a` が 200 に戻ったことを確かめ、journal の `repair_failed` を下書きの無い記事だけ消してから修復ループを流す。1 回の連続処理を短く区切る。
-- **週次運用**: 全量監査は 2026-10-26 から週次レビューの `npm run weekly:audits -- --only note-circulation` (台本 `.claude/scripts/management/weekly-audits/note-circulation.sh`・時間制限 60 分) で走る。CI の `note-circulation-audit-weekly.yml` は 286 記事の browser-verify が 30〜60 分に収まらず一度も完了しなかったので撤去した (run 36909292510 / 37160611864 / 38095490764 / 40138729510)。結果はローカルの `.local/weekly-audits/<日付>/note-circulation.log`、スクリーンショットは R2 にもローカルの git にも蓄積しない。
-- **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
-- **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
-- **2026-10-26 観測**: ローカルの全量監査が初めて最後まで走った (10.8 分)。browser verify の再試行後で影響記事 84・空白カード 124・未確認 3・余白の崩れ 175。結果は `data/note/card-visibility-latest.json`。
-
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15] [領域:サイト]
@@ -2486,11 +2462,7 @@ updated: 2026-10-19
 - **S2/S3/S4 の販売中 10 冊は 2026-09-19 に KDP で出版停止を実行済み** (オーナー指示 → `kdp-unpublish.mjs --all-withdrawn --commit`。本棚 read-back 10/10 が「下書き」、listing は `status: "withdrawn"` + `withdrawal.unpublishedAt/readBack/evidence`)。ストアの商品ページ消滅は数時間〜72 時間後に `curl` か本棚で確認する。
 - **残るオーナー工程 (2026-09-19 時点の `verify-publishable` 全冊の blocker と同じ)**: ①R2 暗号化保全 `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <版>` → `--audit --deep --record` (鍵のある環境。これが無いと `kdp-publish --update` の archive gate で止まる) ②Kindle Previewer で対象 EPUB (SHA) の表示確認 ③`kdp-publish --update --id K-S1-NN` ×12 (S1-01 は書名変更を含む・入稿提案 `.local/kindle-listing-revisions/`) → 承認後 `--commit` ④kdpreports.amazon.co.jp の冊別 export → `products:sales` ⑤ブログ側の同一誤り是正 (上記) と図データ再生成。
 - **ランキング再利用の境界**: S2-01旧版全章レビューでDID可住地分母、死亡率/件数、従属人口指数/就労者、都道府県率の合算、単純平均/全国値、相関からの因果・算術誤りを検出。商品版のランキング章は未レビューAI解説を外して同順位の全県表・決定的集計へ再構成した。公開サイト本文は未変更のため、原典再計算とサイトownerへの是正引渡しが必要。旧版レビューを新版PASSへ流用しない。
-- **note 販売記事 (教材展開) の現状 (2026-10-12、オーナーが「55本すべて公開」を指示)**: `docs/31_note記事原稿/product-sales/` の 55 本は 2026-07 の v1 から生成した旧原稿で使わない。現行は 14 パックから `note/cli.ts revision` で作るが、このMacには各パックの `_delivery` (`.local/coconala-products/P-NN/v2-20260906-r1`) が無く、`revision --revision 2026-10-12-r1 --all` は ENOENT で `readyToPublish:false`。14 パックとも `officeValidation: owner-pending`。進めるには (a) 納品物をWindowsから持ってくるか新しい版を生成し (b) オーナーがOffice実機で確認し (c) revision→レビュー→1日数本ずつ公開 (添付は1日10回まで)。
-- **note 販売記事の置き場 (2026-10-13 改訂)**: 14 パックの販売記事の原稿は git (docs/31) から外れ、記事台帳 `data/note/articles.json` と R2 に移った。
-  有料 13 本は private R2 (`body.store: r2-private`)、P-13 見本 (無料・公開済み) は公開 R2。公開するときは `npm run note:article -- checkout <slug>` で作業コピーを取り出し、
-  公開後に台帳の status / noteUrl / publishedAt を書いて `generate-note-catalog.ts --apply`、作業コピーを変えたら `save`。残りの前提は変わらない (Office 実機確認・添付 1 日 10 回・一括公開しない)。
-  添付 ZIP (`.local/note-product-archives/P-NN-v3-20261012-mac-r4.zip`) はこの Mac にしか無い (保全は `NOTE-PRODUCT-ZIP-ARCHIVE-01`)。
+- **noteデータパックの現状**: 公開状態・販売先は `data/note/articles.json` と `NOTE-PACKS-REPLACE-COCONALA-01` を参照する。2026-10-12のローカル生成未完了を現在の未公開判断に使わない。原稿は記事台帳とR2、添付ZIP保全の未完了確認は `NOTE-PRODUCT-ZIP-ARCHIVE-01` が担当する。Office実機確認・Kindleの入稿前検査は、公開済みnoteの状態とは別の品質工程として扱う。
 - **停止条件**: 生成/形式検査だけで販売準備完了にしない。内部30%をAmazonの合法性・受理保証と説明しない。字数水増し・収録指標の黙った削減をしない。税務・銀行・本人認証・規約同意を代行せず、KDP Select独占を他チャネル展開と両立済みと扱わない。旧公開版・原稿を上書きしない。公開stateを機械品質の結果で書き換えない。
 - **完了条件**: 全offerが対象版の実検証・独立レビュー・必要な人間確認を満たすか、採用見送り理由と再開条件が明記される。販売を選んだofferは価格・納品物・権利・公開証跡が一致する。未完了が1件でもあれば「全商品販売可能」と報告しない。
 
@@ -3615,7 +3587,7 @@ updated: 2026-10-19
 - **保全の残作業**: `data/content-operations/live/image-migration.json` (正本は private R2、`npm run media:state:pull` で取得) の未取得をDrive接続端末で `media:migrate -- --all --verify-existing --apply` により再開する。不一致は元ハッシュの画像を回収するまで停止。note-only本文回収は `NOTE-BODY-RECOVERY-01`。元データ未保全の図は値を推定せず入力を回収し、代表図の再生成・320px比較に進む。
 - **保存状況の根拠**: 同日のローカル台帳で公開397記事中324記事に `body.manifest`、73記事は `note-only`（回収は既存 `NOTE-BODY-RECOVERY-01`）。保存記録は全記事の固定数値・図版入力が揃う保証ではない。投稿済みX210件のうち素材 `missing` を含む行72件、Instagram212件中85件・素材記録なし7件。いずれも台帳上の状態で、R2/Drive全実体の再検査・消失判定は未実施。根拠は同じevidenceの `imageReproducibility`。
 - **画像基盤の順序・完了条件案**: ①台帳と保管先を照合し、元データ/生成条件/完成画像それぞれの不足を区別する。②共通の図の型と媒体別レイアウトを結ぶ。SNSの上位下位のみの旧図を新規へ復活させず、現行の全47県タイル等を維持する。③当時の固定値でのデザイン更新と最新データ更新を別操作にし、前者では数値・年・単位の一致を検査する。④入力・フォント・地理データ・rendererの版/ハッシュと候補画像を共有保管し、320px等での確認後に採用する。代表図を別端末で復元・再生成し、対象利用先と旧新比較を辿れることを完了条件とする。カバーのAI生成は別契約を維持し、統計図に流用しない。公開済みSNSへの差し替え可否は媒体仕様を確認してから扱う。
-- **関連タスク**: 空欄カードの復旧は `NOTE-CARD-REPAIR-01`、誤った元データ案内と導線の対応は `NOTE-CIRCULATION-CTA-01`、マガジン整理は `NOTE-MAGAZINE-REORG-01`。先に全件のカード修復やマガジン作成を再実行しない。
+- **関連タスク**: 空欄カードの復旧結果は `data/note/evidence/note-card-repair-result-2026-10-26.json`、誤った元データ案内と導線の対応は `NOTE-CIRCULATION-CTA-01`、マガジン整理は `NOTE-MAGAZINE-REORG-01`。先に全件のカード修復やマガジン作成を再実行しない。
 - **停止条件・公開境界**: 管理画面・台帳・R2画像保存の実装と旧画像の検証付き移行は承認済み。数値・原典・集計単位が不一致、既存下書きがある、カードの公開表示が確認不能、本文の別変更を巻き込む場合は当該記事を止める。note公開・R2正本更新は差分レビューと当該反映指示後。統計図をimagegenで描かない。
 - **完了条件**: 最大6記事で修正前後・採用図版・本文差分が確認され、承認対象だけ公開実測を通る。対象外本文・価格・公開状態を保持。共通生成・検査・保存手順を次記事でも再利用できる。効果観測を行う場合は最新baseline・対象・交絡・指標・期限を揃えて既存改善台帳へ引き渡す。記事内クリック・読了が未取得なら判定不能と明記する。
 

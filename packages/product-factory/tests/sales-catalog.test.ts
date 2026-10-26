@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { KDP_LISTINGS } from "../../../config/paths.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 import { buildSalesCatalog, CURRENT_SALES_REVISIONS, csvCell, escapeHtml, localPath, renderSalesCsv, renderSalesHtml, verifyManifest } from "../src/build/sales-catalog";
 
 const roots: string[] = [];
@@ -11,6 +11,23 @@ function fixture() { const root = mkdtempSync(join(tmpdir(), "sales-catalog-test
 function json(root: string, path: string, value: unknown) { const full = join(root, path); mkdirSync(join(full, ".."), { recursive: true }); writeFileSync(full, JSON.stringify(value)); }
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 describe("sales readiness does not conflate generation and publication", () => {
+  it('a withdrawn Geo service does not become published again from an old readiness receipt', () => {
+    const root = fixture();
+    json(root, COCONALA_LISTINGS, { listings: { 'GEO-SERVICE-01': { status: 'withdrawn', _withdrawal: { decisionDate: '2026-10-19' } } } });
+    json(root, 'data/products/geo-service-readiness-2026-09-06.json', { status: 'published', publication: { anonymousCheckedAt: '2026-09-06' } });
+    expect(buildSalesCatalog(root, '2026-10-26').offers.find((item) => item.id === 'GEO-SERVICE-01')!.channels[0])
+      .toMatchObject({ publicationStatus: 'withdrawn', checkedAt: '2026-10-19' });
+  });
+  it('reads a published note from the article SSOT even when the local preparation revision is missing', () => {
+    const root = fixture();
+    json(root, 'data/note/articles.json', { articles: [{ key: 'prefecture-migration-living-pack', status: 'published',
+      noteUrl: 'https://note.com/stats47/n/n323af74c09cc', priceJpy: 4500, publicationVerifiedAt: '2026-10-26T02:00:00Z' }] });
+    const offer = buildSalesCatalog(root, '2026-10-26').offers.find((item) => item.id === 'P-07')!;
+    expect(offer.channels.find((item) => item.channel === 'note')).toMatchObject({ publicationStatus: 'published-recorded',
+      url: 'https://note.com/stats47/n/n323af74c09cc', priceStatus: 'recorded', priceYen: 4500,
+      checkedAt: '2026-10-26T02:00:00Z', blockers: [] });
+    expect(offer.buildStatus).toBe('missing');
+  });
   it("keeps the entire authored population when all evidence is missing", () => {
     const c = buildSalesCatalog(fixture(), "2026-09-06");
     expect(c.offers).toHaveLength(62);
