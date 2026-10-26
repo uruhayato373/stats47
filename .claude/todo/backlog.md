@@ -233,15 +233,6 @@ updated: 2026-10-19
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 - **2026-10-23 本番確認 (行削除は backlog-loop)**: main の `deploy-workers.yml` に `reset-worker-cache-after-deploy` があり、デプロイ run 39903739430 で「Reset Workers Cache after deploy」「Warm cache」とも success。カードは完了。
 
-### [RECORD-SCHEMA-CONTRACT-01] 判断に使う記録に形の契約 (JSON Schema) と、書き込む前の検査を入れる
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-20] [領域:管理]
-
-- **背景 (2026-10-20)**: セッションは管理画面を開かず、記録から判断する方針にした (`.claude/rules/recorded-measurement-first.md`)。これで記録が計測スクリプトとエージェントの境界になった。ところが `config/datasets.mjs` が schema を義務にしているのは kind が config・ledger の行だけで、判断に使う `data/authenticated/{latest,revenue-history}.json`・`data/measurement-cycle/latest.json`・`data/affiliate/{a8,rakuten}-results.json`・`data/nsm/weekly-snapshots/*.json` (kind は state・series) には形の契約が無い。書き手の変更で形が崩れても、読む側は気づかずに誤る。後続の `SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で書き手を作り直すときに、壊していないかを判定する基準にもなる。
-- **2026-10-20 済**: ① 6 データセットの schema を `config/schema/{revenue.authenticated,revenue.authenticated-history,business.measurement-cycle,business.nsm-weekly,a8.results,rakuten.results}.schema.json` に置いた (実データから推論。NSM は全 25 週から)。形の違うファイルを 1 行にまとめていた `revenue.authenticated`・`business.measurement-cycle` はファイルごとの行に分けた (`datasetDir` の値は変わらない) ② `check-datasets.mjs` が schema を宣言した行を kind を問わず検証する ③ 金曜に動く書き手 (`build-measurement-cycle.mjs`・`snapshot-weekly-metrics.mjs`) が `assertDatasetShape` で書く前に検証する (W41 の実データで通ることを確認)。
-- **次**: 土曜の取得の経路にある書き手 (`measurement/summarize.mjs` の latest・revenue-history、A8 の成果を書く `normalize-a8-csv.mjs`、`ads/record-rakuten-results.mjs`) にも書く前の検証を入れる。10-22 の Mac の初回取得を変えないため、初回が通ったあとに行う。
-- **停止条件**: 記録の形そのものは変えない (schema は今の形を固定するだけ)。
-- **完了条件**: 6 データセットの行に schema があり、`npm run check-datasets` がそれを検証し、書き手が検証してから書いている。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [BLOG-AUTOMOTIVE-BIRTHDEATH-FOLLOWUP-01] 自動車産業の記事の題名と中身のずれ、出生と死亡の記事に残る critic の MAJOR 6 件を直す

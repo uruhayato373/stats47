@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T06:34:22.396Z",
+  "updatedAt": "2026-10-26T06:36:16.524Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8392,6 +8392,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:34:22.396Z"
+    },
+    "RECORD-SCHEMA-CONTRACT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:36:16.524Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-datasets.mjs",
+              "node --test .claude/scripts/ads/__tests__/record-rakuten-results.test.mjs .claude/scripts/measurement/__tests__/measurement.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "summarize.mjs (latest・revenue-history)・normalize-a8-csv.mjs・record-rakuten-results.mjs が書く前に assertDatasetShape。現行 4 記録は schema に合格、writer テスト 56+1 pass、check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:36:16.524Z"
     }
   }
 }

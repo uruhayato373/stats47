@@ -4,6 +4,7 @@ import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
 import { mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;
@@ -78,6 +79,7 @@ if (kdpLedger) {
 }
 const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources, salesLedger,
   status: sources.every(s => s.status === 'pass') && (salesLedger?.status ?? 'pass') === 'pass' ? 'pass' : 'action_required' };
+assertDatasetShape("revenue.authenticated", state); // 形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 // 商品の週次実売の入力。noteの記事棚卸しと売上APIは独立した取得範囲。
@@ -95,6 +97,7 @@ for (const s of sources) {
   history.entries.push({ channel: s.source, ...revenue, observedAt: s.observedAt });
 }
 history.entries.sort((a, b) => a.date.localeCompare(b.date) || a.channel.localeCompare(b.channel));
+assertDatasetShape("revenue.authenticated-history", history);
 writeFileSync(historyPath, JSON.stringify(history, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
