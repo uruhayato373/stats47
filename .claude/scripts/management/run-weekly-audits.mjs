@@ -7,14 +7,15 @@
  *   npm run weekly:audits -- --only ci-health,provenance
  *   npm run weekly:audits -- --list
  *
- * 各監査の手順は weekly-audits/<id>.sh (旧 workflow の監査部分だけを移したもの)。Issue の作成と develop への push は
- * しない。監査が書いた data/ の記録は、週次レビューのセッションがレビュー本文と一緒にコミットする。
+ * 各監査の手順は weekly-audits/<id>.sh (旧 workflow の監査部分だけを移したもの)。Issue の作成と push はしない。
+ * 毎週は土曜ランナー (scripts/scheduled/weekly-saturday.sh) が専用 clone で走らせ、監査が書いた記録をコミットする。
+ * 手で走らせたときは、監査が書いた data/ の記録を週次レビューのセッションがレビュー本文と一緒にコミットする。
  * 1 本ずつ順に走らせるのは、backlog.md を書く監査が 2 本 (estat-year-coverage・blog-remediation) あり、
  * 文書を検査する consistency は他の監査が書き終えた後に走らせる必要があるため。
  * 出力: .local/weekly-audits/<YYYY-MM-DD>/{<id>.log,summary.md,summary.json}。1 本でも落ちたら exit 1。
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, writeFileSync, createWriteStream } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync, createWriteStream } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -88,6 +89,16 @@ for (const audit of targets) {
   results.push(r);
 }
 
+// --only で一部だけ走らせ直したときは、その日の要約にある他の監査の結果を残して差し替える
+// (上書きすると管理画面 /ops/mac-schedule と週次レビューが 1 本分しか読めない)
+const summaryPath = join(outDir, "summary.json");
+if (args.only && existsSync(summaryPath)) {
+  const previous = JSON.parse(readFileSync(summaryPath, "utf8")).results ?? [];
+  const rerun = new Set(results.map((r) => r.id));
+  const merged = [...previous.filter((r) => !rerun.has(r.id)), ...results];
+  results.splice(0, results.length, ...AUDITS.map((a) => merged.find((r) => r.id === a.id)).filter(Boolean));
+}
+
 const mark = { pass: "✅ 通過", fail: "❌ 異常あり", timeout: "⏱ 時間切れ" };
 const table = [
   "| 監査 | 結果 | 所要 (分) | ログ |",
@@ -95,6 +106,6 @@ const table = [
   ...results.map((r) => `| ${r.label} (\`${r.id}\`) | ${mark[r.status]} | ${r.minutes} | \`${r.log.replace(`${ROOT}/`, "")}\` |`),
 ].join("\n");
 writeFileSync(join(outDir, "summary.md"), `# 週次監査 ${day}\n\n${table}\n`);
-writeFileSync(join(outDir, "summary.json"), JSON.stringify({ day, results }, null, 2) + "\n");
+writeFileSync(summaryPath, JSON.stringify({ day, results }, null, 2) + "\n");
 console.log(`\n${table}`);
 process.exit(results.every((r) => r.status === "pass") ? 0 : 1);

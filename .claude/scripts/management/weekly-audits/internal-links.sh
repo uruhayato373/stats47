@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # サイト内リンクの週次監査 (2026-10-26 に internal-link-audit-weekly.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。soft 404 を含むリンク切れがあれば exit 1。
-# 出力: data/blog/internal-link-audit.json・data/site/link-audit.json (レビューのセッションがコミットする)
+# 出力: data/blog/internal-link-audit.json・data/site/link-audit.json (土曜ランナー weekly-saturday.sh がコミットする)
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
 rc=0

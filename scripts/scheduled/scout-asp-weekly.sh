@@ -1,6 +1,6 @@
 #!/bin/bash
 # 週次 A8 パイプライン (ローカル Mac 限定 — Playwright プロファイルが .local にあるため)。
-# launchd から土曜 08:30 JST に発火 (2026-10-26 に日曜 07:00 から移動)。詳細: .claude/rules/affiliate-ads-standards.md §10
+# 土曜ランナー weekly-saturday.sh の 3 段目 (毎週土曜 07:00 の note の計測の後。2026-10-26 に日曜 07:00 の単独 launchd からまとめた)。詳細: .claude/rules/affiliate-ads-standards.md §10
 #
 # ★設計 (2026-07-27 実測に基づく改訂 + 2026-07-29 doc 42 Phase 1 truthful 化):
 #   この cron は **決定的スクリプトのみ** を回す。claude-code (LLM) を起動しないのでトークン消費ゼロ。

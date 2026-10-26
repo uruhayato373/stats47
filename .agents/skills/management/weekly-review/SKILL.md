@@ -47,14 +47,18 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 2026-10-26 に CI の無人 triage (`improvement-cycle-weekly.yml`) と週次要約 (`weekly-metrics-issue.yml`) をやめ、
 同じ処理をここで行う。対話のセッションは `.claude/` に書けるので、提案ファイルを経由せずに台帳を直接更新する。
 
-0. 週次監査を走らせる (2026-10-26 に CI の週次監査 11 本から移した。1 本ずつ順に走るので、最初に background で始めて他の段を進める。Mac からだと internal-links だけで 1 時間前後かかる)。
+0. 週次監査の結果を読む (2026-10-26 に CI の週次監査 11 本から移した)。土曜 07:00 の Mac の土曜ランナー
+   (`scripts/scheduled/weekly-saturday.sh`) が、認証付き計測・note の計測・ASP の巡回の後に専用 clone で 11 本を回し、
+   記録を develop へ push して、要約を作業フォルダの `.local/weekly-audits/<当日>/summary.md` へ写す。先に `git pull` する。
+   各段と 11 本の結果は管理画面 `/ops/mac-schedule` でも見られる。要約が無い・当日でない (ランナーが落ちた・Mac が眠っていた) ときは、ログ `~/Library/Logs/stats47/weekly-saturday.log` を読んでから
+   ここで走らせる (1 本ずつ順に走るので background で始めて他の段を進める。Mac からだと internal-links だけで 1 時間前後かかる)。
 
    ```bash
    npm run weekly:audits        # 要約は .local/weekly-audits/<日付>/summary.md、各ログは同じ場所
    ```
 
    ❌ / ⏱ の監査はログを読み、仕組みの故障は Blockers、内容の問題 (リンク切れ・出典・データ品質など) は「課題・ブロッカー」と
-   バックログカードへ書く (2026-10-26 から Issue は作らない)。監査が書いた `data/` の記録はレビュー本文と一緒にコミットする。
+   バックログカードへ書く (2026-10-26 から Issue は作らない)。ここで走らせた回の `data/` の記録はレビュー本文と一緒にコミットする。
 1. 認証付き計測の成否を見る (`npm run measurement:status`)。失敗した取得元があれば、オーナーにその場で入り直してもらい、
    `bash scripts/scheduled/measurement-session-refresh.sh` で取り直す。取り直せない取得元は判定不能として Blockers へ。
 2. 計測 state を作り直す。02:00 の計測の後に入った認証付き計測を state に入れるため。

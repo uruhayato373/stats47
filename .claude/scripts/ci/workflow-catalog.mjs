@@ -50,7 +50,7 @@ export function purposeOf(text) {
   for (const line of text.split("\n")) {
     if (/^on:|^"?on"?:/.test(line)) break;
     const m = line.match(/^#\s*(.+?)\s*$/);
-    if (m && !/^-+$/.test(m[1])) return m[1];
+    if (m && !/^[-─━=]+$/.test(m[1])) return m[1];
   }
   return null;
 }
