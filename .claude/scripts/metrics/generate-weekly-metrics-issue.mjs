@@ -358,9 +358,9 @@ function alertsSection(week) {
 }
 
 /**
- * 計測→記録→改善サイクル。日曜の build-measurement-cycle.mjs (計測) と月曜 06:00 の
- * improvement-cycle-weekly.yml (無人 triage の記録) の結果を、対象週と一致するときだけ出す。
- * 週がずれた state を今週の結果として見せない。
+ * 計測→記録→改善サイクル。build-measurement-cycle.mjs (土曜 02:00 の計測と、週次レビューでの作り直し) の結果を、
+ * 対象週と一致するときだけ出す。週がずれた state を今週の結果として見せない。
+ * 施策の記録は週次レビューの中で improvement-triage が行い、結果はレビュー本文に書く (2026-10-26 に CI の無人 triage から移した)。
  */
 function cycleSection(week) {
   const dir = join(PROJECT_ROOT, datasetDir("business.measurement-cycle"));
@@ -375,24 +375,10 @@ function cycleSection(week) {
     const md = readFileSync(join(dir, "LATEST.md"), "utf-8").split("\n").slice(1).join("\n").trim();
     lines.push(md);
   } else {
-    lines.push(`⚠️ ${week} の計測 state が未生成（最新: ${cycle?.week ?? "なし"}）。金曜の fetch-metrics-weekly の「Build measurement cycle state」を確認する。`);
+    lines.push(`⚠️ ${week} の計測 state が未生成（最新: ${cycle?.week ?? "なし"}）。土曜の fetch-metrics-weekly の「Build measurement cycle state」を確認する。`);
   }
   lines.push("");
-  let triage = null;
-  try {
-    triage = JSON.parse(readFileSync(join(dir, "triage-latest.json"), "utf-8"));
-  } catch {
-    // 未実行は下で明示する
-  }
-  if (triage?.week === week) {
-    const i = triage.improvements;
-    lines.push(`**記録（無人 improvement-triage）**: ゲート ${triage.gate === "pass" ? "✅ pass" : "❌ fail"}・閉じた ${i.deleted.length} 件・更新 ${i.updated.length} 件・追加 ${i.added.length} 件・backlog 起票 ${triage.backlogAdded.length} 件${triage.runUrl ? `（[run](${triage.runUrl})）` : ""}`);
-    if (i.deleted.length) lines.push(`- 閉じた: ${i.deleted.map((id) => `\`${id}\``).join(", ")}`);
-    if (i.updated.length) lines.push(`- 更新: ${i.updated.map((id) => `\`${id}\``).join(", ")}`);
-    if (triage.backlogAdded.length) lines.push(`- 起票: ${triage.backlogAdded.map((id) => `\`${id}\``).join(", ")}`);
-  } else {
-    lines.push(`**記録（無人 improvement-triage）**: ${week} は未実行か失敗（最新: ${triage?.week ?? "なし"}）。\`🚨 Improvement cycle failed\` Issue と improvement-cycle-weekly.yml を確認する。`);
-  }
+  lines.push("**記録（improvement-triage）**: 週次レビューの Phase 0b で行う。閉じた・更新した・起票した施策はレビュー本文の「計測→記録→改善サイクル」節に書く。");
   lines.push("");
   lines.push("オーナー作業（自動化の対象外）: 未登録 custom dimension の登録、ASP・KDP の再ログイン、本番デプロイの承認。");
   return lines.join("\n") + "\n";

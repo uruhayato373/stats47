@@ -111,7 +111,7 @@
 - [ga4 history unreliable wow](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [ga4 journey referrer over navclick](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
 - [measurement weekly recorded first](feedback_measurement_weekly_recorded_first.md) — ログインが要る計測は土曜朝の週次だけが取得。セッションではブラウザで取りに行かず記録から判断し、古ければ判定不能と書く (2026-10-20)
-- [measurement cycle ci](project_measurement_cycle_ci.md) — 計測→記録→改善の CI 化。金曜 05:00 計測→12:00 無人 triage→18:00 週次 Issue→土曜レビュー。schedule は main 定義。無人 Claude は .claude/ に書けない
+- [measurement cycle ci](project_measurement_cycle_ci.md) — 計測→記録→改善。土曜 02:00 CI 計測→07:00 Mac 認証付き計測→レビュー内で state 作り直し・triage・週次要約 (2026-10-26 に無人 triage と週次要約 workflow を撤去)。ローカルの作り直しは GA4_PROPERTY_ID を site-config から補う
 - [review cadence wiring](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。週次は土曜期限、正本review-wiring.json・判定review-cadence.mjsを各所が共有。月次の申し送りは「→ 振り分け:」必須
 - [r2 s3 token expired 2026 05 29](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)
 - [sync snapshots checks out main](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は --ref に関係なく main を checkout する。develop の git TS 変更はマージ後に流す (success と出るので気づけない)

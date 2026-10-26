@@ -9,7 +9,7 @@ metadata:
 ---
 
 2026-10-02 にモデル・effort の継続最適化サイクルを作った (正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」、画面 `/ops/agents`)。
-計測 = `npm run model-usage:collect` (transcript 集計) + CI 5 本の `record-claude-usage-ci.sh`、記録 = `latest.json`、改善 = `proposeChanges` + `run-canary.mjs`。
+計測 = `npm run model-usage:collect` (transcript 集計) + CI で Claude を無人実行する workflow の `record-claude-usage-ci.sh`、記録 = `latest.json`、改善 = `proposeChanges` + `run-canary.mjs`。
 
 - **agent frontmatter に effort を書かないとセッションの effort を継承する**。実測で応答の 6 割強が xhigh、自作 agent はほぼ全件 xhigh だった。費用の大半はメインセッション (4 週 $1,231 対 agent $327、API 換算)。
 - **別名の解決先は Claude Code の版で決まる**。CLI 2.1.197: `sonnet`→claude-sonnet-5、`opus`→claude-opus-4-8。2.1.287: 両方 5.5。Opus 5.5 は 2.1.280 未満で API 400。CI は claude-code-base-action の固定 SHA が入れる版 (コメントの版表記は実態とずれていた: 「v2.1.220」と書かれた SHA は 2.1.278 を入れていた。action.yml の `CLAUDE_CODE_VERSION` を見る)。

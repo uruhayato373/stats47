@@ -3,8 +3,7 @@ name: 🗓️ Review Cadence Guard (daily)
 # 週次・月次レビューと計画の期限切れ・本文の契約違反・配線の切れと、自動アラート Issue の回収漏れを毎朝検査し、問題があれば
 # review-cadence-alert Issue を 1 件だけ作って更新し、直ったら自動で閉じる。
 #
-# 計測 (fetch-metrics-weekly.yml) と無人記録 (improvement-cycle-weekly.yml) は自動で回るが、
-# レビューと計画は /weekly-review・/monthly-review・/weekly-plan・/monthly-plan を人が起動して書く。
+# 計測 (fetch-metrics-weekly.yml) は自動で回るが、施策の記録 (2026-10-26 に CI の無人 triage から移した) とレビューと計画は /weekly-review・/monthly-review・/weekly-plan・/monthly-plan を人が起動して書く。
 # 振り返りが止まると計測が改善へ戻らないので、その段をここで見張る (doboku-note の weekly-review-guard の移植)。
 #
 # 判定: .claude/scripts/management/check-review-cadence.mjs (正本 .claude/config/review-wiring.json)

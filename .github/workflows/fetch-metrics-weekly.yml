@@ -4,7 +4,7 @@ on:
   schedule:
     # 土曜 02:00 JST に前週 (月〜日) を計測し、同じ土曜にレビューする (2026-10-10 オーナー決定・2026-10-26 に金曜 05:00 から移動)。
     # 日曜に当週を取ると GSC の取得遅延 (約 3 日) で直近数日が欠け、W40 は 9/30・10/1 が欠落して取り直した。
-    # GitHub の schedule は数時間遅れて発火する (実測で最大 4.5 時間) ので、無人 triage (08:00) まで余裕を置く。
+    # GitHub の schedule は数時間遅れて発火する (実測で最大 4.5 時間) ので、土曜のレビューまで余裕を置く。
     - cron: "0 17 * * 5" # 土曜 02:00 JST (金 17:00 UTC)
   workflow_dispatch:
     inputs:
@@ -202,10 +202,10 @@ jobs:
         continue-on-error: true # 台帳更新の失敗で週次計測本体を止めない
         run: node .claude/scripts/lib/write-past-effects.mjs
 
-      # 計測→記録→改善サイクルの週次 state。土曜 08:00 の improvement-cycle-weekly.yml (無人 triage) が
-      # 同じスクリプトで作り直し (後から入る SNS を反映)、09:00 の週次メトリクス Issue が読む。
-      # state が作れなくても週次計測本体は commit する。失敗は warning に出し、土曜 08:00 の
-      # improvement-cycle-weekly が「state の週が対象週と違う」で止まって improvement-cycle-alert を起票する。
+      # 計測→記録→改善サイクルの週次 state。土曜の /weekly-review が同じスクリプトで作り直し
+      # (Mac が 07:00 に取る認証付き計測を反映)、施策の記録と週次要約もレビューの中で行う (2026-10-26)。
+      # state が作れなくても週次計測本体は commit する。失敗は warning に出し、レビューの Phase 0b が
+      # 「state の週が対象週と違う」として拾う。
       - name: 🔁 Build measurement cycle state (計測→記録→改善)
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
@@ -214,7 +214,7 @@ jobs:
           if bash .claude/scripts/metrics/refresh-measurement-cycle.sh "${{ steps.week.outputs.week }}"; then
             cat data/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "::warning::build-measurement-cycle が失敗した (土曜 08:00 の improvement-cycle-weekly が週の不一致で止まり alert を出す)"
+            echo "::warning::build-measurement-cycle が失敗した (土曜の /weekly-review Phase 0b が週の不一致として拾う)"
           fi
 
       # コード側 slot 定数 (apps/web/src/lib/google-adsense/constants.ts) と AdSense 側 ad unit の

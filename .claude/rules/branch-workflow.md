@@ -50,6 +50,12 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
 空コミットで済ませず、その時点で残っている本来の作業 (規約の追記・是正など) を載せるとよい。
 
+**手で dispatch しても PR は通らないことがある (2026-10-26 PR #1183 で実測)**: 本番デプロイの完了を受けた
+キーワード観測の記録 (`[skip ci]`・`GITHUB_TOKEN` で push) が開いている PR の先頭を奪った。`GITHUB_TOKEN` の push は
+`pull_request_target` も作らないので見張り役は動かない。見張り役と同じ引数で `pr-quality-check.yml` を手で dispatch すると、
+先頭の SHA に Code Quality Check が success で付いたが、PR の `statusCheckRollup` には入らず `mergeStateStatus` は BLOCKED のままだった。
+このときは dispatch で待たず、上の手順どおり後続の実コミットを push する。
+
 #### commit 件名にトークンを書かない
 
 GitHub は **commit メッセージ内のどこにあっても** skip トークン (`[skip ci]` / `[ci skip]` /

@@ -3,7 +3,7 @@
  * 週次・月次レビューと計画の期限・本文の契約・申し送りの振り分け・配線を検査する (旧 check-weekly-cadence.mjs)。
  * 判定は lib/review-cadence.mjs、正本は .claude/config/review-wiring.json。
  *
- * 背景: 計測の収集 (fetch-metrics-weekly.yml) と無人記録 (improvement-cycle-weekly.yml) は自動で回るが、
+ * 背景: 計測の収集 (fetch-metrics-weekly.yml) は自動で回るが、施策の記録 (2026-10-26 に CI の無人 triage から移した) と
  * レビューと計画は /weekly-review・/monthly-review・/weekly-plan・/monthly-plan を人が起動して書く。
  * 2026-W26〜W28 はレビューが 3 週続けて欠け、月次の振り返りは月次計画の 1 節に埋もれて検査されていなかった。
  *

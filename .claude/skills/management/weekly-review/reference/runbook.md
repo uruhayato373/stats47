@@ -178,7 +178,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    レビューの課題欄に書き、放置しない。
 
    **AdSense は 2026-10-11 に新アカウントの手動枠 11 ユニットで再開した**（正典 `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1、
-   残りの手順は backlog `ADSENSE-RESTART-01`）。snapshot は `fetch-metrics-weekly.yml` が金曜に `data/adsense/snapshots/<週>/` へ取得し、
+   残りの手順は backlog `ADSENSE-RESTART-01`）。snapshot は `fetch-metrics-weekly.yml` が土曜 02:00 に `data/adsense/snapshots/<週>/` へ取得し、
    `history.csv` / `history-units.csv` / `LATEST.md` / `impact-LATEST.md` を更新する。レビューでは下の「AdSense」節を埋め、
    KPI `ad-yield` (`data/measurement-cycle/LATEST.md` の KPI ツリー) を 1 行書く。`manifest.json` の `status` が `error`
    (権限切れ等) なら 0 行なので、数値を書かず Blockers に載せる。改善の判断は `/adsense-improvement`。
@@ -593,7 +593,7 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 | 段 | 今週 | 根拠 |
 |---|---|---|
 | 計測 (fetch-metrics-weekly) | 生成 / 未生成 | `data/measurement-cycle/latest.json` の week |
-| 記録 (無人 improvement-triage) | pass / fail・閉じた N・更新 N・追加 N | `triage-latest.json` |
+| 記録 (Phase 0b の improvement-triage) | 実施 / 未実施・閉じた N・更新 N・追加 N | improvements.md の差分と起票した backlog の ID |
 | 改善 (今週動いた施策) | 施策 ID | improvements.md / backlog-loop ledger |
 | 振り返り → 起票 (前週の申し送り) | 振り分け済み N / M | `node .claude/scripts/management/check-review-cadence.mjs --json` |
 
@@ -627,7 +627,7 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 
 ## 運用ルール
 
-- **毎週土曜に実行**する想定 (金曜の計測・無人 triage・週次メトリクス Issue の後)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
+- **毎週土曜に実行**する想定 (土曜 02:00 の計測と 07:00 の Mac の認証付き計測の後。計測 state の作り直し・施策の記録・週次要約はレビューの中で行う)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
 - `.claude/todo/weekly.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
 - 週次レビュー履歴は本skill referenceへ蓄積し、批判的レビュー全文は蓄積しない
 - `/weekly-plan` の Phase 1 Track D が前週のskill referenceレビューを参照する

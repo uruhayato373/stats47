@@ -1,66 +1,35 @@
 ---
 name: project-measurement-cycle-ci
-description: 計測→記録→改善サイクルのCI自動化(2026-09-24)。2026-10-10から金曜05:00に前週を計測→12:00無人triage→18:00週次Issue→土曜レビュー。scheduleはmainの定義で動く。無人Claudeは.claude/を書けない(保護パス)ので提案JSON→決定的適用
+description: 計測→記録→改善サイクル。2026-10-26から土曜02:00にCIが前週を計測、07:00にMacが認証付き計測、レビューの中でstate作り直し・improvement-triage・週次要約。CIの無人triageと週次要約workflowは撤去。scheduleはmainの定義で動く
 metadata:
   node_type: memory
   type: project
   originSessionId: cfc716c2-3e72-4829-9d06-bc9944616b5a
-  modified: 2026-10-17T01:48:55.060511Z
+  modified: 2026-10-26T01:40:00.000000Z
 ---
 
-GA4 実測で止まっていた判定待ちを処理した手順 (計測→improvements.md へ記録→計測基盤の改善) を 2026-09-24 に CI 化した
-(コミット 3ea0fece3 / d297ef217 / df5395859 / e6c716f76。main 反映は PR #1022)。GSC も同じ形:
-`gsc-query.mjs` と閾値エンジンの `gsc-improvement` adapter。GSC 施策は行に `[gsc-page: /path]`・`デプロイ済 YYYY-MM-DD`・
-`[target: +N clicks]` が揃ったものだけ機械判定される。2026-W38 時点は 10 件中 0 件 (全件目印なし)。
+GA4 実測で止まっていた判定待ちを処理した手順 (計測→improvements.md へ記録→計測基盤の改善) を 2026-09-24 に CI 化し、
+2026-10-26 に記録の段を土曜の週次レビューへ戻した (CI 整理の第 2 段階)。GSC 施策は行に `[gsc-page: /path]`・`デプロイ済 YYYY-MM-DD`・
+`[target: +N clicks]` が揃ったものだけ閾値エンジンの `gsc-improvement` adapter が機械判定する。
 
-- **曜日 (2026-10-10 オーナー決定)**: 金曜に前週 (月〜日) を計測し土曜にレビュー・来週の計画を書く (doboku-note と同じ)。それまでは日曜 20:00 に当週を取っており、
-  GSC の取得遅延 (約 3 日) で直近数日が欠けた (W40 は 9/30・10/1 が欠落し取り直し)。GitHub の schedule は実測で最大 4.5 時間遅れるので、計測 05:00 → triage 12:00 → Issue 18:00 と間を空けた。
+- **曜日**: 前週 (月〜日) を土曜に計測し、同じ土曜にレビュー・来週の計画を書く (2026-10-10 に金曜計測・土曜レビューを決め、2026-10-26 に計測も土曜の朝へ寄せた)。
   レビューの期限は `review-wiring.json` (`dueWeekday: 6`・`graceDays: 1`) が正本で、土曜当日は催促、日曜の朝から review-cadence-guard が Issue にする。
-- 計測: 金曜 05:00 JST `fetch-metrics-weekly.yml` が前週について GA4 snapshot (internal-transitions / landing-context / event-volume) と
-  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `data/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
-  PSI / Cloudflare / SNS も同じ state に入る (閾値は各 source の既存判定を再利用: PSI は history.csv の violations_*、
-  Cloudflare は threshold-check.mjs の evaluateRules、SNS は sns-metrics-store.readByRange)。
-  **金曜 12:00 の triage でも作り直す**: sns-metrics-weekly (金曜 05:30) は fetch-metrics-weekly より後に終わる (2026-09-20: 14:33Z → 14:47Z) ため。
-  PSI の空スコア行は計測失敗 (0 点扱いしない)、Instagram は impressions が 0 で reach / views に値が入る。
-- 記録: 金曜 12:00 JST `improvement-cycle-weekly.yml` が improvement-triage を Claude Code (sonnet) で無人実行。
-  個別の内訳は `ga4-query.mjs` / `gsc-query.mjs`。**Claude は台帳を編集せず `.local/ci/improvement-cycle/proposal.json` に提案を書き**、
-  `verify-improvement-cycle-run.mjs` が決定的に適用 → ゲートを通った差分だけ develop へ push、失敗は `improvement-cycle-alert`。
-  理由: `.claude/` は Claude Code の保護パスで `--permission-mode dontAsk` では allow ルールがあっても書き込みが必ず拒否される
-  (公式 permission-modes#protected-paths、2026-09-24 参照)。初回の無人 run 35996605022 は Edit 3 回拒否のまま「変更 0 件・gate pass」で
-  success になった。今は書き込み拒否・提案ファイル欠落をゲートが fail にする。提案と最終メッセージは artifact `improvement-cycle-evidence`。
-  修正後の初回 run 35999010240 (2026-09-24、W38) で初めて台帳に反映された: 期日超過 3 件のうち COVERAGE-LOOP-01 を削除 (gsc 詳細ログへ判定)、
-  TOKEN-AICONTENT-01 / THEME-EXPANSION-EFFECT-01 を更新。数値 3 点を実データと照合して一致 (billing 開始日を 09-01 と書いたが実際は 08-31 の軽微なずれのみ)。
-  残った権限拒否 3 件は `cat` と `node -e` の探索 (禁止どおり) で、書き込み拒否ではない。1 run $1.82 相当・46 ターン。
-  **同じ構成で `.claude/` を Claude に直接編集させる他の無人 workflow も同じ罠に当たる** (dontAsk なら拒否、bypassPermissions は Bash 許可リストが効かなくなる)。
-  目標値は根拠 (過去事例か計算式) が行か詳細ログにあるときだけ書く指示。無人 run が目標値を捏造していないかは初回数回の差分を人が見る。
-- 表示: 金曜 18:00 JST 週次メトリクス Issue の「🔁 計測→記録→改善サイクル」節と土曜の `/weekly-review` Phase 1。
+- 計測: 土曜 02:00 JST `fetch-metrics-weekly.yml` が前週の GA4 / GSC / AdSense snapshot と、
+  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` で `data/measurement-cycle/{latest.json,LATEST.md,history.csv}` を作る。
+  PSI / Cloudflare / SNS も同じ state に入る。
+- 記録: 土曜の `/weekly-review` Phase 0b。Mac が 07:00 に取った認証付き計測を入れるため state をローカルで作り直し、
+  `improvement-triage` agent が期日超過と閾値エンジンの確定分を台帳に直接書く。週次要約 (`generate-weekly-metrics-issue.mjs`) もレビューで出す。
+  撤去したもの: `improvement-cycle-weekly.yml` (無人 Claude + 提案 JSON + `verify-improvement-cycle-run.mjs` のゲート)・`weekly-metrics-issue.yml`・`triage-latest.json`。
+  無人 run の実績は 1 回 $0.2〜$2・処理 0〜8 件で、10-16 は提案 0 件のまま期日超過を処理しなかった。
 
-**Why:** 判定待ちが「GA4 creds のある環境で再試行」のまま期限を越えていた。原因は施策固有の内訳を取る手段が CI に無かったこと。
+**Why:** ログインが要る計測を土曜に寄せると、認証付き計測 (07:00) の後に記録する必要があり、CI で順序を保つより
+オーナーが居るレビューの中で行うほうが単純だった。無人 Claude は `.claude/` (保護パス) に書けず、提案 JSON を経由する回り道が要っていた。
 
 **How to apply:**
-- `fetch-metrics-weekly.yml` の取得段と新 workflow の schedule は **main の定義で動く**。develop だけでは金曜の計測 state も無人記録も生成されない
-  (週次 Issue 生成だけは develop で動く)。曜日を変えたら main 反映後の最初の金曜に `measurement-cycle/latest.json` の week が前週になっているか確認する。
-- 無人 run は Status 列に effect/full|partial|none|adverse を付けられない (ゲートで拒否)。effect の確定は閾値エンジンだけ。
-- GA4 Admin 監査 state は README の規約で commit しない。/tmp 経由で派生値 (未登録パラメータ × 発火量) だけを残す。
-- 無人 Claude は対話と同じ Max 枠を使う。`claude-usage/history.csv` の `workflow=improvement-cycle` 行で費用対効果を見て、割に合わなければ workflow を止める
-  (日次生成ループは歩留まりで 2026-08-21 に削除された前例がある)。
-- 自動化できないオーナー作業: custom dimension 登録 (今は home_featured の card_variant/slot/experiment_variant だけが発火量十分)、ASP/KDP 再ログイン、本番デプロイ承認。
-
-**KPI ツリー配線 (2026-09-27)**: KPI の正典は事業計画 catalog の `kpiTier` (nsm / driver / guardrail) で、
-`business-plan:build-state` が `data/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
-(.mjs/.cjs は TS を import できないためこの写しを読む)。施策は `[kpi: id]` 必須 (docs:check DG079 error)、
-`[target:]` なし・active 上限 10 超過は DG080 warning、無人 run のゲートは新規行の目印欠落と上限超過中の追加を拒否する。
-計測サイクルは KPI ごとに今週値・4週前 (rolling28d の非重複窓) 比較・ぶら下がる施策を出し、認証付き収集の認証切れも
-「計測の鮮度」ガードレールに数える (cron 緑のまま観測が止まる経路)。上限値と目印の解釈は strategy-lanes.cjs が単一ソース。
-
-**計画の規律 (2026-09-27)**: バックログの優先度は起票時のまま下がらず 🔴 31 枚・Must 2 週連続未達だった。
-`strategy-lanes.cjs` に 🔴 上限 10 / 起票 30 日超の未着手 🔴 (DG081 warning) と、連続未達時に前週未達 Must の主 ID を
-`[分割]` なしで再掲する計画を拒否する DG082 (error) を置き、週次 Issue の「サイクルの健全性」節も同じ関数を読む。
-主 ID = 項目で最初の ID (本文で他施策に触れただけの項目を誤検知しないため)。付け替え自体は /monthly-plan + todo-curator の毎月手順。
-
-関連: [[feedback-ga4-journey-referrer-over-navclick]] [[project_monetization_contract]]
-
-
-**KDP Reportsの取得順序（2026-10-17）**: 問題: CIの`session_valid`後も売上取得が`auth_required`に戻った。原因として確認した遷移: Reports実UIへ到達→約13分の全書籍棚卸し→`collectKdpReport`のReports再遷移でAmazonパスワード画面（run38987311743 attempt2）。セッション失効の内部理由は未確認。対策: 既知ASINで口座を照合した直後、別Reportsタブで日次・確定月次を先に取得し、Reportsページを閉じずに本棚を全件確認する。成功条件（全件確認・月次・private保存）は緩和しない。認証拒否世代は繰り返さず本人再確認を挟む。`authenticated-measurement.yml`のschedule定義はmainだが、collectorは明示的にdevelopをcheckoutするため、この取得コードの修正にWeb再デプロイは不要。32回帰テスト、実CIの成否はW41レビューとactivationカードで追う。
-
-KDPの同日追加検証: Reports先行だけのattempt3は22冊の再読込で15分timeout。計測に限って正しい本棚URLの可視draft行を再利用する`reuseVisibleRow`を追加し、出版操作の既定fresh navigationは維持した。関連48テストとdevelop CI成功、attempt4は4分12秒・全22冊・日次/月次complete・private SHA一致・全8source pass・台帳重複なし。基盤の継続性は別日main scheduleを観測するまで確定しない。
+- ローカルで `refresh-measurement-cycle.sh` を動かすとき、GA4 Admin 監査は `GA4_PROPERTY_ID` が要る。Mac の `.env.local` には無いので、
+  スクリプトが CI の外に限って `site-config.cjs` の値を使う (CI は既定値に頼らず設定漏れで止める)。無いと custom dimension の行が `unreadable` に落ちる。
+- `fetch-metrics-weekly.yml` の schedule は **main の定義で動く**。曜日を変えたら main 反映後の最初の土曜に `latest.json` の week が前週か確かめる。
+- Status 列に effect/full|partial|none|adverse を付けない。effect の確定は閾値エンジンだけ。
+- GA4 Admin 監査 state (`.claude/state/metrics/google-admin/`) は README の規約で commit しない。
+- **`.claude/` を Claude に直接編集させる無人 workflow は保護パスの罠に当たる** (dontAsk なら拒否、bypassPermissions は Bash 許可リストが効かない)。
+  2026-09-24 の初回 run 35996605022 は Edit 3 回拒否のまま「変更 0 件・gate pass」で success になった。

@@ -205,7 +205,7 @@ function Wiring({ view }: { view: ReviewRunView }) {
 }
 
 const CYCLE: Record<Cadence, string> = {
-  weekly: "計測 (日曜 fetch-metrics-weekly) → 記録 (月曜 06:00 無人 improvement-triage) → 週次メトリクス Issue (月曜 09:00) → 週次レビュー → 週次計画。週が終わった翌日 (月曜) から必須。",
+  weekly: "計測 (土曜 02:00 fetch-metrics-weekly・07:00 Mac の認証付き計測) → 週次レビュー (計測 state の作り直し・施策の記録・週次メトリクス Issue を含む) → 週次計画。週が終わった後の土曜に必須。",
   monthly: "前月の週次レビューと効果判定を集約 → 月次レビュー (毎月 3 日から必須) → 月次計画が読んで今月の重点を決める。",
 };
 
