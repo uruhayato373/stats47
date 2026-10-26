@@ -1,5 +1,7 @@
 name: 📈 Fetch weekly metrics (GSC + GA4 + AdSense)
 
+# 週次計測。PSI と URL 検査の後に、前週 (月〜日) の GSC・GA4・AdSense と計測→記録→改善の state を作る。
+
 on:
   schedule:
     # 土曜 02:00 JST に前週 (月〜日) を計測し、同じ土曜にレビューする (2026-10-10 オーナー決定・2026-10-26 に金曜 05:00 から移動)。

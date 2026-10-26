@@ -1,5 +1,6 @@
 name: 🧪 Full Quality Suite (weekly)
 
+# 週次のフル品質検査 (型・テスト・E2E・チャートの見た目) と、テーマ・ページ品質・OGP の週次監査。
 # 2026-10-26 から土曜未明の監査 3 本 (旧 theme-chart-audit-weekly.yml・page-quality-audit-weekly.yml・
 # ogp-image-audit-weekly.yml) を job として持つ。各監査の Issue はこれまでどおり監査ごとに開閉し、
 # 下の report (型検査・テスト・E2E・render の Quality Alert) には混ぜない。

@@ -50,7 +50,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 0. 週次監査の結果を読む (2026-10-26 に CI の週次監査 11 本から移した)。土曜 07:00 の Mac の土曜ランナー
    (`scripts/scheduled/weekly-saturday.sh`) が、認証付き計測・note の計測・ASP の巡回の後に専用 clone で 11 本を回し、
    記録を develop へ push して、要約を作業フォルダの `.local/weekly-audits/<当日>/summary.md` へ写す。先に `git pull` する。
-   要約が無い・当日でない (ランナーが落ちた・Mac が眠っていた) ときは、ログ `~/Library/Logs/stats47/weekly-saturday.log` を読んでから
+   各段と 11 本の結果は管理画面 `/ops/mac-schedule` でも見られる。要約が無い・当日でない (ランナーが落ちた・Mac が眠っていた) ときは、ログ `~/Library/Logs/stats47/weekly-saturday.log` を読んでから
    ここで走らせる (1 本ずつ順に走るので background で始めて他の段を進める。Mac からだと internal-links だけで 1 時間前後かかる)。
 
    ```bash

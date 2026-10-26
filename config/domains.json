@@ -96,6 +96,7 @@
         { "label": "品質", "href": "/quality", "kind": "results" },
         { "label": "CI・台帳", "href": "/ops", "kind": "actions" },
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
+        { "label": "Mac の定期実行", "href": "/ops/mac-schedule", "kind": "results" },
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
         { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
         { "label": "型の見本", "href": "/ops/image-templates", "kind": "assets" },

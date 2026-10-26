@@ -5,7 +5,7 @@ import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { Button } from "@/components/ui/button";
 import { hasError } from "@/lib/server/state-io";
-import { workflowCatalog, WORKFLOW_CATALOG, type WorkflowEntry } from "@/lib/server/workflows";
+import { cadenceOf, scheduleSortKey, workflowCatalog, WORKFLOW_CATALOG, type WorkflowEntry } from "@/lib/server/workflows";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "CI ワークフロー — stats47 admin" };
@@ -19,7 +19,10 @@ export const metadata = { title: "CI ワークフロー — stats47 admin" };
 const FILTERS = {
   all: { label: "すべて", test: () => true },
   failing: { label: "直近が失敗", test: (w: WorkflowEntry) => w.last?.conclusion === "failure" },
-  scheduled: { label: "定期実行", test: (w: WorkflowEntry) => w.schedules.length > 0 },
+  daily: { label: "毎日", test: (w: WorkflowEntry) => cadenceOf(w) === "daily" },
+  weekly: { label: "毎週", test: (w: WorkflowEntry) => cadenceOf(w) === "weekly" },
+  monthly: { label: "毎月", test: (w: WorkflowEntry) => cadenceOf(w) === "monthly" },
+  none: { label: "定期実行なし", test: (w: WorkflowEntry) => cadenceOf(w) === "none" },
   manual: { label: "手動のみ", test: (w: WorkflowEntry) => w.triggers.length === 1 && w.triggers[0] === "workflow_dispatch" },
   disabled: { label: "無効・未登録", test: (w: WorkflowEntry) => w.state !== "active" },
 } as const;
@@ -89,7 +92,11 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
     );
   }
   const all = v.workflows;
-  const rows = all.filter(FILTERS[filter].test).sort((a, b) => b.failureStreak - a.failureStreak || a.file.localeCompare(b.file));
+  // 毎日・毎週・毎月は動く順 (日本時間)、それ以外は連続失敗の多い順
+  const byTime = filter === "daily" || filter === "weekly" || filter === "monthly";
+  const rows = all
+    .filter(FILTERS[filter].test)
+    .sort((a, b) => (byTime ? scheduleSortKey(a) - scheduleSortKey(b) : b.failureStreak - a.failureStreak) || a.file.localeCompare(b.file));
   const failing = all.filter(FILTERS.failing.test).length;
 
   return (
@@ -97,7 +104,7 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
       <PageHeading title="CI ワークフロー" source=".github/workflows/*.yml + gh" />
       <Stack>
         <Grid min="sm">
-          <StatCard label="ワークフロー" value={all.length} sub={`定期実行 ${all.filter(FILTERS.scheduled.test).length}・手動のみ ${all.filter(FILTERS.manual.test).length}`} />
+          <StatCard label="ワークフロー" value={all.length} sub={`毎日 ${all.filter(FILTERS.daily.test).length}・毎週 ${all.filter(FILTERS.weekly.test).length}・毎月 ${all.filter(FILTERS.monthly.test).length}・定期実行なし ${all.filter(FILTERS.none.test).length}`} />
           <StatCard label="直近が失敗" value={failing} tone={failing ? "bad" : "good"} sub={`連続 3 回以上 ${all.filter((w) => w.failureStreak >= 3).length}`} />
           <StatCard label="無効・未登録" value={all.filter(FILTERS.disabled.test).length} tone="warn" />
           <StatCard label="集計した時刻" value={<Freshness iso={v.generatedAt} />} sub={`直近 ${v.perWorkflow} 回を確認・取得エラー ${v.errors.length}`} />
@@ -141,7 +148,7 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
             ))}
           </DataTable>
           <p className="mt-1 text-[11px] text-console-muted">
-            定期実行は main にある定義で動く。最新にするには <code>npm run ci:workflows</code> を実行して再読み込みする (<code>npm run admin</code> の起動時にも走る)。
+            定期実行は main にある定義で動く。Mac の launchd で動く土曜ランナーなどは <Link href="/ops/mac-schedule">Mac の定期実行</Link> を見る。最新にするには <code>npm run ci:workflows</code> を実行して再読み込みする (<code>npm run admin</code> の起動時にも走る)。
           </p>
         </Section>
       </Stack>
