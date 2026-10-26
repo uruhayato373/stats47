@@ -16,8 +16,9 @@ Cloudflare R2ストレージとの連携を提供するパッケージ。ファ�
 - **一覧取得**: プレフィックスを指定してファイル一覧を取得
 
 ### 2. 環境検出
-- **Production**: Cloudflare R2バケットを使用
-- **Development**: ローカルの `.wrangler/state/v3/r2/` を使用
+- **`NODE_ENV=development`**: list / delete はリポジトリ直下の `.local/r2` (staging。`resolveR2StagingRoot()`) を読み書きする
+- **S3 資格情報あり** (`R2_ACCESS_KEY_ID`・`R2_SECRET_ACCESS_KEY`・`R2_S3_ENDPOINT`): S3 API で R2 を直接操作する
+- **どちらでもない**: Cloudflare Workers とみなし、R2 binding を使う
 
 ## インストール
 
@@ -113,8 +114,9 @@ packages/r2-storage/
 
 パッケージは自動的に実行環境を検出します:
 
-- **Production**: Cloudflare R2バケットを使用
-- **Development**: ローカルの `.wrangler/state/v3/r2/` を使用
+- **`NODE_ENV=development`**: list / delete はリポジトリ直下の `.local/r2` (staging。`resolveR2StagingRoot()`) を読み書きする
+- **S3 資格情報あり** (`R2_ACCESS_KEY_ID`・`R2_SECRET_ACCESS_KEY`・`R2_S3_ENDPOINT`): S3 API で R2 を直接操作する
+- **どちらでもない**: Cloudflare Workers とみなし、R2 binding を使う
 
 ## API リファレンス
 
