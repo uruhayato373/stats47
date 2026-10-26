@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { allowOwnerRequest, checkBashCommand, checkBrowserInput } from '../admin-read-guard.mjs';
 
-// 意図 (2026-10-20 オーナー判断): ログインが要る計測は木曜に Mac が記録する。セッションは記録から判断し、
+// 意図 (2026-10-20 オーナー判断): ログインが要る計測は土曜の朝に Mac が記録する。セッションは記録から判断し、
 // 管理画面を読むためにブラウザを開かない。投稿・申請・出品と、オーナーが会話で頼んだ取得は止めない。
 const withRoot = (fn) => {
   const root = mkdtempSync(join(tmpdir(), 'stats47-admin-read-'));

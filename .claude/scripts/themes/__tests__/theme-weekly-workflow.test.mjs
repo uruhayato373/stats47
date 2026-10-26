@@ -19,8 +19,8 @@ const commitStep = workflow.jobs.audit.steps.find((step) =>
   step.name.includes('Commit observations')
 );
 
-test('daily planner gates heavy work, while failure artifacts and exit codes survive', () => {
-  assert.equal(workflow.on.schedule[0].cron, '0 0 * * *');
+test('weekly planner gates heavy work, while failure artifacts and exit codes survive', () => {
+  assert.equal(workflow.on.schedule[0].cron, '0 16 * * 5'); // 土曜 01:00 JST の週 1 回 (2026-10-26)
   const steps = workflow.jobs.audit.steps;
   assert.ok(
     steps.findIndex((s) => s.id === 'plan') <

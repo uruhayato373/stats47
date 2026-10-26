@@ -25,7 +25,7 @@ name: 🗓️ e-Stat Year Coverage Audit (weekly)
 
 on:
   schedule:
-    - cron: "0 20 * * 6" # 土 20:00 UTC = 日 05:00 JST (ranking-integrity 04:30 の後、非重複)
+    - cron: "0 20 * * 5" # 金 20:00 UTC = 土 05:00 JST (ranking-integrity 04:30 の後)
   workflow_dispatch:
     inputs:
       batch_size:

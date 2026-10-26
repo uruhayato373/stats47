@@ -38,7 +38,7 @@ node .claude/scripts/ads/check-a8-report-due.mjs
 
 ### 2. collect — CSV を取る (ローカル・要 A8 ログイン)
 
-collect はオーナーが会話で頼んだときだけ動かす。成果の判断は `data/affiliate/a8-results.json` (木曜に Mac が取得) から行う
+collect はオーナーが会話で頼んだときだけ動かす。成果の判断は `data/affiliate/a8-results.json` (土曜に Mac が取得) から行う
 (読むための実行は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
 
 ```bash
@@ -76,7 +76,7 @@ node .claude/scripts/ads/normalize-a8-csv.mjs --latest
   `_sharedWithDobokuNote.ids` に足す。どちらの根拠も無い ID は推測で振り分けず unmapped のまま報告する。
 - **正規化は download に成功した run にだけ流す。** 失敗した run (`status=incomplete`) を normalize すると
   a8-report-log.json の期間が null に上書きされる (2026-09-27 実測)。
-- 毎週木曜の Mac の取得 (`scripts/scheduled/measurement-collect-local.sh`。2026-10-20 に CI から移した) はサイト別集計だけを取り、結果は暗号化保管庫に置く。
+- 毎週土曜の Mac の取得 (`scripts/scheduled/measurement-collect-local.sh`。2026-10-20 に CI から移した) はサイト別集計だけを取り、結果は暗号化保管庫に置く。
   git への反映は週次 `affiliate-ga4-weekly.yml` の restore + commit-back。案件別明細はローカルの本手順で取る。
 
 ## トラブル時

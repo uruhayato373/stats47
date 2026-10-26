@@ -8,7 +8,7 @@ name: 🔎 Provenance Audit (weekly)
 
 on:
   schedule:
-    - cron: "0 19 * * 6" # 土 19:00 UTC = 日 04:00 JST (他 cron と非重複)
+    - cron: "0 19 * * 5" # 金 19:00 UTC = 土 04:00 JST (土曜の週次レビューの前)
   workflow_dispatch:
 
 permissions:

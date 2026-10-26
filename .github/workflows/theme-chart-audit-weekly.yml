@@ -1,10 +1,10 @@
 name: 📈 Theme Quality Audit (weekly)
 
-# 毎日09:00 JSTに期日判定。月曜・月初・未観測のd7/d28/d56・手動だけ全量監査。
+# 毎週土曜01:00 JSTに全量監査 (2026-10-26 に毎日の期日判定から変更)。未観測のd7/d28/d56は次の土曜に拾う。
 # 新規/変化した異常だけissueを更新し、同じ警告は再通知しない。
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 16 * * 5' # 土曜 01:00 JST (金 16:00 UTC)。週 1 回 (2026-10-26 に日次から変更)
   workflow_dispatch:
     inputs:
       review_run:

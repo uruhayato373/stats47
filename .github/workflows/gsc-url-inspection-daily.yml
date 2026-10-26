@@ -1,8 +1,8 @@
-name: 🔎 GSC URL Inspection (daily)
+name: 🔎 GSC URL Inspection (weekly)
 
 on:
   schedule:
-    - cron: "0 21 * * *" # JST 06:00 = UTC 21:00 (前日)
+    - cron: "0 15 * * 5" # 土曜 00:00 JST (金 15:00 UTC)。週 1 回 (2026-10-26 に日次から変更。土曜 02:00 の週次計測の前)
   workflow_dispatch:
     inputs:
       limit:
@@ -42,7 +42,7 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
         run: |
-          # default 500 URL/日 (60分 + マージン)。空白指定で全件 (timeout 注意)
+          # default 500 URL/回 (60分 + マージン)。空白指定で全件 (timeout 注意)
           LIMIT_OPT="${{ inputs.limit || '500' }}"
           if [ -n "$LIMIT_OPT" ]; then
             node .claude/scripts/gsc/url-inspection-daily.cjs --limit "$LIMIT_OPT"
@@ -51,7 +51,7 @@ jobs:
           fi
 
       # 是正キュー (coverage-remediation-queue.json) へ観測を反映する。登録済みになった URL を done にし、
-      # 「直した URL が登録されたか」を日次で数える (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
+      # 「直した URL が登録されたか」を週次で数える (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
       # 失敗しても当日の検査結果は commit する。
       - name: 🔁 Sync remediation queue with inspection results
         run: node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"

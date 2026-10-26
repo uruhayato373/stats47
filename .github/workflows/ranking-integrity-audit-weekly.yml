@@ -19,7 +19,7 @@ name: 📊 Ranking Data Integrity Audit (weekly)
 
 on:
   schedule:
-    - cron: "30 19 * * 6" # 土 19:30 UTC = 日 04:30 JST (internal-link-audit 04:00 の後、他 cron と非重複)
+    - cron: "30 19 * * 5" # 金 19:30 UTC = 土 04:30 JST (internal-link-audit 04:00 の後)
   workflow_dispatch:
 
 permissions:

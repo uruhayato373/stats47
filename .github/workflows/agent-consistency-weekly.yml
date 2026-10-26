@@ -11,8 +11,8 @@ name: 🔗 Agent/Skill Consistency (weekly)
 
 on:
   schedule:
-    # 毎週月曜 JST 07:00 (= 日曜 22:00 UTC)。週初に棚卸しして週次計画に反映できるように。
-    - cron: "0 22 * * 0"
+    # 毎週土曜 JST 07:00 (= 金曜 22:00 UTC)。土曜の週次レビューと来週の計画に反映できるように。
+    - cron: "0 22 * * 5"
   workflow_dispatch: {}
 
 permissions:

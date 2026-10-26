@@ -23,12 +23,12 @@ paths:
 
 | 取得 | 周期 | 入口 |
 |---|---|---|
-| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週木曜 JST 17:30 | Mac の `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
-| 週次の計測→記録→改善サイクル | 毎週金曜 JST 05:00 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要) |
+| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週土曜 JST 07:00 | Mac の `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
+| 週次の計測→記録→改善サイクル | 毎週土曜 JST 02:00 (計測)・08:00 (無人 triage) | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要)・`improvement-cycle-weekly.yml` |
 
-認証付き計測は木曜に取り、金曜朝の週次サイクルがそれを読む。記録は次の取得まで 8 日間「今の値」として使う
+認証付き計測は土曜 07:00 に取り、同じ土曜 08:00 の無人 triage と土曜の週次レビューがそれを読む (2026-10-26 に木曜 17:30 から移した。ログインが切れていても、オーナーがレビューの場で入り直せる日に取るため)。記録は次の取得まで 8 日間「今の値」として使う
 (鮮度の判定と保管庫からの復元が共有する `.claude/scripts/measurement/sources.mjs` の `MEASUREMENT_MAX_AGE_MS`)。
-セッションが切れて取得に失敗した週は、次の木曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
+セッションが切れて取得に失敗した週は、土曜のレビューの冒頭でオーナーが入り直して取り直す。取り直さなければ次の土曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
 
 ## 判断に使う記録
 
@@ -38,7 +38,7 @@ paths:
 | note・KDP の売上 | `data/authenticated/revenue-history.json`・`data/products/sales-ledger.json` |
 | A8 の成果 / 楽天の成果 | `data/affiliate/a8-results.json` / `data/affiliate/rakuten-results.json` |
 | 提携の状態 (A8 / ASP 横断) | `data/affiliate/a8-catalog.json` / `data/affiliate/affiliate-catalog.json` |
-| note の記事別の閲覧 | `data/note/dashboard/latest.json` (月曜の Mac の定期実行) |
+| note の記事別の閲覧 | `data/note/dashboard/latest.json` (土曜 08:00 の Mac の定期実行) |
 | アフィリエイトの表示・クリック (GA4) | `data/affiliate/ga4-affiliate-history.csv` |
 | 週次収益 (NSM)・計測の鮮度 | `data/nsm/weekly-snapshots/`・`data/measurement-cycle/latest.json` |
 | 検索の実績 (GSC) / 除外理由 | `data/gsc/snapshots/<週>/`・`data/gsc/LATEST.md` / `data/gsc/coverage-drilldown/` |

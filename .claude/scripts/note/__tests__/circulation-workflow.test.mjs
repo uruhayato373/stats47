@@ -22,7 +22,7 @@ test("weekly circulation workflow writes only the cover observations and the iss
   assert.deepEqual([...SOURCE.matchAll(/git add -- (\S+)/g)].map((m) => m[1]), ["data/note/cover-assets.json"]);
   assert.equal(WORKFLOW.jobs.audit["timeout-minutes"], 30);
   assert.equal(WORKFLOW.jobs.audit.runsOn ?? WORKFLOW.jobs.audit["runs-on"], "ubuntu-latest");
-  assert.match(SOURCE, /cron:\s*['"]15 20 \* \* 6['"]/);
+  assert.match(SOURCE, /cron:\s*['"]15 20 \* \* 5['"]/); // 土曜 05:15 JST (2026-10-26 に日曜から移動)
   assert.doesNotMatch(SOURCE, /wrangler\s+r2|note-magazine\.mjs.+--commit/);
 });
 

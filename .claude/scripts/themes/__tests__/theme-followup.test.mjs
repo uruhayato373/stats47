@@ -27,10 +27,10 @@ test('Friday checkpoint runs without waiting for Monday; dates and baseline rema
 });
 test('already observed checkpoint does not cause an expensive audit every day', () => {
   const e = { ...experiment, result: { d7: { status: 'quality-only' } } };
-  assert.equal(planFollowup([e], '2026-09-19').run, false);
-  assert.equal(planFollowup([e], '2026-09-21').run, true);
+  assert.equal(planFollowup([e], '2026-09-21').run, false);
+  assert.equal(planFollowup([e], '2026-09-19').run, true); // 土曜は定期の全量監査
   assert.equal(planFollowup([e], '2026-10-01').monthly, true);
-  assert.equal(planFollowup([e], '2026-09-19', true).run, true);
+  assert.equal(planFollowup([e], '2026-09-21', true).run, true);
 });
 const good = () => ({
   http: 200,

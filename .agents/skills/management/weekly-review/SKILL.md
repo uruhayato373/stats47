@@ -14,7 +14,7 @@ primary_agent: strategy-advisor
 
 `$ARGUMENTS`は`YYYY-Www`。省略時は期限が来ている週 (`node .claude/scripts/management/check-review-cadence.mjs` の「期限が来ている週次レビュー」。土曜からは直前に終わった週)。終わっていない週は受け付けない。
 
-**毎週土曜に実行する** (2026-10-10 オーナー決定)。金曜 05:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、12:00 に無人 triage、18:00 に週次メトリクス Issue が出たあとに書く。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
+**毎週土曜に実行する** (2026-10-10 オーナー決定)。同じ土曜の 02:00 JST に fetch-metrics-weekly が前週 (月〜日) を計測し、07:00 に Mac が認証付き計測を取り、08:00 に無人 triage が出たあとに書く (2026-10-26 に金曜から土曜の朝へ集約)。認証付き計測で失敗した取得元があれば、最初にオーナーに入り直してもらって取り直す。snapshot・GSC 入力契約などの週を取るコマンドには対象週を必ず明示する (省略すると実行日の週 = 終わっていない週になる)。続けて `/weekly-plan` で来週分の計画を書く。期限は土曜、土曜当日は催促だけで、日曜の朝から review-cadence-guard が Issue にする。
 
 ## Phase 0: NSM snapshot
 
@@ -56,7 +56,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 週次収益 (NSM) | `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節。欠測は 0 円ではなく「判定不能」。AdSense は 2026-10-11 に手動枠で再開し、再開後に取得できなかった週は判定不能 (停止中の 2026-W35〜W41 だけ ¥0) |
 | AdSense の配置 | `data/adsense/LATEST.md`・`history-units.csv`・`impact-LATEST.md` と KPI `ad-yield`。運用は `/adsense-improvement`。再開後 4 週 (W42〜W45) はベースライン期間で配置を変えない。取得が 0 行 (`manifest.json` の `status: error`) なら Blockers へ (`ADSENSE-RESTART-01` 手順⑤) |
-| 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週木曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
+| 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週土曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `data/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
 | データ品質キュー | `data/data-quality/checks/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |

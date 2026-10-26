@@ -50,7 +50,7 @@ product code、対応format、scope、必要roleまで確認する。
 ### CI 実行について
 
 > **2026-10-20 撤去 (オーナー判断)**: 認証付き計測の CI 実行 (`authenticated-measurement.yml`) と、その補完起動 (`catch-up.mjs`) を撤去した。
-> ログインは週 1 回この Mac だけが持ち、木曜 17:30 の `measurement-session-refresh.sh` → `measurement-collect-local.sh` が取得する。
+> ログインは週 1 回この Mac だけが持ち、土曜 07:00 の `measurement-session-refresh.sh` → `measurement-collect-local.sh` が取得する。
 > 以下の Secrets・CI 再ログイン・artifact・補完起動の記述は旧仕様で、残っている CI 専用のコードとあわせて `MEASUREMENT-MAC-DIRECT-01` で削除する。
 > 保管庫 (vault)・restore・取得範囲・鮮度の記述は Mac の取得にもそのまま当てはまる (鮮度は `MEASUREMENT_MAX_AGE_MS` = 8 日)。
 

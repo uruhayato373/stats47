@@ -223,7 +223,7 @@ test('restore permits canonical reports only and rejects failed, stale or future
   validateAttempt(gsc, now, 'gsc');
   assert.throws(() => validateAttempt({ ...gsc, capability: 'coverage-export' }, now, 'gsc'), /capability_mismatch/);
   assert.throws(() => validateAttempt(gsc, now, 'kdp'), /capability_mismatch/);
-  // 日曜・月曜のアフィリエイト週次は木曜の記録を復元できる。9 日前の記録は拒む
+  // 数日後に動くアフィリエイト週次は週次の記録を復元できる。9 日前の記録は拒む
   validateAttempt({status:'pass',observedAt:'2026-09-14T00:00:00Z'},now);
   for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-12T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
 });
@@ -237,7 +237,7 @@ test('independent health detects stalled schedules even when the last run passed
   assert.equal(measurementHealth(state,now).sources.find(s=>s.source==='kdp').metricsAvailable,false);
   assert.equal(measurementHealth(state,now).status,'action_required');
   kdp.capability = SOURCES.kdp.capability;
-  // 週次の取得 (木曜) の記録は次の取得まで有効で、8 日を過ぎたら古い (MEASUREMENT_MAX_AGE_MS)
+  // 週次の取得 (土曜) の記録は次の取得まで有効で、8 日を過ぎたら古い (MEASUREMENT_MAX_AGE_MS)
   assert.equal(measurementHealth(state,now+6*86400000).status,'pass');
   assert.equal(measurementHealth(state,now+8*86400000).status,'action_required');
   state.sources[0].observedAt='2026-09-10T00:00:00Z';
@@ -340,7 +340,7 @@ test('independent health and alert run even if an earlier artifact download fail
   assert.match(alert.run, /if \[ -f \/tmp\/authenticated-health.txt \]/);
 });
 
-// ログインは週 1 回 (木曜 17:30) この Mac だけが持ち、CI へは渡さない (2026-10-20 オーナー判断。CI の認証付き計測は撤去)。
+// ログインは週 1 回 (土曜 07:00) この Mac だけが持ち、CI へは渡さない (2026-10-20 オーナー判断。CI の認証付き計測は撤去)。
 test('the weekly Mac job logs in locally and collects on the Mac without handing sessions to CI', () => {
   assert.equal(existsSync('.github/workflows/authenticated-measurement.yml'), false, 'CI の認証付き計測は撤去した');
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-  A8 scout 週次パイプライン (日曜 07:00 JST)。ローカル Mac 限定。
+  A8 scout 週次パイプライン (土曜 08:30 JST。2026-10-26 に日曜 07:00 から移動。土曜 07:00 の認証付き計測の後)。ローカル Mac 限定。
   インストール (人間の明示操作。初回 A8 ログイン + セレクタ調整を済ませてから):
     cp scripts/scheduled/com.stats47.scout-asp-weekly.plist ~/Library/LaunchAgents/
     launchctl load ~/Library/LaunchAgents/com.stats47.scout-asp-weekly.plist
@@ -20,11 +20,11 @@
     <key>StartCalendarInterval</key>
     <dict>
         <key>Weekday</key>
-        <integer>0</integer>
+        <integer>6</integer>
         <key>Hour</key>
-        <integer>7</integer>
+        <integer>8</integer>
         <key>Minute</key>
-        <integer>0</integer>
+        <integer>30</integer>
     </dict>
     <key>WorkingDirectory</key>
     <string>/Users/minamidaisuke/stats47</string>

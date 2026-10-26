@@ -9,7 +9,7 @@ on:
       - '.claude/scripts/search-growth/lib/keyword-cycle.mjs'
       - '.claude/prompts/ci/keyword-cycle.md'
   schedule:
-    - cron: '15 1 * * *' # 毎日10:15 JST
+    - cron: '0 21 * * 5' # 土曜 06:00 JST。週 1 回 (2026-10-26 に日次から変更)
   workflow_dispatch: {}
   workflow_run:
     workflows: ['Deploy to Cloudflare Workers']

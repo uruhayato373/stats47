@@ -10,7 +10,7 @@ name: 🛠️ Google Admin settings (audit / plan / apply)
 
 on:
   schedule:
-    - cron: "0 20 * * 0" # 日 20:00 UTC = 月 05:00 JST (他 cron と非重複)。audit のみ
+    - cron: "0 20 * * 5" # 金 20:00 UTC = 土 05:00 JST (土曜の週次レビューの前)。audit のみ
   workflow_dispatch:
     inputs:
       mode:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-  A8 / もしも計測ログインの維持 (毎日 17:30 JST + ログイン時)。ローカル Mac 限定。
+  認証付き計測 (ログインの維持 + A8・note・KDP・楽天・GSC 画面の取得) の週次実行 (毎週土曜 07:00 JST + ログイン時。2026-10-26 に木曜 17:30 から移動)。ローカル Mac 限定。
   前提: キーチェーンに stats47-measurement-a8 / stats47-measurement-moshimo を登録済み。
   インストール:
     cp scripts/scheduled/com.stats47.measurement-session-refresh.plist ~/Library/LaunchAgents/
@@ -21,11 +21,11 @@
     <key>StartCalendarInterval</key>
     <dict>
         <key>Weekday</key>
-        <integer>4</integer>
+        <integer>6</integer>
         <key>Hour</key>
-        <integer>17</integer>
+        <integer>7</integer>
         <key>Minute</key>
-        <integer>30</integer>
+        <integer>0</integer>
     </dict>
     <key>WorkingDirectory</key>
     <string>/Users/minamidaisuke/stats47</string>
