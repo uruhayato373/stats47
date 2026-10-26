@@ -58,7 +58,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
   if (!product) notFound();
 
   const Icon = product.channel === "kindle" ? BookOpen : Database;
-  const destinationLabel = product.channel === "kindle" ? "Amazon" : "ココナラ";
+  const destinationLabel = product.channel === "kindle" ? "Amazon" : product.channel === 'note' ? 'note' : "ココナラ";
   const fiscalCompanion = findFiscalCompanionProduct(slug);
   const baseUrl = getRequiredBaseUrl();
   const productJsonLd = {

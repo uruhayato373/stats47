@@ -19,6 +19,7 @@ on:
         options:
           - ranking
           - areas
+          - products
           - ranking-cards
           - pref-silhouette
           - blog

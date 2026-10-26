@@ -94,10 +94,10 @@ describe('resolveProductBackground', () => {
     ).toThrow('未知のkindle商品IDです');
   });
 
-  it('coconala商品は共通ブランド背景を指す', () => {
+  it.each(['coconala', 'note'] as const)('%s商品は共通ブランド背景を指す', (channel) => {
     const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
-      channel: 'coconala',
+      channel,
       productId: 'P-01',
     });
     expect(background.image).toMatch(/^data:image\/jpeg;base64,/);

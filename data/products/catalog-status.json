@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-09-06T11:19:28.547Z",
+  "checkedAt": "2026-10-26T03:46:04.780Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
@@ -8,10 +8,10 @@
   "scope": "既存14パック・32冊・Geo役務1・Geo note15企画。販売先違いは同一商品内のvariant。その他の未定義商品は含まない。",
   "summary": {
     "total": 62,
-    "existing": 51,
-    "candidates": 11,
+    "existing": 57,
+    "candidates": 5,
     "free": 1,
-    "hashVerified": 18
+    "hashVerified": 0
   },
   "warnings": [],
   "offers": [
@@ -23,23 +23,24 @@
       "scope": "人口・面積・世帯・所得を一冊で把握する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-01/v2-20260906-r1",
-      "artifactSha256": "35768b1d39643a4dc7ddcd3ffccfc95b8759fdd7642ad223f237711537fbbeb6",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-01\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-population-household-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:42:03.318Z",
           "url": "https://coconala.com/services/4323722",
           "priceYen": 4000,
@@ -48,64 +49,43 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
           "priceYen": 4000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-01/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-01/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-01/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-01/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-02",
       "title": "所得・賃金・採用データパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "県民所得・賃金・求人・採用市場をまとめて把握・比較する",
+      "scope": "賃金・求人・採用市場の指標をまとめて把握・比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-02/v2-20260906-r1",
-      "artifactSha256": "c63df1ba168412b7ea0a7702029e47eed491ce931083f24be5f919bd4b15a5cf",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-02\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-income-wage-hiring-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:43:38.386Z",
           "url": "https://coconala.com/services/4323916",
           "priceYen": 5000,
@@ -114,64 +94,43 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n46d68c153502",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-02/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-02/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-02/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-02/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-03",
       "title": "観光・宿泊データパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "宿泊・訪日・観光消費の地域差をまとめて把握・比較する",
+      "scope": "宿泊・訪日・観光関連指標の地域差を把握・比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-03/v2-20260906-r1",
-      "artifactSha256": "9ecf70971dc18272707de812fdf33ab322cab3200ccd560bdec4dd541d6426da",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-03\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-tourism-lodging-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:44:39.073Z",
           "url": "https://coconala.com/services/4323937",
           "priceYen": 5000,
@@ -180,64 +139,43 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n7a5f6df6f5ac",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-03/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-03/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-03/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-03/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-04",
       "title": "自治体財政データパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "歳入歳出・財政指標・類似団体比較をまとめて把握する",
+      "scope": "歳入歳出・財政指標の都道府県差を把握する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-04/v2-20260906-r1",
-      "artifactSha256": "8e0460c2acee3b6d86b636aaca4b9cf6f89bd55ac57db52c1baa73e9b0624fb0",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-04\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-municipal-finance-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:45:35.777Z",
           "url": "https://coconala.com/services/4324057",
           "priceYen": 6000,
@@ -246,38 +184,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n5da8a99b3506",
           "priceYen": 6000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-04/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-04/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-04/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-04/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-05",
@@ -287,23 +203,24 @@
       "scope": "病床・医師・介護・高齢化をまとめて把握・比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-05/v2-20260906-r1",
-      "artifactSha256": "4936c9d7e6960960bb67da19d22aa605173c2c13c2df69b1bbb166da3a99539d",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-05\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-healthcare-nursing-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:47:12.959Z",
           "url": "https://coconala.com/services/4324061",
           "priceYen": 7000,
@@ -312,66 +229,44 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/nbdad7c99d4b5",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-05/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-05/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-05/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-05/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-06",
       "title": "教育・子育てデータパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "学校・保育・進学・出生・子育て環境をまとめて把握する",
+      "scope": "学校・保育・進学・子育て環境の指標を把握する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-06/v2-20260906-r1",
-      "artifactSha256": "30b1fab1cdc24538857301a3ee8d1389c1e6e78b686f89814bac1f49123a3701",
+      "artifactSha256": null,
       "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-06\\v2-20260906-r1\\manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-education-childcare-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:48:38.523Z",
           "url": "https://coconala.com/services/4324062",
           "priceYen": 6500,
@@ -380,64 +275,43 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-06/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-06/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-06/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-06/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-07",
       "title": "移住・生活データパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "住宅・物価・人口移動など移住候補地の生活データを比較する",
+      "scope": "住宅・物価など移住候補地の生活データを比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-07/v2-20260906-r1",
-      "artifactSha256": "b154ad5a6a4f674039893cbe9c85680ab0014fc5dea1efff8d158d90734f1537",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-07\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-migration-living-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:49:47.788Z",
           "url": "https://coconala.com/services/4324065",
           "priceYen": 4500,
@@ -446,64 +320,43 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n323af74c09cc",
           "priceYen": 4500,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-07/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-07/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-07/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-07/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-08",
       "title": "出店・商圏データパック（47都道府県）",
       "kind": "pack",
       "catalogStatus": "approved",
-      "scope": "出店候補地の商圏・人口・購買力を点数化して比較する",
+      "scope": "出店候補地の商業・人口・購買に関する指標を比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-08/v2-20260906-r1",
-      "artifactSha256": "9551e6b0de687b1c147d69ccf2fc14b688638d8c532a5c5ad20306ef7db1dd32",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-08\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-retail-trade-area-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:50:42.271Z",
           "url": "https://coconala.com/services/4324067",
           "priceYen": 5000,
@@ -512,38 +365,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n973c3f8478f5",
           "priceYen": 6000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-08/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-08/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-08/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-08/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-09",
@@ -553,23 +384,24 @@
       "scope": "産業構成・事業所・就業者・経済規模をまとめて把握する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-09/v2-20260906-r1",
-      "artifactSha256": "758e6d1e51daccba2638f1c057b06692ca19e02fde917c6d5513fb4f5ff3f52e",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-09\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-industry-economy-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:51:51.185Z",
           "url": "https://coconala.com/services/4324069",
           "priceYen": 6000,
@@ -578,38 +410,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n2ced199ed715",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-09/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-09/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-09/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-09/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-10",
@@ -619,23 +429,24 @@
       "scope": "災害・交通・エネルギー・インフラをまとめて把握する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-10/v2-20260906-r1",
-      "artifactSha256": "4ff674970c0e4a64dd73f1e199a11b50c95ea203b5ba3c37a93b9dd1a29815e9",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-10\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-disaster-infrastructure-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:52:42.021Z",
           "url": "https://coconala.com/services/4324073",
           "priceYen": 6500,
@@ -644,38 +455,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/nf25cd9ae21e6",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-10/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-10/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-10/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-10/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-11",
@@ -685,23 +474,24 @@
       "scope": "資料・記事・SNS にそのまま貼れる地図・ランキング図版を入手する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-11/v2-20260906-r1",
-      "artifactSha256": "f8d4b6d5aeabf3c0ca61020ff85ed62e427e98a473c568934373e01aca890128",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-11\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-map-chart-assets-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:54:05.922Z",
           "url": "https://coconala.com/services/4324076",
           "priceYen": 4000,
@@ -710,38 +500,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n0f5dafef7fa8",
           "priceYen": 4000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-11/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-11/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-11/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-11/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-12",
@@ -751,25 +519,25 @@
       "scope": "テーマ横断で都道府県データと図表を一括で入手する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-12/v2-20260906-r1",
-      "artifactSha256": "20cfd6398c7bbdaa3b4794ff4f73173856f86409ffa60939e5dfa403ceb9b690",
+      "artifactSha256": null,
       "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-12\\v2-20260906-r1\\manifest.json'",
         "歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない"
       ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-all-in-one-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:56:20.905Z",
           "url": "https://coconala.com/services/4324231",
           "priceYen": 15000,
@@ -778,38 +546,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/nfa7d235eba85",
           "priceYen": 9800,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-12/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-12/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-12/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-12/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-13",
@@ -819,19 +565,20 @@
       "scope": "有料版を買う前に地図・データの品質と使い勝手を無料で試す",
       "free": true,
       "candidate": false,
-      "buildStatus": "hash-verified",
-      "artifactDirectory": ".local/coconala-products/P-13/v3-20260906-r2",
-      "artifactSha256": "aea4d7fe6b21c82a37ba43768cfd0525e301415738e32c61d379f866778f7153",
-      "blockers": [],
+      "buildStatus": "invalid",
+      "artifactDirectory": ".local/coconala-products/P-13/v3-20261012-mac-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-13\\v3-20261012-mac-r4\\manifest.json'"
+      ],
       "ownerGates": [
         "無料サンプルの配布承認"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".claude/state/products/free-sample-delivery.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-free-trial-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/products/free-sample-delivery.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
@@ -845,37 +592,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/n584098246188",
           "priceYen": 0,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "無料見本の内容・配布方法をレビューし、承認後に公開する。Office編集機能の見本ではない",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-13/v3-20260906-r2/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-13/v3-20260906-r2/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-13/v3-20260906-r2/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-13/v3-20260906-r2/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "P-14",
@@ -885,23 +611,24 @@
       "scope": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
+      "buildStatus": "invalid",
       "artifactDirectory": ".local/coconala-products/P-14/v2-20260906-r1",
-      "artifactSha256": "1692ae1cb202ac749d2b71728112c9c66a82459901ed9c4f95ef72161aabd835",
-      "blockers": [],
+      "artifactSha256": null,
+      "blockers": [
+        "ENOENT: no such file or directory, open 'C:\\Users\\m004195\\stats47\\.local\\coconala-products\\P-14\\v2-20260906-r1\\manifest.json'"
+      ],
       "ownerGates": [
-        "Office実機の表示・編集確認（未確認と明示して出品中）"
+        "配布前にOffice実機の表示・編集を確認する"
       ],
       "evidencePaths": [
         "config/coconala-listings.json",
-        ".claude/state/products/coconala-packs-2026-09-06.json",
-        ".local/note-products-revisions/v3-20260906-r1/report.json",
-        ".local/note-products-revisions/v3-20260906-r1/prefecture-household-consumption-pack/readiness.json"
+        "data/products/coconala-packs-2026-09-06.json",
+        "data/note/articles.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "listed",
+          "publicationStatus": "withdrawn",
           "checkedAt": "2026-09-06T07:55:18.296Z",
           "url": "https://coconala.com/services/4323941",
           "priceYen": 9000,
@@ -910,38 +637,16 @@
         },
         {
           "channel": "note",
-          "publicationStatus": "draft-blocked",
-          "checkedAt": null,
-          "url": null,
+          "publicationStatus": "published-recorded",
+          "checkedAt": "2026-10-26T02:20:20.443Z",
+          "url": "https://note.com/stats47/n/n554a047cf5be",
           "priceYen": 5000,
-          "priceStatus": "proposal",
-          "blockers": [
-            "semantic-review-pending",
-            "note-price-terms-and-attachment-review-pending",
-            "owner-publication-approval-pending",
-            "office-real-device-validation-pending"
-          ]
+          "priceStatus": "recorded",
+          "blockers": []
         }
       ],
       "nextAction": "Office実機で改訂版の表示・編集を確認し、対象版に紐付けて記録する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/P-14/v2-20260906-r1/READINESS.md"
-        },
-        {
-          "label": "databook.pdf",
-          "href": "../coconala-products/P-14/v2-20260906-r1/databook.pdf"
-        },
-        {
-          "label": "assets/choropleth-map.png",
-          "href": "../coconala-products/P-14/v2-20260906-r1/assets/choropleth-map.png"
-        },
-        {
-          "label": "data.csv",
-          "href": "../coconala-products/P-14/v2-20260906-r1/data.csv"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "GEO-SERVICE-01",
@@ -951,7 +656,7 @@
       "scope": "1都道府県・地価2026年（前年比2025→2026）・人口2020→2050年・既存の包含結合条件固定",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/coconala-products/GEO-SERVICE-01/pref-14-draft-tHcZsk",
       "artifactSha256": null,
       "blockers": [
@@ -959,40 +664,43 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/products/geo-service-readiness-2026-09-06.json",
+        "data/products/geo-service-readiness-2026-09-06.json",
         "config/coconala-listings.json"
       ],
       "channels": [
         {
           "channel": "coconala",
-          "publicationStatus": "published",
-          "checkedAt": "2026-09-06T06:33:33Z",
+          "publicationStatus": "withdrawn",
+          "checkedAt": "2026-10-19",
           "url": "https://coconala.com/services/4387096",
           "priceYen": 5000,
           "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "受注時に対象県・固定条件を照合し、専用納品CLIで生成・検証する",
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../coconala-products/GEO-SERVICE-01/pref-14-draft-tHcZsk/READINESS.md"
-        }
-      ]
+      "nextAction": "ココナラ撤退済み。新規受付を行わない。",
+      "artifactLinks": []
     },
     {
       "id": "K-S1-01",
-      "title": "所得と支出の地域差 — 家計統計を比較する前に",
+      "title": "年収が高い県は、暮らしも豊かなのか",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認する。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理する。",
+      "scope": "県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認します。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理します。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-01/v3-20260906-r4",
-      "artifactSha256": "4d337777c6dafb628fdaf1cf4f849931a1fad5455e1ab4232ca44111b5bb85d4",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1002,56 +710,57 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-01/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-01/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-01/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:03:52.056Z",
-          "url": "https://www.amazon.co.jp/dp/B0HF17SQ9N",
+          "checkedAt": "2026-09-27T10:20:45.930Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKFB434W",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
-            "改訂書誌と販売記録のタイトルが異なる。内容確定後に変更可否を確認し、承認を得て更新する",
             "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
           ]
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-01/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-01/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-01/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-02",
       "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読む。生産地や県民全体の消費を直接測る統計ではないことも整理する読み物。",
+      "scope": "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-02/v3-20260906-r4",
-      "artifactSha256": "ca02a5fd12e06bd3df4a1b88fb64159aeacdb565a9221601f5b6d8c4c5af1d3b",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1061,56 +770,57 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-02/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-02/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-02/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:04:14.506Z",
-          "url": "https://www.amazon.co.jp/dp/B0HF1N51T8",
+          "checkedAt": "2026-09-27T10:21:07.325Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKF4NLDV",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
-            "改訂書誌と販売記録のタイトルが異なる。内容確定後に変更可否を確認し、承認を得て更新する",
             "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
           ]
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-02/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-02/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-02/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-03",
       "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読む。",
+      "scope": "未婚率・単身高齢・世帯構造の変化・東京一極集中を束ね、人口減少が暮らしの単位をどう変えたかを読みます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-03/v3-20260906-r4",
-      "artifactSha256": "bc6903f68763ebe9998f9ce13bf05a4a638e03e323a8055cb639e5cb41e3f681",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1120,16 +830,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-03/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-03/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-03/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:04:36.843Z",
+          "checkedAt": "2026-09-19T23:27:40.490Z",
           "url": "https://www.amazon.co.jp/dp/B0HDYKVX6F",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1140,35 +849,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-03/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-03/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-03/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-04",
       "title": "健康と医療の地図 — 寿命・自殺・介護2040",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読む。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理する。",
+      "scope": "寿命、自殺に関する指標、介護職員の必要数と病院の利用指標を比較し、医療資源の数と個人の健康状態を区別して読みます。掲載した化学工業の集計は医薬品・医療機器だけの生産額ではないことも整理します。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-04/v3-20260906-r4",
-      "artifactSha256": "797ca1e0c5fe665658436594942d0e3970a10992a95be8e1b5b840a0f971d7be",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1178,16 +890,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-04/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-04/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-04/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:04:58.362Z",
+          "checkedAt": "2026-09-19T23:36:09.618Z",
           "url": "https://www.amazon.co.jp/dp/B0HF1C5QZ6",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1198,37 +909,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-04/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-04/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-04/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-05",
-      "title": "教育と子育ての地図 — 教育費・進学率・待機児童",
+      "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較する。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読む。",
+      "scope": "公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較します。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読みます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-05/v3-20260906-r4",
-      "artifactSha256": "827744a46d764d671fb11f15707b5dcea3a61431394e03578ee3572ec3f644e3",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1238,17 +950,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-05/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-05/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-05/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:05:19.195Z",
-          "url": "https://www.amazon.co.jp/dp/B0HF356WR9",
+          "checkedAt": "2026-09-27T10:21:28.328Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKF5MMF9",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
@@ -1258,37 +969,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-05/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-05/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-05/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-06",
       "title": "自治体財政の地図 — 財政力・借金・将来負担",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認する。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しない。",
+      "scope": "財政力指数、時系列、地方税、地方債務と将来負担比率を比較し、指標ごとの分母・控除・平均期間を確認します。家計の収支とは異なる地方財政の集計として読み、単一指標から健全性を断定しません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-06/v3-20260906-r4",
-      "artifactSha256": "7566189c4cfb44e0cd6fab658c28bf5f2d6099c0b2a8205028f077f5abd57a97",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1298,16 +1010,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-06/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-06/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-06/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:05:40.753Z",
+          "checkedAt": "2026-09-19T23:44:33.977Z",
           "url": "https://www.amazon.co.jp/dp/B0HF1XFXBY",
           "priceYen": 800,
           "priceStatus": "recorded",
@@ -1318,35 +1029,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-06/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-06/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-06/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-07",
       "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読む。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別する。",
+      "scope": "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-07/v3-20260906-r4",
-      "artifactSha256": "43435ddacd1511b48b3883118e16da3cc37f0e913270a77c235093b157732c61",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1356,17 +1070,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-07/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-07/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-07/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:06:01.603Z",
-          "url": "https://www.amazon.co.jp/dp/B0HDYG6DLX",
+          "checkedAt": "2026-09-27T10:21:49.139Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKFB2359",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
@@ -1376,37 +1089,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-07/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-07/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-07/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-08",
       "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "エネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読む。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱わない。",
+      "scope": "エネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読みます。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱いません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-08/v3-20260906-r4",
-      "artifactSha256": "8b6bea4df2f09082104a3e439c65ad8cac2f63813dff75a2448318486791e6bf",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1416,60 +1130,57 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-08/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-08/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-08/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:06:22.770Z",
-          "url": "https://www.amazon.co.jp/dp/B0HDYLY7WM",
+          "checkedAt": "2026-09-27T10:22:09.834Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKDVYP8M",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
-            "改訂書誌と販売記録のタイトルが異なる。内容確定後に変更可否を確認し、承認を得て更新する",
             "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
           ]
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-08/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-08/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-08/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-09",
       "title": "産業と地域経済の地図 — 製造・中小・地価",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "製造業の集計、事業所規模、工業用水、商業地地価を比較する。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読む。",
+      "scope": "製造業の集計、事業所規模、工業用水、商業地地価を比較します。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読みます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-09/v3-20260906-r4",
-      "artifactSha256": "772b571313e0610457204f6271eaebd491791cd44a47977dbcffdb364d9339d7",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1479,60 +1190,57 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-09/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-09/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-09/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:06:43.666Z",
-          "url": "https://www.amazon.co.jp/dp/B0HDYB4CBV",
+          "checkedAt": "2026-09-27T10:22:30.277Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKDXP4NM",
           "priceYen": 800,
           "priceStatus": "recorded",
           "blockers": [
-            "改訂書誌と販売記録のタイトルが異なる。内容確定後に変更可否を確認し、承認を得て更新する",
             "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
           ]
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-09/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-09/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-09/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-10",
       "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読む。集計値から個人の被害確率や地域の安全性全般を断定しない。",
+      "scope": "犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読みます。集計値から個人の被害確率や地域の安全性全般を断定しません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-10/v3-20260906-r4",
-      "artifactSha256": "cc10f105b213289526dafcd36faa6e9870b354949e7cef32bd27b8e0edae8019",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1542,17 +1250,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-10/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-10/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-10/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:07:05.430Z",
-          "url": "https://www.amazon.co.jp/dp/B0HDZ45H6C",
+          "checkedAt": "2026-09-27T10:22:51.852Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKDV78TG",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1562,39 +1269,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-10/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-10/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-10/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-11",
       "title": "文化・スポーツ・余暇の地図",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較する。施設数と利用、参加と頻度、市の家計と県全体を区別して読む。",
+      "scope": "図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較します。施設数と利用、参加と頻度、市の家計と県全体を区別して読みます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-11/v3-20260906-r4",
-      "artifactSha256": "773f03b91d09af8b920a993d2d7495d0254e3b89c02cd8c03c0821648026261a",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1604,17 +1310,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-11/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-11/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-11/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T03:58:38.958Z",
-          "url": null,
+          "publicationStatus": "live",
+          "checkedAt": "2026-09-27T10:23:12.790Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKFGQB8Q",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1624,37 +1329,38 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-11/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-11/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-11/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S1-12",
       "title": "デジタル生活の地図 — 通信・PC・テレワーク",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "ICTメディアの利用、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較する。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読む。",
+      "scope": "テレビ・ラジオ・新聞・雑誌の利用時間、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較します。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読みます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S1-12/v3-20260906-r4",
-      "artifactSha256": "a0a7f67d75da65780273b31c15a3a5eb2f74ca7e5d589e5dc883a883f077430e",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1664,17 +1370,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-12/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S1-12/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S1-12/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:07:27.162Z",
-          "url": "https://www.amazon.co.jp/dp/B0HG55D649",
+          "checkedAt": "2026-09-27T10:23:33.405Z",
+          "url": "https://www.amazon.co.jp/dp/B0HKF7C6JQ",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1684,22 +1389,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S1-12/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S1-12/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S1-12/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-01",
@@ -1709,10 +1409,19 @@
       "scope": "人口・世帯に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-01/v3-20260906-r4",
-      "artifactSha256": "851e9ba0ec73f6d75f8efe823bdfce6b01c7ad7532924b7e7406366d43a11278",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
       "ownerGates": [
@@ -1721,17 +1430,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-01/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-01/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json",
-        ".local/kindle-books/K-S2-01/v3-20260906-r4/review.json"
+        ".local/kindle-books/K-S2-01/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "live",
-          "checkedAt": "2026-08-30T04:07:47.801Z",
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:39:58.744Z",
           "url": "https://www.amazon.co.jp/dp/B0HG543VG9",
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -1741,21 +1448,18 @@
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
-      "contentBlockers": [],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-01/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-01/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-01/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
     },
     {
       "id": "K-S2-02",
@@ -1765,10 +1469,18 @@
       "scope": "所得・賃金・採用に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-02/v3-20260906-r4",
-      "artifactSha256": "6c6a2440c3c628533fd9bbb840353e30b5903c65d7aec03241439773264c68ce",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1778,17 +1490,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-02/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-02/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-02/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T03:59:20.683Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:40:41.401Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8D631S",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1798,22 +1509,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-02/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-02/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-02/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-03",
@@ -1823,10 +1529,18 @@
       "scope": "観光・宿泊に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-03/v3-20260906-r4",
-      "artifactSha256": "57bf43618513d2004a3656f0ce3aa3a76b9da8500fea29599ded4b43836dc6bf",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1836,17 +1550,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-03/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-03/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-03/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T03:59:43.511Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:41:24.211Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8G8JGV",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1856,22 +1569,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-03/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-03/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-03/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-04",
@@ -1881,10 +1589,18 @@
       "scope": "自治体財政に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-04/v3-20260906-r4",
-      "artifactSha256": "d43eb3d60fb05ce93fc26c28487582ad790c0f46a53e6a34025bbd09476c92cc",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1894,16 +1610,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-04/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-04/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-04/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T03:59:44.654Z",
+          "checkedAt": "2026-09-19T02:01:18.283Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -1914,22 +1629,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-04/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-04/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-04/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-05",
@@ -1939,10 +1649,18 @@
       "scope": "医療・介護に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-05/v3-20260906-r4",
-      "artifactSha256": "768f2a757df4fab94bc7e129c18b7715c82e1d4fa2e47525787e387f8cbaa849",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -1952,17 +1670,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-05/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-05/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-05/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:00:05.671Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:42:07.581Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8JHDSZ",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -1972,22 +1689,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-05/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-05/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-05/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-06",
@@ -1997,10 +1709,18 @@
       "scope": "教育・子育てに関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-06/v3-20260906-r4",
-      "artifactSha256": "199e25e37ee509f405b8522f69233a156948e572835961af51fb840da9dcc48d",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2010,17 +1730,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-06/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-06/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-06/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:00:22.331Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:42:49.950Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH91VJZD",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2030,22 +1749,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-06/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-06/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-06/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-07",
@@ -2055,10 +1769,18 @@
       "scope": "移住・生活に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-07/v3-20260906-r4",
-      "artifactSha256": "81b354cb4505baba320b9b248e89cb7faba9a283e9a54ec751a0878ccc63e22f",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2068,16 +1790,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-07/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-07/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-07/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:00:23.379Z",
+          "checkedAt": "2026-09-19T02:02:06.670Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2088,22 +1809,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-07/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-07/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-07/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-08",
@@ -2113,10 +1829,18 @@
       "scope": "出店・商圏に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-08/v3-20260906-r4",
-      "artifactSha256": "b41f5df49babaf0b942ab82429d13d4a439862eb2a1beedd2cc73b123597fd4d",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2126,16 +1850,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-08/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-08/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-08/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:00:23.404Z",
+          "checkedAt": "2026-09-19T02:02:06.686Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2146,22 +1869,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-08/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-08/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-08/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-09",
@@ -2171,10 +1889,18 @@
       "scope": "産業・経済に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-09/v3-20260906-r4",
-      "artifactSha256": "887177e5abebaf3b8b4d3df643f6b6e3bf4731862f243a26fe5b2d00fd87bb32",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2184,16 +1910,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-09/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-09/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-09/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:00:23.424Z",
+          "checkedAt": "2026-09-19T02:02:06.688Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2204,22 +1929,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-09/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-09/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-09/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-10",
@@ -2229,10 +1949,18 @@
       "scope": "防災・インフラに関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-10/v3-20260906-r4",
-      "artifactSha256": "d45d9ac32907f8f1ceeb9adaae79837e37ba6a6bb7311adc764b597749c66c5b",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2242,16 +1970,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-10/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-10/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-10/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:00:23.462Z",
+          "checkedAt": "2026-09-19T02:02:06.702Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2262,22 +1989,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-10/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-10/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-10/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S2-11",
@@ -2287,10 +2009,18 @@
       "scope": "家計・消費に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S2-11/v3-20260906-r4",
-      "artifactSha256": "b1341f7b555489b692ab83c44d97bb0d2f9de2d97293d8c2cbcf4394b02dd317",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2300,17 +2030,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-11/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S2-11/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S2-11/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:00:45.593Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:43:32.077Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8H3WXV",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2320,22 +2049,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S2-11/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S2-11/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S2-11/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-01",
@@ -2345,12 +2069,18 @@
       "scope": "北海道の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-01/v3-20260906-r4",
-      "artifactSha256": "aa7d0c29676a222b9f66a9655557da09006258bcd3e29181df267b32b11fc158",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2360,17 +2090,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-01/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-01/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-01/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:00:59.603Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:44:14.235Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH89XZKS",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2380,24 +2109,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-01/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-01/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-01/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-02",
@@ -2407,12 +2129,18 @@
       "scope": "東北の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-02/v3-20260906-r4",
-      "artifactSha256": "3db46849b9bf0bf793811994040d0aa1140d39e42a1a15693a791b275d309756",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2422,16 +2150,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-02/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-02/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-02/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:01:00.667Z",
+          "checkedAt": "2026-09-19T02:02:34.429Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2442,24 +2169,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-02/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-02/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-02/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-03",
@@ -2469,12 +2189,18 @@
       "scope": "関東の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-03/v3-20260906-r4",
-      "artifactSha256": "7a0fe8fc92170763631c5d6ac89e78e34f4c6f948bb6bd99d27c78d69040a545",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2484,17 +2210,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-03/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-03/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-03/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:01:15.912Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:44:56.048Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8JF9PC",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2504,24 +2229,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-03/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-03/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-03/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-04",
@@ -2531,12 +2249,18 @@
       "scope": "中部の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-04/v3-20260906-r4",
-      "artifactSha256": "8ae15d4795a35dc375d272c2de4db201d7e5ad798d52c02cc613568735c6da38",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2546,16 +2270,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-04/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-04/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-04/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:01:16.939Z",
+          "checkedAt": "2026-09-19T02:02:50.631Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2566,24 +2289,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-04/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-04/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-04/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-05",
@@ -2593,12 +2309,18 @@
       "scope": "近畿の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-05/v3-20260906-r4",
-      "artifactSha256": "08ef2b3e74ca9923fa20a4b1bfdc5271b86e1bd58d7a45051638062c00256d92",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2608,16 +2330,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-05/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-05/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-05/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:01:16.958Z",
+          "checkedAt": "2026-09-19T02:02:50.643Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2628,24 +2349,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-05/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-05/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-05/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-06",
@@ -2655,12 +2369,18 @@
       "scope": "中国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-06/v3-20260906-r4",
-      "artifactSha256": "df7253a10ef1a1b2bc0fcf78cef68624ec23f40681fac627f510ed04b317044c",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2670,16 +2390,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-06/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-06/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-06/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:01:16.975Z",
+          "checkedAt": "2026-09-19T02:02:50.659Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2690,24 +2409,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-06/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-06/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-06/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-07",
@@ -2717,12 +2429,18 @@
       "scope": "四国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-07/v3-20260906-r4",
-      "artifactSha256": "81de6d12a244c60f7e5e82ac6deefbe64e41b8e25cc4ff8dc2ea26a0915fe819",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2732,16 +2450,15 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-07/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-07/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-07/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-08-30T04:01:16.980Z",
+          "checkedAt": "2026-09-19T02:02:50.679Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2752,24 +2469,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-07/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-07/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-07/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S3-08",
@@ -2779,12 +2489,18 @@
       "scope": "九州・沖縄の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S3-08/v3-20260906-r4",
-      "artifactSha256": "a0c3c5f52ccd8f656e40cd9ed24afb3da3051e2ce1ede304087fb6b423c47d9b",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2794,17 +2510,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-08/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S3-08/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S3-08/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:01:34.338Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:45:38.019Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8FWJVV",
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2814,24 +2529,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
         "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
         "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S3-08/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S3-08/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S3-08/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "K-S4-01",
@@ -2841,10 +2549,18 @@
       "scope": "分野をまたいで集めた統計のなかから、思わず人に話したくなる「意外な1位・最下位」を選び抜いた一冊。人口の多い県が上位に来るとはかぎらない指標を並べ、その理由を産業や地理から読み解きます。",
       "free": false,
       "candidate": false,
-      "buildStatus": "generated",
+      "buildStatus": "missing",
       "artifactDirectory": ".local/kindle-books/K-S4-01/v3-20260906-r4",
-      "artifactSha256": "11a327ce0233b07be60969574fb729d82170ff638ad3c4b04f5eba013da3820d",
+      "artifactSha256": null,
       "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing",
         "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
       ],
@@ -2854,17 +2570,16 @@
       ],
       "evidencePaths": [
         "config/kdp-listings.json",
-        ".claude/state/products/kindle-archives.json",
+        "data/products/kindle-archives.json",
         ".local/kindle-books/K-S4-01/v3-20260906-r4/metadata.json",
-        ".local/kindle-books/K-S4-01/v3-20260906-r4/READINESS.md",
-        ".claude/state/products/kindle-v3-20260906-r4-verification.json"
+        ".local/kindle-books/K-S4-01/v3-20260906-r4/READINESS.md"
       ],
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "in_review",
-          "checkedAt": "2026-08-30T04:01:47.501Z",
-          "url": null,
+          "publicationStatus": "draft",
+          "checkedAt": "2026-09-19T08:46:20.705Z",
+          "url": "https://www.amazon.co.jp/dp/B0HH8667TM",
           "priceYen": 1000,
           "priceStatus": "recorded",
           "blockers": [
@@ -2874,22 +2589,17 @@
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
       "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
         "全本文の独立意味レビュー未完了: independent semantic review missing"
       ],
-      "artifactLinks": [
-        {
-          "label": "READINESS.md",
-          "href": "../kindle-books/K-S4-01/v3-20260906-r4/READINESS.md"
-        },
-        {
-          "label": "book.epub",
-          "href": "../kindle-books/K-S4-01/v3-20260906-r4/book.epub"
-        },
-        {
-          "label": "metadata.json",
-          "href": "../kindle-books/K-S4-01/v3-20260906-r4/metadata.json"
-        }
-      ]
+      "artifactLinks": []
     },
     {
       "id": "note-product-01",
@@ -2899,16 +2609,17 @@
       "scope": "IPSSの将来人口を47都道府県コード付きで比較し、地図用データとして再利用できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
-      "artifactDirectory": ".local/geo-products/d-geo-ipss-prefecture-map",
-      "artifactSha256": "f78a17a6ef0e8b78233e1515ca5cea0ce590d8e8793a2b71d34532063070f584",
+      "buildStatus": "missing",
+      "artifactDirectory": null,
+      "artifactSha256": null,
       "blockers": [
+        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -2921,17 +2632,7 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
-      "artifactLinks": [
-        {
-          "label": "analysis.csv",
-          "href": "../geo-products/d-geo-ipss-prefecture-map/analysis.csv"
-        },
-        {
-          "label": "README.md",
-          "href": "../geo-products/d-geo-ipss-prefecture-map/README.md"
-        }
-      ]
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-02",
@@ -2940,50 +2641,51 @@
       "catalogStatus": "in-progress",
       "scope": "県・市区町村コードの欠落、桁、境界変更を公開前に検査できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "本文・図・一次資料・再現テストが揃い、note公開前レビューを通過する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/nfb3e5e44f7ed",
           "priceYen": 980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "本文・図・一次資料・再現テストが揃い、note公開前レビューを通過する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-03",
-      "title": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
+      "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
       "kind": "article",
       "catalogStatus": "gated",
       "scope": "洪水ポリゴンと人口メッシュの重なりを再現可能な手順で集計できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
-      "artifactDirectory": ".local/geo-products/d-geo-flood-population-mesh",
-      "artifactSha256": "87015f996869035fc6ce452fe753cba97ee01040dc6dbc9a0bf93579b936e6a1",
+      "buildStatus": "missing",
+      "artifactDirectory": null,
+      "artifactSha256": null,
       "blockers": [
+        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -2996,17 +2698,7 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
-      "artifactLinks": [
-        {
-          "label": "analysis.csv",
-          "href": "../geo-products/d-geo-flood-population-mesh/analysis.csv"
-        },
-        {
-          "label": "README.md",
-          "href": "../geo-products/d-geo-flood-population-mesh/README.md"
-        }
-      ]
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-04",
@@ -3015,50 +2707,51 @@
       "catalogStatus": "gated",
       "scope": "国土数値情報をQGISで読み込み、CRSと属性を検証できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/n346d566772a1",
           "priceYen": 1980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-05",
-      "title": "地価上昇地点と周囲の人口減少を照合する｜47都道府県CSV・包含結合・検算",
+      "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
       "kind": "article",
       "catalogStatus": "gated",
       "scope": "地価地点と将来人口を混同せず都道府県単位で比較できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
-      "artifactDirectory": ".local/geo-products/d-geo-land-price-future-population",
-      "artifactSha256": "0dbcede76ae69185bb8f21fcd54fb85bc63e559fcfc28501c426f5c55ed87e26",
+      "buildStatus": "missing",
+      "artifactDirectory": null,
+      "artifactSha256": null,
       "blockers": [
+        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3071,17 +2764,7 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
-      "artifactLinks": [
-        {
-          "label": "analysis.csv",
-          "href": "../geo-products/d-geo-land-price-future-population/analysis.csv"
-        },
-        {
-          "label": "README.md",
-          "href": "../geo-products/d-geo-land-price-future-population/README.md"
-        }
-      ]
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-06",
@@ -3090,31 +2773,31 @@
       "catalogStatus": "gated",
       "scope": "1つの地図からX画像とOGPを規約どおり派生できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/n78a43a4c53a4",
           "priceYen": 1980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-07",
@@ -3133,8 +2816,8 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3166,8 +2849,8 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3189,31 +2872,31 @@
       "catalogStatus": "gated",
       "scope": "provenance、単位、分布、coverageの品質ゲートを構築できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/n4e5aaa5dc946",
           "priceYen": 2980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-10",
@@ -3223,16 +2906,17 @@
       "scope": "駅代表点と1km人口メッシュ中心の直線800m判定による47都道府県集計を検算・再利用できる",
       "free": false,
       "candidate": false,
-      "buildStatus": "hash-verified",
-      "artifactDirectory": ".local/geo-products/d-geo-station-access-analysis",
-      "artifactSha256": "f3b41404ac8de90daa839effad56d674d094551282d5014b30e146c6b9d4a30f",
+      "buildStatus": "missing",
+      "artifactDirectory": null,
+      "artifactSha256": null,
       "blockers": [
+        "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
         "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3245,17 +2929,7 @@
           "blockers": []
         }
       ],
-      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する",
-      "artifactLinks": [
-        {
-          "label": "analysis.csv",
-          "href": "../geo-products/d-geo-station-access-analysis/analysis.csv"
-        },
-        {
-          "label": "README.md",
-          "href": "../geo-products/d-geo-station-access-analysis/README.md"
-        }
-      ]
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-11",
@@ -3274,8 +2948,8 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3297,31 +2971,31 @@
       "catalogStatus": "gated",
       "scope": "POIデータの利用条件を確認し、公開可否を判断できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/n502188b7d2c9",
           "priceYen": 1980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-13",
@@ -3330,31 +3004,31 @@
       "catalogStatus": "gated",
       "scope": "自然言語の条件を検証可能な地域フィルタJSONへ変換できる",
       "free": false,
-      "candidate": true,
+      "candidate": false,
       "buildStatus": "missing",
       "artifactDirectory": null,
       "artifactSha256": null,
       "blockers": [
         "本文・添付・再現テスト・出典利用条件・独立レビューが未完了",
-        "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+        "今回の公開面再確認は未実施。過去の公開記録を表示（HTTP403を非公開と解釈しない）"
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
           "channel": "note",
-          "publicationStatus": "draft",
+          "publicationStatus": "published-recorded",
           "checkedAt": null,
-          "url": null,
+          "url": "https://note.com/stats47/n/na9ba449d2c8b",
           "priceYen": 2980,
-          "priceStatus": "proposal",
+          "priceStatus": "recorded",
           "blockers": []
         }
       ],
-      "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
+      "nextAction": "公開済み本文・添付・購入導線をログイン済み画面で再照合する"
     },
     {
       "id": "note-product-14",
@@ -3373,8 +3047,8 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3406,8 +3080,8 @@
       ],
       "ownerGates": [],
       "evidencePaths": [
-        ".claude/state/note-published-urls.json",
-        ".claude/state/products/geo-service-readiness-2026-09-06.json"
+        "data/note/note-published-urls.json",
+        "data/products/geo-service-readiness-2026-09-06.json"
       ],
       "channels": [
         {
@@ -3423,7 +3097,7 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-09-06T11:19:28.547Z",
+  "generatedAt": "2026-10-26T03:46:04.780Z",
   "total": 62,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
@@ -3433,98 +3107,98 @@
       "theme": "population-household",
       "name": "人口・世帯データパック（47都道府県）",
       "catalogStatus": "listed",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-02",
       "theme": "income-wage-hiring",
       "name": "所得・賃金・採用データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-03",
       "theme": "tourism-lodging",
       "name": "観光・宿泊データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-04",
       "theme": "municipal-finance",
       "name": "自治体財政データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-05",
       "theme": "healthcare-nursing",
       "name": "医療・介護データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-06",
       "theme": "education-childcare",
       "name": "教育・子育てデータパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-07",
       "theme": "migration-living",
       "name": "移住・生活データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-08",
       "theme": "retail-trade-area",
       "name": "出店・商圏データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-09",
       "theme": "industry-economy",
       "name": "産業・経済データパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-10",
       "theme": "disaster-infrastructure",
       "name": "防災・インフラデータパック（47都道府県）",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-11",
       "theme": "map-chart-assets",
       "name": "都道府県 地図・チャート素材集",
       "catalogStatus": "approved",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-12",
       "theme": "all-in-one",
       "name": "都道府県データ 全部入りバンドル",
       "catalogStatus": "cataloged",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-13",
       "theme": "free-trial",
       "name": "都道府県データ 無料お試しサンプル",
       "catalogStatus": "cataloged",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     },
     {
       "id": "P-14",
       "theme": "household-consumption",
       "name": "家計・消費データパック（47都道府県）",
       "catalogStatus": "cataloged",
-      "buildStatus": "hash-verified"
+      "buildStatus": "invalid"
     }
   ]
 }

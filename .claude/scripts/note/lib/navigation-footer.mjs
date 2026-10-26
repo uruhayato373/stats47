@@ -231,7 +231,9 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
   const nextUrl = plan.nextNoteUrl ? assertCleanCardUrl(plan.nextNoteUrl, "note.com") : null;
   const magazineUrl = plan.magazineUrl ? assertCleanCardUrl(plan.magazineUrl, "note.com") : null;
   const siteUrl = plan.siteUrl ? assertCleanCardUrl(plan.siteUrl, "stats47.jp") : null;
-  const productUrl = plan.productUrl ? assertCleanCardUrl(plan.productUrl, "stats47.jp") : null;
+  const productUrl = plan.productNoteUrl
+    ? assertCleanCardUrl(plan.productNoteUrl, "note.com")
+    : plan.productUrl ? assertCleanCardUrl(plan.productUrl, "stats47.jp") : null;
   const datasets = (plan.datasets || []).map((dataset) => ({
     ...dataset,
     noteUrl: assertCleanCardUrl(dataset.noteUrl, "note.com"),
@@ -272,8 +274,9 @@ export function applyNavigationFooter(body, plan, { idFactory = randomUUID } = {
   }
   if (productUrl && !hasUrl(output, productUrl)) {
     additions.push(
-      `<p ${attrs(idFactory())}><strong>このテーマをまとめて読む・使う</strong><br>${escapeHtml(plan.productDescription)}</p>`,
-      externalCard(productUrl, plan.productTitle, plan.productDescription, idFactory),
+      `<p ${attrs(idFactory())}><strong>${plan.productNoteUrl ? 'このテーマのデータを手元で使う' : 'このテーマをまとめて読む・使う'}</strong><br>${escapeHtml(plan.productDescription)}</p>`,
+      plan.productNoteUrl ? noteCard(productUrl, new URL(productUrl).pathname.split('/').pop(), idFactory)
+        : externalCard(productUrl, plan.productTitle, plan.productDescription, idFactory),
     );
   }
 

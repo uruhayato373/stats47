@@ -377,6 +377,17 @@
       ]
     },
     {
+      "id": "note:a-annual-paid-leave-11-days-or-more-ratio",
+      "kind": "note",
+      "key": "a-annual-paid-leave-11-days-or-more-ratio",
+      "title": "【2021年版】年次有給休暇を11日以上取得した雇用者の割合が最も高い県は？ 1位は愛知県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/nfb6a7a246b12",
+      "published": true,
+      "rankingKeys": [
+        "annual-paid-leave-11-days-or-more-ratio"
+      ]
+    },
+    {
       "id": "note:a-average-temperature",
       "kind": "note",
       "key": "a-average-temperature",
@@ -1120,6 +1131,17 @@
       ]
     },
     {
+      "id": "note:a-manufacturing-industry-annual-income",
+      "kind": "note",
+      "key": "a-manufacturing-industry-annual-income",
+      "title": "【2023年版】製造業で働く人の平均年収が最も高い県は？ 1位は神奈川県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/nb09980b2ef49",
+      "published": true,
+      "rankingKeys": [
+        "manufacturing-industry-annual-income"
+      ]
+    },
+    {
       "id": "note:a-maximum-temperature",
       "kind": "note",
       "key": "a-maximum-temperature",
@@ -1269,6 +1291,17 @@
       "published": true,
       "rankingKeys": [
         "volunteer-activity-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "note:a-volunteer-activity-annual-participation-rate-15plus",
+      "kind": "note",
+      "key": "a-volunteer-activity-annual-participation-rate-15plus",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人の割合が高い県は？ 1位は島根県｜都道府県ランキング",
+      "href": "https://note.com/stats47/n/n5bf048142f66",
+      "published": true,
+      "rankingKeys": [
+        "volunteer-activity-annual-participation-rate-15plus"
       ]
     },
     {
@@ -2577,6 +2610,15 @@
       "rankingKeys": []
     },
     {
+      "id": "note:d-geo-data-quality-management",
+      "kind": "note",
+      "key": "d-geo-data-quality-management",
+      "title": "stats47型データ品質管理",
+      "href": "https://note.com/stats47/n/n4e5aaa5dc946",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:d-geo-flood-population-mesh",
       "kind": "note",
       "key": "d-geo-flood-population-mesh",
@@ -2595,6 +2637,15 @@
       "rankingKeys": []
     },
     {
+      "id": "note:d-geo-ksj-qgis-guide",
+      "kind": "note",
+      "key": "d-geo-ksj-qgis-guide",
+      "title": "国土数値情報をQGISで扱う",
+      "href": "https://note.com/stats47/n/n346d566772a1",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:d-geo-land-price-future-population",
       "kind": "note",
       "key": "d-geo-land-price-future-population",
@@ -2604,11 +2655,47 @@
       "rankingKeys": []
     },
     {
+      "id": "note:d-geo-natural-language-region-filter",
+      "kind": "note",
+      "key": "d-geo-natural-language-region-filter",
+      "title": "自然言語→地域フィルタJSON",
+      "href": "https://note.com/stats47/n/na9ba449d2c8b",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:d-geo-poi-license-practice",
+      "kind": "note",
+      "key": "d-geo-poi-license-practice",
+      "title": "POIデータのライセンスと実務",
+      "href": "https://note.com/stats47/n/n502188b7d2c9",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:d-geo-region-code-checklist",
+      "kind": "note",
+      "key": "d-geo-region-code-checklist",
+      "title": "地域コード結合の完全チェックリスト",
+      "href": "https://note.com/stats47/n/nfb3e5e44f7ed",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:d-geo-station-access-analysis",
       "kind": "note",
       "key": "d-geo-station-access-analysis",
       "title": "駅代表点から直線800m×2050年人口｜47都道府県を再現",
       "href": "https://note.com/stats47/n/n041e38af8fb5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:d-geo-x-ogp-map-automation",
+      "kind": "note",
+      "key": "d-geo-x-ogp-map-automation",
+      "title": "X/OGP地図カード自動生成",
+      "href": "https://note.com/stats47/n/n78a43a4c53a4",
       "published": true,
       "rankingKeys": []
     },
@@ -2644,6 +2731,39 @@
       ]
     },
     {
+      "id": "note:h-howto-excel-filled-map",
+      "kind": "note",
+      "key": "h-howto-excel-filled-map",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "href": "https://note.com/stats47/n/n800864e68c6b",
+      "published": true,
+      "rankingKeys": [
+        "total-population"
+      ]
+    },
+    {
+      "id": "note:h-howto-mymaps-kml",
+      "kind": "note",
+      "key": "h-howto-mymaps-kml",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "href": "https://note.com/stats47/n/n0c132ee7d825",
+      "published": true,
+      "rankingKeys": [
+        "total-population"
+      ]
+    },
+    {
+      "id": "note:h-howto-mymaps-share",
+      "kind": "note",
+      "key": "h-howto-mymaps-share",
+      "title": "Googleマイマップで作った地図を共有する・サイトに埋め込む方法 ── 公開範囲の選び方と注意点",
+      "href": "https://note.com/stats47/n/n08d8b24bf9c5",
+      "published": true,
+      "rankingKeys": [
+        "total-population"
+      ]
+    },
+    {
       "id": "note:koumuin-gis-01-depopulation-medical",
       "kind": "note",
       "key": "koumuin-gis-01-depopulation-medical",
@@ -2658,6 +2778,15 @@
       "key": "koumuin-shigoto-kouritsuka-ai",
       "title": "公務員の事務作業、AI で「半日仕事」が「数分」になる時代の話",
       "href": "https://note.com/stats47/n/na451784fbbca",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:license-guide",
+      "kind": "note",
+      "key": "license-guide",
+      "title": "都道府県データ商品のライセンス・版の違いガイド",
+      "href": "https://note.com/stats47/n/nadc627790bb6",
       "published": true,
       "rankingKeys": []
     },
@@ -3121,11 +3250,128 @@
       "rankingKeys": []
     },
     {
+      "id": "note:prefecture-all-in-one-pack",
+      "kind": "note",
+      "key": "prefecture-all-in-one-pack",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "href": "https://note.com/stats47/n/nfa7d235eba85",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-disaster-infrastructure-pack",
+      "kind": "note",
+      "key": "prefecture-disaster-infrastructure-pack",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "href": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-education-childcare-pack",
+      "kind": "note",
+      "key": "prefecture-education-childcare-pack",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "href": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "note:prefecture-free-trial-pack",
       "kind": "note",
       "key": "prefecture-free-trial-pack",
       "title": "都道府県データの無料お試しサンプル 総人口2024",
       "href": "https://note.com/stats47/n/n584098246188",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-healthcare-nursing-pack",
+      "kind": "note",
+      "key": "prefecture-healthcare-nursing-pack",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "href": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-household-consumption-pack",
+      "kind": "note",
+      "key": "prefecture-household-consumption-pack",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "href": "https://note.com/stats47/n/n554a047cf5be",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-income-wage-hiring-pack",
+      "kind": "note",
+      "key": "prefecture-income-wage-hiring-pack",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "href": "https://note.com/stats47/n/n46d68c153502",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-industry-economy-pack",
+      "kind": "note",
+      "key": "prefecture-industry-economy-pack",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "href": "https://note.com/stats47/n/n2ced199ed715",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-map-chart-assets-pack",
+      "kind": "note",
+      "key": "prefecture-map-chart-assets-pack",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "href": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-migration-living-pack",
+      "kind": "note",
+      "key": "prefecture-migration-living-pack",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "href": "https://note.com/stats47/n/n323af74c09cc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-municipal-finance-pack",
+      "kind": "note",
+      "key": "prefecture-municipal-finance-pack",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "href": "https://note.com/stats47/n/n5da8a99b3506",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-population-household-pack",
+      "kind": "note",
+      "key": "prefecture-population-household-pack",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "href": "https://note.com/stats47/n/ne47eb45f8a15",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-retail-trade-area-pack",
+      "kind": "note",
+      "key": "prefecture-retail-trade-area-pack",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "href": "https://note.com/stats47/n/n973c3f8478f5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "note:prefecture-tourism-lodging-pack",
+      "kind": "note",
+      "key": "prefecture-tourism-lodging-pack",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "href": "https://note.com/stats47/n/n7a5f6df6f5ac",
       "published": true,
       "rankingKeys": []
     },
@@ -3524,7 +3770,7 @@
       "id": "note:recovered-n4e1e67f70686",
       "kind": "note",
       "key": "recovered-n4e1e67f70686",
-      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
       "href": "https://note.com/stats47/n/n4e1e67f70686",
       "published": true,
       "rankingKeys": [
@@ -4259,11 +4505,11 @@
       "id": "note:recovered-nf5b4ced7a736",
       "kind": "note",
       "key": "recovered-nf5b4ced7a736",
-      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
+      "title": "【2021年版・10歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "href": "https://note.com/stats47/n/nf5b4ced7a736",
       "published": true,
       "rankingKeys": [
-        "volunteer-activity-annual-participation-rate-15plus"
+        "volunteer-activity-annual-participation-rate-10plus"
       ]
     },
     {
@@ -4696,6 +4942,46 @@
       "key": "1034",
       "title": "和歌山のデータブックを公開中。",
       "href": "https://www.threads.com/@stats47jp/post/De1JqU1kwVq",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1035",
+      "kind": "sns",
+      "key": "1035",
+      "title": "3,754mm・3,069mm・3,065mm。",
+      "href": "https://www.threads.com/@stats47jp/post/De29LzkgnsG",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:1036",
+      "kind": "sns",
+      "key": "1036",
+      "title": "鳥取を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/De3rB8SAo7g",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1037",
+      "kind": "sns",
+      "key": "1037",
+      "title": "405万円・402万円・400万円。",
+      "href": "https://www.threads.com/@stats47jp/post/De5jrvtCYa-",
+      "published": true,
+      "rankingKeys": [
+        "care-worker-annual-income"
+      ]
+    },
+    {
+      "id": "sns:1038",
+      "kind": "sns",
+      "key": "1038",
+      "title": "島根の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/De6SGHJAoTO",
       "published": true,
       "rankingKeys": []
     },
@@ -5136,6 +5422,15 @@
       ]
     },
     {
+      "id": "sns:1100",
+      "kind": "sns",
+      "key": "1100",
+      "title": "【都道府県データ】新潟県、全国で何位？",
+      "href": "https://www.instagram.com/p/De4Sw8GFW6n/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
       "id": "sns:113",
       "kind": "sns",
       "key": "113",
@@ -5185,6 +5480,15 @@
       "key": "1185",
       "title": "50年で、人口はどう変わった？",
       "href": "https://www.instagram.com/p/Deo10sGG1qy/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1186",
+      "kind": "sns",
+      "key": "1186",
+      "title": "40年で、世帯数はどう変わった？",
+      "href": "https://www.instagram.com/p/De65zdkEbk-/",
       "published": true,
       "rankingKeys": []
     },
@@ -10204,6 +10508,11 @@
       "relation": "uses"
     },
     {
+      "from": "note:a-annual-paid-leave-11-days-or-more-ratio",
+      "to": "ranking:annual-paid-leave-11-days-or-more-ratio",
+      "relation": "uses"
+    },
+    {
       "from": "note:a-average-temperature",
       "to": "ranking:average-temperature",
       "relation": "uses"
@@ -10969,6 +11278,11 @@
       "relation": "uses"
     },
     {
+      "from": "note:a-manufacturing-industry-annual-income",
+      "to": "ranking:manufacturing-industry-annual-income",
+      "relation": "uses"
+    },
+    {
       "from": "note:a-minimum-wage-by-region",
       "to": "ranking:minimum-wage-by-region",
       "relation": "uses"
@@ -11031,6 +11345,11 @@
     {
       "from": "note:a-volunteer-activity-annual-participation-rate-10plus",
       "to": "ranking:volunteer-activity-annual-participation-rate-10plus",
+      "relation": "uses"
+    },
+    {
+      "from": "note:a-volunteer-activity-annual-participation-rate-15plus",
+      "to": "ranking:volunteer-activity-annual-participation-rate-15plus",
       "relation": "uses"
     },
     {
@@ -12444,6 +12763,16 @@
       "relation": "uses"
     },
     {
+      "from": "note:d-geo-data-quality-management",
+      "to": "page:geo-data-catalog",
+      "relation": "uses"
+    },
+    {
+      "from": "note:d-geo-data-quality-management",
+      "to": "page:geo-method",
+      "relation": "uses"
+    },
+    {
       "from": "note:d-geo-flood-population-mesh",
       "to": "geo:population-flood-risk",
       "relation": "uses"
@@ -12474,6 +12803,16 @@
       "relation": "uses"
     },
     {
+      "from": "note:d-geo-region-code-checklist",
+      "to": "page:geo",
+      "relation": "uses"
+    },
+    {
+      "from": "note:d-geo-region-code-checklist",
+      "to": "page:geo-method",
+      "relation": "uses"
+    },
+    {
       "from": "note:d-geo-station-access-analysis",
       "to": "geo:population-station-access",
       "relation": "uses"
@@ -12495,6 +12834,21 @@
     },
     {
       "from": "note:h-howto-csv-mojibake",
+      "to": "ranking:total-population",
+      "relation": "uses"
+    },
+    {
+      "from": "note:h-howto-excel-filled-map",
+      "to": "ranking:total-population",
+      "relation": "uses"
+    },
+    {
+      "from": "note:h-howto-mymaps-kml",
+      "to": "ranking:total-population",
+      "relation": "uses"
+    },
+    {
+      "from": "note:h-howto-mymaps-share",
       "to": "ranking:total-population",
       "relation": "uses"
     },
@@ -12840,7 +13194,7 @@
     },
     {
       "from": "note:recovered-nf5b4ced7a736",
-      "to": "ranking:volunteer-activity-annual-participation-rate-15plus",
+      "to": "ranking:volunteer-activity-annual-participation-rate-10plus",
       "relation": "uses"
     },
     {
@@ -12956,6 +13310,16 @@
     {
       "from": "sns:1033",
       "to": "ranking:grilled-eel-consumption-expenditure",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1035",
+      "to": "ranking:annual-precipitation",
+      "relation": "uses"
+    },
+    {
+      "from": "sns:1037",
+      "to": "ranking:care-worker-annual-income",
       "relation": "uses"
     },
     {

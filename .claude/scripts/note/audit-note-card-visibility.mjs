@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import * as cheerio from "cheerio";
+import { unregisteredCards } from './lib/native-cards.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);
@@ -16,6 +17,16 @@ if (previousPath) {
 }
 const screenshotDir = args.includes("--screenshots") ? resolve(args[args.indexOf("--screenshots") + 1]) : null;
 const browserVerify = args.includes("--browser-verify");
+// Windows corporate proxies can trust the browser's OS certificate store while Node cannot.
+// Use a public, cookie-free browser fetch when explicitly selected; TLS verification stays enabled.
+let fetchBrowser;
+let fetchPage;
+if (args.includes('--browser-fetch')) {
+  const { chromium } = await import('playwright');
+  fetchBrowser = await chromium.launch({ headless: true, channel: 'chrome' });
+  fetchPage = await fetchBrowser.newPage();
+  await fetchPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
+}
 const maxScreenshots = Math.min(10, Math.max(0, Number(args.includes("--max-screenshots") ? args[args.indexOf("--max-screenshots") + 1] : 3)));
 // npx は Windows で spawn できない (ENOENT) ため、node 直起動で tsx を読み込む (fetch-note-metrics.mjs と同じ形)
 const catalog = JSON.parse(execFileSync(process.execPath, ["--import", "tsx", resolve(ROOT, ".claude/scripts/note/catalog/dump-circulation-json.ts")], { cwd: ROOT, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }));
@@ -33,6 +44,13 @@ async function fetchText(url) {
   let lastError;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
+      if (fetchPage) {
+        return await fetchPage.evaluate(async (url) => {
+          const response = await fetch(url, { credentials: 'omit', signal: AbortSignal.timeout(20_000) });
+          if (!response.ok) throw Error(`HTTP ${response.status}`);
+          return response.text();
+        }, url);
+      }
       const response = await fetch(url, { headers: { "user-agent": "stats47-note-card-visibility/1.0" }, signal: AbortSignal.timeout(20_000) });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return await response.text();
@@ -77,6 +95,9 @@ async function inspect(article) {
       return [];
     });
     const $body = cheerio.load(live.body || "");
+    for (const card of unregisteredCards(live.body || '', live.embedded_contents)) {
+      issues.push({ code: 'card_unregistered', url: card.url, service: card.service, key: card.key });
+    }
     for (const element of $body("figure[embedded-service]").toArray()) {
       const previous = $body(element).prev();
       if (previous.is("p") && !previous.text().trim() && previous.find("br").length === 1) {
@@ -95,12 +116,14 @@ async function inspect(article) {
 
 let results = new Array(articles.length);
 let next = 0;
-await Promise.all(Array.from({ length: 6 }, async () => {
-  while (next < articles.length) {
-    const index = next++;
-    results[index] = await inspect(articles[index]);
-  }
-}));
+try {
+  await Promise.all(Array.from({ length: 6 }, async () => {
+    while (next < articles.length) {
+      const index = next++;
+      results[index] = await inspect(articles[index]);
+    }
+  }));
+} finally { await fetchBrowser?.close(); }
 
 if (browserVerify) {
   const { chromium } = await import("playwright");
@@ -152,12 +175,15 @@ if (browserVerify) {
                 // 「空」と誤判定した (2026-10-01)。中身が入るまで最大 8 秒待ち、入らなければ下の判定で空とする
                 await page.waitForFunction((key) => {
                   const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
-                  return Boolean(element && (element.querySelector("iframe[src],img[src]") || element.textContent?.trim()) && element.getBoundingClientRect().height > 0);
+                    const loaded = element && [...element.querySelectorAll('iframe.note-embed')]
+                      .every((frame) => frame.getAttribute('data-ready') === 'true');
+                    return Boolean(loaded && (element.querySelector("iframe[src],img[src]") || element.textContent?.trim()) && element.getBoundingClientRect().height > 0);
                 }, issue.key, { timeout: 8_000 }).catch(() => {});
                 rendered = await page.evaluate((key) => {
                   const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
                   return element && {
-                    content: Boolean(element.querySelector("iframe[src],img[src]") || element.textContent?.trim()),
+                    content: Boolean(element.querySelector("iframe[src],img[src]") || element.textContent?.trim())
+                      && [...element.querySelectorAll('iframe.note-embed')].every((frame) => frame.getAttribute('data-ready') === 'true'),
                     height: element.getBoundingClientRect().height,
                   };
                 }, issue.key);
@@ -224,6 +250,7 @@ const summary = {
   browserVerifyFailedArticles: results.filter((row) => row.issues.some((issue) => issue.code === "browser_verify_failed")).length,
   affectedArticles: results.filter((row) => row.issues.some((issue) => issue.code !== "fetch_failed" && issue.code !== "card_unverifiable")).length,
   emptyCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_blank_in_browser" || (!browserVerify && issue.code === "card_empty_in_public_html")).length,
+  unregisteredCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === 'card_unregistered').length,
   unknownCards: browserVerify ? results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_empty_in_public_html").length : 0,
   /** この環境では描画を確認できなかったカード (失敗には数えない。手元のブラウザで確かめる) */
   unverifiableCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_unverifiable").length,

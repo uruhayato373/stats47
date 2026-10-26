@@ -72,6 +72,8 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
   const pp = `${datasetDir("products.publication-receipts")}/coconala-packs-2026-09-06.json`, gp = `${datasetDir("products.publication-receipts")}/geo-service-readiness-2026-09-06.json`;
   const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);
   const ni = read(np), notes = obj(ni.articles), packs = read(pp), geo = read(gp);
+  const noteLedgerPath = datasetPath('note.articles');
+  const noteArticles = list(read(noteLedgerPath).articles).map(obj);
   const nrp = `.local/note-products-revisions/${noteRevision}/report.json`;
   const nr = existsSync(join(root, nrp)) ? read(nrp) : {};
   const inspect = (o: SalesOffer, filename: string, expected?: string): void => {
@@ -100,22 +102,30 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     if (["P-06", "P-12"].includes(p.id)) o.blockers.push("歴史的な幼稚園・保育所2指標の原典再確認待ち。最新値として扱わない");
     const a = CANONICAL_ARTICLES.find(a => a.memberProductIds.includes(p.id));
     if (a) {
+      const published = noteArticles.find((item) => item.key === a.slug && item.status === 'published'
+        && /^https:\/\/note\.com\/stats47\/n\/n[a-f0-9]{12}$/.test(str(item.noteUrl)));
       const r = list(nr.items).map(obj).find(i => i.productId === p.id && i.slug === a.slug);
       const problems = r ? list(r.blockers).map(String) : ["改訂納品物への添付接続・本文独立レビュー・価格承認・公開前照合が必要"];
       if (r && str(r.sourceManifestSha256) !== str(d.manifestSha256)) problems.push("note参照版と現行納品版のSHA不一致");
       if (r) o.evidencePaths.push(nrp, `${str(r.outDir)}/readiness.json`);
-      o.channels.push({ channel: "note", publicationStatus: r ? "draft-blocked" : "draft", checkedAt: null, url: null, priceYen: a.priceJpy,
-        priceStatus: "proposal", blockers: problems });
+      o.evidencePaths.push(noteLedgerPath);
+      o.channels.push(published
+        ? { channel: 'note', publicationStatus: 'published-recorded', checkedAt: str(published.publicationVerifiedAt) || null,
+            url: str(published.noteUrl), priceYen: num(published.priceJpy) ?? a.priceJpy, priceStatus: 'recorded', blockers: [] }
+        : { channel: "note", publicationStatus: r ? "draft-blocked" : "draft", checkedAt: null, url: null, priceYen: a.priceJpy,
+            priceStatus: "proposal", blockers: problems });
     }
     return o;
   });
   const g = GEO_SERVICE_OFFER, pub = obj(geo.publication), sample = str(geo.sampleOutput);
+  const geoListing = obj(coco[g.id]);
   offers.push({ id: g.id, title: g.title, kind: "service", catalogStatus: g.status, scope: g.scope, free: false, candidate: false,
     buildStatus: sample && existsSync(join(root, sample)) ? "generated" : "missing", artifactDirectory: sample || null, artifactSha256: null,
     blockers: ["見本は神奈川県。受注県ごとに生成・保存則・出典・内容確認が必要"], ownerGates: [], evidencePaths: [gp, cp],
-    channels: [{ channel: "coconala", publicationStatus: str(geo.status) || "unknown", checkedAt: str(pub.anonymousCheckedAt) || null,
+    channels: [{ channel: "coconala", publicationStatus: str(geoListing.status) || str(geo.status) || "unknown", checkedAt: str(obj(geoListing._withdrawal).decisionDate) || str(pub.anonymousCheckedAt) || null,
       url: str(pub.serviceUrl) || null, priceYen: g.priceYen, priceStatus: "recorded", blockers: [] }],
-    nextAction: "受注時に対象県・固定条件を照合し、専用納品CLIで生成・検証する" });
+    nextAction: geoListing.status === 'withdrawn' ? 'ココナラ撤退済み。新規受付を行わない。'
+      : "受注時に対象県・固定条件を照合し、専用納品CLIで生成・検証する" });
   for (const b of KINDLE_BOOKS) {
     const l = obj(kdp[b.id]), archive = obj(archives[b.id]);
     const revision = list(archive.revisions).map(obj).find(r => r.revision === archive.latestRevision);

@@ -5,7 +5,7 @@
       "id": "product:data-p-01",
       "kind": "product",
       "key": "data-p-01",
-      "title": "47都道府県の人口・世帯データ集をお渡しします",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
       "href": "/products/data-p-01",
       "published": true
     },
@@ -13,7 +13,7 @@
       "id": "product:data-p-02",
       "kind": "product",
       "key": "data-p-02",
-      "title": "47都道府県の所得・賃金データ集をお渡しします",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
       "href": "/products/data-p-02",
       "published": true
     },
@@ -21,7 +21,7 @@
       "id": "product:data-p-03",
       "kind": "product",
       "key": "data-p-03",
-      "title": "47都道府県の観光・交通データ集をお渡しします",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
       "href": "/products/data-p-03",
       "published": true
     },
@@ -29,7 +29,7 @@
       "id": "product:data-p-04",
       "kind": "product",
       "key": "data-p-04",
-      "title": "47都道府県の自治体財政データ集をお渡しします",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
       "href": "/products/data-p-04",
       "published": true
     },
@@ -37,7 +37,7 @@
       "id": "product:data-p-05",
       "kind": "product",
       "key": "data-p-05",
-      "title": "47都道府県の医療・介護データ集をお渡しします",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
       "href": "/products/data-p-05",
       "published": true
     },
@@ -45,7 +45,7 @@
       "id": "product:data-p-06",
       "kind": "product",
       "key": "data-p-06",
-      "title": "47都道府県の教育・文化データ集をお渡しします",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
       "href": "/products/data-p-06",
       "published": true
     },
@@ -53,7 +53,7 @@
       "id": "product:data-p-07",
       "kind": "product",
       "key": "data-p-07",
-      "title": "47都道府県の気候・土地データ集をお渡しします",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
       "href": "/products/data-p-07",
       "published": true
     },
@@ -61,7 +61,7 @@
       "id": "product:data-p-08",
       "kind": "product",
       "key": "data-p-08",
-      "title": "47都道府県の商業・小売データ集をお渡しします",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
       "href": "/products/data-p-08",
       "published": true
     },
@@ -69,7 +69,7 @@
       "id": "product:data-p-09",
       "kind": "product",
       "key": "data-p-09",
-      "title": "47都道府県の農業・産業データ集をお渡しします",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
       "href": "/products/data-p-09",
       "published": true
     },
@@ -77,7 +77,7 @@
       "id": "product:data-p-10",
       "kind": "product",
       "key": "data-p-10",
-      "title": "47都道府県の防災・インフラデータ集をお渡しします",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
       "href": "/products/data-p-10",
       "published": true
     },
@@ -85,7 +85,7 @@
       "id": "product:data-p-11",
       "kind": "product",
       "key": "data-p-11",
-      "title": "47都道府県 汎用統計データ集をお渡しします",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
       "href": "/products/data-p-11",
       "published": true
     },
@@ -93,7 +93,7 @@
       "id": "product:data-p-12",
       "kind": "product",
       "key": "data-p-12",
-      "title": "47都道府県の統計データ総合集をお渡しします",
+      "title": "47都道府県 2,073指標の統計データ総合集",
       "href": "/products/data-p-12",
       "published": true
     },
@@ -101,7 +101,7 @@
       "id": "product:data-p-14",
       "kind": "product",
       "key": "data-p-14",
-      "title": "県庁所在市の家計消費データ集をお渡しします",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
       "href": "/products/data-p-14",
       "published": true
     },
