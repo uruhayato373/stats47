@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import satori from 'satori';
-import { LinkCardOgp, LINK_CARD_IMAGE, type LinkCardOgpProps } from '../../src/features/ogp/LinkCardOgp';
+import { LinkCardOgp, LINK_CARD_IMAGE, resolveLinkCardTitleLayout, type LinkCardOgpProps } from '../../src/features/ogp/LinkCardOgp';
 import type { SatoriFont } from './satori-image-render';
 
 export interface LinkCardTextBox {
@@ -47,6 +47,7 @@ export async function renderLinkCardPreview(directory: string, key: string, data
       if (node.textContent) boxes.push({text: node.textContent, left: node.left, top: node.top, width: node.width, height: node.height});
     },
   });
+  assertLinkCardTextLayout(boxes, data.title, resolveLinkCardTitleLayout(data.title).fontSize);
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
   const file = join(directory, `${key}.png`);
   writeFileSync(file, png);

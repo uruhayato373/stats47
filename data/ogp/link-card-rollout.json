@@ -27262,5 +27262,28 @@
     "eligiblePages": 3214,
     "complete": true
   },
-  "updatedAt": "2026-10-26T09:15:49.056Z"
+  "updatedAt": "2026-10-26T09:15:49.056Z",
+  "sitePreflight": {
+    "checkedAt": "2026-10-26T10:01:24.990Z",
+    "blogTitles": 609,
+    "rankingTitles": 2459,
+    "titleFailures": 0,
+    "previewGeometryCases": 18,
+    "visualSamples": [
+      "annual-precipitation-rainy-season-gap",
+      "annual-sunshine-duration-prefecture-gap",
+      "academic-achievement-test-prefecture-ranking",
+      "agriculture-output-employment-productivity-gap",
+      "automotive-industry-transformation-map"
+    ],
+    "shortHeadlineEdgeSamples": 6,
+    "reviewer": "Codex visual inspection",
+    "checks": [
+      "opaque text panel",
+      "central square readability",
+      "primary title size",
+      "no text overlap"
+    ],
+    "scope": "All titles mechanically checked; representative and short-headline edge images visually inspected. Not a claim of every image being human reviewed."
+  }
 }

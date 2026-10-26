@@ -32,6 +32,6 @@ export function LinkCardOgp({title,eyebrow='都道府県のデータ',detail='st
     <div style={{position:'absolute',left:320,top:38,width:560,height:60,display:'flex',alignItems:'center',justifyContent:'center',background:COLORS.ribbon,border:'3px solid '+COLORS.ink,borderRadius:16,color:COLORS.white,fontSize:30,fontWeight:900}}>{eyebrow}</div>
     <div style={{position:'absolute',left:320,top:112,width:560,height:showSubtitle?330:370,display:'flex',alignItems:'center',justifyContent:'center',textAlign:'center',fontSize:layout.fontSize,lineHeight:1.04,fontWeight:900,color:COLORS.ink,wordBreak:'break-all'}}>{layout.text}</div>
     {showSubtitle && subtitle?<div style={{position:'absolute',left:326,top:450,width:548,height:70,display:'flex',alignItems:'center',justifyContent:'center',textAlign:'center',fontSize:subtitle.length>65?20:24,lineHeight:1.2,fontWeight:700,color:COLORS.ink,wordBreak:'break-all'}}>{subtitle}</div>:null}
-    <div style={{position:'absolute',left:320,top:558,width:560,display:'flex',justifyContent:'center',color:COLORS.ink,fontSize:34,fontWeight:900}}>{detail}</div>
+    <div style={{position:'absolute',left:320,top:550,width:560,display:'flex',justifyContent:'center',color:COLORS.ink,fontSize:34,lineHeight:1.1,fontWeight:900}}>{detail}</div>
   </div>;
 }
