@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-25",
+  "date": "2026-10-26",
   "period": {
-    "periodStart": "2026-10-16",
-    "periodEnd": "2026-10-22",
+    "periodStart": "2026-10-17",
+    "periodEnd": "2026-10-23",
     "windowDays": 7
   },
-  "inputHash": "8836d4dc3dea37439e37ab5e21927863ab3b58210e7160fe6e463cc698e87722",
+  "inputHash": "e0df2fe2a3d58141efeb2696923bb5d875b69cb30e5a48cd56554d09197b9e1e",
   "movements": [
     {
-      "keyword": "出生率 ランキング 日本",
-      "targetPath": "/ranking/total-fertility-rate",
-      "before": 67,
-      "after": 4,
+      "keyword": "知能犯",
+      "targetPath": "/ranking/intellectual-crime-per-100k",
+      "before": 68,
+      "after": 2,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 63
+      "change": 66
     },
     {
       "keyword": "高校 教師 年収",
@@ -45,15 +45,6 @@
       "change": -52.333333333333336
     },
     {
-      "keyword": "小学校 人数 ランキング",
-      "targetPath": "/blog/elementary-school-children-count",
-      "before": 53,
-      "after": 5,
-      "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 48
-    },
-    {
       "keyword": "サンマ 漁獲量",
       "targetPath": "/ranking/fishery-species-catch-pacific-saury",
       "before": 6.5,
@@ -75,10 +66,10 @@
       "keyword": "牛乳 産地 ランキング",
       "targetPath": "/ranking/raw-milk-production",
       "before": 47,
-      "after": 6.75,
+      "after": 5.6,
       "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 40.25
+      "impressions": 5,
+      "change": 41.4
     },
     {
       "keyword": "離婚率 日本",
@@ -97,6 +88,15 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 36
+    },
+    {
+      "keyword": "原発のある都道府県",
+      "targetPath": "/blog/nuclear-power-plant-count-prefecture-gap",
+      "before": 45,
+      "after": 10.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 34.5
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "漁港が多い県",
     "targetPath": "/ranking/fishing-port-count-by-type",
-    "rank": 5.949685534591195,
-    "impressions": 636,
+    "rank": 5.953846153846154,
+    "impressions": 650,
     "clicks": 2,
     "group": 5,
     "previousMethod": null,
