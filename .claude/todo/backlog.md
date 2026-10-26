@@ -89,17 +89,6 @@ updated: 2026-10-19
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
 - **完了条件**: 土曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
 
-### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-19 確認)**: origin/develop の `data/note/dashboard/latest.json` は `fetchedAt` 2026-10-12T00:15Z・`status: incomplete`・記事 0 件で、理由は `browser_open_failed: "[Errno 1] Operation not permitted: '/Users/minamidaisuke/Library/Application Support/Google/Chrome/Profile 5'"`。最後に全件取れたのは 09-07〜10-04 の分 (10-05 取得)。10-19 00:15Z の定期実行 (09-21〜10-18 の分) も同じ `browser_open_failed` で記事 0 件で、2 週続けて失敗した (Mac のローカル出力を 10-19 に develop へコミット)。計測サイクル (`data/measurement-cycle/LATEST.md`) の「有料購入」でも、note は「判定不能 (最終観測 2026-09-30)」になっている。
-- **影響**: note の閲覧と売上が 10-05 以降測れていない。`NOTE-PRODUCT-LADDER-01`・`KNOWHOW-PRODUCT-PILOT-01`・`KNOWHOW-QA-BOARD-01`・`NOTE-FREE-DEFAULT-01` の判定と、`NOTE-FISCAL-PEER-PUBLISH-01` の 11-09 の売上比較がすべて判定不能になる。
-- **2026-10-19 の切り分け**: launchd だけの問題ではない。Claude デスクトップアプリから手で実行しても同じ `browser_open_failed` で失敗した。同じ shell から `ls` すると、Chrome のプロファイルは Profile 5 だけでなく Default・Profile 1 もすべて `Operation not permitted` で中身を読めず、`~/Library/Application Support/Google/Chrome` の一覧も拒否される。フォルダの `stat` (`ls -ld`) は通り、所有者は自分・権限は `drwx------` なので、Unix の権限による拒否ではない。`system_profiler SPInstallHistoryDataType` を見ると、macOS 27.0.1 が **2026-10-10 10:06** に入っている。最後に成功した 10-05 と最初に失敗した 10-12 の間である。
-- **原因 1 (2026-10-19 解消・Claude アプリのみ)**: macOS 27 への更新後、実行元のアプリにフルディスクアクセスが無いと Chrome のプロファイルを読めなかった。オーナーが Claude デスクトップアプリに許可して再起動すると、同じ shell から Profile 5 を読めるようになり、取得のエラーは `browser_open_failed` から `login_required` に変わった。**launchd (`/bin/bash`) とターミナルへの許可は未確認**で、10-26 の定期実行で `browser_open_failed` が出れば、`/bin/bash` にも同じ許可が要る。
-- **原因 2 (2026-10-19 解消)**: Profile 5 (Chrome の表示名「stats47」) の note のログインが 2026-10-16 20:10 UTC に切れていた。オーナーが Profile 5 で再ログインした (新しい `_note_session_v5` の期限は 2027-01-19)。手動の取得は 09-21〜10-18 の 28 日窓で `status: pass` になり、公開 402 件を 21 ページで全件取得し、合計値もダッシュボードと一致した (`fetchedAt` 2026-10-19T10:42Z)。10-05〜10-18 の欠けはこの窓で埋まった。再ログインの直後に実行すると、Cookie ファイルへの書き込み前に読んで `login_required` になることがある (1 回観測)。
-- **残り**: 定期実行 (launchd → `/bin/bash`) にフルディスクアクセスが要るかの確認。**検証期日**: 2026-10-26 (月曜 09:00 JST の定期実行の後)。**2026-10-26 観測**: 09:16 JST の定期実行で `latest.json` (fetchedAt 2026-10-26T00:16Z) と `cover-metrics-latest.json` がともに `status: pass` (ローカルの `data/note/dashboard/`、未コミット)。記録が develop に入ればカードを削除できる。定期実行は同日に土曜 08:00 へ移した (launchd の再登録後に有効)。`data/note/dashboard/latest.json` が `status: pass` で、`cover-metrics-latest.json` も `pass` ならカードを削除する (2026-10-19 に定期実行のラッパー `scripts/scheduled/fetch-note-metrics.sh` が取得の前に表紙監査を毎回走らせるよう直し、同じラッパーの手動実行で結合が初めて `pass`・402 件になった)。`browser_open_failed` なら、オーナーが `/bin/bash` にフルディスクアクセスを許可する。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。
-- **完了条件**: 定期実行で `latest.json` が `status: pass`・`coverage.complete: true` になり、10-05〜10-18 の欠けた期間を 28 日の窓で取り直せている。
-
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -254,6 +243,14 @@ updated: 2026-10-19
 - **完了条件**: 6 データセットの行に schema があり、`npm run check-datasets` がそれを検証し、書き手が検証してから書いている。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [BLOG-AUTOMOTIVE-BIRTHDEATH-FOLLOWUP-01] 自動車産業の記事の題名と中身のずれ、出生と死亡の記事に残る critic の MAJOR 6 件を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-26] [領域:サイト]
+
+- **経緯**: `BLOG-TEXT-CHART-CONFLICT-20261006` の本文の食い違いは 2026-10-24 のデプロイで直り、2026-10-26 に本番で確かめた (3 記事とも 200、alcohol に「9.5%」あり、birth-death に「微増」なし、automotive は製造業全体の出荷額の版)。同じ改稿で次の 2 点が残った。
+- **automotive-industry-transformation-map**: 輸送用機械の県別の図 4 枚を e-Stat から取り直せず外し、全業種合計の製造品出荷額で書き直したため、本文に自動車の数値が無く、題名「自動車産業の県別勢力図」とずれる。CI の app id で輸送用機械の県別出荷額を取り直すか、題名と背景画像を作り直すかを決める。
+- **birth-death-gap-decline**: critic の MAJOR が 6 件残る。うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認。
+- **完了条件**: 2 記事で上の点が解消し、`quality-gate.mjs` が blocker 0・critic PASS。
 
 ### [RANKING-HEADING-YEAR-DECISION-01] ランキングページの見出しの近くに最新年を出すか決める
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:サイト]
@@ -1283,13 +1280,6 @@ updated: 2026-10-19
 - **次**: オーナーが YouTube Studio の動画一覧 (非公開・削除済みを含む) と照合し、42 行に `post_url` を入れるか、存在しない投稿なら `deleted_at` を記録する。2 本の content_key をタイトルから決める。書き込みは store 経由 (`sns-posts-store.cjs`)。
 - **完了条件**: `npm run sns:trace:check` の「外部 ID をたどれない posted 行」から YouTube が消える。
 
-### [SNS-YT-STALE-RECORDS-01] YouTube 保留判断に EXP-006 と古い memory を合わせ、未追跡の古い state を消す
-タグ: [SNS・マーケ] [種類:改善] [実行:sweep] [起票:2026-10-09] [領域:SNS]
-
-- **事象**: YouTube は 2026-09-23 から保留 (`sns-content-standards.md` §0) だが、`data/business/experiments.json` の EXP-006 は `status: "running"` のまま。memory `project_youtube_mass_experiment_2026_07.md` は撤去済みの CI 投稿経路 (2026-07-27 `437b81d83` / `794ce84d4` で削除) を現役として書き、`reference_publish_youtube_47_summary.md` は作業ツリーにも履歴にも無いスキルを指す。`data/sns/metric-discovery-index.json` の古いコピーが旧置き場に未追跡のまま残っている (2026-10-06 の data/ への移動前の残り)。
-- **次**: EXP-006 を保留状態と次の確認日に更新、2 つの memory を事実に合わせて直すか削除、未追跡の古いコピーを削除する。
-
-
 ### [CRITIC-PATTERN-CHART-TEXT] critic の指摘「図と本文」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:サイト]
 
@@ -1857,48 +1847,6 @@ updated: 2026-10-19
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
 
 - **登録リクエスト残件の受付完了（2026-10-17）**: 栃木local-finance、静岡/茨城/福井labor-wagesの4ページは本番200・自己canonical・index可・県固有の表示数値を確認し、GSCで各1回の通常リクエストが全て受理された。前日分と合わせ15/15受付済み。未送信0件となったため自動化gsc-4だけをPAUSEDにした。Google保存状態は依然soft404で、登録完了・件数改善は未確認。10-23の修正後クロールと登録確認を維持し、このカードは進行中とする。
-
-### [NOTE-FISCAL-PEER-PUBLISH-01] 財政指標の同規模比較 note 2 本 (#12 コード版 / #13 コードなし版) を Mac から公開する
-
-タグ: [収益化] [種類:制作] [実行:別環境] [起票:2026-09-29] [期日:2026-10-06] [領域:商品]
-
-- **現在地 (2026-10-13)**: 2 本とも 2026-10-12 に公開済み (#12 `n527e817995e9`・#13 `n20299fc77b17`、各 ¥300)。有料境界は screenshot で確認済み。
-  残りは完了条件の最後の 1 点 (公開日 + 28 日 = 2026-11-09 の売上比較を `improvements.md` 側へ引き渡す) だけ。
-- **2026-10-19 追加**: `NOTE-PRODUCT-LADDER-01` が #13 (コードなし版) を無料の橋渡し記事にする予定。この比較を壊さないよう、11-09 の売上を記録するまで #12・#13 の価格を変えない。note ダッシュボードの取得が 10-12 から失敗しており (`NOTE-DASHBOARD-COLLECT-01`)、直らなければ 11-09 の比較は判定不能になる。
-- **owner**: オーナー (Mac で `/publish-note` を実行・有料境界を目視承認) / note-manager (公開後の state 記録)
-- **対象**: `koumuin-estat-claude-code` の `12-fiscal-peer-comparison` (有料 ¥300・e-Stat API + Python) と `13-fiscal-peer-no-code` (有料 ¥300・Claude / ChatGPT にプロンプトを貼るだけ)。原稿は commit `328a498ee` で develop の `docs/31_note記事原稿/koumuin-estat-claude-code/<slug>/` に入っている。有料原稿は `sync-drafts-r2.mjs` が公開側 R2 への移送を拒否する設計なので、公開までは git に残る (R2 は 404 を確認済み)。note-critic は 2 本とも PASS。
-- **なぜ Mac か**: `publish-new-note.sh` が Mac のパスと osascript を前提にしており、Windows には browser-use も無い (2026-09-29 確認)。
-- **なぜ 2 本同時か**: 売れた note 3 本 (各 ¥300) はすべて AI × e-Stat の技術記事だった。コードを書く層と書かない層のどちらが買うかを、同時公開した 2 本の売上で比べる。
-- **手順** (Mac・`note.com/stats47` にログイン済みの Chrome Profile 5):
-  1. `git pull origin develop` で原稿を取得する。R2 には無いので `restore-from-r2.sh` は使わない。
-  2. PNG を作り直す (資産ポリシーで PNG は git に入れていない)。先に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/koumuin-estat-claude-code/12-fiscal-peer-comparison` を実行し (13 も同様)、そのあと `node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>` で表紙を背景入りに上書きする (順序を逆にすると表紙が背景なしになる)。
-  3. **#12 を先に公開する**: `/publish-note 12-fiscal-peer-comparison`。有料境界は「手順 2: 「－」を正しく処理する」の見出しの直前にあることを screenshot で目視してから確定する。マガジンはシリーズ「公務員のための e-Stat × Claude Code 実務ガイド」に入れ、note 上の既存マガジン「自治体財政」にも入れるかはその場で決める。
-  4. #13 の本文にあるシリーズ内リンク `../12-fiscal-peer-comparison/draft.md` と `../08-benchmark-table-5min/draft.md` を、それぞれの note の URL に置き換える (#12 の原稿にある `../06`・`../07`・`../08`・`../09`・`../10` のリンクも公開前に同じく置き換える。URL の対応表は `data/note/note-published-urls.json`)。
-  5. `/publish-note 13-fiscal-peer-no-code` で公開する。有料境界は「手順 2: AI に渡す前に知っておく 3 つの約束事」の直前。
-  6. (2026-10-13 済) 公開記録は記事台帳 `data/note/articles.json` に書き、派生インデックスを再生成した。
-  7. (2026-10-13 済) 完全原稿は `note:article save` で private R2 に保存し、docs/31 は git から外した (旧 `publish-paid-note-private-r2.ts` は廃止)。
-  8. 図の位置を `node .claude/scripts/note/audit-note-figure-split.mjs` で確かめる。`ins_img` は見出し直前の段落をアンカーにすると画像が 1 ブロック後ろにずれる既知の不具合がある (`NOTE-INS-IMG-HEADING-PLACEMENT-01`)。
-- **禁止**: 有料境界を目視せずに確定しない (有料部分が無料で見える)。予約・即時の別はオーナーが決める。
-- **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
-- **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
-
-### [BLOG-TEXT-CHART-CONFLICT-20261006] 図を一次資料から作り直した 3 記事で、図と食い違う本文を直して再公開する
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
-
-- **経緯 (2026-10-06)**: `alcohol-prefecture-map` / `automotive-industry-transformation-map` / `birth-death-gap-decline` の図を R2・国税庁「酒のしおり」から作り直し、図だけ R2 に反映した (`regenerate-blog-svgs.yml` の source-repair → all)。blog-critic の差分審査で、図と同じ節の本文に図と食い違う記述が見つかった。本文は旧来のゲート負債 (下記) で再公開できず、まだ直っていない。
-- **直す本文 (critic BLOCK/MAJOR・数値は確認済み)**:
-  - automotive「愛知県だけが他県の3倍近い水準にある構図は、2005年以降一貫して変わっていません」→ 2 位との比は 2005 年度 2.0 倍・2023 年度 2.9 倍。「差は広がっている」に直す。NOTE の「構成比が約40%」は散布図の時点の値であり、2023 年度の 58 兆円には当てはまらないと書く。年と年度の表記を「年度」にそろえる。
-  - birth-death「東京都は微増〜横ばい」→ 2024 年は −3.7‰ の自然減 (沖縄に次いで 2 番目に小さい)。「転入超過が補う」は社会増減と自然増減の取り違え。図は 2024 年なので節の年もそろえる。
-  - alcohol「焼酎9.4%」→ 一次資料からの計算は 9.45% で 9.5% (minor)。
-- **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
-- **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
-- **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
-- **2026-10-24 R2 へ公開済み・デプロイ待ち (オーナー指示)** (blog-auto-publish run 40038952462)。旧記録: **2026-10-23 改稿済み・未公開**: 下書きは `.claude/worktrees/agent-a156c49e07097336b/contents/blog/<slug>/` (未コミット)。3 本とも quality-gate blocker 0・critic PASS。
-  - alcohol: 2018 年度の都道府県値は一次資料で再現できず、2023 年度の R2 値 (46 都道府県) で図と本文を作り直した。焼酎は 9.5% に直した。全国の酒類別構成比は 2018 年度のまま (年は明記)。
-  - birth-death: 東京の自然減・社会増減との取り違えを直し、図を合計特殊出生率に作り直した。critic の MAJOR が 6 件残る (うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認)。公開前に MAJOR を直すかを決める。
-  - automotive: 輸送用機械の図 4 枚は e-Stat から取り直せず (app id が CI 専任) 外し、全業種合計の製造品出荷額等で書き直した。**本文に自動車の数値が無く、title「自動車産業の県別勢力図」とずれる** (title を変えると背景画像の作り直しが要るので据え置き)。CI の app id で輸送用機械の県別出荷額を取り直すか、title と背景を作り直すかを決めてから公開する。
-  - **見つかった食い違い**: `manufacturing-shipment-amount`・`manufacturing-employees` の config は `yearFormat: "calendar"` だが R2 の yearName は「年度」。`unmarried-ratio-male-45-49` の東京 24.6%・大阪 24.4% が全国の 50 歳時未婚割合 28.3% より低く、指標の定義の確認が要る。
-- **2026-10-24 デプロイ (PR #1174 マージ・deploy run 40043185828) の後に本番で確かめる**: 3 記事が 200 で、alcohol に「9.5%」がある・birth-death に東京の「微増」が無い・automotive が製造業全体の出荷額の版になっていること。確認: `for s in alcohol-prefecture-map birth-death-gap-decline automotive-industry-transformation-map; do curl -s "https://stats47.jp/blog/$s?v=$(date +%s)" > /tmp/p.html; echo "$s $(grep -c '9\.5%\|微増\|製造品出荷額' /tmp/p.html)"; done` (alcohol は 9.5% が 1 件以上、birth-death は「微増」0 件)。確かめたらカードは完了 (automotive の title と中身のずれ・birth-death の MAJOR 6 件は別に残る)。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
@@ -2558,17 +2506,6 @@ updated: 2026-10-19
   `packages/r2-storage/src/lib/operations/` / `packages/stats-r2/` /
   `CROSS-PAGE-DATA-SSOT-01` / `MONEY-UNIT-SCALE-01` / `RANKING-VALUES-PARTITION-INTEGRITY-01` /
   `PUBLIC-DATA-CONTRACT-AUDIT-01` / `MAINTENANCE-DEBT-PAYDOWN-01`
-
-### [CSV-DL-INTENT-SURVEY-01] CSV ダウンロード後に用途 1 問と任意の連絡口を置き、実務利用者を見つける
-
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-26] [領域:商品]
-
-- **オーナー判断 (2026-09-26 壁打ち)**: CSV のサブスク化・登録制はしない。DL は無料・登録なしのまま、「誰が何に使っているか」を知る導線だけを置く。
-- **根拠**: ランキング CSV の DL は 28 日で 193 件・120 ページ (`ADMIN-STAT-PILOT-01` の GA4 実測)。支払意思の証拠は 0 件で、聞き取り記録 `data/products/admin-stat-interviews.json` は目標 3 件に対して 0 件。
-- **やること**: ①DL 直後に任意の 1 問 (用途: 業務資料 / 学習・研究 / 報道・執筆 / 個人の関心 / その他) を出し、回答を GA4 イベントで送る (analytics-event-standards の台帳に先に登録)。②「業務でお使いの方は話を聞かせてください」の任意の連絡口を置く。
-- **禁止**: DL の必須登録、メールアドレス等の個人情報の保存 (DB レス方針・プライバシーポリシーの改訂が先)。回答を購入意思の代用にしない。
-- **完了条件**: localhost で DL 後に 1 問が出て、回答が GA4 DebugView で観測でき、未回答でも DL が妨げられない。4 週後に用途別件数を `ADMIN-STAT-PILOT-01` へ転記する。
-- **進捗 (2026-09-26)**: 実装済み・未デプロイ。`DataUsageCard.tsx` に DL 後の用途 1 問 (業務の資料 / 学習・研究 / 報道・執筆 / 個人の関心 / その他 / 答えない) と、「業務の資料」回答者にだけ既存のお問い合わせフォームへの案内を出す。イベントは `csv_download_purpose` (`trackCsvDownloadPurpose`)。**2026-09-26 更新**: `download_purpose` と `declared_purpose` (USER) を Admin API で登録済み、PR #1029 で本番反映済み。週次 snapshot の `download-purpose.csv` (2026-09-27 以降の週) に件数が出る。**残り**: ④4 週後 (2026-10-24 以降) に用途別件数を `ADMIN-STAT-PILOT-01` へ転記し、「業務の資料」の回答者・問い合わせ (`contact_click`) があれば聞き取り相手として扱う。
 
 ### [AFF-OFFER-ROTATION-01] 高単価案件と無料登録型案件を、1 枠ずつ順番に試して確定収益で比べる
 
@@ -4593,14 +4530,6 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **次**: リリース対象のパスの定義を 1 つのモジュールに置き、デプロイの inline script とオーバーレイの両方がそれを import する。オーバーレイで返さない種類は理由と一緒に定義に書く。
 - **完了条件**: 定義からパスを 1 種類消すとデプロイ側とオーバーレイ側の両方のテストが落ちる。
 
-### [MUNI-PAGE-SEO-REGISTER-01] 市区町村ページの効果観測 MUNI-PAGE-SEO-01 を active 施策の一覧に登録する
-タグ: [インフラ・計測] [種類:改善] [実行:機械] [起票:2026-10-23] [期日:2026-10-30] [領域:サイト]
-
-- **事象**: 改善ログ `data/improvement/gsc-improvement/improvement-log.md` の `MUNI-PAGE-SEO-01` (2026-10-21 デプロイ・after 窓 2026-10-22〜11-18・判定 2026-11-21) が、
-  2026-10-23 時点で `.claude/todo/improvements.md` に無い。improvements.md は improvement-triage の排他 writer なので、このセッションでは書いていない。
-- **次**: improvement-triage が `[kpi: id]` と観測期限付きで行を足す (想定効果はログの計算式。閾値エンジンが集計しない検索語群なので `[target:]` は付けない旨をログに書いてある)。
-- **完了条件**: improvements.md に `MUNI-PAGE-SEO-01` の行があり、docs:check の DG079 を通る。
-
 ## 🟢 低 — 再開条件を満たしたら着手する
 
 ### [VITE-CONFIG-ESM-WARN-01] vitest.config.ts が CommonJS として読まれ、Vite の次の major で読めなくなる警告が出ている
@@ -4718,6 +4647,7 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **停止条件**: 既存手段で十分、担当者ごとに要件が異なり共通化できない、必要な粒度が取得できない、照合・手直しを含む時間が減らない場合は対象変更または見送り。協力者・試用が得られなければ未検証と記録し、次回確認日と再開条件を決める。検索数・DL数・AI作成の架空ペルソナで実務試用を代替しない。実務者への連絡、販売・価格の外部反映はこのカードだけでは実行しない。
 - **完了条件**: 対象業務・必要粒度・代替手段・時間の測定方法と結果・支払者・購入経路・採算の入力が確認済み/未確認に分かれ、根拠付きのGo/Pivot/Stopが収益化戦略へ反映される。Goの場合だけ1商品・1販売面・価格・上限工数・観測期限が具体化される。実売を観測していなければ「事業成立」と報告しない。
 - **統合 (2026-10-26)**: `DATA-PROCESSING-SIDE-INCOME-01` (データ加工を受託・販売などの副業収入にできるか。出典 vault dairy/2026-09-24) をこのカードへ統合した。
+- **CSV の用途 1 問の 4 週集計 (2026-10-26 転記・`CSV-DL-INTENT-SURVEY-01` から)**: GA4 Japan の 28 日 (2026-09-20〜10-17、`data/ga4/snapshots/2026-W42/download-purpose.csv`。PR #1029 の本番反映 09-26 以前は回答なし) で回答 89 件。学習・研究 45 / 業務の資料 27 / 個人の関心 14 / その他 2 / 報道・執筆 1。業務の資料 27 件は 26 指標に散らばり、同じ指標で 2 件以上あったのは乾しいたけの消費量だけ (公共工事・港湾貨物・有料老人ホーム定員・道路橋りょう費など行政寄りの指標が多い)。購入意思の代用にはしない。
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
 

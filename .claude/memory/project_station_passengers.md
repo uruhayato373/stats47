@@ -32,7 +32,7 @@ metadata:
 
 ## 47連結動画パイプライン
 
-詳細はスキル化済み: [[reference_publish_youtube_47_summary]]
+詳細を書いていたスキル `publish-youtube-47-summary` は YouTube 撤退 (2026-07-27) で撤去済み。
 
 1. バッチレンダー: `tsx scripts/pipeline/render-station-passengers.ts landscape` (47本)
 2. Intro/Telop/Thumb レンダー: `tsx scripts/pipeline/render-station-passengers-intro-telop.ts`

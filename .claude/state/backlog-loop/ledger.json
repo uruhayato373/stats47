@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T06:23:48.915Z",
+  "updatedAt": "2026-10-26T06:28:53.999Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8122,6 +8122,208 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:23:48.915Z"
+    },
+    "NOTE-DASHBOARD-COLLECT-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.695Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -e status of data/note/dashboard/latest.json"
+            ],
+            "pass": true
+          },
+          "evidence": "10-26 09:16 JST の launchd 定期実行で latest.json status pass・coverage.complete true (428/428)、期間 09-28〜10-25。記録を commit",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.695Z"
+    },
+    "CSV-DL-INTENT-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.756Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "aggregate data/ga4/snapshots/2026-W42/download-purpose.csv"
+            ],
+            "pass": true
+          },
+          "evidence": "本番反映済み (PR #1029)。28 日 89 件 (学習45/業務27/個人14/その他2/報道1) を ADMIN-STAT-PILOT-01 へ転記",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.756Z"
+    },
+    "SNS-YT-STALE-RECORDS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.816Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-datasets.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "EXP-006 に paused 履歴と next_check 2026-12-01 を追記、誤った memory 2 本を削除しリンクを修正。discovery-index は現行の出力先 (gitignore) で古い写しではなかった",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.816Z"
+    },
+    "NOTE-FISCAL-PEER-PUBLISH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.876Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "最後の 1 点 (11-09 の売上比較の引き渡し) を improvement-triage が improvements.md に NOTE-FISCAL-PEER-SALES-01 として追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.876Z"
+    },
+    "MUNI-PAGE-SEO-REGISTER-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.938Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "improvement-triage が improvements.md に MUNI-PAGE-SEO-01 (Due 11-21) を追加。docs:check errors 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.938Z"
+    },
+    "BLOG-TEXT-CHART-CONFLICT-20261006": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:28:53.999Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl https://stats47.jp/blog/{alcohol-prefecture-map",
+              "birth-death-gap-decline",
+              "automotive-industry-transformation-map}"
+            ],
+            "pass": true
+          },
+          "evidence": "本番 3 記事 200、alcohol 9.5% 2 件・焼酎 9.4% 0 件、birth-death 微増 0 件、automotive 製造品出荷額 52 件。残件は後継カードへ",
+          "failReason": null,
+          "followUps": [
+            "BLOG-AUTOMOTIVE-BIRTHDEATH-FOLLOWUP-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:28:53.999Z"
     }
   }
 }

@@ -39,7 +39,6 @@
 - [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
 - [workflow arg vector quoted](feedback_workflow_arg_vector_quoted.md) — CI workflowの可変引数列はbash配列("${ARGS[@]}")。文字列連結は1トークン化(2026-07-14に6workflow regression)。ガード=ARG_VECTOR_QUOTED
 - [estat expansion pipeline 2026 07](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開は不可能(生候補17万)。需要ファースト拡充ループ。発見入口はR2 estat-catalogで絞らず出口だけ絞る
-- [youtube mass experiment 2026 07](project_youtube_mass_experiment_2026_07.md) — YouTube量産実験(2026-07-11〜)。ガード緩和=youtube-experiment.json(削除で月1復帰)。CI投稿経路実証済み
 - [docs reorg todo handoffs](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
 - [kakei expansion pipeline gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充の罠: @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須
 - [sns gallery and ig cron fix](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run admin`→localhost:4747、apps/admin)。/snsは画像付きID台帳・下書き本文編集。IG自動投稿の空振りcron修正。正典sns-content-standards.md §5.5
@@ -71,7 +70,6 @@
 - [weekly plan content over sns](feedback_weekly_plan_content_over_sns.md) — 週次計画のMustは記事公開・SEOに集約。SNS/noteはShould以下に降格
 - [weekly review article status from db](feedback_weekly_review_article_status_from_db.md) — 週次レビューの記事公開判定はarticlesテーブルが真実源。git/backlogだけだと誤判定
 - [station passengers](project_station_passengers.md) — 駅別乗降客数(S12)PR#328マージ済+47連結YouTube(wjLQCiuEeNI)public公開済
-- [publish youtube 47 summary](reference_publish_youtube_47_summary.md) — 47県カウントアップまとめ動画(~22分)スキル /publish-youtube-47-summary
 - [voicevox setup](reference_voicevox_setup.md) — VOICEVOX engine(CPU版)ローカル起動。CLIのみで127.0.0.1:50021
 - [redesign bundle](project_redesign_bundle.md) — Claude Designリデザイン11ページ×4案取込済。/apply-redesign、ranking=D案Phase1完了
 - [affiliate-strategy](affiliate-strategy.md) — 広告の停止・文脈・同一案件重複・連続可視1秒の検証、楽天返礼品分類
