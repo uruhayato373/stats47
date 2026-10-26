@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:39:25.747Z",
+  "updatedAt": "2026-10-26T07:41:33.698Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8801,6 +8801,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:39:25.747Z"
+    },
+    "KAKEI-CLASSIFICATION-INCOME-SHEET-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:41:33.698Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run estat:kakei-classification:test",
+              "npm run estat:kakei-classification:check"
+            ],
+            "pass": true
+          },
+          "evidence": "収入シートは名前が H・I・F 列、例示が L 列。品目名の列の補完と見出し行からの例示列の決定を追加。2020/2025 とも 1収入 11→24・3非消費支出 11→18 で公式 Excel の品目番号行数と一致、消費支出は 0 件変化。テスト 11 pass・検査 指摘 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:41:33.698Z"
     }
   }
 }
