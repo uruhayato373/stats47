@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T06:28:53.999Z",
+  "updatedAt": "2026-10-26T06:30:59.495Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8324,6 +8324,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:28:53.999Z"
+    },
+    "LOCAL-DEPS-STALE-WARN-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T06:30:59.495Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "preflight に Installed Deps gate (skipInCi) を追加。ずらした fixture で警告・揃えば空のテストを追加し、判定を壊すと fail 1。実機の preflight で通過",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T06:30:59.495Z"
     }
   }
 }

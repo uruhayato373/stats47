@@ -314,6 +314,7 @@ updated: 2026-10-19
 - **症状**: `sns-weekly-report.yml` はレポートだけを `git add` し、`.agents/` のミラーのリンクが入らない。W43 (`2df9acbe6`) で整合性検査 E12 が出て品質ゲート run 40251621046 が失敗した (`467802415` で手で直した)。
 - **次**: 書き戻しの前に `node .claude/scripts/lib/sync-codex-mirror.cjs` を実行し、`.agents/skills/sns/sns-weekly-report/reference/reports` も `git add` に入れる。
 - **完了条件**: 手動起動でレポートとリンクが同じコミットに入り、次の品質ゲートで E12 が出ない。
+- **2026-10-26 実装 (develop・main 未反映)**: 書き戻しの前に `sync-codex-mirror.cjs` を実行し、`.agents/` のレポートの置き場も `git add` に入れた。手元の `sync-codex-mirror --check` と整合性検査 (`--no-orphan`) は通る。workflow の変更は main へ反映されるまで動かないので、完了条件 (手動起動でレポートとリンクが同じコミットに入る) は main 反映後の次の起動で確かめる。
 
 ### [CRITIC-PATTERN-YEAR] critic の指摘「年の食い違い」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
@@ -4509,16 +4510,6 @@ Claude Code は CLAUDE.md、Codex は AGENTS.md を読むので、片方だけ�
 - **次**: その commit を作ったセッションの環境を特定する (worktree・クラウド・Codex のどれか、hook が効く設定か)。塞ぎ方は、push 前に `.claude/todo` の差分へ
   docs governance を掛ける pre-push hook か、エージェントの規約での `--no-verify` 禁止の明文化 (現状は一部の skill にしか無い)。
 - **完了条件**: DG057 を含む backlog の変更を push しようとすると push 前に止まることを実測する。または bypass した経路を特定して塞いだ記録がある。
-
-### [LOCAL-DEPS-STALE-WARN-01] 手元の node_modules が lockfile より古いと、手元だけテストが落ちて原因を取り違える
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run preflight] [起票:2026-10-23] [領域:管理]
-
-- **証拠**: 2026-10-21 の Mac で `node_modules/.package-lock.json` (10-13) が `package-lock.json` (10-20・braces を外した更新) より古く、
-  `apps/web/src/__tests__/eslint-dependency-compatibility.test.ts` が手元だけ落ちた (CI は `npm ci` で通る)。`npm install` で揃えると通った。
-  同じ型の食い違いは Windows PC でも記録がある (`@babel/core` 不在で pre-commit の lint が落ちた。このファイル内の環境メモ)。
-- **次**: `npm run preflight` に、`node_modules/.package-lock.json` と `package-lock.json` の依存の版を比べ、食い違えば「npm install が要る」と出す検査を足す
-  (install は自動で走らせない。`.claude/rules/local-environment.md` の install の排他に従う)。
-- **完了条件**: lock を 1 件ずらした fixture で警告が出て、揃っていれば何も出ないテストがある。
 
 ### [METRIC-RELEASE-PATHS-SSOT-01] 指標リリースの対象パスが、デプロイと PR のオーバーレイで別々の正規表現に書かれている
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]

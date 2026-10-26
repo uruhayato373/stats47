@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   COMMIT_GATES,
+  findStaleInstalledDeps,
   PR_GATES,
   REGISTRY_NETWORK_GATES,
   partitionRegistryGates,
@@ -340,4 +341,19 @@ test("commit-static: staged 範囲に縛るのは card-census / ad-placement だ
   const src = fs.readFileSync(PREFLIGHT, "utf8");
   const prGates = src.slice(src.indexOf("const PR_GATES = ["), src.indexOf("const GATES = ["));
   assert.ok(!/stagedWebScoped/.test(prGates), "--pr のゲートまで staged 範囲に縛られている (CI と同じ全体走査を保つ)");
+});
+
+test("node_modules が lockfile と食い違う依存だけを挙げ、揃っていれば何も出さない", () => {
+  const lock = {
+    "": { name: "root" },
+    "node_modules/braces": { version: "3.0.3" },
+    "node_modules/@rolldown/binding-win32-x64-msvc": { version: "1.0.0", optional: true },
+    "node_modules/@stats47/web": { link: true, resolved: "apps/web" },
+    "node_modules/react": { version: "19.1.0", peer: true },
+  };
+  const aligned = { "node_modules/braces": { version: "3.0.3" } };
+  assert.deepEqual(findStaleInstalledDeps(lock, aligned), []);
+  const shifted = { "node_modules/braces": { version: "3.0.2" } };
+  assert.deepEqual(findStaleInstalledDeps(lock, shifted), ["node_modules/braces: 導入 3.0.2 / lock 3.0.3"]);
+  assert.deepEqual(findStaleInstalledDeps(lock, {}), ["node_modules/braces: 未導入 (lock 3.0.3)"]);
 });
