@@ -44,3 +44,11 @@ test('[mutation] baseline引上げと例外追加を拒否する', () => {
   assert.ok(errors.some((error) => error.includes('baseline increased')));
   assert.ok(errors.some((error) => error.includes('exception added')));
 });
+
+test('vitest 設定の拡張子変更 (.ts → .mts) は例外の追加と数えず、件数の増加は止める', () => {
+  const before = { ...sample, type: 'test-exclude', path: 'apps/web/vitest.config.ts', detail: '**/tests/e2e/**' };
+  const renamed = { ...before, path: 'apps/web/vitest.config.mts' };
+  assert.deepEqual(auditRegistryGrowth([renamed], [before]), []);
+  assert.ok(auditRegistryGrowth([{ ...renamed, count: 2 }], [before]).some((error) => error.includes('baseline increased')));
+  assert.ok(auditRegistryGrowth([{ ...renamed, path: 'apps/web/other.config.mts' }], [before]).some((error) => error.includes('exception added')));
+});

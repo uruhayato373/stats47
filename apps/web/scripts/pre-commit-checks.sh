@@ -237,17 +237,18 @@ if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   fi
 fi
 
-# 2.3 ESLint (staged の apps/web TS/TSX) — CI の next lint と同基準で import/order 等を事前に弾く
+# 2.3 ESLint (staged の apps/web TS/TSX) — CI と同じ eslint で import/order 等を事前に弾く
 # 背景: import/order は CI (Code Quality Check) でのみ検出され、ローカルで気付けず CI を1サイクル無駄にしていた
-# (2026-06-23 deploy 時に発生)。staged ファイルだけを next lint にかけて高速に事前検出する。
+# (2026-06-23 deploy 時に発生)。staged ファイルだけを eslint にかけて高速に事前検出する。
+# Next.js 16 で `next lint` が廃止されたので eslint を直接呼ぶ (CI の develop-quality-gate と同じ方式)。
 echo -e "${GREEN}🧹 ESLint (staged ファイル)...${NC}"
 STAGED_WEB_TS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
 if [ -n "$STAGED_WEB_TS" ]; then
-  LINT_ARGS=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/#--file #' | tr '\n' ' ')
-  if ! (cd "$WEB_DIR" && npx next lint $LINT_ARGS > /tmp/precommit-lint.out 2>&1); then
+  LINT_FILES=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/##' | tr '\n' ' ')
+  if ! (cd "$WEB_DIR" && npx eslint $LINT_FILES > /tmp/precommit-lint.out 2>&1); then
     echo -e "${RED}❌ ESLint エラー (import/order 等) が検出されました。${NC}"
-    grep -E "Error:|\.tsx?$" /tmp/precommit-lint.out | head -20
-    echo -e "${YELLOW}💡 自動修正: cd apps/web && npx next lint --fix${NC}"
+    grep -E "error|\.tsx?$" /tmp/precommit-lint.out | head -20
+    echo -e "${YELLOW}💡 自動修正: cd apps/web && npx eslint --fix <ファイル>${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   else
     echo -e "${GREEN}✅ ESLint 成功${NC}"

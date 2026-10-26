@@ -147,7 +147,7 @@ Cloudflare 公式 ([Workers static assets headers](https://developers.cloudflare
 - デプロイ後の確認: `curl -I https://stats47.jp/_next/static/css/<hash>.css` で
   `max-age=31536000, immutable` になり、Chrome の repeat navigation で 304 が消えること。
 
-### 5. `PERF-WORKER-P99-01` — Workersの遅いrouteを特定する
+### 5. `CF-CPU-SURGE-01` — Workersの遅いrouteを特定する (旧 `PERF-WORKER-P99-01` を 2026-10-26 に統合)
 
 1. Cloudflare Dashboard の Workers Observability で過去24時間と7日を読み、route別のhandler duration、CPU、wall time、error、fetch / R2 binding spanを集計する（オーナーの画面共有かCSV）。
 2. 日次 snapshot のrequest・CPU・wall集計と突合する。
@@ -231,7 +231,7 @@ SSOT:
 2. PERF-RANKING-PAYLOAD-01（sidebar削減を先、TopoJSONは別段階）
 3. PERF-AREA-DOM-01
 4. A11Y-AREA-CONTRAST-01
-5. PERF-WORKER-P99-01（Cloudflare read-only調査後、根拠があるrouteだけ修正）
+5. CF-CPU-SURGE-01（Cloudflare read-only調査後、根拠があるrouteだけ修正）
 6. PERF-STATIC-CACHE-01（実装済。public/_headers。Cloudflare Rule は作らない）
 
 各IDごとに、変更前のChrome trace/Network/DOM値を取り、外科的に実装し、対象テスト、type-check、同条件のChrome再計測を行ってください。rankingのベース地図・TileSwitcher・モバイルh1直後の配置は維持してください。画像最適化や広告削除は今回のtraceでLCP改善見込みが0ms、または既存バックログと重複するため追加しないでください。

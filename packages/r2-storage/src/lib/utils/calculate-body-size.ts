@@ -9,12 +9,8 @@ export function calculateBodySize(
 ): number {
   if (typeof body === "string") {
     return Buffer.byteLength(body);
-  } else if (body instanceof Buffer) {
-    return body.length;
-  } else if (body instanceof ArrayBuffer) {
-    return body.byteLength;
-  } else if (body instanceof Uint8Array) {
-    return body.length;
   }
-  return 0;
+  // Buffer・Uint8Array・ArrayBuffer はどれも byteLength を持つ (Buffer の length と同じ値)。
+  // instanceof で分けると、新しい @types/node では Buffer の分岐の後に型が絞り込めず length が型エラーになる。
+  return body.byteLength;
 }

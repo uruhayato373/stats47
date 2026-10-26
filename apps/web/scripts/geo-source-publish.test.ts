@@ -81,7 +81,8 @@ function fixture() {
     mkdirSync(path.dirname(path.join(root, key)), { recursive: true });
     writeFileSync(
       path.join(root, key),
-      Buffer.isBuffer(value) ? value : JSON.stringify(value)
+      // 新しい @types/node では Buffer | object を Buffer に絞り込めないので、判定後に型を明示する
+      Buffer.isBuffer(value) ? (value as Buffer) : JSON.stringify(value)
     );
   };
   return { root, objects, writes, store, write };

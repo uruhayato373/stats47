@@ -356,7 +356,7 @@ Mac の `stats47` 専用プロファイルを `npm run note:session:check` で�
 
 要素検索ヘルパー（`find_idx` / `find_idx_retry`）、実証済みの要素パターン、state 最小化ガイドライン、エラーハンドリングの詳細は **[references/troubleshooting.md](references/troubleshooting.md)** を参照。
 
-**マガジンの所属照合と UI 変化時の調査** (すべて read-only・永続プロファイルを再利用。`NOTE-MAGAZINE-REORG-01`):
+**マガジンの所属照合と UI 変化時の調査** (すべて read-only・永続プロファイルを再利用。`NOTE-CIRCULATION-CTA-01`):
 
 ```bash
 node .claude/scripts/note/fetch-note-magazines.mjs     # note.com の既存マガジン一覧 (カタログ照合用)

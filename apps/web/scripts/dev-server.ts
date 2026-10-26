@@ -75,7 +75,8 @@ async function waitForGateway(url: string, child: ChildProcess): Promise<void> {
  * webpack 固有の挙動を確かめたいときは `WEB_DEV_BUNDLER=webpack` で従来どおり起動する。
  */
 function bundlerArgs(): string[] {
-  return process.env.WEB_DEV_BUNDLER === 'webpack' ? [] : ['--turbopack'];
+  // Next.js 16 から next dev の既定は Turbopack。webpack を使うときだけ明示する。
+  return process.env.WEB_DEV_BUNDLER === 'webpack' ? ['--webpack'] : [];
 }
 
 function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {

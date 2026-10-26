@@ -14,7 +14,7 @@ export function packageProjects(root = ROOT) {
     if (workspace.startsWith('packages/') && !['packages/data-configs', 'packages/r2-storage'].includes(workspace))
       throw new Error(`Add a blocking coverage step before splitting ${workspace}`);
   }
-  const config = fs.readFileSync(path.join(root, 'vitest.config.ts'), 'utf8');
+  const config = fs.readFileSync(path.join(root, 'vitest.config.mts'), 'utf8');
   const projects = [];
   for (const match of config.matchAll(/["'](packages\/[^"']+)\/vitest\.config\.[cm]?ts["']/g)) {
     const workspace = match[1];

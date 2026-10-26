@@ -59,10 +59,6 @@ const nextConfig: NextConfig = {
     // 本番 deploy (CLOUDFLARE_WORKERS=true・env 未設定) と localhost では従来どおり型検査する。
     ignoreBuildErrors: process.env.NEXT_SKIP_BUILD_TYPECHECK === "true",
   },
-  eslint: {
-    // ビルド時にESLintエラーを無視する（警告は表示される）
-    ignoreDuringBuilds: true,
-  },
   images: {
     // Cloudflare Workers では /_next/image の画像最適化が利用不可（404/400）。
     // 全 Image コンポーネントで元画像を直接配信する。
@@ -354,7 +350,7 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // 開発サーバー (scripts/dev-server.ts) は Turbopack、本番ビルドは webpack。上の webpack() は本番 (Workers) 向けの
+  // 開発サーバー (scripts/dev-server.ts) は Turbopack、本番ビルドは webpack (`next build --webpack`。Next.js 16 の既定は Turbopack)。上の webpack() は本番 (Workers) 向けの
   // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Turbopack が起動時に出す
   // 「Webpack is configured while Turbopack is not」の警告はこのため無害 (空の turbopack 設定では消えない)。
 };

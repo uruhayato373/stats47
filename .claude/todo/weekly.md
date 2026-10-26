@@ -3,7 +3,7 @@ title: 今週の計画
 type: weekly-plan
 week: 2026-W43
 date: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-26
 status: active
 tags: []
 ---
@@ -38,7 +38,7 @@ W41 のレビューの「来週への申し送り」16 件と、W42 の計画の
 | 9. robots 584 件の再取得 (10-23) | `GSC-ROBOTS-INDEXED-01` | 定常 (10-23 の確認。gsc-analyst) |
 | 10. テーマ d28 を公開後だけの窓で再観測する | `THEME-EXPANSION-EFFECT-01` | 改善ログ pending (10-24 の W42 レビューで処理) |
 | 11. note カード全量監査の分割 | `NOTE-CARD-REPAIR-01` | 見送り (商品領域は今月の重点外。Must の総量を増やさない) |
-| 12. UI 未読 60 画面と error 3,283 件の分類 | `PAGE-QUALITY-ERROR-BACKLOG-01` | 見送り (サイト領域。同上) |
+| 12. UI 未読 60 画面と error 3,283 件の分類 | `SITEWIDE-DUPLICATE-LINK-RATIO-01` (旧 `PAGE-QUALITY-ERROR-BACKLOG-01` は 2026-10-26 に閉じた) | 見送り (サイト領域。同上) |
 | 13. SNS の週内履歴欠測と EXP-006 の表記 | `SNS-YT-STALE-RECORDS-01` | 見送り (SNS は維持。`[実行:sweep]` なので自動処理が拾える) |
 | 14. KDP・ココナラの再認証 | `AUTH-CREDENTIAL-REGISTER-01` | オーナー作業 (10-17 に KDP・ココナラ・A8・note を再認証し、run 38987311743 attempt 4 で 8 サービスすべて pass。残りは Windows のココナラ資格情報) |
 | 15. 家計 note 施策の観測窓 | `NOTE-KAKEI-REDESIGN-EFFECT-01` | 改善ログ pending (10-24 の W42 レビューで処理) |
@@ -213,7 +213,7 @@ W42 の計画のように無人 triage に任せきりにせず、10-24（土）
 - ~~**`AUTH-CREDENTIAL-REGISTER-01`**: Windows のココナラ資格情報の登録~~ — 2026-10-19 のココナラ撤退で不要 (取得対象から外した)。
 - **`NOTE-PACKS-REPLACE-COCONALA-01`** (2026-10-19 追加): Windows PC で 13 パックの Office 実機確認と、有料 note 版の記事ごとの確認 (価格・境界・添付)。
 - **`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`**: 今週の作業は無い。別日の main schedule で 2 回続けて全取得元が pass になるかを観測する。KDP が `auth_required` に戻ったら本人の Reports 再認証が要る。
-- **`PERF-WORKER-P99-01`**: 10-16 に Observability の Traces で route 別の CPU を見て、`_rsc` が約 72% と出た (`CF-CPU-SURGE-01`)。これを特定結果としてカードを閉じてよいか決めてほしい。
+- **`PERF-WORKER-P99-01`**: 2026-10-26 にオーナー判断で閉じた。route 別の CPU は 10-16 に `_rsc` が約 72% と特定済みで、以後は `CF-CPU-SURGE-01` が持つ。
 - **`R2-STORAGE-01`**: doboku-note-archive の保持方針 (許容か削減か) を決めてほしい。R2 保存は 34.152 GB で無料枠 10 GB の超過が続いている。
 - **`DEPS-RENOVATE-01`**: Renovate の GitHub App のインストール。
 - **`NOTE-FREE-DEFAULT-01`**: 雑学・ランキングの有料記事を閲覧の多い順に数本だけ無料に戻す (note へのログインが必要)。

@@ -30,7 +30,7 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 |---|---|---|
 | 都道府県 `/ranking/<key>` | `app/ranking/<key>/` | **本パイプラインの対象** |
 | 市区町村 `/municipalities/ranking/<key>` | `app/municipalities/ranking/<key>/` | 本パイプラインの対象外。別契約 (下の「市区町村の解説」) |
-| 全国 `/japan/<themeSlug>` | `app/japan/<metric>/series.json` | 対象外 (backlog `JAPAN-COMMENTARY-01`) |
+| 全国 `/japan/<themeSlug>` | `app/japan/<metric>/series.json` | 対象外 (2026-10-26 オーナー判断で作らない。`/japan` の検索需要が出たら起票し直す) |
 
 パイプライン内の「47 件」「7 地方区分」「`prefectureCommentary`」「thin 閾値 40 県」
 「`app/ranking/` パス固定」等 (2026-08-31 棚卸しで約 35 箇所) は**欠陥ではなく、
@@ -264,8 +264,8 @@ quarantine は持たない。
 ### Gemini 無料枠の日次 CI を正典にする
 
 > **2026-10-11 から定期実行を停止中。** 導入 (2026-08-30) から 48 run 中 44 run が preflight の billing / HTTP 402 で止まり、
-> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。キーの project が無料枠で通ることを
-> `AI-CONTENT-GEMINI-KEY-01` で確かめるまで手動起動だけにする。その間の未生成 (2026-10-11 時点で 363 件) は
+> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。2026-10-26 のオーナー判断で Gemini の経路はやめた
+> (workflow は手動起動だけ残す)。未生成 (2026-10-11 時点で 363 件) は
 > 次節の headless `claude -p` 経路で、量と時期を週次・月次計画で決めて消化する。
 
 `ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (上の停止中を除く)。既定 3 件、並列数 1、

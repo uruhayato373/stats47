@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T06:36:16.524Z",
+  "updatedAt": "2026-10-26T07:47:45.378Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8496,6 +8496,479 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:00:17.579Z"
+    },
+    "DOCS-RELATED-BACKLOG-HEADING-CHECK-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:24:24.361Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "DG042 をカード見出し・improvements の ID 列だけで判定。本文言及のみの fixture で落ち見出しで通るテスト (戻すと fail 1)。null は warning。plan 48 を ESTAT-CATALOG-SSDS-DERIVE-01 へ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:24:24.361Z"
+    },
+    "USE-SERVER-EXPORT-LINT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:26:20.042Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx eslint (apps/web の use server 18 本)",
+              "npx eslint probe.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "apps/web/eslint.config.mjs に no-restricted-syntax を追加。use server の再export・値・非async関数・export{}を止める。既存 18 本は違反 0、注入した型の再export と export{} が各 1 回 error。develop-quality-gate と pre-commit の eslint で走る。export interface は型宣言で消えるため許す",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:26:20.042Z"
+    },
+    "UNPUSHED-COMMIT-STOP-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:28:18.716Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-unpushed-on-stop.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "Stop hook check-unpushed-on-stop.js を追加し settings.json に登録。自分の author・セッション開始後・upstream より先の commit で同じ HEAD につき 1 回 block、push 後・他人・開始前は黙るテスト 3 件 (絞り込みを外すと fail 1)。この会話の記録で実行し未push 5 件を検出",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:28:18.716Z"
+    },
+    "METRIC-RELEASE-PATHS-SSOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:30:41.172Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict"
+            ],
+            "pass": true
+          },
+          "evidence": ".github/scripts/metric-release-paths.mjs に種類ごとの定義と返さない理由。deploy-workers の inline script と r2-overlay-server が import。city-databook を消すと両側のテスト計 3 件が落ちる",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:30:41.172Z"
+    },
+    "TAXONOMY-USAGE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:32:36.569Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -rl kakei-classification",
+              "grep -rl constants/regions"
+            ],
+            "pass": true
+          },
+          "evidence": "『消費/地域タクソノミー』という名の物は無く、家計調査の収支項目分類と地方区分 REGIONS と推定。前者は pr-quality-check の estat:kakei-classification:check の正本 (estat-api.md)、後者は 31 ファイル (/areas・compare・地域比較) が参照。どちらも使用中で整理対象なし",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:32:36.569Z"
+    },
+    "BLOG-SCATTER-LABELS-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.643Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --root packages/svg-builder"
+            ],
+            "pass": true
+          },
+          "evidence": "機能は 10-09 から scatter.ts の labelPoints→labelNames に実装済みでテストだけ欠けていた。指定県だけに名前が出る・指定なしは出力不変・重なり回避のテスト 5 件を追加 (ラベル処理を外すと 3 件 fail)。svg-builder 107 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.643Z"
+    },
+    "BLOG-SEOTITLE-MIXED-YEAR-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.734Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "title-year-lint.mjs を quality-gate に warning で配線。公開 609+outbox 11 本で 13 件該当 (意図的な比較を含む) のため blocker 化はオーナー判断。テスト 9 pass、条件を外すと 2 fail",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.734Z"
+    },
+    "BLOG-METRIC-NAME-GATE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:37:07.818Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "metric-name-lint.mjs (上位語の呼び名・最低年を基準年にする比較) を quality-gate に warning で配線。コーパス 0 件 (誤検知 8 件を規則で除外しテストで固定)。各検出を外すと fail",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:37:07.818Z"
+    },
+    "GITIGNORE-AUDIT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:39:25.747Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git ls-files -ci --exclude-standard",
+              "node .claude/scripts/lib/check-datasets.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "追跡側を点検: ignore と追跡の食い違い 13 件は data/affiliate/.gitignore に履歴として残すと明記 (意図どおり)。不要な出力 2 本 (type-check-output.txt・auto-brushup-skipped.log) を外した。utils/dist は project reference が要求し外すと ranking 型検査が TS6305 で落ちるため残し UTILS-DIST-PROJECT-REFERENCE-01 へ。秘密らしい 2 本は読む許可が無く TRACKED-SECRET-FILE-",
+          "failReason": null,
+          "followUps": [
+            "UTILS-DIST-PROJECT-REFERENCE-01",
+            "TRACKED-SECRET-FILE-CHECK-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:39:25.747Z"
+    },
+    "KAKEI-CLASSIFICATION-INCOME-SHEET-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:41:33.698Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run estat:kakei-classification:test",
+              "npm run estat:kakei-classification:check"
+            ],
+            "pass": true
+          },
+          "evidence": "収入シートは名前が H・I・F 列、例示が L 列。品目名の列の補完と見出し行からの例示列の決定を追加。2020/2025 とも 1収入 11→24・3非消費支出 11→18 で公式 Excel の品目番号行数と一致、消費支出は 0 件変化。テスト 11 pass・検査 指摘 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:41:33.698Z"
+    },
+    "AGENT-WRITER-CRITIC-HANDOFF-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:42:29.337Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check"
+            ],
+            "pass": true
+          },
+          "evidence": "critic の起動者を呼び元に一本化。article-writer Phase 6-2 を『本 agent は起動しない・呼び元が blog-critic を起動・Status は critic 待ち』に変更。skill 側 (brushup-blog 5・write-prepared-article・publish-geo-portfolio 2・draft-from-trend) は既に呼び元起動で一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:42:29.337Z"
+    },
+    "NEXT-SUPPORT-WINDOW-GUARD-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:47:45.259Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-next-support-window.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "check-next-support-window.cjs (OpenNext の NEXT_RELEASE_DATES を読む) を weekly:audits の ci-health と registry に配線。終了日を手前にした fixture で警告・余裕のある fixture で残り日数だけ。6 pass、60 日判定を外すと 2 fail。現 develop は Next 15.5.28 で期限 10-21 を過ぎ警告",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:47:45.259Z"
+    },
+    "PACK-SNAPSHOT-SKIP-GUARD-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:47:45.319Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --root packages/product-factory tests/pack-snapshot-setup.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "飛ばした理由を data / fetch に分け、fetch 失敗は書く前に止める。fixture で fetch 失敗が止まり data だけなら通るテスト 4 pass (全部 data 扱いにすると 2 fail)。実データの 53 件は全て data 理由",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:47:45.319Z"
+    },
+    "DEPS-OVERRIDES-DRIFT-GATE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:47:45.378Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-dependency-overrides.test.cjs",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "check-dependency-overrides.cjs (next/react の単一版・override が全 workspace の範囲を満たす・lock の版が override を満たす)。7ae184cb8 の fixture で落ち現 develop で通る 5 pass。registry (pull_request) と pr-quality-check に配線、preflight:pr 通過",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:47:45.378Z"
     }
   }
 }

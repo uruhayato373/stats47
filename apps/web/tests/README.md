@@ -12,7 +12,7 @@ npm run test:run      # 1回実行
 npm run test:coverage # カバレッジ付き実行
 ```
 
-- 設定: `vitest.config.ts`
+- 設定: `vitest.config.mts`
 - テストファイル: `src/**/*.test.ts(x)`, `src/**/__tests__/**`
 - CI: PRは変更範囲の通常テスト、週次`quality-suite-weekly.yml`は全体coverage
 
@@ -20,7 +20,7 @@ npm run test:coverage # カバレッジ付き実行
 
 カバレッジは「目標 100%」ではなく **「下げない floor（回帰防止線）」** で運用します。
 
-- **単一ソース**: `apps/web/coverage-thresholds.json`（lines/statements/functions/branches）。`vitest.config.ts` がこれを読んで enforce（未達で `test:coverage` が exit 1）する。週次CIはcoverage成果物を保存する。**閾値を他の場所にハードコードしない**（過去に CI と vitest で 100/10 に分裂した反省）。
+- **単一ソース**: `apps/web/coverage-thresholds.json`（lines/statements/functions/branches）。`vitest.config.mts` がこれを読んで enforce（未達で `test:coverage` が exit 1）する。週次CIはcoverage成果物を保存する。**閾値を他の場所にハードコードしない**（過去に CI と vitest で 100/10 に分裂した反省）。
 - **分母はロジック層のみ**: `src/app` は `page` / `layout` / `route` / OGP / sitemap 等の結線ファイルだけを除外し、同階層の再利用ロジックは coverage 対象にする。`src/middleware.ts`・`src/providers`・`src/store` の結線は E2E 担当。
 - **重要module floor**: `.claude/config/critical-module-coverage.json` がroute metadataを含む重要契約のmodule別lines / branches / functionsを保持し、PRで個別にenforceする。
 - **floor の bump**: floor は自動追随しない。カバレッジが十分上がったら、四半期または大型 PR の節目に `coverage-thresholds.json` を手動で引き上げる（放置すると形骸化する）。緑=十分ではなく「floor を割っていない」だけ。

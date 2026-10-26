@@ -1,6 +1,9 @@
+import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { defineConfig } from "vitest/config";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * apps/admin の unit + route integration テスト設定。

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 
-import criticalCoverage from '../../.claude/config/critical-module-coverage.json';
+import criticalCoverage from '../../.claude/config/critical-module-coverage.json' with { type: 'json' };
 
 const criticalThresholds = Object.fromEntries(
   criticalCoverage.modules
