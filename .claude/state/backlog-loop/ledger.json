@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:24:24.361Z",
+  "updatedAt": "2026-10-26T07:26:20.042Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8530,6 +8530,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:24:24.361Z"
+    },
+    "USE-SERVER-EXPORT-LINT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:26:20.042Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx eslint (apps/web の use server 18 本)",
+              "npx eslint probe.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "apps/web/eslint.config.mjs に no-restricted-syntax を追加。use server の再export・値・非async関数・export{}を止める。既存 18 本は違反 0、注入した型の再export と export{} が各 1 回 error。develop-quality-gate と pre-commit の eslint で走る。export interface は型宣言で消えるため許す",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:26:20.042Z"
     }
   }
 }

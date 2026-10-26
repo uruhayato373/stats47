@@ -248,6 +248,28 @@ reactHooksPlugin.configs.flat.recommended, {
     ],
   },
 }, {
+  // "use server" のファイルは async 関数だけを export する (Next.js のサーバーアクションの規則)。
+  // 型の再 export (`export type { … } from`) で Turbopack の開発サーバーがテーマ詳細を 500 にした (2026-10-21・USE-SERVER-EXPORT-LINT-01)。
+  // `export interface` / `export type X =` の宣言はコンパイル時に消えるので許す (再 export と値の export だけを止める)。
+  files: ["**/*.ts", "**/*.tsx"],
+  rules: {
+    "no-restricted-syntax": [
+      "error",
+      ...[
+        "ExportNamedDeclaration[source]",
+        "ExportAllDeclaration",
+        "ExportNamedDeclaration[declaration=null]:not([source])",
+        "ExportNamedDeclaration > VariableDeclaration",
+        "ExportNamedDeclaration > ClassDeclaration",
+        "ExportNamedDeclaration > FunctionDeclaration[async=false]",
+        "ExportDefaultDeclaration:not(:has(> FunctionDeclaration[async=true]))",
+      ].map((selector) => ({
+        selector: `Program:has(> ExpressionStatement[directive='use server']) > ${selector}`,
+        message: '"use server" のファイルは async 関数だけを export する。型や値は別ファイルへ移す (USE-SERVER-EXPORT-LINT-01)',
+      })),
+    ],
+  },
+}, {
   files: ["**/__mocks__/**", "**/__debug__/**", "**/scripts/**"],
   rules: {
     "no-console": "off", // モックファイル、デバッグファイル、スクリプトではconsole.*を許可
