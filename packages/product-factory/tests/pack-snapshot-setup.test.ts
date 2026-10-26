@@ -16,6 +16,8 @@ const REGISTRY: Record<string, Record<string, unknown>> = {
   "no-full-year": { unit: "人", category: "population", title: "47 県がそろわない指標" },
   "all-null": { unit: "人", category: "population", title: "全県 null の指標" },
   "flaky-key": { unit: "人", category: "population", title: "取得に失敗する指標" },
+  // 取得は成功するが、商品ラベルの検証 (出典変更の要確認) で落ちる実在のキー
+  "agricultural-output": { unit: "億円", category: "agriculture", title: "農業産出額" },
 };
 
 function values(value: number | null): FetchedValues["values"] {
@@ -51,6 +53,13 @@ function run(dir: string, rankingKeys: string[], logs: string[] = []) {
 }
 
 describe("パックの固定データの前処理", () => {
+  it("取得後の検証 (出典変更の要確認など) で落ちた指標は取得の失敗に数えず、データの理由として飛ばす", async () => {
+    const dir = tempDir();
+    const logs: string[] = [];
+    await expect(run(dir, ["ok-key", "agricultural-output"], logs)).resolves.not.toThrow();
+    expect(existsSync(join(dir, "P-99.json"))).toBe(true);
+  });
+
   it("取得の失敗が 1 件でもあれば止まり、欠けた固定データを書かない", async () => {
     const dir = tempDir();
     await expect(run(dir, ["ok-key", "flaky-key", "no-full-year"])).rejects.toBeInstanceOf(PackSnapshotFetchError);

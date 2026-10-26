@@ -81,8 +81,17 @@ async function fetchOne(
 ): Promise<FetchOutcome> {
   const cfg = registry[key];
   if (!cfg) return { key, ok: false, reason: "registry 未登録", kind: "data" };
+  // 取得 (fetchValues) の失敗だけを fetch とする。取得後の検証 (出典変更の要確認・公式定義の未確認など) は
+  // データ側の事情なので data。まとめて 1 つの catch で受けると、パックの無い新しい環境で前処理が止まる
+  // (2026-10-26 に worktree で実測: agricultural-output・per-taxpayer-taxable-income)。
+  let fetched: FetchedValues;
   try {
-    const fetched = await fetchValues(key);
+    fetched = await fetchValues(key);
+  } catch (e) {
+    const reason = e instanceof Error ? e.message : String(e);
+    return { key, ok: false, reason, kind: e instanceof MissingFullYearError ? "data" : "fetch" };
+  }
+  try {
     const nonNull = fetched.values.filter((v) => v.value !== null).length;
     if (nonNull === 0) return { key, ok: false, reason: "全県 null", kind: "data" };
     const unit = fetched.unit || String(cfg.unit ?? "");
@@ -98,7 +107,7 @@ async function fetchOne(
     return { key, ok: true, indicator };
   } catch (e) {
     const reason = e instanceof Error ? e.message : String(e);
-    return { key, ok: false, reason, kind: e instanceof MissingFullYearError ? "data" : "fetch" };
+    return { key, ok: false, reason, kind: "data" };
   }
 }
 
