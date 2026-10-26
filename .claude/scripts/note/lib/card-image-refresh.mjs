@@ -1,6 +1,12 @@
 import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 import { SITE_ORIGIN } from '../../lib/site-config.cjs';
+import { readLinkCardLedger } from '../../ogp/lib/link-card-ledger.mjs';
+
+export function readApprovedCardImageRefresh(file) {
+  const rollout = readLinkCardLedger(file);
+  return rollout.siteMetadataVerification ? createCardImageRefresh(rollout) : null;
+}
 
 const cleanUrl = (value) => { const url = new URL(value); url.search = ''; url.hash = ''; return url.href; };
 const escapeAttribute = (value) => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll("'", '&#39;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');

@@ -41,6 +41,30 @@ function ids() {
   return () => `00000000-0000-4000-8000-${String(++count).padStart(12, "0")}`;
 }
 
+test("an existing versioned magazine or site card is not appended again", () => {
+  const original = applyNavigationFooter('<p>本文</p>', plan, { idFactory: ids() }).body;
+  const versioned = original.replaceAll(plan.magazineUrl, `${plan.magazineUrl}?s47_ogp=abcdef012345`)
+    .replaceAll(plan.siteUrl, `${plan.siteUrl}?s47_ogp=abcdef012345`);
+  const result = applyNavigationFooter(versioned, plan, { idFactory: ids() });
+  assert.equal(result.changed, false);
+  assert.equal(result.body, versioned);
+});
+
+test("an unrelated query does not count as the canonical footer destination", () => {
+  const body = externalCard(`${plan.siteUrl}?different=1`, '別ページ', '', ids());
+  const result = applyNavigationFooter(body, { siteUrl: plan.siteUrl }, { idFactory: ids() });
+  assert.equal(result.addedSite, true);
+});
+
+test("obsolete cards can be repaired after image URL versioning", () => {
+  const body = externalCard(`${plan.siteUrl}?s47_ogp=abcdef012345`, '旧カード', '', ids());
+  const result = applyPublishedLinkRepairs(body, [{ mode: 'replace-card', fromUrl: plan.siteUrl,
+    toUrl: 'https://stats47.jp/themes/climate', linkText: '気候' }]);
+  assert.equal(result.changed, true);
+  assert.doesNotMatch(result.body, /annual-sunshine-duration|s47_ogp/);
+  assert.match(result.body, /themes\/climate/);
+});
+
 test("clean note URL accepts a query-free HTTPS card URL", () => {
   assert.equal(
     assertCleanCardUrl("https://note.com/stats47/n/n023501038bd5", "note.com"),

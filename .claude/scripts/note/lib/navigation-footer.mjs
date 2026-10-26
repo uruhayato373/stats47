@@ -113,7 +113,13 @@ export function externalCard(url, title, description, idFactory) {
 }
 
 function hasUrl(body, url) {
-  return body.includes(`data-src="${url}"`) || body.includes(`href="${url}"`);
+  return [...body.matchAll(/\b(?:data-src|href)="([^"]*)"/g)].some((match) => {
+    try {
+      const candidate = new URL(match[1].replaceAll('&amp;', '&'));
+      candidate.searchParams.delete('s47_ogp');
+      return candidate.href === url;
+    } catch { return false; }
+  });
 }
 
 function escapeRegExp(value) {
@@ -121,7 +127,7 @@ function escapeRegExp(value) {
 }
 
 function figureByDataSrcPattern(url) {
-  return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
+  return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}(?:\\?s47_ogp=[a-f0-9]{12})?"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
 }
 
 /**

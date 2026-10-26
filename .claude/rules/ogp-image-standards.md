@@ -76,6 +76,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 - 判定: 全件の生成・配信SHAと文字サイズ、各種別/最長見出しの原寸・220×150・150正方形の目視結果を区別して記録する。
   サイトの共通テンプレート変更は代表と例外を目視し、機械の全件照合を人の全件目視と呼ばない。
 - noteの既存カード画像: 全画像の公開SHA照合と本番metadata検証後に `repair-note-cards-native.mjs --refresh-external-images --all --commit`。noteは同じURLの再登録でも旧OGPを返す（2026-10-26実測）。所有する外部カードのURLに画像版`s47_ogp`を付け、取得画像を採用版と照合してから登録キーを差し替える。本文の文章・リンク先ページ・既存UTM・価格・有料境界・タグ・下書きを保持する。台帳の`siteMetadataVerification`には実配信HTML検査のversion/passed/failedを記録し、未検証や不一致では停止する。台帳は `note-card-image-refresh.json`、再開状態は `.local/note-card-image-refresh-journal.json`。
+- 通常の回遊フッター更新も同じ検証済み画像版を適用・照合する。重複判定では`s47_ogp`だけを除外し、他のquery/hashを同一視しない。未配信の画像版を先に記事へ書き込まない。
 
 ## 1. 画像資産カタログ (全種別)
 
