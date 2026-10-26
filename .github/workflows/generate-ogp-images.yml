@@ -127,7 +127,7 @@ jobs:
             if [ "$EXTERNAL_ONLY" = "true" ]; then
               npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/refresh-blog-ogp.ts "${FLAGS[@]}"
             else
-              npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
+              npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
             fi
           else
             FLAGS=(--type "$TYPE" "${FLAGS[@]}")

@@ -30,11 +30,11 @@ function addImage(item,file,original,extra={}) {
   if(prior)Object.assign(prior,row);else images.push(row);
   return row;
 }
-async function manifest(item,key,expected,collection) {
+async function manifest(item,key,expected,collection,entityId=item.key) {
   const rows=expected.map(e=>addImage(item,e.key,publicRef(e.key),{usage:e.usage,templateId:e.templateId,collection}));
   try {
     const bytes=await get(key),m=JSON.parse(bytes);
-    if(m.kind!=='stats47-image-generation'||m.entityId!==item.key||!Array.isArray(m.assets))throw Error('manifest contract');
+    if(m.kind!=='stats47-image-generation'||m.entityId!==entityId||!Array.isArray(m.assets))throw Error('manifest contract');
     const prefix=key.slice(0,key.lastIndexOf('/')+1),entityRoot=prefix.replace(/ogp\/$/,'');
     if(m.assets.some(a=>!safeName(a.key)||!a.key.startsWith(entityRoot)||!/^[a-f0-9]{64}$/.test(a.sha256)||!Number.isSafeInteger(a.bytes)||a.bytes<1))throw Error('asset contract');
     const inputFiles=[refFile('generation-manifest.json',publicRef(key,bytes),'generation','preserved-manifest')];
@@ -96,12 +96,12 @@ await Promise.all(Array.from({length:8},async()=>{while(queue.length){
     await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'ranking-ogp');
     await manifest(item,base+'/thumbnail.json',['light','dark'].map(v=>({key:base+'/thumbnail-'+v+'.webp',usage:'card',templateId:'link-card'})),'ranking-card');item.indexComplete=true;
   }else if(page.kind==='area'){
-    const base='app/areas/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'pref-silhouette'}],'areas-ogp');item.indexComplete=true;
+    const base='app/areas/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'areas-ogp');item.indexComplete=true;
   }else if(page.kind==='product'){
     const base='app/products/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'product-ogp');item.indexComplete=true;
   }else{
     const base=page.kind==='category'?'app/default/stats47':'app/themes/'+item.key;
-    await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],page.kind+'-ogp');item.indexComplete=true;
+    await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],page.kind+'-ogp',page.kind==='category'?'stats47':item.key);item.indexComplete=true;
   }
   done++;if(done%100===0)console.log(JSON.stringify({pages:done,total:targets.length,images:images.length}));
 }}));

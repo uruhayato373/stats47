@@ -27260,7 +27260,11 @@
     "source": "https://stats47.jp/sitemap.xml",
     "sitemapPages": 8510,
     "eligiblePages": 3214,
-    "complete": true
+    "complete": true,
+    "sharedConsumers": [
+      "市区町村は所属県のOGPを共用",
+      "カテゴリ比較・一覧・その他のroot metadata継承ページはdefault OGPを共用"
+    ]
   },
   "updatedAt": "2026-10-26T09:15:49.056Z",
   "sitePreflight": {
@@ -27284,6 +27288,12 @@
       "primary title size",
       "no text overlap"
     ],
-    "scope": "All titles mechanically checked; representative and short-headline edge images visually inspected. Not a claim of every image being human reviewed."
+    "scope": "All titles mechanically checked; representative and short-headline edge images visually inspected. Not a claim of every image being human reviewed.",
+    "allTextContainerGeometry": {
+      "checkedAt": "2026-10-26T10:18:07.795Z",
+      "checked": 3068,
+      "kind": "Satori text-container bounds; representative fixed year footer for rankings",
+      "failures": []
+    }
   }
 }
