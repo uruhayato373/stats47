@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:41:33.698Z",
+  "updatedAt": "2026-10-26T07:42:29.337Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8835,6 +8835,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:41:33.698Z"
+    },
+    "AGENT-WRITER-CRITIC-HANDOFF-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:42:29.337Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check"
+            ],
+            "pass": true
+          },
+          "evidence": "critic の起動者を呼び元に一本化。article-writer Phase 6-2 を『本 agent は起動しない・呼び元が blog-critic を起動・Status は critic 待ち』に変更。skill 側 (brushup-blog 5・write-prepared-article・publish-geo-portfolio 2・draft-from-trend) は既に呼び元起動で一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:42:29.337Z"
     }
   }
 }
