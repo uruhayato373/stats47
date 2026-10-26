@@ -1058,10 +1058,6 @@
       ],
       "consumers": [
         {
-          "pageId": "municipality-ranking:fire-affected-persons-count",
-          "kind": "municipality-ranking"
-        },
-        {
           "pageId": "ranking:fire-affected-persons-count",
           "kind": "ranking"
         }
@@ -1095,10 +1091,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "municipality-ranking:fire-damage-amount",
-          "kind": "municipality-ranking"
-        },
         {
           "pageId": "ranking:fire-damage-amount",
           "kind": "ranking"

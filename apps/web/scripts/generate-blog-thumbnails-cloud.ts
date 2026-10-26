@@ -30,6 +30,7 @@ import {
 import {
   computeAiBackgroundCacheFingerprint,
   createAiBackgroundCache,
+  BlogImageBlockedError,
   readPublishedBackgroundState,
   resolveCachedAiBackground,
   type AiBackgroundCache,
@@ -390,152 +391,74 @@ async function main(): Promise<void> {
       `inspector=${inspector.mode}`
   );
 
-  const prepared = await pMap(
-    slugs,
-    async (slug): Promise<PreparedBlogImage> => {
-      const response = await fetchRequired(
-        `${PUBLIC_URL}/app/blog/${slug}/article.md`
-      );
-      const markdown = await response.text();
-      const derived = deriveOgpFromFrontmatter(parseFrontmatter(markdown));
-      if (!derived)
-        throw new Error(`${slug}: article frontmatter title がありません`);
-      const data: BlogImageData = {
-        title: derived.title,
-        subtitle: derived.subtitle ?? null,
-      };
-      const visual = resolveOgpVisual({
-        ...parseOgpVisualFrontmatter(markdown),
-        ...(options.visualTypeOverride
-          ? { ogpVisualType: options.visualTypeOverride }
-          : {}),
-      });
-      const articleSource = await resolveArticleBackgroundSource(
-        PROJECT_ROOT,
-        parseBlogArticleImageContext(slug, markdown)
-      );
-      const legacyCodexSource = await resolveCodexBackgroundSource(
-        PROJECT_ROOT,
-        slug
-      );
-      const codexSource = articleSource ?? legacyCodexSource;
-      const ai: AiDescriptor = codexSource
-        ? {
-            prompt: codexSource.prompt,
-            promptHash: codexSource.promptHash,
-            legacyPromptHash: null,
-            model: codexSource.model,
-            promptVersion: codexSource.promptVersion,
-            visualType: visual.visualType,
-            motif: codexSource.motif,
-          }
-        : {
-            prompt: buildOgpPrompt({ ...visual, title: data.title }),
-            promptHash: computePromptHash({ ...visual, title: data.title }),
-            legacyPromptHash: computeLegacyPromptHashV1({
-              ...visual,
-              title: data.title,
-            }),
-            model: OGP_MODEL,
-            promptVersion: OGP_PROMPT_VERSION,
-            visualType: visual.visualType,
-            motif: visual.motif,
-          };
-      if (codexSource) {
-        const background: ResolvedAiBackground = {
-          location: 'codex',
-          cacheFingerprint: null,
-          metadata: makeAiMetadata(ai, codexSource.sha256),
-          buffer: codexSource.buffer,
-        };
-        const plan = createBlogImagePlan({
-          slug,
-          data,
-          background: {
-            source: 'ai',
-            promptHash: background.metadata.promptHash,
-            sha256: background.metadata.sha256,
-          },
-          rendererHash: baseRendererHash,
-        });
-        const status = await inspector.inspect(plan);
-        if (status.reason === 'probe-error') {
-          throw new Error(`${slug}: R2 freshness probe に失敗しました`);
+  const prepareBlogImage = async (slug: string): Promise<PreparedBlogImage> => {
+    const response = await fetchRequired(
+      `${PUBLIC_URL}/app/blog/${slug}/article.md`
+    );
+    const markdown = await response.text();
+    const derived = deriveOgpFromFrontmatter(parseFrontmatter(markdown));
+    if (!derived)
+      throw new BlogImageBlockedError(`${slug}: article frontmatter title がありません`);
+    const data: BlogImageData = {
+      title: derived.title,
+      subtitle: derived.subtitle ?? null,
+    };
+    const visual = resolveOgpVisual({
+      ...parseOgpVisualFrontmatter(markdown),
+      ...(options.visualTypeOverride
+        ? { ogpVisualType: options.visualTypeOverride }
+        : {}),
+    });
+    const articleSource = await resolveArticleBackgroundSource(
+      PROJECT_ROOT,
+      parseBlogArticleImageContext(slug, markdown)
+    );
+    const legacyCodexSource = await resolveCodexBackgroundSource(
+      PROJECT_ROOT,
+      slug
+    );
+    const codexSource = articleSource ?? legacyCodexSource;
+    const ai: AiDescriptor = codexSource
+      ? {
+          prompt: codexSource.prompt,
+          promptHash: codexSource.promptHash,
+          legacyPromptHash: null,
+          model: codexSource.model,
+          promptVersion: codexSource.promptVersion,
+          visualType: visual.visualType,
+          motif: codexSource.motif,
         }
-        return {
-          slug,
-          data,
-          ai,
-          plan,
-          status,
-          background,
-          needsAiGeneration: false,
+      : {
+          prompt: buildOgpPrompt({ ...visual, title: data.title }),
+          promptHash: computePromptHash({ ...visual, title: data.title }),
+          legacyPromptHash: computeLegacyPromptHashV1({
+            ...visual,
+            title: data.title,
+          }),
+          model: OGP_MODEL,
+          promptVersion: OGP_PROMPT_VERSION,
+          visualType: visual.visualType,
+          motif: visual.motif,
         };
-      }
-      if (!store) {
-        throw new Error(`${slug}: 既存AI背景のR2検証資格情報がありません`);
-      }
-      const cacheFingerprint = computeAiBackgroundCacheFingerprint({
-        prompt: ai.prompt,
-        promptHash: ai.promptHash,
-        model: ai.model,
-        promptVersion: ai.promptVersion,
-        normalizerHash,
-      });
-      const published = await readPublishedBackgroundState({
-        store,
+    if (codexSource) {
+      const background: ResolvedAiBackground = {
+        location: 'codex',
+        cacheFingerprint: null,
+        metadata: makeAiMetadata(ai, codexSource.sha256),
+        buffer: codexSource.buffer,
+      };
+      const plan = createBlogImagePlan({
         slug,
-        descriptor: ai,
+        data,
+        background: {
+          source: 'ai',
+          promptHash: background.metadata.promptHash,
+          sha256: background.metadata.sha256,
+        },
+        rendererHash: baseRendererHash,
       });
-      const remoteWasAi = published.source === 'ai';
-      const publishedReusable = published.reusable;
-      const cached =
-        !publishedReusable && (options.aiBackground || remoteWasAi)
-          ? await backgroundCache.read(cacheFingerprint)
-          : null;
-      const reusableSha = publishedReusable?.sha256 ?? cached?.sha256 ?? null;
-      const reusableLocation = publishedReusable
-        ? 'published'
-        : cached
-          ? 'cache'
-          : null;
-
-      if (!options.aiBackground && remoteWasAi && !reusableSha) {
-        throw new Error(
-          `${slug}: AI背景のpromptまたは画像が陳腐化しています。` +
-            '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください ' +
-            '(npm run blog-images:codex -- request-article --slug <slug>)'
-        );
-      }
-      const needsAiGeneration = options.aiBackground && !reusableSha;
-      const background: ResolvedAiBackground | null =
-        reusableSha && reusableLocation
-          ? {
-              location: reusableLocation,
-              cacheFingerprint,
-              metadata: makeAiMetadata(ai, reusableSha),
-            }
-          : null;
-      if (!background && !needsAiGeneration) {
-        throw new Error(
-          `${slug}: 記事固有背景がありません。` +
-            'blog-images:codex request-article で生成してください'
-        );
-      }
-      const plan = needsAiGeneration
-        ? null
-        : createBlogImagePlan({
-            slug,
-            data,
-            background: {
-              source: 'ai',
-              promptHash: background!.metadata.promptHash,
-              sha256: background!.metadata.sha256,
-            },
-            rendererHash: baseRendererHash,
-          });
-      const status = plan ? await inspector.inspect(plan) : null;
-      if (status?.reason === 'probe-error') {
+      const status = await inspector.inspect(plan);
+      if (status.reason === 'probe-error') {
         throw new Error(`${slug}: R2 freshness probe に失敗しました`);
       }
       return {
@@ -545,10 +468,108 @@ async function main(): Promise<void> {
         plan,
         status,
         background,
-        needsAiGeneration,
+        needsAiGeneration: false,
       };
     }
+    if (!store) {
+      throw new Error(`${slug}: 既存AI背景のR2検証資格情報がありません`);
+    }
+    const cacheFingerprint = computeAiBackgroundCacheFingerprint({
+      prompt: ai.prompt,
+      promptHash: ai.promptHash,
+      model: ai.model,
+      promptVersion: ai.promptVersion,
+      normalizerHash,
+    });
+    const published = await readPublishedBackgroundState({
+      store,
+      slug,
+      descriptor: ai,
+    });
+    const remoteWasAi = published.source === 'ai';
+    const publishedReusable = published.reusable;
+    const cached =
+      !publishedReusable && (options.aiBackground || remoteWasAi)
+        ? await backgroundCache.read(cacheFingerprint)
+        : null;
+    const reusableSha = publishedReusable?.sha256 ?? cached?.sha256 ?? null;
+    const reusableLocation = publishedReusable
+      ? 'published'
+      : cached
+        ? 'cache'
+        : null;
+
+    if (!options.aiBackground && remoteWasAi && !reusableSha) {
+      throw new BlogImageBlockedError(
+        `${slug}: AI背景のpromptまたは画像が陳腐化しています。` +
+          '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください ' +
+          '(npm run blog-images:codex -- request-article --slug <slug>)'
+      );
+    }
+    const needsAiGeneration = options.aiBackground && !reusableSha;
+    const background: ResolvedAiBackground | null =
+      reusableSha && reusableLocation
+        ? {
+            location: reusableLocation,
+            cacheFingerprint,
+            metadata: makeAiMetadata(ai, reusableSha),
+          }
+        : null;
+    if (!background && !needsAiGeneration) {
+      throw new BlogImageBlockedError(
+        `${slug}: 記事固有背景がありません。` +
+          'blog-images:codex request-article で生成してください'
+      );
+    }
+    const plan = needsAiGeneration
+      ? null
+      : createBlogImagePlan({
+          slug,
+          data,
+          background: {
+            source: 'ai',
+            promptHash: background!.metadata.promptHash,
+            sha256: background!.metadata.sha256,
+          },
+          rendererHash: baseRendererHash,
+        });
+    const status = plan ? await inspector.inspect(plan) : null;
+    if (status?.reason === 'probe-error') {
+      throw new Error(`${slug}: R2 freshness probe に失敗しました`);
+    }
+    return {
+      slug,
+      data,
+      ai,
+      plan,
+      status,
+      background,
+      needsAiGeneration,
+    };
+  };
+  // 1 記事だけの契約不一致はその記事を保留にして他の記事を続ける。通信・R2 の検査・資格情報の失敗は全体を止める
+  const settled = await pMap(slugs, async (slug) => {
+    try {
+      return await prepareBlogImage(slug);
+    } catch (error) {
+      if (error instanceof BlogImageBlockedError) return { slug, blocked: error.message };
+      throw error;
+    }
+  });
+  const blocked = settled.filter(
+    (item): item is { slug: string; blocked: string } => 'blocked' in item
   );
+  const prepared = settled.filter(
+    (item): item is PreparedBlogImage => !('blocked' in item)
+  );
+  if (blocked.length > 0) {
+    console.log(`blog画像の保留 (記事ごとの契約不一致): ${blocked.length}件`);
+    for (const item of blocked) console.log(`  [blocked] ${item.blocked}`);
+  }
+  // 記事を指定した実行 (公開時など) は、指定した記事を作れないなら黙って飛ばさずに止める
+  if (options.slugs && blocked.length > 0) {
+    throw new Error(`指定した記事の画像を作れません: ${blocked.map((item) => item.slug).join(', ')}`);
+  }
 
   const changed = prepared.filter(
     (item) => item.needsAiGeneration || options.force || !item.status?.isCurrent
@@ -563,7 +584,7 @@ async function main(): Promise<void> {
         `  [${item.needsAiGeneration ? 'ai-background-required' : (item.status?.reason ?? 'changed')}] ${item.slug}`
       );
     }
-    if (options.audit && changed.length > 0) process.exitCode = 1;
+    if (options.audit && (changed.length > 0 || blocked.length > 0)) process.exitCode = 1;
     return;
   }
 

@@ -8,7 +8,8 @@
  *   1. `ogp-image-audit-weekly` が pull せずに push していたため、develop が 1 コミットでも
  *      進んでいると `! [rejected] (fetch first)` で毎回落ちた (2 週連続で inventory が commit されず)。
  *      同じ穴が **11 workflow** にあった。
- *   2. `blog-remediation-daily` が 3 つのラチェットを commit step より前に置き、全 queue を
+ *   2. ラチェットを持つ workflow が 3 つのラチェットを commit step より前に置き、全 queue を (2026-10-26 までの
+ *      blog-remediation-daily。今は週次レビューの weekly-audits/blog-remediation.sh が同じ順で持つ)
  *      一括 add していたため、**provenance ラチェット 1 つが赤いだけで是正キューと outbox prune まで
  *      17 日間 commit されなかった** (日次ループが実質停止し、ブログ是正が 2 週連続 0 本になった)。
  *

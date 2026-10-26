@@ -283,7 +283,7 @@ test('明示schedule契約は実workflowのUTC日次/週次cronと一致する',
   }
 });
 
-// スクショ検査 (page-quality-audit-weekly) と週次フル検査は、既定の 2 回連続では 2 週間黙る。
+// 週次フル検査 (スクショ検査を含む) は、既定の 2 回連続では 2 週間黙る。
 test('週次契約の workflow は 1 回の失敗 (長時間の cancelled を含む) で unhealthy になる', () => {
   const nowMs = Date.parse('2026-09-27T00:00:00Z');
   const timedOut = run({
@@ -292,7 +292,7 @@ test('週次契約の workflow は 1 回の失敗 (長時間の cancelled を含
     runStartedAt: '2026-09-26T18:00:00Z',
     updatedAt: '2026-09-26T18:46:00Z',
   });
-  const weekly = evaluateWorkflow('page-quality-audit-weekly.yml', [timedOut], { nowMs, minStreak: 2 });
+  const weekly = evaluateWorkflow('quality-suite-weekly.yml', [timedOut], { nowMs, minStreak: 2 });
   assert.equal(weekly.failureStreak, 1);
   assert.equal(weekly.unhealthy, true);
   // 契約の無い workflow は従来どおり 2 回連続まで鳴らさない
@@ -300,10 +300,10 @@ test('週次契約の workflow は 1 回の失敗 (長時間の cancelled を含
 });
 
 test('週次契約の workflow が予定枠から猶予を過ぎても起動していなければ unhealthy', () => {
-  const lastWeek = run({ createdAt: '2026-10-30T22:31:00Z', updatedAt: '2026-10-30T23:20:00Z' });
-  // 次の枠 (11/06 22:30) + 猶予 6 時間より前は健全
+  const lastWeek = run({ createdAt: '2026-10-30T16:01:00Z', updatedAt: '2026-10-30T19:20:00Z' });
+  // 次の枠 (11/06 16:00 UTC = 土曜 01:00 JST) + 猶予 6 時間より前は健全
   assert.equal(
-    evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-11-07T04:00:00Z') }).unhealthy,
+    evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-11-06T21:00:00Z') }).unhealthy,
     false,
   );
   const missed = evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-11-08T00:00:00Z') });
@@ -346,42 +346,15 @@ test('実在の workflow で scheduled 判定が妥当な件数になる', async
   // ★ai-content / blog の日次生成ループは 2026-08-21 に削除した。列挙は readdirSync なので
   //   監視対象は自動で追従するが、この allowlist だけは実在する cron に差し替える。
   //   backlog-loop は 2026-09-27 に日次 cron をやめた (手動起動のみ)。
-  for (const known of ['fetch-metrics-weekly.yml', 'blog-remediation-daily.yml', 'sync-rakuten-catalog.yml']) {
+  for (const known of ['fetch-metrics-weekly.yml', 'cloudflare-usage-daily.yml', 'sync-rakuten-catalog.yml']) {
     assert.ok(scheduled.includes(known), `${known} が scheduled から漏れている`);
   }
 });
 
 // ── workflow の配線 ──────────────────────────────────────────────────────────
 
-// core とテストがあっても workflow から呼ばれていなければ 1 度も走らない。
-// (今回の事故の一般形: 「作ったが配線していない」)
-test('日次 workflow が両方の監査を呼び、片方でも赤なら Issue を立てる', async () => {
-  const fs = await import('node:fs');
-  const path = await import('node:path');
-  const { fileURLToPath } = await import('node:url');
-  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
-  const source = fs.readFileSync(path.join(root, '.github/workflows/workflow-health-daily.yml'), 'utf8');
-
-  assert.match(source, /audit-workflow-health\.mjs/, 'cron 監査を呼んでいない');
-  assert.match(source, /audit-r2-freshness\.mjs/, '鮮度監査を呼んでいない');
-  assert.match(
-    source,
-    /gh run list --workflow affiliate-ga4-weekly\.yml --event schedule --status success/,
-    '手動backfillのartifactが週次運用の成功を偽装する',
-  );
-  // どちらか一方でも異常なら Issue (&& にすると片方の異常を見逃す)
-  assert.match(
-    source,
-    /healthy != 'true' \|\| steps\.freshness\.outputs\.fresh != 'true'/,
-    'Issue の条件が OR でない = 片方の異常を見逃す',
-  );
-  // 復旧 close は両方 healthy のときだけ (|| にすると異常が残っていても閉じる)
-  assert.match(
-    source,
-    /healthy == 'true' && steps\.freshness\.outputs\.fresh == 'true'/,
-    'close の条件が AND でない = 異常が残っていても Issue を閉じる',
-  );
-});
+// 監査の配線 (cron・鮮度・アフィリエイト・認証付き計測のどれかが異常なら失敗) は、2026-10-26 に週次レビューへ移した
+// 台本 ci-health.sh の振る舞いテスト (.claude/scripts/management/__tests__/weekly-audits.test.mjs) が持つ。
 
 test('R2鮮度監査がaffiliate GA4 latestを公開read pathから監視する', async () => {
   const { WATCHED } = await import('../../ci/audit-r2-freshness.mjs');

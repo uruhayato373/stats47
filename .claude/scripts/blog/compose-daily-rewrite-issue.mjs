@@ -81,6 +81,6 @@ lines.push(
     "[.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md](../blob/develop/.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md)_",
 );
 lines.push("");
-lines.push("_Auto-generated daily by `.github/workflows/blog-remediation-daily.yml`_");
+lines.push("_週次レビューの `npm run weekly:audits` (blog-remediation) が出力_");
 
 process.stdout.write(lines.join("\n") + "\n");

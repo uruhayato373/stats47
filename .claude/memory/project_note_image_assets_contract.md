@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-2026-09-29 に `docs/31_note記事原稿/` の画像・データ管理を整理した。正典は `.claude/rules/note-image-assets.md`、検査は `npm run note:images:audit`(pre-commit・PR・quality-gates `note-image-assets`・週次 `note-circulation-audit-weekly`、週次は `--verify-r2` 付き)。
+2026-09-29 に `docs/31_note記事原稿/` の画像・データ管理を整理した。正典は `.claude/rules/note-image-assets.md`、検査は `npm run note:images:audit`(pre-commit・PR・quality-gates `note-image-assets`・週次レビューの `weekly:audits` (note-circulation)、週次は `--verify-r2` 付き)。
 
 **2026-10-02: カバーの正本と画像台帳を統一。**
 

@@ -60,7 +60,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 | brushup 履歴 (wave_id) | `data/blog/auto-brushup-history.json` | done シード + dedup |
 | wave 人間向け (effect) | `.claude/todo/improvements.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
 | 品質基準 (正典) | `.claude/rules/blog-quality-standards.md` | article-writer・blog-critic・quality-gate |
-| 内部リンク実在の live 監査 | `data/blog/internal-link-audit.json` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れは `link-alert` Issue + オフライン分は audit-published-blog 経由でキューにも流れる |
+| 内部リンク実在の live 監査 | `data/blog/internal-link-audit.json` (週次レビューの `npm run weekly:audits` の internal-links) | 土曜の週次レビュー。壊れはレビュー本文の課題 + オフライン分は audit-published-blog 経由でキューにも流れる |
 
 ## キューのスコアリング (統合スコア + must-fix レーン)
 
@@ -95,7 +95,7 @@ lane = blockers>0 ? "must-fix" : staleData あり ? "data-refresh" : expectedLif
 
 CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間が **Claude Pro セッション**で agent に回させる運用。
 
-- **毎朝 JST08:00**: `blog-remediation-daily.yml` (cron) が ① キューを最新化 (公開R2 audit + 最新GSC) して
+- **毎週土曜**: 週次レビューの `npm run weekly:audits` (blog-remediation。2026-10-26 までは毎朝の `blog-remediation-daily.yml`) が ① キューを最新化 (公開R2 audit + 最新GSC) して
   develop へ commit-back ② **contents/blog (ephemeral outbox) を自動掃除** (`prune-published-outbox.mjs --apply`:
   「published:true かつ R2 の article.md と内容完全一致」の公開済みドラフトを git rm。広い `git add` で出戻りした残骸も翌日自動消去。
   published:false の作業中ドラフトは保持。内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置) ③ pending 上位 10 件を GitHub Actions の **Workflow Summary** に出す。

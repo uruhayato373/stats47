@@ -9,9 +9,8 @@ name: 🧮 Enumerate SSDS Indicators (weekly)
 # 「データを取得するか」とは独立に「どんな指標が存在するか」を安く俯瞰するための発見カタログで、
 # ranking-expander 等の候補選定インプットになる (実データ投入は data-ingester に委譲)。
 
+# 定期実行は 2026-10-26 に週次レビューの npm run weekly:audits (estat-ssds) へ移した。手動とクラウドからの起動だけ残す。
 on:
-  schedule:
-    - cron: "30 20 * * 5" # 金 20:30 UTC = 土 05:30 JST (estat-year-coverage-audit 20:00 の後)
   workflow_dispatch:
   push:
     branches: [estat-ssds-run] # cloud 環境で dispatch 不可のときの代替トリガー (branch-workflow.md)

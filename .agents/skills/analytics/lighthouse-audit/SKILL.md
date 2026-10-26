@@ -17,7 +17,7 @@ stats47.jp の各ページの Core Web Vitals を計測し、`data/psi/` に蓄�
 > **2026-06-21 PSI 統合**。旧版は Lighthouse CLI（`packages/database/scripts/lighthouse-check.ts`）で計測し
 > `performance-improvement/snapshots/*/metrics.csv` に蓄積していたが、当該スクリプトは完全DBレス移行で削除され、
 > その CSV を書く writer が無くなっていた。CWV 監視は **PSI 日次ワークフロー**（`.claude/scripts/psi/*` +
-> `data/psi/` + `psi-audit-daily.yml`）に一本化済（Lighthouse Lab data は廃止）。本スキルは
+> `data/psi/` + `fetch-metrics-weekly.yml` の psi job）に一本化済（Lighthouse Lab data は廃止）。本スキルは
 > その PSI ツールを手動実行する薄いラッパー。計測対象 URL は `config/psi-urls.txt`（19 URL × mobile/desktop）。
 
 ## 計測対象
@@ -41,7 +41,7 @@ npm run psi-audit:check                 # = node .claude/scripts/psi/psi-thresho
 #    レポート出力: npm run psi-audit:check -- --output /tmp/psi-report.md
 ```
 
-CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch → digest → check の順で自動実行し、
+CI（`.github/workflows/fetch-metrics-weekly.yml` の psi job、毎週土曜 00:00 JST）は上記を fetch → digest → check の順で自動実行し、
 閾値違反時に `[PSI Alert]`（`psi-alert,auto-generated`）Issue を起票する。手動計測は本スキルで同じ流れを回す。
 
 ## バジェット閾値（`budgets.json`）
@@ -73,7 +73,7 @@ CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch �
 
 ## 推奨実行頻度
 
-- **日次**: CI（`psi-audit-daily.yml`）が自動実行。手動は不要。
+- **週次**: CI（`fetch-metrics-weekly.yml` の psi job）が毎週土曜に自動実行。手動は不要。
 - **デプロイ後**: `npm run fetch-psi-audit -- --strategy mobile` でリグレッション確認。
 - **月次**: `/performance-report` でトレンド分析。
 
@@ -84,5 +84,5 @@ CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch �
 - `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値（SSOT）
 - `data/psi/{LATEST.md,history.csv}` — 蓄積データ
 - `.claude/skills/analytics/performance-report/SKILL.md` — トレンド総合レポート
-- `.github/workflows/psi-audit-daily.yml` — 日次自動計測
+- `.github/workflows/fetch-metrics-weekly.yml` の psi job — 週次自動計測
 - PageSpeed Insights API: https://developers.google.com/speed/docs/insights/v5/get-started

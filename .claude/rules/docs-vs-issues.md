@@ -75,25 +75,23 @@ skill、agent、prompt、READMEへ複製しない。
 
 ### GitHub Issues に置くもの
 
+週次レビューへ移した監査 (サイト内リンク・出典・ランキング整合・CI の健全性・文書の整合・調査分類・note・ブログ是正) は
+2026-10-26 から Issue を作らない。`npm run weekly:audits` の結果をレビュー本文の「課題・ブロッカー」とバックログカードに書く。
+
 | データ | ラベル | 起票方法 |
 |---|---|---|
 | 機能改修・実装タスク (PR で close される) | `enhancement` | 人間が `gh issue create` |
 | バグ修正 | `bug` | 人間が `gh issue create` |
 | Cloudflare 日次 usage 閾値違反 | `cloudflare-alert,auto-generated` | `.github/workflows/cloudflare-usage-daily.yml` |
-| PSI 日次計測の閾値違反 | `psi-alert,auto-generated` | `.github/workflows/psi-audit-daily.yml` |
-| OGP/カード/note 画像の生成漏れ (自動修復後も残存) | `ogp-alert,auto-generated` | `.github/workflows/ogp-image-audit-weekly.yml` |
-| サイト内リンクのリンク切れ (soft 404 / 410 含む。ブログ本文 + ページ側コンポーネント生成リンク) | `link-alert,auto-generated` | `.github/workflows/internal-link-audit-weekly.yml` |
-| 文書の鮮度超過・構造ドリフト | `auto-generated` | `.github/workflows/agent-consistency-weekly.yml` |
-| **連続失敗している cron + 配信データの陳腐化 (横断)** | `ci-health-alert,auto-generated` | `.github/workflows/workflow-health-daily.yml` |
+| PSI 週次計測の閾値違反 | `psi-alert,auto-generated` | `.github/workflows/fetch-metrics-weekly.yml` の psi job |
+| OGP/カード/note 画像の生成漏れ (自動修復後も残存) | `ogp-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の ogp-images job |
 | 楽天カタログ同期の失敗 | `rakuten-alert,auto-generated` | `.github/workflows/sync-rakuten-catalog.yml` |
-| ランキングデータ整合性の異常 | `ranking-alert,auto-generated` | `.github/workflows/ranking-integrity-audit-weekly.yml` |
-| 出典・再現性 lint の error | `provenance-alert,auto-generated` | `.github/workflows/provenance-audit-weekly.yml` |
-| テーマチャートの e-Stat 取得失敗 | `theme-alert,auto-generated` | `.github/workflows/theme-chart-audit-weekly.yml` |
+| テーマチャートの e-Stat 取得失敗 | `theme-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の theme job |
 | e-Stat → R2 更新の失敗 | `data-refresh-alert,auto-generated` | `.github/workflows/data-refresh.yml` |
 | 相関 snapshot 再計算の失敗 | `correlation-alert,auto-generated` | `.github/workflows/correlation-refresh.yml` |
 | GSC カバレッジ是正キューの異常 | `coverage-alert,auto-generated` | `.github/workflows/fetch-metrics-weekly.yml` |
-| ページ肥大化・重複・速度の週次監査でerror違反 | `page-quality-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
-| ページ UI の週次確認 (新しく出た UI 違反 + スクショを見た agent の指摘。直すものはバックログへカード化) | `ui-review-alert,auto-generated` | `.github/workflows/page-quality-audit-weekly.yml` |
+| ページ肥大化・重複・速度の週次監査でerror違反 | `page-quality-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の page-quality job |
+| ページ UI の週次確認 (新しく出た UI 違反 + スクショを見た agent の指摘。直すものはバックログへカード化) | `ui-review-alert,auto-generated` | `.github/workflows/quality-suite-weekly.yml` の page-quality job |
 | 予約中の SNS 投稿画像の週次確認 (機械検査 + 画像を見た agent の指摘) | `sns-review-alert,auto-generated` | Mac の launchd `scripts/scheduled/sns-image-review.sh` (X / Threads の画像がこの Mac にしか無いため CI ではない) |
 | GSC週次レビュー・候補判断・次週計画の接続異常 | `gsc-cycle-alert,auto-generated` | `.github/workflows/gsc-operations-cycle-weekly.yml` |
 | 週次・月次レビューと計画の期限切れ・必須見出しの欠落・申し送りの行き先なし (振り返りの段の停止) | `review-cadence-alert,auto-generated` | `.github/workflows/review-cadence-guard.yml` |
@@ -206,10 +204,10 @@ updated: 2026-MM-DD
 | Claude Stop hook | `.claude/hooks/check-docs-on-stop.js` | 文書差分があるturnの終了前に構造・リンクerrorを差し戻す |
 | pre-commit | `apps/web/scripts/pre-commit-checks.sh` | 文書関連差分があるcommitを事前検査 |
 | PR | `pr-quality-check.yml` | 決定的な構造回帰を拒否 |
-| 週次 | `agent-consistency-weekly.yml` | 鮮度warningを含めて検査し、異常時だけalert |
+| 週次 | 週次レビューの `npm run weekly:audits` (consistency) | 鮮度warningを含めて検査し、異常はレビュー本文の課題へ |
 
 機械契約の変更は`.claude/config/docs-governance.json`、checker、テスト、本規則を同じ差分で更新する。
-CIのwarningはPRを止めないが、週次検査では`--fail-on-warn`により通知対象とする。
+CIのwarningはPRを止めないが、週次検査では`--fail-on-warn`により要対応とする。
 
 ## rules の読み込み条件 (常時読み込み量の上限・2026-09-08)
 

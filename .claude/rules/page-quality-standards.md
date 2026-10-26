@@ -4,13 +4,13 @@ paths:
   - ".claude/skills/analytics/performance-improvement/page-quality-budgets.json"
   - "apps/admin/app/quality/page-audit/**"
   - "apps/admin/lib/server/page-quality.ts"
-  - ".github/workflows/page-quality-audit-weekly.yml"
+  - ".github/workflows/quality-suite-weekly.yml"
 ---
 
 # ページ品質監査 (肥大化・重複・速度) 規約
 
 ページのHTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常・console/pageエラー・
-モバイル横スクロールを継続的に検出する仕組み。**既存の日次PSI (`psi-audit-daily.yml`) ・Cloudflare監視とは
+モバイル横スクロールを継続的に検出する仕組み。**既存の週次PSI (`fetch-metrics-weekly.yml` の psi job) ・Cloudflare監視とは
 別系統で、両者は変更・削除しない** (PSIはLighthouseスコア/CWV専任、本仕組みは静的解析+DOM/リンク/広告/構造化データ専任)。
 
 ## 2段階の検査
@@ -25,7 +25,7 @@ paths:
    fixture に差し替えて決定的にできたときだけ。
 2. **週次 (全件)**: `npm run page-quality:audit-weekly` が `sitemap.xml` から公開対象URLを列挙し
    (独自URL SSOTは持たない)、本番へ直接アクセスして並列数を制限しながら静的解析を行う。
-   `page-quality-audit-weekly.yml` が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
+   `quality-suite-weekly.yml` の page-quality job が `--concurrency 12 --skip-rsc --browser-representative` で実行し、
    error違反があれば `page-quality-alert,auto-generated` ラベルでIssueを起票する。
    - **全URL (静的)**: 上記の肥大化・重複に加え、画像切れ (`broken_images`)・空の見出し (`empty_headings`)・
      「データ出典」見出しの重複 (`duplicate_data_source_sections`)・新しいタブで開かない外部リンク
@@ -93,7 +93,7 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
    agent の確認が走らなかった週と、巡回でそのページを確認しなかった週 (`ui-review-latest.json` の `reviewedPages` に
    無いページ) は、agent の指摘を「消えた」と扱わない。
 
-同期が失敗したら job を赤にする (握りつぶすと黙って止まる)。`workflow-health-daily` は本 workflow を
+同期が失敗したら job を赤にする (握りつぶすと黙って止まる)。週次レビューの CI の健全性 (`weekly:audits` の ci-health) は本 workflow を
 週次契約 (1 回の失敗・予定枠の未起動で通知) で見ている。手動カードが担当する指摘は `owner` + `card` で持ち、
 そのカードが開いている間は起票しない。配線 (週次が同期して commit・ループがキューを commit) は
 `__tests__/ui-findings.test.mjs` が固定する。

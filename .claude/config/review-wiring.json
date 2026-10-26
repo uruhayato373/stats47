@@ -79,6 +79,10 @@
           "run": "bash .claude/scripts/metrics/refresh-measurement-cycle.sh"
         },
         {
+          "label": "週次監査 (旧 CI の週次監査 11 本)",
+          "run": "npm run weekly:audits"
+        },
+        {
           "label": "今週の計画",
           "read": ".claude/todo/weekly.md"
         },

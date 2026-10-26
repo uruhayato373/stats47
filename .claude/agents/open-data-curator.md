@@ -37,7 +37,7 @@ No prose before/after. No section headers.
   `source-processing.mjs` の `extract` / `md-check` / `crop` / `stage` / `stage-status`、Markdown 文字起こし・図の意味付け・
   crop spec は本 agent。正典 `.claude/rules/reference-source-standards.md` §3。書籍本文・画像を Git / 公開 R2 へ出さない。
 - **provenance 監査オーナー** (2026-07-19〜): データ出典・再現性の全量棚卸し (`/audit-provenance`) の実行と、
-  クラス B/C/D (出典薄・手動抽出・出典不明) の是正。週次 cron (`provenance-audit-weekly.yml`) が起票した Issue を消化。
+  クラス B/C/D (出典薄・手動抽出・出典不明) の是正。週次レビューの `npm run weekly:audits` (provenance) の結果を消化する (2026-10-26 から Issue は作らない)。
   fetcher コードから出典を復元し config に backfill、`validate:config` の `[provenance]`/`[provenance-thin]`/`[calc-ref]`
   を error 0 に。正典 `.claude/rules/data-provenance-standards.md`。意味判断 (出典が真に正しいか) は本 agent、機械分類は
   `.claude/scripts/provenance/audit-provenance-queue.ts`。

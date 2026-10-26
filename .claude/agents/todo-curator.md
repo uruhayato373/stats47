@@ -33,7 +33,7 @@ model: sonnet
 
 ## 担当外 (委譲する・触らない)
 
-- **カードの行削除** → 行わない。削除は gate 証拠付きの `backlog-loop` (CI) の専権
+- **カードの行削除** → 行わない。削除は gate 証拠付きの `backlog-loop` (CI) と、完了の証拠が本文にあるカードを消す週次レビュー (`/weekly-review`) が行う
   (`verify-backlog-run.mjs` が ledger の `gate.pass=true` と突合する)。curator は削除**提案**まで
 - **`improvements.md` の一切の変更** → `improvement-triage` の排他 write。改善系 (effect 判定を
   伴う施策) を見つけたら、起票せず「improvement-triage へ回す」と出力する

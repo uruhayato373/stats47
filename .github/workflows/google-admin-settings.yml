@@ -2,15 +2,14 @@ name: 🛠️ Google Admin settings (audit / plan / apply)
 
 # GA4 Admin API / GSC / AdSense を API で監査し、承認付きで GA4 custom dimension を作成する。
 # 正典: .claude/scripts/google-admin/README.md。
-# - schedule は read-only audit だけ (mutation job を構造的に作らない)。
+# - 定期実行はしない (2026-10-26 に外した)。結果を Step Summary にしか残さず、同じ API 監査を土曜の週次レビューの
+#   計測 state の作り直し (refresh-measurement-cycle.sh) が実行するため。手動の audit / plan / apply は残す。
 # - plan は read-only (計画と plan token を出す)。
 # - apply だけが protected Environment google-admin-production を使い、custom dimension を 1 件作成する。
 # - PR trigger なし。screenshot / storageState / Cookie を artifact に含めない (sanitized JSON のみ)。
 # - repo / R2 / GitHub Secrets へ書かない (permissions: contents: read)。
 
 on:
-  schedule:
-    - cron: "0 20 * * 5" # 金 20:00 UTC = 土 05:00 JST (土曜の週次レビューの前)。audit のみ
   workflow_dispatch:
     inputs:
       mode:

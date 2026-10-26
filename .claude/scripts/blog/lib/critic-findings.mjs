@@ -7,7 +7,7 @@
  *
  * 型の語彙としきい値の正本: `.claude/config/critic-finding-types.json`
  * 記録: record-critic-findings.mjs (critic が review.md を書いた直後 + 公開時の outbox 掃除の直前)
- * 集計と起票: critic-findings-digest.mjs (日次の blog-remediation-daily)
+ * 集計と起票: critic-findings-digest.mjs (週次レビューの weekly:audits の blog-remediation)
  */
 
 import { createHash } from "node:crypto";

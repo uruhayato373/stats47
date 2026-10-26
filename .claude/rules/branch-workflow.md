@@ -159,7 +159,7 @@ maintenance debt 1 件が origin/develop に入ったまま残っており (comm
   その形。1 job 3 分の予算は壁時計の話で、並列 job なら push は詰まらない)。develop への push が
   詰まると `--no-verify` を誘発し、ゲートを足した意味が消える。
 - cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない (実測: 23 本中 22 本)。
-  例外は `gsc-url-inspection-daily.yml` の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
+  例外は `fetch-metrics-weekly.yml` の url-inspection job の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
 - **`paths-ignore` で state を除外しない。** 実測すると 3 ゲートはいずれも
   `.claude/state` を読まない (maintenance-debt は `state` を EXCLUDED に持ち、env-registry の
   roots にも無く、eslint は `apps/web/src` のみ) ので、**除外しても今は安全**。

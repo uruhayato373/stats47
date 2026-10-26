@@ -101,7 +101,7 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   「snapshot が stale (r2-drift)」と混同して sync や公開を要求しない (実例: population-projection)。
 - **焼き込み層** (R2 live): `audit-survey-linkage.ts --compare-r2 [--sample N]` が active 全 item の
   live item.json `surveyIds` を git 導出と item 単位で突合 + 調査集合 (all.json vs git-active) を照合。
-  週次 workflow (`survey-taxonomy-audit-weekly.yml` → `run-survey-portfolio-audit.sh` の step 2) と
+  週次レビューの `npm run weekly:audits` (survey-taxonomy → `run-survey-portfolio-audit.sh` の step 2) と
   ポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
   入れない)。初回全件実測 2026-07-14: active 2,159 件 一致 100%・欠落 0・調査集合一致。
 - **横断層**: `audit-survey-taxonomy.ts` が ranking / ThemeCatalog 全 chart / 公開 blog 全 SVG を
@@ -189,7 +189,7 @@ NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-sn
 - 監査スクリプト: `packages/ranking/src/scripts/audit-survey-linkage.ts`
 - 横断 core / 監査: `packages/ranking/src/survey/survey-taxonomy.ts` /
   `packages/ranking/src/scripts/audit-survey-taxonomy.ts`
-- 週次自動化: `.github/workflows/survey-taxonomy-audit-weekly.yml`
+- 週次の実行: `.claude/scripts/management/weekly-audits/survey-taxonomy.sh` (週次レビューの `npm run weekly:audits`。2026-10-26 に CI から移した)
 - 導出実装: `packages/ranking/src/builders/build-ranking-item-from-metric.ts` (`resolveSurveyLinkage`) /
   `packages/data-configs/src/provenance/resolve-metric-provenance.ts`
 - バケット: `packages/ranking/src/exporters/survey-bucketing.ts`

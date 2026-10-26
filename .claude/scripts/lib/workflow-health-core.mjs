@@ -34,14 +34,9 @@ export const DEFAULT_MIN_STREAK = 2;
 //   2026-09-19 のページ品質監査 (スクショ検査) は時間切れで cancelled になり、2026-09-20 の週次フル検査は
 //   Issue 化ステップごと落ちたが、どちらも連続 1 回で止まっていて誰にも知らされなかった。
 export const SCHEDULE_CONTRACTS = Object.freeze({
-  "page-quality-audit-weekly.yml": Object.freeze({
-    firstExpectedAt: "2026-10-30T18:00:00Z",
-    intervalHours: 168,
-    graceHours: 6,
-    minStreak: 1,
-  }),
+  // 2026-10-26 にページ品質監査 (旧 page-quality-audit-weekly.yml) を job として取り込み、土曜 01:00 JST へ移した
   "quality-suite-weekly.yml": Object.freeze({
-    firstExpectedAt: "2026-10-30T22:30:00Z",
+    firstExpectedAt: "2026-10-30T16:00:00Z",
     intervalHours: 168,
     graceHours: 6,
     minStreak: 1,

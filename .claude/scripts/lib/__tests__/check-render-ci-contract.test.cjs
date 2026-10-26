@@ -10,7 +10,7 @@ const { auditContracts, auditGoldenAcceptances } = require('../check-render-ci-c
 const ROOT = path.resolve(__dirname, '../../../..');
 const pr = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-quality-check.yml'), 'utf8');
 const scheduled = fs.readFileSync(
-  path.join(ROOT, '.github/workflows/visualization-render-weekly.yml'),
+  path.join(ROOT, '.github/workflows/quality-suite-weekly.yml'),
   'utf8',
 );
 

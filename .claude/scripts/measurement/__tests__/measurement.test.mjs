@@ -328,17 +328,8 @@ test('KDP auth recovery requires human Reports login instead of re-exporting sta
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
-test('independent health and alert run even if an earlier artifact download failed', () => {
-  const workflow = yaml.load(readFileSync('.github/workflows/workflow-health-daily.yml', 'utf8'));
-  const steps = workflow.jobs.audit.steps;
-  assert.equal(steps.find(s=>s.id==='authenticated').if, 'always()');
-  const alert = steps.find(s=>s.name?.includes('連続失敗を Issue'));
-  assert.match(alert.if, /^always\(\) &&/);
-  for (const id of ['audit', 'freshness', 'affiliate_portfolio', 'authenticated']) {
-    assert.match(alert.if, new RegExp(`steps\\.${id}\\.outputs\\.\\w+ != 'true'`));
-  }
-  assert.match(alert.run, /if \[ -f \/tmp\/authenticated-health.txt \]/);
-});
+// 成果物の取得に失敗しても認証付き計測の検査が走ることは、2026-10-26 に週次レビューへ移した台本 ci-health.sh の
+// 振る舞いテスト (.claude/scripts/management/__tests__/weekly-audits.test.mjs) が持つ。
 
 // ログインは週 1 回 (土曜 07:00) この Mac だけが持ち、CI へは渡さない (2026-10-20 オーナー判断。CI の認証付き計測は撤去)。
 test('the weekly Mac job logs in locally and collects on the Mac without handing sessions to CI', () => {

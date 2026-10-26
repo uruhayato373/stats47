@@ -11,7 +11,7 @@ originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 
 ## 設計（Phase 8）
 
-- **完全自動化**: GitHub Actions `gsc-url-inspection-daily.yml` が毎朝 JST 06:00 に実行
+- **完全自動化**: GitHub Actions `fetch-metrics-weekly.yml` の url-inspection job が毎週土曜 00:00 JST に実行
 - **対象 URL**: 1,500 件（API quota 2,000/day の 75%）
   - GSC pages.csv 全件 + 主要静的ページ + 47 都道府県 + KNOWN_RANKING_KEYS + GONE_RANKING_KEYS + KNOWN_TAG_KEYS（重複排除順）
 - **集計**: URL Inspection の coverageState を内部カテゴリ ID にマッピングして件数集計

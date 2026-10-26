@@ -269,7 +269,7 @@ test("起票したカードはバックログのパーサーで ID・sweep 実�
 test("週次監査が同期と起票を行い、週次と backlog-loop の両方がキューを commit する", async () => {
   const { readFileSync } = await import("node:fs");
   const root = new URL("../../../../", import.meta.url);
-  const weekly = readFileSync(new URL(".github/workflows/page-quality-audit-weekly.yml", root), "utf8");
+  const weekly = readFileSync(new URL(".github/workflows/quality-suite-weekly.yml", root), "utf8"); // 2026-10-26 から page-quality job
   assert.match(weekly, /ui-findings\.ts "\$\{ARGS\[@\]\}"/);
   assert.match(weekly, /ARGS=\(--sync /);
   assert.match(weekly, /--main-deployed-at/);

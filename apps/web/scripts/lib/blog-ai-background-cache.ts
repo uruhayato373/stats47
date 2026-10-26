@@ -428,6 +428,18 @@ function backgroundRecord(value: Record<string, unknown>) {
 }
 
 /**
+ * 1 記事だけの画像契約の不一致 (manifest・背景の SHA・metadata が食い違う)。通信や資格情報の失敗とは違い、
+ * その記事を直すまで画像を作れないだけなので、週次の自己修復はこの記事を保留して他の記事の生成を続ける。
+ * 2026-08-01〜10-24 は 1 記事 (aging-rate-akita-vs-okinawa) の不一致でブログ全件の自己修復が止まっていた。
+ */
+export class BlogImageBlockedError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'BlogImageBlockedError';
+  }
+}
+
+/**
  * 公開custom domainのHEAD metadataに依存せず、S3 GETが返すbody/metadata/ETagだけで
  * committed manifestと既存AI背景の再利用可否を検証する。
  */
@@ -446,7 +458,7 @@ export async function readPublishedBackgroundState(options: {
     const common = parseJsonObject(keys.manifest, commonObject, true);
     background = backgroundRecord(common);
     if (!background) {
-      throw new Error(`${options.slug}: 共通manifestにbackgroundがありません`);
+      throw new BlogImageBlockedError(`${options.slug}: 共通manifestにbackgroundがありません`);
     }
     source = 'common';
     const assets = Array.isArray(common.assets) ? common.assets : [];
@@ -475,14 +487,14 @@ export async function readPublishedBackgroundState(options: {
       background.source !== 'brand' &&
       background.source !== 'shared'
     ) {
-      throw new Error(
+      throw new BlogImageBlockedError(
         `${options.slug}: 共通manifestのbackground sourceが不正です`
       );
     }
     return { source: 'brand', reusable: null };
   }
   if (typeof background.promptHash !== 'string') {
-    throw new Error(`${options.slug}: AI背景のpromptHashがありません`);
+    throw new BlogImageBlockedError(`${options.slug}: AI背景のpromptHashがありません`);
   }
   if (
     source === 'common' &&
@@ -490,7 +502,7 @@ export async function readPublishedBackgroundState(options: {
       !SHA_PATTERN.test(background.sha256) ||
       backgroundAssetSha !== background.sha256)
   ) {
-    throw new Error(
+    throw new BlogImageBlockedError(
       `${options.slug}: AI背景SHAが共通manifestのasset契約と一致しません`
     );
   }
@@ -503,7 +515,7 @@ export async function readPublishedBackgroundState(options: {
 
   const object = await options.store.get(keys.background);
   if (!object) {
-    throw new Error(`${options.slug}: R2 AI背景画像がありません`);
+    throw new BlogImageBlockedError(`${options.slug}: R2 AI背景画像がありません`);
   }
   const digest = sha256(object.body);
   const declaredSha =
@@ -522,7 +534,7 @@ export async function readPublishedBackgroundState(options: {
     (object.metadata['stats47-sha256'] !== undefined &&
       object.metadata['stats47-sha256'] !== digest)
   ) {
-    throw new Error(
+    throw new BlogImageBlockedError(
       `${options.slug}: R2 AI背景画像契約がmanifestと一致しません`
     );
   }

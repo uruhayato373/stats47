@@ -278,7 +278,7 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 
 `d-kakei-category-dataset` (¥2,980) が公開 2 週で PV 2・売上 0 だった原因は「無料部分に買う判断材料が無い」こと。
 統計データを売る有料記事 (vertical `stats47-note`・講座マガジン以外) は、**購入前に読める無料部分**に次の 4 点を必ず置く。
-機械検査は `audit-note-circulation.mjs` の `paid_*` (週次 `note-circulation-audit-weekly.yml` で gate、¥1,000 以上は error)。
+機械検査は `audit-note-circulation.mjs` の `paid_*` (週次レビューの `npm run weekly:audits` の note-circulation で gate、¥1,000 以上は error)。
 
 | 要素 | 置き方 | 検査 |
 |---|---|---|

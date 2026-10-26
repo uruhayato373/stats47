@@ -8,55 +8,15 @@ const { spawnSync } = require('node:child_process');
 const YAML = require('yaml');
 
 const ROOT = path.resolve(__dirname, '../../../..');
-const PROVENANCE = path.join(ROOT, '.github/workflows/provenance-audit-weekly.yml');
-const THEME = path.join(ROOT, '.github/workflows/theme-chart-audit-weekly.yml');
-
-const PROVENANCE_COMMANDS = [
-  'npm run validate:config',
-  'npm run validate:catalog',
-  'npm run validate:area-databook',
-  'npm run validate:prefecture-statistics',
-  'npm run validate:open-data-catalog',
-  'npm run check:prefecture-statistics-links',
-  'npm run check:open-data-links',
-  'node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs',
-];
+// テーマ監査は 2026-10-26 に theme-chart-audit-weekly.yml から quality-suite-weekly.yml の theme job へ移した
+const THEME = path.join(ROOT, '.github/workflows/quality-suite-weekly.yml');
 
 function parse(source) {
   return YAML.parse(source);
 }
 
 function stepsOf(workflow) {
-  return workflow?.jobs?.audit?.steps ?? [];
-}
-
-function auditProvenance(source) {
-  const steps = stepsOf(parse(source));
-  const check = steps.find((step) => step.id === 'check');
-  const final = steps.find((step) => step.name?.includes('Propagate validator status'));
-  const errors = [];
-  if (!check || typeof check.run !== 'string') return ['validator collector is missing'];
-  for (const command of PROVENANCE_COMMANDS) {
-    const commandLine = check.run.split('\n').find((line) => line.includes(command));
-    if (!commandLine) errors.push(`${command} is not executed`);
-    else if (/\|\|\s*true/.test(commandLine)) errors.push(`${command} is fail-open`);
-  }
-  const pipeCaptures = [...check.run.matchAll(/="\$\{PIPESTATUS\[0\]\}"/g)].length;
-  if (pipeCaptures !== PROVENANCE_COMMANDS.length) {
-    errors.push(`validator exit capture mismatch: ${pipeCaptures}/${PROVENANCE_COMMANDS.length}`);
-  }
-  if (!check.run.includes('echo "error_count=$ERROR_COUNT" >> "$GITHUB_OUTPUT"')) {
-    errors.push('aggregate error_count output is missing');
-  }
-  if (!final || final.if !== 'always()' || typeof final.run !== 'string') {
-    errors.push('always final propagation step is missing');
-  } else {
-    if (!final.run.includes('steps.check.outcome')) errors.push('collector outcome is not propagated');
-    if (!final.run.includes('steps.check.outputs.error_count')) {
-      errors.push('validator error_count is not propagated');
-    }
-  }
-  return errors;
+  return workflow?.jobs?.theme?.steps ?? [];
 }
 
 function auditTheme(source) {
@@ -98,33 +58,12 @@ function auditTheme(source) {
   return errors;
 }
 
-const provenanceSource = fs.readFileSync(PROVENANCE, 'utf8');
 const themeSource = fs.readFileSync(THEME, 'utf8');
 
-test('実workflowは全validatorとlive監査の失敗をIssue更新後のjob statusへ伝播する', () => {
-  assert.deepEqual(auditProvenance(provenanceSource), []);
+// 出典監査 (provenance) は 2026-10-26 に週次レビューへ移した。失敗の伝播は台本 provenance.sh の振る舞いテスト
+// (.claude/scripts/management/__tests__/weekly-audits.test.mjs) が持つ。
+test('実workflowはlive監査の失敗をIssue更新後のjob statusへ伝播する', () => {
   assert.deepEqual(auditTheme(themeSource), []);
-});
-
-test('[mutation] provenance validatorの|| true復活を検出する', () => {
-  const mutated = provenanceSource.replace(
-    'npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log',
-    'npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log || true',
-  );
-  assert.ok(auditProvenance(mutated).includes('npm run validate:catalog is fail-open'));
-});
-
-test('[mutation] validator exit codeの未集約を検出する', () => {
-  const mutated = provenanceSource.replace('CATALOG_RC="${PIPESTATUS[0]}"', 'CATALOG_RC=0');
-  assert.ok(auditProvenance(mutated).some((error) => error.includes('exit capture mismatch')));
-});
-
-test('[mutation] provenance最終status stepの削除を検出する', () => {
-  const workflow = parse(provenanceSource);
-  workflow.jobs.audit.steps = workflow.jobs.audit.steps.filter(
-    (step) => !step.name?.includes('Propagate validator status'),
-  );
-  assert.ok(auditProvenance(YAML.stringify(workflow)).includes('always final propagation step is missing'));
 });
 
 for (const kind of ['live', 'quality', 'runtime']) {
@@ -137,13 +76,13 @@ for (const kind of ['live', 'quality', 'runtime']) {
 
 test('[mutation] theme最終statusの無条件成功を検出する', () => {
   const workflow = parse(themeSource);
-  workflow.jobs.audit.steps.find((step) => step.name === 'Propagate audit failures').run = 'exit 0';
+  workflow.jobs.theme.steps.find((step) => step.name === 'Propagate audit failures').run = 'exit 0';
   assert.ok(auditTheme(YAML.stringify(workflow)).some((error) => error.startsWith('audit status propagation failed')));
 });
 
 test('[mutation] theme最終status stepの削除を検出する', () => {
   const workflow = parse(themeSource);
-  workflow.jobs.audit.steps = workflow.jobs.audit.steps.filter(
+  workflow.jobs.theme.steps = workflow.jobs.theme.steps.filter(
     (step) => step.name !== 'Propagate audit failures',
   );
   assert.ok(auditTheme(YAML.stringify(workflow)).includes('always live audit propagation step is missing'));
@@ -151,13 +90,13 @@ test('[mutation] theme最終status stepの削除を検出する', () => {
 
 test('[mutation] active audit failure propagation cannot be skipped after an earlier failure', () => {
   const workflow = parse(themeSource);
-  workflow.jobs.audit.steps.find(step => step.name === 'Propagate audit failures').if = "success() && steps.plan.outputs.run == 'true'";
+  workflow.jobs.theme.steps.find(step => step.name === 'Propagate audit failures').if = "success() && steps.plan.outputs.run == 'true'";
   assert.ok(auditTheme(YAML.stringify(workflow)).includes('always live audit propagation step is missing'));
 });
 for (const kind of ['summary', 'runtime']) {
   test(`[mutation] ${kind} failure cannot be removed from final status`, () => {
     const workflow = parse(themeSource);
-    const final = workflow.jobs.audit.steps.find(step => step.name === 'Propagate audit failures');
+    const final = workflow.jobs.theme.steps.find(step => step.name === 'Propagate audit failures');
     final.run = final.run.replace(` && test "$${kind.toUpperCase()}_CODE" = 0`, '');
     assert.ok(auditTheme(YAML.stringify(workflow)).some(error => error.startsWith('audit status propagation failed')));
   });

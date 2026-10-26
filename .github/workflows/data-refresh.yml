@@ -448,8 +448,7 @@ jobs:
   # **どこにも通知が無く Actions タブに赤が残るだけ**だった。この workflow は月次でしか
   # 走らないので、気づかなければ次の実行まで 1 ヶ月 R2 が更新されない。
   #
-  # 他の定期 workflow (ranking-integrity-audit-weekly / ogp-image-audit-weekly /
-  # cloudflare-usage-daily) は失敗時に Issue を起票しており、ここだけ欠けていた。同じ方式に揃える。
+  # 他の定期 workflow (quality-suite-weekly の ogp-images job / cloudflare-usage-daily) は失敗時に Issue を起票しており、ここだけ欠けていた。同じ方式に揃える。
   #
   # 手動 dispatch の失敗は起票しない (人がその場で見ているため)。
       # push と派生生成を通したあとで、取り込みゲートの結果を job に反映する。

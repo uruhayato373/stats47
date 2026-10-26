@@ -2,9 +2,9 @@
  * build-data-quality-queue — 既存の週次監査の結果を全 active metric のデータ品質キューへまとめる。
  * DATA-QUALITY-LOOP-01 ①②。新しい監査ではなく、次の 2 つの監査の出力を読むだけの集約器。
  *
- *   - ranking-integrity-audit-weekly → `data/ranking/integrity-audit.json` の `deliveredYears`
+ *   - 週次の ranking-integrity (weekly:audits) → `data/ranking/integrity-audit.json` の `deliveredYears`
  *     (配信 values.json の実在年。`years: "all"` の metric もここで最新年が分かる)
- *   - estat-year-coverage-audit-weekly → `data/estat/year-coverage/queue.json`
+ *   - 週次の estat-year-coverage (weekly:audits) → `data/estat/year-coverage/queue.json`
  *
  * 年表記は SSDS 原典 (cdcat01-sources.generated.json) と config の yearFormat で判定する。
  * 需要は search-growth の GSC 表示 (候補集合に含まれる URL だけ。無ければ null = 未観測)。

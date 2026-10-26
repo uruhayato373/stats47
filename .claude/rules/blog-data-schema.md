@@ -26,7 +26,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 ```
 
 - **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`contents/blog` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
-  - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② `blog-remediation-daily.yml` (日次 JST 08:00) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。contents/blog を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので contents/blog は必要)。
+  - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② 週次レビューの `npm run weekly:audits` (blog-remediation。2026-10-26 までは日次の `blog-remediation-daily.yml`) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。contents/blog を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので contents/blog は必要)。
 - **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
 - **置換**: 企画 → `/draft-from-trend` の metric 選定に統合 / データ接地 → `fetch-ranking-data-r2.mjs` (R2直) / brushup キュー → `data/blog/remediation-queue.json` (`brushup-queue.md` は廃止)。
 - **ランキング以外の接地 (2026-08-30)**: `fetch-ranking-data-r2.mjs` は「1 metric = 47 県の 1 本のランキング」しか
@@ -180,7 +180,7 @@ source.json に表示用の出典を明示する:
   (指標の抽出は `extractBlogChartSourceReferences`、年は `year`) と本文の `/ranking/` リンクから
   `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
   (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
-  古い記事の検出 (`build-stale-data-years.mjs`、日次 `blog-remediation-daily.yml`)。同じ指標を複数の年で描いた記事は
+  古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じ指標を複数の年で描いた記事は
   最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
   `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
   (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。
@@ -193,7 +193,7 @@ source.json に表示用の出典を明示する:
 **検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
 `NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。
 存在検査（quality-gate の系譜 gate）では「**存在するが復元できない**」を捕まえられないため別に要る。
-日次 cron (`blog-remediation-daily.yml`) に**縮小専用ラチェット**付きで配線済み — 欠陥が前回より増えたら失敗する。
+週次レビューの `npm run weekly:audits` (blog-remediation) に**縮小専用ラチェット**付きで配線済み — 欠陥が前回より増えたら失敗する。
 実測ベースライン: restorable 804 / out-of-scope 65 / 欠陥 29（参照なし 18 + 自己申告 incomplete 11）。
 最新値は `data/blog/chart-provenance-LATEST.md` が正典。
 
@@ -296,7 +296,7 @@ SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat 
   data/_.json・_.source.json は**ローカルにしか無い場合がある**（実例: `library-museum-cultural-capital` は
   ローカルに json+source があるのに R2 は svg のみ 404）。article.md だけ見て消すと元データが永久に失われるため、
   R2 に無いものが 1 つでもあれば保持する（保持側の誤りは翌日また判定されるので無害、削除側の誤りは不可逆）。
-- **定期棚卸し + ラチェット (2026-07-29 配線)**: `blog-remediation-daily.yml` (日次 JST 08:00) が
+- **定期棚卸し + ラチェット (2026-07-29 配線)**: 週次レビューの `npm run weekly:audits` (blog-remediation。2026-10-26 までは日次 JST 08:00 の `blog-remediation-daily.yml`) が
   `build-lineage-queue.mjs` を実行して queue を develop へ commit-back し、**元データ消失 (`byStatus.neither`) が
   前回より増えたら workflow を失敗させる**（縮小専用ラチェット）。
   **なぜ cron が要るか**: 公開時 gate は _ローカル outbox_ を見るだけで、しかも公開時にしか発火しない。

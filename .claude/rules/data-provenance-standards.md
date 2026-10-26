@@ -5,7 +5,7 @@ paths:
   - "packages/data-configs/src/provenance/**"
   - ".claude/{scripts/provenance,skills/db/audit-provenance}/**"
   - "data/provenance/**"
-  - ".github/workflows/provenance-audit-weekly.yml"
+  - ".claude/scripts/management/weekly-audits/provenance.sh"
   - ".claude/agents/{data-ingester,open-data-curator,geo-analysis-curator,kindle-publisher}.md"
 ---
 # データ出典・再現性 (provenance) 標準
@@ -96,8 +96,8 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 ## 6. 監査体制
 
 - **入口 (投入時)**: lint error が新規の provenance 欠落をブロック (`data-ingester` は非 e-Stat 投入時に本 rules を必読)。
-- **定期 (週次)**: `provenance-audit-weekly.yml` が全量を機械監査 → `data/provenance/{queue.json,LATEST.md}`
-  を commit-back → error 増加 or D クラス検出時だけ `auto-generated` Issue (手本 = `ogp-image-audit-weekly.yml`)。
+- **定期 (週次)**: 週次レビューの `npm run weekly:audits` (provenance) が全量を機械監査 → `data/provenance/{queue.json,LATEST.md}`
+  を commit-back → error 増加 or D クラス検出時だけ `auto-generated` Issue (手本 = `quality-suite-weekly.yml` の ogp-images job)。
 - **是正**: `/audit-provenance` skill が queue を提示 → fetcher コードから出典復元 → config backfill → lint 再実行。
   意味判断 (出典が本当に正しいか) だけ `open-data-curator` / 人間。
 
@@ -109,7 +109,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - queue: `.claude/scripts/provenance/audit-provenance-queue.mjs` → `data/provenance/`
 - skill: `.claude/skills/db/audit-provenance/SKILL.md`
-- cron: `.github/workflows/provenance-audit-weekly.yml`
+- 定期実行: `.claude/scripts/management/weekly-audits/provenance.sh` (週次レビューの `npm run weekly:audits`。2026-10-26 に CI から移した)
 - 手本 (blog lineage): `.claude/scripts/blog/build-lineage-queue.mjs` / `.claude/rules/blog-data-schema.md` §1.5/1.7
 - metric 構造: `.claude/rules/metric-config-standards.md` / e-Stat: `.claude/rules/estat-api.md`
 - 参考文献の保全・昇格条件: `.claude/rules/reference-source-standards.md`

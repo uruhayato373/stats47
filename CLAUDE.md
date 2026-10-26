@@ -179,7 +179,6 @@ Issues は「PR で close される機能改修・バグ」と「機械生成ア
 - `bug` — バグ修正（同上）
 - `auto-generated` — Bot 生成の自動アラート
 - `cloudflare-alert` — Cloudflare 日次 usage 閾値違反 (`cloudflare-usage-daily.yml`)
-- `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
-- `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`ogp-image-audit-weekly.yml`)
-- `link-alert` — サイト内リンクのリンク切れ (ブログ本文 + ページ側コンポーネント生成) (`internal-link-audit-weekly.yml`)
+- `psi-alert` — PSI 週次計測の閾値違反 (`fetch-metrics-weekly.yml` の psi job)
+- `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`quality-suite-weekly.yml` の ogp-images job)
 - `coverage-alert` — GSC カバレッジ是正キューの週次再構築が失敗 (`fetch-metrics-weekly.yml`)

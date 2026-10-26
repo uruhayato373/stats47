@@ -1,4 +1,4 @@
-# 週次ページ UI 確認 (page-quality-audit-weekly)
+# 週次ページ UI 確認 (quality-suite-weekly の page-quality job)
 
 あなたは stats47.jp (都道府県統計の可視化サイト) の UI を、初めて訪れた一般の読者の目で確認する。
 結果は JSON schema に沿った構造化出力だけで返す。ファイルを書き換えない。記録・通知は後続のスクリプトが行う。

@@ -23,7 +23,7 @@ custom dimensionの登録待ちは `.claude/rules/analytics-event-standards.md`�
 | 対象 | 現在 | 採択する実行場所 | 備考 |
 |---|---|---|---|
 | GSC 週次 snapshot | API + Actions | 現状維持 | `fetch-metrics-weekly.yml` |
-| GSC URL Inspection | API + Actions | 現状維持 | `gsc-url-inspection-daily.yml` |
+| GSC URL Inspection | API + Actions | 現状維持 | `fetch-metrics-weekly.yml` の url-inspection job |
 | GSC property 存在・権限監査 | API | API-only CIへ統合 | `audit-gsc.mjs`を再利用 |
 | GA4 週次 snapshot | Data API + Actions | 現状維持 | `fetch-metrics-weekly.yml` |
 | affiliate GA4 集計 | Data API + Actions | 現状維持 | `affiliate-ga4-weekly.yml` |
