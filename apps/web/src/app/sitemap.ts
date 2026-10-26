@@ -370,9 +370,10 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
 export default async function sitemap({
   id,
 }: {
-  id: number;
+  // Next.js 16 は generateSitemaps() の id を Promise<string> で渡す。テストは数値で直接呼ぶ。
+  id: Promise<string> | number;
 }): Promise<MetadataRoute.Sitemap> {
-  const segment: Segment | undefined = SEGMENTS[id];
+  const segment: Segment | undefined = SEGMENTS[Number(await id)];
   if (!segment) {
     return [];
   }
