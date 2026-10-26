@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  土曜ランナー (毎週土曜 07:00 JST。2026-10-26 に認証付き計測・note の計測・ASP の巡回の 3 本と週次監査をまとめた)。ローカル Mac 限定。
+  中身と順番は scripts/scheduled/weekly-saturday.sh。
+  前提: キーチェーンに stats47-measurement-a8 / stats47-measurement-moshimo を登録済み。専用 clone ~/stats47-measurement
+  (初回: git clone --branch develop https://github.com/uruhayato373/stats47.git ~/stats47-measurement && (cd ~/stats47-measurement && npm ci))
+  インストール:
+    cp scripts/scheduled/com.stats47.weekly-saturday.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.weekly-saturday.plist
+  即実行: launchctl kickstart gui/$(id -u)/com.stats47.weekly-saturday
+  アンインストール:
+    launchctl bootout gui/$(id -u)/com.stats47.weekly-saturday
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.weekly-saturday</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/weekly-saturday.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>6</integer>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/weekly-saturday.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/weekly-saturday.launchd.err</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>

@@ -51,3 +51,25 @@ export function workflowCatalog() {
     return JSON.parse(fs.readFileSync(file, "utf8")) as WorkflowCatalog;
   });
 }
+
+/** 定期実行の頻度。cron (UTC) の日が数値なら毎月、曜日が数値なら毎週、どちらも * なら毎日 */
+export type Cadence = "daily" | "weekly" | "monthly" | "none";
+export function cadenceOf(w: Pick<WorkflowEntry, "schedules">): Cadence {
+  const cron = w.schedules[0]?.cron;
+  if (!cron) return "none";
+  const [, , dom, , dow] = cron.trim().split(/\s+/);
+  if (dom !== "*") return "monthly";
+  if (dow !== "*") return "weekly";
+  return "daily";
+}
+
+/** 日本時間で次に動く順に並べるためのキー (月の日・曜日・時・分)。日本時間は UTC+9 なので日付をまたぐ分を足す */
+export function scheduleSortKey(w: Pick<WorkflowEntry, "schedules">): number {
+  const cron = w.schedules[0]?.cron;
+  if (!cron) return Number.MAX_SAFE_INTEGER;
+  const [min, hour, dom, , dow] = cron.trim().split(/\s+/);
+  const minutes = Number(hour) * 60 + Number(min) + 9 * 60;
+  const nextDay = minutes >= 24 * 60 ? 1 : 0;
+  const day = dom !== "*" ? Number(dom) + nextDay : dow !== "*" ? ((Number(dow.split(",")[0]) + nextDay) % 7 || 7) : 0;
+  return day * 24 * 60 + (minutes % (24 * 60));
+}

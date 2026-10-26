@@ -390,7 +390,7 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
 ### 実行形態 (ローカル限定・Mac / Windows 両対応)
 
 - Playwright プロファイル (`.local/playwright-a8-profile`) がローカルにあるため **GitHub Actions では動かない**。
-  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、土曜 08:30 JST。
+  週次 cron は launchd の土曜ランナー (`scripts/scheduled/weekly-saturday.sh` + `com.stats47.weekly-saturday.plist`、土曜 07:00 JST の 3 段目が `scout-asp-weekly.sh` を呼ぶ。
   launchd は Mac のみ。Windows では手動または skill 経由で実行する)。
 - **プロファイルのパス解決は Mac / Windows 両対応** (2026-07-28)。`process.platform` で分岐せず
   「Mac 本体チェックアウトが実在すればそこ、無ければ**このファイルから解決したリポジトリ root**」の
@@ -773,7 +773,7 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
   コア `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` (+ `__tests__/`) /
   ブラウザ `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` /
   カタログ `data/affiliate/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
-  cron `scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist` /
+  cron `scripts/scheduled/scout-asp-weekly.sh` (土曜ランナー `weekly-saturday.sh` から呼ぶ) /
   追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
 - 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /
   設定 `config/affiliate-asp.json` / 台帳 `data/affiliate/affiliate-catalog.json` /

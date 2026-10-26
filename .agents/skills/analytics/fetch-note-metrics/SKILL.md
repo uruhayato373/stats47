@@ -12,7 +12,7 @@ noteの現行ダッシュボードを読み、期間・記事数・合計・カ�
 
 ## 前提
 
-- 取得は土曜 08:00 の Mac の定期実行 (`scripts/scheduled/fetch-note-metrics.sh`) が行う。セッションでは `data/note/dashboard/latest.json` を読み、
+- 取得は Mac の土曜ランナー (`scripts/scheduled/weekly-saturday.sh`。土曜 07:00) の 2 段目 (`scripts/scheduled/fetch-note-metrics.sh`) が行う。セッションでは `data/note/dashboard/latest.json` を読み、
   このスキルはオーナーが会話で頼んだときだけ動かす (読むための実行は hook が止める。`.claude/rules/recorded-measurement-first.md`)。
 - Chrome **Profile 5**にstats47のログインがあること。未ログインならユーザーのログインが必要。
 - `~/.browser-use-env/bin/browser-use`を使用する。別の場所なら`BROWSER_USE_BIN`で指定する。

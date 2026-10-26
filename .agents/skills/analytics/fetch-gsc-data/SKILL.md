@@ -303,7 +303,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 2. **Coverage Drilldown 自動集計（Phase 8、2026-04-26）**:
    `url-inspection-daily.cjs` が URL Inspection API（quota 2,000/site/day の 75% = 1,500 URL）で自動取得・集計するため、本 skill での追加作業は不要。
    - 出力先: `data/gsc/coverage-drilldown/YYYY-Www/`
-   - 自動実行: GitHub Actions `fetch-metrics-weekly.yml` の url-inspection job (毎週土曜 00:00 JST)
+   - 自動実行: GitHub Actions `fetch-metrics-weekly.yml` の url-inspection job (毎週土曜 01:00 JST)
    - 詳細: 親 issue #115 / #43 / `.claude/scripts/gsc/url-inspection-daily.cjs` ヘッダコメント
    - **手動 export は廃止**（旧 Phase 7 `parse-coverage-drilldown.cjs` は Phase 8 で完全代替して削除）
 
