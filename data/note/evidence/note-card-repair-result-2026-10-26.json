@@ -8,14 +8,14 @@
     "repairedArticles": 173,
     "nativeCardRegistrations": 643,
     "initialSunshineRegistrations": 3,
-    "totalRegisteredCards": 646,
     "emptyCards": 0,
     "unregisteredCards": 0,
     "unknownCards": 0,
     "publishedPaidPacks": 13,
     "preservedDrafts": true,
     "priceBoundaryAndMetadataVerified": true,
-    "preExistingCardSpacingWarnings": 175
+    "preExistingCardSpacingWarnings": 175,
+    "registrationEvents": 646
   },
   "evidence": {
     "publicVisibility": "data/note/card-visibility-latest.json",
@@ -5610,5 +5610,6 @@
         }
       ]
     }
-  ]
+  ],
+  "registrationCountNote": "登録回数は、商品導線の差し替えで同じ位置を再登録した分を含む。修復記事数は記事IDで重複を除いている。"
 }
