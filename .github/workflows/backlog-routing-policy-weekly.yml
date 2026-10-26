@@ -7,8 +7,8 @@ name: 🧭 Backlog Routing Policy (weekly)
 
 on:
   schedule:
-    # 毎週月曜 JST 06:45 (= 日曜 21:45 UTC)。日次 GSC 後、整合監査の前。
-    - cron: "45 21 * * 0"
+    # 毎週土曜 JST 06:45 (= 金曜 21:45 UTC)。週次 GSC 後、整合監査の前。
+    - cron: "45 21 * * 5"
   workflow_dispatch: {}
 
 permissions:

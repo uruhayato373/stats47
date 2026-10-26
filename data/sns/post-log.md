@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**742 件** (最終更新: 2026-10-24)
+**745 件** (最終更新: 2026-10-25)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-25 | 📸 Instagram | tile-change/households-1980-2020 | 40年で、世帯数はどう変わった？ 1980→2020年。増加 47県 ／ 減少 0県。全47県を地図に。 全47都道府県… | [🔗](https://www.instagram.com/p/De65zdkEbk-/) |
+| 2026-10-25 | 🧵 Threads | area/area-32000-profile | 島根の「らしさ」をデータでたどる。 県花ボタン、仁多米と出雲おろち大根、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/De6SGHJAoTO) |
+| 2026-10-25 | 🧵 Threads | ranking/care-worker-annual-income | 405万円・402万円・400万円。  介護職員の平均年収、上位は神奈川・大阪・岐阜。 最も低い沖縄は288万円で、1位… | [🔗](https://www.threads.com/@stats47jp/post/De5jrvtCYa-) |
 | 2026-10-24 | 📸 Instagram | area-carousel/15000 | 【都道府県データ】新潟県、全国で何位？  全国トップクラス: 水稲収穫量（水稲・子実用の収穫量） 1位（646100t・… | [🔗](https://www.instagram.com/p/De4Sw8GFW6n/) |
 | 2026-10-24 | 🧵 Threads | area/area-31000-profile | 鳥取を1位・47位だけで語らない。 県木はダイセンキャラボク、県鳥はオシドリ。人口・産業・暮らしの県データブックへ。 続… | [🔗](https://www.threads.com/@stats47jp/post/De3rB8SAo7g) |
 | 2026-10-24 | 🧵 Threads | ranking/annual-precipitation | 3,754mm・3,069mm・3,065mm。  年間降水量の上位3県は静岡・沖縄・鹿児島。 最も少ない宮城は1,02… | [🔗](https://www.threads.com/@stats47jp/post/De29LzkgnsG) |

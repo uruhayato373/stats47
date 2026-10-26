@@ -206,7 +206,7 @@ export const DATASETS = [
   d("a8.ui-last-run", "data/affiliate/a8-ui-last-run.json", "state", "affiliate", "data", "A8 の画面取得を最後に回した記録"),
   d("moshimo.results", "data/affiliate/moshimo-results.json", "state", "affiliate", "data", "もしもアフィリエイトの成果"),
   d("rakuten.results", "data/affiliate/rakuten-results.json", "state", "affiliate", "data", "楽天アフィリエイトの成果", { schema: "config/schema/rakuten.results.schema.json" }),
-  d("revenue.authenticated", "data/authenticated/latest.json", "state", "strategy", "data", "認証付き計測 (木曜の Mac) の取得元ごとの最新の成否", { schema: "config/schema/revenue.authenticated.schema.json" }),
+  d("revenue.authenticated", "data/authenticated/latest.json", "state", "strategy", "data", "認証付き計測 (土曜の Mac) の取得元ごとの最新の成否", { schema: "config/schema/revenue.authenticated.schema.json" }),
   d("revenue.authenticated-history", "data/authenticated/revenue-history.json", "series", "strategy", "data", "認証付き計測が取る売上の推移", { schema: "config/schema/revenue.authenticated-history.schema.json" }),
   d("business.measurement-cycle", "data/measurement-cycle/latest.json", "state", "strategy", "data", "週次の計測→記録→改善サイクルのまとめ", { schema: "config/schema/business.measurement-cycle.schema.json" }),
   d("business.measurement-cycle-triage", "data/measurement-cycle/triage-latest.json", "state", "strategy", "data", "週次サイクルの無人 triage の記録"),

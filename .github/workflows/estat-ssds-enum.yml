@@ -11,7 +11,7 @@ name: 🧮 Enumerate SSDS Indicators (weekly)
 
 on:
   schedule:
-    - cron: "30 20 * * 6" # 土 20:30 UTC = 日 05:30 JST (estat-year-coverage-audit 20:00 の後、非重複)
+    - cron: "30 20 * * 5" # 金 20:30 UTC = 土 05:30 JST (estat-year-coverage-audit 20:00 の後)
   workflow_dispatch:
   push:
     branches: [estat-ssds-run] # cloud 環境で dispatch 不可のときの代替トリガー (branch-workflow.md)

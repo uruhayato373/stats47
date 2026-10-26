@@ -25,7 +25,7 @@ name: 🔗 Internal Link Audit (weekly)
 
 on:
   schedule:
-    - cron: "0 19 * * 6" # 土 19:00 UTC = 日 04:00 JST (OGP 監査 03:00 の後)
+    - cron: "0 19 * * 5" # 金 19:00 UTC = 土 04:00 JST (OGP 監査 03:00 の後)
   workflow_dispatch:
 
 permissions:

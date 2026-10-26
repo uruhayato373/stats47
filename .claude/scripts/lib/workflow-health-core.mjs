@@ -29,18 +29,19 @@ export const DEFAULT_MIN_STREAK = 2;
 // 初回main反映は2026-09-21 01:40 UTC。全cronへ日次前提を適用しない。
 // 同repoで3時間25分のschedule遅延を観測したため、予定時刻から6時間待つ。
 // cron時刻との整合は専用テストで固定する。
+// 2026-10-26 に週次監査を土曜 JST の朝 (金曜 UTC) へ移した。firstExpectedAt は移動後の最初の枠。
 // minStreak (任意): 週次は既定の「2 回連続」だと失敗が 2 週間表に出ないため 1 にする。
 //   2026-09-19 のページ品質監査 (スクショ検査) は時間切れで cancelled になり、2026-09-20 の週次フル検査は
 //   Issue 化ステップごと落ちたが、どちらも連続 1 回で止まっていて誰にも知らされなかった。
 export const SCHEDULE_CONTRACTS = Object.freeze({
   "page-quality-audit-weekly.yml": Object.freeze({
-    firstExpectedAt: "2026-09-26T18:00:00Z",
+    firstExpectedAt: "2026-10-30T18:00:00Z",
     intervalHours: 168,
     graceHours: 6,
     minStreak: 1,
   }),
   "quality-suite-weekly.yml": Object.freeze({
-    firstExpectedAt: "2026-09-26T22:30:00Z",
+    firstExpectedAt: "2026-10-30T22:30:00Z",
     intervalHours: 168,
     graceHours: 6,
     minStreak: 1,

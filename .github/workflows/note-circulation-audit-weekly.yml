@@ -5,7 +5,7 @@ name: 📝 note Circulation Audit (weekly)
 
 on:
   schedule:
-    - cron: '15 20 * * 6' # 土 20:15 UTC = 日 05:15 JST
+    - cron: '15 20 * * 5' # 金 20:15 UTC = 土 05:15 JST
   workflow_dispatch:
 
 permissions:

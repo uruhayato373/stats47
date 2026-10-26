@@ -22,7 +22,7 @@ Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行�
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開 (`--commit`) は
   outward-facing・取り下げに時間がかかるため、オーナーが明示承認したときだけ**実行する。バリデーション
   エラー・未充填フィールドがあれば「公開した」と報告しない (publish は `ok:false` を返す)。
-- **1 冊ずつ検証**。一括出品しない。閲覧・売上・KENP は木曜に Mac が取得した記録 (`data/authenticated/revenue-history.json`・`data/products/sales-ledger.json`) で見て、伸びる系統だけ横展開する (需要ファースト)。レポートの画面を読むために開かない (`.claude/rules/recorded-measurement-first.md`。hook が止める)。
+- **1 冊ずつ検証**。一括出品しない。閲覧・売上・KENP は土曜に Mac が取得した記録 (`data/authenticated/revenue-history.json`・`data/products/sales-ledger.json`) で見て、伸びる系統だけ横展開する (需要ファースト)。レポートの画面を読むために開かない (`.claude/rules/recorded-measurement-first.md`。hook が止める)。
 - **KU (KDP Select 独占) は既定 未登録** (`kuEnrolled:false`)。登録判断はオーナー。
 
 ## スコープ

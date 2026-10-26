@@ -7,7 +7,7 @@ name: 🧬 Survey Taxonomy Audit (weekly)
 
 on:
   schedule:
-    - cron: "30 15 * * 0" # 日 15:30 UTC = 月 00:30 JST (週次 metrics 完了後)
+    - cron: "15 22 * * 5" # 金 22:15 UTC = 土 07:15 JST (土曜 02:00 の週次 metrics 完了後)
   workflow_dispatch:
 
 permissions:

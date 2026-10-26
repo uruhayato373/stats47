@@ -19,7 +19,7 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 
 on:
   schedule:
-    - cron: '0 23 * * *' # JST 08:00 (UTC 前日 23:00)
+    - cron: '0 23 * * 5' # 土曜 08:00 JST (金 23:00 UTC)。週 1 回 (2026-10-26 に日次から変更)
   workflow_dispatch:
     inputs:
       next:

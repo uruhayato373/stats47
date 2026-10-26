@@ -31,8 +31,12 @@
       "date": "2026-10-21",
       "reason": "Retired the 2020-only census duplicate of the day-time population ratio with a 301 to day-time-population-ratio, whose 47 values for 2020 are identical and which also carries 2000-2020 and municipal values (METRIC-DAYTIME-RATIO-DUP-01)",
       "previousMinActiveResolved": 2372,
-      "retiredResolvedKeys": ["daytime-population-ratio"],
-      "redirectTo": { "daytime-population-ratio": "day-time-population-ratio" }
+      "retiredResolvedKeys": [
+        "daytime-population-ratio"
+      ],
+      "redirectTo": {
+        "daytime-population-ratio": "day-time-population-ratio"
+      }
     }
   ],
   "theme": {
@@ -44,12 +48,12 @@
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 1615,
-    "minResolvedCharts": 1489,
+    "minCharts": 1625,
+    "minResolvedCharts": 1499,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0,
-    "maxLegacyDataSourceSectionArticles": 62,
+    "maxLegacyDataSourceSectionArticles": 59,
     "maxSourcelessChartArticles": 1,
     "requireSnapshotSources": true
   },

@@ -123,16 +123,16 @@ updated: 2026-10-19
 - **2026-10-19 Mac の直接取得へ移行 (オーナー承認)**: 毎日 17:30 の `scripts/scheduled/measurement-session-refresh.sh` が、CI を起動する代わりに `measurement-collect-local.sh` を呼ぶ。定期実行専用の clone (`~/stats47-measurement`) で `collect-local.mjs` → `collect.mjs --local --vault` を取得元ごとに動かし、証跡は CI と同じ保管庫のキー (`restore.mjs` が読む) へ、要約は develop へ CI を止める印なしで push する (fab191b9c)。同日の手動の通し実行で もしも・A8・note・楽天は pass、afb は `api_key_missing`、GSC と KDP は `auth_required`。
 - **2026-10-19 夜**: オーナーの準備 (afb の API キー・GSC のログイン) を後日に回したので、定期実行は CI の起動に戻した。切り替えの手順と残りは `MEASUREMENT-MAC-DIRECT-01`。
 
-### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を木曜の Mac の取得だけにし、残っている CI 専用のコードと Secrets を撤去する
+### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を土曜の Mac の取得だけにし、残っている CI 専用のコードと Secrets を撤去する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run measurement:test] [起票:2026-10-19] [期日:2026-11-05] [領域:管理]
 
-- **方針 (2026-10-20 オーナー判断)**: ログインが要る計測 (A8・楽天・note・KDP・GSC の画面) は、毎週木曜に Mac がその場でログインして取得し、記録する。ログインは週 1 回 Mac が行えば足りるので、CI にもセッションを持たせず、普段からセッションを保つこともしない。セッションのエージェントは記録から判断する (`.claude/rules/recorded-measurement-first.md`。読むための操作は hook が止める)。セッションが切れて 2 段階認証が要る週は、その取得元を判定不能にして次の木曜を待つ。
+- **方針 (2026-10-20 オーナー判断)**: ログインが要る計測 (A8・楽天・note・KDP・GSC の画面) は、毎週土曜の朝 (2026-10-26 に木曜 17:30 から土曜 07:00 へ移した) に Mac がその場でログインして取得し、記録する。ログインは週 1 回 Mac が行えば足りるので、CI にもセッションを持たせず、普段からセッションを保つこともしない。セッションのエージェントは記録から判断する (`.claude/rules/recorded-measurement-first.md`。読むための操作は hook が止める)。セッションが切れて 2 段階認証が要る週は、その取得元を判定不能にして次の木曜を待つ。
 - **2026-10-20 実施**: CI の `authenticated-measurement.yml` を無効化 (`gh workflow disable`) のうえ削除し、補完起動 (`catch-up.mjs`・`workflow-health-daily.yml` の段) と監視の契約を外した。木曜 17:30 の `measurement-session-refresh.sh` は CI へセッションを渡さず (`--publish` を外した)、`measurement-collect-local.sh` で取得して develop へ記録する。記録は 8 日間「今の値」として使う (`MEASUREMENT_MAX_AGE_MS`)。同夜に GSC・KDP・note のログインをし直した (KDP・note は `status: ok`)。
 - **次 (Claude)**: ① 10-22 (木) の夜に、`~/Library/Logs/stats47/measurement-collect-local.log`・develop の「(Mac)」の記録コミット・`data/authenticated/latest.json` の各取得元を確かめる ② 初回が通ったら、CI 専用のコードを削除する: `collect.mjs` の CI 分岐 (`MEASUREMENT_SESSION`・`STATS47_AUTH_*`・`ciLogin`・保管庫の `<取得元>/session` と `auth-recovery` の書き込み)、`refresh-session.mjs` の `--ci`・`--publish`、`bootstrap-session.mjs --publish`、`set-ci-secret.mjs`、`auth-recovery.mjs`、`.claude/config/auth-credentials.json` の `ciCredential`・`ciStored` と管理画面 `/ops/auth` の CI 欄、`package.json` の `auth:ci-secret`、`docs/01_技術設計/07_Playwright認証プロファイル.md` の「CI 実行について」の旧仕様。取得のコードを Mac と共有しているので、初回の実測の前には触らない。
 - **2026-10-20 Secrets 削除済み (オーナー承認)**: `MEASUREMENT_SESSION_*` 8 件・`STATS47_AUTH_*` 18 件・`AFB_API_KEY` を削除した。保管庫の鍵 `MEASUREMENT_VAULT_KEY` は週次のワークフロー (`affiliate-ga4-weekly.yml`・`fetch-metrics-weekly.yml` の restore) が使うので残した。管理画面 `/ops/auth` の CI 欄は、上の ② で外すまで「未登録」と出る。
 - **引き継いだ事実 (旧 `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`)**: KDP の Reports は 2 段階認証を求めることがあり、そのときは本人の入力が要る (`refresh-session.mjs kdp --wait-human`)。note は短い集計期間で 1 記事が一覧に出ない欠けを、条件付きで既知の欠けとして pass にしている (`note-inventory.mjs` の `acceptedNoteGap`。値は null のまま)。KDP の速報売上・KENP は確定ロイヤリティや週次の純収益に入れない。
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
-- **完了条件**: 木曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
+- **完了条件**: 土曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
 
 ### [NOTE-DASHBOARD-COLLECT-01] note ダッシュボードの週次取得が 2026-10-12 から失敗している (Chrome Profile 5 を開けない) のを直す
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-19] [期日:2026-10-26] [領域:管理]
@@ -142,7 +142,7 @@ updated: 2026-10-19
 - **2026-10-19 の切り分け**: launchd だけの問題ではない。Claude デスクトップアプリから手で実行しても同じ `browser_open_failed` で失敗した。同じ shell から `ls` すると、Chrome のプロファイルは Profile 5 だけでなく Default・Profile 1 もすべて `Operation not permitted` で中身を読めず、`~/Library/Application Support/Google/Chrome` の一覧も拒否される。フォルダの `stat` (`ls -ld`) は通り、所有者は自分・権限は `drwx------` なので、Unix の権限による拒否ではない。`system_profiler SPInstallHistoryDataType` を見ると、macOS 27.0.1 が **2026-10-10 10:06** に入っている。最後に成功した 10-05 と最初に失敗した 10-12 の間である。
 - **原因 1 (2026-10-19 解消・Claude アプリのみ)**: macOS 27 への更新後、実行元のアプリにフルディスクアクセスが無いと Chrome のプロファイルを読めなかった。オーナーが Claude デスクトップアプリに許可して再起動すると、同じ shell から Profile 5 を読めるようになり、取得のエラーは `browser_open_failed` から `login_required` に変わった。**launchd (`/bin/bash`) とターミナルへの許可は未確認**で、10-26 の定期実行で `browser_open_failed` が出れば、`/bin/bash` にも同じ許可が要る。
 - **原因 2 (2026-10-19 解消)**: Profile 5 (Chrome の表示名「stats47」) の note のログインが 2026-10-16 20:10 UTC に切れていた。オーナーが Profile 5 で再ログインした (新しい `_note_session_v5` の期限は 2027-01-19)。手動の取得は 09-21〜10-18 の 28 日窓で `status: pass` になり、公開 402 件を 21 ページで全件取得し、合計値もダッシュボードと一致した (`fetchedAt` 2026-10-19T10:42Z)。10-05〜10-18 の欠けはこの窓で埋まった。再ログインの直後に実行すると、Cookie ファイルへの書き込み前に読んで `login_required` になることがある (1 回観測)。
-- **残り**: 定期実行 (launchd → `/bin/bash`) にフルディスクアクセスが要るかの確認。**検証期日**: 2026-10-26 (月曜 09:00 JST の定期実行の後)。`data/note/dashboard/latest.json` が `status: pass` で、`cover-metrics-latest.json` も `pass` ならカードを削除する (2026-10-19 に定期実行のラッパー `scripts/scheduled/fetch-note-metrics.sh` が取得の前に表紙監査を毎回走らせるよう直し、同じラッパーの手動実行で結合が初めて `pass`・402 件になった)。`browser_open_failed` なら、オーナーが `/bin/bash` にフルディスクアクセスを許可する。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。
+- **残り**: 定期実行 (launchd → `/bin/bash`) にフルディスクアクセスが要るかの確認。**検証期日**: 2026-10-26 (月曜 09:00 JST の定期実行の後)。**2026-10-26 観測**: 09:16 JST の定期実行で `latest.json` (fetchedAt 2026-10-26T00:16Z) と `cover-metrics-latest.json` がともに `status: pass` (ローカルの `data/note/dashboard/`、未コミット)。記録が develop に入ればカードを削除できる。定期実行は同日に土曜 08:00 へ移した (launchd の再登録後に有効)。`data/note/dashboard/latest.json` が `status: pass` で、`cover-metrics-latest.json` も `pass` ならカードを削除する (2026-10-19 に定期実行のラッパー `scripts/scheduled/fetch-note-metrics.sh` が取得の前に表紙監査を毎回走らせるよう直し、同じラッパーの手動実行で結合が初めて `pass`・402 件になった)。`browser_open_failed` なら、オーナーが `/bin/bash` にフルディスクアクセスを許可する。ログは `~/Library/Logs/stats47/fetch-note-metrics.log`。
 - **完了条件**: 定期実行で `latest.json` が `status: pass`・`coverage.complete: true` になり、10-05〜10-18 の欠けた期間を 28 日の窓で取り直せている。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
@@ -294,7 +294,7 @@ updated: 2026-10-19
 
 - **背景 (2026-10-20)**: セッションは管理画面を開かず、記録から判断する方針にした (`.claude/rules/recorded-measurement-first.md`)。これで記録が計測スクリプトとエージェントの境界になった。ところが `config/datasets.mjs` が schema を義務にしているのは kind が config・ledger の行だけで、判断に使う `data/authenticated/{latest,revenue-history}.json`・`data/measurement-cycle/latest.json`・`data/affiliate/{a8,rakuten}-results.json`・`data/nsm/weekly-snapshots/*.json` (kind は state・series) には形の契約が無い。書き手の変更で形が崩れても、読む側は気づかずに誤る。後続の `SCRIPT-ISO-WEEK-UNIFY-01`・`SCRIPT-GOOGLE-CLIENT-UNIFY-01` で書き手を作り直すときに、壊していないかを判定する基準にもなる。
 - **2026-10-20 済**: ① 6 データセットの schema を `config/schema/{revenue.authenticated,revenue.authenticated-history,business.measurement-cycle,business.nsm-weekly,a8.results,rakuten.results}.schema.json` に置いた (実データから推論。NSM は全 25 週から)。形の違うファイルを 1 行にまとめていた `revenue.authenticated`・`business.measurement-cycle` はファイルごとの行に分けた (`datasetDir` の値は変わらない) ② `check-datasets.mjs` が schema を宣言した行を kind を問わず検証する ③ 金曜に動く書き手 (`build-measurement-cycle.mjs`・`snapshot-weekly-metrics.mjs`) が `assertDatasetShape` で書く前に検証する (W41 の実データで通ることを確認)。
-- **次**: 木曜の取得の経路にある書き手 (`measurement/summarize.mjs` の latest・revenue-history、A8 の成果を書く `normalize-a8-csv.mjs`、`ads/record-rakuten-results.mjs`) にも書く前の検証を入れる。10-22 の Mac の初回取得を変えないため、初回が通ったあとに行う。
+- **次**: 土曜の取得の経路にある書き手 (`measurement/summarize.mjs` の latest・revenue-history、A8 の成果を書く `normalize-a8-csv.mjs`、`ads/record-rakuten-results.mjs`) にも書く前の検証を入れる。10-22 の Mac の初回取得を変えないため、初回が通ったあとに行う。
 - **停止条件**: 記録の形そのものは変えない (schema は今の形を固定するだけ)。
 - **完了条件**: 6 データセットの行に schema があり、`npm run check-datasets` がそれを検証し、書き手が検証してから書いている。
 
@@ -396,7 +396,7 @@ updated: 2026-10-19
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]
 
 - **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。同日に、セッションが管理画面を読みに行く操作を hook で止めたが、X は代わりに読む記録が無いので対象から外した。
-- **次**: X の指標を週 1 回 (認証付き計測と同じ木曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
+- **次**: X の指標を週 1 回 (認証付き計測と同じ土曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
 - **完了条件**: X の指標が週次で記録され、セッションがブラウザで取りに行く必要が無くなっている。
 
 ### [ASP-CONSOLIDATE-A8-RAKUTEN-01] アフィリエイトを A8 と楽天 (直接) に集約し、もしも・afb・バリューコマースの配信と計測を止める
@@ -2467,7 +2467,7 @@ updated: 2026-10-19
 - **2026-10-12 の進捗と停止**: 全量監査 (17:22) は 304 記事・空白 689 枚・空段落 107。修復は 75 枚 verified。修復手順を 2 回直した: (1) 右矢印でカードを選べない場合のクリック経路を足したが、非表示の空白カードはクリックできず、その間に「カード未選択のまま押した Delete」が自動保存されて下書きを 3 件作った → (2) Delete はカードが選択状態 (`ProseMirror-selectednode`) のときだけ押し、未選択なら編集せず止める形に直した。その後 note の公開 API が 403 を返し始め (短時間の大量操作による制限とみられる)、`recovered-n3a4efa70c02a` は「更新する」が出ずタイムアウトした (下書きが残った可能性あり・403 で未確認)。自動処理はすべて停止。
 - **オーナー作業 (下書きの破棄、2026-10-12 時点で 9〜10 本)**: 修復やタグ更新の停止で未公開の下書きが残った記事 — `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`・`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29`・(未確認) `n3a4efa70c02a`、有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8`。`n218588ef2f67`・`n36624f1c4134`・`n391d3ef70d29` の下書きには意図しない削除が入っているので**公開せず破棄**する。破棄後に journal の当該記事の `blocked_by_draft` を消して再開する。
 - **再開手順**: 数時間おいて `curl -s -o /dev/null -w "%{http_code}" https://note.com/api/v3/notes/n3a4efa70c02a` が 200 に戻ったことを確かめ、journal の `repair_failed` を下書きの無い記事だけ消してから修復ループを流す。1 回の連続処理を短く区切る。
-- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。**CIは一度も完了していない (2026-10-11 確認)**: 10-01 (dispatch)・10-03・10-10 (schedule) の 3 回とも `timeout-minutes: 30` で cancelled (run 36909292510 / 37160611864 / 38095490764)。commit `00c5a44f0` の時間切れ対策後も再発しているので、286 記事の browser-verify を 30 分に収める分割か上限の見直しが要る。確認: `gh run list --workflow note-circulation-audit-weekly.yml --limit 3`。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
+- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。**CIは一度も完了していない (2026-10-11 確認)**: 10-01 (dispatch)・10-03・10-10 (schedule) の 3 回とも `timeout-minutes: 30` で cancelled (run 36909292510 / 37160611864 / 38095490764)。commit `00c5a44f0` の時間切れ対策後も再発しているので、286 記事の browser-verify を 30 分に収める分割か上限の見直しが要る。確認: `gh run list --workflow note-circulation-audit-weekly.yml --limit 3`。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。**2026-10-26 観測**: workflow の `timeout-minutes` は 60 に上がっているが、`.claude/scripts/note/__tests__/circulation-workflow.test.mjs` が 30 を期待したまま落ちている (`node --test` で 1 件 fail)。上限を見直すときにテストも同じ値へ直す。
 - **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
 - **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
 

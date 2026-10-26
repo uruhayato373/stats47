@@ -17,8 +17,8 @@ name: 🩺 Health Check (cron 横断 + 配信データ鮮度)
 
 on:
   schedule:
-    # JST 09:00 (UTC 00:00)。日次 cron (JST 03:00-08:00 台) が出そろった後に見る
-    - cron: "0 0 * * *"
+    # 土曜 10:00 JST (UTC 01:00)。週 1 回 (2026-10-26 に日次から変更)。土曜 00:00-08:00 台の週次 cron が出そろった後に見る
+    - cron: "0 1 * * 6"
   workflow_dispatch:
     inputs:
       min_streak:

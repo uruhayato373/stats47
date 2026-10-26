@@ -7,29 +7,29 @@
 | ワークフロー                                        | トリガー                                           | 実行内容                                                                                                                                                                                                        |
 | --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | PR Quality Check                                    | PR作成・更新 (main)                                | Static Gates / Contract Tests / Catalog Gates の 3 job を常時並列実行 (2026-09-18 に 65 step 直列から分割。1 run で複数の失敗を報告する)。差分に応じてType Check、Unit Test、web/admin/Remotion、共有チャートgolden、代表Playwrightを選択し、Web buildは1回だけ生成して再利用。node_modules は lockfile hash キーのキャッシュで復元                                                           |
-| Full Quality Suite (`quality-suite-weekly.yml`)     | 毎週日曜7時30分JST、手動                           | 全workspace型検査、Web coverage、全package/admin/Remotion unit、Admin/Remotion build、Admin/Web全Playwrightを実行。失敗は固定`quality-suite-alert` Issueへ集約し、回復時に自動Close                            |
+| Full Quality Suite (`quality-suite-weekly.yml`)     | 毎週土曜7時30分JST、手動                           | 全workspace型検査、Web coverage、全package/admin/Remotion unit、Admin/Remotion build、Admin/Web全Playwrightを実行。失敗は固定`quality-suite-alert` Issueへ集約し、回復時に自動Close                            |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
 | Warm node_modules cache (`cache-node-modules.yml`)  | `package-lock.json` の main push、毎週月曜6時JST、手動 | default branch scope に node_modules キャッシュを置き、PR / develop の全 job の `npm ci` (実測 105〜122 秒/job) を skip させる |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
 | Ranking AI Content / Gemini (`ai-content-gemini-daily.yml`) | 毎日7時15分JST、手動 | 課金無効の専用 Gemini API key で既定3件を structured 生成。決定的監査 + 別リクエスト critic 通過分だけ publish workflow を明示 dispatch。件数・通過率・token を state へ記録 |
 | Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
-| Backlog Routing Policy (`backlog-routing-policy-weekly.yml`) | 毎週月曜6時45分JST、手動 | ledger と Claude usage の直近28日実測を評価し、minSamples を満たす policy 差分と prompt-evals だけを develop へ提案する。agent frontmatter と日次件数は変更しない |
+| Backlog Routing Policy (`backlog-routing-policy-weekly.yml`) | 毎週土曜6時45分JST、手動 | ledger と Claude usage の直近28日実測を評価し、minSamples を満たす policy 差分と prompt-evals だけを develop へ提案する。agent frontmatter と日次件数は変更しない |
 | Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図を一次ソース照合後に正規化。`source-repair` は公開SVG・manifest・taxonomy・安全なkeyを検証し、既存`source.json`は期待SHA一致時だけCAS更新、欠落`source/data.json`は新規作成してblog調査索引も再生成。dry-run後、明示keyだけR2へ反映 |
-| Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
+| Google Admin settings (`google-admin-settings.yml`) | 毎週土曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 | Affiliate inventory (`affiliate-dashboard-refresh.yml`) | 毎週日曜21時JST、develop対象push、手動 | 在庫/compliance/配置mapとread-only HTMLをartifact化。git/R2/ASPへ書かない |
 | Affiliate metrics (`affiliate-ga4-weekly.yml`) | 毎週日曜22時JST、手動 | GA4 schema v3、二層portfolio、operations、pilot readinessを生成してartifact化。候補提示までで広告変更・winner・pushをしない |
 | GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週日曜20時30分JST (土曜のレビュー・来週の計画の後)、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
-| Visualization Render Golden (`visualization-render-weekly.yml`) | 毎週日曜6時30分JST、手動 | 共有チャート9種をgolden PNGと比較。失敗差分をartifact保存し、PR必須render gateの実行経路も静的契約で監査 |
+| Visualization Render Golden (`visualization-render-weekly.yml`) | 毎週土曜6時30分JST、手動 | 共有チャート9種をgolden PNGと比較。失敗差分をartifact保存し、PR必須render gateの実行経路も静的契約で監査 |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
 
-テーマは `theme-chart-audit-weekly.yml` が毎日09:00 JSTに期日を確認する。
-月曜・月初・未観測d7/d28/d56・手動実行時に公開R2と構成、全テーマのPC/mobile画面を監査する。
+テーマは `theme-chart-audit-weekly.yml` が毎週土曜01:00 JSTに、公開R2と構成、全テーマのPC/mobile画面を監査する
+(2026-10-26 に毎日の期日確認から変更。未観測d7/d28/d56は次の土曜に拾う)。手動実行でも監査する。
 品質の前回正常値を保持し、履歴や県数の退行を検出する。固定theme-alertは内容変更時だけ更新し、
 復旧時に閉じる。画面の初回失敗は30日保持artifact、観測はdevelopの`ci-followup.json`に保存する。
 新しい判断材料・月替わりのみ証拠をレビューし、変更は検証済みdraft PR、無変更は`ci-review.json`へ記録する。
 GA4週次取得はJapan-only pages-clean/theme-navigationと成功・期間メタを保存する。
 
-キーワード順位は `seo-keyword-cycle-daily.yml` が毎日10:15 JSTに確定7日GSCを取得する。
+キーワード順位は `seo-keyword-cycle-daily.yml` が毎週土曜06:00 JSTに確定7日GSCを取得する (2026-10-26 に毎日から変更)。
 実装のdevelop push・手動実行でも動作確認できる。期限到来分を判定し、1キーワードの検索意図を調べて検証付きdraft PRを準備する。
 観察開始は公開成功・変更文言の実測後。台帳は `data/seo/`、詳細はsearch-growthの週次サイクル契約。
 

@@ -142,7 +142,7 @@ test('public page evidence rejects HTTP errors, stale selection and tampered bod
 test('CI commits measurements before read-only research and creates only tested draft PRs', () => {
   const workflow=yaml.load(fs.readFileSync(new URL('../../../../.github/workflows/seo-keyword-cycle-daily.yml',import.meta.url),'utf8'));
   const steps=workflow.jobs.cycle.steps;
-  assert.equal(workflow.on.schedule[0].cron,'15 1 * * *');
+  assert.equal(workflow.on.schedule[0].cron,'0 21 * * 5'); // 土曜 06:00 JST の週 1 回 (2026-10-26)
   assert.match(workflow.jobs.cycle.if,/workflow_run.conclusion == 'success'/);
   const model=steps.findIndex(s=>s.id==='review');
   assert.ok(steps.findIndex(s=>s.name==='Commit measurements before review')<model);

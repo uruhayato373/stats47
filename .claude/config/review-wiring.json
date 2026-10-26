@@ -18,7 +18,7 @@
       "dir": "data/reviews/weekly",
       "periodPattern": "^(\\d{4}-W\\d{2})\\.md$",
       "contractFrom": "2026-W40",
-      "_dueComment": "金曜 (fetch-metrics-weekly) に前週 (月〜日) を計測し、土曜にレビューする (2026-10-10 オーナー決定・doboku-note と同じ曜日)。dueWeekday は getUTCDay の値 (6 = 土曜) で、週 X のレビューは翌週の土曜に必須になる。graceDays の間 (土曜当日) は催促 (warn) だけで、毎朝のガードは日曜から Issue にする",
+      "_dueComment": "土曜の朝 (fetch-metrics-weekly 02:00・Mac の認証付き計測 07:00・無人 triage 08:00) に前週 (月〜日) を計測し、同じ土曜にレビューする (2026-10-10 オーナー決定・doboku-note と同じ曜日。2026-10-26 に計測を金曜から土曜の朝へ移した)。dueWeekday は getUTCDay の値 (6 = 土曜) で、週 X のレビューは翌週の土曜に必須になる。graceDays の間 (土曜当日) は催促 (warn) だけで、毎朝のガードは日曜から Issue にする",
       "dueWeekday": 6,
       "graceDays": 1,
       "requiredSections": [

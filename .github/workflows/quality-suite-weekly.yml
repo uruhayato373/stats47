@@ -2,7 +2,7 @@ name: 🧪 Full Quality Suite (weekly)
 
 on:
   schedule:
-    - cron: "30 22 * * 6" # JST 日曜 07:30。visualization render (06:30) の後
+    - cron: "30 22 * * 5" # JST 土曜 07:30。visualization render (06:30) の後
   workflow_dispatch:
 
 permissions:

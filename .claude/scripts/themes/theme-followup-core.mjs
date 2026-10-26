@@ -18,7 +18,8 @@ export function planFollowup(experiments, today, force = false) {
           date: e.evaluateAt[cp],
         }))
     );
-  const weekly = new Date(`${today}T00:00:00Z`).getUTCDay() === 1;
+  // 定期実行は毎週土曜 (2026-10-26 に毎日の期日判定 + 月曜の全量監査から変更)
+  const weekly = new Date(`${today}T00:00:00Z`).getUTCDay() === 6;
   const monthly = today.endsWith('-01');
   return {
     today,

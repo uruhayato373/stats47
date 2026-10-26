@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T23:13:09.336Z",
-  "stage": "review",
+  "generatedAt": "2026-10-25T15:01:17.535Z",
+  "stage": "monitor",
   "status": "fail",
   "measurementWeek": "2026-W42",
-  "expectedCompletedWeek": "2026-W42",
+  "expectedCompletedWeek": "2026-W43",
   "expectedPlanWeek": "2026-W44",
   "currentMonth": "2026-10",
   "summary": {
-    "pass": 9,
+    "pass": 10,
     "warn": 1,
-    "fail": 1
+    "fail": 3
   },
   "checks": [
     {
@@ -21,9 +21,9 @@
     },
     {
       "code": "snapshot-freshness",
-      "level": "pass",
-      "detail": "latest=2026-W42, expected>=2026-W42",
-      "action": null
+      "level": "fail",
+      "detail": "latest=2026-W42, expected>=2026-W43",
+      "action": "npm run fetch-gsc-snapshot -- 2026-W43"
     },
     {
       "code": "effect-verdict",
@@ -52,7 +52,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W43, age=1d",
+      "detail": "week=2026-W43, age=3d",
       "action": null
     },
     {
@@ -70,13 +70,31 @@
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-10-23, age=1d",
+      "detail": "latest=2026-10-25, age=1d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
       "detail": "2026-W42 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "fail",
+      "detail": "plan=2026-W43, expected=2026-W44",
+      "action": "/weekly-plan 2026-W44"
+    },
+    {
+      "code": "monthly-plan",
+      "level": "pass",
+      "detail": "month=2026-10, GSC運用サイクル節=あり",
+      "action": null
+    },
+    {
+      "code": "monthly-review-coverage",
+      "level": "pass",
+      "detail": "直近4週レビュー 4/4（必要 3以上）",
       "action": null
     }
   ]

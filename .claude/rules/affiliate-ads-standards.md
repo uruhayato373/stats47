@@ -390,7 +390,7 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
 ### 実行形態 (ローカル限定・Mac / Windows 両対応)
 
 - Playwright プロファイル (`.local/playwright-a8-profile`) がローカルにあるため **GitHub Actions では動かない**。
-  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、日曜 07:00 JST。
+  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、土曜 08:30 JST。
   launchd は Mac のみ。Windows では手動または skill 経由で実行する)。
 - **プロファイルのパス解決は Mac / Windows 両対応** (2026-07-28)。`process.platform` で分岐せず
   「Mac 本体チェックアウトが実在すればそこ、無ければ**このファイルから解決したリポジトリ root**」の

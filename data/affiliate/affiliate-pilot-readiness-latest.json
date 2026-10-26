@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-19T19:12:31.295Z",
+  "generatedAt": "2026-10-25T17:01:59.095Z",
   "plan": {
     "experimentId": "ranking-labor-lane-pilot-2026w39",
     "kind": "creative",
@@ -47,10 +47,10 @@
   "feasibility": {
     "status": "feasible",
     "reasons": [],
-    "baselineCtr": 0.0011296243998870376,
-    "requiredImpressions": 17705,
+    "baselineCtr": 0.001887237556027365,
+    "requiredImpressions": 10598,
     "requiredClicks": 20,
-    "projectedDays": 35
+    "projectedDays": 18
   },
   "readiness": {
     "status": "ready",

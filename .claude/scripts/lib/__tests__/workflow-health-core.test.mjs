@@ -300,15 +300,15 @@ test('週次契約の workflow は 1 回の失敗 (長時間の cancelled を含
 });
 
 test('週次契約の workflow が予定枠から猶予を過ぎても起動していなければ unhealthy', () => {
-  const lastWeek = run({ createdAt: '2026-09-26T22:31:00Z', updatedAt: '2026-09-26T23:20:00Z' });
-  // 次の枠 (10/03 22:30) + 猶予 6 時間より前は健全
+  const lastWeek = run({ createdAt: '2026-10-30T22:31:00Z', updatedAt: '2026-10-30T23:20:00Z' });
+  // 次の枠 (11/06 22:30) + 猶予 6 時間より前は健全
   assert.equal(
-    evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-10-04T04:00:00Z') }).unhealthy,
+    evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-11-07T04:00:00Z') }).unhealthy,
     false,
   );
-  const missed = evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-10-05T00:00:00Z') });
+  const missed = evaluateWorkflow('quality-suite-weekly.yml', [lastWeek], { nowMs: Date.parse('2026-11-08T00:00:00Z') });
   assert.equal(missed.unhealthy, true);
-  assert.equal(evaluateSchedule('quality-suite-weekly.yml', [lastWeek], Date.parse('2026-10-05T00:00:00Z')).code, 'scheduled_run_stale');
+  assert.equal(evaluateSchedule('quality-suite-weekly.yml', [lastWeek], Date.parse('2026-11-08T00:00:00Z')).code, 'scheduled_run_stale');
 });
 
 test('API取得はscheduleで絞り込み、eventを判定層まで維持する', async () => {

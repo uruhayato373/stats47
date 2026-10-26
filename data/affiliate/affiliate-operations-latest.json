@@ -1,8 +1,8 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-10-19T19:12:30.001Z",
+  "generatedAt": "2026-10-25T17:01:57.863Z",
   "inventorySnapshot": "data/affiliate/inventory-latest.json",
-  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-10-17.json",
+  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-10-24.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -60,8 +60,8 @@
     }
   ],
   "ga4Totals": {
-    "impressions": 3541,
-    "clicks": 4,
-    "ctr": 0.0011296243998870376
+    "impressions": 4239,
+    "clicks": 8,
+    "ctr": 0.001887237556027365
   }
 }

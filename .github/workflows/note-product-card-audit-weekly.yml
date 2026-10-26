@@ -14,7 +14,7 @@ name: 🛒 note Product Card Audit (weekly)
 
 on:
   schedule:
-    - cron: '20 20 * * 6' # 土 20:20 UTC = 日 05:20 JST (note-circulation-audit-weekly の直後)
+    - cron: '20 20 * * 5' # 金 20:20 UTC = 土 05:20 JST (note-circulation-audit-weekly の直後)
   workflow_dispatch:
 
 permissions:

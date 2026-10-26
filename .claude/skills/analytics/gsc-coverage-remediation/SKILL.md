@@ -25,7 +25,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 ## ループ全体図
 
 ```
-[1] 認証付き週次CI (木曜) が GSC UI export → private R2（初回/期限切れログインは人間）
+[1] 認証付き週次取得 (土曜の Mac) が GSC UI export → private R2（初回/期限切れログインは人間）
        ↓
 [2] ingest-gsc-export.py        cp932 zip を正規化 → coverage-drilldown/<週>/<category>-drilldown.csv + category-totals.json
        ↓
@@ -90,7 +90,7 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ### Phase 1 — 取り込み (ingest)
 ```bash
 # (任意) UI export を Playwright で自動化する。カバレッジは公式 API が無く UI export しか経路がない。
-# 同じ export は週次の取得 (木曜の Mac) が行う。セッションで動かすのはオーナーが会話で頼んだときだけ (hook が止める)。
+# 同じ export は週次の取得 (土曜の Mac) が行う。セッションで動かすのはオーナーが会話で頼んだときだけ (hook が止める)。
 # 初回だけ headed Chrome で人間が Google にログインする (認証情報はスクリプトが扱わない)。
 node .claude/scripts/gsc/export-coverage-playwright.mjs --probe   # 初回: DOM 構造を確認
 node .claude/scripts/gsc/export-coverage-playwright.mjs           # ~/Downloads へ zip を保存
@@ -198,7 +198,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 (`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
 step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
 
-**認証付きの週次取得 (木曜・Mac)**: `measurement-collect-local.sh`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する (2026-10-20 に CI から移した)。
+**認証付きの週次取得 (土曜・Mac)**: `measurement-collect-local.sh`がPhase 1のUI exportとingestを実行し、暗号化private R2へ保存する (2026-10-20 に CI から移した)。
 週次側はsource allowlistで入力だけを復元する。初回成功後は最新試行失敗・8日超で停止し、古いgit入力へfallbackしない。
 Googleの初回ログイン・期限切れ・2FAは人間工程として残す。APIの検索パフォーマンス取得とは別経路。
 
