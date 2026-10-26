@@ -129,6 +129,32 @@ jobs:
   assert.equal(result.output.findings, 0);
 });
 
+test('画像を書く job に付けた shared lock も受理し、別 job の lock は数えない', () => {
+  const workflow = (lockedJob) => `
+name: image
+on: { workflow_dispatch: {} }
+permissions: { contents: read }
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+${lockedJob === 'checks' ? '    concurrency: { group: r2-write, cancel-in-progress: false }\n' : ''}    steps:
+      - run: npm test
+  ogp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+${lockedJob === 'ogp' ? '    concurrency: { group: r2-write, cancel-in-progress: false }\n' : ''}    steps:
+      - name: generate
+        run: npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking
+      - name: publish
+        run: npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-ranking.json
+`;
+  const locked = run(workflow('ogp'));
+  assert.equal(locked.output.findings, 0, JSON.stringify(locked.output.details));
+  const elsewhere = run(workflow('checks'));
+  assert.ok(elsewhere.output.details.some((finding) => finding.code === 'IMAGE_WRITE_NO_SHARED_CONCURRENCY'));
+});
+
 /**
  * SCRIPT_RUN_WITHOUT_INSTALL 用。auditor は実ファイルを走査して「依存を持つスクリプト」を
  * 求めるので、workflow だけでなくスクリプト実体も一時 repo に置く必要がある。

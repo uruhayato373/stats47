@@ -189,7 +189,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (金曜 05:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `--sync-inspection` → `data/gsc/coverage-remediation/` を develop へ commit-back)。
-**判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
+**判断が要る是正も CI で回す (2026-09-24〜)**: 週次 `fetch-metrics-weekly.yml` の url-inspection job と週次の最後に
 `sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、対話セッション (2026-09-27 まで `backlog-loop-daily.yml` の日次実行) が
 直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `data/gsc/coverage-remediation` も commit する
 (是正キューへの `--mark-*` が成果物のため)。
@@ -204,7 +204,7 @@ Googleの初回ログイン・期限切れ・2FAは人間工程として残す�
 
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
 - 全理由・通知・拡張の画面監査と本番是正/Google検証の結果も `/gsc-improvement` の共通手順で週次・月次レビューへ渡す。
-- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎日稼働。
+- 自動アーム (CI・既存): `fetch-metrics-weekly.yml` の url-inspection job (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎週土曜に稼働。
   2026-09-23 まではCI既定の `--limit 500` が検索実績上位 500 件だけで埋まり、是正キューを 1 件も検査していなかった (7日間 0/1,133)。
   枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役・2026-10-01 削除 (Indexing API 送信しない)。
   本スキルのUI export経路は「UI exportでしか取れない総件数・未把握URL」を補う。

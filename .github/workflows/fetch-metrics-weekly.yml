@@ -5,13 +5,25 @@ on:
     # 土曜 02:00 JST に前週 (月〜日) を計測し、同じ土曜にレビューする (2026-10-10 オーナー決定・2026-10-26 に金曜 05:00 から移動)。
     # 日曜に当週を取ると GSC の取得遅延 (約 3 日) で直近数日が欠け、W40 は 9/30・10/1 が欠落して取り直した。
     # GitHub の schedule は数時間遅れて発火する (実測で最大 4.5 時間) ので、土曜のレビューまで余裕を置く。
-    - cron: "0 17 * * 5" # 土曜 02:00 JST (金 17:00 UTC)
+    # 2026-10-26 から 00:00 に PSI と URL 検査 (旧 psi-audit-daily.yml・gsc-url-inspection-daily.yml) を先に走らせ、
+    # 両方が終わってから週次計測を始める (URL 検査は約 60 分なので、計測の開始は従来の 02:00 前後のまま)。
+    - cron: "0 15 * * 5" # 土曜 00:00 JST (金 15:00 UTC)
   workflow_dispatch:
     inputs:
+      only:
+        description: "手動起動で走らせる部分 (schedule は全部)。metrics = 週次計測だけ (従来の手動起動と同じ)"
+        required: false
+        type: choice
+        default: metrics
+        options: [metrics, psi, url-inspection, all]
       week:
         description: "ISO week (YYYY-Www). Empty = 直近に終わった週 (JST の前の日曜を含む週)"
         required: false
         default: ""
+      limit:
+        description: "URL 検査の件数 (default 500、空白で全件)"
+        required: false
+        default: "500"
 
 permissions:
   contents: write
@@ -22,7 +34,261 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # PSI (mobile + desktop)。週次計測の計測サイクルが data/psi/history.csv を読むので、計測より先に取る
+  psi:
+    name: PSI audit
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'psi' || inputs.only == 'all' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      # 計測も develop の上で行う。以前は main で計測して .claude/state/metrics/psi/ を develop へ上書きコピーしており、
+      # main が develop より遅れている間は前日までの history 行と prune の削除を毎日失っていた
+      # (2026-10-05 発見。消えた行は git 履歴から復元済み)。契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🚀 Run PSI audit (mobile + desktop)
+        env:
+          PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+        run: npm run fetch-psi-audit
+
+      - name: 📝 Update history.csv and LATEST.md
+        run: npm run psi-audit:digest
+
+      - name: 🧹 Retain latest raw PSI snapshot
+        # 長期比較は history.csv がSSOT。生JSONは最新1件だけ残し、Git履歴から復元可能にする。
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope psi
+
+      - name: 🔍 Threshold check
+        id: check
+        run: |
+          mkdir -p /tmp/psi-report
+          # bash -e で npm run の非ゼロ終了が即 exit する問題を回避し、exit code を変数に保存
+          set +e
+          npm run psi-audit:check -- --output /tmp/psi-report/report.md
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=${EXIT_CODE}" >> "$GITHUB_OUTPUT"
+          echo "Threshold check exit code: ${EXIT_CODE}"
+
+      - name: 📄 Write GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f /tmp/psi-report/report.md ]; then
+            cat /tmp/psi-report/report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "PSI report not generated" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: 📤 Publish to develop branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/psi
+          if git diff --cached --quiet; then
+            echo "No PSI changes to publish"
+            exit 0
+          fi
+
+          git commit -m "chore(metrics): psi daily audit $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          # 計測の間に develop が進みうるので push の直前で取り直す
+          git pull --rebase --autostash origin develop
+          git push origin develop
+
+      - name: 🔍 Suggest CWV candidates for violated URLs
+        if: steps.check.outputs.exit_code == '1'
+        run: |
+          # report.md から違反 URL を抽出 (https://stats47.jp/... or https://www.stats47.jp/... を全て拾う)
+          URLS=$(grep -oE 'https://(www\.)?stats47\.jp[^ )"]+' /tmp/psi-report/report.md \
+                 | sort -u \
+                 | head -10)
+
+          if [ -z "$URLS" ]; then
+            echo "No stats47.jp URLs found in report.md; skipping candidate suggestion."
+            : > /tmp/psi-report/candidates.md
+            exit 0
+          fi
+
+          # 各 URL を --url 引数として渡す
+          URL_ARGS=""
+          while IFS= read -r u; do
+            URL_ARGS="${URL_ARGS} --url ${u}"
+          done <<< "$URLS"
+
+          echo "" > /tmp/psi-report/candidates.md
+          {
+            echo "---"
+            echo ""
+            echo "## 🔧 修正候補 component (自動提案)"
+            echo ""
+            echo "違反 URL ごとに \`apps/web/src/{app,features}/\` から候補ファイルを抽出 + git blame + 過去施策 hint。"
+            echo "詳細: \`.claude/scripts/psi/suggest-cwv-candidates.mjs\`"
+            echo ""
+          } >> /tmp/psi-report/candidates.md
+
+          node .claude/scripts/psi/suggest-cwv-candidates.mjs "$URL_ARGS" --max 5 --format markdown \
+            >> /tmp/psi-report/candidates.md 2>&1 || echo "_(candidate suggestion failed, see logs)_" >> /tmp/psi-report/candidates.md
+
+          echo "=== candidates preview ==="
+          head -40 /tmp/psi-report/candidates.md
+
+      - name: 🚨 Open issue on threshold violations
+        if: steps.check.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[PSI Alert] しきい値割れ検知"
+          # report.md + candidates.md を結合して body にする
+          BODY_FILE=/tmp/psi-report/body-with-candidates.md
+          cat /tmp/psi-report/report.md > "$BODY_FILE"
+          if [ -s /tmp/psi-report/candidates.md ]; then
+            cat /tmp/psi-report/candidates.md >> "$BODY_FILE"
+          fi
+
+          # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**
+          # (2026-08-12 に rakuten-alert 未登録で実際に発生し、9 日間の同期停止を誰も知らなかった)。
+          gh label create psi-alert --description "PSI 日次計測の閾値違反" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label psi-alert --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — replacing with latest measurement"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file "$BODY_FILE"
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "psi-alert,auto-generated" \
+              --body-file "$BODY_FILE"
+          fi
+
+      - name: ✅ Close recovered PSI alert
+        if: steps.check.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label psi-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "PSIの最新計測がしきい値内へ復旧したため自動Closeします。"
+            done
+
+  # URL Inspection。週次計測の「Sync coverage queue with URL Inspection」がこの結果を読み、両方が
+  # 是正キューとバックログを書き換えるので、同時に走らせず計測より先に終える
+  url-inspection:
+    name: GSC URL Inspection
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'url-inspection' || inputs.only == 'all' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90  # 500 URL × ~7s = 60 分、安全マージン込み
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔎 Run URL Inspection
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+        run: |
+          # default 500 URL/回 (60分 + マージン)。空白指定で全件 (timeout 注意)
+          LIMIT_OPT="${{ inputs.limit || '500' }}"
+          if [ -n "$LIMIT_OPT" ]; then
+            node .claude/scripts/gsc/url-inspection-daily.cjs --limit "$LIMIT_OPT"
+          else
+            node .claude/scripts/gsc/url-inspection-daily.cjs
+          fi
+
+      # 是正キュー (coverage-remediation-queue.json) へ観測を反映する。登録済みになった URL を done にし、
+      # 「直した URL が登録されたか」を週次で数える (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
+      # 失敗しても当日の検査結果は commit する。
+      - name: 🔁 Sync remediation queue with inspection results
+        run: node .claude/scripts/gsc/build-coverage-queue.mjs --sync-inspection || echo "::warning::coverage queue sync failed, continuing"
+
+      # 判断が要る pending (sitemap 掲載判断・ソフト404・5xx 等) をバックログカードにする。
+      # 処理は backlog-loop-daily (CI の Claude) が行い、--assert-handled を gate にして行を消す。
+      # action ごとに開いているカードは 1 枚まで。消化された翌日に次の batch を起票する。
+      - name: 🗂 File judgment items to the backlog
+        run: node .claude/scripts/gsc/sync-coverage-backlog.mjs || echo "::warning::coverage backlog sync failed, continuing"
+
+      - name: 📅 Resolve date
+        id: date
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: 🧹 Retain recent raw inspection snapshots
+        # 集計履歴は history.csv、詳細調査は最新7日。古い生CSVはGit履歴から復元できる。
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope gsc
+
+      - name: 💾 Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/gsc/url-inspection/
+          git add data/gsc/coverage-remediation/
+          git add .claude/todo/backlog.md
+          git add data/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(gsc): URL Inspection daily snapshot ${{ steps.date.outputs.date }}"
+            # 本 job は ~1 時間走り、その間に他の cron の commit-back が develop を進めるため
+            # 素の push は毎日 non-fast-forward で拒否される (2026-07-11〜17 に 7 日連続 fail)。
+            # --autostash: 選択 add (state dir のみ) の後に working tree に残る未ステージの
+            # 変更 (npm ci 等の副作用) が rebase を止める事象 (2026-07-18 run 29622319874) を回避する。
+            # commit 済みの snapshot と resubmit 側は互いに素なので rebase は常にクリーン。
+            git pull --rebase --autostash origin develop
+            # 投稿/計測 state は develop へ commit-back する (main 直推しは branch-workflow 違反。2026-08-16 是正)
+            git push origin develop
+          fi
+
+      - name: 💬 Comment summary on parent issue #115
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'data/gsc/url-inspection/LATEST.md';
+            if (!fs.existsSync(path)) {
+              core.warning('LATEST.md not found, skipping comment');
+              return;
+            }
+            const body = fs.readFileSync(path, 'utf-8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 115,
+              body: body,
+            });
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          if [ -f data/gsc/url-inspection/LATEST.md ]; then
+            cat data/gsc/url-inspection/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
   fetch:
+    needs: [psi, url-inspection]
+    # 前段が skipped (手動起動の metrics) や失敗でも週次計測は走らせる。前段の失敗は各 job の赤で見える
+    if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.only == 'metrics' || inputs.only == 'all') }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -385,7 +651,7 @@ jobs:
       # ── カバレッジキュー失敗の通知 ────────────────────────────────
       # continue-on-error で週次計測本体は止めないが、失敗を green に隠さない。
       # 同一タイトルの open issue があれば編集して重複起票を避ける
-      # (internal-link-audit-weekly / ogp-image-audit-weekly と同じ作法)。
+      # (quality-suite-weekly の ogp-images job と同じ作法)。
       - name: 🚨 Raise coverage queue alert
         if: always() && steps.coverage_queue.outcome != 'success'
         env:

@@ -172,11 +172,12 @@ test('★Claude を使う workflow どうしが実時間で重ならない (利�
     .filter(({ source }) => /- cron: "/.test(source));
 
   // 列挙が空 = 何も検査していない、を防ぐ (2026-09-27 に backlog-loop の cron を止め、2026-10-26 に improvement-cycle を
-  // 週次レビューへ移したので、週次で cron を持つ page-quality-audit を錨にする)
-  assert.ok(
-    claudeWorkflows.some(({ file }) => file === 'page-quality-audit-weekly.yml'),
-    'page-quality-audit が Claude workflow として拾えていない = 列挙が壊れている',
-  );
+  // 週次レビューへ移したので、週次で cron を持つ quality-suite (ページ品質とテーマの Claude を持つ) を錨にする)
+  const suite = claudeWorkflows.find(({ file }) => file === 'quality-suite-weekly.yml');
+  assert.ok(suite, 'quality-suite が Claude workflow として拾えていない = 列挙が壊れている');
+  // 同じ workflow の中の Claude 2 本 (theme・page-quality) は下の重なり検査の対象外なので、needs で順に走らせる
+  const jobs = YAML.parse(suite.source).jobs;
+  assert.deepEqual(jobs['page-quality'].needs, ['theme'], 'page-quality の Claude が theme の Claude と同時に走る');
 
   const crons = (source) => [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);
   const startHour = (cron) => Number(cron.split(/\s+/)[1]);

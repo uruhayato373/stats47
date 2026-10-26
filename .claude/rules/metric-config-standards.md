@@ -142,7 +142,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 - **既存 metric を触るとき**も、単年設定 (`years.from === years.to`) を見つけたら「本当に
   1 年しかないか」を疑い、ついでに確認する (触ったついでの是正。全件一括の棚卸しは別途)。
 - 単年判定を回避するために存在しない年を書かない。確認できた年だけを列挙する。
-- **既存 755 件の棚卸しは週次 `estat-year-coverage-audit-weekly.yml` が少しずつ巡回する**
+- **既存 755 件の棚卸しは 週次レビューの `npm run weekly:audits` (estat-year-coverage) が少しずつ巡回する**
   (`packages/ranking/src/scripts/audit-estat-year-coverage.ts`、都道府県1件をサンプルに
   `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
   `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
@@ -172,7 +172,7 @@ ESTAT-YEAR-AVAILABILITY-01)。原因は `years` 1 つに「e-Stat にある年 (
 - **未判断の除外**: reason が `YEAR_EXCLUSION_INHERITED` の除外 (422 件) は移行時に当時の `years` から
   引き継いだだけ。根拠があれば reason を書き換え、無ければ除外を消して同期で年を戻す。一覧は LATEST.md。
 - **検査**: PR CI (`Metric Years Gate`) が `sync:estat-years -- --check` で、台帳にある全県の年の入れ忘れと、
-  除外した年の残りを止める。週次 `estat-year-coverage-audit-weekly.yml` が台帳を取り直して新しい年を足し、
+  除外した年の残りを止める。週次レビューの `npm run weekly:audits` (estat-year-coverage) が台帳を取り直して新しい年を足し、
   R2 の値は毎月の `data-refresh.yml` で増える。
 - 台帳が無い・取得に失敗した・行が切れた・重複行がある条件の metric と `years: "all"` は同期の対象外。
 - **市区町村の値も台帳に載る** (行に `level: "city"`、現行の市区町村マスタにあるコードだけを数える)。
@@ -222,7 +222,7 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 | 層         | 実装                                                                       | 発火                                      |
 | ---------- | -------------------------------------------------------------------------- | ----------------------------------------- |
 | 取り込み時 | `page-data-batch.ts` の `gateShape` (error なら**書かずに既存 R2 を温存**) | `data-refresh.yml`                        |
-| 事後監査   | `audit-ranking-data-integrity.ts` の検査 (j)                               | 週次 `ranking-integrity-audit-weekly.yml` |
+| 事後監査   | `audit-ranking-data-integrity.ts` の検査 (j)                               | 週次レビューの `npm run weekly:audits` (ranking-integrity) |
 | 棚卸し     | `scan-stats-shape.ts` (R2 走査 + allowlist 生成 + 進捗計測)                | 手動                                      |
 
 判定はすべて `packages/data-configs/src/shape-gate.ts` の**同じ純関数**。
@@ -349,7 +349,7 @@ git の更新日では「クエリが変わった」と「ただ触った (整�
 後者は率系で、`aa5f7c37` 自身が「率系 4 は単一セルでは取れず calculation の設計が要る」と
 書いている残件と一致する。
 
-週次 `ranking-integrity-audit-weekly.yml` に **縮小専用ラチェット**で配線済み
+週次レビューの `npm run weekly:audits` (ranking-integrity) に **縮小専用ラチェット**で配線済み
 (`--ratchet`: 前回より増えたときだけ失敗する)。0 件でなければ失敗にすると恒久的に赤くなり
 無視されるため、増加を止めて減る方へ向ける。state は `data/data-quality/{reingest-queue.json,LATEST.md}`。
 

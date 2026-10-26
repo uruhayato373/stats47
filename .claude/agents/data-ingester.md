@@ -117,7 +117,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   metric (家賃控除後可処分所得 / 実質可処分所得 / エンゲル係数) は、分子・分母を `page-data-batch` で
   更新しても**自分の `app/stats/<key>/values.json` は追従しない**。`calculated-stats` task が producer なので
   `calculated-stats → ranking-values` の順で回す (`data-refresh.yml` は run.sh をフル実行するので自動)。
-  取りこぼしは週次 `ranking-integrity-audit-weekly.yml` の検査 (m) が「作れるはずの年」との差で検出する。
+  取りこぼしは週次レビューの `npm run weekly:audits` (ranking-integrity) の検査 (m) が「作れるはずの年」との差で検出する。
   期間 (月額/年額) の宣言は config の `calculation.periodAlign` が唯一の情報源 — e-Stat のメタは期間を
   明示しないため、宣言を欠くと月額から年額を引く等の誤りが機械では検出できない
   (`.claude/rules/metric-config-standards.md`「計算型 metric」)。

@@ -12,6 +12,7 @@ import type {
 import sharp from 'sharp';
 
 import {
+  BlogImageBlockedError,
   aiBackgroundCacheKey,
   computeAiBackgroundCacheFingerprint,
   createAiBackgroundCache,
@@ -298,6 +299,45 @@ describe('published AI background reuse via S3', () => {
     expect(store.get).toHaveBeenCalledWith(keys.manifest);
     expect(store.get).toHaveBeenCalledWith(keys.background);
     expect(store.head).not.toHaveBeenCalled();
+  });
+
+  // 週次の自己修復は、この例外の記事だけを保留して他の記事の生成を続ける (generate-blog-thumbnails-cloud.ts)。
+  // 普通の Error に戻すと 1 記事の不一致でブログ全件の自己修復がまた止まる (2026-08-01〜10-24 に実際に止まった)
+  it('reports a per-article contract mismatch as BlogImageBlockedError', async () => {
+    const slug = 'article-a';
+    const keys = blogImageKeys(slug);
+    const backgroundBody = await jpegFixture();
+    const backgroundSha = sha256(backgroundBody);
+    const manifestBody = Buffer.from(
+      JSON.stringify({
+        assets: [{ key: keys.background, sha256: backgroundSha }],
+        metadata: { background: { source: 'ai', promptHash: PROMPT_HASH, sha256: backgroundSha } },
+      })
+    );
+    const { store } = makeStore({
+      [keys.manifest]: {
+        body: manifestBody,
+        etag: '"manifest"',
+        contentType: 'application/json',
+        contentLength: manifestBody.byteLength,
+        metadata: { 'stats47-sha256': sha256(manifestBody) },
+      },
+      // 共通 manifest の背景なのに stats47-sha256 / stats47-manifest の metadata が無い
+      [keys.background]: {
+        body: backgroundBody,
+        etag: '"background"',
+        contentType: 'image/jpeg',
+        contentLength: backgroundBody.byteLength,
+        metadata: {},
+      },
+    });
+    const result = readPublishedBackgroundState({
+      store,
+      slug,
+      descriptor: { promptHash: PROMPT_HASH, legacyPromptHash: null },
+    });
+    await expect(result).rejects.toBeInstanceOf(BlogImageBlockedError);
+    await expect(result).rejects.toThrow('R2 AI背景画像契約がmanifestと一致しません');
   });
 
   it('rejects a self-consistent published background with wrong dimensions', async () => {

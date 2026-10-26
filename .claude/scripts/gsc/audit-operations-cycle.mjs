@@ -445,7 +445,7 @@ export function auditOperationsCycle({
     inspectionDate
       ? `latest=${inspectionDate}, age=${inspectionAge}d`
       : 'LATEST.md の取得日を読めない',
-    inspectionFresh ? null : 'gsc-url-inspection-daily workflow を確認'
+    inspectionFresh ? null : 'fetch-metrics-weekly の url-inspection job を確認'
   );
 
   const reviewPath = measurementWeek

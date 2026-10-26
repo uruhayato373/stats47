@@ -30,7 +30,7 @@ npm run note:covers:test
 - 終了コード: `0`=全件設定済み・カタログ集合一致、`1`=未設定または集合差分、`2`=取得失敗・不完全。`--report-only`による成功扱いは用意しない。
 - 出力は`data/note/evidence/note-cover-audit-latest.json`（毎回置換、時刻・完全性・記事別URL・根拠・都道府県別家計調査の集計付き）。`--output /tmp/note-cover.json`で保存先を指定できる。
 - 公開前の下書き・画像の見た目・画像URLの到達性・R2保存状況はこの判定に含めない。画像の保存状況は下記ギャラリーで別途確認する。
-- 既存`note-circulation-audit-weekly.yml`にも接続し、失敗を既存アラートとartifactへ渡す。外部公開・画像生成はしない。
+- 週次レビューの `npm run weekly:audits` (note-circulation) にも接続し、失敗をレビュー本文へ渡す。外部公開・画像生成はしない。
 
 ### 保存画像と配信画像のギャラリー
 
@@ -93,7 +93,7 @@ Cell content: ≤ 10 words each.
 
 ## 自動化との関係
 
-生成漏れは **`ogp-image-audit-weekly.yml` (週次) が自動修復** し、`sync-snapshots.yml` の公開時フックが
+生成漏れは **`quality-suite-weekly.yml` の ogp-images job (週次) が自動修復** し、`sync-snapshots.yml` の公開時フックが
 新規 ranking を即生成する (トークン消費ゼロ・決定的)。本スキルは**人手での目視レビュー / 臨時監査**用途
 (デザイン確認・特定種別の詳細確認)。決定的な欠落ゲートは `generate-ogp-images.ts --audit` /
 `build-image-gallery.mjs --audit --all` (欠落>0 で exit 1)。

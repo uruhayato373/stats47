@@ -24,7 +24,7 @@
  *   node .claude/scripts/blog/prune-published-outbox.mjs --check    # 検出のみ・取り残しがあれば exit 1 (deploy/publish ガード)
  *   R2_PUBLIC_FETCH_URL=... で正典判定先を上書き可 (既定 https://storage.stats47.jp)
  *
- * 呼び出し元: blog-remediation-daily.yml (日次 --apply) / check-published-drafts.cjs (--check ラッパー: /deploy・/publish-article)
+ * 呼び出し元: weekly-audits/blog-remediation.sh (週次レビューの weekly:audits・--apply) / check-published-drafts.cjs (--check ラッパー: /deploy・/publish-article)
  */
 
 import { readFileSync, readdirSync, existsSync, statSync, rmSync } from "node:fs";

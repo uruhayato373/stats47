@@ -64,7 +64,7 @@ test('code and experiment decisions are reviewable proposals', () => {
 });
 test('the reviewer cannot alter its guards or unrelated files', () => {
   for (const file of [
-    '.github/workflows/theme-chart-audit-weekly.yml',
+    '.github/workflows/quality-suite-weekly.yml',
     'package.json',
     '.claude/scripts/themes/check-theme-review.mjs',
     '.claude/scripts/themes/validate-theme-state.mjs',

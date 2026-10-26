@@ -13,7 +13,7 @@ export const metadata = { title: "CI ワークフロー — stats47 admin" };
 /**
  * /ops/workflows — 全 GitHub Actions workflow の起動条件・状態・直近の結果を目視する画面。
  * 読み取り専用。データは `npm run ci:workflows` (preadmin でも実行) が書く .local/ci/workflow-catalog.json。
- * 失敗の数え方は日次の workflow-health-daily と同じ (cancelled / skipped は失敗に数えない)。
+ * 失敗の数え方は週次レビューの CI の健全性 (weekly-audits/ci-health.sh) と同じ (cancelled / skipped は失敗に数えない)。
  */
 
 const FILTERS = {

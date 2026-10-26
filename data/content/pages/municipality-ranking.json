@@ -178,22 +178,6 @@
       "published": true
     },
     {
-      "id": "municipality-ranking:auto-insurance-penetration-bodily-injury-actual",
-      "kind": "municipality-ranking",
-      "key": "auto-insurance-penetration-bodily-injury-actual",
-      "title": "自動車保険普及率の市区町村ランキング",
-      "href": "/municipalities/ranking/auto-insurance-penetration-bodily-injury-actual",
-      "published": false
-    },
-    {
-      "id": "municipality-ranking:auto-insurance-penetration-bodily-injury-fixed",
-      "kind": "municipality-ranking",
-      "key": "auto-insurance-penetration-bodily-injury-fixed",
-      "title": "自動車保険普及率の市区町村ランキング",
-      "href": "/municipalities/ranking/auto-insurance-penetration-bodily-injury-fixed",
-      "published": false
-    },
-    {
       "id": "municipality-ranking:autolock-apartment-main-households",
       "kind": "municipality-ranking",
       "key": "autolock-apartment-main-households",
@@ -1536,22 +1520,6 @@
       "title": "売上金額（民営・金融業、保険業）の市区町村ランキング",
       "href": "/municipalities/ranking/finance-insurance-private-sales",
       "published": true
-    },
-    {
-      "id": "municipality-ranking:fire-affected-persons-count",
-      "kind": "municipality-ranking",
-      "key": "fire-affected-persons-count",
-      "title": "火災り災人員数の市区町村ランキング",
-      "href": "/municipalities/ranking/fire-affected-persons-count",
-      "published": false
-    },
-    {
-      "id": "municipality-ranking:fire-damage-amount",
-      "kind": "municipality-ranking",
-      "key": "fire-damage-amount",
-      "title": "火災損害額の市区町村ランキング",
-      "href": "/municipalities/ranking/fire-damage-amount",
-      "published": false
     },
     {
       "id": "municipality-ranking:fire-service-expense-municipal",

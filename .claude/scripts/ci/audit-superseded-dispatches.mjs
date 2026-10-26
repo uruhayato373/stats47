@@ -2,7 +2,7 @@
 /**
  * R2 書き込みの workflow (`concurrency: group: r2-write`) で、待機中に後続の run へ取り消されて
  * ジョブを 1 つも実行しなかった手動起動を洗い出す (CI-R2-WRITE-PENDING-REPLACED-01)。
- * 判定は `workflow-health-core.mjs` の `findSupersededDispatches`。`workflow-health-daily.yml` が毎日実行し、
+ * 判定は `workflow-health-core.mjs` の `findSupersededDispatches`。週次レビューの `weekly:audits` (ci-health.sh) が実行し、
  * 見つかれば cron ヘルスの Issue に載せる。
  *
  * 使い方: node .claude/scripts/ci/audit-superseded-dispatches.mjs [--hours 48]

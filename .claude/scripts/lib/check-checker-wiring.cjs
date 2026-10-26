@@ -192,6 +192,37 @@ function workflowReferences(file, text, checkerFile) {
     }));
 }
 
+// 週次レビューの `npm run weekly:audits` が順に走らせる台本 (2026-10-26 に CI の週次監査 11 本から移した)。
+// 土曜の週次レビューで毎週走るので定期実行として数える。`|| true` / `|| echo` で失敗を握りつぶす行は失敗が伝わらない扱い。
+// `npm run <名前>` は package.json の中身に展開してから checker を探す (`npm run audit:public-data-contract` など)。
+const WEEKLY_AUDIT_DIR = ".claude/scripts/management/weekly-audits/";
+let npmScriptCache = null;
+function npmScripts() {
+  if (npmScriptCache) return npmScriptCache;
+  npmScriptCache = new Map();
+  for (const workspace of workspacePaths().length ? workspacePaths() : ["."]) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(path.join(ROOT, workspace, "package.json"), "utf8"));
+      for (const [name, command] of Object.entries(parsed.scripts ?? {})) {
+        if (typeof command === "string") npmScriptCache.set(name, [...(npmScriptCache.get(name) ?? []), command]);
+      }
+    } catch {}
+  }
+  return npmScriptCache;
+}
+
+function weeklyReviewReferences(file, text, checkerFile) {
+  const references = [];
+  for (const line of text.split(/\r?\n/)) {
+    if (/^\s*#/.test(line)) continue;
+    const expanded = [line, ...[...line.matchAll(/npm run (?:--silent )?([\w:.-]+)/g)].flatMap((match) => npmScripts().get(match[1]) ?? [])];
+    if (!includesChecker(expanded.join("\n"), checkerFile)) continue;
+    const failOpen = /\|\|\s*(?:true|echo)\b/.test(line);
+    references.push({ file: rel(file), kind: "weekly-review", blocking: !failOpen, scheduled: true, pullRequest: false });
+  }
+  return references;
+}
+
 function packageReferences(file, text, checkerFile) {
   try {
     const parsed = JSON.parse(text);
@@ -214,6 +245,10 @@ function referencesFor(corpus, checkerFile) {
     }
     if (path.basename(entry.file) === "package.json") {
       references.push(...packageReferences(entry.file, entry.text, checkerFile));
+      continue;
+    }
+    if (relative.startsWith(WEEKLY_AUDIT_DIR) && relative.endsWith(".sh")) {
+      references.push(...weeklyReviewReferences(entry.file, entry.text, checkerFile));
       continue;
     }
     if (!includesChecker(entry.text, checkerFile)) continue;

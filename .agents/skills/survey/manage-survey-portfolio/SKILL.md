@@ -42,7 +42,7 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --check          # 
 node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <verdict> --evidence <ref>
 ```
 
-- cadence: **週次 workflow (`survey-taxonomy-audit-weekly.yml`) で再導出、四半期で監査レポート**
+- cadence: **週次レビューの `npm run weekly:audits` (survey-taxonomy) で再導出、四半期で監査レポート**
   (`reference/audits/YYYY-MM-DD-survey-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の
   Survey Portfolio State Guard) は schema/drift/orphan/linkage の検証のみで、本文生成・R2 push・deploy をしない。
 

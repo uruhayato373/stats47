@@ -2,7 +2,7 @@
 /**
  * sync-year-coverage-backlog.mjs — 年カバレッジ監査の要拡張候補をバックログカードにする。
  *
- * 週次の estat-year-coverage-audit-weekly が監査の後に呼ぶ。開いている YEAR-COV カードがあれば起票しない。
+ * 週次レビューの weekly:audits (estat-year-coverage.sh) が監査の後に呼ぶ。開いている YEAR-COV カードがあれば起票しない。
  * 起票したカードは backlog-loop-daily が処理し、`assert-year-coverage-batch.ts <batch>` を completion gate にして消す。
  *
  * Usage:

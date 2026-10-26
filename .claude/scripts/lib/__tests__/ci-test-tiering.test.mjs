@@ -129,7 +129,7 @@ test('PRは差分分類、週次は全数、ローカルcommitは全体型検査
   assert.match(weekly, /npx playwright test --project=e2e-chromium/);
   assert.match(weekly, /npm run build --workspace=apps\/remotion/);
   assert.match(weekly, /npm run test:e2e --workspace=apps\/admin/);
-  assert.match(weekly, /needs: \[type-check, tests, admin-e2e, web-e2e\]/);
+  assert.match(weekly, /needs: \[type-check, tests, admin-e2e, web-e2e, render\]/);
   assert.match(weekly, /gh issue (?:edit|comment)/);
   assert.match(weekly, /gh issue close/);
   assert.match(precommit, /PRECOMMIT_FULL_TYPECHECK/);

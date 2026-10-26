@@ -8,7 +8,7 @@ metadata:
   modified: 2026-09-23T13:49:21.060Z
 ---
 
-週次ページ品質監査 (`page-quality-audit-weekly.yml`、土 18:00 UTC) は 2026-09-23 に初めて最後まで完了した。
+週次ページ品質監査 (`quality-suite-weekly.yml` の page-quality job、土曜 01:00 JST の theme job の後) は 2026-09-23 に初めて最後まで完了した。
 それ以前は RSC 込み並列 4 で 45 分制限に毎回打ち切られていた (1,200/6,237 URL で止まる)。
 
 - 全 URL: 静的解析 (`--skip-rsc`・並列 12) + 画像切れ + 空見出し。代表 URL 11 件だけブラウザで 7 幅

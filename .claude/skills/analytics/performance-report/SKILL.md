@@ -20,7 +20,7 @@ co_agents: [gsc-analyst]
 
 ## 前提条件
 
-- `data/psi/history.csv` にデータがあること（日次 CI `psi-audit-daily.yml` が蓄積。手動は `/lighthouse-audit`）
+- `data/psi/history.csv` にデータがあること（週次 CI `fetch-metrics-weekly.yml` の psi job が蓄積。手動は `/lighthouse-audit`）
 - トレンド比較には複数日のデータが必要
 
 ## 引数

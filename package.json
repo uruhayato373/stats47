@@ -90,7 +90,6 @@
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
     "note:catalog:check": "tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check",
     "note:circulation:audit": "node .claude/scripts/note/audit-note-circulation.mjs",
-    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs",
     "note:cards:audit": "node .claude/scripts/note/audit-note-card-visibility.mjs",
     "note:cards:repair-batch": "node .claude/scripts/note/repair-note-cards-batch.mjs",
     "note:cards:compact-spacing": "node .claude/scripts/note/compact-note-card-spacing.mjs",
@@ -115,7 +114,7 @@
     "note:covers:test": "node --test .claude/scripts/note/__tests__/cover-audit.test.mjs .claude/scripts/note/__tests__/cover-update.test.mjs",
     "note:metrics:fetch": "node .claude/scripts/note/fetch-note-metrics.mjs",
     "note:metrics:test": "node --test .claude/scripts/note/__tests__/dashboard-metrics.test.mjs",
-    "note:circulation:test": "node --test .claude/scripts/note/__tests__/native-cards.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/circulation-workflow.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs",
+    "note:circulation:test": "node --test .claude/scripts/note/__tests__/native-cards.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs",
     "note:brand-assets": "node .claude/scripts/note/generate-note-brand-headers.mjs",
     "note:branding:update": "node .claude/scripts/note/update-note-branding.mjs",
     "note:navigation:pilot": "node .claude/scripts/note/update-published-navigation.mjs",
@@ -235,7 +234,9 @@
     "media:migrate": "node .claude/scripts/media/migrate-sns-images.mjs",
     "media:prepare": "node .claude/scripts/media/prepare-image.mjs",
     "media:state:pull": "node .claude/scripts/media/sync-r2-state.mjs pull",
-    "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push"
+    "media:state:push": "node .claude/scripts/media/sync-r2-state.mjs push",
+    "weekly:audits": "node .claude/scripts/management/run-weekly-audits.mjs",
+    "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

@@ -1291,10 +1291,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "municipality-ranking:auto-insurance-penetration-bodily-injury-actual",
-          "kind": "municipality-ranking"
-        },
-        {
           "pageId": "ranking:auto-insurance-penetration-bodily-injury-actual",
           "kind": "ranking"
         }
@@ -1326,10 +1322,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "municipality-ranking:auto-insurance-penetration-bodily-injury-fixed",
-          "kind": "municipality-ranking"
-        },
         {
           "pageId": "ranking:auto-insurance-penetration-bodily-injury-fixed",
           "kind": "ranking"

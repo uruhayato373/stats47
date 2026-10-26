@@ -113,7 +113,7 @@ test("adminと単体HTMLは同じportfolio view modelを使う", () => {
 });
 
 test("変更したworkflowはYAMLとして解釈できる", () => {
-  for (const file of [...files, ".github/workflows/workflow-health-daily.yml"]) {
+  for (const file of files) {
     const parsed = yaml.load(readFileSync(file, "utf8"));
     assert.equal(typeof parsed, "object", file);
   }
