@@ -300,6 +300,15 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-TEST-ENTRY-NODE22-01] テーマのテストの入口 (theme:quality:test) が Node 22 で 1 件も走らない
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run theme:quality:test] [起票:2026-10-26] [領域:管理]
+
+- **事象 (2026-10-26 実測・Mac の Node 22.23)**: `npm run theme:quality:test` (`node --import tsx --test .claude/scripts/themes/__tests__/`) が
+  `ERR_UNSUPPORTED_DIR_IMPORT` で落ち、`# pass 0`。ディレクトリを引数に渡す形を tsx の解決が import として扱っている。ファイルを直接渡すと通る
+  (`node --import tsx --test .claude/scripts/themes/__tests__/theme-weekly-workflow.test.mjs` は 16 件 pass)。CI は Node 20 なので見え方が違う可能性がある。
+- **次**: package.json の入口を glob (`.claude/scripts/themes/__tests__/*.test.mjs`) に変え、Node 20 と 22 の両方で件数が 0 でないことを確かめる。
+- **完了条件**: `npm run theme:quality:test` が Mac (Node 22) で全件を走らせ、失敗 0。
+
 ### [SNS-WEEKLY-REPORT-MIRROR-01] SNS 週次レポートの workflow が Codex ミラーのリンクを足さず develop の品質ゲートを落とす
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan] [起票:2026-10-26]
 
