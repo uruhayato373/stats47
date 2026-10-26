@@ -246,6 +246,13 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DEPS-PLATFORM-OPTIONAL-LOCK-01] 依存の検査が、他 OS 向けバイナリの lock 記録の取り残しを捕まえない
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/check-dependency-overrides.test.cjs] [起票:2026-10-26] [領域:管理]
+
+- **事象 (2026-10-26)**: Next 16 移行 (`89ef74c19`) の push で develop の品質ゲートが 4 job とも `npm ci` で落ちた。workerd 本体は 1.20261019.1 なのに、lock の他 OS 向け任意依存 (`@cloudflare/workerd-linux-64` ほか 3 件) が 1.20260825.1 のまま残り、Linux の CI で取り出したバイナリの版が合わず workerd の install.js が止めた。Mac では Mac 用だけを入れ直すので気づけない (memory `feedback_windows_npm_install_rolldown_binding` と同じ型)。`check-dependency-overrides.cjs` は override の名前でしか照合しないので通っていた。
+- **次**: lock の各パッケージの optionalDependencies の完全一致の版と、npm の解決順で当たる記録の版を照合する検査を足す (2026-10-26 に手で流した照合で 0 件になることを確認済みの方式)。
+- **完了条件**: 親の要求と食い違う他 OS 向けの記録を持つ fixture で検査が落ち、現在の lock で通るテストがある。
+
 ### [PRECOMMIT-WIRING-STAGED-SCOPE-01] pre-commit の配線検査が、他の作業者の作りかけの検査スクリプトで自分の commit まで止める
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-26] [領域:管理]
 
