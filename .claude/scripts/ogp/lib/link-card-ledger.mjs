@@ -39,7 +39,13 @@ export function writeLinkCardLedger(file, ledger) {
   for (const [target, text] of serialized) {
     if (cached.get(target) === text) continue;
     fs.writeFileSync(`${target}.pending`, text);
-    fs.renameSync(`${target}.pending`, target);
+    for (let attempt = 0; ; attempt++) {
+      try { fs.renameSync(`${target}.pending`, target); break; }
+      catch (error) {
+        if (!['EPERM', 'EACCES', 'EBUSY'].includes(error.code) || attempt >= 4) throw error;
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25 * (attempt + 1));
+      }
+    }
     cached.set(target, text);
   }
   for (const name of ledger.siteShards || []) {

@@ -28,3 +28,19 @@ test('oversized records fail before replacing the manifest',()=>{
  try{fs.writeFileSync(file,'unchanged');assert.throws(()=>writeLinkCardLedger(file,{schemaVersion:1,entries:[{id:'site:/large',payload:'a'.repeat(1024*1024)}]}),/1 MiB/);assert.equal(fs.readFileSync(file,'utf8'),'unchanged');}
  finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('temporary Windows file sharing errors retry without losing publication evidence',(t)=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'link-card-ledger-'));const file=path.join(dir,'link-card-rollout.json');
+ const rename=fs.renameSync;let calls=0;
+ const mock=t.mock.method(fs,'renameSync',(...args)=>{if(++calls===1)throw Object.assign(Error('reader holds file'),{code:'EPERM'});return rename(...args);});
+ try{const ledger={schemaVersion:1,entries:[{id:'magazine:m',status:'published'}]};writeLinkCardLedger(file,ledger);assert.equal(calls,2);assert.equal(readLinkCardLedger(file).entries[0].status,'published');}
+ finally{mock.mock.restore();fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('permanent replacement failure preserves the previous ledger and remains an error',(t)=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'link-card-ledger-'));const file=path.join(dir,'link-card-rollout.json');
+ fs.writeFileSync(file,'previous');let calls=0;
+ const mock=t.mock.method(fs,'renameSync',()=>{calls++;throw Object.assign(Error('locked'),{code:'EACCES'});});
+ try{assert.throws(()=>writeLinkCardLedger(file,{schemaVersion:1,entries:[]}),/locked/);assert.equal(calls,5);assert.equal(fs.readFileSync(file,'utf8'),'previous');}
+ finally{mock.mock.restore();fs.rmSync(dir,{recursive:true,force:true});}
+});
