@@ -7,6 +7,8 @@ import {
   renderTestExcludes,
 } from './src/shared/__tests__/helpers/render-test-contract';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /**
  * ★環境依存のレンダリングテスト (2026-07-31)。
  *

@@ -126,7 +126,7 @@ function requiredJobs(text) {
 }
 
 function registeredVitestProjects(root) {
-  const text = fs.readFileSync(path.join(root, "vitest.config.ts"), "utf8");
+  const text = fs.readFileSync(path.join(root, "vitest.config.mts"), "utf8");
   return new Set(
     [...text.matchAll(/["']([^"']+)\/vitest\.config\.[cm]?ts["']/g)].map(
       (match) => match[1],

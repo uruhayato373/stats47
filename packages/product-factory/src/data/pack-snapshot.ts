@@ -18,7 +18,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { PREFECTURE_CODES5 } from "./prefectures";
 import type { Dataset, PrefectureDatum } from "./dataset";
 import type { SourceRow } from "./sources";
-import { fetchRankingValues } from "./load-ranking-values";
+import { fetchRankingValues, MissingFullYearError, type FetchedValues } from "./load-ranking-values";
 import { productIndicatorLabel } from "./product-indicator-label";
 import { buildSourceRow, unconfirmedLicense, type MetricRegistry } from "./metric-source";
 import type { ExcludedIndicator } from "./databook";
@@ -55,11 +55,21 @@ function toDatums(values: readonly { code5: string; value: number | null }[]): P
   });
 }
 
+/**
+ * 指標を飛ばした理由の種類。
+ * - data: 元データ側の事情 (registry 未登録・全県 null・47 県そろいの年が無い)。取り直しても変わらない
+ * - fetch: 取得の失敗 (R2 の HTTP 失敗・接続失敗など)。取り直せば変わりうるので、黙って飛ばすと件数が揺れる
+ */
+export type SkipKind = "data" | "fetch";
+
+type FetchValues = (rankingKey: string) => Promise<FetchedValues>;
+
 interface FetchOutcome {
   readonly key: string;
   readonly ok: boolean;
   readonly indicator?: SnapshotIndicator;
   readonly reason?: string;
+  readonly kind?: SkipKind;
 }
 
 /** 1 キーを取得し snapshot 指標へ変換する。失敗は ok:false + reason。 */
@@ -67,13 +77,14 @@ async function fetchOne(
   key: string,
   registry: Record<string, Record<string, unknown>>,
   retrievedAt: string,
+  fetchValues: FetchValues,
 ): Promise<FetchOutcome> {
   const cfg = registry[key];
-  if (!cfg) return { key, ok: false, reason: "registry 未登録" };
+  if (!cfg) return { key, ok: false, reason: "registry 未登録", kind: "data" };
   try {
-    const fetched = await fetchRankingValues(key);
+    const fetched = await fetchValues(key);
     const nonNull = fetched.values.filter((v) => v.value !== null).length;
-    if (nonNull === 0) return { key, ok: false, reason: "全県 null" };
+    if (nonNull === 0) return { key, ok: false, reason: "全県 null", kind: "data" };
     const unit = fetched.unit || String(cfg.unit ?? "");
     const indicator: SnapshotIndicator = {
       rankingKey: key,
@@ -86,7 +97,8 @@ async function fetchOne(
     };
     return { key, ok: true, indicator };
   } catch (e) {
-    return { key, ok: false, reason: e instanceof Error ? e.message : String(e) };
+    const reason = e instanceof Error ? e.message : String(e);
+    return { key, ok: false, reason, kind: e instanceof MissingFullYearError ? "data" : "fetch" };
   }
 }
 
@@ -96,6 +108,7 @@ async function fetchAll(
   registry: Record<string, Record<string, unknown>>,
   retrievedAt: string,
   concurrency: number,
+  fetchValues: FetchValues,
   onEach?: (done: number, total: number) => void,
 ): Promise<Map<string, FetchOutcome>> {
   const results = new Map<string, FetchOutcome>();
@@ -107,7 +120,7 @@ async function fetchAll(
       const i = idx++;
       if (i >= total) return;
       const key = keys[i];
-      const out = await fetchOne(key, registry, retrievedAt);
+      const out = await fetchOne(key, registry, retrievedAt, fetchValues);
       results.set(key, out);
       done += 1;
       onEach?.(done, total);
@@ -121,8 +134,20 @@ export interface PackSnapshotResult {
   readonly packId: string;
   readonly requested: number;
   readonly built: number;
-  readonly skipped: readonly { key: string; reason: string }[];
+  readonly skipped: readonly { key: string; reason: string; kind: SkipKind }[];
   readonly path: string;
+}
+
+/** 取得の失敗で指標を飛ばしかけたときに投げる。固定データは書かない (欠けたパックを手元に残さない)。 */
+export class PackSnapshotFetchError extends Error {
+  constructor(readonly failures: readonly { key: string; reason: string }[]) {
+    super(
+      `公開 R2 から ${failures.length} 指標を取得できなかった (固定データは書いていない): ` +
+        failures.slice(0, 5).map((f) => `${f.key}(${f.reason})`).join(", ") +
+        (failures.length > 5 ? " …" : ""),
+    );
+    this.name = "PackSnapshotFetchError";
+  }
 }
 
 /**
@@ -138,24 +163,38 @@ export async function buildPackSnapshots(
     retrievedAt?: string;
     concurrency?: number;
     onProgress?: (done: number, total: number) => void;
+    /** true なら取得の失敗が 1 件でもあれば何も書かずに PackSnapshotFetchError を投げる (テストの前処理用) */
+    failOnFetchError?: boolean;
+    /** 取得関数の差し替え (テスト用)。既定は公開 R2 の fetchRankingValues */
+    fetchValues?: FetchValues;
+    /** 書き出し先 (テスト用)。既定は PACK_SNAPSHOT_DIR */
+    outDir?: string;
   } = {},
 ): Promise<PackSnapshotResult[]> {
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
   const retrievedAt = opts.retrievedAt ?? generatedAt.slice(0, 10);
   const concurrency = opts.concurrency ?? 16;
-  mkdirSync(PACK_SNAPSHOT_DIR, { recursive: true });
+  const outDir = opts.outDir ?? PACK_SNAPSHOT_DIR;
+  const fetchValues = opts.fetchValues ?? ((key: string) => fetchRankingValues(key));
 
   const uniqueKeys = [...new Set(packs.flatMap((p) => p.rankingKeys))];
-  const outcomes = await fetchAll(uniqueKeys, registry, retrievedAt, concurrency, opts.onProgress);
+  const outcomes = await fetchAll(uniqueKeys, registry, retrievedAt, concurrency, fetchValues, opts.onProgress);
+  if (opts.failOnFetchError) {
+    const failures = [...outcomes.values()]
+      .filter((o) => !o.ok && o.kind === "fetch")
+      .map((o) => ({ key: o.key, reason: o.reason ?? "未取得" }));
+    if (failures.length > 0) throw new PackSnapshotFetchError(failures);
+  }
+  mkdirSync(outDir, { recursive: true });
 
   const results: PackSnapshotResult[] = [];
   for (const pack of packs) {
     const indicators: SnapshotIndicator[] = [];
-    const skipped: { key: string; reason: string }[] = [];
+    const skipped: { key: string; reason: string; kind: SkipKind }[] = [];
     for (const key of pack.rankingKeys) {
       const out = outcomes.get(key);
       if (out?.ok && out.indicator) indicators.push(out.indicator);
-      else skipped.push({ key, reason: out?.reason ?? "未取得" });
+      else skipped.push({ key, reason: out?.reason ?? "未取得", kind: out?.kind ?? "fetch" });
     }
     const snapshot: PackSnapshot = {
       packId: pack.id,
@@ -164,7 +203,7 @@ export async function buildPackSnapshots(
       indicatorCount: indicators.length,
       indicators,
     };
-    const path = join(PACK_SNAPSHOT_DIR, `${pack.id}.json`);
+    const path = join(outDir, `${pack.id}.json`);
     writeFileSync(path, JSON.stringify(snapshot, null, 0) + "\n");
     results.push({ packId: pack.id, requested: pack.rankingKeys.length, built: indicators.length, skipped, path });
   }

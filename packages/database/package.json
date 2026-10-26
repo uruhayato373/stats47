@@ -47,7 +47,7 @@
     "studio": "drizzle-kit studio",
     "studio:local": "drizzle-kit studio --config=drizzle.config.local.ts",
     "test": "vitest run",
-    "test:unit": "vitest run --config vitest.config.ts",
+    "test:unit": "vitest run --config vitest.config.mts",
     "test:integration": "vitest run --config vitest.config.integration.mts",
     "seed:themes": "tsx scripts/seed-themes.ts",
     "db:migrate:local": "tsx scripts/migrate-local.ts",

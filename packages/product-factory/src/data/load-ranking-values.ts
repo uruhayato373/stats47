@@ -38,6 +38,12 @@ export interface FetchedValues {
 const FETCH_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 500;
 
+/**
+ * values.json は取れたが 47 県そろいの年が無い (データの理由)。取得の失敗 (通信・HTTP) と区別するために型を分ける。
+ * パックの固定データの前処理は、この理由での除外だけを許し、取得の失敗では止まる (PACK-SNAPSHOT-SKIP-GUARD-01)。
+ */
+export class MissingFullYearError extends Error {}
+
 /** 4xx など、取り直しても結果が変わらない失敗。再試行しない */
 class PermanentFetchError extends Error {}
 
@@ -83,7 +89,7 @@ export async function fetchRankingValues(
     .slice()
     .sort((a, b) => a.yearCode.localeCompare(b.yearCode));
   const latest = full[full.length - 1];
-  if (!latest) throw new Error(`47 県フルの年が見つからない: ${rankingKey}`);
+  if (!latest) throw new MissingFullYearError(`47 県フルの年が見つからない: ${rankingKey}`);
   const unit = latest.values.find((v) => v.unit)?.unit ?? "";
   const byCode = new Map<string, number | null>();
   for (const v of latest.values) byCode.set(toCode5(v.areaCode), v.value ?? null);

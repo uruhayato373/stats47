@@ -1112,18 +1112,6 @@ updated: 2026-10-19
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
-### [DEPS-OVERRIDES-DRIFT-GATE-01] ルートの overrides と各 workspace の依存の版の食い違いを push 前に止める
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run preflight:pr] [起票:2026-10-10] [領域:管理]
-
-- **事象**: dependabot は `apps/web` などの package.json だけを上げ、ルートの `overrides` (next 15.5.24・sharp 0.35.4) は古いまま残った。next が 2 つの版で入り、PR #1119 の本番ビルドの /404 事前描画が `<Html> should not be imported outside of pages/_document` で落ちた (2026-10-10。overrides を揃えて解消)。CI の Build Check が本番前に止めたが、ビルド 5 分と CI 往復 1 回を使った。
-- **手順**: `.claude/scripts/lib/` に lockfile と package.json だけを読む検査を作る。(a) next・react・react-dom (一つの版でしか動かない部品) が `package-lock.json` に 1 つの版しか無い (b) ルートの `overrides` の版が、その依存を持つ全 workspace の指定範囲を満たす。`.claude/config/quality-gates.json` に登録して pre-commit と `preflight:pr` に載せる (checker を CI では直接パスで呼ぶ。npm script 経由だと checker-wiring が認識しない)。
-- **完了条件**: 2026-10-10 の修正前の package.json と lockfile (commit `7ae184cb8`) でテストが失敗し、現在の develop で通る。
-- **追加の観測 (2026-10-21・PR #1165 の Security Scan)**: vite の脆弱性 (8.2.0〜8.2.3) を直すためにルートの `overrides` へ `"vite": "8.2.4"` を足しても、
-  `npm install` は lock の 8.2.2 を残し、`npm ls vite` が `invalid` を出すだけで exit 0 だった。lock から vite の項目を消して入れ直すと、vite と依存 7 件が
-  lock から消えた (誤り。戻した)。`npm update vite` は npm 自体のエラー (`Cannot read properties of null (reading 'edgesOut')`)。
-  通ったのは「ルートの devDependencies に `vite@^8.2.4`、overrides は `"vite": "$vite"`」(commit `ef8df73aa`)。検査の (c) として
-  「`npm ls --all` に `invalid` が無い (override と lock の版が一致する)」を足す。
-
 ### [BLOG-LINK-410-REMAP-01] ブログ本文の 410 になったランキングへのリンク 5 件を置き換える
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/fix-broken-internal-links.mjs] [起票:2026-10-10] [領域:サイト]
 
@@ -3741,15 +3729,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Build が失敗する条件を再現した run (または workflow の契約テスト) で、R2 反映が走らないことを確かめる。二相を許すなら理由を
   `.claude/rules/branch-workflow.md` の「R2 反映は main のコードで動く」節に書く。
 
-### [NEXT-SUPPORT-WINDOW-GUARD-01] フレームワークのサポート期限で本番ビルドが日付だけで止まるのを、事前に知らせる
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
-
-- **証拠**: OpenNext は `node_modules/@opennextjs/aws/dist/build/helper.js` の `NEXT_RELEASE_DATES` から公開後 2 年を過ぎた Next.js の major を拒否する。
-  コードを変えていないのに、2026-10-21 00:00 UTC から本番デプロイが止まった (deploy run 39589689158)。同じ規則では Next.js 16 は 2027-10-21 に止まる。
-- **次**: 週次の既存 workflow (例: `agent-consistency-weekly.yml`) に、導入中の Next.js の major とこの表からサポート終了までの日数を出す検査を足し、
-  60 日を切ったら起票する。`apps/web/package.json` に `--dangerouslyUseUnsupportedNextVersion` が残っている間も毎週知らせる (外し忘れを防ぐ)。
-- **完了条件**: 終了日を手前に動かした fixture で検査が警告を出し、現在の develop では「残り N 日」だけを出すテストがある。関連: `NEXT16-MIGRATION-01`。
-
 ### [E2E-FAILURE-EVIDENCE-01] 代表 E2E が落ちても、サーバーの例外と R2 の取得失敗が残らない
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
 
@@ -3759,17 +3738,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
   (`node_modules/playwright/types/test.d.ts`「Default to "ignore"」)。R2 オーバーレイのログ (`/tmp/pr-e2e-r2-overlay.log`) は起動に失敗したときしか出力しない。
 - **次**: webServer の `stdout: "pipe"` か、サーバーの出力をファイルへ書いて、失敗時にオーバーレイのログと一緒に artifact へ上げる (`pr-quality-check.yml` の Representative E2E)。
 - **完了条件**: わざと落とした E2E の run で、サーバーの例外とオーバーレイの upstream error が artifact から読める。
-
-### [PACK-SNAPSHOT-SKIP-GUARD-01] product-factory のテスト前処理が取得失敗を黙って飛ばし、件数を固定したテストが揺れる
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-23] [領域:商品]
-
-- **証拠**: 2026-10-21 の develop-quality-gate run 39594085606 で P-12 の指標数が 2,073 ではなく 2,072 になり 2 件のテストが落ちた。直後に手元で 2 回組み直すと
-  どちらも 2,073 だった。前処理 (`tests/setup/pack-snapshots.global.ts` → `buildPackSnapshots`) は 2,154 件を公開 R2 から取り、取れなかった指標を理由付きで
-  飛ばすが、件数も理由も出力しない。`fetchRankingValues` に接続失敗と 5xx の再試行を足した (commit 952f0a384) が、3 回失敗すれば同じことが起きる。
-  また前処理は手元に既にあるパックを作り直さないので、手元のテストは古いデータで通り続ける。
-- **次**: 飛ばした理由を「データの理由」(47 県そろいの年が無い・出典変更の要確認・registry 未登録・全県 null) と「取得の理由」(R2 fetch 失敗・接続失敗) に分け、
-  取得の理由が 1 件でもあれば前処理を失敗させる。飛ばした件数を出力する。手元のパックには作成日を持たせ、一定日数より古ければ作り直すか警告する。
-- **完了条件**: fetch を失敗させる fixture で前処理が止まり、データの理由だけのときは今までどおり通るテストがある。
 
 ### [AGENT-COMMIT-HOOK-BYPASS-01] pre-commit の文書検査を通らない backlog の commit が develop に入り、リリース PR を止めた
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:管理]
@@ -3793,6 +3761,8 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **再開条件**: Vite の次の major (native config loader が既定になる版) が出たとき。それまでは警告だけで動作は変わらない。
 - **次**: 設定ファイルを `.mts` にするか、package に `"type": "module"` を足すかを決め、全 package の vitest を同じ形にそろえる。
 - **完了条件**: package テストのログからこの警告が消える。
+- **2026-10-26 実施 (前倒し)**: 21 個の vitest 設定を `.mts` に改名し (4 個は `__dirname` を `import.meta.url` から作り、JSON の import に `with {type:"json"}` を足した)、参照する検査・skill・README を更新した。`npm run test:packages:ci` 3,028 件・web 2,617 件・admin 323 件が通り、このカードの警告は消えた。**残り 2 点**: ① `packages/visualization/src/shared/__tests__/helpers/render-test-contract.ts` が CommonJS として読まれ、別の configLoader 警告が 1 件出る (改名には `check-quality-exceptions.cjs` と例外台帳の更新が要る) ② `apps/admin/vitest.config.mts` が admin の tsconfig (`**/*.ts`) の型検査から外れた。
+- **完了条件 (更新)**: 上の 2 点を直し、package テストのログに configLoader の警告が 1 件も出ず、admin の vitest 設定も型検査される。
 
 ### [FISHERY-2024-DB-01] 漁獲量の 12 指標に 2024 年を足す (e-Stat に 2024 年のデータベースの表が出たら)
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]

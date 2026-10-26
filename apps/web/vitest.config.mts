@@ -1,10 +1,13 @@
+import { fileURLToPath } from "node:url";
 import { readFileSync } from "fs";
 import path from "path";
 
 import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
-import criticalCoverage from "../../.claude/config/critical-module-coverage.json";
+import criticalCoverage from "../../.claude/config/critical-module-coverage.json" with { type: "json" };
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // カバレッジ閾値 (回帰防止 floor) の単一ソース。pr-quality-check.yml のコメント step も
 // 同ファイルを読むため、ここと CI で値がドリフトしない。

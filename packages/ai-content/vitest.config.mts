@@ -1,6 +1,9 @@
+import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { configDefaults, defineConfig } from "vitest/config";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * ai-content のテスト設定。
