@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:37:07.818Z",
+  "updatedAt": "2026-10-26T07:39:25.747Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8764,6 +8764,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:37:07.818Z"
+    },
+    "GITIGNORE-AUDIT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:39:25.747Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git ls-files -ci --exclude-standard",
+              "node .claude/scripts/lib/check-datasets.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "追跡側を点検: ignore と追跡の食い違い 13 件は data/affiliate/.gitignore に履歴として残すと明記 (意図どおり)。不要な出力 2 本 (type-check-output.txt・auto-brushup-skipped.log) を外した。utils/dist は project reference が要求し外すと ranking 型検査が TS6305 で落ちるため残し UTILS-DIST-PROJECT-REFERENCE-01 へ。秘密らしい 2 本は読む許可が無く TRACKED-SECRET-FILE-",
+          "failReason": null,
+          "followUps": [
+            "UTILS-DIST-PROJECT-REFERENCE-01",
+            "TRACKED-SECRET-FILE-CHECK-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:39:25.747Z"
     }
   }
 }
