@@ -91,3 +91,11 @@ test("generated metric metadata overrides remote metadata while observations rem
     assert.equal(localMetricSnapshotFile('/app/stats/total-population/values.json',dir),null);
   } finally {overlay.close();upstream.close();fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('中継が手元から返す種類は共通の定義から決まり、返さない種類は本番へ取り次ぐ (METRIC-RELEASE-PATHS-SSOT-01)', async () => {
+  const { OVERLAY_PATH_PATTERN, METRIC_RELEASE_KINDS } = await import(new URL('../../../../.github/scripts/metric-release-paths.mjs', import.meta.url));
+  // 期待する種類はここに直接書く。定義から 1 種類消すと落ちる
+  for (const p of ['/app/ranking/x/item.json', '/app/ranking-items/all.json', '/app/home/featured.json', '/app/municipalities/ranking/x/item.json', '/app/municipalities/ranking/x/values.json', '/app/areas/13000/cities/13101/databook.json']) assert.ok(OVERLAY_PATH_PATTERN.test(p), p);
+  for (const p of ['/app/categories/all.json', '/app/survey/all.json', '/app/municipalities/ranking/x/ai-content.json', '/app/stats/x/values.json']) assert.equal(OVERLAY_PATH_PATTERN.test(p), false, p);
+  for (const kind of METRIC_RELEASE_KINDS.filter((k) => !k.overlay)) assert.ok(kind.reason, `${kind.id} は返さない理由を書く`);
+});

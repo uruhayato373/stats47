@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:28:18.716Z",
+  "updatedAt": "2026-10-26T07:32:36.569Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8597,6 +8597,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:28:18.716Z"
+    },
+    "METRIC-RELEASE-PATHS-SSOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:30:41.172Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict"
+            ],
+            "pass": true
+          },
+          "evidence": ".github/scripts/metric-release-paths.mjs に種類ごとの定義と返さない理由。deploy-workers の inline script と r2-overlay-server が import。city-databook を消すと両側のテスト計 3 件が落ちる",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:30:41.172Z"
+    },
+    "TAXONOMY-USAGE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:32:36.569Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -rl kakei-classification",
+              "grep -rl constants/regions"
+            ],
+            "pass": true
+          },
+          "evidence": "『消費/地域タクソノミー』という名の物は無く、家計調査の収支項目分類と地方区分 REGIONS と推定。前者は pr-quality-check の estat:kakei-classification:check の正本 (estat-api.md)、後者は 31 ファイル (/areas・compare・地域比較) が参照。どちらも使用中で整理対象なし",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:32:36.569Z"
     }
   }
 }

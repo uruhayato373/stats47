@@ -3149,11 +3149,6 @@ updated: 2026-10-19
 - **完了条件**: 家計調査系 config の subtitle 行に定型文が 0 件、category / survey 一覧のタイトルに定型文の括弧書きが出ない、
   ranking 詳細ではチャート下の note として表示される。
 
-### [TAXONOMY-USAGE-01] 消費タクソノミー・地域タクソノミーが何に使われているかを確かめる
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-27] [領域:データ]
-
-どの画面・スクリプトが参照しているかを洗い出し、使われていなければ整理の対象にする。（出典: 2026-09-24 の手書きメモ・vault dairy/2026-09-24）
-
 ### [GEO-UIUX-SPEED-01] Geo ページの UI/UX と表示速度を見直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-27] [領域:サイト]
 
@@ -3818,16 +3813,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **次**: その commit を作ったセッションの環境を特定する (worktree・クラウド・Codex のどれか、hook が効く設定か)。塞ぎ方は、push 前に `.claude/todo` の差分へ
   docs governance を掛ける pre-push hook か、エージェントの規約での `--no-verify` 禁止の明文化 (現状は一部の skill にしか無い)。
 - **完了条件**: DG057 を含む backlog の変更を push しようとすると push 前に止まることを実測する。または bypass した経路を特定して塞いだ記録がある。
-
-### [METRIC-RELEASE-PATHS-SSOT-01] 指標リリースの対象パスが、デプロイと PR のオーバーレイで別々の正規表現に書かれている
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-10-23] [領域:管理]
-
-- **証拠**: `.github/workflows/deploy-workers.yml` の `allowed` (exact manifest に入れる R2 キー) と `.github/scripts/r2-overlay-server.mjs` の `localMetricSnapshotFile`
-  (PR の E2E とローカル確認で手元の生成物を返すキー) が、同じ種類の生成物を別々の正規表現で持つ。2026-10-21 に市区町村データブックを足したとき、両方を手で直した
-  (commit 436f46b43)。すでに範囲が違い (デプロイは categories・survey・page-components を含み、オーバーレイは page-components を別の経路で返し categories・survey を返さない)、
-  違いの理由はどこにも書かれていない。二重管理はいずれずれる (`feedback_hand_synced_duplication`)。
-- **次**: リリース対象のパスの定義を 1 つのモジュールに置き、デプロイの inline script とオーバーレイの両方がそれを import する。オーバーレイで返さない種類は理由と一緒に定義に書く。
-- **完了条件**: 定義からパスを 1 種類消すとデプロイ側とオーバーレイ側の両方のテストが落ちる。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
 
