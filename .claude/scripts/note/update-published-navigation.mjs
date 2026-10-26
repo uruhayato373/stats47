@@ -709,7 +709,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   FORCE_REGENERATE_CARDS = options.forceRegenerateCards;
-  approvedImageRefresh = readApprovedCardImageRefresh(join(ROOT, 'data/ogp/link-card-rollout.json'));
+  approvedImageRefresh = readApprovedCardImageRefresh(join(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'));
   const source = catalog();
   const views = latestViews();
   let plans = buildPlans(source, views, options);
