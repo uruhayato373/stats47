@@ -309,6 +309,15 @@ function checkAlwaysLoadedInstructions(root, config, add) {
   }
 }
 
+// related_backlog の実在はカードの見出し (`### [ID]`) と improvements の表の ID 列だけで判定する。
+// 本文中の言及で数えると、閉じたカードを指したまま通る (2026-10-26 DOCS-RELATED-BACKLOG-HEADING-CHECK-01)。
+function collectTodoIds(text) {
+  const ids = new Set();
+  for (const match of text.matchAll(/^###\s+\[([A-Z0-9-]+)\]/gm)) ids.add(match[1]);
+  for (const match of text.matchAll(/^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)+)\s*\|/gm)) ids.add(match[1]);
+  return ids;
+}
+
 function getImplementationPlans(root, config) {
   const directory = path.join(root, config.implementationPlans.directory);
   const indexName = path.basename(config.implementationPlans.index);
@@ -597,14 +606,16 @@ function inspectRepository({
   // 実装計画: 命名、backlog参照、INDEX生成ブロック
   const planPattern = new RegExp(config.naming.implementationPlanPattern);
   const plans = getImplementationPlans(root, config);
-  const todoCorpus = config.todo.files.map((file) => readText(path.join(root, file))).join("\n");
+  const todoIds = collectTodoIds(config.todo.files.map((file) => readText(path.join(root, file))).join("\n"));
   for (const plan of plans) {
     if (!planPattern.test(plan.name)) {
       add("error", "DG040", plan.file, "実装計画のファイル名がNN_日本語名.md形式ではない");
     }
     if (config.implementationPlans.requiredRelatedBacklog && !plan.relatedBacklog) {
       add("error", "DG041", plan.file, "activeな実装計画にrelated_backlogがない");
-    } else if (plan.relatedBacklog && !todoCorpus.includes(plan.relatedBacklog)) {
+    } else if (plan.relatedBacklog === "null") {
+      add("warning", "DG042", plan.file, "related_backlogがnull (受け皿のカードが無い)。未完了の作業があればカードを起票して指す");
+    } else if (plan.relatedBacklog && !todoIds.has(plan.relatedBacklog)) {
       add("error", "DG042", plan.file, `related_backlogがTODOに存在しない: ${plan.relatedBacklog}`);
     }
   }

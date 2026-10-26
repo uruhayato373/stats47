@@ -436,3 +436,15 @@ test("DG072 fires when a rule is missing from CLAUDE.md or CLAUDE.md names a mis
   const ghost = inspectRepository({ root, config, now: "2026-07-30" });
   assert.ok(ghost.errors.some((item) => item.code === "DG072" && /ghost-standards\.md/.test(item.message)));
 });
+
+test("related_backlog はカードの見出しで判定し、本文の言及だけでは通さない", (t) => {
+  const { root, config } = fixture(t);
+  const backlogPath = path.join(root, ".claude/todo/backlog.md");
+  const original = fs.readFileSync(backlogPath, "utf8");
+  // 見出しを消し、本文の言及だけを残す
+  fs.writeFileSync(backlogPath, original.replace("### [DOCS-FEATURE-01] Checker", "### [DOCS-OTHER-01] Checker\n\n前身は `DOCS-FEATURE-01`。"));
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(report.errors.some((item) => item.code === "DG042"), "本文の言及だけなら DG042 で落ちる");
+  fs.writeFileSync(backlogPath, original);
+  assert.ok(!inspectRepository({ root, config, now: "2026-07-30" }).errors.some((item) => item.code === "DG042"), "見出しがあれば通る");
+});

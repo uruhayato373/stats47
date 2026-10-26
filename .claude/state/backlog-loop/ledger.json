@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T06:36:16.524Z",
+  "updatedAt": "2026-10-26T07:24:24.361Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8496,6 +8496,40 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T06:00:17.579Z"
+    },
+    "DOCS-RELATED-BACKLOG-HEADING-CHECK-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-26T07:24:24.361Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "DG042 をカード見出し・improvements の ID 列だけで判定。本文言及のみの fixture で落ち見出しで通るテスト (戻すと fail 1)。null は warning。plan 48 を ESTAT-CATALOG-SSDS-DERIVE-01 へ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-26T07:24:24.361Z"
     }
   }
 }

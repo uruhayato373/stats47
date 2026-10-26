@@ -246,13 +246,6 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [DOCS-RELATED-BACKLOG-HEADING-CHECK-01] 実装計画の related_backlog の実在検査が、カード本文中の言及でも通ってしまう
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run docs:check] [起票:2026-10-26] [領域:管理]
-
-- **事象 (2026-10-26)**: 実装計画 42 の `related_backlog: ASP-CONTINUITY-01` は、カードが `9550a80a0` で閉じた後も DG042 を通っていた。別カード (`NOTE-MAGAZINE-REORG-01`) の本文に ID が偶然書かれていたためで、そのカードを消した commit で初めて DG042 が落ちた。
-- **次**: `check-docs-governance.cjs` の DG042 を、`backlog.md` / `improvements.md` のカード見出し (`### [ID]`) と improvements の表の ID 列だけで判定するよう直す。本文中の言及では通さない。
-- **完了条件**: 見出しの無い ID を本文にだけ書いた fixture で DG042 が落ち、見出しがあれば通るテストがある。
-
 ### [OGP-RANKING-CARD-BLOG-REPAIR-01] ranking カード画像の残り 1,459 件の作り直しと、ブログ OGP の週次自動修復を止めている 1 記事の背景記録を直す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-26] [領域:サイト]
 
