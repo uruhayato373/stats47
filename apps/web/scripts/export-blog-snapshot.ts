@@ -27,7 +27,8 @@ import {
   writeR2Staging,
 } from '@stats47/r2-storage/server';
 import dotenv from 'dotenv';
-import yaml from 'js-yaml';
+
+import { parseBlogSnapshotFrontmatter } from './lib/blog-snapshot-frontmatter';
 
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
@@ -52,28 +53,6 @@ dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '.env' });
 
 const BLOG_PREFIX = 'app/blog/';
-
-interface Frontmatter {
-  title?: string;
-  seoTitle?: string;
-  description?: string;
-  tags?: unknown;
-  publishedAt?: unknown;
-  updatedAt?: unknown;
-  published?: boolean;
-  ogImage?: string;
-  [key: string]: unknown;
-}
-
-function parseFrontmatter(content: string): Frontmatter {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return {};
-  try {
-    return (yaml.load(match[1]) as Frontmatter) ?? {};
-  } catch {
-    return {};
-  }
-}
 
 function normalizeDate(v: unknown): string | null {
   if (v instanceof Date) return v.toISOString().slice(0, 10);
@@ -212,7 +191,7 @@ async function main() {
       }
       continue;
     }
-    const fm = parseFrontmatter(content);
+    const fm = parseBlogSnapshotFrontmatter(content, slug);
     const tags = (Array.isArray(fm.tags) ? (fm.tags as string[]) : []).map(
       (value) => {
         const tag = resolveContentTag(String(value));
