@@ -1,12 +1,13 @@
 
 import { fetchPrefectures } from '@stats47/area';
-import { Lightbulb, Newspaper, TrendingUp } from 'lucide-react';
+import { Lightbulb, MapPin, Newspaper, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
 
 import { PageShell, PageHeader } from '@/components/layout';
+import { PageSections } from '@/components/layout/PageShell';
 import { RailStack } from '@/components/rail';
-import { SectionHeader, SectionIndexLink } from '@/components/section';
-import { HorizontalCardCarousel } from '@/components/surface';
+import { SectionIndexLink } from '@/components/section';
+import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
@@ -130,17 +131,21 @@ export default async function HomePage() {
     </RailStack>
   );
 
+  // パンくずの無いトップでは、h1 の上の小ラベルでサイトの役割を示す
+  const header = (
+    <PageHeader
+      eyebrow="地域のデータアトラス"
+      title="日本の地域データを探す"
+      description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
+    />
+  );
+
   return (
     <div className="w-full">
-      <PageShell rightRail={rightRail}>
-        <PageHeader
-          title="日本の地域データを探す"
-          description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
-          className="mb-4"
-        />
-
-        <div className="space-y-4">
-          {/* 節の題名はアイコン付きでカードの見出しに置き、カード列は区切り線のセルにする (テンプレートの KPI 行) */}
+      <PageShell rightRail={rightRail} header={header}>
+        {/* 節はカードの見出しに題名を置き、カード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード)。
+            カード列は区切り線のセルにする (テンプレートの KPI 行) */}
+        <PageSections>
           <HorizontalCardCarouselFrame
             title="注目のランキング"
             icon={<TrendingUp />}
@@ -181,37 +186,34 @@ export default async function HomePage() {
             <PortalUseCaseGrid />
           </HorizontalCardCarouselFrame>
 
-          <section>
-            <SectionHeader
-              title="都道府県から探す"
-              action={<SectionIndexLink href="/areas" label="都道府県の一覧へ" />}
-            />
+          <SectionCard
+            title="都道府県から探す"
+            icon={<MapPin />}
+            headingAs="h2"
+            headerAction={<SectionIndexLink href="/areas" label="都道府県の一覧へ" />}
+          >
             <PrefectureNavigator
               prefectures={prefectures}
               variant="embedded"
               surface="home"
             />
-          </section>
+          </SectionCard>
 
-          <section>
-            <SectionHeader
-              title="運営者プロフィール"
-              action={
-                <SectionIndexLink href="/about">詳しく見る</SectionIndexLink>
-              }
-            />
-            <OperatorProfileCard className="overflow-hidden" />
-          </section>
+          {/* 運営者プロフィール。カード自身が見出し「運営者」とプロフィールへのリンクを持つ */}
+          <OperatorProfileCard className="overflow-hidden" />
+        </PageSections>
 
-          {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
-          {homeNativeBanners.length > 0 && (
+        {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。
+            広告はカードの格子の外に置く (カードではないので格子に入れない) */}
+        {homeNativeBanners.length > 0 && (
+          <div className="mt-4">
             <NativeAffiliateRow
               banners={homeNativeBanners}
               position="home-native"
               trackingCategory="home"
             />
-          )}
-        </div>
+          </div>
+        )}
       </PageShell>
     </div>
   );

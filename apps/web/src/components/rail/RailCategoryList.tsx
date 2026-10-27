@@ -1,15 +1,8 @@
 'use client';
 
-import { cn } from '@stats47/components';
-import {
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuSubButton,
-} from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { ChevronRight } from 'lucide-react';
 
-import Link from '@/components/atoms/SiteLink';
+import { RailNavRow } from '@/components/surface';
 
 import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
 
@@ -54,35 +47,12 @@ function track(label: string, href: string, surface: NavSurface) {
   }
 }
 
-/** 行末の矢印。RailLinksCard の行 (RailNavRow) と同じ大きさ・色の「押せる行」の印 */
-const rowChevron = (
-  <ChevronRight
-    aria-hidden="true"
-    className="shrink-0 text-muted-foreground"
-  />
-);
-
-/**
- * 行の class。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域と
- * 現在地の強調 (bg-accent font-semibold text-primary) を足す。
- */
-function rowClassName(density: RailCategoryDensity, isActive: boolean, className?: string) {
-  return cn(
-    // [&>svg]:size-3.5 = RailNavRow の矢印と同じ大きさ (SidebarMenuSubButton の既定 size-4 を上書き)
-    'h-auto translate-x-0 justify-between [&>svg]:size-3.5 [&>svg]:text-muted-foreground',
-    density === 'compact'
-      ? 'min-h-11 py-1.5 text-sm sm:min-h-9'
-      : 'min-h-11 py-2 text-[15px] sm:min-h-10',
-    isActive && 'bg-accent font-semibold text-primary',
-    className
-  );
-}
-
 /**
  * カテゴリ導線の正 (home の高密度な縦型行 UI を昇格したもの)。
  *
- * - 単列。テンプレートの SidebarMenu / SidebarMenuItem / SidebarMenuSubButton で行を描く
- *   (SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う)
+ * - 単列。行は RailLinksCard の list 行と同じ RailNavRow (区切り線 + 右端の ChevronRight + モバイル 44px)
+ * - 行はカードの本文余白 (16px) の中に置く。行の横余白は持たず (px-0)、呼び出し側は -mx-* で打ち消さない
+ *   (2026-10-28 3 巡目。行の作りが RailLinksCard とずれ、矢印の大きさも違っていた)
  * - 枠 (RailCard) は持たない。呼び出し側が `<RailCard title="カテゴリから探す">` で包む
  *   (カード内カードを機械監査で見える形にするため)
  * - ページ名 variant を持たない。差分は density / showCount / activeCategoryKey / items / moreLink
@@ -98,43 +68,42 @@ export function RailCategoryList({
   className,
 }: RailCategoryListProps) {
   return (
-    <nav aria-label="カテゴリから探す" className={cn('px-2 py-1', className)}>
-      {/* 行は区切り線 + 右端の ChevronRight。RailLinksCard の list 行と同じ作り */}
-      <SidebarMenu className="divide-y divide-border">
+    <nav aria-label="カテゴリから探す" className={className}>
+      <ul className="flex flex-col divide-y divide-border">
         {items.map((category) => {
           const href = hrefFor('category', { categoryKey: category.categoryKey });
           const count =
             showCount && typeof category.count === 'number'
               ? category.count
               : undefined;
-          const isActive = category.categoryKey === activeCategoryKey;
           return (
-            <SidebarMenuItem key={category.categoryKey}>
-              <SidebarMenuSubButton
-                isActive={isActive}
-                aria-current={isActive ? 'page' : undefined}
-                className={rowClassName(density, isActive)}
+            <li key={category.categoryKey}>
+              <RailNavRow
+                href={href}
+                density={density}
+                active={category.categoryKey === activeCategoryKey}
+                className="px-0"
                 onClick={() => track(category.categoryName, href, trackingSurface)}
-                render={<Link href={href} />}
+                trailing={
+                  count !== undefined ? (
+                    <>
+                      {count.toLocaleString('ja-JP')}件
+                      <span className="sr-only">のランキング</span>
+                    </>
+                  ) : undefined
+                }
               >
-                <span className="min-w-0 flex-1 truncate">
-                  {category.categoryName}
-                </span>
-                {count !== undefined && (
-                  <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-                    {count.toLocaleString('ja-JP')}件
-                    <span className="sr-only">のランキング</span>
-                  </span>
-                )}
-                {rowChevron}
-              </SidebarMenuSubButton>
-            </SidebarMenuItem>
+                {category.categoryName}
+              </RailNavRow>
+            </li>
           );
         })}
         {moreLink && (
-          <SidebarMenuItem>
-            <SidebarMenuSubButton
-              className={rowClassName(density, false, 'font-semibold text-primary')}
+          <li>
+            <RailNavRow
+              href={moreLink.href}
+              density={density}
+              className="px-0 font-semibold text-primary"
               onClick={() =>
                 track(
                   moreLink.trackingLabel ?? moreLink.label,
@@ -142,14 +111,12 @@ export function RailCategoryList({
                   trackingSurface
                 )
               }
-              render={<Link href={moreLink.href} />}
             >
-              <span className="min-w-0 flex-1 truncate">{moreLink.label}</span>
-              {rowChevron}
-            </SidebarMenuSubButton>
-          </SidebarMenuItem>
+              {moreLink.label}
+            </RailNavRow>
+          </li>
         )}
-      </SidebarMenu>
+      </ul>
     </nav>
   );
 }

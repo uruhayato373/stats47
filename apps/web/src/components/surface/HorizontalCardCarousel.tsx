@@ -93,8 +93,9 @@ export function HorizontalCardCarouselFrame({
             {action}
           </>
         }
-        className={cn('pb-0', className)}
-        bodyClassName="px-0 pt-0"
+        className={className}
+        // セルは自分の p-4 を持つので、本文の余白を外す (縁から中身まで 16px・見出しのアイコンと同じ左端)
+        bodyClassName="px-0 py-0"
         {...props}
       >
         {children}
@@ -237,8 +238,11 @@ export function HorizontalCardCarousel({
       className={cn(
         'grid snap-x snap-mandatory grid-flow-col overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
         framed
-          ? // カードの見出しの下: 隙間なしで区切り線 (テンプレートの KPI 行)
-            'auto-cols-[85%] divide-x divide-border sm:auto-cols-[50%] lg:auto-cols-[calc(100%/3)] xl:auto-cols-[25%]'
+          ? // カードの見出しの下: 隙間なしで区切り線 (テンプレートの KPI 行)。区切り線は divide-x が
+            // 最後のセル以外の右に引く。本文の横余白を外してあるので、線はカードの上下の線まで届く。
+            // -mr-px で列を 1px だけカードの線の下へ伸ばし、右端に見えているセルの区切り線を外枠の線に重ねる
+            // (外枠の内側に線が 2 本並ばない。カードの overflow-hidden がはみ出した 1px を切る)
+            '-mr-px auto-cols-[85%] divide-x divide-border sm:auto-cols-[50%] lg:auto-cols-[calc(100%/3)] xl:auto-cols-[25%]'
           : 'auto-cols-[85%] gap-3 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)]',
         className
       )}

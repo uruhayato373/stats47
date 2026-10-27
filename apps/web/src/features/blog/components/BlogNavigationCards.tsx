@@ -1,4 +1,4 @@
-import { Button, Input } from '@stats47/components';
+import { Button, Input, cn } from '@stats47/components';
 import { Badge } from '@stats47/components/atoms/ui/badge';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { ArrowRight, Search, Tags } from 'lucide-react';
@@ -71,14 +71,31 @@ export function selectPopularBlogTags(
     .slice(0, POPULAR_TAG_LIMIT);
 }
 
-/** タグの Badge リンク。レールのカードと一覧の上の操作行で同じものを使う */
-function PopularTagList({ tags }: { tags: readonly BlogNavigationTag[] }) {
+/**
+ * タグの Badge リンク。レールのカードと一覧の上の操作行で同じものを使う。
+ * 見た目は記事のタグ (TagBadge) と同じ Badge variant="secondary"。件数は名前より小さい文字で添える。
+ * horizontalOnMobile のときは 640px 未満で横スクロールの 1 行にする (RailLinksCard の horizontalOnMobile と同じ作り)。
+ */
+function PopularTagList({
+  tags,
+  horizontalOnMobile = false,
+}: {
+  tags: readonly BlogNavigationTag[];
+  horizontalOnMobile?: boolean;
+}) {
   return (
-    <ul className="flex flex-wrap gap-1.5">
+    <ul
+      className={cn(
+        'flex flex-wrap gap-1.5',
+        horizontalOnMobile &&
+          // 右端を薄くして「続きがある」ことを示す (スクロールバーは隠す)
+          'max-sm:w-full max-sm:flex-nowrap max-sm:snap-x max-sm:overflow-x-auto max-sm:overscroll-x-contain max-sm:pb-1 max-sm:scrollbar-none max-sm:[mask-image:linear-gradient(to_right,black_85%,transparent)] [&::-webkit-scrollbar]:hidden'
+      )}
+    >
       {tags.map((tag) => (
-        <li key={tag.tagKey}>
+        <li key={tag.tagKey} className="shrink-0 snap-start">
           <Badge
-            variant="outline"
+            variant="secondary"
             className="h-7 gap-1 px-2.5"
             render={
               <Link
@@ -89,7 +106,7 @@ function PopularTagList({ tags }: { tags: readonly BlogNavigationTag[] }) {
             }
           >
             {tag.tagKey}
-            <span className="tabular-nums text-muted-foreground">
+            <span className="text-[0.625rem] tabular-nums text-muted-foreground">
               {tag.articleCount}
             </span>
           </Badge>
@@ -123,7 +140,7 @@ export function BlogListToolbar({ tags }: { tags: readonly BlogNavigationTag[] }
       </form>
       {popularTags.length > 0 && (
         <nav aria-label="人気のタグ" className="flex flex-wrap items-center gap-2" {...navSurfaceProps('blog_sidebar')}>
-          <PopularTagList tags={popularTags} />
+          <PopularTagList tags={popularTags} horizontalOnMobile />
           <Link
             href="/blog/tags"
             data-nav-label="tag:all"

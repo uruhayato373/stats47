@@ -74,7 +74,8 @@ describe('category page featured ranking cards', () => {
   });
 
   it('本文の余白は main の p-4 だけに任せ、見出しの操作は共通部品で描く', () => {
-    expect(PAGE).toContain('<PageShell rightRail={rightRail}>');
+    // パンくずと h1 は PageShell の header に渡し、右レールより上に全幅で置く
+    expect(PAGE).toContain('<PageShell rightRail={rightRail} header={header}>');
     expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
     expect(PAGE).not.toMatch(/(もっと見る|すべての記事) →/);
     expect(PAGE).toContain('<SectionIndexLink');
@@ -88,14 +89,26 @@ describe('category page featured ranking cards', () => {
   });
 
   it('独立した情報セクションの見出しに連番を表示しない', () => {
-    const sectionHeaders = Array.from(
-      PAGE.matchAll(/<SectionHeader\b([\s\S]*?)\/>/g),
+    // 節はカードの見出し (SectionCard / HorizontalCardCarouselFrame / CategoryTopicGroups の title) に置く
+    const sectionHeadings = Array.from(
+      PAGE.matchAll(/<(?:SectionCard|HorizontalCardCarouselFrame|CategoryTopicGroups)\b([\s\S]*?)>/g),
       (match) => match[1]
     );
 
-    expect(sectionHeaders.length).toBeGreaterThan(0);
-    expect(sectionHeaders.every((props) => !/\bnumber=/.test(props))).toBe(
+    expect(sectionHeadings.length).toBeGreaterThan(0);
+    expect(PAGE).not.toContain('<SectionHeader');
+    expect(sectionHeadings.every((props) => !/\bnumber=/.test(props))).toBe(
       true
     );
+  });
+
+  it('節のカードを点線の帯で接ぎ (PageSections)、広告はカードの格子の外に置く', () => {
+    expect(PAGE).toContain('<PageSections>');
+    const grids = Array.from(PAGE.matchAll(/<PageSections\b[\s\S]*?<\/PageSections>/g), (m) => m[0]);
+    expect(grids.length).toBeGreaterThan(0);
+    for (const grid of grids) {
+      expect(grid).not.toContain('AdSlot');
+      expect(grid).not.toContain('<NativeAffiliateRow');
+    }
   });
 });

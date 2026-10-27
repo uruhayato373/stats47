@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { Children, Fragment, type CSSProperties, type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 
@@ -121,6 +121,51 @@ export function PageShell({
           {children}
         </div>
       )}
+    </div>
+  );
+}
+
+/** 節の間の点線の帯 (テンプレートの StyleDivider。radial-gradient の点を 12px 間隔で敷き、両端を薄くする) */
+const SECTION_DIVIDER_DOTS_STYLE: CSSProperties = {
+  backgroundImage: 'radial-gradient(circle at center, currentColor 1px, transparent 0)',
+  backgroundSize: '12px 12px',
+  backgroundPosition: '6px 6px',
+  maskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)',
+  WebkitMaskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)',
+};
+
+/**
+ * 本文の節 (カード) を縦に接いで並べる。テンプレートの lyra のダッシュボード
+ * (`grid p-px gap-px bg-border` の格子 + 行の間の StyleDivider) と同じ見た目を、カードの外枠 (border) と
+ * 節の間の点線の帯 (高さ 16px・左右に線) で描く。カードの線と帯の線が続いて 1 本の格子になる。
+ *
+ * 子はカード (SurfaceCard / SectionCard / RailCard / HorizontalCardCarouselFrame) だけを渡す。
+ * カードを入れ子にしない。空の子 (false / null) は数えず、帯は節と節の間にだけ置く。
+ */
+export function PageSections({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const sections = Children.toArray(children);
+  return (
+    <div data-slot="page-sections" className={cn('flex flex-col', className)}>
+      {sections.map((section, index) => (
+        <Fragment key={index}>
+          {index > 0 && (
+            <div
+              aria-hidden="true"
+              data-slot="section-divider"
+              className="relative h-4 overflow-hidden border-x border-border text-foreground"
+            >
+              <div className="absolute inset-0 opacity-25" style={SECTION_DIVIDER_DOTS_STYLE} />
+            </div>
+          )}
+          {section}
+        </Fragment>
+      ))}
     </div>
   );
 }

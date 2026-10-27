@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { PageShell } from '../PageShell';
+import { PageSections, PageShell } from '../PageShell';
 
 /**
  * PageShell のレール契約。
@@ -106,4 +106,24 @@ describe('PageShell — rightRail', () => {
     expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });
 
+});
+
+describe('PageSections', () => {
+  it('節 (カード) の間にだけ点線の帯を置き、空の子は数えない', () => {
+    const { container } = render(
+      <PageSections>
+        <section aria-label="a">a</section>
+        {false}
+        {null}
+        <section aria-label="b">b</section>
+        <section aria-label="c">c</section>
+      </PageSections>
+    );
+    const root = container.firstElementChild as HTMLElement;
+    expect(root).toHaveAttribute('data-slot', 'page-sections');
+    const kinds = [...root.children].map((child) => child.getAttribute('data-slot') ?? child.tagName);
+    expect(kinds).toEqual(['SECTION', 'section-divider', 'SECTION', 'section-divider', 'SECTION']);
+    // 帯は読み上げない (装飾)
+    expect(root.querySelector('[data-slot="section-divider"]')).toHaveAttribute('aria-hidden', 'true');
+  });
 });

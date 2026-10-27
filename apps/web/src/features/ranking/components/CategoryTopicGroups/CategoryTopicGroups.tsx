@@ -4,6 +4,7 @@ import { Badge } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
+import { ChevronDown } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
@@ -131,8 +132,8 @@ function TopicGroup({
   return (
     // 枠はカードの見出しの外側 (SectionCard) だけが持つ。まとまりは罫線で区切る (2 列のときは間にも縦線)
     <section aria-label={label} className="border-b border-border @md:odd:border-r">
-      {/* 見出しは表の行に近い高さ (min-h-13 ≒ 52px) に詰める */}
-      <div className="flex min-h-13 items-center justify-between gap-2 border-b border-border bg-muted/40 px-4">
+      {/* 見出しは表の行に近い高さ (min-h-13 ≒ 52px) に詰める。地の色は付けず、罫線だけで区切る */}
+      <div className="flex min-h-13 items-center justify-between gap-2 border-b border-border px-4">
         <h3 className="text-sm font-medium text-foreground">{label}</h3>
         <Badge variant="secondary" className="tabular-nums">
           {rows.length}
@@ -146,9 +147,14 @@ function TopicGroup({
       {hidden.length > 0 && (
         // client JS を足さずに展開する。検索 input は置かない
         // (CategoryRankingListClient の「textbox を出さない」契約と揃える)
-        <details className="border-t border-dashed border-border">
-          <summary className="cursor-pointer px-4 py-2 text-xs text-primary hover:underline">
+        <details className="group/more border-t border-dashed border-border">
+          {/* 開閉の行にも他の行と同じ大きさの矢印を付ける (開くと上向き) */}
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-2 text-xs text-primary hover:underline [&::-webkit-details-marker]:hidden">
             すべて見る（残り {hidden.length} 件）
+            <ChevronDown
+              aria-hidden="true"
+              className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-open/more:rotate-180"
+            />
           </summary>
           <ul className="border-t border-border">
             {hidden.map((row) => (
@@ -193,8 +199,8 @@ export function CategoryTopicGroups({ topics, items, title, icon }: Props) {
       title={title}
       icon={icon}
       headingAs="h2"
-      className="pb-0"
-      bodyClassName="px-0 pt-0"
+      // まとまりは自分の罫線と余白を持つので、本文の余白を外して罫線をカードの線まで届かせる
+      bodyClassName="px-0 py-0"
     >
       {groups}
     </SectionCard>

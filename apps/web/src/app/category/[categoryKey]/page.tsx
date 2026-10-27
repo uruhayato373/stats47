@@ -17,12 +17,13 @@ import {
   readRankingValuesFromR2,
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
-import { ListOrdered, Newspaper, TrendingUp } from 'lucide-react';
+import { ListOrdered, MapPin, Newspaper, TrendingUp } from 'lucide-react';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PageSections } from '@/components/layout/PageShell';
 import { RailStack } from '@/components/rail';
-import { SectionHeader, SectionIndexLink } from '@/components/section';
-import { HorizontalCardCarousel } from '@/components/surface';
+import { SectionIndexLink } from '@/components/section';
+import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
@@ -289,8 +290,8 @@ export default async function CategoryPage({ params }: PageProps) {
     </RailStack>
   );
 
-  return (
-    <PageShell rightRail={rightRail}>
+  const header = (
+    <>
       <Breadcrumbs
         items={[
           { label: 'ホーム', href: '/' },
@@ -301,8 +302,13 @@ export default async function CategoryPage({ params }: PageProps) {
         title={category.categoryName}
         description={`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`}
       />
+    </>
+  );
 
-      <div className="space-y-4">
+  return (
+    <PageShell rightRail={rightRail} header={header}>
+      {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / ranking 一覧と同じ) */}
+      <PageSections>
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (
           <HorizontalCardCarouselFrame title="注目のランキング" icon={<TrendingUp />}>
@@ -357,45 +363,53 @@ export default async function CategoryPage({ params }: PageProps) {
             items={topicItems}
           />
         ) : (
-          <section>
-            <SectionHeader
-              title={`全${rankingItems.length}件のランキング`}
-              icon={<ListOrdered />}
-            />
+          <SectionCard
+            title={`全${rankingItems.length}件のランキング`}
+            icon={<ListOrdered />}
+            headingAs="h2"
+          >
             <CategoryRankingTable items={allItems} />
-          </section>
+          </SectionCard>
         )}
+      </PageSections>
 
-        {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-        <InContentAdSlot slot={HUB_INCONTENT} />
+      {/* 広告はカードではないので、カードの格子の外に置く (格子を 2 つに分け、間に置く)。
+          無効のときは何も描かないので、格子の帯が余らない */}
+      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
 
-        {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
-        {nativeBanners.length > 0 && (
-          <section>
-            <NativeAffiliateRow
-              banners={nativeBanners}
-              position="category-native"
-              trackingCategory={`category-${categoryKey}`}
-            />
-          </section>
-        )}
-
-        {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
-        <section aria-labelledby="category-area-links">
-          <SectionHeader
-            title={<span id="category-area-links">47都道府県から探す</span>}
-            description={`${category.categoryName}を含む各都道府県の統計プロファイルを見る`}
+      {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
+      {nativeBanners.length > 0 && (
+        <section className="mt-4">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="category-native"
+            trackingCategory={`category-${categoryKey}`}
           />
+        </section>
+      )}
+
+      <PageSections className="mt-4">
+        {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
+        <SectionCard
+          title="47都道府県から探す"
+          icon={<MapPin />}
+          headingAs="h2"
+          aria-label="47都道府県から探す"
+        >
+          <p className="mb-3 text-sm text-muted-foreground">
+            {`${category.categoryName}を含む各都道府県の統計プロファイルを見る`}
+          </p>
           <PrefectureNavigator
             prefectures={prefectures}
             variant="embedded"
             surface="category"
           />
-        </section>
+        </SectionCard>
+      </PageSections>
 
-        {/* コンテンツ末尾の全幅フッター広告 */}
-        <FooterAdSlot />
-      </div>
+      {/* コンテンツ末尾の全幅フッター広告 */}
+      <FooterAdSlot className="mt-4" />
     </PageShell>
   );
 }

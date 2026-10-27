@@ -21,7 +21,9 @@ import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-pro
 import { Compass, LayoutGrid, TrendingUp } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { PageSections } from '@/components/layout/PageShell';
 import { RailCategoryList, RailStack } from '@/components/rail';
+import { SectionIndexLink } from '@/components/section';
 import { RailCard, RailNavRow, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
@@ -68,9 +70,9 @@ export default function RankingIndexPage() {
   const rightRail = (
     <RailStack>
       <RailCard title="他の探し方" icon={<Compass />}>
-        <nav aria-label="他の探し方" className="-mx-2 flex flex-col">
+        <nav aria-label="他の探し方" className="flex flex-col divide-y divide-border">
           {OTHER_ENTRY_POINTS.map((entry) => (
-            <RailNavRow key={entry.href} href={entry.href}>
+            <RailNavRow key={entry.href} href={entry.href} className="px-0">
               {entry.label}
             </RailNavRow>
           ))}
@@ -79,8 +81,8 @@ export default function RankingIndexPage() {
     </RailStack>
   );
 
-  return (
-    <PageShell rightRail={rightRail}>
+  const header = (
+    <>
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: 'ランキング' }]}
       />
@@ -95,9 +97,18 @@ export default function RankingIndexPage() {
         title="都道府県ランキング一覧"
         stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ ${CATEGORY_COUNT} カテゴリ ・ 47 都道府県`}
       />
+    </>
+  );
 
-      <div className="space-y-4">
-        <HorizontalCardCarouselFrame title="注目のランキング" icon={<TrendingUp />}>
+  return (
+    <PageShell rightRail={rightRail} header={header}>
+      {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / category と同じ) */}
+      <PageSections>
+        <HorizontalCardCarouselFrame
+          title="注目のランキング"
+          icon={<TrendingUp />}
+          action={<SectionIndexLink href="/search?type=ranking">もっと見る</SectionIndexLink>}
+        >
           <FeaturedRankings
             limit={4}
             showHeader={false}
@@ -106,15 +117,14 @@ export default function RankingIndexPage() {
           />
         </HorizontalCardCarouselFrame>
 
-        {/* カテゴリの索引。390px ではサイドバーが畳まれるので、本文からもカテゴリで探せるようにする */}
+        {/* カテゴリの索引。390px ではサイドバーが畳まれるので、本文からもカテゴリで探せるようにする。
+            行は区切り線で並べ、罫線から文字までを 16px にする (行の上下 8px + 本文の上下 8px) */}
         <SectionCard
           title={`${CATEGORY_COUNT} カテゴリから探す`}
           icon={<LayoutGrid />}
           headingAs="h2"
-          bodyClassName="pt-2.5"
+          bodyClassName="@container py-2"
         >
-          {/* 列数は本文の幅 (@container) で決める: 48rem 以上で 2 列 */}
-          <div className="@container">
           <RailCategoryList
             items={CATEGORY_INDEX}
             density="default"
@@ -124,18 +134,18 @@ export default function RankingIndexPage() {
               label: `全 ${RANKING_COUNT.toLocaleString()} ランキングから検索する`,
               trackingLabel: 'category:all',
             }}
-            className="-mx-2 p-0 [&_[data-sidebar=menu]]:grid [&_[data-sidebar=menu]]:gap-x-6 @md:[&_[data-sidebar=menu]]:grid-cols-2"
+            // 列数は本文の幅 (@container) で決める: 48rem 以上で 2 列
+            className="@md:[&>ul]:grid @md:[&>ul]:grid-cols-2 @md:[&>ul]:gap-x-6"
           />
-          </div>
         </SectionCard>
+      </PageSections>
 
-        {/*
-            フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと
-            左レール分だけ記事内広告と左端がずれる。他のハブ面 (/category, /blog) は
-            元から両枠が同一カラムにあり、/ranking だけが内側グリッドのせいで外れていた。
-          */}
-        <FooterAdSlot />
-      </div>
+      {/*
+          フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと
+          左レール分だけ記事内広告と左端がずれる。カードの格子の外 (下) に置く
+          (広告が無効のときは何も描かないので、格子の帯が余らないようにするため)。
+        */}
+      <FooterAdSlot className="mt-4" />
     </PageShell>
   );
 }

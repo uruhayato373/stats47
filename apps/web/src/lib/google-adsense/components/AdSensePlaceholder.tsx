@@ -4,8 +4,9 @@
  * 開発環境で広告の代わりに表示するプレースホルダーです。
  * 外枠 class は本番の `AdSenseAd` と共有（`ad-frame.ts`）しています。
  *
- * 枠は広告スロット側のカード (RailAdSlot / FooterAdSlot の見出し「広告」付き Card) が持つので、
- * ここでは点線の枠を描かず muted の地だけにする (カードを入れ子に見せない。2026-10-28)。
+ * 枠と地は広告スロット側のカード (RailAdSlot / FooterAdSlot の見出し「広告」付き Card) が持つので、
+ * ここでは枠も地の色も描かず、カードの地の上に文字だけを置く (カードの中に別の面を作らない。
+ * 2026-10-28 3 巡目。muted の地がカードの中のもう 1 枚の面に見えていた)。
  * 高さは本番の予約高と同じだが、フレキシブル枠 (Multiplex 300px など) は本文を占めないよう
  * PLACEHOLDER_MAX_HEIGHT までに抑え、本番の予約高を文字で示す。
  */
@@ -65,7 +66,7 @@ export function AdSensePlaceholder({
       style={{ minHeight: `${placeholderHeight}px` }}
     >
       <div
-        className={`flex flex-1 items-center justify-center rounded-sm bg-muted ${
+        className={`flex flex-1 items-center justify-center ${
           isFlexible ? "w-full" : fixedSizeClass
         }`.trim()}
         style={{ maxWidth: "100%", minHeight: `${placeholderHeight}px` }}

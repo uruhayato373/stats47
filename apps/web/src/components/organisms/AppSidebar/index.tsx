@@ -7,12 +7,14 @@
  *   検索エンジン向けには Footer に主要ナビと「すべてのテーマ」のリンクを常に出して補う
  * - テンプレートと同じ variant="inset"。ルートレイアウトの SidebarInset に outline + m-2 を付けて対にする
  * - ヘッダーはテンプレートの full-logo と同じ 2 段 (ロゴ + 名前 text-base + 副題 1 行)
- * - 主要ナビは常に展開。カテゴリ (17 件) とテーマのグループは既定で開き、見出しで閉じられる
- *   (AppSidebarClient の SidebarCollapsibleGroup)。グループ名は SidebarGroupLabel の既定の見た目
+ * - 主要ナビは常に展開し、グループ名「メニュー」を付ける。カテゴリ (17 件) とテーマのグループは既定で開き、
+ *   見出しで閉じられる (AppSidebarClient の SidebarCollapsibleGroup)。グループ名はどれも SidebarGroupLabel の
+ *   見た目に font-semibold を足した同じ作り (Sidebar の className で全グループ名に当てる)
  * - テーマはテンプレートの nav-collapse と同じく 5 系統 (THEME_NAV_GROUPS) の開閉できる項目に分け、
  *   系統の項目にアイコンを付け、テーマのリンクは左線付きで字下げした子に並べる。既定は閉じ、現在地を含む系統だけ開く
  * - 主要ナビ・カテゴリ・テーマの系統の項目にはすべて lucide のアイコンを付ける (カテゴリは categories.ts の icon)
- * - 下端 (SidebarFooter) に一覧への出口 (すべてのランキング・すべてのテーマ) を置く
+ * - 下端 (SidebarFooter) に一覧への出口 (すべてのテーマ) を置く。/ranking への出口は主要ナビの
+ *   「ランキング」と重なるので置かない (2026-10-28 3 巡目)
  * - 閉じている間もリンクは hidden="until-found" で SSR の HTML に残す
  * - 広告は置かない (ルートの body に google-anno-skip を付けてある)
  * - `cookies()` / `headers()` は呼ばない (SSG 維持: .claude/rules/nextjs-ssg-preservation.md)
@@ -30,7 +32,6 @@ import {
   HeartPulse,
   Home,
   LayoutGrid,
-  ListOrdered,
   Map as MapIcon,
   MapPin,
   Palette,
@@ -72,7 +73,6 @@ import {
   SidebarMenuSubItem,
 } from './sidebar-shell';
 import {
-  ALL_RANKINGS_NAV_ITEM,
   ALL_THEMES_NAV_ITEM,
   COMPARE_NAV_ITEM,
   HOME_NAV_ITEM,
@@ -162,11 +162,16 @@ export function getThemeNavSections(): ThemeNavSection[] {
   }));
 }
 
-/** 下端の出口 (一覧ページ)。「すべてのランキング」は主要ナビの「ランキング」が現在地を持つ */
+/** 下端の出口 (一覧ページ)。上のナビ (主要ナビ・カテゴリ・テーマの系統) と行き先が重ならないものだけ */
 const FOOTER_NAV_ITEMS = [
-  { ...ALL_RANKINGS_NAV_ITEM, icon: ListOrdered, matchActive: false },
   { ...ALL_THEMES_NAV_ITEM, icon: LayoutGrid, matchActive: true },
 ] as const;
+
+/**
+ * グループ名の見た目。テンプレートの SidebarGroupLabel (data-slot="sidebar-group-label") と同じクラスで描き、
+ * 主要ナビ・カテゴリ・テーマのグループ名をすべて font-semibold にする (Sidebar の className で当てる)。
+ */
+const GROUP_LABEL_EMPHASIS_CLASS = '**:data-[slot=sidebar-group-label]:font-semibold';
 
 function NavLinkMenu({ items }: { items: NavLinkItem[] }) {
   return (
@@ -212,7 +217,7 @@ export function AppSidebar() {
     // テンプレートの app-sidebar と同じ inset。内側の面は白地 + 線 (SidebarInset の outline と同じく場所を取らない outline)
     <Sidebar
       variant="inset"
-      className="**:data-[slot=sidebar-inner]:bg-background **:data-[slot=sidebar-inner]:outline **:data-[slot=sidebar-inner]:outline-border"
+      className={`**:data-[slot=sidebar-inner]:bg-background **:data-[slot=sidebar-inner]:outline **:data-[slot=sidebar-inner]:outline-border ${GROUP_LABEL_EMPHASIS_CLASS}`}
     >
       {/* 高さ h-14 は SiteHeader の行と同じ値 (下線を一直線に揃える) */}
       <SidebarHeader className="h-14 flex-row items-center border-b border-border px-3 py-0">
@@ -242,6 +247,15 @@ export function AppSidebar() {
       <SidebarActiveProvider hrefs={hrefs}>
         <SidebarNavContent>
           <SidebarGroup>
+            {/* SidebarGroupLabel と同じ見た目の名前。部品は 'use client' のモジュールにあるので、
+                Server Component のここでは同じ data-slot / class の div を描く (RSC の参照を増やさない) */}
+            <div
+              data-slot="sidebar-group-label"
+              data-sidebar="group-label"
+              className="flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70"
+            >
+              メニュー
+            </div>
             <SidebarGroupContent>
               <NavLinkMenu items={primary} />
             </SidebarGroupContent>

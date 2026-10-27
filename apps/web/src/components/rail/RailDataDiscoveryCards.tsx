@@ -55,7 +55,6 @@ export function RailDataDiscoveryCards({
             label: 'ランキング一覧を見る',
             trackingLabel: 'category:all',
           }}
-          className="-mx-2 p-0"
         />
       </RailCard>
 

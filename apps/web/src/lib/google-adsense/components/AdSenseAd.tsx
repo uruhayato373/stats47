@@ -194,11 +194,8 @@ export function AdSenseAd({
           />
         )
       ) : (
-        // 遅延ロード中のスペース確保（CLSの防止）
-        <div
-          style={{ width: "100%", minHeight: `${reservedMinHeight}px` }}
-          className="bg-muted"
-        />
+        // 遅延ロード中のスペース確保（CLSの防止）。地の色は付けない (広告カードの中に別の面を作らない)
+        <div style={{ width: "100%", minHeight: `${reservedMinHeight}px` }} />
       )}
     </div>
   );

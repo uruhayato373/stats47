@@ -55,7 +55,8 @@ describe('home page structure (portal)', () => {
   });
 
   it('本文の余白は main の p-4 だけに任せ、PageShell や注目ランキングで二重に足さない', () => {
-    expect(PAGE).toContain('<PageShell rightRail={rightRail}>');
+    // h1 は PageShell の header に渡し、右レールより上に全幅で置く
+    expect(PAGE).toContain('<PageShell rightRail={rightRail} header={header}>');
     expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
     expect(FEATURED_RANKINGS).not.toContain('SHELL_WIDTH_CLASS');
   });

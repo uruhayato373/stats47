@@ -4,9 +4,7 @@ import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 import {
   CARD_SURFACE_CLASS,
-  Card,
   CardAction,
-  CardContent,
   CardHeader,
   CardTitle,
   Collapsible,
@@ -19,27 +17,29 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "@/components/atoms/SiteLink";
 
 /*
- * カードはテンプレートの Card (@stats47/components の ui/card) で組み立てる (2026-10-27 オーナー決定)。
- * 余白・間隔・線・地は Card と <html class="style-lyra"> の .cn-card が決め、ここでは足さない。
- * 外枠の角丸・線色のトークン (CARD_SURFACE_CLASS) は従来どおり合成する (契約テストが固定)。
+ * カードはテンプレートの Card (@stats47/components の ui/card) の組み立て (data-slot="card" / card-header /
+ * card-title / card-action / card-content) で描く (2026-10-27 オーナー決定)。
  *
- * テンプレートから外す点は 2 つだけ:
- * - 見出しも本文の区切りも無いカード (SurfaceCard / SurfaceSection / ArticleCard) は子を CardContent で
- *   包まずに Card の直下へ置くので、CardContent と同じ px-4 を Card に付ける。呼び出し側の
- *   className (p-0 / p-5 など 118 件) がそのまま効くようにするため。
- * - Card は要素を選べないので、<section> で描く SurfaceSection / RailCard / SectionCard は
- *   Card と同じクラスを section に付ける (CARD_SECTION_CLASS)。region の役割と aria-label を保つため。
- *   角丸は Card 既定の大きい角丸を写さず、CARD_SURFACE_CLASS の rounded-card で決める。
+ * 外枠と本文の要素は Card / CardContent の部品を通さず、同じ data-slot の要素をここで描く。
+ * <html class="style-lyra"> の .cn-card / .cn-card-content はレイヤーの外で当たり、素の utility
+ * (gap-0・py-0・bg-card・border・呼び出し側の p-0 / px-0 など) に必ず勝つため (2026-10-28 3 巡目。
+ * 見出しの下の gap-4 と本文の px-4 が消えず、カルーセルのセルが縁から 32px 内側に寄っていた)。
+ * cn-card を付けなければ、外枠の地・線・角丸は CARD_SURFACE_CLASS のトークン、余白は下の値と呼び出し側の
+ * className だけで決まる。線は ring ではなく border (CARD_SURFACE_CLASS) で引く。カード同士を接ぐ節
+ * (PageSections) は間に点線の帯を挟むので、線が二重に重ならない。
+ *
+ * 文字の大きさと行の高さは lyra の .cn-card と同じ text-xs/relaxed (これまで実際に効いていた値) にする。
+ * <section> で描く SurfaceSection / RailCard / SectionCard は region の役割と aria-label を保つ。
  */
-const CARD_SECTION_CLASS =
-  "cn-card group/card flex flex-col gap-4 overflow-hidden bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10";
+const CARD_LAYOUT_CLASS =
+  "group/card flex flex-col gap-4 overflow-hidden py-4 text-xs/relaxed";
 
-/** CardContent と同じ横余白。子を CardContent で包まないカードだけが使う。 */
+/** カード本文の横余白 (テンプレートの CardContent の px-4)。見出しの無いカードは外枠に付ける。 */
 const CARD_CONTENT_INSET_CLASS = "px-4";
 
 /*
- * Link を外枠にするカード (SurfaceLinkCard と getSurfaceCardClassName の利用側 25 件) は Card を使えないため、
- * クラス文字列のまま残す。Card の py-4 + CardContent の px-4 と同じ p-4。
+ * Link を外枠にするカード (SurfaceLinkCard と getSurfaceCardClassName の利用側) はクラス文字列で描く。
+ * 余白はテンプレートの CardContent と同じ p-4。
  */
 const surfaceCardClass = cn(CARD_SURFACE_CLASS, "p-4 transition-colors");
 
@@ -64,9 +64,12 @@ export const PORTAL_CARD_PADDING_CLASS = "p-4";
 export const PORTAL_CARD_CELL_CLASS =
   "in-data-[carousel=cells]:rounded-none in-data-[carousel=cells]:border-0 in-data-[carousel=cells]:bg-transparent";
 
-/** FeaturedRankingCardを基準にしたタイトル階層。 */
+/**
+ * ポータルカードの題名。語の途中で切らない: 行数で省略せず、日本語は文節で折り返し
+ * (word-break: auto-phrase)、最後の行が 1 語だけにならないよう text-pretty にする。
+ */
 export const PORTAL_CARD_TITLE_CLASS =
-  "relative z-10 line-clamp-2 min-h-[2.4rem] text-sm font-semibold leading-snug transition-colors group-hover:text-primary";
+  "relative z-10 text-sm font-semibold leading-snug text-pretty [word-break:auto-phrase] transition-colors group-hover:text-primary";
 
 /** タイトル下に置く短い説明。カード本文なので12px未満にしない。 */
 export const PORTAL_CARD_DESCRIPTION_CLASS =
@@ -92,13 +95,13 @@ interface SurfaceSectionProps extends ComponentPropsWithoutRef<"section"> {
   children: ReactNode;
 }
 
-/** Card と同じ見た目の <section>。見出しの有無にかかわらず section の役割を保つ。 */
+/** テンプレートの Card と同じ組み立ての <section>。見出しの有無にかかわらず section の役割を保つ。 */
 function CardSection({ className, ...props }: ComponentPropsWithoutRef<"section">) {
   return (
     <section
       data-slot="card"
       data-size="default"
-      className={cn(CARD_SECTION_CLASS, CARD_SURFACE_CLASS, className)}
+      className={cn(CARD_SURFACE_CLASS, CARD_LAYOUT_CLASS, className)}
       {...props}
     />
   );
@@ -110,12 +113,14 @@ export function SurfaceCard({
   ...props
 }: SurfaceCardProps) {
   return (
-    <Card
-      className={cn(CARD_SURFACE_CLASS, CARD_CONTENT_INSET_CLASS, className)}
+    <div
+      data-slot="card"
+      data-size="default"
+      className={cn(CARD_SURFACE_CLASS, CARD_LAYOUT_CLASS, CARD_CONTENT_INSET_CLASS, className)}
       {...props}
     >
       {children}
-    </Card>
+    </div>
   );
 }
 
@@ -161,9 +166,12 @@ export function ArticleCard({
   ...props
 }: SurfaceCardProps) {
   return (
-    <Card
+    <div
+      data-slot="card"
+      data-size="default"
       className={cn(
         CARD_SURFACE_CLASS,
+        CARD_LAYOUT_CLASS,
         CARD_CONTENT_INSET_CLASS,
         "max-sm:-mx-4 max-sm:rounded-none max-sm:border-x-0",
         className,
@@ -171,7 +179,7 @@ export function ArticleCard({
       {...props}
     >
       {children}
-    </Card>
+    </div>
   );
 }
 
@@ -195,21 +203,33 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
   headingAs?: "h2" | "h3";
 }
 
-/**
- * 見出し下〜本文 1 行目の間隔。テンプレートの CardHeader (下罫線の下 pb-4) と CardContent に合わせ、
- * 罫線から中身まで 16px にする。レールの行 (py-1.5) は自分で上下 6px を持つので、本文の上は 10px にして
- * 合計 16px に揃える。
+/*
+ * 見出し行と本文の余白 (2026-10-28 3 巡目。ChartPanel と同じ値):
+ * - 見出し行は px-4 pt-4 pb-3 + 下罫線。題は text-base (24px の行) なので、見出し行は約 53px
+ * - 操作 (CardAction) は常に見出しと同じ行の右端に置く (狭い幅でも下の行へ折り返さない)
+ * - 本文は罫線から 16px (pt-4) で始め、下端も 16px (pb-4) で閉じる。レールのリンク行は自分で上下 6px
+ *   (py-1.5) を持つので、本文の上下を 10px にして文字までを 16px に揃える
+ * 外枠の py-4 と gap-4 は見出しがあるときに外し (py-0 gap-0)、余白は見出し行と本文が持つ。
  */
-const BODY_TOP_CLASS = {
-  rail: "pt-2.5",
-  section: "pt-4",
+const BODY_PADDING_CLASS = {
+  rail: "pt-2.5 pb-2.5",
+  section: "pt-4 pb-4",
 } as const;
+
+/** 見出し行。lyra の .cn-card-header は下罫線付きで pb-4 をレイヤーの外で当てるので、pb-3 は ! で勝たせる */
+const HEADER_CLASS = "items-center px-4 pt-4";
+
+/** 題の文字 (ChartPanel と同じ text-base font-medium の 24px の行)。 */
+const HEADING_TEXT_CLASS = "text-base font-medium leading-6 text-foreground";
 
 /**
  * 見出しの文字。日本語は文節で折り返し (word-break: auto-phrase)、行の長さを揃える (text-balance)。
  * 「全41件のランキン / グ」のような語中の折れを防ぐ。
  */
 const HEADING_WRAP_CLASS = "text-balance [word-break:auto-phrase]";
+
+/** 操作は見出しの 1 行だけにまたがらせ、縦の中央を見出しと揃える (CardAction 既定の row-span-2 を外す) */
+const ACTION_CLASS = "row-span-1 flex items-center gap-2 self-center";
 
 function HeaderedSurfaceCard({
   variant,
@@ -236,14 +256,23 @@ function HeaderedSurfaceCard({
     </span>
   ) : null;
   const headingClassName = cn(
-    "min-w-0 font-medium text-foreground",
+    "min-w-0",
+    HEADING_TEXT_CLASS,
     variant === "rail" ? "truncate" : HEADING_WRAP_CLASS,
     titleClassName,
   );
+  // 本文は CardContent と同じ data-slot の要素で描く (.cn-card-content の px-4 に呼び出し側の px-0 が負けないように)
   const body = hasBody ? (
-    <CardContent className={cn(hasHeader && BODY_TOP_CLASS[variant], bodyClassName)}>
+    <div
+      data-slot="card-content"
+      className={cn(
+        CARD_CONTENT_INSET_CLASS,
+        hasHeader ? BODY_PADDING_CLASS[variant] : undefined,
+        bodyClassName,
+      )}
+    >
       {children}
-    </CardContent>
+    </div>
   ) : null;
 
   if (collapsible) {
@@ -253,10 +282,17 @@ function HeaderedSurfaceCard({
         render={<section />}
         data-slot="card"
         data-size="default"
-        className={cn(CARD_SECTION_CLASS, CARD_SURFACE_CLASS, "group/collapsible gap-0", className)}
+        className={cn(CARD_SURFACE_CLASS, CARD_LAYOUT_CLASS, "group/collapsible gap-0 py-0", className)}
         {...props}
       >
-        <CardHeader className="relative has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-ring">
+        <CardHeader
+          className={cn(
+            HEADER_CLASS,
+            // 閉じているときは見出し行だけなので上下を 16px に揃える。開くと本文の上の罫線までが 12px
+            "pb-4 group-data-open/collapsible:pb-3",
+            "relative has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-ring",
+          )}
+        >
           <CardTitle className="flex min-w-0 items-center gap-2">
             {iconSlot}
             <Heading className={headingClassName}>
@@ -266,7 +302,7 @@ function HeaderedSurfaceCard({
               </CollapsibleTrigger>
             </Heading>
           </CardTitle>
-          <CardAction className="relative flex items-center gap-2 self-center">
+          <CardAction className={cn(ACTION_CLASS, "relative")}>
             {headerAction && <span className="relative z-10">{headerAction}</span>}
             <ChevronDown
               aria-hidden="true"
@@ -274,8 +310,9 @@ function HeaderedSurfaceCard({
             />
           </CardAction>
         </CardHeader>
+        {/* 見出しと本文の区切りはこの罫線 1 本だけ (本文の上余白は BODY_PADDING_CLASS が持つ) */}
         {body && (
-          <CollapsibleContent keepMounted className="mt-3 border-t">
+          <CollapsibleContent keepMounted className="border-t">
             {body}
           </CollapsibleContent>
         )}
@@ -284,32 +321,14 @@ function HeaderedSurfaceCard({
   }
 
   return (
-    <CardSection className={cn(hasHeader && hasBody && "gap-0", className)} {...props}>
+    <CardSection className={cn(hasHeader && "gap-0 py-0", className)} {...props}>
       {hasHeader && (
-        <CardHeader
-          className={cn(
-            "items-center",
-            hasBody && "border-b",
-            // 本文カードは狭い幅 (見出し行 24rem 未満) で操作を見出しの下の行へ回す
-            variant === "section" && headerAction && "@max-[24rem]/card-header:grid-cols-1",
-          )}
-        >
-          {/* min-h-8 = 操作 (Button icon / sm) の高さ。操作の有無や表示の切り替えで見出し行の高さを変えない */}
-          <CardTitle className="flex min-h-8 min-w-0 items-center gap-2">
+        <CardHeader className={cn(HEADER_CLASS, hasBody ? "border-b !pb-3" : "pb-4")}>
+          <CardTitle className="flex min-w-0 items-center gap-2">
             {iconSlot}
             {title && <Heading className={headingClassName}>{title}</Heading>}
           </CardTitle>
-          {headerAction && (
-            <CardAction
-              className={cn(
-                "flex items-center gap-2 self-center",
-                variant === "section" &&
-                  "@max-[24rem]/card-header:col-start-1 @max-[24rem]/card-header:row-span-1 @max-[24rem]/card-header:row-start-auto @max-[24rem]/card-header:justify-self-start",
-              )}
-            >
-              {headerAction}
-            </CardAction>
-          )}
+          {headerAction && <CardAction className={ACTION_CLASS}>{headerAction}</CardAction>}
         </CardHeader>
       )}
       {body}

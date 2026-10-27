@@ -402,6 +402,8 @@ export type NavSurface =
   | 'unlabeled'
   // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
   | 'footer'
+  // 上端のヘッダー (ロゴ・狭い幅の検索への入口。2026-10-28 値追加。登録済み dimension の値追加)
+  | 'header'
   | 'breadcrumb'
   | 'tag'
   | 'blog_body'

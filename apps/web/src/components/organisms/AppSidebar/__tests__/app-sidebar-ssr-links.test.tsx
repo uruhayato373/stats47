@@ -156,13 +156,25 @@ describe('AppSidebar', () => {
     }
   });
 
-  it('下端に一覧への出口を置き、同じ /ranking を指す出口は現在地にしない', () => {
+  it('下端には上のナビと行き先が重ならない一覧への出口だけを置く (主要ナビの「ランキング」と同じ /ranking を重ねない)', () => {
     navigation.pathname = '/ranking';
     const { container } = render(<Shell />);
     const footer = container.querySelector('[data-slot="sidebar"] [data-slot="sidebar-footer"]');
-    expect(footer?.querySelector('a[href="/ranking"]')).toHaveTextContent('すべてのランキング');
+    expect(footer?.querySelector('a[href="/ranking"]')).toBeNull();
+    expect(footer).not.toHaveTextContent('すべてのランキング');
     expect(footer?.querySelector('a[href="/themes"]')).toHaveTextContent('すべてのテーマ');
     expect(footer?.querySelector('[data-active="true"]')).toBeNull();
+  });
+
+  it('主要ナビ・カテゴリ・テーマのグループ名は同じ作り (SidebarGroupLabel + font-semibold)', () => {
+    const { container } = render(<Shell />);
+    const sidebar = container.querySelector('[data-slot="sidebar"]');
+    const labels = [...(sidebar?.querySelectorAll('[data-slot="sidebar-group-label"]') ?? [])].map(
+      (label) => label.textContent
+    );
+    expect(labels).toEqual(['メニュー', 'カテゴリ', 'テーマ']);
+    // font-semibold は Sidebar の className (グループ名すべてへの子孫指定) で当てる
+    expect(container.innerHTML).toContain('**:data-[slot=sidebar-group-label]:font-semibold');
   });
 
   it('ヘッダーはロゴ + 名前 + 副題の 2 段', () => {

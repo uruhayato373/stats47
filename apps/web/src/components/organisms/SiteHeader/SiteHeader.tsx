@@ -3,9 +3,12 @@
 /**
  * サイトのヘッダー。テンプレート (shadcndashboard) の vertical/header に寄せた。
  *
- * 左: サイドバーの開閉 (SidebarTrigger) + lg 未満でだけ出すロゴ。中: 検索。
- * 右: テンプレートと同じ寸法 (size="icon") のアイコンボタン群。一覧への出口 (ランキング・テーマ) と配色の切り替え。
- * ナビのリンクはサイドバー (AppSidebar) に集め、ヘッダーには置かない。
+ * 左: lg 未満でだけ出すロゴ → サイドバーの開閉 (SidebarTrigger)。中: 検索。
+ * 右: テンプレートと同じ寸法 (size="icon") のアイコンボタン。狭い幅の検索への入口と配色の切り替えだけ。
+ * ナビのリンクはサイドバー (AppSidebar) に集め、ヘッダーには置かない (2026-10-28 3 巡目に、文字の無い
+ * 一覧への出口 2 つ (ランキング・テーマ) を外した。サイドバーと行き先が重複していた)。
+ * ヘッダーのリンク (ロゴ・検索) のクリックは導線名 header で共通のクリック監視 (NavClickTracker) が数える。
+ * 配色の切り替えは切り替え先を出す (明るい配色では月、暗い配色では太陽)。
  * ルートレイアウトの SidebarInset の中に置くので、画面遷移で再マウントされず検索欄の入力は残る。
  * 行の高さ (HEADER_HEIGHT_CLASS) は AppSidebar の SidebarHeader と同じ値にし、両方の下線を一直線に揃える。
  * 検索欄はテンプレートの shared/header/search.tsx と同じ組み立て (アイコン left-3・Input pl-10!・幅 w-xs)。
@@ -21,12 +24,12 @@ import { Button, buttonVariants } from '@stats47/components/atoms/ui/button';
 import { Input } from '@stats47/components/atoms/ui/input';
 import { Separator } from '@stats47/components/atoms/ui/separator';
 import { SidebarTrigger } from '@stats47/components/atoms/ui/sidebar';
-import { LayoutGrid, ListOrdered, Moon, Search, Sun } from 'lucide-react';
+import { Moon, Search, Sun } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 
-import { trackSearch } from '@/lib/analytics/events';
+import { navSurfaceProps, trackSearch } from '@/lib/analytics/events';
 
 import { useTheme } from '@/hooks/useTheme';
 
@@ -42,12 +45,6 @@ const ICON_BUTTON_CLASS = buttonVariants({
   size: 'icon',
   className: 'text-muted-foreground hover:text-foreground',
 });
-
-/** 右端に並べる一覧への出口。サイドバーを閉じていても 1 回で一覧へ行ける */
-const HEADER_LINKS = [
-  { href: '/ranking', label: 'ランキング一覧', icon: ListOrdered },
-  { href: '/themes', label: 'テーマ一覧', icon: LayoutGrid },
-] as const;
 
 export function SiteHeader() {
   const { toggleTheme } = useTheme();
@@ -72,9 +69,9 @@ export function SiteHeader() {
   return (
     <header
       className={`portal-header sticky top-0 z-200 border-b border-border bg-background ${HEADER_HEIGHT_CLASS}`}
+      {...navSurfaceProps('header')}
     >
       <div className="flex h-full items-center gap-2 p-2">
-        <SidebarTrigger aria-label="メニューを開閉する" />
         <Link
           href="/"
           className="flex shrink-0 items-center gap-1.5 lg:hidden"
@@ -92,6 +89,7 @@ export function SiteHeader() {
             stats<span className="text-primary">47</span>
           </span>
         </Link>
+        <SidebarTrigger aria-label="メニューを開閉する" />
         <Separator
           orientation="vertical"
           className="mx-1 h-4 data-[orientation=vertical]:self-center max-lg:hidden"
@@ -117,24 +115,12 @@ export function SiteHeader() {
           <Link
             href="/search"
             data-slot="button"
+            data-nav-label="検索"
             className={`${ICON_BUTTON_CLASS} sm:hidden`}
             aria-label="検索"
           >
             <Search className="size-4" />
           </Link>
-          {HEADER_LINKS.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              data-slot="button"
-              data-nav-label={label}
-              className={ICON_BUTTON_CLASS}
-              aria-label={label}
-              title={label}
-            >
-              <Icon className="size-4" />
-            </Link>
-          ))}
           <Button
             variant="ghost"
             size="icon"
@@ -145,8 +131,9 @@ export function SiteHeader() {
             suppressHydrationWarning
           >
             <span className="relative flex h-full w-full items-center justify-center">
-              <Sun className="absolute size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              {/* 切り替え先を出す: 明るい配色では月、暗い配色では太陽 */}
+              <Moon className="absolute size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Sun className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </span>
           </Button>
         </div>
