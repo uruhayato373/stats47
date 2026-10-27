@@ -8,6 +8,23 @@ const source = readFileSync(
   'utf8'
 );
 
+const localFinanceSource = readFileSync(
+  resolve(import.meta.dirname, '../../../../app/themes/local-finance/page.tsx'),
+  'utf8'
+);
+
+describe('地方財政 (bespoke ページ) — ページ内ナビの位置', () => {
+  it('ページ内ナビは h1 (header) の後に置き、幅で隠す代替 UI を持たない', () => {
+    const shellIndex = localFinanceSource.indexOf('<PageShell');
+    const headerIndex = localFinanceSource.indexOf('header={<ThemeAreaHeader', shellIndex);
+    const leftRailIndex = localFinanceSource.indexOf('leftRail={', shellIndex);
+    expect(headerIndex).toBeGreaterThan(shellIndex);
+    expect(leftRailIndex).toBeGreaterThan(headerIndex);
+    expect(localFinanceSource).not.toContain('NarrowBehavior');
+    expect(localFinanceSource).not.toContain('NARROW_ONLY');
+  });
+});
+
 describe('ThemePageLayout — 狭幅の読む順序', () => {
   it('ページ見出しをスコープ・切替・全指標ナビより先に描画する', () => {
     const headerIndex = source.indexOf('THEME_HEROES[theme.themeKey] ?');
@@ -34,11 +51,18 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
     expect(source.slice(themesLinkIndex, pageNavIndex)).toContain('buttonVariants');
   });
 
-  it('ページ内の章リンクは横スクロールさせず折り返す', () => {
+  it('ページ内の章リンクは狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (2026-10-28 テンプレート寄せ)', () => {
     const pageNavIndex = source.indexOf('aria-label="このページの内容"');
     const navTag = source.slice(pageNavIndex, source.indexOf('>', pageNavIndex));
-    expect(navTag).toContain('flex-wrap');
-    expect(navTag).not.toContain('overflow-x-auto');
+    expect(navTag).toContain('overflow-x-auto');
+    expect(navTag).not.toContain('flex-wrap');
+  });
+
+  it('全指標・出典調査と関連記事はダッシュボードの後ろに置き、最初の画面に指標カードを出す', () => {
+    const dashboardIndex = source.indexOf('<ThemeDashboardClient');
+    expect(dashboardIndex).toBeGreaterThan(-1);
+    expect(source.indexOf('title="全指標・出典調査"')).toBeGreaterThan(dashboardIndex);
+    expect(source.indexOf('<ThemeRelatedArticles')).toBeGreaterThan(dashboardIndex);
   });
 
   it('全指標・出典調査は狭幅で初期展開しない', () => {

@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { RailLinksCard } from '@/components/rail';
 
 import type { NavSurface } from '@/lib/analytics/events';
@@ -11,6 +13,8 @@ interface Props {
   surface: NavSurface;
   columns?: 1 | 3;
   frame?: 'card' | 'inline';
+  /** 見出しの左のアイコン。省略時は RailLinksCard の既定。 */
+  icon?: ReactNode;
 }
 
 /**
@@ -24,12 +28,14 @@ export function ContentNavigation({
   surface,
   columns = 1,
   frame = 'card',
+  icon,
 }: Props) {
   if (!items.length) return null;
   const showReason = new Set(items.map((item) => item.reason)).size > 1;
   return (
     <RailLinksCard
       title={title}
+      icon={icon}
       layout="media"
       columns={columns}
       frame={frame}
