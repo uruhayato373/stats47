@@ -11,6 +11,7 @@
       "nav": [
         { "label": "現況レビュー", "href": "/dashboard", "kind": "results" },
         { "label": "領域と構え", "href": "/strategy/lanes", "kind": "actions" },
+        { "label": "pilot 判定", "href": "/strategy/pilots", "kind": "results" },
         { "label": "レビュー", "kind": "results", "children": [
           { "label": "週次レビュー", "href": "/strategy/reviews/weekly" },
           { "label": "月次レビュー", "href": "/strategy/reviews/monthly" }
