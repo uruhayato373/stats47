@@ -21,6 +21,26 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
     expect(pageNavIndex).toBeGreaterThan(controlsIndex);
   });
 
+  it('左レール (2 本目のナビ列) を作らず、切替行の右端にテーマ一覧ボタンを置く', () => {
+    expect(source).not.toMatch(/\bleftRail\b/);
+    expect(source).not.toContain('LEFT_RAIL_NARROW_ONLY_CLASS');
+    expect(source).not.toContain('ThemeSideNav');
+
+    const controlsIndex = source.indexOf('aria-label="テーマと地域"');
+    const themesLinkIndex = source.indexOf('href="/themes"', controlsIndex);
+    const pageNavIndex = source.indexOf('aria-label="このページの内容"');
+    expect(themesLinkIndex).toBeGreaterThan(controlsIndex);
+    expect(themesLinkIndex).toBeLessThan(pageNavIndex);
+    expect(source.slice(themesLinkIndex, pageNavIndex)).toContain('buttonVariants');
+  });
+
+  it('ページ内の章リンクは横スクロールさせず折り返す', () => {
+    const pageNavIndex = source.indexOf('aria-label="このページの内容"');
+    const navTag = source.slice(pageNavIndex, source.indexOf('>', pageNavIndex));
+    expect(navTag).toContain('flex-wrap');
+    expect(navTag).not.toContain('overflow-x-auto');
+  });
+
   it('全指標・出典調査は狭幅で初期展開しない', () => {
     // レール UI 契約統一 (2026-09-17) で自前の <details> を RailCard の
     // collapsible (既定閉・details/summary は共通部品側が持つ) へ置き換えた。

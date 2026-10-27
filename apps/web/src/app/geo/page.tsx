@@ -5,19 +5,13 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
-import {
-  Breadcrumbs,
-  LEFT_RAIL_NARROW_ONLY_CLASS,
-  PageHeader,
-  PageShell,
-} from '@/components/layout';
-import { RailLinksCard, RailStack } from '@/components/rail';
+import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { RailLinksCard } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard } from '@/components/surface';
 
 import {
   GeoAnalysisCards,
-  GEO_HOME_ANALYSIS_NAV_ITEMS,
   GEO_HOME_LAYER_NAV_ITEMS,
 } from '@/features/geo-analysis';
 
@@ -50,7 +44,8 @@ const GEO_METHOD_LINKS = [
   },
 ] as const;
 
-function CompareLink({ compact = false }: { compact?: boolean }) {
+/** 県比較の入口。文言は幅で変えず 1 種類にする。 */
+function CompareLink() {
   return (
     <SurfaceLinkCard
       href="/geo/compare"
@@ -58,13 +53,9 @@ function CompareLink({ compact = false }: { compact?: boolean }) {
     >
       <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold">
-          {compact ? '県から調べる' : 'あなたの県から調べる'}
-        </p>
+        <p className="text-sm font-semibold">あなたの県から調べる</p>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          {compact
-            ? '人口・地価・洪水・駅を比較'
-            : '人口・地価・洪水・駅を県別に比較'}
+          人口・地価・洪水・駅を県別に比較
         </p>
       </div>
       <ArrowRight
@@ -77,34 +68,10 @@ function CompareLink({ compact = false }: { compact?: boolean }) {
 
 export default function GeoPage() {
   return (
-    <PageShell
-      leftRail={
-        <RailStack>
-          <CompareLink compact />
-          <RailLinksCard
-            title="分析を選ぶ"
-            layout="list"
-            trackingSurface="geo_sidebar"
-            items={GEO_HOME_ANALYSIS_NAV_ITEMS}
-          />
-          <RailLinksCard
-            title="GIS一覧"
-            layout="list"
-            trackingSurface="geo_sidebar"
-            items={GEO_HOME_LAYER_NAV_ITEMS}
-            moreLink={{ href: '/geo/layers', label: 'すべてのGISを探す →' }}
-          />
-          <RailLinksCard
-            title="方法・出典"
-            layout="list"
-            trackingSurface="geo_sidebar"
-            items={GEO_METHOD_LINKS}
-          />
-        </RailStack>
-      }
-      leftRailDensity="compact"
-      leftRailNarrowBehavior="hide"
-    >
+    // ページ内ナビのために 2 本目の列 (左レール) を作らない。県比較の入口は本文の先頭、
+    // GIS 一覧と方法・出典は本文末のカードにする (どの幅でも同じ並び)。
+    // 「分析を選ぶ」のリンク一覧は、本文の分析カードと同じ内容なので置かない。
+    <PageShell>
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: '地域分析' }]}
       />
@@ -112,8 +79,7 @@ export default function GeoPage() {
         title="地図で見る地域の変化"
         description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
-      {/* 992px 未満では左レールが隠れるため、県比較の入口を本文上部へ残す。 */}
-      <div className={`mb-5 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+      <div className="mb-5">
         <CompareLink />
       </div>
       <section aria-labelledby="geo-analyses-heading">
@@ -191,8 +157,7 @@ export default function GeoPage() {
           </Link>
         </nav>
       </section>
-      <div className={`mt-6 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
-        <RailStack>
+      <div className="mt-6 grid items-start gap-4 @min-[656px]/shell:grid-cols-2">
           <RailLinksCard
             title="GIS一覧"
             layout="list"
@@ -206,7 +171,6 @@ export default function GeoPage() {
             trackingSurface="geo_sidebar"
             items={GEO_METHOD_LINKS}
           />
-        </RailStack>
       </div>
     </PageShell>
   );

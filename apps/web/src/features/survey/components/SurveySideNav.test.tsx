@@ -13,27 +13,19 @@ const categories = [
 ];
 
 describe('SurveySideNav', () => {
-  it('ページ内移動・代表ランキング・関連分類を役割別に表示する', () => {
-    render(
-      <SurveySideNav
-        pageLinks={pageLinks}
-        representativeRankings={[
-          { rankingKey: 'urban-planning-area', label: '都市計画区域面積' },
-        ]}
-        categories={categories}
-      />
+  it('本文上部のカードに、ページ内移動と関連分類を置く (見出しだけの「調査」カードは作らない)', () => {
+    const { container } = render(
+      <SurveySideNav pageLinks={pageLinks} categories={categories} />
     );
 
-    expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
-      'href',
-      '/survey'
-    );
-    const surveyHeadingRow = screen
-      .getByRole('heading', { name: '調査' })
+    expect(screen.queryByRole('heading', { name: '調査' })).toBeNull();
+    // 調査一覧への出口は「このページ」の見出しの右端に置く
+    const pageHeadingRow = screen
+      .getByRole('heading', { name: 'このページ' })
       .parentElement?.parentElement;
-    expect(surveyHeadingRow).not.toBeNull();
+    expect(pageHeadingRow).not.toBeNull();
     expect(
-      within(surveyHeadingRow as HTMLElement).getByRole('link', {
+      within(pageHeadingRow as HTMLElement).getByRole('link', {
         name: '調査一覧へ',
       })
     ).toHaveAttribute('href', '/survey');
@@ -42,20 +34,25 @@ describe('SurveySideNav', () => {
         screen.getByRole('navigation', { name: 'この調査ページの内容' })
       ).getByRole('link', { name: '代表ランキング' })
     ).toHaveAttribute('href', '#representative-rankings');
+    // 代表ランキングは本文の節が持つので、ナビで繰り返さない
     expect(
-      within(
-        screen.getByRole('navigation', { name: 'この調査の代表ランキング' })
-      ).getByRole('link', { name: '都市計画区域面積' })
-    ).toHaveAttribute('href', '/ranking/urban-planning-area');
+      screen.queryByRole('navigation', { name: 'この調査の代表ランキング' })
+    ).toBeNull();
     expect(
       within(
         screen.getByRole('navigation', { name: 'この調査に関連する分類' })
       ).getByRole('link', { name: /国土・気象/ })
     ).toHaveAttribute('href', '/category/landweather');
+    // 左レール (2 本目の列) ではなく、本文の上に 2 枚並べるグリッド
+    expect(container.firstElementChild).toHaveClass('grid-cols-2');
   });
 
-  it('狭幅代替ナビにもページ内移動と関連分類を残す', () => {
-    render(<SurveyMobileNav pageLinks={pageLinks} categories={categories} />);
+  it('狭幅代替ナビにもページ内移動と関連分類を残し、開閉の向きを示す', () => {
+    const { container } = render(
+      <SurveyMobileNav pageLinks={pageLinks} categories={categories} />
+    );
+
+    expect(container.querySelector('summary svg.lucide-chevron-down')).not.toBeNull();
 
     expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
       'href',

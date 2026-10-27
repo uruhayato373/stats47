@@ -112,6 +112,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
           />
           {/* 市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}
           <AreaHighlightList
+            columns={3}
             rankScope={`${inside}順位`}
             items={highlights.map((metric) => ({
               rankingKey: metric.rankingKey,

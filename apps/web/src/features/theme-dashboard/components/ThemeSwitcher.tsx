@@ -12,8 +12,6 @@ import {
 } from '@stats47/components/atoms/ui/select';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
-import Link from '@/components/atoms/SiteLink';
-
 import { trackNavClick } from '@/lib/analytics/events';
 
 import { themeHref } from '../config/theme-href';
@@ -74,7 +72,7 @@ interface Props {
   currentThemeKey: string;
   /** エリアページ経由時の都道府県コード（5桁）。指定時は都道府県文脈を維持する。 */
   areaContext?: { areaCode: string };
-  /** 狭幅ツールバー内で使う、短いラベル + 全幅 Select の表示。 */
+  /** 本文上部の切替行で使う、短いラベル + 全幅 Select の表示。 */
   compact?: boolean;
   /** テーマ一覧。サーバーで `THEME_SWITCHER_THEMES` を渡す。 */
   themes: readonly ThemeSwitcherTheme[];
@@ -83,13 +81,10 @@ interface Props {
 /**
  * テーマ詳細ページ上部のコンパクトなテーマ切替コントロール。
  *
- * **992px 未満 (左レール非表示) 専用の狭幅代替**。992px 以上ではテーマ切替は左レール
- * `ThemeSideNav` が担うので、呼び出し側が `LEFT_RAIL_NARROW_ONLY_CLASS` で包む
- * (`ThemePageLayout` / bespoke な `/themes/local-finance`)。
- *
- * 経緯: 2026-06 に常設左レール `ThemeSidebar` を廃止して本コンポーネントが唯一の切替 UI に
- * なったが、2026-08-04 に「ページ内容を切り替えるページ内ナビ」として左レールを復活させた
- * (正典: `.claude/rules/ui-components.md` / `.claude/design-system/prohibited.md` の例外節)。
+ * `ThemePageLayout` は本文上部の切替行 (テーマ・地域・テーマ一覧ボタン) に全幅で置く。
+ * テーマ一覧への出口は切替行の右端のボタンが持つので、ここではラベルと Select だけを描く。
+ * 2026-10-28 に左レールのテーマ一覧 (`ThemeSideNav` のグループ一覧) をサイドバーの
+ * 「テーマ」と重複するため撤去し、ページ内のテーマ切替は本コンポーネントだけになった。
  *
  * 遷移は `@stats47/components` の `Select` + `useRouter().push()`。現在値は props を正とし
  * ローカル state で二重管理しない。
@@ -117,17 +112,9 @@ export function ThemeSwitcher({
       )}
     >
       {compact ? (
-        <div className="flex min-h-6 items-center justify-between gap-3">
-          <span className="block shrink-0 text-xs font-medium text-muted-foreground">
-            テーマ
-          </span>
-          <Link
-            href="/themes"
-            className="text-xs font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-          >
-            テーマ一覧
-          </Link>
-        </div>
+        <span className="block text-xs font-medium text-muted-foreground">
+          テーマ
+        </span>
       ) : (
         <span className="block shrink-0 text-xs font-medium text-muted-foreground">
           テーマを切り替える

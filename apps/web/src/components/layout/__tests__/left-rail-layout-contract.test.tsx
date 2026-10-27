@@ -9,7 +9,7 @@ import {
 } from '../LeftRailLayout';
 
 describe('LeftRailLayout — shared contract', () => {
-  it('shell コンテナ 936px から共通の列幅と gap で左レールを表示する', () => {
+  it('ページ内ナビはサイドバーの右に列を作らず、本文の上に全幅で置く', () => {
     const { container } = render(
       <LeftRailLayout
         leftRail={<nav aria-label="contract-left-rail">rail</nav>}
@@ -18,20 +18,23 @@ describe('LeftRailLayout — shared contract', () => {
       </LeftRailLayout>
     );
 
-    expect(container.firstElementChild).toHaveClass(LEFT_RAIL_GRID_CLASS);
-    expect(LEFT_RAIL_GRID_CLASS).toContain(
-      '@min-[936px]/shell:grid-cols-[264px_minmax(0,1fr)]'
-    );
-    expect(
-      screen.getByLabelText('contract-left-rail').parentElement
-    ).toHaveClass(LEFT_RAIL_VISIBLE_CLASS);
-    // 狭い幅の代替 UI は、レール本体と同じ境界で入れ替わる
-    expect(LEFT_RAIL_VISIBLE_CLASS).toBe('hidden @min-[936px]/shell:block');
-    expect(LEFT_RAIL_NARROW_ONLY_CLASS).toBe('@min-[936px]/shell:hidden');
+    const outer = container.firstElementChild;
+    expect(outer).toHaveClass(LEFT_RAIL_GRID_CLASS);
+    // 2 列のグリッド (旧 264px 列) を作らない
+    expect(LEFT_RAIL_GRID_CLASS).not.toMatch(/grid-cols/);
+    const nav = screen.getByLabelText('contract-left-rail').parentElement;
+    expect(nav).toHaveAttribute('data-slot', 'page-nav');
+    expect(nav).toHaveClass(LEFT_RAIL_VISIBLE_CLASS);
+    // 幅で出し入れしない (どの幅でも同じ 1 か所に出す)
+    expect(LEFT_RAIL_VISIBLE_CLASS).not.toMatch(/hidden/);
+    // ナビは本文より先に描く
+    expect(outer?.firstElementChild).toBe(nav);
+    // 旧「狭い幅の代替 UI」は、ナビが全幅で出るため常に隠す (二重表示を作らない)
+    expect(LEFT_RAIL_NARROW_ONLY_CLASS).toBe('hidden');
   });
 
-  it('compact は shell コンテナ 896px から 224px 列で表示する (本文 656px を保つ)', () => {
-    const { container } = render(
+  it('compact を渡しても列を作らず、同じ置き場を使う', () => {
+    render(
       <LeftRailLayout
         leftRail={<nav aria-label="compact-left-rail">rail</nav>}
         density="compact"
@@ -40,13 +43,9 @@ describe('LeftRailLayout — shared contract', () => {
       </LeftRailLayout>
     );
 
-    expect(container.firstElementChild).toHaveClass(
-      '@min-[896px]/shell:grid',
-      '@min-[896px]/shell:grid-cols-[224px_minmax(0,1fr)]'
-    );
     expect(
       screen.getByLabelText('compact-left-rail').parentElement
-    ).toHaveClass('hidden', '@min-[896px]/shell:block');
+    ).toHaveAttribute('data-slot', 'page-nav');
   });
 
   it('本文の列は main を入れ子にせず div[data-slot=shell-main] で描く', () => {

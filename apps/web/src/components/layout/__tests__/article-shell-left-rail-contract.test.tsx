@@ -8,25 +8,34 @@ const LEFT = <nav aria-label="article-left-rail">left</nav>;
 const RIGHT = <aside aria-label="article-right-rail">right</aside>;
 
 describe('ArticleShell — leftRail', () => {
-  it('記事本文の前に共通の shell 936px+ 左レールを描く', () => {
+  it('ページ内ナビを列にせず、本文の上に置く', () => {
     const { container } = render(
       <ArticleShell leftRail={LEFT}>{MAIN}</ArticleShell>
     );
 
     expect(screen.getByLabelText('article-left-rail')).toBeInTheDocument();
     expect(screen.getByText('article-content')).toBeInTheDocument();
-    const grid =
-      screen.getByLabelText('article-left-rail').parentElement?.parentElement;
-    expect(grid).toHaveClass('@min-[936px]/shell:grid');
-    expect(grid?.parentElement).toHaveClass('@container/shell');
-    expect(
-      screen.getByLabelText('article-left-rail').parentElement
-    ).toHaveClass('hidden', '@min-[936px]/shell:block');
-    expect(
-      screen.getByLabelText('article-left-rail').parentElement
-    ).not.toHaveClass('sticky');
+    const nav = screen.getByLabelText('article-left-rail').parentElement;
+    expect(nav).toHaveAttribute('data-slot', 'page-nav');
+    expect(nav).not.toHaveClass('hidden');
+    expect(nav).not.toHaveClass('sticky');
+    expect(nav?.parentElement?.className ?? '').not.toMatch(/grid-cols/);
+    expect(nav?.parentElement?.parentElement).toHaveClass('@container/shell');
     // ページで唯一の main はルートレイアウトが持つ
     expect(container.querySelector('main')).toBeNull();
+  });
+
+  it('パンくずはページ内ナビより先 (コンテナの先頭) に置く', () => {
+    const { container } = render(
+      <ArticleShell
+        leftRail={LEFT}
+        breadcrumb={<nav aria-label="crumb">crumb</nav>}
+      >
+        {MAIN}
+      </ArticleShell>
+    );
+    const shell = container.querySelector('.reading-zone')?.firstElementChild;
+    expect(shell?.firstElementChild).toBe(screen.getByLabelText('crumb'));
   });
 
   it('右レールと同時指定された場合は既存の右レール契約を優先する', () => {

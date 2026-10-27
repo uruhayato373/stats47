@@ -26,12 +26,14 @@ const RAIL_CATEGORY_PAGES = [
 
 /**
  * サイト全体のナビ (カテゴリ一覧) はルートの AppSidebar が持つ (2026-10-27 U4)。
- * home・/ranking・/category はページ内にカテゴリ一覧の写しを置かない。
+ * home・/ranking・/category・都道府県ページはページ内にカテゴリ一覧の写しを置かない
+ * (都道府県ページの右レール「カテゴリから探す」は 2026-10-28 に撤去)。
  */
 const SITE_NAV_DEDUP_PAGES = [
   'src/app/page.tsx',
   'src/app/ranking/page.tsx',
   'src/app/category/[categoryKey]/page.tsx',
+  'src/app/areas/[areaCode]/page.tsx',
 ];
 
 const RAIL_DATA_DISCOVERY_CARDS = 'src/components/rail/RailDataDiscoveryCards.tsx';
@@ -71,11 +73,10 @@ function listTsxFiles(dir: string): string[] {
 }
 
 describe('rail contract: カテゴリ導線ページの共有部品移行', () => {
-  it.each(
-    RAIL_CATEGORY_PAGES.filter((page) => !SITE_NAV_DEDUP_PAGES.includes(page))
-  )('%s は RailCategoryList を使う', (relativePath) => {
-    const source = read(relativePath);
-    expect(source).toContain('RailCategoryList');
+  it('カテゴリ導線ページはすべてサイドバーへ一本化した (ページ内に RailCategoryList を持つページが残っていない)', () => {
+    expect(
+      RAIL_CATEGORY_PAGES.filter((page) => !SITE_NAV_DEDUP_PAGES.includes(page))
+    ).toEqual([]);
   });
 
   it.each(SITE_NAV_DEDUP_PAGES)(

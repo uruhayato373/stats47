@@ -12,6 +12,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { SectionHeader } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 
 import {
@@ -374,7 +375,7 @@ export function ThemeMetricsDashboard({
           <div
             key={`compact-${panel.key}`}
             data-theme-panel-grid="compact"
-            className="grid grid-cols-1 gap-4 @md:grid-cols-2"
+            className="grid grid-cols-1 items-stretch gap-4 @md:grid-cols-2"
           >
             {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
           </div>
@@ -473,26 +474,32 @@ export function ThemeMetricsDashboard({
     (key) => !usedEmbedded.has(key)
   );
 
-  const renderChapter = (chapter: (typeof chapters)[number]) => (
+  // 県を選んでいるときの県プロフィールへの導線。浮いた 1 行にせず、先頭の節見出しの右端に置く。
+  const profileLink = selectedPrefectureCode ? (
+    <Link
+      href={hrefFor('area', { areaCode: selectedPrefectureCode })}
+      className="inline-flex items-center gap-0.5 text-xs font-medium text-primary hover:underline"
+    >
+      {areaName}のプロフィール <ArrowRight className="size-3" aria-hidden />
+    </Link>
+  ) : null;
+
+  const renderChapter = (
+    chapter: (typeof chapters)[number],
+    action?: ReactNode
+  ) => (
     <section
       key={chapter.key}
       id={`theme-section-${chapter.key}`}
-      aria-labelledby={`theme-heading-${chapter.key}`}
+      aria-label={chapter.title}
       className="space-y-4 scroll-mt-24"
     >
-      <div className="border-b border-border pb-3">
-        <h2
-          id={`theme-heading-${chapter.key}`}
-          className="text-lg font-semibold"
-        >
-          {chapter.title}
-        </h2>
-        {chapter.description && (
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {chapter.description}
-          </p>
-        )}
-      </div>
+      <SectionHeader
+        title={chapter.title}
+        description={chapter.description}
+        action={action}
+        className="mb-0"
+      />
       {renderPanelRuns(chapter.panels, (panel) => {
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
@@ -541,17 +548,13 @@ export function ThemeMetricsDashboard({
       className="@container space-y-6 scroll-mt-24 pt-6"
     >
       <h2 className="sr-only">{areaName}の主要指標</h2>
-      {selectedPrefectureCode && (
-        <div className="flex justify-end">
-          <Link
-            href={hrefFor('area', { areaCode: selectedPrefectureCode })}
-            className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-          >
-            {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
-          </Link>
-        </div>
+      {/* 節見出しが無いテーマでは、見出しの右端に置けないので最初の行の右端に置く */}
+      {profileLink && leadingChapters.length === 0 && (
+        <div className="flex justify-end">{profileLink}</div>
       )}
-      {leadingChapters.map(renderChapter)}
+      {leadingChapters.map((chapter, index) =>
+        renderChapter(chapter, index === 0 ? profileLink : undefined)
+      )}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <div
@@ -572,7 +575,7 @@ export function ThemeMetricsDashboard({
           selectedPrefectureCode={selectedPrefectureCode}
         />
       )}
-      {trailingChapters.map(renderChapter)}
+      {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
         <div className="space-y-4">
           {remainingMarkdown.map((chart) => renderChart(chart))}

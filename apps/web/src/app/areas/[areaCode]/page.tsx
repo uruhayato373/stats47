@@ -15,12 +15,10 @@ import {
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
 import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
-import { RailCategoryList, RailLinksCard, RightRailWidgets } from '@/components/rail';
-import { RailCard } from '@/components/surface';
+import { RailLinksCard, RightRailWidgets } from '@/components/rail';
 
 import {
   FooterAdSlot,
@@ -135,6 +133,14 @@ export default async function AreaProfilePage({ params }: PageProps) {
   });
   const structuredData = generateAreaProfileStructuredData({ profile, highlights });
   const breadcrumbStructuredData = generateAreaProfileBreadcrumbStructuredData({ profile });
+  const tocCard = (
+    <RailLinksCard
+      title={`${profile.areaName}の目次`}
+      items={AREA_DATABOOK_TOC_ITEMS}
+      layout="list"
+      trackingSurface="area_sidebar"
+    />
+  );
 
   return (
     <>
@@ -155,12 +161,8 @@ export default async function AreaProfilePage({ params }: PageProps) {
           <RightRailWidgets
             topWidgets={
               <>
-                <RailLinksCard
-                  title={`${profile.areaName}の目次`}
-                  items={AREA_DATABOOK_TOC_ITEMS}
-                  layout="list"
-                  trackingSurface="area_sidebar"
-                />
+                {/* 目次は右レールが出る幅だけここに置く。狭い幅は本文の先頭 (h1 の直後) に出す */}
+                <div className="hidden @min-[988px]/shell:block">{tocCard}</div>
                 <RailLinksCard
                   title={`${profile.areaName}をテーマから見る`}
                   items={AREA_RAIL_THEMES.map((theme) => ({
@@ -175,13 +177,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
                   }}
                   trackingSurface="area_sidebar"
                 />
-                <RailCard title="カテゴリから探す" aria-label="カテゴリから探す">
-                  <RailCategoryList
-                    items={RANKING_PROMINENCE_CATEGORIES}
-                    showCount
-                    trackingSurface="area_sidebar"
-                  />
-                </RailCard>
                 <RelatedAreas areaCode={areaCode} />
               </>
             }
@@ -206,7 +201,10 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
         <AreaProfilePageClient profile={profile} />
 
-        <main className="min-w-0 space-y-8">
+        {/* 右レールが出ない幅では、目次が本文の最下部に落ちないよう h1 の直後に置く */}
+        <div className="mb-8 @min-[988px]/shell:hidden">{tocCard}</div>
+
+        <div className="min-w-0 space-y-8">
           <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
@@ -257,7 +255,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       home の左レールが引き続き使う。
                     */}
           <FooterAdSlot />
-        </main>
+        </div>
       </PageShell>
     </>
   );

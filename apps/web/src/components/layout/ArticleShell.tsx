@@ -9,8 +9,7 @@ interface ArticleShellProps {
   /** 記事本文 (flex-1 で残り幅いっぱいに広がる) */
   children: ReactNode;
   /**
-   * shell コンテナ 936px 以上で左に表示するページ内ナビ。調査ハブなど「読み進め方」を
-   * 先に示す記事面向け。狭幅では描画しないため、必要な操作はページ側で本文上部に代替 UI を置く。
+   * ページ内ナビ。パンくずの直後・本文の上に全幅で置く (列は作らない。`LeftRailLayout`)。
    */
   leftRail?: ReactNode;
   /** 右レール。ページと一緒に自然に流れる (追従・独立スクロールを作らない) */
@@ -37,9 +36,12 @@ interface ArticleShellProps {
  * - レール内に独立スクロールを作らず、ページ本体のスクロールで全内容に到達する
  * - 左レールと右レールは併存させない。右レールがある場合は右レールを優先する
  *
- * レールの境界は PageShell と同じ名前付きコンテナ `@container/shell` の幅で決める
- * (左 936px・右 988px)。ページで唯一の `<main>` はルートレイアウトが持つので、
- * 本文の列は `div[data-slot=shell-main]` で描く。
+ * 右レールの境界は PageShell と同じ名前付きコンテナ `@container/shell` の幅 (988px) で決める。
+ * ページ内ナビ (leftRail) は列を作らず本文の上に置く。ページで唯一の main 要素はルートレイアウトが
+ * 持つので、本文の列は `div[data-slot=shell-main]` で描く。
+ *
+ * パンくずは列の外 (コンテナの先頭) に置き、ページ内ナビ・本文・右レールより先に出す。
+ * 現在地をどの幅でも出す表示は `Breadcrumbs` / `CURRENT_ITEM_CLASS` が持つ。
  *
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md「reading zone」
  */
@@ -56,14 +58,11 @@ export function ArticleShell({
   return (
     <div className={cn('reading-zone w-full bg-background', className)}>
       <div className={SHELL_CONTAINER_CLASS}>
+        {breadcrumb}
         {showLeftRail ? (
-          <LeftRailLayout leftRail={leftRail}>
-            {breadcrumb}
-            {children}
-          </LeftRailLayout>
+          <LeftRailLayout leftRail={leftRail}>{children}</LeftRailLayout>
         ) : hasRightRail ? (
           <>
-            {breadcrumb}
             <div className="@min-[988px]/shell:flex @min-[988px]/shell:items-start @min-[988px]/shell:gap-4">
               <div data-slot="shell-main" className="min-w-0 flex-1">
                 {children}
@@ -78,12 +77,9 @@ export function ArticleShell({
             </div>
           </>
         ) : (
-          <>
-            {breadcrumb}
-            <div data-slot="shell-main" className="min-w-0">
-              {children}
-            </div>
-          </>
+          <div data-slot="shell-main" className="min-w-0">
+            {children}
+          </div>
         )}
       </div>
     </div>

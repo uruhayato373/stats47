@@ -1,6 +1,7 @@
 import { Suspense, type ReactNode } from 'react';
 
 
+import { buttonVariants } from '@stats47/components';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,7 +18,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import Link from '@/components/atoms/SiteLink';
-import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
+import { PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { RailStack } from '@/components/rail';
@@ -56,7 +57,6 @@ import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
-import { ThemeSideNav } from './ThemeSideNav';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
 import type { ThemePageData } from '../lib/load-theme-data';
@@ -79,11 +79,14 @@ interface Props {
 /**
  * テーマダッシュボードの共通レイアウト
  *
- * `PageShell`（左レール = ThemeSideNav）+ Breadcrumb + ヘッダー + ThemeDashboardClient。
+ * `PageShell` + Breadcrumb + ヘッダー + 本文上部の切替行 + ThemeDashboardClient。
  * chart_definitions から DB 管理チャートを取得してクライアントに渡す。
  *
- * ★Shell を本コンポーネントが持つ理由: 左レールの都道府県セレクタが
- * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell(leftRail) の
+ * テーマ間の移動はサイドバーの「テーマ」が持つので、ページ内に左レール (2 本目のナビ列) を
+ * 作らない (2026-10-28 テンプレート寄せ)。テーマ切替・地域選択は本文上部の 1 行に置く。
+ *
+ * ★Shell を本コンポーネントが持つ理由: 本文上部の都道府県セレクタが
+ * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell の
  * 入れ子をここで固定する。呼び出し側の page.tsx は PageShell を重ねない。
  */
 export async function ThemePageLayout({
@@ -177,23 +180,7 @@ export async function ThemePageLayout({
       initialAreaCode={providerPrefecture?.areaCode ?? null}
       initialAreaName={providerPrefecture?.areaName ?? null}
     >
-      <PageShell
-        leftRail={
-          <ThemeSideNav
-            themes={THEME_SWITCHER_THEMES}
-            currentThemeKey={theme.themeKey}
-            areaContext={
-              areaContext ? { areaCode: areaContext.areaCode } : undefined
-            }
-            showScope={!areaContext}
-            scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-            pageLinks={pageLinks}
-            metrics={themeMetrics}
-            surveys={themeSurveys}
-          />
-        }
-        leftRailNarrowBehavior="hide"
-      >
+      <PageShell>
         <div className="text-foreground">
           <script
             type="application/ld+json"
@@ -245,26 +232,22 @@ export async function ThemePageLayout({
           )}
 
           {!areaContext && (
-            <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
-              <StatisticsScopeNav
-                current="prefectures"
-                hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-              />
-            </div>
+            <StatisticsScopeNav
+              current="prefectures"
+              hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+            />
           )}
 
           {toolbar}
 
-          {/* 992px 未満のテーマ・地域切替。広幅は左レール ThemeSideNav が担うので隠す。
-          ★境界は左レールの共有クラスと必ず一致させること。
-          ずれると両方出る幅ができるため LEFT_RAIL_NARROW_ONLY_CLASS を使う。
+          {/* テーマ切替と地域選択は同じ高さ・同じ基準線の 1 行に置き、テーマ一覧への出口は右端のボタンにする。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
           <div
             role="group"
             aria-label="テーマと地域"
-            className={`mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+            className="mb-4 flex flex-wrap items-end gap-3"
           >
-            <div className="min-w-0">
+            <div className="w-full min-w-0 sm:w-64">
               <ThemeSwitcher
                 themes={THEME_SWITCHER_THEMES}
                 currentThemeKey={theme.themeKey}
@@ -274,85 +257,93 @@ export async function ThemePageLayout({
                 compact
               />
             </div>
-            <div className="min-w-0">
+            <div className="w-full min-w-0 sm:w-48">
               <span className="block text-xs font-medium text-muted-foreground">
                 地域
               </span>
               <PrefectureSelect className="mt-1 w-full" />
             </div>
+            <Link
+              href="/themes"
+              data-slot="button"
+              className={buttonVariants({
+                variant: 'outline',
+                className: 'sm:ml-auto',
+              })}
+            >
+              テーマ一覧
+            </Link>
           </div>
 
-          <div className={`mb-4 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
-            <RailStack>
-              {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査) */}
-              {pageLinks.length > 1 && (
-                <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
-                  <nav
-                    aria-label="このページの内容"
-                    className="flex items-center gap-x-5 gap-y-2 overflow-x-auto"
-                  >
-                    <ThemeChapterLinks
-                      links={pageLinks}
-                      themeKey={theme.themeKey}
-                      className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-                    />
-                  </nav>
-                </RailCard>
-              )}
+          <RailStack className="mb-4">
+            {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査) */}
+            {pageLinks.length > 1 && (
+              <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
+                <nav
+                  aria-label="このページの内容"
+                  className="flex flex-wrap items-center gap-x-5 gap-y-1"
+                >
+                  <ThemeChapterLinks
+                    links={pageLinks}
+                    themeKey={theme.themeKey}
+                    className="py-1.5 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
+                  />
+                </nav>
+              </RailCard>
+            )}
 
-              {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
-                <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
-                  <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
-                    {themeMetrics.length > 0 && (
-                      <div>
-                        <p className="pt-3 text-sm font-semibold text-muted-foreground">
-                          全指標（{themeMetrics.length}）
-                        </p>
-                        <nav aria-label="このテーマの全指標（モバイル）">
-                          {themeMetrics.map((metric) => (
-                            <RailNavRow
-                              key={metric.rankingKey}
-                              href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
-                              chevron={false}
-                              className="px-0"
-                            >
-                              {metric.label}
-                            </RailNavRow>
-                          ))}
-                        </nav>
-                      </div>
-                    )}
+            {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
+              <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
+                <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
+                  {themeMetrics.length > 0 && (
                     <div>
                       <p className="pt-3 text-sm font-semibold text-muted-foreground">
-                        出典調査
+                        全指標（{themeMetrics.length}）
                       </p>
-                      <RailNavRow
-                        href="/survey"
-                        chevron={false}
-                        className="px-0 font-medium"
-                      >
-                        調査一覧へ
-                      </RailNavRow>
-                      {themeSurveys.length > 0 && (
-                        <nav aria-label="このテーマの出典調査（モバイル）">
-                          {themeSurveys.map((survey) => (
-                            <RailNavRow
-                              key={survey.id}
-                              href={hrefFor('survey', { surveyKey: survey.id })}
-                              chevron={false}
-                              className="px-0"
-                            >
-                              {survey.name}
-                            </RailNavRow>
-                          ))}
-                        </nav>
-                      )}
+                      <nav aria-label="このテーマの全指標">
+                        {themeMetrics.map((metric) => (
+                          <RailNavRow
+                            key={metric.rankingKey}
+                            href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
+                            chevron={false}
+                            className="px-0"
+                          >
+                            {metric.label}
+                          </RailNavRow>
+                        ))}
+                      </nav>
                     </div>
+                  )}
+                  <div>
+                    <p className="pt-3 text-sm font-semibold text-muted-foreground">
+                      出典調査
+                    </p>
+                    <RailNavRow
+                      href="/survey"
+                      chevron={false}
+                      className="px-0 font-medium"
+                    >
+                      調査一覧へ
+                    </RailNavRow>
+                    {themeSurveys.length > 0 && (
+                      <nav aria-label="このテーマの出典調査">
+                        {themeSurveys.map((survey) => (
+                          <RailNavRow
+                            key={survey.id}
+                            href={hrefFor('survey', { surveyKey: survey.id })}
+                            chevron={false}
+                            className="px-0"
+                          >
+                            {survey.name}
+                          </RailNavRow>
+                        ))}
+                      </nav>
+                    )}
                   </div>
-                </RailCard>
-              )}
-            </RailStack>
-          </div>
+                </div>
+              </RailCard>
+            )}
+          </RailStack>
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (

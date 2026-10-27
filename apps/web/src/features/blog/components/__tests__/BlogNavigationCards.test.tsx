@@ -47,7 +47,18 @@ describe('BlogNavigationCards', () => {
     });
 
     expect(popularTag).toHaveAttribute('href', '/tag/タグ12');
-    expect(popularTag).toHaveClass('rounded-full', 'px-2', 'sm:min-h-7');
+    // 幅に関係なく同じ高さの Badge (画面幅で高さを変える sm:min-h-* を持たない)
+    expect(popularTag).toHaveAttribute('data-slot', 'badge');
+    expect(popularTag).toHaveClass('h-7');
+    expect(popularTag.className).not.toMatch(/sm:min-h-|snap-start/);
+    expect(popularTag.closest('[data-nav-surface]')).toHaveAttribute(
+      'data-nav-surface',
+      'blog_sidebar'
+    );
+    expect(screen.getByRole('link', { name: 'タグ一覧を見る' })).toHaveAttribute(
+      'href',
+      '/blog/tags'
+    );
     expect(
       screen.queryByRole('link', { name: '「タグ2」の記事を2件見る' })
     ).not.toBeInTheDocument();
@@ -71,7 +82,10 @@ describe('BlogNavigationCards', () => {
       <BlogNavigationCards {...PROPS} variant="mobile" />
     );
 
-    expect(container.querySelectorAll('details')).toHaveLength(3);
+    // RailCard の開閉はテンプレートの Collapsible (Base UI) になった。開閉つきのカードを数える
+    expect(
+      container.querySelectorAll('[data-slot="collapsible-trigger"]')
+    ).toHaveLength(3);
     expect(
       screen.getByRole('link', { name: /人気記事その1/ })
     ).toBeInTheDocument();

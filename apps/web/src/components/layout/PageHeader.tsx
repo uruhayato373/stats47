@@ -61,7 +61,7 @@ export function PageHeader({
         {title}
       </h1>
       {description && (
-        <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
           {description}
         </p>
       )}

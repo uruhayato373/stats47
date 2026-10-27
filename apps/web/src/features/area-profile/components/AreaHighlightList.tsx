@@ -1,4 +1,5 @@
 
+import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
@@ -29,6 +30,11 @@ interface AreaHighlightListProps {
   items: readonly AreaHighlightListItem[];
   /** 「全国」「県内」など順位の母集団 (読み上げ用) */
   rankScope: string;
+  /**
+   * 本文の全幅に置くときの段数の上限。コンテナ幅で 2 段 (@md)・3 段 (@lg) まで増やす。
+   * 半幅のカードの中 (県ページの「特徴」) は既定の 1 段。
+   */
+  columns?: 1 | 3;
 }
 
 /**
@@ -36,10 +42,16 @@ interface AreaHighlightListProps {
  * (AREA-HIGHLIGHTS-SSOT-01 step 3)。順位チップは RankBadge だけで描く。
  * クリックは共通の NavClickTracker が `data-nav-surface="area_highlights"` で nav_click として数える。
  */
-export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) {
+export function AreaHighlightList({ items, rankScope, columns = 1 }: AreaHighlightListProps) {
   if (items.length === 0) return null;
-  return (
-    <ol className="space-y-1.5" data-nav-surface="area_highlights">
+  const list = (
+    <ol
+      className={cn(
+        "grid grid-cols-1 gap-y-1.5",
+        columns === 3 && "gap-x-6 @md:grid-cols-2 @lg:grid-cols-3",
+      )}
+      data-nav-surface="area_highlights"
+    >
       {items.map((item) => (
         <li key={item.rankingKey} className="flex items-baseline gap-2">
           <RankBadge rank={item.rank} tone={item.tone} />
@@ -63,4 +75,5 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
       ))}
     </ol>
   );
+  return columns === 1 ? list : <div className="@container">{list}</div>;
 }

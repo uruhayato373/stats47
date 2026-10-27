@@ -15,7 +15,7 @@ const databook = {
 } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"];
 
 describe("RankedKpiGrid", () => {
-  it("指標ごとのカードを作らず、1つの高密度な定義リストにまとめる", () => {
+  it("定義リストの中で、指標 1 つをカード 1 枚に描く", () => {
     const html = renderToStaticMarkup(
       <RankedKpiGrid
         metrics={[metric("population", "人口")]}
@@ -62,7 +62,9 @@ describe("RankedKpiGrid", () => {
     expect(html).not.toContain("—");
   });
 
-  it("最終行の空きマスを段数ごとにカード地で埋める", () => {
+  // 2026-10-28 テンプレート寄せ: 表型 (gap-px + bg-border) をやめ、カードを gap で並べる。
+  // 空きマスが灰色の箱に見えることが構造上起きないので、埋め草も作らない。
+  it("指標の数だけカードを並べ、最終行の空きマスや埋め草を作らない", () => {
     const full = {
       metrics: Object.fromEntries(
         ["a", "b", "c", "d"].map((k) => [
@@ -78,17 +80,11 @@ describe("RankedKpiGrid", () => {
         columns={3}
       />,
     );
-    // 4 件: 2 段では空き 0、3 段では空き 2
-    const fillers = [...html.matchAll(/<div aria-hidden="true" class="([^"]*)"/g)].map(
-      (m) => m[1],
-    );
-    expect(fillers).toHaveLength(2);
-    for (const c of fillers) {
-      expect(c).toContain("hidden");
-      expect(c).toContain("bg-card");
-      expect(c).toContain("@sm:hidden");
-      expect(c).toContain("@md:block");
-    }
+    const fillers = [...html.matchAll(/<div aria-hidden="true" class="([^"]*)"/g)];
+    expect(fillers).toHaveLength(0);
+    expect(html.match(/border-card-outline/g)).toHaveLength(4);
+    expect(html).not.toContain("gap-px");
+    expect(html).not.toContain("bg-border");
   });
 
   // 2026-09-25 UI 全面点検: 県データブックの数値カード約 50 個に年が無く、いつの値か分からなかった。

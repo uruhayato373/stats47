@@ -18,13 +18,16 @@ const LEFT = <nav aria-label="left-rail">left</nav>;
 const RIGHT = <aside aria-label="right-rail">right</aside>;
 
 describe('PageShell — leftRail', () => {
-  it('既定 (stack): 狭幅用の積み下ろし領域にも leftRail を描く', () => {
+  it('既定 (stack): 旧来の積み下ろし領域は残るが、常に隠れて二重表示にならない', () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    // グリッド内 (shell 936px+) と積み下ろし (936px 未満) の 2 か所
-    expect(screen.getAllByLabelText('left-rail')).toHaveLength(2);
+    const rails = screen.getAllByLabelText('left-rail');
+    expect(rails).toHaveLength(2);
+    expect(rails[0].parentElement).toHaveAttribute('data-slot', 'page-nav');
+    expect(rails[1].parentElement).toHaveClass(LEFT_RAIL_NARROW_ONLY_CLASS);
+    expect(LEFT_RAIL_NARROW_ONLY_CLASS).toBe('hidden');
   });
 
-  it('hide: 積み下ろし領域に leftRail を描かない (shell 936px+ のみ)', () => {
+  it('hide: ページ内ナビは本文の上の 1 か所だけに描く', () => {
     render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
@@ -32,19 +35,15 @@ describe('PageShell — leftRail', () => {
     );
     const rails = screen.getAllByLabelText('left-rail');
     expect(rails).toHaveLength(1);
-    // 残る 1 つは shell 936px+ でのみ表示されるグリッド側
-    expect(rails[0].parentElement).toHaveClass(
-      'hidden',
-      '@min-[936px]/shell:block'
-    );
+    expect(rails[0].parentElement).toHaveAttribute('data-slot', 'page-nav');
+    expect(rails[0].parentElement).not.toHaveClass('hidden');
   });
 
   /**
-   * ★shell コンテナ 936px は全 Shell 共通の左レール境界。ビューポートではなく
-   * コンテナで判定するので、サイドバーの開閉に関わらず本文 656px を保つ。
-   * 列の詳細は left-rail-layout-contract.test.tsx が固定する。
+   * ★2026-10-28: サイト全体のナビはサイドバーが持つので、ページ内ナビのために
+   * サイドバーの右へもう 1 本の列を作らない。幅の境界も持たない。
    */
-  it('左レールは shell コンテナの 936px 境界から出す', () => {
+  it('ページ内ナビのために 2 列目を作らない', () => {
     const { container } = render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
@@ -52,24 +51,9 @@ describe('PageShell — leftRail', () => {
     );
     const shell = container.firstElementChild;
     expect(shell).toHaveClass('@container/shell');
-    const grid = shell?.firstElementChild;
-    expect(grid).toHaveClass(
-      '@min-[936px]/shell:grid',
-      '@min-[936px]/shell:grid-cols-[264px_minmax(0,1fr)]',
-      '@min-[936px]/shell:gap-4'
-    );
-    expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
-  });
-
-  /**
-   * 狭幅の積み下ろし境界がレール本体とずれると、両方出る幅 / どちらも出ない幅ができる。
-   * `hide` でも積み下ろしコンテナ自体は描かれるので、その境界クラスを固定する。
-   */
-  it('積み下ろし境界がレール本体と同じ shell 936px になっている', () => {
-    render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    const stacked = screen.getAllByLabelText('left-rail')[1].parentElement;
-    expect(stacked).toHaveClass(LEFT_RAIL_NARROW_ONLY_CLASS);
-    expect(stacked).not.toHaveClass('lg:hidden', 'xl:hidden');
+    const layout = shell?.firstElementChild;
+    expect(layout?.className ?? '').not.toMatch(/grid-cols/);
+    expect(layout?.firstElementChild).toHaveAttribute('data-slot', 'page-nav');
   });
 
   it('leftRail と rightRail を同時に渡すと右が勝ち、左は描かれない', () => {

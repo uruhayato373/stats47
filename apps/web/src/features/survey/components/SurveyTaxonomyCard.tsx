@@ -48,7 +48,7 @@ export function SurveyTaxonomyCard({
     return (
       <SectionCard
         title={title}
-        icon={<FileText className="h-4 w-4 text-muted-foreground" />}
+        icon={<FileText />}
         className="mt-8"
       >
         {description && (
@@ -94,12 +94,13 @@ export function SurveyTaxonomyCard({
   return (
     <RailCard
       title={title}
-      icon={<FileText className="h-4 w-4 text-muted-foreground" />}
+      icon={<FileText />}
     >
       {description && (
         <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
       )}
-      <RailLinkList aria-label={title}>
+      {/* 行の px-2 を打ち消し、文字の左端を CardContent の px-4 (見出し・説明文) に揃える */}
+      <RailLinkList aria-label={title} className="-mx-2">
         {surveys.map((survey) => {
           const href = hrefFor("survey", { surveyKey: survey.id });
           return (

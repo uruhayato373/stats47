@@ -64,7 +64,8 @@ export async function GeoAnalysisCards() {
       : [];
   return (
     <div className="@container" data-testid="geo-analysis-cards">
-      <div className="grid gap-4 @md:grid-cols-2">
+      {/* 地図付きの 3 枚は、並べるときは 3 列にして空きマスを作らない (2 列だと 3 枚目の横が空く) */}
+      <div className="grid gap-4 @md:grid-cols-3">
         {cards.map(({ slug, bundle }) => {
           const config = GEO_CROSS_ANALYSIS_CONFIGS[slug];
           const copy = cardCopy[slug];
@@ -76,9 +77,10 @@ export async function GeoAnalysisCards() {
               key={slug}
               href={hrefFor('geo', { analysisSlug: slug })}
               aria-label={`${copy.question} ${config.eyebrow}の地図を見る`}
-              className="group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 @sm:grid-cols-[148px_minmax(0,1fr)] @md:flex @md:flex-col"
+              className="group flex min-w-0 flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
-              <div className="relative min-h-36 overflow-hidden border-r bg-muted @md:aspect-16/7 @md:min-h-0 @md:w-full @md:shrink-0 @md:border-b @md:border-r-0">
+              {/* 地図はどの幅でもカード上部の全幅に置く (狭い幅で左の細い列に押し込まない) */}
+              <div className="relative aspect-16/7 w-full shrink-0 overflow-hidden border-b bg-muted">
                 {preview ? (
                   <svg
                     viewBox="0 0 640 360"
@@ -155,23 +157,24 @@ export async function GeoAnalysisCards() {
                     地図プレビューを取得できませんでした
                   </div>
                 )}
-                {preview && (
-                  <span className="absolute bottom-2 left-2 border bg-background/95 px-2 py-1 text-xs">
-                    {GEO_DEFAULT_PREF_LABEL}
-                  </span>
-                )}
               </div>
-              <div className="flex min-w-0 flex-1 flex-col p-3 @sm:p-4">
+              <div className="flex min-w-0 flex-1 flex-col p-4">
+                {/* 表示している県は地図に重ねず、地図の下に書く */}
+                {preview && (
+                  <p className="mb-2 text-xs text-muted-foreground">
+                    {GEO_DEFAULT_PREF_LABEL}
+                  </p>
+                )}
                 <p className="text-xs font-semibold text-primary">
                   {config.eyebrow}
                 </p>
-                <h3 className="mt-1 text-base font-bold leading-relaxed group-hover:text-primary @md:text-lg @md:leading-7">
+                <h3 className="mt-1 text-base font-bold leading-relaxed group-hover:text-primary">
                   {copy.question}
                 </h3>
-                <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground @md:line-clamp-none">
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   {copy.description}
                 </p>
-                <p className="mt-2 hidden text-xs leading-relaxed text-muted-foreground @md:block">
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                   {copy.legend}
                 </p>
                 <div className="mt-auto flex items-center justify-between gap-2 pt-3">

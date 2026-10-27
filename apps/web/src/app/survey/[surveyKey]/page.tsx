@@ -20,7 +20,7 @@ import { isOk } from '@stats47/types';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceLinkCard, getSurfaceCardClassName } from '@/components/surface';
+import { SurfaceLinkCard } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -299,21 +299,9 @@ export default async function SurveyPage({ params }: PageProps) {
       ? [{ href: '#survey-caveats', label: '数字を読むときの注意' } as const]
       : []),
   ];
-  const representativeNav = featuredItems.map((item) => ({
-    rankingKey: item.rankingKey,
-    label: item.title,
-  }));
-  let sectionNumber = 1;
 
   return (
     <ArticleShell
-      leftRail={
-        <SurveySideNav
-          pageLinks={pageLinks}
-          representativeRankings={representativeNav}
-          categories={relatedCategories}
-        />
-      }
       breadcrumb={
         <Breadcrumbs
           items={[
@@ -352,26 +340,24 @@ export default async function SurveyPage({ params }: PageProps) {
         }
       />
 
+      {/* ページ内ナビは本文上部に置く (サイドバーの右に 2 本目の列を作らない)。
+      広い幅はカード 2 枚、狭い幅は折りたたみ 1 つ。 */}
+      <SurveySideNav pageLinks={pageLinks} categories={relatedCategories} />
       <SurveyMobileNav pageLinks={pageLinks} categories={relatedCategories} />
 
       {editorial && (
         <section id="survey-overview" className="mb-12 scroll-mt-24 space-y-8">
           <div>
             <SectionHeader
-              number={String(sectionNumber++)}
               title="この調査で分かること"
             />
             <p className="mb-5 text-sm leading-7 text-muted-foreground">
               {editorial.summary}
             </p>
-            <ul className="grid gap-3 sm:grid-cols-2">
+            {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
+            <ul className="grid gap-x-6 sm:grid-cols-2">
               {editorial.whatYouCanLearn.map((item) => (
-                <li
-                  key={item}
-                  className={getSurfaceCardClassName({
-                    className: 'text-sm leading-6',
-                  })}
-                >
+                <li key={item} className="border-b border-border py-2.5 text-sm leading-6 text-foreground">
                   {item}
                 </li>
               ))}
@@ -381,7 +367,6 @@ export default async function SurveyPage({ params }: PageProps) {
           {readerQuestions.length > 0 && (
             <div>
               <SectionHeader
-                number={String(sectionNumber++)}
                 title={`${survey.name}から答えを探す`}
               />
               <SurveyOutboundLinkArea surface="survey_ranking">
@@ -408,7 +393,6 @@ export default async function SurveyPage({ params }: PageProps) {
       {featuredItems.length > 0 && (
         <section id="representative-rankings" className="mb-12 scroll-mt-24">
           <SectionHeader
-            number={String(sectionNumber++)}
             title="代表ランキング"
           />
           <SurveyOutboundLinkArea surface="survey_ranking">
@@ -430,7 +414,6 @@ export default async function SurveyPage({ params }: PageProps) {
       {relatedThemes.length > 0 && (
         <section id="related-themes" className="mb-12 scroll-mt-24">
           <SectionHeader
-            number={String(sectionNumber++)}
             title="この調査を使うテーマ"
           />
           <SurveyOutboundLinkArea surface="survey_theme">
@@ -455,7 +438,6 @@ export default async function SurveyPage({ params }: PageProps) {
       {relatedArticles.length > 0 && (
         <section id="related-articles" className="mb-12 scroll-mt-24">
           <SectionHeader
-            number={String(sectionNumber++)}
             title="この調査を使う記事"
           />
           <SurveyOutboundLinkArea surface="survey_blog">
@@ -487,7 +469,6 @@ export default async function SurveyPage({ params }: PageProps) {
 
       <section id="all-rankings" className="mb-12 scroll-mt-24">
         <SectionHeader
-          number={String(sectionNumber++)}
           title={`全${rankingItems.length}件のランキング`}
         />
         <SurveyOutboundLinkArea surface="survey_ranking">
@@ -498,7 +479,6 @@ export default async function SurveyPage({ params }: PageProps) {
       {editorial && (
         <section id="survey-caveats" className="mb-12 scroll-mt-24">
           <SectionHeader
-            number={String(sectionNumber++)}
             title="数字を読むときの注意"
           />
           <ul className="space-y-3 border bg-muted/30 p-5 text-sm leading-7 text-muted-foreground">

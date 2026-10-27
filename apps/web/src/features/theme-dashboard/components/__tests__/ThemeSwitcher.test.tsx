@@ -86,14 +86,11 @@ describe('ThemeSwitcher', () => {
     expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
   });
 
-  it('compact 表示では短いラベルを使う', () => {
+  it('compact 表示では短いラベルを使い、テーマ一覧への出口は切替行 (ThemePageLayout) の右端ボタンに任せる', () => {
     render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" compact />);
     expect(screen.getByText('テーマ')).toBeInTheDocument();
     expect(screen.queryByText('テーマを切り替える')).toBeNull();
-    expect(screen.getByRole('link', { name: 'テーマ一覧' })).toHaveAttribute(
-      'href',
-      '/themes'
-    );
+    expect(screen.queryByRole('link', { name: 'テーマ一覧' })).toBeNull();
   });
 
   it('現在のテーマがセレクターの現在値として表示される', () => {

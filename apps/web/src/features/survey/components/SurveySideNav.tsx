@@ -2,17 +2,15 @@ import type { ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 import {
-  SidebarGroup,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuSubButton,
 } from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { ListTree } from 'lucide-react';
+import { ChevronDown, ListTree } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
-import { LEFT_RAIL_NARROW_ONLY_CLASS } from '@/components/layout';
-import { RailCategoryList, RailStack } from '@/components/rail';
+import { RailCategoryList } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { RailCard } from '@/components/surface';
 
@@ -36,12 +34,19 @@ export interface SurveyNavCategory {
 
 interface SurveyNavigationProps {
   pageLinks: readonly SurveyPageNavLink[];
-  representativeRankings: readonly SurveyNavRanking[];
   categories: readonly SurveyNavCategory[];
 }
 
 /**
- * レール内のリンク行。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域を足す。
+ * 本文上部のナビの出し分け。サイドバーの開閉で本文幅が変わるので、ビューポートではなく
+ * Shell の名前付きコンテナ `@container/shell` の幅で決める。656px = 2 枚のカードが並べられる本文幅。
+ * 広い幅はカード 2 枚 (SurveySideNav)、狭い幅は折りたたみ 1 つ (SurveyMobileNav)。
+ */
+const WIDE_ONLY_CLASS = 'hidden @min-[656px]/shell:grid';
+const NARROW_ONLY_CLASS = '@min-[656px]/shell:hidden';
+
+/**
+ * ページ内リンク行。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域を足す。
  * SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う。
  */
 function SurveyMenuLink({
@@ -65,61 +70,43 @@ function SurveyMenuLink({
   );
 }
 
-/** 調査詳細のデスクトップ左レール。調査一覧ではなく、現在の出典ハブの読み方だけを担う。 */
-export function SurveySideNav({
-  pageLinks,
-  representativeRankings,
-  categories,
-}: SurveyNavigationProps) {
+/**
+ * 調査詳細のページ内ナビ (本文上部のカード 2 枚)。
+ *
+ * 2026-10-28 (テンプレート寄せ): サイドバーの右にもう 1 本の列 (左レール) を作るのをやめ、
+ * 「このページ」「関連する分類」を本文のグリッドに置いて本文の左端に揃えた。中身の無い
+ * 見出しだけの「調査」カードは撤去し、調査一覧への出口は「このページ」の見出しの右端に置く。
+ * 代表ランキングは本文の節が同じ内容を持つので、ここでは繰り返さない。
+ */
+export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) {
   return (
-    <RailStack>
-      <RailCard
-        title="調査"
-        headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
-        bodyClassName="p-0"
-      >
-        {null}
-      </RailCard>
-
-      <RailCard title="このページ" bodyClassName="p-0">
-        <SidebarGroup className="p-2">
-          <nav aria-label="この調査ページの内容">
-            <SidebarMenu>
-              {pageLinks.map((item) => (
-                <SurveyMenuLink key={item.href} href={item.href}>
-                  {item.label}
-                </SurveyMenuLink>
-              ))}
-            </SidebarMenu>
-          </nav>
-        </SidebarGroup>
-      </RailCard>
-
-      {representativeRankings.length > 0 && (
-        <RailCard
-          title={`代表ランキング（${representativeRankings.length}）`}
-          icon={<ListTree className="size-4 text-muted-foreground" aria-hidden />}
-          collapsible
-          bodyClassName="p-0"
-        >
-          <SurveyOutboundLinkArea surface="survey_ranking">
-            <SidebarGroup className="p-2">
-              <nav aria-label="この調査の代表ランキング">
-                <SidebarMenu>
-                  {representativeRankings.map((item) => (
-                    <SurveyMenuLink
-                      key={item.rankingKey}
-                      href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                    >
-                      {item.label}
-                    </SurveyMenuLink>
-                  ))}
-                </SidebarMenu>
-              </nav>
-            </SidebarGroup>
-          </SurveyOutboundLinkArea>
-        </RailCard>
+    <div
+      className={cn(
+        WIDE_ONLY_CLASS,
+        'mb-8 items-start gap-4',
+        categories.length > 0 && 'grid-cols-2'
       )}
+    >
+      <RailCard
+        title="このページ"
+        aria-label="このページ"
+        headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+      >
+        <nav
+          aria-label="この調査ページの内容"
+          className="flex flex-wrap gap-x-5 gap-y-1"
+        >
+          {pageLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="py-1.5 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </RailCard>
 
       {categories.length > 0 && (
         // RailCategoryList は trackingSurface で自前計測するため、SurveyOutboundLinkArea
@@ -140,22 +127,26 @@ export function SurveySideNav({
           </RailCard>
         </nav>
       )}
-    </RailStack>
+    </div>
   );
 }
 
-/** 左レールが消える狭幅で、本文より前に同じ移動手段を提供する。 */
+/** 狭い幅で、本文より前に同じ移動手段を 1 つの折りたたみにまとめて置く。 */
 export function SurveyMobileNav({
   pageLinks,
   categories,
-}: Pick<SurveyNavigationProps, 'pageLinks' | 'categories'>) {
+}: SurveyNavigationProps) {
   return (
     <details
-      className={`mb-8 border-y border-border py-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+      className={`group/survey-nav mb-8 border-y border-border py-2 ${NARROW_ONLY_CLASS}`}
     >
-      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
         <ListTree className="size-4 text-muted-foreground" aria-hidden />
         このページと関連する分類
+        <ChevronDown
+          className="ml-auto size-4 text-muted-foreground transition-transform group-open/survey-nav:rotate-180"
+          aria-hidden
+        />
       </summary>
       <SidebarMenu className="mt-1">
         <SurveyMenuLink href="/survey" className="font-medium">

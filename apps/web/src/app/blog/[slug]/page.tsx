@@ -217,7 +217,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
     const rail = (
         <>
-            <div className="hidden lg:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
+            {/* 出し分けは ArticleShell の右レールと同じ shell コンテナ 988px 基準 (ビューポートの lg を使わない) */}
+            <div className="hidden @min-[988px]/shell:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
 
             <SurveyTaxonomyCard
                 surveys={articleSurveys}
@@ -250,7 +251,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 品目を検出できない記事では何も描画しない。 */}
 
             {/* 個別記事では本文後へ積まれるモバイルを長くしないため、追加探索カードは右レールだけに置く。 */}
-            <div className="hidden lg:contents">
+            <div className="hidden @min-[988px]/shell:contents">
                 <RailSearchCard
                     title="記事検索"
                     action="/search"
@@ -305,8 +306,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <BreadcrumbItem>
                                 <BreadcrumbLink render={<Link href="/blog" />}>ブログ</BreadcrumbLink>
                             </BreadcrumbItem>
-                            {/* 狭い画面では記事名を出さない (見出しと重なるため。Breadcrumbs と同じ扱い) */}
-                            <BreadcrumbSeparator className={CURRENT_ITEM_CLASS} />
+                            {/* 現在の記事名はどの幅でも出し、長い題は 1 行で省略する (Breadcrumbs と同じクラス) */}
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem className={CURRENT_ITEM_CLASS}>
                                 <BreadcrumbPage>{article.title}</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -317,7 +318,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="space-y-6">
                     <ArticleCard>
                             {/* 記事ヘッダー */}
-                            <header className="mb-8 border-b border-border pb-6 font-news-article">
+                            <header className="mb-5 border-b border-border pb-5 font-news-article">
                                 <div className="mb-1 flex flex-wrap items-center gap-x-2 text-[12px] font-medium leading-6 text-muted-foreground">
                                     <span className="text-primary">stats47 データジャーナル</span>
                                     <span aria-hidden="true">/</span>
@@ -349,8 +350,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                             {/* 目次 (全幅共通でタイトルの後・本文の前に 1 か所だけ) */}
                             <ArticleTableOfContents content={renderedArticle.content} />
 
-                            <div className="lg:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
-
                             {/* 記事本文 */}
                             <ArticleRenderer
                                 article={renderedArticle}
@@ -364,6 +363,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             {/* データ出典 (chart source.json から派生。本文に手書きしない) */}
                             <DataSourceList sources={dataSources} surface="blog_source" />
+
+                            {/* 右レールが出ない幅では、データの確認先を本文の後ろに置く (本文より先に出さない) */}
+                            <div className="mt-6 @min-[988px]/shell:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

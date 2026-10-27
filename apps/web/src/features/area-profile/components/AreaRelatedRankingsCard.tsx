@@ -1,6 +1,7 @@
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
+import { SectionHeader } from '@/components/section';
 import { SectionCard } from '@/components/surface';
 
 import { AreaHighlightList, type AreaHighlightListItem } from './AreaHighlightList';
@@ -44,14 +45,10 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
 
   return (
     <section aria-labelledby="area-highlights-title">
-      <div className="mb-4">
-        <h2 id="area-highlights-title" className="text-xl font-bold text-foreground">
-          {areaName}の特徴
-        </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。
-        </p>
-      </div>
+      <SectionHeader
+        title={<span id="area-highlights-title">{areaName}の特徴</span>}
+        description="県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。"
+      />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {groups.map(({ key, title, icon: Icon, items }) =>
           items.length > 0 ? (

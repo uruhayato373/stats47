@@ -15,6 +15,7 @@ import { Check } from 'lucide-react';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
 import { trackNavClick } from '@/lib/analytics/events';
@@ -23,7 +24,6 @@ import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presenta
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 
-import { ChartEmptyState, ChartLoading } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';

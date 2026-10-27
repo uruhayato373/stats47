@@ -4,13 +4,12 @@ import { useEffect, useState, useTransition } from 'react';
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { ChartErrorState } from '@/components/charts/ChartState';
+import { ChartEmptyState, ChartErrorState, ChartLoading } from '@/components/charts/ChartState';
 import type { PageComponent } from '@/components/stat-charts';
 
 import { loadThemeChartResultBatched } from '../lib/batched-theme-chart-result';
 import { type ThemeChartLoadResult } from '../lib/theme-chart-result';
 
-import { ChartEmptyState, ChartLoading } from './ChartState';
 import { MarkdownSectionRenderer } from './MarkdownSectionRenderer';
 import { ThemeChartResultRenderer } from './ThemeChartResultRenderer';
 
