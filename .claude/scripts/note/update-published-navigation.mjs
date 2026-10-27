@@ -723,10 +723,10 @@ async function main() {
     account: "stats47",
     mode: options.commit ? "commit" : "audit-only",
     measurementContract: {
-      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
+      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（計測用UTMは付けず、検証済み画像版s47_ogpだけを付与）",
       noteToNote: "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
       magazine: "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
-      product: "カードは /products/<slug>/from/note/<noteId> の素URL。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計",
+      product: "サイト商品カードは /products/<slug>/from/note/<noteId> と画像版s47_ogp。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計。有料noteへの直接カードは公開note URLを使う",
     },
     articles: [],
   };

@@ -65,6 +65,23 @@ test("obsolete cards can be repaired after image URL versioning", () => {
   assert.match(result.body, /themes\/climate/);
 });
 
+test("the homepage card is not duplicated before or after image versioning", () => {
+  for (const url of ['https://stats47.jp', 'https://stats47.jp/?s47_ogp=abcdef012345']) {
+    const body = externalCard(url, 'stats47', '', ids());
+    const result = applyNavigationFooter(body, { siteUrl: 'https://stats47.jp' }, { idFactory: ids() });
+    assert.equal(result.body, body);
+    assert.equal(result.addedSite, false);
+  }
+});
+
+test("homepage card repair recognizes the slash added by URL serialization", () => {
+  const body = externalCard('https://stats47.jp/?s47_ogp=abcdef012345', '旧カード', '', ids());
+  const result = applyPublishedLinkRepairs(body, [{ mode: 'replace-card', fromUrl: 'https://stats47.jp',
+    toUrl: 'https://stats47.jp/themes/climate', linkText: '気候' }]);
+  assert.equal(result.changed, true);
+  assert.doesNotMatch(result.body, /s47_ogp|旧カード/);
+});
+
 test("clean note URL accepts a query-free HTTPS card URL", () => {
   assert.equal(
     assertCleanCardUrl("https://note.com/stats47/n/n023501038bd5", "note.com"),

@@ -8,7 +8,7 @@ import { assertAccount, launchContext, pruneProfileCaches } from './lib/note-ses
 import { assertRegisteredCards, cardEntries, noteRequest, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { bodyHash, publishCardBody } from './lib/publish-card-body.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
-import { createCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { createCardImageRefresh, readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
 import { readLinkCardLedger } from '../ogp/lib/link-card-ledger.mjs';
 import { datasetDir } from '../../../config/datasets.mjs';
 import { SITE_ORIGIN } from '../lib/site-config.cjs';
@@ -20,7 +20,7 @@ const commit = args.includes('--commit');
 const refreshImages = args.includes('--refresh-external-images');
 const rollout = refreshImages ? readLinkCardLedger(resolve(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json')) : null;
 if (rollout && rollout.entries.some((entry) => entry.pageUrl && entry.status !== 'published')) throw Error('Finish and verify all card images before refreshing note embeds');
-const imageRefresh = rollout ? createCardImageRefresh(rollout) : null;
+const imageRefresh = rollout ? createCardImageRefresh(rollout) : readApprovedCardImageRefresh(resolve(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'));
 const imageRevision = imageRefresh?.revision ?? null;
 const imageTargets = new Set(rollout?.entries.filter((entry) => entry.pageUrl).map((entry) => new URL(entry.pageUrl).href) ?? []);
 const slug = option('--slug', null);
@@ -81,7 +81,8 @@ try {
       const before = await noteRequest(apiPage, `/api/v3/notes/${key}`);
       if (before.user?.urlname !== 'stats47' || before.status !== 'published') throw Error('article account/status mismatch');
       const product = refreshImages ? null : resolvePaidProduct(article, source);
-      const rewritten = imageRefresh ? imageRefresh.rewriteBody(before.body) : rewriteProductCards(before.body, product);
+      const productBody = refreshImages ? before.body : rewriteProductCards(before.body, product);
+      const rewritten = imageRefresh ? imageRefresh.rewriteBody(productBody) : productBody;
       const prior = journal.articles[key];
       const refreshed = prior?.imageRevision === imageRevision && ((prior.stage === 'verified' && prior.afterBodySha256 === bodyHash(before.body)) || (prior.stage === 'published' && prior.expectedBody === before.body));
       const refreshKeys = new Set(refreshImages && !refreshed ? cardEntries(rewritten).filter((card) => {
@@ -93,10 +94,10 @@ try {
       const missing = unregisteredCards(rewritten, registry);
       row.unregisteredBefore = missing.length;
       row.productNoteUrl = product?.noteUrl || null;
-      row.productLinkChanged = !refreshImages && rewritten !== before.body;
-      row.imageUrlVersionChanged = refreshImages && rewritten !== before.body;
+      row.productLinkChanged = productBody !== before.body;
+      row.imageUrlVersionChanged = rewritten !== productBody;
       if (prior?.stage === 'sending') throw Error('unconfirmed previous publish; inspect journal, backup and saved draft before resuming');
-      if (!missing.length && !row.productLinkChanged) {
+      if (!missing.length && !row.productLinkChanged && !row.imageUrlVersionChanged) {
         // Publication can succeed before a reader-side check times out. Confirm it without sending another update.
         if (commit && prior?.stage === 'published') {
           assertRegisteredCards(before.body, before.embedded_contents);
