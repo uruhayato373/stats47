@@ -23,6 +23,7 @@ import type { D3Module, TopojsonModule } from "../../types/d3";
 import type { MapDataPoint } from "../../types/map-chart";
 import type { MapVisualizationConfig } from "../../types/map-chart";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { getThemeColors } from "../../utils/get-theme-colors";
 
 import type { Feature, FeatureCollection } from "geojson";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
@@ -216,6 +217,8 @@ export function CityMapChart({
     );
 
     const pathGenerator = d3Module.geoPath().projection(projection);
+    // 選択・ホバーの強調はテンプレートの primary、通常の境界は border (都道府県地図と同じ。2026-10-27)
+    const themeColors = getThemeColors();
 
     // メイングループ（ズーム対象）
     const mapGroup = svg.append("g").attr("class", "map-group");
@@ -231,7 +234,7 @@ export function CityMapChart({
         return colorMapper?.(d.properties.cityCode) ?? DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor;
       })
       .attr("stroke", (d) =>
-        d.properties.cityCode === selectedCityCode ? "#3b82f6" : "#94a3b8"
+        d.properties.cityCode === selectedCityCode ? themeColors.primary : themeColors.border
       )
       .attr("stroke-width", (d) =>
         d.properties.cityCode === selectedCityCode ? 2 : 0.5
@@ -264,7 +267,7 @@ export function CityMapChart({
     paths
       .on("mouseenter", function (event, d) {
         if (d.properties.cityCode !== selectedCityCode) {
-          d3Module.select(this).attr("stroke", "#3b82f6").attr("stroke-width", 2);
+          d3Module.select(this).attr("stroke", themeColors.primary).attr("stroke-width", 2);
         }
         showTooltip(event, d.properties.cityName, {
           value: d.properties.value,
@@ -278,7 +281,7 @@ export function CityMapChart({
         if (d.properties.cityCode !== selectedCityCode) {
           d3Module
             .select(this)
-            .attr("stroke", "#94a3b8")
+            .attr("stroke", themeColors.border)
             .attr("stroke-width", 0.5);
         }
         hideTooltip();

@@ -203,7 +203,7 @@ export function PrefectureMapChart({
         return colorMapper?.(areaCode) ?? themeColors.muted;
       })
       .attr("stroke", (d) =>
-        d.properties.prefCode === selectedPrefectureCode ? "#3b82f6" : themeColors.border
+        d.properties.prefCode === selectedPrefectureCode ? themeColors.primary : themeColors.border
       )
       .attr("stroke-width", (d) =>
         d.properties.prefCode === selectedPrefectureCode ? 2 : 0.5
@@ -254,7 +254,7 @@ export function PrefectureMapChart({
     paths
       .on("mouseenter", function (event, d) {
         if (d.properties.prefCode !== selectedPrefectureCode) {
-          d3Module.select(this).attr("stroke", "#3b82f6").attr("stroke-width", 2);
+          d3Module.select(this).attr("stroke", themeColors.primary).attr("stroke-width", 2);
         }
         showTooltip(event, d.properties.prefName, {
           value: d.properties.value,

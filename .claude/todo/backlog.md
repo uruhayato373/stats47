@@ -261,9 +261,10 @@ updated: 2026-10-19
 
 - **経緯**: 2026-10-27 オーナー決定「shadcndashboard テンプレートを正としてサイトを寄せる・余白も少なく」。ブランチ `feature/template-base-ui` で部品の Base UI 化 (admin・web)、色・角丸・カード面 (`@stats47/ui-theme`)、外枠の余白 (p-4 / gap-4) までを済ませた。
 - **済 (2026-10-27)**: 独自カードは数え直すと全件が共通の外枠 (SurfaceCard・RailCard 系・ChartPanel・各 Client) 経由で、外枠の見た目はテンプレートに揃った (ホバー影を外し、記事カードの余白を半分に)。D3 は軸線なし・横目盛りのみが既にテンプレートと同じで、目盛りを点線 (`CHART_STYLES.grid.dashArray`) に、ツールチップを lyra の `.cn-chart-tooltip` と同じ見た目にした。カルーセルの矢印は動かせないときだけ行ごと隠す。ChartFooter の id / aria-controls は Base UI でも明示値が使われ、テストで対応を確認済み (変更不要)。
-- **残り**: ① D3 部品 16 個にある固定色 43 か所のうち、画面に出るものをテンプレートの色トークンへ寄せる (Remotion も同じ部品を読むので CSS 変数が効かない経路を確かめる)。② カルーセルの矢印を、横に動かせる幅でも見出しの「もっと見る」の行へ並べて矢印だけの行をなくす (「カードに重ねない」2026-09-24 週次 UI 検査は守る)。③ 主要 4 ページ (/・/ranking/total-population・/themes/population-dynamics・/areas/13000) の上端の見た目確認。8GB の Mac では webpack の dev が数ページでメモリ切れになり、テーマと地域の上端は未確認 (DEV-TURBOPACK-NEXT164-01 が直れば確認できる)。
+- **済 (2026-10-27・追加)**: D3 の固定色のうち画面に出る地図の選択・ホバー枠の青を、テンプレートの primary (`getThemeColors().primary`) に替えた (都道府県・タイル・市区町村の 3 地図。Remotion はこれらの地図を使わない)。残りの固定色は性別・正負の識別色、文字の読みやすさのための白黒、色未指定時の既定値で、意図があるので残した。
+- **残り**: ① カルーセルの矢印を、横に動かせる幅でも見出しの「もっと見る」の行へ並べて矢印だけの行をなくす (「カードに重ねない」2026-09-24 週次 UI 検査は守る。SectionHeader の下線と action を持つ構成を 5 か所で組み替える: page.tsx・category/[categoryKey]/page.tsx 2 か所・FeaturedRankingGrid・PortalUseCaseGrid)。② 主要 4 ページ (/・/ranking/total-population・/themes/population-dynamics・/areas/13000) の上端の見た目確認。8GB の Mac では webpack の dev が数ページでメモリ切れになり、テーマと地域の上端は未確認 (DEV-TURBOPACK-NEXT164-01 が直れば確認できる)。
 - **禁止**: Recharts を公開サイトに入れない (gzip 約 119KB の上乗せ)。カードを入れ子にしない。
-- **完了条件**: ①② の差分が `npm run design-system:check -w apps/web`・web vitest 全件を通り、③ の 4 ページのスクリーンショットをオーナーが確認した。
+- **完了条件**: ① の差分が `npm run design-system:check -w apps/web`・web vitest 全件を通り、② の 4 ページのスクリーンショットをオーナーが確認した。
 
 ### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
