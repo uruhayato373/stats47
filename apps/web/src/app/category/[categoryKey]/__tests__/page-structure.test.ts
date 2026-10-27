@@ -27,13 +27,18 @@ describe('category page featured ranking cards', () => {
     expect(featuredSection).not.toContain('tileMapSvg=');
   });
 
-  it('PageShellの左レールでカテゴリ関連記事を本文に表示する', () => {
-    expect(PAGE).toContain('const leftRail = (');
-    expect(PAGE).toContain('<PageShell leftRail={leftRail}');
+  it('サイドバーと重複するカテゴリ一覧を置かず、出典調査と広告を右レールへ渡す', () => {
+    expect(PAGE).not.toContain('leftRail');
+    expect(PAGE).not.toContain('RailCategoryList');
+    expect(PAGE).not.toContain('trackingSurface="category_sidebar"');
+    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}');
+    const rightRailBlock =
+      PAGE.match(/const rightRail = \(([\s\S]*?)<\/RailStack>/)?.[1] ?? '';
+    expect(rightRailBlock).toContain('<SurveyCard');
+    expect(rightRailBlock).toContain('surface="category_survey"');
+    expect(rightRailBlock).toContain('<RailAdSlot slot={RAIL_RECT} />');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
-    expect(PAGE).toContain('<RailStack>');
-    expect(PAGE).toContain('<RailCategoryList');
-    expect(PAGE).toContain('trackingSurface="category_sidebar"');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
     expect(PAGE).not.toContain('<aside');
     expect(PAGE).toContain('listArticlesByTagKey(blogTagKey, 8)');

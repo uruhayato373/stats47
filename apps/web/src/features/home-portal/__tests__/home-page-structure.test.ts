@@ -56,9 +56,8 @@ describe('home page structure (portal)', () => {
     expect(pageHeaderUses).toHaveLength(1);
   });
 
-  it('2ペイン内にカテゴリ・ランキング・ブログ・テーマ・都道府県・プロフィールを並べる', () => {
+  it('本文にランキング・ブログ・テーマ・都道府県・プロフィールを順に並べる', () => {
     const order = [
-      'カテゴリから探す',
       '<FeaturedRankings limit',
       '新着ブログ',
       '知りたいことから探す',
@@ -74,13 +73,13 @@ describe('home page structure (portal)', () => {
     }
   });
 
-  it('desktopの左カテゴリ・右コンテンツをPageShellで管理する', () => {
-    expect(PAGE).toContain('const leftRail = (');
-    expect(PAGE).toContain('<PageShell leftRail={leftRail}');
+  it('サイドバーと重複するカテゴリ一覧を置かず、広告をPageShellの右レールへ渡す', () => {
+    expect(PAGE).not.toContain('leftRail');
+    expect(PAGE).not.toContain('RailCategoryList');
+    expect(PAGE).not.toContain('カテゴリから探す');
+    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
-    expect(PAGE).toContain('<RailStack>');
-    expect(PAGE).toContain('<RailCategoryList');
-    expect(PAGE).toContain('trackingSurface="home_category"');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
     expect(PAGE).toContain('showHeader={false} embedded');
     expect(PAGE).not.toContain('overflow-y-auto');
@@ -88,7 +87,7 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('lg:sticky');
   });
 
-  it('全幅広告を置かず、カテゴリ直下のrail広告へ集約する', () => {
+  it('全幅広告を置かず、右レールの広告へ集約する', () => {
     expect(PAGE).toContain('<RailAdSlot slot={RAIL_RECT} />');
     expect(PAGE).not.toContain('InContentAdSlot');
     expect(PAGE).not.toContain('FooterAdSlot');

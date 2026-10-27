@@ -1,13 +1,12 @@
 
 import { fetchPrefectures } from '@stats47/area';
-import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { Metadata } from 'next';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader } from '@/components/layout';
-import { RailCategoryList, RailStack } from '@/components/rail';
+import { RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { HorizontalCardCarousel, RailCard } from '@/components/surface';
+import { HorizontalCardCarousel } from '@/components/surface';
 
 import {
   NativeAffiliateRow,
@@ -117,27 +116,10 @@ export default async function HomePage() {
     'economy',
     8
   ).catch(() => []);
-  const leftRail = (
+  // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
+  // 残る広告だけを右レールに置く (左右レールは併存させない契約)。
+  const rightRail = (
     <RailStack>
-      <RailCard
-        title="カテゴリから探す"
-        headerAction={
-          <Link
-            href="/ranking"
-            className="font-semibold text-primary hover:underline"
-          >
-            一覧 →
-          </Link>
-        }
-        bodyClassName="px-4 pb-3 pt-0"
-      >
-        <RailCategoryList
-          items={RANKING_PROMINENCE_CATEGORIES}
-          trackingSurface="home_category"
-          moreLink={{ href: '/ranking', label: 'すべてのランキングを見る' }}
-          className="-mx-4 border-t-0"
-        />
-      </RailCard>
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       <SidebarPromoBanner index={0} />
       <SidebarStickyBannerAd
@@ -149,7 +131,7 @@ export default async function HomePage() {
 
   return (
     <div className="w-full">
-      <PageShell leftRail={leftRail} className="py-5 lg:py-6">
+      <PageShell rightRail={rightRail} className="py-5 lg:py-6">
         <PageHeader
           eyebrow="地域のデータアトラス"
           title="日本の地域データを探す"

@@ -20,9 +20,9 @@ import { isOk } from '@stats47/types';
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { RailCategoryList, RailStack } from '@/components/rail';
+import { RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
-import { HorizontalCardCarousel, RailCard } from '@/components/surface';
+import { HorizontalCardCarousel } from '@/components/surface';
 
 import {
   FooterAdSlot,
@@ -268,17 +268,10 @@ export default async function CategoryPage({ params }: PageProps) {
   if (rankingItems.length === 0) {
     notFound();
   }
-  const leftRail = (
+  // カテゴリ一覧と現在地はサイドバー (AppSidebar) が持つので、ここでは重複させない。
+  // 残る出典調査と広告を右レールに置く (左右レールは併存させない契約)。
+  const rightRail = (
     <RailStack>
-      <RailCard title="カテゴリから探す" bodyClassName="px-4 pb-3 pt-0">
-        <RailCategoryList
-          items={RANKING_PROMINENCE_CATEGORIES}
-          activeCategoryKey={categoryKey}
-          trackingSurface="category_sidebar"
-          className="-mx-4 border-t-0"
-        />
-      </RailCard>
-
       {sourceSurveys.length > 0 && (
         <SurveyCard
           surveys={sourceSurveys.map((survey) => ({
@@ -296,7 +289,7 @@ export default async function CategoryPage({ params }: PageProps) {
   );
 
   return (
-    <PageShell leftRail={leftRail} className="py-5 lg:py-6">
+    <PageShell rightRail={rightRail} className="py-5 lg:py-6">
       <Breadcrumbs
         items={[
           { label: 'ホーム', href: '/' },

@@ -23,7 +23,7 @@ import { ChevronRight } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
-import { RailCategoryList, RailStack } from '@/components/rail';
+import { RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { RailCard, RailNavRow } from '@/components/surface';
 
@@ -41,7 +41,7 @@ const RANKING_COUNT = KNOWN_RANKING_KEYS.size;
 
 export const dynamic = 'force-dynamic';
 
-/** 左レール末尾の「他の探し方」。旧実装は独立セクションで 3 枚のカードだった。 */
+/** 右レールの「他の探し方」。カテゴリ一覧はサイドバー (AppSidebar) と本文の索引が持つので置かない。 */
 const OTHER_ENTRY_POINTS = [
   { href: '/themes', label: 'テーマから探す' },
   { href: '/survey', label: '調査から探す' },
@@ -60,17 +60,8 @@ export function generateMetadata(): Metadata {
 }
 
 export default function RankingIndexPage() {
-  const leftRail = (
+  const rightRail = (
     <RailStack>
-      <RailCard title="カテゴリ" bodyClassName="px-4 pb-3 pt-0">
-        <RailCategoryList
-          items={RANKING_PROMINENCE_CATEGORIES}
-          showCount={false}
-          trackingSurface="ranking_category"
-          className="-mx-4 border-t-0"
-        />
-      </RailCard>
-
       <RailCard title="他の探し方">
         <nav aria-label="他の探し方" className="-mx-2 flex flex-col">
           {OTHER_ENTRY_POINTS.map((entry) => (
@@ -84,7 +75,7 @@ export default function RankingIndexPage() {
   );
 
   return (
-    <PageShell leftRail={leftRail}>
+    <PageShell rightRail={rightRail}>
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: 'ランキング' }]}
       />
