@@ -196,7 +196,7 @@ function isManifestAsset(value: unknown): value is ImageGenerationAsset {
   );
 }
 
-function isManifest(value: unknown): value is ImageGenerationManifest<unknown> {
+export function isManifest(value: unknown): value is ImageGenerationManifest<unknown> {
   if (!value || typeof value !== 'object') return false;
   const manifest = value as Partial<ImageGenerationManifest<unknown>>;
   const assets = Array.isArray(manifest.assets) ? manifest.assets : [];

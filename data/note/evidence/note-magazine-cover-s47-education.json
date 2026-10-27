@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:38:57.923Z",
+  "before": {
+    "name": "都道府県ランキング｜教育・学び",
+    "description": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832475/magazine_cover_large_698d17b01414eacba6e1abc39e5dadc7.png"
+  },
+  "expectedSha256": "ef9c9dcc2e7d0709d0405bd3e0752579eaac4bbd2760d4943ab587d70cafe4c6",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜教育・学び",
+    "description": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328757628/magazine_cover_large_0677188f03d515f428c6566b7eed8bc2.png"
+  },
+  "verifiedAt": "2026-10-26T08:39:19.961Z",
+  "servedSha256": "65e2a14117f75ba7d6f7756f23a92028086c1b5f070503df7b41277152ad6aa1",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328757628/0677188f03d515f428c6566b7eed8bc2.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328757628/0677188f03d515f428c6566b7eed8bc2.png",
+    "sha256": "adace0ac349ce715b5250bb14c6e4d710a6c5689b8fd86f896aa2399da7d18e8",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.3560049019607843,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-education-live.png",
+    "checkedAt": "2026-10-26T08:43:24.335Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-education",
+    "sha256": "adace0ac349ce715b5250bb14c6e4d710a6c5689b8fd86f896aa2399da7d18e8",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:11.560Z"
+  }
+}

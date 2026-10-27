@@ -1,18 +1,8 @@
-import { buildElement } from './blog-thumbnail-render';
+import { buildExternalCard } from './external-card-render';
 
 export function buildRankingOgpFallbackElement(options: {
   title: string;
   latestYearName: string;
 }) {
-  return buildElement(
-    {
-      title: options.title,
-      subtitle: options.latestYearName
-        ? `都道府県ランキング（${options.latestYearName}）`
-        : '都道府県ランキング',
-      category: 'RANKING',
-      domainPath: 'stats47.jp/ranking',
-    },
-    false
-  );
+  return buildExternalCard({title:options.title,eyebrow:'都道府県ランキング',detail:options.latestYearName?`${options.latestYearName} · stats47`:'stats47'});
 }

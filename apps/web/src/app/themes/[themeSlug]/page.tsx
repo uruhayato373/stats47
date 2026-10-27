@@ -10,6 +10,7 @@ import {
 } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { ogpImageUrl, ogpImageKeys } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
 
@@ -56,7 +57,7 @@ export async function generateMetadata({
     ...generateOGMetadata({
       title,
       description: theme.description,
-      imageUrl: `/themes/${theme.themeKey}/opengraph-image`,
+      imageUrl: ogpImageUrl(ogpImageKeys.theme(theme.themeKey)),
     }),
   };
 }

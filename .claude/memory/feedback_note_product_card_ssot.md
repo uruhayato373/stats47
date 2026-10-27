@@ -34,3 +34,19 @@ note記事の販売カードは `data/note/magazines.json` の `paidProductId`�
   チェックがある場合はそちらを正とし、per-repairの部分チェックは該当modeを除外する。
 
 **関連**: [[project_note_ins_img_heading_placement_bug]] (画像挿入位置の別バグ、こちらは未解決)
+
+## OGP画像のURLキャッシュ（2026-10-26実測）
+
+**問題**: カバーを公開更新しても、カードの新規登録キーが古いOGP画像を参照した。
+
+**原因**: 同一マガジンURLのnative GETは旧画像を返し、同じページに画像版クエリを付けたnative GETは採用済みの新画像を返した。登録キーの新規発行だけでは画像の鮮度を保証できない。
+
+**対策**: 全画像の公開SHAと本番metadataを確認後、`card-image-refresh.mjs`で所有する外部カードURLの`s47_ogp`だけを版更新する。native応答の画像URLが採用版と一致することを公開前・公開後に検査する。本文・有料境界・既存UTM・リンク先ページは保持する。正典は`.claude/rules/ogp-image-standards.md`。
+
+**証拠**: `data/note/evidence/note-card-image-cache-probe.json`（同一URL/画像版URLの比較）。回帰検査は`.claude/scripts/note/__tests__/card-image-refresh.test.mjs`。
+
+## 公開OGPの小さな補足文（2026-10-27）
+
+- 問題: 配信済みの学力ブログOGPで、24pxの補足文の最後の「由」だけが改行した。主題の配置検査だけでは見逃した。
+- 原因: ブログのsubtitleを外部向けの小さなカード画像へ引き継いでいた。
+- 対策: ブログ専用の`buildBlogExternalOgp`に通常生成と外部のみ更新を集約し、画像は主見出しとブランドに絞る。小さな数値説明・タイトルの補足を含めない回帰テストと、公開画像の目視を併用する。内部サムネイル/背景のSHA保持と他種別のrendererを維持する。旧公開receiptは`data/ogp/link-card-blog-caption-before.json`。

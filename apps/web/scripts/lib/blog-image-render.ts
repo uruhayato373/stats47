@@ -11,6 +11,11 @@ import {
 } from './blog-thumbnail-render';
 import { normalizeAiBackground } from './blog-ai-background-normalizer';
 
+/** Keep the external card readable at thumbnail size; the article retains its full subtitle. */
+export function buildBlogExternalOgp(data: { title: string; subtitle?: string | null }) {
+  return buildBlogOgpElement({ ...data, subtitle: '' });
+}
+
 /**
  * 記事固有AI背景をOGPとカードへ用途別に合成する。
  * 背景は1200x630 JPEGのsource artifactで、plan inputのSHAと一致必須。
@@ -64,7 +69,7 @@ export async function renderBlogImageBundle(options: {
     BLOG_THUMBNAIL_SIZE
   );
   await renderToPng(
-    buildBlogOgpElement(renderData, lightBackground),
+    buildBlogExternalOgp(renderData),
     options.fonts,
     options.outputs.ogp
   );

@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:41:12.397Z",
+  "before": {
+    "name": "自治体職員のための GIS 入門",
+    "description": "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832181/magazine_cover_large_a26a43ff3c9b7a63557f713227519ff6.png"
+  },
+  "expectedSha256": "f8a3d42960dd7bcffeef931b715f942d1d99f42d6419eef335ed421e5dbeb7d6",
+  "status": "verified",
+  "after": {
+    "name": "自治体職員のための GIS 入門",
+    "description": "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758381/magazine_cover_large_78df47c87adbafdf8a55024f59393d72.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:21.378Z",
+  "servedSha256": "a0c356efa6ff9350f6956ec814c5067fbde28642fe92da5b7ddc3f05a2aa96d7",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758381/78df47c87adbafdf8a55024f59393d72.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758381/78df47c87adbafdf8a55024f59393d72.png",
+    "sha256": "28ff2cb987be2bf21cd28edac39b5d12845f700dbfc2fd67265d3cc29c2b58fc",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.491421568627451,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-gis-live.png",
+    "checkedAt": "2026-10-26T08:43:17.852Z"
+  },
+  "visualReview": {
+    "id": "magazine:koumuin-gis",
+    "sha256": "28ff2cb987be2bf21cd28edac39b5d12845f700dbfc2fd67265d3cc29c2b58fc",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:44:32.822Z"
+  }
+}

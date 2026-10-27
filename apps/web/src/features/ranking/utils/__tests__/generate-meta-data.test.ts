@@ -54,7 +54,7 @@ describe("generateRankingPageMetaData", () => {
         });
 
         const expectedUrl =
-            "https://storage.stats47.jp/app/ranking/annual-sales-amount-per-employee/ogp/ogp.png";
+            "https://storage.stats47.jp/app/ranking/annual-sales-amount-per-employee/ogp/ogp.png?v=20261026-pop";
         const og = result.openGraph as Record<string, unknown>;
         const ogImages = og.images as Array<Record<string, unknown>>;
         expect(ogImages).toHaveLength(1);

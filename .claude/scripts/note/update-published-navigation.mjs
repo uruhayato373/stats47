@@ -33,10 +33,12 @@ import { SITE_ORIGIN } from "../lib/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
+import { readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
 let FORCE_REGENERATE_CARDS = false;
+let approvedImageRefresh = null;
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -553,6 +555,10 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   if (plan.desiredSeparator && source.separator !== plan.desiredSeparator && !application.changed) {
     application = { ...application, changed: true };
   }
+  if (approvedImageRefresh) {
+    const body = approvedImageRefresh.rewriteBody(application.body);
+    application = { ...application, body, changed: application.changed || body !== application.body };
+  }
   const missingEmbeds = unregisteredCards(application.body, source.embeddedContents);
   if (!application.changed && !missingEmbeds.length) return { status: "already_compliant", ...application };
 
@@ -560,7 +566,8 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   let native;
   try {
     await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
-    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents);
+    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents,
+      () => {}, (native, card) => approvedImageRefresh?.assertFresh(native, card.url));
     application = { ...application, body: native.body, changed: true };
   } finally { await apiPage.close(); }
 
@@ -672,6 +679,9 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     }
     if (live.bodySignature !== fnv1a(application.body)) throw new Error("送信した無料本文と公開本文が一致しません");
     assertRegisteredCards(live.body, live.embeddedContents);
+    if (approvedImageRefresh) for (const card of cardEntries(live.body)) {
+      approvedImageRefresh.assertFresh(live.embeddedContents.find((entry) => entry.key === card.key) || {}, card.url);
+    }
     const readers = await ctx.browser().newContext();
     try {
       const publicLive = await fetchNote(noteKey, 5, readers.request);
@@ -699,6 +709,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   FORCE_REGENERATE_CARDS = options.forceRegenerateCards;
+  approvedImageRefresh = readApprovedCardImageRefresh(join(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'));
   const source = catalog();
   const views = latestViews();
   let plans = buildPlans(source, views, options);
@@ -712,10 +723,10 @@ async function main() {
     account: "stats47",
     mode: options.commit ? "commit" : "audit-only",
     measurementContract: {
-      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
+      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（計測用UTMは付けず、検証済み画像版s47_ogpだけを付与）",
       noteToNote: "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
       magazine: "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
-      product: "カードは /products/<slug>/from/note/<noteId> の素URL。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計",
+      product: "サイト商品カードは /products/<slug>/from/note/<noteId> と画像版s47_ogp。サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送し、記事単位で集計。有料noteへの直接カードは公開note URLを使う",
     },
     articles: [],
   };
@@ -725,7 +736,11 @@ async function main() {
     const noteKey = noteKeyFromUrl(plan.article.noteUrl);
     const before = snapshot(await fetchNote(noteKey));
     if (before.account !== "stats47" || before.status !== "published") throw new Error(`${plan.article.key}: 記事帰属または公開状態が不正`);
-    const application = applyPlanBody(before.body, plan);
+    let application = applyPlanBody(before.body, plan);
+    if (approvedImageRefresh) {
+      const body = approvedImageRefresh.rewriteBody(application.body);
+      application = { ...application, body, changed: application.changed || body !== application.body };
+    }
     const item = {
       key: plan.article.key,
       noteKey,

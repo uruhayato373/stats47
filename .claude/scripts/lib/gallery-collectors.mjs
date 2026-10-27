@@ -272,10 +272,10 @@ export async function buildTab(tab, opts) {
       let slugs = await enumerateFromSitemap(site, /stats47\.jp\/themes\/([a-z0-9-]+)$/);
       if (limit) slugs = slugs.slice(0, limit);
       return {
-        source: "satori-route",
+        source: "r2-static",
         aspect: "1.91:1",
-        r2KeyPattern: `${site}/themes/<slug>/opengraph-image`,
-        entries: await ogpEntries(slugs.map((s) => ({ key: s, pageUrl: `${site}/themes/${s}` }))),
+        r2KeyPattern: `app/themes/<slug>/ogp/ogp.png`,
+        entries: slugs.map(s=>r2OgpEntry(s,`app/themes/${s}/ogp/ogp.png`,`${site}/themes/${s}`,r2)),
       };
     }
     case "category-ogp": {
@@ -284,12 +284,12 @@ export async function buildTab(tab, opts) {
       return {
         source: "static",
         aspect: "1.91:1",
-        r2KeyPattern: `${site}/og-image.jpg (共通静的)`,
+        r2KeyPattern: `app/default/stats47/ogp/ogp.png (共通静的)`,
         entries: keys.map((k) => ({
           key: k,
           label: k,
           pageUrl: `${site}/category/${k}`,
-          images: [{ variant: "single", url: `${site}/og-image.jpg` }],
+          images: [{ variant: "single", url: `${r2}/app/default/stats47/ogp/ogp.png` }],
         })),
       };
     }

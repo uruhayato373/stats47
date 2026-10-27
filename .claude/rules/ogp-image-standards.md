@@ -4,7 +4,7 @@ paths:
   - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
-  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
+  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,refresh-blog-ogp,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
   - ".claude/{scripts/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
   - "data/ogp/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
@@ -24,7 +24,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 > **★方針決定 (2026-07-06): OGP は「事前生成した静的画像を R2 配信」に統一する** (§5)。ランタイムの
 > next/og ImageResponse は Cloudflare Worker で例外 (error 1101) を投げ 500 になるため使わない。生成は
 > Node/CI で Satori レンダリング (ローカル npm フォントを使うため Worker と違い健全) → R2。完全DBレス /
-> R2 snapshot 思想に一致し、home/category の静的 og-image.jpg・blog サムネ (Satori→R2) と同じパターン。
+> R2 snapshot 思想に一致し、home/category の共通静的 R2 OGP・blog サムネ (Satori→R2) と同じパターン。
 
 ---
 
@@ -38,6 +38,46 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 4. 公開前に実寸と縮小表示で文字の欠け、コントラスト、ロゴの識別、円形トリミング、データと画像の一致を確認する。正式な記号・favicon・プロフィール画像は同じ版から派生させる。
 
 既存画像の一括再生成は、正式な記号と代表画像の実寸試作が揃った後に対象を選ぶ。公開済み記事の画像や note カバーは各種別の更新手順で扱う。
+
+### 外部リンクカードでの可読性と媒体間の統一 (2026-10-26)
+
+- サイト内の一覧サムネイルと外部OGPを別ファイル・別用途として維持する。外部OGPの改稿で
+  `thumbnail-light.webp` / `thumbnail-dark.webp` を上書きしない。ブログで同じbundleを再生成する場合も、
+  サムネイルの生成入力と実体SHAが変わらないことを確認する。
+- note記事の採択済みカテゴリ方針を参照し、色・文字の太さ/縁取り・題材の絵柄・発行元表記を揃える。
+  マガジンは記事群の親表紙としてテーマ名、サイトOGPは指標名と必要な対象年、記事カバーは問いや発見を主役にする。
+  同じ気候テーマでも、記事の2023年とサイトの2024年を見た目の統一のために揃えない。
+- 文字の背後は不透明な明るい面または十分な単色面にする。写真/イラストの色むらや輪郭線を
+  文字へ透かさない。絵を増やして文字が埋もれた候補は採用しない。
+- 原寸に加え、実測したnoteカード220×150の中央cover、正方形150×150、狭い画面で確認する。
+  220×150は2026-10-26のPCでの観測値であり、全端末に共通のnote仕様と断定しない。
+  重要な主題は中央630×630（1200×630原寸時）に収め、コード組版ではカード縮小時15px相当未満へ
+  黙って縮小・省略しない。長い見出しは統計上の条件を保つ短いコピーを用意して再確認する。
+- 採択方式: 公開マガジンは文字込みimagegen完成版、サイト外部OGPは専用の共通生成背景＋決定的な文字組版。
+  ポップな青/黄/紫の小物と濃紺文字を共有する。内部サムネイルの背景や文字なし構成は変更しない。
+  文字込み版は日本語/対象年/端の文字/配色を画像で目視照合し、機械検査が可読性を保証したとは報告しない。
+- 自動の寸法・SHA・fingerprint・文字サイズチェックと、試作時の文字境界チェックと、人が読む実寸カードでの確認を両方残す。
+  画像HTTP200やURL登録だけをデザイン品質PASSの根拠にしない。候補は採用版/公開版と分けて保管する。
+
+通常の `update-note-branding.mjs` は名称・説明の整備だけを行い、未設定カバーを旧ローカル画像で補完しない。カバーは採用画像のSHA・レビューを確認する `--reviewed-covers --keys` の経路を必須とする。
+
+### 全件更新・再開の正典
+- マガジンのコピー/プロンプト: `apps/web/scripts/data/link-card-design.ts`。制作・公開状態: `data/ogp/link-card-rollout.json`。
+  サイトの全件記録は同directoryの`link-card-sites-NNN.json`へ500件ずつ分割する。共通の`link-card-ledger.mjs`で読み書きし、公開SHA・manifest指紋・run URLを省略せず、各ファイルを1MiB以内に保つ。
+- 制作CLI: `.claude/scripts/ogp/link-card-production.ts` の sync → export → ingest → review → 公開 → verify-live → confirm-live。
+  生成済みは再生成しない。元画像・実際の入力/参照画像・完成版・目視記録をprivate R2へimmutableに保存してread-back照合する。
+  公開は `update-note-branding.mjs --reviewed-covers --keys ... --commit`。account・公開URL・採用SHAを照合し、名前と説明を維持する。
+  upload途中の不明な結果は自動再投稿しない。note配信画像は1200×628へ変換された実測があるため、公開原寸・正方形を再確認する。
+- サイト: `LinkCardOgp.tsx` / `external-card-render.ts` / `link-card-copy.ts`。長い記事名は原文の完全一致で編集見出しへ対応付ける。対象条件は切り捨てない。
+  主題64px以上・中央630pxの安全域。不透明な明色面で文字を支え、補助説明より主題を優先する。
+- ranking/areas/products/themes/default: `generate-ogp-images.ts` → exact publisher。themeも静的R2とし旧URLは互換redirect。
+- ブログの外部OGPのみ更新: `refresh-blog-ogp.ts`。既存manifestと内部サムネイル/背景のSHAを照合して同じbundleへ保持する。
+  画像更新workflowは `type=blog, external_only=true`。通常のブログ生成も同じ外部rendererを使う。
+  外部画像は`buildBlogExternalOgp`で主見出しとブランドに絞る。記事のsubtitleや`｜`以降の補足を小さな文字で持ち込まない。公開画像で補足の孤立文字を確認したため、主題・ブランド以外の細かな説明はカード外の文言へ委ねる。更新は最大4件ずつ準備し、各組の成否をすべて待ってから採用する。生成上限500件とexact plan、内部画像SHAの保持は維持する。
+- 判定: 全件の生成・配信SHAと文字サイズ、各種別/最長見出しの原寸・220×150・150正方形の目視結果を区別して記録する。
+  サイトの共通テンプレート変更は代表と例外を目視し、機械の全件照合を人の全件目視と呼ばない。
+- noteの既存カード画像: 全画像の公開SHA照合と本番metadata検証後に `repair-note-cards-native.mjs --refresh-external-images --all --commit`。noteは同じURLの再登録でも旧OGPを返す（2026-10-26実測）。所有する外部カードのURLに画像版`s47_ogp`を付け、取得画像を採用版と照合してから登録キーを差し替える。本文の文章・リンク先ページ・既存UTM・価格・有料境界・タグ・下書きを保持する。台帳の`siteMetadataVerification`には実配信HTML検査のversion/passed/failedを記録し、未検証や不一致では停止する。台帳は `note-card-image-refresh.json`、再開状態は `.local/note-card-image-refresh-journal.json`。
+- 通常の回遊フッター更新も同じ検証済み画像版を適用・照合する。重複判定では`s47_ogp`だけを除外し、他のquery/hashを同一視しない。未配信の画像版を先に記事へ書き込まない。
 
 ## 1. 画像資産カタログ (全種別)
 
@@ -55,18 +95,20 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 
 > **正典の配信方式**: OGP は下表の「静的 R2 URL」を `openGraph.images` に設定する
 > (`apps/web/src/lib/metadata/ogp-image.ts` の `ogpImageUrl` / `ogpImageKeys`)。ランタイム
-> `opengraph-image.tsx` route は使わない (Worker 500)。theme のみビルド時 SSG prerender で例外的に稼働可。
+> `opengraph-image.tsx` route は使わない。themeも静的R2へ統一し、旧URLはリダイレクトrouteで互換を保つ。
 
 | 種別 (tab)                     | サイズ・比率                                                                 | 生成方式 (正典 = 事前生成 → R2)                                                                                                                                                                                                                                                                                                                                                                                                                                   | 配信 URL / R2 キー                                                 | 生成スクリプト                                  | 担当 agent                                                       |
 | ------------------------------ | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------- | ---------------------------------------------------------------- |
-| OGP: `/` (サイト共通)          | 1200×630 (1.91:1)                                                            | 静的 (既存 `public/og-image.jpg`)                                                                                                                                                                                                                                                                                                                                                                                                                                 | `stats47.jp/og-image.jpg`                                          | (静的アセット)                                  | image-prompt-curator                                             |
+| OGP: `/` (サイト共通) | 1200×630 | 共通外部カード | `app/default/stats47/ogp/ogp.png` | `generate-ogp-images.ts --type default` | image-prompt-curator |
 | OGP: blog                      | 1200×630                                                                     | Satori(Node) → R2                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `app/blog/<slug>/ogp/ogp.png`                                      | `generate-blog-thumbnails-cloud.ts`             | blog-editor                                                      |
 | OGP: ranking                   | 1200×630                                                                     | Satori(Node) → R2                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `app/ranking/<key>/ogp/ogp.png`                                    | `generate-ogp-images.ts --type ranking`         | ranking-ui-manager                                               |
-| OGP: theme                     | 1200×630                                                                     | Satori SSG prerender (ビルド時、例外的に稼働)                                                                                                                                                                                                                                                                                                                                                                                                                     | `themes/<slug>/opengraph-image` (route)                            | (ビルド時 prerender)                            | theme-ui-manager                                                 |
-| OGP: category                  | 1200×630                                                                     | 静的フォールバック (`og-image.jpg`)                                                                                                                                                                                                                                                                                                                                                                                                                               | `stats47.jp/og-image.jpg`                                          | (静的アセット)                                  | ranking-ui-manager                                               |
-| OGP: areas                     | 1200×630                                                                     | **県シルエットカード** (topojson+satori、§5.7) → R2                                                                                                                                                                                                                                                                                                                                                                                                               | `app/areas/<code>/ogp/ogp.png`                                     | `generate-ogp-images.ts --type areas`           | ranking-ui-manager                                               |
+| OGP: theme | 1200×630 | 共通外部カードを事前生成 | `app/themes/<slug>/ogp/ogp.png` | `generate-ogp-images.ts --type themes` | theme-ui-manager |
+| OGP: category | 1200×630 | 共通外部カード | `app/default/stats47/ogp/ogp.png` | `generate-ogp-images.ts --type default` | ranking-ui-manager |
+| OGP: areas                     | 1200×630                                                                     | 共通外部リンクカード (LinkCardOgp、県名主題) → R2                                                                                                                                                                                                                                                                                                                                                                                                               | `app/areas/<code>/ogp/ogp.png`                                     | `generate-ogp-images.ts --type areas`           | ranking-ui-manager                                               |
 | 素材: 県シルエットカード (SNS) | 5比率 (1200×630 / 1080×1350 / 1080×1080 / 1080×1920 / 1920×1080) × blue/dark | 決定的生成 (topojson+satori、§5.7) → R2                                                                                                                                                                                                                                                                                                                                                                                                                           | `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png` (47県×10枚) | `generate-ogp-images.ts --type pref-silhouette` | image-prompt-curator (規約/監査)・IG 消費は instagram-strategist |
-| OGP: tag / survey / cities     | —                                                                            | 親 `/` の静的 `og-image.jpg` に依存 (専用なし)                                                                                                                                                                                                                                                                                                                                                                                                                    | —                                                                  | —                                               | (要否は §3)                                                      |
+| OGP: tag / survey / その他root継承 | 1200×630 | 共通default画像を継承 | `app/default/stats47/ogp/ogp.png` | `--type default` | image-prompt-curator |
+| OGP: cities | 1200×630 | 所属県の画像を共用 | `app/areas/<県code>/ogp/ogp.png` | `--type areas` | ranking-ui-manager |
+| OGP: products | 1200×630 | 共通外部カード・商品名と販売媒体 | `app/products/<slug>/ogp/ogp.png` | `--type products` | image-prompt-curator |
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
 | カード: ranking (light/dark)   | 640×360 WebP                                                                 | 共通地理地図 renderer → R2                                                                                                                                                                                                                                                                                                                                                                                                                                        | `app/ranking/<key>/thumbnail-{light,dark}.webp`                    | `generate-ogp-images.ts --type ranking-cards`   | ranking-publisher                                                |
 | カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
@@ -74,9 +116,8 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 
 ### OGP コンポーネントの実体
 
-`apps/web/src/features/ogp/`: `DefaultOgp` / `BlogOgp` / `RankingOgp` / `CategoryOgp` / `AreaOgp` /
-`JapanMapSvg` + デザイントークン `brand.ts` + フォント `font-loader.ts` (Noto Sans JP 400/700/900)。
-theme のみ専用コンポーネント無し (route 内インライン JSX)。twitter-image は無く、OGP を Twitter が流用。
+外部OGPの共通コンポーネントは `apps/web/src/features/ogp/LinkCardOgp.tsx`、配色は `brand.ts`。
+生成時の背景と見出し解決は `apps/web/scripts/lib/external-card-render.ts`。Twitterも同じ静的OGPを使う。
 
 ---
 
@@ -114,7 +155,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - 手動監査は `/audit-ogp-images` (下記)。`generate-ogp-images.ts --audit` は欠落>0 で exit 1 (CI ゲート可)。
 
 - **サンプリング**: ranking 系タブは既定 30 件 (先頭 10 + 等間隔 20)、`--all` で全量。他タブは全量。`--audit` も既定はサンプリング (全量は `--audit --all`)。
-- **真実を映す**: OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する。静的フォールバック (home/category の `/og-image.jpg`)・ハッシュ付き URL・ランタイム 500 をそのまま反映する。
+- **真実を映す**: OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する。静的画像 (home/category の共通R2画像)・ハッシュ付き URL・ランタイム 500 をそのまま反映する。
 - **欠落検出**: 常時 `img onerror` バッジ (目視) + `--check`/`--audit` 時に GET でステータス + content-type を確定 (機械)。
 - **棚卸し出力** `data/ogp/inventory.json`: 種別 × 比率 × 供給状態 (`satori-route` /
   `r2-static` / `none`) × entries / expected / ok / missing。tag/survey/cities の「専用なし」も記録。
@@ -125,22 +166,12 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 改善は inventory を見てから着手する。実行は種別ごとの既存 agent に委譲 (§4)。
 
-0. **ランタイム生成 OGP が本番で 500 (Cloudflare Worker 例外 1101)** — 2026-07-06 監査で確定 → **静的 R2 方式へ移行 (§5)**。
-   - **500 を返していた**: `blog` / `ranking` / `areas` の OGP (ランタイム `ƒ` レンダリング)。SNS・Twitter・Slack の
-     カードが全ページで表示されなかった。R2 非依存の `/opengraph-image` (DefaultOgp) すら 500 で、next/og
-     (Satori + resvg-wasm) のランタイムレンダリング自体が Worker で例外を投げる (font-loader の Google Fonts
-     ランタイム fetch も同経路)。
-   - **200 を返す**: `theme` OGP (`generateStaticParams` で**ビルド時 prerender**)。
-   - **是正 (コード変更実施済・要デプロイ)**: メタデータを静的 R2 URL に切替 (§5、`ogp-image.ts`)。blog は既存
-     `app/blog/<slug>/ogp/ogp.png` が R2 にあり即修正。ranking/areas は生成後にデプロイ。
-   - **実行順**: (1) `generate-ogp-images.yml` (ranking/areas を `apply=true`) で R2 に ogp.png 生成 →
-     (2) develop→main デプロイ → (3) 本番 og:image を実測 (`curl -s <URL> | grep 'og:image'` が R2 URL・200)。
-     blog は (1) 不要。ランタイム `opengraph-image.tsx` route は参照されなくなる (dead、削除は後日清掃)。
+0. **ランタイム生成OGPの旧障害と恒久対策**: 2026-07-06のWorker例外1101を受け、全種別を事前生成した静的R2画像へ統一した。2026-10-26にはthemeとhome/categoryも共通経路へ揃えた。画像を先に公開し、metadata変更のデプロイ後に公開ページのog:imageと配信画像を照合する。
 1. **ranking リンクカード供給**: 旧 `ranking/prefecture/<key>/<year>/...png` は廃止。
    `app/ranking/<key>/thumbnail-{light,dark}.webp` + 共通manifestへ移行済み。初回manifest移行だけは
    legacyを安全にcurrent扱いできないため、件数制限付きbatchで再生成する。
 2. **note カバーの旧課題（2026-10-14解消、以下は履歴）**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
-3. **OGP 専用なし route**: `/tag/<key>` `/survey/<key>` `/areas/<code>/cities/<city>` は親 `/` の `DefaultOgp` を流用 (現状その `DefaultOgp` 自体が 500)。→ 課題 0 の解消後、流入が増えたら専用 opengraph-image を検討 (判定は improvement-triage 経由)。
+3. **専用OGPを持たないページ**: tag / survey等はrootの静的defaultを継承し、市区町村は所属県の静的OGPを共用する。専用画像を増やす場合は流入と必要性を確認する。
 4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
 
 ---
@@ -272,7 +303,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   旧public R2の画像は移行元であり、note公開版とは別に未採用の保管版として管理する。
   台帳・制作・移行・レビュー・表示・鮮度の契約は [note-image-assets.md](./note-image-assets.md) に一本化する。
 - **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
-  **home/category は既存の静的 `public/og-image.jpg`** を使う。
+  **home/category は `app/default/stats47/ogp/ogp.png` の静的R2画像**を使う。旧 `public/og-image.jpg` は互換用の配信残置であり生成の正本ではない。
 
 ### 画像生成 AI: ブログ OGP の記事別背景 (実装済・正典)
 
@@ -282,6 +313,8 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
 記事固有資産として検証できる場合だけ移行互換で再利用する。
 旧 doc `23_ブログOGP生成AIパイプライン仕様.md` (docs/02\_実装計画・削除)
 の恒久運用スペックを本節に統合 (doc は削除・git 履歴に残る)。
+
+**2026-10-26以降の適用範囲**: 本節の記事固有背景・左側余白・背景再利用契約はサイト内サムネイル用。外部OGPは共通背景 `assets/ogp/link-card-pop-20261026.jpg` と中央の不透明な文字面を使い、内部サムネイルの背景を上書きしない。
 
 - **新規 Codex 背景のコード SSOT**:
   `apps/web/scripts/data/blog-codex-background-catalog.ts` (slug → 単一 motif / prompt / asset) +
@@ -417,11 +450,9 @@ hero が数枚に増えたら: (a) admin `/assets` に「ページ hero」タブ
 
 ---
 
-## 5.7 県シルエットカード (areas OGP + SNS 素材) — 決定的生成・AI 不使用
+## 5.7 県シルエットカード (SNS 素材) — 決定的生成・AI 不使用
 
-新聞系ニュースサイトの県カード風「県シルエット地図カード」。**areas OGP の正典デザイン**
-(2026-07-16 に旧 AreaOgp satori 描画から置き換え) であり、同デザインの 5 比率 × blue/dark を
-**SNS 素材ライブラリ** (`sns/pref-silhouette/`) として持つ。
+県シルエット地図カードは5比率 × blue/darkのSNS素材ライブラリ (`sns/pref-silhouette/`) として維持する。2026-10-26からareasの外部OGPは共通LinkCardOgpへ分離し、県名を中央の不透明面で表示する。市区町村ページは所属県の同じOGPを参照する。
 
 | 項目              | 内容                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -430,8 +461,8 @@ hero が数枚に増えたら: (a) admin `/assets` に「ページ hero」タブ
 | レンダラー        | `apps/web/scripts/lib/pref-silhouette-render.ts` — `apps/remotion/public/prefecture.topojson` (N03_007/N03_001) → d3-geo Mercator で地図 SVG (テキストなし) → sharp PNG → data URI → satori で県名ピル+ブランド行合成 (Noto Sans JP TTF がグリフをパス化 = CI に日本語フォント不要・環境非依存で決定的)。フレーミングは対象県の最大ポリゴン bbox (東京の離島・鹿児島の南西諸島を枠外に)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | テーマ運用        | **areas OGP = blue 固定** (`PREF_CARD_OGP_THEME`)。R2 素材 push は blue+dark (`PREF_CARD_PUSH_THEMES`)。warm 等は生成能力のみ (色=シリーズの顔、`buzz-map-standards.md` と同思想)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | 比率キー          | `ogp` 1200×630 / `45` 1080×1350 / `11` 1080×1080 / `916` 1080×1920 / `169` 1920×1080 (buzz-map の命名に整合)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| 生成・push        | `generate-ogp-images.ts --type areas` (OGP 47枚) / `--type pref-silhouette` (素材 470枚)。週次 self-heal (`quality-suite-weekly.yml` の ogp-images job) とギャラリー `pref-silhouette` タブに配線済                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| 旧 AreaOgp        | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。route `app/areas/[areaCode]/opengraph-image.tsx` は **ランタイムで 500 する** — `loadOgpFonts()` が `fetch('https://fonts.googleapis.com/...')` でランタイム日本語フォントを取得し、Worker (外部 fetch 不可) でも Node dev でも render が落ちる (themes/[themeSlug]/opengraph-image は `fontFamily:"sans-serif"` で fetch せず 200)。**ただし配信への実害はほぼ無い**: area 詳細も city (`/areas/*/cities/*`) も og:image は **`generate-area-metadata.ts` / city metadata の静的 R2** (`storage.stats47.jp/app/areas/<code>/ogp/ogp.png`) を使い **200** (2026-07-20 横断実測で city 14000/01000/27000/東京13201 等が R2・200 を確認)。この 500 route を og:image に出すのは **修正デプロイ前の stale ISR キャッシュを持つ一部 city のみ** (revalidate 86400 で ≤24h 自然回復 or purge)。**★`generateStaticParams` を単純追加して prerender 化してはならない** — ビルド時に Google Fonts fetch が失敗すると prerender エラーで**ビルド全体が落ち全デプロイがブロックされる** (2026-07-20 に試行し revert 済)。将来 §3 課題0 の本筋清掃でこの route を静的化/削除する場合は、先に `font-loader.ts` を `@expo-google-fonts/noto-sans-jp` のローカル同梱フォントに変え (generate-ogp-images.ts §5 と同方式) ランタイム fetch を排すこと |
+| 生成・push        | `generate-ogp-images.ts --type pref-silhouette` (SNS素材470枚、areas外部OGPとは別管理)。週次 self-heal (`quality-suite-weekly.yml` の ogp-images job) とギャラリー `pref-silhouette` タブに配線済                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 旧コンポーネントとの境界 | areasの生成はLinkCardOgpを使用。旧AreaOgpと実在しない旧画像routeを新しい呼び出し元へ追加しない。市区町村はgenerate-area-metadata / city metadataの静的R2県画像を共用する。 |
 
 ## 5.8 home 利用意図カード画像 — 静的UI素材
 
@@ -456,7 +487,7 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 - 監査スキル: `.claude/skills/ui/audit-ogp-images/SKILL.md`
 - 棚卸し state: `data/ogp/inventory.json`
 - **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
-  レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type areas|pref-silhouette`
+  レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type pref-silhouette`
 - **ブログ OGP AI 背景 (§5)**: 記事固有背景 `apps/web/scripts/lib/blog-article-background.ts` +
   `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の判定
   `apps/web/scripts/lib/blog-background-status.ts` (push 前の検査 `check-blog-background.ts`) / 解決・hash

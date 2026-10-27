@@ -16,3 +16,9 @@ owner: knowledge-curator。外部操作の復旧判断を共有するための�
 **根拠**: 文字込みimagegen画像の1280×670 RGB PNGがnote配信ではpalette PNGとなった。海外旅行・歳出・奈良・果物・教育の画像は平均差3.86〜4.33で閾値3を超えたが、画像対比と公開内容のhashは一致した。特定の減色実装やパラメータまでは未確定。
 **確信度**: 0.9（5件の配信を個別確認）。自動判定の改修は`NOTE-COVER-DELIVERY-VERIFY-01`へ分離。
 **証拠**: `data/note/evidence/note-cover-refresh-ledger-a4bc4308a8b6dcce.json`の`imageVerification.visualReview`と`recoveredFrom`。
+
+## サイト画像の一括照合でも同じ復旧を適用（2026-10-26）
+
+**根拠**: ranking 500件の公開run `40337293104`は成功したが、後続の公開SHA照合で`link-card-rollout.json.pending`のrenameがEPERMになった。外部再公開をせず同じpublish planから照合を再開する。分割台帳writerにも最大5回の短い置換再試行を適用し、恒久的な失敗は旧台帳を残したままエラーにする。公開成功と記録成功を別々に確かめる。原因となったWindowsプロセスは未特定。
+**確信度**: 0.9（既存パターンの別経路での再現）。
+**関連**: `.claude/scripts/ogp/lib/link-card-ledger.mjs` / `.claude/scripts/ogp/__tests__/link-card-ledger.test.mjs`

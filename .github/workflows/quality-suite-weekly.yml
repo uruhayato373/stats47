@@ -752,7 +752,7 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas pref-silhouette; do
+          for TYPE in ranking ranking-cards areas pref-silhouette products themes default; do
             echo "=== self-heal $TYPE ==="
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
@@ -763,7 +763,7 @@ jobs:
       - name: 🖼 Self-heal changed blog thumbnails/OGP
         id: blog_repair
         run: |
-          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails-cloud.ts \
             --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
           PLAN=".local/image-generation-publish-plan-blog.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: blog"; exit 1; }
@@ -777,12 +777,12 @@ jobs:
           STATUS=0
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas pref-silhouette; do
+          for TYPE in ranking ranking-cards areas pref-silhouette products themes default; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --audit \
               2>&1 | tee -a /tmp/ogp-freshness-audit.log
             [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           done
-          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit \
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit \
             2>&1 | tee -a /tmp/ogp-freshness-audit.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           node .claude/scripts/ogp/build-image-gallery.mjs --audit --all 2>&1 | tee /tmp/ogp-audit.log

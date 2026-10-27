@@ -827,6 +827,62 @@ describe('publishGeneratedImageSet', () => {
     ).toBe(false);
   });
 
+  it('waits for concurrent lock acquisition before cleanup and never publishes after a lock failure', async () => {
+    const failed = await makeFixture();
+    const slow = await makeFixture({
+      entityId: 'metric-slow',
+      assetKey: 'app/ranking/metric-slow/thumbnail-light.webp',
+      manifestKey: 'app/ranking/metric-slow/thumbnail.json',
+    });
+    mergeFixtureItem(failed, slow);
+    const fake = makeStore();
+    const originalPut = fake.store.put.bind(fake.store);
+    let releaseSlow!: () => void;
+    let markSlowStarted!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      releaseSlow = resolve;
+    });
+    const started = new Promise<void>((resolve) => {
+      markSlowStarted = resolve;
+    });
+    fake.store.put = async (input) => {
+      if (input.key.startsWith('ops/image-publish-locks/')) {
+        const { objectKey } = JSON.parse(input.body.toString());
+        if (objectKey === failed.manifestKey)
+          throw new Error('injected lock acquisition failure');
+        if (objectKey === slow.manifestKey) {
+          markSlowStarted();
+          await gate;
+        }
+      }
+      return originalPut(input);
+    };
+    let settled = false;
+    const publishing = publishGeneratedImageSet({
+      planPath: failed.planPath,
+      projectRoot: failed.root,
+      store: fake.store,
+    }).then(
+      () => {
+        settled = true;
+        return null;
+      },
+      (error) => {
+        settled = true;
+        return error;
+      }
+    );
+    await started;
+    expect(settled).toBe(false);
+    expect(publishedObjectPuts(fake.puts)).toEqual([]);
+    releaseSlow();
+    expect(String(await publishing)).toContain(
+      'injected lock acquisition failure'
+    );
+    expect(fake.objects.size).toBe(0);
+    expect(publishedObjectPuts(fake.puts)).toEqual([]);
+  });
+
   it('preserves publish, rollback, asset-lock, and plan-lock failures together', async () => {
     const fixture = await makeFixture();
     const fake = makeStore({

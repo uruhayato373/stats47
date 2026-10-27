@@ -12,13 +12,12 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { createElement as h } from 'react';
+import { buildExternalCard } from './external-card-render';
 
 import {
   KINDLE_COVER_BACKGROUND_BY_ID,
   KINDLE_COVER_DESIGN_BY_ID,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
-import { ProductOgp, type ProductOgpData } from '../../src/features/ogp/ProductOgp';
 
 import type { StorefrontChannel } from '../../src/features/products/types';
 
@@ -119,14 +118,5 @@ export interface BuildProductOgpElementInput {
 }
 
 export function buildProductOgpElement(input: BuildProductOgpElementInput) {
-  const backgroundImage = resolveProductBackground(input).image;
-  const { lines, fontSize } = resolveProductTitleLayout(input.title);
-  const data: ProductOgpData = {
-    channelLabel: input.channelLabel,
-    titleLines: lines,
-    titleFontSize: fontSize,
-    priceYen: input.priceYen,
-    backgroundImage,
-  };
-  return h(ProductOgp, { data });
+  return buildExternalCard({title:input.title,eyebrow:input.channelLabel,detail:'stats47 · 商品・書籍'});
 }

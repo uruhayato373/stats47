@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:41:48.094Z",
+  "before": {
+    "name": "都道府県ランキング｜エネルギー・水",
+    "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310833559/magazine_cover_large_826417939f958a40511dc6d0a9d808cb.png"
+  },
+  "expectedSha256": "e36a202514db7ebf74d272466216d56852bf55853f463c2536f3acf77e8c1d0c",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜エネルギー・水",
+    "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758540/magazine_cover_large_a8756d6e2d08393309506818df267525.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:56.958Z",
+  "servedSha256": "fd075a4bdf991713d2451f1376f2e65a1adc422b7e8509ec356c73e9080c3064",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758540/a8756d6e2d08393309506818df267525.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758540/a8756d6e2d08393309506818df267525.png",
+    "sha256": "ad864ab40f68585cf86cffc866c91695e5a6a4fee49bde6e65fa08c38999a4fa",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4877450980392157,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-energy-live.png",
+    "checkedAt": "2026-10-26T08:43:31.662Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-energy",
+    "sha256": "ad864ab40f68585cf86cffc866c91695e5a6a4fee49bde6e65fa08c38999a4fa",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:52.808Z"
+  }
+}

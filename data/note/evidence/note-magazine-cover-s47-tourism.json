@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:40:19.441Z",
+  "before": {
+    "name": "都道府県ランキング｜観光・宿泊",
+    "description": "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832796/magazine_cover_large_acd8bedc1444ff67df44ba4608eb16e9.png"
+  },
+  "expectedSha256": "6d4d49dbdb878d60692a2d1e7ce9732917654241aaba70ee5291f709b3015162",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜観光・宿泊",
+    "description": "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758057/magazine_cover_large_07a384bb44ede84f7be485dd2ca577ca.png"
+  },
+  "verifiedAt": "2026-10-26T08:40:27.819Z",
+  "servedSha256": "9f0ae4f174788c6841ce9eceb24a0729e148349ae3761aa389ea0264e018eecd",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758057/07a384bb44ede84f7be485dd2ca577ca.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758057/07a384bb44ede84f7be485dd2ca577ca.png",
+    "sha256": "73c0c1cd350110224ee2379f276a5734b3bb88a966e08935c0e29036d730c7be",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4417892156862746,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-tourism-live.png",
+    "checkedAt": "2026-10-26T08:43:28.607Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-tourism",
+    "sha256": "73c0c1cd350110224ee2379f276a5734b3bb88a966e08935c0e29036d730c7be",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:52.808Z"
+  }
+}

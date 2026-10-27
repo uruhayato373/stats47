@@ -95,7 +95,7 @@ export async function registerNativeCard(page, noteKey, card) {
   return native;
 }
 
-export async function registerMissingCards(page, noteKey, body, embeddedContents, onRegistered = () => {}) {
+export async function registerMissingCards(page, noteKey, body, embeddedContents, onRegistered = () => {}, validateNative = () => null) {
   const missing = unregisteredCards(body, embeddedContents);
   const replacements = new Map();
   for (const card of missing) {
@@ -103,8 +103,9 @@ export async function registerMissingCards(page, noteKey, body, embeddedContents
     let native;
     try { native = await registerNativeCard(page, noteKey, card); }
     catch (error) { throw Error(`${card.url}: ${error.message}`); }
+    const imageVerification = await validateNative(native, card);
     replacements.set(card.key, native.key);
-    await onRegistered({ oldKey: card.key, key: native.key, url: card.url, service: card.service });
+    await onRegistered({ oldKey: card.key, key: native.key, url: card.url, service: card.service, ...(imageVerification ? { imageVerification } : {}) });
   }
   return { body: replaceCardKeys(body, replacements), registered: [...replacements.values()], missing };
 }

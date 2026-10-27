@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:05:14.063Z",
+  "before": {
+    "name": "都道府県ランキング｜住宅・建設",
+    "description": "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832909/magazine_cover_large_8351d7acec75e9918487653a4b087fbc.png"
+  },
+  "expectedSha256": "73abd78ae64cfff78d5aac935a192a69ff0b6a73af705d54a9d0c9ce7fe42803",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜住宅・建設",
+    "description": "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328745733/magazine_cover_large_3e3dc198c2fd1e30c4e875bed5aa2a04.png"
+  },
+  "verifiedAt": "2026-10-26T08:05:23.406Z",
+  "servedSha256": "7c452cfe779077088a1931277c4b5c93791aa9d202e8913f3c5aca1ea4eb6d0a",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328745733/3e3dc198c2fd1e30c4e875bed5aa2a04.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328745733/3e3dc198c2fd1e30c4e875bed5aa2a04.png",
+    "sha256": "c68abb0ae2b882eace6177e85223554ff47665eccd5ccebc3788af303b16b519",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.414828431372549,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-housing-live.png",
+    "checkedAt": "2026-10-26T08:15:35.446Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-housing",
+    "sha256": "c68abb0ae2b882eace6177e85223554ff47665eccd5ccebc3788af303b16b519",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:22:32.190Z"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "prompt": "Create a reusable text-free background for stats47 external link cards, matching the reference's bright hand-painted miniature objects and warm tactile texture. Wide 1200:630 aspect ratio. Sky blue upper background, warm yellow desk lower background. Large purple and yellow notebooks and a pencil confined to far left 0%-23%; large plain magnifying glass, green plant and blue/yellow wooden blocks confined to far right 77%-100%. Center 25%-75% from top to bottom is a clean flat pale ivory yellow blank surface, opaque and absolutely empty, no objects, lines, texture, shadows or decorative symbols there. It is intentionally a very wide blank title space. All objects stay outside it. No text, letters, numbers, logos, charts, diagrams, maps, people, faces or mascots. Polished pop educational illustration. Preserve matching sunny bright brand palette, but do not copy the reference's weather objects or words.",
+  "generator": "codex-built-in-imagegen",
+  "reference": "climate-complete.png",
+  "role": "external-ogp-background-only",
+  "source": {
+    "key": "media/link-cards/note-family-2026-10-26-v1/30d919ecf5a8911c4f15077b892c160199977f1da70195e745d4564e64744000.png",
+    "sha256": "30d919ecf5a8911c4f15077b892c160199977f1da70195e745d4564e64744000",
+    "bytes": 1909011
+  },
+  "referenceImage": {
+    "key": "media/link-cards/note-family-2026-10-26-v1/65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f.png",
+    "sha256": "65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f",
+    "bytes": 1935191
+  },
+  "output": {
+    "path": "assets/ogp/link-card-pop-20261026.jpg",
+    "sha256": "ef3ec3ef1ff3bc2d087863eb5e7025166304ce83e2623d8f9a7d57b278d20b37",
+    "width": 1200,
+    "height": 630
+  }
+}

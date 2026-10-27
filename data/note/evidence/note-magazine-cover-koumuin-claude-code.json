@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:40:28.399Z",
+  "before": {
+    "name": "公務員 × Claude Code 実務活用ガイド",
+    "description": "「Claude Code を職場で使いたいけれど、何から始めればいいかわからない」——そんな自治体職員のための、実務特化の全 31 本シリーズです。\n\n環境構築（庁内プロキシの突破）から、議事録・議会答弁・条例レビュー・補助金書類のチェック、個人情報を送らないセキュリティ設定、Excel 集計の自動化、上司への導入説明まで。「ターミナルって何？」というレベルの未経験者でも読める導入記事から、中級の実務適用までをカバーします。\n\nまずは無料記事から。Claude Code が初めての方は「Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド」をどうぞ。",
+    "cover": "https://assets.st-note.com/production/uploads/images/277927596/magazine_cover_large_b91083ac48d758a9678698a833fe6295.png"
+  },
+  "expectedSha256": "d4ad42d3b9fed2203bc6c1cb34793b5d2d3b895241f767bfce799e5c0f50ee5f",
+  "status": "verified",
+  "after": {
+    "name": "公務員 × Claude Code 実務活用ガイド",
+    "description": "「Claude Code を職場で使いたいけれど、何から始めればいいかわからない」——そんな自治体職員のための、実務特化の全 31 本シリーズです。\n\n環境構築（庁内プロキシの突破）から、議事録・議会答弁・条例レビュー・補助金書類のチェック、個人情報を送らないセキュリティ設定、Excel 集計の自動化、上司への導入説明まで。「ターミナルって何？」というレベルの未経験者でも読める導入記事から、中級の実務適用までをカバーします。\n\nまずは無料記事から。Claude Code が初めての方は「Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド」をどうぞ。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758124/magazine_cover_large_abec28bc24b7d67fb6891ede8c0ed82b.png"
+  },
+  "verifiedAt": "2026-10-26T08:40:37.715Z",
+  "servedSha256": "bdbf82f69ba5ada74e962c7cd25c67ff581dcc59310d254c1d4195aded24161c",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758124/abec28bc24b7d67fb6891ede8c0ed82b.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758124/abec28bc24b7d67fb6891ede8c0ed82b.png",
+    "sha256": "adac78e4c7bc48abd38b16917b5fe0e740fd54dab1f9e2f0281e2309055d8fc9",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4178921568627452,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-claude-code-live.png",
+    "checkedAt": "2026-10-26T08:43:15.437Z"
+  },
+  "visualReview": {
+    "id": "magazine:koumuin-claude-code",
+    "sha256": "adac78e4c7bc48abd38b16917b5fe0e740fd54dab1f9e2f0281e2309055d8fc9",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:44:32.822Z"
+  }
+}
