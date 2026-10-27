@@ -157,7 +157,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             </a>
           ))}
         </nav>
-        <div className="mt-6 space-y-8" {...navSurfaceProps("area_databook")}>
+        <div className="mt-6 space-y-6" {...navSurfaceProps("area_databook")}>
           {databook.sections.map((section) => (
             <section key={section.themeSlug} id={section.themeSlug} className="scroll-mt-20">
               <SectionHeader

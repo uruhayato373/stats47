@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import { SurveyMobileNav, SurveySideNav } from './SurveySideNav';
@@ -26,7 +27,7 @@ describe('SurveySideNav', () => {
     expect(pageHeadingRow).not.toBeNull();
     expect(
       within(pageHeadingRow as HTMLElement).getByRole('link', {
-        name: '調査一覧へ',
+        name: '調査一覧',
       })
     ).toHaveAttribute('href', '/survey');
     expect(
@@ -45,14 +46,26 @@ describe('SurveySideNav', () => {
     ).toHaveAttribute('href', '/category/landweather');
     // 左レール (2 本目の列) ではなく、本文の上に 2 枚並べるグリッド
     expect(container.firstElementChild).toHaveClass('grid-cols-2');
+    // 「このページ」のリンクは 1 列 (1024px 幅で項目名を省略させない)
+    expect(
+      screen.getByRole('navigation', { name: 'この調査ページの内容' })
+    ).not.toHaveClass('grid-cols-2');
+    // 一覧への導線は見える文字で行き先を示し、文字の矢印を書かない
+    expect(screen.getByRole('link', { name: '調査一覧' }).textContent).not.toContain('→');
   });
 
-  it('狭幅代替ナビにもページ内移動と関連分類を残し、開閉の向きを示す', () => {
+  it('狭幅代替ナビにもページ内移動と関連分類を残し、開閉の向きを示す', async () => {
     const { container } = render(
       <SurveyMobileNav pageLinks={pageLinks} categories={categories} />
     );
 
-    expect(container.querySelector('summary svg.lucide-chevron-down')).not.toBeNull();
+    // 開閉は共通の RailCard (collapsible)。見出しのボタンで開き、向きは ChevronDown で示す
+    expect(container.querySelector('svg.lucide-chevron-down')).not.toBeNull();
+    expect(container.querySelector('svg.lucide-list-tree')).toBeNull();
+    const trigger = screen.getByRole('button', { name: 'このページと関連する分類' });
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.setup().click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
     expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
       'href',

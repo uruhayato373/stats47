@@ -268,16 +268,25 @@ export default async function SurveyPage({ params }: PageProps) {
     })
     .slice(0, 4);
 
-  const statsText = [
-    `全 ${rankingItems.length} ランキング`,
-    featuredItems.length > 0 ? `代表 ${featuredItems.length} 件` : null,
+  // メタ行は項目ごとに折り返さない span にし、数字と単位を詰めて書く (「全716件のランキング」)。
+  // 狭い幅では項目の境目で折り返す (項目の途中で行が割れない)
+  const statsItems = [
+    `全${rankingItems.length}件のランキング`,
+    featuredItems.length > 0 ? `代表${featuredItems.length}件` : null,
     // 調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
     // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
-    latestYear ? `掲載データの最新 ${latestYear} 年` : null,
-    '47 都道府県',
-  ]
-    .filter(Boolean)
-    .join(' ・ ');
+    latestYear ? `掲載データの最新${latestYear}年` : null,
+    '47都道府県',
+  ].filter((item): item is string => item !== null);
+  const statsText = (
+    <span className="flex flex-wrap gap-x-3 gap-y-0.5">
+      {statsItems.map((item) => (
+        <span key={item} className="whitespace-nowrap">
+          {item}
+        </span>
+      ))}
+    </span>
+  );
   const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
   const readerQuestions =
     editorial?.readerQuestions.filter((item) =>

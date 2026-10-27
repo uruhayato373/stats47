@@ -9,7 +9,6 @@ import {
   PaginationPrevious,
 } from '@stats47/components';
 import { CATEGORIES } from '@stats47/data-configs';
-import { Newspaper } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
@@ -135,7 +134,6 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
 
       <SectionHeader
         title={currentPage > 1 ? `記事一覧 · ${currentPage}ページ目` : '新着記事'}
-        icon={<Newspaper />}
       />
       {/* 記事検索と人気のタグは一覧の上に 1 回だけ置く (狭い幅でレールが一覧の後ろへ積まれても届く) */}
       <BlogNavigationCards variant="toolbar" tags={blogTags} />

@@ -281,7 +281,7 @@ export function ThemeDashboardTabbed({
   // 選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {
     return (
-      <div className="space-y-4 overflow-hidden">
+      <div className="min-w-0 space-y-4">
         {metricsDashboardSection}
       </div>
     );
@@ -289,7 +289,7 @@ export function ThemeDashboardTabbed({
 
   if (isBelowLg) {
     return (
-      <div className="space-y-3 min-w-0 overflow-hidden">
+      <div className="min-w-0 space-y-3">
         {indicatorTabs}
         <div className="flex flex-wrap items-center gap-2">
           {yearSelector}
@@ -342,7 +342,7 @@ export function ThemeDashboardTabbed({
 
   // デスクトップ
   return (
-    <div className="space-y-4 overflow-hidden">
+    <div className="min-w-0 space-y-4">
       <div className="space-y-3">
         {indicatorTabs}
         <div className="flex flex-wrap items-center gap-3">

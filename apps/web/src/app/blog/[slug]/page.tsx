@@ -319,12 +319,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="border-b border-border pb-4">
-                                {/* 肩書きと PR 表記は muted の 1 行にまとめる (狭い幅では区切りの位置で折り返す) */}
-                                <p className="mb-2 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground">
-                                    <span>stats47 データジャーナル / 統計で読む地域ニュース</span>
-                                    <span aria-hidden="true">・</span>
-                                    <span>PRを含む場合があります</span>
-                                </p>
+                                {/* 肩書きと PR 表記は別の行の muted テキストにする (区切りの「・」が狭い幅で行末に残らない) */}
+                                <div className="mb-2 text-xs text-muted-foreground">
+                                    <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
+                                    <p>PRを含む場合があります</p>
+                                </div>
                                 <h1 className="article-title mb-3 text-xl font-bold text-foreground sm:text-2xl">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
                                     <p className="mb-3 text-sm text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>

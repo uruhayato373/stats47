@@ -8,6 +8,11 @@ const source = readFileSync(
   'utf8'
 );
 
+const navSource = readFileSync(
+  resolve(import.meta.dirname, '../../../../components/navigation/StatisticsScopeNav.tsx'),
+  'utf8'
+);
+
 const localFinanceSource = readFileSync(
   resolve(import.meta.dirname, '../../../../app/themes/local-finance/page.tsx'),
   'utf8'
@@ -30,7 +35,7 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
     const headerIndex = source.indexOf('THEME_HEROES[theme.themeKey] ?');
     const scopeIndex = source.indexOf('<StatisticsScopeNav');
     const controlsIndex = source.indexOf('aria-label="テーマと地域"');
-    const pageNavIndex = source.indexOf('aria-label="このページの内容"');
+    const pageNavIndex = source.indexOf('label="このページの内容"');
 
     expect(headerIndex).toBeGreaterThan(-1);
     expect(scopeIndex).toBeGreaterThan(headerIndex);
@@ -45,24 +50,35 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
 
     const controlsIndex = source.indexOf('aria-label="テーマと地域"');
     const themesLinkIndex = source.indexOf('href="/themes"', controlsIndex);
-    const pageNavIndex = source.indexOf('aria-label="このページの内容"');
+    const pageNavIndex = source.indexOf('label="このページの内容"');
     expect(themesLinkIndex).toBeGreaterThan(controlsIndex);
     expect(themesLinkIndex).toBeLessThan(pageNavIndex);
     expect(source.slice(themesLinkIndex, pageNavIndex)).toContain('buttonVariants');
   });
 
-  it('ページ内の章リンクは狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (2026-10-28 テンプレート寄せ)', () => {
-    const pageNavIndex = source.indexOf('aria-label="このページの内容"');
-    const navTag = source.slice(pageNavIndex, source.indexOf('>', pageNavIndex));
-    expect(navTag).toContain('overflow-x-auto');
-    expect(navTag).not.toContain('flex-wrap');
+  it('ページ内の章リンクは狭い幅でも 1 行に保ち、はみ出す分は右端のフェード付きの横スクロールにする (2026-10-28 リンク列)', () => {
+    const pageNavIndex = source.indexOf('label="このページの内容"');
+    const frameTag = source.slice(
+      source.lastIndexOf('<', pageNavIndex),
+      source.indexOf('>', pageNavIndex)
+    );
+    // 横スクロールとフェードは共通のリンク列 (LinkRowFrame) が持つ。タブの見た目 (TabsList) にしない
+    expect(frameTag).toContain('<LinkRowFrame');
+    expect(frameTag).not.toContain('flex-wrap');
+    expect(source).not.toContain('TABS_LINK');
+    expect(navSource).toContain("'overflow-x-auto [scrollbar-width:none]'");
+    expect(navSource).toContain('bg-linear-to-l from-background');
+    expect(navSource).not.toContain('cn-tabs');
   });
 
-  it('全指標・出典調査と関連記事はダッシュボードの後ろに置き、最初の画面に指標カードを出す', () => {
+  it('関連記事は h1 と切替行の下・ダッシュボードの前 (最初の画面) に置き、全指標・出典調査はダッシュボードの後ろに置く', () => {
     const dashboardIndex = source.indexOf('<ThemeDashboardClient');
+    const pageNavIndex = source.indexOf('label="このページの内容"');
+    const relatedIndex = source.indexOf('<ThemeRelatedArticles');
     expect(dashboardIndex).toBeGreaterThan(-1);
+    expect(relatedIndex).toBeGreaterThan(pageNavIndex);
+    expect(relatedIndex).toBeLessThan(dashboardIndex);
     expect(source.indexOf('title="全指標・出典調査"')).toBeGreaterThan(dashboardIndex);
-    expect(source.indexOf('<ThemeRelatedArticles')).toBeGreaterThan(dashboardIndex);
   });
 
   it('全指標・出典調査は狭幅で初期展開しない', () => {

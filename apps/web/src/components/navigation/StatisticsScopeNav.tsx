@@ -1,4 +1,6 @@
-import { cn } from '@stats47/components';
+import { type ReactNode } from 'react';
+
+import { buttonVariants, cn } from '@stats47/components';
 
 import Link from '@/components/atoms/SiteLink';
 
@@ -8,52 +10,80 @@ export type StatisticsScope = 'prefectures' | 'municipalities' | 'japan';
 /** 主語ごとのリンク先の上書き。同じ主題のページがある主語だけを渡す (無ければ各主語の一覧へ)。 */
 export type StatisticsScopeHrefs = Partial<Record<StatisticsScope, string>>;
 
-export interface TabsLinkNavItem {
+export interface LinkRowNavItem {
   key: string;
   label: string;
   href: string;
-  /** 現在のページ。aria-current="page" と data-active (選択中の見た目) を付ける */
+  /** 現在のページ。aria-current="page" を付け、outline のボタンで示す */
   current?: boolean;
 }
 
 /**
- * テンプレートの TabsList / TabsTrigger (tabs.tsx の default variant) と同じ見た目のリンク列。
- * ページを移るナビなので Tabs (role="tab") ではなくリンクで描く。JS を持たない。
- * cn-tabs-* は style-lyra.used.css の抽出対象なので文字列のまま書く。
- * 狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする。
+ * ページを移る・ページ内へ飛ぶリンクの列 (統計の地域単位・県の目次・テーマの章)。
+ * タブ (TabsList) の見た目にせず、テンプレートの Button (ghost・sm) を並べる。現在地だけ outline。
+ * 狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする。右端のフェードで続きがあることを示し、
+ * 列の末尾に同じ幅の余白 (pr-8) を置いて、最後まで送ると最後の項目がフェードの外に出るようにする。
+ * JS を持たない。
  */
-export const TABS_LINK_LIST_CLASS =
-  'cn-tabs-list inline-flex h-8 w-max items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground';
-export const TABS_LINK_TRIGGER_CLASS =
-  'cn-tabs-trigger relative inline-flex h-[calc(100%-1px)] shrink-0 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring dark:text-muted-foreground dark:hover:text-foreground data-active:bg-background data-active:text-foreground data-active:shadow-sm dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground';
+export const LINK_ROW_SCROLL_CLASS = 'overflow-x-auto [scrollbar-width:none]';
+export const LINK_ROW_LIST_CLASS = 'flex w-max items-center gap-1 pr-8';
+const LINK_ROW_FADE_CLASS =
+  'pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l from-background';
 
-export function TabsLinkNav({
+export function linkRowItemClass(current = false) {
+  return cn(
+    buttonVariants({ variant: current ? 'outline' : 'ghost', size: 'sm' }),
+    'shrink-0',
+    !current && 'text-muted-foreground'
+  );
+}
+
+/** 横スクロールの容器 + 右端のフェード。中身 (リンク列) は呼び出し側が渡す */
+export function LinkRowFrame({
+  label,
+  className,
+  children,
+}: {
+  /** nav の名前 (読み上げ用) */
+  label: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <nav aria-label={label} className={cn('relative w-full min-w-0', className)}>
+      <div className={LINK_ROW_SCROLL_CLASS}>
+        <div className={LINK_ROW_LIST_CLASS}>{children}</div>
+      </div>
+      <span aria-hidden className={LINK_ROW_FADE_CLASS} />
+    </nav>
+  );
+}
+
+export function LinkRowNav({
   label,
   items,
   className,
 }: {
   /** nav の名前 (読み上げ用) */
   label: string;
-  items: readonly TabsLinkNavItem[];
+  items: readonly LinkRowNavItem[];
   className?: string;
 }) {
   if (items.length === 0) return null;
   return (
-    <nav aria-label={label} className={cn('max-w-full overflow-x-auto [scrollbar-width:none]', className)}>
-      <div className={TABS_LINK_LIST_CLASS}>
-        {items.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            aria-current={item.current ? 'page' : undefined}
-            data-active={item.current ? '' : undefined}
-            className={TABS_LINK_TRIGGER_CLASS}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-    </nav>
+    <LinkRowFrame label={label} className={className}>
+      {items.map((item) => (
+        <Link
+          key={item.key}
+          href={item.href}
+          aria-current={item.current ? 'page' : undefined}
+          data-slot="button"
+          className={linkRowItemClass(item.current)}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </LinkRowFrame>
   );
 }
 
@@ -92,7 +122,7 @@ export function StatisticsScopeNav({
   }));
 
   if (variant === 'horizontal') {
-    return <TabsLinkNav label="統計の地域単位" items={items} className={cn('mb-4', className)} />;
+    return <LinkRowNav label="統計の地域単位" items={items} className={cn('mb-4', className)} />;
   }
 
   return (

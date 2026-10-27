@@ -22,8 +22,8 @@ import { PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
 import {
-  TABS_LINK_LIST_CLASS,
-  TABS_LINK_TRIGGER_CLASS,
+  LinkRowFrame,
+  linkRowItemClass,
 } from '@/components/navigation/StatisticsScopeNav';
 import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
@@ -237,8 +237,9 @@ export async function ThemePageLayout({
 
           {toolbar}
 
-          {/* 地域単位のタブ・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のナビを 1 行で置く。
-          最初の画面に指標カードが出るよう、全指標・出典調査と関連記事はダッシュボードの後ろへ回す。
+          {/* 地域単位・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のリンク列を 1 行で置く。
+          狭い幅ではテーマと地域のセレクトを地域単位のリンク列と別の行にし、選択中の名前を読める幅にする。
+          関連記事は h1 の下の最初の画面に置く (変更前の配置)。全指標・出典調査はダッシュボードの後ろ。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
           <div className="mb-4 flex flex-col gap-3">
             <div className="flex flex-wrap items-end gap-3">
@@ -246,13 +247,13 @@ export async function ThemePageLayout({
                 <StatisticsScopeNav
                   current="prefectures"
                   hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-                  className="mb-0"
+                  className="mb-0 w-auto"
                 />
               )}
               <div
                 role="group"
                 aria-label="テーマと地域"
-                className="flex min-w-0 flex-1 items-end gap-2 sm:gap-3"
+                className="flex min-w-0 basis-full items-end gap-2 sm:flex-1 sm:basis-auto sm:gap-3"
               >
                 <div className="min-w-0 flex-1 sm:w-56 sm:flex-none">
                   <ThemeSwitcher
@@ -265,7 +266,7 @@ export async function ThemePageLayout({
                   />
                 </div>
                 <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
-                  <span className="block text-xs font-medium text-muted-foreground">
+                  <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
                     地域
                   </span>
                   <PrefectureSelect className="mt-1 w-full" />
@@ -284,22 +285,29 @@ export async function ThemePageLayout({
             </div>
 
             {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査)。
-            狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (tabs と同じ見た目のリンク列) */}
+            狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (右端のフェードで続きを示すリンク列) */}
             {pageLinks.length > 1 && (
-              <nav
-                aria-label="このページの内容"
-                className="max-w-full overflow-x-auto [scrollbar-width:none]"
-              >
-                <div className={TABS_LINK_LIST_CLASS}>
-                  <ThemeChapterLinks
-                    links={pageLinks}
-                    themeKey={theme.themeKey}
-                    className={TABS_LINK_TRIGGER_CLASS}
-                  />
-                </div>
-              </nav>
+              <LinkRowFrame label="このページの内容">
+                <ThemeChapterLinks
+                  links={pageLinks}
+                  themeKey={theme.themeKey}
+                  className={linkRowItemClass()}
+                />
+              </LinkRowFrame>
             )}
           </div>
+
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <div className="mb-4">
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles
+                  themeKey={theme.themeKey}
+                  tagKeys={theme.relatedArticleTagKeys ?? []}
+                  rankingKeys={theme.rankingKeys}
+                />
+              </Suspense>
+            </div>
+          )}
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (
@@ -417,18 +425,6 @@ export async function ThemePageLayout({
                   </div>
                 </div>
               </RailCard>
-            </div>
-          )}
-
-          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
-            <div className="mt-8">
-            <Suspense fallback={null}>
-              <ThemeRelatedArticles
-                themeKey={theme.themeKey}
-                tagKeys={theme.relatedArticleTagKeys ?? []}
-                rankingKeys={theme.rankingKeys}
-              />
-            </Suspense>
             </div>
           )}
 

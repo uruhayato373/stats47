@@ -310,7 +310,11 @@ export function ThemeMetricsDashboard({
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
     !panel.comparisonYear && isSingleMetricGroup(panel.metrics);
-  const renderPanel = (panel: Panel, summaryOnly = false) => panel.comparisonYear ? (
+  /**
+   * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
+   * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
+   */
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -339,7 +343,7 @@ export function ThemeMetricsDashboard({
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
       summaryOnly={summaryOnly}
-      title={panel.title}
+      title={panel.title === sectionTitle ? undefined : panel.title}
       metrics={panel.metrics}
       tabLabels={tabLabels}
       selectedPrefectureCode={selectedPrefectureCode}
@@ -350,16 +354,19 @@ export function ThemeMetricsDashboard({
   /**
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
    * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
+   * 2 列の境界は本文幅 640px (@md の 768px だと 1024px 幅でサイドバーを出したとき 1 列に落ちる)。
+   * items-start: 単年のカードを隣の推移付きカードの高さへ引き伸ばさない。
    */
   const renderPanelRuns = (
     list: Panel[],
-    summaryOnlyOf: (panel: Panel) => boolean = () => false
+    summaryOnlyOf: (panel: Panel) => boolean = () => false,
+    sectionTitle?: string
   ) => {
     const out: ReactNode[] = [];
     for (let i = 0; i < list.length; ) {
       const panel = list[i];
       if (!isCompact(panel)) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel)));
+        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle));
         i += 1;
         continue;
       }
@@ -373,7 +380,7 @@ export function ThemeMetricsDashboard({
           <div
             key={`compact-${panel.key}`}
             data-theme-panel-grid="compact"
-            className="grid grid-cols-1 items-stretch gap-4 @md:grid-cols-2"
+            className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2"
           >
             {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
           </div>
@@ -493,7 +500,6 @@ export function ThemeMetricsDashboard({
         title={chapter.title}
         description={chapter.description}
         action={action}
-        className="mb-0"
       />
       {renderPanelRuns(chapter.panels, (panel) => {
         const coveredKeys = new Set(
@@ -518,7 +524,7 @@ export function ThemeMetricsDashboard({
         return panel.metrics.every((metric) =>
           coveredKeys.has(metric.metricKey)
         );
-      })}
+      }, chapter.title)}
       {chapter.charts.length > 0 && (
         <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
           {chapter.charts.map((chart) => renderChart(chart))}

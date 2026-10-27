@@ -27,32 +27,33 @@ const cardCopy = {
     question: '地価が上がる場所、将来の人口は？',
     description:
       '住宅地の地点と将来人口を重ね、同じ県内でも異なる組み合わせを探します。',
-    legend:
-      '赤い点：地価上昇×人口減少。灰の点：その他・比較対象外。背景：人口メッシュ。',
   },
   'population-flood-risk': {
     question: '人口が残る場所と、洪水の想定は？',
     description:
       '浸水想定区域に中心点が入るメッシュを確認し、将来の人口分布と照らし合わせます。',
-    legend: '赤：中心点が浸水想定区域内。灰：今回の判定では区域外。',
   },
   'population-station-access': {
     question: '将来の人口は、駅の近くに残る？',
     description:
       '駅から直線800m以内のメッシュと圏外を比べ、人口の変化を調べます。',
-    legend: '緑：中心点が駅800m圏内。灰：圏外。白い点：駅代表点。',
   },
 } as const;
 
 /**
- * 地図の枠の縦横比 (幅 / 高さ)。縦長の県 (既定の兵庫県) が枠の幅いっぱいに近づくよう 4:3 にする。
- * 16:7 の横長の枠では、縦に収めた県の左右が大きく空いていた。
+ * 地図の枠の縦横比 (幅 / 高さ)。テンプレートのカードのサムネイルと同じ 16:9 にして、カードの上半分を
+ * 地図だけで占めないようにする (4:3 では 3 枚並べたとき本文が最初の画面の下へ押し出された。2026-10-28 3 巡目)。
  */
-const PREVIEW_FRAME_ASPECT = 4 / 3;
+const PREVIEW_FRAME_ASPECT = 16 / 9;
 /** 県の外形の外に取る余白 (viewBox 単位)。上下は駅名の文字、左右は文字の幅の半分ほど。 */
-const PREVIEW_MARGIN = { x: 56, y: 44 } as const;
-/** 駅名の文字の大きさ (viewBox 単位)。 */
-const LANDMARK_FONT_SIZE = 20;
+const PREVIEW_MARGIN = { x: 40, y: 28 } as const;
+/**
+ * 駅名の文字の大きさ (viewBox 単位)。16:9 の枠では viewBox の高さがおよそ 300 になり、
+ * 3 列のカード (幅 350px 前後) で 10px ほどに描かれる。位置の目印なので地図より目立たせない。
+ */
+const LANDMARK_FONT_SIZE = 14;
+/** 駅の点の半径 (viewBox 単位)。文字に合わせて小さくする */
+const LANDMARK_RADIUS = 3.5;
 
 /**
  * buildGeoCardPreview と同じ投影 (640×360・中心 320,180・外形を 568×240 に収める) で県の外形の箱を求め、
@@ -72,7 +73,7 @@ function previewViewBox(bounds: readonly [number, number, number, number]): stri
 }
 
 function labelOffset(below?: boolean): number {
-  return below ? LANDMARK_FONT_SIZE + 6 : -10;
+  return below ? LANDMARK_FONT_SIZE + 4 : -7;
 }
 
 /** 駅名の文字が重なるときに残す順。後ろの名前ほど先に省く (点は残す)。 */
@@ -163,7 +164,7 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
             >
               {/* 地図はどの幅でもカード上部の全幅に置く (狭い幅で左の細い列に押し込まない)。
                   viewBox を県の外形と枠の縦横比から決め、地図を枠いっぱいに描く */}
-              <div className="relative aspect-4/3 w-full shrink-0 overflow-hidden border-b bg-muted">
+              <div className="relative aspect-video w-full shrink-0 overflow-hidden border-b bg-muted">
                 {preview ? (
                   <svg
                     viewBox={viewBox}
@@ -212,10 +213,10 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
                         <circle
                           cx={place.x}
                           cy={place.y}
-                          r="5"
+                          r={LANDMARK_RADIUS}
                           fill={GEO_MAP_COLORS.cardPreview.landmark}
                           stroke={GEO_MAP_COLORS.cardPreview.halo}
-                          strokeWidth="2"
+                          strokeWidth="1.5"
                         />
                         {labelled.has(place.name) && (
                           <text
@@ -226,7 +227,7 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
                             fontWeight="600"
                             fill={GEO_MAP_COLORS.cardPreview.landmark}
                             stroke={GEO_MAP_COLORS.cardPreview.halo}
-                            strokeWidth="4"
+                            strokeWidth="3"
                             paintOrder="stroke"
                             strokeLinejoin="round"
                           >
@@ -243,30 +244,24 @@ export async function GeoAnalysisCards({ previewFootnote }: GeoAnalysisCardsProp
                   </div>
                 )}
               </div>
+              {/* 本文は「対象地域 · 組み合わせ」の 1 行メタ + 題名 + 説明の 3 段。
+                  凡例 (点や色の意味) は地図を開いた詳細ページの凡例が持つので、カードには書かない */}
               <div className="flex min-w-0 flex-1 flex-col p-4">
-                {/* 表示している県は地図に重ねず、地図の下に書く */}
-                {preview && (
-                  <p className="mb-2 text-xs text-muted-foreground">
-                    {GEO_DEFAULT_PREF_LABEL}
-                  </p>
-                )}
-                <p className="text-xs font-semibold text-primary">
+                <p className="text-xs text-muted-foreground">
+                  {preview ? `${GEO_DEFAULT_PREF_LABEL} · ` : ''}
                   {config.eyebrow}
                 </p>
-                <h3 className="mt-1 text-base font-bold leading-relaxed group-hover:text-primary">
+                <h3 className="mt-1 text-base font-semibold leading-snug group-hover:text-primary">
                   {copy.question}
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   {copy.description}
                 </p>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {copy.legend}
-                </p>
                 <div className="mt-auto flex items-center justify-between gap-2 pt-3">
                   <span className="hidden text-xs text-muted-foreground @sm:inline">
                     47都道府県対応
                   </span>
-                  <span className="ml-auto inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-semibold text-primary">
+                  <span className="ml-auto inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-medium text-foreground">
                     地図を見る
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </span>

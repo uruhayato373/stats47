@@ -18,7 +18,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
-import { TabsLinkNav } from '@/components/navigation/StatisticsScopeNav';
+import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { RailLinksCard } from '@/components/rail';
 
 import {
@@ -168,7 +168,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
         <AreaProfilePageClient profile={profile} />
 
-        <TabsLinkNav
+        <LinkRowNav
           label={`${profile.areaName}の目次`}
           items={AREA_DATABOOK_TOC_ITEMS}
           className="mb-4"

@@ -7,7 +7,6 @@ import {
   SidebarMenuSubButton,
 } from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { ChevronDown, ListTree } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { RailCategoryList } from '@/components/rail';
@@ -92,12 +91,13 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
         title="このページ"
         aria-label="このページ"
         className="h-full"
-        headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+        headerAction={<SectionIndexLink href="/survey">調査一覧</SectionIndexLink>}
       >
-        {/* 押せると分かるよう、関連する分類と同じ矢印付きのメニュー行で並べる */}
+        {/* 押せると分かるよう、関連する分類と同じ矢印付きのメニュー行で並べる。
+            1 列 + 区切り線 (カードの余白 16px の中で divide-y)。2 列にすると 1024px 幅で項目名が省略される */}
         <nav
           aria-label="この調査ページの内容"
-          className="grid grid-cols-2 gap-x-4"
+          className="flex flex-col divide-y divide-border"
         >
           {pageLinks.map((item) => (
             <RailNavRow key={item.href} href={item.href}>
@@ -110,8 +110,9 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
       {categories.length > 0 && (
         // RailCategoryList は trackingSurface で自前計測するため、SurveyOutboundLinkArea
         // (click delegation による計測) で二重に包まない。
+        // 本文の余白は RailCard の既定のまま (隣の「このページ」と罫線・本文の始まりを揃える)
         <nav aria-label="この調査に関連する分類" className="h-full">
-          <RailCard title="関連する分類" className="h-full" bodyClassName="px-4 pb-3 pt-0">
+          <RailCard title="関連する分類" className="h-full">
             {/* 件数は「このページの調査に含まれるランキング数」で、全サイトの件数ではない */}
             <p className="sr-only">件数はこの調査のランキング数です</p>
             <RailCategoryList
@@ -121,7 +122,7 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
                 count: category.count,
               }))}
               trackingSurface="survey_category"
-              className="-mx-4 border-t-0"
+              className="p-0"
             />
           </RailCard>
         </nav>
@@ -130,30 +131,27 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
   );
 }
 
-/** 狭い幅で、本文より前に同じ移動手段を 1 つの折りたたみにまとめて置く。 */
+/**
+ * 狭い幅で、本文より前に同じ移動手段を 1 つの折りたたみにまとめて置く。
+ * 開閉は共通の RailCard (collapsible・既定は閉じる)。中身は閉じている間も HTML に残る。
+ */
 export function SurveyMobileNav({
   pageLinks,
   categories,
 }: SurveyNavigationProps) {
   return (
-    <details
-      className={`group/survey-nav mb-8 border-y border-border py-2 ${NARROW_ONLY_CLASS}`}
+    <RailCard
+      title="このページと関連する分類"
+      collapsible
+      className={`mb-8 ${NARROW_ONLY_CLASS}`}
     >
-      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
-        <ListTree className="size-4 text-muted-foreground" aria-hidden />
-        このページと関連する分類
-        <ChevronDown
-          className="ml-auto size-4 text-muted-foreground transition-transform group-open/survey-nav:rotate-180"
-          aria-hidden
-        />
-      </summary>
-      <SidebarMenu className="mt-1">
+      <SidebarMenu className="divide-y divide-border">
         <SurveyMenuLink href="/survey" className="font-medium">
           調査一覧へ
         </SurveyMenuLink>
       </SidebarMenu>
       <nav aria-label="この調査ページの内容（モバイル）" className="pt-2">
-        <SidebarMenu>
+        <SidebarMenu className="divide-y divide-border">
           {pageLinks.map((item) => (
             <SurveyMenuLink key={item.href} href={item.href}>
               {item.label}
@@ -163,7 +161,7 @@ export function SurveyMobileNav({
       </nav>
       {categories.length > 0 && (
         <SurveyOutboundLinkArea surface="survey_category">
-          <nav aria-label="この調査に関連する分類（モバイル）" className="pt-4">
+          <nav aria-label="この調査に関連する分類（モバイル）" className="pt-4 pb-1">
             <p className="mb-2 text-xs font-semibold text-muted-foreground">
               関連する分類
             </p>
@@ -182,6 +180,6 @@ export function SurveyMobileNav({
           </nav>
         </SurveyOutboundLinkArea>
       )}
-    </details>
+    </RailCard>
   );
 }

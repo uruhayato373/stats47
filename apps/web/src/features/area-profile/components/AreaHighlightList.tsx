@@ -38,6 +38,15 @@ interface AreaHighlightListProps {
 }
 
 /**
+ * 本文の全幅で 3 段まで並べるとき、最後の段の空きが目立たない段数を件数から選ぶ。
+ * 3 で割り切れる件数は 3 段、2 で割り切れて 3 で割り切れない件数 (4・8・10 件) は 2 段にする。
+ * どちらでも割り切れない件数 (5・7 件) は 3 段 (空きが 1 マスで済む)。
+ */
+function prefersThreeColumns(count: number): boolean {
+  return count % 3 === 0 || count % 2 !== 0;
+}
+
+/**
  * 「順位 + 指標 + 値」の一覧。県ページの「特徴」カードと市区町村ページで共用する唯一の部品
  * (AREA-HIGHLIGHTS-SSOT-01 step 3)。順位チップは RankBadge だけで描く。
  * クリックは共通の NavClickTracker が `data-nav-surface="area_highlights"` で nav_click として数える。
@@ -49,7 +58,8 @@ export function AreaHighlightList({ items, rankScope, columns = 1 }: AreaHighlig
       className={cn(
         // 行の間隔 (12px) は、見出しの下線から 1 行目までの間隔 (呼び出し側の pt-3) と揃える
         "grid grid-cols-1 gap-y-3",
-        columns === 3 && "gap-x-6 @md:grid-cols-2 @lg:grid-cols-3",
+        columns === 3 && "gap-x-6 @md:grid-cols-2",
+        columns === 3 && (prefersThreeColumns(items.length) ? "@lg:grid-cols-3" : "@lg:grid-cols-2"),
       )}
       data-nav-surface="area_highlights"
     >

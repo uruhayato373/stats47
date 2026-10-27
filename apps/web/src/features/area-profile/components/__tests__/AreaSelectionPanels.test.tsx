@@ -126,4 +126,12 @@ describe('AreaSelectionPanels', () => {
       expect.objectContaining({ surface: 'home_area_list' })
     );
   });
+
+  it('狭い幅の一覧への導線はボタンの見た目のリンクで、文字の矢印を書かない', () => {
+    render(<AreaSelectionPanels {...data} variant="embedded" surface="home" />);
+    const link = screen.getByRole('link', { name: '都道府県一覧から選ぶ' });
+    expect(link).toHaveAttribute('href', '/areas');
+    expect(link).toHaveAttribute('data-slot', 'button');
+    expect(link.textContent).not.toContain('→');
+  });
 });

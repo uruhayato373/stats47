@@ -143,25 +143,26 @@
       line-height: 1.4;
     }
   
+    /* h2 は h1 (記事タイトル 20〜24px) より小さい 19px にし、上余白は 1.75em に詰める (2026-10-28 3 巡目) */
     & h2 {
-      margin: 2.8em 0 0.8em;
-      font-size: 22px;
-      font-weight: 700;
-    }
-  
-    & h3 {
-      margin: 3rem 0 1rem;
-      padding: 0.25rem 0 0.25rem 1rem;
-      border-left: 4px solid hsl(var(--article-accent, var(--primary)));
+      margin: 1.75em 0 0.6em;
       font-size: 19px;
       font-weight: 700;
     }
   
-    & h4 {
+    & h3 {
       margin: 2rem 0 0.75rem;
+      padding: 0.25rem 0 0.25rem 1rem;
+      border-left: 4px solid hsl(var(--article-accent, var(--primary)));
+      font-size: 17px;
+      font-weight: 700;
+    }
+  
+    & h4 {
+      margin: 1.5rem 0 0.5rem;
       padding-left: 0.75rem;
       border-left: 2px solid hsl(var(--border));
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
     }
   
@@ -244,12 +245,12 @@
   
     @media (max-width: 639px) {
       & h2 {
-        font-size: 20px;
+        font-size: 18px;
       }
   
       & h3 {
-        margin-top: 2.25rem;
-        font-size: 18px;
+        margin-top: 1.75rem;
+        font-size: 16px;
       }
     }
   }

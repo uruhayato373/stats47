@@ -40,20 +40,19 @@ export function ArticleTableOfContents({
         <List className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
         目次
       </p>
+      {/* 項目は muted 色 + hover の下線 (リンクの色を本文に揃えない)。h3 は字下げして h2 と区別する */}
       <ol className="space-y-1.5 text-sm">
           {headings.map((h, idx) => (
             <li
               key={`${h.id}-${idx}`}
-              className={h.level === 3 ? "pl-4" : ""}
+              className={h.level === 3 ? "pl-4" : undefined}
             >
               <a
                 href={`#${h.id}`}
                 data-nav-label={h.text}
                 className={
-                  "block leading-snug transition-colors hover:text-primary " +
-                  (h.level === 2
-                    ? "font-medium text-foreground"
-                    : "text-xs text-muted-foreground")
+                  "block leading-snug text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline " +
+                  (h.level === 3 ? "text-xs" : "")
                 }
               >
                 {h.text}

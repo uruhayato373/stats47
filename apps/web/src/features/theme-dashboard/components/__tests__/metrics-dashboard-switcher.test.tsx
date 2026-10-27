@@ -336,7 +336,7 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     const grids = container.querySelectorAll('[data-theme-panel-grid="compact"]');
     expect(grids).toHaveLength(1);
     const grid = grids[0] as HTMLElement;
-    expect(grid).toHaveClass('grid', 'grid-cols-1', '@md:grid-cols-2');
+    expect(grid).toHaveClass('grid', 'grid-cols-1', 'items-start', '@min-[40rem]:grid-cols-2');
     expect(
       within(grid)
         .getAllByTestId('single-card')

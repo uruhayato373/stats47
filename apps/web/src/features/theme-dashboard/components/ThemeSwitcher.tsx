@@ -112,7 +112,7 @@ export function ThemeSwitcher({
       )}
     >
       {compact ? (
-        <span className="block text-xs font-medium text-muted-foreground">
+        <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
           テーマ
         </span>
       ) : (

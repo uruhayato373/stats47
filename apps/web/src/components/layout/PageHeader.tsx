@@ -3,8 +3,11 @@ import { type ReactNode } from "react";
 import { cn } from "@stats47/components";
 
 interface PageHeaderProps {
-  /** 任意の小ラベル（例: "ランキング"）。h1 の上に控えめに表示 */
-  eyebrow?: string;
+  /**
+   * 任意の小ラベル（例: "ランキング"）。h1 の上に控えめに表示。
+   * 文字列のほか、上位ページへのリンク (市区町村ページの「東京都」など) も渡せる。
+   */
+  eyebrow?: ReactNode;
   /** ページ見出し（h1）。テンプレートの breadcrumb-comp と同じ text-xl font-semibold */
   title: string;
   /** 1 行説明。本文の導入 */
@@ -36,8 +39,9 @@ interface PageHeaderProps {
  * h1 + 1 行説明（+ 細い統計テキスト）だけで構成する。
  *
  * 見た目はテンプレート (next-shadcn-dashboard) の breadcrumb-comp に合わせる:
- * 見出しは text-xl font-semibold、見出しと操作 (actions) を 1 行に並べて両端に寄せる
- * (items-center justify-between)。breadcrumb-comp の外枠 (Card) は写さない。PageHeader の
+ * 見出しは text-xl font-semibold、見出しと操作 (actions) を 1 行に並べて両端に寄せる。
+ * 操作は h1 の 1 行目に揃える (items-start + sm 以上で h1 の行の高さを操作のボタンと同じ 32px にする)。
+ * 説明文の行の中央に操作が落ちないようにするため。breadcrumb-comp の外枠 (Card) は写さない。PageHeader の
  * aside や直後の本文にカード面が来るため、枠を足すとカードの入れ子になる。パンくずは
  * 別部品の Breadcrumbs (JSON-LD と一体) が直前に出すので、ここには持たない。
  *
@@ -57,7 +61,7 @@ export function PageHeader({
   // title 群（h1 + description + meta）。aside 有無で共通利用。
   const titleBlock = (
     <div className="min-w-0">
-      <h1 className="text-xl font-semibold leading-tight text-foreground">
+      <h1 className="text-xl font-semibold leading-tight text-foreground sm:leading-8">
         {title}
       </h1>
       {description && (
@@ -88,7 +92,7 @@ export function PageHeader({
           {aside}
         </div>
       ) : (
-        <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
           {titleBlock}
           {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
         </div>
