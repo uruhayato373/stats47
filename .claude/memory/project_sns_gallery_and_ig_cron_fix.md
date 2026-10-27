@@ -37,4 +37,8 @@ SNS 投稿ギャラリー管理画面 + IG cron 修正 + R2 コスト対策 (fea
 - `.github/workflows/cleanup-r2-sns-videos.yml` (weekly 日曜04:00 JST + dispatch)。schedule実行は実削除。
 - 削除済み動画を再投稿したい場合は Remotion で再レンダー。
 
+## 画像台帳の初回保存 (2026-10-27)
+- **問題**: 全画像の取得後、未作成の `data/content-operations/live/` 配下にロックを開いて ENOENT で保存に失敗した。
+- **原因・対策**: `.claude/scripts/media/lib/web-inventory.mjs` は親ディレクトリ作成をロック取得より先に行う。既存台帳のある環境だけで検証せず、`workspace.test.mjs` の空の一時rootへの初回保存・再読込テストを通す。
+
 [[project_sns_reorg_2026_07]] [[feedback_shared_working_copy_git_race]]
