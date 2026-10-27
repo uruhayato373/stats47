@@ -59,7 +59,17 @@ export function ConsoleNavLinks({ groups }: { groups: readonly NavGroup[] }) {
     <>
       {groups.map((group, i) => (
         <SidebarGroup key={group.title ?? `group-${i}`}>
-          {group.title ? <SidebarGroupLabel>{group.title}</SidebarGroupLabel> : null}
+          {group.title ? (
+            group.href ? (
+              <SidebarGroupLabel asChild>
+                <a href={group.href} aria-current={pathname === group.href ? "page" : undefined} className="hover:text-sidebar-foreground">
+                  {group.title}
+                </a>
+              </SidebarGroupLabel>
+            ) : (
+              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+            )
+          ) : null}
           <SidebarMenu>
             {group.items.map((entry) => {
               if (isBranch(entry)) return <NavBranchItem key={`${group.title}-${entry.label}`} branch={entry} isActive={isActive} />;

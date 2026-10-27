@@ -3,7 +3,7 @@ title: 今月の重点
 type: monthly-plan
 month: 2026-10
 date: 2026-10-05
-updated: 2026-10-07
+updated: 2026-10-26
 status: active
 focus_themes:
   - 週次収益 (NSM) を内訳つきで数字で言える状態にする
@@ -110,7 +110,7 @@ W36 の 6,053 から W40 の 10,018 へ伸びた一方、週次収益 (NSM) は�
   - `NAV-CLICK-COVERAGE-01` でサイト内リンクのクリックを既定で全件計測する (UI 改善を計測で判定する土台) [M] (→ W43 Must、期日 10-23)
   - `CF-CPU-SURGE-01` の原因特定と #813 の閉鎖判断 [M] (→ W43〜W44、期日 10-16 は W42 で再設定を判断)
 - **依存・ブロッカー**: 再認証・キーチェーン登録・main マージはオーナー作業。GA4 カスタムディメンション 4 項目の登録 (`FUNNEL-CTA-01` の前提) もオーナー作業。
-- **真実源リンク**: `backlog.md#A8-CROSSCHECK-EXCEED-01`、`backlog.md#AUTH-CREDENTIAL-REGISTER-01`、`backlog.md#NAV-CLICK-COVERAGE-01`、`improvements.md#PERF-WORKER-P99-01`、`improvements.md#R2-STORAGE-01`
+- **真実源リンク**: `backlog.md#A8-CROSSCHECK-EXCEED-01`、`backlog.md#AUTH-CREDENTIAL-REGISTER-01`、`backlog.md#NAV-CLICK-COVERAGE-01`、`backlog.md#CF-CPU-SURGE-01`、`improvements.md#R2-STORAGE-01`
 
 ### 重点2: 公開している指標の誤り・古さを週 5 指標ずつ処置し、処置の流れを 4 週続ける (領域: データ)
 
@@ -157,7 +157,7 @@ Should・Could として毎週 1〜2 件ずつ並行で進める。
 | テーマ | 全 55 テーマの d28 判定 (10-09) が出るまで新設しない | `THEME-EXPANSION-EFFECT-01` | W41〜W42 |
 | ノウハウへの導線 | 雑学ランキング 3〜5 ページに「このランキングの作り方」の 1 行 | `RANKING-MAKING-OF-LINK-01` | W43 Could |
 | SNS | 媒体別の送客を測るまで投稿を増やさない。週次の GA4 取得に流入元別を足す | `SNS-REFERRAL-MEASURE-01` | W43〜W44 Could |
-| 判定 | 2026-12-31 に PV の実績を里程標 (W52 に 28 日 79,000) と比べる | `PV-PLAN-REVIEW-2026Q4-01` | 12 月 |
+| 判定 | 2026-12-31 に PV の実績を里程標 (W52 に 28 日 79,000) と比べる | `PV-100K-LEVERS-01` | 12 月 |
 
 **11 月の重点候補 (`/monthly-plan` で判断)**: AdSense が承認されていれば管理 (`ad-yield` の接続) と、サイト領域の構えの見直し
 (条件: `ad-yield` を 4 週測れたら攻めるへ)。商品は `KNOWHOW-PRODUCT-PILOT-01` と KDP (`KDP-EXPANSION-01`、既刊の計測が戻ってから)。

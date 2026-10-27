@@ -63,6 +63,7 @@ interface LibBoard {
 }
 type StrategyLanesLib = {
   STRATEGY_DOC: string;
+  MAX_ACTIVE_IMPROVEMENTS: number;
   laneBoard: (root: string) => LibBoard;
 };
 
@@ -100,6 +101,8 @@ export interface StrategyLaneBoard {
   issues: LibIssue[];
   totalCards: number;
   unlanedCards: LaneCard[];
+  /** improvements.md の active 施策の上限 (DG080・収益化戦略 §7)。読めなければ null */
+  maxActiveImprovements: number | null;
   error?: string;
 }
 
@@ -140,6 +143,7 @@ export function strategyLaneBoard(): StrategyLaneBoard {
       issues: board.issues,
       totalCards: board.cards.length,
       unlanedCards: board.cards.filter((c) => !c.lane).map(toLaneCard),
+      maxActiveImprovements: l.MAX_ACTIVE_IMPROVEMENTS,
     };
   } catch (e) {
     return {
@@ -150,6 +154,7 @@ export function strategyLaneBoard(): StrategyLaneBoard {
       issues: [],
       totalCards: 0,
       unlanedCards: [],
+      maxActiveImprovements: null,
       error: e instanceof Error ? e.message : String(e),
     };
   }

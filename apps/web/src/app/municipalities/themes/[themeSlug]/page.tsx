@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_THEME_SLUGS,
   MUNICIPALITY_THEME_CATALOGS,
@@ -42,7 +43,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/municipalities/themes/${theme.slug}` },
+    alternates: { canonical: hrefFor("municipality-theme", { themeSlug: theme.slug }) },
     ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
@@ -97,7 +98,7 @@ export default async function MunicipalityThemePage({
           {items.map((item) => (
             <TrackedMunicipalityThemeLink
               key={item.rankingKey}
-              href={`/municipalities/ranking/${item.rankingKey}`}
+              href={hrefFor("municipality-ranking", { rankingKey: item.rankingKey })}
               label={
                 item.subtitle ? `${item.title}（${item.subtitle}）` : item.title
               }

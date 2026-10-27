@@ -31,7 +31,7 @@ import type { Metadata } from 'next';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: '地域データ分析 | stats47',
+  title: '地域データ分析',
   description:
     '人口と土地・災害・施設の地理データを重ね、地域の分布を調べます。分析ごとの対象年、地域、原典と計算の根拠を確認できます。',
   alternates: { canonical: '/geo' },

@@ -13,6 +13,7 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { CATEGORIES } from "@stats47/data-configs";
 import { contentTagIds, resolveContentTag } from '@stats47/data-configs/content';
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 import { ArticleShell, CURRENT_ITEM_CLASS } from "@/components/layout";
@@ -191,7 +192,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         headline: article.title,
         description: article.frontmatter.description ?? "",
         image: `${R2_PUBLIC_URL}/${blogR2Key(slug, "ogp/ogp.png")}`,
-        url: `${baseUrl}/blog/${slug}`,
+        url: `${baseUrl}${hrefFor("blog", { slug })}`,
         datePublished: article.publishedAt ?? undefined,
         dateModified: article.updatedAt ?? article.publishedAt ?? undefined,
         author: article.frontmatter.author
@@ -263,7 +264,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     items={articleTagData.flatMap((tag) => {
                         const registered = resolveContentTag(tag.tagKey);
                         return registered ? [{id: registered.id, label: registered.label,
-                            href: `/tag/${registered.key}`, trackingLabel: registered.id}] : [];
+                            href: hrefFor("tag", { tagKey: registered.key }), trackingLabel: registered.id}] : [];
                     })}
                     moreLink={{
                         href: "/blog/tags",
@@ -344,7 +345,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                         )}
                                     </div>
                                     <div className="ml-auto">
-                                        <ShareButtons title={article.title} url={`/blog/${slug}`} variant="simple" platforms={["X (Twitter)", "LINE"]} />
+                                        <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="simple" platforms={["X (Twitter)", "LINE"]} />
                                     </div>
                                 </div>
                             </header>
@@ -370,7 +371,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">
-                                <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
+                                <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="prominent" />
                             </div>
                     </ArticleCard>
 

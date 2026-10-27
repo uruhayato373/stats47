@@ -9,6 +9,11 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts",
       "require": "./src/index.ts"
+    },
+    "./short-name": {
+      "types": "./src/utils/prefecture-short-name.ts",
+      "import": "./src/utils/prefecture-short-name.ts",
+      "require": "./src/utils/prefecture-short-name.ts"
     }
   },
   "scripts": {

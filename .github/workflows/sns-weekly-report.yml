@@ -33,7 +33,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: 📰 Generate SNS weekly report
         env:
@@ -59,7 +59,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ".claude/skills/sns/sns-weekly-report/reference/reports"
+          # .agents/ (Codex 用のミラー) にも新しいレポートへのリンクが要る。入れ忘れると整合性検査 E12 で
+          # 品質ゲートが落ちる (2026-W43 で踏んだ。SNS-WEEKLY-REPORT-MIRROR-01)
+          node .claude/scripts/lib/sync-codex-mirror.cjs
+          git add ".claude/skills/sns/sns-weekly-report/reference/reports" ".agents/skills/sns/sns-weekly-report/reference/reports"
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

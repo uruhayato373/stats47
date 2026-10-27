@@ -11,6 +11,7 @@
  * 地図・グラフは「使い方」シートで Excel 側の挿入手順を案内する。
  */
 import ExcelJS from "exceljs";
+import { getCategoryName } from "@stats47/data-configs/categories";
 import type { Dataset } from "../data/dataset";
 import { sourceOrigin } from "../data/sources";
 import { PREFECTURE_CODES5, PREFECTURE_BY_CODE5 } from "../data/prefectures";
@@ -19,27 +20,6 @@ const nameOf = (code5: string): string => PREFECTURE_BY_CODE5.get(code5)?.name ?
 
 const HEADER_FILL: ExcelJS.Fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFEEF2F7" } };
 const INPUT_FILL: ExcelJS.Fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFFDEB" } };
-
-/** e-Stat カテゴリ → 日本語ラベル (グループシート名)。 */
-const CATEGORY_LABEL: Readonly<Record<string, string>> = {
-  population: "人口・世帯",
-  laborwage: "労働・賃金",
-  tourism: "観光",
-  international: "国際",
-  administrativefinancial: "行財政",
-  socialsecurity: "社会保障",
-  educationsports: "教育・スポーツ",
-  landweather: "国土・気候",
-  commercial: "商業",
-  miningindustry: "鉱工業",
-  agriculture: "農林水産",
-  economy: "経済・家計",
-  infrastructure: "インフラ",
-  construction: "建設",
-  energy: "エネルギー",
-  safetyenvironment: "安全・環境",
-  ict: "情報通信",
-};
 
 /** 使い方シートの出典注記。収録指標の出典の種類 (e-Stat の統計表 / それ以外の提供元) に従う。 */
 function originNotice(datasets: readonly Dataset[]): string {
@@ -91,7 +71,7 @@ export async function buildDatabookXlsx(title: string, datasets: readonly Datase
   const readme = wb.addWorksheet("使い方");
   readme.getColumn(1).width = 120;
   const groupSummary = [...groups.entries()]
-    .map(([cat, arr]) => `${CATEGORY_LABEL[cat] ?? "その他"}（${arr.length}）`)
+    .map(([cat, arr]) => `${getCategoryName(cat) ?? "その他"}（${arr.length}）`)
     .join(" / ");
   const lines: string[] = [
     title,
@@ -137,7 +117,8 @@ export async function buildDatabookXlsx(title: string, datasets: readonly Datase
 
   // カテゴリ別グループシート ([値, 順位] × 指標)
   for (const [cat, arr] of groups) {
-    const label = CATEGORY_LABEL[cat] ?? "その他";
+    // グループシート名はカテゴリマスタ (data-configs categories.ts) の表示名。独自の表を持たない
+    const label = getCategoryName(cat) ?? "その他";
     const ws = wb.addWorksheet(safeSheetName(label, usedNames));
     ws.getColumn(1).width = 16;
     ws.getColumn(2).width = 12;

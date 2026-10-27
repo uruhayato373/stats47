@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ArrowRight, BookOpen, Database } from "lucide-react";
 
 import { getSurfaceCardClassName } from "@/components/surface";
@@ -7,7 +8,7 @@ import { TrackedProductLink } from "./TrackedProductLink";
 import type { StorefrontProduct } from "../types";
 
 export function ProductItem({ product }: { readonly product: StorefrontProduct }) {
-  const href = `/products/${product.slug}`;
+  const href = hrefFor("product", { slug: product.slug });
   const Icon = product.channel === "kindle" ? BookOpen : Database;
 
   return (

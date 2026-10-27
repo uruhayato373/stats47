@@ -2,6 +2,7 @@
 
 
 import { DataTable } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from "@/components/atoms/SiteLink";
@@ -30,7 +31,7 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
     cell: ({ row }) => (
       <Link
         {...navSurfaceProps("category_ranking_list")}
-        href={`/ranking/${row.original.rankingKey}`}
+        href={hrefFor("ranking", { rankingKey: row.original.rankingKey })}
         className="hover:text-primary transition-colors font-medium"
       >
         {row.original.title}

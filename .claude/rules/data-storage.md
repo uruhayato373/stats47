@@ -116,6 +116,9 @@ paths:
     整数と小数を区別せず、必須はルートの項目と識別子 (`id`・`week` など) に限る。台帳の形を変えたら同じ差分で schema を直す)
     state・series の行も `schema` を宣言すれば同じく検証する (2026-10-20。セッションが判断に使う認証付き計測・週次サイクル・NSM・A8/楽天の成果の記録。
     書き手は `.claude/scripts/lib/dataset-shape.mjs` の `assertDatasetShape(id, doc)` で書く前に検証し、合わなければ書かずに止める)
+  - 台帳の行の `refs` (ID の参照。外部キー相当) が指す ID が参照先の台帳・TS の正本 (`REGISTRIES`) に無い、写し (`copies`) が参照先と違う
+    (2026-10-26)。書き方は `config/datasets.mjs` の「REFS の書き方」。共通の型 (sha256・日付・noteUrl・媒体など) は
+    `config/schema/common.schema.json` を `$ref` で使い、コードの判定も `dataset-shape.mjs` の `commonPattern` で同じ定義から作る
   - コード (ts・tsx・mjs・cjs・js) が台帳の `data/` のパスを直書きしている。テスト・コメント行・import 行と、
     `DATA_LITERAL_EXEMPT` に理由付きで載せたファイル (web の実行時バンドルに入る `packages/data-configs/src` など) は除く
 - 新しい記録・素材は、先に台帳へ 1 行足してから書く。日付付きファイルの寿命は `prune-state-snapshots.mjs` の

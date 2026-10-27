@@ -59,9 +59,24 @@ export function normalizeItemRange(value) {
 }
 /** 見出しの名前。表は同じ名前を E〜I 列の結合セルに繰り返すので、最初に見つかったものを使う */
 const headingName = (row) => [5, 6, 7, 8, 4].map((index) => compactName(row[index])).find(Boolean) ?? "";
+/**
+ * 品目の名前。消費支出のシートは G 列だが、「1収入」シートは階層が深い品目 (010 定期収入・011 臨時収入・
+ * 034 公的年金給付など) の名前が H・I 列にある (KAKEI-CLASSIFICATION-INCOME-SHEET-01)。G 列が空のときだけ H・I 列 (044 クレジット購入借入金は F 列) を見る。
+ * H・I 列の名前は表で揃えるための空白を含む (「臨 時 収 入」) ので詰める。
+ */
+const itemName = (row) => clean(row[6]) || [7, 8, 5].map((index) => compactName(row[index])).find(Boolean) || "";
+/** 内容例示の列。消費支出のシートは O 列、「1収入」シートは L 列なので、見出し行の「内容例示」の位置から決める */
+const DEFAULT_DETAIL_COLUMN = 14;
+function detailColumn(rows) {
+  for (const row of rows.slice(0, 5)) {
+    const index = row.findIndex((cell) => compactName(cell) === "内容例示");
+    if (index >= 0) return index;
+  }
+  return DEFAULT_DETAIL_COLUMN;
+}
 
 /**
- * 1 シートの行を品目へまとめる (pure)。列は A=品目番号 / D=分類番号 / F・G=項目名 / O=内容例示。
+ * 1 シートの行を品目へまとめる (pure)。列は A=品目番号 / D=分類番号 / F・G (収入は H・I も)=項目名 / O (収入は L)=内容例示。
  * 品目番号のある行が品目の始まりで、品目番号の無い後続行は直前の品目の例示の続き。
  * 例示が括弧の途中で折り返された行 (「冷凍食品（コロッケ … しゅうまい」→「からあげ）」) は直前の例示へつなぐ。
  *
@@ -74,11 +89,12 @@ export function parseClassificationRows(rows, sheetName) {
   const items = {};
   let group = null;
   let current = null;
+  const detailIndex = detailColumn(rows);
   for (const row of rows) {
     const code = clean(row[0]);
     const groupCode = clean(row[3]);
-    const name = clean(row[6]);
-    const detail = clean(row[14]);
+    const name = itemName(row);
+    const detail = clean(row[detailIndex]);
     if (code && !ITEM_CODE.test(code) && GROUP_RANGE.test(code)) {
       const range = normalizeItemRange(row[0]);
       const label = headingName(row);

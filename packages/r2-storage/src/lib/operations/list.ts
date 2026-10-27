@@ -5,8 +5,8 @@ import { logger } from "@stats47/logger";
 import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
-import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
+import { resolveR2StagingRoot } from "./write-staging";
 import { SITE } from "@stats47/types";
 
 export interface R2ListedObject {
@@ -20,7 +20,7 @@ function listFromLocalFs(prefix?: string): R2ListedObject[] {
   const fs = require("fs") as typeof import("fs");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const path = require("path") as typeof import("path");
-  const root = findLocalR2Root() ?? path.join(process.cwd(), ".local/r2");
+  const root = resolveR2StagingRoot();
   const dirPath = prefix ? path.join(root, prefix) : root;
   if (!fs.existsSync(dirPath)) return [];
 

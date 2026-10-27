@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**745 件** (最終更新: 2026-10-25)
+**748 件** (最終更新: 2026-10-26)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-26 | 📸 Instagram | ranking-quiz/white-bread-consumption-quantity | 【都道府県クイズ】食パンをいちばん多く買う県は？  A 京都府 B 兵庫県 C 滋賀県  ヒントは2枚目、答えは3枚目�… | [🔗](https://www.instagram.com/p/De9vaK6ldZE/) |
+| 2026-10-26 | 🧵 Threads | area/area-33000-profile | あなたの知る岡山は、データでも同じ姿ですか？ アカマツや桃太郎ぶどうから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/De84meIiHhI) |
+| 2026-10-26 | 🧵 Threads | ranking/pet-food-consumption-expenditure | ペットフードにいちばんお金を使う県は福島。  1世帯あたり1万6,285円。2位は高知の1万5,807円。 最も少ない沖… | [🔗](https://www.threads.com/@stats47jp/post/De8KTRogkZI) |
 | 2026-10-25 | 📸 Instagram | tile-change/households-1980-2020 | 40年で、世帯数はどう変わった？ 1980→2020年。増加 47県 ／ 減少 0県。全47県を地図に。 全47都道府県… | [🔗](https://www.instagram.com/p/De65zdkEbk-/) |
 | 2026-10-25 | 🧵 Threads | area/area-32000-profile | 島根の「らしさ」をデータでたどる。 県花ボタン、仁多米と出雲おろち大根、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/De6SGHJAoTO) |
 | 2026-10-25 | 🧵 Threads | ranking/care-worker-annual-income | 405万円・402万円・400万円。  介護職員の平均年収、上位は神奈川・大阪・岐阜。 最も低い沖縄は288万円で、1位… | [🔗](https://www.threads.com/@stats47jp/post/De5jrvtCYa-) |

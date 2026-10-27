@@ -251,6 +251,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 
 主なポイント:
 - **Phase 0**: Node.js スクリプトで draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
+- **Phase 0 ガード（未検証の断り書き）**: 本文に「検証状況」「この制作環境では」「実機確認は未了」など、作り手が試していないことを読者に断る文が残っていたら公開しない。`publish-new-note.sh` と `patch-note-paid-landing.mjs` が `lib/unverified-disclosure.mjs` で機械的に止める。操作手順・商品は実際に試して画面と結果を本文に入れてから公開する。未検証の範囲を明示して公開する運用は採らない (2026-10-24 に Excel 記事など 17 本が断り書きを残して公開された)。公開済み全記事は週次の `npm run note:unverified:audit` が検査する
 - **Phase 0 ガード（マガジン URL 未注入チェック）**: 本文に未注入プレースホルダー `{{MAGAZINE_URL}}` が残っていたら、その記事は**公開せず中断**する。回遊フッタの `{{MAGAZINE_URL}}` は公開前に `inject-magazine-url.cjs` で実 URL に置換しておく必要がある（未置換のまま公開するとプレースホルダー文字列がそのまま記事に出る）。バッチ中の 1 記事が該当した場合、その記事だけスキップし他は続行してよい
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
 - **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。
@@ -359,7 +360,7 @@ Mac の `stats47` 専用プロファイルを `npm run note:session:check` で�
 
 要素検索ヘルパー（`find_idx` / `find_idx_retry`）、実証済みの要素パターン、state 最小化ガイドライン、エラーハンドリングの詳細は **[references/troubleshooting.md](references/troubleshooting.md)** を参照。
 
-**マガジンの所属照合と UI 変化時の調査** (すべて read-only・永続プロファイルを再利用。`NOTE-MAGAZINE-REORG-01`):
+**マガジンの所属照合と UI 変化時の調査** (すべて read-only・永続プロファイルを再利用。`NOTE-CIRCULATION-CTA-01`):
 
 ```bash
 node .claude/scripts/note/fetch-note-magazines.mjs     # note.com の既存マガジン一覧 (カタログ照合用)

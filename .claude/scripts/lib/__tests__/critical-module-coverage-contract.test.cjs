@@ -165,7 +165,7 @@ test("実inventory・Vitest config・PR workflowがcritical module coverage契�
   const inventory = JSON.parse(fs.readFileSync(INVENTORY_FILE, "utf8"));
   const environment = {
     exists: (file) => fs.existsSync(path.join(ROOT, file)),
-    configText: (workspace) => fs.readFileSync(path.join(ROOT, workspace, "vitest.config.ts"), "utf8"),
+    configText: (workspace) => fs.readFileSync(path.join(ROOT, workspace, "vitest.config.mts"), "utf8"),
   };
   assert.deepEqual(auditInventory(inventory, environment), []);
   assert.deepEqual(auditWorkflow(workflow), []);

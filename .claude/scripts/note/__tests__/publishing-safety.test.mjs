@@ -68,3 +68,12 @@ test("kakei catalog entry builder defaults a-/d-kakei magazine to s47-kakei-read
   assert.match(CATALOG_ENTRIES_BUILDER, /const magazine = "s47-kakei-reading";/);
   assert.doesNotMatch(CATALOG_ENTRIES_BUILDER, /const magazine = "s47-economy"/);
 });
+
+test("new publication and paid-landing patches stop on unverified disclaimers in the body", () => {
+  assert.match(PUBLISHER, /audit-note-unverified\.mjs" --file "\$ADIR\/draft\.md"/);
+  assert.match(PUBLISHER, /FAIL: 未検証の断り書きが本文に残っている/);
+  const patcher = readFileSync(join(NOTE_DIR, "patch-note-paid-landing.mjs"), "utf8");
+  assert.match(patcher, /findUnverifiedDisclosures\(`\$\{composed\.html\}\\n\$\{pay\}`\)/);
+  const weekly = readFileSync(join(NOTE_DIR, "../management/weekly-audits/note-circulation.sh"), "utf8");
+  assert.match(weekly, /note:unverified:audit/);
+});

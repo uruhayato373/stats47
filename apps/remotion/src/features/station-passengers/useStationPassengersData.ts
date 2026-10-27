@@ -5,6 +5,7 @@ import type { Topology } from "topojson-specification";
 
 import type { StationPassengerData } from "@stats47/station-passengers";
 import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
+import { to2DigitPrefCode } from "@stats47/area";
 
 export interface StationPassengersDataResult {
   topology: Topology | null;
@@ -14,9 +15,9 @@ export interface StationPassengersDataResult {
   loading: boolean;
 }
 
-/** 県コードを 2 桁に正規化 ("22000" / "22" / "2" → "22" / "02") */
+/** 県コードを 2 桁に正規化 ("22000" / "22" / "2" → "22" / "02")。`@stats47/area` の単一実装 */
 export function normalizePrefCode(code: string): string {
-  return String(code).padStart(2, "0").slice(0, 2);
+  return to2DigitPrefCode(code);
 }
 
 /**

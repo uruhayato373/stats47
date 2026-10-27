@@ -533,7 +533,10 @@ function auditFile(file) {
           // This generator's explicit staging mode never calls writeR2Staging and is used for PR artifacts.
           const localMetricStage = rel === 'packages/ranking/src/scripts/generate-ranking-items.ts' &&
             /\s--stage-dir\s+\.local\/r2(?:\s|$)/.test(line);
-          return !localMetricStage;
+          // --validate-only は検証だけで return し writeR2Staging に届かない (PR CI の在庫整合ゲート。2026-10-26)
+          const validateOnly = rel === 'apps/web/scripts/export-affiliate-ads-snapshot.ts' &&
+            /\s--validate-only(?:\s|$)/.test(line);
+          return !localMetricStage && !validateOnly;
         })
       );
       if (!writesViaWriteR2Staging) continue;

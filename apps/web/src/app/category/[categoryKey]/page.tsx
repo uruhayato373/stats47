@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
 import { getCategoryDescription } from '@stats47/data-configs/categories';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import {
   readCategorySourceSurveysFromR2,
@@ -124,7 +125,7 @@ export async function generateMetadata({
       title,
       description,
       alternates: {
-        canonical: `/category/${categoryKey}`,
+        canonical: hrefFor('category', { categoryKey }),
       },
       ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
@@ -335,7 +336,7 @@ export default async function CategoryPage({ params }: PageProps) {
               title={`${category.categoryName}の新着ブログ`}
               action={
                 <Link
-                  href={`/tag/${blogTagKey}`}
+                  href={hrefFor('tag', { tagKey: blogTagKey })}
                   className="font-semibold text-primary hover:underline"
                 >
                   すべての記事 →

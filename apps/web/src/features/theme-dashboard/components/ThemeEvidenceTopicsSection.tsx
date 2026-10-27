@@ -1,4 +1,5 @@
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { resolveRankingReaderLabel } from '@stats47/data-configs/prominence';
 import {
   EVIDENCE_LENS_CATALOG,
@@ -9,6 +10,8 @@ import { metricDisplayName } from '@stats47/ranking';
 import { BookOpenText } from 'lucide-react';
 
 import { SectionCard } from '@/components/surface';
+
+import { themeHref } from "../config/theme-href";
 
 import { TrackedThemeLink } from './TrackedThemeLink';
 
@@ -109,7 +112,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                   </p>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                     {rankings.map((ranking) => {
-                      const href = `/ranking/${ranking.key}`;
+                      const href = hrefFor("ranking", { rankingKey: ranking.key });
                       return (
                         <TrackedThemeLink
                           key={ranking.key}
@@ -133,7 +136,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                   </p>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                     {themes.map((theme) => {
-                      const href = `/themes/${theme.key}`;
+                      const href = themeHref(theme.key);
                       return (
                         <TrackedThemeLink
                           key={theme.key}
@@ -157,7 +160,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                   </p>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                     {topic.relatedArticleTagKeys?.map((tagKey) => {
-                      const href = `/tag/${tagKey}`;
+                      const href = hrefFor('tag', { tagKey });
                       return (
                         <TrackedThemeLink
                           key={tagKey}

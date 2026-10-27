@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { unwrap } from "@stats47/types";
 import { type Metadata } from "next";
 
@@ -19,6 +20,7 @@ import {
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
 
@@ -57,17 +59,17 @@ export async function generateMetadata({
     const category = categories.find((c) => c.categoryKey === categoryKey);
     if (!category) return {};
 
-    const canonical = `/category/${categoryKey}/compare`;
+    const canonical = hrefFor("category-compare", { categoryKey });
 
     if (areaCodes.length === 0) {
-        const title = "地域間比較 | stats47";
+        const title = "地域間比較";
         const description = "2つの都道府県の統計データをカテゴリ別に比較できます。";
         return {
             title,
             description,
             alternates: { canonical },
             robots: "noindex, follow",
-            ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
+            ...generateOGMetadata({ title: formatOgpTitle(title), description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
         };
     }
 
@@ -76,7 +78,7 @@ export async function generateMetadata({
         .map((code) => allPrefectures.find((p) => p.prefCode === code)?.prefName)
         .filter(Boolean);
 
-    const title = `${areaNames.join(" vs ")} の地域間比較（${category.categoryName}） | stats47`;
+    const title = `${areaNames.join(" vs ")} の地域間比較（${category.categoryName}）`;
     const description = `${areaNames.join("、")}の${category.categoryName}に関する統計データを比較します。`;
 
     return {
@@ -84,7 +86,7 @@ export async function generateMetadata({
         description,
         alternates: { canonical },
         robots: "noindex, follow",
-        ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
+        ...generateOGMetadata({ title: formatOgpTitle(title), description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
 }
 
@@ -151,7 +153,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                         ? [
                               {
                                   label: currentCategory.categoryName,
-                                  href: `/category/${categoryKey}`,
+                                  href: hrefFor("category", { categoryKey }),
                               },
                           ]
                         : []),

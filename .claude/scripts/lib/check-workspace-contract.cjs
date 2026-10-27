@@ -82,7 +82,7 @@ function hasTestFiles(directory) {
 }
 
 /**
- * root vitest.config.ts の test.projects に登録済みの workspace ディレクトリ。
+ * root vitest.config.mts の test.projects に登録済みの workspace ディレクトリ。
  *
  * ★未登録のパッケージのテストは**どこからも実行されない**。過去に data-configs
  * (2026-07-29) と stats-r2 (2026-07-30) が同じ取りこぼしをしており、
@@ -90,7 +90,7 @@ function hasTestFiles(directory) {
  * 「テストがあるのに緑」という最も気づけない失敗なので機械で塞ぐ。
  */
 function registeredVitestProjects() {
-  const file = path.join(ROOT, "vitest.config.ts");
+  const file = path.join(ROOT, "vitest.config.mts");
   let text = "";
   try { text = fs.readFileSync(file, "utf8"); } catch { return null; }
   const registered = new Set();
@@ -341,14 +341,14 @@ function main() {
 
   const registered = registeredVitestProjects();
   if (registered === null) {
-    findings.push({ code: "MISSING_VITEST_CONFIG", file: "vitest.config.ts", message: "file not found" });
+    findings.push({ code: "MISSING_VITEST_CONFIG", file: "vitest.config.mts", message: "file not found" });
   } else {
     for (const item of packages) {
       if (registered.has(item.relative)) continue;
       if (!hasTestFiles(item.directory)) continue;
       findings.push({
         code: "UNWIRED_TEST_SUITE",
-        file: "vitest.config.ts",
+        file: "vitest.config.mts",
         message: `${item.relative} has test files but is not registered (tests never run)`,
       });
     }

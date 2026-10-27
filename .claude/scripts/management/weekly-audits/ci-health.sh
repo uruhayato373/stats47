@@ -2,7 +2,7 @@
 # CI の健全性の週次確認 (2026-10-26 に workflow-health-daily.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。gh の認証で Actions の run 履歴を読むだけ。
 # 連続失敗している cron・配信データ (R2) の陳腐化・アフィリエイト portfolio state の鮮度・待機中に取り消された
-# R2 書き込みの手動起動・認証付き計測の停止のどれかがあれば exit 1。出力: data/ci/ (LATEST.md・workflow-health.json)
+# R2 書き込みの手動起動・認証付き計測の停止・Next.js のサポート期限 (残り 60 日未満か回避フラグ残存) のどれかがあれば exit 1。出力: data/ci/ (LATEST.md・workflow-health.json)
 # cron でなくなったので、自分自身の失敗を連続失敗に数えて緑に戻れない問題 (2026-08-13〜10-25 に成功 0 回) は起きない。
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
@@ -25,4 +25,5 @@ else
 fi
 run superseded-dispatches node .claude/scripts/ci/audit-superseded-dispatches.mjs
 run authenticated-measurement node .claude/scripts/measurement/health.mjs --check
+run next-support-window node .claude/scripts/lib/check-next-support-window.cjs
 if [ "${#failed[@]}" -gt 0 ]; then echo "異常: ${failed[*]}"; exit 1; fi

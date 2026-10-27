@@ -9,6 +9,11 @@
  * displayOrder は配列順 (= 配信中の表示順)。アイコン SVG は別途 R2 `app/categories/svg/<key>.svg`。
  */
 
+import type { CategoryKey } from "./types";
+
+/** 17 軸のキー一覧 (正本は types.ts)。軽量 subpath `@stats47/data-configs/categories` から引けるよう再 export する。 */
+export { CATEGORY_KEYS, type CategoryKey } from "./types";
+
 export interface CategoryMeta {
   categoryKey: string;
   categoryName: string;
@@ -20,8 +25,12 @@ export interface CategoryMeta {
   description?: string;
 }
 
-/** [categoryKey, categoryName, lucide icon, seo description] — 配列順 = displayOrder (配信中と一致)。 */
-const CATEGORY_DEFS: ReadonlyArray<readonly [string, string, string, string]> = [
+/**
+ * [categoryKey, categoryName, lucide icon, seo description] — 配列順 = displayOrder (配信中と一致)。
+ * キーは `CategoryKey` に縛る (17 軸外のキーはコンパイルエラー)。`CATEGORY_KEYS` とのキー集合・順序の
+ * 一致は `__tests__/categories.test.ts` が固定する。
+ */
+const CATEGORY_DEFS: ReadonlyArray<readonly [CategoryKey, string, string, string]> = [
   [
     "landweather", "国土・気象", "MapPin",
     "猛暑日1位は京都・最下位は沖縄──年平均気温と猛暑日が逆転する盆地気候の正体を47都道府県データで解説。面積・海岸線・可住地面積割合など国土統計も収録。",

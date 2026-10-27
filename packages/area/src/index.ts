@@ -30,6 +30,7 @@ export {
   PREFECTURE_CODE_2DIGIT_RE,
   PREFECTURE_SHORT_TO_REGION_MAP,
   PREFECTURE_TO_REGION_MAP,
+  INLAND_PREFECTURE_CODES,
   REGIONS,
 } from './constants';
 
@@ -37,6 +38,8 @@ export {
 export {
   extractPrefectureCode,
   lookupArea,
+  prefectureNameOf,
+  prefectureShortName,
   to2DigitPrefCode,
   to5DigitPrefCode,
   PREFECTURE_LIST_2DIGIT,

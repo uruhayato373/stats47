@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
@@ -234,7 +235,7 @@ export function LocalFinanceDashboard({
                   chart={<MiniLineChart points={points} unit={meta.unit} />}
                 />
                 <ChartFooter
-                  rankingLink={`/ranking/${meta.rankingKey}`}
+                  rankingLink={hrefFor("ranking", { rankingKey: meta.rankingKey })}
                   rankingLabel={`${meta.label}の定義・ランキング`}
                 />
               </div>

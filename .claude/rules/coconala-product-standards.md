@@ -75,7 +75,7 @@ npm run test:run   --workspace=@stats47/product-factory
 | 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
 | 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
 | 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
-| **実データ未接続パックを status=approved/listed にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。出品可否は `packs.ts` の status と validator の `datasets-missing` 検査で決定し、文書へ商品IDを重複記載しない |
+| **実データ未接続パックを status=approved にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。`packs.ts` の status は商品として完成したか (`cataloged`/`approved`) だけを持ち、公開状態は持たない。ココナラの公開状態の正本は `config/coconala-listings.json` (2026-10-19 撤退で全件 withdrawn。2026-10-27 に `listed` を型から外した) |
 | 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
 | **オーナー承認なしにココナラへ実公開（`--commit`）** | 下書き作成は自動化可・実公開は `--commit` + オーナー承認（§6） |
 | 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |

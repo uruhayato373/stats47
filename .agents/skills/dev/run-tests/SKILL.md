@@ -48,5 +48,5 @@ apps/web および packages のテストを実行する。
 
 - `.claude/rules/local-environment.md`「検証コマンドの粒度」— 対象範囲の正典
 - `apps/web/tests/README.md` — テスト構成・追加指針
-- `apps/web/vitest.config.ts` — Vitest 設定
+- `apps/web/vitest.config.mts` — Vitest 設定
 - `apps/web/playwright.config.ts` — Playwright 設定

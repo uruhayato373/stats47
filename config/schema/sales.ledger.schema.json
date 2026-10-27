@@ -1,63 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "商品の販売台帳",
-  "description": "data/products/sales-ledger.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/products/sales-ledger.json の形状契約。書き手の検証 (packages/product-factory/src/sales/ledger-core.mjs の validateSalesLedger) と同じ条件を形で表す。2026-10-26 に推論版から厳格化 (項目の追加は properties に足してから書く)。productId が出品台帳にあることは config/datasets.mjs の refs が検査する。",
   "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "observations"],
   "properties": {
-    "schemaVersion": {
-      "type": "number"
-    },
+    "schemaVersion": { "const": 1 },
     "observations": {
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "channel", "productId", "periodStart", "periodEnd", "orders", "units", "netRevenueYen", "refunds", "evidencePath", "evidenceSha256", "recordedAt"],
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "channel": {
-            "type": "string"
-          },
-          "productId": {
-            "type": "string"
-          },
-          "periodStart": {
-            "type": "string"
-          },
-          "periodEnd": {
-            "type": "string"
-          },
-          "orders": {
-            "type": "number"
-          },
-          "units": {
-            "type": "number"
-          },
-          "netRevenueYen": {
-            "type": "number"
-          },
-          "refunds": {
-            "type": "number"
-          },
+          "id": { "type": "string", "pattern": "^[a-f0-9]{20}$" },
+          "channel": { "$ref": "common.schema.json#/$defs/salesChannel" },
+          "productId": { "$ref": "common.schema.json#/$defs/nonEmptyString" },
+          "periodStart": { "$ref": "common.schema.json#/$defs/date" },
+          "periodEnd": { "$ref": "common.schema.json#/$defs/date" },
+          "orders": { "type": "integer", "minimum": 0 },
+          "units": { "type": "integer", "minimum": 0 },
+          "netRevenueYen": { "$ref": "common.schema.json#/$defs/yen" },
+          "refunds": { "type": "integer", "minimum": 0 },
+          "kenpRead": { "type": "integer", "minimum": 0 },
           "evidencePath": {
-            "type": "string"
+            "description": "手入力の証跡 (.local/product-sales-evidence/ の下) か、暗号化保管庫の KDP 月次レポート (24 か月の ring)",
+            "type": "string",
+            "pattern": "^(\\.local/product-sales-evidence/.+|vault:kdp/monthly/month-(?:[0-9]|1[0-9]|2[0-3]))$"
           },
-          "evidenceSha256": {
-            "type": "string"
-          },
-          "recordedAt": {
-            "type": "string"
-          }
+          "evidenceSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+          "recordedAt": { "$ref": "common.schema.json#/$defs/datetime" }
         },
-        "required": [
-          "id",
-          "productId"
-        ]
+        "if": { "properties": { "evidencePath": { "pattern": "^vault:" } } },
+        "then": { "properties": { "channel": { "const": "kdp" } } }
       }
     }
-  },
-  "required": [
-    "schemaVersion",
-    "observations"
-  ]
+  }
 }

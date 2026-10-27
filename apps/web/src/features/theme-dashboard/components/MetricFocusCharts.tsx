@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 
 import { lookupArea } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { metricDisplayName, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
@@ -129,13 +130,13 @@ export function MetricFocusCharts({
       contentClassName="space-y-5"
       action={
         <Link
-          href={`/ranking/${metricKey}`}
+          href={hrefFor("ranking", { rankingKey: metricKey })}
           className="text-xs text-primary hover:underline"
           onClick={() =>
             trackNavClick({
               surface: "theme_ranking",
               label: `metric-focus:${metricKey}`,
-              href: `/ranking/${metricKey}`,
+              href: hrefFor("ranking", { rankingKey: metricKey }),
             })
           }
         >

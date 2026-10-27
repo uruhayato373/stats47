@@ -36,6 +36,7 @@
  * 正典: `.claude/todo/backlog.md` の `SEO-META-FACTUAL-GATE-01`
  */
 
+import { prefectureShortName } from "@stats47/area";
 import { isScalePrefixPartOfUnit, scalePrefixMultiplier } from "./unit/unit-semantics";
 
 /** 順位の主張 1 件 */
@@ -96,9 +97,9 @@ function scaleMultiplier(prefix: string | undefined, ssotUnit: string | null | u
 /** SCALE_PREFIX の語彙 (長い順)。正典の表に無い接頭辞は拾わない */
 const SCALE_TOKEN = "兆|千億|百億|十億|億|千万|百万|十万|万|千|百|十";
 
-/** 「北海道」と「北海」を同一視する (表記ゆれで誤検知しない) */
+/** 「東京都」と「東京」を同一視する (表記ゆれで誤検知しない)。短縮は `@stats47/area` の単一実装に従う */
 function normalizeAreaName(name: string): string {
-  return name.trim().replace(/[都道府県]$/, "");
+  return prefectureShortName(name.trim());
 }
 
 function near(a: number, b: number, tol: number): boolean {

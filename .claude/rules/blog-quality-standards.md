@@ -678,6 +678,9 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | **出典: 統計表 ID が e-Stat に実在し、近くの統計名と一致** | 機械 | blocker | `lintStatsTableIds` |
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
+| タイトル: 年の違う図を並べた記事で title/seoTitle に年が 1 つだけ (図の年と一致) | 機械 | warn | `lintMixedYearTitle` (`title-year-lint.mjs`)。2026-10-26 実測 公開済み 11・送り箱 2 件。正当な並べ方も含むため blocker 化はオーナー判断 |
+| 数値: 図の値を上位概念の名前 (「スルメイカ」→「イカ類」) で呼ばない | 機械 | warn | `lintHypernymMetricNames` (`metric-name-lint.mjs`)。同文に図の値があるときだけ。実測 0 件 |
+| 数値: 「N年と比べ」の N が時系列の期間内の極値 (極値と明示した比較は除外) | 機械 | warn | `lintExtremeBaseYear` (`metric-name-lint.mjs`)。実測 0 件 |
 | callout の個数 | **critic** | — | 最低数を強制しない。必要性と情報量を意味判断する |
 | callout の連続配置禁止 (通常本文・見出し・図表を挟む) | 機械 | blocker | `lintConsecutiveCallouts` |
 | callout の中身が定型でない | **critic** | — | 数は数えられるが情報量は測れない |

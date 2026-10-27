@@ -1,5 +1,6 @@
 "use client";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ExternalLink } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -62,7 +63,7 @@ function SourceName({
 }) {
   const nameClass = "font-medium text-foreground underline-offset-2 hover:text-primary hover:underline";
   if (entry.surveyId && isLinkableSurveyId(entry.surveyId)) {
-    const href = `/survey/${entry.surveyId}`;
+    const href = hrefFor("survey", { surveyKey: entry.surveyId });
     // 出典を確かめに行った読者が本文へ戻れるよう、サイト内の調査ページも新しいタブで開く
     return (
       <Link

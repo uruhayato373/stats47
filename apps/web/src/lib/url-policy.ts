@@ -17,6 +17,7 @@
  */
 
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { CATEGORY_KEYS, type CategoryKey } from '@stats47/data-configs/categories';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
@@ -41,33 +42,24 @@ import { UNPUBLISHED_BLOG_SLUGS } from '@/config/unpublished-blog-slugs';
 export const MIN_INDEXABLE_TAG_ARTICLES = 5;
 
 /**
+ * エリア×カテゴリ (都道府県レベル) で **インデックス対象から外す** カテゴリと理由。
+ * 外すときはここに理由付きで書く (url-policy.test.ts が理由の存在と CATEGORY_KEYS 実在を検査する)。
+ */
+export const NON_INDEXABLE_AREA_CATEGORIES: Readonly<Partial<Record<CategoryKey, string>>> = {};
+
+/**
  * インデックス対象のエリア×カテゴリ（都道府県レベル）。
  * middleware（200 で返す）と sitemap（出力する）で完全一致させる。
+ * 17 軸 (`CATEGORY_KEYS`) から `NON_INDEXABLE_AREA_CATEGORIES` を除いて導出する (手写しの一覧を持たない)。
  *
  * 2026-06-02 全17カテゴリに拡張:
  *   page_components が全カテゴリ設定済み（各9〜21コンポーネント）のため
  *   thin content 懸念なし。47×17=799 URL を sitemap/indexing 対象に追加。
  *   city-category は municipality×category で規模が大きいため population/economy 維持。
  */
-export const INDEXABLE_AREA_CATEGORIES = [
-  'population',
-  'economy',
-  'laborwage',
-  'construction',
-  'landweather',
-  'socialsecurity',
-  'energy',
-  'tourism',
-  'administrativefinancial',
-  'agriculture',
-  'commercial',
-  'educationsports',
-  'ict',
-  'infrastructure',
-  'international',
-  'miningindustry',
-  'safetyenvironment',
-] as const;
+export const INDEXABLE_AREA_CATEGORIES: readonly CategoryKey[] = CATEGORY_KEYS.filter(
+  (key) => !(key in NON_INDEXABLE_AREA_CATEGORIES)
+);
 
 const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES

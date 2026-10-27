@@ -2,7 +2,10 @@
 name: feedback_windows_script_portability
 description: Windows でスクリプトが落ちる 3 パターン (URL pathname の先頭スラッシュ / npx の spawn / Mac パス直書き) と、それぞれの正しい書き方
 metadata:
+  node_type: memory
   type: feedback
+  originSessionId: 16158fde-7e33-483a-8476-fae0c5a86895
+  modified: 2026-10-27T02:05:20.619Z
 ---
 
 Mac では動くが **Windows では確実に落ちる**書き方が 3 つある。いずれも 2026-07-28 に実際に
@@ -27,5 +30,12 @@ Windows で初めて実行したときに毎回デバッグからやり直しに
   組み合わせて起動する。`.cmd` への置換は Node 22 で `EINVAL` になるため採用しない。
   回帰テストは `.claude/scripts/lib/__tests__/preflight-commit.test.mjs` の
   `resolveInvocation` ケースで、Windows の npm / npx が shell を介さず Node CLI に解決されることを固定する。
+- **パス区切りの比較 (2026-10-27 追記)**: `path.join` / `path.relative` は Windows で `\` を返すが、
+  TypeScript の `resolveModuleName` は `/` を返す。`\` の定数と `endsWith` で比べると Windows だけ一致せず、
+  境界テストの陽性対照が落ち、`node_modules` の除外も効かなかった (CI の Linux では通るので気づけない)。
+  台帳に書く相対パスも `\` のまま入りかけた (`.claude/scripts/sns/lib/material-reconciliation.mjs`)。
+  比較・正規表現・台帳に書く前に `/` へそろえる: `split(path.sep).join("/")` か `replace(/\\/g, "/")`。
+  `replaceAll` は tsconfig の lib が es2021 未満のパッケージ (product-factory・ranking) で型エラーになるので使わない。
+- `git grep` の pathspec `apps/*/src` はディレクトリの中身に当たらない。`:(glob)apps/*/src/**` と書く。
 - 会社 Windows PC の web dev は Windows の proxy credentials・証明書ストアを使う R2 gateway を自動起動する
   (`apps/web/scripts/dev-server.ts`、正典 `.claude/rules/local-environment.md`)。

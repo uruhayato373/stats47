@@ -16,6 +16,7 @@
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import { metricDisplayName } from "@stats47/ranking";
 import { ChevronRight } from 'lucide-react';
@@ -128,7 +129,7 @@ export default function RankingIndexPage() {
               <div key={category.categoryKey}>
                 <h3 className="mb-1 flex items-baseline gap-2 border-b border-border pb-1">
                   <Link
-                    href={`/category/${category.categoryKey}`}
+                    href={hrefFor('category', { categoryKey: category.categoryKey })}
                     className="text-sm font-bold hover:text-primary"
                   >
                     {category.categoryName}
@@ -150,7 +151,7 @@ export default function RankingIndexPage() {
                         ・
                       </span>
                       <Link
-                        href={`/ranking/${representative.rankingKey}`}
+                        href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
                         className="hover:text-primary hover:underline"
                       >
                         {metricDisplayName(representative)}
@@ -159,7 +160,7 @@ export default function RankingIndexPage() {
                   ))}
                 </ul>
                 <Link
-                  href={`/category/${category.categoryKey}`}
+                  href={hrefFor('category', { categoryKey: category.categoryKey })}
                   className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:underline"
                 >
                   {category.categoryName}の全 {category.count.toLocaleString()}{' '}

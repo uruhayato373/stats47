@@ -18,6 +18,7 @@ import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { OVERLAY_PATH_PATTERN } from "./metric-release-paths.mjs";
 
 import { R2_PUBLIC_BASE_URL } from "../../.claude/scripts/lib/site-config.cjs";
 
@@ -46,7 +47,7 @@ export function localPageComponentsFile(urlPath, localDir = LOCAL_DIR) {
 
 /** Only generated metric metadata (and the city databooks built from it) is overlaid; observation data still comes from R2. */
 export function localMetricSnapshotFile(urlPath, snapshotDir = LOCAL_SNAPSHOT_DIR) {
-  if (!/^\/app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json|areas\/[0-9]{5}\/cities\/[0-9]{5}\/databook\.json)$/.test(urlPath)) return null;
+  if (!OVERLAY_PATH_PATTERN.test(urlPath)) return null;
   const target = path.resolve(snapshotDir, ...urlPath.slice(1).split('/'));
   if (!target.startsWith(path.resolve(snapshotDir) + path.sep)) return null;
   return fs.existsSync(target) ? target : null;

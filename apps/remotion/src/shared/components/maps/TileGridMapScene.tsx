@@ -25,6 +25,7 @@ import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
 import { SITE } from "@stats47/types";
 import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
+import { to2DigitPrefCode } from "@stats47/area";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -87,10 +88,8 @@ const SAFE_AREA = {
  * 都道府県コードを2桁に正規化
  * "01000" → "01", "13" → "13", 1 → "01"
  */
-function normalizePrefId(code: string | number): string {
-  const s = String(code).replace(/0{3}$/, "");
-  return s.padStart(2, "0");
-}
+/** `@stats47/area` の単一実装 ("01000" / "13" / 1 → "01" / "13" / "01") */
+const normalizePrefId = to2DigitPrefCode;
 
 /** areaCode → RankingEntry の Map を構築（2桁正規化キー） */
 function buildEntryMap(entries: RankingEntry[]): Map<string, RankingEntry> {

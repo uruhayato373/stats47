@@ -33,8 +33,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@stats47/utils": "*",
-    "@stats47/types": "*"
+    "@stats47/area": "*",
+    "@stats47/types": "*",
+    "@stats47/utils": "*"
   },
   "devDependencies": {
     "typescript": "^5.0.0",

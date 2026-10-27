@@ -21,7 +21,7 @@ interface PageProps {
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'あなたの県を人口・地価・洪水・駅で比較 | stats47地域分析',
+  title: 'あなたの県を人口・地価・洪水・駅で比較 | 地域分析',
   description:
     '都道府県を1つ選び、人口変化、住宅地点と人口減少の重なり、浸水想定区域内人口、駅800m圏人口を確認し、県内の判定地図へ進みます。',
   alternates: { canonical: '/geo/compare' },

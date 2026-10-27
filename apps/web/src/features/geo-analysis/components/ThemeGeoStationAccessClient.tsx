@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
@@ -34,7 +35,7 @@ interface Props {
 }
 
 const slug = 'population-station-access';
-const canonicalPath = `/geo/${slug}`;
+const canonicalPath = hrefFor('geo', { analysisSlug: slug });
 const metricKeys = [
   'stationAccessShare2020',
   'stationAccessShare2050',

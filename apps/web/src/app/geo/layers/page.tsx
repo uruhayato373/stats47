@@ -20,7 +20,7 @@ import type { Metadata } from 'next';
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
-  title: 'GISを探す | stats47',
+  title: 'GISを探す',
   description:
     '土地・自然、区域・防災、施設、交通、統計のGISを一覧から選び、位置・形状・属性を単体の地図で確認できます。',
   alternates: { canonical: '/geo/layers' },

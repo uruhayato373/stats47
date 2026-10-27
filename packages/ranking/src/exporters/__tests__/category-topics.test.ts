@@ -32,7 +32,7 @@ function bakeCategory(categoryKey: string) {
     (config) =>
       config.isActive !== false &&
       (config.category === categoryKey ||
-        (config.additionalCategories ?? []).includes(categoryKey)),
+        (config.additionalCategories ?? []).some((key) => key === categoryKey)),
   );
 
   const topicKeyByRankingKey = new Map<string, string>();

@@ -13,7 +13,8 @@ const VALIDATOR = path.join(
 );
 const tempDirs: string[] = [];
 // CIのcold startではtsx起動と80調査の全量検証が10秒を超えるため、CLI統合テストだけに適用する。
-const CLI_TEST_TIMEOUT_MS = 30_000;
+// Windows では 1 回 41 秒かかり 30 秒で毎回落ちていた (2026-10-27 実測) ので 90 秒にする。
+const CLI_TEST_TIMEOUT_MS = 90_000;
 
 function runValidator(args: string[], env: Record<string, string> = {}) {
   return spawnSync(process.execPath, [TSX_CLI, VALIDATOR, '--json', ...args], {

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T17:01:59.095Z",
+  "generatedAt": "2026-10-26T19:06:36.425Z",
   "plan": {
     "experimentId": "ranking-labor-lane-pilot-2026w39",
     "kind": "creative",
-    "status": "active",
+    "status": "closed",
     "portfolioPilot": true,
     "surface": "ranking-sidebar",
     "targetLocation": "sidebar-bottom",
@@ -42,7 +42,8 @@
     "confounds": [],
     "owner": "affiliate-manager",
     "winnerVariantId": null,
-    "notes": "2026-09-20にstats47 SID638943で成果条件・掲載条件・canonical 300x250原稿を実機確認。既存ranking sidebar枠だけを1 CTAとして再利用し、追加mobile枠・有料広告出稿は行わない。"
+    "notes": "2026-09-20にstats47 SID638943で成果条件・掲載条件・canonical 300x250原稿を実機確認。既存ranking sidebar枠だけを1 CTAとして再利用し、追加mobile枠・有料広告出稿は行わない。 2026-10-19 にアフィリエイトを A8 と楽天へ集約し (ASP-CONSOLIDATE-A8-RAKUTEN-01・commit 6f69fa2d2)、両 variant のもしもの広告を isActive:false にしたため、母数に届く前に勝者なしで終了した。2026-10-26 に registry を closed へ揃えた (affiliate-ga4-weekly が無効な実験として止めていたため)。",
+    "closedAt": "2026-10-19"
   },
   "feasibility": {
     "status": "feasible",

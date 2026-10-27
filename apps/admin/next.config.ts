@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   // 同じ .next を共有すると起動中の webpack runtime が chunk を失い Runtime Error になる。
   distDir: process.env.NEXT_DIST_DIR?.trim() || ".next",
   transpilePackages: ["@stats47/data-configs", "@stats47/types"],
-  eslint: { ignoreDuringBuilds: true },
 };
 
 export default nextConfig;

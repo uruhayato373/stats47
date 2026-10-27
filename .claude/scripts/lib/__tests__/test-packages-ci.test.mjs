@@ -10,9 +10,9 @@ test('CI includes new package projects and rejects coverage scopes without a blo
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const write = (p, value) => { const target = path.join(root, p); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, value); };
   write('.claude/config/critical-module-coverage.json', JSON.stringify({ modules: [{ workspace: 'packages/data-configs' }] }));
-  write('vitest.config.ts', `["packages/data-configs/vitest.config.ts", "packages/new/vitest.config.ts"]`);
+  write('vitest.config.mts', `["packages/data-configs/vitest.config.mts", "packages/new/vitest.config.mts"]`);
   for (const name of ['data-configs', 'new']) {
-    write(`packages/${name}/vitest.config.ts`, 'export default {}');
+    write(`packages/${name}/vitest.config.mts`, 'export default {}');
     write(`packages/${name}/package.json`, JSON.stringify({ name: `@stats47/${name}` }));
   }
   assert.deepEqual(packageProjects(root), ['@stats47/data-configs', '@stats47/new']);

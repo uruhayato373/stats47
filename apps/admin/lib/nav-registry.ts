@@ -12,7 +12,8 @@ export type NavItem = { href: string; label: string };
 /** 折りたたみの第二階層 (公式 SidebarMenuSub)。現在地を含む枝だけ開いて表示する */
 export type NavBranch = { label: string; children: readonly NavItem[] };
 export type NavEntry = NavItem | NavBranch;
-export type NavGroup = { title: string | null; items: readonly NavEntry[] };
+/** href はグループ名のリンク先 (領域の概要 /domains/<id>)。ホームのグループは持たない */
+export type NavGroup = { title: string | null; href?: string; items: readonly NavEntry[] };
 
 export function isBranch(entry: NavEntry): entry is NavBranch {
   return "children" in entry;
@@ -35,6 +36,7 @@ export const NAV_GROUPS: readonly NavGroup[] = [
   { title: null, items: [{ href: "/", label: "ホーム" }] },
   ...(domainsConfig.domains as readonly Domain[]).map((d) => ({
     title: d.label,
+    href: `/domains/${d.id}`,
     items: d.nav.map((n): NavEntry =>
       "channels" in n
         ? channelBranch(n.channels)

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-10-25T17:01:57.863Z",
+  "generatedAt": "2026-10-26T19:06:35.211Z",
   "inventorySnapshot": "data/affiliate/inventory-latest.json",
   "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-10-24.json",
   "freshness": {
@@ -33,32 +33,22 @@
     "active": [],
     "maturing": [],
     "readyToDecide": [],
-    "invalid": [
-      {
-        "experimentId": "ranking-labor-lane-pilot-2026w39",
-        "status": "invalid",
-        "reasons": [
-          "ssot-variants-insufficient(0)",
-          "registry-ssot-variant-mismatch"
-        ]
-      }
-    ],
+    "invalid": [],
     "inconclusive": [],
     "closed": [
       {
         "experimentId": "blog-inbody-format",
         "status": "closed",
         "winnerVariantId": "banner"
+      },
+      {
+        "experimentId": "ranking-labor-lane-pilot-2026w39",
+        "status": "closed",
+        "winnerVariantId": null
       }
     ]
   },
-  "recommendedActions": [
-    {
-      "id": "fix-experiment-config",
-      "reason": "ranking-labor-lane-pilot-2026w39",
-      "command": "/manage-affiliate-experiment plan"
-    }
-  ],
+  "recommendedActions": [],
   "ga4Totals": {
     "impressions": 4239,
     "clicks": 8,

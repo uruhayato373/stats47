@@ -44,7 +44,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
       - name: Install dependencies
         run: npm ci
@@ -64,7 +64,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
       - name: Install dependencies
         run: npm ci
@@ -103,7 +103,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
       - name: Install dependencies
         run: npm ci
@@ -154,7 +154,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
       # job env の NODE_ENV=production だと npm ci が devDependencies を省く (2026-09-20 実測: 722 件のみ・
       # 他 job は 1661 件)。rimraf が無く build 前の workers:clean が exit 127 で落ち、web E2E が 1 本も動かなかった。
@@ -212,7 +212,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
 
       - name: 📦 Install dependencies
@@ -278,7 +278,7 @@ jobs:
         if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: npm
       - name: Install audit dependencies
         if: steps.plan.outputs.run == 'true' || steps.plan.outputs.replay == 'true'
@@ -528,7 +528,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -741,7 +741,7 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: "22"
           cache: 'npm'
 
       - name: 📦 Install dependencies

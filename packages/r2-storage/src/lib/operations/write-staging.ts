@@ -25,7 +25,11 @@ export interface WriteR2StagingResult {
   path: string;
 }
 
-function resolveStagingRoot(explicitRoot: string | undefined): string {
+/**
+ * staging のルート (リポジトリ直下の `.local/r2`) を返す。書き込み (`writeR2Staging`)・ローカル経路の
+ * list / delete・`push-r2-wrangler.ts` が同じ場所を見るよう、この関数だけで解決する (R2-LOCAL-ROOT-UNIFY-01)。
+ */
+export function resolveR2StagingRoot(explicitRoot?: string): string {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs") as typeof import("fs");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -68,7 +72,7 @@ export async function writeR2Staging(
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const path = require("path") as typeof import("path");
 
-  const filePath = path.join(resolveStagingRoot(options?.root), key);
+  const filePath = path.join(resolveR2StagingRoot(options?.root), key);
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const data =
     typeof body === "string" || Buffer.isBuffer(body)

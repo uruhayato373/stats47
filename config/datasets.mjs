@@ -14,6 +14,7 @@
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い
  *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
  *                    git の追跡ファイルに当たらなくてよい (2026-10-18 オーナー判断: 画像まわりの派生データは R2)
+ *           refs:   この台帳の ID が指す先 (外部キー相当。2026-10-26)。下の「REFS の書き方」
  *
  * 検査は `npm run check-datasets` (.claude/scripts/lib/check-datasets.mjs)。GOVERNED に当たる追跡ファイルは
  * ちょうど 1 行に当たらなければならず、行は 1 件以上のファイルに当たらなければならない。
@@ -105,7 +106,76 @@ export const SLOTS = {
   "{**}": ".+",
 };
 
+/**
+ * REFS の書き方 (台帳どうしの ID 参照。check-datasets が参照先の実在を検査し、無ければ error で止める)
+ *
+ *   refs: [{ field, to, key?, where?, unless?, parse?, copies?, severity?, why? }]
+ *     field    この台帳のファイルの中の ID の場所。"." 区切りで、`name[]` は配列の各要素、`*` はオブジェクトの各値、
+ *              末尾の `$keys` はオブジェクトのキー (例: "posts[].parent_post_id" / "listings.$keys")。値が無い要素は見ない
+ *     to       参照先。台帳の id か "registry:<REGISTRIES の名前>" (TS 側の正本)
+ *     key      参照先の台帳で ID の並ぶ場所 (field と同じ書き方)。registry には書かない
+ *     where    field を持つ要素の兄弟の項目がこの値のときだけ検査する (例: { channel: "kdp" })。値を配列にすると
+ *              そのどれか (例: { domain: ["ranking-quiz", "map-carousel"] })
+ *     unless   where と同じ書き方で、合う要素を検査しない (例: { status: ["posted", "deleted"] })
+ *     parse    "list" = 値が配列・JSON 配列の文字列・カンマ区切りの文字列のどれでも ID の並びとして読む
+ *     copies   参照先の要素の写しとして持つ項目。値が参照先と違えば error (二重の事実のずれを止める)
+ *     severity "warn" = 既存データの違反を一覧するだけで止めない。why に理由を書く (書かない参照は error)。
+ *              違反を個別に許す一覧は作らない (縮小専用の規律と同じく、違反を隠さない)
+ */
 const d = (id, path, kind, domain, target, description, opts = {}) => ({ id, path, kind, domain, target, description, ...opts });
+
+/**
+ * 参照先にする TS 側の正本。check-datasets は素の node で動くので TS を import せず、本文を正規表現で読む
+ * (pattern の 1 番目の括弧が ID。between を書くと、その 2 つの印の間だけを読む)。読んだ件数が 0 なら error。
+ * union: [名前] は他の registry の ID を合わせる (参照先が 2 つの正本のどちらかにあればよいとき。union の入れ子は不可)。
+ * 正規表現と TS の値が一致することは packages/product-factory/tests/dataset-registries.test.ts が固定する
+ * (読み方がずれると、参照切れの誤検知か照合漏れになる)。
+ */
+export const REGISTRIES = {
+  metrics: {
+    description: "都道府県の指標 (METRICS_REGISTRY のキー)",
+    files: ["packages/data-configs/src/registry.ts"],
+    between: ["AUTOGEN_REGISTRY_START", "AUTOGEN_REGISTRY_END"],
+    pattern: '^\\s*"([a-z0-9][a-z0-9-]*)":',
+  },
+  "product-ids": {
+    description: "商品ファクトリーのテーマパック (ALL_PRODUCTS) と Geo サービス (GEO_SERVICE_OFFER) の ID",
+    files: ["packages/product-factory/src/catalog/products/packs.ts", "packages/product-factory/src/channels/geo/service-offer.ts"],
+    pattern: "^\\s*id:\\s*[\"'](P-\\d{2}|GEO-[A-Z]+-\\d{2})[\"']",
+  },
+  "ranking-slug-redirects": {
+    description: "公開後に置き換えた旧 ranking slug (RANKING_SLUG_REDIRECTS のキー。現行ページへ 301 する)",
+    files: ["apps/web/src/config/ranking-redirects.ts"],
+    pattern: "^\\s*'([a-z0-9][a-z0-9-]*)':\\s*'",
+  },
+  "ranking-content-keys": {
+    description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
+    union: ["metrics", "ranking-slug-redirects"],
+  },
+  "geo-campaign-metric-names": {
+    description: "Geo 分析キャンペーン (BUSINESS_PLAN_M1_ANALYSES) の metricKeys の文字列リテラル (Geo の集計値の名前)",
+    files: ["packages/data-configs/src/business-plan/m1.ts"],
+    pattern: "^      '([a-z][A-Za-z0-9]*)',$",
+  },
+  "geo-post-metric-keys": {
+    description: "Geo の投稿が指してよい指標 (都道府県の指標と Geo 分析の集計値の名前)",
+    union: ["metrics", "geo-campaign-metric-names"],
+  },
+  "affiliate-ad-experiment-ids": {
+    description: "アフィリエイト広告 (AFFILIATE_ADS) が持つ A/B 実験の ID",
+    files: ["apps/web/scripts/affiliate-ads-data.ts"],
+    pattern: '"experimentId":\\s*"([^"]+)"',
+  },
+};
+
+/**
+ * TS 側の正本から台帳を指す参照 ({ from: "registry:<名前>", to, key, severity?, why? })。from の ID がすべて参照先にあること。
+ */
+export const REGISTRY_REFS = [
+  // 広告の実験は実験台帳に停止条件を事前登録してから回す。未登録は R2 反映時 (build-affiliate-operations-state) にしか
+  // 見えなかったので、PR の時点で止める (2026-10-26)
+  { from: "registry:affiliate-ad-experiment-ids", to: "affiliate.experiments", key: "experiments[].experimentId" },
+];
 
 const SA = ".claude/skills/analytics";
 const SM = ".claude/state/metrics";
@@ -114,7 +184,11 @@ export const DATASETS = [
   // ── config/ : 事業の台帳と設定 ──
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
-  d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態", { schema: "config/schema/coconala.listings.schema.json" }),
+  d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態", {
+    schema: "config/schema/coconala.listings.schema.json",
+    // 出品のキーは商品ファクトリーのカタログ (P-NN) か Geo サービスの商品。孤立したキーは販売カタログが黙って読み飛ばしていた
+    refs: [{ field: "listings.$keys", to: "registry:product-ids" }],
+  }),
   d("coconala.account", P.COCONALA_ACCOUNT, "config", "product", "config", "ココナラの期待アカウント (account assert)", { schema: "config/schema/coconala.account.schema.json" }),
   d("coconala.profile", P.COCONALA_PROFILE, "config", "product", "config", "ココナラの公開プロフィール文面"),
   d("coconala.assets", `${P.COCONALA_ASSETS_DIR}/{name}`, "config", "product", "config", "ココナラのプロフィール・商品画像と生成プロンプト"),
@@ -143,7 +217,11 @@ export const DATASETS = [
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "config", "product", "data", "上の台帳の JSON Schema"),
   d("note.cover-policies", "data/note/cover-policies.json", "config", "product", "data", "noteカバーのカテゴリ別方針ID・版・プロンプト", { schema: "data/note/cover-policies.schema.json" }),
   d("note.cover-policies-schema", "data/note/cover-policies.schema.json", "config", "product", "data", "カバー方針のJSON Schema"),
-  d("note.hashtags", "config/note-hashtags/{name}.json", "config", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", { schema: "config/schema/note.hashtags.schema.json" }),
+  d("note.hashtags", "config/note-hashtags/{name}.json", "config", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)", {
+    schema: "config/schema/note.hashtags.schema.json",
+    // title・noteUrl・vertical は記事台帳の写し。記事の題名を変えたら同じ差分で直す (2026-10-26 に 8 件ずれていた)
+    refs: [{ field: "slug", to: "note.articles", key: "articles[].key", copies: ["title", "noteUrl", "vertical"] }],
+  }),
   d("metrics.definitions", `${P.METRIC_DEFINITIONS_DIR}/{name}.ts`, "config", "data", "data", "指標ID・取得元・単位・表示方針の型付き正本"),
   d("metrics.defaults", `${P.METRIC_DEFINITIONS_DIR}/defaults/{name}.ts`, "config", "data", "data", "指標表示の共通既定値。指標ごとに上書き可能"),
   d("metrics.policy", `${P.METRIC_DEFINITIONS_DIR}/policy/{name}.ts`, "config", "data", "data", "指標の極性など、根拠付きの判断方針"),
@@ -155,9 +233,9 @@ export const DATASETS = [
   d("content.tags", "data/content/tags.json", "config", "data", "data", "タグの不変ID・表示名・既存URLキー・別名", { schema: "data/content/schema/tags.schema.json" }),
   d("content.routes", "data/content/routes.json", "config", "data", "data", "全公開ページ種別のIDとURLパラメータ契約", { schema: "data/content/schema/routes.schema.json" }),
   d("content.navigation", "data/content/navigation.json", "config", "data", "data", "回遊関係の意味・優先度・件数と明示的な紐付け", { schema: "data/content/schema/navigation.schema.json" }),
-  d("content.entities", "data/content/entities.json", "state", "data", "data", "各正本から再生成するページID索引。観測値・記事本文は含まない"),
+  d("content.entities", "data/content/entities.json", "state", "data", "data", "各正本から再生成するページID索引。観測値・記事本文は含まない", { schema: "data/content/schema/entities.schema.json" }),
   d("content.external", "data/content/external.json", "state", "data", "data", "stats47 の外の公開物 (note 記事・SNS の投稿) の ID と指標・記事への関係。note のカタログと data/sns/posts.json から再生成"),
-  d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む"),
+  d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む", { schema: "data/content/schema/pages.schema.json" }),
   d("content.schema", "data/content/schema/{name}.schema.json", "config", "data", "data", "ページ・タグ・回遊台帳の形状契約"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
   d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "config", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)", { schema: "config/schema/themes.selection-viewpoints.schema.json" }),
@@ -242,7 +320,14 @@ export const DATASETS = [
   d("ga4.affiliate-snapshots", "data/affiliate/ga4-affiliate-{date}.json", "series", "affiliate", "data", "GA4 のアフィリエイト実測の生 JSON (2026-09-14 以降は R2)"),
   d("affiliate.inventory", "data/affiliate/inventory-{date}.json", "state", "affiliate", "data", "広告在庫の棚卸しの日付ごとの記録 (最新は affiliate.audits)"),
   d("affiliate.audits", "data/affiliate/{name}-latest.json", "state", "affiliate", "data", "広告の compliance・配置・関連度・突合などの最新の検査結果"),
-  d("sales.ledger", "data/products/sales-ledger.json", "ledger", "product", "data", "商品の販売台帳", { schema: "config/schema/sales.ledger.schema.json" }),
+  d("sales.ledger", "data/products/sales-ledger.json", "ledger", "product", "data", "商品の販売台帳", {
+    schema: "config/schema/sales.ledger.schema.json",
+    // 販売の観測は出品台帳にある商品だけを指す。CLI の手入力 (sales/cli.ts) は書くときに確かめるが、自動記録と手編集は通らない
+    refs: [
+      { field: "observations[].productId", where: { channel: "kdp" }, to: "kdp.listings", key: "listings.$keys" },
+      { field: "observations[].productId", where: { channel: "coconala" }, to: "coconala.listings", key: "listings.$keys" },
+    ],
+  }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
   d("products.interviews", "data/products/admin-stat-interviews.json", "evidence", "product", "data", "行政実務向け商品の聞き取り"),
   d("kindle.archives", "data/products/kindle-archives.json", "ledger", "product", "data", "KDP へ送った版の暗号化保全の台帳", { schema: "config/schema/kindle.archives.schema.json" }),
@@ -250,7 +335,33 @@ export const DATASETS = [
   d("kdp.weekly-publication", "data/products/kdp-weekly-publication.json", "state", "product", "data", "KDP 週次公開の判定"),
   d("products.status", "data/products/{name}-status.json", "state", "product", "data", "商品・書籍・note の生成と販売準備の状態"),
   d("kindle.verification", "data/products/kindle-{name}-verification.json", "evidence", "product", "data", "Kindle 版ごとの検証記録"),
-  d("sns.posts", "data/sns/posts.json", "ledger", "sns", "data", "SNS 投稿台帳 (投稿履歴の正本)", { schema: "data/sns/posts.schema.json" }),
+  d("sns.posts", "data/sns/posts.json", "ledger", "sns", "data", "SNS 投稿台帳 (投稿履歴の正本)", {
+    schema: "data/sns/posts.schema.json",
+    refs: [
+      { field: "posts[].parent_post_id", to: "sns.posts", key: "posts[].id" },
+      // 投稿が使った指標。外部公開物の索引 (data/content/external.json) が指標へ関係を張る入力。参照先は domain で分ける
+      // (2026-10-27。それまでは全 domain を指標の registry と照合し、Geo の集計値名などで 92 件を warn にしていた)。
+      //   geo         Geo 分析の集計値の名前 (floodExposureShare2050 など) か都道府県の指標
+      //   それ以外     都道府県の指標
+      { field: "posts[].metric_keys", parse: "list", unless: { domain: "geo" }, to: "registry:metrics" },
+      { field: "posts[].metric_keys", parse: "list", where: { domain: "geo" }, to: "registry:geo-post-metric-keys" },
+      // content_key が指標の key そのものである domain (棒グラフレース・クイズ・地図カルーセル)
+      {
+        field: "posts[].content_key", where: { domain: ["bar-chart-race", "ranking-quiz", "ranking-quiz-reel", "map-carousel"] },
+        to: "registry:metrics",
+      },
+      // ranking の domain は、これから出す投稿 (draft・scheduled) を現行の指標と照合する
+      { field: "posts[].content_key", where: { domain: "ranking" }, unless: { status: ["posted", "deleted"] }, to: "registry:metrics" },
+      // 外に出た記録 (posted・deleted) は書き換えないので、旧 slug (301 で現行の指標へ届く) も許す。残る warn は参照先の正本が無いもの:
+      // YouTube の棒グラフレース動画の key (bcr-<指標>-<始年>-<終年>。指標は metric_keys 側で照合する) 31 件と、
+      // note の記事 key・YouTube の動画 key を ranking として記録した 2 件 (2026-10-27 時点)
+      {
+        field: "posts[].content_key", where: { domain: "ranking", status: ["posted", "deleted"] }, to: "registry:ranking-content-keys",
+        severity: "warn",
+        why: "投稿済みの記録は書き換えない。棒グラフレース動画の key など、参照先の正本が無い過去の記録だけが残る",
+      },
+    ],
+  }),
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
   d("sns.image-replacements", "data/sns/image-replacements/{name}.json", "evidence", "sns", "data", "予約済み投稿の画像差し替えの記録 (決定・対象 ID・差し替え前後)"),
   d("sns.material-reconciliation", "data/sns/material-reconciliation-{date}.json", "series", "sns", "data", "素材キーから投稿IDへの照合証跡。候補の正本はposts.json", { planned: true }),
@@ -273,6 +384,7 @@ export const DATASETS = [
   d("business-plan.state", "data/business-plan/{name}.json", "state", "strategy", "data", "事業計画 SSOT から派生した最新状態と KPI ツリー"),
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
   d("business.experiments", "data/business/experiments.json", "ledger", "strategy", "data", "実験の台帳 (PDCA)", { schema: "config/schema/business.experiments.schema.json" }),
+  d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
@@ -302,7 +414,7 @@ export const DATASETS = [
   d("municipalities.ai-content", "data/municipalities/ai-content/{name}.json", "config", "data", "data", "市区町村ランキングの解説の本文 (1 指標 1 ファイル。デプロイ時に配信値で監査して通ったものだけ R2 へ)", { schema: "data/municipalities/schema/ai-content.schema.json" }),
   d("municipalities.ai-content-schema", "data/municipalities/schema/ai-content.schema.json", "config", "data", "data", "上の解説の JSON Schema"),
   d("note.draft-index", "data/note/note-draft-index.json", "state", "product", "data", "note 下書きの索引"),
-  d("note.published-urls", "data/note/note-published-urls.json", "ledger", "product", "data", "note の公開 URL 台帳", { schema: "config/schema/note.published-urls.schema.json" }),
+  d("note.published-urls", "data/note/note-published-urls.json", "state", "product", "data", "note の公開 URL の派生索引 (記事台帳 data/note/articles.json から generate-note-catalog.ts が作る。手編集しない)", { schema: "config/schema/note.published-urls.schema.json" }),
   d("note.r2-missing", "data/note/r2-missing-inventory.md", "report", "product", "data", "R2 に無い note 素材の一覧"),
   d("ogp.inventory", "data/ogp/{name}", "state", "site", "data", "OGP・カード画像の棚卸し"),
   d("provenance.queue", "data/provenance/{name}", "state", "data", "data", "出典・再現性の是正キュー"),

@@ -19,6 +19,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
@@ -190,13 +191,14 @@ export function ThemeDashboardTabbed({
   );
 
   // 選択エリアをH1直下に反映するバナー（client-side表示、SSG不変）
-  const areaBanner = selectedAreaName && (
+  // selectedAreaName は selectedPrefectureCode がある時だけ値を持つ (null の検査は型の絞り込み用)
+  const areaBanner = selectedPrefectureCode !== null && selectedAreaName && (
     <div className="flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2 text-sm">
       <MapPin className="h-4 w-4 text-primary shrink-0" />
       <span className="font-medium text-primary">{selectedAreaName}の視点</span>
       <span className="text-muted-foreground text-xs">— データを{selectedAreaName}でフィルタ表示中</span>
       <Link
-        href={`/areas/${selectedPrefectureCode}`}
+        href={hrefFor("area", { areaCode: selectedPrefectureCode })}
         className="ml-auto text-xs text-primary hover:underline shrink-0"
       >
         {selectedAreaName}プロフィール →
@@ -402,7 +404,7 @@ function IndicatorGrid({
             return (
               <SurfaceLinkCard
                 key={key}
-                href={`/ranking/${key}`}
+                href={hrefFor("ranking", { rankingKey: key })}
                 className="block p-3"
               >
                 <div className="text-sm font-medium mb-2 line-clamp-2">

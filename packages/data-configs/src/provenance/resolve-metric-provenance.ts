@@ -17,6 +17,7 @@ import type { MetricConfig, MetricRegistry, SourceConfig } from '../types';
 import { DISPLAYNAME_TO_SURVEY } from '../ssds/displayname-to-survey';
 import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
 import ssdsProvenanceJson from '../ssds/ssds-provenance.generated.json';
+import surveysMasterJson from '../../../ranking/src/data/surveys.json';
 
 export type ProvenanceSurvey = { id: string; name: string };
 
@@ -46,15 +47,35 @@ const ESTAT_PROVENANCE = estatProvenanceJson as {
 };
 const SSDS_TABLE_IDS = new Set(ESTAT_PROVENANCE.ssdsTableIds);
 
+/**
+ * 調査マスタ (packages/ranking/src/data/surveys.json) の id → name。調査名の正本。
+ * 生成 JSON (estat/ssds-provenance.generated.json) は取り込み時の表記 (「人口動態調査」「国勢調査報告」等) を
+ * 焼き込んでいるため、マスタに実在する id は必ずマスタの name で返す (/survey/<id> の見出しと出典表記を揃える)。
+ */
+const SURVEY_MASTER_NAME: ReadonlyMap<string, string> = new Map(
+  (surveysMasterJson as ReadonlyArray<{ id: string; name: string }>).map((s) => [s.id, s.name])
+);
+
+/** 合成 id (マスタに実在しない fallback)。`ssds-src:<原典名>` / `src:<displayName>` */
+export function isSyntheticSurveyId(id: string): boolean {
+  return id.startsWith('ssds-src:') || id.startsWith('src:');
+}
+
+function withMasterName(survey: ProvenanceSurvey): ProvenanceSurvey {
+  const name = SURVEY_MASTER_NAME.get(survey.id);
+  return name && name !== survey.name ? { id: survey.id, name } : survey;
+}
+
 // kind:"kakei-chousa" は家計調査（品目別）= survey マスタの "kakei-chousa" バケット
-const KAKEI_SURVEY: ProvenanceSurvey = {
+// (surveys.json で parentSourceId: "household-survey" = 家計調査の子として明示)
+const KAKEI_SURVEY: ProvenanceSurvey = withMasterName({
   id: 'kakei-chousa',
   name: '家計調査（品目別）',
-};
+});
 
 function dedupe(surveys: ProvenanceSurvey[]): ProvenanceSurvey[] {
   const seen = new Map<string, ProvenanceSurvey>();
-  for (const s of surveys) if (s && !seen.has(s.id)) seen.set(s.id, s);
+  for (const s of surveys) if (s && !seen.has(s.id)) seen.set(s.id, withMasterName(s));
   return [...seen.values()];
 }
 
@@ -74,10 +95,12 @@ export function resolveProvenanceByParams(
 ): ProvenanceSurvey[] {
   if (!statsDataId) return [];
   if (SSDS_TABLE_IDS.has(statsDataId)) {
-    return cdCat01 ? (SSDS_PROVENANCE[cdCat01]?.originalSurveys ?? []) : [];
+    return cdCat01
+      ? (SSDS_PROVENANCE[cdCat01]?.originalSurveys ?? []).map(withMasterName)
+      : [];
   }
   const survey = ESTAT_PROVENANCE.statsDataIdToSurvey[statsDataId];
-  return survey ? [survey] : [];
+  return survey ? [withMasterName(survey)] : [];
 }
 
 function resolveCalculated(
@@ -145,10 +168,10 @@ export function resolveSourceProvenance(
       if (!source.displayName) return [];
       return DISPLAYNAME_TO_SURVEY[source.displayName]
         ? [
-            {
+            withMasterName({
               id: DISPLAYNAME_TO_SURVEY[source.displayName],
               name: source.displayName,
-            },
+            }),
           ]
         : [{ id: `src:${source.displayName}`, name: source.displayName }];
     default:

@@ -1,4 +1,5 @@
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { resolveSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import type { ChartFooterLink } from '@/components/charts/ChartFooter';
@@ -45,6 +46,6 @@ export function resolveChartSourceLinks({
     METRICS_REGISTRY
   ).surveys.map((survey) => ({
     label: survey.name,
-    url: `/survey/${survey.id}`,
+    url: hrefFor('survey', { surveyKey: survey.id }),
   }));
 }

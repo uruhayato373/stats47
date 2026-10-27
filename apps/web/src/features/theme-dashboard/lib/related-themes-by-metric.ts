@@ -4,6 +4,8 @@ import { listThemeCatalogs, listThemesUsingRankingKeys } from "@stats47/data-con
 
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 
+import { themeHref } from "../config/theme-href";
+
 export interface RelatedThemeLink {
   themeKey: string;
   title: string;
@@ -23,5 +25,5 @@ export function listRelatedThemesForRankingKeys(
   return listThemesUsingRankingKeys(rankingKeys, listThemeCatalogs())
     .filter((theme) => KNOWN_THEME_SLUGS.has(theme.key) && theme.key !== options.excludeThemeKey)
     .slice(0, options.limit ?? Number.POSITIVE_INFINITY)
-    .map((theme) => ({ themeKey: theme.key, title: theme.title, href: `/themes/${theme.key}` }));
+    .map((theme) => ({ themeKey: theme.key, title: theme.title, href: themeHref(theme.key) }));
 }

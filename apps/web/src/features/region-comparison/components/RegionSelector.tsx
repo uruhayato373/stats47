@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { SurfaceCard } from "@/components/surface";
 
@@ -79,7 +80,7 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
     const validCodes = codes.filter(Boolean);
     const query = validCodes.length > 0 ? `?areas=${validCodes.join(",")}` : "";
     startTransition(() => {
-      router.push(`/category/${categoryKey}/compare${query}`);
+      router.push(`${hrefFor("category-compare", { categoryKey })}${query}`);
     });
   };
 

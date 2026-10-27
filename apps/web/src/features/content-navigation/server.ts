@@ -7,6 +7,7 @@ import {
   type ContentPage,
   type ContentLink,
 } from '@stats47/data-configs/content';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   selectContentRecommendations,
   type ContentContext,
@@ -40,7 +41,7 @@ async function readPages(context: ContentContext): Promise<ContentPage[]> {
       kind: 'blog',
       key: article.slug,
       title: article.title,
-      href: `/blog/${article.slug}`,
+      href: hrefFor('blog', { slug: article.slug }),
       published: true,
       rankingKeys: (article.rankingRefs ?? []).map((ref) => ref.rankingKey),
       tagIds: contentTagIds(article.tags.map((tag) => tag.tagKey)),

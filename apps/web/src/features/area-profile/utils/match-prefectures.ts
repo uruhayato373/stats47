@@ -1,16 +1,12 @@
+import { prefectureShortName } from "@stats47/area/short-name";
+
 import type { Prefecture } from "@stats47/area";
 
 /**
- * 都道府県名の末尾接尾辞（都/道/府/県）を 1 文字だけ落とした短縮名を返す。
- * 「東京都」→「東京」、「北海道」→「北海」ではなく「北海道」は特例で「北海道」のまま
- * にはせず、UI 検索では「東京」「大阪」等の suffix 省略入力に一致させる目的で使う。
- *
- * 注: 「北海道」は「北海」に短縮されるが、`東京`/`大阪`/`京都` など主要な suffix 省略
- * 入力を拾えれば十分なので、includes マッチと併用して過不足なく機能する。
+ * 都道府県の短縮名 (「東京都」→「東京」、「北海道」は「北海道」のまま)。
+ * 実装は `@stats47/area` の単一実装 (クライアント部品から使うのでデータを読まない軽量 subpath)。UI 検索で「東京」「大阪」等の suffix 省略入力に一致させる目的で使う。
  */
-export function prefectureShortName(prefName: string): string {
-  return prefName.replace(/[都道府県]$/, "");
-}
+export { prefectureShortName };
 
 /**
  * マッチのランク（小さいほど上位）。

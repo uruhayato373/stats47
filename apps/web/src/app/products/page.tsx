@@ -16,7 +16,7 @@ const dataProducts = STOREFRONT_PRODUCTS.filter(
 );
 
 export const metadata: Metadata = {
-  title: "都道府県データの商品・Kindle本 | stats47",
+  title: "都道府県データの商品・Kindle本",
   description:
     "stats47の公的統計を、読み物としてまとめたKindle本と、編集可能なPowerPoint・Excel・CSVデータ集です。無料の統計ページとの違いも確認できます。",
   alternates: { canonical: "/products" },

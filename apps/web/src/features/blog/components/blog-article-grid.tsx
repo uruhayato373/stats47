@@ -1,3 +1,4 @@
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 import { ArrowRight } from 'lucide-react';
 
@@ -47,7 +48,7 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
           return (
             <SurfaceLinkCard
               key={article.slug}
-              href={`/blog/${article.slug}`}
+              href={hrefFor('blog', { slug: article.slug })}
               className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             >
               <div

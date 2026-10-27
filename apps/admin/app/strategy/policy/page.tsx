@@ -31,7 +31,7 @@ export default function SharedPolicyIndexPage() {
           className="text-console-info underline underline-offset-2"
           href="/strategy"
         >
-          方針・事業計画
+          方針
         </a>
         が管理する。
       </p>

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { readThemeCorrelatedMetricsFromR2 } from "@stats47/correlation/server";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { isOk } from "@stats47/types";
 
 import { SectionCard } from "@/components/surface";
@@ -30,7 +31,7 @@ export async function ThemeCorrelatedMetrics({ themeKey }: ThemeCorrelatedMetric
         {result.data.map((item) => (
           <TrackedThemeLink
             key={item.rankingKey}
-            href={`/ranking/${item.rankingKey}`}
+            href={hrefFor("ranking", { rankingKey: item.rankingKey })}
             trackingLabel={`theme-correlated-metrics:${item.rankingKey}`}
             surface="theme_ranking"
             className="flex items-center justify-between gap-3 py-1.5 transition-colors hover:text-primary"

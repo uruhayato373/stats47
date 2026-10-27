@@ -4,6 +4,8 @@ import tagsJson from '../../../../data/content/tags.json';
 import routesJson from '../../../../data/content/routes.json';
 import navigationJson from '../../../../data/content/navigation.json';
 
+export { hrefFor, HREF_ROUTES, type HrefParams, type HrefRouteName } from './href';
+
 export interface ContentTag {
   id: string;
   label: string;

@@ -374,7 +374,17 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:27:40.490Z",
-      "lastSubmittedAt": "2026-09-19"
+      "lastSubmittedAt": "2026-09-19",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-19T23:27:40.490Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-19T23:27:40.490Z",
+          "statusLabel": "販売中",
+          "asin": "B0HDYKVX6F",
+          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        }
+      }
     },
     "K-S1-04": {
       "id": "K-S1-04",
@@ -443,7 +453,17 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:36:09.618Z",
-      "lastSubmittedAt": "2026-09-19"
+      "lastSubmittedAt": "2026-09-19",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-19T23:36:09.618Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-19T23:36:09.618Z",
+          "statusLabel": "販売中",
+          "asin": "B0HF1C5QZ6",
+          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        }
+      }
     },
     "K-S1-05": {
       "id": "K-S1-05",
@@ -664,7 +684,17 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:44:33.977Z",
-      "lastSubmittedAt": "2026-09-19"
+      "lastSubmittedAt": "2026-09-19",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-19T23:44:33.977Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-19T23:44:33.977Z",
+          "statusLabel": "販売中",
+          "asin": "B0HF1XFXBY",
+          "derivedFrom": "kdpStatus (2026-10-27 に kdpStatusCheckedAt の本棚 read-back から補完)"
+        }
+      }
     },
     "K-S1-07": {
       "id": "K-S1-07",

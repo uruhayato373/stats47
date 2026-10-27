@@ -6,6 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 import { CURRENT_ITEM_CLASS } from "@/components/layout/Breadcrumbs";
@@ -39,7 +40,7 @@ export function RankingPageBreadcrumbs({
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/category/${category.key}`}>{category.name}</Link>
+                <Link href={hrefFor("category", { categoryKey: category.key })}>{category.name}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
           </>

@@ -14,6 +14,7 @@ import {
 } from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { SITE } from "@stats47/types";
+import { to2DigitPrefCode } from "@stats47/area";
 
 /** D3 の interpolator 関数名から関数を取得 */
 function getInterpolator(name: string): (t: number) => string {
@@ -56,10 +57,8 @@ const tileSvgW = tileCols * TILE_CELL;
 const tileSvgH = tileRows * TILE_CELL;
 
 /** 都道府県コードを2桁に正規化 */
-function normalizePrefId(code: string | number): string {
-  const s = String(code).replace(/0{3}$/, "");
-  return s.padStart(2, "0");
-}
+/** `@stats47/area` の単一実装 ("01000" / "13" / 1 → "01" / "13" / "01") */
+const normalizePrefId = to2DigitPrefCode;
 
 /** 背景色からテキスト色を自動判定 */
 function getContrastTextColor(bgColor: string): string {

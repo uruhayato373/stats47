@@ -34,8 +34,23 @@ export function splitPublishedBody(before, publicBefore, body) {
 }
 
 export function assertPublishedMetadata(before, after) {
-  for (const field of ['name', 'price', 'separator', 'status', 'slug', 'eyecatch', 'disable_comment', 'index', 'is_limited']) {
+  for (const field of ['name', 'price', 'separator', 'status', 'slug', 'eyecatch', 'disable_comment', 'is_limited']) {
     if (JSON.stringify(before[field] ?? null) !== JSON.stringify(after[field] ?? null)) throw Error(`published ${field} changed`);
+  }
+  if (JSON.stringify(before.index ?? null) !== JSON.stringify(after.index ?? null)) {
+    // note derives the index from headings. Appending an approved footer can append one index entry.
+    const previous = before.index;
+    const current = after.index;
+    const oldBody = cheerio.load(before.body || '');
+    const newBody = cheerio.load(after.body || '');
+    const appendedOnly = Array.isArray(previous) && Array.isArray(current) && current.length > previous.length
+      && JSON.stringify(current.slice(0, previous.length)) === JSON.stringify(previous)
+      && current.slice(previous.length).every((entry) => {
+        if (!['h2', 'h3'].includes(entry.level) || !/^[a-zA-Z0-9-]+$/.test(entry.name)) return false;
+        const selector = `${entry.level}[name="${entry.name}"],${entry.level}[id="${entry.name}"]`;
+        return oldBody(selector).length === 0 && newBody(selector).length === 1 && newBody(selector).text() === entry.body;
+      });
+    if (!appendedOnly) throw Error('published index changed');
   }
   if (JSON.stringify(tags(before)) !== JSON.stringify(tags(after))) throw Error('published hashtags changed');
   if (before.user?.urlname !== 'stats47' || after.user?.urlname !== 'stats47') throw Error('note account mismatch');

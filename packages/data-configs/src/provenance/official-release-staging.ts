@@ -1,9 +1,9 @@
-import prefectures from "../../../area/src/data/prefectures.json";
+import { fetchPrefectures } from "@stats47/area";
 import type { SingleEntityRow } from "../../../stats-r2/src/types";
-import { classifyShape, summarizeShape } from "../shape-gate";
+import { classifyShape, PREFECTURE_COUNT, summarizeShape } from "../shape-gate";
 import { AGRICULTURAL_OUTPUT_RELEASE } from "../../../../data/metric-sources/official-theme-releases";
 
-const prefectureByCode = new Map(prefectures.map((pref) => [pref.prefCode, pref.prefName]));
+const prefectureByCode = new Map(fetchPrefectures().map((pref) => [pref.prefCode, pref.prefName]));
 const rowKey = (row: SingleEntityRow) => `${row.yearCode}/${row.areaCode}`;
 
 /** A changed source must never silently drop years, overwrite history or duplicate an axis. */
@@ -26,7 +26,9 @@ export function mergeOfficialRows(
   }
   for (const year of years) {
     const count = reconstructed.filter((row) => row.yearCode === String(year)).length;
-    if (count !== 47) throw new Error(`${key}: ${year} has ${count} prefectures, expected 47`);
+    if (count !== PREFECTURE_COUNT) {
+      throw new Error(`${key}: ${year} has ${count} prefectures, expected ${PREFECTURE_COUNT}`);
+    }
   }
   const previousKeys = new Set<string>();
   for (const previous of existing) {

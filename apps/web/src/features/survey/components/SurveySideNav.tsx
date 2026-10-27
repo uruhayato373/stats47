@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ListTree } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
@@ -68,7 +69,7 @@ export function SurveySideNav({
               {representativeRankings.map((item) => (
                 <RailNavRow
                   key={item.rankingKey}
-                  href={`/ranking/${item.rankingKey}`}
+                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                   chevron={false}
                 >
                   {item.label}
@@ -138,7 +139,7 @@ export function SurveyMobileNav({
               {categories.map((category) => (
                 <li key={category.categoryKey}>
                   <Link
-                    href={`/category/${category.categoryKey}`}
+                    href={hrefFor('category', { categoryKey: category.categoryKey })}
                     className="text-sm text-foreground hover:text-primary hover:underline"
                   >
                     {category.label}（{category.count}）

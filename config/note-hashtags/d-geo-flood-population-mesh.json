@@ -1,7 +1,7 @@
 {
   "slug": "d-geo-flood-population-mesh",
   "noteUrl": "https://note.com/stats47/n/nfe50fb61efc0",
-  "title": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
+  "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
   "vertical": "stats47-note",
   "sourceSha256": "6cd951ea6f16a2499b6f2dda77d4a9297b8402d229271face35e3937fc7f9515",
   "model": "claude-sonnet-5-5",

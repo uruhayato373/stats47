@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from "@/components/atoms/SiteLink";
@@ -98,7 +99,7 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
             className="flex min-h-16 items-stretch"
           >
             <GenderCell
-              href={`/ranking/${p.maleKey}`}
+              href={hrefFor("ranking", { rankingKey: p.maleKey })}
               value={male?.value ?? null}
               rank={male?.rank ?? null}
               unit={unit}
@@ -111,7 +112,7 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
               )}
             </div>
             <GenderCell
-              href={`/ranking/${p.femaleKey}`}
+              href={hrefFor("ranking", { rankingKey: p.femaleKey })}
               value={female?.value ?? null}
               rank={female?.rank ?? null}
               unit={unit}

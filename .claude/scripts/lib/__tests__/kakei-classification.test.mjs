@@ -104,3 +104,34 @@ test("控えの全品目に group.code がある (2020・2025)", () => {
     assert.deepEqual(spaced, [], `${revision}: 見出し名に空白・改行が残る品目`);
   }
 });
+
+test("「1収入」シートの列の配置 (名前が H・I・F 列、例示が L 列) でも品目と例示を拾う (KAKEI-CLASSIFICATION-INCOME-SHEET-01)", () => {
+  const blank = (n) => Array.from({ length: n }, () => null);
+  const row = (cells) => Object.assign(blank(15), cells);
+  const items = parseClassificationRows([
+    row({ 6: "収 支 項 目 分 類 表" }),
+    row({ 0: "符 号", 3: "項 目 名 ", 11: "内 容 例 示" }),
+    row({ 0: "(010～012)", 7: "世帯主収入", 8: "世帯主収入", 11: "世帯主の勤め先収入。" }),
+    row({ 0: "010", 8: "定期収入", 11: "労働契約などによる収入。" }),
+    row({ 11: "○ 本給 日給基準額" }),
+    row({ 0: "011", 8: "臨 時 収 入", 11: "その月に限って支給される収入。" }),
+    row({ 0: "013", 6: "世帯主の 配偶者の収入", 7: "世帯主の 配偶者の収入", 11: "配偶者の勤め先収入。" }),
+    row({ 0: "044", 5: "クレジット購入借入金" }),
+  ], "1収入");
+  assert.deepEqual(Object.keys(items), ["010", "011", "013", "044"]);
+  assert.equal(items["010"].name, "定期収入");
+  assert.equal(items["011"].name, "臨時収入");
+  assert.equal(items["013"].name, "世帯主の 配偶者の収入");
+  assert.equal(items["044"].name, "クレジット購入借入金");
+  assert.deepEqual(items["010"].includes, ["本給 日給基準額"]);
+  assert.deepEqual(items["010"].definition, ["労働契約などによる収入。"]);
+});
+
+test("控えの品目数は公式 Excel の品目番号の行数と一致する (収入 24・非消費支出 18)", () => {
+  for (const revision of ["2020", "2025"]) {
+    const data = JSON.parse(fs.readFileSync(path.join(ROOT, `data/estat/kakei-classification/${revision}.json`), "utf8"));
+    const bySheet = Object.values(data.items).reduce((acc, item) => ({ ...acc, [item.sheet]: (acc[item.sheet] ?? 0) + 1 }), {});
+    assert.equal(bySheet["1収入"], 24, `${revision} 1収入`);
+    assert.equal(bySheet["3非消費支出～繰越金"], 18, `${revision} 3非消費支出`);
+  }
+});

@@ -1,4 +1,5 @@
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
@@ -23,7 +24,7 @@ export async function ThemeGeoStationAccessSection() {
         </p>
         <Link
           className="mt-3 inline-block text-sm text-primary underline"
-          href={`/geo/${slug}`}
+          href={hrefFor('geo', { analysisSlug: slug })}
         >
           駅アクセスの分析詳細を見る
         </Link>

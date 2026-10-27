@@ -13,7 +13,7 @@ metadata:
 - ココナラの編集ページに「非公開」は無く、「受付中 / 受付休止中」の select を変えて「更新する」で保存する (select 変更だけでは保存されない)。14 件とも受付休止にし、公開ページで「購入画面に進む」0 件を確認した。
 - 認証付き計測 (`sources.mjs`・CI matrix・`auth-credentials.json`) と週次収益 (`product-revenue.mjs` の REVENUE_CHANNELS) から外した。商品の生成コード (product-factory・build-coconala-product) は note 版が使うので残す。
 - **現在の販売先**: 有料データパック13本は2026-10-24までに公開済み。2026-10-26に公開状態・価格・有料境界・添付を全13本で再確認し、記事台帳に `publicationVerifiedAt` を記録した。公開の正典は `data/note/articles.json`。旧出品台帳14行（データパック13＋Geo受託1）は `withdrawn` にし、note商品への対応は product-factory の mapping で解決する。
-- **記事の配線**: `data/note/magazines.json` の `paidProductId` を通して、公開済み有料noteへ直接案内する。空白カード修復は `note:cards:repair-native`。サイト商品ページの行き先もnoteへ変更する。
+- **記事の配線**: `data/note/magazines.json` の `paidProductId` を通して、公開済み有料noteへ直接案内する。空白カード修復は `note:cards:repair-native`。サイト商品ページ13本も有料noteへ変更済み。公開面の価格・題名・購入先の実測は `data/note/evidence/note-product-storefront-live-2026-10-26.json`。
 
 **問題**: 古いローカル台帳・メモは13本を下書きと誤認させ、受付休止済みのココナラへ誘導していた。
 

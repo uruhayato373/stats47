@@ -14,6 +14,7 @@ import {
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
 import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 
 import Link from '@/components/atoms/SiteLink';
@@ -165,7 +166,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                   items={AREA_RAIL_THEMES.map((theme) => ({
                     id: theme.themeKey,
                     label: theme.title,
-                    href: `/areas/${areaCode}/${theme.themeKey}`,
+                    href: hrefFor('area-theme', { areaCode, themeSlug: theme.themeKey }),
                   }))}
                   layout="list"
                   moreLink={{

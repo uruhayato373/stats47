@@ -313,7 +313,19 @@ export const PR_GATES = [
         const r = await tryRun("npx", ["tsx", `.claude/scripts/ads/${script}`, "--check"]);
         if (!r.ok) return { ...r, hint: `npx tsx .claude/scripts/ads/${script} --check` };
       }
-      return { ok: true, output: "affiliate compliance / relevance OK" };
+      // pr-quality-check.yml の Affiliate Compliance step と同じ在庫整合 (vertical・実験・offer profile)。R2 には書かない
+      const inventory = await tryRun(
+        "npx",
+        ["tsx", "apps/web/scripts/export-affiliate-ads-snapshot.ts", "--validate-only"],
+        { env: { ...process.env, NODE_OPTIONS: "--conditions react-server" } },
+      );
+      if (!inventory.ok) {
+        return {
+          ...inventory,
+          hint: 'NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only',
+        };
+      }
+      return { ok: true, output: "affiliate compliance / relevance / inventory OK" };
     },
   },
   {
@@ -361,7 +373,48 @@ export const PR_GATES = [
   },
 ];
 
+/**
+ * 手元の node_modules が lockfile より古いかを調べる (LOCAL-DEPS-STALE-WARN-01)。
+ * 2026-10-21 に Mac の node_modules が古い lockfile のままで、eslint 依存のテストが手元だけ落ち、
+ * 原因を取り違えた (CI は npm ci で揃う)。install は他セッションと排他なので自動では走らせず、知らせるだけ。
+ * 入力は package-lock.json と node_modules/.package-lock.json の `packages`。
+ * 他 OS 向けの任意依存 (optional) と peer、workspace のリンクは手元に無くて正しいので数えない。
+ */
+export function findStaleInstalledDeps(lockPackages, installedPackages) {
+  const stale = [];
+  for (const [key, locked] of Object.entries(lockPackages ?? {})) {
+    if (!key || !locked?.version || locked.link) continue;
+    const installed = installedPackages?.[key];
+    if (!installed) {
+      if (!locked.optional && !locked.peer) stale.push(`${key}: 未導入 (lock ${locked.version})`);
+      continue;
+    }
+    if (installed.version !== locked.version) stale.push(`${key}: 導入 ${installed.version} / lock ${locked.version}`);
+  }
+  return stale;
+}
+
+function installedDepsGate() {
+  const readPackages = (file) => JSON.parse(fs.readFileSync(path.join(SCAN_ROOT, file), "utf8")).packages;
+  let stale;
+  try {
+    stale = findStaleInstalledDeps(readPackages("package-lock.json"), readPackages("node_modules/.package-lock.json"));
+  } catch (error) {
+    return { ok: true, output: `lockfile を読めないので判定を見送る (${error.message})`, skipped: true };
+  }
+  if (stale.length === 0) return { ok: true, output: "node_modules は lockfile と一致" };
+  return { ok: false, output: [`lockfile と食い違う依存が ${stale.length} 件:`, ...stale.slice(0, 10)].join("\n") };
+}
+
 const GATES = [
+  {
+    name: "Installed Deps",
+    why: "node_modules が lockfile より古いと手元だけテストが落ち、原因を取り違える",
+    // CI は毎回 npm ci で揃うので見ない。
+    skipInCi: true,
+    run: async () => installedDepsGate(),
+    hint: "npm install を実行する (他セッションと同時に install しない。.claude/rules/local-environment.md)",
+  },
   {
     name: "ESLint",
     why: "import/order・no-duplicate-imports・set-state-in-effect 等",

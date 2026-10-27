@@ -2,6 +2,8 @@ import { getRequiredBaseUrl } from "@/lib/env";
 
 import { SITE_NAME } from "@/config/site";
 
+import { themeHref } from "../config/theme-href";
+
 import type { ThemeConfig } from "../types";
 
 export function generateThemeBreadcrumbStructuredData(theme: ThemeConfig): object {
@@ -19,7 +21,7 @@ export function generateThemeBreadcrumbStructuredData(theme: ThemeConfig): objec
 
 export function generateThemePageStructuredData(theme: ThemeConfig): object {
   const baseUrl = getRequiredBaseUrl();
-  const url = `${baseUrl}/themes/${theme.themeKey}`;
+  const url = `${baseUrl}${themeHref(theme.themeKey)}`;
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

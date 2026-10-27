@@ -139,6 +139,24 @@ if [ -n "$STAGED_DISPATCH" ]; then
   fi
 fi
 
+# 2.1d2 検査スクリプトの配線 (CHECKER-WIRING-PRECOMMIT-01)
+# 検査スクリプトを CI の blocking gate につながないまま push すると、Develop Quality Gate が
+# [NON_BLOCKING_GATE] / [MISSING_GATE_TRIGGER] で落ちる (2026-10-10 に check-post-trace.mjs で踏んだ)。
+# 全体を読むので約 9 秒かかる。検査スクリプト (名前の判定は check-checker-wiring.cjs の CHECKER_NAME と同じ)
+# か workflow を staged にした commit だけで走らせる。
+STAGED_CHECKER_WIRING=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
+  '(^|/)([^/]*[-_.])?(check|audit|validate|verify|lint|guard)([-_.][^/]*)?\.(c?js|mjs|ts|sh|py)$|^\.github/workflows/[^/]+\.ya?ml$' || true)
+if [ -n "$STAGED_CHECKER_WIRING" ]; then
+  echo -e "${GREEN}🔌 検査スクリプトの CI 配線...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline; then
+    echo -e "${RED}❌ CI の blocking gate につながっていない検査スクリプトがあります。${NC}"
+    echo -e "${YELLOW}💡 workflow か preflight から blocking で呼ぶ (詳細は上の出力)${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ 検査スクリプトの CI 配線チェック成功${NC}"
+  fi
+fi
+
 # 2.1e import.meta.dirname ガード
 # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
 # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと
@@ -219,17 +237,18 @@ if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   fi
 fi
 
-# 2.3 ESLint (staged の apps/web TS/TSX) — CI の next lint と同基準で import/order 等を事前に弾く
+# 2.3 ESLint (staged の apps/web TS/TSX) — CI と同じ eslint で import/order 等を事前に弾く
 # 背景: import/order は CI (Code Quality Check) でのみ検出され、ローカルで気付けず CI を1サイクル無駄にしていた
-# (2026-06-23 deploy 時に発生)。staged ファイルだけを next lint にかけて高速に事前検出する。
+# (2026-06-23 deploy 時に発生)。staged ファイルだけを eslint にかけて高速に事前検出する。
+# Next.js 16 で `next lint` が廃止されたので eslint を直接呼ぶ (CI の develop-quality-gate と同じ方式)。
 echo -e "${GREEN}🧹 ESLint (staged ファイル)...${NC}"
 STAGED_WEB_TS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
 if [ -n "$STAGED_WEB_TS" ]; then
-  LINT_ARGS=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/#--file #' | tr '\n' ' ')
-  if ! (cd "$WEB_DIR" && npx next lint $LINT_ARGS > /tmp/precommit-lint.out 2>&1); then
+  LINT_FILES=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/##' | tr '\n' ' ')
+  if ! (cd "$WEB_DIR" && npx eslint $LINT_FILES > /tmp/precommit-lint.out 2>&1); then
     echo -e "${RED}❌ ESLint エラー (import/order 等) が検出されました。${NC}"
-    grep -E "Error:|\.tsx?$" /tmp/precommit-lint.out | head -20
-    echo -e "${YELLOW}💡 自動修正: cd apps/web && npx next lint --fix${NC}"
+    grep -E "error|\.tsx?$" /tmp/precommit-lint.out | head -20
+    echo -e "${YELLOW}💡 自動修正: cd apps/web && npx eslint --fix <ファイル>${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   else
     echo -e "${GREEN}✅ ESLint 成功${NC}"

@@ -19,6 +19,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 export const RAKUTEN_RESULTS_PATH = datasetPath("rakuten.results");
@@ -61,8 +62,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const record = parseRecord(process.argv.slice(2));
     const path = join(ROOT, RAKUTEN_RESULTS_PATH);
     const current = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+    const next = upsertRecord(current, record);
+    assertDatasetShape('rakuten.results', next); // 形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
     mkdirSync(dirname(path), { recursive: true });
-    writeFileSync(path, JSON.stringify(upsertRecord(current, record), null, 2) + '\n');
+    writeFileSync(path, JSON.stringify(next, null, 2) + '\n');
     const confirmed = record.confirmedYen == null ? '未確定' : `¥${record.confirmedYen.toLocaleString('ja-JP')}`;
     console.log(`[rakuten] ${record.month}: 発生 ${record.orders} 件・¥${record.estimatedYen.toLocaleString('ja-JP')} / 確定 ${confirmed} を記録 → ${RAKUTEN_RESULTS_PATH}`);
   } catch (error) {

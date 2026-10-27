@@ -1,3 +1,4 @@
+import { resolveAttribution } from "@stats47/data-configs";
 import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
@@ -44,13 +45,20 @@ export async function StatsLineChartCard({
   const displayYear = statData?.year ?? "";
   const displayValue = statData?.value;
 
+  // 出典は statsDataId / cdCat01 から解決する (SSDS → 社会・人口統計体系 + 原典、一次統計 → その調査)。
+  // 以前は全カードを「社会・人口統計体系」と固定していたため、SSDS 以外の表で出典名が誤っていた。
+  const attribution = resolveAttribution(statParams.statsDataId, statParams.cdCat01);
+  const isAttributionResolved =
+    attribution.compilation !== null || attribution.originalSurveys.length > 0;
+
   return (
     <ChartPanel
       title={title}
       description={description}
       footer={
         <ChartFooter
-          source="社会・人口統計体系"
+          source={isAttributionResolved ? undefined : "e-Stat"}
+          attribution={isAttributionResolved ? attribution : undefined}
           sourceLink={buildEstatTableUrl(statParams.statsDataId)}
         />
       }

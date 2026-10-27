@@ -54,6 +54,15 @@ describe("data source contract", () => {
     expect(offenders).toEqual([]);
   });
 
+  it("ChartFooter に編成統計名「社会・人口統計体系」を直書きしない (resolveAttribution で解決する)", () => {
+    // 2026-10-26: ランキングの折れ線カードが SSDS 以外の表でも「社会・人口統計体系」と表示していた。
+    // 表ごとに SSDS かどうかが変わる部品は statsDataId から解決する (単一調査の専用部品の調査名は対象外)。
+    const offenders = FILES.filter(({ source }) =>
+      /<ChartFooter[^>]*\bsource=\{?\s*["'`]社会・人口統計体系/.test(source),
+    ).map(({ file }) => file);
+    expect(offenders).toEqual([]);
+  });
+
   it("ranking item の旧 source フィールドを参照しない", () => {
     const offenders = FILES.filter(({ source }) =>
       /\b(?:rankingItem|itemDetail)\??\.source\b(?!Config)/.test(source),

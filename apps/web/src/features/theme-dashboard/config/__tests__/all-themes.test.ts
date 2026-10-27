@@ -1,4 +1,5 @@
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import { THEME_INDICATOR_SETS } from '@stats47/types';
 import { describe, it, expect } from 'vitest';
 
 
@@ -17,6 +18,12 @@ describe('ALL_THEMES', () => {
     expect(new Set(keys).size).toBe(keys.length);
     expect([...keys].sort()).toEqual(Object.keys(THEME_CATALOGS).sort());
   });
+  it('テーマの並びは THEME_INDICATOR_SETS (正本) と同じ順序・同じ集合', () => {
+    expect(ALL_THEMES.map((theme) => theme.themeKey)).toEqual(
+      THEME_INDICATOR_SETS.map((set) => set.key),
+    );
+  });
+
   it('テーマが1つ以上定義されている', () => {
     expect(ALL_THEMES.length).toBeGreaterThan(0);
   });

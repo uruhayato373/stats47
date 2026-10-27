@@ -1,4 +1,5 @@
 import { fetchPrefectures, REGIONS } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 
@@ -10,12 +11,13 @@ import {
 } from '@/features/area-profile';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
+import { formatOgpTitle } from '@/lib/metadata/site-title';
 
 import { DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from '@/config/site';
 
 import type { Metadata } from 'next';
 
-const title = '都道府県から統計を見る | Stats47';
+const title = '都道府県から統計を見る';
 const description =
   '47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。都道府県名の検索・地方別の一覧・タイル地図から、目的の県のプロフィールへ移動できます。';
 
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/areas',
   },
-  ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
+  ...generateOGMetadata({ title: formatOgpTitle(title), description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
 };
 
 export default function AreasPage() {
@@ -45,7 +47,7 @@ export default function AreasPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: pref.prefName,
-      url: `${baseUrl}/areas/${pref.prefCode}`,
+      url: `${baseUrl}${hrefFor('area', { areaCode: pref.prefCode })}`,
     })),
   };
 

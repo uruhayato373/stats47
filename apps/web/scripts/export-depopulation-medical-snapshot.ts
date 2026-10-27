@@ -19,6 +19,7 @@ import {
   fetchKsjTopologyFromLocal,
   listKsjFiles,
 } from "../../../packages/gis/src/mlit-ksj/adapters/fetch-ksj-from-local";
+import { PREFECTURE_AREA_CODES, prefectureNameOf, to2DigitPrefCode } from "@stats47/area";
 import { writeR2Staging } from "@stats47/r2-storage/server";
 
 import {
@@ -37,18 +38,12 @@ const P04_VERSION = "20";
 // 表示用 GeoJSON の座標丸め桁数 (集計には影響させない。約 1m 精度)
 const DISPLAY_COORD_PRECISION = 5;
 
-const PREF_NAMES: Record<string, string> = {
-  "01": "北海道", "02": "青森県", "03": "岩手県", "04": "宮城県", "05": "秋田県",
-  "06": "山形県", "07": "福島県", "08": "茨城県", "09": "栃木県", "10": "群馬県",
-  "11": "埼玉県", "12": "千葉県", "13": "東京都", "14": "神奈川県", "15": "新潟県",
-  "16": "富山県", "17": "石川県", "18": "福井県", "19": "山梨県", "20": "長野県",
-  "21": "岐阜県", "22": "静岡県", "23": "愛知県", "24": "三重県", "25": "滋賀県",
-  "26": "京都府", "27": "大阪府", "28": "兵庫県", "29": "奈良県", "30": "和歌山県",
-  "31": "鳥取県", "32": "島根県", "33": "岡山県", "34": "広島県", "35": "山口県",
-  "36": "徳島県", "37": "香川県", "38": "愛媛県", "39": "高知県", "40": "福岡県",
-  "41": "佐賀県", "42": "長崎県", "43": "熊本県", "44": "大分県", "45": "宮崎県",
-  "46": "鹿児島県", "47": "沖縄県",
-};
+/** 2 桁コード → 正式名称 (`@stats47/area` の prefectures.json が正本。独自の表を持たない) */
+function prefNameOf(nn: string): string {
+  const name = prefectureNameOf(nn);
+  if (!name) throw new Error(`未知の都道府県コード: ${nn}`);
+  return name;
+}
 
 // ─── GeoJSON 型 (最小限) ──────────────────────────────────────────
 type Ring = [number, number][];
@@ -188,13 +183,13 @@ async function main(): Promise<void> {
   const summaries: DepopulationMedicalPref[] = [];
   let totalDetailBytes = 0;
 
-  for (let i = 1; i <= 47; i++) {
-    const nn = String(i).padStart(2, "0");
+  for (const code5 of PREFECTURE_AREA_CODES) {
+    const nn = to2DigitPrefCode(code5);
     const a17File = `${nn}.topojson`;
     const p04File = `${nn}.topojson`;
 
     if (!a17Files.includes(a17File) || !p04Files.includes(p04File)) {
-      console.warn(`  ⚠ ${nn} (${PREF_NAMES[nn]}): ファイル欠落、skip`);
+      console.warn(`  ⚠ ${nn} (${prefNameOf(nn)}): ファイル欠落、skip`);
       continue;
     }
 
@@ -240,7 +235,7 @@ async function main(): Promise<void> {
     const total = facilities.length;
     const summary: DepopulationMedicalPref = {
       prefCode: `${nn}000`,
-      prefName: PREF_NAMES[nn],
+      prefName: prefNameOf(nn),
       depopulationFacilities: depopulationCount,
       totalFacilities: total,
       outsideFacilities: total - depopulationCount,
@@ -251,7 +246,7 @@ async function main(): Promise<void> {
     // 県別詳細 (表示用、座標丸め + props 最小化)
     const detail: DepopulationMedicalPrefDetail = {
       prefCode: `${nn}000`,
-      prefName: PREF_NAMES[nn],
+      prefName: prefNameOf(nn),
       depopulationAreas: {
         type: "FeatureCollection",
         features: a17Geo.features
@@ -276,7 +271,7 @@ async function main(): Promise<void> {
     await writeR2Staging(depopulationMedicalPrefKey(nn), detailBody);
 
     console.log(
-      `  ✓ ${nn} ${PREF_NAMES[nn]}: 過疎内 ${depopulationCount} / 全 ${total} (${(summary.ratio * 100).toFixed(1)}%) detail=${(detailBody.length / 1024).toFixed(0)}KB`,
+      `  ✓ ${nn} ${prefNameOf(nn)}: 過疎内 ${depopulationCount} / 全 ${total} (${(summary.ratio * 100).toFixed(1)}%) detail=${(detailBody.length / 1024).toFixed(0)}KB`,
     );
   }
 

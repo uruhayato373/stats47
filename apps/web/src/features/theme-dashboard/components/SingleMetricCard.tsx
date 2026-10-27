@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -149,7 +150,7 @@ export function SingleMetricCard({
             source={metric.sourceName}
             sourceLink={metric.sourceLink}
             sourceLinks={metric.sourceLinks}
-            rankingLink={`/ranking/${metric.metricKey}`}
+            rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
             rankingLabel="ランキングを見る"
           />
         }

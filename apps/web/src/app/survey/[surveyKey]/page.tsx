@@ -8,6 +8,7 @@
 import { notFound } from 'next/navigation';
 
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   readRankingItemsBySurveyFromR2,
@@ -48,6 +49,7 @@ import {
   SurveySideNav,
   type SurveyPageNavLink,
 } from '@/features/survey';
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -123,7 +125,7 @@ export async function generateMetadata({
       title,
       description,
       alternates: {
-        canonical: `/survey/${surveyKey}`,
+        canonical: hrefFor('survey', { surveyKey }),
       },
       ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
@@ -387,7 +389,7 @@ export default async function SurveyPage({ params }: PageProps) {
                   {readerQuestions.map((item) => (
                     <SurfaceLinkCard
                       key={item.rankingKey}
-                      href={`/ranking/${item.rankingKey}`}
+                      href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                       className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                     >
                       {item.question}
@@ -436,7 +438,7 @@ export default async function SurveyPage({ params }: PageProps) {
               {relatedThemes.map((theme) => (
                 <SurfaceLinkCard
                   key={theme.key}
-                  href={`/themes/${theme.key}`}
+                  href={themeHref(theme.key)}
                   className="text-sm font-medium text-foreground hover:bg-accent/50"
                 >
                   {theme.title}
@@ -461,7 +463,7 @@ export default async function SurveyPage({ params }: PageProps) {
               {relatedArticles.map((article) => (
                 <SurfaceLinkCard
                   key={article.slug}
-                  href={`/blog/${article.slug}`}
+                  href={hrefFor('blog', { slug: article.slug })}
                   className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                 >
                   {article.title}

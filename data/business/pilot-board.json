@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "description": "収益化 pilot の判定ボード (管理画面 /strategy/pilots) の入力。開始日・窓・判定に使う指標だけを持つ。判定日が他の台帳にある pilot は schedule で参照し、ここに日付を写さない (improvements.md の Due・experiments.json の experiment_window)。現在値は data/ の週次記録から画面が計算する。",
+  "pilots": [
+    {
+      "id": "amazon-associate",
+      "title": "物販 (Amazon アソシエイトと Kindle 自社本への導線)",
+      "route": "雑学の回収経路: アクセス集客の換金",
+      "card": "AMAZON-ASSOCIATE-PILOT-01",
+      "schedule": {
+        "kind": "window",
+        "start": "2026-10-07",
+        "startEvidence": "PR #1099 を main へマージ (2026-10-07 22:28 JST)・同コミットの Post-Deploy Smoke Test 成功 (2026-10-07T13:39Z)",
+        "windowDays": 28
+      },
+      "metrics": [
+        { "label": "ランキング右レールの自社本クリック", "kind": "ga4-nav-click", "surface": "ranking_product" },
+        { "label": "Amazon の売上", "kind": "unrecorded", "reason": "Amazon アソシエイトの成果は自動収集の対象外" }
+      ]
+    },
+    {
+      "id": "knowhow-product",
+      "title": "AI × 公的統計の実務ノウハウ商品",
+      "route": "雑学の回収経路: ノウハウ商品",
+      "card": "KNOWHOW-PRODUCT-PILOT-01",
+      "schedule": {
+        "kind": "window",
+        "start": null,
+        "startEvidence": "商品が未選定で未公開",
+        "windowDays": 28
+      },
+      "metrics": [
+        { "label": "4週の実売", "kind": "sales-ledger", "channel": "note", "productIds": [] }
+      ]
+    },
+    {
+      "id": "kdp",
+      "title": "KDP (Kindle 自社本 S1 12冊)",
+      "route": "雑学の回収経路: コンテンツ販売",
+      "card": "KDP-EXPANSION-01",
+      "schedule": {
+        "kind": "window",
+        "start": "2026-08-30",
+        "startEvidence": "KDP-EXPANSION-01 の 4 週窓の起点 (S1 12冊は 2026-08-13 から販売)",
+        "windowDays": 28
+      },
+      "metrics": [
+        { "label": "販売数・売上", "kind": "sales-ledger", "channel": "kdp", "productIds": [] },
+        { "label": "既読ページ (KENP)", "kind": "unrecorded", "reason": "販売台帳 sales-ledger.json に既読ページの列が無い (KDP-LEDGER-AUTO-01)" }
+      ]
+    },
+    {
+      "id": "note-fiscal",
+      "title": "note 財政比較 2 本 (コードを書く層 / 書かない層)",
+      "route": "商品の展開順序: 新しい商品を作る前の判定",
+      "card": "NOTE-FISCAL-PEER-SALES-01",
+      "schedule": { "kind": "improvement", "id": "NOTE-FISCAL-PEER-SALES-01" },
+      "metrics": [
+        { "label": "閲覧・売上", "kind": "note-dashboard", "noteIds": ["n527e817995e9", "n20299fc77b17"] }
+      ]
+    },
+    {
+      "id": "blog-product",
+      "title": "職場から読まれるブログ 10 記事の商品案内",
+      "route": "商品の展開順序 1",
+      "card": "PRODUCT-FUNNEL-DEPLOY-01",
+      "schedule": {
+        "kind": "window",
+        "start": "2026-10-17",
+        "startEvidence": "PR #1143 の本番デプロイ成功 (2026-10-17 04:48Z)",
+        "windowDays": 28
+      },
+      "metrics": [
+        { "label": "ブログの商品案内クリック", "kind": "ga4-nav-click", "surface": "blog_product" }
+      ]
+    },
+    {
+      "id": "youtube",
+      "title": "YouTube 通常動画 pilot (3本・6週)",
+      "route": "SNS: 限定 pilot",
+      "card": "EXP-006",
+      "schedule": { "kind": "experiment", "id": "EXP-006" },
+      "metrics": [
+        { "label": "公開と記録値", "kind": "experiment", "id": "EXP-006" }
+      ]
+    }
+  ]
+}
