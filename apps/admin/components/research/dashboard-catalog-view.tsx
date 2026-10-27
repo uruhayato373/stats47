@@ -374,7 +374,11 @@ export function DashboardCatalogView() {
                 <Label className="mb-1 block text-xs text-console-muted">
                   stats47テーマ
                 </Label>
-                <Select value={theme} onValueChange={setTheme}>
+                <Select
+                  value={theme}
+                  onValueChange={(value) => setTheme(value ?? ALL)}
+                  items={[{ value: ALL, label: "すべてのテーマ" }, ...data.filters.themes.map((item) => ({ value: item.key, label: `${item.label} (${item.count})` }))]}
+                >
                   <SelectTrigger aria-label="stats47テーマで絞り込み">
                     <SelectValue />
                   </SelectTrigger>
@@ -392,7 +396,11 @@ export function DashboardCatalogView() {
                 <Label className="mb-1 block text-xs text-console-muted">
                   公式システム
                 </Label>
-                <Select value={dashboard} onValueChange={setDashboard}>
+                <Select
+                  value={dashboard}
+                  onValueChange={(value) => setDashboard(value ?? ALL)}
+                  items={[{ value: ALL, label: "すべてのシステム" }, ...data.dashboards.map((item) => ({ value: item.id, label: `${item.title} (${item.storyCount})` }))]}
+                >
                   <SelectTrigger aria-label="公式システムで絞り込み">
                     <SelectValue />
                   </SelectTrigger>
@@ -410,7 +418,11 @@ export function DashboardCatalogView() {
                 <Label className="mb-1 block text-xs text-console-muted">
                   ストーリー形式
                 </Label>
-                <Select value={pattern} onValueChange={setPattern}>
+                <Select
+                  value={pattern}
+                  onValueChange={(value) => setPattern(value ?? ALL)}
+                  items={[{ value: ALL, label: "すべての形式" }, ...data.filters.patterns.map((item) => ({ value: item.key, label: `${PATTERN_LABELS[item.key] ?? item.key} (${item.count})` }))]}
+                >
                   <SelectTrigger aria-label="ストーリー形式で絞り込み">
                     <SelectValue />
                   </SelectTrigger>

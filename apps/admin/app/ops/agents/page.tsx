@@ -148,15 +148,11 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
         )}
 
         <div className="flex flex-wrap gap-2">
-          <Button asChild size="sm" variant={!modelFilter ? "default" : "outline"}>
-            <Link href="/ops/agents">すべて ({v.agents.length})</Link>
-          </Button>
+          <Button size="sm" variant={!modelFilter ? "default" : "outline"} nativeButton={false} render={<Link href="/ops/agents" />}>すべて ({v.agents.length})</Button>
           {models.map((m) => (
-            <Button key={m} asChild size="sm" variant={m === modelFilter ? "default" : "outline"}>
-              <Link href={`/ops/agents?model=${encodeURIComponent(m)}`}>
+            <Button key={m} size="sm" variant={m === modelFilter ? "default" : "outline"} nativeButton={false} render={<Link href={`/ops/agents?model=${encodeURIComponent(m)}`} />}>
                 {m} ({countBy(m)})
-              </Link>
-            </Button>
+              </Button>
           ))}
         </div>
 

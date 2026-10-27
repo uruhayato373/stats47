@@ -1,0 +1,9 @@
+/* テンプレートの見た目の入口。各アプリの globals.css で `@import "tailwindcss";` の直後に読み、
+   ルート要素に class="style-lyra" を付ける (lyra の部品スタイルは .style-lyra の下だけで効く)。 */
+@import "tw-animate-css";
+@import "./shadcn-tailwind.css";
+@import "./tokens.css";
+
+@custom-variant style-lyra (&:where(.style-lyra *));
+
+@import "./style-lyra.css";

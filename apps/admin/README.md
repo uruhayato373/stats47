@@ -48,7 +48,7 @@ PORT=5000 npm run admin    # ポート上書き
 ```
 app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカルファイル配信)
 components/     共有 (console-nav / async-state / media-preview) + ページ別
-components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
+components/ui/  テンプレート (shadcndashboard・Base UI 版 shadcn) の部品。正のままにする (差は check-shadcn-parity が止める・規約 .claude/rules/admin-ui.md)
 components/admin-ui/  組み立て部品 (TableFrame / DataTable / PanelCard / StatCard / StatusBadge / LinkCard)。layout-primitives.tsx は Stack / Grid / Section
 components/content/note-covers-browser.tsx  shadcn Table + TanStack Table v8で制作ID/分類/状況を検索・比較。表示条件はURLに保持
 components/content/note-cover-production.tsx  制作内容・目視確認のフォーム。方針と制作仕様の表示・ダウンロード

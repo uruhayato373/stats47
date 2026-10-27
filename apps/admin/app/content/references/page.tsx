@@ -323,9 +323,7 @@ export default async function ReferenceContentPage({
           ['context', '補強候補'],
           ['audit', '機械監査'],
         ].map(([anchor, label]) => (
-          <Button key={anchor} asChild variant="outline" size="sm">
-            <a href={`#${anchor}`}>{label}</a>
-          </Button>
+          <Button key={anchor} variant="outline" size="sm" nativeButton={false} render={<a href={`#${anchor}`} />}>{label}</Button>
         ))}
       </nav>
 
@@ -386,9 +384,7 @@ export default async function ReferenceContentPage({
               検索する
             </Button>
             {hasFilters ? (
-              <Button asChild variant="ghost">
-                <a href="/content/references#portfolio">条件を解除</a>
-              </Button>
+              <Button variant="ghost" nativeButton={false} render={<a href="/content/references#portfolio" />}>条件を解除</Button>
             ) : null}
           </form>
           <p className="text-[11px] text-console-muted">

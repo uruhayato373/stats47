@@ -85,11 +85,9 @@ function TemplateCard({
       </PanelCard>
       <div className="flex flex-wrap gap-2">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="sm">
+          <SheetTrigger render={<Button variant="outline" size="sm" />}>
               型の方針を編集{changed ? '（未保存）' : ''}
-            </Button>
-          </SheetTrigger>
+            </SheetTrigger>
           <SheetContent className="overflow-y-auto sm:max-w-xl">
             <SheetHeader>
               <SheetTitle>{template.label}の方針を編集</SheetTitle>
@@ -150,17 +148,13 @@ function TemplateCard({
             </div>
           </SheetContent>
         </Sheet>
-        <Button asChild variant="ghost" size="sm">
-          <Link
-            href={mediaUrl('images', {
+        <Button variant="ghost" size="sm" nativeButton={false} render={<Link href={mediaUrl('images', {
               template: template.id,
               purpose,
               returnTo,
-            })}
-          >
+            })} />}>
             この型の使用先
-          </Link>
-        </Button>
+          </Button>
       </div>
     </section>
   );
@@ -261,11 +255,9 @@ export function TemplateGallery({
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-console-border pb-3">
         <div className="@min-[760px]:hidden">
           <Sheet open={listOpen} onOpenChange={setListOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="sm">
+            <SheetTrigger render={<Button variant="outline" size="sm" />}>
                 型分類を選ぶ
-              </Button>
-            </SheetTrigger>
+              </SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>型分類</SheetTitle>

@@ -171,7 +171,7 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
         <SheetHeader><SheetTitle>カバーを比較</SheetTitle><SheetDescription>{selected?.title}</SheetDescription></SheetHeader>
         {selected && <Stack gap="lg" className="px-4 pb-6"><NoteCoverComparison row={selected} />
           <NoteCoverProduction key={`${selected.key}:${selected.production.revision}`} row={selected} onDirty={setDirty} onSaved={row => { setOverrides(previous => ({ ...previous, [row.key]: row })); setSelected(row); setDirty(false); }} />
-          <div className="flex flex-wrap gap-2">{selected.noteUrl && <Button asChild variant="outline"><a href={selected.noteUrl} target="_blank" rel="noreferrer">noteで記事を開く</a></Button>}
+          <div className="flex flex-wrap gap-2">{selected.noteUrl && <Button variant="outline" nativeButton={false} render={<a href={selected.noteUrl} target="_blank" rel="noreferrer" />}>noteで記事を開く</Button>}
             <Button variant="outline" disabled={matched.findIndex(r => r.original.key === selected.key) >= matched.length - 1} onClick={() => { const index = matched.findIndex(r => r.original.key === selected.key); const next = matched[index + 1]; if (next) selectRow(next.original); }}>次の記事を確認</Button>
           </div>
         </Stack>}

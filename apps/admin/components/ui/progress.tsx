@@ -1,32 +1,85 @@
-// shadcn/ui 公式（new-york-v4）の progress.tsx をそのまま使う。変えたのは cn の import 先 (@/lib/cn) だけ。
-// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/progress.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の progress.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。
+// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/progress.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 "use client"
 
-import * as React from "react"
+import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
+
 import { cn } from "@/lib/cn"
-import { Progress as ProgressPrimitive } from "radix-ui"
 
 function Progress({
   className,
+  children,
   value,
   ...props
-}: React.ComponentProps<typeof ProgressPrimitive.Root>) {
+}: ProgressPrimitive.Root.Props) {
   return (
     <ProgressPrimitive.Root
+      value={value}
       data-slot="progress"
-      className={cn(
-        "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
-        className
-      )}
+      className={cn("cn-progress flex flex-wrap gap-3", className)}
       {...props}
     >
-      <ProgressPrimitive.Indicator
-        data-slot="progress-indicator"
-        className="h-full w-full flex-1 bg-primary transition-all"
-        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-      />
+      {children}
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
     </ProgressPrimitive.Root>
   )
 }
 
-export { Progress }
+function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
+  return (
+    <ProgressPrimitive.Track
+      className={cn(
+        "cn-progress-track relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+        className
+      )}
+      data-slot="progress-track"
+      {...props}
+    />
+  )
+}
+
+function ProgressIndicator({
+  className,
+  ...props
+}: ProgressPrimitive.Indicator.Props) {
+  return (
+    <ProgressPrimitive.Indicator
+      data-slot="progress-indicator"
+      className={cn("cn-progress-indicator h-full bg-primary transition-all", className)}
+      {...props}
+    />
+  )
+}
+
+function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
+  return (
+    <ProgressPrimitive.Label
+      className={cn("text-sm font-medium", className)}
+      data-slot="progress-label"
+      {...props}
+    />
+  )
+}
+
+function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
+  return (
+    <ProgressPrimitive.Value
+      className={cn(
+        "ml-auto text-sm text-muted-foreground tabular-nums",
+        className
+      )}
+      data-slot="progress-value"
+      {...props}
+    />
+  )
+}
+
+export {
+  Progress,
+  ProgressTrack,
+  ProgressIndicator,
+  ProgressLabel,
+  ProgressValue,
+}

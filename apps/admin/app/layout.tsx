@@ -28,7 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    // style-lyra: テンプレートの部品スタイル (@stats47/ui-theme の style-lyra.css) は .style-lyra の下だけで効く
+    <html lang="ja" className="style-lyra" suppressHydrationWarning>
       <head>
         {/* 素の <script> を JSX に置くと React が警告を出すため next/script で head へ入れる
             (beforeInteractive なので実行は hydration 前 = 同じタイミング)。 */}

@@ -35,12 +35,10 @@ function RunPicker({ base, view }: { base: string; view: ReviewRunView }) {
   return (
     <div className="flex flex-wrap gap-2">
       {view.options.map((o) => (
-        <Button key={o.key} asChild size="sm" variant={o.key === view.period ? "default" : "outline"}>
-          <Link href={`${base}?run=${o.key}`}>
+        <Button key={o.key} size="sm" variant={o.key === view.period ? "default" : "outline"} nativeButton={false} render={<Link href={`${base}?run=${o.key}`} />}>
             {o.key}
             {o.missing ? " (未作成)" : ""}
-          </Link>
-        </Button>
+          </Button>
       ))}
     </div>
   );

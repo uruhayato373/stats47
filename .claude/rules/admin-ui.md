@@ -8,24 +8,24 @@ paths:
 ---
 # 管理画面 (apps/admin) の UI 規約 (2026-09-30)
 
-`apps/admin` は web (Tailwind v3・`@stats47/components`) から**独立**し、doboku-note の `tools/admin-app` と同じ構成にする。
-部品は shadcn/ui 公式 (new-york-v4) のソースをそのまま使い、画面は共通の組み立て部品から作る。
+`apps/admin` は web (Tailwind v3・`@stats47/components`) から**独立**させる。
+部品はテンプレート [shadcndashboard/next-shadcn-dashboard](https://github.com/shadcndashboard/next-shadcn-dashboard) (MIT・Base UI 版 shadcn の base-nova + style-lyra) のソースをそのまま使い、画面は共通の組み立て部品から作る (2026-10-27 オーナー決定「テンプレートを正としてサイトを寄せる」)。色・角丸・部品の見た目は `@stats47/ui-theme` (`packages/ui-theme/`) を web と共有する。
 
 ## 構成
 
 | 層 | 置き場 | 中身 |
 |---|---|---|
-| 土台 | `apps/admin/app/globals.css` | Tailwind **v4** (CSS-first)。`@theme` に `console-*` と shadcn トークン、`@custom-variant dark`、v3 互換 (border 既定色・cursor・行高) |
-| 公式部品 | `apps/admin/components/ui/*.tsx` (+ `hooks/use-mobile.ts`) | shadcn/ui 公式 (new-york-v4) をそのまま。変えてよいのは import 先 (`cn` → `@/lib/cn`・registry の別名 → admin の alias) だけ。足すときは `node .claude/scripts/admin-ui/sync-shadcn-reference.mjs <name> --install` |
+| 土台 | `apps/admin/app/globals.css` | Tailwind **v4** (CSS-first)。`@import "@stats47/ui-theme"` (テンプレートの色・角丸トークン + lyra スタイル。`<html class="style-lyra">` で効く) と管理画面固有の `console-*`、`@custom-variant dark`、v3 互換 (cursor・行高) |
+| 公式部品 | `apps/admin/components/ui/*.tsx` (+ `hooks/use-mobile.ts`) | テンプレートの Base UI 版をそのまま。変えてよいのは import 先 (`@/lib/utils` → `@/lib/cn`) だけ。足すときは `node .claude/scripts/admin-ui/sync-shadcn-reference.mjs <name> --install` |
 | 並べ方 | `apps/admin/components/layout-primitives.tsx` | `Stack` / `Grid` / `Section` (`id` = ページ内リンクの着地・`count` = 見出し横の件数)。部品は外側の余白を持たず、間隔は親の `gap` が決める |
 | 組み立て部品 | `apps/admin/components/admin-ui/` | `TableFrame` (表の枠)・`DataTable` + `Row` / `Cell` (見出し行つきの一覧)・`PanelCard` (題名つきの区画)・`StatCard` (数値タイル)・`StatusBadge` (状態: good/warn/bad/info/neutral)・`LinkCard` (リンクになるカード)。ページはここと `components/ui/*` から組む |
 | ナビ | `apps/admin/lib/nav-registry.ts` (SSOT) + `lib/channel-registry.ts` + `components/console-nav*.tsx` | メニューの定義と現在地の判定は純モジュール。グループは事業の役割 (商品・SNS・制作・資産・戦略…)。チャネルは最上位に並べず、商品・SNS の「チャネル別」の枝 (折りたたみ・現在地を含む枝だけ開く) に channel-registry から入れる。表示は公式 `Sidebar` (md 未満は Sheet)。`tests/unit/nav-registry.test.ts` が「全項目のページが実在する」を止める |
 | グラフ色 | `apps/admin/components/dashboard/chart-tone.ts` | `ChartTone` → `text-console-*` / `fill-console-*` のクラス。SVG は `currentColor`・幅は属性で決め、`style` を使わない |
-| 公式の保存物 | `.claude/config/shadcn-reference/*.tsx` | 公式ソースの写し (CI がネットワークに依存しないため)。手編集しない |
+| 正の保存物 | `.claude/config/shadcn-reference/*.tsx` | テンプレートの固定コミット (`sync-shadcn-reference.mjs` の `TEMPLATE_SHA`) の写し (CI がネットワークに依存しないため)。手編集しない |
 
 ## 契約
 
-1. **公式と同じクラスにする。** 意図した差だけを `.claude/config/shadcn-parity-allow.json` に**理由付き**で登録する (現在は Badge の状態用 `success` / `warning` / `info` / `danger` の 4 件)。
+1. **正 (テンプレート) と同じクラスにする。** 意図した差だけを `.claude/config/shadcn-parity-allow.json` に**理由付き**で登録する (現在は Badge の状態用 `success` / `warning` / `info` / `danger` の 4 件)。
    差が無くなった例外は検査が知らせるので消す。部品を足すときは `npm run admin-ui:sync-reference -- <name>` で公式を取ってから `components/ui/` に置く。
 2. **大きさはページで上書きしない。** `<Badge>` `<Button>` `<TabsTrigger>` の文字サイズ・高さ・余白を `className` で変えず、`variant` / `size` で選ぶ。
 3. **ページに生のカード面・表・style を増やさない。** `bg-console-card` を使ったカード面の手組み、生の `<table>`、`style={{…}}`、`className="card|badge"` は
@@ -50,13 +50,17 @@ paths:
 ## 新しい画面・部品を足すとき
 
 1. 画面は `PanelCard` / `TableFrame` / `DataTable` / `StatCard` / `StatusBadge` / `LinkCard` / `Stack` / `Grid` / `Section` と公式部品から組む。
-   フォームは公式の `Input` / `NativeSelect` (サーバー描画の GET フォーム向け。Radix の Select は使わない) / `Button`、注記は `Alert`、
-   ページ内リンクは `Button asChild variant="outline"`。
+   フォームは公式の `Input` / `NativeSelect` (サーバー描画の GET フォーム向け) / `Button`、注記は `Alert`、
+   ページ内リンクは `<Button variant="outline" nativeButton={false} render={<Link href=… />}>`。
+   Base UI は Radix の `asChild` を持たない。子要素として描きたい要素は `render` に渡す。
+   クライアントの `Select` は `items` (値と表示名の組) を渡す。渡さないと選択欄に値そのものが出る。値の変更は `null` を受ける。
 2. `npm run admin-ui:check` を通し、light / dark の両方で見た目を確認する。
 3. メニュー項目を足す・URL を変えるときは `lib/nav-registry.ts` だけを編集する (テストがページの実在を確かめる)。
 4. `ops/primitives.tsx` には `PageHeading` / `ErrorNote` / `Unmeasured` / `Freshness` だけが残る。表・数値タイル・状態・区画は上の共通部品を使う。
 
 ## 移行の履歴
+
+2026-10-27: 部品をテンプレートの Base UI 版 (base-nova + style-lyra) へ全面置換し、色・角丸をテンプレートの値に (`@stats47/ui-theme`)。Radix を外し、`asChild` 24 か所を `render` へ、Select 3 か所に `items` を追加。
 
 2026-09-30: Tailwind v4 + 公式部品の土台、`/content/note/covers`・`/content/references` (手作業)、旧 `ops/primitives` の Section/Stat/Badge/Table/Td/Tr を
 共通部品へ置換 (20 ファイル)、残り 30 ファイルの手組みカード面・表・style を解消、ナビを公式 Sidebar へ。手組みの件数は 130 → 0。
