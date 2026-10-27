@@ -56,8 +56,11 @@ export function assertPublishedMetadata(before, after) {
   if (before.user?.urlname !== 'stats47' || after.user?.urlname !== 'stats47') throw Error('note account mismatch');
 }
 
-/** Use the editor's complete per-article payload; only the approved published body is patched. */
-export async function publishCardBody(context, apiPage, before, publicBefore, body, backupPath, onStage = () => {}) {
+/**
+ * Use the editor's complete per-article payload; only the approved published body is patched.
+ * options.name: an approved new title (a full rewrite renames the article). Price, tags and boundary stay guarded.
+ */
+export async function publishCardBody(context, apiPage, before, publicBefore, body, backupPath, onStage = () => {}, options = {}) {
   if (before.user?.urlname !== 'stats47' || before.status !== 'published') throw Error('owned published article required');
   const key = before.key;
   const draft = before.has_draft ? await noteRequest(apiPage, `/api/v3/notes/${key}?draft=true&draft_reedit=false`) : null;
@@ -100,6 +103,7 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
         if (JSON.stringify([...payload.hashtags].sort()) !== JSON.stringify(tags(before))) throw Error('editor hashtags differ from publication');
         if ((payload.separator || null) !== (before.separator || null)) throw Error('editor boundary differs from publication');
         Object.assign(payload, split);
+        if (options.name) payload.name = options.name;
         sent = true;
         await onStage('sending');
         await route.continue({ postData: JSON.stringify(payload) });
@@ -118,7 +122,7 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
   const after = await noteRequest(apiPage, `/api/v3/notes/${key}?cardVerify=${Date.now()}`);
   if (after.body !== body) throw Error('published body differs from approved card repair');
   let metadataError;
-  try { assertPublishedMetadata(before, after); } catch (error) { metadataError = error; }
+  try { assertPublishedMetadata(options.name ? { ...before, name: options.name } : before, after); } catch (error) { metadataError = error; }
   if (draft) {
     await noteRequest(apiPage, `/api/v1/text_notes/draft_save?id=${before.id}&is_temp_saved=true`, { method: 'POST', body: draftSavePayload(draft) });
     const restored = await noteRequest(apiPage, `/api/v3/notes/${key}?draft=true&draft_reedit=false`);

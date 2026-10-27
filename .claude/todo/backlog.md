@@ -289,10 +289,11 @@ updated: 2026-10-19
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:商品]
 
 - **経緯 (2026-10-27 実測)**: 公開済み 428 本を `npm run note:unverified:audit` で検査し 17 本が該当 (記録 `data/note/evidence/note-unverified-audit-latest.json`)。2026-10-24 に「未検証範囲を明示すれば公開してよい」と判断して操作記事を公開したのが直接の原因。同日に公開前ゲート (`lib/unverified-disclosure.mjs`。`publish-new-note.sh`・`patch-note-paid-landing.mjs`・週次 note-circulation) を入れた。週次はこの 17 本が直るまで落ち続ける。
-- **内訳**: Excel 塗りつぶしマップ `h-howto-excel-filled-map` (書き直しは別途進行) / マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
+- **内訳**: マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
 - **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
 - **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
-- **Excel 塗りつぶしマップ `h-howto-excel-filled-map` (2026-10-27・Microsoft 365 Excel バージョン 2407 で全手順を操作済み)**: 原稿を全面的に書き直し、画像 10 枚 (CSV・2 列の表・地理データ型・変換後・塗り分けマップの挿入・完成地図・色の変更 2 枚・「国」列の失敗例・PowerPoint 貼り付け) とともに R2 へ保存した (`note:article save`・manifest sha256 `d9591e04ca4ba2030ac6c18754de5ff9003977b19135fca6e4f5e96b4dc103ee`・13 ファイル・`audit-note-unverified --file` exit 0)。操作で分かった罠 (「国」列で日本全体が 1 色・チャートシートではコピー不可・PowerPoint へ普通に貼ると灰色になり貼り付けのオプション左から 2 番目で色が残る・タイトル枠に直接入力すると別のテキストボックスができる) は本文の「正しく表示されないときは」に書いた。**残り**: ① note.com の公開記事を R2 の新版で更新する (outward-facing なのでオーナー承認後。題名も「塗り分けマップ」に変わるので台帳 `data/note/articles.json` の title も公開時に合わせる) ② `hashtags.txt` の `#塗りつぶされたマップ` を `#塗り分けマップ` に替えるか判断 (承認済みハッシュタグの範囲) ③ 更新後に `npm run note:unverified:audit` でこの記事が外れたことを確かめる
+- **Excel 塗り分けマップ `h-howto-excel-filled-map` は 2026-10-27 に完了**: Microsoft 365 Excel (バージョン 2407) で全手順を操作して書き直し、画像 10 枚とともに note.com の公開本文を差し替えた (題名も「塗り分けマップ」へ。価格・ハッシュタグ 99 個・境界は不変を確認、未ログインの公開ページで画像 10 枚・リンクカード 3 枚の表示を確認)。ハッシュタグの `#塗りつぶされたマップ` は旧名で検索する読者向けに残した。
+- **監査が Windows で動かない (2026-10-27 実測)**: 会社の Windows PC で `npm run note:unverified:audit` を実行すると、プロキシ用の読み込み (memory proxy-preload-for-fetch-scripts) を付けても 428 本すべての取得に失敗した (`fetchFailed=428`・exit 2。原因は未調査)。この PC で全体の 0 件を確かめるには、`lib/note-session.mjs` のログイン済みブラウザから取得する経路に替えるか、Mac で流す。Excel 記事は同じ判定関数で公開版の本文を個別に検査して 0 件。
 - **完了条件**: 17 本それぞれ実際に操作した画面・結果を入れて更新し、`npm run note:unverified:audit` が 0/428 で exit 0。商品パックは Office で開いた確認記録を `data/products/` に残す。
 
 ### [STRATEGY-GATE-ADMIN-PILOT-01] 管理画面に、行政向け商品の検証が4段階のどこにいるかを出す
@@ -698,11 +699,11 @@ updated: 2026-10-19
 - **次**: ① 1 本目は地図用 KML が本番に出てから書く (手順の画面を実物で撮るため) ② 2 本目は今のダウンロード (Shift_JIS 版) で書ける ③ note-critic を通してからオーナー承認で公開。
 - **進捗 (2026-10-17)**: 2 本目 (H-02 CSV 文字化け) は公開済み (https://note.com/stats47/n/nc884a0a01b71)。1 本目 (H-01 マイマップ) は原稿 `docs/31_note記事原稿/h-howto-mymaps-kml/` (作業コピー・未登録) を note-critic が REVISE。minor 4 件は反映済み。
 - **実機確認は `NOTE-HOWTO-OWNER-CHECK-01` (別PC) に分けた。**
-- **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` (Excel の塗りつぶされたマップ) は blocker 1 件が残る: オーナーが Microsoft 365 の Excel で stats47 の CSV から地図を作り、47 都道府県が地理データ型で認識されて塗られるか (「国」列あり・なしで比較) を確かめ、データ型変換後のセルと完成した地図の 2 枚を撮る。認識されなければ公開しない。両方とも公開後に案内先を H-01 へ替える。
+- **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` は 2026-10-27 に実際の Excel で全手順を確かめて書き直し、公開本文を差し替えた (`NOTE-UNVERIFIED-PUBLISHED-01`)。#9 は公開後に案内先を H-01 へ替える。
 - **H-01 の公開条件 (オーナー作業)**: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`) を Google マイマップへ 1 回インポートし、①県別の色分けが出るか ②県をクリックした吹き出しに値・順位・時点・URL が出るかを確かめ、「インポート」の位置と読み込み後の地図の 2 枚を撮る。色が出なければ KML の Style 指定を直してから公開する。
 - **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
-- **統合 (2026-10-26 オーナー判断): `NOTE-HOWTO-OWNER-CHECK-01`** 別PCでマイマップとExcelの表示を確かめ、H-01・#9・#11 の画像を撮る
-  - **完了条件**: 3 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。
+- **統合 (2026-10-26 オーナー判断): `NOTE-HOWTO-OWNER-CHECK-01`** 別PCでマイマップの表示を確かめ、H-01・#9 の画像を撮る (#11 Excel は 2026-10-27 に完了)
+  - **完了条件**: 2 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。
 
 ### [CI-SMOKE-BOUNDING-BOX-01] 本番ランキングの画面幅テストで初回にboundingBoxが取れない原因を調べる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-17] [期日:2026-10-24] [領域:サイト]

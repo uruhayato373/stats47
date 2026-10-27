@@ -2695,7 +2695,7 @@
     },
     "h-howto-excel-filled-map": {
       "vertical": "stats47-note",
-      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "title": "Excelの「塗り分けマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
       "url": "https://note.com/stats47/n/n800864e68c6b",
       "is_paid": false,
       "published_at": "2026-10-24",
