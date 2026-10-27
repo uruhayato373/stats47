@@ -12,7 +12,7 @@ import { ChevronDown, ListTree } from 'lucide-react';
 import Link from '@/components/atoms/SiteLink';
 import { RailCategoryList } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
-import { RailCard } from '@/components/surface';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import { SurveyOutboundLinkArea } from './SurveyOutboundLinkArea';
 
@@ -83,27 +83,26 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
     <div
       className={cn(
         WIDE_ONLY_CLASS,
-        'mb-8 items-start gap-4',
+        // 2 枚の高さを揃える (items-stretch + 各カードの h-full)
+        'mb-8 items-stretch gap-4',
         categories.length > 0 && 'grid-cols-2'
       )}
     >
       <RailCard
         title="このページ"
         aria-label="このページ"
+        className="h-full"
         headerAction={<SectionIndexLink href="/survey" label="調査一覧へ" />}
       >
+        {/* 押せると分かるよう、関連する分類と同じ矢印付きのメニュー行で並べる */}
         <nav
           aria-label="この調査ページの内容"
-          className="flex flex-wrap gap-x-5 gap-y-1"
+          className="grid grid-cols-2 gap-x-4"
         >
           {pageLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="py-1.5 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-            >
+            <RailNavRow key={item.href} href={item.href}>
               {item.label}
-            </Link>
+            </RailNavRow>
           ))}
         </nav>
       </RailCard>
@@ -111,8 +110,8 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
       {categories.length > 0 && (
         // RailCategoryList は trackingSurface で自前計測するため、SurveyOutboundLinkArea
         // (click delegation による計測) で二重に包まない。
-        <nav aria-label="この調査に関連する分類">
-          <RailCard title="関連する分類" bodyClassName="px-4 pb-3 pt-0">
+        <nav aria-label="この調査に関連する分類" className="h-full">
+          <RailCard title="関連する分類" className="h-full" bodyClassName="px-4 pb-3 pt-0">
             {/* 件数は「このページの調査に含まれるランキング数」で、全サイトの件数ではない */}
             <p className="sr-only">件数はこの調査のランキング数です</p>
             <RailCategoryList

@@ -11,6 +11,8 @@ import type { ChartPoint } from './MiniCharts';
 
 /** 実幅を測る前 (SSR・初回描画) に使う幅。測ったあとは実幅に置き換える。 */
 const FALLBACK_WIDTH = 400;
+/** y 軸の目盛り文字と、線の始点 (最初の年) の間に空ける幅 (px)。 */
+const PLOT_START_GAP = 12;
 
 /**
  * 描画先の実幅 (px) を ResizeObserver で測る。viewBox を実幅に合わせ、
@@ -78,9 +80,11 @@ export function NumericTrendChart({
     60,
     Math.max(...tickLabels.map((label) => label.length)) * 7 + 12
   );
+  // 描画域 (目盛り線・線・最初の年) の始点を y 軸の目盛り文字から離す。left のままだと最初の点と年の文字が目盛りに接していた。
+  const plotLeft = left + PLOT_START_GAP;
   const x = scaleLinear()
     .domain([data[0].year, data[data.length - 1].year])
-    .range([left, width - right]);
+    .range([plotLeft, width - right]);
   const y = scaleLinear()
     .domain(domain)
     .range([height - bottom, top]);
@@ -109,9 +113,9 @@ export function NumericTrendChart({
       <defs>
         <clipPath id={clipId}>
           <rect
-            x={left}
+            x={plotLeft}
             y={top - 5}
-            width={width - right - left}
+            width={width - right - plotLeft}
             height={height - bottom - top + 10}
           />
         </clipPath>
@@ -119,7 +123,7 @@ export function NumericTrendChart({
       {ticks.map((value, index) => (
         <g key={index}>
           <line
-            x1={left}
+            x1={plotLeft}
             x2={width - right}
             y1={y(value)}
             y2={y(value)}
@@ -178,8 +182,9 @@ export function NumericTrendChart({
         </g>
       )}
       <text
-        x={left}
+        x={plotLeft}
         y={height - 4}
+        textAnchor="middle"
         className="fill-muted-foreground"
         fontSize="12"
       >

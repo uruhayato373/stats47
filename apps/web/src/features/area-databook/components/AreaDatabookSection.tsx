@@ -1,6 +1,7 @@
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { BookOpen } from "lucide-react";
 
+import { SectionHeader } from "@/components/section";
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 import { getSurfaceCardClassName } from "@/components/surface";
@@ -163,11 +164,13 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
     .filter((s) => sectionHasContent(s, data));
 
   return (
-    <section className="space-y-5">
-      <div className="flex items-center gap-2">
-        <BookOpen className="h-5 w-5 text-primary" />
-        <h2 className="text-xl font-bold">{areaName}のデータブック</h2>
-      </div>
+    <section className="space-y-5" aria-labelledby="area-databook-title">
+      {/* 見出しは「特徴」など他の節と同じ SectionHeader の型で描く */}
+      <SectionHeader
+        icon={<BookOpen aria-hidden />}
+        title={<span id="area-databook-title">{areaName}のデータブック</span>}
+        className="mb-0"
+      />
 
       {sections.map((section) => {
         const useHalfWidthCharts = hasMultipleHalfWidthCharts(section);

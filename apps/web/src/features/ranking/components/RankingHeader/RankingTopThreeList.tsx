@@ -1,15 +1,10 @@
 'use client';
 
-import {
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@stats47/components';
 import { formatUnitForDisplay, parseUnit } from '@stats47/data-configs/unit';
+import { Trophy } from 'lucide-react';
 
+import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ValueDotPlot } from '@/components/charts/ValueDotPlot';
-import { SurfaceCard } from '@/components/surface';
 
 import {
   formatRankingValue,
@@ -52,16 +47,18 @@ export function RankingTopThreeList({
     parseUnit(unit).dimension === 'percent' ? 'pt' : formatUnitForDisplay(unit);
   const formatValue = (value: number) => formatRankingValue(value, precision);
   return (
-    <SurfaceCard className="px-0">
-      <CardHeader>
-        <CardTitle>上位3件{showLast ? 'と最下位' : ''}</CardTitle>
-        {unit && (
-          <CardAction className="text-xs text-muted-foreground">
+    <ChartPanel
+      title={`上位3件${showLast ? 'と最下位' : ''}`}
+      icon={<Trophy />}
+      action={
+        unit ? (
+          <span className="text-xs text-muted-foreground">
             単位: {formatUnitForDisplay(unit)}
-          </CardAction>
-        )}
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2">
+          </span>
+        ) : undefined
+      }
+      contentClassName="flex flex-col gap-2"
+    >
       <ValueDotPlot
         items={entries.map((entry) => ({
           key: entry.areaCode,
@@ -87,7 +84,6 @@ export function RankingTopThreeList({
           )}
         </p>
       )}
-      </CardContent>
-    </SurfaceCard>
+    </ChartPanel>
   );
 }

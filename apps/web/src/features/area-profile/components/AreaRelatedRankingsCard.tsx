@@ -1,7 +1,6 @@
-import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
+import { TrendingDown, TrendingUp } from 'lucide-react';
 
-import Link from '@/components/atoms/SiteLink';
-import { SectionHeader } from '@/components/section';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { SectionCard } from '@/components/surface';
 
 import { AreaHighlightList, type AreaHighlightListItem } from './AreaHighlightList';
@@ -49,27 +48,24 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
         title={<span id="area-highlights-title">{areaName}の特徴</span>}
         description="県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。"
       />
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="@container">
+      <div className="grid grid-cols-1 gap-4 @min-[40rem]:grid-cols-2">
         {groups.map(({ key, title, icon: Icon, items }) =>
           items.length > 0 ? (
             <SectionCard
               key={key}
               title={title}
-              icon={<Icon className="h-4 w-4 text-muted-foreground" />}
-              headerAction={
-                <Link
-                  href="/themes"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-                >
-                  テーマ一覧
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-              }
+              icon={<Icon />}
+              // .style-lyra .cn-card の gap-4 は SectionCard の gap-0 より強く、見出しの下が 16px 余分に空いていた
+              className="gap-0!"
+              bodyClassName="pt-3"
+              headerAction={<SectionIndexLink href="/themes">テーマ一覧</SectionIndexLink>}
             >
               <AreaHighlightList items={items.map(toHighlightListItem)} rankScope="全国順位" />
             </SectionCard>
           ) : null,
         )}
+      </div>
       </div>
     </section>
   );

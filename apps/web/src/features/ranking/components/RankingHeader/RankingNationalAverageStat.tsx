@@ -1,16 +1,10 @@
 "use client";
 
-import {
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { TrendingUp } from "lucide-react";
 
+import { ChartPanel } from "@/components/charts/ChartPanel";
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
-import { SurfaceCard } from "@/components/surface";
 
 import {
   computeNationalAveragePeriodChange,
@@ -60,19 +54,20 @@ export function RankingNationalAverageStat({
   const periodChange = computeNationalAveragePeriodChange(series, unit);
 
   return (
-    <SurfaceCard className="px-0">
-      <CardHeader>
-        <CardTitle>{label}</CardTitle>
-        {yearName && <CardDescription className="text-xs">{yearName}</CardDescription>}
-        <CardAction className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">
+    <ChartPanel
+      title={label}
+      icon={<TrendingUp />}
+      description={yearName ?? undefined}
+      action={
+        <span className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">
           {formatRankingValue(figure.value, precision)}
           <span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span>
-        </CardAction>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-1">
+        </span>
+      }
+      contentClassName="flex flex-col gap-1"
+    >
         {hasTrend ? <NumericTrendChart points={series} policy={domainPolicy} selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined} label={label} unit={unit} formatValue={(value) => formatRankingValue(value, precision)} /> : <p className="text-xs text-muted-foreground">{series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}</p>}
         {periodChange && <p className="text-xs text-muted-foreground">{periodChange.fromYear}→{periodChange.toYear} <span className="font-medium text-foreground">{periodChange.text}</span></p>}
-      </CardContent>
-    </SurfaceCard>
+    </ChartPanel>
   );
 }

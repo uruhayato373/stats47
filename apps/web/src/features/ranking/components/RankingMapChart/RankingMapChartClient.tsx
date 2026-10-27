@@ -20,6 +20,7 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { Map as MapIcon } from "lucide-react";
 
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -44,7 +45,7 @@ import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
 
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
-  { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-md" /> }
+  { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-none" /> }
 );
 
 const TileSwitcher = dynamic(
@@ -168,15 +169,18 @@ export function RankingMapChartClient({
   return (
     <ChartPanel
       title={cardTitle}
+      icon={cardTitle ? <MapIcon /> : undefined}
       description={cardSubtitle}
       action={headerActions}
       footer={cardFooter}
+      contentClassName="px-0!"
     >
       {/* Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
-          固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。 */}
-      <div className="relative isolate z-0 w-full overflow-hidden rounded-md">
+          固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。
+          地図は内側に枠を作らず、カード本文の幅いっぱいに描く (px-0!: lyra の cn-card-content の px-4 に勝たせる)。 */}
+      <div className="relative isolate z-0 w-full overflow-hidden [&_.leaflet-container]:rounded-none!">
         {isMapLoading ? (
-          <Skeleton className="h-[500px] w-full rounded-md" />
+          <Skeleton className="h-[500px] w-full rounded-none" />
         ) : showFallback ? (
           <ChartEmptyState
             height={null}

@@ -47,7 +47,8 @@ export function AreaHighlightList({ items, rankScope, columns = 1 }: AreaHighlig
   const list = (
     <ol
       className={cn(
-        "grid grid-cols-1 gap-y-1.5",
+        // 行の間隔 (12px) は、見出しの下線から 1 行目までの間隔 (呼び出し側の pt-3) と揃える
+        "grid grid-cols-1 gap-y-3",
         columns === 3 && "gap-x-6 @md:grid-cols-2 @lg:grid-cols-3",
       )}
       data-nav-surface="area_highlights"

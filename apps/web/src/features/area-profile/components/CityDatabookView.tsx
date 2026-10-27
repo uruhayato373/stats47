@@ -15,10 +15,11 @@ import {
   type CityDatabookMetric,
   type CityDatabookSnapshot,
 } from "@stats47/ranking";
+import { TrendingUp } from "lucide-react";
 
-import { rankToneByPosition } from "@/components/atoms/RankBadge";
 import Link from "@/components/atoms/SiteLink";
 import { SectionHeader } from "@/components/section";
+import { SectionCard } from "@/components/surface";
 
 import { RankedValueGrid } from "@/features/area-databook";
 
@@ -44,6 +45,16 @@ const DATABOOK_TABLE_CLASS =
   "[&_td+td]:whitespace-nowrap [&_td+td]:text-right [&_td+td]:tabular-nums " +
   "[&_small]:text-[11px] [&_small]:text-muted-foreground " +
   "[&_td>a]:font-medium [&_td>a]:text-foreground [&_td>a:hover]:text-primary [&_td>a:hover]:underline";
+
+/**
+ * 分野へのリンクを outline の小ボタン (buttonVariants outline sm と同じ見た目) で並べる。
+ * 30 件前後並ぶので、DATABOOK_TABLE_CLASS と同じくクラスは親に 1 回だけ書く (ページの重さの予算)。
+ */
+const FIELD_LINKS_CLASS =
+  "flex flex-wrap gap-1.5 " +
+  "[&>a]:inline-flex [&>a]:h-7 [&>a]:items-center [&>a]:rounded-md [&>a]:border [&>a]:border-border " +
+  "[&>a]:bg-background [&>a]:px-2.5 [&>a]:text-xs [&>a]:font-medium [&>a]:text-foreground [&>a]:transition-colors " +
+  "[&>a:hover]:bg-muted [&>a:focus-visible]:outline-hidden [&>a:focus-visible]:ring-2 [&>a:focus-visible]:ring-ring/50";
 
 /** 市区町村の指標は全国の市区町村ランキングへつなぐ (県内の位置は表の県内順位で読める)。 */
 function metricHref(metric: CityDatabookMetric): string {
@@ -94,10 +105,8 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
               value: metric.value,
               unit: metric.unit,
               year: metric.yearName,
-              badge: {
-                rank: metric.prefectureRank,
-                tone: rankToneByPosition(metric.prefectureRank, metric.prefectureCount),
-              },
+              // 市区町村の指標は極性を焼き込んでいないので、順位の位置で色を変えない (特徴の一覧と同じ neutral)
+              badge: { rank: metric.prefectureRank, tone: "neutral" },
               detail: ` ・ ${nationalRankText(metric)}`,
             },
           }))}
@@ -110,7 +119,13 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             title={<span id="city-highlights">{cityShortName}の特徴</span>}
             description={`${inside}で${CITY_TOP_BAND}位以内に入る、人口あたり・割合などの指標`}
           />
-          {/* 市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}
+          {/* 県ページの「特徴」と同じカードに入れる。市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}
+          <SectionCard
+            title={`${cityShortName}が${inside}で上位`}
+            icon={<TrendingUp />}
+            className="gap-0!"
+            bodyClassName="pt-3"
+          >
           <AreaHighlightList
             columns={3}
             rankScope={`${inside}順位`}
@@ -126,6 +141,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
               tone: "neutral",
             }))}
           />
+          </SectionCard>
         </section>
       )}
 
@@ -134,9 +150,9 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
           title={<span id="city-sections">分野別のデータ</span>}
           description={`${Object.keys(metrics).length}指標。指標名から全国の市区町村ランキングへ移れます`}
         />
-        <nav aria-label="分野" className="flex flex-wrap gap-x-3 gap-y-1 text-sm">
+        <nav aria-label="分野" className={FIELD_LINKS_CLASS}>
           {databook.sections.map((section) => (
-            <a key={section.themeSlug} href={`#${section.themeSlug}`} className="text-primary hover:underline">
+            <a key={section.themeSlug} href={`#${section.themeSlug}`}>
               {section.title}
             </a>
           ))}
@@ -204,15 +220,14 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             <p className="text-muted-foreground">
               この表に載せていない分野も、市区町村どうしで比べられます。
             </p>
-            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+            <div className={`mt-2 ${FIELD_LINKS_CLASS}`}>
               {otherThemes.map((theme) => (
                 <Link
                   key={theme.slug}
                   href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
                   data-nav-label={`theme:${theme.slug}`}
-                  className="text-primary hover:underline"
                 >
-                  {theme.title} ›
+                  {theme.title}
                 </Link>
               ))}
             </div>

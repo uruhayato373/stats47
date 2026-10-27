@@ -80,7 +80,7 @@ describe("GA4 カスタムイベント", () => {
       "geo_region_select",
       expect.objectContaining({ area_code: "27000" })
     );
-    // geo_compare_add は呼び出す部品がどのページにも無いので送信関数ごと削除した (2026-10-28)
+    // 「比較へ追加」のイベントは呼び出す部品がどのページにも無いので送信関数ごと削除した (2026-10-28)
     expect(Object.keys(events).filter((name) => name.endsWith("CompareAdd"))).toEqual([]);
     expect(mockGtag).toHaveBeenNthCalledWith(
       4,

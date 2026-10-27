@@ -49,7 +49,8 @@ type Trend =
  *
  * 2 列に並ぶので、カードは grid の行の高さいっぱいに伸ばし (h-full + flex-col)、
  * 出典・ランキングは帯 (CardFooter) にせず本文末の text-xs のリンク行に置く。
- * 隣のカードと高さ・下端が揃う。
+ * 隣のカードと高さ・下端が揃う。推移の有無にかかわらず、見出し・値の行 (text-2xl・テンプレートの KPI と同じ)・
+ * リンク行の位置は隣のカードと同じにする。推移の無いカードは推移の位置に 1 行の案内だけを置く。
  *
  * 時系列は `MetricSwitcherPanel` と同じ action を、この指標 1 件分だけ遅延取得する
  * (自地域 + 全国。47都道府県・未選択では取得しない = GEO-SCOPE-SEPARATION-01 WP2)。
@@ -157,7 +158,7 @@ export function SingleMetricCard({
           <p className="text-[11px] leading-4 text-muted-foreground">{label}</p>
         )}
         <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
-          <span className="text-xl font-bold tabular-nums text-foreground">
+          <span className="text-2xl font-semibold tabular-nums text-foreground">
             {shown !== null
               ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
               : '—'}

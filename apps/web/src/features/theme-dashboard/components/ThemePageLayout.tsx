@@ -21,7 +21,11 @@ import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
-import { RailStack } from '@/components/rail';
+import {
+  TABS_LINK_LIST_CLASS,
+  TABS_LINK_TRIGGER_CLASS,
+} from '@/components/navigation/StatisticsScopeNav';
+import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
 import { RailCard, RailNavRow } from '@/components/surface';
@@ -231,68 +235,139 @@ export async function ThemePageLayout({
             <ThemeAreaHeader themeTitle={theme.title} />
           )}
 
-          {!areaContext && (
-            <StatisticsScopeNav
-              current="prefectures"
-              hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-            />
-          )}
-
           {toolbar}
 
-          {/* テーマ切替と地域選択は同じ高さ・同じ基準線の 1 行に置き、テーマ一覧への出口は右端のボタンにする。
+          {/* 地域単位のタブ・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のナビを 1 行で置く。
+          最初の画面に指標カードが出るよう、全指標・出典調査と関連記事はダッシュボードの後ろへ回す。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-          <div
-            role="group"
-            aria-label="テーマと地域"
-            className="mb-4 flex flex-wrap items-end gap-3"
-          >
-            <div className="w-full min-w-0 sm:w-64">
-              <ThemeSwitcher
-                themes={THEME_SWITCHER_THEMES}
-                currentThemeKey={theme.themeKey}
-                areaContext={
-                  areaContext ? { areaCode: areaContext.areaCode } : undefined
-                }
-                compact
-              />
-            </div>
-            <div className="w-full min-w-0 sm:w-48">
-              <span className="block text-xs font-medium text-muted-foreground">
-                地域
-              </span>
-              <PrefectureSelect className="mt-1 w-full" />
-            </div>
-            <Link
-              href="/themes"
-              data-slot="button"
-              className={buttonVariants({
-                variant: 'outline',
-                className: 'sm:ml-auto',
-              })}
-            >
-              テーマ一覧
-            </Link>
-          </div>
-
-          <RailStack className="mb-4">
-            {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査) */}
-            {pageLinks.length > 1 && (
-              <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
-                <nav
-                  aria-label="このページの内容"
-                  className="flex flex-wrap items-center gap-x-5 gap-y-1"
+          <div className="mb-4 flex flex-col gap-3">
+            <div className="flex flex-wrap items-end gap-3">
+              {!areaContext && (
+                <StatisticsScopeNav
+                  current="prefectures"
+                  hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+                  className="mb-0"
+                />
+              )}
+              <div
+                role="group"
+                aria-label="テーマと地域"
+                className="flex min-w-0 flex-1 items-end gap-2 sm:gap-3"
+              >
+                <div className="min-w-0 flex-1 sm:w-56 sm:flex-none">
+                  <ThemeSwitcher
+                    themes={THEME_SWITCHER_THEMES}
+                    currentThemeKey={theme.themeKey}
+                    areaContext={
+                      areaContext ? { areaCode: areaContext.areaCode } : undefined
+                    }
+                    compact
+                  />
+                </div>
+                <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
+                  <span className="block text-xs font-medium text-muted-foreground">
+                    地域
+                  </span>
+                  <PrefectureSelect className="mt-1 w-full" />
+                </div>
+                <Link
+                  href="/themes"
+                  data-slot="button"
+                  className={buttonVariants({
+                    variant: 'outline',
+                    className: 'shrink-0 sm:ml-auto',
+                  })}
                 >
+                  テーマ一覧
+                </Link>
+              </div>
+            </div>
+
+            {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査)。
+            狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (tabs と同じ見た目のリンク列) */}
+            {pageLinks.length > 1 && (
+              <nav
+                aria-label="このページの内容"
+                className="max-w-full overflow-x-auto [scrollbar-width:none]"
+              >
+                <div className={TABS_LINK_LIST_CLASS}>
                   <ThemeChapterLinks
                     links={pageLinks}
                     themeKey={theme.themeKey}
-                    className="py-1.5 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
+                    className={TABS_LINK_TRIGGER_CLASS}
                   />
-                </nav>
-              </RailCard>
+                </div>
+              </nav>
             )}
+          </div>
 
-            {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
+          {/* エリアページ経由時の視点バナー */}
+          {areaContext && (
+            // 狭い幅では文と導線を縦に積む (横並びだと 1〜2 文字ずつ折り返す。2026-10-04 週次 UI 検査)
+            <div className="mb-4 flex flex-col gap-1 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm sm:flex-row sm:items-center sm:gap-2">
+              <span className="font-medium text-primary">
+                {areaContext.areaName}の視点
+              </span>
+              <span className="text-muted-foreground">
+                — 47都道府県チャートで{areaContext.areaName}
+                をハイライト表示しています
+              </span>
+              <SectionIndexLink
+                href={hrefFor('area', { areaCode: areaContext.areaCode })}
+                className="self-start sm:ml-auto sm:shrink-0 sm:self-auto"
+              >
+                {areaContext.areaName}のプロフィール
+              </SectionIndexLink>
+            </div>
+          )}
+
+          {areaContext && areaHighlights.length > 0 && (
+            <section
+              aria-labelledby="area-theme-highlights"
+              className="mb-6 border-y border-border bg-muted/30 px-4 py-4"
+            >
+              <h2
+                id="area-theme-highlights"
+                className="text-base font-semibold"
+              >
+                {areaContext.areaName}の主なデータ
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                このテーマに関連する最新公表値です。
+              </p>
+              <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
+                {areaHighlights.map((highlight) => (
+                  <div key={highlight.key}>
+                    <dt className="text-xs text-muted-foreground">
+                      {highlight.title}
+                    </dt>
+                    <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
+                      {highlight.value.toLocaleString('ja-JP')} {formatUnitForDisplay(highlight.unit)}
+                    </dd>
+                    <dd className="text-xs text-muted-foreground">
+                      {highlight.yearName}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+
+          <ThemeDashboardClient
+            themeConfig={theme}
+            metricGroups={data.metricGroups}
+            sections={catalog?.sections}
+            embeddedSections={embeddedSections}
+            indicatorDataMap={data.indicatorDataMap}
+            topology={data.topology}
+            pageCharts={pageCharts}
+            chartSourceLinks={chartSourceLinks}
+            kpiDataByArea={kpiDataByArea}
+            highlightAreaCode={areaContext?.areaCode}
+          />
+
+          {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
+            <div className="mt-8">
               <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
                 <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
                   {themeMetrics.length > 0 && (
@@ -342,62 +417,11 @@ export async function ThemePageLayout({
                   </div>
                 </div>
               </RailCard>
-            )}
-          </RailStack>
-
-          {/* エリアページ経由時の視点バナー */}
-          {areaContext && (
-            // 狭い幅では文と導線を縦に積む (横並びだと 1〜2 文字ずつ折り返す。2026-10-04 週次 UI 検査)
-            <div className="mb-4 flex flex-col gap-1 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm sm:flex-row sm:items-center sm:gap-2">
-              <span className="font-medium text-primary">
-                {areaContext.areaName}の視点
-              </span>
-              <span className="text-muted-foreground">
-                — 47都道府県チャートで{areaContext.areaName}
-                をハイライト表示しています
-              </span>
-              <Link
-                href={hrefFor('area', { areaCode: areaContext.areaCode })}
-                className="text-sm text-primary hover:underline sm:ml-auto sm:shrink-0 sm:text-xs"
-              >
-                {areaContext.areaName}プロフィールへ →
-              </Link>
             </div>
           )}
 
-          {areaContext && areaHighlights.length > 0 && (
-            <section
-              aria-labelledby="area-theme-highlights"
-              className="mb-6 border-y border-border bg-muted/30 px-4 py-4"
-            >
-              <h2
-                id="area-theme-highlights"
-                className="text-base font-semibold"
-              >
-                {areaContext.areaName}の主なデータ
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                このテーマに関連する最新公表値です。
-              </p>
-              <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
-                {areaHighlights.map((highlight) => (
-                  <div key={highlight.key}>
-                    <dt className="text-xs text-muted-foreground">
-                      {highlight.title}
-                    </dt>
-                    <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
-                      {highlight.value.toLocaleString('ja-JP')} {formatUnitForDisplay(highlight.unit)}
-                    </dd>
-                    <dd className="text-xs text-muted-foreground">
-                      {highlight.yearName}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          )}
-
           {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <div className="mt-8">
             <Suspense fallback={null}>
               <ThemeRelatedArticles
                 themeKey={theme.themeKey}
@@ -405,21 +429,9 @@ export async function ThemePageLayout({
                 rankingKeys={theme.rankingKeys}
               />
             </Suspense>
+            </div>
           )}
 
-
-          <ThemeDashboardClient
-            themeConfig={theme}
-            metricGroups={data.metricGroups}
-            sections={catalog?.sections}
-            embeddedSections={embeddedSections}
-            indicatorDataMap={data.indicatorDataMap}
-            topology={data.topology}
-            pageCharts={pageCharts}
-            chartSourceLinks={chartSourceLinks}
-            kpiDataByArea={kpiDataByArea}
-            highlightAreaCode={areaContext?.areaCode}
-          />
 
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
           <InContentAdSlot slot={HUB_INCONTENT} />

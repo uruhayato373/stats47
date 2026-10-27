@@ -7,12 +7,10 @@ import { lookupArea } from '@stats47/area';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
-import { ArrowRight } from 'lucide-react';
 
-import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
-import { SectionHeader } from '@/components/section';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 
 import {
@@ -476,12 +474,9 @@ export function ThemeMetricsDashboard({
 
   // 県を選んでいるときの県プロフィールへの導線。浮いた 1 行にせず、先頭の節見出しの右端に置く。
   const profileLink = selectedPrefectureCode ? (
-    <Link
-      href={hrefFor('area', { areaCode: selectedPrefectureCode })}
-      className="inline-flex items-center gap-0.5 text-xs font-medium text-primary hover:underline"
-    >
-      {areaName}のプロフィール <ArrowRight className="size-3" aria-hidden />
-    </Link>
+    <SectionIndexLink href={hrefFor('area', { areaCode: selectedPrefectureCode })}>
+      {areaName}のプロフィール
+    </SectionIndexLink>
   ) : null;
 
   const renderChapter = (

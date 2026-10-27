@@ -33,6 +33,7 @@ export interface ChartPanelProps {
  * タイトル付きチャート/地図の枠。テンプレートの Card 構成
  * (CardHeader / CardTitle / CardDescription / CardAction / CardContent / CardFooter) で描く。
  * 見出しは h3 として CardTitle の中に置き、領域は見出し・説明で命名する。
+ * 見出し行は RailCard / SectionCard と同じ型 (アイコン + font-medium + 下線) にそろえる。
  */
 export function ChartPanel({
   id,
@@ -69,14 +70,31 @@ export function ChartPanel({
             <CardTitle
               className={cn('flex min-w-0 items-center gap-2', titleClassName)}
             >
-              {icon}
-              {title && <h3 id={titleId}>{title}</h3>}
+              {icon && (
+                <span
+                  aria-hidden="true"
+                  className="flex shrink-0 text-muted-foreground [&_svg]:size-4"
+                >
+                  {icon}
+                </span>
+              )}
+              {title && (
+                <h3 id={titleId} className="min-w-0 font-medium text-foreground">
+                  {title}
+                </h3>
+              )}
             </CardTitle>
           )}
           {description && (
             <CardDescription id={descriptionId}>{description}</CardDescription>
           )}
-          {action && <CardAction>{action}</CardAction>}
+          {action && (
+            // 説明が無いときは見出しの 1 行だけにまたがらせ、見出しと縦の中央をそろえる
+            // (CardAction 既定の row-span-2 だと空の 2 行目と gap の分だけ下にずれる)
+            <CardAction className={cn('self-center', !description && 'row-span-1')}>
+              {action}
+            </CardAction>
+          )}
         </CardHeader>
       )}
       <CardContent className={contentClassName}>{children}</CardContent>

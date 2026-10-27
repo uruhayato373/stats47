@@ -12,9 +12,12 @@ describe('ChartFooter', () => {
     expect(trigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
     await user.click(trigger);
     const menu = await screen.findByRole('menu');
-    expect(trigger).toHaveAttribute('aria-controls', 'theme-ports-footer-ranking-content');
+    // メニューの JS は初回操作で読むため、開いた後のボタンは読み込んだ本物 (同じ id・名前) に置き換わる
+    const openedTrigger = screen.getByRole('button', { name: 'ランキング2件を表示' });
+    expect(openedTrigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
+    expect(openedTrigger).toHaveAttribute('aria-controls', 'theme-ports-footer-ranking-content');
     expect(menu).toHaveAttribute('id', 'theme-ports-footer-ranking-content');
-    expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', trigger.id);
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', openedTrigger.id);
   });
   it('単一の出典・ランキングをアイコン付きの短い導線で表示する', async () => {
     const user = userEvent.setup();

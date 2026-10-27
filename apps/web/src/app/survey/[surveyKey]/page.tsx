@@ -7,6 +7,7 @@
 
 import { notFound } from 'next/navigation';
 
+import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
@@ -17,6 +18,7 @@ import {
 } from '@stats47/ranking/server';
 import { resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 import { isOk } from '@stats47/types';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -332,9 +334,11 @@ export default async function SurveyPage({ params }: PageProps) {
               href={survey.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-md border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent/50"
+              data-slot="button"
+              className={buttonVariants({ variant: 'outline', size: 'sm' })}
             >
-              公式サイト ↗
+              公式サイト
+              <ExternalLink data-icon="inline-end" aria-hidden />
             </a>
           ) : undefined
         }
@@ -346,12 +350,12 @@ export default async function SurveyPage({ params }: PageProps) {
       <SurveyMobileNav pageLinks={pageLinks} categories={relatedCategories} />
 
       {editorial && (
-        <section id="survey-overview" className="mb-12 scroll-mt-24 space-y-8">
+        <section id="survey-overview" className="mb-4 scroll-mt-24 space-y-4">
           <div>
             <SectionHeader
               title="この調査で分かること"
             />
-            <p className="mb-5 text-sm leading-7 text-muted-foreground">
+            <p className="mb-4 text-sm leading-6 text-foreground">
               {editorial.summary}
             </p>
             {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
@@ -377,9 +381,9 @@ export default async function SurveyPage({ params }: PageProps) {
                       href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                       className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                     >
-                      {item.question}
-                      <span className="ml-1 text-primary" aria-hidden="true">
-                        →
+                      <span className="flex items-center justify-between gap-2">
+                        <span className="min-w-0">{item.question}</span>
+                        <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
                       </span>
                     </SurfaceLinkCard>
                   ))}
@@ -391,7 +395,7 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {featuredItems.length > 0 && (
-        <section id="representative-rankings" className="mb-12 scroll-mt-24">
+        <section id="representative-rankings" className="mb-4 scroll-mt-24">
           <SectionHeader
             title="代表ランキング"
           />
@@ -412,7 +416,7 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {relatedThemes.length > 0 && (
-        <section id="related-themes" className="mb-12 scroll-mt-24">
+        <section id="related-themes" className="mb-4 scroll-mt-24">
           <SectionHeader
             title="この調査を使うテーマ"
           />
@@ -424,9 +428,9 @@ export default async function SurveyPage({ params }: PageProps) {
                   href={themeHref(theme.key)}
                   className="text-sm font-medium text-foreground hover:bg-accent/50"
                 >
-                  {theme.title}
-                  <span className="ml-1 text-primary" aria-hidden="true">
-                    →
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="min-w-0">{theme.title}</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
                   </span>
                 </SurfaceLinkCard>
               ))}
@@ -436,7 +440,7 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {relatedArticles.length > 0 && (
-        <section id="related-articles" className="mb-12 scroll-mt-24">
+        <section id="related-articles" className="mb-4 scroll-mt-24">
           <SectionHeader
             title="この調査を使う記事"
           />
@@ -448,9 +452,9 @@ export default async function SurveyPage({ params }: PageProps) {
                   href={hrefFor('blog', { slug: article.slug })}
                   className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                 >
-                  {article.title}
-                  <span className="ml-1 text-primary" aria-hidden="true">
-                    →
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="min-w-0">{article.title}</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
                   </span>
                 </SurfaceLinkCard>
               ))}
@@ -467,7 +471,7 @@ export default async function SurveyPage({ params }: PageProps) {
       */}
       <InContentAdSlot slot={HUB_INCONTENT} />
 
-      <section id="all-rankings" className="mb-12 scroll-mt-24">
+      <section id="all-rankings" className="mb-4 scroll-mt-24">
         <SectionHeader
           title={`全${rankingItems.length}件のランキング`}
         />
@@ -477,7 +481,7 @@ export default async function SurveyPage({ params }: PageProps) {
       </section>
 
       {editorial && (
-        <section id="survey-caveats" className="mb-12 scroll-mt-24">
+        <section id="survey-caveats" className="mb-4 scroll-mt-24">
           <SectionHeader
             title="数字を読むときの注意"
           />
@@ -491,7 +495,7 @@ export default async function SurveyPage({ params }: PageProps) {
 
       {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。 */}
       {nativeBanners.length > 0 && (
-        <section className="mb-12">
+        <section className="mb-4">
           <NativeAffiliateRow
             banners={nativeBanners}
             position="survey-native"

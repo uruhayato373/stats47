@@ -87,25 +87,31 @@ export default function GeoPage() {
           title={<span id="geo-analyses-heading">調べたい問いから選ぶ</span>}
           description={`${GEO_ANALYSES.length}つの分析・対象範囲は各分析で確認`}
         />
-        <GeoAnalysisCards />
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          地図は兵庫県（淡路島を含む）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です。空白は人口・危険性・利便性の判定を示しません。
-        </p>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
-          <ExternalAnchor href="https://geoshape.ex.nii.ac.jp/" className="underline">
-            NIIが加工
-          </ExternalAnchor>
-          （2023年）。表示用に加工。{' '}
-          <ExternalAnchor
-            href="https://creativecommons.org/licenses/by-sa/4.0/"
-            className="underline"
-          >
-            CC BY-SA 4.0
-          </ExternalAnchor>
-          。
-          駅名・位置は分析の駅データ（「使用データ・年度・利用条件」に記載）を使用。
-        </p>
+        {/* 注記は地図付きのカードの直下に置き、地図の無い分析の節 (GeoAnalysisCards 内の小見出し) より前に出す */}
+        <GeoAnalysisCards
+          previewFootnote={
+            <>
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                地図は兵庫県（淡路島を含む）の表示例です。3枚とも同じ範囲で、各分析では47都道府県へ切り替えられます。人口メッシュは2020年・2050年推計。境界と駅名は位置の目印です（重なる駅名は一部を省いています）。空白は人口・危険性・利便性の判定を示しません。
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                境界：国土交通省「国土数値情報（行政区域データ）」をもとに{' '}
+                <ExternalAnchor href="https://geoshape.ex.nii.ac.jp/" className="underline">
+                  NIIが加工
+                </ExternalAnchor>
+                （2023年）。表示用に加工。{' '}
+                <ExternalAnchor
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  className="underline"
+                >
+                  CC BY-SA 4.0
+                </ExternalAnchor>
+                。
+                駅名・位置は分析の駅データ（「使用データ・年度・利用条件」に記載）を使用。
+              </p>
+            </>
+          }
+        />
       </section>
       <ContentDisclosure
         title="はじめての地域分析：地図の読み進め方"
