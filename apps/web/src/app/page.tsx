@@ -157,7 +157,7 @@ export default async function HomePage() {
           className="mb-4"
         />
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <section>
             <SectionHeader
               title="注目のランキング"

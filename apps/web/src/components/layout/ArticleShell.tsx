@@ -52,7 +52,7 @@ export function ArticleShell({
 
   return (
     <div className={cn('reading-zone w-full bg-background', className)}>
-      <div className="mx-auto w-full max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
+      <div className="mx-auto w-full max-w-[1280px] px-4 py-4 lg:px-6">
         {showLeftRail ? (
           <LeftRailLayout leftRail={leftRail} mainAs="main">
             {breadcrumb}
@@ -61,14 +61,14 @@ export function ArticleShell({
         ) : hasRightRail ? (
           <>
             {breadcrumb}
-            <div className="lg:flex lg:items-start lg:gap-10">
+            <div className="lg:flex lg:items-start lg:gap-4">
               <main className="min-w-0 flex-1">{children}</main>
               <aside className="hidden w-[316px] shrink-0 lg:flex lg:self-stretch lg:flex-col lg:gap-3">
                 {rail}
               </aside>
             </div>
             {/* lg 未満はレールを本文下に積み下ろす */}
-            <div className="mt-10 space-y-6 lg:hidden">
+            <div className="mt-4 space-y-4 lg:hidden">
               {rail}
             </div>
           </>

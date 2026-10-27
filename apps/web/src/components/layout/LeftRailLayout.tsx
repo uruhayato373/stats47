@@ -9,9 +9,9 @@ import { cn } from '@stats47/components';
  * 必ず共有する。feature 側へ responsive class を複製しない。
  */
 export const LEFT_RAIL_GRID_CLASS =
-  'min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
+  'min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-4 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)]';
 const COMPACT_LEFT_RAIL_GRID_CLASS =
-  'min-[992px]:grid min-[992px]:grid-cols-[224px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start';
+  'min-[992px]:grid min-[992px]:grid-cols-[224px_minmax(0,1fr)] min-[992px]:gap-4 min-[992px]:items-start';
 
 export const LEFT_RAIL_VISIBLE_CLASS = 'hidden min-[992px]:block';
 export const LEFT_RAIL_NARROW_ONLY_CLASS = 'min-[992px]:hidden';

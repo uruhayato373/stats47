@@ -45,8 +45,8 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "mb-4",
-        !hideRule && "border-b border-border pb-2.5",
+        "mb-3",
+        !hideRule && "border-b border-border pb-2",
         className,
       )}
     >
@@ -57,7 +57,7 @@ export function SectionHeader({
               {eyebrow}
             </p>
           )}
-          <Heading className="text-lg font-bold leading-tight text-foreground">
+          <Heading className="text-base font-semibold leading-tight text-foreground">
             {number && (
               <span className="mr-2 font-mono text-primary">{number}</span>
             )}

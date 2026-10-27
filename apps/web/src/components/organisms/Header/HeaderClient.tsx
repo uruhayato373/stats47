@@ -147,7 +147,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
       className="portal-header sticky top-0 z-200 h-14 border-b bg-card lg:h-[52px]"
       suppressHydrationWarning
     >
-      <div className="flex h-full w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="flex h-full w-full items-center gap-4 px-4 lg:px-6">
         {/* 左: モバイルメニュー + ロゴ */}
         <div className="flex items-center gap-2">
           <button

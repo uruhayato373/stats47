@@ -47,10 +47,10 @@ interface PageShellProps {
  * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅。
  * doboku-note スタイルのサイト全体固定幅)。
  * 2026-08-03: lg+ の左右余白を 24px → 40px にし doboku-note と揃えた
- * (同サイトも header 含め `max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10`)。
+ * (横の余白はテンプレートの p-4 に寄せ、広い画面だけ px-6。2026-10-27)。
  */
 export const SHELL_WIDTH_CLASS =
-  'mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10';
+  'mx-auto w-full max-w-[1280px] px-4 lg:px-6';
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -91,15 +91,15 @@ export function PageShell({
 
   const rightGridClass =
     rightRailBreakpoint === 'lg' && hasRight
-      ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_316px] lg:gap-10 lg:items-start'
+      ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_316px] lg:gap-4 lg:items-start'
       : hasRight
-        ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start'
+        ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-4 xl:items-start'
         : '';
 
   const rightRailClass =
     rightRailBreakpoint === 'lg'
-      ? 'mt-10 space-y-8 lg:mt-0'
-      : 'mt-10 space-y-8 xl:mt-0';
+      ? 'mt-4 space-y-4 lg:mt-0'
+      : 'mt-4 space-y-4 xl:mt-0';
 
   // reading variant は本文カラムを可読幅に制限（レールが無い場合は中央寄せ）
   const mainClass = cn(
@@ -108,7 +108,7 @@ export function PageShell({
   );
 
   return (
-    <div className={cn(SHELL_WIDTH_CLASS, 'py-8', className)}>
+    <div className={cn(SHELL_WIDTH_CLASS, 'py-4', className)}>
       {hasRight || hasLeft ? (
         showLeft ? (
           <>
@@ -121,7 +121,7 @@ export function PageShell({
             </LeftRailLayout>
             {leftRailNarrowBehavior === 'stack' && (
               <div
-                className={cn('mt-10 space-y-8', LEFT_RAIL_NARROW_ONLY_CLASS)}
+                className={cn('mt-4 space-y-4', LEFT_RAIL_NARROW_ONLY_CLASS)}
               >
                 {leftRail}
               </div>

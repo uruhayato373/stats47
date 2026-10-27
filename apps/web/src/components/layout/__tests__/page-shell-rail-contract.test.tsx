@@ -50,7 +50,7 @@ describe('PageShell — leftRail', () => {
     expect(grid).toHaveClass(
       'min-[992px]:grid',
       'min-[992px]:grid-cols-[264px_minmax(0,1fr)]',
-      'min-[992px]:gap-6'
+      'min-[992px]:gap-4'
     );
     expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });
@@ -87,7 +87,7 @@ describe('PageShell — rightRail', () => {
   it('同じレールを複製せず、狭幅では本文下・xl以上では右列に置く', () => {
     render(<PageShell rightRail={RIGHT}>{MAIN}</PageShell>);
     const rail = screen.getByLabelText('right-rail');
-    expect(rail.parentElement).toHaveClass('mt-10', 'xl:mt-0');
+    expect(rail.parentElement).toHaveClass('mt-4', 'xl:mt-0');
   });
 
   it('rightRailBreakpoint=lg で lg 境界のクラスに切り替わる', () => {
@@ -98,7 +98,7 @@ describe('PageShell — rightRail', () => {
     );
     expect(container.querySelector('.lg\\:grid')).not.toBeNull();
     expect(screen.getByLabelText('right-rail').parentElement).toHaveClass(
-      'mt-10',
+      'mt-4',
       'lg:mt-0'
     );
   });

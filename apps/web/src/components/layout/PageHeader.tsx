@@ -66,7 +66,7 @@ export function PageHeader({
   );
 
   return (
-    <header className={cn("mb-6", className)}>
+    <header className={cn("mb-4", className)}>
       {eyebrow && (
         <p className="text-[11px] font-semibold uppercase text-muted-foreground">
           {eyebrow}
@@ -74,7 +74,7 @@ export function PageHeader({
       )}
       {aside ? (
         // 右カラム指定時のみ 2 カラム grid 化（lg 以上）。
-        <div className="mt-1 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+        <div className="mt-1 grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2">
           <div className="flex min-w-0 flex-col gap-3">
             {titleBlock}
             {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
