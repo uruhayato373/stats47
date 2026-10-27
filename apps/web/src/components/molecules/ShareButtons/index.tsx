@@ -1,13 +1,8 @@
 "use client";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@stats47/components/atoms/ui/tooltip";
-import { Check, Facebook, Link as LinkIcon, MessageCircle } from "lucide-react";
+import { LazyTooltip } from "@stats47/components/molecules/lazy-select";
+import { Check, Facebook, Link as LinkIcon } from "lucide-react";
 
 import { trackShare } from "@/lib/analytics/events";
 
@@ -51,8 +46,15 @@ function ShareButtonIcon({ name, isProminent }: ShareButtonIconProps) {
     case "Facebook":
       return <Facebook className={iconSize} aria-hidden="true" />;
     case "LINE":
-      // 文字の「LINE」は他のアイコンより幅が広く、ボタンの中で寸法が揃わなかった。同じ大きさのアイコンにする
-      return <MessageCircle className={iconSize} aria-hidden="true" />;
+      // 吹き出しのアイコンでは LINE と分からないので文字で描く。ボタンの幅に収まるよう字を詰める
+      return (
+        <span
+          aria-hidden="true"
+          className={`inline-flex items-center justify-center font-bold leading-none ${isProminent ? "text-xs" : "text-[10px]"}`}
+        >
+          LINE
+        </span>
+      );
     case "はてなブックマーク":
       return (
         <span
@@ -94,47 +96,39 @@ export function ShareButtons({
   return (
     <div className={`flex items-center ${isProminent ? "gap-3" : "gap-1"}`}>
       <span className="mr-1 hidden text-xs text-muted-foreground sm:inline">シェア:</span>
-      <TooltipProvider>
-        {shareLinks.map((link) => (
-          <Tooltip key={link.name}>
-            <TooltipTrigger
-              render={
-                <Button
-                  variant={isProminent ? "default" : "outline"}
-                  size={size}
-                  className={isProminent ? link.prominentClass : undefined}
-                  onClick={() => {
-                    trackShare({ method: link.name, contentType: "page" });
-                    window.open(link.href, "_blank", "width=600,height=400");
-                  }}
-                />
-              }
-            >
-              <ShareButtonIcon name={link.name} isProminent={isProminent} />
-              <span className="sr-only">{link.name}</span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{link.name}</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
+      {/* 補助ラベル (Tooltip) の JS は hover / キーボードの focus で読む (配信サイズ策 D・LazyTooltip) */}
+      {shareLinks.map((link) => (
+        <LazyTooltip
+          key={link.name}
+          content={link.name}
+          render={
+            <Button
+              variant={isProminent ? "default" : "outline"}
+              size={size}
+              className={isProminent ? link.prominentClass : undefined}
+              onClick={() => {
+                trackShare({ method: link.name, contentType: "page" });
+                window.open(link.href, "_blank", "width=600,height=400");
+              }}
+            />
+          }
+        >
+          <ShareButtonIcon name={link.name} isProminent={isProminent} />
+          <span className="sr-only">{link.name}</span>
+        </LazyTooltip>
+      ))}
 
-        <Tooltip>
-          <TooltipTrigger
-            render={<Button variant="outline" size={size} onClick={copy} />}
-          >
-            {copied ? (
-              <Check aria-hidden="true" className={`text-positive ${isProminent ? "size-5" : "size-4"}`} />
-            ) : (
-              <LinkIcon aria-hidden="true" className={isProminent ? "size-5" : "size-4"} />
-            )}
-            <span className="sr-only">URLをコピー</span>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{copied ? "コピーしました！" : "URLをコピー"}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <LazyTooltip
+        content={copied ? "コピーしました！" : "URLをコピー"}
+        render={<Button variant="outline" size={size} onClick={copy} />}
+      >
+        {copied ? (
+          <Check aria-hidden="true" className={`text-positive ${isProminent ? "size-5" : "size-4"}`} />
+        ) : (
+          <LinkIcon aria-hidden="true" className={isProminent ? "size-5" : "size-4"} />
+        )}
+        <span className="sr-only">URLをコピー</span>
+      </LazyTooltip>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の card.tsx をそのまま使う。変えたのは import 先 (相対パス) と
 // 下の CARD_SURFACE_CLASS の追加だけ。取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
 import * as React from "react"
 
 import { cn } from "../../lib/cn"
@@ -22,7 +23,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "cn-card group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        "cn-card group/card flex flex-col gap-4 overflow-hidden py-4 text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0",
         className
       )}
       {...props}
@@ -35,7 +36,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "cn-card-header group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3",
+        "cn-card-header group/card-header @container/card-header grid auto-rows-min items-start gap-1 px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3",
         className
       )}
       {...props}
@@ -48,7 +49,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-title"
       className={cn(
-        "cn-card-title text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
+        "cn-card-title font-medium group-data-[size=sm]/card:text-sm",
         className
       )}
       {...props}
@@ -60,7 +61,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("cn-card-description text-sm text-muted-foreground", className)}
+      className={cn("cn-card-description text-muted-foreground", className)}
       {...props}
     />
   )
@@ -94,7 +95,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-footer"
       className={cn(
-        "cn-card-footer flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3",
+        "cn-card-footer flex items-center border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3",
         className
       )}
       {...props}

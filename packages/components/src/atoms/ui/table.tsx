@@ -1,5 +1,6 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の table.tsx をそのまま使う。変えたのは import 先 (相対パス) と
 // Table の containerClassName / scrollRegion (サイトのアクセシビリティ契約) の追加だけ。取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
 "use client"
 
 import * as React from "react"
@@ -35,7 +36,7 @@ function Table({
     >
       <table
         data-slot="table"
-        className={cn("cn-table w-full caption-bottom text-sm", className)}
+        className={cn("cn-table w-full caption-bottom", className)}
         {...props}
       />
     </div>
@@ -121,7 +122,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("cn-table-caption mt-4 text-sm text-muted-foreground", className)}
+      className={cn("cn-table-caption mt-4 text-muted-foreground", className)}
       {...props}
     />
   )

@@ -38,6 +38,7 @@
 | `tabs.tsx` | 呼び出し 0 件の `TabsList variant="line"` と縦向き (`orientation="vertical"`) の見た目を外した |
 | `toggle-group.tsx` | 呼び出し 0 件の縦向き (`orientation="vertical"`) の見た目を外した |
 | `button.tsx` | 呼び出し 0 件の `variant="destructive"` を外した |
+| 使われる atom 全部 (`badge`・`breadcrumb`・`button`・`card`・`checkbox`・`dropdown-menu`・`empty`・`input`・`label`・`select`・`sheet`・`skeleton`・`slider`・`table`・`tabs`・`toggle`・`toggle-group`・`tooltip`) | 同じ要素の `cn-*` 規則 (`style-lyra.css` の `@apply`) が同じ性質を別の値で決めている base-nova の素のクラス (例: `rounded-xl`・`rounded-4xl`・`rounded-[min(var(--radius-md),10px)]`・`text-sm`・`focus-visible:ring-3`・`bg-card`) を消した。lyra はレイヤーの外にあり必ず勝つので、見た目は変わらず生成 CSS だけが減る (2026-10-28 3 巡目・96 件)。同じ値の重複 (`py-4` 等) は写しとの差を小さくするため残す。`select` の `SelectItem` だけは写しのまま残す (消すと `ThemeComparisonSection.test.tsx` の選択肢の取得が落ちたため・原因未特定)。取り直したときは、各文字列について `tailwind-merge` で「素のクラス + その文字列の `cn-*` の `@apply`」を合成し、消えた素のクラスを外す |
 
 ## 変えるとき
 

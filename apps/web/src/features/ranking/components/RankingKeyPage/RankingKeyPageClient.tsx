@@ -210,35 +210,32 @@ export function RankingKeyPageClient({
         </>
     ) : undefined;
 
+    // h1 と操作の行は ArticleShell の header (本文と右レールの列より前の全幅) に置く。
+    // 本文に入れると右レールが h1 の横から始まり、右レールの最初のカードが本文の最初のカードより上にずれていた。
+    const pageHeader = (
+        <div className="mb-4 flex min-w-0 flex-col gap-4">
+            <RankingHeaderPanel title={displayInfo.title} />
+            <RankingHeaderControls
+                normalizationOptions={rankingItem.calculation?.normalizationOptions}
+                normalizationValue={normalizationType ?? "original"}
+                onNormalizationChange={handleNormalizationChange}
+                normalizationDisabled={isPending}
+                shareButton={
+                    <ShareButtons title={displayInfo.title} shareText={shareText} />
+                }
+            />
+            <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
+        </div>
+    );
+
     return (
-        <ArticleShell rail={rail} breadcrumb={breadcrumb}>
+        <ArticleShell rail={rail} breadcrumb={breadcrumb} header={pageHeader}>
             {/*
-              モバイルは h1 の直後に地図を出す (旧構成は暗色ヒーロー約470px + タブが
-              初期テーブル選択で、地図がヘッダーから約1300px下に埋もれていた)。
-              DOM は 1 つのまま order で並べ替える:
-                <lg  : h1 → 地図/テーブル → 操作 → スタット → 本文
-                lg+ : h1 → 操作 → スタット → 地図|テーブル → 本文
-              h1 は SEO・a11y の前提なので常に DOM 先頭に置く。
+              並び: (header: h1 → 操作) → スタット → 地図|テーブル → 本文。
+              h1 は SEO・a11y の前提なので常に本文より先に置く。
               ページで唯一の <main> はルートレイアウトが持つため、ここは div (main 二重を避ける)。
             */}
             <div className="flex min-w-0 flex-col gap-4">
-                <div className="order-1">
-                    <RankingHeaderPanel title={displayInfo.title} />
-                </div>
-
-                <div className="order-2 flex flex-col gap-4">
-                    <RankingHeaderControls
-                        normalizationOptions={rankingItem.calculation?.normalizationOptions}
-                        normalizationValue={normalizationType ?? "original"}
-                        onNormalizationChange={handleNormalizationChange}
-                        normalizationDisabled={isPending}
-                        shareButton={
-                            <ShareButtons title={displayInfo.title} shareText={shareText} />
-                        }
-                    />
-                    <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
-                </div>
-
                 <RankingHeaderStats
                     presentation={presentedItem.visualization}
                     className="order-3"

@@ -1,5 +1,6 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の empty.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
 // 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/cn"
@@ -9,7 +10,7 @@ function Empty({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="empty"
       className={cn(
-        "cn-empty flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 rounded-xl border-dashed p-6 text-center text-balance",
+        "cn-empty flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 border-dashed p-6 text-center text-balance",
         className
       )}
       {...props}
@@ -75,7 +76,7 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
     <div
       data-slot="empty-description"
       className={cn(
-        "cn-empty-description text-sm/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+        "cn-empty-description text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className
       )}
       {...props}
@@ -88,7 +89,7 @@ function EmptyContent({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="empty-content"
       className={cn(
-        "cn-empty-content flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-sm text-balance",
+        "cn-empty-content flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-balance",
         className
       )}
       {...props}

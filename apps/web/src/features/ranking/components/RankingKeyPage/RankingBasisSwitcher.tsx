@@ -2,13 +2,9 @@
 
 import { useRouter } from "next/navigation";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@stats47/components/atoms/ui/select";
+import { cn } from "@stats47/components";
+import { toggleVariants } from "@stats47/components/atoms/ui/toggle";
+import { LazySelect } from "@stats47/components/molecules/lazy-select";
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
@@ -26,6 +22,16 @@ interface RankingBasisSwitcherProps {
     members: RankingBasisMember[];
 }
 
+/**
+ * 表示基準の切替。別ページへの移動なので、sm 以上は各基準へのリンクを
+ * テンプレートの Toggle (outline) の見た目で並べる (計算方法の ToggleGroup と同じ形)。
+ * 現在地は aria-current と押下中の地 (bg-muted) で示す。隣り合う線は -ml-px で 1 本に重ねる。
+ */
+const BASIS_ITEM_CLASS_NAME = cn(
+    toggleVariants({ variant: "outline" }),
+    "-ml-px first:ml-0 focus-visible:z-10"
+);
+
 export function RankingBasisSwitcher({
     rankingKey,
     members,
@@ -39,54 +45,46 @@ export function RankingBasisSwitcher({
     const sortedMembers = [...members].sort(
         (a, b) => (a.normalizationBasis ? 1 : 0) - (b.normalizationBasis ? 1 : 0)
     );
+    const items = sortedMembers.map((member) => ({
+        value: member.rankingKey,
+        label: member.normalizationBasis || "総数",
+    }));
 
     return (
         <>
-            <div className="mt-3 sm:hidden">
-                <Select
+            <div className="sm:hidden">
+                {/* Select の JS は初回操作で読む (配信サイズ策 D・LazySelect) */}
+                <LazySelect
                     value={rankingKey}
-                    items={sortedMembers.map((member) => ({
-                        value: member.rankingKey,
-                        label: member.normalizationBasis || "総数",
-                    }))}
+                    items={items}
+                    aria-label="表示基準"
+                    triggerClassName="w-full"
                     onValueChange={(key) => {
-                        if (key !== null && key !== rankingKey) router.push(hrefFor("ranking", { rankingKey: key }));
+                        if (key !== rankingKey) router.push(hrefFor("ranking", { rankingKey: key }));
                     }}
-                >
-                    <SelectTrigger aria-label="表示基準" className="h-9 w-full text-sm">
-                        <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {sortedMembers.map((member) => (
-                            <SelectItem key={member.rankingKey} value={member.rankingKey}>
-                                {member.normalizationBasis || "総数"}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                />
             </div>
-            <div className="hidden sm:flex items-center gap-0.5 mt-3 w-fit">
-                {sortedMembers.map((member) => {
-                    const isCurrent = member.rankingKey === rankingKey;
-                    const label = member.normalizationBasis || "総数";
-                    return isCurrent ? (
+            <nav aria-label="表示基準" className="hidden w-fit items-center sm:flex">
+                {items.map((item) =>
+                    item.value === rankingKey ? (
                         <span
-                            key={member.rankingKey}
-                            className="text-xs px-2.5 pb-1 border-b-2 border-primary text-foreground font-medium"
+                            key={item.value}
+                            aria-current="page"
+                            className={cn(BASIS_ITEM_CLASS_NAME, "bg-muted text-foreground")}
                         >
-                            {label}
+                            {item.label}
                         </span>
                     ) : (
                         <Link
-                            key={member.rankingKey}
-                            href={hrefFor("ranking", { rankingKey: member.rankingKey })}
-                            className="text-xs px-2.5 pb-1 border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30 transition-colors"
+                            key={item.value}
+                            href={hrefFor("ranking", { rankingKey: item.value })}
+                            className={BASIS_ITEM_CLASS_NAME}
                         >
-                            {label}
+                            {item.label}
                         </Link>
-                    );
-                })}
-            </div>
+                    )
+                )}
+            </nav>
         </>
     );
 }

@@ -34,7 +34,14 @@ export interface ChartPanelProps {
  * (CardHeader / CardTitle / CardDescription / CardAction / CardContent / CardFooter) で描く。
  * 見出しは h3 として CardTitle の中に置き、領域は見出し・説明で命名する。
  * 見出し行は RailCard / SectionCard と同じ型 (アイコン + font-medium + 下線) にそろえる。
+ *
+ * 見出し行の寸法は SurfaceCard (右レール・節カード) と同じ: 上 16px (Card の py-4)・下 12px + 下線、
+ * 題は text-base font-medium leading-6、操作は同じ行の右端、本文は下線から 16px (Card の gap-4)。
+ * lyra の .cn-card-header ([.border-b]:pb-4) と .cn-card-title (text-sm) はレイヤーの外にあり
+ * 素のクラスに勝つので、テンプレートと同じく ! を付けて上書きする。
  */
+const HEADER_CLASS_NAME = 'border-b pb-3!';
+const TITLE_CLASS_NAME = 'flex min-w-0 items-center gap-2 text-base! leading-6! font-medium';
 export function ChartPanel({
   id,
   title,
@@ -65,10 +72,10 @@ export function ChartPanel({
       aria-describedby={descriptionId}
     >
       {hasHeader && (
-        <CardHeader className={cn('border-b', headerClassName)}>
+        <CardHeader className={cn(HEADER_CLASS_NAME, headerClassName)}>
           {(icon || title) && (
             <CardTitle
-              className={cn('flex min-w-0 items-center gap-2', titleClassName)}
+              className={cn(TITLE_CLASS_NAME, titleClassName)}
             >
               {icon && (
                 <span

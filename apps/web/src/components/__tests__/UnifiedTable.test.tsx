@@ -43,7 +43,10 @@ describe("unified table density", () => {
       </Table>,
     );
 
-    expect(screen.getByRole("table")).toHaveClass("text-sm");
+    // 文字の大きさは style-lyra の .cn-table (text-xs) が決める。base-nova の素の text-sm は lyra に負けて
+    // 効かないので写しから外した (2026-10-28 3 巡目・packages/ui-theme/README.md の差の一覧)。
+    expect(screen.getByRole("table")).toHaveClass("cn-table");
+    expect(screen.getByRole("table")).not.toHaveClass("text-sm");
     expect(screen.getByRole("columnheader")).toHaveClass(
       "h-10",
       "px-2",

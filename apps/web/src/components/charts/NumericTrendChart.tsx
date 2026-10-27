@@ -11,27 +11,32 @@ import type { ChartPoint } from './MiniCharts';
 
 /** 実幅を測る前 (SSR・初回描画) に使う幅。測ったあとは実幅に置き換える。 */
 const FALLBACK_WIDTH = 400;
+/** 既定の高さ (px)。fillHeight のときは最小の高さになる (h-32 と同じ)。 */
+const DEFAULT_HEIGHT = 128;
 /** y 軸の目盛り文字と、線の始点 (最初の年) の間に空ける幅 (px)。 */
 const PLOT_START_GAP = 12;
+/** y 軸の目盛りの数の目安。d3 の nice / ticks が切りのよい値 (1・2・5 の倍数) に丸める。 */
+const Y_TICK_COUNT = 4;
 
 /**
- * 描画先の実幅 (px) を ResizeObserver で測る。viewBox を実幅に合わせ、
- * 目盛りの文字が枠の幅で拡大・縮小されないようにする。
+ * 描画先の実寸 (px) を ResizeObserver で測る。viewBox を実寸に合わせ、
+ * 目盛りの文字が枠の大きさで拡大・縮小されないようにする。
  */
-function useMeasuredWidth<T extends Element>() {
+function useMeasuredSize<T extends Element>() {
   // callback ref で要素を受け取る。データ不足で一度 null を返したあとに描画されても測り始められる。
   const [element, setElement] = useState<T | null>(null);
-  const [width, setWidth] = useState(FALLBACK_WIDTH);
+  const [size, setSize] = useState({ width: FALLBACK_WIDTH, height: DEFAULT_HEIGHT });
   useEffect(() => {
     if (!element || typeof ResizeObserver === 'undefined') return;
     const observer = new ResizeObserver(([entry]) => {
-      const next = Math.round(entry.contentRect.width);
-      if (next > 0) setWidth(next);
+      const width = Math.round(entry.contentRect.width);
+      const height = Math.round(entry.contentRect.height);
+      if (width > 0) setSize({ width, height: Math.max(DEFAULT_HEIGHT, height) });
     });
     observer.observe(element);
     return () => observer.disconnect();
   }, [element]);
-  return [setElement, width] as const;
+  return [setElement, size] as const;
 }
 
 /** A labeled value axis and calendar spacing, with the current observation highlighted. */
@@ -42,6 +47,7 @@ export function NumericTrendChart({
   label,
   unit,
   formatValue,
+  fillHeight = false,
 }: {
   points: ChartPoint[];
   policy: NumericDomainPolicy;
@@ -49,9 +55,12 @@ export function NumericTrendChart({
   label: string;
   unit: string;
   formatValue: (value: number) => string;
+  /** 親 (flex の列) の残りの高さいっぱいに描く。カードの下に空白を残さないため */
+  fillHeight?: boolean;
 }) {
   const clipId = useId().replaceAll(':', '');
-  const [svgRef, width] = useMeasuredWidth<SVGSVGElement>();
+  const [svgRef, measured] = useMeasuredSize<SVGSVGElement>();
+  const width = measured.width;
   const data = points
     .filter(
       (point) => Number.isFinite(point.year)
@@ -62,15 +71,21 @@ export function NumericTrendChart({
     policy
   );
   if (!domain || data.length < 2) return null;
-  const height = 128,
+  const height = fillHeight ? measured.height : DEFAULT_HEIGHT,
     right = 16,
     top = 12,
-    bottom = 24;
-  const ticks = [domain[0], (domain[0] + domain[1]) / 2, domain[1]];
+    bottom = 28;
+  // 目盛りは切りのよい値にする。固定範囲 (fixed) は範囲そのものを意味として持つので広げない。
+  const y = scaleLinear()
+    .domain(domain)
+    .range([height - bottom, top]);
+  if (policy.mode !== 'fixed') y.nice(Y_TICK_COUNT);
+  const ticks = y.ticks(Y_TICK_COUNT);
   const formatted = ticks.map(formatValue);
+  const tickStep = ticks.length > 1 ? Math.abs(ticks[1] - ticks[0]) : domain[1] - domain[0];
   const axisPrecision = Math.max(
     0,
-    Math.min(8, Math.ceil(-Math.log10(domain[1] - domain[0])) + 1)
+    Math.min(8, Math.ceil(-Math.log10(tickStep)))
   );
   const tickLabels =
     new Set(formatted).size === ticks.length
@@ -85,9 +100,6 @@ export function NumericTrendChart({
   const x = scaleLinear()
     .domain([data[0].year, data[data.length - 1].year])
     .range([plotLeft, width - right]);
-  const y = scaleLinear()
-    .domain(domain)
-    .range([height - bottom, top]);
   const path = line<ChartPoint>()
     .defined((point) => typeof point.value === "number" && Number.isFinite(point.value))
     .x((point) => x(point.year))
@@ -102,7 +114,7 @@ export function NumericTrendChart({
     <svg
       ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
-      className="h-32 w-full"
+      className={fillHeight ? 'min-h-32 w-full flex-1' : 'h-32 w-full'}
       role="img"
       aria-label={`${label}の推移。${data[0].year}年から${data[data.length - 1].year}年。単位: ${unit}${outside.length ? `。表示範囲外: ${outside.length}点` : ''}`}
       data-chart="numeric-trend"
@@ -181,10 +193,11 @@ export function NumericTrendChart({
           />
         </g>
       )}
+      {/* 最初の年は描画域の始点から右へ書く (中央揃えだと最下段の目盛りの文字の下へはみ出していた) */}
       <text
         x={plotLeft}
         y={height - 4}
-        textAnchor="middle"
+        textAnchor="start"
         className="fill-muted-foreground"
         fontSize="12"
       >

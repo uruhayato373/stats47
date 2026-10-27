@@ -3,12 +3,7 @@
 import { useState, useSyncExternalStore } from 'react';
 
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@stats47/components/atoms/ui/tooltip';
+import { LazyTooltip } from '@stats47/components/molecules/lazy-select';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   BookOpenText,
@@ -42,6 +37,9 @@ export interface ChartFooterProps {
 }
 
 type FooterActionKind = 'source' | 'ranking';
+
+/** 補助ラベルを出すまでの待ち (旧 TooltipProvider delay={250} と同じ) */
+const TOOLTIP_DELAY_MS = 250;
 
 const ACTION_CLASS_NAME =
   'inline-flex min-h-8 max-w-full items-center gap-1.5 px-1 text-xs font-medium underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50';
@@ -85,33 +83,33 @@ function FooterActionLink({
       {external && <ExternalLink className="size-3 shrink-0" aria-hidden />}
     </>
   );
+  // 補助ラベル (Tooltip) の JS は hover / キーボードの focus で読む (配信サイズ策 D・LazyTooltip)
   return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          external ? (
-            <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className={ACTION_CLASS_NAME}
-            />
-          ) : (
-            <Link
-              href={link.url}
-              aria-label={link.label}
-              className={ACTION_CLASS_NAME}
-            />
-          )
-        }
-      >
-        {content}
-      </TooltipTrigger>
-      <TooltipContent side="top" className="max-w-72">
-        {link.label}
-      </TooltipContent>
-    </Tooltip>
+    <LazyTooltip
+      content={link.label}
+      side="top"
+      contentClassName="max-w-72"
+      delay={TOOLTIP_DELAY_MS}
+      render={
+        external ? (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            className={ACTION_CLASS_NAME}
+          />
+        ) : (
+          <Link
+            href={link.url}
+            aria-label={link.label}
+            className={ACTION_CLASS_NAME}
+          />
+        )
+      }
+    >
+      {content}
+    </LazyTooltip>
   );
 }
 
@@ -380,59 +378,57 @@ export function ChartFooter({
   if (!hasSource && !annotation && indicatorTargets.length === 0) return null;
 
   return (
-    <TooltipProvider delay={250}>
-      <div className="space-y-1.5">
-        {annotation && (
-          <p className="text-left text-xs leading-relaxed text-muted-foreground">
-            {annotation}
-          </p>
-        )}
-        {(hasSource || indicatorTargets.length > 0) && (
-          <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-muted-foreground">
-            {sourceTargets.length === 1 ? (
-              <FooterActionLink
-                kind="source"
-                link={{
-                  ...sourceTargets[0],
-                  label: `出典: ${sourceLabel ?? sourceTargets[0].label}`,
-                }}
-                visibleLabel="出典"
-              />
-            ) : sourceTargets.length > 1 ? (
-              <FooterActionMenu
-                id={id ? `${id}-source` : undefined}
-                kind="source"
-                links={sourceTargets}
-                tooltip={`出典: ${sourceLabel ?? sourceTargets.map((link) => link.label).join('・')}`}
-              />
-            ) : sourceLabel ? (
-              <span className="inline-flex min-h-8 max-w-full items-center gap-1.5 px-1 text-xs">
-                <BookOpenText className="size-4 shrink-0" aria-hidden />
-                <span className="max-w-52 truncate" title={sourceLabel}>
-                  {sourceLabel}
-                </span>
+    <div className="space-y-1.5">
+      {annotation && (
+        <p className="text-left text-xs leading-relaxed text-muted-foreground">
+          {annotation}
+        </p>
+      )}
+      {(hasSource || indicatorTargets.length > 0) && (
+        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-muted-foreground">
+          {sourceTargets.length === 1 ? (
+            <FooterActionLink
+              kind="source"
+              link={{
+                ...sourceTargets[0],
+                label: `出典: ${sourceLabel ?? sourceTargets[0].label}`,
+              }}
+              visibleLabel="出典"
+            />
+          ) : sourceTargets.length > 1 ? (
+            <FooterActionMenu
+              id={id ? `${id}-source` : undefined}
+              kind="source"
+              links={sourceTargets}
+              tooltip={`出典: ${sourceLabel ?? sourceTargets.map((link) => link.label).join('・')}`}
+            />
+          ) : sourceLabel ? (
+            <span className="inline-flex min-h-8 max-w-full items-center gap-1.5 px-1 text-xs">
+              <BookOpenText className="size-4 shrink-0" aria-hidden />
+              <span className="max-w-52 truncate" title={sourceLabel}>
+                {sourceLabel}
               </span>
-            ) : null}
-            {sourceDetail && (
-              <span className="text-xs">（{sourceDetail}）</span>
-            )}
-            {indicatorTargets.length === 1 ? (
-              <FooterActionLink
-                kind="ranking"
-                link={indicatorTargets[0]}
-                visibleLabel="ランキング"
-              />
-            ) : indicatorTargets.length > 1 ? (
-              <FooterActionMenu
-                id={id ? `${id}-ranking` : undefined}
-                kind="ranking"
-                links={indicatorTargets}
-                tooltip={`${indicatorTargets.length}件の指標・ランキング`}
-              />
-            ) : null}
-          </div>
-        )}
-      </div>
-    </TooltipProvider>
+            </span>
+          ) : null}
+          {sourceDetail && (
+            <span className="text-xs">（{sourceDetail}）</span>
+          )}
+          {indicatorTargets.length === 1 ? (
+            <FooterActionLink
+              kind="ranking"
+              link={indicatorTargets[0]}
+              visibleLabel="ランキング"
+            />
+          ) : indicatorTargets.length > 1 ? (
+            <FooterActionMenu
+              id={id ? `${id}-ranking` : undefined}
+              kind="ranking"
+              links={indicatorTargets}
+              tooltip={`${indicatorTargets.length}件の指標・ランキング`}
+            />
+          ) : null}
+        </div>
+      )}
+    </div>
   );
 }

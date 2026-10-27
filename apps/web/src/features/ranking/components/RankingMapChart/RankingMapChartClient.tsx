@@ -173,6 +173,9 @@ export function RankingMapChartClient({
       description={cardSubtitle}
       action={headerActions}
       footer={cardFooter}
+      // 地図は本文の四辺とも端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と
+      // 出典の上線 (無ければカードの下端) に接する (lyra の .cn-card はレイヤーの外なので ! で上書きする)
+      className="gap-0! pb-0!"
       contentClassName="px-0!"
     >
       {/* Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、

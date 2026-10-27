@@ -155,7 +155,7 @@ export function RankingDataTable({
         cell: ({ row }) => {
           const unit = formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
           return (
-            <div className="text-right font-mono whitespace-nowrap">
+            <div className="text-right tabular-nums whitespace-nowrap">
               {formatRankingValue(row.getValue<number>("value"), precision)}
               {unit && (
                 <span className="text-xs text-muted-foreground ml-1">{formatUnitForDisplay(unit)}</span>
@@ -171,7 +171,7 @@ export function RankingDataTable({
         cell: ({ row }) => {
           const val = row.getValue<number | null>("deviationValue");
           return (
-            <div className="text-right font-mono text-muted-foreground">
+            <div className="text-right tabular-nums text-muted-foreground">
               {val === null ? "-" : val.toFixed(1)}
             </div>
           );

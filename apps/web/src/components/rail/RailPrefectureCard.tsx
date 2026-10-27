@@ -2,14 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@stats47/components/atoms/ui/select';
+import { LazySelect } from '@stats47/components/molecules/lazy-select';
 import { hrefFor } from '@stats47/data-configs/content/href';
+import { ChevronRight } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
@@ -53,13 +48,16 @@ function PrefectureCardBody({
 
   return (
     <>
-      <Select
+      {/* Select の JS は初回操作で読む (配信サイズ策 D・LazySelect) */}
+      <LazySelect
         items={prefectures.map((prefecture) => ({
           value: prefecture.prefCode,
           label: prefecture.prefName,
         }))}
-        onValueChange={(prefCode: string | null) => {
-          if (prefCode === null) return;
+        placeholder="都道府県を選択"
+        aria-label="都道府県から探す"
+        triggerClassName="w-full"
+        onValueChange={(prefCode) => {
           const prefecture = prefectures.find(
             (item) => item.prefCode === prefCode
           );
@@ -71,25 +69,15 @@ function PrefectureCardBody({
           );
           router.push(href);
         }}
-      >
-        <SelectTrigger className="w-full" aria-label="都道府県から探す">
-          <SelectValue placeholder="都道府県を選択" />
-        </SelectTrigger>
-        <SelectContent>
-          {prefectures.map((prefecture) => (
-            <SelectItem key={prefecture.prefCode} value={prefecture.prefCode}>
-              {prefecture.prefName}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      />
       {moreHref && moreLabel && (
         <Link
           href={moreHref}
-          className="mt-3 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline sm:min-h-6 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-3 inline-flex min-h-11 items-center gap-1 text-xs font-medium text-primary hover:underline sm:min-h-6 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           onClick={() => safeTrack('area:all', moreHref, trackingSurface)}
         >
           {moreLabel}
+          <ChevronRight aria-hidden="true" className="size-3.5" />
         </Link>
       )}
     </>
@@ -101,7 +89,7 @@ export function RailPrefectureCard({
   title = '都道府県から探す',
   prefectures,
   moreHref = '/areas',
-  moreLabel = '都道府県一覧を見る →',
+  moreLabel = '都道府県一覧を見る',
   trackingSurface,
   collapsible = false,
 }: RailPrefectureCardProps) {

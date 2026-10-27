@@ -59,30 +59,28 @@ export function RankingVisualizationSection({
         // 地図・テーブルとも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。
         // lg 未満だけタブの切替を出し、パネルは className の切替で出し分ける。
         <div className="w-full">
-            {/* 年の切替は地図とテーブルで共有するので 1 つだけ置く。狭い幅は同じ行にタブを並べる。 */}
-            <div className="mb-4 flex items-center gap-2">
-                <Tabs
-                    value={activeTab}
-                    className="min-w-0 flex-1 lg:hidden"
-                    onValueChange={(value) => {
-                        const next: VisualizationTab = value === "table" ? "table" : "map";
-                        setActiveTab(next);
-                        trackUiInteraction({ action: "tab_switch", target: next });
-                    }}
-                >
-                    <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="map" className="flex items-center gap-1.5">
-                            <MapIcon className="size-4" aria-hidden="true" />
-                            地図
-                        </TabsTrigger>
-                        <TabsTrigger value="table" className="flex items-center gap-1.5">
-                            <TableIcon className="size-4" aria-hidden="true" />
-                            テーブル
-                        </TabsTrigger>
-                    </TabsList>
-                </Tabs>
-                {headerActions && <div className="ml-auto shrink-0">{headerActions}</div>}
-            </div>
+            {/* 年の切替は地図・表それぞれの見出し行の右 (ChartPanel の action) に置く。
+                ここは lg 未満のタブだけの行 (lg 以上は両方並べるので行ごと出さない)。 */}
+            <Tabs
+                value={activeTab}
+                className="mb-4 lg:hidden"
+                onValueChange={(value) => {
+                    const next: VisualizationTab = value === "table" ? "table" : "map";
+                    setActiveTab(next);
+                    trackUiInteraction({ action: "tab_switch", target: next });
+                }}
+            >
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="map" className="flex items-center gap-1.5">
+                        <MapIcon className="size-4" aria-hidden="true" />
+                        地図
+                    </TabsTrigger>
+                    <TabsTrigger value="table" className="flex items-center gap-1.5">
+                        <TableIcon className="size-4" aria-hidden="true" />
+                        テーブル
+                    </TabsTrigger>
+                </TabsList>
+            </Tabs>
             <div className="relative flex flex-col gap-4 xl:grid xl:grid-cols-2 xl:items-start">
                 {isPending && (
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-[1px]">
@@ -96,6 +94,7 @@ export function RankingVisualizationSection({
                         areaType={areaType}
                         cardTitle={areaType === "city" ? "市区町村別の地図" : "都道府県別の地図"}
                         cardFooter={cardFooter}
+                        headerActions={headerActions}
                     />
                 </div>
                 <div className={panelClassName(activeTab === "table")}>
@@ -104,6 +103,7 @@ export function RankingVisualizationSection({
                         rankingItem={rankingItem}
                         cardTitle={areaType === "city" ? "市区町村別の表" : "都道府県別の表"}
                         cardFooter={cardFooter}
+                        headerActions={headerActions}
                     />
                 </div>
             </div>

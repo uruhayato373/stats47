@@ -1,5 +1,6 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の breadcrumb.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
 // 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
 import * as React from "react"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
@@ -23,7 +24,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
     <ol
       data-slot="breadcrumb-list"
       className={cn(
-        "cn-breadcrumb-list flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground",
+        "cn-breadcrumb-list flex flex-wrap items-center gap-1.5 wrap-break-word text-muted-foreground",
         className
       )}
       {...props}

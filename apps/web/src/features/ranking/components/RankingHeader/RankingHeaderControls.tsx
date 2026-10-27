@@ -3,16 +3,10 @@
 import { type ReactNode } from "react";
 
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@stats47/components/atoms/ui/select";
-import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@stats47/components/atoms/ui/toggle-group";
+import { LazySelect } from "@stats47/components/molecules/lazy-select";
 
 import type { NormalizationOption } from "@stats47/ranking";
 
@@ -51,8 +45,9 @@ export function RankingHeaderControls({
 
   if (!showPills && !shareButton) return null;
 
+  // シェアのボタン列は切替ボタンの下端 (基準線) にそろえる (items-end)
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="flex flex-wrap items-end justify-between gap-3">
       {showPills ? (
         <div className="min-w-0">
           <p className="mb-1.5 text-xs font-medium text-muted-foreground">
@@ -60,25 +55,14 @@ export function RankingHeaderControls({
           </p>
           {/* モバイル: Select / sm 以上: ToggleGroup。どちらもアイコンを付けず文字だけで揃える */}
           <div className="sm:hidden">
-            <Select
+            <LazySelect
               value={normalizationValue}
-              onValueChange={(value) => {
-                if (value !== null) onNormalizationChange(value);
-              }}
+              onValueChange={onNormalizationChange}
               items={pills.map((p) => ({ value: p.type, label: p.label }))}
               disabled={normalizationDisabled}
-            >
-              <SelectTrigger aria-label="計算方法" className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {pills.map((p) => (
-                  <SelectItem key={p.type} value={p.type}>
-                    {p.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              aria-label="計算方法"
+              triggerClassName="w-full"
+            />
           </div>
           <ToggleGroup
             aria-label="計算方法"
