@@ -6,13 +6,17 @@
  * 左: サイドバーの開閉 (SidebarTrigger) + lg 未満でだけ出すロゴ。中: 検索。右: 配色の切り替え。
  * ナビのリンクはサイドバー (AppSidebar) に集め、ヘッダーには置かない。
  * ルートレイアウトの SidebarInset の中に置くので、画面遷移で再マウントされず検索欄の入力は残る。
+ * 行の高さ (HEADER_HEIGHT_CLASS) は AppSidebar の SidebarHeader と同じ値にし、両方の下線を一直線に揃える。
+ * 検索欄はテンプレートの shared/header/search.tsx と同じ組み立て (アイコン left-3・Input pl-10!・幅 w-xs)。
+ * pl-10 に ! を付けるのは、style-lyra.css がレイヤーの外で .cn-input の px-2.5 を当て、素の pl-* に勝つため
+ * (テンプレートも同じく ! を付けている)。
  * `cookies()` / `headers()` は呼ばない (SSG 維持: .claude/rules/nextjs-ssg-preservation.md)。
  */
 import { useCallback, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@stats47/components/atoms/ui/button';
+import { Button, buttonVariants } from '@stats47/components/atoms/ui/button';
 import { Input } from '@stats47/components/atoms/ui/input';
 import { Separator } from '@stats47/components/atoms/ui/separator';
 import { SidebarTrigger } from '@stats47/components/atoms/ui/sidebar';
@@ -24,6 +28,12 @@ import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 import { trackSearch } from '@/lib/analytics/events';
 
 import { useTheme } from '@/hooks/useTheme';
+
+/**
+ * ヘッダーとサイドバー上端の行の高さ (56px)。AppSidebar の SidebarHeader にも同じ h-14 を書く
+ * (AppSidebar は Server Component なので、'use client' のこのファイルから定数を import しない)。
+ */
+const HEADER_HEIGHT_CLASS = 'h-14';
 
 export function SiteHeader() {
   const { toggleTheme } = useTheme();
@@ -46,8 +56,10 @@ export function SiteHeader() {
   );
 
   return (
-    <header className="portal-header sticky top-0 z-200 border-b border-border bg-background">
-      <div className="flex h-12 items-center gap-2 px-2">
+    <header
+      className={`portal-header sticky top-0 z-200 border-b border-border bg-background ${HEADER_HEIGHT_CLASS}`}
+    >
+      <div className="flex h-full items-center gap-2 p-2">
         <SidebarTrigger aria-label="メニューを開閉する" />
         <Link
           href="/"
@@ -71,15 +83,18 @@ export function SiteHeader() {
           className="mx-1 h-4 data-[orientation=vertical]:self-center max-lg:hidden"
         />
         <form onSubmit={handleSearch} role="search" className="hidden sm:block">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative flex w-xs items-center">
+            <Search
+              aria-hidden="true"
+              className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            />
             <Input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="統計を検索"
               aria-label="統計を検索"
-              className="h-8 w-56 pl-8"
+              className="pl-10!"
             />
           </div>
         </form>
@@ -87,10 +102,15 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center gap-1">
           <Link
             href="/search"
-            className="flex size-9 items-center justify-center text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:hidden"
+            data-slot="button"
+            className={buttonVariants({
+              variant: 'ghost',
+              size: 'icon',
+              className: 'text-muted-foreground hover:text-foreground sm:hidden',
+            })}
             aria-label="検索"
           >
-            <Search className="size-5" />
+            <Search className="size-4" />
           </Link>
           <Button
             variant="ghost"

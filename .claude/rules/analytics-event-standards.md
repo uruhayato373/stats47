@@ -117,7 +117,7 @@ npm run google-admin:audit-api
 | `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
 | `geo_map_interaction` | `trackGeoMapInteraction` | `analysis_slug` / `geography` / `interaction_type` / `area_code` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
 | `geo_region_select` | `trackGeoRegionSelect` | `analysis_slug` / `geography` / `area_code` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
-| `geo_compare_add` | `trackGeoCompareAdd` | 登録しない（呼び出す部品がどのページにも置かれていない。2026-09-26 確認） | 要否× | geo M1 |
+| `geo_compare_add` | （削除済み） | 送信しない。呼び出す部品がどのページにも無かったので、2026-10-28 に送信関数を削除した。比較 UI を作るときに送信関数とこの行を戻す | 要否× | geo M1 |
 
 `geo_map_interaction.interaction_type`は県地図の`select-prefecture` / `clear-prefecture`に加え、
 Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共施設分析専用の`stage-facilities`を許可する。自由入力値は送らない。
@@ -147,7 +147,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > `AppSidebar` だけになり、`nav_surface` は PC の常設サイドバー = `sidebar`、lg (1024px) 未満で Sheet として開いたもの =
 > `sidebar-mobile` の 2 値で送る (送信は共通のクリック監視 `NavClickTracker` が `data-nav-surface` / `data-nav-label` から行う)。
 > 旧値 `desktop-header` / `mobile-drawer` はデプロイ日を境に 0 件になる。登録済み `nav_surface` の**値変更**で新しい
-> custom dimension は無い。サイドバーはカテゴリとテーマの一覧も常に出すので、デプロイ前後のグローバルナビの件数・
+> custom dimension は無い。サイドバーはテーマの一覧を常に出し、カテゴリの一覧は開閉できるグループ (既定は閉じ、現在地がカテゴリなら開く。2026-10-28) に入れ、主要ナビに「調査」(/survey) を加えたので、デプロイ前後のグローバルナビの件数・
 > ラベル別の内訳を単純比較しない。フッターに足した主要ナビ・テーマのリンクは既存の `footer` で数える。
 
 > **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を

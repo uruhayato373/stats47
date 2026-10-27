@@ -38,15 +38,16 @@ interface PageShellProps {
 }
 
 /**
- * サイト chrome (Footer / 固定バナー等) がページ本文と横幅を揃えるための共有トークン。
- * page.tsx は PageShell を使い、これを直接使うのは chrome のみ。
+ * ページ本文と横幅 (1280px 中央寄せ) を揃えるための共有トークン。横の余白は持たない。
+ * page.tsx は PageShell を使い、これを直接使うのは Shell の外で幅だけを揃えたい部品のみ。
  *
  * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅)。
  * 2026-10-27: 横の余白はテンプレートの p-4 に寄せた。本文の余白はルートレイアウトの
  * main#main-content (p-4) が持つので、PageShell / ArticleShell 自身は余白を持たない。
- * chrome は main の外にあるため、同じ 16px をこのトークンで付ける。
+ * 2026-10-28: このトークンから px-4 を外した。main の中で使うと main の p-4 と重なり 32px になっていた。
+ * main の外 (Footer) は自分で px-4 を足す。
  */
-export const SHELL_WIDTH_CLASS = 'mx-auto w-full max-w-[1280px] px-4';
+export const SHELL_WIDTH_CLASS = 'mx-auto w-full max-w-[1280px]';
 
 /**
  * PageShell / ArticleShell の外枠。幅の上限と、レール境界を判定する名前付きコンテナ

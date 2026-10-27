@@ -22,8 +22,8 @@ import {
   trackGeoAnalysisView,
   trackGeoMapInteraction,
   trackGeoRegionSelect,
-  trackGeoCompareAdd,
 } from "../events";
+import * as events from "../events";
 
 describe("GA4 カスタムイベント", () => {
   const mockGtag = vi.fn();
@@ -38,7 +38,7 @@ describe("GA4 カスタムイベント", () => {
     vi.unstubAllGlobals();
   });
 
-  it("Geo分析の4イベントが共通識別子と決定的パラメータを送信する", () => {
+  it("Geo分析の3イベントが共通識別子と決定的パラメータを送信する", () => {
     const common = {
       analysisId: "m1-analysis-population-2050",
       analysisSlug: "2050-population",
@@ -53,7 +53,6 @@ describe("GA4 カスタムイベント", () => {
       areaCode: "13000",
     });
     trackGeoRegionSelect({ ...common, areaCode: "27000" });
-    trackGeoCompareAdd({ ...common, areaCode: "01000", comparisonSize: 2 });
     trackGeoMapInteraction({
       ...common,
       interactionType: "stage-overlap",
@@ -81,14 +80,10 @@ describe("GA4 カスタムイベント", () => {
       "geo_region_select",
       expect.objectContaining({ area_code: "27000" })
     );
+    // geo_compare_add は呼び出す部品がどのページにも無いので送信関数ごと削除した (2026-10-28)
+    expect(Object.keys(events).filter((name) => name.endsWith("CompareAdd"))).toEqual([]);
     expect(mockGtag).toHaveBeenNthCalledWith(
       4,
-      "event",
-      "geo_compare_add",
-      expect.objectContaining({ area_code: "01000", comparison_size: 2 })
-    );
-    expect(mockGtag).toHaveBeenNthCalledWith(
-      5,
       "event",
       "geo_map_interaction",
       expect.objectContaining({ interaction_type: "stage-overlap" })

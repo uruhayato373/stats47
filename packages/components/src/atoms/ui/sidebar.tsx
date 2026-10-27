@@ -1,7 +1,7 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の sidebar.tsx の写し。import 先は相対パスに変えた。
 // 取り直すときは同じコミットの components/ui/ から写し、下の 3 点を当て直す (packages/ui-theme/README.md)。
 //
-// 公式との差は次の 3 点だけ。
+// 公式との差は次の 4 点だけ。
 // 1. PC 表示の境界を md (768px) から lg (1024px) に変えた。md 接頭辞のクラスをすべて lg 接頭辞に置き換え、
 //    hooks/use-mobile.ts の MOBILE_BREAKPOINT=1024 とそろえた。公開サイトは本文 656px と左右レールを並べるため、
 //    768〜1023px でサイドバーを常時出すと本文が狭くなりすぎる。
@@ -9,6 +9,8 @@
 //    main#main-content を SidebarInset の中に置くので、main を入れ子にしないため。
 // 3. 開閉状態を cookie に書き込む処理と、その cookie 名・有効期限の定数を削除した。公開サイトは SSG で、
 //    layout 配下で cookies() を読めない (.claude/rules/nextjs-ssg-preservation.md)。defaultOpen は true 固定で使う。
+// 4. 狭い画面 (isMobile) で使う Sheet を React.lazy で読む。PC の画面は Sheet (Base UI の Dialog) を使わないので、
+//    その分の JS を全ページの初回読み込みに入れない (2026-10-28 配信サイズの点検)。
 //
 // 使う側への注意: SidebarInset に overflow-hidden を付けない (sticky ヘッダーと右レールの追従が壊れる)。
 // はみ出しを切る必要があるときは overflow-clip を className で渡す。
@@ -24,13 +26,6 @@ import { cn } from "../../lib/cn"
 import { Button } from "./button"
 import { Input } from "./input"
 import { Separator } from "./separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "./sheet"
 import { Skeleton } from "./skeleton"
 import {
   Tooltip,
@@ -43,6 +38,52 @@ const SIDEBAR_WIDTH = "16rem"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
+
+type SidebarMobileSheetProps = React.ComponentProps<"div"> & {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  side: "left" | "right"
+}
+
+/** 狭い画面のサイドバー (Sheet)。isMobile のときだけ読み込む (冒頭の差分 4) */
+const SidebarMobileSheet = React.lazy(() =>
+  import("./sheet").then(
+    ({ Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle }) => ({
+      default: function SidebarMobileSheet({
+        open,
+        onOpenChange,
+        side,
+        dir,
+        children,
+        ...props
+      }: SidebarMobileSheetProps) {
+        return (
+          <Sheet open={open} onOpenChange={onOpenChange} {...props}>
+            <SheetContent
+              dir={dir}
+              data-sidebar="sidebar"
+              data-slot="sidebar"
+              data-mobile="true"
+              className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+              style={
+                {
+                  "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+                } as React.CSSProperties
+              }
+              side={side}
+            >
+              <SheetHeader className="sr-only">
+                <SheetTitle>Sidebar</SheetTitle>
+                <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+              </SheetHeader>
+              <div className="flex h-full w-full flex-col">{children}</div>
+            </SheetContent>
+          </Sheet>
+        )
+      },
+    })
+  )
+)
 
 type SidebarContextProps = {
   state: "expanded" | "collapsed"
@@ -190,27 +231,17 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-        <SheetContent
-          dir={dir}
-          data-sidebar="sidebar"
-          data-slot="sidebar"
-          data-mobile="true"
-          className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
-          }
+      <React.Suspense fallback={null}>
+        <SidebarMobileSheet
+          open={openMobile}
+          onOpenChange={setOpenMobile}
           side={side}
+          dir={dir}
+          {...props}
         >
-          <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-          </SheetHeader>
-          <div className="flex h-full w-full flex-col">{children}</div>
-        </SheetContent>
-      </Sheet>
+          {children}
+        </SidebarMobileSheet>
+      </React.Suspense>
     )
   }
 

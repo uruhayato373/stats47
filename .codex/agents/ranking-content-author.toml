@@ -124,4 +124,4 @@ prose / 前置きは禁止。ゲート blocker が残る場合は Result に「�
 - 意味レビュー: `.claude/agents/ranking-content-critic.md`
 - スキーマ: `packages/ai-content/src/types/snapshot.ts`（`AiContentSnapshotRow`）
 - reader: `packages/ai-content/src/repositories/read-ranking-ai-content-snapshot.ts`
-- UI 表示: `apps/web/src/features/ranking/components/{AiInsightCard,AiContentAccordion}.tsx`（考察カード内に地域別をネスト）'''
+- UI 表示: `apps/web/src/features/ranking/components/{AiInsightCard,AiMarkdownContent}.tsx`（考察カード内に地域別をネスト。開閉は共通の `ContentDisclosure`）'''

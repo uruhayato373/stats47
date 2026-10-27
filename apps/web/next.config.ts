@@ -298,7 +298,9 @@ const nextConfig: NextConfig = {
 
   // 静的ファイルの最適化
   experimental: {
-    optimizePackageImports: ["lucide-react", "d3", "@stats47/visualization"], // barrel export の tree-shaking 強化
+    // barrel export の tree-shaking 強化。@stats47/components は index.ts の export * を残したまま、使う部品だけを読む
+    // (packages/components/package.json の sideEffects と対。2026-10-28)
+    optimizePackageImports: ["lucide-react", "d3", "@stats47/visualization", "@stats47/components"],
     webpackBuildWorker: true, // 並列コンパイルを有効化（コンパイル速度向上）
     // Server Actionsのボディサイズ制限を緩和（デフォルト: 1MB -> 4MB）
     serverActions: {

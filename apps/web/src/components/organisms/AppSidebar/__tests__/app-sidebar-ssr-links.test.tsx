@@ -95,6 +95,7 @@ describe('AppSidebar', () => {
     ['/', '/'],
     ['/ranking/annual-income', '/ranking'],
     ['/category/laborwage', '/category/laborwage'],
+    ['/survey/population-census', '/survey'],
     ['/areas/37000/cities/37203', '/municipalities'],
     ['/themes', '/themes'],
     [themeHref(NAV_THEMES[0].themeKey), themeHref(NAV_THEMES[0].themeKey)],
@@ -105,6 +106,29 @@ describe('AppSidebar', () => {
     expect(active).toHaveLength(1);
     expect(active[0]).toHaveAttribute('href', expectedHref);
     expect(active[0]).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('カテゴリのグループは既定で閉じ (テーマを最初の画面に残す)、現在地がカテゴリなら開く', () => {
+    const categoryHref = hrefFor('category', {
+      categoryKey: RANKING_PROMINENCE_CATEGORIES[0].categoryKey,
+    });
+    const first = render(<Shell />);
+    const closedTrigger = screen.getByRole('button', { name: 'カテゴリ' });
+    expect(closedTrigger).toHaveAttribute('aria-expanded', 'false');
+    // 閉じていてもリンクは DOM に残る (hidden="until-found")
+    expect(first.container.querySelector(`[data-slot="sidebar"] a[href="${categoryHref}"]`)).not.toBeNull();
+    expect(screen.getByRole('link', { name: NAV_THEMES[0].title })).toBeVisible();
+    first.unmount();
+
+    navigation.pathname = categoryHref;
+    render(<Shell />);
+    expect(screen.getByRole('button', { name: 'カテゴリ' })).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('カテゴリの件数は単位付きで出す', () => {
+    const { container } = render(<Shell />);
+    const badge = container.querySelector('[data-slot="sidebar-menu-badge"]');
+    expect(badge?.textContent).toBe(`${RANKING_PROMINENCE_CATEGORIES[0].count}件`);
   });
 
   it('PC のサイドバーのリンクは sidebar の導線名で送られる', () => {

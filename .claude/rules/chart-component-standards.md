@@ -111,8 +111,8 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | インポートパス | 用途 |
 |---|---|---|
-| `DashboardCard` | `@/components/stat-charts` | チャートを囲むカードラッパー（タイトル・出典付き） |
-| `ChartSkeleton` | `@/components/stat-charts` | ローディングスケルトン |
+| `ChartPanel` | `@/components/charts/ChartPanel` | チャートを囲む見出し付きの枠（タイトル・説明・出典の footer）。テンプレートの `Card` / `CardHeader` / `CardContent` で組み立てる |
+| `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` | `@/components/charts/ChartState`（`ChartLoadingCard` は `@/components/stat-charts` からも再 export） | 読み込み中・空・エラーの状態表示の唯一の置き場。テンプレートの `Skeleton` / `Empty` / `Card` をそのまま組み立てる。feature 側に別名のラッパーを作らない |
 | `DashboardComponentRenderer` | `@/components/stat-charts/components/DashboardComponentRenderer` | componentTypeディスパッチャー |
 
 #### アダプター（e-Stat → Chart データ変換）
@@ -149,8 +149,9 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 #### カードフレームの役割分担（重複と誤判定しないこと）
 
-`@/components/charts` のカード枠は**基盤 `SurfaceCard` を共有しつつ、用途別に明確な役割を持つ**。
-表層が似ている（どれも `SurfaceCard` を p-0 でラップ）が**重複ではない**。マージは leaky abstraction を生むため禁止。
+`@/components/charts` のカード枠は**基盤のテンプレート `Card` を共有しつつ、用途別に明確な役割を持つ**
+（`ChartPanel` は `Card` を直接組み立て、`ChartCard` は `Card` を合成した `SurfaceCard` を使う。2026-10-27 にテンプレートへ寄せた）。
+表層が似ている（どれも同じ `Card` の枠）が**重複ではない**。マージは leaky abstraction を生むため禁止。
 （過去に監査が「ChartCard と ChartPanel は重複」と表層誤判定 → 精読で役割分担と判明: 2026-06-23）。
 
 | コンポーネント | 役割 | header の形 | 使い分け |

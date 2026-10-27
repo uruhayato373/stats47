@@ -64,20 +64,6 @@ export function trackGeoRegionSelect(
   });
 }
 
-/** 比較リストへ都道府県を追加した。 */
-export function trackGeoCompareAdd(
-  params: GeoAnalysisEventParams & {
-    areaCode: string;
-    comparisonSize: number;
-  }
-): void {
-  sendEvent('geo_compare_add', {
-    ...geoAnalysisPayload(params),
-    area_code: params.areaCode,
-    comparison_size: params.comparisonSize,
-  });
-}
-
 // ─── ファイルダウンロード ───────────────────────────────────
 
 /**

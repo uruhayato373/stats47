@@ -1,22 +1,22 @@
+/* npm shadcn@4 の dist/tailwind.css (MIT) の写し。公式との差は 1 点だけ:
+   data-open などの custom variant から Radix 互換の [data-state=…] 分岐を外した (2026-10-28)。
+   公開サイトの部品は Base UI で、Base UI は data-open / data-closed / data-checked などを直接付け、
+   data-state は付けない。分岐を残すと、使うすべての variant で同じセレクタが 2 倍出ていた。
+   data-[state=selected] のような任意の data-[…] variant は Tailwind 本体の機能なので、これとは関係なく使える。
+   アコーディオンの高さは Base UI の --accordion-panel-height だけを読む (Radix の変数は付かない)。 */
 @theme inline {
   @keyframes accordion-down {
     from {
       height: 0;
     }
     to {
-      height: var(
-        --radix-accordion-content-height,
-        var(--accordion-panel-height, auto)
-      );
+      height: var(--accordion-panel-height, auto);
     }
   }
 
   @keyframes accordion-up {
     from {
-      height: var(
-        --radix-accordion-content-height,
-        var(--accordion-panel-height, auto)
-      );
+      height: var(--accordion-panel-height, auto);
     }
     to {
       height: 0;
@@ -26,28 +26,24 @@
 
 /* Custom variants */
 @custom-variant data-open {
-  &:where([data-state="open"]),
   &:where([data-open]:not([data-open="false"])) {
     @slot;
   }
 }
 
 @custom-variant data-closed {
-  &:where([data-state="closed"]),
   &:where([data-closed]:not([data-closed="false"])) {
     @slot;
   }
 }
 
 @custom-variant data-checked {
-  &:where([data-state="checked"]),
   &:where([data-checked]:not([data-checked="false"])) {
     @slot;
   }
 }
 
 @custom-variant data-unchecked {
-  &:where([data-state="unchecked"]),
   &:where([data-unchecked]:not([data-unchecked="false"])) {
     @slot;
   }
@@ -67,7 +63,6 @@
 }
 
 @custom-variant data-active {
-  &:where([data-state="active"]),
   &:where([data-active]:not([data-active="false"])) {
     @slot;
   }

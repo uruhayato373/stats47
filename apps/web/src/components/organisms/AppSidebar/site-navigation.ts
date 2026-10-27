@@ -11,6 +11,7 @@ export type SiteNavKey =
   | 'areas'
   | 'municipalities'
   | 'geo'
+  | 'survey'
   | 'blog';
 
 /** 主要ナビ (表示順・ラベル)。 */
@@ -19,6 +20,7 @@ export const PRIMARY_NAV_ITEMS = [
   { key: 'areas', href: '/areas', label: '都道府県' },
   { key: 'municipalities', href: '/municipalities', label: '市区町村' },
   { key: 'geo', href: '/geo', label: '地域分析' },
+  { key: 'survey', href: '/survey', label: '調査' },
   { key: 'blog', href: '/blog', label: '統計ブログ' },
 ] as const satisfies ReadonlyArray<{
   key: SiteNavKey;
@@ -28,7 +30,13 @@ export const PRIMARY_NAV_ITEMS = [
 
 export type PrimaryNavKey = (typeof PRIMARY_NAV_ITEMS)[number]['key'];
 
-export const HOME_NAV_ITEM = { href: '/', label: 'ホーム' } as const;
+/**
+ * サイドバーのグループ名の見た目。テンプレートの nav-collapse の見出しと同じ。
+ * サーバー側の AppSidebar と 'use client' の AppSidebarClient の両方が使うので、client 境界の外 (ここ) に置く。
+ */
+export const SIDEBAR_GROUP_LABEL_CLASS = 'text-xs font-semibold uppercase text-muted-foreground';
+
+export const HOME_NAV_ITEM ={ href: '/', label: 'ホーム' } as const;
 export const COMPARE_NAV_ITEM = {
   href: '/category/population/compare',
   label: '地域間比較',

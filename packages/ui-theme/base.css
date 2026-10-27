@@ -6,4 +6,10 @@
 
 @custom-variant style-lyra (&:where(.style-lyra *));
 
-@import "./style-lyra.css";
+/* style-lyra はテンプレートと同じくレイヤーの外に置く。部品の写し (atoms/ui/*.tsx) は base-nova の値
+   (rounded-xl・text-sm・h-9 など) を素のクラスで持ち、それを lyra の値 (角丸なし・text-xs・h-8) で
+   上書きする前提で作られている。layer(components) に入れると素のクラス (utilities 層) が勝ち、
+   テンプレートの見た目が崩れる。呼び出し側が lyra の値を上書きしたいときは、テンプレートと同じく
+   ! を付ける (例: SiteHeader の検索欄の pl-10!)。
+   読むのは正本 style-lyra.css から使う規則だけを抜いた生成物 (scripts/ui-theme/build-used-lyra.mjs)。 */
+@import "./style-lyra.used.css";

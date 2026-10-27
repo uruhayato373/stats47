@@ -111,6 +111,8 @@
     "note:images:ensure": "node .claude/scripts/note/ensure-note-images.mjs",
     "admin-ui:check": "node .claude/scripts/admin-ui/check-shadcn-parity.mjs && node .claude/scripts/admin-ui/check-admin-ui-debt.mjs",
     "admin-ui:test": "node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs .claude/scripts/admin-ui/__tests__/sync-shadcn-reference.test.mjs",
+    "ui-theme:lyra": "node scripts/ui-theme/build-used-lyra.mjs",
+    "ui-theme:lyra:test": "node --test scripts/ui-theme/__tests__/build-used-lyra.test.mjs",
     "admin-ui:sync-reference": "node .claude/scripts/admin-ui/sync-shadcn-reference.mjs",
     "note:covers:test": "node --test .claude/scripts/note/__tests__/cover-audit.test.mjs .claude/scripts/note/__tests__/cover-update.test.mjs",
     "note:metrics:fetch": "node .claude/scripts/note/fetch-note-metrics.mjs",

@@ -39,7 +39,7 @@ export function Footer() {
       className="w-full border-t border-border bg-muted/30 py-4 pb-[calc(1rem+var(--safe-area-bottom))]"
       suppressHydrationWarning
     >
-      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-col gap-3")}>
+      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-col gap-3 px-4")}>
         <nav aria-label="主要ナビ">
           <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
             {PRIMARY_NAV_ITEMS.map((item) => (
