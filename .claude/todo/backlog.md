@@ -256,18 +256,6 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [ADMIN-UI-BASEUI-01] 管理画面を Base UI (base-nova) へ移し、公式 dashboard-01 の並べ方で全ページを作り直す
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run admin-ui:check] [起票:2026-10-27] [領域:管理] [進行中]
-
-- **方針 (2026-10-27 オーナー判断)**: shadcn/ui は 2026-07 から新規の既定を Base UI にした (https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default)。52 ページを作り直す前に部品を `base-nova` へ移し、画面は公式 `dashboard-01` (Section Cards・ChartContainer の面グラフ・TanStack の表・site-header) の並べ方にそろえる。shadcndashboard.dev は並べ方の見本だけに使う (部品が Badge・Button の大きさを className で上書きしており契約 2 に反するため取り込まない)。独自部品は原則使わない。
-- **作業場所**: worktree `C:/tmp/stats47-admin-baseui` (branch `feat/admin-baseui`)。本体の管理画面 (:4747) を作業中に壊さないため。
-- **段階**: 0 土台 (公式部品を base-nova へ入れ替え・`asChild` 47 か所を `render` へ・トークンを完全な色の値へ・chart トークン追加・sync/parity を base-nova へ) → 1 共通部品 (site-header + Breadcrumb・StatCard を Section Cards 型・ChartContainer の推移チャート・TanStack の表・自作 SVG チャートと StatCard の複製を削除) → 2 ページ (概況・一覧・詳細・文書・制作ツールの 5 型。推移はチャート、`<details>` は Collapsible) → 3 検査と規約 (admin-ui:check に自作チャート・複製・`<details>` を追加、admin-ui.md を改訂) → 4 確認 (型・lint・unit・admin-ui:check・design-system:check、light/dark/スマホ幅の目視)。
-- **停止条件**: 部品の大きさをページで上書きしない。`@stats47/components` を入れない。本番デプロイはしない (管理画面はローカル専用)。
-- **完了条件**: 上の検査がすべて通り、主要ページを light/dark/スマホ幅で目視確認済み。develop へ統合後、このカードを削除する。doboku-note 側の揃えは別カードで起票する。
-- **進捗 (2026-10-27)**: 全 56 ページの作り直しと見本の見た目をコミット済み (feat/admin-baseui)。型・lint・admin-ui:check (旧配色・任意の文字サイズ・<details>・Button をリンクにする書き方も 0)・unit (既知の agent-models 1 件のみ・ADMIN の Windows パス区切りの件)・e2e (実行分は全件通過。ローカル動画が無いと自動で飛ぶ 6 件を除く) を確認した。e2e はデータの読み取り元を本体に合わせて流す (`STATS47_PROJECT_ROOT`。worktree には git に入っていないデータが無い)。
-- **次**: ① push と develop への統合の可否をオーナーに確認 ② 統合後にこのカードを削除し、doboku-note 側の揃えを別カードで起票する。
-- **2026-10-27 追加 (オーナー指示)**: 管理画面の古い URL (`/ads`・`/svg`・`/assets`・`/strategy/reviews`) の転送ページを廃止し、それだけが使っていた部品・API (`/api/assets/tab(s)`・`/api/svg/catalog`・`/pilot/*`)・e2e・文書の記述を消した。
-
 ### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]
 
@@ -304,12 +292,7 @@ updated: 2026-10-19
 - **内訳**: Excel 塗りつぶしマップ `h-howto-excel-filled-map` (書き直しは別途進行) / マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
 - **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
 - **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
-- **Excel 塗りつぶしマップの途中経過 (2026-10-27・会社の Windows PC で実機操作。オーナー指示で中断、後日再開)**:
-  - 環境: Microsoft 365 Apps for enterprise・バージョン 2407 (ビルド 17830.20138)。CSV は https://stats47.jp/ranking/total-population の「ダウンロード」(`/api/ranking/total-population/download?format=csv&basis=all-bases`) の実物
-  - 実測: ① CSV は BOM 付き UTF-8 で文字化けなし。都道府県コードは先頭の 0 が落ちる (01000→1000)。年の列名は「総数_2025年」、47 行の下に出典の行が続く ② 「データ」タブの「データの種類」は「地理 (English)」で、変換すると地名が英語に置き換わる (日本→Japan、岩手県→Iwate Prefecture、東京都→Tokyo、兵庫・高知・大分は Hyōgo・Kōchi・Ōita)。47 件すべて地図マークが付いた。「国」の列なしでも都道府県名だけで変換できた ③ メニュー名は「挿入」→「マップ」→**「塗り分けマップ」** (旧版の「塗りつぶされたマップ」ではない)。押すとプレビューなしで即挿入。凡例は連続色、右下に「提供元: Bing © GeoNames, Microsoft, Zenrin」
-  - **最重要の発見**: 旧版が勧めた「国」の列を地図の範囲に含めると、日本全体が 1 色の国単位の地図になり (どこにマウスを置いても「要素 "Hokkaido"」)、都道府県が塗り分けられない。「都道府県名」と値の 2 列だけで作ると境界と濃淡が出る (東京・神奈川・大阪・愛知が濃い)。本文の「国の列を足すと安心」は逆効果なので消し、「正しく表示されないときは」に実例として書く
-  - 残り: Sheet2 (`C:\tmp\excel-map\filled-map-check.xlsx`。都道府県名を地理データに変換済み・列幅調整の途中で入力先が外れて中断) で、塗り分けマップの挿入 → 沖縄・北方領土の位置確認 → 「書式」→「系列のオプション」で色の変更 → PowerPoint への貼り付け → 画像 03〜06 の撮影 → draft.md 全面書き直し (環境の 1 行・完成地図を冒頭・全手順に画像・検証状況の段落の削除・リンクカード 3 本は依頼文どおり) → `node .claude/scripts/note/audit-note-unverified.mjs --file <draft>` exit 0 → `npm run note:article -- save h-howto-excel-filled-map`
-  - 画像の置き場 (この Windows PC の作業場 `docs/31_note記事原稿/h-howto-excel-filled-map/images/`・git 管理外): 01-csv-opened・02-table (都道府県名と値の 2 列版)・09-country-column-one-color (失敗例)・`_redo-03-with-country-column.png` (国の列あり版で使わない。撮り直す)。旧 02-download-card.png は未削除。原寸撮影は PowerShell の CopyFromScreen (computer-use の撮影は 1456px に縮むため)、右側の Claude のウィンドウと右上のアカウント名が入らない範囲で切り出す
+- **Excel 塗りつぶしマップ `h-howto-excel-filled-map` (2026-10-27・Microsoft 365 Excel バージョン 2407 で全手順を操作済み)**: 原稿を全面的に書き直し、画像 10 枚 (CSV・2 列の表・地理データ型・変換後・塗り分けマップの挿入・完成地図・色の変更 2 枚・「国」列の失敗例・PowerPoint 貼り付け) とともに R2 へ保存した (`note:article save`・manifest sha256 `d9591e04ca4ba2030ac6c18754de5ff9003977b19135fca6e4f5e96b4dc103ee`・13 ファイル・`audit-note-unverified --file` exit 0)。操作で分かった罠 (「国」列で日本全体が 1 色・チャートシートではコピー不可・PowerPoint へ普通に貼ると灰色になり貼り付けのオプション左から 2 番目で色が残る・タイトル枠に直接入力すると別のテキストボックスができる) は本文の「正しく表示されないときは」に書いた。**残り**: ① note.com の公開記事を R2 の新版で更新する (outward-facing なのでオーナー承認後。題名も「塗り分けマップ」に変わるので台帳 `data/note/articles.json` の title も公開時に合わせる) ② `hashtags.txt` の `#塗りつぶされたマップ` を `#塗り分けマップ` に替えるか判断 (承認済みハッシュタグの範囲) ③ 更新後に `npm run note:unverified:audit` でこの記事が外れたことを確かめる
 - **完了条件**: 17 本それぞれ実際に操作した画面・結果を入れて更新し、`npm run note:unverified:audit` が 0/428 で exit 0。商品パックは Office で開いた確認記録を `data/products/` に残す。
 
 ### [STRATEGY-GATE-ADMIN-PILOT-01] 管理画面に、行政向け商品の検証が4段階のどこにいるかを出す
@@ -535,7 +518,7 @@ updated: 2026-10-19
 - **次**: ① Windows で `.claude/scripts/model-usage/collect-local-usage.mjs` の記録が空になる原因を直す ② CI の無人 Claude (improvement-cycle など) の起動も同じ形で記録する ③ 4 週分たまったら、起動 0 回の体を統合候補として一覧にし、オーナーが決める。
 - **停止条件**: 記録が 4 週分そろうまで、エージェントの定義を消さない。系統は残し、系統の中の重複だけを減らす (2026-10-11 オーナー判断)。
 - **完了条件**: 3 環境の 4 週分の記録があり、統合候補の一覧とオーナーの判断が出ている。
-- **追記 (2026-10-27)**: 管理画面 `/ops/agents` は週ごとの推移を TrendChart で出せない。`apps/admin/lib/server/agent-models.ts` の `UsageReport` が週別の値を持たないため。記録が 4 週分そろったら週別の配列を足し、`/ops/agents` にチャートを置く (ADMIN-UI-BASEUI-01 の規約: 3 点以上の時系列はチャート)。
+- **追記 (2026-10-27)**: 管理画面 `/ops/agents` は週ごとの推移を TrendChart で出せない。`apps/admin/lib/server/agent-models.ts` の `UsageReport` が週別の値を持たないため。記録が 4 週分そろったら週別の配列を足し、`/ops/agents` にチャートを置く (`.claude/rules/admin-ui.md` の規約: 3 点以上の時系列はチャート)。
 
 ### [X-METRICS-WEEKLY-RECORD-01] X の指標を週次で記録する定期実行を作り、管理画面を読みに行く操作を止める hook の対象に X を加える
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]
@@ -3968,6 +3951,14 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [ADMIN-UI-DOBOKU-ALIGN-01] doboku-note の管理画面 (tools/admin-app) を stats47 と同じ Base UI (base-nova) の構成へ揃えるか決める
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-10-27] [領域:管理]
+
+- **経緯**: stats47 の管理画面は 2026-10-27 に new-york-v4 (Radix) から base-nova (Base UI) へ移し、見本 shadcndashboard.dev の見た目と 5 つのページの型にそろえた (規約 `.claude/rules/admin-ui.md`)。doboku-note の `tools/admin-app` は Radix のままで、todo-standards で共通にしている管理画面の構成がこの時点から食い違う。
+- **次**: doboku-note 側で Base UI へ移すか、Radix のまま見た目 (neutral・Geist・直角のカード) だけ合わせるかをオーナーが決める。移す場合は stats47 の `.claude/scripts/admin-ui/sync-shadcn-reference.mjs` (base-nova の取得と IconPlaceholder の変換) を流用し、作業は doboku-note のリポジトリで行う。
+- **完了条件**: 方針が決まり、移す場合は doboku-note の backlog へ実装カードを移した時点でこのカードを削除する。
+
 
 ### [AFF-RANKING-SLOT-DECISION-01] ランキング面の広告枠 (ranking-incontent ほか) を続けるか決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-10-27] [領域:管理]

@@ -11350,12 +11350,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
-          "files": 5,
-          "bytes": 31582,
-          "savedAt": "2026-10-24T04:59:41.767Z"
+          "sha256": "d9591e04ca4ba2030ac6c18754de5ff9003977b19135fca6e4f5e96b4dc103ee",
+          "files": 13,
+          "bytes": 1367940,
+          "savedAt": "2026-10-27T12:59:18.054Z"
         },
-        "verifiedAt": "2026-10-24T04:59:41.767Z"
+        "verifiedAt": "2026-10-27T12:59:18.054Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
