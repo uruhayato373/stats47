@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+  BlogListToolbar,
   BlogNavigationCards,
   selectPopularBlogTags,
 } from '../BlogNavigationCards';
@@ -89,5 +90,24 @@ describe('BlogNavigationCards', () => {
     expect(
       screen.getByRole('link', { name: /人気記事その1/ })
     ).toBeInTheDocument();
+  });
+
+  it('ブログ一覧では検索とタグを一覧の上の操作行に 1 回だけ描き、レールには重ねない', () => {
+    render(
+      <>
+        <BlogListToolbar tags={TAGS} />
+        <BlogNavigationCards {...PROPS} includeSearchAndTags={false} />
+      </>
+    );
+
+    // 検索欄とタグはそれぞれ 1 つだけ (狭い幅用の写しを隠して置かない)
+    expect(screen.getAllByRole('search')).toHaveLength(1);
+    expect(screen.getAllByRole('link', { name: '「タグ12」の記事を12件見る' })).toHaveLength(1);
+    expect(screen.queryByRole('region', { name: '記事検索' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: '人気のタグ' })).not.toBeInTheDocument();
+    expect(screen.getByRole('searchbox', { name: 'ブログ記事を検索' })).toHaveAttribute('name', 'q');
+    expect(
+      screen.getByRole('link', { name: '「タグ12」の記事を12件見る' }).closest('[data-nav-surface]')
+    ).toHaveAttribute('data-nav-surface', 'blog_sidebar');
   });
 });

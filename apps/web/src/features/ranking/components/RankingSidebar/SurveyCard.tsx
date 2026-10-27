@@ -28,6 +28,9 @@ interface SurveyCardProps {
  * 同調査の関連ランキングだけを出す。未解決 (surveys 空) はカード自体を出さない。
  * 正典: .claude/rules/survey-linkage-standards.md
  */
+/** カテゴリの出典調査は 20 件近くになるので、上位だけを見せて残りは「すべて見る」で開く */
+const CATEGORY_SURVEY_VISIBLE_LIMIT = 5;
+
 export function SurveyCard({
   surveys,
   relatedItems = [],
@@ -40,6 +43,7 @@ export function SurveyCard({
       title={title}
       surface={surface}
       relatedItems={relatedItems}
+      visibleLimit={surface === "category_survey" ? CATEGORY_SURVEY_VISIBLE_LIMIT : undefined}
     />
   );
 }

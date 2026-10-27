@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@stats47/components/atoms/ui/tooltip";
-import { Check, Facebook, Link as LinkIcon } from "lucide-react";
+import { Check, Facebook, Link as LinkIcon, MessageCircle } from "lucide-react";
 
 import { trackShare } from "@/lib/analytics/events";
 
@@ -44,7 +44,6 @@ function XMarkIcon({ className }: { className: string }) {
  */
 function ShareButtonIcon({ name, isProminent }: ShareButtonIconProps) {
   const iconSize = isProminent ? "size-5" : "size-4";
-  const textSize = isProminent ? "text-sm" : "text-[10px]";
 
   switch (name) {
     case "X (Twitter)":
@@ -52,9 +51,17 @@ function ShareButtonIcon({ name, isProminent }: ShareButtonIconProps) {
     case "Facebook":
       return <Facebook className={iconSize} aria-hidden="true" />;
     case "LINE":
-      return <span aria-hidden="true" className={`font-bold ${textSize} leading-none`}>LINE</span>;
+      // 文字の「LINE」は他のアイコンより幅が広く、ボタンの中で寸法が揃わなかった。同じ大きさのアイコンにする
+      return <MessageCircle className={iconSize} aria-hidden="true" />;
     case "はてなブックマーク":
-      return <span aria-hidden="true" className={`font-bold ${textSize} leading-none`}>B!</span>;
+      return (
+        <span
+          aria-hidden="true"
+          className={`inline-flex ${iconSize} items-center justify-center text-xs font-bold leading-none`}
+        >
+          B!
+        </span>
+      );
     default:
       return null;
   }

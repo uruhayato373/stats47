@@ -113,7 +113,10 @@ function RailLinks({
       <nav
         className={
           columns === 3
-            ? '@container grid grid-cols-1 gap-x-6 @min-[560px]:grid-cols-2 @min-[880px]:grid-cols-3'
+            ? // 列数は件数に関係なく、1 列 20rem 以上を保てる数だけ並べる (auto-fit)。
+              // 旧実装は @container を自分に付けて自分を問い合わせていたため、祖先の幅で 3 列に固定され
+              // 題名が 8 字で切れ、件数が列数で割り切れない幅では空きマスが出ていた
+              'grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-x-6'
             : 'flex flex-col'
         }
         aria-label="カード内リンク"
@@ -279,23 +282,26 @@ export function RailLinksCard({
         horizontalOnMobile={horizontalOnMobile}
         columns={columns}
       />
+      {/* 一覧への導線も他の行と同じリンク行 (同じ行高と行末の ChevronRight) にする */}
       {moreLink && (
-        <Link
-          href={moreLink.href}
-          className="mt-3 inline-flex min-h-11 items-center text-xs sm:min-h-6 font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring dark:text-foreground"
-          onClick={() =>
-            trackLink(
-              {
-                href: moreLink.href,
-                label: moreLink.label,
-                trackingLabel: moreLink.trackingLabel,
-              },
-              trackingSurface
-            )
-          }
-        >
-          {moreLink.label}
-        </Link>
+        <div className="-mx-2 mt-1 border-t border-border">
+          <RailNavRow
+            href={moreLink.href}
+            className="font-medium text-primary"
+            onClick={() =>
+              trackLink(
+                {
+                  href: moreLink.href,
+                  label: moreLink.label,
+                  trackingLabel: moreLink.trackingLabel,
+                },
+                trackingSurface
+              )
+            }
+          >
+            {moreLink.label}
+          </RailNavRow>
+        </div>
       )}
     </>
   );

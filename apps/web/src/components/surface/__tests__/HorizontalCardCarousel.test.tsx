@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   HorizontalCardCarousel,
   HorizontalCardCarouselControls,
+  HorizontalCardCarouselFrame,
   HorizontalCardCarouselSection,
 } from '../HorizontalCardCarousel';
 
@@ -76,5 +77,40 @@ describe('HorizontalCardCarousel', () => {
     expect(
       screen.getByRole('button', { name: 'テストカードを右へ' })
     ).toBeDisabled();
+  });
+
+  it('Frame は題名をカードの見出し (h2) に置き、カード列を区切り線のセルにする', () => {
+    render(
+      <HorizontalCardCarouselFrame
+        title="注目のランキング"
+        action={<button type="button">もっと見る</button>}
+      >
+        <HorizontalCardCarousel ariaLabel="注目">
+          <a href="/1">1</a>
+          <a href="/2">2</a>
+        </HorizontalCardCarousel>
+      </HorizontalCardCarouselFrame>
+    );
+
+    const heading = screen.getByRole('heading', { level: 2, name: '注目のランキング' });
+    expect(heading.closest('[data-slot="card-header"]')).not.toBeNull();
+    expect(screen.getByRole("button", { name: "もっと見る" }).closest('[data-slot="card-action"]')).not.toBeNull();
+
+    const region = screen.getByRole('region', { name: /注目/ });
+    // カードを入れ子にしない: 隙間なしの区切り線のセル。項目側は data-carousel=cells で枠を外す
+    expect(region).toHaveAttribute('data-carousel', 'cells');
+    expect(region).toHaveClass('divide-x');
+    expect(region).not.toHaveClass('gap-3');
+  });
+
+  it('Frame の外では従来どおり隙間付きのカード列になる', () => {
+    render(
+      <HorizontalCardCarousel ariaLabel="単独">
+        <a href="/1">1</a>
+      </HorizontalCardCarousel>
+    );
+    const region = screen.getByRole('region', { name: /単独/ });
+    expect(region).toHaveAttribute('data-carousel', 'cards');
+    expect(region).toHaveClass('gap-3');
   });
 });

@@ -52,8 +52,9 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={cn("mb-4 flex flex-col gap-2", className)}>
-      <div className="flex items-center gap-3">
-        <div className="min-w-0 flex-1">
+      {/* 狭い幅では操作を見出しの下の行へ回す (flex-wrap)。min-h-8 = 操作の高さで、操作の有無で行の高さを変えない */}
+      <div className="flex min-h-8 flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="min-w-48 flex-1">
           {eyebrow && (
             <p className="text-xs font-medium text-muted-foreground">
               {eyebrow}
@@ -61,7 +62,8 @@ export function SectionHeader({
           )}
           <Heading className="flex items-center gap-2 text-base font-semibold leading-snug text-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground">
             {icon}
-            <span className="min-w-0">
+            {/* 文節で折り返し、行の長さを揃える (語中で折れない) */}
+            <span className="min-w-0 text-balance [word-break:auto-phrase]">
               {number && (
                 <span className="mr-2 font-mono text-primary">{number}</span>
               )}

@@ -1,16 +1,12 @@
+import { type ReactNode } from "react";
 
-import {
-  Badge,
-  CardAction,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components";
+import { Badge } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
 
 import Link from "@/components/atoms/SiteLink";
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
 
@@ -19,7 +15,9 @@ import type { CategoryTopicListItem } from "./types";
 /**
  * カテゴリ内グループ一覧 (server component / client JS ゼロ)。
  *
- * 平坦な 110 行テーブルの代わりに、意味のあるまとまりごとのカードを並べる。
+ * 平坦な 110 行テーブルの代わりに、意味のあるまとまりごとの区切りを並べる。
+ * 節の題名 (「全41件のランキング」) はアイコン付きでカードの見出しに置き、各まとまりはカードを入れ子にせず
+ * 罫線で区切ったセクションにする (テンプレートのカード内の表と同じ)。
  * 分類の SSOT は `packages/data-configs/src/topics/`、R2 items.json への
  * 焼き込みは `ranking-items-per-url-snapshot.ts`。
  *
@@ -36,6 +34,9 @@ const VISIBLE_ROWS = 5;
 interface Props {
   topics: { key: string; label: string }[];
   items: CategoryTopicListItem[];
+  /** 節の題名。渡すとカードの見出し (h2) に置き、まとまりをカードの中に並べる */
+  title?: ReactNode;
+  icon?: ReactNode;
 }
 
 /** タイトルが同じ item を 1 行に畳む。順序は入力順を保つ */
@@ -81,7 +82,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
             </Link>
           )}
           {primary.top1 ? (
-            <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+            <span className="max-w-[60%] shrink-0 truncate text-right text-xs tabular-nums text-muted-foreground">
               {primary.top1.areaName}
               {primary.top1.value ? (
                 <>
@@ -116,7 +117,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
   );
 }
 
-function TopicCard({
+function TopicGroup({
   label,
   items,
 }: {
@@ -128,17 +129,15 @@ function TopicCard({
   const hidden = rows.slice(VISIBLE_ROWS);
 
   return (
-    <SurfaceCard className="gap-0 p-0">
-      <CardHeader className="border-b py-3 [.border-b]:pb-3">
-        <CardTitle className="text-sm">
-          <h3>{label}</h3>
-        </CardTitle>
-        <CardAction className="self-center">
-          <Badge variant="secondary" className="tabular-nums">
-            {rows.length}
-          </Badge>
-        </CardAction>
-      </CardHeader>
+    // 枠はカードの見出しの外側 (SectionCard) だけが持つ。まとまりは罫線で区切る (2 列のときは間にも縦線)
+    <section aria-label={label} className="border-b border-border @md:odd:border-r">
+      {/* 見出しは表の行に近い高さ (min-h-13 ≒ 52px) に詰める */}
+      <div className="flex min-h-13 items-center justify-between gap-2 border-b border-border bg-muted/40 px-4">
+        <h3 className="text-sm font-medium text-foreground">{label}</h3>
+        <Badge variant="secondary" className="tabular-nums">
+          {rows.length}
+        </Badge>
+      </div>
       <ul>
         {visible.map((row) => (
           <TopicRow key={row.title} row={row} />
@@ -158,11 +157,11 @@ function TopicCard({
           </ul>
         </details>
       )}
-    </SurfaceCard>
+    </section>
   );
 }
 
-export function CategoryTopicGroups({ topics, items }: Props) {
+export function CategoryTopicGroups({ topics, items, title, icon }: Props) {
   const byTopic = new Map<string, CategoryTopicListItem[]>();
   for (const item of items) {
     if (!item.topicKey) continue;
@@ -177,11 +176,27 @@ export function CategoryTopicGroups({ topics, items }: Props) {
   });
   if (cards.length === 0) return null;
 
-  return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {cards.map((card) => (
-        <TopicCard key={card.key} label={card.label} items={card.items} />
-      ))}
+  // 列数は本文の幅 (@container) で決める。最後の行の下罫線はカードの線と重ならないよう -mb-px で隠す
+  const groups = (
+    <div className="@container">
+      <div className="-mb-px grid grid-cols-1 @md:grid-cols-2">
+        {cards.map((card) => (
+          <TopicGroup key={card.key} label={card.label} items={card.items} />
+        ))}
+      </div>
     </div>
+  );
+  if (!title) return groups;
+
+  return (
+    <SectionCard
+      title={title}
+      icon={icon}
+      headingAs="h2"
+      className="pb-0"
+      bodyClassName="px-0 pt-0"
+    >
+      {groups}
+    </SectionCard>
   );
 }

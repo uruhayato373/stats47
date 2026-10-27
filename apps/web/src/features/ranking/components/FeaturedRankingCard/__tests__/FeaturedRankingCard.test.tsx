@@ -16,7 +16,7 @@ const PROPS = {
 };
 
 describe("FeaturedRankingCard", () => {
-  it("共通比率・リンク・hook・1位・年度・単位・地理地図を表示する", () => {
+  it("リンク・hook・1位・年度・単位・地理地図を表示し、地図は固定サイズの枠に置く", () => {
     const { container, getByRole, getByText } = render(
       <FeaturedRankingCard {...PROPS} />,
     );
@@ -26,8 +26,9 @@ describe("FeaturedRankingCard", () => {
       "href",
       "/ranking/annual-sunshine-duration",
     );
-    expect(card).toHaveClass("aspect-[1.47/1]");
-    expect(card).toHaveClass("p-3");
+    // 高さは中身で決める (固定比率を持たない)。余白はテンプレートの p-4
+    expect(card.className).not.toMatch(/aspect-/);
+    expect(card).toHaveClass("p-4");
     expect(getByText("日照時間が最も長い県は？")).toHaveClass(
       "text-sm",
       "font-semibold",
@@ -37,10 +38,11 @@ describe("FeaturedRankingCard", () => {
     expect(getByText("高知県")).toBeInTheDocument();
     expect(getByText(/2,309/)).toBeInTheDocument();
     expect(getByText("2024年")).toBeInTheDocument();
-    expect(container.querySelector("svg")).toHaveAttribute(
-      "data-map-rotation",
-      "clockwise-32",
-    );
+    const map = container.querySelector("svg");
+    expect(map).toHaveAttribute("data-map-rotation", "clockwise-32");
+    // 桁の多い値でも地図が潰れないよう固定サイズの枠、値は省略できる列に置く
+    expect(map?.parentElement).toHaveClass("size-16", "shrink-0");
+    expect(getByText(/2,309/)).toHaveClass("truncate", "tabular-nums");
   });
 
   it("比較・top3・装飾用question分岐を持たない", () => {

@@ -16,6 +16,8 @@ import {
 import { Button, cn } from '@stats47/components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+import { SectionCard } from './SurfaceCard';
+
 const SCROLL_EDGE_TOLERANCE = 2;
 
 interface CarouselControlState {
@@ -28,6 +30,8 @@ interface CarouselControlState {
 interface CarouselRegistry {
   state: CarouselControlState | null;
   setState: (state: CarouselControlState | null) => void;
+  /** カードの見出しの下に並べる (区切り線のセル)。HorizontalCardCarouselFrame だけが true にする */
+  framed?: boolean;
 }
 
 const CarouselContext = createContext<CarouselRegistry | null>(null);
@@ -46,6 +50,55 @@ export function HorizontalCardCarouselSection({
   return (
     <CarouselContext.Provider value={value}>
       <section {...props}>{children}</section>
+    </CarouselContext.Provider>
+  );
+}
+
+interface HorizontalCardCarouselFrameProps
+  extends Omit<ComponentPropsWithoutRef<'section'>, 'title'> {
+  title: ReactNode;
+  /** 見出しの左のアイコン (lucide) */
+  icon?: ReactNode;
+  /** 見出し行の右端。矢印の右に置く一覧への導線 (SectionIndexLink) */
+  action?: ReactNode;
+  children: ReactNode;
+}
+
+/**
+ * 題名をアイコン付きでカードの見出し (CardHeader) に置き、その下にカード列を並べる節。
+ * テンプレートの KPI 行と同じく、列の各項目はカードを入れ子にせず区切り線のセルにする
+ * (PORTAL_CARD_CELL_CLASS)。矢印は見出し行の右端に置く。
+ * 名前を *Card にしないのは、これが外枠で、中の項目 (FeaturedRankingCard 等) が枠を持たないセルになるため
+ * (カードを入れ子にしない)。
+ */
+export function HorizontalCardCarouselFrame({
+  title,
+  icon,
+  action,
+  children,
+  className,
+  ...props
+}: HorizontalCardCarouselFrameProps) {
+  const [state, setState] = useState<CarouselControlState | null>(null);
+  const value = useMemo(() => ({ state, setState, framed: true }), [state]);
+  return (
+    <CarouselContext.Provider value={value}>
+      <SectionCard
+        title={title}
+        icon={icon}
+        headingAs="h2"
+        headerAction={
+          <>
+            <HorizontalCardCarouselControls />
+            {action}
+          </>
+        }
+        className={cn('pb-0', className)}
+        bodyClassName="px-0 pt-0"
+        {...props}
+      >
+        {children}
+      </SectionCard>
     </CarouselContext.Provider>
   );
 }
@@ -128,7 +181,9 @@ export function HorizontalCardCarousel({
   className,
 }: HorizontalCardCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const setControlState = useContext(CarouselContext)?.setState;
+  const context = useContext(CarouselContext);
+  const setControlState = context?.setState;
+  const framed = context?.framed ?? false;
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -172,6 +227,7 @@ export function HorizontalCardCarousel({
       role="region"
       aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
       tabIndex={0}
+      data-carousel={framed ? 'cells' : 'cards'}
       onScroll={updateScrollState}
       onKeyDown={(event) => {
         if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
@@ -179,7 +235,11 @@ export function HorizontalCardCarousel({
         scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
       }}
       className={cn(
-        'grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-3 overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)]',
+        'grid snap-x snap-mandatory grid-flow-col overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+        framed
+          ? // カードの見出しの下: 隙間なしで区切り線 (テンプレートの KPI 行)
+            'auto-cols-[85%] divide-x divide-border sm:auto-cols-[50%] lg:auto-cols-[calc(100%/3)] xl:auto-cols-[25%]'
+          : 'auto-cols-[85%] gap-3 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)]',
         className
       )}
     >

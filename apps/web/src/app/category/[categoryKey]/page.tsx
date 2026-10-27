@@ -17,15 +17,13 @@ import {
   readRankingValuesFromR2,
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
+import { ListOrdered, Newspaper, TrendingUp } from 'lucide-react';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { RailStack } from '@/components/rail';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel } from '@/components/surface';
-import {
-  HorizontalCardCarouselControls,
-  HorizontalCardCarouselSection,
-} from '@/components/surface/HorizontalCardCarousel';
+import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
   FooterAdSlot,
@@ -307,11 +305,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <div className="space-y-4">
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (
-          <HorizontalCardCarouselSection>
-            <SectionHeader
-              title="注目のランキング"
-              action={<HorizontalCardCarouselControls />}
-            />
+          <HorizontalCardCarouselFrame title="注目のランキング" icon={<TrendingUp />}>
             <HorizontalCardCarousel
               ariaLabel={`${category.categoryName}の注目ランキング`}
             >
@@ -325,23 +319,20 @@ export default async function CategoryPage({ params }: PageProps) {
                 />
               ))}
             </HorizontalCardCarousel>
-          </HorizontalCardCarouselSection>
+          </HorizontalCardCarouselFrame>
         )}
 
         {/* Category と Tag の明示対応で絞った関連記事。全体の最新記事は混ぜない。 */}
         {categoryArticles.length > 0 && blogTagKey && (
-          <HorizontalCardCarouselSection>
-            <SectionHeader
-              title={`${category.categoryName}の新着ブログ`}
-              action={
-                <>
-                  <HorizontalCardCarouselControls />
-                  <SectionIndexLink href={hrefFor('tag', { tagKey: blogTagKey })}>
-                    すべての記事
-                  </SectionIndexLink>
-                </>
-              }
-            />
+          <HorizontalCardCarouselFrame
+            title={`${category.categoryName}の新着ブログ`}
+            icon={<Newspaper />}
+            action={
+              <SectionIndexLink href={hrefFor('tag', { tagKey: blogTagKey })}>
+                すべての記事
+              </SectionIndexLink>
+            }
+          >
             <HorizontalCardCarousel
               ariaLabel={`${category.categoryName}の新着ブログ`}
             >
@@ -354,18 +345,26 @@ export default async function CategoryPage({ params }: PageProps) {
                 />
               ))}
             </HorizontalCardCarousel>
-          </HorizontalCardCarouselSection>
+          </HorizontalCardCarouselFrame>
         )}
 
         {/* 全件テーブル */}
-        <section>
-          <SectionHeader title={`全${rankingItems.length}件のランキング`} />
-          {categoryTopics.length > 0 ? (
-            <CategoryTopicGroups topics={categoryTopics} items={topicItems} />
-          ) : (
+        {categoryTopics.length > 0 ? (
+          <CategoryTopicGroups
+            title={`全${rankingItems.length}件のランキング`}
+            icon={<ListOrdered />}
+            topics={categoryTopics}
+            items={topicItems}
+          />
+        ) : (
+          <section>
+            <SectionHeader
+              title={`全${rankingItems.length}件のランキング`}
+              icon={<ListOrdered />}
+            />
             <CategoryRankingTable items={allItems} />
-          )}
-        </section>
+          </section>
+        )}
 
         {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
         <InContentAdSlot slot={HUB_INCONTENT} />

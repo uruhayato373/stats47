@@ -54,11 +54,11 @@ function track(label: string, href: string, surface: NavSurface) {
   }
 }
 
-/** 行末の矢印。RailLinksCard の行 (RailNavRow) と同じ「押せる行」の印 */
+/** 行末の矢印。RailLinksCard の行 (RailNavRow) と同じ大きさ・色の「押せる行」の印 */
 const rowChevron = (
   <ChevronRight
     aria-hidden="true"
-    className="shrink-0"
+    className="shrink-0 text-muted-foreground"
   />
 );
 
@@ -68,7 +68,8 @@ const rowChevron = (
  */
 function rowClassName(density: RailCategoryDensity, isActive: boolean, className?: string) {
   return cn(
-    'h-auto translate-x-0 justify-between',
+    // [&>svg]:size-3.5 = RailNavRow の矢印と同じ大きさ (SidebarMenuSubButton の既定 size-4 を上書き)
+    'h-auto translate-x-0 justify-between [&>svg]:size-3.5 [&>svg]:text-muted-foreground',
     density === 'compact'
       ? 'min-h-11 py-1.5 text-sm sm:min-h-9'
       : 'min-h-11 py-2 text-[15px] sm:min-h-10',

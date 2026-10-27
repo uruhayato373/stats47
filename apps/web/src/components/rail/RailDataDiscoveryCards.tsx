@@ -1,3 +1,5 @@
+import { LayoutGrid } from 'lucide-react';
+
 import { RailCard } from '@/components/surface';
 
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
@@ -40,9 +42,9 @@ export function RailDataDiscoveryCards({
       {/* カテゴリ導線は home と同じ縦型行 UI (RailCategoryList) を使う。件数は出さない */}
       <RailCard
         title="カテゴリから探す"
+        icon={<LayoutGrid />}
         aria-label="カテゴリから探す"
         collapsible={collapsible}
-        bodyClassName="px-4 pb-3 pt-0"
       >
         <RailCategoryList
           items={categories}
@@ -53,7 +55,7 @@ export function RailDataDiscoveryCards({
             label: 'ランキング一覧を見る',
             trackingLabel: 'category:all',
           }}
-          className="-mx-4 border-t-0"
+          className="-mx-2 p-0"
         />
       </RailCard>
 
@@ -68,7 +70,7 @@ export function RailDataDiscoveryCards({
         layout="list"
         moreLink={{
           href: '/themes',
-          label: 'すべてのテーマを見る →',
+          label: 'すべてのテーマを見る',
           trackingLabel: 'theme:all',
         }}
         trackingSurface={trackingSurface}

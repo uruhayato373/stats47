@@ -22,7 +22,8 @@ describe('PortalUseCaseGrid', () => {
       'href',
       '/themes/population-dynamics'
     );
-    expect(migrationLink).toHaveClass('aspect-[1.47/1]');
+    // カードの高さは中身で決める (固定比率を持たない)
+    expect(migrationLink.className).not.toMatch(/aspect-/);
     expect(migrationLink.parentElement).toHaveClass(
       'grid-flow-col',
       'xl:auto-cols-[calc((100%_-_2.25rem)/4)]'
@@ -71,7 +72,9 @@ describe('PortalBlogCard', () => {
     const image = container.querySelector('img');
 
     expect(link).toHaveAttribute('href', '/blog/population-change');
-    expect(link).toHaveClass('aspect-[1.47/1]');
+    // カード全体は固定比率を持たず、画像だけを aspect-video の枠に置く (狭い幅で画像が帯にならない)
+    expect(link.className).not.toMatch(/aspect-/);
+    expect(image?.parentElement).toHaveClass('aspect-video');
     expect(image).toHaveAttribute(
       'src',
       'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp?v=20260822-v3'

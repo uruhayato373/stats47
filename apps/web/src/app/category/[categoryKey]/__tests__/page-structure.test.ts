@@ -78,7 +78,8 @@ describe('category page featured ranking cards', () => {
     expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
     expect(PAGE).not.toMatch(/(もっと見る|すべての記事) →/);
     expect(PAGE).toContain('<SectionIndexLink');
-    expect(PAGE.match(/<HorizontalCardCarouselControls \/>/g)).toHaveLength(2);
+    // 矢印は節のカード見出し (HorizontalCardCarouselFrame) の右端が描く
+    expect(PAGE.match(/<HorizontalCardCarouselFrame\b/g)).toHaveLength(2);
   });
 
   it('全件readから派生値と地図を作り、1位batchを重複取得しない', () => {

@@ -64,7 +64,9 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('→');
     expect(FEATURED_RANKINGS).not.toContain('&rarr;');
     expect(PAGE).toContain('<SectionIndexLink href="/ranking">');
-    expect(PAGE.match(/<HorizontalCardCarouselControls \/>/g)).toHaveLength(3);
+    // 矢印は節のカード見出し (HorizontalCardCarouselFrame) の右端が描く
+    expect(PAGE.match(/<HorizontalCardCarouselFrame\b/g)).toHaveLength(3);
+    expect(CARD_CAROUSEL).toMatch(/headerAction=\{\s*<>\s*<HorizontalCardCarouselControls \/>/);
     // 矢印の操作だけの行をカード列の上に作らない
     expect(CARD_CAROUSEL).not.toContain('mb-2 justify-end');
     expect(CARD_CAROUSEL).not.toContain('from-background');
@@ -144,10 +146,14 @@ describe('home page structure (portal)', () => {
     expect(CARD_CAROUSEL).toContain('<ChevronRight');
   });
 
-  it('比較対象カード3種は共有SSOTの1.47:1を使用する', () => {
+  it('比較対象カード3種は固定比率を持たず、カード見出しの下では枠のないセルになる', () => {
+    // カード全体の固定比率は 390px で地図・値を潰し、ブログ画像を帯にした (2026-10-28 に撤去)
+    expect(SURFACE_CARD).not.toContain('aspect-[1.47/1]');
     expect(SURFACE_CARD).toContain(
-      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-[1.47/1]"'
+      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-video"'
     );
+    expect(SURFACE_CARD).toContain('in-data-[carousel=cells]:border-0');
+    expect(CARD_CAROUSEL).toContain("data-carousel={framed ? 'cells' : 'cards'}");
     expect(FEATURED_GRID).toContain('<FeaturedRankingCard');
     expect(FEATURED_GRID).toContain('model={item.model}');
   });

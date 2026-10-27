@@ -1,8 +1,9 @@
 /**
  * ランキング一覧（索引ハブ）
  *
- * 注目ランキングの入口。カテゴリ別の網羅ブラウズはサイト共通のサイドバー (AppSidebar) の
- * カテゴリ一覧が持つ (2026-10-28 に本文の「カテゴリ別のランキング」節を撤去。サイドバーと重複していた)。
+ * 注目ランキングと、17 カテゴリの索引 (件数付き) + 全ランキングの検索への入口。
+ * 2026-10-28 に本文のカテゴリ節を撤去したが、390px ではサイドバーが Sheet に畳まれ本文から
+ * カテゴリを探せなくなったため、同日に件数付きの索引 (RailCategoryList を本文の密度で流用) を戻した。
  *
  * 経緯: 2026-05-28 に旧索引（featured の薄い複製）を `/` へ 301 統合したが、
  * 2026-06-15 にカテゴリ網羅ブラウズのハブとして再設計・再設置した（home とは役割が異なる:
@@ -16,14 +17,13 @@
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
 
+import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
+import { Compass, LayoutGrid, TrendingUp } from 'lucide-react';
+
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
-import { RailStack } from '@/components/rail';
-import { SectionHeader } from '@/components/section';
-import { RailCard, RailNavRow } from '@/components/surface';
-import {
-  HorizontalCardCarouselControls,
-  HorizontalCardCarouselSection,
-} from '@/components/surface/HorizontalCardCarousel';
+import { RailCategoryList, RailStack } from '@/components/rail';
+import { RailCard, RailNavRow, SectionCard } from '@/components/surface';
+import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import { FooterAdSlot } from '@/features/ads';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
@@ -36,6 +36,13 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 import type { Metadata } from 'next';
 
 const RANKING_COUNT = KNOWN_RANKING_KEYS.size;
+/** カテゴリの数と件数は、サイドバーと同じビルド前の生成物から数える (本文と metadata で同じ値を使う) */
+const CATEGORY_INDEX = RANKING_PROMINENCE_CATEGORIES.map((category) => ({
+  categoryKey: category.categoryKey,
+  categoryName: category.categoryName,
+  count: category.count,
+}));
+const CATEGORY_COUNT = CATEGORY_INDEX.length;
 
 export const dynamic = 'force-dynamic';
 
@@ -47,8 +54,8 @@ const OTHER_ENTRY_POINTS = [
 ] as const;
 
 export function generateMetadata(): Metadata {
-  const title = '都道府県ランキング一覧｜全17カテゴリで47都道府県を比較';
-  const description = `人口・経済・教育・医療・治安まで全17カテゴリ、${RANKING_COUNT.toLocaleString()}件超の統計ランキングで47都道府県を比較。気になるカテゴリからランキングを探せます。`;
+  const title = `都道府県ランキング一覧｜全${CATEGORY_COUNT}カテゴリで47都道府県を比較`;
+  const description = `人口・経済・教育・医療・治安まで全${CATEGORY_COUNT}カテゴリ、${RANKING_COUNT.toLocaleString()}件の統計ランキングで47都道府県を比較。気になるカテゴリからランキングを探せます。`;
   return {
     title,
     description,
@@ -60,7 +67,7 @@ export function generateMetadata(): Metadata {
 export default function RankingIndexPage() {
   const rightRail = (
     <RailStack>
-      <RailCard title="他の探し方">
+      <RailCard title="他の探し方" icon={<Compass />}>
         <nav aria-label="他の探し方" className="-mx-2 flex flex-col">
           {OTHER_ENTRY_POINTS.map((entry) => (
             <RailNavRow key={entry.href} href={entry.href}>
@@ -86,22 +93,41 @@ export default function RankingIndexPage() {
       */}
       <PageHeader
         title="都道府県ランキング一覧"
-        stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ 17 カテゴリ ・ 47 都道府県`}
+        stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ ${CATEGORY_COUNT} カテゴリ ・ 47 都道府県`}
       />
 
-      <div>
-        <HorizontalCardCarouselSection className="mb-4">
-          <SectionHeader
-            title="注目のランキング"
-            action={<HorizontalCardCarouselControls />}
-          />
+      <div className="space-y-4">
+        <HorizontalCardCarouselFrame title="注目のランキング" icon={<TrendingUp />}>
           <FeaturedRankings
             limit={4}
             showHeader={false}
             embedded
             trackHomeEvents={false}
           />
-        </HorizontalCardCarouselSection>
+        </HorizontalCardCarouselFrame>
+
+        {/* カテゴリの索引。390px ではサイドバーが畳まれるので、本文からもカテゴリで探せるようにする */}
+        <SectionCard
+          title={`${CATEGORY_COUNT} カテゴリから探す`}
+          icon={<LayoutGrid />}
+          headingAs="h2"
+          bodyClassName="pt-2.5"
+        >
+          {/* 列数は本文の幅 (@container) で決める: 48rem 以上で 2 列 */}
+          <div className="@container">
+          <RailCategoryList
+            items={CATEGORY_INDEX}
+            density="default"
+            trackingSurface="ranking_category"
+            moreLink={{
+              href: '/search?type=ranking',
+              label: `全 ${RANKING_COUNT.toLocaleString()} ランキングから検索する`,
+              trackingLabel: 'category:all',
+            }}
+            className="-mx-2 p-0 [&_[data-sidebar=menu]]:grid [&_[data-sidebar=menu]]:gap-x-6 @md:[&_[data-sidebar=menu]]:grid-cols-2"
+          />
+          </div>
+        </SectionCard>
 
         {/*
             フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと

@@ -177,4 +177,37 @@ describe('RailLinksCard', () => {
     );
     expect(link).toHaveAttribute('data-nav-surface', 'blog_ranking_card');
   });
+
+  it('一覧への導線も他の行と同じリンク行 (行末の矢印) にする', () => {
+    render(
+      <RailLinksCard
+        trackingSurface="blog_sidebar"
+        title="テーマ"
+        layout="list"
+        items={ITEMS}
+        moreLink={{ href: '/all', label: 'すべて見る' }}
+      />
+    );
+    const more = screen.getByRole('link', { name: 'すべて見る' });
+    const row = screen.getByRole('link', { name: /項目1/ });
+    expect(more.querySelector('svg')).not.toBeNull();
+    // 行の高さの class が同じ
+    expect(more).toHaveClass('min-h-11', 'sm:min-h-9');
+    expect(row).toHaveClass('min-h-11', 'sm:min-h-9');
+  });
+
+  it('本文の 3 列の関連記事は件数ではなく 1 列 20rem を保てる列数で並べる', () => {
+    render(
+      <RailLinksCard
+        trackingSurface="area_blog"
+        title="記事"
+        layout="media"
+        columns={3}
+        items={ITEMS}
+      />
+    );
+    const nav = screen.getByRole('navigation', { name: 'カード内リンク' });
+    expect(nav.className).toContain('grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))]');
+    expect(nav.className).not.toContain('@container');
+  });
 });

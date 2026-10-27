@@ -3,12 +3,12 @@
 import Image from 'next/image';
 
 import {
-  PORTAL_CARD_ASPECT_CLASS,
   PORTAL_CARD_DESCRIPTION_CLASS,
   PORTAL_CARD_PADDING_CLASS,
   PORTAL_CARD_TITLE_CLASS,
   SurfaceLinkCard,
 } from '@/components/surface';
+import { PORTAL_CARD_CELL_CLASS } from '@/components/surface/SurfaceCard';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
@@ -40,10 +40,10 @@ export function PortalNavCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group flex flex-col overflow-hidden`}
+      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full gap-3`}
     >
-      {/* 文字は全幅、イラストは残りの高さの右下に置く。文字とイラストの領域を分けて重ねない。 */}
-      <span className="block min-w-0">
+      {/* 文字は残りの幅、イラストは右上の固定枠 (size-12) に置く。文字とイラストの領域を分けて重ねない。 */}
+      <span className="block min-w-0 flex-1">
         <span className={`${PORTAL_CARD_TITLE_CLASS} block`}>{label}</span>
         {description && (
           <span className={`${PORTAL_CARD_DESCRIPTION_CLASS} mt-1 block`}>
@@ -53,14 +53,14 @@ export function PortalNavCard({
       </span>
       <span
         aria-hidden="true"
-        className="pointer-events-none relative mt-1 min-h-0 flex-1"
+        className="pointer-events-none relative size-12 shrink-0"
       >
         <Image
           src={imageSrc}
           alt=""
           fill
-          sizes="(min-width: 1280px) 110px, (min-width: 1024px) 120px, (min-width: 640px) 160px, 40vw"
-          className="object-contain object-bottom-right"
+          sizes="48px"
+          className="object-contain"
         />
       </span>
     </SurfaceLinkCard>

@@ -19,7 +19,8 @@ interface ArticleTableOfContentsProps {
  * 記事ヘッダーの直後・本文の前に全幅共通で 1 か所だけ置く (2026-09-25)。以前は PC で右レールの
  * 追従領域に固定され、読書中ずっとレールの他の情報を隠していた。記事カードの中に置く本文内の部品なので
  * 枠も地も付けず (カード内カード禁止。2026-10-28 に枠・背景を外した)、本文とは Separator で区切る。
- * 見出しは全件表示し折りたたまない。
+ * 見出しは全件表示し折りたたまない。目次の下の余白は区切り線の上下とも 16px (Card の gap-4) にし、
+ * 本文の最初の段落の上余白は globals.css の .blog-news-article > :first-child が 0 にする (余白を重ねない)。
  * 導線名 `blog_toc` を付け、目次からのクリックを nav_click で数えられるようにする。
  */
 export function ArticleTableOfContents({
@@ -34,7 +35,6 @@ export function ArticleTableOfContents({
     <nav
       aria-label="記事の目次"
       data-nav-surface="blog_toc"
-      className="mb-5"
     >
       <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
         <List className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -61,7 +61,7 @@ export function ArticleTableOfContents({
             </li>
           ))}
       </ol>
-      <Separator className="mt-5" />
+      <Separator className="mt-4" />
     </nav>
   );
 }

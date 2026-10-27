@@ -1,3 +1,5 @@
+import { Megaphone } from "lucide-react";
+
 import { RailCard } from "@/components/surface";
 
 import {
@@ -25,7 +27,7 @@ interface RailAdSlotProps {
 export function RailAdSlot({ slot }: RailAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
-    <RailCard title="広告" bodyClassName="flex justify-center overflow-hidden p-2">
+    <RailCard title="広告" icon={<Megaphone />} bodyClassName="flex justify-center overflow-hidden p-2">
       <AdSenseAd format={slot.format} slotId={slot.slotId} showLabel={false} />
     </RailCard>
   );

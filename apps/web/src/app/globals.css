@@ -84,12 +84,6 @@
  * 本文 16px / 行間 1.8 / 字間 0.03em、見出しは palt 詰め + 0.02em。
  * H2 装飾なし・H3 アクセント左バー 4px・H4 グレー左バー 2px (バーは CSS 側で持つ)。 */
 
-@utility font-news-article {
-  font-family:
-    'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo,
-    'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
 /* @utility にすると .prose と同じ層・同じ詳細度になり、後に出力される .prose の行の高さ等が勝つ。
    v3 と同じく本文の指定を prose より優先させるため、層の末尾に通常の CSS として置く */
 @layer utilities {
@@ -100,6 +94,15 @@
     font-size: 16px;
     line-height: 1.8;
     letter-spacing: 0.03em;
+    /* 本文の色は prose-zinc の灰色ではなく text-foreground (テンプレートの本文色) */
+    --tw-prose-body: hsl(var(--foreground));
+    --tw-prose-invert-body: hsl(var(--foreground));
+    color: hsl(var(--foreground));
+  
+    /* 最初の要素の上余白は持たない。上の目次・記事ヘッダーとの間はカードの gap (16px) だけにする */
+    & > :first-child {
+      margin-top: 0;
+    }
   
     /* コード・数式はトラッキングをリセット (等幅・記号の整列を崩さない) */
     & :not(pre) > code {

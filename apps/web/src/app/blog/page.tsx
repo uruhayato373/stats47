@@ -9,9 +9,11 @@ import {
   PaginationPrevious,
 } from '@stats47/components';
 import { CATEGORIES } from '@stats47/data-configs';
+import { Newspaper } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
+import { SectionHeader } from '@/components/section';
 
 import { OperatorProfileCard } from '@/features/ads';
 import { AffiliateAdSlot } from '@/features/ads/server';
@@ -93,8 +95,10 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
           topWidgets={
             // 探索導線と運営者プロフィール (E-E-A-T)。右レールが出ない幅では PageShell が
             // レールごと記事一覧の後ろへ積むので、記事一覧が先・補助が後ろの順になる。
+            // 記事検索と人気のタグは本文の一覧の上 (BlogNavigationCards variant="toolbar") が持つので、ここでは出さない。
             <>
               <BlogNavigationCards
+                includeSearchAndTags={false}
                 tags={blogTags}
                 popularArticles={popularArticles}
                 categories={BLOG_DISCOVERY_CATEGORIES}
@@ -129,9 +133,12 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
         description="都道府県データを、ランキングや時系列で読み解く記事一覧です"
       />
 
-      <p className="mb-4 text-sm text-muted-foreground">
-        {currentPage > 1 ? `記事一覧 · ${currentPage}ページ目` : '新着記事'}
-      </p>
+      <SectionHeader
+        title={currentPage > 1 ? `記事一覧 · ${currentPage}ページ目` : '新着記事'}
+        icon={<Newspaper />}
+      />
+      {/* 記事検索と人気のタグは一覧の上に 1 回だけ置く (狭い幅でレールが一覧の後ろへ積まれても届く) */}
+      <BlogNavigationCards variant="toolbar" tags={blogTags} />
       <BlogArticleGrid articles={articles} />
 
       {/* 一覧本文の広告は置かず、地域文脈の画像バナー 1 枠をレール末尾だけに置く。 */}

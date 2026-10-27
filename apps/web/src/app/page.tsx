@@ -1,15 +1,13 @@
 
 import { fetchPrefectures } from '@stats47/area';
+import { Lightbulb, Newspaper, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
 
 import { PageShell, PageHeader } from '@/components/layout';
 import { RailStack } from '@/components/rail';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel } from '@/components/surface';
-import {
-  HorizontalCardCarouselControls,
-  HorizontalCardCarouselSection,
-} from '@/components/surface/HorizontalCardCarousel';
+import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
   NativeAffiliateRow,
@@ -136,39 +134,31 @@ export default async function HomePage() {
     <div className="w-full">
       <PageShell rightRail={rightRail}>
         <PageHeader
-          eyebrow="地域のデータアトラス"
           title="日本の地域データを探す"
           description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
           className="mb-4"
         />
 
         <div className="space-y-4">
-          <HorizontalCardCarouselSection>
-            <SectionHeader
-              title="注目のランキング"
-              action={
-                <>
-                  <HorizontalCardCarouselControls />
-                  <SectionIndexLink href="/ranking">
-                    もっと見る
-                  </SectionIndexLink>
-                </>
-              }
-            />
+          {/* 節の題名はアイコン付きでカードの見出しに置き、カード列は区切り線のセルにする (テンプレートの KPI 行) */}
+          <HorizontalCardCarouselFrame
+            title="注目のランキング"
+            icon={<TrendingUp />}
+            action={
+              <SectionIndexLink href="/ranking">もっと見る</SectionIndexLink>
+            }
+          >
             <FeaturedRankings limit={6} showHeader={false} embedded />
-          </HorizontalCardCarouselSection>
+          </HorizontalCardCarouselFrame>
 
           {latestArticles.length > 0 && (
-            <HorizontalCardCarouselSection>
-              <SectionHeader
-                title="新着ブログ"
-                action={
-                  <>
-                    <HorizontalCardCarouselControls />
-                    <SectionIndexLink href="/blog">すべての記事</SectionIndexLink>
-                  </>
-                }
-              />
+            <HorizontalCardCarouselFrame
+              title="新着ブログ"
+              icon={<Newspaper />}
+              action={
+                <SectionIndexLink href="/blog">すべての記事</SectionIndexLink>
+              }
+            >
               <HorizontalCardCarousel ariaLabel="新着ブログ">
                 {latestArticles.map((article) => (
                   <PortalBlogCard
@@ -178,21 +168,18 @@ export default async function HomePage() {
                   />
                 ))}
               </HorizontalCardCarousel>
-            </HorizontalCardCarouselSection>
+            </HorizontalCardCarouselFrame>
           )}
 
-          <HorizontalCardCarouselSection>
-            <SectionHeader
-              title="知りたいことから探す"
-              action={
-                <>
-                  <HorizontalCardCarouselControls />
-                  <SectionIndexLink href="/themes">すべてのテーマ</SectionIndexLink>
-                </>
-              }
-            />
+          <HorizontalCardCarouselFrame
+            title="知りたいことから探す"
+            icon={<Lightbulb />}
+            action={
+              <SectionIndexLink href="/themes">すべてのテーマ</SectionIndexLink>
+            }
+          >
             <PortalUseCaseGrid />
-          </HorizontalCardCarouselSection>
+          </HorizontalCardCarouselFrame>
 
           <section>
             <SectionHeader

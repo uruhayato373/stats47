@@ -47,13 +47,22 @@ const interactiveSurfaceClass =
   "hover:border-primary/40 hover:bg-accent/40";
 
 /**
- * home の比較対象カードとcategory注目ランキングの共通比率。
- * 参照UIの実測約1.47:1に合わせ、各featureで比率を重複定義しない。
+ * ポータルカード (注目ランキング・ブログ・知りたいこと) の画像枠の比率。
+ * カード全体の比率は固定しない (中身の高さで伸ばす。2026-10-28 に固定比率 1.47:1 をやめた。
+ * 390px で値と地図が潰れ、ブログ画像が帯になっていた)。
  */
-export const PORTAL_CARD_ASPECT_CLASS = "aspect-[1.47/1]";
+export const PORTAL_CARD_ASPECT_CLASS = "aspect-video";
 
-/** FeaturedRankingCardを基準にしたポータルカード共通の内側余白。 */
-export const PORTAL_CARD_PADDING_CLASS = "p-3";
+/** ポータルカードの内側余白。テンプレートの CardContent / KPI セルと同じ p-4。 */
+export const PORTAL_CARD_PADDING_CLASS = "p-4";
+
+/**
+ * カルーセルのカード見出し (HorizontalCardCarouselFrame) の中に並ぶときは、
+ * カードを入れ子にせずテンプレートの KPI 行と同じ区切り線のセルにする (枠・角丸・地を外す)。
+ * 区切り線はカルーセル側の divide-x が持つ。
+ */
+export const PORTAL_CARD_CELL_CLASS =
+  "in-data-[carousel=cells]:rounded-none in-data-[carousel=cells]:border-0 in-data-[carousel=cells]:bg-transparent";
 
 /** FeaturedRankingCardを基準にしたタイトル階層。 */
 export const PORTAL_CARD_TITLE_CLASS =
@@ -182,16 +191,25 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
   collapsible?: boolean;
   /** collapsible のときの初期状態 (既定: 閉) */
   defaultOpen?: boolean;
+  /** 見出しの要素 (既定 h3)。ページの節見出しとして使うカードは h2 にする */
+  headingAs?: "h2" | "h3";
 }
 
 /**
- * 見出し下〜本文 1 行目の間隔。見出しの下罫線の下に 12px を置く。
- * レールの行 (py-1.5) は自分で上下 6px を持つので、本文の上は 6px にして合計 12px に揃える。
+ * 見出し下〜本文 1 行目の間隔。テンプレートの CardHeader (下罫線の下 pb-4) と CardContent に合わせ、
+ * 罫線から中身まで 16px にする。レールの行 (py-1.5) は自分で上下 6px を持つので、本文の上は 10px にして
+ * 合計 16px に揃える。
  */
 const BODY_TOP_CLASS = {
-  rail: "pt-1.5",
-  section: "pt-3",
+  rail: "pt-2.5",
+  section: "pt-4",
 } as const;
+
+/**
+ * 見出しの文字。日本語は文節で折り返し (word-break: auto-phrase)、行の長さを揃える (text-balance)。
+ * 「全41件のランキン / グ」のような語中の折れを防ぐ。
+ */
+const HEADING_WRAP_CLASS = "text-balance [word-break:auto-phrase]";
 
 function HeaderedSurfaceCard({
   variant,
@@ -204,6 +222,7 @@ function HeaderedSurfaceCard({
   titleClassName,
   collapsible = false,
   defaultOpen = false,
+  headingAs: Heading = "h3",
   ...props
 }: HeaderedSurfaceCardProps) {
   const hasHeader = Boolean(title || icon || headerAction || collapsible);
@@ -218,7 +237,7 @@ function HeaderedSurfaceCard({
   ) : null;
   const headingClassName = cn(
     "min-w-0 font-medium text-foreground",
-    variant === "rail" && "truncate",
+    variant === "rail" ? "truncate" : HEADING_WRAP_CLASS,
     titleClassName,
   );
   const body = hasBody ? (
@@ -240,12 +259,12 @@ function HeaderedSurfaceCard({
         <CardHeader className="relative has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-ring">
           <CardTitle className="flex min-w-0 items-center gap-2">
             {iconSlot}
-            <h3 className={headingClassName}>
+            <Heading className={headingClassName}>
               {/* 見出しの中にボタンを置く (見出しの役割を保つ)。after で見出し行全体を押せるようにする */}
               <CollapsibleTrigger className="text-left outline-hidden after:absolute after:inset-0 after:content-['']">
                 {title}
               </CollapsibleTrigger>
-            </h3>
+            </Heading>
           </CardTitle>
           <CardAction className="relative flex items-center gap-2 self-center">
             {headerAction && <span className="relative z-10">{headerAction}</span>}
@@ -267,12 +286,30 @@ function HeaderedSurfaceCard({
   return (
     <CardSection className={cn(hasHeader && hasBody && "gap-0", className)} {...props}>
       {hasHeader && (
-        <CardHeader className={cn(hasBody && "border-b [.border-b]:pb-3")}>
-          <CardTitle className="flex min-w-0 items-center gap-2">
+        <CardHeader
+          className={cn(
+            "items-center",
+            hasBody && "border-b",
+            // 本文カードは狭い幅 (見出し行 24rem 未満) で操作を見出しの下の行へ回す
+            variant === "section" && headerAction && "@max-[24rem]/card-header:grid-cols-1",
+          )}
+        >
+          {/* min-h-8 = 操作 (Button icon / sm) の高さ。操作の有無や表示の切り替えで見出し行の高さを変えない */}
+          <CardTitle className="flex min-h-8 min-w-0 items-center gap-2">
             {iconSlot}
-            {title && <h3 className={headingClassName}>{title}</h3>}
+            {title && <Heading className={headingClassName}>{title}</Heading>}
           </CardTitle>
-          {headerAction && <CardAction className="self-center">{headerAction}</CardAction>}
+          {headerAction && (
+            <CardAction
+              className={cn(
+                "flex items-center gap-2 self-center",
+                variant === "section" &&
+                  "@max-[24rem]/card-header:col-start-1 @max-[24rem]/card-header:row-span-1 @max-[24rem]/card-header:row-start-auto @max-[24rem]/card-header:justify-self-start",
+              )}
+            >
+              {headerAction}
+            </CardAction>
+          )}
         </CardHeader>
       )}
       {body}
@@ -289,6 +326,7 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
   titleClassName?: string;
   collapsible?: boolean;
   defaultOpen?: boolean;
+  headingAs?: "h2" | "h3";
 }
 
 /**
