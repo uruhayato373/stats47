@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "収益化 pilot の判定ボード",
+  "description": "data/business/pilot-board.json の形状契約。判定日を他の台帳から引く pilot は schedule.kind で参照先を示し、日付を写さない。",
+  "type": "object",
+  "required": ["schemaVersion", "pilots"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "description": { "type": "string" },
+    "pilots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "route", "card", "schedule", "metrics"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "title": { "type": "string" },
+          "route": { "type": "string" },
+          "card": { "type": "string", "pattern": "^[A-Z0-9]+(-[A-Z0-9]+)+$" },
+          "schedule": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["kind", "start", "startEvidence", "windowDays"],
+                "additionalProperties": false,
+                "properties": {
+                  "kind": { "const": "window" },
+                  "start": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                  "startEvidence": { "type": "string" },
+                  "windowDays": { "type": "integer", "minimum": 1 }
+                }
+              },
+              {
+                "type": "object",
+                "required": ["kind", "id"],
+                "additionalProperties": false,
+                "properties": { "kind": { "enum": ["improvement", "experiment"] }, "id": { "type": "string" } }
+              }
+            ]
+          },
+          "metrics": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["label", "kind"],
+              "properties": {
+                "label": { "type": "string" },
+                "kind": { "enum": ["ga4-nav-click", "sales-ledger", "note-dashboard", "experiment", "unrecorded"] },
+                "surface": { "type": "string" },
+                "channel": { "type": "string" },
+                "productIds": { "type": "array", "items": { "type": "string" } },
+                "noteIds": { "type": "array", "items": { "type": "string" } },
+                "id": { "type": "string" },
+                "reason": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

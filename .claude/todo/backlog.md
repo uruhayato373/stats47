@@ -254,6 +254,73 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [STRATEGY-GATE-ADMIN-PILOT-01] 管理画面に、行政向け商品の検証が4段階のどこにいるかを出す
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §5「行政向け商品の検証順序」は4段階 (業務選定→無料試用→有料 pilot→横展開) の進む条件と止める条件を持つ判断ゲートだが、管理画面のコードに `ADMIN-STAT-PILOT` を読む箇所が無い。聞き取りは 0/3 件で、状態は backlog の `ADMIN-STAT-PILOT-01` の本文にしか無い。
+- **次**: `/strategy` (または `/product/status`) に、`data/products/admin-stat-interviews.json` から聞き取り件数・現在の段階・次の判断点 (有料 pilot は開始から30日) を読み取り専用で出す。
+- **禁止**: 段階を画面用に別の JSON へ手で書き写さない。聞き取り台帳から導出できない値は「未記録」と表示する。
+- **完了条件**: 台帳の件数と段階が画面に出て、台帳が空・欠けている場合に「未記録」になるテストがある。
+
+### [STRATEGY-GATE-UNIT-ECONOMICS-01] 商品 pilot の限界利益と工数込み採算を、記録から計算して管理画面に出す
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §3.4「価格と採算」は限界利益と工数込み採算の式を定めているが、計算している場所が無い。運営者の時間単価と pilot の工数上限も未決で、式に入れる値が揃っていない。
+- **次**: ① オーナーが時間単価と工数上限を決め、§3.4 に書く (対話) ② `data/products/sales-ledger.json` の実売・返金・手数料と工数の記録から、商品ごとの限界利益と工数込み採算を計算して `/revenue` に出す。工数の記録先が無ければ、先に台帳 (`config/datasets.mjs` に1行) を決める。
+- **禁止**: 時間単価が未決の間は工数込み採算を0や推定値で出さない (「単価未決」と表示)。
+- **完了条件**: 単価と工数上限が §3.4 にあり、画面の採算が台帳の値から再計算できるテストがある。
+
+### [STRATEGY-GATE-TABLE-01] 収益化戦略 §5 のゲート表6行の通過・未達を管理画面に並べる
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: §5 のゲート表 (計測・AdSense・アフィ横展開・トラフィック拡大・商品横展開・B2B基盤) のうち、管理画面に状態が出ているのは計測 (`/affiliate` の measurementGate) とアフィ横展開 (pilot readiness) の2行だけ。商品横展開と B2B基盤は状態を持つデータが無い。
+- **次**: ゲート表をパースし、各行に既存の判定 (measurementGate・readiness・AdSense の計測範囲・マーケティング戦略の T1〜T4) をつなぐ。判定元が無い行は「判定元なし」と出す。商品横展開と B2B基盤は `STRATEGY-GATE-ADMIN-PILOT-01` の段階から導けるかを先に確かめる。
+- **禁止**: 判定を画面側で新しく作らない。既存の判定関数・state を読むだけにする (`strategy-lanes.ts` と同じ方針)。
+- **完了条件**: 6行すべてが「通過・未達・判定元なし」のどれかで表示され、表の行が増減したら検出するテストがある。
+
+### [STRATEGY-GATE-NOTE-FISCAL-01] note 財政比較2本の売上比較 (11-09 判定) を管理画面に出す
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [期日:2026-11-09] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §3.6 は「note 2本の売上比較と導線のクリックを見るまで新しい商品を作らない」と決めている。判定は 2026-11-09 (`NOTE-FISCAL-PEER-PUBLISH-01`) だが、管理画面にこの比較が出ていない。
+- **次**: `data/note/dashboard/` から2本の公開日以降の閲覧・売上を読み、判定日までの残り日数と並べて `/content/note` か `/revenue` に出す。
+- **禁止**: note の管理画面へ数字を取りに行かない (週次の記録から読む。`recorded-measurement-first.md`)。記録が古ければ古いと表示する。
+- **完了条件**: 2本の閲覧・売上と記録日が画面に出て、記録が無い場合に判定不能と表示するテストがある。
+- **完了の証拠 (2026-10-27)**: 管理画面 `/strategy/pilots` (戦略 → pilot 判定) に載せた。入力は `data/business/pilot-board.json` (schema `config/schema/business.pilot-board.schema.json`)、判定は `apps/admin/lib/pilot-board.ts`、テスト `apps/admin/tests/unit/pilot-board.test.ts` (6 件)。`npm run test -w apps/admin` 329 件成功・localhost で 6 pilot の表示を確認。
+
+### [STRATEGY-GATE-BLOG-PRODUCT-01] ブログから商品への導線のクリック (4週判定) を管理画面に出す
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §3.6 の展開順序1は、職場から読まれるブログ10記事の商品案内の効果を `nav_click` の `surface=blog_product` で本番反映から4週読むと決めている。2026-10-27 時点で未デプロイ。管理画面のコードに `blog_product` を読む箇所が無い。
+- **次**: `data/ga4/snapshots/<週>/nav-click-surfaces.csv` から `blog_product` の週次クリックを読み、反映日からの経過週数と並べて出す。反映日は storefront の deploy 日を入力にする。
+- **禁止**: 反映前の週を効果の比較に混ぜない。
+- **完了条件**: 反映日以降の週次クリックと経過週数が出て、反映日が未設定なら「未反映」と表示するテストがある。
+- **完了の証拠 (2026-10-27)**: 管理画面 `/strategy/pilots` (戦略 → pilot 判定) に載せた。入力は `data/business/pilot-board.json` (schema `config/schema/business.pilot-board.schema.json`)、判定は `apps/admin/lib/pilot-board.ts`、テスト `apps/admin/tests/unit/pilot-board.test.ts` (6 件)。`npm run test -w apps/admin` 329 件成功・localhost で 6 pilot の表示を確認。
+
+### [STRATEGY-GATE-RECOVERY-PILOTS-01] 雑学の回収経路3つの pilot 判定 (物販28日・ノウハウ4週・KDP4週) を1か所に並べる
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §3.5 の3経路の判定 (`AMAZON-ASSOCIATE-PILOT-01` の28日、`KNOWHOW-PRODUCT-PILOT-01` の4週の実売、`KDP-EXPANSION-01` の4週の既読ページ) は backlog の各カードにしか無く、どこまで進んだかを一覧できない。
+- **次**: `STRATEGY-GATE-NOTE-FISCAL-01`・`STRATEGY-GATE-BLOG-PRODUCT-01`・`STRATEGY-GATE-YOUTUBE-PILOT-01` と同じ「pilot 判定ボード」(開始日・判定日・判定に使う指標・現在値・記録日) にまとめる。現在値は `data/ga4/`・`data/products/sales-ledger.json`・KDP の週次記録から読む。
+- **禁止**: カード本文の期日を画面用に複製しない。開始日・判定日の置き場が無ければ、先に台帳 (`data/business/experiments.json` への追加など) を決める。
+- **完了条件**: 3経路が同じボードに出て、計測が欠けている経路は判定不能と表示されるテストがある。
+- **完了の証拠 (2026-10-27)**: 管理画面 `/strategy/pilots` (戦略 → pilot 判定) に載せた。入力は `data/business/pilot-board.json` (schema `config/schema/business.pilot-board.schema.json`)、判定は `apps/admin/lib/pilot-board.ts`、テスト `apps/admin/tests/unit/pilot-board.test.ts` (6 件)。`npm run test -w apps/admin` 329 件成功・localhost で 6 pilot の表示を確認。
+
+### [STRATEGY-GATE-YOUTUBE-PILOT-01] YouTube 通常動画 pilot (EXP-006・6週) の判定を管理画面に出す
+タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §6 は YouTube を「6週・通常動画3本の限定 pilot」とし、視聴維持・送客・制作工数を EXP-006 で検証すると決めている。EXP-006 は `data/business/experiments.json` にあるが、管理画面のコードに読む箇所が無い。
+- **次**: `data/business/experiments.json` の EXP-006 の期間・指標・記録値を `STRATEGY-GATE-RECOVERY-PILOTS-01` の pilot 判定ボードに載せる。
+- **完了条件**: EXP-006 の開始日・判定日・記録値が画面に出るテストがある。
+- **完了の証拠 (2026-10-27)**: 管理画面 `/strategy/pilots` (戦略 → pilot 判定) に載せた。入力は `data/business/pilot-board.json` (schema `config/schema/business.pilot-board.schema.json`)、判定は `apps/admin/lib/pilot-board.ts`、テスト `apps/admin/tests/unit/pilot-board.test.ts` (6 件)。`npm run test -w apps/admin` 329 件成功・localhost で 6 pilot の表示を確認。
+
+### [STRATEGY-GATE-ADSENSE-UNITS-01] AdSense の枠を外す基準を決め、ユニット別の数字と並べて管理画面に出す
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:戦略]
+
+- **背景 (2026-10-27 の棚卸し)**: 収益化戦略 §3.1 は「ユニット別の収益・視認率を週次で比べ、効かない枠を外す・動かす」と決めているが、外す基準 (何週続けて何を下回ったら外すか) が書かれていない。`/revenue` はユニット別 CSV (`history-units.csv`) を表示するが、判断の基準が無いので数字を見ても決められない。モバイルの手動枠の扱いも「再開後の実測で決め直す」のまま期日が無い。
+- **次**: ① オーナーと基準 (例: 視認率・1,000表示あたり収益の下限と連続週数) と見直しの期日を決め、§3.1 か `manual-ad-policy.ts` に書く (対話) ② `/revenue` のユニット別表に基準を下回ったユニットの印を出す。
+- **禁止**: 基準を画面側に直書きしない。基準の置き場を1か所にする。
+- **完了条件**: 基準が SSOT に書かれ、画面がそれを読んで下回ったユニットに印を付けるテストがある。
+
 ### [DEPS-PLATFORM-OPTIONAL-LOCK-01] 依存の検査が、他 OS 向けバイナリの lock 記録の取り残しを捕まえない
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/check-dependency-overrides.test.cjs] [起票:2026-10-26] [領域:管理]
 
@@ -1589,6 +1656,7 @@ updated: 2026-10-19
 - **ローカルで続きにやること (実行順)**: ①Amazon アソシエイトの管理画面で `stats47-22` が有効か確かめる。無効なら本番へ出す前に止める ②`CATEGORY_BOOKS` (`apps/web/src/features/ads/constants/related-books.ts`) を labor / education などへ広げるなら、Amazon で実在 ASIN と書名を確かめてから足す (推測の ASIN を書かない) ③ローカルの表示を確認し、オーナー判断で PR #1099 の draft を外して main へマージする (= 本番デプロイ)。デプロイ日をこのカードに書く。
 - **次**: デプロイ後 28 日で GA4 の `nav_click` (`ranking_product` / `blog_product`) と `affiliate_click` / `affiliate_impression` (`related-books`)、`cta_click` (`product_kindle`) を取り、Amazon レポートと KDP 売上を照合する。`CATEGORY_BOOKS` は 5 vertical だけなので、labor / education などへ広げるなら実在 ASIN を Amazon で確かめてから足す。
 - **追記 (2026-10-07)**: 雑学の流入を換金する経路の一つとして扱う (収益化戦略 §3.5)。食べ物の消費量・特産のクエリが検索クリックの 31% を占めるので、28 日判定では、楽天と Amazon の物販クリックを食の雑学ページ (家計調査の消費量ランキングなど) とそれ以外に分けて出す。楽天の商品カードは 09-06〜10-03 にクリック率 0.40〜0.46% (サイト平均 0.145%) だが計 4 クリックで、まだ判定できない。
+- **反映日 (2026-10-27 記録)**: 2026-10-07 (PR #1099 の main マージと Post-Deploy Smoke Test 成功)。開始日・28 日の判定日・現在値は `data/business/pilot-board.json` と管理画面 `/strategy/pilots` が持つ。
 - **完了条件**: 28 日分のクリック数と、Amazon / KDP の売上 (取れなければ取れない理由) を記録し、継続・拡大・撤退のどれかをオーナーが決めた。
 
 ### [BLOG-BG-PIPELINE-CONSOLIDATE-01] ブログ背景の経路を Codex の記事固有背景 1 本にまとめ、背景の不足を push 前に止める
@@ -3720,6 +3788,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
   (prerender の notFound 走査・スモークテスト) を通す。
 - **完了条件**: next 16.x で本番デプロイが通り、`workers:build` からフラグを外した版で再デプロイが通る。
 - **2026-10-26 移行済み (develop・本番未デプロイ)**: next 16.4.3・@opennextjs/cloudflare 1.20.13・wrangler 4.152.0 へ上げ、`workers:build` から `--dangerouslyUseUnsupportedNextVersion` を外した (commit `89ef74c19`)。ビルドは独自の webpack 設定があるため `next build --webpack`、`next lint` は eslint 直接、sitemap の `id` は Promise を await。worktree で型チェック・web 2,617/admin 323/packages 3,029 pass、例外フラグなしの workers:build 成功 (静的 1,629)、prerender notFound 0/1,553、手元の workerd で Next 15 と 16 の 16 ルート・sitemap 4 区画が一致。本体へ merge・npm install 後も型チェックと preflight が通り、サポート期限の検査は残り 359 日。**残り**: 本番デプロイ (オーナー承認) と、デプロイ後の本番スモーク・主要ページの実表示の確認。手元の R2 は空の模擬なので、データを読むページの表示は本番でしか確かめていない。
+- **追記 (2026-10-27 観測)**: `npm run admin` (Next 16 の dev) を起動すると `apps/admin/tsconfig.json` が書き換わる (`jsx` を `preserve` → `react-jsx`、include に `.local/next-admin-dev/dev/types/**/*.ts` を追加)。git の作業ツリーに毎回差分が出るので、Next の推奨値を tsconfig に取り込んでコミットするか、書き換えを止めるかを決める。
 
 ### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
