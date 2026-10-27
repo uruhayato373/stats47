@@ -5,7 +5,8 @@ import {fileURLToPath} from 'node:url';
 import {SITE,type ImageGenerationManifest} from '@stats47/types';
 import {blogRendererSources} from './data/image-generator-registry';
 import {blogImageKeys,createBlogImagePlan,publishedBlogSlugsFromIndex,stageBlogImagePath,type BlogImageMetadata,type BlogBackgroundInput} from './lib/blog-image-generation';
-import {buildBlogOgpElement,deriveOgpFromFrontmatter,parseFrontmatter,loadFonts,renderToPng} from './lib/blog-thumbnail-render';
+import {deriveOgpFromFrontmatter,parseFrontmatter,loadFonts,renderToPng} from './lib/blog-thumbnail-render';
+import {buildBlogExternalOgp} from './lib/blog-image-render';
 import {buildImageGenerationManifest,calculateRendererHash,createImageGenerationPublishPlan,isManifest,serializeImageGenerationManifest,sha256} from './lib/image-generation-manifest';
 
 const root=fileURLToPath(new URL('../../../',import.meta.url));
@@ -39,7 +40,11 @@ async function main(){
   const fonts=loadFonts(root),rendererHash=calculateRendererHash(root,blogRendererSources('ai'));
   const items:Parameters<typeof createImageGenerationPublishPlan>[0]['items']=[];
   let current=0;
-  for(const slug of selected){
+  for(let offset=0;offset<selected.length&&items.length<limit;){
+    const batch=selected.slice(offset,offset+Math.min(4,limit-items.length));
+    offset+=batch.length;
+    // Settle every bounded preparation before accepting results; failures prevent publication.
+    const results=await Promise.allSettled(batch.map(async(slug)=>{
     const keys=blogImageKeys(slug),oldBytes=await get(keys.manifest);
     const raw:unknown=JSON.parse(oldBytes.toString());
     if(!isManifest(raw)||raw.generator!=='blog-ogp'||raw.entityId!==slug)throw Error(`${slug}: invalid existing manifest`);
@@ -51,11 +56,11 @@ async function main(){
     if(!derived)throw Error(`${slug}: missing title`);
     const data={title:derived.title,subtitle:derived.subtitle??null};
     const plan=createBlogImagePlan({slug,data,background,rendererHash});
-    if(old.fingerprint===plan.fingerprint){current++;continue;}
+    if(old.fingerprint===plan.fingerprint)return null;
     const assetFiles=new Map<string,string>();
     for(const asset of plan.assets){
       const file=stageBlogImagePath(root,plan,asset.key);
-      if(asset.variant==='ogp')await renderToPng(buildBlogOgpElement(data),fonts,file);
+      if(asset.variant==='ogp')await renderToPng(buildBlogExternalOgp(data),fonts,file);
       else {
         const previous=old.assets.find(a=>a.key===asset.key);
         if(!previous)throw Error(`${slug}: missing preserved asset ${asset.key}`);
@@ -68,9 +73,13 @@ async function main(){
     const manifest=buildImageGenerationManifest({plan,assetFiles,metadata:{...old.metadata,...data}});
     for(const asset of manifest.assets.filter(a=>a.variant!=='ogp'))if(asset.sha256!==old.assets.find(a=>a.key===asset.key)?.sha256)throw Error('Internal asset changed');
     writeFileSync(stageBlogImagePath(root,plan,keys.manifest),serializeImageGenerationManifest(manifest));
-    items.push({plan,manifest,expectedRemoteFingerprint:old.fingerprint,expectedRemoteManifestSha256:sha256(oldBytes)});
     console.log(`${slug}: external OGP rendered; thumbnail/background SHA unchanged`);
-    if(items.length>=limit)break;
+    return {plan,manifest,expectedRemoteFingerprint:old.fingerprint,expectedRemoteManifestSha256:sha256(oldBytes)};
+    }));
+    for(const result of results){
+      if(result.status==='rejected')throw result.reason;
+      if(result.value)items.push(result.value);else current++;
+    }
   }
   const plan=createImageGenerationPublishPlan({generator:'blog-ogp',stageRoot:'.local/image-staging/blog',items});
   mkdirSync(join(root,'.local'),{recursive:true});

@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { createBlogImagePlan } from '../blog-image-generation';
-import { renderBlogImageBundle } from '../blog-image-render';
+import { buildBlogExternalOgp, renderBlogImageBundle } from '../blog-image-render';
 import {
   buildBlogOgpElement,
   buildBlogThumbnailElement,
@@ -44,6 +44,18 @@ afterEach(() => {
 });
 
 describe('blog image variants', () => {
+  it('外部カードは主見出しとブランドに絞り、小さな数値説明やタイトル後半を持ち込まない', () => {
+    const card = JSON.stringify(buildBlogExternalOgp({
+      title: '学力トップは東京｜都道府県別の比較',
+      subtitle: '東京61%・沖縄50.5%、上位を二分する2つの理由',
+    }));
+    expect(card).toContain('学力トップは東京');
+    expect(card).toContain('stats47.jp');
+    expect(card).not.toContain('東京61%');
+    expect(card).not.toContain('上位を二分');
+    expect(card).not.toContain('都道府県別の比較');
+  });
+
   it('OGPはタイトル長に応じて文字を大きくし、長文ではsubtitleを省く', () => {
     expect(resolveBlogOgpTypography('短いタイトル')).toEqual({
       titleFontSize: 72,
