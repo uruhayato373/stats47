@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 
-import { cn } from "@stats47/components";
+import { Separator, cn } from "@stats47/components";
 
 interface SectionHeaderProps {
   /** セクション番号（"1" 等）。eyebrow 先頭に primary 色で表示 */
@@ -15,17 +15,18 @@ interface SectionHeaderProps {
   action?: ReactNode;
   /** 見出しの HTML タグ（既定 "h2"）。階層上 h3 にしたい場合に指定 */
   as?: "h2" | "h3";
-  /** 下罫線 (border-b) を出さない場合 true */
+  /** 下の区切り線 (Separator) を出さない場合 true */
   hideRule?: boolean;
   /** 追加クラス（外側 div に当てる） */
   className?: string;
 }
 
 /**
- * エディトリアル / データ誌風のセクション見出し（サイト全ページ共通）。
+ * セクション見出し（サイト全ページ共通）。
  *
- * eyebrow（任意・番号付き）→ h2 → description（任意）を下罫線で締める。
- * 右端に action スロット（"すべて見る ›" 等）。
+ * テンプレートの CardHeader と同じ並び (見出し + 説明を左、アクションを右上) を、カードの外で使う。
+ * eyebrow（任意・番号付き）→ 見出し → description（任意）→ 区切り線 (テンプレートの Separator)。
+ * 独自の border / padding は持たない。
  *
  * ページ内のセクション見出し（h2）は必ずこのコンポーネント経由にする
  * （生の `<h2>` 直書きは check-design-system の no-raw-h2-in-page で禁止）。
@@ -43,36 +44,27 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <div
-      className={cn(
-        "mb-3",
-        !hideRule && "border-b border-border pb-2",
-        className,
-      )}
-    >
-      <div className="flex items-end justify-between gap-3">
+    <div className={cn("mb-4 flex flex-col gap-2", className)}>
+      <div className="grid auto-rows-min grid-cols-[1fr_auto] items-start gap-x-3 gap-y-1">
         <div className="min-w-0">
           {eyebrow && (
-            <p className="mb-1 text-[11px] font-semibold uppercase text-muted-foreground">
+            <p className="text-xs font-medium text-muted-foreground">
               {eyebrow}
             </p>
           )}
-          <Heading className="text-base font-semibold leading-tight text-foreground">
+          <Heading className="text-base font-medium leading-snug text-foreground">
             {number && (
               <span className="mr-2 font-mono text-primary">{number}</span>
             )}
             {title}
           </Heading>
           {description && (
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              {description}
-            </p>
+            <p className="text-sm text-muted-foreground">{description}</p>
           )}
         </div>
-        {action && (
-          <div className="shrink-0 text-xs text-muted-foreground">{action}</div>
-        )}
+        {action && <div className="self-start text-xs">{action}</div>}
       </div>
+      {!hideRule && <Separator />}
     </div>
   );
 }

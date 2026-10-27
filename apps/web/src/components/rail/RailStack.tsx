@@ -7,13 +7,14 @@ interface RailStackProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 /**
- * レール内カードの縦積み。左レール・右レールとも唯一のスタック (gap-3)。
+ * レール内カードの縦積み。左レール・右レールとも唯一のスタック。
+ * 間隔はテンプレートのカード間と同じ gap-4 (2026-10-27。それ以前は gap-3)。
  * landmark (aside) は Shell / LeftRailLayout が持つので、ページ側で `<aside>` を重ねない。
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */
 export function RailStack({ children, className, ...props }: RailStackProps) {
   return (
-    <div className={cn('flex flex-col gap-3', className)} {...props}>
+    <div className={cn('flex flex-col gap-4', className)} {...props}>
       {children}
     </div>
   );

@@ -2,15 +2,41 @@ import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 
 
-import { CARD_SURFACE_CLASS, cn } from "@stats47/components";
+import {
+  CARD_SURFACE_CLASS,
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  cn,
+} from "@stats47/components";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
 
 /*
- * カード外枠の角丸・線色・地は CARD_SURFACE_CLASS (@stats47/components) の単一定義に従い、
- * 値は globals.css の --card-radius / --card-outline で決める。ここでは余白と遷移だけを足す。
- * border は幅だけ残るので、レイアウトと interactive の hover 枠色が保たれる。
+ * カードはテンプレートの Card (@stats47/components の ui/card) で組み立てる (2026-10-27 オーナー決定)。
+ * 余白・間隔・線・地は Card と <html class="style-lyra"> の .cn-card が決め、ここでは足さない。
+ * 外枠の角丸・線色のトークン (CARD_SURFACE_CLASS) は従来どおり合成する (契約テストが固定)。
+ *
+ * テンプレートから外す点は 2 つだけ:
+ * - 見出しも本文の区切りも無いカード (SurfaceCard / SurfaceSection / ArticleCard) は子を CardContent で
+ *   包まずに Card の直下へ置くので、CardContent と同じ px-4 を Card に付ける。呼び出し側の
+ *   className (p-0 / p-5 など 118 件) がそのまま効くようにするため。
+ * - Card は要素を選べないので、<section> で描く SurfaceSection / RailCard / SectionCard は
+ *   Card と同じクラスを section に付ける (CARD_SECTION_CLASS)。region の役割と aria-label を保つため。
+ *   角丸は Card 既定の大きい角丸を写さず、CARD_SURFACE_CLASS の rounded-card で決める。
+ */
+const CARD_SECTION_CLASS =
+  "cn-card group/card flex flex-col gap-4 overflow-hidden bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10";
+
+/** CardContent と同じ横余白。子を CardContent で包まないカードだけが使う。 */
+const CARD_CONTENT_INSET_CLASS = "px-4";
+
+/*
+ * Link を外枠にするカード (SurfaceLinkCard と getSurfaceCardClassName の利用側 25 件) は Card を使えないため、
+ * クラス文字列のまま残す。Card の py-4 + CardContent の px-4 と同じ p-4。
  */
 const surfaceCardClass = cn(CARD_SURFACE_CLASS, "p-4 transition-colors");
 
@@ -54,15 +80,30 @@ interface SurfaceSectionProps extends ComponentPropsWithoutRef<"section"> {
   children: ReactNode;
 }
 
+/** Card と同じ見た目の <section>。見出しの有無にかかわらず section の役割を保つ。 */
+function CardSection({ className, ...props }: ComponentPropsWithoutRef<"section">) {
+  return (
+    <section
+      data-slot="card"
+      data-size="default"
+      className={cn(CARD_SECTION_CLASS, CARD_SURFACE_CLASS, className)}
+      {...props}
+    />
+  );
+}
+
 export function SurfaceCard({
   children,
   className,
   ...props
 }: SurfaceCardProps) {
   return (
-    <div className={getSurfaceCardClassName({ className })} {...props}>
+    <Card
+      className={cn(CARD_SURFACE_CLASS, CARD_CONTENT_INSET_CLASS, className)}
+      {...props}
+    >
       {children}
-    </div>
+    </Card>
   );
 }
 
@@ -72,9 +113,9 @@ export function SurfaceSection({
   ...props
 }: SurfaceSectionProps) {
   return (
-    <section className={getSurfaceCardClassName({ className })} {...props}>
+    <CardSection className={cn(CARD_CONTENT_INSET_CLASS, className)} {...props}>
       {children}
-    </section>
+    </CardSection>
   );
 }
 
@@ -98,9 +139,9 @@ export function SurfaceLinkCard({
 }
 
 /**
- * 記事本文を包むカード (reading zone 専用・Soft Editorial)。
- * 外枠は通常カードと同じ CARD_SURFACE_CLASS。モバイル (sm 未満) では画面端までフルブリード。
- * ArticleShell のコンテナ px-4 を負マージンで打ち消して端まで届かせる。
+ * 記事本文を包むカード (reading zone 専用)。
+ * 外枠は通常カードと同じ Card。モバイル (sm 未満) では画面端までフルブリード。
+ * ルートレイアウトの main の p-4 を負マージンで打ち消して端まで届かせる。
  */
 export function ArticleCard({
   children,
@@ -108,17 +149,17 @@ export function ArticleCard({
   ...props
 }: SurfaceCardProps) {
   return (
-    <div
+    <Card
       className={cn(
         CARD_SURFACE_CLASS,
-        "px-4 py-6 sm:px-6 lg:px-8 lg:py-8",
+        CARD_CONTENT_INSET_CLASS,
         "max-sm:-mx-4 max-sm:rounded-none max-sm:border-x-0",
         className,
       )}
       {...props}
     >
       {children}
-    </div>
+    </Card>
   );
 }
 
@@ -139,8 +180,6 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
   defaultOpen?: boolean;
 }
 
-const HEADER_CLASS = "flex items-center justify-between gap-3 border-b border-border px-4 py-3";
-
 function HeaderedSurfaceCard({
   variant,
   title,
@@ -157,65 +196,52 @@ function HeaderedSurfaceCard({
   const heading = title ? (
     <h3
       className={cn(
-        variant === "rail"
-          ? "truncate text-sm font-medium text-muted-foreground"
-          : "text-sm font-semibold text-foreground",
+        variant === "rail" && "truncate text-muted-foreground",
         titleClassName,
       )}
     >
       {title}
     </h3>
   ) : null;
-  const body = (
-    <div
-      className={cn(
-        variant === "rail" ? "px-4 pb-4 pt-3" : "p-4",
-        bodyClassName,
-      )}
-    >
-      {children}
-    </div>
+  const titleRow = (
+    <CardTitle className="flex min-w-0 items-center gap-2">
+      {icon}
+      {heading}
+    </CardTitle>
   );
+  const body = <CardContent className={bodyClassName}>{children}</CardContent>;
 
   if (collapsible) {
     return (
-      <SurfaceSection className={cn("overflow-hidden p-0", className)} {...props}>
-        <details className="group" open={defaultOpen || undefined}>
-          <summary
-            className={cn(
-              HEADER_CLASS,
-              "min-h-12 cursor-pointer list-none [&::-webkit-details-marker]:hidden",
-              "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
-            )}
-          >
-            <div className="flex min-w-0 items-center gap-2">
-              {icon}
-              {heading}
-            </div>
-            <ChevronDown
-              aria-hidden="true"
-              className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
-            />
+      <CardSection className={className} {...props}>
+        <details className="group space-y-4" open={defaultOpen || undefined}>
+          <summary className="cursor-pointer list-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+            <CardHeader>
+              {titleRow}
+              <CardAction>
+                <ChevronDown
+                  aria-hidden="true"
+                  className="size-4 text-muted-foreground transition-transform group-open:rotate-180"
+                />
+              </CardAction>
+            </CardHeader>
           </summary>
           {body}
         </details>
-      </SurfaceSection>
+      </CardSection>
     );
   }
 
   return (
-    <SurfaceSection className={cn("p-0", className)} {...props}>
+    <CardSection className={className} {...props}>
       {(title || icon || headerAction) && (
-        <div className={HEADER_CLASS}>
-          <div className="flex min-w-0 items-center gap-2">
-            {icon}
-            {heading}
-          </div>
-          {headerAction}
-        </div>
+        <CardHeader className="border-b">
+          {titleRow}
+          {headerAction && <CardAction>{headerAction}</CardAction>}
+        </CardHeader>
       )}
       {body}
-    </SurfaceSection>
+    </CardSection>
   );
 }
 
@@ -232,8 +258,8 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
 
 /**
  * レール内の独立したまとまり 1 つ = RailCard 1 枚 (左右レール共通の Surface 契約)。
- * 外枠 (CARD_SURFACE_CLASS)、見出し、本文 padding、
- * 折りたたみの見た目をここだけが持つ。レール側で独自の枠・背景・padding を足さない。
+ * Card + CardHeader (border-b) + CardTitle (h3) + CardAction + CardContent で組む。
+ * レール側で独自の枠・背景・padding を足さない。
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */
 export function RailCard(props: RailCardProps) {
@@ -241,8 +267,8 @@ export function RailCard(props: RailCardProps) {
 }
 
 /**
- * 見出し付きコンテンツカード（本文中の非チャートカード）。
- * ヘッダー/本文の視覚契約は ChartPanel と共有する (border-b px-4 py-3 / h3 text-sm font-semibold / p-4)。
+ * 見出し付きコンテンツカード（本文中の非チャートカード）。RailCard と同じ Card の組み立てで、
+ * 見出しの色だけが違う (rail は muted、section は foreground)。
  */
 export function SectionCard(props: RailCardProps) {
   return <HeaderedSurfaceCard variant="section" {...props} />;
