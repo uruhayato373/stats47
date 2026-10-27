@@ -1,14 +1,16 @@
 import type { ReactNode } from 'react';
+import { ScanSearchIcon, TriangleAlertIcon } from 'lucide-react';
 
-import { LinkCard, StatusBadge } from '@/components/admin-ui';
+import { Cell, DataTable, LinkCard, PanelCard, Row, StatusBadge } from '@/components/admin-ui';
+import { buttonVariants } from '@/components/ui/button';
 import type {
   ContentChannelSummaryDTO,
   ContentFindingDTO,
+  ContentOperationsResponse,
   ContentStageDTO,
   ReferenceProductionStageDTO,
 } from '@/lib/contracts/types';
 
-import { Card, CardContent } from "@/components/ui/card";
 const STAGE_LABEL: Record<ContentStageDTO, string> = {
   draft: '原稿・準備中',
   ready: '公開準備完了',
@@ -30,15 +32,16 @@ export function StageBadge({ stage }: { stage: ContentStageDTO }) {
   return <StatusBadge tone={tone}>{STAGE_LABEL[stage]}</StatusBadge>;
 }
 
-/** チャネル 1 つの現在地 (件数と段階)。/content と /product/status が同じ見た目で並べる */
+/** チャネル 1 つの現在地 (件数と段階)。/content と /product/status が同じ見た目で並べる (LinkCard の title / value / sub) */
 export function ChannelSummaryCard({ channel }: { channel: Omit<ContentChannelSummaryDTO, 'channel'> }) {
   return (
-    <LinkCard href={channel.href}>
-      <div className="flex items-baseline justify-between gap-2">
-        <h2 className="font-semibold text-console-fg">{channel.label}</h2>
-        <span className="font-mono text-xl font-bold text-console-fg">{channel.total}</span>
-      </div>
-      <div className="mt-3 flex flex-wrap gap-1.5">
+    <LinkCard
+      href={channel.href}
+      title={channel.label}
+      value={channel.total}
+      sub={`準備完了 ${channel.ready}・審査中 ${channel.review}・予約 ${channel.scheduled}・公開 ${channel.published}・準備中 ${channel.draft}`}
+    >
+      <div className="mt-2 flex flex-wrap gap-1.5">
         {channel.ready > 0 ? <StageBadge stage="ready" /> : null}
         {channel.review > 0 ? <StageBadge stage="review" /> : null}
         {channel.scheduled > 0 ? <StageBadge stage="scheduled" /> : null}
@@ -46,15 +49,42 @@ export function ChannelSummaryCard({ channel }: { channel: Omit<ContentChannelSu
         {channel.draft > 0 ? <StageBadge stage="draft" /> : null}
         {channel.blocked > 0 ? <StageBadge stage="blocked" /> : null}
       </div>
-      <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-console-muted">
-        <div>準備完了 {channel.ready}</div>
-        <div>審査中 {channel.review}</div>
-        <div>予約 {channel.scheduled}</div>
-        <div>公開 {channel.published}</div>
-        <div>準備中 {channel.draft}</div>
-      </dl>
-      <p className="mt-3 break-all text-[10px] text-console-muted/80">{channel.source}</p>
+      <p className="mt-2 break-all font-mono text-xs text-muted-foreground">{channel.source}</p>
     </LinkCard>
+  );
+}
+
+/** 判断待ちの一覧。/content と /product/status が同じ見た目で並べる */
+export function DecisionPanel({ decisions }: { decisions: ContentOperationsResponse['decisions'] }) {
+  const pending = decisions.filter((x) => x.status === 'pending').length;
+  return (
+    <PanelCard title="判断待ち" icon={<TriangleAlertIcon />} description={`未決 ${pending} 件 / 全 ${decisions.length} 件`}>
+      {decisions.length === 0 ? (
+        <p className="text-sm text-muted-foreground">判断待ちはありません。</p>
+      ) : (
+        <DataTable columns={['状態', '判断', '再開条件', '真実源']}>
+          {decisions.map((decision) => (
+            <Row key={`${decision.channel}-${decision.title}`}>
+              <Cell nowrap>
+                <StatusBadge tone={decision.status === 'pending' ? 'warn' : 'good'}>
+                  {decision.status === 'pending' ? '判断待ち' : '決定済み'}
+                </StatusBadge>
+              </Cell>
+              <Cell>
+                <div className="font-medium">{decision.title}</div>
+                <p className="text-xs text-muted-foreground">{decision.detail}</p>
+              </Cell>
+              <Cell muted className="text-xs">
+                {decision.resumeCondition}
+              </Cell>
+              <Cell muted className="font-mono text-xs break-all">
+                {decision.source}
+              </Cell>
+            </Row>
+          ))}
+        </DataTable>
+      )}
+    </PanelCard>
   );
 }
 
@@ -95,40 +125,36 @@ export function ContentAuditPanel({
   findings: ContentFindingDTO[];
 }) {
   return (
-    <Card className="gap-0 py-3"><CardContent className="px-3">
-      <div className="flex items-center gap-2 text-sm font-semibold text-console-fg">
-        SSOT整合性
-        <StatusBadge
-          tone={status === 'pass' ? 'good' : status === 'warn' ? 'warn' : 'bad'}
-        >
+    <PanelCard
+      title="SSOT整合性"
+      icon={<ScanSearchIcon />}
+      action={
+        <StatusBadge tone={status === 'pass' ? 'good' : status === 'warn' ? 'warn' : 'bad'}>
           {status.toUpperCase()}
         </StatusBadge>
-      </div>
+      }
+      description={findings.length > 20 ? `先頭 20 件 / 全 ${findings.length} 件` : undefined}
+    >
       {findings.length === 0 ? (
-        <p className="mt-2 text-xs text-console-muted">不整合はありません。</p>
+        <p className="text-sm text-muted-foreground">不整合はありません。</p>
       ) : (
-        <ul className="mt-2 space-y-1 text-xs text-console-muted">
+        <ul className="flex flex-col gap-1 text-sm text-muted-foreground">
           {findings.slice(0, 20).map((finding, index) => (
             <li key={`${finding.code}-${finding.itemId ?? 'all'}-${index}`}>
-              <span
-                className={
-                  finding.severity === 'error'
-                    ? 'text-console-bad'
-                    : 'text-console-warn'
-                }
-              >
+              <StatusBadge tone={finding.severity === 'error' ? 'bad' : 'warn'}>
                 {finding.severity === 'error' ? 'ERROR' : 'WARN'}
-              </span>{' '}
+              </StatusBadge>{' '}
               {finding.channel}
               {finding.itemId ? `/${finding.itemId}` : ''}: {finding.message}
             </li>
           ))}
         </ul>
       )}
-    </CardContent></Card>
+    </PanelCard>
   );
 }
 
+/** 絞り込みのリンク。選択中は塗りのボタン、それ以外は枠のボタン (公式 Button を a で描く) */
 export function FilterLink({
   href,
   active,
@@ -139,14 +165,7 @@ export function FilterLink({
   children: ReactNode;
 }) {
   return (
-    <a
-      href={href}
-      className={
-        active
-          ? 'rounded-full border border-console-accent bg-console-accent px-3 py-1 text-xs font-semibold text-console-bg'
-          : 'rounded-full border border-console-border px-3 py-1 text-xs text-console-muted hover:border-console-accent/60'
-      }
-    >
+    <a href={href} className={buttonVariants({ variant: active ? 'default' : 'outline', size: "sm" })}>
       {children}
     </a>
   );

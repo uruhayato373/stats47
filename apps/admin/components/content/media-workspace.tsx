@@ -39,6 +39,7 @@ import type {
   CheckState,
   Template,
 } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 export interface WorkspaceData {
   items: ItemView[];
@@ -168,8 +169,8 @@ function ArticleEditor({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold">{item.title}</h2>
-        <p className="break-all text-xs text-console-muted">{item.id}</p>
+        <h2 className="text-base font-semibold">{item.title}</h2>
+        <p className="break-all text-xs text-muted-foreground">{item.id}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           <StatusBadge tone={item.reviewState === 'checked' ? 'good' : 'warn'}>
             {STATE_LABELS[item.reviewState]}
@@ -182,7 +183,7 @@ function ArticleEditor({
               href={item.url}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-console-accent underline"
+              className="text-sm text-primary underline"
             >
               公開ページ
             </a>
@@ -190,7 +191,7 @@ function ArticleEditor({
         </div>
       </div>
       {item.stale && (
-        <p role="status" className="text-sm text-console-muted">
+        <p role="status" className="text-sm text-muted-foreground">
           前回確認後に本文・画像などが変わっています。各項目を確認し直して保存してください。
         </p>
       )}
@@ -285,7 +286,7 @@ function ArticleEditor({
             <button
               type="button"
               key={image.id}
-              className="space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
+              className="space-y-2 rounded-md border border-border p-3 text-left hover:border-primary"
               onClick={() => onImage(image.id)}
             >
               <ActualImage
@@ -304,7 +305,7 @@ function ArticleEditor({
           ))}
         </div>
         {!images.some((i) => i.kind !== 'cover') && (
-          <p className="mt-2 text-sm text-console-muted">
+          <p className="mt-2 text-sm text-muted-foreground">
             本文画像の一覧が未取得、または本文に画像がありません。未取得を「画像なし」と判定しません。
           </p>
         )}
@@ -317,7 +318,7 @@ function ArticleEditor({
           <div className="mt-4 space-y-4">
             {!body && <p>本文を取得しています…</p>}
             {(body?.error || body?.reason) && (
-              <p className="text-sm text-console-muted">
+              <p className="text-sm text-muted-foreground">
                 {body.error ?? body.reason}
               </p>
             )}
@@ -342,7 +343,7 @@ function ArticleEditor({
                         href={href}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-console-accent underline"
+                        className="text-primary underline"
                       >
                         {children}
                       </a>
@@ -362,7 +363,7 @@ function ArticleEditor({
                 </ReactMarkdown>
               </div>
             )}
-            <p className="text-xs text-console-muted">
+            <p className="text-xs text-muted-foreground">
               保存原稿のプレビューです。公開後のnoteカード表示・配置は公開ページでも確認します。
             </p>
           </div>
@@ -425,8 +426,8 @@ function ImageEditor({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold">{image.title}</h2>
-        <p className="break-all text-sm text-console-muted">
+        <h2 className="text-base font-semibold">{image.title}</h2>
+        <p className="break-all text-sm text-muted-foreground">
           {image.id} · {image.file}
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -488,25 +489,27 @@ function ImageEditor({
             </StatusBadge>
           ))}
         </div>
-        <p className="mt-2 text-sm text-console-muted">
+        <p className="mt-2 text-sm text-muted-foreground">
           {image.classification.reason}
         </p>
         {image.classification.updatedAt && (
-          <p className="text-xs text-console-muted">
+          <p className="text-xs text-muted-foreground">
             分類の確認日: {image.classification.updatedAt}
           </p>
         )}
         {!!image.record?.classificationHistory?.length && (
-          <details className="text-sm">
-            <summary>
+          <Collapsible className="text-sm">
+            <CollapsibleTrigger className="cursor-pointer text-left">
               過去の分類 {image.record.classificationHistory.length}件
-            </summary>
+            </CollapsibleTrigger>
+<CollapsibleContent>
             {image.record.classificationHistory.map((entry, index) => (
               <p key={index}>
                 {entry.updatedAt} · {entry.templateId} · {entry.reason}
               </p>
             ))}
-          </details>
+          </CollapsibleContent>
+</Collapsible>
         )}
         {image.coverWorkflow && (
           <p className="mt-2 text-sm">
@@ -520,7 +523,7 @@ function ImageEditor({
         <div className="space-y-3 text-sm">
           {image.pageUrl && (
             <a
-              className="text-console-accent underline"
+              className="text-primary underline"
               href={image.pageUrl}
               target="_blank"
               rel="noreferrer"
@@ -528,7 +531,7 @@ function ImageEditor({
               使用ページ・投稿を開く
             </a>
           )}
-          <p className="break-all text-xs text-console-muted">
+          <p className="break-all text-xs text-muted-foreground">
             原本:{' '}
             {image.original?.key ??
               image.original?.path ??
@@ -536,7 +539,7 @@ function ImageEditor({
               '所在未確認'}
           </p>
           {image.missingReason && (
-            <p className="text-console-muted">{image.missingReason}</p>
+            <p className="text-muted-foreground">{image.missingReason}</p>
           )}
           {image.occurrences?.map((use, index) => (
             <p key={index}>
@@ -551,7 +554,7 @@ function ImageEditor({
                 {related.map((row) => (
                   <li key={row.id}>
                     <button
-                      className="text-left text-console-accent underline"
+                      className="text-left text-primary underline"
                       onClick={() => onSelect(row)}
                     >
                       {row.title} · {IMAGE_USES[row.usage] ?? row.usage}
@@ -562,7 +565,7 @@ function ImageEditor({
             </div>
           )}
           {image.generation && (
-            <div className="break-all text-xs text-console-muted">
+            <div className="break-all text-xs text-muted-foreground">
               <p>生成方式: {image.generation.generator}</p>
               <p>生成コード: {image.generation.renderer ?? '未記録'}</p>
               {image.generation.rendererHash && (
@@ -578,7 +581,7 @@ function ImageEditor({
               <p>{source.relationship}</p>
               {source.url ? (
                 <a
-                  className="break-all text-console-accent underline"
+                  className="break-all text-primary underline"
                   href={source.url}
                   target="_blank"
                   rel="noreferrer"
@@ -591,7 +594,7 @@ function ImageEditor({
             </div>
           ))}
           {!!image.missingInputs?.length && (
-            <p className="break-all text-console-muted">
+            <p className="break-all text-muted-foreground">
               未取得の入力: {image.missingInputs.join('、')}
             </p>
           )}
@@ -606,14 +609,14 @@ function ImageEditor({
                 href={old}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs text-console-accent underline"
+                className="text-xs text-primary underline"
               >
                 原寸を開く
               </a>
               {image.kind !== 'cover' &&
                 image.original?.provider !== 'external' && (
                   <a
-                    className="text-xs text-console-accent underline"
+                    className="text-xs text-primary underline"
                     href={'/api/media-library/' + image.id + '/file?download=1'}
                   >
                     原本ファイルを保存
@@ -629,7 +632,7 @@ function ImageEditor({
               href={candidate}
               target="_blank"
               rel="noreferrer"
-              className="text-xs text-console-accent underline"
+              className="text-xs text-primary underline"
             >
               原寸を開く
             </a>
@@ -651,7 +654,7 @@ function ImageEditor({
         </div>
       </Section>
       {image.kind === 'cover' ? (
-        <Link href={image.coverManagement ?? '/content/note/covers'} data-slot="button" className={buttonVariants({  })}>
+        <Link href={image.coverManagement ?? '/content/note/covers'} className={buttonVariants()}>
             カバーの制作・採用画面を開く
           </Link>
       ) : (
@@ -681,7 +684,7 @@ function ImageEditor({
           <p className="text-sm">
             選択した型の役割: {IMAGE_ROLES[roleForTemplate(templateId)]}
           </p>
-          <p className="text-sm text-console-muted">
+          <p className="text-sm text-muted-foreground">
             棒の長さで比較する画像は棒グラフ、行と列で数値を読む画像はテーブルです。ランキングは目的として記録します。
           </p>
           <label className="block space-y-2 text-sm">
@@ -734,7 +737,7 @@ function ImageEditor({
               }}
             />
           </label>
-          <p className="text-sm text-console-muted">{template?.policy}</p>
+          <p className="text-sm text-muted-foreground">{template?.policy}</p>
           <label className="block space-y-2 text-sm">
             <span>この画像の改善方針</span>
             <Textarea
@@ -817,11 +820,11 @@ function ImageEditor({
                 ? '保存一覧に入力候補があります。値・単位の妥当性と再生成の成功は別途確認します。'
                 : '固定入力の保全は未確認です。完成画像だけでは再生成を保証できません。'}
             </p>
-            <ul className="mt-2 space-y-1 text-xs text-console-muted">
+            <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
               {image.inputFiles.map((f) => (
                 <li key={f.name} className="break-all">
                   <a
-                    className="text-console-accent underline"
+                    className="text-primary underline"
                     href={
                       '/api/media-library/' +
                       image.id +
@@ -840,12 +843,12 @@ function ImageEditor({
                 </li>
               ))}
             </ul>
-            <a href={'/api/media-library/' + image.id + '/request'} data-slot="button" className={buttonVariants({ variant: "outline" })}>
+            <a href={'/api/media-library/' + image.id + '/request'} className={buttonVariants({ variant: "outline" })}>
                 制作仕様をダウンロード
               </a>
           </Section>
           <Section title="改善候補をR2へ保存">
-            <p className="text-sm text-console-muted">
+            <p className="text-sm text-muted-foreground">
               PNG・JPEG・WebP・SVGと、使用したrenderer・元データ・変更点を登録します。SVGは安全なプレビューへ変換して表示します。
             </p>
             <Input
@@ -883,7 +886,7 @@ function ImageEditor({
           {image.candidate && (
             <Section title="候補の確認・採用">
               {!image.candidateMatches && (
-                <p className="text-sm text-console-muted">
+                <p className="text-sm text-muted-foreground">
                   入力・方針が変更されたため、この候補は採用できません。現在の制作仕様で新しい候補を登録してください。
                 </p>
               )}
@@ -950,22 +953,23 @@ function ImageEditor({
                       '/file?revision=' +
                       image.candidate.id +
                       '&input=1'
-                    } data-slot="button" className={buttonVariants({ variant: "outline" })}>
+                    } className={buttonVariants({ variant: "outline" })}>
                     保存した生成根拠
                   </a>
               </div>
             </Section>
           )}
           {!!image.record?.revisions.length && (
-            <details>
-              <summary className="cursor-pointer text-sm">
+            <Collapsible>
+              <CollapsibleTrigger className="cursor-pointer text-sm text-left">
                 候補の履歴（{image.record.revisions.length}版）
-              </summary>
+              </CollapsibleTrigger>
+<CollapsibleContent>
               <ul className="space-y-2 py-3 text-sm">
                 {image.record.revisions.map((r) => (
                   <li key={r.id}>
                     <a
-                      className="text-console-accent underline"
+                      className="text-primary underline"
                       target="_blank"
                       rel="noreferrer"
                       href={
@@ -981,7 +985,8 @@ function ImageEditor({
                   </li>
                 ))}
               </ul>
-            </details>
+            </CollapsibleContent>
+</Collapsible>
           )}
         </>
       )}
@@ -1190,11 +1195,12 @@ export function MediaWorkspace({
           }
         />
       </div>
-      <details className="text-sm text-console-muted">
-        <summary className="cursor-pointer">
+      <Collapsible className="text-sm text-muted-foreground">
+        <CollapsibleTrigger className="cursor-pointer text-left">
           棚卸し範囲・不足を確認する（Web索引:{' '}
           {data.webInventoryUpdatedAt ?? '未取得'}）
-        </summary>
+        </CollapsibleTrigger>
+<CollapsibleContent>
         <p>
           画像の使用箇所を一覧化しています。生成記録の存在は再生成成功を意味しません。未取得・外部参照・素材登録だけの画像も区別して残します。
         </p>
@@ -1206,10 +1212,11 @@ export function MediaWorkspace({
             </li>
           ))}
         </ul>
-      </details>
+      </CollapsibleContent>
+</Collapsible>
       {mode === 'images' && (
         <Section title="画像の改善キュー">
-          <p className="mb-2 text-sm text-console-muted">
+          <p className="mb-2 text-sm text-muted-foreground">
             全使用箇所から自動集計します。複数の作業がある画像は各キューに含まれます。分類済みは品質確認済みを意味しません。
           </p>
           <div className="flex flex-wrap gap-2">
@@ -1240,11 +1247,12 @@ export function MediaWorkspace({
         </Section>
       )}
       {!!data.inventoryGaps?.length && (
-        <details className="space-y-2 text-sm">
-          <summary className="cursor-pointer font-medium">
+        <Collapsible className="text-sm">
+          <CollapsibleTrigger className="cursor-pointer font-medium text-left">
             棚卸し待ちの使用先 ·{' '}
             {new Set(data.inventoryGaps.map((g) => g.owner)).size}件
-          </summary>
+          </CollapsibleTrigger>
+<CollapsibleContent className="flex flex-col gap-2">
           <p>
             一覧未取得を「画像なし」と判定しません。本文・素材台帳を回収して索引を更新すると、同じ画像IDの改善キューへ入ります。
           </p>
@@ -1252,7 +1260,7 @@ export function MediaWorkspace({
             {data.inventoryGaps.map((gap, index) => (
               <li key={gap.owner + index}>
                 <Link
-                  className="text-console-accent underline"
+                  className="text-primary underline"
                   href={
                     '/product/content-quality?owner=' +
                     encodeURIComponent(gap.owner)
@@ -1265,10 +1273,11 @@ export function MediaWorkspace({
               </li>
             ))}
           </ul>
-        </details>
+        </CollapsibleContent>
+</Collapsible>
       )}
       {data.migration && (
-        <p className="text-sm text-console-muted">
+        <p className="text-sm text-muted-foreground">
           旧SNS画像の移行確認: {data.migration.observedAt} · R2照合済み{' '}
           {data.migration.counts.migrated ?? 0}件 · 元画像未取得{' '}
           {data.migration.counts['source-unavailable'] ?? 0}件 · 内容不一致{' '}
@@ -1486,7 +1495,7 @@ export function MediaWorkspace({
         </Button>
       </div>
       {error && <p role="alert">{error}</p>}
-      <p className="text-xs text-console-muted">
+      <p className="text-xs text-muted-foreground">
         画像一覧の取得: {data.inventoryUpdatedAt ?? '未実施'} ·
         R2保存の記録と再生成の成功は別々に確認します。
       </p>
@@ -1505,7 +1514,7 @@ export function MediaWorkspace({
               mode === 'images' ? (
                 <button
                   key={row.id}
-                  className="space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
+                  className="space-y-2 rounded-md border border-border p-3 text-left hover:border-primary"
                   onClick={() => choose((row as ImageView).owner, row.id)}
                 >
                   <ActualImage
@@ -1517,10 +1526,10 @@ export function MediaWorkspace({
                   <p className="line-clamp-2 text-sm">
                     {(row as ImageView).title}
                   </p>
-                  <p className="break-all text-xs text-console-muted">
+                  <p className="break-all text-xs text-muted-foreground">
                     {(row as ImageView).file}
                   </p>
-                  <p className="text-xs text-console-muted">
+                  <p className="text-xs text-muted-foreground">
                     {IMAGE_USES[(row as ImageView).usage]} ·{' '}
                     {IMAGE_ROLES[(row as ImageView).classification.role]}
                   </p>
@@ -1556,7 +1565,7 @@ export function MediaWorkspace({
               ) : (
                 <button
                   key={row.id}
-                  className="block w-full space-y-2 rounded-md border border-console-border p-3 text-left hover:border-console-accent"
+                  className="block w-full space-y-2 rounded-md border border-border p-3 text-left hover:border-primary"
                   onClick={() => choose(row.id)}
                 >
                   <p className="text-sm font-medium">{row.title}</p>
@@ -1574,7 +1583,7 @@ export function MediaWorkspace({
                       {STATE_LABELS[(row as ItemView).reviewState]}
                     </StatusBadge>
                   </div>
-                  <p className="break-all text-xs text-console-muted">
+                  <p className="break-all text-xs text-muted-foreground">
                     {row.id}
                   </p>
                 </button>
@@ -1644,7 +1653,7 @@ export function MediaWorkspace({
               onDirty={setDirty}
             />
           ) : (
-            <p className="text-sm text-console-muted">
+            <p className="text-sm text-muted-foreground">
               左の項目を選ぶと、実際の画像と改善方針をここで確認・編集できます。
             </p>
           )}

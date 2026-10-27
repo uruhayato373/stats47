@@ -252,7 +252,7 @@ jobs:
         continue-on-error: false
 
       - name: 🧩 Admin UI Guard (shadcn parity / UI debt)
-        # 管理画面の UI 部品が shadcn/ui 公式 (new-york-v4) と同じクラスか、ページに生のカード面・<table>・style が増えていないか。
+        # 管理画面の UI 部品が shadcn/ui 公式 (base-nova) と同じクラスか、ページに生のカード面・<table>・style が増えていないか。
         # 契約: .claude/rules/admin-ui.md
         run: |
           node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs

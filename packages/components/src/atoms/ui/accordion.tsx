@@ -1,5 +1,5 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の accordion.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
-// 正の写し: .claude/config/shadcn-reference/ (packages/ui-theme/README.md)。
+// 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 
 import { cn } from "../../lib/cn"

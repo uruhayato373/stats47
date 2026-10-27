@@ -1,8 +1,22 @@
-import { num, wow } from "./format";
-import type { ChartTone } from "./chart-tone";
-import { Sparkline, WowBadge } from "./sparkline";
+import type { ReactNode } from "react";
+import {
+  CoinsIcon,
+  EyeIcon,
+  FileWarningIcon,
+  GaugeIcon,
+  ListOrderedIcon,
+  MousePointerClickIcon,
+  PercentIcon,
+  SearchIcon,
+  TrendingUpIcon,
+  UsersIcon,
+} from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { StatCard, TrendChart, type StatTrend, type TrendRow } from "@/components/admin-ui";
+import { Grid } from "@/components/layout-primitives";
+
+import { num, wow } from "./format";
+
 type Row = Record<string, string | number>;
 type Wrapped<T> = T | { error: string };
 
@@ -10,27 +24,22 @@ function hasError(v: unknown): v is { error: string } {
   return !!v && typeof v === "object" && "error" in (v as Record<string, unknown>);
 }
 
-function StatCard({
-  value,
-  label,
-  sub,
-  sparkValues,
-  sparkTone,
-}: {
-  value: string;
-  label: string;
-  sub?: React.ReactNode;
-  sparkValues?: Array<number | null | undefined>;
-  sparkTone?: ChartTone;
-}) {
-  return (
-    <Card className="min-w-0 gap-0 overflow-hidden py-3"><CardContent className="px-3">
-      <div className="wrap-break-word text-xl font-bold text-console-fg">{value}</div>
-      <div className="mt-0.5 wrap-break-word text-[11px] text-console-muted">{label}</div>
-      {sub ? <div className="mt-1 text-[11px] text-console-muted">{sub}</div> : null}
-      {sparkValues ? <Sparkline values={sparkValues} tone={sparkTone} /> : null}
-    </CardContent></Card>
-  );
+/** 前週比 (wow) を StatCard の増減に写す。比べる値が無いときは出さない */
+function wowTrend(rows: Row[], key: string): StatTrend | undefined {
+  const r = wow(rows, key);
+  if (!r) return undefined;
+  return { label: `${r.up ? "+" : "-"}${Math.abs(r.pct).toFixed(1)}%`, direction: r.pct > 0 ? "up" : r.pct < 0 ? "down" : "flat" };
+}
+
+/** 数値でない値は欠測 (null) のまま渡す。0 にしない */
+function toNum(v: unknown): number | null {
+  if (v === "" || v === null || v === undefined) return null;
+  const n = Number(v);
+  return Number.isNaN(n) ? null : n;
+}
+
+function series(rows: Row[], keys: string[]): TrendRow[] {
+  return rows.map((r) => Object.fromEntries([["week", String(r.week)], ...keys.map((k) => [k, toNum(r[k])])]));
 }
 
 export interface MetricsData {
@@ -43,9 +52,10 @@ export interface MetricsData {
   coverage: Wrapped<{ week?: string; tracked?: number; pendingActionable?: number }>;
 }
 
-/** 旧 dashboard.html renderMetrics() の移植。GSC/GA4/AdSense/PSI/coverage を横並びカード表示。 */
+/** 週次メトリクス。GSC/GA4/AdSense/PSI/coverage の数値タイル → GSC・GA4・AdSense の推移チャート。 */
 export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
-  const cards: React.ReactNode[] = [];
+  const cards: ReactNode[] = [];
+  const charts: ReactNode[] = [];
 
   if (!hasError(metrics)) {
     const g = metrics.gsc;
@@ -57,41 +67,47 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
       cards.push(
         <StatCard
           key="gsc-clicks"
+          icon={<MousePointerClickIcon />}
           value={num(Number(last.clicks))}
-          label={`GSC clicks/確定7日 (${last.week})`}
-          sub={<WowBadge result={wow(g, "clicks")} />}
-          sparkValues={g.map((r) => Number(r.clicks))}
+          label="GSC clicks/確定7日"
+          trend={wowTrend(g, "clicks")}
+          sub={String(last.week)}
         />,
-      );
-      cards.push(
         <StatCard
           key="gsc-impressions"
+          icon={<EyeIcon />}
           value={num(Number(last.impressions))}
           label="GSC impressions/確定7日"
-          sub={<WowBadge result={wow(g, "impressions")} />}
-          sparkValues={g.map((r) => Number(r.impressions))}
+          trend={wowTrend(g, "impressions")}
         />,
+        <StatCard key="gsc-ctr" icon={<PercentIcon />} value={`${(Number(last.ctr) * 100).toFixed(2)}%`} label="GSC CTR" />,
+        <StatCard key="gsc-position" icon={<ListOrderedIcon />} value={String(last.position)} label="GSC 平均掲載順位" />,
       );
-      cards.push(
-        <StatCard
-          key="gsc-ctr"
-          value={`${(Number(last.ctr) * 100).toFixed(2)}%`}
-          label="GSC CTR"
-          sparkValues={g.map((r) => Number(r.ctr))}
-          sparkTone="good"
-        />,
-      );
-      cards.push(
-        <StatCard
-          key="gsc-position"
-          value={String(last.position)}
-          label="GSC 平均掲載順位"
-          sparkValues={g.map((r) => Number(r.position))}
-          sparkTone="warn"
-        />,
-      );
+      if (g.length >= 3) {
+        charts.push(
+          <TrendChart
+            key="gsc-chart"
+            title="GSC clicks の推移"
+            icon={<SearchIcon />}
+            description={`週次・確定7日 (${g.length} 週)`}
+            data={series(g, ["clicks"])}
+            xKey="week"
+            series={[{ key: "clicks", label: "clicks" }]}
+          />,
+          <TrendChart
+            key="gsc-imp-chart"
+            title="GSC impressions の推移"
+            icon={<EyeIcon />}
+            description={`週次・確定7日 (${g.length} 週)`}
+            data={series(g, ["impressions"])}
+            xKey="week"
+            series={[{ key: "impressions", label: "impressions" }]}
+            kind="bar"
+          />,
+        );
+      }
     } else {
-      cards.push(<StatCard key="gsc-err" value="—" label="GSC (取得失敗)" />);
+      cards.push(<StatCard key="gsc-err" icon={<SearchIcon />} value="—" label="GSC (取得失敗)" tone="bad" />);
     }
 
     if (Array.isArray(a) && a.length > 0) {
@@ -99,21 +115,27 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
       cards.push(
         <StatCard
           key="ga4-users"
+          icon={<UsersIcon />}
           value={num(Number(last.active_users))}
-          label={`GA4 users/週 JP (${last.week})`}
-          sub={<WowBadge result={wow(a, "active_users")} />}
-          sparkValues={a.map((r) => Number(r.active_users))}
+          label="GA4 users/週 JP"
+          trend={wowTrend(a, "active_users")}
+          sub={String(last.week)}
         />,
+        <StatCard key="ga4-pv" icon={<EyeIcon />} value={num(Number(last.pageviews))} label="GA4 PV/週" trend={wowTrend(a, "pageviews")} />,
       );
-      cards.push(
-        <StatCard
-          key="ga4-pv"
-          value={num(Number(last.pageviews))}
-          label="GA4 PV/週"
-          sub={<WowBadge result={wow(a, "pageviews")} />}
-          sparkValues={a.map((r) => Number(r.pageviews))}
-        />,
-      );
+      if (a.length >= 3) {
+        charts.push(
+          <TrendChart
+            key="ga4-chart"
+            title="GA4 users の推移"
+            icon={<UsersIcon />}
+            description={`週次・JP (${a.length} 週)`}
+            data={series(a, ["active_users"])}
+            xKey="week"
+            series={[{ key: "active_users", label: "users" }]}
+          />,
+        );
+      }
     }
 
     if (Array.isArray(ad) && ad.length > 0) {
@@ -121,25 +143,35 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
       cards.push(
         <StatCard
           key="adsense-earnings"
+          icon={<CoinsIcon />}
           value={`¥${num(Number(last.earnings))}`}
-          label={`AdSense/週 (${last.week})`}
-          sub={`RPM ¥${last.rpm}`}
-          sparkValues={ad.map((r) => Number(r.earnings))}
-          sparkTone="good"
+          label="AdSense/週"
+          trend={wowTrend(ad, "earnings")}
+          sub={`${last.week}・RPM ¥${last.rpm}`}
         />,
       );
+      if (ad.length >= 3) {
+        charts.push(
+          <TrendChart
+            key="adsense-chart"
+            title="AdSense 収益の推移"
+            icon={<TrendingUpIcon />}
+            description={`週次 (${ad.length} 週)`}
+            data={series(ad, ["earnings"])}
+            xKey="week"
+            series={[{ key: "earnings", label: "収益" }]}
+            valueFormat="yen"
+          />,
+        );
+      }
     }
   } else {
-    cards.push(<StatCard key="metrics-err" value="—" label="メトリクス (取得失敗)" />);
+    cards.push(<StatCard key="metrics-err" icon={<FileWarningIcon />} value="—" label="メトリクス (取得失敗)" tone="bad" />);
   }
 
   if (!hasError(psi) && psi.date) {
     cards.push(
-      <StatCard
-        key="psi"
-        value={`${psi.errors ?? 0} / ${psi.warnings ?? 0}`}
-        label={`PSI 違反 error/warning (${psi.date})`}
-      />,
+      <StatCard key="psi" icon={<GaugeIcon />} value={`${psi.errors ?? 0} / ${psi.warnings ?? 0}`} label="PSI 違反 error/warning" sub={psi.date} />,
     );
   }
 
@@ -147,8 +179,10 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
     cards.push(
       <StatCard
         key="coverage"
+        icon={<FileWarningIcon />}
         value={num(coverage.pendingActionable)}
-        label={`GSC カバレッジ要対応 (追跡 ${num(coverage.tracked)}・${coverage.week})`}
+        label="GSC カバレッジ要対応"
+        sub={`追跡 ${num(coverage.tracked)}・${coverage.week}`}
       />,
     );
   }
@@ -157,5 +191,15 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
     return <p className="text-sm text-console-bad">メトリクスの取得に失敗</p>;
   }
 
-  return <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">{cards}</div>;
+  return (
+    <>
+      <Grid min="sm">{cards}</Grid>
+      {/* チャートは 2 枚ずつ横に並べる */}
+      {Array.from({ length: Math.ceil(charts.length / 2) }, (_, i) => (
+        <Grid key={i} min="lg">
+          {charts.slice(i * 2, i * 2 + 2)}
+        </Grid>
+      ))}
+    </>
+  );
 }

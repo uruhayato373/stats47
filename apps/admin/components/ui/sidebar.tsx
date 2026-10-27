@@ -1,14 +1,14 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の sidebar.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。
-// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/sidebar.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// shadcn/ui 公式（base-nova）の sidebar.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/sidebar.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 "use client"
 
 import * as React from "react"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/cn"
 
 import { useIsMobile } from "@/hooks/use-mobile"
-import { cn } from "@/lib/cn"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
@@ -273,7 +273,8 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <PanelLeftIcon
+        className="cn-rtl-flip" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -568,7 +569,7 @@ function SidebarMenuAction({
         className: cn(
           "absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform group-data-[collapsible=icon]:hidden peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[size=default]/menu-button:top-1.5 peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=sm]/menu-button:top-1 after:absolute after:-inset-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 md:after:hidden [&>svg]:size-4 [&>svg]:shrink-0",
           showOnHover &&
-          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground aria-expanded:opacity-100 md:opacity-0",
+            "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground aria-expanded:opacity-100 md:opacity-0",
           className
         ),
       },

@@ -50,20 +50,16 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="現況レビュー" source="pilot-board.json + improvements.md + 収益化戦略 §5 + data/ の週次記録" />
       <Section title="今週の判断">
         <Grid min="sm">
           {cards.map((c) => (
-            <LinkCard key={c.href} href={c.href}>
-              <div className="text-[11px] text-console-muted">{c.title}</div>
-              <div className="mt-1 text-base font-bold text-console-fg">{c.value}</div>
-              <div className="mt-1 text-[11px] text-console-muted">{c.sub}</div>
-            </LinkCard>
+            <LinkCard key={c.href} href={c.href} title={c.title} value={<span className="text-base">{c.value}</span>} sub={c.sub} />
           ))}
         </Grid>
       </Section>
       <DashboardView />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 ---
 name: project_sns_gallery_and_ig_cron_fix
-description: 統合メディアコンソール(ローカル4747 npm run admin、実装=apps/admin Next.js・2026-07-16完全移管)=SNS投稿(/sns)+画像資産(/assets OGP/カード/note/動画・欠落チェック・再生成)+SVGカタログ(/svg)+現況(/dashboard)。R2動画30日自動削除。IG自動投稿が約1ヶ月空振りcronバグ修正
+description: 統合メディアコンソール(ローカル4747 npm run admin、実装=apps/admin Next.js・2026-07-16完全移管)=SNS投稿(/sns)+画像ライブラリ(/ops/image-library。旧 /assets・/svg は 2026-10-27 廃止)+現況(/dashboard)。R2動画30日自動削除。IG自動投稿が約1ヶ月空振りcronバグ修正
 metadata: 
   node_type: memory
   type: project
@@ -12,7 +12,7 @@ SNS 投稿ギャラリー管理画面 + IG cron 修正 + R2 コスト対策 (fea
 ## 統合メディアコンソール (ローカル専用・2026-07-07 に SNS 単機能→全メディア横断に拡張)
 - 起動: `npm run admin` → http://127.0.0.1:4747/ (skill `/admin-console`。`PORT=` で上書き可)
 - **実装は独立 Next.js アプリ `apps/admin`** (App Router・127.0.0.1 bind 固定。**2026-07-16 に旧 node:http + vanilla JS 実装 `.claude/scripts/gallery/` から完全移管・旧実装と `sns:gallery` alias は削除**。構成・安全ガードは `apps/admin/README.md`)
-- **主要画面**: `/` ホーム(件数サマリ) / `/sns` SNS投稿 / `/assets` 画像資産(OGP・リンクカード light/dark・note カバー・note記事内画像・動画master) / `/svg` ブログSVGカタログ(6カタログ分類)
+- **主要画面**: `/` ホーム(件数サマリ) / `/sns` SNS投稿 / `/ops/image-library` 画像ライブラリ (OGP・リンクカード・note・SNS・ブログ SVG。旧 `/assets`・`/svg` は 2026-10-27 に廃止)
 - **共有 collector**: `.claude/scripts/lib/gallery-collectors.mjs`(列挙 buildTab/note-image/video)+`svg-classify.mjs`(分類)を CI 静的ギャラリー `ogp/build-image-gallery.mjs`(--audit 週次ゲート)と共用。R2 list 不可 → sitemap/all.json/note state/archive-manifest 起点+HEAD probe
 - SNS: `/sns` は投稿ID台帳。画像一覧/表、ID・本文検索、型/状態フィルタ、予約順・JST表示、Drive保全素材のプレビュー。2026-10-11 オーナー指示で下書き本文編集を追加。保存時は版を検査し承認待ちへ戻す。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」
 - 管理画面の書込は下書き本文だけ。予約・投稿・生成はowner agent/skillが担う。予約済み・公開済みの本文は閲覧用

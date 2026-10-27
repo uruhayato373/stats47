@@ -1,33 +1,21 @@
+import { BanIcon, CheckCircle2Icon, FilePenLineIcon, ImageIcon, ListIcon, MapPinnedIcon, SendIcon } from "lucide-react";
+
+import { StatCard } from "@/components/admin-ui";
+import { Grid } from "@/components/layout-primitives";
 import type { BuzzMapCatalogResponse } from "@/lib/contracts/types";
 
-import { Card, CardContent } from "@/components/ui/card";
-/** 集計ヘッダ: 総候補、eligible、blocked、landing-ready、generated、draft、posted。 */
+/** 集計: 総候補、eligible、blocked、landing-ready、generated、draft、posted。 */
 export function BuzzMapSummary({ summary }: { summary: BuzzMapCatalogResponse["summary"] }) {
   const { aggregate, generatedAt } = summary;
-  const items: Array<[string, number]> = [
-    ["総候補", aggregate.total],
-    ["eligible", aggregate.eligible],
-    ["blocked", aggregate.blocked],
-    ["landing-ready", aggregate.landingReady],
-    ["generated", aggregate.generated],
-    ["draft", aggregate.draft],
-    ["posted", aggregate.posted],
-  ];
   return (
-    <Card className="gap-0 py-2"><CardContent className="flex flex-wrap items-center gap-2 px-3">
-      {items.map(([label, value]) => (
-        <span
-          key={label}
-          className="rounded-md border border-console-border bg-console-bg px-2.5 py-1 text-xs text-console-fg"
-        >
-          {label}: <b>{value}</b>
-        </span>
-      ))}
-      {generatedAt ? (
-        <span className="ml-auto text-[11px] text-console-muted">
-          catalog 更新: {generatedAt}
-        </span>
-      ) : null}
-    </CardContent></Card>
+    <Grid min="sm">
+      <StatCard label="総候補" icon={<ListIcon />} value={aggregate.total} sub={generatedAt ? `catalog 更新: ${generatedAt}` : undefined} />
+      <StatCard label="eligible" icon={<CheckCircle2Icon />} value={aggregate.eligible} />
+      <StatCard label="blocked" icon={<BanIcon />} value={aggregate.blocked} tone={aggregate.blocked ? "warn" : "neutral"} />
+      <StatCard label="landing-ready" icon={<MapPinnedIcon />} value={aggregate.landingReady} />
+      <StatCard label="generated" icon={<ImageIcon />} value={aggregate.generated} />
+      <StatCard label="draft" icon={<FilePenLineIcon />} value={aggregate.draft} />
+      <StatCard label="posted" icon={<SendIcon />} value={aggregate.posted} />
+    </Grid>
   );
 }

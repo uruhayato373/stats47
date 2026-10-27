@@ -15,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -33,9 +33,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@stats47/types": [
-        "../../packages/types/src"
-      ],
+      "@stats47/types": ["../../packages/types/src"],
       "@/*": [
         "./*"
       ],
@@ -56,8 +54,7 @@
     ".next/dev/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".local/next-admin-build2/types/**/*.ts",
-    ".local/next-admin-dev/dev/types/**/*.ts"
+    ".local/next-admin-build2/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

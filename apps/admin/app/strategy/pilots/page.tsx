@@ -1,5 +1,7 @@
+import { CircleHelpIcon, CirclePauseIcon, HourglassIcon, TimerIcon } from "lucide-react";
+
 import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
-import { Section } from "@/components/layout-primitives";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import type { MetricStatus, PilotState } from "@/lib/pilot-board";
 import { PILOT_BOARD_PATH, pilotBoard } from "@/lib/server/pilot-board";
@@ -34,14 +36,15 @@ const metricTone: Record<MetricStatus, "good" | "warn" | "bad" | "info"> = {
 };
 const metricLabel: Record<MetricStatus, string> = { ok: "記録あり", waiting: "窓待ち", missing: "記録なし", stale: "記録が古い" };
 
+/** pilot 判定 (型 B: 一覧・キュー)。件数 → pilot 一覧 */
 export default function PilotBoardPage() {
   const board = pilotBoard();
   const count = (s: PilotState) => board.rows.filter((r) => r.state === s).length;
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="pilot 判定" source={`${PILOT_BOARD_PATH} + data/ の週次記録`}>
-        <p className="max-w-4xl text-sm text-console-muted">
+        <p className="max-w-4xl text-sm text-muted-foreground">
           収益化の pilot を、開始日・判定日・判定に使う指標の現在値で並べる。記録が無い指標や古い記録は 0 と読まずに「判定不能」と出す。
           GA4 の導線クリックは直近 28 日の累計なので、開始日より前の日を含む窓は使わない。開始日や指標を変えるときは台帳を編集する。
         </p>
@@ -49,12 +52,12 @@ export default function PilotBoardPage() {
 
       {board.error ? <ErrorNote error={board.error} /> : null}
 
-      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="計測中" value={String(count("measuring"))} sub={`今日 ${board.today}`} tone="good" />
-        <StatCard label="判定待ち" value={String(count("due"))} sub="判定日を過ぎた" tone={count("due") ? "warn" : "good"} />
-        <StatCard label="判定不能" value={String(count("no-data"))} sub="記録なし・古い記録" tone={count("no-data") ? "bad" : "good"} />
-        <StatCard label="未開始・保留" value={String(count("not-started") + count("paused"))} sub="開始日なし / 実験台帳で保留" tone="neutral" />
-      </div>
+      <Grid min="sm">
+        <StatCard label="計測中" icon={<TimerIcon />} value={String(count("measuring"))} sub={`今日 ${board.today}`} tone="good" />
+        <StatCard label="判定待ち" icon={<HourglassIcon />} value={String(count("due"))} sub="判定日を過ぎた" tone={count("due") ? "warn" : "good"} />
+        <StatCard label="判定不能" icon={<CircleHelpIcon />} value={String(count("no-data"))} sub="記録なし・古い記録" tone={count("no-data") ? "bad" : "good"} />
+        <StatCard label="未開始・保留" icon={<CirclePauseIcon />} value={String(count("not-started") + count("paused"))} sub="開始日なし / 実験台帳で保留" tone="neutral" />
+      </Grid>
 
       <Section title="pilot 一覧" count={board.rows.length}>
         <DataTable columns={["pilot", "状態", "開始日", "判定日", "指標と現在値", "参照"]}>
@@ -63,19 +66,19 @@ export default function PilotBoardPage() {
               <Cell>
                 <div className="min-w-48">
                   <div className="font-semibold">{row.title}</div>
-                  <div className="text-[12px] text-console-muted">{row.route}</div>
+                  <div className="text-xs text-muted-foreground">{row.route}</div>
                 </div>
               </Cell>
               <Cell>
-                <div className="min-w-40 space-y-1">
+                <div className="flex min-w-40 flex-col gap-1">
                   <StatusBadge tone={stateTone[row.state]}>{stateLabel[row.state]}</StatusBadge>
-                  <div className="text-[12px] text-console-muted">{row.stateNote}</div>
+                  <div className="text-xs text-muted-foreground">{row.stateNote}</div>
                 </div>
               </Cell>
               <Cell>
                 <div className="min-w-28">
                   <div>{row.start ?? "—"}</div>
-                  <div className="text-[11px] text-console-muted">{row.startEvidence}</div>
+                  <div className="text-xs text-muted-foreground">{row.startEvidence}</div>
                 </div>
               </Cell>
               <Cell>
@@ -83,14 +86,14 @@ export default function PilotBoardPage() {
                   <div>
                     {row.judgeDate ?? "—"}
                     {row.daysLeft !== null && row.daysLeft > 0 ? (
-                      <span className="ml-1 text-[12px] text-console-muted">(残り {row.daysLeft} 日)</span>
+                      <span className="ml-1 text-xs text-muted-foreground">(残り {row.daysLeft} 日)</span>
                     ) : null}
                   </div>
-                  <div className="text-[11px] text-console-muted">{row.judgeSource}</div>
+                  <div className="text-xs text-muted-foreground">{row.judgeSource}</div>
                 </div>
               </Cell>
               <Cell>
-                <ul className="min-w-72 space-y-1.5">
+                <ul className="flex min-w-72 flex-col gap-1.5">
                   {row.metrics.map((m) => (
                     <li key={m.label}>
                       <div className="flex flex-wrap items-center gap-1.5">
@@ -98,7 +101,7 @@ export default function PilotBoardPage() {
                         <span className="font-medium">{m.label}</span>
                         {m.value ? <span>{m.value}</span> : null}
                       </div>
-                      <div className="text-[11px] text-console-muted">
+                      <div className="text-xs text-muted-foreground">
                         {m.note}
                         {m.observedAt ? ` (記録日 ${m.observedAt})` : ""}
                       </div>
@@ -107,12 +110,12 @@ export default function PilotBoardPage() {
                 </ul>
               </Cell>
               <Cell nowrap muted>
-                <code className="text-[11px]">{row.card}</code>
+                <code className="font-mono text-xs">{row.card}</code>
               </Cell>
             </Row>
           ))}
         </DataTable>
       </Section>
-    </div>
+    </>
   );
 }

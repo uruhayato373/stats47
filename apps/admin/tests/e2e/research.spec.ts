@@ -17,8 +17,10 @@ test("調査カタログをテーマで絞り込み、公式出典を確認で�
   await expect(page.getByText("40/40", { exact: true })).toBeVisible();
   await expect(page.getByText("20/20", { exact: true })).toBeVisible();
 
-  await page.getByRole("combobox", { name: "stats47テーマで絞り込み" }).click();
-  await page.getByRole("option", { name: /人口動態/ }).click();
+  // テーマの選択は標準のプルダウン (NativeSelect)。選択肢の文言に件数が付くので、値を引いてから選ぶ
+  const theme = page.getByRole("combobox", { name: "stats47テーマで絞り込み" });
+  const value = await theme.locator("option", { hasText: "人口動態" }).first().getAttribute("value");
+  await theme.selectOption(value ?? "");
 
   await expect(page.getByText(/17 \/ 71 件/)).toBeVisible();
   await expect(

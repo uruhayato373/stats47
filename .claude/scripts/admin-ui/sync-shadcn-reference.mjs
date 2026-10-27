@@ -1,60 +1,101 @@
 #!/usr/bin/env node
 /**
- * sync-shadcn-reference.mjs — 管理画面の UI 部品と比べる正 (テンプレート) のソースを取り直す
+ * sync-shadcn-reference.mjs — 管理画面の UI 部品と比べる shadcn/ui 公式ソースを取り直す
  * ---------------------------------------------------------------------------
- * 正は shadcndashboard/next-shadcn-dashboard (MIT・Base UI 版 shadcn の base-nova + style-lyra) の
- * 固定コミットの components/ui/<name>.tsx (2026-10-27 オーナー決定「テンプレートを正としてサイトを寄せる」)。
- * shadcn 公式 registry の base-nova とはクラスが一部違うので、registry ではなくテンプレートを取る。
+ * 公式の registry（https://ui.shadcn.com/r/styles/base-nova/<name>.json）から ui/<name>.tsx を取り出し、
  * .claude/config/shadcn-reference/<name>.tsx に保存する。check-shadcn-parity はこの保存物（コミット済み）と
  * apps/admin/components/ui/*.tsx を比べるので、CI はネットワークに依存しない。
- * テンプレートを追従させるときは TEMPLATE_SHA を上げて手で実行し、差分を見てから部品側を追従させる。
+ * 公式が更新されたときだけ手で実行し、差分を見てから部品側を追従させる（ADMIN-UI-SHADCN-01）。
+ *
+ * base-nova の registry は、アイコンを `<IconPlaceholder lucide="X" tabler="…" … />` で持つ（公式 CLI が
+ * components.json の iconLibrary に合わせて書き換える前の形）。管理画面は lucide なので、公式 CLI と同じく
+ * `<X … />` + `import { X } from "lucide-react"` に置き換えてから保存する（保存物と部品で同じ変換）。
+ * 2026-10-27 に new-york-v4 (Radix) から base-nova (Base UI) へ移した（ADMIN-UI-BASEUI-01）。
  *
  * 使い方: node .claude/scripts/admin-ui/sync-shadcn-reference.mjs            # 管理画面に置いている部品の分だけ取り直す
  *         node .claude/scripts/admin-ui/sync-shadcn-reference.mjs dialog     # 名前を指定して取る（新しく部品を足すとき）
- *         --install  取った部品を apps/admin/components/ui/ に置く (既存は上書きしない)
+ *         … --install           # apps/admin/components/ui/ にも置く（既存の部品は上書きしない）
+ *         … --install --force   # 既存の部品も公式で置き換える（系統の移行・公式の大きな更新のとき）
  * exit: 0=全件取得 / 2=取得できないものがあった（ネットワーク・名前違い）
  * ---------------------------------------------------------------------------
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..', '..', '..');
 const UI_DIR = join(ROOT, 'apps/admin/components/ui');
+const HOOKS_DIR = join(ROOT, 'apps/admin/hooks');
 const OUT = join(ROOT, '.claude/config/shadcn-reference');
-const TEMPLATE_REPO = 'shadcndashboard/next-shadcn-dashboard';
-const TEMPLATE_SHA = '91deb10215bc6b567d881c608a9ad794e894994f';
+export const STYLE = 'base-nova';
 const TAG = '[sync-shadcn-reference]';
 
-const INSTALL = process.argv.includes('--install');
-const args = process.argv.slice(2).filter((a) => a !== '--install');
-const names = args.length
-  ? args
-  : readdirSync(UI_DIR).filter((f) => f.endsWith('.tsx')).map((f) => f.replace(/\.tsx$/, ''));
-mkdirSync(OUT, { recursive: true });
+const ICON_PROPS = /\s+(?:lucide|tabler|hugeicons|phosphor|remixicon)="[^"]*"/g;
 
-let failed = 0;
-for (const name of names) {
-  const url = `https://raw.githubusercontent.com/${TEMPLATE_REPO}/${TEMPLATE_SHA}/components/ui/${name}.tsx`;
-  try {
-    // 会社 PC のプロキシ越しでも通る curl を使う（fetch は証明書失効確認で落ちる・measurement-incidents.md）
-    const body = execFileSync('curl', ['-sS', '--ssl-no-revoke', '--fail', '--max-time', '30', url], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
-    const content = body.replace(/\r\n/g, '\n');
-    writeFileSync(join(OUT, `${name}.tsx`), content, 'utf8');
-    if (INSTALL) {
-      // テンプレートの別名を admin の alias へ直すだけ (クラスには触れない)。既存の部品は上書きしない
-      const target = join(UI_DIR, `${name}.tsx`);
-      if (existsSync(target)) throw new Error(`${name}.tsx は既にある (上書きしない。差分は check-shadcn-parity で見る)`);
-      const rewritten = content.replace(/from "@\/lib\/utils"/g, 'from "@/lib/cn"');
-      const header = `// テンプレート (${TEMPLATE_REPO}@${TEMPLATE_SHA.slice(0, 8)}・Base UI) の ${name}.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。\n// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/${name}.tsx・例外: .claude/config/shadcn-parity-allow.json）。\n`;
-      writeFileSync(target, header + rewritten, 'utf8');
-    }
-    console.log(`${TAG} ${name} ← ${url}（${content.length} 字）`);
-  } catch (e) {
-    failed++;
-    console.error(`${TAG} ✗ ${name}: ${String(e.message).split('\n')[0]}`);
+/** `<IconPlaceholder lucide="X" … />` を `<X … />` にし、lucide-react の import を足す（テストから使う純関数）。 */
+export function resolveIconPlaceholders(src) {
+  const icons = new Set();
+  let out = src.replace(/<IconPlaceholder\b([\s\S]*?)\/>/g, (whole, attrs) => {
+    const lucide = /\blucide="([A-Za-z0-9]+)"/.exec(attrs);
+    if (!lucide) throw new Error(`IconPlaceholder に lucide の名前が無い: ${whole.slice(0, 80)}`);
+    icons.add(lucide[1]);
+    const rest = attrs.replace(ICON_PROPS, '').replace(/\s+$/, '');
+    return `<${lucide[1]}${rest} />`;
+  });
+  const importLine = /^import \{ IconPlaceholder \} from "@\/app\/\(create\)\/components\/icon-placeholder"\n/m;
+  if (icons.size) {
+    if (!importLine.test(out)) throw new Error('IconPlaceholder の import 行が見つからない');
+    out = out.replace(importLine, `import { ${[...icons].sort().join(', ')} } from "lucide-react"\n`);
   }
+  if (/IconPlaceholder/.test(out)) throw new Error('IconPlaceholder が残っている');
+  return out;
 }
-console.log(`${TAG} ${names.length} 件中 取得 ${names.length - failed} 件 → ${OUT}`);
-process.exitCode = failed ? 2 : 0;
+
+/** registry 内の別名を admin の alias へ直す（クラスには触れない）。 */
+export function rewriteAliases(src) {
+  return src
+    .replace(/from "cn"/g, 'from "@/lib/cn"')
+    .replace(new RegExp(`@/registry/${STYLE}/ui/`, 'g'), '@/components/ui/')
+    .replace(new RegExp(`@/registry/${STYLE}/hooks/`, 'g'), '@/hooks/');
+}
+
+function main() {
+  const INSTALL = process.argv.includes('--install');
+  const FORCE = process.argv.includes('--force');
+  const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+  const names = args.length
+    ? args
+    : readdirSync(UI_DIR).filter((f) => f.endsWith('.tsx')).map((f) => f.replace(/\.tsx$/, ''));
+  mkdirSync(OUT, { recursive: true });
+
+  let failed = 0;
+  for (const name of names) {
+    const url = `https://ui.shadcn.com/r/styles/${STYLE}/${name}.json`;
+    try {
+      // 会社 PC のプロキシ越しでも通る curl を使う（fetch は証明書失効確認で落ちる・measurement-incidents.md）
+      const body = execFileSync('curl', ['-sS', '--ssl-no-revoke', '--fail', '--max-time', '30', url], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+      const item = JSON.parse(body);
+      const file = item.files?.find((f) => /\/(ui|hooks)\/[\w-]+\.tsx?$/.test(f.path) && f.path.split('/').pop().replace(/\.tsx?$/, '') === name);
+      if (!file?.content) throw new Error('registry に ui/<name>.tsx が無い');
+      const isHook = /\/hooks\//.test(file.path);
+      const ext = file.path.endsWith('.ts') ? 'ts' : 'tsx';
+      const content = resolveIconPlaceholders(file.content.replace(/\r\n/g, '\n'));
+      writeFileSync(join(OUT, `${name}.${ext}`), content, 'utf8');
+      if (INSTALL) {
+        const target = join(isHook ? HOOKS_DIR : UI_DIR, `${name}.${ext}`);
+        if (existsSync(target) && !FORCE) throw new Error(`${name}.${ext} は既にある (上書きしない。差分は check-shadcn-parity で見る。置き換えるときは --force)`);
+        const header = `// shadcn/ui 公式（${STYLE}）の ${name}.${ext} をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。\n// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/${name}.${ext}・例外: .claude/config/shadcn-parity-allow.json）。\n`;
+        writeFileSync(target, header + rewriteAliases(content), 'utf8');
+      }
+      console.log(`${TAG} ${name} ← ${url}（${file.content.length} 字）`);
+    } catch (e) {
+      failed++;
+      console.error(`${TAG} ✗ ${name}: ${String(e.message).split('\n')[0]}`);
+    }
+  }
+  console.log(`${TAG} ${names.length} 件中 取得 ${names.length - failed} 件 → ${OUT}`);
+  return failed ? 2 : 0;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) process.exitCode = main();

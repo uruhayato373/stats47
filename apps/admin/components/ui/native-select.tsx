@@ -1,8 +1,8 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の native-select.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。
-// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/native-select.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// shadcn/ui 公式（base-nova）の native-select.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/native-select.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 import * as React from "react"
-
 import { cn } from "@/lib/cn"
+
 import { ChevronDownIcon } from "lucide-react"
 
 type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
@@ -29,7 +29,10 @@ function NativeSelect({
         className="h-8 w-full min-w-0 appearance-none rounded-lg border border-input bg-transparent py-1 pr-8 pl-2.5 text-sm transition-colors outline-none select-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] data-[size=sm]:py-0.5 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40"
         {...props}
       />
-      <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground select-none" aria-hidden="true" data-slot="native-select-icon" />
+      <ChevronDownIcon
+        className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground select-none"
+        aria-hidden="true"
+        data-slot="native-select-icon" />
     </div>
   )
 }

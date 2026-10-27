@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { CHANNELS, channelsOf } from "@/lib/channel-registry";
-import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs } from "@/lib/nav-registry";
+import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs, navTrail } from "@/lib/nav-registry";
 
 import domainsConfig from "../../../../config/domains.json";
 
@@ -85,5 +85,19 @@ describe("nav-registry (左メニューの SSOT)", () => {
   it("ホームは / だけ", () => {
     expect(isNavItemActive("/", params(), "/", hrefs)).toBe(true);
     expect(isNavItemActive("/ops", params(), "/", hrefs)).toBe(false);
+  });
+
+  it("上部バーの現在地は、メニューと同じ判定でグループ ＞ 枝 ＞ ページを返す", () => {
+    const labels = (p: string, q?: string) => navTrail(p, params(q)).map((c) => c.label);
+    const covers = labels("/content/note/covers");
+    expect(covers.at(-1)).toBe("note");
+    expect(covers).toContain("チャネル別");
+    expect(labels("/strategy/lanes").at(-1)).toBe("領域と構え");
+    expect(labels("/")).toEqual(["ホーム"]);
+    expect(labels("/no-such-page")).toEqual([]);
+    for (const href of navHrefs(NAV_GROUPS)) {
+      const [p, q] = href.split("?");
+      expect(navTrail(p, params(q)).at(-1)?.href, href).toBe(href);
+    }
   });
 });

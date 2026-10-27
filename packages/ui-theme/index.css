@@ -1,4 +1,0 @@
-/* テンプレートの見た目の入口 (管理画面用)。部品の見た目 + テンプレートの oklch トークンをそのまま読む。
-   公開サイトは色の参照が hsl(var(--x)) なので、base.css と tokens-hsl.css を個別に読む (README)。 */
-@import "./base.css";
-@import "./tokens.css";

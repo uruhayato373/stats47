@@ -20,13 +20,13 @@ export function ActualImage({
   const [failed, setFailed] = useState(false);
   if (!src)
     return (
-      <p className="p-6 text-sm text-console-muted">
+      <p className="p-6 text-sm text-muted-foreground">
         画像の保存記録がありません
       </p>
     );
   if (failed)
     return (
-      <div className="space-y-2 p-4 text-sm text-console-muted">
+      <div className="space-y-2 p-4 text-sm text-muted-foreground">
         <p>
           画像を取得できません。保存先への接続・移行状況を確認してください。
         </p>

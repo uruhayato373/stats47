@@ -1,6 +1,7 @@
 /* テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102 app/globals.css) の色・角丸トークン。
    値はテンプレートと同じにする (2026-10-27 オーナー決定「テンプレートを正としてサイトを寄せる」)。
-   アプリ固有の色 (管理画面の console-* 等) は各アプリの globals.css に置き、ここへ足さない。 */
+   サイト固有の色 (状態色 positive / negative 等) は apps/web/src/app/globals.css に置き、ここへ足さない。
+   公開サイトはこのファイルを直接は読まず、build-hsl-tokens.mjs が作る tokens-hsl.css を読む。 */
 
 @theme inline {
   --color-background: var(--background);

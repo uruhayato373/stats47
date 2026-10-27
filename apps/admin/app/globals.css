@@ -1,9 +1,10 @@
 @import "tailwindcss";
-/* テンプレート (shadcndashboard/next-shadcn-dashboard) の色・角丸トークンと Base UI 部品の lyra スタイル。
-   2026-10-27 オーナー決定「テンプレートを正としてサイトを寄せる」。中身は packages/ui-theme/README.md */
-@import "@stats47/ui-theme";
+/* shadcn 公式 (base-nova) が前提にする 2 つ: 開閉のアニメーションと、data-open / data-horizontal などの独自 variant (shadcn init と同じ) */
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-/* ── Tailwind v4 (CSS-first) ── 契約: .claude/rules/admin-ui.md */
+/* ── Tailwind v4 (CSS-first) ──
+   2026-10-27 に shadcn 公式 base-nova (Base UI) + neutral テーマへ移した。公式 dashboard-01 の見た目にそろえる。契約: .claude/rules/admin-ui.md */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* v3 互換: v4 の text-* は行高を単位なしの比率で持ち、子孫へ比率として継承される。v3 と同じ rem 値に戻す */
@@ -34,40 +35,142 @@
   --color-console-neutral: rgb(var(--console-neutral));
 }
 
-/* button の cursor は v4 で default になったので pointer に戻す (doboku-note admin-app と同じ) */
+/* shadcn トークン (公式 v4 と同じ形: :root / .dark に完全な色の値、@theme inline で参照)。
+   base-nova の部品は var(--secondary) などを color-mix で直接使うので、HSL の数値だけで持たない (2026-10-27) */
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* 参考 (shadcndashboard.dev) と同じ Geist。日本語は Geist に無いので OS のゴシックで補う */
+  --font-sans: var(--font-geist-sans), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* 公式 v4 の base と同じく、border の既定色を --border (light/dark に追従) にする。button の cursor は default → pointer に戻す */
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border);
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
 }
 
-/* ── 管理画面固有の色 ──
-   既定はライト。ダークは `.dark` の 1 経路だけで表現する (上の @custom-variant dark と揃える)。
-   layout.tsx の head inline script が「保存値 or 既定ライト」を描画前に解決して .dark を付ける。
-   shadcn の色 (background / card / primary …) はテンプレートの値 (@stats47/ui-theme) を使い、ここで上書きしない。
+/* ── テーマトークン ──
+   既定はライト。ダークは `.dark` の 1 経路だけで表現する
+   (上の @custom-variant dark と揃える)。
+   layout.tsx の head inline script が「保存値 or 既定ライト」を描画前に解決して
+   .dark を付けるため、prefers-color-scheme のメディアクエリは持たない
+   (同じパレットを 2 箇所に書くとドリフトするため)。
 
    ★console-* は空白区切りの RGB チャンネルで持つ。hex や rgb() 関数形にすると
-     Tailwind の alpha modifier (bg-console-bg/95 等) が効かなくなる。
+     Tailwind の alpha modifier (bg-console-bg/95 等・実測 25 箇所) が効かなくなる。
    色を足すときは :root と .dark の両方に同じキーを足すこと。 */
 :root {
   color-scheme: light;
-  /* 面・文字・線はテンプレートの白黒に合わせる (bg = background / card = card / border = border の近似 RGB) */
   --console-bg: 255 255 255;
   --console-card: 255 255 255;
   --console-border: 229 229 229;
   --console-fg: 10 10 10;
   --console-muted: 115 115 115;
-  --console-accent: 23 23 23;
-  /* ステータス色。ライト地で読める濃さにする。
-     2026-08-18 に実測して選定 (白地に対するコントラスト):
-       good  green-700 5.02 / warn amber-700 5.02 / info sky-700 5.93 / bad red-700 6.47
+  --console-accent: 37 99 235;
+  /* ステータス色。ライト地で読める濃さにする (ダーク用の淡い緑/黄をそのまま
+     使うと白地でコントラストが落ちる)。
+     2026-08-18 に実測して選定 (ページ地 #f4f6fa / カード地 #fff に対するコントラスト):
+       good  green-700 4.64 / 5.02   (green-600 は 3.05 で AA 未達)
+       warn  amber-700 4.64 / 5.02
+       info  sky-700   5.48 / 5.93   (sky-600 は 3.79 で AA 未達)
+       bad   red-700   5.98 / 6.47   (red-600 は 4.46 で僅かに未達)
      neutral は進捗バーの塗り (図形) にしか使わないので AA 対象外。 */
   --console-good: 21 128 61;
   --console-warn: 180 83 9;
   --console-info: 3 105 161;
   --console-bad: 185 28 28;
   --console-neutral: 163 163 163;
+
+  /* shadcn トークン (components/ui/* の公式部品が参照)。
+     console パレットに合わせ、同等 primitive の再実装を避ける。 */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+  /* チャートの系列色。参考 (shadcndashboard.dev) と同じく主色 (黒) の濃淡の単色にする。系列は明度で見分け、
+     2 本以上は凡例と tooltip を必ず出す (TrendChart が出す)。状態の色 (console-good 等) は系列に使わない */
+  --chart-1: oklch(0.205 0 0);
+  --chart-2: oklch(0.439 0 0);
+  --chart-3: oklch(0.556 0 0);
+  --chart-4: oklch(0.708 0 0);
+  --chart-5: oklch(0.87 0 0);
+  /* 公式 Sidebar のトークン (neutral の値) */
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -77,21 +180,55 @@
   --console-border: 38 38 38;
   --console-fg: 250 250 250;
   --console-muted: 161 161 161;
-  --console-accent: 229 229 229;
+  --console-accent: 96 165 250;
   --console-good: 74 222 128;
   --console-warn: 251 191 36;
   --console-info: 56 189 248;
   --console-bad: 248 113 113;
   --console-neutral: 82 82 82;
+
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  /* dark の系列色 (同じ濃淡を dark の地に向けて反転) */
+  --chart-1: oklch(0.922 0 0);
+  --chart-2: oklch(0.708 0 0);
+  --chart-3: oklch(0.556 0 0);
+  --chart-4: oklch(0.439 0 0);
+  --chart-5: oklch(0.371 0 0);
+  --sidebar: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
 /* ★@layer base に入れる。v4 はユーティリティを @layer utilities に置くので、レイヤー外の自作 CSS は詳細度に関係なく勝つ
    (`a { color: inherit }` が text-console-accent を上書きしてリンクが黒くなった。2026-09-30 実測) */
 @layer base {
   body {
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-      "Yu Gothic", "Segoe UI", sans-serif;
+    background: rgb(var(--console-bg));
+    color: rgb(var(--console-fg));
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 

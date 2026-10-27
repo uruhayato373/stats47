@@ -1,5 +1,7 @@
+import { ClockIcon, KeyRoundIcon, LaptopIcon, ShieldAlertIcon, TerminalIcon } from "lucide-react";
+
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
-import { Section, Stack } from "@/components/layout-primitives";
+import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { authCredentialRows, type AuthCredentialRow } from "@/lib/server/auth-credentials";
 import { hasError } from "@/lib/server/state-io";
@@ -21,13 +23,13 @@ function action(r: AuthCredentialRow): string | null {
 }
 
 function localCell(r: AuthCredentialRow) {
-  if (r.stored === null) return <span className="text-console-muted">?</span>;
+  if (r.stored === null) return <span className="text-muted-foreground">?</span>;
   return r.stored ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="warn">未</StatusBadge>;
 }
 
 function ciCell(r: AuthCredentialRow) {
-  if (!r.ciCredential && !r.ciStored) return <span className="text-console-muted">—</span>;
-  if (r.ciSecrets === null) return <span className="text-console-muted">?</span>;
+  if (!r.ciCredential && !r.ciStored) return <span className="text-muted-foreground">—</span>;
+  if (r.ciSecrets === null) return <span className="text-muted-foreground">?</span>;
   if (!r.ciSecrets) return <StatusBadge tone="warn">未</StatusBadge>;
   // CI が実際に使うのは ciCredential だけ。保管だけのものは「保管」(理由は自動ログイン欄のツールチップ)
   return r.ciCredential ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="info">保管</StatusBadge>;
@@ -37,10 +39,10 @@ export default function AuthCredentialsPage() {
   const v = authCredentialRows();
   if (hasError(v)) {
     return (
-      <div className="space-y-8">
+      <>
         <PageHeading title="ログインと資格情報" source=".claude/config/auth-credentials.json" />
         <ErrorNote error={v.error} />
-      </div>
+      </>
     );
   }
   const todo = v.rows.filter((r) => action(r));
@@ -49,17 +51,13 @@ export default function AuthCredentialsPage() {
   const ciMissing = v.rows.filter((r) => (r.ciCredential || r.ciStored) && r.ciSecrets === false);
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="ログインと資格情報" source=".claude/config/auth-credentials.json" />
-      <Stack>
-        <div className="grid gap-2 sm:grid-cols-3">
-          <StatCard label="この PC の登録" value={`${v.rows.length - unregistered.length}/${v.rows.length}`} />
-          <StatCard label="要対応" value={todo.length} tone={todo.length > 0 ? "warn" : "good"} />
-          <StatCard
-            label="確認した時刻"
-            value={v.generatedAt ? <Freshness iso={v.generatedAt} /> : "未確認"}
-          />
-        </div>
+      <Grid min="sm">
+        <StatCard label="この PC の登録" icon={<LaptopIcon />} value={`${v.rows.length - unregistered.length}/${v.rows.length}`} />
+        <StatCard label="要対応" icon={<ShieldAlertIcon />} value={todo.length} tone={todo.length > 0 ? "warn" : "good"} />
+        <StatCard label="確認した時刻" icon={<ClockIcon />} value={v.generatedAt ? <Freshness iso={v.generatedAt} /> : "未確認"} />
+      </Grid>
 
         <Section title="サービス">
           <DataTable columns={["サービス", "ログイン ID", "この PC", "CI", "自動ログイン", "要対応"]}>
@@ -74,12 +72,12 @@ export default function AuthCredentialsPage() {
                   <Cell nowrap>
                     <span title={r.policyNote}>{r.autoLogin ? "する" : "しない"}</span>
                   </Cell>
-                  <Cell nowrap>{a ? <StatusBadge tone="bad">{a}</StatusBadge> : <span className="text-console-muted">—</span>}</Cell>
+                  <Cell nowrap>{a ? <StatusBadge tone="bad">{a}</StatusBadge> : <span className="text-muted-foreground">—</span>}</Cell>
                 </Row>
               );
             })}
           </DataTable>
-          <p className="mt-1 text-[11px] text-console-muted">
+          <p className="text-xs text-muted-foreground">
             CI は note・KDP・A8・もしも・楽天がパスワードを使う (セッション切れの入り直し)。ココナラは自動操作が拒否されるので人が入り直す。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
             登録状況はページを開くたびに調べる。パスワードは表示も読み出しもしない。
           </p>
@@ -88,26 +86,26 @@ export default function AuthCredentialsPage() {
         {toRegister.length > 0 && (
           <PanelCard
             title="未登録・ID 不一致のサービスを登録する"
+            icon={<KeyRoundIcon />}
             description="ターミナルで実行し、聞かれたらパスワードを入力する。登録後にこのページを再読み込みする"
           >
             <Stack gap="sm">
               {toRegister.map((r) => (
-                <code key={r.id} className="text-[12px]">{r.registerCommand}</code>
+                <code key={r.id} className="font-mono text-xs">{r.registerCommand}</code>
               ))}
             </Stack>
           </PanelCard>
         )}
 
         {ciMissing.length > 0 && (
-          <PanelCard title="CI の Secrets を登録する" description="ID はこの PC に登録済みのものを自動で入れる。聞かれたらパスワードだけを入力する">
+          <PanelCard title="CI の Secrets を登録する" icon={<TerminalIcon />} description="ID はこの PC に登録済みのものを自動で入れる。聞かれたらパスワードだけを入力する">
             <Stack gap="sm">
               {ciMissing.map((r) => (
-                <code key={r.id} className="text-[12px]">npm run auth:ci-secret -- {r.id}</code>
+                <code key={r.id} className="font-mono text-xs">npm run auth:ci-secret -- {r.id}</code>
               ))}
             </Stack>
           </PanelCard>
         )}
-      </Stack>
-    </div>
+    </>
   );
 }

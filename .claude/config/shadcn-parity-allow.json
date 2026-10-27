@@ -1,5 +1,5 @@
 {
-  "_comment": "check-shadcn-parity の例外。管理画面の UI 部品 (apps/admin/components/ui/*.tsx) は 正 (テンプレート・Base UI 版 shadcn) (.claude/config/shadcn-reference/*.tsx) と同じクラスにするのが原則で、ここに書いた差だけを許す。1 件ごとに理由を書く。登録した差が無くなったら (公式へ寄せたら) 検査が知らせるので行を消す (ADMIN-UI-SHADCN-01)。",
+  "_comment": "check-shadcn-parity の例外。管理画面の UI 部品 (apps/admin/components/ui/*.tsx) は shadcn/ui 公式 (.claude/config/shadcn-reference/*.tsx) と同じクラスにするのが原則で、ここに書いた差だけを許す。1 件ごとに理由を書く。登録した差が無くなったら (公式へ寄せたら) 検査が知らせるので行を消す (ADMIN-UI-SHADCN-01)。",
   "components": {
     "badge": {
       "cva:badgeVariants:variant.success": {
@@ -33,6 +33,29 @@
           "text-console-warn"
         ],
         "reason": "同上。「一部・暫定・未実施・不足あり」用。色は console-warn"
+      }
+    },
+    "card": {
+      "slot:card": {
+        "missing": [
+          "rounded-xl"
+        ],
+        "extra": [
+          "rounded-none"
+        ],
+        "reason": "オーナー指定の見本 (shadcndashboard.dev・2026-10-27 に実測) はカードの角が直角 (border-radius 0) で、格子の 1px 線を共有して並ぶ。角丸を外すのは Card の面だけで、ボタン・入力・Badge の角丸は公式のまま"
+      },
+      "slot:card-header": {
+        "missing": [
+          "rounded-t-xl"
+        ],
+        "reason": "同上 (見出しの上の角)"
+      },
+      "slot:card-footer": {
+        "missing": [
+          "rounded-b-xl"
+        ],
+        "reason": "同上 (下の帯の角)"
       }
     }
   }

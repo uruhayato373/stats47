@@ -36,7 +36,7 @@ export function MediaWorkspaceNav({
         aria-label="メニューを切り替える"
       />
       {links.map(([key, label, href]) => (
-        <Link href={href} aria-current={active === key ? 'page' : undefined} onClick={(event) => {
+        <Link key={key} href={href} aria-current={active === key ? 'page' : undefined} onClick={(event) => {
               if (
                 active === key ||
                 (dirty &&
@@ -45,7 +45,7 @@ export function MediaWorkspaceNav({
                   ))
               )
                 event.preventDefault();
-            }} key={key} data-slot="button" className={buttonVariants({ variant: active === key ? 'default' : 'outline', size: "sm" })}>
+            }} className={buttonVariants({ variant: active === key ? 'default' : 'outline', size: "sm" })}>
             {label}
           </Link>
       ))}

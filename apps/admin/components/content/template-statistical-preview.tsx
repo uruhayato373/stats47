@@ -40,7 +40,7 @@ function SamplePreview({
         target="_blank"
         rel="noreferrer"
         aria-label={label + 'のサンプル画像を原寸で開く'}
-        className="mx-auto block w-full max-w-[320px] rounded-md border border-console-border bg-white"
+        className="mx-auto block w-full max-w-[320px] rounded-md border border-border bg-white"
       >
         <ActualImage
           src={image.src}
@@ -49,7 +49,7 @@ function SamplePreview({
           onDimensions={setSize}
         />
       </a>
-      <figcaption className="space-y-1 text-sm text-console-muted">
+      <figcaption className="space-y-1 text-sm text-muted-foreground">
         <p>
           {ratio
             ? ratio + ' · ' + width + ' × ' + height + 'px'
@@ -85,7 +85,7 @@ function SampleRow({ sample }: { sample: StatisticalSampleView }) {
                 label={labels[channel] + '・' + sample.statistic}
               />
             ) : (
-              <div className="rounded-md border border-dashed border-console-border p-6 text-sm text-console-muted">
+              <div className="rounded-md border border-dashed border-border p-6 text-sm text-muted-foreground">
                 サンプル画像を準備中
               </div>
             )}
@@ -93,7 +93,7 @@ function SampleRow({ sample }: { sample: StatisticalSampleView }) {
         ))}
       </div>
       {sample.binding && (
-        <div aria-label="データと表示設定" className="space-y-1 border-t border-console-border pt-3 text-sm text-console-muted">
+        <div aria-label="データと表示設定" className="space-y-1 border-t border-border pt-3 text-sm text-muted-foreground">
           {sample.templateId === 'tile-map' && <p>
             配色：{sample.binding.visualization.colorScheme.replace(/^interpolate/, '')}
             {' · '}{sample.binding.visualization.colorSchemeType === 'diverging' ? '発散色' : '単方向'}
@@ -135,7 +135,7 @@ export function TemplateStatisticalPreview({
           {TEMPLATE_CHANNELS.map((channel) => (
             <section key={channel} className="space-y-3">
               <h3 className="font-semibold">{labels[channel]}</h3>
-              <p className="text-sm text-console-muted">サンプル画像を準備中</p>
+              <p className="text-sm text-muted-foreground">サンプル画像を準備中</p>
             </section>
           ))}
         </div>
@@ -145,16 +145,16 @@ export function TemplateStatisticalPreview({
     <div className="space-y-5">
       <SampleRow sample={samples[0]} />
       {!!samples[0].basisImages?.length && (
-        <section aria-label="公開済みの基準画像" className="space-y-3 border-t border-console-border pt-4">
+        <section aria-label="公開済みの基準画像" className="space-y-3 border-t border-border pt-4">
           <h3 className="font-medium">公開済みの基準画像</h3>
           <div className="grid items-start gap-6 @min-[600px]:grid-cols-2">
             {samples[0].basisImages.map((reference) => (
               <figure key={reference.src} className="min-w-0 space-y-2">
                 <figcaption className="text-sm">{reference.label}</figcaption>
-                <a href={reference.src} target="_blank" rel="noreferrer" aria-label={reference.label + 'の原寸を開く'} className="block w-full max-w-[320px] rounded-md border border-console-border bg-white">
+                <a href={reference.src} target="_blank" rel="noreferrer" aria-label={reference.label + 'の原寸を開く'} className="block w-full max-w-[320px] rounded-md border border-border bg-white">
                   <ActualImage src={reference.src} alt={reference.label} eager />
                 </a>
-                {reference.pageUrl && <a href={reference.pageUrl} target="_blank" rel="noreferrer" className="text-sm text-console-accent underline">公開先</a>}
+                {reference.pageUrl && <a href={reference.pageUrl} target="_blank" rel="noreferrer" className="text-sm text-primary underline">公開先</a>}
               </figure>
             ))}
           </div>

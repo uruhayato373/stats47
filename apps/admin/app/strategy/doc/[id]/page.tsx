@@ -18,23 +18,23 @@ export default async function StrategyDocumentPage({
   if (!document) notFound();
 
   return (
-    <div className="space-y-6">
+    <>
       <PageHeading title={document.title} source={document.path}>
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <StatusBadge>{document.status ?? "status不明"}</StatusBadge>
-          <span className="text-[11px] text-console-muted">
+          <span className="text-xs text-muted-foreground">
             owner: {document.owner} · updated: {document.updated ?? "不明"}
           </span>
         </div>
       </PageHeading>
-      <p className="text-sm text-console-muted">{document.role}</p>
+      <p className="text-sm text-muted-foreground">{document.role}</p>
       <MarkdownArticle>{document.body}</MarkdownArticle>
       <Link
-        className="text-sm font-medium text-console-info hover:underline"
+        className="text-sm font-medium underline-offset-4 hover:underline"
         href="/strategy"
       >
         ← 方針へ戻る
       </Link>
-    </div>
+    </>
   );
 }

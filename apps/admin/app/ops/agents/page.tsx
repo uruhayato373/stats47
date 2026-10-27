@@ -1,7 +1,8 @@
+import { AlertTriangleIcon, BotIcon, CircleDollarSignIcon, CpuIcon, LightbulbIcon, PuzzleIcon, TerminalIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 
-import { Cell, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
-import { Grid, Section, Stack } from "@/components/layout-primitives";
+import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { buttonVariants } from "@/components/ui/button";
 import { AGENT_MODEL_SOURCES, agentModelCatalog } from "@/lib/server/agent-models";
@@ -20,7 +21,7 @@ const MODEL_ORDER = ["haiku", "sonnet", "opus", "fable", "inherit"] as const;
 const MODEL_TONE: Record<string, Tone> = { haiku: "good", sonnet: "info", opus: "warn", fable: "bad" };
 
 function modelBadge(model: string | null) {
-  if (!model) return <span className="text-console-muted">未指定</span>;
+  if (!model) return <span className="text-muted-foreground">未指定</span>;
   const family = MODEL_ORDER.find((m) => model.includes(m)) ?? model;
   return <StatusBadge tone={MODEL_TONE[family] ?? "neutral"}>{model}</StatusBadge>;
 }
@@ -62,10 +63,10 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
   const v = agentModelCatalog();
   if (hasError(v)) {
     return (
-      <div className="space-y-8">
+      <>
         <PageHeading title="エージェントとモデル" source={AGENT_MODEL_SOURCES} />
         <ErrorNote error={v.error} />
-      </div>
+      </>
     );
   }
 
@@ -87,26 +88,37 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
   const ciCost = (usage?.ci ?? []).reduce((n, c) => n + c.costUsd, 0);
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="エージェントとモデル" source={AGENT_MODEL_SOURCES} />
-      <Stack>
         <Grid min="sm">
-          <StatCard label="エージェント" value={v.agents.length} sub={models.map((m) => `${m} ${countBy(m)}`).join("・")} />
-          <StatCard label="スキル" value={v.skills.length} sub={`担当 agent のモデルが引けない ${unowned}`} tone={unowned ? "warn" : "good"} />
-          <StatCard label="CI の無人実行" value={v.ciRuns.length} sub={[...new Set(v.ciRuns.map((r) => r.model))].join("・") || "—"} />
-          <StatCard label="読み取りエラー" value={v.errors.length} tone={v.errors.length ? "bad" : "good"} />
+          <StatCard label="エージェント" icon={<BotIcon />} value={v.agents.length} sub={models.map((m) => `${m} ${countBy(m)}`).join("・")} />
+          <StatCard label="スキル" icon={<PuzzleIcon />} value={v.skills.length} sub={`担当 agent のモデルが引けない ${unowned}`} tone={unowned ? "warn" : "good"} />
+          <StatCard label="CI の無人実行" icon={<TerminalIcon />} value={v.ciRuns.length} sub={[...new Set(v.ciRuns.map((r) => r.model))].join("・") || "—"} />
+          <StatCard label="読み取りエラー" icon={<AlertTriangleIcon />} value={v.errors.length} tone={v.errors.length ? "bad" : "good"} />
         </Grid>
 
         {usage ? (
           <>
             <Grid min="sm">
-              <StatCard label={`メインセッション (直近 ${usage.window.weeks} 週)`} value={usd(mainCost)} sub={`最多 ${usage.main[0] ? `${usage.main[0].model} ${usage.main[0].effort}` : "—"}`} />
-              <StatCard label="エージェント" value={usd(subCost)} sub={`呼び出し ${(usage.agents ?? []).reduce((n, a) => n + a.runs, 0)} 回`} />
-              <StatCard label="CI の無人実行" value={usd(ciCost)} sub={`${(usage.ci ?? []).reduce((n, c) => n + c.runs, 0)} 回`} />
-              <StatCard label="改善提案" value={usage.proposals.length} tone={usage.proposals.length ? "warn" : "good"} sub={`集計 ${usage.generatedAt.slice(0, 10)}・単価 ${usage.sources.pricing.observedAt}`} />
+              <StatCard label={`メインセッション (直近 ${usage.window.weeks} 週)`} icon={<CpuIcon />} value={usd(mainCost)} sub={`最多 ${usage.main[0] ? `${usage.main[0].model} ${usage.main[0].effort}` : "—"}`} />
+              <StatCard label="エージェント" icon={<UsersIcon />} value={usd(subCost)} sub={`呼び出し ${(usage.agents ?? []).reduce((n, a) => n + a.runs, 0)} 回`} />
+              <StatCard label="CI の無人実行" icon={<CircleDollarSignIcon />} value={usd(ciCost)} sub={`${(usage.ci ?? []).reduce((n, c) => n + c.runs, 0)} 回`} />
+              <StatCard label="改善提案" icon={<LightbulbIcon />} value={usage.proposals.length} tone={usage.proposals.length ? "warn" : "good"} sub={`集計 ${usage.generatedAt.slice(0, 10)}・単価 ${usage.sources.pricing.observedAt}`} />
             </Grid>
 
-            <Section id="proposals" title="改善提案 (試す価値があるもの。採否は canary と人が決める)" count={usage.proposals.length}>
+            <Section
+              id="proposals"
+              title="改善提案 (試す価値があるもの。採否は canary と人が決める)"
+              count={usage.proposals.length}
+              note={
+                <>
+                  費用は API 単価での換算で、Max プランの枠消費の実額ではない。閾値は{" "}
+                  <code className="font-mono text-xs">.claude/config/model-optimization-policy.json</code>。 更新は{" "}
+                  <code className="font-mono text-xs">npm run model-usage:collect &amp;&amp; npm run model-usage:report</code> (
+                  <code className="font-mono text-xs">npm run admin</code> の起動時にも走る)。
+                </>
+              }
+            >
               <DataTable columns={["対象", "提案", "現状 → 提案", "換算費用", "canary", "根拠と次の一手"]}>
                 {usage.proposals.map((p) => {
                   const verdict = VERDICT[p.canary ?? ""] ?? null;
@@ -118,99 +130,140 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
                       <Cell nowrap>
                         <StatusBadge tone="info">{PROPOSAL_LABEL[p.kind] ?? p.kind}</StatusBadge>
                       </Cell>
-                      <Cell className="text-[12px]">
+                      <Cell className="text-xs">
                         {p.current}
                         <div className="font-semibold">→ {p.suggested}</div>
                       </Cell>
                       <Cell nowrap>
                         {usd(p.costUsd)}
-                        {p.savingUsd ? <div className="text-[11px] text-console-good">節約見込み {usd(p.savingUsd)}</div> : null}
+                        {p.savingUsd ? <div className="text-xs text-console-good">節約見込み {usd(p.savingUsd)}</div> : null}
                       </Cell>
-                      <Cell nowrap>{verdict ? <StatusBadge tone={verdict.tone}>{verdict.label}</StatusBadge> : <span className="text-console-muted">—</span>}</Cell>
-                      <Cell className="text-[12px]">
-                        <div className="text-console-muted">{p.evidence}</div>
-                        <code className="break-all text-[11px]">{p.next}</code>
+                      <Cell nowrap>{verdict ? <StatusBadge tone={verdict.tone}>{verdict.label}</StatusBadge> : <span className="text-muted-foreground">—</span>}</Cell>
+                      <Cell className="text-xs">
+                        <div className="text-muted-foreground">{p.evidence}</div>
+                        <code className="break-all font-mono text-xs">{p.next}</code>
                       </Cell>
                     </Row>
                   );
                 })}
               </DataTable>
-              <p className="mt-1 text-[11px] text-console-muted">
-                費用は API 単価での換算で、Max プランの枠消費の実額ではない。閾値は <code>.claude/config/model-optimization-policy.json</code>。
-                更新は <code>npm run model-usage:collect &amp;&amp; npm run model-usage:report</code> (<code>npm run admin</code> の起動時にも走る)。
-              </p>
             </Section>
           </>
         ) : (
-          <p className="text-sm text-console-muted">
-            使用量の集計がまだ無い。<code>npm run model-usage:collect &amp;&amp; npm run model-usage:report</code> を実行してから再読み込みする。
+          <p className="text-sm text-muted-foreground">
+            使用量の集計がまだ無い。<code className="font-mono text-xs">npm run model-usage:collect &amp;&amp; npm run model-usage:report</code> を実行してから再読み込みする。
           </p>
         )}
 
         <div className="flex flex-wrap gap-2">
-          <Link href="/ops/agents" data-slot="button" className={buttonVariants({ variant: !modelFilter ? "default" : "outline", size: "sm" })}>すべて ({v.agents.length})</Link>
+          <Link href="/ops/agents" className={buttonVariants({ variant: !modelFilter ? "default" : "outline", size: "sm" })}>
+            すべて ({v.agents.length})
+          </Link>
           {models.map((m) => (
-            <Link href={`/ops/agents?model=${encodeURIComponent(m)}`} key={m} data-slot="button" className={buttonVariants({ variant: m === modelFilter ? "default" : "outline", size: "sm" })}>
+            <Link key={m} href={`/ops/agents?model=${encodeURIComponent(m)}`} className={buttonVariants({ variant: m === modelFilter ? "default" : "outline", size: "sm" })}>
                 {m} ({countBy(m)})
               </Link>
           ))}
         </div>
 
         <Section id="agents" title="エージェント" count={agents.length}>
-          <DataTable columns={["エージェント", "モデル", "effort", "直近の実測", "担当スキル", "役割"]}>
-            {agents.map((a) => (
-              <Row key={a.file}>
-                <Cell nowrap>
-                  <div className="font-semibold">{a.name}</div>
-                  <div className="text-[11px] text-console-muted">{a.domain ?? "—"}</div>
-                </Cell>
-                <Cell nowrap>{modelBadge(a.model)}</Cell>
-                <Cell nowrap muted>
-                  {a.effort ?? "継承"}
-                </Cell>
-                <Cell nowrap>
-                  {usageBy.get(a.name) ? (
-                    <>
-                      {usageBy.get(a.name)!.runs} 回・{usd(usageBy.get(a.name)!.costUsd)}
-                      <div className="text-[11px] text-console-muted">{shareText(usageBy.get(a.name)!.byEffort)}</div>
-                    </>
+          <DataGrid
+            columns={[
+              { id: "name", header: "エージェント", sortable: true, nowrap: true },
+              { id: "model", header: "モデル", sortable: true, nowrap: true },
+              { id: "effort", header: "effort", sortable: true, nowrap: true },
+              { id: "usage", header: "直近の実測", sortable: true, nowrap: true },
+              { id: "skills", header: "担当スキル", numeric: true, sortable: true, nowrap: true },
+              { id: "role", header: "役割" },
+            ]}
+            rows={agents.map((a) => {
+              const u = usageBy.get(a.name);
+              return {
+                id: a.file,
+                cells: [
+                  <div key="n">
+                    <div className="font-semibold">{a.name}</div>
+                    <div className="text-xs text-muted-foreground">{a.domain ?? "—"}</div>
+                  </div>,
+                  modelBadge(a.model),
+                  <span key="e" className="text-muted-foreground">
+                    {a.effort ?? "継承"}
+                  </span>,
+                  u ? (
+                    <div key="u">
+                      {u.runs} 回・{usd(u.costUsd)}
+                      <div className="text-xs text-muted-foreground">{shareText(u.byEffort)}</div>
+                    </div>
                   ) : (
-                    <span className="text-console-muted">—</span>
-                  )}
-                </Cell>
-                <Cell nowrap>
-                  {a.primarySkills}
-                  <span className="text-[11px] text-console-muted"> (協力 {a.coSkills})</span>
-                </Cell>
-                <Cell className="text-[12px]">{firstSentence(a.description)}</Cell>
-              </Row>
-            ))}
-          </DataTable>
+                    <span className="text-muted-foreground">—</span>
+                  ),
+                  <span key="s">
+                    {a.primarySkills}
+                    <span className="text-xs text-muted-foreground"> (協力 {a.coSkills})</span>
+                  </span>,
+                  <span key="r" className="text-xs">
+                    {firstSentence(a.description)}
+                  </span>,
+                ],
+                sort: [a.name, a.model, a.effort, u?.costUsd ?? null, a.primarySkills, null],
+                search: `${a.name} ${a.domain ?? ""} ${a.description}`,
+                facet: u ? "used" : "unused",
+              };
+            })}
+            facets={[
+              { value: "used", label: "直近に実測あり" },
+              { value: "unused", label: "実測なし" },
+            ]}
+            pageSize={50}
+            searchPlaceholder="名前・領域・役割で絞り込み"
+          />
         </Section>
 
-        <Section id="skills" title="スキル" count={skills.length}>
-          <DataTable columns={["スキル", "担当 agent", "担当のモデル", "呼び出し", "説明"]}>
-            {skills.map((s) => (
-              <Row key={s.file}>
-                <Cell nowrap>
-                  <div className="font-semibold">{s.name}</div>
-                  <div className="text-[11px] text-console-muted">{s.domain ?? "—"}</div>
-                </Cell>
-                <Cell nowrap>
-                  {s.primaryAgent ?? <span className="text-console-muted">—</span>}
-                  {s.coAgents.length ? <div className="text-[11px] text-console-muted">協力 {s.coAgents.join("・")}</div> : null}
-                </Cell>
-                <Cell nowrap>{modelBadge(s.primaryAgentModel)}</Cell>
-                <Cell nowrap muted>
-                  {s.modelInvocable ? "自動+手動" : "手動のみ"}
-                </Cell>
-                <Cell className="text-[12px]">{firstSentence(s.description)}</Cell>
-              </Row>
-            ))}
-          </DataTable>
-          <p className="mt-1 text-[11px] text-console-muted">
-            スキル自体は呼び出したセッションのモデルで動く。「担当のモデル」は primary_agent に委譲したときのモデル (参考値)。
-          </p>
+        <Section
+          id="skills"
+          title="スキル"
+          count={skills.length}
+          note="スキル自体は呼び出したセッションのモデルで動く。「担当のモデル」は primary_agent に委譲したときのモデル (参考値)。"
+        >
+          <DataGrid
+            columns={[
+              { id: "name", header: "スキル", sortable: true, nowrap: true },
+              { id: "agent", header: "担当 agent", sortable: true, nowrap: true },
+              { id: "model", header: "担当のモデル", sortable: true, nowrap: true },
+              { id: "invoke", header: "呼び出し", nowrap: true },
+              { id: "description", header: "説明" },
+            ]}
+            rows={skills.map((sk) => ({
+              id: sk.file,
+              cells: [
+                <div key="n">
+                  <div className="font-semibold">{sk.name}</div>
+                  <div className="text-xs text-muted-foreground">{sk.domain ?? "—"}</div>
+                </div>,
+                <div key="a">
+                  {sk.primaryAgent ?? <span className="text-muted-foreground">—</span>}
+                  {sk.coAgents.length ? <div className="text-xs text-muted-foreground">協力 {sk.coAgents.join("・")}</div> : null}
+                </div>,
+                modelBadge(sk.primaryAgentModel),
+                <span key="i" className="text-muted-foreground">
+                  {sk.modelInvocable ? "自動+手動" : "手動のみ"}
+                </span>,
+                <span key="d" className="text-xs">
+                  {firstSentence(sk.description)}
+                </span>,
+              ],
+              sort: [sk.name, sk.primaryAgent, sk.primaryAgentModel, null, null],
+              search: `${sk.name} ${sk.domain ?? ""} ${sk.primaryAgent ?? ""} ${sk.description}`,
+              facet: sk.modelInvocable ? "auto" : "manual",
+              tone: !sk.primaryAgent || !sk.primaryAgentModel ? "warn" : undefined,
+            }))}
+            facets={[
+              { value: "auto", label: "自動+手動" },
+              { value: "manual", label: "手動のみ" },
+            ]}
+            pageSize={50}
+            searchPlaceholder="名前・担当・説明で絞り込み"
+          />
         </Section>
 
         <Section id="ci" title="CI の無人実行 (claude --model)" count={v.ciRuns.length}>
@@ -220,7 +273,7 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
               return (
                 <Row key={`${r.workflow}-${i}`}>
                   <Cell nowrap>
-                    <code>{r.workflow}</code>
+                    <code className="font-mono text-xs">{r.workflow}</code>
                   </Cell>
                   <Cell nowrap>{modelBadge(r.model)}</Cell>
                   <Cell nowrap muted>
@@ -230,10 +283,10 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
                     {m ? (
                       <>
                         {m.runs} 回・1 回 {usd(m.costPerRun)}
-                        <div className="text-[11px] text-console-muted">実際のモデル {shareText(m.models)}</div>
+                        <div className="text-xs text-muted-foreground">実際のモデル {shareText(m.models)}</div>
                       </>
                     ) : (
-                      <span className="text-console-muted">記録なし</span>
+                      <span className="text-muted-foreground">記録なし</span>
                     )}
                   </Cell>
                 </Row>
@@ -272,12 +325,22 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
         ) : null}
 
         {v.routing ? (
-          <Section id="routing" title={`backlog-loop の振り分け (更新 ${v.routing.updatedAt ?? "不明"})`} count={v.routing.classes.length}>
+          <Section
+            id="routing"
+            title={`backlog-loop の振り分け (更新 ${v.routing.updatedAt ?? "不明"})`}
+            count={v.routing.classes.length}
+            note={
+              <>
+                週次の <code className="font-mono text-xs">update-routing-policy.mjs</code> が成功率の実測で書き換える (
+                <code className="font-mono text-xs">.claude/config/backlog-routing-policy.json</code>)。
+              </>
+            }
+          >
             <DataTable columns={["クラス", "モデル", "effort", "試行上限"]}>
               {v.routing.classes.map((c) => (
                 <Row key={c.className}>
                   <Cell nowrap>
-                    <code>{c.className}</code>
+                    <code className="font-mono text-xs">{c.className}</code>
                   </Cell>
                   <Cell nowrap>{modelBadge(c.model)}</Cell>
                   <Cell nowrap muted>
@@ -289,9 +352,6 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
                 </Row>
               ))}
             </DataTable>
-            <p className="mt-1 text-[11px] text-console-muted">
-              週次の <code>update-routing-policy.mjs</code> が成功率の実測で書き換える (<code>.claude/config/backlog-routing-policy.json</code>)。
-            </p>
           </Section>
         ) : null}
 
@@ -301,7 +361,7 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
               {v.errors.map((e) => (
                 <Row key={e.file}>
                   <Cell nowrap>
-                    <code>{e.file}</code>
+                    <code className="font-mono text-xs">{e.file}</code>
                   </Cell>
                   <Cell>{e.error}</Cell>
                 </Row>
@@ -309,7 +369,6 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
             </DataTable>
           </Section>
         ) : null}
-      </Stack>
-    </div>
+    </>
   );
 }

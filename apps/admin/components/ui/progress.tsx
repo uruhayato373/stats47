@@ -1,9 +1,8 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の progress.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。
-// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/progress.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// shadcn/ui 公式（base-nova）の progress.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/progress.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 "use client"
 
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
-
 import { cn } from "@/lib/cn"
 
 function Progress({
@@ -16,7 +15,7 @@ function Progress({
     <ProgressPrimitive.Root
       value={value}
       data-slot="progress"
-      className={cn("cn-progress flex flex-wrap gap-3", className)}
+      className={cn("flex flex-wrap gap-3", className)}
       {...props}
     >
       {children}
@@ -31,7 +30,7 @@ function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
   return (
     <ProgressPrimitive.Track
       className={cn(
-        "cn-progress-track relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+        "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
         className
       )}
       data-slot="progress-track"
@@ -47,7 +46,7 @@ function ProgressIndicator({
   return (
     <ProgressPrimitive.Indicator
       data-slot="progress-indicator"
-      className={cn("cn-progress-indicator h-full bg-primary transition-all", className)}
+      className={cn("h-full bg-primary transition-all", className)}
       {...props}
     />
   )

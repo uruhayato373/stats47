@@ -2,10 +2,8 @@
   "name": "@stats47/ui-theme",
   "version": "1.0.0",
   "private": true,
-  "description": "テンプレート (shadcndashboard/next-shadcn-dashboard) の色・角丸トークンと Base UI 部品の lyra スタイル。web と admin が共有する CSS だけを持つ",
+  "description": "テンプレート (shadcndashboard/next-shadcn-dashboard) の色・角丸トークンと Base UI 部品の lyra スタイル。公開サイト (apps/web) が読む CSS だけを持つ",
   "exports": {
-    ".": "./index.css",
-    "./index.css": "./index.css",
     "./base.css": "./base.css",
     "./tokens.css": "./tokens.css",
     "./tokens-hsl.css": "./tokens-hsl.css"

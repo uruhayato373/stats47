@@ -1,7 +1,8 @@
+import { CalendarClockIcon, ClipboardCheckIcon, GitCompareIcon, PackageXIcon } from "lucide-react";
 import Link from "next/link";
 
 import { Cell, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
-import { Grid, Section, Stack } from "@/components/layout-primitives";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { macSchedule, slotLabel, SCHEDULE_DIR, type LogStatus, type MacJob } from "@/lib/server/mac-schedule";
@@ -37,11 +38,11 @@ function resultCell(log: LogStatus) {
         </StatusBadge>
       </span>
       {log.startedAt ? (
-        <span className="text-[11px] text-console-muted">
+        <span className="text-xs text-muted-foreground">
           {jst(log.startedAt)} 開始{log.finishedAt ? ` · ${jst(log.finishedAt)} 終了` : ""}
         </span>
       ) : null}
-      {log.detail ? <span className="text-[11px] text-console-muted">落ちた段: {log.detail}</span> : null}
+      {log.detail ? <span className="text-xs text-muted-foreground">落ちた段: {log.detail}</span> : null}
     </div>
   );
 }
@@ -61,7 +62,7 @@ function installedCell(job: MacJob) {
       <span>
         <StatusBadge tone="bad">定義と違う</StatusBadge>
       </span>
-      <span className="text-[11px] text-console-muted">この Mac: {(job.installedSlots ?? []).map(slotLabel).join(" / ") || "—"}</span>
+      <span className="text-xs text-muted-foreground">この Mac: {(job.installedSlots ?? []).map(slotLabel).join(" / ") || "—"}</span>
     </div>
   );
 }
@@ -70,10 +71,10 @@ export default function MacSchedulePage() {
   const v = macSchedule();
   if (hasError(v)) {
     return (
-      <div className="space-y-8">
+      <>
         <PageHeading title="Mac の定期実行" source={`${SCHEDULE_DIR}/*.plist`} />
         <ErrorNote error={v.error} />
-      </div>
+      </>
     );
   }
   const runner = v.jobs.find((j) => j.def.label === "com.stats47.weekly-saturday");
@@ -83,9 +84,8 @@ export default function MacSchedulePage() {
   const auditFailed = audits?.results.filter((r) => r.status !== "pass").length ?? 0;
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="Mac の定期実行" source={`${SCHEDULE_DIR}/*.plist + ~/Library/LaunchAgents + ~/Library/Logs/stats47`} />
-      <Stack>
         {!v.isLaunchdHost ? (
           <Alert>
             <AlertDescription>この端末には launchd の登録フォルダが無い。登録と結果は、定期実行を登録した Mac で開いたときだけ出る。</AlertDescription>
@@ -94,18 +94,20 @@ export default function MacSchedulePage() {
         <Grid min="sm">
           <StatCard
             label="土曜ランナー"
+            icon={<CalendarClockIcon />}
             value={runner ? RESULT[runner.log.result].label : "定義なし"}
             tone={runner?.log.result === "ok" ? "good" : runner?.log.result === "failed" ? "bad" : "neutral"}
             sub={runner ? `最後の開始 ${jst(runner.log.startedAt)}` : undefined}
           />
           <StatCard
             label="週次監査"
+            icon={<ClipboardCheckIcon />}
             value={audits ? `${audits.results.length - auditFailed} / ${audits.results.length} 通過` : "要約なし"}
             tone={!audits ? "neutral" : auditFailed ? "warn" : "good"}
             sub={audits ? `${audits.day} の回` : undefined}
           />
-          <StatCard label="定義と違う登録" value={drift} tone={drift ? "bad" : "good"} sub={`定義 ${v.jobs.length} 本`} />
-          <StatCard label="定義に無い登録" value={v.strayInstalled.length} tone={v.strayInstalled.length ? "warn" : "good"} />
+          <StatCard label="定義と違う登録" icon={<GitCompareIcon />} value={drift} tone={drift ? "bad" : "good"} sub={`定義 ${v.jobs.length} 本`} />
+          <StatCard label="定義に無い登録" icon={<PackageXIcon />} value={v.strayInstalled.length} tone={v.strayInstalled.length ? "warn" : "good"} />
         </Grid>
 
         <Section title="土曜ランナー (毎週土曜 07:00)">
@@ -113,16 +115,16 @@ export default function MacSchedulePage() {
             {v.saturday.steps.map((s, i) => (
               <Row key={s.id}>
                 <Cell nowrap>
-                  {i + 1}. <code>{s.id}</code>
+                  {i + 1}. <code className="font-mono text-xs">{s.id}</code>
                 </Cell>
                 <Cell>{s.label}</Cell>
                 <Cell nowrap>{resultCell(s.log)}</Cell>
               </Row>
             ))}
           </DataTable>
-          <p className="mt-1 text-[11px] text-console-muted">
-            1 段が落ちても次の段へ進む。ログは <code>~/Library/Logs/stats47/&lt;段&gt;.log</code>、全体は <code>weekly-saturday.log</code>。
-            すぐ 1 回走らせるには <code>launchctl kickstart gui/$(id -u)/com.stats47.weekly-saturday</code>。
+          <p className="text-xs text-muted-foreground">
+            1 段が落ちても次の段へ進む。ログは <code className="font-mono text-xs">~/Library/Logs/stats47/&lt;段&gt;.log</code>、全体は <code className="font-mono text-xs">weekly-saturday.log</code>。
+            すぐ 1 回走らせるには <code className="font-mono text-xs">launchctl kickstart gui/$(id -u)/com.stats47.weekly-saturday</code>。
           </p>
         </Section>
 
@@ -133,8 +135,8 @@ export default function MacSchedulePage() {
                 <Row key={r.id}>
                   <Cell>
                     <div>{r.label}</div>
-                    <div className="text-[11px] text-console-muted">
-                      <code>{r.id}</code>
+                    <div className="text-xs text-muted-foreground">
+                      <code className="font-mono text-xs">{r.id}</code>
                     </div>
                   </Cell>
                   <Cell nowrap>
@@ -149,12 +151,12 @@ export default function MacSchedulePage() {
               ))}
             </DataTable>
           ) : (
-            <p className="text-sm text-console-muted">
-              まだ要約が無い。土曜ランナーの後か、<code>npm run weekly:audits</code> を走らせた後に <code>.local/weekly-audits/&lt;日付&gt;/summary.json</code> ができる。
+            <p className="text-sm text-muted-foreground">
+              まだ要約が無い。土曜ランナーの後か、<code className="font-mono text-xs">npm run weekly:audits</code> を走らせた後に <code className="font-mono text-xs">.local/weekly-audits/&lt;日付&gt;/summary.json</code> ができる。
             </p>
           )}
-          <p className="mt-1 text-[11px] text-console-muted">
-            各監査のログは <code>.local/weekly-audits/&lt;日付&gt;/&lt;監査&gt;.log</code>。異常の中身は週次レビューで読み、バックログカードへ書く。
+          <p className="text-xs text-muted-foreground">
+            各監査のログは <code className="font-mono text-xs">.local/weekly-audits/&lt;日付&gt;/&lt;監査&gt;.log</code>。異常の中身は週次レビューで読み、バックログカードへ書く。
           </p>
         </Section>
 
@@ -164,8 +166,8 @@ export default function MacSchedulePage() {
               <Row key={j.file}>
                 <Cell>
                   <div className="font-semibold">{j.def.label.replace(/^com\.stats47\./, "")}</div>
-                  <div className="text-[11px] text-console-muted">
-                    <code>{j.def.script?.replace(/^.*\/stats47\//, "") ?? j.file}</code>
+                  <div className="text-xs text-muted-foreground">
+                    <code className="font-mono text-xs">{j.def.script?.replace(/^.*\/stats47\//, "") ?? j.file}</code>
                   </div>
                 </Cell>
                 <Cell>{schedule(j)}</Cell>
@@ -175,22 +177,23 @@ export default function MacSchedulePage() {
             ))}
           </DataTable>
           {v.scriptInstalled.length ? (
-            <p className="mt-1 text-[11px] text-console-muted">
-              台本が自分で登録するもの (plist はリポジトリに置かない): {v.scriptInstalled.map((f) => <code key={f} className="mr-2">{f}</code>)}
+            <p className="text-xs text-muted-foreground">
+              台本が自分で登録するもの (plist はリポジトリに置かない): {v.scriptInstalled.map((f) => <code key={f} className="mr-2 font-mono text-xs">{f}</code>)}
             </p>
           ) : null}
           {v.strayInstalled.length ? (
-            <p className="mt-1 text-[11px] text-console-muted">
-              定義に無い登録: {v.strayInstalled.map((f) => <code key={f} className="mr-2">{f}</code>)}
-              (リポジトリから消した定義が Mac に残っている可能性がある。外すなら <code>launchctl bootout gui/$(id -u)/&lt;Label&gt;</code>)
+            <p className="text-xs text-muted-foreground">
+              定義に無い登録: {v.strayInstalled.map((f) => <code key={f} className="mr-2 font-mono text-xs">{f}</code>)}
+              (リポジトリから消した定義が Mac に残っている可能性がある。外すなら <code className="font-mono text-xs">launchctl bootout gui/$(id -u)/&lt;Label&gt;</code>)
             </p>
           ) : null}
-          <p className="mt-1 text-[11px] text-console-muted">
-            時刻は Mac の現地時刻 (日本時間)。定義を変えたら <code>~/Library/LaunchAgents/</code> へ入れ直す (入れ直さないと旧時刻のまま動く)。
-            GitHub Actions の定期実行は <Link href="/ops/workflows">CI ワークフロー</Link>。
+          <p className="text-xs text-muted-foreground">
+            時刻は Mac の現地時刻 (日本時間)。定義を変えたら <code className="font-mono text-xs">~/Library/LaunchAgents/</code> へ入れ直す (入れ直さないと旧時刻のまま動く)。
+            GitHub Actions の定期実行は <Link href="/ops/workflows" className="font-medium underline-offset-4 hover:underline">
+              CI ワークフロー
+            </Link>。
           </p>
         </Section>
-      </Stack>
-    </div>
+    </>
   );
 }

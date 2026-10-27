@@ -1,5 +1,5 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の table.tsx をそのまま使う。変えたのは import 先 (相対パス) と
-// Table の containerClassName / scrollRegion (サイトのアクセシビリティ契約) の追加だけ。正の写し: .claude/config/shadcn-reference/。
+// Table の containerClassName / scrollRegion (サイトのアクセシビリティ契約) の追加だけ。取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
 "use client"
 
 import * as React from "react"

@@ -1,5 +1,5 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の collapsible.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn）だけ。
-// 正との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/collapsible.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// shadcn/ui 公式（base-nova）の collapsible.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/collapsible.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 "use client"
 
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"

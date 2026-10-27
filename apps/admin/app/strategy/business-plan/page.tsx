@@ -20,9 +20,9 @@ export default function BusinessPlanDetailPage() {
   const data = businessPlanAdminData();
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="事業計画の詳細" source="packages/data-configs/src/business-plan/">
-        <p className="max-w-4xl text-sm text-console-muted">
+        <p className="max-w-4xl text-sm text-muted-foreground">
           原案を実行可能な正典へ変換した資料。売上・アクセス目標は予測ではなく仮説、未計測は 0 ではない。
         </p>
       </PageHeading>
@@ -32,6 +32,6 @@ export default function BusinessPlanDetailPage() {
       <KpiContracts data={data} />
       <EventContracts data={data} />
       <ContentCatalog data={data} />
-    </div>
+    </>
   );
 }

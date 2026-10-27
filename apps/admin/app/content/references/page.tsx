@@ -1,16 +1,30 @@
 import type { ReactNode } from 'react';
+import {
+  BanIcon,
+  BookCopyIcon,
+  BookMarkedIcon,
+  CircleCheckIcon,
+  FileSearchIcon,
+  FilterIcon,
+  HammerIcon,
+  LayersIcon,
+  LightbulbIcon,
+  PencilRulerIcon,
+  ScanSearchIcon,
+  ShieldQuestionIcon,
+} from 'lucide-react';
 
 import {
   FilterLink,
   REFERENCE_STAGE_LABELS,
   ReferenceStageBadge,
 } from '@/components/content/content-ui';
-import { Cell, DataTable, Row, StatCard } from '@/components/admin-ui';
-import { Section, Stack } from '@/components/layout-primitives';
+import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge } from '@/components/admin-ui';
+import { Grid, Section } from '@/components/layout-primitives';
 import { ErrorNote, PageHeading } from '@/components/ops/primitives';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import type {
@@ -136,12 +150,12 @@ function InternalDetails({
   summary?: string;
 }) {
   return (
-    <details className="mt-1 text-[10px] text-console-muted">
-      <summary className="cursor-pointer select-none hover:text-console-fg">
+    <Collapsible className="mt-1 text-xs text-muted-foreground">
+      <CollapsibleTrigger className="cursor-pointer select-none hover:text-foreground">
         {summary}
-      </summary>
-      <div className="mt-1 break-all font-mono text-[9px]">{children}</div>
-    </details>
+      </CollapsibleTrigger>
+      <CollapsibleContent className="mt-1 break-all font-mono text-xs">{children}</CollapsibleContent>
+    </Collapsible>
   );
 }
 
@@ -164,13 +178,13 @@ export default async function ReferenceContentPage({
   const query = await searchParams;
   if (hasError(data)) {
     return (
-      <Stack>
+      <>
         <PageHeading
           title="参考文献の活用・展開管理"
           source="参考文献台帳 + 各コンテンツ管理台帳"
         />
         <ErrorNote error={data.error} />
-      </Stack>
+      </>
     );
   }
   const portfolio = data.references;
@@ -263,53 +277,27 @@ export default async function ReferenceContentPage({
   );
 
   return (
-    <Stack gap="lg">
+    <>
       <PageHeading
         title="参考文献の活用・展開管理"
         source="参考文献台帳 + 各コンテンツ管理台帳"
       >
-        <p className="text-xs text-console-muted">
+        <p className="text-sm text-muted-foreground">
           原本、文字起こし、ページ画像、図表の切り抜きは非公開のGoogle
           Driveで保管しています。この画面では、一次資料まで確認できた展開テーマと、既存コンテンツの補強候補だけを管理します。
         </p>
       </PageHeading>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-8">
-        <StatCard label="確認した資料項目" value={portfolio.summary.sourceItems} />
-        <StatCard
-          label="展開テーマ"
-          value={portfolio.summary.productionUnits}
-          tone="info"
-        />
-        <StatCard
-          label="既存内容の補強候補"
-          value={portfolio.summary.contextEvidence}
-        />
-        <StatCard
-          label="補強資料グループ"
-          value={portfolio.summary.contextGroups}
-        />
-        <StatCard
-          label="反映済み"
-          value={portfolio.summary.integratedSlots}
-          tone="good"
-        />
-        <StatCard
-          label="下書き・制作中"
-          value={portfolio.summary.draftSlots}
-          tone="warn"
-        />
-        <StatCard
-          label="制作可能"
-          value={portfolio.summary.readySlots}
-          tone="info"
-        />
-        <StatCard
-          label="権利・出典確認待ち"
-          value={portfolio.summary.blockedEvidence}
-          tone="warn"
-        />
-      </div>
+      <Grid min="sm">
+        <StatCard label="確認した資料項目" icon={<BookCopyIcon />} value={portfolio.summary.sourceItems} />
+        <StatCard label="展開テーマ" icon={<LayersIcon />} value={portfolio.summary.productionUnits} tone="info" />
+        <StatCard label="既存内容の補強候補" icon={<FileSearchIcon />} value={portfolio.summary.contextEvidence} />
+        <StatCard label="補強資料グループ" icon={<BookMarkedIcon />} value={portfolio.summary.contextGroups} />
+        <StatCard label="反映済み" icon={<CircleCheckIcon />} value={portfolio.summary.integratedSlots} tone="good" />
+        <StatCard label="下書き・制作中" icon={<PencilRulerIcon />} value={portfolio.summary.draftSlots} tone="warn" />
+        <StatCard label="制作可能" icon={<HammerIcon />} value={portfolio.summary.readySlots} tone="info" />
+        <StatCard label="権利・出典確認待ち" icon={<ShieldQuestionIcon />} value={portfolio.summary.blockedEvidence} tone="warn" />
+      </Grid>
 
       <nav
         aria-label="参考文献管理のページ内メニュー"
@@ -323,13 +311,12 @@ export default async function ReferenceContentPage({
           ['context', '補強候補'],
           ['audit', '機械監査'],
         ].map(([anchor, label]) => (
-          <a href={`#${anchor}`} key={anchor} data-slot="button" className={buttonVariants({ variant: "outline", size: "sm" })}>{label}</a>
+          <a key={anchor} href={`#${anchor}`} className={buttonVariants({ variant: "outline", size: "sm" })}>{label}</a>
         ))}
       </nav>
 
-      <Section id="filters" title="検索・絞り込み">
-        <Card className="py-4">
-          <CardContent className="flex flex-col gap-2 px-4">
+      <PanelCard title="検索・絞り込み" icon={<FilterIcon />}>
+        <div className="flex flex-col gap-2">
           <div className="flex flex-wrap gap-2">
             <FilterLink
               href={href(
@@ -384,17 +371,16 @@ export default async function ReferenceContentPage({
               検索する
             </Button>
             {hasFilters ? (
-              <a href="/content/references#portfolio" data-slot="button" className={buttonVariants({ variant: "ghost" })}>条件を解除</a>
+              <a href="/content/references#portfolio" className={buttonVariants({ variant: "ghost" })}>条件を解除</a>
             ) : null}
           </form>
-          <p className="text-[11px] text-console-muted">
+          <p className="text-xs text-muted-foreground">
             {hasFilters
               ? `${portfolio.units.length}件中${units.length}件を表示しています。`
               : `展開テーマ${portfolio.units.length}件を表示しています。`}
           </p>
-          </CardContent>
-        </Card>
-      </Section>
+        </div>
+      </PanelCard>
 
       <Section
         id="sources"
@@ -417,7 +403,7 @@ export default async function ReferenceContentPage({
                 <div className="font-medium">
                   {sourceLabel(source.sourceKey)}
                 </div>
-                <div className="text-[10px] text-console-muted">
+                <div className="text-xs text-muted-foreground">
                   {editionLabel(source.sourceKey, source.edition)}
                 </div>
                 <InternalDetails>{source.sourceKey}</InternalDetails>
@@ -432,11 +418,12 @@ export default async function ReferenceContentPage({
         </DataTable>
       </Section>
 
-      <Section id="channels" title="展開先別の状況" count={CHANNELS.length}>
-        <p className="mb-3 text-xs text-console-muted">
-          サイト、長文記事、書籍、動画、SNSへの展開状況を同じ基準で追跡します。
-          「対象外」も残し、内容に合わない展開を増やさないための判断に使います。
-        </p>
+      <Section
+        id="channels"
+        title="展開先別の状況"
+        count={CHANNELS.length}
+        note="サイト、長文記事、書籍、動画、SNSへの展開状況を同じ基準で追跡します。「対象外」も残し、内容に合わない展開を増やさないための判断に使います。"
+      >
         <DataTable
           columns={[
             '展開先',
@@ -472,13 +459,13 @@ export default async function ReferenceContentPage({
         title="分析企画の展開"
         count={expansion.summary.length}
       >
-        <p className="mb-3 text-xs text-console-muted">
+        <p className="text-sm text-muted-foreground">
           教材から採択した分析企画を展開先ごとに数えます。記録は展開記録
           (expansion.json。書き込みは npm run reference:expansion --
           record)。ランキング・調査・テーマ・全国は、指標が公開ページに載っていれば自動で済みにします。
         </p>
         {expansion.errors.length > 0 && (
-          <Alert className="mb-3">
+          <Alert>
             <AlertDescription>
               展開記録の検査エラー {expansion.errors.length} 件:{' '}
               {expansion.errors.slice(0, 3).join(' / ')}
@@ -513,43 +500,44 @@ export default async function ReferenceContentPage({
       </Section>
 
       <Section id="plans" title="企画・下書き" count={plans.length}>
-        <div className="mb-3 grid gap-3 sm:grid-cols-3">
-          <StatCard label="テーマ企画" value={themePlans.length} tone="info" />
-          <StatCard label="ブログ下書き" value={blogDrafts.length} tone="warn" />
+        <Grid min="sm">
+          <StatCard label="テーマ企画" icon={<LightbulbIcon />} value={themePlans.length} tone="info" />
+          <StatCard label="ブログ下書き" icon={<PencilRulerIcon />} value={blogDrafts.length} tone="warn" />
           <StatCard
             label="確認待ち"
+            icon={<ShieldQuestionIcon />}
             value={plans.filter((plan) => plan.status === 'blocked').length}
             tone="warn"
           />
-        </div>
-        <p className="mb-3 text-xs text-console-muted">
+        </Grid>
+        <p className="text-sm text-muted-foreground">
           テーマ企画は展開判断の記録 (placement-decisions.ts) 、ブログは非公開の原稿ファイルが管理元です。
           参考文献は論点の発見に使い、一次資料と保存済み統計データを確認するまで公開へ進めません。
         </p>
-        <DataTable
+        <DataGrid
           columns={[
-            '種類',
-            '企画名',
-            '追加先・使用指標',
-            '状態',
-            '企画の狙い',
-            '管理情報',
+            { id: 'kind', header: '種類', sortable: true, nowrap: true },
+            { id: 'title', header: '企画名', sortable: true },
+            { id: 'target', header: '追加先・使用指標' },
+            { id: 'status', header: '状態', sortable: true, nowrap: true },
+            { id: 'summary', header: '企画の狙い' },
+            { id: 'meta', header: '管理情報' },
           ]}
-        >
-          {plans.map((plan) => (
-            <Row key={plan.id}>
-              <Cell nowrap>{plan.kind === 'theme' ? 'テーマ' : 'ブログ'}</Cell>
-              <Cell>
-                <div className="font-medium">{plan.title}</div>
-              </Cell>
-              <Cell muted>
-                <div className="text-console-fg">
+          rows={plans.map((plan) => ({
+            id: plan.id,
+            cells: [
+              plan.kind === 'theme' ? 'テーマ' : 'ブログ',
+              <div key="title" className="font-medium">
+                {plan.title}
+              </div>,
+              <div key="target" className="text-muted-foreground">
+                <div className="text-foreground">
                   {plan.kind === 'theme'
                     ? themeTargetLabel(plan.target)
                     : 'ブログ記事（非公開下書き）'}
                 </div>
                 {plan.metricKeys.length > 0 ? (
-                  <div className="mt-1 max-w-72 text-[10px]">
+                  <div className="mt-1 max-w-72 text-xs">
                     {plan.metricKeys
                       .map(
                         (key) =>
@@ -558,22 +546,27 @@ export default async function ReferenceContentPage({
                       .join('、')}
                   </div>
                 ) : null}
-              </Cell>
-              <Cell nowrap>
-                <ReferenceStageBadge stage={plan.status} />
-              </Cell>
-              <Cell>{plan.summary}</Cell>
-              <Cell muted>
-                <InternalDetails summary="識別子と保存先を表示">
-                  <div>{plan.id}</div>
-                  <div>{plan.target}</div>
-                  <div>{plan.metricKeys.join(' / ')}</div>
-                  <div>{plan.sourcePath}</div>
-                </InternalDetails>
-              </Cell>
-            </Row>
-          ))}
-        </DataTable>
+              </div>,
+              <ReferenceStageBadge key="status" stage={plan.status} />,
+              plan.summary,
+              <InternalDetails key="meta" summary="識別子と保存先を表示">
+                <div>{plan.id}</div>
+                <div>{plan.target}</div>
+                <div>{plan.metricKeys.join(' / ')}</div>
+                <div>{plan.sourcePath}</div>
+              </InternalDetails>,
+            ],
+            sort: [plan.kind, plan.title, null, plan.status, null, null],
+            search: `${plan.id} ${plan.title} ${plan.target}`,
+            facet: plan.kind,
+            tone: plan.status === 'blocked' ? ('warn' as const) : undefined,
+          }))}
+          facets={[
+            { value: 'theme', label: 'テーマ' },
+            { value: 'blog', label: 'ブログ' },
+          ]}
+          searchPlaceholder="企画名・識別子で絞り込み"
+        />
       </Section>
 
       <Section
@@ -606,7 +599,7 @@ export default async function ReferenceContentPage({
               <Row key={unit.id}>
                 <Cell>
                   <div className="font-medium">{unit.label}</div>
-                  <div className="mt-1 text-[10px] text-console-muted">
+                  <div className="mt-1 text-xs text-muted-foreground">
                     {japaneseLabels(unit.geoScopes, GEO_SCOPE_LABELS).join(
                       '・'
                     ) || '対象範囲未指定'}
@@ -623,7 +616,7 @@ export default async function ReferenceContentPage({
                       href={unit.primarySourceUrls[0]}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-console-accent hover:underline"
+                      className="font-medium text-foreground underline-offset-4 hover:underline"
                     >
                       一次資料
                     </a>
@@ -641,7 +634,7 @@ export default async function ReferenceContentPage({
                         key={entry.channel}
                         className="inline-flex items-center gap-1"
                       >
-                        <span className="text-[10px] text-console-muted">
+                        <span className="text-xs text-muted-foreground">
                           {REFERENCE_PRODUCTION_CHANNEL_LABELS[entry.channel]}
                         </span>
                         <ReferenceStageBadge stage={entry.stage} />
@@ -681,7 +674,7 @@ export default async function ReferenceContentPage({
           })}
         </DataTable>
         {pageCount > 1 ? (
-          <div className="flex items-center justify-end gap-2 text-xs text-console-muted">
+          <div className="flex items-center justify-end gap-2 text-xs text-muted-foreground">
             {currentPage > 1 ? (
               <FilterLink
                 href={href(
@@ -718,24 +711,27 @@ export default async function ReferenceContentPage({
         title="既存コンテンツの補強候補"
         count={`${visibleContextGroups.length}/${contextGroups.length}`}
       >
-        <div className="mb-3 grid gap-3 sm:grid-cols-3">
+        <Grid min="sm">
           <StatCard
             label="既存ページへ反映済み"
+            icon={<CircleCheckIcon />}
             value={portfolio.summary.contextIntegratedEvidence}
             tone="good"
           />
           <StatCard
             label="補強に利用可能"
+            icon={<HammerIcon />}
             value={portfolio.summary.contextReadyEvidence}
             tone="info"
           />
           <StatCard
             label="反映先の確認待ち"
+            icon={<ShieldQuestionIcon />}
             value={portfolio.summary.contextBlockedEvidence}
             tone="warn"
           />
-        </div>
-        <p className="mb-3 text-xs text-console-muted">
+        </Grid>
+        <p className="text-sm text-muted-foreground">
           補強専用資料は独立した記事、ランキング、書籍にはしません。公式一次資料ごとにまとめ、
           既存ページの用語説明、よくある質問、考察、出典の補強にだけ使います。
         </p>
@@ -758,7 +754,7 @@ export default async function ReferenceContentPage({
             <Row key={group.id}>
               <Cell>
                 <div className="font-medium">{group.label}</div>
-                <div className="text-[10px] text-console-muted">
+                <div className="text-xs text-muted-foreground">
                   {group.organization} · {sourceLabel(group.sourceKey)}
                 </div>
                 <InternalDetails>{group.id}</InternalDetails>
@@ -767,7 +763,7 @@ export default async function ReferenceContentPage({
                     href={group.primarySourceUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[10px] text-console-accent hover:underline"
+                    className="text-xs font-medium text-foreground underline-offset-4 hover:underline"
                   >
                     一次資料
                   </a>
@@ -780,7 +776,7 @@ export default async function ReferenceContentPage({
                     '・'
                   ) || '内部運用'}
                 </div>
-                <div className="mt-1 text-[10px]">
+                <div className="mt-1 text-xs">
                   {japaneseLabels(group.roles, ROLE_LABELS).join('・')}
                 </div>
               </Cell>
@@ -788,7 +784,7 @@ export default async function ReferenceContentPage({
                 <ReferenceStageBadge stage={group.stage} />
               </Cell>
               <Cell muted>
-                <div className="max-w-72 text-console-fg">
+                <div className="max-w-72 text-foreground">
                   {group.targetPaths.length > 0
                     ? Array.from(
                         new Set(group.targetPaths.map(targetLabel))
@@ -806,7 +802,7 @@ export default async function ReferenceContentPage({
           ))}
         </DataTable>
         {contextPageCount > 1 ? (
-          <div className="flex items-center justify-end gap-2 text-xs text-console-muted">
+          <div className="flex items-center justify-end gap-2 text-xs text-muted-foreground">
             {currentContextPage > 1 ? (
               <FilterLink
                 href={href(
@@ -843,94 +839,68 @@ export default async function ReferenceContentPage({
       </Section>
 
       <Section title="展開しない判断も含む完了境界">
-        <div className="grid gap-3 text-xs text-console-muted md:grid-cols-2 xl:grid-cols-3">
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">世界統計</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`世界比較ページの基盤が完成するまでは「確認待ち」です。国際比較の候補を国内ランキングへ混在させません。`}
-            </CardContent>
-          </Card>
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">Kindle・データ商品</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`1指標ごとに商品化せず、既存書籍への追加、無料コンテンツでの需要確認、少数の試験販売、実売確認の順で進めます。`}
-            </CardContent>
-          </Card>
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">YouTube・SNS</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`YouTubeの通常動画を基礎に、Instagram・X向け素材を作ります。TikTokは撤退済みのため再開しません。`}
-            </CardContent>
-          </Card>
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">補強専用資料</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`既存コンテンツ補強専用。単独ページ・記事・書籍への水増しを禁止します。`}
-            </CardContent>
-          </Card>
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">権利・一次資料の確認待ち</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`権利確認中、または一次資料を確認できない資料はGoogle Driveに保全したまま、制作予定へは入れません。`}
-            </CardContent>
-          </Card>
-          <Card className="gap-1 py-3">
-            <CardHeader className="px-3">
-              <CardTitle className="text-sm">公開承認</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3">
-              {`この画面は読み取り専用です。各担当の品質確認と公開確認が終わるまで外部公開しません。`}
-            </CardContent>
-          </Card>
-        </div>
+        <Grid min="md">
+          <PanelCard title="世界統計" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">世界比較ページの基盤が完成するまでは「確認待ち」です。国際比較の候補を国内ランキングへ混在させません。</p>
+          </PanelCard>
+          <PanelCard title="Kindle・データ商品" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">1指標ごとに商品化せず、既存書籍への追加、無料コンテンツでの需要確認、少数の試験販売、実売確認の順で進めます。</p>
+          </PanelCard>
+          <PanelCard title="YouTube・SNS" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">YouTubeの通常動画を基礎に、Instagram・X向け素材を作ります。TikTokは撤退済みのため再開しません。</p>
+          </PanelCard>
+          <PanelCard title="補強専用資料" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">既存コンテンツ補強専用。単独ページ・記事・書籍への水増しを禁止します。</p>
+          </PanelCard>
+          <PanelCard title="権利・一次資料の確認待ち" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">権利確認中、または一次資料を確認できない資料はGoogle Driveに保全したまま、制作予定へは入れません。</p>
+          </PanelCard>
+          <PanelCard title="公開承認" icon={<BanIcon />}>
+            <p className="text-sm text-muted-foreground">この画面は読み取り専用です。各担当の品質確認と公開確認が終わるまで外部公開しません。</p>
+          </PanelCard>
+        </Grid>
       </Section>
 
-      <Section id="audit" title="機械監査">
-        <Card className="py-4">
-          <CardContent className="px-4 text-xs text-muted-foreground">
-          <div className="font-semibold text-foreground">
-            {{
-              pass: '問題なし',
-              warn: '確認事項あり',
-              fail: '不整合あり',
-            }[portfolio.audit.status] ?? portfolio.audit.status}
-          </div>
+      <div id="audit" className="scroll-mt-6">
+        <PanelCard
+          title="機械監査"
+          icon={<ScanSearchIcon />}
+          action={
+            <StatusBadge tone={portfolio.audit.status === 'pass' ? 'good' : portfolio.audit.status === 'warn' ? 'warn' : 'bad'}>
+              {{
+                pass: '問題なし',
+                warn: '確認事項あり',
+                fail: '不整合あり',
+              }[portfolio.audit.status] ?? portfolio.audit.status}
+            </StatusBadge>
+          }
+        >
           {portfolio.audit.findings.length === 0 ? (
-            <p className="mt-1">
+            <p className="text-sm text-muted-foreground">
               参考文献台帳と各コンテンツ管理台帳の接続に不整合はありません。
             </p>
           ) : (
-            <ul className="mt-2 space-y-1">
+            <DataTable columns={['重大度', '内容']}>
               {portfolio.audit.findings.map((finding) => (
-                <li
-                  key={`${finding.code}-${finding.itemId ?? 'all'}`}
-                  className="rounded border border-console-border/70 px-2 py-1.5"
-                >
-                  <span className="font-medium text-console-fg">
-                    {finding.severity === 'error' ? 'エラー' : '警告'}：
-                  </span>
-                  {finding.message}
-                  <InternalDetails summary="監査コードを表示">
-                    {finding.code}
-                    {finding.itemId ? ` / ${finding.itemId}` : ''}
-                  </InternalDetails>
-                </li>
+                <Row key={`${finding.code}-${finding.itemId ?? 'all'}`}>
+                  <Cell nowrap>
+                    <StatusBadge tone={finding.severity === 'error' ? 'bad' : 'warn'}>
+                      {finding.severity === 'error' ? 'エラー' : '警告'}
+                    </StatusBadge>
+                  </Cell>
+                  <Cell>
+                    {finding.message}
+                    <InternalDetails summary="監査コードを表示">
+                      {finding.code}
+                      {finding.itemId ? ` / ${finding.itemId}` : ''}
+                    </InternalDetails>
+                  </Cell>
+                </Row>
               ))}
-            </ul>
+            </DataTable>
           )}
-          </CardContent>
-        </Card>
-      </Section>
-    </Stack>
+        </PanelCard>
+      </div>
+    </>
   );
 }

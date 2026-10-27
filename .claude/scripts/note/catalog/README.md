@@ -176,7 +176,7 @@ noteへの差し替えは下の既存公開工程を使う。候補ごとの目�
 
 画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
 公開済み記事もドラフトも記事keyで結び、タイトルや分類は記事台帳から読む。
-管理画面の `/content/note/covers` と `/assets` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
+管理画面の `/content/note/covers` と `/ops/image-library` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
 
 1. 記事台帳登録後は `generate-note-catalog.ts --apply` で制作IDも同期する。現在の公開画像は `note:assets archive --keys <key>` で保全する。
 2. 上の「制作IDを使ったポップなカバー」に従い、本文根拠・コピー・題材を保存して最新版仕様をexportする。

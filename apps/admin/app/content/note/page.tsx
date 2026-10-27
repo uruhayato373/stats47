@@ -1,7 +1,9 @@
-import { ContentAuditPanel, FilterLink, StageBadge } from "@/components/content/content-ui";
 import Link from "next/link";
-import { Cell, DataTable, Row } from "@/components/admin-ui";
-import { Section } from "@/components/layout-primitives";
+import { CircleCheckIcon, FileTextIcon, NotebookPenIcon, OctagonAlertIcon } from "lucide-react";
+
+import { ContentAuditPanel, FilterLink, StageBadge } from "@/components/content/content-ui";
+import { DataGrid, StatCard } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
@@ -9,6 +11,8 @@ import { hasError } from "@/lib/server/state-io";
 import { NativeSelect } from "@/components/ui/native-select";
 import { datasetPath } from "../../../../../config/datasets.mjs";
 import { Input } from "@/components/ui/input";
+import { Button, buttonVariants } from "@/components/ui/button";
+
 export const dynamic = "force-dynamic";
 export const metadata = { title: "note運用 — stats47 admin" };
 
@@ -35,10 +39,10 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
   const query = await searchParams;
   if (hasError(data)) {
     return (
-      <div className="space-y-4">
+      <>
         <PageHeading title="note運用" source="note catalog + R2" />
         <ErrorNote error={data.error} />
-      </div>
+      </>
     );
   }
   const stage = STAGES.includes(query.stage as (typeof STAGES)[number]) ? query.stage : undefined;
@@ -56,19 +60,37 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
   const findings = data.audit.findings.filter((x) => x.channel === "note");
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading
         title="note運用"
         source={`${datasetPath("note.articles")} (Git記事台帳) + R2 note/<vertical>/<slug>/ (本文)`}
       >
-        <p className="text-xs text-console-muted">
+        <p className="text-sm text-muted-foreground">
           Git記事台帳の公開記録と制作中の記事を確認します。本文はR2に保存します。この画面の「未公開」はnote.com管理画面の下書き件数ではありません。
         </p>
-        <Link href="/content/note/covers" className="text-xs text-console-accent hover:underline">カバー画像を分類別に確認する →</Link>
-        <Link href="/product/content-quality?channel=note" className="text-sm text-console-accent hover:underline">本文・画像の改善方針を管理する →</Link>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/content/note/covers" className={buttonVariants({ variant: "outline", size: "sm" })}>
+            カバー画像を分類別に確認する
+          </Link>
+          <Link href="/product/content-quality?channel=note" className={buttonVariants({ variant: "outline", size: "sm" })}>
+            本文・画像の改善方針を管理する
+          </Link>
+        </div>
       </PageHeading>
 
-      <div className="space-y-2">
+      <Grid min="sm">
+        <StatCard label="記事" icon={<FileTextIcon />} value={data.note.length} sub={`絞り込み後 ${articles.length} 本`} />
+        <StatCard label="公開済み" icon={<CircleCheckIcon />} value={data.note.filter((x) => x.stage === "published").length} tone="good" />
+        <StatCard label="公開準備完了" icon={<NotebookPenIcon />} value={data.note.filter((x) => x.stage === "ready").length} tone="info" />
+        <StatCard
+          label="公開条件未充足"
+          icon={<OctagonAlertIcon />}
+          value={data.note.filter((x) => x.stage === "blocked").length}
+          tone={data.note.some((x) => x.stage === "blocked") ? "warn" : "neutral"}
+        />
+      </Grid>
+
+      <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-2">
           <FilterLink href={href(query, { stage: undefined })} active={!stage}>すべて {data.note.length}</FilterLink>
           {STAGES.map((value) => (
@@ -100,57 +122,83 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
             defaultValue={query.q}
             aria-label="note記事を検索"
             placeholder="slug・タイトルで検索" className="w-56" />
-          <button className="rounded-md border border-console-border px-3 text-xs text-console-muted">絞り込む</button>
+          <Button type="submit" variant="outline">
+            絞り込む
+          </Button>
         </form>
       </div>
 
       <Section title="記事" count={articles.length}>
-        <DataTable columns={["記事", "状態", "分類", "本文・公開", "次の作業"]}>
-          {articles.map((article) => (
-            <Row key={`${article.vertical}-${article.key}`}>
-              <Cell>
-                <Link className="font-medium text-console-accent hover:underline" href={'/product/content-quality?owner='+encodeURIComponent('note/'+article.key)}>{article.title}</Link>
-                <div className="font-mono text-[10px] text-console-muted">{article.key}</div>
-              </Cell>
-              <Cell nowrap>
+        <DataGrid
+          columns={[
+            { id: "article", header: "記事", sortable: true },
+            { id: "stage", header: "状態", sortable: true, nowrap: true },
+            { id: "class", header: "分類", sortable: true, nowrap: true },
+            { id: "body", header: "本文・公開" },
+            { id: "next", header: "次の作業" },
+          ]}
+          rows={articles.map((article) => ({
+            id: `${article.vertical}-${article.key}`,
+            cells: [
+              <div key="article">
+                <Link
+                  className="font-medium underline-offset-4 hover:underline"
+                  href={"/product/content-quality?owner=" + encodeURIComponent("note/" + article.key)}
+                >
+                  {article.title}
+                </Link>
+                <div className="font-mono text-xs text-muted-foreground">{article.key}</div>
+              </div>,
+              <div key="stage">
                 <StageBadge stage={article.stage} />
-                {article.publicationGate ? <div className="text-[10px] text-console-muted">{GATE_LABELS[article.publicationGate]}</div> : null}
-              </Cell>
-              <Cell nowrap muted>
+                {article.publicationGate ? <div className="text-xs text-muted-foreground">{GATE_LABELS[article.publicationGate]}</div> : null}
+              </div>,
+              <div key="class" className="text-muted-foreground">
                 <div>{article.vertical}</div>
-                <div>{article.series ?? "—"} / {article.magazine ?? "未割当"}</div>
+                <div>
+                  {article.series ?? "—"} / {article.magazine ?? "未割当"}
+                </div>
                 <div>{article.isPaid ? `有料 ¥${article.priceJpy}` : "無料"}</div>
-              </Cell>
-              <Cell muted>
+              </div>,
+              <div key="body" className="text-muted-foreground">
                 <div>R2本文 {article.r2Body ? "あり" : "未復元"}</div>
                 {article.noteUrl ? (
-                  <a href={article.noteUrl} target="_blank" rel="noreferrer" className="text-console-accent hover:underline">
+                  <a href={article.noteUrl} target="_blank" rel="noreferrer" className="font-medium text-foreground underline-offset-4 hover:underline">
                     note.comを開く
                   </a>
                 ) : (
                   <span>未公開</span>
                 )}
-                <div className="text-[10px]">{article.r2Path}</div>
-              </Cell>
-              <Cell>
+                <div className="font-mono text-xs break-all">{article.r2Path}</div>
+              </div>,
+              <div key="next">
                 <div>{article.nextAction}</div>
                 {article.publicationGate === "cover" && article.coverProductionId ? (
-                  <Link href={`/content/note/covers?scope=all&ids=${encodeURIComponent(article.coverProductionId)}`} className="text-xs text-console-accent hover:underline">カバーを管理する →</Link>
+                  <Link
+                    href={`/content/note/covers?scope=all&ids=${encodeURIComponent(article.coverProductionId)}`}
+                    className="text-xs font-medium underline-offset-4 hover:underline"
+                  >
+                    カバーを管理する →
+                  </Link>
                 ) : article.publicationGate === "product" ? (
-                  <Link href="/product/status" className="text-xs text-console-accent hover:underline">商品状態を確認する →</Link>
+                  <Link href="/product/status" className="text-xs font-medium underline-offset-4 hover:underline">
+                    商品状態を確認する →
+                  </Link>
                 ) : null}
-              </Cell>
-            </Row>
-          ))}
-        </DataTable>
-      </Section>
-
-      <Section title="note監査">
-        <ContentAuditPanel
-          status={findings.some((x) => x.severity === "error") ? "fail" : findings.length ? "warn" : "pass"}
-          findings={findings}
+              </div>,
+            ],
+            sort: [article.title, article.stage, article.vertical, null, null],
+            search: `${article.key} ${article.title}`,
+            tone: article.stage === "blocked" ? ("warn" as const) : undefined,
+          }))}
+          searchPlaceholder="この中から slug・タイトルで絞り込み"
         />
       </Section>
-    </div>
+
+      <ContentAuditPanel
+        status={findings.some((x) => x.severity === "error") ? "fail" : findings.length ? "warn" : "pass"}
+        findings={findings}
+      />
+    </>
   );
 }

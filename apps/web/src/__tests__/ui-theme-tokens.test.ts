@@ -3,7 +3,6 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-// @ts-expect-error -- 生成スクリプトは型定義を持たない .mjs
 import { buildHslTokens } from '../../../../packages/ui-theme/build-hsl-tokens.mjs';
 
 const themeDir = path.resolve(__dirname, '../../../../packages/ui-theme');

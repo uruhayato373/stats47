@@ -32,7 +32,7 @@ export function ImageAssessment({
   };
   return (
     <Section title="現在の画像を確認する">
-      <p className="text-sm text-console-muted">
+      <p className="text-sm text-muted-foreground">
         現画像を維持する判断も記録できます。原本・分類・制作方針が変わると再確認になります。
       </p>
       {image.assessment && (

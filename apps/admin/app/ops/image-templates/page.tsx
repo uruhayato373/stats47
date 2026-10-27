@@ -11,6 +11,8 @@ import {
 import { redirect } from 'next/navigation';
 import { taxonomyQuery } from '../../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { loadStatisticalSamples } from '@/lib/server/template-statistical-samples';
+import { PageHeading } from '@/components/ops/primitives';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: '型の基本形 — stats47 admin' };
@@ -61,9 +63,11 @@ export default async function Page({
     );
   return (
     <div className="flex h-[calc(100dvh-6rem)] min-h-[520px] flex-col gap-3 md:h-[calc(100dvh-4rem)]">
-      <header>
-        <h1 className="text-2xl font-bold">型の基本形</h1>
-      </header>
+      <PageHeading
+        title="型の基本形"
+        source={datasetPath('content.image-templates')}
+        accessLabel="型の方針を保存できます"
+      />
       <ImageTemplateWorkspace
         initial={{ templates, samples: loadStatisticalSamples(projectRoot()) }}
       />

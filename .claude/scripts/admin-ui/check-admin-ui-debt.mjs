@@ -15,6 +15,11 @@
  *   rawBadge     className に単語 "badge" を含む（状態表示は components/admin-ui の StatusBadge＝shadcn の Badge）
  *   rawSurface   className に bg-console-card を含む（stats47 の管理画面は card クラスでなくユーティリティでカード面を組んでいた。
  *                Card 部品か PanelCard を使う）
+ *   legacyColor  旧配色の文字・面・線の色 (console-fg / muted / border / accent / card / bg)。2026-10-27 に neutral テーマへ移し、
+ *                shadcn のトークン (text-muted-foreground・border・bg-card 等) にそろえた。状態の色 (console-good 等) は数えない
+ *   arbitraryText 任意値の文字サイズ (text-[11px] 等)。見本 (shadcndashboard.dev) は Tailwind の段だけを使う
+ *   rawDetails   生の <details>。折りたたみは公式の Collapsible（ADMIN-UI-BASEUI-01）
+ *   buttonAsLink Button を nativeButton={false} + render でリンクにする書き方。<a> に role="button" が付きリンクとして読まれない
  *
  * 判定:
  *   基準値（.claude/config/admin-ui-debt-baseline.json）より増えたページがあれば exit 1。
@@ -41,14 +46,24 @@ const TAG = '[check-admin-ui-debt]';
 const RE_CLASSNAME = /className=(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\})/g;
 const RE_STYLE = /style=\{\{/g;
 const RE_TABLE = /<table\b/g;
-export const KEYS = ['rawCard', 'inlineStyle', 'rawTable', 'rawBadge', 'rawSurface'];
+export const KEYS = ['rawCard', 'inlineStyle', 'rawTable', 'rawBadge', 'rawSurface', 'legacyColor', 'arbitraryText', 'rawDetails', 'buttonAsLink'];
 const LABEL = {
   rawCard: '生の card クラス',
   inlineStyle: 'インライン style',
   rawTable: '生の <table>',
   rawBadge: '生の badge クラス',
   rawSurface: 'ユーティリティで組んだカード面 (bg-console-card)',
+  legacyColor: '旧配色の色クラス (console-fg/muted/border/accent/card/bg)',
+  arbitraryText: '任意値の文字サイズ (text-[…])',
+  rawDetails: '生の <details>',
+  buttonAsLink: 'Button をリンクとして描く書き方 (nativeButton={false})',
 };
+// Base UI の Button は render の <a> に role="button" を付け、リンクがボタンとして読まれる (2026-10-27 実測)。
+// ボタンの見た目のリンクは <Link className={buttonVariants(...)}> にする
+const RE_BUTTON_AS_LINK = /nativeButton=\{false\}/g;
+const RE_LEGACY_COLOR = /(?<![\w-])(?:[\w-]+:)*(?:text|bg|border|ring|fill|stroke|divide|outline|from|to|via|decoration|placeholder)-console-(?:fg|muted|border|accent|card|bg)(?![\w-])/g;
+const RE_ARBITRARY_TEXT = /(?<![\w-])(?:[\w-]+:)*text-\[\d[^\]]*\]/g;
+const RE_DETAILS = /<details\b/g;
 
 /** ソース 1 本の件数を数える（テストから使う純関数）。 */
 export function countDebt(src) {
@@ -66,7 +81,11 @@ export function countDebt(src) {
   rawBadge += (src.match(/className=\{\s*['"`]badge\b/g) || []).length;
   const inlineStyle = (src.match(RE_STYLE) || []).length;
   const rawTable = (src.match(RE_TABLE) || []).length;
-  return { rawCard, inlineStyle, rawTable, rawBadge, rawSurface };
+  const legacyColor = (src.match(RE_LEGACY_COLOR) || []).length;
+  const arbitraryText = (src.match(RE_ARBITRARY_TEXT) || []).length;
+  const rawDetails = (src.match(RE_DETAILS) || []).length;
+  const buttonAsLink = (src.match(RE_BUTTON_AS_LINK) || []).length;
+  return { rawCard, inlineStyle, rawTable, rawBadge, rawSurface, legacyColor, arbitraryText, rawDetails, buttonAsLink };
 }
 
 /** 基準値と比べる（テストから使う純関数）。 */
@@ -112,7 +131,7 @@ function main() {
 
   if (argv.includes('--update')) {
     const doc = {
-      _comment: 'check-admin-ui-debt のラチェット基準値。ページ・部品ごとの生 card クラス・インライン style・生の <table>・生の badge クラス・ユーティリティで組んだカード面 (bg-console-card) の件数。増えたら CI が落ちる。shadcn 部品へ移して減らしたら `node .claude/scripts/admin-ui/check-admin-ui-debt.mjs --update` で下げる（ADMIN-UI-SHADCN-01）。',
+      _comment: 'check-admin-ui-debt のラチェット基準値。ページ・部品ごとの生 card クラス・インライン style・生の <table>・生の badge クラス・ユーティリティで組んだカード面 (bg-console-card)・旧配色の色クラス・任意値の文字サイズ・生の <details> の件数。増えたら CI が落ちる。shadcn 部品へ移して減らしたら `node .claude/scripts/admin-ui/check-admin-ui-debt.mjs --update` で下げる（ADMIN-UI-SHADCN-01）。',
       _updatedAt: new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10),
       totals,
       files: Object.fromEntries(Object.entries(current).sort(([a], [b]) => a.localeCompare(b))),
@@ -142,7 +161,7 @@ function main() {
       console.log(`  info ${i.file}: ${what} ${i.base} → ${i.now}（--update で基準値を下げる）`);
     }
     if (!regressions.length) console.log(`${TAG} ✓ 増えたページなし`);
-    else console.log(`${TAG} components/admin-ui（TableFrame・PanelCard・StatusBadge）と components/ui/*・components/layout-primitives.tsx を使う`);
+    else console.log(`${TAG} components/admin-ui（StatCard・TrendChart・DataGrid・PanelCard・StatusBadge）と components/ui/*・components/layout-primitives.tsx を使い、色は shadcn のトークン・文字サイズは Tailwind の段にする（.claude/rules/admin-ui.md）`);
   }
   return regressions.length ? 1 : 0;
 }

@@ -1,4 +1,3 @@
-import { Section } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import {
   GeoAnalyses,
@@ -20,22 +19,16 @@ export default function DataGeoPage() {
   const data = businessPlanAdminData();
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="Geo 分析" source="packages/data-configs/src/business-plan/ (M1 カタログ) + GIS カタログ" />
-      <Section title="分析記事">
-        <GeoAnalyses data={data} />
-      </Section>
+      <GeoAnalyses data={data} />
       <GeoPilots data={data} />
-      <Section title="公開ライフサイクルと GIS">
-        <GeoLifecycle data={data} />
-        <GisCatalog data={data} />
-        <GeoEvents data={data} />
-      </Section>
-      <Section title="M1（2026年9月）の結果">
-        <M1Summary data={data} />
-        <M1RoutesTasks data={data} />
-        <M1ReleaseGates data={data} />
-      </Section>
-    </div>
+      <GeoLifecycle data={data} />
+      <GisCatalog data={data} />
+      <GeoEvents data={data} />
+      <M1Summary data={data} />
+      <M1RoutesTasks data={data} />
+      <M1ReleaseGates data={data} />
+    </>
   );
 }
