@@ -92,3 +92,36 @@ hit していれば `effect/pending` に留まり、確定ラベルは付かな�
 - **想定効果**: 置かない [根拠が無い]。並び替えの前例が無く、カードのクリック率の倍率を支える過去事例も計算式も無い。週次 snapshot adapter が ranking→blog の page_view を扱わないため、行は「効果判定エンジン対象外」とし、下の手順で判定する。
 - **観測期限と判定手順**: 2026-11-17。W44〜W46 (10-26〜11-15) を同コマンドで取り、デプロイ前 W40〜W42 の比率の範囲 2.90〜3.76% と比べる。3 週すべてが 3.76% を超えれば増加として記録、3 週すべてが範囲内なら effect/none 候補、混在なら pending のまま次の 3 週 (期日 2026-12-08) を足す。W43 (10-19〜10-25) はデプロイ日をまたぐので使わない。副指標は 1 週 56 件で標本が薄く count のみ。
 - **交絡**: W40→W42 の 142→195 は並び替えより前の上昇で、原因は未確認 (範囲が広い理由)。`SEO-TITLE-CTR-EFFECT-01` の title 変更が分母 (ranking の page_view) の構成を変え得る。`NAV-CLICK-COVERAGE-01` の共通クリック監視が窓内にデプロイされると `nav_click` の数え方が変わり得る ([仮説] `ranking_blog` は導線名付きで影響は小さい。検証: デプロイ日に `ranking_blog` の日次件数を前日と比べる。検証期日: そのデプロイ日)。
+
+### [BLOG-SRCLINK-01] 効果判定は行わず、ブログ→ランキング回遊の新定義 baseline を記録 (2026-10-27)
+
+- **判定**: 判定しない (行の手順どおり新 baseline の記録で閉じる)。07-24 の source-link 配置是正の効果は、2026-09-26 の二重計測是正をまたぐため before/after では判定できない (`data/releases/2026-09-26-ga4-measurement-v2.json` の `doNotCompareAcross`)。
+- **根拠データ (取得元 data/ga4/snapshots/<週>/ の rolling28d・Japan、`internal-transitions.csv` の blog→ranking ÷ `pages-clean.csv` の /blog/ page view。`data/measurement-cycle/latest.json` の journey と同じ定義)**: 2026-W40 869/10,651 = 8.16%、W41 893/10,428 = 8.56%、W42 946/10,220 = 9.26%。窓は重なり、W42 (09-20〜10-17) は 09-26 をまたぐ。これは行にあった ISO 週の page_view 参照元定義 (W40 5.27%、W41 4.09%) とは別定義で、両者は比べない。
+- **再現コマンド**: `for w in 2026-W40 2026-W41 2026-W42; do node -e "const fs=require('fs');const rd=f=>fs.readFileSync(f,'utf8').trim().split('\n');const t=rd('data/ga4/snapshots/$w/internal-transitions.csv').slice(1).map(l=>l.split(','));const br=t.filter(r=>r[0]=='blog'&&r[1]=='ranking').reduce((a,r)=>a+ +r[2],0);const p=rd('data/ga4/snapshots/$w/pages-clean.csv');const h=p[0].split(',');let b=0;for(const l of p.slice(1)){const c=l.split(',');if((c[h.indexOf('pagePath')]||'').startsWith('/blog/'))b+=+c[h.indexOf('screenPageViews')]||0}console.log('$w',br,b,(br/b*100).toFixed(2))"; done`
+- **以後**: blog→ranking の導線を変える施策は `[target:]` 付きの別行で起票し、この rolling28d の値 (W42 時点 9.26%) と比べる。ISO 週の定義 (ga4-query.mjs) は GA4 資格情報がある PC でのみ再取得できる (この PC には無い)。
+- **処置**: improvements.md から行を削除。
+
+### [NOTE-KAKEI-REDESIGN-EFFECT-01] note家計シリーズの決定的テンプレ化は PV を動かさず effect/none (2026-10-27)
+
+- **デプロイ日**: 2026-09-15 (全 47 本本番反映)
+- **想定効果**: PV 中央値 baseline 比 +50% 以上、または 47 本合計 PV +100 以上 [根拠: 行に記載した目標。過去事例・計算式は無く、目標感の値]
+- **検証コマンド**: `node -e "const j=require('./data/note/dashboard/latest.json');const a=j.articles.filter(x=>/^a-kakei-/.test(x.catalogKey||''));console.log(a.length,a.reduce((s,x)=>s+x.pageViews,0))"` (期間別は `data/note/dashboard/<期間>_*.json` の同じ集計)
+- **実測 (取得元 data/note/dashboard、a-kakei-* 47 本)**: baseline 2026-08-17〜09-13 は合計 108 PV・中央値 2 (この記録の status は incomplete だが 47 本は揃う)。after は 2026-09-21〜10-18 が合計 115・中央値 2、2026-09-28〜10-25 (fetchedAt 2026-10-26、status pass) が合計 100・中央値 2、売上 0 円。
+- **判定**: effect/none [根拠: 合計は +7 / -8 で目標 +100 の達成率 0% 以下、中央値は 2 のままで +50% (3) に届かない。デプロイ後 12〜40 日、全窓がデプロイ後]。標本は小さい (47 本で 100 PV 前後) が、目標が小さな増分で、実測はその水準に達していない。
+- **未確定 / 仮説**: [仮説] PV が動かないのは、note 内の検索・おすすめ経由の露出が少なく、記事本体の改善では閲覧数が増えないため。表示 (インプレッション) は 28 日で 1,412。検証: 同コマンドで impressions を baseline と比べ、期日 2026-11-24 に impressions が baseline 比 +50% 未満なら導線 (タイトル・タグ) 側の問題として扱う。
+- **処置**: improvements.md から行を削除。
+
+### [NOTE-CIRCULATION-PILOT-01] 着地 session を取り直せず判定不能。降格 (2026-10-27)
+
+- **判定**: 判定不能 (effect/* は付けない)。不足データ: ① 対象 3 パスの note.com 経由の着地 session (`ga4-query.mjs` に GA4 サービスアカウント鍵が要るが、この PC には無い (`Service account key not found` を 2026-10-27 に確認)。週次 snapshot の `landing-context.csv` は参照元で絞っていない)、② 遷移先 note の view を dashboard 経路 28 日で置き直した baseline、③ `[target:]` (根拠付きの想定値が無い)。
+- **根拠データ**: 週次 snapshot 2026-W42 (2026-09-20〜10-17、Japan) の note.com 参照は 369 sessions (`data/ga4/snapshots/2026-W42/referral-sources.csv`)。10-05 計測の 397 (28日)、baseline の 505 から低下が続くが、これは note.com 全体で、対象 3 記事の効果とは分けられない。
+- **再現コマンド**: `node .claude/scripts/metrics/ga4-query.mjs --start 2026-09-21 --end 2026-10-18 --dims landingPagePlusQueryString --metrics sessions --filter 'sessionSource==note.com' --filter 'landingPagePlusQueryString==/ranking/annual-sunshine-duration' --japan` (3 パスそれぞれ。鍵のある PC で実行)
+- **処置**: improvements.md から行を削除し、backlog に `NOTE-CIRCULATION-RECHECK-01` を起票。
+
+### [THEME-EXPANSION-EFFECT-01] d28 の公開後窓でも標本不足で判定不能。降格 (2026-10-27)
+
+- **判定**: 判定不能 (effect/* は付けない)。想定効果値 `[target:]` が無く、標本も不足 (guard: insufficient-sample / insufficient-target)。
+- **根拠データ (data/themes/experiments.json の `result.rechecks.d28`、observedAt 2026-10-19、公開後だけの窓 GA4 09-13〜10-10・GSC 09-11〜10-08)**: 44 件の実験で、status は launch-provisional 30・insufficient-data 14。GA4 pageViews の合計 410 (measured-low 41 件・insufficient-data 3 件)、GSC impressions の合計 1,574。ほかの 21 件は d28 の再観測が無い。
+- **再現コマンド**: `node -e "const j=require('./data/themes/experiments.json');const a=j.experiments||Object.values(j);let n=0,pv=0,imp=0;for(const y of a){const rc=y.result?.rechecks?.d28||[];const l=rc[rc.length-1];if(!l||l.observedAt.slice(0,10)!='2026-10-19')continue;n++;pv+=l.values['ga4.pageViews']?.value||0;imp+=l.values['gsc.impressions']?.value||0}console.log(n,pv,imp)"`
+- **次**: d56 基本観測 2026-11-06 (週次 snapshot で公開後 56 日の窓が揃う日) に `evaluate-theme-experiments` で記録する。標本が不足のままなら count のみ記録して効果を主張しない。カード `THEME-EXPANSION-D56-01` で追う。
+- **処置**: improvements.md から行を削除し、backlog へ起票。

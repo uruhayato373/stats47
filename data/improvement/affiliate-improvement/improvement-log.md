@@ -381,3 +381,21 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - 次の検証: 期日2026-10-25に、2026-10-10・10-17・10-24週の7日窓を加えた4週分で、ranking系position (`ranking-incontent` / `ranking-native` / `ranking-sidebar` / `rakuten-native`) の週次imp合計の水準とclick累計を確認する。集計は上の再現コマンドの grep を `grep -E 'ranking-|rakuten-native'` に替え、列5 (impressions) と列6 (clicks) を週ごとに合算する。click累計が10件未満ならinsufficient-sampleとして扱い、枠の継続可否は意思決定カードへ回す。
 
 - **2026-10-11 注 (置き場の移動)**: 上の再現コマンドの `.claude/state/ads/ga4-affiliate-history.csv` は 2026-10-06 に `data/affiliate/ga4-affiliate-history.csv` へ移った。10-25 の判定では次を使う: `awk -F, '$1=="2026-09-26" || $1=="2026-10-03"' data/affiliate/ga4-affiliate-history.csv | grep ranking-incontent`
+
+### [AFF-RESOLUTION-EFFECT-01] 広告の意図軸統一: furusato への imp 流入は想定に届かず effect/none (2026-10-27)
+
+- **デプロイ日**: 2026-09-03 (PR #915)
+- **想定効果**: furusato imp +20,000/28日、全体 CTR 0.10% 以上 [根拠: デプロイ前の写像で試算した行き先 ranking furusato 2,904→31,465 imp/週。baseline は GA4 28日 〜2026-08-28 の furusato 1,307 imp・全体 CTR 0.046%]
+- **検証コマンド**: `awk -F, '$2==7 && $3=="furusato" && $4!="_all" && ($1=="2026-10-03"||$1=="2026-10-10"||$1=="2026-10-17"||$1=="2026-10-24"){i+=$5;c+=$6} END{print i,c}' data/affiliate/ga4-affiliate-history.csv` (全 vertical は `$3!="_all" && $3!="(not set)"` に替える)
+- **実測 (取得元 data/affiliate/ga4-affiliate-history.csv、7日窓 4 本の 2026-10-03 / 10-10 / 10-17 / 10-24、deploy 後 30〜57 日)**: furusato 1,238 imp・3 click (週別 390 / 285 / 253 / 310)。baseline 1,307 に対し -69 (target +20,000 の達成率 0% 未満)。全体は 16,747 imp・26 click・CTR 0.155% (baseline 0.046%)。
+- **判定**: furusato imp の target は effect/none (標本は 1,238 imp で、閾値の標本条件を満たす)。全体 CTR の target は数値上クリア (0.155% 対 0.10%) だが、click が 26 件で、楽天カード置換・furusato A8 抑止 (記事 180 本、09-24)・AFF-IMPRESSION-ROUTING-01 が同じ窓に重なる (guard: confounded) ため、本施策の効果としては帰属しない。
+- **未確定 / 仮説**: [仮説] furusato の imp が増えなかったのは、写像で furusato へ回した ranking 面の枠が少なく、記事面では 09-24 の A8 抑止で imp が減ったため。検証: ranking 面の furusato の枠数と記事面の `article-inline` / `article-end` の週次 imp (上のコマンドの `$4` 条件を替える)。検証期日なし (本施策は閉じる。再び furusato 配信を増やす施策は `[target:]` 付きの別行で起票する)。
+- **処置**: improvements.md から行を削除。
+
+### [AFF-IMPRESSION-ROUTING-01] 4週集計は click 5 件で判定不能。枠の継続可否は意思決定カードへ (2026-10-27)
+
+- **判定**: 判定不能 (effect/* は付けない)。行に書いた手順 (4 週で click 累計 10 件未満は insufficient-sample) のとおり。
+- **根拠データ**: `data/affiliate/ga4-affiliate-history.csv` の 7日窓 (2026-10-03 / 10-10 / 10-17 / 10-24) で、`ranking-incontent` + `ranking-native` + `ranking-sidebar` + `rakuten-native` の imp は週 1,686 / 1,788 / 778 / 967、click は 4 週で 5 件。`ranking-incontent` 単独は 570 → 630 → 19 → 1 imp と 10-17 週から実質ゼロ。
+- **再現コマンド**: `awk -F, '$2==7 && ($4=="ranking-incontent"||$4=="ranking-native"||$4=="ranking-sidebar"||$4=="rakuten-native") && ($1=="2026-10-03"||$1=="2026-10-10"||$1=="2026-10-17"||$1=="2026-10-24"){i[$1]+=$5;c+=$6} END{for(k in i)print k,i[k];print "click",c}' data/affiliate/ga4-affiliate-history.csv`
+- **未確定**: [仮説] `ranking-incontent` が 10-17 週に消えたのは枠の配信条件が変わったため (履歴: 2026-08-16 配線、08-27 の ranking UI 統一)。検証: `git log -S"ranking-incontent" -- apps packages` と本番 ranking ページの描画。原因は未確認で、backlog カード `AFF-RANKING-SLOT-DECISION-01` に引き継ぐ。
+- **処置**: improvements.md から行を削除し、backlog (🟣 判断待ち) へ意思決定カードを起票。

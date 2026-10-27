@@ -114,7 +114,7 @@ primary_agent: strategy-advisor
    上限 10 枚（`strategy-lanes.cjs` の `MAX_HIGH_TIER_CARDS`、`npm run docs:check` の DG081）に収める。
    それ以外と、起票から 30 日を過ぎた未着手の 🔴 は 🟡 へ下げるか、1 か月で終わる大きさに分割する。
    付け替えた枚数（🔴 何枚 → 何枚）を月次計画の「現状サマリー」に書く。
-3. **施策の棚卸し**: active 施策（improvements.md）が上限 10 件（`npm run docs:check` の DG080）を超えていれば、
+3. **施策の棚卸し**: active 施策（improvements.md）が上限 5 件（`npm run docs:check` の DG080）を超えていれば、
    重点領域の KPI に紐づかない施策から `improvement-triage` に判定・backlog 降格を依頼し、上限内に戻す。
    `[target:]` の無い施策は、根拠を付けて target を書くか backlog へ降格するかを決める（放置すると永久に判定できない）。
 
@@ -183,7 +183,7 @@ tags: []
 | 楽天アフィリエイト（前月確定）| ¥N / 判定不能 | | 管理画面の手入力 (`rakuten-results.json`) |
 | 重点領域の駆動 KPI（id ごとに 1 行）| N | 4週前比 ±X% | `LATEST.md` の KPI ツリー節 |
 | ガードレール KPI（悪化したものだけ）| N | | |
-| active 施策 / 上限 | N / 10 | | KPI 未接続 N・target なし N |
+| active 施策 / 上限 | N / 5 | | KPI 未接続 N・target なし N |
 | バックログ 🔴 / 上限 | 付け替え前 N → 後 N / 10 | | 30 日超の未着手 🔴 N 枚 |
 | 公開記事数 | N | +N | |
 | 改善ログ effect/pending | N | | due 集中時期 |
