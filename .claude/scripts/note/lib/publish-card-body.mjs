@@ -27,8 +27,10 @@ export function splitPublishedBody(before, publicBefore, body) {
   const opening = new RegExp(`<([a-z][a-z0-9-]*)\\b[^>]*(?:id|name)="${escaped}"[^>]*>`, 'i').exec(body);
   if (!opening) throw Error('paid boundary element missing');
   const tag = opening[1].toLowerCase();
-  if (!['p', 'h1', 'h2', 'h3', 'h4', 'hr', 'figure'].includes(tag)) throw Error('unsupported paid boundary element');
+  if (!['p', 'h1', 'h2', 'h3', 'h4', 'hr', 'figure', 'ul', 'ol'].includes(tag)) throw Error('unsupported paid boundary element');
   const end = tag === 'hr' ? opening.index + opening[0].length : body.indexOf(`</${tag}>`, opening.index) + tag.length + 3;
+  // A list boundary is cut at its first closing tag, so a nested list of the same kind would split it early.
+  if ((tag === 'ul' || tag === 'ol') && body.slice(opening.index + opening[0].length, end).includes(`<${tag}`)) throw Error('nested list in paid boundary element');
   if (end < opening.index + opening[0].length) throw Error('paid boundary closing tag missing');
   return { free_body: body.slice(0, end), pay_body: body.slice(end) };
 }

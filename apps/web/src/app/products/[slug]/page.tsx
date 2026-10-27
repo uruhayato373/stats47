@@ -167,7 +167,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           {slug === "data-p-04" && (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               本商品は固定年度のデータ集で、自動更新はありません。Excel・CSV・PDFは110指標、PowerPointは先頭30指標です。
-              Office実機での表示・編集互換性は未確認です。最新年度の資料や市町村比較に使う場合は、必要な年度と地域粒度を販売先で確認してください。
+              Microsoft 365 の Excel・PowerPoint（Windows版）で開き、表示と編集を確かめています。最新年度の資料や市町村比較に使う場合は、必要な年度と地域粒度を販売先で確認してください。
             </p>
           )}
           <Link

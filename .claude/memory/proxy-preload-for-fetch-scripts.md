@@ -32,3 +32,10 @@ global dispatcher を注入すれば script 内の素の fetch がすべて prox
 - `npx tsx` で動く script (generate-article-charts.ts 等) はネットワーク不要ならそのままでよい。
 - 恒久対応するなら script 側に `resolveDispatcher` パターン ([[proxy-fetch-canonical-pattern]] =
   `.claude/scripts/audit/theme-chart-live-audit.mjs` の手本) を入れる方が正だが、一時実行はこの preload が最速。
+
+**証明書の追加 (2026-10-28 実測)**: プロキシを通しても `fetch failed` / `UNABLE_TO_VERIFY_LEAF_SIGNATURE` で落ちる
+(会社のネットワークが TLS 証明書を差し替えるため)。Node 22.14 には `--use-system-ca` が無いので、PowerShell で
+`Cert:\LocalMachine\Root`・`Cert:\CurrentUser\Root`・`Cert:\LocalMachine\CA` を PEM に書き出し
+(`[Convert]::ToBase64String($_.RawData,'InsertLineBreaks')` を BEGIN/END CERTIFICATE で囲む)、
+`NODE_EXTRA_CA_CERTS=<pem>` を付けて preload と併用する。`audit-note-unverified.mjs --published` は
+これで 428 本すべて取得できた (未設定時は fetchFailed=428・exit 2 で、結果は 0 件ではなく判定不能)。

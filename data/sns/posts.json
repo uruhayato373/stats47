@@ -31657,9 +31657,9 @@
     },
     {
       "id": 1041,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.278Z",
-      "updated_at": "2026-10-12T01:26:17.987Z",
+      "updated_at": "2026-10-27T19:44:31.300Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31690,13 +31690,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/final-energy-consumption-per-capita/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/De-sypbk8V8",
+      "posted_at": "2026-10-27T01:40:49.000Z"
     },
     {
       "id": 1042,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.283Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-27T19:44:31.337Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31713,7 +31715,9 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "post_url": "https://www.threads.com/@stats47jp/post/De_akZpAoQh",
+      "posted_at": "2026-10-27T08:20:50.000Z"
     },
     {
       "id": 1043,
