@@ -161,9 +161,7 @@ export function PostPreview({
               </div>
             )}
             {item.id && (
-              <Button asChild variant="outline">
-                <a
-                  href={`/sns/${item.id}`}
+              <Button variant="outline" nativeButton={false} render={<a href={`/sns/${item.id}`}
                   onClick={(e) => {
                     if (
                       dirty &&
@@ -172,11 +170,9 @@ export function PostPreview({
                       )
                     )
                       e.preventDefault();
-                  }}
-                >
+                  }} />}>
                   ID台帳の詳細・出典・指標
-                </a>
-              </Button>
+                </Button>
             )}
             {typeof item.post_url === 'string' && (
               <p>

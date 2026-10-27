@@ -112,11 +112,9 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
 
         <div className="flex flex-wrap gap-2">
           {(Object.keys(FILTERS) as FilterKey[]).map((k) => (
-            <Button key={k} asChild size="sm" variant={k === filter ? "default" : "outline"}>
-              <Link href={k === "all" ? "/ops/workflows" : `/ops/workflows?f=${k}`}>
+            <Button key={k} size="sm" variant={k === filter ? "default" : "outline"} nativeButton={false} render={<Link href={k === "all" ? "/ops/workflows" : `/ops/workflows?f=${k}`} />}>
                 {FILTERS[k].label} ({all.filter(FILTERS[k].test).length})
-              </Link>
-            </Button>
+              </Button>
           ))}
         </div>
 

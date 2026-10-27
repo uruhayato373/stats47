@@ -1,6 +1,9 @@
 import { CloseSidebarOnNavigate } from "@/components/close-sidebar-on-navigate";
 import { ConsoleSidebar } from "@/components/console-nav";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
+import { Suspense } from "react";
 
 import type { Metadata } from "next";
 import Script from "next/script";
@@ -37,17 +40,16 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <SidebarProvider>
+        {/* 公式 dashboard-01 と同じ外枠: inset のサイドバー + 上部バー + @container/main の本文 */}
+        <SidebarProvider className="[--header-height:calc(var(--spacing)*12)]">
           <CloseSidebarOnNavigate />
           <ConsoleSidebar />
           <SidebarInset className="min-w-0">
-            {/* md 未満はサイドメニューが Sheet になるので、開くボタンを上部バーに置く */}
-            <div className="flex items-center gap-2 border-b px-3 py-2 md:hidden">
-              <SidebarTrigger />
-              <span className="text-sm font-semibold">stats47 管理コンソール</span>
-            </div>
-            <div className="min-w-0 flex-1 overflow-x-hidden wrap-break-word px-3 py-5 sm:px-6 sm:py-8">
-              {children}
+            <Suspense fallback={<div className="h-(--header-height) border-b" aria-hidden="true" />}>
+              <SiteHeader />
+            </Suspense>
+            <div className="@container/main flex min-w-0 flex-1 flex-col overflow-x-hidden wrap-break-word">
+              <div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:py-6 lg:px-6">{children}</div>
             </div>
           </SidebarInset>
         </SidebarProvider>

@@ -13,12 +13,10 @@ import { TableFrame } from "./table-frame";
 export function DataTable({ columns, children, className }: { columns: string[]; children: ReactNode; className?: string }) {
   return (
     <TableFrame className={className}>
-      <TableHeader>
+      <TableHeader className="bg-muted">
         <TableRow>
           {columns.map((column) => (
-            <TableHead key={column} className="text-xs text-muted-foreground">
-              {column}
-            </TableHead>
+            <TableHead key={column}>{column}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
@@ -32,7 +30,7 @@ export const Row = TableRow;
 export function Cell({ nowrap, muted, className, ...props }: ComponentProps<typeof TableCell> & { nowrap?: boolean; muted?: boolean }) {
   return (
     <TableCell
-      className={cn("py-1.5 align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
+      className={cn("align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
       {...props}
     />
   );

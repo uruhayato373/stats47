@@ -13,7 +13,7 @@ export default function NoteCoversPage() {
   return <Stack gap="lg">
     <PageHeading title="noteカバー管理" source="記事・画像の共通台帳" accessLabel="制作内容・確認結果を保存できます">
       <p className="text-sm text-console-muted">カテゴリの方針を選び、制作IDごとにコピー・題材・プロンプトを管理します。画像を比較し、確認・採用を順に進められます。</p>
-      <Button asChild variant="outline" size="sm"><Link href="/content/note">記事管理へ戻る</Link></Button>
+      <Button variant="outline" size="sm" nativeButton={false} render={<Link href="/content/note" />}>記事管理へ戻る</Button>
     </PageHeading>
     <NoteCoversBrowser rows={data.rows} categories={NOTE_COVER_CATEGORIES} updatedAt={data.updatedAt} />
   </Stack>;

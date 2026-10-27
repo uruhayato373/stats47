@@ -69,7 +69,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
           <StatusBadge tone={APPROVAL_TONE[approval.state] ?? "neutral"}>{APPROVAL_LABEL[approval.state] ?? approval.state}</StatusBadge>
         </div>
       </PageHeading>
-      <div><Button asChild variant="outline"><Link href={`/sns?q=${post.id}`}>画像一覧で確認・下書き編集</Link></Button></div>
+      <div><Button variant="outline" nativeButton={false} render={<Link href={`/sns?q=${post.id}`} />}>画像一覧で確認・下書き編集</Button></div>
 
       <Grid min="lg">
         <PanelCard title="状態と外部 ID">

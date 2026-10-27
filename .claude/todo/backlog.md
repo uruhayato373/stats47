@@ -256,6 +256,15 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ADMIN-UI-BASEUI-01] 管理画面を Base UI (base-nova) へ移し、公式 dashboard-01 の並べ方で全ページを作り直す
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run admin-ui:check] [起票:2026-10-27] [領域:管理] [進行中]
+
+- **方針 (2026-10-27 オーナー判断)**: shadcn/ui は 2026-07 から新規の既定を Base UI にした (https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default)。52 ページを作り直す前に部品を `base-nova` へ移し、画面は公式 `dashboard-01` (Section Cards・ChartContainer の面グラフ・TanStack の表・site-header) の並べ方にそろえる。shadcndashboard.dev は並べ方の見本だけに使う (部品が Badge・Button の大きさを className で上書きしており契約 2 に反するため取り込まない)。独自部品は原則使わない。
+- **作業場所**: worktree `C:/tmp/stats47-admin-baseui` (branch `feat/admin-baseui`)。本体の管理画面 (:4747) を作業中に壊さないため。
+- **段階**: 0 土台 (公式部品を base-nova へ入れ替え・`asChild` 47 か所を `render` へ・トークンを完全な色の値へ・chart トークン追加・sync/parity を base-nova へ) → 1 共通部品 (site-header + Breadcrumb・StatCard を Section Cards 型・ChartContainer の推移チャート・TanStack の表・自作 SVG チャートと StatCard の複製を削除) → 2 ページ (概況・一覧・詳細・文書・制作ツールの 5 型。推移はチャート、`<details>` は Collapsible) → 3 検査と規約 (admin-ui:check に自作チャート・複製・`<details>` を追加、admin-ui.md を改訂) → 4 確認 (型・lint・unit・admin-ui:check・design-system:check、light/dark/スマホ幅の目視)。
+- **停止条件**: 部品の大きさをページで上書きしない。`@stats47/components` を入れない。本番デプロイはしない (管理画面はローカル専用)。
+- **完了条件**: 上の検査がすべて通り、主要ページを light/dark/スマホ幅で目視確認済み。develop へ統合後、このカードを削除する。doboku-note 側の揃えは別カードで起票する。
+
 ### [NOTE-CIRCULATION-RECHECK-01] note→ランキング回遊の着地 session を note.com 経由で取り直す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:管理]
 

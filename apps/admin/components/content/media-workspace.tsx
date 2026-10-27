@@ -651,11 +651,9 @@ function ImageEditor({
         </div>
       </Section>
       {image.kind === 'cover' ? (
-        <Button asChild>
-          <Link href={image.coverManagement ?? '/content/note/covers'}>
+        <Button nativeButton={false} render={<Link href={image.coverManagement ?? '/content/note/covers'} />}>
             カバーの制作・採用画面を開く
-          </Link>
-        </Button>
+          </Button>
       ) : (
         <>
           <label className="block space-y-2 text-sm">
@@ -842,11 +840,9 @@ function ImageEditor({
                 </li>
               ))}
             </ul>
-            <Button asChild variant="outline">
-              <a href={'/api/media-library/' + image.id + '/request'}>
+            <Button variant="outline" nativeButton={false} render={<a href={'/api/media-library/' + image.id + '/request'} />}>
                 制作仕様をダウンロード
-              </a>
-            </Button>
+              </Button>
           </Section>
           <Section title="改善候補をR2へ保存">
             <p className="text-sm text-console-muted">
@@ -948,19 +944,15 @@ function ImageEditor({
                     {status === 'pass' ? 'この候補を採用' : '修正を依頼'}
                   </Button>
                 ))}
-                <Button asChild variant="outline">
-                  <a
-                    href={
+                <Button variant="outline" nativeButton={false} render={<a href={
                       '/api/media-library/' +
                       image.id +
                       '/file?revision=' +
                       image.candidate.id +
                       '&input=1'
-                    }
-                  >
+                    } />}>
                     保存した生成根拠
-                  </a>
-                </Button>
+                  </Button>
               </div>
             </Section>
           )}

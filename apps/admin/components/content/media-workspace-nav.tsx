@@ -36,14 +36,7 @@ export function MediaWorkspaceNav({
         aria-label="メニューを切り替える"
       />
       {links.map(([key, label, href]) => (
-        <Button
-          key={key}
-          asChild
-          variant={active === key ? 'default' : 'outline'}
-          size="sm"
-        >
-          <Link
-            href={href}
+        <Button key={key} variant={active === key ? 'default' : 'outline'} size="sm" nativeButton={false} render={<Link href={href}
             aria-current={active === key ? 'page' : undefined}
             onClick={(event) => {
               if (
@@ -54,11 +47,9 @@ export function MediaWorkspaceNav({
                   ))
               )
                 event.preventDefault();
-            }}
-          >
+            }} />}>
             {label}
-          </Link>
-        </Button>
+          </Button>
       ))}
     </nav>
   );

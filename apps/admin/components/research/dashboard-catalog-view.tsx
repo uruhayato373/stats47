@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ExternalLink } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -374,55 +374,40 @@ export function DashboardCatalogView() {
                 <Label className="mb-1 block text-xs text-console-muted">
                   stats47テーマ
                 </Label>
-                <Select value={theme} onValueChange={setTheme}>
-                  <SelectTrigger aria-label="stats47テーマで絞り込み">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={ALL}>すべてのテーマ</SelectItem>
+                <NativeSelect value={theme} onChange={(e) => setTheme(e.target.value)} aria-label="stats47テーマで絞り込み">
+                    <NativeSelectOption value={ALL}>すべてのテーマ</NativeSelectOption>
                     {data.filters.themes.map((item) => (
-                      <SelectItem key={item.key} value={item.key}>
+                      <NativeSelectOption key={item.key} value={item.key}>
                         {item.label} ({item.count})
-                      </SelectItem>
+                      </NativeSelectOption>
                     ))}
-                  </SelectContent>
-                </Select>
+                </NativeSelect>
               </div>
               <div>
                 <Label className="mb-1 block text-xs text-console-muted">
                   公式システム
                 </Label>
-                <Select value={dashboard} onValueChange={setDashboard}>
-                  <SelectTrigger aria-label="公式システムで絞り込み">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={ALL}>すべてのシステム</SelectItem>
+                <NativeSelect value={dashboard} onChange={(e) => setDashboard(e.target.value)} aria-label="公式システムで絞り込み">
+                    <NativeSelectOption value={ALL}>すべてのシステム</NativeSelectOption>
                     {data.dashboards.map((item) => (
-                      <SelectItem key={item.id} value={item.id}>
+                      <NativeSelectOption key={item.id} value={item.id}>
                         {item.title} ({item.storyCount})
-                      </SelectItem>
+                      </NativeSelectOption>
                     ))}
-                  </SelectContent>
-                </Select>
+                </NativeSelect>
               </div>
               <div>
                 <Label className="mb-1 block text-xs text-console-muted">
                   ストーリー形式
                 </Label>
-                <Select value={pattern} onValueChange={setPattern}>
-                  <SelectTrigger aria-label="ストーリー形式で絞り込み">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={ALL}>すべての形式</SelectItem>
+                <NativeSelect value={pattern} onChange={(e) => setPattern(e.target.value)} aria-label="ストーリー形式で絞り込み">
+                    <NativeSelectOption value={ALL}>すべての形式</NativeSelectOption>
                     {data.filters.patterns.map((item) => (
-                      <SelectItem key={item.key} value={item.key}>
+                      <NativeSelectOption key={item.key} value={item.key}>
                         {PATTERN_LABELS[item.key] ?? item.key} ({item.count})
-                      </SelectItem>
+                      </NativeSelectOption>
                     ))}
-                  </SelectContent>
-                </Select>
+                </NativeSelect>
               </div>
             </div>
 

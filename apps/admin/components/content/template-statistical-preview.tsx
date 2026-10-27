@@ -162,12 +162,10 @@ export function TemplateStatisticalPreview({
       )}
       {samples.length > 1 && (
         <Collapsible open={open} onOpenChange={setOpen}>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm">
+          <CollapsibleTrigger render={<Button variant="ghost" size="sm" />}>
               {open ? 'ほかの検討見本を閉じる' : 'ほかの検討見本を見る'}（
               {samples.length - 1}件）
-            </Button>
-          </CollapsibleTrigger>
+            </CollapsibleTrigger>
           <CollapsibleContent className="space-y-6 pt-4">
             {open &&
               samples

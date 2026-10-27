@@ -1,4 +1,5 @@
-// shadcn/ui 公式（new-york-v4）の hooks/use-mobile.ts をそのまま使う (sidebar.tsx が参照する)。
+// shadcn/ui 公式（base-nova）の use-mobile.ts をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/use-mobile.ts・例外: .claude/config/shadcn-parity-allow.json）。
 import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768

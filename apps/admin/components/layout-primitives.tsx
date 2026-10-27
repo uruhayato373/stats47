@@ -7,7 +7,7 @@ import { cn } from "@/lib/cn";
  * 「直後がカードのときだけ margin」のような兄弟セレクタ依存は、間に別の箱が入ると 0 になる (doboku-note PR #684 の実例)。
  */
 
-const GAP = { sm: "gap-2", md: "gap-3", lg: "gap-6" } as const;
+const GAP = { sm: "gap-2", md: "gap-4", lg: "gap-6" } as const;
 type Gap = keyof typeof GAP;
 
 /** 縦に積む。 */
@@ -17,10 +17,10 @@ export function Stack({ gap = "md", className, ...props }: ComponentProps<"div">
 
 /**
  * 幅に合わせて列数が変わる格子。min は 1 列の最小幅 (この幅を下回ると列が減る)。
- * 例: <Grid min="sm"> (150px) = 小さい数値タイル、<Grid min="lg"> (320px) = グラフ入りカード。
+ * 例: <Grid min="sm"> (180px) = 数値タイル (StatCard)、<Grid min="lg"> (320px) = グラフ入りカード。
  */
 const MIN = {
-  sm: "grid-cols-[repeat(auto-fit,minmax(150px,1fr))]",
+  sm: "grid-cols-[repeat(auto-fit,minmax(180px,1fr))]",
   md: "grid-cols-[repeat(auto-fit,minmax(260px,1fr))]",
   lg: "grid-cols-[repeat(auto-fit,minmax(320px,1fr))]",
 } as const;
@@ -54,8 +54,8 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={cn("flex scroll-mt-6 flex-col gap-2", className)}>
-      <h2 className="m-0 text-sm font-semibold">
+    <section id={id} className={cn("flex scroll-mt-6 flex-col gap-3", className)}>
+      <h2 className="m-0 text-base font-semibold">
         {title}
         {count !== undefined ? <span className="ml-2 font-normal text-muted-foreground">({count})</span> : null}
       </h2>

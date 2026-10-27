@@ -4,13 +4,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { cn } from "@/lib/cn";
 
 /**
- * 表の外枠 (shadcn/ui の Data Table の公式の形: `overflow-hidden rounded-md border` の div + Table)。
+ * 表の外枠 (公式 dashboard-01 の data-table と同じ形: `overflow-hidden rounded-lg border` の div + Table。見出し行は bg-muted)。
  * 表だけの画面では Card で囲まない。区画が並ぶ画面では PanelCard の中に置く (その場合も枠はこれ)。
  * 行・セルは shadcn の TableHeader / TableRow / TableHead / TableCell をそのまま使う (ここで再輸出する)。
  */
 export function TableFrame({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-md border", className)}>
+    <div className={cn("overflow-hidden rounded-lg border", className)}>
       <Table>{children}</Table>
     </div>
   );
