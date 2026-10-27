@@ -17,22 +17,24 @@
  * - フォント最適化（next/font/google）
  * - メタデータはNext.jsのMetadata APIを使用
  *
- * レイアウト構造:
- * - Header: 全ページ共通のヘッダー
- * - SidebarVisibility: サイドバーナビゲーション
- * - main: 各ページのコンテンツエリア
- * - Footer: 全ページ共通のフッター
+ * レイアウト構造 (テンプレート shadcndashboard の dashboard-layout に寄せた・2026-10-27):
+ * - SidebarProvider の中に AppSidebar と SidebarInset を兄弟で置く (sidebar.tsx の DOM 前提)
+ * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content (p-4)・Footer を並べる
+ * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
+ * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
+ * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
  */
 
 import { Suspense } from "react";
 
+import { SidebarInset, SidebarProvider } from "@stats47/components/atoms/ui/sidebar";
 import { Toaster } from "sonner";
 
 import "./globals.css";
 
+import { AppSidebar } from "@/components/organisms/AppSidebar";
 import { Footer } from "@/components/organisms/Footer/Footer";
-import Header from "@/components/organisms/Header";
-import { MobileNavDrawer } from "@/components/organisms/MobileNavDrawer";
+import { SiteHeader } from "@/components/organisms/SiteHeader/SiteHeader";
 
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
@@ -148,27 +150,26 @@ export default function RootLayout({
         </Suspense>
         {/* テーマプロバイダー（ダークモード対応） */}
         <ThemeProvider>
-          {/* メインレイアウトコンテナ */}
-          <div className="relative flex min-h-screen flex-col" suppressHydrationWarning>
-            <a
-              href="#main-content"
-              className="sr-only z-50 bg-background px-4 py-2 text-foreground focus:not-sr-only focus:absolute focus:left-2 focus:top-2"
-            >
-              本文へスキップ
-            </a>
-            {/* ヘッダー（全ページ共通・カテゴリメガメニュー内蔵） */}
-            <Header />
-            {/* メインコンテンツエリア（各ページが PageShell で幅を制御） */}
-            <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
-              {children}
-            </main>
-            {/* フッター（全ページ共通） */}
-            <Footer />
-          </div>
-          {/* モバイル専用ナビゲーションドロワー（PC では描画しない） */}
-          <Suspense fallback={null}>
-            <MobileNavDrawer />
-          </Suspense>
+          <a
+            href="#main-content"
+            className="sr-only z-300 bg-background px-4 py-2 text-foreground focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
+          >
+            本文へスキップ
+          </a>
+          {/* サイドバー型の骨組み (lg 未満では AppSidebar が Sheet に替わる) */}
+          <SidebarProvider defaultOpen>
+            <AppSidebar />
+            <SidebarInset className="min-w-0 overflow-clip">
+              {/* ヘッダー（全ページ共通） */}
+              <SiteHeader />
+              {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}
+              <main id="main-content" className="min-w-0 flex-1 p-4" tabIndex={-1}>
+                {children}
+              </main>
+              {/* フッター（全ページ共通） */}
+              <Footer />
+            </SidebarInset>
+          </SidebarProvider>
           {/* トースト通知（成功、エラー、警告などの通知を表示） */}
           <Toaster position="top-right" richColors />
           {/* Cookie 同意バナー */}

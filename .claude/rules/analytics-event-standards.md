@@ -117,7 +117,7 @@ npm run google-admin:audit-api
 | `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
 | `geo_map_interaction` | `trackGeoMapInteraction` | `analysis_slug` / `geography` / `interaction_type` / `area_code` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
 | `geo_region_select` | `trackGeoRegionSelect` | `analysis_slug` / `geography` / `area_code` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
-| `geo_compare_add` | `trackGeoCompareAdd` | 登録しない（送信元の `GeoPopulationExplorer` がどのページにも置かれていない。2026-09-26 確認） | 要否× | geo M1 |
+| `geo_compare_add` | `trackGeoCompareAdd` | 登録しない（呼び出す部品がどのページにも置かれていない。2026-09-26 確認） | 要否× | geo M1 |
 
 `geo_map_interaction.interaction_type`は県地図の`select-prefecture` / `clear-prefecture`に加え、
 Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共施設分析専用の`stage-facilities`を許可する。自由入力値は送らない。
@@ -141,6 +141,14 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 旧実装は交差率未確認のため過大計上し得た。今回の厳密化、旧 `*-item` と親配置の分離、検索クリック除外で
 > CTR の定義が変わるため、デプロイ境界をまたぐ配置別CTRを単純比較しない。
 > 公開後は日付を固定した非重複期間で `pagePath × deviceCategory × ad_id × link_position` とPVを取得する。
+
+> **nav_surface の値変更 (2026-10-27・サイドバー型の骨組み、未デプロイ)**: 公開サイトの骨組みをテンプレート
+> (shadcndashboard) のサイドバー型に替え、ヘッダーのナビ (メガメニュー) とモバイルドロワーを撤去した。サイト全体のナビは
+> `AppSidebar` だけになり、`nav_surface` は PC の常設サイドバー = `sidebar`、lg (1024px) 未満で Sheet として開いたもの =
+> `sidebar-mobile` の 2 値で送る (送信は共通のクリック監視 `NavClickTracker` が `data-nav-surface` / `data-nav-label` から行う)。
+> 旧値 `desktop-header` / `mobile-drawer` はデプロイ日を境に 0 件になる。登録済み `nav_surface` の**値変更**で新しい
+> custom dimension は無い。サイドバーはカテゴリとテーマの一覧も常に出すので、デプロイ前後のグローバルナビの件数・
+> ラベル別の内訳を単純比較しない。フッターに足した主要ナビ・テーマのリンクは既存の `footer` で数える。
 
 > **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を
 > `product_catalog`、ブログ本文末→文脈一致したKindle詳細を `blog_product` として追加した。

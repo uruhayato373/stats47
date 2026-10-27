@@ -398,8 +398,8 @@
     --info: 224 76% 48%;
     --info-soft: 214 100% 97%;
 
-    /* Header height: mobile compact / desktop portal navigation */
-    --header-height: 56px;
+    /* Header height: SiteHeader (h-12)。PC とモバイルで同じ高さ */
+    --header-height: 48px;
 
     /* Footer height */
     --footer-height: 80px;
@@ -409,12 +409,6 @@
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
     --safe-area-left: env(safe-area-inset-left, 0px);
     --safe-area-right: env(safe-area-inset-right, 0px);
-  }
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --header-height: 52px;
   }
 }
 

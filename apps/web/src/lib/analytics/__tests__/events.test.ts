@@ -219,6 +219,19 @@ describe("GA4 カスタムイベント", () => {
     expect(params).not.toHaveProperty("ranking_key");
   });
 
+  it("サイト全体のナビは PC の sidebar と Sheet の sidebar-mobile を分けて送る", () => {
+    trackNavClick({ label: "ランキング", href: "/ranking", surface: "sidebar" });
+    trackNavClick({ label: "ランキング", href: "/ranking", surface: "sidebar-mobile" });
+
+    expect(mockGtag).toHaveBeenNthCalledWith(1, "event", "nav_click", expect.objectContaining({
+      nav_label: "ランキング",
+      nav_surface: "sidebar",
+    }));
+    expect(mockGtag).toHaveBeenNthCalledWith(2, "event", "nav_click", expect.objectContaining({
+      nav_surface: "sidebar-mobile",
+    }));
+  });
+
   it("trackNavClick が /areas の areas_search surface を送信する", () => {
     trackNavClick({
       label: "東京都",
