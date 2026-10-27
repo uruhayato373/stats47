@@ -256,6 +256,26 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [TEMPLATE-BASE-UI-REST-01] テンプレートを正とする移行の残り (独自カードの型・D3 チャートの見た目・カルーセル矢印)
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:サイト]
+
+- **経緯**: 2026-10-27 オーナー決定「shadcndashboard テンプレートを正としてサイトを寄せる・余白も少なく」。ブランチ `feature/template-base-ui` で部品の Base UI 化 (admin・web)、色・角丸・カード面 (`@stats47/ui-theme`)、外枠の余白 (p-4 / gap-4) までを済ませた。
+- **残り (実行順)**: ① 名前に Card が付く独自部品のうち共通 `Card` を使わない 25 ファイルを、テンプレートの 3 型 (数値カード「Weekly sales」・チャートカード「Sales Overview」・一覧カード「Campaign Performance」) へ寄せる。② D3 チャートの見た目をテンプレートの Recharts 版に合わせる (点線の横目盛りだけ・軸線なし・小さい軸文字・単色の濃淡・白いカード型ツールチップ・上置きの凡例)。D3 部品 16 個に固定色が 43 か所ある。Remotion も同じ部品を読むので CSS 変数が効かない経路を確かめる。③ カルーセルの矢印は「カードに重ねない」(2026-09-24 週次 UI 検査) を守ったまま、見出しの「もっと見る」の行へ並べて矢印だけの行をなくす。④ ChartFooter のメニューで id / aria-controls を自前で渡しているが Base UI の MenuTrigger も自動で付ける (`node_modules/@base-ui/react/menu/trigger/MenuTrigger.js`)。二重指定が要るか確かめる。
+- **禁止**: Recharts を公開サイトに入れない (gzip 約 119KB の上乗せ)。カードを入れ子にしない。
+- **完了条件**: ①〜④ の差分が `npm run design-system:check -w apps/web`・web vitest 全件・`npm run admin-ui:check` を通り、主要 4 ページ (/・/ranking/total-population・/themes/population-dynamics・/areas/13000) の前後のスクリーンショットをオーナーが確認した。
+
+### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
+
+- **証拠 (2026-10-27)**: `npm run dev:web` が「This build is using Turbopack, with a `webpack` config and no `turbopack` config」で終了する。`apps/web/scripts/dev-server.ts` の `bundlerArgs()` が既定で引数を付けないため。`--turbopack` を明示すると起動はするが、次に「Conflicting route and metadata at /sitemap.xml」で全ページ 500。どちらも 2026-10-26 の Next.js 16.4.3 更新 (`89ef74c19`) 以降。`WEB_DEV_BUNDLER=webpack` なら起動するが、8GB の Mac で数ページ開くとメモリ切れで落ちる。
+- **完了条件**: `npm run dev:web` (Turbopack) で /・/ranking/total-population・/sitemap.xml が 200。
+
+### [MIGRATION-FLOW-TEST-POLICY-01] quality-gates の migration-flow がテスト実在と食い違う
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-10-27] [領域:データ]
+
+- **証拠**: `.claude/config/quality-gates.json` の `packages/migration-flow` は `testPolicy: none` (テストなし) だが、`packages/migration-flow/src/lib/__tests__/focus-file.test.ts` がある (2026-10-26 追加)。上の契約テストが `MIGRATION_FLOW_TEST_POLICY_INVALID` で落ちる。
+- **完了条件**: testPolicy を required にして PR の test job に含めるか、テストの置き場を見直し、上の検証コマンドが pass。
+
 ### [MEDIA-CODE-IMAGE-REFERENCE-01] 画像台帳でコード例の画像記法を配信画像として数えない
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-27] [領域:サイト]
 
