@@ -15,7 +15,7 @@ import Link from "@/components/atoms/SiteLink";
 const surfaceCardClass = cn(CARD_SURFACE_CLASS, "p-4 transition-colors");
 
 const interactiveSurfaceClass =
-  "hover:border-primary/40 hover:bg-accent/40 hover:shadow-md";
+  "hover:border-primary/40 hover:bg-accent/40";
 
 /**
  * home の比較対象カードとcategory注目ランキングの共通比率。
@@ -111,7 +111,7 @@ export function ArticleCard({
     <div
       className={cn(
         CARD_SURFACE_CLASS,
-        "px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12",
+        "px-4 py-6 sm:px-6 lg:px-8 lg:py-8",
         "max-sm:-mx-4 max-sm:rounded-none max-sm:border-x-0",
         className,
       )}

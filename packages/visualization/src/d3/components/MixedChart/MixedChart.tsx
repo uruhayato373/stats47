@@ -267,6 +267,7 @@ export function MixedChart({
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - plotLeft - marginRight)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
+          .attr("stroke-dasharray", CHART_STYLES.grid.dashArray)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("fill", columns[0]?.color ?? "#666").attr("dx", "-4"));
 

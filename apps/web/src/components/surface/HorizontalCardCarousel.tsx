@@ -82,7 +82,8 @@ export function HorizontalCardCarousel({
 
   return (
     <div>
-      <div className="mb-2 flex justify-end gap-2">
+      {/* 横に動かせないとき (全カードが見えている広い画面) は矢印の行ごと出さず、見出しとカードの間を詰める */}
+      <div className={`mb-2 justify-end gap-2 ${canScrollLeft || canScrollRight ? 'flex' : 'hidden'}`}>
         <Button
           type="button"
           variant="outline"

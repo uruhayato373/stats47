@@ -51,12 +51,13 @@ export const TOOLTIP_STYLES = {
   opacity: "0",
   pointerEvents: "none",
   zIndex: "9999",
-  backgroundColor: "hsl(var(--popover))",
-  color: "hsl(var(--popover-foreground))",
+  // テンプレートの lyra チャートツールチップ (.cn-chart-tooltip: 角丸なし・border-border/50・bg-background・shadow-xl) に合わせる
+  backgroundColor: "hsl(var(--background))",
+  color: "hsl(var(--foreground))",
   padding: "0.375rem 0.625rem",
-  borderRadius: "0.5rem",
-  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-  border: "1px solid hsl(var(--border))",
+  borderRadius: "0",
+  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+  border: "1px solid hsl(var(--border) / 0.5)",
   fontSize: "0.75rem",
   lineHeight: "1.125rem",
   transition: "opacity 0.1s ease",
@@ -68,7 +69,7 @@ export const TOOLTIP_STYLES = {
  * React要素のclassNameプロップに使用
  */
 export const TOOLTIP_CLASSNAMES =
-  "absolute bg-popover text-popover-foreground px-2.5 py-1.5 rounded-lg border border-border text-xs opacity-0 transition-opacity z-50 backdrop-blur-xs pointer-events-none shadow-md";
+  "absolute bg-background text-foreground px-2.5 py-1.5 rounded-none border border-border/50 text-xs opacity-0 transition-opacity z-50 backdrop-blur-xs pointer-events-none shadow-xl";
 
 /**
  * ツールチップのHTML生成関数

@@ -112,12 +112,14 @@ export function Scatterplot({
                 .attr("transform", `translate(0,${height - marginBottom})`)
                 .attr("class", "grid")
                 .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
+                .style("stroke-dasharray", CHART_STYLES.grid.dashArray)
                 .call(axisBottom(xScale).ticks(width / 80).tickSize(-height + marginTop + marginBottom).tickFormat(() => ""));
 
             svg.append("g")
                 .attr("transform", `translate(${marginLeft},0)`)
                 .attr("class", "grid")
                 .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
+                .style("stroke-dasharray", CHART_STYLES.grid.dashArray)
                 .call(axisLeft(yScale).ticks(height / 50).tickSize(-width + marginLeft + marginRight).tickFormat(() => ""));
         }
 
