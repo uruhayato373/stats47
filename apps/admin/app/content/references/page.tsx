@@ -9,7 +9,7 @@ import { Cell, DataTable, Row, StatCard } from '@/components/admin-ui';
 import { Section, Stack } from '@/components/layout-primitives';
 import { ErrorNote, PageHeading } from '@/components/ops/primitives';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
@@ -323,7 +323,7 @@ export default async function ReferenceContentPage({
           ['context', '補強候補'],
           ['audit', '機械監査'],
         ].map(([anchor, label]) => (
-          <Button key={anchor} variant="outline" size="sm" nativeButton={false} render={<a href={`#${anchor}`} />}>{label}</Button>
+          <a href={`#${anchor}`} key={anchor} data-slot="button" className={buttonVariants({ variant: "outline", size: "sm" })}>{label}</a>
         ))}
       </nav>
 
@@ -384,7 +384,7 @@ export default async function ReferenceContentPage({
               検索する
             </Button>
             {hasFilters ? (
-              <Button variant="ghost" nativeButton={false} render={<a href="/content/references#portfolio" />}>条件を解除</Button>
+              <a href="/content/references#portfolio" data-slot="button" className={buttonVariants({ variant: "ghost" })}>条件を解除</a>
             ) : null}
           </form>
           <p className="text-[11px] text-console-muted">

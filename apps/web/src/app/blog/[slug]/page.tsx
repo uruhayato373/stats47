@@ -299,15 +299,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <Breadcrumb className="mb-4" data-nav-surface="breadcrumb">
                         <BreadcrumbList>
                             <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/">ホーム</Link>
-                                </BreadcrumbLink>
+                                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/blog">ブログ</Link>
-                                </BreadcrumbLink>
+                                <BreadcrumbLink render={<Link href="/blog" />}>ブログ</BreadcrumbLink>
                             </BreadcrumbItem>
                             {/* 狭い画面では記事名を出さない (見出しと重なるため。Breadcrumbs と同じ扱い) */}
                             <BreadcrumbSeparator className={CURRENT_ITEM_CLASS} />

@@ -45,8 +45,13 @@ export function DataTablePagination<TData>({
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={(value) => {
+                            if (value === null) return;
                             table.setPageSize(Number(value));
                         }}
+                        items={[10, 20, 30, 40, 50, 100].map((pageSize) => ({
+                            value: `${pageSize}`,
+                            label: `${pageSize}`,
+                        }))}
                     >
                         <SelectTrigger
                             aria-label="表示件数"

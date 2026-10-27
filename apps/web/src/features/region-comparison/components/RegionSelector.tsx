@@ -45,7 +45,16 @@ function PrefectureSelect({ value, onChange, excludeCode, color }: PrefectureSel
 
   return (
     <div>
-      <Select value={value || ""} onValueChange={onChange}>
+      <Select
+        value={value || ""}
+        onValueChange={(code) => {
+          if (code !== null) onChange(code);
+        }}
+        items={available.map((pref) => ({
+          value: pref.prefCode,
+          label: pref.prefName,
+        }))}
+      >
         <SelectTrigger
           aria-label={color === REGION_A_COLOR ? "地域Aの都道府県を選択" : "地域Bの都道府県を選択"}
           className="h-9 w-full rounded-lg border text-sm font-semibold text-foreground focus:ring-2"

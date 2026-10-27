@@ -51,8 +51,9 @@ paths:
 
 1. 画面は `PanelCard` / `TableFrame` / `DataTable` / `StatCard` / `StatusBadge` / `LinkCard` / `Stack` / `Grid` / `Section` と公式部品から組む。
    フォームは公式の `Input` / `NativeSelect` (サーバー描画の GET フォーム向け) / `Button`、注記は `Alert`、
-   ページ内リンクは `<Button variant="outline" nativeButton={false} render={<Link href=… />}>`。
-   Base UI は Radix の `asChild` を持たない。子要素として描きたい要素は `render` に渡す。
+   ボタンの見た目のリンクは `<Link href=… data-slot="button" className={buttonVariants({ variant: "outline" })}>`。
+   `<Button render={<Link />}>` にしない (Base UI の Button が role="button" を付け、リンクとして読み上げられなくなる)。
+   Base UI は Radix の `asChild` を持たない。リンク以外で子要素として描きたい要素 (SheetTrigger の中の Button 等) は `render` に渡す。
    クライアントの `Select` は `items` (値と表示名の組) を渡す。渡さないと選択欄に値そのものが出る。値の変更は `null` を受ける。
 2. `npm run admin-ui:check` を通し、light / dark の両方で見た目を確認する。
 3. メニュー項目を足す・URL を変えるときは `lib/nav-registry.ts` だけを編集する (テストがページの実在を確かめる)。

@@ -31,17 +31,13 @@ export function RankingPageBreadcrumbs({
     <Breadcrumb className={className ?? "mb-4"}>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">ホーム</Link>
-          </BreadcrumbLink>
+          <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
         </BreadcrumbItem>
         {category && (
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href={hrefFor("category", { categoryKey: category.key })}>{category.name}</Link>
-              </BreadcrumbLink>
+              <BreadcrumbLink render={<Link href={hrefFor("category", { categoryKey: category.key })} />}>{category.name}</BreadcrumbLink>
             </BreadcrumbItem>
           </>
         )}

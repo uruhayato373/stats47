@@ -54,7 +54,12 @@ function PrefectureCardBody({
   return (
     <>
       <Select
-        onValueChange={(prefCode) => {
+        items={prefectures.map((prefecture) => ({
+          value: prefecture.prefCode,
+          label: prefecture.prefName,
+        }))}
+        onValueChange={(prefCode: string | null) => {
+          if (prefCode === null) return;
           const prefecture = prefectures.find(
             (item) => item.prefCode === prefCode
           );

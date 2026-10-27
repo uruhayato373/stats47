@@ -1,9 +1,4 @@
-/* テンプレートの見た目の入口。各アプリの globals.css で `@import "tailwindcss";` の直後に読み、
-   ルート要素に class="style-lyra" を付ける (lyra の部品スタイルは .style-lyra の下だけで効く)。 */
-@import "tw-animate-css";
-@import "./shadcn-tailwind.css";
+/* テンプレートの見た目の入口 (管理画面用)。部品の見た目 + テンプレートの oklch トークンをそのまま読む。
+   公開サイトは色の参照が hsl(var(--x)) なので、base.css と tokens-hsl.css を個別に読む (README)。 */
+@import "./base.css";
 @import "./tokens.css";
-
-@custom-variant style-lyra (&:where(.style-lyra *));
-
-@import "./style-lyra.css";

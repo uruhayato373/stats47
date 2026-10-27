@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Cell, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { hasError } from "@/lib/server/state-io";
 import { cadenceOf, scheduleSortKey, workflowCatalog, WORKFLOW_CATALOG, type WorkflowEntry } from "@/lib/server/workflows";
 
@@ -112,9 +112,9 @@ export default async function WorkflowsPage({ searchParams }: { searchParams: Pr
 
         <div className="flex flex-wrap gap-2">
           {(Object.keys(FILTERS) as FilterKey[]).map((k) => (
-            <Button key={k} size="sm" variant={k === filter ? "default" : "outline"} nativeButton={false} render={<Link href={k === "all" ? "/ops/workflows" : `/ops/workflows?f=${k}`} />}>
+            <Link href={k === "all" ? "/ops/workflows" : `/ops/workflows?f=${k}`} key={k} data-slot="button" className={buttonVariants({ variant: k === filter ? "default" : "outline", size: "sm" })}>
                 {FILTERS[k].label} ({all.filter(FILTERS[k].test).length})
-              </Button>
+              </Link>
           ))}
         </div>
 

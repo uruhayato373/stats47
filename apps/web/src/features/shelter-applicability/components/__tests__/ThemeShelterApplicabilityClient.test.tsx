@@ -34,7 +34,7 @@ describe('施設種別と災害対応を混ぜない県別表示', () => {
     expect(tables[0]!.querySelectorAll('tbody tr')).toHaveLength(8);
     expect(tables[1]!.querySelectorAll('tbody tr')).toHaveLength(3);
     for (const t of tables)
-      expect(t.parentElement?.className).toContain('overflow-auto');
+      expect(t.parentElement?.className).toContain('overflow-x-auto');
     expect(
       container.querySelector('[data-hazard-key="flood"] [data-applicable]')
         ?.textContent

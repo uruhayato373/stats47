@@ -129,7 +129,16 @@ export function GeoPopulationExplorer({
             </p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row">
-            <Select value={selectedCode ?? NONE} onValueChange={selectFromList}>
+            <Select
+              value={selectedCode ?? NONE}
+              items={[
+                { value: NONE, label: '都道府県を選択' },
+                ...rows.map((row) => ({ value: row.areaCode, label: row.areaName })),
+              ]}
+              onValueChange={(value) => {
+                if (value !== null) selectFromList(value);
+              }}
+            >
               <SelectTrigger
                 className="w-full sm:w-48"
                 aria-label="都道府県を選択"

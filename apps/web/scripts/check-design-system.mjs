@@ -441,7 +441,9 @@ if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
   });
 }
 
-// 角丸の SSOT は globals.css の --radius (操作部品) と --card-radius (カード外枠) で、どちらも 0。
+// 操作部品の --radius はテンプレートの値 (@stats47/ui-theme の tokens-hsl.css・2026-10-27 オーナー決定
+// 「テンプレートを正とする」) で、globals.css では定義しない。部品の角はテンプレートの lyra スタイルが決める。
+// globals.css に残るのはカード外枠の --card-radius (0) で、ここに非ゼロを入れたらこの検査が止める。
 // 角丸を採用する判断をしたら、この検査の許容値を同じ差分で変える (トークンだけ変えると落ちる)。
 // 本文の中に置く部品の --content-radius (2026-09-25 採択) は別の役割なので 0 でなくてよく、下で個別に見る。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で

@@ -536,7 +536,14 @@ function PrefectureSelector({
   return (
     <Select
       value={value ?? "all"}
-      onValueChange={(v) => onChange(v === "all" ? null : v)}
+      onValueChange={(v) => {
+        if (v === null) return;
+        onChange(v === "all" ? null : v);
+      }}
+      items={[
+        { value: "all", label: PREFECTURE_SET_LABEL },
+        ...PREFECTURE_OPTIONS.map((p) => ({ value: p.value, label: p.label })),
+      ]}
     >
       <SelectTrigger className="w-[140px] h-8 text-xs">
         <SelectValue placeholder="都道府県を選択" />

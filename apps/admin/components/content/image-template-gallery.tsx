@@ -16,7 +16,7 @@ import { MediaWorkspaceNav } from './media-workspace-nav';
 import { ImageTemplateTree, type GalleryBranch } from './image-template-tree';
 import { TemplateStatisticalPreview } from './template-statistical-preview';
 import { PanelCard, StatusBadge } from '@/components/admin-ui';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -148,13 +148,13 @@ function TemplateCard({
             </div>
           </SheetContent>
         </Sheet>
-        <Button variant="ghost" size="sm" nativeButton={false} render={<Link href={mediaUrl('images', {
+        <Link href={mediaUrl('images', {
               template: template.id,
               purpose,
               returnTo,
-            })} />}>
+            })} data-slot="button" className={buttonVariants({ variant: "ghost", size: "sm" })}>
             この型の使用先
-          </Button>
+          </Link>
       </div>
     </section>
   );

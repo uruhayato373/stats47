@@ -37,7 +37,15 @@ export function PrefectureSelect({ className }: { className?: string } = {}) {
   return (
     <Select
       value={selectedPrefectureCode ?? THEME_PREFECTURE_SET_VALUE}
+      items={[
+        { value: THEME_PREFECTURE_SET_VALUE, label: PREFECTURE_SET_LABEL },
+        ...PREFECTURE_LIST_2DIGIT.map((p) => ({
+          value: to5DigitPrefCode(p.code),
+          label: p.name,
+        })),
+      ]}
       onValueChange={(v) => {
+        if (v === null) return;
         setSelected(v === THEME_PREFECTURE_SET_VALUE ? null : v);
         trackNavClick({
           surface: 'theme_region',

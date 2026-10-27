@@ -306,7 +306,7 @@ describe("単独世帯と5年前居住地の母集団", () => {
         "沖縄県",
       );
       expect(screen.getByRole("table").parentElement?.className).toContain(
-        "overflow-auto",
+        "overflow-x-auto",
       );
     });
   }

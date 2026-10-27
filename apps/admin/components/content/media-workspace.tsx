@@ -27,7 +27,7 @@ import {
   TableFrame,
 } from '@/components/admin-ui';
 import { Section } from '@/components/layout-primitives';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { NativeSelect } from '@/components/ui/native-select';
@@ -651,9 +651,9 @@ function ImageEditor({
         </div>
       </Section>
       {image.kind === 'cover' ? (
-        <Button nativeButton={false} render={<Link href={image.coverManagement ?? '/content/note/covers'} />}>
+        <Link href={image.coverManagement ?? '/content/note/covers'} data-slot="button" className={buttonVariants({  })}>
             カバーの制作・採用画面を開く
-          </Button>
+          </Link>
       ) : (
         <>
           <label className="block space-y-2 text-sm">
@@ -840,9 +840,9 @@ function ImageEditor({
                 </li>
               ))}
             </ul>
-            <Button variant="outline" nativeButton={false} render={<a href={'/api/media-library/' + image.id + '/request'} />}>
+            <a href={'/api/media-library/' + image.id + '/request'} data-slot="button" className={buttonVariants({ variant: "outline" })}>
                 制作仕様をダウンロード
-              </Button>
+              </a>
           </Section>
           <Section title="改善候補をR2へ保存">
             <p className="text-sm text-console-muted">
@@ -944,15 +944,15 @@ function ImageEditor({
                     {status === 'pass' ? 'この候補を採用' : '修正を依頼'}
                   </Button>
                 ))}
-                <Button variant="outline" nativeButton={false} render={<a href={
+                <a href={
                       '/api/media-library/' +
                       image.id +
                       '/file?revision=' +
                       image.candidate.id +
                       '&input=1'
-                    } />}>
+                    } data-slot="button" className={buttonVariants({ variant: "outline" })}>
                     保存した生成根拠
-                  </Button>
+                  </a>
               </div>
             </Section>
           )}

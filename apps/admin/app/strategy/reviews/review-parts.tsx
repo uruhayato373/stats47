@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { reviewRunView, type Cadence, type ReviewRunView, type RunVerdict, type StepState } from "@/lib/server/reviews";
 import { hasError } from "@/lib/server/state-io";
 
@@ -35,10 +35,10 @@ function RunPicker({ base, view }: { base: string; view: ReviewRunView }) {
   return (
     <div className="flex flex-wrap gap-2">
       {view.options.map((o) => (
-        <Button key={o.key} size="sm" variant={o.key === view.period ? "default" : "outline"} nativeButton={false} render={<Link href={`${base}?run=${o.key}`} />}>
+        <Link href={`${base}?run=${o.key}`} key={o.key} data-slot="button" className={buttonVariants({ variant: o.key === view.period ? "default" : "outline", size: "sm" })}>
             {o.key}
             {o.missing ? " (未作成)" : ""}
-          </Button>
+          </Link>
       ))}
     </div>
   );

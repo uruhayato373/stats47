@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
@@ -11,8 +11,9 @@ describe('ChartFooter', () => {
     const trigger = screen.getByRole('button', { name: 'ランキング2件を表示' });
     expect(trigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
     await user.click(trigger);
+    const menu = await screen.findByRole('menu');
     expect(trigger).toHaveAttribute('aria-controls', 'theme-ports-footer-ranking-content');
-    expect(screen.getByRole('menu')).toHaveAttribute('id', 'theme-ports-footer-ranking-content');
+    expect(menu).toHaveAttribute('id', 'theme-ports-footer-ranking-content');
     expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', trigger.id);
   });
   it('単一の出典・ランキングをアイコン付きの短い導線で表示する', async () => {
@@ -31,7 +32,13 @@ describe('ChartFooter', () => {
     expect(screen.getByText('出典')).toBeVisible();
     expect(screen.queryByText('人口動態統計')).toBeNull();
     await user.hover(sourceLink);
-    expect(await screen.findByRole('tooltip')).toHaveTextContent('出典: 人口動態統計');
+    // Base UI の Tooltip は視覚専用で role="tooltip" を持たない (読み上げはトリガーの aria-label が担う)。
+    // 表示された補助ラベルの本文で確かめる。
+    await waitFor(() =>
+      expect(document.querySelector('[data-slot="tooltip-content"]')).toHaveTextContent(
+        '出典: 人口動態統計'
+      )
+    );
     expect(screen.getByText('ランキング')).toBeVisible();
     expect(
       screen.getByRole('link', { name: '指標の定義・ランキング' })
@@ -69,7 +76,7 @@ describe('ChartFooter', () => {
 
     await user.click(screen.getByRole('button', { name: 'ランキング2件を表示' }));
     expect(
-      screen.getByRole('menuitem', { name: '指標の定義・ランキング' })
+      await screen.findByRole('menuitem', { name: '指標の定義・ランキング' })
     ).toHaveAttribute('href', '/ranking/primary');
     expect(
       screen.getByRole('menuitem', { name: '関連指標の定義・ランキング' })

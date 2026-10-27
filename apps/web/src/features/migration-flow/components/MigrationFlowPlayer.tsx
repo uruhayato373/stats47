@@ -94,7 +94,13 @@ export function MigrationFlowPlayer({
       {showSelector && (
         <div className="mb-3 flex items-center gap-2">
           <span className="text-sm text-muted-foreground">焦点の都道府県</span>
-          <Select value={prefCode} onValueChange={setPrefCode}>
+          <Select
+            value={prefCode}
+            items={PREFECTURES.map((p) => ({ value: p.code, label: p.name }))}
+            onValueChange={(value) => {
+              if (value !== null) setPrefCode(value);
+            }}
+          >
             <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>

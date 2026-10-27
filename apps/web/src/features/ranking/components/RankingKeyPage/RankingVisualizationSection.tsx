@@ -26,7 +26,7 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
  * lg 以上: タブ選択に関係なく両方表示する (地図とテーブルを並べる)
  */
 const CONTENT_CLASS =
-    "mt-0 min-w-0 data-[state=inactive]:hidden lg:data-[state=inactive]:block";
+    "mt-0 min-w-0 lg:data-[hidden]:block!";
 
 interface RankingVisualizationSectionProps {
     rankingItem: RankingItem;
@@ -49,7 +49,7 @@ export function RankingVisualizationSection({
 }: RankingVisualizationSectionProps) {
     return (
         // Tabs は 1 本だけ置く。地図・テーブルとも各 1 インスタンスに保つため
-        // forceMount + lg:block で「モバイル=タブ切替 / lg+=常時 2 枚」を CSS だけで両立する。
+        // keepMounted + lg:block で「モバイル=タブ切替 / lg+=常時 2 枚」を CSS だけで両立する。
         // (旧実装は lg:hidden と hidden lg:block の 2 ブロックに分かれており、
         //  CSS で隠しているだけで DOM には両方存在した。地図を初期タブにすると
         //  デスクトップで Leaflet が 2 インスタンスマウントされてしまう)
@@ -74,10 +74,11 @@ export function RankingVisualizationSection({
                         <Skeleton className="w-full h-full opacity-50" />
                     </div>
                 )}
-                {/* forceMount 時 Radix は hidden 属性を付けない (present が常に true になるため)。
-                    表示制御は data-state で自前に行う: lg 未満は非アクティブを隠し、lg+ は常に 2 枚出す。 */}
+                {/* keepMounted の非アクティブなパネルには Base UI が hidden 属性 (と data-hidden) を付ける。
+                    lg 未満はそのまま隠し、lg+ は常に 2 枚出す。Tailwind v4 の preflight は [hidden] を
+                    display:none !important にするので、lg+ の表示指定にも ! (important) が要る。 */}
                 <TabsContent
-                    forceMount
+                    keepMounted
                     value="map"
                     className={CONTENT_CLASS}
                 >
@@ -90,7 +91,7 @@ export function RankingVisualizationSection({
                     />
                 </TabsContent>
                 <TabsContent
-                    forceMount
+                    keepMounted
                     value="table"
                     className={CONTENT_CLASS}
                 >

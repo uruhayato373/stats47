@@ -63,6 +63,7 @@
     "@stats47/station-passengers": "*",
     "@stats47/stats-r2": "*",
     "@stats47/types": "*",
+    "@stats47/ui-theme": "^1.0.0",
     "@stats47/utils": "*",
     "@stats47/visualization": "*",
     "@tanstack/react-table": "^8.21.3",

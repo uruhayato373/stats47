@@ -57,7 +57,7 @@ describe('貨物ODの県・機関・方向表示', () => {
       screen.getByRole('columnheader', { name: '輸送量（フレートトン）' })
     ).toBeTruthy();
     expect(screen.getByRole('table').parentElement?.className).toContain(
-      'overflow-auto'
+      'overflow-x-auto'
     );
   });
   it('不正な県コードを全国で代用しない', () => {

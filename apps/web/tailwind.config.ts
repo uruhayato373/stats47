@@ -64,6 +64,24 @@ const config: Config = {
           // 完全な色値 (transparent を取れるよう hsl で包まない)。opacity 修飾子は使わない
           outline: "var(--card-outline)",
         },
+        // テンプレートの部品スタイル (@stats47/ui-theme の style-lyra.css) が @apply で使う色。値は tokens-hsl.css
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
+        },
         // データの状態色。生の emerald/red/amber/blue-NNN の代わりに使う
         positive: { DEFAULT: "hsl(var(--positive))", soft: "hsl(var(--positive-soft))" },
         negative: { DEFAULT: "hsl(var(--negative))", soft: "hsl(var(--negative-soft))" },

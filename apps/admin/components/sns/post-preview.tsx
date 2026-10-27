@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin-ui/status-badge';
 import { MediaPreview } from '@/components/media-preview';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
@@ -161,8 +161,7 @@ export function PostPreview({
               </div>
             )}
             {item.id && (
-              <Button variant="outline" nativeButton={false} render={<a href={`/sns/${item.id}`}
-                  onClick={(e) => {
+              <a href={`/sns/${item.id}`} onClick={(e) => {
                     if (
                       dirty &&
                       !window.confirm(
@@ -170,9 +169,9 @@ export function PostPreview({
                       )
                     )
                       e.preventDefault();
-                  }} />}>
+                  }} data-slot="button" className={buttonVariants({ variant: "outline" })}>
                   ID台帳の詳細・出典・指標
-                </Button>
+                </a>
             )}
             {typeof item.post_url === 'string' && (
               <p>

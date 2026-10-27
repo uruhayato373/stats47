@@ -1,0 +1,9 @@
+/* 部品の見た目 (色トークンを含まない)。tw-animate・shadcn の追加 variant・style-lyra。
+   色は tokens.css (oklch・管理画面) か tokens-hsl.css (同じ色の HSL 3 値・公開サイト) を別に読む。
+   ルート要素に class="style-lyra" を付ける (lyra の部品スタイルは .style-lyra の下だけで効く)。 */
+@import "tw-animate-css";
+@import "./shadcn-tailwind.css";
+
+@custom-variant style-lyra (&:where(.style-lyra *));
+
+@import "./style-lyra.css";

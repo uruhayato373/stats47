@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin-ui';
 import { Section, Stack } from '@/components/layout-primitives';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -91,7 +91,7 @@ export function NoteCoverProduction({ row, onSaved, onDirty }: { row: NoteCoverR
       </Stack>}
       {work.candidateRevisionId && !work.candidateMatches && <p className="text-sm text-console-muted">表示中の候補は、この制作内容で作った画像として登録されていません。新しい候補を制作・登録してください。</p>}
       {work.candidateMatches && <Stack>
-        {row.candidateImageUrl && <><div className="w-full max-w-80"><NoteCoverImage src={row.candidateImageUrl} alt="候補の縮小表示（幅320px）" /></div><Button variant="outline" nativeButton={false} render={<a href={row.candidateImageUrl} target="_blank" rel="noreferrer" />}>候補を原寸で開く</Button></>}
+        {row.candidateImageUrl && <><div className="w-full max-w-80"><NoteCoverImage src={row.candidateImageUrl} alt="候補の縮小表示（幅320px）" /></div><a href={row.candidateImageUrl} target="_blank" rel="noreferrer" data-slot="button" className={buttonVariants({ variant: "outline" })}>候補を原寸で開く</a></>}
         <p className="text-sm">原寸と幅320pxで文字・絵・根拠との一致を確認し、上の確認項目に沿って判定してください。</p>
         <Label htmlFor="cover-review-reason">確認結果・修正指示</Label><Textarea id="cover-review-reason" value={reason} maxLength={2000} onChange={e => { setReason(e.target.value); onDirty(dirty || !!e.target.value); }} />
         <div className="flex flex-wrap gap-2"><Button disabled={busy || dirty || !reason.trim()} onClick={() => save({ action: 'review', status: 'pass', candidateRevisionId: work.candidateRevisionId, reason })}>この画像を採用</Button><Button variant="outline" disabled={busy || dirty || !reason.trim()} onClick={() => save({ action: 'review', status: 'needs-revision', candidateRevisionId: work.candidateRevisionId, reason })}>修正を依頼</Button></div>

@@ -62,9 +62,17 @@ export function DataTableToolbar<TData>({
                                 </span>
                                 <Select
                                     value={(column.getFilterValue() as string) ?? ""}
-                                    onValueChange={(value) =>
-                                        column.setFilterValue(value === "all" ? "" : value)
-                                    }
+                                    onValueChange={(value) => {
+                                        if (value === null) return;
+                                        column.setFilterValue(value === "all" ? "" : value);
+                                    }}
+                                    items={[
+                                        { value: "all", label: "すべて" },
+                                        ...options.map((option) => ({
+                                            value: option.value,
+                                            label: option.label,
+                                        })),
+                                    ]}
                                 >
                                     <SelectTrigger className={DATA_TABLE_STYLES.selectTrigger}>
                                         <SelectValue placeholder="すべて" />

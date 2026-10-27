@@ -87,9 +87,7 @@ export function ShareButtons({
       <TooltipProvider>
         {shareLinks.map((link) => (
           <Tooltip key={link.name}>
-            <TooltipTrigger asChild>
-              <Button
-                variant={isProminent ? "default" : "ghost"}
+            <TooltipTrigger render={<Button variant={isProminent ? "default" : "ghost"}
                 size={isProminent ? "default" : "icon"}
                 className={`rounded-full transition-all ${isProminent
                   ? `h-10 w-10 p-0 shadow-xs ${link.prominentClass}`
@@ -98,12 +96,10 @@ export function ShareButtons({
                 onClick={() => {
                   trackShare({ method: link.name, contentType: "page" });
                   window.open(link.href, "_blank", "width=600,height=400");
-                }}
-              >
+                }} />}>
                 <ShareButtonIcon name={link.name} isProminent={isProminent} />
                 <span className="sr-only">{link.name}</span>
-              </Button>
-            </TooltipTrigger>
+              </TooltipTrigger>
             <TooltipContent>
               <p>{link.name}</p>
             </TooltipContent>
@@ -111,16 +107,13 @@ export function ShareButtons({
         ))}
 
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant={isProminent ? "outline" : "ghost"}
+          <TooltipTrigger render={<Button variant={isProminent ? "outline" : "ghost"}
               size={isProminent ? "default" : "icon"}
               className={`rounded-full transition-all ${isProminent
                 ? "h-10 w-10 p-0 border-muted-foreground/20 hover:bg-muted"
                 : "h-8 w-8 hover:bg-muted"
                 }`}
-              onClick={copy}
-            >
+              onClick={copy} />}>
               <span className="flex items-center justify-center w-full h-full">
                 {copied ? (
                   <Check
@@ -132,8 +125,7 @@ export function ShareButtons({
                 )}
               </span>
               <span className="sr-only">URLをコピー</span>
-            </Button>
-          </TooltipTrigger>
+            </TooltipTrigger>
           <TooltipContent>
             <p>{copied ? "コピーしました！" : "URLをコピー"}</p>
           </TooltipContent>

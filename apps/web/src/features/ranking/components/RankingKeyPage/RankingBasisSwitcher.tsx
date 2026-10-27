@@ -45,8 +45,12 @@ export function RankingBasisSwitcher({
             <div className="mt-3 sm:hidden">
                 <Select
                     value={rankingKey}
+                    items={sortedMembers.map((member) => ({
+                        value: member.rankingKey,
+                        label: member.normalizationBasis || "総数",
+                    }))}
                     onValueChange={(key) => {
-                        if (key !== rankingKey) router.push(hrefFor("ranking", { rankingKey: key }));
+                        if (key !== null && key !== rankingKey) router.push(hrefFor("ranking", { rankingKey: key }));
                     }}
                 >
                     <SelectTrigger aria-label="表示基準" className="h-9 w-full text-sm">

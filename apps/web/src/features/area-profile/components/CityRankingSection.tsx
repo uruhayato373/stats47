@@ -186,16 +186,18 @@ export function CityRankingSection({
       {/* 指標切替タブ */}
       {categoryItems.length > 1 && (
         <ToggleGroup
-          type="single"
-          value={selectedRankingKey}
-          onValueChange={handleRankingChange}
+          value={[selectedRankingKey]}
+          onValueChange={(v) => {
+            // Base UI の ToggleGroup は値を配列で返す。押し直しで空になったときは選択を保つ
+            if (v[0]) handleRankingChange(v[0]);
+          }}
           className="flex flex-wrap gap-1.5 justify-start"
         >
           {categoryItems.map((item) => (
             <ToggleGroupItem
               key={item.rankingKey}
               value={item.rankingKey}
-              className="text-xs px-3 py-1.5 rounded-full border data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-primary transition-all"
+              className="text-xs px-3 py-1.5 rounded-full border data-pressed:bg-primary data-pressed:text-primary-foreground data-pressed:border-primary transition-all"
             >
               {item.title}
             </ToggleGroupItem>

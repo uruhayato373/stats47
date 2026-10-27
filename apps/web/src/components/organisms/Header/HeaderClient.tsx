@@ -184,21 +184,17 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
 
           {categories.length > 0 && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className={cn(
+              <DropdownMenuTrigger render={<button className={cn(
                     'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',
                     activeNav === 'category'
                       ? 'border-primary text-foreground'
                       : 'border-transparent text-foreground/80 hover:text-foreground'
                   )}
                   aria-label="カテゴリから探す"
-                  data-active={activeNav === 'category' ? 'true' : undefined}
-                >
+                  data-active={activeNav === 'category' ? 'true' : undefined} />}>
                   カテゴリ
                   <ChevronDown className="h-3.5 w-3.5 opacity-70" />
-                </button>
-              </DropdownMenuTrigger>
+                </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="start"
                 sideOffset={8}
@@ -305,21 +301,17 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
           {/* テーマ メガメニュー (市区町村 と 地域分析 の間。category は内部利用に降格) */}
           {themes.length > 0 && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className={cn(
+              <DropdownMenuTrigger render={<button className={cn(
                     'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',
                     activeNav === 'themes'
                       ? 'border-primary text-foreground'
                       : 'border-transparent text-foreground/80 hover:text-foreground'
                   )}
                   aria-label="テーマ一覧"
-                  data-active={activeNav === 'themes' ? 'true' : undefined}
-                >
+                  data-active={activeNav === 'themes' ? 'true' : undefined} />}>
                   テーマ
                   <ChevronDown className="h-3.5 w-3.5 opacity-70" />
-                </button>
-              </DropdownMenuTrigger>
+                </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="start"
                 sideOffset={8}

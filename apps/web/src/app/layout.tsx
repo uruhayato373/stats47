@@ -91,7 +91,8 @@ export default function RootLayout({
   const baseUrl = getRequiredBaseUrl();
 
   return (
-    <html lang="ja" suppressHydrationWarning>
+    // style-lyra: テンプレートの部品スタイル (@stats47/ui-theme の style-lyra.css) は .style-lyra の下だけで効く
+    <html lang="ja" className="style-lyra" suppressHydrationWarning>
       <head>
         {/*
          * 地図タイルへの preconnect は全ページには置かない。地図のあるランキングページは

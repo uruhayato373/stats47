@@ -1,10 +1,10 @@
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
   within,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { THEME_SWITCHER_THEMES } from '../../config/theme-switcher-themes';
@@ -155,8 +155,10 @@ describe('ThemeSideNav — 地域ブロック', () => {
   it('県を選ぶと47都道府県へ戻す操作を表示する', async () => {
     renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
-    fireEvent.click(screen.getByLabelText('都道府県を選択'));
-    fireEvent.click(await screen.findByRole('option', { name: '大阪府' }));
+    // Base UI の Select は pointer の一連の操作で選ぶので、fireEvent.click ではなく user-event で操作する
+    const user = userEvent.setup();
+    await user.click(screen.getByLabelText('都道府県を選択'));
+    await user.click(await screen.findByRole('option', { name: '大阪府' }));
 
     await waitFor(() => {
       expect(screen.getByLabelText('都道府県を選択')).toHaveTextContent(

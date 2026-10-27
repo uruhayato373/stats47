@@ -129,7 +129,7 @@ export function SearchFilters({
                                         <Label htmlFor={`tag-${tag}`} className="cursor-pointer text-sm">
                                             {tag}
                                         </Label>
-                                        <Badge variant="secondary" size="sm" className="ml-auto">
+                                        <Badge variant="secondary" className="ml-auto">
                                             {count}
                                         </Badge>
                                     </div>
@@ -165,7 +165,14 @@ export function SearchFilters({
                         <div className="space-y-2">
                             <Select
                                 value={selectedYear ?? "all"}
-                                onValueChange={(v) => onYearChange(v === "all" ? undefined : v)}
+                                onValueChange={(v) => {
+                                    if (v === null) return;
+                                    onYearChange(v === "all" ? undefined : v);
+                                }}
+                                items={[
+                                    { value: "all", label: "すべての年" },
+                                    ...blogYears.map((y) => ({ value: y, label: `${y}年` })),
+                                ]}
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="年を選択" />
@@ -183,7 +190,14 @@ export function SearchFilters({
                             {selectedYear && (
                                 <Select
                                     value={selectedMonth ?? "all"}
-                                    onValueChange={(v) => onMonthChange(v === "all" ? undefined : v)}
+                                    onValueChange={(v) => {
+                                        if (v === null) return;
+                                        onMonthChange(v === "all" ? undefined : v);
+                                    }}
+                                    items={[
+                                        { value: "all", label: "すべての月" },
+                                        ...months.map((m) => ({ value: m, label: `${m}月` })),
+                                    ]}
                                 >
                                     <SelectTrigger>
                                         <SelectValue placeholder="月を選択" />
@@ -208,7 +222,17 @@ export function SearchFilters({
                         <h3 className="text-sm font-semibold mb-3">カテゴリ</h3>
                         <Select
                             value={selectedCategory ?? "all"}
-                            onValueChange={(value) => onCategoryChange(value === "all" ? undefined : value)}
+                            onValueChange={(value) => {
+                                if (value === null) return;
+                                onCategoryChange(value === "all" ? undefined : value);
+                            }}
+                            items={[
+                                { value: "all", label: "すべてのカテゴリ" },
+                                ...categories.map((category) => ({
+                                    value: category.categoryKey,
+                                    label: category.categoryName,
+                                })),
+                            ]}
                         >
                             <SelectTrigger>
                                 <SelectValue placeholder="カテゴリを選択" />

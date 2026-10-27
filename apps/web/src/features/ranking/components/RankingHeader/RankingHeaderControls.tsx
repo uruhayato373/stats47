@@ -69,7 +69,10 @@ export function RankingHeaderControls({
           <div className="sm:hidden">
             <Select
               value={normalizationValue}
-              onValueChange={onNormalizationChange}
+              onValueChange={(value) => {
+                if (value !== null) onNormalizationChange(value);
+              }}
+              items={pills.map((p) => ({ value: p.type, label: p.label }))}
               disabled={normalizationDisabled}
             >
               <SelectTrigger aria-label="計算方法" className="h-9 w-full text-sm">

@@ -206,25 +206,19 @@ export async function ThemePageLayout({
           <Breadcrumb className="mb-4">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">ホーム</Link>
-                </BreadcrumbLink>
+                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               {areaContext ? (
                 <>
                   <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="/areas">都道府県一覧</Link>
-                    </BreadcrumbLink>
+                    <BreadcrumbLink render={<Link href="/areas" />}>都道府県一覧</BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href={hrefFor('area', { areaCode: areaContext.areaCode })}>
+                    <BreadcrumbLink render={<Link href={hrefFor('area', { areaCode: areaContext.areaCode })} />}>
                         {areaContext.areaName}
-                      </Link>
-                    </BreadcrumbLink>
+                      </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>

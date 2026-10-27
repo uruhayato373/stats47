@@ -1,25 +1,25 @@
+// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の toggle.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
+// 正の写し: .claude/config/shadcn-reference/ (packages/ui-theme/README.md)。
 "use client"
 
-import * as React from "react"
-
-import { Slot } from "@radix-ui/react-slot"
+import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/cn"
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-xs font-medium ring-offset-background transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
+  "cn-toggle group/toggle inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "bg-transparent",
-        outline:
-          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        default: "cn-toggle-variant-default bg-transparent",
+        outline: "cn-toggle-variant-outline border border-input bg-transparent hover:bg-muted",
       },
       size: {
-        default: "h-8 px-3",
-        sm: "h-7 px-2.5",
-        lg: "h-9 px-5",
+        default:
+          "cn-toggle-size-default h-8 min-w-8 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        sm: "cn-toggle-size-sm h-7 min-w-7 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "cn-toggle-size-lg h-9 min-w-9 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
       },
     },
     defaultVariants: {
@@ -29,30 +29,19 @@ const toggleVariants = cva(
   }
 )
 
-export interface ToggleProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof toggleVariants> {
-  asChild?: boolean
-  pressed?: boolean
-  onPressedChange?: (pressed: boolean) => void
+function Toggle({
+  className,
+  variant = "default",
+  size = "default",
+  ...props
+}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
+  return (
+    <TogglePrimitive
+      data-slot="toggle"
+      className={cn(toggleVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
 }
 
-const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
-  ({ className, variant, size, asChild = false, pressed, onPressedChange, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        className={cn(toggleVariants({ variant, size, className }))}
-        ref={ref}
-        data-state={pressed ? "on" : "off"}
-        aria-pressed={pressed}
-        onClick={() => onPressedChange?.(!pressed)}
-        {...props}
-      />
-    )
-  }
-)
-Toggle.displayName = "Toggle"
-
 export { Toggle, toggleVariants }
-

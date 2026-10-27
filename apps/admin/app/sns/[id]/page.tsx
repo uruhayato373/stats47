@@ -5,7 +5,7 @@ import { Cell, DataTable, PanelCard, Row, StatusBadge, type Tone } from "@/compo
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { MediaPreview } from "@/components/media-preview";
 import { PageHeading } from "@/components/ops/primitives";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { formatJst } from "@/lib/sns-ledger";
 import { buildPostTrace } from "@/lib/server/post-trace";
 import type { Post } from "@/lib/server/posts-store";
@@ -69,7 +69,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
           <StatusBadge tone={APPROVAL_TONE[approval.state] ?? "neutral"}>{APPROVAL_LABEL[approval.state] ?? approval.state}</StatusBadge>
         </div>
       </PageHeading>
-      <div><Button variant="outline" nativeButton={false} render={<Link href={`/sns?q=${post.id}`} />}>画像一覧で確認・下書き編集</Button></div>
+      <div><Link href={`/sns?q=${post.id}`} data-slot="button" className={buttonVariants({ variant: "outline" })}>画像一覧で確認・下書き編集</Link></div>
 
       <Grid min="lg">
         <PanelCard title="状態と外部 ID">

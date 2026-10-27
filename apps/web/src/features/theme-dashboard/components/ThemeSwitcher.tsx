@@ -135,8 +135,9 @@ export function ThemeSwitcher({
       )}
       <Select
         value={currentThemeKey}
+        items={options.map((o) => ({ value: o.themeKey, label: o.title }))}
         onValueChange={(key) => {
-          if (key === currentThemeKey) return;
+          if (key === null || key === currentThemeKey) return;
           const next = options.find((o) => o.themeKey === key);
           if (next) {
             trackNavClick({

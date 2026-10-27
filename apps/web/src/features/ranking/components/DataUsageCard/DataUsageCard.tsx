@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Button } from "@stats47/components/atoms/ui/button";
+import { Button, buttonVariants } from "@stats47/components/atoms/ui/button";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { Download } from "lucide-react";
@@ -87,23 +87,13 @@ export function DataUsageCard({
             47都道府県{yearText ? ` × ${yearText}` : "の"}データをCSVでダウンロード。クレジット表記すれば無料で商用利用できます。
           </p>
         </div>
-        <Button
-          variant="default"
-          size="sm"
-          className="gap-1.5 shrink-0"
-          asChild
-        >
-          <a
-            href={href}
-            onClick={() => {
+        <a href={href} onClick={() => {
               trackCsvDownload({ rankingKey, yearCode: "all" });
               if (survey === "hidden") setSurvey("asking");
-            }}
-          >
+            }} data-slot="button" className={buttonVariants({ variant: "default", size: "sm", className: "gap-1.5 shrink-0" })}>
             <Download className="h-4 w-4" />
             ダウンロード
           </a>
-        </Button>
       </div>
       <p className="mt-2 text-xs text-muted-foreground">
         地図用（最新年・都道府県の塗り分け）:{" "}

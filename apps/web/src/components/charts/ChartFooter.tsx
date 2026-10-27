@@ -92,26 +92,22 @@ function FooterActionLink({
   );
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        {external ? (
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.label}
-            className={ACTION_CLASS_NAME}
-          >
-            {content}
-          </a>
-        ) : (
-          <Link
-            href={link.url}
-            aria-label={link.label}
-            className={ACTION_CLASS_NAME}
-          >
-            {content}
-          </Link>
-        )}
+      <TooltipTrigger
+        render={
+          external ? (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className={ACTION_CLASS_NAME}
+            />
+          ) : (
+            <Link href={link.url} aria-label={link.label} className={ACTION_CLASS_NAME} />
+          )
+        }
+      >
+        {content}
       </TooltipTrigger>
       <TooltipContent side="top" className="max-w-72">
         {link.label}
@@ -138,27 +134,20 @@ function FooterActionMenu({
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger
-        asChild
-        {...(id
+      <DropdownMenuTrigger {...(id
           ? { id: triggerId, 'aria-controls': open ? contentId : undefined }
-          : {})}
-      >
-        <Button
-          type="button"
+          : {})} render={<Button type="button"
           variant="ghost"
           size="sm"
           aria-label={`${visibleLabel}${links.length}件を表示`}
           title={tooltip}
-          className="h-8 gap-1.5 px-1 text-xs font-medium text-muted-foreground hover:bg-transparent hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50"
-        >
+          className="h-8 gap-1.5 px-1 text-xs font-medium text-muted-foreground hover:bg-transparent hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50" />}>
           <ActionIcon kind={kind} />
           <span>
             {visibleLabel} {links.length}件
           </span>
           <ChevronDown className="size-3" aria-hidden />
-        </Button>
-      </DropdownMenuTrigger>
+        </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         className="max-w-80"
@@ -176,26 +165,23 @@ function FooterActionMenu({
             </>
           );
           return (
-            <DropdownMenuItem key={link.url} asChild>
-              {isExternalUrl(link.url) ? (
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="flex w-full items-center gap-2"
-                >
-                  {content}
-                </a>
-              ) : (
-                <Link
-                  href={link.url}
-                  aria-label={link.label}
-                  className="flex w-full items-center gap-2"
-                >
-                  {content}
-                </Link>
-              )}
+            <DropdownMenuItem
+              key={link.url}
+              render={
+                isExternalUrl(link.url) ? (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="flex w-full items-center gap-2"
+                  />
+                ) : (
+                  <Link href={link.url} aria-label={link.label} className="flex w-full items-center gap-2" />
+                )
+              }
+            >
+              {content}
             </DropdownMenuItem>
           );
         })}
@@ -261,7 +247,7 @@ export function ChartFooter({
   if (!hasSource && !annotation && indicatorTargets.length === 0) return null;
 
   return (
-    <TooltipProvider delayDuration={250}>
+    <TooltipProvider delay={250}>
       <div className="space-y-1.5">
         {annotation && (
           <p className="text-left text-xs leading-relaxed text-muted-foreground">

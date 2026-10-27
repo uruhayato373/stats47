@@ -20,12 +20,9 @@ export function useIndexColumn<TData, TValue>(
                 id: "select",
                 header: ({ table }) => (
                     <Checkbox
-                        checked={
-                            table.getIsAllPageRowsSelected()
-                                ? true
-                                : table.getIsSomePageRowsSelected()
-                                  ? "indeterminate"
-                                  : false
+                        checked={table.getIsAllPageRowsSelected()}
+                        indeterminate={
+                            !table.getIsAllPageRowsSelected() && table.getIsSomePageRowsSelected()
                         }
                         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                         aria-label="すべて選択"

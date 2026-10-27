@@ -45,8 +45,8 @@ function RankingYearSelectorComponent({
 
   // 年度選択時のハンドラー
   const handleYearChange = useCallback(
-    (yearCode: string) => {
-      onChange(yearCode);
+    (yearCode: string | null) => {
+      if (yearCode !== null) onChange(yearCode);
     },
     [onChange]
   );
@@ -58,7 +58,14 @@ function RankingYearSelectorComponent({
 
   return (
     <div className="flex items-center gap-2">
-      <Select value={value} onValueChange={handleYearChange}>
+      <Select
+        value={value}
+        onValueChange={handleYearChange}
+        items={sortedTimes.map((year) => ({
+          value: year.yearCode,
+          label: year.yearName,
+        }))}
+      >
         <SelectTrigger
           aria-label="表示する年度"
           className="h-6 w-[100px] text-xs rounded-xs"

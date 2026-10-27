@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Cell, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { AGENT_MODEL_SOURCES, agentModelCatalog } from "@/lib/server/agent-models";
 import { hasError } from "@/lib/server/state-io";
 
@@ -148,11 +148,11 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
         )}
 
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" variant={!modelFilter ? "default" : "outline"} nativeButton={false} render={<Link href="/ops/agents" />}>すべて ({v.agents.length})</Button>
+          <Link href="/ops/agents" data-slot="button" className={buttonVariants({ variant: !modelFilter ? "default" : "outline", size: "sm" })}>すべて ({v.agents.length})</Link>
           {models.map((m) => (
-            <Button key={m} size="sm" variant={m === modelFilter ? "default" : "outline"} nativeButton={false} render={<Link href={`/ops/agents?model=${encodeURIComponent(m)}`} />}>
+            <Link href={`/ops/agents?model=${encodeURIComponent(m)}`} key={m} data-slot="button" className={buttonVariants({ variant: m === modelFilter ? "default" : "outline", size: "sm" })}>
                 {m} ({countBy(m)})
-              </Button>
+              </Link>
           ))}
         </div>
 
