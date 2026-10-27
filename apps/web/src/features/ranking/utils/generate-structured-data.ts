@@ -100,7 +100,7 @@ export function generateRankingBreadcrumbStructuredData({
       "@type": "ListItem",
       position: items.length + 1,
       name: category.name,
-      item: `${baseUrl}/category/${category.key}`,
+      item: `${baseUrl}${hrefFor("category", { categoryKey: category.key })}`,
     });
   }
 

@@ -125,7 +125,7 @@ export async function generateMetadata({
       title,
       description,
       alternates: {
-        canonical: `/survey/${surveyKey}`,
+        canonical: hrefFor('survey', { surveyKey }),
       },
       ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
@@ -463,7 +463,7 @@ export default async function SurveyPage({ params }: PageProps) {
               {relatedArticles.map((article) => (
                 <SurfaceLinkCard
                   key={article.slug}
-                  href={`/blog/${article.slug}`}
+                  href={hrefFor('blog', { slug: article.slug })}
                   className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                 >
                   {article.title}

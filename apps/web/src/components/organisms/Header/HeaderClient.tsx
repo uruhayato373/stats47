@@ -217,7 +217,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                         return (
                           <Link
                             key={category.categoryKey}
-                            href={`/category/${category.categoryKey}`}
+                            href={hrefFor('category', { categoryKey: category.categoryKey })}
                             onMouseEnter={() =>
                               setSelectedCategoryKey(category.categoryKey)
                             }
@@ -227,7 +227,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                             onClick={() =>
                               handleNavClick(
                                 category.title,
-                                `/category/${category.categoryKey}`
+                                hrefFor('category', { categoryKey: category.categoryKey })
                               )
                             }
                             className={cn(
@@ -280,11 +280,11 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                           })}
                         </div>
                         <Link
-                          href={`/category/${selectedCategory.categoryKey}`}
+                          href={hrefFor('category', { categoryKey: selectedCategory.categoryKey })}
                           onClick={() =>
                             handleNavClick(
                               `${selectedCategory.title}をすべて見る`,
-                              `/category/${selectedCategory.categoryKey}`
+                              hrefFor('category', { categoryKey: selectedCategory.categoryKey })
                             )
                           }
                           className="mt-4 flex items-center justify-between text-sm font-semibold text-primary hover:underline"

@@ -57,7 +57,7 @@ export function CorrelationSectionClient({
                             <span className="flex shrink-0 items-center gap-3">
                                 {article && (
                                     <Link
-                                        href={`/blog/${article.slug}`}
+                                        href={hrefFor("blog", { slug: article.slug })}
                                         title={article.title}
                                         className="text-xs text-primary hover:underline"
                                     >

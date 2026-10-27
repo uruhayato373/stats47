@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
@@ -57,7 +58,7 @@ function PrefectureCardBody({
           const prefecture = prefectures.find(
             (item) => item.prefCode === prefCode
           );
-          const href = `/areas/${prefCode}`;
+          const href = hrefFor('area', { areaCode: prefCode });
           safeTrack(
             `area:${prefecture?.prefName ?? prefCode}`,
             href,

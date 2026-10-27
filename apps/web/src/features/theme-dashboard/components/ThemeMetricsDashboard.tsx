@@ -4,6 +4,7 @@ import { useMemo, type ReactNode } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
 import { ArrowRight } from 'lucide-react';
@@ -153,7 +154,7 @@ export function ThemeMetricsDashboard({
           d.rankingItem.attribution?.compilation?.url ?? configSource.url,
         sourceLinks: (d.rankingItem.originalSurveys ?? []).map((survey) => ({
           label: survey.name,
-          url: `/survey/${survey.id}`,
+          url: hrefFor('survey', { surveyKey: survey.id }),
         })),
       };
 
@@ -543,7 +544,7 @@ export function ThemeMetricsDashboard({
       {selectedPrefectureCode && (
         <div className="flex justify-end">
           <Link
-            href={`/areas/${selectedPrefectureCode}`}
+            href={hrefFor('area', { areaCode: selectedPrefectureCode })}
             className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
           >
             {areaName}のプロフィール <ArrowRight className="h-3 w-3" />

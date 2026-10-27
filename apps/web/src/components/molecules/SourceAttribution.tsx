@@ -1,3 +1,5 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import Link from "@/components/atoms/SiteLink";
 
 import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
@@ -43,7 +45,7 @@ export function SourceAttribution({ attribution, className }: SourceAttributionP
       {i > 0 && "・"}
       {isLinkableSurveyId(s.id) ? (
         <Link
-          href={`/survey/${s.id}`}
+          href={hrefFor("survey", { surveyKey: s.id })}
           className="hover:text-primary hover:underline"
         >
           {s.name}

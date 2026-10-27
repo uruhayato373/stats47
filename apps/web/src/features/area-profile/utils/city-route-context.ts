@@ -1,4 +1,5 @@
 import { lookupArea } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { UrlPolicy } from "@/lib/url-policy";
 
@@ -24,6 +25,6 @@ export function getCityRouteContext(areaCode: string, cityCode: string) {
     pref,
     /** 県名を外した市区町村名 (県が文脈で分かる見出し・一覧用) */
     cityShortName: stripPrefectureName(city.areaName, pref.areaName),
-    cityBasePath: `/areas/${areaCode}/cities/${cityCode}`,
+    cityBasePath: hrefFor("city", { areaCode, cityCode }),
   };
 }

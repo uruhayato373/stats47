@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T09:58:22.865Z",
+  "generatedAt": "2026-10-27T00:26:13.157Z",
   "total": 32,
   "bySeries": {
     "S1-issues": 12,
@@ -14,7 +14,7 @@
     {
       "id": "K-S1-01",
       "series": "S1-issues",
-      "title": "実質手取りの地図 — 住む県で変わる、暮らしのお金",
+      "title": "年収が高い県は、暮らしも豊かなのか",
       "status": "generated",
       "priceYen": 800,
       "chapters": 13
@@ -22,7 +22,7 @@
     {
       "id": "K-S1-02",
       "series": "S1-issues",
-      "title": "消費量日本一の食卓 — 家計調査で読む47都道府県の食",
+      "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
       "status": "generated",
       "priceYen": 800,
       "chapters": 8
@@ -46,7 +46,7 @@
     {
       "id": "K-S1-05",
       "series": "S1-issues",
-      "title": "教育と子育ての地図 — 教育費・進学率・待機児童",
+      "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
       "status": "generated",
       "priceYen": 800,
       "chapters": 8
@@ -70,7 +70,7 @@
     {
       "id": "K-S1-08",
       "series": "S1-issues",
-      "title": "エネルギーとインフラの地図 — 電力・再エネ・水道",
+      "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
       "status": "generated",
       "priceYen": 800,
       "chapters": 8
@@ -78,7 +78,7 @@
     {
       "id": "K-S1-09",
       "series": "S1-issues",
-      "title": "産業と地域経済の地図 — 製造・中小・農林",
+      "title": "産業と地域経済の地図 — 製造・中小・地価",
       "status": "generated",
       "priceYen": 800,
       "chapters": 8

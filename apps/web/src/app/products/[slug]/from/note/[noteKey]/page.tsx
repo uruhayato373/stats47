@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import {
   buildNoteProductDestination,
   findStorefrontProduct,
@@ -32,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = product.title;
   const baseUrl = getRequiredBaseUrl();
-  const url = `${baseUrl}/products/${product.slug}/from/note/${noteKey}`;
+  const url = `${baseUrl}${hrefFor("product-from-note", { slug: product.slug, noteKey })}`;
 
   return {
     title,

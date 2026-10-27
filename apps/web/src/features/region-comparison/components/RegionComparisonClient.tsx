@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { Loader2 } from "lucide-react";
 
 import { ComparisonEmpty } from "./ComparisonEmpty";
@@ -52,7 +53,7 @@ export function RegionComparisonClient({
   const handleCategoryChange = (key: string) => {
     const params = new URLSearchParams(searchParams.toString());
     startTransition(() => {
-      router.push(`/category/${key}/compare?${params.toString()}`);
+      router.push(`${hrefFor("category-compare", { categoryKey: key })}?${params.toString()}`);
     });
   };
 

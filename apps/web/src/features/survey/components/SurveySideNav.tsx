@@ -139,7 +139,7 @@ export function SurveyMobileNav({
               {categories.map((category) => (
                 <li key={category.categoryKey}>
                   <Link
-                    href={`/category/${category.categoryKey}`}
+                    href={hrefFor('category', { categoryKey: category.categoryKey })}
                     className="text-sm text-foreground hover:text-primary hover:underline"
                   >
                     {category.label}（{category.count}）

@@ -1,4 +1,5 @@
 import { cn } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 
@@ -51,7 +52,7 @@ export function AreaTileMap({
         {tiles.map((tile) => (
           <Link
             key={tile.prefCode}
-            href={`/areas/${tile.prefCode}`}
+            href={hrefFor("area", { areaCode: tile.prefCode })}
             aria-label={`${tile.prefName}の統計を見る`}
             onClick={() => onSelect?.(tile)}
             style={{

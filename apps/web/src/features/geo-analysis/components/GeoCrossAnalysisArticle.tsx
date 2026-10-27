@@ -12,6 +12,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
@@ -207,7 +208,7 @@ export async function GeoCrossAnalysisArticle({
                       <TableCell className="font-medium">
                         <Link
                           className="text-primary underline"
-                          href={`/geo/${slug}/${to2DigitPrefCode(row.areaCode)}/overlap`}
+                          href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
                         >
                           {row.areaName}の地図
                         </Link>
@@ -354,7 +355,7 @@ export async function GeoCrossAnalysisArticle({
               <Link
                 key={analysis.slug}
                 className="font-medium text-primary underline"
-                href={`/geo/${analysis.slug}`}
+                href={hrefFor('geo', { analysisSlug: analysis.slug })}
               >
                 {analysis.title}
               </Link>

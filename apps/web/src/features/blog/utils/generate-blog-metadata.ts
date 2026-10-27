@@ -1,3 +1,5 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
@@ -15,7 +17,7 @@ export function generateBlogMetadata({ title, description, slug }: BlogMetadataI
     title,
     description,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: hrefFor("blog", { slug }),
     },
     openGraph: {
       title,

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
@@ -65,7 +66,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `/tag/${tagKey}`,
+      canonical: hrefFor('tag', { tagKey }),
     },
     robots: indexable ? 'index, follow' : 'noindex, follow',
     openGraph: {
@@ -116,7 +117,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
         {articles.map((article) => (
           <Link
             key={article.slug}
-            href={`/blog/${article.slug}`}
+            href={hrefFor('blog', { slug: article.slug })}
             className="group block h-full"
           >
             <SurfaceCard className="flex h-full flex-col transition-colors hover:border-primary/50 hover:shadow-md">

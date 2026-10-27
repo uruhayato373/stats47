@@ -1,4 +1,5 @@
 import { cn } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 
@@ -76,7 +77,7 @@ export function AreaDirectoryList({
               {region.prefectures.map((pref) => (
                 <li key={pref.prefCode}>
                   <Link
-                    href={`/areas/${pref.prefCode}`}
+                    href={hrefFor("area", { areaCode: pref.prefCode })}
                     aria-label={`${pref.prefName}の統計を見る`}
                     onClick={() => onSelect?.(pref.prefCode, pref.prefName)}
                     className={cn(

@@ -22,7 +22,8 @@ export function mergeKdpOperationalState(listing, shelf, checkedAt = new Date().
     kdpStatusCheckedAt: checkedAt,
   };
   if (shelf?.asin) next.asin = shelf.asin;
-  if (kdpStatus !== "draft" && kdpStatus !== "unknown") next.status = "listed";
+  // withdrawn は「売らない」と決めた記録。出版停止の処理待ちで本棚がまだ live でも listed に戻さない (2026-10-27)
+  if (kdpStatus !== "draft" && kdpStatus !== "unknown" && listing.status !== "withdrawn") next.status = "listed";
   if (kdpStatus === "live" && !next.salesStartedAt) {
     next.salesStartedAt = checkedAt.slice(0, 10);
   }

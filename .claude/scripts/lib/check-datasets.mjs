@@ -116,7 +116,16 @@ export function checkSchemas({ datasets, files, readJson, exists }) {
 // ── 台帳どうしの参照 (外部キー相当) ── 2026-10-26。宣言の書き方は config/datasets.mjs の REFS の説明
 
 const REGISTRY_PREFIX = "registry:";
-const REF_KEYS = new Set(["field", "to", "key", "where", "parse", "copies", "severity", "why"]);
+const REF_KEYS = new Set(["field", "to", "key", "where", "unless", "parse", "copies", "severity", "why"]);
+
+/**
+ * where / unless の条件に要素が合うか。値が配列ならそのどれかに一致すれば合う (例: { domain: ["a", "b"] })
+ * @param {any} parent
+ * @param {Record<string, unknown>} cond
+ */
+export function matchesCondition(parent, cond) {
+  return Object.entries(cond).every(([k, v]) => (Array.isArray(v) ? v.includes(parent?.[k]) : parent?.[k] === v));
+}
 
 /**
  * JSON の値をたどる。path は "." 区切り。`name[]` は配列の各要素、`*` はオブジェクトの各値、末尾の `$keys` はオブジェクトのキー。
@@ -184,12 +193,18 @@ export function refValues(value, parse) {
  * TS 側の正本 (指標の registry・商品カタログなど) から ID の集合を作る。check-datasets は素の node で動くので
  * TS を import せず、宣言した正規表現で本文から読む。読んだ件数が 0 なら読み方の取り違えとして例外にする
  * (0 件の集合で照合すると、全件が参照切れに見えるか、照合そのものが消える)。
- * @param {{ files: string[], pattern: string, between?: [string, string] }} registry
+ * @param {{ files?: string[], pattern?: string, between?: [string, string], union?: string[] }} registry
  * @param {(path: string) => string} readText
+ * @param {Record<string, any>} [registries] union の名前を引く REGISTRIES
  */
-export function resolveRegistry(registry, readText) {
+export function resolveRegistry(registry, readText, registries = {}) {
   const ids = new Set();
-  for (const file of registry.files) {
+  // union: 他の registry の ID を合わせた参照先 (例: 指標 + 旧 slug の転送元)。自分の files を持たなくてよい
+  for (const name of registry.union ?? []) {
+    if (!registries[name] || registries[name].union) throw new Error(`registry の union は union を持たない REGISTRIES の名前だけ (${name})`);
+    for (const id of resolveRegistry(registries[name], readText)) ids.add(id);
+  }
+  for (const file of registry.files ?? []) {
     let text = readText(file);
     if (registry.between) {
       const [start, end] = registry.between;
@@ -200,7 +215,7 @@ export function resolveRegistry(registry, readText) {
     }
     for (const m of text.matchAll(new RegExp(registry.pattern, "gm"))) ids.add(m[1]);
   }
-  if (ids.size === 0) throw new Error(`registry から ID を 1 件も読めない (${registry.files.join(", ")})`);
+  if (ids.size === 0) throw new Error(`registry から ID を 1 件も読めない (${[...(registry.files ?? []), ...(registry.union ?? [])].join(", ")})`);
   return ids;
 }
 
@@ -237,7 +252,7 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
       const name = ref.to.slice(REGISTRY_PREFIX.length);
       if (!registries[name]) throw new Error(`${owner}: REGISTRIES に無い参照先 ${ref.to}`);
       if (ref.key || ref.copies) throw new Error(`${owner}: registry を参照先にするときは key / copies を書かない (${ref.to})`);
-      if (!registryCache.has(name)) registryCache.set(name, new Map([...resolveRegistry(registries[name], readText)].map((id) => [id, null])));
+      if (!registryCache.has(name)) registryCache.set(name, new Map([...resolveRegistry(registries[name], readText, registries)].map((id) => [id, null])));
       return registryCache.get(name);
     }
     const target = byId.get(ref.to);
@@ -255,6 +270,11 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
       throw new Error(`${owner}: severity: "warn" には理由 (why) を書く`);
     }
     if (ref.parse !== undefined && ref.parse !== "list") throw new Error(`${owner}: parse は "list" だけ`);
+    for (const k of ["where", "unless"]) {
+      if (ref[k] !== undefined && (typeof ref[k] !== "object" || ref[k] === null || Array.isArray(ref[k]) || Object.keys(ref[k]).length === 0)) {
+        throw new Error(`${owner}: ${k} は { 項目: 値 | 値の配列 } の形で 1 項目以上`);
+      }
+    }
   };
 
   for (const ds of datasets) {
@@ -278,7 +298,8 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
           continue;
         }
         for (const { value, parent } of selectPath(doc, ref.field)) {
-          if (ref.where && !Object.entries(ref.where).every(([k, v]) => parent?.[k] === v)) continue;
+          if (ref.where && !matchesCondition(parent, ref.where)) continue;
+          if (ref.unless && matchesCondition(parent, ref.unless)) continue;
           for (const id of refValues(value, ref.parse)) {
             if (!target.has(id)) {
               sink.push(`参照切れ: ${ds.id} ${file}${where(parent)} の ${ref.field}=${show(id)} が ${ref.to}${ref.key ? ` の ${ref.key}` : ""} に無い`);
@@ -306,7 +327,7 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
       declare(owner, { field: "", ...rest });
       const target = targetOf(owner, ref);
       const sink = ref.severity === "warn" ? warnings : errors;
-      for (const id of resolveRegistry(registries[ref.from.slice(REGISTRY_PREFIX.length)], readText)) {
+      for (const id of resolveRegistry(registries[ref.from.slice(REGISTRY_PREFIX.length)], readText, registries)) {
         if (!target.has(id)) sink.push(`参照切れ: ${ref.from} の ${show(id)} が ${ref.to} の ${ref.key} に無い`);
       }
     } catch (e) {

@@ -43,7 +43,8 @@ function readJson(file) {
 export function prepareMaterial(root, material) {
   const dir = materialDirectory(root, material);
   const base = path.dirname(dir);
-  const files = mediaFiles(dir).map(file => path.relative(root, file));
+  // 台帳のパスは "/" 区切り (Windows の path.relative は "\\" を返すため揃える。2026-10-27)
+  const files = mediaFiles(dir).map(file => path.relative(root, file).split(path.sep).join('/'));
   const props = readJson(path.join(base, 'props.json')) ?? readJson(path.join(dir, 'props.json'));
   const card = props?.card;
   const meta = readJson(path.join(base, 'ranking_items.json'));

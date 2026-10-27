@@ -1,6 +1,7 @@
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { resolveContentTag } from '@stats47/data-configs/content';
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 
@@ -20,7 +21,7 @@ export function TagBadge({ tag, tagKey, static: isStatic }: TagBadgeProps) {
 
   return (
     <Link
-      href={`/tag/${encodeURIComponent(identity?.key ?? tagKey ?? tag)}`}
+      href={hrefFor("tag", { tagKey: encodeURIComponent(identity?.key ?? tagKey ?? tag) })}
       data-nav-surface="tag"
       data-nav-label={identity?.id ?? tagKey ?? tag}
     >

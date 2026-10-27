@@ -40,6 +40,8 @@ export function resolveLegacyThemePathRedirect(pathname: string): string | undef
  * `/areas/{prefCode}/{categoryKey}` (旧カテゴリ別ページ) → `/areas/{prefCode}/{themeSlug}` の対応。
  * 空文字は対応テーマなし → `/areas/{prefCode}` (エリアプロフィール) へ転送する。
  * tourism は旧 categoryKey と現行 themeSlug が同一なので含めない (含めると同一 URL への 301 ループ)。
+ * administrativefinancial は middleware の先の規則が `/themes/local-finance?pref={prefCode}` へ転送するので
+ * 含めない (含めても照合されない死に行になる。middleware.test.ts が表の全行の着地を固定する)。
  */
 export const AREA_CATEGORY_TO_THEME: Readonly<Record<string, string>> = {
   population: 'population-dynamics',
@@ -54,7 +56,6 @@ export const AREA_CATEGORY_TO_THEME: Readonly<Record<string, string>> = {
   safetyenvironment: 'safety',
   landweather: 'climate',
   international: 'foreign-residents',
-  administrativefinancial: 'local-finance',
   energy: '',
   ict: '',
   infrastructure: '',

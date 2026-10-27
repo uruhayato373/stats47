@@ -99,7 +99,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/about`, changeFrequency: 'monthly', priority: 0.5 },
   { url: `${BASE_URL}/products`, changeFrequency: 'weekly', priority: 0.6 },
   ...STOREFRONT_PRODUCTS.map((product) => ({
-    url: `${BASE_URL}/products/${product.slug}`,
+    url: `${BASE_URL}${hrefFor('product', { slug: product.slug })}`,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   })),
@@ -122,7 +122,7 @@ const THEME_PAGES: MetadataRoute.Sitemap = ALL_THEMES.map((theme) => ({
 const JAPAN_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/japan`, changeFrequency: 'weekly', priority: 0.6 },
   ...listJapanCatalogThemes().map((theme) => ({
-    url: `${BASE_URL}/japan/${theme.themeSlug}`,
+    url: `${BASE_URL}${hrefFor('japan-theme', { themeSlug: theme.themeSlug })}`,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   })),
@@ -148,14 +148,14 @@ const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [
 
 const AREA_PAGES: MetadataRoute.Sitemap = [
   ...PREFECTURE_AREA_CODES.map((code) => ({
-    url: `${BASE_URL}/areas/${code}`,
+    url: `${BASE_URL}${hrefFor('area', { areaCode: code })}`,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   })),
   // /areas/[code]/[themeSlug] — Type A テーマ（都道府県単位）× 47 県
   ...PREFECTURE_AREA_CODES.flatMap((code) =>
     TYPE_A_THEME_SLUGS.map((slug) => ({
-      url: `${BASE_URL}/areas/${code}/${slug}`,
+      url: `${BASE_URL}${hrefFor('area-theme', { areaCode: code, themeSlug: slug })}`,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }))
@@ -241,7 +241,7 @@ function blogSitemapEntries(
     ...entries
       .filter((e) => isSitemapBlogSlug(e.slug))
       .map((e) => ({
-        url: `${BASE_URL}/blog/${e.slug}`,
+        url: `${BASE_URL}${hrefFor('blog', { slug: e.slug })}`,
         lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
         changeFrequency: 'monthly' as const,
         priority: 0.7,
@@ -257,7 +257,7 @@ async function getCategoryPages(): Promise<MetadataRoute.Sitemap> {
       ? result.data.map((c) => c.categoryKey)
       : [...CATEGORY_KEYS];
   return keys.map((categoryKey) => ({
-    url: `${BASE_URL}/category/${categoryKey}`,
+    url: `${BASE_URL}${hrefFor('category', { categoryKey })}`,
     changeFrequency: 'weekly',
     priority: 0.5,
   }));
@@ -275,7 +275,7 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${BASE_URL}/survey`, changeFrequency: 'weekly', priority: 0.6 },
     ...ids.map((id) => ({
-      url: `${BASE_URL}/survey/${id}`,
+      url: `${BASE_URL}${hrefFor('survey', { surveyKey: id })}`,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     })),
@@ -293,7 +293,7 @@ function getCityPages(): MetadataRoute.Sitemap {
   // soft 404 / crawled-not-indexed を生んだため提出しない。middleware が profile へ301する。
   // ページの正確な更新日時はこのgit定数から決定できないため、虚偽の lastmod は出さない。
   return PUBLISHABLE_CITIES.map(({ prefectureCode, code }) => ({
-    url: `${BASE_URL}/areas/${prefectureCode}/cities/${code}`,
+    url: `${BASE_URL}${hrefFor('city', { areaCode: prefectureCode, cityCode: code })}`,
     changeFrequency: 'monthly',
     priority: 0.5,
   }));
@@ -305,7 +305,7 @@ function getCityPages(): MetadataRoute.Sitemap {
  * が食い違う。middleware も `encodeURIComponent(jaKey)` で揃えている。
  */
 function tagUrl(tagKey: string): string {
-  return `${BASE_URL}/tag/${encodeURIComponent(tagKey)}`;
+  return `${BASE_URL}${hrefFor('tag', { tagKey: encodeURIComponent(tagKey) })}`;
 }
 
 /** ビルド時 (R2 不達) 用の tag フォールバック。git 定数から組む (上の docstring 参照)。 */
@@ -442,7 +442,7 @@ export default async function sitemap({
         return blogSitemapEntries(SITEMAP_BLOG_ENTRIES);
       case 'categories':
         return [...CATEGORY_KEYS].map((categoryKey) => ({
-          url: `${BASE_URL}/category/${categoryKey}`,
+          url: `${BASE_URL}${hrefFor('category', { categoryKey })}`,
           changeFrequency: 'weekly' as const,
           priority: 0.5,
         }));
@@ -454,7 +454,7 @@ export default async function sitemap({
             priority: 0.6,
           },
           ...SITEMAP_SURVEY_IDS.map((id2) => ({
-            url: `${BASE_URL}/survey/${id2}`,
+            url: `${BASE_URL}${hrefFor('survey', { surveyKey: id2 })}`,
             changeFrequency: 'monthly' as const,
             priority: 0.5,
           })),

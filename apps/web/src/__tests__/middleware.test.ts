@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
 import { KNOWN_THEME_SLUGS } from '../config/known-theme-slugs';
+import { AREA_CATEGORY_TO_THEME, LEGACY_THEME_PATH_REDIRECTS } from '../config/legacy-theme-redirects';
 import middleware, { isValidPrefCode } from '../middleware';
 
 describe('isValidPrefCode', () => {
@@ -397,12 +398,16 @@ describe('動的コンテンツの soft-404 防止', () => {
 describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は config/legacy-theme-redirects.ts)', () => {
   // vitest.shims.ts の redirect は第 2 引数に数値しか受けない。本物の Next は { status } も受けるので合わせる。
   const originalRedirect = NextResponse.redirect;
+  const originalNext = NextResponse.next;
   beforeAll(() => {
     NextResponse.redirect = ((url: string | URL, init?: number | ResponseInit) =>
       originalRedirect(url, typeof init === 'number' ? init : init?.status)) as typeof NextResponse.redirect;
+    // 転送先がそのまま通過する (転送が続かない) ことを見るため、通過応答を作れるようにする
+    NextResponse.next = () => new NextResponse();
   });
   afterAll(() => {
     NextResponse.redirect = originalRedirect;
+    NextResponse.next = originalNext;
   });
 
   function legacyRequest(pathWithQuery: string): NextRequest {
@@ -413,8 +418,10 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
 
   test.each([
     ['/ports', '/themes/ports'],
-    // 末尾スラッシュは先に正規化される (/ports/ → /ports → /themes/ports の 2 段)
-    ['/ports/', '/ports'],
+    // 末尾スラッシュ付きも正規化と転送を 1 回の 301 で済ませる (/ports/ → /ports → … の 2 段にしない)
+    ['/ports/', '/themes/ports'],
+    ['/ports/?utm_source=x', '/themes/ports?utm_source=x'],
+    ['/station-passengers/13000/', '/themes/railway'],
     ['/fishing-ports?x=1', '/themes/fishery-marine?x=1'],
     ['/station-passengers/13000', '/themes/railway'],
     ['/maps/highway-timeline/2020', '/themes/roads'],
@@ -431,5 +438,33 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
     const response = middleware(legacyRequest(source));
     expect(response.status).toBe(301);
     expect(response.headers.get('location')).toBe(`https://stats47.jp${destination}`);
+  });
+
+  /** 301 の転送先をもう一度 middleware に通し、転送が続かない (1 回で着地する) ことを確かめる */
+  function expectSingleHop(source: string) {
+    const first = middleware(legacyRequest(source));
+    expect(first.status, source).toBe(301);
+    const location = new URL(first.headers.get('location')!);
+    const second = middleware(legacyRequest(`${location.pathname}${location.search}`));
+    expect(second.status, `${source} → ${location.pathname}`).not.toBe(301);
+  }
+
+  test('廃止ページ表の全行が末尾スラッシュの有無にかかわらず 1 回の 301 で着地する', () => {
+    const sources = ['/ports', '/fishing-ports', '/station-passengers', '/maps/highway-timeline', '/gis-cross/migration-flow', '/gis-cross/depopulation-medical', '/gis-cross/sunshine-map', '/gis-cross'];
+    // 表に行を足したら sources にも足す (行と source の数が食い違うと落ちる)
+    expect(sources.length).toBe(LEGACY_THEME_PATH_REDIRECTS.length);
+    for (const source of sources) {
+      expectSingleHop(source);
+      expectSingleHop(`${source}/`);
+    }
+  });
+
+  test('AREA_CATEGORY_TO_THEME の全行が先の規則に奪われず、表の転送先へ 1 回で着地する (死に行がない)', () => {
+    for (const [categoryKey, themeSlug] of Object.entries(AREA_CATEGORY_TO_THEME)) {
+      const response = middleware(legacyRequest(`/areas/13000/${categoryKey}`));
+      const expected = themeSlug ? `/areas/13000/${themeSlug}` : '/areas/13000';
+      expect(response.headers.get('location'), categoryKey).toBe(`https://stats47.jp${expected}`);
+      expectSingleHop(`/areas/13000/${categoryKey}`);
+    }
   });
 });

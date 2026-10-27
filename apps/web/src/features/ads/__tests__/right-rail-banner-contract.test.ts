@@ -39,7 +39,8 @@ describe("right rail banner contract", () => {
     const missing = runPlacementGuard(blogPage.replace(/<BannerAd\b/g, "<UnregisteredImage"));
     expect(missing.status).toBe(1);
     expect(missing.messages).toContain("blog 右レールに画像バナーがない");
-  });
+    // 配置ガードを 2 回実行する。Windows では 1 回 9〜20 秒かかり既定の 10 秒を超える (2026-10-27 実測)
+  }, 60_000);
 
   it("shared right rails render registered image banners instead of text promo cards", () => {
     const rightRail = source(

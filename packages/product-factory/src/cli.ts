@@ -9,7 +9,12 @@
  */
 import { ALL_PRODUCTS } from "./catalog/products";
 import { PACK_META } from "./catalog/packs";
-import { validateCatalog } from "./validators/catalog-validator";
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { validateCatalog, validateListingPrices } from "./validators/catalog-validator";
+import { GEO_SERVICE_OFFER } from "./channels/geo/service-offer";
+import { COCONALA_LISTINGS } from "../../../config/paths.mjs";
 import type { PackTheme } from "./catalog/types";
 
 const argv = process.argv.slice(2);
@@ -30,7 +35,11 @@ function printCatalogSummary(): void {
 }
 
 function runCheck(): number {
-  const result = validateCatalog(ALL_PRODUCTS);
+  const catalog = validateCatalog(ALL_PRODUCTS);
+  // 出品台帳の価格が商品定義の範囲に入るか (価格の正本は出品台帳。validateListingPrices の説明)
+  const listings = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../../..", COCONALA_LISTINGS), "utf8")).listings;
+  const priceErrors = validateListingPrices(ALL_PRODUCTS, listings, { [GEO_SERVICE_OFFER.id]: GEO_SERVICE_OFFER.priceYen });
+  const result = { ...catalog, ok: catalog.ok && priceErrors.length === 0, errors: [...catalog.errors, ...priceErrors] };
   printCatalogSummary();
   if (result.ok) {
     console.log(`\n✅ catalog check: OK (${result.total} products, errors 0)`);

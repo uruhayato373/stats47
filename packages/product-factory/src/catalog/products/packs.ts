@@ -5,7 +5,7 @@
  * family 横断で重複していた (観光 = B-06/C-14/D-08/E-06 等) ため、出品・実データ接続・管理の単位を
  * テーマパックへ集約する。sourceIds に吸収元の旧 ID をトレースする (非網羅・参照用)。
  *
- * 出品規律: 実データを接続済みのパックだけ status を approved/listed にできる (validator が datasets の
+ * 出品規律: 実データを接続済みのパックだけ status を approved にできる (validator が datasets の
  * 実在を検査)。当面 P-01 のみ実データ接続済 (旧 D-01 の 4 データセットを継承)。他は cataloged 固定。
  */
 import type { ProductDefinition } from "../types";
@@ -48,7 +48,7 @@ const RAW_PACKS: readonly Omit<ProductDefinition, "rankingKeys">[] = [
     supportLevel: "manual",
     compatibility: OFFICE_COMPAT,
     risk: "normal",
-    status: "listed",
+    status: "approved",
     sourceIds: ["D-01"],
   },
   {

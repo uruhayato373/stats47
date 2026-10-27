@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import {
   GeoCrossAnalysisArticle,
@@ -29,7 +30,7 @@ export async function generateMetadata({
   return {
     title: `${config.shortTitle} | 地域分析`,
     description: config.description,
-    alternates: { canonical: `/geo/${analysisSlug}` },
+    alternates: { canonical: hrefFor('geo', { analysisSlug }) },
   };
 }
 

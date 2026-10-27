@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   geoAnalysisManifestKey,
   geoAnalysisPrefKey,
@@ -49,7 +50,7 @@ export async function generateMetadata({
       '選択県の人口メッシュ、地点の空間判定、集計の分母と出典を確認できます。',
     alternates: {
       canonical: isGeoCrossAnalysisSlug(analysisSlug)
-        ? `/geo/${analysisSlug}`
+        ? hrefFor('geo', { analysisSlug })
         : '/geo',
     },
     robots: { index: false, follow: true },
@@ -157,7 +158,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         items={[
           { label: 'ホーム', href: '/' },
           { label: '地域分析', href: '/geo' },
-          { label: config.shortTitle, href: `/geo/${analysisSlug}` },
+          { label: config.shortTitle, href: hrefFor('geo', { analysisSlug }) },
           { label: `${detail.areaName}の地図・検算データ` },
         ]}
       />
@@ -290,7 +291,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
           <li>
             <Link
               className="font-medium text-primary underline"
-              href={`/geo/${analysisSlug}?pref=${prefCode}#article-data`}
+              href={`${hrefFor('geo', { analysisSlug })}?pref=${prefCode}#article-data`}
             >
               公開Geo分析へ戻る
             </Link>
@@ -298,7 +299,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
           <li>
             <Link
               className="font-medium text-primary underline"
-              href={`/areas/${detail.areaCode}`}
+              href={hrefFor('area', { areaCode: detail.areaCode })}
             >
               {detail.areaName}の統計ページ
             </Link>

@@ -1,3 +1,4 @@
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
@@ -54,7 +55,7 @@ export default function JapanHubPage() {
           {themes.map((theme) => (
             <SurfaceLinkCard
               key={theme.themeSlug}
-              href={`/japan/${theme.themeSlug}`}
+              href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
               className="block"
             >
               <h3 className="text-base font-semibold text-foreground">

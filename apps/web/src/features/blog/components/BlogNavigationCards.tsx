@@ -1,3 +1,5 @@
+import { hrefFor } from '@stats47/data-configs/content/href';
+
 import {
   RailDataDiscoveryCards,
   RailLinksCard,
@@ -83,7 +85,7 @@ export function BlogNavigationCards({
         items={popularTags.map((tag) => ({
           id: tag.tagKey,
           label: tag.tagKey,
-          href: `/tag/${tag.tagKey}`,
+          href: hrefFor('tag', { tagKey: tag.tagKey }),
           count: tag.articleCount,
           ariaLabel: `「${tag.tagKey}」の記事を${tag.articleCount}件見る`,
           trackingLabel: `tag:${tag.tagKey}`,
@@ -102,7 +104,7 @@ export function BlogNavigationCards({
         items={popularArticles.map((article) => ({
           id: article.slug,
           label: article.title,
-          href: `/blog/${article.slug}`,
+          href: hrefFor('blog', { slug: article.slug }),
           trackingLabel: `popular:${article.slug}`,
           thumbnail: {
             lightSrc: blogThumbnailUrl(article.slug, 'light'),

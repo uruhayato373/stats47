@@ -129,7 +129,7 @@ export default function RankingIndexPage() {
               <div key={category.categoryKey}>
                 <h3 className="mb-1 flex items-baseline gap-2 border-b border-border pb-1">
                   <Link
-                    href={`/category/${category.categoryKey}`}
+                    href={hrefFor('category', { categoryKey: category.categoryKey })}
                     className="text-sm font-bold hover:text-primary"
                   >
                     {category.categoryName}
@@ -160,7 +160,7 @@ export default function RankingIndexPage() {
                   ))}
                 </ul>
                 <Link
-                  href={`/category/${category.categoryKey}`}
+                  href={hrefFor('category', { categoryKey: category.categoryKey })}
                   className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:underline"
                 >
                   {category.categoryName}の全 {category.count.toLocaleString()}{' '}

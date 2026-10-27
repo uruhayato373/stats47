@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { BookOpen, Check, Database, ExternalLink } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -38,7 +39,7 @@ export async function generateMetadata({
   if (!product) return { title: "商品が見つかりません" };
 
   const baseUrl = getRequiredBaseUrl();
-  const canonicalPath = `/products/${product.slug}`;
+  const canonicalPath = hrefFor("product", { slug: product.slug });
 
   return {
     title: product.title,
@@ -76,7 +77,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       price: String(product.priceYen),
       availability: "https://schema.org/InStock",
     },
-    url: `${baseUrl}/products/${product.slug}`,
+    url: `${baseUrl}${hrefFor("product", { slug: product.slug })}`,
   };
 
   return (
@@ -181,7 +182,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               : "県別の値をExcelで編集したい方へ。固定年度・対応形式を購入前に確認してください。"}
           </p>
           <TrackedProductLink
-            href={`/products/${fiscalCompanion.slug}`}
+            href={hrefFor("product", { slug: fiscalCompanion.slug })}
             label={`${fiscalCompanion.id}:${fiscalCompanion.title}`}
             surface="product_catalog"
             className="mt-2 inline-flex min-h-10 items-center text-sm text-primary underline"

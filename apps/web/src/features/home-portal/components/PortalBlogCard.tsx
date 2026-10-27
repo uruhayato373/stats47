@@ -1,5 +1,7 @@
 "use client";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import {
   PORTAL_CARD_ASPECT_CLASS,
@@ -29,7 +31,7 @@ export function PortalBlogCard({
   title,
   surface = "home_blog",
 }: PortalBlogCardProps) {
-  const href = `/blog/${slug}`;
+  const href = hrefFor("blog", { slug });
   return (
     <SurfaceLinkCard
       href={href}

@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title,
     description: theme.description,
     keywords: theme.keywords,
-    alternates: { canonical: `/japan/${theme.themeSlug}` },
+    alternates: { canonical: hrefFor('japan-theme', { themeSlug: theme.themeSlug }) },
     ...generateOGMetadata({
       title,
       description: theme.description,

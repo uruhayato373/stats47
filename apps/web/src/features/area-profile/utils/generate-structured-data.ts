@@ -4,6 +4,8 @@
  * SEO対策のための構造化データを生成
  */
 
+import { hrefFor } from '@stats47/data-configs/content/href';
+
 import { getRequiredBaseUrl } from '@/lib/env';
 
 import type { AreaHighlights } from '@stats47/area-profile';
@@ -77,7 +79,7 @@ export function generateAreaProfileStructuredData({
     '@context': 'https://schema.org',
     '@type': 'AdministrativeArea',
     name: profile.areaName,
-    url: `${baseUrl}/areas/${profile.areaCode}`,
+    url: `${baseUrl}${hrefFor('area', { areaCode: profile.areaCode })}`,
     containedInPlace: {
       '@type': 'Country',
       name: '日本',

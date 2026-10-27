@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 
@@ -53,7 +54,7 @@ export function buildThemeSwitcherOptions(
     : allThemes;
   return themes.map((t) => {
     const href = areaContext
-      ? `/areas/${areaContext.areaCode}/${t.themeKey}`
+      ? hrefFor('area-theme', { areaCode: areaContext.areaCode, themeSlug: t.themeKey })
       : themeHref(t.themeKey);
     const preference = selectedPrefectureCode ?? THEME_PREFECTURE_SET_VALUE;
 

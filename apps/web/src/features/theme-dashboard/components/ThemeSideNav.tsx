@@ -130,13 +130,13 @@ export function ThemeSideNav({
               {surveys.map((survey) => (
                 <RailNavRow
                   key={survey.id}
-                  href={`/survey/${survey.id}`}
+                  href={hrefFor('survey', { surveyKey: survey.id })}
                   chevron={false}
                   onClick={() =>
                     trackNavClick({
                       surface: 'theme_survey',
                       label: survey.id,
-                      href: `/survey/${survey.id}`,
+                      href: hrefFor('survey', { surveyKey: survey.id }),
                     })
                   }
                 >
