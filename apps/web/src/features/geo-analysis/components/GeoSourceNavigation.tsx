@@ -1,3 +1,9 @@
+import {
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuSubButton,
+} from '@stats47/components/atoms/ui/sidebar';
+
 import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import { RailCard } from '@/components/surface';
@@ -13,6 +19,12 @@ type Props = {
   currentDataId?: string;
   mobile?: boolean;
 };
+
+/** 一覧の後に置く関連ページ。行はテンプレートの SidebarMenu で描く。 */
+const RELATED_LINKS = [
+  { href: '/geo/layers', label: 'GISを検索・比較する' },
+  { href: '/geo', label: '重ね合わせた地域分析を見る' },
+] as const;
 
 /** Same complete list in the desktop rail and the mobile top disclosure. */
 export function GeoSourceNavigation({
@@ -32,18 +44,18 @@ export function GeoSourceNavigation({
           : '地図の準備状況を取得できませんでした。データ名から個別ページへ進めます。'}
       </p>
       <GeoSourceNavigationList groups={groups} currentDataId={currentDataId} />
-      <Link
-        href="/geo/layers"
-        className="mt-4 flex min-h-11 items-center text-sm text-primary underline"
-      >
-        GISを検索・比較する
-      </Link>
-      <Link
-        href="/geo"
-        className="flex min-h-11 items-center text-sm text-primary underline"
-      >
-        重ね合わせた地域分析を見る
-      </Link>
+      <SidebarMenu className="-mx-2 mt-4">
+        {RELATED_LINKS.map((link) => (
+          <SidebarMenuItem key={link.href}>
+            <SidebarMenuSubButton
+              className="h-auto min-h-11 translate-x-0 text-primary underline xl:min-h-8"
+              render={<Link href={link.href} />}
+            >
+              <span>{link.label}</span>
+            </SidebarMenuSubButton>
+          </SidebarMenuItem>
+        ))}
+      </SidebarMenu>
     </nav>
   );
   if (mobile) {

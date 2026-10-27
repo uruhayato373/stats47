@@ -1,3 +1,12 @@
+import type { ReactNode } from 'react';
+
+import { cn } from '@stats47/components';
+import {
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuSubButton,
+} from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { ListTree } from 'lucide-react';
 
@@ -5,7 +14,7 @@ import Link from '@/components/atoms/SiteLink';
 import { LEFT_RAIL_NARROW_ONLY_CLASS } from '@/components/layout';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { RailCard } from '@/components/surface';
 
 import { SurveyOutboundLinkArea } from './SurveyOutboundLinkArea';
 
@@ -31,6 +40,31 @@ interface SurveyNavigationProps {
   categories: readonly SurveyNavCategory[];
 }
 
+/**
+ * レール内のリンク行。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域を足す。
+ * SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う。
+ */
+function SurveyMenuLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuSubButton
+        className={cn('h-auto min-h-11 translate-x-0 py-1.5 sm:min-h-8', className)}
+        render={<Link href={href} />}
+      >
+        <span>{children}</span>
+      </SidebarMenuSubButton>
+    </SidebarMenuItem>
+  );
+}
+
 /** 調査詳細のデスクトップ左レール。調査一覧ではなく、現在の出典ハブの読み方だけを担う。 */
 export function SurveySideNav({
   pageLinks,
@@ -48,13 +82,17 @@ export function SurveySideNav({
       </RailCard>
 
       <RailCard title="このページ" bodyClassName="p-0">
-        <nav aria-label="この調査ページの内容" className="pb-2">
-          {pageLinks.map((item) => (
-            <RailNavRow key={item.href} href={item.href} chevron={false}>
-              {item.label}
-            </RailNavRow>
-          ))}
-        </nav>
+        <SidebarGroup className="p-2">
+          <nav aria-label="この調査ページの内容">
+            <SidebarMenu>
+              {pageLinks.map((item) => (
+                <SurveyMenuLink key={item.href} href={item.href}>
+                  {item.label}
+                </SurveyMenuLink>
+              ))}
+            </SidebarMenu>
+          </nav>
+        </SidebarGroup>
       </RailCard>
 
       {representativeRankings.length > 0 && (
@@ -65,17 +103,20 @@ export function SurveySideNav({
           bodyClassName="p-0"
         >
           <SurveyOutboundLinkArea surface="survey_ranking">
-            <nav aria-label="この調査の代表ランキング" className="pb-2">
-              {representativeRankings.map((item) => (
-                <RailNavRow
-                  key={item.rankingKey}
-                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                  chevron={false}
-                >
-                  {item.label}
-                </RailNavRow>
-              ))}
-            </nav>
+            <SidebarGroup className="p-2">
+              <nav aria-label="この調査の代表ランキング">
+                <SidebarMenu>
+                  {representativeRankings.map((item) => (
+                    <SurveyMenuLink
+                      key={item.rankingKey}
+                      href={hrefFor("ranking", { rankingKey: item.rankingKey })}
+                    >
+                      {item.label}
+                    </SurveyMenuLink>
+                  ))}
+                </SidebarMenu>
+              </nav>
+            </SidebarGroup>
           </SurveyOutboundLinkArea>
         </RailCard>
       )}
@@ -116,18 +157,19 @@ export function SurveyMobileNav({
         <ListTree className="size-4 text-muted-foreground" aria-hidden />
         このページと関連する分類
       </summary>
-      <Link
-        href="/survey"
-        className="mt-1 flex min-h-11 items-center border-y border-border px-2 text-sm font-medium text-foreground hover:bg-accent/50 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-      >
-        調査一覧へ
-      </Link>
+      <SidebarMenu className="mt-1">
+        <SurveyMenuLink href="/survey" className="font-medium">
+          調査一覧へ
+        </SurveyMenuLink>
+      </SidebarMenu>
       <nav aria-label="この調査ページの内容（モバイル）" className="pt-2">
-        {pageLinks.map((item) => (
-          <RailNavRow key={item.href} href={item.href} chevron={false}>
-            {item.label}
-          </RailNavRow>
-        ))}
+        <SidebarMenu>
+          {pageLinks.map((item) => (
+            <SurveyMenuLink key={item.href} href={item.href}>
+              {item.label}
+            </SurveyMenuLink>
+          ))}
+        </SidebarMenu>
       </nav>
       {categories.length > 0 && (
         <SurveyOutboundLinkArea surface="survey_category">

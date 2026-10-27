@@ -1,12 +1,24 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
+import { cn } from '@stats47/components';
+import {
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+} from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
+import Link from '@/components/atoms/SiteLink';
 import { StatisticsScopeNav, type StatisticsScopeHrefs } from '@/components/navigation';
 import { RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { RailCard } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
@@ -76,12 +88,11 @@ export function ThemeSideNav({
 
       {pageLinks.length > 0 && (
         <RailCard title="このページ" bodyClassName="p-0">
-          <nav aria-label="このページの内容" className="pb-2">
+          <RailMenu label="このページの内容">
             {pageLinks.map((link) => (
-              <RailNavRow
+              <RailMenuLink
                 key={link.href}
                 href={link.href}
-                chevron={false}
                 onClick={() =>
                   trackNavClick({
                     surface: 'theme_section',
@@ -91,9 +102,9 @@ export function ThemeSideNav({
                 }
               >
                 {link.label}
-              </RailNavRow>
+              </RailMenuLink>
             ))}
-          </nav>
+          </RailMenu>
         </RailCard>
       )}
 
@@ -104,17 +115,16 @@ export function ThemeSideNav({
           collapsible
           bodyClassName="p-0"
         >
-          <nav aria-label="このテーマの全指標" className="pb-2">
+          <RailMenu label="このテーマの全指標">
             {metrics.map((metric) => (
-              <RailNavRow
+              <RailMenuLink
                 key={metric.rankingKey}
                 href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
-                chevron={false}
               >
                 {metric.label}
-              </RailNavRow>
+              </RailMenuLink>
             ))}
-          </nav>
+          </RailMenu>
         </RailCard>
       )}
 
@@ -126,28 +136,67 @@ export function ThemeSideNav({
           bodyClassName="p-0"
         >
           {surveys.length > 0 && (
-            <div className="pb-2">
-              {surveys.map((survey) => (
-                <RailNavRow
-                  key={survey.id}
-                  href={hrefFor('survey', { surveyKey: survey.id })}
-                  chevron={false}
-                  onClick={() =>
-                    trackNavClick({
-                      surface: 'theme_survey',
-                      label: survey.id,
-                      href: hrefFor('survey', { surveyKey: survey.id }),
-                    })
-                  }
-                >
-                  {survey.name}
-                </RailNavRow>
-              ))}
-            </div>
+            <SidebarGroup className="p-2">
+              <SidebarMenu>
+                {surveys.map((survey) => (
+                  <RailMenuLink
+                    key={survey.id}
+                    href={hrefFor('survey', { surveyKey: survey.id })}
+                    onClick={() =>
+                      trackNavClick({
+                        surface: 'theme_survey',
+                        label: survey.id,
+                        href: hrefFor('survey', { surveyKey: survey.id }),
+                      })
+                    }
+                  >
+                    {survey.name}
+                  </RailMenuLink>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
           )}
         </RailCard>
       </nav>
     </RailStack>
+  );
+}
+
+/**
+ * レール内のリンク行。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域を足す。
+ * SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う。
+ */
+const RAIL_MENU_ROW_CLASS = 'h-auto min-h-11 py-1.5 sm:min-h-8';
+
+function RailMenu({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <SidebarGroup className="p-2">
+      <nav aria-label={label}>
+        <SidebarMenu>{children}</SidebarMenu>
+      </nav>
+    </SidebarGroup>
+  );
+}
+
+function RailMenuLink({
+  href,
+  onClick,
+  children,
+}: {
+  href: string;
+  onClick?: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuSubButton
+        className={cn(RAIL_MENU_ROW_CLASS, 'translate-x-0')}
+        onClick={onClick}
+        render={<Link href={href} />}
+      >
+        <span>{children}</span>
+      </SidebarMenuSubButton>
+    </SidebarMenuItem>
   );
 }
 
@@ -173,56 +222,61 @@ function ThemeGroupNavigation({
         headerAction={<SectionIndexLink href="/themes" label="テーマ一覧へ" />}
         bodyClassName="p-0"
       >
-        {THEME_NAV_GROUPS.map((group) => {
-          const groupOptions = group.themeKeys.flatMap((themeKey) => {
-            const option = optionByKey.get(themeKey);
-            return option ? [option] : [];
-          });
-          if (groupOptions.length === 0) return null;
+        <SidebarGroup className="p-2">
+          <SidebarMenu>
+            {THEME_NAV_GROUPS.map((group) => {
+              const groupOptions = group.themeKeys.flatMap((themeKey) => {
+                const option = optionByKey.get(themeKey);
+                return option ? [option] : [];
+              });
+              if (groupOptions.length === 0) return null;
 
-          const isCurrentGroup = groupOptions.some(
-            (option) => option.themeKey === currentThemeKey
-          );
+              const isCurrentGroup = groupOptions.some(
+                (option) => option.themeKey === currentThemeKey
+              );
 
-          return (
-            <details
-              key={group.id}
-              open={isCurrentGroup}
-              className="group border-b border-border last:border-b-0"
-            >
-              <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50">
-                {group.label}
-                <ChevronDown
-                  className="ml-auto size-4 text-muted-foreground transition-transform group-open:rotate-180"
-                  aria-hidden
-                />
-              </summary>
-              <div className="pb-2">
-                {groupOptions.map((option) => {
-                  const isCurrent = option.themeKey === currentThemeKey;
-                  return (
-                    <RailNavRow
-                      key={option.themeKey}
-                      href={option.href}
-                      active={isCurrent}
-                      chevron={false}
-                      className="pl-4"
-                      onClick={() =>
-                        trackNavClick({
-                          surface: 'theme_switcher',
-                          label: option.themeKey,
-                          href: option.href,
-                        })
-                      }
-                    >
-                      {option.title}
-                    </RailNavRow>
-                  );
-                })}
-              </div>
-            </details>
-          );
-        })}
+              // 開閉は details/summary で持つ。閉じたグループのリンクも SSR の HTML に残すため
+              // (Collapsible の Panel は閉じると中身を DOM から外す)。
+              return (
+                <SidebarMenuItem key={group.id}>
+                  <details open={isCurrentGroup} className="group/theme-group">
+                    <summary className="flex min-h-11 w-full cursor-pointer list-none items-center gap-2 rounded-md p-2 text-sm font-medium text-sidebar-foreground ring-sidebar-ring outline-hidden hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 sm:min-h-8 [&::-webkit-details-marker]:hidden">
+                      {group.label}
+                      <ChevronDown
+                        className="ml-auto size-4 text-muted-foreground transition-transform group-open/theme-group:rotate-180"
+                        aria-hidden
+                      />
+                    </summary>
+                    <SidebarMenuSub>
+                      {groupOptions.map((option) => {
+                        const isCurrent = option.themeKey === currentThemeKey;
+                        return (
+                          <SidebarMenuSubItem key={option.themeKey}>
+                            <SidebarMenuSubButton
+                              isActive={isCurrent}
+                              aria-current={isCurrent ? 'page' : undefined}
+                              className={RAIL_MENU_ROW_CLASS}
+                              onClick={() =>
+                                trackNavClick({
+                                  surface: 'theme_switcher',
+                                  label: option.themeKey,
+                                  href: option.href,
+                                })
+                              }
+                              render={<Link href={option.href} />}
+                            >
+                              <span>{option.title}</span>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        );
+                      })}
+                    </SidebarMenuSub>
+                  </details>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarGroup>
       </RailCard>
     </nav>
   );
