@@ -1,4 +1,5 @@
-import { AiContentAccordion } from "../AiContentAccordion";
+import { ContentDisclosure } from "@/components/content";
+
 import { AiInsightCard } from "../AiInsightCard";
 import { AiMarkdownContent } from "../AiMarkdownContent";
 import { RankingFaqSection } from "../RankingFaqSection";
@@ -23,9 +24,9 @@ export function RankingPageInsightsSection({
         title="データの考察"
         footer={
           aiContent.regionalAnalysis ? (
-            <AiContentAccordion title="地域別の傾向" bordered={false}>
+            <ContentDisclosure title="地域別の傾向" bordered={false}>
               <AiMarkdownContent content={aiContent.regionalAnalysis} />
-            </AiContentAccordion>
+            </ContentDisclosure>
           ) : undefined
         }
       >
@@ -36,9 +37,9 @@ export function RankingPageInsightsSection({
 
   if (aiContent?.regionalAnalysis) {
     return (
-      <AiContentAccordion title="地域別の傾向">
+      <ContentDisclosure title="地域別の傾向">
         <AiMarkdownContent content={aiContent.regionalAnalysis} />
-      </AiContentAccordion>
+      </ContentDisclosure>
     );
   }
 

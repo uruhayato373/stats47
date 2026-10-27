@@ -4,8 +4,8 @@ import { resolve } from "node:path";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { AiContentAccordion } from "../components/AiContentAccordion";
 import { AiInsightCard } from "../components/AiInsightCard";
+import { RankingPageInsightsSection } from "../components/RankingKeyPage/RankingPageAiSections";
 
 describe("ランキング本文の共通開閉UI", () => {
   it("AI考察をSSR可能なネイティブdetailsで表示する", () => {
@@ -23,9 +23,12 @@ describe("ランキング本文の共通開閉UI", () => {
     expect(container.textContent).not.toContain("▼");
   });
 
-  it("AIサブ節も同じ開閉契約を再利用する", () => {
+  it("地域別の傾向だけのとき、AIサブ節も同じ開閉契約を再利用する", () => {
     const { container } = render(
-      <AiContentAccordion title="地域別の傾向">地域別本文</AiContentAccordion>,
+      <RankingPageInsightsSection
+        aiContent={{ regionalAnalysis: "地域別本文" }}
+        rankingName="テスト"
+      />,
     );
 
     expect(screen.getByRole("heading", { level: 2, name: "地域別の傾向" })).toBeInTheDocument();
@@ -36,7 +39,7 @@ describe("ランキング本文の共通開閉UI", () => {
 describe("移行対象が独自アコーディオンへ戻らない", () => {
   const targets = [
     "src/features/ranking/components/RankingFaqSection.tsx",
-    "src/features/ranking/components/AiContentAccordion.tsx",
+    "src/features/ranking/components/RankingKeyPage/RankingPageAiSections.tsx",
     "src/features/ranking/components/AiInsightCard.tsx",
     "src/features/ranking/components/RankingDefinitionCard/index.tsx",
     "src/components/stat-charts/components/cards/DefinitionsCard.tsx",

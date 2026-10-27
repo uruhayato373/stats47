@@ -41,6 +41,3 @@ export {
   getRelatedArticleSummaries,
   type RelatedArticleSummary,
 } from "./services/related-articles";
-
-// サーバーコンポーネント
-export { RelatedRankingsSection } from "./components/RelatedRankingsSection";

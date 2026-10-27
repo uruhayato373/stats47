@@ -28,7 +28,6 @@ export {
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
 export { GeoSpatialEvidenceExplorer } from './components/GeoSpatialEvidenceExplorer';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
-export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoContentPublicationSection } from './components/GeoContentPublicationSection';
 export { AreaGeoInsightsSection } from './components/AreaGeoInsightsSection';
 export { ThemeGeoPublicFacilityAccessSection } from './components/ThemeGeoPublicFacilityAccessSection';
