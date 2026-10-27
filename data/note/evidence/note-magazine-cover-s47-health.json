@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:05:34.285Z",
+  "before": {
+    "name": "都道府県ランキング｜医療・健康・社会保障",
+    "description": "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832527/magazine_cover_large_6d57c3581093d4a5129deb64758f4961.png"
+  },
+  "expectedSha256": "b5a80827544390a398c7a63bf9d5f530599293f549e58e9c6f28262295c989bf",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜医療・健康・社会保障",
+    "description": "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328745834/magazine_cover_large_60bc84604c39c879683d26e0033c15ec.png"
+  },
+  "verifiedAt": "2026-10-26T08:05:42.976Z",
+  "servedSha256": "9183d437a2a512e1bf020fb7955db3977b52b62bd44e422e8f987b2426aa061f",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328745834/60bc84604c39c879683d26e0033c15ec.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328745834/60bc84604c39c879683d26e0033c15ec.png",
+    "sha256": "e9299df063212b231b9c480c7e197cb08ba9ba56133c2b1d0f24de0ce0113a82",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.5772058823529411,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-health-live.png",
+    "checkedAt": "2026-10-26T08:15:33.210Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-health",
+    "sha256": "e9299df063212b231b9c480c7e197cb08ba9ba56133c2b1d0f24de0ce0113a82",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:22:32.190Z"
+  }
+}

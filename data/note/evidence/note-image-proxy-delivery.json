@@ -1,0 +1,58 @@
+[
+  {
+    "url": "https://stats47.jp/ranking/annual-sunshine-duration?s47_ogp=8d59932b36d9",
+    "source": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/e42ca6c11bca592a4cff1245f384f60d0b2e1fdf33e9314c0d9e64364ed8.png?x-type=ogp",
+    "sourceSha256": "51958ff72336fdd9e2b362a2f3137abee552dddbf7cc2a11d55f9ad89bf7ece7",
+    "proxySha256": "d86a20c091d29f19cd2d61d1efe97658d5d32fd1ad56cbda189ce242d1b1edba",
+    "meanDifference": 0.4554227941176471
+  },
+  {
+    "url": "https://stats47.jp/ranking/annual-clear-days?s47_ogp=c6ce25cbf60d",
+    "source": "https://storage.stats47.jp/app/ranking/annual-clear-days/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/2f5a8acc692aa517f6af3b7a2ed747b3225a69703bf4494df39978b00353.png?x-type=ogp",
+    "sourceSha256": "2b28181abea2f034bc585bfad87315807f9f011d49d41e096b72a224cee25e57",
+    "proxySha256": "9a73364396efa3513ff43ebfc70997638d2b9698b94ee860f3b17792ca3e89a9",
+    "meanDifference": 0.46767769607843135
+  },
+  {
+    "url": "https://stats47.jp/ranking/annual-cloudy-days?s47_ogp=40a9636fdbfb",
+    "source": "https://storage.stats47.jp/app/ranking/annual-cloudy-days/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/c2ef654b9b36434f5a098b4f6408d65bc0e122fc7ba3f3a2ca5d9e1679ff.png?x-type=ogp",
+    "sourceSha256": "abf3f9307c0a768d3539a4170664c7ead219058cfc798484ed523c34403e2d35",
+    "proxySha256": "1c09fea5860d762c3d4e499564d3c6c798e61a26cb16fde4bf698aabc0ce23c2",
+    "meanDifference": 0.4609375
+  },
+  {
+    "url": "https://stats47.jp/ranking/annual-snow-days?s47_ogp=1c8544e77abc",
+    "source": "https://storage.stats47.jp/app/ranking/annual-snow-days/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/37981e0c0dd85276e10cb45fb2262f9b937aeae54de85f0b39de504c9723.png?x-type=ogp",
+    "sourceSha256": "3b76aab99250e79a093ce286dbf4febb22c546179dd44dcff386408c24f9328f",
+    "proxySha256": "0c450a67e147fe64b99b375e948a938492ac914ef195c740d80cf6e4d855ae60",
+    "meanDifference": 0.46721813725490197
+  },
+  {
+    "url": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai?s47_ogp=8ea11918804e",
+    "source": "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/c5c38c1a1e03dc23586b67a9480fb8f0177fba85d8a4d0e8a858f8a1c24b.png?x-type=ogp",
+    "sourceSha256": "41c4f5db8e761e0b1e29ceecbcf193ea5738b99d9873f78b55aa7a5f83f2c887",
+    "proxySha256": "be2d2974a2ff1cd2e6ce0efa5b40cac033042ea366cc54f2d1b9b70a4e76acd0",
+    "meanDifference": 0.46369485294117646
+  },
+  {
+    "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+    "source": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/334f59d970b08217749d6ad9d2b2ff2f42bf4b839fbae193d6911620ab69.png?x-type=ogp",
+    "sourceSha256": "0ffcc70f96e85fa6dbc73a43a8ef165d351e1c33c1c233ba5c1fcbb70eaaa1bf",
+    "proxySha256": "1b99b8a3ffc0a586156a2c4083c0d25fa68bebc139ceb32e0ad8fa5dbe5e0a02",
+    "meanDifference": 0.47840073529411764
+  },
+  {
+    "url": "https://note.com/stats47/m/me574f67ac47f?s47_ogp=e03f844a06c6",
+    "source": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "proxy": "https://assets.st-note.com/production/uploads/ext/ca3f40a5533f54a385010e769807d3196ae3d4f1f6b4d5c9799e344008a4.jpeg?x-type=ogp",
+    "sourceSha256": "f0e0df473a97d9171c8ae3241b24cb7a40e9b24c5fa128995f9eecf4361ace5e",
+    "proxySha256": "1fe0fe0ef9fff404be600671e95c10769fd6122db121d7f7f14b2c3144f2cbd1",
+    "meanDifference": 0.641390931372549
+  }
+]

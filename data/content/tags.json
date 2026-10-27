@@ -1700,6 +1700,18 @@
       ]
     },
     {
+      "id": "tag:flush-toilet-coverage-rate",
+      "label": "水洗化率",
+      "key": "水洗化率",
+      "aliases": []
+    },
+    {
+      "id": "tag:combined-treatment-septic-tank",
+      "label": "合併処理浄化槽",
+      "key": "合併処理浄化槽",
+      "aliases": []
+    },
+    {
       "id": "tag:chemical-industry",
       "label": "化学工業",
       "key": "化学工業",

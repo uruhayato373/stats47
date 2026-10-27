@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:41:39.342Z",
+  "before": {
+    "name": "都道府県ランキング｜交通・インフラ",
+    "description": "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832977/magazine_cover_large_1dd14771aa21ac37b2c1ed8af867f681.png"
+  },
+  "expectedSha256": "32fa068b1c6597c000d9730e9f4f8773b25c830119d5ff5d228b8c1c2ea095df",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜交通・インフラ",
+    "description": "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758508/magazine_cover_large_1a348f5088cdb4db100e4e0a63a07037.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:47.909Z",
+  "servedSha256": "d6c028f511f9abca4bb73fe006784de29f739f20ed000f5a5310d9b1ce5154db",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758508/1a348f5088cdb4db100e4e0a63a07037.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758508/1a348f5088cdb4db100e4e0a63a07037.png",
+    "sha256": "21aa1e5a3393597634bf4be4ebc988c9059c7690de51fb62acb85b5b1b877679",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.650735294117647,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-infrastructure-live.png",
+    "checkedAt": "2026-10-26T08:43:30.530Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-infrastructure",
+    "sha256": "21aa1e5a3393597634bf4be4ebc988c9059c7690de51fb62acb85b5b1b877679",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:52.808Z"
+  }
+}

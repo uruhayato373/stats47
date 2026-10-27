@@ -6179,10 +6179,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:livable-prefecture-composite-ranking",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:prefectural-income-gdp-ranking",
           "kind": "blog"
         },

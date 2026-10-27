@@ -36,11 +36,10 @@ PORT=5000 npm run admin    # ポート変更
 | `/content/kindle` | Kindle運用 | book catalog + manuscripts + `.local`成果物 + R2暗号化archive + KDP審査/販売状態・価格・ロイヤリティ・KU。読み取り専用 |
 | `/content/references` | 参考文献展開 | 制作単位×12チャネルとcontext-only補強プールを、既存SSOTから全件派生。読み取り専用 |
 | `/sns` | SNS 投稿ギャラリー | ID検索・画像一覧/台帳・caption・投稿状態・残枠を表示し、下書き本文を編集。YouTube は過去実績とpilot台帳を表示 |
-| `/ops/image-library` | 画像ライブラリ | OGP・リンクカード・ブログSVG・note・SNS・素材の画像、入力、使用先、改善方針を統合。旧 `/assets` はここへ転送 |
+| `/ops/image-library` | 画像ライブラリ | OGP・リンクカード・ブログSVG (`?format=svg`)・note・SNS・素材の画像、入力、使用先、改善方針を統合 (旧 `/assets`・`/svg` は 2026-10-27 に廃止) |
 | `/strategy` | 事業戦略 | 事業計画とM1 Geo分析のレイヤー・空間演算・metric・X role 3/9/2/1・機械契約を表示 |
-| `/svg` | SVGの互換入口 | `/ops/image-library?format=svg` へ転送。既存SVG分類と対応入力を統合画面で利用 |
 | `/research` | 調査カタログ | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続と監査状態を読み取り専用で表示 |
-| `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 効果測定サマリ + 機能バックログ + 戦略(STP)。改善の全件表は `/todo?f=improvements` に一本化。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
+| `/dashboard` | 現況レビュー | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 効果測定サマリ + 機能バックログ + 戦略(STP)。改善の全件表は `/todo?f=improvements` に一本化。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
 | `/todo` | TODO | 左サイドバーで「収益」「品質・運用」と同列の独立グループとして、実行バックログ・今週の計画・今月の計画・効果測定と改善を表示。全件・Owner・Metricはここで確認し、編集は各 SSOT 側で |
 
 ## API
@@ -48,9 +47,7 @@ PORT=5000 npm run admin    # ポート変更
 | メソッド + パス | 機能 |
 |---|---|
 | `GET /api/posts` `/api/inventory` `/api/limits` `/api/ig-consistency` | SNS 台帳・在庫・残枠・IG 整合 |
-| `GET /api/assets/tabs` `/api/assets/summary` | 資産タブ定義 / ホームサマリ |
-| `GET /api/assets/tab/:id?limit&all` | タブ 1 つの entry (OGP=buildTab / note-image / video) |
-| `GET /api/svg/catalog?limit&all` | ブログ SVG を fetch → 分類 (TTL 10 分キャッシュ) |
+| `GET /api/assets/summary` | ホームの件数サマリ |
 | `GET /api/research/dashboard-catalog` | 公式ダッシュボード研究カタログ + 基本監査結果 (読み取り専用・TTL 60 秒) |
 | `GET /api/dashboard/summary` | プロジェクト現況の集約 JSON (state/md ライブ読み・TTL 60 秒、collector は `dashboard-data.mjs`) |
 | `GET /api/content` | 4運用チャネルの共通stage・note/Kindle詳細・参考文献12チャネル展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
@@ -65,8 +62,8 @@ PORT=5000 npm run admin    # ポート変更
 | SNS 素材ギャラリー閲覧 (動画再生・画像) | 投稿IDのR2画像正本を優先。旧Drive画像・動画も表示 |
 | caption / 予約日時 / 投稿状態の確認・下書き本文編集 | `/content/{x,instagram}` と `/sns` |
 | Geo role・分析ID・claim metricの確認 | `/content/x` と `/strategy` |
-| 画像資産の所在・欠落状態の確認 | `/assets` |
-| SVG カタログの分類確認 | `/svg` (dark 対応の厳密確認は静的 `build-svg-gallery-tabbed.mjs`) |
+| 画像資産の所在・欠落状態の確認 | `/ops/image-library` |
+| SVG カタログの分類確認 | `/ops/image-library?format=svg` (dark 対応の厳密確認は静的 `build-svg-gallery-tabbed.mjs`) |
 
 ## 規約 (正典: `.claude/rules/sns-content-standards.md` §5.5 / `.claude/rules/ogp-image-standards.md`)
 

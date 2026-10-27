@@ -1,0 +1,226 @@
+{
+  "checkedAt": "2026-10-27T02:37:36.161Z",
+  "slug": "sewerage-water-supply-gap",
+  "sourceUrl": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/article.md",
+  "originalSha256": "7fe908513e5743363d3ee1ac647f902403b301bc4dddb9f87078e84abf607200",
+  "correctedSha256": "71f2585aaae583c993ee70aefd5ae0d37020cd48f44d2b1298ced91f097d0385",
+  "indexRow": {
+    "slug": "sewerage-water-supply-gap",
+    "title": "sewerage-water-supply-gap",
+    "seoTitle": null,
+    "description": null,
+    "filePath": "blog/sewerage-water-supply-gap/article.md",
+    "format": "md",
+    "hasCharts": true,
+    "published": true,
+    "publishedAt": null,
+    "ogImageType": null,
+    "proofreadAt": "2026-03-12T00:00:00.000Z",
+    "createdAt": "2026-03-06 03:07:35",
+    "updatedAt": "2026-05-29T06:14:44.150Z",
+    "tags": [],
+    "surveyIds": [
+      "resident-registry-population-survey",
+      "waterworks-statistics",
+      "sewerage-statistics"
+    ],
+    "sources": [
+      {
+        "label": "社会・人口統計体系",
+        "organization": "総務省統計局",
+        "url": "https://www.stat.go.jp/data/ssds/index.htm",
+        "tables": [
+          {
+            "label": "社会・人口統計体系",
+            "url": "https://www.e-stat.go.jp/dbview?sid=0000010208"
+          }
+        ]
+      },
+      {
+        "label": "下水道統計",
+        "organization": "日本下水道協会",
+        "surveyId": "sewerage-statistics",
+        "tables": []
+      },
+      {
+        "label": "住民基本台帳に基づく人口、人口動態及び世帯数調査",
+        "organization": "総務省",
+        "surveyId": "resident-registry-population-survey",
+        "tables": []
+      },
+      {
+        "label": "水道統計",
+        "organization": "厚生労働省",
+        "surveyId": "waterworks-statistics",
+        "tables": []
+      }
+    ],
+    "metricPairs": [
+      [
+        "sewerage-penetration-rate-2012on",
+        "water-supply-population-ratio-2012on"
+      ]
+    ],
+    "rankingRefs": [
+      {
+        "rankingKey": "sewerage-penetration-rate-2012on",
+        "year": "2021"
+      },
+      {
+        "rankingKey": "water-supply-population-ratio-2012on"
+      }
+    ]
+  },
+  "parseError": "bad indentation of a mapping entry (4:108)\n\n 1 |  ... \n 2 |  ... \n 3 |  ... \n 4 |  ... と水洗化率の2つの数字がなぜズレるのか、合併処理浄化槽という\"もう一つの汚水処理\"を軸に、47都道府県の水インフラを読み解く。\"\n-----------------------------------------^\n 5 |  ... \n 6 |  ... ",
+  "correctedMetadata": {
+    "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+    "seoTitle": "下水道普及率は徳島22%・東京99.7%｜だが水洗化率で見ると逆転する47都道府県の真相",
+    "subtitle": "下水道22.3%の徳島も、水洗トイレは77.5%が使える──なぜか？",
+    "description": "「下水道普及率が低い県は遅れている」は本当か？──徳島は下水道22.3%で全国最下位だが、水洗化率は77.5%。下水道普及率と水洗化率の2つの数字がなぜズレるのか、合併処理浄化槽という\"もう一つの汚水処理\"を軸に、47都道府県の水インフラを読み解く。",
+    "category": "infrastructure",
+    "tags": [
+      "下水道普及率",
+      "水洗化率",
+      "合併処理浄化槽",
+      "インフラ格差",
+      "水道"
+    ],
+    "published": true,
+    "publishedAt": "2026-03-06T00:00:00.000Z",
+    "updatedAt": "2026-05-29T00:00:00.000Z"
+  },
+  "bodyUnchanged": true,
+  "publicIndexVerification": {
+    "checkedAt": "2026-10-27T06:12:15.558Z",
+    "url": "https://storage.stats47.jp/app/blog/all.json",
+    "sha256": "cf83944285f6e43b4c95ceabfb7ec8d62bbf33ebf054fc8914b4a3cd965b02bb",
+    "total": 619,
+    "published": 609,
+    "publishedWithoutValidDate": 0,
+    "restored": {
+      "slug": "sewerage-water-supply-gap",
+      "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+      "publishedAt": "2026-03-06"
+    }
+  },
+  "status": "restored",
+  "restoredPublishedAt": "2026-03-06",
+  "sourceRepairRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40442494913",
+  "publicVerification": {
+    "checkedAt": "2026-10-27T05:00:37.282Z",
+    "url": "https://stats47.jp/blog/sewerage-water-supply-gap",
+    "status": 200,
+    "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+    "canonical": "https://stats47.jp/blog/sewerage-water-supply-gap",
+    "imageUrl": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop",
+    "imageSha256": "7d7530d0b015c90d106182c6d83965dbc76cc63a873e38a6ff6dec84060e3763",
+    "publishedDatePresent": true,
+    "bodyImages": [
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-map.svg",
+        "alt": "下水道普及率（都道府県別）",
+        "heading": "全国マップで見る下水道普及率",
+        "line": 20,
+        "sha256": "f10328c6f5f19b2dfd3be96c65ac588cc812eff0eaea2c9bdbe2235b4f7c3351",
+        "bytes": 31464,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-ranking.svg",
+        "alt": "下水道普及率 上位5・下位5",
+        "heading": "全国マップで見る下水道普及率",
+        "line": 26,
+        "sha256": "fab271d41e74b5b63ee8def0364b3b7de558ab921d94eb7315614ec2a8d03f95",
+        "bytes": 6851,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-vs-water-scatter.svg",
+        "alt": "下水道普及率 vs 上水道給水人口比率",
+        "heading": "「下水道22%」の県でも、水洗トイレは8割が使える",
+        "line": 39,
+        "sha256": "9990b19e2c608172c4dc8ec56832d17dfffc2e368e196e359e11ff9c27b2d741",
+        "bytes": 10349,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-trend.svg",
+        "alt": "下水道普及率の推移（全国平均）",
+        "heading": "全国の下水道普及率は緩やかに上昇",
+        "line": 76,
+        "sha256": "5c8d717a5f8d5603a5faf56f33b0e47e16065c060c48abe5d6ddc5afd4b7c453",
+        "bytes": 4171,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-summary-findings.svg",
+        "alt": "この記事でわかったこと",
+        "heading": "まとめ",
+        "line": 92,
+        "sha256": "95f2657cad386c13345fc9fb91e8ea94836622cf9fd2a3ce3862a557db05901d",
+        "bytes": 3365,
+        "status": "verified"
+      }
+    ],
+    "internalLinks": [
+      {
+        "href": "/tag/%E6%B0%B4%E6%B4%97%E5%8C%96%E7%8E%87",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E6%B0%B4%E6%B4%97%E5%8C%96%E7%8E%87"
+      },
+      {
+        "href": "/tag/%E5%90%88%E4%BD%B5%E5%87%A6%E7%90%86%E6%B5%84%E5%8C%96%E6%A7%BD",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E5%90%88%E4%BD%B5%E5%87%A6%E7%90%86%E6%B5%84%E5%8C%96%E6%A7%BD"
+      },
+      {
+        "href": "/tag/%E4%B8%8B%E6%B0%B4%E9%81%93%E6%99%AE%E5%8F%8A%E7%8E%87",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E4%B8%8B%E6%B0%B4%E9%81%93%E6%99%AE%E5%8F%8A%E7%8E%87"
+      },
+      {
+        "href": "/tag/%E6%B0%B4%E9%81%93",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E6%B0%B4%E9%81%93"
+      },
+      {
+        "href": "/tag/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E6%A0%BC%E5%B7%AE",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E6%A0%BC%E5%B7%AE"
+      },
+      {
+        "href": "/ranking/sewerage-penetration-rate-2012on",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/sewerage-penetration-rate-2012on"
+      },
+      {
+        "href": "/ranking/water-supply-population-ratio-2012on",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/water-supply-population-ratio-2012on"
+      },
+      {
+        "href": "/ranking/flush-toilet-population-ratio",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/flush-toilet-population-ratio"
+      }
+    ],
+    "failedLinks": 0,
+    "deployment": {
+      "commit": "45615ddc11fd1974e8b4f6a63ba7ddacdb85d7a6",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40450556600",
+      "purgeRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40453636238"
+    }
+  },
+  "preventRecurrence": [
+    "Invalid frontmatter stops snapshot export rather than replacing metadata with empty fields",
+    "Published blog catalog requires a nonblank publication date",
+    "Article-specific external card headline is checked against its exact source title"
+  ],
+  "sitemapVerification": {
+    "checkedAt": "2026-10-27T06:12:16.207Z",
+    "url": "https://stats47.jp/sitemap/4.xml",
+    "status": 200,
+    "containsRestoredArticle": true
+  },
+  "followUpIndexRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40458743458"
+}

@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:05:05.701Z",
+  "before": {
+    "name": "都道府県ランキング｜家計・所得・物価",
+    "description": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832325/magazine_cover_large_f19d5a540b20717278785c3b0432658a.png"
+  },
+  "expectedSha256": "29b0db9124984781cbcb088fea837295d3947def6a3555001c24439b4b5ecece",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜家計・所得・物価",
+    "description": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328745683/magazine_cover_large_96c754afa720751e0e3208f09ea0811f.png"
+  },
+  "verifiedAt": "2026-10-26T08:05:13.954Z",
+  "servedSha256": "8b9d9d7a6b90ab68f5bb343a9536a1daa166c148fdb6154472ac18c9581ff84a",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328745683/96c754afa720751e0e3208f09ea0811f.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328745683/96c754afa720751e0e3208f09ea0811f.png",
+    "sha256": "9625df4910f416f8346b82ed6cec062d0d08f64c15b0cce3fdd24980596783e8",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.3878676470588236,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-economy-live.png",
+    "checkedAt": "2026-10-26T08:15:31.076Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-economy",
+    "sha256": "9625df4910f416f8346b82ed6cec062d0d08f64c15b0cce3fdd24980596783e8",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:22:32.190Z"
+  }
+}

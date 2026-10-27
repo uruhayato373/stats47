@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-26T07:35:07.410Z",
+  "status": "design-review",
+  "reference": {
+    "url": "https://assets.st-note.com/production/uploads/images/327706934/rectangle_large_type_2_40e2a97aeb814b8903158b1ca06aec0c.png?width=1200",
+    "sha256": "4f8f677ae58fbb349eb7138daa5c28e9253026149bf0f5be015a180ecfad6aa6"
+  },
+  "scope": {
+    "publishedMagazines": 20,
+    "magazineLedgerRows": 22,
+    "registeredRankingKeys": 2459
+  },
+  "publication": {
+    "noteChanged": false,
+    "siteChanged": false,
+    "siteThumbnailsChanged": false
+  },
+  "entries": [
+    {
+      "key": "sunshine",
+      "role": "site-ogp",
+      "copy": [
+        "年間・47都道府県",
+        "日照時間",
+        "2024年 / stats47"
+      ],
+      "status": "candidate",
+      "generator": "codex-built-in-imagegen-complete",
+      "source": {
+        "provider": "private-r2",
+        "key": "media/design-pilots/link-card-2026-10-26/21561c58c240ecad825ca25b13275d92e631b721051e2517cd29d9f431fa2813.png",
+        "sha256": "21561c58c240ecad825ca25b13275d92e631b721051e2517cd29d9f431fa2813",
+        "bytes": 2177359
+      },
+      "normalized": {
+        "provider": "private-r2",
+        "key": "media/design-pilots/link-card-2026-10-26/c8b034c240733cd67ec8370c9bcf8e70536f0fa65b1b2b075b092f4652169294.png",
+        "sha256": "c8b034c240733cd67ec8370c9bcf8e70536f0fa65b1b2b075b092f4652169294",
+        "bytes": 1646282
+      },
+      "visualReview": {
+        "fullSize": true,
+        "note220x150": true,
+        "contrastOnOpaqueSurface": true,
+        "japaneseCopyMatched": true,
+        "squareCrop": "needs-further-check",
+        "brandDirection": "reference-matched; owner adoption pending"
+      }
+    },
+    {
+      "key": "climate",
+      "role": "note-magazine-cover",
+      "copy": [
+        "都道府県ランキング",
+        "気候・自然",
+        "stats47"
+      ],
+      "status": "candidate",
+      "generator": "codex-built-in-imagegen-complete",
+      "source": {
+        "provider": "private-r2",
+        "key": "media/design-pilots/link-card-2026-10-26/aa42b3fb1fb9ae4edbf7883ebae3db9c68f386df06c5b5e3b635807d97832eae.png",
+        "sha256": "aa42b3fb1fb9ae4edbf7883ebae3db9c68f386df06c5b5e3b635807d97832eae",
+        "bytes": 2399896
+      },
+      "normalized": {
+        "provider": "private-r2",
+        "key": "media/design-pilots/link-card-2026-10-26/608ce1950eb21579ee860623a25ce24652d911ee402364497e0bda7cbfb8c891.png",
+        "sha256": "608ce1950eb21579ee860623a25ce24652d911ee402364497e0bda7cbfb8c891",
+        "bytes": 1747614
+      },
+      "visualReview": {
+        "fullSize": true,
+        "note220x150": true,
+        "contrastOnOpaqueSurface": true,
+        "japaneseCopyMatched": true,
+        "squareCrop": "needs-further-check",
+        "brandDirection": "reference-matched; owner adoption pending"
+      }
+    }
+  ]
+}

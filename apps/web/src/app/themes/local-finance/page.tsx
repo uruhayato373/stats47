@@ -63,7 +63,7 @@ export function generateMetadata(): Metadata {
     ...generateOGMetadata({
       title,
       description: theme.description ?? '',
-      imageUrl: `/themes/local-finance/opengraph-image`,
+      imageUrl: `${R2_BASE}/app/themes/local-finance/ogp/ogp.png?v=20261026-pop`,
     }),
   };
 }

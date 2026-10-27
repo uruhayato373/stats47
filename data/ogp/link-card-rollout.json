@@ -1,0 +1,3691 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "note-family-2026-10-26-v1",
+  "entries": [
+    {
+      "id": "magazine:koumuin-claude-code",
+      "key": "koumuin-claude-code",
+      "kind": "magazine",
+      "name": "公務員 × Claude Code 実務活用ガイド",
+      "pageUrl": "https://note.com/stats47/m/m512ad7023815",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "bb0a96e9fe7ebae39de3d175bcfc0b39b26c2e5215752e609e1ad7bad8acb428",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-a7a39954-98dd-46b7-9f88-d4a8834beeeb.png",
+        "sourceSha256": "b740b2e28c445ad3c26db2e28294dc5a28afd6b83a00bebb0e68aa88b8bf8b30",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-claude-code.png",
+        "sha256": "d4ad42d3b9fed2203bc6c1cb34793b5d2d3b895241f767bfce799e5c0f50ee5f",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-claude-code.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/b740b2e28c445ad3c26db2e28294dc5a28afd6b83a00bebb0e68aa88b8bf8b30.png",
+          "sha256": "b740b2e28c445ad3c26db2e28294dc5a28afd6b83a00bebb0e68aa88b8bf8b30",
+          "bytes": 2245606
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/d4ad42d3b9fed2203bc6c1cb34793b5d2d3b895241f767bfce799e5c0f50ee5f.png",
+          "sha256": "d4ad42d3b9fed2203bc6c1cb34793b5d2d3b895241f767bfce799e5c0f50ee5f",
+          "bytes": 1798623
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/fcbcb0c6b9fcffd7110525ed7df3792e328833785de5ff9a9b4bc046423db374.json",
+          "sha256": "fcbcb0c6b9fcffd7110525ed7df3792e328833785de5ff9a9b4bc046423db374",
+          "bytes": 3655
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/78b26f6db66e27aeed109f72143762fccb156c2c199287f281ee80176b401c6f.json",
+          "sha256": "78b26f6db66e27aeed109f72143762fccb156c2c199287f281ee80176b401c6f",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:40:28.399Z",
+        "before": {
+          "name": "公務員 × Claude Code 実務活用ガイド",
+          "description": "「Claude Code を職場で使いたいけれど、何から始めればいいかわからない」——そんな自治体職員のための、実務特化の全 31 本シリーズです。\n\n環境構築（庁内プロキシの突破）から、議事録・議会答弁・条例レビュー・補助金書類のチェック、個人情報を送らないセキュリティ設定、Excel 集計の自動化、上司への導入説明まで。「ターミナルって何？」というレベルの未経験者でも読める導入記事から、中級の実務適用までをカバーします。\n\nまずは無料記事から。Claude Code が初めての方は「Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド」をどうぞ。",
+          "cover": "https://assets.st-note.com/production/uploads/images/277927596/magazine_cover_large_b91083ac48d758a9678698a833fe6295.png"
+        },
+        "expectedSha256": "d4ad42d3b9fed2203bc6c1cb34793b5d2d3b895241f767bfce799e5c0f50ee5f",
+        "status": "verified",
+        "after": {
+          "name": "公務員 × Claude Code 実務活用ガイド",
+          "description": "「Claude Code を職場で使いたいけれど、何から始めればいいかわからない」——そんな自治体職員のための、実務特化の全 31 本シリーズです。\n\n環境構築（庁内プロキシの突破）から、議事録・議会答弁・条例レビュー・補助金書類のチェック、個人情報を送らないセキュリティ設定、Excel 集計の自動化、上司への導入説明まで。「ターミナルって何？」というレベルの未経験者でも読める導入記事から、中級の実務適用までをカバーします。\n\nまずは無料記事から。Claude Code が初めての方は「Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド」をどうぞ。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758124/magazine_cover_large_abec28bc24b7d67fb6891ede8c0ed82b.png"
+        },
+        "verifiedAt": "2026-10-26T08:40:37.715Z",
+        "servedSha256": "bdbf82f69ba5ada74e962c7cd25c67ff581dcc59310d254c1d4195aded24161c",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758124/abec28bc24b7d67fb6891ede8c0ed82b.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758124/abec28bc24b7d67fb6891ede8c0ed82b.png",
+          "sha256": "adac78e4c7bc48abd38b16917b5fe0e740fd54dab1f9e2f0281e2309055d8fc9",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4178921568627452,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-claude-code-live.png",
+          "checkedAt": "2026-10-26T08:43:15.437Z"
+        },
+        "visualReview": {
+          "id": "magazine:koumuin-claude-code",
+          "sha256": "adac78e4c7bc48abd38b16917b5fe0e740fd54dab1f9e2f0281e2309055d8fc9",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:44:32.822Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:koumuin-estat-claude-code",
+      "key": "koumuin-estat-claude-code",
+      "kind": "magazine",
+      "name": "公務員のe-Stat×Claude Code実務ガイド",
+      "pageUrl": "https://note.com/stats47/m/m1b836e4c8dce",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "5aab2958cf2ab1ca8ce5c11ac5457d9747d6ec2b93ede27f5c12ee7354bbf13a",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-398c2c5d-f5b1-406d-b6ed-4739915afc55.png",
+        "sourceSha256": "44a51f7fbbca9e336d892d4e3c77c83571601af92bf6f5469aa577cb74289313",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-estat-claude-code.png",
+        "sha256": "021e8f8de746fd3a8e65450233d0dd3b7565e5ae2f7ea7f90132e7384722b8c1",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-estat-claude-code.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/44a51f7fbbca9e336d892d4e3c77c83571601af92bf6f5469aa577cb74289313.png",
+          "sha256": "44a51f7fbbca9e336d892d4e3c77c83571601af92bf6f5469aa577cb74289313",
+          "bytes": 2183362
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/021e8f8de746fd3a8e65450233d0dd3b7565e5ae2f7ea7f90132e7384722b8c1.png",
+          "sha256": "021e8f8de746fd3a8e65450233d0dd3b7565e5ae2f7ea7f90132e7384722b8c1",
+          "bytes": 1736492
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/072f4ad2e57491c49e3dfcec1f6f20554de194d4b6515cd2dc778b4d615bc3c0.json",
+          "sha256": "072f4ad2e57491c49e3dfcec1f6f20554de194d4b6515cd2dc778b4d615bc3c0",
+          "bytes": 2970
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/024b870475d61f628c2a51a6d857a6be88afb73671a0dab1aad12247f7133b52.json",
+          "sha256": "024b870475d61f628c2a51a6d857a6be88afb73671a0dab1aad12247f7133b52",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:40:37.970Z",
+        "before": {
+          "name": "公務員のe-Stat×Claude Code実務ガイド",
+          "description": "他自治体比較、議会答弁の根拠データ、県民向け資料——e-Stat で都道府県統計を引く仕事を、検索・取得・整形・派生指標・チャート出力まで Claude Code で完結させる、自治体職員のための実務ガイド(全12本)。API キー取得から Excel/CSV のパース、pandas/DuckDB の集計、議会用チャート生成、月次ルーティンの自動化まで、コピペで動くサンプル付きで解説します。執筆者は Claude Code で47都道府県統計サイト stats47.jp(約2,000ランキングを毎日自動更新)を個人開発・運用。無料3本+有料9本、個別¥300の有料記事が本マガジンなら全部読めます。",
+          "cover": "https://assets.st-note.com/production/uploads/images/285314870/magazine_cover_large_89c8857eb1399cba40c2606265ba3295.png"
+        },
+        "expectedSha256": "021e8f8de746fd3a8e65450233d0dd3b7565e5ae2f7ea7f90132e7384722b8c1",
+        "status": "verified",
+        "after": {
+          "name": "公務員のe-Stat×Claude Code実務ガイド",
+          "description": "他自治体比較、議会答弁の根拠データ、県民向け資料——e-Stat で都道府県統計を引く仕事を、検索・取得・整形・派生指標・チャート出力まで Claude Code で完結させる、自治体職員のための実務ガイド(全12本)。API キー取得から Excel/CSV のパース、pandas/DuckDB の集計、議会用チャート生成、月次ルーティンの自動化まで、コピペで動くサンプル付きで解説します。執筆者は Claude Code で47都道府県統計サイト stats47.jp(約2,000ランキングを毎日自動更新)を個人開発・運用。無料3本+有料9本、個別¥300の有料記事が本マガジンなら全部読めます。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758320/magazine_cover_large_453dedc8b5157a55f3d7754982865cd3.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:12.251Z",
+        "servedSha256": "9207fd243f9a34281c4424549fca077c039481049c61696f0fa13889d4bd4eac",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758320/453dedc8b5157a55f3d7754982865cd3.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758320/453dedc8b5157a55f3d7754982865cd3.png",
+          "sha256": "5c6dca4493218e03deb3c310a41499a8bfc04c7cf0d4fa73040f681936d26592",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.5318627450980393,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-estat-claude-code-live.png",
+          "checkedAt": "2026-10-26T08:43:16.712Z"
+        },
+        "visualReview": {
+          "id": "magazine:koumuin-estat-claude-code",
+          "sha256": "5c6dca4493218e03deb3c310a41499a8bfc04c7cf0d4fa73040f681936d26592",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:44:32.822Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:koumuin-gis",
+      "key": "koumuin-gis",
+      "kind": "magazine",
+      "name": "自治体職員のための GIS 入門",
+      "pageUrl": "https://note.com/stats47/m/m599831c3769e",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "08c9768d5f9f3522e754abc721ddca993002cfccfc11e839544b76ed0e5a8231",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-552fc85b-7f79-4e3b-a6fd-ec2502e4e1a7.png",
+        "sourceSha256": "fa316fdb20dbd482058bed25756bcdb1b700a46e4768b31da44673ce32161c80",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-gis.png",
+        "sha256": "f8a3d42960dd7bcffeef931b715f942d1d99f42d6419eef335ed421e5dbeb7d6",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-gis.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/fa316fdb20dbd482058bed25756bcdb1b700a46e4768b31da44673ce32161c80.png",
+          "sha256": "fa316fdb20dbd482058bed25756bcdb1b700a46e4768b31da44673ce32161c80",
+          "bytes": 2463439
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/f8a3d42960dd7bcffeef931b715f942d1d99f42d6419eef335ed421e5dbeb7d6.png",
+          "sha256": "f8a3d42960dd7bcffeef931b715f942d1d99f42d6419eef335ed421e5dbeb7d6",
+          "bytes": 1910473
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/2975b4c4e45ce555888afa6b1cb1b540e323b987252a855c539a500f7fbe5280.json",
+          "sha256": "2975b4c4e45ce555888afa6b1cb1b540e323b987252a855c539a500f7fbe5280",
+          "bytes": 3689
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/e49fec08a10edf69cd07f78691d548b693af37d4c2a81b9a315f09d43a76077c.json",
+          "sha256": "e49fec08a10edf69cd07f78691d548b693af37d4c2a81b9a315f09d43a76077c",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:41:12.397Z",
+        "before": {
+          "name": "自治体職員のための GIS 入門",
+          "description": "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832181/magazine_cover_large_a26a43ff3c9b7a63557f713227519ff6.png"
+        },
+        "expectedSha256": "f8a3d42960dd7bcffeef931b715f942d1d99f42d6419eef335ed421e5dbeb7d6",
+        "status": "verified",
+        "after": {
+          "name": "自治体職員のための GIS 入門",
+          "description": "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758381/magazine_cover_large_78df47c87adbafdf8a55024f59393d72.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:21.378Z",
+        "servedSha256": "a0c356efa6ff9350f6956ec814c5067fbde28642fe92da5b7ddc3f05a2aa96d7",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758381/78df47c87adbafdf8a55024f59393d72.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758381/78df47c87adbafdf8a55024f59393d72.png",
+          "sha256": "28ff2cb987be2bf21cd28edac39b5d12845f700dbfc2fd67265d3cc29c2b58fc",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.491421568627451,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-gis-live.png",
+          "checkedAt": "2026-10-26T08:43:17.852Z"
+        },
+        "visualReview": {
+          "id": "magazine:koumuin-gis",
+          "sha256": "28ff2cb987be2bf21cd28edac39b5d12845f700dbfc2fd67265d3cc29c2b58fc",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:44:32.822Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:product-d3-colors",
+      "key": "product-d3-colors",
+      "kind": "magazine",
+      "name": "D3.js 地図可視化のための配色完全ガイド",
+      "pageUrl": "https://note.com/stats47/m/mfe0fab2606eb",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "df62230b1a8a745b982be0f8b2d66b1fef007f4a9a61a33ff6760bc36adbf2b4",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-51d4a335-b812-4c08-9d31-17d762dda969.png",
+        "sourceSha256": "86c284f988a028b87482fd8d1cc52aedf3b5476760d73f9d119b2608a7881f74",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\product-d3-colors.png",
+        "sha256": "83195fb659cd8b6779b00625a0d694853eb06d29b8e70f5f63515d56ab812872",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\product-d3-colors.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/86c284f988a028b87482fd8d1cc52aedf3b5476760d73f9d119b2608a7881f74.png",
+          "sha256": "86c284f988a028b87482fd8d1cc52aedf3b5476760d73f9d119b2608a7881f74",
+          "bytes": 2437444
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/83195fb659cd8b6779b00625a0d694853eb06d29b8e70f5f63515d56ab812872.png",
+          "sha256": "83195fb659cd8b6779b00625a0d694853eb06d29b8e70f5f63515d56ab812872",
+          "bytes": 1874163
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/67734eb362d4dea394f76fcd1638cc665749c04b1c41795dff6e644f3a1dc76f.json",
+          "sha256": "67734eb362d4dea394f76fcd1638cc665749c04b1c41795dff6e644f3a1dc76f",
+          "bytes": 3680
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/29c24dbb3a1069e55fe3626638706d4be0e4ac98c11c2712e80fb5584cfa085c.json",
+          "sha256": "29c24dbb3a1069e55fe3626638706d4be0e4ac98c11c2712e80fb5584cfa085c",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:41:21.569Z",
+        "before": {
+          "name": "D3.js 地図可視化のための配色完全ガイド",
+          "description": "D3.jsでの地図可視化、最大の悩みである「配色」の正解を網羅した完全ガイドです。\n\nデータ可視化において色は単なる装飾ではなく「情報」です。本マガジンでは、適切な色の選び方（理論）から、TypeScriptですぐに動かせる全98パターンの実装コード（実践）までを体系化しました。\n\n「順序データ」「発散データ」「カテゴリデータ」など、データの性質に合わせた最適なグラデーション選びに迷うことはもうありません。プロのエンジニアやデータアナリストが、辞書代わりに使える「保存版」のリファレンスとしてお届けします。\n\n＼ 実際のアプリで配色を体験できます ／ 本マガジンで解説している配色スキームが、実際の日本地図上でどのように見えるかを確認できる「インタラクティブ・デモサイト」を公開しています。\n\nhttps://nextjs-d3-map.vercel.app/",
+          "cover": "https://assets.st-note.com/production/uploads/images/236478727/magazine_cover_large_37b1624e469520ff7c422057311c8c15.png"
+        },
+        "expectedSha256": "83195fb659cd8b6779b00625a0d694853eb06d29b8e70f5f63515d56ab812872",
+        "status": "verified",
+        "after": {
+          "name": "D3.js 地図可視化のための配色完全ガイド",
+          "description": "D3.jsでの地図可視化、最大の悩みである「配色」の正解を網羅した完全ガイドです。\n\nデータ可視化において色は単なる装飾ではなく「情報」です。本マガジンでは、適切な色の選び方（理論）から、TypeScriptですぐに動かせる全98パターンの実装コード（実践）までを体系化しました。\n\n「順序データ」「発散データ」「カテゴリデータ」など、データの性質に合わせた最適なグラデーション選びに迷うことはもうありません。プロのエンジニアやデータアナリストが、辞書代わりに使える「保存版」のリファレンスとしてお届けします。\n\n＼ 実際のアプリで配色を体験できます ／ 本マガジンで解説している配色スキームが、実際の日本地図上でどのように見えるかを確認できる「インタラクティブ・デモサイト」を公開しています。\n\nhttps://nextjs-d3-map.vercel.app/",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758433/magazine_cover_large_3338d7fca2b7eac83faf19b163b35f35.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:30.898Z",
+        "servedSha256": "f0928f796c9766e12263e58351dfde44227674bc4c99fad1d0ca17a97a888935",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758433/3338d7fca2b7eac83faf19b163b35f35.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758433/3338d7fca2b7eac83faf19b163b35f35.png",
+          "sha256": "c258ae903732e3dd98d5ba2f0bce5af8df34603ab3242c0d0e24de7b5e4ce066",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.5968137254901962,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\product-d3-colors-live.png",
+          "checkedAt": "2026-10-26T08:43:19.205Z"
+        },
+        "visualReview": {
+          "id": "magazine:product-d3-colors",
+          "sha256": "c258ae903732e3dd98d5ba2f0bce5af8df34603ab3242c0d0e24de7b5e4ce066",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:44:32.822Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-sports-culture",
+      "key": "s47-sports-culture",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+      "pageUrl": "https://note.com/stats47/m/mef7c42c1c86c",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "ba784f084bd120451d6244e5b5591c48d29f5be2b9217491e6006988243c248c",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-2e666b9e-9e36-4a4e-9a83-a2d5fd159315.png",
+        "sourceSha256": "8bc946ac759ac17b55988f1c1c50bc39c282c62ce9bc48d710e545f51ff3d3a7",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-sports-culture.png",
+        "sha256": "9597f10b7a59a506a89172718306e226e8db574c25c853aee55e0400bfcece7c",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-sports-culture.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/8bc946ac759ac17b55988f1c1c50bc39c282c62ce9bc48d710e545f51ff3d3a7.png",
+          "sha256": "8bc946ac759ac17b55988f1c1c50bc39c282c62ce9bc48d710e545f51ff3d3a7",
+          "bytes": 2553100
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/9597f10b7a59a506a89172718306e226e8db574c25c853aee55e0400bfcece7c.png",
+          "sha256": "9597f10b7a59a506a89172718306e226e8db574c25c853aee55e0400bfcece7c",
+          "bytes": 1880035
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/a0980a522c92e4e5f794617829c64a7e45089461671fb8dab5e2b6af8cc9cad8.json",
+          "sha256": "a0980a522c92e4e5f794617829c64a7e45089461671fb8dab5e2b6af8cc9cad8",
+          "bytes": 3603
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/e23738226ad7d77d822d9ee4746e6f6f7337038cbfbf003c419dd9a3e676a2e6.json",
+          "sha256": "e23738226ad7d77d822d9ee4746e6f6f7337038cbfbf003c419dd9a3e676a2e6",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:39:21.011Z",
+        "before": {
+          "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+          "description": "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310831562/magazine_cover_large_0ce4363bdaa97b3fcab8d076437a1993.png"
+        },
+        "expectedSha256": "9597f10b7a59a506a89172718306e226e8db574c25c853aee55e0400bfcece7c",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜趣味・スポーツ・文化活動",
+          "description": "社会生活基本調査の行動者率で見る趣味・スポーツ・文化活動 (野球・ヨガ・読書・楽器・書道など) の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757708/magazine_cover_large_7d6fa49268985f8db9696cf3e3002023.png"
+        },
+        "verifiedAt": "2026-10-26T08:39:29.196Z",
+        "servedSha256": "c6c537bfb6119845d1f76ee9fce434affae66c2f2d5fba711226b255698e8b98",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757708/7d6fa49268985f8db9696cf3e3002023.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757708/7d6fa49268985f8db9696cf3e3002023.png",
+          "sha256": "0eda796b7f9f96d8fe8d61e7c9e924aeaaa3ae5af2df2acd550541948e10ba52",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.7622549019607843,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-sports-culture-live.png",
+          "checkedAt": "2026-10-26T08:43:20.398Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-sports-culture",
+          "sha256": "0eda796b7f9f96d8fe8d61e7c9e924aeaaa3ae5af2df2acd550541948e10ba52",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:44:32.822Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-fiscal",
+      "key": "s47-fiscal",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜自治体財政",
+      "pageUrl": "https://note.com/stats47/m/m30bb1cee28f7",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "376938f66e08c371a0aeeaf74bfabcb6f1fd737d9a8249a76e54abbd808c685d",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-addece1f-09fe-4f71-89fe-361ef850cc09.png",
+        "sourceSha256": "2ad2e1a2ccbc1f1d9a79271ef90c68af574317ff3a5f71d957a2ece4386e3444",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-fiscal.png",
+        "sha256": "0df47f2bf8ac4f1db68c6007e2c544cd46db1c48650095ef81efb7767f993545",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-fiscal.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/2ad2e1a2ccbc1f1d9a79271ef90c68af574317ff3a5f71d957a2ece4386e3444.png",
+          "sha256": "2ad2e1a2ccbc1f1d9a79271ef90c68af574317ff3a5f71d957a2ece4386e3444",
+          "bytes": 2333297
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/0df47f2bf8ac4f1db68c6007e2c544cd46db1c48650095ef81efb7767f993545.png",
+          "sha256": "0df47f2bf8ac4f1db68c6007e2c544cd46db1c48650095ef81efb7767f993545",
+          "bytes": 1861517
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/ccf9eac07912356a945845e6c8ffb98809d86bb2aa94e91fe40569b6cf802776.json",
+          "sha256": "ccf9eac07912356a945845e6c8ffb98809d86bb2aa94e91fe40569b6cf802776",
+          "bytes": 3664
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/44fd1ff9dfb67b9d53f37a3e1a6d17aabd4d0d9ecc76e2c6d9446058b8823928.json",
+          "sha256": "44fd1ff9dfb67b9d53f37a3e1a6d17aabd4d0d9ecc76e2c6d9446058b8823928",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:39:29.483Z",
+        "before": {
+          "name": "都道府県ランキング｜自治体財政",
+          "description": "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832271/magazine_cover_large_80e4a7a70b7ab4e2d271d91ab502b076.png"
+        },
+        "expectedSha256": "0df47f2bf8ac4f1db68c6007e2c544cd46db1c48650095ef81efb7767f993545",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜自治体財政",
+          "description": "財政力指数・実質公債費比率・自主財源比率・財政健全化指標・公務員数など、自治体財政と行政の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757796/magazine_cover_large_cbf376a7327fed95aeb65d2c1bf18f2e.png"
+        },
+        "verifiedAt": "2026-10-26T08:39:37.803Z",
+        "servedSha256": "d9ba04ff555dea03d94bf2eee57163eeb3606304b5682c76a3f63b6e1b0070cd",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757796/cbf376a7327fed95aeb65d2c1bf18f2e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757796/cbf376a7327fed95aeb65d2c1bf18f2e.png",
+          "sha256": "2c8155d39012cabc235778c567a6e2aaa84d41430ebfe1b6bb738ac84fd83bc1",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4822303921568627,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-fiscal-live.png",
+          "checkedAt": "2026-10-26T08:43:21.601Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-fiscal",
+          "sha256": "2c8155d39012cabc235778c567a6e2aaa84d41430ebfe1b6bb738ac84fd83bc1",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:11.560Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-kakei-reading",
+      "key": "s47-kakei-reading",
+      "kind": "magazine",
+      "name": "家計調査の読み方｜47都道府県の家計を読み解く",
+      "pageUrl": "https://note.com/stats47/m/m8603c96e8466",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "bb896b0e8e77c3e51140360a14fbea74e551ee0c7834f077290437e6c778e6df",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-5e17cda7-155d-4295-a73c-78802e9858ff.png",
+        "sourceSha256": "68f1de660d170bbb339530e5318efcc7b1aa08273e7c4499faa09a4ed6885237",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-kakei-reading.png",
+        "sha256": "fd0d8d6d2189b67d5445f4f60a677639e51ce0534f1be239c1f38c5d9369fe63",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-kakei-reading.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/68f1de660d170bbb339530e5318efcc7b1aa08273e7c4499faa09a4ed6885237.png",
+          "sha256": "68f1de660d170bbb339530e5318efcc7b1aa08273e7c4499faa09a4ed6885237",
+          "bytes": 2432160
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/fd0d8d6d2189b67d5445f4f60a677639e51ce0534f1be239c1f38c5d9369fe63.png",
+          "sha256": "fd0d8d6d2189b67d5445f4f60a677639e51ce0534f1be239c1f38c5d9369fe63",
+          "bytes": 1841724
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/7dc84bdb64d75d55c08a5b110d213705584a8affaf78207cd818eae4936054f3.json",
+          "sha256": "7dc84bdb64d75d55c08a5b110d213705584a8affaf78207cd818eae4936054f3",
+          "bytes": 3641
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/d6176808fc631451c0a00e4ed58510288a428d768988d701caddc2ae36bf591b.json",
+          "sha256": "d6176808fc631451c0a00e4ed58510288a428d768988d701caddc2ae36bf591b",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:39:38.467Z",
+        "before": {
+          "name": "家計調査の読み方｜47都道府県の家計を読み解く",
+          "description": "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
+          "cover": "https://assets.st-note.com/production/uploads/images/315553594/magazine_cover_large_2d0aa345219967bf10175238c92b899f.png"
+        },
+        "expectedSha256": "fd0d8d6d2189b67d5445f4f60a677639e51ce0534f1be239c1f38c5d9369fe63",
+        "status": "verified",
+        "after": {
+          "name": "家計調査の読み方｜47都道府県の家計を読み解く",
+          "description": "家計調査の支出額を読み解くための無料マガジン。十大費目で見る47都道府県の家計プロファイルと、支出額の読み違いを正す論点記事を束ねる。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757834/magazine_cover_large_9982bb48e50f38ee5130e08b15ec3187.png"
+        },
+        "verifiedAt": "2026-10-26T08:39:47.157Z",
+        "servedSha256": "a8d201f3c90640c3be785f04381cbc0d06630582500f946601e065dffde15ed7",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757834/9982bb48e50f38ee5130e08b15ec3187.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757834/9982bb48e50f38ee5130e08b15ec3187.png",
+          "sha256": "c0073ae83cb1dc09f776d78cef7770f8a28c16760cc6e193429858e2f7551a5f",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4681372549019607,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-kakei-reading-live.png",
+          "checkedAt": "2026-10-26T08:43:22.860Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-kakei-reading",
+          "sha256": "c0073ae83cb1dc09f776d78cef7770f8a28c16760cc6e193429858e2f7551a5f",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:11.560Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-economy",
+      "key": "s47-economy",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜家計・所得・物価",
+      "pageUrl": "https://note.com/stats47/m/m2604e003aac4",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "292279f5531901decc5d9582aea19d69dbb878bec7aab5110d0b2272dc54e8db",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-e5f14ca4-75e6-424d-a2ce-336af756c4ae.png",
+        "sourceSha256": "b9e200649a2fab476f9d9c562f62932760101338c950b7b7db4a6924c6ab7916",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-economy.png",
+        "sha256": "29b0db9124984781cbcb088fea837295d3947def6a3555001c24439b4b5ecece",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-economy.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/b9e200649a2fab476f9d9c562f62932760101338c950b7b7db4a6924c6ab7916.png",
+          "sha256": "b9e200649a2fab476f9d9c562f62932760101338c950b7b7db4a6924c6ab7916",
+          "bytes": 2360981
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/29b0db9124984781cbcb088fea837295d3947def6a3555001c24439b4b5ecece.png",
+          "sha256": "29b0db9124984781cbcb088fea837295d3947def6a3555001c24439b4b5ecece",
+          "bytes": 1850169
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/679873fedd4273ac91509c03811513d7f8a0928385dca9da5d763fc367284e61.json",
+          "sha256": "679873fedd4273ac91509c03811513d7f8a0928385dca9da5d763fc367284e61",
+          "bytes": 3635
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/febddf1e48379f2181f388d5fde59a5a46309452c0176266d21f04c126b5cc30.json",
+          "sha256": "febddf1e48379f2181f388d5fde59a5a46309452c0176266d21f04c126b5cc30",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:05:05.701Z",
+        "before": {
+          "name": "都道府県ランキング｜家計・所得・物価",
+          "description": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832325/magazine_cover_large_f19d5a540b20717278785c3b0432658a.png"
+        },
+        "expectedSha256": "29b0db9124984781cbcb088fea837295d3947def6a3555001c24439b4b5ecece",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜家計・所得・物価",
+          "description": "県民所得・貯蓄率・消費者物価・費目別支出など、家計と経済の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328745683/magazine_cover_large_96c754afa720751e0e3208f09ea0811f.png"
+        },
+        "verifiedAt": "2026-10-26T08:05:13.954Z",
+        "servedSha256": "8b9d9d7a6b90ab68f5bb343a9536a1daa166c148fdb6154472ac18c9581ff84a",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328745683/96c754afa720751e0e3208f09ea0811f.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328745683/96c754afa720751e0e3208f09ea0811f.png",
+          "sha256": "9625df4910f416f8346b82ed6cec062d0d08f64c15b0cce3fdd24980596783e8",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.3878676470588236,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-economy-live.png",
+          "checkedAt": "2026-10-26T08:15:31.076Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-economy",
+          "sha256": "9625df4910f416f8346b82ed6cec062d0d08f64c15b0cce3fdd24980596783e8",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:22:32.190Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-population",
+      "key": "s47-population",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜人口・世帯",
+      "pageUrl": "https://note.com/stats47/m/meacbafeb15a1",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "1184ce9647962022deb4d662bf28042de996e600484f2fa6131c48a4463833c3",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-cb986d00-ada8-443f-966b-2e6f6413194d.png",
+        "sourceSha256": "7dafe90c91863b9008f9ba77d51d903dfb9b94dc1b746dd8981c7d1db044cb78",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-population.png",
+        "sha256": "b14522a675190d4924493fc46e935a7f8a0dafe6616743e5d9759ee68ca21de8",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-population.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/7dafe90c91863b9008f9ba77d51d903dfb9b94dc1b746dd8981c7d1db044cb78.png",
+          "sha256": "7dafe90c91863b9008f9ba77d51d903dfb9b94dc1b746dd8981c7d1db044cb78",
+          "bytes": 2338217
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/b14522a675190d4924493fc46e935a7f8a0dafe6616743e5d9759ee68ca21de8.png",
+          "sha256": "b14522a675190d4924493fc46e935a7f8a0dafe6616743e5d9759ee68ca21de8",
+          "bytes": 1879891
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/1afcda3d95143ff3957a5995110f1028d236f2ceefa891855f225fa6621a1e35.json",
+          "sha256": "1afcda3d95143ff3957a5995110f1028d236f2ceefa891855f225fa6621a1e35",
+          "bytes": 3686
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/9d835e136588eaa4047671fdcbba30f53d4806c07b46139317d4b22c796575a9.json",
+          "sha256": "9d835e136588eaa4047671fdcbba30f53d4806c07b46139317d4b22c796575a9",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:05:23.747Z",
+        "before": {
+          "name": "都道府県ランキング｜人口・世帯",
+          "description": "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832411/magazine_cover_large_88d81e48f961aa6d13b3fdbb077a8714.png"
+        },
+        "expectedSha256": "b14522a675190d4924493fc46e935a7f8a0dafe6616743e5d9759ee68ca21de8",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜人口・世帯",
+          "description": "出生率・初婚年齢・人口移動・世帯構造・高齢化など、人口と世帯の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328745767/magazine_cover_large_8e553f5e17b3e3e591ed32ed9ba60431.png"
+        },
+        "verifiedAt": "2026-10-26T08:05:34.005Z",
+        "servedSha256": "c806c6a30c54dc09f00298139e4d68decc18ec143bc07e51890ea89cc944862f",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328745767/8e553f5e17b3e3e591ed32ed9ba60431.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328745767/8e553f5e17b3e3e591ed32ed9ba60431.png",
+          "sha256": "e49f3627094822fc0e277b7b46bf633990cad6e092a7a64d004439be2c5581d1",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.6072303921568627,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-population-live.png",
+          "checkedAt": "2026-10-26T08:15:32.175Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-population",
+          "sha256": "e49f3627094822fc0e277b7b46bf633990cad6e092a7a64d004439be2c5581d1",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:22:32.190Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-education",
+      "key": "s47-education",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜教育・学び",
+      "pageUrl": "https://note.com/stats47/m/m72e6b89b155e",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "8e5e1a88628aa4d8a7d785986bc15a2dab31feb04534840ed1b4c0dadd3d8f77",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-4e0693c5-a7b6-446f-a157-7f1f5a60e0ea.png",
+        "sourceSha256": "40c870b18ad4522e75d9dcfa4738b8face1fb0214a6e73bb1f8d80f18b794017",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-education.png",
+        "sha256": "ef9c9dcc2e7d0709d0405bd3e0752579eaac4bbd2760d4943ab587d70cafe4c6",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-education.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/40c870b18ad4522e75d9dcfa4738b8face1fb0214a6e73bb1f8d80f18b794017.png",
+          "sha256": "40c870b18ad4522e75d9dcfa4738b8face1fb0214a6e73bb1f8d80f18b794017",
+          "bytes": 2249668
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/ef9c9dcc2e7d0709d0405bd3e0752579eaac4bbd2760d4943ab587d70cafe4c6.png",
+          "sha256": "ef9c9dcc2e7d0709d0405bd3e0752579eaac4bbd2760d4943ab587d70cafe4c6",
+          "bytes": 1783274
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/c8e799d7f2652cf5397d1340d1e18d69b1ed2e5a57d0e72ddad8e11530578e3e.json",
+          "sha256": "c8e799d7f2652cf5397d1340d1e18d69b1ed2e5a57d0e72ddad8e11530578e3e",
+          "bytes": 3529
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/1b4156e5dc9b6804763ea3c2024a6fbb3088667db4fc8dcf07642d4c1eeb38ae.json",
+          "sha256": "1b4156e5dc9b6804763ea3c2024a6fbb3088667db4fc8dcf07642d4c1eeb38ae",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:38:57.923Z",
+        "before": {
+          "name": "都道府県ランキング｜教育・学び",
+          "description": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832475/magazine_cover_large_698d17b01414eacba6e1abc39e5dadc7.png"
+        },
+        "expectedSha256": "ef9c9dcc2e7d0709d0405bd3e0752579eaac4bbd2760d4943ab587d70cafe4c6",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜教育・学び",
+          "description": "進学率・学力・体力・体格・教育費・図書館など、教育と学びの都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757628/magazine_cover_large_0677188f03d515f428c6566b7eed8bc2.png"
+        },
+        "verifiedAt": "2026-10-26T08:39:19.961Z",
+        "servedSha256": "65e2a14117f75ba7d6f7756f23a92028086c1b5f070503df7b41277152ad6aa1",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757628/0677188f03d515f428c6566b7eed8bc2.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757628/0677188f03d515f428c6566b7eed8bc2.png",
+          "sha256": "adace0ac349ce715b5250bb14c6e4d710a6c5689b8fd86f896aa2399da7d18e8",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.3560049019607843,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-education-live.png",
+          "checkedAt": "2026-10-26T08:43:24.335Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-education",
+          "sha256": "adace0ac349ce715b5250bb14c6e4d710a6c5689b8fd86f896aa2399da7d18e8",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:11.560Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-health",
+      "key": "s47-health",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜医療・健康・社会保障",
+      "pageUrl": "https://note.com/stats47/m/m83c357247e0c",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "3083c6c3447da86e43f904c6e9449e7c8a16b3719900537e7bd55578a0f1969d",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-d5778bdf-43fa-4227-901c-8a9bc9fcff0a.png",
+        "sourceSha256": "326f65c91f8f0301466b34d5bd278c9fedf3b4850d6bce225795590a1a3a4884",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-health.png",
+        "sha256": "b5a80827544390a398c7a63bf9d5f530599293f549e58e9c6f28262295c989bf",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-health.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/326f65c91f8f0301466b34d5bd278c9fedf3b4850d6bce225795590a1a3a4884.png",
+          "sha256": "326f65c91f8f0301466b34d5bd278c9fedf3b4850d6bce225795590a1a3a4884",
+          "bytes": 2459289
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/b5a80827544390a398c7a63bf9d5f530599293f549e58e9c6f28262295c989bf.png",
+          "sha256": "b5a80827544390a398c7a63bf9d5f530599293f549e58e9c6f28262295c989bf",
+          "bytes": 1879043
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/c5f1a957cde0ea02537d3fa2c9cce6b4491df3ffeb43cfc6cfb5d95531677011.json",
+          "sha256": "c5f1a957cde0ea02537d3fa2c9cce6b4491df3ffeb43cfc6cfb5d95531677011",
+          "bytes": 3649
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/71726c755a07725ebd4797a7bca69cc26722accd96ce39ad48bde6f299afa943.json",
+          "sha256": "71726c755a07725ebd4797a7bca69cc26722accd96ce39ad48bde6f299afa943",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:05:34.285Z",
+        "before": {
+          "name": "都道府県ランキング｜医療・健康・社会保障",
+          "description": "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832527/magazine_cover_large_6d57c3581093d4a5129deb64758f4961.png"
+        },
+        "expectedSha256": "b5a80827544390a398c7a63bf9d5f530599293f549e58e9c6f28262295c989bf",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜医療・健康・社会保障",
+          "description": "医療・病院・介護・健診・死亡率・平均寿命・社会保障など、健康と福祉の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328745834/magazine_cover_large_60bc84604c39c879683d26e0033c15ec.png"
+        },
+        "verifiedAt": "2026-10-26T08:05:42.976Z",
+        "servedSha256": "9183d437a2a512e1bf020fb7955db3977b52b62bd44e422e8f987b2426aa061f",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328745834/60bc84604c39c879683d26e0033c15ec.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328745834/60bc84604c39c879683d26e0033c15ec.png",
+          "sha256": "e9299df063212b231b9c480c7e197cb08ba9ba56133c2b1d0f24de0ce0113a82",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.5772058823529411,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-health-live.png",
+          "checkedAt": "2026-10-26T08:15:33.210Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-health",
+          "sha256": "e9299df063212b231b9c480c7e197cb08ba9ba56133c2b1d0f24de0ce0113a82",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:22:32.190Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-climate",
+      "key": "s47-climate",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜気候・自然",
+      "pageUrl": "https://note.com/stats47/m/me574f67ac47f",
+      "priority": 0,
+      "status": "published",
+      "promptSha256": "dcec6f2caf46e59a3cc409c939a42978d237b93b96f4753cf49154cff20b1591",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-b63e6e95-1f3b-4701-938e-1538a166e543.png",
+        "sourceSha256": "1744314e1621e3312f506ebd8d7ba33a7d79f58649e1431e9216f368950ced14",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-climate.png",
+        "sha256": "65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-climate.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/1744314e1621e3312f506ebd8d7ba33a7d79f58649e1431e9216f368950ced14.png",
+          "sha256": "1744314e1621e3312f506ebd8d7ba33a7d79f58649e1431e9216f368950ced14",
+          "bytes": 2467548
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f.png",
+          "sha256": "65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f",
+          "bytes": 1935191
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/ca492b165f369e1283fa48ccce42e952bbac547250d7f9705d1db86bcf4ff9d0.json",
+          "sha256": "ca492b165f369e1283fa48ccce42e952bbac547250d7f9705d1db86bcf4ff9d0",
+          "bytes": 3186
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/cc65e13021763c8e3ba8e78ae172c8efecc5605a25b448c9ec1884278dab823f.json",
+          "sha256": "cc65e13021763c8e3ba8e78ae172c8efecc5605a25b448c9ec1884278dab823f",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:04:52.392Z",
+        "before": {
+          "name": "都道府県ランキング｜気候・自然",
+          "description": "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832597/magazine_cover_large_5056eb81c0d46042f772b12866c0cd36.png"
+        },
+        "expectedSha256": "65bed3c27576571034739e2321f7c4b4f57030f7569e7812e4e991871b173f8f",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜気候・自然",
+          "description": "日照時間・気温・降水量・晴天日数・積雪など、気候と自然の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328745631/magazine_cover_large_0537c3cb9dc9368879901a96bc1cf78e.png"
+        },
+        "verifiedAt": "2026-10-26T08:05:05.371Z",
+        "servedSha256": "1fdc107185b26a92fb2d85e4db6b912a20702278ee620388a5c1ccca78b55778",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png",
+          "sha256": "7756fb8c9c1cbf1eabe03137a270580c61de565ef2403d3c8f6d59f634483910",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.423406862745098,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-climate-live.png",
+          "checkedAt": "2026-10-26T08:15:34.250Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-climate",
+          "sha256": "7756fb8c9c1cbf1eabe03137a270580c61de565ef2403d3c8f6d59f634483910",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:22:32.190Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-agriculture",
+      "key": "s47-agriculture",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜農林水産",
+      "pageUrl": "https://note.com/stats47/m/md6aa26278129",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "fbc9a72c2de6833b334613eb29177c09cc1cbf55dfb2c0ea31ed87304458b7b0",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-e7b0defe-faba-49f6-b36a-f82a3e1c4c28.png",
+        "sourceSha256": "28ac879d886a5e05b8254647e8b380fc3575a7db2d2a44ee450da99e518b5106",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-agriculture.png",
+        "sha256": "946c1207c681f8588253c34055ad34a06c3555df4f7a6d87e01dcf3e6749572b",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-agriculture.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/28ac879d886a5e05b8254647e8b380fc3575a7db2d2a44ee450da99e518b5106.png",
+          "sha256": "28ac879d886a5e05b8254647e8b380fc3575a7db2d2a44ee450da99e518b5106",
+          "bytes": 2632975
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/946c1207c681f8588253c34055ad34a06c3555df4f7a6d87e01dcf3e6749572b.png",
+          "sha256": "946c1207c681f8588253c34055ad34a06c3555df4f7a6d87e01dcf3e6749572b",
+          "bytes": 1962373
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/87e87f1cf87e838ac4023806e096280add296481c9ce207a3ada0d55c8a79d01.json",
+          "sha256": "87e87f1cf87e838ac4023806e096280add296481c9ce207a3ada0d55c8a79d01",
+          "bytes": 3552
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/a3288ac73c6798a7a613ca40fc7acc4eb93f9106c5aea0df9179971c0325f883.json",
+          "sha256": "a3288ac73c6798a7a613ca40fc7acc4eb93f9106c5aea0df9179971c0325f883",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:39:47.319Z",
+        "before": {
+          "name": "都道府県ランキング｜農林水産",
+          "description": "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832668/magazine_cover_large_91f2173a5301b115c3aea0a078096f3b.png"
+        },
+        "expectedSha256": "946c1207c681f8588253c34055ad34a06c3555df4f7a6d87e01dcf3e6749572b",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜農林水産",
+          "description": "農業産出額・農業所得・漁獲量・畜産・特産品の消費量など、農林水産の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757878/magazine_cover_large_414b30c788c7167fdbfca57c0b41c525.png"
+        },
+        "verifiedAt": "2026-10-26T08:39:56.178Z",
+        "servedSha256": "dc5e8e9093e526e8f514d24700eae7c3c77a2f2a4eeaf3cf9aa974906665c238",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757878/414b30c788c7167fdbfca57c0b41c525.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757878/414b30c788c7167fdbfca57c0b41c525.png",
+          "sha256": "0c0fe048e13bf1a56256d8be11885aa7abf7d9bd96cbf54a08b75837622005fc",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.6035539215686274,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-agriculture-live.png",
+          "checkedAt": "2026-10-26T08:43:25.393Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-agriculture",
+          "sha256": "0c0fe048e13bf1a56256d8be11885aa7abf7d9bd96cbf54a08b75837622005fc",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:11.560Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-safety",
+      "key": "s47-safety",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜安全・環境",
+      "pageUrl": "https://note.com/stats47/m/md7d4906a40ac",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "b8fb79d7d15209ae740e5b94e15da88d7372fef79ed1e1924415a48fd134812b",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-494233a1-2846-4fa3-a92f-a20395a89f3d.png",
+        "sourceSha256": "dd22af3e75549767d9d1b39dc4aba572181ef1f4661ec648909c016ac3b50ea0",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-safety.png",
+        "sha256": "63353decfdeb365e5e3f7b11438ee9244738a51c37bb9be0b4eb43882b4e1454",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-safety.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/dd22af3e75549767d9d1b39dc4aba572181ef1f4661ec648909c016ac3b50ea0.png",
+          "sha256": "dd22af3e75549767d9d1b39dc4aba572181ef1f4661ec648909c016ac3b50ea0",
+          "bytes": 2358144
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/63353decfdeb365e5e3f7b11438ee9244738a51c37bb9be0b4eb43882b4e1454.png",
+          "sha256": "63353decfdeb365e5e3f7b11438ee9244738a51c37bb9be0b4eb43882b4e1454",
+          "bytes": 1879540
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/fe738085aee38f56c39f38bb04c50ba600473f6cff2fe357ec91b86223fa9947.json",
+          "sha256": "fe738085aee38f56c39f38bb04c50ba600473f6cff2fe357ec91b86223fa9947",
+          "bytes": 3592
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/2f262daff9e89d4757c0f03c398265c624c24ae6db2eca0332c765fcbcf16a08.json",
+          "sha256": "2f262daff9e89d4757c0f03c398265c624c24ae6db2eca0332c765fcbcf16a08",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:39:56.363Z",
+        "before": {
+          "name": "都道府県ランキング｜安全・環境",
+          "description": "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310831955/magazine_cover_large_bd91227b366efcf05d0fcdfadbdf67f6.png"
+        },
+        "expectedSha256": "63353decfdeb365e5e3f7b11438ee9244738a51c37bb9be0b4eb43882b4e1454",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜安全・環境",
+          "description": "犯罪・交通事故・警察官数・災害・ごみ・公害など、安全と環境の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328757953/magazine_cover_large_2eea19e3771225e298eed154295bff9a.png"
+        },
+        "verifiedAt": "2026-10-26T08:40:09.676Z",
+        "servedSha256": "e0266035c25708a51fee8168fe5b3e1eb0ef60398a7b464186d25c2b7fc82e51",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328757953/2eea19e3771225e298eed154295bff9a.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328757953/2eea19e3771225e298eed154295bff9a.png",
+          "sha256": "65ef8a150621fb685fae1574aa447b5ed64b1d2ccfff11b2b0e7877dc5d55960",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.3970588235294117,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-safety-live.png",
+          "checkedAt": "2026-10-26T08:43:26.540Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-safety",
+          "sha256": "65ef8a150621fb685fae1574aa447b5ed64b1d2ccfff11b2b0e7877dc5d55960",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:11.560Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-labor",
+      "key": "s47-labor",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜労働・雇用",
+      "pageUrl": "https://note.com/stats47/m/m4709a61adf77",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "645439a6672591c69ac2d54754d65c3a23b897d0f88938b86ee4012b5967dbeb",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-c9a7868d-f35f-4548-8c30-33cfc3ed7a31.png",
+        "sourceSha256": "932b91b70917cee4e579abab8d687300686f32e3a9fab6ba4ce30a62d3b9b64c",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-labor.png",
+        "sha256": "2af31b3b7267a0af9d9d1d4d7aa7095c7e63fd73cf44555eb2fc66cd46a5fa6d",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-labor.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/932b91b70917cee4e579abab8d687300686f32e3a9fab6ba4ce30a62d3b9b64c.png",
+          "sha256": "932b91b70917cee4e579abab8d687300686f32e3a9fab6ba4ce30a62d3b9b64c",
+          "bytes": 2532043
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/2af31b3b7267a0af9d9d1d4d7aa7095c7e63fd73cf44555eb2fc66cd46a5fa6d.png",
+          "sha256": "2af31b3b7267a0af9d9d1d4d7aa7095c7e63fd73cf44555eb2fc66cd46a5fa6d",
+          "bytes": 1924403
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/d3817ca19735cbf22b3e20cf2ed3ecd436522b31852c30b366f9f0c210085c0e.json",
+          "sha256": "d3817ca19735cbf22b3e20cf2ed3ecd436522b31852c30b366f9f0c210085c0e",
+          "bytes": 3555
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/a1d5bc0d991a216d80c26213dd4a55500d402b4c0f4fc96c261ac6dd93783f49.json",
+          "sha256": "a1d5bc0d991a216d80c26213dd4a55500d402b4c0f4fc96c261ac6dd93783f49",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:40:09.875Z",
+        "before": {
+          "name": "都道府県ランキング｜労働・雇用",
+          "description": "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832717/magazine_cover_large_e10299c79e69d82fb9d90978eb90e0c2.png"
+        },
+        "expectedSha256": "2af31b3b7267a0af9d9d1d4d7aa7095c7e63fd73cf44555eb2fc66cd46a5fa6d",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜労働・雇用",
+          "description": "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758016/magazine_cover_large_1a6d836227329eba6c7dc99fe72114bc.png"
+        },
+        "verifiedAt": "2026-10-26T08:40:19.300Z",
+        "servedSha256": "80bf4425258517ff848b5046f95b888838263774110b9191dcc099f2ce533ef1",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758016/1a6d836227329eba6c7dc99fe72114bc.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758016/1a6d836227329eba6c7dc99fe72114bc.png",
+          "sha256": "aae005d16c9bf298f47b3049407082b8a0349bfb03e5e6d41063ecb9b75ae9ea",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4503676470588236,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-labor-live.png",
+          "checkedAt": "2026-10-26T08:43:27.598Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-labor",
+          "sha256": "aae005d16c9bf298f47b3049407082b8a0349bfb03e5e6d41063ecb9b75ae9ea",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:52.808Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-tourism",
+      "key": "s47-tourism",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜観光・宿泊",
+      "pageUrl": "https://note.com/stats47/m/m87e6a79d821b",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "a3123ba86ba03fa40eef92c8610a2115476883ed9ed5b88f5c2a420c734fcae7",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-22b4b519-b676-4111-bd6b-6395603aac5e.png",
+        "sourceSha256": "f4f8098bb3d94919843265bc6edcd001346d98bfd75dcdc789ca26518a1ca029",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-tourism.png",
+        "sha256": "6d4d49dbdb878d60692a2d1e7ce9732917654241aaba70ee5291f709b3015162",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-tourism.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/f4f8098bb3d94919843265bc6edcd001346d98bfd75dcdc789ca26518a1ca029.png",
+          "sha256": "f4f8098bb3d94919843265bc6edcd001346d98bfd75dcdc789ca26518a1ca029",
+          "bytes": 2550914
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/6d4d49dbdb878d60692a2d1e7ce9732917654241aaba70ee5291f709b3015162.png",
+          "sha256": "6d4d49dbdb878d60692a2d1e7ce9732917654241aaba70ee5291f709b3015162",
+          "bytes": 1929502
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/ec5ef1d427bf13f15e321819a28ee152a4689f4c4bf402ee72f70f0dfe7c4a66.json",
+          "sha256": "ec5ef1d427bf13f15e321819a28ee152a4689f4c4bf402ee72f70f0dfe7c4a66",
+          "bytes": 3593
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/2b3f3a122e1126409e479271205b4c69aa9466e04aa569e9f30de0bffc43e4bb.json",
+          "sha256": "2b3f3a122e1126409e479271205b4c69aa9466e04aa569e9f30de0bffc43e4bb",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:40:19.441Z",
+        "before": {
+          "name": "都道府県ランキング｜観光・宿泊",
+          "description": "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832796/magazine_cover_large_acd8bedc1444ff67df44ba4608eb16e9.png"
+        },
+        "expectedSha256": "6d4d49dbdb878d60692a2d1e7ce9732917654241aaba70ee5291f709b3015162",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜観光・宿泊",
+          "description": "観光入込・宿泊者数・ホテル/旅館・温泉など、観光の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758057/magazine_cover_large_07a384bb44ede84f7be485dd2ca577ca.png"
+        },
+        "verifiedAt": "2026-10-26T08:40:27.819Z",
+        "servedSha256": "9f0ae4f174788c6841ce9eceb24a0729e148349ae3761aa389ea0264e018eecd",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758057/07a384bb44ede84f7be485dd2ca577ca.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758057/07a384bb44ede84f7be485dd2ca577ca.png",
+          "sha256": "73c0c1cd350110224ee2379f276a5734b3bb88a966e08935c0e29036d730c7be",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4417892156862746,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-tourism-live.png",
+          "checkedAt": "2026-10-26T08:43:28.607Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-tourism",
+          "sha256": "73c0c1cd350110224ee2379f276a5734b3bb88a966e08935c0e29036d730c7be",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:52.808Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-industry",
+      "key": "s47-industry",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜産業・商業",
+      "pageUrl": "https://note.com/stats47/m/m8c84e9e6e4bd",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "4c20d51215fbe540cdabb1b21e5f7c2b5f6e2638dfa4ce90afef67aadb349257",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-54c0e6b1-eef3-4406-b26b-ff0f6523c4c9.png",
+        "sourceSha256": "87440a7a03036c7c751cad6ef7331f70dae5b36d617dd002515a7d7b330f2c4d",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-industry.png",
+        "sha256": "ee2dde38e515e9fe26d15321e1bfaf82b2a164e3126fff6f8903894b73ee5c43",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-industry.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/87440a7a03036c7c751cad6ef7331f70dae5b36d617dd002515a7d7b330f2c4d.png",
+          "sha256": "87440a7a03036c7c751cad6ef7331f70dae5b36d617dd002515a7d7b330f2c4d",
+          "bytes": 2436462
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/ee2dde38e515e9fe26d15321e1bfaf82b2a164e3126fff6f8903894b73ee5c43.png",
+          "sha256": "ee2dde38e515e9fe26d15321e1bfaf82b2a164e3126fff6f8903894b73ee5c43",
+          "bytes": 1913037
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/c743519d2e880fa8d313cac8ead8f33e8818abacca3f0d867564e67c1e8b8178.json",
+          "sha256": "c743519d2e880fa8d313cac8ead8f33e8818abacca3f0d867564e67c1e8b8178",
+          "bytes": 3558
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/0bb6f89908d7b67556feecf341a588eaef2cb0170aba3f8fe80707803c89fcf1.json",
+          "sha256": "0bb6f89908d7b67556feecf341a588eaef2cb0170aba3f8fe80707803c89fcf1",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:41:31.045Z",
+        "before": {
+          "name": "都道府県ランキング｜産業・商業",
+          "description": "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832861/magazine_cover_large_01822b10793b68e25f8e45952465e7b5.png"
+        },
+        "expectedSha256": "ee2dde38e515e9fe26d15321e1bfaf82b2a164e3126fff6f8903894b73ee5c43",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜産業・商業",
+          "description": "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758471/magazine_cover_large_9b158e243cebdb0abb5c910f4ef6ecc3.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:39.203Z",
+        "servedSha256": "cee758ed7a8cd17ea9ec677dd6eab2edd360a121f2032d1114f1b1c4e781cb8b",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758471/9b158e243cebdb0abb5c910f4ef6ecc3.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758471/9b158e243cebdb0abb5c910f4ef6ecc3.png",
+          "sha256": "42118fb751f44eba4dd60dea2fd2c67d470b45ffa5ced97599fa413d5a812bdb",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.3780637254901962,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-industry-live.png",
+          "checkedAt": "2026-10-26T08:43:29.546Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-industry",
+          "sha256": "42118fb751f44eba4dd60dea2fd2c67d470b45ffa5ced97599fa413d5a812bdb",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:52.808Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-housing",
+      "key": "s47-housing",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜住宅・建設",
+      "pageUrl": "https://note.com/stats47/m/m940fb189a4c0",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "ac6a66c8465526ee1303a3122dee50bb92448f40eb195e2d15e9326f8da5c44f",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-c8bc8f3f-8bde-4e06-8dde-457ec63a858e.png",
+        "sourceSha256": "7853eb80545611e3a250679f3ff0119678fb6c88953a741dc629a478ec99751f",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-housing.png",
+        "sha256": "73abd78ae64cfff78d5aac935a192a69ff0b6a73af705d54a9d0c9ce7fe42803",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-housing.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/7853eb80545611e3a250679f3ff0119678fb6c88953a741dc629a478ec99751f.png",
+          "sha256": "7853eb80545611e3a250679f3ff0119678fb6c88953a741dc629a478ec99751f",
+          "bytes": 2421061
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/73abd78ae64cfff78d5aac935a192a69ff0b6a73af705d54a9d0c9ce7fe42803.png",
+          "sha256": "73abd78ae64cfff78d5aac935a192a69ff0b6a73af705d54a9d0c9ce7fe42803",
+          "bytes": 1923330
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/bcbc66ea0df036c6e2f98d4e1b75ff4ff5f7bca7f957ebf1f3b028a21dae1aa2.json",
+          "sha256": "bcbc66ea0df036c6e2f98d4e1b75ff4ff5f7bca7f957ebf1f3b028a21dae1aa2",
+          "bytes": 3623
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/140c7555d9d2181ad9f2621418f8ebdc264dcc79988805c544d859d38d6c259e.json",
+          "sha256": "140c7555d9d2181ad9f2621418f8ebdc264dcc79988805c544d859d38d6c259e",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:05:14.063Z",
+        "before": {
+          "name": "都道府県ランキング｜住宅・建設",
+          "description": "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832909/magazine_cover_large_8351d7acec75e9918487653a4b087fbc.png"
+        },
+        "expectedSha256": "73abd78ae64cfff78d5aac935a192a69ff0b6a73af705d54a9d0c9ce7fe42803",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜住宅・建設",
+          "description": "持ち家率・空き家率・家賃・地価・住宅床面積・普及率など、住宅と建設の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328745733/magazine_cover_large_3e3dc198c2fd1e30c4e875bed5aa2a04.png"
+        },
+        "verifiedAt": "2026-10-26T08:05:23.406Z",
+        "servedSha256": "7c452cfe779077088a1931277c4b5c93791aa9d202e8913f3c5aca1ea4eb6d0a",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328745733/3e3dc198c2fd1e30c4e875bed5aa2a04.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328745733/3e3dc198c2fd1e30c4e875bed5aa2a04.png",
+          "sha256": "c68abb0ae2b882eace6177e85223554ff47665eccd5ccebc3788af303b16b519",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.414828431372549,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-housing-live.png",
+          "checkedAt": "2026-10-26T08:15:35.446Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-housing",
+          "sha256": "c68abb0ae2b882eace6177e85223554ff47665eccd5ccebc3788af303b16b519",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:22:32.190Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-infrastructure",
+      "key": "s47-infrastructure",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜交通・インフラ",
+      "pageUrl": "https://note.com/stats47/m/md9ab5cabf8f8",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "33174260bd39a63154e22f108008a06305c98a08931d301372ad617d18350c30",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-a2bdd829-e6db-4214-8315-e226a0909b2f.png",
+        "sourceSha256": "94a763a9d5d4c65fb3b00338048981c45001919252d170475df7ae70d2ead0e4",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-infrastructure.png",
+        "sha256": "32fa068b1c6597c000d9730e9f4f8773b25c830119d5ff5d228b8c1c2ea095df",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-infrastructure.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/94a763a9d5d4c65fb3b00338048981c45001919252d170475df7ae70d2ead0e4.png",
+          "sha256": "94a763a9d5d4c65fb3b00338048981c45001919252d170475df7ae70d2ead0e4",
+          "bytes": 2534699
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/32fa068b1c6597c000d9730e9f4f8773b25c830119d5ff5d228b8c1c2ea095df.png",
+          "sha256": "32fa068b1c6597c000d9730e9f4f8773b25c830119d5ff5d228b8c1c2ea095df",
+          "bytes": 1924447
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/da9f207b7389ea00348c62c24fb18106e37c5e55201ffbf940217a2ee5acdded.json",
+          "sha256": "da9f207b7389ea00348c62c24fb18106e37c5e55201ffbf940217a2ee5acdded",
+          "bytes": 3585
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/0752fcdeb363b9a52fe0dc62efbaeca54cc0b8b58f4be4eb98e1f55aef7eea1c.json",
+          "sha256": "0752fcdeb363b9a52fe0dc62efbaeca54cc0b8b58f4be4eb98e1f55aef7eea1c",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:41:39.342Z",
+        "before": {
+          "name": "都道府県ランキング｜交通・インフラ",
+          "description": "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310832977/magazine_cover_large_1dd14771aa21ac37b2c1ed8af867f681.png"
+        },
+        "expectedSha256": "32fa068b1c6597c000d9730e9f4f8773b25c830119d5ff5d228b8c1c2ea095df",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜交通・インフラ",
+          "description": "道路・鉄道・駅・港湾・空港・自動車保有など、交通とインフラの都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758508/magazine_cover_large_1a348f5088cdb4db100e4e0a63a07037.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:47.909Z",
+        "servedSha256": "d6c028f511f9abca4bb73fe006784de29f739f20ed000f5a5310d9b1ce5154db",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758508/1a348f5088cdb4db100e4e0a63a07037.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758508/1a348f5088cdb4db100e4e0a63a07037.png",
+          "sha256": "21aa1e5a3393597634bf4be4ebc988c9059c7690de51fb62acb85b5b1b877679",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.650735294117647,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-infrastructure-live.png",
+          "checkedAt": "2026-10-26T08:43:30.530Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-infrastructure",
+          "sha256": "21aa1e5a3393597634bf4be4ebc988c9059c7690de51fb62acb85b5b1b877679",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:52.808Z"
+        }
+      }
+    },
+    {
+      "id": "magazine:s47-ict",
+      "key": "s47-ict",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜情報通信",
+      "pageUrl": null,
+      "priority": 10,
+      "status": "not-published",
+      "promptSha256": "adb6d9d2548f03ded6953ecac87b9aa6c1e2b61df5b9d785595769bc1c4d197c"
+    },
+    {
+      "id": "magazine:s47-international",
+      "key": "s47-international",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜国際・外国人",
+      "pageUrl": null,
+      "priority": 10,
+      "status": "not-published",
+      "promptSha256": "8d60ac1eb44a1a73a83e5d0418270cd75b92323b1b3b0b40e5288749839e5ab1"
+    },
+    {
+      "id": "magazine:s47-energy",
+      "key": "s47-energy",
+      "kind": "magazine",
+      "name": "都道府県ランキング｜エネルギー・水",
+      "pageUrl": "https://note.com/stats47/m/mc659ce45528f",
+      "priority": 10,
+      "status": "published",
+      "promptSha256": "0d92ca408b0dbe3ff0b3643c0297461a5d3638fc3b3e3abc845cfdf0d9877afe",
+      "candidate": {
+        "source": "C:\\Users\\m004195\\.codex\\generated_images\\01a175e5-3b18-7512-9719-c5ee23c0ea66\\exec-2cf8c03b-fd32-4baa-8799-976b3542ee44.png",
+        "sourceSha256": "fe8ab8bc2f70a5ef7f89833cdedc46146130e1eff37bac6b7e62acdb15d83476",
+        "file": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-energy.png",
+        "sha256": "e36a202514db7ebf74d272466216d56852bf55853f463c2536f3acf77e8c1d0c",
+        "input": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-energy.input.json"
+      },
+      "revision": {
+        "source": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/fe8ab8bc2f70a5ef7f89833cdedc46146130e1eff37bac6b7e62acdb15d83476.png",
+          "sha256": "fe8ab8bc2f70a5ef7f89833cdedc46146130e1eff37bac6b7e62acdb15d83476",
+          "bytes": 2422460
+        },
+        "image": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/e36a202514db7ebf74d272466216d56852bf55853f463c2536f3acf77e8c1d0c.png",
+          "sha256": "e36a202514db7ebf74d272466216d56852bf55853f463c2536f3acf77e8c1d0c",
+          "bytes": 1880370
+        },
+        "input": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/f6c51616e964d6ddfdb4bcff42d30d25129f6c4519dab842a1f5346c19048537.json",
+          "sha256": "f6c51616e964d6ddfdb4bcff42d30d25129f6c4519dab842a1f5346c19048537",
+          "bytes": 3568
+        },
+        "review": {
+          "key": "media/link-cards/note-family-2026-10-26-v1/65dc35f442dc4fdfa9102ffea6d889386ab00511e56340bdb4b9760de04fa67f.json",
+          "sha256": "65dc35f442dc4fdfa9102ffea6d889386ab00511e56340bdb4b9760de04fa67f",
+          "bytes": 403
+        }
+      },
+      "publication": {
+        "startedAt": "2026-10-26T08:41:48.094Z",
+        "before": {
+          "name": "都道府県ランキング｜エネルギー・水",
+          "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/310833559/magazine_cover_large_826417939f958a40511dc6d0a9d808cb.png"
+        },
+        "expectedSha256": "e36a202514db7ebf74d272466216d56852bf55853f463c2536f3acf77e8c1d0c",
+        "status": "verified",
+        "after": {
+          "name": "都道府県ランキング｜エネルギー・水",
+          "description": "電力・ガス・水道・再生可能エネルギーなど、エネルギーと水の都道府県ランキングを束ねる無料マガジン。",
+          "cover": "https://assets.st-note.com/production/uploads/images/328758540/magazine_cover_large_a8756d6e2d08393309506818df267525.png"
+        },
+        "verifiedAt": "2026-10-26T08:41:56.958Z",
+        "servedSha256": "fd075a4bdf991713d2451f1376f2e65a1adc422b7e8509ec356c73e9080c3064",
+        "width": 580,
+        "height": 580,
+        "ogImage": {
+          "url": "https://assets.st-note.com/production/uploads/images/328758540/a8756d6e2d08393309506818df267525.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+          "originalUrl": "https://assets.st-note.com/production/uploads/images/328758540/a8756d6e2d08393309506818df267525.png",
+          "sha256": "ad864ab40f68585cf86cffc866c91695e5a6a4fee49bde6e65fa08c38999a4fa",
+          "width": 1200,
+          "height": 628,
+          "meanDifference32": 1.4877450980392157,
+          "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-energy-live.png",
+          "checkedAt": "2026-10-26T08:43:31.662Z"
+        },
+        "visualReview": {
+          "id": "magazine:s47-energy",
+          "sha256": "ad864ab40f68585cf86cffc866c91695e5a6a4fee49bde6e65fa08c38999a4fa",
+          "wideReadable": true,
+          "squareReadable": true,
+          "reviewer": "codex-visual",
+          "observedAt": "2026-10-26T08:45:52.808Z"
+        }
+      }
+    }
+  ],
+  "siteInventory": {
+    "observedAt": "2026-10-27T04:05:18.524Z",
+    "source": "https://stats47.jp/sitemap.xml",
+    "sitemapPages": 8510,
+    "eligiblePages": 3214,
+    "complete": true,
+    "sharedConsumers": [
+      "市区町村は所属県のOGPを共用",
+      "カテゴリ比較・一覧・その他のroot metadata継承ページはdefault OGPを共用"
+    ]
+  },
+  "updatedAt": "2026-10-27T05:15:10.801Z",
+  "sitePreflight": {
+    "checkedAt": "2026-10-26T10:01:24.990Z",
+    "blogTitles": 609,
+    "rankingTitles": 2459,
+    "titleFailures": 0,
+    "previewGeometryCases": 18,
+    "visualSamples": [
+      "annual-precipitation-rainy-season-gap",
+      "annual-sunshine-duration-prefecture-gap",
+      "academic-achievement-test-prefecture-ranking",
+      "agriculture-output-employment-productivity-gap",
+      "automotive-industry-transformation-map"
+    ],
+    "shortHeadlineEdgeSamples": 6,
+    "reviewer": "Codex visual inspection",
+    "checks": [
+      "opaque text panel",
+      "central square readability",
+      "primary title size",
+      "no text overlap"
+    ],
+    "scope": "All titles mechanically checked; representative and short-headline edge images visually inspected. Not a claim of every image being human reviewed.",
+    "allTextContainerGeometry": {
+      "checkedAt": "2026-10-26T10:18:07.795Z",
+      "checked": 3068,
+      "kind": "Satori text-container bounds; representative fixed year footer for rankings",
+      "failures": []
+    },
+    "blogCaptionRevision": {
+      "observedAt": "2026-10-27T01:03:48.862Z",
+      "scope": "All blog OGP only; other generator render sources are unchanged",
+      "targets": 609,
+      "policy": "Primary headline and brand only; no small subtitle",
+      "rejectedExample": {
+        "id": "site:/blog/academic-achievement-test-prefecture-ranking",
+        "sha256": "2b0832ce34d6fb92ba22cb1efed3224615177d329cdd123e41f6ddf813e2973d"
+      },
+      "checks": [
+        "Corrected full-size prototype visually inspected",
+        "Image copy regression test passed",
+        "Internal thumbnail and background SHA must remain unchanged"
+      ],
+      "completedAt": "2026-10-27T05:15:10.801Z"
+    },
+    "publicImageReviews": [
+      {
+        "checkedAt": "2026-10-26T13:20:06.287Z",
+        "id": "site:/ranking/annual-sunshine-duration",
+        "sha256": "51958ff72336fdd9e2b362a2f3137abee552dddbf7cc2a11d55f9ad89bf7ece7",
+        "source": "public R2 bytes verified",
+        "fullImageReadable": true,
+        "opaqueTextPanel": true,
+        "title": "年間日照時間",
+        "year": "2024年",
+        "reviewer": "Codex visual review",
+        "noteCard220x150Readable": true,
+        "publicUrl": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png"
+      },
+      {
+        "checkedAt": "2026-10-26T13:29:36.210Z",
+        "id": "site:/themes/climate",
+        "sha256": "4a420bdb6a307a3c02a5d66a6dcfb344eb18b71c9b09c426d0aba30ef481a1c5",
+        "fullImageReadable": true,
+        "opaqueTextPanel": true,
+        "title": "気候",
+        "reviewer": "Codex visual review",
+        "publicUrl": "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png"
+      },
+      {
+        "checkedAt": "2026-10-27T01:19:22.264Z",
+        "id": "site:/blog/academic-achievement-test-prefecture-ranking",
+        "sha256": "a01dbce6afb315bb9c3cbb884725020c332ab1c739f0ec349958b1a661359a0d",
+        "publicUrl": "https://storage.stats47.jp/app/blog/academic-achievement-test-prefecture-ranking/ogp/ogp.png",
+        "reviewer": "Codex visual inspection of actual public bytes",
+        "fullImageReadable": true,
+        "noteCard220x150Readable": true,
+        "smallSubtitleAbsent": true,
+        "primaryTitle": "学力トップは東京",
+        "internalAssetShaPreserved": true
+      },
+      {
+        "checkedAt": "2026-10-27T04:37:35.383Z",
+        "id": "site:/blog/sewerage-water-supply-gap",
+        "sha256": "7d7530d0b015c90d106182c6d83965dbc76cc63a873e38a6ff6dec84060e3763",
+        "publicUrl": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png",
+        "reviewer": "Codex visual inspection of actual public bytes",
+        "fullImageReadable": true,
+        "noteCard220x150Readable": true,
+        "square150x150Readable": true,
+        "smallSubtitleAbsent": true,
+        "primaryTitle": "下水道普及率と衛生の関係",
+        "noSplitNumericTokens": true,
+        "noOrphanFinalCharacter": true,
+        "internalAssetShaPreserved": true
+      }
+    ]
+  },
+  "siteShards": [
+    "link-card-sites-000.json",
+    "link-card-sites-001.json",
+    "link-card-sites-002.json",
+    "link-card-sites-003.json",
+    "link-card-sites-004.json",
+    "link-card-sites-005.json",
+    "link-card-sites-006.json"
+  ],
+  "sitePublicationSummary": {
+    "checkedAt": "2026-10-27T05:15:10.777Z",
+    "targets": 3214,
+    "uniqueImages": 3197,
+    "magazines": 20,
+    "allPublicBytesVerified": true,
+    "scope": "Every exact publication plan was checked against the public manifest SHA, image SHA and 1200x630 dimensions; run URLs and hashes are stored per target.",
+    "retainedNonpublicImages": 0
+  },
+  "siteMetadataVerification": {
+    "version": "20261026-pop",
+    "checkedAt": "2026-10-27T05:14:29.388Z",
+    "scope": "All home/category/theme/area/product targets plus representative blog/ranking pages; canonical HTML after deployment and purge",
+    "total": 158,
+    "passed": 158,
+    "failed": 0,
+    "rows": [
+      {
+        "id": "site:/",
+        "pageUrl": "https://stats47.jp",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/01000",
+        "pageUrl": "https://stats47.jp/areas/01000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/02000",
+        "pageUrl": "https://stats47.jp/areas/02000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/03000",
+        "pageUrl": "https://stats47.jp/areas/03000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/04000",
+        "pageUrl": "https://stats47.jp/areas/04000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/05000",
+        "pageUrl": "https://stats47.jp/areas/05000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/06000",
+        "pageUrl": "https://stats47.jp/areas/06000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/07000",
+        "pageUrl": "https://stats47.jp/areas/07000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/08000",
+        "pageUrl": "https://stats47.jp/areas/08000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/09000",
+        "pageUrl": "https://stats47.jp/areas/09000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/10000",
+        "pageUrl": "https://stats47.jp/areas/10000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/11000",
+        "pageUrl": "https://stats47.jp/areas/11000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/12000",
+        "pageUrl": "https://stats47.jp/areas/12000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/13000",
+        "pageUrl": "https://stats47.jp/areas/13000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/14000",
+        "pageUrl": "https://stats47.jp/areas/14000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/15000",
+        "pageUrl": "https://stats47.jp/areas/15000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/16000",
+        "pageUrl": "https://stats47.jp/areas/16000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/17000",
+        "pageUrl": "https://stats47.jp/areas/17000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/18000",
+        "pageUrl": "https://stats47.jp/areas/18000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/19000",
+        "pageUrl": "https://stats47.jp/areas/19000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/20000",
+        "pageUrl": "https://stats47.jp/areas/20000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/21000",
+        "pageUrl": "https://stats47.jp/areas/21000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/22000",
+        "pageUrl": "https://stats47.jp/areas/22000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/23000",
+        "pageUrl": "https://stats47.jp/areas/23000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/24000",
+        "pageUrl": "https://stats47.jp/areas/24000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/25000",
+        "pageUrl": "https://stats47.jp/areas/25000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/26000",
+        "pageUrl": "https://stats47.jp/areas/26000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/27000",
+        "pageUrl": "https://stats47.jp/areas/27000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/28000",
+        "pageUrl": "https://stats47.jp/areas/28000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/29000",
+        "pageUrl": "https://stats47.jp/areas/29000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/30000",
+        "pageUrl": "https://stats47.jp/areas/30000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/31000",
+        "pageUrl": "https://stats47.jp/areas/31000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/32000",
+        "pageUrl": "https://stats47.jp/areas/32000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/33000",
+        "pageUrl": "https://stats47.jp/areas/33000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/34000",
+        "pageUrl": "https://stats47.jp/areas/34000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/35000",
+        "pageUrl": "https://stats47.jp/areas/35000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/36000",
+        "pageUrl": "https://stats47.jp/areas/36000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/37000",
+        "pageUrl": "https://stats47.jp/areas/37000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/38000",
+        "pageUrl": "https://stats47.jp/areas/38000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/39000",
+        "pageUrl": "https://stats47.jp/areas/39000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/40000",
+        "pageUrl": "https://stats47.jp/areas/40000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/41000",
+        "pageUrl": "https://stats47.jp/areas/41000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/42000",
+        "pageUrl": "https://stats47.jp/areas/42000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/43000",
+        "pageUrl": "https://stats47.jp/areas/43000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/44000",
+        "pageUrl": "https://stats47.jp/areas/44000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/45000",
+        "pageUrl": "https://stats47.jp/areas/45000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/46000",
+        "pageUrl": "https://stats47.jp/areas/46000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/areas/47000",
+        "pageUrl": "https://stats47.jp/areas/47000",
+        "expectedImage": "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/2050-population-flood-exposure",
+        "pageUrl": "https://stats47.jp/blog/2050-population-flood-exposure",
+        "expectedImage": "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/annual-sunshine-duration-prefecture-gap",
+        "pageUrl": "https://stats47.jp/blog/annual-sunshine-duration-prefecture-gap",
+        "expectedImage": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+        "pageUrl": "https://stats47.jp/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+        "expectedImage": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/gas-expenditure-ranking",
+        "pageUrl": "https://stats47.jp/blog/gas-expenditure-ranking",
+        "expectedImage": "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/pear-consumption-expenditure-prefecture-gap",
+        "pageUrl": "https://stats47.jp/blog/pear-consumption-expenditure-prefecture-gap",
+        "expectedImage": "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/sewerage-water-supply-gap",
+        "pageUrl": "https://stats47.jp/blog/sewerage-water-supply-gap",
+        "expectedImage": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/blog/sunshine-pacific-vs-nihonkai",
+        "pageUrl": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai",
+        "expectedImage": "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/administrativefinancial",
+        "pageUrl": "https://stats47.jp/category/administrativefinancial",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/agriculture",
+        "pageUrl": "https://stats47.jp/category/agriculture",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/commercial",
+        "pageUrl": "https://stats47.jp/category/commercial",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/construction",
+        "pageUrl": "https://stats47.jp/category/construction",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/economy",
+        "pageUrl": "https://stats47.jp/category/economy",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/educationsports",
+        "pageUrl": "https://stats47.jp/category/educationsports",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/energy",
+        "pageUrl": "https://stats47.jp/category/energy",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/ict",
+        "pageUrl": "https://stats47.jp/category/ict",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/infrastructure",
+        "pageUrl": "https://stats47.jp/category/infrastructure",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/international",
+        "pageUrl": "https://stats47.jp/category/international",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/laborwage",
+        "pageUrl": "https://stats47.jp/category/laborwage",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/landweather",
+        "pageUrl": "https://stats47.jp/category/landweather",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/miningindustry",
+        "pageUrl": "https://stats47.jp/category/miningindustry",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/population",
+        "pageUrl": "https://stats47.jp/category/population",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/safetyenvironment",
+        "pageUrl": "https://stats47.jp/category/safetyenvironment",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/socialsecurity",
+        "pageUrl": "https://stats47.jp/category/socialsecurity",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/category/tourism",
+        "pageUrl": "https://stats47.jp/category/tourism",
+        "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-01",
+        "pageUrl": "https://stats47.jp/products/data-p-01",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-02",
+        "pageUrl": "https://stats47.jp/products/data-p-02",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-03",
+        "pageUrl": "https://stats47.jp/products/data-p-03",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-04",
+        "pageUrl": "https://stats47.jp/products/data-p-04",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-05",
+        "pageUrl": "https://stats47.jp/products/data-p-05",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-06",
+        "pageUrl": "https://stats47.jp/products/data-p-06",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-07",
+        "pageUrl": "https://stats47.jp/products/data-p-07",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-08",
+        "pageUrl": "https://stats47.jp/products/data-p-08",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-09",
+        "pageUrl": "https://stats47.jp/products/data-p-09",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-10",
+        "pageUrl": "https://stats47.jp/products/data-p-10",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-11",
+        "pageUrl": "https://stats47.jp/products/data-p-11",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-12",
+        "pageUrl": "https://stats47.jp/products/data-p-12",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/data-p-14",
+        "pageUrl": "https://stats47.jp/products/data-p-14",
+        "expectedImage": "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-01",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-01",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-02",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-02",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-03",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-03",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-04",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-04",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-05",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-05",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-06",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-06",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-07",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-07",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-08",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-08",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-09",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-09",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-10",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-10",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-11",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-11",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/products/kindle-k-s1-12",
+        "pageUrl": "https://stats47.jp/products/kindle-k-s1-12",
+        "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/ranking/abandoned-cultivated-land-area",
+        "pageUrl": "https://stats47.jp/ranking/abandoned-cultivated-land-area",
+        "expectedImage": "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/ranking/annual-sunshine-duration",
+        "pageUrl": "https://stats47.jp/ranking/annual-sunshine-duration",
+        "expectedImage": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/ranking/general-project-investment-housing",
+        "pageUrl": "https://stats47.jp/ranking/general-project-investment-housing",
+        "expectedImage": "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/ranking/personnel-expenditure-ratio-pref-finance",
+        "pageUrl": "https://stats47.jp/ranking/personnel-expenditure-ratio-pref-finance",
+        "expectedImage": "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/ranking/zoo-count",
+        "pageUrl": "https://stats47.jp/ranking/zoo-count",
+        "expectedImage": "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/aging-society",
+        "pageUrl": "https://stats47.jp/themes/aging-society",
+        "expectedImage": "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/agriculture-production",
+        "pageUrl": "https://stats47.jp/themes/agriculture-production",
+        "expectedImage": "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/business-demography",
+        "pageUrl": "https://stats47.jp/themes/business-demography",
+        "expectedImage": "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/childcare-services",
+        "pageUrl": "https://stats47.jp/themes/childcare-services",
+        "expectedImage": "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/climate",
+        "pageUrl": "https://stats47.jp/themes/climate",
+        "expectedImage": "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/communication-access",
+        "pageUrl": "https://stats47.jp/themes/communication-access",
+        "expectedImage": "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/community-participation",
+        "pageUrl": "https://stats47.jp/themes/community-participation",
+        "expectedImage": "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/construction-industry",
+        "pageUrl": "https://stats47.jp/themes/construction-industry",
+        "expectedImage": "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/consumer-prices",
+        "pageUrl": "https://stats47.jp/themes/consumer-prices",
+        "expectedImage": "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/cultural-participation",
+        "pageUrl": "https://stats47.jp/themes/cultural-participation",
+        "expectedImage": "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/daily-time-use",
+        "pageUrl": "https://stats47.jp/themes/daily-time-use",
+        "expectedImage": "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/disability-support",
+        "pageUrl": "https://stats47.jp/themes/disability-support",
+        "expectedImage": "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/earthquake-exposure",
+        "pageUrl": "https://stats47.jp/themes/earthquake-exposure",
+        "expectedImage": "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/education-culture",
+        "pageUrl": "https://stats47.jp/themes/education-culture",
+        "expectedImage": "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/environmental-quality",
+        "pageUrl": "https://stats47.jp/themes/environmental-quality",
+        "expectedImage": "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/fishery-marine",
+        "pageUrl": "https://stats47.jp/themes/fishery-marine",
+        "expectedImage": "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/foreign-residents",
+        "pageUrl": "https://stats47.jp/themes/foreign-residents",
+        "expectedImage": "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/forestry-timber",
+        "pageUrl": "https://stats47.jp/themes/forestry-timber",
+        "expectedImage": "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/freight-logistics",
+        "pageUrl": "https://stats47.jp/themes/freight-logistics",
+        "expectedImage": "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/gender-participation",
+        "pageUrl": "https://stats47.jp/themes/gender-participation",
+        "expectedImage": "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/geographic-access",
+        "pageUrl": "https://stats47.jp/themes/geographic-access",
+        "expectedImage": "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/health-checkups",
+        "pageUrl": "https://stats47.jp/themes/health-checkups",
+        "expectedImage": "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/healthcare",
+        "pageUrl": "https://stats47.jp/themes/healthcare",
+        "expectedImage": "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/household-assets-debt",
+        "pageUrl": "https://stats47.jp/themes/household-assets-debt",
+        "expectedImage": "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/household-food-spending",
+        "pageUrl": "https://stats47.jp/themes/household-food-spending",
+        "expectedImage": "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/information-industry",
+        "pageUrl": "https://stats47.jp/themes/information-industry",
+        "expectedImage": "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/innovation-patents",
+        "pageUrl": "https://stats47.jp/themes/innovation-patents",
+        "expectedImage": "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/labor-mobility",
+        "pageUrl": "https://stats47.jp/themes/labor-mobility",
+        "expectedImage": "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/labor-wages",
+        "pageUrl": "https://stats47.jp/themes/labor-wages",
+        "expectedImage": "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/land-property-market",
+        "pageUrl": "https://stats47.jp/themes/land-property-market",
+        "expectedImage": "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/landslide-exposure",
+        "pageUrl": "https://stats47.jp/themes/landslide-exposure",
+        "expectedImage": "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/living-housing",
+        "pageUrl": "https://stats47.jp/themes/living-housing",
+        "expectedImage": "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/local-economy",
+        "pageUrl": "https://stats47.jp/themes/local-economy",
+        "expectedImage": "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/local-finance",
+        "pageUrl": "https://stats47.jp/themes/local-finance",
+        "expectedImage": "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/local-government-digital",
+        "pageUrl": "https://stats47.jp/themes/local-government-digital",
+        "expectedImage": "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/local-services",
+        "pageUrl": "https://stats47.jp/themes/local-services",
+        "expectedImage": "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/long-term-care",
+        "pageUrl": "https://stats47.jp/themes/long-term-care",
+        "expectedImage": "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/manufacturing",
+        "pageUrl": "https://stats47.jp/themes/manufacturing",
+        "expectedImage": "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/natural-environment",
+        "pageUrl": "https://stats47.jp/themes/natural-environment",
+        "expectedImage": "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/occupation-salary",
+        "pageUrl": "https://stats47.jp/themes/occupation-salary",
+        "expectedImage": "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/population-dynamics",
+        "pageUrl": "https://stats47.jp/themes/population-dynamics",
+        "expectedImage": "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/ports",
+        "pageUrl": "https://stats47.jp/themes/ports",
+        "expectedImage": "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/public-assistance",
+        "pageUrl": "https://stats47.jp/themes/public-assistance",
+        "expectedImage": "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/railway",
+        "pageUrl": "https://stats47.jp/themes/railway",
+        "expectedImage": "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/real-income",
+        "pageUrl": "https://stats47.jp/themes/real-income",
+        "expectedImage": "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/regional-energy",
+        "pageUrl": "https://stats47.jp/themes/regional-energy",
+        "expectedImage": "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/regional-transport",
+        "pageUrl": "https://stats47.jp/themes/regional-transport",
+        "expectedImage": "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/retail-commerce",
+        "pageUrl": "https://stats47.jp/themes/retail-commerce",
+        "expectedImage": "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/roads",
+        "pageUrl": "https://stats47.jp/themes/roads",
+        "expectedImage": "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/safety",
+        "pageUrl": "https://stats47.jp/themes/safety",
+        "expectedImage": "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/single-parent-households",
+        "pageUrl": "https://stats47.jp/themes/single-parent-households",
+        "expectedImage": "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/sports-participation",
+        "pageUrl": "https://stats47.jp/themes/sports-participation",
+        "expectedImage": "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/tourism",
+        "pageUrl": "https://stats47.jp/themes/tourism",
+        "expectedImage": "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/tsunami-exposure",
+        "pageUrl": "https://stats47.jp/themes/tsunami-exposure",
+        "expectedImage": "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/waste-recycling",
+        "pageUrl": "https://stats47.jp/themes/waste-recycling",
+        "expectedImage": "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      },
+      {
+        "id": "site:/themes/water-services",
+        "pageUrl": "https://stats47.jp/themes/water-services",
+        "expectedImage": "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop",
+        "ogImages": [
+          "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "twitterImages": [
+          "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop"
+        ],
+        "passed": true
+      }
+    ],
+    "deployment": {
+      "commit": "45615ddc11fd1974e8b4f6a63ba7ddacdb85d7a6",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40450556600",
+      "purgeRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40453636238"
+    },
+    "cacheRecovery": {
+      "url": "https://stats47.jp/category/agriculture",
+      "before": {
+        "status": 404,
+        "cache": "HIT"
+      },
+      "freshQuery": {
+        "status": 200,
+        "cache": "MISS"
+      },
+      "after": {
+        "status": 200,
+        "verifiedInReport": true
+      },
+      "action": "CDN and Worker cache purge; no category source removed or excluded"
+    }
+  },
+  "pendingSitePublicationRepairs": [],
+  "webImageInventoryVerification": {
+    "checkedAt": "2026-10-27T05:16:46.559Z",
+    "publicPages": 3213,
+    "uniqueOgpImages": 3197,
+    "matchedOgpImages": 3197,
+    "missingOgpImages": 0,
+    "preservedLocalAndMaterialItems": 1270,
+    "items": 4483,
+    "images": 13283,
+    "scope": "Full published page catalogs; every unique adopted OGP SHA matches the current generation manifest. Existing primary local/material inventory is preserved. Body/SVG provenance coverage is recorded separately, not counted as OGP success.",
+    "coverage": [
+      {
+        "collection": "areas-ogp",
+        "images": 47,
+        "verified": 47,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "blog-body",
+        "images": 1632,
+        "verified": 1613,
+        "missing": 1,
+        "unverified": 19
+      },
+      {
+        "collection": "blog-ogp",
+        "images": 1218,
+        "verified": 1218,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "blog-card",
+        "images": 1218,
+        "verified": 1218,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "category-ogp",
+        "images": 17,
+        "verified": 17,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "product-ogp",
+        "images": 25,
+        "verified": 25,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "ranking-ogp",
+        "images": 2459,
+        "verified": 2459,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "ranking-card",
+        "images": 4918,
+        "verified": 4898,
+        "missing": 0,
+        "unverified": 20
+      },
+      {
+        "collection": "theme-ogp",
+        "images": 56,
+        "verified": 56,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "static-material",
+        "images": 1223,
+        "verified": 1223,
+        "missing": 0,
+        "unverified": 0
+      },
+      {
+        "collection": "pref-silhouette",
+        "images": 470,
+        "verified": 470,
+        "missing": 0,
+        "unverified": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,1901 @@
+{
+  "version": "20261026-pop",
+  "checkedAt": "2026-10-27T02:18:03.181Z",
+  "scope": "All home/category/theme/area/product targets plus representative blog/ranking pages; canonical HTML after deployment and purge",
+  "total": 158,
+  "passed": 157,
+  "failed": 1,
+  "rows": [
+    {
+      "id": "site:/",
+      "pageUrl": "https://stats47.jp",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/01000",
+      "pageUrl": "https://stats47.jp/areas/01000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/01000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/02000",
+      "pageUrl": "https://stats47.jp/areas/02000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/02000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/03000",
+      "pageUrl": "https://stats47.jp/areas/03000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/03000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/04000",
+      "pageUrl": "https://stats47.jp/areas/04000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/04000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/05000",
+      "pageUrl": "https://stats47.jp/areas/05000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/05000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/06000",
+      "pageUrl": "https://stats47.jp/areas/06000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/06000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/07000",
+      "pageUrl": "https://stats47.jp/areas/07000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/08000",
+      "pageUrl": "https://stats47.jp/areas/08000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/08000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/09000",
+      "pageUrl": "https://stats47.jp/areas/09000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/09000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/10000",
+      "pageUrl": "https://stats47.jp/areas/10000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/10000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/11000",
+      "pageUrl": "https://stats47.jp/areas/11000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/11000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/12000",
+      "pageUrl": "https://stats47.jp/areas/12000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/12000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/13000",
+      "pageUrl": "https://stats47.jp/areas/13000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/13000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/14000",
+      "pageUrl": "https://stats47.jp/areas/14000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/14000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/15000",
+      "pageUrl": "https://stats47.jp/areas/15000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/15000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/16000",
+      "pageUrl": "https://stats47.jp/areas/16000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/16000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/17000",
+      "pageUrl": "https://stats47.jp/areas/17000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/17000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/18000",
+      "pageUrl": "https://stats47.jp/areas/18000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/18000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/19000",
+      "pageUrl": "https://stats47.jp/areas/19000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/19000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/20000",
+      "pageUrl": "https://stats47.jp/areas/20000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/20000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/21000",
+      "pageUrl": "https://stats47.jp/areas/21000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/21000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/22000",
+      "pageUrl": "https://stats47.jp/areas/22000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/22000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/23000",
+      "pageUrl": "https://stats47.jp/areas/23000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/23000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/24000",
+      "pageUrl": "https://stats47.jp/areas/24000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/24000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/25000",
+      "pageUrl": "https://stats47.jp/areas/25000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/25000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/26000",
+      "pageUrl": "https://stats47.jp/areas/26000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/26000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/27000",
+      "pageUrl": "https://stats47.jp/areas/27000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/27000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/28000",
+      "pageUrl": "https://stats47.jp/areas/28000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/28000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/29000",
+      "pageUrl": "https://stats47.jp/areas/29000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/29000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/30000",
+      "pageUrl": "https://stats47.jp/areas/30000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/30000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/31000",
+      "pageUrl": "https://stats47.jp/areas/31000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/31000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/32000",
+      "pageUrl": "https://stats47.jp/areas/32000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/32000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/33000",
+      "pageUrl": "https://stats47.jp/areas/33000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/33000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/34000",
+      "pageUrl": "https://stats47.jp/areas/34000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/34000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/35000",
+      "pageUrl": "https://stats47.jp/areas/35000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/35000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/36000",
+      "pageUrl": "https://stats47.jp/areas/36000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/36000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/37000",
+      "pageUrl": "https://stats47.jp/areas/37000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/37000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/38000",
+      "pageUrl": "https://stats47.jp/areas/38000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/38000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/39000",
+      "pageUrl": "https://stats47.jp/areas/39000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/39000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/40000",
+      "pageUrl": "https://stats47.jp/areas/40000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/40000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/41000",
+      "pageUrl": "https://stats47.jp/areas/41000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/41000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/42000",
+      "pageUrl": "https://stats47.jp/areas/42000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/42000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/43000",
+      "pageUrl": "https://stats47.jp/areas/43000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/43000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/44000",
+      "pageUrl": "https://stats47.jp/areas/44000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/44000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/45000",
+      "pageUrl": "https://stats47.jp/areas/45000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/45000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/46000",
+      "pageUrl": "https://stats47.jp/areas/46000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/46000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/areas/47000",
+      "pageUrl": "https://stats47.jp/areas/47000",
+      "expectedImage": "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/areas/47000/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/2050-population-flood-exposure",
+      "pageUrl": "https://stats47.jp/blog/2050-population-flood-exposure",
+      "expectedImage": "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/2050-population-flood-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/annual-sunshine-duration-prefecture-gap",
+      "pageUrl": "https://stats47.jp/blog/annual-sunshine-duration-prefecture-gap",
+      "expectedImage": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "pageUrl": "https://stats47.jp/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "expectedImage": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/gas-expenditure-ranking",
+      "pageUrl": "https://stats47.jp/blog/gas-expenditure-ranking",
+      "expectedImage": "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/gas-expenditure-ranking/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/pear-consumption-expenditure-prefecture-gap",
+      "pageUrl": "https://stats47.jp/blog/pear-consumption-expenditure-prefecture-gap",
+      "expectedImage": "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/pear-consumption-expenditure-prefecture-gap/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/blog/sewerage-water-supply-gap",
+      "pageUrl": "https://stats47.jp/blog/sewerage-water-supply-gap",
+      "expectedImage": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop",
+      "passed": false,
+      "error": "HTTP 410"
+    },
+    {
+      "id": "site:/blog/sunshine-pacific-vs-nihonkai",
+      "pageUrl": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai",
+      "expectedImage": "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/administrativefinancial",
+      "pageUrl": "https://stats47.jp/category/administrativefinancial",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/agriculture",
+      "pageUrl": "https://stats47.jp/category/agriculture",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/commercial",
+      "pageUrl": "https://stats47.jp/category/commercial",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/construction",
+      "pageUrl": "https://stats47.jp/category/construction",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/economy",
+      "pageUrl": "https://stats47.jp/category/economy",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/educationsports",
+      "pageUrl": "https://stats47.jp/category/educationsports",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/energy",
+      "pageUrl": "https://stats47.jp/category/energy",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/ict",
+      "pageUrl": "https://stats47.jp/category/ict",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/infrastructure",
+      "pageUrl": "https://stats47.jp/category/infrastructure",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/international",
+      "pageUrl": "https://stats47.jp/category/international",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/laborwage",
+      "pageUrl": "https://stats47.jp/category/laborwage",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/landweather",
+      "pageUrl": "https://stats47.jp/category/landweather",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/miningindustry",
+      "pageUrl": "https://stats47.jp/category/miningindustry",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/population",
+      "pageUrl": "https://stats47.jp/category/population",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/safetyenvironment",
+      "pageUrl": "https://stats47.jp/category/safetyenvironment",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/socialsecurity",
+      "pageUrl": "https://stats47.jp/category/socialsecurity",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/category/tourism",
+      "pageUrl": "https://stats47.jp/category/tourism",
+      "expectedImage": "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/default/stats47/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-01",
+      "pageUrl": "https://stats47.jp/products/data-p-01",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-01/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-02",
+      "pageUrl": "https://stats47.jp/products/data-p-02",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-02/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-03",
+      "pageUrl": "https://stats47.jp/products/data-p-03",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-03/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-04",
+      "pageUrl": "https://stats47.jp/products/data-p-04",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-04/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-05",
+      "pageUrl": "https://stats47.jp/products/data-p-05",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-05/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-06",
+      "pageUrl": "https://stats47.jp/products/data-p-06",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-06/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-07",
+      "pageUrl": "https://stats47.jp/products/data-p-07",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-07/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-08",
+      "pageUrl": "https://stats47.jp/products/data-p-08",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-08/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-09",
+      "pageUrl": "https://stats47.jp/products/data-p-09",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-09/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-10",
+      "pageUrl": "https://stats47.jp/products/data-p-10",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-10/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-11",
+      "pageUrl": "https://stats47.jp/products/data-p-11",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-11/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-12",
+      "pageUrl": "https://stats47.jp/products/data-p-12",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-12/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/data-p-14",
+      "pageUrl": "https://stats47.jp/products/data-p-14",
+      "expectedImage": "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/data-p-14/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-01",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-01",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-01/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-02",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-02",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-02/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-03",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-03",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-03/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-04",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-04",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-04/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-05",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-05",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-05/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-06",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-06",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-06/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-07",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-07",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-07/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-08",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-08",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-08/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-09",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-09",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-09/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-10",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-10",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-10/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-11",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-11",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-11/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/products/kindle-k-s1-12",
+      "pageUrl": "https://stats47.jp/products/kindle-k-s1-12",
+      "expectedImage": "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/products/kindle-k-s1-12/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/ranking/abandoned-cultivated-land-area",
+      "pageUrl": "https://stats47.jp/ranking/abandoned-cultivated-land-area",
+      "expectedImage": "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/ranking/abandoned-cultivated-land-area/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/ranking/annual-sunshine-duration",
+      "pageUrl": "https://stats47.jp/ranking/annual-sunshine-duration",
+      "expectedImage": "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/ranking/annual-sunshine-duration/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/ranking/general-project-investment-housing",
+      "pageUrl": "https://stats47.jp/ranking/general-project-investment-housing",
+      "expectedImage": "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/ranking/general-project-investment-housing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/ranking/personnel-expenditure-ratio-pref-finance",
+      "pageUrl": "https://stats47.jp/ranking/personnel-expenditure-ratio-pref-finance",
+      "expectedImage": "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/ranking/personnel-expenditure-ratio-pref-finance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/ranking/zoo-count",
+      "pageUrl": "https://stats47.jp/ranking/zoo-count",
+      "expectedImage": "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/ranking/zoo-count/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/aging-society",
+      "pageUrl": "https://stats47.jp/themes/aging-society",
+      "expectedImage": "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/aging-society/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/agriculture-production",
+      "pageUrl": "https://stats47.jp/themes/agriculture-production",
+      "expectedImage": "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/agriculture-production/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/business-demography",
+      "pageUrl": "https://stats47.jp/themes/business-demography",
+      "expectedImage": "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/business-demography/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/childcare-services",
+      "pageUrl": "https://stats47.jp/themes/childcare-services",
+      "expectedImage": "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/childcare-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/climate",
+      "pageUrl": "https://stats47.jp/themes/climate",
+      "expectedImage": "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/climate/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/communication-access",
+      "pageUrl": "https://stats47.jp/themes/communication-access",
+      "expectedImage": "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/communication-access/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/community-participation",
+      "pageUrl": "https://stats47.jp/themes/community-participation",
+      "expectedImage": "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/community-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/construction-industry",
+      "pageUrl": "https://stats47.jp/themes/construction-industry",
+      "expectedImage": "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/construction-industry/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/consumer-prices",
+      "pageUrl": "https://stats47.jp/themes/consumer-prices",
+      "expectedImage": "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/consumer-prices/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/cultural-participation",
+      "pageUrl": "https://stats47.jp/themes/cultural-participation",
+      "expectedImage": "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/cultural-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/daily-time-use",
+      "pageUrl": "https://stats47.jp/themes/daily-time-use",
+      "expectedImage": "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/daily-time-use/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/disability-support",
+      "pageUrl": "https://stats47.jp/themes/disability-support",
+      "expectedImage": "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/disability-support/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/earthquake-exposure",
+      "pageUrl": "https://stats47.jp/themes/earthquake-exposure",
+      "expectedImage": "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/earthquake-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/education-culture",
+      "pageUrl": "https://stats47.jp/themes/education-culture",
+      "expectedImage": "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/education-culture/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/environmental-quality",
+      "pageUrl": "https://stats47.jp/themes/environmental-quality",
+      "expectedImage": "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/environmental-quality/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/fishery-marine",
+      "pageUrl": "https://stats47.jp/themes/fishery-marine",
+      "expectedImage": "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/fishery-marine/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/foreign-residents",
+      "pageUrl": "https://stats47.jp/themes/foreign-residents",
+      "expectedImage": "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/foreign-residents/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/forestry-timber",
+      "pageUrl": "https://stats47.jp/themes/forestry-timber",
+      "expectedImage": "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/forestry-timber/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/freight-logistics",
+      "pageUrl": "https://stats47.jp/themes/freight-logistics",
+      "expectedImage": "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/freight-logistics/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/gender-participation",
+      "pageUrl": "https://stats47.jp/themes/gender-participation",
+      "expectedImage": "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/gender-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/geographic-access",
+      "pageUrl": "https://stats47.jp/themes/geographic-access",
+      "expectedImage": "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/geographic-access/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/health-checkups",
+      "pageUrl": "https://stats47.jp/themes/health-checkups",
+      "expectedImage": "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/health-checkups/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/healthcare",
+      "pageUrl": "https://stats47.jp/themes/healthcare",
+      "expectedImage": "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/healthcare/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/household-assets-debt",
+      "pageUrl": "https://stats47.jp/themes/household-assets-debt",
+      "expectedImage": "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/household-assets-debt/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/household-food-spending",
+      "pageUrl": "https://stats47.jp/themes/household-food-spending",
+      "expectedImage": "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/household-food-spending/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/information-industry",
+      "pageUrl": "https://stats47.jp/themes/information-industry",
+      "expectedImage": "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/information-industry/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/innovation-patents",
+      "pageUrl": "https://stats47.jp/themes/innovation-patents",
+      "expectedImage": "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/innovation-patents/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/labor-mobility",
+      "pageUrl": "https://stats47.jp/themes/labor-mobility",
+      "expectedImage": "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/labor-mobility/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/labor-wages",
+      "pageUrl": "https://stats47.jp/themes/labor-wages",
+      "expectedImage": "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/labor-wages/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/land-property-market",
+      "pageUrl": "https://stats47.jp/themes/land-property-market",
+      "expectedImage": "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/land-property-market/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/landslide-exposure",
+      "pageUrl": "https://stats47.jp/themes/landslide-exposure",
+      "expectedImage": "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/landslide-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/living-housing",
+      "pageUrl": "https://stats47.jp/themes/living-housing",
+      "expectedImage": "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/living-housing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/local-economy",
+      "pageUrl": "https://stats47.jp/themes/local-economy",
+      "expectedImage": "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/local-economy/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/local-finance",
+      "pageUrl": "https://stats47.jp/themes/local-finance",
+      "expectedImage": "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/local-finance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/local-government-digital",
+      "pageUrl": "https://stats47.jp/themes/local-government-digital",
+      "expectedImage": "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/local-government-digital/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/local-services",
+      "pageUrl": "https://stats47.jp/themes/local-services",
+      "expectedImage": "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/local-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/long-term-care",
+      "pageUrl": "https://stats47.jp/themes/long-term-care",
+      "expectedImage": "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/long-term-care/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/manufacturing",
+      "pageUrl": "https://stats47.jp/themes/manufacturing",
+      "expectedImage": "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/manufacturing/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/natural-environment",
+      "pageUrl": "https://stats47.jp/themes/natural-environment",
+      "expectedImage": "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/natural-environment/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/occupation-salary",
+      "pageUrl": "https://stats47.jp/themes/occupation-salary",
+      "expectedImage": "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/occupation-salary/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/population-dynamics",
+      "pageUrl": "https://stats47.jp/themes/population-dynamics",
+      "expectedImage": "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/population-dynamics/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/ports",
+      "pageUrl": "https://stats47.jp/themes/ports",
+      "expectedImage": "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/ports/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/public-assistance",
+      "pageUrl": "https://stats47.jp/themes/public-assistance",
+      "expectedImage": "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/public-assistance/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/railway",
+      "pageUrl": "https://stats47.jp/themes/railway",
+      "expectedImage": "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/railway/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/real-income",
+      "pageUrl": "https://stats47.jp/themes/real-income",
+      "expectedImage": "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/real-income/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/regional-energy",
+      "pageUrl": "https://stats47.jp/themes/regional-energy",
+      "expectedImage": "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/regional-energy/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/regional-transport",
+      "pageUrl": "https://stats47.jp/themes/regional-transport",
+      "expectedImage": "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/regional-transport/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/retail-commerce",
+      "pageUrl": "https://stats47.jp/themes/retail-commerce",
+      "expectedImage": "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/retail-commerce/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/roads",
+      "pageUrl": "https://stats47.jp/themes/roads",
+      "expectedImage": "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/roads/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/safety",
+      "pageUrl": "https://stats47.jp/themes/safety",
+      "expectedImage": "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/safety/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/single-parent-households",
+      "pageUrl": "https://stats47.jp/themes/single-parent-households",
+      "expectedImage": "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/single-parent-households/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/sports-participation",
+      "pageUrl": "https://stats47.jp/themes/sports-participation",
+      "expectedImage": "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/sports-participation/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/tourism",
+      "pageUrl": "https://stats47.jp/themes/tourism",
+      "expectedImage": "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/tourism/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/tsunami-exposure",
+      "pageUrl": "https://stats47.jp/themes/tsunami-exposure",
+      "expectedImage": "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/tsunami-exposure/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/waste-recycling",
+      "pageUrl": "https://stats47.jp/themes/waste-recycling",
+      "expectedImage": "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/waste-recycling/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    },
+    {
+      "id": "site:/themes/water-services",
+      "pageUrl": "https://stats47.jp/themes/water-services",
+      "expectedImage": "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop",
+      "ogImages": [
+        "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "twitterImages": [
+        "https://storage.stats47.jp/app/themes/water-services/ogp/ogp.png?v=20261026-pop"
+      ],
+      "passed": true
+    }
+  ]
+}

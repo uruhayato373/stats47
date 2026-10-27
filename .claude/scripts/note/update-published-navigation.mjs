@@ -33,10 +33,13 @@ import { SITE_ORIGIN } from "../lib/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
+import { readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { indexEnabled, preservePublishedIndex } from './lib/publish-card-body.mjs';
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
 let FORCE_REGENERATE_CARDS = false;
+let approvedImageRefresh = null;
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -149,6 +152,7 @@ function snapshot(note) {
       : [],
     hasDraft: Boolean(note.has_draft),
     embeddedContents: Array.isArray(note.embedded_contents) ? note.embedded_contents : null,
+    index: note.index,
     body: String(note.body || ""),
     bodySignature: fnv1a(note.body || ""),
   };
@@ -419,7 +423,7 @@ async function installPatch(page, before, updatedBody, plan, visibilityNudge = n
       return;
     }
     try {
-      const payload = request.postDataJSON();
+      const payload = preservePublishedIndex(request.postDataJSON(), before);
       if (Number(payload.price || 0) !== before.price) throw new Error("price changed before update");
       const targetSeparator = visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")
         ? visibilityNudge.restoreSeparator
@@ -510,6 +514,9 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       { headers: { "User-Agent": UA } },
     );
     const draft = snapshot((await response.json())?.data || {});
+    if (JSON.stringify(draft.index ?? null) !== JSON.stringify(before.index ?? null)) {
+      throw new Error('未公開下書きの目次設定が公開版と異なるため本文更新を停止');
+    }
     identicalDraft = draft.bodySignature === before.bodySignature
       && draft.price === before.price
       && draft.separator === before.separator
@@ -561,6 +568,10 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   if (plan.desiredSeparator && source.separator !== plan.desiredSeparator && !application.changed) {
     application = { ...application, changed: true };
   }
+  if (approvedImageRefresh) {
+    const body = approvedImageRefresh.rewriteBody(application.body);
+    application = { ...application, body, changed: application.changed || body !== application.body };
+  }
   const missingEmbeds = unregisteredCards(application.body, source.embeddedContents);
   if (!application.changed && !missingEmbeds.length) return { status: "already_compliant", ...application };
 
@@ -568,7 +579,8 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   let native;
   try {
     await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
-    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents);
+    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents,
+      () => {}, (native, card) => approvedImageRefresh?.verifyFresh(native, card.url));
     application = { ...application, body: native.body, changed: true };
   } finally { await apiPage.close(); }
 
@@ -657,6 +669,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     const expectedSeparator = plan.desiredSeparator || source.separator;
     if (live.price !== source.price || live.separator !== expectedSeparator) throw new Error("価格または有料境界が変化");
     if (live.hashtagCount !== before.hashtagCount) throw new Error(`タグ数が変化: ${before.hashtagCount} -> ${live.hashtagCount}`);
+    if (indexEnabled(live) !== indexEnabled(before)) throw new Error('公開記事の目次表示設定が変化');
     if (plan.footer && (
       (application.addedNextNote && !live.body.includes(plan.footer.nextNoteUrl))
       || (application.addedMagazine && !live.body.includes(plan.footer.magazineUrl))
@@ -680,6 +693,9 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     }
     if (live.bodySignature !== fnv1a(application.body)) throw new Error("送信した無料本文と公開本文が一致しません");
     assertRegisteredCards(live.body, live.embeddedContents);
+    if (approvedImageRefresh) for (const card of cardEntries(live.body)) {
+      await approvedImageRefresh.verifyFresh(live.embeddedContents.find((entry) => entry.key === card.key) || {}, card.url);
+    }
     const readers = await ctx.browser().newContext();
     try {
       const publicLive = await fetchNote(noteKey, 5, readers.request);
@@ -707,6 +723,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   FORCE_REGENERATE_CARDS = options.forceRegenerateCards;
+  approvedImageRefresh = readApprovedCardImageRefresh(join(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'));
   const source = catalog();
   const views = latestViews();
   let plans = buildPlans(source, views, options);
@@ -720,10 +737,10 @@ async function main() {
     account: "stats47",
     mode: options.commit ? "commit" : "audit-only",
     measurementContract: {
-      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（カードは素URL）",
+      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（計測用UTMは付けず、検証済み画像版s47_ogpだけを付与）",
       noteToNote: "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
       magazine: "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
-      product: "有料noteへの直接カードはnote内遷移（記事間clickは取得不可）。サイト商品ページ経由のカードは /products/<slug>/from/note/<noteId> からGA4標準UTMへ転送し、記事単位で集計",
+      product: "有料noteへの直接カードはnote内遷移（記事間clickは取得不可）。サイト商品ページ経由のカードは /products/<slug>/from/note/<noteId> と検証済み画像版s47_ogpを使い、サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送して記事単位で集計",
     },
     articles: [],
   };
@@ -733,7 +750,11 @@ async function main() {
     const noteKey = noteKeyFromUrl(plan.article.noteUrl);
     const before = snapshot(await fetchNote(noteKey));
     if (before.account !== "stats47" || before.status !== "published") throw new Error(`${plan.article.key}: 記事帰属または公開状態が不正`);
-    const application = applyPlanBody(before.body, plan);
+    let application = applyPlanBody(before.body, plan);
+    if (approvedImageRefresh) {
+      const body = approvedImageRefresh.rewriteBody(application.body);
+      application = { ...application, body, changed: application.changed || body !== application.body };
+    }
     const item = {
       key: plan.article.key,
       noteKey,

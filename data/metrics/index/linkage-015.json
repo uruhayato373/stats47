@@ -448,6 +448,10 @@
           "kind": "area"
         },
         {
+          "pageId": "blog:automotive-industry-transformation-map",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:cc-estat-08-bar-chart-race",
           "kind": "blog"
         },

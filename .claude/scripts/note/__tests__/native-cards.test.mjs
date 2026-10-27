@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertRegisteredCards, registerMissingCards, replaceCardKeys, unregisteredCards } from '../lib/native-cards.mjs';
+import { assertRegisteredCards, registerNativeCard, registerMissingCards, replaceCardKeys, unregisteredCards } from '../lib/native-cards.mjs';
 
 const body = '<h2 id="boundary">次に読む</h2><figure data-src="https://note.com/stats47/n/n023501038bd5" embedded-service="note" embedded-content-key="embFake"></figure>';
 
@@ -39,4 +39,20 @@ test('an external figure must acquire a server-issued key before it is publishab
   assert.match(calls[0].pathname, /^\/api\/v2\/embed_by_external_api\?/);
   assert.deepEqual(result.registered, ['embNative']);
   assert.doesNotThrow(() => assertRegisteredCards(result.body, [{ key: 'embNative', url: 'https://stats47.jp', service: 'external-article', html_for_embed: '<div>stats47</div>' }]));
+});
+
+test('temporary external-fetch rejections use bounded GET backoff without retrying publication', async () => {
+  const waits = []; let calls = 0;
+  const page = { evaluate: async () => { if (++calls < 4) throw Error('note API HTTP 400'); return {key:'embNative',html_for_embed:'<div>card</div>'}; } };
+  assert.equal((await registerNativeCard(page,'nf962c6702b93',{url:'https://stats47.jp',service:'external-article'},{wait:async ms=>waits.push(ms)})).key,'embNative');
+  assert.equal(calls,4);assert.deepEqual(waits,[1500,5000,15000]);
+});
+
+test('access and rate denials never enter the external-fetch retry loop', async () => {
+  for (const status of [403,429]) {
+    let calls = 0;
+    const page = {evaluate:async()=>{calls++;throw Error(`note API HTTP ${status}`);}};
+    await assert.rejects(registerNativeCard(page,'nf962c6702b93',{url:'https://stats47.jp',service:'external-article'},{wait:async()=>assert.fail('must not wait')}),new RegExp(String(status)));
+    assert.equal(calls,1);
+  }
 });

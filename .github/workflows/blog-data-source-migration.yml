@@ -9,6 +9,7 @@ name: 🧾 Blog data source migration (source.json / article.md → R2)
 #   migrate-bodies           … 本文の手書き「データ出典」節を移行する (引用のみ → 削除 / 説明を含む → 改名)。
 #                               R2 の all.json に sources が焼かれている必要がある (先に sync-snapshots only=blog)。
 #                               Kindle 書籍の章の記事は本文を変えない (スクリプト側で除外)
+#   repair-published-frontmatter … SHAで原本を限定し、descriptionの引用符だけ修復。本文と公開日を保持する。
 #
 # 安全設計:
 # - dry_run 既定 true。書き込みは dry_run=false を明示したときだけ。put 後に GET で内容を照合する
@@ -27,6 +28,7 @@ on:
         options:
           - backfill-display-sources
           - migrate-bodies
+          - repair-published-frontmatter
       dry_run:
         description: "true: R2 に書かず対象一覧のみ"
         required: false
@@ -79,6 +81,9 @@ jobs:
             migrate-bodies)
               npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --apply 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
               ;;
+            repair-published-frontmatter)
+              npx tsx .claude/scripts/blog/repair-published-frontmatter.ts 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+              ;;
             *) echo "::error::unknown mode: $MODE"; exit 1 ;;
           esac
 
@@ -92,6 +97,18 @@ jobs:
             ARGS+=(--apply)
           fi
           npx tsx .claude/scripts/blog/push-article-md-r2.ts "${ARGS[@]}" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 🧮 Restore published article metadata after syntax repair
+        if: inputs.mode == 'repair-published-frontmatter' && inputs.dry_run == 'false'
+        env:
+          NODE_OPTIONS: '--conditions react-server'
+          # Read the just-verified authoritative S3 bytes rather than the old public CDN response.
+          R2_PUBLIC_FETCH_URL: ''
+        run: npx tsx apps/web/scripts/export-blog-snapshot.ts
+
+      - name: 📤 Publish only the rebuilt blog index
+        if: inputs.mode == 'repair-published-frontmatter' && inputs.dry_run == 'false'
+        run: npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --key app/blog/all.json
 
       - name: 🗂️ Keep originals and report
         if: always()

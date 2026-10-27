@@ -654,26 +654,32 @@ export async function publishGeneratedImageSet(options: {
   let publishError: unknown;
   try {
     if (!options.dryRun) {
-      for (const item of [...plan.items].sort((a, b) =>
-        a.manifestKey.localeCompare(b.manifestKey)
-      )) {
-        locks.push(await acquirePublishLock(options.store, item.manifestKey));
-      }
+      // Independent CAS locks do not wait for another owner. Wait for every
+      // in-flight acquisition before cleanup, including after one fails.
+      await pMap(
+        [...plan.items].sort((a, b) =>
+          a.manifestKey.localeCompare(b.manifestKey)
+        ),
+        async (item) => {
+          locks.push(await acquirePublishLock(options.store, item.manifestKey));
+        }
+      );
     }
 
     // remote manifest はdistributed lock取得後に読む。plan後に完了した別publishを
     // 古いETagで上書きしたり、stable assetだけ競合更新したりするのを防ぐ。
-    const bundles: ValidatedBundle[] = [];
-    for (const item of plan.items) {
-      bundles.push(
-        await validateBundle({
+    const bundles = new Array<ValidatedBundle>(plan.items.length);
+    await pMap(
+      plan.items.map((item, index) => ({ item, index })),
+      async ({ item, index }) => {
+        bundles[index] = await validateBundle({
           item,
           generator: plan.generator,
           stageRoot,
           store: options.store,
-        })
-      );
-    }
+        });
+      }
+    );
     const objectKeys = new Set(plan.items.map((item) => item.manifestKey));
     for (const bundle of bundles) {
       for (const asset of bundle.assets) {

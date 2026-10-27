@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FolderOpenIcon } from "lucide-react";
+import { DOMAINS } from "../../../../config/paths.mjs";
 
 import { PanelCard } from "@/components/admin-ui";
 import { Grid, Stack } from "@/components/layout-primitives";
@@ -19,7 +20,7 @@ export default function DocsIndexPage() {
 
   return (
     <>
-      <PageHeading title="文書" source="docs/ (領域は config/domains.json の documents)" />
+      <PageHeading title="文書" source={`docs/ (領域は ${DOMAINS} の documents)`} />
       <Grid min="md">
         {groups.map((g) => (
           <PanelCard

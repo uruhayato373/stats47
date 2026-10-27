@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-26T13:49:57.640Z",
+  "account": "stats47",
+  "articleKey": "nf962c6702b93",
+  "operation": "Native GET registrations only; article was not published by this probe",
+  "rows": [
+    {
+      "url": "https://note.com/stats47/m/me574f67ac47f",
+      "key": "embdb9e7476334a",
+      "expectedImage": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png",
+      "returnedImage": "https://assets.st-note.com/production/uploads/images/310832597/5056eb81c0d46042f772b12866c0cd36.png",
+      "matchesCurrentCover": false
+    },
+    {
+      "url": "https://note.com/stats47/m/me574f67ac47f?s47_ogp=7756fb8c9c1c",
+      "key": "emb8aa96f92c37a",
+      "expectedImage": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png",
+      "returnedImage": "https://assets.st-note.com/production/uploads/images/328745631/0537c3cb9dc9368879901a96bc1cf78e.png",
+      "matchesCurrentCover": true
+    }
+  ]
+}

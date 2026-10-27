@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:40:37.970Z",
+  "before": {
+    "name": "公務員のe-Stat×Claude Code実務ガイド",
+    "description": "他自治体比較、議会答弁の根拠データ、県民向け資料——e-Stat で都道府県統計を引く仕事を、検索・取得・整形・派生指標・チャート出力まで Claude Code で完結させる、自治体職員のための実務ガイド(全12本)。API キー取得から Excel/CSV のパース、pandas/DuckDB の集計、議会用チャート生成、月次ルーティンの自動化まで、コピペで動くサンプル付きで解説します。執筆者は Claude Code で47都道府県統計サイト stats47.jp(約2,000ランキングを毎日自動更新)を個人開発・運用。無料3本+有料9本、個別¥300の有料記事が本マガジンなら全部読めます。",
+    "cover": "https://assets.st-note.com/production/uploads/images/285314870/magazine_cover_large_89c8857eb1399cba40c2606265ba3295.png"
+  },
+  "expectedSha256": "021e8f8de746fd3a8e65450233d0dd3b7565e5ae2f7ea7f90132e7384722b8c1",
+  "status": "verified",
+  "after": {
+    "name": "公務員のe-Stat×Claude Code実務ガイド",
+    "description": "他自治体比較、議会答弁の根拠データ、県民向け資料——e-Stat で都道府県統計を引く仕事を、検索・取得・整形・派生指標・チャート出力まで Claude Code で完結させる、自治体職員のための実務ガイド(全12本)。API キー取得から Excel/CSV のパース、pandas/DuckDB の集計、議会用チャート生成、月次ルーティンの自動化まで、コピペで動くサンプル付きで解説します。執筆者は Claude Code で47都道府県統計サイト stats47.jp(約2,000ランキングを毎日自動更新)を個人開発・運用。無料3本+有料9本、個別¥300の有料記事が本マガジンなら全部読めます。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758320/magazine_cover_large_453dedc8b5157a55f3d7754982865cd3.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:12.251Z",
+  "servedSha256": "9207fd243f9a34281c4424549fca077c039481049c61696f0fa13889d4bd4eac",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758320/453dedc8b5157a55f3d7754982865cd3.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758320/453dedc8b5157a55f3d7754982865cd3.png",
+    "sha256": "5c6dca4493218e03deb3c310a41499a8bfc04c7cf0d4fa73040f681936d26592",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.5318627450980393,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\koumuin-estat-claude-code-live.png",
+    "checkedAt": "2026-10-26T08:43:16.712Z"
+  },
+  "visualReview": {
+    "id": "magazine:koumuin-estat-claude-code",
+    "sha256": "5c6dca4493218e03deb3c310a41499a8bfc04c7cf0d4fa73040f681936d26592",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:44:32.822Z"
+  }
+}

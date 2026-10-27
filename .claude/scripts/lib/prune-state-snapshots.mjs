@@ -75,6 +75,11 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^note-card-repair-result-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
+  "note-ogp-design-pilots": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-ogp-card-design-pilot-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
   "note-native-card-audits": {
     directory: datasetDir("note.operation-evidence"),
     pattern: /^note-native-card-final-audit-\d{4}-\d{2}-\d{2}\.json$/,

@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import { createElement } from 'react';
 
 import { BRAND } from '../../src/features/ogp/brand';
+import { buildExternalCard } from './external-card-render';
 
 export { loadFonts, renderToPng, renderToWebP } from './satori-image-render';
 export type { RenderSize, SatoriFont } from './satori-image-render';
@@ -118,11 +119,9 @@ export function buildBlogThumbnailElement(
 }
 
 /** SNS共有専用。タイトルとブランドを持つ1200×630の自己完結画像。 */
-export function buildBlogOgpElement(data: OgpData, backgroundImage?: string) {
-  return buildElement(data, false, {
-    background: true,
-    backgroundImage,
-  });
+export function buildBlogOgpElement(data: OgpData, _backgroundImage?: string) {
+  const [title,...rest]=data.title.split(/[｜|]/);
+  return buildExternalCard({title:title.trim(),subtitle:data.subtitle??(rest.join(' ').trim()||null),eyebrow:'統計を読む',detail:'stats47.jp'});
 }
 
 export function buildElement(

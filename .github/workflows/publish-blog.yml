@@ -105,7 +105,7 @@ jobs:
         run: |
           # article.md から semantic fingerprint を作り、変更時だけ
           # .local/image-staging/blog に bundle + exact plan を生成する。
-          npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
 
       - name: 🖼️ Publish exact blog image set
         run: |

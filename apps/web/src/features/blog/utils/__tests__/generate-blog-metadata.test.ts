@@ -19,7 +19,7 @@ describe("generateBlogMetadata", () => {
 
   it("openGraph/twitter.images に事前生成した静的 OGP (R2) を設定すること", () => {
     const result = generateBlogMetadata(input);
-    const expectedUrl = `https://storage.stats47.jp/app/blog/${input.slug}/ogp/ogp.png`;
+    const expectedUrl = `https://storage.stats47.jp/app/blog/${input.slug}/ogp/ogp.png?v=20261026-pop`;
 
     const ogImages = (result.openGraph as Record<string, unknown>)?.images as
       | Array<{ url: string }>

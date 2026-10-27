@@ -5,9 +5,15 @@ import * as cheerio from 'cheerio';
 import { noteRequest } from './native-cards.mjs';
 
 export const bodyHash = (body) => createHash('sha256').update(body || '').digest('hex');
+// GET returns the generated heading array; native saves accept an enabled/disabled boolean.
+export const indexEnabled = (note) => Array.isArray(note.index) ? note.index.length > 0 : Boolean(note.index);
+export function preservePublishedIndex(payload, before) {
+  if ('index' in payload && typeof payload.index !== 'boolean') throw Error('editor index flag is not boolean');
+  return { ...payload, index: indexEnabled(before) };
+}
 export function draftSavePayload(draft) {
   return { body: draft.body, name: draft.name, body_length: cheerio.load(draft.body)('body').text().length,
-    index: Boolean(draft.index), ...(draft.separator ? { separator: draft.separator } : {}) };
+    index: indexEnabled(draft), ...(draft.separator ? { separator: draft.separator } : {}) };
 }
 const tags = (note) => (note.hashtag_notes || []).map((entry) => entry.hashtag?.name).filter(Boolean).sort();
 
@@ -84,7 +90,7 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
       if (route.request().method() !== 'PUT') return route.continue();
       try {
         if (sent) throw Error('duplicate publish request');
-        const payload = route.request().postDataJSON();
+        const payload = preservePublishedIndex(route.request().postDataJSON(), before);
         if (visibilityNudge) {
           if (payload.exclude_from_creator_top !== visibilityNudge.expectedExclude) throw Error('visibility nudge mismatch');
           payload.exclude_from_creator_top = visibilityNudge.restoreExclude;
@@ -111,12 +117,14 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
   } finally { await page.close(); }
   const after = await noteRequest(apiPage, `/api/v3/notes/${key}?cardVerify=${Date.now()}`);
   if (after.body !== body) throw Error('published body differs from approved card repair');
-  assertPublishedMetadata(before, after);
+  let metadataError;
+  try { assertPublishedMetadata(before, after); } catch (error) { metadataError = error; }
   if (draft) {
     await noteRequest(apiPage, `/api/v1/text_notes/draft_save?id=${before.id}&is_temp_saved=true`, { method: 'POST', body: draftSavePayload(draft) });
     const restored = await noteRequest(apiPage, `/api/v3/notes/${key}?draft=true&draft_reedit=false`);
-    if (restored.body !== draft.body || restored.name !== draft.name || restored.separator !== draft.separator) throw Error('pre-existing draft restoration mismatch');
+    if (restored.body !== draft.body || restored.name !== draft.name || restored.separator !== draft.separator || JSON.stringify(restored.index ?? null) !== JSON.stringify(draft.index ?? null)) throw Error('pre-existing draft restoration mismatch');
   } else if (after.has_draft) throw Error('unexpected draft after publication');
+  if (metadataError) { await onStage('published-metadata-mismatch'); throw metadataError; }
   await onStage('published');
   return { after, preservedDraft: Boolean(draft), beforeBodySha256: bodyHash(before.body), afterBodySha256: bodyHash(after.body) };
 }

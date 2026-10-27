@@ -275,6 +275,14 @@ updated: 2026-10-19
 - **次**: タイムアウトするテストの共通点 (重いファイル読み取り・初回 import の変換時間) を特定し、`vitest.config.mts` の testTimeout を上げるか、読み取りを小さな fixture にする。
 - **完了条件**: 並行作業中でも `npm run test --workspace apps/admin` がタイムアウト 0 件。
 
+### [MEDIA-CODE-IMAGE-REFERENCE-01] 画像台帳でコード例の画像記法を配信画像として数えない
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-27] [領域:サイト]
+
+- **証拠**: imageReferences はコード領域も正規表現で拾い、公開記事 /blog/cc-estat-03-population-bar の記法例 /charts/population.svg を missing とする。本番HTMLは200で、このURLをsrcとするimg要素はなくコード表示だけだった（2026-10-27確認）。OGPの実配信画像とは別件。
+- **次**: .claude/scripts/media/lib/web-inventory.mjs でMarkdownのコード例を除き、通常の画像・HTML img・出現行番号を維持する。インライン/フェンス付きコードと実画像を同時に含む回帰テストを足す。
+- **停止条件**: 正常な本文画像の参照を落とす場合は採用しない。
+- **完了条件**: 記法例がmissing件数に入らず、実画像の欠落を引き続き検知する。対象記事の台帳を再生成し、本番HTMLのimg集合と照合する。
+
 ### [NOTE-CIRCULATION-RECHECK-01] note→ランキング回遊の着地 session を note.com 経由で取り直す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:管理]
 

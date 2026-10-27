@@ -108,7 +108,7 @@ jobs:
           fi
           echo "generate-blog-thumbnails-cloud.ts ${ARGS[*]}"
           set -o pipefail
-          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}" 2>&1 | tee /tmp/gemini-run.log
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}" 2>&1 | tee /tmp/gemini-run.log
 
       - name: ☁️ Publish exact blog image set (apply=true のみ)
         if: steps.req.outputs.apply == 'true'

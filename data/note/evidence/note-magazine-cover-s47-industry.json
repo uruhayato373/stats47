@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:41:31.045Z",
+  "before": {
+    "name": "都道府県ランキング｜産業・商業",
+    "description": "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832861/magazine_cover_large_01822b10793b68e25f8e45952465e7b5.png"
+  },
+  "expectedSha256": "ee2dde38e515e9fe26d15321e1bfaf82b2a164e3126fff6f8903894b73ee5c43",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜産業・商業",
+    "description": "製造品出荷額・工業・商業・小売・店舗数など、産業と商業の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758471/magazine_cover_large_9b158e243cebdb0abb5c910f4ef6ecc3.png"
+  },
+  "verifiedAt": "2026-10-26T08:41:39.203Z",
+  "servedSha256": "cee758ed7a8cd17ea9ec677dd6eab2edd360a121f2032d1114f1b1c4e781cb8b",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758471/9b158e243cebdb0abb5c910f4ef6ecc3.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758471/9b158e243cebdb0abb5c910f4ef6ecc3.png",
+    "sha256": "42118fb751f44eba4dd60dea2fd2c67d470b45ffa5ced97599fa413d5a812bdb",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.3780637254901962,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-industry-live.png",
+    "checkedAt": "2026-10-26T08:43:29.546Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-industry",
+    "sha256": "42118fb751f44eba4dd60dea2fd2c67d470b45ffa5ced97599fa413d5a812bdb",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:52.808Z"
+  }
+}

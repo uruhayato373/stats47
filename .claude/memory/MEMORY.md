@@ -17,7 +17,7 @@
 - [native chrome session export](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
 - [monetization contract](project_monetization_contract.md) — 収益化の判断。AdSenseは10/11に手動枠で再開・10/13に改善サイクルの凍結解除(ad-yield接続)、NSMは週次収益、アフィ評価は確定収益/1,000 viewable imp、本線は行政実務向け商品
 - [theme selection backfill pipeline](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON だけ返し、決定的 gate が catalogs/<key>.json に書く。PDF は pdftotext で照合
-- [note product card ssot](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op
+- [note product card ssot](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op。OGP再登録のURLキャッシュは画像版と採用画像照合で防ぐ
 - [note ins img heading placement bug](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
 - [geo source initial display](feedback_geo_source_initial_display.md) — GISは操作前の地図表示・区画切替・一覧リンクによる移動を検証。代表区画を選んだ後のPASSだけで初期表示を完了扱いしない
 - [ai content headless claude batch](project_ai_content_headless_claude_batch.md) — 個別ai-content改善はheadless author+critic。大規模構造補完は決定的backfill + 境界サンプル意味レビューへ分離。枠枯渇・スロットリング・rebase競合の罠

@@ -8,6 +8,7 @@ import { PageHeading } from "@/components/ops/primitives";
 import { domainOverview } from "@/lib/server/domains";
 
 import domainsConfig from "../../../../../config/domains.json";
+import { DOMAINS } from "../../../../../config/paths.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,7 @@ export default async function DomainPage({ params }: { params: Promise<{ id: str
 
   return (
     <>
-      <PageHeading title={domain.label} source={`config/domains.json (${domain.role})`}>
+      <PageHeading title={domain.label} source={`${DOMAINS} (${domain.role})`}>
         <p className="text-sm text-muted-foreground">{domain.manages}</p>
       </PageHeading>
 

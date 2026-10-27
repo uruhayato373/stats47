@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T07:47:45.378Z",
+  "updatedAt": "2026-10-27T05:29:20.662Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -8969,6 +8969,67 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-26T07:47:45.378Z"
+    },
+    "OGP-LINKCARD-READABILITY-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "マガジンカバーとサイトOGPの全件更新・noteカード更新",
+      "attempts": [
+        {
+          "at": "2026-10-27T05:25:55.784Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check",
+              "node --test .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/card-image-refresh.test.mjs .claude/scripts/note/__tests__/native-cards.test.mjs",
+              "node --test .claude/scripts/media/__tests__/workspace.test.mjs",
+              "node C:/tmp/stats47-link-card-design-20261026/finalize-current-web-inventory.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "PR1187/1188 merged and deployed; data/ogp/link-card-rollout.json:20 public magazines,3214 pages/3197 unique OGP SHA verified,158/158 canonical metadata checks; data/note/evidence/note-card-image-idempotence.json:428 checked,0 pending/failed; data/blog/sewerage-metadata-repair.jso",
+          "failReason": null,
+          "followUps": [
+            "MEDIA-CODE-IMAGE-REFERENCE-01"
+          ]
+        },
+        {
+          "at": "2026-10-27T05:29:20.662Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check",
+              "node --test .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/card-image-refresh.test.mjs .claude/scripts/note/__tests__/native-cards.test.mjs",
+              "node --test .claude/scripts/media/__tests__/workspace.test.mjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "Final integration: npm run type-check fully exited0 (25/25 workspaces and9/9 script configs);30 note tests and25 media tests passed;docs errors0;PR1187/1188 production deployed;20 public magazines,3197 unique OGP,158/158 public metadata,428 note idempotence with0pending/failed. E",
+          "failReason": null,
+          "followUps": [
+            "MEDIA-CODE-IMAGE-REFERENCE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-27T05:29:20.662Z"
     }
   }
 }

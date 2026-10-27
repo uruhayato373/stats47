@@ -13,6 +13,16 @@ export const BRAND = {
   vermilion: '#E63946',
 } as const;
 
+/** External link cards share the pop note-cover palette, without changing internal thumbnails. */
+export const LINK_CARD_PALETTE = {
+  background:'#fff5cc',
+  accent:'#ffcf38',
+  paper:'#fffdf3',
+  ink:'#182c50',
+  ribbon:'#6637b8',
+  white:BRAND.white,
+} as const;
+
 export const OGP_SURFACE = {
   whiteOverlay: 'rgba(255,255,255,0.85)',
   paperOverlay: 'rgba(248,250,252,0.92)',

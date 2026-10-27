@@ -18,7 +18,7 @@ function fixture() {
   mkdirSync(join(root, 'outbox'));
   writeFileSync(join(root, 'package.json'), '{"type":"module"}\n');
   copyFileSync(join(repo, 'apps/web/scripts/generate-blog-thumbnails.ts'), join(scripts, 'generate-blog-thumbnails.ts'));
-  for (const relative of ['node_modules', 'apps/web/src', 'apps/web/scripts/data', 'apps/web/scripts/lib']) {
+  for (const relative of ['node_modules', 'assets', 'apps/web/src', 'apps/web/scripts/data', 'apps/web/scripts/lib']) {
     symlinkSync(join(repo, relative), join(root, relative), 'junction');
   }
   return root;

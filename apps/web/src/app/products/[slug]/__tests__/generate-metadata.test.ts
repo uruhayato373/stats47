@@ -12,7 +12,7 @@ describe("product page generateMetadata", () => {
     const images = openGraph?.images as Array<{ url: string }> | undefined;
     const imageUrl = images?.[0]?.url;
 
-    expect(imageUrl).toMatch(/\/app\/products\/kindle-k-s1-02\/ogp\/ogp\.png$/);
+    expect(imageUrl).toMatch(/\/app\/products\/kindle-k-s1-02\/ogp\/ogp\.png\?v=20261026-pop$/);
     expect((metadata.twitter as Record<string, unknown> | undefined)?.images).toEqual([
       imageUrl,
     ]);

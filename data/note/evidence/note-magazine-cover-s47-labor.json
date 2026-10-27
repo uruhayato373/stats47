@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-26T08:40:09.875Z",
+  "before": {
+    "name": "都道府県ランキング｜労働・雇用",
+    "description": "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/310832717/magazine_cover_large_e10299c79e69d82fb9d90978eb90e0c2.png"
+  },
+  "expectedSha256": "2af31b3b7267a0af9d9d1d4d7aa7095c7e63fd73cf44555eb2fc66cd46a5fa6d",
+  "status": "verified",
+  "after": {
+    "name": "都道府県ランキング｜労働・雇用",
+    "description": "賃金・初任給・通勤時間・有効求人倍率・休暇取得など、労働と雇用の都道府県ランキングを束ねる無料マガジン。",
+    "cover": "https://assets.st-note.com/production/uploads/images/328758016/magazine_cover_large_1a6d836227329eba6c7dc99fe72114bc.png"
+  },
+  "verifiedAt": "2026-10-26T08:40:19.300Z",
+  "servedSha256": "80bf4425258517ff848b5046f95b888838263774110b9191dcc099f2ce533ef1",
+  "width": 580,
+  "height": 580,
+  "ogImage": {
+    "url": "https://assets.st-note.com/production/uploads/images/328758016/1a6d836227329eba6c7dc99fe72114bc.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+    "originalUrl": "https://assets.st-note.com/production/uploads/images/328758016/1a6d836227329eba6c7dc99fe72114bc.png",
+    "sha256": "aae005d16c9bf298f47b3049407082b8a0349bfb03e5e6d41063ecb9b75ae9ea",
+    "width": 1200,
+    "height": 628,
+    "meanDifference32": 1.4503676470588236,
+    "localFile": "C:\\tmp\\stats47-link-card-design-20261026\\batch\\s47-labor-live.png",
+    "checkedAt": "2026-10-26T08:43:27.598Z"
+  },
+  "visualReview": {
+    "id": "magazine:s47-labor",
+    "sha256": "aae005d16c9bf298f47b3049407082b8a0349bfb03e5e6d41063ecb9b75ae9ea",
+    "wideReadable": true,
+    "squareReadable": true,
+    "reviewer": "codex-visual",
+    "observedAt": "2026-10-26T08:45:52.808Z"
+  }
+}

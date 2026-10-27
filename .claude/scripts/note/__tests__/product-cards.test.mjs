@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { inspectPaidProductCard, resolvePaidProduct, rewriteProductCards } from '../lib/product-cards.mjs';
-import { assertPublishedMetadata, draftSavePayload, splitPublishedBody } from '../lib/publish-card-body.mjs';
+import { assertPublishedMetadata, draftSavePayload, preservePublishedIndex, splitPublishedBody } from '../lib/publish-card-body.mjs';
 
 const article = { key: 'sunshine', magazine: 'climate', isPaid: false };
 const source = {
@@ -72,10 +72,18 @@ test('only an appended index entry derived from the new footer heading is allowe
 test('restore a temporary draft with the boolean index required by the native API', () => {
   const draft = { body: '<p>未公開の編集</p>', name: '編集', index: [] };
   const payload = draftSavePayload(draft);
-  assert.equal(payload.index, true);
+  assert.equal(payload.index, false);
   assert.equal(payload.body_length, 6);
   assert.equal(payload.body, draft.body);
   assert.ok(!Object.hasOwn(payload, 'separator'));
+});
+
+test('a draft with a table of contents cannot enable it on a publication that has none', () => {
+  const payload = {index:true,free_body:'approved body',price:0};
+  assert.deepEqual(preservePublishedIndex(payload,{index:[]}),{...payload,index:false});
+  assert.equal(preservePublishedIndex({index:false},{index:[{body:'見出し'}]}).index,true);
+  assert.equal(draftSavePayload({body:'<h2>見出し</h2>',name:'draft',index:[{body:'見出し'}]}).index,true);
+  assert.throws(()=>preservePublishedIndex({index:[]},{index:[]}),/not boolean/);
 });
 
 test('paid card repair retains the original separator and all paid content', () => {
