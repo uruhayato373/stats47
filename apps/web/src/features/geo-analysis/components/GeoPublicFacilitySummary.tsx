@@ -19,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
@@ -183,7 +184,7 @@ export function GeoPublicFacilitySummary({
                   ) : (
                     <Link
                       className="inline-flex min-h-11 items-center text-primary underline"
-                      href={`/geo/${slug}/${to2DigitPrefCode(row.areaCode)}/overlap`}
+                      href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
                     >
                       {row.areaName}
                     </Link>
@@ -221,8 +222,8 @@ export function GeoPublicFacilitySummary({
         aria-label="公共施設アクセスの出典"
         className="mt-3 flex flex-wrap gap-4 text-sm text-primary underline"
       >
-        <Link href={`/geo/${slug}`}>分析詳細</Link>
-        <Link href={`/geo/${slug}#methods`}>一次資料・取得記録・判定方法</Link>
+        <Link href={hrefFor('geo', { analysisSlug: slug })}>分析詳細</Link>
+        <Link href={`${hrefFor('geo', { analysisSlug: slug })}#methods`}>一次資料・取得記録・判定方法</Link>
       </nav>
       <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
         {snapshot.sources.map((source) => (

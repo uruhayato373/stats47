@@ -450,3 +450,102 @@ test("[mutation] 厳格化した schema は知らない項目と語彙外の値�
   store[datasetPath("sales.ledger")].observations[0].channel = "kdp";
   assert.deepEqual(run(), [], "戻すと通る (赤は書き換えた値が理由)");
 });
+
+test("where の値の配列はどれかに一致する行、unless は合う行を除き、registry の union は 2 つの正本を合わせる (2026-10-27)", () => {
+  const child = refRow("t.child", "data/child.json", [
+    { field: "rows[].keys", parse: "list", where: { channel: ["x", "y"] }, to: "registry:keys" },
+    { field: "rows[].id", unless: { channel: ["x", "y"] }, to: "registry:keys" },
+  ]);
+  // id=12 は channel が無いので unless に合わず、registry に無い 12 が参照切れになる
+  const result = runRefs([parentRow, child]);
+  assert.deepEqual(result.errors.map((e) => e.replace(/ \(id=\d+\)/, "")), ["参照切れ: t.child data/child.json の rows[].id=12 が registry:keys に無い"]);
+
+  const registries = {
+    keys: { description: "fixture", files: ["reg/registry.ts"], between: ["START", "END"], pattern: '^\\s*"([A-Z]-\\d)":' },
+    nines: { description: "fixture", files: ["reg/registry.ts"], pattern: '^\\s*"(K-9)":' },
+    both: { description: "fixture", union: ["keys", "nines"] },
+  };
+  const store = refsFixture();
+  store["data/child.json"].rows[0].keys = "K-1,K-9";
+  const viaKeys = refRow("t.child", "data/child.json", [{ field: "rows[].keys", parse: "list", to: "registry:keys" }]);
+  const viaBoth = refRow("t.child", "data/child.json", [{ field: "rows[].keys", parse: "list", to: "registry:both" }]);
+  assert.equal(runRefs([viaKeys], store, { registries }).errors.length, 1, "片方の正本だけなら K-9 は参照切れ");
+  assert.deepEqual(runRefs([viaBoth], store, { registries }).errors, [], "union なら K-9 も届く");
+  const nested = { ...registries, nested: { description: "fixture", union: ["both"] } };
+  const viaNested = refRow("t.child", "data/child.json", [{ field: "rows[].keys", parse: "list", to: "registry:nested" }]);
+  assert.match(runRefs([viaNested], store, { registries: nested }).errors[0], /union を持たない/);
+  const badWhere = refRow("t.child", "data/child.json", [{ field: "rows[].id", where: {}, to: "registry:keys" }]);
+  assert.match(runRefs([badWhere]).errors[0], /where は \{ 項目/);
+});
+
+test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、warn は投稿済みの ranking の content_key だけ", () => {
+  const files = ["data/sns/posts.json"];
+  const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts");
+  const run = () =>
+    checkRefs({ datasets: rows, files, readJson: () => doc, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
+  const clean = run();
+  assert.deepEqual(clean.errors, []);
+  for (const w of clean.warnings) assert.match(w, /posts\[\]\.content_key=.* が registry:ranking-content-keys に無い$/);
+  const byId = new Map(doc.posts.map((p) => [p.id, p]));
+  for (const w of clean.warnings) {
+    const post = byId.get(Number(w.match(/\(id=(\d+)\)/)[1]));
+    assert.equal(post.domain, "ranking");
+    assert.ok(["posted", "deleted"].includes(post.status), `warn は外に出た記録だけ: id=${post.id}`);
+  }
+  const draft = doc.posts.find((p) => p.domain === "ranking" && p.status === "draft");
+  const geo = doc.posts.find((p) => p.domain === "geo");
+  const quiz = doc.posts.find((p) => p.domain === "ranking-quiz");
+  const saved = [draft.content_key, geo.metric_keys, quiz.content_key];
+  draft.content_key = "no-such-metric";
+  geo.metric_keys = "floodExposureShare2051";
+  quiz.content_key = "no-such-quiz-metric";
+  const broken = run().errors.join("\n");
+  assert.ok(broken.includes(`(id=${draft.id}) の posts[].content_key=no-such-metric が registry:metrics に無い`), broken);
+  assert.ok(broken.includes(`(id=${geo.id}) の posts[].metric_keys=floodExposureShare2051 が registry:geo-post-metric-keys に無い`), broken);
+  assert.ok(broken.includes(`(id=${quiz.id}) の posts[].content_key=no-such-quiz-metric が registry:metrics に無い`), broken);
+  // 投稿済みの ranking でも旧 slug (RANKING_SLUG_REDIRECTS) は届く
+  const posted = doc.posts.find((p) => p.domain === "ranking" && p.status === "posted");
+  [draft.content_key, geo.metric_keys, quiz.content_key] = saved;
+  const before = posted.content_key;
+  posted.content_key = "ssdse-c-lb021101";
+  assert.equal(run().warnings.length, clean.warnings.length, "旧 slug は 301 先の指標へ届くので warn を増やさない");
+  posted.content_key = before;
+  assert.deepEqual(run().errors, [], "戻すと通る");
+});
+
+test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わせを schema が固定する (2026-10-27)", () => {
+  const store = { [KDP_LISTINGS]: JSON.parse(readFileSync(resolve(ROOT, KDP_LISTINGS), "utf8")) };
+  const rows = DATASETS.filter((d) => d.id === "kdp.listings");
+  const run = () => checkSchemas({ datasets: rows, files: [KDP_LISTINGS], readJson: (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8")), exists: (p) => existsSync(resolve(ROOT, p)) });
+  assert.deepEqual(run(), []);
+  const listings = store[KDP_LISTINGS].listings;
+  const live = Object.values(listings).find((l) => l.status === "listed" && l.kdpStatus === "live");
+  const withdrawn = Object.values(listings).find((l) => l.status === "withdrawn" && l.withdrawal?.unpublishedAt);
+  const blocked = Object.values(listings).find((l) => l.status === "blocked-design");
+  const cases = [
+    [live, "publicationStage", undefined], // 販売中なのに工程が無い
+    [live, "publicationStage", "verified"], // 販売中なのに公開前の工程
+    [live, "asin", null], // 販売中なのに ASIN が無い
+    [live, "status", "draft"], // 販売中なのに売らない判断
+    [withdrawn, "kdpStatus", "live"], // 出版停止を受理したのに販売中
+    [blocked, "publicationStage", "live"], // 作らない判断の版が live
+    [{ ...live, kdpStatus: "draft" }, null, null], // listed なのに本棚は下書き (下で置き換える)
+  ];
+  for (const [target, field, value] of cases) {
+    if (field === null) {
+      const before = live.kdpStatus;
+      live.kdpStatus = "draft";
+      assert.match(run().join("\n"), /kdp\.listings: .* が schema に合わない/, "listed + kdpStatus=draft");
+      live.kdpStatus = before;
+      continue;
+    }
+    const before = target[field];
+    if (value === undefined) delete target[field];
+    else target[field] = value;
+    assert.match(run().join("\n"), /kdp\.listings: .* が schema に合わない/, `${target.id} ${field}=${String(value)}`);
+    if (before === undefined) delete target[field];
+    else target[field] = before;
+  }
+  assert.deepEqual(run(), [], "戻すと通る (赤は書き換えた値が理由)");
+});

@@ -26,9 +26,12 @@ const HREF_ROUTE_IDS = {
   'municipality-theme': 'route:municipality-theme:themeSlug',
   'japan-theme': 'route:japan-theme:themeSlug',
   geo: 'route:geo:analysisSlug',
+  'geo-stage': 'route:geo:analysisSlug:prefCode:stage',
+  'geo-data': 'route:geo-data:analysisSlug:prefCode',
   'geo-layer': 'route:geo-layer:layerSlug',
   'geo-datasets': 'route:geo-datasets:dataId',
   product: 'route:product:slug',
+  'product-from-note': 'route:products-from-note:slug:noteKey',
 } as const;
 
 export type HrefRouteName = keyof typeof HREF_ROUTE_IDS;

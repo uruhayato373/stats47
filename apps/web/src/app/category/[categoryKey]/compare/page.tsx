@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { unwrap } from "@stats47/types";
 import { type Metadata } from "next";
 
@@ -58,7 +59,7 @@ export async function generateMetadata({
     const category = categories.find((c) => c.categoryKey === categoryKey);
     if (!category) return {};
 
-    const canonical = `/category/${categoryKey}/compare`;
+    const canonical = hrefFor("category-compare", { categoryKey });
 
     if (areaCodes.length === 0) {
         const title = "地域間比較";
@@ -152,7 +153,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                         ? [
                               {
                                   label: currentCategory.categoryName,
-                                  href: `/category/${categoryKey}`,
+                                  href: hrefFor("category", { categoryKey }),
                               },
                           ]
                         : []),

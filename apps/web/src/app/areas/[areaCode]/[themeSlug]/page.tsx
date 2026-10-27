@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { AREA_THEMES } from "@/features/theme-dashboard/config/area-theme-slugs";
 import {
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    alternates: { canonical: `/areas/${areaCode}/${themeSlug}` },
+    alternates: { canonical: hrefFor("area-theme", { areaCode, themeSlug }) },
     ...generateOGMetadata({ title: formatOgpTitle(title), description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }

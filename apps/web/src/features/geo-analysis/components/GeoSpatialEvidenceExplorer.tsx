@@ -20,6 +20,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@stats47/components/atoms/ui/tabs';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
@@ -183,7 +184,7 @@ function GeoSpatialEvidenceExplorerState({
   ) => {
     if (!syncUrl) return;
     const url = new URL(window.location.href);
-    url.pathname = `/geo/${slug}`;
+    url.pathname = hrefFor('geo', { analysisSlug: slug });
     url.searchParams.set('pref', pref);
     url.searchParams.set('stage', stage);
     if (publicFacility) url.searchParams.set('group', group);
@@ -396,7 +397,7 @@ function GeoSpatialEvidenceExplorerState({
       </div>
       <div className="mt-4 flex flex-wrap gap-4 text-sm">
         <Link
-          href={`/geo/${slug}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}
+          href={`${hrefFor('geo', { analysisSlug: slug })}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}
           className="text-primary underline"
         >
           この県・この表示を共有
@@ -407,7 +408,7 @@ function GeoSpatialEvidenceExplorerState({
         >
           この県の地点・検算データを見る
         </Link>
-        <Link href={`/geo/${slug}#methods`} className="text-primary underline">
+        <Link href={`${hrefFor('geo', { analysisSlug: slug })}#methods`} className="text-primary underline">
           一次資料と判定方法
         </Link>
       </div>

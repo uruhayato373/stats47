@@ -31,6 +31,9 @@ describe('hrefFor (routes.json から href を組み立てる)', () => {
     }
     expect(hrefFor('ranking', { rankingKey: 'total-population' })).toBe('/ranking/total-population');
     expect(hrefFor('area-theme', { areaCode: '13000', themeSlug: 'population' })).toBe('/areas/13000/population');
+    expect(hrefFor('geo-stage', { analysisSlug: 'flood', prefCode: '13', stage: 'overlap' })).toBe('/geo/flood/13/overlap');
+    expect(hrefFor('geo-data', { analysisSlug: 'flood', prefCode: '13' })).toBe('/geo/data/flood/13');
+    expect(hrefFor('product-from-note', { slug: 'p-04', noteKey: 'n1a' })).toBe('/products/p-04/from/note/n1a');
   });
 
   it('ブラウザ部品から読むので routes.json 以外を import しない (tags.json 128KB をヘッダーへ入れない)', () => {

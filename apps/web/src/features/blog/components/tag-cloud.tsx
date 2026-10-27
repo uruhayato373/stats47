@@ -1,4 +1,5 @@
 import { Badge } from "@stats47/components/atoms/ui/badge";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 
@@ -27,7 +28,7 @@ export function TagCloud({ tags }: TagCloudProps) {
   return (
     <div className="flex flex-wrap gap-2">
       {tags.map(({ tag, tagKey, count }) => (
-        <Link key={tagKey} href={`/tag/${tagKey}`}>
+        <Link key={tagKey} href={hrefFor("tag", { tagKey })}>
           <Badge variant="secondary" className={getSizeClass(count, max)}>
             {tag} ({count})
           </Badge>

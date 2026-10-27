@@ -1,4 +1,5 @@
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 
 import { SurfaceLinkCard } from '@/components/surface';
@@ -73,7 +74,7 @@ export async function GeoAnalysisCards() {
           return (
             <SurfaceLinkCard
               key={slug}
-              href={`/geo/${slug}`}
+              href={hrefFor('geo', { analysisSlug: slug })}
               aria-label={`${copy.question} ${config.eyebrow}の地図を見る`}
               className="group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 @sm:grid-cols-[148px_minmax(0,1fr)] @md:flex @md:flex-col"
             >
@@ -193,7 +194,7 @@ export async function GeoAnalysisCards() {
         ).map((analysis) => (
           <SurfaceLinkCard
             key={analysis.slug}
-            href={`/geo/${analysis.slug}`}
+            href={hrefFor('geo', { analysisSlug: analysis.slug })}
             className="group flex min-w-0 items-center gap-3 p-4"
           >
             <div className="min-w-0 flex-1">

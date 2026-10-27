@@ -160,7 +160,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                   </p>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                     {topic.relatedArticleTagKeys?.map((tagKey) => {
-                      const href = `/tag/${tagKey}`;
+                      const href = hrefFor('tag', { tagKey });
                       return (
                         <TrackedThemeLink
                           key={tagKey}

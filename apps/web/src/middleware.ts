@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { SITE } from '@stats47/types';
 
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
@@ -70,7 +71,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     const key = segments[3];
     if (pageType === 'dashboard' && /^\d{5}$/.test(key)) {
       if (!UrlPolicy.area.isValidPrefCode(key)) return gone();
-      return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), {
+      return NextResponse.redirect(new URL(hrefFor('area', { areaCode: key }), baseUrl), {
         status: 301,
       });
     }
@@ -78,12 +79,12 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
       const destination = RANKING_SLUG_REDIRECTS[key];
       if (destination) {
         const url = new URL(baseUrl);
-        url.pathname = `/ranking/${destination}`;
+        url.pathname = hrefFor('ranking', { rankingKey: destination });
         return NextResponse.redirect(url, 301);
       }
       if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key))
         return gone();
-      return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), {
+      return NextResponse.redirect(new URL(hrefFor('ranking', { rankingKey: key }), baseUrl), {
         status: 301,
       });
     }
@@ -96,7 +97,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     /^\d{5}$/.test(segments[1])
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('area', { areaCode: segments[1] }), baseUrl), {
       status: 301,
     });
   }
@@ -124,7 +125,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     /^\d{5}$/.test(segments[1])
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('area', { areaCode: segments[1] }), baseUrl), {
       status: 301,
     });
   }
@@ -143,7 +144,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     segments.length <= 3 &&
     OLD_CATEGORY_KEYS.has(segments[0])
   ) {
-    return NextResponse.redirect(new URL(`/category/${segments[0]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('category', { categoryKey: segments[0] }), baseUrl), {
       status: 301,
     });
   }
@@ -177,7 +178,7 @@ function checkContentTypePolicy(
     if (!slug) return gone();
     if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug))
       return gone();
-    return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('ranking', { rankingKey: slug }), baseUrl), {
       status: 301,
     });
   }
@@ -213,7 +214,7 @@ function checkContentTypePolicy(
         !UrlPolicy.tag.isGone(jaKey)
       ) {
         return NextResponse.redirect(
-          new URL(`/tag/${encodeURIComponent(jaKey)}`, baseUrl),
+          new URL(hrefFor('tag', { tagKey: encodeURIComponent(jaKey) }), baseUrl),
           { status: 301 }
         );
       }
@@ -236,7 +237,7 @@ function checkContentTypePolicy(
       if (slug === 'tags' && pathname === '/blog/tags') return null;
       const newSlug = BLOG_SLUG_REDIRECTS[slug];
       if (newSlug) {
-        return NextResponse.redirect(new URL(`/blog/${newSlug}`, baseUrl), {
+        return NextResponse.redirect(new URL(hrefFor('blog', { slug: newSlug }), baseUrl), {
           status: 301,
         });
       }
@@ -348,7 +349,7 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     if (seg.length === 5) {
       if (!UrlPolicy.cityCategory.isKnown(seg[4])) return gone();
       return NextResponse.redirect(
-        new URL(`/areas/${areaCode}/cities/${cityCode}`, req.url),
+        new URL(hrefFor('city', { areaCode, cityCode }), req.url),
         301
       );
     }
@@ -370,8 +371,8 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     const themeSlug = CATEGORY_TO_THEME[seg[2]];
     // テーマスラグ空文字 = 対応テーマなし → エリアプロフィールへ
     const dest = themeSlug
-      ? `/areas/${seg[1]}/${themeSlug}`
-      : `/areas/${seg[1]}`;
+      ? hrefFor('area-theme', { areaCode: seg[1], themeSlug })
+      : hrefFor('area', { areaCode: seg[1] });
     return NextResponse.redirect(new URL(dest, req.url), { status: 301 });
   }
 
@@ -417,8 +418,10 @@ export default function middleware(req: NextRequest) {
   }
 
   // --- Trailing slash 正規化（301）---
+  // 廃止ページ (/ports/ など) は正規化後の path で転送先を引き、301 を 1 回で着地させる。
   if (pathname !== '/' && pathname.endsWith('/')) {
-    const url = new URL(pathname.slice(0, -1), req.url);
+    const normalized = pathname.slice(0, -1);
+    const url = new URL(resolveLegacyThemePathRedirect(normalized) ?? normalized, req.url);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }
@@ -484,7 +487,7 @@ export default function middleware(req: NextRequest) {
     }
     if (!UrlPolicy.ranking.isKnown(rankingKey)) return gone();
     return NextResponse.redirect(
-      new URL(`/ranking/${rankingKey}`, req.url),
+      new URL(hrefFor('ranking', { rankingKey }), req.url),
       301
     );
   }
@@ -507,7 +510,7 @@ export default function middleware(req: NextRequest) {
     const segments = pathname.split('/').filter(Boolean);
     if (segments.length === 1 && OLD_CATEGORY_KEYS.has(segments[0])) {
       return NextResponse.redirect(
-        new URL(`/category/${segments[0]}`, req.url),
+        new URL(hrefFor('category', { categoryKey: segments[0] }), req.url),
         { status: 301 }
       );
     }
@@ -544,7 +547,7 @@ export default function middleware(req: NextRequest) {
       const categoryKey = compareMatch[1] ?? 'population';
       const search = req.nextUrl.search;
       return NextResponse.redirect(
-        new URL(`/category/${categoryKey}/compare${search}`, req.url),
+        new URL(`${hrefFor('category-compare', { categoryKey })}${search}`, req.url),
         { status: 301 }
       );
     }

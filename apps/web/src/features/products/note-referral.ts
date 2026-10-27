@@ -1,3 +1,5 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 const NOTE_KEY_PATTERN = /^n[0-9a-f]+$/i;
 
 export function isValidNoteKey(noteKey: string): boolean {
@@ -18,5 +20,5 @@ export function buildNoteProductDestination(
     utm_campaign: "note_product",
     utm_content: noteKey,
   });
-  return `/products/${encodeURIComponent(productSlug)}?${search.toString()}`;
+  return `${hrefFor("product", { slug: encodeURIComponent(productSlug) })}?${search.toString()}`;
 }

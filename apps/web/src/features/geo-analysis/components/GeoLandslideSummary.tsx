@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { LANDSLIDE_EXPOSURE_SOURCE as S } from '@stats47/data-configs/theme-catalog';
 import {
   landslideNationalValues,
@@ -165,7 +166,7 @@ export function GeoLandslideSummary({
             {s.title}
           </a>
         ))}
-        <Link href={`/geo/${S.slug}`} className="text-primary underline">
+        <Link href={hrefFor('geo', { analysisSlug: S.slug })} className="text-primary underline">
           計算入力・県別途中データ・合計の検算を確認
         </Link>
       </div>

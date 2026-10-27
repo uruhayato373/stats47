@@ -60,7 +60,7 @@ export async function RelatedRankingsGrid({
         categoryKey ? (
           <Link
             {...navSurfaceProps("ranking_related")}
-            href={`/category/${categoryKey}`}
+            href={hrefFor("category", { categoryKey })}
             className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
           >
             すべて見る

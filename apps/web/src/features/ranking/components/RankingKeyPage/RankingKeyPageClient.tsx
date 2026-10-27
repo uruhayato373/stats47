@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
     type RankingItem,
     type RankingValue,
@@ -129,7 +130,7 @@ export function RankingKeyPageClient({
             )}
             {sourceObj?.name && surveyName && "　"}
             {surveyName && rankingItem?.surveyId && (
-                <>調査: <Link href={`/survey/${rankingItem.surveyId}`} className="hover:text-primary hover:underline">{surveyName}</Link></>
+                <>調査: <Link href={hrefFor("survey", { surveyKey: rankingItem.surveyId })} className="hover:text-primary hover:underline">{surveyName}</Link></>
             )}
         </span>
     ) : undefined;

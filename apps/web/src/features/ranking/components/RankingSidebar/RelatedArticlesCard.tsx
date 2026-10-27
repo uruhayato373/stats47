@@ -1,3 +1,5 @@
+import { hrefFor } from '@stats47/data-configs/content/href';
+
 import { ContentNavigation } from '@/components/rail/ContentNavigation';
 import { railNavRowClassName } from '@/components/surface';
 
@@ -13,7 +15,7 @@ export async function RelatedArticlesCard({ rankingKey, areaType }: Props) {
   const product = items.map(item => findKindleProductForBlog(item.key)).find(Boolean);
   return <>
     <ContentNavigation title="このランキングを読み解く" items={items} surface="ranking_blog" />
-    {product && <TrackedProductLink href={`/products/${product.slug}`} label={`${product.id}:${product.title}`} surface="ranking_product" className={railNavRowClassName({})}>
+    {product && <TrackedProductLink href={hrefFor('product', { slug: product.slug })} label={`${product.id}:${product.title}`} surface="ranking_product" className={railNavRowClassName({})}>
       この記事を収録した本：{product.title}（Kindle）
     </TrackedProductLink>}
   </>;

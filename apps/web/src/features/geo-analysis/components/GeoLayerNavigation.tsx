@@ -2,6 +2,7 @@ import {
   findGeoLayer,
   type GeoLayerSlug,
 } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { RailLinksCard, RailStack } from '@/components/rail';
 
@@ -24,7 +25,7 @@ export function GeoLayerNavigation({
         {
           id: 'analysis',
           label: `${GEO_HOME_ANALYSIS_LABELS[layer.sourceAnalysis]}の分析`,
-          href: `/geo/${layer.sourceAnalysis}`,
+          href: hrefFor('geo', { analysisSlug: layer.sourceAnalysis }),
         },
         {
           id: 'method',

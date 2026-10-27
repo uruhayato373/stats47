@@ -40,9 +40,9 @@ describe("pack catalog", () => {
     }
   });
 
-  it("only lists (approved/listed) packs whose datasets all exist — anti-overclaim", () => {
+  it("only lists (approved) packs whose datasets all exist — anti-overclaim", () => {
     for (const p of ALL_PRODUCTS) {
-      if (p.status === "approved" || p.status === "listed") {
+      if (p.status === "approved") {
         expect(p.datasets.length, `${p.id} listable must declare datasets`).toBeGreaterThan(0);
         for (const key of p.datasets) {
           expect(DATASET_KEYS.has(key), `${p.id} dataset ${key} must exist`).toBe(true);
@@ -59,10 +59,10 @@ describe("pack catalog", () => {
     expect(DATASET_KEYS.has("tourism-resource-count")).toBe(false);
   });
 
-  it("P-01 inherits the real 4 datasets of former D-01 and is listable", () => {
+  it("P-01 inherits the real 4 datasets of former D-01 and is listable (approved; publication state lives in the listings)", () => {
     const p01 = ALL_PRODUCTS.find((p) => p.id === "P-01");
     expect(p01).toBeDefined();
-    expect(p01!.status).toBe("listed");
+    expect(p01!.status).toBe("approved");
     expect([...p01!.datasets].sort()).toEqual(
       [
         "general-households",
@@ -75,9 +75,9 @@ describe("pack catalog", () => {
   });
 
   it("detects an overclaiming catalog (validator negative control)", () => {
-    // approved/listed だが実在しない dataset を宣言 → datasets-missing で ok=false
+    // approved だが実在しない dataset を宣言 → datasets-missing で ok=false
     const broken = ALL_PRODUCTS.map((p) =>
-      p.id === "P-02" ? { ...p, status: "listed" as const, datasets: ["does-not-exist"] } : p,
+      p.id === "P-02" ? { ...p, status: "approved" as const, datasets: ["does-not-exist"] } : p,
     );
     const result = validateCatalog(broken);
     expect(result.ok).toBe(false);

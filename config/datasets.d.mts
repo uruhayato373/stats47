@@ -12,6 +12,14 @@ export interface Dataset {
   /** 正本を置く private R2 の prefix */
   r2State?: string;
 }
+/** TS 側の正本から ID を読む方法 (REGISTRIES の 1 件)。union は他の registry の ID を合わせる */
+export interface DatasetRegistry {
+  description: string;
+  files?: string[];
+  pattern?: string;
+  between?: [string, string];
+  union?: string[];
+}
 export declare const KINDS: Record<string, string>;
 export declare const TARGETS: Record<string, { dir: string; label: string }>;
 export declare const GOVERNED: RegExp[];

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@stats47/components";
 import { Input } from "@stats47/components/atoms/ui/input";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { trackNavClick } from "@/lib/analytics/events";
 
@@ -68,14 +69,14 @@ export function AreaSearch({ prefectures, className }: AreaSearchProps) {
     try {
       trackNavClick({
         label: pref.prefName,
-        href: `/areas/${pref.prefCode}`,
+        href: hrefFor("area", { areaCode: pref.prefCode }),
         surface: "areas_search",
       });
     } catch {
       // analytics 失敗で遷移を止めない
     }
     setIsOpen(false);
-    router.push(`/areas/${pref.prefCode}`);
+    router.push(hrefFor("area", { areaCode: pref.prefCode }));
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {

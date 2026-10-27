@@ -9,6 +9,7 @@ import {
   DataTable,
 } from "@stats47/components";
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { rankByValue } from "@stats47/ranking";
 import { computeDeviationScores } from "@stats47/utils";
@@ -122,7 +123,7 @@ export function CityRankingSection({
         },
         cell: ({ row }) => (
           <Link
-            href={`/areas/${areaCode}/cities/${row.original.areaCode}`}
+            href={hrefFor("city", { areaCode, cityCode: row.original.areaCode })}
             className="font-medium text-primary hover:underline"
           >
             {row.original.areaName}
@@ -167,7 +168,7 @@ export function CityRankingSection({
     if (!key) return; // ToggleGroup で同じボタンを押した場合は空文字
     startTransition(() => {
       router.push(
-        `/areas/${areaCode}/${categoryKey}?ranking=${key}`,
+        `${hrefFor("area-theme", { areaCode, themeSlug: categoryKey })}?ranking=${key}`,
         { scroll: false }
       );
     });
@@ -223,7 +224,7 @@ export function CityRankingSection({
                 topology={topology}
                 unit={selectedItem?.unit ?? ""}
                 onCityClick={(cityCode) => {
-                  router.push(`/areas/${areaCode}/cities/${cityCode}`);
+                  router.push(hrefFor("city", { areaCode, cityCode }));
                 }}
               />
             </ChartPanel>

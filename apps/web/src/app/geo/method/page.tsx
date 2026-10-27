@@ -1,4 +1,5 @@
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
@@ -63,7 +64,7 @@ export default function GeoMethodPage() {
             </ol>
             <Link
               className="mt-4 inline-block text-sm font-medium text-primary underline"
-              href={`/geo/${analysis.slug}`}
+              href={hrefFor('geo', { analysisSlug: analysis.slug })}
             >
               結果・出典・データ品質を見る →
             </Link>

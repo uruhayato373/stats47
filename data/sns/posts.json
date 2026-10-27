@@ -40457,10 +40457,10 @@
         "state": "pending"
       },
       "created_at": "2026-10-23T04:28:03.346Z",
-      "updated_at": "2026-10-23T04:28:03.346Z",
+      "updated_at": "2026-10-27T00:21:20.169Z",
       "platform": "x",
       "post_type": "original",
-      "domain": "ranking",
+      "domain": "blog",
       "content_key": "municipality-population-change-census-2025",
       "caption": "5年で人口が8割増えた町と、3割減った市。\n2020→2025年の国勢調査で、人口が増えた市区町村は1,740のうち169だけでした。\n増加率1位 大熊町 +80.99%\n減少率1位 珠洲市 -34.57%\nhttps://stats47.jp/blog/municipality-population-change-census-2025?utm_source=x&utm_medium=social&utm_campaign=blog-municipality-population-change-census-2025&utm_content=shock\n#国勢調査 #人口増減率 #市区町村",
       "utm_url": "https://stats47.jp/blog/municipality-population-change-census-2025?utm_source=x&utm_medium=social&utm_campaign=blog-municipality-population-change-census-2025&utm_content=shock",
@@ -40468,7 +40468,7 @@
       "media_path": ".local/r2/sns/blog/municipality-population-change-census-2025/x/stills/municipality-population-change-census-2025.png",
       "scheduled_at": null,
       "template": "shock",
-      "metric_keys": "municipality-population-change-census-2025",
+      "metric_keys": null,
       "geo_role": null,
       "analysis_ids": null,
       "claim_metric_key": null

@@ -360,7 +360,7 @@ export default async function MunicipalityRankingPage({
                 <TableCell className="font-medium">
                   {/* 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする */}
                   <Link
-                    href={`/areas/${row.prefectureCode}/cities/${row.areaCode}`}
+                    href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}
                     className="text-primary hover:underline"
                   >
                     {listName(row.areaName)}

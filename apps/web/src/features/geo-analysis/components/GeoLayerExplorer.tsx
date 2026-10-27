@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SurfaceCard } from '@/components/surface';
@@ -283,7 +284,7 @@ export function GeoLayerExplorer({
             <li key={slug}>
               <Link
                 className="inline-flex min-h-11 items-center text-sm text-primary underline"
-                href={`/geo/${slug}?pref=${pref}&stage=overlap`}
+                href={`${hrefFor('geo', { analysisSlug: slug })}?pref=${pref}&stage=overlap`}
               >
                 {GEO_CROSS_ANALYSIS_CONFIGS[slug].eyebrow}
               </Link>

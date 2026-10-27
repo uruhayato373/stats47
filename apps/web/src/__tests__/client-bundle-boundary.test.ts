@@ -12,9 +12,12 @@ import { describe, expect, it } from "vitest";
  */
 const WEB_ROOT = path.resolve(__dirname, "../..");
 const REPO_ROOT = path.resolve(WEB_ROOT, "../..");
-const REGISTRY = path.join("packages", "data-configs", "src", "registry.ts");
+// TypeScript の解決結果は Windows でも "/" 区切りなので、比較はすべて "/" にそろえて行う
+// (path.join の "\\" と比べると Windows では一致せず、陽性対照が落ち、node_modules も除外できなかった。2026-10-27)
+const toPosix = (file: string) => file.replaceAll("\\", "/");
+const REGISTRY = "packages/data-configs/src/registry.ts";
 // 全テーマの指標定義。本番ビルドで 324KB のチャンクになり、テーマ切替が読むと各テーマページへ入っていた。
-const ALL_THEMES = path.join("theme-dashboard", "config", "all-themes.ts");
+const ALL_THEMES = "theme-dashboard/config/all-themes.ts";
 const GIS_PROCESSING_PACKAGES = new Set(["unzipper", "shapefile", "proj4", "topojson-server", "topojson-simplify"]);
 
 const parsed = ts.parseJsonConfigFileContent(
@@ -63,11 +66,11 @@ function findHeavyDependency(entry: string): string[] | null {
       const packageName = specifier.match(/^(@[^/]+\/[^/]+|[^./][^/]*)/)?.[1];
       if (packageName && GIS_PROCESSING_PACKAGES.has(packageName)) return chainTo(file, packageName);
       const resolved = ts.resolveModuleName(specifier, file, parsed.options, host).resolvedModule?.resolvedFileName;
-      if (!resolved || resolved.includes(`${path.sep}node_modules${path.sep}`) || resolved.endsWith(".d.ts")) continue;
+      if (!resolved || toPosix(resolved).includes("/node_modules/") || resolved.endsWith(".d.ts")) continue;
       if (seen.has(resolved)) continue;
       seen.add(resolved);
       parent.set(resolved, file);
-      if (resolved.endsWith(REGISTRY) || resolved.endsWith(ALL_THEMES)) return chainTo(file, path.relative(REPO_ROOT, resolved));
+      if (toPosix(resolved).endsWith(REGISTRY) || toPosix(resolved).endsWith(ALL_THEMES)) return chainTo(file, path.relative(REPO_ROOT, resolved));
       queue.push(resolved);
     }
   }

@@ -21,7 +21,7 @@ model: sonnet
 
 ## 責務（単一所有）
 
-- カタログ (`src/catalog/products/packs.ts`) の CRUD と検証（`products:catalog --check`：ID 一意・`EXPECTED_PACK_IDS` 集合一致・価格整合/刻み・参照存在・approved/listed パックの `datasets` 実在=誇大表示防止）。
+- カタログ (`src/catalog/products/packs.ts`) の CRUD と検証（`products:catalog --check`：ID 一意・`EXPECTED_PACK_IDS` 集合一致・価格整合/刻み・参照存在・approved パックの `datasets` 実在=誇大表示防止）。
 - ジェネレータ（`src/generators/` : pptx/xlsx/csv/svg/png/pdf/listing/manifest/readiness）と汎用ビルダー
   （`src/build/build-product.ts` / `build-all.ts`）の保守。
 - 生成（`products:generate --id/--all`）・リリース台帳（`products:report` → `data/products/catalog-status.json`）。

@@ -71,7 +71,10 @@
         "kuEnrolled": { "type": "boolean" },
         "epubPath": { "type": "string", "pattern": "^\\.local/kindle-books/" },
         "coverPath": { "type": "string", "pattern": "^\\.local/kindle-books/" },
-        "status": { "enum": ["draft", "listed", "blocked-thin", "blocked-design", "withdrawn"] },
+        "status": {
+          "description": "編集上の判断 (この版を売るか)。本棚の観測は kdpStatus、作業の到達点は publicationStage。3 つの関係は listing の allOf が固定する",
+          "enum": ["draft", "listed", "blocked-thin", "blocked-design", "withdrawn"]
+        },
         "withdrawal": {
           "type": "object",
           "additionalProperties": false,
@@ -90,7 +93,10 @@
         "publishedAt": { "$ref": "#/definitions/nullableDate" },
         "lastSubmittedAt": { "$ref": "#/definitions/nullableDate" },
         "salesStartedAt": { "$ref": "#/definitions/nullableDate" },
-        "kdpStatus": { "enum": ["draft", "in_review", "live", "unknown"] },
+        "kdpStatus": {
+          "description": "KDP 本棚の read-back を正規化した観測 (kdp-status.mjs の normalizeKdpStatus)。観測日は kdpStatusCheckedAt",
+          "enum": ["draft", "in_review", "live", "unknown"]
+        },
         "kdpStatusLabel": { "$ref": "#/definitions/nullableString" },
         "kdpStatusCheckedAt": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/datetime" }] },
         "publicationStage": { "$ref": "#/definitions/publicationStage" },
@@ -123,7 +129,52 @@
       }
     },
     "listing": {
-      "allOf": [{ "$ref": "#/definitions/edition" }],
+      "description": "status (判断)・kdpStatus (本棚の観測)・publicationStage (作業の到達点) の整合は下の allOf で固定する (2026-10-27)。書き手 (.claude/scripts/kdp/lib/kdp-status.mjs の mergeKdpOperationalState) は観測が in_review / live なら status を listed にし、publicationStage を submitted / live へ進める",
+      "allOf": [
+        { "$ref": "#/definitions/edition" },
+        {
+          "description": "販売中の観測には ASIN・販売開始日・live 以降の工程が要り、判断は listed か withdrawn (出版停止の処理待ち)",
+          "if": { "required": ["kdpStatus"], "properties": { "kdpStatus": { "const": "live" } } },
+          "then": {
+            "required": ["asin", "salesStartedAt", "publicationStage"],
+            "properties": {
+              "asin": { "type": "string" },
+              "salesStartedAt": { "type": "string" },
+              "publicationStage": { "enum": ["live", "previous_unpublished"] },
+              "status": { "enum": ["listed", "withdrawn"] }
+            }
+          }
+        },
+        {
+          "description": "審査中の観測は submitted 以降の工程で、判断は listed か withdrawn",
+          "if": { "required": ["kdpStatus"], "properties": { "kdpStatus": { "const": "in_review" } } },
+          "then": {
+            "required": ["publicationStage"],
+            "properties": {
+              "publicationStage": { "enum": ["submitted", "live", "previous_unpublished"] },
+              "status": { "enum": ["listed", "withdrawn"] }
+            }
+          }
+        },
+        {
+          "description": "listed は本棚の観測を持つ (未確認の間は unknown)。下書きの観測のままの listed は書き戻し漏れ",
+          "if": { "required": ["status"], "properties": { "status": { "const": "listed" } } },
+          "then": { "required": ["kdpStatus"], "properties": { "kdpStatus": { "enum": ["in_review", "live", "unknown"] } } }
+        },
+        {
+          "description": "売らない判断 (draft・blocked-*) の版は live 以降の工程に進んでいない",
+          "if": { "required": ["status"], "properties": { "status": { "enum": ["draft", "blocked-thin", "blocked-design"] } } },
+          "then": { "properties": { "publicationStage": { "enum": ["prepared", "details_filled", "files_processed", "verified", "submitted"] } } }
+        },
+        {
+          "description": "出版停止を受理した withdrawn は、本棚で下書きに戻っている",
+          "if": {
+            "required": ["status", "withdrawal"],
+            "properties": { "status": { "const": "withdrawn" }, "withdrawal": { "required": ["unpublishedAt"] } }
+          },
+          "then": { "properties": { "kdpStatus": { "enum": ["draft", "unknown"] } } }
+        }
+      ],
       "required": ["id", "title", "priceYen", "status", "epubPath", "coverPath", "asin", "publishedAt"],
       "propertyNames": {
         "enum": [

@@ -1,4 +1,5 @@
 import { fetchPrefectures, REGIONS } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 
@@ -46,7 +47,7 @@ export default function AreasPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: pref.prefName,
-      url: `${baseUrl}/areas/${pref.prefCode}`,
+      url: `${baseUrl}${hrefFor('area', { areaCode: pref.prefCode })}`,
     })),
   };
 

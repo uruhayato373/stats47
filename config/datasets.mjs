@@ -109,12 +109,14 @@ export const SLOTS = {
 /**
  * REFS の書き方 (台帳どうしの ID 参照。check-datasets が参照先の実在を検査し、無ければ error で止める)
  *
- *   refs: [{ field, to, key?, where?, parse?, copies?, severity?, why? }]
+ *   refs: [{ field, to, key?, where?, unless?, parse?, copies?, severity?, why? }]
  *     field    この台帳のファイルの中の ID の場所。"." 区切りで、`name[]` は配列の各要素、`*` はオブジェクトの各値、
  *              末尾の `$keys` はオブジェクトのキー (例: "posts[].parent_post_id" / "listings.$keys")。値が無い要素は見ない
  *     to       参照先。台帳の id か "registry:<REGISTRIES の名前>" (TS 側の正本)
  *     key      参照先の台帳で ID の並ぶ場所 (field と同じ書き方)。registry には書かない
- *     where    field を持つ要素の兄弟の項目がこの値のときだけ検査する (例: { channel: "kdp" })
+ *     where    field を持つ要素の兄弟の項目がこの値のときだけ検査する (例: { channel: "kdp" })。値を配列にすると
+ *              そのどれか (例: { domain: ["ranking-quiz", "map-carousel"] })
+ *     unless   where と同じ書き方で、合う要素を検査しない (例: { status: ["posted", "deleted"] })
  *     parse    "list" = 値が配列・JSON 配列の文字列・カンマ区切りの文字列のどれでも ID の並びとして読む
  *     copies   参照先の要素の写しとして持つ項目。値が参照先と違えば error (二重の事実のずれを止める)
  *     severity "warn" = 既存データの違反を一覧するだけで止めない。why に理由を書く (書かない参照は error)。
@@ -125,6 +127,7 @@ const d = (id, path, kind, domain, target, description, opts = {}) => ({ id, pat
 /**
  * 参照先にする TS 側の正本。check-datasets は素の node で動くので TS を import せず、本文を正規表現で読む
  * (pattern の 1 番目の括弧が ID。between を書くと、その 2 つの印の間だけを読む)。読んだ件数が 0 なら error。
+ * union: [名前] は他の registry の ID を合わせる (参照先が 2 つの正本のどちらかにあればよいとき。union の入れ子は不可)。
  * 正規表現と TS の値が一致することは packages/product-factory/tests/dataset-registries.test.ts が固定する
  * (読み方がずれると、参照切れの誤検知か照合漏れになる)。
  */
@@ -139,6 +142,24 @@ export const REGISTRIES = {
     description: "商品ファクトリーのテーマパック (ALL_PRODUCTS) と Geo サービス (GEO_SERVICE_OFFER) の ID",
     files: ["packages/product-factory/src/catalog/products/packs.ts", "packages/product-factory/src/channels/geo/service-offer.ts"],
     pattern: "^\\s*id:\\s*[\"'](P-\\d{2}|GEO-[A-Z]+-\\d{2})[\"']",
+  },
+  "ranking-slug-redirects": {
+    description: "公開後に置き換えた旧 ranking slug (RANKING_SLUG_REDIRECTS のキー。現行ページへ 301 する)",
+    files: ["apps/web/src/config/ranking-redirects.ts"],
+    pattern: "^\\s*'([a-z0-9][a-z0-9-]*)':\\s*'",
+  },
+  "ranking-content-keys": {
+    description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
+    union: ["metrics", "ranking-slug-redirects"],
+  },
+  "geo-campaign-metric-names": {
+    description: "Geo 分析キャンペーン (BUSINESS_PLAN_M1_ANALYSES) の metricKeys の文字列リテラル (Geo の集計値の名前)",
+    files: ["packages/data-configs/src/business-plan/m1.ts"],
+    pattern: "^      '([a-z][A-Za-z0-9]*)',$",
+  },
+  "geo-post-metric-keys": {
+    description: "Geo の投稿が指してよい指標 (都道府県の指標と Geo 分析の集計値の名前)",
+    union: ["metrics", "geo-campaign-metric-names"],
   },
   "affiliate-ad-experiment-ids": {
     description: "アフィリエイト広告 (AFFILIATE_ADS) が持つ A/B 実験の ID",
@@ -318,18 +339,26 @@ export const DATASETS = [
     schema: "data/sns/posts.schema.json",
     refs: [
       { field: "posts[].parent_post_id", to: "sns.posts", key: "posts[].id" },
-      // 投稿が使った指標。外部公開物の索引 (data/content/external.json) が指標へ関係を張る入力。
-      // warn にしている理由: 2026-10-26 時点で 92 件 (50 種) が指標の registry に無い。内訳は棒グラフレース (bcr-*)・
-      // SSDS の旧キー (ssdse-*)・Geo 分析の指標名 (floodExposureShare2050 など)・ブログの slug を ranking の domain で
-      // 登録した下書き 1 件 (id=1194)。どれも domain の語彙が「指標を指すか」を区別しないことによる。投稿済みの行は
-      // 外部に出た記録なので書き換えず、domain ごとの参照先 (Geo の指標・ブログ) を決めてから error に上げる。
+      // 投稿が使った指標。外部公開物の索引 (data/content/external.json) が指標へ関係を張る入力。参照先は domain で分ける
+      // (2026-10-27。それまでは全 domain を指標の registry と照合し、Geo の集計値名などで 92 件を warn にしていた)。
+      //   geo         Geo 分析の集計値の名前 (floodExposureShare2050 など) か都道府県の指標
+      //   それ以外     都道府県の指標
+      { field: "posts[].metric_keys", parse: "list", unless: { domain: "geo" }, to: "registry:metrics" },
+      { field: "posts[].metric_keys", parse: "list", where: { domain: "geo" }, to: "registry:geo-post-metric-keys" },
+      // content_key が指標の key そのものである domain (棒グラフレース・クイズ・地図カルーセル)
       {
-        field: "posts[].metric_keys", parse: "list", to: "registry:metrics", severity: "warn",
-        why: "既存の投稿 92 件が棒グラフレース・SSDS 旧キー・Geo 指標名を指す。domain ごとの参照先を決めるまで warn",
+        field: "posts[].content_key", where: { domain: ["bar-chart-race", "ranking-quiz", "ranking-quiz-reel", "map-carousel"] },
+        to: "registry:metrics",
       },
+      // ranking の domain は、これから出す投稿 (draft・scheduled) を現行の指標と照合する
+      { field: "posts[].content_key", where: { domain: "ranking" }, unless: { status: ["posted", "deleted"] }, to: "registry:metrics" },
+      // 外に出た記録 (posted・deleted) は書き換えないので、旧 slug (301 で現行の指標へ届く) も許す。残る warn は参照先の正本が無いもの:
+      // YouTube の棒グラフレース動画の key (bcr-<指標>-<始年>-<終年>。指標は metric_keys 側で照合する) 31 件と、
+      // note の記事 key・YouTube の動画 key を ranking として記録した 2 件 (2026-10-27 時点)
       {
-        field: "posts[].content_key", where: { domain: "ranking" }, to: "registry:metrics", severity: "warn",
-        why: "ranking の domain の行の content_key に棒グラフレース・SSDS 旧キー・ブログ slug が混ざる。domain の語彙を直すまで warn",
+        field: "posts[].content_key", where: { domain: "ranking", status: ["posted", "deleted"] }, to: "registry:ranking-content-keys",
+        severity: "warn",
+        why: "投稿済みの記録は書き換えない。棒グラフレース動画の key など、参照先の正本が無い過去の記録だけが残る",
       },
     ],
   }),

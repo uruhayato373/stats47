@@ -8,6 +8,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@stats47/components/atoms/ui/tabs';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 
@@ -73,9 +74,9 @@ export function AreaSelectionPanels({
   }));
 
   const onMapSelect = (tile: AreaTile) =>
-    track(trackingSurface.map, `/areas/${tile.prefCode}`, tile.prefName);
+    track(trackingSurface.map, hrefFor('area', { areaCode: tile.prefCode }), tile.prefName);
   const onListSelect = (prefCode: string, prefName: string) =>
-    track(trackingSurface.list, `/areas/${prefCode}`, prefName);
+    track(trackingSurface.list, hrefFor('area', { areaCode: prefCode }), prefName);
 
   if (variant === 'embedded') {
     return (

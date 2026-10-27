@@ -56,7 +56,7 @@ export function SurveyTaxonomyCard({
         )}
         <nav aria-label={title} className="flex flex-col gap-0.5">
           {surveys.map((survey) => {
-            const href = `/survey/${survey.id}`;
+            const href = hrefFor("survey", { surveyKey: survey.id });
             return (
               <Link
                 key={survey.id}
@@ -101,7 +101,7 @@ export function SurveyTaxonomyCard({
       )}
       <RailLinkList aria-label={title}>
         {surveys.map((survey) => {
-          const href = `/survey/${survey.id}`;
+          const href = hrefFor("survey", { surveyKey: survey.id });
           return (
             <RailNavRow
               key={survey.id}

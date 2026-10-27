@@ -11,7 +11,10 @@ import { describe, expect, it } from "vitest";
  */
 const PACKAGE_ROOT = path.resolve(__dirname, "../..");
 const CONFIG_PATH = path.join(PACKAGE_ROOT, "tsconfig.json");
-const REGISTRY_SUFFIX = path.join("data-configs", "src", "registry.ts");
+// TypeScript の解決結果は Windows でも "/" 区切りなので、比較は "/" にそろえる
+// (path.join の "\\" と比べると Windows では一致せず、陽性対照が落ち、node_modules も除外できなかった。2026-10-27)
+const toPosix = (file: string) => file.replace(/\\/g, "/");
+const REGISTRY_SUFFIX = "data-configs/src/registry.ts";
 
 function valueImportSpecifiers(file: string): string[] {
   const source = ts.sys.readFile(file) ?? "";
@@ -47,11 +50,11 @@ function pathToRegistry(entry: string): string[] | null {
     const file = queue.shift() as string;
     for (const specifier of valueImportSpecifiers(file)) {
       const resolved = ts.resolveModuleName(specifier, file, parsed.options, host).resolvedModule?.resolvedFileName;
-      if (!resolved || resolved.includes(`${path.sep}node_modules${path.sep}`) || resolved.endsWith(".d.ts")) continue;
+      if (!resolved || toPosix(resolved).includes("/node_modules/") || resolved.endsWith(".d.ts")) continue;
       if (seen.has(resolved)) continue;
       seen.add(resolved);
       parent.set(resolved, file);
-      if (resolved.endsWith(REGISTRY_SUFFIX)) {
+      if (toPosix(resolved).endsWith(REGISTRY_SUFFIX)) {
         const chain = [resolved];
         let cursor = parent.get(resolved);
         while (cursor) { chain.unshift(cursor); cursor = parent.get(cursor); }

@@ -6,6 +6,7 @@ import { useMemo } from "react";
 
 
 import { DataTable, cn } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   rankByValue,
@@ -136,7 +137,7 @@ export function RankingDataTable({
             return (
               <Link
                 {...navSurfaceProps("ranking_table")}
-                href={`/areas/${areaCode}`}
+                href={hrefFor("area", { areaCode })}
                 className="font-medium hover:underline hover:text-primary"
                 prefetch={false}
               >

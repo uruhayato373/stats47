@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-10-26T03:46:04.780Z",
+  "checkedAt": "2026-10-27T00:56:22.256Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
@@ -19,7 +19,7 @@
       "id": "P-01",
       "title": "人口・世帯データパック（47都道府県）",
       "kind": "pack",
-      "catalogStatus": "listed",
+      "catalogStatus": "approved",
       "scope": "人口・面積・世帯・所得を一冊で把握する",
       "free": false,
       "candidate": false,
@@ -3097,7 +3097,7 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-10-26T03:46:04.780Z",
+  "generatedAt": "2026-10-27T00:56:22.256Z",
   "total": 62,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
@@ -3106,7 +3106,7 @@
       "id": "P-01",
       "theme": "population-household",
       "name": "人口・世帯データパック（47都道府県）",
-      "catalogStatus": "listed",
+      "catalogStatus": "approved",
       "buildStatus": "invalid"
     },
     {

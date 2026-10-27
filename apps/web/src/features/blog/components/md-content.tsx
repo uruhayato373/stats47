@@ -11,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@stats47/components";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { ArrowRight, BookOpenText } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -423,7 +424,7 @@ function makeMdComponents(
             return (
                 <div className="my-6 not-prose">
                     <SurfaceLinkCard
-                        href={`/category/${category}`}
+                        href={hrefFor("category", { categoryKey: category })}
                         className="flex items-center justify-between border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
                     >
                         <span>このカテゴリの全ランキングを見る</span>

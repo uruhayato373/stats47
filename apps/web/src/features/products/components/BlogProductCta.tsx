@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { BookOpen, FileSpreadsheet } from "lucide-react";
 
 import { SurfaceSection } from "@/components/surface";
@@ -24,7 +25,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
         （{dataProduct.priceYen.toLocaleString("ja-JP")}円）があります。固定年度のデータで、自動更新はありません。必要な年度・地域粒度・納品形式を購入前に確認してください。
       </p>
       <TrackedProductLink
-        href={`/products/${dataProduct.slug}`}
+        href={hrefFor("product", { slug: dataProduct.slug })}
         label={`${dataProduct.id}:${dataProduct.title}`}
         surface="blog_product"
         className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-primary underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
@@ -53,7 +54,7 @@ export function BlogProductCta({ blogSlug }: { readonly blogSlug: string }) {
     );
   }
 
-  const href = `/products/${product.slug}`;
+  const href = hrefFor("product", { slug: product.slug });
   return (
     <SurfaceSection className="mt-8 border-primary/30 p-5">
       <div className="flex items-start gap-3">
