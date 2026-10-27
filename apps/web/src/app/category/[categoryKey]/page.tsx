@@ -18,11 +18,14 @@ import {
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
 
-import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { RailStack } from '@/components/rail';
-import { SectionHeader } from '@/components/section';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel } from '@/components/surface';
+import {
+  HorizontalCardCarouselControls,
+  HorizontalCardCarouselSection,
+} from '@/components/surface/HorizontalCardCarousel';
 
 import {
   FooterAdSlot,
@@ -289,7 +292,7 @@ export default async function CategoryPage({ params }: PageProps) {
   );
 
   return (
-    <PageShell rightRail={rightRail} className="py-5 lg:py-6">
+    <PageShell rightRail={rightRail}>
       <Breadcrumbs
         items={[
           { label: 'ホーム', href: '/' },
@@ -301,11 +304,14 @@ export default async function CategoryPage({ params }: PageProps) {
         description={`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`}
       />
 
-      <div className="space-y-8">
+      <div className="space-y-4">
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (
-          <section>
-            <SectionHeader title="注目のランキング" />
+          <HorizontalCardCarouselSection>
+            <SectionHeader
+              title="注目のランキング"
+              action={<HorizontalCardCarouselControls />}
+            />
             <HorizontalCardCarousel
               ariaLabel={`${category.categoryName}の注目ランキング`}
             >
@@ -319,21 +325,21 @@ export default async function CategoryPage({ params }: PageProps) {
                 />
               ))}
             </HorizontalCardCarousel>
-          </section>
+          </HorizontalCardCarouselSection>
         )}
 
         {/* Category と Tag の明示対応で絞った関連記事。全体の最新記事は混ぜない。 */}
         {categoryArticles.length > 0 && blogTagKey && (
-          <section>
+          <HorizontalCardCarouselSection>
             <SectionHeader
               title={`${category.categoryName}の新着ブログ`}
               action={
-                <Link
-                  href={hrefFor('tag', { tagKey: blogTagKey })}
-                  className="font-semibold text-primary hover:underline"
-                >
-                  すべての記事 →
-                </Link>
+                <>
+                  <HorizontalCardCarouselControls />
+                  <SectionIndexLink href={hrefFor('tag', { tagKey: blogTagKey })}>
+                    すべての記事
+                  </SectionIndexLink>
+                </>
               }
             />
             <HorizontalCardCarousel
@@ -348,7 +354,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 />
               ))}
             </HorizontalCardCarousel>
-          </section>
+          </HorizontalCardCarouselSection>
         )}
 
         {/* 全件テーブル */}

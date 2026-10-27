@@ -21,16 +21,21 @@ export function ValueDotPlot({
   policy: NumericDomainPolicy;
   formatValue: (value: number) => string;
 }) {
-  const domain = resolveNumericDomain(values, policy);
-  if (!domain) return null;
+  const resolved = resolveNumericDomain(values, policy);
+  if (!resolved) return null;
+  // 全値が非負なら軸を負へ伸ばさない (余白付きの範囲で「-162,605」のような実在しない目盛りが出ていた)
+  const domain: [number, number] = policy.mode !== 'fixed' && values.every((value) => value >= 0)
+    ? [Math.max(0, resolved[0]), resolved[1]]
+    : resolved;
   const position = (value: number) =>
     Math.max(
       0,
       Math.min(100, ((value - domain[0]) / (domain[1] - domain[0])) * 100)
     );
   return (
+    // 行ごとに grid を作ると右端の値の桁数で軸の幅が行ごとにずれる。全行で 1 つの grid を共有する。
     <div
-      className="space-y-2"
+      className="grid grid-cols-[6rem_minmax(0,1fr)_max-content] items-center gap-x-2 gap-y-2 text-xs"
       data-chart="value-dot-plot"
       data-domain-min={domain[0]}
       data-domain-max={domain[1]}
@@ -38,7 +43,7 @@ export function ValueDotPlot({
       {items.map((item) => (
         <div
           key={item.key}
-          className="grid grid-cols-[6rem_minmax(0,1fr)_max-content] items-center gap-2 text-xs"
+          className="contents"
           data-value={item.value}
         >
           <span className="flex items-baseline gap-2">
@@ -75,19 +80,18 @@ export function ValueDotPlot({
           </span>
         </div>
       ))}
-      <div
-        className="grid grid-cols-[6rem_minmax(0,1fr)_max-content] gap-2 text-[11px] text-muted-foreground"
+      {/* 端の目盛りは軸の端に揃える: 左端の値は左寄せ、右端の値は右寄せ */}
+      <span aria-hidden="true" />
+      <span
         aria-hidden="true"
+        className="-mt-1 flex justify-between gap-2 text-xs text-muted-foreground tabular-nums"
       >
-        <span />
-        <span className="flex justify-between gap-2">
-          <span>{formatValue(domain[0])}</span>
-          <span>{formatValue(domain[1])}</span>
-        </span>
-        <span className="invisible">{formatValue(Math.max(...values))}</span>
-      </div>
+        <span>{formatValue(domain[0])}</span>
+        <span>{formatValue(domain[1])}</span>
+      </span>
+      <span aria-hidden="true" />
       {reference !== null && (
-        <p className="text-xs text-muted-foreground">
+        <p className="col-span-3 text-xs text-muted-foreground">
           破線: 単純平均 {formatValue(reference)}
         </p>
       )}

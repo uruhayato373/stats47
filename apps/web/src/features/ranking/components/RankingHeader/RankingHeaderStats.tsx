@@ -74,7 +74,7 @@ export function RankingHeaderStats({
     <div className={cn("@container", className)}>
       <div
         className={cn(
-          "grid grid-cols-1 gap-3",
+          "grid grid-cols-1 gap-4",
           showNationalAverage && "@md:grid-cols-2",
         )}
       >

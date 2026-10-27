@@ -2,11 +2,14 @@
 import { fetchPrefectures } from '@stats47/area';
 import { Metadata } from 'next';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader } from '@/components/layout';
 import { RailStack } from '@/components/rail';
-import { SectionHeader } from '@/components/section';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { HorizontalCardCarousel } from '@/components/surface';
+import {
+  HorizontalCardCarouselControls,
+  HorizontalCardCarouselSection,
+} from '@/components/surface/HorizontalCardCarousel';
 
 import {
   NativeAffiliateRow,
@@ -131,7 +134,7 @@ export default async function HomePage() {
 
   return (
     <div className="w-full">
-      <PageShell rightRail={rightRail} className="py-5 lg:py-6">
+      <PageShell rightRail={rightRail}>
         <PageHeader
           eyebrow="地域のデータアトラス"
           title="日本の地域データを探す"
@@ -140,32 +143,30 @@ export default async function HomePage() {
         />
 
         <div className="space-y-4">
-          <section>
+          <HorizontalCardCarouselSection>
             <SectionHeader
               title="注目のランキング"
               action={
-                <Link
-                  href="/ranking"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  もっと見る →
-                </Link>
+                <>
+                  <HorizontalCardCarouselControls />
+                  <SectionIndexLink href="/ranking">
+                    もっと見る
+                  </SectionIndexLink>
+                </>
               }
             />
             <FeaturedRankings limit={6} showHeader={false} embedded />
-          </section>
+          </HorizontalCardCarouselSection>
 
           {latestArticles.length > 0 && (
-            <section>
+            <HorizontalCardCarouselSection>
               <SectionHeader
                 title="新着ブログ"
                 action={
-                  <Link
-                    href="/blog"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    すべての記事 →
-                  </Link>
+                  <>
+                    <HorizontalCardCarouselControls />
+                    <SectionIndexLink href="/blog">すべての記事</SectionIndexLink>
+                  </>
                 }
               />
               <HorizontalCardCarousel ariaLabel="新着ブログ">
@@ -177,35 +178,26 @@ export default async function HomePage() {
                   />
                 ))}
               </HorizontalCardCarousel>
-            </section>
+            </HorizontalCardCarouselSection>
           )}
 
-          <section>
+          <HorizontalCardCarouselSection>
             <SectionHeader
               title="知りたいことから探す"
               action={
-                <Link
-                  href="/themes"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  すべてのテーマ →
-                </Link>
+                <>
+                  <HorizontalCardCarouselControls />
+                  <SectionIndexLink href="/themes">すべてのテーマ</SectionIndexLink>
+                </>
               }
             />
             <PortalUseCaseGrid />
-          </section>
+          </HorizontalCardCarouselSection>
 
           <section>
             <SectionHeader
               title="都道府県から探す"
-              action={
-                <Link
-                  href="/areas"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  一覧 →
-                </Link>
-              }
+              action={<SectionIndexLink href="/areas" label="都道府県の一覧へ" />}
             />
             <PrefectureNavigator
               prefectures={prefectures}
@@ -218,12 +210,7 @@ export default async function HomePage() {
             <SectionHeader
               title="運営者プロフィール"
               action={
-                <Link
-                  href="/about"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  詳しく見る →
-                </Link>
+                <SectionIndexLink href="/about">詳しく見る</SectionIndexLink>
               }
             />
             <OperatorProfileCard className="overflow-hidden" />

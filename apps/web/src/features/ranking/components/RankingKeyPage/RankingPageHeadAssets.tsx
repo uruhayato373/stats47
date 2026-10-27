@@ -1,11 +1,6 @@
 import { MEDIA_QUERIES } from "@/constants/breakpoints";
 interface RankingPageHeadAssetsProps {
   structuredData: object;
-  /**
-   * 使わない。BreadcrumbList JSON-LD は RankingPageClientShell の Breadcrumbs が出す
-   * (ここでも出すと同じページに 2 つ並ぶ)。呼び出し側の受け渡しを外すまで型だけ残す。
-   */
-  breadcrumbStructuredData?: object;
   faqStructuredData: object | null;
   initialTileUrls: string[];
 }

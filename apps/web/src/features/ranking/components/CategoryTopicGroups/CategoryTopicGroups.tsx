@@ -1,4 +1,10 @@
 
+import {
+  Badge,
+  CardAction,
+  CardHeader,
+  CardTitle,
+} from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
@@ -61,21 +67,21 @@ function TopicRow({ row }: { row: CollapsedRow }) {
 
   return (
     <li className="border-b border-border last:border-b-0">
-      <div className="flex flex-col gap-0.5 px-3 py-2">
+      <div className="flex flex-col gap-0.5 px-4 py-2">
         <div className="flex items-baseline justify-between gap-3">
           {hasVariants ? (
-            <span className="min-w-0 flex-1 truncate text-[13px]">{readerLabel}</span>
+            <span className="min-w-0 flex-1 truncate text-sm">{readerLabel}</span>
           ) : (
             <Link
               {...navSurfaceProps("category_ranking_list")}
               href={hrefFor("ranking", { rankingKey: primary.rankingKey })}
-              className="min-w-0 flex-1 truncate text-[13px] hover:text-primary hover:underline"
+              className="min-w-0 flex-1 truncate text-sm hover:text-primary hover:underline"
             >
               {readerLabel}
             </Link>
           )}
           {primary.top1 ? (
-            <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+            <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
               {primary.top1.areaName}
               {primary.top1.value ? (
                 <>
@@ -98,7 +104,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
                 {...navSurfaceProps("category_ranking_list")}
                 key={variant.rankingKey}
                 href={hrefFor("ranking", { rankingKey: variant.rankingKey })}
-                className="border border-border px-1.5 text-[11px] leading-[18px] text-muted-foreground hover:border-primary hover:text-primary"
+                className="border border-border px-1.5 text-xs leading-5 text-muted-foreground hover:border-primary hover:text-primary"
               >
                 {variant.subtitle ?? "総数"}
               </Link>
@@ -122,13 +128,17 @@ function TopicCard({
   const hidden = rows.slice(VISIBLE_ROWS);
 
   return (
-    <SurfaceCard className="overflow-hidden p-0">
-      <div className="flex items-center gap-2 border-b border-border px-3 py-2">
-        <h3 className="flex-1 text-[13px] font-bold">{label}</h3>
-        <span className="border border-border bg-accent px-1.5 text-[11px] tabular-nums text-accent-foreground">
-          {rows.length}
-        </span>
-      </div>
+    <SurfaceCard className="gap-0 p-0">
+      <CardHeader className="border-b py-3 [.border-b]:pb-3">
+        <CardTitle className="text-sm">
+          <h3>{label}</h3>
+        </CardTitle>
+        <CardAction className="self-center">
+          <Badge variant="secondary" className="tabular-nums">
+            {rows.length}
+          </Badge>
+        </CardAction>
+      </CardHeader>
       <ul>
         {visible.map((row) => (
           <TopicRow key={row.title} row={row} />
@@ -138,7 +148,7 @@ function TopicCard({
         // client JS を足さずに展開する。検索 input は置かない
         // (CategoryRankingListClient の「textbox を出さない」契約と揃える)
         <details className="border-t border-dashed border-border">
-          <summary className="cursor-pointer px-3 py-2 text-[11.5px] text-primary hover:underline">
+          <summary className="cursor-pointer px-4 py-2 text-xs text-primary hover:underline">
             すべて見る（残り {hidden.length} 件）
           </summary>
           <ul className="border-t border-border">
@@ -168,7 +178,7 @@ export function CategoryTopicGroups({ topics, items }: Props) {
   if (cards.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {cards.map((card) => (
         <TopicCard key={card.key} label={card.label} items={card.items} />
       ))}

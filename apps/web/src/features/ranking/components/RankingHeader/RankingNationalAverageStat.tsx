@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
@@ -53,13 +60,19 @@ export function RankingNationalAverageStat({
   const periodChange = computeNationalAveragePeriodChange(series, unit);
 
   return (
-    <SurfaceCard className="flex flex-col gap-1">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <div><p className="text-sm font-medium text-muted-foreground">{label}</p>{yearName && <p className="text-xs text-muted-foreground">{yearName}</p>}</div>
-        <p className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">{formatRankingValue(figure.value, precision)}<span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span></p>
-      </div>
-      {hasTrend ? <NumericTrendChart points={series} policy={domainPolicy} selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined} label={label} unit={unit} formatValue={(value) => formatRankingValue(value, precision)} /> : <p className="mt-2 text-xs text-muted-foreground">{series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}</p>}
-      {periodChange && <p className="text-xs text-muted-foreground">{periodChange.fromYear}→{periodChange.toYear} <span className="font-medium text-foreground">{periodChange.text}</span></p>}
+    <SurfaceCard className="px-0">
+      <CardHeader>
+        <CardTitle>{label}</CardTitle>
+        {yearName && <CardDescription className="text-xs">{yearName}</CardDescription>}
+        <CardAction className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">
+          {formatRankingValue(figure.value, precision)}
+          <span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-1">
+        {hasTrend ? <NumericTrendChart points={series} policy={domainPolicy} selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined} label={label} unit={unit} formatValue={(value) => formatRankingValue(value, precision)} /> : <p className="text-xs text-muted-foreground">{series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}</p>}
+        {periodChange && <p className="text-xs text-muted-foreground">{periodChange.fromYear}→{periodChange.toYear} <span className="font-medium text-foreground">{periodChange.text}</span></p>}
+      </CardContent>
     </SurfaceCard>
   );
 }

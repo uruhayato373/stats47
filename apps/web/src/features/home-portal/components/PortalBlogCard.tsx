@@ -22,8 +22,8 @@ interface PortalBlogCardProps {
 
 /**
  * 「統計を読み解く」の画像付き blog カード。
- * FeaturedRankingCardと同じタイトル階層・余白・右下ビジュアルで表示する。
- * 640×336の文字なしサムネイルは右下へ裁断配置し、タイトルはDOMを正典とする。
+ * FeaturedRankingCardと同じタイトル階層・余白で表示する。
+ * 640×336の文字なしサムネイルはタイトルの下に置き、タイトルはDOMを正典とする。
  * クリックで配置面に対応する nav_click を送る (analytics 失敗で遷移を止めない)。
  */
 export function PortalBlogCard({
@@ -42,20 +42,21 @@ export function PortalBlogCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group relative block overflow-hidden`}
+      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group flex flex-col gap-1 overflow-hidden`}
     >
-      <ThemeAwareImage
-        lightSrc={blogThumbnailUrl(slug, "light")}
-        darkSrc={blogThumbnailUrl(slug, "dark")}
-        alt=""
-        width={640}
-        height={336}
-        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 640px) 50vw, 85vw"
-        className="pointer-events-none absolute -bottom-2 -right-4 h-[77%] w-[74%] object-cover object-[64%_center] mask-[linear-gradient(to_right,transparent_0%,black_24%)] transition-transform duration-200 group-hover:scale-[1.01]"
-      />
-      <p className={`${PORTAL_CARD_TITLE_CLASS} w-[60%]`}>{title}</p>
-      <span className="absolute bottom-3 left-3 z-10 text-[11px] leading-none text-muted-foreground">
-        統計ブログ
+      {/* タイトルは全幅、サムネイルはタイトルの下の残りの高さに置く (文字と図版を重ねない) */}
+      <span className="text-xs leading-none text-muted-foreground">統計ブログ</span>
+      <p className={PORTAL_CARD_TITLE_CLASS} title={title}>{title}</p>
+      <span className="relative mt-1 min-h-0 flex-1 overflow-hidden rounded-sm bg-muted">
+        <ThemeAwareImage
+          lightSrc={blogThumbnailUrl(slug, "light")}
+          darkSrc={blogThumbnailUrl(slug, "dark")}
+          alt=""
+          width={640}
+          height={336}
+          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 640px) 50vw, 85vw"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.01]"
+        />
       </span>
     </SurfaceLinkCard>
   );

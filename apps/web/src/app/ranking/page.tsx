@@ -1,8 +1,8 @@
 /**
  * ランキング一覧（索引ハブ）
  *
- * 全 17 カテゴリ = 全ランキングの網羅ブラウズ入口。**カテゴリ名だけでなく実際の
- * ランキング名を出す**ことで、探している指標がここにあるかをその場で判断できるようにする。
+ * 注目ランキングの入口。カテゴリ別の網羅ブラウズはサイト共通のサイドバー (AppSidebar) の
+ * カテゴリ一覧が持つ (2026-10-28 に本文の「カテゴリ別のランキング」節を撤去。サイドバーと重複していた)。
  *
  * 経緯: 2026-05-28 に旧索引（featured の薄い複製）を `/` へ 301 統合したが、
  * 2026-06-15 にカテゴリ網羅ブラウズのハブとして再設計・再設置した（home とは役割が異なる:
@@ -16,16 +16,14 @@
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
 
-import { hrefFor } from "@stats47/data-configs/content/href";
-import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
-import { metricDisplayName } from "@stats47/ranking";
-import { ChevronRight } from 'lucide-react';
-
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RailStack } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { RailCard, RailNavRow } from '@/components/surface';
+import {
+  HorizontalCardCarouselControls,
+  HorizontalCardCarouselSection,
+} from '@/components/surface/HorizontalCardCarousel';
 
 import { FooterAdSlot } from '@/features/ads';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
@@ -92,76 +90,18 @@ export default function RankingIndexPage() {
       />
 
       <div>
-        <section className="mb-8">
-          <SectionHeader title="注目のランキング" />
+        <HorizontalCardCarouselSection className="mb-4">
+          <SectionHeader
+            title="注目のランキング"
+            action={<HorizontalCardCarouselControls />}
+          />
           <FeaturedRankings
             limit={4}
             showHeader={false}
             embedded
             trackHomeEvents={false}
           />
-        </section>
-
-        {/*
-            記事内広告は置かない。注目ストリップと索引の間しか置き場が無く、そこは
-            ファーストビュー内 (実測 1440x900 で 396px / 390x844 で 620px) で、
-            InContentAdSlot の配置規約「ファーストビュー内には置かない」に反する。
-            比較: /category の記事内枠は 390px 幅で 3108px と fold の遥か下にある。
-            索引ハブ (/ranking /themes /survey /tag /blog) は末尾の Multiplex 1 枠に統一する。
-          */}
-        <section className="mb-12">
-          {/* 件数は h1 直下の stats 行が出しているのでここでは繰り返さない */}
-          <SectionHeader
-            title="カテゴリ別のランキング"
-            description="各カテゴリの代表的なランキングを抜粋しています。"
-          />
-          <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
-            {RANKING_PROMINENCE_CATEGORIES.map((category) => (
-              <div key={category.categoryKey}>
-                <h3 className="mb-1 flex items-baseline gap-2 border-b border-border pb-1">
-                  <Link
-                    href={hrefFor('category', { categoryKey: category.categoryKey })}
-                    className="text-sm font-bold hover:text-primary"
-                  >
-                    {category.categoryName}
-                  </Link>
-                  <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                    {category.count.toLocaleString()} 件
-                  </span>
-                </h3>
-                <ul className="mb-1">
-                  {category.representatives.map((representative) => (
-                    <li
-                      key={representative.rankingKey}
-                      className="truncate text-[13px] leading-6"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="text-muted-foreground"
-                      >
-                        ・
-                      </span>
-                      <Link
-                        href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
-                        className="hover:text-primary hover:underline"
-                      >
-                        {metricDisplayName(representative)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={hrefFor('category', { categoryKey: category.categoryKey })}
-                  className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:underline"
-                >
-                  {category.categoryName}の全 {category.count.toLocaleString()}{' '}
-                  件
-                  <ChevronRight className="size-3" />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
+        </HorizontalCardCarouselSection>
 
         {/*
             フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと

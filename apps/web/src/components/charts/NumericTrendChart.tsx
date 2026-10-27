@@ -1,4 +1,6 @@
-import { useId } from 'react';
+'use client';
+
+import { useEffect, useId, useState } from 'react';
 
 import { resolveNumericDomain, type NumericDomainPolicy } from '@stats47/types';
 import { formatValueWithPrecision } from '@stats47/utils';
@@ -6,6 +8,29 @@ import { scaleLinear } from 'd3-scale';
 import { line } from 'd3-shape';
 
 import type { ChartPoint } from './MiniCharts';
+
+/** 実幅を測る前 (SSR・初回描画) に使う幅。測ったあとは実幅に置き換える。 */
+const FALLBACK_WIDTH = 400;
+
+/**
+ * 描画先の実幅 (px) を ResizeObserver で測る。viewBox を実幅に合わせ、
+ * 目盛りの文字が枠の幅で拡大・縮小されないようにする。
+ */
+function useMeasuredWidth<T extends Element>() {
+  // callback ref で要素を受け取る。データ不足で一度 null を返したあとに描画されても測り始められる。
+  const [element, setElement] = useState<T | null>(null);
+  const [width, setWidth] = useState(FALLBACK_WIDTH);
+  useEffect(() => {
+    if (!element || typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = Math.round(entry.contentRect.width);
+      if (next > 0) setWidth(next);
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [element]);
+  return [setElement, width] as const;
+}
 
 /** A labeled value axis and calendar spacing, with the current observation highlighted. */
 export function NumericTrendChart({
@@ -24,6 +49,7 @@ export function NumericTrendChart({
   formatValue: (value: number) => string;
 }) {
   const clipId = useId().replaceAll(':', '');
+  const [svgRef, width] = useMeasuredWidth<SVGSVGElement>();
   const data = points
     .filter(
       (point) => Number.isFinite(point.year)
@@ -34,8 +60,7 @@ export function NumericTrendChart({
     policy
   );
   if (!domain || data.length < 2) return null;
-  const width = 400,
-    height = 128,
+  const height = 128,
     right = 16,
     top = 12,
     bottom = 24;
@@ -71,6 +96,7 @@ export function NumericTrendChart({
     y(Math.max(domain[0], Math.min(domain[1], value)));
   return (
     <svg
+      ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       className="h-32 w-full"
       role="img"

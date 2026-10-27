@@ -73,6 +73,14 @@ describe('category page featured ranking cards', () => {
     expect(mappedCategoryKeys).toEqual(categoryKeys);
   });
 
+  it('本文の余白は main の p-4 だけに任せ、見出しの操作は共通部品で描く', () => {
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}>');
+    expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
+    expect(PAGE).not.toMatch(/(もっと見る|すべての記事) →/);
+    expect(PAGE).toContain('<SectionIndexLink');
+    expect(PAGE.match(/<HorizontalCardCarouselControls \/>/g)).toHaveLength(2);
+  });
+
   it('全件readから派生値と地図を作り、1位batchを重複取得しない', () => {
     expect(PAGE).toContain('values: valuesResult.data');
     expect(PAGE).not.toContain('readTopRankingValuesBatchFromR2');

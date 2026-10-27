@@ -40,12 +40,11 @@ export function PortalNavCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group relative block overflow-hidden`}
+      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group flex flex-col overflow-hidden`}
     >
-      <span className="relative z-10 block w-[60%] min-w-0">
-        <span className={PORTAL_CARD_TITLE_CLASS}>
-          {label}
-        </span>
+      {/* 文字は全幅、イラストは残りの高さの右下に置く。文字とイラストの領域を分けて重ねない。 */}
+      <span className="block min-w-0">
+        <span className={`${PORTAL_CARD_TITLE_CLASS} block`}>{label}</span>
         {description && (
           <span className={`${PORTAL_CARD_DESCRIPTION_CLASS} mt-1 block`}>
             {description}
@@ -54,7 +53,7 @@ export function PortalNavCard({
       </span>
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-1 right-1 h-[70%] w-[48%]"
+        className="pointer-events-none relative mt-1 min-h-0 flex-1"
       >
         <Image
           src={imageSrc}

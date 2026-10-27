@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from "vitest";
 import { invalidDatasetDescriptions } from '@/lib/structured-data/dataset';
 
 import {
-    generateRankingBreadcrumbStructuredData,
     generateRankingFAQStructuredData,
     generateRankingPageStructuredData,
     generateRankingTopPageStructuredData,
@@ -205,34 +204,6 @@ describe("年ラベル (暦年の指標を「年度」と書かない)", () => {
             selectedYear: "2021",
         }) as JsonLd;
         expect(page.name).toBe("商業年間商品販売額 2021年度");
-    });
-});
-
-describe("generateRankingBreadcrumbStructuredData", () => {
-    it("category 指定なしでは 3 階層 (ホーム > ランキング > 名前)", () => {
-        const result = generateRankingBreadcrumbStructuredData({
-            rankingItem: mockItem as RankingItem,
-        }) as JsonLd;
-
-        const items = result.itemListElement as JsonLd[];
-        expect(items).toHaveLength(3);
-        expect(items[0].name).toBe("ホーム");
-        expect(items[1].name).toBe("ランキング");
-        expect(items[2].name).toBe("商業年間商品販売額");
-    });
-
-    it("category 指定ありで 4 階層 (ホーム > ランキング > カテゴリ > 名前)", () => {
-        const result = generateRankingBreadcrumbStructuredData({
-            rankingItem: mockItem as RankingItem,
-            category: { key: "economy", name: "経済" },
-        }) as JsonLd;
-
-        const items = result.itemListElement as JsonLd[];
-        expect(items).toHaveLength(4);
-        expect(items[2].name).toBe("経済");
-        expect(items[2].item).toBe("https://test.stats47.jp/category/economy");
-        expect(items[3].name).toBe("商業年間商品販売額");
-        expect(items[3].position).toBe(4);
     });
 });
 

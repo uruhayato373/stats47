@@ -7,6 +7,7 @@ import {
   SidebarMenuSubButton,
 } from '@stats47/components/atoms/ui/sidebar';
 import { hrefFor } from '@stats47/data-configs/content/href';
+import { ChevronRight } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 
@@ -53,6 +54,14 @@ function track(label: string, href: string, surface: NavSurface) {
   }
 }
 
+/** 行末の矢印。RailLinksCard の行 (RailNavRow) と同じ「押せる行」の印 */
+const rowChevron = (
+  <ChevronRight
+    aria-hidden="true"
+    className="shrink-0"
+  />
+);
+
 /**
  * 行の class。テンプレートの SidebarMenuSubButton (h-7) に、モバイル 44px のタップ領域と
  * 現在地の強調 (bg-accent font-semibold text-primary) を足す。
@@ -89,7 +98,8 @@ export function RailCategoryList({
 }: RailCategoryListProps) {
   return (
     <nav aria-label="カテゴリから探す" className={cn('px-2 py-1', className)}>
-      <SidebarMenu>
+      {/* 行は区切り線 + 右端の ChevronRight。RailLinksCard の list 行と同じ作り */}
+      <SidebarMenu className="divide-y divide-border">
         {items.map((category) => {
           const href = hrefFor('category', { categoryKey: category.categoryKey });
           const count =
@@ -115,6 +125,7 @@ export function RailCategoryList({
                     <span className="sr-only">のランキング</span>
                   </span>
                 )}
+                {rowChevron}
               </SidebarMenuSubButton>
             </SidebarMenuItem>
           );
@@ -132,7 +143,8 @@ export function RailCategoryList({
               }
               render={<Link href={moreLink.href} />}
             >
-              <span>{moreLink.label}</span>
+              <span className="min-w-0 flex-1 truncate">{moreLink.label}</span>
+              {rowChevron}
             </SidebarMenuSubButton>
           </SidebarMenuItem>
         )}

@@ -52,7 +52,7 @@ describe('RailLinksCard', () => {
   });
 
   it('長いモバイル導線はカード単位で折りたためる', () => {
-    const { container } = render(
+    render(
       <RailLinksCard
         title="カテゴリから探す"
         items={ITEMS}
@@ -64,7 +64,9 @@ describe('RailLinksCard', () => {
     expect(
       screen.getByRole('region', { name: 'カテゴリから探す' })
     ).toBeInTheDocument();
-    expect(container.querySelector('details')).not.toHaveAttribute('open');
+    expect(
+      screen.getByRole('button', { name: 'カテゴリから探す' })
+    ).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('順位リンクに任意のサムネイルを表示できる', () => {

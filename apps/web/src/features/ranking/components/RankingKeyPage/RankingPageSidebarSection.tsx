@@ -87,7 +87,8 @@ export function RankingPageSidebarSection({
 
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      <div className="hidden lg:block">
+      {/* 本文の order-5 枠 (@min-[988px]/shell:hidden) と同じシェル幅基準で出し分け、二重に出さない。 */}
+      <div className="hidden @min-[988px]/shell:block">
         <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
       </div>
       {areaType === "prefecture" && (

@@ -226,7 +226,7 @@ export function RankingKeyPageClient({
                     <RankingHeaderPanel title={displayInfo.title} />
                 </div>
 
-                <div className="order-2 flex flex-col gap-3">
+                <div className="order-2 flex flex-col gap-4">
                     <RankingHeaderControls
                         normalizationOptions={rankingItem.calculation?.normalizationOptions}
                         normalizationValue={normalizationType ?? "original"}

@@ -68,7 +68,7 @@ interface Props {
   onPrefectureClick?: (code: string | null) => void;
   /** CardHeader右側に表示するアクション要素 */
   headerActions?: React.ReactNode;
-  /** カードタイトル（省略時: コロプレスマップ） */
+  /** カードタイトル（省略時は見出しなし） */
   cardTitle?: string;
   /** カードサブタイトル（出典等） */
   cardSubtitle?: string;
@@ -172,7 +172,9 @@ export function RankingMapChartClient({
       action={headerActions}
       footer={cardFooter}
     >
-      <div className="relative w-full overflow-hidden rounded-md">
+      {/* Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
+          固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。 */}
+      <div className="relative isolate z-0 w-full overflow-hidden rounded-md">
         {isMapLoading ? (
           <Skeleton className="h-[500px] w-full rounded-md" />
         ) : showFallback ? (

@@ -13,7 +13,11 @@ interface Props {
   frame?: 'card' | 'inline';
 }
 
-/** 関係の表示を既存のRailLinksCardへ渡す。カードの枠・クリック計測は共通部品が持つ。 */
+/**
+ * 関係の表示を既存のRailLinksCardへ渡す。カードの枠・クリック計測は共通部品が持つ。
+ * 全項目が同じ関係 (reason) なら、各行の補助ラベルは見出しの繰り返しにしかならないので出さない
+ * (例: 見出し「このランキングを読み解く」の各行に「このデータを読み解く記事」が並んでいた)。
+ */
 export function ContentNavigation({
   title,
   items,
@@ -22,6 +26,7 @@ export function ContentNavigation({
   frame = 'card',
 }: Props) {
   if (!items.length) return null;
+  const showReason = new Set(items.map((item) => item.reason)).size > 1;
   return (
     <RailLinksCard
       title={title}
@@ -35,7 +40,7 @@ export function ContentNavigation({
         trackingLabel: item.id,
         href: item.href,
         label: item.title,
-        description: item.reason,
+        description: showReason ? item.reason : undefined,
         ...(item.kind === 'blog'
           ? {
               thumbnail: {

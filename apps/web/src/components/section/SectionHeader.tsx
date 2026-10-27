@@ -7,11 +7,16 @@ interface SectionHeaderProps {
   number?: string;
   /** eyebrow（小ラベル・大文字）。省略時は見出しのみ */
   eyebrow?: ReactNode;
+  /** 見出しの左に置くアイコン (lucide。size-4 text-muted-foreground に揃える) */
+  icon?: ReactNode;
   /** セクション見出し（既定 h2） */
   title: ReactNode;
   /** 見出し下の 1 行説明 */
   description?: ReactNode;
-  /** 右端のアクション（"すべて見る ›" 等）。見出しと同じ行に右寄せ */
+  /**
+   * 右端の操作。見出しと同じ行の中央に揃える。
+   * 一覧への導線は SectionIndexLink (Button outline sm + ArrowRight) を使い、文字の矢印 (→) を書かない。
+   */
   action?: ReactNode;
   /** 見出しの HTML タグ（既定 "h2"）。階層上 h3 にしたい場合に指定 */
   as?: "h2" | "h3";
@@ -24,7 +29,8 @@ interface SectionHeaderProps {
 /**
  * セクション見出し（サイト全ページ共通）。
  *
- * テンプレートの CardHeader と同じ並び (見出し + 説明を左、アクションを右上) を、カードの外で使う。
+ * テンプレートの CardHeader と同じ並び (アイコン + 見出し + 説明を左、操作を右) を、カードの外で使う。
+ * 見出しは text-base font-semibold に統一する (home / ranking / category / city / area / theme で共通)。
  * eyebrow（任意・番号付き）→ 見出し → description（任意）→ 区切り線 (テンプレートの Separator)。
  * 独自の border / padding は持たない。
  *
@@ -36,6 +42,7 @@ interface SectionHeaderProps {
 export function SectionHeader({
   number,
   eyebrow,
+  icon,
   title,
   description,
   action,
@@ -45,24 +52,29 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={cn("mb-4 flex flex-col gap-2", className)}>
-      <div className="grid auto-rows-min grid-cols-[1fr_auto] items-start gap-x-3 gap-y-1">
-        <div className="min-w-0">
+      <div className="flex items-center gap-3">
+        <div className="min-w-0 flex-1">
           {eyebrow && (
             <p className="text-xs font-medium text-muted-foreground">
               {eyebrow}
             </p>
           )}
-          <Heading className="text-base font-medium leading-snug text-foreground">
-            {number && (
-              <span className="mr-2 font-mono text-primary">{number}</span>
-            )}
-            {title}
+          <Heading className="flex items-center gap-2 text-base font-semibold leading-snug text-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground">
+            {icon}
+            <span className="min-w-0">
+              {number && (
+                <span className="mr-2 font-mono text-primary">{number}</span>
+              )}
+              {title}
+            </span>
           </Heading>
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
         </div>
-        {action && <div className="self-start text-xs">{action}</div>}
+        {action && (
+          <div className="flex shrink-0 items-center gap-2">{action}</div>
+        )}
       </div>
       {!hideRule && <Separator />}
     </div>

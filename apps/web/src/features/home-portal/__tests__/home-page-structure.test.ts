@@ -19,6 +19,13 @@ const FEATURED_GRID = readFileSync(
   ),
   'utf8'
 );
+const FEATURED_RANKINGS = readFileSync(
+  path.resolve(
+    process.cwd(),
+    'src/features/ranking/components/FeaturedRankings/index.tsx'
+  ),
+  'utf8'
+);
 const SURFACE_CARD = readFileSync(
   path.resolve(process.cwd(), 'src/components/surface/SurfaceCard.tsx'),
   'utf8'
@@ -45,6 +52,22 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('SHELL_WIDTH_CLASS');
     // oversized display 見出し (home hero の h1) が無い
     expect(PAGE).not.toMatch(/text-4xl|text-5xl/);
+  });
+
+  it('本文の余白は main の p-4 だけに任せ、PageShell や注目ランキングで二重に足さない', () => {
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}>');
+    expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
+    expect(FEATURED_RANKINGS).not.toContain('SHELL_WIDTH_CLASS');
+  });
+
+  it('見出しの右端は文字の矢印ではなく共通の SectionIndexLink とカルーセルの矢印を置く', () => {
+    expect(PAGE).not.toContain('→');
+    expect(FEATURED_RANKINGS).not.toContain('&rarr;');
+    expect(PAGE).toContain('<SectionIndexLink href="/ranking">');
+    expect(PAGE.match(/<HorizontalCardCarouselControls \/>/g)).toHaveLength(3);
+    // 矢印の操作だけの行をカード列の上に作らない
+    expect(CARD_CAROUSEL).not.toContain('mb-2 justify-end');
+    expect(CARD_CAROUSEL).not.toContain('from-background');
   });
 
   it('PageHeader (単一 h1) から始まり、重複する本文検索を置かない', () => {

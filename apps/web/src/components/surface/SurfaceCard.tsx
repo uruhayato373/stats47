@@ -9,6 +9,9 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
   cn,
 } from "@stats47/components";
 import { ChevronDown, ChevronRight } from "lucide-react";
@@ -166,19 +169,29 @@ export function ArticleCard({
 interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title"> {
   variant: "rail" | "section";
   title?: ReactNode;
+  /** 見出しの左に置くアイコン (lucide)。大きさと色はここで size-4 / muted に揃える */
   icon?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
   headerAction?: ReactNode;
   bodyClassName?: string;
   titleClassName?: string;
   /**
-   * details/summary で本文を折りたたむ (狭幅で本文下へ積まれるレール用)。
-   * 見出しが summary になり、折りたたみ時の見た目も左右レールで共通になる。
+   * 本文を折りたたむ (狭幅で本文下へ積まれるレール用)。テンプレートの Collapsible (Base UI) で描き、
+   * 閉じているときは見出し行の高さだけになる。本文は DOM に残す (keepMounted。リンクをクロールさせるため)。
    */
   collapsible?: boolean;
   /** collapsible のときの初期状態 (既定: 閉) */
   defaultOpen?: boolean;
 }
+
+/**
+ * 見出し下〜本文 1 行目の間隔。見出しの下罫線の下に 12px を置く。
+ * レールの行 (py-1.5) は自分で上下 6px を持つので、本文の上は 6px にして合計 12px に揃える。
+ */
+const BODY_TOP_CLASS = {
+  rail: "pt-1.5",
+  section: "pt-3",
+} as const;
 
 function HeaderedSurfaceCard({
   variant,
@@ -193,51 +206,73 @@ function HeaderedSurfaceCard({
   defaultOpen = false,
   ...props
 }: HeaderedSurfaceCardProps) {
-  const heading = title ? (
-    <h3
-      className={cn(
-        variant === "rail" && "truncate text-muted-foreground",
-        titleClassName,
-      )}
+  const hasHeader = Boolean(title || icon || headerAction || collapsible);
+  const hasBody = children !== undefined && children !== null && children !== false;
+  const iconSlot = icon ? (
+    <span
+      aria-hidden="true"
+      className="flex shrink-0 text-muted-foreground [&_svg]:size-4"
     >
-      {title}
-    </h3>
-  ) : null;
-  const titleRow = (
-    <CardTitle className="flex min-w-0 items-center gap-2">
       {icon}
-      {heading}
-    </CardTitle>
+    </span>
+  ) : null;
+  const headingClassName = cn(
+    "min-w-0 font-medium text-foreground",
+    variant === "rail" && "truncate",
+    titleClassName,
   );
-  const body = <CardContent className={bodyClassName}>{children}</CardContent>;
+  const body = hasBody ? (
+    <CardContent className={cn(hasHeader && BODY_TOP_CLASS[variant], bodyClassName)}>
+      {children}
+    </CardContent>
+  ) : null;
 
   if (collapsible) {
     return (
-      <CardSection className={className} {...props}>
-        <details className="group space-y-4" open={defaultOpen || undefined}>
-          <summary className="cursor-pointer list-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
-            <CardHeader>
-              {titleRow}
-              <CardAction>
-                <ChevronDown
-                  aria-hidden="true"
-                  className="size-4 text-muted-foreground transition-transform group-open:rotate-180"
-                />
-              </CardAction>
-            </CardHeader>
-          </summary>
-          {body}
-        </details>
-      </CardSection>
+      <Collapsible
+        defaultOpen={defaultOpen}
+        render={<section />}
+        data-slot="card"
+        data-size="default"
+        className={cn(CARD_SECTION_CLASS, CARD_SURFACE_CLASS, "group/collapsible gap-0", className)}
+        {...props}
+      >
+        <CardHeader className="relative has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-ring">
+          <CardTitle className="flex min-w-0 items-center gap-2">
+            {iconSlot}
+            <h3 className={headingClassName}>
+              {/* 見出しの中にボタンを置く (見出しの役割を保つ)。after で見出し行全体を押せるようにする */}
+              <CollapsibleTrigger className="text-left outline-hidden after:absolute after:inset-0 after:content-['']">
+                {title}
+              </CollapsibleTrigger>
+            </h3>
+          </CardTitle>
+          <CardAction className="relative flex items-center gap-2 self-center">
+            {headerAction && <span className="relative z-10">{headerAction}</span>}
+            <ChevronDown
+              aria-hidden="true"
+              className="pointer-events-none size-4 text-muted-foreground transition-transform group-data-open/collapsible:rotate-180"
+            />
+          </CardAction>
+        </CardHeader>
+        {body && (
+          <CollapsibleContent keepMounted className="mt-3 border-t">
+            {body}
+          </CollapsibleContent>
+        )}
+      </Collapsible>
     );
   }
 
   return (
-    <CardSection className={className} {...props}>
-      {(title || icon || headerAction) && (
-        <CardHeader className="border-b">
-          {titleRow}
-          {headerAction && <CardAction>{headerAction}</CardAction>}
+    <CardSection className={cn(hasHeader && hasBody && "gap-0", className)} {...props}>
+      {hasHeader && (
+        <CardHeader className={cn(hasBody && "border-b [.border-b]:pb-3")}>
+          <CardTitle className="flex min-w-0 items-center gap-2">
+            {iconSlot}
+            {title && <h3 className={headingClassName}>{title}</h3>}
+          </CardTitle>
+          {headerAction && <CardAction className="self-center">{headerAction}</CardAction>}
         </CardHeader>
       )}
       {body}
@@ -248,7 +283,7 @@ function HeaderedSurfaceCard({
 interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title"> {
   title?: ReactNode;
   icon?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
   headerAction?: ReactNode;
   bodyClassName?: string;
   titleClassName?: string;
@@ -258,7 +293,8 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
 
 /**
  * レール内の独立したまとまり 1 つ = RailCard 1 枚 (左右レール共通の Surface 契約)。
- * Card + CardHeader (border-b) + CardTitle (h3) + CardAction + CardContent で組む。
+ * Card + CardHeader (border-b) + CardTitle (アイコン + h3) + CardAction + CardContent で組む。
+ * 見出しは左右レール・本文カードとも text-foreground font-medium。本文が空なら CardContent を描かない。
  * レール側で独自の枠・背景・padding を足さない。
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */
@@ -268,7 +304,7 @@ export function RailCard(props: RailCardProps) {
 
 /**
  * 見出し付きコンテンツカード（本文中の非チャートカード）。RailCard と同じ Card の組み立てで、
- * 見出しの色だけが違う (rail は muted、section は foreground)。
+ * 違いは見出しの省略 (rail は 1 行で truncate) と本文上の余白だけ。
  */
 export function SectionCard(props: RailCardProps) {
   return <HeaderedSurfaceCard variant="section" {...props} />;
