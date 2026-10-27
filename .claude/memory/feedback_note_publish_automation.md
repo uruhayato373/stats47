@@ -6,6 +6,13 @@ originSessionId: 931dd251-e8f5-4988-a5c5-a6306131c5ff
 ---
 2026-04-25 実証で確定した最終形（旧 per-segment 方式は破棄）:
 
+## 既存記事の目次と未公開下書きを分けて保存する（2026-10-27）
+
+- **問題**: カード更新時、公開版は目次なし・未公開下書きは目次ありの1記事で、公開目次が下書き側の設定に変わり、検証例外で下書き復元前に停止した。
+- **原因**: GETの`index`は生成済み見出し配列、保存時はboolean。`Boolean([])`はtrueになる。エディタは下書きの設定で開くため、本文だけを差し替えても公開設定を守れない。
+- **対策**: `indexEnabled`で配列の長さから表示有無を読み、送信直前に公開版の値を固定する。既存下書きは本文・題名・境界・目次を復元照合し、公開メタ情報の例外でも下書き復元を先に行う。送信状態が未確定なら再送せず原本と公開本文SHAを比較する。
+- **証拠**: `data/note/evidence/note-card-draft-preservation-recovery.json`。1件の元データをprivate R2へSHA付き保全し、公開設定・下書き・画像13カードを再照合した。回帰検査は`product-cards.test.mjs`。
+
 ## ClipboardEvent paste は同一エディタで 1 回しか機能しない
 
 - 2 回目以降の eval は `result: None` で失敗（contenteditable がフォーカス失う or DataTransfer が動かない）

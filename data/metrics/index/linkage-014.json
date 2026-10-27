@@ -9900,6 +9900,14 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:automotive-industry-transformation-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-aichi-dominance",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:manufacturing-labor-productivity-pref",
           "kind": "blog"
         },
@@ -10997,6 +11005,10 @@
         {
           "pageId": "area:47000",
           "kind": "area"
+        },
+        {
+          "pageId": "blog:automotive-industry-transformation-map",
+          "kind": "blog"
         },
         {
           "pageId": "blog:industrial-water-manufacturing-nexus",

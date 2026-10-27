@@ -1,0 +1,16 @@
+{
+  "key": "n144d350fc14e",
+  "verifiedAt": "2026-10-27T03:19:06.383Z",
+  "originalBackup": {
+    "key": "media/note-card-repairs/originals/46b518dd0577bc8784536c9495613d3a90c3f048d1b634beafba7ac3038d8796.json",
+    "sha256": "46b518dd0577bc8784536c9495613d3a90c3f048d1b634beafba7ac3038d8796",
+    "bucket": "private"
+  },
+  "publishedBodySha256": "4230663c62d85fbd8d9eb2f3df20bf39453a26c9ea36729c0db91abfa96bf4b5",
+  "draftBodySha256": "f3b5f4884198ff2231406eda5dfb100acfaf75bc20f12bb48e4fc559fd241f4c",
+  "publishedIndexPreserved": true,
+  "draftIndexPreserved": true,
+  "pricePreserved": true,
+  "separatorPreserved": true,
+  "registeredCards": 13
+}

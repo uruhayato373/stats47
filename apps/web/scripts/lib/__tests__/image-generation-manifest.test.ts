@@ -289,9 +289,11 @@ describe('image generation fingerprint', () => {
     expect(
       publishedBlogSlugsFromIndex({
         articles: [
-          { slug: 'published-b', published: true },
+          { slug: 'published-b', published: true, publishedAt: '2026-10-01' },
           { slug: 'draft-a', published: false },
-          { slug: 'published-a', published: true },
+          { slug: 'published-a', published: true, publishedAt: '2026-10-01' },
+          { slug: 'missing-publication-date', published: true, publishedAt: null },
+          { slug: 'blank-publication-date', published: true, publishedAt: ' ' },
         ],
       })
     ).toEqual(['published-a', 'published-b']);

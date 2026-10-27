@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createCardImageRefresh } from '../lib/card-image-refresh.mjs';
+import { createHash } from 'node:crypto';
+import sharp from 'sharp';
+import { createCardImageRefresh, imageRefreshAlreadyApplied } from '../lib/card-image-refresh.mjs';
 import { cardEntries, registerMissingCards } from '../lib/native-cards.mjs';
 
 const magazine='https://note.com/stats47/m/mabc';
@@ -18,6 +20,14 @@ const figure=(url,service='external-article')=>`<figure id="boundary" data-src="
 test('metadata must be verified before card publication',()=>{
   assert.throws(()=>createCardImageRefresh({...rollout,siteMetadataVerification:null}),/Verify deployed/);
   assert.throws(()=>createCardImageRefresh({...rollout,siteMetadataVerification:{...rollout.siteMetadataVerification,failed:1}}),/Verify deployed/);
+});
+
+test('a saved publication resumes verification after an unrelated target changes the rollout revision', () => {
+  const body='<p>already published</p>', prior={stage:'published',expectedBody:body,imageRevision:'old'};
+  assert.equal(imageRefreshAlreadyApplied(prior,'new',body,body),true);
+  assert.equal(imageRefreshAlreadyApplied(prior,'new',body,body+' changed target URL'),false);
+  assert.equal(imageRefreshAlreadyApplied({...prior,stage:'sending'},'old',body,body),false);
+  assert.equal(imageRefreshAlreadyApplied({...prior,expectedBody:'different body'},'old',body,body),false);
 });
 test('versioning preserves authored text, boundary, destination, tracking and fragment',()=>{
   const url=site+'?utm_source=note&utm_campaign=sunshine#results';
@@ -48,5 +58,35 @@ test('shared site pages can use only a known verified image',()=>{
 test('stale native metadata is rejected before accepting a registration',async()=>{
   const saved=[];const page={evaluate:async()=>({key:'embNew',...native('https://assets.st-note.com/old.png')})};
   await assert.rejects(registerMissingCards(page,'nf962c6702b93',figure(magazine),[],row=>saved.push(row),(entry,card)=>refresh.assertFresh(entry,card.url)),/stale/);
+  assert.equal(saved.length,0);
+});
+
+test('persisted note CDN copies are checked against the adopted image pixels', async () => {
+  const source = await sharp({create:{width:320,height:168,channels:3,background:'#243456'}}).png().toBuffer();
+  const delivered = await sharp(source).jpeg({quality:85}).toBuffer();
+  const sha256 = createHash('sha256').update(source).digest('hex');
+  const proxy = 'https://assets.st-note.com/production/uploads/ext/current.jpeg?x-type=ogp';
+  const current = createCardImageRefresh({...rollout,entries:[{kind:'site',pageUrl:site,status:'published',sitePublication:{url:image,sha256}}]}, {fetchImage:async url=>url===proxy?delivered:source});
+  const proof = await current.verifyFresh(native(proxy), site);
+  assert.equal(proof.expectedImageUrl,image+'?v=20261026-pop');
+  assert.ok(proof.meanDifference<=3);
+});
+
+test('a proxy URL with an old image cannot pass as a fresh card', async () => {
+  const source = await sharp({create:{width:320,height:168,channels:3,background:'#243456'}}).png().toBuffer();
+  const old = await sharp({create:{width:320,height:168,channels:3,background:'#eeddbb'}}).png().toBuffer();
+  const sha256 = createHash('sha256').update(source).digest('hex');
+  const proxy = 'https://assets.st-note.com/production/uploads/ext/old.png';
+  const current = createCardImageRefresh({...rollout,entries:[{kind:'site',pageUrl:site,status:'published',sitePublication:{url:image,sha256}}]}, {fetchImage:async url=>url===proxy?old:source});
+  await assert.rejects(current.verifyFresh(native(proxy),site),/differs/);
+});
+
+test('a correct direct URL with stale CDN bytes is rejected before a card can be accepted', async () => {
+  const source = Buffer.from('adopted image'), stale = Buffer.from('old CDN image');
+  const sha256 = createHash('sha256').update(source).digest('hex');
+  const current = createCardImageRefresh({...rollout,entries:[{kind:'site',pageUrl:site,status:'published',sitePublication:{url:image,sha256}}]}, {fetchImage:async()=>stale});
+  const saved=[];
+  const page={evaluate:async()=>({key:'embNew',...native(image+'?v=20261026-pop')})};
+  await assert.rejects(registerMissingCards(page,'nf962c6702b93',figure(site),[],row=>saved.push(row),(entry,card)=>current.verifyFresh(entry,card.url)),/source image bytes changed/);
   assert.equal(saved.length,0);
 });

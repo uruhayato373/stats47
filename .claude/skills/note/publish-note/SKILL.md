@@ -266,8 +266,10 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - 商品対応は `magazines.json` の `paidProductId` → product-factory の note mapping → 公開済み有料記事で解決する。旧ココナラページや手書きURLへ戻さない。
 - 空白カードと旧商品カードは `npm run note:cards:repair-native -- --slug <key> --commit` で修復する。全件は `--all --commit`。既定は変更しない検査で、日照時間→記録済みPV順に処理する。
 - 新規公開・本文更新の後も同じ記事単位の修復コマンドを実行する。本番検証済みの画像台帳がある場合、通常修復でも所有する外部カードへ画像版`s47_ogp`を適用し、noteが返した画像を採用版と照合する。未配信の画像版は適用しない。同じURLの埋め込みキー再登録だけでは旧OGPが残るため、匿名表示の検査まで通して完了とする。
+- 保存後に外部画像が`assets.st-note.com/production/uploads/ext/`へ置き換わった場合は、元画像のSHAと配信画像の画素を`card-image-refresh.mjs`で照合する。マガジンは検証済み原本と、OGPで指定された縮小JPEGを区別する。URL変更だけで失敗扱いにせず、旧画像を許容するために照合条件を緩めない。保存済みのjournalは画像照合から再開し、未確定の公開要求を再送しない。
 - `lib/native-cards.mjs` がnote標準の埋め込み登録を行う。HTML内のURL・figure・独自キーだけでは成功としない。公開後は対応キーの登録と匿名ブラウザの表示を検査する。
 - 既存下書きは公開本文と別にバックアップし、公開済み本文だけを修正した後に復元・一致照合する。応答不明はjournalと公開本文のSHAを照合し、再送しない。
+- noteの取得APIの`index`は見出し配列、保存APIの`index`は表示有無のbooleanである。空配列を`Boolean([])`でtrueにしない。`publish-card-body.mjs`で公開版の表示有無を送信前に固定し、下書き復元後は本文・題名・境界・目次配列まで照合する。回遊更新で下書きの目次が公開版と異なる場合は停止する。
 
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 

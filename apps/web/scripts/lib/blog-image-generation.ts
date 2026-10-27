@@ -5,6 +5,7 @@ import { dirname, resolve, sep } from 'node:path';
 import type { OgpVisualType } from '@stats47/types';
 
 import { BLOG_IMAGE_GENERATOR_SPEC } from '../data/image-generator-registry';
+import { BLOG_LINK_CARD_COPY } from '../data/blog-link-card-copy';
 import {
   buildImageGenerationManifest,
   createImageGenerationPlan,
@@ -19,6 +20,14 @@ export const BLOG_IMAGE_PUBLISH_PLAN =
 export interface BlogImageData {
   title: string;
   subtitle: string | null;
+}
+
+/** Copy is a per-article plan input; unrelated articles keep the same fingerprint. */
+export function resolveBlogImageData(slug: string, data: BlogImageData): BlogImageData {
+  const copy = BLOG_LINK_CARD_COPY[slug];
+  if (!copy) return data;
+  if (data.title !== copy.sourceTitle && data.title !== copy.title) throw new Error(`${slug}: article title changed; review the short link-card title`);
+  return { ...data, title: copy.title };
 }
 
 export type BlogBackgroundInput =
@@ -100,7 +109,9 @@ export function publishedBlogSlugsFromIndex(value: unknown): string[] {
   const slugs = [
     ...new Set(
       articles.flatMap((article) =>
-        (article as { published: boolean }).published
+        (article as { published: boolean }).published &&
+        typeof (article as { publishedAt?: unknown }).publishedAt === 'string' &&
+        ((article as { publishedAt: string }).publishedAt).trim().length > 0
           ? [(article as { slug: string }).slug]
           : []
       )

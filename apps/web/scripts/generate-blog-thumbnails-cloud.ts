@@ -46,6 +46,7 @@ import {
   BLOG_IMAGE_STAGE_ROOT,
   blogImageKeys,
   createBlogImagePlan,
+  resolveBlogImageData,
   publishedBlogSlugsFromIndex,
   stageBlogImagePath,
   writeBlogImageManifest,
@@ -399,7 +400,7 @@ async function main(): Promise<void> {
     const derived = deriveOgpFromFrontmatter(parseFrontmatter(markdown));
     if (!derived)
       throw new BlogImageBlockedError(`${slug}: article frontmatter title がありません`);
-    const data: BlogImageData = {
+    const articleData: BlogImageData = {
       title: derived.title,
       subtitle: derived.subtitle ?? null,
     };
@@ -429,17 +430,18 @@ async function main(): Promise<void> {
           motif: codexSource.motif,
         }
       : {
-          prompt: buildOgpPrompt({ ...visual, title: data.title }),
-          promptHash: computePromptHash({ ...visual, title: data.title }),
+          prompt: buildOgpPrompt({ ...visual, title: articleData.title }),
+          promptHash: computePromptHash({ ...visual, title: articleData.title }),
           legacyPromptHash: computeLegacyPromptHashV1({
             ...visual,
-            title: data.title,
+            title: articleData.title,
           }),
           model: OGP_MODEL,
           promptVersion: OGP_PROMPT_VERSION,
           visualType: visual.visualType,
           motif: visual.motif,
         };
+    const data = resolveBlogImageData(slug, articleData);
     if (codexSource) {
       const background: ResolvedAiBackground = {
         location: 'codex',

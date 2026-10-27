@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-27T02:37:36.161Z",
+  "slug": "sewerage-water-supply-gap",
+  "sourceUrl": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/article.md",
+  "originalSha256": "7fe908513e5743363d3ee1ac647f902403b301bc4dddb9f87078e84abf607200",
+  "correctedSha256": "71f2585aaae583c993ee70aefd5ae0d37020cd48f44d2b1298ced91f097d0385",
+  "indexRow": {
+    "slug": "sewerage-water-supply-gap",
+    "title": "sewerage-water-supply-gap",
+    "seoTitle": null,
+    "description": null,
+    "filePath": "blog/sewerage-water-supply-gap/article.md",
+    "format": "md",
+    "hasCharts": true,
+    "published": true,
+    "publishedAt": null,
+    "ogImageType": null,
+    "proofreadAt": "2026-03-12T00:00:00.000Z",
+    "createdAt": "2026-03-06 03:07:35",
+    "updatedAt": "2026-05-29T06:14:44.150Z",
+    "tags": [],
+    "surveyIds": [
+      "resident-registry-population-survey",
+      "waterworks-statistics",
+      "sewerage-statistics"
+    ],
+    "sources": [
+      {
+        "label": "社会・人口統計体系",
+        "organization": "総務省統計局",
+        "url": "https://www.stat.go.jp/data/ssds/index.htm",
+        "tables": [
+          {
+            "label": "社会・人口統計体系",
+            "url": "https://www.e-stat.go.jp/dbview?sid=0000010208"
+          }
+        ]
+      },
+      {
+        "label": "下水道統計",
+        "organization": "日本下水道協会",
+        "surveyId": "sewerage-statistics",
+        "tables": []
+      },
+      {
+        "label": "住民基本台帳に基づく人口、人口動態及び世帯数調査",
+        "organization": "総務省",
+        "surveyId": "resident-registry-population-survey",
+        "tables": []
+      },
+      {
+        "label": "水道統計",
+        "organization": "厚生労働省",
+        "surveyId": "waterworks-statistics",
+        "tables": []
+      }
+    ],
+    "metricPairs": [
+      [
+        "sewerage-penetration-rate-2012on",
+        "water-supply-population-ratio-2012on"
+      ]
+    ],
+    "rankingRefs": [
+      {
+        "rankingKey": "sewerage-penetration-rate-2012on",
+        "year": "2021"
+      },
+      {
+        "rankingKey": "water-supply-population-ratio-2012on"
+      }
+    ]
+  },
+  "parseError": "bad indentation of a mapping entry (4:108)\n\n 1 |  ... \n 2 |  ... \n 3 |  ... \n 4 |  ... と水洗化率の2つの数字がなぜズレるのか、合併処理浄化槽という\"もう一つの汚水処理\"を軸に、47都道府県の水インフラを読み解く。\"\n-----------------------------------------^\n 5 |  ... \n 6 |  ... ",
+  "correctedMetadata": {
+    "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+    "seoTitle": "下水道普及率は徳島22%・東京99.7%｜だが水洗化率で見ると逆転する47都道府県の真相",
+    "subtitle": "下水道22.3%の徳島も、水洗トイレは77.5%が使える──なぜか？",
+    "description": "「下水道普及率が低い県は遅れている」は本当か？──徳島は下水道22.3%で全国最下位だが、水洗化率は77.5%。下水道普及率と水洗化率の2つの数字がなぜズレるのか、合併処理浄化槽という\"もう一つの汚水処理\"を軸に、47都道府県の水インフラを読み解く。",
+    "category": "infrastructure",
+    "tags": [
+      "下水道普及率",
+      "水洗化率",
+      "合併処理浄化槽",
+      "インフラ格差",
+      "水道"
+    ],
+    "published": true,
+    "publishedAt": "2026-03-06T00:00:00.000Z",
+    "updatedAt": "2026-05-29T00:00:00.000Z"
+  },
+  "bodyUnchanged": true
+}

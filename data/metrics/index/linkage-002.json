@@ -9043,6 +9043,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:municipality-population-change-census-2025",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:census-population-change-5y",
           "kind": "municipality-ranking"
         },
@@ -9095,6 +9099,10 @@
         },
         {
           "pageId": "blog:household-growth-population-decline-census-2025",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:municipality-population-change-census-2025",
           "kind": "blog"
         },
         {

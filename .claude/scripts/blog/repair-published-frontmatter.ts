@@ -11,6 +11,7 @@ const output = path.resolve('.local/blog-datasource-fix');
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 
 async function main() {
+  await fs.mkdir(path.join(output, 'out'), { recursive: true });
   const response = await fetch(`https://storage.stats47.jp/app/blog/${slug}/article.md`, { cache: 'no-store', signal: AbortSignal.timeout(30000) });
   if (!response.ok) throw new Error(`Article HTTP ${response.status}`);
   const original = await response.text();

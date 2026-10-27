@@ -40,6 +40,7 @@ import {
   adoptLegacyAiBackgroundSha256,
   blogImageKeys,
   createBlogImagePlan,
+  resolveBlogImageData,
   stageBlogImagePath,
   writeBlogImageManifest,
   type BlogBackgroundMetadata,
@@ -444,13 +445,14 @@ async function main(): Promise<void> {
           'blog-images:codex request-article で生成してください'
       );
     }
+    const data = resolveBlogImageData(slug, source.data);
     return {
       slug,
-      data: source.data,
+      data,
       background,
       plan: createBlogImagePlan({
         slug,
-        data: source.data,
+        data,
         background: {
           source: 'ai',
           promptHash: background.metadata.promptHash,

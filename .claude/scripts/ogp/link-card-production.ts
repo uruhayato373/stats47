@@ -9,6 +9,7 @@ import { LINK_CARD_DESIGN, MAGAZINE_CARD_DESIGNS, magazineCardPrompt } from '../
 import site from '../lib/site-config.cjs';
 import {datasetDir,datasetPath} from '../../../config/datasets.mjs';
 import {readLinkCardLedger,writeLinkCardLedger} from './lib/link-card-ledger.mjs';
+import {publishedBlogSlugsFromIndex} from '../../../apps/web/scripts/lib/blog-image-generation';
 
 interface StoredImage {key:string;sha256:string;bytes:number}
 interface Candidate {source:string;sourceSha256:string;file:string;sha256:string;input:string}
@@ -24,6 +25,8 @@ interface Entry {
   revision?:{source:StoredImage;image:StoredImage;input:StoredImage;review:StoredImage};
   publication?:Publication;
   sitePublication?:{manifestKey:string;fingerprint:string;manifestSha256:string;imageKey:string;sha256:string;url:string;verifiedAt:string;runUrl:string};
+  sourcePageUrl?:string;
+  exclusion?:{reason:string;observedAt:string};
 }
 interface Ledger {schemaVersion:number;policyVersion:string;updatedAt?:string;entries:Entry[];siteInventory?:unknown}
 
@@ -70,12 +73,18 @@ async function main() {
       }
       if(!pages.length)throw Error('Empty sitemap');
       const blogIndex=JSON.parse((await fetchPublicMediaSource(`${site.R2_PUBLIC_BASE_URL}/app/blog/all.json`)).toString('utf8'));
-      const blogPages=blogIndex.articles.filter((a:{published?:boolean})=>a.published!==false).map((a:{slug:string})=>`${site.SITE_ORIGIN}/blog/${a.slug}`);
+      const blogPages=publishedBlogSlugsFromIndex(blogIndex).map(slug=>`${site.SITE_ORIGIN}/blog/${slug}`);
       const eligible=[...new Set([...blogPages,...pages])].filter(p=>/^\/(ranking|blog|themes|category|areas|products)\/[^/]+\/?$/.test(new URL(p).pathname));
+      const eligibleSet=new Set(eligible);
+      for(const e of ledger.entries.filter(e=>e.id.startsWith('site:/blog/')&&e.pageUrl&&!eligibleSet.has(e.pageUrl))){
+        e.sourcePageUrl=e.pageUrl!;e.pageUrl=null;e.status='not-public';
+        e.exclusion={reason:'Absent from the live sitemap and the published index with a valid publication date',observedAt:new Date().toISOString()};
+      }
       for(const pageUrl of [...new Set([site.SITE_ORIGIN,...eligible])].sort()) {
         const pathname=new URL(pageUrl).pathname.replace(/\/$/,'');
         const id=`site:${pathname||'/'}`;
         if(!ledger.entries.some((e:Entry)=>e.id===id)) ledger.entries.push({id,key:pathname.split('/').at(-1)||'home',kind:'site-ogp',pageUrl,priority:/sunshine/.test(pathname)?1:100,status:'input-pending'});
+        else {const e=target(id);if(e.status==='not-public'){e.pageUrl=pageUrl;e.status=e.sitePublication?'published':'input-pending';delete e.exclusion;}}
       }
       ledger.siteInventory={observedAt:new Date().toISOString(),source:`${site.SITE_ORIGIN}/sitemap.xml`,sitemapPages:pages.length,eligiblePages:eligible.length+1,complete:true};
     }
