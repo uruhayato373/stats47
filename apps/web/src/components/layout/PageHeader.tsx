@@ -5,7 +5,7 @@ import { cn } from "@stats47/components";
 interface PageHeaderProps {
   /** 任意の小ラベル（例: "ランキング"）。h1 の上に控えめに表示 */
   eyebrow?: string;
-  /** ページ見出し（h1）。常に text-2xl font-bold */
+  /** ページ見出し（h1）。テンプレートの breadcrumb-comp と同じ text-xl font-semibold */
   title: string;
   /** 1 行説明。本文の導入 */
   description?: ReactNode;
@@ -33,7 +33,13 @@ interface PageHeaderProps {
  * 全ページ共通の最小ページヘッダー。
  *
  * 暗色グラデの hero バナーや page-top KPI タイルを置かず、
- * h1 + 1 行説明（+ 細い統計テキスト）だけで構成する（白基調・余白主導）。
+ * h1 + 1 行説明（+ 細い統計テキスト）だけで構成する。
+ *
+ * 見た目はテンプレート (next-shadcn-dashboard) の breadcrumb-comp に合わせる:
+ * 見出しは text-xl font-semibold、見出しと操作 (actions) を 1 行に並べて両端に寄せる
+ * (items-center justify-between)。breadcrumb-comp の外枠 (Card) は写さない。PageHeader の
+ * aside や直後の本文にカード面が来るため、枠を足すとカードの入れ子になる。パンくずは
+ * 別部品の Breadcrumbs (JSON-LD と一体) が直前に出すので、ここには持たない。
  *
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
@@ -51,16 +57,16 @@ export function PageHeader({
   // title 群（h1 + description + meta）。aside 有無で共通利用。
   const titleBlock = (
     <div className="min-w-0">
-      <h1 className="text-2xl font-bold leading-tight text-foreground">
+      <h1 className="text-xl font-semibold leading-tight text-foreground">
         {title}
       </h1>
       {description && (
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {description}
         </p>
       )}
       {meta && (
-        <p className="mt-1.5 text-xs text-muted-foreground">{meta}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{meta}</p>
       )}
     </div>
   );
@@ -68,7 +74,7 @@ export function PageHeader({
   return (
     <header className={cn("mb-4", className)}>
       {eyebrow && (
-        <p className="text-[11px] font-semibold uppercase text-muted-foreground">
+        <p className="text-xs font-medium text-muted-foreground">
           {eyebrow}
         </p>
       )}
@@ -82,12 +88,12 @@ export function PageHeader({
           {aside}
         </div>
       ) : (
-        <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           {titleBlock}
           {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
         </div>
       )}
-      {controls && <div className="mt-4">{controls}</div>}
+      {controls && <div className="mt-3">{controls}</div>}
       {stats && (
         <p className="mt-2 text-xs text-muted-foreground sm:text-sm">{stats}</p>
       )}

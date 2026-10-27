@@ -1,14 +1,17 @@
 import { MEDIA_QUERIES } from "@/constants/breakpoints";
 interface RankingPageHeadAssetsProps {
   structuredData: object;
-  breadcrumbStructuredData: object;
+  /**
+   * 使わない。BreadcrumbList JSON-LD は RankingPageClientShell の Breadcrumbs が出す
+   * (ここでも出すと同じページに 2 つ並ぶ)。呼び出し側の受け渡しを外すまで型だけ残す。
+   */
+  breadcrumbStructuredData?: object;
   faqStructuredData: object | null;
   initialTileUrls: string[];
 }
 
 export function RankingPageHeadAssets({
   structuredData,
-  breadcrumbStructuredData,
   faqStructuredData,
   initialTileUrls,
 }: RankingPageHeadAssetsProps) {
@@ -17,10 +20,6 @@ export function RankingPageHeadAssets({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
       {faqStructuredData && (
         <script
