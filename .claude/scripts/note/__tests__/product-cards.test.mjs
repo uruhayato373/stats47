@@ -93,3 +93,12 @@ test('paid card repair retains the original separator and all paid content', () 
   assert.deepEqual(splitPublishedBody(before, { body: free }, free + paid), { free_body: free, pay_body: paid });
   assert.throws(() => splitPublishedBody(before, { body: '<p>違う</p>' }, before.body), /prefix mismatch/);
 });
+
+test('a list paid boundary is cut after the whole list, and a nested list is refused', () => {
+  const free = '<p>導入</p><ul id="s"><li><p>a</p></li><li><p>b</p></li></ul>';
+  const paid = '<p>購入者用の本文</p>';
+  const before = { body: free + paid, price: 500, separator: 's' };
+  assert.deepEqual(splitPublishedBody(before, { body: free }, free + paid), { free_body: free, pay_body: paid });
+  const nested = '<ul id="s"><li><ul><li><p>a</p></li></ul></li></ul>';
+  assert.throws(() => splitPublishedBody({ ...before, body: nested + paid }, { body: nested }, nested + paid), /nested list/);
+});

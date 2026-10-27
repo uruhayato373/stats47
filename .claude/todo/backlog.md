@@ -256,6 +256,22 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [PPTX-RANK-ORDER-01] 商品パックの PowerPoint で「上位 10」の棒グラフの 1 位が一番下に並ぶ
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-28] [領域:商品]
+
+- **実測 (2026-10-28・Microsoft 365 PowerPoint Windows版 16.0 build 17830)**: note で販売中の 13 パック (P-01〜P-12・P-14) の product.pptx を開くと、ランキングのページ (例 P-01 の 4 枚目「不慮の事故による死亡者数（人口10万人当たり）（上位 10）」) で 1 位の青森県 61 が一番下、10 位が一番上に描かれる。値と順位は正しい。
+- **原因**: `packages/product-factory/src/generators/pptx.ts` の `addBarChartSlide` は 1 位から順にデータを渡すが、横棒グラフは先頭の項目を下に描く。並びを逆にする指定 (pptxgenjs の `catAxisOrientation: "maxMin"`) が無い。
+- **次**: 指定を足してテストで固定 → 13 パックを再生成 → Office で並びを確かめる → note の有料記事の添付 ZIP を差し替える (添付は 1 日 10 回まで。`project_note_attachment_upload_limits`)。
+- **停止条件**: 添付の差し替えは有料商品の納品物を変えるのでオーナー承認の後。
+- **完了条件**: 13 パックの PowerPoint で 1 位が一番上に並び、note の添付が新しい版に替わっている。
+
+### [NOTE-DELIVERY-CONTRACT-DRIFT-01] 出品台帳の note 納品版 (v3) が、note に添付した版 (v4) と食い違っている
+タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:商品]
+
+- **実測 (2026-10-28)**: `config/coconala-listings.json` の `_noteDelivery.artifactDirectory` は 13 パックとも `v3-20261012-mac-r4` を指す。note の有料記事に添付したのは `data/products/note-pack-regeneration-2026-10-24.json` の `v4-20261024-mac-r2` の ZIP (private R2 `note/product-archives/`)。`build-revision.ts` は `_noteDelivery` を読むので、次に販売準備原稿を作ると公開中と違う版の件数・枚数で書かれる。
+- **次**: `_noteDelivery` を v4 の manifestSha256 へ合わせるか、note の納品の正本を regeneration の記録へ一本化するかを決めて直す。Office の確認記録 (`data/products/note-pack-office-verification-2026-10-28.json`) は v4 の ZIP に結びついている。
+- **完了条件**: note の販売準備原稿の生成が、添付中の版と同じ manifest を読む。
+
 ### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]
 
@@ -289,7 +305,8 @@ updated: 2026-10-19
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:商品]
 
 - **経緯 (2026-10-27 実測)**: 公開済み 428 本を `npm run note:unverified:audit` で検査し 17 本が該当 (記録 `data/note/evidence/note-unverified-audit-latest.json`)。2026-10-24 に「未検証範囲を明示すれば公開してよい」と判断して操作記事を公開したのが直接の原因。同日に公開前ゲート (`lib/unverified-disclosure.mjs`。`publish-new-note.sh`・`patch-note-paid-landing.mjs`・週次 note-circulation) を入れた。週次はこの 17 本が直るまで落ち続ける。
-- **内訳**: マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
+- **進捗 (2026-10-28)**: 17 本中 16 本を、実際に操作した結果で書き直して公開本文を差し替えた。監査 (`audit-note-unverified --published`) は 1/428 (残りはマイマップ KML `h-howto-mymaps-kml`)。商品パック 13 本は private R2 の納品 ZIP (SHA 照合済み) を Microsoft 365 の Excel・PowerPoint (Windows版 16.0 build 17830) で開き、記録を `data/products/note-pack-office-verification-2026-10-28.json` に残した。QGIS の記事は QGIS 3.44.15 で練習キットの全手順を操作し、画像 8 枚を入れた。`b-ref-prc-a24` は通信利用動向調査を stats47 が取り込んでいないことを確かめて文を直した。サイトの商品ページ (`products/[slug]/page.tsx`) の文は直したが、本番には次のデプロイで出る。
+- **残り (マイマップ)**: このブラウザは PC のファイルを選べないので、取り込みの「参照」でのファイル選択だけオーナーが行う。読み込み後に、47 都道府県の色分けと県をクリックした吹き出し (値・順位・時点・URL) を確かめ、画面を撮って書き直す。KML は `C:\Users\m004195\Downloads\total-population.kml`。取り込み画面は待てば表示される (前回の「表示されない」は読み込み待ち)。
 - **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
 - **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
 - **Excel 塗り分けマップ `h-howto-excel-filled-map` は 2026-10-27 に完了**: Microsoft 365 Excel (バージョン 2407) で全手順を操作して書き直し、画像 10 枚とともに note.com の公開本文を差し替えた (題名も「塗り分けマップ」へ。価格・ハッシュタグ 99 個・境界は不変を確認、未ログインの公開ページで画像 10 枚・リンクカード 3 枚の表示を確認)。ハッシュタグの `#塗りつぶされたマップ` は旧名で検索する読者向けに残した。

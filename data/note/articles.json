@@ -96,12 +96,12 @@
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
-          "files": 4,
-          "bytes": 14452,
-          "savedAt": "2026-10-24T22:05:26.150Z"
+          "sha256": "bdd144f46b83daf0e178256bc7058626579b241d3228a6e74275523b216f077b",
+          "files": 12,
+          "bytes": 796203,
+          "savedAt": "2026-10-27T22:43:03.338Z"
         },
-        "verifiedAt": "2026-10-24T22:05:26.150Z"
+        "verifiedAt": "2026-10-27T22:43:03.338Z"
       },
       "noteUrl": "https://note.com/stats47/n/n346d566772a1",
       "publishedAt": "2026-10-25"
@@ -9961,12 +9961,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f4e01fad4c7264ca62fbb6150d42a9a6c7e9f1389078a91b59d1cffbeb290b21",
+          "sha256": "e5911e7d7f8c720b05159124cae6030124e039d93fc6e4e8ae06ae1eacbbbb07",
           "files": 6,
-          "bytes": 160446,
-          "savedAt": "2026-10-13T08:47:17.952Z"
+          "bytes": 160473,
+          "savedAt": "2026-10-27T22:01:51.119Z"
         },
-        "verifiedAt": "2026-10-13T08:47:17.952Z"
+        "verifiedAt": "2026-10-27T22:01:51.119Z"
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
