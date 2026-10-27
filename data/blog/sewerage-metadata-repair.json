@@ -91,9 +91,9 @@
   },
   "bodyUnchanged": true,
   "publicIndexVerification": {
-    "checkedAt": "2026-10-27T05:12:35.742Z",
+    "checkedAt": "2026-10-27T06:12:15.558Z",
     "url": "https://storage.stats47.jp/app/blog/all.json",
-    "sha256": "ea2067269bbc8c964ea0682c397c46ece7d9e17287bda1573d7e91a84ce8a9ea",
+    "sha256": "cf83944285f6e43b4c95ceabfb7ec8d62bbf33ebf054fc8914b4a3cd965b02bb",
     "total": 619,
     "published": 609,
     "publishedWithoutValidDate": 0,
@@ -215,5 +215,12 @@
     "Invalid frontmatter stops snapshot export rather than replacing metadata with empty fields",
     "Published blog catalog requires a nonblank publication date",
     "Article-specific external card headline is checked against its exact source title"
-  ]
+  ],
+  "sitemapVerification": {
+    "checkedAt": "2026-10-27T06:12:16.207Z",
+    "url": "https://stats47.jp/sitemap/4.xml",
+    "status": 200,
+    "containsRestoredArticle": true
+  },
+  "followUpIndexRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40458743458"
 }
