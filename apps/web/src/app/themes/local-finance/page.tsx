@@ -6,17 +6,12 @@ import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
 import Link from '@/components/atoms/SiteLink';
-import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
-import { StatisticsScopeNav } from '@/components/navigation';
+import { PageShell } from '@/components/layout';
 
 import { InContentAdSlot } from '@/features/ads';
 import type { FinanceFlowData } from '@/features/finance-flow';
 import { loadFinanceCards, splitLocalFinanceSections } from '@/features/local-finance-dashboard';
-import {
-  PrefectureSelect,
-  ThemePrefectureProvider,
-  ThemeChapterLinks,
-} from '@/features/theme-dashboard';
+import { ThemePrefectureProvider } from '@/features/theme-dashboard';
 import { ALL_THEMES } from '@/features/theme-dashboard/config/all-themes';
 import {
   THEME_PREFECTURE_COOKIE_NAME,
@@ -24,7 +19,6 @@ import {
   ThemeAreaHeader,
   ThemeIndicatorCatalogSection,
   ThemeSideNav,
-  ThemeSwitcher,
   THEME_SWITCHER_THEMES,
   ThemeDashboardClient,
   loadThemeData,
@@ -121,7 +115,9 @@ export default async function LocalFinanceThemePage({
       initialAreaCode={initialPrefecture?.areaCode ?? null}
       initialAreaName={initialPrefecture?.areaName ?? null}
     >
+      {/* ページ内ナビ (ThemeSideNav) は h1 の後・本文の上に置く (PageShell の header → leftRail → 本文) */}
       <PageShell
+        header={<ThemeAreaHeader themeTitle="地方財政" />}
         leftRail={
           <ThemeSideNav
             themes={THEME_SWITCHER_THEMES}
@@ -130,44 +126,7 @@ export default async function LocalFinanceThemePage({
             scopeHrefs={scopeHrefsForPrefectureTheme('local-finance')}
           />
         }
-        leftRailNarrowBehavior="hide"
       >
-        <ThemeAreaHeader themeTitle="地方財政" />
-        {/* Regional selection shares the URL / Cookie provider with the other themes. */}
-        <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
-          <ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="local-finance" />
-          <div className="my-3">
-            <PrefectureSelect className="w-full" />
-          </div>
-          <nav aria-label="このページの内容" className="flex flex-wrap gap-4">
-            <ThemeChapterLinks
-              links={pageLinks}
-              themeKey="local-finance"
-              className="py-2 text-sm hover:text-primary"
-            />
-          </nav>
-          <nav
-            aria-label="テーマ・調査の一覧"
-            className="flex flex-wrap gap-x-5"
-          >
-            <Link
-              href="/themes"
-              className="inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-            >
-              テーマ一覧へ
-            </Link>
-            <Link
-              href="/survey"
-              className="inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-            >
-              調査一覧へ
-            </Link>
-          </nav>
-          <StatisticsScopeNav
-            current="prefectures"
-            hrefs={scopeHrefsForPrefectureTheme('local-finance')}
-          />
-        </div>
         <nav aria-label="関連する統計範囲" className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
           <span className="text-muted-foreground">市区町村の財政:</span>
           {[

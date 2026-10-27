@@ -30,18 +30,17 @@ export const PRIMARY_NAV_ITEMS = [
 
 export type PrimaryNavKey = (typeof PRIMARY_NAV_ITEMS)[number]['key'];
 
-/**
- * サイドバーのグループ名の見た目。テンプレートの nav-collapse の見出しと同じ。
- * サーバー側の AppSidebar と 'use client' の AppSidebarClient の両方が使うので、client 境界の外 (ここ) に置く。
- */
-export const SIDEBAR_GROUP_LABEL_CLASS = 'text-xs font-semibold uppercase text-muted-foreground';
-
-export const HOME_NAV_ITEM ={ href: '/', label: 'ホーム' } as const;
+export const HOME_NAV_ITEM = { href: '/', label: 'ホーム' } as const;
 export const COMPARE_NAV_ITEM = {
   href: '/category/population/compare',
   label: '地域間比較',
 } as const;
 export const ALL_THEMES_NAV_ITEM = { href: '/themes', label: 'すべてのテーマ' } as const;
+/**
+ * サイドバー下端 (SidebarFooter) の出口。主要ナビの「ランキング」と同じ /ranking を指すので、
+ * 現在地の判定には加えない (同じ href の項目が 2 つ現在地になるのを防ぐ。AppSidebar の matchActive)。
+ */
+export const ALL_RANKINGS_NAV_ITEM = { href: '/ranking', label: 'すべてのランキング' } as const;
 
 /** 市区町村ページは URL が /areas の下にあるが、見ているのは市区町村の空間 (2026-09-25 UI 点検の指摘)。 */
 const CITY_PAGE_PATH = /^\/areas\/\d{5}\/cities(?:\/|$)/;

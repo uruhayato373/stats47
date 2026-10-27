@@ -1,42 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { LEFT_RAIL_NARROW_ONLY_CLASS } from '../LeftRailLayout';
 import { PageShell } from '../PageShell';
 
 /**
  * PageShell のレール契約。
  *
- * ★2026-08-04 にテーマページの左レール (ThemeSideNav) で `leftRail` を初めて実用したときに
- * 固定した挙動。特に `leftRailNarrowBehavior` は「ページ内容を切り替えるナビを本文の後ろに
- * 積むと操作対象より後ろに回って意味を失う」ために足した分岐で、既定 (`stack`) との違いが
- * 崩れると狭幅でナビが二重に出る / 消えるのどちらかになる。
+ * ★2026-10-28 (2 巡目): ページ内ナビ (leftRail) は幅で出し入れせず、どの幅でも本文の上の 1 か所に出す。
+ * 旧来の「狭い幅でナビを隠す / 本文の下に積む」切替と、常に隠す代替 UI は撤去した。
+ * パンくずと h1 は `header` に渡し、ページ内ナビより先に出す。
  */
 
 const MAIN = <p>main-content</p>;
 const LEFT = <nav aria-label="left-rail">left</nav>;
 const RIGHT = <aside aria-label="right-rail">right</aside>;
+const HEADER = <h1>page-title</h1>;
 
 describe('PageShell — leftRail', () => {
-  it('既定 (stack): 旧来の積み下ろし領域は残るが、常に隠れて二重表示にならない', () => {
+  it('ページ内ナビは本文の上の 1 か所だけに描き、幅で隠さない', () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    const rails = screen.getAllByLabelText('left-rail');
-    expect(rails).toHaveLength(2);
-    expect(rails[0].parentElement).toHaveAttribute('data-slot', 'page-nav');
-    expect(rails[1].parentElement).toHaveClass(LEFT_RAIL_NARROW_ONLY_CLASS);
-    expect(LEFT_RAIL_NARROW_ONLY_CLASS).toBe('hidden');
-  });
-
-  it('hide: ページ内ナビは本文の上の 1 か所だけに描く', () => {
-    render(
-      <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
-        {MAIN}
-      </PageShell>
-    );
     const rails = screen.getAllByLabelText('left-rail');
     expect(rails).toHaveLength(1);
     expect(rails[0].parentElement).toHaveAttribute('data-slot', 'page-nav');
-    expect(rails[0].parentElement).not.toHaveClass('hidden');
+    expect(rails[0].parentElement?.className ?? '').not.toMatch(/hidden/);
+  });
+
+  it('header (パンくず + h1) → ページ内ナビ → 本文の順に描く', () => {
+    const { container } = render(
+      <PageShell header={HEADER} leftRail={LEFT}>
+        {MAIN}
+      </PageShell>
+    );
+    const shell = container.firstElementChild;
+    expect(shell?.firstElementChild).toBe(screen.getByRole('heading', { name: 'page-title' }));
+    const nav = screen.getByLabelText('left-rail');
+    const heading = screen.getByRole('heading', { name: 'page-title' });
+    const main = container.querySelector('div[data-slot="shell-main"]');
+    expect(heading.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(nav.compareDocumentPosition(main as Node) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   /**
@@ -44,11 +45,7 @@ describe('PageShell — leftRail', () => {
    * サイドバーの右へもう 1 本の列を作らない。幅の境界も持たない。
    */
   it('ページ内ナビのために 2 列目を作らない', () => {
-    const { container } = render(
-      <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
-        {MAIN}
-      </PageShell>
-    );
+    const { container } = render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
     const shell = container.firstElementChild;
     expect(shell).toHaveClass('@container/shell');
     const layout = shell?.firstElementChild;

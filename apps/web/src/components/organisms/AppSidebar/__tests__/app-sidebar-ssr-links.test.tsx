@@ -3,6 +3,8 @@
  *
  * - SSR の HTML にナビの全リンクが a[href] で出る (検索エンジンと JS 前の利用者が辿れる)
  * - サイドバー内の現在地 ([data-active=true]) は常に 1 件だけ
+ * - カテゴリとテーマのグループは既定で開く。テーマは 5 系統の開閉できる項目 (既定は閉じ、現在地の系統だけ開く)
+ * - 主要ナビ・カテゴリ・テーマの系統・下端の出口の項目にはすべてアイコンがあり、件数の札は現在地でも残る
  * - lg (1024px) 未満ではヘッダーの開閉ボタンで Sheet が開き、リンクを押すと閉じる
  * - クリックは PC で 'sidebar'、Sheet で 'sidebar-mobile' の導線名で共通のクリック監視に渡る
  */
@@ -13,6 +15,7 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { THEME_NAV_GROUPS } from '@/features/theme-dashboard/config/theme-navigation';
 import { NAV_THEMES, themeHref } from '@/features/theme-dashboard/config/theme-urls';
 
 import { resolveNavClick } from '@/lib/analytics/components/NavClickTracker';
@@ -108,27 +111,76 @@ describe('AppSidebar', () => {
     expect(active[0]).toHaveAttribute('aria-current', 'page');
   });
 
-  it('カテゴリのグループは既定で閉じ (テーマを最初の画面に残す)、現在地がカテゴリなら開く', () => {
+  it('カテゴリとテーマのグループは既定で開き、見出しを押すと閉じる (閉じてもリンクは DOM に残る)', async () => {
     const categoryHref = hrefFor('category', {
       categoryKey: RANKING_PROMINENCE_CATEGORIES[0].categoryKey,
     });
-    const first = render(<Shell />);
-    const closedTrigger = screen.getByRole('button', { name: 'カテゴリ' });
-    expect(closedTrigger).toHaveAttribute('aria-expanded', 'false');
-    // 閉じていてもリンクは DOM に残る (hidden="until-found")
-    expect(first.container.querySelector(`[data-slot="sidebar"] a[href="${categoryHref}"]`)).not.toBeNull();
-    expect(screen.getByRole('link', { name: NAV_THEMES[0].title })).toBeVisible();
-    first.unmount();
+    const { container } = render(<Shell />);
+    const categoryTrigger = screen.getByRole('button', { name: 'カテゴリ' });
+    expect(categoryTrigger).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button', { name: 'テーマ' })).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('link', { name: RANKING_PROMINENCE_CATEGORIES[0].categoryName })).toBeVisible();
 
-    navigation.pathname = categoryHref;
-    render(<Shell />);
-    expect(screen.getByRole('button', { name: 'カテゴリ' })).toHaveAttribute('aria-expanded', 'true');
+    await act(async () => {
+      fireEvent.click(categoryTrigger);
+    });
+    expect(categoryTrigger).toHaveAttribute('aria-expanded', 'false');
+    // 閉じていてもリンクは DOM に残る (hidden="until-found")
+    expect(container.querySelector(`[data-slot="sidebar"] a[href="${categoryHref}"]`)).not.toBeNull();
   });
 
-  it('カテゴリの件数は単位付きで出す', () => {
+  it('テーマは 5 系統の開閉できる項目に分け、既定は閉じ、現在地のテーマを含む系統だけ開く', () => {
+    const first = render(<Shell />);
+    for (const group of THEME_NAV_GROUPS) {
+      expect(screen.getByRole('button', { name: group.label })).toHaveAttribute('aria-expanded', 'false');
+    }
+    first.unmount();
+
+    const [activeGroup, ...otherGroups] = THEME_NAV_GROUPS;
+    navigation.pathname = themeHref(activeGroup.themeKeys[0]);
+    render(<Shell />);
+    expect(screen.getByRole('button', { name: activeGroup.label })).toHaveAttribute('aria-expanded', 'true');
+    for (const group of otherGroups) {
+      expect(screen.getByRole('button', { name: group.label })).toHaveAttribute('aria-expanded', 'false');
+    }
+  });
+
+  it('主要ナビ・カテゴリ・テーマの系統・下端の出口の項目にはすべてアイコンがある', () => {
     const { container } = render(<Shell />);
-    const badge = container.querySelector('[data-slot="sidebar-menu-badge"]');
-    expect(badge?.textContent).toBe(`${RANKING_PROMINENCE_CATEGORIES[0].count}件`);
+    const buttons = container.querySelectorAll('[data-slot="sidebar"] [data-slot="sidebar-menu-button"]');
+    expect(buttons.length).toBeGreaterThanOrEqual(
+      PRIMARY_NAV_ITEMS.length + RANKING_PROMINENCE_CATEGORIES.length + THEME_NAV_GROUPS.length
+    );
+    for (const button of buttons) {
+      expect(button.querySelector('svg'), button.textContent ?? '').not.toBeNull();
+    }
+  });
+
+  it('下端に一覧への出口を置き、同じ /ranking を指す出口は現在地にしない', () => {
+    navigation.pathname = '/ranking';
+    const { container } = render(<Shell />);
+    const footer = container.querySelector('[data-slot="sidebar"] [data-slot="sidebar-footer"]');
+    expect(footer?.querySelector('a[href="/ranking"]')).toHaveTextContent('すべてのランキング');
+    expect(footer?.querySelector('a[href="/themes"]')).toHaveTextContent('すべてのテーマ');
+    expect(footer?.querySelector('[data-active="true"]')).toBeNull();
+  });
+
+  it('ヘッダーはロゴ + 名前 + 副題の 2 段', () => {
+    const { container } = render(<Shell />);
+    const header = container.querySelector('[data-slot="sidebar"] [data-slot="sidebar-header"]');
+    expect(header).toHaveTextContent('stats47');
+    expect(header).toHaveTextContent('統計で見る都道府県');
+  });
+
+  it('カテゴリの件数は単位付きで出し、現在地の項目でも残す', () => {
+    const category = RANKING_PROMINENCE_CATEGORIES[0];
+    navigation.pathname = hrefFor('category', { categoryKey: category.categoryKey });
+    const { container } = render(<Shell />);
+    const active = container.querySelector('[data-slot="sidebar"] [data-active="true"]');
+    const badge = active?.parentElement?.querySelector('[data-slot="sidebar-menu-badge"]');
+    expect(badge?.textContent).toBe(`${category.count}件`);
+    // 現在地 (bg-primary) の上でも読める色にする
+    expect(badge?.className).toContain('peer-data-active/menu-button:text-background');
   });
 
   it('PC のサイドバーのリンクは sidebar の導線名で送られる', () => {

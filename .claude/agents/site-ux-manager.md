@@ -9,12 +9,12 @@ model: sonnet
 
 **サイト横断のUI/情報設計 (IA) 層**（特定ページに閉じない領域）が統一されているかを管理・監査・是正する
 専任エージェント。`ranking-ui-manager` / `theme-ui-manager` が「1 ページ種別の内部」を所有するのに対し、
-本エージェントは**ページをまたぐ骨格**（ヘッダー・ナビ IA・ホーム・一覧カード・共通 shell・左右レールの共通視覚契約
+本エージェントは**ページをまたぐ骨格**（サイドバー・ヘッダー・ナビ IA・ホーム・一覧カード・共通 shell・左右レールの共通視覚契約
 (`RailCard`/`RailNavRow`/`RailCategoryList`)・UX 計装配線）を所有する。横断UIの恒常契約は、現在の情報設計・
 デザインシステム・UI rules と `.claude/todo/` のactive項目から読む。
 
 > **役割分担（重複しない）**
-> - **site-ux-manager（本エージェント）**: サイト横断 = グローバルヘッダー/ナビ IA・モバイルドロワー・ホーム
+> - **site-ux-manager（本エージェント）**: サイト横断 = 骨組み (サイドバー・ヘッダー・フッター)/ナビ IA・ホーム
 >   (`app/page.tsx`)・ブログ/タグ**一覧**のカード UX・共通レイアウト shell (`PageShell`/`ArticleShell`/`PageHeader`/
 >   `HeroBanner`/`RightRailWidgets`)・リンクカード taxonomy・左右レールの共通視覚契約 (`RailCard`/`RailNavRow`/
 >   `RailCategoryList`・Surface統一)・UX 計装 (`trackNavClick`/`trackRailClick`/
@@ -32,11 +32,16 @@ model: sonnet
 
 ## 正典スペック（このとおりに統一されているかを管理する）
 
-### A. ヘッダー / ナビ IA
-- desktop 主要 nav = ランキング`/ranking`・都道府県`/areas`・テーマ`/themes`・ブログ`/blog` + 検索（`HeaderClient.tsx`）。
-  「都道府県」を primary nav に維持（P0-1・stats47 固有価値）。mobile は menu/logo/search を優先し drawer に nav を集約。
-- 実装: `components/organisms/Header/*` / `components/organisms/MobileNavDrawer/*`。正典: 情報設計
-  `docs/01_技術設計/03_情報設計.md`、ベンチマーク §3。nav 順・項目変更は **nav_click の baseline を取ってから**（計測撹乱を避ける・evidence-based）。
+### A. 骨組み / ナビ IA (サイドバー型・2026-10-27 オーナー決定)
+- サイト全体のナビは `AppSidebar` (テンプレートの app-sidebar に寄せたサイドバー。lg 未満は Sheet) だけが持つ。
+  主要ナビ = ホーム・ランキング`/ranking`・都道府県`/areas`・市区町村`/municipalities`・地域分析`/geo`・調査`/survey`・統計ブログ`/blog`・地域間比較
+  (項目とラベルの正典は `components/organisms/AppSidebar/site-navigation.ts`)。カテゴリとテーマは既定で開くグループ、
+  テーマは `THEME_NAV_GROUPS` の 5 系統の開閉できる項目、下端に一覧への出口。「都道府県」を主要ナビに維持（P0-1・stats47 固有価値）。
+- ヘッダー (`SiteHeader`) は開閉ボタン・検索・右端のアイコンボタン群 (一覧への出口・配色)。ナビのリンクは置かない。
+  フッター (`Footer`) は主要な入口数個とサイトの案内・著作表記だけ。Cookie 同意は `SidebarInset` 末尾の 1 行の帯。
+- 実装: `app/layout.tsx` / `components/organisms/{AppSidebar,SiteHeader,Footer}/*` / `lib/analytics/components/CookieConsentBanner.tsx`。
+  正典: 情報設計 `docs/01_技術設計/03_情報設計.md`、`docs/01_技術設計/04_デザインシステム.md`「骨組み」、ベンチマーク §3。
+  nav 順・項目変更は **nav_click の baseline を取ってから**（計測撹乱を避ける・evidence-based）。
 
 ### B. 共通レイアウト shell（統一レイアウト規約）
 - 幅・レールは `PageShell`（1280px・`SHELL_WIDTH_CLASS`）/ 記事系は `ArticleShell`（reading zone）経由で統一。
@@ -44,7 +49,7 @@ model: sonnet
   hero は allowlist の `HeroBanner` のみ。正典: `docs/01_技術設計/04_デザインシステム.md`、
   `.claude/design-system/SSOT.md`、`.claude/rules/ui-components.md`。
 - 左右レールの Surface・見出し・リンク行の視覚契約は共通（`RailCard` / `RailNavRow` / `RailNavRowButton` / `RailStack`）。
-  左レールの内容所有もここに含む（`LeftRailLayout` の中身）。詳細・機械ゲートは `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」。
+  ページ内ナビ (旧 左レール) の置き場は `LeftRailLayout` (本文の上・どの幅でも 1 か所) で、内容所有もここに含む。詳細・機械ゲートは `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」。
 
 ### C. 一覧カード / リンクカード taxonomy
 - ブログ/タグ**一覧**カードは title/meta を **DOM テキスト**で必ず見せる（サムネ焼き込み文字に依存しない・

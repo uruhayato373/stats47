@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 
-import { LEFT_RAIL_NARROW_ONLY_CLASS, LeftRailLayout } from './LeftRailLayout';
+import { LeftRailLayout } from './LeftRailLayout';
 
 interface PageShellProps {
   /** 中央メインコンテンツ */
@@ -19,20 +19,16 @@ interface PageShellProps {
    */
   rightRail?: ReactNode;
   /**
-   * shell コンテナ 936px 以上で左に表示するサイドレール（ページ内ナビ）。省略すると左レールなし。
+   * ページ内ナビ (旧 左レール)。列を作らず、`header` の後・本文の上にどの幅でも全幅で置く
+   * (`LeftRailLayout`)。右レールと同時に渡すと右レールを優先し、ページ内ナビは描かない。
    */
   leftRail?: ReactNode;
-  /** 左ナビを狭め、データの表示幅を優先する。寸法は LeftRailLayout が所有。 */
-  leftRailDensity?: 'default' | 'compact';
   /**
-   * 左レールが出ない幅で左レールをどう扱うか。
-   * - `stack`（既定）: 本文の下に積む。関連リンク集など「読み終えた後で見る」もの向け
-   * - `hide`: 描画しない。**ページ内容を切り替えるナビ**はページ末尾に置くと操作対象より
-   *   後ろに来て意味を失うため、狭幅では非表示にし、代替 UI をページ側が本文上部に出す
-   *   （テーマページ = ヘッダーの `LEFT_RAIL_NARROW_ONLY_CLASS`）。
-   *   ★代替 UI 側も同じ共有クラスを使うこと。ずれると両方出る幅ができる
+   * パンくずとページ見出し (h1)。本文・ページ内ナビ・右レールより先に全幅で置く。
+   * ページ内ナビ (leftRail) を渡すページは、ナビがパンくずと h1 より前に出ないよう必ずここへ渡す
+   * (`design-system:check` の `left-rail-requires-header-first`)。
    */
-  leftRailNarrowBehavior?: 'stack' | 'hide';
+  header?: ReactNode;
   /** 追加 className（外側コンテナに当てる） */
   className?: string;
 }
@@ -76,7 +72,7 @@ export const RIGHT_RAIL_GRID_CLASS =
  * グリッド (境界はすべて shell コンテナの幅):
  * - レールなし     : 1280px 中央寄せ
  * - 右レールのみ   : 988px 以上で [minmax(0,1fr) 316px]
- * - 左レールのみ   : 936px 以上で [264px minmax(0,1fr)] (compact は 896px 以上で 224px)
+ * - ページ内ナビ   : 列を作らない。header (パンくず + h1) → ページ内ナビ → 本文の順に縦に積む
  *
  * 右レール 316px と gap 16px は ArticleShell と同値。同じ `RightRailWidgets` を描画するため、
  * 両 Shell で幅を揃える。300×250 の `SidebarPromoBanner` は Card で囲まず、このレール内に
@@ -90,8 +86,7 @@ export function PageShell({
   variant = 'default',
   rightRail,
   leftRail,
-  leftRailDensity,
-  leftRailNarrowBehavior = 'stack',
+  header,
   className,
 }: PageShellProps) {
   const hasRight = !!rightRail;
@@ -107,21 +102,11 @@ export function PageShell({
 
   return (
     <div className={cn(SHELL_CONTAINER_CLASS, className)}>
+      {header}
       {showLeft ? (
-        <>
-          <LeftRailLayout
-            leftRail={leftRail}
-            mainClassName={mainClass}
-            density={leftRailDensity}
-          >
-            {children}
-          </LeftRailLayout>
-          {leftRailNarrowBehavior === 'stack' && (
-            <div className={cn('mt-4 space-y-4', LEFT_RAIL_NARROW_ONLY_CLASS)}>
-              {leftRail}
-            </div>
-          )}
-        </>
+        <LeftRailLayout leftRail={leftRail} mainClassName={mainClass}>
+          {children}
+        </LeftRailLayout>
       ) : hasRight ? (
         <div className={RIGHT_RAIL_GRID_CLASS}>
           <div data-slot="shell-main" className={mainClass}>

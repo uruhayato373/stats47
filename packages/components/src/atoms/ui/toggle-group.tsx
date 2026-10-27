@@ -1,5 +1,9 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の toggle-group.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
-// 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の toggle-group.tsx の写し。import 先は相対パスに変えた。
+// 取り直すときは同じコミットの components/ui/ から写し、下の 1 点を当て直す (packages/ui-theme/README.md)。
+//
+// 公式との差: 呼び出しが 0 件の縦向き (orientation="vertical") の見た目のクラスを外した。orientation の値は
+// data-orientation と Base UI にそのまま渡す。Tailwind はソースに書かれたクラスを全部 CSS に出すので、
+// 使わない見た目の分だけ全ページの CSS が重くなる (2026-10-28 配信サイズの点検・策 E)。
 "use client"
 
 import * as React from "react"
@@ -44,7 +48,7 @@ function ToggleGroup({
       data-orientation={orientation}
       style={{ "--gap": spacing } as React.CSSProperties}
       className={cn(
-        "cn-toggle-group group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-lg data-[size=sm]:rounded-[min(var(--radius-md),10px)] data-vertical:flex-col data-vertical:items-stretch",
+        "cn-toggle-group group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-lg data-[size=sm]:rounded-[min(var(--radius-md),10px)]",
         className
       )}
       {...props}
@@ -74,7 +78,7 @@ function ToggleGroupItem({
       data-size={context.size || size}
       data-spacing={context.spacing}
       className={cn(
-        "cn-toggle-group-item shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-lg group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-lg group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-lg group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-lg group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
+        "cn-toggle-group-item shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-lg group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-lg group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l",
         toggleVariants({
           variant: context.variant || variant,
           size: context.size || size,

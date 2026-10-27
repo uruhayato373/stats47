@@ -20,14 +20,14 @@ describe("right rail scroll contract", () => {
     // 寸法を変える変更もここで一度止まるので、意図した変更かを必ず確認できる
     // 316px は PageShell と共通。300×250 バナーは Card なしで等倍表示する。
     expect(source).toContain(
-      'className="hidden w-[316px] shrink-0 @min-[988px]/shell:flex @min-[988px]/shell:self-stretch @min-[988px]/shell:flex-col @min-[988px]/shell:gap-3"',
+      "'mt-4 flex flex-col gap-4 @min-[988px]/shell:mt-0 @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3'",
     );
+    expect(source).toContain("<aside className={ARTICLE_RAIL_CLASS}>{rail}</aside>");
 
     // レールはページと一緒に流れる。追従する領域 (旧 railSticky) を戻さない (2026-09-25)。
-    const asideStart = source.indexOf('<aside className="hidden w-[316px]');
-    const asideEnd = source.indexOf('</aside>', asideStart);
-    const asideSource = source.slice(asideStart, asideEnd);
-    expect(asideSource).not.toContain("sticky");
+    const classStart = source.indexOf("export const ARTICLE_RAIL_CLASS");
+    const classSource = source.slice(classStart, source.indexOf(";", classStart));
+    expect(classSource).not.toContain("sticky");
     expect(source).not.toContain("railSticky");
   });
 

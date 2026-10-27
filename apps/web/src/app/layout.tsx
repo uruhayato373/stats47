@@ -9,7 +9,6 @@
  * - メタデータ設定（SEO、OGP、Twitter Cards）
  * - テーマプロバイダー（ダークモード対応）
  * - セッションプロバイダー（NextAuth）
- * - トースト通知（Sonner）
  *
  * アーキテクチャ:
  * - Next.js 15 App Router のレイアウト機能を使用
@@ -24,17 +23,22 @@
  * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
  * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
  * - AppSidebar は variant="inset"。SidebarInset はテンプレートの layout.tsx と同じ outline + m-2 + 角丸なしにする
- * - Cookie 同意のカードは本文の右下に浮かべるので、その高さ分の余白をページに足さない
+ * - Cookie 同意は SidebarInset の最後の子に置く画面下端の帯 (sticky bottom-0)。流れの中に高さを持つので、
+ *   ページの末尾が帯に隠れない
+ * - サイドバー部品と AdSenseScript は sidebar-shell.tsx (1 つの client モジュール) から import する
+ * - トースト通知 (Toaster) は置かない。toast() の呼び出しが 0 件で、全ページの JS を増やすだけだった
  */
 
 import { Suspense } from "react";
 
-import { SidebarInset, SidebarProvider } from "@stats47/components/atoms/ui/sidebar";
-import { Toaster } from "sonner";
-
 import "./globals.css";
 
 import { AppSidebar } from "@/components/organisms/AppSidebar";
+import {
+  AdSenseScript,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/organisms/AppSidebar/sidebar-shell";
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { SiteHeader } from "@/components/organisms/SiteHeader/SiteHeader";
 
@@ -45,10 +49,7 @@ import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { ReadProgressTracker } from "@/lib/analytics/components/ReadProgressTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
-import {
-  ADSENSE_DISPLAY_ENABLED,
-  AdSenseScript,
-} from "@/lib/google-adsense";
+import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense/constants";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
 import { generateWebSiteStructuredDataScripts } from "@/lib/structured-data/scripts";
@@ -170,12 +171,10 @@ export default function RootLayout({
               </main>
               {/* フッター（全ページ共通） */}
               <Footer />
+              {/* Cookie 同意の帯 (画面下端に留まり、SidebarInset の幅だけを覆う) */}
+              <CookieConsentBanner />
             </SidebarInset>
           </SidebarProvider>
-          {/* トースト通知（成功、エラー、警告などの通知を表示） */}
-          <Toaster position="top-right" richColors />
-          {/* Cookie 同意バナー */}
-          <CookieConsentBanner />
         </ThemeProvider>
       </body>
     </html>

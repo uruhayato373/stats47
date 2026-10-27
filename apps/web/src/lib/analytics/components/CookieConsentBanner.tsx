@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
 
-import { SurfaceCard } from "@/components/surface";
-
 const CONSENT_COOKIE_NAME = "stats47_consent";
 const CONSENT_LS_KEY = "stats47_cookie_consent";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -36,9 +34,12 @@ function syncGtag(value: "granted" | "denied") {
  * useEffect 内の setState 連鎖を避けるため、表示判定は別 effect として
  * 分離 (react-hooks/set-state-in-effect 警告回避)。
  *
- * 見た目 (2026-10-28): 画面下端の全幅の帯をやめ、本文の右下に浮かぶ小さなカードにした。
- * 全幅の帯はサイドバーと地図の凡例・操作ボタンを覆っていた。固定表示でも覆う面積が小さいので、
- * 帯の高さ分の余白をページに足さない。z-index は地図 (Leaflet のペインと操作部品 400〜1000) より上にする。
+ * 見た目 (2026-10-28 2 巡目): 画面下端の 1 行の横帯。ルートレイアウトの SidebarInset の最後の子に置き、
+ * `sticky bottom-0` で画面下端に留める。幅は SidebarInset と同じで、サイドバーを覆わない。
+ * 流れの中に高さを持つので、ページの末尾 (フッター・地図とテーブルのタブ) はこの帯の上までスクロールでき、
+ * 帯に隠れたままにならない (fixed の浮きカードは本文の上に重なり、その分の余白も無かった)。
+ * 文は 1 行に収まる長さにし、390px でも「文 1 行 + ボタン 1 行」の 2 行で収める。
+ * z-index は地図 (Leaflet のペインと操作部品 400〜1000) より上、ヘッダー (z-200) の重なりとは独立。
  */
 export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -72,15 +73,16 @@ export function CookieConsentBanner() {
   if (!visible) return null;
 
   return (
-    <SurfaceCard
+    <div
       role="region"
       aria-label="Cookie の利用について"
-      className="fixed right-4 bottom-[calc(1rem+var(--safe-area-bottom))] left-4 z-[1100] text-muted-foreground shadow-md sm:left-auto sm:w-full sm:max-w-sm"
+      data-slot="cookie-consent"
+      className="sticky bottom-0 z-[1100] flex flex-wrap items-center justify-end gap-x-4 gap-y-1 border-t border-border bg-background px-4 py-2 pb-[calc(0.5rem+var(--safe-area-bottom))]"
     >
-      <p className="leading-snug">
-        当サイトでは、利用状況の分析のために Cookie を使用しています。
+      <p className="min-w-0 flex-1 basis-72 text-xs text-pretty text-muted-foreground sm:text-sm">
+        当サイトは利用状況の分析に Cookie を使用しています。
       </p>
-      <div className="flex items-center justify-end gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         <Button variant="ghost" size="sm" onClick={handleDecline}>
           拒否
         </Button>
@@ -88,6 +90,6 @@ export function CookieConsentBanner() {
           同意する
         </Button>
       </div>
-    </SurfaceCard>
+    </div>
   );
 }

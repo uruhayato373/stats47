@@ -200,6 +200,12 @@ jobs:
         run: npm run design-system:check -w apps/web
         continue-on-error: false
 
+      - name: 🎨 Lyra Used CSS Check
+        # style-lyra.used.css (公開サイトが読む lyra の規則の生成物) の取りこぼし・cn-* の組み立て・
+        # 再生成忘れを止める (pre-commit と同一)。正典: packages/ui-theme/README.md
+        run: npm run ui-theme:lyra:test
+        continue-on-error: false
+
       - name: 🃏 Card Census Guard
         # *Card の増殖を抑える (スパゲッティ化の止血)。ベースライン超過で失敗。
         run: node .claude/scripts/lib/check-card-census.cjs

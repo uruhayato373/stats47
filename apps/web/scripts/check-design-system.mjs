@@ -43,7 +43,7 @@ const rules = [
     // 992px だったので、旧境界の書き戻しも同じ rule で止める。
     id: 'no-manual-left-rail-breakpoint',
     message:
-      'Left rail responsive classes belong to LeftRailLayout. Use LEFT_RAIL_NARROW_ONLY_CLASS for narrow alternatives.',
+      'Page navigation is placed above the content at every width (LeftRailLayout). Do not reintroduce left rail breakpoints.',
     pattern:
       /(?:min-\[992px\]:|@min-\[(?:936|896)px\]\/shell:)(?:grid|block|hidden|grid-cols-\[(?:264|224)px_minmax\(0,1fr\)\]|gap-\d+|items-start)/,
     allow: (relativePath) =>
@@ -423,27 +423,39 @@ for (const relativePath of [
   });
 }
 
-// 操作用 left rail を hide する consumer は、同じファイルの狭幅代替 UI に共有境界を
-// 使わなければならない。独自 lg:hidden 等だと 992-1023px に二重表示/欠落が生じる。
-// /areas は PrefectureNavigator 自体が全幅で地方別一覧を常設するため、別 visibility wrapper
-// を持たない。この例外も fallback component の存在まで決定的に検査する。
-const integratedLeftRailFallbacks = new Map([
-  ['src/app/areas/page.tsx', '<PrefectureNavigator'],
-]);
+// 2026-10-28 (2 巡目): ページ内ナビ (leftRail) は列を作らず、どの幅でも本文の上の 1 か所に出す。
+// 幅で隠す分岐 (旧 leftRailNarrowBehavior="hide") と常に隠す代替 UI のクラス (旧 LEFT_RAIL_NARROW_ONLY_CLASS) は
+// 撤去したので、戻さない。ページ内ナビを渡す PageShell は、パンくずと h1 を header に渡して
+// ナビより先に出す (LeftRailLayout はナビを本文の先頭に置くので、h1 を children に入れるとナビが h1 より前に来る)。
 for (const root of scanRoots) {
   for (const relativePath of listFiles(root)) {
+    if (relativePath.startsWith('src/components/layout/')) continue;
     const source = readFileSync(path.join(cwd, relativePath), 'utf8');
-    if (!source.includes('leftRailNarrowBehavior="hide"')) continue;
-    if (source.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) continue;
-    const integratedFallback = integratedLeftRailFallbacks.get(relativePath);
-    if (integratedFallback && source.includes(integratedFallback)) continue;
+    for (const retired of ['leftRailNarrowBehavior', 'LEFT_RAIL_NARROW_ONLY_CLASS', 'leftRailDensity']) {
+      if (!source.includes(retired)) continue;
+      violations.push({
+        ruleId: 'no-retired-left-rail-narrow-api',
+        message:
+          'Page navigation is shown above the content at every width. Do not hide it by width or add a hidden narrow alternative.',
+        file: relativePath,
+        lineNumber: source.slice(0, source.indexOf(retired)).split('\n').length,
+        line: retired,
+      });
+    }
+    const pageShellStart = source.indexOf('<PageShell');
+    if (pageShellStart === -1) continue;
+    const pageShellTag = source.slice(pageShellStart, source.indexOf('\n      >', pageShellStart) + 1 || undefined);
+    const leftRailIndex = pageShellTag.indexOf('leftRail=');
+    if (leftRailIndex === -1) continue;
+    const headerIndex = pageShellTag.indexOf('header=');
+    if (headerIndex !== -1 && headerIndex < leftRailIndex) continue;
     violations.push({
-      ruleId: 'left-rail-hide-requires-shared-narrow-alternative',
+      ruleId: 'left-rail-requires-header-first',
       message:
-        'A hidden left rail requires a narrow alternative using LEFT_RAIL_NARROW_ONLY_CLASS in the same consumer.',
+        'A PageShell with leftRail must pass the breadcrumb and h1 through header (before leftRail) so the page navigation follows them.',
       file: relativePath,
-      lineNumber: 1,
-      line: 'leftRailNarrowBehavior="hide"',
+      lineNumber: source.slice(0, pageShellStart).split('\n').length,
+      line: '<PageShell leftRail=…>',
     });
   }
 }

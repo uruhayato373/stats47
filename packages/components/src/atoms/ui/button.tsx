@@ -1,5 +1,9 @@
-// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の button.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
-// 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の button.tsx の写し。import 先は相対パスに変えた。
+// 取り直すときは同じコミットの components/ui/ から写し、下の 1 点を当て直す (packages/ui-theme/README.md)。
+//
+// 公式との差: 呼び出しが 0 件の variant="destructive" を外した。Tailwind はソースに書かれたクラスを全部 CSS に出し、
+// その variant の lyra 規則名を書くと style-lyra.used.css に規則が残るので、使わない見た目の分だけ全ページの CSS が
+// 重くなる (2026-10-28 配信サイズの点検・策 E)。使い始めるときはテンプレートの写しから戻す。
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -17,8 +21,6 @@ const buttonVariants = cva(
           "cn-button-variant-secondary bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
           "cn-button-variant-ghost hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
-        destructive:
-          "cn-button-variant-destructive bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "cn-button-variant-link text-primary underline-offset-4 hover:underline",
       },
       size: {

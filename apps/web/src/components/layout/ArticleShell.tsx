@@ -16,9 +16,19 @@ interface ArticleShellProps {
   rail?: ReactNode;
   /** パンくず (zone 内・コンテナ先頭に配置) */
   breadcrumb?: ReactNode;
+  /**
+   * ページの見出し (h1 と操作の行)。パンくずの後・本文と右レールの列より前に全幅で置く。
+   * 渡すと、右レールの先頭の上端が本文の最初のカードの上端と揃う (見出しを children に入れると、
+   * 右レールは見出しの横から始まる)。
+   */
+  header?: ReactNode;
   /** 追加 className (外側 zone コンテナに当てる) */
   className?: string;
 }
+
+/** 右レール。狭い幅は本文の下 (mt-4・間隔 16px)、988px 以上は幅 316px の列 (間隔 12px) */
+export const ARTICLE_RAIL_CLASS =
+  'mt-4 flex flex-col gap-4 @min-[988px]/shell:mt-0 @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3';
 
 /**
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。
@@ -34,6 +44,9 @@ interface ArticleShellProps {
  * - レールはページと一緒に自然に流れる。追従する領域は置かない (2026-09-25 にブログの目次を
  *   本文上部へ移し、唯一の利用者だったレール先頭の追従領域を廃止した)
  * - レール内に独立スクロールを作らず、ページ本体のスクロールで全内容に到達する
+ * - 右レールは 1 回だけ描く。狭い幅では本文の下に積み、988px 以上では同じ要素を本文の右の列に置く
+ *   (2026-10-28 2 巡目。それまでは aside と本文下の div の 2 か所に描き、広告の計測画像・検索欄・
+ *   リンクが HTML に二重に出ていた)
  * - 左レールと右レールは併存させない。右レールがある場合は右レールを優先する
  *
  * 右レールの境界は PageShell と同じ名前付きコンテナ `@container/shell` の幅 (988px) で決める。
@@ -50,6 +63,7 @@ export function ArticleShell({
   leftRail,
   rail,
   breadcrumb,
+  header,
   className,
 }: ArticleShellProps) {
   const hasRightRail = !!rail;
@@ -59,23 +73,17 @@ export function ArticleShell({
     <div className={cn('reading-zone w-full bg-background', className)}>
       <div className={SHELL_CONTAINER_CLASS}>
         {breadcrumb}
+        {header}
         {showLeftRail ? (
           <LeftRailLayout leftRail={leftRail}>{children}</LeftRailLayout>
         ) : hasRightRail ? (
-          <>
-            <div className="@min-[988px]/shell:flex @min-[988px]/shell:items-start @min-[988px]/shell:gap-4">
-              <div data-slot="shell-main" className="min-w-0 flex-1">
-                {children}
-              </div>
-              <aside className="hidden w-[316px] shrink-0 @min-[988px]/shell:flex @min-[988px]/shell:self-stretch @min-[988px]/shell:flex-col @min-[988px]/shell:gap-3">
-                {rail}
-              </aside>
+          <div className="@min-[988px]/shell:flex @min-[988px]/shell:items-start @min-[988px]/shell:gap-4">
+            <div data-slot="shell-main" className="min-w-0 flex-1">
+              {children}
             </div>
-            {/* 右レールが出ない幅では、レールを本文の下に積み下ろす */}
-            <div className="mt-4 space-y-4 @min-[988px]/shell:hidden">
-              {rail}
-            </div>
-          </>
+            {/* 狭い幅では本文の下に積み、988px 以上では本文の右の列になる (同じ要素を 1 回だけ描く) */}
+            <aside className={ARTICLE_RAIL_CLASS}>{rail}</aside>
+          </div>
         ) : (
           <div data-slot="shell-main" className="min-w-0">
             {children}
