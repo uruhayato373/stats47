@@ -42,8 +42,8 @@ const SECTIONS = [
   },
   {
     href: "/strategy",
-    title: "方針・事業計画",
-    desc: "stats47 2.0の取込判断、初期パイロット、企画在庫、KPI、設計文書を確認",
+    title: "方針",
+    desc: "事業計画の題目・事業原則・設計と方針の文書。計画の明細は各領域の画面へ割り振った",
   },
   {
     href: "/revenue",

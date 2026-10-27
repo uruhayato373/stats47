@@ -33,7 +33,7 @@ export default async function StrategyDocumentPage({
         className="text-sm font-medium text-console-info hover:underline"
         href="/strategy"
       >
-        ← 方針・事業計画へ戻る
+        ← 方針へ戻る
       </Link>
     </div>
   );

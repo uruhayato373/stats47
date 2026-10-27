@@ -27,6 +27,19 @@ describe("nav-registry (左メニューの SSOT)", () => {
     expect(NAV_GROUPS.at(-1)?.title).toBe("管理");
   });
 
+  it("領域のグループ名は領域の概要 (/domains/<id>) へリンクし、そのページは動的ルートで実在する", () => {
+    expect(NAV_GROUPS.slice(1).map((g) => g.href)).toEqual(domainsConfig.domains.map((d) => `/domains/${d.id}`));
+    expect(NAV_GROUPS[0]?.href).toBeUndefined();
+    expect(existsSync(path.join(APP_DIR, "domains", "[id]", "page.tsx"))).toBe(true);
+  });
+
+  it("戦略のグループは判断の画面だけで、資料 (事業計画の詳細・共通方針・文書) をメニューに出さない", () => {
+    const strategy = NAV_GROUPS.find((g) => g.title === "戦略");
+    const items = navHrefs(strategy ? [strategy] : []);
+    expect(items).toContain("/strategy");
+    for (const reference of ["/strategy/business-plan", "/strategy/policy", "/docs"]) expect(hrefs).not.toContain(reference);
+  });
+
   it("href が重複しない (同じ画面が二重に出ない)", () => {
     expect(new Set(hrefs).size).toBe(hrefs.length);
   });

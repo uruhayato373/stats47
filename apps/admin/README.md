@@ -35,8 +35,11 @@ PORT=5000 npm run admin    # ポート上書き
 | `/assets`                         | 画像/動画資産 11 タブの読み取り専用ギャラリー                                                                                                                                                      |
 | `/svg`                            | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ)                                                                                                                                              |
 | `/research`                       | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続の読み取り専用ミラー                                                                                                  |
-| `/strategy`                       | stats47 2.0事業計画とM1 Geoのsource layer・空間演算・metric・X role 3/9/2/1・契約違反の読み取り専用ミラー                                                                                          |
-| `/dashboard`                      | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ)                                                                                                                        |
+| `/dashboard`                      | 現況レビュー。pilot 判定・施策の同時進行・領域の警告の要約とリンク + 週次メトリクス (60 秒キャッシュ)                                                                                               |
+| `/strategy`                       | 方針。事業計画の題目・事業原則・設計と方針の文書。明細は `/strategy/business-plan` (計画の詳細)・`/data/geo` (Geo 分析)・`/sns/geo-plan` (X 企画)・`/product/note-plan` (note 商品) へ割り振った |
+| `/site/queues`                    | サイトの是正キュー (ブログ品質・AI 解説・企画キュー・SNS・実験)。旧 `/dashboard` の進捗キュー                                                                                                      |
+| `/domains/<id>`                   | 領域の概要 (サイドメニューのグループ名から開く)。判断に使う画面・構えと狙い・タスク・文書・担当エージェント/スキル                                                                                  |
+| `/docs` `/docs/<path>`            | docs/ の全文書を領域ごとに一覧し、本文を表示する (docs/ の外は開かない)                                                                                                                            |
 | `/buzz-map`                       | curated catalog・score・evidence・landing・素材previewの読み取り専用ギャラリー。実行は `/buzz-map` skill                                                                                           |
 | `/ops/agents`                     | agent・skill・CI 無人実行・backlog-loop のモデル/effort 割り当て一覧。正本の frontmatter・workflow・routing policy を表示のたびに読む                                                              |
 
