@@ -3,8 +3,15 @@
 import { type ReactNode, useId } from 'react';
 
 import { cn } from '@stats47/components';
-
-import { SurfaceSection } from '@/components/surface';
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@stats47/components/atoms/ui/card';
 
 export interface ChartPanelProps {
   /** 固定キーがあるグラフでは、SSRとクライアントで同じ見出しIDを使う。 */
@@ -22,6 +29,11 @@ export interface ChartPanelProps {
   footerClassName?: string;
 }
 
+/**
+ * タイトル付きチャート/地図の枠。テンプレートの Card 構成
+ * (CardHeader / CardTitle / CardDescription / CardAction / CardContent / CardFooter) で描く。
+ * 見出しは h3 として CardTitle の中に置き、領域は見出し・説明で命名する。
+ */
 export function ChartPanel({
   id,
   title,
@@ -44,54 +56,40 @@ export function ChartPanel({
     : undefined;
 
   return (
-    <SurfaceSection
+    <Card
       id={id}
-      className={cn('w-full p-0', className)}
+      role={titleId ? 'region' : undefined}
+      className={cn('w-full', className)}
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
     >
       {hasHeader && (
-        <div
-          className={cn('border-b border-border px-4 py-3', headerClassName)}
-        >
-          <div className="flex flex-wrap items-start justify-between gap-2">
-            <div className="flex min-w-0 items-center gap-2">
-              {icon}
-              {title && (
-                <h3
-                  id={titleId}
-                  className={cn(
-                    'text-sm font-semibold text-foreground',
-                    titleClassName
-                  )}
-                >
-                  {title}
-                </h3>
-              )}
-            </div>
-            {action}
-          </div>
-          {description && (
-            <div
-              id={descriptionId}
-              className="mt-1 text-sm leading-relaxed text-muted-foreground"
+        <CardHeader className={cn('border-b', headerClassName)}>
+          {(icon || title) && (
+            <CardTitle
+              className={cn('flex min-w-0 items-center gap-2', titleClassName)}
             >
-              {description}
-            </div>
+              {icon}
+              {title && <h3 id={titleId}>{title}</h3>}
+            </CardTitle>
           )}
-        </div>
+          {description && (
+            <CardDescription id={descriptionId}>{description}</CardDescription>
+          )}
+          {action && <CardAction>{action}</CardAction>}
+        </CardHeader>
       )}
-      <div className={cn('p-4', contentClassName)}>{children}</div>
+      <CardContent className={contentClassName}>{children}</CardContent>
       {footer && (
-        <div
+        <CardFooter
           className={cn(
-            'border-t border-border px-4 py-3 text-xs text-muted-foreground',
+            'flex-col items-stretch text-xs text-muted-foreground',
             footerClassName
           )}
         >
           {footer}
-        </div>
+        </CardFooter>
       )}
-    </SurfaceSection>
+    </Card>
   );
 }

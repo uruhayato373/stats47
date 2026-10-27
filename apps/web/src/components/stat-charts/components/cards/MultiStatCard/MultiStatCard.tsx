@@ -1,8 +1,9 @@
 import { logger } from "@stats47/logger";
 
+import { ChartErrorState } from "@/components/charts/ChartState";
+
 import { toKpiCardData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { MultiStatCardClient } from "./MultiStatCardClient";
 
@@ -24,7 +25,7 @@ export const MultiStatCard = async ({
 
   if (!statsDataId || !categories?.length) {
     return (
-      <ErrorDisplay
+      <ChartErrorState
         title={title}
         message="設定エラー: パラメータがありません"
       />
@@ -78,7 +79,7 @@ export const MultiStatCard = async ({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={title} message={fetchErrorMessage} />;
   }
 
   return (

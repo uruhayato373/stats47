@@ -9,14 +9,15 @@ import {
   type ChartDataNode,
 } from "@stats47/visualization/d3";
 
+import { ChartLoadingCard } from "@/components/charts/ChartState";
+
 import { CHART_COLORS } from "../../../constants";
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 import type { BarChartData } from "../../../types/visualization";
 
 const BarChart = dynamic(
   () => import("@stats47/visualization/d3/BarChart").then((mod) => mod.BarChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface BarChartClientProps {

@@ -1,8 +1,9 @@
 import { logger } from "@stats47/logger";
 
+import { ChartErrorState } from "@/components/charts/ChartState";
+
 import { toStatsTableData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { StatsTableClient } from "./StatsTableClient";
 
@@ -19,7 +20,7 @@ export const StatsTable = async ({
 
   if (!statsDataId || !rowDefs?.length) {
     return (
-      <ErrorDisplay
+      <ChartErrorState
         title={title}
         message="設定エラー: パラメータがありません"
       />
@@ -67,5 +68,5 @@ export const StatsTable = async ({
   }
   /* eslint-enable react-hooks/error-boundaries */
 
-  return <ErrorDisplay title={title} message={fetchErrorMessage ?? "エラー"} />;
+  return <ChartErrorState title={title} message={fetchErrorMessage ?? "エラー"} />;
 };

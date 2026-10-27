@@ -2,11 +2,11 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { BarChartClient } from "./BarChartClient";
 
@@ -34,7 +34,7 @@ export const DashboardBarChart = async ({
 
   if (!estatParams?.length) {
     return (
-      <ErrorDisplay title={title} message="設定エラー: 系列が未設定です" />
+      <ChartErrorState title={title} message="設定エラー: 系列が未設定です" />
     );
   }
 
@@ -68,11 +68,11 @@ export const DashboardBarChart = async ({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={title} message={fetchErrorMessage} />;
   }
 
   if (!chartData) {
-    return <ErrorDisplay title={title} message="データがありません" />;
+    return <ChartErrorState title={title} message="データがありません" />;
   }
 
   return (

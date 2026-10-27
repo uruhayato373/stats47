@@ -23,12 +23,12 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { AreaType } from "@/features/area";
 import {
   filterMapDataPoints,
   getLeafletBorderColor,
-  MapFallback,
   rankingItemToMapConfig,
   useThemedLeafletTile,
 } from "@/features/map-visualization/client";
@@ -176,7 +176,9 @@ export function RankingMapChartClient({
         {isMapLoading ? (
           <Skeleton className="h-[500px] w-full rounded-md" />
         ) : showFallback ? (
-          <MapFallback
+          <ChartEmptyState
+            height={null}
+            className="min-h-[200px] bg-muted/50"
             message={
               areaType === "city" && cityTopologyError
               ? "市区町村の地図データを読み込めませんでした"

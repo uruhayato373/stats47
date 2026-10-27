@@ -16,7 +16,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartPanel } from '@/components/charts/ChartPanel';
-import { ChartSkeleton } from '@/components/stat-charts/components/shared/ChartSkeleton';
+import { ChartLoadingCard } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
@@ -29,7 +29,7 @@ import type {
 const LineChartClient = dynamic(
   () => import('@/components/stat-charts/components/charts/LineChart/LineChartClient')
     .then((module) => module.LineChartClient),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface Props {

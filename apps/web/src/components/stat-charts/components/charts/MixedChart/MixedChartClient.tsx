@@ -4,14 +4,14 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 import type { MixedChartData } from "../../../types/visualization";
 import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
 
 const MixedChart = dynamic(
   () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface MixedChartClientProps {

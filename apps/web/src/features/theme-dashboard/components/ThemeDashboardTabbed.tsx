@@ -25,6 +25,7 @@ import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
+import { ChartLoading } from "@/components/charts/ChartState";
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
 
 import { RankingYearSelector } from "@/features/ranking/widgets";
@@ -36,7 +37,6 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { fetchIndicatorForYearAction } from "../actions";
 import { PREFECTURE_SET_LABEL, type ThemeDashboardClientProps } from "../types";
 
-import { ChartLoading } from "./ChartState";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";

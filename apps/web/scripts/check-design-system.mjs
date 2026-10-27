@@ -74,6 +74,10 @@ const rules = [
     message:
       'Do not import shadcn Card directly from app components/features. Use SurfaceCard, SurfaceLinkCard, SurfaceSection, or ChartPanel.',
     pattern: /from\s+["']@stats47\/components\/atoms\/ui\/card["']/,
+    // カード枠の正規の持ち主 (チャート枠と状態表示) はテンプレートの Card で組み立てる (2026-10-27)。
+    allow: (relativePath) =>
+      relativePath === 'src/components/charts/ChartPanel.tsx' ||
+      relativePath === 'src/components/charts/ChartState.tsx',
   },
   {
     id: 'no-legacy-dashboard-card',
