@@ -262,9 +262,39 @@ updated: 2026-10-19
 - **経緯**: 2026-10-27 オーナー決定「shadcndashboard テンプレートを正としてサイトを寄せる・余白も少なく」。ブランチ `feature/template-base-ui` で公開サイトの部品の Base UI 化、色・角丸・カード面 (`@stats47/ui-theme`)、外枠の余白 (p-4 / gap-4) までを済ませた。管理画面は並行して develop に入った移行 (dc37e10a3・2db4392b6。shadcn 公式 base-nova + shadcndashboard.dev の見た目) を採用し、このブランチの管理画面の変更は取り下げた。
 - **済 (2026-10-27)**: 独自カードは数え直すと全件が共通の外枠 (SurfaceCard・RailCard 系・ChartPanel・各 Client) 経由で、外枠の見た目はテンプレートに揃った (ホバー影を外し、記事カードの余白を半分に)。D3 は軸線なし・横目盛りのみが既にテンプレートと同じで、目盛りを点線 (`CHART_STYLES.grid.dashArray`) に、ツールチップを lyra の `.cn-chart-tooltip` と同じ見た目にした。カルーセルの矢印は動かせないときだけ行ごと隠す。ChartFooter の id / aria-controls は Base UI でも明示値が使われ、テストで対応を確認済み (変更不要)。
 - **済 (2026-10-27・追加)**: D3 の固定色のうち画面に出る地図の選択・ホバー枠の青を、テンプレートの primary (`getThemeColors().primary`) に替えた (都道府県・タイル・市区町村の 3 地図。Remotion はこれらの地図を使わない)。残りの固定色は性別・正負の識別色、文字の読みやすさのための白黒、色未指定時の既定値で、意図があるので残した。
-- **残り**: ① カルーセルの矢印を、横に動かせる幅でも見出しの「もっと見る」の行へ並べて矢印だけの行をなくす (「カードに重ねない」2026-09-24 週次 UI 検査は守る。SectionHeader の下線と action を持つ構成を 5 か所で組み替える: page.tsx・category/[categoryKey]/page.tsx 2 か所・FeaturedRankingGrid・PortalUseCaseGrid)。② 主要 4 ページ (/・/ranking/total-population・/themes/population-dynamics・/areas/13000) の上端の見た目確認。8GB の Mac では webpack の dev が数ページでメモリ切れになり、テーマと地域の上端は未確認 (DEV-TURBOPACK-NEXT164-01 が直れば確認できる)。
+- **済 (2026-10-28)**: カルーセルの矢印は見出しの行の右端に並べ、sm 未満は描かない (スワイプで動かす)。本番ビルドで 11 ページ × 3 幅 (1440・1024・390) とダークモードを撮って 3 巡の監査 (指摘 93・78・77 件) を直した。カードの地は lyra と同じ `bg-background` に揃えた。配信 JS は全ページで変更前以下 (ランキング詳細 404→396KB gzip・/blog 324→240KB)。
+- **残り (オーナー判断)**: CSS は全ページ共通の 1 ファイルで 24.5→33.8KB gzip (+9.3KB)。内訳は lyra の部品の見た目 5.1KB と、Base UI の部品の状態クラス (`data-open:` など) を含むユーティリティ +4.5KB。テンプレートの写しを保ったままでは削れない。案 CSS-3 = shadcn CLI がインストール時にするのと同じく、写しの部品の `cn-*` を lyra の最終的な値へ展開し `style-lyra.used.css` をやめる (推定 -3〜-4.5KB。詳細度が変わるので、全ページの撮り比べと、呼び出し側が `!` なしで lyra と同じ性質を渡している箇所の棚卸しが前提。写しとの差が大きくなり、テンプレートの取り直しが重くなる)。
 - **禁止**: Recharts を公開サイトに入れない (gzip 約 119KB の上乗せ)。カードを入れ子にしない。
-- **完了条件**: ① の差分が `npm run design-system:check -w apps/web`・web vitest 全件を通り、② の 4 ページのスクリーンショットをオーナーが確認した。
+- **完了条件**: CSS-3 を採るか見送るかをオーナーが決め、採るなら 11 ページ × 3 幅の撮り比べで差 0 を確認した。
+
+### [MAP-TILE-FOREIGN-LABELS-01] ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 のテンプレート移行の撮り直しで、`/ranking/total-population` の都道府県別の地図 (1440 幅) の左上に、地理院タイルが描く外国の地名と点が出ていることを確認した。変更前 (develop) の画面にも同じものが出ているので、移行で増えたものではない。
+- **次**: 地図のタイル (地理院の淡色地図) を、地名ラベルを持たない種類か、日本の外を塗りつぶす表示に替えられるかを調べる。地図の部品は `apps/web/src/app/layout.tsx` の `getInitialMapTileUrls` の preload と同じタイルを使う。
+- **禁止**: 出典表示 (地理院タイルの attribution) を外さない。
+- **完了条件**: 同じページの 1440・390 の撮影で、日本の外の地名が出ていない。
+
+### [COMPARE-ADD-REMNANT-01] 送信関数を消した compare-add が、管理画面のテストと GeoAI の実装仕様にまだ残っている
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:管理]
+
+- **経緯**: 2026-10-28 のテンプレート移行 3 巡目で、公開サイトから compare-add の送信関数を消した。`apps/admin/tests/unit/business-plan.test.ts` と `docs/02_実装計画/47_GeoAI事業M1実装仕様.md` が、まだこのイベントに依存している (イベントの catalog の項目もそのため残っている)。
+- **次**: M1 の計測にこのイベントが要るかを仕様の持ち主 (strategy-advisor) と決め、要らないなら catalog・m1 の eventIds・テスト・仕様の記述をまとめて外す。要るなら送信口を戻す。
+- **完了条件**: `npx vitest run --root apps/admin` が通り、catalog・テスト・仕様のどれにも参照の宙ぶらりんが無い。
+
+### [SELECT-ITEM-JSDOM-01] SelectItem から lyra と重なる素のクラスを外すと jsdom のテストが選択肢を取れなくなる
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 に、部品の写しから lyra と同じ性質を決める素のクラスを消して CSS を減らした (96 件)。`packages/components/src/atoms/ui/select.tsx` の `SelectItem` だけは、`gap-1.5 rounded-md py-1 pl-1.5 text-sm` を外すと `ThemeComparisonSection.test.tsx` が option を取れずに落ちたため写しのまま残した。クラスの文字列がテストの結果を変える理由は分かっていない (`packages/ui-theme/README.md` の「見た目は変わらず CSS だけ減る」前提に例外がある)。
+- **次**: 外した状態でテストを 1 本だけ動かし、取れなくなる要素の DOM を出力して、テストの取得方法 (role・name) とクラスのどちらに依存しているかを確かめる。
+- **完了条件**: 原因を README の差分一覧に書き、外せるなら外して web vitest 全件が通る。
+
+### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]
+
+- **経緯**: lyra の生成器 `scripts/ui-theme/build-used-lyra.mjs` は root の `scripts/` にあり、`check-checker-wiring.cjs` の candidateRoots (`.claude/scripts` と `apps|packages/*/scripts`) の外にある。そのため `.claude/config/quality-gates.json` の exceptions に `NOT_A_CHECKER` (期限 2026-12-31) を置いて通している。検査本体の `npm run ui-theme:lyra:test` は pre-commit と PR CI で blocking なので、検査そのものは走っている。
+- **次**: candidateRoots に root の `scripts/` を足すか、生成器を探索範囲へ移し、例外を外す。
+- **完了条件**: 例外なしで `node .claude/scripts/lib/check-checker-wiring.cjs --baseline` が通る。
 
 ### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]

@@ -107,13 +107,14 @@ export function HorizontalCardCarouselFrame({
 /**
  * 見出し行の右端に置く左右矢印。横に動かせないとき (全カードが見えている広い画面) は描かない。
  * 矢印はカードに重ねない (1 位の値を隠し、タップがカードのリンクへ抜ける。2026-09-23 週次 UI 検査)。
+ * sm 未満はスワイプで動かせるので描かない (390px で見出しが矢印に押されて 2 行に折れた。2026-10-28)。
  */
 export function HorizontalCardCarouselControls() {
   const state = useContext(CarouselContext)?.state;
   if (!state || (!state.canScrollLeft && !state.canScrollRight)) return null;
   const { ariaLabel, canScrollLeft, canScrollRight, scroll } = state;
   return (
-    <div className="flex items-center gap-1">
+    <div className="hidden items-center gap-1 sm:flex">
       <Button
         type="button"
         variant="outline"

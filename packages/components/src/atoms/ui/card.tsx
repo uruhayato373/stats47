@@ -9,9 +9,10 @@ import { cn } from "../../lib/cn"
  * Card を使わずにカード面だけが要る場所 (apps/web の SurfaceCard 系) の外枠。
  * テンプレートの lyra カード (角丸なし・細い線・影なし) と同じ見た目を、トークンだけで決める。
  * 角丸は --card-radius、線色は --card-outline (apps/web/src/app/globals.css)。ここにリテラル値を書かない。
+ * 地は lyra の .cn-card と同じ bg-background (ダークで bg-card にすると Card 経由のカードと色が食い違った。2026-10-28)。
  */
 export const CARD_SURFACE_CLASS =
-  "rounded-card border border-card-outline bg-card text-card-foreground"
+  "rounded-card border border-card-outline bg-background text-card-foreground"
 
 function Card({
   className,

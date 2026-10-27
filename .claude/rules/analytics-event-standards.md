@@ -146,8 +146,9 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > (shadcndashboard) のサイドバー型に替え、ヘッダーのナビ (メガメニュー) とモバイルドロワーを撤去した。サイト全体のナビは
 > `AppSidebar` だけになり、`nav_surface` は PC の常設サイドバー = `sidebar`、lg (1024px) 未満で Sheet として開いたもの =
 > `sidebar-mobile` の 2 値で送る (送信は共通のクリック監視 `NavClickTracker` が `data-nav-surface` / `data-nav-label` から行う)。
+> ヘッダーの行 (`SiteHeader`) に残るリンク (狭い画面のロゴ = ホームへ) は値 `header` で送る (2026-10-28 追加)。
 > 旧値 `desktop-header` / `mobile-drawer` はデプロイ日を境に 0 件になる。登録済み `nav_surface` の**値変更**で新しい
-> custom dimension は無い。サイドバーはテーマの一覧を常に出し、カテゴリの一覧は開閉できるグループ (既定は閉じ、現在地がカテゴリなら開く。2026-10-28) に入れ、主要ナビに「調査」(/survey) を加えたので、デプロイ前後のグローバルナビの件数・
+> custom dimension は無い。サイドバーはカテゴリ 17 件とテーマを開閉できるグループ (既定は開く) に入れ、テーマは 5 系統ごとに開閉する項目 (既定は閉じ、現在地のテーマを含む系統だけ開く) に分け、主要ナビに「調査」(/survey) を加えたので、デプロイ前後のグローバルナビの件数・
 > ラベル別の内訳を単純比較しない。フッターに足した主要ナビ・テーマのリンクは既存の `footer` で数える。
 
 > **nav_surface の値追加 (2026-09-06・商品導線)**: 商品一覧→商品詳細を
