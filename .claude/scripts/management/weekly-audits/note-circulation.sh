@@ -2,7 +2,7 @@
 # note の公開記事・タグ・導線・マガジン・カバー・カードの週次全量監査 (2026-10-26 に note-circulation-audit-weekly.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。note への書き込みはしない (公開ページと公開 API の読み取りだけ)。
 # どれかの検査が落ちる・circulation の gate (errors / warnings / タグ / マガジン / 有料記事の無料部分) を満たさないと exit 1。
-# 出力: data/note/evidence/note-circulation-audit-*.json・note-cover-audit-latest.json・data/note/card-visibility-latest.json・data/note/cover-assets.json
+# 出力: data/note/evidence/note-circulation-audit-*.json・note-unverified-audit-latest.json・note-cover-audit-latest.json・data/note/card-visibility-latest.json・data/note/cover-assets.json
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
 failed=()
@@ -24,6 +24,7 @@ if node -e 'process.exit(require(process.argv[1]).summary.browserVerifyFailedArt
 fi
 node -e 'const s=require(process.argv[1]).summary; process.exit(s.fetchFailed || s.browserVerifyFailedArticles || s.affectedArticles ? 1 : 0)' "$PWD/$CARDS" || failed+=("card-visibility")
 run product-navigation npm run --silent note:navigation:products:check
+run unverified npm run --silent note:unverified:audit -- --output data/note/evidence/note-unverified-audit-latest.json
 REPORT=$(ls -t data/note/evidence/note-circulation-audit-*.json 2>/dev/null | head -1)
 if [ -z "$REPORT" ]; then
   failed+=("circulation-report-missing")
