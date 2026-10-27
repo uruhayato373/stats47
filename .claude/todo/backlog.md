@@ -270,6 +270,14 @@ updated: 2026-10-19
 - **次**: 2026-11-06 以降の週次 snapshot で `evaluate-theme-experiments` を実行して d56 を記録する。標本不足のままなら count のみ記録し、効果を主張しない。
 - **完了条件**: 55 件の d56 が `data/themes/experiments.json` に記録され、継続・改善・保留が launch-review に書かれている。
 
+### [NOTE-UNVERIFIED-PUBLISHED-01] 「実機で確認していない」断り書きを残して公開した note 17 本を、実際に試して書き直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:商品]
+
+- **経緯 (2026-10-27 実測)**: 公開済み 428 本を `npm run note:unverified:audit` で検査し 17 本が該当 (記録 `data/note/evidence/note-unverified-audit-latest.json`)。2026-10-24 に「未検証範囲を明示すれば公開してよい」と判断して操作記事を公開したのが直接の原因。同日に公開前ゲート (`lib/unverified-disclosure.mjs`。`publish-new-note.sh`・`patch-note-paid-landing.mjs`・週次 note-circulation) を入れた。週次はこの 17 本が直るまで落ち続ける。
+- **内訳**: Excel 塗りつぶしマップ `h-howto-excel-filled-map` (書き直しは別途進行) / マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
+- **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
+- **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
+- **完了条件**: 17 本それぞれ実際に操作した画面・結果を入れて更新し、`npm run note:unverified:audit` が 0/428 で exit 0。商品パックは Office で開いた確認記録を `data/products/` に残す。
 
 ### [STRATEGY-GATE-ADMIN-PILOT-01] 管理画面に、行政向け商品の検証が4段階のどこにいるかを出す
 タグ: [収益化] [種類:改善] [実行:sweep] [検証:npm run test -w apps/admin] [起票:2026-10-27] [領域:戦略]

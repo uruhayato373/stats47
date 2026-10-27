@@ -36,6 +36,7 @@ import { externalCard } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { assertRegisteredCards, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
+import { findUnverifiedDisclosures, formatDisclosures } from "./lib/unverified-disclosure.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -261,6 +262,8 @@ async function processArticle(ctx, article, options) {
     console.log(`  ${article.key}: already compliant (intro/source ともに本文にある)`);
     return { status: "already_compliant", key: article.key };
   }
+  const unverified = findUnverifiedDisclosures(`${composed.html}\n${pay}`);
+  if (unverified.length) throw new Error(`${article.key}: 未検証の断り書きが本文に残っている。検証して本文を直すまで公開本文を更新しない\n${formatDisclosures(unverified)}`);
   const newSeparator = composed.separatorId || published.separator;
   console.log(`  ${article.key}: changes=${composed.changes.join("+")} free ${free.length}→${composed.html.length} chars, pay ${pay.length} (attachments ${attachmentsBefore}), separator ${published.separator}→${newSeparator}`);
   if (!options.commit) return { status: "dry-run", key: article.key, changes: composed.changes };

@@ -15,6 +15,10 @@ ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
 [ -d "$ADIR" ] || ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
 # PNG は git に無い。無ければ作り直し、足りなければ公開前に止める (契約: .claude/rules/note-image-assets.md)
 node "$ROOT/.claude/scripts/note/ensure-note-images.mjs" "$ADIR" || { echo "FAIL: 画像が揃っていない"; exit 1; }
+# 「検証状況」「実機確認は未了」など作り手が試していない断り書きを本文に残したまま公開しない (2026-10-27)。
+# --commit-publish でも確かめる (準備の後に本文を差し替えた場合も止める)。
+node "$ROOT/.claude/scripts/note/audit-note-unverified.mjs" --file "$ADIR/draft.md" --file "/tmp/note-body-$SLUG.txt" \
+  || { echo "FAIL: 未検証の断り書きが本文に残っている"; exit 1; }
 # NOTE_BU_CDP=http://127.0.0.1:<port> drives an already-running Chrome (e.g. the logged-in Playwright note profile)
 # instead of Profile 5, for hosts where Profile 5 cannot be read (macOS privacy protection, 2026-10-12).
 BU(){ if [ -n "${NOTE_BU_CDP:-}" ]; then browser-use --cdp-url "$NOTE_BU_CDP" "$@"; else browser-use --headed --profile "Profile 5" "$@"; fi; }
