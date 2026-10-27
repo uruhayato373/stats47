@@ -126,7 +126,7 @@
 - [note update mode learnings](project_note_update_mode_learnings.md) — カバーはv3詳細eyecatchで監査、画像専用CLIで更新（本文再公開不要）。制作TS/GIS/Satori・保全hash・変更journal。本文updateのeval-click・有料境界・temp profileの注意点
 - [asp site attribution](project_asp_site_attribution.md) — 3 ASP共用口座のサイト帰属assert。A8成果はsite-rows限定、afb成果APIはsite指定＋JSON配列（空応答を実測）、Cookie移送と分離
 - [playwright profile dual os](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
-- [windows script portability](feedback_windows_script_portability.md) — Windowsで落ちる3パターン: URL().pathnameの先頭スラッシュ(C:\C:\)/npxのspawn(ENOENT・Node22は.cmdをEINVAL)/Macパス直書き。node直起動とfileURLToPathで書く
+- [windows script portability](feedback_windows_script_portability.md) — Windowsで落ちる型: URL().pathnameの先頭スラッシュ/npxのspawn/Macパス直書き/パス区切りの比較 (path.joinの\とTS解決の/。台帳は/に揃える・replaceAllはlib es2021未満で不可)
 - [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
 - [source vault expanded layout](project_source_vault_expanded_layout.md) — 参考文献 vault は 2026-09-10 から Drive の版フォルダへ展開配置 (PDF・pages・md・figures)。マウント自動解決・差分 upload と readback
 - [kakei marketing book pipeline](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』を source-vault で保全・全 307 ページ解決。企画 analyses.json・展開記録 expansion.json

@@ -3591,6 +3591,7 @@ updated: 2026-10-19
   候補 5 は svg-builder と product-factory の package.json に `@stats47/area` を宣言した。
   調査名は解決時にマスタ (`packages/ranking/src/data/surveys.json`) の name で上書きしているが、生成スクリプト `build-estat-provenance.ts` の出力にはまだ旧表記が残る。
   Kindle の単位検査 (`content-invariants.ts`) は単位の次元を `parseUnit` で判定するようになり、千人・万円なども検出するようになった。既存の版の `verify-epub` は再実行していない。
+  remotion の `shared/utils/choropleth.ts` と `features/geo-x/GeoInsightCard.tsx` は、5 桁の市区町村コードを県コード (`"13113"`→`"13000"`) に寄せるようになった。県単位の図なので影響は無いと判断したが、レンダーして見比べてはいない。次にこの 2 つで画像を作るときに、前の版と目視で比べる。
 
 ### [CHART-SOURCE-DERIVE-01] 図ごとの出典 (ブログの `<data-source>` タグ・機能別 ChartFooter の固定値) をデータから導出する
 
@@ -3887,6 +3888,16 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **判断・再開条件**: 2026-10-19のユーザー指示でSNS展開は後回し。note・サイトの既存公開分は維持し、SNSはユーザーが再開を指示するまで保留する。note・サイトの拡充は `CONTENT-KAKEI-EXPANSION-01`。
 - **次・担当**: 再開時にx-strategist / instagram-strategistが既存note・サイトから家計支出の10分類・個別品目比較・都市ごとの特徴品目の候補を選び、共通4:5・1枚型で管理画面のnote・X・Instagramを比較して確認する。既存の試作素材を維持する。
 - **停止条件・完了条件**: 今は制作・レンダリング・投稿を行わない。候補の3媒体比較・確認ができれば制作準備完了とし、投稿・予約は別途ユーザーの明示指示を得る。
+
+### [WINDOWS-LOCAL-TEST-FAILURES-01] Windows の手元でだけ落ちるテスト 3 種を、CI と同じく通るようにする
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-10-27] [領域:管理]
+
+- **事象 (2026-10-27、会社の Windows PC で実測。CI の Linux では通る)**:
+  1. `packages/product-factory` の kindle CLI テスト (`kindle-verify-cli`・`kindle-listing-revision`) が、外部プロセスの 60 秒制限で打ち切られる。`verify-epub` は単体なら 42 秒・exit 1 の正しい応答。全件実行中は負荷で 60 秒を超える。
+  2. `apps/web` の `eslint-dependency-compatibility.test.ts` の深い入れ子のケースが、Windows の一時ディレクトリのパスが長いため、パターンが braces の上限 10000 字を超えて落ちる (memory `feedback_next_eslint_unpatched_braces` の braces と同じ部品)。
+  3. この PC の `packages/product-factory/src/data/pack-snapshots/*.json` が 158 バイトほどの空ファイルで、`delivery-integrity` と `license-exclusion` が null 参照で落ちる。globalSetup が既存ファイルを作り直さない。
+- **次**: 1 は所要時間の実測に合わせて制限を延ばす。2 は一時ディレクトリを短いパスに作るか、パス長に依存しない入力にする。3 は空・壊れた snapshot を globalSetup が作り直すか、明確な理由で落とす。
+- **完了条件**: Windows で 3 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
