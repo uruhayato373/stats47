@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "period": {
-    "periodStart": "2026-10-17",
-    "periodEnd": "2026-10-23",
+    "periodStart": "2026-10-18",
+    "periodEnd": "2026-10-24",
     "windowDays": 7
   },
-  "inputHash": "3cb5d67dbc3609bafb8222fc4ff3c9964ed9f67e761bcadbcdaeab6d3c3442de",
+  "inputHash": "dfac6701e8d65d6c5c5445e285927a75e756eabbe57fc90dd2d41d24079c1291",
   "movements": [
     {
       "keyword": "知能犯",
@@ -18,13 +18,13 @@
       "change": 66
     },
     {
-      "keyword": "高校 教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 13,
-      "after": 67,
-      "beforeImpressions": 2,
-      "impressions": 2,
-      "change": -54
+      "keyword": "財政力指数",
+      "targetPath": "/blog/fiscal-self-reliance-gap",
+      "before": 60,
+      "after": 3,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 57
     },
     {
       "keyword": "警察 官 年収 ランキング",
@@ -36,28 +36,37 @@
       "change": -53
     },
     {
-      "keyword": "高校教師年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 10.666666666666666,
-      "after": 63,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": -52.333333333333336
+      "keyword": "沖縄 出生率",
+      "targetPath": "/blog/total-fertility-rate",
+      "before": 57,
+      "after": 4.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 52.5
     },
     {
-      "keyword": "サンマ 漁獲量",
-      "targetPath": "/ranking/fishery-species-catch-pacific-saury",
-      "before": 6.5,
-      "after": 54,
-      "beforeImpressions": 2,
+      "keyword": "東成瀬村 人口",
+      "targetPath": "/areas/05000/cities/05464",
+      "before": 53,
+      "after": 6,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -47.5
+      "change": 47
     },
     {
       "keyword": "jr 乗降客数",
       "targetPath": "/blog/railway-theme-overview",
       "before": 66,
       "after": 23,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 43
+    },
+    {
+      "keyword": "可処分所得",
+      "targetPath": "/ranking/real-disposable-income",
+      "before": 46,
+      "after": 3,
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 43
@@ -72,31 +81,22 @@
       "change": 41.4
     },
     {
+      "keyword": "北海道 人口",
+      "targetPath": "/areas/01000/cities/01100/population",
+      "before": 98,
+      "after": 59,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 39
+    },
+    {
       "keyword": "離婚率 日本",
       "targetPath": "/blog/divorces-per-total-population",
       "before": 64,
-      "after": 24,
+      "after": 26,
       "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 40
-    },
-    {
-      "keyword": "漁獲 量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 89,
-      "after": 53,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 36
-    },
-    {
-      "keyword": "原発のある都道府県",
-      "targetPath": "/blog/nuclear-power-plant-count-prefecture-gap",
-      "before": 45,
-      "after": 10.5,
-      "beforeImpressions": 1,
       "impressions": 2,
-      "change": 34.5
+      "change": 38
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "漁港が多い県",
     "targetPath": "/ranking/fishing-port-count-by-type",
-    "rank": 5.953846153846154,
-    "impressions": 650,
+    "rank": 5.957511380880121,
+    "impressions": 659,
     "clicks": 2,
     "group": 5,
     "previousMethod": null,
