@@ -277,6 +277,12 @@ updated: 2026-10-19
 - **内訳**: Excel 塗りつぶしマップ `h-howto-excel-filled-map` (書き直しは別途進行) / マイマップ KML `h-howto-mymaps-kml` (取り込み後の地図が未確認) / QGIS `d-geo-ksj-qgis-guide` (QGIS 未導入) / 商品パック 13 本 `prefecture-*-pack` (販売準備原稿 `packages/product-factory/src/channels/note/build/build-revision.ts:91` の「Excel・PowerPoint の実機確認は未了」が無料部分に残った。有料商品なので Office で開いて確認してから文を消す) / `b-ref-prc-a24` (「通信利用動向調査の県別値は stats47 では確認できていません」= 調べてから書くか削る)。
 - **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
 - **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
+- **Excel 塗りつぶしマップの途中経過 (2026-10-27・会社の Windows PC で実機操作。オーナー指示で中断、後日再開)**:
+  - 環境: Microsoft 365 Apps for enterprise・バージョン 2407 (ビルド 17830.20138)。CSV は https://stats47.jp/ranking/total-population の「ダウンロード」(`/api/ranking/total-population/download?format=csv&basis=all-bases`) の実物
+  - 実測: ① CSV は BOM 付き UTF-8 で文字化けなし。都道府県コードは先頭の 0 が落ちる (01000→1000)。年の列名は「総数_2025年」、47 行の下に出典の行が続く ② 「データ」タブの「データの種類」は「地理 (English)」で、変換すると地名が英語に置き換わる (日本→Japan、岩手県→Iwate Prefecture、東京都→Tokyo、兵庫・高知・大分は Hyōgo・Kōchi・Ōita)。47 件すべて地図マークが付いた。「国」の列なしでも都道府県名だけで変換できた ③ メニュー名は「挿入」→「マップ」→**「塗り分けマップ」** (旧版の「塗りつぶされたマップ」ではない)。押すとプレビューなしで即挿入。凡例は連続色、右下に「提供元: Bing © GeoNames, Microsoft, Zenrin」
+  - **最重要の発見**: 旧版が勧めた「国」の列を地図の範囲に含めると、日本全体が 1 色の国単位の地図になり (どこにマウスを置いても「要素 "Hokkaido"」)、都道府県が塗り分けられない。「都道府県名」と値の 2 列だけで作ると境界と濃淡が出る (東京・神奈川・大阪・愛知が濃い)。本文の「国の列を足すと安心」は逆効果なので消し、「正しく表示されないときは」に実例として書く
+  - 残り: Sheet2 (`C:\tmp\excel-map\filled-map-check.xlsx`。都道府県名を地理データに変換済み・列幅調整の途中で入力先が外れて中断) で、塗り分けマップの挿入 → 沖縄・北方領土の位置確認 → 「書式」→「系列のオプション」で色の変更 → PowerPoint への貼り付け → 画像 03〜06 の撮影 → draft.md 全面書き直し (環境の 1 行・完成地図を冒頭・全手順に画像・検証状況の段落の削除・リンクカード 3 本は依頼文どおり) → `node .claude/scripts/note/audit-note-unverified.mjs --file <draft>` exit 0 → `npm run note:article -- save h-howto-excel-filled-map`
+  - 画像の置き場 (この Windows PC の作業場 `docs/31_note記事原稿/h-howto-excel-filled-map/images/`・git 管理外): 01-csv-opened・02-table (都道府県名と値の 2 列版)・09-country-column-one-color (失敗例)・`_redo-03-with-country-column.png` (国の列あり版で使わない。撮り直す)。旧 02-download-card.png は未削除。原寸撮影は PowerShell の CopyFromScreen (computer-use の撮影は 1456px に縮むため)、右側の Claude のウィンドウと右上のアカウント名が入らない範囲で切り出す
 - **完了条件**: 17 本それぞれ実際に操作した画面・結果を入れて更新し、`npm run note:unverified:audit` が 0/428 で exit 0。商品パックは Office で開いた確認記録を `data/products/` に残す。
 
 ### [STRATEGY-GATE-ADMIN-PILOT-01] 管理画面に、行政向け商品の検証が4段階のどこにいるかを出す
