@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {SITE,type ImageGenerationManifest} from '@stats47/types';
 import {blogRendererSources} from './data/image-generator-registry';
-import {blogImageKeys,createBlogImagePlan,publishedBlogSlugsFromIndex,stageBlogImagePath,type BlogImageMetadata,type BlogBackgroundInput} from './lib/blog-image-generation';
+import {blogImageKeys,createBlogImagePlan,publishedBlogSlugsFromIndex,resolveBlogImageData,stageBlogImagePath,type BlogImageMetadata,type BlogBackgroundInput} from './lib/blog-image-generation';
 import {deriveOgpFromFrontmatter,parseFrontmatter,loadFonts,renderToPng} from './lib/blog-thumbnail-render';
 import {buildBlogExternalOgp} from './lib/blog-image-render';
 import {buildImageGenerationManifest,calculateRendererHash,createImageGenerationPublishPlan,isManifest,serializeImageGenerationManifest,sha256} from './lib/image-generation-manifest';
@@ -54,7 +54,7 @@ async function main(){
     const background:BlogBackgroundInput={source:'ai',sha256:bg.sha256,promptHash:bg.promptHash};
     const derived=deriveOgpFromFrontmatter(parseFrontmatter((await get(`app/blog/${slug}/article.md`)).toString()));
     if(!derived)throw Error(`${slug}: missing title`);
-    const data={title:derived.title,subtitle:derived.subtitle??null};
+    const data=resolveBlogImageData(slug,{title:derived.title,subtitle:derived.subtitle??null});
     const plan=createBlogImagePlan({slug,data,background,rendererHash});
     if(old.fingerprint===plan.fingerprint)return null;
     const assetFiles=new Map<string,string>();

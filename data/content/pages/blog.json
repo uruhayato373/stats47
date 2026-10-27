@@ -365,10 +365,16 @@
       "id": "blog:alcohol-prefecture-map",
       "kind": "blog",
       "key": "alcohol-prefecture-map",
-      "title": "東京トップは『飲み歩き集計』の罠──居住地ベースで変わる飲酒地図の読み方",
+      "title": "酒の販売量が東京で最多に見える理由は?",
       "href": "/blog/alcohol-prefecture-map",
       "published": true,
-      "rankingKeys": [],
+      "rankingKeys": [
+        "alcohol-sales-per-adult-beer",
+        "alcohol-sales-per-adult-sake",
+        "alcohol-sales-per-adult-shochu",
+        "alcohol-sales-per-adult-total",
+        "alcohol-sales-per-adult-wine"
+      ],
       "tagIds": [
         "tag:alcohol",
         "tag:alcohol-consumption",
@@ -527,12 +533,13 @@
       "title": "自動車産業の県別勢力図",
       "href": "/blog/automotive-industry-transformation-map",
       "published": true,
-      "rankingKeys": [],
+      "rankingKeys": [
+        "manufacturing-employees",
+        "manufacturing-industry-added-value",
+        "manufacturing-shipment-amount"
+      ],
       "tagIds": [
         "tag:automobiles",
-        "tag:transport-equipment",
-        "tag:electric-vehicles",
-        "tag:supply-chain",
         "tag:industrial-structural-change"
       ]
     },
@@ -821,7 +828,8 @@
       "rankingKeys": [
         "births",
         "natural-increase-rate",
-        "population-growth-rate"
+        "population-growth-rate",
+        "total-fertility-rate"
       ],
       "tagIds": [
         "tag:population-decline",
@@ -874,7 +882,7 @@
       "id": "blog:bonito-catch-prefecture",
       "kind": "blog",
       "key": "bonito-catch-prefecture",
-      "title": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",
+      "title": "カツオ日本一が静岡と宮城で割れる理由",
       "href": "/blog/bonito-catch-prefecture",
       "published": true,
       "rankingKeys": [
@@ -5980,7 +5988,6 @@
         "general-hospital-count-per-100k",
         "maximum-temperature",
         "owner-occupied-housing-ratio",
-        "per-capita-kenmin-shotoku-h27",
         "per-capita-prefectural-income-h27",
         "private-rental-housing-rent-per-3-3m2",
         "total-fertility-rate",
@@ -6300,7 +6307,7 @@
       "href": "/blog/manufacturing-aichi-dominance",
       "published": true,
       "rankingKeys": [
-        "gpp-manufacturing",
+        "manufacturing-employees",
         "manufacturing-shipment-amount",
         "manufacturing-shipment-amount-per-employee"
       ],
@@ -6867,6 +6874,25 @@
         "tag:t-d18872bbba7c",
         "tag:t-e07409150129",
         "tag:t-e79890c96ee6"
+      ]
+    },
+    {
+      "id": "blog:municipality-population-change-census-2025",
+      "kind": "blog",
+      "key": "municipality-population-change-census-2025",
+      "title": "人口が8割増えた町、3割減った市",
+      "href": "/blog/municipality-population-change-census-2025",
+      "published": true,
+      "rankingKeys": [
+        "census-population-change-5y",
+        "census-population-change-rate-5y"
+      ],
+      "tagIds": [
+        "tag:t-f3a85adbff54",
+        "tag:t-db192b8bb5b2",
+        "tag:t-0f04bb93e80e",
+        "tag:population-decline",
+        "tag:t-ce76fe655d41"
       ]
     },
     {
@@ -9220,14 +9246,20 @@
       "id": "blog:sewerage-water-supply-gap",
       "kind": "blog",
       "key": "sewerage-water-supply-gap",
-      "title": "sewerage-water-supply-gap",
+      "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
       "href": "/blog/sewerage-water-supply-gap",
       "published": true,
       "rankingKeys": [
         "sewerage-penetration-rate-2012on",
         "water-supply-population-ratio-2012on"
       ],
-      "tagIds": []
+      "tagIds": [
+        "tag:sewerage-coverage-rate",
+        "tag:flush-toilet-coverage-rate",
+        "tag:combined-treatment-septic-tank",
+        "tag:infrastructure-disparity",
+        "tag:water-supply"
+      ]
     },
     {
       "id": "blog:sex-ratio-total-prefecture-gap",

@@ -9,6 +9,13 @@ metadata:
 
 ## 現行契約（2026-09-07）
 
+### 公開情報の読み取り失敗で記事を一覧から落とさない（2026-10-27）
+
+- **問題**: `sewerage-water-supply-gap` は原本に`published:true`と公開日があるのに、一覧のタイトルがslug・公開日がnullになり、公開URLが410を返した。
+- **原因**: description内の未エスケープ引用符でYAML解析が失敗し、`export-blog-snapshot.ts`が空オブジェクトへ置換していた。sticky publishedだけが残り、公開日を必須とするサイトマップから外れた。原本・修正後を同じparserで比較し、本文不変を確認した（`data/blog/sewerage-metadata-repair.json`）。
+- **対策**: `blog-snapshot-frontmatter.ts`はslug付きのエラーで生成を停止し、壊れた読み取りで配信メタ情報を上書きしない。修復は原本SHAを限定し、本文と元の公開日を保ってから記事一覧・公開URL一覧を再生成し、本番200まで照合する。画像台帳から外して終わりにしない。
+- **検査**: `apps/web/scripts/lib/__tests__/blog-snapshot-frontmatter.test.ts`で引用符エラー時の停止と修正後の日付保持を検証する。
+
 - **問題**: 背景未生成1件で後続の公開可能記事も止まる。
 - **原因**: factual/qualityはper-slug skipだが、thumbnail生成は無条件に`set -e`でrun全体を終了する。
 - **対策**: `generate-blog-thumbnails.ts`の背景未生成専用exit 20のみskipし、通信・SHA不一致・生成失敗は停止する。

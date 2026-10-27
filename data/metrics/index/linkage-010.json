@@ -2346,10 +2346,6 @@
       ],
       "consumers": [
         {
-          "pageId": "blog:manufacturing-aichi-dominance",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:gpp-manufacturing",
           "kind": "ranking"
         }

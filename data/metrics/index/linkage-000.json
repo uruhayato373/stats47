@@ -5901,6 +5901,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:alcohol-prefecture-map",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-beer",
           "kind": "ranking"
         },
@@ -6117,6 +6121,10 @@
         {
           "pageId": "area-theme:47000:health-checkups",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:alcohol-prefecture-map",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:alcohol-sales-per-adult-sake",
@@ -6337,6 +6345,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:alcohol-prefecture-map",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:alcohol-sales-per-adult-shochu",
           "kind": "ranking"
         },
@@ -6553,6 +6565,10 @@
         {
           "pageId": "area-theme:47000:health-checkups",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:alcohol-prefecture-map",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:alcohol-sales-per-adult-total",
@@ -6989,6 +7005,10 @@
         {
           "pageId": "area-theme:47000:health-checkups",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:alcohol-prefecture-map",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:alcohol-sales-per-adult-wine",

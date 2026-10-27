@@ -34,6 +34,7 @@ import { datasetDir } from "../../../config/datasets.mjs";
 import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
 import { readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { indexEnabled, preservePublishedIndex } from './lib/publish-card-body.mjs';
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
@@ -151,6 +152,7 @@ function snapshot(note) {
       : [],
     hasDraft: Boolean(note.has_draft),
     embeddedContents: Array.isArray(note.embedded_contents) ? note.embedded_contents : null,
+    index: note.index,
     body: String(note.body || ""),
     bodySignature: fnv1a(note.body || ""),
   };
@@ -413,7 +415,7 @@ async function installPatch(page, before, updatedBody, plan, visibilityNudge = n
       return;
     }
     try {
-      const payload = request.postDataJSON();
+      const payload = preservePublishedIndex(request.postDataJSON(), before);
       if (Number(payload.price || 0) !== before.price) throw new Error("price changed before update");
       const targetSeparator = visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")
         ? visibilityNudge.restoreSeparator
@@ -504,6 +506,9 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       { headers: { "User-Agent": UA } },
     );
     const draft = snapshot((await response.json())?.data || {});
+    if (JSON.stringify(draft.index ?? null) !== JSON.stringify(before.index ?? null)) {
+      throw new Error('未公開下書きの目次設定が公開版と異なるため本文更新を停止');
+    }
     identicalDraft = draft.bodySignature === before.bodySignature
       && draft.price === before.price
       && draft.separator === before.separator
@@ -567,7 +572,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
   try {
     await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
     native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents,
-      () => {}, (native, card) => approvedImageRefresh?.assertFresh(native, card.url));
+      () => {}, (native, card) => approvedImageRefresh?.verifyFresh(native, card.url));
     application = { ...application, body: native.body, changed: true };
   } finally { await apiPage.close(); }
 
@@ -656,6 +661,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     const expectedSeparator = plan.desiredSeparator || source.separator;
     if (live.price !== source.price || live.separator !== expectedSeparator) throw new Error("価格または有料境界が変化");
     if (live.hashtagCount !== before.hashtagCount) throw new Error(`タグ数が変化: ${before.hashtagCount} -> ${live.hashtagCount}`);
+    if (indexEnabled(live) !== indexEnabled(before)) throw new Error('公開記事の目次表示設定が変化');
     if (plan.footer && (
       (application.addedNextNote && !live.body.includes(plan.footer.nextNoteUrl))
       || (application.addedMagazine && !live.body.includes(plan.footer.magazineUrl))
@@ -680,7 +686,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     if (live.bodySignature !== fnv1a(application.body)) throw new Error("送信した無料本文と公開本文が一致しません");
     assertRegisteredCards(live.body, live.embeddedContents);
     if (approvedImageRefresh) for (const card of cardEntries(live.body)) {
-      approvedImageRefresh.assertFresh(live.embeddedContents.find((entry) => entry.key === card.key) || {}, card.url);
+      await approvedImageRefresh.verifyFresh(live.embeddedContents.find((entry) => entry.key === card.key) || {}, card.url);
     }
     const readers = await ctx.browser().newContext();
     try {

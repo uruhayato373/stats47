@@ -17,7 +17,8 @@ export async function noteRequest(page, pathname, { method = 'GET', body, form }
     }
     const response = await fetch(`https://note.com${pathname}`, { method, headers, body: data, credentials: 'include' });
     const result = await response.json();
-    if (!response.ok) throw Error(`note API HTTP ${response.status}: ${pathname.split('?')[0]}${typeof result.error?.message === 'string' ? ` (${result.error.message.slice(0, 160)})` : ''}`);
+    const detail = result.error?.message || result.data?.error;
+    if (!response.ok) throw Error(`note API HTTP ${response.status}: ${pathname.split('?')[0]}${typeof detail === 'string' ? ` (${detail.slice(0, 160)})` : ''}`);
     if (result.error) throw Error(`note API rejected ${pathname.split('?')[0]}`);
     return result.data;
   }, { pathname, method, body, form });
@@ -57,18 +58,19 @@ export function replaceCardKeys(body, replacements) {
 }
 
 /** These are the native editor requests observed on 2026-10-26, not invented HTML embed IDs. */
-export async function registerNativeCard(page, noteKey, card) {
+export async function registerNativeCard(page, noteKey, card, { wait = (ms) => page.waitForTimeout(ms) } = {}) {
   if (!/^n[a-f0-9]{12}$/.test(noteKey)) throw Error('invalid note key');
   if (new URL(card.url).protocol !== 'https:') throw Error('card URL must be HTTPS');
   let native;
   if (card.service === 'external-article') {
     const params = new URLSearchParams({ url: card.url, service: card.service, embeddable_key: noteKey, embeddable_type: 'Note' });
-    for (let attempt = 0; attempt < 2; attempt++) {
+    const delays = [1500, 5000, 15000];
+    for (let attempt = 0; attempt <= delays.length; attempt++) {
       try { native = await noteRequest(page, `/api/v2/embed_by_external_api?${params}`); break; }
       catch (error) {
         // The native GET can time out while note fetches public OGP. Never retry a POST or an access/rate denial.
-        if (attempt || !/HTTP 400/.test(error.message)) throw error;
-        await page.waitForTimeout(1500);
+        if (attempt === delays.length || !/HTTP 400/.test(error.message)) throw error;
+        await wait(delays[attempt]);
       }
     }
   } else if (card.service === 'note') {

@@ -338,6 +338,14 @@
       "published": true
     },
     {
+      "id": "tag:combined-treatment-septic-tank",
+      "kind": "tag",
+      "key": "合併処理浄化槽",
+      "title": "合併処理浄化槽",
+      "href": "/tag/%E5%90%88%E4%BD%B5%E5%87%A6%E7%90%86%E6%B5%84%E5%8C%96%E6%A7%BD",
+      "published": true
+    },
+    {
       "id": "tag:commerce",
       "kind": "tag",
       "key": "商業",
@@ -826,6 +834,14 @@
       "published": true
     },
     {
+      "id": "tag:flush-toilet-coverage-rate",
+      "kind": "tag",
+      "key": "水洗化率",
+      "title": "水洗化率",
+      "href": "/tag/%E6%B0%B4%E6%B4%97%E5%8C%96%E7%8E%87",
+      "published": true
+    },
+    {
       "id": "tag:food-culture",
       "kind": "tag",
       "key": "食文化",
@@ -1167,7 +1183,7 @@
       "key": "インフラ格差",
       "title": "インフラ格差",
       "href": "/tag/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E6%A0%BC%E5%B7%AE",
-      "published": false
+      "published": true
     },
     {
       "id": "tag:international-cooperation",
@@ -2111,7 +2127,7 @@
       "key": "下水道普及率",
       "title": "下水道普及率",
       "href": "/tag/%E4%B8%8B%E6%B0%B4%E9%81%93%E6%99%AE%E5%8F%8A%E7%8E%87",
-      "published": false
+      "published": true
     },
     {
       "id": "tag:single-parent-households",

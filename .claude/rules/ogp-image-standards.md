@@ -74,6 +74,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 - ブログの外部OGPのみ更新: `refresh-blog-ogp.ts`。既存manifestと内部サムネイル/背景のSHAを照合して同じbundleへ保持する。
   画像更新workflowは `type=blog, external_only=true`。通常のブログ生成も同じ外部rendererを使う。
   外部画像は`buildBlogExternalOgp`で主見出しとブランドに絞る。記事のsubtitleや`｜`以降の補足を小さな文字で持ち込まない。公開画像で補足の孤立文字を確認したため、主題・ブランド以外の細かな説明はカード外の文言へ委ねる。更新は最大4件ずつ準備し、各組の成否をすべて待ってから採用する。生成上限500件とexact plan、内部画像SHAの保持は維持する。
+  追加のブログ用短見出しは`apps/web/scripts/data/blog-link-card-copy.ts`に原題と組で登録し、`resolveBlogImageData`を通常生成・外部のみ更新の共通入力にする。背景プロンプトは原題を使い、短見出しは記事単位のfingerprintへ入れる。既存の共通編集見出し表は維持する。原題変更時はコピーの再確認を要求する。原寸・縮小で数字の途中改行と末尾1文字の孤立も確認する。
 - 判定: 全件の生成・配信SHAと文字サイズ、各種別/最長見出しの原寸・220×150・150正方形の目視結果を区別して記録する。
   サイトの共通テンプレート変更は代表と例外を目視し、機械の全件照合を人の全件目視と呼ばない。
 - noteの既存カード画像: 全画像の公開SHA照合と本番metadata検証後に `repair-note-cards-native.mjs --refresh-external-images --all --commit`。noteは同じURLの再登録でも旧OGPを返す（2026-10-26実測）。所有する外部カードのURLに画像版`s47_ogp`を付け、取得画像を採用版と照合してから登録キーを差し替える。本文の文章・リンク先ページ・既存UTM・価格・有料境界・タグ・下書きを保持する。台帳の`siteMetadataVerification`には実配信HTML検査のversion/passed/failedを記録し、未検証や不一致では停止する。台帳は `note-card-image-refresh.json`、再開状態は `.local/note-card-image-refresh-journal.json`。
