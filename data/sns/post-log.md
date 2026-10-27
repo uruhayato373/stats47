@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**748 件** (最終更新: 2026-10-26)
+**750 件** (最終更新: 2026-10-27)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-27 | 🧵 Threads | area/area-34000-profile | 広島を数字と地域文化の両方から見る。 県鳥アビ、特産メバル、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/De_akZpAoQh) |
+| 2026-10-27 | 🧵 Threads | ranking/final-energy-consumption-per-capita | 1人あたりのエネルギー消費量が最も多い県は？  1位大分308.8GJ、2位山口276.9GJ、3位岡山273.2GJ。… | [🔗](https://www.threads.com/@stats47jp/post/De-sypbk8V8) |
 | 2026-10-26 | 📸 Instagram | ranking-quiz/white-bread-consumption-quantity | 【都道府県クイズ】食パンをいちばん多く買う県は？  A 京都府 B 兵庫県 C 滋賀県  ヒントは2枚目、答えは3枚目�… | [🔗](https://www.instagram.com/p/De9vaK6ldZE/) |
 | 2026-10-26 | 🧵 Threads | area/area-33000-profile | あなたの知る岡山は、データでも同じ姿ですか？ アカマツや桃太郎ぶどうから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/De84meIiHhI) |
 | 2026-10-26 | 🧵 Threads | ranking/pet-food-consumption-expenditure | ペットフードにいちばんお金を使う県は福島。  1世帯あたり1万6,285円。2位は高知の1万5,807円。 最も少ない沖… | [🔗](https://www.threads.com/@stats47jp/post/De8KTRogkZI) |
