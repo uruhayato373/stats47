@@ -450,11 +450,20 @@ for (const root of scanRoots) {
 
 const surveyNavPath = 'src/features/survey/components/SurveySideNav.tsx';
 const surveyNavSource = readFileSync(path.join(cwd, surveyNavPath), 'utf8');
-if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
+// 2026-10-28 (テンプレート寄せ): 調査のページ内ナビは左レールを使わず本文上部に置く。広い幅の
+// カード 2 枚 (SurveySideNav) と狭い幅の折りたたみ (SurveyMobileNav) が同じ shell コンテナ境界で
+// 入れ替わること (二重表示・欠落なし) を、2 つのクラス定数が同じ境界値を持つことで検査する。
+const surveyWide = surveyNavSource.match(
+  /WIDE_ONLY_CLASS = 'hidden @min-\[(\d+)px\]\/shell:grid'/,
+);
+const surveyNarrow = surveyNavSource.match(
+  /NARROW_ONLY_CLASS = '@min-\[(\d+)px\]\/shell:hidden'/,
+);
+if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
   violations.push({
     ruleId: 'survey-mobile-nav-must-share-left-rail-breakpoint',
     message:
-      'SurveyMobileNav must use LEFT_RAIL_NARROW_ONLY_CLASS so its handoff matches the shared desktop rail.',
+      'SurveySideNav (WIDE_ONLY_CLASS) and SurveyMobileNav (NARROW_ONLY_CLASS) must switch at the same @container/shell width.',
     file: surveyNavPath,
     lineNumber: 1,
     line: 'SurveyMobileNav',
