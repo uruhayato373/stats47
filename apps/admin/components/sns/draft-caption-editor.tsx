@@ -61,7 +61,7 @@ export function DraftCaptionEditor({
     }
   }
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={`caption-${post.id}`}>下書き本文</Label>
       <Textarea
         id={`caption-${post.id}`}
@@ -74,7 +74,7 @@ export function DraftCaptionEditor({
         maxLength={10000}
         disabled={saving}
       />
-      <p className="text-xs text-console-muted">
+      <p className="text-xs text-muted-foreground">
         {caption.length.toLocaleString()}文字 · 保存先は投稿 #{post.id}{' '}
         の下書きです。公開前に再承認します。
       </p>

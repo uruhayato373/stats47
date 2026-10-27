@@ -1,3 +1,5 @@
+import { ChartColumnIcon, EyeIcon, GaugeIcon, MousePointerClickIcon, ScaleIcon, TrendingUpIcon, WalletIcon } from "lucide-react";
+
 import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge, TrendChart, type StatTrend } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading, Unmeasured } from "@/components/ops/primitives";
@@ -57,18 +59,21 @@ export default function RevenuePage() {
           <Grid min="sm">
             <StatCard
               label="AdSense 収益"
+              icon={<WalletIcon />}
               value={latest ? `¥${YEN.format(Number(latest.earnings))}` : <Unmeasured />}
               trend={weekTrend(num(latest?.earnings), num(prev?.earnings))}
               sub={`${latest?.week ?? "—"} の週・前週比`}
             />
-            <StatCard label="RPM" value={latest ? `¥${latest.rpm}` : <Unmeasured />} trend={weekTrend(num(latest?.rpm), num(prev?.rpm))} />
+            <StatCard label="RPM" icon={<GaugeIcon />} value={latest ? `¥${latest.rpm}` : <Unmeasured />} trend={weekTrend(num(latest?.rpm), num(prev?.rpm))} />
             <StatCard
               label="PV"
+              icon={<EyeIcon />}
               value={latest ? YEN.format(Number(latest.page_views)) : <Unmeasured />}
               trend={weekTrend(num(latest?.page_views), num(prev?.page_views))}
             />
             <StatCard
               label="CTR"
+              icon={<MousePointerClickIcon />}
               value={latest ? `${(Number(latest.ctr) * 100).toFixed(2)}%` : <Unmeasured />}
               sub={latest ? `クリック ${YEN.format(Number(latest.clicks))}` : undefined}
             />
@@ -76,6 +81,7 @@ export default function RevenuePage() {
           <Grid min="lg">
             <TrendChart
               title="AdSense 収益の推移"
+              icon={<TrendingUpIcon />}
               description={`週次 (${chronological.length} 週)`}
               data={chronological}
               xKey="week"
@@ -85,6 +91,7 @@ export default function RevenuePage() {
             />
             <TrendChart
               title="PV の推移"
+              icon={<ChartColumnIcon />}
               description="週次・AdSense の計測した表示"
               data={chronological}
               xKey="week"
@@ -99,6 +106,7 @@ export default function RevenuePage() {
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}
       <PanelCard
         title="計測範囲"
+        icon={<ScaleIcon />}
         description={
           <>
             証拠付きの販売台帳か、直近 3 日以内の自動取得 (revenue-history.json) があるチャネルを実測として扱います。どちらも無いチャネルは、0

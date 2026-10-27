@@ -16,13 +16,13 @@ export default async function Page({
 }) {
   const query = await searchParams;
   return (
-    <div className="space-y-6">
+    <>
       <PageHeading
         accessLabel="改善方針・画像候補を保存できます"
         title="記事・投稿の改善"
         source="記事・投稿台帳 / R2 / 品質記録"
       >
-        <p className="text-sm text-console-muted">
+        <p className="text-sm text-muted-foreground">
           実際の画像と本文を確認しながら、改善方針と確認結果を残します。
         </p>
       </PageHeading>
@@ -36,6 +36,6 @@ export default async function Page({
         initialQuery={query.q}
         initialTemplate={query.template}
       />
-    </div>
+    </>
   );
 }

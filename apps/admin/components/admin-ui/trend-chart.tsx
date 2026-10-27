@@ -16,10 +16,10 @@ import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 /**
- * 推移のチャート。公式 dashboard-01 の chart-area-interactive と同じ形 (Card + ChartContainer + 期間の ToggleGroup)。
+ * 推移のチャート。公式 chart-area-interactive の仕組み (ChartContainer + 期間の切り替え) を、見本 (shadcndashboard.dev) の
+ * パネルの形 (アイコン + 題名の見出し行と下線) で包む。
  * 面 (area)・棒 (bar)・折れ線 (line) を選べる。軸は 1 本だけ (単位の違う量は別のチャートにする)。
- * 色: 系列が 1 本なら --primary、2 本以上なら --chart-1〜5 を順に固定で使い、凡例を必ず出す
- * (--chart-2〜4 は light で 3:1 未満なので、凡例と tooltip で識別を補う。globals.css の注記)。
+ * 色: 参考 (shadcndashboard.dev) と同じ主色の濃淡 (--chart-1〜5 を順に固定)。2 本以上は凡例を必ず出す。
  * サーバーから渡せるよう、書式は関数でなく valueFormat の名前で指定する。
  */
 export type TrendSeries = { key: string; label: string };
@@ -51,6 +51,7 @@ export function TrendChart({
   valueFormat = "number",
   ranges,
   footer,
+  icon,
   height = 250,
 }: {
   title: ReactNode;
@@ -64,6 +65,8 @@ export function TrendChart({
   /** 期間の切り替え (末尾から何件を見せるか)。先頭が既定。件数が足りない選択肢は出さない */
   ranges?: { label: string; last: number }[];
   footer?: ReactNode;
+  /** 見出しのアイコン要素 (例: <TrendingUpIcon />) */
+  icon?: ReactNode;
   height?: 200 | 250 | 300;
 }) {
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
@@ -73,7 +76,7 @@ export function TrendChart({
   const rows = last ? data.slice(-last) : data;
 
   const config: ChartConfig = Object.fromEntries(
-    series.map((s, i) => [s.key, { label: s.label, color: series.length === 1 ? "var(--primary)" : `var(--chart-${(i % 5) + 1})` }]),
+    series.map((s, i) => [s.key, { label: s.label, color: `var(--chart-${(i % 5) + 1})` }]),
   );
   const fmt = (v: unknown) => (typeof v === "number" ? FORMAT[valueFormat].format(v) : String(v ?? "—"));
   const stackId = stacked ? "a" : undefined;
@@ -94,8 +97,15 @@ export function TrendChart({
 
   return (
     <Card className="@container/card">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
+      <CardHeader className="border-b">
+        <CardTitle className="flex items-center gap-2">
+          {icon ? (
+            <span className="text-muted-foreground [&_svg]:size-4" aria-hidden="true">
+              {icon}
+            </span>
+          ) : null}
+          {title}
+        </CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
         {usable.length > 1 ? (
           <CardAction>
@@ -124,7 +134,7 @@ export function TrendChart({
           </CardAction>
         ) : null}
       </CardHeader>
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
+      <CardContent className="px-2 sm:px-4">
         {rows.length === 0 ? (
           <p className="text-sm text-muted-foreground">まだ記録がありません。</p>
         ) : (

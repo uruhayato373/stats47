@@ -36,7 +36,7 @@ function ClassificationGroup({
           <ChevronRight
             aria-hidden="true"
             strokeWidth={1.5}
-            className="size-4 shrink-0 text-console-muted transition-transform group-data-[state=open]:rotate-90"
+            className="size-4 shrink-0 text-muted-foreground transition-transform group-data-[state=open]:rotate-90"
           />
           <span className="truncate">{label}</span>
         </CollapsibleTrigger>
@@ -93,7 +93,7 @@ export function ImageTemplateTree({
         );
       })}
       {!branches.length && (
-        <p className="text-sm text-console-muted">該当する分類はありません。</p>
+        <p className="text-sm text-muted-foreground">該当する分類はありません。</p>
       )}
     </nav>
   );

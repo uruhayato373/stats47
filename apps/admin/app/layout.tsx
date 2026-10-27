@@ -5,6 +5,8 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import { Suspense } from "react";
 
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import Script from "next/script";
 
@@ -31,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
         {/* 素の <script> を JSX に置くと React が警告を出すため next/script で head へ入れる
             (beforeInteractive なので実行は hydration 前 = 同じタイミング)。 */}
@@ -40,16 +42,16 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        {/* 公式 dashboard-01 と同じ外枠: inset のサイドバー + 上部バー + @container/main の本文 */}
+        {/* 見本 (shadcndashboard.dev) と同じ外枠: inset のサイドバー + 角の無い 1px 枠の本文 + sticky の上部バー + p-4 の本文 */}
         <SidebarProvider className="[--header-height:calc(var(--spacing)*12)]">
           <CloseSidebarOnNavigate />
           <ConsoleSidebar />
-          <SidebarInset className="min-w-0">
+          <SidebarInset className="min-w-0 outline outline-border md:peer-data-[variant=inset]:rounded-none md:peer-data-[variant=inset]:shadow-none">
             <Suspense fallback={<div className="h-(--header-height) border-b" aria-hidden="true" />}>
               <SiteHeader />
             </Suspense>
             <div className="@container/main flex min-w-0 flex-1 flex-col overflow-x-hidden wrap-break-word">
-              <div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:py-6 lg:px-6">{children}</div>
+              <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-4 p-4">{children}</div>
             </div>
           </SidebarInset>
         </SidebarProvider>

@@ -34,6 +34,29 @@
         ],
         "reason": "同上。「一部・暫定・未実施・不足あり」用。色は console-warn"
       }
+    },
+    "card": {
+      "slot:card": {
+        "missing": [
+          "rounded-xl"
+        ],
+        "extra": [
+          "rounded-none"
+        ],
+        "reason": "オーナー指定の見本 (shadcndashboard.dev・2026-10-27 に実測) はカードの角が直角 (border-radius 0) で、格子の 1px 線を共有して並ぶ。角丸を外すのは Card の面だけで、ボタン・入力・Badge の角丸は公式のまま"
+      },
+      "slot:card-header": {
+        "missing": [
+          "rounded-t-xl"
+        ],
+        "reason": "同上 (見出しの上の角)"
+      },
+      "slot:card-footer": {
+        "missing": [
+          "rounded-b-xl"
+        ],
+        "reason": "同上 (下の帯の角)"
+      }
     }
   }
 }

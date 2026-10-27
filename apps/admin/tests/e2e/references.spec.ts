@@ -16,6 +16,8 @@ function channelRowPattern(channel: 'theme' | 'youtube', label: string) {
 }
 
 test.describe('/content/references 参考文献の活用・展開管理', () => {
+  // 全量のポートフォリオを描く重い画面。開発サーバーが初回に組み立てる時間を含めると 30 秒では足りない (2026-10-27 実測)
+  test.describe.configure({ timeout: 120_000 });
   test('日本語の資料名と12展開先、企画・補強の全量サマリを表示する', async ({
     page,
   }) => {

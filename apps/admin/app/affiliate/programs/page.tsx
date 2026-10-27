@@ -1,5 +1,7 @@
-import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
-import { Section } from "@/components/layout-primitives";
+import { CircleHelpIcon, HandshakeIcon, ListChecksIcon, PackageIcon, RouteIcon, TriangleAlertIcon } from "lucide-react";
+
+import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { affiliatePrograms } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
@@ -24,7 +26,7 @@ const STATUS: Record<string, string> = {
 };
 
 /**
- * /affiliate/programs — 提携と案件 (要対応)。doboku-note の /affiliate/programs に揃える。
+ * /affiliate/programs — 提携と案件 (要対応)。型 B (一覧): 件数の要約 → 一覧。doboku-note の /affiliate/programs に揃える。
  * 案件ごとに、配信中の広告があるか・ASP での提携状態・報酬・掲載終了日を並べる。
  * 掲載終了日は広告定義の endDate (doboku-note のリンク期限に相当)。
  */
@@ -33,58 +35,61 @@ export default function AffiliateProgramsPage() {
   const d = adsSummary();
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="アフィリエイト 提携・案件" source={`${datasetDir("affiliate.audits")}/{a8-catalog,affiliate-catalog}.json`} />
 
-      <Section title="案件ポートフォリオ">
-        {hasError(d.portfolio) ? (
-          <ErrorNote error={d.portfolio.error} />
-        ) : (
-          <>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard label="案件" value={d.portfolio.totals.offers} sub={`creative ${d.portfolio.totals.ads}`} />
-              <StatCard
-                label="未分類"
-                value={d.portfolio.totals.unclassified}
-                tone={d.portfolio.totals.unclassified > 0 ? "warn" : "good"}
-                sub="推測せず配信候補から隔離"
-              />
-              <StatCard
-                label="欠損指標を持つ案件"
-                value={d.portfolio.unknownMetricOffers}
-                tone={d.portfolio.unknownMetricOffers > 0 ? "warn" : "good"}
-                sub={`共用口座 ${d.portfolio.totals.sharedOutcomePrograms} 件`}
-              />
-              <StatCard
-                label="次の1件"
-                value={d.portfolio.nextAction?.id ?? "—"}
-                sub={d.portfolio.nextAction?.programRef ?? d.portfolio.nextAction?.reasons.join(" / ") ?? "—"}
-              />
-            </div>
-            <div className="mt-2">
-              <DataTable columns={["レーン", "案件数"]}>
-                {d.portfolio.lanes.map((lane) => (
-                  <Row key={lane.lane}>
-                    <Cell nowrap>{lane.lane}</Cell>
-                    <Cell nowrap muted>{lane.count}</Cell>
-                  </Row>
-                ))}
-              </DataTable>
-            </div>
-          </>
-        )}
-      </Section>
+      {hasError(d.portfolio) ? (
+        <ErrorNote error={d.portfolio.error} />
+      ) : (
+        <>
+          <Grid min="sm">
+            <StatCard label="案件" icon={<PackageIcon />} value={d.portfolio.totals.offers} sub={`creative ${d.portfolio.totals.ads}`} />
+            <StatCard
+              label="未分類"
+              icon={<CircleHelpIcon />}
+              value={d.portfolio.totals.unclassified}
+              tone={d.portfolio.totals.unclassified > 0 ? "warn" : "good"}
+              sub="推測せず配信候補から隔離"
+            />
+            <StatCard
+              label="欠損指標を持つ案件"
+              icon={<TriangleAlertIcon />}
+              value={d.portfolio.unknownMetricOffers}
+              tone={d.portfolio.unknownMetricOffers > 0 ? "warn" : "good"}
+              sub={`共用口座 ${d.portfolio.totals.sharedOutcomePrograms} 件`}
+            />
+            <StatCard
+              label="次の1件"
+              icon={<ListChecksIcon />}
+              value={d.portfolio.nextAction?.id ?? "—"}
+              sub={d.portfolio.nextAction?.programRef ?? d.portfolio.nextAction?.reasons.join(" / ") ?? "—"}
+            />
+          </Grid>
+          <PanelCard title="案件ポートフォリオのレーン" icon={<RouteIcon />}>
+            <DataTable columns={["レーン", "案件数"]}>
+              {d.portfolio.lanes.map((lane) => (
+                <Row key={lane.lane}>
+                  <Cell nowrap>{lane.lane}</Cell>
+                  <Cell nowrap muted>
+                    {lane.count}
+                  </Cell>
+                </Row>
+              ))}
+            </DataTable>
+          </PanelCard>
+        </>
+      )}
 
       {hasError(p) ? (
         <ErrorNote error={p.error} />
       ) : (
         <>
-          <Section title="ASP ごとの提携状態">
-            <p className="text-sm text-console-fg">
+          <PanelCard title="ASP ごとの提携状態" icon={<HandshakeIcon />}>
+            <p className="text-sm text-foreground">
               {["a8", "moshimo", "afb"].map((asp) => (
                 <span key={asp} className="mr-4">
                   <span className="font-medium">{ASP[asp]}</span>{" "}
-                  <span className="text-console-muted">
+                  <span className="text-muted-foreground">
                     {p.byStatus
                       .filter((s) => s.asp === asp)
                       .map((s) => `${STATUS[s.status] ?? s.status} ${s.count}`)
@@ -93,26 +98,56 @@ export default function AffiliateProgramsPage() {
                 </span>
               ))}
             </p>
-          </Section>
+          </PanelCard>
 
-          <Section title="案件" count={p.rows.length}>
-            <p className="text-[11px] text-console-muted">配信中の案件を先頭に並べる。報酬は ASP カタログの記録値</p>
-            <DataTable columns={["案件", "配信", "ASP", "提携", "報酬", "分野", "掲載終了日"]}>
-              {p.rows.map((r) => (
-                <Row key={r.programRef}>
-                  <Cell>{r.name}</Cell>
-                  <Cell nowrap>{r.live ? <StatusBadge tone="good">配信中</StatusBadge> : <span className="text-console-muted">なし</span>}</Cell>
-                  <Cell nowrap muted>{ASP[r.asp] ?? r.asp}</Cell>
-                  <Cell nowrap>{STATUS[r.status] ?? r.status}</Cell>
-                  <Cell nowrap muted>{r.rewardYen == null ? "—" : `¥${r.rewardYen.toLocaleString()}`}</Cell>
-                  <Cell nowrap muted>{r.vertical ?? "—"}</Cell>
-                  <Cell nowrap muted>{r.endDate ?? "—"}</Cell>
-                </Row>
-              ))}
-            </DataTable>
+          <Section title="案件" count={p.rows.length} note="配信中の案件を先頭に並べる。報酬は ASP カタログの記録値">
+            <DataGrid
+              columns={[
+                { id: "name", header: "案件", sortable: true },
+                { id: "live", header: "配信", sortable: true, nowrap: true },
+                { id: "asp", header: "ASP", sortable: true, nowrap: true },
+                { id: "status", header: "提携", sortable: true, nowrap: true },
+                { id: "reward", header: "報酬", numeric: true, sortable: true, nowrap: true },
+                { id: "vertical", header: "分野", sortable: true, nowrap: true },
+                { id: "end", header: "掲載終了日", sortable: true, nowrap: true },
+              ]}
+              rows={p.rows.map((r) => ({
+                id: r.programRef,
+                cells: [
+                  r.name,
+                  r.live ? (
+                    <StatusBadge key="live" tone="good">
+                      配信中
+                    </StatusBadge>
+                  ) : (
+                    <span key="live" className="text-muted-foreground">
+                      なし
+                    </span>
+                  ),
+                  <span key="asp" className="text-muted-foreground">
+                    {ASP[r.asp] ?? r.asp}
+                  </span>,
+                  STATUS[r.status] ?? r.status,
+                  <span key="reward" className="text-muted-foreground">
+                    {r.rewardYen == null ? "—" : `¥${r.rewardYen.toLocaleString()}`}
+                  </span>,
+                  <span key="v" className="text-muted-foreground">
+                    {r.vertical ?? "—"}
+                  </span>,
+                  <span key="end" className="text-muted-foreground">
+                    {r.endDate ?? "—"}
+                  </span>,
+                ],
+                sort: [r.name, r.live ? 0 : 1, r.asp, r.status, r.rewardYen ?? null, r.vertical ?? null, r.endDate ?? null],
+                search: `${r.name} ${r.programRef} ${r.vertical ?? ""}`,
+                facet: r.asp,
+              }))}
+              facets={["a8", "moshimo", "afb"].map((a) => ({ value: a, label: ASP[a] }))}
+              searchPlaceholder="案件名・分野で絞り込み"
+            />
           </Section>
         </>
       )}
-    </div>
+    </>
   );
 }

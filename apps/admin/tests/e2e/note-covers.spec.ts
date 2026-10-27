@@ -17,6 +17,9 @@ test.beforeEach(async ({ page }) => {
   await page.route('**/note-cover/**', route => route.fulfill({ contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="670"><rect width="1280" height="670" fill="#142754"/></svg>' }));
 });
 
+// カバー画像を多数読む重い画面。開発サーバーの初回の組み立てと画像読込を含めると 30 秒では足りない (2026-10-27 実測)
+test.describe.configure({ timeout: 120_000 });
+
 test('分類・検索・並べ替え・ページ送りが同じURL条件を保持する', async ({ page }) => {
   await page.goto('/content/note/covers?category=household&view=complete');
   const main = page.locator('main');
@@ -34,7 +37,8 @@ test('分類・検索・並べ替え・ページ送りが同じURL条件を保�
   await expect(body.locator('tr')).toHaveCount(1);
   await expect(body).toContainText('a-kakei-aichi');
   await page.reload();
-  await expect(body).toContainText('a-kakei-aichi');
+  // 再読込のあと一覧は画面側で取り直すので、既定の 5 秒では間に合わないことがある
+  await expect(body).toContainText('a-kakei-aichi', { timeout: 30_000 });
   await filter(page, () => page.getByRole('combobox', { name: '確認状態', exact: true }).selectOption('needs-revision'));
   await expect(main.getByRole('status')).toContainText('0件');
   await filter(page, () => page.getByRole('button', { name: '絞り込みを解除' }).click());
@@ -69,8 +73,12 @@ test('制作IDで探し、内容の保存と制作仕様の受け渡しができ
   });
   await page.goto(`/content/note/covers?category=household&q=${source.production.id}`);
   await expect(page.getByText('このカテゴリの制作方針', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /のカバーを比較/ }).click();
   const dialog = page.getByRole('dialog', { name: 'カバーを比較' });
+  // 画面の準備 (hydration) 前のクリックは効かないので、比較画面が開くまで押し直す
+  await expect(async () => {
+    if (!(await dialog.isVisible())) await page.getByRole('button', { name: /のカバーを比較/ }).click();
+    await expect(dialog).toBeVisible({ timeout: 1_000 });
+  }).toPass();
   await dialog.getByLabel('大きく見せるコピー').fill('家計から見る愛知');
   // 家計の記事は対象都市と対象年が無いと保存できない (scopeReady)
   await dialog.getByLabel('家計データの対象都市').fill('名古屋市');
@@ -94,8 +102,12 @@ test('表からカバーを大きく比較し、ギャラリーへ条件を引�
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('img', { name: /公開カバー/ })).toBeVisible();
   await expect(dialog.getByRole('img', { name: /差し替え候補/ })).toBeVisible();
-  await dialog.getByText('過去の保管版 2 件', { exact: true }).click();
-  await expect(dialog.getByRole('img', { name: /過去の保管版/ })).toHaveCount(2);
+  // 保管版の件数は台帳が増えると変わる (2026-10-27 に 2 → 3 件)。表示の件数を読み、その数だけ画像が出ることを確かめる
+  const archived = dialog.getByText(/^過去の保管版 \d+ 件$/);
+  const count = Number((await archived.textContent())?.match(/(\d+) 件/)?.[1]);
+  expect(count).toBeGreaterThan(0);
+  await archived.click();
+  await expect(dialog.getByRole('img', { name: /過去の保管版/ })).toHaveCount(count);
   await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
   await page.getByRole('tab', { name: 'カバー比較' }).click();

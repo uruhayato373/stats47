@@ -63,7 +63,7 @@ export function KpiTree() {
               </Cell>
               <Cell nowrap>
                 {n.improvements.length ? (
-                  <Link href="/todo?f=improvements" className="text-console-accent" title={n.improvements.join("\n")}>
+                  <Link href="/todo?f=improvements" className="font-medium underline-offset-4 hover:underline" title={n.improvements.join("\n")}>
                     {n.improvements.length} 件
                   </Link>
                 ) : (

@@ -45,11 +45,6 @@ export function localSnsDir(): string {
   return path.join(projectRoot(), ".local/r2/sns");
 }
 
-/** ブログ OGP AI パイロットのローカル出力先 (旧 LOCAL_PILOT_DIR)。 */
-export function localPilotDir(): string {
-  return path.join(projectRoot(), ".local/ogp-pilot");
-}
-
 /** Kindle EPUB・表紙のローカル生成物。 */
 export function localKindleBooksDir(): string {
   return path.join(projectRoot(), ".local/kindle-books");

@@ -1,6 +1,8 @@
+import { BookCheckIcon, BookOpenIcon, CircleAlertIcon, PackageCheckIcon } from "lucide-react";
+
 import { ContentAuditPanel, FilterLink, StageBadge } from "@/components/content/content-ui";
-import { Cell, DataTable, Row } from "@/components/admin-ui";
-import { Section, Stack } from "@/components/layout-primitives";
+import { DataGrid, StatCard } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
@@ -9,6 +11,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Kindle運用 — stats47 admin" };
 
@@ -40,10 +43,10 @@ export default async function KindleContentPage({
   const query = await searchParams;
   if (hasError(data)) {
     return (
-      <div className="space-y-4">
+      <>
         <PageHeading title="Kindle運用" source="Kindle catalog + KDP listings" />
         <ErrorNote error={data.error} />
-      </div>
+      </>
     );
   }
   const stage = STAGES.includes(query.stage as (typeof STAGES)[number]) ? query.stage : undefined;
@@ -67,15 +70,32 @@ export default async function KindleContentPage({
   const findings = data.audit.findings.filter((x) => x.channel === "kindle");
 
   return (
-    <Stack gap="lg">
+    <>
       <PageHeading
         title="Kindle運用"
         source="book-catalog.ts / manuscripts / kdp-listings.json / kindle-archives.json / .local EPUB"
       >
-        <p className="text-xs text-console-muted">
+        <p className="text-sm text-muted-foreground">
           書籍設計・原稿・ローカル成果物・KDP公開状態を突合します。公開操作は /kdp-publish とオーナー承認のままです。
         </p>
       </PageHeading>
+
+      <Grid min="sm">
+        <StatCard label="書籍" icon={<BookOpenIcon />} value={data.kindle.length} sub={`絞り込み後 ${books.length} 冊`} />
+        <StatCard label="公開済み" icon={<BookCheckIcon />} value={data.kindle.filter((x) => x.stage === "published").length} tone="good" />
+        <StatCard
+          label="公開準備完了・審査中"
+          icon={<PackageCheckIcon />}
+          value={data.kindle.filter((x) => x.stage === "ready" || x.stage === "review").length}
+          tone="info"
+        />
+        <StatCard
+          label="要対応"
+          icon={<CircleAlertIcon />}
+          value={data.kindle.filter((x) => x.stage === "blocked").length}
+          tone={data.kindle.some((x) => x.stage === "blocked") ? "bad" : "neutral"}
+        />
+      </Grid>
 
       <div className="flex flex-wrap items-center gap-2">
         <FilterLink href={filterHref(undefined, query)} active={!stage}>すべて {data.kindle.length}</FilterLink>
@@ -116,9 +136,8 @@ export default async function KindleContentPage({
         </form>
       </div>
 
-      <Section title="表紙一覧" count={books.filter((book) => book.hasCover).length}>
-        <p className="text-xs text-console-muted">表紙を選ぶと原寸画像を開きます。</p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <Section title="表紙一覧" count={books.filter((book) => book.hasCover).length} note="表紙を選ぶと原寸画像を開きます。">
+        <Grid min="sm" lines={false} gap="sm">
           {books.map((book) => (
             <Card key={book.id} className="gap-0 overflow-hidden py-0">
               {book.hasCover ? (
@@ -126,7 +145,7 @@ export default async function KindleContentPage({
                   href={`/kindle-cover/${book.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block aspect-5/8 bg-console-bg"
+                  className="block aspect-5/8 bg-background"
                   aria-label={`${book.title}の表紙を原寸で開く`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -138,70 +157,81 @@ export default async function KindleContentPage({
                   />
                 </a>
               ) : (
-                <div className="flex aspect-5/8 items-center justify-center bg-console-bg text-xs text-console-muted">
+                <div className="flex aspect-5/8 items-center justify-center bg-background text-xs text-muted-foreground">
                   表紙なし
                 </div>
               )}
-              <CardContent className="space-y-1 border-t p-2">
-                <div className="font-mono text-[10px] text-console-muted">
+              <CardContent className="flex flex-col gap-1 border-t p-2">
+                <div className="font-mono text-xs text-muted-foreground">
                   {book.id} · {book.seriesLabel}
                 </div>
-                <div className="line-clamp-2 text-xs font-medium text-console-fg">{book.title}</div>
-                <div className="text-[10px] text-console-muted">
+                <div className="line-clamp-2 text-xs font-medium text-foreground">{book.title}</div>
+                <div className="text-xs text-muted-foreground">
                   {book.coverThemeLabel} · {COVER_REVIEW_LABELS[book.coverReviewStatus]}
                 </div>
-                <div className="line-clamp-2 text-[10px] text-console-muted">
+                <div className="line-clamp-2 text-xs text-muted-foreground">
                   {book.coverDataLabels.join("・")}
                 </div>
                 <StageBadge stage={book.stage} />
               </CardContent>
             </Card>
           ))}
-        </div>
+        </Grid>
       </Section>
 
       <Section title="書籍" count={books.length}>
-        <DataTable columns={["ID・書名", "状態", "表紙設計", "原稿・成果物", "KDP", "次の作業"]}>
-          {books.map((book) => (
-            <Row key={book.id}>
-              <Cell>
-                <div className="font-mono text-[11px] text-console-muted">{book.id} · {book.seriesLabel}</div>
+        <DataGrid
+          columns={[
+            { id: "book", header: "ID・書名", sortable: true },
+            { id: "stage", header: "状態", sortable: true, nowrap: true },
+            { id: "cover", header: "表紙設計" },
+            { id: "artifacts", header: "原稿・成果物", nowrap: true },
+            { id: "kdp", header: "KDP" },
+            { id: "next", header: "次の作業" },
+          ]}
+          rows={books.map((book) => ({
+            id: book.id,
+            cells: [
+              <div key="book">
+                <div className="font-mono text-xs text-muted-foreground">{book.id} · {book.seriesLabel}</div>
                 <div className="font-medium">{book.title}</div>
-                {book.subtitle ? <div className="text-[11px] text-console-muted">{book.subtitle}</div> : null}
-              </Cell>
-              <Cell nowrap><StageBadge stage={book.stage} /></Cell>
-              <Cell muted>
+                {book.subtitle ? <div className="text-xs text-muted-foreground">{book.subtitle}</div> : null}
+              </div>,
+              <StageBadge key="stage" stage={book.stage} />,
+              <div key="cover" className="text-muted-foreground">
                 <div>{book.coverThemeLabel} · {book.coverTemplateLabel}</div>
-                <div className="text-[11px]">{book.coverDataLabels.join("・")}</div>
-                <div className="text-[11px]">
+                <div className="text-xs">{book.coverDataLabels.join("・")}</div>
+                <div className="text-xs">
                   背景台帳 {book.hasCoverBackground ? "登録" : "未登録"} / {COVER_REVIEW_LABELS[book.coverReviewStatus]}
                 </div>
-                <div className="font-mono text-[10px]">{book.coverVersion ?? "版不明"} · {book.coverPalette}</div>
-              </Cell>
-              <Cell nowrap muted>
+                <div className="font-mono text-xs">{book.coverVersion ?? "版不明"} · {book.coverPalette}</div>
+              </div>,
+              <div key="artifacts" className="text-muted-foreground">
                 <div>原稿 {book.manuscriptCount}章</div>
                 <div>EPUB {book.hasEpub ? "あり" : "なし"} / 表紙 {book.hasCover ? "あり" : "なし"}</div>
                 <div>R2 {book.archiveStatus}{book.archiveRevision ? ` · ${book.archiveRevision}` : ""}</div>
-              </Cell>
-              <Cell muted>
+              </div>,
+              <div key="kdp" className="text-muted-foreground">
                 <div>{book.kdpStatusLabel} · ¥{book.priceYen.toLocaleString("ja-JP")}</div>
                 <div>{book.royaltyPlan}% · KU {book.kuEnrolled ? "登録" : "未登録"}</div>
-                <div className="font-mono text-[11px]">ASIN {book.asin ?? "割当待ち"}</div>
-                <div className="text-[11px]">申請 {book.lastSubmittedAt ?? "—"} / 販売確認 {book.salesStartedAt ?? "—"}</div>
-                <div className="text-[11px]">状態確認 {book.kdpStatusCheckedAt ?? "未同期"}</div>
-              </Cell>
-              <Cell>{book.nextAction}</Cell>
-            </Row>
-          ))}
-        </DataTable>
-      </Section>
-
-      <Section title="Kindle監査">
-        <ContentAuditPanel
-          status={findings.some((x) => x.severity === "error") ? "fail" : findings.length ? "warn" : "pass"}
-          findings={findings}
+                <div className="font-mono text-xs">ASIN {book.asin ?? "割当待ち"}</div>
+                <div className="text-xs">申請 {book.lastSubmittedAt ?? "—"} / 販売確認 {book.salesStartedAt ?? "—"}</div>
+                <div className="text-xs">状態確認 {book.kdpStatusCheckedAt ?? "未同期"}</div>
+              </div>,
+              book.nextAction,
+            ],
+            sort: [book.id, book.stage, null, null, null, null],
+            search: `${book.id} ${book.title} ${book.subtitle ?? ""} ${book.seriesLabel}`,
+            tone: book.stage === "blocked" ? ("bad" as const) : undefined,
+          }))}
+          searchPlaceholder="この中から ID・書名で絞り込み"
         />
       </Section>
-    </Stack>
+
+      <ContentAuditPanel
+        status={findings.some((x) => x.severity === "error") ? "fail" : findings.length ? "warn" : "pass"}
+        findings={findings}
+      />
+    </>
   );
 }

@@ -13,6 +13,6 @@ export function NoteCoverImage({ src, alt }: { src: string; alt: string }) {
       if (typeof body.error === 'string') setError(body.error);
     }).catch(() => {});
   };
-  if (error) return <div className="aspect-[1.91] rounded border border-console-border p-2 text-xs whitespace-normal text-console-muted" role="status">{error}</div>;
-  return <img src={src} alt={alt} loading="lazy" onError={fail} className="aspect-[1.91] w-full rounded border border-console-border object-contain" />;
+  if (error) return <div className="aspect-[1.91] rounded border border-border p-2 text-xs whitespace-normal text-muted-foreground" role="status">{error}</div>;
+  return <img src={src} alt={alt} loading="lazy" onError={fail} className="aspect-[1.91] w-full rounded border border-border object-contain" />;
 }

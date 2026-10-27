@@ -19,13 +19,14 @@ const LINKS = [
  * /strategy — 方針 (判断の基準)。事業計画の明細は各領域のページへ割り振った
  * (Geo は /data/geo、X は /sns/geo-plan、note 商品は /product/note-plan、計画の詳細は /strategy/business-plan)。
  */
+/** 型 D: 文書。題目 → 入口 → 原則 → 文書の一覧 */
 export default function StrategyPolicyPage() {
   const data = businessPlanAdminData();
 
   return (
-    <div className="space-y-8">
+    <>
       <PageHeading title="方針" source="packages/data-configs/src/business-plan/ + docs/00_プロジェクト管理/">
-        <p className="max-w-4xl text-sm text-console-muted">
+        <p className="max-w-4xl text-sm text-muted-foreground">
           判断の基準だけを置く。売上・アクセス目標は予測ではなく仮説、未計測は 0 ではない。今週の判断はレビュー、施策の構えは領域と構えで行う。
         </p>
       </PageHeading>
@@ -34,15 +35,12 @@ export default function StrategyPolicyPage() {
 
       <Grid min="sm">
         {LINKS.map((l) => (
-          <LinkCard key={l.href} href={l.href}>
-            <h2 className="text-sm font-semibold">{l.title}</h2>
-            <p className="pt-1 text-xs text-console-muted">{l.body}</p>
-          </LinkCard>
+          <LinkCard key={l.href} href={l.href} title={l.title} sub={l.body} />
         ))}
       </Grid>
 
       <Principles data={data} />
       <PolicyDocs data={data} />
-    </div>
+    </>
   );
 }

@@ -18,12 +18,15 @@ import { isBranch, isNavItemActive, navHrefs, type NavBranch, type NavGroup } fr
 
 type IsActive = (href: string) => boolean;
 
+/** 見本 (shadcndashboard.dev) と同じ選択中の形: 主色で塗り、文字は反転・medium。ホバーは主色 5% */
+const ITEM = "hover:bg-primary/5 data-active:bg-primary data-active:font-medium data-active:text-primary-foreground";
+
 /** 「チャネル別」などの第二階層。現在地を含む枝だけ開いた状態で描く (doboku-note admin-app の SectionTree と同じ)。 */
 function NavBranchItem({ branch, isActive }: { branch: NavBranch; isActive: IsActive }) {
   const open = branch.children.some((child) => isActive(child.href));
   return (
     <Collapsible defaultOpen={open} render={<SidebarMenuItem />} className="group/branch">
-      <CollapsibleTrigger render={<SidebarMenuButton />}>
+      <CollapsibleTrigger render={<SidebarMenuButton className="hover:bg-primary/5" />}>
         <ChevronRight aria-hidden="true" className="size-3.5 shrink-0 opacity-60 transition-transform group-data-[open]/branch:rotate-90" />
         {branch.label}
       </CollapsibleTrigger>
@@ -33,7 +36,7 @@ function NavBranchItem({ branch, isActive }: { branch: NavBranch; isActive: IsAc
             const active = isActive(child.href);
             return (
               <SidebarMenuSubItem key={child.href}>
-                <SidebarMenuSubButton isActive={active} render={<a href={child.href} aria-current={active ? "page" : undefined} />}>
+                <SidebarMenuSubButton isActive={active} className={ITEM} render={<a href={child.href} aria-current={active ? "page" : undefined} />}>
                   {child.label}
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>
@@ -59,12 +62,12 @@ export function ConsoleNavLinks({ groups }: { groups: readonly NavGroup[] }) {
           {group.title ? (
             group.href ? (
               <SidebarGroupLabel
-                render={<a href={group.href} aria-current={pathname === group.href ? "page" : undefined} className="hover:text-sidebar-foreground" />}
+                render={<a href={group.href} aria-current={pathname === group.href ? "page" : undefined} className="font-semibold hover:text-sidebar-foreground" />}
               >
                 {group.title}
               </SidebarGroupLabel>
             ) : (
-              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+              <SidebarGroupLabel className="font-semibold">{group.title}</SidebarGroupLabel>
             )
           ) : null}
           <SidebarMenu>
@@ -73,7 +76,7 @@ export function ConsoleNavLinks({ groups }: { groups: readonly NavGroup[] }) {
               const active = isActive(entry.href);
               return (
                 <SidebarMenuItem key={entry.href}>
-                  <SidebarMenuButton isActive={active} render={<a href={entry.href} aria-current={active ? "page" : undefined} />}>
+                  <SidebarMenuButton isActive={active} className={ITEM} render={<a href={entry.href} aria-current={active ? "page" : undefined} />}>
                     {entry.label}
                   </SidebarMenuButton>
                 </SidebarMenuItem>

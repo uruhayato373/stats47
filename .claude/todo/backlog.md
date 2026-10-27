@@ -264,6 +264,16 @@ updated: 2026-10-19
 - **段階**: 0 土台 (公式部品を base-nova へ入れ替え・`asChild` 47 か所を `render` へ・トークンを完全な色の値へ・chart トークン追加・sync/parity を base-nova へ) → 1 共通部品 (site-header + Breadcrumb・StatCard を Section Cards 型・ChartContainer の推移チャート・TanStack の表・自作 SVG チャートと StatCard の複製を削除) → 2 ページ (概況・一覧・詳細・文書・制作ツールの 5 型。推移はチャート、`<details>` は Collapsible) → 3 検査と規約 (admin-ui:check に自作チャート・複製・`<details>` を追加、admin-ui.md を改訂) → 4 確認 (型・lint・unit・admin-ui:check・design-system:check、light/dark/スマホ幅の目視)。
 - **停止条件**: 部品の大きさをページで上書きしない。`@stats47/components` を入れない。本番デプロイはしない (管理画面はローカル専用)。
 - **完了条件**: 上の検査がすべて通り、主要ページを light/dark/スマホ幅で目視確認済み。develop へ統合後、このカードを削除する。doboku-note 側の揃えは別カードで起票する。
+- **進捗 (2026-10-27)**: 全 56 ページの作り直しと見本の見た目をコミット済み (feat/admin-baseui)。型・lint・admin-ui:check (旧配色・任意の文字サイズ・<details>・Button をリンクにする書き方も 0)・unit (既知の agent-models 1 件のみ・ADMIN の Windows パス区切りの件)・e2e (実行分は全件通過。ローカル動画が無いと自動で飛ぶ 6 件を除く) を確認した。e2e はデータの読み取り元を本体に合わせて流す (`STATS47_PROJECT_ROOT`。worktree には git に入っていないデータが無い)。
+- **次**: ① push と develop への統合の可否をオーナーに確認 ② 統合後にこのカードを削除し、doboku-note 側の揃えを別カードで起票する。
+- **2026-10-27 追加 (オーナー指示)**: 管理画面の古い URL (`/ads`・`/svg`・`/assets`・`/strategy/reviews`) の転送ページを廃止し、それだけが使っていた部品・API (`/api/assets/tab(s)`・`/api/svg/catalog`・`/pilot/*`)・e2e・文書の記述を消した。
+
+### [ADMIN-VITEST-TIMEOUT-01] 管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run test --workspace apps/admin] [起票:2026-10-27] [領域:管理]
+
+- **実測 (2026-10-27・会社 Windows PC)**: 別の作業 (tsc・dev サーバー) と並行して `apps/admin` の vitest を流すと、`lib/server` 系のテスト約 23 件が既定の 5 秒でタイムアウトした。`--testTimeout=120000` では 311 件が通り、落ちたのは既知の agent-models の 1 件 (Windows のパス区切り) だけだった。
+- **次**: タイムアウトするテストの共通点 (重いファイル読み取り・初回 import の変換時間) を特定し、`vitest.config.mts` の testTimeout を上げるか、読み取りを小さな fixture にする。
+- **完了条件**: 並行作業中でも `npm run test --workspace apps/admin` がタイムアウト 0 件。
 
 ### [NOTE-CIRCULATION-RECHECK-01] note→ランキング回遊の着地 session を note.com 経由で取り直す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:管理]
@@ -517,6 +527,7 @@ updated: 2026-10-19
 - **次**: ① Windows で `.claude/scripts/model-usage/collect-local-usage.mjs` の記録が空になる原因を直す ② CI の無人 Claude (improvement-cycle など) の起動も同じ形で記録する ③ 4 週分たまったら、起動 0 回の体を統合候補として一覧にし、オーナーが決める。
 - **停止条件**: 記録が 4 週分そろうまで、エージェントの定義を消さない。系統は残し、系統の中の重複だけを減らす (2026-10-11 オーナー判断)。
 - **完了条件**: 3 環境の 4 週分の記録があり、統合候補の一覧とオーナーの判断が出ている。
+- **追記 (2026-10-27)**: 管理画面 `/ops/agents` は週ごとの推移を TrendChart で出せない。`apps/admin/lib/server/agent-models.ts` の `UsageReport` が週別の値を持たないため。記録が 4 週分そろったら週別の配列を足し、`/ops/agents` にチャートを置く (ADMIN-UI-BASEUI-01 の規約: 3 点以上の時系列はチャート)。
 
 ### [X-METRICS-WEEKLY-RECORD-01] X の指標を週次で記録する定期実行を作り、管理画面を読みに行く操作を止める hook の対象に X を加える
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]

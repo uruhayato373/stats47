@@ -11,7 +11,8 @@ import {
   NativeSelectOption,
 } from '@/components/ui/native-select';
 import { StatusBadge } from '@/components/admin-ui/status-badge';
-import { DataTable, Row, Cell } from '@/components/admin-ui/data-table';
+import { DataGrid } from '@/components/admin-ui/data-grid';
+import { Grid } from '@/components/layout-primitives';
 import { MediaPreview } from '@/components/media-preview';
 import { apiGet, ApiError } from '@/lib/client/api-client';
 import { ErrorState, Loading } from '@/components/async-state';
@@ -160,8 +161,8 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
     setSelected(post);
   }
   return (
-    <div className="space-y-4">
-      <div className="space-y-3 border-y border-console-border py-4">
+    <>
+      <div className="flex flex-col gap-3 border-y py-4">
         <div className="flex flex-wrap gap-2" aria-label="台帳の対象">
           <Button
             variant={scope === 'posts' ? 'default' : 'outline'}
@@ -295,8 +296,8 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
           </Button>
         </div>
         {scope === 'candidates' && (
-          <div className="space-y-2">
-            <p className="text-sm text-console-muted">
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-muted-foreground">
               予約前の下書きを画像付きで比較できます。確認用プレビューは投稿用画像一式の準備が必要です。
             </p>
             <div className="flex flex-wrap gap-2">
@@ -378,7 +379,7 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
           >
             再読込
           </Button>
-          <span className="text-xs text-console-muted">
+          <span className="text-xs text-muted-foreground">
             日時は日本時間 (JST)
           </span>
         </div>
@@ -407,13 +408,13 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
       ) : error ? (
         <ErrorState message={error} onRetry={loadInventory} />
       ) : items.length === 0 ? (
-        <p className="text-sm text-console-muted">
+        <p className="text-sm text-muted-foreground">
           該当する投稿がありません。検索条件を変更してください。
         </p>
       ) : (
         <>
           {view === 'gallery' ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <Grid min="md" lines={false}>
               {visible.map((item, i) => (
                 <PostCard
                   key={item.id ?? `${item.platform}-${item.content_key}-${i}`}
@@ -421,45 +422,43 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
                   onPreview={() => setSelected(item)}
                 />
               ))}
-            </div>
+            </Grid>
           ) : (
-            <DataTable
+            <DataGrid
               columns={[
-                'ID / 画像',
-                '媒体・型',
-                '本文',
-                '状態',
-                '予約 / 投稿日時 (JST)',
-                '操作',
+                { id: 'id', header: 'ID / 画像', sortable: true },
+                { id: 'platform', header: '媒体・型', sortable: true },
+                { id: 'caption', header: '本文' },
+                { id: 'status', header: '状態', sortable: true },
+                { id: 'at', header: '予約 / 投稿日時 (JST)', sortable: true, nowrap: true },
+                { id: 'action', header: '操作' },
               ]}
-            >
-              {visible.map((item, i) => (
-                <Row key={item.id ?? i}>
-                  <Cell>
-                    <div className="w-24 space-y-2">
-                      {item.id ? (
-                        <a
-                          className="font-mono font-semibold text-console-accent hover:underline"
-                          href={`/sns/${item.id}`}
-                        >
-                          #{item.id}
-                        </a>
-                      ) : (
-                        '未登録'
-                      )}
-                      <MediaPreview
-                        candidates={candidatesFor(item)}
-                        aspectClassName="aspect-square"
-                        alt={`投稿 #${item.id ?? '未登録'}`}
-                      />
-                    </div>
-                  </Cell>
-                  <Cell>
+              rows={items.map((item, i) => ({
+                id: String(item.id ?? `${item.platform}-${item.content_key}-${i}`),
+                cells: [
+                  <div key="id" className="flex w-24 flex-col gap-2">
+                    {item.id ? (
+                      <a
+                        className="font-mono font-semibold underline-offset-4 hover:underline"
+                        href={`/sns/${item.id}`}
+                      >
+                        #{item.id}
+                      </a>
+                    ) : (
+                      '未登録'
+                    )}
+                    <MediaPreview
+                      candidates={candidatesFor(item)}
+                      aspectClassName="aspect-square"
+                      alt={`投稿 #${item.id ?? '未登録'}`}
+                    />
+                  </div>,
+                  <div key="p">
                     {PLATFORM_LABELS[item.platform] ?? item.platform}
                     <br />
                     {formatLabel(item.domain)}
-                  </Cell>
-                  <Cell>
+                  </div>,
+                  <div key="c">
                     {item.planning && (
                       <p className="mb-2 font-semibold">
                         {item.planning.title}
@@ -468,11 +467,11 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
                     <p className="line-clamp-3 min-w-48 max-w-lg whitespace-pre-wrap break-words text-sm">
                       {item.caption || '本文未登録'}
                     </p>
-                    <p className="mt-2 break-all text-xs text-console-muted">
+                    <p className="mt-2 break-all text-xs text-muted-foreground">
                       {item.content_key}
                     </p>
-                  </Cell>
-                  <Cell>
+                  </div>,
+                  <div key="s">
                     <StatusBadge tone={statusTone(item.status)}>
                       {statusLabel(item.status)}
                     </StatusBadge>
@@ -484,24 +483,39 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
                     {item.approval?.state === 'pending' && (
                       <p className="mt-2 text-xs text-console-warn">承認待ち</p>
                     )}
-                  </Cell>
-                  <Cell nowrap>
-                    {formatJst(item.scheduled_at || item.posted_at)}
-                  </Cell>
-                  <Cell>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setSelected(item)}
-                      aria-label={`投稿 #${item.id ?? '未登録'} の画像と本文を開く`}
-                    >
-                      画像・本文
-                    </Button>
-                  </Cell>
-                </Row>
-              ))}
-            </DataTable>
+                  </div>,
+                  formatJst(item.scheduled_at || item.posted_at),
+                  <Button
+                    key="a"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setSelected(item)}
+                    aria-label={`投稿 #${item.id ?? '未登録'} の画像と本文を開く`}
+                  >
+                    画像・本文
+                  </Button>,
+                ],
+                sort: [
+                  item.id ?? null,
+                  item.platform ?? null,
+                  null,
+                  item.status ?? null,
+                  item.scheduled_at || item.posted_at || null,
+                  null,
+                ],
+                facet: item.status ?? '',
+                tone: item.approval?.state === 'pending' ? 'warn' : undefined,
+              }))}
+              facets={[
+                ...new Set(
+                  items
+                    .map((item) => item.status)
+                    .filter((st): st is string => !!st)
+                ),
+              ].map((st) => ({ value: st, label: statusLabel(st) }))}
+            />
           )}
+          {view === 'gallery' && (
           <div className="flex items-center justify-center gap-4">
             <Button
               size="sm"
@@ -523,6 +537,7 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
               次へ
             </Button>
           </div>
+          )}
         </>
       )}
       {selected && (
@@ -533,6 +548,6 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
           onSaved={saved}
         />
       )}
-    </div>
+    </>
   );
 }

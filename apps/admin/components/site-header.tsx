@@ -17,16 +17,16 @@ import { navTrail } from "@/lib/nav-registry";
 
 import { ThemeToggle } from "./theme-toggle";
 
-/** 上部バー (公式 dashboard-01 の site-header と同じ形)。サイドバーの開閉と、メニューから求めた現在地を出す。 */
+/** 上部バー (見本 shadcndashboard.dev と同じく sticky の白地 + 下線)。サイドバーの開閉と、メニューから求めた現在地を出す。 */
 export function SiteHeader() {
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams();
   const trail = navTrail(pathname, searchParams);
 
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
-      <div className="flex w-full min-w-0 items-center gap-1 px-4 lg:gap-2 lg:px-6">
-        <SidebarTrigger className="-ml-1" />
+    <header className="sticky top-0 z-10 flex h-(--header-height) shrink-0 items-center border-b bg-background">
+      <div className="flex w-full min-w-0 items-center gap-1 px-2 lg:gap-2">
+        <SidebarTrigger />
         <Separator orientation="vertical" className="mx-2 h-4 data-vertical:self-auto" />
         <Breadcrumb className="min-w-0">
           <BreadcrumbList>

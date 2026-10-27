@@ -71,6 +71,10 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* 参考 (shadcndashboard.dev) と同じ Geist。日本語は Geist に無いので OS のゴシックで補う */
+  --font-sans: var(--font-geist-sans), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -151,15 +155,15 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
-  /* チャートの系列色 (dataviz の参照パレット 1〜5。2026-10-27 に validate_palette.js でカード面 #fff に対して検証。
-     2・3・4 番目は 3:1 未満なので、チャートには凡例と表 (または tooltip) を必ず添える) */
-  --chart-1: #2a78d6;
-  --chart-2: #eb6834;
-  --chart-3: #1baf7a;
-  --chart-4: #eda100;
-  --chart-5: #e87ba4;
+  /* チャートの系列色。参考 (shadcndashboard.dev) と同じく主色 (黒) の濃淡の単色にする。系列は明度で見分け、
+     2 本以上は凡例と tooltip を必ず出す (TrendChart が出す)。状態の色 (console-good 等) は系列に使わない */
+  --chart-1: oklch(0.205 0 0);
+  --chart-2: oklch(0.439 0 0);
+  --chart-3: oklch(0.556 0 0);
+  --chart-4: oklch(0.708 0 0);
+  --chart-5: oklch(0.87 0 0);
   /* 公式 Sidebar のトークン (neutral の値) */
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -202,13 +206,13 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  /* dark の系列色 (同じ 5 色相を dark 面 #121a23 向けに選んだ段。全項目 PASS) */
-  --chart-1: #3987e5;
-  --chart-2: #d95926;
-  --chart-3: #199e70;
-  --chart-4: #c98500;
-  --chart-5: #d55181;
-  --sidebar: oklch(0.205 0 0);
+  /* dark の系列色 (同じ濃淡を dark の地に向けて反転) */
+  --chart-1: oklch(0.922 0 0);
+  --chart-2: oklch(0.708 0 0);
+  --chart-3: oklch(0.556 0 0);
+  --chart-4: oklch(0.439 0 0);
+  --chart-5: oklch(0.371 0 0);
+  --sidebar: oklch(0.145 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -224,9 +228,7 @@
   body {
     background: rgb(var(--console-bg));
     color: rgb(var(--console-fg));
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-      "Yu Gothic", "Segoe UI", sans-serif;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 

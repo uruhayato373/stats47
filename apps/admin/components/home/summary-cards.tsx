@@ -3,25 +3,18 @@
 import { useEffect, useState } from "react";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
-import { EmptyState, ErrorState, Loading } from "@/components/async-state";
+import { CalendarClockIcon, FilePenLineIcon, FileTextIcon, MegaphoneIcon, NewspaperIcon, SendIcon, VideoIcon } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { EmptyState, ErrorState, Loading } from "@/components/async-state";
+import { StatCard } from "@/components/admin-ui";
+import { Grid } from "@/components/layout-primitives";
+
 type SummaryResponse = {
   sns: { total: number; posted: number; scheduled: number; draft: number };
   blogArticles: number;
   noteCovers: number;
   videoMasters: number;
-  assetTabs: number;
 };
-
-function StatCard({ value, label }: { value: number; label: string }) {
-  return (
-    <Card className="gap-0 py-3.5"><CardContent className="px-3.5">
-      <div className="text-xl font-bold text-console-fg">{value}</div>
-      <div className="mt-1 text-[11px] text-console-muted">{label}</div>
-    </CardContent></Card>
-  );
-}
 
 export function SummaryCards() {
   const [data, setData] = useState<SummaryResponse | null>(null);
@@ -54,15 +47,14 @@ export function SummaryCards() {
   if (!data) return <EmptyState message="サマリなし" />;
 
   return (
-    <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8">
-      <StatCard value={data.sns.total} label="SNS 投稿 (台帳)" />
-      <StatCard value={data.sns.posted} label="├ 投稿済" />
-      <StatCard value={data.sns.scheduled} label="├ 予約" />
-      <StatCard value={data.sns.draft} label="└ draft" />
-      <StatCard value={data.blogArticles} label="ブログ記事 (OGP/カード)" />
-      <StatCard value={data.noteCovers} label="note カバー" />
-      <StatCard value={data.videoMasters} label="動画 master" />
-      <StatCard value={data.assetTabs} label="画像資産タブ" />
-    </div>
+    <Grid min="sm">
+      <StatCard icon={<MegaphoneIcon />} value={data.sns.total} label="SNS 投稿 (台帳)" />
+      <StatCard icon={<SendIcon />} value={data.sns.posted} label="├ 投稿済" />
+      <StatCard icon={<CalendarClockIcon />} value={data.sns.scheduled} label="├ 予約" />
+      <StatCard icon={<FilePenLineIcon />} value={data.sns.draft} label="└ draft" />
+      <StatCard icon={<NewspaperIcon />} value={data.blogArticles} label="ブログ記事 (OGP/カード)" />
+      <StatCard icon={<FileTextIcon />} value={data.noteCovers} label="note カバー" />
+      <StatCard icon={<VideoIcon />} value={data.videoMasters} label="動画 master" />
+    </Grid>
   );
 }

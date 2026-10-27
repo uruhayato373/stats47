@@ -1,14 +1,12 @@
 import type { ReactNode } from "react";
-import { MinusIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 
 /**
- * 数値タイル。公式 dashboard-01 の Section Cards と同じ形 (CardDescription = 名前・CardTitle = 値・
- * CardAction = 前週比などの Badge・CardFooter = 補足)。色は状態の意味があるときだけ tone で付ける
- * (console-good/warn/bad/info は light/dark でコントラスト AA を実測済み)。
+ * 数値タイル。見本 (shadcndashboard.dev の Total Orders 等・2026-10-27 実測) と同じ形:
+ * 名前 (14px) + 右上の枠付きアイコン / 値 (24px semibold) / 増減 (緑・赤) と補足 (muted) の 1 行。
+ * 値の色は状態の意味があるときだけ tone で付ける (console-good/warn/bad/info は light/dark で AA を実測済み)。
  */
 export type StatTone = "neutral" | "good" | "warn" | "bad" | "info";
 
@@ -20,10 +18,13 @@ const TONE: Record<StatTone, string | undefined> = {
   info: "text-console-info",
 };
 
-/** 前週比などの増減。direction は値の符号ではなく「増えた / 減った / 横ばい」 */
-export type StatTrend = { label: ReactNode; direction: "up" | "down" | "flat" };
+/**
+ * 前週比などの増減。direction は「増えた / 減った / 横ばい」。色は既定で増=良・減=悪で、
+ * 減るほど良い量 (エラー件数など) は tone で逆にする。
+ */
+export type StatTrend = { label: ReactNode; direction: "up" | "down" | "flat"; tone?: "good" | "bad" | "neutral" };
 
-const TREND_ICON = { up: TrendingUpIcon, down: TrendingDownIcon, flat: MinusIcon } as const;
+const TREND_TONE = { good: "text-console-good", bad: "text-console-bad", neutral: "text-muted-foreground" } as const;
 
 export function StatCard({
   label,
@@ -31,29 +32,38 @@ export function StatCard({
   sub,
   tone = "neutral",
   trend,
+  icon,
 }: {
   label: ReactNode;
   value: ReactNode;
   sub?: ReactNode;
   tone?: StatTone;
   trend?: StatTrend;
+  /** lucide のアイコン要素 (例: <WalletIcon />)。右上の枠付きの箱に入る */
+  icon?: ReactNode;
 }) {
-  const Icon = trend ? TREND_ICON[trend.direction] : null;
+  const trendTone = trend ? (trend.tone ?? (trend.direction === "up" ? "good" : trend.direction === "down" ? "bad" : "neutral")) : null;
   return (
-    <Card className="@container/card bg-linear-to-t from-primary/5 to-card shadow-xs dark:bg-card">
+    <Card>
       <CardHeader>
-        <CardDescription>{label}</CardDescription>
-        <CardTitle className={cn("text-2xl font-semibold tabular-nums @[250px]/card:text-3xl", TONE[tone])}>{value}</CardTitle>
-        {trend && Icon ? (
+        <CardTitle className="text-sm font-normal">{label}</CardTitle>
+        {icon ? (
           <CardAction>
-            <Badge variant="outline">
-              <Icon />
-              {trend.label}
-            </Badge>
+            <div className="rounded-md p-2.5 outline [&_svg]:size-4" aria-hidden="true">
+              {icon}
+            </div>
           </CardAction>
         ) : null}
       </CardHeader>
-      {sub ? <CardFooter className="flex-col items-start gap-1.5 text-sm text-muted-foreground">{sub}</CardFooter> : null}
+      <CardContent className="flex flex-col gap-1">
+        <p className={cn("text-2xl font-semibold tracking-tight tabular-nums", TONE[tone])}>{value}</p>
+        {trend || sub ? (
+          <p className="text-sm text-muted-foreground">
+            {trend && trendTone ? <span className={cn("mr-1.5", TREND_TONE[trendTone])}>{trend.label}</span> : null}
+            {sub}
+          </p>
+        ) : null}
+      </CardContent>
     </Card>
   );
 }

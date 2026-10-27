@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/cn";
 
-import { TableFrame } from "./table-frame";
+import { bodyCell, headCell, TableFrame } from "./table-frame";
 
 /**
  * 見出し行つきの表。`columns` (列見出し) + 行 (`Row` / `Cell`) で書ける。旧 `ops/primitives` の Table / Tr / Td と同じ書き味で、
@@ -13,10 +13,12 @@ import { TableFrame } from "./table-frame";
 export function DataTable({ columns, children, className }: { columns: string[]; children: ReactNode; className?: string }) {
   return (
     <TableFrame className={className}>
-      <TableHeader className="bg-muted">
+      <TableHeader>
         <TableRow>
           {columns.map((column) => (
-            <TableHead key={column}>{column}</TableHead>
+            <TableHead key={column} className={headCell}>
+              {column}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
@@ -30,7 +32,7 @@ export const Row = TableRow;
 export function Cell({ nowrap, muted, className, ...props }: ComponentProps<typeof TableCell> & { nowrap?: boolean; muted?: boolean }) {
   return (
     <TableCell
-      className={cn("align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
+      className={cn(bodyCell, "align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
       {...props}
     />
   );

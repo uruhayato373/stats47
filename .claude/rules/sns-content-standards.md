@@ -548,7 +548,7 @@ draft登録・予約・即時投稿・dry-run・レンダ・R2 push・再生成�
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
 全チャネルの制作・公開状態は `/content`、参考文献からサイト・ブログ・note・Kindleへの展開状況は
 `/content/references`、X / Instagramの投稿確認は `/content/{x,instagram}` または共通 `/sns`、Geo契約は`/data/geo`、OGP/リンクカード/note カバー・
-記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**現況レビュー (今週の判断の要約・週次メトリクス) は `/dashboard`**、
+記事内画像/動画 master とブログ SVG カタログは `/ops/image-library` (SVG は `?format=svg`)、**現況レビュー (今週の判断の要約・週次メトリクス) は `/dashboard`**、
 進捗キューは `/site/queues`、Geo契約の明細は `/data/geo`・`/sns/geo-plan` で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
 現況 collector は `apps/admin/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FolderOpenIcon } from "lucide-react";
 
 import { PanelCard } from "@/components/admin-ui";
 import { Grid, Stack } from "@/components/layout-primitives";
@@ -17,18 +18,19 @@ export default function DocsIndexPage() {
   ].filter((g) => g.items.length > 0);
 
   return (
-    <div className="space-y-6">
+    <>
       <PageHeading title="文書" source="docs/ (領域は config/domains.json の documents)" />
       <Grid min="md">
         {groups.map((g) => (
           <PanelCard
             key={g.id}
             title={`${g.label} ${g.items.length} 件`}
-            action={g.id === "unresolved" ? undefined : <Link href={`/domains/${g.id}`} className="text-xs font-normal">領域へ →</Link>}
+            icon={<FolderOpenIcon />}
+            action={g.id === "unresolved" ? undefined : <Link href={`/domains/${g.id}`} className="text-xs font-medium underline-offset-4 hover:underline">領域へ →</Link>}
           >
             <Stack gap="sm">
               {g.items.map((d) => (
-                <Link key={d.path} href={d.href} className="text-sm text-console-info hover:underline" title={d.path}>
+                <Link key={d.path} href={d.href} className="text-sm font-medium underline-offset-4 hover:underline" title={d.path}>
                   {d.title}
                 </Link>
               ))}
@@ -36,6 +38,6 @@ export default function DocsIndexPage() {
           </PanelCard>
         ))}
       </Grid>
-    </div>
+    </>
   );
 }

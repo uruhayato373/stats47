@@ -32,8 +32,6 @@ PORT=5000 npm run admin    # ポート上書き
 | `/content/kindle`                 | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー                                                                |
 | `/content/references`             | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示         |
 | `/sns`                            | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー                                                                                   |
-| `/assets`                         | 画像/動画資産 11 タブの読み取り専用ギャラリー                                                                                                                                                      |
-| `/svg`                            | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ)                                                                                                                                              |
 | `/research`                       | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続の読み取り専用ミラー                                                                                                  |
 | `/dashboard`                      | 現況レビュー。pilot 判定・施策の同時進行・領域の警告の要約とリンク + 週次メトリクス (60 秒キャッシュ)                                                                                               |
 | `/strategy`                       | 方針。事業計画の題目・事業原則・設計と方針の文書。明細は `/strategy/business-plan` (計画の詳細)・`/data/geo` (Geo 分析)・`/sns/geo-plan` (X 企画)・`/product/note-plan` (note 商品) へ割り振った |
@@ -48,7 +46,7 @@ PORT=5000 npm run admin    # ポート上書き
 ```
 app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカルファイル配信)
 components/     共有 (console-nav / async-state / media-preview) + ページ別
-components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
+components/ui/  shadcn/ui 公式 (base-nova・Base UI) の部品。公式のままにする (差は check-shadcn-parity が止める)
 components/admin-ui/  組み立て部品 (TableFrame / DataTable / PanelCard / StatCard / StatusBadge / LinkCard)。layout-primitives.tsx は Stack / Grid / Section
 components/content/note-covers-browser.tsx  shadcn Table + TanStack Table v8で制作ID/分類/状況を検索・比較。表示条件はURLに保持
 components/content/note-cover-production.tsx  制作内容・目視確認のフォーム。方針と制作仕様の表示・ダウンロード

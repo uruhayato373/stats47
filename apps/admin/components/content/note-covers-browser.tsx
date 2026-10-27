@@ -7,7 +7,7 @@ import { EmptyRow, PanelCard, TableBody, TableCell, TableFrame, TableHead, Table
 import { CoverPublicationBadge, CoverReviewBadge, NoteCoverComparison } from '@/components/content/note-cover-comparison';
 import { NoteCoverImage } from '@/components/content/note-cover-image';
 import { Section, Stack } from '@/components/layout-primitives';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -45,18 +45,18 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
       cell: ({ row: { original: row } }) => <div className="flex items-start gap-3">
         <div className="w-24 shrink-0">{row.currentImageUrl && <NoteCoverImage src={row.currentImageUrl} alt={`${row.title} 公開カバー`} />}</div>
         <div className="min-w-48 max-w-sm">
-          <button type="button" onClick={() => setSelected(row)} className="text-left font-medium whitespace-normal hover:text-console-accent hover:underline">{row.title}</button>
-          <p className="mt-1 text-xs text-console-muted">{row.production.id} · {row.key}</p>
+          <button type="button" onClick={() => setSelected(row)} className="text-left font-medium whitespace-normal hover:text-primary hover:underline">{row.title}</button>
+          <p className="mt-1 text-xs text-muted-foreground">{row.production.id} · {row.key}</p>
         </div>
       </div>,
     },
     { accessorKey: 'category', header: '分類', enableGlobalFilter: false, filterFn: 'equalsString',
       cell: ({ row }) => categories.find(c => c.key === row.original.category)?.label },
-    { id: 'production', accessorFn: row => row.production.stage, header: '制作状況', enableGlobalFilter: false, filterFn: 'equalsString', cell: ({ row }) => <Stack gap="sm"><CoverProductionBadge row={row.original} /><span className="text-xs text-console-muted">{row.original.production.policy.id} · v{row.original.production.policy.version}</span></Stack> },
+    { id: 'production', accessorFn: row => row.production.stage, header: '制作状況', enableGlobalFilter: false, filterFn: 'equalsString', cell: ({ row }) => <Stack gap="sm"><CoverProductionBadge row={row.original} /><span className="text-xs text-muted-foreground">{row.original.production.policy.id} · v{row.original.production.policy.version}</span></Stack> },
     { accessorKey: 'review', header: '確認状態', enableGlobalFilter: false, filterFn: 'equalsString', cell: ({ row }) => <CoverReviewBadge review={row.original.review} /> },
     { accessorKey: 'publication', header: 'note反映', enableGlobalFilter: false, filterFn: 'equalsString', cell: ({ row }) => <CoverPublicationBadge publication={row.original.publication} /> },
     { accessorKey: 'coverObservedAt', header: '公開確認日', enableGlobalFilter: false,
-      cell: ({ row }) => <span className="whitespace-nowrap text-console-muted">{row.original.coverObservedAt ? new Date(row.original.coverObservedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }) : '未確認'}</span> },
+      cell: ({ row }) => <span className="whitespace-nowrap text-muted-foreground">{row.original.coverObservedAt ? new Date(row.original.coverObservedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }) : '未確認'}</span> },
     { id: 'actions', enableSorting: false, header: '画像', cell: ({ row }) => <Button variant="outline" size="sm" onClick={() => setSelected(row.original)} aria-label={`${row.original.title}のカバーを比較`}>比較</Button> },
   ], [categories]);
   const sorting = [{ id: query.sort, desc: query.desc }];
@@ -119,10 +119,10 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
       </aside>
       <Stack gap="lg" className="min-w-0 lg:col-start-1 lg:row-start-1">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div><h2 className="text-lg font-semibold">{query.category ? categoryLabel(query.category) : selectedIds ? '今回の修正対象' : 'すべての記事'}</h2>
-            <p className="text-sm text-console-muted">{group.length}件 · 確認済み {reviewed}件 · note反映済み {published}件</p>
+          <div><h2 className="text-base font-semibold">{query.category ? categoryLabel(query.category) : selectedIds ? '今回の修正対象' : 'すべての記事'}</h2>
+            <p className="text-sm text-muted-foreground">{group.length}件 · 確認済み {reviewed}件 · note反映済み {published}件</p>
           </div>
-          <p className="text-xs text-console-muted">台帳更新 {new Date(updatedAt).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}</p>
+          <p className="text-xs text-muted-foreground">台帳更新 {new Date(updatedAt).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}</p>
         </div>
         <Button variant="outline" className="self-start lg:hidden" onClick={() => setFiltersOpen(true)}>分類・絞り込み</Button>
         {query.category && group[0] && <PanelCard title="このカテゴリの制作方針"><CoverPolicyDetails policy={group[0].production.policy} /></PanelCard>}
@@ -134,7 +134,7 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
               <TabsTrigger value="gallery"><LayoutGrid />カバー比較</TabsTrigger>
             </TabsList>
           </div>
-          <p role="status" className="text-sm text-console-muted">{matched.length}件{matched.length ? `中 ${(page - 1) * query.size + 1}–${Math.min(page * query.size, matched.length)}件を表示` : '：条件に合う記事はありません'}</p>
+          <p role="status" className="text-sm text-muted-foreground">{matched.length}件{matched.length ? `中 ${(page - 1) * query.size + 1}–${Math.min(page * query.size, matched.length)}件を表示` : '：条件に合う記事はありません'}</p>
           <TabsContent value="table">
             <TableFrame>
               <TableHeader>{table.getHeaderGroups().map(group => <TableRow key={group.id}>{group.headers.map(header => <TableHead key={header.id} aria-sort={header.column.getIsSorted() === 'asc' ? 'ascending' : header.column.getIsSorted() === 'desc' ? 'descending' : undefined}>
@@ -148,10 +148,10 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
           </TabsContent>
           <TabsContent value="gallery">
             <div className={selectedIds ? 'grid gap-4' : 'grid gap-4 xl:grid-cols-2'}>{visible.map(({ original: row }) => <Card key={row.key}>
-              <CardHeader><CardTitle>{row.title}</CardTitle><p className="text-xs text-console-muted">{row.production.id} · {row.production.policy.id} · {row.key}</p><CoverProductionBadge row={row} /></CardHeader>
+              <CardHeader><CardTitle>{row.title}</CardTitle><p className="text-xs text-muted-foreground">{row.production.id} · {row.production.policy.id} · {row.key}</p><CoverProductionBadge row={row} /></CardHeader>
               <CardContent><Stack><NoteCoverComparison row={row} /><Button variant="outline" onClick={() => setSelected(row)}>大きく比較</Button></Stack></CardContent>
             </Card>)}</div>
-            {!visible.length && <p className="text-sm text-console-muted">条件に合う記事はありません。検索語や絞り込みを変更してください。</p>}
+            {!visible.length && <p className="text-sm text-muted-foreground">条件に合う記事はありません。検索語や絞り込みを変更してください。</p>}
           </TabsContent>
         </Tabs>
         <nav aria-label="一覧のページ切り替え" className="flex flex-wrap items-center justify-between gap-3">
@@ -171,7 +171,7 @@ export function NoteCoversBrowser({ rows: initialRows, categories, updatedAt }: 
         <SheetHeader><SheetTitle>カバーを比較</SheetTitle><SheetDescription>{selected?.title}</SheetDescription></SheetHeader>
         {selected && <Stack gap="lg" className="px-4 pb-6"><NoteCoverComparison row={selected} />
           <NoteCoverProduction key={`${selected.key}:${selected.production.revision}`} row={selected} onDirty={setDirty} onSaved={row => { setOverrides(previous => ({ ...previous, [row.key]: row })); setSelected(row); setDirty(false); }} />
-          <div className="flex flex-wrap gap-2">{selected.noteUrl && <Button variant="outline" nativeButton={false} render={<a href={selected.noteUrl} target="_blank" rel="noreferrer" />}>noteで記事を開く</Button>}
+          <div className="flex flex-wrap gap-2">{selected.noteUrl && <a href={selected.noteUrl} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outline" })}>noteで記事を開く</a>}
             <Button variant="outline" disabled={matched.findIndex(r => r.original.key === selected.key) >= matched.length - 1} onClick={() => { const index = matched.findIndex(r => r.original.key === selected.key); const next = matched[index + 1]; if (next) selectRow(next.original); }}>次の記事を確認</Button>
           </div>
         </Stack>}

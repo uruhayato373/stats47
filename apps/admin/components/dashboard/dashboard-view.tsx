@@ -1,6 +1,7 @@
 "use client";
 
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
+import { Section } from "@/components/layout-primitives";
 
 import { MetricsSection, type MetricsData } from "./metrics-section";
 import { useDashboardSummary } from "./use-dashboard-summary";
@@ -15,19 +16,11 @@ export function DashboardView() {
   const { data, error, loading, load } = useDashboardSummary<DashboardSummary>();
 
   return (
-    <section id="metrics" className="space-y-3">
-      <h2 className="border-b border-console-border pb-1.5 text-sm font-semibold text-console-fg">メトリクス (週次)</h2>
+    <Section id="metrics" title="メトリクス (週次)" note={data ? `読み取り専用ミラー (60秒キャッシュ)。取得: ${data.generatedAt.replace("T", " ").slice(0, 19)}` : undefined}>
       {loading ? <Loading /> : null}
       {error ? <ErrorState message={error} onRetry={load} /> : null}
       {!loading && !error && !data ? <EmptyState message="現況データなし" /> : null}
-      {data ? (
-        <>
-          <p className="text-xs text-console-muted">
-            読み取り専用ミラー (60秒キャッシュ)。取得: {data.generatedAt.replace("T", " ").slice(0, 19)}
-          </p>
-          <MetricsSection metrics={data.metrics} psi={data.psi} coverage={data.coverage} />
-        </>
-      ) : null}
-    </section>
+      {data ? <MetricsSection metrics={data.metrics} psi={data.psi} coverage={data.coverage} /> : null}
+    </Section>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 
@@ -10,7 +10,7 @@ export function useDashboardSummary<T>() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true);
     setError(null);
     apiGet<T>("/api/dashboard/summary")
@@ -25,11 +25,11 @@ export function useDashboardSummary<T>() {
         setError(message);
       })
       .finally(() => setLoading(false));
-  };
+  }, []);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   return { data, error, loading, load };
 }

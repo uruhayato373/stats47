@@ -60,7 +60,12 @@ test.describe('/sns 投稿ID台帳', () => {
     await expect(
       page.getByRole('button', { name: '台帳表示', exact: true })
     ).toHaveAttribute('aria-pressed', 'true');
-    await page.getByRole('button', { name: '絞り込みを解除' }).click();
+    // 再読込の直後は画面の準備 (hydration) 前で、押しても効かないことがある (2026-10-27 に件数の要約チャートを足して
+    // 準備が遅くなった)。全件 (30 件) に戻るまで押し直す
+    await expect(async () => {
+      await page.getByRole('button', { name: '絞り込みを解除' }).click();
+      await expect(page.getByTestId('sns-count')).toHaveText('30 件', { timeout: 1_000 });
+    }).toPass();
     await page
       .getByRole('combobox', { name: '画像の型' })
       .selectOption('area-atlas');
@@ -177,8 +182,11 @@ test('展開候補は予約前だけを表示し、出どころと準備状況�
   await expect(page.getByRole('heading', {name:'沖縄県図鑑'})).toBeVisible();
   await page.reload();
   await expect(page.getByRole('combobox', {name:'候補の出どころ'})).toHaveValue('new-format');
-  await page.getByRole('combobox', {name:'候補の出どころ'}).selectOption('');
-  await page.getByRole('combobox', {name:'準備状況'}).selectOption('preview');
+  // 再読込の直後は画面の準備 (hydration) 前で、選択が効かないことがある。目的の候補が出るまで選び直す
+  await expect(async () => {
+    await page.getByRole('combobox', {name:'候補の出どころ'}).selectOption('');
+    await page.getByRole('combobox', {name:'準備状況'}).selectOption('preview');
+    await expect(page.getByRole('heading', {name:'確認用の素材'})).toBeVisible({ timeout: 1_000 });
+  }).toPass();
   await expect(page.getByTestId('sns-count')).toHaveText('1 件');
-  await expect(page.getByRole('heading', {name:'確認用の素材'})).toBeVisible();
 });

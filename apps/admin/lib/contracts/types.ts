@@ -123,7 +123,6 @@ export interface AssetsSummaryResponse {
   blogArticles: number;
   noteCovers: number;
   videoMasters: number;
-  assetTabs: number;
 }
 
 export interface AssetsCheckResponse {
