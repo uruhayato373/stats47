@@ -39,13 +39,29 @@ const rules = [
       relativePath === 'src/components/layout/LeftRailLayout.tsx',
   },
   {
+    // 左レールの境界は shell コンテナの 936px (compact 896px)。2026-10-27 まではビューポートの
+    // 992px だったので、旧境界の書き戻しも同じ rule で止める。
     id: 'no-manual-left-rail-breakpoint',
     message:
       'Left rail responsive classes belong to LeftRailLayout. Use LEFT_RAIL_NARROW_ONLY_CLASS for narrow alternatives.',
     pattern:
-      /min-\[992px\]:(?:grid|block|hidden|grid-cols-\[264px_minmax\(0,1fr\)\]|gap-6|items-start)/,
+      /(?:min-\[992px\]:|@min-\[(?:936|896)px\]\/shell:)(?:grid|block|hidden|grid-cols-\[(?:264|224)px_minmax\(0,1fr\)\]|gap-\d+|items-start)/,
     allow: (relativePath) =>
       relativePath === 'src/components/layout/LeftRailLayout.tsx',
+  },
+  {
+    // ページで唯一の <main> はルートレイアウト (app/layout.tsx の main#main-content) が持つ。
+    // Shell や page が <main> を足すと landmark が入れ子になり、スキップリンクの行き先も曖昧になる。
+    // 本文の列は div[data-slot=shell-main] で描く。
+    id: 'no-nested-main-landmark',
+    message:
+      'Only app/layout.tsx renders <main>. Use a div (PageShell / ArticleShell render div[data-slot=shell-main]).',
+    pattern: /^\s*<main\b/,
+    allow: (relativePath) =>
+      relativePath === 'src/app/layout.tsx' ||
+      // 既存の負債 (U3 の範囲外)。県・市区町村ページを PageShell へ寄せる単位で外す。
+      relativePath === 'src/app/areas/[areaCode]/page.tsx' ||
+      relativePath === 'src/app/areas/[areaCode]/cities/[cityCode]/page.tsx',
   },
   {
     id: 'no-generic-only-right-rail',

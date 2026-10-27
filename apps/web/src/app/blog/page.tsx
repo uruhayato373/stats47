@@ -81,12 +81,11 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
     // doboku-note スタイル: 左=記事カード一覧 / 右=共通サイドバー (運営者プロフィール + promo/広告)。
     // 運営者は上部の共通 OperatorProfileCard が担う。
     <PageShell
-      rightRailBreakpoint="lg"
       rightRail={
         <RightRailWidgets
           topWidgets={
             // 探索導線と運営者プロフィール (E-E-A-T) は右レールに PC のみ表示
-            <div className="hidden lg:flex lg:flex-col lg:gap-3">
+            <div className="hidden @min-[988px]/shell:flex @min-[988px]/shell:flex-col @min-[988px]/shell:gap-3">
               <BlogNavigationCards
                 tags={blogTags}
                 popularArticles={popularArticles}
@@ -123,7 +122,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
       />
 
       {/* 右レールが本文後へ回る狭幅では、探索導線を記事一覧の前に置く。 */}
-      <div className="mb-6 lg:hidden">
+      <div className="mb-6 @min-[988px]/shell:hidden">
         <div className="space-y-3">
           <BlogNavigationCards
             tags={blogTags}

@@ -12,12 +12,12 @@ paths:
 
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/04_デザインシステム.md`）
 
-- **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。外枠は `PageShell.tsx`、左レールの列・境界・DOM は `LeftRailLayout.tsx` を正典とする。**寸法**: コンテナ 1280px / 左右 16px（`px-4`）・lg+ 24px（`lg:px-6`）/ 列の gap 16px（`gap-4`）/ 縦の間隔 16px / 右レール **316px**（余白はテンプレートの `p-4`・`gap-4` に寄せた。2026-10-27。それ以前は doboku-note に合わせた 40px）。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
-- **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
-  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` / `ArticleShell` の `leftRail` に置いてよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、survey は調査一覧 + このページ + 代表ランキング + 関連分類、home / `/ranking` / `/category/*` はカテゴリ探索を置く。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置き、狭幅代替 UI にも同じ出口を残す。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分け、広幅では左レール、992px 未満では本文上部へ置く。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
+- **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。外枠は `PageShell.tsx`、左レールの列・境界・DOM は `LeftRailLayout.tsx` を正典とする。**寸法**: コンテナ 1280px / 余白はルートレイアウトの `main#main-content` の `p-4`（16px。Shell 自身は余白を持たない）/ 列の gap 16px（`gap-4`）/ 縦の間隔 16px / 右レール **316px**（テンプレートの `p-4`・`gap-4` に寄せた。2026-10-27。それ以前は doboku-note に合わせた 40px）。main の外の chrome（Footer・固定バナー）だけが `SHELL_WIDTH_CLASS`（1280px + `px-4`）を使う。**ページで唯一の `<main>` はルートレイアウトが持つ**。Shell の本文列は `div[data-slot=shell-main]` で、page や feature は `<main>` を描かない（`design-system:check` の `no-nested-main-landmark`）。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
+- **サイト全体ナビはテンプレートのサイドバー（`AppSidebar`）に置く**（2026-10-27 オーナー決定）。ルートレイアウトの `SidebarProvider` の中に `AppSidebar` と `SidebarInset` を兄弟で置き、`SidebarInset` に `SiteHeader`・`main#main-content`・`Footer` を並べる。lg（1024px）以上は常設、lg 未満は Sheet。
+  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` / `ArticleShell` の `leftRail` に置いてよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、survey は調査一覧 + このページ + 代表ランキング + 関連分類、home / `/ranking` / `/category/*` はカテゴリ探索を置く。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置き、狭幅代替 UI にも同じ出口を残す。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分け、広幅では左レール、左レールが出ない幅では本文上部へ置く。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
   - 左レールは両 Shell とも**右レールと併用できない**。右レールが指定された場合は右を優先する。
-  - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。992〜1023px ではヘッダーのナビが折りたたみのまま左レールが出るが、これは仕様として許容する (2026-10-26 オーナー判断・LEFT-RAIL-992-HEADER-DECISION-01。境界を 1024px へ上げるとアプリ内ブラウザで左レールが消えるため)。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
-  - **992px 未満で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
+  - **レールの境界はビューポートではなく、Shell が名付けたコンテナ `@container/shell` の幅で決める**（2026-10-27。旧: 左はビューポート 992px、右は `rightRailBreakpoint` の `lg` / `xl`）。左レールは `@min-[936px]/shell`（compact は `@min-[896px]/shell`）、右レールは `@min-[988px]/shell`。どれもレールが出た時点の本文幅 656px を保つ値で、サイドバーを開いても畳んでも変わらない。`rightRailBreakpoint` は廃止した。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの内側で表示を合わせる部品（レール専用の広告・探索導線とその狭幅版）は、ビューポートの `lg:` ではなく同じ `@min-[988px]/shell:` を使う。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
+  - **左レールが出ない幅（shell 936px 未満）で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
 - **テンプレート (shadcndashboard・Base UI 版 shadcn + style-lyra) を正とする（2026-10-27 オーナー決定）。** 部品は `packages/components/src/atoms/ui/` のテンプレート版を使い、色・`--radius` は `@stats47/ui-theme` (tokens-hsl.css) から来る。`<html class="style-lyra">` が部品の見た目を効かせる。Base UI に Radix の `asChild` は無い。子要素に描くときは `render` を使い、ボタンの見た目のリンクは `<Link data-slot="button" className={buttonVariants({...})}>` にする (`<Button render={<a/>}>` は role="button" になりリンクの役割が消える)。クライアントの `Select` は `items` (値と表示名) を渡す (渡さないと値そのものが出る)。状態のクラスは `data-pressed` / `data-active` / `data-open` (Radix の `data-[state=…]` は付かない)。
 - **カード外枠は角丸なし（`--card-radius: 0`）。値はトークンだけで決め、クラスを役割で選ぶ（2026-09-25）**:
@@ -43,7 +43,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
 // ✅ flex の右レールは自然フロー（内部スクロールなし）
-<aside className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3">
+<aside className="hidden w-[316px] shrink-0 @min-[988px]/shell:flex @min-[988px]/shell:flex-col @min-[988px]/shell:gap-3">
 
 // ❌ sticky grid aside で max-h なしは禁止 (フッターが見えなくなる)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:pr-1">
@@ -113,7 +113,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 | 対象                                              | 使うべきブレイクポイント                  | 理由                                                         |
 | ------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------ |
-| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px)               | `PageShell` の右レール（316px）は `xl:` で出現               |
+| ページレイアウト（2カラム/1カラム、左右レール表示） | `@min-[936px]/shell:` / `@min-[988px]/shell:` (名前付きコンテナ) | サイドバーの開閉で本文幅が変わるため。値は `LeftRailLayout` / `PageShell` だけが持つ |
 | テキスト・ボタンのサイズ調整                      | `sm:` / `md:` (ビューポート)              | デバイスサイズで決まる                                       |
 | ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 

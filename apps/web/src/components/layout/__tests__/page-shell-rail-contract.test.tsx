@@ -20,11 +20,11 @@ const RIGHT = <aside aria-label="right-rail">right</aside>;
 describe('PageShell — leftRail', () => {
   it('既定 (stack): 狭幅用の積み下ろし領域にも leftRail を描く', () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    // グリッド内 (992px+) と積み下ろし (992px 未満) の 2 か所
+    // グリッド内 (shell 936px+) と積み下ろし (936px 未満) の 2 か所
     expect(screen.getAllByLabelText('left-rail')).toHaveLength(2);
   });
 
-  it('hide: 積み下ろし領域に leftRail を描かない (992px+ のみ)', () => {
+  it('hide: 積み下ろし領域に leftRail を描かない (shell 936px+ のみ)', () => {
     render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
@@ -32,25 +32,31 @@ describe('PageShell — leftRail', () => {
     );
     const rails = screen.getAllByLabelText('left-rail');
     expect(rails).toHaveLength(1);
-    // 残る 1 つは 992px+ でのみ表示されるグリッド側
-    expect(rails[0].parentElement).toHaveClass('hidden', 'min-[992px]:block');
+    // 残る 1 つは shell 936px+ でのみ表示されるグリッド側
+    expect(rails[0].parentElement).toHaveClass(
+      'hidden',
+      '@min-[936px]/shell:block'
+    );
   });
 
   /**
-   * ★992px は全 Shell 共通の左レール境界。列の詳細は
-   * left-rail-layout-contract.test.tsx が固定する。
+   * ★shell コンテナ 936px は全 Shell 共通の左レール境界。ビューポートではなく
+   * コンテナで判定するので、サイドバーの開閉に関わらず本文 656px を保つ。
+   * 列の詳細は left-rail-layout-contract.test.tsx が固定する。
    */
-  it('左レールは専用の 992px 境界から出す', () => {
+  it('左レールは shell コンテナの 936px 境界から出す', () => {
     const { container } = render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
       </PageShell>
     );
-    const grid = container.firstElementChild?.firstElementChild;
+    const shell = container.firstElementChild;
+    expect(shell).toHaveClass('@container/shell');
+    const grid = shell?.firstElementChild;
     expect(grid).toHaveClass(
-      'min-[992px]:grid',
-      'min-[992px]:grid-cols-[264px_minmax(0,1fr)]',
-      'min-[992px]:gap-4'
+      '@min-[936px]/shell:grid',
+      '@min-[936px]/shell:grid-cols-[264px_minmax(0,1fr)]',
+      '@min-[936px]/shell:gap-4'
     );
     expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });
@@ -59,7 +65,7 @@ describe('PageShell — leftRail', () => {
    * 狭幅の積み下ろし境界がレール本体とずれると、両方出る幅 / どちらも出ない幅ができる。
    * `hide` でも積み下ろしコンテナ自体は描かれるので、その境界クラスを固定する。
    */
-  it('積み下ろし境界がレール本体と同じ 992px になっている', () => {
+  it('積み下ろし境界がレール本体と同じ shell 936px になっている', () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
     const stacked = screen.getAllByLabelText('left-rail')[1].parentElement;
     expect(stacked).toHaveClass(LEFT_RAIL_NARROW_ONLY_CLASS);
@@ -81,26 +87,42 @@ describe('PageShell — leftRail', () => {
     expect(screen.getByText('main-content')).toBeInTheDocument();
     expect(screen.queryByLabelText('left-rail')).toBeNull();
   });
+
+  it('余白はルートの main#main-content (p-4) に任せ、main を入れ子にしない', () => {
+    const { container } = render(
+      <PageShell leftRail={LEFT}>{MAIN}</PageShell>
+    );
+    const shell = container.firstElementChild;
+    expect(shell).not.toHaveClass('px-4', 'py-4', 'lg:px-6');
+    expect(container.querySelector('main')).toBeNull();
+    expect(
+      container.querySelector('div[data-slot="shell-main"]')
+    ).toHaveTextContent('main-content');
+  });
 });
 
 describe('PageShell — rightRail', () => {
-  it('同じレールを複製せず、狭幅では本文下・xl以上では右列に置く', () => {
+  it('同じレールを複製せず、狭幅では本文下・shell 988px 以上では右列に置く', () => {
     render(<PageShell rightRail={RIGHT}>{MAIN}</PageShell>);
-    const rail = screen.getByLabelText('right-rail');
-    expect(rail.parentElement).toHaveClass('mt-4', 'xl:mt-0');
+    const rail = screen.getAllByLabelText('right-rail');
+    expect(rail).toHaveLength(1);
+    expect(rail[0].parentElement).toHaveClass(
+      'mt-4',
+      '@min-[988px]/shell:mt-0'
+    );
   });
 
-  it('rightRailBreakpoint=lg で lg 境界のクラスに切り替わる', () => {
+  it('右レールの列は shell コンテナ 988px 境界で出す (ビューポート境界を使わない)', () => {
     const { container } = render(
-      <PageShell rightRail={RIGHT} rightRailBreakpoint="lg">
-        {MAIN}
-      </PageShell>
+      <PageShell rightRail={RIGHT}>{MAIN}</PageShell>
     );
-    expect(container.querySelector('.lg\\:grid')).not.toBeNull();
-    expect(screen.getByLabelText('right-rail').parentElement).toHaveClass(
-      'mt-4',
-      'lg:mt-0'
+    const grid = container.firstElementChild?.firstElementChild;
+    expect(grid).toHaveClass(
+      '@min-[988px]/shell:grid',
+      '@min-[988px]/shell:grid-cols-[minmax(0,1fr)_316px]',
+      '@min-[988px]/shell:gap-4'
     );
+    expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });
 
 });

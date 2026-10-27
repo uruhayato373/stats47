@@ -193,14 +193,14 @@ export function RankingKeyPageClient({
     const dataNote = configNote ?? subtitleNote;
 
     // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
-    // rightRailBreakpoint="lg" で lg+（1024px）から 360px レールを表示し、
-    // ラッパーもブログと同じ非 sticky の <aside className="flex flex-col gap-3"> に揃える。
-    // サイド AdSense はレール表示時（lg+）に合わせて hidden lg:block。
+    // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
+    // ラッパーもブログと同じ非 sticky の <aside> に揃える。
+    // サイド AdSense はレール表示時に合わせて hidden @min-[988px]/shell:block。
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
             {ADSENSE_DISPLAY_ENABLED && (
-                <div className="hidden lg:block">
+                <div className="hidden @min-[988px]/shell:block">
                     <AdSenseAd
                         format={RANKING_PAGE_TABLE_SIDE.format}
                         slotId={RANKING_PAGE_TABLE_SIDE.slotId}
@@ -219,7 +219,7 @@ export function RankingKeyPageClient({
                 <lg  : h1 → 地図/テーブル → 操作 → スタット → 本文
                 lg+ : h1 → 操作 → スタット → 地図|テーブル → 本文
               h1 は SEO・a11y の前提なので常に DOM 先頭に置く。
-              ArticleShell が既に <main> を持つため、ここは div (main 二重を避ける)。
+              ページで唯一の <main> はルートレイアウトが持つため、ここは div (main 二重を避ける)。
             */}
             <div className="flex min-w-0 flex-col gap-4">
                 <div className="order-1">
@@ -265,7 +265,7 @@ export function RankingKeyPageClient({
                     />
                 </div>
 
-                <div className="order-5 lg:hidden">{sections.relatedArticles}</div>
+                <div className="order-5 @min-[988px]/shell:hidden">{sections.relatedArticles}</div>
                 <div className="order-6 flex flex-col gap-4">
                     <RankingPageContentSections
                         rankingKey={rankingKey}
