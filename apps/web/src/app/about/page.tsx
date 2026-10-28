@@ -26,7 +26,7 @@ import Link from "@/components/atoms/SiteLink";
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { Breadcrumbs, PageShell, PageHeader } from "@/components/layout";
 import { PanelGrid } from "@/components/layout/PageShell";
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 
 import { getRequiredBaseUrl } from "@/lib/env";
@@ -48,12 +48,9 @@ interface AboutSectionProps {
 
 function AboutSection({ title, children }: AboutSectionProps) {
   return (
-    <SurfaceCard className="h-full">
-      <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-lg md:text-xl md:leading-7">{title}</h2>
-      </div>
-      <div className="p-4 md:p-6 pt-3">{children}</div>
-    </SurfaceCard>
+    <SectionCard title={title} headingAs="h2" className="h-full">
+      {children}
+    </SectionCard>
   );
 }
 

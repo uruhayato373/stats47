@@ -964,6 +964,86 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
   }
 }
 
+// --- 記事本文の見出しの太さと、静的ページのパネル内見出し ---
+//
+// 見本 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「記事本文」) は見出しが 600。
+// 2026-10-28 までは本文の h2・h3 が 700 で、利用規約などのページは自前の見出し (20px・独自余白・下線) を持っていた。
+// - article-heading-weight-600: globals.css の記事本文 (.blog-news-article と @utility blog-article) の h2〜h4 は
+//   太さ 600 (font-semibold) だけ。MDContent の見出し部品は太さ・文字の大きさを持たない (見た目は CSS が持つ)
+// - static-panel-heading-uses-section-card: 利用規約・プライバシーポリシー・運営者情報のパネルの題名は
+//   SectionCard の title (16px / 22px・500 + 下の線) で描く。<h2> を自前で書かない。パネル内の小見出しは 14px まで
+const ARTICLE_HEADING_BLOCK = /(?:^|\n)\s*& (h[2-4])\s*\{([^}]*)\}/g;
+const articleTypographyStart = globalsText.indexOf('/* ===== Blog Article Typography');
+const articleTypographyEnd = globalsText.indexOf('\n}\n', globalsText.indexOf('@utility blog-article'));
+if (articleTypographyStart < 0 || articleTypographyEnd < 0) {
+  violations.push({
+    ruleId: 'article-heading-weight-600',
+    message: 'Could not find the Blog Article Typography section / @utility blog-article in globals.css.',
+    file: globalsPath,
+    lineNumber: 1,
+    line: 'Blog Article Typography',
+  });
+} else {
+  const section = globalsText.slice(articleTypographyStart, articleTypographyEnd);
+  for (const match of section.matchAll(ARTICLE_HEADING_BLOCK)) {
+    const body = match[2];
+    const weights = [
+      ...[...body.matchAll(/font-weight:\s*([^;]+);/g)].map((m) => m[1].trim()),
+      ...[...body.matchAll(/(?<![\w-])font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)(?![\w-])/g)].map((m) => m[0]),
+    ];
+    const bad = weights.find((w) => w !== '600' && w !== 'font-semibold');
+    if (!bad) continue;
+    violations.push({
+      ruleId: 'article-heading-weight-600',
+      message:
+        'Article body headings (h2-h4) use weight 600 (font-semibold), matching the reference. Change size/spacing if needed, not weight.',
+      file: globalsPath,
+      lineNumber: globalsText
+        .slice(0, articleTypographyStart + match.index + match[0].indexOf('&'))
+        .split(/\r?\n/).length,
+      line: `${match[1]} ${bad}`,
+    });
+  }
+}
+{
+  const mdContentPath = 'src/features/blog/components/md-content.tsx';
+  const mdText = readFileSync(path.join(cwd, mdContentPath), 'utf8');
+  for (const match of mdText.matchAll(/<(h[2-4])\b[^>]*\bclassName=["'{`]+([^"'`}]*)/g)) {
+    const token = match[2]
+      .split(/\s+/)
+      .find((t) => /^(?:[\w-]+:)*(?:font-(?:thin|extralight|light|normal|medium|semibold|bold|extrabold|black)|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[))/.test(t));
+    if (!token) continue;
+    violations.push({
+      ruleId: 'article-heading-weight-600',
+      message:
+        'MDContent headings carry only structure (id / scroll-mt). Weight and size come from .blog-news-article in globals.css.',
+      file: mdContentPath,
+      lineNumber: mdText.slice(0, match.index).split('\n').length,
+      line: `<${match[1]} ${token}>`,
+    });
+  }
+}
+const STATIC_PANEL_PAGE_FILES = ['src/app/terms/page.tsx', 'src/app/privacy/page.tsx', 'src/app/about/page.tsx'];
+for (const file of STATIC_PANEL_PAGE_FILES) {
+  const text = readFileSync(path.join(cwd, file), 'utf8');
+  const lineOf = (index) => text.slice(0, index).split('\n').length;
+  for (const match of text.matchAll(/<(h[1-6])\b[^>]*>/g)) {
+    const className = match[0].match(/className=["'`]([^"'`]*)/)?.[1] ?? '';
+    const large = className
+      .split(/\s+/)
+      .find((t) => /^(?:[\w-]+:)*text-(?:base|lg|xl|[2-9]xl|\[)/.test(t));
+    if (match[1] !== 'h2' && match[1] !== 'h1' && !large) continue;
+    violations.push({
+      ruleId: 'static-panel-heading-uses-section-card',
+      message:
+        'Static pages title their panels with SectionCard (title + headingAs="h2"): 16px/22px, 500, line below. Sub-headings inside a panel stay at 14px (text-sm).',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
+}
+
 if (violations.length > 0) {
   console.error('Design system check failed:');
   for (const violation of violations) {

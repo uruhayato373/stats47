@@ -31,7 +31,7 @@ import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
 import { ArticleShell, PageHeader } from "@/components/layout";
 import { PanelGrid } from "@/components/layout/PageShell";
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 import { OPERATOR_PROFILE } from "@/config/operator-profile";
 import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from "@/config/site";
@@ -55,12 +55,9 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
   const displayTitle = number ? `${number}. ${title}` : title;
 
   return (
-    <SurfaceCard className="h-full">
-      <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-lg md:text-xl md:leading-7">{displayTitle}</h2>
-      </div>
-      <div className="p-4 md:p-6 pt-3">{children}</div>
-    </SurfaceCard>
+    <SectionCard title={displayTitle} headingAs="h2" className="h-full">
+      {children}
+    </SectionCard>
   );
 }
 
@@ -249,7 +246,7 @@ export default function PrivacyPage() {
                 当サービスは、サービス品質の向上と利用状況の分析のため、Cookieを使用しています。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   4.1 使用するCookie
                 </h3>
                 <ul className={`space-y-2 ${TEXT_STYLE}`}>
@@ -276,7 +273,7 @@ export default function PrivacyPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   4.2 Cookieの無効化
                 </h3>
                 <p className={TEXT_STYLE}>
@@ -299,7 +296,7 @@ export default function PrivacyPage() {
                 適切な広告を配信することがあります。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   5.1 広告配信プロバイダー
                 </h3>
                 <ul className={`space-y-2 ${TEXT_STYLE}`}>
@@ -337,7 +334,7 @@ export default function PrivacyPage() {
                 ユーザーは、上記のオプトアウトページから、パーソナライズド広告を停止できます。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   5.2 アフィリエイトプログラムについて
                 </h3>
                 <p className={TEXT_STYLE_WITH_MARGIN}>

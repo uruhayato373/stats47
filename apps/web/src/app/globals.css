@@ -133,19 +133,21 @@
       line-height: 1.4;
     }
   
-    /* h2 は h1 (記事タイトル 20〜24px) より小さい 19px にし、上余白は 1.75em に詰める (2026-10-28 3 巡目) */
+    /* h2 は h1 (記事タイトル 20〜24px) より小さい 19px にし、上余白は 1.75em に詰める (2026-10-28 3 巡目)。
+       見出しの太さは h2〜h4 とも見本 (shadcndashboard) の 600 にそろえる (docs/01_技術設計/04_デザインシステム.md「記事本文」)。
+       太さを変えるのはここだけ (design-system:check の article-heading-weight-600) */
     & h2 {
       margin: 1.75em 0 0.6em;
       font-size: 19px;
-      font-weight: 700;
+      font-weight: 600;
     }
-  
+
     & h3 {
       margin: 2rem 0 0.75rem;
       padding: 0.25rem 0 0.25rem 1rem;
       border-left: 4px solid hsl(var(--article-accent, var(--primary)));
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 600;
     }
   
     & h4 {
@@ -264,11 +266,11 @@
   @apply text-foreground leading-relaxed text-base;
 
   & h2 {
-    @apply text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
+    @apply text-2xl font-semibold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
   }
 
   & h3 {
-    @apply text-xl font-bold mt-9 mb-2 scroll-mt-20;
+    @apply text-xl font-semibold mt-9 mb-2 scroll-mt-20;
   }
 
   & p {
