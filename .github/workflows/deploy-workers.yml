@@ -84,6 +84,8 @@ jobs:
           npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)" --concurrency 16
 
       - name: 🔐 Verify Cloudflare authentication
+        # wrangler は apps/web の依存で、npm はルートへ巻き上げないことがある (2026-10-28 にルートで not found)
+        working-directory: apps/web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

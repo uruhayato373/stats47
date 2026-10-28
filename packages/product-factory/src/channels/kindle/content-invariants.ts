@@ -25,18 +25,26 @@ export interface ContentFinding {
   readonly msg: string;
 }
 
+/** 置換を変化が無くなるまで繰り返す (1 回の置換で残る入れ子のタグも落とす)。 */
+function replaceUntilStable(input: string, pattern: RegExp, replacement: string): string {
+  let current = input;
+  for (;;) {
+    const next = current.replace(pattern, replacement);
+    if (next === current) return current;
+    current = next;
+  }
+}
+
 /** XHTML 1 章を検査用テキストに落とす。 */
 export function chapterTextFromXhtml(fileName: string, xhtml: string): ChapterText {
-  const title = (xhtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "").replace(/<[^>]+>/g, "").trim();
-  const text = xhtml
-    .replace(/<style[\s\S]*?<\/style>/g, "")
-    .replace(/<\/(p|h[1-6]|li|figcaption|div|section|tr)>/g, "\n")
-    .replace(/<[^>]+>/g, "")
+  const title = replaceUntilStable(xhtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "", /<[^>]*>/g, "").trim();
+  const withoutStyles = replaceUntilStable(xhtml, /<style[\s\S]*?<\/style\s*>/gi, "");
+  const text = replaceUntilStable(withoutStyles.replace(/<\/(p|h[1-6]|li|figcaption|div|section|tr)>/g, "\n"), /<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"');
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&"); // &amp; は最後に戻す (先に戻すと &amp;lt; が < まで二重に戻る)
   const imgs = (xhtml.match(/<img /g) ?? []).length;
   // 図 1 枚 + 先頭の集計文 (v1 は解説文、v3 は全県表を続ける。どちらも対象)。
   const isRanking = imgs === 1 && /(1位は|最大値は)/.test(text);

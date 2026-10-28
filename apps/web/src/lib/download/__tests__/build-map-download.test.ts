@@ -49,4 +49,27 @@ describe("build-map-download", () => {
     expect(kml).toContain("国土数値情報");
     expect(kml).not.toContain("47位"); // 古い年の順位を使っていない
   });
+
+  it("丸めで点が 3 つ未満に潰れた小島と穴を落とし、残りの面は保つ", () => {
+    // 1e-6 度の小島は 5 桁に丸めると 1 点に潰れる。マイマップはこれを含む県を線として読み込む
+    const tiny = [[139.500001, 35.500001], [139.500002, 35.500001], [139.500002, 35.500002], [139.500001, 35.500001]];
+    const island: Feature = {
+      type: "Feature",
+      geometry: {
+        type: "MultiPolygon",
+        coordinates: [
+          [[[139, 35], [140, 35], [140, 36], [139, 35]], tiny],
+          [tiny],
+        ],
+      },
+      properties: { N03_001: "東京都", N03_007: "13" },
+    };
+    const geo = buildMapGeoJson({ features: [island], values, meta });
+    const polygons = (geo.features[0].geometry as { coordinates: number[][][][] }).coordinates;
+    expect(polygons).toHaveLength(1); // 潰れた小島 (外周) を落とした
+    expect(polygons[0]).toHaveLength(1); // 潰れた穴も落とした
+    const kml = buildMapKml({ features: [island], values, meta });
+    expect(kml.match(/<Polygon>/g)).toHaveLength(1);
+    expect(kml).not.toContain("<innerBoundaryIs>");
+  });
 });

@@ -2212,6 +2212,7 @@
       "series": "A",
       "title": "【保存版】GoogleマップでKMLファイルを利用する方法",
       "magazine": "koumuin-gis",
+      "nextBestArticle": "h-howto-mymaps-kml",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/n03e45e40d3a7",
@@ -2223,9 +2224,9 @@
           "sha256": "dbf5f8221ff605301da88e249766d98a77b8ab5daa056bbe323139bc72bd6d3e",
           "files": 9,
           "bytes": 1080328,
-          "savedAt": "2026-10-17T23:14:32.749Z"
+          "savedAt": "2026-10-28T00:44:46.251Z"
         },
-        "verifiedAt": "2026-10-17T23:14:32.749Z"
+        "verifiedAt": "2026-10-28T00:44:46.251Z"
       }
     },
     {
@@ -11278,12 +11279,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "fe247ebb3cb911bba35525fb11804faf688630e89b3f6be360519508c9a1d14b",
+          "sha256": "a46dda93ac394689b6c3a49c34808a3d6d4036dfbaf4f4aac362cc7bf16dd3c1",
           "files": 6,
-          "bytes": 252900,
-          "savedAt": "2026-10-17T06:07:19.308Z"
+          "bytes": 253287,
+          "savedAt": "2026-10-28T00:46:22.402Z"
         },
-        "verifiedAt": "2026-10-17T06:07:19.308Z"
+        "verifiedAt": "2026-10-28T00:46:22.402Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
@@ -11350,12 +11351,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "fa0c08641930f7b774f7364cdd1c0b7f2a276cc791ee1dd3e77c4cecbbd73ed6",
+          "sha256": "67b220cb88144d70d67aff5f7ab60927253374e4fba8f3a2ae03e23cf4a40a51",
           "files": 13,
-          "bytes": 1370393,
-          "savedAt": "2026-10-27T13:55:45.451Z"
+          "bytes": 1370772,
+          "savedAt": "2026-10-28T00:45:36.287Z"
         },
-        "verifiedAt": "2026-10-27T13:55:45.451Z"
+        "verifiedAt": "2026-10-28T00:45:36.287Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
