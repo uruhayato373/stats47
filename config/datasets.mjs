@@ -388,7 +388,7 @@ export const DATASETS = [
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
-  d("blog.critic-findings", "data/blog/critic-findings/{date}.jsonl", "series", "site", "data", "ブログの審査 (critic) の BLOCK・MAJOR の指摘。日付ごとに追記し、型ごとに数えて規約・gate への格上げに使う"),
+  d("blog.critic-findings", "data/blog/critic-findings/{date}.jsonl", "series", "site", "data", "ブログの審査 (critic) の BLOCK・MAJOR の指摘。日付ごとに追記し、型ごとに数えて規約・gate への格上げに使う", { retain: "blog-critic-findings" }),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
   d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),
   d("content.quality-schema", "data/content-operations/quality.schema.json", "config", "product", "data", "記事と画像の改善台帳のJSON Schema"),

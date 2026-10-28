@@ -24,6 +24,12 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}-\d{4}-W\d{2}\.json$/,
     keep: 26,
   },
+  // 審査の指摘の台帳。集計 (critic-findings-digest) の窓は 56 日で、審査のあった日だけファイルができる
+  "blog-critic-findings": {
+    directory: datasetDir("blog.critic-findings"),
+    pattern: /^\d{4}-\d{2}-\d{2}\.jsonl$/,
+    keep: 60,
+  },
   psi: {
     directory: datasetDir("psi.batch"),
     pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,
