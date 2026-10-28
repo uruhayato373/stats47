@@ -30,6 +30,11 @@
       "import": "./src/mlit/index.ts",
       "require": "./src/mlit/index.ts"
     },
+    "./ward-mode-topology": {
+      "types": "./src/mlit/utils/ward-mode-topology.ts",
+      "import": "./src/mlit/utils/ward-mode-topology.ts",
+      "require": "./src/mlit/utils/ward-mode-topology.ts"
+    },
     "./export": {
       "types": "./src/export/index.ts",
       "import": "./src/export/index.ts",

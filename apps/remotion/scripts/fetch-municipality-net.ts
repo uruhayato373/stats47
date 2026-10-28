@@ -2,7 +2,9 @@
  * e-Stat から市区町村別の転入超過数（純移動）を取得し、47 都道府県ごとに
  * public/migration-flow/municipalities/{NN}.json へ書き出す。
  * あわせて市区町村境界 topojson を public/migration-flow/city-topo/{NN}.topojson
- * にコピーする（焦点県を市区町村粒度で描くため）。
+ * に書く（焦点県を市区町村粒度で描くため）。境界は分割版 `{NN}_city.topojson` から WardMode の merged
+ * （政令指定都市は市全体・東京の特別区は区ごと）を作る。値は市全体と行政区、特別区部と 23 区の両方を持つ
+ * (MUNI-WARD-MODE-READERS-01)。
  *
  * データ源: e-Stat 0003419945
  *   「年齢（５歳階級），男女別 他市区町村からの転入者数・転出者数・転入超過数
@@ -10,9 +12,12 @@
  *
  * 実行: tsx scripts/fetch-municipality-net.ts [year]
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from "@stats47/area";
+import { deriveWardModeTopology } from "@stats47/gis/ward-mode-topology";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REMOTION_ROOT = resolve(__dirname, "..");
@@ -109,6 +114,7 @@ async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   mkdirSync(TOPO_OUT_DIR, { recursive: true });
 
+  const { mergeGroups } = resolveWardModeAreas(buildMunicipalityEntityPolicy(), "merged");
   let written = 0;
   for (let pref = 1; pref <= 47; pref++) {
     const pp = String(pref).padStart(2, "0");
@@ -129,10 +135,11 @@ async function main() {
     );
     written++;
 
-    // 市区町村境界 topojson をコピー
-    const src = resolve(CITY_TOPO_SRC, pp, `${pp}_city_dc.topojson`);
+    // 市区町村境界 topojson (分割版から merged を作る)
+    const src = resolve(CITY_TOPO_SRC, pp, `${pp}_city.topojson`);
     if (existsSync(src)) {
-      copyFileSync(src, resolve(TOPO_OUT_DIR, `${pp}.topojson`));
+      const merged = deriveWardModeTopology(JSON.parse(readFileSync(src, "utf8")), mergeGroups);
+      writeFileSync(resolve(TOPO_OUT_DIR, `${pp}.topojson`), JSON.stringify(merged));
     } else {
       console.warn(`[warn] city topojson 不在: ${src}`);
     }
