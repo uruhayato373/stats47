@@ -325,6 +325,15 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [WEB-DEV-TURBOPACK-SITEMAP-CONFLICT-01] Turbopack の開発サーバーで全ページが 500 になる (sitemap.xml の route と metadata の衝突)
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run dev:web] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28・Next.js 16.4.3・Mac)**: `npm run dev:web` は 2 段で止まった。① フラグ無しの `next dev` が「webpack 設定があって turbopack 設定が無い」をエラーで止める (同日 `dev-server.ts` で `--turbopack` を明示して解消)。② その後、全ページが「Conflicting route and metadata at /sitemap.xml: route at /sitemap.xml/route and metadata at /sitemap.xml/route」で 500。`apps/web/src/app/sitemap.ts` (`generateSitemaps` で `/sitemap/<id>.xml`) と `apps/web/src/app/sitemap.xml/route.ts` (sitemap index) が同じ `/sitemap.xml` を取り合う。本番ビルドは webpack で通り、本番には影響しない。
+- **当面の回避**: `WEB_DEV_BUNDLER=webpack npm run dev:web`。ただし同日の Mac では webpack の dev でも HMR の WebSocket が繋がらず、ランキング詳細が 30 秒以上 hydrate されなかったので、画面の確認は本番ビルド (`npm run build -w apps/web` → `next start -p 3200`) で行った。
+- **次**: sitemap index を route ではなく metadata の仕組みで出せるか、`sitemap.ts` の出力先を変えて衝突を避けられるかを調べる。URL (`/sitemap.xml`・`/sitemap/<id>.xml`) と Google への提出は変えない。
+- **禁止**: Search Console に提出済みの sitemap の URL を変えない。
+- **完了条件**: `npm run dev:web` (Turbopack) でランキング詳細が 200、`/sitemap.xml` が今と同じ index を返す。
+
 ### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
 
@@ -345,14 +354,6 @@ updated: 2026-10-19
 - **証拠 (2026-10-28)**: `apps/web/src/app/privacy/page.tsx`・`about/page.tsx` の本文は `TEXT_STYLE` (`text-xs md:text-sm`) で、スマホ幅では 12px。`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」のパネルの中の文字は 14px。
 - **次**: `TEXT_STYLE` を消し、パネルの既定 (14px) に任せる。利用規約も同じ書き方をしていないか確かめる。
 - **完了条件**: 3 ページの本文が 390px と 1440px で 14px (描いた画面で測る)。
-
-### [SEO-META-WARD-LOWEST-01] 市区町村ランキング 4 指標の SEO 文が「最下位は政令市の区」のままで、観測値の最下位 (村) と食い違い develop の Catalog Gates を止めている
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: develop の `develop-quality-gate.yml` (run 40660907015・HEAD `984230b3e`) の Catalog Gates が `audit-seo-meta-facts.ts --fail-on-new` で失敗。手元で再現: `fiscal-strength-index` (主張 熊本市北区 / 実 鹿児島県三島村)、`manufacturing-shipment` (伊是名村 / 渡名喜村)、`per-taxpayer-income` (熊本市北区 / 群馬県南牧村)、`total-area-prefecture-ratio` (浜松市浜名区 / 札幌市厚別区)。同じ workflow は 08:40 の `714350846` で success。
-- **[仮説]** 政令指定都市の区の統合 / 分割 (`MUNI-DESIGNATED-CITY-WARDS-01`) で R2 の市区町村の観測値か順位の母集団が変わり、SEO 文 (git TS の metric の説明) が古いまま残った。この監査は R2 から観測値を読むので、コミットに関係なく R2 の更新で落ちうる。714350846 から HEAD までで監査の入力 (`packages/data-configs`・`packages/ranking`) を変えたのは `f9d38ed03` と `e485bd294` だけで、見本合わせのブランチは触っていない。
-- **次**: 4 指標の SEO 文を観測値の最下位に直す (区を順位の母集団に入れるかの決定に合わせる)。意図した変更でないなら R2 側を確かめる。`--update-baseline` で黙らせない。
-- **完了条件**: 上の検証コマンドが新規の不一致 0 件で通り、develop の Catalog Gates が success。
 
 ### [LINE-GRID-COLUMN-01] 描いた画面の線の格子の検査を定期実行に載せる
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]

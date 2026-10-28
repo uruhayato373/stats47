@@ -137,8 +137,8 @@ describe('development bundler contract', () => {
   it('starts next dev with Turbopack unless WEB_DEV_BUNDLER=webpack is set', () => {
     const supervisor = read('scripts/dev-server.ts');
 
-    // Next.js 16 から next dev の既定が Turbopack なので、webpack を選んだときだけ --webpack を渡す
-    expect(supervisor).toContain("process.env.WEB_DEV_BUNDLER === 'webpack' ? ['--webpack'] : []");
+    // Next.js 16.4 は webpack() 設定があるとフラグ無しの next dev をエラーで止めるので、どちらでもフラグを明示して渡す (2026-10-28)
+    expect(supervisor).toContain("process.env.WEB_DEV_BUNDLER === 'webpack' ? ['--webpack'] : ['--turbopack']");
     expect(supervisor).toContain('...bundlerArgs()');
   });
 

@@ -353,8 +353,8 @@ const nextConfig: NextConfig = {
   },
 
   // 開発サーバー (scripts/dev-server.ts) は Turbopack、本番ビルドは webpack (`next build --webpack`。Next.js 16 の既定は Turbopack)。上の webpack() は本番 (Workers) 向けの
-  // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Turbopack が起動時に出す
-  // 「Webpack is configured while Turbopack is not」の警告はこのため無害 (空の turbopack 設定では消えない)。
+  // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Next.js 16.4 は
+  // この組み合わせをフラグ無しの next dev ではエラーで止めるので、dev-server.ts が `--turbopack` を明示して渡す (2026-10-28)。
 };
 
 export default withBundleAnalyzer(nextConfig);

@@ -142,6 +142,13 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > CTR の定義が変わるため、デプロイ境界をまたぐ配置別CTRを単純比較しない。
 > 公開後は日付を固定した非重複期間で `pagePath × deviceCategory × ad_id × link_position` とPVを取得する。
 
+> **値の追加 (2026-10-28・ランキングの県の詳細パネル、Flowly の試行)**: ランキング詳細の地図・表で県を押すと右から開く
+> 詳細パネル (`RankingAreaDetailSheet`) を足した。開いたとき `ui_interaction` を `ui_action=detail_open`・`ui_target=map|table`、
+> パネルの中の前後送りを `ui_action=region_select`・`ui_target=detail_sheet` で送り、どちらも `area_code` を付ける。
+> パネルの中のリンクは `nav_surface=ranking_detail_sheet`。すべて登録済みの dimension の値追加で、GA4 側の作業は無い。
+> 判定 (台帳 `data/design-references/references.json` の flowly): 公開から 4 週で、`ranking_detail_sheet` の `nav_click`
+> と `ranking_table` の県名リンクを合わせた県ページへの遷移が、公開前の 4 週の `ranking_table` より増えたかで広げるかを決める。
+
 > **nav_surface の値変更 (2026-10-27・サイドバー型の骨組み、未デプロイ)**: 公開サイトの骨組みをテンプレート
 > (shadcndashboard) のサイドバー型に替え、ヘッダーのナビ (メガメニュー) とモバイルドロワーを撤去した。サイト全体のナビは
 > `AppSidebar` だけになり、`nav_surface` は PC の常設サイドバー = `sidebar`、lg (1024px) 未満で Sheet として開いたもの =
