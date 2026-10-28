@@ -83,6 +83,8 @@ jobs:
           [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
           mkdir -p ".local/r2/app/blog/$SLUG"
           cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
+          # 公開しない作業ファイル (調査材料・審査結果・prompt) を公開 R2 へ上げない (blog-auto-publish.yml と同じ)
+          rm -f ".local/r2/app/blog/$SLUG/research.md" ".local/r2/app/blog/$SLUG/review.md" ".local/r2/app/blog/$SLUG/"*.prompt.txt
           # 公開フォルダ側の publishedAt + published を設定 (git のドラフトは触らない)
           A=".local/r2/app/blog/$SLUG/article.md"
           perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" "$A"
@@ -125,7 +127,10 @@ jobs:
           SLUG="${{ github.event.inputs.slug }}"
           if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
             echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
+            # 上書きの前後で本文の版を private R2 に退避する (blog-auto-publish.yml と同じ)
+            node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            node .claude/scripts/blog/archive-blog-articles.mjs --file ".local/r2/app/blog/$SLUG/article.md" --slug "$SLUG"
           else
             echo "dry-run: 記事 push スキップ (差分のみ)"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG" --dry-run

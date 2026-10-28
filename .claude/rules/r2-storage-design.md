@@ -176,6 +176,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | `gis/` / `ges/` / `video/` / `note/` | 正規保持 (§「ルート直下に置くもの」)。private の `note-archive/` は note 記事の保存履歴で削除しない |
 | `staging/image-cache/` | AI 背景の再課金防止 cache (`ogp-image-standards.md` §5)。無期限 |
 | `archive/kindle-encrypted/` | KDP送信版の復元・rollback証跡。manifest署名とplain/cipher SHAが一致するrevisionを保持 |
+| `stats47-private:blog-archive/<slug>/<sha256>.md` | ブログ本文の版。公開 (`blog-auto-publish.yml`・`publish-blog.yml`) と直接の上書き (`push-article-md-r2.ts`) の前後に `archive-blog-articles.mjs` が読み戻し照合つきで保存する。本文の正本は公開 R2 だけで git に履歴が残らないため (2026-10-28 に公開中の全記事を初回退避)。削除しない |
 | `media/note-backgrounds/` | 承認済みのnote生成AI背景。`render-spec.json`のSHAが指す間は削除しない (作り直せない入力。`--verify-r2`が実在を監視) |
 | `media/kindle-cover-assets/` | 目視承認済みKDP表紙asset。内容ハッシュ付きrevisionを保持し、Gitへ画像本体を戻さない |
 | `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材。投稿した素材の正本は Google Drive `stats47/SNS素材/` (台帳 `assets[]`。`sns-content-standards.md` §3-1)。投稿済み mp4 は Drive 保全済みの場合だけ 30 日で削除 |

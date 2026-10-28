@@ -25,6 +25,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
   → 公開後はライブ (stats47.jp/blog/<slug>) で確認 → /brushup-blog (R2 取得→是正) で反復
 ```
 
+- **本文の版は private R2 `blog-archive/<slug>/<sha256>.md` に残る (2026-10-28〜)**。公開と直接の上書きの前後に `archive-blog-articles.mjs` が保存する。調査材料 `research.md`・審査結果 `review.md`・`*.prompt.txt` は公開 R2 へ上げない (公開の CI がステージから外す)。
 - **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`contents/blog` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
   - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② 週次レビューの `npm run weekly:audits` (blog-remediation。2026-10-26 までは日次の `blog-remediation-daily.yml`) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。contents/blog を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので contents/blog は必要)。
 - **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
