@@ -161,4 +161,29 @@ describe('県名×市区町村ランキングの title', () => {
     expect(meta.title).toBe('愛知県の市町村出生数ランキング【2023年】｜1位 豊田市（1,500人）');
     expect(meta.description).toContain('1位は豊田市（1,500人）、2位は名古屋市（800人）、3位は岡崎市（300人）');
   });
+
+  it('1 万〜10 万の値を「1万人」に丸めず、title・説明文・要約で桁区切りのまま書く (MUNI-TITLE-MAGNITUDE-01)', () => {
+    const births = [
+      row('01100', '北海道 札幌市', '01000', 10352, 1),
+      row('01202', '北海道 函館市', '01000', 1495, 2),
+    ];
+    const ranking = buildMunicipalityPrefectureRanking(births, '01000', SPECIAL_WARDS)!;
+    const meta = buildMunicipalityPrefectureRankingMeta({ title: '出生数' }, { yearName: '2023年', unit: '人' }, ranking, '北海道');
+    expect(meta.title).toBe('北海道の市町村出生数ランキング【2023年】｜1位 札幌市（10,352人）');
+    expect(meta.description).toContain('1位は札幌市（10,352人）');
+    const summary = buildMunicipalityPrefectureRankingSummary(ranking, {
+      prefectureName: '北海道',
+      unit: '人',
+      metricLabel: '出生数',
+    });
+    expect(summary[0]).toContain('札幌市（10,352人）');
+  });
+
+  it('単位が「指数」の指標は値だけを書き、「1.48指数」としない (MUNI-TITLE-MAGNITUDE-01)', () => {
+    const fiscal = [row('13203', '東京都 武蔵野市', '13000', 1.48, 1), row('13201', '東京都 八王子市', '13000', 0.9, 2)];
+    const ranking = buildMunicipalityPrefectureRanking(fiscal, '13000', SPECIAL_WARDS)!;
+    const meta = buildMunicipalityPrefectureRankingMeta({ title: '財政力指数' }, { yearName: '2022年度', unit: '指数' }, ranking, '東京都');
+    expect(meta.title).toBe('東京都の市町村財政力指数ランキング【2022年度】｜1位 武蔵野市（1.48）');
+    expect(meta.description).not.toContain('指数）');
+  });
 });

@@ -19,6 +19,8 @@ export interface RankingLinkCardData {
 }
 
 const RANKING_HREF_RE = /^\/ranking\/([^/?#]+)/;
+/** 市区町村ランキング (`/municipalities/ranking/<key>` と県別の `/<key>/<県コード>`)。BLOG-MUNI-SOURCE-LINK-01 */
+const MUNICIPALITY_RANKING_HREF_RE = /^\/municipalities\/ranking\/([^/?#]+)/;
 const TOP_ROW_COUNT = 3;
 
 /** 本文内の面。記事本文 (白い ArticleCard) の中なのでカードを重ねず、地の色で区切る。 */
@@ -39,7 +41,9 @@ interface RankingLinkCardProps {
  * 読み込み中は地図と3行の高さを確保し、表示のずれを起こさない。
  */
 export function RankingLinkCard({ href, children }: RankingLinkCardProps) {
+    // 上位3県と地図の API は都道府県版だけ。市区町村ランキングは同じキーの県データを出さず、ラベルのリンクだけにする
     const rankingKey = RANKING_HREF_RE.exec(href)?.[1] ?? null;
+    const trackingKey = rankingKey ?? MUNICIPALITY_RANKING_HREF_RE.exec(href)?.[1] ?? null;
     // undefined = 読み込み中 / null = 表示できるデータなし
     const [data, setData] = useState<RankingLinkCardData | null | undefined>(
         rankingKey ? undefined : null,
@@ -60,7 +64,7 @@ export function RankingLinkCard({ href, children }: RankingLinkCardProps) {
     }, [rankingKey]);
 
     const handleClick = () => {
-        trackNavClick({ label: rankingKey ?? href, href, surface: "blog_ranking_card" });
+        trackNavClick({ label: trackingKey ?? href, href, surface: "blog_ranking_card" });
     };
 
     return (
