@@ -177,6 +177,19 @@ export const MEASUREMENT_REPORTS = Object.freeze({
     dims: ['customEvent:ranking_key', 'customEvent:download_purpose'],
     metrics: ['eventCount'],
   },
+  // PRODUCT-FUNNEL-DEPLOY-01 (2026-10-28): ダウンロードの形式 (csv / kml / geojson) × 指標。
+  // event-volume.csv は file_download の総数だけで、地図用の形式がどれだけ落とされたかを読めなかった。
+  'file-downloads': {
+    columns: ['file_extension', 'ranking_key', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['fileExtension', 'customEvent:ranking_key'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(eventIs('file_download')),
+    }),
+    dims: ['fileExtension', 'customEvent:ranking_key'],
+    metrics: ['eventCount'],
+  },
   // SNS-REFERRAL-MEASURE-01 (2026-10-19): SNS と外部サイト (note.com など) の媒体別の送客。
   // Organic Social は 28 日で 98 セッションしかなく、どの媒体が送っているかが snapshot に無かった。
   'referral-sources': {

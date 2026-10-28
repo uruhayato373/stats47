@@ -27,7 +27,12 @@ async function renewWranglerSession() {
       fs.writeFileSync(certificates, authorities.join('\n'));
       env.NODE_EXTRA_CA_CERTS = certificates;
     }
-    await runFile(process.execPath, [path.join(COVER_ROOT, 'node_modules/wrangler/bin/wrangler.js'), 'whoami'], {
+    // wrangler is a dependency of apps/web; npm may install it there instead of hoisting it to the root.
+    const wrangler = ['node_modules', 'apps/web/node_modules']
+      .map((dir) => path.join(COVER_ROOT, dir, 'wrangler/bin/wrangler.js'))
+      .find((file) => fs.existsSync(file));
+    if (!wrangler) throw Object.assign(Error('private R2 session renewal failed; wrangler is not installed (run npm ci)'), { safe: true });
+    await runFile(process.execPath, [wrangler, 'whoami'], {
       env, cwd: COVER_ROOT, timeout: 30000, maxBuffer: 1e6, windowsHide: true,
     });
   } catch (error) {
