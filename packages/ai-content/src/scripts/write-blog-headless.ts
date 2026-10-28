@@ -12,6 +12,7 @@ import "dotenv/config";
  *   2. 決定的ゲート: quality-gate.mjs + ci-factual-gate.mjs。落ちたら blocker を添えて --retries 回まで書き直す
  *   3. critic: 記事本文だけを別プロセスで審査 → review.md (buildBlogCriticPrompt。執筆時の文脈は渡さない)
  *      REVISE なら blocker / major の指摘と原稿を author に返し、--revise-rounds 回まで 1〜3 をやり直す
+ *      review.md を書くたびに record-critic-findings.mjs で指摘を台帳へ残す
  *   4. run report (.local/ci/blog-headless-<run>.json) と data/blog/headless-runs.csv に費用・通過を記録
  *
  * **公開しない。** published:false のまま残す。公開は人が `generate-blog-article.ts --ingest <slug>` で
@@ -49,6 +50,15 @@ const OUTBOX = path.join(PROJECT_ROOT, "contents/blog");
 const HISTORY = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/headless-runs.csv`);
 const HISTORY_HEADER =
   "run_id,date,slug,author,critic,effort,author_calls,critic_calls,input_tokens,output_tokens,cost_usd,gate,verdict,seconds\n";
+
+/** critic の指摘の型。台帳 (critic-findings.jsonl) が型ごとに数えて格上げに使う */
+const FINDING_TYPES = Object.entries(
+  (
+    JSON.parse(
+      fs.readFileSync(path.join(PROJECT_ROOT, ".claude/config/critic-finding-types.json"), "utf8"),
+    ) as { types: Record<string, { label: string }> }
+  ).types,
+).map(([key, v]) => ({ key, label: v.label }));
 
 const AUTHOR_SYSTEM_PROMPT =
   "あなたは日本の都道府県統計サイトの記事執筆者です。ユーザーメッセージの指示だけに従い、article.md の中身だけを出力してください。前置き・補足説明・確認の質問は一切書かないでください。";
@@ -279,11 +289,16 @@ async function processSlug(slug: string): Promise<SlugResult> {
         return result;
       }
       const article = fs.readFileSync(path.join(dir, "article.md"), "utf8");
-      const reviewed = await callEngine(CRITIC, buildBlogCriticPrompt(article), CRITIC_SYSTEM_PROMPT);
+      const reviewed = await callEngine(CRITIC, buildBlogCriticPrompt(article, FINDING_TYPES), CRITIC_SYSTEM_PROMPT);
       result.criticCalls++;
       result.usage = addUsage(result.usage, reviewed.usage);
       const { review, verdict } = normalizeReview(reviewed.text, slug, CRITIC);
       fs.writeFileSync(path.join(dir, "review.md"), review);
+      // REVISE の指摘は次の周で上書きされるので、書いた直後に台帳へ残す (blog-quality-standards.md)
+      spawnSync("node", [".claude/scripts/blog/record-critic-findings.mjs", path.join(dir, "review.md")], {
+        cwd: PROJECT_ROOT,
+        stdio: "inherit",
+      });
       result.verdict = verdict;
       log(`  [critic] ${slug} round ${round + 1}: ${verdict ?? "verdict 不明"}`);
       if (verdict === "PASS") {
