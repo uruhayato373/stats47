@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "avg-salary-police-prefecture",
+  "pair": "national-assessment-elementary-tutoring-rate",
+  "xKey": "avg-salary-police-prefecture",
+  "yKey": "national-assessment-elementary-tutoring-rate",
+  "pearsonR": 0.7120846049500625,
+  "partialRPopulation": 0.4987782253684757,
+  "unit": "円 × ％",
+  "label": "警察職 平均給与月額 と 学習塾・家庭教師で教わっている小学生の割合 の関係",
+  "source": "r2:app/correlation/by-ranking-key/avg-salary-police-prefecture.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug avg-salary-police-prefecture-vs-national-assessment --base avg-salary-police-prefecture --pair national-assessment-elementary-tutoring-rate --data-name avg-salary-police-prefecture--national-assessment-elementary-tutoring-rate"
+}
