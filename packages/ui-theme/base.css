@@ -1,15 +1,8 @@
-/* 部品の見た目 (色トークンを含まない)。tw-animate・shadcn の追加 variant・style-lyra。
+/* 部品の見た目 (色トークンを含まない)。tw-animate と shadcn の追加 variant。
    色は tokens-hsl.css (tokens.css と同じ色の HSL 3 値) を別に読む。
-   ルート要素に class="style-lyra" を付ける (lyra の部品スタイルは .style-lyra の下だけで効く)。 */
+   テンプレートの lyra の部品スタイル (style-lyra.css) は CSS として読まない。規則の中身は部品の className に
+   書き込んである (scripts/ui-theme/inline-lyra.mjs。2026-10-28 CSS-3)。 */
 @import "tw-animate-css";
 @import "./shadcn-tailwind.css";
 
 @custom-variant style-lyra (&:where(.style-lyra *));
-
-/* style-lyra はテンプレートと同じくレイヤーの外に置く。部品の写し (atoms/ui/*.tsx) は base-nova の値
-   (rounded-xl・text-sm・h-9 など) を素のクラスで持ち、それを lyra の値 (角丸なし・text-xs・h-8) で
-   上書きする前提で作られている。layer(components) に入れると素のクラス (utilities 層) が勝ち、
-   テンプレートの見た目が崩れる。呼び出し側が lyra の値を上書きしたいときは、テンプレートと同じく
-   ! を付ける (例: SiteHeader の検索欄の pl-10!)。
-   読むのは正本 style-lyra.css から使う規則だけを抜いた生成物 (scripts/ui-theme/build-used-lyra.mjs)。 */
-@import "./style-lyra.used.css";

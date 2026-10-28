@@ -21,7 +21,7 @@ function Slider({
 
   return (
     <SliderPrimitive.Root
-      className={cn("cn-slider data-horizontal:w-full data-vertical:h-full", className)}
+      className={cn("cn-slider data-horizontal:w-full data-vertical:h-full", className, /* lyra */ "data-vertical:min-h-40")}
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
@@ -33,18 +33,18 @@ function Slider({
       <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col">
         <SliderPrimitive.Track
           data-slot="slider-track"
-          className="cn-slider-track relative grow overflow-hidden bg-muted select-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+          className="cn-slider-track relative grow overflow-hidden select-none bg-muted rounded-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
         >
           <SliderPrimitive.Indicator
             data-slot="slider-range"
-            className="cn-slider-range bg-primary select-none data-horizontal:h-full data-vertical:w-full"
+            className="cn-slider-range select-none data-horizontal:h-full data-vertical:w-full bg-primary"
           />
         </SliderPrimitive.Track>
         {Array.from({ length: _values.length }, (_, index) => (
           <SliderPrimitive.Thumb
             data-slot="slider-thumb"
             key={index}
-            className="cn-slider-thumb relative block size-3 shrink-0 border border-ring bg-white ring-ring/50 select-none after:absolute after:-inset-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+            className="cn-slider-thumb block shrink-0 select-none disabled:pointer-events-none disabled:opacity-50 border-ring ring-ring/50 relative size-3 rounded-none border bg-white transition-[color,box-shadow] after:absolute after:-inset-2 hover:ring-1 focus-visible:ring-1 focus-visible:outline-hidden active:ring-1"
           />
         ))}
       </SliderPrimitive.Control>

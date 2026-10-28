@@ -24,7 +24,7 @@ export function ScrollableTabsList({ tabs }: ScrollableTabsListProps) {
           <TabsTrigger
             key={tab.rankingKey}
             value={tab.rankingKey}
-            className="text-[11px] sm:text-xs whitespace-nowrap px-2 py-1 data-active:border data-active:border-primary/40 data-active:font-bold"
+            className="text-[11px] sm:text-xs whitespace-nowrap px-2 py-1 data-active:border"
           >
             {tab.tabLabel}
           </TabsTrigger>

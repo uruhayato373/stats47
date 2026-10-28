@@ -1,6 +1,6 @@
 #!/bin/sh
 # Pre-commitチェックスクリプトを実行
 bash apps/web/scripts/pre-commit-checks.sh || exit 1
-# style-lyra.used.css (公開サイトが読む lyra の規則の生成物) の取りこぼし・cn-* の組み立て・再生成忘れ
+# lyra の規則 (style-lyra.css) の部品の className への書き込み漏れ・cn-* の組み立て
 # (PR CI の static-gates と同一。正典: packages/ui-theme/README.md。実測 1 秒未満)
-npm run --silent ui-theme:lyra:test > /dev/null || { echo "❌ ui-theme:lyra:test が失敗 (npm run ui-theme:lyra で再生成)"; exit 1; }
+npm run --silent ui-theme:lyra:test > /dev/null || { echo "❌ ui-theme:lyra:test が失敗 (npm run ui-theme:lyra で書き込み直す)"; exit 1; }

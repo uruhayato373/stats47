@@ -5,6 +5,7 @@
 // data-orientation と Base UI にそのまま渡す。Tailwind はソースに書かれたクラスを全部 CSS に出すので、
 // 使わない見た目の分だけ全ページの CSS が重くなる (2026-10-28 配信サイズの点検・策 E)。
 // lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
+// ToggleGroupItem は Toggle の素のクラス → className → Toggle の lyra → 自分の lyra の順に合成する (CSS で読んでいたときの勝ち方)。
 "use client"
 
 import * as React from "react"
@@ -13,7 +14,7 @@ import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group
 import { type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/cn"
-import { toggleVariants } from "./toggle"
+import { toggleClasses, toggleClassesLyra, toggleVariants } from "./toggle"
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants> & {
@@ -50,7 +51,8 @@ function ToggleGroup({
       style={{ "--gap": spacing } as React.CSSProperties}
       className={cn(
         "cn-toggle-group group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))]",
-        className
+        className,
+        /* lyra */ "rounded-none data-[size=sm]:rounded-none"
       )}
       {...props}
     >
@@ -79,12 +81,17 @@ function ToggleGroupItem({
       data-size={context.size || size}
       data-spacing={context.spacing}
       className={cn(
-        "cn-toggle-group-item shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l",
-        toggleVariants({
+        "cn-toggle-group-item shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5",
+        toggleClasses({
           variant: context.variant || variant,
           size: context.size || size,
         }),
-        className
+        className,
+        toggleClassesLyra({
+          variant: context.variant || variant,
+          size: context.size || size,
+        }),
+        /* lyra */ "group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-none group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-none group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-none group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-none"
       )}
       {...props}
     >

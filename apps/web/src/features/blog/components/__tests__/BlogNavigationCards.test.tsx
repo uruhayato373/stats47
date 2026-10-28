@@ -50,7 +50,8 @@ describe('BlogNavigationCards', () => {
     expect(popularTag).toHaveAttribute('href', '/tag/タグ12');
     // 幅に関係なく同じ高さの Badge (画面幅で高さを変える sm:min-h-* を持たない)
     expect(popularTag).toHaveAttribute('data-slot', 'badge');
-    expect(popularTag).toHaveClass('h-7');
+    // 高さは Badge の lyra の h-5。呼び出し側の h-7 は lyra に負けて効かない (CSS で読んでいた頃から同じ。! で勝たせる)
+    expect(popularTag).toHaveClass('h-5');
     expect(popularTag.className).not.toMatch(/sm:min-h-|snap-start/);
     expect(popularTag.closest('[data-nav-surface]')).toHaveAttribute(
       'data-nav-surface',

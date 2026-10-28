@@ -200,9 +200,9 @@ jobs:
         run: npm run design-system:check -w apps/web
         continue-on-error: false
 
-      - name: 🎨 Lyra Used CSS Check
-        # style-lyra.used.css (公開サイトが読む lyra の規則の生成物) の取りこぼし・cn-* の組み立て・
-        # 再生成忘れを止める (pre-commit と同一)。正典: packages/ui-theme/README.md
+      - name: 🎨 Lyra Inline Check
+        # lyra の規則 (style-lyra.css) の部品の className への書き込み漏れと cn-* の組み立てを止める
+        # (pre-commit と同一)。正典: packages/ui-theme/README.md
         run: npm run ui-theme:lyra:test
         continue-on-error: false
 

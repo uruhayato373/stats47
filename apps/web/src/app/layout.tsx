@@ -96,7 +96,7 @@ export default function RootLayout({
   const baseUrl = getRequiredBaseUrl();
 
   return (
-    // style-lyra: テンプレートの部品スタイル (@stats47/ui-theme の style-lyra.css) は .style-lyra の下だけで効く
+    // style-lyra: テンプレートと同じルートのクラス。lyra の見た目は部品の className に書き込んであり、このクラスには依存しない (2026-10-28 CSS-3)
     <html lang="ja" className="style-lyra" suppressHydrationWarning>
       <head>
         {/*

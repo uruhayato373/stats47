@@ -11,7 +11,8 @@ function Empty({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="empty"
       className={cn(
         "cn-empty flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 border-dashed p-6 text-center text-balance",
-        className
+        className,
+        /* lyra */ "gap-4 rounded-none border-dashed p-6"
       )}
       {...props}
     />
@@ -22,7 +23,7 @@ function EmptyHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="empty-header"
-      className={cn("cn-empty-header flex max-w-sm flex-col items-center gap-2", className)}
+      className={cn("cn-empty-header flex max-w-sm flex-col items-center gap-2", className, /* lyra */ "gap-2")}
       {...props}
     />
   )
@@ -52,7 +53,7 @@ function EmptyMedia({
     <div
       data-slot="empty-icon"
       data-variant={variant}
-      className={cn("cn-empty-media", emptyMediaVariants({ variant, className }))}
+      className={cn("cn-empty-media", emptyMediaVariants({ variant, className }), /* lyra */ "mb-2")}
       {...props}
     />
   )
@@ -64,7 +65,8 @@ function EmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="empty-title"
       className={cn(
         "cn-empty-title text-sm font-medium tracking-tight",
-        className
+        className,
+        /* lyra */ "text-sm font-medium"
       )}
       {...props}
     />
@@ -77,7 +79,8 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="empty-description"
       className={cn(
         "cn-empty-description text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
-        className
+        className,
+        /* lyra */ "text-xs/relaxed"
       )}
       {...props}
     />
@@ -90,7 +93,8 @@ function EmptyContent({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="empty-content"
       className={cn(
         "cn-empty-content flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-balance",
-        className
+        className,
+        /* lyra */ "gap-2.5 text-xs"
       )}
       {...props}
     />

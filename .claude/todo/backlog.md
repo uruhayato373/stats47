@@ -256,17 +256,12 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [TEMPLATE-BASE-UI-REST-01] テンプレートを正とする移行の残り (独自カードの型・D3 チャートの見た目・カルーセル矢印)
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-27] [領域:サイト]
+### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
-- **経緯**: 2026-10-27 オーナー決定「shadcndashboard テンプレートを正としてサイトを寄せる・余白も少なく」。ブランチ `feature/template-base-ui` で公開サイトの部品の Base UI 化、色・角丸・カード面 (`@stats47/ui-theme`)、外枠の余白 (p-4 / gap-4) までを済ませた。管理画面は並行して develop に入った移行 (dc37e10a3・2db4392b6。shadcn 公式 base-nova + shadcndashboard.dev の見た目) を採用し、このブランチの管理画面の変更は取り下げた。
-- **済 (2026-10-27)**: 独自カードは数え直すと全件が共通の外枠 (SurfaceCard・RailCard 系・ChartPanel・各 Client) 経由で、外枠の見た目はテンプレートに揃った (ホバー影を外し、記事カードの余白を半分に)。D3 は軸線なし・横目盛りのみが既にテンプレートと同じで、目盛りを点線 (`CHART_STYLES.grid.dashArray`) に、ツールチップを lyra の `.cn-chart-tooltip` と同じ見た目にした。カルーセルの矢印は動かせないときだけ行ごと隠す。ChartFooter の id / aria-controls は Base UI でも明示値が使われ、テストで対応を確認済み (変更不要)。
-- **済 (2026-10-27・追加)**: D3 の固定色のうち画面に出る地図の選択・ホバー枠の青を、テンプレートの primary (`getThemeColors().primary`) に替えた (都道府県・タイル・市区町村の 3 地図。Remotion はこれらの地図を使わない)。残りの固定色は性別・正負の識別色、文字の読みやすさのための白黒、色未指定時の既定値で、意図があるので残した。
-- **済 (2026-10-28)**: カルーセルの矢印は見出しの行の右端に並べ、sm 未満は描かない (スワイプで動かす)。本番ビルドで 11 ページ × 3 幅 (1440・1024・390) とダークモードを撮って 3 巡の監査 (指摘 93・78・77 件) を直した。カードの地は lyra と同じ `bg-background` に揃えた。配信 JS は全ページで変更前以下 (ランキング詳細 404→396KB gzip・/blog 324→240KB)。
-- **残り (オーナー判断)**: CSS は全ページ共通の 1 ファイルで 24.5→33.8KB gzip (+9.3KB)。内訳は lyra の部品の見た目 5.1KB と、Base UI の部品の状態クラス (`data-open:` など) を含むユーティリティ +4.5KB。テンプレートの写しを保ったままでは削れない。案 CSS-3 = shadcn CLI がインストール時にするのと同じく、写しの部品の `cn-*` を lyra の最終的な値へ展開し `style-lyra.used.css` をやめる (推定 -3〜-4.5KB。詳細度が変わるので、全ページの撮り比べと、呼び出し側が `!` なしで lyra と同じ性質を渡している箇所の棚卸しが前提。写しとの差が大きくなり、テンプレートの取り直しが重くなる)。
-- **禁止**: Recharts を公開サイトに入れない (gzip 約 119KB の上乗せ)。カードを入れ子にしない。
-- **完了条件**: CSS-3 を採るか見送るかをオーナーが決め、採るなら 11 ページ × 3 幅の撮り比べで差 0 を確認した。
-
+- **経緯**: テンプレート (lyra) の部品は、呼び出し側の className より lyra の値が勝つ (CSS で読んでいた頃はレイヤーの外の規則として、2026-10-28 の CSS-3 以降は className の後ろで合成されて)。勝てるのは `!` 付きだけ。このため、テンプレートへ移した時点から効いていない指定が残っている。2026-10-28 の静的な洗い出しで約 180 件。主なもの: `TableHead` の `text-right` (72 件。数値列の見出しが左寄せのまま)、共有ボタンのブランド色 (`share-brand.palette.ts`。X・Facebook・LINE・はてなの地色が出ず全部 primary)、ブログのタグの Badge の `h-7` (実際は 20px)、Button の `h-11`・`h-9`・`gap-2`、Skeleton の `rounded-md`、SelectTrigger の `text-sm`。CSS-3 では見た目を変えない約束だったので触っていない。
+- **次**: 一覧を作り直し (`scripts/ui-theme/inline-lyra.mjs` の `losesToLyra` で、呼び出し側のクラスと部品の lyra を突き合わせる)、意図どおり効かせるもの (`!` を付ける) と消すものに分ける。効かせるものは画面が変わるので、ページごとに撮って確かめる。
+- **完了条件**: 洗い出しの結果が 0 件、または残すものに理由が書いてある。
 ### [MAP-TILE-FOREIGN-LABELS-01] ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
@@ -292,8 +287,8 @@ updated: 2026-10-19
 ### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]
 
-- **経緯**: lyra の生成器 `scripts/ui-theme/build-used-lyra.mjs` は root の `scripts/` にあり、`check-checker-wiring.cjs` の candidateRoots (`.claude/scripts` と `apps|packages/*/scripts`) の外にある。そのため `.claude/config/quality-gates.json` の exceptions に `NOT_A_CHECKER` (期限 2026-12-31) を置いて通している。検査本体の `npm run ui-theme:lyra:test` は pre-commit と PR CI で blocking なので、検査そのものは走っている。
-- **次**: candidateRoots に root の `scripts/` を足すか、生成器を探索範囲へ移し、例外を外す。
+- **経緯**: lyra の書き込みスクリプト `scripts/ui-theme/inline-lyra.mjs` は root の `scripts/` にあり、`check-checker-wiring.cjs` の candidateRoots (`.claude/scripts` と `apps|packages/*/scripts`) の外にある。そのため `.claude/config/quality-gates.json` の exceptions に `NOT_A_CHECKER` (期限 2026-12-31) を置いて通している。検査本体の `npm run ui-theme:lyra:test` は pre-commit と PR CI で blocking なので、検査そのものは走っている。
+- **次**: candidateRoots に root の `scripts/` を足すか、スクリプトを探索範囲へ移し、例外を外す。
 - **完了条件**: 例外なしで `node .claude/scripts/lib/check-checker-wiring.cjs --baseline` が通る。
 
 ### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない

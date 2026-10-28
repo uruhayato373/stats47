@@ -25,7 +25,8 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
       data-slot="breadcrumb-list"
       className={cn(
         "cn-breadcrumb-list flex flex-wrap items-center gap-1.5 wrap-break-word text-muted-foreground",
-        className
+        className,
+        /* lyra */ "text-muted-foreground gap-1.5 text-xs"
       )}
       {...props}
     />
@@ -36,7 +37,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
       data-slot="breadcrumb-item"
-      className={cn("cn-breadcrumb-item inline-flex items-center gap-1", className)}
+      className={cn("cn-breadcrumb-item inline-flex items-center gap-1", className, /* lyra */ "gap-1")}
       {...props}
     />
   )
@@ -51,7 +52,7 @@ function BreadcrumbLink({
     defaultTagName: "a",
     props: mergeProps<"a">(
       {
-        className: cn("cn-breadcrumb-link transition-colors hover:text-foreground", className),
+        className: cn("cn-breadcrumb-link transition-colors hover:text-foreground", className, /* lyra */ "hover:text-foreground transition-colors"),
       },
       props
     ),
@@ -69,7 +70,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("cn-breadcrumb-page font-normal text-foreground", className)}
+      className={cn("cn-breadcrumb-page font-normal text-foreground", className, /* lyra */ "text-foreground font-normal")}
       {...props}
     />
   )
@@ -85,7 +86,7 @@ function BreadcrumbSeparator({
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={cn("cn-breadcrumb-separator [&>svg]:size-3.5", className)}
+      className={cn("cn-breadcrumb-separator [&>svg]:size-3.5", className, /* lyra */ "[&>svg]:size-3.5")}
       {...props}
     >
       {children ?? (
@@ -106,7 +107,8 @@ function BreadcrumbEllipsis({
       aria-hidden="true"
       className={cn(
         "cn-breadcrumb-ellipsis flex size-5 items-center justify-center [&>svg]:size-4",
-        className
+        className,
+        /* lyra */ "size-5 [&>svg]:size-4"
       )}
       {...props}
     >

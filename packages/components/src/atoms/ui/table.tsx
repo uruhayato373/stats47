@@ -28,7 +28,8 @@ function Table({
       className={cn(
         "cn-table-container relative w-full overflow-x-auto",
         scrollRegion && "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
-        containerClassName
+        containerClassName,
+        /* lyra */ "relative w-full overflow-x-auto"
       )}
       {...(scrollRegion
         ? { role: "region", tabIndex: 0, "aria-label": props["aria-label"] ?? "表" }
@@ -36,7 +37,7 @@ function Table({
     >
       <table
         data-slot="table"
-        className={cn("cn-table w-full caption-bottom", className)}
+        className={cn("cn-table w-full caption-bottom", className, /* lyra */ "w-full caption-bottom text-xs")}
         {...props}
       />
     </div>
@@ -47,7 +48,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   return (
     <thead
       data-slot="table-header"
-      className={cn("cn-table-header [&_tr]:border-b", className)}
+      className={cn("cn-table-header [&_tr]:border-b", className, /* lyra */ "[&_tr]:border-b")}
       {...props}
     />
   )
@@ -57,7 +58,7 @@ function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
       data-slot="table-body"
-      className={cn("cn-table-body [&_tr:last-child]:border-0", className)}
+      className={cn("cn-table-body [&_tr:last-child]:border-0", className, /* lyra */ "[&_tr:last-child]:border-0")}
       {...props}
     />
   )
@@ -69,7 +70,8 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
       data-slot="table-footer"
       className={cn(
         "cn-table-footer border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-        className
+        className,
+        /* lyra */ "bg-muted/50 border-t font-medium [&>tr]:last:border-b-0"
       )}
       {...props}
     />
@@ -82,7 +84,8 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
       data-slot="table-row"
       className={cn(
         "cn-table-row border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
-        className
+        className,
+        /* lyra */ "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
       )}
       {...props}
     />
@@ -95,7 +98,8 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
       data-slot="table-head"
       className={cn(
         "cn-table-head h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0",
-        className
+        className,
+        /* lyra */ "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0"
       )}
       {...props}
     />
@@ -108,7 +112,8 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
       data-slot="table-cell"
       className={cn(
         "cn-table-cell p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
-        className
+        className,
+        /* lyra */ "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0"
       )}
       {...props}
     />
@@ -122,7 +127,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("cn-table-caption mt-4 text-muted-foreground", className)}
+      className={cn("cn-table-caption mt-4 text-muted-foreground", className, /* lyra */ "text-muted-foreground mt-4 text-xs")}
       {...props}
     />
   )

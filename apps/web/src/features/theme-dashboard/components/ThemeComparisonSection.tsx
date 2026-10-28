@@ -245,7 +245,7 @@ export function ThemeComparisonSection({
                       </Button>
                     </div>
                   )}
-                  <Table className="[&_td]:py-0 [&_th]:h-8">
+                  <Table>
                     <TableCaption className="mt-2">
                       {showAll ? '全県' : '上位5県＋選択県'} ·
                       高い順（同値は同順位）
