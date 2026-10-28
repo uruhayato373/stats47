@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { DATASETS } from "../../../../config/datasets.mjs";
+import { DATASETS, datasetDir } from "../../../../config/datasets.mjs";
 import { patternToRegExp } from "../check-datasets.mjs";
 
 import {
@@ -60,9 +60,17 @@ test("keep=0 を拒否して全削除を防ぐ", () => {
   );
 });
 
+test("GSC の週次 snapshot はどの寿命 policy も消さない (長期の需要推移に使う)", () => {
+  const gsc = datasetDir("gsc.snapshots");
+  assert.deepEqual(
+    Object.entries(RETENTION_POLICIES).filter(([, p]) => p.directory === gsc).map(([name]) => name),
+    [],
+  );
+});
+
 test("ディレクトリ scope はディレクトリごと消し、存在しない scope は空扱い", () => {
   const root = mkdtempSync(join(tmpdir(), "stats47-state-retention-dir-"));
-  const directory = join(root, RETENTION_POLICIES["analytics-gsc"].directory);
+  const directory = join(root, RETENTION_POLICIES["analytics-ga4"].directory);
   mkdirSync(directory, { recursive: true });
   for (let week = 1; week <= 28; week++) {
     const dir = join(directory, `2026-W${String(week).padStart(2, "0")}`);
@@ -70,7 +78,7 @@ test("ディレクトリ scope はディレクトリごと消し、存在しな�
     writeFileSync(join(dir, "queries.csv"), "q");
   }
   writeFileSync(join(directory, "README.md"), "keep");
-  const result = pruneScope("analytics-gsc", { root });
+  const result = pruneScope("analytics-ga4", { root });
   assert.deepEqual(result.removed, ["2026-W01", "2026-W02"]);
   assert.equal(readdirSync(directory).length, 27);
   assert.ok(readdirSync(directory).includes("README.md"));
@@ -82,6 +90,7 @@ test("ディレクトリ scope はディレクトリごと消し、存在しな�
 // 載っている既存の直下ファイル (DATED_STATE_ARTIFACT)。新しい置き場を足すときはここか policy を更新する。
 const PERMANENT_DATED_DIRS = [
   "data/gsc/coverage-drilldown", // GSC UI の手動 export (再取得不能)
+  "data/gsc/snapshots", // GSC の週次生 CSV。長期の需要推移に使うため削除しない (2026-10-29 オーナー判断)
   "data/note/dashboard", // note ダッシュボードの baseline
   "data/themes/evidence", // テーマ品質の週次証拠 (theme-chart-audit が参照)
   ".claude/state/metrics/prompt-evals",
