@@ -157,6 +157,8 @@ export const PAGE_TEMPLATES: readonly PageTemplate[] = [
       { id: "municipalities", url: "/municipalities", why: "市区町村のハブ" },
       { id: "municipalities-theme", url: "/municipalities/themes/aging-society", why: "市区町村のテーマ (ヒストグラム)" },
       { id: "municipalities-ranking", url: "/municipalities/ranking/junior-high-school-count", why: "市区町村のランキング表" },
+      { id: "municipalities-pref-ranking", url: "/municipalities/ranking/manufacturing-shipment-amount/23000", why: "県名×市区町村ランキング (県内の地図・要約・47 県リンク。外れ値の大きい指標)" },
+      { id: "municipalities-pref-ranking-tokyo", url: "/municipalities/ranking/per-taxpayer-income/13000", why: "県名×市区町村ランキングの東京都 (特別区を含む・島嶼の地図範囲)" },
       { id: "japan", url: "/japan", why: "日本全体のハブ" },
       { id: "japan-theme", url: "/japan/education-culture", why: "日本全体のテーマ (時系列グラフ)" },
       { id: "products", url: "/products", why: "商品一覧" },

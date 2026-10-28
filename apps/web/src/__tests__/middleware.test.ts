@@ -305,6 +305,43 @@ describe('市区町村URLのknown集合と旧query移行', () => {
     );
   });
 
+  test('県名×市区町村ランキングを持つ指標の県だけの絞り込みは県別ページへ301し、UTMは残す', () => {
+    const response = middleware(
+      request('/municipalities/ranking/manufacturing-shipment-amount?pref=23000&utm_source=x')
+    );
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/municipalities/ranking/manufacturing-shipment-amount/23000?utm_source=x'
+    );
+  });
+
+  test('県名×市区町村ランキングのページ自体は通す (410 にしない)', () => {
+    const response = middleware(
+      request('/municipalities/ranking/manufacturing-shipment-amount/23000')
+    );
+    expect(response.status).not.toBe(410);
+    expect(response.status).not.toBe(301);
+  });
+
+  test.each([
+    '/municipalities/ranking/future-burden-ratio-city/23000', // 県別ページを作らない指標
+    '/municipalities/ranking/manufacturing-shipment-amount/99000', // 不正な県コード
+    '/municipalities/ranking/manufacturing-shipment-amount/23000/extra',
+  ])('%s は 410 (soft-404 にしない)', (pathname) => {
+    expect(middleware(request(pathname)).status).toBe(410);
+  });
+
+  test.each([
+    // 自治体名の検索・ページ送りを伴う絞り込みは全国版に残す
+    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&q=豊田',
+    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&page=2',
+    // 県別ページを作らない指標・不正な県コードは転送しない
+    '/municipalities/ranking/future-burden-ratio-city?pref=23000',
+    '/municipalities/ranking/manufacturing-shipment-amount?pref=99000',
+  ])('%s は県別ページへ転送しない', (pathname) => {
+    expect(middleware(request(pathname)).status).not.toBe(301);
+  });
+
   test('旧市区町村テーマは市区町村ハブへ恒久転送する', () => {
     const response = middleware(request('/themes/local-finance-city'));
     expect(response.status).toBe(301);

@@ -16,6 +16,7 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
+  isMunicipalityPrefectureRankingKey,
   scopeHrefsForMunicipalityRanking,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -40,6 +41,7 @@ import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-categ
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
+  MunicipalityPrefectureLinks,
   MunicipalityRankingCommentary,
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
@@ -414,6 +416,13 @@ export default async function MunicipalityRankingPage({
             </Link>
           )}
         </nav>
+      )}
+
+      {isMunicipalityPrefectureRankingKey(item.rankingKey) && (
+        <MunicipalityPrefectureLinks
+          rankingKey={item.rankingKey}
+          title={`都道府県別の${municipalityRankingDisplayTitle(item)}ランキング`}
+        />
       )}
 
       {commentary && <MunicipalityRankingCommentary content={commentary} />}

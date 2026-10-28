@@ -223,6 +223,7 @@ tooltip.style("left", ...).style("top", ...);  // ← useD3Tooltip を使う
 | ボーダー | `hsl(var(--border))` |
 | 地図背景（データなし） | `hsl(var(--muted))` |
 | 境界線（地図） | `hsl(var(--border))` |
+| 境界線（市区町村地図 `CityMapChart`） | `hsl(var(--background))`（地の色の線。`--border` の 0.5 では薄い塗りの上で市区町村界が見えなかった。2026-10-28） |
 | ホバー強調（地図） | `hsl(var(--foreground))` |
 | 道路・特殊用途 | `hsl(var(--warning))` |
 

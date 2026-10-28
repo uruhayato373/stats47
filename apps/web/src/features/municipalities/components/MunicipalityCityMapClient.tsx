@@ -23,6 +23,21 @@ const CityMapChart = dynamic(
   }
 );
 
+const MUNICIPALITY_MAP_CLASSES = 5;
+
+/**
+ * 県内の市区町村地図は、連続色の指標を分位 5 段階で塗る (2026-10-28)。
+ * 指標の設定 (都道府県地図と共有) は等間隔が多く、県内に飛び抜けた自治体があると他がすべて一番薄い段に入る
+ * (愛知県の製造品出荷額: 豊田市 20.5 兆円・2 位の名古屋市 3.5 兆円で、等間隔 5 段では 53 市町村が同じ色)。
+ * 分位は段の順番で色を付けるので、外れ値があっても下の段の色が薄まらない。発散色 (正負) は設定のまま使う。
+ */
+export function toMunicipalityMapConfig(
+  config: ReturnType<typeof rankingItemToMapConfig>
+): ReturnType<typeof rankingItemToMapConfig> {
+  if (config.colorSchemeType !== 'sequential') return config;
+  return { ...config, classification: { method: 'quantile', classes: MUNICIPALITY_MAP_CLASSES } };
+}
+
 export interface MunicipalityMapPoint {
   areaCode: string;
   areaName: string;
@@ -50,7 +65,7 @@ export function MunicipalityCityMapClient({
   fitExcludeCodes,
 }: Props) {
   const router = useRouter();
-  const colorConfig = rankingItemToMapConfig({ visualization });
+  const colorConfig = toMunicipalityMapConfig(rankingItemToMapConfig({ visualization }));
 
   return (
     <CityMapChart

@@ -350,6 +350,16 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 市区町村ページの見出しの指標・分野別の表は県データブックと同じ `area_databook`、特徴は `area_highlights` を使う (ページの path で県と分かれる)。
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
 >
+> **サイドバーの項目の変更 (2026-10-28・未デプロイ)**: 主要ナビを内容の種類 (ランキング・テーマ・地域・地域分析・統計ブログ) だけにし、
+> 「市区町村」「調査」「地域間比較」「すべてのテーマ」を外した (調査・地域間比較はフッターの `footer` で数える)。「都道府県」は「地域」に改名、
+> テーマは主要ナビの直後で 5 系統を既定で開き、カテゴリは既定で閉じた。`nav_surface` は `sidebar` / `sidebar-mobile` のままで、`nav_label` の値が変わる。
+> デプロイ前後のラベル別の件数を単純比較しない。
+>
+> **nav_surface の値追加 (2026-10-28・県名×市区町村ランキング、MUNI-PREF-RANKING-ROUTE-01、未デプロイ)**: 新設した
+> `/municipalities/ranking/<key>/<県コード>` への導線 (全国版の「都道府県別に見る」・県別ページ同士の 47 県リンク・県ページの
+> 「県内の市町村ランキング」) に `municipality_prefecture` を付けた (`MunicipalityPrefectureLinks` / 県ページの `RailLinksCard`)。
+> 送信は共通のクリック監視だけが行う。`nav_label` は県名または指標名。登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

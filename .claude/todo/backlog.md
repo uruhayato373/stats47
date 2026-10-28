@@ -24,12 +24,15 @@ updated: 2026-10-19
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
 
 ### [MUNI-PREF-RANKING-ROUTE-01] 「県名×市区町村ランキング」を検索に出せる独立ページとして作る (ルート・canonical・sitemap・内部リンク)
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト] [進行中]
 
 - **決定 (2026-10-28 オーナー)**: 作る。検索に出さなければ需要に届かない。
 - **親**: `MUNI-KOSODATE-RANKING-01` (打ち手台帳 EXP-008)。老後 (EXP-009)・移住 (EXP-010) も同じ型を使うので、子育てより先に作る。
 - **背景**: 市単位の検索は細く (推定 月 56「子育てしやすい市」)、「県名＋市区町村ランキング」の形の方が需要がある (推定 月 2,320「子育てしやすい街ランキング」。vault `memos/stats47_悩み起点リサーチ.md` §8)。いまの `/municipalities/ranking/[rankingKey]?pref=` は canonical を本体 (`hrefFor("municipality-ranking")`) に向けているので、県で絞った表示は検索に出ない。
-- **次 (実行順)**: ① URL を決める (案 `/municipalities/ranking/[rankingKey]/[prefCode]`。`?pref=` の旧 URL は新ページへ 301 か canonical を向ける) ② 薄いページの量産にしない条件を決める: 県内の自治体数の下限、県ごとに変わる本文 (県内 1 位・最下位・県平均と全国平均の差)、作る指標の範囲。最初は検索需要の確かな指標 (子育て系・`manufacturing-shipment-amount`・`elderly-population-ratio` など市区町村ページで表示のあるもの) に限る ③ title・description を「{県名}の市町村 {指標} ランキング」の形で作る ④ sitemap に載せ、本体ランキング・県ページ (`/areas/[areaCode]`)・市区町村テーマから内部リンクを張る (`nav_click` で計測) ⑤ 公開後 4 週、GSC のインデックス登録数と表示を記録し、広げる指標を決める。
+- **[進行中] 実装済み・未コミット (2026-10-28)**: 地域単位を内容の中の切り口とする設計を `docs/01_技術設計/03_情報設計.md`「地理スコープ」に書き (オーナー合意)、URL は `/municipalities/ranking/[rankingKey]/[prefCode]` に決めた。対象 10 指標 (`MUNICIPALITY_PREFECTURE_RANKING_KEYS`・全 47 県で県内 15 自治体以上を R2 で確認)・県内 10 自治体未満は作らない・本文は配信値のテンプレート (`buildMunicipalityPrefectureRankingSummary`)・`?pref=` だけの絞り込みは 301・不正な県別 URL は middleware で 410・sitemap 470 URL・全国版と県ページ (`/areas/[code]`) からのリンク (`nav_surface=municipality_prefecture`)。同じ変更でサイドバーから「市区町村」を外し「都道府県」を「地域」にし、`/ranking` に地域単位の切替を置いた。web の vitest 全件・tsc・content:check が通り、localhost (webpack の dev) で愛知・東京の表示、canonical、301/410 を確認した。
+- **本番の守り (2026-10-28 追加)**: デプロイ後スモークテスト (`.github/scripts/smoke-test-routes.sh`) に全国版の代表と県別ページ (STRICT = 200 以外は失敗) を、週次のページ品質監査 (`.claude/scripts/page-quality/templates.ts`) に愛知・東京の県別ページを足した。スモークテストは手元の bash 3.2 では動かず、構文検査だけ通した (本番は CI が実行する)。
+- **構造化データ**: 県別ページは `BreadcrumbList` だけで、全国版にある `Dataset` は付けていない。付けるかは `GSC-DATASET-NESTED-SCHEMA-01` の再検証結果を見て決める。
+- **次 (実行順)**: ① commit → develop push (デプロイは溜めて 1 回・オーナー確認) ② 公開後 4 週、GSC のインデックス登録数と表示を記録し、広げる指標を決める。市区町村テーマからのリンクはまだ張っていない (子育てのテーマを決める `MUNI-KOSODATE-PAGES-01` で張る)。
 - **検証**: `npm run content:check`、型と単体テスト、公開後の GSC 「ページ」レポート (登録数・除外理由)。
 - **完了条件**: 新しいルートが公開されて sitemap に載り、4 週のインデックス登録数と表示が記録されている。
 
@@ -283,6 +286,30 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [MUNI-TITLE-MAGNITUDE-01] 市区町村ランキングの title・説明文で、1 万〜10 万の値が「1万人」のように丸まって見える
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28 localhost)**: 北海道の出生数の県別ページの title が「1位 札幌市（1万人）」になる (実値 10,352 人)。共通の整形 `formatReadableMagnitude` (`packages/data-configs/src/unit/unit-display.ts`) が小数 1 桁で丸め、末尾の 0 を落とすため。全国版の title (`buildMunicipalityRankingMeta`) と県別ページ (`buildMunicipalityPrefectureRankingMeta`・要約文) が同じ整形を使う。
+- **次**: ① 万の位に切り替える下限を決める (案: 10 万未満は「10,352人」のように桁区切りで書く) ② 整形は単位の正典 (`.claude/rules/unit-semantics-standards.md`) の部品なので、変えるとほかのページの表示も変わる。影響するページを数えてから直すか、市区町村の title だけ別の整形にするかを決める ③ テストで「10,352人」を固定する。
+- **完了条件**: 1 万〜10 万の値が title・説明文で丸めずに読め、テストで固定されている。
+
+### [MUNI-STATIC-MAP-PILOT-01] 検索に出すページの地図を静的な画像にし、操作できる地図は noindex の別ページへ分ける試験
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **決定 (2026-10-28 オーナー合意)**: `docs/01_技術設計/03_情報設計.md`「静的な地図と操作できる地図」。検索に出すページは `packages/svg-builder` の choropleth で静的に描き、D3 の地図は「地図を操作する」で移る別ページ (noindex・sitemap 外) に置く。
+- **未確認**: 表示速度が良くなるか。過去に「LCP 要素を特定せずに直して効かなかった」例がある (memory `feedback_lcp_optimization`)。
+- **次 (実行順)**: ① 代表 3 URL (`/ranking/total-population`・`/municipalities/ranking/manufacturing-shipment-amount`・`/municipalities/ranking/manufacturing-shipment-amount/23000`) の PSI と LCP 要素を記録する ② 市区町村の全国地図 (1,741 区画) を静的 SVG にしたときの大きさを測る (ページの重さの予算 900KB) ③ 1 ページ種別で切り替え、前後の PSI を比べてから広げるか決める。
+- **停止条件**: LCP が地図でなく、静的化で LCP・TBT とも変わらないなら広げない。
+- **完了条件**: 試験した 1 ページ種別の前後の PSI と判断 (広げる・止める) がこのカードか improvement log に書かれている。
+
+### [MUNI-DESIGNATED-CITY-WARDS-01] 政令指定都市の行政区の値を「内訳」として出せる指標を調べ、表示を決める
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:データ]
+
+- **決定 (2026-10-28 オーナー合意)**: 順位の単位は基礎自治体で、政令指定都市は市全体の 1 行 (`docs/01_技術設計/03_情報設計.md`「政令指定都市の表示」)。行政区は順位を付けない内訳として、政令指定都市のページと県名 × 市区町村ランキングに添える。
+- **次 (実行順)**: ① 公開中の市区町村指標 (716) のうち、行政区の値を同じ表・同じ年で取れるものを e-Stat (社会・人口統計体系の行政区の地域コード) で数える ② 取れる指標で、政令指定都市のページに行政区の表を出す形を決める (行政区の地図は静的地図の試験 `MUNI-STATIC-MAP-PILOT-01` の後) ③ 行政区を他の自治体と同じ順位表に入れない検査を足す。
+- **禁止**: 行政区を市区町村ランキングの順位に混ぜない。行政区の個別ページを量産しない。
+- **完了条件**: 行政区の値を持つ指標の一覧と表示の形が決まり、1 指標で政令指定都市のページに内訳が出ている。
+
 ### [MUNI-KOSODATE-RANKING-01] 子育て世帯の住む市選びに向けて、子育て系の市区町村ランキングを5〜10ページ足し、8週で検索の反応を見る
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
@@ -407,6 +434,7 @@ updated: 2026-10-19
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
 
 - **証拠 (2026-10-27)**: `npm run dev:web` が「This build is using Turbopack, with a `webpack` config and no `turbopack` config」で終了する。`apps/web/scripts/dev-server.ts` の `bundlerArgs()` が既定で引数を付けないため。`--turbopack` を明示すると起動はするが、次に「Conflicting route and metadata at /sitemap.xml」で全ページ 500。どちらも 2026-10-26 の Next.js 16.4.3 更新 (`89ef74c19`) 以降。`WEB_DEV_BUNDLER=webpack` なら起動するが、8GB の Mac で数ページ開くとメモリ切れで落ちる。
+- **再現 (2026-10-28)**: 本体の作業ツリーで `npm install` (lock どおり Next.js 16.4.3) の直後に同じ ERROR で終了した。`WEB_DEV_BUNDLER=webpack` での起動と市区町村ランキング・県ページ・`/ranking` の表示は通った (数ページではメモリ切れなし)。`apps/web/next.config.ts` 末尾のコメント「警告は無害 (空の turbopack 設定では消えない)」は 16.4.3 では ERROR になるので実態と合わない。
 - **完了条件**: `npm run dev:web` (Turbopack) で /・/ranking/total-population・/sitemap.xml が 200。
 
 ### [MIGRATION-FLOW-TEST-POLICY-01] quality-gates の migration-flow がテスト実在と食い違う

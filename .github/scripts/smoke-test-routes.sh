@@ -73,6 +73,7 @@ URLS+=( "$(pick '/areas/[0-9]+$' || echo "${BASE_URL}/areas/13000")" )
 URLS+=( "$(pick '/areas/[0-9]+/cities/' || echo "${BASE_URL}/areas/14000/cities/14130")" )
 URLS+=( "$(pick '/blog/[a-z]' || echo "${BASE_URL}/blog/banana-consumption-quantity")" )
 URLS+=( "$(pick '/themes/[a-z]' || echo "${BASE_URL}/themes/aging-society")" )
+URLS+=( "$(pick '/municipalities/ranking/[a-z0-9-]+$' || echo "${BASE_URL}/municipalities/ranking/elderly-population-ratio")" )
 # /areas/<code>/<themeSlug> は sitemap に載らない (pick できない) ので直接指定する。
 # 47県 × 18テーマ = 846 ページを持つ独立した route テンプレートで、/areas/<code> とも
 # /themes/<slug> とも別コンポーネント構成 (2026-08-04 に PageShell + 左レールを新設した
@@ -96,6 +97,9 @@ STRICT_URLS=(
   "${BASE_URL}/geo/population-station-access"
   "${BASE_URL}/geo/population-public-facility-access"
   "${BASE_URL}/geo/population-low-elevation"
+  # 県名×市区町村ランキング (MUNI-PREF-RANKING-ROUTE-01)。2026-10-28 に旧 URL 構造の判定 (ranking + 5 桁コード → 410) が
+  # この route まで 410 にしていたのを localhost で見つけた。同じ取り違えを本番で捕まえるため STRICT に置く
+  "${BASE_URL}/municipalities/ranking/manufacturing-shipment-amount/23000"
 )
 
 # G6 (2026-07-11): 直近 push (≒ merge された PR) で追加された ranking キーを smoke 対象に追加。

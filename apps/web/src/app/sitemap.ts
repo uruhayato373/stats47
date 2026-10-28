@@ -17,6 +17,7 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
+  MUNICIPALITY_PREFECTURE_RANKING_KEYS,
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
 import { GIS_DATASETS, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
@@ -144,6 +145,16 @@ const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   })),
+  // 県名×市区町村ランキング (MUNI-PREF-RANKING-ROUTE-01)。対象の指標は全 47 県で県内の値が下限以上ある (選定時に確認)
+  ...[...MUNICIPALITY_PREFECTURE_RANKING_KEYS]
+    .filter((key) => KNOWN_MUNICIPALITY_RANKING_KEYS.has(key))
+    .flatMap((key) =>
+      PREFECTURE_AREA_CODES.map((prefCode) => ({
+        url: `${BASE_URL}${hrefFor('municipality-pref-ranking', { rankingKey: key, prefCode })}`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
+      }))
+    ),
 ];
 
 const AREA_PAGES: MetadataRoute.Sitemap = [

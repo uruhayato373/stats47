@@ -423,7 +423,10 @@ export type NavSurface =
   // 市区町村の回遊 (2026-10-21 値追加・MUNI-PAGE-QUALITY-01。登録済み dimension の値追加):
   // 市区町村ページ・市区町村ランキングの関連コンテンツ / 都道府県ランキングから同じ指標の市区町村ランキングへ
   | 'municipality_related'
-  | 'ranking_municipality';
+  | 'ranking_municipality'
+  // 「県名×市区町村ランキング」への導線 (全国版・県別ページ同士・県ページ。2026-10-28 値追加・MUNI-PREF-RANKING-ROUTE-01。
+  // 登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'municipality_prefecture';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。
