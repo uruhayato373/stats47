@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "high-school-teacher-annual-income",
+  "pair": "new-graduate-starting-salary-college-male",
+  "xKey": "high-school-teacher-annual-income",
+  "yKey": "new-graduate-starting-salary-college-male",
+  "pearsonR": 0.701773090352545,
+  "partialRPopulation": 0.5503861346876531,
+  "unit": "万円 × 千円",
+  "label": "高等学校教員の平均年収 と 新規学卒者初任給 の関係",
+  "source": "r2:app/correlation/by-ranking-key/high-school-teacher-annual-income.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug high-school-teacher-annual-income-vs-new-graduate-starting --base high-school-teacher-annual-income --pair new-graduate-starting-salary-college-male --data-name high-school-teacher-annual-income--new-graduate-starting-salary-college-male"
+}

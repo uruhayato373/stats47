@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "hobby-participation-rate-instrument",
+  "year": "2021",
+  "unit": "％",
+  "label": "楽器の演奏の行動者率",
+  "readerLabel": "楽器の演奏をした人の割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/hobby-participation-rate-instrument/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hobby-participation-rate-instrument-prefecture-gap --keys hobby-participation-rate-instrument --data-name hobby-participation-rate-instrument-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:32:22.748Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sports-participation-rate-softball",
+  "year": "2021",
+  "unit": "％",
+  "label": "ソフトボールの行動者率",
+  "readerLabel": "ソフトボールをした人の割合",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/sports-participation-rate-softball/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sports-participation-rate-softball-prefecture-gap --keys sports-participation-rate-softball --with-map",
+  "fetchedAt": "2026-10-28T12:30:48.221Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

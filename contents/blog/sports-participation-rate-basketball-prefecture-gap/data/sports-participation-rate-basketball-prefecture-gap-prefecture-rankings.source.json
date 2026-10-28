@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sports-participation-rate-basketball",
+  "year": "2021",
+  "unit": "％",
+  "label": "バスケットボールの行動者率",
+  "readerLabel": "バスケットボールをした人の割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sports-participation-rate-basketball/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sports-participation-rate-basketball-prefecture-gap --keys sports-participation-rate-basketball --data-name sports-participation-rate-basketball-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:52.971Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

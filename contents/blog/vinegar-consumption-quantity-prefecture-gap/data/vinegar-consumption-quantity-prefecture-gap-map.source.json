@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "vinegar-consumption-quantity",
+  "year": "2024",
+  "unit": "ml",
+  "label": "酢消費量",
+  "readerLabel": "酢消費量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/vinegar-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug vinegar-consumption-quantity-prefecture-gap --keys vinegar-consumption-quantity --with-map",
+  "fetchedAt": "2026-10-28T12:30:22.141Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

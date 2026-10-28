@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sole-proprietor-sales",
+  "year": "2025",
+  "unit": "万円",
+  "label": "個人企業の売上高",
+  "readerLabel": "個人企業の売上高",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sole-proprietor-sales/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sole-proprietor-sales-prefecture-gap --keys sole-proprietor-sales --data-name sole-proprietor-sales-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:29:50.800Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

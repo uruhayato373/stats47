@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "golf-course-public",
+  "year": "2021",
+  "unit": "施設",
+  "label": "ゴルフ場数（公共）",
+  "readerLabel": "ゴルフ場数（公共）",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/golf-course-public/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug golf-course-public-prefecture-gap --keys golf-course-public --with-map",
+  "fetchedAt": "2026-10-28T12:29:04.235Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

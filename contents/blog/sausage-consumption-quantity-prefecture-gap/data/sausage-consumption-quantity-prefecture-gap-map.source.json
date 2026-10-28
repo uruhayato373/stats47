@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sausage-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "ソーセージ消費量",
+  "readerLabel": "ソーセージ消費量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/sausage-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sausage-consumption-quantity-prefecture-gap --keys sausage-consumption-quantity --with-map",
+  "fetchedAt": "2026-10-28T12:30:03.548Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

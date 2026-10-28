@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "specific-health-checkup-participation-rate",
+  "pair": "taxpayer-ratio-per-pref-resident",
+  "xKey": "specific-health-checkup-participation-rate",
+  "yKey": "taxpayer-ratio-per-pref-resident",
+  "pearsonR": 0.7172712322913943,
+  "partialRPopulation": 0.6917839883944633,
+  "unit": "％ × ％",
+  "label": "特定健診受診率 と 納税義務者割合 の関係",
+  "source": "r2:app/correlation/by-ranking-key/specific-health-checkup-participation-rate.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug specific-health-checkup-participation-rate-vs-taxpayer --base specific-health-checkup-participation-rate --pair taxpayer-ratio-per-pref-resident --data-name specific-health-checkup-participation-rate--taxpayer-ratio-per-pref-resident"
+}

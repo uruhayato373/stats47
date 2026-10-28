@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "persimmon-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "柿消費支出額",
+  "readerLabel": "柿への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/persimmon-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug persimmon-consumption-expenditure-prefecture-gap --keys persimmon-consumption-expenditure --with-map",
+  "fetchedAt": "2026-10-28T12:30:07.283Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
