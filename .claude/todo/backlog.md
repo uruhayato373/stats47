@@ -333,6 +333,13 @@ updated: 2026-10-19
 - **禁止**: テストを消して速くしない。並列数を上げてメモリ上限の再起動を起こさない (2 並列は `config/local-resources.json` の予算)。
 - **完了条件**: 同じ Mac で全件の所要が測定前より短くなり、前後の所要と上位ファイルの一覧を本カードか PR に書いてある。
 
+### [BLOG-MUNI-LINK-LINT-01] ブログ本文の市区町村ランキングへのリンクが実在の検査に掛からない
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/internal-link-geo.test.mjs] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `BLOG-MUNI-SOURCE-LINK-01` で図の直下カードと構造検査が `/municipalities/ranking/<key>` (と `/<県コード>`) を受け付けるようにしたが、実在の検査 `.claude/scripts/lib/internal-link-lint.mjs` の `LINK_TYPES` は `/municipalities/` を見ない。存在しない key へのカードやテキストリンクは公開前に止まらない。カード (`RankingLinkCard`) は市区町村版で地図・上位 3 を出さない (`/api/ranking-card` が都道府県のデータしか読まない)。
+- **次**: ① `LINK_TYPES` に市区町村ランキングを足し、実在集合 (市区町村ランキングの key 一覧と県別ページの対象 `MUNICIPALITY_PREFECTURE_RANKING_KEYS`) で判定する ② 存在しない key・対象外の県別 URL で発火し、実在する URL で発火しないテストを足す。カードの地図・上位 3 は需要を見てから別に決める。
+- **完了条件**: 存在しない `/municipalities/ranking/<key>` が quality-gate で blocker になり、テストで両方向を固定している。
+
 ### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
 
@@ -423,6 +430,36 @@ updated: 2026-10-19
 - **証拠 (2026-10-28)**: `data/metrics/general-clinic-count-per-100k.ts` は SSDS `0000010209` `#I0910105` (人口10万人当たり) を取るが、title は「一般診療所数」・unit は「施設」で、`normalizationOptions` に「人口10万人あたり」(施設/10万人) がある。R2 の市区町村 values.json は最大が三島村 987.7 で、実数ではなく率の値。換算を選ぶと二重に割る (memory `feedback_ssds_denominator_evidence` と同じ型)。`general-hospital-count-per-100k` も同じ形かは未確認。
 - **次**: 2 指標の SSDS 項目名を e-Stat のメタで確かめ、title・unit を「人口10万人当たり」の形に直し、人口・面積の換算を外す。同じ形の SSDS `#` 項目を `validate:config` で検出できるか検討する。
 - **完了条件**: 2 指標の title・unit が値の意味と一致し、二重の換算を選べない。
+- **影響の追記 (2026-10-28)**: topic-queue の型B の件数×件数の除外 (`isPopulationCountMetric`・`topic-queue-spurious-core.mjs`) は unit と subtitle・title の「当たり」で判定するので、この 2 指標は率なのに件数と判定されうる。直せば除外の精度も上がる。
+
+### [BLOG-TOPIC-PAIR-SCALE-01] 型B の題材に残る「規模×規模」の組 (件数×金額の総額) を外す
+タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `BLOG-TOPIC-PAIR-PER-CAPITA-01` で件数×件数の組 (69 件・うちこの規則だけで外れた 16 件) は外したが、郵便局数×老人福祉費、コンビニ店舗数×歳入決算総額 (r=0.95) のように、金額で数える総額と件数の組が型B の pending に残る。人口の大きさだけで相関が出る点は同じ。
+- **次**: unit 正典 (`.claude/scripts/lib/unit-semantics.mjs` の `parseUnit`) で金額次元かつ分母なしの総額を「規模の指標」に含め、規模×規模の組を外す。外した件数を `correlationExclusions` に出す。家計調査 (世帯当たり) は含めない。
+- **停止条件**: 総額を含めると型B の pending が 10 件を切るなら、除外ではなく人口あたりの版の相関 snapshot を作る方を先に決める。
+- **完了条件**: 型B の pending に規模×規模の組が無く、テストで両方向を固定している。
+
+### [BLOG-CORRELATION-VALUE-MISMATCH-01] 公開済み 7 記事で、本文の相関係数が散布図の値と合わない
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: factual gate に相関係数の照合 (`checkCorrelationClaims`・warning) を足して公開済み 609 記事を R2 から走査したところ、相関係数を書く 91 本のうち 7 本で不一致。例 `engel-coefficient-vs-prefectural-income` は本文 0.03・0.57、散布図は 0.09 / -0.42。散布図の無い別の相関 (地域を絞った値・別指標) を語る文にも当たるので、すべてが誤りとは限らない。照合先の散布図が無い記事は 54 本。
+- **次**: ① 7 本を一覧にし、文ごとに「散布図の相関の誤り」か「別の相関」かを分ける ② 誤りは brushup で直す (critic PASS) ③ 新しい型B の記事で誤検出 0 を確かめてから、照合を blocker に上げるか決める。
+- **完了条件**: 7 本の分類が済み、誤りが直って公開され、blocker 化の判断がこのカードに書かれている。
+
+### [BLOG-STACKED-MOBILE-WEB-01] 積み上げ棒のスマホ用 SVG がサイトで使われない
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: svg-builder の積み上げ棒に `layout: "mobile"` (640 幅・最小 20px) を足し、`generate-article-charts` が `-mobile.svg` を作るようにした (旧 `BLOG-STACKED-BAR-LABEL-MOBILE-01`)。しかし `apps/web/src/features/blog/lib/responsive-chart.ts` の `RESPONSIVE_RANKING_SUFFIX` はランキングの接尾辞しか `-mobile.svg` に切り替えないので、積み上げ棒 (`-stacked`・`-breakdown`・`-composition`) はスマホでも横長のまま。公開済みの積み上げ棒 (約 4 枚) の作り直しと前後の見た目の比較もしていない。
+- **次**: ① 切り替えの対象に積み上げ棒の接尾辞を足し、`-mobile.svg` が無い記事は今どおり横長を出すことをテストで固定する ② 公開済みの積み上げ棒を作り直し、前後を比べてから R2 へ上げる (承認が要る)。
+- **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
+
+### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `safe-driving-5-features/aging-fatality-scatter` は source.json の `year` が 2023 だが、点と見出しは 2024 年の値 (図の年の取り直しの照合で発見)。古い図の一覧 (`build-stale-data-years.mjs`) は source.json の年を読むので、誤った年で判定される。
+- **次**: 散布図の点を R2 と照合して年を決める関数 (`lib/refresh-chart-year.mjs`) で公開済みの散布図を一括で調べ、source.json の年と食い違う図を一覧にして直す。
+- **完了条件**: 公開済みの散布図で source.json の年と点の年の食い違いが 0 件。
 
 ### [MUNI-WARD-GAP-DISPLAY-01] 東京の特別区に値が無い市区町村指標で、区の値を別の公的資料から足すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:データ]
@@ -465,6 +502,7 @@ updated: 2026-10-19
 - **次**: ① 万の位に切り替える下限を決める (案: 10 万未満は「10,352人」のように桁区切りで書く) ② 整形は単位の正典 (`.claude/rules/unit-semantics-standards.md`) の部品なので、変えるとほかのページの表示も変わる。影響するページを数えてから直すか、市区町村の title だけ別の整形にするかを決める ③ テストで「10,352人」を固定する。
 - **同じ整形の別の症状 (2026-10-28)**: 単位が「指数」の指標で「1位 武蔵野市（1.48指数）」「飛島村（2.1指数）」と単位名がそのまま付く。直すときに一緒に扱う。
 - **完了条件**: 1 万〜10 万の値が title・説明文で丸めずに読め、テストで固定されている。
+- **進捗 (2026-10-28)**: 県別ページ (`/municipalities/ranking/<key>/<県>`) の title・要約は develop の `formatMunicipalityValueText` で「10,352人」「1.48」(指数を付けない) になっており、ページ単位のテスト 2 件で固定した (共通の整形に戻すと落ちる)。**残り**: 全国版の `buildMunicipalityRankingMeta` (`municipality-page-meta.ts`) は `formatReadableMagnitude` のままで「1万人」「1.48指数」が出る。`MUNI-PAGE-SEO-01` の 2026-11-21 の判定の後に同じ整形へ替える (1 行)。
 
 ### [MUNI-STATIC-MAP-PILOT-01] 検索に出すページの地図を静的な画像にし、操作できる地図は noindex の別ページへ分ける試験
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
@@ -1632,6 +1670,7 @@ updated: 2026-10-19
 - **事象**: リンク監査 #752 (2026-10-03) でブログ本文に HTTP 410 のリンクが 5 件 (`/ranking/elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`・`prefectural-income-per-capita`・`tourism-resource-count`、各 1 記事)。
 - **手順**: #752 本文の是正手順どおり、`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (無ければ `to: null`) を足し、`fix-broken-internal-links.mjs --apply` で置き換えて公開する。
 - **完了条件**: 週次監査の internal-links で 410 が 0 件 (2026-10-26 から Issue は作らないので #752 は手で閉じる)。
+- **2026-10-28 訂正と準備**: 10-23 の「本文にもうリンクが無い」は誤りで、R2 の article.md と本番 HTML の 3 記事とも 410 のリンクが残っていた (curl で確認)。置換表には 3 件とも置換先 (`ratio-65-plus`・`foreign-resident-count-per-100k`・`population-density-per-km2-inhabitable-area`、本番 200) が既にあった。`fix-broken-internal-links.mjs` が 7 月の本文の控え (`.local/blog-linkfix/_src`) を読み戻していて、2025 年国勢調査で改稿した記事を 2020 年版に戻す修正版を作ることが分かったので、毎回 R2 を読むように直した。修正版 (差分はリンク先 3 行だけ) は `.local/blog-linkfix/out/`。**残り**: `push-article-md-r2.ts --apply --src .local/blog-linkfix/out` で R2 へ上げ、再デプロイ後に週次監査で 410 が 0 件 (承認が要る)。
 - **2026-10-23 確認**: #752 (10-17) の 410 は 3 件 (`elderly-population-ratio`・`foreign-population-per-100k`・`population-density-habitable`、いずれも市区町村専用の指標) に減っていて、参照元の 3 記事 (R2 の article.md と本番 HTML) にはもうリンクが無い。次の週次リンク監査 (日曜) で #752 が閉じるかを見る。
 - **2026-10-26 観測**: 週次監査 internal-links のブログ本文の監査でも 410 は同じ 3 件 (参照各 1 記事)。結果は `data/blog/internal-link-audit.json`。
 - **統合 (2026-10-26 オーナー判断): `BLOG-LINKROT-01`** 内部リンク是正後の coverage とブログ→ranking 回遊を判定する (SITE-LINKROT-01 統合済み)
@@ -2154,6 +2193,7 @@ updated: 2026-10-19
 - **追記 (2026-10-07)**: vacant-housing-vs-aging の writer によると、R2 の `app/correlation/by-ranking-key` に vacant-housing-rate と ratio-65-plus の組が無く、散布図を相関 snapshot から復元できなかった。writer はランキングの値から 47 点を結んで作り直し、人口規模を統制した偏相関 (旧版の 0.555) は再計算できないので記事から外した。
 - **追記 (2026-10-07、同記事の critic)**: 最新年が指標ごとに違う組 (空き家率 2023 年 × 65 歳以上人口割合 2025 年) を相関 snapshot に持たせるか、記事ごとにランキングの値から作り直す運用を規約にするかを決める。
 - **完了条件**: 散布図を含む記事で取り直しが手作業なしに終わることを、テストで固定している。
+- **進捗 (2026-10-28・`15bbd9f9d` 相当の統合コミット)**: `refresh-article-data-years.mjs` が scatter / derived-scatter / calculated / ranking-join / composite の散布図を、点と R2 の値の一致 (図の桁で丸めて 95% 以上) で軸の指標と年を決め、点・見出しの年・pearsonR・除外県を作り直すようにした (`lib/refresh-chart-year.mjs`・テスト 25 件、しきい値を 0 にすると 2 件落ちる)。共通の年にそろえると古い年へ戻る軸があるときは、軸ごとの最新年を使う。**残り**: 同じ指標の 2 年比較 (school-teacher-annual-income-prefecture-gap) と、点が R2 と一致しない calculated (manufacturing) は手作業のまま。formula の文章に残る古い年は手作業の一覧に出る。最新年が違う組を相関 snapshot に持たせるかは未決。
 
 ### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
@@ -4011,6 +4051,7 @@ updated: 2026-10-19
 - **証拠**: 2026-10-23 公開の `municipality-population-change-census-2025` で、市区町村の図の `<source-link>` は `/ranking/<key>` (都道府県版) にしか張れず、市区町村ランキング `/municipalities/ranking/<key>` へは「あわせて見る」のテキストリンクで代用した。カードの部品 (RankingLinkCard) が `/ranking/` だけを受け付け、構造の検査 (`article-structure-lint.mjs`) も `/municipalities/ranking/` を数えない。
 - **次**: カードの部品と検査の両方で `/municipalities/ranking/<key>` を受け付けるか決める。受け付けるなら同じ記事のカードを市区町村版へ差し替える。
 - **完了条件**: 市区町村の図の直下に市区町村ランキングのカードを置いた記事が quality-gate を通り、本番でカードが市区町村ランキングへ移る。
+- **進捗 (2026-10-28)**: 受け付けると決め、構造検査 (`article-structure-lint.mjs`) が `/municipalities/ranking/<key>` と `/<県コード>` を図のカードとして数え (重複は版ごと)、`RankingLinkCard` は市区町村の href で都道府県の上位 3 API を呼ばずリンクだけを出すようにした (テストで固定・apps/web vitest 全件 pass)。**残り**: `municipality-population-change-census-2025` のカードを市区町村版へ差し替えて公開し、本番で確かめる (公開は承認が要る)。存在しないキーの検出は `BLOG-MUNI-LINK-LINT-01`。
 
 ### [MUNI-AI-CONTENT-EXPAND-01] 市区町村ランキングの解説を需要のある指標へ広げ、監査の穴を 2 つ塞ぐ
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-22] [領域:データ]
