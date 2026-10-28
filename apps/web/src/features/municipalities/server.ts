@@ -6,4 +6,4 @@ export {
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
 } from './services/read-municipality-ranking';
-export { getSpecialWardCodes } from './services/special-ward-codes';
+export { getComparableMunicipalityCodes, getSpecialWardCodes } from './services/special-ward-codes';
