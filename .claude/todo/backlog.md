@@ -256,6 +256,19 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-REFERENCE-PARTS-REST-01] 見本合わせの残りの部品 (リンクの行・開閉・空の状態・記事本文の見出し) と develop への取り込み
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 に見本 (shadcndashboard) を部品の種類ごとに実測して仕様にし (`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)、パネル・線の格子・数値タイル・ボタンを済ませた。作業はブランチ `feature/template-base-ui` (worktree `.claude/worktrees/template-base-ui`) にあり、origin へ push 済み・**develop には未取り込み** (最後に develop へ入れたのは 18d122f7b)。
+- **次 (実行順)**:
+  1. ブランチを develop へ入れる (develop へ push はオーナーの確認後。入れる前に `npm run test:run -w apps/web` と本番ビルドの `npm run ui-theme:line-grid -- <baseUrl>` を通す)
+  2. リンクの行 (`RailNavRow`・`RailLinkList`・`ContentNavigation`): 14px・余白 8px・最小の高さ 40px の 1 種類
+  3. 開閉 (`FaqSection`・`ContentDisclosure`): `details` は残し (閉じた本文を SSR に残すため)、質問 14px・500、上下 10px、項目の間に線
+  4. 空の状態 (`ChartEmptyState`・`ChartErrorState`): 余白 24px・間隔 16px・破線の枠
+  5. 記事本文 (`MDContent`・`ArticleShell`): 本文 16px は残し、見出しを 600 にそろえる。利用規約などのパネル内の大きな見出しと下線もここで直す
+- **進め方**: 部品の種類ごとに、見本の値を部品へ入れる → ページ側の上書きを止める検査を `design-system:check` に足す → 本番ビルドで `scripts/ui-theme/measure-design-reference.mjs` と `compare-design-slots.mjs` で測り比べる → 仕様の表の行を「済」にする。
+- **完了条件**: 仕様の表の上記 4 行が「済」になり、各部品に上書きを止める検査がある。ブランチが develop に入っている。
+
 ### [UI-PARTS-UNIFY-ADMIN-REMOTION-01] 管理画面と動画アプリを公開サイトと同じ部品にそろえる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
