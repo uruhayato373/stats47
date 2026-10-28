@@ -113,5 +113,14 @@ describe("blog critic", () => {
     expect(decideBlogCriticVerdict(`${head}- [major] 図の言い換え\n- [minor] 重複\n`)).toBe("PASS");
     expect(decideBlogCriticVerdict(`${head.replace("REVISE", "PASS")}- [blocker] 順位の誤り\n`)).toBe("REVISE");
     expect(decideBlogCriticVerdict("PASS です")).toBeNull();
+    expect(decideBlogCriticVerdict(`${head}- [BLOCK][型:region] 山梨は西日本ではない\n`)).toBe("REVISE");
+    expect(decideBlogCriticVerdict(`${head}- [major][型:structure] 重複\n`)).toBe("PASS");
+  });
+
+  it("型の語彙を渡すと指摘に [型:<key>] を付けさせる", () => {
+    const prompt = buildBlogCriticPrompt("本文", [{ key: "region", label: "地域のくくり" }]);
+    expect(prompt).toContain("[型:<型>]");
+    expect(prompt).toContain("region (地域のくくり)");
+    expect(buildBlogCriticPrompt("本文")).not.toContain("[型:");
   });
 });

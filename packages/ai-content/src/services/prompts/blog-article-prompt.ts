@@ -242,7 +242,19 @@ function titleSeedSection(
  * 機械で測れること (文字数・callout 数・リンク数) は critic に判定させません。それは
  * quality-gate が既に握っており、二重に判定させると critic の注意が意味の審査から逸れます。
  */
-export function buildBlogCriticPrompt(articleMarkdown: string): string {
+export function buildBlogCriticPrompt(
+  articleMarkdown: string,
+  findingTypes: readonly { key: string; label: string }[] = [],
+): string {
+  // 指摘の型 (.claude/config/critic-finding-types.json) を付けさせると、critic-findings 台帳が型ごとに数えて
+  // 繰り返す誤りを規約や gate へ格上げできる。型が無い指摘は集計から外れる。
+  const typeLine =
+    findingTypes.length > 0
+      ? `\n各指摘には型を 1 つ付けます。型は次から選びます: ${findingTypes
+          .map((t) => `${t.key} (${t.label})`)
+          .join(" / ")}\n`
+      : "";
+  const findingFormat = findingTypes.length > 0 ? "- [blocker|major|minor][型:<型>]" : "- [blocker|major|minor]";
   return `あなたは統計記事の編集者です。読者にとっての価値だけを審査してください。
 文字数・見出し数・リンク数は別の仕組みが検査済みなので、数えないでください。
 
@@ -289,12 +301,12 @@ date: <今日の日付 YYYY-MM-DD 形式>
 <読者価値の総括を 3〜5 文。何が良く、何が足りないかを具体的に書きます>
 
 ## 指摘
-- [blocker|major|minor] <具体的な箇所と、どう直すかの提案>
+${findingFormat} <具体的な箇所と、どう直すかの提案>
 
 ## 判定理由
 <PASS か REVISE かの根拠を 2〜3 文>
 
-blocker が 1 件でもあれば verdict は REVISE、blocker が無ければ major や minor が残っていても PASS です。
+${typeLine}blocker が 1 件でもあれば verdict は REVISE、blocker が無ければ major や minor が残っていても PASS です。
 評価サマリと判定理由は合わせて 200 文字以上書いてください。
 
 # 審査対象の記事
@@ -307,7 +319,8 @@ ${articleMarkdown}`;
  * (blog-critic agent と同じ「BLOCK 0 件なら PASS」)。評価サマリも指摘も無い出力は形式崩れとして null。
  */
 export function decideBlogCriticVerdict(review: string): "PASS" | "REVISE" | null {
-  const findings = review.match(/^- \[(blocker|major|minor)\]/gm) ?? [];
+  // blog-critic の書式 ([BLOCK]・大文字) と headless の書式 ([blocker]) の両方を読む
+  const findings = review.match(/^\s*[-*]\s*\[(block|blocker|major|minor)\]/gim) ?? [];
   if (findings.length === 0 && !/^## 評価サマリ/m.test(review)) return null;
-  return findings.some((f) => f.includes("[blocker]")) ? "REVISE" : "PASS";
+  return findings.some((f) => /\[block/i.test(f)) ? "REVISE" : "PASS";
 }
