@@ -107,7 +107,7 @@ export function GeoLandslideSummary({
                     {onSelectArea && r.areaCode !== 'all' ? (
                       <Button
                         variant="link"
-                        className="p-0"
+                        className="p-0!"
                         onClick={() => onSelectArea(r.areaCode, r.areaName)}
                       >
                         {r.areaName}

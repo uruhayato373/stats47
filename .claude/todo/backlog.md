@@ -256,6 +256,27 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: ルートの `package.json` は `tsx` を devDependencies に持たないのに、`ui-theme:lyra`・`ui-theme:lyra:test`・`page-quality:test` が `node --import tsx` で動く (workspace からの巻き上げで偶然解決)。`apps/web` の `design-system:check` は `--experimental-strip-types` を付けて `.ts` を読む。`engines` は `"node": ">=22"` だけで、`.nvmrc` の版と型の除去が既定で有効な版 (22.18 以降) の関係が書かれていない。
+- **次**: ルートの devDependencies に `tsx` を足して lockfile を更新する。`engines` を `.nvmrc` と合わせる (22.14 を支える必要があるかは会社の Windows PC の版で決める)。
+- **完了条件**: ルートの `package.json` に `tsx` があり、`npm run ui-theme:lyra:test` と `npm run design-system:check -w apps/web` が `.nvmrc` の版で通る。
+
+### [DESIGN-CHECK-CLASSNAME-EXPR-01] design-system:check の上書き禁止の規則が、cn() やテンプレート文字列で書いた className を見ない
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `panel-no-text-size-override`・`link-row-no-size-override`・`disclosure-no-look-override`・`empty-state-no-look-override` は `className="…"` と `className={"…"}` だけを読む。`className={cn(…)}` やテンプレート文字列で同じ上書きを書くと素通りする。`lyra-dead-caller-class` も別ファイルの定数 (`*.palette.ts`) と `contentClassName` など className 以外の属性を追わない。部分的な上書き (`p-0` が lyra の `px-2.5` と並んで残る) も数えない (`GeoLandslideSummary` で実例。同日に `p-0!` へ直した)。
+- **次**: `cn(` の引数の文字列リテラルとテンプレートの固定部分も読む共通の取り出し関数を `check-design-system.mjs` に作り、上の規則で共有する。
+- **完了条件**: 各規則に `cn(…)` で書いた上書きを 1 件入れると落ちる。既存の違反は 0 件か理由付きで残す。
+
+### [STATIC-PAGE-BODY-TEXT-SIZE-01] プライバシーポリシーと運営者情報の本文が 12px から始まり、パネル本文 14px の仕様と合わない
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `apps/web/src/app/privacy/page.tsx`・`about/page.tsx` の本文は `TEXT_STYLE` (`text-xs md:text-sm`) で、スマホ幅では 12px。`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」のパネルの中の文字は 14px。
+- **次**: `TEXT_STYLE` を消し、パネルの既定 (14px) に任せる。利用規約も同じ書き方をしていないか確かめる。
+- **完了条件**: 3 ページの本文が 390px と 1440px で 14px (描いた画面で測る)。
+
 ### [UI-REFERENCE-PARTS-REST-01] 見本合わせの残りの部品 (リンクの行・開閉・空の状態・記事本文の見出し) と develop への取り込み
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
 
