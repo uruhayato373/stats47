@@ -4114,6 +4114,14 @@
       "published": false
     },
     {
+      "id": "ranking:damaged-vacant-housing-ratio",
+      "kind": "ranking",
+      "key": "damaged-vacant-housing-ratio",
+      "title": "腐朽・破損のある空き家の割合",
+      "href": "/ranking/damaged-vacant-housing-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:day-time-population",
       "kind": "ranking",
       "key": "day-time-population",
@@ -5394,6 +5402,14 @@
       "published": true
     },
     {
+      "id": "ranking:elderly-day-service-within-500m-household-ratio",
+      "kind": "ranking",
+      "key": "elderly-day-service-within-500m-household-ratio",
+      "title": "老人デイサービスセンターまで500m未満の世帯の割合",
+      "href": "/ranking/elderly-day-service-within-500m-household-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:elderly-equipment-dwellings",
       "kind": "ranking",
       "key": "elderly-equipment-dwellings",
@@ -5696,6 +5712,14 @@
       "title": "小学校教員割合",
       "href": "/ranking/elementary-school-teachers-ratio-female",
       "published": true
+    },
+    {
+      "id": "ranking:elementary-school-within-1km-household-ratio",
+      "kind": "ranking",
+      "key": "elementary-school-within-1km-household-ratio",
+      "title": "小学校まで1km未満の世帯の割合",
+      "href": "/ranking/elementary-school-within-1km-household-ratio",
+      "published": false
     },
     {
       "id": "ranking:elementary-tutoring-consumption-expenditure",
@@ -6184,6 +6208,14 @@
       "title": "従業者5～9人の事業所割合",
       "href": "/ranking/establishment-ratio-5-9-employees-private",
       "published": true
+    },
+    {
+      "id": "ranking:evacuation-site-within-500m-household-ratio",
+      "kind": "ranking",
+      "key": "evacuation-site-within-500m-household-ratio",
+      "title": "緊急避難場所まで500m未満の世帯の割合",
+      "href": "/ranking/evacuation-site-within-500m-household-ratio",
+      "published": false
     },
     {
       "id": "ranking:exclusive-industrial-district-area",
@@ -10778,6 +10810,14 @@
       "published": true
     },
     {
+      "id": "ranking:junior-high-school-within-1km-household-ratio",
+      "kind": "ranking",
+      "key": "junior-high-school-within-1km-household-ratio",
+      "title": "中学校まで1km未満の世帯の割合",
+      "href": "/ranking/junior-high-school-within-1km-household-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:junior-high-tutoring-consumption-expenditure",
       "kind": "ranking",
       "key": "junior-high-tutoring-consumption-expenditure",
@@ -12271,6 +12311,14 @@
       "key": "median-age",
       "title": "年齢中位数",
       "href": "/ranking/median-age",
+      "published": false
+    },
+    {
+      "id": "ranking:medical-facility-within-500m-household-ratio",
+      "kind": "ranking",
+      "key": "medical-facility-within-500m-household-ratio",
+      "title": "医療機関まで500m未満の世帯の割合",
+      "href": "/ranking/medical-facility-within-500m-household-ratio",
       "published": false
     },
     {
@@ -14218,6 +14266,14 @@
       "published": true
     },
     {
+      "id": "ranking:nursery-within-500m-young-child-household-ratio",
+      "kind": "ranking",
+      "key": "nursery-within-500m-young-child-household-ratio",
+      "title": "保育所まで500m未満の子育て世帯の割合",
+      "href": "/ranking/nursery-within-500m-young-child-household-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:nurses-general-hospital-per-100beds",
       "kind": "ranking",
       "key": "nurses-general-hospital-per-100beds",
@@ -15736,6 +15792,14 @@
       "title": "紙おむつ消費支出額",
       "href": "/ranking/paper-diapers-consumption-expenditure",
       "published": true
+    },
+    {
+      "id": "ranking:park-within-500m-household-ratio",
+      "kind": "ranking",
+      "key": "park-within-500m-household-ratio",
+      "title": "公園まで500m未満の世帯の割合",
+      "href": "/ranking/park-within-500m-household-ratio",
+      "published": false
     },
     {
       "id": "ranking:part-time-employment-rate-regular",
@@ -17466,6 +17530,14 @@
       "published": false
     },
     {
+      "id": "ranking:post-office-bank-within-500m-household-ratio",
+      "kind": "ranking",
+      "key": "post-office-bank-within-500m-household-ratio",
+      "title": "郵便局・銀行まで500m未満の世帯の割合",
+      "href": "/ranking/post-office-bank-within-500m-household-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:post-office-count",
       "kind": "ranking",
       "key": "post-office-count",
@@ -18832,6 +18904,14 @@
       "title": "公立学校の廃校発生延べ数",
       "href": "/ranking/public-school-closures-cumulative",
       "published": true
+    },
+    {
+      "id": "ranking:public-sewer-housing-ratio",
+      "kind": "ranking",
+      "key": "public-sewer-housing-ratio",
+      "title": "公共下水道のある住宅の割合",
+      "href": "/ranking/public-sewer-housing-ratio",
+      "published": false
     },
     {
       "id": "ranking:public-swimming-pool-count-per-million",
@@ -21858,6 +21938,14 @@
       "published": false
     },
     {
+      "id": "ranking:station-within-1km-household-ratio",
+      "kind": "ranking",
+      "key": "station-within-1km-household-ratio",
+      "title": "駅まで1km未満の世帯の割合",
+      "href": "/ranking/station-within-1km-household-ratio",
+      "published": false
+    },
+    {
       "id": "ranking:statistical-discrepancy-nominal-h27",
       "kind": "ranking",
       "key": "statistical-discrepancy-nominal-h27",
@@ -24240,6 +24328,22 @@
       "title": "空き家率",
       "href": "/ranking/vacant-housing-rate",
       "published": true
+    },
+    {
+      "id": "ranking:vacant-housing-rate-excluding-rental-sale-secondary",
+      "kind": "ranking",
+      "key": "vacant-housing-rate-excluding-rental-sale-secondary",
+      "title": "賃貸・売却用及び二次的住宅を除く空き家率",
+      "href": "/ranking/vacant-housing-rate-excluding-rental-sale-secondary",
+      "published": false
+    },
+    {
+      "id": "ranking:vacant-housing-rate-for-rent",
+      "kind": "ranking",
+      "key": "vacant-housing-rate-for-rent",
+      "title": "賃貸用の空き家率",
+      "href": "/ranking/vacant-housing-rate-for-rent",
+      "published": false
     },
     {
       "id": "ranking:vacant-housing-ratio",

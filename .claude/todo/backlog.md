@@ -42,8 +42,25 @@ updated: 2026-10-19
 - **親**: `MUNI-KOSODATE-RANKING-01` (打ち手台帳 EXP-008)。
 - **既にある市区町村指標 (data/municipalities/wp0-inventory.json)**: `young-population-ratio` (15 歳未満人口割合)・`births`・`elementary-school-children-count`・`elementary-school-count`・`integrated-kindergarten-enrollment`・`nuclear-family-households-ratio`・`general-clinic-count-per-100k`・`general-hospital-count-per-100k`・`movers-in` / `movers-out`。
 - **足りない指標の取得元候補 (要確認)**: 待機児童数はこども家庭庁「保育所等関連状況取りまとめ」(市区町村別の表)。こども医療費助成の対象年齢は各都道府県・市の公表で、全国一覧の公的な表があるかを確かめる。小児科のある医療機関数は厚生労働省の医療施設調査。
-- **次**: ① 指標ごとに最新年・欠けている自治体・単位を確かめる ② 足りない指標は取得元・年次・更新頻度・取り込み方 (cron で取れるか) を決めて、取り込むものを `MUNI-RANKING-EXPANSION-01` の手順で足す ③ 子育ての観点で 5〜10 指標のセットを決め、親カードに書く。
-- **完了条件**: 指標のセットと各指標の最新年が決まり、足りない指標が取り込まれるか見送り理由が書かれている。
+- **済み (2026-10-28) 公開中の候補の実測** (R2 `app/municipalities/ranking/<key>/values.json`。全国の地域数は 1,741 = 市区町村 1,718 + 東京 23 区):
+  | key | 最新年 | 単位 | 値のある地域 | 0 の地域 | 判断 |
+  |---|---|---|---|---|---|
+  | `young-population-ratio` | 2025 | ％ | 1,741 | 0 | 採る |
+  | `births` | 2023 | 人 | 1,741 | 8 | 採る |
+  | `nursery-facility-count` | 2023 | 所 | 1,741 | 170 | 採る |
+  | `elementary-school-children-count` | 2024年度 | 人 | 1,741 | 42 | 採る |
+  | `child-welfare-expense-municipal` | 2022年度 | 千円 | 1,741 | 0 | 採る (総額。子ども 1 人当たりは未作成) |
+  | `nuclear-family-households-ratio` | 2020 | ％ | 1,740 | 0 | 採る |
+  | `nursery-enrolled-children` | 2017 | 人 | 1,741 | 61 | 外す (8 年前で古い) |
+  | `integrated-ece-center-enrolled-children` | 2017 | 人 | 714 | 0 | 外す (古く、半数に値が無い) |
+  | `kindergarten-count-city` | 2024年度 | 園 | 1,741 | 615 | 外す (0 が 35%) |
+  | `general-clinic-count-per-100k` | 2020年度 | 施設 | 1,740 | 3 | 外す (小児科ではない。単位が「施設」で人口当たりの表記と合わない → 起票候補) |
+- **済み (2026-10-28) 待機児童 → 取り込む (次)**: こども家庭庁「保育所等関連状況取りまとめ（令和7年4月1日）」の参考 Excel「定員・申込者の状況」(`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1aa96453/20250828_policies_hoiku_torimatome_r7_04.xlsx`、シート「申込者の状況」、合計の「申込者数」列と「待機児童」列) に全 1,741 市区町村の行がある。待機児童のいる自治体は 211、合計 2,254 人で、本文の公表値と一致した。地域コードは無く、県名＋市区町村名で結ぶ (同じ組の重複 0 件を確認)。e-Stat に無いので `fetcherKey: "manual"` と provenance 9 点セット (`.claude/rules/data-provenance-standards.md`) が要る。毎年 8 月末の公表で、ファイルの URL が年ごとに変わるため cron には向かず、年 1 回の手動取り込みにする。順位は「待機児童率 (待機児童 ÷ 申込者)」を 0 を除いて付け (211 自治体)、0 の自治体数を注記に書く。
+- **済み (2026-10-28) こども医療費助成 → ランキングとしては見送る**: こども家庭庁「こども医療費に対する助成の実施状況調査」(令和7年4月1日時点) の別紙3 (`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/6a9b8926-411c-4044-81aa-d8c26b21aaf5/12ae0d40/20251224policies-boshihoken-kodomoiryouhityousa-r7-03.pdf`、32 ページ) に全 1,741 市区町村の対象年齢・所得制限・一部自己負担がある。ただし通院の対象年齢は「18歳年度末」が 1,576 (90.5%) で、順位がほぼ同値になり比較の役に立たない。PDF だけで地域コードも無い。近隣市の比較ページを作るとき (`MUNI-KOSODATE-PAGES-01` の判定後) に属性として載せる候補に留める。
+- **済み (2026-10-28) 新しく作った子育て向けの指標** (`MUNI-RANKING-EXPANSION-01` の住宅・土地統計調査分。R2 取り込みは承認待ち): `nursery-within-500m-young-child-household-ratio` (保育所まで 500m 未満の子育て世帯の割合・1,178 地域) と `elementary-school-within-1km-household-ratio` (小学校まで 1km 未満の世帯の割合・1,235 地域)。
+- **決めたセット (9)**: `young-population-ratio`・`births`・`nursery-facility-count`・`elementary-school-children-count`・`child-welfare-expense-municipal`・`nuclear-family-households-ratio`・`nursery-within-500m-young-child-household-ratio` (承認待ち)・`elementary-school-within-1km-household-ratio` (承認待ち)・待機児童率 (未作成)。小児科のある医療機関数は医療施設調査の市区町村表が 2019 年で止まっていて (カタログ 0003421874 等)、今回は入れない。
+- **次**: ① 待機児童率の metric (manual・provenance 付き) と取り込みスクリプトを作る ② 承認待ちの 2 指標が取り込まれたら公開へ切り替える (`MUNI-RANKING-EXPANSION-01`) ③ `MUNI-KOSODATE-PAGES-01` で公開と内部リンク。
+- **完了条件**: 指標のセットと各指標の最新年が決まり、足りない指標が取り込まれるか見送り理由が書かれている。→ セット・最新年・見送り理由は済み。残りは待機児童率の取り込み。
 
 ### [MUNI-DATA-LICENSE-CHECK-01] 市区町村の加工済みデータを売る前に、政府統計・国土数値情報の販売条件と表記を確かめる
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:商品]
@@ -328,8 +345,17 @@ updated: 2026-10-19
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
 
 - **証拠 (2026-10-28)**: `<県>_city_dc.topojson` は 23 区を特別区部 13100 の 1 つにまとめる (東京都で形 41・分割版は 63)。県内の市区町村地図とテーマのドリルダウンは `fetchMunicipalityTopologyForWardMode` へ移した (`MUNI-DESIGNATED-CITY-WARDS-01`) が、次の 2 か所が今も読む: ① 移動フローの地図の中継 `apps/web/src/app/api/mf-topo/[code]/route.ts` (読み手は `features/migration-flow/lib/load-data.ts`・`features/station-passengers/lib/load-data.ts`) ② Remotion の人口コロプレス `apps/remotion/src/features/population-choropleth/usePopulationData.ts` (東京 13・大阪 27)。② の値のファイル `blog/population-choropleth/data/population-ratio-tokyo.json` は R2 に無かった (空の応答)。
-- **次**: ① 各読み手の値が 23 区ごとか特別区部 1 つかを確かめる (値が特別区部 1 つなら今の地図のままで正しい) ② 区ごとなら `fetchMunicipalityTopologyForWardMode` (サーバー) か、分割版 + `deriveWardModeTopology` (Remotion) へ移す ③ 読み手が 0 になったら `_city_dc` の削除を承認制で行う (`.claude/rules/r2-storage-design.md`「市区町村の境界」)。
+- **済み (2026-10-28)**: ① 移動フローの値 (R2 `app/migration-flow/municipalities/<県>.json`) は特別区部 13100 と 23 区、政令市の市全体 (14100・27100) と行政区の両方の行を持つ。形の `N03_007` と値の `code` で結ぶので、`/api/mf-topo/<県>` を `fetchMunicipalityTopologyForWardMode(code, "merged")` に移した。実測で東京 63 の形が値と結び付き (値の無い形は所属未定地 13000 だけ。統合版では 41 で 23 区が 1 色)、神奈川 33・大阪 43 は全て結び付く。② Remotion の人口コロプレスの値は R2 で 404 のまま (`population-ratio-tokyo.json`)。同じ値を web の地域比較 (`choropleth-data-repository.ts`) が分割版 `_city` で塗っているので区ごとの行を持つと判断し、分割版 + `deriveWardModeTopology` (merged) に移した。Remotion から使う入口として `@stats47/gis/ward-mode-topology` (純関数だけ) を足した。③ カードに無かった 3 か所目 `apps/remotion/scripts/fetch-municipality-net.ts` (ローカルの `.local/r2` から `_city_dc` をコピーしていた) も分割版から merged を作って書くようにした。web・Remotion・Remotion scripts の tsc、gis の vitest 273 件、web の vitest 2,753 件が通る。自前の `_city_dc.topojson` を読むコードは 0 件 (geoshape の `_city_dc.i` は外部配布物で別)。
+- **未検証**: Remotion の人口コロプレスは値のファイルが R2 に無いため描画を確かめていない。移動フローの地図は localhost で見ていない (データの結び付きはスクリプトで確認済み)。
+- **次**: ① 本番反映後、`/api/mf-topo/13` が 23 区を返し、移動フローの東京の地図で区ごとに色が付くかを確かめる ② 読み手が 0 になったので `_city_dc` の R2 からの削除を承認制で行う (`.claude/rules/r2-storage-design.md`「市区町村の境界」)。
 - **完了条件**: `_city_dc` を読むコードが 0 件で、2 か所の地図で地域と形が対応している。
+
+### [METRIC-CLINIC-PER-100K-UNIT-01] 人口10万人当たりの一般診療所数・病院数が、題名と単位では実数に見え、さらに人口換算を重ねられる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
+
+- **証拠 (2026-10-28)**: `data/metrics/general-clinic-count-per-100k.ts` は SSDS `0000010209` `#I0910105` (人口10万人当たり) を取るが、title は「一般診療所数」・unit は「施設」で、`normalizationOptions` に「人口10万人あたり」(施設/10万人) がある。R2 の市区町村 values.json は最大が三島村 987.7 で、実数ではなく率の値。換算を選ぶと二重に割る (memory `feedback_ssds_denominator_evidence` と同じ型)。`general-hospital-count-per-100k` も同じ形かは未確認。
+- **次**: 2 指標の SSDS 項目名を e-Stat のメタで確かめ、title・unit を「人口10万人当たり」の形に直し、人口・面積の換算を外す。同じ形の SSDS `#` 項目を `validate:config` で検出できるか検討する。
+- **完了条件**: 2 指標の title・unit が値の意味と一致し、二重の換算を選べない。
 
 ### [MUNI-WARD-GAP-DISPLAY-01] 東京の特別区に値が無い市区町村指標で、区の値を別の公的資料から足すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:データ]
@@ -401,7 +427,8 @@ updated: 2026-10-19
 - **読者の課題 / HARM**: 引っ越し・家の購入を考える子育て世帯が、近隣2〜4市のどこが子育てしやすいか決められない (M: 住居費・支援、R: 家族、H: 小児医療)。個人は払わない前提で、AdSense と無料系の導線で回収する (保険・不動産の案件は出さない)。
 - **需要の証拠**: Yahoo!知恵袋に約1,737件、サジェストに「子育てしやすい市町村ランキング」。県版の子育てランキングは平均1.27位・CTR 40%。**市区町村版で同じ順位が取れるかは未検証**。
 - **子カード (実行順)**: 🔴 `MUNI-PREF-RANKING-ROUTE-01` (県名×市区町村のページ・先に作る) と 🔴 `MUNI-KOSODATE-METRICS-01` (指標) → 🟡 `MUNI-KOSODATE-PAGES-01` (公開と内部リンク)。続きは `MUNI-ROUGO-CARFREE-01` (EXP-009) → `MUNI-IJU-COMPARE-01` (EXP-010)。
-- **次 (実行順)**: ① 既存の市区町村指標から子育て系 (年少人口比・出生数・保育・学校・小児医療) を選び、待機児童など足りない指標の取得元を決める ② cron 生成でランキングを5〜10ページ足す ③ 県版の子育て記事・ランキングから市区町村版へ内部リンクを張る ④ 8週後に判定する。
+- **指標のセット (2026-10-28 決定・詳細と根拠は `MUNI-KOSODATE-METRICS-01`)**: 公開中 6 (`young-population-ratio` 2025・`births` 2023・`nursery-facility-count` 2023・`elementary-school-children-count` 2024年度・`child-welfare-expense-municipal` 2022年度・`nuclear-family-households-ratio` 2020) + 新規 2 (保育所まで 500m 未満の子育て世帯の割合・小学校まで 1km 未満の世帯の割合。config 作成済み・R2 取り込みは承認待ち) + 待機児童率 (こども家庭庁の Excel から取り込む予定)。こども医療費助成は 9 割が同じ対象年齢のためランキングにしない。
+- **次 (実行順)**: ① ~~既存の市区町村指標から子育て系を選び、足りない指標の取得元を決める~~ 済み (2026-10-28) ② cron 生成でランキングを5〜10ページ足す ③ 県版の子育て記事・ランキングから市区町村版へ内部リンクを張る ④ 8週後に判定する。
 - **判定 (8週)**: 該当ページの GSC 28日表示 3,000 以上、かつ1ページあたり PV が市区町村ページ平均 (44.7) 以上なら、近隣市比較ページを自動生成で広げる。下回れば止める (手作業の記事量産には移らない)。
 - **ページの形**: 市単位の検索は細い (推定 月56「子育てしやすい市」) ので、「県名×市区町村ランキング」の形にする (推定 月2,320「子育てしやすい街ランキング」。調査 §8)。
 - **続き**: 型ができたら、同じ型で老後 (EXP-009、車なしで暮らせる町を3ページ) と移住 (EXP-010) を同じ基準で試す。
@@ -4000,6 +4027,9 @@ updated: 2026-10-19
      e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
      metric config 新設が要るため data-ingester 系の作業
   3. 非 SSDS 3,349 表 (R2 estat-catalog `npm run estat:catalog:search -- <語> --collect-area 3`、2026-09-16 manifest) — 表ごとに軸 pin 設計が要る長尾
+     - **済み (2026-10-28) 第 1 バッチ: 住宅・土地統計調査 2023 の 13 指標**。表題に市区町村を持つ非 SSDS の表は 845 (住宅・土地 282・国勢調査 253・地域保健 139・経済センサス 109 など) で、都道府県版の metric と重なるのは 3 表だけだった。空き家比率・持ち家比率・延べ面積・就業者比率・失業率などは SSDS 経由で既に公開済みなので、SSDS に無い「最寄り施設までの距離」と空き家の内訳を選んだ: 保育所まで 500m 未満の子育て世帯 / 小学校・中学校まで 1km 未満 / 駅まで 1km 未満 / 医療機関・公園・緊急避難場所・郵便局と銀行・老人デイサービスセンターまで 500m 未満の世帯の割合、公共下水道のある住宅の割合、賃貸・売却用及び二次的住宅を除く空き家率、賃貸用の空き家率、腐朽・破損のある空き家の割合。どれも axisRatio (同じ軸の総数で割る) で、`citySource` に同じ表を書いた (非 SSDS の表は `citySource` が無いと取り込みが市区町村を飛ばす)。e-Stat の実測で値のある地域は 1,127〜1,235 (表章地域は市区と人口 1.5 万以上の町村)、全国値は公表値 (空き家 5.9%・賃貸用 6.8%) と一致。13 件とも `page-data-batch --dry-run` で書き込み停止 0 (丸めで 100.2〜100.3% の地域がある 3 件は警告のみ)。判定の表は `packages/data-configs/src/geo-scope/municipality-housing-survey-expansion.ts`、カタログは `candidate`・テーマ「市区町村の住環境」(`living-environment`) は `draft` で登録。validate:config (error 0)・validate:years・content:check・data-configs の vitest 1,251 件・tsc が通る。
+     - **[承認待ち] R2 への取り込み**: `data-refresh` で 13 指標の `app/stats/<key>/cities.json` を作る (R2 書き込みのためオーナー承認が要る)。取り込み後に cities.json の件数・値域を確かめ、`MUNICIPALITY_HOUSING_SURVEY_STATUS` を `'published'` にすると、13 指標が公開集合 (716 → 729) とテーマ (29 → 30) に入る (`municipality-catalog.test.ts` の件数も同じ差分で直す)。値の範囲は公開時に 0〜100 に限る (valuePolicy 済み)。
+     - **次の候補 (第 2 バッチ)**: 国勢調査 2020 の市区町村表 (共働き世帯・通勤時間ではない従業地など SSDS に無い軸)、経済センサス 2021 の産業別、人口動態の母の年齢別出生。1 バッチ 20 件まで・公開 4 週の計測を次のバッチの条件にする (`SSDS-DEMAND-BATCH-01` と同じ)。
 - **2026-10-21 追加 (本番反映済み)**: 令和7年国勢調査の 5 年間の増減 3 件 (`census-population-change-rate-5y` /
   `census-population-change-5y` / `census-household-change-rate-5y`) を R2 cities.json で監査して published に足した (171 → 174)。
   人口テーマと世帯テーマにも入れたので、市区町村データブックにも出る。未公開の unknown は残り 10 件

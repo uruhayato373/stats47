@@ -2,6 +2,286 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "occupation-company-executive-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1303"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1303"
+        },
+        "derived": false,
+        "configHash": "ae094354fb5a27a7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-company-executive-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-company-executive-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-engineer-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1308"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1308"
+        },
+        "derived": false,
+        "configHash": "d6532db3337ba64c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-engineer-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-engineer-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-factory-owner-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1305"
+        },
+        "derived": false,
+        "configHash": "b712df8617c984ed"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-factory-owner-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-factory-owner-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-home-based-piecework-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1318"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1318"
+        },
+        "derived": false,
+        "configHash": "9c3075885e381613"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-home-based-piecework-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-home-based-piecework-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-manager-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1311"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1311"
+        },
+        "derived": false,
+        "configHash": "326d09696b219272"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-manager-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-manager-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-manual-labor-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1315"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1315"
+        },
+        "derived": false,
+        "configHash": "c21975f5e20046de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-manual-labor-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-manual-labor-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-personal-service-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1316"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1316"
+        },
+        "derived": false,
+        "configHash": "64be8dba639560c5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-personal-service-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupations",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-personal-service-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "occupation-professional-workers",
       "pageId": null,
       "title": "職業別就業者数",
@@ -5965,286 +6245,6 @@
       "consumers": [
         {
           "pageId": "ranking:other-noodles-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-parking-fee-consumption-expenditure",
-      "pageId": "ranking:other-parking-fee-consumption-expenditure",
-      "title": "他の駐車場借料消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "070230070",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "070230070",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "9efba5c56a318f0a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-parking-fee-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-personal-items-consumption-expenditure",
-      "pageId": "ranking:other-personal-items-consumption-expenditure",
-      "title": "他の身の回り用品消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "100133030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "100133030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "160cf96597d7108e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-personal-items-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-pet-service-consumption-expenditure",
-      "pageId": "ranking:other-pet-service-consumption-expenditure",
-      "title": "他のペット関連サービス消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "090205020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "090205020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "a68af3022f266a21"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-pet-service-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-prepared-food-consumption-expenditure",
-      "pageId": "ranking:other-prepared-food-consumption-expenditure",
-      "title": "他の調理食品のその他消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010920120",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010920120",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "c11b8ee5956a6f7a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-prepared-food-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-processed-fish-ext-consumption-expenditure",
-      "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
-      "title": "他の魚介加工品のその他消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010240050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010240050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "1b65700074b5bcbb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-processed-meat-consumption-expenditure",
-      "pageId": "ranking:other-processed-meat-consumption-expenditure",
-      "title": "他の加工肉消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010320040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010320040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "1eb0f71ac49f6609"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-processed-meat-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-publications-consumption-expenditure",
-      "pageId": "ranking:other-publications-consumption-expenditure",
-      "title": "他の印刷物消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "090300040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "090300040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "091daf1c66d87fbf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-publications-consumption-expenditure",
           "kind": "ranking"
         }
       ],

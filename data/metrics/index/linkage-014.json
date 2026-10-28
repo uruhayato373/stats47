@@ -2,6 +2,918 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "landslide-special-warning-zone-count",
+      "pageId": "ranking:landslide-special-warning-zone-count",
+      "title": "土砂災害特別警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:landslide-special-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "landslide-warning-zone-count",
+      "pageId": "ranking:landslide-warning-zone-count",
+      "title": "土砂災害警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:landslide-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "landslip-special-warning-zone-count",
+      "pageId": "ranking:landslip-special-warning-zone-count",
+      "title": "地滑りの特別警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:landslip-special-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "landslip-warning-zone-count",
+      "pageId": "ranking:landslip-warning-zone-count",
+      "title": "地滑りの警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:landslip-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "language-lesson-consumption-expenditure",
+      "pageId": "ranking:language-lesson-consumption-expenditure",
+      "title": "語学月謝消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090430010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090430010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "79690e3fdc798824"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:language-lesson-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "large-retail-store-count",
       "pageId": null,
       "title": "大型小売店数",
@@ -11038,221 +11950,6 @@
       "themes": [
         "manufacturing"
       ]
-    },
-    {
-      "metricKey": "manufacturing-industry-annual-income",
-      "pageId": "ranking:manufacturing-industry-annual-income",
-      "title": "製造業で働く人の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003426933",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "01",
-            "cdCat03": "01",
-            "cdCat04": "07"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003426933",
-          "cdCat01": "01",
-          "cdCat02": "01",
-          "cdCat03": "01",
-          "cdCat04": "07"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "920f14b5886b0f6a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:manufacturing-industry-annual-income",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "manufacturing-net-value-added-private",
-      "pageId": null,
-      "title": "純付加価値額（製造業）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C620107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C620107"
-        },
-        "derived": false,
-        "configHash": "403897b3f2e65b80"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:manufacturing-net-value-added-private",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:manufacturing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:manufacturing-net-value-added-private",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "manufacturing-private-employees",
-      "pageId": null,
-      "title": "従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C220837"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C220837"
-        },
-        "derived": false,
-        "configHash": "ad2d53dbd4a643cc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:manufacturing-private-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:employees",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:manufacturing-private-employees",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "manufacturing-private-establishments",
-      "pageId": null,
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C210837"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C210837"
-        },
-        "derived": false,
-        "configHash": "5a5a0530d5278293"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:manufacturing-private-establishments",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:establishments",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:manufacturing-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "manufacturing-sales-private",
-      "pageId": null,
-      "title": "売上金額（製造業）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C610107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C610107"
-        },
-        "derived": false,
-        "configHash": "a0a9d15c4995fa7f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:manufacturing-sales-private",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:manufacturing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:manufacturing-sales-private",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

@@ -2,6 +2,930 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "final-education-junior-college-technical-college-ratio",
+      "pageId": "ranking:final-education-junior-college-technical-college-ratio",
+      "title": "最終学歴が短大・高専卒の者の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E09503"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E09503"
+        },
+        "derived": false,
+        "configHash": "c6155c2c111ef937"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:final-education-junior-college-technical-college-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "final-education-university-graduate-school-ratio",
+      "pageId": "ranking:final-education-university-graduate-school-ratio",
+      "title": "最終学歴が大学・大学院卒の者の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E09504"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E09504"
+        },
+        "derived": false,
+        "configHash": "fc83c0f732281c98"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:bread-consumption-expenditure-vs-final-education-university",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:university-advancement-capacity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:education-culture",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:final-education-university-graduate-school-ratio",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "final-energy-consumption",
+      "pageId": "ranking:final-energy-consumption",
+      "title": "最終エネルギー消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H5701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H5701"
+        },
+        "derived": false,
+        "configHash": "b5ef4102933aba21"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:final-energy-consumption",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "final-energy-consumption-per-capita",
+      "pageId": "ranking:final-energy-consumption-per-capita",
+      "title": "1人当たり最終エネルギー消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H5702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H5702"
+        },
+        "derived": false,
+        "configHash": "a91228e95078eb4a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:electricity-demand-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:energy-consumption-structure-shift",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:final-energy-consumption-per-capita",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
       "metricKey": "finance-insurance-private-employees",
       "pageId": null,
       "title": "従業者数",
@@ -13084,513 +14008,6 @@
       "themes": [
         "manufacturing"
       ]
-    },
-    {
-      "metricKey": "food-manufacturing-establishments",
-      "pageId": "ranking:food-manufacturing-establishments",
-      "title": "食料品製造業の事業所数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040480518&fileKind=0"
-        },
-        "fetcherKey": "manual",
-        "configHash": "50d92ae27b36a311"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:food-manufacturing-establishments",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:manufacturing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "manufacturing"
-      ]
-    },
-    {
-      "metricKey": "food-manufacturing-shipment-amount",
-      "pageId": "ranking:food-manufacturing-shipment-amount",
-      "title": "食料品製造業の製造品出荷額等",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040480518&fileKind=0"
-        },
-        "fetcherKey": "manual",
-        "configHash": "50d92ae27b36a311"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:manufacturing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:food-manufacturing-shipment-amount",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:manufacturing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "manufacturing"
-      ]
-    },
-    {
-      "metricKey": "food-retail-store-count-per-1000",
-      "pageId": "ranking:food-retail-store-count-per-1000",
-      "title": "飲食料品小売店数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H06105"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H06105"
-        },
-        "derived": false,
-        "configHash": "80d6a87b8ec10c48"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:commercial-sales-productivity-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:food-retail-store-count-per-1000",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "food-retail-store-count-per-1000-alt",
-      "pageId": null,
-      "title": "飲食料品小売店数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H06129"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H06129"
-        },
-        "derived": false,
-        "configHash": "cdede111a91a5f56"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:food-retail-store-count-per-1000-alt",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }
