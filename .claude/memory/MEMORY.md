@@ -162,3 +162,4 @@
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
 - [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)
 - [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古いコミットから切られ node_modules も無い。prompt に起点 SHA の付け替えと @stats47 だけ張る手順を書き、取り込みは cherry-pick
+- [batch production builds](feedback_batch_production_builds.md) — 本番ビルド (10 分) を修正ごとに回さない。dev で確かめ、本番は節目に 1 回でまとめて検査。dev が壊れていたら先に dev を直す

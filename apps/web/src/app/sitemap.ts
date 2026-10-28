@@ -71,7 +71,7 @@ const GEO_PAGES: MetadataRoute.Sitemap = [...GEO_INDEXABLE_ROUTES,...GIS_DATASET
 // Sitemap Index 定義
 // ----------------------------------------------------------------------------
 
-// ★定義は `@/config/sitemap-segments` が単一ソース。index (`app/sitemap.xml/route.ts`)
+// ★定義は `@/config/sitemap-segments` が単一ソース。index (`app/sitemap-index.xml/route.ts`。公開 URL は /sitemap.xml)
 // も同じものを読む。以前は index 側が件数をハードコードしており、cities / japan が
 // 2 か月以上 index から漏れていた (2026-08-20 実測)。
 const SEGMENTS = SITEMAP_SEGMENTS;

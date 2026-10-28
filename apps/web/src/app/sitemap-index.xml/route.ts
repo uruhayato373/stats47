@@ -1,6 +1,9 @@
 /**
  * Sitemap Index (/sitemap.xml)
  *
+ * 公開 URL は /sitemap.xml のまま。next.config.ts の rewrites (beforeFiles) が /sitemap.xml をここへ書き換える。
+ * app/sitemap.xml/ に置くと app/sitemap.ts の metadata と衝突し、Turbopack の dev が全ページ 500 になる (2026-10-28)。
+ *
  * Phase 9 P2-C (2026-04-26): app/sitemap.ts が generateSitemaps で
  * /sitemap/<id>.xml を生成するように変更したため、Google が探す
  * /sitemap.xml を sitemap index として明示的に提供する route handler。

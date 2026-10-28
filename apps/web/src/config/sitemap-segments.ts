@@ -2,7 +2,7 @@
  * sitemap の segment 定義 (単一ソース)。
  *
  * ★ここが唯一の定義。`app/sitemap.ts` (各 shard の生成) と
- * `app/sitemap.xml/route.ts` (index) の**両方**がここを読む。
+ * `app/sitemap-index.xml/route.ts` (index。公開 URL は /sitemap.xml) の**両方**がここを読む。
  *
  * ★なぜ切り出したか (2026-08-20 の実測):
  *   以前は index 側が `const SEGMENT_COUNT = 8` とハードコードし、
