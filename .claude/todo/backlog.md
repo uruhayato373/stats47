@@ -286,6 +286,13 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [MUNI-WARD-MODE-READERS-01] 自前の統合版の地図 (`_city_dc`) を読む残り 2 か所を、データの単位を確かめてから WardMode の地図へ移す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
+
+- **証拠 (2026-10-28)**: `<県>_city_dc.topojson` は 23 区を特別区部 13100 の 1 つにまとめる (東京都で形 41・分割版は 63)。県内の市区町村地図とテーマのドリルダウンは `fetchMunicipalityTopologyForWardMode` へ移した (`MUNI-DESIGNATED-CITY-WARDS-01`) が、次の 2 か所が今も読む: ① 移動フローの地図の中継 `apps/web/src/app/api/mf-topo/[code]/route.ts` (読み手は `features/migration-flow/lib/load-data.ts`・`features/station-passengers/lib/load-data.ts`) ② Remotion の人口コロプレス `apps/remotion/src/features/population-choropleth/usePopulationData.ts` (東京 13・大阪 27)。② の値のファイル `blog/population-choropleth/data/population-ratio-tokyo.json` は R2 に無かった (空の応答)。
+- **次**: ① 各読み手の値が 23 区ごとか特別区部 1 つかを確かめる (値が特別区部 1 つなら今の地図のままで正しい) ② 区ごとなら `fetchMunicipalityTopologyForWardMode` (サーバー) か、分割版 + `deriveWardModeTopology` (Remotion) へ移す ③ 読み手が 0 になったら `_city_dc` の削除を承認制で行う (`.claude/rules/r2-storage-design.md`「市区町村の境界」)。
+- **完了条件**: `_city_dc` を読むコードが 0 件で、2 か所の地図で地域と形が対応している。
+
 ### [MUNI-WARD-GAP-DISPLAY-01] 東京の特別区に値が無い市区町村指標で、区の値を別の公的資料から足すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:データ] [進行中]
 
