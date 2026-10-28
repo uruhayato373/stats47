@@ -50,7 +50,7 @@ interface RankingVisualizationSectionProps {
  * カードで、見出しと年の選択が 2 つずつ並んでいた)。
  *
  * 並べ方は画面の幅ではなく部品の幅 (@container/viz) で決める: 640px (地図 260px + 表 380px) 以上は
- * 「地図 | 表」の横並び、未満 (スマホ) はタブで切り替える。サイドバーの開閉や右レールの有無に関係なく並びが決まる。
+ * 「地図 | 表」の横並び (840px からは地図を 460px に止める)、未満 (スマホ) はタブで切り替える。サイドバーの開閉や右レールの有無に関係なく並びが決まる。
  * Tailwind はソースの文字列からクラスを作るので、境界の @min-[640px]/viz は組み立てずに書く。
  * 地図は表と同じ高さに伸び、表の右には線を 1 本だけ引く (カードどうしの余白を置かない)。
  */
@@ -104,7 +104,9 @@ export function RankingVisualizationSection({
                         <Skeleton className="h-full w-full opacity-50" />
                     </div>
                 )}
-                <div className="@min-[640px]/viz:grid @min-[640px]/viz:grid-cols-[minmax(0,1fr)_380px]">
+                {/* 地図は表と同じ高さ (約 450px) で、日本は縦長なので幅は 460px あれば収まる。それより広げても左右の海が増えるだけなので、
+                    部品が 840px (地図 460px + 表 380px) を超えたら地図を 460px に止め、残りを表に回す (表の列は比率どおりに伸びる) */}
+                <div className="@min-[640px]/viz:grid @min-[640px]/viz:grid-cols-[minmax(0,1fr)_380px] @min-[840px]/viz:grid-cols-[460px_minmax(0,1fr)]">
                     {/* 狭い幅は地図だけを 420px で描く。並べる幅では表と同じ高さに伸ばす (最低 440px) */}
                     <div className={panelClassName(activeTab === "map", "h-[420px] @min-[640px]/viz:h-auto @min-[640px]/viz:min-h-[440px]")}>
                         <RankingMapChartClient
