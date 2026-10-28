@@ -73,7 +73,7 @@ export function selectPopularBlogTags(
 
 /**
  * タグの Badge リンク。レールのカードと一覧の上の操作行で同じものを使う。
- * 見た目は記事のタグ (TagBadge) と同じ Badge variant="secondary"。件数は名前より小さい文字で添える。
+ * 見た目は記事のタグ (TagBadge) と同じ Badge variant="secondary"。件数は名前より小さい文字で添える。色は Badge の文字色のまま (muted にすると secondary の地で 4.34:1 となり WCAG AA に届かない。2026-10-28 axe)。
  * horizontalOnMobile のときは 640px 未満で横スクロールの 1 行にする (RailLinksCard の horizontalOnMobile と同じ作り)。
  */
 function PopularTagList({
@@ -106,7 +106,7 @@ function PopularTagList({
             }
           >
             {tag.tagKey}
-            <span className="text-[0.625rem] tabular-nums text-muted-foreground">
+            <span className="text-[0.625rem] tabular-nums">
               {tag.articleCount}
             </span>
           </Badge>
