@@ -66,7 +66,7 @@ test('landing context computes shares per landing page and hides unstable small 
 
 test('Phase 5 slices: every request is Japan-only and filters to its own event', async () => {
   const { MEASUREMENT_REPORTS, KEY_EVENT_NAMES } = await import('../lib/journey-ga4-reports.mjs');
-  const expectEvent = { interactions: 'ui_interaction', 'read-progress': 'read_progress', 'download-purpose': 'csv_download_purpose' };
+  const expectEvent = { interactions: 'ui_interaction', 'read-progress': 'read_progress', 'download-purpose': 'csv_download_purpose', 'file-downloads': 'file_download' };
   for (const [name, report] of Object.entries(MEASUREMENT_REPORTS)) {
     const req = report.request(period);
     const filters = req.dimensionFilter.andGroup?.expressions ?? [req.dimensionFilter];
