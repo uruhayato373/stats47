@@ -286,6 +286,22 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BLOG-HEADLESS-AUTHOR-01] ブログ執筆を headless `claude -p` のバッチに移し、本数を増やしながら 1 本あたりの費用と通過率を記録する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run] [起票:2026-10-28] [領域:サイト] [進行中]
+
+- **背景 (2026-10-28 オーナー指示)**: 「Claude のトークン消費を節約してブログをもっと展開したい」。Agent tool (article-writer / blog-critic) は subagent が CLAUDE.md と rules を毎ターン読み、是正で約 10 万トークン/本・旧 CI で $8.2/本だった。ランキング解説の headless 経路は $0.51/件 (`ranking-content-standards.md`)。
+- **実装 (branch `claude/determined-newton-2d077c`)**: `packages/ai-content/src/scripts/write-blog-headless.ts` + `src/services/claude-cli-runner.ts`。準備 (`generate-blog-article.ts`) が作った prompt を sonnet・effort low の `claude -p` で書き、`quality-gate.mjs` + `ci-factual-gate.mjs` → 別プロセスの critic (`buildBlogCriticPrompt`・本文だけ) → REVISE なら指摘と原稿を author に返して 1 回書き直す。記録は `data/blog/headless-runs.csv`。公開はしない (`published:false` のまま)。手順は `/write-prepared-article` の「headless 経路」。
+- **実測 (2026-10-28)**: 計 5 本 (型B 3・型A 1・型D2 1)、15 回の run で `data/blog/headless-runs.csv` に記録。1 回の呼び出しは author が入力約 3.8K / 出力 3〜5.5K トークンで $0.035〜0.09、critic が約 $0.03 (rules の漏れ込みは無い)。1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27・70〜140 秒。決定的ゲートは 1 回目で 15 回中 13 回通った。審査は当初 0/6 PASS で、原因は審査 prompt が author に禁じた「別の指標を足せ」「相関係数を示せ」を blocker にしていたことと、MAJOR だけでも REVISE にしていたこと (blog-critic agent は BLOCK 0 件で PASS)。審査 prompt に書き手の制約と重大度の基準を書き、verdict を blocker の有無からコードで決めるよう直した後の最終 run は **2/4 PASS・PASS 1 本 $0.32**。較正中の run を含めた実験の総額は $2.80 で PASS 3 本 (乾麺の型D2・一般病院×高齢単身・警察官給与×塾通い)。Agent tool 経路 (約 10 万トークン/本・旧 CI $8.2/本) と比べ、定常の PASS 1 本は約 1/25。残る blocker は記事の事実誤り (山口と岡山を隣接と書く・北海道を東北に含める・題が「なぜ」を約束して答えない) と、審査が順位の整合をまだ疑う誤判定が混ざる。費用は CLI の `total_cost_usd` (API 換算・Pro/Max の OAuth では実請求ではない)
+- **次 (実行順)**: ⓪ author prompt (`blog-article-prompt.ts`) に「題で『なぜ』を約束したら本文で答える。答えられないなら題を変える」と、地方区分・隣接の言及は prompt に渡した区分だけを使う指示を足す (残る blocker の多数) ① 型B 以外 (A / D2 / F) で 3〜5 本ずつ回し、型ごとの通過率と費用を CSV に貯める ② 通過率が低い型は critic の指摘を読んで author prompt (`blog-article-prompt.ts`) 側を直す (critic は緩めない) ③ PASS 分を `--ingest` で確定して develop へ push する (公開は週次計画の本数で人が決める)。
+- **完了条件**: 型ごとに 5 本以上の実測が CSV にあり、既定の運転設定 (型・本数・rounds) を skill に書いている。
+
+### [BLOG-TOPIC-PAIR-PER-CAPITA-01] 相関記事 (型B) の題材に「件数×件数」の組が並び、人口の大きさだけで相関が出る問題を topic-queue の選定で直す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `data/blog/topic-queue.json` の must-write 上位 8 件はすべて型B で、`general-hospital-count` × `elderly-single-person-households` のように人口で割っていない件数どうしの組や、`avg-salary-police-prefecture` × `national-assessment-elementary-tutoring-rate` (警察官の給与×小学生の塾通い) のように因果の筋が考えにくい組がある。さらに型B の prompt には相関係数が渡っておらず、critic は 3 本とも「相関の強さを示していない」と指摘した (相関 snapshot には値がある)。headless の critic はこの記事を「人口のデータを示さずに真因を切り分けると言っている」と blocker で差し戻した (`contents/blog/general-hospital-count-vs-elderly-single-person-households/review.md`)。prompt は実データ以外の数値を禁じるので、本文側では人口で割れない。
+- **次**: ① `.claude/scripts/blog/build-topic-queue.mjs` の型B 候補で、両方が人口比でない件数指標の組を外すか、人口あたりの版の指標に差し替える。外した件数を出力に出す ② 型B の prompt (`generate-blog-article.ts` → `buildBlogArticlePrompt`) に相関 snapshot の相関係数と対象県数を実データとして渡す (factual gate の照合対象にも加える)。
+- **完了条件**: 型B の pending に件数×件数の組が無く、テストで固定されている。
+
 ### [MUNI-WARD-MODE-READERS-01] 自前の統合版の地図 (`_city_dc`) を読む残り 2 か所を、データの単位を確かめてから WardMode の地図へ移す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
 
@@ -4199,6 +4215,39 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [BLOG-GEMINI-AUTHOR-01] Gemini の無料枠でブログ下書きを書く経路を動かすか決める (鍵の作り直し・審査に使うか)
+タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
+
+- **用意済み (branch `claude/determined-newton-2d077c`)**: `write-blog-headless.ts --author gemini-api` で既存の `gemini-text-client.ts` を使って下書きを書き、決定的ゲートと Claude の critic に通す。run の最初に極小の実生成で鍵を確かめ、HTTP 402 / クレジット枯渇は billing として止まる (以前は 402 を bad-request に分類していたので直し、単体テストを足した)。手元の `.env.local` に `GEMINI_API_KEY` は無い (GitHub Secrets 専任) ので、実際の生成は試していない。
+- **根拠**: 公式料金表 (https://ai.google.dev/gemini-api/docs/pricing・2026-10-28 確認) では 2.5 Pro / 2.5 Flash / 2.5 Flash-Lite / 3.x Flash / 3.5 Flash-Lite に無料枠があり、3.1 Pro Preview と画像系には無い。無料枠の入出力は Google の製品改善に使われうるので、公開データ (R2 の観測値と記事) だけを渡す。今の鍵は課金 project の前払いクレジット枯渇で 402 (ランキング解説の日次 run で 48 run 中 44)。2026-10-26 にオーナー判断で Gemini の経路は中止した。
+- **決めてほしいこと**: ① 課金を付けていない Google AI Studio project で鍵を作り直すか (オーナー操作。作ったら `.env.local` に `GEMINI_API_KEY` を置く) ② 作り直すなら author だけに使うか、critic にも使うか。案: author は Gemini (無料枠)、critic は Claude headless (sonnet・1 本 $0.03 前後) のまま。critic まで Gemini にすると書き手と審査が同じモデル系列になり、見落としの傾向が揃う。
+- **決まったら**: 鍵を置いて `--author gemini-api` で 3 本試し、headless-runs.csv で Claude author と通過率を比べる。
+
+### [BLOG-MONTHLY-CAP-01] ブログの月の本数上限 (月 15〜20 本) を、headless 化で 1 本の費用が下がった後も据え置くか決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
+
+- **今の上限**: `data/blog/seo-strategy.json` の `typeMix` (B 5 / D2 4 / A 3-4 / F 3 / G 1-2 / H 2 / C_E 1-2 = 月 17〜19 本)。
+- **費用の根拠**: headless の実測は BLOG-HEADLESS-AUTHOR-01 を参照 (PASS 1 本 $0.32・書き直し込み 1 本 $0.10〜0.27・API 換算)。Agent tool 経路の約 10 万トークン/本・$8.2/本から大きく下がった。topic-queue の pending は 140 本 (must-write 60)。
+- **据え置く理由の候補**: 費用ではなく、公開後の検索の評価 (薄い記事の量産と見なされないか) と、同じ主題の重複 (`BLOG-DUPLICATE-AUDIT-01`) が制約になっている。上げるなら GSC で新規記事の表示が付くかを 4 週見てから。
+- **案**: 11 月は据え置き (月 17〜19 本) で headless に移し、通過率と GSC の表示を見て 12 月の月次計画で 25〜30 本に上げるかを決める。
+- **決めてほしいこと**: 上限を据え置くか・上げるか、上げるなら何本か。
+
+### [BLOG-OUTBOX-PASS-PUBLISH-01] `contents/blog/` で審査 PASS のまま止まっている下書きを公開するか決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
+
+- **状態 (2026-10-28 に quality-gate.mjs と ci-factual-gate.mjs を流し直した)**: review.md が PASS の下書きは 7 本。事実照合は 7 本とも通る。品質ゲートを今も通るのは `population-decline-land-price-divergence` の 1 本だけ。5 本 (`elderly-welfare-expenditure-prefecture-gap`・`evacuation-plan-coverage-urban-prefecture-gap`・`intellectual-crime-tokyo-kagawa-gap`・`sme-business-sentiment-regional-gap`・`vacant-housing-rate-inherited-home-risk`) はタグ台帳 `data/content/tags.json` に無いタグ (UNREGISTERED_TAG)、`nursery-shortage-urban-prefecture` はスマホ用 SVG の欠落で落ちる。
+- **次**: ① 5 本のタグを登録済みのものに替えるか台帳に足す ② nursery は `generate-article-charts.ts --slug nursery-shortage-urban-prefecture` でスマホ用 SVG を作る ③ 通ったものを `generate-blog-article.ts --ingest <slug>` で確定し、オーナー承認後に develop へ push する (公開は `blog-auto-publish.yml`)。
+- **追加 (2026-10-28)**: headless の実測で審査 PASS した 3 本 (`dried-udon-soba-consumption-quantity-prefecture-gap`・`general-hospital-count-vs-elderly-single-person-households`・`avg-salary-police-prefecture-vs-national-assessment`) を `published: false` のまま branch `claude/determined-newton-2d077c` に置いた。後の 2 本は題材の弱さ (BLOG-TOPIC-PAIR-PER-CAPITA-01) があるので、公開するかは題材ごと判断する。
+- **注意**: 2026-10-28 に headless の審査 (基準を blog-critic に揃えた版) を `vacant-housing-rate-inherited-home-risk` に掛けたところ、blog-critic (Agent) の PASS 後も「山梨を西日本に含める」「人口移動を因果として断定」の blocker が残っていた。公開前に各本を審査し直す。
+- **決めてほしいこと**: 7 本を公開するか (月の上限 BLOG-MONTHLY-CAP-01 の枠に入れるか)。
+
+### [BLOG-NOTEBOOKLM-RESEARCH-01] NotebookLM の調査材料を記事に入れる段を試し、公式 API (企業版) を使うか決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **用意済み**: `/notebooklm-research` に「新規記事の調査段」を書いた。非公式 CLI (`~/bin/notebooklm`) の回答をそのまま `contents/blog/<slug>/research.md` に保存し、`write-blog-headless.ts` が author prompt に足す (白書の数値は書かせない)。Claude は回答を読まないのでこの段の Claude トークンは 0。ログイン (`notebooklm login`) は人がブラウザで行い、期限切れになると止まる。CI では使えない。
+- **次**: 型B 以外の記事 3 本で research.md あり・なしを書き分け、critic の指摘 (背景の根拠不足) が減るかを headless-runs.csv と review.md で比べる。
+- **決めてほしいこと**: 効果があれば、企業版 (Gemini Notebook Enterprise・Google Cloud のライセンスが要る) の公式 API に移すか。移さない場合は対話セッションで人がログインして回す運用のまま。
 
 ### [ADMIN-UI-DOBOKU-ALIGN-01] doboku-note の管理画面 (tools/admin-app) を stats47 と同じ Base UI (base-nova) の構成へ揃えるか決める
 タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-10-27] [領域:管理]

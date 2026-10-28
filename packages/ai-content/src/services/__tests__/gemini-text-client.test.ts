@@ -111,6 +111,21 @@ describe("generateContentText", () => {
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     expect(isBillingExhausted("Credit balance is too low")).toBe(true);
   });
+
+  it("HTTP 402 は本文に関係なく billing として再試行しない", async () => {
+    const fetchImpl = vi.fn(async () =>
+      new Response('{"error":{"code":402,"status":"PAYMENT_REQUIRED"}}', { status: 402 }),
+    );
+    await expect(
+      generateContentText({
+        prompt: "test",
+        apiKey: "key",
+        fetchImpl: fetchImpl as typeof fetch,
+        maxAttempts: 3,
+      }),
+    ).rejects.toMatchObject({ classification: "billing", status: 402 } satisfies Partial<GeminiTextError>);
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("listGenerateContentModels", () => {
