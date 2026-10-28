@@ -132,7 +132,7 @@ export function LocalFinanceDashboard({
         <TableRow>
           <TableHead>都道府県</TableHead>
           {columns.map((column) => (
-            <TableHead key={column.label} className="text-right">{column.label}</TableHead>
+            <TableHead key={column.label} className="text-right!">{column.label}</TableHead>
           ))}
         </TableRow>
       </TableHeader>

@@ -145,7 +145,7 @@ export function ThemeFreightOdClient({
                       ? '発送県'
                       : '到着県'}
                 </TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   輸送量（{formatUnitForDisplay(mode.unit)}）
                 </TableHead>
               </TableRow>

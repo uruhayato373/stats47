@@ -109,7 +109,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
             variant="ghost"
             size="icon"
             onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 hover:bg-background shadow-md border border-border h-9 w-9"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 shadow-md border"
           >
             <ChevronLeft className="h-4 w-4 text-muted-foreground" />
           </Button>
@@ -117,7 +117,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
             variant="ghost"
             size="icon"
             onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 hover:bg-background shadow-md border border-border h-9 w-9"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 shadow-md border"
           >
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </Button>

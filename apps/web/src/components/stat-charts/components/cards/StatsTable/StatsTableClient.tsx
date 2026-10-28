@@ -64,7 +64,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
                   if (value !== null) setSelectedYearCode(value);
                 }}
               >
-                <SelectTrigger className="h-8 w-[140px] text-sm">
+                <SelectTrigger className="h-8 w-[140px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -81,7 +81,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
             <TableHeader>
               <TableRow>
                 <TableHead>指標名</TableHead>
-                <TableHead className="text-right">値</TableHead>
+                <TableHead className="text-right!">値</TableHead>
                 <TableHead>単位</TableHead>
               </TableRow>
             </TableHeader>

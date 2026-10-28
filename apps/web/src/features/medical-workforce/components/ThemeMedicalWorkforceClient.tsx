@@ -51,10 +51,10 @@ function WorkforceTable({
       <TableHeader>
         <TableRow>
           <TableHead scope="col">{kind}</TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             医師数（人）
           </TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             構成割合（%）
           </TableHead>
         </TableRow>
@@ -62,7 +62,7 @@ function WorkforceTable({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.label} data-workforce-category={row.label}>
-            <TableHead scope="row" className="min-w-36 whitespace-normal">
+            <TableHead scope="row" className="min-w-36 whitespace-normal!">
               {row.label}
             </TableHead>
             <TableCell

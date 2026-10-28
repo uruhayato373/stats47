@@ -132,7 +132,7 @@ export function TrendChart({
           </CardAction>
         ) : null}
       </CardHeader>
-      <CardContent className="px-2 sm:px-4">
+      <CardContent className="sm:px-4">
         {rows.length === 0 ? (
           <p className="text-sm text-muted-foreground">まだ記録がありません。</p>
         ) : (

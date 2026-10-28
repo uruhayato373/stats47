@@ -85,12 +85,12 @@ export function ThemeEarthquakeExposureClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">震度帯</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 2020年人口
                 <br />
                 （人・割合）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 2050年推計人口
                 <br />
                 （人・割合）

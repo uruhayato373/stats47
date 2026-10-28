@@ -235,7 +235,7 @@ export function ThemeComparisonSection({
                       <p className="text-xs">選択：{label}</p>
                       <Button
                         variant="link"
-                        className="h-9 px-2 text-xs"
+                        className="h-9"
                         aria-label="都道府県の選択を解除"
                         onClick={() => setSelected(null)}
                       >
@@ -244,7 +244,7 @@ export function ThemeComparisonSection({
                     </div>
                   )}
                   <Table>
-                    <TableCaption className="mt-2">
+                    <TableCaption>
                       {showAll ? '全県' : '上位5県＋選択県'} ·
                       高い順（同値は同順位）
                     </TableCaption>
@@ -252,7 +252,7 @@ export function ThemeComparisonSection({
                       <TableRow>
                         <TableHead>順位</TableHead>
                         <TableHead>都道府県</TableHead>
-                        <TableHead className="text-right">
+                        <TableHead className="text-right!">
                           {current.data.rankingItem.unit.normalize('NFKC')}
                         </TableHead>
                       </TableRow>
@@ -330,19 +330,19 @@ export function ThemeComparisonSection({
             aria-label="指標の横断比較"
             aria-describedby="theme-table-note"
           >
-            <TableCaption className="mt-2 px-3 pb-2">
+            <TableCaption className="px-3 pb-2">
               —：値なし。割合の差：ポイント。
             </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="min-w-32">指標</TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   {selectedPrefectureCode ? label : '最高値（都道府県）'}
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   都道府県中央値
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   中央値との差
                 </TableHead>
                 <TableHead className="whitespace-nowrap">年次・県数</TableHead>

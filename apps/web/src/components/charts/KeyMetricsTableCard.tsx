@@ -60,7 +60,7 @@ export function KeyMetricsTableCard({
               return (
                 <TableRow
                   key={index}
-                  className="border-border/50 hover:bg-transparent"
+                  className="border-border/50"
                 >
                   {row.href ? (
                     <>

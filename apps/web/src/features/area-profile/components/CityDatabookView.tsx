@@ -179,9 +179,9 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                   <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
                     <TableRow>
                       <TableHead>指標</TableHead>
-                      <TableHead className="text-right">値</TableHead>
-                      <TableHead className="text-right">{inside}</TableHead>
-                      <TableHead className="text-right">全国</TableHead>
+                      <TableHead className="text-right!">値</TableHead>
+                      <TableHead className="text-right!">{inside}</TableHead>
+                      <TableHead className="text-right!">全国</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

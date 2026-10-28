@@ -72,13 +72,13 @@ export function ThemeBridgeInspectionAgeClient({
                 <br />
                 （西暦）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 年度差
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 橋数
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 割合
               </TableHead>
             </TableRow>

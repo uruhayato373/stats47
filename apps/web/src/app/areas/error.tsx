@@ -34,7 +34,7 @@ export default function AreasError({
                     <Button
                         variant="default"
                         onClick={() => reset()}
-                        className="flex items-center gap-2"
+                        className="flex items-center"
                     >
                         <RefreshCcw size={18} />
                         再読み込み

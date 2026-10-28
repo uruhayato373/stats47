@@ -69,23 +69,23 @@ export function GeoLandslideSummary({
           <TableHeader>
             <TableRow>
               <TableHead>地域</TableHead>
-              <TableHead className="text-right whitespace-nowrap">
+              <TableHead className="text-right! whitespace-nowrap">
                 区域面の和集合
                 <br />
                 中心人口（人）
               </TableHead>
-              <TableHead className="text-right whitespace-nowrap">
+              <TableHead className="text-right! whitespace-nowrap">
                 人口分母（人）
               </TableHead>
-              <TableHead className="text-right whitespace-nowrap">
+              <TableHead className="text-right! whitespace-nowrap">
                 割合
               </TableHead>
-              <TableHead className="text-right whitespace-nowrap">
+              <TableHead className="text-right! whitespace-nowrap">
                 市町村役場等
                 <br />
                 区域内／全体
               </TableHead>
-              <TableHead className="text-right whitespace-nowrap">
+              <TableHead className="text-right! whitespace-nowrap">
                 公的集会施設
                 <br />
                 区域内／全体
@@ -107,7 +107,7 @@ export function GeoLandslideSummary({
                     {onSelectArea && r.areaCode !== 'all' ? (
                       <Button
                         variant="link"
-                        className="h-auto p-0"
+                        className="p-0"
                         onClick={() => onSelectArea(r.areaCode, r.areaName)}
                       >
                         {r.areaName}

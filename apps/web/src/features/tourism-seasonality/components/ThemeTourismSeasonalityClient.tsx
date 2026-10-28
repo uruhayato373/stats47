@@ -114,7 +114,7 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
             <TableHeader>
               <TableRow>
                 <TableHead scope="col" className="whitespace-nowrap">年月</TableHead>
-                <TableHead scope="col" className="text-right">延べ宿泊者数（人泊）</TableHead>
+                <TableHead scope="col" className="text-right!">延べ宿泊者数（人泊）</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

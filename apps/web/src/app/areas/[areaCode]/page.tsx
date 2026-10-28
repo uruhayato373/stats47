@@ -187,7 +187,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           <Suspense
             fallback={
               <Skeleton
-                className="h-64 w-full rounded-card"
+                className="h-64 w-full"
                 aria-label={`${profile.areaName}のデータブックを読み込んでいます`}
               />
             }

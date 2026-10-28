@@ -42,7 +42,7 @@ function heightStyle(height: number | null | undefined) {
 export function ChartLoading({ height, className }: ChartStateProps) {
   return (
     <Skeleton
-      className={cn("w-full rounded-card", height == null && "h-[200px]", className)}
+      className={cn("w-full", height == null && "h-[200px]", className)}
       style={heightStyle(height)}
     />
   );
@@ -132,7 +132,7 @@ export function ChartLoadingCard({
         <Skeleton className="h-6 w-1/3" />
       </CardHeader>
       <CardContent>
-        <Skeleton className="w-full rounded-card" style={heightStyle(height)} />
+        <Skeleton className="w-full" style={heightStyle(height)} />
       </CardContent>
     </Card>
   );

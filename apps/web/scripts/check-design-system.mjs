@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
 import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
+import { addWrappers, buildLyraMap, findLyraDeadCallerClasses } from './lib/lyra-dead-class-audit.mjs';
 import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
 
 const cwd = process.cwd();
@@ -380,6 +381,38 @@ for (const relativePath of scanRoots.flatMap((root) => listFiles(root))) {
       lineNumber: found.lineNumber,
       line: found.line,
     });
+  }
+}
+
+// 部品の lyra は呼び出し側の className より後ろで合成されるので、lyra と同じ性質を決めるクラスは ! が無いと効かない
+// (TableHead の text-right・Skeleton の rounded-md など。2026-10-28 に約 210 件あった)。効かせるなら ! を付け、
+// 要らないなら消す。ボタンの大きさは ! で上書きせず size を選ぶ (button-no-forced-size)。判定は lib 側のコメント参照。
+{
+  const lyraMap = buildLyraMap(path.join(cwd, '../../packages/components/src/atoms/ui'));
+  const lyraAuditFiles = [
+    ...scanRoots.flatMap((root) => listFiles(root)),
+    ...listFiles('../admin/app'),
+    ...listFiles('../admin/components'),
+  ].filter((relativePath) => relativePath.endsWith('.tsx'));
+  const wrapperSourceFiles = [
+    ...listFiles('../../packages/components/src').filter((relativePath) => !relativePath.includes('/atoms/ui/')),
+    ...lyraAuditFiles,
+  ].filter((relativePath) => relativePath.endsWith('.tsx'));
+  const wrapperNames = addWrappers(
+    lyraMap,
+    wrapperSourceFiles.map((relativePath) => readFileSync(path.join(cwd, relativePath), 'utf8'))
+  );
+  for (const relativePath of lyraAuditFiles) {
+    const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+    for (const dead of findLyraDeadCallerClasses(source, lyraMap, wrapperNames)) {
+      violations.push({
+        ruleId: 'lyra-dead-caller-class',
+        message: `${dead.component} の lyra が ${dead.token} を上書きするので効かない。効かせるなら ${dead.token}! にし、要らないなら消す (ボタンの大きさは size を選ぶ)。`,
+        file: relativePath,
+        lineNumber: dead.lineNumber,
+        line: dead.token,
+      });
+    }
   }
 }
 

@@ -20,7 +20,7 @@ export function AreaTypeToggle({ value, onChange, disabled }: AreaTypeToggleProp
         const next = v[0];
         if (next) onChange(next as AreaType);
       }}
-      className="bg-muted p-0.5 rounded-xs h-6"
+      className="bg-muted p-0.5 h-6"
     >
       <ToggleGroupItem
         value="prefecture"

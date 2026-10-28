@@ -99,10 +99,10 @@ export function ThemeWaterQualityClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">都道府県</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 達成 / 掲載行
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 達成割合
               </TableHead>
             </TableRow>
@@ -145,13 +145,13 @@ export function ThemeWaterQualityClient({
               <TableRow>
                 <TableHead scope="col">水域 / 関係県</TableHead>
                 <TableHead scope="col">類型</TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   基準値
                 </TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   75%値の最大値
                 </TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   平均値
                 </TableHead>
                 <TableHead scope="col">判定</TableHead>

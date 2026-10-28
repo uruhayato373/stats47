@@ -75,10 +75,10 @@ export function ThemeGraduationPathsClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">進路</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 卒業者数（人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 構成割合（%）
               </TableHead>
             </TableRow>
@@ -86,7 +86,7 @@ export function ThemeGraduationPathsClient({
           <TableBody>
             {view.categories.map((category) => (
               <TableRow key={category.key} data-category-key={category.key}>
-                <TableHead scope="row" className="min-w-40 whitespace-normal">
+                <TableHead scope="row" className="min-w-40 whitespace-normal!">
                   {category.label}
                 </TableHead>
                 <TableCell

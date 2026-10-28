@@ -64,7 +64,7 @@ export function ThemeFactoryInvestmentClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">都道府県</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 設備投資額（百万円）
               </TableHead>
             </TableRow>

@@ -26,7 +26,7 @@ export function PostCard({
   onPreview: () => void;
 }) {
   return (
-    <Card className="gap-0 overflow-hidden py-0">
+    <Card className="gap-0! overflow-hidden py-0!">
       <div className="flex items-center justify-between gap-2 p-3">
         {item.id ? (
           <a

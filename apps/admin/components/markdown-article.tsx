@@ -7,8 +7,8 @@ import { Card, CardContent, Table, TableBody, TableCell, TableHead, TableHeader,
 /** 文書ビューア共通のMarkdown表示 (strategy/doc と共通方針ページで共用)。 */
 export function MarkdownArticle({ children }: { children: string }) {
   return (
-    <Card className="gap-0 overflow-x-auto py-5 sm:py-7">
-      <CardContent className="px-5 text-sm leading-6 sm:px-7">
+    <Card className="gap-0! overflow-x-auto! py-5! sm:py-7!">
+      <CardContent className="px-5! text-sm leading-6 sm:px-7!">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkBreaks]}
         components={{
@@ -65,8 +65,8 @@ export function MarkdownArticle({ children }: { children: string }) {
           thead: ({ children }) => <TableHeader>{children}</TableHeader>,
           tbody: ({ children }) => <TableBody>{children}</TableBody>,
           tr: ({ children }) => <TableRow>{children}</TableRow>,
-          th: ({ children }) => <TableHead className="font-semibold">{children}</TableHead>,
-          td: ({ children }) => <TableCell className="align-top whitespace-normal text-muted-foreground">{children}</TableCell>,
+          th: ({ children }) => <TableHead>{children}</TableHead>,
+          td: ({ children }) => <TableCell className="align-top! whitespace-normal! text-muted-foreground">{children}</TableCell>,
           hr: () => <hr className="my-6" />,
         }}
       >

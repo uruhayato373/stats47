@@ -90,7 +90,7 @@ export function ThemeGeoStationAccessClient({
                 都道府県
               </TableHead>
               {metrics.map((metric) => (
-                <TableHead key={metric.key} scope="col" className="text-right">
+                <TableHead key={metric.key} scope="col" className="text-right!">
                   {metric.label}
                 </TableHead>
               ))}
@@ -108,7 +108,7 @@ export function ThemeGeoStationAccessClient({
                   ) : (
                     <Button
                       variant="link"
-                      className="h-11 p-0"
+                      className="p-0"
                       onClick={() => setSelected(row.areaCode, row.areaName)}
                       aria-label={`${row.areaName}の地図を表示`}
                     >

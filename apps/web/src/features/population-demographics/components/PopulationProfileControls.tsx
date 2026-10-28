@@ -43,7 +43,7 @@ export function PopulationProfileSelect({
           if (next !== null) onChange(next);
         }}
       >
-        <SelectTrigger id={id} aria-label={label} className="h-11 text-sm">
+        <SelectTrigger id={id} aria-label={label} className="h-11">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

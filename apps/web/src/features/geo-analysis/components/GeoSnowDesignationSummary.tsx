@@ -87,7 +87,7 @@ export function GeoSnowDesignationSummary({
               <TableHead
                 key={m.key}
                 scope="col"
-                className="text-right whitespace-nowrap"
+                className="text-right! whitespace-nowrap"
               >
                 {m.label}（{formatUnitForDisplay(m.unit)}）
               </TableHead>
@@ -101,7 +101,7 @@ export function GeoSnowDesignationSummary({
                 {onSelectArea && !selected && r.areaCode !== '00000' ? (
                   <Button
                     variant="link"
-                    className="h-11 p-0"
+                    className="p-0"
                     onClick={() => onSelectArea(r.areaCode, r.areaName)}
                   >
                     {r.areaName}

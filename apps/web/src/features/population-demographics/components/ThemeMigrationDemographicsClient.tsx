@@ -129,13 +129,13 @@ export function ThemeMigrationDemographicsClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">{tableLabel}</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転入（人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転出（人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転入超過（人）
               </TableHead>
             </TableRow>
@@ -143,7 +143,7 @@ export function ThemeMigrationDemographicsClient({
           <TableBody>
             {view.rows.map((row) => (
               <TableRow key={row.areaCode} data-counterpart-code={row.areaCode}>
-                <TableHead scope="row" className="whitespace-normal">
+                <TableHead scope="row" className="whitespace-normal!">
                   {row.areaName}
                 </TableHead>
                 <TableCell

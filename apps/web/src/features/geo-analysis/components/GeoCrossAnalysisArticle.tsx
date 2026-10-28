@@ -196,7 +196,7 @@ export async function GeoCrossAnalysisArticle({
                     <TableHead>表示順</TableHead>
                     <TableHead>都道府県</TableHead>
                     {snapshot.metrics.map((metric) => (
-                      <TableHead key={metric.key} className="text-right">
+                      <TableHead key={metric.key} className="text-right!">
                         {metric.label}
                       </TableHead>
                     ))}

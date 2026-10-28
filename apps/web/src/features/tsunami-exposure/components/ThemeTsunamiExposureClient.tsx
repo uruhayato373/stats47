@@ -119,22 +119,22 @@ export function ThemeTsunamiExposureClient({
               <TableHeader>
                 <TableRow>
                   <TableHead scope="col">浸水深</TableHead>
-                  <TableHead scope="col" className="text-right">
+                  <TableHead scope="col" className="text-right!">
                     2020年人口
                     <br />
                     （人）
                   </TableHead>
-                  <TableHead scope="col" className="text-right">
+                  <TableHead scope="col" className="text-right!">
                     2050年推計人口
                     <br />
                     （人）
                   </TableHead>
-                  <TableHead scope="col" className="text-right">
+                  <TableHead scope="col" className="text-right!">
                     市町村役場等
                     <br />
                     （施設）
                   </TableHead>
-                  <TableHead scope="col" className="text-right">
+                  <TableHead scope="col" className="text-right!">
                     公的集会施設
                     <br />
                     （施設）

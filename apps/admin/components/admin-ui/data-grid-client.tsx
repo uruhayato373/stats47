@@ -163,7 +163,7 @@ export function DataGridClient({
                   const sorted = header.column.getIsSorted();
                   const Icon = sorted === "asc" ? ArrowUpIcon : sorted === "desc" ? ArrowDownIcon : ArrowUpDownIcon;
                   return (
-                    <TableHead key={header.id} className={cn(headCell, col.numeric && "text-right")}>
+                    <TableHead key={header.id} className={cn(headCell, col.numeric && "text-right!")}>
                       {header.column.getCanSort() ? (
                         <Button
                           variant="ghost"
@@ -196,8 +196,8 @@ export function DataGridClient({
                       key={cell.id}
                       className={cn(
                         bodyCell,
-                        "align-top",
-                        columns[i].numeric ? "text-right tabular-nums" : "whitespace-normal",
+                        "align-top!",
+                        columns[i].numeric ? "text-right tabular-nums" : "whitespace-normal!",
                         columns[i].nowrap && "whitespace-nowrap",
                       )}
                     >
@@ -224,7 +224,7 @@ export function DataGridClient({
           </span>
           <div className="flex items-center gap-4">
             <div className="hidden items-center gap-2 sm:flex">
-              <Label htmlFor={pageSizeId} className="text-sm font-normal">
+              <Label htmlFor={pageSizeId} className="font-normal">
                 表示件数
               </Label>
               <NativeSelect

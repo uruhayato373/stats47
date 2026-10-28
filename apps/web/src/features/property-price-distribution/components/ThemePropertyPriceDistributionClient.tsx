@@ -81,20 +81,20 @@ export function ThemePropertyPriceDistributionClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">資料</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 第1
                 <br />
                 四分位
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 中央値
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 第3
                 <br />
                 四分位
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 標本数
               </TableHead>
             </TableRow>

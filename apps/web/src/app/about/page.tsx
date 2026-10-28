@@ -189,28 +189,28 @@ export default function AboutPage() {
           <Separator className="my-4" />
           <div className="flex flex-col gap-2">
             <a href={OPERATOR_PROFILE.links.note} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="font-bold text-[#12766a] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">統計の読み方を解説</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
             <a href={OPERATOR_PROFILE.links.x} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="font-bold">X</span>
                 <span className="text-xs">最新ランキングを投稿</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
             <a href={OPERATOR_PROFILE.links.instagram} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Instagram className="h-3 w-3" />
                 <span className="text-xs">インフォグラフィック</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
             <a href={OPERATOR_PROFILE.links.youtube} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Youtube className="h-3 w-3" />
                 <span className="text-xs">ランキング動画</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -259,7 +259,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1"
               >
-                <Badge variant="secondary" className="text-xs font-normal">
+                <Badge variant="secondary" className="text-xs">
                   e-Stat（政府統計の総合窓口）
                 </Badge>
                 <ExternalLink className="h-3 w-3 text-muted-foreground" />
@@ -267,13 +267,13 @@ export default function AboutPage() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-24 shrink-0">データ鮮度</span>
-              <Badge variant="outline" className="text-xs font-normal">
+              <Badge variant="outline" className="text-xs">
                 公開後 24 時間以内に反映（自動化）
               </Badge>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-24 shrink-0">出典明示</span>
-              <Badge variant="outline" className="text-xs font-normal">
+              <Badge variant="outline" className="text-xs">
                 全記事末尾に一次情報リンク
               </Badge>
             </div>
@@ -297,18 +297,18 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col gap-2">
             <a href={EXTERNAL_LINKS.contactForm} target="_blank" rel="noopener noreferrer">
-              <Button variant="default" size="sm" className="w-full gap-2">
+              <Button variant="default" size="sm" className="w-full">
                 <span className="text-xs">お問い合わせフォーム</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
             <a href="/privacy">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="text-xs">プライバシーポリシー</span>
               </Button>
             </a>
             <a href="/terms">
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="text-xs">利用規約</span>
               </Button>
             </a>

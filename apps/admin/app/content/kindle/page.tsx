@@ -136,7 +136,7 @@ export default async function KindleContentPage({
       <Section title="表紙一覧" count={books.filter((book) => book.hasCover).length} note="表紙を選ぶと原寸画像を開きます。">
         <Grid min="sm" lines={false} gap="sm">
           {books.map((book) => (
-            <Card key={book.id} className="gap-0 overflow-hidden py-0">
+            <Card key={book.id} className="gap-0! overflow-hidden py-0!">
               {book.hasCover ? (
                 <a
                   href={`/kindle-cover/${book.id}`}

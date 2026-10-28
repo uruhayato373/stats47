@@ -142,13 +142,13 @@ export default function PrivacyPage() {
           <div className="mb-4 space-y-2">
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-20 shrink-0">サービス</span>
-              <Badge variant="secondary" className="text-xs font-normal">
+              <Badge variant="secondary" className="text-xs">
                 統計で見る都道府県（stats47）
               </Badge>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-20 shrink-0">活動拠点</span>
-              <Badge variant="outline" className="text-xs font-normal">
+              <Badge variant="outline" className="text-xs">
                 東京都
               </Badge>
             </div>
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="font-bold text-[#12766a] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">で発信中</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -174,7 +174,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Instagram className="h-4 w-4 text-[#E1306C]" />
                 <span className="text-xs">@stats47jp</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -186,7 +186,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Youtube className="h-4 w-4 text-[#FF0000]" />
                 <span className="text-xs">YouTube チャンネル</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />

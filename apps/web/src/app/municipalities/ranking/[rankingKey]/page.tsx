@@ -322,7 +322,7 @@ export default async function MunicipalityRankingPage({
             />
           </span>
         </label>
-        <Button type="submit" className="h-10 self-end px-5">
+        <Button type="submit" className="self-end">
           絞り込む
         </Button>
       </form>
@@ -350,7 +350,7 @@ export default async function MunicipalityRankingPage({
             <TableRow>
               <TableHead className="w-20">順位</TableHead>
               <TableHead>市区町村</TableHead>
-              <TableHead className="text-right">値</TableHead>
+              <TableHead className="text-right!">値</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

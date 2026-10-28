@@ -71,7 +71,7 @@ export function ThemeShelterApplicabilityClient({
                 <TableRow>
                   <TableHead scope="col">災害の種類</TableHead>
                   {['該当', '非該当', '不明'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right">
+                    <TableHead key={label} scope="col" className="text-right!">
                       {label}（件）
                     </TableHead>
                   ))}
@@ -80,7 +80,7 @@ export function ThemeShelterApplicabilityClient({
               <TableBody>
                 {row.emergency.hazards.map((h, i) => (
                   <TableRow key={h.key} data-hazard-key={h.key}>
-                    <TableHead scope="row" className="whitespace-normal">
+                    <TableHead scope="row" className="whitespace-normal!">
                       {source.hazards[i]!.label}
                     </TableHead>
                     <TableCell
@@ -116,7 +116,7 @@ export function ThemeShelterApplicabilityClient({
               <TableHeader>
                 <TableRow>
                   <TableHead scope="col">指定避難所の区分</TableHead>
-                  <TableHead scope="col" className="text-right">
+                  <TableHead scope="col" className="text-right!">
                     掲載件数（件）
                   </TableHead>
                 </TableRow>

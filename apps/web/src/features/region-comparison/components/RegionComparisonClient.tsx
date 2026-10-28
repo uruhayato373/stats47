@@ -75,7 +75,7 @@ export function RegionComparisonClient({
               label: cat.categoryName,
             }))}
           >
-            <SelectTrigger aria-label="比較カテゴリを選択" className="h-10 w-40 rounded-lg border text-sm font-bold">
+            <SelectTrigger aria-label="比較カテゴリを選択" className="h-10 w-40 border font-bold">
               <SelectValue>
                 {currentCategory?.categoryName ?? "カテゴリ"}
               </SelectValue>

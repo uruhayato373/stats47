@@ -24,10 +24,10 @@ export function LinkCard({
 }) {
   return (
     <a href={href} className="group/link block h-full">
-      <Card className={cn("h-full transition-colors group-hover/link:bg-muted/40", className)}>
+      <Card className={cn("h-full transition-colors group-hover/link:bg-muted/40!", className)}>
         {title !== undefined ? (
           <CardHeader>
-            <CardTitle className="text-sm font-normal">{title}</CardTitle>
+            <CardTitle className="text-sm! font-normal!">{title}</CardTitle>
           </CardHeader>
         ) : null}
         <CardContent className="flex flex-col gap-1">

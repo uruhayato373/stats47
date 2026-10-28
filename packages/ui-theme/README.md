@@ -56,7 +56,7 @@ CSS で読んでいた間、lyra の規則はレイヤーの外にあり、部�
 - `cn(…)` の引数に `cn-*` を含む文字列があれば、その規則の `@apply` を最後の引数 `/* lyra */ "…"` として足す。className より後ろなので tailwind-merge が lyra の値を残す
 - `cva(…)` の文字列に `cn-*` があれば、同じ variant の形で lyra だけの cva (`<名前>Lyra`) を `// lyra:begin` 〜 `// lyra:end` に書く。`button`・`badge`・`toggle` は `<名前>Variants` を「素のクラス → className → lyra」の順に合成する包みにした。`ToggleGroupItem` は Toggle の素のクラス → className → Toggle の lyra → 自分の lyra の順
 - 呼び出し側の className が入らない `className="…"` の直書きは、その文字列の中で lyra を後ろに合成する
-- lyra に負けていた素のクラスは文字列から外す。`hover:` などの variant 付きは tailwind-merge では消えず、残すと効き始めるため (例: lyra の `bg-transparent` は `hover:bg-muted` にも勝っていた)。呼び出し側の variant 付きの同種のクラス (3 件) と、子の部品の lyra に負けていた `[&_td]:py-0 [&_th]:h-8` (1 か所) も外した。それ以外の負けていた呼び出し側の指定は見た目を変えないため残してある (backlog `LYRA-DEAD-CALLER-CLASSES-01`)
+- lyra に負けていた素のクラスは文字列から外す。`hover:` などの variant 付きは tailwind-merge では消えず、残すと効き始めるため (例: lyra の `bg-transparent` は `hover:bg-muted` にも勝っていた)。呼び出し側の variant 付きの同種のクラス (3 件) と、子の部品の lyra に負けていた `[&_td]:py-0 [&_th]:h-8` (1 か所) も外した。それ以外の負けていた呼び出し側の指定は CSS-3 では見た目を変えないため残し、同日の後続で `!` を付けるか消した (再発は `design-system:check` の `lyra-dead-caller-class` が止める)
 
 確かめ方: 11 ページ × 3 幅 (+ ダーク) の撮り比べと全要素の計算後スタイル、サイトマップから選んだ約 300 URL の全要素について
 「変更前の勝ち方で合成したクラス」と「変更後のクラス」の一致 (約 30 万要素で lyra 由来の差 0)、同じ URL で lyra の目印を持つ要素の計算後スタイル (56,546 要素で差 0。残りは読み込みの揺らぎ) を見た (2026-10-28)。テンプレートを取り直したら `npm run ui-theme:lyra` を実行し、同じ確かめ方をする。

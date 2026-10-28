@@ -56,17 +56,17 @@ export function ThemePhysicalActivityClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">指標</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 平均
                 <br />
                 （歩/日）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 95%信頼区間
                 <br />
                 （歩/日）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 集計
                 <br />
                 人数

@@ -38,7 +38,7 @@ const LeafletChoroplethMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" />
+      <Skeleton className="h-[400px] lg:h-[500px] w-full" />
     ),
   }
 );
