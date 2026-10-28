@@ -355,14 +355,6 @@ updated: 2026-10-19
 - **次**: `TEXT_STYLE` を消し、パネルの既定 (14px) に任せる。利用規約も同じ書き方をしていないか確かめる。
 - **完了条件**: 3 ページの本文が 390px と 1440px で 14px (描いた画面で測る)。
 
-### [SEO-META-WARD-LOWEST-01] 市区町村ランキング 4 指標の SEO 文が「最下位は政令市の区」のままで、観測値の最下位 (村) と食い違い develop の Catalog Gates を止めている
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: develop の `develop-quality-gate.yml` (run 40660907015・HEAD `984230b3e`) の Catalog Gates が `audit-seo-meta-facts.ts --fail-on-new` で失敗。手元で再現: `fiscal-strength-index` (主張 熊本市北区 / 実 鹿児島県三島村)、`manufacturing-shipment` (伊是名村 / 渡名喜村)、`per-taxpayer-income` (熊本市北区 / 群馬県南牧村)、`total-area-prefecture-ratio` (浜松市浜名区 / 札幌市厚別区)。同じ workflow は 08:40 の `714350846` で success。
-- **[仮説]** 政令指定都市の区の統合 / 分割 (`MUNI-DESIGNATED-CITY-WARDS-01`) で R2 の市区町村の観測値か順位の母集団が変わり、SEO 文 (git TS の metric の説明) が古いまま残った。この監査は R2 から観測値を読むので、コミットに関係なく R2 の更新で落ちうる。714350846 から HEAD までで監査の入力 (`packages/data-configs`・`packages/ranking`) を変えたのは `f9d38ed03` と `e485bd294` だけで、見本合わせのブランチは触っていない。
-- **次**: 4 指標の SEO 文を観測値の最下位に直す (区を順位の母集団に入れるかの決定に合わせる)。意図した変更でないなら R2 側を確かめる。`--update-baseline` で黙らせない。
-- **完了条件**: 上の検証コマンドが新規の不一致 0 件で通り、develop の Catalog Gates が success。
-
 ### [LINE-GRID-COLUMN-01] 描いた画面の線の格子の検査を定期実行に載せる
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
 
