@@ -408,13 +408,6 @@ updated: 2026-10-19
 - **次 (実行順)**: ⓪ author prompt (`blog-article-prompt.ts`) に「題で『なぜ』を約束したら本文で答える。答えられないなら題を変える」と、地方区分・隣接の言及は prompt に渡した区分だけを使う指示を足す (残る blocker の多数) ① 型B 以外 (A / D2 / F) で 3〜5 本ずつ回し、型ごとの通過率と費用を CSV に貯める ② 通過率が低い型は critic の指摘を読んで author prompt (`blog-article-prompt.ts`) 側を直す (critic は緩めない) ③ PASS 分を `--ingest` で確定して develop へ push する (公開は週次計画の本数で人が決める)。
 - **完了条件**: 型ごとに 5 本以上の実測が CSV にあり、既定の運転設定 (型・本数・rounds) を skill に書いている。
 
-### [BLOG-TOPIC-PAIR-PER-CAPITA-01] 相関記事 (型B) の題材に「件数×件数」の組が並び、人口の大きさだけで相関が出る問題を topic-queue の選定で直す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: `data/blog/topic-queue.json` の must-write 上位 8 件はすべて型B で、`general-hospital-count` × `elderly-single-person-households` のように人口で割っていない件数どうしの組や、`avg-salary-police-prefecture` × `national-assessment-elementary-tutoring-rate` (警察官の給与×小学生の塾通い) のように因果の筋が考えにくい組がある。さらに型B の prompt には相関係数が渡っておらず、critic は 3 本とも「相関の強さを示していない」と指摘した (相関 snapshot には値がある)。headless の critic はこの記事を「人口のデータを示さずに真因を切り分けると言っている」と blocker で差し戻した (`contents/blog/general-hospital-count-vs-elderly-single-person-households/review.md`)。prompt は実データ以外の数値を禁じるので、本文側では人口で割れない。
-- **次**: ① `.claude/scripts/blog/build-topic-queue.mjs` の型B 候補で、両方が人口比でない件数指標の組を外すか、人口あたりの版の指標に差し替える。外した件数を出力に出す ② 型B の prompt (`generate-blog-article.ts` → `buildBlogArticlePrompt`) に相関 snapshot の相関係数と対象県数を実データとして渡す (factual gate の照合対象にも加える)。
-- **完了条件**: 型B の pending に件数×件数の組が無く、テストで固定されている。
-
 ### [MUNI-WARD-MODE-READERS-01] 自前の統合版の地図 (`_city_dc`) を読む残り 2 か所を、データの単位を確かめてから WardMode の地図へ移す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
 
@@ -2175,14 +2168,6 @@ updated: 2026-10-19
   7. `article-factual-check.mjs` は「N位の県」の順位と「◯%」の割合の誤りを検出しない (2026-10-08、school-teacher-annual-income の writer が一時コピーに 42位・3.8% を注入して pass を確認。年収の値 515.72 万円の注入は VALUE_MISMATCH で検出された)。計算型の図 (kind `calculated`) の割合は data JSON にあるので、照合の対象に足せる
 - **次**: 1 はコードブロックを除いて数える (公開済み記事で誤検知・見逃しの件数を比べてから入れる)。2 は描画スクリプトの置き場 (例: 記事の data/ に置く `render-*.ts`) と restore の書き方を規約に足し、cc-estat-04 の 2 枚の描画スクリプトを保存する。3 は注入テストを再現して、照合から漏れる数値の書き方を特定する。
 - **完了条件**: 1 と 3 の修正がテストで固定され、2 が規約に書かれ cc-estat-04 の図が repo のスクリプトから作り直せる。
-
-### [BLOG-STACKED-BAR-LABEL-MOBILE-01] ブログの積み上げ棒で、狭い区分の値が図に出ないことと、スマホ用 SVG が無いことを直す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run --root packages/svg-builder] [起票:2026-10-07] [領域:サイト]
-
-- **事象 (2026-10-07、dairy-cattle-hokkaido-monopoly の writer が報告)**: `generateStackedBarSvg` は区分の幅が一定以下だと棒の中の値ラベルを出さない (横向きは幅 28 以下)。北海道のシェアを並べた図で、採卵鶏の 3.5% が図のどこにも数字で出なかった。また `generate-article-charts` は積み上げ棒のスマホ用 SVG (`-mobile.svg`) を作らないので、ランキング図と違ってスマホでは横長の図を縮めて見せている。
-- **追記**: 横向きの積み上げ棒は幅 4.9% 未満の区分のラベルを出さず、比べる基準の縦線 (例: 全国平均 26.6%) も引けない (同じ記事の critic 対応で、9 地方の図と基準線を見送った)。
-- **次**: 狭い区分の値を棒の外 (右端や凡例) に出す。基準線のオプションを足す。スマホ用のレイアウトを足して `generate-article-charts` から作る。公開済みの積み上げ棒 (2026-10 の監査で 4 枚程度) の見た目の差を比べてから入れる。
-- **完了条件**: 狭い区分の値も図に数字で出ることと、スマホ用 SVG ができることを svg-builder のテストで固定している。
 
 ### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T05:29:20.662Z",
+  "updatedAt": "2026-10-28T11:27:48.514Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -9030,6 +9030,79 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-27T05:29:20.662Z"
+    },
+    "BLOG-TOPIC-PAIR-PER-CAPITA-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-28T11:27:48.441Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs",
+              "npx vitest run --root packages/ai-content"
+            ],
+            "pass": true
+          },
+          "evidence": "834dea4cc: 型Bの件数×件数の組を除外(69件該当・単独16件)、再生成キューのpendingに件数×件数0をテストで固定(判定を外すと2件fail)。prompt に相関係数・対象県数を渡しテスト固定。ai-content vitest 全件pass",
+          "failReason": null,
+          "followUps": [
+            "BLOG-TOPIC-PAIR-SCALE-01",
+            "BLOG-CORRELATION-VALUE-MISMATCH-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-28T11:27:48.441Z"
+    },
+    "BLOG-STACKED-BAR-LABEL-MOBILE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-28T11:27:48.514Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run --root packages/svg-builder"
+            ],
+            "pass": true
+          },
+          "evidence": "be564d10d: 積み上げ棒の狭い区分の値を棒の外に出す・基準線・mobile layout(640幅/最小20px)をsvg-builderテストで固定(注記分岐を止めると4件fail)。generate-article-chartsが-mobile.svgを生成。svg-builder vitest 全件pass",
+          "failReason": null,
+          "followUps": [
+            "BLOG-STACKED-MOBILE-WEB-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-28T11:27:48.514Z"
     }
   }
 }
