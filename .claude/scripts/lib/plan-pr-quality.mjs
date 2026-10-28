@@ -7,7 +7,7 @@ const ROOT_BUILD_FILES = new Set([
   'package-lock.json',
   'turbo.json',
   'tsconfig.json',
-  'vitest.config.ts',
+  'vitest.config.mts',
 ]);
 
 function matchesAny(path, patterns) {

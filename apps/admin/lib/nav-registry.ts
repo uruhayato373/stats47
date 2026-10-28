@@ -12,7 +12,8 @@ export type NavItem = { href: string; label: string };
 /** 折りたたみの第二階層 (公式 SidebarMenuSub)。現在地を含む枝だけ開いて表示する */
 export type NavBranch = { label: string; children: readonly NavItem[] };
 export type NavEntry = NavItem | NavBranch;
-export type NavGroup = { title: string | null; items: readonly NavEntry[] };
+/** href はグループ名のリンク先 (領域の概要 /domains/<id>)。ホームのグループは持たない */
+export type NavGroup = { title: string | null; href?: string; items: readonly NavEntry[] };
 
 export function isBranch(entry: NavEntry): entry is NavBranch {
   return "children" in entry;
@@ -35,6 +36,7 @@ export const NAV_GROUPS: readonly NavGroup[] = [
   { title: null, items: [{ href: "/", label: "ホーム" }] },
   ...(domainsConfig.domains as readonly Domain[]).map((d) => ({
     title: d.label,
+    href: `/domains/${d.id}`,
     items: d.nav.map((n): NavEntry =>
       "channels" in n
         ? channelBranch(n.channels)
@@ -81,6 +83,33 @@ export function hasMoreSpecificMatch(pathname: string, href: string, hrefs: read
     const o = other.split("?")[0];
     return o.startsWith(path + "/") && (pathname === o || pathname.startsWith(o + "/"));
   });
+}
+
+export type NavCrumb = { label: string; href?: string };
+
+/**
+ * 上部バーの現在地 (グループ ＞ 枝 ＞ ページ)。メニューと同じ判定 (isNavItemActive) で現在の項目を探す。
+ * メニューに無いページ (詳細ページなど) は、前方一致する一番近い項目までを返す。何も一致しなければ空配列。
+ */
+export function navTrail(
+  pathname: string,
+  searchParams: Pick<URLSearchParams, "get">,
+  groups: readonly NavGroup[] = NAV_GROUPS,
+): NavCrumb[] {
+  const hrefs = navHrefs(groups);
+  for (const group of groups) {
+    const head: NavCrumb[] = group.title ? [{ label: group.title, href: group.href }] : [];
+    for (const entry of group.items) {
+      const items = isBranch(entry) ? entry.children : [entry];
+      for (const item of items) {
+        if (!isNavItemActive(pathname, searchParams, item.href, hrefs)) continue;
+        const branch = isBranch(entry) ? [{ label: entry.label }] : [];
+        return [...head, ...branch, { label: item.label, href: item.href }];
+      }
+    }
+    if (group.href && pathname === group.href && group.title) return [{ label: group.title, href: group.href }];
+  }
+  return [];
 }
 
 /** メニュー項目が現在地か。より具体的な項目が一致するときは親 (/strategy) は譲る。 */

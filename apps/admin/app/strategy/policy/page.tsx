@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { LinkCard, StatusBadge } from "@/components/admin-ui";
+import { Grid } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { sharedPolicyDocuments } from "@/lib/server/shared-policy";
 
@@ -16,50 +15,46 @@ export default function SharedPolicyIndexPage() {
   const documents = sharedPolicyDocuments();
 
   return (
-    <div className="space-y-6">
-      <PageHeading
-        title="共通方針"
-        source="Obsidian vault memos/*SSOT.md（正本）→ .claude/shared-policy/（写し）"
-      />
-      <p className="text-sm text-console-muted">
+    <>
+      <PageHeading title="共通方針" source="Obsidian vault memos/*SSOT.md（正本）→ .claude/shared-policy/（写し）">
+      <p className="text-sm text-muted-foreground">
         stats47・doboku-note・Obsidian vault
         で共有する判断枠組み。編集はObsidian vaultの正本だけで行い、
-        <code className="rounded bg-muted px-1">npm run policy:sync</code>
+        <code className="rounded bg-muted px-1 font-mono text-xs">npm run policy:sync</code>
         で配布する。ここは読み取り専用のミラー表示で、対象読者・商品・KPI・優先順位は
         stats47固有の
         <a
-          className="text-console-info underline underline-offset-2"
+          className="font-medium underline-offset-4 hover:underline"
           href="/strategy"
         >
-          方針・事業計画
+          方針
         </a>
         が管理する。
       </p>
+      </PageHeading>
 
       {documents.length === 0 ? (
         <p className="text-sm text-console-warn">
           配布物 (.claude/shared-policy/manifest.json) が見つかりません。Obsidian
-          vault で <code>npm run policy:sync</code> を実行してください。
+          vault で <code className="rounded bg-muted px-1 font-mono text-xs">npm run policy:sync</code> を実行してください。
         </p>
       ) : (
-        <ul className="grid gap-3 md:grid-cols-3">
+        <Grid min="md">
           {documents.map((d) => (
-            <li key={d.name}>
-              <LinkCard href={`/strategy/policy/${d.slug}`}>
+              <LinkCard key={d.name} href={`/strategy/policy/${d.slug}`}>
                 <div className="flex flex-wrap items-center gap-2">
                   <StatusBadge>v{d.version}</StatusBadge>
-                  <span className="text-[11px] text-console-muted">更新 {d.updated}</span>
+                  <span className="text-xs text-muted-foreground">更新 {d.updated}</span>
                 </div>
                 <h2 className="pt-2 text-base font-semibold">{d.title}</h2>
-                <p className="pt-1 text-sm text-console-muted">{d.summary}</p>
-                <code className="mt-2 block text-[11px] text-console-muted">
+                <p className="pt-1 text-sm text-muted-foreground">{d.summary}</p>
+                <code className="mt-2 block font-mono text-xs text-muted-foreground">
                   {d.name} ← {d.sourcePath}
                 </code>
               </LinkCard>
-            </li>
           ))}
-        </ul>
+        </Grid>
       )}
-    </div>
+    </>
   );
 }

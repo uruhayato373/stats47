@@ -1,249 +1,114 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ココナラの出品内容と公開状態",
-  "description": "config/coconala-listings.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "config/coconala-listings.json の形状契約。2026-10-26 に推論版から厳格化した (項目の追加は properties に足してから書く)。出品のキーが商品ファクトリーのカタログにあることは config/datasets.mjs の refs が検査する。_schema は人が読む記入例で、形は検査しない。",
   "type": "object",
+  "additionalProperties": false,
+  "required": ["listings"],
   "properties": {
-    "_note": {
-      "type": "string"
-    },
-    "_schema": {
-      "type": "object",
-      "properties": {
-        "<PRODUCT_ID>": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            },
-            "priceYen": {
-              "type": "string"
-            },
-            "status": {
-              "type": "string"
-            },
-            "serviceUrl": {
-              "type": "string"
-            },
-            "listedAt": {
-              "type": "string"
-            },
-            "catchphrase": {
-              "type": "string"
-            },
-            "category": {
-              "type": "object",
-              "properties": {
-                "master": {
-                  "type": "string"
-                },
-                "sub": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                }
-              }
-            },
-            "genreFacets": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "provisionFormat": {
-              "type": "string"
-            },
-            "body": {
-              "type": "string"
-            },
-            "purchaseNote": {
-              "type": "string"
-            },
-            "deliveryDays": {
-              "type": "string"
-            },
-            "fixLimit": {
-              "type": "string"
-            },
-            "faq": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "q": {
-                    "type": "string"
-                  },
-                  "a": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "options": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string"
-                  },
-                  "priceYen": {
-                    "type": "number"
-                  },
-                  "deliveryDays": {
-                    "type": "number"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
+    "_note": { "type": "string" },
+    "_schema": { "type": "object" },
     "listings": {
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "priceYen": {
-            "type": "number"
-          },
-          "status": {
-            "type": "string"
-          },
-          "serviceUrl": {
-            "type": "string"
-          },
-          "draftId": {
-            "type": "string"
-          },
-          "_thumbnail": {
-            "type": "string"
-          },
-          "_images": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "sellerUserId": {
-            "type": "string"
-          },
-          "catchphrase": {
-            "type": "string"
-          },
-          "category": {
-            "type": "object",
-            "properties": {
-              "master": {
-                "type": "string"
-              },
-              "sub": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            }
-          },
-          "genreFacets": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "provisionFormat": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          },
-          "body": {
-            "type": "string"
-          },
-          "purchaseNote": {
-            "type": "string"
-          },
-          "deliveryDays": {
-            "type": "number"
-          },
-          "fixLimit": {
-            "type": "string"
-          },
-          "faq": {
-            "type": "array"
-          },
-          "options": {
-            "type": "array"
-          },
-          "_source": {
-            "type": "string"
-          },
-          "_approval": {
-            "type": "string"
-          },
-          "_sampleArchiveSha256": {
-            "type": "string"
-          },
-          "listedAt": {
-            "type": "string"
-          },
-          "_thumbnailNote": {
-            "type": "string"
-          },
-          "_delivery": {
-            "type": "object",
-            "properties": {
-              "artifactDirectory": {
-                "type": "string"
-              },
-              "indicatorCount": {
-                "type": "number"
-              },
-              "pptxIndicatorCount": {
-                "type": "number"
-              },
-              "hasXlsx": {
-                "type": "boolean"
-              },
-              "officeValidation": {
-                "type": "string"
-              },
-              "verifiedAt": {
-                "type": "string"
-              },
-              "manifestSha256": {
-                "type": "string"
-              },
-              "previewHeader": {
-                "type": "string"
-              },
-              "labelRevision": {
-                "type": "string"
-              },
-              "originalManifestSha256": {
-                "type": "string"
-              }
-            }
-          },
-          "_provisionFormatNote": {
-            "type": "string"
-          }
-        }
-      }
+      "propertyNames": { "$ref": "common.schema.json#/$defs/coconalaListingId" },
+      "additionalProperties": { "$ref": "#/definitions/listing" }
     }
   },
-  "required": [
-    "_note",
-    "_schema",
-    "listings"
-  ]
+  "definitions": {
+    "listing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "priceYen", "status"],
+      "properties": {
+        "title": { "$ref": "common.schema.json#/$defs/nonEmptyString" },
+        "priceYen": { "$ref": "common.schema.json#/$defs/yen" },
+        "status": { "enum": ["draft", "listed", "withdrawn"] },
+        "serviceUrl": { "type": ["string", "null"], "pattern": "^https://coconala\\.com/services/\\d+$" },
+        "listedAt": { "$ref": "common.schema.json#/$defs/date" },
+        "catchphrase": { "type": "string" },
+        "category": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["master", "sub"],
+          "properties": {
+            "master": { "type": "string", "pattern": "^\\d+$" },
+            "sub": { "type": "string", "pattern": "^\\d+$" },
+            "type": { "type": "string", "pattern": "^\\d+$" }
+          }
+        },
+        "genreFacets": { "type": "array", "items": { "type": "string", "pattern": "^\\d+$" } },
+        "provisionFormat": { "enum": [1, 2, 3] },
+        "body": { "type": "string" },
+        "purchaseNote": { "type": "string" },
+        "deliveryDays": { "type": "integer", "minimum": 1 },
+        "fixLimit": {
+          "description": "無料修正回数。-1 = 無料修正なし",
+          "anyOf": [{ "type": "integer", "minimum": -1 }, { "type": "string", "pattern": "^(-1|\\d+)$" }]
+        },
+        "faq": {
+          "type": "array",
+          "items": { "type": "object", "additionalProperties": false, "required": ["q", "a"], "properties": { "q": { "type": "string" }, "a": { "type": "string" } } }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "priceYen"],
+            "properties": {
+              "title": { "type": "string" },
+              "priceYen": { "$ref": "common.schema.json#/$defs/yen" },
+              "deliveryDays": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "_thumbnail": { "type": "string" },
+        "_thumbnailNote": { "type": "string" },
+        "_images": { "type": "array", "items": { "type": "string" } },
+        "_provisionFormatNote": { "type": "string" },
+        "_delivery": { "$ref": "#/definitions/delivery" },
+        "_noteDelivery": { "$ref": "#/definitions/delivery" },
+        "_withdrawal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["decisionDate", "reason"],
+          "properties": {
+            "decisionDate": { "$ref": "common.schema.json#/$defs/date" },
+            "recordedAt": { "$ref": "common.schema.json#/$defs/date" },
+            "reason": { "$ref": "common.schema.json#/$defs/nonEmptyString" },
+            "historicalPublicationEvidence": { "type": "string" }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "listed" } } },
+          "then": { "required": ["serviceUrl", "listedAt"], "properties": { "serviceUrl": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "status": { "const": "withdrawn" } } },
+          "then": { "required": ["_withdrawal"] }
+        }
+      ]
+    },
+    "delivery": {
+      "description": "販売する納品版の固定 (成果物のディレクトリと manifest の SHA)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactDirectory", "manifestSha256"],
+      "properties": {
+        "artifactDirectory": { "type": "string", "pattern": "^\\.local/" },
+        "indicatorCount": { "type": "integer", "minimum": 0 },
+        "pptxIndicatorCount": { "type": "integer", "minimum": 0 },
+        "hasXlsx": { "type": "boolean" },
+        "officeValidation": { "enum": ["owner-pending", "verified"] },
+        "verifiedAt": { "$ref": "common.schema.json#/$defs/date" },
+        "manifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+        "originalManifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+        "previewHeader": { "type": "string" },
+        "labelRevision": { "type": "string" },
+        "_note": { "type": "string" }
+      }
+    }
+  }
 }

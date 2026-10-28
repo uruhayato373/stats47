@@ -27,22 +27,42 @@ export function splitPublishedBody(before, publicBefore, body) {
   const opening = new RegExp(`<([a-z][a-z0-9-]*)\\b[^>]*(?:id|name)="${escaped}"[^>]*>`, 'i').exec(body);
   if (!opening) throw Error('paid boundary element missing');
   const tag = opening[1].toLowerCase();
-  if (!['p', 'h1', 'h2', 'h3', 'h4', 'hr', 'figure'].includes(tag)) throw Error('unsupported paid boundary element');
+  if (!['p', 'h1', 'h2', 'h3', 'h4', 'hr', 'figure', 'ul', 'ol'].includes(tag)) throw Error('unsupported paid boundary element');
   const end = tag === 'hr' ? opening.index + opening[0].length : body.indexOf(`</${tag}>`, opening.index) + tag.length + 3;
+  // A list boundary is cut at its first closing tag, so a nested list of the same kind would split it early.
+  if ((tag === 'ul' || tag === 'ol') && body.slice(opening.index + opening[0].length, end).includes(`<${tag}`)) throw Error('nested list in paid boundary element');
   if (end < opening.index + opening[0].length) throw Error('paid boundary closing tag missing');
   return { free_body: body.slice(0, end), pay_body: body.slice(end) };
 }
 
 export function assertPublishedMetadata(before, after) {
-  for (const field of ['name', 'price', 'separator', 'status', 'slug', 'eyecatch', 'disable_comment', 'index', 'is_limited']) {
+  for (const field of ['name', 'price', 'separator', 'status', 'slug', 'eyecatch', 'disable_comment', 'is_limited']) {
     if (JSON.stringify(before[field] ?? null) !== JSON.stringify(after[field] ?? null)) throw Error(`published ${field} changed`);
+  }
+  if (JSON.stringify(before.index ?? null) !== JSON.stringify(after.index ?? null)) {
+    // note derives the index from headings. Appending an approved footer can append one index entry.
+    const previous = before.index;
+    const current = after.index;
+    const oldBody = cheerio.load(before.body || '');
+    const newBody = cheerio.load(after.body || '');
+    const appendedOnly = Array.isArray(previous) && Array.isArray(current) && current.length > previous.length
+      && JSON.stringify(current.slice(0, previous.length)) === JSON.stringify(previous)
+      && current.slice(previous.length).every((entry) => {
+        if (!['h2', 'h3'].includes(entry.level) || !/^[a-zA-Z0-9-]+$/.test(entry.name)) return false;
+        const selector = `${entry.level}[name="${entry.name}"],${entry.level}[id="${entry.name}"]`;
+        return oldBody(selector).length === 0 && newBody(selector).length === 1 && newBody(selector).text() === entry.body;
+      });
+    if (!appendedOnly) throw Error('published index changed');
   }
   if (JSON.stringify(tags(before)) !== JSON.stringify(tags(after))) throw Error('published hashtags changed');
   if (before.user?.urlname !== 'stats47' || after.user?.urlname !== 'stats47') throw Error('note account mismatch');
 }
 
-/** Use the editor's complete per-article payload; only the approved published body is patched. */
-export async function publishCardBody(context, apiPage, before, publicBefore, body, backupPath, onStage = () => {}) {
+/**
+ * Use the editor's complete per-article payload; only the approved published body is patched.
+ * options.name: an approved new title (a full rewrite renames the article). Price, tags and boundary stay guarded.
+ */
+export async function publishCardBody(context, apiPage, before, publicBefore, body, backupPath, onStage = () => {}, options = {}) {
   if (before.user?.urlname !== 'stats47' || before.status !== 'published') throw Error('owned published article required');
   const key = before.key;
   const draft = before.has_draft ? await noteRequest(apiPage, `/api/v3/notes/${key}?draft=true&draft_reedit=false`) : null;
@@ -85,6 +105,7 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
         if (JSON.stringify([...payload.hashtags].sort()) !== JSON.stringify(tags(before))) throw Error('editor hashtags differ from publication');
         if ((payload.separator || null) !== (before.separator || null)) throw Error('editor boundary differs from publication');
         Object.assign(payload, split);
+        if (options.name) payload.name = options.name;
         sent = true;
         await onStage('sending');
         await route.continue({ postData: JSON.stringify(payload) });
@@ -103,7 +124,7 @@ export async function publishCardBody(context, apiPage, before, publicBefore, bo
   const after = await noteRequest(apiPage, `/api/v3/notes/${key}?cardVerify=${Date.now()}`);
   if (after.body !== body) throw Error('published body differs from approved card repair');
   let metadataError;
-  try { assertPublishedMetadata(before, after); } catch (error) { metadataError = error; }
+  try { assertPublishedMetadata(options.name ? { ...before, name: options.name } : before, after); } catch (error) { metadataError = error; }
   if (draft) {
     await noteRequest(apiPage, `/api/v1/text_notes/draft_save?id=${before.id}&is_temp_saved=true`, { method: 'POST', body: draftSavePayload(draft) });
     const restored = await noteRequest(apiPage, `/api/v3/notes/${key}?draft=true&draft_reedit=false`);

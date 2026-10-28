@@ -41,3 +41,15 @@ test("審査提出と販売中をpublicationStageで分離する", () => {
   );
   assert.equal(liveWithPredecessor.publicationStage, "live");
 });
+
+test("出版停止を決めた withdrawn は本棚が live のままでも listed に戻さない", () => {
+  const next = mergeKdpOperationalState(
+    { id: "K-S1-99", status: "withdrawn" },
+    { status: "販売中", asin: "B000000000" },
+    "2026-10-27T00:00:00.000Z",
+  );
+  assert.equal(next.status, "withdrawn");
+  assert.equal(next.kdpStatus, "live");
+  const listed = mergeKdpOperationalState({ id: "K-S1-98", status: "approved" }, { status: "販売中" }, "2026-10-27T00:00:00.000Z");
+  assert.equal(listed.status, "listed");
+});

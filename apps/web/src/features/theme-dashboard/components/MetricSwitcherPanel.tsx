@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { classifyUnitComparability, formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { Check } from 'lucide-react';
@@ -489,7 +490,7 @@ export function MetricSwitcherPanel({
     if (next) {
       trackNavClick({
         label: key,
-        href: `/ranking/${key}`,
+        href: hrefFor("ranking", { rankingKey: key }),
         surface: 'theme_kpi_switcher',
       });
     }
@@ -536,7 +537,7 @@ export function MetricSwitcherPanel({
               source={representative.sourceName}
               sourceLink={representative.sourceLink}
               sourceLinks={representative.sourceLinks}
-              rankingLink={`/ranking/${representative.metricKey}`}
+              rankingLink={hrefFor("ranking", { rankingKey: representative.metricKey })}
               rankingLabel="ランキングを見る"
             />
           ) : undefined

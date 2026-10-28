@@ -2,6 +2,8 @@ import { HOME_PORTAL_USE_CASES } from '@stats47/data-configs/home-portal';
 
 import { HorizontalCardCarousel } from '@/components/surface';
 
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
+
 import { PortalNavCard } from './PortalNavCard';
 
 /**
@@ -17,7 +19,7 @@ export function PortalUseCaseGrid() {
       {items.map((u) => (
         <PortalNavCard
           key={u.id}
-          href={`/themes/${u.themeKey}`}
+          href={themeHref(u.themeKey)}
           label={u.label}
           description={u.description}
           imageSrc={u.imageSrc}

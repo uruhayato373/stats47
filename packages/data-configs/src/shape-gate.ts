@@ -34,6 +34,8 @@
  * (起点が 47 でなくてもよい。39 → 34 も劣化として捕まえる)。
  */
 
+import { PREFECTURE_AREA_CODES } from "@stats47/area";
+
 /** 検査の種類 */
 export type ShapeCheck =
   /** 同一 (areaCode, yearCode) に 2 行以上 = 分類軸の絞り忘れ */
@@ -137,8 +139,8 @@ export const VALUE_CHECKS: readonly ShapeCheck[] = [
  */
 export const WARN_ONLY_CHECKS: readonly ShapeCheck[] = ["zero-heavy", "negative-count"];
 
-/** 都道府県の総数。coverage 判定の基準 */
-export const PREFECTURE_COUNT = 47;
+/** 都道府県の総数。coverage 判定の基準。`@stats47/area` の 47 県コードから導出する */
+export const PREFECTURE_COUNT = PREFECTURE_AREA_CODES.length;
 
 /**
  * unit が % のときの値域しきい値。

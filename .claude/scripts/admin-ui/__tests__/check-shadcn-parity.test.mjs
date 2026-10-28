@@ -9,7 +9,7 @@ const REF_BADGE = readFileSync(new URL('../../../config/shadcn-reference/badge.t
 
 test('cva の base と variant、data-slot の className を部品単位のクラス集合にする', () => {
   const e = extractEntities(REF_BADGE);
-  assert.ok(e['cva:badgeVariants:base'].includes('rounded-full'));
+  assert.ok(e['cva:badgeVariants:base'].includes('rounded-4xl'));
   assert.ok(e['cva:badgeVariants:variant.outline'].includes('border-border'));
   const card = extractEntities('<div data-slot="card" className={cn("flex gap-6 py-6", className)} />\n<div data-slot="card-title" className="font-semibold" />');
   assert.deepEqual(card, { 'slot:card': ['flex', 'gap-6', 'py-6'], 'slot:card-title': ['font-semibold'] });

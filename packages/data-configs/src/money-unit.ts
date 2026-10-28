@@ -20,24 +20,20 @@
  *   広げると誤検知が出る (同型のバグは起こりうるので、必要になったら族を足す)
  */
 
-/** 金額単位 → 10 の指数。円 = 0 を基準にする */
-const MONEY_UNIT_EXPONENT: Readonly<Record<string, number>> = {
-  円: 0,
-  千円: 3,
-  万円: 4,
-  十万円: 5,
-  百万円: 6,
-  千万円: 7,
-  億円: 8,
-  兆円: 12,
-};
+import { parseUnit } from "./unit/unit-semantics";
 
-/** 金額族として解釈できる unit なら 10 の指数を返す。族外・空なら null */
+/**
+ * 金額族として解釈できる unit なら 10 の指数 (円 = 0) を返す。族外・空・分母つきなら null。
+ *
+ * 桁の表は持たない。単位の正典 `unit/unit-semantics.ts` の `parseUnit` に委ねる
+ * (`.claude/rules/unit-semantics-standards.md` §3「新しいスケール表をファイル内に書く」の禁止)。
+ * 分母つき (「円（1人当たり）」等) は素の金額と換算しないので族外とする。
+ */
 export function moneyUnitExponent(unit: string | null | undefined): number | null {
-  if (typeof unit !== "string") return null;
-  const trimmed = unit.trim();
-  if (trimmed === "") return null;
-  return MONEY_UNIT_EXPONENT[trimmed] ?? null;
+  if (typeof unit !== "string" || unit.trim() === "") return null;
+  const parsed = parseUnit(unit);
+  if (parsed.dimension !== "currency" || parsed.hasDenominator) return null;
+  return parsed.scaleExponent;
 }
 
 export type MoneyUnitVerdict =

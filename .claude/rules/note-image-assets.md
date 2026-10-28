@@ -46,7 +46,7 @@ paths:
 - `update-note-covers.mjs [--keys ...] [--commit]` は台帳の採用済みremote版だけを読み、
   画像専用更新と本文/価格/境界の保全・配信検証後に公開ポインタを更新する。
   `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面からの保存は以下の制作内容・目視確認だけ。
-- `/content/note/covers` と `/assets` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
+- `/content/note/covers` と `/ops/image-library` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
   ローカル画像キャッシュを永続化しない。取得失敗・旧版未回収・未判定・未反映・観測の鮮度を表示する。
 - Wrangler OAuthの期限切れは、既存sessionを非対話で更新し、同時画像取得は1回の更新を共有する。
   更新後の認証を読み直し、子プロセスもTLSを検証する。失効などで更新不能なら接続案内を表示して停止する。

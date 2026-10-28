@@ -1,0 +1,302 @@
+{
+  "checkedAt": "2026-10-27T03:36:59.884Z",
+  "summary": {
+    "total": 428,
+    "affected": 17,
+    "fetchFailed": 0
+  },
+  "fetchFailed": [],
+  "findings": [
+    {
+      "key": "b-ref-prc-a24",
+      "noteUrl": "https://note.com/stats47/n/nb1643889a8a4",
+      "title": "インターネットを使う人の割合は東京都70.8％、青森県44.4％ ── 2006年の47都道府県比較",
+      "isPaid": false,
+      "hits": [
+        {
+          "code": "behavior-unverified",
+          "label": "操作・表示を確認していない",
+          "excerpt": "いません。また、総務省の通信利用動向調査の都道府県別の値は、stats47ではまだ確認できていません。 結論を先に書くと、2006年の時点では、最も高い東京都("
+        }
+      ]
+    },
+    {
+      "key": "d-geo-ksj-qgis-guide",
+      "noteUrl": "https://note.com/stats47/n/n346d566772a1",
+      "title": "国土数値情報をQGISで扱う",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "verification-status-note",
+          "label": "検証状況・検証範囲の断り書き",
+          "excerpt": "を付けました。実在の国土数値情報はZIPに入れていません。 検証範囲 : この記事のQGIS画面操作は国土交通省とQGISの公式マニ"
+        },
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "国土交通省とQGISの公式マニュアルを参照して記述しました。このMacにはQGISがなく、現在のQGIS画面での実機確認は未了です。利"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "ました。このMacにはQGISがなく、現在のQGIS画面での実機確認は未了です。利用中の版でメニュー名や表示を確認してください。添付キ"
+        },
+        {
+          "code": "behavior-unverified",
+          "label": "操作・表示を確認していない",
+          "excerpt": "て記述しました。このMacにはQGISがなく、現在のQGIS画面での実機確認は未了です。利用中の版でメニュー名や表示を確認してください。添付キ"
+        }
+      ]
+    },
+    {
+      "key": "h-howto-excel-filled-map",
+      "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
+      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "isPaid": false,
+      "hits": [
+        {
+          "code": "verification-status-note",
+          "label": "検証状況・検証範囲の断り書き",
+          "excerpt": "Microsoft の公式サポートの表記に合わせています。 検証状況（2026年10月24日）: この制作環境にはMicrosof"
+        },
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "合わせています。 検証状況（2026年10月24日）: この制作環境にはMicrosoft 365のExcelがなく、以下の操作"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "365のExcelがなく、以下の操作手順と県別の表示結果は実機で確認できていません。画面の項目名や利用可能な機能は、お使いのExcelで確かめ"
+        }
+      ]
+    },
+    {
+      "key": "h-howto-mymaps-kml",
+      "noteUrl": "https://note.com/stats47/n/n0c132ee7d825",
+      "title": "Googleマイマップで都道府県を色分けした地図を作る方法 ── KMLを読み込むだけ・GIS不要",
+      "isPaid": false,
+      "hits": [
+        {
+          "code": "verification-status-note",
+          "label": "検証状況・検証範囲の断り書き",
+          "excerpt": "す。必要なのは、Googleアカウントとブラウザだけです。 検証状況（2026年10月24日）: stats47のKMLファイルと"
+        },
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "イルとGoogleのKMLインポート手順は確認しました。この制作環境では、Googleマイマップのファイル選択画面が表示されず、"
+        },
+        {
+          "code": "behavior-unverified",
+          "label": "操作・表示を確認していない",
+          "excerpt": "イル選択画面が表示されず、取り込み後の地図と県をクリックした表示は確認できていません。表示結果はご自身の環境で確かめてください。 KMLファイル"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-all-in-one-pack",
+      "noteUrl": "https://note.com/stats47/n/nfa7d235eba85",
+      "title": "47都道府県 2,073指標の統計データ総合集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "（使い方・一覧・17カテゴリのシート・出典の計20シート）。実機での表示・編集・再計算は未確認です。 PDF：4,467ページ。指標ごとの47都道府県の順"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-disaster-infrastructure-pack",
+      "noteUrl": "https://note.com/stats47/n/nf25cd9ae21e6",
+      "title": "防災・交通・インフラを県別に比べる 230指標データ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "境・インフラ・建設・情報通信・エネルギー・出典の8シート）。実機での表示・編集・再計算は未確認です。 PDF：495ページ。指標ごとの47都道府県の順位表"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-education-childcare-pack",
+      "noteUrl": "https://note.com/stats47/n/n9f0be14ecc0c",
+      "title": "学校・保育・社会教育を47都道府県で比べる244指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-healthcare-nursing-pack",
+      "noteUrl": "https://note.com/stats47/n/nbdad7c99d4b5",
+      "title": "医療・介護の体制を47都道府県で比べる237指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-household-consumption-pack",
+      "noteUrl": "https://note.com/stats47/n/n554a047cf5be",
+      "title": "県庁所在市の家計消費を品目別に比べる 685指標データ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "el：同梱です（使い方・一覧・経済・家計・出典の4シート）。実機での表示・編集・再計算は未確認です。 PDF：1,488ページ。指標ごとの47都道府県の順"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-income-wage-hiring-pack",
+      "noteUrl": "https://note.com/stats47/n/n46d68c153502",
+      "title": "賃金・求人・働き方を47都道府県で比べる107指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-industry-economy-pack",
+      "noteUrl": "https://note.com/stats47/n/n2ced199ed715",
+      "title": "県ごとの産業・農業・家計を比べる 132指標データ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "」「農林水産」「経済・家計」「鉱工業」「出典」の6シート）。実機での表示・編集・再計算は未確認です。 PDF：286ページ。指標ごとの47都道府県の順位表"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-map-chart-assets-pack",
+      "noteUrl": "https://note.com/stats47/n/n0f5dafef7fa8",
+      "title": "資料に貼れる都道府県の地図・ランキング素材 28指標",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "-ja.txt）。 PowerPointでの動作は、現時点で実機確認が完了していません。 関連する無料データ stats47 /ranking s"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-migration-living-pack",
+      "noteUrl": "https://note.com/stats47/n/n323af74c09cc",
+      "title": "住居費・物価・気候を47都道府県で比べる76指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-municipal-finance-pack",
+      "noteUrl": "https://note.com/stats47/n/n5da8a99b3506",
+      "title": "自治体財政・職員給与を47都道府県で比べる119指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-population-household-pack",
+      "noteUrl": "https://note.com/stats47/n/ne47eb45f8a15",
+      "title": "人口・世帯を47都道府県で比べる134指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-retail-trade-area-pack",
+      "noteUrl": "https://note.com/stats47/n/n973c3f8478f5",
+      "title": "出店候補の県を比べる 商業・小売69指標データ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "Excel：同梱です（使い方・一覧・商業・出典の4シート）。実機での表示・編集・再計算は未確認です。 PDF：150ページ。指標ごとの47都道府県の順位表"
+        }
+      ]
+    },
+    {
+      "key": "prefecture-tourism-lodging-pack",
+      "noteUrl": "https://note.com/stats47/n/n7a5f6df6f5ac",
+      "title": "宿泊・交通・旅行行動を47都道府県で比べる44指標のデータ集",
+      "isPaid": true,
+      "hits": [
+        {
+          "code": "production-environment",
+          "label": "制作環境・作成側への言及",
+          "excerpt": "覧の3枚で、全CSV指標をスライド化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（p"
+        },
+        {
+          "code": "device-unverified",
+          "label": "実機で確認していない",
+          "excerpt": "化したものではありません。作成側での PowerPoint 実機確認は未了です。 Excel（product.xlsx）：「使い方」「"
+        }
+      ]
+    }
+  ]
+}

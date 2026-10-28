@@ -1,7 +1,10 @@
+import { LinkCard } from "@/components/admin-ui";
 import { KpiTree } from "@/components/home/kpi-tree";
 import { SummaryCards } from "@/components/home/summary-cards";
+import { Grid, Section } from "@/components/layout-primitives";
+import { PageHeading } from "@/components/ops/primitives";
+import { datasetDir } from "../../../config/datasets.mjs";
 
-import { LinkCard } from "@/components/admin-ui";
 export const dynamic = "force-dynamic";
 
 const SECTIONS = [
@@ -26,14 +29,9 @@ const SECTIONS = [
     desc: "日本地図 × 統計カードの企画キューと素材プレビュー",
   },
   {
-    href: "/assets",
-    title: "画像資産",
-    desc: "OGP・リンクカード・note カバー・記事内画像/動画の閲覧",
-  },
-  {
-    href: "/svg",
-    title: "SVG カタログ",
-    desc: "ブログ SVG チャートをカタログ別に横断閲覧",
+    href: "/ops/image-library",
+    title: "画像ライブラリ",
+    desc: "OGP・リンクカード・ブログ SVG・note・SNS の画像と動画を横断して閲覧",
   },
   {
     href: "/research",
@@ -42,8 +40,8 @@ const SECTIONS = [
   },
   {
     href: "/strategy",
-    title: "方針・事業計画",
-    desc: "stats47 2.0の取込判断、初期パイロット、企画在庫、KPI、設計文書を確認",
+    title: "方針",
+    desc: "事業計画の題目・事業原則・設計と方針の文書。計画の明細は各領域の画面へ割り振った",
   },
   {
     href: "/revenue",
@@ -77,37 +75,29 @@ const SECTIONS = [
   },
 ] as const;
 
+/** トップ (型 A: 概況)。数値タイル → KPI ツリー → 各画面への入口の順。 */
 export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-xl font-bold text-console-fg">
-          管理コンソール
-        </h1>
-        <p className="mt-1 text-sm text-console-muted">
-          ローカル専用 (127.0.0.1)・完全読み取り専用。制作・収益・品質・運用・Geo契約を横断確認し、実行は担当agent/skillだけが行う。
-        </p>
-      </div>
+    <>
+      <PageHeading
+        title="管理コンソール"
+        source={`${datasetDir("business.measurement-cycle")}/latest.json + /api/assets/summary`}
+        accessLabel="ローカル専用 (127.0.0.1)・完全読み取り専用"
+      >
+        <p className="text-sm text-muted-foreground">制作・収益・品質・運用・Geo契約を横断確認し、実行は担当agent/skillだけが行う。</p>
+      </PageHeading>
+
+      <SummaryCards />
 
       <KpiTree />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {SECTIONS.map((section) => (
-          <LinkCard key={section.href} href={section.href}>
-            <div className="text-base font-semibold text-console-fg">
-              {section.title}
-            </div>
-            <p className="mt-2 text-sm text-console-muted">{section.desc}</p>
-          </LinkCard>
-        ))}
-      </div>
-
-      <div>
-        <h2 className="text-sm font-semibold text-console-fg">サマリ</h2>
-        <div className="mt-3">
-          <SummaryCards />
-        </div>
-      </div>
-    </div>
+      <Section title="画面一覧">
+        <Grid min="md">
+          {SECTIONS.map((section) => (
+            <LinkCard key={section.href} href={section.href} title={section.title} sub={section.desc} />
+          ))}
+        </Grid>
+      </Section>
+    </>
   );
 }

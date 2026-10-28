@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { findIndicatorSet } from '@stats47/types';
 
@@ -63,7 +64,7 @@ export function ThemeIndicatorCatalogSection({
                 {items.map((m) => (
                   <li key={m.rankingKey}>
                     <TrackedThemeLink
-                      href={`/ranking/${m.rankingKey}`}
+                      href={hrefFor("ranking", { rankingKey: m.rankingKey })}
                       trackingLabel={`${themeKey}:indicator-catalog:${m.rankingKey}`}
                       surface="theme_ranking"
                       className="text-sm text-primary hover:underline"

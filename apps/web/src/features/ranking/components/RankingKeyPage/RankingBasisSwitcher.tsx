@@ -9,6 +9,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@stats47/components/atoms/ui/select";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
 
@@ -45,7 +46,7 @@ export function RankingBasisSwitcher({
                 <Select
                     value={rankingKey}
                     onValueChange={(key) => {
-                        if (key !== rankingKey) router.push(`/ranking/${key}`);
+                        if (key !== rankingKey) router.push(hrefFor("ranking", { rankingKey: key }));
                     }}
                 >
                     <SelectTrigger aria-label="表示基準" className="h-9 w-full text-sm">
@@ -74,7 +75,7 @@ export function RankingBasisSwitcher({
                     ) : (
                         <Link
                             key={member.rankingKey}
-                            href={`/ranking/${member.rankingKey}`}
+                            href={hrefFor("ranking", { rankingKey: member.rankingKey })}
                             className="text-xs px-2.5 pb-1 border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30 transition-colors"
                         >
                             {label}

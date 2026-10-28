@@ -15,6 +15,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import { buildMigrationFocusFile } from "@stats47/migration-flow/focus-file";
 import { readMigrationFlow } from "@stats47/stats-r2/readers";
 
 const METRIC_KEY = "population-migration-inter-prefecture";
@@ -29,15 +30,6 @@ function loadPrefNames(): Map<string, string> {
     readFileSync(resolve(REPO_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
   ) as Array<{ prefCode: string; prefName: string }>;
   return new Map(raw.map((p) => [p.prefCode, p.prefName]));
-}
-
-interface FocusFile {
-  focusCode: string;
-  focusName: string;
-  year: number;
-  source: string;
-  partners: { code: string; name: string; inflow: number; outflow: number; net: number }[];
-  totals: { inflow: number; outflow: number; net: number };
 }
 
 async function resolveLatestYear(): Promise<number> {
@@ -65,26 +57,7 @@ async function main(): Promise<void> {
     const code = String(i).padStart(2, "0");
     const area = `${code}000`;
     // focus F の partner = toPrefCode === F の行 (inflow=partner→F, outflow=F→partner)
-    const partners = payload.rows
-      .filter((r) => r.toPrefCode === area && r.fromPrefCode !== area)
-      .map((r) => ({
-        code: r.fromPrefCode.slice(0, 2),
-        name: prefNames.get(r.fromPrefCode) ?? "",
-        inflow: r.inflow,
-        outflow: r.outflow,
-        net: r.net,
-      }))
-      .sort((a, b) => b.inflow - a.inflow);
-    const ti = partners.reduce((s, p) => s + p.inflow, 0);
-    const to = partners.reduce((s, p) => s + p.outflow, 0);
-    const focus: FocusFile = {
-      focusCode: code,
-      focusName: prefNames.get(area) ?? area,
-      year,
-      source: `e-Stat 住民基本台帳人口移動報告 (統計表 0003423613)`,
-      partners,
-      totals: { inflow: ti, outflow: to, net: ti - to },
-    };
+    const focus = buildMigrationFocusFile({ focusCode5: area, year, rows: payload.rows, prefNames });
     writeFileSync(resolve(OUT_DIR, `${code}.json`), JSON.stringify(focus));
     written++;
   }

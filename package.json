@@ -79,7 +79,7 @@
     "measurement:restore": "node .claude/scripts/measurement/restore.mjs",
     "measurement:status": "node .claude/scripts/measurement/health.mjs",
     "measurement:test": "node --test .claude/scripts/measurement/__tests__/*.test.mjs",
-    "test:agent-efficiency": "node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/check-findings-on-stop.test.cjs .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs",
+    "test:agent-efficiency": "node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/check-unpushed-on-stop.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/check-findings-on-stop.test.cjs .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs",
     "preflight": "node .claude/scripts/lib/preflight-commit.mjs",
     "preflight:pr": "node .claude/scripts/lib/preflight-commit.mjs --pr",
     "test:content-routines": "node --test .claude/scripts/lib/__tests__/content-generation-routine.test.cjs .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs .claude/scripts/lib/__tests__/record-claude-usage.test.mjs",
@@ -90,6 +90,7 @@
     "note:catalog:validate": "tsx .claude/scripts/note/catalog/validate-note-catalog.ts",
     "note:catalog:check": "tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check",
     "note:circulation:audit": "node .claude/scripts/note/audit-note-circulation.mjs",
+    "note:unverified:audit": "node .claude/scripts/note/audit-note-unverified.mjs --published",
     "note:cards:audit": "node .claude/scripts/note/audit-note-card-visibility.mjs",
     "note:cards:repair-batch": "node .claude/scripts/note/repair-note-cards-batch.mjs",
     "note:cards:compact-spacing": "node .claude/scripts/note/compact-note-card-spacing.mjs",
@@ -109,12 +110,12 @@
     "note:images:test": "node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs",
     "note:images:ensure": "node .claude/scripts/note/ensure-note-images.mjs",
     "admin-ui:check": "node .claude/scripts/admin-ui/check-shadcn-parity.mjs && node .claude/scripts/admin-ui/check-admin-ui-debt.mjs",
-    "admin-ui:test": "node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs",
+    "admin-ui:test": "node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs .claude/scripts/admin-ui/__tests__/sync-shadcn-reference.test.mjs",
     "admin-ui:sync-reference": "node .claude/scripts/admin-ui/sync-shadcn-reference.mjs",
     "note:covers:test": "node --test .claude/scripts/note/__tests__/cover-audit.test.mjs .claude/scripts/note/__tests__/cover-update.test.mjs",
     "note:metrics:fetch": "node .claude/scripts/note/fetch-note-metrics.mjs",
     "note:metrics:test": "node --test .claude/scripts/note/__tests__/dashboard-metrics.test.mjs",
-    "note:circulation:test": "node --test .claude/scripts/note/__tests__/native-cards.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs",
+    "note:circulation:test": "node --test .claude/scripts/note/__tests__/native-cards.test.mjs .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/circulation-audit.test.mjs .claude/scripts/note/__tests__/navigation-footer.test.mjs .claude/scripts/note/__tests__/publishing-safety.test.mjs .claude/scripts/note/__tests__/unverified-disclosure.test.mjs",
     "note:brand-assets": "node .claude/scripts/note/generate-note-brand-headers.mjs",
     "note:branding:update": "node .claude/scripts/note/update-note-branding.mjs",
     "note:navigation:pilot": "node .claude/scripts/note/update-published-navigation.mjs",
@@ -215,7 +216,7 @@
     "evidence:pilot:data:write-local": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs --write-local",
     "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/ && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs",
     "theme:quality:check": "node --import tsx .claude/scripts/themes/audit-theme-quality.ts",
-    "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/",
+    "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/*.test.mjs",
     "theme:py:test": "python3 .claude/scripts/themes/cultural-heritage-source.test.py && python3 .claude/scripts/themes/test_extract_bridge_inspection_age.py && python3 .claude/scripts/themes/property-prices/test_aggregate.py",
     "theme:portfolio:audit": "bash .claude/scripts/themes/run-theme-portfolio-audit.sh",
     "geo:build-public-facility-access": "node --import tsx packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts",
@@ -249,6 +250,7 @@
     "fast-glob": "file:.claude/scripts/lib/next-eslint-glob",
     "googleapis": "^171.4.0",
     "knip": "^6.39.0",
+    "next": "16.4.3",
     "prettier": "^3.4.2",
     "turbo": "^2.10.12",
     "vite": "^8.2.4"
@@ -274,7 +276,7 @@
     "image-size": "$image-size",
     "js-yaml": "4.3.2",
     "katex": "0.18.2",
-    "next": "15.5.28",
+    "next": "$next",
     "postcss": "8.5.26",
     "postcss-selector-parser": "7.1.6",
     "qs": "6.16.0",
@@ -283,11 +285,20 @@
     "undici": "7.30.1",
     "uuid": "11.1.1",
     "vite": "$vite",
-    "workerd": "1.20260825.1",
+    "workerd": "1.20261019.1",
     "ws": "8.21.3",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "@node-minify/core": {
+      "glob": "10.5.0"
+    },
+    "satori": {
+      "fflate": "0.7.5"
+    }
   },
   "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "ajv": "^6.15.0",
     "d3-scale-chromatic": "^3.1.0",

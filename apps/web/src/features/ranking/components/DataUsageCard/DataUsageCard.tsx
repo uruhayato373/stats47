@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { Download } from "lucide-react";
 
@@ -156,7 +157,7 @@ export function DataUsageCard({
               {workProduct.title.replace(/をお渡しします$/, "")}
               （{formatValueWithPrecision(workProduct.priceYen, 0)}円・Excel / CSV / PowerPoint）があります。{" "}
               <TrackedProductLink
-                href={`/products/${workProduct.slug}`}
+                href={hrefFor("product", { slug: workProduct.slug })}
                 label={`${workProduct.id}:${workProduct.title}`}
                 surface="ranking_product"
                 className="text-primary underline underline-offset-2"

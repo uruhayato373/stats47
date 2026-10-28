@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   buildAllBasesCsv,
   buildSingleSeriesCsv,
@@ -130,7 +131,7 @@ export async function GET(
   // 読めなければ地図はキーのまま、CSV は「掲載ページの出典欄を参照」で出す (ダウンロード自体は止めない)
   const itemResult = await readRankingItemFromR2(rankingKey, "prefecture");
   const item = isOk(itemResult) ? itemResult.data : null;
-  const pageUrl = `${req.nextUrl.origin}/ranking/${encodeURIComponent(rankingKey)}`;
+  const pageUrl = `${req.nextUrl.origin}${hrefFor("ranking", { rankingKey: encodeURIComponent(rankingKey) })}`;
 
   // 本文生成
   let bodyText: string;

@@ -1,5 +1,6 @@
 "use client";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { FileText } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -55,7 +56,7 @@ export function SurveyTaxonomyCard({
         )}
         <nav aria-label={title} className="flex flex-col gap-0.5">
           {surveys.map((survey) => {
-            const href = `/survey/${survey.id}`;
+            const href = hrefFor("survey", { surveyKey: survey.id });
             return (
               <Link
                 key={survey.id}
@@ -77,7 +78,7 @@ export function SurveyTaxonomyCard({
               {relatedItems.map((item) => (
                 <Link
                   key={item.rankingKey}
-                  href={`/ranking/${item.rankingKey}`}
+                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                   className="py-1 text-xs transition-colors hover:text-primary"
                 >
                   {item.title}
@@ -100,7 +101,7 @@ export function SurveyTaxonomyCard({
       )}
       <RailLinkList aria-label={title}>
         {surveys.map((survey) => {
-          const href = `/survey/${survey.id}`;
+          const href = hrefFor("survey", { surveyKey: survey.id });
           return (
             <RailNavRow
               key={survey.id}
@@ -123,7 +124,7 @@ export function SurveyTaxonomyCard({
             {relatedItems.map((item) => (
               <Link
                 key={item.rankingKey}
-                href={`/ranking/${item.rankingKey}`}
+                href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                 className="py-1 text-xs transition-colors hover:text-primary"
               >
                 {item.title}

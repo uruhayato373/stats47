@@ -3,7 +3,7 @@ title: e-Statカタログ実装仕様
 type: implementation-spec
 status: active
 updated: 2026-09-25
-related_backlog: ESTAT-CATALOG-01
+related_backlog: ESTAT-CATALOG-SSDS-DERIVE-01
 tags: [estat, r2, catalog, ci, data-discovery]
 ---
 

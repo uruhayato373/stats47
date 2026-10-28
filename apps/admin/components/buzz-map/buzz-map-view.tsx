@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { cn } from "@/lib/cn";
+import { Grid } from "@/components/layout-primitives";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";
@@ -103,10 +105,10 @@ export function BuzzMapView() {
   const overflow = filtered.length - visible.length;
 
   return (
-    <div className="space-y-4">
+    <>
       {catalog ? <BuzzMapSummary summary={catalog.summary} /> : null}
 
-      <div className="sticky top-[57px] z-10 -mx-3 space-y-2 border-b border-console-border bg-console-bg/95 px-3 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+      <div className="sticky top-(--header-height) z-10 flex flex-col gap-2 border-b bg-background/95 py-3 backdrop-blur">
         <div className="flex flex-wrap items-center gap-3">
           <FilterGroup label="priority" options={PRIORITIES} value={priority} onChange={setPriority} />
           <FilterGroup
@@ -124,32 +126,25 @@ export function BuzzMapView() {
           <FilterGroup label="license" options={LICENSES} value={license} onChange={setLicense} />
         </div>
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="h-8 rounded-md border border-console-border bg-console-bg px-2 text-xs text-console-fg"
-          >
-            <option value="">category: All</option>
+          <NativeSelect size="sm" aria-label="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <NativeSelectOption value="">category: All</NativeSelectOption>
             {categories.map((c) => (
-              <option key={c} value={c}>
+              <NativeSelectOption key={c} value={c}>
                 {c}
-              </option>
+              </NativeSelectOption>
             ))}
-          </select>
+          </NativeSelect>
           <Input
+            aria-label="候補を検索"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="title / hook / ideaId 検索"
-            className="h-8 w-64 bg-console-bg text-xs"
+            className="w-64"
           />
-          <button
-            type="button"
-            onClick={load}
-            className="h-8 rounded-md border border-console-border bg-console-bg px-3 text-xs text-console-fg transition-colors hover:border-console-accent"
-          >
+          <Button size="sm" variant="outline" onClick={load}>
             再読込
-          </button>
-          <span className="text-console-muted">{filtered.length} 件</span>
+          </Button>
+          <span className="text-sm text-muted-foreground">{filtered.length} 件</span>
         </div>
       </div>
 
@@ -158,26 +153,25 @@ export function BuzzMapView() {
       ) : error ? (
         <ErrorState message={error} onRetry={load} />
       ) : filtered.length === 0 ? (
-        <p className="text-sm text-console-muted">該当する候補がありません</p>
+        <p className="text-sm text-muted-foreground">該当する候補がありません</p>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-2 xl:grid-cols-3">
+          <Grid min="lg">
             {visible.map((entry) => (
               <BuzzMapCard
                 key={entry.ideaId || entry.metricKey}
                 entry={entry}
               />
             ))}
-          </div>
+          </Grid>
           {overflow > 0 ? (
-            <p className="text-sm text-console-muted">
+            <p className="text-sm text-muted-foreground">
               +{overflow} 件 (上限 {MAX_VISIBLE} 件表示。filter で絞ってください)
             </p>
           ) : null}
         </>
       )}
-
-    </div>
+    </>
   );
 }
 
@@ -194,26 +188,19 @@ function FilterGroup({
 }) {
   return (
     <div className="flex items-center gap-1.5">
-      <span className="text-[11px] text-console-muted">{label}</span>
+      <span className="text-xs text-muted-foreground">{label}</span>
       <div className="flex flex-wrap gap-1">
-        {options.map(([val, lbl]) => {
-          const active = value === val;
-          return (
-            <button
-              key={`${label}-${val || "all"}`}
-              type="button"
-              onClick={() => onChange(val)}
-              className={cn(
-                "rounded-full border px-2.5 py-0.5 text-[11px] transition-colors",
-                active
-                  ? "border-console-accent bg-console-accent font-semibold text-console-bg"
-                  : "border-console-border text-console-muted hover:border-console-accent/60",
-              )}
-            >
-              {lbl}
-            </button>
-          );
-        })}
+        {options.map(([val, lbl]) => (
+          <Button
+            key={`${label}-${val || "all"}`}
+            size="xs"
+            variant={value === val ? "default" : "outline"}
+            aria-pressed={value === val}
+            onClick={() => onChange(val)}
+          >
+            {lbl}
+          </Button>
+        ))}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import { readBlogIndexPageFromR2 } from '@/features/blog/listing.server';
 import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import { DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from '@/config/site';
 
@@ -31,7 +32,7 @@ const BLOG_DISCOVERY_THEMES = ALL_THEMES.slice(0, 6).map((theme) => ({
 }));
 const BLOG_DISCOVERY_PREFECTURES = fetchPrefectures();
 
-const BLOG_INDEX_TITLE = 'ブログ | stats47';
+const BLOG_INDEX_TITLE = 'ブログ';
 const BLOG_INDEX_DESCRIPTION =
   '都道府県の統計データを分析した記事一覧。人口、経済、教育、福祉などのランキングや時系列分析を掲載。';
 
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   // 未指定だと Next が root の opengraph-image.tsx (ランタイム next/og) を自動注入し、
   // Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
   ...generateOGMetadata({
-    title: BLOG_INDEX_TITLE,
+    title: formatOgpTitle(BLOG_INDEX_TITLE),
     description: BLOG_INDEX_DESCRIPTION,
     imageUrl: DEFAULT_OGP_IMAGE_PATH,
     url: `${SITE_ORIGIN}/blog`,

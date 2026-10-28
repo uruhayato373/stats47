@@ -313,6 +313,13 @@
       ]
     },
     {
+      "name": "CLAUDE_CODE_SESSION_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CLAUDE_SESSION_ID",
       "visibility": "server",
       "contexts": [

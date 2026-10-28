@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin-ui/status-badge';
 import { MediaPreview } from '@/components/media-preview';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
@@ -73,7 +73,7 @@ export function PostPreview({
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-6 px-4 pb-6 md:grid-cols-2">
-          <div className="space-y-3">
+          <div className="flex flex-col gap-3">
             <MediaPreview
               key={`${item.id}-${assetIndex}`}
               candidates={candidates}
@@ -95,7 +95,7 @@ export function PostPreview({
               </div>
             )}
           </div>
-          <div className="min-w-0 space-y-4">
+          <div className="flex min-w-0 flex-col gap-4">
             <div className="flex flex-wrap gap-2">
               <StatusBadge tone={statusTone(item.status)}>
                 {statusLabel(item.status)}
@@ -105,13 +105,13 @@ export function PostPreview({
               )}
             </div>
             {item.planning && (
-              <div className="space-y-2 text-sm">
+              <div className="flex flex-col gap-2 text-sm">
                 <h3 className="font-semibold">{item.planning.title}</h3>
                 <StatusBadge tone="info">
                   {CANDIDATE_STAGES[candidateStage(item)]}
                 </StatusBadge>
                 <p className="break-all">{item.planning.note}</p>
-                <p className="text-console-muted">
+                <p className="text-muted-foreground">
                   {item.planning.origin === 'new-format'
                     ? '新しい型の追加企画'
                     : '既存素材から整理'}{' '}
@@ -130,12 +130,12 @@ export function PostPreview({
               </p>
             )}
             {item.template && (
-              <p className="break-all text-xs text-console-muted">
+              <p className="break-all text-xs text-muted-foreground">
                 画像テンプレート: {item.template}
               </p>
             )}
             {item.domain === 'geo' && (
-              <p className="break-all text-xs text-console-muted">
+              <p className="break-all text-xs text-muted-foreground">
                 Geo role: {String(item.geo_role || '—')} · 指標:{' '}
                 {String(item.claim_metric_key || '—')} · 分析ID:{' '}
                 {String(item.analysis_ids || '—')}
@@ -148,23 +148,20 @@ export function PostPreview({
                 onDirtyChange={setDirty}
               />
             ) : (
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <h3 className="font-semibold">投稿本文</h3>
                 <p className="whitespace-pre-wrap break-words text-sm">
                   {item.caption || '本文はまだ登録されていません'}
                 </p>
                 {item.status === 'scheduled' && (
-                  <p className="text-xs text-console-muted">
+                  <p className="text-xs text-muted-foreground">
                     予約済みの本文です。内容の変更は投稿先の予約にも反映する必要があります。
                   </p>
                 )}
               </div>
             )}
             {item.id && (
-              <Button asChild variant="outline">
-                <a
-                  href={`/sns/${item.id}`}
-                  onClick={(e) => {
+              <a href={`/sns/${item.id}`} onClick={(e) => {
                     if (
                       dirty &&
                       !window.confirm(
@@ -172,16 +169,14 @@ export function PostPreview({
                       )
                     )
                       e.preventDefault();
-                  }}
-                >
+                  }} className={buttonVariants({ variant: "outline" })}>
                   ID台帳の詳細・出典・指標
                 </a>
-              </Button>
             )}
             {typeof item.post_url === 'string' && (
               <p>
                 <a
-                  className="text-sm text-console-accent hover:underline"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   href={item.post_url}
                   target="_blank"
                   rel="noreferrer"
@@ -193,7 +188,7 @@ export function PostPreview({
             {typeof item.utm_url === 'string' && (
               <p>
                 <a
-                  className="text-sm text-console-accent hover:underline"
+                  className="text-sm font-medium underline-offset-4 hover:underline"
                   href={item.utm_url}
                   target="_blank"
                   rel="noreferrer"

@@ -66,11 +66,11 @@
     {
       "channel": "theme",
       "metricKey": "child-abuse-consultation-cases",
-      "status": "blocked",
+      "status": "rejected",
       "title": "児童虐待相談対応件数",
-      "reason": "既存 55 テーマに合うものが無い。児童福祉・子どもの安全のテーマを新設するかの判断待ち (THEME-CHILD-WELFARE-01)",
-      "decidedAt": "2026-10-08",
-      "decidedBy": "theme-designer (2026-09-14 判定) と参考文献の展開判断"
+      "reason": "既存 55 テーマに合うものが無く、児童福祉・子どもの安全のテーマは新設しない (2026-10-26 オーナー判断)。指標はランキング単体で公開する",
+      "decidedAt": "2026-10-26",
+      "decidedBy": "オーナー (THEME-CHILD-WELFARE-01 の判断)"
     },
     {
       "channel": "area",

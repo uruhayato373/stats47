@@ -31,13 +31,13 @@ export function PostCard({
       <div className="flex items-center justify-between gap-2 p-3">
         {item.id ? (
           <a
-            className="font-mono font-semibold text-console-accent hover:underline"
+            className="font-mono font-semibold underline-offset-4 hover:underline"
             href={`/sns/${item.id}`}
           >
             #{item.id}
           </a>
         ) : (
-          <span className="text-sm text-console-muted">ID未登録</span>
+          <span className="text-sm text-muted-foreground">ID未登録</span>
         )}
         <StatusBadge tone={statusTone(item.status)}>
           {statusLabel(item.status)}
@@ -51,7 +51,7 @@ export function PostCard({
       <div className="flex flex-1 flex-col gap-3 p-3 text-sm">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-semibold">{formatLabel(item.domain)}</span>
-          <span className="text-console-muted">
+          <span className="text-muted-foreground">
             {PLATFORM_LABELS[item.platform] ?? item.platform}
           </span>
         </div>
@@ -68,14 +68,14 @@ export function PostCard({
         <p className="line-clamp-3 whitespace-pre-wrap break-words">
           {item.caption || '本文はまだ登録されていません'}
         </p>
-        <p className="break-all text-xs text-console-muted">
+        <p className="break-all text-xs text-muted-foreground">
           {item.content_key}
         </p>
         {item.scheduled_at && (
           <p className="text-xs">予約 {formatJst(item.scheduled_at)} JST</p>
         )}
         {item.posted_at && (
-          <p className="text-xs text-console-muted">
+          <p className="text-xs text-muted-foreground">
             投稿 {formatJst(item.posted_at)} JST · 表示{' '}
             {item.impressions ?? '—'}
           </p>

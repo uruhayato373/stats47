@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * note.com記事の商品カード (embedded-service="external-article" の figure で
- * data-src が https://stats47.jp/products/... を指すもの) が、実商品
- * (apps/web/src/features/products/storefront.generated.ts の STOREFRONT_PRODUCTS) の
- * title/description を表示しているかを検知する read-only 監査。
+ * note.com記事の商品カードを公開済みの商品情報と照合する read-only 監査。
+ * paidProductIdがあるマガジンは記事台帳・商品対応表から有料noteを解決し、
+ * カードのURL・登録情報・旧購入先の残存を検査する。サイト商品カードは
+ * storefrontの題名との照合を維持する。
  *
  * 背景: applyNavigationFooter() が挿入する商品カードは、現状マガジンの name/description を
  * そのまま流用しており、実商品の title/description と一致しない (2026-09-16 時点で対象記事の
@@ -11,8 +11,8 @@
  * 修正・本文更新は行わない (audit-only)。
  *
  * モード:
- *   既定 (引数なし) : ネットワークアクセスなし。全マガジンの productTarget slug が
- *                     STOREFRONT_PRODUCTS に実在するかだけを検証する (catalog内部の整合監査)。
+ *   既定 (引数なし) : ネットワークアクセスなし。全マガジンの販売先が
+ *                     公開台帳またはSTOREFRONT_PRODUCTSに実在するか検証する。
  *   --live          : catalog上の「無料 (isPaid=false) かつ 所属マガジンに productTarget が
  *                     ある」公開記事について note 公開API (v3/notes) から実本文を取得し、
  *                     商品カードの title を期待値 (実商品 title) と突合する。
@@ -20,6 +20,8 @@
  * Usage:
  *   node .claude/scripts/note/audit-note-product-cards.mjs
  *   node .claude/scripts/note/audit-note-product-cards.mjs --live
+ *   node .claude/scripts/note/audit-note-product-cards.mjs --live --browser-fetch
+ *     (匿名Chromeの通常のTLSで取得。ログイン・本文更新はしない)
  *
  * exit 0 = 全PASS / 1 = 不一致あり / 2 = catalog・storefront 読み込み失敗 (入力エラー)
  */
@@ -27,7 +29,10 @@ import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { chromium } from 'playwright';
 import { resolveProductCardText } from "./lib/navigation-footer.mjs";
+import { inspectPaidProductCard, resolvePaidProduct } from './lib/product-cards.mjs';
+import { applyPlanBody, buildPlans } from './update-published-navigation.mjs';
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -39,6 +44,8 @@ const CONCURRENCY = 6;
 
 const args = process.argv.slice(2);
 const LIVE = args.includes("--live");
+const BROWSER_FETCH = args.includes('--browser-fetch');
+let browserPage;
 
 // ---------- catalog 読み込み ----------
 
@@ -59,12 +66,14 @@ function loadCatalog() {
 
 // ---------- モード1: catalog整合性 (productTarget -> storefront、ネットワークなし) ----------
 
-function auditCatalogIntegrity(magazines) {
+function auditCatalogIntegrity(catalog) {
   const results = [];
-  for (const magazine of magazines) {
+  for (const magazine of catalog.magazines) {
     if (!magazine.productTarget) continue;
     try {
-      const resolved = resolveProductCardText(magazine.productTarget);
+      const resolved = magazine.paidProductId
+        ? resolvePaidProduct({ magazine: magazine.key, isPaid: false }, catalog)
+        : resolveProductCardText(magazine.productTarget);
       results.push({
         magazineKey: magazine.key,
         productTarget: magazine.productTarget,
@@ -115,11 +124,19 @@ async function fetchWithRetry(url, attempts = 4) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
+      if (browserPage) {
+        const result = await browserPage.evaluate(async (url) => {
+          const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+          return { status: response.status, json: response.ok ? await response.json() : null };
+        }, url);
+        if (result.status >= 200 && result.status < 300) return result.json;
+        throw new Error(`HTTP ${result.status}`);
+      }
       const response = await fetch(url, {
         headers: { "user-agent": UA },
         signal: AbortSignal.timeout(20_000),
       });
-      if (response.ok) return response;
+      if (response.ok) return await response.json();
       lastError = new Error(`HTTP ${response.status}`);
     } catch (error) {
       lastError = error;
@@ -130,11 +147,10 @@ async function fetchWithRetry(url, attempts = 4) {
 }
 
 async function fetchNoteBody(noteKey) {
-  const response = await fetchWithRetry(`https://note.com/api/v3/notes/${noteKey}?audit=${Date.now()}`);
-  const json = await response.json();
+  const json = await fetchWithRetry(`https://note.com/api/v3/notes/${noteKey}?audit=${Date.now()}`);
   const body = json?.data?.body;
   if (typeof body !== "string") throw new Error("note API data.body が取得できません");
-  return body;
+  return json.data;
 }
 
 /** 本文HTML中の embedded-service="external-article" な figure を全て抽出する
@@ -168,6 +184,7 @@ function extractProductCardText(body, productTarget) {
 }
 
 async function auditLive(catalog, magazinesByKey) {
+  const productPlans = new Map(buildPlans(catalog, new Map(), { products: true }).map((plan) => [plan.article.key, plan]));
   const targets = catalog.articles.filter((article) => {
     if (article.isPaid !== false) return false;
     const magazine = magazinesByKey.get(article.magazine);
@@ -180,7 +197,9 @@ async function auditLive(catalog, magazinesByKey) {
     const magazine = magazinesByKey.get(article.magazine);
     let expected;
     try {
-      expected = resolveProductCardText(magazine.productTarget);
+      expected = magazine.paidProductId
+        ? resolvePaidProduct(article, catalog)
+        : resolveProductCardText(magazine.productTarget);
     } catch (error) {
       return { key: article.key, ok: false, detail: `期待値解決に失敗: ${error.message}` };
     }
@@ -189,7 +208,15 @@ async function auditLive(catalog, magazinesByKey) {
       return { key: article.key, ok: false, detail: `noteUrlからkeyを抽出できません: ${article.noteUrl}` };
     }
     try {
-      const body = await fetchNoteBody(noteKey);
+      const live = await fetchNoteBody(noteKey);
+      const body = live.body;
+      if (magazine.paidProductId) {
+        const result = inspectPaidProductCard(body, live.embedded_contents, expected);
+        const navigationPending = applyPlanBody(body, productPlans.get(article.key)).changed;
+        return { key: article.key, ...result, navigationPending,
+          ok: result.ok && !navigationPending,
+          detail: navigationPending ? '有料noteカードの更新が未適用' : result.detail };
+      }
       const actual = extractProductCardText(body, magazine.productTarget);
       if (!actual.found) {
         return {
@@ -229,8 +256,8 @@ async function main() {
 
   const magazinesByKey = new Map(catalog.magazines.map((m) => [m.key, m]));
 
-  const integrityResults = auditCatalogIntegrity(catalog.magazines);
-  console.log(`\n=== catalog整合性 (productTarget -> storefront、ネットワークなし) ===`);
+  const integrityResults = auditCatalogIntegrity(catalog);
+  console.log(`\n=== catalog整合性 (公開済み有料note / storefront、ネットワークなし) ===`);
   for (const r of integrityResults) {
     console.log(`${r.ok ? "PASS" : "FAIL"} ${r.magazineKey}: ${r.detail}`);
   }
@@ -238,7 +265,16 @@ async function main() {
 
   let liveResults = [];
   if (LIVE) {
-    liveResults = await auditLive(catalog, magazinesByKey);
+    let browser;
+    try {
+      if (BROWSER_FETCH) {
+        try { browser = await chromium.launch({ headless: true, channel: 'chrome' }); }
+        catch { browser = await chromium.launch({ headless: true }); }
+        browserPage = await browser.newPage();
+        await browserPage.goto('https://note.com/stats47', { waitUntil: 'domcontentloaded' });
+      }
+      liveResults = await auditLive(catalog, magazinesByKey);
+    } finally { await browser?.close(); browserPage = null; }
     console.log(`\n=== live 商品カード本文突合 ===`);
     for (const r of liveResults) {
       console.log(`${r.ok ? "PASS" : "FAIL"} ${r.key}: ${r.detail}`);
@@ -255,6 +291,7 @@ async function main() {
       integrityFailures: integrityFailures.length,
       liveChecked: liveResults.length,
       liveFailures: liveFailures.length,
+      productNavigationPending: liveResults.filter((row) => row.navigationPending).length,
     },
     integrity: integrityResults,
     live: liveResults,

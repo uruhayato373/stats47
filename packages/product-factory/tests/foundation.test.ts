@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import {
+  fetchPrefectures,
+  PREFECTURE_TO_REGION_MAP,
+  REGIONS as AREA_REGIONS,
+} from '@stats47/area';
+import {
   PREFECTURES,
   PREFECTURE_CODES5,
   toCode5,
@@ -34,6 +39,17 @@ describe('prefectures master', () => {
     expect(toCode5('13000')).toBe('13000');
     expect(toCode2('47000')).toBe('47');
     expect(() => toCode5('99')).toThrow();
+    expect(() => toCode5('48')).toThrow();
+    expect(() => toCode5('0')).toThrow();
+  });
+  it('derives names, codes and regions from @stats47/area (no local copy)', () => {
+    expect(PREFECTURES.map((p) => [p.code5, p.name])).toEqual(
+      fetchPrefectures().map((p) => [p.prefCode, p.prefName])
+    );
+    for (const p of PREFECTURES) expect(p.region).toBe(PREFECTURE_TO_REGION_MAP[p.code5]);
+    expect(REGIONS.map((r) => [r.code, r.name, r.color, [...r.prefCodes5]])).toEqual(
+      AREA_REGIONS.map((r) => [r.regionCode, r.regionName, r.color, [...r.prefectures]])
+    );
   });
 });
 

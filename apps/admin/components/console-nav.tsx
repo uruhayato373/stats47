@@ -1,28 +1,43 @@
+import Link from "next/link";
 import { Suspense } from "react";
+import { ChartNoAxesCombinedIcon } from "lucide-react";
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { Badge } from "@/components/ui/badge";
 import { NAV_GROUPS } from "@/lib/nav-registry";
 
 import { ConsoleNavLinks } from "./console-nav-links";
-import { ThemeToggle } from "./theme-toggle";
 
-/** 左サイドメニュー (shadcn/ui 公式の Sidebar)。メニューの定義は lib/nav-registry.ts。md 未満では Sheet になる。 */
+/**
+ * 左サイドメニュー。見本 (shadcndashboard.dev) と同じく inset の Sidebar の中身を白地 + 1px 枠の箱にし、
+ * ロゴ行の下に線を引く。メニューの定義は lib/nav-registry.ts。md 未満では Sheet になる。
+ */
 export function ConsoleSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader className="px-4 pt-5">
-        <span className="block text-sm font-bold leading-tight tracking-tight text-sidebar-foreground">stats47</span>
-        <span className="block text-xs text-muted-foreground">管理コンソール</span>
-        <span className="mt-1 block text-[11px] text-muted-foreground/70">local · :4747</span>
+    <Sidebar collapsible="offcanvas" variant="inset" className="**:data-[slot=sidebar-inner]:border **:data-[slot=sidebar-inner]:bg-background">
+      <SidebarHeader className="flex-row items-center justify-between border-b p-3">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:p-1.5!" render={<Link href="/" />}>
+              <ChartNoAxesCombinedIcon className="size-5!" />
+              <span className="text-base font-semibold">stats47 管理</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <Badge variant="secondary">local</Badge>
       </SidebarHeader>
       <SidebarContent>
         <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
           <ConsoleNavLinks groups={NAV_GROUPS} />
         </Suspense>
       </SidebarContent>
-      <SidebarFooter className="px-3 pb-4">
-        <ThemeToggle />
-      </SidebarFooter>
     </Sidebar>
   );
 }

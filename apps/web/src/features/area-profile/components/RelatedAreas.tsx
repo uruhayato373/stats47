@@ -3,6 +3,7 @@ import {
     PREFECTURE_TO_REGION_MAP,
     REGIONS,
 } from "@stats47/area";
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
@@ -32,7 +33,7 @@ export function RelatedAreas({ areaCode }: Props) {
         <RailCard title={`${region.regionName}の都道府県`}>
             <RailLinkList>
                 {relatedPrefs.map((pref) => (
-                    <RailNavRow key={pref.code} href={`/areas/${pref.code}`} chevron={false}>
+                    <RailNavRow key={pref.code} href={hrefFor("area", { areaCode: pref.code })} chevron={false}>
                         {pref.name}
                     </RailNavRow>
                 ))}

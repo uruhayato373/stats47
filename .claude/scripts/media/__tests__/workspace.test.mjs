@@ -237,6 +237,16 @@ test('local originals verify hashes and never escape material roots',async t=>{
  await assert.rejects(()=>readMediaObject(root,{provider:'git',path:rel,sha256:sha('changed'),bytes:bytes.length}),/変わりました/);
 });
 
+test('first inventory write creates its missing parent before acquiring the lock',t=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'stats47-inventory-first-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const item={id:'web/blog/first',title:'first'},image={owner:item.id,file:'first.svg'};
+ writeWebInventory(root,{items:[item],images:[image],coverage:[],updatedAt:'first'});
+ assert.deepEqual(readWebInventory(root).items,[item]);
+ assert.deepEqual(readWebInventory(root).images,[image]);
+ assert.equal(fs.existsSync(path.join(root,WEB_INVENTORY)+'.lock'),false);
+});
+
 test('partitioned inventory restores all uses and rejects a partial update',t=>{
  const root=fixture(t),item={id:'web/blog/test',title:'test'},image={owner:item.id,file:'test.svg'};
  writeWebInventory(root,{items:[item],images:[image],coverage:[],updatedAt:'first'});

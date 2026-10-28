@@ -1,22 +1,25 @@
 import Link from "next/link";
+import { CircleAlertIcon, CircleCheckIcon, GlobeIcon, TrendingDownIcon, TriangleAlertIcon } from "lucide-react";
 
-import { Sparkline } from "@/components/dashboard/sparkline";
-import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
-import { Section } from "@/components/layout-primitives";
+import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, TrendChart } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
+import { buttonVariants } from "@/components/ui/button";
 import { pageQualitySummary, type MetricValue } from "@/lib/server/page-quality";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { datasetDir } from "../../../../../config/datasets.mjs";
+
 export const dynamic = "force-dynamic";
 export const metadata = { title: "ページ品質監査 — stats47 admin" };
+
+const LINK = "font-medium underline-offset-4 hover:underline";
 
 function isUnmeasured(v: MetricValue): v is { value: null; reason: string } {
   return typeof v === "object" && v !== null && "value" in v && v.value === null;
 }
 
 function MetricCell({ value, unit = "" }: { value: MetricValue; unit?: string }) {
-  if (value === undefined) return <span className="text-console-muted">対象外</span>;
+  if (value === undefined) return <span className="text-muted-foreground">対象外</span>;
   if (isUnmeasured(value)) {
     return (
       <span className="text-console-warn" title={value.reason}>
@@ -33,6 +36,23 @@ function MetricCell({ value, unit = "" }: { value: MetricValue; unit?: string })
   );
 }
 
+/** 並べ替えの値。対象外・計測不能は null (末尾) にし、0 と混ぜない */
+function metricSort(value: MetricValue): number | null {
+  if (typeof value === "number") return value;
+  if (typeof value === "boolean") return value ? 1 : 0;
+  return null;
+}
+
+const METRIC_COLUMNS = [
+  { key: "html_bytes", header: "HTML", unit: " B" },
+  { key: "rsc_bytes", header: "RSC", unit: " B" },
+  { key: "dom_nodes", header: "DOM", unit: "" },
+  { key: "duplicate_link_ratio", header: "重複リンク率", unit: "" },
+  { key: "ad_duplicate_count", header: "広告重複", unit: "" },
+  { key: "lcp_ms", header: "LCP", unit: " ms" },
+];
+
+/** ページ品質監査 (型 B: 一覧・キュー)。件数 → 推移 → 一覧 (DataGrid) */
 export default async function PageQualityAuditPage({
   searchParams,
 }: {
@@ -43,16 +63,13 @@ export default async function PageQualityAuditPage({
 
   if (!summary.ok) {
     return (
-      <div className="space-y-4">
-        <PageHeading
-          title="ページ品質監査"
-          source={`${datasetDir("page-quality.metrics")}/latest.json`}
-        />
+      <>
+        <PageHeading title="ページ品質監査" source={`${datasetDir("page-quality.metrics")}/latest.json`} />
         <ErrorNote error={summary.error ?? "unknown error"} />
-        <p className="text-sm text-console-muted">
-          ローカルで <code className="rounded bg-muted px-1">npm run page-quality:check --all</code> を実行すると生成されます。
+        <p className="text-sm text-muted-foreground">
+          ローカルで <code className="rounded bg-muted px-1 font-mono text-xs">npm run page-quality:check --all</code> を実行すると生成されます。
         </p>
-      </div>
+      </>
     );
   }
 
@@ -79,52 +96,49 @@ export default async function PageQualityAuditPage({
   const templates = [...new Set(summary.results.map((r) => r.template))].sort();
 
   return (
-    <div className="space-y-8">
-      <PageHeading
-        title="ページ品質監査"
-        source={`${datasetDir("page-quality.metrics")}/latest.json`}
-      >
+    <>
+      <PageHeading title="ページ品質監査" source={`${datasetDir("page-quality.metrics")}/latest.json`}>
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <StatusBadge tone="info">{summary.mode}</StatusBadge>
           {summary.commitSha ? <StatusBadge>{summary.commitSha.slice(0, 8)}</StatusBadge> : null}
           {summary.generatedAt ? <Freshness iso={summary.generatedAt} /> : null}
         </div>
-        <p className="mt-2 max-w-3xl text-sm text-console-muted">
+        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
           HTML/RSC肥大化・DOM過剰・リンク重複・広告重複・構造化データ異常・表示速度を継続監視する。
           変更時は影響テンプレートの代表URLだけ、週次は公開対象の全URLを検査する。
           既存のPSI/Cloudflare日次監視とは別系統 (それらは
-          <Link className="text-console-info underline underline-offset-2" href="/ops">
+          <Link className={LINK} href="/ops">
             /ops
           </Link>
           参照)。
         </p>
       </PageHeading>
 
-      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="対象URL" value={summary.totalUrls} />
-        <StatCard label="正常" value={summary.successCount} tone="good" />
-        <StatCard label="warningのみ" value={summary.warningOnlyCount} tone={summary.warningOnlyCount ? "warn" : "good"} />
-        <StatCard label="error" value={summary.errorCount} tone={summary.errorCount ? "bad" : "good"} />
-      </div>
+      <Grid min="sm">
+        <StatCard label="対象URL" icon={<GlobeIcon />} value={summary.totalUrls} />
+        <StatCard label="正常" icon={<CircleCheckIcon />} value={summary.successCount} tone="good" />
+        <StatCard
+          label="warningのみ"
+          icon={<TriangleAlertIcon />}
+          value={summary.warningOnlyCount}
+          tone={summary.warningOnlyCount ? "warn" : "good"}
+        />
+        <StatCard label="error" icon={<CircleAlertIcon />} value={summary.errorCount} tone={summary.errorCount ? "bad" : "good"} />
+      </Grid>
 
       {summary.trend.length > 1 ? (
-        <Section title="推移 (直近runのerror/warning件数)">
-          <Card className="py-3">
-            <CardContent className="flex items-center gap-6 px-3">
-            <div>
-              <p className="text-[11px] text-console-muted">error</p>
-              <Sparkline values={summary.trend.map((t) => t.errorCount)} tone="bad" />
-            </div>
-            <div>
-              <p className="text-[11px] text-console-muted">warning</p>
-              <Sparkline values={summary.trend.map((t) => t.warningCount)} tone="warn" />
-            </div>
-            <p className="text-[11px] text-console-muted">
-              {summary.trend[0]?.date} 〜 {summary.trend[summary.trend.length - 1]?.date} ({summary.trend.length}run)
-            </p>
-            </CardContent>
-          </Card>
-        </Section>
+        <TrendChart
+          title="推移 (直近runのerror/warning件数)"
+          icon={<TrendingDownIcon />}
+          description={`${summary.trend[0]?.date} 〜 ${summary.trend[summary.trend.length - 1]?.date} (${summary.trend.length}run)`}
+          data={summary.trend.map((t) => ({ date: t.date, errorCount: t.errorCount, warningCount: t.warningCount }))}
+          xKey="date"
+          series={[
+            { key: "errorCount", label: "error" },
+            { key: "warningCount", label: "warning" },
+          ]}
+          kind="line"
+        />
       ) : null}
 
       <Section title="テンプレート別集計" count={summary.templateRollups.length}>
@@ -132,10 +146,7 @@ export default async function PageQualityAuditPage({
           {summary.templateRollups.map((t) => (
             <Row key={t.template}>
               <Cell>
-                <Link
-                  className="text-console-info underline underline-offset-2"
-                  href={`/quality/page-audit?template=${t.template}`}
-                >
+                <Link className={LINK} href={`/quality/page-audit?template=${t.template}`}>
                   {t.template}
                 </Link>
               </Cell>
@@ -152,16 +163,12 @@ export default async function PageQualityAuditPage({
       </Section>
 
       <Section title="問題が大きいページ (悪化ランキング)" count={filteredOffenders.length}>
-        <div className="mb-2 flex flex-wrap gap-2 text-[11px]">
-          <Link className="text-console-info underline underline-offset-2" href="/quality/page-audit">
+        <div className="flex flex-wrap gap-2">
+          <Link href="/quality/page-audit" className={buttonVariants({ variant: templateFilter ? "outline" : "default", size: "sm" })}>
             絞り込み解除
           </Link>
           {templates.map((t) => (
-            <Link
-              key={t}
-              className={templateFilter === t ? "font-bold text-console-fg" : "text-console-info underline underline-offset-2"}
-              href={`/quality/page-audit?template=${t}${severityFilter ? `&severity=${severityFilter}` : ""}`}
-            >
+            <Link key={t} href={`/quality/page-audit?template=${t}${severityFilter ? `&severity=${severityFilter}` : ""}`} className={buttonVariants({ variant: templateFilter === t ? "default" : "outline", size: "sm" })}>
               {t}
             </Link>
           ))}
@@ -169,77 +176,78 @@ export default async function PageQualityAuditPage({
         {filteredOffenders.length === 0 ? (
           <p className="text-sm text-console-good">対象範囲に違反ページはありません。</p>
         ) : (
-          <DataTable columns={["URL", "テンプレート", "error", "warning", "理由"]}>
-            {filteredOffenders.map((o) => (
-              <Row key={o.url}>
-                <Cell>
-                  <code className="text-[11px]">{o.path}</code>
-                </Cell>
-                <Cell nowrap>{o.template}</Cell>
-                <Cell nowrap>
-                  <StatusBadge tone={o.errorCount ? "bad" : "good"}>{o.errorCount}</StatusBadge>
-                </Cell>
-                <Cell nowrap>
-                  <StatusBadge tone={o.warningCount ? "warn" : "good"}>{o.warningCount}</StatusBadge>
-                </Cell>
-                <Cell>
-                  <div className="space-y-1 text-[10px] text-console-muted">
-                    {o.violations.slice(0, 4).map((v, i) => (
-                      <div key={i}>
-                        {v.metric_key} ({v.comparison}): {v.actual} {v.operator} {v.threshold}
-                        {v.previous != null ? ` (前回 ${v.previous})` : ""}
-                      </div>
-                    ))}
-                  </div>
-                </Cell>
-              </Row>
-            ))}
-          </DataTable>
+          <DataGrid
+            columns={[
+              { id: "url", header: "URL", sortable: true },
+              { id: "template", header: "テンプレート", sortable: true, nowrap: true },
+              { id: "error", header: "error", numeric: true, sortable: true },
+              { id: "warning", header: "warning", numeric: true, sortable: true },
+              { id: "reason", header: "理由" },
+            ]}
+            rows={filteredOffenders.map((o) => ({
+              id: o.url,
+              cells: [
+                <code key="p" className="font-mono text-xs">
+                  {o.path}
+                </code>,
+                o.template,
+                <StatusBadge key="e" tone={o.errorCount ? "bad" : "good"}>
+                  {o.errorCount}
+                </StatusBadge>,
+                <StatusBadge key="w" tone={o.warningCount ? "warn" : "good"}>
+                  {o.warningCount}
+                </StatusBadge>,
+                <div key="r" className="flex flex-col gap-1 text-xs text-muted-foreground">
+                  {o.violations.slice(0, 4).map((v, i) => (
+                    <div key={i}>
+                      {v.metric_key} ({v.comparison}): {v.actual} {v.operator} {v.threshold}
+                      {v.previous != null ? ` (前回 ${v.previous})` : ""}
+                    </div>
+                  ))}
+                </div>,
+              ],
+              sort: [o.path, o.template, o.errorCount, o.warningCount, null],
+              search: `${o.path} ${o.template}`,
+              tone: o.errorCount ? "bad" : o.warningCount ? "warn" : undefined,
+            }))}
+            searchPlaceholder="URL・テンプレートで絞り込み"
+          />
         )}
       </Section>
 
       <Section title="全URLの現在値" count={filteredResults.length}>
         {shouldTrim ? (
-          <p className="mb-2 text-[11px] text-console-muted">
+          <p className="text-xs text-muted-foreground">
             対象 {templateScoped.length} URL中、違反ページ {filteredResults.length} 件だけ表示 (
-            <Link className="text-console-info underline underline-offset-2" href="/quality/page-audit?showAll=1">
+            <Link className={LINK} href="/quality/page-audit?showAll=1">
               全件表示
             </Link>
             )。テンプレートで絞り込むと全件表示される。
           </p>
         ) : null}
-        <div className="max-h-[32rem] overflow-auto">
-          <DataTable columns={["URL", "テンプレート", "HTML", "RSC", "DOM", "重複リンク率", "広告重複", "LCP"]}>
-            {filteredResults.map((r) => (
-              <Row key={r.url}>
-                <Cell>
-                  <code className="text-[10px]">{r.path}</code>
-                  {r.error ? <div className="text-[10px] text-console-bad">{r.error}</div> : null}
-                </Cell>
-                <Cell nowrap>{r.template}</Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.html_bytes} unit=" B" />
-                </Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.rsc_bytes} unit=" B" />
-                </Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.dom_nodes} />
-                </Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.duplicate_link_ratio} />
-                </Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.ad_duplicate_count} />
-                </Cell>
-                <Cell nowrap>
-                  <MetricCell value={r.metrics.lcp_ms} unit=" ms" />
-                </Cell>
-              </Row>
-            ))}
-          </DataTable>
-        </div>
+        <DataGrid
+          columns={[
+            { id: "url", header: "URL", sortable: true },
+            { id: "template", header: "テンプレート", sortable: true, nowrap: true },
+            ...METRIC_COLUMNS.map((m) => ({ id: m.key, header: m.header, numeric: true, sortable: true, nowrap: true })),
+          ]}
+          rows={filteredResults.map((r) => ({
+            id: r.url,
+            cells: [
+              <div key="u">
+                <code className="font-mono text-xs">{r.path}</code>
+                {r.error ? <div className="text-xs text-console-bad">{r.error}</div> : null}
+              </div>,
+              r.template,
+              ...METRIC_COLUMNS.map((m) => <MetricCell key={m.key} value={r.metrics[m.key]} unit={m.unit} />),
+            ],
+            sort: [r.path, r.template, ...METRIC_COLUMNS.map((m) => metricSort(r.metrics[m.key]))],
+            search: `${r.path} ${r.template}`,
+            tone: r.error ? ("bad" as const) : undefined,
+          }))}
+          searchPlaceholder="URL・テンプレートで絞り込み"
+        />
       </Section>
-    </div>
+    </>
   );
 }

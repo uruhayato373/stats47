@@ -1,0 +1,453 @@
+{
+  "schemaVersion": 1,
+  "kind": "note-pack-office-verification",
+  "observedAt": "2026-10-28",
+  "environment": {
+    "os": "Windows 11 Enterprise 10.0.22631",
+    "excel": "Microsoft 365 Apps for enterprise 16.0 build 17830 (2407)",
+    "powerpoint": "Microsoft 365 Apps for enterprise 16.0 build 17830 (2407)",
+    "method": "Office COM automation on the real applications; files opened read-only, changes discarded"
+  },
+  "checks": [
+    "Excel: open without repair, list sheets, CalculateFull, count formula/constant error cells, write and read back one cell",
+    "PowerPoint: open, count slides and native charts, export slides 1/3/4 to PNG for visual check, recolor one prefecture freeform shape on the first map slide and read back"
+  ],
+  "chartDataEdit": {
+    "productId": "P-01",
+    "slide": 4,
+    "result": "ChartData B2 60.7 -> 12345 changed series value 1 to 12345"
+  },
+  "findings": [
+    "Ranking bar charts draw rank 1 at the bottom (PPTX-RANK-ORDER-01); values and order of data are correct",
+    "Not checked: Excel/PowerPoint for Mac"
+  ],
+  "packs": [
+    {
+      "productId": "P-01",
+      "noteArticleKey": "prefecture-population-household-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+        "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "人口・世帯",
+          "出典"
+        ],
+        "formulaCells": 6298,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-02",
+      "noteArticleKey": "prefecture-income-wage-hiring-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-02/v4-20261024-mac-r2/c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974.zip",
+        "sha256": "c67013355f3e07aca14f5989e947ea63f574bae97eea4916b36d687b10467974",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "労働・賃金",
+          "出典"
+        ],
+        "formulaCells": 5029,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-03",
+      "noteArticleKey": "prefecture-tourism-lodging-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-03/v4-20261024-mac-r2/4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1.zip",
+        "sha256": "4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 5,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "観光",
+          "国際",
+          "出典"
+        ],
+        "formulaCells": 2068,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-04",
+      "noteArticleKey": "prefecture-municipal-finance-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-04/v4-20261024-mac-r2/d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3.zip",
+        "sha256": "d9b9b654d9506084e1170782dd5f99dc7e5655a676a914b9bcca286828d60fc3",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "行財政",
+          "出典"
+        ],
+        "formulaCells": 5593,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-05",
+      "noteArticleKey": "prefecture-healthcare-nursing-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-05/v4-20261024-mac-r2/530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0.zip",
+        "sha256": "530abeb1677f3b768d8067d4428f4d28111b7dd2c16ab4cbf116ba08aa34afd0",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "社会保障",
+          "出典"
+        ],
+        "formulaCells": 11139,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-06",
+      "noteArticleKey": "prefecture-education-childcare-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-06/v4-20261024-mac-r2/fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114.zip",
+        "sha256": "fec123fa91cc886e7fc03607b11cca31d78f96dae8dceb499a5476e116630114",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "教育・スポーツ",
+          "出典"
+        ],
+        "formulaCells": 11468,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-07",
+      "noteArticleKey": "prefecture-migration-living-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-07/v4-20261024-mac-r2/f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab.zip",
+        "sha256": "f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 5,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "国土・気候",
+          "経済・家計",
+          "出典"
+        ],
+        "formulaCells": 3572,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-08",
+      "noteArticleKey": "prefecture-retail-trade-area-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-08/v4-20261024-mac-r2/c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb.zip",
+        "sha256": "c8b621732235b120e4985adaa784ad75495eb08dac842aa5e21acd83f6010ccb",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "商業",
+          "出典"
+        ],
+        "formulaCells": 3243,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-09",
+      "noteArticleKey": "prefecture-industry-economy-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-09/v4-20261024-mac-r2/4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1.zip",
+        "sha256": "4077bc2a3098b05f2c3be8469444518cb6b7b1deb5df2978e8578e6e501509a1",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 6,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "農林水産",
+          "経済・家計",
+          "鉱工業",
+          "出典"
+        ],
+        "formulaCells": 6204,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-10",
+      "noteArticleKey": "prefecture-disaster-infrastructure-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-10/v4-20261024-mac-r2/5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2.zip",
+        "sha256": "5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 8,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "安全・環境",
+          "インフラ",
+          "建設",
+          "情報通信",
+          "エネルギー",
+          "出典"
+        ],
+        "formulaCells": 10810,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-11",
+      "noteArticleKey": "prefecture-map-chart-assets-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-11/v4-20261024-mac-r2/137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548.zip",
+        "sha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548",
+        "shaVerified": true
+      },
+      "excel": null,
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 90,
+        "nativeCharts": 28,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-12",
+      "noteArticleKey": "prefecture-all-in-one-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-12/v4-20261024-mac-r2/833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379.zip",
+        "sha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 20,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "農林水産",
+          "社会保障",
+          "経済・家計",
+          "安全・環境",
+          "人口・世帯",
+          "労働・賃金",
+          "行財政",
+          "教育・スポーツ",
+          "国土・気候",
+          "観光",
+          "インフラ",
+          "商業",
+          "建設",
+          "情報通信",
+          "エネルギー",
+          "鉱工業",
+          "国際",
+          "出典"
+        ],
+        "formulaCells": 97431,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    },
+    {
+      "productId": "P-14",
+      "noteArticleKey": "prefecture-household-consumption-pack",
+      "artifactVersion": "v4-20261024-mac-r2",
+      "archive": {
+        "bucket": "stats47-private",
+        "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
+        "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d",
+        "shaVerified": true
+      },
+      "excel": {
+        "opened": true,
+        "repairPrompt": false,
+        "sheetCount": 4,
+        "sheets": [
+          "使い方",
+          "一覧",
+          "経済・家計",
+          "出典"
+        ],
+        "formulaCells": 32195,
+        "errorCellsAfterRecalc": 0,
+        "cellEditOk": true
+      },
+      "powerpoint": {
+        "opened": true,
+        "slideCount": 96,
+        "nativeCharts": 30,
+        "mapFreeformShapes": 47,
+        "mapRecolorOk": true
+      }
+    }
+  ]
+}

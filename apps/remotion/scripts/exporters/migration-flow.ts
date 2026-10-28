@@ -1,5 +1,7 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { buildMigrationFocusFile } from "@stats47/migration-flow/focus-file";
+
 import { loadPrefectures } from "./_shared/load-prefectures.js";
 import {
   LOCAL_R2_ROOT,
@@ -11,23 +13,6 @@ import { REMOTION_PUBLIC } from "./_shared/paths.js";
 const METRIC_KEY = "population-migration-inter-prefecture";
 const MUNICIPALITY_METRIC = "population-migration-net-municipality";
 const FEATURE_DIR = resolve(REMOTION_PUBLIC, "migration-flow");
-
-interface PartnerEntry {
-  code: string;
-  name: string;
-  inflow: number;
-  outflow: number;
-  net: number;
-}
-
-interface FocusFile {
-  focusCode: string;
-  focusName: string;
-  year: number;
-  source: string;
-  partners: PartnerEntry[];
-  totals: { inflow: number; outflow: number; net: number };
-}
 
 interface PrefNetEntry {
   code: string;
@@ -96,37 +81,8 @@ export async function exportMigrationFlow(year?: number): Promise<{
 
   let wrote = 0;
   for (const [focusCode5, partners] of byFocus) {
-    const focusCode2 = to2(focusCode5);
-    const focusName = prefName.get(focusCode5) ?? focusCode5;
-    const partnerEntries: PartnerEntry[] = partners
-      .filter((p) => p.fromPrefCode !== focusCode5)
-      .map((p) => ({
-        code: to2(p.fromPrefCode),
-        name: prefName.get(p.fromPrefCode) ?? p.fromPrefCode,
-        inflow: p.inflow ?? 0,
-        outflow: p.outflow ?? 0,
-        net: p.net ?? 0,
-      }))
-      .sort((a, b) => a.code.localeCompare(b.code));
-
-    const totals = partnerEntries.reduce(
-      (acc, p) => {
-        acc.inflow += p.inflow;
-        acc.outflow += p.outflow;
-        acc.net += p.net;
-        return acc;
-      },
-      { inflow: 0, outflow: 0, net: 0 },
-    );
-
-    const file: FocusFile = {
-      focusCode: focusCode2,
-      focusName,
-      year: targetYear,
-      source: "e-Stat 住民基本台帳人口移動報告 (統計表 0003423613)",
-      partners: partnerEntries,
-      totals,
-    };
+    const file = buildMigrationFocusFile({ focusCode5, year: targetYear, rows: partners, prefNames: prefName });
+    const focusCode2 = file.focusCode;
     writeFileSync(
       resolve(FEATURE_DIR, `${focusCode2}.json`),
       JSON.stringify(file),

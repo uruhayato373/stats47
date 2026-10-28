@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { CHANNELS, channelsOf } from "@/lib/channel-registry";
-import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs } from "@/lib/nav-registry";
+import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs, navTrail } from "@/lib/nav-registry";
 
 import domainsConfig from "../../../../config/domains.json";
 
@@ -25,6 +25,19 @@ describe("nav-registry (左メニューの SSOT)", () => {
     expect(NAV_GROUPS.map((g) => g.title)).toEqual([null, ...domainsConfig.domains.map((d) => d.label)]);
     expect(NAV_GROUPS[1]?.title).toBe("戦略");
     expect(NAV_GROUPS.at(-1)?.title).toBe("管理");
+  });
+
+  it("領域のグループ名は領域の概要 (/domains/<id>) へリンクし、そのページは動的ルートで実在する", () => {
+    expect(NAV_GROUPS.slice(1).map((g) => g.href)).toEqual(domainsConfig.domains.map((d) => `/domains/${d.id}`));
+    expect(NAV_GROUPS[0]?.href).toBeUndefined();
+    expect(existsSync(path.join(APP_DIR, "domains", "[id]", "page.tsx"))).toBe(true);
+  });
+
+  it("戦略のグループは判断の画面だけで、資料 (事業計画の詳細・共通方針・文書) をメニューに出さない", () => {
+    const strategy = NAV_GROUPS.find((g) => g.title === "戦略");
+    const items = navHrefs(strategy ? [strategy] : []);
+    expect(items).toContain("/strategy");
+    for (const reference of ["/strategy/business-plan", "/strategy/policy", "/docs"]) expect(hrefs).not.toContain(reference);
   });
 
   it("href が重複しない (同じ画面が二重に出ない)", () => {
@@ -72,5 +85,19 @@ describe("nav-registry (左メニューの SSOT)", () => {
   it("ホームは / だけ", () => {
     expect(isNavItemActive("/", params(), "/", hrefs)).toBe(true);
     expect(isNavItemActive("/ops", params(), "/", hrefs)).toBe(false);
+  });
+
+  it("上部バーの現在地は、メニューと同じ判定でグループ ＞ 枝 ＞ ページを返す", () => {
+    const labels = (p: string, q?: string) => navTrail(p, params(q)).map((c) => c.label);
+    const covers = labels("/content/note/covers");
+    expect(covers.at(-1)).toBe("note");
+    expect(covers).toContain("チャネル別");
+    expect(labels("/strategy/lanes").at(-1)).toBe("領域と構え");
+    expect(labels("/")).toEqual(["ホーム"]);
+    expect(labels("/no-such-page")).toEqual([]);
+    for (const href of navHrefs(NAV_GROUPS)) {
+      const [p, q] = href.split("?");
+      expect(navTrail(p, params(q)).at(-1)?.href, href).toBe(href);
+    }
   });
 });

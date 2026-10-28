@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { SITE } from '@stats47/types';
 
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
@@ -11,6 +12,7 @@ import { UrlPolicy } from '@/lib/url-policy';
 import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
 import { GEO_BASELINE_REDIRECTS } from '@/config/geo-redirects';
 import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
+import { AREA_CATEGORY_TO_THEME, resolveLegacyThemePathRedirect } from '@/config/legacy-theme-redirects';
 import { RANKING_SLUG_REDIRECTS } from '@/config/ranking-redirects';
 import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
 
@@ -69,7 +71,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     const key = segments[3];
     if (pageType === 'dashboard' && /^\d{5}$/.test(key)) {
       if (!UrlPolicy.area.isValidPrefCode(key)) return gone();
-      return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), {
+      return NextResponse.redirect(new URL(hrefFor('area', { areaCode: key }), baseUrl), {
         status: 301,
       });
     }
@@ -77,12 +79,12 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
       const destination = RANKING_SLUG_REDIRECTS[key];
       if (destination) {
         const url = new URL(baseUrl);
-        url.pathname = `/ranking/${destination}`;
+        url.pathname = hrefFor('ranking', { rankingKey: destination });
         return NextResponse.redirect(url, 301);
       }
       if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key))
         return gone();
-      return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), {
+      return NextResponse.redirect(new URL(hrefFor('ranking', { rankingKey: key }), baseUrl), {
         status: 301,
       });
     }
@@ -95,7 +97,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     /^\d{5}$/.test(segments[1])
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('area', { areaCode: segments[1] }), baseUrl), {
       status: 301,
     });
   }
@@ -123,7 +125,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     /^\d{5}$/.test(segments[1])
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('area', { areaCode: segments[1] }), baseUrl), {
       status: 301,
     });
   }
@@ -142,7 +144,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     segments.length <= 3 &&
     OLD_CATEGORY_KEYS.has(segments[0])
   ) {
-    return NextResponse.redirect(new URL(`/category/${segments[0]}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('category', { categoryKey: segments[0] }), baseUrl), {
       status: 301,
     });
   }
@@ -176,7 +178,7 @@ function checkContentTypePolicy(
     if (!slug) return gone();
     if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug))
       return gone();
-    return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), {
+    return NextResponse.redirect(new URL(hrefFor('ranking', { rankingKey: slug }), baseUrl), {
       status: 301,
     });
   }
@@ -212,7 +214,7 @@ function checkContentTypePolicy(
         !UrlPolicy.tag.isGone(jaKey)
       ) {
         return NextResponse.redirect(
-          new URL(`/tag/${encodeURIComponent(jaKey)}`, baseUrl),
+          new URL(hrefFor('tag', { tagKey: encodeURIComponent(jaKey) }), baseUrl),
           { status: 301 }
         );
       }
@@ -235,7 +237,7 @@ function checkContentTypePolicy(
       if (slug === 'tags' && pathname === '/blog/tags') return null;
       const newSlug = BLOG_SLUG_REDIRECTS[slug];
       if (newSlug) {
-        return NextResponse.redirect(new URL(`/blog/${newSlug}`, baseUrl), {
+        return NextResponse.redirect(new URL(hrefFor('blog', { slug: newSlug }), baseUrl), {
           status: 301,
         });
       }
@@ -347,7 +349,7 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     if (seg.length === 5) {
       if (!UrlPolicy.cityCategory.isKnown(seg[4])) return gone();
       return NextResponse.redirect(
-        new URL(`/areas/${areaCode}/cities/${cityCode}`, req.url),
+        new URL(hrefFor('city', { areaCode, cityCode }), req.url),
         301
       );
     }
@@ -356,27 +358,8 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
 
   // /areas/{prefCode}/{categoryKey} → /areas/{prefCode}/{themeSlug} (301)
   // 旧カテゴリ別ページを対応するテーマページへリダイレクト
-  const CATEGORY_TO_THEME: Record<string, string> = {
-    population: 'population-dynamics',
-    laborwage: 'labor-wages',
-    economy: 'local-economy',
-    agriculture: 'local-economy',
-    miningindustry: 'manufacturing',
-    construction: 'living-housing',
-    commercial: 'local-economy',
-    // tourism は旧 categoryKey と現行 themeSlug が同一なので転送しない。
-    // ここへ含めると同一 URL への 301 ループになる。
-    socialsecurity: 'healthcare',
-    educationsports: 'education-culture',
-    safetyenvironment: 'safety',
-    landweather: 'climate',
-    international: 'foreign-residents',
-    administrativefinancial: 'local-finance',
-    // テーマ未対応カテゴリ → エリアプロフィールへ
-    energy: '',
-    ict: '',
-    infrastructure: '',
-  };
+  // 対応表は config/legacy-theme-redirects.ts (転送先の実在をテストで照合する)
+  const CATEGORY_TO_THEME = AREA_CATEGORY_TO_THEME;
   if (
     seg.length === 3 &&
     /^\d{5}$/.test(seg[1]) &&
@@ -388,8 +371,8 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     const themeSlug = CATEGORY_TO_THEME[seg[2]];
     // テーマスラグ空文字 = 対応テーマなし → エリアプロフィールへ
     const dest = themeSlug
-      ? `/areas/${seg[1]}/${themeSlug}`
-      : `/areas/${seg[1]}`;
+      ? hrefFor('area-theme', { areaCode: seg[1], themeSlug })
+      : hrefFor('area', { areaCode: seg[1] });
     return NextResponse.redirect(new URL(dest, req.url), { status: 301 });
   }
 
@@ -435,8 +418,10 @@ export default function middleware(req: NextRequest) {
   }
 
   // --- Trailing slash 正規化（301）---
+  // 廃止ページ (/ports/ など) は正規化後の path で転送先を引き、301 を 1 回で着地させる。
   if (pathname !== '/' && pathname.endsWith('/')) {
-    const url = new URL(pathname.slice(0, -1), req.url);
+    const normalized = pathname.slice(0, -1);
+    const url = new URL(resolveLegacyThemePathRedirect(normalized) ?? normalized, req.url);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }
@@ -502,7 +487,7 @@ export default function middleware(req: NextRequest) {
     }
     if (!UrlPolicy.ranking.isKnown(rankingKey)) return gone();
     return NextResponse.redirect(
-      new URL(`/ranking/${rankingKey}`, req.url),
+      new URL(hrefFor('ranking', { rankingKey }), req.url),
       301
     );
   }
@@ -525,7 +510,7 @@ export default function middleware(req: NextRequest) {
     const segments = pathname.split('/').filter(Boolean);
     if (segments.length === 1 && OLD_CATEGORY_KEYS.has(segments[0])) {
       return NextResponse.redirect(
-        new URL(`/category/${segments[0]}`, req.url),
+        new URL(hrefFor('category', { categoryKey: segments[0] }), req.url),
         { status: 301 }
       );
     }
@@ -562,71 +547,18 @@ export default function middleware(req: NextRequest) {
       const categoryKey = compareMatch[1] ?? 'population';
       const search = req.nextUrl.search;
       return NextResponse.redirect(
-        new URL(`/category/${categoryKey}/compare${search}`, req.url),
+        new URL(`${hrefFor('category-compare', { categoryKey })}${search}`, req.url),
         { status: 301 }
       );
     }
   }
 
-  // /ports・/fishing-ports (廃止 2026-05-28) → /themes に統合
-  //  - /ports → /themes/ports (港湾テーマ新設)
-  //  - /fishing-ports → /themes/fishery-marine (既存「漁業（水産業）」テーマ、漁港数を含む)
-  // 独立ページを廃止し theme に一本化。クエリは保持。
-  if (pathname === '/ports' || pathname === '/ports/') {
+  // 廃止ページ (/ports・/fishing-ports・/station-passengers・/maps/highway-timeline・/gis-cross) → テーマへ 301。
+  // 表と照合順は config/legacy-theme-redirects.ts。クエリは保持。
+  const legacyThemeDestination = resolveLegacyThemePathRedirect(pathname);
+  if (legacyThemeDestination) {
     return NextResponse.redirect(
-      new URL(`/themes/ports${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (pathname === '/fishing-ports' || pathname === '/fishing-ports/') {
-    return NextResponse.redirect(
-      new URL(`/themes/fishery-marine${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /station-passengers・/station-passengers/[prefCode] (廃止 2026-05-28) → /themes/railway に統合
-  // 駅別乗降客数の県別バブルマップは鉄道テーマに集約。API (/api/station-passengers/*) も廃止。
-  if (/^\/station-passengers(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/railway${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /maps/highway-timeline・/maps/highway-timeline/[year] (廃止 2026-05-28) → /themes/roads に統合
-  // 高速道路時系列マップは道路テーマに集約。
-  if (/^\/maps\/highway-timeline(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/roads${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  // /gis-cross・/gis-cross/* (廃止 2026-05-29) → /themes に統合
-  //  - migration-flow → /themes/population-dynamics (人口移動フローを人口動態テーマに埋め込み)
-  //  - depopulation-medical → /themes/healthcare (過疎×医療マップを医療テーマに埋め込み)
-  //  - sunshine-map → /themes/climate (気候テーマ新設、日照地図を埋め込み)
-  //  - hub → /themes
-  // 具体 path を先に判定し、最後にハブをフォールバック。クエリは保持。
-  if (/^\/gis-cross\/migration-flow(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/population-dynamics${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross\/depopulation-medical(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/healthcare${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross\/sunshine-map(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes/climate${req.nextUrl.search}`, req.url),
-      { status: 301 }
-    );
-  }
-  if (/^\/gis-cross(?:\/.*)?$/.test(pathname)) {
-    return NextResponse.redirect(
-      new URL(`/themes${req.nextUrl.search}`, req.url),
+      new URL(`${legacyThemeDestination}${req.nextUrl.search}`, req.url),
       { status: 301 }
     );
   }

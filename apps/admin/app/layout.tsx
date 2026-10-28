@@ -1,7 +1,12 @@
 import { CloseSidebarOnNavigate } from "@/components/close-sidebar-on-navigate";
 import { ConsoleSidebar } from "@/components/console-nav";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
+import { Suspense } from "react";
+
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import Script from "next/script";
 
@@ -28,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
         {/* 素の <script> を JSX に置くと React が警告を出すため next/script で head へ入れる
             (beforeInteractive なので実行は hydration 前 = 同じタイミング)。 */}
@@ -37,17 +42,16 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <SidebarProvider>
+        {/* 見本 (shadcndashboard.dev) と同じ外枠: inset のサイドバー + 角の無い 1px 枠の本文 + sticky の上部バー + p-4 の本文 */}
+        <SidebarProvider className="[--header-height:calc(var(--spacing)*12)]">
           <CloseSidebarOnNavigate />
           <ConsoleSidebar />
-          <SidebarInset className="min-w-0">
-            {/* md 未満はサイドメニューが Sheet になるので、開くボタンを上部バーに置く */}
-            <div className="flex items-center gap-2 border-b px-3 py-2 md:hidden">
-              <SidebarTrigger />
-              <span className="text-sm font-semibold">stats47 管理コンソール</span>
-            </div>
-            <div className="min-w-0 flex-1 overflow-x-hidden wrap-break-word px-3 py-5 sm:px-6 sm:py-8">
-              {children}
+          <SidebarInset className="min-w-0 outline outline-border md:peer-data-[variant=inset]:rounded-none md:peer-data-[variant=inset]:shadow-none">
+            <Suspense fallback={<div className="h-(--header-height) border-b" aria-hidden="true" />}>
+              <SiteHeader />
+            </Suspense>
+            <div className="@container/main flex min-w-0 flex-1 flex-col overflow-x-hidden wrap-break-word">
+              <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-4 p-4">{children}</div>
             </div>
           </SidebarInset>
         </SidebarProvider>

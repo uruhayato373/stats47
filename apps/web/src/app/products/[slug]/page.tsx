@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { BookOpen, Check, Database, ExternalLink } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -18,6 +19,7 @@ import {
 import { getRequiredBaseUrl } from "@/lib/env";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import type { Metadata } from "next";
 
@@ -37,14 +39,14 @@ export async function generateMetadata({
   if (!product) return { title: "商品が見つかりません" };
 
   const baseUrl = getRequiredBaseUrl();
-  const canonicalPath = `/products/${product.slug}`;
+  const canonicalPath = hrefFor("product", { slug: product.slug });
 
   return {
-    title: `${product.title} | stats47`,
+    title: product.title,
     description: product.description,
     alternates: { canonical: canonicalPath },
     ...generateOGMetadata({
-      title: `${product.title} | stats47`,
+      title: formatOgpTitle(product.title),
       description: product.description,
       imageUrl: ogpImageUrl(ogpImageKeys.product(product.slug)),
       url: `${baseUrl}${canonicalPath}`,
@@ -75,7 +77,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       price: String(product.priceYen),
       availability: "https://schema.org/InStock",
     },
-    url: `${baseUrl}/products/${product.slug}`,
+    url: `${baseUrl}${hrefFor("product", { slug: product.slug })}`,
   };
 
   return (
@@ -165,7 +167,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           {slug === "data-p-04" && (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               本商品は固定年度のデータ集で、自動更新はありません。Excel・CSV・PDFは110指標、PowerPointは先頭30指標です。
-              Office実機での表示・編集互換性は未確認です。最新年度の資料や市町村比較に使う場合は、必要な年度と地域粒度を販売先で確認してください。
+              Microsoft 365 の Excel・PowerPoint（Windows版）で開き、表示と編集を確かめています。最新年度の資料や市町村比較に使う場合は、必要な年度と地域粒度を販売先で確認してください。
             </p>
           )}
           <Link
@@ -180,7 +182,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               : "県別の値をExcelで編集したい方へ。固定年度・対応形式を購入前に確認してください。"}
           </p>
           <TrackedProductLink
-            href={`/products/${fiscalCompanion.slug}`}
+            href={hrefFor("product", { slug: fiscalCompanion.slug })}
             label={`${fiscalCompanion.id}:${fiscalCompanion.title}`}
             surface="product_catalog"
             className="mt-2 inline-flex min-h-10 items-center text-sm text-primary underline"

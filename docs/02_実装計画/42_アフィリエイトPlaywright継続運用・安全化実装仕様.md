@@ -2,9 +2,9 @@
 title: アフィリエイト Playwright 継続運用・安全化実装仕様
 type: implementation-spec
 date: 2026-07-28
-updated: 2026-09-25
+updated: 2026-10-26
 status: in-progress
-related_backlog: ASP-CONTINUITY-01
+related_backlog: AFF-A8-EXPANSION-2026-10
 tags: [affiliate, Playwright, automation, operations, safety, measurement]
 ---
 
@@ -16,7 +16,7 @@ tags: [affiliate, Playwright, automation, operations, safety, measurement]
 Claude Code と Playwright で継続運用するための実装仕様である。
 
 未完了タスクの status / tier / 期日は
-`.claude/todo/backlog.md` の `ASP-CONTINUITY-01` を真実源とする。本書は実装方法と受入条件を扱い、
+`.claude/todo/backlog.md` の `AFF-A8-EXPANSION-2026-10` を真実源とする (旧 `ASP-CONTINUITY-01` は afb の承認追跡・原稿取得の自動化 `9550a80a0` で完了。afb は 2026-10-19 の ASP 集約で停止)。本書は実装方法と受入条件を扱い、
 提携状態・広告在庫・成果値の現在値を正典化しない。
 
 運用上の正典は既存の配置を維持する。
@@ -73,7 +73,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | ---------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
 | active 広告 260 件、広告主 160 社、10 vertical に gap なし | `data/affiliate/inventory-latest.json`              | 新規申請数は現在の制約ではない            |
 | A8 の新規 scout / apply は `APPLY_NEW=0`                   | `scripts/scheduled/scout-asp-weekly.sh`                | 計測復旧まで維持                          |
-| もしも / afb は apply 後の承認追跡・harvest が未実装       | `/affiliate-operate`                                   | `ASP-CONTINUITY-01` の主対象              |
+| もしも / afb は apply 後の承認追跡・harvest が未実装       | `/affiliate-operate`                                   | 済 (旧 `ASP-CONTINUITY-01`・`afb-harvest.mjs`) |
 | GA4 operations state が旧データでも `ready`                | `data/affiliate/affiliate-operations-latest.json`   | event schema gate が必要                  |
 | 直接配置 2 件に PR 表記不足                                | `data/affiliate/compliance-latest.json`             | 公開前 fail gate が必要                   |
 | A8 `check-approval` の全ページ走査は実装済 (2026-08-04)    | `a8-browser.ts` `collectPartneredProgramIds`           | 残りは上限到達の `partial` 表現 (§8.1)    |
@@ -695,7 +695,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 - 既存 test baseline を取る。
 - 追加・変更・触らないファイルを確定する。
 - `.claude/scripts/ads` 内の state writer を列挙する。
-- 未完了事項だけを `ASP-CONTINUITY-01` の実行順・停止条件・完了条件へ反映する。
+- 未完了事項だけを `AFF-A8-EXPANSION-2026-10` の実行順・停止条件・完了条件へ反映する。
 - Phase 1 の開始可否を `ready / blocked` で判定する。
 
 ### Phase 1 — 外部アクセス不要の安全基盤（完了 2026-07-29）

@@ -1,5 +1,7 @@
 import { RailCard } from '@/components/surface';
 
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
+
 import type { NavSurface } from '@/lib/analytics/events';
 
 import { RailCategoryList } from './RailCategoryList';
@@ -60,7 +62,7 @@ export function RailDataDiscoveryCards({
         items={themes.map((theme) => ({
           id: theme.themeKey,
           label: theme.title,
-          href: `/themes/${theme.themeKey}`,
+          href: themeHref(theme.themeKey),
           trackingLabel: `theme:${theme.themeKey}`,
         }))}
         layout="list"

@@ -3,7 +3,7 @@
     "id": "kakei-chousa",
     "sourceKind": "survey",
     "externalId": null,
-    "parentSourceId": "estat",
+    "parentSourceId": "household-survey",
     "name": "家計調査（品目別）",
     "organization": "総務省統計局",
     "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
@@ -16,7 +16,7 @@
     "displayOrder": 0,
     "isActive": true,
     "createdAt": "2026-03-12 10:41:34",
-    "updatedAt": "2026-03-12 10:41:34"
+    "updatedAt": "2026-10-26 00:00:00"
   },
   {
     "id": "commercial-dynamics-survey",

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { mediaUrl, templateReturnUrl } from '@/lib/media-workspace-navigation';
 
@@ -36,16 +36,7 @@ export function MediaWorkspaceNav({
         aria-label="メニューを切り替える"
       />
       {links.map(([key, label, href]) => (
-        <Button
-          key={key}
-          asChild
-          variant={active === key ? 'default' : 'outline'}
-          size="sm"
-        >
-          <Link
-            href={href}
-            aria-current={active === key ? 'page' : undefined}
-            onClick={(event) => {
+        <Link key={key} href={href} aria-current={active === key ? 'page' : undefined} onClick={(event) => {
               if (
                 active === key ||
                 (dirty &&
@@ -54,11 +45,9 @@ export function MediaWorkspaceNav({
                   ))
               )
                 event.preventDefault();
-            }}
-          >
+            }} className={buttonVariants({ variant: active === key ? 'default' : 'outline', size: "sm" })}>
             {label}
           </Link>
-        </Button>
       ))}
     </nav>
   );

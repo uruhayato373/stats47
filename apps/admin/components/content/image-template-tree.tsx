@@ -29,21 +29,17 @@ function ClassificationGroup({
   const [open, setOpen] = useState(active);
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      <CollapsibleTrigger asChild>
-        <Button
-          variant="ghost"
+      <CollapsibleTrigger render={<Button variant="ghost"
           size="sm"
           className="group w-full justify-start"
-          aria-label={label + 'の分類を開閉'}
-        >
+          aria-label={label + 'の分類を開閉'} />}>
           <ChevronRight
             aria-hidden="true"
             strokeWidth={1.5}
-            className="size-4 shrink-0 text-console-muted transition-transform group-data-[state=open]:rotate-90"
+            className="size-4 shrink-0 text-muted-foreground transition-transform group-data-[state=open]:rotate-90"
           />
           <span className="truncate">{label}</span>
-        </Button>
-      </CollapsibleTrigger>
+        </CollapsibleTrigger>
       <CollapsibleContent className="pl-3">{children}</CollapsibleContent>
     </Collapsible>
   );
@@ -97,7 +93,7 @@ export function ImageTemplateTree({
         );
       })}
       {!branches.length && (
-        <p className="text-sm text-console-muted">該当する分類はありません。</p>
+        <p className="text-sm text-muted-foreground">該当する分類はありません。</p>
       )}
     </nav>
   );

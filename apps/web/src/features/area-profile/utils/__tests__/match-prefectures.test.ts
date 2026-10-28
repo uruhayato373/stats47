@@ -54,6 +54,7 @@ describe("prefectureShortName", () => {
     expect(prefectureShortName("東京都")).toBe("東京");
     expect(prefectureShortName("大阪府")).toBe("大阪");
     expect(prefectureShortName("神奈川県")).toBe("神奈川");
-    expect(prefectureShortName("北海道")).toBe("北海");
+    // 「北海」という地名は無いので北海道は落とさない (@stats47/area の単一実装)
+    expect(prefectureShortName("北海道")).toBe("北海道");
   });
 });

@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@stats47/components';
+import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { RailNavRow, type RailNavRowDensity } from '@/components/surface';
 
@@ -68,7 +69,7 @@ export function RailCategoryList({
       className={cn('divide-y divide-border border-y border-border', className)}
     >
       {items.map((category) => {
-        const href = `/category/${category.categoryKey}`;
+        const href = hrefFor('category', { categoryKey: category.categoryKey });
         const count =
           showCount && typeof category.count === 'number'
             ? category.count

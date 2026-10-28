@@ -4,8 +4,8 @@ import { logger } from "@stats47/logger";
 import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
-import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { listFromR2 } from "./list";
+import { resolveR2StagingRoot } from "./write-staging";
 import { SITE } from "@stats47/types";
 
 function deleteFromLocalFs(key: string): void {
@@ -13,7 +13,7 @@ function deleteFromLocalFs(key: string): void {
   const fs = require("fs") as typeof import("fs");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const path = require("path") as typeof import("path");
-  const r2Root = findLocalR2Root() ?? path.join(process.cwd(), ".local/r2");
+  const r2Root = resolveR2StagingRoot();
   const filePath = path.join(r2Root, key);
   if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 }

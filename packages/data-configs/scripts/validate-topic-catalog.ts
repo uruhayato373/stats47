@@ -46,7 +46,7 @@ function metricsOfCategory(categoryKey: string): MetricConfig[] {
   return Object.values(METRICS_REGISTRY).filter((config) => {
     if (config.isActive === false) return false;
     if (config.category === categoryKey) return true;
-    return (config.additionalCategories ?? []).includes(categoryKey);
+    return (config.additionalCategories ?? []).some((key) => key === categoryKey);
   });
 }
 

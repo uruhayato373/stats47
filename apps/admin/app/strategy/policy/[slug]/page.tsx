@@ -22,31 +22,31 @@ export default async function SharedPolicyDocumentPage({
   if (!document) notFound();
 
   return (
-    <div className="space-y-6">
+    <>
       <PageHeading
         title={document.title}
         source={`Obsidian vault ${document.sourcePath}（正本）`}
       >
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <StatusBadge>v{document.version}</StatusBadge>
-          <span className="text-[11px] text-console-muted">
+          <span className="text-xs text-muted-foreground">
             更新 {document.updated}
           </span>
           <Link
-            className="text-[11px] text-console-info underline underline-offset-2"
+            className="text-xs font-medium underline-offset-4 hover:underline"
             href="/strategy/policy"
           >
             共通方針の一覧へ
           </Link>
         </div>
       </PageHeading>
-      <p className="text-sm text-console-muted">
+      <p className="text-sm text-muted-foreground">
         {document.summary}
         {" "}編集はObsidian vaultの正本だけで行い、
-        <code className="rounded bg-muted px-1">npm run policy:sync</code>
+        <code className="rounded bg-muted px-1 font-mono text-xs">npm run policy:sync</code>
         で配布する。stats47 固有の適用（対象読者・商品・KPI・章立て）はこのリポジトリ側が管理し、ここには書かない。
       </p>
       <MarkdownArticle>{document.body}</MarkdownArticle>
-    </div>
+    </>
   );
 }

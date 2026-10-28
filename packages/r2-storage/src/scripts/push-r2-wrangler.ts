@@ -21,7 +21,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
-import { findLocalR2Root } from "../lib/utils/find-local-r2-root";
+import { resolveR2StagingRoot } from "../lib/operations/write-staging";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
@@ -54,8 +54,8 @@ function main(): void {
     process.exit(1);
   }
 
-  const root = findLocalR2Root();
-  if (!root) {
+  const root = resolveR2StagingRoot();
+  if (!fs.existsSync(root)) {
     console.error(
       "ローカル R2 ルートが見つかりません。sync-snapshots.yml で .local/r2 stage dir を生成してください。",
     );

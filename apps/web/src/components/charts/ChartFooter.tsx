@@ -14,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@stats47/components';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   BookOpenText,
   ChartNoAxesColumnIncreasing,
@@ -225,7 +226,7 @@ export function ChartFooter({
     .filter((survey) => isLinkableSurveyId(survey.id))
     .map((survey) => ({
       label: survey.name,
-      url: `/survey/${survey.id}`,
+      url: hrefFor('survey', { surveyKey: survey.id }),
     }));
   const resolvedSourceLinks = dedupeLinks([
     ...(sourceLinks ?? []),

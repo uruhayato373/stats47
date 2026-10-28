@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { layerSlug } = await params;
   const layer = findGeoLayer(layerSlug);
   return {
-    title: layer ? `${layer.name}の地図 | stats47` : 'GISが見つかりません',
+    title: layer ? `${layer.name}の地図` : 'GISが見つかりません',
     description: layer?.description,
     alternates: { canonical: `/geo/layers/${layerSlug}` },
   };

@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { rankToneByPosition } from "@/components/atoms/RankBadge";
@@ -42,7 +43,7 @@ export function RankedKpiGrid({ metrics, databook, columns = 3 }: Props) {
         const v = databook?.metrics[m.rankingKey];
         return {
           key: m.rankingKey,
-          href: `/ranking/${m.rankingKey}`,
+          href: hrefFor("ranking", { rankingKey: m.rankingKey }),
           label: (
             <>
               {m.shortLabel}

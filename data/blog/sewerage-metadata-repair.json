@@ -89,5 +89,138 @@
     "publishedAt": "2026-03-06T00:00:00.000Z",
     "updatedAt": "2026-05-29T00:00:00.000Z"
   },
-  "bodyUnchanged": true
+  "bodyUnchanged": true,
+  "publicIndexVerification": {
+    "checkedAt": "2026-10-27T06:12:15.558Z",
+    "url": "https://storage.stats47.jp/app/blog/all.json",
+    "sha256": "cf83944285f6e43b4c95ceabfb7ec8d62bbf33ebf054fc8914b4a3cd965b02bb",
+    "total": 619,
+    "published": 609,
+    "publishedWithoutValidDate": 0,
+    "restored": {
+      "slug": "sewerage-water-supply-gap",
+      "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+      "publishedAt": "2026-03-06"
+    }
+  },
+  "status": "restored",
+  "restoredPublishedAt": "2026-03-06",
+  "sourceRepairRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40442494913",
+  "publicVerification": {
+    "checkedAt": "2026-10-27T05:00:37.282Z",
+    "url": "https://stats47.jp/blog/sewerage-water-supply-gap",
+    "status": 200,
+    "title": "下水道普及率が低い県は不衛生なのか？徳島22%の意外な真相",
+    "canonical": "https://stats47.jp/blog/sewerage-water-supply-gap",
+    "imageUrl": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/ogp/ogp.png?v=20261026-pop",
+    "imageSha256": "7d7530d0b015c90d106182c6d83965dbc76cc63a873e38a6ff6dec84060e3763",
+    "publishedDatePresent": true,
+    "bodyImages": [
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-map.svg",
+        "alt": "下水道普及率（都道府県別）",
+        "heading": "全国マップで見る下水道普及率",
+        "line": 20,
+        "sha256": "f10328c6f5f19b2dfd3be96c65ac588cc812eff0eaea2c9bdbe2235b4f7c3351",
+        "bytes": 31464,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-ranking.svg",
+        "alt": "下水道普及率 上位5・下位5",
+        "heading": "全国マップで見る下水道普及率",
+        "line": 26,
+        "sha256": "fab271d41e74b5b63ee8def0364b3b7de558ab921d94eb7315614ec2a8d03f95",
+        "bytes": 6851,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-vs-water-scatter.svg",
+        "alt": "下水道普及率 vs 上水道給水人口比率",
+        "heading": "「下水道22%」の県でも、水洗トイレは8割が使える",
+        "line": 39,
+        "sha256": "9990b19e2c608172c4dc8ec56832d17dfffc2e368e196e359e11ff9c27b2d741",
+        "bytes": 10349,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-trend.svg",
+        "alt": "下水道普及率の推移（全国平均）",
+        "heading": "全国の下水道普及率は緩やかに上昇",
+        "line": 76,
+        "sha256": "5c8d717a5f8d5603a5faf56f33b0e47e16065c060c48abe5d6ddc5afd4b7c453",
+        "bytes": 4171,
+        "status": "verified"
+      },
+      {
+        "url": "https://storage.stats47.jp/app/blog/sewerage-water-supply-gap/data/sewerage-summary-findings.svg",
+        "alt": "この記事でわかったこと",
+        "heading": "まとめ",
+        "line": 92,
+        "sha256": "95f2657cad386c13345fc9fb91e8ea94836622cf9fd2a3ce3862a557db05901d",
+        "bytes": 3365,
+        "status": "verified"
+      }
+    ],
+    "internalLinks": [
+      {
+        "href": "/tag/%E6%B0%B4%E6%B4%97%E5%8C%96%E7%8E%87",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E6%B0%B4%E6%B4%97%E5%8C%96%E7%8E%87"
+      },
+      {
+        "href": "/tag/%E5%90%88%E4%BD%B5%E5%87%A6%E7%90%86%E6%B5%84%E5%8C%96%E6%A7%BD",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E5%90%88%E4%BD%B5%E5%87%A6%E7%90%86%E6%B5%84%E5%8C%96%E6%A7%BD"
+      },
+      {
+        "href": "/tag/%E4%B8%8B%E6%B0%B4%E9%81%93%E6%99%AE%E5%8F%8A%E7%8E%87",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E4%B8%8B%E6%B0%B4%E9%81%93%E6%99%AE%E5%8F%8A%E7%8E%87"
+      },
+      {
+        "href": "/tag/%E6%B0%B4%E9%81%93",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E6%B0%B4%E9%81%93"
+      },
+      {
+        "href": "/tag/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E6%A0%BC%E5%B7%AE",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/tag/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E6%A0%BC%E5%B7%AE"
+      },
+      {
+        "href": "/ranking/sewerage-penetration-rate-2012on",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/sewerage-penetration-rate-2012on"
+      },
+      {
+        "href": "/ranking/water-supply-population-ratio-2012on",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/water-supply-population-ratio-2012on"
+      },
+      {
+        "href": "/ranking/flush-toilet-population-ratio",
+        "status": 200,
+        "finalUrl": "https://stats47.jp/ranking/flush-toilet-population-ratio"
+      }
+    ],
+    "failedLinks": 0,
+    "deployment": {
+      "commit": "45615ddc11fd1974e8b4f6a63ba7ddacdb85d7a6",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/40450556600",
+      "purgeRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40453636238"
+    }
+  },
+  "preventRecurrence": [
+    "Invalid frontmatter stops snapshot export rather than replacing metadata with empty fields",
+    "Published blog catalog requires a nonblank publication date",
+    "Article-specific external card headline is checked against its exact source title"
+  ],
+  "sitemapVerification": {
+    "checkedAt": "2026-10-27T06:12:16.207Z",
+    "url": "https://stats47.jp/sitemap/4.xml",
+    "status": 200,
+    "containsRestoredArticle": true
+  },
+  "followUpIndexRunUrl": "https://github.com/uruhayato373/stats47/actions/runs/40458743458"
 }

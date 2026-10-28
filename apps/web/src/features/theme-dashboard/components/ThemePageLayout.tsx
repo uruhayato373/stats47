@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -109,7 +110,7 @@ export async function ThemePageLayout({
         chart.componentKey,
         chart.surveys.map((survey) => ({
           label: survey.name,
-          url: `/survey/${survey.id}`,
+          url: hrefFor('survey', { surveyKey: survey.id }),
         })),
       ])
   );
@@ -220,7 +221,7 @@ export async function ThemePageLayout({
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                      <Link href={`/areas/${areaContext.areaCode}`}>
+                      <Link href={hrefFor('area', { areaCode: areaContext.areaCode })}>
                         {areaContext.areaName}
                       </Link>
                     </BreadcrumbLink>
@@ -317,7 +318,7 @@ export async function ThemePageLayout({
                           {themeMetrics.map((metric) => (
                             <RailNavRow
                               key={metric.rankingKey}
-                              href={`/ranking/${metric.rankingKey}`}
+                              href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
                               chevron={false}
                               className="px-0"
                             >
@@ -343,7 +344,7 @@ export async function ThemePageLayout({
                           {themeSurveys.map((survey) => (
                             <RailNavRow
                               key={survey.id}
-                              href={`/survey/${survey.id}`}
+                              href={hrefFor('survey', { surveyKey: survey.id })}
                               chevron={false}
                               className="px-0"
                             >
@@ -371,7 +372,7 @@ export async function ThemePageLayout({
                 をハイライト表示しています
               </span>
               <Link
-                href={`/areas/${areaContext.areaCode}`}
+                href={hrefFor('area', { areaCode: areaContext.areaCode })}
                 className="text-sm text-primary hover:underline sm:ml-auto sm:shrink-0 sm:text-xs"
               >
                 {areaContext.areaName}プロフィールへ →

@@ -19,14 +19,12 @@ const PAGES = [
   { path: "/content/references", heading: "参考文献の活用・展開管理" },
   { path: "/sns", heading: "SNS 投稿台帳" },
   { path: "/buzz-map", heading: null },
-  { path: "/assets", heading: null },
-  { path: "/svg", heading: null },
   { path: "/research", heading: "調査カタログ" },
   { path: "/revenue", heading: "収益" },
   { path: "/affiliate", heading: "アフィリエイト 成果" },
   { path: "/affiliate/placements", heading: "アフィリエイト 掲載先" },
   { path: "/affiliate/programs", heading: "アフィリエイト 提携・案件" },
-  { path: "/dashboard", heading: "プロジェクト現況" },
+  { path: "/dashboard", heading: "現況レビュー" },
   { path: "/quality", heading: "品質" },
   { path: "/ops", heading: "CI・台帳" },
   { path: "/todo", heading: "TODO" },
@@ -101,6 +99,8 @@ test.describe("smoke: 管理画面の疎通", () => {
   }
 
   test("共通ナビで相互遷移できる", async ({ page }) => {
+    // 1 本で 9 画面を順に開く。開発サーバーが初回に各画面を組み立てる時間を含めると 30 秒では足りない
+    test.setTimeout(120_000);
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "管理コンソール" })).toBeVisible();
 
@@ -114,8 +114,15 @@ test.describe("smoke: 管理画面の疎通", () => {
 
     // チャネルは「チャネル別」の枝 (折りたたみ) の中。現在地を含まない枝は閉じているので開いてから押す
     let sidebar = await sidebarOf(page);
-    await sidebar.locator("summary", { hasText: "チャネル別" }).first().click();
-    await sidebar.getByRole("link", { name: "Kindle", exact: true }).click();
+    // 2026-10-27: 枝は <details> から公式の Collapsible (ボタン) に変わった。Collapsible は画面の準備 (hydration) の後にしか
+    // 開かないので、開いた状態 (aria-expanded) になるまで押し直す
+    const branch = sidebar.getByRole("button", { name: "チャネル別" }).first();
+    const kindle = sidebar.getByRole("link", { name: "Kindle", exact: true });
+    await expect(async () => {
+      if ((await branch.getAttribute("aria-expanded")) !== "true") await branch.click();
+      await expect(kindle).toBeVisible({ timeout: 1_000 });
+    }).toPass();
+    await kindle.click();
     await expect(page).toHaveURL(/\/content\/kindle$/);
     // 現在地を含む枝は開いた状態で描かれる
     sidebar = await sidebarOf(page);

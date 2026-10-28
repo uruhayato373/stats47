@@ -20,3 +20,12 @@ test('同じ月は上書きし、月の昇順に並べる', () => {
   const out = upsertRecord(upsertRecord(upsertRecord(null, a), b), c);
   assert.deepEqual(out.records.map((r) => [r.month, r.orders]), [['2026-09', 2], ['2026-10', 4]]);
 });
+
+test('書く前の schema 検証が、正しい記録を通し形の崩れた記録を止める', async () => {
+  const { assertDatasetShape } = await import('../../lib/dataset-shape.mjs');
+  const a = parseRecord(['--month', '2026-10', '--orders', '1', '--estimated-yen', '100'], NOW);
+  const out = upsertRecord(null, a);
+  assert.doesNotThrow(() => assertDatasetShape('rakuten.results', out));
+  const broken = { ...out, records: [{ ...out.records[0], orders: '1' }] };
+  assert.throws(() => assertDatasetShape('rakuten.results', broken), /dataset_shape_mismatch/);
+});

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildCityPageMeta } from "@stats47/ranking";
 
 import { PageHeader, PageShell } from "@/components/layout";
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     robots: databook ? "index, follow" : "noindex, follow",
-    alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}` },
+    alternates: { canonical: hrefFor("city", { areaCode, cityCode }) },
     // 親県の静的 R2 OGP を明示。未指定だと最寄りの areas/[areaCode]/opengraph-image (ランタイム) に
     // 落ち Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
     openGraph: {

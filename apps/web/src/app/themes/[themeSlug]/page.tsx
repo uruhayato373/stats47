@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 import {
   THEME_PREFECTURE_COOKIE_NAME,
   ThemePageLayout,
@@ -53,7 +54,7 @@ export async function generateMetadata({
     title,
     description: theme.description,
     keywords: theme.keywords,
-    alternates: { canonical: `/themes/${theme.themeKey}` },
+    alternates: { canonical: themeHref(theme.themeKey) },
     ...generateOGMetadata({
       title,
       description: theme.description,

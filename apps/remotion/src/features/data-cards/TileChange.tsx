@@ -3,6 +3,7 @@ import { AbsoluteFill } from 'remotion';
 import type { DataCard } from './model';
 
 import { CHANGE_TILE_LAYOUT } from './tile-layout';
+import { prefectureShortName } from '@stats47/area/short-name';
 export { CHANGE_TILE_LAYOUT } from './tile-layout';
 export const CHANGE_BINS = [
   { label: '−30%未満', color: '#164F86', text: '#FFFFFF' },
@@ -102,8 +103,7 @@ export function TileChange({ card }: { card: TileCard }) {
         {CHANGE_TILE_LAYOUT.map(([id, x, y]) => {
           const r = byCode.get(id)!;
           const color = CHANGE_BINS[changeBin(r.change)];
-          const name =
-            r.name === '北海道' ? r.name : r.name.replace(/[都府県]$/, '');
+          const name = prefectureShortName(r.name);
           return (
             <g key={id} transform={`translate(${x * 80},${y * 80})`}>
               <rect width="75" height="75" rx="8" fill={color.color} />

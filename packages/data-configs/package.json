@@ -115,6 +115,11 @@
       "import": "./src/content/index.ts",
       "require": "./src/content/index.ts"
     },
+    "./content/href": {
+      "types": "./src/content/href.ts",
+      "import": "./src/content/href.ts",
+      "require": "./src/content/href.ts"
+    },
     "./content/navigation": {
       "types": "./src/content/navigation.ts",
       "import": "./src/content/navigation.ts",

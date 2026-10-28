@@ -9,9 +9,11 @@ import Ajv from 'ajv';
 import articleSchema from '../../../../data/note/articles.schema.json' with { type: 'json' };
 import magazineSchema from '../../../../data/note/magazines.schema.json' with { type: 'json' };
 import { datasetPath } from '../../../../config/datasets.mjs';
+import { addCommonSchema } from '../../lib/dataset-shape.mjs';
 
 export const LEDGER_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
-const ajv = new Ajv({ allErrors: true });
+// 台帳の schema は共通の型 (config/schema/common.schema.json) を $ref で参照する (2026-10-26)
+const ajv = addCommonSchema(new Ajv({ allErrors: true }));
 const validateArticleShape = ajv.compile(articleSchema);
 const validateMagazineShape = ajv.compile(magazineSchema);
 

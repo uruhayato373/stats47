@@ -8,6 +8,8 @@
  *   意味的な正しさ (分母・因果) は critic の領分で、ここでは扱わない。
  */
 
+import { parseUnit } from "@stats47/data-configs/unit";
+
 export interface ChapterText {
   readonly fileName: string;
   readonly title: string;
@@ -23,18 +25,26 @@ export interface ContentFinding {
   readonly msg: string;
 }
 
+/** 置換を変化が無くなるまで繰り返す (1 回の置換で残る入れ子のタグも落とす)。 */
+function replaceUntilStable(input: string, pattern: RegExp, replacement: string): string {
+  let current = input;
+  for (;;) {
+    const next = current.replace(pattern, replacement);
+    if (next === current) return current;
+    current = next;
+  }
+}
+
 /** XHTML 1 章を検査用テキストに落とす。 */
 export function chapterTextFromXhtml(fileName: string, xhtml: string): ChapterText {
-  const title = (xhtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "").replace(/<[^>]+>/g, "").trim();
-  const text = xhtml
-    .replace(/<style[\s\S]*?<\/style>/g, "")
-    .replace(/<\/(p|h[1-6]|li|figcaption|div|section|tr)>/g, "\n")
-    .replace(/<[^>]+>/g, "")
+  const title = replaceUntilStable(xhtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "", /<[^>]*>/g, "").trim();
+  const withoutStyles = replaceUntilStable(xhtml, /<style[\s\S]*?<\/style\s*>/gi, "");
+  const text = replaceUntilStable(withoutStyles.replace(/<\/(p|h[1-6]|li|figcaption|div|section|tr)>/g, "\n"), /<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"');
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&"); // &amp; は最後に戻す (先に戻すと &amp;lt; が < まで二重に戻る)
   const imgs = (xhtml.match(/<img /g) ?? []).length;
   // 図 1 枚 + 先頭の集計文 (v1 は解説文、v3 は全県表を続ける。どちらも対象)。
   const isRanking = imgs === 1 && /(1位は|最大値は)/.test(text);
@@ -42,8 +52,17 @@ export function chapterTextFromXhtml(fileName: string, xhtml: string): ChapterTe
 }
 
 const WEB_SELF_REFERENCE = /この記事|本記事|関連記事|あわせて読みたい|詳しくはこちら|ページ下部|サイト内リンク/g;
-/** 率・割合・指数・係数の指標に付くとおかしい単位。 */
-const COUNT_UNITS = new Set(["人", "円", "件", "世帯", "戸"]);
+/**
+ * 率・割合・指数・係数の指標に付くとおかしい単位の次元 (実数を数える次元)。
+ * 単位の解釈は正典 `@stats47/data-configs/unit` の `parseUnit` に委ね、単位語の表を持たない
+ * (`.claude/rules/unit-semantics-standards.md`)。分母つき (「人（人口10万対）」) は率なので対象外。
+ */
+const ABSOLUTE_COUNT_DIMENSIONS: ReadonlySet<string> = new Set(["people", "currency", "count", "household", "dwelling"]);
+
+function isAbsoluteCountUnit(unit: string): boolean {
+  const parsed = parseUnit(unit);
+  return parsed.dimension !== null && ABSOLUTE_COUNT_DIMENSIONS.has(parsed.dimension) && !parsed.hasDenominator;
+}
 
 /** 1 冊分の本文不変量。 */
 export function checkBookContent(chapters: readonly ChapterText[]): ContentFinding[] {
@@ -68,7 +87,7 @@ export function checkBookContent(chapters: readonly ChapterText[]): ContentFindi
     if (ch.isRanking) {
       const lead = ch.text.split("\n").find((l) => /(1位は|最大値は)/.test(l)) ?? "";
       const unit = lead.match(/(?:1位は|最大値は)[^、。]*?で[\d,.]+（([^）]*)）/)?.[1];
-      if (unit && /率|割合|指数|係数|比率/.test(ch.title) && COUNT_UNITS.has(unit)) {
+      if (unit && /率|割合|指数|係数|比率/.test(ch.title) && isAbsoluteCountUnit(unit)) {
         f.push({ level: "error", code: "rate-with-count-unit", msg: `${ch.fileName}: 率系の指標「${ch.title}」に単位（${unit}）` });
       }
       const stem = ch.title.replace(/（[^）]*）/g, "").replace(/〔[^〕]*〕/g, "").replace(/[\s・]/g, "");

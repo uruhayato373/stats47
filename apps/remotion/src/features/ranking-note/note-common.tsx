@@ -12,6 +12,7 @@ import {
   type RankingMeta,
 } from "@/shared";
 import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
+import { prefectureShortName } from "@stats47/area/short-name";
 
 /**
  * note ランキング記事の画像 4 枚 (cover / map / chart / boxplot) が共有する定義。
@@ -49,10 +50,8 @@ export function rankColor(rank: number, palette?: string, total = 47): string {
   return getInterpolator(palette)((total - rank) / (total - 1));
 }
 
-/** 「東京都」「大阪府」「青森県」→ 接尾辞を除いた短縮名 (北海道はそのまま) */
-export function shortPrefName(name: string): string {
-  return name === "北海道" ? name : name.replace(/[都府県]$/, "");
-}
+/** 「東京都」「大阪府」「青森県」→ 接尾辞を除いた短縮名 (北海道はそのまま)。`@stats47/area` の単一実装 */
+export const shortPrefName = prefectureShortName;
 
 export function formatNoteValue(value: number, precision: number): string {
   return value.toLocaleString("ja-JP", { minimumFractionDigits: precision, maximumFractionDigits: precision });

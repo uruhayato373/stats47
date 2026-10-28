@@ -1,30 +1,21 @@
 "use client";
 
-import { useState } from "react";
-
 import { SITE } from "@stats47/types";
 
-import { cn } from "@/lib/cn";
-import { Badge } from "@/components/ui/badge";
-
+import { StatusBadge, type Tone } from "@/components/admin-ui";
 import { MediaPreview } from "@/components/media-preview";
+import { Card } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
-import { Card } from "@/components/ui/card";
-const READINESS_BADGE: Record<string, string> = {
-  live: "border-green-500/50 bg-green-500/10 text-console-good",
-  ready: "border-green-500/50 bg-green-500/10 text-console-good",
-  "review-passed": "border-green-500/50 bg-green-500/10 text-console-good",
-  "needs-content": "border-amber-500/50 bg-amber-500/10 text-console-warn",
-  "publish-pending": "border-amber-500/50 bg-amber-500/10 text-console-warn",
-  blocked: "border-red-500/50 bg-red-500/10 text-console-bad",
+const READINESS_TONE: Record<string, Tone> = {
+  live: "good",
+  ready: "good",
+  "review-passed": "good",
+  "needs-content": "warn",
+  "publish-pending": "warn",
+  blocked: "bad",
 };
-
-function readinessBadgeClass(r: string | undefined) {
-  return (
-    READINESS_BADGE[r ?? ""] ?? "border-console-border bg-console-border/30 text-console-muted"
-  );
-}
 
 function fmtScoreBreakdown(breakdown: Record<string, number> | undefined): string {
   if (!breakdown) return "";
@@ -33,13 +24,7 @@ function fmtScoreBreakdown(breakdown: Record<string, number> | undefined): strin
     .join(" / ");
 }
 
-export function BuzzMapCard({
-  entry,
-}: {
-  entry: BuzzMapEntryDTO;
-}) {
-  const [showBreakdown, setShowBreakdown] = useState(false);
-
+export function BuzzMapCard({ entry }: { entry: BuzzMapEntryDTO }) {
   const ideaId = entry.ideaId;
 
   const mediaCandidates = entry.r2AssetBaseUrl
@@ -62,33 +47,26 @@ export function BuzzMapCard({
     <Card className="flex-col gap-0 overflow-hidden py-0">
       <div className="relative">
         <MediaPreview candidates={mediaCandidates} aspectClassName="aspect-16/10" />
-        <Badge
-          variant="outline"
-          className={cn(
-            "absolute left-1.5 top-1.5 z-10 text-[10px]",
-            readinessBadgeClass(entry.landingReadiness),
-          )}
-        >
-          {entry.landingStrategy ?? "-"} / {entry.landingReadiness ?? "-"}
-        </Badge>
+        <span className="absolute left-1.5 top-1.5 z-10">
+          <StatusBadge tone={READINESS_TONE[entry.landingReadiness ?? ""] ?? "neutral"}>
+            {entry.landingStrategy ?? "-"} / {entry.landingReadiness ?? "-"}
+          </StatusBadge>
+        </span>
         {entry.priority ? (
-          <Badge
-            variant="outline"
-            className="absolute right-1.5 top-1.5 z-10 border-console-accent/50 bg-console-accent/10 text-console-accent"
-          >
-            {entry.priority}
-          </Badge>
+          <span className="absolute right-1.5 top-1.5 z-10">
+            <StatusBadge tone="info">{entry.priority}</StatusBadge>
+          </span>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-2.5 text-xs">
-        <div className="text-[13px] font-semibold text-console-fg">
+      <div className="flex flex-1 flex-col gap-2 p-3 text-xs">
+        <div className="text-sm font-semibold">
           {entry.title}
-          <span className="ml-1.5 font-normal text-console-muted">score {entry.score}</span>
+          <span className="ml-1.5 font-normal text-muted-foreground">score {entry.score}</span>
         </div>
-        {entry.subtitle ? <div className="text-console-muted">{entry.subtitle}</div> : null}
+        {entry.subtitle ? <div className="text-muted-foreground">{entry.subtitle}</div> : null}
 
-        <div className="flex flex-wrap gap-2 text-console-muted">
+        <div className="flex flex-wrap gap-2 text-muted-foreground">
           <span>{entry.category || "-"}</span>
           <span>{entry.recommendedType ? `型${entry.recommendedType}` : ""}</span>
           <span>{entry.sourceKind || ""}</span>
@@ -96,85 +74,41 @@ export function BuzzMapCard({
         </div>
 
         <div className="flex flex-wrap gap-1.5">
-          <Badge
-            variant="outline"
-            className={cn(
-              "text-[10px]",
-              entry.commercialUse === "allowed"
-                ? "border-green-500/50 text-console-good"
-                : entry.commercialUse === "blocked"
-                  ? "border-red-500/50 text-console-bad"
-                  : "border-amber-500/50 text-console-warn",
-            )}
-          >
+          <StatusBadge tone={entry.commercialUse === "allowed" ? "good" : entry.commercialUse === "blocked" ? "bad" : "warn"}>
             license: {entry.commercialUse || "-"}
-          </Badge>
+          </StatusBadge>
           {entry.sensitivity ? (
-            <Badge
-              variant="outline"
-              className={cn(
-                "text-[10px]",
-                entry.sensitivity === "high"
-                  ? "border-red-500/50 text-console-bad"
-                  : "border-console-border text-console-muted",
-              )}
-            >
-              sensitivity: {entry.sensitivity}
-            </Badge>
+            <StatusBadge tone={entry.sensitivity === "high" ? "bad" : "neutral"}>sensitivity: {entry.sensitivity}</StatusBadge>
           ) : null}
-          <Badge
-            variant="outline"
-            className={cn(
-              "text-[10px]",
-              entry.eligible
-                ? "border-green-500/50 text-console-good"
-                : "border-red-500/50 text-console-bad",
-            )}
-          >
-            {entry.eligible ? "eligible" : "not-eligible"}
-          </Badge>
+          <StatusBadge tone={entry.eligible ? "good" : "bad"}>{entry.eligible ? "eligible" : "not-eligible"}</StatusBadge>
         </div>
 
         {entry.gateReasons && entry.gateReasons.length > 0 ? (
-          <div className="rounded-md bg-console-bad/10 px-2 py-1 text-[11px] text-console-bad">
-            {entry.gateReasons.join(" / ")}
-          </div>
+          <div className="rounded-md bg-console-bad/10 px-2 py-1 text-xs text-console-bad">{entry.gateReasons.join(" / ")}</div>
         ) : null}
 
-        <button
-          type="button"
-          onClick={() => setShowBreakdown((v) => !v)}
-          className="w-fit text-[11px] text-console-muted hover:text-console-fg"
-        >
-          score breakdown {showBreakdown ? "▲" : "▼"}
-        </button>
-        {showBreakdown ? (
-          <div className="text-[11px] text-console-muted">{fmtScoreBreakdown(entry.breakdown)}</div>
-        ) : null}
+        <Collapsible>
+          <CollapsibleTrigger className="w-fit text-xs text-muted-foreground hover:text-foreground">score breakdown</CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="pt-1 text-xs text-muted-foreground">{fmtScoreBreakdown(entry.breakdown)}</div>
+          </CollapsibleContent>
+        </Collapsible>
 
         {primaryUrl ? (
-          <a
-            href={primaryUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-console-accent hover:underline"
-          >
+          <a href={primaryUrl} target="_blank" rel="noreferrer" className="break-all font-medium underline-offset-4 hover:underline">
             landing: {entry.primaryUrl} ↗
           </a>
         ) : (
-          <span className="text-console-muted">landing 未確定</span>
+          <span className="text-muted-foreground">landing 未確定</span>
         )}
 
-        <div className="flex flex-wrap gap-2 text-[11px] text-console-muted">
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
           <span>spec: {entry.assets?.hasSpec ? "✓" : "-"}</span>
           <span>素材: {entry.assets?.hasLocalAssets ? "✓" : "-"}</span>
-          <span>
-            posts.json:{" "}
-            {entry.post?.status ? `${entry.post.status} (#${entry.post.postId})` : "未登録"}
-          </span>
+          <span>posts.json: {entry.post?.status ? `${entry.post.status} (#${entry.post.postId})` : "未登録"}</span>
         </div>
 
-        <div className="rounded-md border border-console-border bg-console-bg px-2 py-1.5 text-[11px] text-console-muted">
+        <div className="rounded-md border bg-muted px-2 py-1.5 text-xs text-muted-foreground">
           spec生成・render・R2反映・draft登録は担当agent/skillから実行します。
         </div>
       </div>

@@ -96,12 +96,12 @@
       "body": {
         "store": "r2-private",
         "manifest": {
-          "sha256": "f1ac4473eb979a3db6178e283802e32bf8dddfb879bf43153a1cbde4ffdf5db9",
-          "files": 4,
-          "bytes": 14452,
-          "savedAt": "2026-10-24T22:05:26.150Z"
+          "sha256": "bdd144f46b83daf0e178256bc7058626579b241d3228a6e74275523b216f077b",
+          "files": 12,
+          "bytes": 796203,
+          "savedAt": "2026-10-27T22:43:03.338Z"
         },
-        "verifiedAt": "2026-10-24T22:05:26.150Z"
+        "verifiedAt": "2026-10-27T22:43:03.338Z"
       },
       "noteUrl": "https://note.com/stats47/n/n346d566772a1",
       "publishedAt": "2026-10-25"
@@ -9961,12 +9961,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f4e01fad4c7264ca62fbb6150d42a9a6c7e9f1389078a91b59d1cffbeb290b21",
+          "sha256": "e5911e7d7f8c720b05159124cae6030124e039d93fc6e4e8ae06ae1eacbbbb07",
           "files": 6,
-          "bytes": 160446,
-          "savedAt": "2026-10-13T08:47:17.952Z"
+          "bytes": 160473,
+          "savedAt": "2026-10-27T22:01:51.119Z"
         },
-        "verifiedAt": "2026-10-13T08:47:17.952Z"
+        "verifiedAt": "2026-10-27T22:01:51.119Z"
       },
       "stats47Targets": [
         "/ranking/internet-usage-rate-10plus"
@@ -11342,7 +11342,7 @@
     {
       "key": "h-howto-excel-filled-map",
       "vertical": "stats47-note",
-      "title": "Excelの「塗りつぶされたマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
+      "title": "Excelの「塗り分けマップ」で都道府県の色分け地図を作る方法 ── GISなしで資料に貼れる",
       "magazine": null,
       "isPaid": false,
       "status": "published",
@@ -11350,12 +11350,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "ee193f97502f1954c1f1f1127eb108f5b9211c7e3199982ffed8b8a617b68bab",
-          "files": 5,
-          "bytes": 31582,
-          "savedAt": "2026-10-24T04:59:41.767Z"
+          "sha256": "fa0c08641930f7b774f7364cdd1c0b7f2a276cc791ee1dd3e77c4cecbbd73ed6",
+          "files": 13,
+          "bytes": 1370393,
+          "savedAt": "2026-10-27T13:55:45.451Z"
         },
-        "verifiedAt": "2026-10-24T04:59:41.767Z"
+        "verifiedAt": "2026-10-27T13:55:45.451Z"
       },
       "stats47Targets": [
         "/ranking/total-population"

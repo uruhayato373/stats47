@@ -16,7 +16,7 @@ import { MediaWorkspaceNav } from './media-workspace-nav';
 import { ImageTemplateTree, type GalleryBranch } from './image-template-tree';
 import { TemplateStatisticalPreview } from './template-statistical-preview';
 import { PanelCard, StatusBadge } from '@/components/admin-ui';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -73,7 +73,7 @@ function TemplateCard({
   return (
     <section aria-label="共通の基本形" className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-base font-semibold">
           {IMAGE_PURPOSES[purpose]} / {template.label}
         </h2>
         <StatusBadge tone="neutral">基本形を検討中</StatusBadge>
@@ -85,11 +85,9 @@ function TemplateCard({
       </PanelCard>
       <div className="flex flex-wrap gap-2">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="sm">
+          <SheetTrigger render={<Button variant="outline" size="sm" />}>
               型の方針を編集{changed ? '（未保存）' : ''}
-            </Button>
-          </SheetTrigger>
+            </SheetTrigger>
           <SheetContent className="overflow-y-auto sm:max-w-xl">
             <SheetHeader>
               <SheetTitle>{template.label}の方針を編集</SheetTitle>
@@ -123,7 +121,7 @@ function TemplateCard({
                   />
                 </label>
               ))}
-              <p className="text-sm text-console-muted">
+              <p className="text-sm text-muted-foreground">
                 保存すると版が上がり、この型の候補は再確認が必要になります。
               </p>
               <Button
@@ -150,17 +148,13 @@ function TemplateCard({
             </div>
           </SheetContent>
         </Sheet>
-        <Button asChild variant="ghost" size="sm">
-          <Link
-            href={mediaUrl('images', {
+        <Link href={mediaUrl('images', {
               template: template.id,
               purpose,
               returnTo,
-            })}
-          >
+            })} className={buttonVariants({ variant: "ghost", size: "sm" })}>
             この型の使用先
           </Link>
-        </Button>
       </div>
     </section>
   );
@@ -258,14 +252,12 @@ export function TemplateGallery({
       className="@container flex min-h-0 flex-1 flex-col gap-3"
     >
       <MediaWorkspaceNav active="templates" template={selected?.templateId} />
-      <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-console-border pb-3">
+      <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border pb-3">
         <div className="@min-[760px]:hidden">
           <Sheet open={listOpen} onOpenChange={setListOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="sm">
+            <SheetTrigger render={<Button variant="outline" size="sm" />}>
                 型分類を選ぶ
-              </Button>
-            </SheetTrigger>
+              </SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>型分類</SheetTitle>
@@ -295,7 +287,7 @@ export function TemplateGallery({
       </div>
       <div className="grid min-h-0 flex-1 gap-4 @min-[760px]:grid-cols-[216px_minmax(0,1fr)]">
         <aside
-          className="hidden min-h-0 flex-col gap-3 border-r border-console-border pr-3 @min-[760px]:flex"
+          className="hidden min-h-0 flex-col gap-3 border-r border-border pr-3 @min-[760px]:flex"
           aria-label="型分類を一覧から選ぶ"
         >
           <h2 className="shrink-0 font-semibold">型分類</h2>
@@ -338,7 +330,7 @@ export function TemplateGallery({
               }
             />
           ) : (
-            <p className="text-sm text-console-muted">
+            <p className="text-sm text-muted-foreground">
               該当する分類はありません。
             </p>
           )}

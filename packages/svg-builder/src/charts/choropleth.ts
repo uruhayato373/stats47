@@ -1,3 +1,4 @@
+import { prefectureNameOf, prefectureShortName } from "@stats47/area";
 import {
   resolveColorEncoding,
   resolveNumericDomain,
@@ -229,41 +230,26 @@ const TILE_GRID: Record<string, readonly [number, number, number, number]> = {
 };
 
 /**
- * 都道府県コード → 正式名称。
+ * 都道府県コード → 正式名称。`@stats47/area` の prefectures.json から引く (独自の表を持たない)。
  *
- * タイル内は幅が無いので短縮名 (`item.name`) を使うが、**上位リストは正式名称で出す**
+ * タイル内は幅が無いので短縮名を使うが、**上位リストは正式名称で出す**
  * (「宮崎」ではなく「宮崎県」)。呼び元がどちらの形で name を渡してくるかに依存させたくないので、
- * コードから決定的に引く。
+ * コードから決定的に引く。未知コードは呼び元の name にフォールバック。
  */
-const PREF_FULL_NAME: Record<string, string> = {
-  "01": "北海道", "02": "青森県", "03": "岩手県", "04": "宮城県", "05": "秋田県",
-  "06": "山形県", "07": "福島県", "08": "茨城県", "09": "栃木県", "10": "群馬県",
-  "11": "埼玉県", "12": "千葉県", "13": "東京都", "14": "神奈川県", "15": "新潟県",
-  "16": "富山県", "17": "石川県", "18": "福井県", "19": "山梨県", "20": "長野県",
-  "21": "岐阜県", "22": "静岡県", "23": "愛知県", "24": "三重県", "25": "滋賀県",
-  "26": "京都府", "27": "大阪府", "28": "兵庫県", "29": "奈良県", "30": "和歌山県",
-  "31": "鳥取県", "32": "島根県", "33": "岡山県", "34": "広島県", "35": "山口県",
-  "36": "徳島県", "37": "香川県", "38": "愛媛県", "39": "高知県", "40": "福岡県",
-  "41": "佐賀県", "42": "長崎県", "43": "熊本県", "44": "大分県", "45": "宮崎県",
-  "46": "鹿児島県", "47": "沖縄県",
-};
-
-/** 正式名称を引く (未知コードは呼び元の name にフォールバック)。 */
 function fullNameOf(item: ChoroplethItem): string {
-  return PREF_FULL_NAME[item.code.slice(0, 2).padStart(2, "0")] ?? item.name;
+  return prefectureNameOf(item.code.slice(0, 2).padStart(2, "0")) ?? item.name;
 }
 
 /**
  * タイル内に出す短縮名。**呼び元の `name` に依存させず、コードから決定的に作る。**
  *
  * 呼び元のデータは末尾の「県/府/都/道」を一律に落としていることがあり、
- * **北海道が「北海」になっていた** (2026-07-31 実データで確認)。「北海」は地名として
- * 存在しないので、道だけは落とさない。都・府・県は落として構わない (東京・大阪・京都)。
+ * **北海道が「北海」になっていた** (2026-07-31 実データで確認)。短縮は
+ * `@stats47/area` の `prefectureShortName` (北海道は落とさない) の単一実装に従う。
  */
 function shortNameOf(item: ChoroplethItem): string {
-  const full = PREF_FULL_NAME[item.code.slice(0, 2).padStart(2, "0")];
-  if (!full) return item.name;
-  return full === "北海道" ? full : full.replace(/[都府県]$/, "");
+  const full = prefectureNameOf(item.code.slice(0, 2).padStart(2, "0"));
+  return full ? prefectureShortName(full) : item.name;
 }
 
 const GRID_COLS = 14;

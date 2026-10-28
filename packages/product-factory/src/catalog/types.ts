@@ -57,7 +57,12 @@ export type SupportLevel = "none" | "manual" | "limited" | "custom";
 /** リスク区分。high-stakes / rights-review は制作前に個別確認が必須。 */
 export type ProductRisk = "normal" | "high-stakes" | "rights-review";
 
-/** ライフサイクル状態。cataloged から listed まで一方向に進む。 */
+/**
+ * 商品定義のライフサイクル状態。cataloged から approved まで一方向に進む。
+ * 販売先での公開状態はここに持たない (2026-10-27)。ココナラは config/coconala-listings.json、note は
+ * data/note/articles.json、KDP は config/kdp-listings.json が正本。旧 "listed" はココナラの出品を写していたが、
+ * 2026-10-19 の撤退後も P-01 が listed のまま残り、出品台帳 (withdrawn) と食い違ったので型から外した。
+ */
 export type ProductStatus =
   | "cataloged"
   | "spike"
@@ -65,7 +70,6 @@ export type ProductStatus =
   | "generated"
   | "reviewed"
   | "approved"
-  | "listed"
   | "paused";
 
 /** 価格帯 (円・税抜)。initialYen は出品検証の起点。entry / license は 0 を許可する。 */
@@ -114,7 +118,7 @@ export interface ProductDefinition {
   readonly rankingKeys: readonly string[];
   /**
    * 収録する実データセットの key 群 (= src/data/datasets/<key>.ts)。実データ接続台帳 (後方互換)。
-   * 未接続パックは []。status が approved/listed のパックは全キーが実在する必要がある
+   * 未接続パックは []。status が approved のパックは全キーが実在する必要がある
    * (validator が誇大表示を防ぐ)。全部入り本体は rankingKeys + pack snapshot を使う。
    */
   readonly datasets: readonly string[];

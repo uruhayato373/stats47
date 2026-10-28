@@ -79,7 +79,8 @@ test.describe("/sns ページ内 video の seek", () => {
     await page.goto("/sns");
     await page.waitForLoadState("networkidle");
     // 一覧が読み込まれる前に video を探すと、素材があっても「無い」としてスキップしてしまう
-    await expect(page.locator("text=/\\d+ 件/").first()).toHaveText(/^[1-9]\d* 件$/, { timeout: 30_000 });
+    // 件数は一覧の上の表示 (sns-count) で見る。2026-10-27 に先頭へ件数の要約 (「表示の記録あり N 件」等) が増えたため、文言では探さない
+    await expect(page.getByTestId("sns-count")).toHaveText(/^[1-9]\d* 件$/, { timeout: 30_000 });
 
     // ローカル mp4 を持つことが分かっている post (bcr-births-1995-2023, id=580) を検索で絞り込む
     await page.getByPlaceholder(/^ID \/ 本文 \/ キーを検索/).fill("bcr-births-1995-2023");

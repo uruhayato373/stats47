@@ -48,6 +48,7 @@ import {
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 
 const REPO_ROOT = repoRoot();
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
@@ -259,6 +260,7 @@ function main() {
   if (opts.dryRun) {
     console.log("\n[dry-run] SSOT は書き込みません。");
   } else {
+    assertDatasetShape("a8.results", results); // 形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
     mkdirSync(AFF_DIR, { recursive: true });
     writeFileSync(REPORT_LOG, JSON.stringify(log, null, 2) + "\n", "utf-8");
     writeFileSync(RESULTS, JSON.stringify(results, null, 2) + "\n", "utf-8");

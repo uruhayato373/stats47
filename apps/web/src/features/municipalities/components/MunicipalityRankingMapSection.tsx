@@ -1,4 +1,5 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
+import { hrefFor } from '@stats47/data-configs/content/href';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
 import { municipalityLeafName } from '@stats47/ranking';
@@ -58,7 +59,7 @@ export async function MunicipalityRankingMapSection({
   for (const row of rows) {
     if (UrlPolicy.city.isIndexable(row.prefectureCode, row.areaCode)) {
       hrefByCode[row.areaCode] =
-        `/areas/${row.prefectureCode}/cities/${row.areaCode}`;
+        hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode });
     }
   }
 

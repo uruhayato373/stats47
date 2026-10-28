@@ -22,10 +22,10 @@ export function PageHeading({
   children?: ReactNode;
 }) {
   return (
-    <header className="space-y-1">
-      <h1 className="text-2xl font-bold text-console-fg">{title}</h1>
-      <p className="text-sm text-console-muted">
-        真実源: <code className="break-all rounded bg-muted px-1">{source}</code> — {accessLabel}
+    <header className="flex flex-col gap-1">
+      <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+      <p className="text-sm text-muted-foreground">
+        真実源: <code className="break-all rounded bg-muted px-1 font-mono text-xs">{source}</code> — {accessLabel}
       </p>
       {children}
     </header>

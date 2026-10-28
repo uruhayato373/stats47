@@ -1,4 +1,5 @@
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricShortName } from "@stats47/ranking";
 import { isOk, type AreaType } from "@stats47/types";
@@ -59,7 +60,7 @@ export async function RelatedRankingsGrid({
         categoryKey ? (
           <Link
             {...navSurfaceProps("ranking_related")}
-            href={`/category/${categoryKey}`}
+            href={hrefFor("category", { categoryKey })}
             className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
           >
             すべて見る
@@ -78,7 +79,7 @@ export async function RelatedRankingsGrid({
           return (
             <Link
               key={item.rankingKey}
-              href={`/ranking/${item.rankingKey}`}
+              href={hrefFor("ranking", { rankingKey: item.rankingKey })}
               className="group flex flex-col gap-1 rounded-none px-3 py-2.5 transition-colors hover:bg-accent/40"
             >
               <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">

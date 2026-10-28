@@ -1,3 +1,4 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { municipalityLeafName } from "@stats47/ranking";
 
 import { RailNavRow, SectionCard } from "@/components/surface";
@@ -74,7 +75,7 @@ function CityGrid({
       {cities.map((city) => (
         <RailNavRow
           key={city.code}
-          href={`/areas/${areaCode}/cities/${city.code}`}
+          href={hrefFor("city", { areaCode, cityCode: city.code })}
           active={city.code === activeCityCode}
           chevron={false}
         >

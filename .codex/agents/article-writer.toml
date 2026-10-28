@@ -231,11 +231,12 @@ data ファイルを使った場合は `contents/blog/<slug>/data/*.json` も同
 完全DBレスのため **D1 INSERT SQL は不要** (articles テーブルは廃止、article.md frontmatter が SSOT)。
 
 1. factual gate を通す (上記「Factual cross-check を必ず通す」)。pass するまで data を再 Read して修正
-2. **意味レビューを別 agent に依頼する (★必須・自己採点禁止)**: `blog-critic` を Agent tool で起動し、
-   読者価値の観点 (冗長・図表重複・truncated 表・CTA過多・curiosity gap の真正性) で review してもらう。
-   blog-critic が `contents/blog/<slug>/review.md` (`verdict: PASS`) を出すまで、指摘を修正して反復する。
+2. **意味レビューは呼び元が `blog-critic` を起動して行う (★必須・自己採点禁止)**: 本 agent は blog-critic を起動しない。
+   サブエージェントとして起動された本 agent には Agent tool が無く、起動できないため (2026-10-08 に review.md なしで返った。
+   AGENT-WRITER-CRITIC-HANDOFF-01)。呼び元 (対話セッション・`/brushup-blog`・`/write-prepared-article`・`/publish-geo-portfolio` 等) が
+   blog-critic を別に起動し、`contents/blog/<slug>/review.md` (`verdict: PASS`) が出るまで、REVISE の指摘を本 agent に戻して直す。
    **自分 (article-writer) が書いた記事を自分で採点して公開してはならない。**
-3. 呼び元へ Output Contract の1表で返す (Files に `contents/blog/<slug>/` を含める)
+3. 呼び元へ Output Contract の1表で返す (Files に `contents/blog/<slug>/` を含め、Status は「critic 待ち」と書く)
 4. **公開は CI / develop push で行う (本 agent はやらない)**。`quality-gate.mjs` は `published:true` かつ
    `review.md` (verdict: PASS) が無いと公開を blocker で止める (自己採点公開を構造的に防止)。
 5. 公開確認後、`contents/blog` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
@@ -246,7 +247,7 @@ data ファイルを使った場合は `contents/blog/<slug>/data/*.json` も同
 - [ ] 「○○ランキング」「○○格差」テンプレを使っていない
 - [ ] seo_title に「1位X・最下位Y・N倍差」が含まれる
 - [ ] (表を置く場合のみ) 全件表である / 図と重複する truncated 表 (… 省略) でない。数値は values.json と一致
-- [ ] 公開前に blog-critic の意味レビュー (`review.md` verdict: PASS) を通す予定 (自分が書いた記事を自分で採点して公開しない)
+- [ ] 公開前に呼び元が起動する blog-critic の意味レビュー (`review.md` verdict: PASS) を通す (自分が書いた記事を自分で採点して公開しない)
 - [ ] 全ての内部リンク (`/ranking/` `/themes/` `/category/` `/areas/` `/blog/`) が**実在**する
       (推測でキー名を書かない。存在しないと 404 ではなく soft 404 で 200 が返り目視で気づけない。
       `quality-gate.mjs` が blocker で検出する)

@@ -11,6 +11,8 @@ import { authoredBookSha256, semanticReviewErrors, revisionEditorIds, type Revie
 import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-delivery";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+// note の公開 URL の形は config/schema/common.schema.json の noteUrl が唯一の定義
+import { NOTE_URL_PATTERN } from "../../../../.claude/scripts/lib/dataset-shape.mjs";
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => v !== null && typeof v === "object" && !Array.isArray(v) ? v as Obj : {};
@@ -103,7 +105,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     const a = CANONICAL_ARTICLES.find(a => a.memberProductIds.includes(p.id));
     if (a) {
       const published = noteArticles.find((item) => item.key === a.slug && item.status === 'published'
-        && /^https:\/\/note\.com\/stats47\/n\/n[a-f0-9]{12}$/.test(str(item.noteUrl)));
+        && NOTE_URL_PATTERN.test(str(item.noteUrl)));
       const r = list(nr.items).map(obj).find(i => i.productId === p.id && i.slug === a.slug);
       const problems = r ? list(r.blockers).map(String) : ["改訂納品物への添付接続・本文独立レビュー・価格承認・公開前照合が必要"];
       if (r && str(r.sourceManifestSha256) !== str(d.manifestSha256)) problems.push("note参照版と現行納品版のSHA不一致");

@@ -81,28 +81,11 @@ import surveysMaster from "../data/surveys.json";
 import { expectedCalculatedYears } from "./lib/calculated-stats-core";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
 import { SITE } from "@stats47/types";
+import { CATEGORY_KEYS } from "@stats47/data-configs/categories";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
-const CATEGORY_KEYS = [
-  "landweather",
-  "population",
-  "laborwage",
-  "agriculture",
-  "miningindustry",
-  "commercial",
-  "economy",
-  "construction",
-  "energy",
-  "tourism",
-  "educationsports",
-  "administrativefinancial",
-  "safetyenvironment",
-  "socialsecurity",
-  "international",
-  "infrastructure",
-  "ict",
-] as const;
+// カテゴリ 17 軸は data-configs の CATEGORY_KEYS が正本 (手写ししない)
 
 // 前回実行比でカウントが半減 (または 0 化) した場合をドリフトとみなす。
 // 2026-07-27 実測でカテゴリ件数は 8 (international) 〜 817 (economy) と幅が大きく、
@@ -868,7 +851,7 @@ async function main() {
     previous === null || previous.survey === 0 ? true : surveyCount >= previous.survey * DRIFT_RATIO_THRESHOLD;
 
   const categoryChecks: AuditReport["countChecks"]["categories"] = {};
-  await mapPool(CATEGORY_KEYS as unknown as string[], 10, async (catKey) => {
+  await mapPool([...CATEGORY_KEYS], 10, async (catKey) => {
     const res = await fetchJson<{ count: number }>(`app/category/${catKey}/items.json`);
     const count = res.body?.count ?? 0;
     const absOk = res.status === 200 && count > 0; // 絶対フロア: 0 件は無条件で異常

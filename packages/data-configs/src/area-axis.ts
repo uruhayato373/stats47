@@ -18,31 +18,26 @@
  * 1 件でも食い違えば **fail** する。
  */
 
+import {
+  INLAND_PREFECTURE_CODES,
+  fetchPrefectures,
+  prefectureNameOf,
+  prefectureShortName,
+} from "@stats47/area";
+
 /**
- * 都道府県コード (5 桁) と正準名。
+ * 都道府県コード (5 桁) と正準名。`@stats47/area` の prefectures.json から導出する (独自の表を持たない)。
  *
  * e-Stat の分類軸は「青森」「東京」のように接尾辞を落とした表記を使うことがあるため、
  * 照合は接尾辞 (都/府/県) を除いた短縮形で行う。北海道だけは「北海」にしない
- * (「道」は接尾辞ではなく名前の一部)。
+ * (「道」は接尾辞ではなく名前の一部。`prefectureShortName` の規約)。
  */
-export const PREFECTURES: ReadonlyArray<{ code: string; name: string; short: string }> = [
-  ["01000", "北海道", "北海道"], ["02000", "青森県", "青森"], ["03000", "岩手県", "岩手"],
-  ["04000", "宮城県", "宮城"], ["05000", "秋田県", "秋田"], ["06000", "山形県", "山形"],
-  ["07000", "福島県", "福島"], ["08000", "茨城県", "茨城"], ["09000", "栃木県", "栃木"],
-  ["10000", "群馬県", "群馬"], ["11000", "埼玉県", "埼玉"], ["12000", "千葉県", "千葉"],
-  ["13000", "東京都", "東京"], ["14000", "神奈川県", "神奈川"], ["15000", "新潟県", "新潟"],
-  ["16000", "富山県", "富山"], ["17000", "石川県", "石川"], ["18000", "福井県", "福井"],
-  ["19000", "山梨県", "山梨"], ["20000", "長野県", "長野"], ["21000", "岐阜県", "岐阜"],
-  ["22000", "静岡県", "静岡"], ["23000", "愛知県", "愛知"], ["24000", "三重県", "三重"],
-  ["25000", "滋賀県", "滋賀"], ["26000", "京都府", "京都"], ["27000", "大阪府", "大阪"],
-  ["28000", "兵庫県", "兵庫"], ["29000", "奈良県", "奈良"], ["30000", "和歌山県", "和歌山"],
-  ["31000", "鳥取県", "鳥取"], ["32000", "島根県", "島根"], ["33000", "岡山県", "岡山"],
-  ["34000", "広島県", "広島"], ["35000", "山口県", "山口"], ["36000", "徳島県", "徳島"],
-  ["37000", "香川県", "香川"], ["38000", "愛媛県", "愛媛"], ["39000", "高知県", "高知"],
-  ["40000", "福岡県", "福岡"], ["41000", "佐賀県", "佐賀"], ["42000", "長崎県", "長崎"],
-  ["43000", "熊本県", "熊本"], ["44000", "大分県", "大分"], ["45000", "宮崎県", "宮崎"],
-  ["46000", "鹿児島県", "鹿児島"], ["47000", "沖縄県", "沖縄"],
-].map(([code, name, short]) => ({ code, name, short }));
+export const PREFECTURES: ReadonlyArray<{ code: string; name: string; short: string }> =
+  fetchPrefectures().map((p) => ({
+    code: p.prefCode,
+    name: p.prefName,
+    short: prefectureShortName(p.prefName),
+  }));
 
 const BY_FULL = new Map(PREFECTURES.map((p) => [p.name, p.code]));
 const BY_SHORT = new Map(PREFECTURES.map((p) => [p.short, p.code]));
@@ -73,7 +68,7 @@ export function lookupPrefectureCode(normalized: string): string | null {
   return (
     BY_FULL.get(normalized) ??
     BY_SHORT.get(normalized) ??
-    BY_SHORT.get(normalized.replace(/[都府県]$/, "")) ??
+    BY_SHORT.get(prefectureShortName(normalized)) ??
     null
   );
 }
@@ -92,9 +87,11 @@ export function isAggregateAreaName(raw: string): boolean {
  * 海のない 8 県。海面漁業など海に関わる統計の表は、この 8 県の行を最初から持たない。
  * 照合はこの完全名で行う (`resolveAreaAxis` の `missingPrefectures` と同じ形)。
  */
-export const INLAND_PREFECTURES: readonly string[] = [
-  "栃木県", "群馬県", "埼玉県", "山梨県", "長野県", "岐阜県", "滋賀県", "奈良県",
-];
+export const INLAND_PREFECTURES: readonly string[] = INLAND_PREFECTURE_CODES.map((code) => {
+  const name = prefectureNameOf(code);
+  if (!name) throw new Error(`INLAND_PREFECTURE_CODES に未知のコード: ${code}`);
+  return name;
+});
 
 /**
  * 写像で解決できなかった県が、表の対象範囲から見て想定どおりかを判定する。
@@ -175,8 +172,10 @@ export function resolveAreaAxis(
     }
 
     // seq-pref: コード n → 県番号 n-1。名前と一致した場合だけ採用する
+    // (配列の並び順に依存せず、県番号から 5 桁コードを組み立てる)
     const n = Number(m.code);
-    const seq = Number.isInteger(n) && n >= 2 && n <= 48 ? PREFECTURES[n - 2]?.code : undefined;
+    const seq =
+      Number.isInteger(n) && n >= 2 && n <= 48 ? `${String(n - 1).padStart(2, "0")}000` : undefined;
     if (seq && seq === byName) byCode.set(m.code, seq);
     else unresolved.push(m);
   }

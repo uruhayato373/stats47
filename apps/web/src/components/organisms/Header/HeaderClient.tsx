@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@stats47/components/atoms/ui/dropdown-menu';
 import { Input } from '@stats47/components/atoms/ui/input';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   ChevronDown,
   ChevronRight,
@@ -23,6 +24,8 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
+
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 
 import { trackNavClick, trackSearch } from '@/lib/analytics/events';
 
@@ -214,7 +217,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                         return (
                           <Link
                             key={category.categoryKey}
-                            href={`/category/${category.categoryKey}`}
+                            href={hrefFor('category', { categoryKey: category.categoryKey })}
                             onMouseEnter={() =>
                               setSelectedCategoryKey(category.categoryKey)
                             }
@@ -224,7 +227,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                             onClick={() =>
                               handleNavClick(
                                 category.title,
-                                `/category/${category.categoryKey}`
+                                hrefFor('category', { categoryKey: category.categoryKey })
                               )
                             }
                             className={cn(
@@ -258,7 +261,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                         </div>
                         <div className="pt-2">
                           {selectedCategory.rankings.map((ranking) => {
-                            const href = `/ranking/${ranking.rankingKey}`;
+                            const href = hrefFor("ranking", { rankingKey: ranking.rankingKey });
                             return (
                               <Link
                                 key={ranking.rankingKey}
@@ -277,11 +280,11 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                           })}
                         </div>
                         <Link
-                          href={`/category/${selectedCategory.categoryKey}`}
+                          href={hrefFor('category', { categoryKey: selectedCategory.categoryKey })}
                           onClick={() =>
                             handleNavClick(
                               `${selectedCategory.title}をすべて見る`,
-                              `/category/${selectedCategory.categoryKey}`
+                              hrefFor('category', { categoryKey: selectedCategory.categoryKey })
                             )
                           }
                           className="mt-4 flex items-center justify-between text-sm font-semibold text-primary hover:underline"
@@ -324,7 +327,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               >
                 <div className="grid grid-cols-2 gap-1">
                   {themes.map((theme) => {
-                    const href = `/themes/${theme.themeKey}`;
+                    const href = themeHref(theme.themeKey);
                     const isActive = pathname.startsWith(href);
                     return (
                       <Link

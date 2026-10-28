@@ -78,6 +78,23 @@ function polygonsOf(geometry: Feature["geometry"]): Position[][][] {
   return [];
 }
 
+/** 丸めで点が 3 つ未満に潰れた環は面にならない */
+function isAreaRing(ring: Position[]): boolean {
+  return new Set(ring.map(([x, y]) => `${x},${y}`)).size >= 3;
+}
+
+/**
+ * 座標を丸め、潰れた小島 (外周) と穴を落とす。
+ * Google マイマップは潰れた外周を 1 つでも含む県を、塗りのない線として読み込む
+ * (2026-10-28 実測: 総人口の KML で東京都など 13 府県が枠線だけになり、潰れた外周 25 個を落とすと 47 県とも塗られた)。
+ */
+function roundPolygons(geometry: Feature["geometry"]): Position[][][] {
+  return polygonsOf(geometry)
+    .map((poly) => poly.map((ring) => ring.map(([x, y]) => [round(x), round(y)])))
+    .filter(([outer]) => outer !== undefined && isAreaRing(outer))
+    .map(([outer, ...holes]) => [outer, ...holes.filter(isAreaRing)]);
+}
+
 function escapeXml(text: string): string {
   return text.replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" })[c] ?? c);
 }
@@ -111,7 +128,7 @@ export function buildMapGeoJson({ features, values, meta }: MapDownloadInput): F
         type: "Feature",
         geometry: {
           type: "MultiPolygon",
-          coordinates: polygonsOf(f.geometry).map((poly) => poly.map((ring) => ring.map(([x, y]) => [round(x), round(y)]))),
+          coordinates: roundPolygons(f.geometry),
         },
         properties: {
           prefCode: code,

@@ -53,4 +53,4 @@ xattr -dr com.apple.quarantine ~/voicevox_engine_dl/macos-arm64
 
 ## 使うスキル
 
-- [[reference_publish_youtube_47_summary]] (47県動画のナレーション付与)
+- (47県動画のナレーション付与のスキルは 2026-07-27 の YouTube 撤退で撤去済み)

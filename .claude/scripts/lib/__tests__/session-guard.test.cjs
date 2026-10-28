@@ -14,7 +14,7 @@ function fixture(t) {
 function run(root, args = [], input = {}, env = {}) {
   return spawnSync(process.execPath, [SCRIPT, ...args], { cwd: root, encoding: "utf8",
     input: JSON.stringify(input), env: { ...process.env, CLAUDE_PROJECT_DIR: root,
-      CODEX_THREAD_ID: "", CLAUDE_SESSION_ID: "", ...env } });
+      CODEX_THREAD_ID: "", CLAUDE_SESSION_ID: "", CLAUDE_CODE_SESSION_ID: "", ...env } });
 }
 test("Codex登録をClaude hookが検知し、終了後は衝突扱いしない", (t) => {
   const root = fixture(t);
@@ -36,6 +36,15 @@ test("IDなしの確認はunknownを登録せず、登録要求は失敗する",
   assert.equal(run(root, ["codex", "stripped-flags"]).status, 1);
   assert.equal(run(root, ["--register", "--session"]).status, 1);
   assert.deepEqual(JSON.parse(run(root, ["--status"]).stdout), []);
+});
+test("デスクトップアプリのセッションはCLAUDE_CODE_SESSION_IDだけで登録できる", (t) => {
+  const root = fixture(t);
+  const registered = run(root, ["--register", "--task", "TASK-1"], {}, { CLAUDE_CODE_SESSION_ID: "desktop-1" });
+  assert.equal(registered.status, 0, registered.stderr);
+  const status = JSON.parse(run(root, ["--status"]).stdout);
+  assert.equal(status.length, 1);
+  assert.equal(status[0].sessionId, "desktop-1");
+  assert.equal(status[0].task, "TASK-1");
 });
 test("異なるworktreeでも同じタスクを検知し、別タスクの並行作業は許す", (t) => {
   const root = fixture(t);

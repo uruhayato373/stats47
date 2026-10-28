@@ -28,7 +28,28 @@ export interface ExternalSnsSource {
   caption?: string | null;
   domain?: string | null;
   content_key?: string | null;
-  metric_keys?: readonly string[] | null;
+  /** 投稿台帳では配列・JSON 配列の文字列・カンマ区切りの文字列が混在する (posts.schema.json の metric_keys) */
+  metric_keys?: readonly string[] | string | null;
+}
+
+/**
+ * 投稿台帳の metric_keys を key の配列にする。文字列のまま展開すると 1 文字ずつの key になり、
+ * 指標の正本に無いとして全部捨てられていた (2026-10-26 まで SNS 投稿の metric_keys 由来の関係が 0 件)。
+ * 読み方は check-datasets の refs (parse: "list") と同じ。
+ */
+export function snsMetricKeys(value: ExternalSnsSource['metric_keys']): string[] {
+  if (Array.isArray(value)) return [...value];
+  if (typeof value !== 'string' || !value.trim()) return [];
+  const text = value.trim();
+  if (text.startsWith('[')) {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      if (Array.isArray(parsed)) return parsed.filter((k): k is string => typeof k === 'string');
+    } catch {
+      // JSON として読めない文字列はカンマ区切りとして扱う
+    }
+  }
+  return text.split(',').map((k) => k.trim()).filter(Boolean);
 }
 
 export interface ExternalContentInput {
@@ -43,9 +64,17 @@ export interface ExternalContentInput {
 export function buildExternalContentPages(input: ExternalContentInput): {
   pages: ContentPage[];
   links: ContentLink[];
+  /** 指標の正本に無いため関係を張らなかった key (外部公開物 ID → key)。黙って捨てず呼び出し側が報告する */
+  unknownMetricKeys: { id: string; key: string }[];
 } {
   const pages: ContentPage[] = [];
   const links: ContentLink[] = [];
+  const unknownMetricKeys: { id: string; key: string }[] = [];
+  const known = (id: string) => (key: string) => {
+    if (input.isKnownMetric(key)) return true;
+    unknownMetricKeys.push({ id, key });
+    return false;
+  };
   for (const note of input.notes) {
     if (!note.noteUrl?.startsWith('https://')) continue;
     const id = `note:${note.key}`;
@@ -66,7 +95,7 @@ export function buildExternalContentPages(input: ExternalContentInput): {
       rankingKeys: targetIds
         .filter((target) => target.startsWith('ranking:'))
         .map((target) => target.slice('ranking:'.length))
-        .filter(input.isKnownMetric),
+        .filter(known(id)),
     });
     for (const target of targetIds) links.push({ from: id, to: target, relation: 'uses' });
   }
@@ -78,10 +107,10 @@ export function buildExternalContentPages(input: ExternalContentInput): {
     const id = `sns:${post.id}`;
     const metricKeys = [
       ...new Set([
-        ...(post.metric_keys ?? []),
+        ...snsMetricKeys(post.metric_keys),
         ...(post.domain === 'ranking' && post.content_key ? [post.content_key] : []),
       ]),
-    ].filter(input.isKnownMetric);
+    ].filter(known(id));
     const caption = (post.caption ?? '')
       .split('\n')
       .find((line) => line.trim())
@@ -98,5 +127,5 @@ export function buildExternalContentPages(input: ExternalContentInput): {
     });
     for (const key of metricKeys) links.push({ from: id, to: `ranking:${key}`, relation: 'uses' });
   }
-  return { pages, links };
+  return { pages, links, unknownMetricKeys };
 }

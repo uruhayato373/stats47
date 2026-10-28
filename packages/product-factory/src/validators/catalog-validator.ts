@@ -1,7 +1,7 @@
 /**
  * カタログ決定的 validator。
  * 受入条件: 全パック ID が一意で、期待パック集合 (EXPECTED_PACK_IDS) と一致し、
- * 出品可能 (approved/listed) なパックは実データセットが実在する (誇大表示防止)。
+ * 出品可能 (approved) なパックは実データセットが実在する (誇大表示防止)。
  * 純関数 (availableDatasetKeys を注入することで fs に依存しない)。
  */
 import type {
@@ -49,12 +49,11 @@ const STATUSES: ReadonlySet<ProductStatus> = new Set<ProductStatus>([
   "generated",
   "reviewed",
   "approved",
-  "listed",
   "paused",
 ]);
 
-/** 出品可能な状態 (実データ接続が必須)。 */
-const LISTABLE_STATUSES: ReadonlySet<ProductStatus> = new Set<ProductStatus>(["approved", "listed"]);
+/** 出品可能な状態 (実データ接続が必須)。販売先での公開状態は各チャネルの出品台帳が持つ (ProductStatus の説明)。 */
+const LISTABLE_STATUSES: ReadonlySet<ProductStatus> = new Set<ProductStatus>(["approved"]);
 
 const ID_PATTERN = /^P-\d{2}$/;
 
@@ -221,7 +220,7 @@ export function validateCatalog(
       }
     }
 
-    // datasets: 出品可能 (approved/listed) なら全キーが実在する (誇大表示防止)
+    // datasets: 出品可能 (approved) なら全キーが実在する (誇大表示防止)
     if (LISTABLE_STATUSES.has(p.status)) {
       if (p.datasets.length === 0) {
         errors.push({
@@ -249,4 +248,56 @@ export function validateCatalog(
     errors,
     warnings,
   };
+}
+
+/** 出品台帳の 1 行のうち、価格の照合に使う項目。 */
+export interface ListingPriceRow {
+  readonly priceYen?: unknown;
+  readonly status?: unknown;
+}
+
+/**
+ * 出品台帳 (config/coconala-listings.json の listings) の価格を商品定義と照合する (2026-10-27)。
+ * 価格の正本は出品台帳の priceYen (外に出した値)。商品定義の price はその許容範囲で、販売カタログ
+ * (build/sales-catalog.ts) は台帳に価格が無いときだけ initialYen を使う。台帳の価格が範囲の外にあると、
+ * 範囲を前提にした生成物・販売文と食い違うので止める。
+ *   - 全行: priceYen が数値 (無いと販売カタログが出していない initialYen を表示する)
+ *   - P-NN: [minYen, maxYen] に入り、価格刻みに合う
+ *   - それ以外 (Geo サービスなど): fixedPrices に書いた固定価格と一致する
+ *   - 商品定義にも fixedPrices にも無いキー: error (孤立した出品)
+ * status が withdrawn の行は、撤退時に外へ出ていた価格の記録なので範囲・固定価格を照合しない (書き換えると記録を偽る)。
+ * 範囲を外れた記録を再出品するときは、先に価格をオーナーが決め直す (2026-10-27 時点で P-08 が 5,000 円・範囲 6,000〜14,000 円)。
+ */
+export function validateListingPrices(
+  products: readonly ProductDefinition[],
+  listings: Readonly<Record<string, ListingPriceRow>>,
+  fixedPrices: Readonly<Record<string, number>> = {},
+): ValidationIssue[] {
+  const errors: ValidationIssue[] = [];
+  const byId = new Map(products.map((p) => [p.id, p]));
+  for (const [id, row] of Object.entries(listings)) {
+    const yen = row.priceYen;
+    if (typeof yen !== "number" || !Number.isFinite(yen)) {
+      errors.push({ code: "listing-price-missing", id, message: `出品台帳の priceYen が数値でない: ${String(yen)}` });
+      continue;
+    }
+    const product = byId.get(id);
+    if (!product && !(id in fixedPrices)) {
+      errors.push({ code: "listing-orphan", id, message: "出品台帳のキーが商品定義にも固定価格の商品にも無い" });
+      continue;
+    }
+    if (row.status === "withdrawn") continue;
+    if (product) {
+      const { minYen, maxYen } = product.price;
+      if (yen < minYen || yen > maxYen) {
+        errors.push({ code: "listing-price-range", id, message: `出品台帳の priceYen(${yen}) が商品定義の [${minYen}, ${maxYen}] の外` });
+      }
+      if (!isPriceStepValid(yen)) {
+        errors.push({ code: "listing-price-step", id, message: `出品台帳の priceYen(${yen}) が価格刻みに合わない` });
+      }
+    } else if (yen !== fixedPrices[id]) {
+      errors.push({ code: "listing-price-fixed", id, message: `出品台帳の priceYen(${yen}) が固定価格 ${fixedPrices[id]} と違う` });
+    }
+  }
+  return errors;
 }

@@ -4,6 +4,7 @@
  * `/survey` でアクセスされ、全調査の一覧を表示。
  */
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
@@ -84,7 +85,7 @@ export default async function SurveyIndexPage() {
           return (
             <SurfaceLinkCard
               key={survey.id}
-              href={`/survey/${survey.id}`}
+              href={hrefFor("survey", { surveyKey: survey.id })}
               className="block"
             >
               <div className="flex items-start justify-between">

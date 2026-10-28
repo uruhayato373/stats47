@@ -11,6 +11,7 @@ import { SearchPageClient, type ContentType } from "@/features/search";
 import { getSearchIndexMeta, searchDocumentsServer } from "@/features/search/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { formatOgpTitle } from "@/lib/metadata/site-title";
 
 import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
 
@@ -29,7 +30,7 @@ function buildResultsSummary(
 // 検索インデックスはビルド時に static JSON として bundle 済み（D1 read なし）。
 // searchParams が異なれば Next.js が per-request render に切替えるので force-dynamic は不要。
 
-const searchTitle = "検索 | stats47";
+const searchTitle = "検索";
 const searchDescription =
   "都道府県ランキング・ブログ記事をキーワードで検索。カテゴリやタグで絞り込みも可能です。";
 
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   description: searchDescription,
   alternates: { canonical: "/search" },
   robots: { index: false, follow: true },
-  ...generateOGMetadata({ title: searchTitle, description: searchDescription, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
+  ...generateOGMetadata({ title: formatOgpTitle(searchTitle), description: searchDescription, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
 };
 
 interface PageProps {

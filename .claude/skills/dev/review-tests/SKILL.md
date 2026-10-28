@@ -62,6 +62,6 @@ co_agents: [code-reviewer]
 ## 参照
 
 - `apps/web/tests/README.md` — テスト構成・追加指針
-- `apps/web/vitest.config.ts` — Vitest 設定
+- `apps/web/vitest.config.mts` — Vitest 設定
 - `apps/web/playwright.config.ts` — Playwright 設定
 - `apps/web/src/config/test.setup.tsx` — テストグローバルモック設定

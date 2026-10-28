@@ -88,7 +88,9 @@ function renderPreparation(article: NoteArticlePlan, listing: Listing | undefine
   } else {
     lines.push(`- CSVには47地域・${evidence.count.toLocaleString('ja-JP')}指標を収録しています。`,
       evidence.slides ? `- PowerPointは${listing!._delivery!.pptxIndicatorCount}指標・${evidence.slides}枚です。全CSV指標をスライド化したものではありません。` : '- PowerPointは非同梱です。PDF・PNGは固定表示の見本です。',
-      `- Excel: ${evidence.hasXlsx ? '同梱。実機での表示・編集・再計算は未確認です。' : '非同梱です。'}`,
+      `- Excel: ${!evidence.hasXlsx ? '非同梱です。'
+        : listing!._delivery!.officeValidation === 'verified' ? '同梱。Microsoft 365 の Excel（Windows版）で開き、表示・編集・再計算を確かめました。'
+        : '同梱。Office での表示・編集・再計算はこの版ではまだ確かめていません。'}`,
       `- 収録年: ${evidence.manifest.year}。指標ごとに年・単位・地域の対象が異なります。`,
       '- 家計調査などは県庁所在市等を対象とし、県全体の値ではありません。SOURCES.csvで対象を確認してください。',
       '- 欠測・非該当をゼロに置き換えないでください。順位は指標の望ましさや因果関係を示しません。', '',

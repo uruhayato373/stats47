@@ -5,6 +5,7 @@ import {
   listPublishableMunicipalities,
 } from '@stats47/area';
 import { getMetricConfig } from '@stats47/data-configs';
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   MUNICIPALITY_THEME_CATALOGS,
   getMunicipalityMetricAvailability,
@@ -86,7 +87,7 @@ export default function MunicipalitiesHubPage() {
         {
           id: theme.slug,
           label: theme.title,
-          href: `/municipalities/themes/${theme.slug}`,
+          href: hrefFor("municipality-theme", { themeSlug: theme.slug }),
           trackingLabel: `municipality-theme:${theme.slug}`,
           thumbnail: {
             lightSrc: imageSrc,
@@ -184,7 +185,7 @@ export default function MunicipalitiesHubPage() {
             return (
               <SurfaceLinkCard
                 key={theme.slug}
-                href={`/municipalities/themes/${theme.slug}`}
+                href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
                 className="group flex min-h-36 flex-col justify-between"
                 aria-label={`${theme.title}、${metricTitles.length}指標を見る`}
               >

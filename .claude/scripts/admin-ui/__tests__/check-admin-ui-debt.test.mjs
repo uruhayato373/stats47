@@ -61,3 +61,26 @@ test('Card 部品を使わずユーティリティで組んだカード面 (bg-c
   // bg-console-card/95 のような alpha 修飾付きは別の単語なので数えない (背景の重ね塗り用途)
   assert.equal(countDebt(src).rawSurface, 2);
 });
+
+test('旧配色の文字・面・線の色を数え、状態の色と shadcn のトークンは数えない（2026-10-27 neutral 移行）', () => {
+  const src = [
+    '<p className="text-console-muted hover:border-console-accent/60 md:bg-console-bg">',
+    '<p className="text-console-good bg-console-bad/10 text-console-info">',
+    '<p className="text-muted-foreground border bg-card bg-console-cardx">',
+  ].join('\n');
+  assert.equal(countDebt(src).legacyColor, 3);
+});
+
+test('任意値の文字サイズ text-[11px] を数え、text-xs や色の任意値は数えない', () => {
+  const src = '<p className="text-[11px] md:text-[13px] text-xs text-[#fff] max-w-[11px]">';
+  assert.equal(countDebt(src).arbitraryText, 2);
+});
+
+test('生の <details> を数える（折りたたみは公式の Collapsible）', () => {
+  assert.equal(countDebt('<details open><summary>a</summary></details><Collapsible />').rawDetails, 1);
+});
+
+test('Button をリンクとして描く書き方 (nativeButton={false}) を数える（<a> に role="button" が付く）', () => {
+  const src = '<Button nativeButton={false} render={<a href="/x" />}>x</Button><Link className={buttonVariants()} href="/y">y</Link>';
+  assert.equal(countDebt(src).buttonAsLink, 1);
+});

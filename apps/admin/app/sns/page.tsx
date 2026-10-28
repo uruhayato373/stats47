@@ -1,15 +1,18 @@
+import { PageHeading } from "@/components/ops/primitives";
+import { SnsSummary } from "@/components/sns/sns-summary";
 import { SnsView } from "@/components/sns/sns-view";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
+export const dynamic = "force-dynamic";
+export const metadata = { title: "SNS 投稿台帳 — stats47 admin" };
+
+/** SNS 投稿台帳 (型 B: 一覧)。件数の要約 → 推移 → 投稿の一覧。下書きは画像を確認しながら本文を編集できる。 */
 export default function SnsPage() {
   return (
-    <div className="space-y-4">
-      <div>
-        <h1 className="text-xl font-bold text-console-fg">SNS 投稿台帳</h1>
-        <p className="mt-1 text-sm text-console-muted">
-          投稿IDで画像・本文・予約日時を管理。下書きは画像を確認しながら本文を編集できます。
-        </p>
-      </div>
+    <>
+      <PageHeading title="SNS 投稿台帳" source={datasetPath("sns.posts")} accessLabel="下書き本文の編集のみ" />
+      <SnsSummary />
       <SnsView />
-    </div>
+    </>
   );
 }

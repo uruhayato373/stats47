@@ -1,5 +1,7 @@
 "use client";
 
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import Link from "@/components/atoms/SiteLink";
 import { SectionCard } from "@/components/surface";
 
@@ -47,7 +49,7 @@ export function CorrelationSectionClient({
                     return (
                         <div key={item.rankingKey} className="flex items-center justify-between gap-2 py-1.5">
                             <Link
-                                href={`/ranking/${item.rankingKey}`}
+                                href={hrefFor("ranking", { rankingKey: item.rankingKey })}
                                 className="truncate text-sm hover:text-primary transition-colors"
                             >
                                 {item.title}
@@ -55,7 +57,7 @@ export function CorrelationSectionClient({
                             <span className="flex shrink-0 items-center gap-3">
                                 {article && (
                                     <Link
-                                        href={`/blog/${article.slug}`}
+                                        href={hrefFor("blog", { slug: article.slug })}
                                         title={article.title}
                                         className="text-xs text-primary hover:underline"
                                     >

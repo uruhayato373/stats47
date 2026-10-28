@@ -11,6 +11,14 @@ import {
   surveyYearFromDate,
   type AreaAxisMember,
 } from "../area-axis";
+import {
+  fetchPrefectures,
+  INLAND_PREFECTURE_CODES,
+  PREFECTURE_AREA_CODES,
+  prefectureNameOf,
+  prefectureShortName,
+} from "@stats47/area";
+import { PREFECTURE_COUNT } from "../shape-gate";
 
 /** 患者調査 0004026104 の cat03 (実データ・抜粋) */
 const PATIENT_CAT03: AreaAxisMember[] = [
@@ -218,4 +226,32 @@ describe("surveyYearFromDate — time 軸を持たない表の年", () => {
       expect(surveyYearFromDate(input)).toBeNull();
     },
   );
+});
+
+describe("都道府県マスタは @stats47/area の正本から導出する", () => {
+  it("PREFECTURES のコード・名称・短縮名が prefectures.json と prefectureShortName に一致する", () => {
+    expect(PREFECTURES).toEqual(
+      fetchPrefectures().map((p) => ({
+        code: p.prefCode,
+        name: p.prefName,
+        short: prefectureShortName(p.prefName),
+      })),
+    );
+    expect(PREFECTURES.find((p) => p.code === "01000")?.short).toBe("北海道");
+  });
+
+  it("海のない 8 県の名称は INLAND_PREFECTURE_CODES から引く", () => {
+    expect(INLAND_PREFECTURES).toEqual(INLAND_PREFECTURE_CODES.map((c) => prefectureNameOf(c)));
+  });
+
+  it("shape-gate の PREFECTURE_COUNT は 47 県コード数と一致する", () => {
+    expect(PREFECTURE_COUNT).toBe(PREFECTURE_AREA_CODES.length);
+    expect(PREFECTURE_COUNT).toBe(47);
+  });
+
+  it("seq-pref は配列の並び順ではなく県番号から写像する (沖縄 = 48 → 47000)", () => {
+    const { byCode } = resolveAreaAxis([{ code: "48", name: "沖縄県" }, { code: "2", name: "北海道" }], "seq-pref");
+    expect(byCode.get("48")).toBe("47000");
+    expect(byCode.get("2")).toBe("01000");
+  });
 });

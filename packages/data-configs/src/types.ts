@@ -329,7 +329,8 @@ export interface CalculationOptions {
 
 /**
  * e-Stat 機械分類の category キー (17 軸固定)。表示名・アイコンは
- * `categories.ts` の CATEGORY_DEFS が SSOT。順序はそちらに合わせる。
+ * `categories.ts` の CATEGORY_DEFS が SSOT。順序はそちらに合わせる
+ * (キー集合と順序の一致は `__tests__/categories.test.ts` が固定する)。
  *
  * ★ `MetricConfig.category` をこの union で縛ることで、`port` / `uncategorized`
  *   / `labor` / `local-economy` のような無効キーを **コンパイルエラー**にして
@@ -418,8 +419,8 @@ export interface MetricConfig {
   visualization: VisualizationConfig;
   display?: DisplayConfig;
   calculation?: CalculationOptions;
-  /** sub-property tags (旧 additional_categories) */
-  additionalCategories?: string[];
+  /** sub-property tags (旧 additional_categories)。値は `category` と同じ 17 軸のキーに限る */
+  additionalCategories?: CategoryKey[];
   /** group_key — テーマダッシュボードでの集約用 */
   groupKey?: string;
   /**

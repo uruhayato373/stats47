@@ -5,6 +5,7 @@
  */
 
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildEstatTableUrl, readSourceConfigRef } from "@stats47/data-configs/data-source";
 import { filterOutNationalArea, getRankingTitle, resolveNationalFigure, type RankingItem, type RankingValue } from "@stats47/ranking";
 
@@ -99,7 +100,7 @@ export function generateRankingBreadcrumbStructuredData({
       "@type": "ListItem",
       position: items.length + 1,
       name: category.name,
-      item: `${baseUrl}/category/${category.key}`,
+      item: `${baseUrl}${hrefFor("category", { categoryKey: category.key })}`,
     });
   }
 
@@ -146,7 +147,7 @@ export function generateRankingTopPageStructuredData({
       "@type": "ListItem",
       position: index + 1,
       name: item.title,
-      url: `${baseUrl}/ranking/${item.rankingKey}`,
+      url: `${baseUrl}${hrefFor("ranking", { rankingKey: item.rankingKey })}`,
     })),
   };
 }
@@ -297,7 +298,7 @@ export function generateRankingPageStructuredData({
   const primarySource = resolvePrimarySource(rankingItem);
   const sourceName = primarySource?.name ?? "e-Stat";
 
-  const url = `${baseUrl}/ranking/${rankingItem.rankingKey}`;
+  const url = `${baseUrl}${hrefFor("ranking", { rankingKey: rankingItem.rankingKey })}`;
 
   // descriptionを50文字以上に改善し、ランキングデータの具体的な情報を含める
   const yearLabel = selectedYear ? resolveYearLabel(rankingItem, selectedYear) : "";

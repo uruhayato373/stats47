@@ -15,9 +15,12 @@ test('a metric migration verifies and publishes snapshots before building the ap
   assert.ok(workflow.includes('cancel-in-progress: false'));
 });
 
-test('the release allowlist includes cards and municipal presentation, excludes raw observations and unrelated assets', () => {
-  const literal = workflow.match(/const allowed = (\/.+\/);/)[1];
-  const allowed = Function('return ' + literal)();
-  for (const key of ['app/ranking/x/item.json', 'app/ranking-items/all.json', 'app/home/featured.json', 'app/municipalities/ranking/x/values.json', 'app/page-components/theme/climate.json']) assert.ok(allowed.test(key), key);
+test('the release allowlist includes cards and municipal presentation, excludes raw observations and unrelated assets', async () => {
+  // デプロイは対象パスを共通の定義から読む (METRIC-RELEASE-PATHS-SSOT-01)。正規表現を workflow に直書きしない
+  assert.ok(workflow.includes('import {RELEASE_KEY_PATTERN as allowed} from "./.github/scripts/metric-release-paths.mjs"'));
+  assert.ok(!/const allowed = \//.test(workflow));
+  const { RELEASE_KEY_PATTERN: allowed } = await import(new URL('../../../../.github/scripts/metric-release-paths.mjs', import.meta.url));
+  // 期待する種類はここに直接書く。定義から 1 種類消すと落ちる
+  for (const key of ['app/ranking/x/item.json', 'app/ranking-items/all.json', 'app/home/featured.json', 'app/municipalities/ranking/x/values.json', 'app/municipalities/ranking/x/item.json', 'app/municipalities/ranking/x/ai-content.json', 'app/areas/13000/cities/13101/databook.json', 'app/categories/all.json', 'app/categories/population/items.json', 'app/survey/all.json', 'app/survey/census/items.json', 'app/page-components/theme/climate.json']) assert.ok(allowed.test(key), key);
   for (const key of ['app/stats/x/values.json', 'app/ranking/x/values.json', 'app/blog/x/article.mdx', 'gis/x.json', 'app/page-components/../../secret.json']) assert.equal(allowed.test(key), false, key);
 });

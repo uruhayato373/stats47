@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS, BOOK_BY_ID } from "./book-catalog";
 import { validateKindleCatalog } from "./validator";
 import { buildBook, assertBookVersion } from "./build-book";
+import { buildKindleStatus } from "./kindle-status";
 import { datasetDir } from "../../../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
@@ -143,22 +144,8 @@ async function runGenerate(): Promise<number> {
 }
 
 function runReport(): number {
-  const v = validateKindleCatalog();
   mkdirSync(dirname(STATUS_PATH), { recursive: true });
-  const payload = {
-    generatedAt: new Date().toISOString(),
-    total: v.counts.total,
-    bySeries: v.counts.bySeries,
-    byStatus: v.counts.byStatus,
-    books: KINDLE_BOOKS.map((b) => ({
-      id: b.id,
-      series: b.series,
-      title: b.title,
-      status: b.status,
-      priceYen: b.priceYen,
-      chapters: b.chapters.length,
-    })),
-  };
+  const payload = buildKindleStatus(KINDLE_BOOKS, new Date().toISOString());
   writeFileSync(STATUS_PATH, JSON.stringify(payload, null, 2) + "\n");
   console.log(`✅ kindle-status を書き出しました: ${STATUS_PATH}`);
   return 0;

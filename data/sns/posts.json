@@ -31593,9 +31593,9 @@
     },
     {
       "id": 1039,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.266Z",
-      "updated_at": "2026-10-12T01:26:13.604Z",
+      "updated_at": "2026-10-26T20:13:59.056Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31626,13 +31626,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/pet-food-consumption-expenditure/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/De8KTRogkZI",
+      "posted_at": "2026-10-26T02:00:58.000Z"
     },
     {
       "id": 1040,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.272Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-26T20:13:59.087Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31649,13 +31651,15 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "post_url": "https://www.threads.com/@stats47jp/post/De84meIiHhI",
+      "posted_at": "2026-10-26T08:45:32.000Z"
     },
     {
       "id": 1041,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.278Z",
-      "updated_at": "2026-10-12T01:26:17.987Z",
+      "updated_at": "2026-10-27T19:44:31.300Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -31686,13 +31690,15 @@
           "height": 1350,
           "source": ".local/r2/sns/_replacements/2026-10-12/final-energy-consumption-per-capita/all47.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/De-sypbk8V8",
+      "posted_at": "2026-10-27T01:40:49.000Z"
     },
     {
       "id": 1042,
-      "status": "draft",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.283Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-27T19:44:31.337Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -31709,7 +31715,9 @@
         "at": "2026-10-09T12:21:34.045Z",
         "via": "approve-posts",
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
-      }
+      },
+      "post_url": "https://www.threads.com/@stats47jp/post/De_akZpAoQh",
+      "posted_at": "2026-10-27T08:20:50.000Z"
     },
     {
       "id": 1043,
@@ -34217,7 +34225,7 @@
     },
     {
       "id": 1102,
-      "status": "draft",
+      "status": "posted",
       "approval": {
         "state": "approved",
         "by": "owner",
@@ -34226,13 +34234,16 @@
         "note": "2026-10-09 オーナーがチャットで全件承認を指示"
       },
       "created_at": "2026-10-09T03:56:58.253Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-26T16:44:40.448Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "ranking-quiz",
       "content_key": "white-bread-consumption-quantity",
       "caption": "【都道府県クイズ】食パンをいちばん多く買う県は？\n\nA 京都府\nB 兵庫県\nC 滋賀県\n\nヒントは2枚目、答えは3枚目👉\n予想をコメントで教えてください💬\n\n保存して、朝ごはんの話題に📌\n全47都道府県のランキングはプロフィールのリンクから\n\nデータ: 総務省「家計調査」2024年（県庁所在市・二人以上世帯の年間購入量（2024年））\n\n#都道府県クイズ #都道府県ランキング #食パン #パン #家計調査 #雑学 #クイズ #統計 #stats47",
-      "scheduled_at": "2026-10-26T10:00:00.000Z"
+      "scheduled_at": "2026-10-26T10:00:00.000Z",
+      "posted_at": "2026-10-26T16:44:40.434Z",
+      "post_url": "https://www.instagram.com/p/De9vaK6ldZE/",
+      "external_id": "17960757177011599"
     },
     {
       "id": 1103,
@@ -40450,10 +40461,10 @@
         "state": "pending"
       },
       "created_at": "2026-10-23T04:28:03.346Z",
-      "updated_at": "2026-10-23T04:28:03.346Z",
+      "updated_at": "2026-10-27T00:21:20.169Z",
       "platform": "x",
       "post_type": "original",
-      "domain": "ranking",
+      "domain": "blog",
       "content_key": "municipality-population-change-census-2025",
       "caption": "5年で人口が8割増えた町と、3割減った市。\n2020→2025年の国勢調査で、人口が増えた市区町村は1,740のうち169だけでした。\n増加率1位 大熊町 +80.99%\n減少率1位 珠洲市 -34.57%\nhttps://stats47.jp/blog/municipality-population-change-census-2025?utm_source=x&utm_medium=social&utm_campaign=blog-municipality-population-change-census-2025&utm_content=shock\n#国勢調査 #人口増減率 #市区町村",
       "utm_url": "https://stats47.jp/blog/municipality-population-change-census-2025?utm_source=x&utm_medium=social&utm_campaign=blog-municipality-population-change-census-2025&utm_content=shock",
@@ -40461,7 +40472,7 @@
       "media_path": ".local/r2/sns/blog/municipality-population-change-census-2025/x/stills/municipality-population-change-census-2025.png",
       "scheduled_at": null,
       "template": "shock",
-      "metric_keys": "municipality-population-change-census-2025",
+      "metric_keys": null,
       "geo_role": null,
       "analysis_ids": null,
       "claim_metric_key": null

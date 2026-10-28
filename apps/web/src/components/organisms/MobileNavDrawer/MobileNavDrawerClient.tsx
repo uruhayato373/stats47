@@ -26,6 +26,8 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 
+import { themeHref } from "@/features/theme-dashboard/config/theme-href";
+
 import { trackNavClick } from '@/lib/analytics/events';
 
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -184,7 +186,7 @@ export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
             </h2>
             <nav className="flex flex-col">
               {themes.map((theme) => {
-                const href = `/themes/${theme.themeKey}`;
+                const href = themeHref(theme.themeKey);
                 const isActive = pathname?.startsWith(href) ?? false;
                 return (
                   <Link

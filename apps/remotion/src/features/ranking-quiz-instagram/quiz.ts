@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import type { RankingEntry } from "../../shared/types/ranking";
+import { to2DigitPrefCode } from "@stats47/area";
 
 /**
  * 予想クイズ型カルーセル（Instagram 4:5・5枚）の編集入力と、ランキングデータからの導出。
@@ -64,9 +65,9 @@ export interface ResolvedRankingQuiz {
 
 const LETTERS = ["A", "B", "C", "D"];
 
-/** "45" / "45000" / 45 を "45" に揃える */
+/** "45" / "45000" / 45 を "45" に揃える (`@stats47/area` の単一実装) */
 export function toPrefCode(code: string | number): string {
-  return String(code).replace(/0{3}$/, "").padStart(2, "0");
+  return to2DigitPrefCode(code);
 }
 
 function ratio(a: number, b: number): string | null {

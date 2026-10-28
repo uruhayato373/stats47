@@ -49,7 +49,7 @@ function collectQualityExceptions() {
 
   const sourceFiles = [
     ...[path.join(ROOT, 'apps'), path.join(ROOT, 'packages')].flatMap(walk),
-    path.join(ROOT, 'vitest.config.ts'),
+    path.join(ROOT, 'vitest.config.mts'),
   ];
   for (const file of sourceFiles) {
     const relative = normalize(file);
@@ -112,11 +112,19 @@ function auditExceptionRegistry(entries, actual, now = new Date()) {
   return errors;
 }
 
+/**
+ * 前回との比較だけに使うキー。vitest 設定の拡張子変更 (vitest.config.ts → .mts、2026-10-26 VITE-CONFIG-ESM-WARN-01) は
+ * 同じ設定ファイルの改名なので、例外の追加と数えない。件数の増加はこのキーでも従来どおり止める。
+ */
+function growthKey(entry) {
+  return inventoryKey({ ...entry, path: String(entry.path).replace(/vitest\.config\.[cm]?ts$/, 'vitest.config.ts') });
+}
+
 function auditRegistryGrowth(current, previous) {
   const errors = [];
-  const old = new Map(previous.map((entry) => [inventoryKey(entry), entry.count]));
+  const old = new Map(previous.map((entry) => [growthKey(entry), entry.count]));
   for (const entry of current) {
-    const oldCount = old.get(inventoryKey(entry));
+    const oldCount = old.get(growthKey(entry));
     if (oldCount === undefined) errors.push(`${inventoryKey(entry)}: exception added`);
     else if (entry.count > oldCount) errors.push(`${inventoryKey(entry)}: exception baseline increased ${oldCount}->${entry.count}`);
   }

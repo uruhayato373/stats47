@@ -1,3 +1,5 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
+
 import { R2_PUBLIC_BASE_URL, SITE_NAME, SITE_ORIGIN } from "@/config/site";
 const DEFAULT_SITE_URL = SITE_ORIGIN;
 const DEFAULT_R2_PUBLIC_URL = R2_PUBLIC_BASE_URL;
@@ -38,7 +40,7 @@ export function buildMunicipalityDatasetStructuredData({
   r2PublicUrl?: string;
 }) {
   const title = displayTitle(item);
-  const canonicalUrl = `${siteUrl.replace(/\/$/, '')}/municipalities/ranking/${encodeURIComponent(item.rankingKey)}`;
+  const canonicalUrl = `${siteUrl.replace(/\/$/, '')}${hrefFor("municipality-ranking", { rankingKey: encodeURIComponent(item.rankingKey) })}`;
   const contentUrl = `${r2PublicUrl.replace(/\/$/, '')}/app/municipalities/ranking/${encodeURIComponent(item.rankingKey)}/values.json`;
   const description =
     `${title}について、${snapshot.yearName}の値を${item.valueCount.toLocaleString('ja-JP')}市区町村で比較できるランキングデータセットです。` +

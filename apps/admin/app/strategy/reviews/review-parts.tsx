@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { CalendarRangeIcon, ClipboardCheckIcon, FileTextIcon, ForwardIcon, GavelIcon, TriangleAlertIcon } from "lucide-react";
 
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { reviewRunView, type Cadence, type ReviewRunView, type RunVerdict, type StepState } from "@/lib/server/reviews";
 import { hasError } from "@/lib/server/state-io";
 
@@ -35,12 +36,10 @@ function RunPicker({ base, view }: { base: string; view: ReviewRunView }) {
   return (
     <div className="flex flex-wrap gap-2">
       {view.options.map((o) => (
-        <Button key={o.key} asChild size="sm" variant={o.key === view.period ? "default" : "outline"}>
-          <Link href={`${base}?run=${o.key}`}>
+        <Link key={o.key} href={`${base}?run=${o.key}`} className={buttonVariants({ variant: o.key === view.period ? "default" : "outline", size: "sm" })}>
             {o.key}
             {o.missing ? " (未作成)" : ""}
           </Link>
-        </Button>
       ))}
     </div>
   );
@@ -50,9 +49,9 @@ function Current({ view }: { view: ReviewRunView }) {
   const v = VERDICT[view.verdict];
   return (
     <Grid min="sm">
-      <StatCard label="振り返り期間" value={`${md(view.range.start)}〜${md(view.range.end)}`} sub={view.period} />
-      <StatCard label="記録" value={view.verdict === "missing" || view.verdict === "upcoming" ? "なし" : "あり"} sub={view.path} />
-      <StatCard label="判定" value={<StatusBadge tone={v.tone}>{v.label}</StatusBadge>} sub={view.nextDue ? `期限 ${view.nextDue}` : `${view.command} ${view.period}`} />
+      <StatCard label="振り返り期間" icon={<CalendarRangeIcon />} value={`${md(view.range.start)}〜${md(view.range.end)}`} sub={view.period} />
+      <StatCard label="記録" icon={<FileTextIcon />} value={view.verdict === "missing" || view.verdict === "upcoming" ? "なし" : "あり"} sub={view.path} />
+      <StatCard label="判定" icon={<GavelIcon />} value={<StatusBadge tone={v.tone}>{v.label}</StatusBadge>} sub={view.nextDue ? `期限 ${view.nextDue}` : `${view.command} ${view.period}`} />
     </Grid>
   );
 }
@@ -68,7 +67,7 @@ function Checklist({ view }: { view: ReviewRunView }) {
             </Cell>
             <Cell>
               <div className="font-semibold">{s.label}</div>
-              <div className="text-[11px] text-console-muted">{s.does}</div>
+              <div className="text-xs text-muted-foreground">{s.does}</div>
             </Cell>
             <Cell nowrap>
               <StatusBadge tone={STEP[s.state].tone} title={s.note}>
@@ -76,7 +75,7 @@ function Checklist({ view }: { view: ReviewRunView }) {
               </StatusBadge>
             </Cell>
             <Cell muted>
-              <span className="text-[11px]">{s.note}</span>
+              <span className="text-xs">{s.note}</span>
             </Cell>
           </Row>
         ))}
@@ -86,7 +85,7 @@ function Checklist({ view }: { view: ReviewRunView }) {
 }
 
 function routeBadge(problem: string | null, inContract: boolean) {
-  if (!inContract) return <span className="text-console-muted">契約前</span>;
+  if (!inContract) return <span className="text-muted-foreground">契約前</span>;
   if (!problem) return <StatusBadge tone="good">結ばれている</StatusBadge>;
   const label = problem.startsWith("unrouted") ? "行き先なし" : problem.startsWith("unknown-id") ? "ID が無い" : "形が不正";
   return (
@@ -100,16 +99,16 @@ function Outcome({ view }: { view: ReviewRunView }) {
   return (
     <Section title="判断">
       <Stack>
-        <PanelCard title="サマリー" description={view.path}>
+        <PanelCard title="サマリー" icon={<ClipboardCheckIcon />} description={view.path}>
           {view.summary ? (
             <p className="m-0 whitespace-pre-line text-sm leading-relaxed">{view.summary.replace(/\*\*/g, "").replace(/`/g, "")}</p>
           ) : (
-            <p className="m-0 text-sm text-console-muted">まだ記録が無い。{view.command} {view.period} を実行する。</p>
+            <p className="m-0 text-sm text-muted-foreground">まだ記録が無い。{view.command} {view.period} を実行する。</p>
           )}
         </PanelCard>
-        <PanelCard title={view.handoffSection} description={`各項目の末尾に「${view.marker} <カード ID / EXP-NNN / #Issue / 定常 / 見送り>」。次の計画はこの行き先を拾う`}>
+        <PanelCard title={view.handoffSection} icon={<ForwardIcon />} description={`各項目の末尾に「${view.marker} <カード ID / EXP-NNN / #Issue / 定常 / 見送り>」。次の計画はこの行き先を拾う`}>
           {view.handoff.length === 0 ? (
-            <p className="m-0 text-sm text-console-muted">申し送りが無い。</p>
+            <p className="m-0 text-sm text-muted-foreground">申し送りが無い。</p>
           ) : (
             <DataTable columns={["項目", "行き先", "判定"]}>
               {view.handoff.map((h, i) => (
@@ -118,12 +117,12 @@ function Outcome({ view }: { view: ReviewRunView }) {
                   <Cell nowrap>
                     {h.routes?.length ? (
                       h.routes.map((r) => (
-                        <code key={r} className="mr-1 text-[11px]">
+                        <code key={r} className="mr-1 font-mono text-xs">
                           {r}
                         </code>
                       ))
                     ) : (
-                      <span className="text-console-muted">—</span>
+                      <span className="text-muted-foreground">—</span>
                     )}
                   </Cell>
                   <Cell nowrap>{routeBadge(h.problem, view.inContract)}</Cell>
@@ -158,7 +157,7 @@ function Deadlines({ view }: { view: ReviewRunView }) {
               )}
             </Cell>
             <Cell nowrap>
-              <code className="text-[12px]">{s.command}</code>
+              <code className="font-mono text-xs">{s.command}</code>
             </Cell>
           </Row>
         ))}
@@ -170,7 +169,7 @@ function Deadlines({ view }: { view: ReviewRunView }) {
 function Findings({ view }: { view: ReviewRunView }) {
   if (view.findings.length === 0) return null;
   return (
-    <PanelCard title="要対応" description="check-review-cadence.mjs と同じ判定。error は毎朝の review-cadence-guard.yml の Issue と docs:check (DG084) でも出る">
+    <PanelCard title="要対応" icon={<TriangleAlertIcon />} description="check-review-cadence.mjs と同じ判定。error は毎朝の review-cadence-guard.yml の Issue と docs:check (DG084) でも出る">
       <DataTable columns={["区分", "内容", "直し方"]}>
         {view.findings.map((f, i) => (
           <Row key={`${f.code}-${i}`}>
@@ -194,7 +193,7 @@ function Wiring({ view }: { view: ReviewRunView }) {
           <Row key={i}>
             <Cell nowrap>{w.label}</Cell>
             <Cell muted>
-              <code className="text-[11px]">{w.target}</code>
+              <code className="font-mono text-xs">{w.target}</code>
             </Cell>
             <Cell nowrap>{w.problem ? <StatusBadge tone="bad">{w.problem}</StatusBadge> : <StatusBadge tone="good">ok</StatusBadge>}</Cell>
           </Row>
@@ -216,27 +215,24 @@ export async function ReviewPage({ cadence, searchParams }: { cadence: Cadence; 
   const v = reviewRunView(cadence, run);
   if (hasError(v)) {
     return (
-      <div className="space-y-8">
+      <>
         <PageHeading title={title} source={SOURCE} />
         <ErrorNote error={v.error} />
-      </div>
+      </>
     );
   }
   return (
-    <div className="space-y-8">
-      <PageHeading title={title} source={SOURCE} />
-      <Stack>
-        <p className="text-[12px] text-console-muted">{CYCLE[cadence]}</p>
-        <RunPicker base={`/strategy/reviews/${cadence}`} view={v} />
-        <Section title="実施状況">
-          <Current view={v} />
-        </Section>
-        <Checklist view={v} />
-        <Outcome view={v} />
-        <Findings view={v} />
-        <Deadlines view={v} />
-        <Wiring view={v} />
-      </Stack>
-    </div>
+    <>
+      <PageHeading title={title} source={SOURCE}>
+        <p className="text-xs text-muted-foreground">{CYCLE[cadence]}</p>
+      </PageHeading>
+      <RunPicker base={`/strategy/reviews/${cadence}`} view={v} />
+      <Current view={v} />
+      <Checklist view={v} />
+      <Outcome view={v} />
+      <Findings view={v} />
+      <Deadlines view={v} />
+      <Wiring view={v} />
+    </>
   );
 }

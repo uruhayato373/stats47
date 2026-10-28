@@ -1,28 +1,25 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { BugIcon, CalendarClockIcon, CircleAlertIcon, ListTodoIcon } from "lucide-react";
 
-import { Cell, DataTable, Row, StatusBadge, type Tone } from "@/components/admin-ui";
-import { Card as UiCard, CardContent } from "@/components/ui/card";
-
-import {
-  todoBoard,
-  type ImprovementRow,
-  type LayerId,
-  type Tier,
-  type TodoCard,
-} from "@/lib/server/todo";
+import { DataGrid, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
+import { Grid, Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading } from "@/components/ops/primitives";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { todoBoard, type ImprovementRow, type LayerId, type Tier, type TodoCard } from "@/lib/server/todo";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = { title: "TODO — stats47 統合メディアコンソール" };
 
 /**
- * TODO ボード (.claude/todo の読み取り専用ビュー)。doboku-note の admin と同型:
+ * TODO ボード (.claude/todo の読み取り専用ビュー・型 B: 一覧・キュー)。doboku-note の admin と同型:
  *
  * - **役割 (実行/計画/検証) は共通サイドバーの TODO 階層**が持つ。台帳は別ファイルで、
  *   週間・月間は backlog の部分集合ではなく pull されたコピー＝「行き先」であって絞り込みではない。
- * - **優先度・種類は本文右のレール**に置く。backlog カードの属性でしかない
- *   (他層には存在しない) ため。クライアント JS を持たず、絞り込みは searchParams に載せる:
+ * - **優先度・種類は一覧の上の絞り込み**に置く。backlog カードの属性でしかない
+ *   (他層には存在しない) ため。絞り込みは searchParams に載せる (リンクで共有できる):
  *   f=層 / t=優先度 / k=種類。実行タグは自動処理の内部契約で、読者向け分類には使わない。
  * - 件数は**自分以外の絞り込みを当てた集合**で数える (押した先が 0 件になる導線に件数を出さない)。
  * - 読み取り専用。編集は vscode リンクで元ファイルを開く (排他 writer 契約を画面から崩さない)。
@@ -31,13 +28,14 @@ export const metadata = { title: "TODO — stats47 統合メディアコンソ�
 type Query = { f?: string; t?: string; k?: string; e?: string };
 type TierKey = Tier | "none";
 
-const TIERS: { key: TierKey; label: string; dot: string }[] = [
-  { key: "high", label: "高", dot: "bg-console-bad" },
-  { key: "mid", label: "中", dot: "bg-console-warn" },
-  { key: "low", label: "低", dot: "bg-console-good" },
-  { key: "hold", label: "判断待ち", dot: "bg-console-accent" },
-  { key: "none", label: "未設定", dot: "bg-console-muted" },
+const TIERS: { key: TierKey; label: string; tone: Tone }[] = [
+  { key: "high", label: "高", tone: "bad" },
+  { key: "mid", label: "中", tone: "warn" },
+  { key: "low", label: "低", tone: "good" },
+  { key: "hold", label: "判断待ち", tone: "info" },
+  { key: "none", label: "未設定", tone: "neutral" },
 ];
+const TIER_ORDER = new Map(TIERS.map((t, i) => [t.key, i]));
 
 const LAYER_TITLES: Record<LayerId, string> = {
   backlog: "実行バックログ",
@@ -52,6 +50,8 @@ const LAYER_HINTS: Record<LayerId, string> = {
   monthly: "バックログから選んだ今月の重点とゴール",
   improvements: "実装後の効果判定・期限・Owner・Metricを持つ専用台帳",
 };
+
+const LINK = "font-medium underline-offset-4 hover:underline";
 
 const tierKey = (c: TodoCard): TierKey => c.tier ?? "none";
 
@@ -77,7 +77,7 @@ function countBy(cards: TodoCard[], pick: (c: TodoCard) => string | null): Map<s
   return m;
 }
 
-/** 右レールの 1 群。active=null が「すべて」(その軸の解除)。 */
+/** 絞り込みの 1 軸 (リンクのボタン列)。active=null が「すべて」(その軸の解除)。 */
 function Facet({
   title,
   param,
@@ -91,38 +91,21 @@ function Facet({
   now: Query;
   active: string | null;
   total: number;
-  items: { key: string; label: string; count: number; dot?: string }[];
+  items: { key: string; label: string; count: number }[];
 }) {
-  const rowCls = (isActive: boolean) =>
-    `flex items-center gap-2 rounded px-2 py-1 text-[13px] ${
-      isActive
-        ? "bg-console-accent/10 font-medium text-console-accent"
-        : "text-console-fg hover:bg-console-card"
-    }`;
   return (
-    <section className="space-y-1">
-      <h4 className="px-2 text-[11px] font-bold uppercase tracking-wide text-console-muted">
-        {title}
-      </h4>
-      <Link href={href(now, { [param]: undefined })} className={rowCls(!active)}>
-        <span className="flex-1">すべて</span>
-        <span className="font-mono text-[11px] text-console-muted">{total}</span>
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="text-xs font-medium text-muted-foreground">{title}</span>
+      <Link href={href(now, { [param]: undefined })} className={buttonVariants({ variant: !active ? "default" : "outline", size: "sm" })}>
+        すべて ({total})
       </Link>
       {items.map((it) => (
-        <Link key={it.key} href={href(now, { [param]: it.key })} className={rowCls(active === it.key)}>
-          {it.dot ? <span className={`h-2 w-2 shrink-0 rounded-full ${it.dot}`} /> : null}
-          <span className="flex-1">{it.label}</span>
-          <span className="font-mono text-[11px] text-console-muted">{it.count}</span>
+        <Link key={it.key} href={href(now, { [param]: it.key })} className={buttonVariants({ variant: active === it.key ? "default" : "outline", size: "sm" })}>
+          {it.label} ({it.count})
         </Link>
       ))}
-    </section>
+    </div>
   );
-}
-
-// このページの tone (accent / muted を含む) を StatusBadge の tone へ寄せる
-const BADGE_TONE: Record<"bad" | "warn" | "info" | "accent" | "muted", Tone> = { bad: "bad", warn: "warn", info: "info", accent: "info", muted: "neutral" };
-function Badge({ tone, children }: { tone: "bad" | "warn" | "info" | "accent" | "muted"; children: React.ReactNode }) {
-  return <StatusBadge tone={BADGE_TONE[tone]}>{children}</StatusBadge>;
 }
 
 function getExecutorStatus(executor: string | null) {
@@ -133,83 +116,83 @@ function getExecutorStatus(executor: string | null) {
   return null;
 }
 
-function TodoCardItem({ c, today }: { c: TodoCard; today: string }) {
+/** カードのタイトル・状態バッジ・詳細 (本文は Collapsible で開く) */
+function TodoCardCell({ c, today }: { c: TodoCard; today: string }) {
   const overdue = c.due !== null && c.due < today;
   const executorStatus = getExecutorStatus(c.executor);
   return (
-    <UiCard className="gap-0 py-3">
-      <CardContent className="px-3">
-      <a
-        href={editorHref(c.abs, c.line)}
-        className="text-sm font-medium text-console-fg hover:text-console-accent hover:underline"
-        title={`${c.path}:${c.line} を VS Code で開く`}
-      >
+    <div className="flex flex-col gap-1.5">
+      <a href={editorHref(c.abs, c.line)} className={LINK} title={`${c.path}:${c.line} を VS Code で開く`}>
         {c.title}
       </a>
-      <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-        {c.id ? <span className="font-mono text-[11px] text-console-muted">{c.id}</span> : null}
-        {c.kind ? <Badge tone={c.kind === "不具合" ? "bad" : "muted"}>{c.kind}</Badge> : null}
-        {executorStatus ? <Badge tone={executorStatus.tone}>{executorStatus.label}</Badge> : null}
-        {c.wip ? <Badge tone="info">進行中</Badge> : null}
-        {c.codex ? <Badge tone="accent">Codex</Badge> : null}
-        {c.due ? <Badge tone={overdue ? "bad" : "muted"}>期日 {c.due}</Badge> : null}
-        {!c.id && c.layer === "backlog" ? <Badge tone="warn">ID なし</Badge> : null}
+      <div className="flex flex-wrap items-center gap-1.5">
+        {c.kind ? <StatusBadge tone={c.kind === "不具合" ? "bad" : "neutral"}>{c.kind}</StatusBadge> : null}
+        {executorStatus ? <StatusBadge tone={executorStatus.tone}>{executorStatus.label}</StatusBadge> : null}
+        {c.wip ? <StatusBadge tone="info">進行中</StatusBadge> : null}
+        {c.codex ? <StatusBadge tone="info">Codex</StatusBadge> : null}
+        {overdue ? <StatusBadge tone="bad">期日超過</StatusBadge> : null}
+        {!c.id && c.layer === "backlog" ? <StatusBadge tone="warn">ID なし</StatusBadge> : null}
       </div>
       {c.body ? (
-        <details className="mt-2">
-          <summary className="cursor-pointer text-[11px] text-console-muted hover:text-console-fg">
-            詳細
-          </summary>
-          {c.verify ? (
-            <div className="mt-1.5 font-mono text-[11px] text-console-info">検証: {c.verify}</div>
-          ) : null}
-          <pre className="mt-1.5 max-h-96 overflow-auto whitespace-pre-wrap rounded bg-console-bg p-2 text-[12px] leading-relaxed text-console-fg">
-            {c.body}
-          </pre>
-        </details>
+        <Collapsible className="flex flex-col gap-1.5">
+          <CollapsibleTrigger render={<Button variant="ghost" size="sm" className="self-start" />}>詳細</CollapsibleTrigger>
+          <CollapsibleContent className="flex flex-col gap-1.5">
+            {c.verify ? <div className="font-mono text-xs text-muted-foreground">検証: {c.verify}</div> : null}
+            <pre className="max-h-96 overflow-auto whitespace-pre-wrap rounded bg-muted p-2 font-mono text-xs leading-relaxed text-foreground">{c.body}</pre>
+          </CollapsibleContent>
+        </Collapsible>
       ) : null}
-      </CardContent>
-    </UiCard>
+    </div>
   );
 }
 
-function ImprovementsTable({ rows, abs, today }: { rows: ImprovementRow[]; abs: string; today: string }) {
+function ImprovementsGrid({ rows, abs, today }: { rows: ImprovementRow[]; abs: string; today: string }) {
   const groups = [...new Set(rows.map((r) => r.tierLabel))];
   return (
-    <div className="space-y-4">
-      {groups.map((g) => (
-        <div key={g} className="space-y-1">
-          <h3 className="text-[13px] font-medium text-console-muted">
-            {g} ({rows.filter((r) => r.tierLabel === g).length})
-          </h3>
-          <DataTable columns={["ID", "タイトル", "Status", "Due", "Owner", "Metric"]}>
-            {rows
-              .filter((r) => r.tierLabel === g)
-              .map((r) => (
-                <Row key={r.id}>
-                  <Cell nowrap>
-                    <a
-                      href={editorHref(abs, r.line)}
-                      className="font-mono text-[11px] text-console-accent hover:underline"
-                    >
-                      {r.id}
-                    </a>
-                  </Cell>
-                  <Cell>{r.title}</Cell>
-                  <Cell nowrap>
-                    <Badge tone={r.status === "in-progress" ? "info" : "muted"}>{r.status}</Badge>
-                  </Cell>
-                  <Cell nowrap className={r.due && r.due < today ? "text-console-bad" : "text-muted-foreground"}>
-                    {r.due}
-                  </Cell>
-                  <Cell nowrap muted>{r.owner}</Cell>
-                  <Cell nowrap muted>{r.metric}</Cell>
-                </Row>
-              ))}
-          </DataTable>
-        </div>
-      ))}
-    </div>
+    <DataGrid
+      columns={[
+        { id: "id", header: "ID", sortable: true, nowrap: true },
+        { id: "title", header: "タイトル", sortable: true },
+        { id: "tier", header: "区分", sortable: true, nowrap: true },
+        { id: "status", header: "Status", sortable: true, nowrap: true },
+        { id: "due", header: "Due", sortable: true, nowrap: true },
+        { id: "owner", header: "Owner", sortable: true, nowrap: true },
+        { id: "metric", header: "Metric", nowrap: true },
+      ]}
+      rows={rows.map((r) => {
+        const overdue = !!r.due && r.due < today;
+        return {
+          id: r.id,
+          cells: [
+            <a key="i" href={editorHref(abs, r.line)} className={`${LINK} font-mono text-xs`}>
+              {r.id}
+            </a>,
+            r.title,
+            <span key="t" className="text-muted-foreground">
+              {r.tierLabel}
+            </span>,
+            <StatusBadge key="s" tone={r.status === "in-progress" ? "info" : "neutral"}>
+              {r.status}
+            </StatusBadge>,
+            <span key="d" className={overdue ? "text-console-bad" : "text-muted-foreground"}>
+              {r.due}
+            </span>,
+            <span key="o" className="text-muted-foreground">
+              {r.owner}
+            </span>,
+            <span key="m" className="text-muted-foreground">
+              {r.metric}
+            </span>,
+          ],
+          sort: [r.id, r.title, r.tierLabel, r.status, r.due || null, r.owner, null],
+          search: `${r.id} ${r.title} ${r.owner} ${r.metric}`,
+          facet: r.tierLabel,
+          tone: overdue ? ("bad" as const) : undefined,
+        };
+      })}
+      facets={groups.map((g) => ({ value: g, label: g }))}
+      searchPlaceholder="ID・タイトル・Owner で絞り込み"
+    />
   );
 }
 
@@ -224,10 +207,10 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
 
   if (board.error) {
     return (
-      <div className="space-y-3">
-        <h1 className="text-2xl font-bold">TODO</h1>
-        <p className="text-sm text-console-bad">読み取り失敗: {board.error}</p>
-      </div>
+      <>
+        <PageHeading title="TODO ボード" source=".claude/todo/" />
+        <ErrorNote error={board.error} />
+      </>
     );
   }
 
@@ -256,96 +239,65 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
     k: kind ?? undefined,
   };
 
-  // 優先度を選んでいなければ tier ごとに見出しを立てる (1 グループなら見出しは要らない)
-  const groups = TIERS.filter((t) => tierCounts.has(t.key) && (!tier || tier === t.key));
   // 語彙の宣言順で並べる (件数順にすると押すたびに行が動く)
   const kindKeys = board.kinds.filter((k) => kindCounts.has(k) || kind === k);
+  const overdueCount = items.filter((c) => c.due !== null && c.due < today).length;
+  const tierLabel = new Map(TIERS.map((t) => [t.key, t]));
+  // 優先度の宣言順 (高 → 未設定) に並べる。同じ優先度の中は台帳の順のまま
+  const byTierOrder = (cs: TodoCard[]) => [...cs].sort((x, y) => (TIER_ORDER.get(tierKey(x)) ?? 0) - (TIER_ORDER.get(tierKey(y)) ?? 0));
 
   return (
-    <div className="space-y-5">
-      <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-console-fg">TODO ボード</h1>
-        <p className="text-sm text-console-muted">
-          真実源: <code className="rounded bg-muted px-1">.claude/todo/</code> (構文の正典:
-          todo-standards.md・doboku-note と統一) — 読み取り専用。編集はタイトルのリンクからエディタで開く。
-        </p>
-      </header>
+    <>
+      <PageHeading title="TODO ボード" source=".claude/todo/ (構文の正典: todo-standards.md・doboku-note と統一)" accessLabel="読み取り専用。編集はタイトルのリンクからエディタで開く" />
 
-      <section
-        aria-labelledby="todo-layer-heading"
-        className="flex flex-wrap items-start gap-3 border-b border-console-border pb-3"
+      <Section
+        title={LAYER_TITLES[layer]}
+        count={`${layerMeta?.count ?? 0} 件`}
+        note={
+          layerMeta ? (
+            <a href={editorHref(layerMeta.abs, 1)} className={LINK} title={layerMeta.rel}>
+              {layerMeta.file} を開く{layerMeta.updated ? ` (更新 ${layerMeta.updated})` : ""}
+            </a>
+          ) : undefined
+        }
       >
-        <div className="min-w-0 flex-1">
-          <h2 id="todo-layer-heading" className="text-base font-semibold text-console-fg">
-            {LAYER_TITLES[layer]}
-            <span className="ml-2 font-mono text-[11px] font-normal text-console-muted">
-              {layerMeta?.count ?? 0} 件
-            </span>
-          </h2>
-          <p className="mt-0.5 text-[11px] text-console-muted">{LAYER_HINTS[layer]}</p>
-        </div>
-        {layerMeta ? (
-          <a
-            href={editorHref(layerMeta.abs, 1)}
-            className="text-[11px] text-console-muted hover:text-console-accent"
-            title={layerMeta.rel}
-          >
-            {layerMeta.file} を開く{layerMeta.updated ? ` (更新 ${layerMeta.updated})` : ""}
-          </a>
-        ) : null}
-      </section>
+        <p className="text-xs text-muted-foreground">{LAYER_HINTS[layer]}</p>
+      </Section>
 
       {layer === "improvements" ? (
         <>
-          <p className="text-[11px] text-console-muted">
-            improvement-triage の排他 write。効果測定項目の 6 列テーブル (v3-unified カードの対象外)。
-          </p>
-          <ImprovementsTable rows={board.improvements} abs={layerMeta?.abs ?? ""} today={today} />
+          <Grid min="sm">
+            <StatCard label="施策" icon={<ListTodoIcon />} value={board.improvements.length} />
+            <StatCard
+              label="期日超過"
+              icon={<CalendarClockIcon />}
+              value={board.improvements.filter((r) => r.due && r.due < today).length}
+              tone={board.improvements.some((r) => r.due && r.due < today) ? "bad" : "good"}
+            />
+          </Grid>
+          <p className="text-xs text-muted-foreground">improvement-triage の排他 write。効果測定項目の 6 列テーブル (v3-unified カードの対象外)。</p>
+          <ImprovementsGrid rows={board.improvements} abs={layerMeta?.abs ?? ""} today={today} />
         </>
       ) : (
-        <div className="flex flex-col gap-5 md:flex-row">
-          {/* 本文: tier グループのカード */}
-          <div className="min-w-0 flex-1 space-y-5">
-            {items.length === 0 ? (
-              <p className="text-sm text-console-muted">該当するカードはありません。</p>
-            ) : (
-              groups.map((g) => (
-                <section key={g.key} className="space-y-2">
-                  {groups.length > 1 ? (
-                    <h3 className="flex items-center gap-2 text-[13px] font-medium text-console-fg">
-                      <span className={`h-2 w-2 rounded-full ${g.dot}`} />
-                      {g.label}
-                      <span className="font-mono text-[11px] text-console-muted">
-                        {tierCounts.get(g.key)}
-                      </span>
-                    </h3>
-                  ) : null}
-                  <div className="space-y-2">
-                    {items
-                      .filter((c) => tierKey(c) === g.key)
-                      .map((c) => (
-                        <TodoCardItem key={c.path + c.line} c={c} today={today} />
-                      ))}
-                  </div>
-                </section>
-              ))
-            )}
-          </div>
+        <>
+          <Grid min="sm">
+            <StatCard label="表示中のカード" icon={<ListTodoIcon />} value={items.length} sub={`この台帳 ${layerCards.length} 件`} />
+            <StatCard
+              label="優先度 高"
+              icon={<CircleAlertIcon />}
+              value={items.filter((c) => c.tier === "high").length}
+              tone={items.some((c) => c.tier === "high") ? "warn" : "neutral"}
+            />
+            <StatCard label="期日超過" icon={<CalendarClockIcon />} value={overdueCount} tone={overdueCount ? "bad" : "good"} />
+            <StatCard
+              label="不具合"
+              icon={<BugIcon />}
+              value={items.filter((c) => c.kind === "不具合").length}
+              tone={items.some((c) => c.kind === "不具合") ? "bad" : "good"}
+            />
+          </Grid>
 
-          {/* 右レール: 読者の整理に使う優先度・種類だけを表示する */}
-          <aside className="w-full shrink-0 space-y-4 md:w-52">
-            <div className="flex items-center justify-between px-2">
-              <span className="text-[11px] font-bold text-console-muted">絞り込み</span>
-              {tier || kind ? (
-                <Link
-                  href={href({}, { f: now.f })}
-                  className="text-[11px] text-console-accent hover:underline"
-                >
-                  すべて解除
-                </Link>
-              ) : null}
-            </div>
-
+          <div className="flex flex-col gap-2">
             <Facet
               title="優先度"
               param="t"
@@ -356,10 +308,8 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                 key: t.key,
                 label: t.label,
                 count: tierCounts.get(t.key) ?? 0,
-                dot: t.dot,
               }))}
             />
-
             {faceted ? (
               <Facet
                 title="種類"
@@ -370,9 +320,47 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                 items={kindKeys.map((v) => ({ key: v, label: v, count: kindCounts.get(v) ?? 0 }))}
               />
             ) : null}
-          </aside>
-        </div>
+            {tier || kind ? (
+              <Link href={href({}, { f: now.f })} className={`${LINK} self-start text-xs`}>
+                すべて解除
+              </Link>
+            ) : null}
+          </div>
+
+          <DataGrid
+            columns={[
+              { id: "tier", header: "優先度", sortable: true, nowrap: true },
+              { id: "id", header: "ID", sortable: true, nowrap: true },
+              { id: "title", header: "タスク" },
+              { id: "due", header: "期日", sortable: true, nowrap: true },
+            ]}
+            rows={byTierOrder(items).map((c) => {
+              const t = tierLabel.get(tierKey(c));
+              const overdue = c.due !== null && c.due < today;
+              return {
+                id: c.path + c.line,
+                cells: [
+                  <StatusBadge key="t" tone={t?.tone ?? "neutral"}>
+                    {t?.label ?? "未設定"}
+                  </StatusBadge>,
+                  <span key="i" className="font-mono text-xs text-muted-foreground">
+                    {c.id ?? "—"}
+                  </span>,
+                  <TodoCardCell key="c" c={c} today={today} />,
+                  <span key="d" className={overdue ? "text-console-bad" : "text-muted-foreground"}>
+                    {c.due ?? "—"}
+                  </span>,
+                ],
+                sort: [TIER_ORDER.get(tierKey(c)) ?? null, c.id, null, c.due],
+                search: `${c.id ?? ""} ${c.title} ${c.kind ?? ""}`,
+                tone: overdue ? ("bad" as const) : undefined,
+              };
+            })}
+            searchPlaceholder="ID・タスク名で絞り込み"
+            empty="該当するカードはありません。"
+          />
+        </>
       )}
-    </div>
+    </>
   );
 }

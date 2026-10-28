@@ -39,13 +39,13 @@ export default async function Page({
   const destination = mediaViewRedirect(query);
   if (destination) redirect(destination);
   return (
-    <div className="space-y-6">
+    <>
       <PageHeading
         accessLabel="改善方針・画像候補を保存できます"
         title="画像ライブラリ"
         source="R2 / 画像・投稿台帳"
       >
-        <p className="text-sm text-console-muted">
+        <p className="text-sm text-muted-foreground">
           OGP・リンクカード・ブログSVG・note・SNS・共通素材の実画像、元データ、使用先、改善方針をここで管理します。
         </p>
       </PageHeading>
@@ -66,6 +66,6 @@ export default async function Page({
         initialPurpose={query.purpose}
         initialSelection={query.selection}
       />
-    </div>
+    </>
   );
 }

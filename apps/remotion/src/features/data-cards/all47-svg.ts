@@ -1,5 +1,6 @@
 import { PREF_CAPITAL_COORDS } from '../../../../../packages/migration-flow/src/lib/pref-capitals';
 import { CHANGE_TILE_LAYOUT } from './tile-layout';
+import { prefectureShortName } from '@stats47/area/short-name';
 
 export interface All47Entry {
   areaCode: string;
@@ -59,9 +60,7 @@ export function renderAll47TileSvg(
     const color = bin >= 3 ? '#FFFFFF' : '#183B48';
     const name = opts.capitalCities
       ? (r.areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name)
-      : r.areaName === '北海道'
-        ? r.areaName
-        : r.areaName.replace(/[都府県]$/, '');
+      : prefectureShortName(r.areaName);
     return `<g transform="translate(${60 + x * 80},${302 + y * 80})" data-area="${r.areaCode}" data-value="${r.value}"><rect width="75" height="75" rx="8" fill="${colors[bin]}"/>${text(name, 5, 28, 21, 65, color)}${text(fmt(r.value), 5, 57, 23, 65, color)}</g>`;
   }).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350"><rect width="1080" height="1350" fill="#F8F5EC"/><g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif">

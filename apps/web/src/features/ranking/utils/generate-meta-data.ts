@@ -13,6 +13,7 @@
  *   - JSON-LD `dateModified` (generate-structured-data) と二重に出すことで Google freshness 評価強化
  */
 
+import { hrefFor } from "@stats47/data-configs/content/href";
 import {
     type RankingItem,
 } from "@stats47/ranking";
@@ -39,7 +40,7 @@ export function generateRankingPageMetaData({
 
   const title = rankingItem.seoTitle ?? rankingItem.title;
   const description = rankingItem.seoDescription ?? "";
-  const path = `/ranking/${rankingItem.rankingKey}`;
+  const path = hrefFor("ranking", { rankingKey: rankingItem.rankingKey });
   const ogImagePath = ogpImageUrl(ogpImageKeys.ranking(rankingItem.rankingKey));
 
   return {

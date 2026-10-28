@@ -30,7 +30,9 @@ export function readWebInventory(root) {
   indexCache={stamp,value};return value;
 }
 export function writeWebInventory(root,result){
-  const file=path.join(root,WEB_INVENTORY),lock=file+'.lock',fd=fs.openSync(lock,'wx'),directory=path.join(root,WEB_PARTS);
+  const file=path.join(root,WEB_INVENTORY);
+  fs.mkdirSync(path.dirname(file),{recursive:true});
+  const lock=file+'.lock',fd=fs.openSync(lock,'wx'),directory=path.join(root,WEB_PARTS);
   try{
     fs.mkdirSync(directory,{recursive:true});
     const groups=new Map(),group=id=>{const key=digest(id).slice(0,2);if(!groups.has(key))groups.set(key,{items:[],images:[]});return groups.get(key);};

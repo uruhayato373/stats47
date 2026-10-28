@@ -445,7 +445,7 @@ OGP・カード・note カバーとは別の種別で、**ページ本文の先�
 | 改善                           | プロンプトは `page-heroes.ts` の `HeroImageAsset.prompt` を直す (記事ごとの自由入力プロンプトは持たせない = OGP と同じ方針)                                                                             |
 
 **監査・ギャラリー・agent 所有は現時点で意図的に未整備** (hero は実質 1 枚のため過剰投資を避ける、`最小SSOT整備` 判断)。
-hero が数枚に増えたら: (a) admin `/assets` に「ページ hero」タブ追加 (`ASSET_TABS` + collector)、
+hero が数枚に増えたら: (a) admin `/ops/image-library` に「ページ hero」の分類を追加 (旧 `/assets` のタブは 2026-10-27 に廃止)、
 (b) `/audit-ogp-images` に欠落検知を配線、(c) `image-prompt-curator` の守備範囲に page hero を追加、を行う。
 それまでは page-heroes.ts の git TS SSOT + プロベナンスで管理する (欠落検知は type-check + 手動確認)。
 
