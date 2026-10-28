@@ -98,3 +98,17 @@
   --info: 213 94% 68%;
   --info-soft: 226 57% 21%;
 }
+
+/* v3 の行の高さ (固定の rem) を保つ。v4 既定は比率 (calc(1.75 / 1.25) 等) のため、
+   text-xl の中の text-[11px] のように子へ継承される行の高さが縮み、カードの高さが変わる。
+   公開サイト・管理画面・動画アプリが同じ値を使う (2026-10-28 に各 globals.css から移した) */
+@theme {
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+}

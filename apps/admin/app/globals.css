@@ -11,17 +11,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* v3 互換: v4 の text-* は行高を単位なしの比率で持ち、子孫へ比率として継承される。v3 と同じ rem 値に戻す (公開サイトと同じ) */
-@theme {
-  --text-xs--line-height: 1rem;
-  --text-sm--line-height: 1.25rem;
-  --text-base--line-height: 1.5rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl--line-height: 1.75rem;
-  --text-2xl--line-height: 2rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl--line-height: 2.5rem;
-}
 
 @theme inline {
   /* Geist。日本語は Geist に無いので OS のゴシックで補う */

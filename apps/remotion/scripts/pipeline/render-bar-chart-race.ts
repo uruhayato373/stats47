@@ -28,6 +28,7 @@ import {
 import { execSync } from "child_process";
 import fs from "fs/promises";
 import path from "path";
+import { makeWebpackOverride } from "../../src/webpack-override";
 
 // ---------------------------------------------------------
 // 設定
@@ -264,13 +265,7 @@ async function main() {
   const srcPath = path.join(projectRoot, "src");
   const bundleUrl = await bundle({
     entryPoint: path.join(projectRoot, "src", "index.ts"),
-    webpackOverride: (config) => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: { ...(config.resolve?.alias ?? {}), "@": srcPath },
-      },
-    }),
+    webpackOverride: makeWebpackOverride(srcPath),
   });
   console.log("✅ Bundle completed\n");
 

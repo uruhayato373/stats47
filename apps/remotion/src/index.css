@@ -1,0 +1,42 @@
+/* 公開サイト・管理画面と同じテーマを読み、動画と画像でも @stats47/components の部品 (StatTile・ChartPanel など) を
+   同じ見た目で使えるようにする (2026-10-28 オーナー決定「可能な限り集約」)。
+   Tailwind の初期化 (preflight) は読まない。既存の動画・画像は inline style で描いていて、preflight が見出し・段落の
+   既定の余白を消すと文字の位置がずれる (2026-10-28 に代表 29 枚を描き比べ、23 枚が変わった)。
+   初期化は共有部品 (data-slot を持つ要素) の中だけに効かせる。 */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@import "@stats47/ui-theme/base.css";
+@import "@stats47/ui-theme/tokens-hsl.css";
+@import "@stats47/ui-theme/theme.css";
+
+/* 動画アプリと共有部品のクラスを拾う (このファイルからの相対パス) */
+@source "./";
+@source "../../../packages/components/src";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :where([data-slot]),
+  :where([data-slot]) *,
+  :where([data-slot]) ::before,
+  :where([data-slot]) ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+    /* 線の色は公開サイトの globals.css と同じ (v3 互換の gray-200) */
+    border-color: var(--color-gray-200, currentcolor);
+  }
+  :where([data-slot]) {
+    font-family: var(--font-sans);
+  }
+  :where([data-slot]) :where(h1, h2, h3, h4, h5, h6) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  :where([data-slot]) :where(ol, ul) {
+    list-style: none;
+  }
+}

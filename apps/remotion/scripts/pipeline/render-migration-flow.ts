@@ -28,6 +28,7 @@ import { openBrowser, renderMedia, selectComposition } from "@remotion/renderer"
 import fs from "fs/promises";
 import path from "path";
 import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
+import { makeWebpackOverride } from "../../src/webpack-override";
 
 type Format = "landscape" | "portrait";
 
@@ -190,13 +191,7 @@ async function main() {
   try {
     bundleUrl = await bundle({
       entryPoint: path.join(srcPath, "index.ts"),
-      webpackOverride: (config) => ({
-        ...config,
-        resolve: {
-          ...config.resolve,
-          alias: { ...(config.resolve?.alias ?? {}), "@": srcPath },
-        },
-      }),
+      webpackOverride: makeWebpackOverride(srcPath),
     });
   } finally {
     await restoreBrokenSymlinks(stash);

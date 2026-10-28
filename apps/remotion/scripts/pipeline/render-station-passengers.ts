@@ -24,6 +24,7 @@ import {
 import fs from "fs/promises";
 import path from "path";
 import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
+import { makeWebpackOverride } from "../../src/webpack-override";
 
 type Format = "landscape" | "portrait" | "square";
 
@@ -82,13 +83,7 @@ async function main() {
   );
   const bundleUrl = await bundle({
     entryPoint: path.join(srcPath, "index.ts"),
-    webpackOverride: (config) => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: { ...(config.resolve?.alias ?? {}), "@": srcPath },
-      },
-    }),
+    webpackOverride: makeWebpackOverride(srcPath),
   });
   console.log("✅ Bundle completed\n");
 

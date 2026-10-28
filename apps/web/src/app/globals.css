@@ -8,18 +8,6 @@
 
 @config '../../tailwind.config.ts';
 
-/* v3 の行の高さ (固定の rem) を保つ。v4 既定は比率 (calc(1.75 / 1.25) 等) のため、
-   text-xl の中の text-[11px] のように子へ継承される行の高さが縮み、カードの高さが変わる */
-@theme {
-  --text-xs--line-height: 1rem;
-  --text-sm--line-height: 1.25rem;
-  --text-base--line-height: 1.5rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl--line-height: 1.75rem;
-  --text-2xl--line-height: 2rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl--line-height: 2.5rem;
-}
 
 /* v3 の theme.containers (30 / 48 / 64rem) を保つ。v4 は @sm/@md/@lg と max-w-sm/md/lg が
    --container-* を共有するため、テーマ値ではなく variant を上書きして max-w-* を v3 と同じ既定値に残す */

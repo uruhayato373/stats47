@@ -10,6 +10,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { makeWebpackOverride } from '../../src/webpack-override';
 
 interface GeoEntry {
   rank: number;
@@ -269,13 +270,7 @@ async function main(): Promise<void> {
   const srcPath = path.join(remotionRoot, 'src');
   const bundleUrl = await bundle({
     entryPoint: path.join(srcPath, 'index.ts'),
-    webpackOverride: (config) => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: { ...(config.resolve?.alias ?? {}), '@': srcPath },
-      },
-    }),
+    webpackOverride: makeWebpackOverride(srcPath),
   });
   const browser = await openBrowser('chrome');
 
