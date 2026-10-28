@@ -193,7 +193,7 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 | トリガー | 必要 snapshot |
 |---|---|
 | `/page-data-batch` 完了 | master + ai-content + ranking-values |
-| **計算型 metric の分子・分母を更新** (例 `disposable-income-worker-households`) | **calculated-stats → ranking-values** (この順)。分子だけ更新しても計算型の正典 `app/stats/{計算型key}` は追従しないため。`data-refresh.yml` は run.sh をフル実行するので自動で入る |
+| **計算型 metric の分子・分母を更新** (例 `disposable-income-worker-households`) | **calculated-stats → ranking-values** (この順)。分子だけ更新しても計算型の正典 `app/stats/{計算型key}` は追従しないため。`data-refresh.yml` は計算型を含む指定を `auto` で全範囲 (run.sh) にするので自動で入る |
 | `/sync-metrics-cache` 完了 (新規 metric 追加後) | master + ranking-values |
 | 市区町村観測値 / catalog 更新 | municipality-ranking |
 | ブログ記事の公開・改稿 | blog |
