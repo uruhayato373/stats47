@@ -467,7 +467,7 @@ export const DATASETS = [
   d("improvement.log-archives", "data/improvement/{name}/archive/{**}", "ledger", "strategy", "data", "改善ログの過去分"),
   d("improvement.closed-waves", "data/improvement/gsc-improvement/closed-waves.json", "ledger", "strategy", "data", "効果判定を判定不能のまま終了したブログ是正 wave (オーナー判断・理由付き)。閾値エンジンの対象から外す", { schema: "config/schema/improvement.closed-waves.schema.json" }),
   d("improvement.budgets", ".claude/config/budgets/{name}/budgets{name}", "config", "site", "agent-config", "計測値の警告閾値"),
-  d("gsc.snapshots", "data/gsc/snapshots/{week}/{**}", "series", "site", "data", "GSC の週次生 CSV", { retain: "analytics-gsc" }),
+  d("gsc.snapshots", "data/gsc/snapshots/{week}/{**}", "series", "site", "data", "GSC の週次生 CSV。長期の需要推移に使うため削除しない (2026-10-29 オーナー判断)"),
   d("ga4.snapshots", "data/ga4/snapshots/{week}/{**}", "series", "site", "data", "GA4 の週次生 CSV", { retain: "analytics-ga4" }),
   d("adsense.snapshots", "data/adsense/snapshots/{week}/{**}", "series", "affiliate", "data", "AdSense の週次生 CSV", { retain: "analytics-adsense" }),
   d("cloudflare.cost-snapshots", "data/cloudflare/{name}-snapshots/{name}", "series", "ops", "data", "Cloudflare の月次・週次コストの snapshot"),
