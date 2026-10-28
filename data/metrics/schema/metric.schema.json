@@ -16,6 +16,9 @@
     "note": {
       "type": "string"
     },
+    "absentValueReason": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     },
