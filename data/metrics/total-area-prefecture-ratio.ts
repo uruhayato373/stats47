@@ -19,7 +19,7 @@ export const totalAreaPrefectureRatio: MetricConfig = {
   ],
   "years": {
     "from": 2023,
-    "to": 2023,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

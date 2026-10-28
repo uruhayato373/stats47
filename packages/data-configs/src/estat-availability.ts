@@ -219,6 +219,40 @@ export interface ResolvedLedgerYears {
   removed: number[];
 }
 
+/** 市区町村の新しい年を足す下限: 設定の最新年と比べて、値のある市区町村がこの割合以上あること。 */
+export const CITY_LEDGER_MIN_COVERAGE = 0.9;
+
+/**
+ * 県の値を持たない (市区町村だけの) metric の years を、市区町村の台帳から決める (2026-10-28 MUNI-YEAR-FRESHNESS-AUDIT-01)。
+ *
+ * 県の値で years を決める規則 (resolveLedgerYears) は市区町村だけの metric に届かず、財政力指数などが
+ * e-Stat に新しい年があっても止まっていた。市区町村は合併でコードが変わり「全市区町村の年」が定まらないので、
+ * 全数ではなく「設定の最新年と比べて値のある市区町村が CITY_LEDGER_MIN_COVERAGE 以上ある、それより新しい年」だけを足す。
+ * 古い年は足さず、年を外すこともしない (外す判断は人が yearExclusions に書く)。
+ */
+export function resolveCityLedgerYears(params: {
+  configYears: readonly number[];
+  ledgerYears: Readonly<Record<string, number>>;
+  excludedYears?: readonly number[];
+  minCoverage?: number;
+}): ResolvedLedgerYears {
+  const { configYears, ledgerYears } = params;
+  const excluded = new Set(params.excludedYears ?? []);
+  const minCoverage = params.minCoverage ?? CITY_LEDGER_MIN_COVERAGE;
+  const latest = Math.max(...configYears);
+  const baseline = ledgerYears[String(latest)] ?? 0;
+  const years = new Set(configYears);
+  if (baseline > 0) {
+    for (const [year, count] of Object.entries(ledgerYears)) {
+      const y = Number(year);
+      if (y > latest && !excluded.has(y) && count >= baseline * minCoverage) years.add(y);
+    }
+  }
+  const sorted = [...years].sort((a, b) => a - b);
+  const before = new Set(configYears);
+  return { years: sorted, added: sorted.filter((year) => !before.has(year)), removed: [] };
+}
+
 /**
  * metric の years を台帳から決める。sync-estat-years.ts と、その --check が使う唯一の規則。
  * - 全県の値がある年は、除外されていなければ入れる

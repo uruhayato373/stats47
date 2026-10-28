@@ -19,7 +19,7 @@ export const fiscalStrengthIndex: MetricConfig = {
   ],
   "years": {
     "from": 1980,
-    "to": 2021,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "visualization": {

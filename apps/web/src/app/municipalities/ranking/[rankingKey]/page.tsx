@@ -24,6 +24,7 @@ import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
   isMunicipalityAiContentCurrent,
+  lacksSpecialWards,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
@@ -455,6 +456,7 @@ export default async function MunicipalityRankingPage({
         surface="municipality_source"
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        {lacksSpecialWards(snapshot.values) && <p>東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。</p>}
         <p>
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>

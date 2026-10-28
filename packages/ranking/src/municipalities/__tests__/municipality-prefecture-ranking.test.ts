@@ -4,6 +4,8 @@ import {
   buildMunicipalityPrefectureRanking,
   buildMunicipalityPrefectureRankingMeta,
   buildMunicipalityPrefectureRankingSummary,
+  isSpecialWardRow,
+  lacksSpecialWards,
   municipalityPrefectureAreaLabel,
 } from '../municipality-prefecture-ranking';
 
@@ -59,6 +61,22 @@ describe('buildMunicipalityPrefectureRanking', () => {
   });
 });
 
+describe('特別区の有無', () => {
+  it('東京都の「〜区」だけを特別区とみなす (他県の「〜区」は配信値に無いが、あっても数えない)', () => {
+    expect(isSpecialWardRow({ prefectureCode: '13000', areaName: '東京都 千代田区' })).toBe(true);
+    expect(isSpecialWardRow({ prefectureCode: '13000', areaName: '東京都 八王子市' })).toBe(false);
+    expect(isSpecialWardRow({ prefectureCode: '14000', areaName: '神奈川県 横浜市 西区' })).toBe(false);
+  });
+
+  it('東京都の市町村に値があり特別区が 1 つも無い指標だけ、区が欠けていると判定する', () => {
+    const cities = [row('13201', '東京都 八王子市', '13000', 1, 1)];
+    expect(lacksSpecialWards(cities)).toBe(true);
+    expect(lacksSpecialWards([...cities, row('13101', '東京都 千代田区', '13000', 2, 2)])).toBe(false);
+    // 東京都に 1 行も無い指標 (湖沼の面積など) は区の欠けとして扱わない
+    expect(lacksSpecialWards([row('23211', '愛知県 豊田市', '23000', 1, 1)])).toBe(false);
+  });
+});
+
 describe('buildMunicipalityPrefectureRankingSummary', () => {
   it('1位・最下位・中央値・全国上位の数を配信値から組む', () => {
     const ranking = buildMunicipalityPrefectureRanking(VALUES, '23000')!;
@@ -86,9 +104,16 @@ describe('buildMunicipalityPrefectureRankingSummary', () => {
 });
 
 describe('県名×市区町村ランキングの title', () => {
-  it('東京都だけ「市区町村」、他は検索語の多い「市町村」と書く', () => {
-    expect(municipalityPrefectureAreaLabel('東京都')).toBe('市区町村');
-    expect(municipalityPrefectureAreaLabel('愛知県')).toBe('市町村');
+  it('県内に特別区の行があるときだけ「市区町村」、無ければ検索語の多い「市町村」と書く', () => {
+    expect(municipalityPrefectureAreaLabel(true)).toBe('市区町村');
+    expect(municipalityPrefectureAreaLabel(false)).toBe('市町村');
+  });
+
+  it('東京都でも特別区に値の無い指標は「市町村」と書く (財政力指数の東京都で「39市区町村」と出ていた)', () => {
+    const fiscal = [row('13201', '東京都 八王子市', '13000', 0.9, 1), row('13202', '東京都 立川市', '13000', 1.1, 2)];
+    expect(buildMunicipalityPrefectureRanking(fiscal, '13000')?.hasSpecialWards).toBe(false);
+    const income = [row('13103', '東京都 港区', '13000', 13968, 1), ...fiscal];
+    expect(buildMunicipalityPrefectureRanking(income, '13000')?.hasSpecialWards).toBe(true);
   });
 
   it('title に県名・年・県内 1 位を入れ、全国版の title と別にする', () => {

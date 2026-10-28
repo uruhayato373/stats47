@@ -27,6 +27,8 @@ export interface MunicipalityPrefectureRankingRow extends MunicipalityRankingVal
 export interface MunicipalityPrefectureRanking {
   prefectureCode: string;
   rows: MunicipalityPrefectureRankingRow[];
+  /** 県内の行に東京の特別区があるか (表記を「市区町村」にするか「市町村」にするか) */
+  hasSpecialWards: boolean;
   /** 県内の下側中央値 (全国版の「分布の要点」と同じ定義) */
   median: number;
   nationalMedian: number;
@@ -34,6 +36,25 @@ export interface MunicipalityPrefectureRanking {
 }
 
 const NATIONAL_TOP_RANK = 100;
+const TOKYO_PREFECTURE_CODE = '13000';
+
+/**
+ * 東京の特別区の行か。配信値の市区町村は政令指定都市の行政区を含まないので (entity policy が除外)、
+ * 東京都の「〜区」は特別区だけ (packages/area/src/municipalities/entity-policy.ts と同じ判定)。
+ */
+export function isSpecialWardRow(row: Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaName'>): boolean {
+  return row.prefectureCode === TOKYO_PREFECTURE_CODE && row.areaName.trim().endsWith('区');
+}
+
+/**
+ * 東京都の市町村には値があるのに、特別区が 1 つも無いか (MUNI-WARD-GAP-DISPLAY-01)。
+ * 財政力指数・ごみの排出量などは、元の統計 (社会・人口統計体系) で区の値が「-」(データが得られないもの) になっている
+ * (2026-10-28 に e-Stat で確認)。このときはページに理由を書く。東京都に 1 行も無い指標 (湖沼の面積など) は対象外。
+ */
+export function lacksSpecialWards(values: readonly Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaName'>[]): boolean {
+  const tokyo = values.filter((row) => row.prefectureCode === TOKYO_PREFECTURE_CODE);
+  return tokyo.length > 0 && !tokyo.some(isSpecialWardRow);
+}
 
 function lowerMedian(values: readonly number[]): number {
   const sorted = [...values].sort((a, b) => a - b);
@@ -55,15 +76,19 @@ export function buildMunicipalityPrefectureRanking(
   return {
     prefectureCode,
     rows,
+    hasSpecialWards: rows.some(isSpecialWardRow),
     median: lowerMedian(rows.map((row) => row.value)),
     nationalMedian: lowerMedian(values.map((row) => row.value)),
     nationalCount: values.length,
   };
 }
 
-/** Tokyo だけ特別区を含むので「市区町村」、他は検索語の多い「市町村」と書く。 */
-export function municipalityPrefectureAreaLabel(prefectureName: string): string {
-  return prefectureName === '東京都' ? '市区町村' : '市町村';
+/**
+ * 県内に特別区の行があれば「市区町村」、無ければ検索語の多い「市町村」と書く。
+ * 東京都でも特別区に値の無い指標 (財政力指数など) は「市町村」になる (2026-10-28 に「東京都なら市区町村」の決め方を改めた)。
+ */
+export function municipalityPrefectureAreaLabel(hasSpecialWards: boolean): string {
+  return hasSpecialWards ? '市区町村' : '市町村';
 }
 
 function formatValue(value: number, unit: string): string {
@@ -84,7 +109,7 @@ export function buildMunicipalityPrefectureRankingSummary(
   options: { prefectureName: string; unit: string; metricLabel: string }
 ): string[] {
   const { rows } = ranking;
-  const areaLabel = municipalityPrefectureAreaLabel(options.prefectureName);
+  const areaLabel = municipalityPrefectureAreaLabel(ranking.hasSpecialWards);
   const topRows = rows.filter((row) => row.prefectureRank === 1);
   const bottomRank = rows[rows.length - 1]!.prefectureRank;
   const bottomRows = rows.filter((row) => row.prefectureRank === bottomRank);
@@ -125,7 +150,7 @@ export function buildMunicipalityPrefectureRankingMeta(
   prefectureName: string
 ): PageMeta {
   const displayTitle = municipalityRankingDisplayTitle(item);
-  const areaLabel = municipalityPrefectureAreaLabel(prefectureName);
+  const areaLabel = municipalityPrefectureAreaLabel(ranking.hasSpecialWards);
   const heading = `${prefectureName}の${areaLabel}${displayTitle}ランキング【${values.yearName}】`;
   const leader = ranking.rows[0]!;
   const title = `${heading}｜1位 ${municipalityLeafName(leader.areaName)}（${formatValue(leader.value, values.unit)}）`;

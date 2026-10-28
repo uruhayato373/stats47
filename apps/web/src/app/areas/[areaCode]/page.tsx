@@ -55,6 +55,9 @@ const AREA_DATABOOK_TOC_ITEMS = [...AREA_DATABOOK_TEMPLATE.sections]
     href: `#databook-${section.sectionKey}`,
   }));
 
+/** 特別区を持つのは東京都だけ (カードの見出しの「市区町村 / 市町村」) */
+const TOKYO_AREA_CODE = '13000';
+
 /** 県内の市町村ランキング (県名×市区町村ランキング・MUNI-PREF-RANKING-ROUTE-01) への導線。 */
 const MUNICIPALITY_PREFECTURE_RANKING_LINKS = [...MUNICIPALITY_PREFECTURE_RANKING_KEYS].map(
   (rankingKey) => ({ rankingKey, label: getMetricConfig(rankingKey)?.title ?? rankingKey })
@@ -243,7 +246,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
               />
               <RelatedAreas areaCode={areaCode} />
               <RailLinksCard
-                title={`${profile.areaName}の${municipalityPrefectureAreaLabel(profile.areaName)}ランキング`}
+                title={`${profile.areaName}の${municipalityPrefectureAreaLabel(areaCode === TOKYO_AREA_CODE)}ランキング`}
                 items={MUNICIPALITY_PREFECTURE_RANKING_LINKS.map((link) => ({
                   id: link.rankingKey,
                   label: link.label,
