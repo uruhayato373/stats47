@@ -763,6 +763,41 @@ function jsxOpeningTag(text, start) {
   return text.slice(start);
 }
 
+/**
+ * 隙間を空けて子を並べる <div> (gap-N・space-y-N。gap-0 / gap-px は線の格子なので除く)。
+ * className は "…"・{`…`}・{cn(…)} の形を見る (テーマのチャートの並びはテンプレート文字列で組んでいた)。
+ */
+const SPACED_STACK_DIV = /<div\b[^>]*?\bclassName=(?:"([^"]*)"|\{\s*`([^`]*)`\s*\}|\{\s*cn\(([^)]*)\)\s*\})/g;
+const SPACED_STACK_CLASS = /(?<![\w-])(?:[\w-]+:)*(?:gap(?:-y)?-(?!0\b|px\b)[\d.]+|space-y-[\d.]+)\b/;
+const PANEL_TAG_NAMES = new Set(PANEL_COMPONENTS);
+
+/**
+ * text[openStart] の <div …> の直下の子のうち、パネルの部品の数。
+ * JSX の深さはタグだけで数え、{…} (map の中など) は深さに数えない。
+ * 型引数 (useState<string>) を拾わないよう、識別子・括弧の直後の < はタグとみなさない。
+ */
+function directPanelChildren(text, openStart) {
+  // 閉じタグ (</div>・</>) は直前が文字でもよい。開きタグ (<Name・<>) だけ型引数を除く
+  const tagPattern = /<(\/)([A-Za-z][\w.]*)?|(?<![\w)\]])<()([A-Za-z][\w.]*|(?=>))/g;
+  tagPattern.lastIndex = openStart + jsxOpeningTag(text, openStart).length;
+  let depth = 0;
+  let panels = 0;
+  for (let m = tagPattern.exec(text); m; m = tagPattern.exec(text)) {
+    const closing = m[1];
+    const name = m[2] ?? m[4] ?? '';
+    if (closing) {
+      if (depth === 0) return panels;
+      depth -= 1;
+      continue;
+    }
+    const tag = jsxOpeningTag(text, m.index);
+    tagPattern.lastIndex = m.index + tag.length;
+    if (depth === 0 && PANEL_TAG_NAMES.has(name)) panels += 1;
+    if (!tag.endsWith('/>')) depth += 1;
+  }
+  return panels;
+}
+
 /** 文字ごとの {…} の深さ (0 = 開始タグの属性の並び) */
 function topLevelMask(tag) {
   const depths = [];
@@ -809,6 +844,19 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
         line: `<${match[1]} ${prop[1]}="${size[0]}">`,
       });
     }
+  }
+  // パネルを 2 枚以上、隙間 (gap-N / space-y-N) を空けて並べる <div> は線の格子 (PanelGrid / PageSections) にする
+  for (const match of text.matchAll(SPACED_STACK_DIV)) {
+    if (!SPACED_STACK_CLASS.test(match[1] ?? match[2] ?? match[3] ?? '')) continue;
+    if (directPanelChildren(text, match.index) < 2) continue;
+    violations.push({
+      ruleId: 'panels-in-line-grid',
+      message:
+        'Lay out sibling panels with PanelGrid / PageSections (@/components/layout): panels share 1px lines (grid gap-px bg-border) instead of being spaced with gap-N / space-y-N.',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
   }
 }
 

@@ -4,8 +4,9 @@
   /* 根拠: assets/design-reference/shadcndashboard/2026-10-28/measurements の data-slot ごとの実測 (1440px)。 */
 
   /* MARK: Card */
+  /* 線の格子 (apps/web の PanelGrid) の中のパネルは線を持たない (見本は並べる親の 1px の隙間が線になる) */
   .cn-card {
-    @apply text-sm/relaxed;
+    @apply text-sm/relaxed in-data-[slot=panel-grid]:ring-0;
   }
 
   .cn-card-title {

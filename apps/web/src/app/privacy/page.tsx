@@ -30,6 +30,7 @@ import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
 import { ArticleShell, PageHeader } from "@/components/layout";
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 import { OPERATOR_PROFILE } from "@/config/operator-profile";
@@ -114,7 +115,7 @@ export default function PrivacyPage() {
       />
 
       {/* カードセクション */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <PanelGrid className="grid-cols-1 lg:grid-cols-2">
 
         {/* 1. 運営者情報 / 2. 個人情報の取得 — 2列 */}
         <LegalSection number="1" title="運営者情報">
@@ -403,7 +404,7 @@ export default function PrivacyPage() {
           </p>
         </LegalSection>
 
-      </div>
+      </PanelGrid>
 
       {/* フッター */}
       <footer className="text-xs text-muted-foreground border-t border-border pt-6 mt-8">

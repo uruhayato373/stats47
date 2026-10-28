@@ -27,6 +27,7 @@ import { metricDisplayName } from "@stats47/ranking";
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SurfaceCard } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
@@ -179,7 +180,7 @@ export function ThemeComparisonSection({
                   current.data.rankingItem.description ??
                   '値は同じ年次の都道府県で比較しています。指標の定義・対象・単位は出典で確認できます。'}
               </p>
-              <div className="grid min-w-0 items-start gap-3 @[640px]:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+              <PanelGrid className="@[640px]:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
                 <ChartPanel
                   id={`theme-${themeConfig.themeKey}-map`}
                   title={`${currentName}の分布`}
@@ -300,7 +301,7 @@ export function ThemeComparisonSection({
                     </Button>
                   )}
                 </ChartPanel>
-              </div>
+              </PanelGrid>
             </>
           ) : (
             <p role="status" className="py-8 text-sm text-muted-foreground">

@@ -18,6 +18,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { RailLinksCard } from '@/components/rail';
 
@@ -219,7 +220,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
           <div className="@container">
-            <div className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2">
+            <PanelGrid className="grid-cols-1 @min-[40rem]:grid-cols-2">
               <RailLinksCard
                 title={`${profile.areaName}をテーマから見る`}
                 items={AREA_FEATURED_THEMES.map((theme) => ({
@@ -235,7 +236,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 trackingSurface="area_sidebar"
               />
               <RelatedAreas areaCode={areaCode} />
-            </div>
+            </PanelGrid>
           </div>
 
           {/*

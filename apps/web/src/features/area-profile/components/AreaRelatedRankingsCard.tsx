@@ -1,5 +1,6 @@
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import { SectionCard } from '@/components/surface';
 
@@ -58,7 +59,7 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
         }
       />
       <div className="@container">
-      <div className="grid grid-cols-1 gap-4 @min-[40rem]:grid-cols-2">
+      <PanelGrid className="grid-cols-1 @min-[40rem]:grid-cols-2">
         {groups.map(({ key, title, icon: Icon, items }) =>
           items.length > 0 ? (
             <SectionCard
@@ -74,7 +75,7 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
             </SectionCard>
           ) : null,
         )}
-      </div>
+      </PanelGrid>
       </div>
     </section>
   );

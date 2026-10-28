@@ -25,6 +25,7 @@ import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "luc
 import Link from "@/components/atoms/SiteLink";
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { Breadcrumbs, PageShell, PageHeader } from "@/components/layout";
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 
@@ -140,7 +141,7 @@ export default function AboutPage() {
         className="mb-6 h-32 w-full rounded-card object-cover object-center sm:h-40"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <PanelGrid className="grid-cols-1 lg:grid-cols-2">
         {/* 1. 運営者プロフィール */}
         <AboutSection title="運営者プロフィール">
           <div className="flex items-center gap-4 mb-4">
@@ -320,7 +321,7 @@ export default function AboutPage() {
             サービス開始: 2024 年 10 月 / 運営: {OPERATOR_PROFILE.name}（個人） / 所在: 東京都
           </p>
         </AboutSection>
-      </div>
+      </PanelGrid>
     </PageShell>
   );
 }

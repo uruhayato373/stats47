@@ -13,6 +13,7 @@ import {
 } from '@stats47/components/atoms/ui/select';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SurfaceCard } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';
@@ -139,7 +140,7 @@ export function GeoDecisionExplorer({
         </Select>
       </div>
 
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <PanelGrid className="mt-5 sm:grid-cols-2">
         {cards.map((card) => (
           <SurfaceCard key={card.href} className="p-5">
             <p className="text-xs font-semibold text-primary">{card.label}</p>
@@ -154,7 +155,7 @@ export function GeoDecisionExplorer({
             </Link>
           </SurfaceCard>
         ))}
-      </div>
+      </PanelGrid>
 
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         洪水は1kmメッシュ中心点による近似、駅800mは直線距離です。個別地点の安全や実際の徒歩経路を判定する値ではありません。

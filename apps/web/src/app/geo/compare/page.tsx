@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -68,7 +69,7 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
         title="比較するときの注意"
         description="この画面は各分析の集計を並べる入口です。住宅・洪水・駅の三条件を同じ地点で同時に満たすことは判定していません。"
       />
-      <div className="grid gap-4 md:grid-cols-3">
+      <PanelGrid className="md:grid-cols-3">
         <SurfaceCard className="p-5">
           <h3 className="font-bold">詳しい場所は個別の地図へ</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -87,7 +88,7 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
             代表点、直線距離、中心点判定など、結果を使える範囲も記事ごとに示します。
           </p>
         </SurfaceCard>
-      </div>
+      </PanelGrid>
 
       <p className="mt-6 text-sm text-muted-foreground">
         空間処理と利用上の停止線は{' '}

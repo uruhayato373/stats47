@@ -120,7 +120,10 @@ describe('PageSections', () => {
       </PageSections>
     );
     const root = container.firstElementChild as HTMLElement;
-    expect(root).toHaveAttribute('data-slot', 'page-sections');
+    // 節は線の格子に並ぶ (並べる親が線の色を地に持ち、1px の隙間を線にする)
+    expect(root).toHaveAttribute('data-slot', 'panel-grid');
+    expect(root.className).toMatch(/\bgap-px\b/);
+    expect(root.className).toMatch(/\bbg-border!/);
     const kinds = [...root.children].map((child) => child.getAttribute('data-slot') ?? child.tagName);
     expect(kinds).toEqual(['SECTION', 'section-divider', 'SECTION', 'section-divider', 'SECTION']);
     // 帯は読み上げない (装飾)

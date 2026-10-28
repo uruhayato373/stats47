@@ -14,6 +14,7 @@ import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PanelGrid } from '@/components/layout/PageShell';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -114,8 +115,8 @@ export function ThemeMedicalWorkforceClient({
     area.areaCode === '00000' ? '全国（公式集計）' : area.areaName;
   const source = MEDICAL_WORKFORCE_SOURCE;
   return (
-    <div
-      className="min-w-0 space-y-6"
+    <PanelGrid
+      className="min-w-0"
       data-theme-component-key="medical-workforce"
       data-data-state="ready"
       data-area-code={area.areaCode}
@@ -165,6 +166,6 @@ export function ThemeMedicalWorkforceClient({
           }))}
         />
       </ChartPanel>
-    </div>
+    </PanelGrid>
   );
 }

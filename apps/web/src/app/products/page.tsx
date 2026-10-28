@@ -1,6 +1,7 @@
 import { BookOpen, Database } from "lucide-react";
 
 import { Breadcrumbs, PageHeader, PageShell } from "@/components/layout";
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SectionHeader } from "@/components/section";
 import { SurfaceSection } from "@/components/surface";
 
@@ -35,7 +36,7 @@ export default function ProductsPage() {
         stats={`${kindleProducts.length}冊のKindle本 ・ ${dataProducts.length}点の編集可能データ`}
       />
 
-      <div className="mb-10 grid gap-4 md:grid-cols-2">
+      <PanelGrid className="mb-10 md:grid-cols-2">
         <SurfaceSection className="p-5">
           <SectionHeader
             title={
@@ -66,7 +67,7 @@ export default function ProductsPage() {
             PowerPoint・Excel・CSVなど、編集可能な形式をまとめたデータ集です。企画書や比較資料をゼロから整える作業を短縮します。
           </p>
         </SurfaceSection>
-      </div>
+      </PanelGrid>
 
       <section>
         <SectionHeader

@@ -84,6 +84,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - **`@stats47/components` の shadcn ベースコンポーネント（① プリミティブ）を最優先で使う。**
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 - **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
+- **パネルを並べるときは線の格子 `PanelGrid` / `PageSections`（`@/components/layout`）を使う（2026-10-28）。** 見本と同じく並べる親が線の色を地に持ち（`grid gap-px bg-border p-px`）、パネルは線を持たない。列は `className` で渡す（例: `@md:grid-cols-2`）。`gap-4`・`space-y-6` でパネルを空けて並べると `design-system:check` の `panels-in-line-grid` が止める。
 - **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。レール契約の機械ゲート = `rail-*` rule（`rail-contract-audit.mjs`）。
 - **色付きの順位チップ（「N位」）は `RankBadge`（`@/components/atoms/RankBadge`）だけで描く。** 幅を固定せず最小幅で揃え、折り返さない（市区町村の「1741位」も伸びて収まる）。色は `tone`（`positive` / `negative`、向きのない順位は `rankToneByPosition(rank, total)`）で選ぶ。表のセル・補足の小さな文字・文章中の「N位」はチップにせず文字のまま書く。`design-system:check` の `rank-chip-must-use-rank-badge` が背景色つきの手書き「N位」を拒否する。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。

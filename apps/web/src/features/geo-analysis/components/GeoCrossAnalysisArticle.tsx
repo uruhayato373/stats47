@@ -17,6 +17,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 
@@ -229,7 +230,7 @@ export async function GeoCrossAnalysisArticle({
           </SurfaceSection>
         </>
       )}
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+      <PanelGrid className="mt-6 lg:grid-cols-2">
         <SurfaceSection>
           <SectionHeader title="この記事で読み取れること" hideRule />
           <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
@@ -258,7 +259,7 @@ export async function GeoCrossAnalysisArticle({
             )}
           </dl>
         </SurfaceSection>
-      </div>
+      </PanelGrid>
 
       <SurfaceSection id="methods" className="mt-6 scroll-mt-24">
         <SectionHeader title="方法・出典・限界" hideRule />

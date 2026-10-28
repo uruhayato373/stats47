@@ -23,6 +23,7 @@ import {
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -388,7 +389,7 @@ function GeoSpatialEvidenceExplorerState({
       <div className="mt-6" data-testid="spatial-audit">
         <SectionHeader as="h3" title="数値の確かめ方" hideRule />
         {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
-          <div className="grid gap-3 sm:grid-cols-3">
+          <PanelGrid className="sm:grid-cols-3">
             {spatialAuditRows(detail).map((row) => (
               <SurfaceCard key={row.label}>
                 <p className="text-xs text-muted-foreground">{row.label}</p>
@@ -397,7 +398,7 @@ function GeoSpatialEvidenceExplorerState({
                 </p>
               </SurfaceCard>
             ))}
-          </div>
+          </PanelGrid>
         ) : null}
         <p className="mt-3 text-sm text-muted-foreground">
           {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}

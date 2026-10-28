@@ -3,6 +3,7 @@ import { to2DigitPrefCode } from '@stats47/area';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -45,7 +46,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
         description="人口・住まい・防災・交通を、都道府県平均だけでなく公式GISレイヤーの重なりから確認します。"
         hideRule
       />
-      <div className="mt-4 grid gap-3 md:grid-cols-3">
+      <PanelGrid className="mt-4 md:grid-cols-3">
         {items.map(({ item, row, metric, manifest }) => (
           <SurfaceCard key={item.contentId}>
             <p className="text-xs text-muted-foreground">
@@ -71,7 +72,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
             </div>
           </SurfaceCard>
         ))}
-      </div>
+      </PanelGrid>
     </section>
   );
 }

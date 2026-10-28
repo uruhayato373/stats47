@@ -8,6 +8,7 @@
 import { ReactNode } from "react";
 
 import { ArticleShell, PageHeader } from "@/components/layout";
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -60,7 +61,7 @@ export default function TermsPage() {
       />
 
 
-      <div className="space-y-6">
+      <PanelGrid>
         {/* 第1条（適用） */}
         <TermsArticle title="第1条（適用）">
           <div className="space-y-4">
@@ -274,7 +275,7 @@ export default function TermsPage() {
             </a>
           </p>
         </TermsArticle>
-      </div>
+      </PanelGrid>
     </ArticleShell>
   );
 }

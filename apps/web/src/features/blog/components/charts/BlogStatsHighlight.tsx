@@ -7,6 +7,7 @@ import { TrendingUp, BarChart3 } from "lucide-react";
 
 import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 import { useChartData } from "../../hooks/useChartData";
@@ -87,21 +88,21 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
 
   if (isLoading) {
     return (
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <PanelGrid className="w-full grid-cols-1 lg:grid-cols-2">
         <SurfaceCard className="h-32 animate-pulse">
           <span className="sr-only">読み込み中</span>
         </SurfaceCard>
         <SurfaceCard className="h-32 animate-pulse">
           <span className="sr-only">読み込み中</span>
         </SurfaceCard>
-      </div>
+      </PanelGrid>
     );
   }
 
   if (!data || top3.length === 0 || !stats) return null;
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <PanelGrid className="w-full grid-cols-1 lg:grid-cols-2">
       <ChartPanel
         title="Top 3 都道府県"
         icon={<TrendingUp className="h-4 w-4 text-primary" />}
@@ -227,6 +228,6 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
             </div>
           </div>
       </ChartPanel>
-    </div>
+    </PanelGrid>
   );
 }

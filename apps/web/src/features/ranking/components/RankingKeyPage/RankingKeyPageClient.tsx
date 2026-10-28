@@ -10,7 +10,7 @@ import {
 } from "@stats47/ranking";
 
 import Link from "@/components/atoms/SiteLink";
-import { ArticleShell } from "@/components/layout";
+import { ArticleShell, PanelGrid } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
@@ -236,9 +236,9 @@ export function RankingKeyPageClient({
               ページで唯一の <main> はルートレイアウトが持つため、ここは div (main 二重を避ける)。
             */}
             <div className="flex min-w-0 flex-col gap-4">
-                {/* スタットと地図・表は余白なしで接する 1 つの格子 (カードの線が重なって 1 本になる)。
+                {/* スタットと地図・表は 1 つの線の格子 (隣り合うパネルが 1px の線を共有する)。
                     ここから下の本文・導線とは従来どおり gap-4 で区切る。 */}
-                <div className="order-3 flex min-w-0 flex-col">
+                <PanelGrid className="order-3">
                     <RankingHeaderStats
                         presentation={presentedItem.visualization}
                         rankingValues={rankingValues}
@@ -264,7 +264,7 @@ export function RankingKeyPageClient({
                         }
                         isPending={isPending}
                     />
-                </div>
+                </PanelGrid>
 
                 <div className="order-5 @min-[988px]/shell:hidden">{sections.relatedArticles}</div>
                 <div className="order-6 flex flex-col gap-4">

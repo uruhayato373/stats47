@@ -1,4 +1,10 @@
-import { Children, Fragment, type CSSProperties, type ReactNode } from 'react';
+import {
+  Children,
+  Fragment,
+  type ComponentPropsWithoutRef,
+  type CSSProperties,
+  type ReactNode,
+} from 'react';
 
 import { cn } from '@stats47/components';
 
@@ -135,12 +141,37 @@ const SECTION_DIVIDER_DOTS_STYLE: CSSProperties = {
 };
 
 /**
- * 本文の節 (カード) を縦に接いで並べる。テンプレートの lyra のダッシュボード
- * (`grid p-px gap-px bg-border` の格子 + 行の間の StyleDivider) と同じ見た目を、カードの外枠 (border) と
- * 節の間の点線の帯 (高さ 16px・左右に線) で描く。カードの線と帯の線が続いて 1 本の格子になる。
+ * 線の格子 (部品の種類「線の格子」)。見本 (テンプレートのダッシュボード) と同じく、並べる親が線の色を地に持ち
+ * (`grid gap-px bg-border p-px`)、パネルは線を持たない。1px の隙間から地の色が見えて、隣り合うパネルが線を共有する。
  *
- * 子はカード (SurfaceCard / SectionCard / RailCard / HorizontalCardCarouselFrame) だけを渡す。
- * カードを入れ子にしない。空の子 (false / null) は数えず、帯は節と節の間にだけ置く。
+ * - 子はパネル (ChartPanel・SurfaceCard 系) か、白い地のセルになる要素。直下の子は地を bg-background にそろえる
+ * - 格子の中の格子 (2 列に並べる行など) は外枠の 1px を持たない (`in-data-[slot=panel-grid]:p-0`)。地は線の色のまま
+ * - 列の数と幅は className で渡す (例: `@md:grid-cols-2`)。パネルの間を gap-4 などで空けない
+ * - 格子の中のパネルは自分の線を外す (`CARD_SURFACE_CLASS` と Card 部品の `in-data-[slot=panel-grid]:` の指定)
+ *
+ * 仕様: docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「線の格子」。
+ */
+export const PANEL_GRID_CLASS =
+  'grid min-w-0 gap-px bg-border! p-px *:min-w-0 *:bg-background in-data-[slot=panel-grid]:p-0';
+
+export function PanelGrid({
+  children,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<'div'>) {
+  return (
+    <div data-slot="panel-grid" className={cn(PANEL_GRID_CLASS, className)} {...props}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * 本文の節 (パネル) を縦に並べる線の格子。節と節の間に点線の帯 (高さ 16px。テンプレートの StyleDivider) を挟む。
+ * 帯も格子のセルなので、上下と左右の線は格子が引く。
+ *
+ * 子はパネル (SurfaceCard / SectionCard / RailCard / ChartPanel / HorizontalCardCarouselFrame) か、
+ * パネルを横に並べる `PanelGrid` を渡す。空の子 (false / null) は数えず、帯は節と節の間にだけ置く。
  */
 export function PageSections({
   children,
@@ -151,14 +182,14 @@ export function PageSections({
 }) {
   const sections = Children.toArray(children);
   return (
-    <div data-slot="page-sections" className={cn('flex flex-col', className)}>
+    <PanelGrid className={className}>
       {sections.map((section, index) => (
         <Fragment key={index}>
           {index > 0 && (
             <div
               aria-hidden="true"
               data-slot="section-divider"
-              className="relative h-4 overflow-hidden border-x border-border text-foreground"
+              className="relative h-4 overflow-hidden text-foreground"
             >
               <div className="absolute inset-0 opacity-25" style={SECTION_DIVIDER_DOTS_STYLE} />
             </div>
@@ -166,6 +197,6 @@ export function PageSections({
           {section}
         </Fragment>
       ))}
-    </div>
+    </PanelGrid>
   );
 }
