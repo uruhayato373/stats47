@@ -263,6 +263,8 @@ export const MUNICIPALITY_THEME_AFFILIATE_MAP: Record<string, AffiliateVertical>
   "welfare-facilities":    "health",
   "housing-size-age":      "housing",
   "housing-households":    "housing",
+  // 2026-10-28 住宅・土地統計調査の住環境 (最寄り施設までの距離・空き家の内訳)。住宅テーマに揃える
+  "living-environment":    "housing",
 };
 
 /**

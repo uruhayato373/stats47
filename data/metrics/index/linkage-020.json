@@ -2,6 +2,498 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "per-capita-firefighting-expenditure-tokyo-municipal",
+      "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
+      "title": "消防費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D03313"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D03313"
+        },
+        "derived": false,
+        "configHash": "a1c7a553895ebea8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-fixed-asset-tax-pref-municipal",
+      "pageId": "ranking:per-capita-fixed-asset-tax-pref-municipal",
+      "title": "固定資産税",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D02202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D02202"
+        },
+        "derived": false,
+        "configHash": "5543f7abe94e71e0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-fixed-asset-tax-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-inhabitant-tax-pref-municipal",
+      "pageId": "ranking:per-capita-inhabitant-tax-pref-municipal",
+      "title": "住民税",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0220103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0220103"
+        },
+        "derived": false,
+        "configHash": "0aa4553b93ac4b18"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:local-tax-regional-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:local-finance",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:per-capita-inhabitant-tax-pref-municipal",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "per-capita-kenmin-shotoku-h17",
+      "pageId": "ranking:per-capita-kenmin-shotoku-h17",
+      "title": "1人当たり県民所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C01301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C01301"
+        },
+        "derived": false,
+        "configHash": "3d0b2054cb13124f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-kenmin-shotoku-h17",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-kenmin-shotoku-h23",
+      "pageId": "ranking:per-capita-kenmin-shotoku-h23",
+      "title": "1人当たり県民所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C01311"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C01311"
+        },
+        "derived": false,
+        "configHash": "919b774be3ad0acc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:price-index-high-low-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-kenmin-shotoku-h23",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-kenmin-shotoku-h27",
+      "pageId": null,
+      "title": "１人当たり県民所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C122101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C122101"
+        },
+        "derived": false,
+        "configHash": "8af06742b9c4c7ad"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:prefectural-income-gdp-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-kenmin-shotoku-h27",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-national-tax-collected",
+      "pageId": "ranking:per-capita-national-tax-collected",
+      "title": "国税徴収決定済額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D02204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D02204"
+        },
+        "derived": false,
+        "configHash": "aa88d9ddc03373fe"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-national-tax-collected",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-police-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-police-expenditure-pref-municipal",
+      "title": "警察費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D03312"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D03312"
+        },
+        "derived": false,
+        "configHash": "d025d99e9a86a8f5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:police-officer-density-vs-crime-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-police-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "per-capita-prefectural-income-h27",
       "pageId": "ranking:per-capita-prefectural-income-h27",
       "title": "1人当たり県民所得",
@@ -8559,326 +9051,6 @@
         },
         {
           "pageId": "ranking:population-aged-0-3",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-3-female",
-      "pageId": null,
-      "title": "0～3歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140402"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140402"
-        },
-        "derived": false,
-        "configHash": "24ad93e03c3e200b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-3-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-3-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-3-male",
-      "pageId": null,
-      "title": "0～3歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140401"
-        },
-        "derived": false,
-        "configHash": "24866d33ea8c46f0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-3-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-3-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-5",
-      "pageId": null,
-      "title": "0～5歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A1405"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A1405"
-        },
-        "derived": false,
-        "configHash": "d0d1ed6332e518d8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-5",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-5",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-5-female",
-      "pageId": null,
-      "title": "0～5歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140502"
-        },
-        "derived": false,
-        "configHash": "cecaea316a44443e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-5-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-5-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-5-male",
-      "pageId": null,
-      "title": "0～5歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140501"
-        },
-        "derived": false,
-        "configHash": "f1be4ec255cf610d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-5-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-5-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-10-13",
-      "pageId": null,
-      "title": "10～13歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A1410"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A1410"
-        },
-        "derived": false,
-        "configHash": "f331efd1e5bbbb4a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-10-13",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-10-13",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-10-13-female",
-      "pageId": null,
-      "title": "10～13歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A141002"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A141002"
-        },
-        "derived": false,
-        "configHash": "3ff96843c5ece5c8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-10-13-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-10-13-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-10-13-male",
-      "pageId": null,
-      "title": "10～13歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A141001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A141001"
-        },
-        "derived": false,
-        "configHash": "e60538b00759b6ab"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-10-13-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:age-structure-by-sex",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-10-13-male",
           "kind": "ranking"
         }
       ],

@@ -2,6 +2,565 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "investment-expenditure-ratio-pref-finance",
+      "pageId": "ranking:investment-expenditure-ratio-pref-finance",
+      "title": "投資的経費の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0140201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0140201"
+        },
+        "derived": false,
+        "configHash": "4d112c5dfefb30de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:investment-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "investment-expenses-prefecture",
+      "pageId": "ranking:investment-expenses-prefecture",
+      "title": "投資的経費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2110"
+        },
+        "derived": false,
+        "configHash": "e59df6532f088ff4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:investment-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "investments-and-capital-municipal",
+      "pageId": null,
+      "title": "投資及び出資金",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320411"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320411"
+        },
+        "derived": false,
+        "configHash": "d7df23fe13604c29"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:investments-and-capital-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:municipal-expenditure",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:investments-and-capital-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "jam-consumption-expenditure",
+      "pageId": "ranking:jam-consumption-expenditure",
+      "title": "ジャム消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010720100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010720100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0928c16524f55e6a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:jam-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
       "metricKey": "jam-consumption-quantity",
       "pageId": "ranking:jam-consumption-quantity",
       "title": "ジャム消費量",
@@ -5180,6 +5739,70 @@
       "themes": []
     },
     {
+      "metricKey": "junior-high-school-within-1km-household-ratio",
+      "pageId": null,
+      "title": "中学校まで1km未満の世帯の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004025631",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004025631",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004025631",
+          "cdCat01": "00",
+          "cdTab": "13-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat02",
+            "numeratorCodes": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "8cde3bfd7cbd88dc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:junior-high-school-within-1km-household-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-environment",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:junior-high-school-within-1km-household-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "junior-high-tutoring-consumption-expenditure",
       "pageId": "ranking:junior-high-tutoring-consumption-expenditure",
       "title": "中学校補習教育消費支出額",
@@ -10066,918 +10689,6 @@
       "themes": [
         "household-food-spending"
       ]
-    },
-    {
-      "metricKey": "landslide-special-warning-zone-count",
-      "pageId": "ranking:landslide-special-warning-zone-count",
-      "title": "土砂災害特別警戒区域数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "c70ba9d36e19c3e6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:landslide-special-warning-zone-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:landslide-exposure",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "landslide-exposure"
-      ]
-    },
-    {
-      "metricKey": "landslide-warning-zone-count",
-      "pageId": "ranking:landslide-warning-zone-count",
-      "title": "土砂災害警戒区域数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "c70ba9d36e19c3e6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:landslide-warning-zone-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:landslide-exposure",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "landslide-exposure"
-      ]
-    },
-    {
-      "metricKey": "landslip-special-warning-zone-count",
-      "pageId": "ranking:landslip-special-warning-zone-count",
-      "title": "地滑りの特別警戒区域数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "c70ba9d36e19c3e6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:landslip-special-warning-zone-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:landslide-exposure",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "landslide-exposure"
-      ]
-    },
-    {
-      "metricKey": "landslip-warning-zone-count",
-      "pageId": "ranking:landslip-warning-zone-count",
-      "title": "地滑りの警戒区域数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "c70ba9d36e19c3e6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:landslide-exposure",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:landslip-warning-zone-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:landslide-exposure",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "landslide-exposure"
-      ]
-    },
-    {
-      "metricKey": "language-lesson-consumption-expenditure",
-      "pageId": "ranking:language-lesson-consumption-expenditure",
-      "title": "語学月謝消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "090430010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "090430010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "79690e3fdc798824"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:language-lesson-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

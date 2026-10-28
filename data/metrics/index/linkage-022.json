@@ -2,6 +2,1455 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pots-kettles-consumption-quantity",
+      "pageId": "ranking:pots-kettles-consumption-quantity",
+      "title": "鍋・やかん消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "040400030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "040400030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c7dba411a537ea0e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pots-kettles-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "poverty-support-new-consultation-cases",
+      "pageId": "ranking:poverty-support-new-consultation-cases",
+      "title": "生活困窮者自立支援の新規相談受付件数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/001681642.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "398c77309aee44db"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:public-assistance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:poverty-support-new-consultation-cases",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:public-assistance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "public-assistance"
+      ]
+    },
+    {
+      "metricKey": "powdered-milk-consumption-expenditure",
+      "pageId": "ranking:powdered-milk-consumption-expenditure",
+      "title": "粉ミルク消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010420010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010420010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "3ea376c0964cf4e3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:powdered-milk-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "practical-nurse-annual-income",
+      "pageId": "ranking:practical-nurse-annual-income",
+      "title": "准看護師の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1134"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1134"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "22e84f34cb7d26c7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:practical-nurse-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "prefectural-assembly-female-share",
+      "pageId": "ranking:prefectural-assembly-female-share",
+      "title": "都道府県議会議員に占める女性の割合",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.gender.go.jp/research/kenkyu/suishinjokyo/2025/pdf/rep/21-1.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "bb44afe5a6b9805a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:prefectural-assembly-female-share",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:gender-participation",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "gender-participation"
+      ]
+    },
+    {
+      "metricKey": "prefectural-assembly-members",
+      "pageId": "ranking:prefectural-assembly-members",
+      "title": "都道府県議会議員数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D1210"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D1210"
+        },
+        "derived": false,
+        "configHash": "a585fbbd97531542"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:prefectural-assembly-members",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "prefectural-auto-environment-tax-application-count",
+      "pageId": "ranking:prefectural-auto-environment-tax-application-count",
+      "title": "自動車税環境性能割の申告納付の申請総件数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/001048599.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "b74aa25a458bda81"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:prefectural-auto-environment-tax-application-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-government-digital",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-government-digital"
+      ]
+    },
+    {
+      "metricKey": "prefectural-auto-environment-tax-online-application-count",
+      "pageId": "ranking:prefectural-auto-environment-tax-online-application-count",
+      "title": "自動車税環境性能割の申告納付のオンライン申請件数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/001048599.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "b74aa25a458bda81"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:prefectural-auto-environment-tax-online-application-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-government-digital",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-government-digital"
+      ]
+    },
+    {
+      "metricKey": "prefectural-auto-environment-tax-online-application-rate",
+      "pageId": "ranking:prefectural-auto-environment-tax-online-application-rate",
+      "title": "自動車税環境性能割の申告納付のオンライン申請率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/001048599.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "b74aa25a458bda81"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:prefectural-auto-environment-tax-online-application-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-government-digital",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-government-digital"
+      ]
+    },
+    {
       "metricKey": "prefectural-cultural-property-protection-expenditure",
       "pageId": "ranking:prefectural-cultural-property-protection-expenditure",
       "title": "都道府県の文化財保護経費",
@@ -6436,538 +7885,6 @@
       "consumers": [
         {
           "pageId": "ranking:property-income-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "protective-facility-count",
-      "pageId": null,
-      "title": "保護施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020210",
-          "filters": {
-            "cdCat01": "J2221"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020210",
-          "cdCat01": "J2221"
-        },
-        "derived": false,
-        "configHash": "f915e04b4954bc68"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:protective-facility-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:welfare-facilities",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:protective-facility-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-bed-count",
-      "pageId": "ranking:psychiatric-bed-count",
-      "title": "精神病床数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I521130"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I521130"
-        },
-        "derived": false,
-        "configHash": "a478f82b3438f30c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:psychiatric-bed-count-vs-elementary-school-count",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:psychiatric-bed-count-vs-neighborhood-park-count",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:psychiatric-bed-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-bed-count-per-100k",
-      "pageId": "ranking:psychiatric-bed-count-per-100k",
-      "title": "精神病床数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I0910205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I0910205"
-        },
-        "derived": false,
-        "configHash": "5d88e18cb5abe2c7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:psychiatric-bed-count-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-hospital-avg-length-of-stay",
-      "pageId": "ranking:psychiatric-hospital-avg-length-of-stay",
-      "title": "精神科病院平均在院日数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I10205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I10205"
-        },
-        "derived": false,
-        "configHash": "54690563cc8ac7f4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:psychiatric-hospital-avg-length-of-stay",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-hospital-bed-occupancy-rate",
-      "pageId": "ranking:psychiatric-hospital-bed-occupancy-rate",
-      "title": "精神科病院病床利用率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I10204"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I10204"
-        },
-        "derived": false,
-        "configHash": "927e8ccaaec882f9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:psychiatric-hospital-bed-occupancy-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-hospital-count",
-      "pageId": "ranking:psychiatric-hospital-count",
-      "title": "精神科病院数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010109",
-          "filters": {
-            "cdCat01": "I510110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010109",
-          "cdCat01": "I510110"
-        },
-        "derived": false,
-        "configHash": "f6797061bbe461ca"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:psychiatric-hospital-count",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:medical-welfare",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:psychiatric-hospital-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-hospital-count-per-100k",
-      "pageId": "ranking:psychiatric-hospital-count-per-100k",
-      "title": "精神科病院数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I0910107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I0910107"
-        },
-        "derived": false,
-        "configHash": "a556d8a58574c5ce"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:healthcare",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:psychiatric-hospital-count-per-100k",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:healthcare",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "healthcare"
-      ]
-    },
-    {
-      "metricKey": "psychiatric-inpatients-per-fulltime-physician-per-day",
-      "pageId": "ranking:psychiatric-inpatients-per-fulltime-physician-per-day",
-      "title": "精神科病院在院患者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I10207"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I10207"
-        },
-        "derived": false,
-        "configHash": "307335350aea3c82"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:psychiatric-inpatients-per-fulltime-physician-per-day",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "psychiatric-inpatients-per-nurse-per-day",
-      "pageId": "ranking:psychiatric-inpatients-per-nurse-per-day",
-      "title": "精神科病院在院患者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010209",
-          "filters": {
-            "cdCat01": "#I10208"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010209",
-          "cdCat01": "#I10208"
-        },
-        "derived": false,
-        "configHash": "276ff656597a3aa5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:psychiatric-inpatients-per-nurse-per-day",
           "kind": "ranking"
         }
       ],

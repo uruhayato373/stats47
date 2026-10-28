@@ -2,6 +2,286 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "other-parking-fee-consumption-expenditure",
+      "pageId": "ranking:other-parking-fee-consumption-expenditure",
+      "title": "他の駐車場借料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070230070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070230070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9efba5c56a318f0a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-parking-fee-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-personal-items-consumption-expenditure",
+      "pageId": "ranking:other-personal-items-consumption-expenditure",
+      "title": "他の身の回り用品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100133030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100133030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "160cf96597d7108e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-personal-items-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-pet-service-consumption-expenditure",
+      "pageId": "ranking:other-pet-service-consumption-expenditure",
+      "title": "他のペット関連サービス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090205020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090205020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a68af3022f266a21"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-pet-service-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-prepared-food-consumption-expenditure",
+      "pageId": "ranking:other-prepared-food-consumption-expenditure",
+      "title": "他の調理食品のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010920120",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010920120",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c11b8ee5956a6f7a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-prepared-food-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-processed-fish-ext-consumption-expenditure",
+      "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
+      "title": "他の魚介加工品のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010240050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010240050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1b65700074b5bcbb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-processed-meat-consumption-expenditure",
+      "pageId": "ranking:other-processed-meat-consumption-expenditure",
+      "title": "他の加工肉消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010320040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010320040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1eb0f71ac49f6609"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-processed-meat-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-publications-consumption-expenditure",
+      "pageId": "ranking:other-publications-consumption-expenditure",
+      "title": "他の印刷物消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090300040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090300040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "091daf1c66d87fbf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-publications-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-remittance-consumption-expenditure",
       "pageId": "ranking:other-remittance-consumption-expenditure",
       "title": "他の仕送り金消費支出額",
@@ -3706,6 +3986,68 @@
       "themes": []
     },
     {
+      "metricKey": "park-within-500m-household-ratio",
+      "pageId": null,
+      "title": "公園まで500m未満の世帯の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004025595",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004025595",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004025595",
+          "cdCat01": "00",
+          "cdTab": "13-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat02",
+            "numeratorCodes": [
+              "1",
+              "2"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "f9de375faa247c16"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:park-within-500m-household-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-environment",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:park-within-500m-household-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "part-time-employment-rate-regular",
       "pageId": "ranking:part-time-employment-rate-regular",
       "title": "パートタイム就職率",
@@ -5766,498 +6108,6 @@
       "consumers": [
         {
           "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-firefighting-expenditure-tokyo-municipal",
-      "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
-      "title": "消防費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D03313"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D03313"
-        },
-        "derived": false,
-        "configHash": "a1c7a553895ebea8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-fixed-asset-tax-pref-municipal",
-      "pageId": "ranking:per-capita-fixed-asset-tax-pref-municipal",
-      "title": "固定資産税",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D02202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D02202"
-        },
-        "derived": false,
-        "configHash": "5543f7abe94e71e0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:per-capita-fixed-asset-tax-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-inhabitant-tax-pref-municipal",
-      "pageId": "ranking:per-capita-inhabitant-tax-pref-municipal",
-      "title": "住民税",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0220103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0220103"
-        },
-        "derived": false,
-        "configHash": "0aa4553b93ac4b18"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:local-tax-regional-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:per-capita-inhabitant-tax-pref-municipal",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-finance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-finance"
-      ]
-    },
-    {
-      "metricKey": "per-capita-kenmin-shotoku-h17",
-      "pageId": "ranking:per-capita-kenmin-shotoku-h17",
-      "title": "1人当たり県民所得",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C01301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C01301"
-        },
-        "derived": false,
-        "configHash": "3d0b2054cb13124f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-kenmin-shotoku-h17",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-kenmin-shotoku-h23",
-      "pageId": "ranking:per-capita-kenmin-shotoku-h23",
-      "title": "1人当たり県民所得",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C01311"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C01311"
-        },
-        "derived": false,
-        "configHash": "919b774be3ad0acc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:price-index-high-low-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:per-capita-kenmin-shotoku-h23",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-kenmin-shotoku-h27",
-      "pageId": null,
-      "title": "１人当たり県民所得",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C122101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C122101"
-        },
-        "derived": false,
-        "configHash": "8af06742b9c4c7ad"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:prefectural-income-gdp-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:per-capita-kenmin-shotoku-h27",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-national-tax-collected",
-      "pageId": "ranking:per-capita-national-tax-collected",
-      "title": "国税徴収決定済額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D02204"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D02204"
-        },
-        "derived": false,
-        "configHash": "aa88d9ddc03373fe"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-national-tax-collected",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-police-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-police-expenditure-pref-municipal",
-      "title": "警察費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D03312"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D03312"
-        },
-        "derived": false,
-        "configHash": "d025d99e9a86a8f5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:police-officer-density-vs-crime-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:per-capita-police-expenditure-pref-municipal",
           "kind": "ranking"
         }
       ],
