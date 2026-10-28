@@ -64,7 +64,7 @@ export function FeaturedRankingCard({
         </p>
         <p
           className={cn(
-            "mt-1 whitespace-nowrap font-bold leading-tight tabular-nums text-foreground",
+            "mt-1 whitespace-nowrap font-semibold leading-tight tabular-nums text-foreground",
             featuredValueSizeClass(`${model.top.value}${displayUnit}`),
           )}
         >

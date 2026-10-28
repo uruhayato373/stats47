@@ -62,9 +62,9 @@ describe("RankedKpiGrid", () => {
     expect(html).not.toContain("—");
   });
 
-  // 2026-10-28 テンプレート寄せ: 表型 (gap-px + bg-border) をやめ、カードを gap で並べる。
-  // 空きマスが灰色の箱に見えることが構造上起きないので、埋め草も作らない。
-  it("指標の数だけカードを並べ、最終行の空きマスや埋め草を作らない", () => {
+  // 2026-10-28 数値タイル: 線の格子 (PanelGrid) に数値タイル (StatTile) を並べる。格子の地は線の色なので、
+  // 最終行の空きマスは白いセルで埋める。列数は幅で 1 → 2 → 3 と変わるので、幅ごとに必要な数だけ出す。
+  it("指標の数だけ数値タイルを線の格子に並べ、最終行の空きマスは幅ごとに白いセルで埋める", () => {
     const full = {
       metrics: Object.fromEntries(
         ["a", "b", "c", "d"].map((k) => [
@@ -80,11 +80,15 @@ describe("RankedKpiGrid", () => {
         columns={3}
       />,
     );
-    const fillers = [...html.matchAll(/<div aria-hidden="true" class="([^"]*)"/g)];
-    expect(fillers).toHaveLength(0);
-    expect(html.match(/border-card-outline/g)).toHaveLength(4);
-    expect(html).not.toContain("gap-px");
-    expect(html).not.toContain("bg-border");
+    expect(html.match(/data-slot-kind="stat-tile"/g)).toHaveLength(4);
+    expect(html).toContain('data-slot="panel-grid"');
+    // 4 枚: 2 列では空きマス 0、3 列では 2。埋めるセルは 3 列のときだけ出す
+    const fillers = [...html.matchAll(/<div aria-hidden="true" data-cell="flush" class="([^"]*)"/g)].map((m) => m[1]);
+    expect(fillers).toHaveLength(2);
+    for (const className of fillers) {
+      expect(className.split(" ")).toEqual(expect.arrayContaining(["hidden", "@md:block"]));
+      expect(className).not.toContain("@sm:block");
+    }
   });
 
   // 2026-09-25 UI 全面点検: 県データブックの数値カード約 50 個に年が無く、いつの値か分からなかった。

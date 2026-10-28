@@ -1,10 +1,12 @@
 "use client";
 
+import { cn } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { TrendingUp } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
+import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from "@/components/surface";
 
 import {
   computeNationalAveragePeriodChange,
@@ -62,9 +64,9 @@ export function RankingNationalAverageStat({
       contentClassName="flex flex-1 flex-col gap-2"
     >
       <p className="flex items-baseline gap-2">
-        <span className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">
+        <span className={cn(STAT_VALUE_CLASS, "whitespace-nowrap")}>
           {formatRankingValue(figure.value, precision)}
-          <span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span>
+          <span className={STAT_UNIT_CLASS}>{formatUnitForDisplay(unit)}</span>
         </span>
         {yearName && <span className="text-xs text-muted-foreground">（{yearName}）</span>}
       </p>

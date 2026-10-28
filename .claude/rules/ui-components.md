@@ -73,7 +73,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 | tier                 | 置き場所                                                                | import 元                  | 中身                                                                                                                                                      | 追加方法                                                                                            |
 | -------------------- | ----------------------------------------------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **① プリミティブ**   | `packages/components/src/atoms/ui`                                      | `@stats47/components`      | shadcn/ui 由来の素部品（Button/Card/Select/Table/Tabs…30 個）                                                                                             | `cd packages/components && npx shadcn add`（`packages/components/README.md`）。app-local に置かない |
-| **② 共有 composite** | `apps/web/src/components/{surface,charts,stat-charts,layout,molecules}` | `@/components/...`         | 複数 feature が使う合成部品（`SurfaceCard` / `ChartCard` / `PageShell` / `MiniCharts` / KPI カード等）。**これは正式な共有層**（実質 180+ import のハブ） | ① を組み合わせて作る。チャートは `chart-component-builder` agent                                    |
+| **② 共有 composite** | `apps/web/src/components/{surface,charts,stat-charts,layout,molecules}` | `@/components/...`         | 複数 feature が使う合成部品（`SurfaceCard` / `StatTile` / `PageShell` / `MiniCharts` / KPI カード等）。**これは正式な共有層**（実質 180+ import のハブ） | ① を組み合わせて作る。チャートは `chart-component-builder` agent                                    |
 | **③ feature 固有**   | `apps/web/src/features/<feature>/components`                            | feature 内 `index.ts` 経由 | その feature だけで使う UI。複数 feature で必要になったら ② へ昇格                                                                                        | feature 内。**他 feature から直接 import しない**（app 層経由で合成）                               |
 
 判断フロー: 「① にあるか？ → ② にあるか？ → 無ければ作る（汎用なら ②、その feature 専用なら ③）」。
@@ -92,7 +92,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 ## チャートコンポーネント（新規追加前に必読）
 
 チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
-既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
+既存の `MiniLineChart` / `MiniBarChart` / `StatTile` 等が使えるケースでは再実装しない。大きな数値 (KPI) は `StatTile` か `STAT_VALUE_CLASS`（`@/components/surface`）で描き、ページ側で文字の大きさを書かない（`stat-value-uses-shared-class`）。
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 

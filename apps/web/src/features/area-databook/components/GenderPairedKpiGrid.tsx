@@ -1,12 +1,9 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import Link from "@/components/atoms/SiteLink";
-import { getSurfaceCardClassName } from "@/components/surface";
+import { rankToneByPosition } from "@/components/atoms/RankBadge";
 
-import { navSurfaceProps } from "@/lib/analytics/events";
-
-import { GENDER_TONE_TEXT } from "./gender-tone.palette";
+import { GENDER_TONE_TEXT, type GenderTone } from "./gender-tone.palette";
+import { RankedValueGrid, type RankedValueGridItem } from "./RankedValueGrid";
 
 import type { AreaDatabookSnapshot } from "@stats47/area-profile/server";
 import type { DatabookGenderPair } from "@stats47/data-configs";
@@ -16,117 +13,47 @@ interface Props {
   databook: AreaDatabookSnapshot | null;
 }
 
-function fmt(value: number): string {
-  if (Number.isInteger(value)) return value.toLocaleString("ja-JP");
-  return value.toLocaleString("ja-JP", { maximumFractionDigits: 1 });
-}
+/** 都道府県の数。全国順位のチップはこの範囲の順位にだけ付ける。 */
+const PREFECTURE_COUNT = 47;
+
+const GENDER_LABEL: Record<GenderTone, string> = { male: "男性", female: "女性" };
 
 /**
- * 男/女それぞれの値+順位を表示する 1 セル。
- *
- * 色は 2026-08-05 に是正した。旧 `text-[#3b82f6]` / `text-[#ec4899]` は白地で
- * contrast 3.68 / 3.53 しかなく、本文サイズの文字に必要な 4.5:1 を満たしていない。
- * 単色では light と dark の両方を満たせないため (濃色は dark 地で 2 前後まで落ちる)、
- * light は 700 系、dark は 400 系に分ける。実測 contrast:
- * blue-700 6.70 / pink-700 6.04 (白地)、blue-400 5.83 / pink-400 5.60 (dark --card)。
- *
- * 併せて「男性 / 女性」を可視ラベルとして出す。左右の位置と色以外に手掛かりが無く、
- * 色覚特性によっては men/women を区別できなかった (WCAG 1.4.1)。
- */
-function GenderCell({
-  href,
-  value,
-  rank,
-  unit,
-  tone,
-}: {
-  href: string;
-  value: number | null;
-  rank: number | null;
-  unit: string;
-  tone: "male" | "female";
-}) {
-  const color = GENDER_TONE_TEXT[tone];
-  const genderLabel = tone === "male" ? "男性" : "女性";
-  return (
-    <Link
-      {...navSurfaceProps("area_databook")}
-      href={href}
-      className="flex flex-1 flex-col items-center gap-0.5 py-1.5 transition-colors hover:bg-accent/30"
-    >
-      <span className="text-[10px] leading-none text-muted-foreground">
-        {genderLabel}
-      </span>
-      {value !== null ? (
-        <>
-          <span className={`text-base font-bold tabular-nums ${color}`}>
-            {fmt(value)}
-            <span className="ml-0.5 text-[11px] text-muted-foreground">{formatUnitForDisplay(unit)}</span>
-          </span>
-          {rank !== null && rank >= 1 && rank <= 47 && (
-            <span className="text-[10px] text-muted-foreground tabular-nums">
-              全国{rank}位
-            </span>
-          )}
-        </>
-      ) : (
-        <span className="text-sm text-muted-foreground">—</span>
-      )}
-    </Link>
-  );
-}
-
-/**
- * 男女で対比する KPI (初婚年齢・寿命・給与・身長・体重)。男=青 / 女=桃 の系統は
- * 予約色に合わせつつ、テキスト用途として 4.5:1 を満たす明度に寄せてある (GenderCell)。
+ * 男女で対比する KPI (初婚年齢・寿命・給与・身長・体重)。男女それぞれを数値タイル 1 枚にし、
+ * 県データブックの他の数値 (RankedKpiGrid) と同じ RankedValueGrid で 2 列に並べる (左 = 男性・右 = 女性)。
  * 各値は databook.json、47 県比較は `/ranking/<key>` リンクで回遊。
+ *
+ * 男女は色だけでなく「男性 / 女性」の文字でも区別する (WCAG 1.4.1)。色は GENDER_TONE_TEXT で、
+ * light は 700 系・dark は 400 系 (白地 contrast blue-700 6.70 / pink-700 6.04、dark --card で blue-400 5.83 / pink-400 5.60。
+ * 旧 `text-[#3b82f6]` / `text-[#ec4899]` は 3.68 / 3.53 で 4.5:1 を満たさなかった。2026-08-05 是正)。
  */
 export function GenderPairedKpiGrid({ pairs, databook }: Props) {
-  return (
-    <div
-      className={getSurfaceCardClassName({
-        className: "divide-y divide-border overflow-hidden p-0",
-      })}
-    >
-      {pairs.map((p) => {
-        const male = databook?.metrics[p.maleKey] ?? null;
-        const female = databook?.metrics[p.femaleKey] ?? null;
-        const unit = male?.unit ?? female?.unit ?? "";
-        const yearLabel = pairYearLabel(male?.year, female?.year);
-        return (
-          <div
-            key={p.label}
-            className="flex min-h-16 items-stretch"
-          >
-            <GenderCell
-              href={hrefFor("ranking", { rankingKey: p.maleKey })}
-              value={male?.value ?? null}
-              rank={male?.rank ?? null}
-              unit={unit}
-              tone="male"
-            />
-            <div className="flex w-24 shrink-0 flex-col items-center justify-center gap-0.5 border-x border-border bg-muted/30 px-2 text-center text-xs font-medium text-muted-foreground">
-              {p.label}
-              {yearLabel && (
-                <span className="text-[10px] font-normal tabular-nums">{yearLabel}</span>
-              )}
-            </div>
-            <GenderCell
-              href={hrefFor("ranking", { rankingKey: p.femaleKey })}
-              value={female?.value ?? null}
-              rank={female?.rank ?? null}
-              unit={unit}
-              tone="female"
-            />
-          </div>
-        );
-      })}
-    </div>
+  const items: RankedValueGridItem[] = pairs.flatMap((p) =>
+    (["male", "female"] as const).map((tone) => {
+      const key = tone === "male" ? p.maleKey : p.femaleKey;
+      const v = databook?.metrics[key];
+      return {
+        key,
+        href: hrefFor("ranking", { rankingKey: key }),
+        label: (
+          <>
+            <span className={GENDER_TONE_TEXT[tone]}>{GENDER_LABEL[tone]}</span> {p.label}
+          </>
+        ),
+        value: v
+          ? {
+              value: v.value,
+              unit: v.unit,
+              year: v.year,
+              badge:
+                v.rank >= 1 && v.rank <= PREFECTURE_COUNT
+                  ? { rank: v.rank, tone: rankToneByPosition(v.rank) }
+                  : undefined,
+            }
+          : undefined,
+      };
+    }),
   );
-}
 
-/** 男女の値の年。同じなら 1 つ、違えば両方を出す (値だけではいつの値か分からないため) */
-export function pairYearLabel(maleYear?: string, femaleYear?: string): string | null {
-  if (maleYear && femaleYear && maleYear !== femaleYear) return `男 ${maleYear} / 女 ${femaleYear}`;
-  return maleYear ?? femaleYear ?? null;
+  return <RankedValueGrid items={items} columns={2} navSurface="area_databook" />;
 }

@@ -82,7 +82,7 @@ const rules = [
   {
     id: 'no-legacy-dashboard-card',
     message:
-      'DashboardCard/LegacyDashboardCard was removed. Use ChartPanel for charts/maps and ChartCard for compact KPI cards.',
+      'DashboardCard/LegacyDashboardCard was removed. Use ChartPanel for charts/maps and StatTile for compact KPI (numeric) tiles.',
     pattern: /\b(?:DashboardCard|LegacyDashboardCard)\b/,
   },
   {
@@ -842,6 +842,23 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
         file,
         lineNumber: lineOf(match.index + prop.index),
         line: `<${match[1]} ${prop[1]}="${size[0]}">`,
+      });
+    }
+  }
+  // 数値タイルの値 (大きな等幅数字) は StatTile の書式 (STAT_VALUE_CLASS = 24px / 32px・600) だけで描く。
+  // 2026-10-28 までは部品ごとに text-lg〜text-3xl・太さ 600〜700 が混在していた。
+  if (file !== 'src/components/surface/StatTile.tsx') {
+    for (const match of text.matchAll(/className="([^"]*)"/g)) {
+      const tokens = match[1].split(/\s+/);
+      if (!tokens.includes('tabular-nums')) continue;
+      if (!tokens.some((t) => /^(?:[\w-]+:)*text-(?:lg|xl|[2-9]xl)$/.test(t))) continue;
+      violations.push({
+        ruleId: 'stat-value-uses-shared-class',
+        message:
+          'Render large numeric values with StatTile or STAT_VALUE_CLASS (@/components/surface): one size (24px/32px, 600) for every numeric tile.',
+        file,
+        lineNumber: lineOf(match.index),
+        line: match[0],
       });
     }
   }

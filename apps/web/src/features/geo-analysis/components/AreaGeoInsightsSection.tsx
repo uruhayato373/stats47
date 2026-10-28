@@ -1,11 +1,12 @@
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { cn } from '@stats47/components';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard } from '@/components/surface';
+import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
 import { formatGeoValue, isGeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
@@ -53,7 +54,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
               合計の検算 {manifest.quality.conservationChecks}/47県
             </p>
             <h3 className="mt-1 font-bold">{metric.label}</h3>
-            <p className="mt-3 text-lg font-bold tabular-nums">
+            <p className={cn(STAT_VALUE_CLASS, "mt-3")}>
               {formatGeoValue(metric, row.values[metric.key])}
             </p>
             <div className="mt-4 space-y-1 text-sm">

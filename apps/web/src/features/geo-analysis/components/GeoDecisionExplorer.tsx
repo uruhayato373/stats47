@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { cn } from '@stats47/components';
 import {
   Select,
   SelectContent,
@@ -14,7 +15,7 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 import { PanelGrid } from '@/components/layout/PageShell';
-import { SurfaceCard } from '@/components/surface';
+import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';
 
@@ -145,7 +146,7 @@ export function GeoDecisionExplorer({
           <SurfaceCard key={card.href} className="p-5">
             <p className="text-xs font-semibold text-primary">{card.label}</p>
             <h3 className="mt-2 text-sm font-bold">{card.question}</h3>
-            <p className="mt-3 text-2xl font-bold tabular-nums">{card.value}</p>
+            <p className={cn(STAT_VALUE_CLASS, "mt-3")}>{card.value}</p>
             <p className="mt-1 text-sm text-muted-foreground">{card.detail}</p>
             <Link
               className="mt-4 inline-block text-sm font-medium text-primary underline"

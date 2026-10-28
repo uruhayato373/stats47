@@ -86,7 +86,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
 
   return (
     <>
-      <section aria-labelledby="city-headline">
+      <PanelGrid as="section" aria-labelledby="city-headline">
         <SectionHeader
           title={<span id="city-headline">{cityShortName}の主な指標</span>}
           description={
@@ -112,7 +112,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             },
           }))}
         />
-      </section>
+      </PanelGrid>
 
       {highlights.length > 0 && (
         <PanelGrid as="section" aria-labelledby="city-highlights">

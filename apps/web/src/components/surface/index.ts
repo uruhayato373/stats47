@@ -17,3 +17,10 @@ export {
   getSurfaceCardClassName,
 } from './SurfaceCard';
 export { HorizontalCardCarousel } from './HorizontalCardCarousel';
+export {
+  StatTile,
+  STAT_LABEL_CLASS,
+  STAT_META_CLASS,
+  STAT_UNIT_CLASS,
+  STAT_VALUE_CLASS,
+} from './StatTile';

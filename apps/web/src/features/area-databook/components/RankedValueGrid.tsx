@@ -5,7 +5,8 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { RankBadge, type RankBadgeTone } from "@/components/atoms/RankBadge";
 import Link from "@/components/atoms/SiteLink";
-import { getSurfaceCardClassName } from "@/components/surface";
+import { PanelGrid } from "@/components/layout";
+import { STAT_META_CLASS, StatTile } from "@/components/surface";
 
 import { navSurfaceProps, type NavSurface } from "@/lib/analytics/events";
 
@@ -51,14 +52,31 @@ const COLS: Record<number, string> = {
   4: "@sm:grid-cols-2 @md:grid-cols-4",
 };
 
+/** 最終行の空きマスの数 (列数 cols で n 枚を並べたとき) */
+function remainder(n: number, cols: number): number {
+  return (cols - (n % cols)) % cols;
+}
+
 /**
- * 「指標名 + 値 + 順位チップ + 年」の KPI グリッド。指標 1 つ = カード 1 枚
- * (テンプレートの KPI カードと同じ並び)。県データブック (RankedKpiGrid) と
- * 市区町村ページの見出し KPI が同じ描画を使う。値と順位の解決は呼び出し側が行う。
- *
- * 2026-10-28: 旧来の gap-px + bg-border の表型グリッドは、最終行の空きマスが灰色の箱に見え、
- * 段数ごとの埋め草が要った。カードを gap で並べる形にして空きマスそのものを無くした。
- * 最終行の端数は伸ばさない (列幅をそろえる。最後の 1 枚だけ広げると値の大きさが他と揃わない。2026-10-28 3 巡目)。
+ * 最終行の空きマスを白いセルで埋める。線の格子は地が線の色なので、空きマスのままだと灰色の箱に見える。
+ * 列数は幅 (コンテナクエリ) で 1 → 2 → 3/4 と変わるので、幅ごとに必要な数だけ出す。
+ */
+function fillerClassNames(n: number, columns: 1 | 2 | 3 | 4): string[] {
+  const wide = columns >= 3 ? remainder(n, columns) : 0;
+  const mid = columns >= 2 ? remainder(n, 2) : 0;
+  return Array.from({ length: Math.max(wide, mid) }, (_, i) =>
+    cn(
+      "hidden",
+      i < mid && "@sm:block",
+      columns >= 3 && (i < wide ? "@md:block" : "@md:hidden"),
+    ),
+  );
+}
+
+/**
+ * 「指標名 + 値 + 順位チップ + 年」の数値タイルを線の格子で並べる。指標 1 つ = 数値タイル (StatTile) 1 枚。
+ * 県データブック (RankedKpiGrid・GenderPairedKpiGrid) と市区町村ページの見出し KPI が同じ描画を使う。
+ * 値と順位の解決は呼び出し側が行う。最終行の空きマスは白いセルで埋める (fillerClassNames)。
  */
 export function RankedValueGrid({ items, columns = 3, navSurface, footnote }: Props) {
   if (items.length === 0) return null;
@@ -66,17 +84,13 @@ export function RankedValueGrid({ items, columns = 3, navSurface, footnote }: Pr
 
   return (
     <div className="@container">
-      <dl className={cn("grid grid-cols-1 gap-4", COLS[effectiveColumns])}>
+      <PanelGrid className={cn("grid-cols-1", COLS[effectiveColumns])}>
         {items.map((item) => {
           const v = item.value;
           return (
-            <div
+            <StatTile
               key={item.key}
-              className={getSurfaceCardClassName({
-                className: "group flex flex-col gap-1 p-4",
-              })}
-            >
-              <dt className="text-sm leading-snug text-muted-foreground group-hover:text-foreground">
+              label={
                 <Link
                   {...navSurfaceProps(navSurface)}
                   href={item.href}
@@ -84,34 +98,28 @@ export function RankedValueGrid({ items, columns = 3, navSurface, footnote }: Pr
                 >
                   {item.label}
                 </Link>
-              </dt>
-              <dd className="flex items-center justify-between gap-2">
-                <span className="min-w-0">
-                  {v ? (
-                    <>
-                      <span className="text-2xl font-semibold tabular-nums text-foreground">
-                        {formatValue(v.value)}
-                      </span>
-                      <span className="ml-1 text-xs text-muted-foreground">{formatUnitForDisplay(v.unit)}</span>
-                    </>
-                  ) : (
-                    <span className="text-sm text-muted-foreground">—</span>
-                  )}
-                </span>
-                {v?.badge && <RankBadge rank={v.badge.rank} tone={v.badge.tone} />}
-              </dd>
-              {/* 値だけではいつの値か分からないので年を必ず添える (2026-09-25) */}
-              {v && (
-                <dd className="text-xs tabular-nums text-muted-foreground">
-                  {v.year}
-                  {v.detail}
-                </dd>
-              )}
-            </div>
+              }
+              value={v ? formatValue(v.value) : null}
+              unit={v ? formatUnitForDisplay(v.unit) : undefined}
+              badge={v?.badge && <RankBadge rank={v.badge.rank} tone={v.badge.tone} />}
+              // 値だけではいつの値か分からないので年を必ず添える (2026-09-25)
+              meta={
+                v && (
+                  <>
+                    {v.year}
+                    {v.detail}
+                  </>
+                )
+              }
+            />
           );
         })}
-      </dl>
-      {footnote && <p className="mt-1.5 text-[10px] text-muted-foreground">{footnote}</p>}
+        {fillerClassNames(items.length, effectiveColumns).map((className, i) => (
+          <div key={`filler-${i}`} aria-hidden="true" data-cell="flush" className={className} />
+        ))}
+        {/* 注記も格子の 1 行 (パネルと同じ要素に文章を包むと、文章が線に接する) */}
+        {footnote && <p className={cn(STAT_META_CLASS, "col-span-full")}>{footnote}</p>}
+      </PanelGrid>
     </div>
   );
 }
