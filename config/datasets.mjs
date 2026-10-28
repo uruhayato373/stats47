@@ -456,6 +456,7 @@ export const DATASETS = [
   d("area.specialty-illustrations", "assets/area-specialty/{**}", "asset", "site", "assets", "県ページの特産品イラストの原本 (sync-snapshots が R2 へ反映)"),
   d("site.page-heroes", "assets/page-heroes/{name}", "asset", "site", "assets", "カテゴリ・ホーム・テーマのヒーロー画像の原本 (webp にして apps/web/public へ)"),
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
+  d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "公開サイトが寄せる見本 (shadcndashboard) の撮影と部品ごとの実測値 (docs/01_技術設計/04_デザインシステム.md の仕様の根拠)"),
   d("note.assets", "assets/note/{**}", "asset", "product", "assets", "note の背景・見出し・マガジン表紙の原本と生成の説明・マニフェスト"),
   d("affiliate.banners", "assets/affiliate-banners/{name}", "asset", "affiliate", "assets", "note 記事に貼るアフィリエイトのバナー画像"),
 

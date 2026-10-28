@@ -1,0 +1,14 @@
+[
+  { "name": "dash-analytics", "url": "/" },
+  { "name": "dash-ecommerce", "url": "/dashboards/ecommerce" },
+  { "name": "dash-modern", "url": "/dashboards/modern" },
+  { "name": "dash-logistics", "url": "/dashboards/logistics" },
+  { "name": "blog-list", "url": "/apps/blog/post" },
+  { "name": "blog-detail", "url": "/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow" },
+  { "name": "faq", "url": "/theme-pages/faq" },
+  { "name": "table-sorting", "url": "/react-tables/sorting" },
+  { "name": "table-basic", "url": "/shadcn-tables/basic" },
+  { "name": "shop-list", "url": "/apps/ecommerce/shop" },
+  { "name": "user-profile", "url": "/apps/user-profile/profile" },
+  { "name": "empty", "url": "/theme-pages/empty-page/empty-1" }
+]
