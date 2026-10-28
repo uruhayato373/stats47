@@ -256,6 +256,13 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-THEME-LYRA-TEST-NODE-01] ui-theme:lyra:test が Node 22.14 で .ts を読めず pre-commit を止める
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
+
+- **事象 (2026-10-28 実測)**: 会社の Windows PC (Node v22.14.0) で pre-commit の `ui-theme:lyra:test` が `ERR_UNKNOWN_FILE_EXTENSION ... packages/components/src/lib/cn.ts` で失敗し、関係のないコミットも止まった。`NODE_OPTIONS=--experimental-strip-types` を付けると 11/11 pass。入ったのは `5392747f7` (lyra の部品スタイルを className へ書き込む)。
+- **次**: npm script に `--experimental-strip-types` を足すか、`.ts` を tsx 経由で読む。必要な Node の版を `engines` か `.nvmrc` と合わせる。
+- **完了条件**: Node 22.14 で `npm run ui-theme:lyra:test` がフラグなしで pass する。
+
 ### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
@@ -761,6 +768,7 @@ updated: 2026-10-19
 - **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` は 2026-10-27 に実際の Excel で全手順を確かめて書き直し、公開本文を差し替えた (`NOTE-UNVERIFIED-PUBLISHED-01`)。#9 は公開後に案内先を H-01 へ替える。
 - **H-01 の公開条件 (オーナー作業)**: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`) を Google マイマップへ 1 回インポートし、①県別の色分けが出るか ②県をクリックした吹き出しに値・順位・時点・URL が出るかを確かめ、「インポート」の位置と読み込み後の地図の 2 枚を撮る。色が出なければ KML の Style 指定を直してから公開する。
 - **2026-10-28 実機確認と差し替え (済)**: H-01 (`h-howto-mymaps-kml`) は本番の KML をマイマップに読み込んだ画面 4 枚を入れて公開本文を差し替えた。#9 (`h-howto-mymaps-share`) もテスト用の地図で共有・埋め込みを操作し、画面 5 枚を入れて書き直した。実際の画面は記事の旧記述と 3 点違った。① 初めて共有すると「共有する前に名前と説明を追加」が先に出る。② スイッチの文言は「このリンクを知っている人なら誰でも表示できる」「インターネットで検索しているユーザーにこの地図を公開する」で、ボタンは「閉じる」(完了・変更を保存は無い)。③ 埋め込みは 1 つ目のスイッチだけで使え、検索公開は要らない (オフだと「この地図は公開されていません」)。どちらも R2 に保存済み。テスト用の地図 3 つと KML 3 つは Google ドライブのゴミ箱へ移した。残りは 28 日の計測だけ。
+- **#3 QGIS (`h-howto-qgis-choropleth`) 原稿完成・未公開 (2026-10-28)**: QGIS 3.44.15 (Windows) で、stats47 の総人口 GeoJSON の読み込み・「連続値による定義」で 5 段階 (等量分類)・属性テーブル・画像への書き出しを操作し、画面 10 枚と原稿を R2 に保存した (台帳 status draft)。実機で見つけた注意: 書き出した PNG はダイアログ表示の 2,454×1,583 ではなく 3,068×3,068 の正方形で上下に余白が入った (原稿に記載)。**残り**: ① カバーを Codex imagegen で作る (この日は Codex MCP が接続できず未着手。`.claude/rules/note-image-assets.md` の制作 ID 経路) ② note-critic ③ 新規公開 (`publish-new-note.sh` は Mac の Chrome Profile 5 前提)。公開後は H シリーズの基準 (28 日で閲覧 190 以上) で有料の続き (港湾・人口増減・財政の地図) を作るか決める。
 - **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
 - **統合 (2026-10-26 オーナー判断): `NOTE-HOWTO-OWNER-CHECK-01`** 別PCでマイマップの表示を確かめ、H-01・#9 の画像を撮る (#11 Excel は 2026-10-27 に完了)
   - **完了条件**: 2 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。
@@ -1744,7 +1752,8 @@ updated: 2026-10-19
   「47 都道府県・市区町村の KML / GeoJSON セット (¥500)」は 2026-10-19 の検討で外した。stats47 が同じ形式を無料で配っており、§3.4 の「公開データをまとめ直したことだけを支払う理由にしない」に当たるため。
 - **次 (実行順。各段に完了の判定と停止条件を付ける)**:
   1. **基準値を記録する [S・1 回]** — 前提は `NOTE-DASHBOARD-COLLECT-01` で note ダッシュボードの取得が戻っていること (戻らなければ、以降の判定はすべて「判定不能」になる)。階段 1・2 の各記事の直近 28 日の閲覧と売上、マガジン 4 つの購入、GA4 の `sessionSource = note.com` の着地 (再現: `node .claude/scripts/metrics/ga4-query.mjs --dims landingPage --metrics sessions --filter 'sessionSource==note.com'`) を、このカードに 1 表で書く。**完了**: 表がある。
-  2. **階段 1 の段 0 → 段 1 の導線を揃える [S・人手]** — `s47-fiscal` の無料 7 本の末尾の案内を、「同じ比較を自分の自治体で作る (`13-fiscal-peer-no-code`)」の 1 本にする。stats47 へのリンクは本文の出典として残し、末尾の案内は 1 つにする。この 7 本は `NOTE-CIRCULATION-PILOT-01` (次の記事とマガジンのカード) の観測対象と重なるので、その判定 (improvements の Due 10-18 を超過) を記録してから変える。カタログ (`data/note/articles.json` の本文) も同じ差分で直す。**完了**: 7 本の末尾が揃い、カタログと一致している。**停止**: 公開記事の編集は人手のログインとオーナー承認を経てから。
+  2. **[済 2026-10-28] 階段 1 の段 0 → 段 1 の導線を揃える** — 7 本の「次に読む」の先頭の枠 (「もう一歩深掘りする」。`paid-n2ed31d721531` は枠が無かったので見出しの直後に追加) を `13-fiscal-peer-no-code` のカードに差し替え、未ログインの公開 API で 7 本ともカードの登録を確認した。台帳の `nextBestArticle` も同じ記事にした。`update-published-navigation.mjs` は既存の枠を差し替えず有料のデータ記事カードを足す動き (試行で wouldAddNextNote=false・wouldAddDataset=true) だったので使っていない。データ集・元データのカードは残っており、「末尾の案内を 1 つにする」は未了。4 週の判定の基準日は 2026-10-28。
+  2'. (元の記述) **階段 1 の段 0 → 段 1 の導線を揃える [S・人手]** — `s47-fiscal` の無料 7 本の末尾の案内を、「同じ比較を自分の自治体で作る (`13-fiscal-peer-no-code`)」の 1 本にする。stats47 へのリンクは本文の出典として残し、末尾の案内は 1 つにする。この 7 本は `NOTE-CIRCULATION-PILOT-01` (次の記事とマガジンのカード) の観測対象と重なるので、その判定 (improvements の Due 10-18 を超過) を記録してから変える。カタログ (`data/note/articles.json` の本文) も同じ差分で直す。**完了**: 7 本の末尾が揃い、カタログと一致している。**停止**: 公開記事の編集は人手のログインとオーナー承認を経てから。
   3. **段 1 を無料にする [S・人手・2026-11-09 以降]** — `NOTE-FISCAL-PEER-PUBLISH-01` が公開日 + 28 日 (11-09) の売上比較を記録するまで、価格を変えない。記録後、`13-fiscal-peer-no-code` を無料にし、末尾に段 2 (`12-fiscal-peer-comparison`) への案内 1 行を置く。**完了**: note 上で無料になり、カタログの `isPaid` が false。
   4. **階段 2 の段 0 → 段 1 の導線 [S・人手]** — `h-howto-mymaps-kml` が公開されたら (制作・公開は `NOTE-HOWTO-SERIES-01`)、KML 記事の末尾をそこへの案内 1 行にし、H-01 の末尾を段 2 への案内にする。**完了**: 2 本の末尾がつながっている。
   5. **段 2 `ppt-japan-map-assets` を仕上げて公開する [M・承認]** — 下書きの中身を、PowerPoint で開いて県ごとに色を変えられるか (図形として編集できるか) の実機確認と note-critic で確かめる。境界は国土数値情報の行政区域 (N03・`cc-by-4.0`、`packages/gis/src/mlit-ksj/datasets.ts`) なので、出典表示を同梱する (product-factory の `LICENSE-ja.txt` 生成を使う)。**完了**: 実機確認・critic PASS・オーナー承認を経て公開。**停止**: 図形として編集できない (画像の貼り付けだけ) なら ¥1,980 では出さない。

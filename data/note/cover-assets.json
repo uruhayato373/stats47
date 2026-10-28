@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-24T22:19:25.334Z",
+  "updatedAt": "2026-10-28T02:44:17.067Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -31103,6 +31103,21 @@
           "subject": "大きな地図カードと、共有リンクを表す小さな鎖アイコン、ウェブサイトに埋め込むブラウザー枠を紙の立体コラージュ風に配置。地図は抽象的な色面にし、実在する地域の境界やGoogleの実画面は描かない。人物・手は描かない。",
           "evidence": "本文はGoogleマイマップの「リンクの共有を許可する」「地図を公開する」の違いと、自分のサイトに埋め込む手順を説明。Googleマイマップ公式ヘルプ https://support.google.com/mymaps/answer/3109452?co=GENIE.Platform%3DDesktop&hl=ja を2026-10-24に照合。統計値や実際の地図の塗り分けは表紙に描かない。"
         }
+      }
+    },
+    {
+      "articleKey": "h-howto-qgis-choropleth",
+      "noteUrl": null,
+      "revisions": [],
+      "candidateRevisionId": null,
+      "approvedRevisionId": null,
+      "published": null,
+      "missingVersions": [],
+      "production": {
+        "id": "NCI-00506",
+        "policyId": "NCP-007",
+        "policyVersion": 4,
+        "brief": null
       }
     },
     {
