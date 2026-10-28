@@ -1423,6 +1423,13 @@ jobs:
           tests/e2e/seo/structured-data.spec.ts
         working-directory: apps/web
 
+      - name: 📜 Show server logs on E2E failure
+        # 失敗の画面は汎用のエラー表示だけで原因が読めないため、サーバー側の出力を残す (2026-10-28 PR #1194)
+        if: failure()
+        run: |
+          echo "── next start (末尾 300 行) ──"; tail -n 300 /tmp/pr-e2e-next.log 2>/dev/null || true
+          echo "── r2 overlay (末尾 100 行) ──"; tail -n 100 /tmp/pr-e2e-r2-overlay.log 2>/dev/null || true
+
       - name: 🛑 Stop web app
         if: always()
         run: |
