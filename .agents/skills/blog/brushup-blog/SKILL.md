@@ -298,7 +298,8 @@ nlm cross query --notebooks "<ノートブック名>" \
      取り直さずにその図の `data/<name>.source.json` に `"yearPinnedReason": "<理由>"` を書く (古い図の一覧と data-refresh レーンから外れる)。
      本文が図の年を語っていない図は固定しない (2026-10-07 に図の年が古い 24 枚を本文と照らした結果、固定が正しい図は 0 枚だった)
 3. 取り直し: 同じコマンドに `--apply`。data JSON・source.json (`year` と `refreshedFromYear`)・SVG (PC・本文縦長・Instagram) を
-   最新年で作り直す。「手作業」の図 (散布図・計算値など) は表の理由を見て `fetch-correlation-scatter.mjs` 等で個別に取り直す
+   最新年で作り直す。2 指標の散布図も、点が R2 の値と一致すれば両軸の最新の共通年で作り直し、相関係数を記録し直す。
+   「手作業」の図 (同じ指標の年比較・計算した軸など) は表の理由を見て `fetch-correlation-scatter.mjs` 等で個別に取り直す
 4. 本文: 表の下の「本文で古い年を書いた行」と、`article-factual-check.mjs` の `VALUE_MISMATCH` (取り直した data と食い違う
    本文の数値) をすべて直す。順位が入れ替わって見出しや結論が成り立たなくなった節は、data に合わせて解釈から書き直す
 5. 共通 Step B / C (lint・quality-gate) → blog-critic (delta) → 公開。done にすると次の snapshot で図の年が最新になり、一覧から消える

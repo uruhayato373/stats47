@@ -183,7 +183,12 @@ source.json に表示用の出典を明示する:
   古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じ指標を複数の年で描いた記事は
   最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
   `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
-  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。
+  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。2 指標の散布図
+  (kind `scatter` / `derived-scatter` / `calculated` / `ranking-join` / `composite`) も、今の点が R2 のどの指標・年の値と
+  一致するかで軸と年を確かめてから、両軸の最新の共通年で作り直し、`pearsonR`・除外県を記録し直す。共通年へそろえると
+  今より古くなる軸があるときは軸ごとの最新年のまま両方の年を見出しに出す。同じ指標の 2 年比較と、点が R2 の値と
+  一致しない (計算した軸の) 図は手作業に回す。`formula` の文章は作り直さないので、古い年が残れば手作業として出る
+  (2026-10-28 BLOG-REFRESH-DERIVED-SCATTER-01)。
 - **`yearPinnedReason` (2026-10-07)**: 本文がその年そのものを主題として論じる図 (特定の年の出来事や、制度が変わった前後の
   比較で過去側に置いた図) だけ、source.json に `"yearPinnedReason": "<理由>"` を書く。`rankingRefs` はその図の年を持たず
   (指標 → 記事の回遊には残る)、古い図の一覧と取り直しの対象から外れる。理由の無い固定はしない (空文字は固定として扱わない)。
