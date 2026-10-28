@@ -256,6 +256,12 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [REMOTION-UNDECLARED-VISUALIZATION-DEP-01] 動画アプリが @stats47/visualization を宣言せずに使っている
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:grep -c @stats47/visualization apps/remotion/package.json] [起票:2026-10-28] [領域:SNS]
+
+- **証拠 (2026-10-28)**: `apps/remotion/src` の 23 ファイルが `@stats47/visualization` を import しているが、`apps/remotion/package.json` の dependencies に無い (`grep -c` が 0)。workspace の巻き上げで偶然解決しているだけで、install の構成が変わると動画・画像の生成が import エラーで止まる。
+- **完了条件**: `apps/remotion/package.json` に `"@stats47/visualization": "*"` を足し、lockfile を更新し、`cd apps/remotion && npx tsc --noEmit` が通る。
+
 ### [LINE-GRID-COLUMN-01] 右レールを線の格子にするか決め、描いた画面の格子検査を定期実行に載せる
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
 
