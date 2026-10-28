@@ -3,14 +3,7 @@
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin-ui/status-badge';
 import { MediaPreview } from '@/components/media-preview';
-import { Button, buttonVariants } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
+import { Button, buttonVariants, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@stats47/components';
 import type { PostDTO } from '@/lib/contracts/types';
 import {
   candidatesFor,

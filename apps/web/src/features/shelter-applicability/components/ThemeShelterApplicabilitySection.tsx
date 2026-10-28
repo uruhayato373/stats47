@@ -1,8 +1,8 @@
 
+import { ChartPanel } from '@stats47/components';
 import { SHELTER_APPLICABILITY_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { parseShelterApplicabilitySnapshot } from '../lib/shelter-applicability-snapshot';
 

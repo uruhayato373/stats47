@@ -31,7 +31,7 @@ Layer 2: 共有チャートエンジン（e-Stat連携・ローディング・�
   └── services/            e-Stat API 接続
 
 Layer 3: UIミニチャート（カード内埋め込み用）
-  apps/web/src/components/charts/            ← ミニチャート + ChartCard
+  apps/web/src/components/charts/            ← ミニチャート (数値タイルは @/components/surface の StatTile)
 
 Feature-scoped（明示的に例外認定）
   features/blog/components/charts/           ← ブログ専用（useChartDataに依存、移動不可）
@@ -102,7 +102,6 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | コンポーネント | インポートパス | `componentType` | 用途 |
 |---|---|---|---|
 | `KpiCardClient` | `@/components/stat-charts` | `stats-card` | KPI単一値カード |
-| `MultiStatCardClient` | `@/components/stat-charts/components/cards/MultiStatCard` | `multi-stats-card` | 複数KPIカード |
 | `DefinitionsCard` | `@/components/stat-charts/components/cards/DefinitionsCard` | `definitions-card` | 定義・説明テキストカード |
 | `StatsTableClient` | `@/components/stat-charts/components/cards/StatsTable` | `data-table` | 統計テーブル |
 | `SlidePresentation` | `@/components/stat-charts/components/cards/SlidePresentation` | `slide-presentation` | スライド表示 |
@@ -111,7 +110,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | インポートパス | 用途 |
 |---|---|---|
-| `ChartPanel` | `@/components/charts/ChartPanel` | チャートを囲む見出し付きの枠（タイトル・説明・出典の footer）。テンプレートの `Card` / `CardHeader` / `CardContent` で組み立てる |
+| `ChartPanel` | `@/components/charts/ChartPanel` | チャートを囲む見出し付きの枠（タイトル・説明・出典の補足 1 行）。見出し・文字の寸法は Card 部品が持ち、ページの側で変えない。テンプレートの `Card` / `CardHeader` / `CardContent` で組み立てる |
 | `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` | `@/components/charts/ChartState`（`ChartLoadingCard` は `@/components/stat-charts` からも再 export） | 読み込み中・空・エラーの状態表示の唯一の置き場。テンプレートの `Skeleton` / `Empty` / `Card` をそのまま組み立てる。feature 側に別名のラッパーを作らない |
 | `DashboardComponentRenderer` | `@/components/stat-charts/components/DashboardComponentRenderer` | componentTypeディスパッチャー |
 
@@ -137,7 +136,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | インポートパス | 用途 |
 |---|---|---|
-| `ChartCard` | `@/components/charts/ChartCard` | label / value / chart / footer スロット付きカード |
+| `StatTile` | `@/components/surface` | 数値タイル (名前 / 値・単位・バッジ / 補足 + 子にミニチャート)。旧 `ChartCard` は 2026-10-28 に統合して削除 |
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
@@ -150,19 +149,19 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 #### カードフレームの役割分担（重複と誤判定しないこと）
 
 `@/components/charts` のカード枠は**基盤のテンプレート `Card` を共有しつつ、用途別に明確な役割を持つ**
-（`ChartPanel` は `Card` を直接組み立て、`ChartCard` は `Card` を合成した `SurfaceCard` を使う。2026-10-27 にテンプレートへ寄せた）。
+（`ChartPanel` は `Card` を直接組み立て、`StatTile` は `Card` を合成した `SurfaceCard` を使う。2026-10-27 にテンプレートへ寄せ、2026-10-28 に `ChartCard` を `StatTile` へ統合した）。
 表層が似ている（どれも同じ `Card` の枠）が**重複ではない**。マージは leaky abstraction を生むため禁止。
 （過去に監査が「ChartCard と ChartPanel は重複」と表層誤判定 → 精読で役割分担と判明: 2026-06-23）。
 
 | コンポーネント | 役割 | header の形 | 使い分け |
 |---|---|---|---|
-| `ChartPanel` | **タイトル付きチャート/マップ枠** | `title`+`description`+`icon`+`action`（border-b 付き）/ bordered footer | チャート・地図など「見出し付きパネル」 |
-| `ChartCard` | **compact KPI カード** | `label`+`value` を1行 baseline（border なし） | KPI（指標名+大きな数値）+ ミニチャート |
+| `ChartPanel` | **タイトル付きチャート/マップ枠** | `title`+`description`+`icon`+`action`（border-b 付き）/ 補足はパネルの中の下端 1 行 (`footer`。帯にしない) | チャート・地図など「見出し付きパネル」 |
+| `StatTile` | **数値タイル** | 名前 → 値 (24px/600)・単位・バッジ → 補足 (見出しの帯なし) | KPI（指標名+大きな数値）+ ミニチャート |
 | `KpiCard` | **KPI + badge/trend** | KPI 値 + バッジ/トレンド | 増減トレンド付き KPI |
 
-> `ChartCard.tsx` が実装本体（import path は `@/components/charts/ChartCard` の 1 種類のみ）。
+> `StatTile.tsx` (`apps/web/src/components/surface/`) が実装本体。値の書式は同じファイルの `STAT_VALUE_CLASS` などで、パネルの中の大きな数値もこれを使う。
 > 旧 `StatsChartCard` alias と re-export barrel は 2026-07-11 (DR-AUDIT-04) で廃止した。
-> 役割の正典はこの表 + `check-design-system.mjs` の `no-legacy-dashboard-card` メッセージ（"ChartPanel for charts/maps and ChartCard for compact KPI cards"）。
+> 役割の正典はこの表 + `check-design-system.mjs` の旧ダッシュボードカードを止める規則のメッセージ（"ChartPanel for charts/maps and StatTile for compact KPI (numeric) tiles"）。
 
 ---
 

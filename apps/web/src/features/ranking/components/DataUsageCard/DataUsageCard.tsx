@@ -90,7 +90,7 @@ export function DataUsageCard({
         <a href={href} onClick={() => {
               trackCsvDownload({ rankingKey, yearCode: "all" });
               if (survey === "hidden") setSurvey("asking");
-            }} data-slot="button" className={buttonVariants({ variant: "default", size: "sm", className: "gap-1.5 shrink-0" })}>
+            }} data-slot="button" className={buttonVariants({ variant: "default", size: "sm", className: "shrink-0" })}>
             <Download className="h-4 w-4" />
             ダウンロード
           </a>

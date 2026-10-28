@@ -4,6 +4,7 @@ import {
 } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -55,13 +56,13 @@ export async function ThemeGeoInsightsSection({
   );
 
   return (
-    <section className="mt-8">
+    <PanelGrid as="section">
       <SectionHeader
         title={areaName ? `${areaName}を空間分析で読む` : '関連する空間分析'}
         description="テーマ指標の概況に加え、公式GISレイヤーを重ねた分析を確認できます。計算・途中データ・限界は各Geoページへ集約しています。"
         hideRule
       />
-      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      <PanelGrid className="mt-4 md:grid-cols-2 xl:grid-cols-3">
         {cards.map(({ item, snapshot, row, metric }) => {
           const prefCode2 = areaCode?.slice(0, 2);
           const href = prefCode2
@@ -95,7 +96,7 @@ export async function ThemeGeoInsightsSection({
             </SurfaceCard>
           );
         })}
-      </div>
-    </section>
+      </PanelGrid>
+    </PanelGrid>
   );
 }

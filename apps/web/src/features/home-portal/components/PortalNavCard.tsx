@@ -2,13 +2,7 @@
 
 import Image from 'next/image';
 
-import {
-  PORTAL_CARD_DESCRIPTION_CLASS,
-  PORTAL_CARD_PADDING_CLASS,
-  PORTAL_CARD_TITLE_CLASS,
-  SurfaceLinkCard,
-} from '@/components/surface';
-import { PORTAL_CARD_CELL_CLASS } from '@/components/surface/SurfaceCard';
+import { PORTAL_CARD_DESCRIPTION_CLASS, PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 

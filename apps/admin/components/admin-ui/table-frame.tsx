@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { cn } from "@/lib/cn";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, cn } from "@stats47/components";
 
 /**
  * 表の外枠 (見本 shadcndashboard.dev の表と同じ: 1px 枠・角なし。見出し行は塗らず muted の 14px、セルの余白は 12px × 16px)。

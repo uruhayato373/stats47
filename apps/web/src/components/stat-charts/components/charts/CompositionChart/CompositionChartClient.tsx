@@ -27,9 +27,9 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
       onValueChange={(v) => setActiveTab(v as "composition" | "trend")}
     >
       <div className="flex items-center justify-between mb-3">
-        <TabsList className="h-7 p-0.5">
-          <TabsTrigger value="composition" className="text-xs h-6 px-2.5">構成比</TabsTrigger>
-          <TabsTrigger value="trend" className="text-xs h-6 px-2.5">推移</TabsTrigger>
+        <TabsList className="h-7">
+          <TabsTrigger value="composition" className="text-xs h-6">構成比</TabsTrigger>
+          <TabsTrigger value="trend" className="text-xs h-6">推移</TabsTrigger>
         </TabsList>
         {activeTab === "composition" && chartData.latestYearLabel && (
           <span className="text-xs text-muted-foreground">{chartData.latestYearLabel}</span>

@@ -31,8 +31,10 @@ describe('PageShell — leftRail', () => {
         {MAIN}
       </PageShell>
     );
-    const shell = container.firstElementChild;
-    expect(shell?.firstElementChild).toBe(screen.getByRole('heading', { name: 'page-title' }));
+    // 見出し・ページ内ナビ・本文は 1 本の線の格子 (本文の列)。見出しはその先頭のセル
+    const column = container.firstElementChild?.firstElementChild;
+    expect(column).toHaveAttribute('data-slot', 'panel-grid');
+    expect(column?.firstElementChild).toBe(screen.getByRole('heading', { name: 'page-title' }));
     const nav = screen.getByLabelText('left-rail');
     const heading = screen.getByRole('heading', { name: 'page-title' });
     const main = container.querySelector('div[data-slot="shell-main"]');
@@ -120,7 +122,11 @@ describe('PageSections', () => {
       </PageSections>
     );
     const root = container.firstElementChild as HTMLElement;
-    expect(root).toHaveAttribute('data-slot', 'page-sections');
+    // 節は線の格子に並ぶ (1px の隙間をセルの外側 1px の影で線にする。親の地は塗らないので空いた所が灰色にならない)
+    expect(root).toHaveAttribute('data-slot', 'panel-grid');
+    expect(root.className).toMatch(/\bgap-px\b/);
+    expect(root.className).toContain('*:shadow-[0_0_0_1px_hsl(var(--border))]!');
+    expect(root.className).not.toMatch(/\bbg-border/);
     const kinds = [...root.children].map((child) => child.getAttribute('data-slot') ?? child.tagName);
     expect(kinds).toEqual(['SECTION', 'section-divider', 'SECTION', 'section-divider', 'SECTION']);
     // 帯は読み上げない (装飾)

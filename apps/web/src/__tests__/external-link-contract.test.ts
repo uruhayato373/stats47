@@ -24,7 +24,6 @@ const SRC = path.resolve(ROOT, "src");
  */
 const SAME_TAB_DYNAMIC_ANCHORS: Record<string, string> = {
   "src/app/products/[slug]/from/note/[noteKey]/page.tsx": "meta refresh で商品ページへ転送する中継ページの代替リンク",
-  "src/components/stat-charts/components/cards/MultiStatCard/MultiStatCardClient.tsx": "ランキングページへのサイト内リンク",
   "src/components/stat-charts/components/cards/StatsTable/StatsTableClient.tsx": "ランキングページへのサイト内リンク",
   "src/features/ranking/components/DataUsageCard/DataUsageCard.tsx": "サイト内 API の CSV ダウンロード",
 };

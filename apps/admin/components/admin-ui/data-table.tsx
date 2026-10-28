@@ -1,7 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { cn } from "@/lib/cn";
+import { TableBody, TableCell, TableHead, TableHeader, TableRow, cn } from "@stats47/components";
 
 import { bodyCell, headCell, TableFrame } from "./table-frame";
 
@@ -32,7 +31,7 @@ export const Row = TableRow;
 export function Cell({ nowrap, muted, className, ...props }: ComponentProps<typeof TableCell> & { nowrap?: boolean; muted?: boolean }) {
   return (
     <TableCell
-      className={cn(bodyCell, "align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
+      className={cn(bodyCell, "align-top! whitespace-normal!", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
       {...props}
     />
   );

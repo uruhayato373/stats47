@@ -5,7 +5,7 @@
 import { useMemo } from "react";
 
 
-import { DataTable, cn } from "@stats47/components";
+import { DataTable, cn, ChartPanel } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
@@ -19,7 +19,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Table as TableIcon } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import { navSurfaceProps } from "@/lib/analytics/events";

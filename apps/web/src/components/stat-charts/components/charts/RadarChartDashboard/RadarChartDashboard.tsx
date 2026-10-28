@@ -1,3 +1,4 @@
+import { ChartPanel } from "@stats47/components";
 import { logger } from "@stats47/logger";
 import {
   readRankingItemFromR2,
@@ -6,7 +7,6 @@ import {
 import { isOk } from "@stats47/types";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toRadarChartData } from "../../../adapters";

@@ -22,11 +22,7 @@ import {
 import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge } from '@/components/admin-ui';
 import { Grid, Section } from '@/components/layout-primitives';
 import { ErrorNote, PageHeading } from '@/components/ops/primitives';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Input } from '@/components/ui/input';
-import { NativeSelect } from '@/components/ui/native-select';
+import { Alert, AlertDescription, Button, buttonVariants, Collapsible, CollapsibleContent, CollapsibleTrigger, Input, NativeSelect } from '@stats47/components';
 import type {
   ReferenceProductionChannelDTO,
   ReferenceProductionKindDTO,

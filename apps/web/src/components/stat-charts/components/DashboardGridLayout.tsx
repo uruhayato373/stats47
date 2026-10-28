@@ -22,7 +22,6 @@ const GRID_DEFAULTS: Record<string, { lg: number; md: number; sm: number; xs: nu
   "sunburst":           { lg: 6,  md: 6,  sm: 12, xs: 12 },
   "treemap":            { lg: 6,  md: 6,  sm: 12, xs: 12 },
   "bar-chart-race":     { lg: 6,  md: 12, sm: 12, xs: 12 },
-  "multi-stats-card":   { lg: 4,  md: 6,  sm: 12, xs: 12 },
   "definitions-card":   { lg: 12, md: 12, sm: 6,  xs: 6  },
   "slide-presentation": { lg: 6,  md: 12, sm: 12, xs: 12 },
   "stats-table":        { lg: 6,  md: 6,  sm: 12, xs: 12 },

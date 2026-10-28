@@ -4,12 +4,12 @@ import ts from 'typescript';
 export const CARD_SURFACE_COMPONENTS = new Set([
   'ArticleCard',
   'Card',
-  'ChartCard',
   'ChartPanel',
   'RailCard',
   'SurfaceCard',
   'SurfaceLinkCard',
   'SurfaceSection',
+  'StatTile',
 ]);
 
 function getJsxTagName(tagName) {

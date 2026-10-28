@@ -4,7 +4,7 @@ import { CalendarRangeIcon, ClipboardCheckIcon, FileTextIcon, ForwardIcon, Gavel
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@stats47/components";
 import { reviewRunView, type Cadence, type ReviewRunView, type RunVerdict, type StepState } from "@/lib/server/reviews";
 import { hasError } from "@/lib/server/state-io";
 

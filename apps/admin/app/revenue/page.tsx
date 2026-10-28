@@ -3,9 +3,7 @@ import { ChartColumnIcon, EyeIcon, GaugeIcon, MousePointerClickIcon, ScaleIcon, 
 import { Cell, DataGrid, DataTable, PanelCard, Row, StatCard, StatusBadge, TrendChart, type StatTrend } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading, Unmeasured } from "@/components/ops/primitives";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger, Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@stats47/components";
 import { readWeeklyProductRevenue } from "@/lib/server/kpi";
 import { revenueSummary } from "@/lib/server/revenue";
 import { hasError } from "@/lib/server/state-io";

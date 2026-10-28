@@ -1,7 +1,7 @@
+import { ChartPanel } from "@stats47/components";
 import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toStackedAreaData } from "../../../adapters";

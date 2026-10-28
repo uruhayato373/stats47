@@ -3,17 +3,7 @@
 import { ChevronRight } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "@/components/ui/sidebar";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@stats47/components";
 import { isBranch, isNavItemActive, navHrefs, type NavBranch, type NavGroup } from "@/lib/nav-registry";
 
 type IsActive = (href: string) => boolean;

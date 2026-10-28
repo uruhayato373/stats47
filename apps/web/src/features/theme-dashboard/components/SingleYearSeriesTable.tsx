@@ -59,7 +59,7 @@ export function SingleYearSeriesTable({
         <TableRow>
           <TableHead>{nameColumnLabel}</TableHead>
           <TableHead>年次</TableHead>
-          <TableHead className="text-right">値</TableHead>
+          <TableHead className="text-right!">値</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

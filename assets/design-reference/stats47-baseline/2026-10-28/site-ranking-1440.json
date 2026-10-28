@@ -1,0 +1,478 @@
+{
+  "title": "年間日照時間ランキング都道府県【2024年】｜1位高知県（2,309時間） | 統計で見る都道府県",
+  "inset": {
+    "font": "16px/27.2px 400",
+    "color": "rgb(10, 10, 10)",
+    "bg": "rgb(255, 255, 255)",
+    "pad": "0 0 0 0",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "rgb(229, 229, 229)",
+    "radius": "0px",
+    "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
+    "display": "flex",
+    "w": 1176,
+    "h": 3114,
+    "cls": "relative flex w-full flex-1 flex-col bg-background lg:peer-data-[variant=inset]:m-2 lg:peer-data-[variant=inset]:ml-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:"
+  },
+  "main": {
+    "font": "16px/27.2px 400",
+    "color": "rgb(10, 10, 10)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "pad": "16 16 16 16",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "rgb(229, 229, 229)",
+    "radius": "0px",
+    "shadow": "none",
+    "display": "block",
+    "cls": "min-w-0 flex-1 p-4"
+  },
+  "text": {
+    "h1": {
+      "font": "20px/32px 600",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "年間日照時間",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "h2": {
+      "font": "14px/20px 600",
+      "color": "rgb(23, 23, 23)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "このデータを使う",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "h3": {
+      "font": "16px/24px 500",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "上位3件と最下位",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "p": {
+      "font": "12px/16px 400",
+      "color": "rgb(115, 115, 115)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "破線: 単純平均 2,034.6",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "body": {
+      "font": "16px/27.2px 400",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgb(255, 255, 255)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "#nprogress{pointer-events:none",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    }
+  },
+  "dividers": [],
+  "grids": [
+    {
+      "cls": "grid grid-cols-1 gap-0 @min-[40rem]:grid-cols-2",
+      "cols": "406px 406px",
+      "gap": "0px 0px",
+      "border": "0 0 0 0 solid",
+      "children": 2
+    }
+  ],
+  "slots": {
+    "sidebar-wrapper": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-gap": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-container": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-inner": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-header": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 12 0 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-content": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-group": {
+      "count": 4,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-group-label": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"12px/16px 600\",\"pad\":\"0 8 0 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 3
+      }
+    },
+    "sidebar-group-content": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3
+      }
+    },
+    "sidebar-menu": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-menu-item": {
+      "count": 46,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 25,
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 20
+      }
+    },
+    "sidebar-menu-button": {
+      "count": 31,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 12 8 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 14,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 48 8 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 17
+      }
+    },
+    "collapsible": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "collapsible-content": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "sidebar-menu-badge": {
+      "count": 17,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 4 0 4\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 17
+      }
+    },
+    "sidebar-menu-sub": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"2 10 2 10\",\"gap\":\"4px 4px\",\"border\":\"0 0 0 1 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "sidebar-menu-sub-item": {
+      "count": 56,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 56
+      }
+    },
+    "sidebar-menu-sub-button": {
+      "count": 76,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 8 0 8\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 56,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"6 8 6 8\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 20
+      }
+    },
+    "sidebar-footer": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"8px 8px\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-inset": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-trigger": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "separator": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "input": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"4 10 4 40\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 1
+      }
+    },
+    "button": {
+      "count": 13,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":0}": 1,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 1,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 10 0 10\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\",\"h\":28}": 5,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 10 0 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 4,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 8 0 8\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\",\"h\":24}": 2
+      }
+    },
+    "breadcrumb": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-list": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"6px 6px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-item": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"4px 4px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "breadcrumb-link": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3
+      }
+    },
+    "breadcrumb-separator": {
+      "count": 4,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 4
+      }
+    },
+    "breadcrumb-ellipsis": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-page": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "tooltip-trigger": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\"}": 5
+      }
+    },
+    "shell-main": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "card": {
+      "count": 16,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 0 16 0\",\"gap\":\"16px 16px\",\"border\":\"0 0 0 0 none\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 none\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 8,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 16 16\",\"gap\":\"16px 16px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"8 16 8 16\",\"gap\":\"16px 16px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"12 12 12 12\",\"gap\":\"16px 16px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "card-header": {
+      "count": 11,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":37}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":45}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":0}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":53}": 7
+      }
+    },
+    "card-title": {
+      "count": 11,
+      "variants": {
+        "{\"font\":\"16px/24px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 8
+      }
+    },
+    "card-action": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "card-content": {
+      "count": 11,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 16 0 16\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"10 16 10 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 16 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"8 7 8 7\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "select-trigger": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"8 8 8 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\"}": 2
+      }
+    },
+    "select-value": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"6px 6px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "tabs": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"8 16 8 16\",\"gap\":\"8px 8px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "tabs-list": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"3 3 3 3\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":0}": 1
+      }
+    },
+    "tabs-trigger": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"2 6 2 6\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "table-container": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-header": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-row": {
+      "count": 11,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 10,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-head": {
+      "count": 4,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 8 0 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":40}": 4
+      }
+    },
+    "table-body": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-cell": {
+      "count": 40,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":33}": 40
+      }
+    },
+    "card-footer": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"16 16 16 16\",\"gap\":\"normal normal\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\",\"h\":49}": 1
+      }
+    },
+    "disclosure-icon": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 6,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "cookie-consent": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 16 8 16\",\"gap\":\"12px 12px\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    }
+  },
+  "cssVars": {
+    "--radius": ".625rem",
+    "--border": "240 0% 89.8%",
+    "--muted-foreground": "0 0% 45.2%",
+    "--foreground": "330 0% 3.9%",
+    "--background": "0 0% 100%",
+    "--card": "0 0% 100%",
+    "--muted": "120 0% 96.1%",
+    "--primary": "0 0% 9.1%"
+  }
+}

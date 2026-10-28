@@ -9,7 +9,7 @@
  */
 import { MoonIcon, SunIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@stats47/components";
 
 const KEY = "stats47-console-theme";
 

@@ -17,5 +17,5 @@ metadata:
 **How to apply:**
 - 見本の URL があれば、最初にブラウザで実物 (デモ) を開き、`getComputedStyle` で角丸・余白・フォント・色・表の見出し・サイドバーの選択色を実測し、表にしてから設計する
 - 無料版のリポジトリや公式ブロックは「実装の手がかり」に留め、見た目の正本にしない
-- 実測値は規約 (`.claude/rules/admin-ui.md` の「見本の実測値」) に書き、担当 agent にも渡す
+- 見本は台帳 `data/design-references/references.json` に 1 件足し (URL・採否と理由・撮影 `assets/design-reference/<id>/<日付>/`・反映先)、管理画面「サイト > 参考サイト」で共有する。実測値は `docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」に書き、担当 agent にも渡す
 - 関連: [[feedback-agent-output-contract]]

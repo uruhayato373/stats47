@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
+import { PanelGrid } from "@/components/layout";
+
 import { FooterAdSlot } from "@/features/ads";
 
 import { trackSearch } from "@/lib/analytics/events";
@@ -201,58 +203,58 @@ function SearchPageClientInner({
   // かつ skeleton → 実レイアウトへの遷移で CLS を発生させるため削除した。
   // T2-CWV-04 / #79 Phase 1B。実ロードは `isSearching` 側で handle される。
 
+  // 本文の線の格子の中に、結果の列と絞り込みの列を 2 列の格子で置く。結果の列は検索欄・件数・各結果・広告を
+  // それぞれ 1 セルにする (パネルと文章を 1 つのセルに混ぜると文章が線に接する)
   return (
-    <div className="mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-8">
-        {/* メインコンテンツ: 検索と結果 */}
+    <PanelGrid className="md:grid-cols-[1fr_240px]">
+      {/* メインコンテンツ: 検索と結果 */}
+      <PanelGrid className="min-h-[400px] content-start">
         <div>
           <SearchInput
             onSearch={handleSearch}
             placeholder="ブログ記事、ダッシュボード、ランキングを検索..."
             defaultValue={query}
           />
+        </div>
 
-          <div className="mt-8 min-h-[400px]">
-            {isSearching ? (
-              <div className="space-y-4">
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-24 w-full" />
-              </div>
-            ) : (
-              <SearchResults results={results} query={query} />
-            )}
+        {isSearching ? (
+          <div className="flex flex-col gap-4">
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
           </div>
+        ) : (
+          <SearchResults results={results} query={query} />
+        )}
 
-          {!isSearching && results.length > 0 && <FooterAdSlot />}
-        </div>
+        {!isSearching && results.length > 0 && <FooterAdSlot />}
+      </PanelGrid>
 
-        {/* 右サイドバー: フィルター */}
-        <div className="md:order-last order-first">
-          <SearchFilters
-            selectedType={selectedType}
-            selectedCategory={selectedCategory}
-            selectedTags={selectedTags}
-            selectedYear={selectedYear}
-            selectedMonth={selectedMonth}
-            onTypeChange={handleTypeChange}
-            onCategoryChange={setSelectedCategory}
-            onTagToggle={handleTagToggle}
-            onYearChange={handleYearChange}
-            onMonthChange={handleMonthChange}
-            categories={filterMeta.categories}
-            blogTags={filterMeta.blogTags}
-            blogYears={filterMeta.blogYears}
-          />
-        </div>
+      {/* 右サイドバー: フィルター */}
+      <div className="md:order-last order-first">
+        <SearchFilters
+          selectedType={selectedType}
+          selectedCategory={selectedCategory}
+          selectedTags={selectedTags}
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+          onTypeChange={handleTypeChange}
+          onCategoryChange={setSelectedCategory}
+          onTagToggle={handleTagToggle}
+          onYearChange={handleYearChange}
+          onMonthChange={handleMonthChange}
+          categories={filterMeta.categories}
+          blogTags={filterMeta.blogTags}
+          blogYears={filterMeta.blogYears}
+        />
       </div>
-    </div>
+    </PanelGrid>
   );
 }
 
 function SearchPageSkeleton() {
   return (
-    <div className="mt-8">
+    <div>
       <Skeleton className="h-10 w-full mb-4" />
       <Skeleton className="h-20 w-full mb-4" />
       <Skeleton className="h-40 w-full" />

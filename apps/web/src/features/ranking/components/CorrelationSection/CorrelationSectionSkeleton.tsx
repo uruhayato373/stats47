@@ -9,7 +9,7 @@ export function CorrelationSectionSkeleton() {
         {[...Array(3)].map((_, i) => (
           <div key={i} className="flex items-center justify-between">
             <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-5 w-16 rounded-full" />
+            <Skeleton className="h-5 w-16" />
           </div>
         ))}
       </div>

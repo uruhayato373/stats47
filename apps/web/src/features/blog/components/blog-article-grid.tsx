@@ -3,7 +3,7 @@ import { normalizePercentInText } from "@stats47/data-configs/unit";
 import { ArrowRight } from 'lucide-react';
 
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
-import { SurfaceLinkCard } from '@/components/surface/SurfaceCard';
+import { SurfaceLinkCard } from '@/components/surface';
 
 import {
   BLOG_THUMBNAIL_ASPECT_CLASS,

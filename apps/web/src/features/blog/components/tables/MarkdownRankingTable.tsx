@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { DataTable } from "@stats47/components";
+import { DataTable, ChartPanel } from "@stats47/components";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState, ChartLoading } from "@/components/charts/ChartState";
 
 import type { ColumnDef } from "@tanstack/react-table";

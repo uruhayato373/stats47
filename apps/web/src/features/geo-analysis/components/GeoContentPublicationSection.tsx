@@ -7,6 +7,7 @@ import {
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -30,14 +31,14 @@ export function GeoContentPublicationSection({
   const detailKey = geoAnalysisPrefKey(slug, prefCode2);
 
   return (
-    <section id="article-data" className="mt-6 scroll-mt-24">
+    <PanelGrid as="section" id="article-data" className="scroll-mt-24">
       <SectionHeader
         title="再現・検証データ"
         description="結論だけでなく、入力、空間処理、県別途中データ、合計の検算を同じ分析の証拠として公開しています。"
         hideRule
       />
 
-      <div className="mt-4 grid gap-3 md:grid-cols-3">
+      <PanelGrid className="mt-4 md:grid-cols-3">
         <SurfaceCard>
           <p className="text-xs font-medium text-muted-foreground">
             入力から結論まで
@@ -78,7 +79,7 @@ export function GeoContentPublicationSection({
             入力レイヤーと判定結果を県別に確認
           </p>
         </SurfaceCard>
-      </div>
+      </PanelGrid>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div>
@@ -147,6 +148,6 @@ export function GeoContentPublicationSection({
           ))}
         </ol>
       </details>
-    </section>
+    </PanelGrid>
   );
 }

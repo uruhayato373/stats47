@@ -203,8 +203,8 @@ export default async function MunicipalityPrefectureRankingPage({
               <TableRow>
                 <TableHead className="w-20">県内順位</TableHead>
                 <TableHead>{areaLabel}</TableHead>
-                <TableHead className="text-right">値</TableHead>
-                <TableHead className="w-24 text-right">全国順位</TableHead>
+                <TableHead className="text-right!">値</TableHead>
+                <TableHead className="w-24 text-right!">全国順位</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

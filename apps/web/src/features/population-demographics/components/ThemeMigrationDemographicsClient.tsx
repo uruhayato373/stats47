@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -14,7 +15,6 @@ import {
 } from '@stats47/components/atoms/ui/table';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -129,13 +129,13 @@ export function ThemeMigrationDemographicsClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">{tableLabel}</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転入（人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転出（人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 転入超過（人）
               </TableHead>
             </TableRow>
@@ -143,7 +143,7 @@ export function ThemeMigrationDemographicsClient({
           <TableBody>
             {view.rows.map((row) => (
               <TableRow key={row.areaCode} data-counterpart-code={row.areaCode}>
-                <TableHead scope="row" className="whitespace-normal">
+                <TableHead scope="row" className="whitespace-normal!">
                   {row.areaName}
                 </TableHead>
                 <TableCell

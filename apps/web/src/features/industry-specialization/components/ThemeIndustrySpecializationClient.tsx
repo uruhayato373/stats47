@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -12,7 +13,6 @@ import {
 import { INDUSTRY_SPECIALIZATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -59,22 +59,22 @@ export function ThemeIndustrySpecializationClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">産業</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 従業者
                 <br />
                 （人）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 構成割合
                 <br />
                 （%）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 全国割合
                 <br />
                 （%）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 特化
                 <br />
                 係数
@@ -87,7 +87,7 @@ export function ThemeIndustrySpecializationClient({
                 key={row.industryCode}
                 data-industry-code={row.industryCode}
               >
-                <TableHead scope="row" className="min-w-32 whitespace-normal">
+                <TableHead scope="row" className="min-w-32 whitespace-normal!">
                   {row.industryName}
                 </TableHead>
                 <TableCell

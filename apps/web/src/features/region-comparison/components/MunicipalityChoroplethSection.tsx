@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 
+import { ChartPanel } from "@stats47/components";
 import { DivergingChoroplethMap, type DivergingChoroplethValue } from "@stats47/visualization/d3/DivergingChoroplethMap";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { ComparisonRegion } from "../types";
 import type { TopoJSONTopology } from "@stats47/types";

@@ -71,7 +71,8 @@ function CityGrid({
   activeCityCode?: string;
 }) {
   return (
-    <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 sm:grid-cols-3 md:grid-cols-4">
+    // 行は左右 8px を外へ出す (LINK_ROW_SIZE_CLASS) ので、列の間は 16px 空けて hover の地を重ねない
+    <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 sm:grid-cols-3 md:grid-cols-4">
       {cities.map((city) => (
         <RailNavRow
           key={city.code}

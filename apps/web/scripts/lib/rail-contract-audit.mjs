@@ -155,7 +155,7 @@ export function findRailContractViolations(source, relativePath) {
     }
     for (const tag of jsxOpenTags(source, ['Link', 'button'])) {
       const classLiteral = /className=["']([^"']*)["']/.exec(tag.attrs)?.[1];
-      const usesSharedClass = /railNavRowClassName|RAIL_CHIP_CLASS/.test(tag.attrs);
+      const usesSharedClass = /railNavRowClassName|LINK_ROW_SIZE_CLASS|RAIL_CHIP_CLASS/.test(tag.attrs);
       if (usesSharedClass) continue;
       if (classLiteral === undefined) continue; // 動的 className は実行時計測 (measure-page-a11y) に委ねる
       if (!/\bmin-h-(11|12|14|1[6-9]|[2-9]\d)\b/.test(classLiteral)) {

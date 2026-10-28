@@ -1,7 +1,7 @@
 import { CloseSidebarOnNavigate } from "@/components/close-sidebar-on-navigate";
 import { ConsoleSidebar } from "@/components/console-nav";
 import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@stats47/components";
 
 import { Suspense } from "react";
 
@@ -46,7 +46,7 @@ export default function RootLayout({
         <SidebarProvider className="[--header-height:calc(var(--spacing)*12)]">
           <CloseSidebarOnNavigate />
           <ConsoleSidebar />
-          <SidebarInset className="min-w-0 outline outline-border md:peer-data-[variant=inset]:rounded-none md:peer-data-[variant=inset]:shadow-none">
+          <SidebarInset className="min-w-0 outline outline-border lg:peer-data-[variant=inset]:rounded-none lg:peer-data-[variant=inset]:shadow-none">
             <Suspense fallback={<div className="h-(--header-height) border-b" aria-hidden="true" />}>
               <SiteHeader />
             </Suspense>

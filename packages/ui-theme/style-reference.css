@@ -1,0 +1,69 @@
+.style-reference {
+  /* 見本サイト (demos.shadcndashboard.dev) とテンプレートの lyra が食い違う値だけを書く (正は見本。docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」)。 */
+  /* 形は style-lyra.css と同じ。npm run ui-theme:lyra が lyra の後に重ね (tailwind-merge で同じ性質を置き換え)、部品へ書き込む。 */
+  /* 根拠: assets/design-reference/shadcndashboard/2026-10-28/measurements の data-slot ごとの実測 (1440px)。 */
+
+  /* MARK: Card */
+  /* 線の格子 (apps/web の PanelGrid) の中のパネルは線を持たない (見本は並べる親の 1px の隙間が線になる) */
+  .cn-card {
+    @apply text-sm/relaxed in-data-[slot=panel-grid]:ring-0;
+  }
+
+  .cn-card-title {
+    @apply text-base leading-5.5;
+  }
+
+  .cn-card-description {
+    @apply text-sm/relaxed;
+  }
+
+  /* MARK: Button */
+  /* 見本のボタンは標準の大きさ 1 種類 (文字 14px / 20px・500、高さ 36px、左右 10px、角丸 8px)。lyra は文字 12px・高さ 32px・小さい大きさは角 0 */
+  .cn-button {
+    @apply text-sm;
+  }
+
+  /* 小・極小は見本に無い。表の見出しの並べ替えやページ送りなど詰めた場所で使い、文字 12px と高さは lyra のまま、角丸だけ見本の 8px にそろえる */
+  .cn-button-size-xs {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-sm {
+    @apply rounded-md text-xs;
+  }
+
+  .cn-button-size-default {
+    @apply h-9;
+  }
+
+  .cn-button-size-lg {
+    @apply h-10;
+  }
+
+  .cn-button-size-icon-xs {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-icon-sm {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-icon {
+    @apply size-9;
+  }
+
+  .cn-button-size-icon-lg {
+    @apply size-10;
+  }
+
+  /* MARK: HSL トークンの包み */
+  /* tokens-hsl.css の色は HSL の数値 3 つ (例 --secondary: 120 0% 96.1%) なので、var(--x) のままでは色として無効になり宣言ごと捨てられる。 */
+  /* lyra は色を完全な値で持つ前提なので、var(--x) を直接読む値だけ hsl(var(--x)) で包んで置き換える (ui-theme:lyra:test が包み忘れを止める)。 */
+  .cn-button-variant-secondary {
+    @apply hover:bg-[color-mix(in_oklch,hsl(var(--secondary)),hsl(var(--foreground))_5%)];
+  }
+
+  .cn-sidebar-menu-button-variant-outline {
+    @apply shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))];
+  }
+}

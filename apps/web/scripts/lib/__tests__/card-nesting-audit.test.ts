@@ -37,14 +37,14 @@ describe('findNestedCardSurfaces', () => {
     const result = findNestedCardSurfaces(`
       <ArticleCard>
         <SurfaceSection>
-          <ChartCard />
+          <StatTile />
         </SurfaceSection>
       </ArticleCard>
     `);
 
     expect(result).toEqual([
       expect.objectContaining({ parent: 'ArticleCard', child: 'SurfaceSection' }),
-      expect.objectContaining({ parent: 'SurfaceSection', child: 'ChartCard' }),
+      expect.objectContaining({ parent: 'SurfaceSection', child: 'StatTile' }),
     ]);
   });
 

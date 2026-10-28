@@ -2,12 +2,7 @@ import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import {
-  PORTAL_CARD_PADDING_CLASS,
-  PORTAL_CARD_TITLE_CLASS,
-  SurfaceLinkCard,
-} from "@/components/surface";
-import { PORTAL_CARD_CELL_CLASS } from "@/components/surface/SurfaceCard";
+import { PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from "@/components/surface";
 
 import type { FeaturedRankingCardModel } from "../../utils/resolve-featured-ranking-card";
 
@@ -64,7 +59,7 @@ export function FeaturedRankingCard({
         </p>
         <p
           className={cn(
-            "mt-1 whitespace-nowrap font-bold leading-tight tabular-nums text-foreground",
+            "mt-1 whitespace-nowrap font-semibold leading-tight tabular-nums text-foreground",
             featuredValueSizeClass(`${model.top.value}${displayUnit}`),
           )}
         >

@@ -485,15 +485,15 @@ function DeferredTabs({
   return (
     <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
       <TabsList className="w-full grid grid-cols-3">
-        <TabsTrigger value="map" className="flex items-center gap-1">
+        <TabsTrigger value="map" className="flex items-center">
           <MapIcon className="w-3.5 h-3.5" />
           地図
         </TabsTrigger>
-        <TabsTrigger value="stats" className="flex items-center gap-1">
+        <TabsTrigger value="stats" className="flex items-center">
           <BarChart3 className="w-3.5 h-3.5" />
           統計
         </TabsTrigger>
-        <TabsTrigger value="table" className="flex items-center gap-1">
+        <TabsTrigger value="table" className="flex items-center">
           <TableIcon className="w-3.5 h-3.5" />
           テーブル
         </TabsTrigger>

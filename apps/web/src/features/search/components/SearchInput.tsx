@@ -44,7 +44,7 @@ export function SearchInput({
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     placeholder={placeholder}
-                    className="h-12 pl-10 pr-24 text-base"
+                    className="h-12! pl-10! pr-24!"
                 />
                 {value && (
                     <button

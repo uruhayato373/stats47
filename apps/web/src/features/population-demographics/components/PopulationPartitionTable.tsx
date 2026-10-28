@@ -40,10 +40,10 @@ export function PopulationPartitionTable({
       <TableHeader>
         <TableRow>
           <TableHead scope="col">{category}</TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             {unit === '世帯' ? '世帯数' : '人口'}（{formatUnitForDisplay(unit)}）
           </TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             構成割合（%）
           </TableHead>
         </TableRow>
@@ -51,7 +51,7 @@ export function PopulationPartitionTable({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.code} data-category-code={row.code}>
-            <TableHead scope="row" className="min-w-40 whitespace-normal">
+            <TableHead scope="row" className="min-w-40 whitespace-normal!">
               {row.label}
             </TableHead>
             <TableCell

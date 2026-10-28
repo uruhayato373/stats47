@@ -8,7 +8,8 @@
 import { ReactNode } from "react";
 
 import { ArticleShell, PageHeader } from "@/components/layout";
-import { SurfaceCard } from "@/components/surface";
+import { PanelGrid } from "@/components/layout/PageShell";
+import { SectionCard } from "@/components/surface";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -24,12 +25,9 @@ function TermsArticle({
   children: ReactNode;
 }) {
   return (
-    <SurfaceCard>
-      <div className="py-3 px-4 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-xl">{title}</h2>
-      </div>
-      <div className="p-4 pt-3">{children}</div>
-    </SurfaceCard>
+    <SectionCard title={title} headingAs="h2">
+      {children}
+    </SectionCard>
   );
 }
 
@@ -60,7 +58,7 @@ export default function TermsPage() {
       />
 
 
-      <div className="space-y-6">
+      <PanelGrid>
         {/* 第1条（適用） */}
         <TermsArticle title="第1条（適用）">
           <div className="space-y-4">
@@ -274,7 +272,7 @@ export default function TermsPage() {
             </a>
           </p>
         </TermsArticle>
-      </div>
+      </PanelGrid>
     </ArticleShell>
   );
 }

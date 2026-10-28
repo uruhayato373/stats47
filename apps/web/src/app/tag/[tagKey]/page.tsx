@@ -4,7 +4,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
-import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
 import { FooterAdSlot, NativeAffiliateRow } from '@/features/ads';
@@ -113,7 +113,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
         stats={`全 ${articles.length} 記事`}
       />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <PanelGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => (
           <Link
             key={article.slug}
@@ -135,7 +135,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
             </SurfaceCard>
           </Link>
         ))}
-      </div>
+      </PanelGrid>
 
       {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
       {/*

@@ -31,6 +31,12 @@ import { cn } from "../../packages/components/src/lib/cn.ts";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const SOURCE_CSS = join(ROOT, "packages/ui-theme/style-lyra.css");
+/** 見本サイトに合わせて lyra の値を置き換える差分 (正本 style-lyra.css は手で直さないので別に持つ) */
+export const REFERENCE_CSS = join(ROOT, "packages/ui-theme/style-reference.css");
+/** 色の値 (HSL の数値 3 つ)。lyra の値はこれを hsl(var(--x)) で包んで読む */
+export const HSL_TOKENS_CSS = join(ROOT, "packages/ui-theme/tokens-hsl.css");
+/** HSL トークンの包み忘れを数える部品 (lyra を書き込む部品と、テンプレートから写した部品) */
+export const ATOMS_DIR = "packages/components/src/atoms/ui";
 
 /** cn-* を探すソースの場所。apps/web/tailwind.config.ts の content と同じ 3 か所 */
 export const SOURCE_DIRS = ["apps/web/src", "packages/components/src", "packages/visualization/src"];
@@ -77,9 +83,9 @@ export function listSourceFiles(root = ROOT, dirs = SOURCE_DIRS) {
  * 正本は `.style-lyra {` の中に 2 スペース字下げの `.cn-x {` … `}` が並び、本文は `@apply …;` だけを持つ。
  * それ以外の形が来たら黙って落とさず例外にする (テンプレートの取り直しで形が変わったことに気づくため)。
  */
-export function parseLyra(css) {
+export function parseLyra(css, root = ".style-lyra") {
   const lines = css.split("\n");
-  if (lines[0] !== ".style-lyra {") throw new Error("style-lyra.css の 1 行目が `.style-lyra {` ではない");
+  if (lines[0] !== `${root} {`) throw new Error(`style-lyra.css の 1 行目が \`${root} {\` ではない`);
   const rules = new Map();
   let i = 1;
   let closed = false;
@@ -454,11 +460,56 @@ export function inlineSource(text, rules) {
   return { output: applyEdits(text, edits), dynamic, uncovered };
 }
 
+/** tokens-hsl.css で HSL の数値 3 つ (例 `--secondary: 120 0% 96.1%`) を持つトークン名 */
+export function parseHslTokens(css) {
+  const tokens = new Set();
+  for (const match of css.matchAll(/^\s*--([a-z0-9-]+):\s*[0-9.]+\s+[0-9.]+%\s+[0-9.]+%\s*;/gm)) tokens.add(match[1]);
+  if (tokens.size === 0) throw new Error("tokens-hsl.css から HSL のトークンを読めない");
+  return tokens;
+}
+
+/**
+ * HSL の数値 3 つのトークンを hsl(…) で包まずに色として読む箇所の行 (`var(--secondary)`・`bg-(--muted)`)。
+ * その値は色として無効なので、ブラウザが宣言ごと捨てる。`hsl(var(--x))` だけを正しい読み方とする。
+ */
+export function rawHslTokenUses(text, tokens) {
+  const lines = [];
+  for (const match of text.matchAll(/(hsl\()?(?:var)?\(--([a-z0-9-]+)(?![a-z0-9-])/g)) {
+    if (match[1] || !tokens.has(match[2])) continue;
+    lines.push(text.slice(0, match.index).split("\n").length);
+  }
+  return lines;
+}
+
+/**
+ * lyra の規則に見本の差分を重ねる。差分は lyra にある規則だけに書け、同じ性質は tailwind-merge で置き換わる
+ * (例: lyra の text-xs/relaxed → 見本の text-sm/relaxed)。
+ */
+export function mergeReference(rules, reference) {
+  const merged = new Map(rules);
+  for (const [name, classes] of reference) {
+    if (!merged.has(name)) throw new Error(`style-reference.css: 規則 ${name} が style-lyra.css に無い`);
+    merged.set(name, cn(merged.get(name), classes));
+  }
+  return merged;
+}
+
 export function run({ write }) {
-  const rules = parseLyra(readFileSync(SOURCE_CSS, "utf8"));
+  const rules = mergeReference(
+    parseLyra(readFileSync(SOURCE_CSS, "utf8")),
+    parseLyra(readFileSync(REFERENCE_CSS, "utf8"), ".style-reference")
+  );
   const changed = [];
   const dynamic = [];
   const uncovered = [];
+  const rawHsl = [];
+  const tokens = parseHslTokens(readFileSync(HSL_TOKENS_CSS, "utf8"));
+  for (const [name, classes] of rules) {
+    if (rawHslTokenUses(classes, tokens).length > 0) rawHsl.push(`${name} (style-lyra.css + style-reference.css)`);
+  }
+  for (const file of listSourceFiles(ROOT, [ATOMS_DIR])) {
+    for (const line of rawHslTokenUses(readFileSync(file, "utf8"), tokens)) rawHsl.push(`${relative(ROOT, file)}:${line}`);
+  }
   for (const file of listSourceFiles()) {
     const text = readFileSync(file, "utf8");
     if (!/(?<![A-Za-z0-9_-])cn-[a-z]/.test(text)) continue;
@@ -469,18 +520,24 @@ export function run({ write }) {
     changed.push(relative(ROOT, file));
     if (write) writeFileSync(file, result.output);
   }
-  return { changed, dynamic, uncovered, rules };
+  return { changed, dynamic, uncovered, rawHsl, rules };
 }
 
 function main() {
   const check = process.argv.includes("--check");
-  const { changed, dynamic, uncovered } = run({ write: !check });
+  const { changed, dynamic, uncovered, rawHsl } = run({ write: !check });
   if (dynamic.length > 0) {
     console.error(`組み立てられた cn-* があり、規則を書き込めない:\n  ${dynamic.join("\n  ")}`);
     process.exit(1);
   }
   if (uncovered.length > 0) {
     console.error(`cn(…) の引数でも cva(…) の文字列でもない cn-* があり、規則を書き込めない:\n  ${uncovered.join("\n  ")}`);
+    process.exit(1);
+  }
+  if (rawHsl.length > 0) {
+    console.error(
+      `HSL の数値 3 つのトークンを hsl(…) で包まずに色として読んでいる (style-reference.css か部品で hsl(var(--x)) にする):\n  ${rawHsl.join("\n  ")}`
+    );
     process.exit(1);
   }
   if (check) {

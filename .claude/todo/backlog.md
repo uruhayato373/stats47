@@ -185,8 +185,8 @@ updated: 2026-10-19
      (導線名・ラベルの値は変えない)。`rail_click` / `cta_click` / `home_featured_click` / `affiliate_click` は専用処理を残し、
      領域に `data-click-owner` を付けて共通監視から除外する。リンク以外の操作 (チェックボックス・セレクト) は現状維持。
      未コミットのブログカード (`RankingLinkCard` / `/api/ranking-card`) も属性方式にそろえる。
-     `UI-CARD-HEADER-SIMPLIFY-01` が同じレール部品 (`SurfaceCard.tsx` の `RailCard` 等) のクラスを変えるので、同じコミットに混ぜない
-     (P1 は属性の追加だけ、見出しの見た目は同カードで変える)。
+     P1 は属性の追加だけにし、レール部品 (`SurfaceCard.tsx` の `RailCard` 等) の見た目は変えない (見た目の正典は
+     `docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)。
   2. **P2**: 全ページに出る共通領域 (ヘッダー・フッター・パンくず・ページ送り・タグ・ブログ本文リンク) に導線名を付ける。
      目標の名前なし割合は代表 URL で実測してから決める。
   3. **P3**: `page-quality` の全 URL 静的解析に「名前の無いサイト内リンク数」「計測担当の無い広告リンク数」を追加し、
@@ -325,6 +325,41 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: ルートの `package.json` は `tsx` を devDependencies に持たないのに、`ui-theme:lyra`・`ui-theme:lyra:test`・`page-quality:test` が `node --import tsx` で動く (workspace からの巻き上げで偶然解決)。`apps/web` の `design-system:check` は `--experimental-strip-types` を付けて `.ts` を読む。`engines` は `"node": ">=22"` だけで、`.nvmrc` の版と型の除去が既定で有効な版 (22.18 以降) の関係が書かれていない。
+- **次**: ルートの devDependencies に `tsx` を足して lockfile を更新する。`engines` を `.nvmrc` と合わせる (22.14 を支える必要があるかは会社の Windows PC の版で決める)。
+- **完了条件**: ルートの `package.json` に `tsx` があり、`npm run ui-theme:lyra:test` と `npm run design-system:check -w apps/web` が `.nvmrc` の版で通る。
+
+### [DESIGN-CHECK-CLASSNAME-EXPR-01] design-system:check の上書き禁止の規則が、cn() やテンプレート文字列で書いた className を見ない
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `panel-no-text-size-override`・`link-row-no-size-override`・`disclosure-no-look-override`・`empty-state-no-look-override` は `className="…"` と `className={"…"}` だけを読む。`className={cn(…)}` やテンプレート文字列で同じ上書きを書くと素通りする。`lyra-dead-caller-class` も別ファイルの定数 (`*.palette.ts`) と `contentClassName` など className 以外の属性を追わない。部分的な上書き (`p-0` が lyra の `px-2.5` と並んで残る) も数えない (`GeoLandslideSummary` で実例。同日に `p-0!` へ直した)。
+- **次**: `cn(` の引数の文字列リテラルとテンプレートの固定部分も読む共通の取り出し関数を `check-design-system.mjs` に作り、上の規則で共有する。
+- **完了条件**: 各規則に `cn(…)` で書いた上書きを 1 件入れると落ちる。既存の違反は 0 件か理由付きで残す。
+
+### [STATIC-PAGE-BODY-TEXT-SIZE-01] プライバシーポリシーと運営者情報の本文が 12px から始まり、パネル本文 14px の仕様と合わない
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `apps/web/src/app/privacy/page.tsx`・`about/page.tsx` の本文は `TEXT_STYLE` (`text-xs md:text-sm`) で、スマホ幅では 12px。`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」のパネルの中の文字は 14px。
+- **次**: `TEXT_STYLE` を消し、パネルの既定 (14px) に任せる。利用規約も同じ書き方をしていないか確かめる。
+- **完了条件**: 3 ページの本文が 390px と 1440px で 14px (描いた画面で測る)。
+
+### [SEO-META-WARD-LOWEST-01] 市区町村ランキング 4 指標の SEO 文が「最下位は政令市の区」のままで、観測値の最下位 (村) と食い違い develop の Catalog Gates を止めている
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: develop の `develop-quality-gate.yml` (run 40660907015・HEAD `984230b3e`) の Catalog Gates が `audit-seo-meta-facts.ts --fail-on-new` で失敗。手元で再現: `fiscal-strength-index` (主張 熊本市北区 / 実 鹿児島県三島村)、`manufacturing-shipment` (伊是名村 / 渡名喜村)、`per-taxpayer-income` (熊本市北区 / 群馬県南牧村)、`total-area-prefecture-ratio` (浜松市浜名区 / 札幌市厚別区)。同じ workflow は 08:40 の `714350846` で success。
+- **[仮説]** 政令指定都市の区の統合 / 分割 (`MUNI-DESIGNATED-CITY-WARDS-01`) で R2 の市区町村の観測値か順位の母集団が変わり、SEO 文 (git TS の metric の説明) が古いまま残った。この監査は R2 から観測値を読むので、コミットに関係なく R2 の更新で落ちうる。714350846 から HEAD までで監査の入力 (`packages/data-configs`・`packages/ranking`) を変えたのは `f9d38ed03` と `e485bd294` だけで、見本合わせのブランチは触っていない。
+- **次**: 4 指標の SEO 文を観測値の最下位に直す (区を順位の母集団に入れるかの決定に合わせる)。意図した変更でないなら R2 側を確かめる。`--update-baseline` で黙らせない。
+- **完了条件**: 上の検証コマンドが新規の不一致 0 件で通り、develop の Catalog Gates が success。
+
+### [LINE-GRID-COLUMN-01] 描いた画面の線の格子の検査を定期実行に載せる
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 に本文の列全体を 1 本の線の格子にした (`ShellColumn`・`PanelGrid`、`@/components/layout`)。28 画面 × 1440・390px で違反 0 件 (`npm run ui-theme:line-grid`)。右レールは格子にしない (同日オーナー決定。`docs/01_技術設計/04_デザインシステム.md` の「線の格子」の行)。検査の画面に検索を足したところ、検索結果がカードを空けて並べるだけで格子になっていなかった (同日に直した)。検査の一覧に無い画面には同じ取りこぼしが残りうる。
+- **次**: `npm run ui-theme:line-grid` は手元の本番ビルドに流す検査で、定期実行に載っていない。週次の page-quality (本番 URL を Playwright で巡回する job) に同じ判定を足すか決める。足すなら全ルートの代表 URL (`DEFAULT_PAGES`) を page-quality の一覧と揃える。
+- **完了条件**: 週次の結果に違反件数が出る (または載せない理由を本カードに書く)。
 ### [BLOG-QUESTION-ANSWER-01] 「〜が最も少ない県はどこ」の質問形の検索に、答えを冒頭に置いた記事で応える
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
@@ -543,19 +578,6 @@ updated: 2026-10-19
 - **読者の課題 / HARM**: 住んでいる・引っ越し先の市の人口や順位をすぐ確かめたい (M・H)。支払う理由はこの段では無く、PV は AdSense の先行指標。需要の証拠は上の検索語 1,840 imp。要約で CTR が上がるかは未検証。
 - **完了条件**: 1,741 件に要約・Q&A・比較・`Place` が出て、28 日の判定がこのカードと `PV-100K-LEVERS-01` のレバー 2 に記録されている。
 
-### [UI-THEME-LYRA-TEST-NODE-01] ui-theme:lyra:test が Node 22.14 で .ts を読めず pre-commit を止める
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
-
-- **事象 (2026-10-28 実測)**: 会社の Windows PC (Node v22.14.0) で pre-commit の `ui-theme:lyra:test` が `ERR_UNKNOWN_FILE_EXTENSION ... packages/components/src/lib/cn.ts` で失敗し、関係のないコミットも止まった。`NODE_OPTIONS=--experimental-strip-types` を付けると 11/11 pass。入ったのは `5392747f7` (lyra の部品スタイルを className へ書き込む)。
-- **次**: npm script に `--experimental-strip-types` を足すか、`.ts` を tsx 経由で読む。必要な Node の版を `engines` か `.nvmrc` と合わせる。
-- **完了条件**: Node 22.14 で `npm run ui-theme:lyra:test` がフラグなしで pass する。
-
-### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
-
-- **経緯**: テンプレート (lyra) の部品は、呼び出し側の className より lyra の値が勝つ (CSS で読んでいた頃はレイヤーの外の規則として、2026-10-28 の CSS-3 以降は className の後ろで合成されて)。勝てるのは `!` 付きだけ。このため、テンプレートへ移した時点から効いていない指定が残っている。2026-10-28 の静的な洗い出しで約 180 件。主なもの: `TableHead` の `text-right` (72 件。数値列の見出しが左寄せのまま)、共有ボタンのブランド色 (`share-brand.palette.ts`。X・Facebook・LINE・はてなの地色が出ず全部 primary)、ブログのタグの Badge の `h-7` (実際は 20px)、Button の `h-11`・`h-9`・`gap-2`、Skeleton の `rounded-md`、SelectTrigger の `text-sm`。CSS-3 では見た目を変えない約束だったので触っていない。
-- **次**: 一覧を作り直し (`scripts/ui-theme/inline-lyra.mjs` の `losesToLyra` で、呼び出し側のクラスと部品の lyra を突き合わせる)、意図どおり効かせるもの (`!` を付ける) と消すものに分ける。効かせるものは画面が変わるので、ページごとに撮って確かめる。
-- **完了条件**: 洗い出しの結果が 0 件、または残すものに理由が書いてある。
 ### [MAP-TILE-FOREIGN-LABELS-01] ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
@@ -2415,65 +2437,6 @@ updated: 2026-10-19
 - **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
 - **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
 
-### [UI-CARD-TYPOGRAPHY-UNIFY-01] カードの見出し・本文・余白を役割契約に統一する (A 済 / B 実装済・検証途中 / C 未着手)
-
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-16] [期日:2026-09-30] [領域:サイト]
-
-- **owner**: site-ux-manager (横断契約・機械ゲート) / ranking-ui-manager (ranking 面) / theme-ui-manager (themes 面)
-- **背景 (2026-09-16 実測・5 ページ・デスクトップ幅)**: 同じ役割のカードが feature ごとに見出しサイズ/太さ/余白を上書き・再実装し、
-  ranking 詳細で本文カード見出しが 14/600・14/500・16/600・14/700 の 4 系統、FAQ 本文 14px / 考察 15px に対し他カード 12px、
-  `/areas/04000` 右レールで 14/500 と 16/600 が混在、`/themes/real-income` でチャート見出しが同一ページ内 16/600 (9 枚) と
-  14/600 (6 枚)、category の分類カードが 13/700・余白 8/12。規約 (`04_デザインシステム.md`) はカード見出し/本文/余白の数値を
-  持たず、旧資料 `.claude/design-system/{prohibited,principles,quick-reference}.md` は余白を `p-5以上`/`p-6`/`p-0禁止` と 3 値で
-  並立させコード正典 `SurfaceCard p-4` と食い違う。計測方法: DOM で `border`+`bg-card` を持つ最外郭要素ごとに最初の見出し
-  (h2-h4 / font-weight≥600) の font-size/weight、本文の最頻 font-size、padding を集計。
-- **契約 (確定。数値はコードが正典・文書へ二重管理しない)**:
-  - ※ 見出しの色・太さ・下線と本文の下余白は `UI-CARD-HEADER-SIMPLIFY-01` (2026-09-25 決定) で改訂する。以下の数値はそれまでの現行値
-  - レール/リンク一覧カード = `RailCard` 既定 (h3 `text-sm font-medium text-muted-foreground`・ヘッダ `px-4 py-3`・本文 `px-4 pb-4 pt-3`)、
-    リンク行 = `RailLinkItem` (`py-1.5 text-sm`、2026-09-16 に text-xs から統一)、2 行目 `text-xs`
-  - 見出し付き本文カード = `SectionCard` (`components/surface/SurfaceCard.tsx`、RailCard と同じ HeaderedSurfaceCard の variant。
-    h3 `text-sm font-semibold text-foreground`・ヘッダ `px-4 py-3`・本文 `p-4`)。`ChartPanel` と同じ見た目。非チャート用
-  - メタ文字 = `text-xs`。`text-[10px]`/`text-[11px]`/`text-[13px]` の任意値は使わない
-  - `titleClassName` のサイズ/太さ上書き禁止 (色だけ可: AreaProfileSidebar の emerald/amber)
-  - ページ節見出し: h2 `text-xl font-bold`、節内の小見出し h3 `text-base font-semibold`。h1 だけ `text-2xl font-bold`。`text-lg` 見出し禁止
-  - カード内カード禁止は維持 (SectionCard の内側は枠なしのリンク行にする)
-- **済 (A) — commit `3ca99124c`**: SectionCard 新設 + card census 登録 / RailLinkItem text-sm / RailCard 再実装 7 件
-  (RelatedAreas・AreaProfileSidebar・CitiesNavCard・CorrelationSection+Skeleton・PortStatisticsMapCard・RankingSidebarSkeleton・RailAdSlot)
-  を共通部品化 / blog 関連ランキング・目次と CityRankingSection の titleClassName 上書き削除 (ArticleTableOfContents の compact prop 削除) /
-  楽天・返礼品・運営者カードを semibold + text-xs へ / PortalCategoryGrid sidebar・RailLinksCard の任意 px を scale へ。
-  `/areas/04000` 右レール 4 枚が 14/500・リンク 14px に揃ったことをブラウザ実測済み
-- **B — 実装済み・検証途中 (この PC で 2026-09-16 に Sonnet が編集、型/design-system/card census/eslint は緑、対象 vitest は実行途中で中断)**:
-  対象 14 ファイル = RankingSourceCard / RelatedRankingsGrid (SectionCard 化。内側 9 枚は枠付き SurfaceLinkCard から枠なしリンク行へ =
-  カード内カード禁止のため。**見た目の確認が未了**) / DataUsageCard (SurfaceCard + tint) / RankingPageCardsSkeleton / AreaRelatedRankingsCard /
-  AreaRelatedBlogArticles (h2 text-2xl→text-xl) / AreaDatabookSection (節内 h3 text-lg→text-base semibold) / ThemeRelatedArticles /
-  ThemeEvidenceTopicsSection / ThemeIndicatorCatalogSection (h2 text-lg→text-xl) / MetricFocusCharts・MetricSwitcherPanel
-  (`titleClassName="text-base"` 削除 = themes のチャート見出し 16→14px) / ChartState (h3 text-lg→text-sm) / SurveyTaxonomyCard section 変種
-  (h2 text-lg→text-xl、p-5 撤去)。**次の PC ではまず** `cd apps/web && npx vitest run src/features/ranking src/features/area-profile
-  src/features/area-databook src/features/theme-dashboard src/features/survey src/components` を通し、`git diff` で
-  ThemeEvidenceTopicsSection の見出し扱い (h2 を節見出しとして残したか SectionCard title にしたか) を確認する
-- **C — 未着手 (機械ゲート + 文書)**:
-  1. `apps/web/scripts/check-design-system.mjs` に規則を追加 (既存の `rules` 配列と同形式・`allow` で例外):
-     `no-card-title-scale-override` (`titleClassName=` に `text-(xs|sm|base|lg|xl|2xl)|font-\w+` を含む。features/app 対象) /
-     `no-manual-card-header` (`border-b` と `px-N` と `py-N` を同一 class 文字列に持つ手書きヘッダ。features/app 対象、`src/components/**` は許可) /
-     `no-arbitrary-text-size` (`text-\[(10|11|13)px\]`。A 実施前は 87 箇所/40 ファイル。残存ファイルを**縮小専用 allowlist** に列挙し新規を止める。
-     `src/features/ogp/**` と Remotion 系は対象外) / `no-text-lg-heading` (`<h[23]` と `text-lg` の同居。`MarkdownSectionRenderer` は allowlist) /
-     `no-h2-text-2xl` (hero・PageHeader 以外)。checker のテストがあれば規則ごとに 1 ケース足す
-  2. 文書: `docs/01_技術設計/04_デザインシステム.md` に「カードの役割契約」節 (部品名で書く。数値は書かない) / `.claude/rules/ui-components.md` に
-     「RailCard/SectionCard の titleClassName でサイズを上書きしない」「feature 内で SurfaceCard p-0 + 手書きヘッダを作らない」を追記 /
-     `.claude/design-system/{prohibited,principles,quick-reference}.md` の余白数値 (`p-5以上`/`p-6`/`p-0禁止`) を削除し「コード正典 = SurfaceCard p-4」へ
-  3. ブラウザ再計測 (上記の計測方法) を `/ranking/natto-consumption-expenditure` `/areas/04000` `/themes/real-income` `/category/economy`
-     `/blog/local-government-debt-burden` で行い、役割ごとに 1 系統に収束したことを確認。RelatedRankingsGrid の枠なし化と
-     ranking 右レールのリンク 14px 化の見た目を目視
-- **未決 (オーナー判断)**: ① FAQ/定義/考察 (開閉 UI) の本文 14px は規約どおりだが他カードの 12px と並ぶと大きく見える —
-  他カードを 14px へ上げるか開閉 UI を 13px へ寄せるか ② category の分類カード (13/700・8/12、`CategoryTopicGroups`) を契約へ寄せるか
-  ③ `MarkdownSectionRenderer` の h2 16px (テーマ本文内) の扱い
-- **環境メモ**: この Windows PC で node_modules が lock とずれ `@babel/core` 不在 → pre-commit の `next lint` が落ちる。`npm install` で復元済み。
-  共有ツリーで作業するときは `git commit -- <paths>` で staged を残さない (別セッションの commit に巻き込まれた実例あり)
-- **停止条件**: 契約テスト (`right-rail-banner-contract` / `page-shell-rail-contract` / `left-rail-layout-contract` / chart contract audit) を弱めない。
-  デプロイはオーナー指示で 1 回
-- **完了条件**: 5 ページ計測で役割ごとに 1 系統 / `check-design-system` の新規則が緑で既存違反 0 (allowlist は縮小専用) / 文書 3 点更新 /
-  `npm run type-check --workspace=apps/web` と対象 vitest が緑
-
 ### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-10-12] [領域:管理]
@@ -2847,7 +2810,7 @@ updated: 2026-10-19
 - **証拠 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: `/survey` は約 100 の調査が分類・検索・並び順の規則なしで並ぶ / `/themes` は 55 テーマが分類なしの同形カード /
   `/blog` は 390〜992px で新着記事が約 2 画面下まで出ない / `/tag/population` の記事カードに日付が無く並び順が分からない /
   `/municipalities` で自分の市町村を探す入口が最下部 / `/areas` は県名だけで数値が無い / カードの題名・説明が「…」で切れる
-  (ホーム・カテゴリの新着ブログ・`/themes`・`/survey`。カードの型の統一は `UI-CARD-TYPOGRAPHY-UNIFY-01`)。
+  (ホーム・カテゴリの新着ブログ・`/themes`・`/survey`。カードの型の統一は `docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)。
 - **完了条件**: 各一覧に分類か絞り込みがあり、並び順の基準が画面に出ている。
 
 ### [SURVEY-PAGES-01] 統計調査のページで、調査と関係のない指標が並び、最新年が誤って見える
@@ -3043,44 +3006,6 @@ updated: 2026-10-19
   gate を error にして無関係なコミットを止めない (新規・再生成分だけ止める)。
 - **完了条件**: 週次監査が 2 指標を計測して UI-FIX カードに振り分け手順が載り、`/areas/13000` の縦軸切れとビール SVG の
   重なりが本番で 0 件になっている。
-
-### [UI-CARD-HEADER-SIMPLIFY-01] カードの見出しを「白いカードのまま・見出しの下に線を引かない」形にそろえ、検索窓はカードで包まない
-
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-09-25] [領域:サイト]
-
-- **背景 (2026-09-25・スクショ 2 枚 = 左レールのカテゴリ / ブログの右レール)**: 見出しの下の区切り線 (`border-b`) のすぐ下で
-  一覧の各行にも線があり、見出し直下に線が 2 本近接して見える。本文の下余白が固定 (`pb-4`) なので一覧の最後の行の下に空白が残る。
-  見出しは灰色の小さい文字 (`text-muted-foreground`) で、見出しとしての強さが弱いのに線と余白で面積を取っている。
-  「記事検索」は入力欄 1 つのためにカードと見出しを持っている。
-- **決定 (2026-09-25 オーナー)**: 3 案のモック (A 見出しをカードの外へ / B カードは残し見出しの線をなくす / C カードをなくす) から **B**。
-  A はレールに 5〜6 ブロック並ぶと見出しが灰色の地に浮いて帰属が曖昧、C は地の上に一覧がむき出しになりレール契約も変わるため不採用。
-  - 見出し: 濃い色の太字の小見出し (`text-foreground` + `font-semibold`、大きさは `text-sm` のまま)。**見出しの下に線を引かない**
-  - 区切り線は一覧の行と行の間だけ (最初の行の上には引かない)
-  - 本文の下余白を固定しない (一覧は行の余白だけで閉じ、一覧でない本文だけ小さな下余白を持つ)
-  - 検索窓 (`RailSearchCard`) はカードと見出しをやめ、レールの先頭に入力欄とボタンだけを置く。読み上げ用ラベル (`ariaLabel`) は既にあり維持する
-- **範囲 (2026-09-25 のコード検索)**: 見出しの作りは 3 系統。`RailCard` (左右レール・23 ファイル) と `SectionCard` (本文の見出し付きカード・
-  10 ファイル) は `apps/web/src/components/surface/SurfaceCard.tsx` の `HEADER_CLASS` を共有。`ChartPanel` (本文のチャート枠・76 ファイル) は
-  同じ見た目 (`border-b border-border px-4 py-3`) を `components/charts/ChartPanel.tsx` に**重複して**書いている → 同じ定数を使わせて 1 か所にする。
-  `RailSearchCard` は 2 か所 (`features/blog/components/BlogNavigationCards.tsx` / `app/blog/[slug]/page.tsx`)。
-  見出しの下線を前提にしているもの: `components/surface/__tests__/rail-card-contract.test.tsx` の「ヘッダーは border-b を持つ」と、
-  `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」の見出し・本文余白の記述。
-- **既存カードとの関係**: `UI-CARD-TYPOGRAPHY-UNIFY-01` の「契約」にある RailCard の見出し (灰色・中太・`border-b`) と本文余白 (`pb-4`) を
-  **このカードが改訂する**。同カード C-1 の `no-manual-card-header` (手書きヘッダ禁止) は、新しい見出しの形を基準に書く。
-  `NAV-CLICK-COVERAGE-01` P1 が同じレール部品に計測用の属性を足すので、同じコミットに混ぜない。
-- **次 (実行順)**: ①`SurfaceCard.tsx` の見出しと本文余白を変える (RailCard と SectionCard が同時に変わる) ②`ChartPanel` の見出しを同じ定数へ
-  ③`RailSearchCard` からカードと見出しを外す ④契約テストを「見出しの下に線が無い・行の間だけに線がある」形で固定し直し、デザインシステム文書を改訂
-  ⑤localhost で代表ページ (`/` `/ranking/total-population` `/areas/13000` `/themes/population-dynamics` `/category/population` `/blog`
-  `/blog/<記事>` `/survey/census`) をライト・ダーク・390px で撮り、変更前と並べて確認 ⑥チャート枠は見出しとチャートの間隔が変わるので、
-  76 か所のうち代表的なチャートの種類ごとに目視する。
-- **決定 (2026-09-25 オーナー)**: チャート枠の下部 (出典・ランキングの開閉。`ChartPanel.tsx` の `border-t border-border px-4 py-3`) の
-  上線も**残さない**。見出しと同じく、線ではなく余白で区切る。
-- **追加の不具合 (2026-09-25 実測)**: `ChartPanel.tsx` は `footer && (...)` でフッターの枠を描くが、渡されるフッター要素が空の中身しか
-  描かなくても枠 (上線 + `px-4 py-3`) は出る。ランキングページでは地図と表の下に高さ 25px の空の帯が全 8 幅で出ていた
-  (`RANKING-MAP-TABLE-CARD-01` の背景)。フッターは中身があるときだけ描く (空の判定をフッター側の部品に持たせるか、
-  呼び出し側で中身が無ければ `footer` を渡さない)。
-- **停止条件・禁止**: 契約テストを弱めない (線の有無を消すのではなく、新しい形を固定し直す)。本番デプロイは他の変更とまとめて 1 回・オーナー承認。
-- **完了条件**: 3 部品が同じ見出しの定数を使い、見出しの下の線と一覧末尾の固定余白が無い / 検索窓がカードで包まれていない /
-  代表ページの撮り比べで確認済み / `npm run design-system:check -w apps/web` と対象の vitest が緑。
 
 ### [BLOG-POPULAR-AUTO-01] ブログ一覧の「よく読まれている記事」を閲覧数から週次で自動選定し、表示数を定数 1 か所にする
 

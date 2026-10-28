@@ -2,7 +2,7 @@ import { CARD_SURFACE_CLASS } from '@stats47/components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { RailCard, RailNavRow, RailNavRowButton } from '../SurfaceCard';
+import { RailCard, RailNavRow, RailNavRowButton } from '..';
 
 describe('RailCard', () => {
   it('外枠は共通の CARD_SURFACE_CLASS (角丸・線色をトークンで決める) を持つ', () => {

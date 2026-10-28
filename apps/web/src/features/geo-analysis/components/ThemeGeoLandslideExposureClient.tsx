@@ -1,6 +1,8 @@
 'use client';
 import { to2DigitPrefCode } from '@stats47/area';
 
+import { PanelGrid } from '@/components/layout';
+
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
 import { GeoLandslideSummary } from './GeoLandslideSummary';
@@ -24,7 +26,7 @@ export function ThemeGeoLandslideExposureClient({
     (r) => r.areaCode === selectedPrefectureCode
   );
   return (
-    <div className="space-y-4">
+    <PanelGrid>
       {selected && selected.areaCode !== '26000' ? (
         <GeoSpatialEvidenceExplorer
           slug="population-landslide-exposure"
@@ -42,6 +44,6 @@ export function ThemeGeoLandslideExposureClient({
         selectedAreaCode={selectedPrefectureCode}
         onSelectArea={setSelected}
       />
-    </div>
+    </PanelGrid>
   );
 }

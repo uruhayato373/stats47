@@ -22,6 +22,7 @@ export * from "./atoms/ui/empty";
 // 必要な箇所で "@stats47/components/atoms/ui/icon" から直接 import すること
 export * from "./atoms/ui/input";
 export * from "./atoms/ui/label";
+export * from "./atoms/ui/native-select";
 export * from "./atoms/ui/pagination";
 export * from "./atoms/ui/progress";
 export * from "./atoms/ui/radio-group";
@@ -49,3 +50,9 @@ export * from "./hooks/use-mobile";
 
 // Utilities
 export * from "./lib/cn";
+
+// パネル・数値タイル・線の格子 (公開サイト・管理画面・動画アプリが共有する。2026-10-28 に apps/web から移した)
+export * from "./surface/surface";
+export * from "./surface/stat-tile";
+export * from "./surface/chart-panel";
+export * from "./surface/panel-grid";

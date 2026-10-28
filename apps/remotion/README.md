@@ -20,6 +20,19 @@ Studio で表示されるデータは `src/utils/preview-data.ts` が提供す�
 
 各 Preview コンポーネントは `resolveRankingData({ meta, allEntries })` を使用し、props が未指定の場合に `previewData` にフォールバックする。
 
+## 共有部品と Tailwind (2026-10-28)
+
+公開サイト・管理画面と同じ部品 (`@stats47/components` の `StatTile`・`ChartPanel`・`PanelGrid`・`Button` など) と
+同じテーマ (`@stats47/ui-theme`) を使える。
+
+- webpack の設定は `src/webpack-override.ts` の `makeWebpackOverride(srcPath)` 1 つ (`@` を src へ向け、`@remotion/tailwind-v4` を有効にする)。
+  Studio・CLI は `remotion.config.ts`、`bundle()` を呼ぶスクリプトは `webpackOverride: makeWebpackOverride(srcPath)` で同じものを使う。
+- CSS は `src/index.css` (入口 `src/index.ts` が読む)。**Tailwind の初期化 (preflight) は読まない。** 既存の動画・画像は inline style で描いていて、
+  preflight が見出し・段落の既定の余白を消すと文字の位置がずれるため (代表 29 枚を描き比べて 23 枚が変わった)。初期化と線の色・書体は
+  共有部品 (`data-slot` を持つ要素) の中だけに効かせる。
+- 既存のコンポジションの色は `src/shared/themes/brand.ts` (SNS 画像の配色) のまま。公開済みの画像の見た目を変えないため、theme.css へは寄せていない。
+- `.gitignore` の `tmp-*` に当たるファイルは Tailwind がクラスを拾わない (`@source` でも除外される)。
+
 ## SNSデータカード（4型）
 
 `src/features/data-cards/`の`SNS-HouseholdReceipt`（家計レシート）、`SNS-AreaAtlas`（県の図鑑）、

@@ -55,7 +55,7 @@ export function RailSearchCard({
           name={queryName}
           aria-label={ariaLabel}
           placeholder={placeholder}
-          className="min-w-0 flex-1 text-sm"
+          className="min-w-0 flex-1"
         />
         <Button
           type="submit"

@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
+import { cn } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -36,6 +37,7 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
+import { STAT_VALUE_CLASS } from '@/components/surface';
 
 import { NativeAffiliateRow } from '@/features/ads';
 import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
@@ -236,7 +238,7 @@ export default async function MunicipalityRankingPage({
             className="border-r border-border p-3 last:border-r-0"
           >
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className="mt-1 text-lg font-semibold tabular-nums">
+            <p className={cn(STAT_VALUE_CLASS, "mt-1")}>
               {typeof value === 'number' ? formatValue(value) : '—'}
               <span className="ml-0.5 text-xs font-normal text-muted-foreground">
                 {formatUnitForDisplay(snapshot.unit)}
@@ -331,7 +333,7 @@ export default async function MunicipalityRankingPage({
             />
           </span>
         </label>
-        <Button type="submit" className="h-10 self-end px-5">
+        <Button type="submit" className="self-end">
           絞り込む
         </Button>
       </form>
@@ -359,7 +361,7 @@ export default async function MunicipalityRankingPage({
             <TableRow>
               <TableHead className="w-20">順位</TableHead>
               <TableHead>市区町村</TableHead>
-              <TableHead className="text-right">値</TableHead>
+              <TableHead className="text-right!">値</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

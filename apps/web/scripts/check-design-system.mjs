@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { findNestedCardSurfaces } from './lib/card-nesting-audit.mjs';
 import { findChartContractViolations } from './lib/chart-contract-audit.mjs';
+import { addWrappers, buildLyraMap, findLyraDeadCallerClasses } from './lib/lyra-dead-class-audit.mjs';
 import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
 
 const cwd = process.cwd();
@@ -74,15 +75,14 @@ const rules = [
     message:
       'Do not import shadcn Card directly from app components/features. Use SurfaceCard, SurfaceLinkCard, SurfaceSection, or ChartPanel.',
     pattern: /from\s+["']@stats47\/components\/atoms\/ui\/card["']/,
-    // カード枠の正規の持ち主 (チャート枠と状態表示) はテンプレートの Card で組み立てる (2026-10-27)。
+    // カード枠の正規の持ち主 (状態表示) はテンプレートの Card で組み立てる (2026-10-27)。ChartPanel は 2026-10-28 に @stats47/components へ移した。
     allow: (relativePath) =>
-      relativePath === 'src/components/charts/ChartPanel.tsx' ||
       relativePath === 'src/components/charts/ChartState.tsx',
   },
   {
     id: 'no-legacy-dashboard-card',
     message:
-      'DashboardCard/LegacyDashboardCard was removed. Use ChartPanel for charts/maps and ChartCard for compact KPI cards.',
+      'DashboardCard/LegacyDashboardCard was removed. Use ChartPanel for charts/maps and StatTile for compact KPI (numeric) tiles.',
     pattern: /\b(?:DashboardCard|LegacyDashboardCard)\b/,
   },
   {
@@ -384,6 +384,38 @@ for (const relativePath of scanRoots.flatMap((root) => listFiles(root))) {
   }
 }
 
+// 部品の lyra は呼び出し側の className より後ろで合成されるので、lyra と同じ性質を決めるクラスは ! が無いと効かない
+// (TableHead の text-right・Skeleton の rounded-md など。2026-10-28 に約 210 件あった)。効かせるなら ! を付け、
+// 要らないなら消す。ボタンの大きさは ! で上書きせず size を選ぶ (button-no-forced-size)。判定は lib 側のコメント参照。
+{
+  const lyraMap = buildLyraMap(path.join(cwd, '../../packages/components/src/atoms/ui'));
+  const lyraAuditFiles = [
+    ...scanRoots.flatMap((root) => listFiles(root)),
+    ...listFiles('../admin/app'),
+    ...listFiles('../admin/components'),
+  ].filter((relativePath) => relativePath.endsWith('.tsx'));
+  const wrapperSourceFiles = [
+    ...listFiles('../../packages/components/src').filter((relativePath) => !relativePath.includes('/atoms/ui/')),
+    ...lyraAuditFiles,
+  ].filter((relativePath) => relativePath.endsWith('.tsx'));
+  const wrapperNames = addWrappers(
+    lyraMap,
+    wrapperSourceFiles.map((relativePath) => readFileSync(path.join(cwd, relativePath), 'utf8'))
+  );
+  for (const relativePath of lyraAuditFiles) {
+    const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+    for (const dead of findLyraDeadCallerClasses(source, lyraMap, wrapperNames)) {
+      violations.push({
+        ruleId: 'lyra-dead-caller-class',
+        message: `${dead.component} の lyra が ${dead.token} を上書きするので効かない。効かせるなら ${dead.token}! にし、要らないなら消す (ボタンの大きさは size を選ぶ)。`,
+        file: relativePath,
+        lineNumber: dead.lineNumber,
+        line: dead.token,
+      });
+    }
+  }
+}
+
 // 統計チャートは軸を短く、完全値と単位を共通ツールチップで表示する。
 // 表示崩れの原因になる単位の渡し忘れ・完全桁の軸・個別 tooltip 実装を止める。
 const chartAuditFiles = [
@@ -491,29 +523,39 @@ if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
 // ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
 const globalsPath = 'src/app/globals.css';
 const globalsText = readFileSync(path.join(cwd, globalsPath), 'utf8');
+// 2026-10-28: カード外枠・本文部品の角丸と状態色は 3 アプリ共通の @stats47/ui-theme/theme.css に移した。両方を見る
+const themePath = '../../packages/ui-theme/theme.css';
+const tokenSources = [
+  { file: globalsPath, text: globalsText },
+  { file: themePath, text: readFileSync(path.join(cwd, themePath), 'utf8') },
+];
 const radiusPattern = /--(?:card-)?radius:\s*([^;]+);/g;
-for (const match of globalsText.matchAll(radiusPattern)) {
-  const value = match[1].trim();
-  if (/^0(?:px|rem)?$/.test(value)) continue;
-  const lineNumber = globalsText.slice(0, match.index).split(/\r?\n/).length;
-  violations.push({
-    ruleId: 'no-nonzero-radius-token',
-    message:
-      'Card radius is globally flat. Keep every --radius token at 0; circular UI must use rounded-full explicitly.',
-    file: globalsPath,
-    lineNumber,
-    line: match[0],
-  });
+for (const { file: tokenFile, text: tokenText } of tokenSources) {
+  for (const match of tokenText.matchAll(radiusPattern)) {
+    const value = match[1].trim();
+    if (/^0(?:px|rem)?$/.test(value)) continue;
+    const lineNumber = tokenText.slice(0, match.index).split(/\r?\n/).length;
+    violations.push({
+      ruleId: 'no-nonzero-radius-token',
+      message:
+        'Card radius is globally flat. Keep every --radius token at 0; circular UI must use rounded-full explicitly.',
+      file: tokenFile,
+      lineNumber,
+      line: match[0],
+    });
+  }
 }
 
 // 本文の中に置く部品の角丸 (--content-radius) は 1 か所だけで定義する。ページ種別ごと
 // (.reading-zone / .dark 等) に上書きすると、同じ部品が画面によって違う形になる。
-const contentRadiusDefinitions = [...globalsText.matchAll(/--content-radius:\s*([^;]+);/g)];
+const contentRadiusDefinitions = tokenSources.flatMap(({ text: tokenText }) => [
+  ...tokenText.matchAll(/--content-radius:\s*([^;]+);/g),
+]);
 if (contentRadiusDefinitions.length !== 1) {
   violations.push({
     ruleId: 'content-radius-single-definition',
     message: `--content-radius must be defined exactly once in :root (found ${contentRadiusDefinitions.length}).`,
-    file: globalsPath,
+    file: themePath,
     lineNumber: 1,
     line: '--content-radius',
   });
@@ -545,7 +587,8 @@ for (const match of globalsText.matchAll(cssBorderRadiusPattern)) {
 // ArticleCard は本文カードの正典。外枠を独自クラスで書かず、通常カードと同じ
 // CARD_SURFACE_CLASS (角丸・線色をトークンで決める単一定義) を使うことを要求する。
 // クラス名の完全一致では判定しない (意図が同じでも 1 語足すだけで落ちるため)。
-const surfacePath = 'src/components/surface/SurfaceCard.tsx';
+// 2026-10-28 にパネル部品は @stats47/components (packages/components/src/surface/) へ移した
+const surfacePath = '../../packages/components/src/surface/surface.tsx';
 const surfaceText = readFileSync(path.join(cwd, surfacePath), 'utf8');
 const articleCardBody = surfaceText.match(
   /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/
@@ -731,6 +774,307 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       line: line.trim(),
     });
   });
+}
+
+// --- パネル (ChartPanel・SurfaceCard 系) の見出し・文字・補足はページの側で変えない ---
+//
+// 見本の実測から決めた寸法 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」) は
+// Card 部品 (packages/components/src/atoms/ui/card.tsx) と SurfaceCard が持つ。2026-10-28 まではページの側が
+// 題名の大きさ・見出しの余白を上書きし、同じパネルに 14px と 16px、高さ 37px と 53px の見出しが混在していた。
+// - panel-no-text-size-override: パネルの className・contentClassName・bodyClassName に文字の大きさ・行の高さを書かない
+// - panel-parts-only-in-panel-components: CardHeader・CardTitle・CardFooter を組み立てるのはパネルの実装だけ
+//   (補足は CardFooter の帯にせず、ChartPanel の footer でパネルの中の 1 行にする)
+const PANEL_COMPONENTS = ['ChartPanel', 'SurfaceCard', 'SurfaceSection', 'SectionCard', 'RailCard', 'ArticleCard'];
+const PANEL_IMPLEMENTATION_FILES = new Set([
+  // ChartPanel・SurfaceCard 系は 2026-10-28 に @stats47/components へ移した (packages は走査しない)
+  'src/components/charts/ChartState.tsx',
+]);
+const PANEL_CLASS_PROPS = /\b(className|contentClassName|bodyClassName)=(?:"([^"]*)"|\{\s*["'`]([^"'`]*)["'`]\s*\})/g;
+const PANEL_TEXT_SIZE = /(?<![\w-])(?:[\w-]+:)*(?:text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(?:\/[\w.]+)?|leading-[\w.[\]-]+)!?(?![\w-])/;
+const PANEL_TAG = new RegExp(`<(${PANEL_COMPONENTS.join('|')})\\b`, 'g');
+// 見た目を部品が持ち、呼び出し側で変えない部品 (開閉・空の状態)
+const LOOK_LOCKED_TAG = /<(FaqSection|ContentDisclosure|ChartEmptyState|ChartErrorState)\b/g;
+const LOOK_OVERRIDE_TOKEN =
+  /^(?:[\w-]+:)*!?(?:p[xytrbl]?-|gap-|border|bg-|rounded|shadow|ring|text-|font-|leading-|tracking-|divide-)[^\s]*$/;
+
+/** text[start] から JSX の開始タグの終わり (> または />) までを返す。{…} の中の > は数えない */
+function jsxOpeningTag(text, start) {
+  let depth = 0;
+  for (let i = start; i < text.length; i += 1) {
+    const ch = text[i];
+    if (ch === '{') depth += 1;
+    else if (ch === '}') depth -= 1;
+    else if (ch === '>' && depth === 0) return text.slice(start, i + 1);
+  }
+  return text.slice(start);
+}
+
+/**
+ * 隙間を空けて子を並べる <div> (gap-N・space-y-N。gap-0 / gap-px は線の格子なので除く)。
+ * className は "…"・{`…`}・{cn(…)} の形を見る (テーマのチャートの並びはテンプレート文字列で組んでいた)。
+ */
+const SPACED_STACK_DIV = /<div\b[^>]*?\bclassName=(?:"([^"]*)"|\{\s*`([^`]*)`\s*\}|\{\s*cn\(([^)]*)\)\s*\})/g;
+const SPACED_STACK_CLASS = /(?<![\w-])(?:[\w-]+:)*(?:gap(?:-y)?-(?!0\b|px\b)[\d.]+|space-y-[\d.]+)\b/;
+const PANEL_TAG_NAMES = new Set(PANEL_COMPONENTS);
+
+/**
+ * text[openStart] の <div …> の直下の子のうち、パネルの部品の数。
+ * JSX の深さはタグだけで数え、{…} (map の中など) は深さに数えない。
+ * 型引数 (useState<string>) を拾わないよう、識別子・括弧の直後の < はタグとみなさない。
+ */
+function directPanelChildren(text, openStart) {
+  // 閉じタグ (</div>・</>) は直前が文字でもよい。開きタグ (<Name・<>) だけ型引数を除く
+  const tagPattern = /<(\/)([A-Za-z][\w.]*)?|(?<![\w)\]])<()([A-Za-z][\w.]*|(?=>))/g;
+  tagPattern.lastIndex = openStart + jsxOpeningTag(text, openStart).length;
+  let depth = 0;
+  let panels = 0;
+  for (let m = tagPattern.exec(text); m; m = tagPattern.exec(text)) {
+    const closing = m[1];
+    const name = m[2] ?? m[4] ?? '';
+    if (closing) {
+      if (depth === 0) return panels;
+      depth -= 1;
+      continue;
+    }
+    const tag = jsxOpeningTag(text, m.index);
+    tagPattern.lastIndex = m.index + tag.length;
+    if (depth === 0 && PANEL_TAG_NAMES.has(name)) panels += 1;
+    if (!tag.endsWith('/>')) depth += 1;
+  }
+  return panels;
+}
+
+/** 文字ごとの {…} の深さ (0 = 開始タグの属性の並び) */
+function topLevelMask(tag) {
+  const depths = [];
+  let depth = 0;
+  for (const ch of tag) {
+    if (ch === '}') depth -= 1;
+    depths.push(depth);
+    if (ch === '{') depth += 1;
+  }
+  return depths;
+}
+
+for (const file of scanRoots.flatMap((root) => listFiles(root))) {
+  if (!file.endsWith('.tsx')) continue;
+  const text = readFileSync(path.join(cwd, file), 'utf8');
+  const lineOf = (index) => text.slice(0, index).split('\n').length;
+  if (!PANEL_IMPLEMENTATION_FILES.has(file)) {
+    for (const match of text.matchAll(/<(CardHeader|CardTitle|CardFooter)\b/g)) {
+      violations.push({
+        ruleId: 'panel-parts-only-in-panel-components',
+        message:
+          'Build panels with ChartPanel / RailCard / SectionCard. Card headers and footers are assembled only in the panel components; put source/updated notes in the ChartPanel footer (one line inside the panel).',
+        file,
+        lineNumber: lineOf(match.index),
+        line: match[0],
+      });
+    }
+  }
+  for (const match of text.matchAll(PANEL_TAG)) {
+    const tag = jsxOpeningTag(text, match.index);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
+      // action={<Link className=…>} のような属性の中の JSX はパネル自身の属性ではない
+      if (depthAt[prop.index] !== 0) continue;
+      const value = prop[2] ?? prop[3] ?? '';
+      const size = value.match(PANEL_TEXT_SIZE);
+      if (!size) continue;
+      violations.push({
+        ruleId: 'panel-no-text-size-override',
+        message:
+          'Panels keep the reference sizes (body 14px/relaxed, title 16px/22px). Do not set text size or line height on the panel; set it on the specific child element instead.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: `<${match[1]} ${prop[1]}="${size[0]}">`,
+      });
+    }
+  }
+  // 開閉 (FaqSection・ContentDisclosure) と空の状態 (ChartEmptyState・ChartErrorState) の見た目は部品が持つ
+  // (開閉 = 質問 14px・500・上下 10px・項目の間に線、空の状態 = 余白 24px・間隔 16px・破線の枠)。
+  // 2026-10-28 まではページの側が地の色・線・行の高さ・文字色を足し、空の状態に 3 種類の地の色が混在していた。
+  // 呼び出し側の className・contentClassName は置き場所 (外の余白・表示切替・縦横比・最小の高さ・子の間隔) だけに使う。
+  for (const match of text.matchAll(LOOK_LOCKED_TAG)) {
+    const tag = jsxOpeningTag(text, match.index);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
+      if (depthAt[prop.index] !== 0) continue;
+      const value = prop[2] ?? prop[3] ?? '';
+      const override = value.split(/\s+/).find((t) => LOOK_OVERRIDE_TOKEN.test(t));
+      if (!override) continue;
+      const isDisclosure = match[1] === 'FaqSection' || match[1] === 'ContentDisclosure';
+      violations.push({
+        ruleId: isDisclosure ? 'disclosure-no-look-override' : 'empty-state-no-look-override',
+        message: isDisclosure
+          ? 'Disclosures keep the reference look (question 14px/500, 10px vertical padding, divider lines). Use className / contentClassName only for placement (margin, visibility) and child spacing (space-y-*).'
+          : 'Empty / error states keep the reference look (24px padding, 16px gap, dashed frame). Use className only for placement (margin, aspect ratio, min height); do not add background, border, padding or text styles.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: `<${match[1]} ${prop[1]}="${override}">`,
+      });
+    }
+  }
+  // ボタンの大きさ・文字・角丸は部品 (見本の値を書き込んだ button.tsx) が持つ。ページの側で ! を付けて上書きしない。
+  // 大きさを変えたいときは size (default / sm / xs / icon …) を選ぶ。押しやすさの min-h-* は上書きではないので対象外
+  for (const match of text.matchAll(/<Button\b|buttonVariants\(\{/g)) {
+    const tag = match[0].startsWith('<')
+      ? jsxOpeningTag(text, match.index)
+      : text.slice(match.index, text.indexOf('})', match.index) + 2);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(/className(?:=|:\s*)["'`]([^"'`]*)["'`]/g)) {
+      if (match[0].startsWith('<') && depthAt[prop.index] !== 0) continue;
+      const forced = prop[1]
+        .split(/\s+/)
+        .find((t) => /^(?:[\w-]+:)*(?:h-|size-|text-(?:xs|sm|base|lg|xl|\[)|rounded|px-|py-|leading-)[^\s]*!$/.test(t));
+      if (!forced) continue;
+      violations.push({
+        ruleId: 'button-no-forced-size',
+        message:
+          'Buttons keep the reference size (14px, h-36, rounded-8). Pick a size variant (default / sm / xs / icon) instead of forcing height, text, padding or radius with !.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: forced,
+      });
+    }
+  }
+  // リンクの行 (RailNavRow・RailNavRowButton・railNavRowClassName・RailLinkList) の寸法は部品 (LINK_ROW_SIZE_CLASS =
+  // 14px・余白 8px・最小の高さ 40px / モバイル 44px) が持つ。2026-10-28 までは呼び出し側が px-0・-mx-2・15px の密度で
+  // 行ごとに違う寸法にしていた。行には文字の大きさ・行の高さ・余白・高さを、一覧には行の間隔・左右の余白を書かない
+  // (一覧の上下の位置 mt-* / mb-* は一覧の外側なので対象外)。太さ・色は上書きではないので対象外
+  for (const match of text.matchAll(/<(RailNavRow|RailNavRowButton|RailLinkList)\b|railNavRowClassName\(\{/g)) {
+    const isList = match[1] === 'RailLinkList';
+    const tag = match[0].startsWith('<')
+      ? jsxOpeningTag(text, match.index)
+      : text.slice(match.index, text.indexOf('})', match.index) + 2);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(/className(?:=|:\s*)(?:["'`]([^"'`]*)["'`]|\{\s*["'`]([^"'`]*)["'`]\s*\})/g)) {
+      if (match[0].startsWith('<') && depthAt[prop.index] !== 0) continue;
+      const sizeToken = isList
+        ? /^!?(?:[\w-]+:)*!?(?:-?(?:mx|px|ms|me|ps|pe)-|gap-|space-y-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/
+        : /^!?(?:[\w-]+:)*!?(?:-?(?:p|px|py|pt|pb|pl|pr|ps|pe|m|mx|my|ms|me)-|(?:min-|max-)?h-|size-|w-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/;
+      const forced = (prop[1] ?? prop[2] ?? '').split(/\s+/).find((t) => sizeToken.test(t));
+      if (!forced) continue;
+      violations.push({
+        ruleId: 'link-row-no-size-override',
+        message:
+          'Link rows keep the reference size (LINK_ROW_SIZE_CLASS: 14px, padding 8px, min-height 40px / 44px on mobile). Do not set text size, line height, padding, margin or height on RailNavRow / railNavRowClassName, nor row spacing or horizontal padding on RailLinkList.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: forced,
+      });
+    }
+  }
+  // 数値タイルの値 (大きな等幅数字) は StatTile の書式 (STAT_VALUE_CLASS = 24px / 32px・600) だけで描く。
+  // 2026-10-28 までは部品ごとに text-lg〜text-3xl・太さ 600〜700 が混在していた。
+  {
+    for (const match of text.matchAll(/className="([^"]*)"/g)) {
+      const tokens = match[1].split(/\s+/);
+      if (!tokens.includes('tabular-nums')) continue;
+      if (!tokens.some((t) => /^(?:[\w-]+:)*text-(?:lg|xl|[2-9]xl)$/.test(t))) continue;
+      violations.push({
+        ruleId: 'stat-value-uses-shared-class',
+        message:
+          'Render large numeric values with StatTile or STAT_VALUE_CLASS (@/components/surface): one size (24px/32px, 600) for every numeric tile.',
+        file,
+        lineNumber: lineOf(match.index),
+        line: match[0],
+      });
+    }
+  }
+  // パネルを 2 枚以上、隙間 (gap-N / space-y-N) を空けて並べる <div> は線の格子 (PanelGrid / PageSections) にする
+  for (const match of text.matchAll(SPACED_STACK_DIV)) {
+    if (!SPACED_STACK_CLASS.test(match[1] ?? match[2] ?? match[3] ?? '')) continue;
+    if (directPanelChildren(text, match.index) < 2) continue;
+    violations.push({
+      ruleId: 'panels-in-line-grid',
+      message:
+        'Lay out sibling panels with PanelGrid / PageSections (@/components/layout): panels share 1px lines (grid gap-px; each cell draws a 1px outset shadow) instead of being spaced with gap-N / space-y-N.',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
+}
+
+// --- 記事本文の見出しの太さと、静的ページのパネル内見出し ---
+//
+// 見本 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「記事本文」) は見出しが 600。
+// 2026-10-28 までは本文の h2・h3 が 700 で、利用規約などのページは自前の見出し (20px・独自余白・下線) を持っていた。
+// - article-heading-weight-600: globals.css の記事本文 (.blog-news-article と @utility blog-article) の h2〜h4 は
+//   太さ 600 (font-semibold) だけ。MDContent の見出し部品は太さ・文字の大きさを持たない (見た目は CSS が持つ)
+// - static-panel-heading-uses-section-card: 利用規約・プライバシーポリシー・運営者情報のパネルの題名は
+//   SectionCard の title (16px / 22px・500 + 下の線) で描く。<h2> を自前で書かない。パネル内の小見出しは 14px まで
+const ARTICLE_HEADING_BLOCK = /(?:^|\n)\s*& (h[2-4])\s*\{([^}]*)\}/g;
+const articleTypographyStart = globalsText.indexOf('/* ===== Blog Article Typography');
+const articleTypographyEnd = globalsText.indexOf('\n}\n', globalsText.indexOf('@utility blog-article'));
+if (articleTypographyStart < 0 || articleTypographyEnd < 0) {
+  violations.push({
+    ruleId: 'article-heading-weight-600',
+    message: 'Could not find the Blog Article Typography section / @utility blog-article in globals.css.',
+    file: globalsPath,
+    lineNumber: 1,
+    line: 'Blog Article Typography',
+  });
+} else {
+  const section = globalsText.slice(articleTypographyStart, articleTypographyEnd);
+  for (const match of section.matchAll(ARTICLE_HEADING_BLOCK)) {
+    const body = match[2];
+    const weights = [
+      ...[...body.matchAll(/font-weight:\s*([^;]+);/g)].map((m) => m[1].trim()),
+      ...[...body.matchAll(/(?<![\w-])font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)(?![\w-])/g)].map((m) => m[0]),
+    ];
+    const bad = weights.find((w) => w !== '600' && w !== 'font-semibold');
+    if (!bad) continue;
+    violations.push({
+      ruleId: 'article-heading-weight-600',
+      message:
+        'Article body headings (h2-h4) use weight 600 (font-semibold), matching the reference. Change size/spacing if needed, not weight.',
+      file: globalsPath,
+      lineNumber: globalsText
+        .slice(0, articleTypographyStart + match.index + match[0].indexOf('&'))
+        .split(/\r?\n/).length,
+      line: `${match[1]} ${bad}`,
+    });
+  }
+}
+{
+  const mdContentPath = 'src/features/blog/components/md-content.tsx';
+  const mdText = readFileSync(path.join(cwd, mdContentPath), 'utf8');
+  for (const match of mdText.matchAll(/<(h[2-4])\b[^>]*\bclassName=["'{`]+([^"'`}]*)/g)) {
+    const token = match[2]
+      .split(/\s+/)
+      .find((t) => /^(?:[\w-]+:)*(?:font-(?:thin|extralight|light|normal|medium|semibold|bold|extrabold|black)|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[))/.test(t));
+    if (!token) continue;
+    violations.push({
+      ruleId: 'article-heading-weight-600',
+      message:
+        'MDContent headings carry only structure (id / scroll-mt). Weight and size come from .blog-news-article in globals.css.',
+      file: mdContentPath,
+      lineNumber: mdText.slice(0, match.index).split('\n').length,
+      line: `<${match[1]} ${token}>`,
+    });
+  }
+}
+const STATIC_PANEL_PAGE_FILES = ['src/app/terms/page.tsx', 'src/app/privacy/page.tsx', 'src/app/about/page.tsx'];
+for (const file of STATIC_PANEL_PAGE_FILES) {
+  const text = readFileSync(path.join(cwd, file), 'utf8');
+  const lineOf = (index) => text.slice(0, index).split('\n').length;
+  for (const match of text.matchAll(/<(h[1-6])\b[^>]*>/g)) {
+    const className = match[0].match(/className=["'`]([^"'`]*)/)?.[1] ?? '';
+    const large = className
+      .split(/\s+/)
+      .find((t) => /^(?:[\w-]+:)*text-(?:base|lg|xl|[2-9]xl|\[)/.test(t));
+    if (match[1] !== 'h2' && match[1] !== 'h1' && !large) continue;
+    violations.push({
+      ruleId: 'static-panel-heading-uses-section-card',
+      message:
+        'Static pages title their panels with SectionCard (title + headingAs="h2"): 16px/22px, 500, line below. Sub-headings inside a panel stay at 14px (text-sm).',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
 }
 
 if (violations.length > 0) {

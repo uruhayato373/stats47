@@ -2,8 +2,7 @@
 
 import { StatusBadge } from '@/components/admin-ui/status-badge';
 import { MediaPreview } from '@/components/media-preview';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button, Card } from '@stats47/components';
 import {
   candidatesFor,
   candidateStage,
@@ -27,7 +26,7 @@ export function PostCard({
   onPreview: () => void;
 }) {
   return (
-    <Card className="gap-0 overflow-hidden py-0">
+    <Card className="gap-0! overflow-hidden py-0!">
       <div className="flex items-center justify-between gap-2 p-3">
         {item.id ? (
           <a

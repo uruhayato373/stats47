@@ -31,8 +31,8 @@ interface Props {
 export function MigrationSankey({ code, initialData }: Props) {
   const { data, errored } = useFlowData<MigrationFlowData>("migration", code, initialData);
 
-  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73 border bg-muted" />;
-  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73 border bg-muted" />;
+  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73" />;
+  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73" />;
 
   const totalIn = data.partners.reduce((s, p) => s + p.inflow, 0);
   const totalOut = data.partners.reduce((s, p) => s + p.outflow, 0);

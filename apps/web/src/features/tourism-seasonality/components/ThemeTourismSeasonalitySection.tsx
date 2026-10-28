@@ -1,8 +1,8 @@
+import { ChartPanel } from '@stats47/components';
 import { TOURISM_SEASONALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import {
   parseTourismSeasonalitySnapshot,

@@ -1,10 +1,10 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@stats47/components/atoms/ui/table';
 import { NUTRITION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -26,8 +26,8 @@ export function ThemeNutritionClient({ snapshot }: { snapshot: NutritionSnapshot
       <Table aria-label={`${area}の栄養摂取量と95%信頼区間`}>
         <TableCaption>平均と95%信頼区間は1日当たりのグラム数です。集計人数は推計人口ではありません。</TableCaption>
         <TableHeader><TableRow>
-          <TableHead scope="col">指標</TableHead><TableHead scope="col" className="text-right">平均<br />（g/日）</TableHead>
-          <TableHead scope="col" className="text-right">95%信頼区間<br />（g/日）</TableHead><TableHead scope="col" className="text-right">集計<br />人数</TableHead>
+          <TableHead scope="col">指標</TableHead><TableHead scope="col" className="text-right!">平均<br />（g/日）</TableHead>
+          <TableHead scope="col" className="text-right!">95%信頼区間<br />（g/日）</TableHead><TableHead scope="col" className="text-right!">集計<br />人数</TableHead>
         </TableRow></TableHeader>
         <TableBody>{NUTRITION_SOURCE.metrics.map(metric => {
           const row = rows.find(point => point.metricKey === metric.key)!;

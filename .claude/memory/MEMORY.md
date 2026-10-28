@@ -161,3 +161,4 @@
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
 - [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)
+- [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古いコミットから切られ node_modules も無い。prompt に起点 SHA の付け替えと @stats47 だけ張る手順を書き、取り込みは cherry-pick

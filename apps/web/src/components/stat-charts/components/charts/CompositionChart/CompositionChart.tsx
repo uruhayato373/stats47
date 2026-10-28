@@ -1,8 +1,8 @@
+import { ChartPanel } from "@stats47/components";
 import { resolveAttribution } from "@stats47/data-configs";
 import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState, ChartErrorState } from "@/components/charts/ChartState";
 
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
@@ -145,7 +145,7 @@ export const CompositionChartDashboard = async ({
             />
         }
       >
-          <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+          <ChartEmptyState message="データがありません" height={250} />
         </ChartPanel>
       );
     }

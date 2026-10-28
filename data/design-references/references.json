@@ -1,0 +1,92 @@
+{
+  "_doc": "参考サイトの台帳。URL・何を参考にするか・採否と理由・撮影と実測の置き場・反映先を 1 件ずつ持つ。管理画面「サイト > 参考サイト」が読む。形は config/schema/design.references.schema.json。参考サイトを新しく見たら、ここに 1 件足してから設計に使う (規約・メモリに URL を書き散らさない)。",
+  "references": [
+    {
+      "id": "shadcndashboard",
+      "name": "shadcndashboard (Next.js shadcn dashboard template)",
+      "url": "https://demos.shadcndashboard.dev/",
+      "source": "https://github.com/shadcndashboard/next-shadcn-dashboard (commit 91deb102、style-lyra)",
+      "status": "adopted",
+      "decidedAt": "2026-10-27",
+      "decision": "オーナー決定「テンプレートを正としてサイトを寄せる」。写したテンプレートのソース (lyra) と見本サイトが食い違うときは見本サイトの値を正とする (2026-10-28)。",
+      "scope": "公開サイト・管理画面の部品の寸法と並べ方 (2026-10-28 に管理画面も同じ部品へ統一)",
+      "screens": "assets/design-reference/shadcndashboard/2026-10-28/screens",
+      "measurements": "assets/design-reference/shadcndashboard/2026-10-28/measurements",
+      "spec": "docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」",
+      "adoptions": [
+        {
+          "part": "パネル",
+          "what": "中の文字 14px、題名 16px / 22px・500、見出しの下 16px + 線、補足はパネルの中の下端 1 行",
+          "state": "done",
+          "reflectedIn": "packages/components/src/surface/surface.tsx・chart-panel.tsx、packages/ui-theme/style-reference.css"
+        },
+        {
+          "part": "線の格子",
+          "what": "並べる親が線の色を地に持ち (grid p-px gap-px bg-border)、パネルは線を持たない。本文の列全体が 1 本の格子",
+          "state": "done",
+          "reflectedIn": "packages/components/src/surface/panel-grid.tsx、apps/web/src/components/layout/PanelGrid.tsx (ShellColumn)"
+        },
+        {
+          "part": "数値タイル",
+          "what": "名前 14px → 値 24px / 32px・600 (右に単位とバッジ) → 補足 12px、余白 16px",
+          "state": "done",
+          "reflectedIn": "packages/components/src/surface/stat-tile.tsx"
+        },
+        {
+          "part": "ボタン",
+          "what": "14px / 20px・500、高さ 36px、左右 10px、角丸 8px (小・極小は 12px のまま角丸だけ)",
+          "state": "done",
+          "reflectedIn": "packages/ui-theme/style-reference.css → packages/components/src/atoms/ui/button.tsx"
+        },
+        {
+          "part": "リンクの行",
+          "what": "文字 14px・余白 8px・最小の高さ 40px の 1 種類",
+          "state": "done",
+          "reflectedIn": "packages/components/src/surface/surface.tsx (LINK_ROW_SIZE_CLASS)、design-system:check の link-row-no-size-override"
+        },
+        {
+          "part": "開閉 (FAQ・定義・AI の解説)",
+          "what": "質問 14px・500、上下 10px、項目の間に線。details は残す",
+          "state": "done",
+          "reflectedIn": "apps/web/src/components/content/{FaqSection,ContentDisclosure}.tsx、disclosure-no-look-override"
+        },
+        {
+          "part": "空の状態",
+          "what": "余白 24px・間隔 16px・破線の枠 (見本の実測は線の太さ 0。1px はオーナー確認待ち)",
+          "state": "done",
+          "reflectedIn": "apps/web/src/components/charts/ChartState.tsx、empty-state-no-look-override"
+        },
+        {
+          "part": "記事本文の見出し",
+          "what": "見出しの太さ 600、本文 16px は残す。静的ページのパネルの題名は SectionCard",
+          "state": "done",
+          "reflectedIn": "apps/web/src/app/globals.css、article-heading-weight-600・static-panel-heading-uses-section-card"
+        }
+      ]
+    },
+    {
+      "id": "flowly",
+      "name": "Flowly (ReUI のダッシュボード見本)",
+      "url": "https://flowly-app.reui.io/dashboard",
+      "status": "trial",
+      "decidedAt": "2026-10-28",
+      "decision": "カードやリストの項目を押すと右から詳細パネル (スマホは下から) が開き、詳細・関連リンク・前後送りを出す形。オーナーの提案を受けて試行候補にした。全面採用はしない。 2026-10-28 にオーナーが「試す」と決めた (ランキングの地図と表)。",
+      "scope": "ランキング詳細の地図と表で「県を押したら右に詳細 (値・順位・推移・都道府県ページと関連ランキングへのリンク)」を試す",
+      "conditions": [
+        "検索で拾われる導線 (都道府県・関連ランキングへのリンク) はページの HTML にふつうのリンクとして残し、パネルは補助にとどめる",
+        "URL に開いた項目を残す (?pref=13 など) なら、canonical を元のページに向ける",
+        "パネルを開いた回数と中のリンクの押下を GA4 で記録し、4 週ほどで都道府県ページへの遷移が増えたかで広げるかを決める",
+        "UI の規約 (.claude/rules/ui-components.md)「表示領域に収まるリンク一覧は常時表示し、情報密度だけを理由に折りたたみや中間画面を追加しない」の例外として試す (2026-10-28 オーナー決定)。都道府県ページ・関連ランキングへのリンクはページ側にも残す"
+      ],
+      "screens": "assets/design-reference/flowly/2026-10-28/screens",
+      "adoptions": [
+        {
+          "part": "詳細パネル (右から開くシート)",
+          "what": "項目を押すと右から幅半分ほどのパネル。上から名前と状態、前後送り (3 of 12)、操作、タブ、警告、小さなグラフ、項目名と値の一覧。開いた項目を URL の ?open= に残す",
+          "state": "proposed",
+          "reflectedIn": "未着手 (共有部品の Sheet を使う)"
+        }
+      ]
+    }
+  ]
+}

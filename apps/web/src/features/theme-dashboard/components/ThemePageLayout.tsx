@@ -18,7 +18,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import Link from '@/components/atoms/SiteLink';
-import { PageShell } from '@/components/layout';
+import { PageShell, PanelGrid } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
 import {
@@ -185,7 +185,7 @@ export async function ThemePageLayout({
       initialAreaName={providerPrefecture?.areaName ?? null}
     >
       <PageShell>
-        <div className="text-foreground">
+        <PanelGrid className="text-foreground">
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
@@ -332,7 +332,8 @@ export async function ThemePageLayout({
           {areaContext && areaHighlights.length > 0 && (
             <section
               aria-labelledby="area-theme-highlights"
-              className="mb-6 border-y border-border bg-muted/30 px-4 py-4"
+              // 線の格子のセル (余白 16px と上下の線は格子が持つ)
+              className="min-w-0"
             >
               <h2
                 id="area-theme-highlights"
@@ -389,7 +390,6 @@ export async function ThemePageLayout({
                             key={metric.rankingKey}
                             href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
                             chevron={false}
-                            className="px-0"
                           >
                             {metric.label}
                           </RailNavRow>
@@ -404,7 +404,7 @@ export async function ThemePageLayout({
                     <RailNavRow
                       href="/survey"
                       chevron={false}
-                      className="px-0 font-medium"
+                      className="font-medium"
                     >
                       調査一覧へ
                     </RailNavRow>
@@ -415,7 +415,6 @@ export async function ThemePageLayout({
                             key={survey.id}
                             href={hrefFor('survey', { surveyKey: survey.id })}
                             chevron={false}
-                            className="px-0"
                           >
                             {survey.name}
                           </RailNavRow>
@@ -467,7 +466,7 @@ export async function ThemePageLayout({
             </div>
           )}
 
-        </div>
+        </PanelGrid>
       </PageShell>
     </ThemePrefectureProvider>
   );

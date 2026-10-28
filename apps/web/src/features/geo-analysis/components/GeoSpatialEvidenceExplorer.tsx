@@ -23,6 +23,7 @@ import {
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
@@ -214,9 +215,9 @@ function GeoSpatialEvidenceExplorerState({
     });
   };
   return (
-    <section
+    <PanelGrid as="section"
       id={syncUrl ? 'spatial-evidence' : `${slug}-spatial-evidence`}
-      className="mb-6 scroll-mt-24"
+      className="scroll-mt-24"
       aria-label="県内の空間分析"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -385,10 +386,10 @@ function GeoSpatialEvidenceExplorerState({
           </Button>
         </div>
       ) : null}
-      <div className="mt-6" data-testid="spatial-audit">
+      <PanelGrid data-testid="spatial-audit">
         <SectionHeader as="h3" title="数値の確かめ方" hideRule />
         {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
-          <div className="grid gap-3 sm:grid-cols-3">
+          <PanelGrid className="sm:grid-cols-3">
             {spatialAuditRows(detail).map((row) => (
               <SurfaceCard key={row.label}>
                 <p className="text-xs text-muted-foreground">{row.label}</p>
@@ -397,14 +398,14 @@ function GeoSpatialEvidenceExplorerState({
                 </p>
               </SurfaceCard>
             ))}
-          </div>
+          </PanelGrid>
         ) : null}
         <p className="mt-3 text-sm text-muted-foreground">
           {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}
           {manifest.quality.conservationChecks}
           /{landslide ? 46 : 47}）。表示の人数は丸めているため足し算に1人程度の差が出ることがあります。検算は丸め前の値で行います。
         </p>
-      </div>
+      </PanelGrid>
       <div className="mt-4 flex flex-wrap gap-4 text-sm">
         <Link
           href={`${hrefFor('geo', { analysisSlug: slug })}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}
@@ -426,6 +427,6 @@ function GeoSpatialEvidenceExplorerState({
         背景地図は地理院タイルをその都度読み込んでいます。背景の道路・地形は計算には使いません。
         {GEO_BASEMAP_SHORELINE_ATTRIBUTION}
       </p>
-    </section>
+    </PanelGrid>
   );
 }

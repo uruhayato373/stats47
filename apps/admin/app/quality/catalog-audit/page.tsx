@@ -53,7 +53,7 @@ export default async function CatalogAuditPage({
 
       <Section title="違反の内訳 (error)" count={summary.errorTally.length}>
         {summary.errorTally.length === 0 ? (
-          <p className="text-sm text-console-good">error はありません。</p>
+          <p className="text-sm text-positive">error はありません。</p>
         ) : (
           <DataTable columns={["種別", "件数"]}>
             {summary.errorTally.map((row) => (

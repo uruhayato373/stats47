@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@stats47/components";
 
 export type MediaCandidate = {
   url: string;

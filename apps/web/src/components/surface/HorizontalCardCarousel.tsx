@@ -13,10 +13,9 @@ import {
   type RefObject,
 } from 'react';
 
-import { Button, cn } from '@stats47/components';
+import { Button, cn, SectionCard } from '@stats47/components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { SectionCard } from './SurfaceCard';
 
 const SCROLL_EDGE_TOLERANCE = 2;
 

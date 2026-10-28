@@ -2,22 +2,9 @@
 
 import React, { useState } from "react";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@stats47/components";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, ChartPanel } from "@stats47/components";
 
 import { ChartFooter, type ChartFooterLink } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { StatsTableRowData } from "../../../types/visualization";
@@ -65,7 +52,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
       }
     >
       {years.length === 0 ? (
-        <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+        <ChartEmptyState message="データがありません" height={250} />
       ) : (
         <>
           {years.length > 1 && (
@@ -77,7 +64,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
                   if (value !== null) setSelectedYearCode(value);
                 }}
               >
-                <SelectTrigger className="h-8 w-[140px] text-sm">
+                <SelectTrigger className="h-8 w-[140px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -94,7 +81,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
             <TableHeader>
               <TableRow>
                 <TableHead>指標名</TableHead>
-                <TableHead className="text-right">値</TableHead>
+                <TableHead className="text-right!">値</TableHead>
                 <TableHead>単位</TableHead>
               </TableRow>
             </TableHeader>

@@ -257,12 +257,11 @@ jobs:
         run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
         continue-on-error: false
 
-      - name: 🧩 Admin UI Guard (shadcn parity / UI debt)
-        # 管理画面の UI 部品が shadcn/ui 公式 (base-nova) と同じクラスか、ページに生のカード面・<table>・style が増えていないか。
+      - name: 🧩 Admin UI Guard (UI debt)
+        # 管理画面のページに生のカード・<table>・style などが増えていないか。部品は公開サイトと同じ @stats47/components。
         # 契約: .claude/rules/admin-ui.md
         run: |
-          node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
-          node .claude/scripts/admin-ui/check-shadcn-parity.mjs
+          node --test .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 

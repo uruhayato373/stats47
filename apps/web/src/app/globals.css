@@ -3,21 +3,11 @@
    「テンプレートを正としてサイトを寄せる」。色はサイトの hsl(var(--x)) 参照に合わせた HSL 版を読む (packages/ui-theme/README.md) */
 @import '@stats47/ui-theme/base.css';
 @import '@stats47/ui-theme/tokens-hsl.css';
+/* 色・角丸の Tailwind テーマと stats47 の値 (状態色・カードの線と角丸)。管理画面・動画アプリと共有 */
+@import '@stats47/ui-theme/theme.css';
 
 @config '../../tailwind.config.ts';
 
-/* v3 の行の高さ (固定の rem) を保つ。v4 既定は比率 (calc(1.75 / 1.25) 等) のため、
-   text-xl の中の text-[11px] のように子へ継承される行の高さが縮み、カードの高さが変わる */
-@theme {
-  --text-xs--line-height: 1rem;
-  --text-sm--line-height: 1.25rem;
-  --text-base--line-height: 1.5rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl--line-height: 1.75rem;
-  --text-2xl--line-height: 2rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl--line-height: 2.5rem;
-}
 
 /* v3 の theme.containers (30 / 48 / 64rem) を保つ。v4 は @sm/@md/@lg と max-w-sm/md/lg が
    --container-* を共有するため、テーマ値ではなく variant を上書きして max-w-* を v3 と同じ既定値に残す */
@@ -143,19 +133,21 @@
       line-height: 1.4;
     }
   
-    /* h2 は h1 (記事タイトル 20〜24px) より小さい 19px にし、上余白は 1.75em に詰める (2026-10-28 3 巡目) */
+    /* h2 は h1 (記事タイトル 20〜24px) より小さい 19px にし、上余白は 1.75em に詰める (2026-10-28 3 巡目)。
+       見出しの太さは h2〜h4 とも見本 (shadcndashboard) の 600 にそろえる (docs/01_技術設計/04_デザインシステム.md「記事本文」)。
+       太さを変えるのはここだけ (design-system:check の article-heading-weight-600) */
     & h2 {
       margin: 1.75em 0 0.6em;
       font-size: 19px;
-      font-weight: 700;
+      font-weight: 600;
     }
-  
+
     & h3 {
       margin: 2rem 0 0.75rem;
       padding: 0.25rem 0 0.25rem 1rem;
       border-left: 4px solid hsl(var(--article-accent, var(--primary)));
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 600;
     }
   
     & h4 {
@@ -274,11 +266,11 @@
   @apply text-foreground leading-relaxed text-base;
 
   & h2 {
-    @apply text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
+    @apply text-2xl font-semibold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
   }
 
   & h3 {
-    @apply text-xl font-bold mt-9 mb-2 scroll-mt-20;
+    @apply text-xl font-semibold mt-9 mb-2 scroll-mt-20;
   }
 
   & p {
@@ -380,28 +372,10 @@
 
 /* ===== サイト固有のトークン =====
    shadcn の色 (background / card / primary / border / chart-* …) と --radius はテンプレートの値
-   (@stats47/ui-theme/tokens-hsl.css) を使い、ここで上書きしない。ここにはテンプレートに無いものだけを置く。 */
+   (@stats47/ui-theme/tokens-hsl.css)、状態色・カードの線と角丸は @stats47/ui-theme/theme.css (管理画面・動画アプリと共有) が持つ。
+   ここには公開サイトだけの値 (ヘッダーの高さなど) を置く。 */
 @layer base {
   :root {
-    --destructive-foreground: 0 0% 98%;
-
-    /* カード外枠 (@stats47/components の CARD_SURFACE_CLASS が参照)。テンプレートと同じく角丸なし・線あり */
-    --card-radius: 0px; /* rounded-card */
-    --card-outline: hsl(var(--border)); /* border-card-outline */
-
-    /* 本文の中に置く部品 (callout・本文内のランキングカード・コードブロック) */
-    --content-radius: 6px; /* rounded-content */
-
-    /* データの状態色 (上位・良い値 / 下位・悪い値 / 注意 / 補足)。text-positive, bg-positive-soft 等 */
-    --positive: 161 94% 30%;
-    --positive-soft: 152 81% 96%;
-    --negative: 0 72% 51%;
-    --negative-soft: 0 86% 97%;
-    --warning: 26 90% 37%;
-    --warning-soft: 48 100% 96%;
-    --info: 224 76% 48%;
-    --info-soft: 214 100% 97%;
-
     /* Header height: SiteHeader (h-12)。PC とモバイルで同じ高さ */
     --header-height: 48px;
 
@@ -431,17 +405,7 @@
  * @layer 外のルールは @layer 内より高優先度なので、dark 時に正しく上書きされる。
  */
 .dark {
-  --destructive-foreground: 0 0% 98%;
-
-  --positive: 158 64% 52%;
-  --positive-soft: 166 91% 9%;
-  --negative: 0 91% 71%;
-  --negative-soft: 0 75% 15%;
-  --warning: 43 96% 56%;
-  --warning-soft: 21 92% 14%;
-  --info: 213 94% 68%;
-  --info-soft: 226 57% 21%;
-
+  /* 状態色などのダークの値は @stats47/ui-theme/theme.css */
   color-scheme: dark;
 }
 

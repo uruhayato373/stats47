@@ -3,9 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { Grid } from "@/components/layout-primitives";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Button, Input, NativeSelect, NativeSelectOption } from "@stats47/components";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";

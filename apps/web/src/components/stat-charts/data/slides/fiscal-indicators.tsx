@@ -5,6 +5,7 @@ import {
   TrendingDown,
 } from "lucide-react";
 
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 import {
@@ -28,7 +29,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
             「隠れた借金」を可視化し、早期に財政悪化を食い止めるための法律です。
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <PanelGrid className="grid-cols-3 text-center">
           <SurfaceCard className="text-center">
             <div className="text-info font-bold text-xl mb-1">可視化</div>
             <p className="text-xs text-muted-foreground">連結ベースの指標導入</p>
@@ -41,7 +42,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
             <div className="text-info font-bold text-xl mb-1">徹底公開</div>
             <p className="text-xs text-muted-foreground">住民への情報開示義務</p>
           </SurfaceCard>
-        </div>
+        </PanelGrid>
       </div>
     ),
     accent: FISCAL_SLIDE_ACCENT.introduction,

@@ -2,6 +2,7 @@
 
 import { Lightbulb, MapPin, Users } from "lucide-react";
 
+import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 
 /**
@@ -26,7 +27,7 @@ export function ComparisonEmpty() {
                 都道府県を2つ選ぶと、人口、経済、教育などの統計データをカテゴリ別に比較できます。
             </p>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 text-left max-w-lg">
+            <PanelGrid className="grid-cols-1 sm:grid-cols-2 text-left max-w-lg">
                 <SurfaceCard className="flex gap-3 bg-muted/50 shadow-none">
                     <div className="h-8 w-8 shrink-0 rounded-full bg-positive-soft flex items-center justify-center text-positive">
                         <Users size={18} />
@@ -45,7 +46,7 @@ export function ComparisonEmpty() {
                         <div className="text-xs text-muted-foreground">全国順位や差分率から、その地域の強みを見つけ出せます。</div>
                     </div>
                 </SurfaceCard>
-            </div>
+            </PanelGrid>
         </div>
     );
 }

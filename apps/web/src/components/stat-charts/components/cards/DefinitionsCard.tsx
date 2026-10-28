@@ -97,8 +97,8 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
         <Table>
           <TableBody>
             {group.items.map((item) => (
-              <TableRow key={item.name} className="border-b border-border/40 hover:bg-transparent">
-                <TableCell className="pr-2 text-foreground">{item.name}</TableCell>
+              <TableRow key={item.name} className="border-b border-border/40">
+                <TableCell className="text-foreground">{item.name}</TableCell>
                 {item.cat01 && (
                   <TableCell className="text-right font-mono text-muted-foreground">
                     {item.cat01}
@@ -138,7 +138,7 @@ export const DefinitionsCard: React.FC<DashboardItemProps<"definitions-card">> =
       description={data.description}
       meta={
         data.badge ? (
-          <Badge variant="secondary" className="text-[10px]">
+          <Badge variant="secondary">
             {data.badge}
           </Badge>
         ) : undefined

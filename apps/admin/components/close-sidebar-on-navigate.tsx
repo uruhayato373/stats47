@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-import { useSidebar } from "@/components/ui/sidebar";
+import { useSidebar } from "@stats47/components";
 
 /**
  * 画面を移ったら、モバイルのサイドメニュー (Sheet) を閉じる。

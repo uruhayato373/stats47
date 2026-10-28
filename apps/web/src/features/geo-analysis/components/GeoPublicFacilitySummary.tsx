@@ -130,10 +130,10 @@ export function GeoPublicFacilitySummary({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">最寄り施設への距離帯</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 {year}年人口
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 比率
               </TableHead>
             </TableRow>
@@ -168,7 +168,7 @@ export function GeoPublicFacilitySummary({
                 <TableHead
                   key={label}
                   scope="col"
-                  className="text-right whitespace-nowrap"
+                  className="text-right! whitespace-nowrap"
                 >
                   {label}
                 </TableHead>
@@ -183,7 +183,7 @@ export function GeoPublicFacilitySummary({
                   {onSelectArea && !selected ? (
                     <Button
                       variant="link"
-                      className="h-11 p-0"
+                      className="p-0"
                       onClick={() => onSelectArea(row.areaCode, row.areaName)}
                       aria-label={`${row.areaName}の公共施設地図を表示`}
                     >

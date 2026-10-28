@@ -2,16 +2,12 @@
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin-ui';
 import { Section, Stack } from '@/components/layout-primitives';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Button, buttonVariants, Label, Input, Textarea, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 import { COVER_PRODUCTION_STAGES } from '@/lib/note-cover-view';
 import { NoteCoverImage } from './note-cover-image';
 import type { NoteCoverRow } from '@/lib/server/note-covers';
 import type { CoverBrief } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 import type { CoverPolicy } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 export function CoverPolicyDetails({ policy }: { policy: CoverPolicy }) {
   return <Stack gap="sm">

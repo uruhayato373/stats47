@@ -17,6 +17,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 
@@ -160,13 +161,13 @@ export async function GeoCrossAnalysisArticle({
           </Link>
         ))}
       </nav>
-      <div id="prefecture-comparison" className="scroll-mt-24">
+      <PanelGrid id="prefecture-comparison" className="scroll-mt-24">
         <RelatedContentNavigation title="この地域分析をもっと読む" sourceId={`geo:${slug}`} kinds={['blog', 'theme', 'ranking']} surface="geo_related" />
         <SectionHeader
           title="空間判定の結果を都道府県で比較"
           description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。"
         />
-      </div>
+      </PanelGrid>
       {slug === 'population-landslide-exposure' ? (
         <GeoLandslideSummary snapshot={snapshot} />
       ) : slug === 'population-snow-designation' ? (
@@ -195,7 +196,7 @@ export async function GeoCrossAnalysisArticle({
                     <TableHead>表示順</TableHead>
                     <TableHead>都道府県</TableHead>
                     {snapshot.metrics.map((metric) => (
-                      <TableHead key={metric.key} className="text-right">
+                      <TableHead key={metric.key} className="text-right!">
                         {metric.label}
                       </TableHead>
                     ))}
@@ -229,7 +230,7 @@ export async function GeoCrossAnalysisArticle({
           </SurfaceSection>
         </>
       )}
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+      <PanelGrid className="mt-6 lg:grid-cols-2">
         <SurfaceSection>
           <SectionHeader title="この記事で読み取れること" hideRule />
           <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
@@ -258,7 +259,7 @@ export async function GeoCrossAnalysisArticle({
             )}
           </dl>
         </SurfaceSection>
-      </div>
+      </PanelGrid>
 
       <SurfaceSection id="methods" className="mt-6 scroll-mt-24">
         <SectionHeader title="方法・出典・限界" hideRule />

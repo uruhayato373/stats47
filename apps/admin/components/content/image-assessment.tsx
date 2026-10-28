@@ -5,8 +5,7 @@ import type {
   VisualReview,
 } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { Section } from '@/components/layout-primitives';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Button, Textarea } from '@stats47/components';
 
 export function ImageAssessment({
   image,

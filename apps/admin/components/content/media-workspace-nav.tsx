@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { buttonVariants } from '@/components/ui/button';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { buttonVariants, SidebarTrigger } from '@stats47/components';
 import { mediaUrl, templateReturnUrl } from '@/lib/media-workspace-navigation';
 
 export function MediaWorkspaceNav({

@@ -4,7 +4,7 @@ import { NoteCoverImage } from '@/components/content/note-cover-image';
 import { Stack } from '@/components/layout-primitives';
 import { COVER_PUBLICATIONS, COVER_REVIEWS } from '@/lib/note-cover-view';
 import type { NoteCoverReview, NoteCoverRow } from '@/lib/server/note-covers';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 
 const REVIEW_TONE: Record<NoteCoverReview, Tone> = { pass: 'good', 'needs-revision': 'warn', pending: 'neutral', missing: 'neutral', unavailable: 'warn' };
 export function CoverReviewBadge({ review }: { review: NoteCoverReview }) {

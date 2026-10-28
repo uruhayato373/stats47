@@ -18,7 +18,6 @@ import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
-import { ChartCard } from '@/components/charts/ChartCard';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartLegend } from '@/components/charts/ChartLegend';
 import { getChartColors } from '@/components/charts/ChartPalette';
@@ -30,6 +29,8 @@ import {
   type ChartPoint,
   type StackPoint,
 } from '@/components/charts/MiniCharts';
+import { PanelGrid } from '@/components/layout';
+import { StatTile } from '@/components/surface';
 
 import {
   FinanceSankey,
@@ -131,7 +132,7 @@ export function LocalFinanceDashboard({
         <TableRow>
           <TableHead>都道府県</TableHead>
           {columns.map((column) => (
-            <TableHead key={column.label} className="text-right">{column.label}</TableHead>
+            <TableHead key={column.label} className="text-right!">{column.label}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
@@ -158,7 +159,7 @@ export function LocalFinanceDashboard({
   );
   const embedded: Record<LocalFinanceEmbeddedKey, ReactNode> = {
     'finance-overview': prefCode ? (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <PanelGrid className="grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
           <KeyMetricsTableCard
             title={activeName}
             subtitle="主要指標"
@@ -176,41 +177,28 @@ export function LocalFinanceDashboard({
             footer={`${latestYear}年度`}
           />
 
-          <ChartCard
-            label="実質収支"
-            value={latest ? oku(latest.realBalance) : '—'}
-            chart={
-              <MiniLineChart
-                points={lineSeries('realBalance', OKU)}
-                unit="億円"
-              />
-            }
-          />
+          <StatTile label="実質収支" value={latest ? oku(latest.realBalance) : null}>
+            <MiniLineChart points={lineSeries('realBalance', OKU)} unit="億円" />
+          </StatTile>
 
-          <ChartCard
-            label="積立金現在高"
-            value={latest ? oku(fundTotalLatest) : "—"}
-            chart={
-              <div>
-                <MiniStackedBarChart points={fundStacks} colors={FUND_COLORS} />
-                <ChartLegend items={FUND_LEGEND_ITEMS} className="mt-1" />
-              </div>
-            }
-          />
+          <StatTile label="積立金現在高" value={latest ? oku(fundTotalLatest) : null}>
+            <div>
+              <MiniStackedBarChart points={fundStacks} colors={FUND_COLORS} />
+              <ChartLegend items={FUND_LEGEND_ITEMS} className="mt-1" />
+            </div>
+          </StatTile>
 
-          <ChartCard
-            label="地方債現在高"
-            value={latest ? oku(latest.localDebt) : '—'}
-            chart={<MiniBarChart points={lineSeries('localDebt', OKU)} />}
-          />
-        </div>
+          <StatTile label="地方債現在高" value={latest ? oku(latest.localDebt) : null}>
+            <MiniBarChart points={lineSeries('localDebt', OKU)} />
+          </StatTile>
+        </PanelGrid>
     ) : comparisonTable([
       { label: '歳入総額', format: (record) => oku(record.revenue) },
       { label: '歳出総額', format: (record) => oku(record.expenditure) },
       { label: '実質収支', format: (record) => oku(record.realBalance) },
     ]),
     'finance-sustainability': prefCode ? (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <PanelGrid className="grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
           {RATIO_METRICS.map((meta) => {
             const latestVal = latest ? latest[meta.key] : null;
             const points = lineSeries(meta.key, 1);
@@ -225,23 +213,22 @@ export function LocalFinanceDashboard({
                 data-year={`${latestYear}年度`}
                 data-series-count={points.length}
               >
-                <ChartCard
+                {/* 定義・ランキングへの導線もタイルの中に置く (タイルと文章を別々に包むと文章が格子の線に接する) */}
+                <StatTile
                   label={meta.label}
-                  value={
-                    latestVal == null
-                      ? '—'
-                      : `${latestVal.toFixed(meta.decimals)}${formatUnitForDisplay(meta.unit)}`
-                  }
-                  chart={<MiniLineChart points={points} unit={meta.unit} />}
-                />
-                <ChartFooter
-                  rankingLink={hrefFor("ranking", { rankingKey: meta.rankingKey })}
-                  rankingLabel={`${meta.label}の定義・ランキング`}
-                />
+                  value={latestVal == null ? null : latestVal.toFixed(meta.decimals)}
+                  unit={formatUnitForDisplay(meta.unit)}
+                >
+                  <MiniLineChart points={points} unit={meta.unit} />
+                  <ChartFooter
+                    rankingLink={hrefFor("ranking", { rankingKey: meta.rankingKey })}
+                    rankingLabel={`${meta.label}の定義・ランキング`}
+                  />
+                </StatTile>
               </div>
             );
           })}
-        </div>
+        </PanelGrid>
     ) : comparisonTable(RATIO_METRICS.map((metric) => ({
       label: metric.label,
       format: (record) => `${record[metric.key].toFixed(metric.decimals)}${formatUnitForDisplay(metric.unit)}`,

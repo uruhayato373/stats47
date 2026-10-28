@@ -3,13 +3,14 @@
 テンプレート [shadcndashboard/next-shadcn-dashboard](https://github.com/shadcndashboard/next-shadcn-dashboard)
 (MIT・commit `91deb102`) の見た目を、公開サイト (`apps/web`) に持ち込む CSS。
 2026-10-27 のオーナー決定「テンプレートを正としてサイトを寄せる」による。
-管理画面 (`apps/admin`) は shadcn 公式の base-nova を別に使う (`.claude/rules/admin-ui.md`)。このパッケージは読まない。
+管理画面 (`apps/admin`) も公開サイトと同じくこのパッケージ (base.css → tokens-hsl.css → theme.css) と `@stats47/components` を使う (2026-10-28 オーナー決定。`.claude/rules/admin-ui.md`)。
 
 | ファイル | 中身 | 出どころ |
 |---|---|---|
 | `base.css` | 入口。`shadcn-tailwind.css` と tw-animate を読み、`style-lyra` の variant を定義する | — |
 | `shadcn-tailwind.css` | `data-open:` などの追加の書き方とアコーディオンの動き | npm `shadcn@4` の `dist/tailwind.css` (MIT) |
 | `style-lyra.css` | Base UI 部品の `cn-*` クラスの見た目 (正本・手で直さない)。**CSS としては読まない**。規則の中身を部品の className に書き込む (`npm run ui-theme:lyra` = `scripts/ui-theme/inline-lyra.mjs`。`npm run ui-theme:lyra:test` が書き込み漏れ・`cn-*` の組み立てを検査し、`.husky/pre-commit` と PR CI の static-gates で走る) | テンプレート `app/css/styles/style-lyra.css` |
+| `style-reference.css` | 見本サイト (demos.shadcndashboard.dev) とテンプレートの lyra が食い違う値だけの差分 (正は見本。仕様は `docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)。形は `style-lyra.css` と同じで、`npm run ui-theme:lyra` が lyra の後に重ねて (tailwind-merge で同じ性質を置き換え) 部品へ書き込む。lyra に無い規則への差分は止める。2026-10-28: パネル (`cn-card` の文字 14px・`cn-card-title` 16px / 22px・`cn-card-description` 14px) | 自作 (見本の実測) |
 | `tokens.css` | 色・角丸のトークン (テンプレートの oklch の値そのまま) | テンプレート `app/globals.css` |
 | `tokens-hsl.css` | `tokens.css` と同じ色の HSL 3 値 (生成物・手で直さない) | `build-hsl-tokens.mjs` |
 
@@ -22,6 +23,7 @@
 ```
 
 サイトは色を `hsl(var(--x))` の形で参照するので、oklch のままの `tokens.css` ではなく `tokens-hsl.css` を読む。
+部品と lyra の値も同じで、`var(--secondary)` のように包まずに読むと色として無効になり宣言ごと捨てられる。lyra の値は `style-reference.css` で `hsl(var(--x))` に置き換え、`npm run ui-theme:lyra:test` が包み忘れを止める。
 ルート要素 (`<html>`) にはテンプレートと同じく `class="style-lyra"` を付ける (lyra の見た目は className に書き込んであるので、このクラスには依存しない)。部品 (`packages/components/src/atoms/ui/*.tsx`) は
 テンプレートの同じコミットの `components/ui/` の写しで、変えたのは import 先と、各ファイル先頭に書いたサイト固有の追加だけ。
 
@@ -54,7 +56,7 @@ CSS で読んでいた間、lyra の規則はレイヤーの外にあり、部�
 - `cn(…)` の引数に `cn-*` を含む文字列があれば、その規則の `@apply` を最後の引数 `/* lyra */ "…"` として足す。className より後ろなので tailwind-merge が lyra の値を残す
 - `cva(…)` の文字列に `cn-*` があれば、同じ variant の形で lyra だけの cva (`<名前>Lyra`) を `// lyra:begin` 〜 `// lyra:end` に書く。`button`・`badge`・`toggle` は `<名前>Variants` を「素のクラス → className → lyra」の順に合成する包みにした。`ToggleGroupItem` は Toggle の素のクラス → className → Toggle の lyra → 自分の lyra の順
 - 呼び出し側の className が入らない `className="…"` の直書きは、その文字列の中で lyra を後ろに合成する
-- lyra に負けていた素のクラスは文字列から外す。`hover:` などの variant 付きは tailwind-merge では消えず、残すと効き始めるため (例: lyra の `bg-transparent` は `hover:bg-muted` にも勝っていた)。呼び出し側の variant 付きの同種のクラス (3 件) と、子の部品の lyra に負けていた `[&_td]:py-0 [&_th]:h-8` (1 か所) も外した。それ以外の負けていた呼び出し側の指定は見た目を変えないため残してある (backlog `LYRA-DEAD-CALLER-CLASSES-01`)
+- lyra に負けていた素のクラスは文字列から外す。`hover:` などの variant 付きは tailwind-merge では消えず、残すと効き始めるため (例: lyra の `bg-transparent` は `hover:bg-muted` にも勝っていた)。呼び出し側の variant 付きの同種のクラス (3 件) と、子の部品の lyra に負けていた `[&_td]:py-0 [&_th]:h-8` (1 か所) も外した。それ以外の負けていた呼び出し側の指定は CSS-3 では見た目を変えないため残し、同日の後続で `!` を付けるか消した (再発は `design-system:check` の `lyra-dead-caller-class` が止める)
 
 確かめ方: 11 ページ × 3 幅 (+ ダーク) の撮り比べと全要素の計算後スタイル、サイトマップから選んだ約 300 URL の全要素について
 「変更前の勝ち方で合成したクラス」と「変更後のクラス」の一致 (約 30 万要素で lyra 由来の差 0)、同じ URL で lyra の目印を持つ要素の計算後スタイル (56,546 要素で差 0。残りは読み込みの揺らぎ) を見た (2026-10-28)。テンプレートを取り直したら `npm run ui-theme:lyra` を実行し、同じ確かめ方をする。

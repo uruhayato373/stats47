@@ -28,7 +28,7 @@ export function MunicipalityRankingCommentary({ content }: MunicipalityRankingCo
         title="データの考察"
         leading={<Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />}
         meta={<span className="text-xs font-normal text-muted-foreground">AI生成</span>}
-        contentClassName="space-y-2 leading-relaxed text-muted-foreground"
+        contentClassName="space-y-2"
       >
         <p>{content.summary}</p>
         <h3 className="pt-2 font-semibold text-foreground">都道府県ごとの分布</h3>

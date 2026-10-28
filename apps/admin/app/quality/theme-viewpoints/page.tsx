@@ -235,7 +235,7 @@ export default async function ThemeViewpointsPage({
             </p>
           ) : null}
           {selectedHits.length === 0 ? (
-            <p className="text-sm text-console-good">該当はありません。</p>
+            <p className="text-sm text-positive">該当はありません。</p>
           ) : (
             <DataGrid
               columns={[

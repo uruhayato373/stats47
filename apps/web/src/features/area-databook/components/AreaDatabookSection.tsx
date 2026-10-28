@@ -1,6 +1,7 @@
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { BookOpen } from "lucide-react";
 
+import { PanelGrid } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
@@ -164,7 +165,7 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
     .filter((s) => sectionHasContent(s, data));
 
   return (
-    <section className="space-y-5" aria-labelledby="area-databook-title">
+    <PanelGrid as="section" aria-labelledby="area-databook-title">
       {/* 見出しは「特徴」など他の節と同じ SectionHeader の型で描く */}
       <SectionHeader
         icon={<BookOpen aria-hidden />}
@@ -175,11 +176,11 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
       {sections.map((section) => {
         const useHalfWidthCharts = hasMultipleHalfWidthCharts(section);
         return (
-          <section
+          <PanelGrid as="section"
             key={section.sectionKey}
             id={`databook-${section.sectionKey}`}
             aria-labelledby={`databook-${section.sectionKey}-title`}
-            className="scroll-mt-24 space-y-3 border-t border-border pt-5 first:border-t-0 first:pt-0"
+            className="scroll-mt-24"
           >
             <div>
               <h3
@@ -194,7 +195,7 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
                 </p>
               )}
             </div>
-            <div className="@container grid grid-cols-12 gap-3">
+            <PanelGrid className="@container grid-cols-12">
               {section.blocks.map((block) => {
               const useHalfWidth =
                 block.blockType === "chart" &&
@@ -217,10 +218,10 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
                 </div>
               );
               })}
-            </div>
-          </section>
+            </PanelGrid>
+          </PanelGrid>
         );
       })}
-    </section>
+    </PanelGrid>
   );
 }

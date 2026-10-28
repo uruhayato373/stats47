@@ -16,17 +16,7 @@ import { MediaWorkspaceNav } from './media-workspace-nav';
 import { ImageTemplateTree, type GalleryBranch } from './image-template-tree';
 import { TemplateStatisticalPreview } from './template-statistical-preview';
 import { PanelCard, StatusBadge } from '@/components/admin-ui';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Button, buttonVariants, Input, Textarea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@stats47/components';
 
 type EditableTemplate = Template & { revision: string };
 type PolicyDraft = Pick<EditableTemplate, 'policy' | 'profiles' | 'revision'>;
