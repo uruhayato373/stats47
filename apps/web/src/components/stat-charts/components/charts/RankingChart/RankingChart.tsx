@@ -12,6 +12,7 @@ import {
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { aggregateMetricTimeseries } from '@/lib/aggregate-metric-timeseries';
 import { resolveMetricAxisPolicy } from '@/lib/metric-axis-policy';
@@ -19,7 +20,6 @@ import { metricSeriesDomain } from '@/lib/metric-presentation';
 
 import { toBarChartData } from '../../../adapters';
 import { toLineChartData } from '../../../adapters/toLineChartData';
-import { ErrorDisplay } from '../../shared/ErrorDisplay';
 import { BarChartClient } from '../BarChart/BarChartClient';
 import { LineChartClient } from '../LineChart/LineChartClient';
 
@@ -34,7 +34,7 @@ export const RankingChartDashboard = async ({
   const { rankingKeys, chartType, labels, yAxisConfig } = config;
   if (!rankingKeys?.length)
     return (
-      <ErrorDisplay
+      <ChartErrorState
         title={title}
         message="設定エラー: rankingKeys が未設定です"
       />
@@ -76,7 +76,7 @@ export const RankingChartDashboard = async ({
     );
     if (!resolved.some((item) => item.rows.length))
       return (
-        <ErrorDisplay
+        <ChartErrorState
           title={title}
           message="有効なランキングデータが見つかりません"
         />
@@ -170,6 +170,6 @@ export const RankingChartDashboard = async ({
     );
   } catch (error) {
     logger.error({ error }, 'RankingChart data failed');
-    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
+    return <ChartErrorState title={title} message="データの取得に失敗しました" />;
   }
 };

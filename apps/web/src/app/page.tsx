@@ -1,13 +1,14 @@
 
 import { fetchPrefectures } from '@stats47/area';
-import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
+import { Lightbulb, MapPin, Newspaper, TrendingUp } from 'lucide-react';
 import { Metadata } from 'next';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader } from '@/components/layout';
-import { RailCategoryList, RailStack } from '@/components/rail';
-import { SectionHeader } from '@/components/section';
-import { HorizontalCardCarousel, RailCard } from '@/components/surface';
+import { PageSections } from '@/components/layout/PageShell';
+import { RailStack } from '@/components/rail';
+import { SectionIndexLink } from '@/components/section';
+import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
+import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
   NativeAffiliateRow,
@@ -117,27 +118,10 @@ export default async function HomePage() {
     'economy',
     8
   ).catch(() => []);
-  const leftRail = (
+  // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
+  // 残る広告だけを右レールに置く (左右レールは併存させない契約)。
+  const rightRail = (
     <RailStack>
-      <RailCard
-        title="カテゴリから探す"
-        headerAction={
-          <Link
-            href="/ranking"
-            className="font-semibold text-primary hover:underline"
-          >
-            一覧 →
-          </Link>
-        }
-        bodyClassName="px-4 pb-3 pt-0"
-      >
-        <RailCategoryList
-          items={RANKING_PROMINENCE_CATEGORIES}
-          trackingSurface="home_category"
-          moreLink={{ href: '/ranking', label: 'すべてのランキングを見る' }}
-          className="-mx-4 border-t-0"
-        />
-      </RailCard>
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       <SidebarPromoBanner index={0} />
       <SidebarStickyBannerAd
@@ -147,45 +131,39 @@ export default async function HomePage() {
     </RailStack>
   );
 
+  // パンくずの無いトップでは、h1 の上の小ラベルでサイトの役割を示す
+  const header = (
+    <PageHeader
+      eyebrow="地域のデータアトラス"
+      title="日本の地域データを探す"
+      description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
+    />
+  );
+
   return (
     <div className="w-full">
-      <PageShell leftRail={leftRail} className="py-5 lg:py-6">
-        <PageHeader
-          eyebrow="地域のデータアトラス"
-          title="日本の地域データを探す"
-          description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
-          className="mb-4"
-        />
-
-        <div className="space-y-6">
-          <section>
-            <SectionHeader
-              title="注目のランキング"
-              action={
-                <Link
-                  href="/ranking"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  もっと見る →
-                </Link>
-              }
-            />
+      <PageShell rightRail={rightRail} header={header}>
+        {/* 節はカードの見出しに題名を置き、カード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード)。
+            カード列は区切り線のセルにする (テンプレートの KPI 行) */}
+        <PageSections>
+          <HorizontalCardCarouselFrame
+            title="注目のランキング"
+            icon={<TrendingUp />}
+            action={
+              <SectionIndexLink href="/ranking">もっと見る</SectionIndexLink>
+            }
+          >
             <FeaturedRankings limit={6} showHeader={false} embedded />
-          </section>
+          </HorizontalCardCarouselFrame>
 
           {latestArticles.length > 0 && (
-            <section>
-              <SectionHeader
-                title="新着ブログ"
-                action={
-                  <Link
-                    href="/blog"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    すべての記事 →
-                  </Link>
-                }
-              />
+            <HorizontalCardCarouselFrame
+              title="新着ブログ"
+              icon={<Newspaper />}
+              action={
+                <SectionIndexLink href="/blog">すべての記事</SectionIndexLink>
+              }
+            >
               <HorizontalCardCarousel ariaLabel="新着ブログ">
                 {latestArticles.map((article) => (
                   <PortalBlogCard
@@ -195,67 +173,47 @@ export default async function HomePage() {
                   />
                 ))}
               </HorizontalCardCarousel>
-            </section>
+            </HorizontalCardCarouselFrame>
           )}
 
-          <section>
-            <SectionHeader
-              title="知りたいことから探す"
-              action={
-                <Link
-                  href="/themes"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  すべてのテーマ →
-                </Link>
-              }
-            />
+          <HorizontalCardCarouselFrame
+            title="知りたいことから探す"
+            icon={<Lightbulb />}
+            action={
+              <SectionIndexLink href="/themes">すべてのテーマ</SectionIndexLink>
+            }
+          >
             <PortalUseCaseGrid />
-          </section>
+          </HorizontalCardCarouselFrame>
 
-          <section>
-            <SectionHeader
-              title="都道府県から探す"
-              action={
-                <Link
-                  href="/areas"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  一覧 →
-                </Link>
-              }
-            />
+          <SectionCard
+            title="都道府県から探す"
+            icon={<MapPin />}
+            headingAs="h2"
+            headerAction={<SectionIndexLink href="/areas" label="都道府県の一覧へ" />}
+          >
             <PrefectureNavigator
               prefectures={prefectures}
               variant="embedded"
               surface="home"
             />
-          </section>
+          </SectionCard>
 
-          <section>
-            <SectionHeader
-              title="運営者プロフィール"
-              action={
-                <Link
-                  href="/about"
-                  className="font-semibold text-primary hover:underline"
-                >
-                  詳しく見る →
-                </Link>
-              }
-            />
-            <OperatorProfileCard className="overflow-hidden" />
-          </section>
+          {/* 運営者プロフィール。カード自身が見出し「運営者」とプロフィールへのリンクを持つ */}
+          <OperatorProfileCard className="overflow-hidden" />
+        </PageSections>
 
-          {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
-          {homeNativeBanners.length > 0 && (
+        {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。
+            広告はカードの格子の外に置く (カードではないので格子に入れない) */}
+        {homeNativeBanners.length > 0 && (
+          <div className="mt-4">
             <NativeAffiliateRow
               banners={homeNativeBanners}
               position="home-native"
               trackingCategory="home"
             />
-          )}
-        </div>
+          </div>
+        )}
       </PageShell>
     </div>
   );

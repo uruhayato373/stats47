@@ -39,13 +39,29 @@ const rules = [
       relativePath === 'src/components/layout/LeftRailLayout.tsx',
   },
   {
+    // 左レールの境界は shell コンテナの 936px (compact 896px)。2026-10-27 まではビューポートの
+    // 992px だったので、旧境界の書き戻しも同じ rule で止める。
     id: 'no-manual-left-rail-breakpoint',
     message:
-      'Left rail responsive classes belong to LeftRailLayout. Use LEFT_RAIL_NARROW_ONLY_CLASS for narrow alternatives.',
+      'Page navigation is placed above the content at every width (LeftRailLayout). Do not reintroduce left rail breakpoints.',
     pattern:
-      /min-\[992px\]:(?:grid|block|hidden|grid-cols-\[264px_minmax\(0,1fr\)\]|gap-6|items-start)/,
+      /(?:min-\[992px\]:|@min-\[(?:936|896)px\]\/shell:)(?:grid|block|hidden|grid-cols-\[(?:264|224)px_minmax\(0,1fr\)\]|gap-\d+|items-start)/,
     allow: (relativePath) =>
       relativePath === 'src/components/layout/LeftRailLayout.tsx',
+  },
+  {
+    // ページで唯一の <main> はルートレイアウト (app/layout.tsx の main#main-content) が持つ。
+    // Shell や page が <main> を足すと landmark が入れ子になり、スキップリンクの行き先も曖昧になる。
+    // 本文の列は div[data-slot=shell-main] で描く。
+    id: 'no-nested-main-landmark',
+    message:
+      'Only app/layout.tsx renders <main>. Use a div (PageShell / ArticleShell render div[data-slot=shell-main]).',
+    pattern: /^\s*<main\b/,
+    allow: (relativePath) =>
+      relativePath === 'src/app/layout.tsx' ||
+      // 既存の負債 (U3 の範囲外)。県・市区町村ページを PageShell へ寄せる単位で外す。
+      relativePath === 'src/app/areas/[areaCode]/page.tsx' ||
+      relativePath === 'src/app/areas/[areaCode]/cities/[cityCode]/page.tsx',
   },
   {
     id: 'no-generic-only-right-rail',
@@ -58,6 +74,10 @@ const rules = [
     message:
       'Do not import shadcn Card directly from app components/features. Use SurfaceCard, SurfaceLinkCard, SurfaceSection, or ChartPanel.',
     pattern: /from\s+["']@stats47\/components\/atoms\/ui\/card["']/,
+    // カード枠の正規の持ち主 (チャート枠と状態表示) はテンプレートの Card で組み立てる (2026-10-27)。
+    allow: (relativePath) =>
+      relativePath === 'src/components/charts/ChartPanel.tsx' ||
+      relativePath === 'src/components/charts/ChartState.tsx',
   },
   {
     id: 'no-legacy-dashboard-card',
@@ -403,45 +423,68 @@ for (const relativePath of [
   });
 }
 
-// 操作用 left rail を hide する consumer は、同じファイルの狭幅代替 UI に共有境界を
-// 使わなければならない。独自 lg:hidden 等だと 992-1023px に二重表示/欠落が生じる。
-// /areas は PrefectureNavigator 自体が全幅で地方別一覧を常設するため、別 visibility wrapper
-// を持たない。この例外も fallback component の存在まで決定的に検査する。
-const integratedLeftRailFallbacks = new Map([
-  ['src/app/areas/page.tsx', '<PrefectureNavigator'],
-]);
+// 2026-10-28 (2 巡目): ページ内ナビ (leftRail) は列を作らず、どの幅でも本文の上の 1 か所に出す。
+// 幅で隠す分岐 (旧 leftRailNarrowBehavior="hide") と常に隠す代替 UI のクラス (旧 LEFT_RAIL_NARROW_ONLY_CLASS) は
+// 撤去したので、戻さない。ページ内ナビを渡す PageShell は、パンくずと h1 を header に渡して
+// ナビより先に出す (LeftRailLayout はナビを本文の先頭に置くので、h1 を children に入れるとナビが h1 より前に来る)。
 for (const root of scanRoots) {
   for (const relativePath of listFiles(root)) {
+    if (relativePath.startsWith('src/components/layout/')) continue;
     const source = readFileSync(path.join(cwd, relativePath), 'utf8');
-    if (!source.includes('leftRailNarrowBehavior="hide"')) continue;
-    if (source.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) continue;
-    const integratedFallback = integratedLeftRailFallbacks.get(relativePath);
-    if (integratedFallback && source.includes(integratedFallback)) continue;
+    for (const retired of ['leftRailNarrowBehavior', 'LEFT_RAIL_NARROW_ONLY_CLASS', 'leftRailDensity']) {
+      if (!source.includes(retired)) continue;
+      violations.push({
+        ruleId: 'no-retired-left-rail-narrow-api',
+        message:
+          'Page navigation is shown above the content at every width. Do not hide it by width or add a hidden narrow alternative.',
+        file: relativePath,
+        lineNumber: source.slice(0, source.indexOf(retired)).split('\n').length,
+        line: retired,
+      });
+    }
+    const pageShellStart = source.indexOf('<PageShell');
+    if (pageShellStart === -1) continue;
+    const pageShellTag = source.slice(pageShellStart, source.indexOf('\n      >', pageShellStart) + 1 || undefined);
+    const leftRailIndex = pageShellTag.indexOf('leftRail=');
+    if (leftRailIndex === -1) continue;
+    const headerIndex = pageShellTag.indexOf('header=');
+    if (headerIndex !== -1 && headerIndex < leftRailIndex) continue;
     violations.push({
-      ruleId: 'left-rail-hide-requires-shared-narrow-alternative',
+      ruleId: 'left-rail-requires-header-first',
       message:
-        'A hidden left rail requires a narrow alternative using LEFT_RAIL_NARROW_ONLY_CLASS in the same consumer.',
+        'A PageShell with leftRail must pass the breadcrumb and h1 through header (before leftRail) so the page navigation follows them.',
       file: relativePath,
-      lineNumber: 1,
-      line: 'leftRailNarrowBehavior="hide"',
+      lineNumber: source.slice(0, pageShellStart).split('\n').length,
+      line: '<PageShell leftRail=…>',
     });
   }
 }
 
 const surveyNavPath = 'src/features/survey/components/SurveySideNav.tsx';
 const surveyNavSource = readFileSync(path.join(cwd, surveyNavPath), 'utf8');
-if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
+// 2026-10-28 (テンプレート寄せ): 調査のページ内ナビは左レールを使わず本文上部に置く。広い幅の
+// カード 2 枚 (SurveySideNav) と狭い幅の折りたたみ (SurveyMobileNav) が同じ shell コンテナ境界で
+// 入れ替わること (二重表示・欠落なし) を、2 つのクラス定数が同じ境界値を持つことで検査する。
+const surveyWide = surveyNavSource.match(
+  /WIDE_ONLY_CLASS = 'hidden @min-\[(\d+)px\]\/shell:grid'/,
+);
+const surveyNarrow = surveyNavSource.match(
+  /NARROW_ONLY_CLASS = '@min-\[(\d+)px\]\/shell:hidden'/,
+);
+if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
   violations.push({
     ruleId: 'survey-mobile-nav-must-share-left-rail-breakpoint',
     message:
-      'SurveyMobileNav must use LEFT_RAIL_NARROW_ONLY_CLASS so its handoff matches the shared desktop rail.',
+      'SurveySideNav (WIDE_ONLY_CLASS) and SurveyMobileNav (NARROW_ONLY_CLASS) must switch at the same @container/shell width.',
     file: surveyNavPath,
     lineNumber: 1,
     line: 'SurveyMobileNav',
   });
 }
 
-// 角丸の SSOT は globals.css の --radius (操作部品) と --card-radius (カード外枠) で、どちらも 0。
+// 操作部品の --radius はテンプレートの値 (@stats47/ui-theme の tokens-hsl.css・2026-10-27 オーナー決定
+// 「テンプレートを正とする」) で、globals.css では定義しない。部品の角はテンプレートの lyra スタイルが決める。
+// globals.css に残るのはカード外枠の --card-radius (0) で、ここに非ゼロを入れたらこの検査が止める。
 // 角丸を採用する判断をしたら、この検査の許容値を同じ差分で変える (トークンだけ変えると落ちる)。
 // 本文の中に置く部品の --content-radius (2026-09-25 採択) は別の役割なので 0 でなくてよく、下で個別に見る。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で

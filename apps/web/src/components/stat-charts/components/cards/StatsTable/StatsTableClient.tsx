@@ -70,7 +70,13 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
         <>
           {years.length > 1 && (
             <div className="flex justify-end mb-2">
-              <Select value={selectedYearCode} onValueChange={setSelectedYearCode}>
+              <Select
+                value={selectedYearCode}
+                items={years.map((y) => ({ value: y.yearCode, label: y.yearName }))}
+                onValueChange={(value) => {
+                  if (value !== null) setSelectedYearCode(value);
+                }}
+              >
                 <SelectTrigger className="h-8 w-[140px] text-sm">
                   <SelectValue />
                 </SelectTrigger>

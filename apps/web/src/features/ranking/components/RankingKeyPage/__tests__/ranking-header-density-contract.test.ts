@@ -82,7 +82,7 @@ describe('ranking header density contract', () => {
   it('基準値と単位は折り返さず、期間と数値軸を表示する', () => {
     expect(NATIONAL_AVERAGE_STAT).toContain('whitespace-nowrap');
     expect(NATIONAL_AVERAGE_STAT).toContain('selectedYear=');
-    expect(NATIONAL_AVERAGE_STAT).toContain('<SurfaceCard');
+    expect(NATIONAL_AVERAGE_STAT).toContain('<ChartPanel');
     expect(NATIONAL_AVERAGE_STAT).not.toContain('<ChartCard');
   });
 });

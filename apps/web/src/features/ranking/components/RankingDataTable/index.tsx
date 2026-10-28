@@ -16,6 +16,7 @@ import {
   type RankingStats,
 } from "@stats47/ranking";
 import { ColumnDef } from "@tanstack/react-table";
+import { Table as TableIcon } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -43,10 +44,8 @@ interface Props {
   className?: string;
   /** CardHeader右側に表示するアクション要素 */
   headerActions?: React.ReactNode;
-  /** カードタイトル（省略時: 都道府県別データ） */
+  /** カードタイトル（省略時: 都道府県別の表）。地図カードと同じアイコン付きの見出しで描く */
   cardTitle?: string;
-  /** カードサブタイトル */
-  cardSubtitle?: string;
   /** カード下部に表示するコンテンツ（出典等） */
   cardFooter?: React.ReactNode;
 }
@@ -68,6 +67,7 @@ export function RankingDataTable({
   rankingItem,
   className,
   headerActions,
+  cardTitle = "都道府県別の表",
   cardFooter,
 }: Props) {
   // 偏差値計算用の統計情報を計算
@@ -155,7 +155,7 @@ export function RankingDataTable({
         cell: ({ row }) => {
           const unit = formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
           return (
-            <div className="text-right font-mono whitespace-nowrap">
+            <div className="text-right tabular-nums whitespace-nowrap">
               {formatRankingValue(row.getValue<number>("value"), precision)}
               {unit && (
                 <span className="text-xs text-muted-foreground ml-1">{formatUnitForDisplay(unit)}</span>
@@ -171,7 +171,7 @@ export function RankingDataTable({
         cell: ({ row }) => {
           const val = row.getValue<number | null>("deviationValue");
           return (
-            <div className="text-right font-mono text-muted-foreground">
+            <div className="text-right tabular-nums text-muted-foreground">
               {val === null ? "-" : val.toFixed(1)}
             </div>
           );
@@ -191,7 +191,8 @@ export function RankingDataTable({
 
   return (
     <ChartPanel
-      title={undefined}
+      title={cardTitle}
+      icon={<TableIcon />}
       action={headerActions}
       footer={cardFooter}
       className={cn("w-full", className)}

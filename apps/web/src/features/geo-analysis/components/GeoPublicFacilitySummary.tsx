@@ -78,6 +78,10 @@ export function GeoPublicFacilitySummary({
       <div className="my-4 flex flex-col gap-3 sm:flex-row">
         <Select
           value={group}
+          items={Object.entries(PUBLIC_FACILITY_GROUPS).map(([key, label]) => ({
+            value: key,
+            label,
+          }))}
           onValueChange={(value) => {
             if (value === 'administrative' || value === 'meeting')
               setGroup(value);
@@ -96,6 +100,10 @@ export function GeoPublicFacilitySummary({
         </Select>
         <Select
           value={year}
+          items={[
+            { value: '2020', label: '2020年人口' },
+            { value: '2050', label: '2050年推計人口' },
+          ]}
           onValueChange={(value) => {
             if (value === '2020' || value === '2050') setYear(value);
           }}

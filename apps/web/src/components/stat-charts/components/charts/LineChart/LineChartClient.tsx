@@ -7,14 +7,14 @@ import dynamic from "next/dynamic";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 import type { LineChartData } from "../../../types/visualization";
 import type { TimeSeriesDataNode } from "@stats47/visualization/d3";
 
 const D3LineChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3LineChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface LineChartClientProps {

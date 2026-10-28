@@ -7,7 +7,6 @@ import { SHARE_BRAND_PALETTE } from "./share-brand.palette";
 interface ShareLinkConfig {
   name: string;
   href: string;
-  color: string;
   prominentClass: string;
 }
 
@@ -31,7 +30,6 @@ export function generateShareLinks(
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         xText
       )}&url=${encodeURIComponent(shareUrl)}`,
-      color: SHARE_BRAND_PALETTE.x.hover,
       prominentClass: SHARE_BRAND_PALETTE.x.prominent,
     },
     {
@@ -39,7 +37,6 @@ export function generateShareLinks(
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
         shareUrl
       )}`,
-      color: SHARE_BRAND_PALETTE.facebook.hover,
       prominentClass: SHARE_BRAND_PALETTE.facebook.prominent,
     },
     {
@@ -47,13 +44,11 @@ export function generateShareLinks(
       href: `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(
         shareUrl
       )}`,
-      color: SHARE_BRAND_PALETTE.line.hover,
       prominentClass: SHARE_BRAND_PALETTE.line.prominent,
     },
     {
       name: "はてなブックマーク",
       href: `https://b.hatena.ne.jp/entry/${shareUrl.replace(/^https?:\/\//, "")}`,
-      color: SHARE_BRAND_PALETTE.hatena.hover,
       prominentClass: SHARE_BRAND_PALETTE.hatena.prominent,
     },
   ];

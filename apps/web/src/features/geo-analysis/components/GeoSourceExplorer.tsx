@@ -99,7 +99,13 @@ export function GeoSourceExplorer({
             </label>
             <Select
               value={selection ? String(selection.index) : ''}
-              onValueChange={setSelected}
+              items={visible.map(({ asset, index }) => ({
+                value: String(index),
+                label: asset.label,
+              }))}
+              onValueChange={(value) => {
+                if (value !== null) setSelected(value);
+              }}
               disabled={!selection}
             >
               <SelectTrigger

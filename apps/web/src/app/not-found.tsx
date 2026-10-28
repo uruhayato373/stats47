@@ -1,5 +1,5 @@
 
-import { Button } from "@stats47/components";
+import { buttonVariants } from "@stats47/components";
 import { LayoutDashboard, Home, MapPin, Search } from "lucide-react";
 
 import Link from '@/components/atoms/SiteLink';
@@ -50,9 +50,7 @@ export default function NotFound() {
           })}
         </div>
 
-        <Button asChild className="mt-8">
-          <Link href="/">トップページに戻る</Link>
-        </Button>
+        <Link href="/" data-slot="button" className={buttonVariants({ className: "mt-8" })}>トップページに戻る</Link>
       </div>
     </PageShell>
   );

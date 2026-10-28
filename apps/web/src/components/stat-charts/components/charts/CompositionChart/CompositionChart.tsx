@@ -3,11 +3,10 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
-import { ChartEmptyState } from "@/components/charts/ChartState";
+import { ChartEmptyState, ChartErrorState } from "@/components/charts/ChartState";
 
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 
 import { CompositionChartClient } from "./CompositionChartClient";
@@ -43,7 +42,7 @@ export const CompositionChartDashboard = async ({
   const cardAttribution = hasAttribution ? attribution : undefined;
 
   if (!segments?.length || (!config.statsDataId && !config.multipleStatsSources?.length)) {
-    return <ErrorDisplay title={title} message="設定エラー: パラメータがありません" />;
+    return <ChartErrorState title={title} message="設定エラー: パラメータがありません" />;
   }
 
   const labels = segments.map((s) => s.label);
@@ -119,7 +118,7 @@ export const CompositionChartDashboard = async ({
 
       const firstError = segmentResponses.find((r) => "error" in r);
       if (firstError && "error" in firstError) {
-        return <ErrorDisplay title={title} message={firstError.error} />;
+        return <ChartErrorState title={title} message={firstError.error} />;
       }
 
       rawDataList = segmentResponses.map((r) => ("data" in r ? r.data : []));
@@ -175,7 +174,7 @@ export const CompositionChartDashboard = async ({
       { error: err },
       "CompositionChartのデータ取得に失敗しました",
     );
-    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
+    return <ChartErrorState title={title} message="データの取得に失敗しました" />;
   }
    
 };

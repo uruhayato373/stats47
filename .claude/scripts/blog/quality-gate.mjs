@@ -431,7 +431,7 @@ if (checks.inlineSvg) {
 }
 if (checks.inArticleRelated) {
   blockers.push(
-    '記事内『関連ランキング/関連記事』セクション — ページ側コンポーネント (RelatedRankingsSection / BlogRelatedArticlesSection) が正典。記事 markdown からは削除'
+    '記事内『関連ランキング/関連記事』セクション — ページ側コンポーネント (ContentNavigation の「この記事のデータを確かめる」「関連記事」) が正典。記事 markdown からは削除'
   );
 }
 

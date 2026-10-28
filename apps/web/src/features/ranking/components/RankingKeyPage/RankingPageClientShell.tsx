@@ -1,5 +1,7 @@
+import { hrefFor } from "@stats47/data-configs/content/href";
 import { resolveRankingItemDataSources } from "@stats47/ranking/survey";
 
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 
 import { BannerAd, isLandscapeBanner } from "@/features/ads";
@@ -20,7 +22,6 @@ import {
   RankingPageCorrelationSection,
   RankingPageSupplementCardsSection,
 } from "./RankingPageAsyncSections";
-import { RankingPageBreadcrumbs } from "./RankingPageBreadcrumbs";
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
 import { RankingPageRakutenNativeSection } from "./RankingPageRakutenNativeSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
@@ -77,10 +78,21 @@ export function RankingPageClientShell({
       surveyName={model.surveyName ?? undefined}
       groupMembers={model.groupMembers}
       breadcrumb={
-        <RankingPageBreadcrumbs
+        // 共通の Breadcrumbs が見た目と BreadcrumbList JSON-LD を一体で出す (JSON-LD はここだけ)。
+        // 階層は旧 JSON-LD と同じ ホーム > ランキング > {カテゴリ} > {ランキング名}。
+        <Breadcrumbs
           key="breadcrumb"
-          rankingName={model.rankingName}
-          category={model.breadcrumbCategory}
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: "ランキング", href: "/ranking" },
+            ...(model.breadcrumbCategory
+              ? [{
+                  label: model.breadcrumbCategory.name,
+                  href: hrefFor("category", { categoryKey: model.breadcrumbCategory.key }),
+                }]
+              : []),
+            { label: model.rankingName },
+          ]}
         />
       }
       sections={{

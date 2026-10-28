@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 
+import { ChartLoadingCard } from "@/components/charts/ChartState";
+
 import { DashboardComponentRenderer } from "./DashboardComponentRenderer";
-import { ChartSkeleton } from "./shared/ChartSkeleton";
 
 import type { DashboardComponent } from "../types";
 import type { Area } from "@stats47/area";
@@ -68,7 +69,7 @@ export const DashboardGridLayout: React.FC<DashboardGridLayoutProps> = ({
             key={component.id}
             className={`col-span-${colSpanXs} @sm:col-span-${colSpanSm} @md:col-span-${colSpanMd} @lg:col-span-${colSpanLg}`}
           >
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartLoadingCard />}>
               <DashboardComponentRenderer
                 component={component}
                 area={area}

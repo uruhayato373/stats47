@@ -143,9 +143,14 @@ export function ThemeComparisonSection({
             <Select
               value={current?.key ?? metricKey}
               onValueChange={(value) => {
+                if (value === null) return;
                 setMetricKey(value);
                 setShowAll(false);
               }}
+              items={mapSummaries.map(({ key, data }) => ({
+                value: key,
+                label: overviewLabels[key] ?? metricDisplayName(data.rankingItem),
+              }))}
             >
               <SelectTrigger
                 aria-label="地図と一覧の指標"
@@ -240,7 +245,7 @@ export function ThemeComparisonSection({
                       </Button>
                     </div>
                   )}
-                  <Table className="[&_td]:py-0 [&_th]:h-8">
+                  <Table>
                     <TableCaption className="mt-2">
                       {showAll ? '全県' : '上位5県＋選択県'} ·
                       高い順（同値は同順位）

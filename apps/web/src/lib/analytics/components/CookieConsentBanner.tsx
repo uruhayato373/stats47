@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { cn } from "@stats47/components";
 import { Button } from "@stats47/components/atoms/ui/button";
-
-import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
 const CONSENT_COOKIE_NAME = "stats47_consent";
 const CONSENT_LS_KEY = "stats47_cookie_consent";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
-/** バナーの高さ。スマホで文章が 2 行になっても収まる値 (余白と共有する) */
-const BANNER_HEIGHT_CLASS = "h-14";
 
 function setConsentCookie(value: string) {
   document.cookie = `${CONSENT_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
@@ -38,6 +33,14 @@ function syncGtag(value: "granted" | "denied") {
  *
  * useEffect 内の setState 連鎖を避けるため、表示判定は別 effect として
  * 分離 (react-hooks/set-state-in-effect 警告回避)。
+ *
+ * 見た目 (2026-10-28 2 巡目): 画面下端の 1 行の横帯。ルートレイアウトの SidebarInset の最後の子に置き、
+ * `sticky bottom-0` で画面下端に留める。幅は SidebarInset と同じで、サイドバーを覆わない。
+ * 流れの中に高さを持つので、ページの末尾 (フッター・地図とテーブルのタブ) はこの帯の上までスクロールでき、
+ * 帯に隠れたままにならない (fixed の浮きカードは本文の上に重なり、その分の余白も無かった)。
+ * 390px でも文とボタンを 1 行に収める (2026-10-28 3 巡目。2 行の帯が本文の下端を覆っていた):
+ * 文を短くし、ボタンは xs にして、折り返さない (flex-nowrap)。
+ * z-index は地図 (Leaflet のペインと操作部品 400〜1000) より上、ヘッダー (z-200) の重なりとは独立。
  */
 export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -70,36 +73,24 @@ export function CookieConsentBanner() {
 
   if (!visible) return null;
 
-  // 最初の画面の下端 (地図の凡例・ボタン) に重なる面積を小さくするため、スマホでも文章とボタンを
-  // 1 行に並べる (縦積みで約 2 倍の高さになっていた。2026-09-25 UI 全面点検)。
-  // 固定表示なのでページ末尾が隠れないよう、同じ高さの余白を流れの中にも置く。
   return (
-    <>
-    <div aria-hidden="true" className={BANNER_HEIGHT_CLASS} />
-    <div className={cn("fixed bottom-0 left-0 right-0 z-50 flex items-center bg-background/95 backdrop-blur-xs border-t shadow-xs", BANNER_HEIGHT_CLASS)}>
-      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-row items-center justify-between gap-2 text-xs text-muted-foreground")}>
-        <p className="min-w-0 leading-snug">
-          当サイトでは、利用状況の分析のために Cookie を使用しています。
-        </p>
-        <div className="flex items-center gap-2 shrink-0">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleDecline}
-            className="text-xs h-7"
-          >
-            拒否
-          </Button>
-          <Button
-            size="sm"
-            onClick={handleAccept}
-            className="text-xs h-7"
-          >
-            同意する
-          </Button>
-        </div>
+    <div
+      role="region"
+      aria-label="Cookie の利用について"
+      data-slot="cookie-consent"
+      className="sticky bottom-0 z-[1100] flex flex-nowrap items-center gap-3 border-t border-border bg-background px-4 py-2 pb-[calc(0.5rem+var(--safe-area-bottom))]"
+    >
+      <p className="min-w-0 flex-1 text-xs text-muted-foreground sm:text-sm">
+        利用状況の分析に Cookie を使います。
+      </p>
+      <div className="flex shrink-0 items-center gap-1">
+        <Button variant="ghost" size="xs" onClick={handleDecline}>
+          拒否
+        </Button>
+        <Button size="xs" onClick={handleAccept}>
+          同意する
+        </Button>
       </div>
     </div>
-    </>
   );
 }

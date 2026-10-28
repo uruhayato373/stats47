@@ -25,7 +25,7 @@ describe('RailPrefectureCard', () => {
       screen.getByRole('combobox', { name: '都道府県から探す' })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('link', { name: '都道府県一覧を見る →' })
+      screen.getByRole('link', { name: '都道府県一覧を見る' })
     ).toHaveAttribute('href', '/areas');
   });
 });

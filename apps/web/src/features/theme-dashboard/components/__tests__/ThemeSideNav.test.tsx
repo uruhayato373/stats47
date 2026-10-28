@@ -1,10 +1,10 @@
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
   within,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { THEME_SWITCHER_THEMES } from '../../config/theme-switcher-themes';
@@ -18,25 +18,14 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 describe('ThemeSideNav — テーマナビ', () => {
-  it('デスクトップはグループ別リストを表示し、現在テーマを明示する', () => {
+  it('テーマ一覧はサイドバーの「テーマ」と重複するので描かない', () => {
     renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
-    const themeNav = screen.getByRole('navigation', {
-      name: 'テーマを切り替える',
-    });
-    const current = within(themeNav).getByRole('link', { name: '人口動態' });
-    const themeHeadingRow = within(themeNav)
-      .getByRole('heading', { name: 'テーマ' })
-      .parentElement?.parentElement;
-
-    expect(themeHeadingRow).not.toBeNull();
     expect(
-      within(themeHeadingRow as HTMLElement).getByRole('link', {
-        name: 'テーマ一覧へ',
-      })
-    ).toHaveAttribute('href', '/themes');
-    expect(current).toHaveAttribute('aria-current', 'page');
-    expect(current.closest('details')).toHaveAttribute('open');
+      screen.queryByRole('navigation', { name: 'テーマを切り替える' })
+    ).toBeNull();
+    expect(screen.queryByRole('link', { name: '人口動態' })).toBeNull();
+    expect(screen.queryByRole('heading', { name: 'テーマ' })).toBeNull();
     expect(
       screen.queryByRole('combobox', { name: 'テーマを切り替える' })
     ).toBeNull();
@@ -54,10 +43,11 @@ describe('ThemeSideNav — テーマナビ', () => {
     expect(
       screen.queryByRole('navigation', { name: 'このページの内容' })
     ).toBeNull();
+    // 全指標は折りたたみ (既定は閉)。閉じていてもリンクは DOM に残す (keepMounted) ので hidden も含めて探す
     expect(
       within(
-        screen.getByRole('navigation', { name: 'このテーマの全指標' })
-      ).getByRole('link', { name: '総人口' })
+        screen.getByRole('navigation', { name: 'このテーマの全指標', hidden: true })
+      ).getByRole('link', { name: '総人口', hidden: true })
     ).toHaveAttribute('href', '/ranking/total-population');
     expect(
       within(
@@ -80,7 +70,7 @@ describe('ThemeSideNav — テーマナビ', () => {
     ).toHaveAttribute('href', '/survey');
   });
 
-  it('areaContextのテーマリンクは都道府県文脈を維持し、Type Bを除外する', () => {
+  it('areaContext を渡してもテーマリンクを描かない (テーマ間の移動はページ上部の切替が持つ)', () => {
     render(
       <ThemeSideNav themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
@@ -88,15 +78,12 @@ describe('ThemeSideNav — テーマナビ', () => {
         showRegion={false}
       />
     );
-    const themeNav = screen.getByRole('navigation', {
-      name: 'テーマを切り替える',
-    });
 
     expect(
-      within(themeNav).getByRole('link', { name: '観光', hidden: true })
-    ).toHaveAttribute('href', '/areas/13000/tourism');
+      screen.queryByRole('link', { name: '観光', hidden: true })
+    ).toBeNull();
     expect(
-      within(themeNav).queryByRole('link', { name: '港湾', hidden: true })
+      screen.queryByRole('navigation', { name: 'テーマを切り替える' })
     ).toBeNull();
   });
 
@@ -135,8 +122,8 @@ describe('ThemeSideNav — 地域ブロック', () => {
       screen.getByRole('navigation', { name: '統計の地域単位' })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('navigation', { name: 'テーマを切り替える' })
-    ).toBeInTheDocument();
+      screen.queryByRole('navigation', { name: 'テーマを切り替える' })
+    ).toBeNull();
   });
 
   it('showScope=falseでは比較単位だけを隠し、都道府県選択は残す', () => {
@@ -155,8 +142,10 @@ describe('ThemeSideNav — 地域ブロック', () => {
   it('県を選ぶと47都道府県へ戻す操作を表示する', async () => {
     renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
-    fireEvent.click(screen.getByLabelText('都道府県を選択'));
-    fireEvent.click(await screen.findByRole('option', { name: '大阪府' }));
+    // Base UI の Select は pointer の一連の操作で選ぶので、fireEvent.click ではなく user-event で操作する
+    const user = userEvent.setup();
+    await user.click(screen.getByLabelText('都道府県を選択'));
+    await user.click(await screen.findByRole('option', { name: '大阪府' }));
 
     await waitFor(() => {
       expect(screen.getByLabelText('都道府県を選択')).toHaveTextContent(

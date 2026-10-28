@@ -36,49 +36,32 @@ Organismsは、複数のMoleculesやAtomsを組み合わせた**複数の機能�
 
 ## 実例
 
-### Header
+### AppSidebar / SiteHeader / Footer (ルートレイアウトの骨組み)
 
-ロゴ、検索フォーム、ナビゲーション、テーマ切り替えを統合したヘッダーコンポーネント。
-
-```tsx
-// organisms/layout/Header/Header.tsx
-export default function Header() {
-  const { toggleTheme } = useTheme();
-  const { toggle } = useSidebarStore();
-  const router = useRouter();
-  const pathname = usePathname();
-  const { setPageType } = usePageTypeStore();
-  const [searchQuery, setSearchQuery] = useState("");
-  // ... 複数の機能を統合
-}
-```
-
-**特徴:**
-- 複数機能: ロゴ、検索、ナビゲーション、テーマ切り替えを統合
-- 状態管理: 複数のhooksとストアを使用
-- ルーティング: ナビゲーションロジックを含む
-- ページ固有: レイアウト全体で使用される
-
-### Sidebar
-
-カテゴリ、ナビゲーション、データ取得を統合したサイドバーコンポーネント。
+テンプレート (shadcndashboard) のサイドバー型の骨組み (2026-10-27)。`app/layout.tsx` が
+`SidebarProvider` の中に `AppSidebar` と `SidebarInset` を兄弟で置き、`SidebarInset` の中に
+`SiteHeader`・ページで唯一の `main#main-content`・`Footer` を並べる。
 
 ```tsx
-// organisms/layout/Sidebar/Sidebar.tsx
-export async function Sidebar() {
+// organisms/AppSidebar/index.tsx (Server Component)
+export function AppSidebar() {
+  const groups = getSidebarNavGroups(); // 主要ナビ・カテゴリ・テーマ
   return (
-    <Suspense fallback={<SidebarSkeleton />}>
-      <SidebarDataFetcher />
-    </Suspense>
+    <Sidebar>
+      <SidebarActiveProvider hrefs={...}>   {/* 現在地の判定だけが client */}
+        <SidebarNavContent>...<SidebarNavLink href label>...</SidebarNavLink></SidebarNavContent>
+      </SidebarActiveProvider>
+    </Sidebar>
   );
 }
 ```
 
 **特徴:**
-- 複数機能: カテゴリ表示、ナビゲーション、エラー処理を統合
-- データ取得: Server Componentとしてデータ取得を行う
-- Suspense: 非同期データ取得をストリーミング表示
-- ページ固有: レイアウト全体で使用される
+- リンクはすべて Server Component が組み立て、SSR の HTML に a[href] で出す
+- 現在地の判定・Sheet を閉じる処理・導線名 (`sidebar` / `sidebar-mobile`) だけを `AppSidebarClient.tsx` に閉じ込める
+- 項目とラベルの正本は `AppSidebar/site-navigation.ts`。`Footer` も同じ項目を常に出す (lg 未満で Sheet に替わったときの SEO 対策)
+- `SiteHeader` は開閉ボタン・検索・配色の切り替えだけを持つ client 部品
+- どれも `cookies()` / `headers()` を呼ばない (契約テスト `src/__tests__/layout-ssg-contract.test.ts`)
 
 ### HomeNavigationCards
 
@@ -169,11 +152,9 @@ Organismsは、機能やページごとにサブディレクトリに分類さ�
 
 ```
 organisms/
-├── layout/          # レイアウト関連のOrganisms
-│   ├── Header/
-│   ├── Footer/
-│   ├── Sidebar/
-│   └── StatsBreadcrumb/
+├── AppSidebar/      # サイト全体のナビ (サイドバー)
+├── SiteHeader/      # ヘッダー (開閉ボタン・検索・配色)
+├── Footer/          # フッター
 ├── home/            # ホームページ固有のOrganisms
 │   ├── HeroSearch.tsx
 │   ├── HomeNavigationCards.tsx
@@ -190,8 +171,8 @@ organisms/
 OrganismsはMoleculesを組み合わせて作成します。
 
 ```
-components/organisms/layout/Header/Header.tsx
-  → @stats47/visualization/d3 のチャートコンポーネントを使用
+components/organisms/SiteHeader/SiteHeader.tsx
+  → @stats47/components/atoms/ui/sidebar の SidebarTrigger を使用
   → @stats47/components/atoms/ui/button を使用
 ```
 

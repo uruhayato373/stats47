@@ -123,7 +123,8 @@ export function BoxplotChart({
     g.append("g")
       .call(axisLeft(yScale).tickSize(-chartWidth).tickFormat(() => ""))
       .style("stroke", BORDER)
-      .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity);
+      .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
+      .style("stroke-dasharray", CHART_STYLES.grid.dashArray);
 
     // 箱ひげ図
     const boxWidth = xScale.bandwidth() * CONFIG.boxWidthRatio;

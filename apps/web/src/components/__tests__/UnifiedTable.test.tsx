@@ -25,7 +25,9 @@ const columns: ColumnDef<TestRow>[] = [
 ];
 
 describe("unified table density", () => {
-  it("Tableプリミティブが13px・36px行の共通密度を持つ", () => {
+  // 2026-10-27: 密度の正はテンプレート (shadcndashboard/next-shadcn-dashboard・Base UI) の table.tsx。
+  // 旧 13px・36px 行 (text-[13px] / h-9 / py-1.5) はテンプレートの text-sm / h-10 / p-2 に置き換わった。
+  it("Tableプリミティブがテンプレートの共通密度を持つ", () => {
     render(
       <Table>
         <TableHeader>
@@ -41,19 +43,15 @@ describe("unified table density", () => {
       </Table>,
     );
 
-    expect(screen.getByRole("table")).toHaveClass("text-[13px]");
+    // 文字の大きさは style-lyra の .cn-table (text-xs) が決める。base-nova の素の text-sm は lyra に負けて
+    // 効かないので写しから外した (2026-10-28 3 巡目・packages/ui-theme/README.md の差の一覧)。
+    expect(screen.getByRole("table")).toHaveClass("cn-table");
+    expect(screen.getByRole("table")).not.toHaveClass("text-sm");
     expect(screen.getByRole("columnheader")).toHaveClass(
-      "h-9",
+      "h-10",
       "px-2",
-      "py-1.5",
-      "text-xs",
     );
-    expect(screen.getByRole("cell")).toHaveClass(
-      "h-9",
-      "px-2",
-      "py-1.5",
-      "text-[13px]",
-    );
+    expect(screen.getByRole("cell")).toHaveClass("p-2");
   });
 
   it("DataTableも同じTableプリミティブのセルを使う", () => {
@@ -68,17 +66,12 @@ describe("unified table density", () => {
       />,
     );
 
+    expect(screen.getByRole("columnheader")).toHaveAttribute("data-slot", "table-head");
+    expect(screen.getByRole("cell")).toHaveAttribute("data-slot", "table-cell");
     expect(screen.getByRole("columnheader")).toHaveClass(
-      "h-9",
+      "h-10",
       "px-2",
-      "py-1.5",
-      "text-xs",
     );
-    expect(screen.getByRole("cell")).toHaveClass(
-      "h-9",
-      "px-2",
-      "py-1.5",
-      "text-[13px]",
-    );
+    expect(screen.getByRole("cell")).toHaveClass("p-2");
   });
 });

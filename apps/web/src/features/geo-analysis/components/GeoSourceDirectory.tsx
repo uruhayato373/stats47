@@ -68,7 +68,16 @@ export function GeoSourceDirectory({ entries }: { entries: Entry[] }) {
           <label htmlFor={`${id}-category`} className="mb-1 block text-sm">
             分野
           </label>
-          <Select value={category} onValueChange={setCategory}>
+          <Select
+            value={category}
+            items={[
+              { value: 'all', label: 'すべて' },
+              ...Object.entries(categories).map(([id, label]) => ({ value: id, label })),
+            ]}
+            onValueChange={(value) => {
+              if (value !== null) setCategory(value);
+            }}
+          >
             <SelectTrigger
               id={`${id}-category`}
               className="min-h-11 w-28 sm:w-40"

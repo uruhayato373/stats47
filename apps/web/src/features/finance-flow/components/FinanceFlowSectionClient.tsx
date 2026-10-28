@@ -56,7 +56,13 @@ export function FinanceFlowSectionClient({ initialData }: Props) {
 
       <div className="mb-4 flex items-center gap-2">
         <span className="text-sm text-muted-foreground">焦点の都道府県</span>
-        <Select value={prefCode} onValueChange={handleChange}>
+        <Select
+          value={prefCode}
+          items={PREFECTURES.map((p) => ({ value: p.code, label: p.name }))}
+          onValueChange={(value) => {
+            if (value !== null) handleChange(value);
+          }}
+        >
           <SelectTrigger className="w-40">
             <SelectValue />
           </SelectTrigger>

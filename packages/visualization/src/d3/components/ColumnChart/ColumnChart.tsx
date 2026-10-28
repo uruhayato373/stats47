@@ -130,6 +130,7 @@ export function ColumnChart({
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
+          .attr("stroke-dasharray", CHART_STYLES.grid.dashArray)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 

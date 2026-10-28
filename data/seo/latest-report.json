@@ -1,22 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "period": {
-    "periodStart": "2026-10-18",
-    "periodEnd": "2026-10-24",
+    "periodStart": "2026-10-19",
+    "periodEnd": "2026-10-25",
     "windowDays": 7
   },
-  "inputHash": "aa73b3122b2dfa9a6627c36fb89bf68a4cb004e47720507357b75a01d5ceef04",
+  "inputHash": "ef606c4f7dc59791db07032e7a63f88ebd12577202286b992269493bafde57b5",
   "movements": [
-    {
-      "keyword": "知能犯",
-      "targetPath": "/ranking/intellectual-crime-per-100k",
-      "before": 68,
-      "after": 2,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 66
-    },
     {
       "keyword": "財政力指数",
       "targetPath": "/blog/fiscal-self-reliance-gap",
@@ -25,15 +16,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 57
-    },
-    {
-      "keyword": "警察 官 年収 ランキング",
-      "targetPath": "/ranking/avg-salary-police-prefecture",
-      "before": 15,
-      "after": 68,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -53
     },
     {
       "keyword": "沖縄 出生率",
@@ -45,13 +27,22 @@
       "change": 52.5
     },
     {
+      "keyword": "出生率 日本 ランキング 市町村",
+      "targetPath": "/municipalities/ranking/births",
+      "before": 51,
+      "after": 2,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 49
+    },
+    {
       "keyword": "東成瀬村 人口",
       "targetPath": "/areas/05000/cities/05464",
       "before": 53,
-      "after": 6,
+      "after": 9,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 47
+      "impressions": 3,
+      "change": 44
     },
     {
       "keyword": "jr 乗降客数",
@@ -69,6 +60,15 @@
       "after": 3,
       "beforeImpressions": 1,
       "impressions": 1,
+      "change": 43
+    },
+    {
+      "keyword": "離婚率 日本",
+      "targetPath": "/blog/divorces-per-total-population",
+      "before": 64,
+      "after": 21,
+      "beforeImpressions": 2,
+      "impressions": 3,
       "change": 43
     },
     {
@@ -90,12 +90,12 @@
       "change": 39
     },
     {
-      "keyword": "離婚率 日本",
-      "targetPath": "/blog/divorces-per-total-population",
-      "before": 64,
-      "after": 26,
-      "beforeImpressions": 2,
-      "impressions": 2,
+      "keyword": "高知県 廃業",
+      "targetPath": "/areas/39000/business-demography",
+      "before": 57,
+      "after": 19,
+      "beforeImpressions": 1,
+      "impressions": 1,
       "change": 38
     }
   ],
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "漁港が多い県",
     "targetPath": "/ranking/fishing-port-count-by-type",
-    "rank": 5.957511380880121,
-    "impressions": 659,
+    "rank": 5.950375939849624,
+    "impressions": 665,
     "clicks": 2,
     "group": 5,
     "previousMethod": null,

@@ -4,7 +4,7 @@ import { expect, it, vi } from 'vitest';
 
 import { GeoAnalysisCards } from '../../components/GeoAnalysisCards';
 import {
-  GEO_HOME_ANALYSIS_NAV_ITEMS,
+  GEO_HOME_ANALYSIS_LABELS,
   GEO_HOME_LAYER_NAV_ITEMS,
   getGeoHomeLayerNavItems,
 } from '../geo-home-copy';
@@ -39,14 +39,13 @@ it('reads the default prefecture (兵庫県) for previews and links to the canon
   expect(html).not.toContain('東京');
 });
 
-it('provides one compact navigation label for every published analysis', () => {
-  expect(GEO_HOME_ANALYSIS_NAV_ITEMS).toHaveLength(GEO_ANALYSES.length);
-  expect(
-    new Set(GEO_HOME_ANALYSIS_NAV_ITEMS.map((item) => item.href)).size
-  ).toBe(GEO_ANALYSES.length);
-  expect(
-    GEO_HOME_ANALYSIS_NAV_ITEMS.every((item) => item.label.length <= 20)
-  ).toBe(true);
+it('provides one compact label for every published analysis', () => {
+  const labels = GEO_ANALYSES.map(
+    (analysis) => GEO_HOME_ANALYSIS_LABELS[analysis.slug]
+  );
+  expect(labels).toHaveLength(GEO_ANALYSES.length);
+  expect(new Set(labels).size).toBe(GEO_ANALYSES.length);
+  expect(labels.every((label) => label.length <= 20)).toBe(true);
 });
 
 it('provides one direct navigation item for every public single-layer GIS', () => {

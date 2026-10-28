@@ -19,4 +19,13 @@ describe("AdSense frame contract", () => {
     expect(getAdReservedMinHeight("article")).toBeGreaterThan(0);
     expect(getAdReservedMinHeight("multiplex")).toBeGreaterThan(0);
   });
+
+  it("reserves the heights documented in ad-frame.ts (comment and value stay in sync)", () => {
+    expect(getAdReservedMinHeight("rectangle")).toBe(280);
+    expect(getAdReservedMinHeight("banner")).toBe(90);
+    expect(getAdReservedMinHeight("skyscraper")).toBe(600);
+    expect(getAdReservedMinHeight("article")).toBe(120);
+    expect(getAdReservedMinHeight("multiplex")).toBe(300);
+    expect(getAdReservedMinHeight("infeed")).toBe(250);
+  });
 });

@@ -17,9 +17,11 @@ import { AD_SIZES, type AdFormat } from "../types";
  * だったため、広告読み込み前にレイアウト領域を予約する。desktop / mobile の大きい方を採用して
  * 予約不足を防ぐ。
  *
- * - `article`（fluid / in-article）は 0×0 フレキシブルで高さが予測困難なため 120px（infeed と同水準）
+ * 今の値 (AD_SIZES の desktop / mobile の高さの大きい方。ad-frame.test.ts が固定する):
+ * - `rectangle` 280px (336×280 / 300×250) / `banner` 90px (728×90 / 320×50) / `skyscraper` 600px (160×600)
+ * - `article`（fluid / in-article）は 0×0 フレキシブルで高さが予測困難なため 120px
  * - `multiplex`（autorelaxed）はグリッド型で高さが出るため 300px
- * - それ以外で AD_SIZES が 0 の場合は 250px（rectangle mobile 相当）にフォールバック
+ * - `infeed` は AD_SIZES が 0×0 なので 250px（rectangle mobile の高さ）にフォールバック
  */
 export function getAdReservedMinHeight(format: AdFormat): number {
   if (format === "article") return 120;

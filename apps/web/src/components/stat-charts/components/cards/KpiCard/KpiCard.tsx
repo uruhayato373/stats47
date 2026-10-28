@@ -1,9 +1,10 @@
 import { logger } from "@stats47/logger";
 import { resolveValuePrecision } from "@stats47/utils";
 
+import { ChartErrorState } from "@/components/charts/ChartState";
+
 import { toKpiCardData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { KpiCardClient } from "./KpiCardClient";
 
@@ -20,7 +21,7 @@ export const KpiCard = async ({
 
   if (!estatParams) {
     return (
-      <ErrorDisplay
+      <ChartErrorState
         title={title}
         message="設定エラー: APIパラメータがありません"
       />
@@ -31,7 +32,7 @@ export const KpiCard = async ({
   try {
     const result = await fetchEstatData(areaCode, estatParams);
     if ("error" in result) {
-      return <ErrorDisplay title={title} message={result.error} />;
+      return <ChartErrorState title={title} message={result.error} />;
     }
 
     const cardData = toKpiCardData(result.data);
@@ -52,7 +53,7 @@ export const KpiCard = async ({
     );
   } catch (err) {
     logger.error({ error: err }, "KpiCardのデータ取得に失敗しました");
-    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
+    return <ChartErrorState title={title} message="データの取得に失敗しました" />;
   }
   /* eslint-enable react-hooks/error-boundaries */
 };

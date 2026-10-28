@@ -7,9 +7,9 @@ import { isOk } from "@stats47/types";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toRadarChartData } from "../../../adapters";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { RadarChartDashboardClient } from "./RadarChartDashboardClient";
 
@@ -89,11 +89,11 @@ export const RadarChartDashboard = async ({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={title} message={fetchErrorMessage} />;
   }
 
   if (!chartData) {
-    return <ErrorDisplay title={title} message="データがありません" />;
+    return <ChartErrorState title={title} message="データがありません" />;
   }
 
   return (

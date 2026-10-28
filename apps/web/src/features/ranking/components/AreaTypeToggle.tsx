@@ -14,17 +14,18 @@ interface AreaTypeToggleProps {
 export function AreaTypeToggle({ value, onChange, disabled }: AreaTypeToggleProps) {
   return (
     <ToggleGroup
-      type="single"
-      value={value}
+      value={[value]}
       onValueChange={(v) => {
-        if (v) onChange(v as AreaType);
+        // Base UI の ToggleGroup は値を配列で返す。押し直しで空になったときは選択を保つ
+        const next = v[0];
+        if (next) onChange(next as AreaType);
       }}
       className="bg-muted p-0.5 rounded-xs h-6"
     >
       <ToggleGroupItem
         value="prefecture"
         disabled={disabled}
-        className="text-xs px-1.5 h-5 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-xs rounded-xs transition-all"
+        className="text-xs px-1.5 h-5 flex items-center gap-1 data-pressed:bg-background data-pressed:text-primary data-pressed:shadow-xs rounded-xs transition-all"
         aria-label="都道府県"
       >
         <MapPin className="w-3 h-3" />
@@ -33,7 +34,7 @@ export function AreaTypeToggle({ value, onChange, disabled }: AreaTypeToggleProp
       <ToggleGroupItem
         value="city"
         disabled={disabled}
-        className="text-xs px-1.5 h-5 flex items-center gap-1 data-[state=on]:bg-background data-[state=on]:text-primary data-[state=on]:shadow-xs rounded-xs transition-all"
+        className="text-xs px-1.5 h-5 flex items-center gap-1 data-pressed:bg-background data-pressed:text-primary data-pressed:shadow-xs rounded-xs transition-all"
         aria-label="市区町村"
       >
         <Building2 className="w-3 h-3" />

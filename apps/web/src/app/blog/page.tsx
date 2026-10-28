@@ -1,10 +1,18 @@
 
 import { fetchPrefectures } from '@stats47/area';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@stats47/components';
 import { CATEGORIES } from '@stats47/data-configs';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
+import { SectionHeader } from '@/components/section';
 
 import { OperatorProfileCard } from '@/features/ads';
 import { AffiliateAdSlot } from '@/features/ads/server';
@@ -81,13 +89,15 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
     // doboku-note スタイル: 左=記事カード一覧 / 右=共通サイドバー (運営者プロフィール + promo/広告)。
     // 運営者は上部の共通 OperatorProfileCard が担う。
     <PageShell
-      rightRailBreakpoint="lg"
       rightRail={
         <RightRailWidgets
           topWidgets={
-            // 探索導線と運営者プロフィール (E-E-A-T) は右レールに PC のみ表示
-            <div className="hidden lg:flex lg:flex-col lg:gap-3">
+            // 探索導線と運営者プロフィール (E-E-A-T)。右レールが出ない幅では PageShell が
+            // レールごと記事一覧の後ろへ積むので、記事一覧が先・補助が後ろの順になる。
+            // 記事検索と人気のタグは本文の一覧の上 (BlogNavigationCards variant="toolbar") が持つので、ここでは出さない。
+            <>
               <BlogNavigationCards
+                includeSearchAndTags={false}
                 tags={blogTags}
                 popularArticles={popularArticles}
                 categories={BLOG_DISCOVERY_CATEGORIES}
@@ -95,7 +105,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 prefectures={BLOG_DISCOVERY_PREFECTURES}
               />
               <OperatorProfileCard />
-            </div>
+            </>
           }
           bottomWidgets={
             <AffiliateAdSlot
@@ -122,65 +132,42 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
         description="都道府県データを、ランキングや時系列で読み解く記事一覧です"
       />
 
-      {/* 右レールが本文後へ回る狭幅では、探索導線を記事一覧の前に置く。 */}
-      <div className="mb-6 lg:hidden">
-        <div className="space-y-3">
-          <BlogNavigationCards
-            tags={blogTags}
-            popularArticles={popularArticles}
-            categories={BLOG_DISCOVERY_CATEGORIES}
-            themes={BLOG_DISCOVERY_THEMES}
-            prefectures={BLOG_DISCOVERY_PREFECTURES}
-            variant="mobile"
-          />
-        </div>
-      </div>
-
-      <p className="mb-4 text-sm text-muted-foreground">
-        {currentPage > 1 ? `記事一覧 · ${currentPage}ページ目` : '新着記事'}
-      </p>
+      <SectionHeader
+        title={currentPage > 1 ? `記事一覧 · ${currentPage}ページ目` : '新着記事'}
+      />
+      {/* 記事検索と人気のタグは一覧の上に 1 回だけ置く (狭い幅でレールが一覧の後ろへ積まれても届く) */}
+      <BlogNavigationCards variant="toolbar" tags={blogTags} />
       <BlogArticleGrid articles={articles} />
 
       {/* 一覧本文の広告は置かず、地域文脈の画像バナー 1 枠をレール末尾だけに置く。 */}
-      {/* ページネーション */}
       {(hasPrevPage || hasNextPage) && (
-        <nav
-          className="mt-8 flex items-center justify-center gap-3"
-          aria-label="ページネーション"
-        >
-          {hasPrevPage ? (
-            <Link
-              href={
-                currentPage === 2 ? '/blog' : `/blog?page=${currentPage - 1}`
-              }
-              className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-            >
-              ← 前のページ
-            </Link>
-          ) : (
-            <span
-              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed"
-              aria-disabled="true"
-            >
-              ← 前のページ
-            </span>
-          )}
-          <span className="text-sm text-muted-foreground">
-            {currentPage} ページ
-          </span>
-          {hasNextPage ? (
-            <Link
-              href={`/blog?page=${currentPage + 1}`}
-              className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-            >
-              次のページ →
-            </Link>
-          ) : (
-            <span className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
-              次のページ →
-            </span>
-          )}
-        </nav>
+        <Pagination className="mt-8" aria-label="ページネーション">
+          <PaginationContent>
+            {hasPrevPage && (
+              <PaginationItem>
+                <PaginationPrevious
+                  href={currentPage === 2 ? '/blog' : `/blog?page=${currentPage - 1}`}
+                  aria-label="前のページ"
+                  text="前のページ"
+                />
+              </PaginationItem>
+            )}
+            <PaginationItem>
+              <PaginationLink href={currentPage === 1 ? '/blog' : `/blog?page=${currentPage}`} isActive>
+                {currentPage}
+              </PaginationLink>
+            </PaginationItem>
+            {hasNextPage && (
+              <PaginationItem>
+                <PaginationNext
+                  href={`/blog?page=${currentPage + 1}`}
+                  aria-label="次のページ"
+                  text="次のページ"
+                />
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
       )}
     </PageShell>
   );

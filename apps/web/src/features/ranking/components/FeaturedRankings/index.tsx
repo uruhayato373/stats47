@@ -5,8 +5,7 @@ import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
 
-import Link from "@/components/atoms/SiteLink";
-import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
+import { SectionHeader, SectionIndexLink } from "@/components/section";
 
 import { logger } from "@/lib/logger";
 
@@ -171,16 +170,10 @@ export async function FeaturedRankings({
   const content = (
     <>
       {showHeader && (
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-lg font-bold">注目のランキング</h2>
-          <Link
-            href="/ranking"
-            className="text-sm font-medium text-primary hover:underline"
-            aria-label="すべてのランキングを見る"
-          >
-            もっと見る &rarr;
-          </Link>
-        </div>
+        <SectionHeader
+          title="注目のランキング"
+          action={<SectionIndexLink href="/ranking">もっと見る</SectionIndexLink>}
+        />
       )}
       <FeaturedRankingGrid
         items={gridItems}
@@ -190,14 +183,10 @@ export async function FeaturedRankings({
     </>
   );
 
+  // 横幅と余白は呼び出し側の PageShell (main の p-4) が決める。ここで px-4 や背景帯を足さない。
   if (embedded) {
     return <div>{content}</div>;
   }
 
-  return (
-    <section className="bg-muted/30 py-8">
-      {/* 背景バンドは全幅、コンテンツは shell 幅 (1280px) に整列 */}
-      <div className={SHELL_WIDTH_CLASS}>{content}</div>
-    </section>
-  );
+  return <section>{content}</section>;
 }

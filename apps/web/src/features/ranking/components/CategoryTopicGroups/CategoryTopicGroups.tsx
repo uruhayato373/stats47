@@ -1,10 +1,13 @@
+import { type ReactNode } from "react";
 
+import { Badge } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName, metricShortName } from "@stats47/ranking";
+import { ChevronDown } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
-import { SurfaceCard } from "@/components/surface";
+import { SectionCard } from "@/components/surface";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
 
@@ -13,7 +16,9 @@ import type { CategoryTopicListItem } from "./types";
 /**
  * カテゴリ内グループ一覧 (server component / client JS ゼロ)。
  *
- * 平坦な 110 行テーブルの代わりに、意味のあるまとまりごとのカードを並べる。
+ * 平坦な 110 行テーブルの代わりに、意味のあるまとまりごとの区切りを並べる。
+ * 節の題名 (「全41件のランキング」) はアイコン付きでカードの見出しに置き、各まとまりはカードを入れ子にせず
+ * 罫線で区切ったセクションにする (テンプレートのカード内の表と同じ)。
  * 分類の SSOT は `packages/data-configs/src/topics/`、R2 items.json への
  * 焼き込みは `ranking-items-per-url-snapshot.ts`。
  *
@@ -30,6 +35,9 @@ const VISIBLE_ROWS = 5;
 interface Props {
   topics: { key: string; label: string }[];
   items: CategoryTopicListItem[];
+  /** 節の題名。渡すとカードの見出し (h2) に置き、まとまりをカードの中に並べる */
+  title?: ReactNode;
+  icon?: ReactNode;
 }
 
 /** タイトルが同じ item を 1 行に畳む。順序は入力順を保つ */
@@ -61,21 +69,21 @@ function TopicRow({ row }: { row: CollapsedRow }) {
 
   return (
     <li className="border-b border-border last:border-b-0">
-      <div className="flex flex-col gap-0.5 px-3 py-2">
+      <div className="flex flex-col gap-0.5 px-4 py-2">
         <div className="flex items-baseline justify-between gap-3">
           {hasVariants ? (
-            <span className="min-w-0 flex-1 truncate text-[13px]">{readerLabel}</span>
+            <span className="min-w-0 flex-1 truncate text-sm">{readerLabel}</span>
           ) : (
             <Link
               {...navSurfaceProps("category_ranking_list")}
               href={hrefFor("ranking", { rankingKey: primary.rankingKey })}
-              className="min-w-0 flex-1 truncate text-[13px] hover:text-primary hover:underline"
+              className="min-w-0 flex-1 truncate text-sm hover:text-primary hover:underline"
             >
               {readerLabel}
             </Link>
           )}
           {primary.top1 ? (
-            <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+            <span className="max-w-[60%] shrink-0 truncate text-right text-xs tabular-nums text-muted-foreground">
               {primary.top1.areaName}
               {primary.top1.value ? (
                 <>
@@ -98,7 +106,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
                 {...navSurfaceProps("category_ranking_list")}
                 key={variant.rankingKey}
                 href={hrefFor("ranking", { rankingKey: variant.rankingKey })}
-                className="border border-border px-1.5 text-[11px] leading-[18px] text-muted-foreground hover:border-primary hover:text-primary"
+                className="border border-border px-1.5 text-xs leading-5 text-muted-foreground hover:border-primary hover:text-primary"
               >
                 {variant.subtitle ?? "総数"}
               </Link>
@@ -110,7 +118,7 @@ function TopicRow({ row }: { row: CollapsedRow }) {
   );
 }
 
-function TopicCard({
+function TopicGroup({
   label,
   items,
 }: {
@@ -122,12 +130,14 @@ function TopicCard({
   const hidden = rows.slice(VISIBLE_ROWS);
 
   return (
-    <SurfaceCard className="overflow-hidden p-0">
-      <div className="flex items-center gap-2 border-b border-border px-3 py-2">
-        <h3 className="flex-1 text-[13px] font-bold">{label}</h3>
-        <span className="border border-border bg-accent px-1.5 text-[11px] tabular-nums text-accent-foreground">
+    // 枠はカードの見出しの外側 (SectionCard) だけが持つ。まとまりは罫線で区切る (2 列のときは間にも縦線)
+    <section aria-label={label} className="border-b border-border @md:odd:border-r">
+      {/* 見出しは表の行に近い高さ (min-h-13 ≒ 52px) に詰める。地の色は付けず、罫線だけで区切る */}
+      <div className="flex min-h-13 items-center justify-between gap-2 border-b border-border px-4">
+        <h3 className="text-sm font-medium text-foreground">{label}</h3>
+        <Badge variant="secondary" className="tabular-nums">
           {rows.length}
-        </span>
+        </Badge>
       </div>
       <ul>
         {visible.map((row) => (
@@ -137,9 +147,14 @@ function TopicCard({
       {hidden.length > 0 && (
         // client JS を足さずに展開する。検索 input は置かない
         // (CategoryRankingListClient の「textbox を出さない」契約と揃える)
-        <details className="border-t border-dashed border-border">
-          <summary className="cursor-pointer px-3 py-2 text-[11.5px] text-primary hover:underline">
+        <details className="group/more border-t border-dashed border-border">
+          {/* 開閉の行にも他の行と同じ大きさの矢印を付ける (開くと上向き) */}
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-2 text-xs text-primary hover:underline [&::-webkit-details-marker]:hidden">
             すべて見る（残り {hidden.length} 件）
+            <ChevronDown
+              aria-hidden="true"
+              className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-open/more:rotate-180"
+            />
           </summary>
           <ul className="border-t border-border">
             {hidden.map((row) => (
@@ -148,11 +163,11 @@ function TopicCard({
           </ul>
         </details>
       )}
-    </SurfaceCard>
+    </section>
   );
 }
 
-export function CategoryTopicGroups({ topics, items }: Props) {
+export function CategoryTopicGroups({ topics, items, title, icon }: Props) {
   const byTopic = new Map<string, CategoryTopicListItem[]>();
   for (const item of items) {
     if (!item.topicKey) continue;
@@ -167,11 +182,27 @@ export function CategoryTopicGroups({ topics, items }: Props) {
   });
   if (cards.length === 0) return null;
 
-  return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-      {cards.map((card) => (
-        <TopicCard key={card.key} label={card.label} items={card.items} />
-      ))}
+  // 列数は本文の幅 (@container) で決める。最後の行の下罫線はカードの線と重ならないよう -mb-px で隠す
+  const groups = (
+    <div className="@container">
+      <div className="-mb-px grid grid-cols-1 @md:grid-cols-2">
+        {cards.map((card) => (
+          <TopicGroup key={card.key} label={card.label} items={card.items} />
+        ))}
+      </div>
     </div>
+  );
+  if (!title) return groups;
+
+  return (
+    <SectionCard
+      title={title}
+      icon={icon}
+      headingAs="h2"
+      // まとまりは自分の罫線と余白を持つので、本文の余白を外して罫線をカードの線まで届かせる
+      bodyClassName="px-0 py-0"
+    >
+      {groups}
+    </SectionCard>
   );
 }

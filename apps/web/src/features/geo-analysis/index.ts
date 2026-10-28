@@ -2,7 +2,6 @@ export { GeoAnalysisTracker } from './components/GeoAnalysisTracker';
 export { GeoAnalysisCards } from './components/GeoAnalysisCards';
 export {
   GEO_HOME_ANALYSIS_LABELS,
-  GEO_HOME_ANALYSIS_NAV_ITEMS,
   GEO_HOME_LAYER_NAV_ITEMS,
 } from './lib/geo-home-copy';
 export { GeoLayerCards } from './components/GeoLayerCards';
@@ -28,7 +27,6 @@ export {
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
 export { GeoSpatialEvidenceExplorer } from './components/GeoSpatialEvidenceExplorer';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
-export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoContentPublicationSection } from './components/GeoContentPublicationSection';
 export { AreaGeoInsightsSection } from './components/AreaGeoInsightsSection';
 export { ThemeGeoPublicFacilityAccessSection } from './components/ThemeGeoPublicFacilityAccessSection';

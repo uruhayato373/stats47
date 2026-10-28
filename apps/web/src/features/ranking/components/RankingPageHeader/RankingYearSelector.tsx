@@ -1,14 +1,8 @@
 "use client";
 
-import { memo, useCallback, useMemo } from "react";
+import { memo, useMemo } from "react";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@stats47/components/atoms/ui/select";
+import { LazySelect } from "@stats47/components/molecules/lazy-select";
 
 /** 年度情報の型 */
 interface YearInfo {
@@ -27,7 +21,7 @@ interface RankingYearSelectorProps {
 
 /**
  * ランキング年度選択コンポーネント（制御コンポーネント）
- * セレクトボックスで年度を選択できる
+ * セレクトボックスで年度を選択できる (地図・表カードの見出し行の右に置く)
  */
 function RankingYearSelectorComponent({
   times,
@@ -43,12 +37,9 @@ function RankingYearSelectorComponent({
     });
   }, [times]);
 
-  // 年度選択時のハンドラー
-  const handleYearChange = useCallback(
-    (yearCode: string) => {
-      onChange(yearCode);
-    },
-    [onChange]
+  const items = useMemo(
+    () => sortedTimes.map((year) => ({ value: year.yearCode, label: year.yearName })),
+    [sortedTimes]
   );
 
   // 年度が空の場合は何も表示しない
@@ -56,24 +47,17 @@ function RankingYearSelectorComponent({
     return null;
   }
 
+  // Select の JS は初回操作で読む (配信サイズ策 D・LazySelect)
   return (
-    <div className="flex items-center gap-2">
-      <Select value={value} onValueChange={handleYearChange}>
-        <SelectTrigger
-          aria-label="表示する年度"
-          className="h-6 w-[100px] text-xs rounded-xs"
-        >
-          <SelectValue placeholder="年度を選択" />
-        </SelectTrigger>
-        <SelectContent className="**:text-xs">
-          {sortedTimes.map((year) => (
-            <SelectItem key={year.yearCode} value={year.yearCode}>
-              {year.yearName}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+    <LazySelect
+      value={value}
+      items={items}
+      onValueChange={onChange}
+      placeholder="年度を選択"
+      aria-label="表示する年度"
+      triggerClassName="h-6 w-[100px] text-xs rounded-xs"
+      contentClassName="**:text-xs"
+    />
   );
 }
 

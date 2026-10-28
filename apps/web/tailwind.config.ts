@@ -18,6 +18,16 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/components/src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/visualization/src/**/*.{js,ts,jsx,tsx,mdx}",
+    // どこからも import されない atom は走査しない (index.ts の export * には残る。2026-10-28 配信サイズの点検)。
+    // 一覧は scripts/ui-theme/inline-lyra.mjs の UNUSED_ATOMS と同じ (テストが一致と importer 0 件を確かめる)。
+    // base.css の `@source not` は Tailwind 4.3.3 でこの content を外せなかったので、除外はここに書く。
+    "!../../packages/components/src/atoms/ui/accordion.tsx",
+    "!../../packages/components/src/atoms/ui/alert.tsx",
+    "!../../packages/components/src/atoms/ui/alert-dialog.tsx",
+    "!../../packages/components/src/atoms/ui/dialog.tsx",
+    "!../../packages/components/src/atoms/ui/progress.tsx",
+    "!../../packages/components/src/atoms/ui/switch.tsx",
+    "!../../packages/components/src/atoms/ui/textarea.tsx",
   ],
   // safelist (col-span-N の動的生成)・コンテナクエリ幅 (@sm 30rem / @md 48rem / @lg 64rem)・
   // container ユーティリティ (中央寄せ・2xl で最大 1700px) は v4 の JS 設定では効かないため
@@ -63,6 +73,24 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
           // 完全な色値 (transparent を取れるよう hsl で包まない)。opacity 修飾子は使わない
           outline: "var(--card-outline)",
+        },
+        // テンプレートの部品スタイル (lyra。部品の className に書き込み済み) が使う色。値は tokens-hsl.css
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
         },
         // データの状態色。生の emerald/red/amber/blue-NNN の代わりに使う
         positive: { DEFAULT: "hsl(var(--positive))", soft: "hsl(var(--positive-soft))" },

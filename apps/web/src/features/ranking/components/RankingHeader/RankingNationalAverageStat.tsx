@@ -1,9 +1,10 @@
 "use client";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { TrendingUp } from "lucide-react";
 
+import { ChartPanel } from "@/components/charts/ChartPanel";
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
-import { SurfaceCard } from "@/components/surface";
 
 import {
   computeNationalAveragePeriodChange,
@@ -52,14 +53,42 @@ export function RankingNationalAverageStat({
   const hasTrend = series.length >= 2;
   const periodChange = computeNationalAveragePeriodChange(series, unit);
 
+  // 見出し行は題だけにして隣の「上位3件」と高さをそろえる。大きな数値と年は本文の先頭に置く。
+  // 推移の図は本文の残りの高さいっぱいに伸ばし、カードの下に空白を残さない。
   return (
-    <SurfaceCard className="flex flex-col gap-1">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <div><p className="text-sm font-medium text-muted-foreground">{label}</p>{yearName && <p className="text-xs text-muted-foreground">{yearName}</p>}</div>
-        <p className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">{formatRankingValue(figure.value, precision)}<span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span></p>
-      </div>
-      {hasTrend ? <NumericTrendChart points={series} policy={domainPolicy} selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined} label={label} unit={unit} formatValue={(value) => formatRankingValue(value, precision)} /> : <p className="mt-2 text-xs text-muted-foreground">{series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}</p>}
-      {periodChange && <p className="text-xs text-muted-foreground">{periodChange.fromYear}→{periodChange.toYear} <span className="font-medium text-foreground">{periodChange.text}</span></p>}
-    </SurfaceCard>
+    <ChartPanel
+      title={label}
+      icon={<TrendingUp />}
+      contentClassName="flex flex-1 flex-col gap-2"
+    >
+      <p className="flex items-baseline gap-2">
+        <span className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">
+          {formatRankingValue(figure.value, precision)}
+          <span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span>
+        </span>
+        {yearName && <span className="text-xs text-muted-foreground">（{yearName}）</span>}
+      </p>
+      {hasTrend ? (
+        <NumericTrendChart
+          points={series}
+          policy={domainPolicy}
+          selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined}
+          label={label}
+          unit={unit}
+          formatValue={(value) => formatRankingValue(value, precision)}
+          fillHeight
+        />
+      ) : (
+        <p className="text-xs text-muted-foreground">
+          {series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}
+        </p>
+      )}
+      {periodChange && (
+        <p className="text-xs text-muted-foreground">
+          {periodChange.fromYear}→{periodChange.toYear}{" "}
+          <span className="font-medium text-foreground">{periodChange.text}</span>
+        </p>
+      )}
+    </ChartPanel>
   );
 }

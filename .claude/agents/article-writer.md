@@ -189,7 +189,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
      本文に `## データ出典` を書くと `quality-gate.mjs` が blocker で止める。出典は図の `source.json` に記録する
    - 計算方法・定義・対象の限定など読者に要る説明があれば `## データについて` 節に書く
    - ★**記事内に「関連ランキング」「関連記事」セクションを書かない** (見出しごと不可)。
-     関連はページ側 `RelatedRankingsSection` / `BlogRelatedArticlesSection` が tag 駆動で描画する正典 (二重表示防止・`quality-gate.mjs` が blocker)。
+     関連はページ側 `ContentNavigation` (「この記事のデータを確かめる」「関連記事」) が描画する正典 (二重表示防止・`quality-gate.mjs` が blocker)。
    - ランキング詳細への誘導は各図直下の `<source-link href="/ranking/<key>">` (本文インライン) で行う
 
 ### Phase 4: フロントマター生成

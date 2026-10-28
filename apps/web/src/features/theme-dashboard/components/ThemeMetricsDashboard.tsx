@@ -7,11 +7,10 @@ import { lookupArea } from '@stats47/area';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
-import { ArrowRight } from 'lucide-react';
 
-import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 
 import {
@@ -311,7 +310,11 @@ export function ThemeMetricsDashboard({
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
     !panel.comparisonYear && isSingleMetricGroup(panel.metrics);
-  const renderPanel = (panel: Panel, summaryOnly = false) => panel.comparisonYear ? (
+  /**
+   * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
+   * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
+   */
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -340,7 +343,7 @@ export function ThemeMetricsDashboard({
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
       summaryOnly={summaryOnly}
-      title={panel.title}
+      title={panel.title === sectionTitle ? undefined : panel.title}
       metrics={panel.metrics}
       tabLabels={tabLabels}
       selectedPrefectureCode={selectedPrefectureCode}
@@ -351,16 +354,19 @@ export function ThemeMetricsDashboard({
   /**
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
    * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
+   * 2 列の境界は本文幅 640px (@md の 768px だと 1024px 幅でサイドバーを出したとき 1 列に落ちる)。
+   * items-start: 単年のカードを隣の推移付きカードの高さへ引き伸ばさない。
    */
   const renderPanelRuns = (
     list: Panel[],
-    summaryOnlyOf: (panel: Panel) => boolean = () => false
+    summaryOnlyOf: (panel: Panel) => boolean = () => false,
+    sectionTitle?: string
   ) => {
     const out: ReactNode[] = [];
     for (let i = 0; i < list.length; ) {
       const panel = list[i];
       if (!isCompact(panel)) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel)));
+        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle));
         i += 1;
         continue;
       }
@@ -374,7 +380,7 @@ export function ThemeMetricsDashboard({
           <div
             key={`compact-${panel.key}`}
             data-theme-panel-grid="compact"
-            className="grid grid-cols-1 gap-4 @md:grid-cols-2"
+            className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2"
           >
             {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
           </div>
@@ -473,26 +479,28 @@ export function ThemeMetricsDashboard({
     (key) => !usedEmbedded.has(key)
   );
 
-  const renderChapter = (chapter: (typeof chapters)[number]) => (
+  // 県を選んでいるときの県プロフィールへの導線。浮いた 1 行にせず、先頭の節見出しの右端に置く。
+  const profileLink = selectedPrefectureCode ? (
+    <SectionIndexLink href={hrefFor('area', { areaCode: selectedPrefectureCode })}>
+      {areaName}のプロフィール
+    </SectionIndexLink>
+  ) : null;
+
+  const renderChapter = (
+    chapter: (typeof chapters)[number],
+    action?: ReactNode
+  ) => (
     <section
       key={chapter.key}
       id={`theme-section-${chapter.key}`}
-      aria-labelledby={`theme-heading-${chapter.key}`}
+      aria-label={chapter.title}
       className="space-y-4 scroll-mt-24"
     >
-      <div className="border-b border-border pb-3">
-        <h2
-          id={`theme-heading-${chapter.key}`}
-          className="text-lg font-semibold"
-        >
-          {chapter.title}
-        </h2>
-        {chapter.description && (
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {chapter.description}
-          </p>
-        )}
-      </div>
+      <SectionHeader
+        title={chapter.title}
+        description={chapter.description}
+        action={action}
+      />
       {renderPanelRuns(chapter.panels, (panel) => {
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
@@ -516,7 +524,7 @@ export function ThemeMetricsDashboard({
         return panel.metrics.every((metric) =>
           coveredKeys.has(metric.metricKey)
         );
-      })}
+      }, chapter.title)}
       {chapter.charts.length > 0 && (
         <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
           {chapter.charts.map((chart) => renderChart(chart))}
@@ -541,17 +549,13 @@ export function ThemeMetricsDashboard({
       className="@container space-y-6 scroll-mt-24 pt-6"
     >
       <h2 className="sr-only">{areaName}の主要指標</h2>
-      {selectedPrefectureCode && (
-        <div className="flex justify-end">
-          <Link
-            href={hrefFor('area', { areaCode: selectedPrefectureCode })}
-            className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-          >
-            {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
-          </Link>
-        </div>
+      {/* 節見出しが無いテーマでは、見出しの右端に置けないので最初の行の右端に置く */}
+      {profileLink && leadingChapters.length === 0 && (
+        <div className="flex justify-end">{profileLink}</div>
       )}
-      {leadingChapters.map(renderChapter)}
+      {leadingChapters.map((chapter, index) =>
+        renderChapter(chapter, index === 0 ? profileLink : undefined)
+      )}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <div
@@ -572,7 +576,7 @@ export function ThemeMetricsDashboard({
           selectedPrefectureCode={selectedPrefectureCode}
         />
       )}
-      {trailingChapters.map(renderChapter)}
+      {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
         <div className="space-y-4">
           {remainingMarkdown.map((chart) => renderChart(chart))}

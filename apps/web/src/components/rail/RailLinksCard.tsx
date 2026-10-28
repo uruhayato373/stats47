@@ -1,14 +1,19 @@
-'use client';
-
+import { type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
-import { ChevronRight } from 'lucide-react';
+import {
+  ChevronRight,
+  List,
+  ListOrdered,
+  Newspaper,
+  Tags,
+} from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 import { RailCard, RailNavRow } from '@/components/surface';
 
-import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
+import { navSurfaceProps, type NavSurface } from '@/lib/analytics/events';
 
 export interface RailLinksCardItem {
   id: string;
@@ -35,8 +40,21 @@ export interface RailLinksCardItem {
  */
 export type RailLinksCardLayout = 'chips' | 'list' | 'media' | 'ranked';
 
+/**
+ * 見出しの既定アイコン。見出しの左にアイコンを揃えて置く (テンプレートの CardTitle の並び)。
+ * 呼び出し側は `icon` で差し替えられる。
+ */
+const DEFAULT_ICON: Record<RailLinksCardLayout, ReactNode> = {
+  chips: <Tags />,
+  list: <List />,
+  media: <Newspaper />,
+  ranked: <ListOrdered />,
+};
+
 interface RailLinksCardProps {
   title: string;
+  /** 見出しの左のアイコン (既定: layout ごとのアイコン) */
+  icon?: ReactNode;
   items: readonly RailLinksCardItem[];
   layout?: RailLinksCardLayout;
   moreLink?: {
@@ -50,25 +68,38 @@ interface RailLinksCardProps {
   collapsible?: boolean;
   /** chips を横スクロール 1 行にする (狭幅の本文上部など) */
   horizontalOnMobile?: boolean;
-  /** 本文の関連記事は透明な行を横に並べられる。枠を入れ子にしないinlineも同じリンクを使う。 */
+  /**
+   * 本文の関連記事は透明な行を横に並べられる。枠を入れ子にしないinlineも同じリンクを使う。
+   * 列数は画面幅ではなくカード自身の幅 (@container) で決め、狭いカードで文字が折れないようにする。
+   */
   columns?: 1 | 3;
   frame?: 'card' | 'inline';
 }
 
-function trackLink(
-  item: Pick<RailLinksCardItem, 'href' | 'label' | 'trackingLabel'>,
+/**
+ * クリックの計測は共通のクリック監視 (NavClickTracker) に任せる。導線名は data-nav-surface、
+ * ラベルは data-nav-label (trackingLabel が無ければ表示名) で渡す。部品ごとの onClick を持たないので、
+ * この部品は Server Component のまま描ける (クライアントの JS を増やさない。2026-10-28 3 巡目)。
+ */
+function trackingProps(
+  item: Pick<RailLinksCardItem, 'label' | 'trackingLabel'>,
   surface: NavSurface
 ) {
-  try {
-    trackNavClick({
-      label: item.trackingLabel ?? item.label,
-      href: item.href,
-      surface,
-    });
-  } catch {
-    // 計測失敗で遷移を止めない。
-  }
+  return {
+    ...navSurfaceProps(surface),
+    'data-nav-label': item.trackingLabel ?? item.label,
+  };
 }
+
+/**
+ * サムネイルの枠。ブログのサムネイル (640×336) を判別できる 16:9・幅 96px にする
+ * (2026-10-28 3 巡目。幅 80px では何の図か読めなかった)。
+ */
+const THUMBNAIL_FRAME_CLASS =
+  'relative aspect-video w-24 shrink-0 overflow-hidden border border-border bg-muted';
+
+/** 記事名などの題。語の途中で切らず、最後の行に 1 文字だけ残らないよう text-pretty にする */
+const LINK_LABEL_CLASS = 'line-clamp-2 text-pretty [word-break:auto-phrase]';
 
 /** タグ用ピル。PC は高密度 (sm:min-h-7)、モバイルは 44px のタップ領域 (min-h-11) */
 export const RAIL_CHIP_CLASS =
@@ -89,8 +120,11 @@ function RailLinks({
       <nav
         className={
           columns === 3
-            ? 'grid grid-cols-1 gap-x-6 sm:grid-cols-2 xl:grid-cols-3'
-            : 'space-y-0.5'
+            ? // 列数は件数に関係なく、1 列 20rem 以上を保てる数だけ並べる (auto-fit)。
+              // 旧実装は @container を自分に付けて自分を問い合わせていたため、祖先の幅で 3 列に固定され
+              // 題名が 8 字で切れ、件数が列数で割り切れない幅では空きマスが出ていた
+              'grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-x-6'
+            : 'flex flex-col'
         }
         aria-label="カード内リンク"
       >
@@ -99,20 +133,22 @@ function RailLinks({
             key={item.id}
             href={item.href}
             data-content-id={item.contentId}
-            data-nav-label={item.contentId}
-            data-nav-surface={item.contentId ? trackingSurface : undefined}
+            {...trackingProps(item, trackingSurface)}
             aria-label={item.ariaLabel}
-            className="group flex min-h-14 items-center gap-3 border-b border-border py-2.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-            onClick={() => trackLink(item, trackingSurface)}
+            className={cn(
+              'group flex min-h-11 items-center gap-3 border-b border-border py-1.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+              // 画像の無い行は RailNavRow の通常行と同じ高さ (sm 以上 36px)
+              !item.thumbnail && 'sm:min-h-9'
+            )}
           >
             {item.thumbnail && (
-              <span className="relative aspect-40/21 w-20 shrink-0 overflow-hidden border border-border bg-muted">
+              <span className={THUMBNAIL_FRAME_CLASS}>
                 <ThemeAwareImage
                   lightSrc={item.thumbnail.lightSrc}
                   darkSrc={item.thumbnail.darkSrc}
                   alt={item.thumbnail.alt ?? ''}
                   fill
-                  sizes="80px"
+                  sizes="96px"
                   className="object-cover"
                 />
               </span>
@@ -123,11 +159,11 @@ function RailLinks({
                   {item.description}
                 </span>
               )}
-              <span className="line-clamp-2">{item.label}</span>
+              <span className={LINK_LABEL_CLASS}>{item.label}</span>
             </span>
             <ChevronRight
               aria-hidden="true"
-              className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+              className="size-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
             />
           </Link>
         ))}
@@ -143,17 +179,17 @@ function RailLinks({
             <Link
               href={item.href}
               aria-label={item.ariaLabel}
-              className="group flex min-h-12 items-center gap-3 py-2.5 text-sm leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-              onClick={() => trackLink(item, trackingSurface)}
+              {...trackingProps(item, trackingSurface)}
+              className="group flex min-h-11 items-center gap-3 py-1.5 text-sm leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             >
               {item.thumbnail ? (
-                <span className="relative aspect-40/21 w-20 shrink-0 overflow-hidden border border-border bg-muted">
+                <span className={THUMBNAIL_FRAME_CLASS}>
                   <ThemeAwareImage
                     lightSrc={item.thumbnail.lightSrc}
                     darkSrc={item.thumbnail.darkSrc}
                     alt={item.thumbnail.alt ?? ''}
                     fill
-                    sizes="80px"
+                    sizes="96px"
                     className="object-cover"
                   />
                   <span className="absolute left-0 top-0 flex h-5 w-5 items-center justify-center bg-primary text-xs font-bold text-primary-foreground">
@@ -165,7 +201,11 @@ function RailLinks({
                   {index + 1}
                 </span>
               )}
-              <span className="line-clamp-2">{item.label}</span>
+              <span className={cn('min-w-0 flex-1', LINK_LABEL_CLASS)}>{item.label}</span>
+              <ChevronRight
+                aria-hidden="true"
+                className="size-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+              />
             </Link>
           </li>
         ))}
@@ -175,19 +215,21 @@ function RailLinks({
 
   if (layout === 'list') {
     return (
-      <nav className="-mx-2 flex flex-col" aria-label="カード内リンク">
+      // 行はカードの本文余白 (16px) の中に区切り線で並べる (行の横余白を外し、-mx-* で打ち消さない)
+      <nav className="flex flex-col divide-y divide-border" aria-label="カード内リンク">
         {items.map((item) => (
           <RailNavRow
             key={item.id}
             href={item.href}
             aria-label={item.ariaLabel}
             active={item.active}
+            className="px-0"
+            {...trackingProps(item, trackingSurface)}
             trailing={
               item.count !== undefined
                 ? item.count.toLocaleString('ja-JP')
                 : undefined
             }
-            onClick={() => trackLink(item, trackingSurface)}
           >
             {item.label}
           </RailNavRow>
@@ -212,7 +254,7 @@ function RailLinks({
           href={item.href}
           aria-label={item.ariaLabel}
           className={RAIL_CHIP_CLASS}
-          onClick={() => trackLink(item, trackingSurface)}
+          {...trackingProps(item, trackingSurface)}
         >
           <span>{item.label}</span>
           {item.count !== undefined && (
@@ -232,6 +274,7 @@ function RailLinks({
 /** 独立した共通リンクカード (chips / list / media / ranked)。枠・見出し・折りたたみは RailCard が持つ。 */
 export function RailLinksCard({
   title,
+  icon,
   items,
   layout = 'chips',
   moreLink,
@@ -250,23 +293,17 @@ export function RailLinksCard({
         horizontalOnMobile={horizontalOnMobile}
         columns={columns}
       />
+      {/* 一覧への導線も他の行と同じリンク行 (同じ行高と行末の ChevronRight) にする */}
       {moreLink && (
-        <Link
-          href={moreLink.href}
-          className="mt-3 inline-flex min-h-11 items-center text-xs sm:min-h-6 font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring dark:text-foreground"
-          onClick={() =>
-            trackLink(
-              {
-                href: moreLink.href,
-                label: moreLink.label,
-                trackingLabel: moreLink.trackingLabel,
-              },
-              trackingSurface
-            )
-          }
-        >
-          {moreLink.label}
-        </Link>
+        <div className="border-t border-border">
+          <RailNavRow
+            href={moreLink.href}
+            className="px-0 font-medium text-primary"
+            {...trackingProps(moreLink, trackingSurface)}
+          >
+            {moreLink.label}
+          </RailNavRow>
+        </div>
       )}
     </>
   );
@@ -278,7 +315,12 @@ export function RailLinksCard({
       </section>
     );
   return (
-    <RailCard title={title} aria-label={title} collapsible={collapsible}>
+    <RailCard
+      title={title}
+      icon={icon ?? DEFAULT_ICON[layout]}
+      aria-label={title}
+      collapsible={collapsible}
+    >
       {content}
     </RailCard>
   );

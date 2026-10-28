@@ -60,64 +60,6 @@ function buildDescription({
 }
 
 /**
- * ランキングページのパンくずリスト構造化データ（BreadcrumbList）を生成
- *
- * Google 検索結果にパンくずナビゲーションを表示するための JSON-LD を返す。
- * 構造:
- * - category 指定なし: ホーム > ランキング > {ランキング名}
- * - category 指定あり: ホーム > ランキング > {カテゴリ名} > {ランキング名}
- *
- * category 階層を含めることで topical relationships を Google に伝え、
- * 同カテゴリ内ランキングへの内部リンク評価を強める。
- */
-export function generateRankingBreadcrumbStructuredData({
-  rankingItem,
-  category,
-}: {
-  rankingItem: RankingItem;
-  category?: { key: string; name: string } | null;
-}): object {
-  const baseUrl = getRequiredBaseUrl();
-  const itemName = getRankingTitle(rankingItem);
-
-  const items: object[] = [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "ホーム",
-      item: baseUrl,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "ランキング",
-      item: `${baseUrl}/ranking`,
-    },
-  ];
-
-  if (category) {
-    items.push({
-      "@type": "ListItem",
-      position: items.length + 1,
-      name: category.name,
-      item: `${baseUrl}${hrefFor("category", { categoryKey: category.key })}`,
-    });
-  }
-
-  items.push({
-    "@type": "ListItem",
-    position: items.length + 1,
-    name: itemName,
-  });
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items,
-  };
-}
-
-/**
  * ランキングデータの構造化データを生成（Dataset）
  *
  * Google Dataset Searchでの表示を目的とする

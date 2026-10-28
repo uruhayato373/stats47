@@ -143,7 +143,7 @@ describe('共通県選択に連動する架設年度表', () => {
         screen.getByRole('link', { name: s.title }).getAttribute('href')
       ).toBe(s.url);
     expect(screen.getByRole('table').parentElement?.className).toContain(
-      'overflow-auto'
+      'overflow-x-auto'
     );
   });
 });

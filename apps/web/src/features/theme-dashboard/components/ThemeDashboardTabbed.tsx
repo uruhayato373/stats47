@@ -25,6 +25,7 @@ import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
+import { ChartLoading } from "@/components/charts/ChartState";
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
 
 import { RankingYearSelector } from "@/features/ranking/widgets";
@@ -36,7 +37,6 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { fetchIndicatorForYearAction } from "../actions";
 import { PREFECTURE_SET_LABEL, type ThemeDashboardClientProps } from "../types";
 
-import { ChartLoading } from "./ChartState";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";
@@ -281,7 +281,7 @@ export function ThemeDashboardTabbed({
   // 選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {
     return (
-      <div className="space-y-4 overflow-hidden">
+      <div className="min-w-0 space-y-4">
         {metricsDashboardSection}
       </div>
     );
@@ -289,7 +289,7 @@ export function ThemeDashboardTabbed({
 
   if (isBelowLg) {
     return (
-      <div className="space-y-3 min-w-0 overflow-hidden">
+      <div className="min-w-0 space-y-3">
         {indicatorTabs}
         <div className="flex flex-wrap items-center gap-2">
           {yearSelector}
@@ -342,7 +342,7 @@ export function ThemeDashboardTabbed({
 
   // デスクトップ
   return (
-    <div className="space-y-4 overflow-hidden">
+    <div className="min-w-0 space-y-4">
       <div className="space-y-3">
         {indicatorTabs}
         <div className="flex flex-wrap items-center gap-3">
@@ -536,7 +536,14 @@ function PrefectureSelector({
   return (
     <Select
       value={value ?? "all"}
-      onValueChange={(v) => onChange(v === "all" ? null : v)}
+      onValueChange={(v) => {
+        if (v === null) return;
+        onChange(v === "all" ? null : v);
+      }}
+      items={[
+        { value: "all", label: PREFECTURE_SET_LABEL },
+        ...PREFECTURE_OPTIONS.map((p) => ({ value: p.value, label: p.label })),
+      ]}
     >
       <SelectTrigger className="w-[140px] h-8 text-xs">
         <SelectValue placeholder="都道府県を選択" />

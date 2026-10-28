@@ -15,6 +15,7 @@ import { Check } from 'lucide-react';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
 import { trackNavClick } from '@/lib/analytics/events';
@@ -23,7 +24,6 @@ import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presenta
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 
-import { ChartEmptyState, ChartLoading } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
@@ -584,12 +584,11 @@ export function MetricSwitcherPanel({
                           : // タイル幅に収まらないラベルを hover で読めるようにする
                             label
                     }
-                    className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 ${
-                      checked
-                        ? 'bg-accent/40'
-                        : 'border-b-border hover:bg-accent/30'
+                    /* テンプレートの ToggleGroup (outline・spacing 0) と同じ見た目: 隙間なく並べ、
+                       選択中は bg-muted。系列色はチェックの箱だけが持つ (下線のタブにしない) */
+                    className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 ${
+                      checked ? 'bg-muted' : 'hover:bg-muted/60'
                     } ${lockedOn ? 'cursor-default' : 'cursor-pointer'}`}
-                    style={checked ? { borderBottomColor: color } : undefined}
                   >
                     <span className="flex w-full items-center gap-1.5">
                       {/* チェック状態と系列色を 1 つの箱で示す (色ドットを別に置かない) */}

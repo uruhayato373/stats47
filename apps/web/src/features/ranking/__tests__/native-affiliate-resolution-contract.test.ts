@@ -52,7 +52,7 @@ vi.mock("../components/RankingKeyPage/RankingPageAiSections", () => ({
 vi.mock("../components/RankingKeyPage/RankingPageAsyncSections", () => ({
   RankingPageCorrelationSection: () => null, RankingPageSupplementCardsSection: () => null,
 }));
-vi.mock("../components/RankingKeyPage/RankingPageBreadcrumbs", () => ({ RankingPageBreadcrumbs: () => null }));
+vi.mock("@/components/layout/Breadcrumbs", () => ({ Breadcrumbs: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageNativeAffiliateSection", () => ({ RankingPageNativeAffiliateSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageRakutenNativeSection", () => ({ RankingPageRakutenNativeSection: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageRelatedRankingsSection", () => ({ RankingPageRelatedRankingsSection: () => null }));

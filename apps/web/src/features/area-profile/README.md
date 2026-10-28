@@ -9,10 +9,10 @@
 
 目的の県へ一操作で移動できることを主目的とし、入口の優先順位を「検索 → 一覧 → 地図」とする。
 
-- routeはServer Componentを維持し、`PageShell`の左レール、`Breadcrumbs`、`PageHeader`、`AreaDirectory`を構成する。
-- レール表示幅では地方フィルタを`AreaDirectoryRegionNav`として左に置き、末尾広告を本文カラム幅に収める。レール未表示幅では本文の全県一覧を代替導線とする。
+- routeはServer Componentを維持し、`PageShell`のページ内ナビ（`leftRail`。列を作らず本文の上に置く）、`Breadcrumbs`、`PageHeader`、`AreaDirectory`を構成する。
+- 地方フィルタ`AreaDirectoryRegionNav`はページ内ナビとして本文の上に置く（2026-10-28 にサイドバー型へ寄せ、左の列をやめた）。サイト全体のナビは`AppSidebar`が持つ。
 - `AreaSearch`は県名のsuffix省略検索、候補表示、キーボード操作、直接遷移を担うClient Component。
-- desktopは`AreaSelectionPanels`で軽量タイル地図と地方別一覧を2ペイン表示し、左レールの地方選択を一覧へ反映する。
+- desktopは`AreaSelectionPanels`で軽量タイル地図と地方別一覧を2ペイン表示し、本文上の地方選択を一覧へ反映する。
 - mobile/tabletは一覧を既定タブとし、地図は利用者が切り替えたときに表示する。
 - `AreaTileMap`はD3やcanvasを使わず、通常の県リンクをCSS Gridへ配置する。初期HTMLに47県リンクを残す。
 - `AreaDirectoryList`は地方別のsemantic listを描画し、各リンクの操作領域を44px以上にする。

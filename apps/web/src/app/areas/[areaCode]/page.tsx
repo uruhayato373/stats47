@@ -15,12 +15,11 @@ import {
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
 import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
-import { RailCategoryList, RailLinksCard, RightRailWidgets } from '@/components/rail';
-import { RailCard } from '@/components/surface';
+import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
+import { RailLinksCard } from '@/components/rail';
 
 import {
   FooterAdSlot,
@@ -49,13 +48,13 @@ import type { Metadata } from 'next';
 const AREA_DATABOOK_TOC_ITEMS = [...AREA_DATABOOK_TEMPLATE.sections]
   .sort((a, b) => a.sortOrder - b.sortOrder)
   .map((section) => ({
-    id: section.sectionKey,
+    key: section.sectionKey,
     label: section.title,
     href: `#databook-${section.sectionKey}`,
   }));
 
 /** 県トップから掘り下げやすい主要テーマ。表示順はテーマ一覧の SSOT に従う。 */
-const AREA_RAIL_THEMES = AREA_THEMES.slice(0, 8);
+const AREA_FEATURED_THEMES = AREA_THEMES.slice(0, 8);
 
 /**
  * オンデマンド ISR（24時間）。
@@ -135,7 +134,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
   });
   const structuredData = generateAreaProfileStructuredData({ profile, highlights });
   const breadcrumbStructuredData = generateAreaProfileBreadcrumbStructuredData({ profile });
-
   return (
     <>
       {/* 構造化データ */}
@@ -150,56 +148,16 @@ export default async function AreaProfilePage({ params }: PageProps) {
         }}
       />
 
-      <PageShell
-        rightRail={
-          <RightRailWidgets
-            topWidgets={
-              <>
-                <RailLinksCard
-                  title={`${profile.areaName}の目次`}
-                  items={AREA_DATABOOK_TOC_ITEMS}
-                  layout="list"
-                  trackingSurface="area_sidebar"
-                />
-                <RailLinksCard
-                  title={`${profile.areaName}をテーマから見る`}
-                  items={AREA_RAIL_THEMES.map((theme) => ({
-                    id: theme.themeKey,
-                    label: theme.title,
-                    href: hrefFor('area-theme', { areaCode, themeSlug: theme.themeKey }),
-                  }))}
-                  layout="list"
-                  moreLink={{
-                    href: '/themes',
-                    label: 'すべてのテーマを見る →',
-                  }}
-                  trackingSurface="area_sidebar"
-                />
-                <RailCard title="カテゴリから探す" aria-label="カテゴリから探す">
-                  <RailCategoryList
-                    items={RANKING_PROMINENCE_CATEGORIES}
-                    showCount
-                    trackingSurface="area_sidebar"
-                  />
-                </RailCard>
-                <RelatedAreas areaCode={areaCode} />
-              </>
-            }
-          />
-        }
-      >
+      {/* 右レールは持たない。目次は h1 の直後の 1 行のナビにし、最初の画面に「特徴」カードを出す */}
+      <PageShell>
         <Breadcrumb className="mb-4">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/">ホーム</Link>
-              </BreadcrumbLink>
+              <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/areas">都道府県一覧</Link>
-              </BreadcrumbLink>
+              <BreadcrumbLink render={<Link href="/areas" />}>都道府県一覧</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -210,7 +168,13 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
         <AreaProfilePageClient profile={profile} />
 
-        <main className="min-w-0 space-y-8">
+        <LinkRowNav
+          label={`${profile.areaName}の目次`}
+          items={AREA_DATABOOK_TOC_ITEMS}
+          className="mb-4"
+        />
+
+        <div className="flex min-w-0 flex-col gap-8">
           <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
@@ -254,6 +218,26 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
+          <div className="@container">
+            <div className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2">
+              <RailLinksCard
+                title={`${profile.areaName}をテーマから見る`}
+                items={AREA_FEATURED_THEMES.map((theme) => ({
+                  id: theme.themeKey,
+                  label: theme.title,
+                  href: hrefFor('area-theme', { areaCode, themeSlug: theme.themeKey }),
+                }))}
+                layout="list"
+                moreLink={{
+                  href: '/themes',
+                  label: 'すべてのテーマを見る →',
+                }}
+                trackingSurface="area_sidebar"
+              />
+              <RelatedAreas areaCode={areaCode} />
+            </div>
+          </div>
+
           {/*
                       広告②: 本文末尾。RailAdSlot は右レール(360px)前提の SurfaceCard 枠で、
                       本文カラム(840px)に置くと枠だけレール幅のまま浮く。他のハブ面と同じ
@@ -261,7 +245,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       home の左レールが引き続き使う。
                     */}
           <FooterAdSlot />
-        </main>
+        </div>
       </PageShell>
     </>
   );

@@ -33,7 +33,16 @@ export function PopulationProfileSelect({
       <label htmlFor={id} className="block text-sm text-muted-foreground">
         {label}
       </label>
-      <Select value={value} onValueChange={onChange}>
+      <Select
+        value={value}
+        items={options.map((option) => ({
+          value: option.code,
+          label: option.label,
+        }))}
+        onValueChange={(next) => {
+          if (next !== null) onChange(next);
+        }}
+      >
         <SelectTrigger id={id} aria-label={label} className="h-11 text-sm">
           <SelectValue />
         </SelectTrigger>

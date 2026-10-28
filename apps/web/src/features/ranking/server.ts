@@ -6,8 +6,7 @@ export { getFeaturedRankings } from "./lib/get-featured-rankings";
 // サーバーコンポーネントの再エクスポート (app/ から使われるものだけ個別に。
 // RankingKeyPage の他 section は RankingPageClientShell が相対 import で直接使う)
 export { FeaturedRankings } from "./components/FeaturedRankings";
-// RankingPageBreadcrumbs は ArticleShell の breadcrumb slot 用に RankingPageClientShell が
-// 相対 import で直接使う (2026-07-11)。app/ からの barrel 参照は無いので個別 export しない。
+// パンくずは共通の Breadcrumbs (@/components/layout/Breadcrumbs) を RankingPageClientShell が直接使う。
 export { RankingPageClientShell } from "./components/RankingKeyPage/RankingPageClientShell";
 export { RankingPageHeadAssets } from "./components/RankingKeyPage/RankingPageHeadAssets";
 

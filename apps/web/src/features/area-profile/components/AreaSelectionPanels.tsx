@@ -10,7 +10,7 @@ import {
 } from '@stats47/components/atoms/ui/tabs';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
-import Link from '@/components/atoms/SiteLink';
+import { SectionIndexLink } from '@/components/section/SectionIndexLink';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
@@ -94,12 +94,10 @@ export function AreaSelectionPanels({
             regionLegend={legend}
             onSelect={onMapSelect}
           />
-          <Link
-            href="/areas"
-            className="mt-3 inline-flex min-h-8 items-center text-sm font-semibold text-primary hover:underline @md:hidden"
-          >
-            都道府県一覧から選ぶ →
-          </Link>
+          {/* 一覧への導線は共通の SectionIndexLink (Button outline sm + lucide の矢印)。文字の「→」を書かない */}
+          <SectionIndexLink href="/areas" className="mt-3 @md:hidden">
+            都道府県一覧から選ぶ
+          </SectionIndexLink>
         </div>
         <AreaDirectoryList
           regionGroups={regionGroups}

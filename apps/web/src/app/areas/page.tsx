@@ -53,21 +53,25 @@ export default function AreasPage() {
 
   return (
     <AreaDirectoryRegionProvider>
+      {/* ページ内ナビ (地方の切替) はパンくずと h1 の後・本文の上に置く (PageShell の header → leftRail → 本文) */}
       <PageShell
+        header={
+          <>
+            <Breadcrumbs
+              items={[{ label: 'ホーム', href: '/' }, { label: '都道府県' }]}
+            />
+            <PageHeader
+              eyebrow="エリア"
+              title="都道府県から統計を見る"
+              description="47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。"
+            />
+          </>
+        }
         leftRail={<AreaDirectoryRegionNav regions={regions} />}
-        leftRailNarrowBehavior="hide"
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <Breadcrumbs
-          items={[{ label: 'ホーム', href: '/' }, { label: '都道府県' }]}
-        />
-        <PageHeader
-          eyebrow="エリア"
-          title="都道府県から統計を見る"
-          description="47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。"
         />
 
         <PrefectureNavigator
