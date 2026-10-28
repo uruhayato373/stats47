@@ -17,6 +17,7 @@ const batch = step('page-data-batch');
 const observations = step('Push observations');
 const ranking = step('Regenerate scoped ranking');
 const full = step('Regenerate derived');
+const municipality = step('Regenerate scoped municipality');
 const tsx = path.join(root, 'node_modules/.bin/tsx');
 const keys = 'annual-clear-days,annual-precipitation';
 const registryResult = spawnSync(tsx, ['-r', './packages/ranking/src/scripts/setup-cli.js', '-e', `
@@ -56,7 +57,14 @@ const write = (file, data) => { fs.mkdirSync(path.dirname(file), { recursive: tr
 const year = c => ({ yearCode: '2024', yearName: '2024' + (c.yearFormat === 'fiscal' || fixture.staleLabel ? '年度' : '年') });
 const item = c => ({ rankingKey: c.rankingKey, latestYear: year(c), availableYears: [year(c)] });
 const value = c => ({ ...year(c), areaCode: '01000', value: 1, rank: 1 });
-if (has('page-data-batch.ts')) {
+if (has('page-data-batch.ts') && args.includes('city')) {
+  if (!args.includes('--dry-run')) {
+    for (const key of keys) {
+      const rows = fixture.emptyStats ? [] : [{ areaCode: '01100', yearCode: '2024', value: 1 }];
+      write('.local/r2/app/stats/' + key + '/cities.json', { metricKey: key, entityKind: fixture.wrongStats ? 'prefecture' : 'city', rows, meta: { rowCount: rows.length, recipe: {} } });
+    }
+  }
+} else if (has('page-data-batch.ts')) {
   if (fixture.batchFails) process.exit(1);
   if (!args.includes('--dry-run')) {
     for (const key of keys) {
@@ -89,6 +97,16 @@ if (has('generate-ranking-values.ts') || has('generate-ranking-normalized-values
       write('.local/r2/app/ranking/' + key + '/national-trend.json', { rankingKey: key, areaType: 'prefecture', series: [{ points: [year(c)] }] });
     }
   }
+}
+if (has('generate-municipality-ranking.ts')) {
+  if (fixture.municipalityFails) process.exit(1);
+  const generated = args[args.indexOf('--keys') + 1].split(',');
+  for (const key of generated) for (const file of ['item.json', 'values.json']) write('.local/r2/app/municipalities/ranking/' + key + '/' + file, { rankingKey: key });
+  if (fixture.extraMunicipality) write('.local/r2/app/municipalities/ranking/extra-key/item.json', { rankingKey: 'extra-key' });
+}
+if (has('generate-city-databooks.ts')) {
+  if (fixture.databookFails) process.exit(1);
+  write('.local/r2/app/areas/01000/cities/01100/databook.json', {});
 }
 if (has('diff-push-r2.ts') && fixture.pushFails) process.exit(1);
 `, { mode: 0o755 });
@@ -213,7 +231,7 @@ test('default all scope retains existing full/partial-publish path and shared wr
   assert.equal(workflow.concurrency.group, 'r2-write');
   assert.equal(batch['continue-on-error'], true);
   assert.match(full.run, /bash \.claude\/skills\/db\/sync-snapshots\/run\.sh "\$\{ARGS\[@\]\}"/);
-  assert.match(full.if, /snapshot_scope != 'ranking'/);
+  assert.match(full.if, /snapshot_scope == 'all'/);
   assert.match(ranking.if, /snapshot_scope == 'ranking'/);
   assert.equal(ranking.env.NODE_ENV, 'production');
   assert.ok(steps.indexOf(validate) < steps.indexOf(batch));
@@ -259,4 +277,56 @@ test('develop への push で起動したときだけ、派生 snapshot から p
   assert.equal(argsOf('push'), '--skip page-components');
   assert.equal(argsOf('schedule'), '');
   assert.equal(argsOf('workflow_dispatch'), '');
+});
+
+const cityKeys = 'fiscal-strength-index,per-taxpayer-income';
+const citySequence = [validate, batch, observations, municipality].map(entry => entry.run).join('\n');
+const cityEnv = { SNAPSHOT_SCOPE: 'municipality', REFRESH_METRIC: cityKeys };
+
+test('municipality scope fetches city observations, then publishes only those rankings and the databooks', () => {
+  const result = run(citySequence, cityEnv);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(puts(result).map(args => args.slice(-2)), [
+    ['--prefix', 'app/stats/fiscal-strength-index/'],
+    ['--prefix', 'app/stats/per-taxpayer-income/'],
+    ['--prefix', 'app/municipalities/'],
+    ['--prefix', 'app/areas/'],
+  ]);
+  const fetched = result.calls.find(args => args.some(arg => arg.endsWith('page-data-batch.ts')));
+  assert.deepEqual(fetched.slice(-4), ['--metric', cityKeys, '--kind', 'city']);
+  const generated = result.calls.find(args => args.some(arg => arg.endsWith('generate-municipality-ranking.ts')));
+  assert.deepEqual(generated.slice(-2), ['--keys', cityKeys]);
+  assert.match(municipality.if, /snapshot_scope == 'municipality'/);
+  assert.match(municipality.if, /steps\.resolve\.outputs\.dry_run != 'true'/);
+});
+
+for (const metric of ['', 'annual-clear-days', 'unknown-key', 'fiscal-strength-index,fiscal-strength-index']) {
+  test(`invalid municipality scope fails before fetch and PUT: ${metric}`, () => {
+    const result = run(citySequence, { ...cityEnv, REFRESH_METRIC: metric });
+    assert.notEqual(result.status, 0);
+    assert.equal(puts(result).length, 0);
+    assert.equal(result.calls.some(args => args.some(arg => arg.endsWith('page-data-batch.ts'))), false);
+  });
+}
+
+for (const fixture of [{ emptyStats: true }, { wrongStats: true }]) {
+  test(`wrong city observations prevent the first PUT: ${JSON.stringify(fixture)}`, () => {
+    const result = run(citySequence, cityEnv, fixture);
+    assert.notEqual(result.status, 0);
+    assert.equal(puts(result).length, 0);
+  });
+}
+
+for (const fixture of [{ municipalityFails: true }, { databookFails: true }, { extraMunicipality: true }]) {
+  test(`failed municipality snapshots publish nothing beyond observations: ${JSON.stringify(fixture)}`, () => {
+    const result = run(citySequence, cityEnv, fixture);
+    assert.notEqual(result.status, 0);
+    assert.ok(puts(result).every(args => args.at(-1).startsWith('app/stats/')));
+  });
+}
+
+test('request file can ask for municipality scope', () => {
+  const result = run(resolveInputs.run, { EVENT_NAME: 'push' }, { request: { metric: cityKeys, snapshotScope: 'municipality', dryRun: false } });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.outputs, /^snapshot_scope=municipality$/m);
 });

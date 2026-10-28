@@ -264,10 +264,13 @@ async function main(): Promise<void> {
   );
 
   // --all-published: 公開済み全 key を生成 (sync-snapshots の municipality-ranking task 用)。
+  // --keys a,b: 指定 key だけを生成 (data-refresh の snapshot_scope=municipality 用)。
   // 1 key でも失敗したら exit≠0 (部分成功で push させない)。
   const keys = process.argv.includes('--all-published')
     ? [...KNOWN_MUNICIPALITY_RANKING_KEYS].sort()
-    : [argValue('--key') ?? 'elderly-population-ratio'];
+    : argValue('--keys')
+      ? argValue('--keys')!.split(',')
+      : [argValue('--key') ?? 'elderly-population-ratio'];
   const subtitleByKey = buildMunicipalityRankingSubtitles();
   const concurrency = Math.max(1, Number(argValue('--concurrency') ?? DEFAULT_CONCURRENCY) || DEFAULT_CONCURRENCY);
   // 1 key が失敗したら、ほかの worker は手元の key を終えたところで止まる (部分成功で push させない)
