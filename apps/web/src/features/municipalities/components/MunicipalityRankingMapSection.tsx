@@ -1,7 +1,7 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import { fetchMunicipalityTopology } from '@stats47/gis/server';
+import { fetchMunicipalityTopologyForWardMode } from '@stats47/gis/server';
 import { municipalityLeafName } from '@stats47/ranking';
 
 import { SectionHeader } from '@/components/section';
@@ -48,7 +48,8 @@ export async function MunicipalityRankingMapSection({
   if (rows.length === 0) return null;
 
   const pref2 = to2DigitPrefCode(prefectureCode);
-  const topology = await fetchMunicipalityTopology(pref2, 'merged').catch(
+  // 市区町村ランキングは基礎自治体の単位 (政令指定都市は市全体・特別区は区ごと) なので merged の地図を使う
+  const topology = await fetchMunicipalityTopologyForWardMode(pref2, 'merged').catch(
     () => null as TopoJSONTopology | null
   );
   if (!topology) return null;

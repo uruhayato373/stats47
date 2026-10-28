@@ -127,6 +127,13 @@ W36 の 6,053 から W40 の 10,018 へ伸びた一方、週次収益 (NSM) は�
 - **依存・ブロッカー**: e-Stat の取得は CI 専用 (data-refresh の dryRun → オーナー承認 → R2 反映)。R2 反映はオーナー承認が要る。
 - **真実源リンク**: `backlog.md#DATA-QUALITY-LOOP-01`、`backlog.md#DATA-WAGE-TABLE-YEARS-01`、`backlog.md#YEAR-COV-20260926`
 
+## 11 月の重点（2026-10-28 オーナー決定・`/monthly-plan` はこれを入力にする）
+
+- **focus_domains: サイト・商品**。市区町村 × GIS を軸に、打ち手は件数の上限なく並行して試し、判定日の実測で配分を決める (収益化戦略 §7)。打ち手の台帳は `data/business/experiments.json` (EXP-007〜012)。
+- **サイト**: 検索に出せる「県名×市区町村ランキング」(`MUNI-PREF-RANKING-ROUTE-01`) を先に作り、子育ての市区町村ランキング (`MUNI-KOSODATE-METRICS-01` → `MUNI-KOSODATE-PAGES-01`) を載せる。
+- **商品**: 市区町村の加工済みデータ (製造品出荷額) を 1 商品売る (`MUNI-DATA-LICENSE-CHECK-01` → `MUNI-DATA-PRODUCT-BUILD-01` → `MUNI-DATA-PRODUCT-SALE-01`)。
+- 10 月の重点 (管理・データ) の残りは、月次レビューで判定してから扱いを決める。根拠は vault `memos/stats47_悩み起点リサーチ.md`。
+
 ## 今月やらないこと（予算のため意図的に見送る）
 
 - **UI を「攻める」に変えること** — `STRATEGY-FOCUS-2026-10-01` は UI・回遊を 3 つ目の重点にする案だったが、9/30 に領域が 8 つになり、

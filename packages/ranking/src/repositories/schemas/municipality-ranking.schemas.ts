@@ -105,6 +105,31 @@ const CityDatabookMetricSchema = z
   })
   .strict();
 
+const CityDatabookWardBreakdownSchema = z
+  .object({
+    wards: z.array(z.object({ areaCode: z.string().regex(/^\d{5}$/), areaName: z.string().min(1) }).strict()).min(1),
+    metrics: z.record(
+      z.string(),
+      z
+        .object({
+          rankingKey: z.string().min(1),
+          label: z.string().min(1),
+          unit: z.string(),
+          yearCode: z.string().regex(/^\d{4}$/),
+          yearName: z.string().min(1),
+          values: z
+            .array(
+              z
+                .object({ areaCode: z.string().regex(/^\d{5}$/), value: z.number().finite(), cityRank: z.number().int().positive() })
+                .strict()
+            )
+            .min(1),
+        })
+        .strict()
+    ),
+  })
+  .strict();
+
 export const CityDatabookSnapshotSchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -120,6 +145,7 @@ export const CityDatabookSnapshotSchema = z
       z.object({ themeSlug: z.string().min(1), title: z.string().min(1), metricKeys: z.array(z.string().min(1)).min(1) }).strict()
     ),
     metrics: z.record(z.string(), CityDatabookMetricSchema),
+    wardBreakdown: CityDatabookWardBreakdownSchema.optional(),
   })
   .strict();
 

@@ -1225,6 +1225,7 @@
       "series": "A",
       "title": "財政健全化法の4指標で見る都道府県ランキング｜赤字比率は全県クリア、差がつくのは借金の重さ",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/n2ed31d721531",
@@ -2278,7 +2279,7 @@
       "stats47Targets": [
         "/ranking/real-public-debt-service-ratio"
       ],
-      "nextBestArticle": "recovered-nded2d34fc978"
+      "nextBestArticle": "13-fiscal-peer-no-code"
     },
     {
       "key": "recovered-n0654ddf27920",
@@ -2477,6 +2478,7 @@
       "series": "A",
       "title": "【2022年度】都道府県「財政力指数」ランキング｜唯一の1.0超え東京都、茨城8位の意外",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/n16950238dfd8",
@@ -3185,6 +3187,7 @@
       "series": "A",
       "title": "【2022年度】都道府県「実質収支比率」ランキング｜島根県7.5%でトップ、長崎県0.3%で余裕なし",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/n567416b632f6",
@@ -4340,6 +4343,7 @@
       "series": "A",
       "title": "財政力7位なのに借金1位？都道府県「稼ぐ力」と「借金」のギャップを可視化してみた",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/nded2d34fc978",
@@ -4384,6 +4388,7 @@
       "series": "A",
       "title": "【2022年度】都道府県「経常収支比率」ランキング｜100%超えの大阪府、東京都は全国最低の79.5%",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/ne31a2574e231",
@@ -4506,6 +4511,7 @@
       "series": "A",
       "title": "【2022年度】都道府県「地方債現在高比率」ランキング｜なぜ財政力7位の静岡が借金ワースト？大阪41位の意外",
       "magazine": "s47-fiscal",
+      "nextBestArticle": "13-fiscal-peer-no-code",
       "isPaid": false,
       "status": "published",
       "noteUrl": "https://note.com/stats47/n/ne82a6c83ed45",
@@ -11306,9 +11312,9 @@
           "sha256": "e77c0a2c5a160bcd2412c89182a9b39be2fbb1c37439f23d3ec76bba86963195",
           "files": 10,
           "bytes": 1892438,
-          "savedAt": "2026-10-28T01:37:31.469Z"
+          "savedAt": "2026-10-28T02:38:12.179Z"
         },
-        "verifiedAt": "2026-10-28T01:37:31.469Z"
+        "verifiedAt": "2026-10-28T02:38:12.179Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
@@ -11339,6 +11345,28 @@
       ],
       "noteUrl": "https://note.com/stats47/n/n08d8b24bf9c5",
       "publishedAt": "2026-10-24"
+    },
+    {
+      "key": "h-howto-qgis-choropleth",
+      "vertical": "stats47-note",
+      "title": "QGISで都道府県の色分け地図を作る方法 ── GeoJSONを読み込んで5段階に塗り分けるまで",
+      "magazine": null,
+      "isPaid": false,
+      "status": "draft",
+      "r2Path": "note/stats47-note/h-howto-qgis-choropleth",
+      "body": {
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "884ef5a54c1e70057aedb0ef2949e14ff67abc48a31e5a4ca8bd50ab4b684332",
+          "files": 11,
+          "bytes": 2046684,
+          "savedAt": "2026-10-28T02:42:22.679Z"
+        },
+        "verifiedAt": "2026-10-28T02:42:22.679Z"
+      },
+      "stats47Targets": [
+        "/ranking/total-population"
+      ]
     },
     {
       "key": "h-howto-excel-filled-map",

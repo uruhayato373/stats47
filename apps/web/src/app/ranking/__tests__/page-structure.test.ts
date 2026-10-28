@@ -22,10 +22,12 @@ describe('ranking index featured cards', () => {
     expect(PAGE).not.toContain('FEATURED_STRIP_LIMIT');
   });
 
-  it('390px でもカテゴリから探せるよう、件数付きのカテゴリ索引と全ランキングへの入口を本文に置く', () => {
+  it('390px でもカテゴリから探せるよう、カテゴリ索引と全ランキングへの入口を本文に置く (件数は出さない)', () => {
     // サイドバーは 390px で Sheet に畳まれるので、本文に索引が無いとカテゴリから探せない
     expect(PAGE).toContain('<RailCategoryList');
-    expect(PAGE).toContain('count: category.count');
+    // 件数はサイドバーと同じく出さない (2026-10-28 オーナー合意)
+    expect(PAGE).toContain('showCount={false}');
+    expect(PAGE).not.toContain('count: category.count');
     expect(PAGE).toContain("href: '/search?type=ranking'");
     expect(PAGE).toContain('trackingSurface="ranking_category"');
   });

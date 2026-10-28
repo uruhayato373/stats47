@@ -97,6 +97,15 @@
       ]
     },
     {
+      "id": "route:municipality-pref-ranking:rankingKey:prefCode",
+      "kind": "municipality-pref-ranking",
+      "pattern": "/municipalities/ranking/[rankingKey]/[prefCode]",
+      "parameters": [
+        "rankingKey",
+        "prefCode"
+      ]
+    },
+    {
       "id": "route:municipality-theme:themeSlug",
       "kind": "municipality-theme",
       "pattern": "/municipalities/themes/[themeSlug]",

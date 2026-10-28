@@ -23,6 +23,7 @@ const HREF_ROUTE_IDS = {
   'category-compare': 'route:category-compare:categoryKey',
   survey: 'route:survey:surveyKey',
   'municipality-ranking': 'route:municipality-ranking:rankingKey',
+  'municipality-pref-ranking': 'route:municipality-pref-ranking:rankingKey:prefCode',
   'municipality-theme': 'route:municipality-theme:themeSlug',
   'japan-theme': 'route:japan-theme:themeSlug',
   geo: 'route:geo:analysisSlug',

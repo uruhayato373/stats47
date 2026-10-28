@@ -18,7 +18,7 @@ export const perTaxpayerIncome: MetricConfig = {
   ],
   "years": {
     "from": 1985,
-    "to": 2023,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -173,19 +173,21 @@ function useOpenOnActive(hrefs: readonly string[], defaultOpen: boolean) {
 }
 
 /**
- * 開閉できるグループ (shadcn の Collapsible SidebarGroup の組み立て)。既定は開く。
- * 見出しは SidebarGroupLabel の既定の見た目のまま使う。
+ * 開閉できるグループ (shadcn の Collapsible SidebarGroup の組み立て)。既定は開く (defaultOpen で閉じられる)。
+ * 現在地を含むときは既定にかかわらず開く。見出しは SidebarGroupLabel の既定の見た目のまま使う。
  */
 export function SidebarCollapsibleGroup({
   label,
   hrefs,
+  defaultOpen = true,
   children,
 }: {
   label: string;
   hrefs: readonly string[];
+  defaultOpen?: boolean;
   children: React.ReactNode;
 }) {
-  const [open, setOpen] = useOpenOnActive(hrefs, true);
+  const [open, setOpen] = useOpenOnActive(hrefs, defaultOpen);
 
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="group/collapsible">
@@ -208,20 +210,22 @@ export function SidebarCollapsibleGroup({
 
 /**
  * 開閉できる項目 (テンプレートの nav-collapse: アイコン + 名前 + 右端の矢印、子は左線付きで字下げ)。
- * 既定は閉じ、現在地を含むときだけ開く。
+ * 既定は閉じる (defaultOpen で開ける)。現在地を含むときは既定にかかわらず開く。
  */
 export function SidebarCollapsibleItem({
   label,
   hrefs,
   icon,
+  defaultOpen = false,
   children,
 }: {
   label: string;
   hrefs: readonly string[];
   icon: React.ReactNode;
+  defaultOpen?: boolean;
   children: React.ReactNode;
 }) {
-  const [open, setOpen] = useOpenOnActive(hrefs, false);
+  const [open, setOpen] = useOpenOnActive(hrefs, defaultOpen);
 
   return (
     <Collapsible

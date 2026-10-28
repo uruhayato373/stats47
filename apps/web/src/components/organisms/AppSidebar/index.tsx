@@ -7,14 +7,15 @@
  *   検索エンジン向けには Footer に主要ナビと「すべてのテーマ」のリンクを常に出して補う
  * - テンプレートと同じ variant="inset"。ルートレイアウトの SidebarInset に outline + m-2 を付けて対にする
  * - ヘッダーはテンプレートの full-logo と同じ 2 段 (ロゴ + 名前 text-base + 副題 1 行)
- * - 主要ナビは常に展開し、グループ名「メニュー」を付ける。カテゴリ (17 件) とテーマのグループは既定で開き、
- *   見出しで閉じられる (AppSidebarClient の SidebarCollapsibleGroup)。グループ名はどれも SidebarGroupLabel の
- *   見た目に font-semibold を足した同じ作り (Sidebar の className で全グループ名に当てる)
- * - テーマはテンプレートの nav-collapse と同じく 5 系統 (THEME_NAV_GROUPS) の開閉できる項目に分け、
- *   系統の項目にアイコンを付け、テーマのリンクは左線付きで字下げした子に並べる。既定は閉じ、現在地を含む系統だけ開く
+ * - 主要ナビは常に展開し、グループ名「メニュー」を付ける。項目はサイトの内容の種類 (site-navigation.ts) だけ
+ * - サイトの顔はテーマ。テーマのグループを主要ナビの直後に置き、5 系統 (THEME_NAV_GROUPS) をすべて開いた状態で出す。
+ *   カテゴリ (17 件) は全指標の索引なのでテーマの後に置き、既定で閉じる。件数は選ぶ判断に役立たないので出さない
+ *   (2026-10-28 オーナー合意)。どちらのグループも現在地を含むときは開く (AppSidebarClient の useOpenOnActive)
+ * - グループ名はどれも SidebarGroupLabel の見た目に font-semibold を足した同じ作り (Sidebar の className で全グループ名に当てる)
+ * - テーマはテンプレートの nav-collapse と同じく系統の開閉できる項目に分け、系統の項目にアイコンを付け、
+ *   テーマのリンクは左線付きで字下げした子に並べる
  * - 主要ナビ・カテゴリ・テーマの系統の項目にはすべて lucide のアイコンを付ける (カテゴリは categories.ts の icon)
- * - 下端 (SidebarFooter) に一覧への出口 (すべてのテーマ) を置く。/ranking への出口は主要ナビの
- *   「ランキング」と重なるので置かない (2026-10-28 3 巡目)
+ * - 下端 (SidebarFooter) は置かない。テーマ一覧 (/themes) は主要ナビの「テーマ」から入る
  * - 閉じている間もリンクは hidden="until-found" で SSR の HTML に残す
  * - 広告は置かない (ルートの body に google-anno-skip を付けてある)
  * - `cookies()` / `headers()` は呼ばない (SSG 維持: .claude/rules/nextjs-ssg-preservation.md)
@@ -24,11 +25,8 @@ import { CATEGORIES } from '@stats47/data-configs/categories';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import {
-  ArrowLeftRight,
   BookOpen,
   Briefcase,
-  Building2,
-  ClipboardList,
   HeartPulse,
   Home,
   LayoutGrid,
@@ -59,22 +57,17 @@ import {
   SidebarNavContent,
   SidebarNavLink,
   SidebarNavSubLink,
-  SidebarNavSurface,
 } from './AppSidebarClient';
 import {
   Sidebar,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuItem,
   SidebarMenuSubItem,
 } from './sidebar-shell';
 import {
-  ALL_THEMES_NAV_ITEM,
-  COMPARE_NAV_ITEM,
   HOME_NAV_ITEM,
   PRIMARY_NAV_ITEMS,
   type PrimaryNavKey,
@@ -82,10 +75,9 @@ import {
 
 const PRIMARY_NAV_ICONS: Record<PrimaryNavKey, LucideIcon> = {
   ranking: TrendingUp,
+  themes: LayoutGrid,
   areas: MapPin,
-  municipalities: Building2,
   geo: MapIcon,
-  survey: ClipboardList,
   blog: BookOpen,
 };
 
@@ -105,15 +97,10 @@ const CATEGORY_ICON_NAMES = new Map(
   CATEGORIES.map((category) => [category.categoryKey, category.icon])
 );
 
-/** 件数の札の位置。行の高さ (h-9) の中央に置き、現在地 (bg-primary) でも読める色にする */
-const BADGE_CLASS =
-  'peer-data-[size=default]/menu-button:top-2 peer-data-active/menu-button:text-background';
-
 interface NavLinkItem {
   href: string;
   label: string;
   icon: LucideIcon;
-  count?: number;
 }
 
 interface ThemeNavSection {
@@ -132,17 +119,15 @@ function getPrimaryNavItems(): NavLinkItem[] {
       label,
       icon: PRIMARY_NAV_ICONS[key],
     })),
-    { ...COMPARE_NAV_ITEM, icon: ArrowLeftRight },
   ];
 }
 
-/** カテゴリ (件数付き)。件数はビルド前に git TS から焼いた生成物を使う (METRICS_REGISTRY を全 route の bundle に入れないため) */
+/** カテゴリ。並び順はビルド前に git TS から焼いた生成物を使う (METRICS_REGISTRY を全 route の bundle に入れないため) */
 function getCategoryNavItems(): NavLinkItem[] {
   return RANKING_PROMINENCE_CATEGORIES.map((category) => ({
     href: hrefFor('category', { categoryKey: category.categoryKey }),
     label: category.categoryName,
     icon: getIcon(CATEGORY_ICON_NAMES.get(category.categoryKey) ?? ''),
-    count: category.count,
   }));
 }
 
@@ -162,11 +147,6 @@ export function getThemeNavSections(): ThemeNavSection[] {
   }));
 }
 
-/** 下端の出口 (一覧ページ)。上のナビ (主要ナビ・カテゴリ・テーマの系統) と行き先が重ならないものだけ */
-const FOOTER_NAV_ITEMS = [
-  { ...ALL_THEMES_NAV_ITEM, icon: LayoutGrid, matchActive: true },
-] as const;
-
 /**
  * グループ名の見た目。テンプレートの SidebarGroupLabel (data-slot="sidebar-group-label") と同じクラスで描き、
  * 主要ナビ・カテゴリ・テーマのグループ名をすべて font-semibold にする (Sidebar の className で当てる)。
@@ -176,21 +156,12 @@ const GROUP_LABEL_EMPHASIS_CLASS = '**:data-[slot=sidebar-group-label]:font-semi
 function NavLinkMenu({ items }: { items: NavLinkItem[] }) {
   return (
     <SidebarMenu>
-      {items.map(({ href, label, icon: Icon, count }) => (
+      {items.map(({ href, label, icon: Icon }) => (
         <SidebarMenuItem key={href}>
-          <SidebarNavLink
-            href={href}
-            label={label}
-            className={count === undefined ? undefined : 'pr-12'}
-          >
+          <SidebarNavLink href={href} label={label}>
             <Icon />
             <span>{label}</span>
           </SidebarNavLink>
-          {count !== undefined && (
-            <SidebarMenuBadge className={BADGE_CLASS}>
-              {count}件
-            </SidebarMenuBadge>
-          )}
         </SidebarMenuItem>
       ))}
     </SidebarMenu>
@@ -208,9 +179,6 @@ export function AppSidebar() {
     ...primary.map((item) => item.href),
     ...categories.map((item) => item.href),
     ...themeHrefs,
-    ...FOOTER_NAV_ITEMS.filter((item) => item.matchActive).map(
-      (item) => item.href
-    ),
   ];
 
   return (
@@ -260,14 +228,6 @@ export function AppSidebar() {
               <NavLinkMenu items={primary} />
             </SidebarGroupContent>
           </SidebarGroup>
-          <SidebarCollapsibleGroup
-            label="カテゴリ"
-            hrefs={categories.map((item) => item.href)}
-          >
-            <SidebarGroupContent>
-              <NavLinkMenu items={categories} />
-            </SidebarGroupContent>
-          </SidebarCollapsibleGroup>
           <SidebarCollapsibleGroup label="テーマ" hrefs={themeHrefs}>
             <SidebarGroupContent>
               <SidebarMenu>
@@ -277,6 +237,7 @@ export function AppSidebar() {
                     label={label}
                     hrefs={items.map((item) => item.href)}
                     icon={<Icon />}
+                    defaultOpen
                   >
                     {items.map((item) => (
                       <SidebarMenuSubItem key={item.href}>
@@ -291,27 +252,16 @@ export function AppSidebar() {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarCollapsibleGroup>
+          <SidebarCollapsibleGroup
+            label="カテゴリ"
+            hrefs={categories.map((item) => item.href)}
+            defaultOpen={false}
+          >
+            <SidebarGroupContent>
+              <NavLinkMenu items={categories} />
+            </SidebarGroupContent>
+          </SidebarCollapsibleGroup>
         </SidebarNavContent>
-        <SidebarFooter className="border-t border-border">
-          <SidebarNavSurface>
-            <SidebarMenu>
-              {FOOTER_NAV_ITEMS.map(
-                ({ href, label, icon: Icon, matchActive }) => (
-                  <SidebarMenuItem key={href}>
-                    <SidebarNavLink
-                      href={href}
-                      label={label}
-                      matchActive={matchActive}
-                    >
-                      <Icon />
-                      <span>{label}</span>
-                    </SidebarNavLink>
-                  </SidebarMenuItem>
-                )
-              )}
-            </SidebarMenu>
-          </SidebarNavSurface>
-        </SidebarFooter>
       </SidebarActiveProvider>
     </Sidebar>
   );

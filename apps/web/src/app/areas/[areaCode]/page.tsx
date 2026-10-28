@@ -13,8 +13,10 @@ import {
   BreadcrumbSeparator,
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
-import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
+import { AREA_DATABOOK_TEMPLATE, getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
+import { MUNICIPALITY_PREFECTURE_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
+import { municipalityPrefectureAreaLabel } from '@stats47/ranking';
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell } from '@/components/layout';
@@ -52,6 +54,14 @@ const AREA_DATABOOK_TOC_ITEMS = [...AREA_DATABOOK_TEMPLATE.sections]
     label: section.title,
     href: `#databook-${section.sectionKey}`,
   }));
+
+/** 特別区を持つのは東京都だけ (カードの見出しの「市区町村 / 市町村」) */
+const TOKYO_AREA_CODE = '13000';
+
+/** 県内の市町村ランキング (県名×市区町村ランキング・MUNI-PREF-RANKING-ROUTE-01) への導線。 */
+const MUNICIPALITY_PREFECTURE_RANKING_LINKS = [...MUNICIPALITY_PREFECTURE_RANKING_KEYS].map(
+  (rankingKey) => ({ rankingKey, label: getMetricConfig(rankingKey)?.title ?? rankingKey })
+);
 
 /** 県トップから掘り下げやすい主要テーマ。表示順はテーマ一覧の SSOT に従う。 */
 const AREA_FEATURED_THEMES = AREA_THEMES.slice(0, 8);
@@ -235,6 +245,19 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 trackingSurface="area_sidebar"
               />
               <RelatedAreas areaCode={areaCode} />
+              <RailLinksCard
+                title={`${profile.areaName}の${municipalityPrefectureAreaLabel(areaCode === TOKYO_AREA_CODE)}ランキング`}
+                items={MUNICIPALITY_PREFECTURE_RANKING_LINKS.map((link) => ({
+                  id: link.rankingKey,
+                  label: link.label,
+                  href: hrefFor('municipality-pref-ranking', {
+                    rankingKey: link.rankingKey,
+                    prefCode: areaCode,
+                  }),
+                }))}
+                layout="list"
+                trackingSurface="municipality_prefecture"
+              />
             </div>
           </div>
 

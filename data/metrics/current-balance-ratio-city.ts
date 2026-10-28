@@ -24,7 +24,7 @@ export const currentBalanceRatioCity: MetricConfig = {
   },
   "years": {
     "from": 2000,
-    "to": 2021,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "isActive": true,

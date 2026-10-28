@@ -3,17 +3,21 @@ import { cn } from "@stats47/components";
 import Link from "@/components/atoms/SiteLink";
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import {
-  ALL_THEMES_NAV_ITEM,
+  COMPARE_NAV_ITEM,
   PRIMARY_NAV_ITEMS,
+  SURVEY_NAV_ITEM,
 } from "@/components/organisms/AppSidebar/site-navigation";
 
 import { FooterSocialLinks } from "./FooterSocialLinks";
 
-/** 主要な入口 (ランキング・都道府県・テーマ・統計ブログ・商品) とサイトの案内 */
+/**
+ * 主要な入口 (ランキング・テーマ・地域・統計ブログ)、サイドバーに置かない入口 (調査・地域間比較)、商品とサイトの案内。
+ * 地域分析は従来どおりフッターに置かない (サイドバーだけ)。
+ */
 const FOOTER_LINKS = [
-  ...PRIMARY_NAV_ITEMS.filter((item) => item.key === "ranking" || item.key === "areas"),
-  ALL_THEMES_NAV_ITEM,
-  ...PRIMARY_NAV_ITEMS.filter((item) => item.key === "blog"),
+  ...PRIMARY_NAV_ITEMS.filter((item) => item.key !== "geo"),
+  SURVEY_NAV_ITEM,
+  COMPARE_NAV_ITEM,
   { href: "/products", label: "商品・書籍" },
   { href: "/about", label: "このサイトについて" },
   { href: "/privacy", label: "プライバシーポリシー" },

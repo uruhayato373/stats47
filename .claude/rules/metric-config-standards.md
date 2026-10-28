@@ -176,8 +176,12 @@ ESTAT-YEAR-AVAILABILITY-01)。原因は `years` 1 つに「e-Stat にある年 (
   R2 の値は毎月の `data-refresh.yml` で増える。
 - 台帳が無い・取得に失敗した・行が切れた・重複行がある条件の metric と `years: "all"` は同期の対象外。
 - **市区町村の値も台帳に載る** (行に `level: "city"`、現行の市区町村マスタにあるコードだけを数える)。
-  ただし years は県の値で決め、市区町村は LATEST.md の「市区町村」節で報告だけする (合併でコードが変わり、
+  県の値を持つ metric の years は県の値で決め、市区町村は LATEST.md の「市区町村」節で報告だけする (合併でコードが変わり、
   古い年ほど数が減るので「全市区町村の年」が定まらない)。
+- **県の値を持たない市区町村だけの metric** (財政指標など) は県の台帳が無いので、市区町村の台帳から
+  `resolveCityLedgerYears` で新しい年だけを足す: 設定の最新年より新しく、値のある市区町村が設定の最新年の
+  `CITY_LEDGER_MIN_COVERAGE` (9 割) 以上ある年。古い年は足さず、外しもしない (2026-10-28。それまでは対象外で、
+  財政力指数など 8 件が e-Stat より 1 年遅れていた。`.claude/todo/backlog.md` MUNI-YEAR-FRESHNESS-AUDIT-01)。
 - 台帳を取り直すと、控えの無い表と更新日が変わった表のメタ情報 (`data/estat/meta/<statsDataId>.json`、
   分類コードの全項目) も `fetch-estat-meta.mjs --full` で取り直す。
 

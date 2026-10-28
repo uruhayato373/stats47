@@ -10,3 +10,5 @@ export {
   findMlitDataDir,
   getMlitPrefectureTopojsonPath,
 } from "./utils/mlit-data-dir";
+
+export { deriveWardModeTopology } from "./utils/ward-mode-topology";

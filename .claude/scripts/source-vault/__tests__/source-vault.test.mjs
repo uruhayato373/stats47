@@ -94,6 +94,9 @@ test('source vault profiles follow the canonical private Drive hierarchy', async
       'prefecture-ranking-consumption':
         '参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/2020年版',
       'average-income-ranking': '参考文献/都道府県別平均年収ランキング/版不明',
+      'visual-japan-data': '参考文献/ビジュアルでわかる日本 データに隠された真実/2023年版',
+      'color-japan-map': '参考文献/統計から読み解く色分け日本地図/2022年版',
+      'tokyo-kakusa-data': '参考文献/データでわかる東京格差/2025年版',
     }
   );
   assert.deepEqual(config.profiles['prefecture-deviation'].bibliography, {

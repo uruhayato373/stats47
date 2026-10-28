@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-22T21:49:44.689Z",
+  "updated_at": "2026-10-28T03:30:54.750Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -569,6 +569,306 @@
         "checked_at": "2026-08-23",
         "result": "PASS (7 unique metric keys resolved)"
       }
+    },
+    {
+      "id": "EXP-007",
+      "title": "市区町村の加工済みデータ (組替済み時系列 CSV＋GeoJSON) を1商品だけ売る",
+      "hypothesis": "仕事で市区町村データを使う人は、最新境域でそろった1テーマの表と地図に ¥980〜2,980 を払う。製造品出荷額ページの1行 CTA と stats47 note で売れる。",
+      "target_metric": "cta_click_rate / product_units (sales-ledger)",
+      "target_delta": "6週で CTA クリック率2%以上かつ販売3件以上 → 2テーマ目。0件で停止",
+      "rubric": {
+        "impact": 2,
+        "effort": 1,
+        "learning": 3,
+        "certainty": 1,
+        "weighted": 1.8,
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
+        "note": "GSC「製造品出荷額 ランキング 市町村」CTR 46%・平均1.3位、該当ページ28日390クリック。データ販売の実売は0"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:14:01.490Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:14:01.490Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "MUNI-DATA-PRODUCT-PILOT-01",
+      "harm": {
+        "reader": "計画策定を受けたコンサルの担当者 (主)・企業の企画・学生・自治体職員",
+        "pain": "最新境域でそろった表と地図を作る手間",
+        "harm": "A＋M",
+        "payWhy": "経費で時間を買う。比べる相手は都市データパック (冊子 ¥24,200・CSV 版 ¥22〜66万)。¥1,000〜3,000 の帯は空いている",
+        "evidence": "GSC「製造品出荷額 ランキング 市町村」CTR 46%・1.3位・28日390クリック。note 売上2件が統計業務。データ単品の購入は未検証。ライセンス: N03 は CC BY 4.0、e-Stat は商用可 (出典と加工の明記)。境界と合併履歴は無料で出回るので、売り物は組替済みの時系列の値に絞る",
+        "payer": "事業者・学生 (個人の自腹ではなく経費・研究費)"
+      },
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-DATA-PRODUCT-PILOT-01",
+        "MUNI-DATA-LICENSE-CHECK-01",
+        "MUNI-DATA-PRODUCT-BUILD-01",
+        "MUNI-DATA-PRODUCT-SALE-01"
+      ]
+    },
+    {
+      "id": "EXP-008",
+      "title": "子育て世帯の住む市選び: 子育て系の市区町村ランキングを5〜10ページ足す",
+      "hypothesis": "近隣2〜4市で迷う子育て世帯の検索に、同じ物差しで並べた市区町村ランキングが上位で答えられ、市区町村ページ平均並みの PV を取れる。 市単位の検索は細い (子育てしやすい市 月56) ので、ページは「県名×市区町村ランキング」の形にする (子育てしやすい街ランキング 月2,320)。",
+      "target_metric": "gsc_impressions_28d / pv_per_page (該当ページ)",
+      "target_delta": "8週で表示3,000以上かつ1ページ PV 44.7以上 → 近隣市比較ページを自動生成で拡大",
+      "rubric": {
+        "impact": 3,
+        "effort": 2,
+        "learning": 2,
+        "certainty": 2,
+        "weighted": 2.4,
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
+        "note": "県版の子育てランキングは平均1.27位・CTR 40%。市区町村版の子育てページは未公開"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:14:01.492Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:14:01.492Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "MUNI-KOSODATE-RANKING-01",
+      "harm": {
+        "reader": "引っ越し・家の購入を考える子育て世帯",
+        "pain": "近隣のどの市が子育てしやすいか決められない",
+        "harm": "M・R・H",
+        "payWhy": "個人は払わない前提。AdSense と無料系の低摩擦導線で回収 (保険・不動産案件は出さない)",
+        "evidence": "Yahoo!知恵袋 約1,737件・サジェスト・県版ランキング1.27位 CTR 40%。市区町村版で同じ順位が取れるかは未検証。推定検索数 (月・Google): 住みやすい街ランキング 7,920、子育てしやすい街ランキング 2,320、子育てしやすい市 56",
+        "payer": "広告主 (AdSense)"
+      },
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-KOSODATE-RANKING-01",
+        "MUNI-KOSODATE-METRICS-01",
+        "MUNI-PREF-RANKING-ROUTE-01",
+        "MUNI-KOSODATE-PAGES-01"
+      ]
+    },
+    {
+      "id": "EXP-009",
+      "title": "老後に車なしで暮らせる町: 市区町村比較ページを3ページだけ試す",
+      "hypothesis": "免許返納後の暮らしを考える人に、食料品アクセス・病院・高齢化の比較が検索で読まれる。子育ての型をそのまま使えば追加の能動時間はほぼ要らない。",
+      "target_metric": "gsc_impressions_28d / pv_per_page",
+      "target_delta": "子育ての検証の型ができてから8週。判定基準は子育てと同じ",
+      "rubric": {
+        "impact": 1,
+        "effort": 2,
+        "learning": 2,
+        "certainty": 1,
+        "weighted": 1.5,
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
+        "note": "該当ページ未公開"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:14:01.493Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:14:01.493Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "MUNI-ROUGO-CARFREE-01",
+      "harm": {
+        "reader": "本人・親の老後の住まいを考える人",
+        "pain": "車がなくても買い物・病院に行ける町か分からない",
+        "harm": "H・M",
+        "payWhy": "個人は払わない前提。広告で回収",
+        "evidence": "推定検索数「老後 住みやすい街」月384 で需要は小さい。stats47 の GSC に悩みのクエリは出ていない",
+        "payer": "広告主 (AdSense)"
+      },
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-ROUGO-CARFREE-01"
+      ]
+    },
+    {
+      "id": "EXP-010",
+      "title": "移住先選び: 雪・車・求人の条件で市区町村を絞る比較を自動生成で試す",
+      "hypothesis": "移住を考える人が、条件で市区町村を絞る比較ページを検索で読む。",
+      "target_metric": "gsc_impressions_28d / pv_per_page",
+      "target_delta": "老後の3ページの後に、同じ基準で判定",
+      "rubric": {
+        "impact": 1,
+        "effort": 2,
+        "learning": 1,
+        "certainty": 0,
+        "weighted": 1.2,
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
+        "note": "該当ページ未公開"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:14:01.494Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:14:01.494Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "MUNI-IJU-COMPARE-01",
+      "harm": {
+        "reader": "地方移住を考える人",
+        "pain": "雪・車・仕事の条件で候補を絞れない",
+        "harm": "A・M",
+        "payWhy": "個人は払わない前提。広告で回収",
+        "evidence": "Yahoo!知恵袋 549件。stats47 の GSC はほぼ0。競合 (JOIN・田舎暮らしの本・自治体広報) が強い。推定検索数「移住 おすすめ」月4,320、移住相談 73,003件 (2025年・過去最多)",
+        "payer": "広告主 (AdSense)"
+      },
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-IJU-COMPARE-01"
+      ]
+    },
+    {
+      "id": "EXP-011",
+      "title": "KDP セレクトに登録して印税を35%から70%にする (1冊ずつ)",
+      "hypothesis": "Amazon.co.jp の70%は KDP セレクト登録が条件で、全冊未登録のため実売2件とも35%だった。登録すれば同じ売上で純収益が倍になり、Kindle Unlimited の既読ページも収入になる。",
+      "target_metric": "kdp_net_revenue / kenp_read",
+      "target_delta": "登録した本の90日の純収益と KENP を、未登録の本と比べる",
+      "rubric": {
+        "impact": 1,
+        "effort": 3,
+        "learning": 1,
+        "certainty": 3,
+        "weighted": 1.8,
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする。セレクト登録は1冊ずつオーナーが決める"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
+        "note": "KDP 実売2冊 (¥254・¥159)、全冊セレクト未登録"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:14:01.495Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:14:01.495Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "KDP-ROYALTY-RATE-CHECK-01",
+      "harm": {
+        "reader": "(運営の設定。読者の課題ではない)",
+        "pain": "—",
+        "harm": "対象外 (収益設定の是正)",
+        "payWhy": "—",
+        "evidence": "実売 ¥800→¥254・¥500→¥159 がちょうど35%。KDP ヘルプ G200634500 に条件の記載",
+        "payer": "Kindle 読者"
+      },
+      "source": "vault memos/stats47_悩み起点リサーチ.md",
+      "cards": [
+        "KDP-ROYALTY-RATE-CHECK-01"
+      ]
+    },
+    {
+      "id": "EXP-012",
+      "title": "1自治体と類似団体の現況データ一式 (計画策定の現況分析向け)",
+      "hypothesis": "計画策定を受けたコンサル・自治体の担当者は、対象自治体と類似団体の現況指標をそろえた一式に払う。EXP-007 の単テーマ商品が売れたら、同じ ETL で作る。",
+      "target_metric": "product_units / inquiries",
+      "target_delta": "EXP-007 の判定後に指標と判定日を決める",
+      "rubric": {
+        "impact": 2,
+        "effort": 0,
+        "learning": 2,
+        "certainty": 1,
+        "weighted": 1.3,
+        "verdict": "proposed",
+        "reason": "ディープリサーチで出た候補。EXP-007 の結果を見てから着手"
+      },
+      "baseline": {
+        "date": "2026-10-28",
+        "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+        "note": "未着手。計画策定の委託は1件 ¥300万〜3,000万で、データ整理・地図化は再委託先に出ている"
+      },
+      "status": "proposed",
+      "created_at": "2026-10-28T03:25:38.134Z",
+      "started_at": null,
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [],
+      "pending_user_actions": [],
+      "next_check_date": null,
+      "history": [
+        {
+          "date": "2026-10-28T03:25:38.134Z",
+          "action": "proposed"
+        }
+      ],
+      "card": "MUNI-PEER-DATASET-01",
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "harm": {
+        "reader": "計画策定を受けたコンサル・自治体の担当者",
+        "pain": "現況分析で対象自治体と類似団体の指標を集めそろえる手間",
+        "harm": "A＋M",
+        "payWhy": "業務の経費で作業時間を買う",
+        "evidence": "委託単価と再委託の構造はあり。データ一式の購入は未検証",
+        "payer": "事業者 (経費)"
+      },
+      "cards": [
+        "MUNI-PEER-DATASET-01"
+      ]
     }
   ]
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { to2DigitPrefCode } from "@stats47/area";
-import { fetchMunicipalityTopology } from "@stats47/gis/geoshape";
+import { fetchMunicipalityTopologyForWardMode } from "@stats47/gis/server";
 import { readRankingValuesByPrefectureFromR2 } from "@stats47/ranking/server";
 import { isOk, type TopoJSONTopology } from "@stats47/types";
 
@@ -27,7 +27,7 @@ export async function fetchMunicipalityDrilldownAction(
     const prefCodeShort = to2DigitPrefCode(prefCode);
 
     const [topology, valuesResult] = await Promise.all([
-      fetchMunicipalityTopology(prefCodeShort).catch(() => null),
+      fetchMunicipalityTopologyForWardMode(prefCodeShort, 'merged').catch(() => null),
       readRankingValuesByPrefectureFromR2(rankingKey, yearCode, prefCode),
     ]);
 

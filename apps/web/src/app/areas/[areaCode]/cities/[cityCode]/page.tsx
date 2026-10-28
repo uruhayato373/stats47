@@ -1,5 +1,8 @@
+import { Suspense } from "react";
+
 import { notFound } from "next/navigation";
 
+import { getMetricConfig } from "@stats47/data-configs";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildCityPageMeta } from "@stats47/ranking";
 
@@ -14,6 +17,7 @@ import {
 } from "@/features/area-profile";
 import { readCityDatabook } from "@/features/area-profile/server";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
+import { MunicipalityWardBreakdownSection } from "@/features/municipalities/server";
 
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
@@ -28,6 +32,9 @@ interface PageProps {
  * データブックは公開対象の市区町村にだけある。対象外 (政令指定都市の行政区・「特別区部」の集約行) は
  * R2 を読まずに索引から外す。
  */
+/** 行政区の内訳の地図は人口を塗るので、人口の指標と同じ色の方式を使う */
+const WARD_MAP_VISUALIZATION = getMetricConfig("total-population")!.visualization;
+
 async function readDatabook(areaCode: string, cityCode: string) {
   return UrlPolicy.city.isIndexable(areaCode, cityCode)
     ? readCityDatabook(areaCode, cityCode)
@@ -128,6 +135,18 @@ export default async function CityPage({ params }: PageProps) {
           <p role="status" className="border border-border bg-muted/20 p-5 text-sm text-muted-foreground">
             この地域の統計データは、市区町村の一覧から各市区町村のページでご覧ください。
           </p>
+        )}
+
+        {/* 政令指定都市だけ: 行政区の内訳 (WardMode split。MUNI-DESIGNATED-CITY-WARDS-01) */}
+        {databook?.wardBreakdown && (
+          <Suspense fallback={<div className="h-72 animate-pulse bg-muted/40" aria-hidden />}>
+            <MunicipalityWardBreakdownSection
+              breakdown={databook.wardBreakdown}
+              prefectureCode={areaCode}
+              cityShortName={context.cityShortName}
+              visualization={WARD_MAP_VISUALIZATION}
+            />
+          </Suspense>
         )}
 
         {databook && (

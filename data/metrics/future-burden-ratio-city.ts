@@ -24,7 +24,7 @@ export const futureBurdenRatioCity: MetricConfig = {
   },
   "years": {
     "from": 2011,
-    "to": 2021,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "isActive": true,

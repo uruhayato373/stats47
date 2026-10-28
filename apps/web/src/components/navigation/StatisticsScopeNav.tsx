@@ -117,7 +117,8 @@ export function StatisticsScopeNav({
   const items = ITEMS.map((item) => ({
     key: item.key,
     label: item.label,
-    href: (item.key !== current && hrefs?.[item.key]) || item.href,
+    // 現在地の項目も hrefs で上書きできる (/ranking の「47都道府県」は /themes ではなく /ranking 自身)
+    href: hrefs?.[item.key] || item.href,
     current: item.key === current,
   }));
 

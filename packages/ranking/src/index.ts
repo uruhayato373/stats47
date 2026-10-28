@@ -14,6 +14,7 @@ export {
 export * from "./municipalities/municipality-ai-content";
 export * from "./municipalities/municipality-names";
 export * from "./municipalities/municipality-page-meta";
+export * from "./municipalities/municipality-prefecture-ranking";
 export * from "./municipalities/build-city-databooks";
 // home/featured.json 派生の pure helper (R2 非依存)。exporter と apps/web の dev 補完が共用する
 export {

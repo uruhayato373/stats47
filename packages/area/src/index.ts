@@ -54,4 +54,7 @@ export {
   STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
   buildMunicipalityEntityPolicy,
   listPublishableMunicipalities,
+  listSpecialWardCodes,
+  resolveWardModeAreas,
 } from './municipalities';
+export type { WardMode, WardModeAreas } from './municipalities';

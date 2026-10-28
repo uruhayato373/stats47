@@ -236,17 +236,17 @@ export function RankingKeyPageClient({
               ページで唯一の <main> はルートレイアウトが持つため、ここは div (main 二重を避ける)。
             */}
             <div className="flex min-w-0 flex-col gap-4">
-                <RankingHeaderStats
-                    presentation={presentedItem.visualization}
-                    className="order-3"
-                    rankingValues={rankingValues}
-                    unit={displayInfo.unit}
-                    nationalAverageSeries={nationalAverageSeries}
-                    areaType={currentAreaType}
-                    yearName={latestYearName}
-                />
-
-                <div className="order-4 min-w-0">
+                {/* スタットと地図・表は余白なしで接する 1 つの格子 (カードの線が重なって 1 本になる)。
+                    ここから下の本文・導線とは従来どおり gap-4 で区切る。 */}
+                <div className="order-3 flex min-w-0 flex-col">
+                    <RankingHeaderStats
+                        presentation={presentedItem.visualization}
+                        rankingValues={rankingValues}
+                        unit={displayInfo.unit}
+                        nationalAverageSeries={nationalAverageSeries}
+                        areaType={currentAreaType}
+                        yearName={latestYearName}
+                    />
                     <RankingVisualizationSection
                         rankingItem={presentedItem}
                         activeRankingItem={presentedItem}

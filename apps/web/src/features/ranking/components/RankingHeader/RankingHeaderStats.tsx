@@ -74,7 +74,8 @@ export function RankingHeaderStats({
     <div className={cn("@container", className)}>
       <div
         className={cn(
-          "grid grid-cols-1 gap-4",
+          // カードの間は空けない。カードの線は 1px の ring なので、隣と重なって 1 本の線になる (テンプレートの格子と同じ。2026-10-28)
+          "grid grid-cols-1 gap-0",
           // 本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。
           showNationalAverage && "@min-[40rem]:grid-cols-2",
         )}

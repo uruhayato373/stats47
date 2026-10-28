@@ -7,6 +7,7 @@ import {
   expandYearSpec,
   formatYearList,
   inheritedExclusionYears,
+  resolveCityLedgerYears,
   resolveLedgerYears,
 } from '../estat-availability';
 import { rewriteYearsBlock, yearSpecOf } from '../../scripts/sync-estat-years';
@@ -144,6 +145,43 @@ describe('台帳から years を決める規則', () => {
     const removed = resolveLedgerYears({ ...base, removeMissing: true });
     expect(removed.years).toEqual([2019, 2021]);
     expect(removed.removed).toEqual([2020]);
+  });
+});
+
+describe('市区町村だけの metric の years を市区町村の台帳から決める規則', () => {
+  it('設定の最新年より新しく、値のある市区町村が 9 割以上ある年を足す (財政力指数の 2022 年度)', () => {
+    const resolved = resolveCityLedgerYears({
+      configYears: [2020, 2021],
+      ledgerYears: { '2020': 1718, '2021': 1718, '2022': 1718 },
+    });
+    expect(resolved.years).toEqual([2020, 2021, 2022]);
+    expect(resolved.added).toEqual([2022]);
+  });
+
+  it('値のある市区町村が大きく減った年は足さない (取りこぼしや途中の公表を配信しない)', () => {
+    const resolved = resolveCityLedgerYears({
+      configYears: [2021],
+      ledgerYears: { '2021': 1718, '2022': 900 },
+    });
+    expect(resolved.added).toEqual([]);
+  });
+
+  it('古い年は足さず、年を外すこともしない (合併で古い年ほど市区町村が少ない)', () => {
+    const resolved = resolveCityLedgerYears({
+      configYears: [2015, 2021],
+      ledgerYears: { '2010': 1718, '2015': 0, '2021': 1718 },
+    });
+    expect(resolved.years).toEqual([2015, 2021]);
+    expect(resolved.removed).toEqual([]);
+  });
+
+  it('除外に書いた年は足さない', () => {
+    const resolved = resolveCityLedgerYears({
+      configYears: [2021],
+      ledgerYears: { '2021': 1718, '2022': 1718 },
+      excludedYears: [2022],
+    });
+    expect(resolved.added).toEqual([]);
   });
 });
 

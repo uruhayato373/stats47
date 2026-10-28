@@ -52,6 +52,15 @@ R2 gis/mlit-ksj/{dataId}/{version}/  →  build-data-catalog.tsが実査 → 本
 R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 ```
 
+## 市区町村の境界 (政令指定都市の統合 / 分割・2026-10-28)
+
+市区町村の地図は R2 `gis/mlit/<版>/<県>/<県>_city.topojson` (国土数値情報 行政区域の分割版) だけを元にする。
+政令指定都市を市全体で見せる地図は `deriveWardModeTopology` が分割版から行政区をまとめて作り (東京の特別区はまとめない)、
+部品は `fetchMunicipalityTopologyForWardMode(県, "merged" | "split")` を呼ぶ。自前の統合版 `<県>_city_dc.topojson` は
+23 区を特別区部 13100 の 1 つにまとめていた (東京の地図で 23 区が灰色になった) ので使わない。地域と形の対応は
+`npm run audit:ward-mode-topology --workspace=@stats47/gis` (週次レビューの ranking-integrity) が 47 県で検査する。
+フラグの意味と使う場所の正典は `docs/01_技術設計/03_情報設計.md`「政令指定都市の表示」。
+
 ## 新規データセット追加手順 (手動 SQLite INSERT は禁止)
 
 1. `datasets.ts` の `GIS_DATASETS` にエントリ追加 (メタ + ranking 定義)
