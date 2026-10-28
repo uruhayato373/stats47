@@ -27,16 +27,16 @@ const buttonClasses = cva(
       },
       size: {
         default:
-          "cn-button-size-default h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "cn-button-size-default gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         xs: "cn-button-size-xs h-6 gap-1 px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "cn-button-size-sm h-7 gap-1 px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "cn-button-size-lg h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "cn-button-size-icon size-8",
+        lg: "cn-button-size-lg gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        icon: "cn-button-size-icon",
         "icon-xs":
           "cn-button-size-icon-xs size-6 [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
           "cn-button-size-icon-sm size-7",
-        "icon-lg": "cn-button-size-icon-lg size-9",
+        "icon-lg": "cn-button-size-icon-lg",
       },
     },
     defaultVariants: {
@@ -46,7 +46,7 @@ const buttonClasses = cva(
   }
 )
 // lyra:begin buttonClasses (scripts/ui-theme/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
-const buttonClassesLyra = cva("focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding text-xs font-medium focus-visible:ring-1 aria-invalid:ring-1 active:not-aria-[haspopup]:translate-y-px [&_svg:not([class*='size-'])]:size-4", {
+const buttonClassesLyra = cva("focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding font-medium focus-visible:ring-1 aria-invalid:ring-1 active:not-aria-[haspopup]:translate-y-px [&_svg:not([class*='size-'])]:size-4 text-sm", {
   variants: {
     variant: {
       default: "bg-primary text-primary-foreground hover:bg-primary/80",
@@ -56,14 +56,14 @@ const buttonClassesLyra = cva("focus-visible:border-ring focus-visible:ring-ring
       link: "text-primary underline-offset-4 hover:underline",
     },
     size: {
-      default: "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-      xs: "h-6 gap-1 rounded-none px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-      sm: "h-7 gap-1 rounded-none px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-      lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-      icon: "size-8",
-      "icon-xs": "size-6 rounded-none [&_svg:not([class*='size-'])]:size-3",
-      "icon-sm": "size-7 rounded-none",
-      "icon-lg": "size-9",
+      default: "gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 h-9",
+      xs: "h-6 gap-1 px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3 rounded-md",
+      sm: "h-7 gap-1 px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5 rounded-md text-xs",
+      lg: "gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 h-10",
+      icon: "size-9",
+      "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3 rounded-md",
+      "icon-sm": "size-7 rounded-md",
+      "icon-lg": "size-10",
     },
   },
   defaultVariants: { variant: "default", size: "default" },

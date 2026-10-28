@@ -845,6 +845,29 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       });
     }
   }
+  // ボタンの大きさ・文字・角丸は部品 (見本の値を書き込んだ button.tsx) が持つ。ページの側で ! を付けて上書きしない。
+  // 大きさを変えたいときは size (default / sm / xs / icon …) を選ぶ。押しやすさの min-h-* は上書きではないので対象外
+  for (const match of text.matchAll(/<Button\b|buttonVariants\(\{/g)) {
+    const tag = match[0].startsWith('<')
+      ? jsxOpeningTag(text, match.index)
+      : text.slice(match.index, text.indexOf('})', match.index) + 2);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(/className(?:=|:\s*)["'`]([^"'`]*)["'`]/g)) {
+      if (match[0].startsWith('<') && depthAt[prop.index] !== 0) continue;
+      const forced = prop[1]
+        .split(/\s+/)
+        .find((t) => /^(?:[\w-]+:)*(?:h-|size-|text-(?:xs|sm|base|lg|xl|\[)|rounded|px-|py-|leading-)[^\s]*!$/.test(t));
+      if (!forced) continue;
+      violations.push({
+        ruleId: 'button-no-forced-size',
+        message:
+          'Buttons keep the reference size (14px, h-36, rounded-8). Pick a size variant (default / sm / xs / icon) instead of forcing height, text, padding or radius with !.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: forced,
+      });
+    }
+  }
   // 数値タイルの値 (大きな等幅数字) は StatTile の書式 (STAT_VALUE_CLASS = 24px / 32px・600) だけで描く。
   // 2026-10-28 までは部品ごとに text-lg〜text-3xl・太さ 600〜700 が混在していた。
   if (file !== 'src/components/surface/StatTile.tsx') {

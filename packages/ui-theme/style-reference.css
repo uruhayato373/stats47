@@ -16,4 +16,43 @@
   .cn-card-description {
     @apply text-sm/relaxed;
   }
+
+  /* MARK: Button */
+  /* 見本のボタンは標準の大きさ 1 種類 (文字 14px / 20px・500、高さ 36px、左右 10px、角丸 8px)。lyra は文字 12px・高さ 32px・小さい大きさは角 0 */
+  .cn-button {
+    @apply text-sm;
+  }
+
+  /* 小・極小は見本に無い。表の見出しの並べ替えやページ送りなど詰めた場所で使い、文字 12px と高さは lyra のまま、角丸だけ見本の 8px にそろえる */
+  .cn-button-size-xs {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-sm {
+    @apply rounded-md text-xs;
+  }
+
+  .cn-button-size-default {
+    @apply h-9;
+  }
+
+  .cn-button-size-lg {
+    @apply h-10;
+  }
+
+  .cn-button-size-icon-xs {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-icon-sm {
+    @apply rounded-md;
+  }
+
+  .cn-button-size-icon {
+    @apply size-9;
+  }
+
+  .cn-button-size-icon-lg {
+    @apply size-10;
+  }
 }
