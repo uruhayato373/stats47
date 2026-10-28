@@ -31,6 +31,8 @@ import { cn } from "../../packages/components/src/lib/cn.ts";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const SOURCE_CSS = join(ROOT, "packages/ui-theme/style-lyra.css");
+/** 見本サイトに合わせて lyra の値を置き換える差分 (正本 style-lyra.css は手で直さないので別に持つ) */
+export const REFERENCE_CSS = join(ROOT, "packages/ui-theme/style-reference.css");
 
 /** cn-* を探すソースの場所。apps/web/tailwind.config.ts の content と同じ 3 か所 */
 export const SOURCE_DIRS = ["apps/web/src", "packages/components/src", "packages/visualization/src"];
@@ -77,9 +79,9 @@ export function listSourceFiles(root = ROOT, dirs = SOURCE_DIRS) {
  * 正本は `.style-lyra {` の中に 2 スペース字下げの `.cn-x {` … `}` が並び、本文は `@apply …;` だけを持つ。
  * それ以外の形が来たら黙って落とさず例外にする (テンプレートの取り直しで形が変わったことに気づくため)。
  */
-export function parseLyra(css) {
+export function parseLyra(css, root = ".style-lyra") {
   const lines = css.split("\n");
-  if (lines[0] !== ".style-lyra {") throw new Error("style-lyra.css の 1 行目が `.style-lyra {` ではない");
+  if (lines[0] !== `${root} {`) throw new Error(`style-lyra.css の 1 行目が \`${root} {\` ではない`);
   const rules = new Map();
   let i = 1;
   let closed = false;
@@ -454,8 +456,24 @@ export function inlineSource(text, rules) {
   return { output: applyEdits(text, edits), dynamic, uncovered };
 }
 
+/**
+ * lyra の規則に見本の差分を重ねる。差分は lyra にある規則だけに書け、同じ性質は tailwind-merge で置き換わる
+ * (例: lyra の text-xs/relaxed → 見本の text-sm/relaxed)。
+ */
+export function mergeReference(rules, reference) {
+  const merged = new Map(rules);
+  for (const [name, classes] of reference) {
+    if (!merged.has(name)) throw new Error(`style-reference.css: 規則 ${name} が style-lyra.css に無い`);
+    merged.set(name, cn(merged.get(name), classes));
+  }
+  return merged;
+}
+
 export function run({ write }) {
-  const rules = parseLyra(readFileSync(SOURCE_CSS, "utf8"));
+  const rules = mergeReference(
+    parseLyra(readFileSync(SOURCE_CSS, "utf8")),
+    parseLyra(readFileSync(REFERENCE_CSS, "utf8"), ".style-reference")
+  );
   const changed = [];
   const dynamic = [];
   const uncovered = [];

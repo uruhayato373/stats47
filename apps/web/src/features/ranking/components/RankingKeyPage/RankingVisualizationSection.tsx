@@ -71,9 +71,10 @@ export function RankingVisualizationSection({
             title={`${unitLabel}別の地図と表`}
             icon={<MapIcon />}
             action={headerActions}
-            footer={cardFooter}
-            // 地図を枠の端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と出典の上線に接する
-            className="gap-0! pb-0!"
+            // 補足 (集計条件・最終更新・出典) はパネルの中の下端に置く。地図・表との間は線 1 本で区切る
+            footer={<div className="-mx-4 space-y-1.5 border-t px-4 pt-3">{cardFooter}</div>}
+            // 地図を枠の端まで描く: 横は px-0!、上は Card の gap-4 を外して見出しの下線に接する
+            className="gap-0!"
             contentClassName="px-0!"
         >
             {/* 地図・表とも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。

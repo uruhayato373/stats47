@@ -8,7 +8,6 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@stats47/components/atoms/ui/card';
@@ -24,24 +23,23 @@ export interface ChartPanelProps {
   footer?: ReactNode;
   className?: string;
   contentClassName?: string;
-  headerClassName?: string;
-  titleClassName?: string;
-  footerClassName?: string;
 }
 
 /**
- * タイトル付きチャート/地図の枠。テンプレートの Card 構成
- * (CardHeader / CardTitle / CardDescription / CardAction / CardContent / CardFooter) で描く。
+ * タイトル付きチャート/地図の枠 (部品の種類「パネル」)。テンプレートの Card 構成
+ * (CardHeader / CardTitle / CardDescription / CardAction / CardContent) で描く。
  * 見出しは h3 として CardTitle の中に置き、領域は見出し・説明で命名する。
- * 見出し行は RailCard / SectionCard と同じ型 (アイコン + font-medium + 下線) にそろえる。
  *
- * 見出し行の寸法は SurfaceCard (右レール・節カード) と同じ: 上 16px (Card の py-4)・下 12px + 下線、
- * 題は text-base font-medium leading-6、操作は同じ行の右端、本文は下線から 16px (Card の gap-4)。
- * lyra の .cn-card-header ([.border-b]:pb-4) と .cn-card-title (text-sm) はレイヤーの外にあり
- * 素のクラスに勝つので、テンプレートと同じく ! を付けて上書きする。
+ * 寸法は Card 部品が見本 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」) の値で持つ:
+ * 見出し行は上 16px (Card の py-4)・下 16px + 下線、題は 16px / 22px・500、本文は 14px で下線から 16px。
+ * SurfaceCard (RailCard・SectionCard) も同じ寸法。ページの側から見出し・余白・補足の位置を変える口は持たない
+ * (`design-system:check` の panel-* 規則)。
+ *
+ * 補足 (出典・注記・関連リンク) は下端の帯 (CardFooter) にせず、本文の後の 1 行としてパネルの中に置く。
  */
-const HEADER_CLASS_NAME = 'border-b pb-3!';
-const TITLE_CLASS_NAME = 'flex min-w-0 items-center gap-2 text-base! leading-6! font-medium';
+const TITLE_CLASS_NAME = 'flex min-w-0 items-center gap-2';
+const META_CLASS_NAME = 'flex flex-col px-4 text-xs text-muted-foreground';
+
 export function ChartPanel({
   id,
   title,
@@ -52,9 +50,6 @@ export function ChartPanel({
   footer,
   className,
   contentClassName,
-  headerClassName,
-  titleClassName,
-  footerClassName,
 }: ChartPanelProps) {
   const hasHeader = title || description || action || icon;
   const generatedId = useId();
@@ -72,11 +67,9 @@ export function ChartPanel({
       aria-describedby={descriptionId}
     >
       {hasHeader && (
-        <CardHeader className={cn(HEADER_CLASS_NAME, headerClassName)}>
+        <CardHeader className="border-b">
           {(icon || title) && (
-            <CardTitle
-              className={cn(TITLE_CLASS_NAME, titleClassName)}
-            >
+            <CardTitle className={TITLE_CLASS_NAME}>
               {icon && (
                 <span
                   aria-hidden="true"
@@ -106,14 +99,9 @@ export function ChartPanel({
       )}
       <CardContent className={contentClassName}>{children}</CardContent>
       {footer && (
-        <CardFooter
-          className={cn(
-            'flex-col items-stretch text-xs text-muted-foreground',
-            footerClassName
-          )}
-        >
+        <div data-slot="panel-meta" className={META_CLASS_NAME}>
           {footer}
-        </CardFooter>
+        </div>
       )}
     </Card>
   );

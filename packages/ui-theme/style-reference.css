@@ -1,0 +1,18 @@
+.style-reference {
+  /* 見本サイト (demos.shadcndashboard.dev) とテンプレートの lyra が食い違う値だけを書く (正は見本。docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」)。 */
+  /* 形は style-lyra.css と同じ。npm run ui-theme:lyra が lyra の後に重ね (tailwind-merge で同じ性質を置き換え)、部品へ書き込む。 */
+  /* 根拠: assets/design-reference/shadcndashboard/2026-10-28/measurements の data-slot ごとの実測 (1440px)。 */
+
+  /* MARK: Card */
+  .cn-card {
+    @apply text-sm/relaxed;
+  }
+
+  .cn-card-title {
+    @apply text-base leading-5.5;
+  }
+
+  .cn-card-description {
+    @apply text-sm/relaxed;
+  }
+}

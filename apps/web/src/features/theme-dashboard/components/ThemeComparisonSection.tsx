@@ -183,8 +183,6 @@ export function ThemeComparisonSection({
                 <ChartPanel
                   id={`theme-${themeConfig.themeKey}-map`}
                   title={`${currentName}の分布`}
-                  headerClassName="px-3 py-2"
-                  footerClassName="px-3 py-2"
                   contentClassName="p-0"
                   footer={
                     <div className="flex flex-wrap justify-between gap-2">
@@ -226,7 +224,6 @@ export function ThemeComparisonSection({
                 <ChartPanel
                   id={`theme-${themeConfig.themeKey}-ranking`}
                   title="都道府県別の値"
-                  headerClassName="px-3 py-2"
                   contentClassName="px-2 py-1"
                 >
                   {selectedPrefectureCode && (

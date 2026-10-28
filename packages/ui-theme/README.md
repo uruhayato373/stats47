@@ -10,6 +10,7 @@
 | `base.css` | 入口。`shadcn-tailwind.css` と tw-animate を読み、`style-lyra` の variant を定義する | — |
 | `shadcn-tailwind.css` | `data-open:` などの追加の書き方とアコーディオンの動き | npm `shadcn@4` の `dist/tailwind.css` (MIT) |
 | `style-lyra.css` | Base UI 部品の `cn-*` クラスの見た目 (正本・手で直さない)。**CSS としては読まない**。規則の中身を部品の className に書き込む (`npm run ui-theme:lyra` = `scripts/ui-theme/inline-lyra.mjs`。`npm run ui-theme:lyra:test` が書き込み漏れ・`cn-*` の組み立てを検査し、`.husky/pre-commit` と PR CI の static-gates で走る) | テンプレート `app/css/styles/style-lyra.css` |
+| `style-reference.css` | 見本サイト (demos.shadcndashboard.dev) とテンプレートの lyra が食い違う値だけの差分 (正は見本。仕様は `docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)。形は `style-lyra.css` と同じで、`npm run ui-theme:lyra` が lyra の後に重ねて (tailwind-merge で同じ性質を置き換え) 部品へ書き込む。lyra に無い規則への差分は止める。2026-10-28: パネル (`cn-card` の文字 14px・`cn-card-title` 16px / 22px・`cn-card-description` 14px) | 自作 (見本の実測) |
 | `tokens.css` | 色・角丸のトークン (テンプレートの oklch の値そのまま) | テンプレート `app/globals.css` |
 | `tokens-hsl.css` | `tokens.css` と同じ色の HSL 3 値 (生成物・手で直さない) | `build-hsl-tokens.mjs` |
 

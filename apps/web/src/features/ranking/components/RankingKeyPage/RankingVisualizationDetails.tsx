@@ -3,7 +3,7 @@ interface RankingVisualizationDetailsProps {
   updatedAt?: string | null;
 }
 
-/** 地図・テーブルの双方に共通する集計条件と鮮度情報。 */
+/** 地図・テーブルの双方に共通する集計条件と鮮度情報。パネルの補足 (ChartPanel の footer) の中に置く。 */
 export function RankingVisualizationDetails({
   description,
   updatedAt,
@@ -13,7 +13,7 @@ export function RankingVisualizationDetails({
   return (
     <section
       aria-label="このデータについて"
-      className="mt-3 space-y-1 text-sm leading-relaxed text-muted-foreground"
+      className="space-y-1 leading-relaxed"
     >
       {description && <p>{description}</p>}
       {updatedAt && <p>最終更新 {updatedAt}</p>}

@@ -111,7 +111,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | インポートパス | 用途 |
 |---|---|---|
-| `ChartPanel` | `@/components/charts/ChartPanel` | チャートを囲む見出し付きの枠（タイトル・説明・出典の footer）。テンプレートの `Card` / `CardHeader` / `CardContent` で組み立てる |
+| `ChartPanel` | `@/components/charts/ChartPanel` | チャートを囲む見出し付きの枠（タイトル・説明・出典の補足 1 行）。見出し・文字の寸法は Card 部品が持ち、ページの側で変えない。テンプレートの `Card` / `CardHeader` / `CardContent` で組み立てる |
 | `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` | `@/components/charts/ChartState`（`ChartLoadingCard` は `@/components/stat-charts` からも再 export） | 読み込み中・空・エラーの状態表示の唯一の置き場。テンプレートの `Skeleton` / `Empty` / `Card` をそのまま組み立てる。feature 側に別名のラッパーを作らない |
 | `DashboardComponentRenderer` | `@/components/stat-charts/components/DashboardComponentRenderer` | componentTypeディスパッチャー |
 
@@ -156,7 +156,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | 役割 | header の形 | 使い分け |
 |---|---|---|---|
-| `ChartPanel` | **タイトル付きチャート/マップ枠** | `title`+`description`+`icon`+`action`（border-b 付き）/ bordered footer | チャート・地図など「見出し付きパネル」 |
+| `ChartPanel` | **タイトル付きチャート/マップ枠** | `title`+`description`+`icon`+`action`（border-b 付き）/ 補足はパネルの中の下端 1 行 (`footer`。帯にしない) | チャート・地図など「見出し付きパネル」 |
 | `ChartCard` | **compact KPI カード** | `label`+`value` を1行 baseline（border なし） | KPI（指標名+大きな数値）+ ミニチャート |
 | `KpiCard` | **KPI + badge/trend** | KPI 値 + バッジ/トレンド | 増減トレンド付き KPI |
 

@@ -253,12 +253,16 @@ export function RankingKeyPageClient({
                         rankingValues={rankingValues}
                         areaType={currentAreaType}
                         headerActions={headerActions}
-                        cardFooter={cardFooter}
+                        cardFooter={
+                            <>
+                                <RankingVisualizationDetails
+                                    description={definitionDetail}
+                                    updatedAt={formattedUpdated}
+                                />
+                                {cardFooter}
+                            </>
+                        }
                         isPending={isPending}
-                    />
-                    <RankingVisualizationDetails
-                        description={definitionDetail}
-                        updatedAt={formattedUpdated}
                     />
                 </div>
 

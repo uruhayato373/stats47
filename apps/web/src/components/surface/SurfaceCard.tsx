@@ -28,11 +28,11 @@ import Link from "@/components/atoms/SiteLink";
  * className だけで決まる。線は ring ではなく border (CARD_SURFACE_CLASS) で引く。カード同士を接ぐ節
  * (PageSections) は間に点線の帯を挟むので、線が二重に重ならない。
  *
- * 文字の大きさと行の高さは lyra の .cn-card と同じ text-xs/relaxed (これまで実際に効いていた値) にする。
+ * 文字の大きさと行の高さは Card 部品 (.cn-card) と同じ text-sm/relaxed (見本の 14px / 22.75px。2026-10-28 に 12px から変更)。
  * <section> で描く SurfaceSection / RailCard / SectionCard は region の役割と aria-label を保つ。
  */
 const CARD_LAYOUT_CLASS =
-  "group/card flex flex-col gap-4 overflow-hidden py-4 text-xs/relaxed";
+  "group/card flex flex-col gap-4 overflow-hidden py-4 text-sm/relaxed";
 
 /** カード本文の横余白 (テンプレートの CardContent の px-4)。見出しの無いカードは外枠に付ける。 */
 const CARD_CONTENT_INSET_CLASS = "px-4";
@@ -191,7 +191,6 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
   children?: ReactNode;
   headerAction?: ReactNode;
   bodyClassName?: string;
-  titleClassName?: string;
   /**
    * 本文を折りたたむ (狭幅で本文下へ積まれるレール用)。テンプレートの Collapsible (Base UI) で描き、
    * 閉じているときは見出し行の高さだけになる。本文は DOM に残す (keepMounted。リンクをクロールさせるため)。
@@ -204,8 +203,8 @@ interface HeaderedSurfaceCardProps extends Omit<ComponentPropsWithoutRef<"sectio
 }
 
 /*
- * 見出し行と本文の余白 (2026-10-28 3 巡目。ChartPanel と同じ値):
- * - 見出し行は px-4 pt-4 pb-3 + 下罫線。題は text-base (24px の行) なので、見出し行は約 53px
+ * 見出し行と本文の余白 (見本の実測。ChartPanel と同じ値。docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」):
+ * - 見出し行は px-4 pt-4 pb-4 + 下罫線。題は CardTitle の 16px / 22px・500 なので、見出し行は約 55px
  * - 操作 (CardAction) は常に見出しと同じ行の右端に置く (狭い幅でも下の行へ折り返さない)
  * - 本文は罫線から 16px (pt-4) で始め、下端も 16px (pb-4) で閉じる。レールのリンク行は自分で上下 6px
  *   (py-1.5) を持つので、本文の上下を 10px にして文字までを 16px に揃える
@@ -216,11 +215,11 @@ const BODY_PADDING_CLASS = {
   section: "pt-4 pb-4",
 } as const;
 
-/** 見出し行。lyra の .cn-card-header は下罫線付きで pb-4 をレイヤーの外で当てるので、pb-3 は ! で勝たせる */
-const HEADER_CLASS = "items-center px-4 pt-4";
+/** 見出し行。下罫線付きの下の余白 16px は CardHeader の lyra ([.border-b]:pb-4) が持つ */
+const HEADER_CLASS = "items-center px-4 pt-4 pb-4";
 
-/** 題の文字 (ChartPanel と同じ text-base font-medium の 24px の行)。 */
-const HEADING_TEXT_CLASS = "text-base font-medium leading-6 text-foreground";
+/** 題の文字の色 (大きさ・行の高さ・太さは CardTitle が持つ。ここで変えない)。 */
+const HEADING_TEXT_CLASS = "font-medium text-foreground";
 
 /**
  * 見出しの文字。日本語は文節で折り返し (word-break: auto-phrase)、行の長さを揃える (text-balance)。
@@ -239,7 +238,6 @@ function HeaderedSurfaceCard({
   headerAction,
   className,
   bodyClassName,
-  titleClassName,
   collapsible = false,
   defaultOpen = false,
   headingAs: Heading = "h3",
@@ -259,7 +257,6 @@ function HeaderedSurfaceCard({
     "min-w-0",
     HEADING_TEXT_CLASS,
     variant === "rail" ? "truncate" : HEADING_WRAP_CLASS,
-    titleClassName,
   );
   // 本文は CardContent と同じ data-slot の要素で描く (.cn-card-content の px-4 に呼び出し側の px-0 が負けないように)
   const body = hasBody ? (
@@ -288,8 +285,6 @@ function HeaderedSurfaceCard({
         <CardHeader
           className={cn(
             HEADER_CLASS,
-            // 閉じているときは見出し行だけなので上下を 16px に揃える。開くと本文の上の罫線までが 12px
-            "pb-4 group-data-open/collapsible:pb-3",
             "relative has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-ring",
           )}
         >
@@ -323,7 +318,7 @@ function HeaderedSurfaceCard({
   return (
     <CardSection className={cn(hasHeader && "gap-0 py-0", className)} {...props}>
       {hasHeader && (
-        <CardHeader className={cn(HEADER_CLASS, hasBody ? "border-b !pb-3" : "pb-4")}>
+        <CardHeader className={cn(HEADER_CLASS, hasBody && "border-b")}>
           <CardTitle className="flex min-w-0 items-center gap-2">
             {iconSlot}
             {title && <Heading className={headingClassName}>{title}</Heading>}
@@ -342,7 +337,6 @@ interface RailCardProps extends Omit<ComponentPropsWithoutRef<"section">, "title
   children?: ReactNode;
   headerAction?: ReactNode;
   bodyClassName?: string;
-  titleClassName?: string;
   collapsible?: boolean;
   defaultOpen?: boolean;
   headingAs?: "h2" | "h3";

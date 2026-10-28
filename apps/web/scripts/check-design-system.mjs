@@ -733,6 +733,85 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
   });
 }
 
+// --- パネル (ChartPanel・SurfaceCard 系) の見出し・文字・補足はページの側で変えない ---
+//
+// 見本の実測から決めた寸法 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」) は
+// Card 部品 (packages/components/src/atoms/ui/card.tsx) と SurfaceCard が持つ。2026-10-28 まではページの側が
+// 題名の大きさ・見出しの余白を上書きし、同じパネルに 14px と 16px、高さ 37px と 53px の見出しが混在していた。
+// - panel-no-text-size-override: パネルの className・contentClassName・bodyClassName に文字の大きさ・行の高さを書かない
+// - panel-parts-only-in-panel-components: CardHeader・CardTitle・CardFooter を組み立てるのはパネルの実装だけ
+//   (補足は CardFooter の帯にせず、ChartPanel の footer でパネルの中の 1 行にする)
+const PANEL_COMPONENTS = ['ChartPanel', 'SurfaceCard', 'SurfaceSection', 'SectionCard', 'RailCard', 'ArticleCard'];
+const PANEL_IMPLEMENTATION_FILES = new Set([
+  'src/components/charts/ChartPanel.tsx',
+  'src/components/charts/ChartState.tsx',
+  'src/components/surface/SurfaceCard.tsx',
+]);
+const PANEL_CLASS_PROPS = /\b(className|contentClassName|bodyClassName)=(?:"([^"]*)"|\{\s*["'`]([^"'`]*)["'`]\s*\})/g;
+const PANEL_TEXT_SIZE = /(?<![\w-])(?:[\w-]+:)*(?:text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(?:\/[\w.]+)?|leading-[\w.[\]-]+)!?(?![\w-])/;
+const PANEL_TAG = new RegExp(`<(${PANEL_COMPONENTS.join('|')})\\b`, 'g');
+
+/** text[start] から JSX の開始タグの終わり (> または />) までを返す。{…} の中の > は数えない */
+function jsxOpeningTag(text, start) {
+  let depth = 0;
+  for (let i = start; i < text.length; i += 1) {
+    const ch = text[i];
+    if (ch === '{') depth += 1;
+    else if (ch === '}') depth -= 1;
+    else if (ch === '>' && depth === 0) return text.slice(start, i + 1);
+  }
+  return text.slice(start);
+}
+
+/** 文字ごとの {…} の深さ (0 = 開始タグの属性の並び) */
+function topLevelMask(tag) {
+  const depths = [];
+  let depth = 0;
+  for (const ch of tag) {
+    if (ch === '}') depth -= 1;
+    depths.push(depth);
+    if (ch === '{') depth += 1;
+  }
+  return depths;
+}
+
+for (const file of scanRoots.flatMap((root) => listFiles(root))) {
+  if (!file.endsWith('.tsx')) continue;
+  const text = readFileSync(path.join(cwd, file), 'utf8');
+  const lineOf = (index) => text.slice(0, index).split('\n').length;
+  if (!PANEL_IMPLEMENTATION_FILES.has(file)) {
+    for (const match of text.matchAll(/<(CardHeader|CardTitle|CardFooter)\b/g)) {
+      violations.push({
+        ruleId: 'panel-parts-only-in-panel-components',
+        message:
+          'Build panels with ChartPanel / RailCard / SectionCard. Card headers and footers are assembled only in the panel components; put source/updated notes in the ChartPanel footer (one line inside the panel).',
+        file,
+        lineNumber: lineOf(match.index),
+        line: match[0],
+      });
+    }
+  }
+  for (const match of text.matchAll(PANEL_TAG)) {
+    const tag = jsxOpeningTag(text, match.index);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
+      // action={<Link className=…>} のような属性の中の JSX はパネル自身の属性ではない
+      if (depthAt[prop.index] !== 0) continue;
+      const value = prop[2] ?? prop[3] ?? '';
+      const size = value.match(PANEL_TEXT_SIZE);
+      if (!size) continue;
+      violations.push({
+        ruleId: 'panel-no-text-size-override',
+        message:
+          'Panels keep the reference sizes (body 14px/relaxed, title 16px/22px). Do not set text size or line height on the panel; set it on the specific child element instead.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: `<${match[1]} ${prop[1]}="${size[0]}">`,
+      });
+    }
+  }
+}
+
 if (violations.length > 0) {
   console.error('Design system check failed:');
   for (const violation of violations) {

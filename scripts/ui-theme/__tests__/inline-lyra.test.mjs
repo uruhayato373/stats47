@@ -14,7 +14,17 @@ import { join } from "node:path";
 import test from "node:test";
 
 import { cn } from "../../../packages/components/src/lib/cn.ts";
-import { ROOT, SOURCE_CSS, UNUSED_ATOMS, inlineSource, losesToLyra, parseLyra, run } from "../inline-lyra.mjs";
+import {
+  REFERENCE_CSS,
+  ROOT,
+  SOURCE_CSS,
+  UNUSED_ATOMS,
+  inlineSource,
+  losesToLyra,
+  mergeReference,
+  parseLyra,
+  run,
+} from "../inline-lyra.mjs";
 
 const RULES = parseLyra(readFileSync(SOURCE_CSS, "utf8"));
 const FIXTURE_RULES = new Map([["cn-a", "rounded-none text-xs"]]);
@@ -28,11 +38,23 @@ test("ソースの cn-* を含む文字列は、すべて lyra の規則が書�
 
 test("走査が空振りしていない (部品の写しが cn-card などを持ち、lyra の値が入っている)", () => {
   const card = readFileSync(join(ROOT, "packages/components/src/atoms/ui/card.tsx"), "utf8");
-  assert.match(card, /\/\* lyra \*\/ "[^"]*\btext-xs\/relaxed\b/);
+  // lyra の値 (ring-1) と、見本の差分 (style-reference.css の text-sm/relaxed) の両方が入っている
+  assert.match(card, /\/\* lyra \*\/ "[^"]*\bring-1\b[^"]*\btext-sm\/relaxed\b/);
   const button = readFileSync(join(ROOT, "packages/components/src/atoms/ui/button.tsx"), "utf8");
   assert.match(button, /const buttonClassesLyra = cva\(/);
   assert.ok(RULES.has("cn-card"));
   assert.ok(RULES.has("cn-input"));
+});
+
+test("見本の差分は lyra の同じ性質を置き換え、lyra に無い規則への差分は止める", () => {
+  const reference = parseLyra(readFileSync(REFERENCE_CSS, "utf8"), ".style-reference");
+  const merged = mergeReference(RULES, reference);
+  // パネルの文字は見本の 14px / 22.75px (lyra は 12px)。lyra の他の値 (py-4 ring-1) は残る
+  assert.match(merged.get("cn-card"), /\btext-sm\/relaxed\b/);
+  assert.doesNotMatch(merged.get("cn-card"), /\btext-xs\/relaxed\b/);
+  assert.match(merged.get("cn-card"), /\bpy-4\b.*\bring-1\b/);
+  assert.match(merged.get("cn-card-title"), /\btext-base leading-5\.5\b/);
+  assert.throws(() => mergeReference(RULES, new Map([["cn-missing", "text-sm"]])), /cn-missing/);
 });
 
 test("cn(…) は lyra を className の後ろに足すので、lyra が呼び出し側に勝ち、! だけが lyra に勝つ", () => {
