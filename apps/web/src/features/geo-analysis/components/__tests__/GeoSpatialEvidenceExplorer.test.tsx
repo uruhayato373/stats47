@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import { buildFloodPrefDetail, type GeoAnalysisPrefDetail } from '@stats47/gis';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/lib/analytics/events', () => ({
@@ -180,12 +181,9 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     fireEvent.change(screen.getByRole('combobox', { name: '県' }), {
       target: { value: '28' },
     });
-    fireEvent.mouseDown(
-      screen.getByRole('tab', { name: '浸水包含の判定結果' }),
-      {
-        button: 0,
-        ctrlKey: false,
-      }
+    // Base UI の Tabs は click で切り替わる (Radix の mousedown ではない) ので user-event で操作する
+    await userEvent.setup().click(
+      screen.getByRole('tab', { name: '浸水包含の判定結果' })
     );
     expect(window.location.pathname).toBe('/geo/population-flood-risk');
     expect(new URLSearchParams(window.location.search).get('pref')).toBe('28');
@@ -228,12 +226,9 @@ describe('Geo表示境界の県・段階・証跡版', () => {
       />
     );
     await screen.findByTestId('map');
-    fireEvent.mouseDown(
-      screen.getByRole('tab', { name: '浸水包含の判定結果' }),
-      {
-        button: 0,
-        ctrlKey: false,
-      }
+    // Base UI の Tabs は click で切り替わる (Radix の mousedown ではない) ので user-event で操作する
+    await userEvent.setup().click(
+      screen.getByRole('tab', { name: '浸水包含の判定結果' })
     );
     expect(
       screen.getByRole('tab', { name: '浸水包含の判定結果' })

@@ -1,28 +1,55 @@
-"use client"
-
-import * as SliderPrimitive from "@radix-ui/react-slider"
-import * as React from "react"
+// テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の slider.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
+// 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
+// lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
+import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
 import { cn } from "../../lib/cn"
 
-const Slider = React.forwardRef<
-  React.ElementRef<typeof SliderPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <SliderPrimitive.Root
-    ref={ref}
-    className={cn(
-      "relative flex w-full touch-none select-none items-center",
-      className
-    )}
-    {...props}
-  >
-    <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-      <SliderPrimitive.Range className="absolute h-full bg-primary" />
-    </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
-  </SliderPrimitive.Root>
-))
-Slider.displayName = SliderPrimitive.Root.displayName
+function Slider({
+  className,
+  defaultValue,
+  value,
+  min = 0,
+  max = 100,
+  ...props
+}: SliderPrimitive.Root.Props) {
+  const _values = Array.isArray(value)
+    ? value
+    : Array.isArray(defaultValue)
+      ? defaultValue
+      : [min, max]
+
+  return (
+    <SliderPrimitive.Root
+      className={cn("cn-slider data-horizontal:w-full data-vertical:h-full", className, /* lyra */ "data-vertical:min-h-40")}
+      data-slot="slider"
+      defaultValue={defaultValue}
+      value={value}
+      min={min}
+      max={max}
+      thumbAlignment="edge"
+      {...props}
+    >
+      <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col">
+        <SliderPrimitive.Track
+          data-slot="slider-track"
+          className="cn-slider-track relative grow overflow-hidden select-none bg-muted rounded-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+        >
+          <SliderPrimitive.Indicator
+            data-slot="slider-range"
+            className="cn-slider-range select-none data-horizontal:h-full data-vertical:w-full bg-primary"
+          />
+        </SliderPrimitive.Track>
+        {Array.from({ length: _values.length }, (_, index) => (
+          <SliderPrimitive.Thumb
+            data-slot="slider-thumb"
+            key={index}
+            className="cn-slider-thumb block shrink-0 select-none disabled:pointer-events-none disabled:opacity-50 border-ring ring-ring/50 relative size-3 rounded-none border bg-white transition-[color,box-shadow] after:absolute after:-inset-2 hover:ring-1 focus-visible:ring-1 focus-visible:outline-hidden active:ring-1"
+          />
+        ))}
+      </SliderPrimitive.Control>
+    </SliderPrimitive.Root>
+  )
+}
 
 export { Slider }

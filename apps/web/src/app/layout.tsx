@@ -9,7 +9,6 @@
  * - メタデータ設定（SEO、OGP、Twitter Cards）
  * - テーマプロバイダー（ダークモード対応）
  * - セッションプロバイダー（NextAuth）
- * - トースト通知（Sonner）
  *
  * アーキテクチャ:
  * - Next.js 15 App Router のレイアウト機能を使用
@@ -17,22 +16,31 @@
  * - フォント最適化（next/font/google）
  * - メタデータはNext.jsのMetadata APIを使用
  *
- * レイアウト構造:
- * - Header: 全ページ共通のヘッダー
- * - SidebarVisibility: サイドバーナビゲーション
- * - main: 各ページのコンテンツエリア
- * - Footer: 全ページ共通のフッター
+ * レイアウト構造 (テンプレート shadcndashboard の dashboard-layout に寄せた・2026-10-27):
+ * - SidebarProvider の中に AppSidebar と SidebarInset を兄弟で置く (sidebar.tsx の DOM 前提)
+ * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content (p-4)・Footer を並べる
+ * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
+ * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
+ * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
+ * - AppSidebar は variant="inset"。SidebarInset はテンプレートの layout.tsx と同じ outline + m-2 + 角丸なしにする
+ * - Cookie 同意は SidebarInset の最後の子に置く画面下端の帯 (sticky bottom-0)。流れの中に高さを持つので、
+ *   ページの末尾が帯に隠れない
+ * - サイドバー部品と AdSenseScript は sidebar-shell.tsx (1 つの client モジュール) から import する
+ * - トースト通知 (Toaster) は置かない。toast() の呼び出しが 0 件で、全ページの JS を増やすだけだった
  */
 
 import { Suspense } from "react";
 
-import { Toaster } from "sonner";
-
 import "./globals.css";
 
+import { AppSidebar } from "@/components/organisms/AppSidebar";
+import {
+  AdSenseScript,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/organisms/AppSidebar/sidebar-shell";
 import { Footer } from "@/components/organisms/Footer/Footer";
-import Header from "@/components/organisms/Header";
-import { MobileNavDrawer } from "@/components/organisms/MobileNavDrawer";
+import { SiteHeader } from "@/components/organisms/SiteHeader/SiteHeader";
 
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
@@ -41,10 +49,7 @@ import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { ReadProgressTracker } from "@/lib/analytics/components/ReadProgressTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
-import {
-  ADSENSE_DISPLAY_ENABLED,
-  AdSenseScript,
-} from "@/lib/google-adsense";
+import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense/constants";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
 import { generateWebSiteStructuredDataScripts } from "@/lib/structured-data/scripts";
@@ -91,7 +96,8 @@ export default function RootLayout({
   const baseUrl = getRequiredBaseUrl();
 
   return (
-    <html lang="ja" suppressHydrationWarning>
+    // style-lyra: テンプレートと同じルートのクラス。lyra の見た目は部品の className に書き込んであり、このクラスには依存しない (2026-10-28 CSS-3)
+    <html lang="ja" className="style-lyra" suppressHydrationWarning>
       <head>
         {/*
          * 地図タイルへの preconnect は全ページには置かない。地図のあるランキングページは
@@ -147,31 +153,28 @@ export default function RootLayout({
         </Suspense>
         {/* テーマプロバイダー（ダークモード対応） */}
         <ThemeProvider>
-          {/* メインレイアウトコンテナ */}
-          <div className="relative flex min-h-screen flex-col" suppressHydrationWarning>
-            <a
-              href="#main-content"
-              className="sr-only z-50 bg-background px-4 py-2 text-foreground focus:not-sr-only focus:absolute focus:left-2 focus:top-2"
-            >
-              本文へスキップ
-            </a>
-            {/* ヘッダー（全ページ共通・カテゴリメガメニュー内蔵） */}
-            <Header />
-            {/* メインコンテンツエリア（各ページが PageShell で幅を制御） */}
-            <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
-              {children}
-            </main>
-            {/* フッター（全ページ共通） */}
-            <Footer />
-          </div>
-          {/* モバイル専用ナビゲーションドロワー（PC では描画しない） */}
-          <Suspense fallback={null}>
-            <MobileNavDrawer />
-          </Suspense>
-          {/* トースト通知（成功、エラー、警告などの通知を表示） */}
-          <Toaster position="top-right" richColors />
-          {/* Cookie 同意バナー */}
-          <CookieConsentBanner />
+          <a
+            href="#main-content"
+            className="sr-only z-300 bg-background px-4 py-2 text-foreground focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
+          >
+            本文へスキップ
+          </a>
+          {/* サイドバー型の骨組み (lg 未満では AppSidebar が Sheet に替わる) */}
+          <SidebarProvider defaultOpen>
+            <AppSidebar />
+            <SidebarInset className="m-2 min-w-0 overflow-clip rounded-none! outline outline-border">
+              {/* ヘッダー（全ページ共通） */}
+              <SiteHeader />
+              {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}
+              <main id="main-content" className="min-w-0 flex-1 p-4" tabIndex={-1}>
+                {children}
+              </main>
+              {/* フッター（全ページ共通） */}
+              <Footer />
+              {/* Cookie 同意の帯 (画面下端に留まり、SidebarInset の幅だけを覆う) */}
+              <CookieConsentBanner />
+            </SidebarInset>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

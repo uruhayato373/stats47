@@ -3,54 +3,34 @@ import { type ReactNode } from 'react';
 import { cn } from '@stats47/components';
 
 /**
- * ページ内ナビ用の左レール契約。
+ * ページ内ナビ (旧 左レール) の置き場の契約。
  *
- * PageShell / ArticleShell はページの surface が異なっても、この列幅・gap・表示境界を
- * 必ず共有する。feature 側へ responsive class を複製しない。
- */
-export const LEFT_RAIL_GRID_CLASS =
-  'min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
-const COMPACT_LEFT_RAIL_GRID_CLASS =
-  'min-[992px]:grid min-[992px]:grid-cols-[224px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start';
-
-export const LEFT_RAIL_VISIBLE_CLASS = 'hidden min-[992px]:block';
-export const LEFT_RAIL_NARROW_ONLY_CLASS = 'min-[992px]:hidden';
-
-interface LeftRailLayoutProps {
-  leftRail: ReactNode;
-  children: ReactNode;
-  /** 本文の意味要素。PageShell は div、ArticleShell は main を使う。 */
-  mainAs?: 'div' | 'main';
-  mainClassName?: string;
-  /** データ中心のダッシュボードで、左ナビより本文幅を優先する。 */
-  density?: 'default' | 'compact';
-}
-
-/**
- * 左レールと本文の横並びだけを所有する共有 composite。
+ * 2026-10-28 (テンプレート寄せ): サイト全体のナビはルートの AppSidebar が持つので、
+ * ページ内ナビのためにサイドバーの右へもう 1 本の列を作らない。ページ内ナビは
+ * 本文の上部に置き、どの幅でも同じ 1 か所に出す (幅で出し入れしないので、狭い幅の代替 UI も持たない)。
+ * パンくずとページ見出し (h1) は呼び出し側の Shell がこの外側の先に置く
+ * (PageShell / ArticleShell の `header`・`breadcrumb`)。
  *
- * レールはページ本体と同じ自然スクロールに置く。sticky の有無を feature ごとに
- * 分岐させないことで、テーマ・調査・一覧ページの位置と到達性を揃える。
+ * ページで唯一の main 要素はルートレイアウトが持つため、本文は
+ * `div[data-slot=shell-main]` で描く (main を入れ子にしない)。
  */
 export function LeftRailLayout({
   leftRail,
   children,
-  mainAs = 'div',
   mainClassName,
-  density = 'default',
-}: LeftRailLayoutProps) {
-  const Main = mainAs;
-
+}: {
+  leftRail: ReactNode;
+  children: ReactNode;
+  mainClassName?: string;
+}) {
   return (
-    <div
-      className={
-        density === 'compact'
-          ? COMPACT_LEFT_RAIL_GRID_CLASS
-          : LEFT_RAIL_GRID_CLASS
-      }
-    >
-      <aside className={LEFT_RAIL_VISIBLE_CLASS}>{leftRail}</aside>
-      <Main className={cn('min-w-0', mainClassName)}>{children}</Main>
+    <div className="flex flex-col gap-4">
+      <div data-slot="page-nav" className="min-w-0">
+        {leftRail}
+      </div>
+      <div data-slot="shell-main" className={cn('min-w-0', mainClassName)}>
+        {children}
+      </div>
     </div>
   );
 }

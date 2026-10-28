@@ -256,6 +256,53 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: テンプレート (lyra) の部品は、呼び出し側の className より lyra の値が勝つ (CSS で読んでいた頃はレイヤーの外の規則として、2026-10-28 の CSS-3 以降は className の後ろで合成されて)。勝てるのは `!` 付きだけ。このため、テンプレートへ移した時点から効いていない指定が残っている。2026-10-28 の静的な洗い出しで約 180 件。主なもの: `TableHead` の `text-right` (72 件。数値列の見出しが左寄せのまま)、共有ボタンのブランド色 (`share-brand.palette.ts`。X・Facebook・LINE・はてなの地色が出ず全部 primary)、ブログのタグの Badge の `h-7` (実際は 20px)、Button の `h-11`・`h-9`・`gap-2`、Skeleton の `rounded-md`、SelectTrigger の `text-sm`。CSS-3 では見た目を変えない約束だったので触っていない。
+- **次**: 一覧を作り直し (`scripts/ui-theme/inline-lyra.mjs` の `losesToLyra` で、呼び出し側のクラスと部品の lyra を突き合わせる)、意図どおり効かせるもの (`!` を付ける) と消すものに分ける。効かせるものは画面が変わるので、ページごとに撮って確かめる。
+- **完了条件**: 洗い出しの結果が 0 件、または残すものに理由が書いてある。
+### [MAP-TILE-FOREIGN-LABELS-01] ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 のテンプレート移行の撮り直しで、`/ranking/total-population` の都道府県別の地図 (1440 幅) の左上に、地理院タイルが描く外国の地名と点が出ていることを確認した。変更前 (develop) の画面にも同じものが出ているので、移行で増えたものではない。
+- **次**: 地図のタイル (地理院の淡色地図) を、地名ラベルを持たない種類か、日本の外を塗りつぶす表示に替えられるかを調べる。地図の部品は `apps/web/src/app/layout.tsx` の `getInitialMapTileUrls` の preload と同じタイルを使う。
+- **禁止**: 出典表示 (地理院タイルの attribution) を外さない。
+- **完了条件**: 同じページの 1440・390 の撮影で、日本の外の地名が出ていない。
+
+### [COMPARE-ADD-REMNANT-01] 送信関数を消した compare-add が、管理画面のテストと GeoAI の実装仕様にまだ残っている
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:管理]
+
+- **経緯**: 2026-10-28 のテンプレート移行 3 巡目で、公開サイトから compare-add の送信関数を消した。`apps/admin/tests/unit/business-plan.test.ts` と `docs/02_実装計画/47_GeoAI事業M1実装仕様.md` が、まだこのイベントに依存している (イベントの catalog の項目もそのため残っている)。
+- **次**: M1 の計測にこのイベントが要るかを仕様の持ち主 (strategy-advisor) と決め、要らないなら catalog・m1 の eventIds・テスト・仕様の記述をまとめて外す。要るなら送信口を戻す。
+- **完了条件**: `npx vitest run --root apps/admin` が通り、catalog・テスト・仕様のどれにも参照の宙ぶらりんが無い。
+
+### [SELECT-ITEM-JSDOM-01] SelectItem から lyra と重なる素のクラスを外すと jsdom のテストが選択肢を取れなくなる
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 に、部品の写しから lyra と同じ性質を決める素のクラスを消して CSS を減らした (96 件)。`packages/components/src/atoms/ui/select.tsx` の `SelectItem` だけは、`gap-1.5 rounded-md py-1 pl-1.5 text-sm` を外すと `ThemeComparisonSection.test.tsx` が option を取れずに落ちたため写しのまま残した。クラスの文字列がテストの結果を変える理由は分かっていない (`packages/ui-theme/README.md` の「見た目は変わらず CSS だけ減る」前提に例外がある)。
+- **次**: 外した状態でテストを 1 本だけ動かし、取れなくなる要素の DOM を出力して、テストの取得方法 (role・name) とクラスのどちらに依存しているかを確かめる。
+- **完了条件**: 原因を README の差分一覧に書き、外せるなら外して web vitest 全件が通る。
+
+### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]
+
+- **経緯**: lyra の書き込みスクリプト `scripts/ui-theme/inline-lyra.mjs` は root の `scripts/` にあり、`check-checker-wiring.cjs` の candidateRoots (`.claude/scripts` と `apps|packages/*/scripts`) の外にある。そのため `.claude/config/quality-gates.json` の exceptions に `NOT_A_CHECKER` (期限 2026-12-31) を置いて通している。検査本体の `npm run ui-theme:lyra:test` は pre-commit と PR CI で blocking なので、検査そのものは走っている。
+- **次**: candidateRoots に root の `scripts/` を足すか、スクリプトを探索範囲へ移し、例外を外す。
+- **完了条件**: 例外なしで `node .claude/scripts/lib/check-checker-wiring.cjs --baseline` が通る。
+
+### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
+
+- **証拠 (2026-10-27)**: `npm run dev:web` が「This build is using Turbopack, with a `webpack` config and no `turbopack` config」で終了する。`apps/web/scripts/dev-server.ts` の `bundlerArgs()` が既定で引数を付けないため。`--turbopack` を明示すると起動はするが、次に「Conflicting route and metadata at /sitemap.xml」で全ページ 500。どちらも 2026-10-26 の Next.js 16.4.3 更新 (`89ef74c19`) 以降。`WEB_DEV_BUNDLER=webpack` なら起動するが、8GB の Mac で数ページ開くとメモリ切れで落ちる。
+- **完了条件**: `npm run dev:web` (Turbopack) で /・/ranking/total-population・/sitemap.xml が 200。
+
+### [MIGRATION-FLOW-TEST-POLICY-01] quality-gates の migration-flow がテスト実在と食い違う
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-10-27] [領域:データ]
+
+- **証拠**: `.claude/config/quality-gates.json` の `packages/migration-flow` は `testPolicy: none` (テストなし) だが、`packages/migration-flow/src/lib/__tests__/focus-file.test.ts` がある (2026-10-26 追加)。上の契約テストが `MIGRATION_FLOW_TEST_POLICY_INVALID` で落ちる。
+- **完了条件**: testPolicy を required にして PR の test job に含めるか、テストの置き場を見直し、上の検証コマンドが pass。
+
 ### [PPTX-RANK-ORDER-01] 商品パックの PowerPoint で「上位 10」の棒グラフの 1 位が一番下に並ぶ
 タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-28] [領域:商品]
 

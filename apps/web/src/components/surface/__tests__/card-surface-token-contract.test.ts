@@ -10,7 +10,7 @@ const read = (relativePath: string) => readFileSync(path.join(repoRoot, relative
 describe('CARD_SURFACE_CLASS (カード外枠の単一定義)', () => {
   it('角丸・線色をリテラルで持たず、トークン (rounded-card / border-card-outline) だけで決める', () => {
     const classes = CARD_SURFACE_CLASS.split(' ');
-    expect(classes).toEqual(expect.arrayContaining(['rounded-card', 'border', 'border-card-outline', 'bg-card']));
+    expect(classes).toEqual(expect.arrayContaining(['rounded-card', 'border', 'border-card-outline', 'bg-background']));
     // リテラルが混ざると --card-radius / --card-outline を変えてもカードが追従しない
     expect(classes.filter((c) => /^rounded-(?!card$)/.test(c))).toEqual([]);
     expect(classes).not.toContain('border-border');

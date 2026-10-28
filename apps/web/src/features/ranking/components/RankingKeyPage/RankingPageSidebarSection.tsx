@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 
+import { LayoutGrid, MapPin } from "lucide-react";
+
 
 import {
   RailAdSlot,
@@ -87,12 +89,16 @@ export function RankingPageSidebarSection({
 
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      <div className="hidden lg:block">
+      {/* 本文の order-5 枠 (@min-[988px]/shell:hidden) と同じシェル幅基準で出し分け、二重に出さない。
+          contents にして、記事カードが描かれないときに空の枠がレールの先頭に gap の分の段差を作らないようにする
+          (右レールの最初のカードの上端を本文の最初のカードの上端にそろえる)。 */}
+      <div className="hidden @min-[988px]/shell:contents">
         <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
       </div>
       {areaType === "prefecture" && (
         <RelatedContentNavigation
           title="この指標を使うテーマ"
+          icon={<LayoutGrid />}
           sourceId={`ranking:${rankingKey}`}
           kinds={['theme']}
           limit={3}
@@ -102,6 +108,7 @@ export function RankingPageSidebarSection({
       {areaType === "prefecture" && (
         <RelatedContentNavigation
           title="この指標を市区町村で見る"
+          icon={<MapPin />}
           sourceId={`ranking:${rankingKey}`}
           kinds={['municipality-ranking']}
           limit={1}

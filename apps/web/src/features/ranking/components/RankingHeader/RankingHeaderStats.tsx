@@ -74,8 +74,9 @@ export function RankingHeaderStats({
     <div className={cn("@container", className)}>
       <div
         className={cn(
-          "grid grid-cols-1 gap-3",
-          showNationalAverage && "@md:grid-cols-2",
+          "grid grid-cols-1 gap-4",
+          // 本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。
+          showNationalAverage && "@min-[40rem]:grid-cols-2",
         )}
       >
         <RankingTopThreeList stats={stats} unit={unit} precision={precision} domainPolicy={presentation.comparisonDomain} />

@@ -175,7 +175,7 @@ describe('進路8区分と同一分母', () => {
         .getAttribute('href')
     ).toBe(GRADUATION_PATHS_SOURCE.url);
     expect(screen.getByRole('table').parentElement?.className).toContain(
-      'overflow-auto'
+      'overflow-x-auto'
     );
   });
 });

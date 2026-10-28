@@ -27,13 +27,18 @@ describe('category page featured ranking cards', () => {
     expect(featuredSection).not.toContain('tileMapSvg=');
   });
 
-  it('PageShellの左レールでカテゴリ関連記事を本文に表示する', () => {
-    expect(PAGE).toContain('const leftRail = (');
-    expect(PAGE).toContain('<PageShell leftRail={leftRail}');
+  it('サイドバーと重複するカテゴリ一覧を置かず、出典調査と広告を右レールへ渡す', () => {
+    expect(PAGE).not.toContain('leftRail');
+    expect(PAGE).not.toContain('RailCategoryList');
+    expect(PAGE).not.toContain('trackingSurface="category_sidebar"');
+    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}');
+    const rightRailBlock =
+      PAGE.match(/const rightRail = \(([\s\S]*?)<\/RailStack>/)?.[1] ?? '';
+    expect(rightRailBlock).toContain('<SurveyCard');
+    expect(rightRailBlock).toContain('surface="category_survey"');
+    expect(rightRailBlock).toContain('<RailAdSlot slot={RAIL_RECT} />');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
-    expect(PAGE).toContain('<RailStack>');
-    expect(PAGE).toContain('<RailCategoryList');
-    expect(PAGE).toContain('trackingSurface="category_sidebar"');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
     expect(PAGE).not.toContain('<aside');
     expect(PAGE).toContain('listArticlesByTagKey(blogTagKey, 8)');
@@ -68,20 +73,42 @@ describe('category page featured ranking cards', () => {
     expect(mappedCategoryKeys).toEqual(categoryKeys);
   });
 
+  it('本文の余白は main の p-4 だけに任せ、見出しの操作は共通部品で描く', () => {
+    // パンくずと h1 は PageShell の header に渡し、右レールより上に全幅で置く
+    expect(PAGE).toContain('<PageShell rightRail={rightRail} header={header}>');
+    expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
+    expect(PAGE).not.toMatch(/(もっと見る|すべての記事) →/);
+    expect(PAGE).toContain('<SectionIndexLink');
+    // 矢印は節のカード見出し (HorizontalCardCarouselFrame) の右端が描く
+    expect(PAGE.match(/<HorizontalCardCarouselFrame\b/g)).toHaveLength(2);
+  });
+
   it('全件readから派生値と地図を作り、1位batchを重複取得しない', () => {
     expect(PAGE).toContain('values: valuesResult.data');
     expect(PAGE).not.toContain('readTopRankingValuesBatchFromR2');
   });
 
   it('独立した情報セクションの見出しに連番を表示しない', () => {
-    const sectionHeaders = Array.from(
-      PAGE.matchAll(/<SectionHeader\b([\s\S]*?)\/>/g),
+    // 節はカードの見出し (SectionCard / HorizontalCardCarouselFrame / CategoryTopicGroups の title) に置く
+    const sectionHeadings = Array.from(
+      PAGE.matchAll(/<(?:SectionCard|HorizontalCardCarouselFrame|CategoryTopicGroups)\b([\s\S]*?)>/g),
       (match) => match[1]
     );
 
-    expect(sectionHeaders.length).toBeGreaterThan(0);
-    expect(sectionHeaders.every((props) => !/\bnumber=/.test(props))).toBe(
+    expect(sectionHeadings.length).toBeGreaterThan(0);
+    expect(PAGE).not.toContain('<SectionHeader');
+    expect(sectionHeadings.every((props) => !/\bnumber=/.test(props))).toBe(
       true
     );
+  });
+
+  it('節のカードを点線の帯で接ぎ (PageSections)、広告はカードの格子の外に置く', () => {
+    expect(PAGE).toContain('<PageSections>');
+    const grids = Array.from(PAGE.matchAll(/<PageSections\b[\s\S]*?<\/PageSections>/g), (m) => m[0]);
+    expect(grids.length).toBeGreaterThan(0);
+    for (const grid of grids) {
+      expect(grid).not.toContain('AdSlot');
+      expect(grid).not.toContain('<NativeAffiliateRow');
+    }
   });
 });

@@ -3,7 +3,6 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { FileText } from "lucide-react";
 
-import Link from "@/components/atoms/SiteLink";
 import { RailCard, RailLinkList, RailNavRow, SectionCard } from "@/components/surface";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
@@ -28,6 +27,8 @@ interface SurveyTaxonomyCardProps {
   variant?: "rail" | "section";
   description?: string;
   relatedItems?: RelatedRankingItem[];
+  /** 最初に見せる件数。超えた分は「すべて見る」で開く (client JS なしの details)。省略時は全件 */
+  visibleLimit?: number;
 }
 
 /**
@@ -41,98 +42,76 @@ export function SurveyTaxonomyCard({
   variant = "rail",
   description,
   relatedItems = [],
+  visibleLimit,
 }: SurveyTaxonomyCardProps) {
   if (surveys.length === 0) return null;
 
-  if (variant === "section") {
+  const visible = visibleLimit ? surveys.slice(0, visibleLimit) : surveys;
+  const hidden = visibleLimit ? surveys.slice(visibleLimit) : [];
+  // 調査の行はレールのリンク行 (RailNavRow: 同じ行高と行末の ChevronRight) で描く
+  const surveyRow = (survey: SurveyTaxonomyItem) => {
+    const href = hrefFor("survey", { surveyKey: survey.id });
     return (
-      <SectionCard
-        title={title}
-        icon={<FileText className="h-4 w-4 text-muted-foreground" />}
-        className="mt-8"
+      <RailNavRow
+        key={survey.id}
+        href={href}
+        onClick={() => trackNavClick({ label: survey.id, href, surface })}
       >
-        {description && (
-          <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
-        )}
-        <nav aria-label={title} className="flex flex-col gap-0.5">
-          {surveys.map((survey) => {
-            const href = hrefFor("survey", { surveyKey: survey.id });
-            return (
-              <Link
-                key={survey.id}
-                href={href}
-                className="py-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
-                onClick={() => trackNavClick({ label: survey.id, href, surface })}
-              >
-                {survey.name}
-              </Link>
-            );
-          })}
-        </nav>
-        {relatedItems.length > 0 && (
-          <>
-            <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
-              同じ調査のランキング
-            </p>
-            <nav className="mt-1 flex flex-col gap-0.5">
-              {relatedItems.map((item) => (
-                <Link
-                  key={item.rankingKey}
-                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                  className="py-1 text-xs transition-colors hover:text-primary"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          </>
-        )}
-      </SectionCard>
+        {survey.name}
+      </RailNavRow>
     );
-  }
+  };
 
-  return (
-    <RailCard
-      title={title}
-      icon={<FileText className="h-4 w-4 text-muted-foreground" />}
-    >
+  const body = (
+    <>
       {description && (
         <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
       )}
-      <RailLinkList aria-label={title}>
-        {surveys.map((survey) => {
-          const href = hrefFor("survey", { surveyKey: survey.id });
-          return (
-            <RailNavRow
-              key={survey.id}
-              href={href}
-              chevron={false}
-              className="font-medium text-foreground"
-              onClick={() => trackNavClick({ label: survey.id, href, surface })}
-            >
-              {survey.name}
-            </RailNavRow>
-          );
-        })}
+      {/* 行の px-2 を打ち消し、文字の左端を CardContent の px-4 (見出し・説明文) に揃える */}
+      <RailLinkList aria-label={title} className="-mx-2 gap-0 divide-y divide-border">
+        {visible.map(surveyRow)}
       </RailLinkList>
+      {hidden.length > 0 && (
+        <details className="group/more -mx-2 border-t border-border">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center px-2 text-sm font-medium text-primary hover:bg-accent/50 sm:min-h-9 [&::-webkit-details-marker]:hidden">
+            すべて見る（残り {hidden.length} 件）
+          </summary>
+          <RailLinkList aria-label={`${title}（残り）`} className="gap-0 divide-y divide-border border-t border-border">
+            {hidden.map(surveyRow)}
+          </RailLinkList>
+        </details>
+      )}
       {relatedItems.length > 0 && (
         <>
           <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
             同じ調査のランキング
           </p>
-          <nav className="mt-1 flex flex-col gap-0.5">
+          <RailLinkList aria-label="同じ調査のランキング" className="-mx-2 mt-1 gap-0">
             {relatedItems.map((item) => (
-              <Link
+              <RailNavRow
                 key={item.rankingKey}
                 href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                className="py-1 text-xs transition-colors hover:text-primary"
               >
                 {item.title}
-              </Link>
+              </RailNavRow>
             ))}
-          </nav>
+          </RailLinkList>
         </>
       )}
+    </>
+  );
+
+  if (variant === "section") {
+    return (
+      <SectionCard title={title} icon={<FileText />} className="mt-8">
+        {body}
+      </SectionCard>
+    );
+  }
+
+  return (
+    <RailCard title={title} icon={<FileText />}>
+      {body}
     </RailCard>
   );
 }

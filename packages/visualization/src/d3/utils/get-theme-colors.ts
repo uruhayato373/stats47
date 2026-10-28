@@ -12,6 +12,8 @@ export interface ThemeColors {
   border: string;
   background: string;
   muted: string;
+  /** 選択・ホバーの強調 (テンプレートの primary。2026-10-27 に固定の青から変更) */
+  primary: string;
 }
 
 export function getThemeColors(): ThemeColors {
@@ -22,5 +24,6 @@ export function getThemeColors(): ThemeColors {
     border: `hsl(${style.getPropertyValue("--border").trim()})`,
     background: `hsl(${style.getPropertyValue("--background").trim()})`,
     muted: `hsl(${style.getPropertyValue("--muted").trim()})`,
+    primary: `hsl(${style.getPropertyValue("--primary").trim()})`,
   };
 }

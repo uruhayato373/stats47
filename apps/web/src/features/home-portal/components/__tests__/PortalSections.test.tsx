@@ -22,7 +22,8 @@ describe('PortalUseCaseGrid', () => {
       'href',
       '/themes/population-dynamics'
     );
-    expect(migrationLink).toHaveClass('aspect-[1.47/1]');
+    // カードの高さは中身で決める (固定比率を持たない)
+    expect(migrationLink.className).not.toMatch(/aspect-/);
     expect(migrationLink.parentElement).toHaveClass(
       'grid-flow-col',
       'xl:auto-cols-[calc((100%_-_2.25rem)/4)]'
@@ -36,11 +37,13 @@ describe('PortalUseCaseGrid', () => {
     expect(images.every((image) => image.getAttribute('alt') === '')).toBe(
       true
     );
-    expect(screen.getByText('移住先を比較したい')).toHaveClass(
-      'text-sm',
-      'font-semibold',
-      'line-clamp-2'
-    );
+    // 題名は行数で切らず文節で折り返す。挿絵は題名の上 (横に並べて題名の列を潰さない)
+    const useCaseTitle = screen.getByText('移住先を比較したい');
+    expect(useCaseTitle).toHaveClass('text-sm', 'font-semibold', 'text-pretty');
+    expect(useCaseTitle.className).not.toMatch(/line-clamp/);
+    expect(
+      images[0].compareDocumentPosition(useCaseTitle) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
     expect(
       screen.getByText('人口移動・転入超過から住みやすい地域を探す')
     ).toHaveClass('text-[13px]', 'line-clamp-2');
@@ -71,19 +74,20 @@ describe('PortalBlogCard', () => {
     const image = container.querySelector('img');
 
     expect(link).toHaveAttribute('href', '/blog/population-change');
-    expect(link).toHaveClass('aspect-[1.47/1]');
+    // カード全体は固定比率を持たず、画像だけを aspect-video の枠に置く (狭い幅で画像が帯にならない)
+    expect(link.className).not.toMatch(/aspect-/);
+    expect(image?.parentElement).toHaveClass('aspect-video');
     expect(image).toHaveAttribute(
       'src',
       'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp?v=20260822-v3'
     );
     expect(image).toHaveAttribute('alt', '');
     expect(image).toHaveClass('absolute', 'object-cover');
-    expect(screen.getByText('人口が増えている都道府県は？')).toHaveClass(
-      'text-sm',
-      'font-semibold',
-      'line-clamp-2'
-    );
-    expect(screen.getByText('統計ブログ')).toBeVisible();
+    // 題名は語の途中で切らない (行数で省略しない)。節の見出しと同じ「統計ブログ」の札は置かない
+    const blogTitle = screen.getByText('人口が増えている都道府県は？');
+    expect(blogTitle).toHaveClass('text-sm', 'font-semibold', 'text-pretty');
+    expect(blogTitle.className).not.toMatch(/line-clamp/);
+    expect(screen.queryByText('統計ブログ')).toBeNull();
   });
 
   it('カテゴリ配置では category_blog を計測する', () => {

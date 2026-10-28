@@ -18,6 +18,8 @@ test.describe("PR responsive smoke", () => {
         });
         expect(response?.status()).toBe(200);
         await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+        // ページで唯一の main はルートレイアウトの main#main-content。Shell は main を入れ子にしない
+        await expect(page.locator("main")).toHaveCount(1);
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth - document.documentElement.clientWidth
         );

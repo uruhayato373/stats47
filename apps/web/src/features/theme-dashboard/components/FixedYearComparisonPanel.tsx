@@ -11,12 +11,12 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
+import { ChartEmptyState } from '@/components/charts/ChartState';
 import { RankingBarList } from '@/components/charts/RankingBarList';
 
 import { rankingItemToMapConfig } from '@/features/map-visualization/client';
 
 
-import { ChartEmptyState } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
 import { SingleYearSeriesTable } from './SingleYearSeriesTable';
 

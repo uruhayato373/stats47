@@ -1,5 +1,5 @@
 import { CARD_SURFACE_CLASS } from '@stats47/components';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { RailCard, RailNavRow, RailNavRowButton } from '../SurfaceCard';
@@ -30,26 +30,53 @@ describe('RailCard', () => {
     expect(header).toHaveClass('border-b');
   });
 
-  it('collapsible は details/summary で既定閉、summary に h3 見出しを持つ', () => {
-    const { container } = render(
+  it('見出しは text-foreground font-medium で、アイコンを左に置ける', () => {
+    render(
+      <RailCard title="タイトル" icon={<svg data-testid="icon" />}>
+        本文
+      </RailCard>
+    );
+    const heading = screen.getByRole('heading', { name: 'タイトル' });
+    expect(heading).toHaveClass('text-foreground', 'font-medium');
+    expect(heading).not.toHaveClass('text-muted-foreground');
+    expect(heading.previousElementSibling).toContainElement(
+      screen.getByTestId('icon')
+    );
+  });
+
+  it('本文が空のカードは CardContent を描かない', () => {
+    const { container } = render(<RailCard title="見出しだけ" />);
+    expect(
+      container.querySelector('[data-slot="card-content"]')
+    ).toBeNull();
+  });
+
+  it('collapsible は既定閉で、h3 見出しの中の開閉ボタンが本文を隠す', () => {
+    render(
       <RailCard title="折りたたみ" collapsible>
         本文
       </RailCard>
     );
-    const details = container.querySelector('details');
-    expect(details).not.toBeNull();
-    expect(details).not.toHaveAttribute('open');
     const heading = screen.getByRole('heading', { name: '折りたたみ', level: 3 });
-    expect(heading.closest('summary')).not.toBeNull();
+    const trigger = screen.getByRole('button', { name: '折りたたみ' });
+    expect(heading).toContainElement(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    // 閉じた本文も DOM に残し (リンクをクロールさせる)、hidden で見出し行の高さだけにする
+    const body = screen.getByText('本文').closest('[data-slot="collapsible-content"]');
+    expect(body).not.toBeNull();
+    expect(body).toHaveAttribute('hidden');
   });
 
-  it('defaultOpen を渡すと details が開いた状態で描画される', () => {
-    const { container } = render(
+  it('defaultOpen を渡すと開いた状態で描画され、押すと閉じる', () => {
+    render(
       <RailCard title="折りたたみ" collapsible defaultOpen>
         本文
       </RailCard>
     );
-    expect(container.querySelector('details')).toHaveAttribute('open');
+    const trigger = screen.getByRole('button', { name: '折りたたみ' });
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
 });
 

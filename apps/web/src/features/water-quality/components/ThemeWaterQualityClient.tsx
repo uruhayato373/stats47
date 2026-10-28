@@ -66,9 +66,14 @@ export function ThemeWaterQualityClient({
         <Select
           value={kind}
           onValueChange={(v) => {
+            if (v === null) return;
             if (waterKinds.includes(v as typeof kind))
               setKind(v as typeof kind);
           }}
+          items={waterKinds.map((k) => ({
+            value: k,
+            label: WATER_QUALITY_SOURCE.kinds[k],
+          }))}
         >
           <SelectTrigger className="w-full sm:w-56" aria-label="水域の種類">
             <SelectValue />

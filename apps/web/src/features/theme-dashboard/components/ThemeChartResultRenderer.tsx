@@ -2,10 +2,11 @@
 
 import dynamic from 'next/dynamic';
 
+import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
+
 import {metricSeriesDomain} from '@/lib/metric-presentation';
 
 
-import { ChartEmptyState, ChartLoading } from './ChartState';
 import {
   partitionObservedSeries,
   SingleYearSeriesTable,

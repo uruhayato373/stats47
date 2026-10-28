@@ -142,10 +142,6 @@ function MyComponent() {
 }
 ```
 
-### sidebar-store.ts
-
-サイドバーの開閉状態を管理するストア。
-
 ## 永続化（Persist）
 
 ローカルストレージへの永続化が必要な場合は、`persist`ミドルウェアを使用します：

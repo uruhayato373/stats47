@@ -1,3 +1,6 @@
+import { type ReactNode } from 'react';
+
+import { buttonVariants, cn } from '@stats47/components';
 import { ArrowRight } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
@@ -5,20 +8,33 @@ import Link from '@/components/atoms/SiteLink';
 
 interface SectionIndexLinkProps {
   href: string;
-  /** スクリーンリーダー向けの遷移先（例: 「テーマ一覧へ」）。 */
-  label: string;
+  /** 見える文字 (既定「一覧」)。 */
+  children?: ReactNode;
+  /** スクリーンリーダー向けの遷移先（例: 「テーマ一覧へ」）。見える文字で足りるときは省略する。 */
+  label?: string;
+  className?: string;
 }
 
-/** 左レールなどの SectionHeader 右端に置く、一覧ハブへの共通導線。 */
-export function SectionIndexLink({ href, label }: SectionIndexLinkProps) {
+/**
+ * 見出しの右端 (SectionHeader の action / RailCard の headerAction) に置く、一覧ハブへの共通導線。
+ * テンプレートの Button (outline・sm) の見た目をリンクに付け、矢印は lucide の ArrowRight で描く
+ * (役割はリンクのまま。文字の「→」は使わない。ui-components.md)。
+ */
+export function SectionIndexLink({
+  href,
+  children = '一覧',
+  label,
+  className,
+}: SectionIndexLinkProps) {
   return (
     <Link
       href={href}
       aria-label={label}
-      className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
+      data-slot="button"
+      className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), className)}
     >
-      <span>一覧</span>
-      <ArrowRight className="size-4" aria-hidden />
+      <span>{children}</span>
+      <ArrowRight data-icon="inline-end" aria-hidden />
     </Link>
   );
 }

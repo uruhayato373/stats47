@@ -2,10 +2,10 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { resolveChartUnit, toSunburstData } from "../../../adapters";
 import { fetchEstatDataWithCategories } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { SunburstChartClient } from "./SunburstChartClient";
 
@@ -51,11 +51,11 @@ export const SunburstDashboardChart = async ({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={title} message={fetchErrorMessage} />;
   }
 
   if (!data) {
-    return <ErrorDisplay title={title} message="データがありません" />;
+    return <ChartErrorState title={title} message="データがありません" />;
   }
 
   return (

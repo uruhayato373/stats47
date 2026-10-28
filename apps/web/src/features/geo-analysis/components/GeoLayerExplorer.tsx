@@ -134,7 +134,13 @@ export function GeoLayerExplorer({
         <label htmlFor="geo-layer-pref" className="text-sm font-semibold">
           表示する都道府県
         </label>
-        <Select value={pref} onValueChange={changePref}>
+        <Select
+          value={pref}
+          items={PREFECTURE_LIST_2DIGIT.map((p) => ({ value: p.code, label: p.name }))}
+          onValueChange={(value) => {
+            if (value !== null) changePref(value);
+          }}
+        >
           <SelectTrigger id="geo-layer-pref" className="min-h-11 w-40">
             <SelectValue />
           </SelectTrigger>

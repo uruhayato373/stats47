@@ -12,20 +12,24 @@ paths:
 
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/04_デザインシステム.md`）
 
-- **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。外枠は `PageShell.tsx`、左レールの列・境界・DOM は `LeftRailLayout.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
-- **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
-  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` / `ArticleShell` の `leftRail` に置いてよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、survey は調査一覧 + このページ + 代表ランキング + 関連分類、home / `/ranking` / `/category/*` はカテゴリ探索を置く。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置き、狭幅代替 UI にも同じ出口を残す。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分け、広幅では左レール、992px 未満では本文上部へ置く。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
-  - 左レールは両 Shell とも**右レールと併用できない**。右レールが指定された場合は右を優先する。
-  - **全ページの左レールは共通境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。992〜1023px ではヘッダーのナビが折りたたみのまま左レールが出るが、これは仕様として許容する (2026-10-26 オーナー判断・LEFT-RAIL-992-HEADER-DECISION-01。境界を 1024px へ上げるとアプリ内ブラウザで左レールが消えるため)。列幅・gap・表示境界・自然スクロールは `LeftRailLayout` だけが持ち、Shell や feature に複製しない。右レールの `lg` / `xl` 境界は別契約として維持する。境界は別だが、Surface・見出し・リンク行・余白の視覚契約は左右共通（正典 04「レール UI 契約」）。部品は `RailStack` / `RailCard` / `RailNavRow` / `RailCategoryList`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
-  - **992px 未満で操作ナビを隠す場合は、同等の操作を本文上部へ置く**。PageShell は `leftRailNarrowBehavior="hide"`、ArticleShell は feature の狭幅ナビを使い、どちらも代替 UI に `LEFT_RAIL_NARROW_ONLY_CLASS` を付ける。関連リンク型の PageShell 左レールは既定 `stack` で本文後へ積んでよい。
+- **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。外枠は `PageShell.tsx`、ページ内ナビの置き場は `LeftRailLayout.tsx` を正典とする。**寸法**: コンテナ 1280px / 余白はルートレイアウトの `main#main-content` の `p-4`（16px。Shell 自身は余白を持たない）/ 列の gap 16px（`gap-4`）/ 縦の間隔 16px / 右レール **316px**（テンプレートの `p-4`・`gap-4` に寄せた。2026-10-27。それ以前は doboku-note に合わせた 40px）。`SHELL_WIDTH_CLASS` は幅（1280px 中央寄せ）だけを持ち、横の余白を持たない（2026-10-28。main の中で使うと main の `p-4` と重なっていた）。main の外にある `Footer` は自分で `px-4` を足す。**ページで唯一の `<main>` はルートレイアウトが持つ**。Shell の本文列は `div[data-slot=shell-main]` で、page や feature は `<main>` を描かない（`design-system:check` の `no-nested-main-landmark`）。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
+- **骨組みはテンプレートのサイドバー型（2026-10-27 オーナー決定・2026-10-28 テンプレートの layout.tsx / app-sidebar.tsx に合わせ直し）**。ルートレイアウトの `SidebarProvider` の中に `AppSidebar` と `SidebarInset` を兄弟で置き、`SidebarInset` に `SiteHeader`・`main#main-content`・`Footer`・Cookie 同意の帯（`sticky bottom-0` の 1 行。浮きカードにしない）を並べる。lg（1024px）以上は常設、lg 未満は Sheet（`sidebar.tsx` が isMobile のときだけ React.lazy で読む）。Server Component（layout・`AppSidebar`）はサイドバー部品と `AdSenseScript` を `AppSidebar/sidebar-shell.tsx` から import する（RSC の参照を 1 モジュールに寄せる）。トースト（sonner の `Toaster`）は置かない（`toast()` の呼び出し 0 件）。
+  - `AppSidebar` は `variant="inset"`、`SidebarInset` は `m-2 outline outline-border rounded-none!`（テンプレートと同じ）。`SiteHeader` の行と `AppSidebar` の `SidebarHeader` はどちらも `h-14` にして下線を一直線に揃える。
+  - サイドバーの項目は非選択も `font-medium`、現在地は `bg-primary text-background`（`AppSidebarClient` の呼び出し側で当てる。`sidebar.tsx` の既定は変えない）。項目の行の高さはテンプレートの nav-items と同じ 1 行 40px（`h-9` + `my-0.5`）、主要ナビ・カテゴリ・テーマの系統・下端の出口の項目にはすべて lucide のアイコンを付ける（カテゴリは `categories.ts` の icon）。グループ名は `SidebarGroupLabel` の既定の見た目のまま使う。ヘッダーはロゴ + 名前（`text-base`）+ 副題 1 行の 2 段。下端（`SidebarFooter`）に一覧への出口（すべてのテーマ）を置く。/ranking への出口は主要ナビの「ランキング」と重なるので置かない。
+  - 主要ナビ（ホーム・ランキング・都道府県・市区町村・地域分析・調査・統計ブログ・地域間比較）は常に展開する。カテゴリ 17 件とテーマは開閉できるグループ（`SidebarCollapsibleGroup`。既定は開く）に入れ、テーマは `THEME_NAV_GROUPS` の 5 系統を開閉できる項目（`SidebarCollapsibleItem`。テンプレートの nav-collapse。既定は閉じ、現在地のテーマを含む系統だけ開く）に分ける。カテゴリの件数は `SidebarMenuBadge` に「41件」の形で出し、現在地の項目でも読める色にする。閉じている間もリンクは `hidden="until-found"` で SSR の HTML に残す。
+  - **カテゴリの一覧はサイドバーだけが持つ**。home / `/ranking` / `/category/*` の左レールにあったカテゴリ一覧（`RailCategoryList`）は撤去した（2026-10-27。`rail-contract-structure.test.ts` が再混入を止める）。
+  - **例外: ページ内ナビ（旧 左レール）**。「そのページの表示内容を切り替えるナビ」は `PageShell` / `ArticleShell` の `leftRail` に渡してよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、survey は調査一覧 + このページ + 代表ランキング + 関連分類、`/areas` は地方の切替。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置く。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分ける。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
+  - **ページ内ナビは列を作らず、どの幅でも本文の上に置く**（2026-10-28。サイト全体のナビがサイドバーにあるので、サイドバーの右へもう 1 本の列を作らない）。旧来の左レールの境界と、幅で隠す分岐・常に隠す代替 UI は撤去した（2026-10-28 2 巡目。`design-system:check` の `no-retired-left-rail-narrow-api` が再混入を止める）。パンくずと h1 は Shell の `header` に渡し、ページ内ナビより先に出す（`left-rail-requires-header-first`）。ページ内ナビは両 Shell とも**右レールと併用できない**。右レールが指定された場合は右を優先する。
+  - **右レールの境界はビューポートではなく、Shell が名付けたコンテナ `@container/shell` の幅で決める**（2026-10-27。旧: `rightRailBreakpoint` の `lg` / `xl`、廃止）。右レールは `@min-[988px]/shell`（本文 656px + gap 16px + レール 316px）で、サイドバーを開いても畳んでも本文幅 656px を保つ。右レールの内側で表示を合わせる部品（レール専用の広告・探索導線とその狭幅版）は、ビューポートの `lg:` ではなく同じ `@min-[988px]/shell:` を使う。Surface・見出し・リンク行・余白の視覚契約は正典 04「レール UI 契約」。部品は `RailStack` / `RailCard` / `RailNavRow`。機械ゲート = `left-rail-layout-contract.test.tsx` + `page-shell-rail-contract.test.tsx` + `article-shell-left-rail-contract.test.tsx` + `check-design-system.mjs`。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
-- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0` / `--card-radius: 0`）。値はトークンだけで決め、クラスを役割で選ぶ（2026-09-25）**:
+- **テンプレート (shadcndashboard・Base UI 版 shadcn + style-lyra) を正とする（2026-10-27 オーナー決定）。** 部品は `packages/components/src/atoms/ui/` のテンプレート版を使い、色・`--radius` は `@stats47/ui-theme` (tokens-hsl.css) から来る。テンプレートの lyra の見た目 (`style-lyra.css` の `cn-*` 規則) は CSS として読まず、部品の className に書き込んである (`npm run ui-theme:lyra`。2026-10-28)。lyra の値は呼び出し側の className より後ろで合成され、CSS で読んでいたときと同じく呼び出し側に勝つ。上書きするときはテンプレートと同じく `!` を付ける (例: `pl-10!`)。Base UI に Radix の `asChild` は無い。子要素に描くときは `render` を使い、ボタンの見た目のリンクは `<Link data-slot="button" className={buttonVariants({...})}>` にする (`<Button render={<a/>}>` は role="button" になりリンクの役割が消える)。クライアントの `Select` は `items` (値と表示名) を渡す (渡さないと値そのものが出る)。状態のクラスは `data-pressed` / `data-active` / `data-open` (Radix の `data-[state=…]` は付かない。`shadcn-tailwind.css` の `data-open:` などの variant も Base UI の属性だけを見る。2026-10-28)。呼び出し側の素のクラス (`p-0`・`pl-8`・`bg-card` 等) は lyra の同じ性質の値に負ける。一方、親から子の要素を指定するクラス (`[&_td]:py-0` 等) は詳細度が高く、子の部品の lyra に勝つ (CSS で読んでいた頃は負けていた。2026-10-28 に負けていた 1 か所を外した)。`npm run ui-theme:lyra` が正本 `style-lyra.css` の規則を部品へ書き込み、`npm run ui-theme:lyra:test` が書き込み漏れ・組み立てを検査する (`.husky/pre-commit` と PR CI の static-gates で走る)。テンプレートの写しのうち呼び出し 0 件の見た目 (sidebar の `collapsible="icon"`・`variant="floating"`・`side="right"`、tabs の line・縦向き、toggle-group の縦向き、button の destructive) は CSS を減らすため外してある。使い始めるときは写しから戻し、差分一覧 (`packages/ui-theme/README.md`) を直す。`cn-*` は文字列のまま書き、テンプレートリテラルや連結で組み立てない。どこからも import されない atom は `apps/web/tailwind.config.ts` の content で `!` 除外する (一覧は `scripts/ui-theme/inline-lyra.mjs` の `UNUSED_ATOMS` と一致させる)。
+- **カード外枠は角丸なし（`--card-radius: 0`）。値はトークンだけで決め、クラスを役割で選ぶ（2026-09-25）**:
   - カード外枠・その仮表示・地図/チャート枠 → `rounded-card`（`--card-radius`）。カード本体は `CARD_SURFACE_CLASS`（`@stats47/components`）を使い、`SurfaceCard` 系もこれを合成している
   - ボタン・ボタン風リンク・ドロップダウン → `rounded-md`、カード内の小タイル・バッジ・サムネ → `rounded-sm`（どちらも `--radius`）
   - 形として四角であるべきもの（凡例の色見本・タイル地図のマス・下線タブ・一覧行）だけ `rounded-none`。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）
   - **本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）→ `rounded-content`（`--content-radius` = 6px）。レイアウトのカード外枠とは役割が別なので別トークン。使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限り、そのファイルでは `rounded-card` / `rounded-lg` を使わない（`content-radius-only-in-article-body` / `article-body-parts-use-content-radius`）。callout の種類の定義は `callout-config.ts`、表示は `Callout.tsx`（左の色バーなし）
   - `rounded-xl`/`2xl`/任意値の手動付与は禁止。角丸を採用するときは `globals.css` のトークンと `check-design-system.mjs` の `no-nonzero-radius-token` 許容値を同じ差分で変える
-- **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-xs`（Tailwind v4 の名前。v3 の `shadow-sm` と同じ影）。
+- **カード外枠の線と地**: テンプレートと同じく、ページ地もカードも白 (`--background` / `--card`)、カード外枠は細い線 (`--card-outline` = `--border`)、影なし（2026-10-27）。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
 ## Sticky aside の max-h 必須ルール（削除禁止）
@@ -42,7 +46,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
 // ✅ flex の右レールは自然フロー（内部スクロールなし）
-<aside className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3">
+<aside className="hidden w-[316px] shrink-0 @min-[988px]/shell:flex @min-[988px]/shell:flex-col @min-[988px]/shell:gap-3">
 
 // ❌ sticky grid aside で max-h なしは禁止 (フッターが見えなくなる)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:pr-1">
@@ -81,7 +85,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 - **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
 - **カード内カードは禁止。** `SurfaceCard` / `SurfaceSection` / `SurfaceLinkCard` / `RailCard` / `ChartPanel` 等の外枠を相互にネストしない。外側を通常の `section` にするか、内側を border と shadow のない list / table / link row にする。`npm run design-system:check -w apps/web` の `no-nested-card-surfaces` が JSX 親子関係と `getSurfaceCardClassName` のネストを検査する。レール契約の機械ゲート = `rail-*` rule（`rail-contract-audit.mjs`）。
-- **色付きの順位チップ（「N位」）は `RankBadge`（`@/components/atoms/RankBadge`）だけで描く。** 幅を固定せず最小幅で揃え、折り返さない（市区町村の「1741位」も伸びて収まる）。色は `tone`（`positive` / `negative`、向きのない順位は `rankToneByPosition(rank, total)`）で選ぶ。表のセル・補足の小さな文字・文章中の「N位」はチップにせず文字のまま書く。`design-system:check` の `rank-chip-must-use-rank-badge` が背景色つきの手書き「N位」を拒否する。メダルのアイコン表示（`RankingRankBadge`）は別部品。
+- **色付きの順位チップ（「N位」）は `RankBadge`（`@/components/atoms/RankBadge`）だけで描く。** 幅を固定せず最小幅で揃え、折り返さない（市区町村の「1741位」も伸びて収まる）。色は `tone`（`positive` / `negative`、向きのない順位は `rankToneByPosition(rank, total)`）で選ぶ。表のセル・補足の小さな文字・文章中の「N位」はチップにせず文字のまま書く。`design-system:check` の `rank-chip-must-use-rank-badge` が背景色つきの手書き「N位」を拒否する。
 - **FAQ / 定義 / AI考察など本文の開閉 UI は `@/components/content` を再利用する。** 複数FAQ=`FaqSection`、単一本文=`ContentDisclosure`。feature 内の独自 Radix Accordion、`▼` / `▲` 文字、`text-lg` 見出しを追加しない。表示契約と機械ゲートの正典は `docs/01_技術設計/04_デザインシステム.md`。
 
 ## チャートコンポーネント（新規追加前に必読）
@@ -91,8 +95,8 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 
-- **ページ見出し（h1）は `text-2xl font-bold` に統一する。** `text-3xl` 以上は使わない。
-  - **例外: hero バナー内の h1**（色付き `HeroShell` / hero セクション内のキャッチコピー）は `text-2xl sm:text-3xl` のレスポンシブ大見出しを許容する。マーケ目的の意図的拡大であり、コンテンツ本文の h1（ranking/category 詳細・記事タイトル）とは役割が異なる。該当: `category/[categoryKey]`・`themes`・`survey/[surveyKey]`・`tag/[tagKey]`。**home `/` は 2026-07-23 のポータル型再設計で暗色 hero を撤去し `PageHeader`（`text-2xl`）に統一したため、この例外の対象外**（正典: `apps/web/src/features/home-portal/README.md`）。本文コンテンツの h1 では `text-2xl` を厳守する。
+- **ページ見出し（h1）は `PageHeader`（`@/components/layout`）で描き、`text-xl font-semibold`（テンプレートの breadcrumb-comp と同じ）に統一する**（2026-10-27 にテンプレートへ寄せた。それ以前は `text-2xl font-bold`）。ページや feature に別の大きさの h1 を書かない。
+  - **例外**: 記事本文のタイトル（blog 詳細の `.article-title`。読み物の見出しとして `globals.css` が大きさを持つ）と `not-found` の大見出し。`HeroBanner`（`text-2xl sm:text-3xl`）は現在どのページからも使われていない（使うときはこの例外に足す）。
 
 ## melta-ui デザインシステム準拠
 
@@ -112,7 +116,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 | 対象                                              | 使うべきブレイクポイント                  | 理由                                                         |
 | ------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------ |
-| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px)               | `PageShell` の右レール（316px）は `xl:` で出現               |
+| ページレイアウト（右レールの表示） | `@min-[988px]/shell:` (名前付きコンテナ) | サイドバーの開閉で本文幅が変わるため。値は `PageShell` / `ArticleShell` だけが持つ (ページ内ナビは列を作らないので境界を持たない) |
 | テキスト・ボタンのサイズ調整                      | `sm:` / `md:` (ビューポート)              | デバイスサイズで決まる                                       |
 | ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 

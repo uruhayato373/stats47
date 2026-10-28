@@ -2,10 +2,10 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { resolveChartUnit, toPyramidChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { PyramidChartClient } from "./PyramidChartClient";
 
@@ -28,7 +28,7 @@ export const PyramidChartDashboard = async ({
 
   if (!maleParams?.length || !femaleParams?.length) {
     return (
-      <ErrorDisplay title={title} message="設定エラー: 男女のパラメータが必要です" />
+      <ChartErrorState title={title} message="設定エラー: 男女のパラメータが必要です" />
     );
   }
 
@@ -41,11 +41,11 @@ export const PyramidChartDashboard = async ({
 
     const maleError = maleResponses.find((r) => "error" in r);
     if (maleError && "error" in maleError) {
-      return <ErrorDisplay title={title} message={maleError.error} />;
+      return <ChartErrorState title={title} message={maleError.error} />;
     }
     const femaleError = femaleResponses.find((r) => "error" in r);
     if (femaleError && "error" in femaleError) {
-      return <ErrorDisplay title={title} message={femaleError.error} />;
+      return <ChartErrorState title={title} message={femaleError.error} />;
     }
 
     const maleDataList = maleResponses.map((r) => ("data" in r ? r.data : []));
@@ -55,7 +55,7 @@ export const PyramidChartDashboard = async ({
     const unit = resolveChartUnit(configuredUnit, [...maleDataList, ...femaleDataList]) ?? "人";
 
     if (chartData.length === 0) {
-      return <ErrorDisplay title={title} message="データがありません" />;
+      return <ChartErrorState title={title} message="データがありません" />;
     }
 
     // 最新年度を取得（最初の男性データの最新レコードから）
@@ -86,6 +86,6 @@ export const PyramidChartDashboard = async ({
       { error: err },
       "PyramidChartDashboardのデータ取得に失敗しました",
     );
-    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
+    return <ChartErrorState title={title} message="データの取得に失敗しました" />;
   }
 };

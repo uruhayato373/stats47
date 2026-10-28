@@ -1,10 +1,10 @@
 import {
-  fireEvent,
   render,
   screen,
   waitFor,
   within,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ALL_THEMES } from '../../config/all-themes';
@@ -86,14 +86,11 @@ describe('ThemeSwitcher', () => {
     expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
   });
 
-  it('compact 表示では短いラベルを使う', () => {
+  it('compact 表示では短いラベルを使い、テーマ一覧への出口は切替行 (ThemePageLayout) の右端ボタンに任せる', () => {
     render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" compact />);
     expect(screen.getByText('テーマ')).toBeInTheDocument();
     expect(screen.queryByText('テーマを切り替える')).toBeNull();
-    expect(screen.getByRole('link', { name: 'テーマ一覧' })).toHaveAttribute(
-      'href',
-      '/themes'
-    );
+    expect(screen.queryByRole('link', { name: 'テーマ一覧' })).toBeNull();
   });
 
   it('現在のテーマがセレクターの現在値として表示される', () => {
@@ -107,9 +104,10 @@ describe('ThemeSwitcher', () => {
     render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
 
-    fireEvent.click(screen.getByRole('combobox'));
-    const option = await screen.findByRole('option', { name: target.title });
-    fireEvent.click(option);
+    // Base UI の Select は pointer の一連の操作で選ぶので、fireEvent.click ではなく user-event で操作する
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('combobox'));
+    await user.click(await screen.findByRole('option', { name: target.title }));
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith('/themes/tourism');
@@ -124,8 +122,9 @@ describe('ThemeSwitcher', () => {
     );
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
 
-    fireEvent.click(screen.getByRole('combobox'));
-    fireEvent.click(await screen.findByRole('option', { name: target.title }));
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('combobox'));
+    await user.click(await screen.findByRole('option', { name: target.title }));
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith('/themes/tourism?pref=28000');
@@ -141,13 +140,14 @@ describe('ThemeSwitcher', () => {
     );
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
 
-    fireEvent.click(screen.getByRole('combobox'));
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('combobox'));
     const listbox = await screen.findByRole('listbox');
     // Type B テーマは選択肢に無い (存在しない/410 URL を作らない)
     expect(
       within(listbox).queryByRole('option', { name: /港湾|鉄道|道路/ })
     ).toBeNull();
-    fireEvent.click(
+    await user.click(
       within(listbox).getByRole('option', { name: target.title })
     );
 

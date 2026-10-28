@@ -33,15 +33,20 @@ Related canon:
 
 ```
 ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
-  └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
-       └─ geography scope / compact controls / ThemeAreaHeader / dashboard
+  └─ PageShell (no leftRail, no rightRail)
+       └─ breadcrumb / ThemeAreaHeader | ThemeHero
+          / one control row: geography scope tabs (StatisticsScopeNav) + ThemeSwitcher + PrefectureSelect + 「テーマ一覧」
+          / one-line chapter nav (tabs look, horizontal scroll on narrow widths)
+          / dashboard (ThemeDashboardClient)
+          / 全指標・出典調査 (collapsible) / ThemeRelatedArticles / geo・evidence・correlated sections
 ```
 
-The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
-would otherwise read the default (no-op) context. Below the shared 992px boundary the rail is hidden — a nav that switches
-the page content is useless when stacked after the content it controls. The content column therefore
-owns equivalent controls directly below the breadcrumb: `ThemeSwitcher`, `PrefectureSelect`, page anchors,
-all metric links, and source surveys. The desktop rail has the same roles and does not expand the full theme list.
+The provider must stay outside `PageShell` because `PrefectureSelect` in the control row reads it and
+would otherwise read the default (no-op) context. Moving between themes is owned by the site sidebar
+(`AppSidebar`, grouped by the navigation-only `THEME_NAV_GROUPS` in `config/theme-navigation.ts`), so the page
+does not render a second navigation column (2026-10-28 template alignment). The first screen at 390px and
+1440px shows the controls, the chapter nav and the first metric cards; the all-metrics list and related
+articles come after the dashboard.
 
 `app/themes/local-finance` keeps its bespoke finance renderer, but uses the same Provider, 5-digit URL preference and Cookie. Its page composes `PageShell` directly; do not add a second shell.
 
@@ -99,7 +104,7 @@ Theme chart は複数指標の関係を読むための可視化であり、指�
 - 系列断絶、母集団差、比較不能条件など、その chart 固有の注意だけを `ThemeCatalog.charts[].annotation` に置き、footer に表示する。
 - 指標の定義、算出方法、一般注釈、出典詳細、関連ページは `/ranking/[key]` を指標ハブとして集約する。
 - chart は `relatedRankingKeys` で指標ハブへ接続する。title 類似だけで mapping を推測しない。
-- footer は primary hub と補助2件までを表示する。全関連指標は左レール／狭幅の「全指標」で探索する。
+- footer は primary hub と補助2件までを表示する。全関連指標はダッシュボードの後ろの「全指標・出典調査」で探索する。
 - `ChartPanel` は title を accessible name にした `section` とし、説明文を外しても領域名を失わない。
 
 契約は `validate:catalog`、transform tests、Theme UI contract tests が固定する。件数分岐・compact grid・`#theme-charts` ガードは `components/__tests__/metrics-dashboard-switcher.test.tsx`、単一指標カードの選択 UI 不在・重複見出しなし・固定高枠なし・遅延取得は `components/__tests__/SingleMetricCard.test.tsx`、全テーマ×カタログの件数別振り分けは `components/__tests__/all-theme-panel-kinds.test.tsx` が固定する（再現: `cd apps/web && npx vitest run src/features/theme-dashboard`）。

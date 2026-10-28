@@ -51,8 +51,10 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
               href={hrefFor('blog', { slug: article.slug })}
               className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             >
+              {/* サムネイル (640×336 = 40:21) と同じ縦横比の枠。flex の列で縮ませない (shrink-0)。
+                  縮むと object-cover が上下を切り、絵の端が欠ける */}
               <div
-                className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full overflow-hidden border-b border-border bg-muted`}
+                className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full shrink-0 overflow-hidden border-b border-border bg-muted`}
               >
                 <ThemeAwareImage
                   lightSrc={blogThumbnailUrl(article.slug, 'light')}

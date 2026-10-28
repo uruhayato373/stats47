@@ -3,15 +3,14 @@
 import { Table } from "@tanstack/react-table";
 import { Button } from "../../atoms/ui/button";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "../../atoms/ui/select";
+import { LazySelect } from "../lazy-select";
 
 import { DATA_TABLE_STYLES } from "./constants";
+
+const PAGE_SIZE_ITEMS = [10, 20, 30, 40, 50, 100].map((pageSize) => ({
+    value: `${pageSize}`,
+    label: `${pageSize}`,
+}));
 
 interface DataTablePaginationProps<TData> {
     table: Table<TData>;
@@ -41,27 +40,16 @@ export function DataTablePagination<TData>({
             )}
             <div className="flex items-center space-x-4 lg:space-x-6">
                 <div className="flex flex-col space-y-1">
-                    {/* <p className={DATA_TABLE_STYLES.selectLabel}>表示件数</p> */}
-                    <Select
+                    {/* Select の JS は初回操作で読む (配信サイズ策 D・LazySelect) */}
+                    <LazySelect
                         value={`${table.getState().pagination.pageSize}`}
-                        onValueChange={(value) => {
-                            table.setPageSize(Number(value));
-                        }}
-                    >
-                        <SelectTrigger
-                            aria-label="表示件数"
-                            className={DATA_TABLE_STYLES.paginationSelectTrigger}
-                        >
-                            <SelectValue placeholder={table.getState().pagination.pageSize} />
-                        </SelectTrigger>
-                        <SelectContent side="top">
-                            {[10, 20, 30, 40, 50, 100].map((pageSize) => (
-                                <SelectItem key={pageSize} value={`${pageSize}`}>
-                                    {pageSize}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        items={PAGE_SIZE_ITEMS}
+                        onValueChange={(value) => table.setPageSize(Number(value))}
+                        placeholder={`${table.getState().pagination.pageSize}`}
+                        aria-label="表示件数"
+                        triggerClassName={DATA_TABLE_STYLES.paginationSelectTrigger}
+                        side="top"
+                    />
                 </div>
                 <div className="flex w-[80px] items-center justify-center text-xs font-medium">
                     ページ {table.getState().pagination.pageIndex + 1} /{" "}

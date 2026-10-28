@@ -1,5 +1,4 @@
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
-import { hrefFor } from '@stats47/data-configs/content/href';
 
 type GeoAnalysisSlug = (typeof GEO_ANALYSES)[number]['slug'];
 type GeoLayerSlug = (typeof GEO_LAYERS)[number]['slug'];
@@ -17,12 +16,6 @@ export const GEO_HOME_ANALYSIS_LABELS = {
   'population-public-facility-access': '公共施設距離 × 人口',
   'population-low-elevation': '低い標高 × 人口',
 } as const satisfies Record<GeoAnalysisSlug, string>;
-
-export const GEO_HOME_ANALYSIS_NAV_ITEMS = GEO_ANALYSES.map((analysis) => ({
-  id: analysis.slug,
-  label: GEO_HOME_ANALYSIS_LABELS[analysis.slug],
-  href: hrefFor('geo', { analysisSlug: analysis.slug }),
-}));
 
 /** 公開済みで単体表示できるGISだけを、正典の表示名・順序で案内する。 */
 export const GEO_HOME_LAYER_NAV_ITEMS = GEO_LAYERS.map((layer) => ({

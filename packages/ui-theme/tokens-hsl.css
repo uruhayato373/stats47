@@ -1,0 +1,71 @@
+/* 生成物: packages/ui-theme/build-hsl-tokens.mjs が tokens.css (テンプレートの oklch 値) から作る。手で直さない。
+   apps/web の hsl(var(--x)) 参照のために、同じ色を HSL 3 値で持つ。 */
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 330 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 330 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 330 0% 3.9%;
+  --primary: 0 0% 9.1%;
+  --primary-foreground: 180 0% 98%;
+  --secondary: 120 0% 96.1%;
+  --secondary-foreground: 0 0% 9.1%;
+  --muted: 120 0% 96.1%;
+  --muted-foreground: 0 0% 45.2%;
+  --accent: 120 0% 96.1%;
+  --accent-foreground: 0 0% 9.1%;
+  --destructive: 357.2 100% 45.3%;
+  --border: 240 0% 89.8%;
+  --input: 240 0% 89.8%;
+  --ring: 0 0% 63%;
+  --chart-1: 18 100% 48%;
+  --chart-2: 174.7 100% 29.5%;
+  --chart-3: 195.8 72.1% 22.9%;
+  --chart-4: 43.6 100% 50%;
+  --chart-5: 36.3 100% 49.7%;
+  --radius: 0.625rem;
+  --sidebar: 180 0% 98%;
+  --sidebar-foreground: 330 0% 3.9%;
+  --sidebar-primary: 0 0% 9.1%;
+  --sidebar-primary-foreground: 180 0% 98%;
+  --sidebar-accent: 120 0% 96.1%;
+  --sidebar-accent-foreground: 0 0% 9.1%;
+  --sidebar-border: 240 0% 89.8%;
+  --sidebar-ring: 0 0% 63%;
+}
+
+.dark {
+  --background: 330 0% 3.9%;
+  --foreground: 180 0% 98%;
+  --card: 0 0% 9.1%;
+  --card-foreground: 180 0% 98%;
+  --popover: 0 0% 9.1%;
+  --popover-foreground: 180 0% 98%;
+  --primary: 240 0% 89.8%;
+  --primary-foreground: 0 0% 9.1%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 180 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 180 0% 98%;
+  --destructive: 358.7 100% 69.6%;
+  --border: 0 0% 13.5%; /* oklch(1 0 0 / 10%) を --background に重ねた色 */
+  --input: 0 0% 18.3%; /* oklch(1 0 0 / 15%) を --background に重ねた色 */
+  --ring: 0 0% 45.2%;
+  --chart-1: 18 100% 48%;
+  --chart-2: 174.7 100% 29.5%;
+  --chart-3: 195.8 72.1% 22.9%;
+  --chart-4: 43.6 100% 50%;
+  --chart-5: 36.3 100% 49.7%;
+  --sidebar: 0 0% 9.1%;
+  --sidebar-foreground: 180 0% 98%;
+  --sidebar-primary: 225.3 84.1% 49%;
+  --sidebar-primary-foreground: 180 0% 98%;
+  --sidebar-accent: 0 0% 14.9%;
+  --sidebar-accent-foreground: 180 0% 98%;
+  --sidebar-border: 0 0% 13.5%; /* oklch(1 0 0 / 10%) を --background に重ねた色 */
+  --sidebar-ring: 0 0% 45.2%;
+}

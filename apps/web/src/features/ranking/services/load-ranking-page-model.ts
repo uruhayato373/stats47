@@ -16,7 +16,6 @@ import { applyRankingAffiliatePolicy } from "@/features/ads/constants/ranking-af
 import { resolveAffiliateBannersForContent } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
-  generateRankingBreadcrumbStructuredData,
   generateRankingFAQStructuredData,
   generateRankingPageStructuredData,
 } from "@/features/ranking";
@@ -174,10 +173,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingValues,
     selectedYear,
   });
-  const breadcrumbStructuredData = generateRankingBreadcrumbStructuredData({
-    rankingItem,
-    category: breadcrumbCategory,
-  });
   const faqStructuredData = generateRankingFAQStructuredData({
     rankingItem,
     rankingValues,
@@ -202,7 +197,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     affiliateVertical,
     breadcrumbCategory,
     structuredData,
-    breadcrumbStructuredData,
     faqStructuredData,
     initialTileUrls: getInitialMapTileUrls(),
   };

@@ -24,6 +24,38 @@ const RAIL_CATEGORY_PAGES = [
   'src/app/areas/[areaCode]/page.tsx',
 ];
 
+/**
+ * サイト全体のナビ (カテゴリ一覧) はルートの AppSidebar が持つ (2026-10-27 U4)。
+ * home・/ranking・/category・都道府県ページはページ内にカテゴリ一覧の写しを置かない
+ * (都道府県ページの右レール「カテゴリから探す」は 2026-10-28 に撤去)。
+ */
+const SITE_NAV_DEDUP_PAGES = [
+  'src/app/page.tsx',
+  'src/app/category/[categoryKey]/page.tsx',
+  'src/app/areas/[areaCode]/page.tsx',
+];
+
+/**
+ * 例外: /ranking はカテゴリの索引そのものが本文の役割 (ランキングの索引ハブ)。390px ではサイドバーが
+ * Sheet に畳まれ、本文からカテゴリを探せなくなるため、件数付きの索引を本文に置く (2026-10-28)。
+ * 左レールは作らない (本文の節として置く)。
+ */
+const CATEGORY_INDEX_HUB_PAGES = ['src/app/ranking/page.tsx'];
+
+/**
+ * 右レールを持たないページ。都道府県ページは目次を h1 下の 1 行ナビへ移し、右レールを撤去した
+ * (2026-10-28 template-audit 2 巡目)。
+ */
+const NO_RIGHT_RAIL_PAGES = ['src/app/areas/[areaCode]/page.tsx'];
+
+it('右レールを持たないページは RailStack / RightRailWidgets を使わない', () => {
+  for (const page of NO_RIGHT_RAIL_PAGES) {
+    const source = read(page);
+    expect(source).not.toContain('RailStack');
+    expect(source).not.toContain('RightRailWidgets');
+  }
+});
+
 const RAIL_DATA_DISCOVERY_CARDS = 'src/components/rail/RailDataDiscoveryCards.tsx';
 
 /**
@@ -61,10 +93,33 @@ function listTsxFiles(dir: string): string[] {
 }
 
 describe('rail contract: カテゴリ導線ページの共有部品移行', () => {
-  it.each(RAIL_CATEGORY_PAGES)('%s は RailCategoryList を使う', (relativePath) => {
-    const source = read(relativePath);
-    expect(source).toContain('RailCategoryList');
+  it('カテゴリ導線ページはすべてサイドバーへ一本化した (ページ内に RailCategoryList を持つページが残っていない)', () => {
+    expect(
+      RAIL_CATEGORY_PAGES.filter(
+        (page) =>
+          !SITE_NAV_DEDUP_PAGES.includes(page) &&
+          !CATEGORY_INDEX_HUB_PAGES.includes(page)
+      )
+    ).toEqual([]);
   });
+
+  it.each(SITE_NAV_DEDUP_PAGES)(
+    '%s はサイドバーと重複するカテゴリ一覧 (RailCategoryList / leftRail) を持たない',
+    (relativePath) => {
+      const source = read(relativePath);
+      expect(source).not.toContain('RailCategoryList');
+      expect(source).not.toMatch(/\bleftRail\b/);
+    }
+  );
+
+  it.each(CATEGORY_INDEX_HUB_PAGES)(
+    '%s はカテゴリの索引を本文の節に置き、左レールを作らない',
+    (relativePath) => {
+      const source = read(relativePath);
+      expect(source).toContain('<RailCategoryList');
+      expect(source).not.toMatch(/\bleftRail\b/);
+    }
+  );
 
   it.each(RAIL_CATEGORY_PAGES)(
     '%s は生の <aside> と PortalCategoryGrid を持たない',
@@ -75,11 +130,10 @@ describe('rail contract: カテゴリ導線ページの共有部品移行', () =
     }
   );
 
-  it.each(RAIL_CATEGORY_PAGES)(
+  it.each(RAIL_CATEGORY_PAGES.filter((page) => !NO_RIGHT_RAIL_PAGES.includes(page)))(
     '%s は RailStack でレールを組む (共有 RightRailWidgets 経由を含む)',
     (relativePath) => {
       const source = read(relativePath);
-      // areas/[areaCode] は RightRailWidgets (共有部品) を使い、RailStack はその内部が持つ。
       const usesRailStackDirectly = source.includes('RailStack');
       const usesSharedRailStackWrapper = source.includes('RightRailWidgets');
       expect(usesRailStackDirectly || usesSharedRailStackWrapper).toBe(true);

@@ -1,13 +1,8 @@
 "use client";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@stats47/components/atoms/ui/tooltip";
-import { Check, Facebook, Link as LinkIcon, Twitter } from "lucide-react";
+import { LazyTooltip } from "@stats47/components/molecules/lazy-select";
+import { Check, Facebook, Link as LinkIcon } from "lucide-react";
 
 import { trackShare } from "@/lib/analytics/events";
 
@@ -30,39 +25,54 @@ interface ShareButtonIconProps {
   isProminent: boolean;
 }
 
+/** X のマーク。lucide の Twitter (旧ロゴの鳥) は現行の X と別物なので自前で描く。 */
+function XMarkIcon({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
 /**
  * シェアボタンのアイコンコンポーネント
  */
 function ShareButtonIcon({ name, isProminent }: ShareButtonIconProps) {
-  const iconSize = isProminent ? "h-5 w-5" : "h-4 w-4";
-  const textSize = isProminent ? "text-sm" : "text-[10px]";
+  const iconSize = isProminent ? "size-5" : "size-4";
 
-  const content = (() => {
-    switch (name) {
-      case "X (Twitter)":
-        return <Twitter className={iconSize} />;
-      case "Facebook":
-        return <Facebook className={iconSize} />;
-      case "LINE":
-        return <span className={`font-bold ${textSize} leading-none`}>LINE</span>;
-      case "はてなブックマーク":
-        return (
-          <span className={`font-bold ${textSize} leading-none`}>
-            B!
-          </span>
-        );
-      default:
-        return null;
-    }
-  })();
-
-  return (
-    <span className="flex items-center justify-center w-full h-full">
-      {content}
-    </span>
-  );
+  switch (name) {
+    case "X (Twitter)":
+      return <XMarkIcon className={iconSize} />;
+    case "Facebook":
+      return <Facebook className={iconSize} aria-hidden="true" />;
+    case "LINE":
+      // 吹き出しのアイコンでは LINE と分からないので文字で描く。ボタンの幅に収まるよう字を詰める
+      return (
+        <span
+          aria-hidden="true"
+          className={`inline-flex items-center justify-center font-bold leading-none ${isProminent ? "text-xs" : "text-[10px]"}`}
+        >
+          LINE
+        </span>
+      );
+    case "はてなブックマーク":
+      return (
+        <span
+          aria-hidden="true"
+          className={`inline-flex ${iconSize} items-center justify-center text-xs font-bold leading-none`}
+        >
+          B!
+        </span>
+      );
+    default:
+      return null;
+  }
 }
 
+/**
+ * シェアボタンの並び。テンプレートの Button (outline・icon) を並べる。
+ * prominent はブログ記事末尾などの大きい版で、各サービスの色の地を使う。
+ */
 export function ShareButtons({
   title,
   url,
@@ -81,64 +91,44 @@ export function ShareButtons({
 
   if (!shareUrl) return null;
 
+  const size = isProminent ? "icon-lg" : "icon";
+
   return (
     <div className={`flex items-center ${isProminent ? "gap-3" : "gap-1"}`}>
-      <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">シェア:</span>
-      <TooltipProvider>
-        {shareLinks.map((link) => (
-          <Tooltip key={link.name}>
-            <TooltipTrigger asChild>
-              <Button
-                variant={isProminent ? "default" : "ghost"}
-                size={isProminent ? "default" : "icon"}
-                className={`rounded-full transition-all ${isProminent
-                  ? `h-10 w-10 p-0 shadow-xs ${link.prominentClass}`
-                  : `h-8 w-8 ${link.color}`
-                  }`}
-                onClick={() => {
-                  trackShare({ method: link.name, contentType: "page" });
-                  window.open(link.href, "_blank", "width=600,height=400");
-                }}
-              >
-                <ShareButtonIcon name={link.name} isProminent={isProminent} />
-                <span className="sr-only">{link.name}</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{link.name}</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
-
-        <Tooltip>
-          <TooltipTrigger asChild>
+      <span className="mr-1 hidden text-xs text-muted-foreground sm:inline">シェア:</span>
+      {/* 補助ラベル (Tooltip) の JS は hover / キーボードの focus で読む (配信サイズ策 D・LazyTooltip) */}
+      {shareLinks.map((link) => (
+        <LazyTooltip
+          key={link.name}
+          content={link.name}
+          render={
             <Button
-              variant={isProminent ? "outline" : "ghost"}
-              size={isProminent ? "default" : "icon"}
-              className={`rounded-full transition-all ${isProminent
-                ? "h-10 w-10 p-0 border-muted-foreground/20 hover:bg-muted"
-                : "h-8 w-8 hover:bg-muted"
-                }`}
-              onClick={copy}
-            >
-              <span className="flex items-center justify-center w-full h-full">
-                {copied ? (
-                  <Check
-                    className={`text-positive ${isProminent ? "h-5 w-5" : "h-4 w-4"
-                      }`}
-                  />
-                ) : (
-                  <LinkIcon className={isProminent ? "h-5 w-5" : "h-4 w-4"} />
-                )}
-              </span>
-              <span className="sr-only">URLをコピー</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{copied ? "コピーしました！" : "URLをコピー"}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+              variant={isProminent ? "default" : "outline"}
+              size={size}
+              className={isProminent ? link.prominentClass : undefined}
+              onClick={() => {
+                trackShare({ method: link.name, contentType: "page" });
+                window.open(link.href, "_blank", "width=600,height=400");
+              }}
+            />
+          }
+        >
+          <ShareButtonIcon name={link.name} isProminent={isProminent} />
+          <span className="sr-only">{link.name}</span>
+        </LazyTooltip>
+      ))}
+
+      <LazyTooltip
+        content={copied ? "コピーしました！" : "URLをコピー"}
+        render={<Button variant="outline" size={size} onClick={copy} />}
+      >
+        {copied ? (
+          <Check aria-hidden="true" className={`text-positive ${isProminent ? "size-5" : "size-4"}`} />
+        ) : (
+          <LinkIcon aria-hidden="true" className={isProminent ? "size-5" : "size-4"} />
+        )}
+        <span className="sr-only">URLをコピー</span>
+      </LazyTooltip>
     </div>
   );
 }

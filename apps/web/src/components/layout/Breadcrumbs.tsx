@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 import {
   Breadcrumb,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -31,8 +32,16 @@ interface BreadcrumbsProps {
   className?: string;
 }
 
-/** 現在地の項目 (と直前の区切り) は sm 以上だけ出す */
-export const CURRENT_ITEM_CLASS = "hidden sm:inline-flex";
+/**
+ * 現在地の項目の幅。どの画面幅でも出し、列の幅を超える名前は 1 行で省略記号 (…) にする。
+ * 記事ページ (blog/[slug]) の手組みのパンくずも同じクラスを使う。
+ */
+export const CURRENT_ITEM_CLASS =
+  "min-w-0 max-w-full *:data-[slot=breadcrumb-page]:block *:data-[slot=breadcrumb-page]:truncate";
+
+/** 中間項目は狭い画面 (sm 未満) で省き、代わりに BreadcrumbEllipsis を 1 つ出す */
+const MIDDLE_ITEM_CLASS = "max-sm:hidden";
+const ELLIPSIS_ITEM_CLASS = "sm:hidden";
 
 /**
  * 全ページ共通のパンくず（視覚 UI + BreadcrumbList JSON-LD を一体で出力）。
@@ -40,8 +49,9 @@ export const CURRENT_ITEM_CLASS = "hidden sm:inline-flex";
  * top 以外の全ページで PageShell 直下の先頭に配置する（Breadcrumbs 必須ルール）。
  * JSON-LD の itemListElement を同時に出力し、ページ側の構造化データ重複を防ぐ。
  *
- * 狭い画面 (sm 未満) では末尾 (現在地) を出さない。見出しと同じ語が並び、長い名前だけが次の行へ
- * 落ちて見出しと重なって見えた (2026-09-25 UI 全面点検)。JSON-LD には全項目を残す。
+ * 現在地は常に出し、長い名前は省略記号で 1 行に収める (以前は sm 未満で隠していたため、狭い画面では
+ * 「ホーム」だけが残ることがあった)。4 項目以上のとき、狭い画面ではホームと直前の項目と現在地を残し、
+ * 間を BreadcrumbEllipsis にまとめる。JSON-LD には全項目を残す。
  *
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
@@ -56,6 +66,9 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
       ...(item.href ? { item: `${SITE_ORIGIN}${item.href}` } : {}),
     })),
   };
+  // 省く対象はホーム (0) と直前 (length - 2) と現在地 (length - 1) の間
+  const hasMiddle = items.length > 3;
+  const isMiddle = (i: number) => hasMiddle && i > 0 && i < items.length - 2;
 
   return (
     <>
@@ -67,20 +80,28 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
         <BreadcrumbList>
           {items.map((item, i) => {
             const isLast = i === items.length - 1;
-            const isBeforeLast = i === items.length - 2;
+            const middle = isMiddle(i);
             return (
               <Fragment key={`${item.label}-${i}`}>
-                <BreadcrumbItem className={isLast && items.length > 1 ? CURRENT_ITEM_CLASS : undefined}>
+                <BreadcrumbItem
+                  className={isLast ? CURRENT_ITEM_CLASS : middle ? MIDDLE_ITEM_CLASS : undefined}
+                >
                   {isLast || !item.href ? (
                     <BreadcrumbPage>{item.label}</BreadcrumbPage>
                   ) : (
-                    <BreadcrumbLink asChild>
-                      <Link href={item.href}>{item.label}</Link>
-                    </BreadcrumbLink>
+                    <BreadcrumbLink render={<Link href={item.href} />}>{item.label}</BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
                 {!isLast && (
-                  <BreadcrumbSeparator className={isBeforeLast ? CURRENT_ITEM_CLASS : undefined} />
+                  <BreadcrumbSeparator className={middle ? MIDDLE_ITEM_CLASS : undefined} />
+                )}
+                {hasMiddle && i === 0 && (
+                  <>
+                    <BreadcrumbItem className={ELLIPSIS_ITEM_CLASS}>
+                      <BreadcrumbEllipsis />
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator className={ELLIPSIS_ITEM_CLASS} />
+                  </>
                 )}
               </Fragment>
             );

@@ -77,7 +77,7 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
       <div className="px-4 pb-3 pt-0">
         <div className="flex items-center gap-2">
           {year && (
-            <Badge variant="outline" size="sm" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
+            <Badge variant="outline" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
               {year}
             </Badge>
           )}

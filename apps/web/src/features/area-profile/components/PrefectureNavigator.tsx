@@ -39,7 +39,12 @@ export function PrefectureNavigator({
   return (
     <section
       aria-label={heading ?? "都道府県から探す"}
-      className={cn("@container", className)}
+      className={cn(
+        "@container",
+        // 地方の小見出しは無彩色 (muted の小見出し)。色の見本は地図のマスと凡例だけが持ち、一覧の見出しには付けない
+        "[&_nav_h3]:text-xs [&_nav_h3]:font-medium [&_nav_h3]:text-muted-foreground [&_nav_h3>span[aria-hidden]]:hidden",
+        className,
+      )}
     >
       {heading && (
         <h2 className="text-lg font-semibold text-foreground">{heading}</h2>

@@ -5,7 +5,7 @@
  */
 export function AdSlotLabel() {
   return (
-    <div className="mb-1.5 flex items-center gap-2 text-[10.5px] font-semibold uppercase text-muted-foreground">
+    <div className="mb-1.5 flex items-center gap-2 text-xs font-medium text-muted-foreground">
       <span className="h-px flex-1 bg-border" />
       広告
       <span className="h-px flex-1 bg-border" />

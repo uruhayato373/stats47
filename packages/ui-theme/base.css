@@ -1,0 +1,8 @@
+/* 部品の見た目 (色トークンを含まない)。tw-animate と shadcn の追加 variant。
+   色は tokens-hsl.css (tokens.css と同じ色の HSL 3 値) を別に読む。
+   テンプレートの lyra の部品スタイル (style-lyra.css) は CSS として読まない。規則の中身は部品の className に
+   書き込んである (scripts/ui-theme/inline-lyra.mjs。2026-10-28 CSS-3)。 */
+@import "tw-animate-css";
+@import "./shadcn-tailwind.css";
+
+@custom-variant style-lyra (&:where(.style-lyra *));

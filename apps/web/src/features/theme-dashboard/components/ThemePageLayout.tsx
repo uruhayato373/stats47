@@ -1,6 +1,7 @@
 import { Suspense, type ReactNode } from 'react';
 
 
+import { buttonVariants } from '@stats47/components';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,10 +18,14 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
 import Link from '@/components/atoms/SiteLink';
-import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
+import { PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
-import { RailStack } from '@/components/rail';
+import {
+  LinkRowFrame,
+  linkRowItemClass,
+} from '@/components/navigation/StatisticsScopeNav';
+import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
 import { RailCard, RailNavRow } from '@/components/surface';
@@ -56,7 +61,6 @@ import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
-import { ThemeSideNav } from './ThemeSideNav';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
 import type { ThemePageData } from '../lib/load-theme-data';
@@ -79,11 +83,14 @@ interface Props {
 /**
  * テーマダッシュボードの共通レイアウト
  *
- * `PageShell`（左レール = ThemeSideNav）+ Breadcrumb + ヘッダー + ThemeDashboardClient。
+ * `PageShell` + Breadcrumb + ヘッダー + 本文上部の切替行 + ThemeDashboardClient。
  * chart_definitions から DB 管理チャートを取得してクライアントに渡す。
  *
- * ★Shell を本コンポーネントが持つ理由: 左レールの都道府県セレクタが
- * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell(leftRail) の
+ * テーマ間の移動はサイドバーの「テーマ」が持つので、ページ内に左レール (2 本目のナビ列) を
+ * 作らない (2026-10-28 テンプレート寄せ)。テーマ切替・地域選択は本文上部の 1 行に置く。
+ *
+ * ★Shell を本コンポーネントが持つ理由: 本文上部の都道府県セレクタが
+ * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell の
  * 入れ子をここで固定する。呼び出し側の page.tsx は PageShell を重ねない。
  */
 export async function ThemePageLayout({
@@ -177,23 +184,7 @@ export async function ThemePageLayout({
       initialAreaCode={providerPrefecture?.areaCode ?? null}
       initialAreaName={providerPrefecture?.areaName ?? null}
     >
-      <PageShell
-        leftRail={
-          <ThemeSideNav
-            themes={THEME_SWITCHER_THEMES}
-            currentThemeKey={theme.themeKey}
-            areaContext={
-              areaContext ? { areaCode: areaContext.areaCode } : undefined
-            }
-            showScope={!areaContext}
-            scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-            pageLinks={pageLinks}
-            metrics={themeMetrics}
-            surveys={themeSurveys}
-          />
-        }
-        leftRailNarrowBehavior="hide"
-      >
+      <PageShell>
         <div className="text-foreground">
           <script
             type="application/ld+json"
@@ -206,25 +197,19 @@ export async function ThemePageLayout({
           <Breadcrumb className="mb-4">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">ホーム</Link>
-                </BreadcrumbLink>
+                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               {areaContext ? (
                 <>
                   <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="/areas">都道府県一覧</Link>
-                    </BreadcrumbLink>
+                    <BreadcrumbLink render={<Link href="/areas" />}>都道府県一覧</BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href={hrefFor('area', { areaCode: areaContext.areaCode })}>
+                    <BreadcrumbLink render={<Link href={hrefFor('area', { areaCode: areaContext.areaCode })} />}>
                         {areaContext.areaName}
-                      </Link>
-                    </BreadcrumbLink>
+                      </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
@@ -250,115 +235,79 @@ export async function ThemePageLayout({
             <ThemeAreaHeader themeTitle={theme.title} />
           )}
 
-          {!areaContext && (
-            <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
-              <StatisticsScopeNav
-                current="prefectures"
-                hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-              />
-            </div>
-          )}
-
           {toolbar}
 
-          {/* 992px 未満のテーマ・地域切替。広幅は左レール ThemeSideNav が担うので隠す。
-          ★境界は左レールの共有クラスと必ず一致させること。
-          ずれると両方出る幅ができるため LEFT_RAIL_NARROW_ONLY_CLASS を使う。
+          {/* 地域単位・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のリンク列を 1 行で置く。
+          狭い幅ではテーマと地域のセレクトを地域単位のリンク列と別の行にし、選択中の名前を読める幅にする。
+          関連記事は h1 の下の最初の画面に置く (変更前の配置)。全指標・出典調査はダッシュボードの後ろ。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-          <div
-            role="group"
-            aria-label="テーマと地域"
-            className={`mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
-          >
-            <div className="min-w-0">
-              <ThemeSwitcher
-                themes={THEME_SWITCHER_THEMES}
-                currentThemeKey={theme.themeKey}
-                areaContext={
-                  areaContext ? { areaCode: areaContext.areaCode } : undefined
-                }
-                compact
-              />
+          <div className="mb-4 flex flex-col gap-3">
+            <div className="flex flex-wrap items-end gap-3">
+              {!areaContext && (
+                <StatisticsScopeNav
+                  current="prefectures"
+                  hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+                  className="mb-0 w-auto"
+                />
+              )}
+              <div
+                role="group"
+                aria-label="テーマと地域"
+                className="flex min-w-0 basis-full items-end gap-2 sm:flex-1 sm:basis-auto sm:gap-3"
+              >
+                <div className="min-w-0 flex-1 sm:w-56 sm:flex-none">
+                  <ThemeSwitcher
+                    themes={THEME_SWITCHER_THEMES}
+                    currentThemeKey={theme.themeKey}
+                    areaContext={
+                      areaContext ? { areaCode: areaContext.areaCode } : undefined
+                    }
+                    compact
+                  />
+                </div>
+                <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
+                  <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
+                    地域
+                  </span>
+                  <PrefectureSelect className="mt-1 w-full" />
+                </div>
+                <Link
+                  href="/themes"
+                  data-slot="button"
+                  className={buttonVariants({
+                    variant: 'outline',
+                    className: 'shrink-0 sm:ml-auto',
+                  })}
+                >
+                  テーマ一覧
+                </Link>
+              </div>
             </div>
-            <div className="min-w-0">
-              <span className="block text-xs font-medium text-muted-foreground">
-                地域
-              </span>
-              <PrefectureSelect className="mt-1 w-full" />
-            </div>
+
+            {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査)。
+            狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (右端のフェードで続きを示すリンク列) */}
+            {pageLinks.length > 1 && (
+              <LinkRowFrame label="このページの内容">
+                <ThemeChapterLinks
+                  links={pageLinks}
+                  themeKey={theme.themeKey}
+                  className={linkRowItemClass()}
+                />
+              </LinkRowFrame>
+            )}
           </div>
 
-          <div className={`mb-4 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
-            <RailStack>
-              {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査) */}
-              {pageLinks.length > 1 && (
-                <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
-                  <nav
-                    aria-label="このページの内容"
-                    className="flex items-center gap-x-5 gap-y-2 overflow-x-auto"
-                  >
-                    <ThemeChapterLinks
-                      links={pageLinks}
-                      themeKey={theme.themeKey}
-                      className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-                    />
-                  </nav>
-                </RailCard>
-              )}
-
-              {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
-                <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
-                  <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
-                    {themeMetrics.length > 0 && (
-                      <div>
-                        <p className="pt-3 text-sm font-semibold text-muted-foreground">
-                          全指標（{themeMetrics.length}）
-                        </p>
-                        <nav aria-label="このテーマの全指標（モバイル）">
-                          {themeMetrics.map((metric) => (
-                            <RailNavRow
-                              key={metric.rankingKey}
-                              href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
-                              chevron={false}
-                              className="px-0"
-                            >
-                              {metric.label}
-                            </RailNavRow>
-                          ))}
-                        </nav>
-                      </div>
-                    )}
-                    <div>
-                      <p className="pt-3 text-sm font-semibold text-muted-foreground">
-                        出典調査
-                      </p>
-                      <RailNavRow
-                        href="/survey"
-                        chevron={false}
-                        className="px-0 font-medium"
-                      >
-                        調査一覧へ
-                      </RailNavRow>
-                      {themeSurveys.length > 0 && (
-                        <nav aria-label="このテーマの出典調査（モバイル）">
-                          {themeSurveys.map((survey) => (
-                            <RailNavRow
-                              key={survey.id}
-                              href={hrefFor('survey', { surveyKey: survey.id })}
-                              chevron={false}
-                              className="px-0"
-                            >
-                              {survey.name}
-                            </RailNavRow>
-                          ))}
-                        </nav>
-                      )}
-                    </div>
-                  </div>
-                </RailCard>
-              )}
-            </RailStack>
-          </div>
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <div className="mb-4">
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles
+                  themeKey={theme.themeKey}
+                  tagKeys={theme.relatedArticleTagKeys ?? []}
+                  rankingKeys={theme.rankingKeys}
+                />
+              </Suspense>
+            </div>
+          )}
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (
@@ -371,12 +320,12 @@ export async function ThemePageLayout({
                 — 47都道府県チャートで{areaContext.areaName}
                 をハイライト表示しています
               </span>
-              <Link
+              <SectionIndexLink
                 href={hrefFor('area', { areaCode: areaContext.areaCode })}
-                className="text-sm text-primary hover:underline sm:ml-auto sm:shrink-0 sm:text-xs"
+                className="self-start sm:ml-auto sm:shrink-0 sm:self-auto"
               >
-                {areaContext.areaName}プロフィールへ →
-              </Link>
+                {areaContext.areaName}のプロフィール
+              </SectionIndexLink>
             </div>
           )}
 
@@ -412,17 +361,6 @@ export async function ThemePageLayout({
             </section>
           )}
 
-          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
-            <Suspense fallback={null}>
-              <ThemeRelatedArticles
-                themeKey={theme.themeKey}
-                tagKeys={theme.relatedArticleTagKeys ?? []}
-                rankingKeys={theme.rankingKeys}
-              />
-            </Suspense>
-          )}
-
-
           <ThemeDashboardClient
             themeConfig={theme}
             metricGroups={data.metricGroups}
@@ -435,6 +373,61 @@ export async function ThemePageLayout({
             kpiDataByArea={kpiDataByArea}
             highlightAreaCode={areaContext?.areaCode}
           />
+
+          {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
+            <div className="mt-8">
+              <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
+                <div className="grid gap-5 px-4 pb-3 sm:grid-cols-2">
+                  {themeMetrics.length > 0 && (
+                    <div>
+                      <p className="pt-3 text-sm font-semibold text-muted-foreground">
+                        全指標（{themeMetrics.length}）
+                      </p>
+                      <nav aria-label="このテーマの全指標">
+                        {themeMetrics.map((metric) => (
+                          <RailNavRow
+                            key={metric.rankingKey}
+                            href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
+                            chevron={false}
+                            className="px-0"
+                          >
+                            {metric.label}
+                          </RailNavRow>
+                        ))}
+                      </nav>
+                    </div>
+                  )}
+                  <div>
+                    <p className="pt-3 text-sm font-semibold text-muted-foreground">
+                      出典調査
+                    </p>
+                    <RailNavRow
+                      href="/survey"
+                      chevron={false}
+                      className="px-0 font-medium"
+                    >
+                      調査一覧へ
+                    </RailNavRow>
+                    {themeSurveys.length > 0 && (
+                      <nav aria-label="このテーマの出典調査">
+                        {themeSurveys.map((survey) => (
+                          <RailNavRow
+                            key={survey.id}
+                            href={hrefFor('survey', { surveyKey: survey.id })}
+                            chevron={false}
+                            className="px-0"
+                          >
+                            {survey.name}
+                          </RailNavRow>
+                        ))}
+                      </nav>
+                    )}
+                  </div>
+                </div>
+              </RailCard>
+            </div>
+          )}
+
 
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
           <InContentAdSlot slot={HUB_INCONTENT} />

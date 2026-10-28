@@ -6,11 +6,11 @@ import dynamic from "next/dynamic";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 const DivergingBarChart = dynamic(
   () => import("@stats47/visualization/d3/DivergingBarChart").then((mod) => mod.DivergingBarChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface LatestValues {

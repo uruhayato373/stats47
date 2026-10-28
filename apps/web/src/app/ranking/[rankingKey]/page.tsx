@@ -86,7 +86,6 @@ export default async function RankingKeyPage({
     <>
       <RankingPageHeadAssets
         structuredData={model.structuredData}
-        breadcrumbStructuredData={model.breadcrumbStructuredData}
         faqStructuredData={model.faqStructuredData}
         initialTileUrls={model.initialTileUrls}
       />

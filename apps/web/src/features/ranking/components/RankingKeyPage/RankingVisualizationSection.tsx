@@ -1,11 +1,11 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
+import { cn } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
     Tabs,
-    TabsContent,
     TabsList,
     TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
@@ -21,12 +21,18 @@ import { RankingMapChartClient } from "../RankingMapChart/RankingMapChartClient"
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
+type VisualizationTab = "map" | "table";
+
 /**
- * lg 未満: 非アクティブなタブ内容を隠す (タブ切替として振る舞う)
+ * lg 未満: 選んでいない側を隠す (タブ切替として振る舞う)
  * lg 以上: タブ選択に関係なく両方表示する (地図とテーブルを並べる)
+ *
+ * hidden 属性ではなく Tailwind の `hidden` クラスで隠す。hidden 属性は preflight の
+ * `[hidden]{display:none!important}` が lg の表示指定にレイヤー順で勝ち、PC でテーブルが消えていた。
  */
-const CONTENT_CLASS =
-    "mt-0 min-w-0 data-[state=inactive]:hidden lg:data-[state=inactive]:block";
+function panelClassName(isActive: boolean) {
+    return cn("min-w-0", isActive ? "block" : "hidden lg:block");
+}
 
 interface RankingVisualizationSectionProps {
     rankingItem: RankingItem;
@@ -47,61 +53,60 @@ export function RankingVisualizationSection({
     cardFooter,
     isPending = false,
 }: RankingVisualizationSectionProps) {
+    const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
+
     return (
-        // Tabs は 1 本だけ置く。地図・テーブルとも各 1 インスタンスに保つため
-        // forceMount + lg:block で「モバイル=タブ切替 / lg+=常時 2 枚」を CSS だけで両立する。
-        // (旧実装は lg:hidden と hidden lg:block の 2 ブロックに分かれており、
-        //  CSS で隠しているだけで DOM には両方存在した。地図を初期タブにすると
-        //  デスクトップで Leaflet が 2 インスタンスマウントされてしまう)
-        <Tabs
-            defaultValue="map"
-            className="w-full"
-            onValueChange={(value) => trackUiInteraction({ action: "tab_switch", target: value === "table" ? "table" : "map" })}
-        >
-            <TabsList className="w-full grid grid-cols-2 lg:hidden">
-                <TabsTrigger value="map" className="flex items-center gap-1.5">
-                    <MapIcon className="w-4 h-4" />
-                    地図
-                </TabsTrigger>
-                <TabsTrigger value="table" className="flex items-center gap-1.5">
-                    <TableIcon className="w-4 h-4" />
-                    テーブル
-                </TabsTrigger>
-            </TabsList>
-            <div className="relative mt-4 flex flex-col gap-4 xl:grid xl:grid-cols-2 xl:gap-4 xl:items-start">
+        // 地図・テーブルとも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。
+        // lg 未満だけタブの切替を出し、パネルは className の切替で出し分ける。
+        <div className="w-full">
+            {/* 年の切替は地図・表それぞれの見出し行の右 (ChartPanel の action) に置く。
+                ここは lg 未満のタブだけの行 (lg 以上は両方並べるので行ごと出さない)。 */}
+            <Tabs
+                value={activeTab}
+                className="mb-4 lg:hidden"
+                onValueChange={(value) => {
+                    const next: VisualizationTab = value === "table" ? "table" : "map";
+                    setActiveTab(next);
+                    trackUiInteraction({ action: "tab_switch", target: next });
+                }}
+            >
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="map" className="flex items-center gap-1.5">
+                        <MapIcon className="size-4" aria-hidden="true" />
+                        地図
+                    </TabsTrigger>
+                    <TabsTrigger value="table" className="flex items-center gap-1.5">
+                        <TableIcon className="size-4" aria-hidden="true" />
+                        テーブル
+                    </TabsTrigger>
+                </TabsList>
+            </Tabs>
+            <div className="relative flex flex-col gap-4 xl:grid xl:grid-cols-2 xl:items-start">
                 {isPending && (
-                    <div className="absolute inset-0 z-10 bg-background/50 flex items-center justify-center backdrop-blur-[1px]">
-                        <Skeleton className="w-full h-full opacity-50" />
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-[1px]">
+                        <Skeleton className="h-full w-full opacity-50" />
                     </div>
                 )}
-                {/* forceMount 時 Radix は hidden 属性を付けない (present が常に true になるため)。
-                    表示制御は data-state で自前に行う: lg 未満は非アクティブを隠し、lg+ は常に 2 枚出す。 */}
-                <TabsContent
-                    forceMount
-                    value="map"
-                    className={CONTENT_CLASS}
-                >
+                <div className={panelClassName(activeTab === "map")}>
                     <RankingMapChartClient
                         rankingItem={activeRankingItem}
                         rankingValues={rankingValues}
                         areaType={areaType}
-                        headerActions={headerActions}
+                        cardTitle={areaType === "city" ? "市区町村別の地図" : "都道府県別の地図"}
                         cardFooter={cardFooter}
+                        headerActions={headerActions}
                     />
-                </TabsContent>
-                <TabsContent
-                    forceMount
-                    value="table"
-                    className={CONTENT_CLASS}
-                >
+                </div>
+                <div className={panelClassName(activeTab === "table")}>
                     <RankingDataTable
                         rankingValues={rankingValues}
                         rankingItem={rankingItem}
-                        headerActions={headerActions}
+                        cardTitle={areaType === "city" ? "市区町村別の表" : "都道府県別の表"}
                         cardFooter={cardFooter}
+                        headerActions={headerActions}
                     />
-                </TabsContent>
+                </div>
             </div>
-        </Tabs>
+        </div>
     );
 }

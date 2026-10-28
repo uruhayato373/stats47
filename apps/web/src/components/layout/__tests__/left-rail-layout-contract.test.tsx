@@ -1,15 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import {
-  LEFT_RAIL_GRID_CLASS,
-  LEFT_RAIL_NARROW_ONLY_CLASS,
-  LEFT_RAIL_VISIBLE_CLASS,
-  LeftRailLayout,
-} from '../LeftRailLayout';
+import { LeftRailLayout } from '../LeftRailLayout';
 
 describe('LeftRailLayout — shared contract', () => {
-  it('992px から共通の列幅と gap で左レールを表示する', () => {
+  it('ページ内ナビはサイドバーの右に列を作らず、本文の上に全幅で置く', () => {
     const { container } = render(
       <LeftRailLayout
         leftRail={<nav aria-label="contract-left-rail">rail</nav>}
@@ -18,20 +13,28 @@ describe('LeftRailLayout — shared contract', () => {
       </LeftRailLayout>
     );
 
-    expect(container.firstElementChild).toHaveClass(LEFT_RAIL_GRID_CLASS);
-    expect(
-      screen.getByLabelText('contract-left-rail').parentElement
-    ).toHaveClass(LEFT_RAIL_VISIBLE_CLASS);
-    expect(LEFT_RAIL_NARROW_ONLY_CLASS).toBe('min-[992px]:hidden');
+    const outer = container.firstElementChild;
+    // 2 列のグリッド (旧 264px 列) を作らない
+    expect(outer?.className ?? '').not.toMatch(/grid-cols/);
+    const nav = screen.getByLabelText('contract-left-rail').parentElement;
+    expect(nav).toHaveAttribute('data-slot', 'page-nav');
+    // 幅で出し入れしない (どの幅でも同じ 1 か所に出す)
+    expect(nav?.className ?? '').not.toMatch(/hidden/);
+    // ナビは本文より先に描き、同じナビを 2 か所に出さない
+    expect(outer?.firstElementChild).toBe(nav);
+    expect(screen.getAllByLabelText('contract-left-rail')).toHaveLength(1);
   });
 
-  it('ArticleShell 向けに main 要素を選べる', () => {
+  it('本文の列は main を入れ子にせず div[data-slot=shell-main] で描く', () => {
     const { container } = render(
-      <LeftRailLayout leftRail={<nav>rail</nav>} mainAs="main">
+      <LeftRailLayout leftRail={<nav>rail</nav>}>
         <h1>content</h1>
       </LeftRailLayout>
     );
 
-    expect(container.querySelector('main')).not.toBeNull();
+    expect(container.querySelector('main')).toBeNull();
+    const shellMain = container.querySelector('div[data-slot="shell-main"]');
+    expect(shellMain).not.toBeNull();
+    expect(shellMain).toHaveTextContent('content');
   });
 });

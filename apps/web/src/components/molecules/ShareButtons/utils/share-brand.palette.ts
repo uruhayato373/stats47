@@ -4,22 +4,20 @@
  *
  * LINE とはてなの地色は明るく、白文字では 4.5:1 に届かない (2.26 / 2.85)。ブランドの地色は変えず、
  * 文字を濃紺にする (7.91 / 6.26。2026-10-06 axe color-contrast)。
+ * simple 版はテンプレートの Button (outline) の hover をそのまま使うので、ブランド色の hover は持たない
+ * (旧 hover は読み手 0 件のため 2026-10-28 に削除)。
  */
 export const SHARE_BRAND_PALETTE = {
   x: {
-    hover: "hover:text-blue-400 hover:bg-blue-400/10",
     prominent: "bg-black text-white hover:bg-black/80",
   },
   facebook: {
-    hover: "hover:text-blue-600 hover:bg-blue-600/10",
     prominent: "bg-[#1877F2] text-white hover:bg-[#1877F2]/90",
   },
   line: {
-    hover: "hover:text-green-500 hover:bg-green-500/10",
     prominent: "bg-[#06C755] text-[#0f172a] hover:bg-[#06C755]/90",
   },
   hatena: {
-    hover: "hover:text-blue-500 hover:bg-blue-500/10",
     prominent: "bg-[#00A4DE] text-[#0f172a] hover:bg-[#00A4DE]/90",
   },
-} as const satisfies Record<string, { hover: string; prominent: string }>;
+} as const satisfies Record<string, { prominent: string }>;

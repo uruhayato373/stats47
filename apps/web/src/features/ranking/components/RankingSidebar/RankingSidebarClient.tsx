@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 
+import {
+    SidebarGroup,
+    SidebarMenu,
+    SidebarMenuItem,
+    SidebarMenuSubButton,
+} from "@stats47/components/atoms/ui/sidebar";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricShortName } from "@stats47/ranking";
 
-import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
+import Link from "@/components/atoms/SiteLink";
+import { RailCard } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
 import { CategoryIcon } from "@/features/category";
@@ -72,53 +79,61 @@ export function RankingSidebarClient({
                 <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
             ) : undefined}
         >
-                {/* 関連ランキング: コンパクトリスト */}
+                {/* 関連ランキング: テンプレートの SidebarMenu で描く */}
                 {/* rail_click で計測するので、共通のクリック監視 (NavClickTracker) からは外す */}
-                <RailLinkList data-click-owner="rail">
-                    {displayOthers.map((item, index) => (
-                        <RailNavRow
-                            key={`${item.rankingKey}-${item.areaType}`}
-                            href={`${linkPrefix}/${item.rankingKey}`}
-                            title={metricShortName(item)}
-                            chevron={false}
-                            onClick={() =>
-                                trackRailClick({
-                                    widget: "related-rankings",
-                                    href: `${linkPrefix}/${item.rankingKey}`,
-                                    slot: index + 1,
-                                    rankingKey,
-                                })
-                            }
-                        >
-                            <span className="flex min-w-0 flex-col gap-0.5">
-                                <span className="line-clamp-1 leading-snug">
-                                    {metricShortName(item)}
-                                    {(() => {
-                                        const detail = getSidebarDetail(item);
-                                        return detail ? (
-                                            <span className="text-muted-foreground">
-                                                {" "}({detail})
-                                            </span>
-                                        ) : null;
-                                    })()}
-                                </span>
-                                {item.top1 ? (
-                                    <span className="line-clamp-1 text-xs leading-snug text-muted-foreground">
-                                        <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
-                                            {item.top1.rank ?? 1}位
-                                        </span>{" "}
-                                        {item.top1.areaName}{" "}
-                                        {item.top1.value ? (
-                                            <span className="font-semibold text-foreground">
-                                                {item.top1.value}{formatUnitForDisplay(item.unit)}
-                                            </span>
-                                        ) : null}
-                                    </span>
-                                ) : null}
-                            </span>
-                        </RailNavRow>
-                    ))}
-                </RailLinkList>
+                {/* SidebarMenuButton は SidebarProvider の context を必須にするため、context を読まない Sub 版を使う */}
+                <SidebarGroup className="-mx-2 p-0">
+                    <nav data-click-owner="rail">
+                        <SidebarMenu>
+                            {displayOthers.map((item, index) => {
+                                const href = `${linkPrefix}/${item.rankingKey}`;
+                                const detail = getSidebarDetail(item);
+                                return (
+                                    <SidebarMenuItem key={`${item.rankingKey}-${item.areaType}`}>
+                                        <SidebarMenuSubButton
+                                            title={metricShortName(item)}
+                                            className="h-auto min-h-11 translate-x-0 py-1.5 sm:min-h-9"
+                                            onClick={() =>
+                                                trackRailClick({
+                                                    widget: "related-rankings",
+                                                    href,
+                                                    slot: index + 1,
+                                                    rankingKey,
+                                                })
+                                            }
+                                            render={<Link href={href} />}
+                                        >
+                                            {/* 2 行で描く。SidebarMenuSubButton は最後の span を truncate するので div で包む */}
+                                            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                                <span className="line-clamp-1 leading-snug">
+                                                    {metricShortName(item)}
+                                                    {detail ? (
+                                                        <span className="text-muted-foreground">
+                                                            {" "}({detail})
+                                                        </span>
+                                                    ) : null}
+                                                </span>
+                                                {item.top1 ? (
+                                                    <span className="line-clamp-1 text-xs leading-snug text-muted-foreground">
+                                                        <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
+                                                            {item.top1.rank ?? 1}位
+                                                        </span>{" "}
+                                                        {item.top1.areaName}{" "}
+                                                        {item.top1.value ? (
+                                                            <span className="font-semibold text-foreground">
+                                                                {item.top1.value}{formatUnitForDisplay(item.unit)}
+                                                            </span>
+                                                        ) : null}
+                                                    </span>
+                                                ) : null}
+                                            </div>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuItem>
+                                );
+                            })}
+                        </SidebarMenu>
+                    </nav>
+                </SidebarGroup>
 
                 {/* もっと見る / 折りたたむ */}
                 {hasMore && (

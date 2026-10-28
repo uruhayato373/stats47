@@ -4,12 +4,7 @@ import { PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
-import {
-  Breadcrumbs,
-  LEFT_RAIL_NARROW_ONLY_CLASS,
-  PageHeader,
-  PageShell,
-} from '@/components/layout';
+import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
@@ -55,11 +50,8 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
   ]);
   const data = bundle ? projectGeoLayer(layer.slug, bundle.detail) : null;
   return (
-    <PageShell
-      leftRail={<GeoLayerNavigation activeLayerSlug={layer.slug} />}
-      leftRailDensity="compact"
-      leftRailNarrowBehavior="hide"
-    >
+    // GIS の切り替えは 2 本目の列 (左レール) にせず、どの幅でも本文上部の折りたたみカードに置く
+    <PageShell>
       <Breadcrumbs
         items={[
           { label: 'ホーム', href: '/' },
@@ -73,7 +65,7 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
         description={layer.description}
         meta={layer.representation}
       />
-      <div className={`mb-5 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
+      <div className="mb-5">
         <GeoLayerNavigation activeLayerSlug={layer.slug} mobile />
       </div>
       {bundle &&
