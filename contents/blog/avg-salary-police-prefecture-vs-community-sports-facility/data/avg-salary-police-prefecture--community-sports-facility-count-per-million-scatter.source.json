@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "avg-salary-police-prefecture",
+  "pair": "community-sports-facility-count-per-million",
+  "xKey": "avg-salary-police-prefecture",
+  "yKey": "community-sports-facility-count-per-million",
+  "pearsonR": -0.7758846370350619,
+  "partialRPopulation": -0.5966639287640577,
+  "unit": "円 × 施設",
+  "label": "警察職 平均給与月額 と 社会体育施設数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/avg-salary-police-prefecture.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug avg-salary-police-prefecture-vs-community-sports-facility --base avg-salary-police-prefecture --pair community-sports-facility-count-per-million --data-name avg-salary-police-prefecture--community-sports-facility-count-per-million"
+}

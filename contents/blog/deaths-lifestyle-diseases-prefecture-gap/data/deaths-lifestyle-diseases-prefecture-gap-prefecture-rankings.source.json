@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "deaths-lifestyle-diseases",
+  "year": "2023",
+  "unit": "人",
+  "label": "生活習慣病による死亡者数",
+  "readerLabel": "生活習慣病による死亡者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/deaths-lifestyle-diseases/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug deaths-lifestyle-diseases-prefecture-gap --keys deaths-lifestyle-diseases --data-name deaths-lifestyle-diseases-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:30:26.988Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

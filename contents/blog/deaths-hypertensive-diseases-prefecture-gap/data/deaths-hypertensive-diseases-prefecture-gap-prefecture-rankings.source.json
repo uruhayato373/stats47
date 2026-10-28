@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "deaths-hypertensive-diseases",
+  "year": "2023",
+  "unit": "人",
+  "label": "高血圧性疾患による死亡者数",
+  "readerLabel": "高血圧性疾患による死亡者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/deaths-hypertensive-diseases/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug deaths-hypertensive-diseases-prefecture-gap --keys deaths-hypertensive-diseases --data-name deaths-hypertensive-diseases-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:30:33.079Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

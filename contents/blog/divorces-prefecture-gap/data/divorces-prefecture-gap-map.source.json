@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "divorces",
+  "year": "2023",
+  "unit": "組",
+  "label": "離婚件数",
+  "readerLabel": "離婚件数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/divorces/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug divorces-prefecture-gap --keys divorces --with-map",
+  "fetchedAt": "2026-10-28T12:31:43.861Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

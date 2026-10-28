@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "aquaculture-harvest",
+  "year": "2023",
+  "unit": "トン",
+  "label": "養殖収獲量",
+  "readerLabel": "養殖収獲量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/aquaculture-harvest/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug aquaculture-harvest-prefecture-gap --keys aquaculture-harvest --with-map",
+  "fetchedAt": "2026-10-28T12:30:49.290Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

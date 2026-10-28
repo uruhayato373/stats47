@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "passport-issuance-count-per-thousand",
+  "year": "2024",
+  "unit": "件",
+  "label": "一般旅券発行件数",
+  "readerLabel": "一般旅券発行件数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/passport-issuance-count-per-thousand/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug food-self-sufficiency-rate-calorie-vs-passport-issuance --keys passport-issuance-count-per-thousand --data-name passport-issuance-count-per-thousand-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:28.792Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

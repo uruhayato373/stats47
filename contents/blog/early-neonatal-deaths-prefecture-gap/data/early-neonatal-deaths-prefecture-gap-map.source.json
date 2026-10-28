@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "early-neonatal-deaths",
+  "year": "2023",
+  "unit": "人",
+  "label": "早期新生児死亡数",
+  "readerLabel": "早期新生児死亡数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/early-neonatal-deaths/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug early-neonatal-deaths-prefecture-gap --keys early-neonatal-deaths --with-map",
+  "fetchedAt": "2026-10-28T12:28:59.470Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

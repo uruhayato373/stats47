@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "deaths-cerebrovascular-disease",
+  "year": "2023",
+  "unit": "人",
+  "label": "脳血管疾患による死亡者数",
+  "readerLabel": "脳血管疾患による死亡者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/deaths-cerebrovascular-disease/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug deaths-cerebrovascular-disease-prefecture-gap --keys deaths-cerebrovascular-disease --data-name deaths-cerebrovascular-disease-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:00.372Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

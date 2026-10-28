@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "food-manufacturing-establishments",
+  "year": "2024",
+  "unit": "事業所",
+  "label": "食料品製造業の事業所数",
+  "readerLabel": "食料品製造業の事業所数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/food-manufacturing-establishments/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug food-manufacturing-establishments-vs-regional-transport-co2 --keys food-manufacturing-establishments --data-name food-manufacturing-establishments-vs-regional-transport-co2-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:36.381Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

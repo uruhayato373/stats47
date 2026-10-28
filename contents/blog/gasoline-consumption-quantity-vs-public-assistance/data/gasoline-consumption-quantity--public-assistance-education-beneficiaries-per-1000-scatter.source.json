@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "gasoline-consumption-quantity",
+  "pair": "public-assistance-education-beneficiaries-per-1000",
+  "xKey": "gasoline-consumption-quantity",
+  "yKey": "public-assistance-education-beneficiaries-per-1000",
+  "pearsonR": -0.6671351169158128,
+  "partialRPopulation": -0.6265841326015614,
+  "unit": "l × 人",
+  "label": "ガソリン消費量 と 生活保護教育扶助人員 の関係",
+  "source": "r2:app/correlation/by-ranking-key/gasoline-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug gasoline-consumption-quantity-vs-public-assistance --base gasoline-consumption-quantity --pair public-assistance-education-beneficiaries-per-1000 --data-name gasoline-consumption-quantity--public-assistance-education-beneficiaries-per-1000"
+}
