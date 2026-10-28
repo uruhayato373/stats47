@@ -6,6 +6,8 @@
  * - 勝ち方は CSS で読んでいたときと同じ: lyra は部品の素のクラスにも呼び出し側の className にも勝ち、
  *   勝てるのは ! 付きだけ (lyra を cn(…) の最後の引数・cva の外の <名前>Lyra に置く)
  * - 公開サイトは lyra の規則を CSS として読まない (読むと同じ見た目が CSS に 2 回出る)
+ * - 部品と lyra の値は、HSL の数値 3 つのトークン (tokens-hsl.css) を hsl(var(--x)) で包んで読む
+ *   (var(--x) のままだと色として無効で、宣言ごと捨てられる。2026-10-28 に secondary の hover とサイドバーの線で実例)
  * - 走査から外す atom の一覧は tailwind.config.ts の "!" 除外と同じで、どれも本当に import されていない
  */
 import assert from "node:assert/strict";
@@ -15,6 +17,7 @@ import test from "node:test";
 
 import { cn } from "../../../packages/components/src/lib/cn.ts";
 import {
+  HSL_TOKENS_CSS,
   REFERENCE_CSS,
   ROOT,
   SOURCE_CSS,
@@ -22,7 +25,9 @@ import {
   inlineSource,
   losesToLyra,
   mergeReference,
+  parseHslTokens,
   parseLyra,
+  rawHslTokenUses,
   run,
 } from "../inline-lyra.mjs";
 
@@ -30,7 +35,8 @@ const RULES = parseLyra(readFileSync(SOURCE_CSS, "utf8"));
 const FIXTURE_RULES = new Map([["cn-a", "rounded-none text-xs"]]);
 
 test("ソースの cn-* を含む文字列は、すべて lyra の規則が書き込み済み", () => {
-  const { changed, dynamic, uncovered } = run({ write: false });
+  const { changed, dynamic, uncovered, rawHsl } = run({ write: false });
+  assert.deepEqual(rawHsl, []);
   assert.deepEqual(dynamic, []);
   assert.deepEqual(uncovered, []);
   assert.deepEqual(changed, []);
@@ -55,6 +61,24 @@ test("見本の差分は lyra の同じ性質を置き換え、lyra に無い規
   assert.match(merged.get("cn-card"), /\bpy-4\b.*\bring-1\b/);
   assert.match(merged.get("cn-card-title"), /\btext-base leading-5\.5\b/);
   assert.throws(() => mergeReference(RULES, new Map([["cn-missing", "text-sm"]])), /cn-missing/);
+});
+
+test("HSL の数値 3 つのトークンを hsl(…) で包まずに色として読む箇所を拾い、包んだものと色でない変数は拾わない", () => {
+  const tokens = parseHslTokens(readFileSync(HSL_TOKENS_CSS, "utf8"));
+  // 空振りしていない: 包み忘れの実例になったトークンが読めている
+  for (const name of ["secondary", "foreground", "sidebar-border", "sidebar-accent"]) assert.ok(tokens.has(name), name);
+  assert.ok(!tokens.has("radius"));
+  const raw = [
+    '"hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]"',
+    '"shadow-[0_0_0_1px_var(--sidebar-border)]"',
+    '"bg-(--muted)"',
+  ].join("\n");
+  assert.deepEqual(rawHslTokenUses(raw, tokens), [1, 1, 2, 3]);
+  const ok = [
+    '"hover:bg-[color-mix(in_oklch,hsl(var(--secondary)),hsl(var(--foreground))_5%)]"',
+    '"left-[calc(var(--sidebar-width)*-1)] rounded-[min(var(--radius-md),10px)] [--sidebar:1px]"',
+  ].join("\n");
+  assert.deepEqual(rawHslTokenUses(ok, tokens), []);
 });
 
 test("cn(…) は lyra を className の後ろに足すので、lyra が呼び出し側に勝ち、! だけが lyra に勝つ", () => {

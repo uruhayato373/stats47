@@ -23,6 +23,7 @@
 ```
 
 サイトは色を `hsl(var(--x))` の形で参照するので、oklch のままの `tokens.css` ではなく `tokens-hsl.css` を読む。
+部品と lyra の値も同じで、`var(--secondary)` のように包まずに読むと色として無効になり宣言ごと捨てられる。lyra の値は `style-reference.css` で `hsl(var(--x))` に置き換え、`npm run ui-theme:lyra:test` が包み忘れを止める。
 ルート要素 (`<html>`) にはテンプレートと同じく `class="style-lyra"` を付ける (lyra の見た目は className に書き込んであるので、このクラスには依存しない)。部品 (`packages/components/src/atoms/ui/*.tsx`) は
 テンプレートの同じコミットの `components/ui/` の写しで、変えたのは import 先と、各ファイル先頭に書いたサイト固有の追加だけ。
 

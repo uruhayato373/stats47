@@ -256,13 +256,6 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [LYRA-RAW-HSL-TOKEN-COLORS-01] 共有部品の lyra が HSL の数値 3 つのトークンを色として直接読み、ボタン・サイドバーの一部の色が効いていない
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: `packages/ui-theme/tokens-hsl.css` は `--secondary: 120 0% 96.1%` のように HSL の数値 3 つで持つ (公開サイトの `hsl(var(--x))` 参照に合わせた形)。一方 lyra を書き込んだ部品は、テンプレート (色を完全な値で持つ前提) のまま `button.tsx:54` の secondary の hover で `color-mix(in oklch, var(--secondary), var(--foreground) 5%)`、`sidebar.tsx:518` で `var(--sidebar-accent)`・`var(--sidebar-border)` を直接読む。この値は色として無効なので、宣言ごと捨てられる (公開サイトと管理画面の両方)。
-- **次**: `packages/ui-theme/style-reference.css` に `hsl(var(--x))` で包んだ値を書いて `npm run ui-theme:lyra` で書き込む。ほかに `var(--` を直接色として読む lyra のクラスが無いかを `packages/components/src/atoms/ui/*.tsx` で数える。
-- **完了条件**: 部品の lyra に、HSL の数値 3 つのトークンを包まずに色として読む箇所が 0 件。`ui-theme:lyra:test` にその検査がある。
-
 ### [UI-REFERENCE-PARTS-REST-01] 見本合わせの残りの部品 (リンクの行・開閉・空の状態・記事本文の見出し) と develop への取り込み
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
 
@@ -297,13 +290,6 @@ updated: 2026-10-19
 - **関係**: `KNOWHOW-PRODUCT-PILOT-01` は「複数の商品を同時に出さない」としているので、どちらを先に出すかはオーナーが決める。行政の業務向けデータ商品の検証は `ADMIN-STAT-PILOT-01` が持ち、読者が一部重なる。市区町村ページの拡大は `MUNI-RANKING-EXPANSION-01`。
 - **禁止**: 元データの利用規約 (政府統計は出典明記で二次利用可) を確かめずに売らない。参考文献の書籍の図・構成・数値を商品に使わない (`publicOriginalReuse: forbidden`)。
 - **完了条件**: 1商品の6週の CTA クリックと販売数 (0件なら0件と考えられる理由) が台帳にあり、続ける・変える・止めるのどれかをオーナーが決めた。
-
-### [UI-THEME-LYRA-TEST-NODE-01] ui-theme:lyra:test が Node 22.14 で .ts を読めず pre-commit を止める
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
-
-- **事象 (2026-10-28 実測)**: 会社の Windows PC (Node v22.14.0) で pre-commit の `ui-theme:lyra:test` が `ERR_UNKNOWN_FILE_EXTENSION ... packages/components/src/lib/cn.ts` で失敗し、関係のないコミットも止まった。`NODE_OPTIONS=--experimental-strip-types` を付けると 11/11 pass。入ったのは `5392747f7` (lyra の部品スタイルを className へ書き込む)。
-- **次**: npm script に `--experimental-strip-types` を足すか、`.ts` を tsx 経由で読む。必要な Node の版を `engines` か `.nvmrc` と合わせる。
-- **完了条件**: Node 22.14 で `npm run ui-theme:lyra:test` がフラグなしで pass する。
 
 ### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
