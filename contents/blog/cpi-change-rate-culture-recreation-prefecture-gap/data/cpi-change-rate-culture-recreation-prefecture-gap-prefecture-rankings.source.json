@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "cpi-change-rate-culture-recreation",
+  "year": "2024",
+  "unit": "％",
+  "label": "消費者物価指数変化率",
+  "readerLabel": "消費者物価指数変化率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/cpi-change-rate-culture-recreation/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cpi-change-rate-culture-recreation-prefecture-gap --keys cpi-change-rate-culture-recreation --data-name cpi-change-rate-culture-recreation-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:34:09.568Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

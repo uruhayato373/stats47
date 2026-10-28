@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-fresh-fruit-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "他の果物消費量",
+  "readerLabel": "他の果物消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/other-fresh-fruit-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug other-fresh-fruit-consumption-quantity-prefecture-gap --keys other-fresh-fruit-consumption-quantity --data-name other-fresh-fruit-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:32:12.012Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

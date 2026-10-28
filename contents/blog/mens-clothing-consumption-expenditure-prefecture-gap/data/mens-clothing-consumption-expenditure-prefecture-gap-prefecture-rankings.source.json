@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "mens-clothing-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "男子用洋服消費支出額",
+  "readerLabel": "男子用洋服への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/mens-clothing-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug mens-clothing-consumption-expenditure-prefecture-gap --keys mens-clothing-consumption-expenditure --data-name mens-clothing-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:34:13.340Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

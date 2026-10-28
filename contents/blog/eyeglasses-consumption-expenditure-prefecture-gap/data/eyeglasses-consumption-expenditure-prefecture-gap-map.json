@@ -1,0 +1,249 @@
+{
+  "title": "眼鏡消費支出額",
+  "subtitle": "2024年",
+  "label": "眼鏡消費支出額",
+  "readerLabel": "眼鏡への支出",
+  "hook": "眼鏡への支出が最も多い県は？",
+  "unit": "円",
+  "year": "2024",
+  "rankingKey": "eyeglasses-consumption-expenditure",
+  "source": "家計調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 11000
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 9571
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 9291
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 8976
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 8804
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 8486
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 8475
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 8450
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 8411
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 7975
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 7635
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 7430
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 7408
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 7330
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 7309
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 7034
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 6950
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 6936
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 6807
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 6776
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 6690
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 6449
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 6435
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 6108
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 6054
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 6017
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 5978
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 5730
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 5492
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 5482
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 5412
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 5277
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 5272
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 5232
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 5222
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 5222
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 5184
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 4707
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 4604
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 4596
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 4541
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 4511
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 4373
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 4172
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 3933
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 3512
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 3097
+    }
+  ]
+}

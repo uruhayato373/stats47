@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "employed-people-ratio-primary",
+  "year": "2020",
+  "unit": "％",
+  "label": "第1次産業就業者比率",
+  "readerLabel": "第1次産業就業者比率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/employed-people-ratio-primary/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug employed-people-ratio-primary-prefecture-gap --keys employed-people-ratio-primary --data-name employed-people-ratio-primary-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:33:19.204Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

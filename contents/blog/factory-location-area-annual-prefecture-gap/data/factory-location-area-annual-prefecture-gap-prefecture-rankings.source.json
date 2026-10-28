@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "factory-location-area-annual",
+  "year": "2020",
+  "unit": "千m2",
+  "label": "工場立地敷地面積（都道府県別・年次）",
+  "readerLabel": "工場立地敷地面積（都道府県別・年次）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/factory-location-area-annual/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug factory-location-area-annual-prefecture-gap --keys factory-location-area-annual --data-name factory-location-area-annual-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:29:01.893Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

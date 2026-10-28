@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "dual-income-household-ratio",
+  "pair": "elderly-on-public-assistance-per-1000-65plus",
+  "xKey": "dual-income-household-ratio",
+  "yKey": "elderly-on-public-assistance-per-1000-65plus",
+  "pearsonR": -0.8221628059110698,
+  "partialRPopulation": -0.777965161849452,
+  "unit": "％ × 人",
+  "label": "共働き世帯割合 と 生活保護被保護高齢者数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/dual-income-household-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dual-income-household-ratio-vs-elderly-on-public-assistance --base dual-income-household-ratio --pair elderly-on-public-assistance-per-1000-65plus --data-name dual-income-household-ratio--elderly-on-public-assistance-per-1000-65plus"
+}

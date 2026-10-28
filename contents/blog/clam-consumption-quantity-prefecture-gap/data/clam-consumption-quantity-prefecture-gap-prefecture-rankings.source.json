@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "clam-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "あさり消費量",
+  "readerLabel": "あさり消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/clam-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug clam-consumption-quantity-prefecture-gap --keys clam-consumption-quantity --data-name clam-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:32:50.479Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

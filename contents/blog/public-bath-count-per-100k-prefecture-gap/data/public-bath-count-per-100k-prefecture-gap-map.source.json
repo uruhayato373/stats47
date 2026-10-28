@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "public-bath-count-per-100k",
+  "year": "2023",
+  "unit": "所",
+  "label": "公衆浴場数",
+  "readerLabel": "公衆浴場数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/public-bath-count-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug public-bath-count-per-100k-prefecture-gap --keys public-bath-count-per-100k --with-map",
+  "fetchedAt": "2026-10-28T12:28:51.358Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

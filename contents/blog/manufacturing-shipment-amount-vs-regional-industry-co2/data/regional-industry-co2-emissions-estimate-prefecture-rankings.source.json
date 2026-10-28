@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "regional-industry-co2-emissions-estimate",
+  "year": "2023",
+  "unit": "千t-CO₂",
+  "label": "産業部門のCO₂排出量推計",
+  "readerLabel": "産業部門のCO₂排出量推計",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/regional-industry-co2-emissions-estimate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug manufacturing-shipment-amount-vs-regional-industry-co2 --keys regional-industry-co2-emissions-estimate --data-name regional-industry-co2-emissions-estimate-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:32.141Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

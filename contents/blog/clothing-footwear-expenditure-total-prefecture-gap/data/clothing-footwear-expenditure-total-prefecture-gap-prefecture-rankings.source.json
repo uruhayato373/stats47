@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "clothing-footwear-expenditure-total",
+  "year": "2024",
+  "unit": "円",
+  "label": "被服及び履物費",
+  "readerLabel": "被服及び履物費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/clothing-footwear-expenditure-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug clothing-footwear-expenditure-total-prefecture-gap --keys clothing-footwear-expenditure-total --data-name clothing-footwear-expenditure-total-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:24:04.245Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

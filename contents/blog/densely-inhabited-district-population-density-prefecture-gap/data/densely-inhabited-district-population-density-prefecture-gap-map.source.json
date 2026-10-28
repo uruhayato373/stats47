@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "densely-inhabited-district-population-density",
+  "year": "2020",
+  "unit": "人",
+  "label": "人口集中地区人口密度",
+  "readerLabel": "人口集中地区人口密度",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/densely-inhabited-district-population-density/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug densely-inhabited-district-population-density-prefecture-gap --keys densely-inhabited-district-population-density --with-map",
+  "fetchedAt": "2026-10-28T12:32:41.002Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

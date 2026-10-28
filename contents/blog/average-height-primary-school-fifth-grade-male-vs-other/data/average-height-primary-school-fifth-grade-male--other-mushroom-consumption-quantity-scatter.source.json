@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "average-height-primary-school-fifth-grade-male",
+  "pair": "other-mushroom-consumption-quantity",
+  "xKey": "average-height-primary-school-fifth-grade-male",
+  "yKey": "other-mushroom-consumption-quantity",
+  "pearsonR": 0.7036579407037957,
+  "partialRPopulation": 0.7063345780511336,
+  "unit": "cm × g",
+  "label": "平均身長 と 他のきのこ消費量 の関係",
+  "source": "r2:app/correlation/by-ranking-key/average-height-primary-school-fifth-grade-male.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug average-height-primary-school-fifth-grade-male-vs-other --base average-height-primary-school-fifth-grade-male --pair other-mushroom-consumption-quantity --data-name average-height-primary-school-fifth-grade-male--other-mushroom-consumption-quantity"
+}

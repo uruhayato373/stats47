@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-mushroom-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "他のきのこ消費量",
+  "readerLabel": "他のきのこ消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/other-mushroom-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug average-height-primary-school-fifth-grade-male-vs-other --keys other-mushroom-consumption-quantity --data-name other-mushroom-consumption-quantity-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:22:29.469Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

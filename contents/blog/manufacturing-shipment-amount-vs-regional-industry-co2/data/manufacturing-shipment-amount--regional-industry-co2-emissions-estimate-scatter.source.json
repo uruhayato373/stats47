@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "manufacturing-shipment-amount",
+  "pair": "regional-industry-co2-emissions-estimate",
+  "xKey": "manufacturing-shipment-amount",
+  "yKey": "regional-industry-co2-emissions-estimate",
+  "pearsonR": 0.6514438530518162,
+  "partialRPopulation": 0.5551760126465105,
+  "unit": "百万円 × 千t-CO₂",
+  "label": "製造品出荷額等 と 産業部門のCO₂排出量推計 の関係",
+  "source": "r2:app/correlation/by-ranking-key/manufacturing-shipment-amount.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug manufacturing-shipment-amount-vs-regional-industry-co2 --base manufacturing-shipment-amount --pair regional-industry-co2-emissions-estimate --data-name manufacturing-shipment-amount--regional-industry-co2-emissions-estimate"
+}
