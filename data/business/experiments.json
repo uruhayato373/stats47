@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T03:25:38.134Z",
+  "updated_at": "2026-10-28T03:30:54.750Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -614,7 +614,13 @@
         "evidence": "GSC「製造品出荷額 ランキング 市町村」CTR 46%・1.3位・28日390クリック。note 売上2件が統計業務。データ単品の購入は未検証。ライセンス: N03 は CC BY 4.0、e-Stat は商用可 (出典と加工の明記)。境界と合併履歴は無料で出回るので、売り物は組替済みの時系列の値に絞る",
         "payer": "事業者・学生 (個人の自腹ではなく経費・研究費)"
       },
-      "source": "vault memos/stats47_悩み起点リサーチ.md §8"
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-DATA-PRODUCT-PILOT-01",
+        "MUNI-DATA-LICENSE-CHECK-01",
+        "MUNI-DATA-PRODUCT-BUILD-01",
+        "MUNI-DATA-PRODUCT-SALE-01"
+      ]
     },
     {
       "id": "EXP-008",
@@ -660,7 +666,13 @@
         "evidence": "Yahoo!知恵袋 約1,737件・サジェスト・県版ランキング1.27位 CTR 40%。市区町村版で同じ順位が取れるかは未検証。推定検索数 (月・Google): 住みやすい街ランキング 7,920、子育てしやすい街ランキング 2,320、子育てしやすい市 56",
         "payer": "広告主 (AdSense)"
       },
-      "source": "vault memos/stats47_悩み起点リサーチ.md §8"
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-KOSODATE-RANKING-01",
+        "MUNI-KOSODATE-METRICS-01",
+        "MUNI-PREF-RANKING-ROUTE-01",
+        "MUNI-KOSODATE-PAGES-01"
+      ]
     },
     {
       "id": "EXP-009",
@@ -697,7 +709,7 @@
           "action": "proposed"
         }
       ],
-      "card": "MUNI-KOSODATE-RANKING-01",
+      "card": "MUNI-ROUGO-CARFREE-01",
       "harm": {
         "reader": "本人・親の老後の住まいを考える人",
         "pain": "車がなくても買い物・病院に行ける町か分からない",
@@ -706,7 +718,10 @@
         "evidence": "推定検索数「老後 住みやすい街」月384 で需要は小さい。stats47 の GSC に悩みのクエリは出ていない",
         "payer": "広告主 (AdSense)"
       },
-      "source": "vault memos/stats47_悩み起点リサーチ.md §8"
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-ROUGO-CARFREE-01"
+      ]
     },
     {
       "id": "EXP-010",
@@ -743,7 +758,7 @@
           "action": "proposed"
         }
       ],
-      "card": "MUNI-KOSODATE-RANKING-01",
+      "card": "MUNI-IJU-COMPARE-01",
       "harm": {
         "reader": "地方移住を考える人",
         "pain": "雪・車・仕事の条件で候補を絞れない",
@@ -752,7 +767,10 @@
         "evidence": "Yahoo!知恵袋 549件。stats47 の GSC はほぼ0。競合 (JOIN・田舎暮らしの本・自治体広報) が強い。推定検索数「移住 おすすめ」月4,320、移住相談 73,003件 (2025年・過去最多)",
         "payer": "広告主 (AdSense)"
       },
-      "source": "vault memos/stats47_悩み起点リサーチ.md §8"
+      "source": "vault memos/stats47_悩み起点リサーチ.md §8",
+      "cards": [
+        "MUNI-IJU-COMPARE-01"
+      ]
     },
     {
       "id": "EXP-011",
@@ -798,7 +816,10 @@
         "evidence": "実売 ¥800→¥254・¥500→¥159 がちょうど35%。KDP ヘルプ G200634500 に条件の記載",
         "payer": "Kindle 読者"
       },
-      "source": "vault memos/stats47_悩み起点リサーチ.md"
+      "source": "vault memos/stats47_悩み起点リサーチ.md",
+      "cards": [
+        "KDP-ROYALTY-RATE-CHECK-01"
+      ]
     },
     {
       "id": "EXP-012",
@@ -835,7 +856,7 @@
           "action": "proposed"
         }
       ],
-      "card": "MUNI-DATA-PRODUCT-PILOT-01",
+      "card": "MUNI-PEER-DATASET-01",
       "source": "vault memos/stats47_悩み起点リサーチ.md §8",
       "harm": {
         "reader": "計画策定を受けたコンサル・自治体の担当者",
@@ -844,7 +865,10 @@
         "payWhy": "業務の経費で作業時間を買う",
         "evidence": "委託単価と再委託の構造はあり。データ一式の購入は未検証",
         "payer": "事業者 (経費)"
-      }
+      },
+      "cards": [
+        "MUNI-PEER-DATASET-01"
+      ]
     }
   ]
 }
