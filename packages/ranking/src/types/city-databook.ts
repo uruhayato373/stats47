@@ -42,6 +42,29 @@ export interface CityDatabookPopulationChange {
   yearName: string;
 }
 
+/** 行政区の内訳の 1 指標 (政令指定都市のページだけ。MUNI-DESIGNATED-CITY-WARDS-01) */
+export interface CityDatabookWardMetric {
+  rankingKey: string;
+  label: string;
+  unit: string;
+  /** 市全体の値と同じ年 */
+  yearCode: string;
+  yearName: string;
+  /** 値のある行政区だけ。cityRank は市の中の順位 (値の大きい順・同じ値は同じ順位) */
+  values: Array<{ areaCode: string; value: number; cityRank: number }>;
+}
+
+/**
+ * 政令指定都市を行政区に分けた内訳 (WardMode `split`)。値は e-Stat の観測値 (`app/stats/<key>/cities.json`) の
+ * 行政区の行をそのまま写す。行政区は市区町村ランキング (基礎自治体の単位) の順位に混ぜないので、全国順位は持たない。
+ */
+export interface CityDatabookWardBreakdown {
+  /** 行政区 (コード順) */
+  wards: Array<{ areaCode: string; areaName: string }>;
+  /** 見出しの指標のうち、行政区に値があるもの */
+  metrics: Record<string, CityDatabookWardMetric>;
+}
+
 export interface CityDatabookSnapshot {
   schemaVersion: 1;
   areaCode: string;
@@ -54,6 +77,8 @@ export interface CityDatabookSnapshot {
   previousPopulation: CityDatabookPopulationChange | null;
   sections: CityDatabookSection[];
   metrics: Record<string, CityDatabookMetric>;
+  /** 政令指定都市だけが持つ行政区の内訳 */
+  wardBreakdown?: CityDatabookWardBreakdown;
 }
 
 export function cityDatabookKeyPath(prefectureCode: string, cityCode: string): string {

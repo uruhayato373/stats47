@@ -49,7 +49,8 @@ interface BuildMunicipalitySnapshotsInput {
   generatedAt: string;
 }
 
-function satisfiesValuePolicy(
+/** 市区町村カタログの値の範囲 (`valuePolicy`) を満たすか。行政区の内訳 (buildWardBreakdowns) も同じ判定を使う */
+export function satisfiesValuePolicy(
   value: number,
   policy: MunicipalityMetricSnapshotConfig['valuePolicy']
 ): boolean {

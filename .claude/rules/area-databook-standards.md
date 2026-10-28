@@ -109,6 +109,10 @@ SNS 地域カルーセルは、**同じ選定関数 `selectAreaHighlights` / `se
 - **載せる指標の上限**: 社会・人口統計体系の拡充分 (2026-10-22・541 件。`municipality-ssds-expansion.ts`) は
   `SSDS_EXPANSION_DATABOOK_PICKS` に挙げたものだけを載せる (`isCityDatabookMetric`)。全件を載せると 1 ページの HTML が
   ページの重さの予算 (900KB) を外れるため。残りは市区町村テーマのページから見る。テーマも 1 件 60 指標以下に保つ (契約テスト)。
+- **行政区の内訳** (`wardBreakdown`・政令指定都市 20 市だけ): 見出しの指標の行政区の値を、e-Stat の観測値
+  (`app/stats/<key>/cities.json`) から市全体と同じ年で取り、市の中の順位を付ける (`buildWardBreakdowns`)。値の範囲は市区町村
+  カタログの `valuePolicy` と同じ判定で、全区が 0 の指標は載せない。全国順位は持たない (行政区は基礎自治体ではない)。
+  政令指定都市のどれかで内訳を作れなければ生成器が止まる。表示は `MunicipalityWardBreakdownSection` (地図は WardMode `split`)。
 - **生成**: `generate-city-databooks.ts`。deploy は市区町村ランキング生成の直後、sync-snapshots は `city-databook` task。
   生成時刻を持たない。検査は `npm run validate:municipalities` (配置) と schema (`parseCityDatabookSnapshot`)。
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ランキングデータ整合性の週次監査 (2026-10-26 に ranking-integrity-audit-weekly.yml から週次レビューへ移した)。
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。R2 配信データへの read-only 監査 (HEAD/GET のみ)。
-# 整合性・再取り込みキュー (縮小専用ラチェット)・計算型 ranking の再計算・公開データ契約のどれかが違反なら exit 1。
+# 整合性・再取り込みキュー (縮小専用ラチェット)・計算型 ranking の再計算・公開データ契約・市区町村の地図の対応のどれかが違反なら exit 1。
 # 出力: data/ranking/integrity-audit.json・data/data-quality/ (データ品質キュー。レビューの Phase 1 が読む)
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
@@ -13,6 +13,8 @@ npx tsx packages/data-configs/scripts/audit-reingest-queue.ts --ratchet || faile
 NODE_OPTIONS=--conditions=react-server npx tsx packages/ranking/scripts/verify-calculated-rankings.ts || failed+=("calculated-rankings")
 npm run --silent audit:public-data-contract -- --json "${TMPDIR:-/tmp}/public-data-contract.json" || failed+=("public-data-contract")
 npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts || failed+=("data-quality-queue")
+# 市区町村の地図: 47 県 × 政令指定都市の統合 / 分割で、地域と地図の形が 1 対 1 か (MUNI-DESIGNATED-CITY-WARDS-01。R2 の地図を読むだけ)
+npm run --silent audit:ward-mode-topology --workspace=@stats47/gis || failed+=("ward-mode-topology")
 if [ "${#failed[@]}" -gt 0 ]; then
   cat <<HINT
 違反の出た検査: ${failed[*]}

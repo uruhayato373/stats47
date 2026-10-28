@@ -43,6 +43,7 @@ import {
 } from '@/features/municipalities';
 import {
   MunicipalityRankingMapSection,
+  getSpecialWardCodes,
   readMunicipalityRanking,
 } from '@/features/municipalities/server';
 
@@ -77,7 +78,7 @@ async function loadPrefectureRanking({ rankingKey, prefCode }: Params) {
   if (!prefecture) return null;
   const { item, values } = await readMunicipalityRanking(rankingKey);
   if (!item || !values) return null;
-  const ranking = buildMunicipalityPrefectureRanking(values.values, prefCode);
+  const ranking = buildMunicipalityPrefectureRanking(values.values, prefCode, getSpecialWardCodes());
   // 比べる相手が少なすぎる県はページを作らない (薄いページにしない)
   if (!ranking || ranking.rows.length < MIN_MUNICIPALITIES_PER_PREFECTURE_RANKING) return null;
   return { item, values, ranking, prefecture };
@@ -122,7 +123,7 @@ export default async function MunicipalityPrefectureRankingPage({
   const displayTitle = municipalityRankingDisplayTitle(item);
   const areaLabel = municipalityPrefectureAreaLabel(ranking.hasSpecialWards);
   // 東京都で特別区に値が無い指標 (財政力指数など) は、区が無い理由を書く (MUNI-WARD-GAP-DISPLAY-01)
-  const showWardGapNote = prefecture.prefCode === '13000' && lacksSpecialWards(snapshot.values);
+  const showWardGapNote = prefecture.prefCode === '13000' && lacksSpecialWards(snapshot.values, getSpecialWardCodes());
   const summary = buildMunicipalityPrefectureRankingSummary(ranking, {
     prefectureName: prefecture.prefName,
     unit: snapshot.unit,

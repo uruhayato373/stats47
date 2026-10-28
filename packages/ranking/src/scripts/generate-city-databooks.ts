@@ -11,11 +11,12 @@ import {
   CITY_DATABOOK_LAYOUT,
   CITY_DATABOOK_POPULATION_METRIC_KEY,
   KNOWN_MUNICIPALITY_RANKING_KEYS,
+  getMunicipalityMetricAvailability,
   listCityDatabookThemes,
   validateCityDatabookLayout,
 } from '@stats47/data-configs/geo-scope';
 
-import { buildCityDatabooks } from '../municipalities/build-city-databooks';
+import { buildCityDatabooks, buildWardBreakdowns } from '../municipalities/build-city-databooks';
 import { cityDatabookKeyPath } from '../types/city-databook';
 import {
   municipalityRankingItemKeyPath,
@@ -90,7 +91,39 @@ async function main(): Promise<void> {
     }>,
   ]);
 
-  const entities = buildMunicipalityEntityPolicy().entities.filter((entity) => entity.disposition === 'publishable');
+  const policy = buildMunicipalityEntityPolicy();
+  const entities = policy.entities.filter((entity) => entity.disposition === 'publishable');
+
+  // 政令指定都市の行政区の内訳 (MUNI-DESIGNATED-CITY-WARDS-01): 見出しの指標の e-Stat の観測値から行政区の行を取る
+  const wardsByCity = new Map<string, Array<{ code: string; name: string }>>();
+  for (const entity of policy.entities) {
+    if (entity.disposition !== 'excluded' || entity.kind !== 'administrative-ward' || !entity.parentMunicipalityCode) continue;
+    wardsByCity.set(entity.parentMunicipalityCode, [
+      ...(wardsByCity.get(entity.parentMunicipalityCode) ?? []),
+      { code: entity.code, name: entity.name },
+    ]);
+  }
+  const headlineObservations = new Map<string, CityPopulationHistoryRow[]>([[CITY_DATABOOK_POPULATION_METRIC_KEY, population.rows]]);
+  for (const key of CITY_DATABOOK_LAYOUT.headlineMetricKeys) {
+    if (headlineObservations.has(key)) continue;
+    const payload = (await fetchCitiesPayload(`${sourceBase}/app/stats/${key}/cities.json`)) as { rows: CityPopulationHistoryRow[] };
+    headlineObservations.set(key, payload.rows);
+  }
+  const wardBreakdowns = buildWardBreakdowns({
+    wardsByCity,
+    headlineMetricKeys: CITY_DATABOOK_LAYOUT.headlineMetricKeys,
+    rankings,
+    observations: headlineObservations,
+    valuePolicyOf: (key) => {
+      const availability = getMunicipalityMetricAvailability(key);
+      return availability.status === 'published' ? availability.valuePolicy : undefined;
+    },
+  });
+  if (wardBreakdowns.size !== wardsByCity.size) {
+    const lacking = [...wardsByCity.keys()].filter((code) => !wardBreakdowns.has(code));
+    throw new Error(`designated cities without ward breakdown: ${lacking.join(', ')}`);
+  }
+
   const databooks = buildCityDatabooks({
     entities,
     themes: listCityDatabookThemes(),
@@ -103,6 +136,7 @@ async function main(): Promise<void> {
       return classifyMetric(metric).basis;
     },
     populationHistory: population.rows,
+    wardBreakdowns,
   });
 
   const missing = entities.filter((entity) => !databooks.has(entity.code));
@@ -124,7 +158,11 @@ async function main(): Promise<void> {
   }
 
   console.log(
-    JSON.stringify({ outputRoot, databooks: databooks.size, rankings: rankings.size, largestBytes: largest }, null, 2)
+    JSON.stringify(
+      { outputRoot, databooks: databooks.size, rankings: rankings.size, wardBreakdowns: wardBreakdowns.size, largestBytes: largest },
+      null,
+      2
+    )
   );
 }
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { parseCityDatabookSnapshot } from '../../repositories/schemas/municipality-ranking.schemas';
-import { buildCityDatabooks } from '../build-city-databooks';
+import { buildCityDatabooks, buildWardBreakdowns } from '../build-city-databooks';
 import { buildCityPageMeta, buildMunicipalityRankingMeta } from '../municipality-page-meta';
 import {
   buildMunicipalityListNames,
@@ -188,5 +188,66 @@ describe('title・説明文', () => {
     expect(meta.title).toBe('千代田区（東京都）の人口・統計データ｜6.7万人（2020年）・都内2位');
     expect(meta.description).toContain('2015年の5.8万人から14.2%増えました');
     expect(meta.description).toContain('高齢化率17%');
+  });
+});
+
+describe('政令指定都市の行政区の内訳', () => {
+  const rankings = new Map([
+    ['total-population', ranking('total-population', '総人口', '人', [['14100', '神奈川県 横浜市', '14000', 3_750_000, 1]])],
+    ['fiscal-strength-index', ranking('fiscal-strength-index', '財政力指数', '指数', [['14100', '神奈川県 横浜市', '14000', 0.96, 1]])],
+  ]);
+  const wardsByCity = new Map([
+    ['14100', [
+      { code: '14102', name: '神奈川県 横浜市 神奈川区' },
+      { code: '14101', name: '神奈川県 横浜市 鶴見区' },
+    ]],
+  ]);
+  const observations = new Map([
+    ['total-population', [
+      { areaCode: '14101', yearCode: '2020', value: 290_000 },
+      { areaCode: '14102', yearCode: '2020', value: 250_000 },
+      { areaCode: '14102', yearCode: '2015', value: 999_999 }, // 市全体と違う年は使わない
+      { areaCode: '14100', yearCode: '2020', value: 3_750_000 }, // 市全体の行は内訳に入れない
+    ]],
+    // e-Stat で行政区が 0 の指標 (行政区の値が集計されていない)
+    ['fiscal-strength-index', [
+      { areaCode: '14101', yearCode: '2020', value: 0 },
+      { areaCode: '14102', yearCode: '2020', value: 0 },
+    ]],
+  ]);
+
+  const breakdowns = buildWardBreakdowns({
+    wardsByCity,
+    headlineMetricKeys: ['total-population', 'fiscal-strength-index'],
+    rankings,
+    observations,
+    valuePolicyOf: (key) => (key === 'fiscal-strength-index' ? { minExclusive: 0 } : undefined),
+  });
+
+  it('市全体と同じ年の行政区の値だけを、市の中の順位付きで束ねる (行政区はコード順)', () => {
+    const yokohama = breakdowns.get('14100')!;
+    expect(yokohama.wards.map((ward) => ward.areaCode)).toEqual(['14101', '14102']);
+    expect(yokohama.metrics['total-population']!.values).toEqual([
+      { areaCode: '14101', value: 290_000, cityRank: 1 },
+      { areaCode: '14102', value: 250_000, cityRank: 2 },
+    ]);
+  });
+
+  it('値の範囲 (valuePolicy) を外れる値・全区 0 の指標は載せない (財政力指数は行政区が集計されていない)', () => {
+    expect(breakdowns.get('14100')!.metrics['fiscal-strength-index']).toBeUndefined();
+  });
+
+  it('作った内訳はデータブックの形 (schema) を満たす', () => {
+    const databook = buildCityDatabooks({
+      entities: [{ code: '14100', name: '神奈川県 横浜市', prefectureCode: '14000' }],
+      themes: [],
+      headlineMetricKeys: ['total-population'],
+      populationMetricKey: 'total-population',
+      rankings,
+      basisOf: () => 'total',
+      populationHistory: [],
+      wardBreakdowns: breakdowns,
+    }).get('14100')!;
+    expect(parseCityDatabookSnapshot(databook).wardBreakdown?.wards).toHaveLength(2);
   });
 });

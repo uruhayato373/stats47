@@ -38,32 +38,30 @@ export interface MunicipalityPrefectureRanking {
 const NATIONAL_TOP_RANK = 100;
 const TOKYO_PREFECTURE_CODE = '13000';
 
-/**
- * 東京の特別区の行か。配信値の市区町村は政令指定都市の行政区を含まないので (entity policy が除外)、
- * 東京都の「〜区」は特別区だけ (packages/area/src/municipalities/entity-policy.ts と同じ判定)。
- */
-export function isSpecialWardRow(row: Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaName'>): boolean {
-  return row.prefectureCode === TOKYO_PREFECTURE_CODE && row.areaName.trim().endsWith('区');
+function lowerMedian(values: readonly number[]): number {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor((sorted.length - 1) / 2)]!;
 }
 
 /**
  * 東京都の市町村には値があるのに、特別区が 1 つも無いか (MUNI-WARD-GAP-DISPLAY-01)。
  * 財政力指数・ごみの排出量などは、元の統計 (社会・人口統計体系) で区の値が「-」(データが得られないもの) になっている
  * (2026-10-28 に e-Stat で確認)。このときはページに理由を書く。東京都に 1 行も無い指標 (湖沼の面積など) は対象外。
+ * 特別区のコードは `@stats47/area` の listSpecialWardCodes (公開方針の分類) を呼び元が渡す
+ * (この package は client からも読まれるので、地域マスタをここで読まない)。
  */
-export function lacksSpecialWards(values: readonly Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaName'>[]): boolean {
+export function lacksSpecialWards(
+  values: readonly Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaCode'>[],
+  specialWardCodes: ReadonlySet<string>
+): boolean {
   const tokyo = values.filter((row) => row.prefectureCode === TOKYO_PREFECTURE_CODE);
-  return tokyo.length > 0 && !tokyo.some(isSpecialWardRow);
-}
-
-function lowerMedian(values: readonly number[]): number {
-  const sorted = [...values].sort((a, b) => a - b);
-  return sorted[Math.floor((sorted.length - 1) / 2)]!;
+  return tokyo.length > 0 && !tokyo.some((row) => specialWardCodes.has(row.areaCode));
 }
 
 export function buildMunicipalityPrefectureRanking(
   values: readonly MunicipalityRankingValue[],
-  prefectureCode: string
+  prefectureCode: string,
+  specialWardCodes: ReadonlySet<string>
 ): MunicipalityPrefectureRanking | null {
   const inPrefecture = values
     .filter((row) => row.prefectureCode === prefectureCode)
@@ -76,7 +74,7 @@ export function buildMunicipalityPrefectureRanking(
   return {
     prefectureCode,
     rows,
-    hasSpecialWards: rows.some(isSpecialWardRow),
+    hasSpecialWards: rows.some((row) => specialWardCodes.has(row.areaCode)),
     median: lowerMedian(rows.map((row) => row.value)),
     nationalMedian: lowerMedian(values.map((row) => row.value)),
     nationalCount: values.length,

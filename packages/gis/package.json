@@ -63,7 +63,8 @@
     "audit:public-ksj-manifests": "tsx src/mlit-ksj/scripts/audit-public-ksj-manifests.ts",
     "audit:public-ksj-r2": "tsx src/mlit-ksj/scripts/audit-public-ksj-r2.ts",
     "acquire:public-ksj": "tsx src/mlit-ksj/scripts/acquire-public-ksj.ts",
-    "acquire:mhlw-medical": "tsx src/mlit-ksj/scripts/acquire-mhlw-medical.ts"
+    "acquire:mhlw-medical": "tsx src/mlit-ksj/scripts/acquire-mhlw-medical.ts",
+    "audit:ward-mode-topology": "tsx src/mlit/scripts/audit-ward-mode-topology.ts"
   },
   "dependencies": {
     "@stats47/area": "*",
