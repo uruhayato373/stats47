@@ -1,7 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { cn } from "@/lib/cn";
+import { TableBody, TableCell, TableHead, TableHeader, TableRow, cn } from "@stats47/components";
 
 import { bodyCell, headCell, TableFrame } from "./table-frame";
 

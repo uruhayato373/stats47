@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@stats47/components";
 import { AGENT_MODEL_SOURCES, agentModelCatalog } from "@/lib/server/agent-models";
 import { hasError } from "@/lib/server/state-io";
 
@@ -136,7 +136,7 @@ export default async function AgentsPage({ searchParams }: { searchParams: Promi
                       </Cell>
                       <Cell nowrap>
                         {usd(p.costUsd)}
-                        {p.savingUsd ? <div className="text-xs text-console-good">節約見込み {usd(p.savingUsd)}</div> : null}
+                        {p.savingUsd ? <div className="text-xs text-positive">節約見込み {usd(p.savingUsd)}</div> : null}
                       </Cell>
                       <Cell nowrap>{verdict ? <StatusBadge tone={verdict.tone}>{verdict.label}</StatusBadge> : <span className="text-muted-foreground">—</span>}</Cell>
                       <Cell className="text-xs">

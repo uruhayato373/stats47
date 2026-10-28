@@ -7,14 +7,7 @@ import { EmptyRow, PanelCard, TableBody, TableCell, TableFrame, TableHead, Table
 import { CoverPublicationBadge, CoverReviewBadge, NoteCoverComparison } from '@/components/content/note-cover-comparison';
 import { NoteCoverImage } from '@/components/content/note-cover-image';
 import { Section, Stack } from '@/components/layout-primitives';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button, buttonVariants, Card, CardContent, CardHeader, CardTitle, Input, Label, NativeSelect, NativeSelectOption, Separator, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, Tabs, TabsContent, TabsList, TabsTrigger } from '@stats47/components';
 import { COVER_PRODUCTION_STAGES, COVER_PUBLICATIONS, COVER_REVIEWS, coverSearchText, coverViewUrl, readCoverView } from '@/lib/note-cover-view';
 import { CoverPolicyDetails, CoverProductionBadge, NoteCoverProduction } from './note-cover-production';
 import type { NoteCoverCategory, NoteCoverRow } from '@/lib/server/note-covers';

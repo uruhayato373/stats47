@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Cell, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@stats47/components";
 import { macSchedule, slotLabel, SCHEDULE_DIR, type LogStatus, type MacJob } from "@/lib/server/mac-schedule";
 import { hasError } from "@/lib/server/state-io";
 

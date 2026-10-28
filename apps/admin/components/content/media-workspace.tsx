@@ -27,10 +27,7 @@ import {
   TableFrame,
 } from '@/components/admin-ui';
 import { Section } from '@/components/layout-primitives';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { NativeSelect } from '@/components/ui/native-select';
+import { Button, buttonVariants, Input, Textarea, NativeSelect, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 import type {
   ImageView,
   ItemView,
@@ -39,7 +36,6 @@ import type {
   CheckState,
   Template,
 } from '../../../../.claude/scripts/media/lib/workspace.mjs';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 export interface WorkspaceData {
   items: ItemView[];

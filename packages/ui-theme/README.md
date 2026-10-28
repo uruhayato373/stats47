@@ -3,7 +3,7 @@
 テンプレート [shadcndashboard/next-shadcn-dashboard](https://github.com/shadcndashboard/next-shadcn-dashboard)
 (MIT・commit `91deb102`) の見た目を、公開サイト (`apps/web`) に持ち込む CSS。
 2026-10-27 のオーナー決定「テンプレートを正としてサイトを寄せる」による。
-管理画面 (`apps/admin`) は shadcn 公式の base-nova を別に使う (`.claude/rules/admin-ui.md`)。このパッケージは読まない。
+管理画面 (`apps/admin`) も公開サイトと同じくこのパッケージ (base.css → tokens-hsl.css → theme.css) と `@stats47/components` を使う (2026-10-28 オーナー決定。`.claude/rules/admin-ui.md`)。
 
 | ファイル | 中身 | 出どころ |
 |---|---|---|

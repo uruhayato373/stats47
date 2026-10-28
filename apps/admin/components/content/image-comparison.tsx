@@ -10,10 +10,7 @@ import {
   TEMPLATE_CHANNELS,
 } from '@/lib/media-template-examples';
 import { Section } from '@/components/layout-primitives';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { NativeSelect } from '@/components/ui/native-select';
+import { Button, Input, Textarea, NativeSelect } from '@stats47/components';
 
 const labels = { note: 'note', web: 'サイト', x: 'X', instagram: 'Instagram' };
 export function ImageComparison({

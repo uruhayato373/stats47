@@ -1,10 +1,6 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Badge, Button, Input, Label, NativeSelect, NativeSelectOption } from "@stats47/components";
 import {
   BookOpenIcon,
   Building2Icon,

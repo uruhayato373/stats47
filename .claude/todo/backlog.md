@@ -256,6 +256,13 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [LYRA-RAW-HSL-TOKEN-COLORS-01] 共有部品の lyra が HSL の数値 3 つのトークンを色として直接読み、ボタン・サイドバーの一部の色が効いていない
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28)**: `packages/ui-theme/tokens-hsl.css` は `--secondary: 120 0% 96.1%` のように HSL の数値 3 つで持つ (公開サイトの `hsl(var(--x))` 参照に合わせた形)。一方 lyra を書き込んだ部品は、テンプレート (色を完全な値で持つ前提) のまま `button.tsx:54` の secondary の hover で `color-mix(in oklch, var(--secondary), var(--foreground) 5%)`、`sidebar.tsx:518` で `var(--sidebar-accent)`・`var(--sidebar-border)` を直接読む。この値は色として無効なので、宣言ごと捨てられる (公開サイトと管理画面の両方)。
+- **次**: `packages/ui-theme/style-reference.css` に `hsl(var(--x))` で包んだ値を書いて `npm run ui-theme:lyra` で書き込む。ほかに `var(--` を直接色として読む lyra のクラスが無いかを `packages/components/src/atoms/ui/*.tsx` で数える。
+- **完了条件**: 部品の lyra に、HSL の数値 3 つのトークンを包まずに色として読む箇所が 0 件。`ui-theme:lyra:test` にその検査がある。
+
 ### [UI-REFERENCE-PARTS-REST-01] 見本合わせの残りの部品 (リンクの行・開閉・空の状態・記事本文の見出し) と develop への取り込み
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
 

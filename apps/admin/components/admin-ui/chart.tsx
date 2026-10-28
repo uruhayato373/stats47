@@ -1,7 +1,9 @@
+// shadcn/ui 公式 (base-nova) の chart.tsx の写し。変えたのは import 先 (cn → @stats47/components) だけ。
+// recharts に依存するので @stats47/components には置かない (recharts を持つのは管理画面だけ。2026-10-28)。
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@stats47/components"
 import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
 

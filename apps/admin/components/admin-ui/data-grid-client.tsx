@@ -13,13 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { cn } from "@/lib/cn";
+import { Button, Input, Label, NativeSelect, NativeSelectOption, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, ToggleGroup, ToggleGroupItem, cn } from "@stats47/components";
 
 import { bodyCell, headCell } from "./table-frame";
 
@@ -195,7 +189,7 @@ export function DataGridClient({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className={cn(row.original.tone === "bad" && "bg-console-bad/5", row.original.tone === "warn" && "bg-console-warn/5")}
+                  className={cn(row.original.tone === "bad" && "bg-negative/5", row.original.tone === "warn" && "bg-warning/5")}
                 >
                   {row.getVisibleCells().map((cell, i) => (
                     <TableCell

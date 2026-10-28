@@ -1,21 +1,19 @@
 import type { ReactNode } from "react";
 
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/cn";
+import { StatTile, cn } from "@stats47/components";
 
 /**
- * 数値タイル。見本 (shadcndashboard.dev の Total Orders 等・2026-10-27 実測) と同じ形:
- * 名前 (14px) + 右上の枠付きアイコン / 値 (24px semibold) / 増減 (緑・赤) と補足 (muted) の 1 行。
- * 値の色は状態の意味があるときだけ tone で付ける (console-good/warn/bad/info は light/dark で AA を実測済み)。
+ * 数値タイル。公開サイトと同じ StatTile (@stats47/components) で描き、管理画面で使う tone と trend だけを足す。
+ * 値の色は状態の意味があるときだけ tone で付ける (状態色は @stats47/ui-theme/theme.css の positive / warning / negative / info)。
  */
 export type StatTone = "neutral" | "good" | "warn" | "bad" | "info";
 
 const TONE: Record<StatTone, string | undefined> = {
   neutral: undefined,
-  good: "text-console-good",
-  warn: "text-console-warn",
-  bad: "text-console-bad",
-  info: "text-console-info",
+  good: "text-positive",
+  warn: "text-warning",
+  bad: "text-negative",
+  info: "text-info",
 };
 
 /**
@@ -24,7 +22,7 @@ const TONE: Record<StatTone, string | undefined> = {
  */
 export type StatTrend = { label: ReactNode; direction: "up" | "down" | "flat"; tone?: "good" | "bad" | "neutral" };
 
-const TREND_TONE = { good: "text-console-good", bad: "text-console-bad", neutral: "text-muted-foreground" } as const;
+const TREND_TONE = { good: "text-positive", bad: "text-negative", neutral: "text-muted-foreground" } as const;
 
 export function StatCard({
   label,
@@ -44,26 +42,18 @@ export function StatCard({
 }) {
   const trendTone = trend ? (trend.tone ?? (trend.direction === "up" ? "good" : trend.direction === "down" ? "bad" : "neutral")) : null;
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-sm font-normal">{label}</CardTitle>
-        {icon ? (
-          <CardAction>
-            <div className="rounded-md p-2.5 outline [&_svg]:size-4" aria-hidden="true">
-              {icon}
-            </div>
-          </CardAction>
-        ) : null}
-      </CardHeader>
-      <CardContent className="flex flex-col gap-1">
-        <p className={cn("text-2xl font-semibold tracking-tight tabular-nums", TONE[tone])}>{value}</p>
-        {trend || sub ? (
-          <p className="text-sm text-muted-foreground">
+    <StatTile
+      label={label}
+      value={TONE[tone] ? <span className={TONE[tone]}>{value}</span> : value}
+      icon={icon}
+      meta={
+        trend || sub ? (
+          <>
             {trend && trendTone ? <span className={cn("mr-1.5", TREND_TONE[trendTone])}>{trend.label}</span> : null}
             {sub}
-          </p>
-        ) : null}
-      </CardContent>
-    </Card>
+          </>
+        ) : undefined
+      }
+    />
   );
 }

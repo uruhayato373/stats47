@@ -4,7 +4,7 @@ import { CircleAlertIcon, CircleCheckIcon, GlobeIcon, TrendingDownIcon, Triangle
 import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, TrendChart } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@stats47/components";
 import { pageQualitySummary, type MetricValue } from "@/lib/server/page-quality";
 
 import { datasetDir } from "../../../../../config/datasets.mjs";
@@ -22,7 +22,7 @@ function MetricCell({ value, unit = "" }: { value: MetricValue; unit?: string })
   if (value === undefined) return <span className="text-muted-foreground">対象外</span>;
   if (isUnmeasured(value)) {
     return (
-      <span className="text-console-warn" title={value.reason}>
+      <span className="text-warning" title={value.reason}>
         計測不能
       </span>
     );
@@ -174,7 +174,7 @@ export default async function PageQualityAuditPage({
           ))}
         </div>
         {filteredOffenders.length === 0 ? (
-          <p className="text-sm text-console-good">対象範囲に違反ページはありません。</p>
+          <p className="text-sm text-positive">対象範囲に違反ページはありません。</p>
         ) : (
           <DataGrid
             columns={[
@@ -236,7 +236,7 @@ export default async function PageQualityAuditPage({
             cells: [
               <div key="u">
                 <code className="font-mono text-xs">{r.path}</code>
-                {r.error ? <div className="text-xs text-console-bad">{r.error}</div> : null}
+                {r.error ? <div className="text-xs text-negative">{r.error}</div> : null}
               </div>,
               r.template,
               ...METRIC_COLUMNS.map((m) => <MetricCell key={m.key} value={r.metrics[m.key]} unit={m.unit} />),

@@ -1,7 +1,7 @@
-// shadcn/ui 公式（base-nova）の native-select.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias・IconPlaceholder → lucide-react）だけ。
-// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/native-select.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+// shadcn/ui 公式 (base-nova) の native-select.tsx の写し。変えたのは import 先 (cn → 相対パス) だけ。テンプレートに無い部品なので lyra の値は無い。
+// 管理画面 (apps/admin) の絞り込みが使う (2026-10-28 に apps/admin/components/ui から移した)。
 import * as React from "react"
-import { cn } from "@/lib/cn"
+import { cn } from "../../lib/cn"
 
 import { ChevronDownIcon } from "lucide-react"
 

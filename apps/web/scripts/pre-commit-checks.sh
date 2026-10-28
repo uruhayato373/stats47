@@ -206,8 +206,8 @@ if [ -n "$STAGED_ANY" ]; then
     echo -e "${RED}❌ note の台帳・資産の契約違反 (docs/31 の追跡・カバー台帳・記事台帳から生成した索引のずれ)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
-  if ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-shadcn-parity.mjs" || ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-admin-ui-debt.mjs"; then
-    echo -e "${RED}❌ 管理画面の UI 契約違反 (shadcn 公式との差・生のカード面/<table>/style の増加)。.claude/rules/admin-ui.md を参照。${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-admin-ui-debt.mjs"; then
+    echo -e "${RED}❌ 管理画面の UI 契約違反 (生のカード・<table>・style などの増加)。.claude/rules/admin-ui.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-maintenance-debt.cjs" --baseline; then

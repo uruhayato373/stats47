@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { Button } from "@/components/ui/button";
+import { cn, Button } from "@stats47/components";
 
 /** 読込中プレースホルダ。旧 UI の `.lead` (muted テキスト) 相当。 */
 export function Loading({ label = "読込中...", className }: { label?: string; className?: string }) {
@@ -22,7 +21,7 @@ export function ErrorState({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-wrap items-center gap-3 text-sm text-console-bad", className)}>
+    <div className={cn("flex flex-wrap items-center gap-3 text-sm text-negative", className)}>
       <span>{message}</span>
       {onRetry ? (
         <Button type="button" variant="outline" size="sm" onClick={onRetry}>

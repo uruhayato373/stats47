@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { NoteCoversBrowser } from '@/components/content/note-covers-browser';
 import { PageHeading } from '@/components/ops/primitives';
-import { buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@stats47/components';
 import { NOTE_COVER_CATEGORIES, noteCoverManagement } from '@/lib/server/note-covers';
 
 export const dynamic = 'force-dynamic';

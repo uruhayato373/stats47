@@ -4,7 +4,7 @@ import { ChevronDownIcon, CrosshairIcon, ListChecksIcon, TagIcon, WorkflowIcon }
 import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
 import { strategyLaneBoard, type Stance } from "@/lib/server/strategy-lanes";
 
 export const dynamic = "force-dynamic";
@@ -166,7 +166,7 @@ export default function StrategyLanesPage() {
             <Row key={item.line}>
               <Cell nowrap muted>{item.section}</Cell>
               <Cell>
-                {item.done ? <span className="mr-1 text-console-good">✓</span> : null}
+                {item.done ? <span className="mr-1 text-positive">✓</span> : null}
                 {item.text}
               </Cell>
               <Cell nowrap muted>

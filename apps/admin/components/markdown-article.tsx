@@ -2,8 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card, CardContent, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stats47/components";
 
 /** 文書ビューア共通のMarkdown表示 (strategy/doc と共通方針ページで共用)。 */
 export function MarkdownArticle({ children }: { children: string }) {

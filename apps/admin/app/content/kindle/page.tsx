@@ -7,10 +7,7 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
-import { NativeSelect } from "@/components/ui/native-select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { NativeSelect, Input, Button, Card, CardContent } from "@stats47/components";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Kindle運用 — stats47 admin" };

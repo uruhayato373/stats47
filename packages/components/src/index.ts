@@ -22,6 +22,7 @@ export * from "./atoms/ui/empty";
 // 必要な箇所で "@stats47/components/atoms/ui/icon" から直接 import すること
 export * from "./atoms/ui/input";
 export * from "./atoms/ui/label";
+export * from "./atoms/ui/native-select";
 export * from "./atoms/ui/pagination";
 export * from "./atoms/ui/progress";
 export * from "./atoms/ui/radio-group";

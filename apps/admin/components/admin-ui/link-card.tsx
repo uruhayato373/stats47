@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/cn";
+import { Card, CardContent, CardHeader, CardTitle, cn } from "@stats47/components";
 
 /**
  * リンクになるカード (トップ・チャネル一覧・方針の入口など)。中身は Card で、a で包む。ホバーで面を薄く塗る。

@@ -5,8 +5,7 @@ import { BugIcon, CalendarClockIcon, CircleAlertIcon, ListTodoIcon } from "lucid
 import { DataGrid, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Button, buttonVariants, Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
 import { todoBoard, type ImprovementRow, type LayerId, type Tier, type TodoCard } from "@/lib/server/todo";
 
 export const dynamic = "force-dynamic";
@@ -174,7 +173,7 @@ function ImprovementsGrid({ rows, abs, today }: { rows: ImprovementRow[]; abs: s
             <StatusBadge key="s" tone={r.status === "in-progress" ? "info" : "neutral"}>
               {r.status}
             </StatusBadge>,
-            <span key="d" className={overdue ? "text-console-bad" : "text-muted-foreground"}>
+            <span key="d" className={overdue ? "text-negative" : "text-muted-foreground"}>
               {r.due}
             </span>,
             <span key="o" className="text-muted-foreground">
@@ -347,7 +346,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                     {c.id ?? "—"}
                   </span>,
                   <TodoCardCell key="c" c={c} today={today} />,
-                  <span key="d" className={overdue ? "text-console-bad" : "text-muted-foreground"}>
+                  <span key="d" className={overdue ? "text-negative" : "text-muted-foreground"}>
                     {c.due ?? "—"}
                   </span>,
                 ],

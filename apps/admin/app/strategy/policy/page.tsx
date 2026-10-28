@@ -34,7 +34,7 @@ export default function SharedPolicyIndexPage() {
       </PageHeading>
 
       {documents.length === 0 ? (
-        <p className="text-sm text-console-warn">
+        <p className="text-sm text-warning">
           配布物 (.claude/shared-policy/manifest.json) が見つかりません。Obsidian
           vault で <code className="rounded bg-muted px-1 font-mono text-xs">npm run policy:sync</code> を実行してください。
         </p>

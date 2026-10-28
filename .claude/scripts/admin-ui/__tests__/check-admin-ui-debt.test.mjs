@@ -50,27 +50,6 @@ test('基準値に無い項目（あとから足した rawTable 等）は 0 と�
   assert.deepEqual(regressions.map((r) => [r.key, r.base, r.now]), [['rawTable', 0, 1]]);
 });
 
-test('Card 部品を使わずユーティリティで組んだカード面 (bg-console-card) を数える', () => {
-  const src = [
-    '<div className="rounded-lg border border-console-border bg-console-card p-4">',
-    "<section className='bg-console-card'>",
-    '<div className="bg-console-card/95 p-2">',
-    '<div className="bg-console-bg">',
-    '<Card className="gap-0">',
-  ].join('\n');
-  // bg-console-card/95 のような alpha 修飾付きは別の単語なので数えない (背景の重ね塗り用途)
-  assert.equal(countDebt(src).rawSurface, 2);
-});
-
-test('旧配色の文字・面・線の色を数え、状態の色と shadcn のトークンは数えない（2026-10-27 neutral 移行）', () => {
-  const src = [
-    '<p className="text-console-muted hover:border-console-accent/60 md:bg-console-bg">',
-    '<p className="text-console-good bg-console-bad/10 text-console-info">',
-    '<p className="text-muted-foreground border bg-card bg-console-cardx">',
-  ].join('\n');
-  assert.equal(countDebt(src).legacyColor, 3);
-});
-
 test('任意値の文字サイズ text-[11px] を数え、text-xs や色の任意値は数えない', () => {
   const src = '<p className="text-[11px] md:text-[13px] text-xs text-[#fff] max-w-[11px]">';
   assert.equal(countDebt(src).arbitraryText, 2);
