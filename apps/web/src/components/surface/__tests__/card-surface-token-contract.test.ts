@@ -25,17 +25,18 @@ describe('CARD_SURFACE_CLASS (カード外枠の単一定義)', () => {
     expect(cn(CARD_SURFACE_CLASS, 'max-sm:rounded-none')).toContain('rounded-card');
   });
 
-  // apps/admin は 2026-09-30 に共有 primitive (@stats47/components) の利用をやめ、Tailwind v4 + shadcn 公式部品へ移った
-  // (契約: .claude/rules/admin-ui.md)。共有 primitive を使うのは web だけなので、トークン定義の検査対象も web だけ。
-  it.each([
-    ['apps/web/tailwind.config.ts', 'apps/web/src/app/globals.css'],
-  ])('%s はカード外枠のトークンを定義している', (configPath, cssPath) => {
-    // 共有 primitive を使うアプリは定義しないと、クラスが生成されず外枠が崩れる
-    const config = read(configPath);
-    expect(config).toMatch(/card:\s*"var\(--card-radius\)"/);
-    expect(config).toMatch(/outline:\s*"var\(--card-outline\)"/);
-    const css = read(cssPath);
-    expect(css).toMatch(/--card-radius:/);
-    expect(css).toMatch(/--card-outline:/);
+  // カード外枠のトークンは 3 アプリ共通の @stats47/ui-theme/theme.css が持つ (2026-10-28 に apps/web の
+  // tailwind.config.ts と globals.css から移した)。共有部品を使うアプリの CSS はこれを読み込む。
+  it('theme.css はカード外枠の Tailwind テーマと値を定義している', () => {
+    const theme = read('packages/ui-theme/theme.css');
+    expect(theme).toMatch(/--radius-card:\s*var\(--card-radius\)/);
+    expect(theme).toMatch(/--color-card-outline:\s*var\(--card-outline\)/);
+    expect(theme).toMatch(/--card-radius:/);
+    expect(theme).toMatch(/--card-outline:/);
+  });
+
+  it.each([['apps/web/src/app/globals.css']])('%s は theme.css を読み込む', (cssPath) => {
+    // 読み込まないと rounded-card / border-card-outline のクラスが生成されず外枠が崩れる
+    expect(read(cssPath)).toContain("@import '@stats47/ui-theme/theme.css';");
   });
 });

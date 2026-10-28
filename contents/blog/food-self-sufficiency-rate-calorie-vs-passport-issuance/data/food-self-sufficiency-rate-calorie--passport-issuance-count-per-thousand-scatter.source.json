@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "food-self-sufficiency-rate-calorie",
+  "pair": "passport-issuance-count-per-thousand",
+  "xKey": "food-self-sufficiency-rate-calorie",
+  "yKey": "passport-issuance-count-per-thousand",
+  "pearsonR": -0.6717148402094987,
+  "partialRPopulation": -0.6861744103730089,
+  "unit": "％ × 件",
+  "label": "食料自給率（カロリーベース） と 一般旅券発行件数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/food-self-sufficiency-rate-calorie.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug food-self-sufficiency-rate-calorie-vs-passport-issuance --base food-self-sufficiency-rate-calorie --pair passport-issuance-count-per-thousand --data-name food-self-sufficiency-rate-calorie--passport-issuance-count-per-thousand"
+}

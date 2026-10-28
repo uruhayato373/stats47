@@ -1,0 +1,249 @@
+{
+  "title": "中学部活動 100人あたり部員数",
+  "subtitle": "2025年度",
+  "label": "中学部活動 100人あたり部員数",
+  "readerLabel": "中学部活動100人あたり部員数",
+  "hook": "中学部活動100人あたり部員数が最も多い県は？",
+  "unit": "人",
+  "year": "2025",
+  "rankingKey": "junior-high-club-per100-track-and-field",
+  "source": "(公財)日本中学校体育連盟",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 10.51
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 9.69
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 9.24
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 8.91
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 8.58
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 8.39
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 8.2
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 7.97
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 7.87
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 7.73
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 7.44
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 7.43
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 7.25
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 6.91
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 6.91
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 6.87
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 6.85
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 6.81
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 6.61
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 6.48
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 6.38
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 6.34
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 6.21
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 6.19
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 6.05
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 5.94
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 5.88
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 5.85
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 5.79
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 5.67
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 5.45
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 5.44
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 5.44
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 5.42
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 5.39
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 5.17
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 5.15
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 5.13
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 5.08
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 4.9
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 4.72
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 4.31
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 4.28
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 4.27
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 4.21
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 3.55
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 0.55
+    }
+  ]
+}

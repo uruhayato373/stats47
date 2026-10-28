@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   lintConsecutiveCallouts,
+  lintSourceLinkPlacement,
   normalizeConsecutiveCallouts,
 } from "../article-structure-lint.mjs";
 
@@ -96,4 +97,54 @@ test("連続していない callout は正規化しても変更しない", () =>
 > 読み方です。`;
 
   assert.equal(normalizeConsecutiveCallouts(markdown), markdown);
+});
+
+// BLOG-MUNI-SOURCE-LINK-01: 市区町村の図の直下に市区町村ランキングのカードを置けるようにする
+const FIGURE = "![市区町村の人口増減率](./images/map.svg)";
+
+function sectionWithCard(heading, href, withFigure = true) {
+  return `## ${heading}\n\n本文です。\n\n${withFigure ? `${FIGURE}\n\n` : ""}<source-link href="${href}">ランキングをもっと見る</source-link>\n\n説明が続きます。\n`;
+}
+
+test("市区町村ランキングのカードを図のカードとして数え、図の直下なら通す", () => {
+  const md = [
+    sectionWithCard("市区町村の人口増減", "/municipalities/ranking/census-population-change-rate-5y"),
+    sectionWithCard("県内の市町村", "/municipalities/ranking/census-population-change-rate-5y/01000"),
+  ].join("\n");
+  const result = lintSourceLinkPlacement(md);
+
+  assert.equal(result.stats.rankingSourceLinks, 2);
+  assert.deepEqual(result.blockers, []);
+});
+
+test("市区町村ランキングのカードにも重複・図の無い節の規則を当てる (都道府県版と同じキーは別ページなので重複にしない)", () => {
+  const dup = lintSourceLinkPlacement(
+    [
+      sectionWithCard("A", "/municipalities/ranking/births"),
+      sectionWithCard("B", "/municipalities/ranking/births/"),
+      sectionWithCard("C", "/ranking/births"),
+    ].join("\n"),
+  );
+  assert.equal(dup.stats.rankingSourceLinks, 3);
+  assert.equal(dup.stats.dupRankingLinks, 1);
+  assert.match(dup.blockers.join("\n"), /\[dup-ranking-link\] .*municipalities\/births×2/);
+
+  const noFigure = lintSourceLinkPlacement(sectionWithCard("A", "/municipalities/ranking/births", false));
+  assert.equal(noFigure.stats.noFigureSectionLinks, 1);
+  assert.match(noFigure.blockers.join("\n"), /\[no-figure-section\]/);
+});
+
+test("市区町村ランキングの形でないパスは図のカードとして数えない", () => {
+  for (const href of [
+    "/municipalities/ranking/",
+    "/municipalities/ranking/births/hokkaido",
+    "/municipalities/ranking/births/01000/extra",
+    "/municipalities/themes/kosodate",
+    "/municipality/ranking/births",
+    "/areas/01000/municipalities/ranking/births",
+  ]) {
+    const result = lintSourceLinkPlacement(sectionWithCard("A", href, false));
+    assert.equal(result.stats.rankingSourceLinks, 0, href);
+    assert.deepEqual(result.blockers, [], href);
+  }
 });

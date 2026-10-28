@@ -4,12 +4,13 @@ import { useMemo, type ReactNode } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 
@@ -355,7 +356,8 @@ export function ThemeMetricsDashboard({
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
    * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
    * 2 列の境界は本文幅 640px (@md の 768px だと 1024px 幅でサイドバーを出したとき 1 列に落ちる)。
-   * items-start: 単年のカードを隣の推移付きカードの高さへ引き伸ばさない。
+   * 並びは線の格子 (PanelGrid)。隣り合うカードは線を共有し、同じ行のカードは同じ高さに伸ばす
+   * (縮めると格子の線の色の地が見えるため)。
    */
   const renderPanelRuns = (
     list: Panel[],
@@ -377,13 +379,13 @@ export function ThemeMetricsDashboard({
         out.push(renderPanel(panel, summaryOnlyOf(panel)));
       } else {
         out.push(
-          <div
+          <PanelGrid
             key={`compact-${panel.key}`}
             data-theme-panel-grid="compact"
-            className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2"
+            className="grid-cols-1 @min-[40rem]:grid-cols-2"
           >
             {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
-          </div>
+          </PanelGrid>
         );
       }
       i = j;
@@ -490,11 +492,12 @@ export function ThemeMetricsDashboard({
     chapter: (typeof chapters)[number],
     action?: ReactNode
   ) => (
-    <section
+    <PanelGrid
+      as="section"
       key={chapter.key}
       id={`theme-section-${chapter.key}`}
       aria-label={chapter.title}
-      className="space-y-4 scroll-mt-24"
+      className="scroll-mt-24"
     >
       <SectionHeader
         title={chapter.title}
@@ -526,27 +529,27 @@ export function ThemeMetricsDashboard({
         );
       }, chapter.title)}
       {chapter.charts.length > 0 && (
-        <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
+        <PanelGrid className={`grid-cols-1 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
           {chapter.charts.map((chart) => renderChart(chart))}
-        </div>
+        </PanelGrid>
       )}
       {chapter.markdown.length > 0 && (
-        <div className="space-y-4">
+        <PanelGrid>
           {chapter.markdown.map((chart) => renderChart(chart, 3))}
-        </div>
+        </PanelGrid>
       )}
       {chapter.embedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-    </section>
+    </PanelGrid>
   );
 
   return (
-    <section
+    <PanelGrid
+      as="section"
       id="theme-indicators"
-      // pt-6: 先頭の sr-only 見出しは絶対配置で、v4 の space-y (下側の余白) が効かない。
-      // v3 で 2 番目の子に付いていた上の余白をここで保つ
-      className="@container space-y-6 scroll-mt-24 pt-6"
+      // 章・パネル・文章を 1 本の線の格子に並べる (ページの本文の列につながる)
+      className="@container scroll-mt-24"
     >
       <h2 className="sr-only">{areaName}の主要指標</h2>
       {/* 節見出しが無いテーマでは、見出しの右端に置けないので最初の行の右端に置く */}
@@ -558,12 +561,12 @@ export function ThemeMetricsDashboard({
       )}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
-        <div
+        <PanelGrid
           id="theme-charts"
-          className={`grid scroll-mt-24 grid-cols-1 gap-4 ${remainingCharts.length > 1 ? '@md:grid-cols-2' : ''}`}
+          className={`scroll-mt-24 grid-cols-1 ${remainingCharts.length > 1 ? '@md:grid-cols-2' : ''}`}
         >
           {remainingCharts.map((chart) => renderChart(chart))}
-        </div>
+        </PanelGrid>
       )}
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
@@ -578,10 +581,10 @@ export function ThemeMetricsDashboard({
       )}
       {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
-        <div className="space-y-4">
+        <PanelGrid>
           {remainingMarkdown.map((chart) => renderChart(chart))}
-        </div>
+        </PanelGrid>
       )}
-    </section>
+    </PanelGrid>
   );
 }

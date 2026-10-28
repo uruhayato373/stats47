@@ -123,6 +123,9 @@ function classify(status: number): GeminiTextErrorClass {
   if (status === 429) return "rate-limit";
   if (status >= 500) return "server";
   if (status === 401 || status === 403) return "auth";
+  // 前払いクレジット枯渇は 402 で返る (2026-10 の日次 run で 48 run 中 44 が 402)。
+  // bad-request に混ぜると「prompt が悪い」と読み違えるので billing に分ける。
+  if (status === 402) return "billing";
   if (status >= 400) return "bad-request";
   return "http-error";
 }

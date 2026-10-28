@@ -2,6 +2,590 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "handbag-consumption-expenditure",
+      "pageId": "ranking:handbag-consumption-expenditure",
+      "title": "ハンドバッグ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100132010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100132010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1269f536325f07c5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:handbag-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "handbag-consumption-quantity",
+      "pageId": "ranking:handbag-consumption-quantity",
+      "title": "ハンドバッグ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "100132010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "100132010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8e90938a35ce7d49"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:handbag-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "happoshu-consumption-expenditure",
+      "pageId": "ranking:happoshu-consumption-expenditure",
+      "title": "発泡酒・ビール風アルコール飲料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011100060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011100060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "276f71870b430a78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:beer-vs-happoshu-shift",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:happoshu-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "happoshu-consumption-quantity",
+      "pageId": "ranking:happoshu-consumption-quantity",
+      "title": "発泡酒・ビール風アルコール飲料消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "011100060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "011100060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "34adea23a40d1994"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:happoshu-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
       "metricKey": "hat-consumption-expenditure",
       "pageId": "ranking:hat-consumption-expenditure",
       "title": "帽子消費支出額",
@@ -12718,344 +13302,6 @@
         },
         {
           "pageId": "ranking:household-head-income-worker-households-per-month",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "household-income-by-type",
-      "pageId": "ranking:household-income-by-type",
-      "title": "年間収入階級別主世帯数（総数）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003355488",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "00",
-            "cdCat03": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003355488",
-          "cdCat01": "0",
-          "cdCat02": "00",
-          "cdCat03": "0"
-        },
-        "derived": false,
-        "configHash": "1359923c895a034f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:household-income-by-type",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "household-members-outside-dwellings",
-      "pageId": null,
-      "title": "住宅以外の建物に居住の世帯人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H3314"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H3314"
-        },
-        "derived": false,
-        "configHash": "982f8712c2150d55"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:household-members-outside-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:housing-households",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:household-members-outside-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "household-ratio-above-minimum-housing-area",
-      "pageId": "ranking:household-ratio-above-minimum-housing-area",
-      "title": "最低居住面積水準以上世帯割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H02602"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H02602"
-        },
-        "derived": false,
-        "configHash": "79fa85a79f58aae4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:household-ratio-above-minimum-housing-area",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "household-ratio-main-earner-employee-commute-90min",
-      "pageId": "ranking:household-ratio-main-earner-employee-commute-90min",
-      "title": "雇用者世帯の通勤時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H03101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H03101"
-        },
-        "derived": false,
-        "configHash": "6adf1cc08dce03fb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:long-commute-telework-potential",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:household-ratio-main-earner-employee-commute-90min",
           "kind": "ranking"
         }
       ],

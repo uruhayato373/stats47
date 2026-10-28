@@ -6,12 +6,12 @@ import dynamic from "next/dynamic";
 
 
 import { lookupArea } from "@stats47/area";
+import { ChartPanel } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { metricDisplayName, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState, ChartLoading } from "@/components/charts/ChartState";
 import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
@@ -126,7 +126,6 @@ export function MetricFocusCharts({
     <ChartPanel
       title={`${displayTitle} — 詳細チャート`}
       icon={<TrendingUp className="h-4 w-4 shrink-0 text-primary" />}
-      className="rounded-lg"
       contentClassName="space-y-5"
       action={
         <Link

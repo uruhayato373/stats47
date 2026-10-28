@@ -3,6 +3,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard, SurfaceSection } from '@/components/surface';
 
@@ -48,7 +49,7 @@ export default function GeoMethodPage() {
         title="今回使う3つの空間処理"
         description="同じ地図に見えても、問いごとに演算と近似条件が違います。"
       />
-      <div className="grid gap-4 md:grid-cols-3">
+      <PanelGrid className="md:grid-cols-3">
         {crossAnalyses.map((analysis) => (
           <SurfaceCard key={analysis.slug} className="p-5">
             <p className="text-xs font-semibold text-primary">
@@ -70,7 +71,7 @@ export default function GeoMethodPage() {
             </Link>
           </SurfaceCard>
         ))}
-      </div>
+      </PanelGrid>
 
       <SurfaceSection className="mt-6">
         <SectionHeader title="この分析だけでは判断できないこと" hideRule />

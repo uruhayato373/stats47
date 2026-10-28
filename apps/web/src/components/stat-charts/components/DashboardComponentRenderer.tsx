@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 
 import { extractDashboardProps } from "../utils";
 
-import { DefinitionsCard, KpiCard, KpiCardSkeleton, MultiStatCard, SlidePresentation, StatsTable } from "./cards";
+import { DefinitionsCard, KpiCard, KpiCardSkeleton, SlidePresentation, StatsTable } from "./cards";
 import {
   AttributeMatrixDashboard,
   D3BarChartRaceDashboard,
@@ -40,7 +40,6 @@ const COMPONENT_REGISTRY: Omit<Record<
   sunburst: SunburstDashboardChart as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
   treemap: TreemapDashboardChart as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
   "bar-chart-race": D3BarChartRaceDashboard as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
-  "multi-stats-card": MultiStatCard as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
   "definitions-card": DefinitionsCard as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
   "slide-presentation": SlidePresentation as React.ComponentType<DashboardItemProps<DashboardComponentType>>,
   "stats-table": StatsTable as React.ComponentType<DashboardItemProps<DashboardComponentType>>,

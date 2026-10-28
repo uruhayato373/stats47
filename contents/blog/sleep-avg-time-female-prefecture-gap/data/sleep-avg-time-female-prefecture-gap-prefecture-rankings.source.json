@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sleep-avg-time-female",
+  "year": "2021",
+  "unit": "分",
+  "label": "睡眠の平均時間",
+  "readerLabel": "睡眠の平均時間",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sleep-avg-time-female/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sleep-avg-time-female-prefecture-gap --keys sleep-avg-time-female --data-name sleep-avg-time-female-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:29:54.168Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

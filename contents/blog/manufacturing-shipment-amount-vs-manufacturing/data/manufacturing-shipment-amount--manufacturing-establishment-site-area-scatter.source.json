@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "manufacturing-shipment-amount",
+  "pair": "manufacturing-establishment-site-area",
+  "xKey": "manufacturing-shipment-amount",
+  "yKey": "manufacturing-establishment-site-area",
+  "pearsonR": 0.8717084331267683,
+  "partialRPopulation": 0.8356919366096537,
+  "unit": "百万円 × 千ｍ2",
+  "label": "製造品出荷額等 と 製造業事業所敷地面積 の関係",
+  "source": "r2:app/correlation/by-ranking-key/manufacturing-shipment-amount.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug manufacturing-shipment-amount-vs-manufacturing --base manufacturing-shipment-amount --pair manufacturing-establishment-site-area --data-name manufacturing-shipment-amount--manufacturing-establishment-site-area"
+}

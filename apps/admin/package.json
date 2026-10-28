@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
+    "@stats47/components": "*",
     "@stats47/data-configs": "*",
     "@stats47/types": "*",
+    "@stats47/ui-theme": "*",
     "@tailwindcss/postcss": "^4.3.3",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",

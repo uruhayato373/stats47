@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -13,7 +14,6 @@ import {
 import { DEPOPULATED_SETTLEMENTS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -104,10 +104,10 @@ export function ThemeDepopulatedSettlementsClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">集落人口に占める65歳以上割合</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 集落数
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 構成割合（%）
               </TableHead>
             </TableRow>
@@ -157,13 +157,13 @@ export function ThemeDepopulatedSettlementsClient({
             <TableHeader>
               <TableRow>
                 <TableHead scope="col">地方ブロック</TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   対象集落
                 </TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   65歳以上が半数以上
                 </TableHead>
-                <TableHead scope="col" className="text-right">
+                <TableHead scope="col" className="text-right!">
                   無回答
                 </TableHead>
               </TableRow>

@@ -1,6 +1,6 @@
+import { ChartPanel } from '@stats47/components';
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
 

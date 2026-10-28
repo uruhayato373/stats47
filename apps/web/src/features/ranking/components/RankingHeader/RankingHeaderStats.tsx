@@ -6,6 +6,8 @@ import { useMemo } from "react";
 import { cn } from "@stats47/components";
 import { resolveNationalFigure, type RankingValue } from "@stats47/ranking";
 
+import { PanelGrid } from "@/components/layout/PageShell";
+
 import type { AreaType } from "@/features/area";
 
 import {
@@ -72,14 +74,9 @@ export function RankingHeaderStats({
 
   return (
     <div className={cn("@container", className)}>
-      <div
-        className={cn(
-          // カードの間は空けない。カードの線は 1px の ring なので、隣と重なって 1 本の線になる (テンプレートの格子と同じ。2026-10-28)
-          "grid grid-cols-1 gap-0",
-          // 本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。
-          showNationalAverage && "@min-[40rem]:grid-cols-2",
-        )}
-      >
+      {/* 2 枚は線の格子で並べ、隣り合う線を共有する (見本の grid gap-px bg-border)。
+          本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。 */}
+      <PanelGrid className={cn("grid-cols-1", showNationalAverage && "@min-[40rem]:grid-cols-2")}>
         <RankingTopThreeList stats={stats} unit={unit} precision={precision} domainPolicy={presentation.comparisonDomain} />
         {showNationalAverage && (
           <RankingNationalAverageStat
@@ -91,7 +88,7 @@ export function RankingHeaderStats({
             precision={precision}
           />
         )}
-      </div>
+      </PanelGrid>
     </div>
   );
 }

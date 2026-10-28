@@ -30,7 +30,8 @@ import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
 import { ArticleShell, PageHeader } from "@/components/layout";
-import { SurfaceCard } from "@/components/surface";
+import { PanelGrid } from "@/components/layout/PageShell";
+import { SectionCard } from "@/components/surface";
 
 import { OPERATOR_PROFILE } from "@/config/operator-profile";
 import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from "@/config/site";
@@ -54,12 +55,9 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
   const displayTitle = number ? `${number}. ${title}` : title;
 
   return (
-    <SurfaceCard className="h-full">
-      <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-lg md:text-xl md:leading-7">{displayTitle}</h2>
-      </div>
-      <div className="p-4 md:p-6 pt-3">{children}</div>
-    </SurfaceCard>
+    <SectionCard title={displayTitle} headingAs="h2" className="h-full">
+      {children}
+    </SectionCard>
   );
 }
 
@@ -114,7 +112,7 @@ export default function PrivacyPage() {
       />
 
       {/* カードセクション */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <PanelGrid className="grid-cols-1 lg:grid-cols-2">
 
         {/* 1. 運営者情報 / 2. 個人情報の取得 — 2列 */}
         <LegalSection number="1" title="運営者情報">
@@ -144,13 +142,13 @@ export default function PrivacyPage() {
           <div className="mb-4 space-y-2">
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-20 shrink-0">サービス</span>
-              <Badge variant="secondary" className="text-xs font-normal">
+              <Badge variant="secondary" className="text-xs">
                 統計で見る都道府県（stats47）
               </Badge>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground w-20 shrink-0">活動拠点</span>
-              <Badge variant="outline" className="text-xs font-normal">
+              <Badge variant="outline" className="text-xs">
                 東京都
               </Badge>
             </div>
@@ -164,7 +162,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <span className="font-bold text-[#12766a] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">で発信中</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -176,7 +174,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Instagram className="h-4 w-4 text-[#E1306C]" />
                 <span className="text-xs">@stats47jp</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -188,7 +186,7 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <Button variant="outline" size="sm" className="w-full gap-2">
+              <Button variant="outline" size="sm" className="w-full">
                 <Youtube className="h-4 w-4 text-[#FF0000]" />
                 <span className="text-xs">YouTube チャンネル</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
@@ -248,7 +246,7 @@ export default function PrivacyPage() {
                 当サービスは、サービス品質の向上と利用状況の分析のため、Cookieを使用しています。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   4.1 使用するCookie
                 </h3>
                 <ul className={`space-y-2 ${TEXT_STYLE}`}>
@@ -275,7 +273,7 @@ export default function PrivacyPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   4.2 Cookieの無効化
                 </h3>
                 <p className={TEXT_STYLE}>
@@ -298,7 +296,7 @@ export default function PrivacyPage() {
                 適切な広告を配信することがあります。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   5.1 広告配信プロバイダー
                 </h3>
                 <ul className={`space-y-2 ${TEXT_STYLE}`}>
@@ -336,7 +334,7 @@ export default function PrivacyPage() {
                 ユーザーは、上記のオプトアウトページから、パーソナライズド広告を停止できます。
               </p>
               <div>
-                <h3 className="text-sm font-semibold mb-3 md:text-base">
+                <h3 className="text-sm font-semibold mb-3">
                   5.2 アフィリエイトプログラムについて
                 </h3>
                 <p className={TEXT_STYLE_WITH_MARGIN}>
@@ -403,7 +401,7 @@ export default function PrivacyPage() {
           </p>
         </LegalSection>
 
-      </div>
+      </PanelGrid>
 
       {/* フッター */}
       <footer className="text-xs text-muted-foreground border-t border-border pt-6 mt-8">

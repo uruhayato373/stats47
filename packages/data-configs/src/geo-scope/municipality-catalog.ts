@@ -6,6 +6,12 @@ import {
   SSDS_EXPANSION_POSITIVE_ONLY_KEYS,
   SSDS_EXPANSION_THEME_METRICS,
 } from './municipality-ssds-expansion';
+import {
+  MUNICIPALITY_HOUSING_SURVEY_CANDIDATE_REASON,
+  MUNICIPALITY_HOUSING_SURVEY_KEYS,
+  MUNICIPALITY_HOUSING_SURVEY_STATUS,
+  MUNICIPALITY_HOUSING_SURVEY_THEME,
+} from './municipality-housing-survey-expansion';
 
 export type MunicipalityMetricAvailability =
   | {
@@ -1001,7 +1007,26 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
   },
   // 2026-10-22 社会・人口統計体系の未使用コードの公開判断 (判定の記録は municipality-ssds-expansion.ts)
   ...ssdsExpansionAvailability(),
+  // 2026-10-28 住宅・土地統計調査の市区町村表から足す指標 (判定の記録は municipality-housing-survey-expansion.ts)
+  ...housingSurveyAvailability(),
 };
+
+function housingSurveyAvailability(): Record<string, MunicipalityMetricAvailability> {
+  return Object.fromEntries(
+    MUNICIPALITY_HOUSING_SURVEY_KEYS.map((metricKey) => [
+      metricKey,
+      MUNICIPALITY_HOUSING_SURVEY_STATUS === 'published'
+        ? ({
+            status: 'published',
+            entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+            comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+            // 推計値の丸めで 100% をわずかに超える地域を除く
+            valuePolicy: { minInclusive: 0, maxInclusive: 100 },
+          } satisfies MunicipalityMetricAvailability)
+        : ({ status: 'candidate', reason: MUNICIPALITY_HOUSING_SURVEY_CANDIDATE_REASON } satisfies MunicipalityMetricAvailability),
+    ])
+  );
+}
 
 function ssdsExpansionAvailability(): Record<string, MunicipalityMetricAvailability> {
   const positiveOnly = new Set(SSDS_EXPANSION_POSITIVE_ONLY_KEYS);
@@ -1381,7 +1406,15 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
 function withSsdsExpansionThemes(
   base: Readonly<Record<string, MunicipalityThemeCatalog>>
 ): Record<string, MunicipalityThemeCatalog> {
-  const themes: Record<string, MunicipalityThemeCatalog> = { ...base };
+  const themes: Record<string, MunicipalityThemeCatalog> = {
+    ...base,
+    [MUNICIPALITY_HOUSING_SURVEY_THEME.slug]: {
+      ...MUNICIPALITY_HOUSING_SURVEY_THEME,
+      metricKeys: MUNICIPALITY_HOUSING_SURVEY_KEYS,
+      entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+      status: MUNICIPALITY_HOUSING_SURVEY_STATUS === 'published' ? 'active' : 'draft',
+    },
+  };
   for (const [slug, { title, defaultMetricKey }] of Object.entries(SSDS_EXPANSION_NEW_THEMES)) {
     if (themes[slug]) throw new Error(`SSDS expansion theme already exists: ${slug}`);
     themes[slug] = {

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fire-deaths-per-100k",
+  "year": "2023",
+  "unit": "人",
+  "label": "火災死亡者数",
+  "readerLabel": "火災死亡者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fire-deaths-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fire-deaths-per-100k-prefecture-gap --keys fire-deaths-per-100k --data-name fire-deaths-per-100k-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:51.147Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

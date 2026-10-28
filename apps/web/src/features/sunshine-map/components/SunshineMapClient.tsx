@@ -11,7 +11,7 @@ const SunshineMapLeaflet = dynamic(
   {
     ssr: false,
     loading: () => (
-      <Skeleton className="h-[460px] lg:h-[600px] w-full rounded-md" />
+      <Skeleton className="h-[460px] lg:h-[600px] w-full" />
     ),
   },
 );

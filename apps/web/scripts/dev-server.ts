@@ -3,6 +3,7 @@ import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { SITE } from '@stats47/types';
 
 const DEFAULT_NEXT_PORT = 3000;
@@ -75,8 +76,9 @@ async function waitForGateway(url: string, child: ChildProcess): Promise<void> {
  * webpack 固有の挙動を確かめたいときは `WEB_DEV_BUNDLER=webpack` で従来どおり起動する。
  */
 function bundlerArgs(): string[] {
-  // Next.js 16 から next dev の既定は Turbopack。webpack を使うときだけ明示する。
-  return process.env.WEB_DEV_BUNDLER === 'webpack' ? ['--webpack'] : [];
+  // Next.js 16.4 は webpack() 設定があって turbopack 設定が無いと、フラグ無しの next dev を警告ではなくエラーで止める
+  // (2026-10-28 実測。メッセージは `--turbopack` か `--webpack` を明示せよと案内する)。どちらでも明示して渡す。
+  return process.env.WEB_DEV_BUNDLER === 'webpack' ? ['--webpack'] : ['--turbopack'];
 }
 
 function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {

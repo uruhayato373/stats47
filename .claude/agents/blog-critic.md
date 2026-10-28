@@ -90,7 +90,7 @@ effort: high
 - `.local/r2/app/blog/<slug>/` — read only (data JSON)
 - `data/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
 - `contents/blog/<slug>/review.md` — **write (本 agent の唯一の書き込み先)**
-- `data/blog/critic-findings.jsonl` — append (`record-critic-findings.mjs` 経由でのみ。指摘の台帳)
+- `data/blog/critic-findings/<date>.jsonl` — append (`record-critic-findings.mjs` 経由でのみ。指摘の台帳)
 
 ## File Boundary (並行衝突回避)
 

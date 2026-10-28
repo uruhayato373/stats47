@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sashimi-platter-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "さしみ盛合わせ消費量",
+  "readerLabel": "さしみ盛合わせ消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sashimi-platter-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sashimi-platter-consumption-quantity-prefecture-gap --keys sashimi-platter-consumption-quantity --data-name sashimi-platter-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:41.991Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

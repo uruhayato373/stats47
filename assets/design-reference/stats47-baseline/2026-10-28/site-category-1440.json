@@ -1,0 +1,392 @@
+{
+  "title": "国土・気象 | 統計で見る都道府県",
+  "inset": {
+    "font": "16px/27.2px 400",
+    "color": "rgb(10, 10, 10)",
+    "bg": "rgb(255, 255, 255)",
+    "pad": "0 0 0 0",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "rgb(229, 229, 229)",
+    "radius": "0px",
+    "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
+    "display": "flex",
+    "w": 1176,
+    "h": 2951,
+    "cls": "relative flex w-full flex-1 flex-col bg-background lg:peer-data-[variant=inset]:m-2 lg:peer-data-[variant=inset]:ml-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:"
+  },
+  "main": {
+    "font": "16px/27.2px 400",
+    "color": "rgb(10, 10, 10)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "pad": "16 16 16 16",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "rgb(229, 229, 229)",
+    "radius": "0px",
+    "shadow": "none",
+    "display": "block",
+    "cls": "min-w-0 flex-1 p-4"
+  },
+  "text": {
+    "h1": {
+      "font": "20px/32px 600",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "国土・気象",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "h2": {
+      "font": "16px/24px 500",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "注目のランキング",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "h3": {
+      "font": "14px/20px 500",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "気象",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "p": {
+      "font": "14px/22.75px 400",
+      "color": "rgb(115, 115, 115)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "国土・気象に関する都道府県ランキングを、地図やグラフで比較で",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    },
+    "body": {
+      "font": "16px/27.2px 400",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgb(255, 255, 255)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "rgb(229, 229, 229)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "#nprogress{pointer-events:none",
+      "fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Kaku Gothic Pro\", Meiryo, \"Helvetica Neue"
+    }
+  },
+  "dividers": [
+    {
+      "cls": "absolute inset-0 opacity-25",
+      "h": 16,
+      "w": 810,
+      "bgImage": "radial-gradient(circle, rgb(10, 10, 10) 1px, rgba(0, 0, 0, 0) 0px)",
+      "border": "solid/solid"
+    },
+    {
+      "cls": "absolute inset-0 opacity-25",
+      "h": 16,
+      "w": 810,
+      "bgImage": "radial-gradient(circle, rgb(10, 10, 10) 1px, rgba(0, 0, 0, 0) 0px)",
+      "border": "solid/solid"
+    }
+  ],
+  "grids": [],
+  "slots": {
+    "sidebar-wrapper": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-gap": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-container": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-inner": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-header": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 12 0 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-content": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-group": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3
+      }
+    },
+    "sidebar-group-label": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"12px/16px 600\",\"pad\":\"0 8 0 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 3
+      }
+    },
+    "sidebar-group-content": {
+      "count": 3,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3
+      }
+    },
+    "sidebar-menu": {
+      "count": 4,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-menu-item": {
+      "count": 26,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 25,
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-menu-button": {
+      "count": 31,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 12 8 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 14,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 48 8 12\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 17
+      }
+    },
+    "collapsible": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "collapsible-content": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "sidebar-menu-badge": {
+      "count": 17,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 4 0 4\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 17
+      }
+    },
+    "sidebar-menu-sub": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"2 10 2 10\",\"gap\":\"4px 4px\",\"border\":\"0 0 0 1 solid\",\"radius\":\"0px\"}": 5
+      }
+    },
+    "sidebar-menu-sub-item": {
+      "count": 56,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 56
+      }
+    },
+    "sidebar-menu-sub-button": {
+      "count": 56,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"0 8 0 8\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"8px\"}": 56
+      }
+    },
+    "sidebar-footer": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"8px 8px\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-inset": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-trigger": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "separator": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "input": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"14px/20px 400\",\"pad\":\"4 10 4 40\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 1
+      }
+    },
+    "button": {
+      "count": 8,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":0}": 1,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 3,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 6 0 10\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\",\"h\":28}": 1,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 6 0 10\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\",\"h\":0}": 1,
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 8 0 8\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\",\"h\":24}": 2
+      }
+    },
+    "breadcrumb": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-list": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"6px 6px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-item": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"4px 4px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "breadcrumb-link": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-separator": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "breadcrumb-page": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "shell-main": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "page-sections": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "card": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"0px\"}": 7
+      }
+    },
+    "card-header": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":61}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":57}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 12 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":53}": 5
+      }
+    },
+    "card-title": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 7
+      }
+    },
+    "card-action": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "card-content": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"16 16 16 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 2,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"10 16 10 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/19.5px 400\",\"pad\":\"8 7 8 7\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "section-divider": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 1 0 1 solid\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "badge": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"2 8 2 8\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":20}": 5
+      }
+    },
+    "cookie-consent": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/27.2px 400\",\"pad\":\"8 16 8 16\",\"gap\":\"12px 12px\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    }
+  },
+  "cssVars": {
+    "--radius": ".625rem",
+    "--border": "240 0% 89.8%",
+    "--muted-foreground": "0 0% 45.2%",
+    "--foreground": "330 0% 3.9%",
+    "--background": "0 0% 100%",
+    "--card": "0 0% 100%",
+    "--muted": "120 0% 96.1%",
+    "--primary": "0 0% 9.1%"
+  }
+}

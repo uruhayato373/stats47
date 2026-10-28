@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 
-import { cn } from "@stats47/components";
+import { cn, ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
     Tabs,
@@ -11,19 +11,36 @@ import {
 } from "@stats47/components/atoms/ui/tabs";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { AreaType } from "@/features/area";
 
 import { trackUiInteraction } from "@/lib/analytics/events";
 
 import { RankingDataTable } from "../RankingDataTable";
+import { buildRankingRows } from "../RankingDataTable/ranking-rows";
 import { RankingMapChartClient } from "../RankingMapChart/RankingMapChartClient";
+
+import { RankingAreaDetailSheet } from "./RankingAreaDetailSheet";
 
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 type VisualizationTab = "map" | "table";
+
+/** 開いている県を URL に残す名前 (?pref=13)。canonical はクエリを含まないページのパスなので、検索の評価は分かれない */
+const PREF_PARAM = "pref";
+
+function areaCodeFromPrefParam(value: string | null): string | null {
+    return value && /^(0[1-9]|[1-3]\d|4[0-7])$/.test(value) ? `${value}000` : null;
+}
+
+/** ページを移動させずに URL のクエリだけを書き換える (戻るボタンの履歴を増やさない) */
+function writePrefParam(areaCode: string | null) {
+    const url = new URL(window.location.href);
+    if (areaCode) url.searchParams.set(PREF_PARAM, areaCode.slice(0, 2));
+    else url.searchParams.delete(PREF_PARAM);
+    window.history.replaceState(window.history.state, "", url);
+}
 
 /**
  * 狭い幅: 選んでいない側を隠す (タブ切替として振る舞う)。広い幅: タブ選択に関係なく両方表示する。
@@ -66,14 +83,43 @@ export function RankingVisualizationSection({
     const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
     const unitLabel = areaType === "city" ? "市区町村" : "都道府県";
 
+    // 県の詳細パネル (都道府県のときだけ)。表と同じ行の計算を使う
+    const detailRows = useMemo(
+        () => (areaType === "prefecture" ? buildRankingRows(rankingValues) : []),
+        [areaType, rankingValues],
+    );
+    const [detailAreaCode, setDetailAreaCode] = useState<string | null>(null);
+
+    // URL の ?pref=NN から開く (共有されたリンク・再読み込み)。SSR の HTML は常に同じにするため、読むのは描画の後
+    useEffect(() => {
+        if (areaType !== "prefecture") return;
+        const fromUrl = areaCodeFromPrefParam(new URLSearchParams(window.location.search).get(PREF_PARAM));
+        // 描画の後に 1 度だけ URL を読む (テーマの県選択 ThemePrefectureContext と同じ形)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (fromUrl) setDetailAreaCode(fromUrl);
+    }, [areaType]);
+
+    const openDetail = useCallback((areaCode: string | null, source: "map" | "table" | "detail_sheet") => {
+        setDetailAreaCode(areaCode);
+        writePrefParam(areaCode);
+        if (areaCode) {
+            trackUiInteraction({
+                action: source === "detail_sheet" ? "region_select" : "detail_open",
+                target: source,
+                areaCode,
+            });
+        }
+    }, []);
+
     return (
         <ChartPanel
             title={`${unitLabel}別の地図と表`}
             icon={<MapIcon />}
             action={headerActions}
-            footer={cardFooter}
-            // 地図を枠の端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と出典の上線に接する
-            className="gap-0! pb-0!"
+            // 補足 (集計条件・最終更新・出典) はパネルの中の下端に置く。地図・表との間は線 1 本で区切る
+            footer={<div className="-mx-4 space-y-1.5 border-t px-4 pt-3">{cardFooter}</div>}
+            // 地図を枠の端まで描く: 横は px-0!、上は Card の gap-4 を外して見出しの下線に接する
+            className="gap-0!"
             contentClassName="px-0!"
         >
             {/* 地図・表とも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。
@@ -115,6 +161,8 @@ export function RankingVisualizationSection({
                             areaType={areaType}
                             bare
                             mapClassName="h-full"
+                            selectedPrefectureCode={detailAreaCode}
+                            onPrefectureClick={(code) => openDetail(code, "map")}
                         />
                     </div>
                     <div className={panelClassName(activeTab === "table", "px-2.5 py-2 @min-[640px]/viz:border-l")}>
@@ -122,10 +170,20 @@ export function RankingVisualizationSection({
                             rankingValues={rankingValues}
                             rankingItem={rankingItem}
                             bare
+                            onSelectArea={areaType === "prefecture" ? (code) => openDetail(code, "table") : undefined}
+                            selectedAreaCode={detailAreaCode}
                         />
                     </div>
                 </div>
             </div>
+            {areaType === "prefecture" && (
+                <RankingAreaDetailSheet
+                    rankingItem={activeRankingItem}
+                    rows={detailRows}
+                    areaCode={detailAreaCode}
+                    onAreaChange={(code, via) => openDetail(code, via === "step" ? "detail_sheet" : "table")}
+                />
+            )}
         </ChartPanel>
     );
 }

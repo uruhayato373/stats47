@@ -2,6 +2,513 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "food-manufacturing-establishments",
+      "pageId": "ranking:food-manufacturing-establishments",
+      "title": "食料品製造業の事業所数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040480518&fileKind=0"
+        },
+        "fetcherKey": "manual",
+        "configHash": "50d92ae27b36a311"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:food-manufacturing-establishments",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
+      "metricKey": "food-manufacturing-shipment-amount",
+      "pageId": "ranking:food-manufacturing-shipment-amount",
+      "title": "食料品製造業の製造品出荷額等",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040480518&fileKind=0"
+        },
+        "fetcherKey": "manual",
+        "configHash": "50d92ae27b36a311"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:food-manufacturing-shipment-amount",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
+      "metricKey": "food-retail-store-count-per-1000",
+      "pageId": "ranking:food-retail-store-count-per-1000",
+      "title": "飲食料品小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06105"
+        },
+        "derived": false,
+        "configHash": "80d6a87b8ec10c48"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:commercial-sales-productivity-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:food-retail-store-count-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "food-retail-store-count-per-1000-alt",
+      "pageId": null,
+      "title": "飲食料品小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06129"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06129"
+        },
+        "derived": false,
+        "configHash": "cdede111a91a5f56"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:food-retail-store-count-per-1000-alt",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "food-sanitation-inspection",
       "pageId": "ranking:food-sanitation-inspection",
       "title": "食品収去試験数（都道府県別）",
@@ -14050,165 +14557,6 @@
         },
         {
           "pageId": "ranking:general-hospital-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "general-household-members",
-      "pageId": null,
-      "title": "一般世帯人員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A710201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A710201"
-        },
-        "derived": false,
-        "configHash": "e59d8faa0486201d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:general-household-members",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:general-household-members",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "general-household-members-in-dwellings",
-      "pageId": null,
-      "title": "住宅に住む一般世帯人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H3410"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H3410"
-        },
-        "derived": false,
-        "configHash": "3397db413869c622"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:general-household-members-in-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:housing-households",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:general-household-members-in-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "general-household-members-outside-dwellings",
-      "pageId": null,
-      "title": "住宅以外に住む一般世帯人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H3420"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H3420"
-        },
-        "derived": false,
-        "configHash": "b596fd88c2331883"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:general-household-members-outside-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:housing-households",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:general-household-members-outside-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "general-households",
-      "pageId": "ranking:general-households",
-      "title": "一般世帯数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A06103"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A06103"
-        },
-        "derived": false,
-        "configHash": "0ea2023985f8c0da"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:general-households-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:general-households",
           "kind": "ranking"
         }
       ],

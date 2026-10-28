@@ -2,15 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ChartNoAxesCombinedIcon } from "lucide-react";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
+import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, Badge } from "@stats47/components";
 import { NAV_GROUPS } from "@/lib/nav-registry";
 
 import { ConsoleNavLinks } from "./console-nav-links";

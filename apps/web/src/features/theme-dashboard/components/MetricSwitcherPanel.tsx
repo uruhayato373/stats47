@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { classifyUnitComparability, formatUnitForDisplay } from '@stats47/data-configs/unit';
@@ -14,7 +15,6 @@ import { Check } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 

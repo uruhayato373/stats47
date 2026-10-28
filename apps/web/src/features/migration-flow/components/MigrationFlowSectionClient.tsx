@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import dynamic from "next/dynamic";
 
+import { ChartPanel } from "@stats47/components";
 import {
   Select,
   SelectContent,
@@ -14,7 +15,6 @@ import {
 import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 

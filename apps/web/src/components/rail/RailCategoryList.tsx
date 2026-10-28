@@ -6,9 +6,6 @@ import { RailNavRow } from '@/components/surface';
 
 import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
 
-/** compact = レールの既定密度 / default = 本文中の一覧 */
-export type RailCategoryDensity = 'compact' | 'default';
-
 export interface RailCategoryItem {
   categoryKey: string;
   categoryName: string;
@@ -26,8 +23,6 @@ interface RailCategoryListProps {
   showCount?: boolean;
   /** 現在地のカテゴリ。行を aria-current="page" + 強調にする */
   activeCategoryKey?: string;
-  /** compact = レールの既定密度 / default = 本文中の一覧 */
-  density?: RailCategoryDensity;
   /** GA4 nav_surface。ページごとに別の値を渡す (home と混ぜない) */
   trackingSurface: NavSurface;
   /** 末尾の「すべて見る」行。同じ行スタイルで最終行に置く */
@@ -51,18 +46,17 @@ function track(label: string, href: string, surface: NavSurface) {
  * カテゴリ導線の正 (home の高密度な縦型行 UI を昇格したもの)。
  *
  * - 単列。行は RailLinksCard の list 行と同じ RailNavRow (区切り線 + 右端の ChevronRight + モバイル 44px)
- * - 行はカードの本文余白 (16px) の中に置く。行の横余白は持たず (px-0)、呼び出し側は -mx-* で打ち消さない
- *   (2026-10-28 3 巡目。行の作りが RailLinksCard とずれ、矢印の大きさも違っていた)
+ * - 行の寸法は RailNavRow (LINK_ROW_SIZE_CLASS) が持つ。文字の左端はカード本文の端にそろう。
+ *   呼び出し側は行の文字の大きさ・余白・高さを上書きしない (design-system:check の link-row-no-size-override)
  * - 枠 (RailCard) は持たない。呼び出し側が `<RailCard title="カテゴリから探す">` で包む
  *   (カード内カードを機械監査で見える形にするため)
- * - ページ名 variant を持たない。差分は density / showCount / activeCategoryKey / items / moreLink
+ * - ページ名 variant を持たない。差分は showCount / activeCategoryKey / items / moreLink
  * 正典: docs/01_技術設計/04_デザインシステム.md「レール UI 契約」
  */
 export function RailCategoryList({
   items,
   showCount = true,
   activeCategoryKey,
-  density = 'compact',
   trackingSurface,
   moreLink,
   className,
@@ -80,9 +74,7 @@ export function RailCategoryList({
             <li key={category.categoryKey}>
               <RailNavRow
                 href={href}
-                density={density}
                 active={category.categoryKey === activeCategoryKey}
-                className="px-0"
                 onClick={() => track(category.categoryName, href, trackingSurface)}
                 trailing={
                   count !== undefined ? (
@@ -102,8 +94,7 @@ export function RailCategoryList({
           <li>
             <RailNavRow
               href={moreLink.href}
-              density={density}
-              className="px-0 font-semibold text-primary"
+              className="font-semibold text-primary"
               onClick={() =>
                 track(
                   moreLink.trackingLabel ?? moreLink.label,

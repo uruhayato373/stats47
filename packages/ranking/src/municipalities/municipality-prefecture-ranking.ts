@@ -1,10 +1,10 @@
-import { formatReadableMagnitude } from '@stats47/data-configs/unit';
 
 import {
   municipalityLeafName,
   municipalityRankingDisplayTitle,
 } from './municipality-names';
 import type { PageMeta } from './municipality-page-meta';
+import { formatMunicipalityValueText } from './municipality-value-text';
 
 import type {
   MunicipalityRankingItemSnapshot,
@@ -58,6 +58,42 @@ export function lacksSpecialWards(
   return tokyo.length > 0 && !tokyo.some((row) => specialWardCodes.has(row.areaCode));
 }
 
+export interface MunicipalityAbsenceNoteOptions {
+  /** 比較対象の自治体 (市町村と特別区。行政区と特別区部を除く) のコード。`@stats47/area` の公開方針から呼び元が渡す */
+  comparableCodes: ReadonlySet<string>;
+  specialWardCodes: ReadonlySet<string>;
+  /** metric config の `absentValueReason`。値が無いことが「該当なし」を意味する指標だけが持つ */
+  absentValueReason?: string;
+  /** 県別ページなら県コード (5 桁)。全国版は省く */
+  prefectureCode?: string;
+}
+
+/**
+ * ランキングに居ない自治体の理由を 1 文で返す (無ければ null)。
+ * 値が無いことが「該当なし」を意味する指標 (将来負担比率の「―」= 将来負担が無い) は、居ない自治体の数と理由を書く。
+ * それ以外は、東京都の市町村に値があって特別区が無いときだけ「元の統計に区ごとの値が無い」と書く (MUNI-FUTURE-BURDEN-DASH-01)。
+ */
+export function municipalityAbsenceNote(
+  values: readonly Pick<MunicipalityRankingValue, 'prefectureCode' | 'areaCode'>[],
+  options: MunicipalityAbsenceNoteOptions
+): string | null {
+  const { comparableCodes, specialWardCodes, absentValueReason, prefectureCode } = options;
+  if (absentValueReason) {
+    const present = new Set(values.map((row) => row.areaCode));
+    const inScope = [...comparableCodes].filter(
+      (code) => !prefectureCode || `${code.slice(0, 2)}000` === prefectureCode
+    );
+    const absent = inScope.filter((code) => !present.has(code)).length;
+    if (absent === 0) return null;
+    const scope = prefectureCode ? '県内' : '全国';
+    return `${scope}の${absent.toLocaleString('ja-JP')}自治体は、${absentValueReason}ため、このランキングに含まれていません。`;
+  }
+  if (prefectureCode && prefectureCode !== TOKYO_PREFECTURE_CODE) return null;
+  return lacksSpecialWards(values, specialWardCodes)
+    ? '東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。'
+    : null;
+}
+
 export function buildMunicipalityPrefectureRanking(
   values: readonly MunicipalityRankingValue[],
   prefectureCode: string,
@@ -90,7 +126,7 @@ export function municipalityPrefectureAreaLabel(hasSpecialWards: boolean): strin
 }
 
 function formatValue(value: number, unit: string): string {
-  return formatReadableMagnitude(value, unit);
+  return formatMunicipalityValueText(value, unit);
 }
 
 /** 同順位の自治体をまとめて「A市など3市町村」と書く (1 件ならその名前だけ)。 */

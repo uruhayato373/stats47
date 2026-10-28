@@ -7,12 +7,7 @@ import type {
 import { TEMPLATE_CHANNELS } from '@/lib/media-template-examples';
 import { ActualImage } from './media-image';
 import { StatusBadge } from '@/components/admin-ui';
-import { Button } from '@/components/ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 
 const labels = { note: 'note', web: 'サイト', x: 'X', instagram: 'Instagram' };
 function SamplePreview({

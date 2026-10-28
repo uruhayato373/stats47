@@ -39,7 +39,7 @@ const DepopulationChoroplethMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <Skeleton className="h-[420px] lg:h-[520px] w-full rounded-md" />
+      <Skeleton className="h-[420px] lg:h-[520px] w-full" />
     ),
   },
 );
@@ -49,7 +49,7 @@ const PrefectureOverlayMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <Skeleton className="h-[420px] lg:h-[520px] w-full rounded-md" />
+      <Skeleton className="h-[420px] lg:h-[520px] w-full" />
     ),
   },
 );
@@ -143,8 +143,8 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
                 <TableRow>
                   <TableHead className="w-10">#</TableHead>
                   <TableHead>都道府県</TableHead>
-                  <TableHead className="text-right">過疎内</TableHead>
-                  <TableHead className="text-right">比率</TableHead>
+                  <TableHead className="text-right!">過疎内</TableHead>
+                  <TableHead className="text-right!">比率</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -210,7 +210,7 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
               </span>
             </div>
             {isPending || !prefDetail ? (
-              <Skeleton className="h-[420px] lg:h-[520px] w-full rounded-md" />
+              <Skeleton className="h-[420px] lg:h-[520px] w-full" />
             ) : (
               <>
                 <PrefectureOverlayMap detail={prefDetail} />

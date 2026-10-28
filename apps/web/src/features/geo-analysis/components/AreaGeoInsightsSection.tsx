@@ -1,10 +1,12 @@
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { cn } from '@stats47/components';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard } from '@/components/surface';
+import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
 import { formatGeoValue, isGeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
@@ -39,20 +41,20 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section>
+    <PanelGrid as="section">
       <SectionHeader
         title={`${areaName}の空間分析`}
         description="人口・住まい・防災・交通を、都道府県平均だけでなく公式GISレイヤーの重なりから確認します。"
         hideRule
       />
-      <div className="mt-4 grid gap-3 md:grid-cols-3">
+      <PanelGrid className="mt-4 md:grid-cols-3">
         {items.map(({ item, row, metric, manifest }) => (
           <SurfaceCard key={item.contentId}>
             <p className="text-xs text-muted-foreground">
               合計の検算 {manifest.quality.conservationChecks}/47県
             </p>
             <h3 className="mt-1 font-bold">{metric.label}</h3>
-            <p className="mt-3 text-lg font-bold tabular-nums">
+            <p className={cn(STAT_VALUE_CLASS, "mt-3")}>
               {formatGeoValue(metric, row.values[metric.key])}
             </p>
             <div className="mt-4 space-y-1 text-sm">
@@ -71,7 +73,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
             </div>
           </SurfaceCard>
         ))}
-      </div>
-    </section>
+      </PanelGrid>
+    </PanelGrid>
   );
 }

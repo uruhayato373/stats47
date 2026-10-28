@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "other-processed-fish-ext-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "他の魚介加工品のその他消費支出額",
+  "readerLabel": "他の魚介加工品のその他への支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/other-processed-fish-ext-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug average-height-primary-school-fifth-grade-male-vs-other --keys other-processed-fish-ext-consumption-expenditure --data-name other-processed-fish-ext-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:22:31.161Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

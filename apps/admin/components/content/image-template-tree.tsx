@@ -3,12 +3,7 @@ import { useState, type ReactNode } from 'react';
 import { ChevronRight } from 'lucide-react';
 import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { IMAGE_PURPOSES } from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
-import { Button } from '@/components/ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 
 export type GalleryBranch = {
   key: string;

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "metabolic-syndrome-prevalence-among-checkup-recipients",
+  "year": "2024",
+  "unit": "％",
+  "label": "健診受診者のメタボ該当割合",
+  "readerLabel": "健診受診者のメタボ該当割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/metabolic-syndrome-prevalence-among-checkup-recipients/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug metabolic-syndrome-prevalence-among-checkup-recipients --keys metabolic-syndrome-prevalence-among-checkup-recipients --data-name metabolic-syndrome-prevalence-among-checkup-recipients-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:47.538Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

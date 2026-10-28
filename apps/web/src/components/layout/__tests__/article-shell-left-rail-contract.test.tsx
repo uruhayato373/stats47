@@ -25,7 +25,7 @@ describe('ArticleShell — leftRail', () => {
     expect(container.querySelector('main')).toBeNull();
   });
 
-  it('パンくずはページ内ナビより先 (コンテナの先頭) に置く', () => {
+  it('パンくずはページ内ナビより先 (本文の列の先頭) に置く', () => {
     const { container } = render(
       <ArticleShell
         leftRail={LEFT}
@@ -34,8 +34,10 @@ describe('ArticleShell — leftRail', () => {
         {MAIN}
       </ArticleShell>
     );
-    const shell = container.querySelector('.reading-zone')?.firstElementChild;
-    expect(shell?.firstElementChild).toBe(screen.getByLabelText('crumb'));
+    // パンくずは本文の列 (線の格子) の先頭のセル
+    const column = container.querySelector('.reading-zone')?.firstElementChild?.firstElementChild;
+    expect(column).toHaveAttribute('data-slot', 'panel-grid');
+    expect(column?.firstElementChild).toBe(screen.getByLabelText('crumb'));
   });
 
   it('右レールと同時指定された場合は既存の右レール契約を優先する', () => {
@@ -57,15 +59,17 @@ describe('ArticleShell — leftRail', () => {
   it('右レールは本文の後に 1 回だけ描き、狭い幅は本文の下・988px 以上は右の列にする', () => {
     const { container } = render(<ArticleShell rail={RIGHT}>{MAIN}</ArticleShell>);
     expect(screen.getAllByLabelText('article-right-rail')).toHaveLength(1);
-    const rails = container.querySelectorAll('div[data-slot="shell-main"] ~ aside');
+    // 右レールは本文の列 (線の格子) の外の兄弟。格子の中には入れない
+    const column = container.querySelector('div[data-slot="shell-main"]')?.parentElement;
+    expect(column).toHaveAttribute('data-slot', 'panel-grid');
+    const rails = column?.parentElement?.querySelectorAll(':scope > aside') ?? [];
     expect(rails).toHaveLength(1);
     expect(rails[0]).not.toHaveClass('hidden');
     expect(rails[0]).toHaveClass('mt-4', '@min-[988px]/shell:mt-0', '@min-[988px]/shell:w-[316px]');
-    const main = container.querySelector('div[data-slot="shell-main"]');
-    expect(main?.nextElementSibling).toBe(rails[0]);
+    expect(column?.nextElementSibling).toBe(rails[0]);
   });
 
-  it('見出し (header) はパンくずの後・本文と右レールの列より前に全幅で置く', () => {
+  it('見出し (header) はパンくずの後、本文と同じ線の格子に置き、右レールの列には入れない', () => {
     const { container } = render(
       <ArticleShell
         rail={RIGHT}
@@ -75,12 +79,12 @@ describe('ArticleShell — leftRail', () => {
         {MAIN}
       </ArticleShell>
     );
-    const shell = container.querySelector('.reading-zone')?.firstElementChild;
-    expect(shell?.children[0]).toBe(screen.getByLabelText('crumb'));
-    expect(shell?.children[1]).toBe(screen.getByRole('heading', { name: 'title' }));
-    // 右レールの列は見出しの後から始まる (列の中に見出しが無い)
-    expect(shell?.children[2]?.querySelector('h1')).toBeNull();
-    expect(shell?.children[2]?.querySelector('aside')).not.toBeNull();
+    // パンくずと見出しは本文と同じ線の格子の先頭のセル。右レールは格子の外 (見出しを含まない)
+    const column = container.querySelector('div[data-slot="shell-main"]')?.parentElement;
+    expect(column?.children[0]).toBe(screen.getByLabelText('crumb'));
+    expect(column?.children[1]).toBe(screen.getByRole('heading', { name: 'title' }));
+    expect(container.querySelector('aside')?.querySelector('h1')).toBeNull();
+    expect(column?.contains(container.querySelector('aside'))).toBe(false);
   });
 
   it('余白はルートの main#main-content (p-4) に任せる', () => {

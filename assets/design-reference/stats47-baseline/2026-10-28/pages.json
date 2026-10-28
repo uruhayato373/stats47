@@ -1,0 +1,10 @@
+[
+  { "name": "site-home", "url": "/" },
+  { "name": "site-ranking", "url": "/ranking/annual-sunshine-duration" },
+  { "name": "site-category", "url": "/category/landweather" },
+  { "name": "site-theme", "url": "/themes/population-dynamics" },
+  { "name": "site-area", "url": "/areas/13000" },
+  { "name": "site-blog-list", "url": "/blog" },
+  { "name": "site-blog-detail", "url": "/blog/local-government-debt-burden" },
+  { "name": "site-survey", "url": "/survey/kakei-chousa" }
+]

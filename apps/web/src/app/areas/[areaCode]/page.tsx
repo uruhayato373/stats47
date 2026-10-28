@@ -19,7 +19,7 @@ import { MUNICIPALITY_PREFECTURE_RANKING_KEYS } from '@stats47/data-configs/geo-
 import { municipalityPrefectureAreaLabel } from '@stats47/ranking';
 
 import Link from '@/components/atoms/SiteLink';
-import { PageShell } from '@/components/layout';
+import { PageShell, PanelGrid } from '@/components/layout';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { RailLinksCard } from '@/components/rail';
 
@@ -184,7 +184,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           className="mb-4"
         />
 
-        <div className="flex min-w-0 flex-col gap-8">
+        <PanelGrid>
           <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
@@ -197,7 +197,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           <Suspense
             fallback={
               <Skeleton
-                className="h-64 w-full rounded-card"
+                className="h-64 w-full"
                 aria-label={`${profile.areaName}のデータブックを読み込んでいます`}
               />
             }
@@ -229,7 +229,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
           <div className="@container">
-            <div className="grid grid-cols-1 items-start gap-4 @min-[40rem]:grid-cols-2">
+            <PanelGrid className="grid-cols-1 @min-[40rem]:grid-cols-2">
               <RailLinksCard
                 title={`${profile.areaName}をテーマから見る`}
                 items={AREA_FEATURED_THEMES.map((theme) => ({
@@ -258,7 +258,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 layout="list"
                 trackingSurface="municipality_prefecture"
               />
-            </div>
+            </PanelGrid>
           </div>
 
           {/*
@@ -268,7 +268,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       home の左レールが引き続き使う。
                     */}
           <FooterAdSlot />
-        </div>
+        </PanelGrid>
       </PageShell>
     </>
   );

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "electricity-consumption-quantity",
+  "year": "2024",
+  "unit": "kWh",
+  "label": "電気使用量",
+  "readerLabel": "電気使用量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/electricity-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug electricity-consumption-quantity-prefecture-gap --keys electricity-consumption-quantity --with-map",
+  "fetchedAt": "2026-10-28T12:30:05.870Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

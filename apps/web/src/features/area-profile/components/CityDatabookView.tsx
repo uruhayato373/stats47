@@ -18,6 +18,7 @@ import {
 import { TrendingUp } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
+import { PanelGrid } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
 import { SectionCard } from "@/components/surface";
 
@@ -85,7 +86,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
 
   return (
     <>
-      <section aria-labelledby="city-headline">
+      <PanelGrid as="section" aria-labelledby="city-headline">
         <SectionHeader
           title={<span id="city-headline">{cityShortName}の主な指標</span>}
           description={
@@ -111,10 +112,10 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             },
           }))}
         />
-      </section>
+      </PanelGrid>
 
       {highlights.length > 0 && (
-        <section aria-labelledby="city-highlights">
+        <PanelGrid as="section" aria-labelledby="city-highlights">
           <SectionHeader
             title={<span id="city-highlights">{cityShortName}の特徴</span>}
             description={`${inside}で${CITY_TOP_BAND}位以内に入る、人口あたり・割合などの指標`}
@@ -142,7 +143,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             }))}
           />
           </SectionCard>
-        </section>
+        </PanelGrid>
       )}
 
       <section aria-labelledby="city-sections">
@@ -178,9 +179,9 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                   <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
                     <TableRow>
                       <TableHead>指標</TableHead>
-                      <TableHead className="text-right">値</TableHead>
-                      <TableHead className="text-right">{inside}</TableHead>
-                      <TableHead className="text-right">全国</TableHead>
+                      <TableHead className="text-right!">値</TableHead>
+                      <TableHead className="text-right!">{inside}</TableHead>
+                      <TableHead className="text-right!">全国</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

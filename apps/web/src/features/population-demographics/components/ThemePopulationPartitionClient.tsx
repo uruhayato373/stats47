@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 
+import { ChartPanel } from '@stats47/components';
+
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 

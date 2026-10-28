@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartPanel } from "@stats47/components";
 
 import { useChartData } from "../../hooks/useChartData";
 import { type BarChartConfig } from "../../types/chart-config.types";

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "core-agricultural-workers",
+  "year": "2014",
+  "unit": "人",
+  "label": "基幹的農業従事者数",
+  "readerLabel": "基幹的農業従事者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/core-agricultural-workers/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug road-total-length-vs-core-agricultural-workers --keys core-agricultural-workers --data-name core-agricultural-workers-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:38.198Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

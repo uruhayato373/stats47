@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "garbage-final-disposal",
+  "year": "2023",
+  "unit": "t",
+  "label": "ごみ最終処分量",
+  "readerLabel": "ごみ最終処分量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/garbage-final-disposal/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug garbage-final-disposal-prefecture-gap --keys garbage-final-disposal --with-map",
+  "fetchedAt": "2026-10-28T12:30:44.693Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

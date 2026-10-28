@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { StatusBadge } from "@/components/admin-ui";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@stats47/components";
 
 /**
  * 管理ページ共通の表示部品 (見出し・エラー表示・未計測・鮮度)。
@@ -43,7 +43,7 @@ export function ErrorNote({ error }: { error: string }) {
 
 /** 「未計測」を「0」と見分けられるようにする */
 export function Unmeasured() {
-  return <span className="text-console-neutral">—</span>;
+  return <span className="text-muted-foreground">—</span>;
 }
 
 /** 鮮度バッジ。古い数字を「現在値」と読ませないため */

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "psychiatric-hospital-bed-occupancy-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "精神科病院病床利用率",
+  "readerLabel": "精神科病院病床利用率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/psychiatric-hospital-bed-occupancy-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug psychiatric-hospital-bed-occupancy-rate-prefecture-gap --keys psychiatric-hospital-bed-occupancy-rate --data-name psychiatric-hospital-bed-occupancy-rate-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:37.330Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

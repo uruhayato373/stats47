@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "furusato-fundraising-cost-prefecture",
+  "year": "2025",
+  "unit": "円",
+  "label": "ふるさと納税募集経費",
+  "readerLabel": "ふるさと納税募集経費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/furusato-fundraising-cost-prefecture/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug furusato-fundraising-cost-prefecture-prefecture-gap --keys furusato-fundraising-cost-prefecture --data-name furusato-fundraising-cost-prefecture-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:10.537Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

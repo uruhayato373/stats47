@@ -1,10 +1,10 @@
+import { ChartPanel } from '@stats47/components';
 import {
   TSUNAMI_EXPOSURE_SOURCE as source,
   parseTsunamiBundle,
 } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsString } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { ThemeTsunamiExposureClient } from './ThemeTsunamiExposureClient';
 export async function ThemeTsunamiExposureSection() {

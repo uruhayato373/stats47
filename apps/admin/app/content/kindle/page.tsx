@@ -7,10 +7,7 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
-import { NativeSelect } from "@/components/ui/native-select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { NativeSelect, Input, Button, Card, CardContent } from "@stats47/components";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Kindle運用 — stats47 admin" };
@@ -139,7 +136,7 @@ export default async function KindleContentPage({
       <Section title="表紙一覧" count={books.filter((book) => book.hasCover).length} note="表紙を選ぶと原寸画像を開きます。">
         <Grid min="sm" lines={false} gap="sm">
           {books.map((book) => (
-            <Card key={book.id} className="gap-0 overflow-hidden py-0">
+            <Card key={book.id} className="gap-0! overflow-hidden py-0!">
               {book.hasCover ? (
                 <a
                   href={`/kindle-cover/${book.id}`}

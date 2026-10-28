@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "foreign-worker-count",
+  "year": "2025",
+  "unit": "人",
+  "label": "外国人労働者数",
+  "readerLabel": "外国人労働者数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/foreign-worker-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug foreign-worker-count-prefecture-gap --keys foreign-worker-count --with-map",
+  "fetchedAt": "2026-10-28T12:30:11.355Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -12,7 +13,6 @@ import {
 import { PHYSICAL_ACTIVITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -56,17 +56,17 @@ export function ThemePhysicalActivityClient({
           <TableHeader>
             <TableRow>
               <TableHead scope="col">指標</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 平均
                 <br />
                 （歩/日）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 95%信頼区間
                 <br />
                 （歩/日）
               </TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead scope="col" className="text-right!">
                 集計
                 <br />
                 人数

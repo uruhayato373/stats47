@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fresh-vegetables-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "生鮮野菜消費量",
+  "readerLabel": "生鮮野菜消費量",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/fresh-vegetables-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fresh-vegetables-consumption-quantity-prefecture-gap --keys fresh-vegetables-consumption-quantity --with-map",
+  "fetchedAt": "2026-10-28T12:32:37.051Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

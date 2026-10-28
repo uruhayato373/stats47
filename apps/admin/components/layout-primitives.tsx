@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 
-import { cn } from "@/lib/cn";
+import { cn, PanelGrid } from "@stats47/components";
 
 /**
  * 並べ方の部品。部品 (Card など) は外側の余白を持たず、間隔はここの gap だけが決める。
@@ -17,8 +17,8 @@ export function Stack({ gap = "md", className, ...props }: ComponentProps<"div">
 
 /**
  * 幅に合わせて列数が変わる格子。min は 1 列の最小幅 (この幅を下回ると列が減る)。
- * 既定 (lines) は見本 (shadcndashboard.dev) と同じく、カードが 1px の線を共有して並ぶ
- * (外枠の上・左とセルの右・下の 1px 線 + 中のカードの ring を消す)。カード以外を並べるときは lines={false}。
+ * 既定 (lines) は公開サイトと同じ線の格子 (@stats47/components の PanelGrid) で、カードが 1px の線を共有して並ぶ。
+ * カード以外を並べるときは lines={false}。
  * 例: <Grid min="sm"> (180px) = 数値タイル (StatCard)、<Grid min="lg"> (320px) = グラフ入りカード。
  */
 const MIN = {
@@ -34,20 +34,8 @@ export function Grid({
   className,
   ...props
 }: ComponentProps<"div"> & { min?: keyof typeof MIN; gap?: Gap; lines?: boolean }) {
-  return (
-    <div
-      className={cn(
-        "grid",
-        MIN[min],
-        // 外枠の上・左 + 各セルの右・下に 1px の線を引く。面を塗らないので、列数で割り切れないときの空きマスも白地のまま
-        lines
-          ? "border-t border-l *:border-r *:border-b [&_[data-slot=card]]:h-full [&_[data-slot=card]]:ring-0"
-          : GAP[gap],
-        className,
-      )}
-      {...props}
-    />
-  );
+  if (lines) return <PanelGrid className={cn(MIN[min], className)} {...props} />;
+  return <div className={cn("grid", MIN[min], GAP[gap], className)} {...props} />;
 }
 
 /**

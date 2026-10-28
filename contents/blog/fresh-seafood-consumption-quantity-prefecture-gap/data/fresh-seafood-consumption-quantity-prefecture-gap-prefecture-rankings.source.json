@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fresh-seafood-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "生鮮魚介消費量",
+  "readerLabel": "生鮮魚介消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fresh-seafood-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fresh-seafood-consumption-quantity-prefecture-gap --keys fresh-seafood-consumption-quantity --data-name fresh-seafood-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:30:02.127Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

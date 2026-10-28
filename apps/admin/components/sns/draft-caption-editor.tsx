@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Button, Label, Textarea } from '@stats47/components';
 import type { PostDTO } from '@/lib/contracts/types';
 
 export function DraftCaptionEditor({
@@ -98,12 +96,12 @@ export function DraftCaptionEditor({
         </Button>
       </div>
       {message && (
-        <p role="status" className="text-sm text-console-good">
+        <p role="status" className="text-sm text-positive">
           {message}
         </p>
       )}
       {error && (
-        <p role="alert" className="text-sm text-console-bad">
+        <p role="alert" className="text-sm text-negative">
           {error}
         </p>
       )}

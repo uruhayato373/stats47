@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "toothbrush-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "歯ブラシ消費支出額",
+  "readerLabel": "歯ブラシへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/toothbrush-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug toothbrush-consumption-expenditure-prefecture-gap --keys toothbrush-consumption-expenditure --data-name toothbrush-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:33:21.154Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

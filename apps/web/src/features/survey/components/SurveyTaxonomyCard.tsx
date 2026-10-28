@@ -3,7 +3,13 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { FileText } from "lucide-react";
 
-import { RailCard, RailLinkList, RailNavRow, SectionCard } from "@/components/surface";
+import {
+  RailCard,
+  RailLinkList,
+  RailNavRow,
+  railNavRowClassName,
+  SectionCard,
+} from "@/components/surface";
 
 import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
 
@@ -67,16 +73,21 @@ export function SurveyTaxonomyCard({
       {description && (
         <p className="mb-2 text-xs leading-5 text-muted-foreground">{description}</p>
       )}
-      {/* 行の px-2 を打ち消し、文字の左端を CardContent の px-4 (見出し・説明文) に揃える */}
-      <RailLinkList aria-label={title} className="-mx-2 gap-0 divide-y divide-border">
+      {/* 行の寸法と文字の左端 (CardContent の端にそろう) は RailNavRow が持つ */}
+      <RailLinkList aria-label={title} divided>
         {visible.map(surveyRow)}
       </RailLinkList>
       {hidden.length > 0 && (
-        <details className="group/more -mx-2 border-t border-border">
-          <summary className="flex min-h-11 cursor-pointer list-none items-center px-2 text-sm font-medium text-primary hover:bg-accent/50 sm:min-h-9 [&::-webkit-details-marker]:hidden">
+        <details className="group/more border-t border-border">
+          <summary
+            className={railNavRowClassName({
+              className:
+                "cursor-pointer list-none font-medium text-primary [&::-webkit-details-marker]:hidden",
+            })}
+          >
             すべて見る（残り {hidden.length} 件）
           </summary>
-          <RailLinkList aria-label={`${title}（残り）`} className="gap-0 divide-y divide-border border-t border-border">
+          <RailLinkList aria-label={`${title}（残り）`} divided className="border-t border-border">
             {hidden.map(surveyRow)}
           </RailLinkList>
         </details>
@@ -86,7 +97,7 @@ export function SurveyTaxonomyCard({
           <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
             同じ調査のランキング
           </p>
-          <RailLinkList aria-label="同じ調査のランキング" className="-mx-2 mt-1 gap-0">
+          <RailLinkList aria-label="同じ調査のランキング" className="mt-1">
             {relatedItems.map((item) => (
               <RailNavRow
                 key={item.rankingKey}

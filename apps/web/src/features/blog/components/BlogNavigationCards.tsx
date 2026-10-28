@@ -96,7 +96,7 @@ function PopularTagList({
         <li key={tag.tagKey} className="shrink-0 snap-start">
           <Badge
             variant="secondary"
-            className="h-7 gap-1 px-2.5"
+            className="gap-1"
             render={
               <Link
                 href={hrefFor('tag', { tagKey: tag.tagKey })}
@@ -132,7 +132,7 @@ export function BlogListToolbar({ tags }: { tags: readonly BlogNavigationTag[] }
           name="q"
           aria-label="ブログ記事を検索"
           placeholder="キーワードで記事を検索"
-          className="min-w-0 flex-1 text-sm"
+          className="min-w-0 flex-1"
         />
         <Button type="submit" variant="outline" size="icon" aria-label="検索する" className="shrink-0">
           <Search aria-hidden="true" />

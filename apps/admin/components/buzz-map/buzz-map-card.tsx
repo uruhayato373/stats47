@@ -4,8 +4,7 @@ import { SITE } from "@stats47/types";
 
 import { StatusBadge, type Tone } from "@/components/admin-ui";
 import { MediaPreview } from "@/components/media-preview";
-import { Card } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Card, Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
 const READINESS_TONE: Record<string, Tone> = {
@@ -44,7 +43,7 @@ export function BuzzMapCard({ entry }: { entry: BuzzMapEntryDTO }) {
     : null;
 
   return (
-    <Card className="flex-col gap-0 overflow-hidden py-0">
+    <Card className="flex-col gap-0! overflow-hidden py-0!">
       <div className="relative">
         <MediaPreview candidates={mediaCandidates} aspectClassName="aspect-16/10" />
         <span className="absolute left-1.5 top-1.5 z-10">
@@ -84,7 +83,7 @@ export function BuzzMapCard({ entry }: { entry: BuzzMapEntryDTO }) {
         </div>
 
         {entry.gateReasons && entry.gateReasons.length > 0 ? (
-          <div className="rounded-md bg-console-bad/10 px-2 py-1 text-xs text-console-bad">{entry.gateReasons.join(" / ")}</div>
+          <div className="rounded-md bg-negative/10 px-2 py-1 text-xs text-negative">{entry.gateReasons.join(" / ")}</div>
         ) : null}
 
         <Collapsible>

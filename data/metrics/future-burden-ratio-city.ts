@@ -5,6 +5,8 @@ export const futureBurdenRatioCity: MetricConfig = {
   "key": "future-burden-ratio-city",
   "title": "将来負担比率（市町村財政）",
   "subtitle": "市町村分",
+  // 「―」は将来負担が無いこと (東京都の健全化判断比率一覧表の備考)。R2 で行の無い団体と一覧表の「―」が都内 39 市町村で一致 (2026-10-28)
+  absentValueReason: "将来負担が無く（基金などの充当可能財源が将来負担額を上回り）、比率が算定されない",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

@@ -61,7 +61,6 @@ export function SurveyCard({
       key={survey.id}
       href={hrefFor("survey", { surveyKey: survey.id })}
       data-nav-label={survey.id}
-      className="px-0"
     >
       {survey.name}
     </RailNavRow>
@@ -77,7 +76,7 @@ export function SurveyCard({
           <summary
             className={railNavRowClassName({
               className:
-                "cursor-pointer list-none px-0 font-medium text-primary [&::-webkit-details-marker]:hidden",
+                "cursor-pointer list-none font-medium text-primary [&::-webkit-details-marker]:hidden",
             })}
           >
             <span className="min-w-0 flex-1 truncate">
@@ -107,7 +106,6 @@ export function SurveyCard({
               <RailNavRow
                 key={item.rankingKey}
                 href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                className="px-0"
               >
                 {item.title}
               </RailNavRow>

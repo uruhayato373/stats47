@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "参考サイトの台帳",
+  "description": "data/design-references/references.json の形状契約 (2026-10-28 作成)。参考サイト 1 件ごとに URL・採否と理由・撮影と実測の置き場・反映先を持つ。",
+  "type": "object",
+  "required": ["references"],
+  "properties": {
+    "_doc": { "type": "string" },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "url", "status", "decidedAt", "decision", "adoptions"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "url": { "type": "string", "pattern": "^https://" },
+          "source": { "type": "string" },
+          "status": { "enum": ["adopted", "trial", "rejected"] },
+          "decidedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "decision": { "type": "string", "minLength": 10 },
+          "scope": { "type": "string" },
+          "conditions": { "type": "array", "items": { "type": "string" } },
+          "screens": { "type": "string", "pattern": "^assets/design-reference/" },
+          "measurements": { "type": "string", "pattern": "^assets/design-reference/" },
+          "spec": { "type": "string" },
+          "adoptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["part", "what", "state"],
+              "properties": {
+                "part": { "type": "string" },
+                "what": { "type": "string" },
+                "state": { "enum": ["done", "todo", "proposed", "rejected"] },
+                "reflectedIn": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -188,7 +188,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
   }
 
   if (cards.length === 0) {
-    return <p className="text-sm text-console-bad">メトリクスの取得に失敗</p>;
+    return <p className="text-sm text-negative">メトリクスの取得に失敗</p>;
   }
 
   return (

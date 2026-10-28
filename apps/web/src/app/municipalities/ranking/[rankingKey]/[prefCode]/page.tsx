@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   MIN_MUNICIPALITIES_PER_PREFECTURE_RANKING,
@@ -23,7 +24,7 @@ import {
   buildMunicipalityPrefectureRanking,
   buildMunicipalityPrefectureRankingMeta,
   buildMunicipalityPrefectureRankingSummary,
-  lacksSpecialWards,
+  municipalityAbsenceNote,
   municipalityPrefectureAreaLabel,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
@@ -43,6 +44,7 @@ import {
 } from '@/features/municipalities';
 import {
   MunicipalityRankingMapSection,
+  getComparableMunicipalityCodes,
   getSpecialWardCodes,
   readMunicipalityRanking,
 } from '@/features/municipalities/server';
@@ -122,8 +124,13 @@ export default async function MunicipalityPrefectureRankingPage({
 
   const displayTitle = municipalityRankingDisplayTitle(item);
   const areaLabel = municipalityPrefectureAreaLabel(ranking.hasSpecialWards);
-  // 東京都で特別区に値が無い指標 (財政力指数など) は、区が無い理由を書く (MUNI-WARD-GAP-DISPLAY-01)
-  const showWardGapNote = prefecture.prefCode === '13000' && lacksSpecialWards(snapshot.values, getSpecialWardCodes());
+  // 県内でランキングに居ない自治体の理由 (将来負担比率の「―」は該当なし、東京都の財政力指数は元の統計に区の値が無い)
+  const absenceNote = municipalityAbsenceNote(snapshot.values, {
+    comparableCodes: getComparableMunicipalityCodes(),
+    specialWardCodes: getSpecialWardCodes(),
+    absentValueReason: getMetricConfig(item.rankingKey)?.absentValueReason,
+    prefectureCode: prefecture.prefCode,
+  });
   const summary = buildMunicipalityPrefectureRankingSummary(ranking, {
     prefectureName: prefecture.prefName,
     unit: snapshot.unit,
@@ -196,8 +203,8 @@ export default async function MunicipalityPrefectureRankingPage({
               <TableRow>
                 <TableHead className="w-20">県内順位</TableHead>
                 <TableHead>{areaLabel}</TableHead>
-                <TableHead className="text-right">値</TableHead>
-                <TableHead className="w-24 text-right">全国順位</TableHead>
+                <TableHead className="text-right!">値</TableHead>
+                <TableHead className="w-24 text-right!">全国順位</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -260,7 +267,7 @@ export default async function MunicipalityPrefectureRankingPage({
         surface="municipality_source"
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        {showWardGapNote && <p>東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。</p>}
+        {absenceNote && <p>{absenceNote}</p>}
         <p>
           県内順位は全国順位の順に数え直したもので、全国で同じ順位の自治体は県内でも同じ順位です。政令指定都市は市全体の値で、行政区は含みません。欠測値は順位に入れていません。
         </p>

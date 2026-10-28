@@ -57,7 +57,7 @@ function PrefectureSelect({ value, onChange, excludeCode, color }: PrefectureSel
       >
         <SelectTrigger
           aria-label={color === REGION_A_COLOR ? "地域Aの都道府県を選択" : "地域Bの都道府県を選択"}
-          className="h-9 w-full rounded-lg border text-sm font-semibold text-foreground focus:ring-2"
+          className="h-9 w-full border font-semibold text-foreground focus:ring-2"
           style={{ borderColor: value ? color : undefined }}>
           <SelectValue placeholder="都道府県を選択">
             {selected ? selected.prefName : "都道府県を選択"}

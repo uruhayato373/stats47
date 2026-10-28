@@ -1,4 +1,8 @@
 import { listCategories } from "@stats47/data-configs";
+import {
+  KNOWN_MUNICIPALITY_RANKING_KEYS,
+  MUNICIPALITY_PREFECTURE_RANKING_KEYS,
+} from "@stats47/data-configs/geo-scope";
 import { describe, expect, it } from "vitest";
 
 import { KNOWN_THEME_SLUGS } from "../known-theme-slugs";
@@ -39,6 +43,16 @@ describe("internal-link-lint の key 集合", () => {
   it("gone: GONE_RANKING_KEYS を読めている", () => {
     const { rankingGone } = __loadKeySetsForTest();
     expect(rankingGone.size).toBeGreaterThan(100);
+  });
+
+  it("municipalities: 生成索引の公開 key が KNOWN_MUNICIPALITY_RANKING_KEYS と完全一致する", () => {
+    const { municipalityRanking } = __loadKeySetsForTest();
+    expect(municipalityRanking).toEqual(new Set(KNOWN_MUNICIPALITY_RANKING_KEYS));
+  });
+
+  it("municipalities: 県別対象 key が MUNICIPALITY_PREFECTURE_RANKING_KEYS と完全一致する", () => {
+    const { municipalityPrefectureRanking } = __loadKeySetsForTest();
+    expect(municipalityPrefectureRanking).toEqual(new Set(MUNICIPALITY_PREFECTURE_RANKING_KEYS));
   });
 
   it("areas: 47 都道府県コードが揃っている", () => {

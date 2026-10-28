@@ -64,6 +64,35 @@ export interface BlogArticlePromptInput {
   allowedLinks: { href: string; label: string }[];
   /** 前回のゲート違反 (再試行時のみ)。何を直すかを具体的に伝える */
   previousBlockers?: string[];
+  /**
+   * 型B の 2 指標の相関 (R2 相関 snapshot の値)。散布図の接地物
+   * (`<base>--<pair>-scatter.source.json` の pearsonR と `-scatter.json` の点数) から渡す。
+   * 渡さないと書き手は相関の強さを書けず、critic が「強さを示していない」と差し戻す
+   * (BLOG-TOPIC-PAIR-PER-CAPITA-01)。本文の値は factual gate が同じファイルと照合する。
+   */
+  correlation?: CorrelationFact;
+}
+
+export interface CorrelationFact {
+  /** ピアソンの相関係数 (snapshot の生値。prompt では小数第 2 位に丸めて渡す) */
+  pearsonR: number;
+  /** 相関の計算に使った都道府県の数 (散布図の点数) */
+  pointCount: number;
+}
+
+/** prompt と factual gate が同じ丸めを使う (小数第 2 位) */
+export const CORRELATION_DECIMALS = 2;
+
+function correlationSection(correlation: CorrelationFact | undefined): string {
+  if (!correlation) return "";
+  return `
+
+## 2 つの指標の相関 (散布図と同じデータ)
+- ピアソンの相関係数: ${correlation.pearsonR.toFixed(CORRELATION_DECIMALS)}
+- 計算に使った都道府県の数: ${correlation.pointCount}
+
+相関係数を本文に書くときは、この値を小数第 ${CORRELATION_DECIMALS} 位までそのまま書きます。
+相関の強さを示す根拠はこの値だけです。相関係数は因果の大きさや説明できる割合ではありません。`;
 }
 
 /** 型ごとの必須分析視点 (blog-quality-standards.md §各型の章構成テンプレ) */
@@ -107,6 +136,7 @@ export function buildBlogArticlePrompt(input: BlogArticlePromptInput): string {
     sourceLinkLabel,
     allowedLinks,
     previousBlockers,
+    correlation,
   } = input;
 
   const retry =
@@ -152,7 +182,7 @@ ${metrics
 - 全${m.rows.length}件:
 ${formatRows(m)}`,
   )
-  .join("\n\n")}
+  .join("\n\n")}${correlationSection(correlation)}
 
 本文では見出しの平易な呼び方を使ってください。正式な統計名は、定義や出典に触れる箇所
 (callout・「データについて」の節) でだけ使います。両方を毎回併記する必要はありません。
@@ -242,7 +272,19 @@ function titleSeedSection(
  * 機械で測れること (文字数・callout 数・リンク数) は critic に判定させません。それは
  * quality-gate が既に握っており、二重に判定させると critic の注意が意味の審査から逸れます。
  */
-export function buildBlogCriticPrompt(articleMarkdown: string): string {
+export function buildBlogCriticPrompt(
+  articleMarkdown: string,
+  findingTypes: readonly { key: string; label: string }[] = [],
+): string {
+  // 指摘の型 (.claude/config/critic-finding-types.json) を付けさせると、critic-findings 台帳が型ごとに数えて
+  // 繰り返す誤りを規約や gate へ格上げできる。型が無い指摘は集計から外れる。
+  const typeLine =
+    findingTypes.length > 0
+      ? `\n各指摘には型を 1 つ付けます。型は次から選びます: ${findingTypes
+          .map((t) => `${t.key} (${t.label})`)
+          .join(" / ")}\n`
+      : "";
+  const findingFormat = findingTypes.length > 0 ? "- [blocker|major|minor][型:<型>]" : "- [blocker|major|minor]";
   return `あなたは統計記事の編集者です。読者にとっての価値だけを審査してください。
 文字数・見出し数・リンク数は別の仕組みが検査済みなので、数えないでください。
 
@@ -256,6 +298,26 @@ export function buildBlogCriticPrompt(articleMarkdown: string): string {
    (どの記事にも書ける一般論なら価値がありません)
 4. 題と本文が一致しているか。題が煽っているのに中身が伴わないものは落とします
 5. 同じ内容の繰り返しで分量を稼いでいないか
+6. 数え間違い・順位や地方区分の誤りなど、本文の中で確かめられる事実の誤りが無いか
+
+# 書き手の制約 (これを前提に審査します)
+
+書き手は、記事に載っている指標の実データ (都道府県別の値と順位) しか使えません。
+2 つの指標の関係を扱う記事に限り、その 2 指標の相関係数と計算に使った都道府県の数も渡されています。
+他の指標・人口や面積・白書の数値を足すことは禁じられています。
+そのため「別の指標を加えて裏付けよ」「人口で割って示せ」という指摘はしないでください。
+データで裏付けられない断定があれば、それを「仮説として書く・弱める・削る」よう指摘します。
+
+本文に書かれた県の値と順位は、機械が実データと照合済みです。「本文の他の箇所で確認できない」
+ことを理由に値や順位を指摘しないでください。同じ値の県は同じ順位になり、次の順位は飛びます
+(42位が 2 県なら次は 44位) 。これは誤りではありません。
+
+# 重大度の基準
+
+- blocker: 事実の誤り (数え間違い・順位や地域の誤り)、相関を因果として断定している、
+  題が約束したことに本文が答えていない
+- major: 図の数字の言い換えが節の大半を占める、どの記事にも書ける一般論の注記、根拠の弱い推論を断定調で書いている
+- minor: 繰り返し・表現の不自然さ・構成の改善案
 
 # 出力形式
 
@@ -270,15 +332,26 @@ date: <今日の日付 YYYY-MM-DD 形式>
 <読者価値の総括を 3〜5 文。何が良く、何が足りないかを具体的に書きます>
 
 ## 指摘
-- [blocker|major|minor] <具体的な箇所と、どう直すかの提案>
+${findingFormat} <具体的な箇所と、どう直すかの提案>
 
 ## 判定理由
 <PASS か REVISE かの根拠を 2〜3 文>
 
-blocker が 1 件でもあれば verdict は REVISE です。
+${typeLine}blocker が 1 件でもあれば verdict は REVISE、blocker が無ければ major や minor が残っていても PASS です。
 評価サマリと判定理由は合わせて 200 文字以上書いてください。
 
 # 審査対象の記事
 
 ${articleMarkdown}`;
+}
+
+/**
+ * critic の出力から verdict を決める。モデルの自己申告 (verdict 行) ではなく blocker の有無で決める
+ * (blog-critic agent と同じ「BLOCK 0 件なら PASS」)。評価サマリも指摘も無い出力は形式崩れとして null。
+ */
+export function decideBlogCriticVerdict(review: string): "PASS" | "REVISE" | null {
+  // blog-critic の書式 ([BLOCK]・大文字) と headless の書式 ([blocker]) の両方を読む
+  const findings = review.match(/^\s*[-*]\s*\[(block|blocker|major|minor)\]/gim) ?? [];
+  if (findings.length === 0 && !/^## 評価サマリ/m.test(review)) return null;
+  return findings.some((f) => /\[block/i.test(f)) ? "REVISE" : "PASS";
 }

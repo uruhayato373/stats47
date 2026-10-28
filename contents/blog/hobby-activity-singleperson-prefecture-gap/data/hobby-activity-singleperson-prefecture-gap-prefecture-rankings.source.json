@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "hobby-activity-singleperson",
+  "year": "2021",
+  "unit": "千人",
+  "label": "趣味・娯楽の行動者数（単身世帯主・男女計・総数・全年齢）",
+  "readerLabel": "単身世帯主で趣味・娯楽をした人の数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/hobby-activity-singleperson/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hobby-activity-singleperson-prefecture-gap --keys hobby-activity-singleperson --data-name hobby-activity-singleperson-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:15.940Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

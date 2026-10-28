@@ -1,10 +1,11 @@
+import { ChartPanel } from "@stats47/components";
 import { resolveAttribution } from "@stats47/data-configs";
 import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { LineChartClient, toLineChartData } from "@/components/stat-charts";
 import { fetchEstatData, toKpiCardData } from "@/components/stat-charts/server";
+import { STAT_VALUE_CLASS } from "@/components/surface";
 
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
 
@@ -67,7 +68,7 @@ export async function StatsLineChartCard({
         {/* 統計値（インライン描画） */}
         {displayValue != null && (
           <div>
-            <p className="text-3xl font-bold tabular-nums">
+            <p className={STAT_VALUE_CLASS}>
               {displayValue.toLocaleString()}
               <span className="text-base font-normal text-muted-foreground ml-1">
                 {displayUnit}

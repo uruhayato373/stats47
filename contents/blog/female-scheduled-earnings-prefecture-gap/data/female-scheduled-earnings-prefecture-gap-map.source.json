@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "female-scheduled-earnings",
+  "year": "2022",
+  "unit": "千円",
+  "label": "女性所定内給与額",
+  "readerLabel": "女性所定内給与額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/female-scheduled-earnings/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug female-scheduled-earnings-prefecture-gap --keys female-scheduled-earnings --with-map",
+  "fetchedAt": "2026-10-28T12:31:35.581Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

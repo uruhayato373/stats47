@@ -6,6 +6,7 @@ import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ContentDisclosure } from '@/components/content';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { RailLinksCard } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard } from '@/components/surface';
@@ -163,7 +164,7 @@ export default function GeoPage() {
           </Link>
         </nav>
       </section>
-      <div className="mt-6 grid items-start gap-4 @min-[656px]/shell:grid-cols-2">
+      <PanelGrid className="mt-6 @min-[656px]/shell:grid-cols-2">
           <RailLinksCard
             title="GIS一覧"
             layout="list"
@@ -177,7 +178,7 @@ export default function GeoPage() {
             trackingSurface="geo_sidebar"
             items={GEO_METHOD_LINKS}
           />
-      </div>
+      </PanelGrid>
     </PageShell>
   );
 }

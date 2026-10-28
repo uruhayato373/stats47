@@ -10,19 +10,39 @@ import { SITE } from "@stats47/types";
 
 const DEFAULT_PUBLIC_BASE = SITE.r2PublicBaseUrl;
 
+/** 5xx と通信の失敗だけを読み直す間隔。ビルドは数千件を並列に読み、公開 R2 が時々 500 を返す (2026-10-28 PR #1194 で 2 回) */
+const RETRY_DELAYS_MS = [500, 2000];
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
 /**
  * 公開 URL から前回配信した JSON を読む。無ければ (404) null。
- * それ以外の失敗は例外にする (通信の失敗を「前回が無い」と扱うと全件を作り直してしまう)。
+ * 5xx と通信の失敗は間隔を空けて読み直し、それでも読めなければ例外にする
+ * (通信の失敗を「前回が無い」と扱うと全件を作り直してしまう)。
  */
 export async function readPublishedSnapshot<T>(
   key: string,
   base: string = process.env.R2_PUBLIC_FETCH_URL ?? DEFAULT_PUBLIC_BASE,
+  wait: (ms: number) => Promise<void> = sleep,
 ): Promise<T | null> {
   if (key.startsWith("/") || key.includes("..")) throw new Error(`不正な R2 キー: ${key}`);
-  const response = await fetch(`${base.replace(/\/$/, "")}/${key}`);
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error(`前回の snapshot を読めません (HTTP ${response.status}): ${key}`);
-  return (await response.json()) as T;
+  const url = `${base.replace(/\/$/, "")}/${key}`;
+  for (let attempt = 0; ; attempt++) {
+    const isLast = attempt >= RETRY_DELAYS_MS.length;
+    let response: Response;
+    try {
+      response = await fetch(url);
+    } catch (error) {
+      if (isLast) throw error;
+      await wait(RETRY_DELAYS_MS[attempt]);
+      continue;
+    }
+    if (response.status === 404) return null;
+    if (response.ok) return (await response.json()) as T;
+    if (response.status < 500 || isLast) {
+      throw new Error(`前回の snapshot を読めません (HTTP ${response.status}): ${key}`);
+    }
+    await wait(RETRY_DELAYS_MS[attempt]);
+  }
 }
 
 /**

@@ -24,6 +24,7 @@
 
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { config } from "dotenv";
+import { execFileSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -104,6 +105,14 @@ async function main() {
     return;
   }
 
+  // 上書きの前後で本文の版を private R2 (blog-archive/<slug>/<sha>.md) に退避する。
+  // 直接の上書きは git に履歴が残らないため (2026-10-28 に 7 月の控えで改稿済みの記事を戻しかけた)
+  const ARCHIVE = path.join(PROJECT_ROOT, ".claude/scripts/blog/archive-blog-articles.mjs");
+  const articleSlugs = [...new Set(targets.filter((t) => t.file === "article.md").map((t) => t.slug))];
+  if (articleSlugs.length > 0) {
+    execFileSync("node", [ARCHIVE, "--slugs", articleSlugs.join(",")], { stdio: "inherit" });
+  }
+
   const client = getClient();
   const failed: string[] = [];
   let done = 0;
@@ -131,6 +140,11 @@ async function main() {
       }
     }),
   );
+
+  for (const slug of articleSlugs) {
+    if (failed.some((f) => f.startsWith(`${slug}/article.md`))) continue;
+    execFileSync("node", [ARCHIVE, "--file", path.join(OUT_DIR, slug, "article.md"), "--slug", slug], { stdio: "inherit" });
+  }
 
   console.log(`push 完了: ${done}/${targets.length}`);
   if (failed.length) {

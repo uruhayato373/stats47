@@ -184,7 +184,7 @@ export function M1Summary({ data }: { data: BusinessPlanData }) {
             action={<StatusBadge tone={releaseTone[check.status]}>{check.status === "pass" ? "PASS" : "待ち"}</StatusBadge>}
           >
             <p className="text-xs leading-relaxed text-muted-foreground">{check.detail}</p>
-            {check.external ? <p className="mt-1 text-xs font-medium text-console-warn">外部操作</p> : null}
+            {check.external ? <p className="mt-1 text-xs font-medium text-warning">外部操作</p> : null}
           </PanelCard>
         ))}
       </Grid>
@@ -389,7 +389,7 @@ export function GisCatalog({ data }: { data: BusinessPlanData }) {
                   </StatusBadge>,
                   <div key="r" className="text-muted-foreground">
                     {item.r2.fileCount > 0 ? `${item.r2.fileCount} files / ${formatBytes(item.r2.totalBytes)}` : "—"}
-                    {item.compliance.publicMirrorPolicyMismatch ? <div className="text-xs font-semibold text-console-warn">公開条件要確認</div> : null}
+                    {item.compliance.publicMirrorPolicyMismatch ? <div className="text-xs font-semibold text-warning">公開条件要確認</div> : null}
                   </div>,
                   item.usedInAnalyses.join(" / ") || "未使用",
                 ],
@@ -418,7 +418,7 @@ export function M1XAudit({ data }: { data: BusinessPlanData }) {
           {data.m1.x.contractViolations.length > 0 ? (
             <ErrorNote error={`Geo契約違反: ${data.m1.x.contractViolations.join(" / ")}`} />
           ) : (
-            <p className="text-xs text-console-good">Geo契約 PASS — 入口3 / 空間横断9 / 方法2 / 意思決定1。ランキング画像の流用なし。</p>
+            <p className="text-xs text-positive">Geo契約 PASS — 入口3 / 空間横断9 / 方法2 / 意思決定1。ランキング画像の流用なし。</p>
           )}
           <DataTable columns={["投稿", "Geo分類", "分析・空間処理", "主張metric", "着地", "予定（JST）", "画像", "台帳"]}>
             {data.m1.x.posts.map((post) => (

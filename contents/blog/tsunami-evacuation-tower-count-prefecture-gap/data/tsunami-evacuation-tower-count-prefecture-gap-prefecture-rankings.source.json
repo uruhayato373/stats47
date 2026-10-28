@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tsunami-evacuation-tower-count",
+  "year": "2023",
+  "unit": "棟",
+  "label": "津波避難タワー等数",
+  "readerLabel": "津波避難タワー等数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tsunami-evacuation-tower-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tsunami-evacuation-tower-count-prefecture-gap --keys tsunami-evacuation-tower-count --data-name tsunami-evacuation-tower-count-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:31:08.699Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

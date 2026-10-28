@@ -27,7 +27,7 @@ vi.mock('@stats47/data-configs/geo-scope', () => ({ KNOWN_MUNICIPALITY_RANKING_K
  */
 describe("sitemap index ↔ shard の件数整合", () => {
   it("index route が SITEMAP_SEGMENTS.length ぶんの <sitemap> を出す", async () => {
-    const { GET } = await import("@/app/sitemap.xml/route");
+    const { GET } = await import("@/app/sitemap-index.xml/route");
     const xml = await (await GET()).text();
     const count = (xml.match(/<sitemap>/g) ?? []).length;
     expect(count).toBe(SITEMAP_SEGMENTS.length);
@@ -74,7 +74,7 @@ describe("sitemap index ↔ shard の件数整合", () => {
   });
 
   it("index が列挙する URL に全 shard が含まれる (欠番なし)", async () => {
-    const { GET } = await import("@/app/sitemap.xml/route");
+    const { GET } = await import("@/app/sitemap-index.xml/route");
     const xml = await (await GET()).text();
     for (let id = 0; id < SITEMAP_SEGMENTS.length; id += 1) {
       expect(xml).toContain(`/sitemap/${id}.xml`);

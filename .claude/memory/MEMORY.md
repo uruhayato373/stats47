@@ -161,3 +161,8 @@
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
 - [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)
+- [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古いコミットから切られ node_modules も無い。prompt に起点 SHA の付け替えと @stats47 だけ張る手順を書き、取り込みは cherry-pick
+- [batch production builds](feedback_batch_production_builds.md) — 本番ビルド (10 分) を修正ごとに回さない。dev で確かめ、本番は節目に 1 回でまとめて検査。dev が壊れていたら先に dev を直す
+- [local r2 overlay for generated snapshots](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成の R2 snapshot を localhost で見るときは .github/scripts/r2-overlay-server.mjs を使う (自作しない)。R2_S3_ENDPOINT を空に
+- [check ci job scope before launch](feedback_check_ci_job_scope_before_launch.md) — 長い CI ジョブは起動前に作り直す範囲と前回の所要時間を確かめる。data-refresh は snapshot_scope=auto (all を明示しない)。2026-10-28 に 8 指標で 75 分浪費
+- [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は vitest related で触った範囲だけ。web 全件 (約10分) は develop 直前の 1 回。CI は push 後に待たずに次へ進む

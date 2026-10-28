@@ -9,6 +9,7 @@ import {
 import { metricDisplayName } from '@stats47/ranking';
 import { BookOpenText } from 'lucide-react';
 
+import { PanelGrid } from '@/components/layout';
 import { SectionCard } from '@/components/surface';
 
 import { themeHref } from "../config/theme-href";
@@ -26,9 +27,8 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
   if (topics.length === 0) return null;
 
   return (
-    <section
+    <PanelGrid as="section"
       id="theme-evidence"
-      className="mt-8"
       aria-labelledby="theme-evidence-topics-title"
     >
       <div className="flex items-center gap-2">
@@ -204,6 +204,6 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
           );
         })}
       </SectionCard>
-    </section>
+    </PanelGrid>
   );
 }

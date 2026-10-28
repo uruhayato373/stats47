@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "regional-co2-emissions-estimate",
+  "year": "2023",
+  "unit": "千t-CO₂",
+  "label": "地域のCO₂排出量推計",
+  "readerLabel": "地域のCO₂排出量推計",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/regional-co2-emissions-estimate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug regional-co2-emissions-estimate-prefecture-gap --keys regional-co2-emissions-estimate --with-map",
+  "fetchedAt": "2026-10-28T12:30:00.940Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

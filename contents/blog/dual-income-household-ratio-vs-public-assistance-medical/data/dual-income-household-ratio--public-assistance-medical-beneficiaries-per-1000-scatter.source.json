@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "dual-income-household-ratio",
+  "pair": "public-assistance-medical-beneficiaries-per-1000",
+  "xKey": "dual-income-household-ratio",
+  "yKey": "public-assistance-medical-beneficiaries-per-1000",
+  "pearsonR": -0.7900995992109062,
+  "partialRPopulation": -0.7875601995782913,
+  "unit": "％ × 人",
+  "label": "共働き世帯割合 と 生活保護医療扶助人員 の関係",
+  "source": "r2:app/correlation/by-ranking-key/dual-income-household-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dual-income-household-ratio-vs-public-assistance-medical --base dual-income-household-ratio --pair public-assistance-medical-beneficiaries-per-1000 --data-name dual-income-household-ratio--public-assistance-medical-beneficiaries-per-1000"
+}

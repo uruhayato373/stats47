@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "average-height-primary-school-fifth-grade-male",
+  "pair": "other-processed-fish-ext-consumption-expenditure",
+  "xKey": "average-height-primary-school-fifth-grade-male",
+  "yKey": "other-processed-fish-ext-consumption-expenditure",
+  "pearsonR": 0.6978808700550948,
+  "partialRPopulation": 0.7034469188952649,
+  "unit": "cm × 円",
+  "label": "平均身長 と 他の魚介加工品のその他消費支出額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/average-height-primary-school-fifth-grade-male.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug average-height-primary-school-fifth-grade-male-vs-other --base average-height-primary-school-fifth-grade-male --pair other-processed-fish-ext-consumption-expenditure --data-name average-height-primary-school-fifth-grade-male--other-processed-fish-ext-consumption-expenditure"
+}

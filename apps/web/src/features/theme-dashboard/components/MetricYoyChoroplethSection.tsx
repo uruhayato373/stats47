@@ -83,7 +83,7 @@ export function MetricYoyChoroplethSection({
 
   if (!topology || !timeseries) {
     return (
-      <SurfaceCard className="text-sm text-muted-foreground">
+      <SurfaceCard className="text-muted-foreground">
         {title}を読み込み中...
       </SurfaceCard>
     );

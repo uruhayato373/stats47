@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
+import { cn } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -24,7 +25,7 @@ import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
   isMunicipalityAiContentCurrent,
-  lacksSpecialWards,
+  municipalityAbsenceNote,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
@@ -36,6 +37,7 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
+import { STAT_VALUE_CLASS } from '@/components/surface';
 
 import { NativeAffiliateRow } from '@/features/ads';
 import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
@@ -51,6 +53,7 @@ import {
 } from '@/features/municipalities';
 import {
   MunicipalityRankingMapSection,
+  getComparableMunicipalityCodes,
   getSpecialWardCodes,
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
@@ -154,6 +157,12 @@ export default async function MunicipalityRankingPage({
   // 解説は今の values.json に対して監査済みのときだけ出す (値が改訂された回は前回の解説を出さない)
   const commentary =
     aiContent && isMunicipalityAiContentCurrent(aiContent, snapshot) ? aiContent : null;
+  // ランキングに居ない自治体の理由 (将来負担比率の「―」は該当なし、財政力指数の 23 区は元の統計に値が無い)
+  const absenceNote = municipalityAbsenceNote(snapshot.values, {
+    comparableCodes: getComparableMunicipalityCodes(),
+    specialWardCodes: getSpecialWardCodes(),
+    absentValueReason: getMetricConfig(rankingKey)?.absentValueReason,
+  });
   const query = first(queryParams.q).trim();
   const prefectureCode = first(queryParams.pref);
   const requestedPage = Number.parseInt(first(queryParams.page) || '1', 10);
@@ -229,7 +238,7 @@ export default async function MunicipalityRankingPage({
             className="border-r border-border p-3 last:border-r-0"
           >
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className="mt-1 text-lg font-semibold tabular-nums">
+            <p className={cn(STAT_VALUE_CLASS, "mt-1")}>
               {typeof value === 'number' ? formatValue(value) : '—'}
               <span className="ml-0.5 text-xs font-normal text-muted-foreground">
                 {formatUnitForDisplay(snapshot.unit)}
@@ -324,7 +333,7 @@ export default async function MunicipalityRankingPage({
             />
           </span>
         </label>
-        <Button type="submit" className="h-10 self-end px-5">
+        <Button type="submit" className="self-end">
           絞り込む
         </Button>
       </form>
@@ -352,7 +361,7 @@ export default async function MunicipalityRankingPage({
             <TableRow>
               <TableHead className="w-20">順位</TableHead>
               <TableHead>市区町村</TableHead>
-              <TableHead className="text-right">値</TableHead>
+              <TableHead className="text-right!">値</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -457,7 +466,7 @@ export default async function MunicipalityRankingPage({
         surface="municipality_source"
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        {lacksSpecialWards(snapshot.values, getSpecialWardCodes()) && <p>東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。</p>}
+        {absenceNote && <p>{absenceNote}</p>}
         <p>
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>

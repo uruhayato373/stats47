@@ -1,6 +1,8 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の card.tsx をそのまま使う。変えたのは import 先 (相対パス) と
 // 下の CARD_SURFACE_CLASS の追加だけ。取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
 // lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
+// 文字の大きさ (Card 14px・CardTitle 16px / 22px・CardDescription 14px) は見本サイトに合わせて lyra から変えてある
+// (packages/ui-theme/style-reference.css。/* lyra */ の文字列は npm run ui-theme:lyra が書くので手で直さない)。
 import * as React from "react"
 
 import { cn } from "../../lib/cn"
@@ -10,9 +12,10 @@ import { cn } from "../../lib/cn"
  * テンプレートの lyra カード (角丸なし・細い線・影なし) と同じ見た目を、トークンだけで決める。
  * 角丸は --card-radius、線色は --card-outline (apps/web/src/app/globals.css)。ここにリテラル値を書かない。
  * 地は lyra の .cn-card と同じ bg-background (ダークで bg-card にすると Card 経由のカードと色が食い違った。2026-10-28)。
+ * 線の格子 (apps/web の PanelGrid。data-slot="panel-grid") の中では線を持たない。線は格子の 1px の隙間が引く。
  */
 export const CARD_SURFACE_CLASS =
-  "rounded-card border border-card-outline bg-background text-card-foreground"
+  "rounded-card border border-card-outline bg-background text-card-foreground in-data-[slot=panel-grid]:border-0"
 
 function Card({
   className,
@@ -26,7 +29,7 @@ function Card({
       className={cn(
         "cn-card group/card flex flex-col gap-4 overflow-hidden py-4 text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0",
         className,
-        /* lyra */ "ring-foreground/10 bg-background text-card-foreground gap-4 overflow-hidden rounded-none py-4 text-xs/relaxed ring-1 border-none has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-2 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-none *:[img:last-child]:rounded-none"
+        /* lyra */ "ring-foreground/10 bg-background text-card-foreground gap-4 overflow-hidden rounded-none py-4 ring-1 border-none has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-2 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-none *:[img:last-child]:rounded-none text-sm/relaxed in-data-[slot=panel-grid]:ring-0"
       )}
       {...props}
     />
@@ -54,7 +57,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         "cn-card-title font-medium group-data-[size=sm]/card:text-sm",
         className,
-        /* lyra */ "text-sm font-medium group-data-[size=sm]/card:text-sm"
+        /* lyra */ "font-medium group-data-[size=sm]/card:text-sm text-base leading-5.5"
       )}
       {...props}
     />
@@ -65,7 +68,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("cn-card-description text-muted-foreground", className, /* lyra */ "text-muted-foreground text-xs/relaxed")}
+      className={cn("cn-card-description text-muted-foreground", className, /* lyra */ "text-muted-foreground text-sm/relaxed")}
       {...props}
     />
   )

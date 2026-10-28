@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "outpatient-rate-per-1000",
+  "year": "2022",
+  "unit": "人口千対",
+  "label": "通院者率",
+  "readerLabel": "通院者率",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/outpatient-rate-per-1000/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug outpatient-rate-per-1000-prefecture-gap --keys outpatient-rate-per-1000 --with-map",
+  "fetchedAt": "2026-10-28T12:29:12.181Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

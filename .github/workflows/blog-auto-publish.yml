@@ -169,6 +169,9 @@ jobs:
             # --- ステージ (publishedAt 補完) ---
             mkdir -p ".local/r2/app/blog/$SLUG"
             cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
+            # 公開しない作業ファイル (NotebookLM の調査材料・審査結果・prompt) を公開 R2 へ上げない。
+            # 審査の指摘は下の record-critic-findings で台帳に残る
+            rm -f ".local/r2/app/blog/$SLUG/research.md" ".local/r2/app/blog/$SLUG/review.md" ".local/r2/app/blog/$SLUG/"*.prompt.txt
             A=".local/r2/app/blog/$SLUG/article.md"
             if grep -qE '^publishedAt:\s*\(未定\)' "$A" || ! grep -qE '^publishedAt:\s*[0-9]' "$A"; then
               perl -i -pe "s/^publishedAt:.*/publishedAt: $(date -u +%Y-%m-%d)/" "$A"
@@ -180,7 +183,10 @@ jobs:
             # --- 記事本体を R2 へ push ---
             # prefix には画像 manifest も含まれる。exact plan の前に同期すると
             # manifest の楽観ロックを自分自身で壊すため、画像セット確定後に同期する。
+            # 上書きの前後で本文の版を private R2 (blog-archive/<slug>/<sha>.md) に退避する (読み戻して SHA を照合)
+            node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            node .claude/scripts/blog/archive-blog-articles.mjs --file "$A" --slug "$SLUG"
             PUBLISHED="$PUBLISHED $SLUG"
             echo "✅ $SLUG published"
             echo "::endgroup::"
@@ -233,7 +239,7 @@ jobs:
               node .claude/scripts/blog/record-critic-findings.mjs "contents/blog/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
             fi
           done
-          if [ -f data/blog/critic-findings.jsonl ]; then git add data/blog/critic-findings.jsonl; fi
+          if [ -d data/blog/critic-findings ]; then git add data/blog/critic-findings; fi
           for SLUG in $PUBLISHED; do
             if [ -d "contents/blog/$SLUG" ]; then
               git rm -r -q "contents/blog/$SLUG" && REMOVED="$REMOVED $SLUG"

@@ -7,13 +7,20 @@ import {
   computeSharedDomain,
   createSharedColorScale,
 } from "../../shared/utils/choropleth-diverging";
-import { SITE } from "@stats47/types";
+import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from "@stats47/area";
+import { deriveWardModeTopology } from "@stats47/gis/ward-mode-topology";
+import { SITE, type TopoJSONTopology } from "@stats47/types";
 
 const R2_BASE = SITE.r2PublicBaseUrl;
 
+/**
+ * 境界は R2 の分割版 (`<県>_city.topojson`) から WardMode の merged を作る: 政令指定都市 (大阪市など) は市全体で 1 つ、
+ * 東京の特別区は区ごと。自前の統合版 `_city_dc` は 23 区を特別区部 13100 の 1 つにまとめていた
+ * (MUNI-WARD-MODE-READERS-01)。値 (社人研の将来推計) は同じ値を分割版で塗る web の地域比較と共有で、区ごとの行を持つ。
+ */
 const R2_URLS = {
-  tokyoTopo: `${R2_BASE}/gis/mlit/20240101/13/13_city_dc.topojson`,
-  osakaTopo: `${R2_BASE}/gis/mlit/20240101/27/27_city_dc.topojson`,
+  tokyoTopo: `${R2_BASE}/gis/mlit/20240101/13/13_city.topojson`,
+  osakaTopo: `${R2_BASE}/gis/mlit/20240101/27/27_city.topojson`,
   tokyoData: `${R2_BASE}/blog/population-choropleth/data/population-ratio-tokyo.json`,
   osakaData: `${R2_BASE}/blog/population-choropleth/data/population-ratio-osaka.json`,
 } as const;
@@ -62,14 +69,18 @@ export function usePopulationData(): PopulationDataResult {
             fetch(R2_URLS.osakaData),
           ]);
 
-        const [tokyoTopo, osakaTopo, tokyoData, osakaData] = await Promise.all([
-          tokyoTopoRes.json() as Promise<Topology>,
-          osakaTopoRes.json() as Promise<Topology>,
+        const [tokyoSplit, osakaSplit, tokyoData, osakaData] = await Promise.all([
+          tokyoTopoRes.json() as Promise<TopoJSONTopology>,
+          osakaTopoRes.json() as Promise<TopoJSONTopology>,
           tokyoDataRes.json() as Promise<PopulationRecord[]>,
           osakaDataRes.json() as Promise<PopulationRecord[]>,
         ]);
 
         if (cancelled) return;
+
+        const { mergeGroups } = resolveWardModeAreas(buildMunicipalityEntityPolicy(), "merged");
+        const tokyoTopo = deriveWardModeTopology(tokyoSplit, mergeGroups) as unknown as Topology;
+        const osakaTopo = deriveWardModeTopology(osakaSplit, mergeGroups) as unknown as Topology;
 
         const sharedDomain = computeSharedDomain(tokyoData, osakaData);
         const colorScale = createSharedColorScale(sharedDomain.maxAbs);

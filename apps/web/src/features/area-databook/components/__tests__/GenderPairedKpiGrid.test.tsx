@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { GenderPairedKpiGrid, pairYearLabel } from "../GenderPairedKpiGrid";
+import { GenderPairedKpiGrid } from "../GenderPairedKpiGrid";
 
 /**
  * 男女 KPI の可読性契約。
@@ -10,6 +10,9 @@ import { GenderPairedKpiGrid, pairYearLabel } from "../GenderPairedKpiGrid";
  * `#ec4899` (同 3.53) が本文文字に必要な 4.5:1 を満たしていなかった。単色では light と
  * dark の両立が不可能 (濃色は dark 地で 2 前後まで落ちる) なため、light / dark で
  * 明度を分ける。生 hex の任意値クラスへ戻す変更はここで落ちる。
+ *
+ * 2026-10-28: 男女それぞれを数値タイル (StatTile) 1 枚にし、県データブックの他の数値と同じ
+ * RankedValueGrid の線の格子で並べる (旧: 1 枚の表面に男 | 項目名 | 女 の行)。
  */
 
 const PAIRS = [
@@ -18,8 +21,8 @@ const PAIRS = [
 
 const DATABOOK = {
   metrics: {
-    "marriage-age-male": { value: 31.2, rank: 12, unit: "歳" },
-    "marriage-age-female": { value: 29.6, rank: 20, unit: "歳" },
+    "marriage-age-male": { value: 31.2, rank: 12, unit: "歳", year: "2020年" },
+    "marriage-age-female": { value: 29.6, rank: 20, unit: "歳", year: "2022年" },
   },
   // 本テストが読むのは metrics だけ
 } as unknown as Parameters<typeof GenderPairedKpiGrid>[0]["databook"];
@@ -59,27 +62,22 @@ describe("GenderPairedKpiGrid", () => {
     const html = markup();
     expect(html).toContain("31.2");
     expect(html).toContain("29.6");
-    expect(html).toContain("全国12位");
-    expect(html).toContain("全国20位");
+    expect(html).toContain("12位");
+    expect(html).toContain("20位");
   });
 
-  it("各行をカード化せず1つの表面にまとめる", () => {
+  it("男女を 1 枚ずつの数値タイルにし、線の格子に 2 列で並べる (男性が左)", () => {
     const html = markup();
-    expect(html.match(/border-card-outline/g)).toHaveLength(1);
-    expect(html).toContain("divide-y");
+    expect(html.match(/data-slot-kind="stat-tile"/g)).toHaveLength(2);
+    expect(html).toContain('data-slot="panel-grid"');
+    expect(html).toContain("@sm:grid-cols-2");
+    expect(html.indexOf("男性")).toBeLessThan(html.indexOf("女性"));
   });
-});
 
-// 2026-09-25 UI 全面点検: 数値だけではいつの値か分からなかった。男女で年が違えば両方出す。
-describe("pairYearLabel", () => {
-  it("男女が同じ年なら 1 つ", () => {
-    expect(pairYearLabel("2020年", "2020年")).toBe("2020年");
-  });
-  it("年が違えば両方", () => {
-    expect(pairYearLabel("2020年", "2022年")).toBe("男 2020年 / 女 2022年");
-  });
-  it("片方しか値が無ければその年、両方無ければ出さない", () => {
-    expect(pairYearLabel(undefined, "2022年")).toBe("2022年");
-    expect(pairYearLabel(undefined, undefined)).toBeNull();
+  // 2026-09-25 UI 全面点検: 数値だけではいつの値か分からなかった。年は男女それぞれのタイルに出す
+  it("年を男女それぞれに添える (年が違っても取り違えない)", () => {
+    const html = markup();
+    expect(html).toContain("2020年");
+    expect(html).toContain("2022年");
   });
 });

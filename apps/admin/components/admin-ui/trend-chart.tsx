@@ -3,7 +3,7 @@
 import { useId, useState, type ReactNode } from "react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, NativeSelect, NativeSelectOption, ToggleGroup, ToggleGroupItem } from "@stats47/components";
 import {
   ChartContainer,
   ChartLegend,
@@ -11,15 +11,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+} from "./chart";
 
 /**
  * 推移のチャート。公式 chart-area-interactive の仕組み (ChartContainer + 期間の切り替え) を、見本 (shadcndashboard.dev) の
  * パネルの形 (アイコン + 題名の見出し行と下線) で包む。
  * 面 (area)・棒 (bar)・折れ線 (line) を選べる。軸は 1 本だけ (単位の違う量は別のチャートにする)。
- * 色: 参考 (shadcndashboard.dev) と同じ主色の濃淡 (--chart-1〜5 を順に固定)。2 本以上は凡例を必ず出す。
+ * 色: 公開サイトと同じ --chart-1〜5 (@stats47/ui-theme の HSL 数値なので hsl() で包む) を順に固定。2 本以上は凡例を必ず出す。
  * サーバーから渡せるよう、書式は関数でなく valueFormat の名前で指定する。
  */
 export type TrendSeries = { key: string; label: string };
@@ -76,7 +74,7 @@ export function TrendChart({
   const rows = last ? data.slice(-last) : data;
 
   const config: ChartConfig = Object.fromEntries(
-    series.map((s, i) => [s.key, { label: s.label, color: `var(--chart-${(i % 5) + 1})` }]),
+    series.map((s, i) => [s.key, { label: s.label, color: `hsl(var(--chart-${(i % 5) + 1}))` }]),
   );
   const fmt = (v: unknown) => (typeof v === "number" ? FORMAT[valueFormat].format(v) : String(v ?? "—"));
   const stackId = stacked ? "a" : undefined;
@@ -88,7 +86,7 @@ export function TrendChart({
       <XAxis dataKey={xKey} tickLine={false} axisLine={false} tickMargin={8} minTickGap={32} tickFormatter={shortX} />
       <YAxis tickLine={false} axisLine={false} width={56} tickFormatter={fmt} />
       <ChartTooltip
-        cursor={kind === "bar" ? { fill: "var(--muted)" } : false}
+        cursor={kind === "bar" ? { fill: "hsl(var(--muted))" } : false}
         content={<ChartTooltipContent indicator="dot" labelFormatter={(v) => String(v)} />}
       />
       {series.length > 1 ? <ChartLegend content={<ChartLegendContent />} /> : null}
@@ -134,7 +132,7 @@ export function TrendChart({
           </CardAction>
         ) : null}
       </CardHeader>
-      <CardContent className="px-2 sm:px-4">
+      <CardContent className="sm:px-4">
         {rows.length === 0 ? (
           <p className="text-sm text-muted-foreground">まだ記録がありません。</p>
         ) : (

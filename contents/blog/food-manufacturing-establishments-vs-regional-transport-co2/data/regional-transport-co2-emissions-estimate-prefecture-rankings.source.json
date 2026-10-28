@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "regional-transport-co2-emissions-estimate",
+  "year": "2023",
+  "unit": "千t-CO₂",
+  "label": "運輸部門のCO₂排出量推計",
+  "readerLabel": "運輸部門のCO₂排出量推計",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/regional-transport-co2-emissions-estimate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug food-manufacturing-establishments-vs-regional-transport-co2 --keys regional-transport-co2-emissions-estimate --data-name regional-transport-co2-emissions-estimate-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:36.635Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

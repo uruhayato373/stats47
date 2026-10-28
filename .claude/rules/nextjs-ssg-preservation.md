@@ -157,8 +157,13 @@ export const revalidate = 86400;   // ƒ (オンデマンド) になり、ラン
 
 - **記事・コンテンツの編集 (brushup / 一括是正) は、R2 push だけでは本番に出ない**。まとまった単位で
   デプロイする (デプロイ規律は `branch-workflow.md`: 溜めて 1 回・明示指示か確認の上)。
-- 逆に**新規公開**の記事は build 時の `generateStaticParams` に含まれないため on-demand で描画され、
-  R2 push + CDN パージだけで出る (`blog-auto-publish.yml` が成立しているのはこのため)。
+- **新規公開**の記事は build 時の `generateStaticParams` に含まれないため on-demand で描画されるが、
+  **それだけでは出ない (2026-10-28 実測)**。middleware は `UrlPolicy.blog.isKnownPublished` (コミット済みの
+  `apps/web/src/config/sitemap-blog-entries.ts`) に無い slug を 410 にする。公開の CI
+  (`blog-auto-publish.yml`) が最後の手順でこの一覧を作り直してコミットし、**次のデプロイ**で記事が出る。
+  公開後の検査が落ちるとこの手順が飛ばされるので、そのときは
+  `cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-sitemap-blog-entries.ts`
+  で作り直してコミットする (2026-10-28 に 40 本が R2 にあるのに 410 だった)。
 - ISR エントリだけを消したい場合の道具は `packages/r2-storage/src/scripts/purge-isr-routes.ts`
   (route → sha256 → `incremental-cache/<buildId>/` を削除。現行 buildId は自動判定)。
   ただし上表のとおり **prerender 済みページには効かない**。効くのは `ƒ` オンデマンド ISR ページ。

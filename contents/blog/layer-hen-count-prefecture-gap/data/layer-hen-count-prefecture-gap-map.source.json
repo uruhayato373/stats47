@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "layer-hen-count",
+  "year": "2024",
+  "unit": "千羽",
+  "label": "採卵鶏の成鶏めす飼養羽数",
+  "readerLabel": "採卵鶏の成鶏めす飼養羽数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/layer-hen-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug layer-hen-count-prefecture-gap --keys layer-hen-count --with-map",
+  "fetchedAt": "2026-10-28T12:31:17.699Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

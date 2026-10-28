@@ -4,12 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { LayoutGrid, List } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from '@/components/ui/native-select';
+import { Button, Input, NativeSelect, NativeSelectOption } from '@stats47/components';
 import { StatusBadge } from '@/components/admin-ui/status-badge';
 import { DataGrid } from '@/components/admin-ui/data-grid';
 import { Grid } from '@/components/layout-primitives';
@@ -398,7 +393,7 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
         </div>
       )}
       {consistencyCount > 0 && (
-        <p className="text-sm text-console-warn">
+        <p className="text-sm text-warning">
           IG予約の不整合: 予約表のみ {consistency?.onlyInJson.length} 件 /
           台帳のみ {consistency?.onlyInPosts.length} 件
         </p>
@@ -481,7 +476,7 @@ function SnsLedger({ initialPlatform }: { initialPlatform: string }) {
                       </p>
                     )}
                     {item.approval?.state === 'pending' && (
-                      <p className="mt-2 text-xs text-console-warn">承認待ち</p>
+                      <p className="mt-2 text-xs text-warning">承認待ち</p>
                     )}
                   </div>,
                   formatJst(item.scheduled_at || item.posted_at),

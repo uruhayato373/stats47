@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "cpi-change-rate-food",
+  "year": "2024",
+  "unit": "％",
+  "label": "消費者物価指数変化率",
+  "readerLabel": "消費者物価指数変化率",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/cpi-change-rate-food/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cpi-change-rate-food-prefecture-gap --keys cpi-change-rate-food --with-map",
+  "fetchedAt": "2026-10-28T12:33:41.601Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

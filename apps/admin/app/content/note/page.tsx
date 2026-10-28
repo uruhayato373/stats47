@@ -8,10 +8,8 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
-import { NativeSelect } from "@/components/ui/native-select";
+import { NativeSelect, Input, Button, buttonVariants } from "@stats47/components";
 import { datasetPath } from "../../../../../config/datasets.mjs";
-import { Input } from "@/components/ui/input";
-import { Button, buttonVariants } from "@/components/ui/button";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "note運用 — stats47 admin" };

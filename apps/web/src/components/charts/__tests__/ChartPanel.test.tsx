@@ -1,7 +1,7 @@
+import { ChartPanel } from '@stats47/components';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { ChartPanel } from '../ChartPanel';
 
 describe('ChartPanel', () => {
   it('固定IDを指定した領域と見出しを対応させる', () => {

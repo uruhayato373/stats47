@@ -22,6 +22,7 @@ import {
   selectComposition,
 } from "@remotion/renderer";
 import path from "path";
+import { makeWebpackOverride } from "../../src/webpack-override";
 
 // ---------------------------------------------------------
 // 引数パース
@@ -82,16 +83,7 @@ async function main() {
   console.log("Bundling Remotion project...");
   const bundleUrl = await bundle({
     entryPoint: path.join(srcPath, "index.ts"),
-    webpackOverride: (config) => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...(config.resolve?.alias ?? {}),
-          "@": srcPath,
-        },
-      },
-    }),
+    webpackOverride: makeWebpackOverride(srcPath),
   });
   console.log("Bundle completed\n");
 

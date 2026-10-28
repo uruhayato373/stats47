@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fried-tofu-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "油揚げ・がんもどき消費支出額",
+  "readerLabel": "油揚げ・がんもどきへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fried-tofu-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fried-tofu-consumption-expenditure-prefecture-gap --keys fried-tofu-consumption-expenditure --data-name fried-tofu-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:32:01.385Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "per-capita-prefectural-income-h27",
+  "year": "2021",
+  "unit": "千円",
+  "label": "1人当たり県民所得",
+  "readerLabel": "1人当たり県民所得",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/per-capita-prefectural-income-h27/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug per-capita-prefectural-income-h27-prefecture-gap --keys per-capita-prefectural-income-h27 --with-map",
+  "fetchedAt": "2026-10-28T12:31:23.485Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

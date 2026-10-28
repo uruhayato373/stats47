@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "blanket-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "毛布消費支出額",
+  "readerLabel": "毛布への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/blanket-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug blanket-consumption-expenditure-prefecture-gap --keys blanket-consumption-expenditure --with-map",
+  "fetchedAt": "2026-10-28T12:34:18.979Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

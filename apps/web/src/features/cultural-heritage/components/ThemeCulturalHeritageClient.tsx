@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -18,7 +19,6 @@ import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -56,7 +56,7 @@ function LocationsTable({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.id} data-heritage-id={row.id}>
-            <TableHead scope="row" className="min-w-40 whitespace-normal">
+            <TableHead scope="row" className="min-w-40 whitespace-normal!">
               <a
                 href={row.officialUrl}
                 className="text-primary underline underline-offset-4"
@@ -66,13 +66,13 @@ function LocationsTable({
                 {row.name}
               </a>
             </TableHead>
-            <TableCell className="whitespace-normal">
+            <TableCell className="whitespace-normal!">
               {source.categories
                 .filter((category) => row.kinds.includes(category.key))
                 .map((category) => category.label)
                 .join('・')}
             </TableCell>
-            <TableCell className="min-w-48 whitespace-normal">
+            <TableCell className="min-w-48 whitespace-normal!">
               <p>
                 {row.geography === 'unspecified'
                   ? '地域を定めない'

@@ -1,6 +1,7 @@
 'use client';
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -17,7 +18,6 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import type { GeoAnalysisSnapshot } from '@stats47/gis';
 export function snowNationalValues(
@@ -87,7 +87,7 @@ export function GeoSnowDesignationSummary({
               <TableHead
                 key={m.key}
                 scope="col"
-                className="text-right whitespace-nowrap"
+                className="text-right! whitespace-nowrap"
               >
                 {m.label}（{formatUnitForDisplay(m.unit)}）
               </TableHead>
@@ -101,7 +101,7 @@ export function GeoSnowDesignationSummary({
                 {onSelectArea && !selected && r.areaCode !== '00000' ? (
                   <Button
                     variant="link"
-                    className="h-11 p-0"
+                    className="p-0"
                     onClick={() => onSelectArea(r.areaCode, r.areaName)}
                   >
                     {r.areaName}

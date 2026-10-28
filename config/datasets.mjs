@@ -388,6 +388,7 @@ export const DATASETS = [
 
   // ── data/ : 2026-10-06 の第 2 段階で .claude/state から移した事業の記録・運用状態 ──
   d("blog.operations", "data/blog/{name}", "state", "site", "data", "ブログの週次指標・是正キュー・トピックキュー・図の系譜と監査・勝ち要因"),
+  d("blog.critic-findings", "data/blog/critic-findings/{date}.jsonl", "series", "site", "data", "ブログの審査 (critic) の BLOCK・MAJOR の指摘。日付ごとに追記し、型ごとに数えて規約・gate への格上げに使う", { retain: "blog-critic-findings" }),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
   d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),
   d("content.quality-schema", "data/content-operations/quality.schema.json", "config", "product", "data", "記事と画像の改善台帳のJSON Schema"),
@@ -456,6 +457,8 @@ export const DATASETS = [
   d("area.specialty-illustrations", "assets/area-specialty/{**}", "asset", "site", "assets", "県ページの特産品イラストの原本 (sync-snapshots が R2 へ反映)"),
   d("site.page-heroes", "assets/page-heroes/{name}", "asset", "site", "assets", "カテゴリ・ホーム・テーマのヒーロー画像の原本 (webp にして apps/web/public へ)"),
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
+  d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "参考サイト (shadcndashboard・Flowly など) の撮影と部品ごとの実測値。どれを参考にするかは台帳 design.references"),
+  d("design.references", "data/design-references/references.json", "ledger", "site", "data", "参考サイトの台帳 (URL・採否と理由・撮影と実測の置き場・反映先)。管理画面「サイト > 参考サイト」が読む", { schema: "config/schema/design.references.schema.json" }),
   d("note.assets", "assets/note/{**}", "asset", "product", "assets", "note の背景・見出し・マガジン表紙の原本と生成の説明・マニフェスト"),
   d("affiliate.banners", "assets/affiliate-banners/{name}", "asset", "affiliate", "assets", "note 記事に貼るアフィリエイトのバナー画像"),
 

@@ -23,12 +23,12 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
 | ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**/**送り箱の記事に今の内容に合うサムネイル背景があるか (タイトル変更で古くなった AI 背景を push 前に止め、Codex の手順を示す。記事固有の背景 `assets/blog/article-backgrounds/<slug>.jpg` がある記事は title を変えても止まらない)**。**不可: 読者価値の有無** |
-| ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」・**定義整合 (下記)** |
+| ② 意味レビュー | **別コンテキストの critic** (新規記事の既定は headless `claude -p`、是正・panel は `blog-critic` agent) | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」・**定義整合 (下記)** |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 
 **鉄則**:
 - **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
-- **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
+- **書いた本人が自分の記事を採点して公開してはならない。**必ず別コンテキストの意味レビューを通す。執筆と審査は別のプロセスに分ける。新規記事は headless `claude -p` の author と critic (下の「執筆と審査の経路」)、既存記事の是正・panel review は `article-writer` と `blog-critic` agent が担う。どちらも critic は記事本文だけを読み、執筆時の文脈 (prompt・再試行の履歴) を渡さない。
 - 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
 - **定義整合 (★2026-09-19 追加・BLOCK)**: 本文の解釈は指標の定義 (単位・対象と分母・期間の型・調査・名目/実質) に
   縛られる。執筆と審査の両方が **同じ「指標定義シート」** を入力にする:
@@ -51,15 +51,41 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 > で最新化し `/brushup-blog --target queue --next 3` で週次バッチ是正する。仕組みの正典:
 > **`.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
 
+### 執筆と審査の経路 (新規記事は headless が既定・2026-10-28〜)
+
+新規記事の本文と審査は `packages/ai-content/src/scripts/write-blog-headless.ts` が headless `claude -p` で回す
+(手順は `/write-prepared-article` の「headless 経路」)。Agent tool の `article-writer` / `blog-critic` で新規記事を
+量産しない。subagent は CLAUDE.md と rules を毎ターン読むため、是正で約 10 万トークン/本・旧 CI で $8.2/本かかっていた。
+
+- **流れ**: 準備 (`generate-blog-article.ts`: 接地・データ健全性ゲート・SVG・prompt) → author (sonnet・effort low・repo 外 cwd・
+  ツール無し) → ① の `quality-gate.mjs` と `ci-factual-gate.mjs` (落ちたら blocker を添えて書き直す) → 別プロセスの critic
+  (`buildBlogCriticPrompt`。記事本文だけを渡す) → REVISE なら blocker / major の指摘と原稿を author に返して書き直し、
+  critic は新しいプロセスで全文を読み直す
+- **critic は書き手の制約を前提に審査する** (★2026-10-28 実測)。書き手は記事の指標の実データしか使えないので、
+  「別の指標を足せ」「相関係数を示せ」は指摘させず、裏付けの無い断定を「弱める・仮説にする・削る」よう指摘させる。
+  値と順位は factual gate が照合済みなので、本文の他の箇所で確かめられないことを理由にさせない。これを書く前の
+  critic は、author に禁じたことを blocker にして 0/6 PASS だった。**critic の基準を明文化することは緩めることではない**。
+  事実の誤り・因果の断定・題の約束不足は blocker のまま
+- **verdict はモデルの自己申告ではなくコードが blocker の有無で決める** (`decideBlogCriticVerdict`)。blocker 0 件なら
+  major / minor が残っても PASS で、`blog-critic` agent と同じ基準である
+- **公開しない**: PASS 分も `published: false` のまま outbox に残す。確定 (`--ingest`) と push は人が行い、本数は週次計画と
+  `data/blog/seo-strategy.json` が決める。Claude を CI の cron で無人実行しない
+- **記録**: `data/blog/headless-runs.csv` (slug ごとの呼び出し数・トークン・API 換算費用・ゲート・verdict)。
+  実測 (2026-10-28・5 本): 1 本 (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27、基準を揃えた後は 2/4 PASS・PASS 1 本 $0.32
+  (Pro/Max の OAuth では実請求ではない)。残る差し戻しは地理の誤り (隣接県・地方区分) と題の約束不足が多い
+  (`.claude/todo/backlog.md` の BLOG-HEADLESS-AUTHOR-01)
+- Gemini の無料枠 (`--author gemini-api`) と NotebookLM の調査材料 (`contents/blog/<slug>/research.md`) は同じバッチに
+  入る。白書の数値は factual gate の外なので本文に書かせない
+
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
-`published: true` の記事は `contents/blog/<slug>/review.md` (blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
+`published: true` の記事は `contents/blog/<slug>/review.md` (headless の critic か blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
 
 ```markdown
 ---
 slug: <slug>
-reviewer: blog-critic
-mode: expert | panel
+reviewer: blog-critic | headless-critic/<model>
+mode: expert | panel   # headless は書かない
 verdict: PASS | REVISE
 date: YYYY-MM-DD
 ---
@@ -71,12 +97,16 @@ date: YYYY-MM-DD
 <PASS/REVISE の根拠>
 ```
 
-`verdict: PASS`(実体200字以上) で初めて公開可。REVISE の指摘は article-writer 側が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
+`verdict: PASS`(実体200字以上) で初めて公開可。`quality-gate.mjs` はこの 2 点だけを見て、reviewer 欄では判定しない
+(書き手と審査の分離は、審査を別プロセスに置く経路の側で担保する)。headless の critic は重大度を小文字
+(`- [blocker|major|minor][型:<key>]`) で書くが、台帳の読み取り (`critic-findings.mjs`) は大文字小文字を区別しない。
+REVISE の指摘は執筆側 (headless の author か article-writer) が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
 
 ### critic の指摘の型と格上げ
 
 critic の指摘には型 (`[型:<key>]`、語彙は `.claude/config/critic-finding-types.json`) を付け、review.md を書いた直後に
-`record-critic-findings.mjs` で台帳 `data/blog/critic-findings.jsonl` に残す (公開時の outbox 掃除の直前にも CI が記録する)。
+`record-critic-findings.mjs` で日付ごとの台帳 `data/blog/critic-findings/<date>.jsonl` に BLOCK・MAJOR を残す (2026-10-29 に 1 ファイルから分けた。MINOR は集計に使わないので残さない) (公開時の outbox 掃除の直前にも CI が記録する)。
+headless の経路は語彙を critic の prompt に渡し、`write-blog-headless.ts` が review.md を書くたびに記録する。
 日次の `critic-findings-digest.mjs` が型ごとに数え、窓 (既定 56 日) の中で同じ型の BLOCK/MAJOR が 3 本以上の記事に
 出たら、backlog に `CRITIC-PATTERN-<型>` のカードを起票する。カードは「機械で判定できるなら gate、できなければ
 本規約と writer の指示」へ格上げして閉じ、config の `promotedAt` に日付を書く (以後はその日より後の再発だけを数える)。
@@ -367,7 +397,7 @@ HTTP 200 を返し、タイトルだけ「ランキングが見つかりませ�
 
 | 層 | 実装 | 発火箇所 | 判定できるもの |
 |---|---|---|---|
-| ① オフライン (ネットワーク不要) | `.claude/scripts/lib/internal-link-lint.mjs` | `quality-gate.mjs` (pre-commit + 公開 CI) / `audit-article-structure.mjs` / `audit-published-blog.mjs` | ranking (GONE / KNOWN∪config 外) / category / areas / themes / blog (GONE・呼び元が公開 slug 集合を渡した場合) → **blocker** |
+| ① オフライン (ネットワーク不要) | `.claude/scripts/lib/internal-link-lint.mjs` | `quality-gate.mjs` (pre-commit + 公開 CI) / `audit-article-structure.mjs` / `audit-published-blog.mjs` | ranking (GONE / KNOWN∪config 外) / category / areas / themes / blog (GONE・呼び元が公開 slug 集合を渡した場合) / municipalities/ranking (公開索引 `data/content/pages/municipality-ranking.json` 外の key・県別は `MUNICIPALITY_PREFECTURE_RANKING_KEYS` 外か 47 県外のコード) → **blocker** |
 | ② live 実測 (週次) | `.claude/scripts/blog/audit-internal-links.mjs` (週次レビューの `npm run weekly:audits` の internal-links) | 土曜の週次レビュー。壊れがあればレビュー本文の課題とバックログへ | 全種別。**KNOWN に載っているが R2 データが無いキー**など①が確定できない壊れ方 |
 | ③ サイト横断 live 実測 (週次) | `.claude/scripts/site/audit-site-links.mjs` (同 workflow) | 同上 | **ページ側コンポーネントが生成するリンク** (タグ・パンくず・サイドバー・県データブックの KPI グリッド等)。記事本文に現れないため①②では原理的に検知できない |
 

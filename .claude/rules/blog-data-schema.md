@@ -25,6 +25,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
   → 公開後はライブ (stats47.jp/blog/<slug>) で確認 → /brushup-blog (R2 取得→是正) で反復
 ```
 
+- **本文の版は private R2 `blog-archive/<slug>/<sha256>.md` に残る (2026-10-28〜)**。公開と直接の上書きの前後に `archive-blog-articles.mjs` が保存する。調査材料 `research.md`・審査結果 `review.md`・`*.prompt.txt` は公開 R2 へ上げない (公開の CI がステージから外す)。
 - **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`contents/blog` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
   - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② 週次レビューの `npm run weekly:audits` (blog-remediation。2026-10-26 までは日次の `blog-remediation-daily.yml`) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は contents/blog に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。contents/blog を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので contents/blog は必要)。
 - **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
@@ -183,7 +184,12 @@ source.json に表示用の出典を明示する:
   古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じ指標を複数の年で描いた記事は
   最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
   `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
-  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。
+  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。2 指標の散布図
+  (kind `scatter` / `derived-scatter` / `calculated` / `ranking-join` / `composite`) も、今の点が R2 のどの指標・年の値と
+  一致するかで軸と年を確かめてから、両軸の最新の共通年で作り直し、`pearsonR`・除外県を記録し直す。共通年へそろえると
+  今より古くなる軸があるときは軸ごとの最新年のまま両方の年を見出しに出す。同じ指標の 2 年比較と、点が R2 の値と
+  一致しない (計算した軸の) 図は手作業に回す。`formula` の文章は作り直さないので、古い年が残れば手作業として出る
+  (2026-10-28 BLOG-REFRESH-DERIVED-SCATTER-01)。
 - **`yearPinnedReason` (2026-10-07)**: 本文がその年そのものを主題として論じる図 (特定の年の出来事や、制度が変わった前後の
   比較で過去側に置いた図) だけ、source.json に `"yearPinnedReason": "<理由>"` を書く。`rankingRefs` はその図の年を持たず
   (指標 → 記事の回遊には残る)、古い図の一覧と取り直しの対象から外れる。理由の無い固定はしない (空文字は固定として扱わない)。

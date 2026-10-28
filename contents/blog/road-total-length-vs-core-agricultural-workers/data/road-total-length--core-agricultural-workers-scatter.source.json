@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "road-total-length",
+  "pair": "core-agricultural-workers",
+  "xKey": "road-total-length",
+  "yKey": "core-agricultural-workers",
+  "pearsonR": 0.7960587573851751,
+  "partialRPopulation": 0.8565008437347471,
+  "unit": "km × 人",
+  "label": "道路実延長 と 基幹的農業従事者数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/road-total-length.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug road-total-length-vs-core-agricultural-workers --base road-total-length --pair core-agricultural-workers --data-name road-total-length--core-agricultural-workers"
+}

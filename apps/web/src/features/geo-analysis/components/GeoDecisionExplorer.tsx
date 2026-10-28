@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { cn } from '@stats47/components';
 import {
   Select,
   SelectContent,
@@ -13,7 +14,8 @@ import {
 } from '@stats47/components/atoms/ui/select';
 
 import Link from '@/components/atoms/SiteLink';
-import { SurfaceCard } from '@/components/surface';
+import { PanelGrid } from '@/components/layout/PageShell';
+import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
 import { trackGeoRegionSelect } from '@/lib/analytics/events';
 
@@ -106,7 +108,7 @@ export function GeoDecisionExplorer({
   ] as const;
 
   return (
-    <section aria-labelledby="geo-decision-title">
+    <PanelGrid as="section" aria-labelledby="geo-decision-title">
       <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold text-primary">
@@ -139,12 +141,12 @@ export function GeoDecisionExplorer({
         </Select>
       </div>
 
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <PanelGrid className="mt-5 sm:grid-cols-2">
         {cards.map((card) => (
           <SurfaceCard key={card.href} className="p-5">
             <p className="text-xs font-semibold text-primary">{card.label}</p>
             <h3 className="mt-2 text-sm font-bold">{card.question}</h3>
-            <p className="mt-3 text-2xl font-bold tabular-nums">{card.value}</p>
+            <p className={cn(STAT_VALUE_CLASS, "mt-3")}>{card.value}</p>
             <p className="mt-1 text-sm text-muted-foreground">{card.detail}</p>
             <Link
               className="mt-4 inline-block text-sm font-medium text-primary underline"
@@ -154,11 +156,11 @@ export function GeoDecisionExplorer({
             </Link>
           </SurfaceCard>
         ))}
-      </div>
+      </PanelGrid>
 
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         洪水は1kmメッシュ中心点による近似、駅800mは直線距離です。個別地点の安全や実際の徒歩経路を判定する値ではありません。
       </p>
-    </section>
+    </PanelGrid>
   );
 }

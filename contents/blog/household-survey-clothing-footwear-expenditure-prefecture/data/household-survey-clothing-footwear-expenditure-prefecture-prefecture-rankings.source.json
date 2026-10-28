@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "household-survey-clothing-footwear-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "被服及び履物支出",
+  "readerLabel": "被服及び履物支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/household-survey-clothing-footwear-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug household-survey-clothing-footwear-expenditure-prefecture --keys household-survey-clothing-footwear-expenditure --data-name household-survey-clothing-footwear-expenditure-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:34:21.037Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

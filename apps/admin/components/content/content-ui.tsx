@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { ScanSearchIcon, TriangleAlertIcon } from 'lucide-react';
 
 import { Cell, DataTable, LinkCard, PanelCard, Row, StatusBadge } from '@/components/admin-ui';
-import { buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@stats47/components';
 import type {
   ContentChannelSummaryDTO,
   ContentFindingDTO,

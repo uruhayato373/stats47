@@ -1,7 +1,7 @@
+import { ChartPanel } from '@stats47/components';
 import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { parseWaterQualitySnapshot } from '../lib/water-quality-snapshot';
 

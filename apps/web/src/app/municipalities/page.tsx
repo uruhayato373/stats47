@@ -14,6 +14,7 @@ import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { StatisticsScopeNav } from '@/components/navigation';
 import {
   RailLinksCard,
@@ -177,7 +178,7 @@ export default function MunicipalitiesHubPage() {
             {activeThemes.length}テーマ
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <PanelGrid className="sm:grid-cols-2">
           {activeThemes.map((theme) => {
             const metricTitles = getMetricTitles(theme.metricKeys);
             const visibleMetricTitles = metricTitles.slice(0, 3);
@@ -212,7 +213,7 @@ export default function MunicipalitiesHubPage() {
               </SurfaceLinkCard>
             );
           })}
-        </div>
+        </PanelGrid>
       </section>
 
       <SurfaceSection

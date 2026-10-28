@@ -834,6 +834,109 @@ export function checkInlineSvgProvenance(content) {
   return warnings;
 }
 
+// ============================================================================
+// Correlation claim check (BLOG-TOPIC-PAIR-PER-CAPITA-01, 2026-10-28)
+// ============================================================================
+
+/**
+ * 散布図の接地物 (`*-scatter.source.json` の pearsonR と `*-scatter.json` の点数) を読む。
+ * 型B の prompt は同じファイルから相関係数を渡すので、本文の相関係数はこれと一致するはず。
+ *
+ * @param {string|null} dataDir
+ * `partialRPopulation` (人口を統制した偏相関) があれば partialR として持つ。本文が「偏相関係数を計算すると r=0.71」と
+ * 書くとき、`(?<!偏)` では r= の形を外せないため、既知の値として照合する (2026-10-28 に公開記事の誤検知 4 件の原因)。
+ *
+ * @returns {{file: string, pearsonR: number, partialR: number|null, pointCount: number|null}[]}
+ */
+export function loadCorrelationFacts(dataDir) {
+  if (!dataDir || !fs.existsSync(dataDir)) return [];
+  const facts = [];
+  for (const file of fs.readdirSync(dataDir)) {
+    if (!file.endsWith("-scatter.source.json")) continue;
+    try {
+      const source = JSON.parse(fs.readFileSync(path.join(dataDir, file), "utf8"));
+      if (typeof source.pearsonR !== "number" || !Number.isFinite(source.pearsonR)) continue;
+      let pointCount = null;
+      const scatterPath = path.join(dataDir, file.replace(/\.source\.json$/, ".json"));
+      if (fs.existsSync(scatterPath)) {
+        const scatter = JSON.parse(fs.readFileSync(scatterPath, "utf8"));
+        if (Array.isArray(scatter.points)) pointCount = scatter.points.length;
+      }
+      const partialR =
+        typeof source.partialRPopulation === "number" && Number.isFinite(source.partialRPopulation)
+          ? source.partialRPopulation
+          : null;
+      facts.push({ file, pearsonR: source.pearsonR, partialR, pointCount });
+    } catch {
+      // 壊れた JSON は照合材料にしない (下で「照合先なし」として警告に倒れる)
+    }
+  }
+  return facts;
+}
+
+// 「相関係数は−0.71」「相関係数が約0.7」「r=0.71」。符号は半角/全角ハイフン・マイナス記号・「マイナス」
+const CORRELATION_CLAIM_RE =
+  /(?:(?<!偏)相関係数|(?<![A-Za-z])r\s*[=＝])[^0-9０-９\n。−\-－]{0,6}?(マイナス\s*|[−\-－]\s*)?([0-9]*[.．][0-9]+)/g;
+// 相関を語る文の「46県」「46都道府県」(対象県数の主張)
+const CORRELATION_COUNT_RE = /([0-9]+)\s*(?:都道府県|県)/g;
+
+/**
+ * 本文の相関係数を散布図の接地物と照合する。
+ * - 本文の値が、書かれた小数桁で丸めたどの相関係数とも一致しない → warning
+ *   (unit-semantics-standards.md §5 の段階導入。2026-10-28 に公開 609 記事を走査し、相関係数を書く 91 記事中
+ *   7 記事で発火した。散布図に無い別の相関 (部分集合・別指標) を語る文も拾うため、blocker にすると
+ *   正しい記事の是正を止める。照合先の無い 54 記事は CORRELATION_NO_TRUTH。2026-10-28 に 7 記事の 20 件を文ごとに
+ *   確かめ、散布図の相関の誤りは 0 件・全件が別の相関 (部分集合・偏相関・順位相関・別指標・別の年) だった。
+ *   偏相関 4 件は partialR で解消したが、残りは文面から機械で区別できないので warning のままにする)
+ * - 相関係数を書いているのに照合先 (pearsonR を持つ source.json) が無い → warning
+ * - 相関係数と同じ文の「N県」が点数とも 47 とも違う → warning (順位の話と混ざるため blocker にしない)
+ *
+ * @param {string} content - article.md の全文
+ * @param {{pearsonR: number, partialR?: number|null, pointCount: number|null}[]} facts
+ * @returns {{blockers: string[], warnings: string[]}}
+ */
+export function checkCorrelationClaims(content, facts) {
+  const blockers = [];
+  const warnings = [];
+  const body = content
+    .replace(/^---[\s\S]*?\n---\n/, "")
+    .replace(/```[\s\S]*?```/g, "");
+  const sentences = body.split(/(?<=[。\n])/);
+  for (const sentence of sentences) {
+    CORRELATION_CLAIM_RE.lastIndex = 0;
+    let m;
+    let hasClaim = false;
+    while ((m = CORRELATION_CLAIM_RE.exec(sentence)) !== null) {
+      hasClaim = true;
+      const digits = m[2].replace("．", ".");
+      const decimals = digits.split(".")[1].length;
+      const stated = (m[1] ? -1 : 1) * Number(digits);
+      if (facts.length === 0) {
+        warnings.push(`CORRELATION_NO_TRUTH: 相関係数 ${m[0].trim()} を照合する散布図の source.json (pearsonR) が無い`);
+        continue;
+      }
+      const known = facts.flatMap((f) => (f.partialR == null ? [f.pearsonR] : [f.pearsonR, f.partialR]));
+      const ok = known.some((r) => Math.abs(Number(r.toFixed(decimals)) - stated) < 1e-9);
+      if (!ok) {
+        const truth = facts.map((f) => f.pearsonR.toFixed(decimals)).join(" / ");
+        warnings.push(`CORRELATION_MISMATCH: 本文の相関係数 ${stated} が散布図の値 ${truth} と一致しない (「${m[0].trim()}」)`);
+      }
+    }
+    if (!hasClaim || facts.length === 0) continue;
+    const counts = new Set(facts.map((f) => f.pointCount).filter((n) => n != null));
+    if (counts.size === 0) continue;
+    CORRELATION_COUNT_RE.lastIndex = 0;
+    let c;
+    while ((c = CORRELATION_COUNT_RE.exec(sentence)) !== null) {
+      const n = Number(c[1]);
+      if (n !== 47 && !counts.has(n)) {
+        warnings.push(`CORRELATION_COUNT_MISMATCH: 相関の文の「${c[0]}」が散布図の点数 ${[...counts].join(" / ")} と違う`);
+      }
+    }
+  }
+  return { blockers, warnings };
+}
+
 /**
  * Article content + data dir を取り、factual cross-check の結果を返す高レベル関数。
  *
@@ -847,6 +950,11 @@ export function checkArticleFactual(articleContent, dataDir) {
   const perCapita = isPerCapitaArticle(articleContent);
   const blockers = [];
   const warnings = [];
+
+  // 相関係数は県別の ground truth と独立に照合する (散布図の source.json が照合先)
+  const correlation = checkCorrelationClaims(articleContent, loadCorrelationFacts(dataDir));
+  blockers.push(...correlation.blockers);
+  warnings.push(...correlation.warnings);
 
   if (groundTruthPrefCount === 0) {
     warnings.push("data/*.json なし — factual cross-check スキップ (rank 整合性未検証)");

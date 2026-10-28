@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { cn } from '@stats47/components';
+import { ShellColumn } from './PanelGrid';
 
 /**
  * ページ内ナビ (旧 左レール) の置き場の契約。
@@ -18,19 +18,18 @@ export function LeftRailLayout({
   leftRail,
   children,
   mainClassName,
+  header,
 }: {
-  leftRail: ReactNode;
+  /** ページ内ナビ。無いときは見出しと本文だけの列になる */
+  leftRail?: ReactNode;
   children: ReactNode;
   mainClassName?: string;
+  /** ページ見出し。ページ内ナビより先の同じ格子に置く */
+  header?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-4">
-      <div data-slot="page-nav" className="min-w-0">
-        {leftRail}
-      </div>
-      <div data-slot="shell-main" className={cn('min-w-0', mainClassName)}>
-        {children}
-      </div>
-    </div>
+    <ShellColumn header={header} pageNav={leftRail} className={mainClassName}>
+      {children}
+    </ShellColumn>
   );
 }

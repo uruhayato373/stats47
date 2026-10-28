@@ -56,6 +56,7 @@ import { decideOutcome } from "../services/generation-outcome";
 import {
   buildBlogArticlePrompt,
   type BlogArchetype,
+  type CorrelationFact,
   type GroundTruthMetric,
 } from "../services/prompts/blog-article-prompt";
 // @stats47/types を依存に持たないため、サイト識別子の正本 JSON を直接読む
@@ -195,6 +196,27 @@ async function buildAllowedLinks(
     if (code) links.push({ href: `/areas/${code}`, label: `${row.areaName}のデータ` });
   }
   return links;
+}
+
+/**
+ * 型B の散布図の接地物から相関係数と点数を読む (BLOG-TOPIC-PAIR-PER-CAPITA-01)。
+ * 値は fetch-correlation-scatter.mjs が R2 相関 snapshot から書いたもので、factual gate
+ * (`checkCorrelationClaims`) も同じファイルと本文を照合する。読めなければ null。
+ */
+export function readCorrelationFact(dataDir: string, scatterBase: string): CorrelationFact | null {
+  try {
+    const source = JSON.parse(
+      fs.readFileSync(path.join(dataDir, `${scatterBase}.source.json`), "utf8"),
+    ) as { pearsonR?: unknown };
+    const scatter = JSON.parse(
+      fs.readFileSync(path.join(dataDir, `${scatterBase}.json`), "utf8"),
+    ) as { points?: unknown };
+    if (typeof source.pearsonR !== "number" || !Number.isFinite(source.pearsonR)) return null;
+    if (!Array.isArray(scatter.points) || scatter.points.length === 0) return null;
+    return { pearsonR: source.pearsonR, pointCount: scatter.points.length };
+  } catch {
+    return null;
+  }
 }
 
 /** モデルが ```markdown で包んだ場合に剥がす */
@@ -360,6 +382,7 @@ async function main() {
     // この記事は成立しないので skip する (主指標だけの図で相関記事を書かない)。
     let scatterBase: string | null = null;
     let secondMetric: GroundTruthMetric | null = null;
+    let correlation: CorrelationFact | null = null;
     if (isPair) {
       const [aKey, bKey] = topic.metricKeys;
       const secondJson = path.join(dataDir, `${bKey}-prefecture-rankings.json`);
@@ -392,6 +415,13 @@ async function main() {
         continue;
       }
       scatterBase = `${aKey}--${bKey}-scatter`;
+      correlation = readCorrelationFact(dataDir, scatterBase);
+      if (!correlation) {
+        log(`[reject] 相関係数を接地物から読めない: ${scatterBase}.source.json`);
+        fs.rmSync(dir, { recursive: true, force: true });
+        counters.rejected++;
+        continue;
+      }
       secondMetric = {
         rankingKey: second.rankingKey,
         label: second.title,
@@ -479,6 +509,7 @@ async function main() {
       sourceLinkHref: `/ranking/${payload.rankingKey}`,
       sourceLinkLabel: `${readerLabel}ランキングをもっと見る`,
       allowedLinks,
+      ...(correlation ? { correlation } : {}),
     };
 
     if (DRY_RUN) {

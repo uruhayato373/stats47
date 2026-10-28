@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "average-age-of-first-marriage-wife",
+  "year": "2023",
+  "unit": "歳",
+  "label": "平均初婚年齢（妻）",
+  "readerLabel": "平均初婚年齢（妻）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/average-age-of-first-marriage-wife/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug average-age-of-first-marriage-wife-prefecture-gap --keys average-age-of-first-marriage-wife --data-name average-age-of-first-marriage-wife-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:30:23.339Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

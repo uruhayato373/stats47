@@ -519,6 +519,7 @@ import { dailyStepsMale20to64AgeAdjusted } from "../../../data/metrics/daily-ste
 import { dairyCattleCount } from "../../../data/metrics/dairy-cattle-count";
 import { dairyCattleHoldings } from "../../../data/metrics/dairy-cattle-holdings";
 import { damCount } from "../../../data/metrics/dam-count";
+import { damagedVacantHousingRatio } from "../../../data/metrics/damaged-vacant-housing-ratio";
 import { dayTimePopulationRatio } from "../../../data/metrics/day-time-population-ratio";
 import { dayTimePopulation } from "../../../data/metrics/day-time-population";
 import { daytimePopulationRatio } from "../../../data/metrics/daytime-population-ratio";
@@ -679,6 +680,7 @@ import { elderlyCareEmploymentRate } from "../../../data/metrics/elderly-care-em
 import { elderlyClassLectureCountPerMillion } from "../../../data/metrics/elderly-class-lecture-count-per-million";
 import { elderlyCoupleHouseholds } from "../../../data/metrics/elderly-couple-households";
 import { elderlyCoupleOnlyHouseholdRatio } from "../../../data/metrics/elderly-couple-only-household-ratio";
+import { elderlyDayServiceWithin500mHouseholdRatio } from "../../../data/metrics/elderly-day-service-within-500m-household-ratio";
 import { elderlyEquipmentDwellings } from "../../../data/metrics/elderly-equipment-dwellings";
 import { elderlyFriendlyApartmentDwellings } from "../../../data/metrics/elderly-friendly-apartment-dwellings";
 import { elderlyGeneralWorkerOldPopulationRatioPre2019 } from "../../../data/metrics/elderly-general-worker-old-population-ratio-pre2019";
@@ -717,6 +719,7 @@ import { elementarySchoolLongAbsenceRatioOver30daysPer1000 } from "../../../data
 import { elementarySchoolStudentsPerTeacher } from "../../../data/metrics/elementary-school-students-per-teacher";
 import { elementarySchoolTeachersRatioFemale } from "../../../data/metrics/elementary-school-teachers-ratio-female";
 import { elementarySchoolTeachers } from "../../../data/metrics/elementary-school-teachers";
+import { elementarySchoolWithin1kmHouseholdRatio } from "../../../data/metrics/elementary-school-within-1km-household-ratio";
 import { elementaryTutoringConsumptionExpenditure } from "../../../data/metrics/elementary-tutoring-consumption-expenditure";
 import { elementary5FitnessScoreFemale } from "../../../data/metrics/elementary5-fitness-score-female";
 import { elementary5FitnessScoreMale } from "../../../data/metrics/elementary5-fitness-score-male";
@@ -778,6 +781,7 @@ import { establishmentRatio1029EmployeesPrivate } from "../../../data/metrics/es
 import { establishmentRatio100299EmployeesPrivate } from "../../../data/metrics/establishment-ratio-100-299-employees-private";
 import { establishmentRatio300plusEmployeesPrivate } from "../../../data/metrics/establishment-ratio-300plus-employees-private";
 import { establishmentRatio59EmployeesPrivate } from "../../../data/metrics/establishment-ratio-5-9-employees-private";
+import { evacuationSiteWithin500mHouseholdRatio } from "../../../data/metrics/evacuation-site-within-500m-household-ratio";
 import { exclusiveIndustrialDistrictArea } from "../../../data/metrics/exclusive-industrial-district-area";
 import { exclusiveResidentialDistrictArea } from "../../../data/metrics/exclusive-residential-district-area";
 import { exclusiveResidentialDwellings } from "../../../data/metrics/exclusive-residential-dwellings";
@@ -1352,6 +1356,7 @@ import { juniorHighSchoolLongAbsenceRatioOver30daysPer1000 } from "../../../data
 import { juniorHighSchoolStudentsCount } from "../../../data/metrics/junior-high-school-students-count";
 import { juniorHighSchoolStudentsPerTeacher } from "../../../data/metrics/junior-high-school-students-per-teacher";
 import { juniorHighSchoolTeachers } from "../../../data/metrics/junior-high-school-teachers";
+import { juniorHighSchoolWithin1kmHouseholdRatio } from "../../../data/metrics/junior-high-school-within-1km-household-ratio";
 import { juniorHighTutoringConsumptionExpenditure } from "../../../data/metrics/junior-high-tutoring-consumption-expenditure";
 import { juvenileCriminalArrestPersonPerPopulation } from "../../../data/metrics/juvenile-criminal-arrest-person-per-population";
 import { juvenileCriminalArrestPerson } from "../../../data/metrics/juvenile-criminal-arrest-person";
@@ -1539,6 +1544,7 @@ import { mediaProductionEstablishments } from "../../../data/metrics/media-produ
 import { mediaProductionNetValueAdded } from "../../../data/metrics/media-production-net-value-added";
 import { mediaProductionRevenue } from "../../../data/metrics/media-production-revenue";
 import { medianAge } from "../../../data/metrics/median-age";
+import { medicalFacilityWithin500mHouseholdRatio } from "../../../data/metrics/medical-facility-within-500m-household-ratio";
 import { medicalFeeConsumptionExpenditure } from "../../../data/metrics/medical-fee-consumption-expenditure";
 import { medicalPhysiciansAge4059 } from "../../../data/metrics/medical-physicians-age-40-59";
 import { medicalPhysiciansAge60Plus } from "../../../data/metrics/medical-physicians-age-60-plus";
@@ -1782,6 +1788,7 @@ import { nurseryTeacherAnnualIncome } from "../../../data/metrics/nursery-teache
 import { nurseryTypeEceCenterEnrolledChildren } from "../../../data/metrics/nursery-type-ece-center-enrolled-children";
 import { nurseryUtilizationRate } from "../../../data/metrics/nursery-utilization-rate";
 import { nurseryWaitingChildrenCount } from "../../../data/metrics/nursery-waiting-children-count";
+import { nurseryWithin500mYoungChildHouseholdRatio } from "../../../data/metrics/nursery-within-500m-young-child-household-ratio";
 import { nursesGeneralHospitalPer100beds } from "../../../data/metrics/nurses-general-hospital-per-100beds";
 import { nursesInMedicalFacilitiesPer100k } from "../../../data/metrics/nurses-in-medical-facilities-per-100k";
 import { nursesPer100kPopulation } from "../../../data/metrics/nurses-per-100k-population";
@@ -1972,6 +1979,7 @@ import { paidNursingHomeCount } from "../../../data/metrics/paid-nursing-home-co
 import { paidNursingHomeResidentsPer100065plus } from "../../../data/metrics/paid-nursing-home-residents-per-1000-65plus";
 import { paidNursingHomeResidents } from "../../../data/metrics/paid-nursing-home-residents";
 import { paperDiapersConsumptionExpenditure } from "../../../data/metrics/paper-diapers-consumption-expenditure";
+import { parkWithin500mHouseholdRatio } from "../../../data/metrics/park-within-500m-household-ratio";
 import { partTimeEmploymentRateRegular } from "../../../data/metrics/part-time-employment-rate-regular";
 import { partTimeWorkers } from "../../../data/metrics/part-time-workers";
 import { passengerShipTransport } from "../../../data/metrics/passenger-ship-transport";
@@ -2188,6 +2196,7 @@ import { portVehicleFerryCar } from "../../../data/metrics/port-vehicle-ferry-ca
 import { portVehicleFerryTotal } from "../../../data/metrics/port-vehicle-ferry-total";
 import { portVehicleFerryTruck } from "../../../data/metrics/port-vehicle-ferry-truck";
 import { portVehicleFerry } from "../../../data/metrics/port-vehicle-ferry";
+import { postOfficeBankWithin500mHouseholdRatio } from "../../../data/metrics/post-office-bank-within-500m-household-ratio";
 import { postOfficeCountPer100km2 } from "../../../data/metrics/post-office-count-per-100km2";
 import { postOfficeCount } from "../../../data/metrics/post-office-count";
 import { postageConsumptionExpenditure } from "../../../data/metrics/postage-consumption-expenditure";
@@ -2359,6 +2368,7 @@ import { publicRentConsumptionQuantity } from "../../../data/metrics/public-rent
 import { publicRentalHousingRentPer33m2 } from "../../../data/metrics/public-rental-housing-rent-per-3-3m2";
 import { publicRentedDwellings } from "../../../data/metrics/public-rented-dwellings";
 import { publicSchoolClosuresCumulative } from "../../../data/metrics/public-school-closures-cumulative";
+import { publicSewerHousingRatio } from "../../../data/metrics/public-sewer-housing-ratio";
 import { publicSwimmingPoolCountPerMillion } from "../../../data/metrics/public-swimming-pool-count-per-million";
 import { publicUniversityConsumptionExpenditure } from "../../../data/metrics/public-university-consumption-expenditure";
 import { publicUniversityStudentRatio } from "../../../data/metrics/public-university-student-ratio";
@@ -2737,6 +2747,7 @@ import { standardizedMortalityRatePer1000 } from "../../../data/metrics/standard
 import { startingSalaryHighschool } from "../../../data/metrics/starting-salary-highschool";
 import { startingSalaryUniversity } from "../../../data/metrics/starting-salary-university";
 import { stationPassengersAnnualTotal } from "../../../data/metrics/station-passengers-annual-total";
+import { stationWithin1kmHouseholdRatio } from "../../../data/metrics/station-within-1km-household-ratio";
 import { statisticalDiscrepancyNominalH27 } from "../../../data/metrics/statistical-discrepancy-nominal-h27";
 import { steelFrameDwellings } from "../../../data/metrics/steel-frame-dwellings";
 import { steepSlopeSpecialWarningZoneCount } from "../../../data/metrics/steep-slope-special-warning-zone-count";
@@ -3034,6 +3045,8 @@ import { vacantHousesCity } from "../../../data/metrics/vacant-houses-city";
 import { vacantHousingExcludingRentalSaleSecondary } from "../../../data/metrics/vacant-housing-excluding-rental-sale-secondary";
 import { vacantHousingForRent } from "../../../data/metrics/vacant-housing-for-rent";
 import { vacantHousingForSale } from "../../../data/metrics/vacant-housing-for-sale";
+import { vacantHousingRateExcludingRentalSaleSecondary } from "../../../data/metrics/vacant-housing-rate-excluding-rental-sale-secondary";
+import { vacantHousingRateForRent } from "../../../data/metrics/vacant-housing-rate-for-rent";
 import { vacantHousingRate } from "../../../data/metrics/vacant-housing-rate";
 import { vacantHousingRatio } from "../../../data/metrics/vacant-housing-ratio";
 import { vacantHousingSecondaryResidences } from "../../../data/metrics/vacant-housing-secondary-residences";
@@ -3696,6 +3709,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "dairy-cattle-count": dairyCattleCount,
   "dairy-cattle-holdings": dairyCattleHoldings,
   "dam-count": damCount,
+  "damaged-vacant-housing-ratio": damagedVacantHousingRatio,
   "day-time-population-ratio": dayTimePopulationRatio,
   "day-time-population": dayTimePopulation,
   "daytime-population-ratio": daytimePopulationRatio,
@@ -3856,6 +3870,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "elderly-class-lecture-count-per-million": elderlyClassLectureCountPerMillion,
   "elderly-couple-households": elderlyCoupleHouseholds,
   "elderly-couple-only-household-ratio": elderlyCoupleOnlyHouseholdRatio,
+  "elderly-day-service-within-500m-household-ratio": elderlyDayServiceWithin500mHouseholdRatio,
   "elderly-equipment-dwellings": elderlyEquipmentDwellings,
   "elderly-friendly-apartment-dwellings": elderlyFriendlyApartmentDwellings,
   "elderly-general-worker-old-population-ratio-pre2019": elderlyGeneralWorkerOldPopulationRatioPre2019,
@@ -3894,6 +3909,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "elementary-school-students-per-teacher": elementarySchoolStudentsPerTeacher,
   "elementary-school-teachers-ratio-female": elementarySchoolTeachersRatioFemale,
   "elementary-school-teachers": elementarySchoolTeachers,
+  "elementary-school-within-1km-household-ratio": elementarySchoolWithin1kmHouseholdRatio,
   "elementary-tutoring-consumption-expenditure": elementaryTutoringConsumptionExpenditure,
   "elementary5-fitness-score-female": elementary5FitnessScoreFemale,
   "elementary5-fitness-score-male": elementary5FitnessScoreMale,
@@ -3955,6 +3971,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "establishment-ratio-100-299-employees-private": establishmentRatio100299EmployeesPrivate,
   "establishment-ratio-300plus-employees-private": establishmentRatio300plusEmployeesPrivate,
   "establishment-ratio-5-9-employees-private": establishmentRatio59EmployeesPrivate,
+  "evacuation-site-within-500m-household-ratio": evacuationSiteWithin500mHouseholdRatio,
   "exclusive-industrial-district-area": exclusiveIndustrialDistrictArea,
   "exclusive-residential-district-area": exclusiveResidentialDistrictArea,
   "exclusive-residential-dwellings": exclusiveResidentialDwellings,
@@ -4529,6 +4546,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "junior-high-school-students-count": juniorHighSchoolStudentsCount,
   "junior-high-school-students-per-teacher": juniorHighSchoolStudentsPerTeacher,
   "junior-high-school-teachers": juniorHighSchoolTeachers,
+  "junior-high-school-within-1km-household-ratio": juniorHighSchoolWithin1kmHouseholdRatio,
   "junior-high-tutoring-consumption-expenditure": juniorHighTutoringConsumptionExpenditure,
   "juvenile-criminal-arrest-person-per-population": juvenileCriminalArrestPersonPerPopulation,
   "juvenile-criminal-arrest-person": juvenileCriminalArrestPerson,
@@ -4716,6 +4734,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "media-production-net-value-added": mediaProductionNetValueAdded,
   "media-production-revenue": mediaProductionRevenue,
   "median-age": medianAge,
+  "medical-facility-within-500m-household-ratio": medicalFacilityWithin500mHouseholdRatio,
   "medical-fee-consumption-expenditure": medicalFeeConsumptionExpenditure,
   "medical-physicians-age-40-59": medicalPhysiciansAge4059,
   "medical-physicians-age-60-plus": medicalPhysiciansAge60Plus,
@@ -4959,6 +4978,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "nursery-type-ece-center-enrolled-children": nurseryTypeEceCenterEnrolledChildren,
   "nursery-utilization-rate": nurseryUtilizationRate,
   "nursery-waiting-children-count": nurseryWaitingChildrenCount,
+  "nursery-within-500m-young-child-household-ratio": nurseryWithin500mYoungChildHouseholdRatio,
   "nurses-general-hospital-per-100beds": nursesGeneralHospitalPer100beds,
   "nurses-in-medical-facilities-per-100k": nursesInMedicalFacilitiesPer100k,
   "nurses-per-100k-population": nursesPer100kPopulation,
@@ -5149,6 +5169,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "paid-nursing-home-residents-per-1000-65plus": paidNursingHomeResidentsPer100065plus,
   "paid-nursing-home-residents": paidNursingHomeResidents,
   "paper-diapers-consumption-expenditure": paperDiapersConsumptionExpenditure,
+  "park-within-500m-household-ratio": parkWithin500mHouseholdRatio,
   "part-time-employment-rate-regular": partTimeEmploymentRateRegular,
   "part-time-workers": partTimeWorkers,
   "passenger-ship-transport": passengerShipTransport,
@@ -5365,6 +5386,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "port-vehicle-ferry-total": portVehicleFerryTotal,
   "port-vehicle-ferry-truck": portVehicleFerryTruck,
   "port-vehicle-ferry": portVehicleFerry,
+  "post-office-bank-within-500m-household-ratio": postOfficeBankWithin500mHouseholdRatio,
   "post-office-count-per-100km2": postOfficeCountPer100km2,
   "post-office-count": postOfficeCount,
   "postage-consumption-expenditure": postageConsumptionExpenditure,
@@ -5536,6 +5558,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "public-rental-housing-rent-per-3-3m2": publicRentalHousingRentPer33m2,
   "public-rented-dwellings": publicRentedDwellings,
   "public-school-closures-cumulative": publicSchoolClosuresCumulative,
+  "public-sewer-housing-ratio": publicSewerHousingRatio,
   "public-swimming-pool-count-per-million": publicSwimmingPoolCountPerMillion,
   "public-university-consumption-expenditure": publicUniversityConsumptionExpenditure,
   "public-university-student-ratio": publicUniversityStudentRatio,
@@ -5914,6 +5937,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "starting-salary-highschool": startingSalaryHighschool,
   "starting-salary-university": startingSalaryUniversity,
   "station-passengers-annual-total": stationPassengersAnnualTotal,
+  "station-within-1km-household-ratio": stationWithin1kmHouseholdRatio,
   "statistical-discrepancy-nominal-h27": statisticalDiscrepancyNominalH27,
   "steel-frame-dwellings": steelFrameDwellings,
   "steep-slope-special-warning-zone-count": steepSlopeSpecialWarningZoneCount,
@@ -6211,6 +6235,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "vacant-housing-excluding-rental-sale-secondary": vacantHousingExcludingRentalSaleSecondary,
   "vacant-housing-for-rent": vacantHousingForRent,
   "vacant-housing-for-sale": vacantHousingForSale,
+  "vacant-housing-rate-excluding-rental-sale-secondary": vacantHousingRateExcludingRentalSaleSecondary,
+  "vacant-housing-rate-for-rent": vacantHousingRateForRent,
   "vacant-housing-rate": vacantHousingRate,
   "vacant-housing-ratio": vacantHousingRatio,
   "vacant-housing-secondary-residences": vacantHousingSecondaryResidences,

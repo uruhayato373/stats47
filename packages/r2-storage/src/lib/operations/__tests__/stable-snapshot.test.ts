@@ -37,8 +37,27 @@ describe("readPublishedSnapshot", () => {
     await expect(readPublishedSnapshot("app/x.json", "https://r2.test")).resolves.toBeNull();
     vi.stubGlobal("fetch", respond(200, '{"a":1}'));
     await expect(readPublishedSnapshot("app/x.json", "https://r2.test")).resolves.toEqual({ a: 1 });
-    vi.stubGlobal("fetch", respond(503));
-    await expect(readPublishedSnapshot("app/x.json", "https://r2.test")).rejects.toThrow("HTTP 503");
+    const noWait = async () => {};
+    const always503 = respond(503);
+    vi.stubGlobal("fetch", always503);
+    await expect(readPublishedSnapshot("app/x.json", "https://r2.test", noWait)).rejects.toThrow("HTTP 503");
+    expect(always503).toHaveBeenCalledTimes(3);
+    const forbidden = respond(403);
+    vi.stubGlobal("fetch", forbidden);
+    await expect(readPublishedSnapshot("app/x.json", "https://r2.test", noWait)).rejects.toThrow("HTTP 403");
+    expect(forbidden).toHaveBeenCalledTimes(1);
     await expect(readPublishedSnapshot("../x.json", "https://r2.test")).rejects.toThrow("不正");
+  });
+
+  it("一時的な 5xx と通信の失敗は読み直して読めた値を返す", async () => {
+    const noWait = async () => {};
+    const flaky = vi
+      .fn()
+      .mockResolvedValueOnce(new Response("{}", { status: 500 }))
+      .mockRejectedValueOnce(new TypeError("fetch failed"))
+      .mockResolvedValueOnce(new Response('{"a":2}', { status: 200 }));
+    vi.stubGlobal("fetch", flaky);
+    await expect(readPublishedSnapshot("app/x.json", "https://r2.test", noWait)).resolves.toEqual({ a: 2 });
+    expect(flaky).toHaveBeenCalledTimes(3);
   });
 });

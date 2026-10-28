@@ -4,7 +4,7 @@ import Link from "next/link";
 import { DataGrid, StatCard, StatusBadge, TrendChart, type Tone } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@stats47/components";
 import { hasError } from "@/lib/server/state-io";
 import { cadenceOf, scheduleSortKey, workflowCatalog, WORKFLOW_CATALOG, type WorkflowEntry } from "@/lib/server/workflows";
 

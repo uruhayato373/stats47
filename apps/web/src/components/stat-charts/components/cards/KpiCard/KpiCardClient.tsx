@@ -3,12 +3,11 @@
 import React from "react";
 
 import { cn } from "@stats47/components";
-import { Badge } from "@stats47/components/atoms/ui/badge";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
-import { SurfaceCard } from "@/components/surface";
+import { StatTile } from "@/components/surface";
 
 import { parseTitle } from "../../../utils/parseTitle";
 
@@ -54,41 +53,27 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
 
   const { main, sub } = parseTitle(title);
 
+  // 数値タイル (StatTile) で描く: 名前 → 値 + 増減 → 年
   return (
-    <SurfaceCard className="@container/kpi p-0">
-      <div className="px-4 pb-0 pt-4">
-        <p className="min-w-0 text-sm text-muted-foreground">
+    <StatTile
+      label={
+        <>
           {main}
-          {sub && (
-            <span className="block text-xs text-muted-foreground/70 mt-0.5">{sub}</span>
-          )}
-        </p>
-      </div>
-      <div className="px-4 pb-1.5">
-        <div className="text-lg font-semibold @[200px]/kpi:text-xl tabular-nums">
-          {formattedValue}
-          {unit && (
-            <span className="text-sm font-normal text-muted-foreground ml-1">
-              {formatUnitForDisplay(unit)}
-            </span>
-          )}
-        </div>
-      </div>
-      <div className="px-4 pb-3 pt-0">
-        <div className="flex items-center gap-2">
-          {year && (
-            <Badge variant="outline" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
-              {year}
-            </Badge>
-          )}
-          {changeRate !== null && changeRate !== undefined && changeDirection ? (
-            <div className={cn("flex items-center gap-0.5 text-xs", trendColor)}>
-              {TrendIcon && <TrendIcon className="h-3 w-3" />}
-              <span className="font-medium">{changeRate > 0 ? "+" : ""}{changeRate}%</span>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </SurfaceCard>
+          {sub && <span className="mt-0.5 block text-xs text-muted-foreground">{sub}</span>}
+        </>
+      }
+      value={formattedValue}
+      unit={unit ? formatUnitForDisplay(unit) : undefined}
+      badge={
+        changeRate !== null && changeRate !== undefined && changeDirection ? (
+          <span className={cn("flex items-center gap-0.5 text-xs font-medium", trendColor)}>
+            {TrendIcon && <TrendIcon className="size-3" aria-hidden="true" />}
+            {changeRate > 0 ? "+" : ""}
+            {changeRate}%
+          </span>
+        ) : undefined
+      }
+      meta={year ?? undefined}
+    />
   );
 };

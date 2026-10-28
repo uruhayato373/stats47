@@ -113,8 +113,7 @@ function FooterActionLink({
   );
 }
 
-const MENU_TRIGGER_CLASS_NAME =
-  'h-8 gap-1.5 px-1 text-xs font-medium text-muted-foreground hover:bg-transparent hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50';
+const MENU_TRIGGER_CLASS_NAME = 'font-medium text-muted-foreground';
 
 interface FooterMenuTriggerLabelProps {
   kind: FooterActionKind;

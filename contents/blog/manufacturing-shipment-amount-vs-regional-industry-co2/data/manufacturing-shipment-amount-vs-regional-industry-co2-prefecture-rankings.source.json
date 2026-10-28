@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "manufacturing-shipment-amount",
+  "year": "2023",
+  "unit": "百万円",
+  "label": "製造品出荷額等",
+  "readerLabel": "製造品出荷額等",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/manufacturing-shipment-amount/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug manufacturing-shipment-amount-vs-regional-industry-co2 --keys manufacturing-shipment-amount --data-name manufacturing-shipment-amount-vs-regional-industry-co2-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:31.963Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

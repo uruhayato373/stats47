@@ -1,0 +1,249 @@
+{
+  "title": "生しいたけ消費量",
+  "subtitle": "2024年",
+  "label": "生しいたけ消費量",
+  "readerLabel": "生しいたけ消費量",
+  "hook": "生しいたけ消費量が最も多い県は？",
+  "unit": "g",
+  "year": "2024",
+  "rankingKey": "fresh-shiitake-consumption-quantity",
+  "source": "家計調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 2135
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 2021
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 1916
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 1905
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 1904
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 1818
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 1772
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 1763
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 1745
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 1720
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 1710
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 1675
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 1640
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 1617
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 1613
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 1609
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 1600
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 1591
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 1581
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 1577
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 1559
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 1541
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 1523
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 1511
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 1509
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 1501
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 1487
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 1444
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 1439
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 1426
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 1411
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 1405
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 1398
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 1390
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 1386
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 1381
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 1372
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 1339
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 1328
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 1293
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 1282
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 1252
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 1205
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 1198
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 1172
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 1103
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 669
+    }
+  ]
+}

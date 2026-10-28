@@ -1,8 +1,9 @@
 "use client";
 
+import { ChartPanel } from "@stats47/components";
+
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { FINANCE_CHART_COLORS } from "@/components/charts/ChartPalette";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { useFlowData } from "@/components/charts/useFlowData";
@@ -32,8 +33,8 @@ export const LOCAL_FINANCE_SOURCE_LINKS = [
 export function FinanceSankey({ code, initialData }: Props) {
   const { data, errored } = useFlowData<FinanceFlowData>("finance", code, initialData);
 
-  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73 border bg-muted" />;
-  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73 border bg-muted" />;
+  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73" />;
+  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73" />;
 
   const title = `${data.focusName} 財政フロー（${data.year}年度）`;
   const description =

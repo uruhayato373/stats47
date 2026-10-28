@@ -1,4 +1,4 @@
-export { PageShell } from './PageShell';
+export { PageShell, PageSections, PanelGrid } from './PageShell';
 export { LeftRailLayout } from './LeftRailLayout';
 export { ArticleShell } from './ArticleShell';
 export { PageHeader } from './PageHeader';

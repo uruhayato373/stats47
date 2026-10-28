@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "solar-power-housing",
+  "year": "2023",
+  "unit": "戸",
+  "label": "太陽光を利用した発電機器のある住宅数",
+  "readerLabel": "太陽光を利用した発電機器のある住宅数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/solar-power-housing/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug solar-power-housing-prefecture-gap --keys solar-power-housing --with-map",
+  "fetchedAt": "2026-10-28T12:30:16.103Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

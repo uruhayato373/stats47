@@ -7,12 +7,12 @@
  *
  * 検査対象:
  *   - callout の連続配置
- *   - /ranking/ への <source-link> カードの配置
+ *   - /ranking/ と /municipalities/ranking/ への <source-link> カードの配置
  * カードは「そのセクションの主題データへ深掘りする 1 枚」であってリンク集ではない。
  * 束ねて並べるとどのカードがどの図に対応するか文脈が失われ、読者には無関係なリンクの
  * 羅列に見える (2026-07-24 に /blog/black-tea-income-gap で実際に報告された)。
  *
- *   dup-ranking-link   同一 /ranking/<key> へのカードが記事内に 2 枚以上   → blocker
+ *   dup-ranking-link   同一ランキング (版ごと) へのカードが記事内に 2 枚以上   → blocker
  *   adjacent-cluster   カードが空白のみを挟んで 2 枚以上連続              → blocker
  *   no-figure-section  図が 1 枚も無い H2 セクション内にカードがある      → blocker
  *   tail-cluster       末尾ゾーン (まとめ以降) にカードが 2 枚以上        → blocker
@@ -222,17 +222,33 @@ function findSections(body) {
   return secs;
 }
 
-/** /ranking/ への <source-link> を列挙 (位置・key・ラベル付き) */
+/**
+ * 図に対応するランキングへの <source-link> を列挙 (位置・key・ラベル付き)。
+ * 都道府県版 `/ranking/<key>` と市区町村版 `/municipalities/ranking/<key>` (県別 `/<key>/<県コード>` を含む) を数える
+ * (BLOG-MUNI-SOURCE-LINK-01・2026-10-28)。`/municipalities/ranking/` だけ・`/municipalities/` の別のページは数えない。
+ * 重複判定は版ごと (`id`)。同じ指標の都道府県版と市区町村版は別のページなので重複にしない。
+ */
 function findRankingLinks(body) {
   const links = [];
-  const re = /<source-link\s+href="\/ranking\/([^"]+)"\s*>([\s\S]*?)<\/source-link>/g;
+  const re = /<source-link\s+href="\/(municipalities\/)?ranking\/([^"]+)"\s*>([\s\S]*?)<\/source-link>/g;
   let m;
   while ((m = re.exec(body)) !== null) {
+    const hrefPath = m[2].replace(/\/$/, "");
+    let key = hrefPath;
+    let id = hrefPath;
+    if (m[1]) {
+      // 市区町村版は `<key>` か `<key>/<県コード 5 桁>` だけ。それ以外の形は図のカードとして数えない
+      const [metricKey, prefCode, ...rest] = hrefPath.split("/");
+      if (!metricKey || rest.length > 0 || (prefCode !== undefined && !/^\d{5}$/.test(prefCode))) continue;
+      key = metricKey;
+      id = `municipalities/${hrefPath}`;
+    }
     links.push({
       index: m.index,
       end: m.index + m[0].length,
-      key: m[1].replace(/\/$/, ""),
-      label: m[2].trim(),
+      key,
+      id,
+      label: m[3].trim(),
     });
   }
   return links;
@@ -282,7 +298,7 @@ export function lintSourceLinkPlacement(md) {
 
   // --- dup-ranking-link: 同じランキングのカードを 2 枚以上出さない
   const byKey = new Map();
-  for (const l of links) byKey.set(l.key, (byKey.get(l.key) ?? 0) + 1);
+  for (const l of links) byKey.set(l.id, (byKey.get(l.id) ?? 0) + 1);
   const dupKeys = [...byKey.entries()].filter(([, c]) => c > 1);
   if (dupKeys.length) {
     blockers.push(

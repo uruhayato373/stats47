@@ -1,4 +1,5 @@
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { logger } from '@stats47/logger';
 import { readRankingItemFromR2 } from '@stats47/ranking/server';
@@ -11,7 +12,6 @@ import {
 } from '@stats47/types';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { aggregateMetricTimeseries } from '@/lib/aggregate-metric-timeseries';

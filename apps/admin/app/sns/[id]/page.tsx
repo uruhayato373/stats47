@@ -6,7 +6,7 @@ import { Cell, DataGrid, DataTable, PanelCard, Row, StatusBadge, TrendChart, typ
 import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { MediaPreview } from "@/components/media-preview";
 import { PageHeading } from "@/components/ops/primitives";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@stats47/components";
 import { formatJst } from "@/lib/sns-ledger";
 import { buildPostTrace } from "@/lib/server/post-trace";
 import type { Post } from "@/lib/server/posts-store";
@@ -145,7 +145,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
             </DataTable>
           </Stack>
         ) : (
-          <p className="m-0 text-sm text-console-warn">台本ファイルがありません: {script.path}</p>
+          <p className="m-0 text-sm text-warning">台本ファイルがありません: {script.path}</p>
         )}
       </PanelCard>
 
@@ -155,7 +155,7 @@ export default async function SnsPostPage({ params }: { params: Promise<{ id: st
         note="画像の正本はprivate R2。移行前の画像と動画はGoogle Driveを参照します。台帳のハッシュで照合します"
       >
         {assets === null ? (
-          <p className="m-0 text-sm text-console-warn">
+          <p className="m-0 text-sm text-warning">
             まだ保全していません: node .claude/scripts/sns/archive-sns-assets.mjs --id {post.id}
           </p>
         ) : assets.length === 0 ? (

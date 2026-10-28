@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "new-graduate-scheduled-salary-university-male",
+  "year": "2024",
+  "unit": "千円",
+  "label": "新規学卒者所定内給与額",
+  "readerLabel": "新規学卒者所定内給与額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/new-graduate-scheduled-salary-university-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug new-graduate-scheduled-salary-university-male-prefecture-gap --keys new-graduate-scheduled-salary-university-male --with-map",
+  "fetchedAt": "2026-10-28T12:30:57.343Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -46,6 +46,19 @@ const nextConfig: NextConfig = {
   /* config options here */
   // dev中の.nextを壊さず、ローカル公開相当検査を別成果物へ出せるようにする。
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // 開発サーバーは localhost 以外の origin からの開発用リソース (chunk・HMR) を既定で止める。127.0.0.1 で開くと
+  // ページは表示されても hydrate されず、ボタンが一切動かない (2026-10-28 実測。WEB_DEV_HOST=127.0.0.1 の運用もある)
+  allowedDevOrigins: ["127.0.0.1"],
+  // /sitemap.xml (sitemap index) の実体は app/sitemap-index.xml/route.ts。app/sitemap.ts (generateSitemaps で
+  // /sitemap/<id>.xml) の metadata と同じ /sitemap.xml に route を置くと、Turbopack が「Conflicting route and metadata」で
+  // 全ページを 500 にする (Next.js 16.4.3・2026-10-28 実測。webpack は通していた)。公開 URL は変えず、ファイルより先に書き換える
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: "/sitemap.xml", destination: "/sitemap-index.xml" }],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   // OpenNextの要件: standalone出力を有効化
   output: "standalone",
   outputFileTracingRoot: path.resolve(__dirname, "../.."),
@@ -353,8 +366,8 @@ const nextConfig: NextConfig = {
   },
 
   // 開発サーバー (scripts/dev-server.ts) は Turbopack、本番ビルドは webpack (`next build --webpack`。Next.js 16 の既定は Turbopack)。上の webpack() は本番 (Workers) 向けの
-  // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Turbopack が起動時に出す
-  // 「Webpack is configured while Turbopack is not」の警告はこのため無害 (空の turbopack 設定では消えない)。
+  // 外部化とブラウザ向けの Node 専用モジュール無効化で、開発時の表示には要らない。Next.js 16.4 は
+  // この組み合わせをフラグ無しの next dev ではエラーで止めるので、dev-server.ts が `--turbopack` を明示して渡す (2026-10-28)。
 };
 
 export default withBundleAnalyzer(nextConfig);

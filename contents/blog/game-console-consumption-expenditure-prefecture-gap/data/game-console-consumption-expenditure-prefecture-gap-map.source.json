@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "game-console-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ゲーム機消費支出額",
+  "readerLabel": "ゲーム機への支出",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/game-console-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug game-console-consumption-expenditure-prefecture-gap --keys game-console-consumption-expenditure --with-map",
+  "fetchedAt": "2026-10-28T12:30:18.483Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

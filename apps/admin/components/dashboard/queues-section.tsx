@@ -3,7 +3,7 @@ import { BotIcon, FlaskConicalIcon, LightbulbIcon, MegaphoneIcon, NotebookPenIco
 
 import { Cell, DataTable, PanelCard, Row, StatusBadge, TableBody, TableFrame } from "@/components/admin-ui";
 import { Grid } from "@/components/layout-primitives";
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@stats47/components";
 
 import { num, statusTone } from "./format";
 
@@ -210,7 +210,7 @@ export function QueuesSection(d: QueuesData) {
           </div>
         ) : null}
         {warnEmpty ? (
-          <div className="text-xs text-console-warn">⚠ 予約/draft が 0 — X 量産 (/post-x-batch) 未稼働</div>
+          <div className="text-xs text-warning">⚠ 予約/draft が 0 — X 量産 (/post-x-batch) 未稼働</div>
         ) : null}
       </QueueCard>,
     );
@@ -253,7 +253,7 @@ export function QueuesSection(d: QueuesData) {
   }
 
   if (cards.length === 0) {
-    return <p className="text-sm text-console-bad">進捗データの取得に失敗</p>;
+    return <p className="text-sm text-negative">進捗データの取得に失敗</p>;
   }
 
   return <Grid min="lg">{cards}</Grid>;

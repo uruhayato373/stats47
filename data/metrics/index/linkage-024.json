@@ -2,6 +2,1292 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "real-public-debt-service-ratio-city",
+      "pageId": null,
+      "title": "実質公債費比率（市町村財政）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D2211"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D2211"
+        },
+        "derived": false,
+        "configHash": "e7ac7a550643b9f2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:real-public-debt-service-ratio-city",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:real-public-debt-service-ratio-city",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "recorded-media-consumption-expenditure",
+      "pageId": "ranking:recorded-media-consumption-expenditure",
+      "title": "音楽・映像収録済メディア消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090204020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090204020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "bacb97bf0ebd4168"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:recorded-media-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "recreational-fishing-count",
+      "pageId": "ranking:recreational-fishing-count",
+      "title": "遊漁数（主とする遊漁場種類計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003262287",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003262287",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "8ee3136ad912b82d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:recreational-fishing-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "refrigerator-consumption-expenditure",
+      "pageId": "ranking:refrigerator-consumption-expenditure",
+      "title": "電気冷蔵庫消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040110040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040110040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "957d84407122f673"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:refrigerator-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:refrigerator-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "refrigerator-consumption-quantity",
+      "pageId": "ranking:refrigerator-consumption-quantity",
+      "title": "電気冷蔵庫消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "040110040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "040110040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0444540c111fa8e7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:refrigerator-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "regional-business-co2-emissions-estimate",
+      "pageId": "ranking:regional-business-co2-emissions-estimate",
+      "title": "業務その他部門のCO₂排出量推計",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/files/tool/suikei/suikei-1.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "abadda9630686945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:regional-business-co2-emissions-estimate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "regional-business-final-energy-consumption",
+      "pageId": "ranking:regional-business-final-energy-consumption",
+      "title": "業務他部門の最終エネルギー消費量",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?cycle=8&layout=datalist&page=1&result_page=1&tclass1=000001234683&tclass2val=0&toukei=00551006&toukei_kind=9&tstat=000001234682"
+        },
+        "fetcherKey": "manual",
+        "configHash": "200ef7c7c8f2a342"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:regional-business-final-energy-consumption",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "regional-co2-emissions-estimate",
+      "pageId": "ranking:regional-co2-emissions-estimate",
+      "title": "地域のCO₂排出量推計",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/files/tool/suikei/suikei-1.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "abadda9630686945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:regional-co2-emissions-estimate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "regional-household-car-final-energy-consumption",
+      "pageId": "ranking:regional-household-car-final-energy-consumption",
+      "title": "家庭乗用車の最終エネルギー消費量",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?cycle=8&layout=datalist&page=1&result_page=1&tclass1=000001234683&tclass2val=0&toukei=00551006&toukei_kind=9&tstat=000001234682"
+        },
+        "fetcherKey": "manual",
+        "configHash": "200ef7c7c8f2a342"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:regional-household-car-final-energy-consumption",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
+      "metricKey": "regional-household-co2-emissions-estimate",
+      "pageId": "ranking:regional-household-co2-emissions-estimate",
+      "title": "家庭部門のCO₂排出量推計",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/files/tool/suikei/suikei-1.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "abadda9630686945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:regional-household-co2-emissions-estimate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "regional-energy"
+      ]
+    },
+    {
       "metricKey": "regional-household-final-energy-consumption",
       "pageId": "ranking:regional-household-final-energy-consumption",
       "title": "家庭部門の最終エネルギー消費量",
@@ -8805,794 +10091,6 @@
       "themes": [
         "roads"
       ]
-    },
-    {
-      "metricKey": "road-total-length-with-expressway",
-      "pageId": "ranking:road-total-length-with-expressway",
-      "title": "道路実延長（高速道路を含む）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H711001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H711001"
-        },
-        "derived": false,
-        "configHash": "27f624a5d853d6ae"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-total-length-with-expressway",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-traffic-law-violation-arrest-count-per-population",
-      "pageId": "ranking:road-traffic-law-violation-arrest-count-per-population",
-      "title": "道路交通法違反検挙件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010211",
-          "filters": {
-            "cdCat01": "#K04301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010211",
-          "cdCat01": "#K04301"
-        },
-        "derived": false,
-        "configHash": "e380f3fc342ce7cf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:safe-driving-5-features",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:road-traffic-law-violation-arrest-count-per-population",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "road-tunnel-condition-iii-count",
-      "pageId": "ranking:road-tunnel-condition-iii-count",
-      "title": "道路トンネルの判定区分Ⅲの施設数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z2-2.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "7adfe276daccfb1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:road-tunnel-condition-iii-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-tunnel-condition-iv-count",
-      "pageId": "ranking:road-tunnel-condition-iv-count",
-      "title": "道路トンネルの判定区分Ⅳの施設数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z2-2.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "7adfe276daccfb1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:road-tunnel-condition-iv-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-tunnel-diagnosed-count",
-      "pageId": "ranking:road-tunnel-diagnosed-count",
-      "title": "道路トンネルの診断済総数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/road/sisaku/yobohozen/pdf/r07/z2-2.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "7adfe276daccfb1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:road-tunnel-diagnosed-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "roadside-station-count",
-      "pageId": "ranking:roadside-station-count",
-      "title": "道の駅数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mlit.go.jp/road/Michi-no-Eki/file/list.xlsx"
-        },
-        "fetcherKey": "manual",
-        "configHash": "b969af445c6c3d17"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:roadside-station-count-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:roadside-station-count-vs-forest-road-length",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:roadside-station-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:roadside-station-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "room-aircon-ownership-multi-person-households-per-1000",
-      "pageId": "ranking:room-aircon-ownership-multi-person-households-per-1000",
-      "title": "ルームエアコン所有数量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010212",
-          "filters": {
-            "cdCat01": "#L03603"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010212",
-          "cdCat01": "#L03603"
-        },
-        "derived": false,
-        "configHash": "632327ee36fb3a69"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:room-aircon-ownership-multi-person-households-per-1000",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "room-utilization-rate",
-      "pageId": "ranking:room-utilization-rate",
-      "title": "客室稼働率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010207",
-          "filters": {
-            "cdCat01": "#G04308"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010207",
-          "cdCat01": "#G04308"
-        },
-        "derived": false,
-        "configHash": "0ad083ca4eb2b781"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:inbound-overnight-guests-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ryokan-vs-hotel-overnight-shift",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:tourism",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:room-utilization-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:tourism",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "tourism"
-      ]
-    },
-    {
-      "metricKey": "rooms-per-dwelling",
-      "pageId": "ranking:rooms-per-dwelling",
-      "title": "居住室数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H02101"
-          }
-        },
-        {
-          "role": "city",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H2110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H02101"
-        },
-        "derived": false,
-        "configHash": "238cbbb3ea7762d8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:dual-income-household-ratio-vs-rooms-per-dwelling",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:rooms-per-dwelling",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:housing-size-age",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:rooms-per-dwelling",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "rooms-per-dwelling-owner",
-      "pageId": "ranking:rooms-per-dwelling-owner",
-      "title": "居住室数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H0210101"
-          }
-        },
-        {
-          "role": "city",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H211010"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H0210101"
-        },
-        "derived": false,
-        "configHash": "f0b86bbe3358df6d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:rooms-per-dwelling-owner",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:housing-size-age",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:rooms-per-dwelling-owner",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

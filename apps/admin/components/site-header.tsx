@@ -3,16 +3,7 @@
 import { Fragment } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Separator, SidebarTrigger } from "@stats47/components";
 import { navTrail } from "@/lib/nav-registry";
 
 import { ThemeToggle } from "./theme-toggle";

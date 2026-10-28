@@ -106,7 +106,7 @@ export async function MunicipalityWardBreakdownSection({
             <TableRow>
               <TableHead>行政区</TableHead>
               {metricKeys.map((key) => (
-                <TableHead key={key} className="text-right">
+                <TableHead key={key} className="text-right!">
                   {breakdown.metrics[key]!.label}
                   <span className="block font-normal">{breakdown.metrics[key]!.yearName}</span>
                 </TableHead>

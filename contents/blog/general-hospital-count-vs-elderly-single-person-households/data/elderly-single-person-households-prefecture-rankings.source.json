@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "elderly-single-person-households",
+  "year": "2005",
+  "unit": "世帯",
+  "label": "高齢単身世帯数（60歳以上の者1人）",
+  "readerLabel": "高齢単身世帯数（60歳以上の者1人）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/elderly-single-person-households/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug general-hospital-count-vs-elderly-single-person-households --keys elderly-single-person-households --data-name elderly-single-person-households-prefecture-rankings",
+  "fetchedAt": "2026-10-28T07:42:34.786Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

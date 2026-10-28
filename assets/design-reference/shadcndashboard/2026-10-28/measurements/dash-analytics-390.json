@@ -1,0 +1,324 @@
+{
+  "title": "Analytics Admin Dashboard",
+  "inset": {
+    "font": "16px/24px 400",
+    "color": "lab(2.75381 0 0)",
+    "bg": "lab(100 0 0)",
+    "pad": "0 0 0 0",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "lab(90.952 0 -0.0000119209)",
+    "radius": "0px",
+    "shadow": "none",
+    "display": "flex",
+    "w": 374,
+    "h": 3016,
+    "cls": "relative flex w-full flex-1 flex-col bg-background md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:"
+  },
+  "main": {
+    "font": "16px/24px 400",
+    "color": "lab(2.75381 0 0)",
+    "bg": "lab(100 0 0)",
+    "pad": "0 0 0 0",
+    "gap": "normal normal",
+    "border": "0 0 0 0 solid",
+    "borderColor": "lab(90.952 0 -0.0000119209)",
+    "radius": "0px",
+    "shadow": "none",
+    "display": "flex",
+    "cls": "relative flex w-full flex-1 flex-col bg-background md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:"
+  },
+  "text": {
+    "h1": {
+      "font": "16px/24px 500",
+      "color": "lab(2.75381 0 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "lab(90.952 0 -0.0000119209)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "No Components Found!",
+      "fontFamily": "Geist, \"Geist Fallback\""
+    },
+    "h2": {
+      "font": "20px/28px 500",
+      "color": "lab(2.75381 0 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "lab(90.952 0 -0.0000119209)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "Good Afternoon, Katrina",
+      "fontFamily": "Geist, \"Geist Fallback\""
+    },
+    "h3": {
+      "font": "24px/32px 600",
+      "color": "lab(2.75381 0 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "lab(90.952 0 -0.0000119209)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "714k",
+      "fontFamily": "Geist, \"Geist Fallback\""
+    },
+    "p": {
+      "font": "14px/20px 400",
+      "color": "lab(48.496 0 0)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "lab(90.952 0 -0.0000119209)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "Stay informed with today’s ana",
+      "fontFamily": "Geist, \"Geist Fallback\""
+    },
+    "body": {
+      "font": "16px/24px 400",
+      "color": "lab(2.75381 0 0)",
+      "bg": "lab(100 0 0)",
+      "pad": "0 0 0 0",
+      "gap": "normal normal",
+      "border": "0 0 0 0 solid",
+      "borderColor": "lab(90.952 0 -0.0000119209)",
+      "radius": "0px",
+      "shadow": "none",
+      "display": "block",
+      "sample": "#nprogress{pointer-events:none",
+      "fontFamily": "Geist, \"Geist Fallback\""
+    }
+  },
+  "dividers": [
+    {
+      "cls": "absolute inset-0",
+      "h": 16,
+      "w": 340,
+      "bgImage": "radial-gradient(circle, lab(2.75381 0 0) 1px, rgba(0, 0, 0, 0) 0px)",
+      "border": "solid/solid"
+    },
+    {
+      "cls": "absolute inset-0",
+      "h": 16,
+      "w": 340,
+      "bgImage": "radial-gradient(circle, lab(2.75381 0 0) 1px, rgba(0, 0, 0, 0) 0px)",
+      "border": "solid/solid"
+    },
+    {
+      "cls": "absolute inset-0",
+      "h": 16,
+      "w": 340,
+      "bgImage": "radial-gradient(circle, lab(2.75381 0 0) 1px, rgba(0, 0, 0, 0) 0px)",
+      "border": "solid/solid"
+    }
+  ],
+  "grids": [
+    {
+      "cls": "grid grid-cols-12 p-px gap-px bg-border",
+      "cols": "27.4062px 27.4062px 27.4062px 27.4062px 27.4062px 27.4062px 27.4062px 27.4062px ",
+      "gap": "1px 1px",
+      "border": "0 0 0 0 solid",
+      "children": 12
+    }
+  ],
+  "slots": {
+    "sidebar-wrapper": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "sidebar-inset": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "button": {
+      "count": 9,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 1,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 10 0 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":36}": 2,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":32}": 1,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 10 8 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":36}": 4,
+        "{\"font\":\"16px/24px 500\",\"pad\":\"8 16 8 16\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":42}": 1
+      }
+    },
+    "separator": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 4
+      }
+    },
+    "input": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"4 10 4 40\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":0}": 1
+      }
+    },
+    "dropdown-menu-trigger": {
+      "count": 7,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 3,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"4 10 4 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\"}": 4
+      }
+    },
+    "sheet-trigger": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"3.35544e+07px\"}": 2
+      }
+    },
+    "avatar": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"3.35544e+07px\"}": 1
+      }
+    },
+    "avatar-image": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"16px/24px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"3.35544e+07px\"}": 1
+      }
+    },
+    "card": {
+      "count": 9,
+      "variants": {
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"16 0 16 0\",\"gap\":\"16px 16px\",\"border\":\"0 0 0 0 none\",\"radius\":\"0px\"}": 7,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"16 0 16 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 none\",\"radius\":\"0px\"}": 2
+      }
+    },
+    "card-content": {
+      "count": 9,
+      "variants": {
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 16 0 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 4,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"16 16 16 16\",\"gap\":\"normal normal\",\"border\":\"1 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"20 16 20 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"20 16 20 16\",\"gap\":\"24px 24px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"0px 0px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "card-header": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 16 0 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":22}": 1,
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 16 16 16\",\"gap\":\"4px 4px\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\",\"h\":39}": 4
+      }
+    },
+    "card-title": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"16px/22px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 4,
+        "{\"font\":\"16px/22px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"8px 8px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "tooltip-trigger": {
+      "count": 52,
+      "variants": {
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"1px\"}": 52
+      }
+    },
+    "select-trigger": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"8 8 8 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\"}": 1,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"8 8 8 10\",\"gap\":\"6px 6px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\"}": 1
+      }
+    },
+    "select-value": {
+      "count": 2,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"6px 6px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"6px 6px\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "chart": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "badge": {
+      "count": 11,
+      "variants": {
+        "{\"font\":\"12px/16px 500\",\"pad\":\"2 8 2 8\",\"gap\":\"4px 4px\",\"border\":\"1 1 1 1 solid\",\"radius\":\"8px\",\"h\":20}": 11
+      }
+    },
+    "table-container": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"14px/22.75px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-header": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-row": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 4,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-head": {
+      "count": 6,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 0 0 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":40}": 1,
+        "{\"font\":\"14px/20px 500\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":40}": 5
+      }
+    },
+    "checkbox": {
+      "count": 5,
+      "variants": {
+        "{\"font\":\"14px/20px 500\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"2px\"}": 1,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"1 1 1 1 solid\",\"radius\":\"2px\"}": 4
+      }
+    },
+    "table-body": {
+      "count": 1,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"0 0 0 0\",\"gap\":\"normal normal\",\"border\":\"0 0 1 0 solid\",\"radius\":\"0px\"}": 1
+      }
+    },
+    "table-cell": {
+      "count": 24,
+      "variants": {
+        "{\"font\":\"12px/16px 400\",\"pad\":\"8 0 8 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":65}": 4,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"12 16 12 16\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":65}": 4,
+        "{\"font\":\"12px/16px 400\",\"pad\":\"8 8 8 8\",\"gap\":\"normal normal\",\"border\":\"0 0 0 0 solid\",\"radius\":\"0px\",\"h\":65}": 16
+      }
+    }
+  },
+  "cssVars": {
+    "--radius": ".625rem",
+    "--border": "lab(90.952% 0 -.0000119209)",
+    "--muted-foreground": "lab(48.496% 0 0)",
+    "--foreground": "lab(2.75381% 0 0)",
+    "--background": "lab(100% 0 0)",
+    "--card": "lab(100% 0 0)",
+    "--muted": "lab(96.52% -.0000298023 .0000119209)",
+    "--primary": "lab(7.78201% -.0000149012 0)"
+  }
+}

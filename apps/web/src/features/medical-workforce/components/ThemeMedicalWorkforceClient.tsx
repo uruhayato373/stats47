@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -13,7 +14,7 @@ import {
 import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PanelGrid } from '@/components/layout/PageShell';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -50,10 +51,10 @@ function WorkforceTable({
       <TableHeader>
         <TableRow>
           <TableHead scope="col">{kind}</TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             医師数（人）
           </TableHead>
-          <TableHead scope="col" className="text-right">
+          <TableHead scope="col" className="text-right!">
             構成割合（%）
           </TableHead>
         </TableRow>
@@ -61,7 +62,7 @@ function WorkforceTable({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.label} data-workforce-category={row.label}>
-            <TableHead scope="row" className="min-w-36 whitespace-normal">
+            <TableHead scope="row" className="min-w-36 whitespace-normal!">
               {row.label}
             </TableHead>
             <TableCell
@@ -114,8 +115,8 @@ export function ThemeMedicalWorkforceClient({
     area.areaCode === '00000' ? '全国（公式集計）' : area.areaName;
   const source = MEDICAL_WORKFORCE_SOURCE;
   return (
-    <div
-      className="min-w-0 space-y-6"
+    <PanelGrid
+      className="min-w-0"
       data-theme-component-key="medical-workforce"
       data-data-state="ready"
       data-area-code={area.areaCode}
@@ -165,6 +166,6 @@ export function ThemeMedicalWorkforceClient({
           }))}
         />
       </ChartPanel>
-    </div>
+    </PanelGrid>
   );
 }

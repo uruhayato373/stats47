@@ -103,9 +103,10 @@ export function fixArticle(content) {
   return { content: out, changes };
 }
 
+// 毎回 R2 の現行版を読む。_src は取得した版の控えで、読み戻さない
+// (2026-10-28: 7 月の控えを読み戻し、2025 年国勢調査で改稿した記事を 2020 年版で上書きする修正版を作った)。
 async function fetchArticle(slug) {
   const cached = path.join(SRC_CACHE, `${slug}.md`);
-  if (fs.existsSync(cached)) return fs.readFileSync(cached, "utf8");
   const res = await fetch(`${R2_BASE}/app/blog/${slug}/article.md`, {
     signal: AbortSignal.timeout(20000),
   });

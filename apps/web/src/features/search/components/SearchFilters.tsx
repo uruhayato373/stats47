@@ -126,7 +126,7 @@ export function SearchFilters({
                                             checked={selectedTags.includes(tag)}
                                             onCheckedChange={() => onTagToggle(tag)}
                                         />
-                                        <Label htmlFor={`tag-${tag}`} className="cursor-pointer text-sm">
+                                        <Label htmlFor={`tag-${tag}`} className="cursor-pointer">
                                             {tag}
                                         </Label>
                                         <Badge variant="secondary" className="ml-auto">

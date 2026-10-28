@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "department-supermarket-count-per-100k",
+  "year": "2021",
+  "unit": "店",
+  "label": "百貨店、総合スーパー数",
+  "readerLabel": "百貨店、総合スーパー数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/department-supermarket-count-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug department-supermarket-count-per-100k-prefecture-gap --keys department-supermarket-count-per-100k --with-map",
+  "fetchedAt": "2026-10-28T12:30:24.525Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

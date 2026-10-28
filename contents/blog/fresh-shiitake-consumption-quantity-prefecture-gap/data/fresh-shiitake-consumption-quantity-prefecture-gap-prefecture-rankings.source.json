@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fresh-shiitake-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "生しいたけ消費量",
+  "readerLabel": "生しいたけ消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fresh-shiitake-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fresh-shiitake-consumption-quantity-prefecture-gap --keys fresh-shiitake-consumption-quantity --data-name fresh-shiitake-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:33:54.812Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

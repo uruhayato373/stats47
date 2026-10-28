@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "general-hospital-count",
+  "pair": "elderly-single-person-households",
+  "xKey": "general-hospital-count",
+  "yKey": "elderly-single-person-households",
+  "pearsonR": 0.9449430937513903,
+  "partialRPopulation": 0.6646402753613876,
+  "unit": "施設 × 世帯",
+  "label": "一般病院数 と 高齢単身世帯数（60歳以上の者1人） の関係",
+  "source": "r2:app/correlation/by-ranking-key/general-hospital-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug general-hospital-count-vs-elderly-single-person-households --base general-hospital-count --pair elderly-single-person-households --data-name general-hospital-count--elderly-single-person-households"
+}

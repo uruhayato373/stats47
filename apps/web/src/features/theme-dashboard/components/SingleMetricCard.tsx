@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
+import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from '@/components/surface';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
@@ -155,31 +156,31 @@ export function SingleMetricCard({
       >
         {/* 見出しと同じ文言を本文で繰り返さない。グループ名が別にあるときだけ指標名を添える */}
         {label !== heading && (
-          <p className="text-[11px] leading-4 text-muted-foreground">{label}</p>
+          <p className="text-xs leading-4 text-muted-foreground">{label}</p>
         )}
         <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
-          <span className="text-2xl font-semibold tabular-nums text-foreground">
+          <span className={STAT_VALUE_CLASS}>
             {shown !== null
               ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
               : '—'}
             {metric.unit ? (
-              <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+              <span className={STAT_UNIT_CLASS}>
                 {formatUnitForDisplay(metric.unit)}
               </span>
             ) : null}
           </span>
           {metric.yearName && (
-            <span className="text-[11px] text-muted-foreground">{metric.yearName}</span>
+            <span className="text-xs text-muted-foreground">{metric.yearName}</span>
           )}
           {selectedPrefectureCode ? (
             metric.rank !== null ? (
-              <span className="text-[11px] tabular-nums text-muted-foreground">
+              <span className="text-xs tabular-nums text-muted-foreground">
                 {metric.rank}位 / {metric.total}
               </span>
             ) : null
           ) : metric.topRanked !== null ? (
             /* 47都道府県 (未選択): 実在する1位県の事実 (47県平均でも全国値でもない) */
-            <span className="text-[11px] tabular-nums text-muted-foreground">
+            <span className="text-xs tabular-nums text-muted-foreground">
               1位: {metric.topRanked.areaName}
             </span>
           ) : null}

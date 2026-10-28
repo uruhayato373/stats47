@@ -336,7 +336,11 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     const grids = container.querySelectorAll('[data-theme-panel-grid="compact"]');
     expect(grids).toHaveLength(1);
     const grid = grids[0] as HTMLElement;
-    expect(grid).toHaveClass('grid', 'grid-cols-1', 'items-start', '@min-[40rem]:grid-cols-2');
+    // 線の格子で並べる: 隣り合うカードが 1px の線を共有し、同じ行のカードは同じ高さに伸びる
+    // (items-start で縮めると、格子の地 (線の色) がカードの下に見えてしまう)
+    expect(grid).toHaveAttribute('data-slot', 'panel-grid');
+    expect(grid).toHaveClass('grid', 'gap-px', 'grid-cols-1', '@min-[40rem]:grid-cols-2');
+    expect(grid).not.toHaveClass('items-start');
     expect(
       within(grid)
         .getAllByTestId('single-card')

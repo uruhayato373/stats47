@@ -1,6 +1,7 @@
 'use client';
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -13,7 +14,6 @@ import {
 import { AIRPORT_TRAFFIC_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -84,7 +84,7 @@ export function ThemeAirportTrafficClient({
                 <TableRow>
                   <TableHead scope="col">空港・所在地</TableHead>
                   {['国内線', '国際線', 'うち通過客', '合計'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right">
+                    <TableHead key={label} scope="col" className="text-right!">
                       {label}（人）
                     </TableHead>
                   ))}
@@ -96,7 +96,7 @@ export function ThemeAirportTrafficClient({
                     key={row.airportName}
                     data-airport-name={row.airportName}
                   >
-                    <TableHead scope="row" className="whitespace-normal">
+                    <TableHead scope="row" className="whitespace-normal!">
                       {row.airportName}
                       <span className="block text-xs font-normal text-muted-foreground">
                         {row.areaCodes
@@ -136,7 +136,7 @@ export function ThemeAirportTrafficClient({
                 <TableRow>
                   <TableHead scope="col">空港</TableHead>
                   {['国内線', '国際線', '合計'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right">
+                    <TableHead key={label} scope="col" className="text-right!">
                       {label}（トン）
                     </TableHead>
                   ))}

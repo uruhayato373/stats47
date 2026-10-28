@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
@@ -26,7 +27,7 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName } from "@stats47/ranking";
 
 import Link from '@/components/atoms/SiteLink';
-import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PanelGrid } from '@/components/layout/PageShell';
 import { SurfaceCard } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
@@ -126,12 +127,12 @@ export function ThemeComparisonSection({
   if (summaries.length === 0) return null;
 
   return (
-    <div className="@container min-w-0 space-y-5">
+    <PanelGrid className="@container">
       {current && (
-        <section
+        <PanelGrid as="section"
           id="theme-comparison"
           aria-labelledby="theme-comparison-heading"
-          className="scroll-mt-24 space-y-2"
+          className="scroll-mt-24"
         >
           <div className="flex items-center justify-between gap-2">
             <h2
@@ -179,12 +180,10 @@ export function ThemeComparisonSection({
                   current.data.rankingItem.description ??
                   '値は同じ年次の都道府県で比較しています。指標の定義・対象・単位は出典で確認できます。'}
               </p>
-              <div className="grid min-w-0 items-start gap-3 @[640px]:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+              <PanelGrid className="@[640px]:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
                 <ChartPanel
                   id={`theme-${themeConfig.themeKey}-map`}
                   title={`${currentName}の分布`}
-                  headerClassName="px-3 py-2"
-                  footerClassName="px-3 py-2"
                   contentClassName="p-0"
                   footer={
                     <div className="flex flex-wrap justify-between gap-2">
@@ -226,7 +225,6 @@ export function ThemeComparisonSection({
                 <ChartPanel
                   id={`theme-${themeConfig.themeKey}-ranking`}
                   title="都道府県別の値"
-                  headerClassName="px-3 py-2"
                   contentClassName="px-2 py-1"
                 >
                   {selectedPrefectureCode && (
@@ -237,7 +235,7 @@ export function ThemeComparisonSection({
                       <p className="text-xs">選択：{label}</p>
                       <Button
                         variant="link"
-                        className="h-9 px-2 text-xs"
+                        className="h-9"
                         aria-label="都道府県の選択を解除"
                         onClick={() => setSelected(null)}
                       >
@@ -246,7 +244,7 @@ export function ThemeComparisonSection({
                     </div>
                   )}
                   <Table>
-                    <TableCaption className="mt-2">
+                    <TableCaption>
                       {showAll ? '全県' : '上位5県＋選択県'} ·
                       高い順（同値は同順位）
                     </TableCaption>
@@ -254,7 +252,7 @@ export function ThemeComparisonSection({
                       <TableRow>
                         <TableHead>順位</TableHead>
                         <TableHead>都道府県</TableHead>
-                        <TableHead className="text-right">
+                        <TableHead className="text-right!">
                           {current.data.rankingItem.unit.normalize('NFKC')}
                         </TableHead>
                       </TableRow>
@@ -303,20 +301,20 @@ export function ThemeComparisonSection({
                     </Button>
                   )}
                 </ChartPanel>
-              </div>
+              </PanelGrid>
             </>
           ) : (
             <p role="status" className="py-8 text-sm text-muted-foreground">
               この指標の比較データを取得できませんでした。
             </p>
           )}
-        </section>
+        </PanelGrid>
       )}
 
-      <section
+      <PanelGrid as="section"
         id="theme-comparison-table"
         aria-labelledby="theme-table-heading"
-        className="scroll-mt-24 space-y-2"
+        className="scroll-mt-24"
       >
         <h2 id="theme-table-heading" className="text-base font-semibold">
           指標の比較
@@ -332,19 +330,19 @@ export function ThemeComparisonSection({
             aria-label="指標の横断比較"
             aria-describedby="theme-table-note"
           >
-            <TableCaption className="mt-2 px-3 pb-2">
+            <TableCaption className="px-3 pb-2">
               —：値なし。割合の差：ポイント。
             </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="min-w-32">指標</TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   {selectedPrefectureCode ? label : '最高値（都道府県）'}
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   都道府県中央値
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">
+                <TableHead className="text-right! whitespace-nowrap">
                   中央値との差
                 </TableHead>
                 <TableHead className="whitespace-nowrap">年次・県数</TableHead>
@@ -404,7 +402,7 @@ export function ThemeComparisonSection({
             </TableBody>
           </Table>
         </SurfaceCard>
-      </section>
-    </div>
+      </PanelGrid>
+    </PanelGrid>
   );
 }

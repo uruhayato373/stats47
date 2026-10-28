@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "psychiatric-hospital-count",
+  "year": "2023",
+  "unit": "施設",
+  "label": "精神科病院数",
+  "readerLabel": "精神科病院数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/psychiatric-hospital-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug psychiatric-hospital-count-prefecture-gap --keys psychiatric-hospital-count --data-name psychiatric-hospital-count-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:29:43.615Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

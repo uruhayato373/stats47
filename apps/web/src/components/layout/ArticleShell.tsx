@@ -68,26 +68,29 @@ export function ArticleShell({
 }: ArticleShellProps) {
   const hasRightRail = !!rail;
   const showLeftRail = !!leftRail && !hasRightRail;
+  // パンくずと見出しは本文と同じ線の格子のセル (パンくずと見出しは 1 つの区画に見える)
+  const headerCells = (
+    <>
+      {breadcrumb}
+      {header}
+    </>
+  );
 
   return (
     <div className={cn('reading-zone w-full bg-background', className)}>
       <div className={SHELL_CONTAINER_CLASS}>
-        {breadcrumb}
-        {header}
-        {showLeftRail ? (
-          <LeftRailLayout leftRail={leftRail}>{children}</LeftRailLayout>
-        ) : hasRightRail ? (
+        {hasRightRail ? (
           <div className="@min-[988px]/shell:flex @min-[988px]/shell:items-start @min-[988px]/shell:gap-4">
-            <div data-slot="shell-main" className="min-w-0 flex-1">
+            <LeftRailLayout header={headerCells} mainClassName="flex-1">
               {children}
-            </div>
+            </LeftRailLayout>
             {/* 狭い幅では本文の下に積み、988px 以上では本文の右の列になる (同じ要素を 1 回だけ描く) */}
             <aside className={ARTICLE_RAIL_CLASS}>{rail}</aside>
           </div>
         ) : (
-          <div data-slot="shell-main" className="min-w-0">
+          <LeftRailLayout header={headerCells} leftRail={showLeftRail ? leftRail : undefined}>
             {children}
-          </div>
+          </LeftRailLayout>
         )}
       </div>
     </div>

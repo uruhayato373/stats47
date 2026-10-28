@@ -2,6 +2,976 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "unemployment-rate-woman",
+      "pageId": null,
+      "title": "完全失業率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0130102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0130102"
+        },
+        "derived": false,
+        "configHash": "1ea47b529716da65"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:unemployment-rate-woman",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "university-capacity-index",
+      "pageId": "ranking:university-capacity-index",
+      "title": "大学収容力指数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E0610202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0610202"
+        },
+        "derived": false,
+        "configHash": "aef89cc62308356d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:university-advancement-capacity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:university-capacity-index",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "university-count",
+      "pageId": "ranking:university-count",
+      "title": "大学数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010105",
+          "filters": {
+            "cdCat01": "E6102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010105",
+          "cdCat01": "E6102"
+        },
+        "derived": false,
+        "configHash": "53c273986232d343"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:university-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "university-count-per-100k",
+      "pageId": "ranking:university-count-per-100k",
+      "title": "大学数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E0610102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0610102"
+        },
+        "derived": false,
+        "configHash": "13e6a53981be75b2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:university-count-per-100k",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "university-graduates-job-ratio",
+      "pageId": "ranking:university-graduates-job-ratio",
+      "title": "大学卒業者に占める就職者の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03403"
+        },
+        "derived": false,
+        "configHash": "37963fc3dff7c810"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:university-graduates-job-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "university-new-graduates-unemployment-rate",
+      "pageId": "ranking:university-new-graduates-unemployment-rate",
+      "title": "大学新規卒業者の無業者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03402"
+        },
+        "derived": false,
+        "configHash": "3463206a3d04e3ed"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:university-new-graduates-unemployment-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:university-new-graduates-unemployment-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "university-professor-annual-income",
+      "pageId": "ranking:university-professor-annual-income",
+      "title": "大学教授の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1196"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1196"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "b65036a86a06863b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:professor-income-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:university-professor-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "unmarried-ratio-female-25-29",
+      "pageId": "ranking:unmarried-ratio-female-25-29",
+      "title": "未婚者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A0410402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A0410402"
+        },
+        "derived": false,
+        "configHash": "30e91fa64eb79c1d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:unmarried-ratio-female-25-29",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unmarried-ratio-female-30-34",
+      "pageId": "ranking:unmarried-ratio-female-30-34",
+      "title": "未婚者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A0410502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A0410502"
+        },
+        "derived": false,
+        "configHash": "6e6807978bd16340"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:unmarried-ratio-female-30-34",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unmarried-ratio-female-35-39",
+      "pageId": "ranking:unmarried-ratio-female-35-39",
+      "title": "未婚者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A0410602"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A0410602"
+        },
+        "derived": false,
+        "configHash": "10f03b80605a4c53"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:unmarried-ratio-female-35-39",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unmarried-ratio-female-40-44",
+      "pageId": "ranking:unmarried-ratio-female-40-44",
+      "title": "未婚者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A0410702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A0410702"
+        },
+        "derived": false,
+        "configHash": "d8c77df9a61e452e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:unmarried-ratio-female-40-44",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "unmarried-ratio-female-45-49",
       "pageId": "ranking:unmarried-ratio-female-45-49",
       "title": "未婚者割合",
@@ -2718,6 +3688,122 @@
       "themes": [
         "living-housing"
       ]
+    },
+    {
+      "metricKey": "vacant-housing-rate-excluding-rental-sale-secondary",
+      "pageId": null,
+      "title": "賃貸・売却用及び二次的住宅を除く空き家率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004021421",
+          "filters": {
+            "cdTab": "01-2023"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004021421",
+          "filters": {
+            "cdTab": "01-2023"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004021421",
+          "cdTab": "01-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "221"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "ac7df73fa2bbcdb0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:vacant-housing-rate-excluding-rental-sale-secondary",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-environment",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:vacant-housing-rate-excluding-rental-sale-secondary",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "vacant-housing-rate-for-rent",
+      "pageId": null,
+      "title": "賃貸用の空き家率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004021421",
+          "filters": {
+            "cdTab": "01-2023"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004021421",
+          "filters": {
+            "cdTab": "01-2023"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004021421",
+          "cdTab": "01-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat01",
+            "numeratorCodes": [
+              "222"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "281474180d924bfb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:vacant-housing-rate-for-rent",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-environment",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:vacant-housing-rate-for-rent",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
     },
     {
       "metricKey": "vacant-housing-ratio",
@@ -7930,956 +9016,6 @@
       "consumers": [
         {
           "pageId": "ranking:welfare-commissioner-consultations-per-person",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-commissioner-count-per-100k",
-      "pageId": "ranking:welfare-commissioner-count-per-100k",
-      "title": "民生委員数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J05101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J05101"
-        },
-        "derived": false,
-        "configHash": "04a3afb59eaed642"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:vacant-housing-vs-welfare-commissioner",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:welfare-commissioner-count-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-expenditure",
-      "pageId": "ranking:welfare-expenditure",
-      "title": "民生費（歳出決算）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310303"
-        },
-        "derived": false,
-        "configHash": "064a369fd2755690"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-expenditure-ratio-pref-finance",
-      "pageId": "ranking:welfare-expenditure-ratio-pref-finance",
-      "title": "民生費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0310301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0310301"
-        },
-        "derived": false,
-        "configHash": "1b9bf11fec98e7ac"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:local-finance",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:expenditure-structure-comparison",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:welfare-expenses-squeeze",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:welfare-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:local-finance",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "local-finance"
-      ]
-    },
-    {
-      "metricKey": "welfare-expense-municipal",
-      "pageId": "ranking:welfare-expense-municipal",
-      "title": "民生費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D320303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D320303"
-        },
-        "derived": false,
-        "configHash": "7824252cc02ab93f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:welfare-expense-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:welfare-expense-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-expenses-prefecture",
-      "pageId": "ranking:welfare-expenses-prefecture",
-      "title": "民生費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310303"
-        },
-        "derived": false,
-        "configHash": "064a369fd2755690"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:welfare-expenses-squeeze",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:welfare-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-facilities-count-per-100k-on-assistance",
-      "pageId": "ranking:welfare-facilities-count-per-100k-on-assistance",
-      "title": "保護施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J02101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J02101"
-        },
-        "derived": false,
-        "configHash": "a28639b811d5593b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-facilities-count-per-100k-on-assistance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-facility-staff-per-1000-on-assistance",
-      "pageId": "ranking:welfare-facility-staff-per-1000-on-assistance",
-      "title": "保護施設従事者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J03101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J03101"
-        },
-        "derived": false,
-        "configHash": "9e849c47a5d60338"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-facility-staff-per-1000-on-assistance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-office-intellectual-disability-consultations",
-      "pageId": "ranking:welfare-office-intellectual-disability-consultations",
-      "title": "福祉事務所知的障害者相談実人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010110",
-          "filters": {
-            "cdCat01": "J3204"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010110",
-          "cdCat01": "J3204"
-        },
-        "derived": false,
-        "configHash": "c754c6a37b7523c4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-office-intellectual-disability-consultations",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-office-intellectual-disability-consultations-per-100k",
-      "pageId": "ranking:welfare-office-intellectual-disability-consultations-per-100k",
-      "title": "福祉事務所知的障害者相談実人員",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J05204"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J05204"
-        },
-        "derived": false,
-        "configHash": "c05091f3c15987c0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-office-intellectual-disability-consultations-per-100k",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "welfare-office-public-assistance-applications-per-1000-households",
-      "pageId": "ranking:welfare-office-public-assistance-applications-per-1000-households",
-      "title": "福祉事務所生活保護申請件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J05202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J05202"
-        },
-        "derived": false,
-        "configHash": "44d515fdde7249ba"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:welfare-office-public-assistance-applications-per-1000-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "western-food-dining-consumption-expenditure",
-      "pageId": "ranking:western-food-dining-consumption-expenditure",
-      "title": "洋食消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "011211070",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "011211070",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "546df4f3356d9fb4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:western-food-dining-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "wheat-flour-consumption-expenditure",
-      "pageId": "ranking:wheat-flour-consumption-expenditure",
-      "title": "小麦粉消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "010140010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "010140010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "237be57f5bd0e760"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wheat-flour-consumption-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wheat-flour-expenditure-vs-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:wheat-flour-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "wheat-flour-consumption-quantity",
-      "pageId": "ranking:wheat-flour-consumption-quantity",
-      "title": "小麦粉消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "010140010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "010140010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "72cba4eb1ffae89c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:other-bread-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:udon-soba-food-culture-prefecture-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wheat-flour-consumption-food-culture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wheat-flour-consumption-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wheat-flour-expenditure-vs-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:wheat-flour-consumption-quantity",
           "kind": "ranking"
         }
       ],

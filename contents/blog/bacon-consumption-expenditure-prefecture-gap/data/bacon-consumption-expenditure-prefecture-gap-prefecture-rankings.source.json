@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "bacon-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ベーコン消費支出額",
+  "readerLabel": "ベーコンへの支出",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/bacon-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug bacon-consumption-expenditure-prefecture-gap --keys bacon-consumption-expenditure --data-name bacon-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-10-28T12:28:52.424Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

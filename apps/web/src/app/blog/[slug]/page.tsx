@@ -16,7 +16,7 @@ import { contentTagIds, resolveContentTag } from '@stats47/data-configs/content'
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
-import { ArticleShell, CURRENT_ITEM_CLASS } from "@/components/layout";
+import { ArticleShell, CURRENT_ITEM_CLASS, PanelGrid } from "@/components/layout";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { RailDataDiscoveryCards, RailLinksCard, RailSearchCard } from "@/components/rail";
@@ -315,7 +315,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </Breadcrumb>
                 }
             >
-                <div className="space-y-6">
+                <PanelGrid>
                     <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="border-b border-border pb-4">
@@ -324,7 +324,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
                                     <p>PRを含む場合があります</p>
                                 </div>
-                                <h1 className="article-title mb-3 text-xl font-bold text-foreground sm:text-2xl">{article.title}</h1>
+                                <h1 className="article-title mb-3 text-xl font-semibold text-foreground sm:text-2xl">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
                                     <p className="mb-3 text-sm text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
                                 )}
@@ -388,7 +388,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             )}
                         </Suspense>
                     )}
-                </div>
+                </PanelGrid>
             </ArticleShell>
         </>
     );

@@ -125,12 +125,6 @@ export interface DefinitionSetData {
   source?: string;
 }
 
-/** multi-stats-card の各カテゴリ定義 */
-export interface MultiStatItem {
-  categoryFilter: string;
-  label: string;
-}
-
 /** stats-table の各行定義 */
 export interface StatsTableRow {
   label: string;
@@ -200,12 +194,6 @@ export type DashboardConfigMap = {
     description?: string;
     /** アスペクト比（CSS aspect-ratio 値。デフォルト: "16/9"） */
     aspectRatio?: string;
-  };
-  "multi-stats-card": {
-    statsDataId: string;
-    categories: MultiStatItem[];
-    showTotal?: boolean;
-    totalLabel?: string;
   };
   "definitions-card": {
     definitionSetKey: string;

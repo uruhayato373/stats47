@@ -5,6 +5,7 @@ import {
   buildMunicipalityPrefectureRankingMeta,
   buildMunicipalityPrefectureRankingSummary,
   lacksSpecialWards,
+  municipalityAbsenceNote,
   municipalityPrefectureAreaLabel,
 } from '../municipality-prefecture-ranking';
 
@@ -73,6 +74,43 @@ describe('特別区の有無', () => {
   });
 });
 
+describe('municipalityAbsenceNote', () => {
+  // 比較対象: 東京 3 区 + 八王子市・檜原村、愛知 2 市
+  const COMPARABLE: ReadonlySet<string> = new Set([
+    '13101', '13102', '13103', '13201', '13307', '23100', '23211',
+  ]);
+  const FUTURE_BURDEN_REASON = '将来負担が無く（基金などの充当可能財源が将来負担額を上回り）、比率が算定されない';
+
+  it('値が無いことが「該当なし」の指標は、居ない自治体の数と理由を書き、23 区の「元の統計に値が無い」は書かない', () => {
+    // 将来負担比率: 「―」(将来負担が無い) の自治体は行が無い。東京は八王子市だけ、愛知は名古屋市だけに値がある
+    const values = [row('13201', '東京都 八王子市', '13000', 4.0, 1), row('23100', '愛知県 名古屋市', '23000', 80.1, 2)];
+    const options = { comparableCodes: COMPARABLE, specialWardCodes: SPECIAL_WARDS, absentValueReason: FUTURE_BURDEN_REASON };
+    expect(municipalityAbsenceNote(values, options)).toBe(
+      `全国の5自治体は、${FUTURE_BURDEN_REASON}ため、このランキングに含まれていません。`
+    );
+    // 県別ページは県内だけを数える (東京都は 3 区 + 檜原村 = 4)
+    expect(municipalityAbsenceNote(values, { ...options, prefectureCode: '13000' })).toBe(
+      `県内の4自治体は、${FUTURE_BURDEN_REASON}ため、このランキングに含まれていません。`
+    );
+    // 居ない自治体が無い県では何も書かない
+    expect(
+      municipalityAbsenceNote([...values, row('23211', '愛知県 豊田市', '23000', 1, 3)], { ...options, prefectureCode: '23000' })
+    ).toBeNull();
+  });
+
+  it('理由を持たない指標は、東京都の市町村に値があり特別区が無いときだけ「元の統計に区ごとの値が無い」と書く', () => {
+    const tokyoCityOnly = [row('13201', '東京都 八王子市', '13000', 1, 1), row('23100', '愛知県 名古屋市', '23000', 2, 2)];
+    const base = { comparableCodes: COMPARABLE, specialWardCodes: SPECIAL_WARDS };
+    const wardNote = '東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。';
+    expect(municipalityAbsenceNote(tokyoCityOnly, base)).toBe(wardNote);
+    expect(municipalityAbsenceNote(tokyoCityOnly, { ...base, prefectureCode: '13000' })).toBe(wardNote);
+    // 東京都以外の県別ページには 23 区の注記を出さない
+    expect(municipalityAbsenceNote(tokyoCityOnly, { ...base, prefectureCode: '23000' })).toBeNull();
+    // 区に値があれば何も書かない (居ない自治体は欠測として扱い、数えない)
+    expect(municipalityAbsenceNote([...tokyoCityOnly, row('13101', '東京都 千代田区', '13000', 3, 3)], base)).toBeNull();
+  });
+});
+
 describe('buildMunicipalityPrefectureRankingSummary', () => {
   it('1位・最下位・中央値・全国上位の数を配信値から組む', () => {
     const ranking = buildMunicipalityPrefectureRanking(VALUES, '23000', SPECIAL_WARDS)!;
@@ -122,5 +160,30 @@ describe('県名×市区町村ランキングの title', () => {
     );
     expect(meta.title).toBe('愛知県の市町村出生数ランキング【2023年】｜1位 豊田市（1,500人）');
     expect(meta.description).toContain('1位は豊田市（1,500人）、2位は名古屋市（800人）、3位は岡崎市（300人）');
+  });
+
+  it('1 万〜10 万の値を「1万人」に丸めず、title・説明文・要約で桁区切りのまま書く (MUNI-TITLE-MAGNITUDE-01)', () => {
+    const births = [
+      row('01100', '北海道 札幌市', '01000', 10352, 1),
+      row('01202', '北海道 函館市', '01000', 1495, 2),
+    ];
+    const ranking = buildMunicipalityPrefectureRanking(births, '01000', SPECIAL_WARDS)!;
+    const meta = buildMunicipalityPrefectureRankingMeta({ title: '出生数' }, { yearName: '2023年', unit: '人' }, ranking, '北海道');
+    expect(meta.title).toBe('北海道の市町村出生数ランキング【2023年】｜1位 札幌市（10,352人）');
+    expect(meta.description).toContain('1位は札幌市（10,352人）');
+    const summary = buildMunicipalityPrefectureRankingSummary(ranking, {
+      prefectureName: '北海道',
+      unit: '人',
+      metricLabel: '出生数',
+    });
+    expect(summary[0]).toContain('札幌市（10,352人）');
+  });
+
+  it('単位が「指数」の指標は値だけを書き、「1.48指数」としない (MUNI-TITLE-MAGNITUDE-01)', () => {
+    const fiscal = [row('13203', '東京都 武蔵野市', '13000', 1.48, 1), row('13201', '東京都 八王子市', '13000', 0.9, 2)];
+    const ranking = buildMunicipalityPrefectureRanking(fiscal, '13000', SPECIAL_WARDS)!;
+    const meta = buildMunicipalityPrefectureRankingMeta({ title: '財政力指数' }, { yearName: '2022年度', unit: '指数' }, ranking, '東京都');
+    expect(meta.title).toBe('東京都の市町村財政力指数ランキング【2022年度】｜1位 武蔵野市（1.48）');
+    expect(meta.description).not.toContain('指数）');
   });
 });

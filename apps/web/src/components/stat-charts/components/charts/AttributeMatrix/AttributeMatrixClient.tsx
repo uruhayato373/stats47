@@ -43,7 +43,7 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
           {columns.map((col) => (
             <TableHead
               key={col}
-              className="text-center whitespace-nowrap"
+              className="text-center! whitespace-nowrap"
             >
               {col}
             </TableHead>

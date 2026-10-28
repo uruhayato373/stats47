@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "food-manufacturing-establishments",
+  "pair": "regional-transport-co2-emissions-estimate",
+  "xKey": "food-manufacturing-establishments",
+  "yKey": "regional-transport-co2-emissions-estimate",
+  "pearsonR": 0.8409765308742848,
+  "partialRPopulation": 0.8121255768533802,
+  "unit": "事業所 × 千t-CO₂",
+  "label": "食料品製造業の事業所数 と 運輸部門のCO₂排出量推計 の関係",
+  "source": "r2:app/correlation/by-ranking-key/food-manufacturing-establishments.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug food-manufacturing-establishments-vs-regional-transport-co2 --base food-manufacturing-establishments --pair regional-transport-co2-emissions-estimate --data-name food-manufacturing-establishments--regional-transport-co2-emissions-estimate"
+}

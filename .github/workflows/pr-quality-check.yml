@@ -257,12 +257,11 @@ jobs:
         run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
         continue-on-error: false
 
-      - name: 🧩 Admin UI Guard (shadcn parity / UI debt)
-        # 管理画面の UI 部品が shadcn/ui 公式 (base-nova) と同じクラスか、ページに生のカード面・<table>・style が増えていないか。
+      - name: 🧩 Admin UI Guard (UI debt)
+        # 管理画面のページに生のカード・<table>・style などが増えていないか。部品は公開サイトと同じ @stats47/components。
         # 契約: .claude/rules/admin-ui.md
         run: |
-          node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
-          node .claude/scripts/admin-ui/check-shadcn-parity.mjs
+          node --test .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 
@@ -608,6 +607,10 @@ jobs:
           node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
           node --test .claude/scripts/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
+          node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs
+          node --test .claude/scripts/blog/__tests__/archive-blog-articles.test.mjs
+          # topic-queue 型B の件数×件数の除外と、生成済みキューに件数×件数の組が無いこと
+          node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
@@ -1419,6 +1422,13 @@ jobs:
           tests/e2e/accessibility/representative-routes.spec.ts
           tests/e2e/seo/structured-data.spec.ts
         working-directory: apps/web
+
+      - name: 📜 Show server logs on E2E failure
+        # 失敗の画面は汎用のエラー表示だけで原因が読めないため、サーバー側の出力を残す (2026-10-28 PR #1194)
+        if: failure()
+        run: |
+          echo "── next start (末尾 300 行) ──"; tail -n 300 /tmp/pr-e2e-next.log 2>/dev/null || true
+          echo "── r2 overlay (末尾 100 行) ──"; tail -n 100 /tmp/pr-e2e-r2-overlay.log 2>/dev/null || true
 
       - name: 🛑 Stop web app
         if: always()

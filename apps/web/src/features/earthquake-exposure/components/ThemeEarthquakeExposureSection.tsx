@@ -1,7 +1,7 @@
+import { ChartPanel } from '@stats47/components';
 import { EARTHQUAKE_EXPOSURE_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsString } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { parseEarthquakeExposureBundle } from '../lib/earthquake-exposure-bundle';
 

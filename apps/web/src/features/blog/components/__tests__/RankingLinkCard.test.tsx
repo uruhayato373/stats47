@@ -84,4 +84,20 @@ describe('RankingLinkCard', () => {
       surface: 'blog_ranking_card',
     });
   });
+
+  it('市区町村ランキングへのカードは都道府県のAPIを呼ばず、リンクとキー付きのnav_clickだけを出す (BLOG-MUNI-SOURCE-LINK-01)', () => {
+    mockFetch(DATA);
+    renderCard('/municipalities/ranking/census-population-change-rate-5y');
+
+    expect(fetch).not.toHaveBeenCalled();
+    expect(screen.queryByText(/上位3県/)).toBeNull();
+    const link = screen.getByRole('link', { name: /もっと見る/ });
+    expect(link).toHaveAttribute('href', '/municipalities/ranking/census-population-change-rate-5y');
+    fireEvent.click(link);
+    expect(trackNavClick).toHaveBeenCalledWith({
+      label: 'census-population-change-rate-5y',
+      href: '/municipalities/ranking/census-population-change-rate-5y',
+      surface: 'blog_ranking_card',
+    });
+  });
 });

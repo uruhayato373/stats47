@@ -9,6 +9,7 @@ import {
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout';
 import { RailCategoryList } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { RailCard, RailNavRow } from '@/components/surface';
@@ -79,14 +80,8 @@ function SurveyMenuLink({
  */
 export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) {
   return (
-    <div
-      className={cn(
-        WIDE_ONLY_CLASS,
-        // 2 枚の高さを揃える (items-stretch + 各カードの h-full)
-        'mb-8 items-stretch gap-4',
-        categories.length > 0 && 'grid-cols-2'
-      )}
-    >
+    // 2 枚は線の格子で並べ、線を共有する (同じ行の 2 枚は同じ高さに伸びる)
+    <PanelGrid className={cn(WIDE_ONLY_CLASS, categories.length > 0 && 'grid-cols-2')}>
       <RailCard
         title="このページ"
         aria-label="このページ"
@@ -127,7 +122,7 @@ export function SurveySideNav({ pageLinks, categories }: SurveyNavigationProps) 
           </RailCard>
         </nav>
       )}
-    </div>
+    </PanelGrid>
   );
 }
 

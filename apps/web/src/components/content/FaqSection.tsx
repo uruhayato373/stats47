@@ -55,8 +55,8 @@ export function FaqSection({
             key={`${item.question}-${index}`}
             className="border-b border-border last:border-b-0 [&[open]>summary_.disclosure-vertical]:scale-y-0"
           >
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-3 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
-              <span className="text-sm font-normal leading-5 text-foreground">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-2.5 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
+              <span className="text-sm font-medium leading-5 text-foreground">
                 Q. {item.question}
               </span>
               <DisclosureIcon />
