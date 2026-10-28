@@ -1,10 +1,10 @@
-import { formatReadableMagnitude } from '@stats47/data-configs/unit';
 
 import {
   municipalityLeafName,
   municipalityRankingDisplayTitle,
 } from './municipality-names';
 import type { PageMeta } from './municipality-page-meta';
+import { formatMunicipalityValueText } from './municipality-value-text';
 
 import type {
   MunicipalityRankingItemSnapshot,
@@ -90,7 +90,7 @@ export function municipalityPrefectureAreaLabel(hasSpecialWards: boolean): strin
 }
 
 function formatValue(value: number, unit: string): string {
-  return formatReadableMagnitude(value, unit);
+  return formatMunicipalityValueText(value, unit);
 }
 
 /** 同順位の自治体をまとめて「A市など3市町村」と書く (1 件ならその名前だけ)。 */

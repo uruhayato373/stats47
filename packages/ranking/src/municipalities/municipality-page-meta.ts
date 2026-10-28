@@ -29,6 +29,8 @@ export interface PageMeta {
 const TOP_COUNT = 3;
 
 function formatMetricValue(value: number, unit: string): string {
+  // 市区町村ページと全国版の title は効果判定中 (improvements.md MUNI-PAGE-SEO-01・2026-11-21 判定) なので、
+  // 判定までは共通の整形のまま (formatMunicipalityValueText へ替えるのは MUNI-TITLE-MAGNITUDE-01 で判定後に)
   return formatReadableMagnitude(value, unit);
 }
 
