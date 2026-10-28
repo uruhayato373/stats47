@@ -50,9 +50,10 @@ export default function RootLayout({
             <Suspense fallback={<div className="h-(--header-height) border-b" aria-hidden="true" />}>
               <SiteHeader />
             </Suspense>
-            <div className="@container/main flex min-w-0 flex-1 flex-col overflow-x-hidden wrap-break-word">
+            {/* 共通部品の SidebarInset は div なので、本文の main はここで置く (公開サイトの layout と同じ) */}
+            <main className="@container/main flex min-w-0 flex-1 flex-col overflow-x-hidden wrap-break-word">
               <div className="mx-auto flex w-full max-w-screen-2xl flex-col gap-4 p-4">{children}</div>
-            </div>
+            </main>
           </SidebarInset>
         </SidebarProvider>
       </body>
