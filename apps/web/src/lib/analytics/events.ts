@@ -122,6 +122,8 @@ export const UI_ACTIONS = [
   'region_select',
   'expand',
   'filter',
+  // ランキングの地図・表で県を押して詳細パネルを開く (2026-10-28 値追加。登録済み dimension の値追加)
+  'detail_open',
 ] as const;
 export type UiAction = (typeof UI_ACTIONS)[number];
 
@@ -133,6 +135,8 @@ export const UI_TARGETS = [
   'faq',
   'ai_insight',
   'search',
+  // 詳細パネルの中の前後送り (2026-10-28 値追加。登録済み dimension の値追加)
+  'detail_sheet',
 ] as const;
 export type UiTarget = (typeof UI_TARGETS)[number];
 
@@ -426,7 +430,9 @@ export type NavSurface =
   | 'ranking_municipality'
   // 「県名×市区町村ランキング」への導線 (全国版・県別ページ同士・県ページ。2026-10-28 値追加・MUNI-PREF-RANKING-ROUTE-01。
   // 登録済み dimension の値追加なので GA4 側の作業は不要)
-  | 'municipality_prefecture';
+  | 'municipality_prefecture'
+  // ランキングの地図・表から開く県の詳細パネルの中のリンク (2026-10-28 値追加・Flowly の試行。登録済み dimension の値追加)
+  | 'ranking_detail_sheet';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。

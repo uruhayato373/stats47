@@ -82,9 +82,9 @@
       "adoptions": [
         {
           "part": "詳細パネル (右から開くシート)",
-          "what": "項目を押すと右から幅半分ほどのパネル。上から名前と状態、前後送り (3 of 12)、操作、タブ、警告、小さなグラフ、項目名と値の一覧。開いた項目を URL の ?open= に残す",
-          "state": "proposed",
-          "reflectedIn": "未着手 (共有部品の Sheet を使う)"
+          "what": "ランキング詳細の地図・表で県を押すと右から開く詳細パネル。県名と指標・年、順位 (N 位 / 47) と前後送り、値と偏差値の数値タイル、県のデータブックと同じ分野のランキングへのリンク。開いた県を URL の ?pref=NN に残す (canonical はクエリなし)。Flowly のタブ・警告・小さなグラフは入れていない",
+          "state": "done",
+          "reflectedIn": "apps/web/src/features/ranking/components/RankingKeyPage/RankingAreaDetailSheet.tsx・RankingVisualizationSection.tsx、計測は ui_interaction (detail_open / region_select) と nav_surface=ranking_detail_sheet (.claude/rules/analytics-event-standards.md)。公開から 4 週で判定"
         }
       ]
     }

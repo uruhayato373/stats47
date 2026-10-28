@@ -325,6 +325,15 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [WEB-DEV-TURBOPACK-SITEMAP-CONFLICT-01] Turbopack の開発サーバーで全ページが 500 になる (sitemap.xml の route と metadata の衝突)
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run dev:web] [起票:2026-10-28] [領域:サイト]
+
+- **証拠 (2026-10-28・Next.js 16.4.3・Mac)**: `npm run dev:web` は 2 段で止まった。① フラグ無しの `next dev` が「webpack 設定があって turbopack 設定が無い」をエラーで止める (同日 `dev-server.ts` で `--turbopack` を明示して解消)。② その後、全ページが「Conflicting route and metadata at /sitemap.xml: route at /sitemap.xml/route and metadata at /sitemap.xml/route」で 500。`apps/web/src/app/sitemap.ts` (`generateSitemaps` で `/sitemap/<id>.xml`) と `apps/web/src/app/sitemap.xml/route.ts` (sitemap index) が同じ `/sitemap.xml` を取り合う。本番ビルドは webpack で通り、本番には影響しない。
+- **当面の回避**: `WEB_DEV_BUNDLER=webpack npm run dev:web`。ただし同日の Mac では webpack の dev でも HMR の WebSocket が繋がらず、ランキング詳細が 30 秒以上 hydrate されなかったので、画面の確認は本番ビルド (`npm run build -w apps/web` → `next start -p 3200`) で行った。
+- **次**: sitemap index を route ではなく metadata の仕組みで出せるか、`sitemap.ts` の出力先を変えて衝突を避けられるかを調べる。URL (`/sitemap.xml`・`/sitemap/<id>.xml`) と Google への提出は変えない。
+- **禁止**: Search Console に提出済みの sitemap の URL を変えない。
+- **完了条件**: `npm run dev:web` (Turbopack) でランキング詳細が 200、`/sitemap.xml` が今と同じ index を返す。
+
 ### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
 

@@ -8,13 +8,7 @@ import { useMemo } from "react";
 import { DataTable, cn, ChartPanel } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import {
-  rankByValue,
-  computeRankingStats,
-  type RankingItem,
-  type RankingValue,
-  type RankingStats,
-} from "@stats47/ranking";
+import { type RankingItem, type RankingValue } from "@stats47/ranking";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table as TableIcon } from "lucide-react";
 
@@ -27,6 +21,8 @@ import {
   formatRankingValue,
   resolveRankingPrecision,
 } from "../../utils/compute-ranking-header-stats";
+
+import { buildRankingRows, type RankingDataRow } from "./ranking-rows";
 
 import type { StatsSchema } from "@stats47/types";
 
@@ -49,11 +45,11 @@ interface Props {
   cardFooter?: React.ReactNode;
   /** カードの枠を付けずに表だけを描く (地図と 1 枚の枠に並べるランキングページ用) */
   bare?: boolean;
+  /** 県を選んで詳細パネルを開く (ランキングページ用)。渡すと順位のセルがボタンになり、行の押下でも開く */
+  onSelectArea?: (areaCode: string) => void;
+  /** 詳細パネルで開いている県 (行に地の色を付ける) */
+  selectedAreaCode?: string | null;
 }
-
-type RankingDataRow = RankingValue & {
-  deviationValue: number | null;
-};
 
 /**
  * 列幅 (px)。合計はランキングページで地図の右に並べる表の列 (RANKING_TABLE_FRAME_WIDTH) に収める。
@@ -73,42 +69,11 @@ export function RankingDataTable({
   cardTitle = "都道府県別の表",
   cardFooter,
   bare = false,
+  onSelectArea,
+  selectedAreaCode,
 }: Props) {
-  // 偏差値計算用の統計情報を計算
-  const statistics = useMemo<RankingStats | null>(() => {
-    return rankingValues ? computeRankingStats(rankingValues) : null;
-  }, [rankingValues]);
-
-  // データを加工（順位、偏差値を追加）
-  const processedData = useMemo<RankingDataRow[]>(() => {
-    if (!rankingValues) return [];
-
-    const validItems: StatsSchema[] = [];
-    for (const item of rankingValues) {
-      if (item.areaCode !== "00000") {
-        validItems.push(item);
-      }
-    }
-
-    const dataWithRank = rankByValue(validItems);
-
-    return dataWithRank.map((item) => {
-      // 偏差値計算
-      let deviationValue: number | null = null;
-      if (statistics && statistics.hasVariation) {
-        deviationValue =
-          50 +
-          (10 * ((item.value ?? 0) - statistics.mean)) / statistics.standardDeviation;
-      } else if (statistics) {
-        deviationValue = 50;
-      }
-
-      return {
-        ...item,
-        deviationValue,
-      };
-    });
-  }, [rankingValues, statistics]);
+  // 順位と偏差値を付けた行 (県の詳細パネルと同じ計算)
+  const processedData = useMemo(() => buildRankingRows(rankingValues), [rankingValues]);
 
   // カラム定義
   // 桁数は 47 県の値から 1 度だけ決める。値ごとに整形すると 60.4 と 44 が混ざり、
@@ -127,9 +92,25 @@ export function RankingDataTable({
         accessorKey: "rank",
         header: "順位",
         meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.rank}px` },
-        cell: ({ row }) => (
-          <div className="text-center font-medium">{row.getValue("rank")}</div>
-        ),
+        cell: ({ row }) => {
+          const { areaCode, areaName } = row.original;
+          if (onSelectArea && PREFECTURE_CODE_PATTERN.test(areaCode)) {
+            return (
+              <button
+                type="button"
+                className="w-full text-center font-medium underline decoration-dotted underline-offset-4 hover:text-primary"
+                aria-label={`${areaName}の詳細を開く`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onSelectArea(areaCode);
+                }}
+              >
+                {row.getValue("rank")}
+              </button>
+            );
+          }
+          return <div className="text-center font-medium">{row.getValue("rank")}</div>;
+        },
       },
       {
         accessorKey: "areaName",
@@ -144,6 +125,8 @@ export function RankingDataTable({
                 href={hrefFor("area", { areaCode })}
                 className="font-medium hover:underline hover:text-primary"
                 prefetch={false}
+                // 県のページへの移動を優先し、行の押下 (詳細パネル) を起こさない
+                onClick={(event) => event.stopPropagation()}
               >
                 {areaName}
               </Link>
@@ -182,7 +165,7 @@ export function RankingDataTable({
         },
       },
     ],
-    [rankingItem, processedData, precision]
+    [rankingItem, processedData, precision, onSelectArea]
   );
 
   if (!rankingValues || processedData.length === 0) {
@@ -201,6 +184,22 @@ export function RankingDataTable({
         showRowCount={false}
         className="h-full flex flex-col"
         getRowId={(row) => row.areaCode}
+        onRowClick={
+          onSelectArea
+            ? (row) => {
+                if (PREFECTURE_CODE_PATTERN.test(row.areaCode)) onSelectArea(row.areaCode);
+              }
+            : undefined
+        }
+        rowClassName={
+          onSelectArea
+            ? (row) =>
+                cn(
+                  PREFECTURE_CODE_PATTERN.test(row.areaCode) && "cursor-pointer",
+                  row.areaCode === selectedAreaCode && "bg-muted",
+                )
+            : undefined
+        }
         ariaLabel={`${rankingItem?.title ?? "ランキング"}の都道府県別データ表`}
         caption={`${rankingItem?.title ?? "ランキング"}の47都道府県別ランキング表。順位・都道府県名・値・偏差値の列。`}
       />
