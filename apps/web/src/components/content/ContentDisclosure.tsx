@@ -55,12 +55,12 @@ export function ContentDisclosure({
       open={defaultOpen}
       className="[&[open]>summary_.disclosure-vertical]:scale-y-0"
     >
-      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-11 cursor-pointer list-none py-2.5 items-center justify-between gap-3 text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 [&::-webkit-details-marker]:hidden">
         <div className="flex min-w-0 items-center gap-2.5">
           {leading ? <span className="shrink-0">{leading}</span> : null}
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <Heading className="text-sm font-semibold leading-5 text-foreground">
+              <Heading className="text-sm font-medium leading-5 text-foreground">
                 {title}
               </Heading>
               {meta}
@@ -76,7 +76,7 @@ export function ContentDisclosure({
       </summary>
       <div
         className={cn(
-          "border-t border-border pb-2 pt-3 text-sm",
+          "border-t border-border pb-2 pt-3 text-sm/relaxed",
           contentClassName,
         )}
       >

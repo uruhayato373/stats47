@@ -145,7 +145,7 @@ export const CompositionChartDashboard = async ({
             />
         }
       >
-          <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+          <ChartEmptyState message="データがありません" height={250} />
         </ChartPanel>
       );
     }

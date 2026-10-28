@@ -28,6 +28,13 @@ interface ChartMessageStateProps extends ChartStateProps {
   bordered?: boolean;
 }
 
+/**
+ * 空・エラーの枠。見本の Empty と同じ余白 24px・間隔 16px に、破線の枠 (1px) を足す
+ * (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「空の状態」)。
+ * 呼び出し側で地の色・線・余白を足さない (design-system:check の empty-state-no-look-override)。
+ */
+const EMPTY_FRAME_CLASS = "gap-4 border border-dashed border-border p-6";
+
 function heightStyle(height: number | null | undefined) {
   return height == null ? undefined : { height };
 }
@@ -50,7 +57,7 @@ export function ChartEmptyState({
     <Empty
       role="status"
       aria-live="polite"
-      className={cn("gap-2 rounded-card p-4 text-sm text-muted-foreground", className)}
+      className={cn(EMPTY_FRAME_CLASS, "text-sm text-muted-foreground", className)}
       style={heightStyle(height)}
     >
       {message}
@@ -67,7 +74,7 @@ export function ChartErrorState({
 }: ChartMessageStateProps) {
   const body = (
     <Empty
-      className="gap-2 rounded-card bg-muted/10 p-4"
+      className={EMPTY_FRAME_CLASS}
       style={heightStyle(height)}
     >
       <EmptyDescription className="text-destructive">{message}</EmptyDescription>

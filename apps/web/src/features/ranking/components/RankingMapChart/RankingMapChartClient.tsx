@@ -182,7 +182,7 @@ export function RankingMapChartClient({
         ) : showFallback ? (
           <ChartEmptyState
             height={null}
-            className="min-h-[200px] bg-muted/50"
+            className="min-h-[200px]"
             message={
               areaType === "city" && cityTopologyError
               ? "市区町村の地図データを読み込めませんでした"

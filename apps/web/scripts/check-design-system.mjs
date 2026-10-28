@@ -759,6 +759,10 @@ const PANEL_IMPLEMENTATION_FILES = new Set([
 const PANEL_CLASS_PROPS = /\b(className|contentClassName|bodyClassName)=(?:"([^"]*)"|\{\s*["'`]([^"'`]*)["'`]\s*\})/g;
 const PANEL_TEXT_SIZE = /(?<![\w-])(?:[\w-]+:)*(?:text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(?:\/[\w.]+)?|leading-[\w.[\]-]+)!?(?![\w-])/;
 const PANEL_TAG = new RegExp(`<(${PANEL_COMPONENTS.join('|')})\\b`, 'g');
+// 見た目を部品が持ち、呼び出し側で変えない部品 (開閉・空の状態)
+const LOOK_LOCKED_TAG = /<(FaqSection|ContentDisclosure|ChartEmptyState|ChartErrorState)\b/g;
+const LOOK_OVERRIDE_TOKEN =
+  /^(?:[\w-]+:)*!?(?:p[xytrbl]?-|gap-|border|bg-|rounded|shadow|ring|text-|font-|leading-|tracking-|divide-)[^\s]*$/;
 
 /** text[start] から JSX の開始タグの終わり (> または />) までを返す。{…} の中の > は数えない */
 function jsxOpeningTag(text, start) {
@@ -851,6 +855,30 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
         file,
         lineNumber: lineOf(match.index + prop.index),
         line: `<${match[1]} ${prop[1]}="${size[0]}">`,
+      });
+    }
+  }
+  // 開閉 (FaqSection・ContentDisclosure) と空の状態 (ChartEmptyState・ChartErrorState) の見た目は部品が持つ
+  // (開閉 = 質問 14px・500・上下 10px・項目の間に線、空の状態 = 余白 24px・間隔 16px・破線の枠)。
+  // 2026-10-28 まではページの側が地の色・線・行の高さ・文字色を足し、空の状態に 3 種類の地の色が混在していた。
+  // 呼び出し側の className・contentClassName は置き場所 (外の余白・表示切替・縦横比・最小の高さ・子の間隔) だけに使う。
+  for (const match of text.matchAll(LOOK_LOCKED_TAG)) {
+    const tag = jsxOpeningTag(text, match.index);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(PANEL_CLASS_PROPS)) {
+      if (depthAt[prop.index] !== 0) continue;
+      const value = prop[2] ?? prop[3] ?? '';
+      const override = value.split(/\s+/).find((t) => LOOK_OVERRIDE_TOKEN.test(t));
+      if (!override) continue;
+      const isDisclosure = match[1] === 'FaqSection' || match[1] === 'ContentDisclosure';
+      violations.push({
+        ruleId: isDisclosure ? 'disclosure-no-look-override' : 'empty-state-no-look-override',
+        message: isDisclosure
+          ? 'Disclosures keep the reference look (question 14px/500, 10px vertical padding, divider lines). Use className / contentClassName only for placement (margin, visibility) and child spacing (space-y-*).'
+          : 'Empty / error states keep the reference look (24px padding, 16px gap, dashed frame). Use className only for placement (margin, aspect ratio, min height); do not add background, border, padding or text styles.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: `<${match[1]} ${prop[1]}="${override}">`,
       });
     }
   }

@@ -33,8 +33,8 @@ export const LOCAL_FINANCE_SOURCE_LINKS = [
 export function FinanceSankey({ code, initialData }: Props) {
   const { data, errored } = useFlowData<FinanceFlowData>("finance", code, initialData);
 
-  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73 border bg-muted" />;
-  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73 border bg-muted" />;
+  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73" />;
+  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73" />;
 
   const title = `${data.focusName} 財政フロー（${data.year}年度）`;
   const description =

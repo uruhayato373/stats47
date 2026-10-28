@@ -49,7 +49,7 @@ describe("FaqSection", () => {
       "text-sm",
     );
     expect(container.querySelectorAll("details")).toHaveLength(2);
-    expect(screen.getByText("Q. 質問1")).toHaveClass("text-sm", "font-normal");
+    expect(screen.getByText("Q. 質問1")).toHaveClass("text-sm", "font-medium");
     expect(screen.getByText("A. 回答1")).toBeInTheDocument();
     expect(container.textContent).not.toContain("▼");
   });

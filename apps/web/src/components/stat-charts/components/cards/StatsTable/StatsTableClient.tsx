@@ -52,7 +52,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
       }
     >
       {years.length === 0 ? (
-        <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+        <ChartEmptyState message="データがありません" height={250} />
       ) : (
         <>
           {years.length > 1 && (
