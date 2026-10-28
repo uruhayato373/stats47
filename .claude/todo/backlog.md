@@ -333,13 +333,6 @@ updated: 2026-10-19
 - **禁止**: テストを消して速くしない。並列数を上げてメモリ上限の再起動を起こさない (2 並列は `config/local-resources.json` の予算)。
 - **完了条件**: 同じ Mac で全件の所要が測定前より短くなり、前後の所要と上位ファイルの一覧を本カードか PR に書いてある。
 
-### [BLOG-MUNI-LINK-LINT-01] ブログ本文の市区町村ランキングへのリンクが実在の検査に掛からない
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/internal-link-geo.test.mjs] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: `BLOG-MUNI-SOURCE-LINK-01` で図の直下カードと構造検査が `/municipalities/ranking/<key>` (と `/<県コード>`) を受け付けるようにしたが、実在の検査 `.claude/scripts/lib/internal-link-lint.mjs` の `LINK_TYPES` は `/municipalities/` を見ない。存在しない key へのカードやテキストリンクは公開前に止まらない。カード (`RankingLinkCard`) は市区町村版で地図・上位 3 を出さない (`/api/ranking-card` が都道府県のデータしか読まない)。
-- **次**: ① `LINK_TYPES` に市区町村ランキングを足し、実在集合 (市区町村ランキングの key 一覧と県別ページの対象 `MUNICIPALITY_PREFECTURE_RANKING_KEYS`) で判定する ② 存在しない key・対象外の県別 URL で発火し、実在する URL で発火しないテストを足す。カードの地図・上位 3 は需要を見てから別に決める。
-- **完了条件**: 存在しない `/municipalities/ranking/<key>` が quality-gate で blocker になり、テストで両方向を固定している。
-
 ### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
 
@@ -432,21 +425,6 @@ updated: 2026-10-19
 - **証拠 (2026-10-28)**: 金融負債残高・預貯金・有価証券保有額 (statsDataId `0000010112`) と農家総所得は unit が素の「千円」で、title にも subtitle にも世帯あたりの印が無い。topic-queue の型B の規模×規模の除外 (`isMoneyTotalMetric`・`topic-queue-spurious-core.mjs`) はこれを総額と判定する。今のキューには出ていないが、型B の候補になると誤って外れる。読者にも世帯あたりか総額かが分からない。
 - **次**: e-Stat のメタで各指標の値が 1 世帯当たりか (農家総所得は 1 農家当たりか) を確かめ、metric config の subtitle に分母を書く。単位を変えるときは `.claude/rules/unit-semantics-standards.md` に従う。
 - **完了条件**: 該当指標の subtitle が分母を持ち、`isMoneyTotalMetric` が総額と判定しないことをテストで固定している。
-
-### [BLOG-TOPIC-PAIR-SCALE-01] 型B の題材に残る「規模×規模」の組 (件数×金額の総額) を外す
-タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: `BLOG-TOPIC-PAIR-PER-CAPITA-01` で件数×件数の組 (69 件・うちこの規則だけで外れた 16 件) は外したが、郵便局数×老人福祉費、コンビニ店舗数×歳入決算総額 (r=0.95) のように、金額で数える総額と件数の組が型B の pending に残る。人口の大きさだけで相関が出る点は同じ。
-- **次**: unit 正典 (`.claude/scripts/lib/unit-semantics.mjs` の `parseUnit`) で金額次元かつ分母なしの総額を「規模の指標」に含め、規模×規模の組を外す。外した件数を `correlationExclusions` に出す。家計調査 (世帯当たり) は含めない。
-- **停止条件**: 総額を含めると型B の pending が 10 件を切るなら、除外ではなく人口あたりの版の相関 snapshot を作る方を先に決める。
-- **完了条件**: 型B の pending に規模×規模の組が無く、テストで両方向を固定している。
-
-### [BLOG-CORRELATION-VALUE-MISMATCH-01] 公開済み 7 記事で、本文の相関係数が散布図の値と合わない
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
-
-- **証拠 (2026-10-28)**: factual gate に相関係数の照合 (`checkCorrelationClaims`・warning) を足して公開済み 609 記事を R2 から走査したところ、相関係数を書く 91 本のうち 7 本で不一致。例 `engel-coefficient-vs-prefectural-income` は本文 0.03・0.57、散布図は 0.09 / -0.42。散布図の無い別の相関 (地域を絞った値・別指標) を語る文にも当たるので、すべてが誤りとは限らない。照合先の散布図が無い記事は 54 本。
-- **次**: ① 7 本を一覧にし、文ごとに「散布図の相関の誤り」か「別の相関」かを分ける ② 誤りは brushup で直す (critic PASS) ③ 新しい型B の記事で誤検出 0 を確かめてから、照合を blocker に上げるか決める。
-- **完了条件**: 7 本の分類が済み、誤りが直って公開され、blocker 化の判断がこのカードに書かれている。
 
 ### [BLOG-STACKED-MOBILE-WEB-01] 積み上げ棒のスマホ用 SVG がサイトで使われない
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]

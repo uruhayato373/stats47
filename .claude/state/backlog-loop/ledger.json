@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-28T11:27:48.514Z",
+  "updatedAt": "2026-10-28T11:51:29.344Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -9103,6 +9103,108 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-28T11:27:48.514Z"
+    },
+    "BLOG-MUNI-LINK-LINT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-28T11:51:29.220Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/internal-link-geo.test.mjs",
+              "cd apps/web && npx vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "internal-link-lint が /municipalities/ranking/<key>(/<県コード>) を公開索引と県別対象集合で実在検査。存在しない key・対象外の県別URL・47県外コードの6件で発火、実在3件で非発火をテスト固定(判定を外すと fail)。公開609記事で誤検知0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-28T11:51:29.220Z"
+    },
+    "BLOG-TOPIC-PAIR-SCALE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-28T11:51:29.283Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "size-pair 除外を追加(60件該当・単独22件)。型Bのpending 28→24で停止条件(10未満)に当たらない。生成済みキューに規模×規模0をテスト固定(判定を外すと2件fail)、家計調査・1人当たり等を非検出テストで固定",
+          "failReason": null,
+          "followUps": [
+            "METRIC-HOUSEHOLD-ASSET-SUBTITLE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-28T11:51:29.283Z"
+    },
+    "BLOG-CORRELATION-VALUE-MISMATCH-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-28T11:51:29.344Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "7記事20件を文ごとにR2の値で再計算: 散布図の相関の誤り0、全件が別の相関(北海道除外0.836・偏相関0.713等)。偏相関4件は partialRPopulation を既知値にして解消(テスト固定・戻すと fail)。残りは文面で区別不能のため warning 維持と判断し照合関数のコメントに記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-28T11:51:29.344Z"
     }
   }
 }
