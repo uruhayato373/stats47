@@ -98,11 +98,31 @@ describe("buildBlogArticlePrompt — 読者向けコピーの配線", () => {
   });
 });
 
+describe("buildBlogArticlePrompt — 型B の相関係数 (BLOG-TOPIC-PAIR-PER-CAPITA-01)", () => {
+  it("相関係数 (小数第 2 位) と対象県数を実データ節に渡す", () => {
+    const prompt = buildBlogArticlePrompt(
+      buildInput({ archetype: "B", correlation: { pearsonR: -0.7134, pointCount: 46 } }),
+    );
+    const dataSection = prompt.slice(prompt.indexOf("# 実データ"), prompt.indexOf("# 本文に必ず含めるもの"));
+
+    expect(dataSection).toContain("ピアソンの相関係数: -0.71");
+    expect(dataSection).toContain("計算に使った都道府県の数: 46");
+  });
+
+  it("相関を渡さない記事には相関の節を出さない", () => {
+    const prompt = buildBlogArticlePrompt(buildInput());
+    expect(prompt).not.toContain("ピアソンの相関係数");
+  });
+});
+
 describe("blog critic", () => {
   it("critic に書き手の制約を渡し、実データ外の指標を求める指摘を禁じる", () => {
     const prompt = buildBlogCriticPrompt("本文");
     expect(prompt).toContain("書き手の制約");
-    expect(prompt).toContain("相関係数を示せ");
+    expect(prompt).toContain("人口で割って示せ");
+    // 型B は相関係数を実データとして渡すので、critic にもそれが書き手の手元にあると伝える
+    expect(prompt).toContain("相関係数と計算に使った都道府県の数も渡されています");
+    expect(prompt).not.toContain("相関係数を示せ");
     expect(prompt).toContain("blocker が無ければ major や minor が残っていても PASS");
     // 値と順位は factual gate が照合済み。critic が同順位の飛びを欠落と誤判定した実例 (2026-10-28)
     expect(prompt).toContain("機械が実データと照合済み");

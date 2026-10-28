@@ -14,7 +14,11 @@
  *  - year-mismatch    : 両 metric の最新年が 5 年以上乖離 (古いデータ同士の見かけ相関)
  *  - low-n            : 相関の標本都道府県数 < 40 (欠測が多く不安定)
  *  - national-mixed   : scatterData に全国値 (areaCode 00000) が混入
+ *  - count-pair       : 両方が人口で割っていない件数指標 (BLOG-TOPIC-PAIR-PER-CAPITA-01)。
+ *                       |r| に関係なく除外する。人口の大きい県ほど両方が多くなるだけで、
+ *                       本文側では人口で割れない (prompt が実データ以外の数値を禁じる) ため
  */
+import { parseUnit } from "../../lib/unit-semantics.mjs";
 
 const RATIO_UNIT_RE = /[%％‰倍]|ポイント/u;
 const DERIVED_KEY_RE =
@@ -54,6 +58,50 @@ export function isScaleMetric({ key, unit, title = "", isKakei = false }) {
   return SCALE_UNIT_TAIL_RE.test(u);
 }
 
+// 件数として数える次元 (unit 正典 parseUnit の dimension)。金額・質量・面積・割合は含めない
+const COUNT_DIMENSIONS = new Set(["count", "people", "household", "dwelling"]);
+// 分母は unit ではなく subtitle / title が持つ (unit-semantics-standards.md §4)。
+// 「人口10万人当たり」「1世帯当たり」「平均」「割合」は件数ではなく比・平均の値
+const PER_QUALIFIER_RE = /(あたり|当たり|人口\s*\S*?対|平均|割合|率)/u;
+
+/**
+ * 人口で割っていない件数指標か (一般病院数・高齢単身世帯数 など)。
+ *
+ * 単位の次元は unit 正典 (`parseUnit`) で決める。名前 (key) からは推測しない。
+ * 分母の有無は unit (`人（人口10万対）`) と subtitle / title の修飾子 (`人口10万人当たり`) で見る。
+ * 家計調査は世帯あたりの値なので件数ではない。
+ */
+export function isPopulationCountMetric({ unit, title = "", subtitle = "", isKakei = false }) {
+  if (isKakei) return false;
+  const parsed = parseUnit(unit);
+  if (parsed.hasDenominator) return false;
+  if (!COUNT_DIMENSIONS.has(parsed.dimension)) return false;
+  if (PER_QUALIFIER_RE.test(subtitle || "") || PER_QUALIFIER_RE.test(title || "")) return false;
+  return true;
+}
+
+/**
+ * metric config (data/metrics/<key>.ts) の本文から B型判定に使う項目を読む (tsx 不要の軽量読み)。
+ * 先頭の "unit" がトップレベルの単位 (normalizationOptions の単位はその後に現れる)。
+ * key が無ければ null。
+ */
+export function parseMetricConfigSource(src) {
+  const key = src.match(/"key":\s*"([^"]+)"/)?.[1];
+  if (!key) return null;
+  const title = src.match(/"title":\s*"([^"]+)"/)?.[1] || "";
+  // 分母 (人口10万人当たり 等) は subtitle が持つ (unit-semantics-standards.md §4)
+  const subtitle = src.match(/"subtitle":\s*"([^"]+)"/)?.[1] || "";
+  const category = src.match(/"category":\s*"([^"]+)"/)?.[1] || "";
+  const isActive = /"isActive":\s*true/.test(src);
+  const isKakei = /"kind":\s*"kakei-chousa"/.test(src);
+  const unit = src.match(/"unit":\s*"([^"]*)"/)?.[1] || "";
+  // years ブロック内の最大 4 桁年 = 最新年 (from/to 形式・years 配列形式の両対応)
+  const yearsBlock = src.match(/"years":\s*\{[\s\S]*?\}/)?.[0] || "";
+  const yearMatches = yearsBlock.match(/\b(19|20)\d{2}\b/g) || [];
+  const yearTo = yearMatches.length > 0 ? Math.max(...yearMatches.map(Number)) : null;
+  return { key, title, subtitle, category, isActive, isKakei, unit, yearTo };
+}
+
 /** 同義バリアント判定用の key family (suffix を畳んだ形) */
 export function keyFamily(key) {
   let k = key;
@@ -67,7 +115,7 @@ export function keyFamily(key) {
  * B型候補ペアの疑似相関 reason code 配列を返す。空配列 = 採用可。
  *
  * @param {object} input
- *   base / pair: { key, unit, title, category, isKakei, yearTo }
+ *   base / pair: { key, unit, title, subtitle, category, isKakei, yearTo }
  *   pearsonR: number
  *   partialRPopulation: number | null
  *   scatterData: Array<{areaCode: string}> | null
@@ -94,6 +142,11 @@ export function spuriousReasons({ base, pair, pearsonR, partialRPopulation, scat
     (absR >= SCALE_PAIR_R || (partialRPopulation == null && absR >= SCALE_PAIR_R_NO_PARTIAL))
   ) {
     reasons.push("scale-pair");
+  }
+
+  // 件数×件数 (人口の大きさだけで相関が出る組)。|r| の大小に関係なく外す
+  if (isPopulationCountMetric(base) && isPopulationCountMetric(pair)) {
+    reasons.push("count-pair");
   }
 
   // 機序カテゴリ距離 (同一 category は B型の跨ぎ要件を満たさない)

@@ -64,6 +64,35 @@ export interface BlogArticlePromptInput {
   allowedLinks: { href: string; label: string }[];
   /** 前回のゲート違反 (再試行時のみ)。何を直すかを具体的に伝える */
   previousBlockers?: string[];
+  /**
+   * 型B の 2 指標の相関 (R2 相関 snapshot の値)。散布図の接地物
+   * (`<base>--<pair>-scatter.source.json` の pearsonR と `-scatter.json` の点数) から渡す。
+   * 渡さないと書き手は相関の強さを書けず、critic が「強さを示していない」と差し戻す
+   * (BLOG-TOPIC-PAIR-PER-CAPITA-01)。本文の値は factual gate が同じファイルと照合する。
+   */
+  correlation?: CorrelationFact;
+}
+
+export interface CorrelationFact {
+  /** ピアソンの相関係数 (snapshot の生値。prompt では小数第 2 位に丸めて渡す) */
+  pearsonR: number;
+  /** 相関の計算に使った都道府県の数 (散布図の点数) */
+  pointCount: number;
+}
+
+/** prompt と factual gate が同じ丸めを使う (小数第 2 位) */
+export const CORRELATION_DECIMALS = 2;
+
+function correlationSection(correlation: CorrelationFact | undefined): string {
+  if (!correlation) return "";
+  return `
+
+## 2 つの指標の相関 (散布図と同じデータ)
+- ピアソンの相関係数: ${correlation.pearsonR.toFixed(CORRELATION_DECIMALS)}
+- 計算に使った都道府県の数: ${correlation.pointCount}
+
+相関係数を本文に書くときは、この値を小数第 ${CORRELATION_DECIMALS} 位までそのまま書きます。
+相関の強さを示す根拠はこの値だけです。相関係数は因果の大きさや説明できる割合ではありません。`;
 }
 
 /** 型ごとの必須分析視点 (blog-quality-standards.md §各型の章構成テンプレ) */
@@ -107,6 +136,7 @@ export function buildBlogArticlePrompt(input: BlogArticlePromptInput): string {
     sourceLinkLabel,
     allowedLinks,
     previousBlockers,
+    correlation,
   } = input;
 
   const retry =
@@ -152,7 +182,7 @@ ${metrics
 - 全${m.rows.length}件:
 ${formatRows(m)}`,
   )
-  .join("\n\n")}
+  .join("\n\n")}${correlationSection(correlation)}
 
 本文では見出しの平易な呼び方を使ってください。正式な統計名は、定義や出典に触れる箇所
 (callout・「データについて」の節) でだけ使います。両方を毎回併記する必要はありません。
@@ -273,8 +303,9 @@ export function buildBlogCriticPrompt(
 # 書き手の制約 (これを前提に審査します)
 
 書き手は、記事に載っている指標の実データ (都道府県別の値と順位) しか使えません。
-他の指標・相関係数・人口や面積・白書の数値を足すことは禁じられています。
-そのため「別の指標を加えて裏付けよ」「相関係数を示せ」という指摘はしないでください。
+2 つの指標の関係を扱う記事に限り、その 2 指標の相関係数と計算に使った都道府県の数も渡されています。
+他の指標・人口や面積・白書の数値を足すことは禁じられています。
+そのため「別の指標を加えて裏付けよ」「人口で割って示せ」という指摘はしないでください。
 データで裏付けられない断定があれば、それを「仮説として書く・弱める・削る」よう指摘します。
 
 本文に書かれた県の値と順位は、機械が実データと照合済みです。「本文の他の箇所で確認できない」

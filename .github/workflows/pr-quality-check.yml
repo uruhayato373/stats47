@@ -607,6 +607,9 @@ jobs:
           node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
           node --test .claude/scripts/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
+          node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs
+          # topic-queue 型B の件数×件数の除外と、生成済みキューに件数×件数の組が無いこと
+          node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs

@@ -33,6 +33,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   correlationTitle,
+  parseMetricConfigSource,
   spuriousReasons,
 } from "./lib/topic-queue-spurious-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
@@ -160,18 +161,8 @@ function loadMetrics() {
   for (const file of fs.readdirSync(METRICS_DIR)) {
     if (!file.endsWith(".ts") || file === "index.ts") continue;
     const src = fs.readFileSync(path.join(METRICS_DIR, file), "utf8");
-    const key = src.match(/"key":\s*"([^"]+)"/)?.[1];
-    if (!key) continue;
-    const title = src.match(/"title":\s*"([^"]+)"/)?.[1] || "";
-    const category = src.match(/"category":\s*"([^"]+)"/)?.[1] || "";
-    const isActive = /"isActive":\s*true/.test(src);
-    const isKakei = /"kind":\s*"kakei-chousa"/.test(src);
-    const unit = src.match(/"unit":\s*"([^"]*)"/)?.[1] || "";
-    // years ブロック内の最大 4 桁年 = 最新年 (from/to 形式・years 配列形式の両対応)
-    const yearsBlock = src.match(/"years":\s*\{[\s\S]*?\}/)?.[0] || "";
-    const yearMatches = yearsBlock.match(/\b(19|20)\d{2}\b/g) || [];
-    const yearTo = yearMatches.length > 0 ? Math.max(...yearMatches.map(Number)) : null;
-    metrics.set(key, { key, title, category, isActive, isKakei, unit, yearTo });
+    const meta = parseMetricConfigSource(src);
+    if (meta) metrics.set(meta.key, meta);
   }
   return metrics;
 }
@@ -353,6 +344,7 @@ console.error(`[corr] per-key 相関 fetch: ${corrData.length}/${topKeys.length}
 const seenPairs = new Set();
 const spuriousTally = {};
 const spuriousExamples = [];
+let countPairOnly = 0;
 for (const { key: baseKey, json } of corrData) {
   const baseMetric = metrics.get(baseKey);
   if (!baseMetric) continue;
@@ -383,6 +375,8 @@ for (const { key: baseKey, json } of corrData) {
       for (const reason of spurious) {
         spuriousTally[reason] = (spuriousTally[reason] || 0) + 1;
       }
+      // 件数×件数のルールが無ければ候補に残っていた組 (このルールで新たに外れた件数)
+      if (spurious.length === 1 && spurious[0] === "count-pair") countPairOnly++;
       spuriousExamples.push(`${pairId} (r=${r.toFixed(2)}): ${spurious.join(",")}`);
       continue;
     }
@@ -429,6 +423,11 @@ for (const { key: baseKey, json } of corrData) {
     pairsFromThisBase++;
   }
 }
+// 件数×件数の組 (BLOG-TOPIC-PAIR-PER-CAPITA-01) は他の理由と重なっても必ず件数を出す
+console.error(
+  `[count-pair] 人口で割っていない件数指標どうしの組を除外: ${spuriousTally["count-pair"] || 0} 件` +
+    ` (うち他の除外理由が無く、このルールだけで外れた組 ${countPairOnly} 件)`,
+);
 if (Object.keys(spuriousTally).length > 0) {
   console.error(`[spurious] 疑似相関の除外: ${JSON.stringify(spuriousTally)}`);
   for (const ex of spuriousExamples.slice(0, 10)) console.error(`  - ${ex}`);
@@ -574,6 +573,8 @@ const result = {
   scoring:
     "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   summary: summarize(queue),
+  // 型B 候補から決定的ルールで外した組の件数 (reason code → 件数。1 組が複数 reason を持ちうる)
+  correlationExclusions: { ...spuriousTally, countPairOnly },
   queue,
 };
 saveQueue(result);

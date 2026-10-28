@@ -4,13 +4,20 @@
  * fixture は 2026-07-09 記事量産バッチで実際に spurious と判明したペアを基にする。
  */
 import { strict as assert } from "node:assert";
+import fs from "node:fs";
+import path from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   correlationTitle,
+  isPopulationCountMetric,
   isScaleMetric,
   keyFamily,
+  parseMetricConfigSource,
   spuriousReasons,
 } from "../topic-queue-spurious-core.mjs";
+
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 const scatter47 = Array.from({ length: 47 }, (_, i) => ({
   areaCode: `${String(i + 1).padStart(2, "0")}000`,
@@ -175,4 +182,79 @@ test("correlationTitle: 「意外な関係」を含まず疑問形 1 要素", ()
   assert.equal(neg, "日照時間が多い県はうつ受療率が少ない?");
   assert.ok(!pos.includes("意外"));
   assert.ok(!neg.includes("意外"));
+});
+
+// ── BLOG-TOPIC-PAIR-PER-CAPITA-01: 件数×件数の組 ─────────────────────────────
+// 2026-10-28 の must-write に並んだ実例 (一般病院数 × 高齢単身世帯数)。
+// 人口の大きい県ほど両方が多いだけで、本文側では人口で割れない (prompt が実データ以外の数値を禁じる)
+
+test("isPopulationCountMetric: 人口で割っていない件数 (施設・世帯・人・店) は true", () => {
+  assert.equal(isPopulationCountMetric({ unit: "施設", title: "一般病院数", subtitle: "総数" }), true);
+  assert.equal(
+    isPopulationCountMetric({ unit: "世帯", title: "高齢単身世帯数（60歳以上の者1人）" }),
+    true,
+  );
+  assert.equal(isPopulationCountMetric({ unit: "人", title: "情報通信業の従業者数" }), true);
+  assert.equal(isPopulationCountMetric({ unit: "店", title: "コンビニエンスストア数" }), true);
+});
+
+test("isPopulationCountMetric: 分母つき・平均・割合・金額・家計調査・解釈できない単位は false", () => {
+  // 分母は subtitle が持つ (unit は素の「施設」のまま)
+  assert.equal(
+    isPopulationCountMetric({ unit: "施設", title: "一般病院数", subtitle: "人口10万人当たり" }),
+    false,
+  );
+  assert.equal(isPopulationCountMetric({ unit: "人（人口10万対）", title: "医師数" }), false);
+  assert.equal(isPopulationCountMetric({ unit: "人", title: "一般世帯の平均人員" }), false);
+  assert.equal(isPopulationCountMetric({ unit: "％", title: "共働き世帯の割合" }), false);
+  assert.equal(isPopulationCountMetric({ unit: "千円", title: "老人福祉費" }), false);
+  assert.equal(isPopulationCountMetric({ unit: "円", title: "豚肉消費支出額", isKakei: true }), false);
+  assert.equal(isPopulationCountMetric({ unit: "人/日", title: "鉄道乗車人員" }), false);
+});
+
+const HOSPITALS = { key: "general-hospital-count", unit: "施設", title: "一般病院数", subtitle: "総数", category: "socialsecurity", yearTo: 2023 };
+const ELDERLY_SINGLE = { key: "elderly-single-person-households", unit: "世帯", title: "高齢単身世帯数（60歳以上の者1人）", category: "population", yearTo: 2020 };
+
+test("count-pair: 件数×件数は |r| が中程度でも除外する", () => {
+  const reasons = spuriousReasons({
+    base: HOSPITALS,
+    pair: ELDERLY_SINGLE,
+    pearsonR: 0.7,
+    partialRPopulation: 0.5,
+    scatterData: scatter47,
+  });
+  assert.deepEqual(reasons, ["count-pair"]);
+});
+
+test("count-pair: 片方が人口あたりの版なら除外しない", () => {
+  const reasons = spuriousReasons({
+    base: { ...HOSPITALS, key: "general-hospital-count-per-100k", subtitle: "人口10万人当たり" },
+    pair: ELDERLY_SINGLE,
+    pearsonR: 0.7,
+    partialRPopulation: 0.5,
+    scatterData: scatter47,
+  });
+  assert.deepEqual(reasons, []);
+});
+
+test("topic-queue.json: 型B の pending に件数×件数の組が無い", () => {
+  const metricsDir = path.join(PROJECT_ROOT, "data/metrics");
+  const metas = new Map();
+  for (const file of fs.readdirSync(metricsDir)) {
+    if (!file.endsWith(".ts") || file === "index.ts") continue;
+    const meta = parseMetricConfigSource(fs.readFileSync(path.join(metricsDir, file), "utf8"));
+    if (meta) metas.set(meta.key, meta);
+  }
+  const queue = JSON.parse(
+    fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/topic-queue.json"), "utf8"),
+  ).queue;
+  const pendingB = queue.filter((e) => e.status === "pending" && e.archetype === "B");
+  // 母集団が空なら何も見ていないのと区別できない
+  assert.ok(pendingB.length > 0, "型B の pending が 0 件 (検査対象が無い)");
+  const offenders = pendingB.filter((e) => {
+    const [a, b] = e.metricKeys.map((k) => metas.get(k));
+    assert.ok(a && b, `metric config が無い: ${e.metricKeys.join(", ")}`);
+    return isPopulationCountMetric(a) && isPopulationCountMetric(b);
+  });
+  assert.deepEqual(offenders.map((e) => e.topicKey), []);
 });
