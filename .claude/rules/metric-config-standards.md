@@ -181,7 +181,7 @@ ESTAT-YEAR-AVAILABILITY-01)。原因は `years` 1 つに「e-Stat にある年 (
 - **県の値を持たない市区町村だけの metric** (財政指標など) は県の台帳が無いので、市区町村の台帳から
   `resolveCityLedgerYears` で新しい年だけを足す: 設定の最新年より新しく、値のある市区町村が設定の最新年の
   `CITY_LEDGER_MIN_COVERAGE` (9 割) 以上ある年。古い年は足さず、外しもしない (2026-10-28。それまでは対象外で、
-  財政力指数など 8 件が e-Stat より 1 年遅れていた。`.claude/todo/backlog.md` MUNI-YEAR-FRESHNESS-AUDIT-01)。
+  財政力指数など 8 件が e-Stat より 1 年遅れていた。同日に 8 件を取り込み、本番で新しい年になったことを確かめた)。
 - 台帳を取り直すと、控えの無い表と更新日が変わった表のメタ情報 (`data/estat/meta/<statsDataId>.json`、
   分類コードの全項目) も `fetch-estat-meta.mjs --full` で取り直す。
 
