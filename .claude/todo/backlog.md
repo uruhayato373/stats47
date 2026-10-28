@@ -270,12 +270,12 @@ updated: 2026-10-19
 - **禁止**: 出典表示 (地理院タイルの attribution) を外さない。
 - **完了条件**: 同じページの 1440・390 の撮影で、日本の外の地名が出ていない。
 
-### [COMPARE-ADD-REMNANT-01] 送信関数を消した compare-add が、管理画面のテストと GeoAI の実装仕様にまだ残っている
+### [COMPARE-ADD-REMNANT-01] 送信関数を消した compare-add が、GeoAI の M1 実装仕様と計測の予定にまだ残っている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:管理]
 
-- **経緯**: 2026-10-28 のテンプレート移行 3 巡目で、公開サイトから compare-add の送信関数を消した。`apps/admin/tests/unit/business-plan.test.ts` と `docs/02_実装計画/47_GeoAI事業M1実装仕様.md` が、まだこのイベントに依存している (イベントの catalog の項目もそのため残っている)。
+- **経緯**: 2026-10-28 のテンプレート移行 3 巡目で、公開サイトから compare-add の送信関数を消し、事業計画の catalog で未計測 (canonicalEvent: null) にした。管理画面のテスト (`apps/admin/tests/unit/business-plan.test.ts`) の件数は同日に合わせた (未計測 3→4、M1 のコード対応 4→3)。`docs/02_実装計画/47_GeoAI事業M1実装仕様.md` と m1 の eventIds は、まだこのイベントを M1 の計測の 1 つに数えている。
 - **次**: M1 の計測にこのイベントが要るかを仕様の持ち主 (strategy-advisor) と決め、要らないなら catalog・m1 の eventIds・テスト・仕様の記述をまとめて外す。要るなら送信口を戻す。
-- **完了条件**: `npx vitest run --root apps/admin` が通り、catalog・テスト・仕様のどれにも参照の宙ぶらりんが無い。
+- **完了条件**: M1 の計測の予定 (仕様・m1 の eventIds) と catalog が一致し、`npx vitest run --root apps/admin` が通る。
 
 ### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]

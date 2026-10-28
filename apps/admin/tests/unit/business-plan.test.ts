@@ -63,7 +63,8 @@ describe("business plan admin server", () => {
     expect(result.counts).toEqual({
       readyContent: 4,
       gatedInitiatives: 8,
-      unmeasuredEvents: 3,
+      // compare-add は比較へ追加する UI が無いため 2026-10-28 に送信関数を消し、未計測へ移した
+      unmeasuredEvents: 4,
     });
     expect(result.state).toMatchObject({
       catalogId: "stats47-business-plan-2026",
@@ -103,7 +104,8 @@ describe("business plan admin server", () => {
     });
     expect(result.m1.events).toEqual({
       planned: 4,
-      codeMapped: 4,
+      // compare-add は送信関数が無い (canonicalEvent: null) ので、コードに結びつくのは 3 件
+      codeMapped: 3,
       measured: 0,
       registrationPending: 4,
       items: expect.arrayContaining([
