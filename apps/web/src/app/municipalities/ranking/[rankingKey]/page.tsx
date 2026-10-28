@@ -24,7 +24,7 @@ import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
   isMunicipalityAiContentCurrent,
-  lacksSpecialWards,
+  municipalityAbsenceNote,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
@@ -51,6 +51,7 @@ import {
 } from '@/features/municipalities';
 import {
   MunicipalityRankingMapSection,
+  getComparableMunicipalityCodes,
   getSpecialWardCodes,
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
@@ -154,6 +155,12 @@ export default async function MunicipalityRankingPage({
   // 解説は今の values.json に対して監査済みのときだけ出す (値が改訂された回は前回の解説を出さない)
   const commentary =
     aiContent && isMunicipalityAiContentCurrent(aiContent, snapshot) ? aiContent : null;
+  // ランキングに居ない自治体の理由 (将来負担比率の「―」は該当なし、財政力指数の 23 区は元の統計に値が無い)
+  const absenceNote = municipalityAbsenceNote(snapshot.values, {
+    comparableCodes: getComparableMunicipalityCodes(),
+    specialWardCodes: getSpecialWardCodes(),
+    absentValueReason: getMetricConfig(rankingKey)?.absentValueReason,
+  });
   const query = first(queryParams.q).trim();
   const prefectureCode = first(queryParams.pref);
   const requestedPage = Number.parseInt(first(queryParams.page) || '1', 10);
@@ -457,7 +464,7 @@ export default async function MunicipalityRankingPage({
         surface="municipality_source"
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        {lacksSpecialWards(snapshot.values, getSpecialWardCodes()) && <p>東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。</p>}
+        {absenceNote && <p>{absenceNote}</p>}
         <p>
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>

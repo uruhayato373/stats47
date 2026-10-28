@@ -5,6 +5,7 @@ import {
   buildMunicipalityPrefectureRankingMeta,
   buildMunicipalityPrefectureRankingSummary,
   lacksSpecialWards,
+  municipalityAbsenceNote,
   municipalityPrefectureAreaLabel,
 } from '../municipality-prefecture-ranking';
 
@@ -70,6 +71,43 @@ describe('特別区の有無', () => {
     expect(lacksSpecialWards([...cities, row('13101', '東京都 千代田区', '13000', 2, 2)], SPECIAL_WARDS)).toBe(false);
     // 東京都に 1 行も無い指標 (湖沼の面積など) は区の欠けとして扱わない
     expect(lacksSpecialWards([row('23211', '愛知県 豊田市', '23000', 1, 1)], SPECIAL_WARDS)).toBe(false);
+  });
+});
+
+describe('municipalityAbsenceNote', () => {
+  // 比較対象: 東京 3 区 + 八王子市・檜原村、愛知 2 市
+  const COMPARABLE: ReadonlySet<string> = new Set([
+    '13101', '13102', '13103', '13201', '13307', '23100', '23211',
+  ]);
+  const FUTURE_BURDEN_REASON = '将来負担が無く（基金などの充当可能財源が将来負担額を上回り）、比率が算定されない';
+
+  it('値が無いことが「該当なし」の指標は、居ない自治体の数と理由を書き、23 区の「元の統計に値が無い」は書かない', () => {
+    // 将来負担比率: 「―」(将来負担が無い) の自治体は行が無い。東京は八王子市だけ、愛知は名古屋市だけに値がある
+    const values = [row('13201', '東京都 八王子市', '13000', 4.0, 1), row('23100', '愛知県 名古屋市', '23000', 80.1, 2)];
+    const options = { comparableCodes: COMPARABLE, specialWardCodes: SPECIAL_WARDS, absentValueReason: FUTURE_BURDEN_REASON };
+    expect(municipalityAbsenceNote(values, options)).toBe(
+      `全国の5自治体は、${FUTURE_BURDEN_REASON}ため、このランキングに含まれていません。`
+    );
+    // 県別ページは県内だけを数える (東京都は 3 区 + 檜原村 = 4)
+    expect(municipalityAbsenceNote(values, { ...options, prefectureCode: '13000' })).toBe(
+      `県内の4自治体は、${FUTURE_BURDEN_REASON}ため、このランキングに含まれていません。`
+    );
+    // 居ない自治体が無い県では何も書かない
+    expect(
+      municipalityAbsenceNote([...values, row('23211', '愛知県 豊田市', '23000', 1, 3)], { ...options, prefectureCode: '23000' })
+    ).toBeNull();
+  });
+
+  it('理由を持たない指標は、東京都の市町村に値があり特別区が無いときだけ「元の統計に区ごとの値が無い」と書く', () => {
+    const tokyoCityOnly = [row('13201', '東京都 八王子市', '13000', 1, 1), row('23100', '愛知県 名古屋市', '23000', 2, 2)];
+    const base = { comparableCodes: COMPARABLE, specialWardCodes: SPECIAL_WARDS };
+    const wardNote = '東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。';
+    expect(municipalityAbsenceNote(tokyoCityOnly, base)).toBe(wardNote);
+    expect(municipalityAbsenceNote(tokyoCityOnly, { ...base, prefectureCode: '13000' })).toBe(wardNote);
+    // 東京都以外の県別ページには 23 区の注記を出さない
+    expect(municipalityAbsenceNote(tokyoCityOnly, { ...base, prefectureCode: '23000' })).toBeNull();
+    // 区に値があれば何も書かない (居ない自治体は欠測として扱い、数えない)
+    expect(municipalityAbsenceNote([...tokyoCityOnly, row('13101', '東京都 千代田区', '13000', 3, 3)], base)).toBeNull();
   });
 });
 
