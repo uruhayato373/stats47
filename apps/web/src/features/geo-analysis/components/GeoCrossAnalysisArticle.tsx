@@ -161,13 +161,13 @@ export async function GeoCrossAnalysisArticle({
           </Link>
         ))}
       </nav>
-      <div id="prefecture-comparison" className="scroll-mt-24">
+      <PanelGrid id="prefecture-comparison" className="scroll-mt-24">
         <RelatedContentNavigation title="この地域分析をもっと読む" sourceId={`geo:${slug}`} kinds={['blog', 'theme', 'ranking']} surface="geo_related" />
         <SectionHeader
           title="空間判定の結果を都道府県で比較"
           description="県内の地点・メッシュの判定を集計した結果です。値の大小は地域の優劣を表しません。"
         />
-      </div>
+      </PanelGrid>
       {slug === 'population-landslide-exposure' ? (
         <GeoLandslideSummary snapshot={snapshot} />
       ) : slug === 'population-snow-designation' ? (

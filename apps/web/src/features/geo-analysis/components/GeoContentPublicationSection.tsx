@@ -31,7 +31,7 @@ export function GeoContentPublicationSection({
   const detailKey = geoAnalysisPrefKey(slug, prefCode2);
 
   return (
-    <section id="article-data" className="mt-6 scroll-mt-24">
+    <PanelGrid as="section" id="article-data" className="scroll-mt-24">
       <SectionHeader
         title="再現・検証データ"
         description="結論だけでなく、入力、空間処理、県別途中データ、合計の検算を同じ分析の証拠として公開しています。"
@@ -148,6 +148,6 @@ export function GeoContentPublicationSection({
           ))}
         </ol>
       </details>
-    </section>
+    </PanelGrid>
   );
 }

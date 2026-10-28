@@ -256,16 +256,14 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [LINE-GRID-COLUMN-01] 本文の列全体を 1 つの線の格子にし、右レールとパネル以外が混ざる列も見本の形にそろえる
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
+### [LINE-GRID-COLUMN-01] 右レールを線の格子にするか決め、描いた画面の格子検査を定期実行に載せる
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
 
-- **経緯**: 2026-10-28 に部品の種類「線の格子」を作り (`PanelGrid` / `PageSections`、`@/components/layout`)、パネルを 2 枚以上並べる所を格子へ移した。見本 (`assets/design-reference/shadcndashboard/2026-10-28/screens/dash-analytics-1440.webp`・`faq-1440.webp`) は、ページ見出しの区画から最後のパネルまで本文の列全体が 1 つの格子で、区画の間は点線の帯。stats47 はまだ列の中で格子と単独のパネル・見出し・文章が `space-y-*` で並ぶ。
-- **残り (実測の起点は `.local/template-ref/grid/probe-stacks.mjs` を 28 ルートに流した結果)**:
-  1. 本文の列の並び: テーマの章 (`ThemeMetricsDashboard` の `space-y-4` / `space-y-6`)、地域 `/areas/[areaCode]` の `flex flex-col gap-8`、市区町村詳細の `space-y-6`、ランキング詳細の下部 (`RankingKeyPageClient` の `order-6 flex flex-col gap-4`。広告・注記の文章が混ざる)
-  2. パネルを `shell-main` に直に並べるページ: `/geo/layers/*`・`/geo/*/[code]/overlap`・`/products/[id]`
-  3. 右レール (`RailStack`・`ARTICLE_RAIL_CLASS`): 広告バナー (`SidebarPromoBanner`) と `hidden … :contents` の包みが混ざるので、格子にするとセルの地が抜ける。見本に右レールは無いので、続けるか決めてから
-- **やり方**: 章の見出し (`SectionHeader`) と注記の文章を格子のセル (余白 16px) として持つか、パネルの見出しへ吸収するかを先に決める。セルにしない要素は格子の外へ出す。
-- **完了条件**: 28 ルートの実測で、本文の列にパネルを `gap-N` / `space-y-N` で並べる親が 0 件 (右レールを除くなら除くと明記)。`panels-in-line-grid` の検査を、`.map()` の中で関数を呼んでパネルを返す形 (`renderPanel(item)`) にも広げる。
+- **経緯**: 2026-10-28 に本文の列全体を 1 本の線の格子にした (`ShellColumn`・`PanelGrid`、`@/components/layout`)。27 画面 × 1440・390px で格子の外のパネルと文章が線に接するセルは 0 件 (`npm run ui-theme:line-grid`)。
+- **残り**:
+  1. 右レール (`RailStack`・`ARTICLE_RAIL_CLASS`) は格子の外で、パネルの間を 12〜16px 空けたまま。広告バナー (`SidebarPromoBanner`) と `hidden … :contents` の包みが混ざるので、格子にするとセルの地が抜ける。見本に右レールは無いので、格子にするか (広告をセルにする形) を決めてから着手する
+  2. `npm run ui-theme:line-grid` は手元の本番ビルドに流す検査で、定期実行に載っていない。週次の page-quality (本番 URL を Playwright で巡回する job) に同じ判定を足すか決める
+- **完了条件**: 1 は決定を本カードか `docs/01_技術設計/04_デザインシステム.md` の「線の格子」の行に書く。2 は週次の結果に違反件数が出る (または載せない理由を書く)。
 
 ### [MUNI-DATA-PRODUCT-PILOT-01] 市区町村の製造品出荷額を「組替済み時系列 CSV＋GeoJSON」の1商品にし、6週で売れるかを確かめる
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]

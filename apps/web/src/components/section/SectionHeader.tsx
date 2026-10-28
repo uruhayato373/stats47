@@ -78,7 +78,8 @@ export function SectionHeader({
           <div className="flex shrink-0 items-center gap-2">{action}</div>
         )}
       </div>
-      {!hideRule && <Separator />}
+      {/* 線の格子のセルとして置いたときは格子が下の線を引くので、区切り線を出さない (二重線になる) */}
+      {!hideRule && <Separator className="in-data-[slot=panel-grid]:hidden" />}
     </div>
   );
 }

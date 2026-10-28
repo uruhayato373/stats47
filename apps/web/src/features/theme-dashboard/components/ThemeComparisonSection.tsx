@@ -127,12 +127,12 @@ export function ThemeComparisonSection({
   if (summaries.length === 0) return null;
 
   return (
-    <div className="@container min-w-0 space-y-5">
+    <PanelGrid className="@container">
       {current && (
-        <section
+        <PanelGrid as="section"
           id="theme-comparison"
           aria-labelledby="theme-comparison-heading"
-          className="scroll-mt-24 space-y-2"
+          className="scroll-mt-24"
         >
           <div className="flex items-center justify-between gap-2">
             <h2
@@ -308,13 +308,13 @@ export function ThemeComparisonSection({
               この指標の比較データを取得できませんでした。
             </p>
           )}
-        </section>
+        </PanelGrid>
       )}
 
-      <section
+      <PanelGrid as="section"
         id="theme-comparison-table"
         aria-labelledby="theme-table-heading"
-        className="scroll-mt-24 space-y-2"
+        className="scroll-mt-24"
       >
         <h2 id="theme-table-heading" className="text-base font-semibold">
           指標の比較
@@ -402,7 +402,7 @@ export function ThemeComparisonSection({
             </TableBody>
           </Table>
         </SurfaceCard>
-      </section>
-    </div>
+      </PanelGrid>
+    </PanelGrid>
   );
 }

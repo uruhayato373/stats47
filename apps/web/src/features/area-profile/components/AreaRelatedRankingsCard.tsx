@@ -49,7 +49,7 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
   ] as const;
 
   return (
-    <section aria-labelledby="area-highlights-title">
+    <PanelGrid as="section" aria-labelledby="area-highlights-title">
       <SectionHeader
         title={<span id="area-highlights-title">{areaName}の特徴</span>}
         description={
@@ -77,6 +77,6 @@ export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRan
         )}
       </PanelGrid>
       </div>
-    </section>
+    </PanelGrid>
   );
 }

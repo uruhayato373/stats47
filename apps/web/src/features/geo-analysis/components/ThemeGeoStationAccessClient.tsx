@@ -14,6 +14,7 @@ import {
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
+import { PanelGrid } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection } from '@/components/surface';
 
@@ -59,7 +60,7 @@ export function ThemeGeoStationAccessClient({
   );
 
   return (
-    <div className="space-y-4">
+    <PanelGrid>
       {selectedRow ? (
         <GeoSpatialEvidenceExplorer
           slug={slug}
@@ -170,6 +171,6 @@ export function ThemeGeoStationAccessClient({
           対象版と検証記録は分析詳細で確認できます。
         </p>
       </SurfaceSection>
-    </div>
+    </PanelGrid>
   );
 }

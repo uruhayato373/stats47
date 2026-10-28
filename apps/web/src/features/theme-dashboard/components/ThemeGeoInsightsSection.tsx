@@ -56,7 +56,7 @@ export async function ThemeGeoInsightsSection({
   );
 
   return (
-    <section className="mt-8">
+    <PanelGrid as="section">
       <SectionHeader
         title={areaName ? `${areaName}を空間分析で読む` : '関連する空間分析'}
         description="テーマ指標の概況に加え、公式GISレイヤーを重ねた分析を確認できます。計算・途中データ・限界は各Geoページへ集約しています。"
@@ -97,6 +97,6 @@ export async function ThemeGeoInsightsSection({
           );
         })}
       </PanelGrid>
-    </section>
+    </PanelGrid>
   );
 }

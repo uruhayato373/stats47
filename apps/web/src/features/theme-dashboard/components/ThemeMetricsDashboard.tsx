@@ -492,11 +492,12 @@ export function ThemeMetricsDashboard({
     chapter: (typeof chapters)[number],
     action?: ReactNode
   ) => (
-    <section
+    <PanelGrid
+      as="section"
       key={chapter.key}
       id={`theme-section-${chapter.key}`}
       aria-label={chapter.title}
-      className="space-y-4 scroll-mt-24"
+      className="scroll-mt-24"
     >
       <SectionHeader
         title={chapter.title}
@@ -533,22 +534,22 @@ export function ThemeMetricsDashboard({
         </PanelGrid>
       )}
       {chapter.markdown.length > 0 && (
-        <div className="space-y-4">
+        <PanelGrid>
           {chapter.markdown.map((chart) => renderChart(chart, 3))}
-        </div>
+        </PanelGrid>
       )}
       {chapter.embedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-    </section>
+    </PanelGrid>
   );
 
   return (
-    <section
+    <PanelGrid
+      as="section"
       id="theme-indicators"
-      // pt-6: 先頭の sr-only 見出しは絶対配置で、v4 の space-y (下側の余白) が効かない。
-      // v3 で 2 番目の子に付いていた上の余白をここで保つ
-      className="@container space-y-6 scroll-mt-24 pt-6"
+      // 章・パネル・文章を 1 本の線の格子に並べる (ページの本文の列につながる)
+      className="@container scroll-mt-24"
     >
       <h2 className="sr-only">{areaName}の主要指標</h2>
       {/* 節見出しが無いテーマでは、見出しの右端に置けないので最初の行の右端に置く */}
@@ -580,10 +581,10 @@ export function ThemeMetricsDashboard({
       )}
       {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
-        <div className="space-y-4">
+        <PanelGrid>
           {remainingMarkdown.map((chart) => renderChart(chart))}
-        </div>
+        </PanelGrid>
       )}
-    </section>
+    </PanelGrid>
   );
 }

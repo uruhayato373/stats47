@@ -40,7 +40,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section>
+    <PanelGrid as="section">
       <SectionHeader
         title={`${areaName}の空間分析`}
         description="人口・住まい・防災・交通を、都道府県平均だけでなく公式GISレイヤーの重なりから確認します。"
@@ -73,6 +73,6 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
           </SurfaceCard>
         ))}
       </PanelGrid>
-    </section>
+    </PanelGrid>
   );
 }

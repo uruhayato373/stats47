@@ -17,8 +17,7 @@ import { AREA_DATABOOK_TEMPLATE } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
-import { PageShell } from '@/components/layout';
-import { PanelGrid } from '@/components/layout/PageShell';
+import { PageShell, PanelGrid } from '@/components/layout';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { RailLinksCard } from '@/components/rail';
 
@@ -175,7 +174,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           className="mb-4"
         />
 
-        <div className="flex min-w-0 flex-col gap-8">
+        <PanelGrid>
           <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
@@ -246,7 +245,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       home の左レールが引き続き使う。
                     */}
           <FooterAdSlot />
-        </div>
+        </PanelGrid>
       </PageShell>
     </>
   );

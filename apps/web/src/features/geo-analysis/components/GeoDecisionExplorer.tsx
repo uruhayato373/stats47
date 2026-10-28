@@ -107,7 +107,7 @@ export function GeoDecisionExplorer({
   ] as const;
 
   return (
-    <section aria-labelledby="geo-decision-title">
+    <PanelGrid as="section" aria-labelledby="geo-decision-title">
       <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold text-primary">
@@ -160,6 +160,6 @@ export function GeoDecisionExplorer({
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         洪水は1kmメッシュ中心点による近似、駅800mは直線距離です。個別地点の安全や実際の徒歩経路を判定する値ではありません。
       </p>
-    </section>
+    </PanelGrid>
   );
 }

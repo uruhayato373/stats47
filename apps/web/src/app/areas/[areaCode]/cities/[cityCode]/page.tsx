@@ -4,7 +4,7 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildCityPageMeta } from "@stats47/ranking";
 
 import Link from "@/components/atoms/SiteLink";
-import { PageHeader, PageShell } from "@/components/layout";
+import { PageHeader, PageShell, PanelGrid } from "@/components/layout";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 import {
@@ -117,7 +117,7 @@ export default async function CityPage({ params }: PageProps) {
       />
 
       {/* main はルートレイアウトの main#main-content だけ (ページ内で入れ子にしない) */}
-      <div className="min-w-0 space-y-6">
+      <PanelGrid>
         {databook ? (
           <CityDatabookView
             databook={databook}
@@ -146,7 +146,7 @@ export default async function CityPage({ params }: PageProps) {
           prefName={context.pref.areaName}
           activeCityCode={cityCode}
         />
-      </div>
+      </PanelGrid>
     </PageShell>
   );
 }

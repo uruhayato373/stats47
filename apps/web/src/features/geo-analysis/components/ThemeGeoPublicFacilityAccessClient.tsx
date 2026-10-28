@@ -1,6 +1,8 @@
 'use client';
 import { to2DigitPrefCode } from '@stats47/area';
 
+import { PanelGrid } from '@/components/layout';
+
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
 import { GeoPublicFacilitySummary } from './GeoPublicFacilitySummary';
@@ -24,7 +26,7 @@ export function ThemeGeoPublicFacilityAccessClient({
     (row) => row.areaCode === selectedPrefectureCode
   );
   return (
-    <div className="space-y-4">
+    <PanelGrid>
       {selected ? (
         <GeoSpatialEvidenceExplorer
           slug="population-public-facility-access"
@@ -42,6 +44,6 @@ export function ThemeGeoPublicFacilityAccessClient({
         selectedAreaCode={selectedPrefectureCode}
         onSelectArea={setSelected}
       />
-    </div>
+    </PanelGrid>
   );
 }
