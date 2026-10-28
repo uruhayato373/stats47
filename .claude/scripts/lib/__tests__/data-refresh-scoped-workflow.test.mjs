@@ -12,6 +12,7 @@ const workflow = YAML.parse(fs.readFileSync(path.join(root, '.github/workflows/d
 const steps = workflow.jobs.refresh.steps;
 const step = name => steps.find(entry => entry.name.includes(name));
 const resolveInputs = step('Resolve inputs');
+const resolveScope = step('Resolve snapshot scope');
 const validate = step('Validate ranking refresh scope');
 const batch = step('page-data-batch');
 const observations = step('Push observations');
@@ -48,7 +49,7 @@ const args = process.argv.slice(2);
 const fixture = JSON.parse(fs.readFileSync('fixture.json', 'utf8'));
 const keys = process.env.REFRESH_METRIC.split(',');
 fs.appendFileSync(process.env.CALL_LOG, JSON.stringify(args) + '\\n');
-if (args.includes('-e')) {
+if (args.includes('-e') || args.some(arg => arg.endsWith('resolve-refresh-scope.ts'))) {
   const result = spawnSync(process.env.REAL_TSX, args.slice(1), { env: process.env, stdio: 'inherit' });
   process.exit(result.status ?? 1);
 }
@@ -227,7 +228,7 @@ test('dry-run still validates and fetches, while workflow conditions skip every 
 });
 
 test('default all scope retains existing full/partial-publish path and shared writer lock', () => {
-  assert.equal(workflow.on.workflow_dispatch.inputs.snapshot_scope.default, 'all');
+  assert.equal(workflow.on.workflow_dispatch.inputs.snapshot_scope.default, 'auto');
   assert.equal(workflow.concurrency.group, 'r2-write');
   assert.equal(batch['continue-on-error'], true);
   assert.match(full.run, /bash \.claude\/skills\/db\/sync-snapshots\/run\.sh "\$\{ARGS\[@\]\}"/);
@@ -241,11 +242,11 @@ test('default all scope retains existing full/partial-publish path and shared wr
   assert.deepEqual(puts(result)[0].slice(-2), ['--prefix', 'app/stats']);
 });
 
-test('dispatch/schedule omission defaults to all; request supports explicit ranking', () => {
+test('dispatch/schedule omission defaults to auto; request supports explicit ranking', () => {
   for (const event of ['workflow_dispatch', 'schedule']) {
     const result = run(resolveInputs.run, { EVENT_NAME: event });
     assert.equal(result.status, 0, result.stderr);
-    assert.match(result.outputs, /^snapshot_scope=all$/m);
+    assert.match(result.outputs, /^snapshot_scope=auto$/m);
   }
   const result = run(resolveInputs.run, { EVENT_NAME: 'push' }, { request: { metric: keys, snapshotScope: 'ranking', dryRun: false } });
   assert.equal(result.status, 0, result.stderr);
@@ -329,4 +330,40 @@ test('request file can ask for municipality scope', () => {
   const result = run(resolveInputs.run, { EVENT_NAME: 'push' }, { request: { metric: cityKeys, snapshotScope: 'municipality', dryRun: false } });
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.outputs, /^snapshot_scope=municipality$/m);
+});
+
+const scopeOf = (overrides) => {
+  const result = run(resolveScope.run, overrides);
+  assert.equal(result.status, 0, result.stderr);
+  return result.outputs.match(/^snapshot_scope=(.*)$/m)?.[1];
+};
+
+test('auto はすべて公開中の市区町村だけの指標なら municipality を選ぶ', () => {
+  assert.equal(scopeOf({ REQUESTED_SCOPE: 'auto', REFRESH_METRIC: cityKeys }), 'municipality');
+});
+
+test('auto は都道府県の値を持つ指標・指定なしでは all に倒し、ranking を自動では選ばない', () => {
+  for (const metric of ['fiscal-strength-index,total-population', 'annual-clear-days', '']) {
+    assert.equal(scopeOf({ REQUESTED_SCOPE: 'auto', REFRESH_METRIC: metric }), 'all', metric);
+  }
+});
+
+test('明示した範囲は auto の判定を通さずそのまま使う', () => {
+  for (const scope of ['all', 'ranking', 'municipality']) {
+    assert.equal(scopeOf({ REQUESTED_SCOPE: scope, REFRESH_METRIC: keys }), scope);
+  }
+});
+
+test('範囲を使う後続ステップはすべて確定後の範囲 (steps.scope) を読む', () => {
+  const text = fs.readFileSync(path.join(root, '.github/workflows/data-refresh.yml'), 'utf8');
+  const stale = text.split('\n').filter(line => line.includes('steps.resolve.outputs.snapshot_scope') && !line.includes('REQUESTED_SCOPE'));
+  assert.deepEqual(stale, []);
+  assert.ok(steps.indexOf(step('Install dependencies')) < steps.indexOf(resolveScope));
+  assert.ok(steps.indexOf(resolveScope) < steps.indexOf(validate));
+});
+
+test('auto で指標を渡すときも、GITHUB_OUTPUT へ渡す前に key の形を限定する', () => {
+  const result = run(resolveInputs.run, { INPUT_SNAPSHOT_SCOPE: 'auto', INPUT_METRIC: 'fiscal-strength-index\nskip=true' });
+  assert.notEqual(result.status, 0);
+  assert.equal(result.outputs, '');
 });

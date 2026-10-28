@@ -47,7 +47,11 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   宣言しないと `unit:"万円"` のまま千円値が配信される (2026-08-05 に年収 39 件が 10 倍過大だった)。
   棚卸しは `npx tsx packages/data-configs/scripts/audit-money-unit-scale.ts` (不一致 0 を保つ)。
   **config を直したら再取り込みまでやる** — 宣言だけ変えても R2 は古いまま
-  (`audit-reingest-queue.ts` が `stale-delivery` として追う)
+  (`audit-reingest-queue.ts` が `stale-delivery` として追う)。
+  再取り込みの `data-refresh.yml` は派生の作り直しの範囲を指定しない (`snapshotScope` を書かない = `auto`)。
+  `auto` は全指標が公開中の市区町村だけの指標なら市区町村ランキングとデータブックだけを、それ以外は全範囲を作り直す
+  (判定 `packages/ranking/src/scripts/lib/refresh-scope.ts`)。`all` を明示すると市区町村だけの指標でも 90 分前後かかる
+  (2026-10-28 に 8 指標で 75 分)。都道府県の `ranking` は地域プロフィール等を作らないので、自動では選ばれず人が決める
 - `.claude/rules/data-provenance-standards.md` — **非 e-Stat (手動/PDF/xlsx/HTML) 投入時は provenance 9点セット必須**。`fetcherKey:"manual"` は config.source.config.provenance に {pdfUrl/url, accessedAt, extraction, verification, restore} を記録 (欠落は `validate:config` の `[provenance]` error)。手本 `ambulance-hospital-arrival-time.ts`。出典なし (config 空) 投入は禁止
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)
@@ -112,7 +116,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - **計算型 metric の分子・分母を更新したら下流も再生成する (2026-08-05)**: `fetcherKey:"calculated"` の
   metric (家賃控除後可処分所得 / 実質可処分所得 / エンゲル係数) は、分子・分母を `page-data-batch` で
   更新しても**自分の `app/stats/<key>/values.json` は追従しない**。`calculated-stats` task が producer なので
-  `calculated-stats → ranking-values` の順で回す (`data-refresh.yml` は run.sh をフル実行するので自動)。
+  `calculated-stats → ranking-values` の順で回す (`data-refresh.yml` は計算型を含む指定を `auto` で全範囲にするので自動)。
   取りこぼしは週次レビューの `npm run weekly:audits` (ranking-integrity) の検査 (m) が「作れるはずの年」との差で検出する。
   期間 (月額/年額) の宣言は config の `calculation.periodAlign` が唯一の情報源 — e-Stat のメタは期間を
   明示しないため、宣言を欠くと月額から年額を引く等の誤りが機械では検出できない

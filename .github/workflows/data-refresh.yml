@@ -9,6 +9,8 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #      git TS + R2 観測値から再生成 → R2 push。CI reader はS3から更新済観測値を読む。
 #   snapshot_scope=ranking は指定1〜50件の都道府県stats/item/values/正規化値と
 #   全件ranking-items索引だけを更新。master/area-profile/correlation等は更新しない。
+#   snapshot_scope=auto (既定) は指標から範囲を選ぶ: 全指標が公開中の市区町村だけの指標なら municipality、
+#   それ以外 (指定なし・都道府県の値を持つ指標を含む等) は all。ranking は自動では選ばない (下記の派生を作らないため)。
 #   snapshot_scope=municipality は都道府県の値を持たない市区町村だけの指定1〜50件の
 #   観測値 (cities.json) と、その市区町村ランキング・全市区町村のデータブックだけを更新する
 #   (全範囲の作り直しは 90 分前後かかる。2026-10-28 に財政指標 8 件で実測)。
@@ -32,7 +34,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #
 # request file 形式 (data/data-refresh-requests.json):
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
-#     "migrateLegacyRecipes": false, "snapshotScope": "all" }
+#     "migrateLegacyRecipes": false, "snapshotScope": "auto" }
 #   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 #   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
@@ -59,11 +61,11 @@ on:
         required: false
         default: ""
       snapshot_scope:
-        description: "派生更新範囲。ranking: 指定1〜50件の都道府県rankingと全件索引のみ。municipality: 指定1〜50件の市区町村だけの指標の市区町村ランキングとデータブックのみ"
+        description: "派生更新範囲。auto: 指標から自動で選ぶ (既定)。ranking: 指定1〜50件の都道府県rankingと全件索引のみ。municipality: 指定1〜50件の市区町村だけの指標の市区町村ランキングとデータブックのみ"
         required: false
-        default: all
+        default: auto
         type: choice
-        options: [all, ranking, municipality]
+        options: [auto, all, ranking, municipality]
       since:
         description: "差分取得の起点 (YYYY-MM-DD、空なら全期間)"
         required: false
@@ -143,7 +145,7 @@ jobs:
           REQ=data/data-refresh-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
             METRIC=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.metric??''))")
-            SNAPSHOT_SCOPE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.snapshotScope??'all'))")
+            SNAPSHOT_SCOPE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.snapshotScope??'auto'))")
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
             ALLOW_EMPTY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.allowEmpty??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
@@ -160,18 +162,18 @@ jobs:
             exit 0
           else
             METRIC="$INPUT_METRIC"
-            SNAPSHOT_SCOPE="${INPUT_SNAPSHOT_SCOPE:-all}"
+            SNAPSHOT_SCOPE="${INPUT_SNAPSHOT_SCOPE:-auto}"
             SINCE="$INPUT_SINCE"
             ALLOW_EMPTY="$INPUT_ALLOW_EMPTY"
             DRY="$INPUT_DRY_RUN"
             MIGRATE_LEGACY_RECIPES="$INPUT_MIGRATE_LEGACY_RECIPES"
           fi
           case "$SNAPSHOT_SCOPE" in
-            all|ranking|municipality) ;;
-            *) echo 'snapshot_scope must be all, ranking or municipality' >&2; exit 1 ;;
+            auto|all|ranking|municipality) ;;
+            *) echo 'snapshot_scope must be auto, all, ranking or municipality' >&2; exit 1 ;;
           esac
           # ranking入力はGITHUB_OUTPUTへ渡す前にも形式を限定する。
-          if [ "$SNAPSHOT_SCOPE" != "all" ] && ! [[ "$METRIC" =~ ^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$ ]]; then
+          if { [ "$SNAPSHOT_SCOPE" = "ranking" ] || [ "$SNAPSHOT_SCOPE" = "municipality" ] || { [ "$SNAPSHOT_SCOPE" = "auto" ] && [ -n "$METRIC" ]; }; } && ! [[ "$METRIC" =~ ^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$ ]]; then
             echo 'ranking/municipality scope requires explicit comma-separated metric keys' >&2
             exit 1
           fi
@@ -201,10 +203,27 @@ jobs:
         if: steps.resolve.outputs.skip != 'true'
         run: npm ci
 
+      # auto は「狭くしても作り直し漏れが起きない」と確かめた範囲だけを選び、それ以外は all に倒す。
+      # 判定は packages/ranking/src/scripts/lib/refresh-scope.ts。人が範囲を選び忘れて全範囲 (90 分前後) を
+      # 回すのを防ぐ (2026-10-28 に市区町村だけの 8 指標で 75 分かかった)。明示した範囲はそのまま使う。
+      - name: 🎯 Resolve snapshot scope
+        id: scope
+        if: steps.resolve.outputs.skip != 'true'
+        env:
+          REQUESTED_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+        run: |
+          if [ "$REQUESTED_SCOPE" = "auto" ]; then
+            npx tsx packages/ranking/src/scripts/resolve-refresh-scope.ts
+          else
+            echo "snapshot_scope=$REQUESTED_SCOPE" >> "$GITHUB_OUTPUT"
+            echo "snapshot_scope=$REQUESTED_SCOPE (明示)"
+          fi
+
       - name: 🔎 Validate ranking refresh scope
         if: steps.resolve.outputs.skip != 'true'
         env:
-          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          SNAPSHOT_SCOPE: ${{ steps.scope.outputs.snapshot_scope }}
           REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
           REFRESH_SINCE: ${{ steps.resolve.outputs.since }}
           REFRESH_ALLOW_EMPTY: ${{ steps.resolve.outputs.allow_empty }}
@@ -261,7 +280,7 @@ jobs:
         continue-on-error: true
         if: steps.resolve.outputs.skip != 'true'
         env:
-          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          SNAPSHOT_SCOPE: ${{ steps.scope.outputs.snapshot_scope }}
           REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
           REFRESH_SINCE: ${{ steps.resolve.outputs.since }}
           REFRESH_ALLOW_EMPTY: ${{ steps.resolve.outputs.allow_empty }}
@@ -289,7 +308,7 @@ jobs:
       - name: ☁️ Push observations to R2 (app/stats)
         if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
         env:
-          SNAPSHOT_SCOPE: ${{ steps.resolve.outputs.snapshot_scope }}
+          SNAPSHOT_SCOPE: ${{ steps.scope.outputs.snapshot_scope }}
           REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
           BATCH_OUTCOME: ${{ steps.batch.outcome }}
         run: |
@@ -354,7 +373,7 @@ jobs:
       #   (この job は R2_ACCESS_KEY_ID 等 S3 認証を持つため、production にすれば S3 API 経由の
       #   一覧に切り替わる。既知の罠: memory project_kakei_expansion_pipeline_gotchas)。
       - name: 🗂️ Regenerate derived snapshots + push to R2
-        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.snapshot_scope == 'all'
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.scope.outputs.snapshot_scope == 'all'
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
@@ -376,7 +395,7 @@ jobs:
       # statsのPUT完了後、production/S3 readで同じキーの配信用派生を生成する。
       # items --onlyでもall.jsonは全registryから生成される。索引を部分集合へ縮めない。
       - name: 🗂️ Regenerate scoped ranking snapshots + push to R2
-        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.snapshot_scope == 'ranking'
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.scope.outputs.snapshot_scope == 'ranking'
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
@@ -428,7 +447,7 @@ jobs:
       # データブックはこの run で作ったランキングを .local/r2 から、ほかの key は R2 から読む。
       # 1 key でも生成に失敗したら何も PUT しない (生成器が exit≠0)。
       - name: 🗂️ Regenerate scoped municipality snapshots + push to R2
-        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.snapshot_scope == 'municipality'
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.scope.outputs.snapshot_scope == 'municipality'
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
@@ -471,7 +490,7 @@ jobs:
       # 次の退行を見逃す。逆に「増やす」方向を自動化すると壊れたデータを自動で
       # 追認してしまうため、**現行リストの部分集合になったときだけ** commit-back する。
       - name: 🔻 Shrink shape allowlist (縮小時のみ commit-back)
-        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.snapshot_scope == 'all' && (steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request')
+        if: steps.resolve.outputs.skip != 'true' && steps.scope.outputs.snapshot_scope == 'all' && (steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request')
         continue-on-error: true
         run: npx tsx packages/data-configs/scripts/shrink-shape-allowlist.ts --apply
 
