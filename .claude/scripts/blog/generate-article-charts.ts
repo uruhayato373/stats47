@@ -22,7 +22,7 @@
  *   *-timeseries.json          → line chart (時系列・多系列対応)  [実装済み]
  *   *-scatter.json             → scatter chart (正方形・単色)      [実装済み]
  *   *-radar.json               → radar chart (720×720・正規化済み値) [実装済み]
- *   *-stacked.json             → stacked-bar                     [TODO]
+ *   *-stacked.json             → stacked-bar (+ -mobile.svg)       [実装済み]
  *   *-summary-findings.json    → findings card (番号付き要点)     [実装済み]
  *   *-findings.json            → findings card (番号付き要点)     [実装済み]
  *
@@ -381,8 +381,10 @@ function genLineChartSvg(data) {
  * stacked-bar: { title, subtitle?, unit?, normalized?, horizontal?, series:[{label, data:[{year, value}]}] }
  * → svg-builder generateStackedBarSvg。series = 積み上げる区分、data[].year = 棒 (グループ)。
  * line と同じ series 形式なので、時系列の内訳をそのまま渡せる。
+ * 任意の referenceLine: { value, label } で比べる基準の線 (例: 全国平均) を引く。
+ * layout "mobile" はブログのスマホ本文・note 本文用 (640 幅・最小 20px)。
  */
-function genStackedBarSvg(data) {
+function genStackedBarSvg(data, layout: 'default' | 'mobile' = 'default') {
   const series = (data.series || []).filter(
     (s) => Array.isArray(s.data) && s.data.length
   );
@@ -407,6 +409,8 @@ function genStackedBarSvg(data) {
     seriesKey: 'areaCode',
     normalized: data.normalized === true,
     horizontal: data.horizontal === true,
+    referenceLine: data.referenceLine ?? undefined,
+    layout,
   });
 }
 
@@ -856,6 +860,25 @@ for (const { file, type, parsed } of jsonMeta) {
     log(
       `  [gen] ${baseName}-ig.svg  (IG縦長 ${(igSvg.length / 1024).toFixed(1)} KB)`
     );
+  }
+  // 積み上げ棒もスマホ本文用を同じデータから出す (横長の図を CSS で縮めると文字が 4px 台になる)。
+  // 見出しがスマホの読める範囲に収まらないときは縮めずに作らない (desktop の図は作る)
+  if (type === 'stacked-bar' && !svg.startsWith('<!--')) {
+    try {
+      const mobileSvg = genStackedBarSvg(parsed, 'mobile');
+      fs.writeFileSync(
+        path.join(DATA_DIR, `${baseName}-mobile.svg`),
+        provenance + mobileSvg,
+        'utf8'
+      );
+      log(
+        `  [gen] ${baseName}-mobile.svg  (本文mobile ${(mobileSvg.length / 1024).toFixed(1)} KB)`
+      );
+    } catch (e) {
+      warn(
+        `${file}: スマホ用の積み上げ棒を作れない (${e instanceof Error ? e.message : String(e)})。見出しを短くして作り直す`
+      );
+    }
   }
 }
 
