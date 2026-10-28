@@ -122,10 +122,11 @@ describe('PageSections', () => {
       </PageSections>
     );
     const root = container.firstElementChild as HTMLElement;
-    // 節は線の格子に並ぶ (並べる親が線の色を地に持ち、1px の隙間を線にする)
+    // 節は線の格子に並ぶ (1px の隙間をセルの外側 1px の影で線にする。親の地は塗らないので空いた所が灰色にならない)
     expect(root).toHaveAttribute('data-slot', 'panel-grid');
     expect(root.className).toMatch(/\bgap-px\b/);
-    expect(root.className).toMatch(/\bbg-border!/);
+    expect(root.className).toContain('*:shadow-[0_0_0_1px_hsl(var(--border))]!');
+    expect(root.className).not.toMatch(/\bbg-border/);
     const kinds = [...root.children].map((child) => child.getAttribute('data-slot') ?? child.tagName);
     expect(kinds).toEqual(['SECTION', 'section-divider', 'SECTION', 'section-divider', 'SECTION']);
     // 帯は読み上げない (装飾)

@@ -901,7 +901,7 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
     violations.push({
       ruleId: 'panels-in-line-grid',
       message:
-        'Lay out sibling panels with PanelGrid / PageSections (@/components/layout): panels share 1px lines (grid gap-px bg-border) instead of being spaced with gap-N / space-y-N.',
+        'Lay out sibling panels with PanelGrid / PageSections (@/components/layout): panels share 1px lines (grid gap-px; each cell draws a 1px outset shadow) instead of being spaced with gap-N / space-y-N.',
       file,
       lineNumber: lineOf(match.index),
       line: match[0],
