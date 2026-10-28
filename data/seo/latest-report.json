@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "period": {
-    "periodStart": "2026-10-19",
-    "periodEnd": "2026-10-25",
+    "periodStart": "2026-10-20",
+    "periodEnd": "2026-10-26",
     "windowDays": 7
   },
-  "inputHash": "384e448202601dc19ef9a4316ee7db790fd75dbee77135f0df0fb9efb97c6866",
+  "inputHash": "b09955900f004559214b7cda6deba3bda5b061b5dda603a91e5a9ec534271f45",
   "movements": [
     {
       "keyword": "財政力指数",
@@ -18,28 +18,19 @@
       "change": 57
     },
     {
-      "keyword": "沖縄 出生率",
-      "targetPath": "/blog/total-fertility-rate",
-      "before": 57,
-      "after": 4.5,
+      "keyword": "東成瀬村 人口",
+      "targetPath": "/areas/05000/cities/05464",
+      "before": 53,
+      "after": 8.25,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 52.5
+      "impressions": 4,
+      "change": 44.75
     },
     {
       "keyword": "出生率 日本 ランキング 市町村",
       "targetPath": "/municipalities/ranking/births",
       "before": 51,
-      "after": 2,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 49
-    },
-    {
-      "keyword": "東成瀬村 人口",
-      "targetPath": "/areas/05000/cities/05464",
-      "before": 53,
-      "after": 9,
+      "after": 7,
       "beforeImpressions": 1,
       "impressions": 3,
       "change": 44
@@ -49,15 +40,6 @@
       "targetPath": "/blog/railway-theme-overview",
       "before": 66,
       "after": 23,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 43
-    },
-    {
-      "keyword": "可処分所得",
-      "targetPath": "/ranking/real-disposable-income",
-      "before": 46,
-      "after": 3,
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 43
@@ -81,15 +63,6 @@
       "change": 41.4
     },
     {
-      "keyword": "北海道 人口",
-      "targetPath": "/areas/01000/cities/01100/population",
-      "before": 98,
-      "after": 59,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 39
-    },
-    {
       "keyword": "高知県 廃業",
       "targetPath": "/areas/39000/business-demography",
       "before": 57,
@@ -97,6 +70,33 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 38
+    },
+    {
+      "keyword": "私立高校教師 年収ランキング",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 18,
+      "after": 55,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -37
+    },
+    {
+      "keyword": "財政力指数",
+      "targetPath": "/blog/fiscal-health-50years-trend",
+      "before": 37,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 36
+    },
+    {
+      "keyword": "都 道府県 別 出生率 ランキング",
+      "targetPath": "/ranking/total-fertility-rate",
+      "before": 10,
+      "after": 46,
+      "beforeImpressions": 2,
+      "impressions": 2,
+      "change": -36
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "漁港が多い県",
     "targetPath": "/ranking/fishing-port-count-by-type",
-    "rank": 5.950375939849624,
-    "impressions": 665,
+    "rank": 5.943283582089553,
+    "impressions": 670,
     "clicks": 2,
     "group": 5,
     "previousMethod": null,
