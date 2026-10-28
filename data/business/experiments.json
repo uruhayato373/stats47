@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T03:14:45.816Z",
+  "updated_at": "2026-10-28T03:18:08.653Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -582,8 +582,8 @@
         "learning": 3,
         "certainty": 1,
         "weighted": 1.8,
-        "verdict": "proposed",
-        "reason": "2026-10-28 オーナーとの壁打ち。打ち手は全部台帳に載せ、試せるものから順に試す方針"
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
       },
       "baseline": {
         "date": "2026-10-28",
@@ -628,8 +628,8 @@
         "learning": 2,
         "certainty": 2,
         "weighted": 2.4,
-        "verdict": "proposed",
-        "reason": "2026-10-28 オーナーとの壁打ち。打ち手は全部台帳に載せ、試せるものから順に試す方針"
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
       },
       "baseline": {
         "date": "2026-10-28",
@@ -674,8 +674,8 @@
         "learning": 2,
         "certainty": 1,
         "weighted": 1.5,
-        "verdict": "proposed",
-        "reason": "2026-10-28 オーナーとの壁打ち。打ち手は全部台帳に載せ、試せるものから順に試す方針"
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
       },
       "baseline": {
         "date": "2026-10-28",
@@ -720,8 +720,8 @@
         "learning": 1,
         "certainty": 0,
         "weighted": 1.2,
-        "verdict": "proposed",
-        "reason": "2026-10-28 オーナーとの壁打ち。打ち手は全部台帳に載せ、試せるものから順に試す方針"
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする"
       },
       "baseline": {
         "date": "2026-10-28",
@@ -766,8 +766,8 @@
         "learning": 1,
         "certainty": 3,
         "weighted": 1.8,
-        "verdict": "proposed",
-        "reason": "2026-10-28 オーナーとの壁打ち。打ち手は全部台帳に載せ、試せるものから順に試す方針"
+        "verdict": "adopted",
+        "reason": "2026-10-28 オーナー決定: 打ち手は件数の上限なく幅広く試し、判定日の実測で配分を決める (収益化戦略 §7)。変更を公開した日に running にする。セレクト登録は1冊ずつオーナーが決める"
       },
       "baseline": {
         "date": "2026-10-28",

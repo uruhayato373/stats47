@@ -164,7 +164,7 @@ abandoned  abandoned  running (re-measure)
 
 ## 制約事項
 
-- **同時 active 実験 ≤ 2 件**（rubric 原則）: `listActive()` が 2 件以上返す場合、新規 start 時に警告
+- **件数の上限は置かない**（rubric 原則「幅広く並行して試し、計測で配分を決める」）: start の前に、同じページ・同じ指標に running の実験が無いことと、指標・判定日・停止条件・ベースラインが台帳にあることだけを確かめる
 - **started_at + 10 日未満の measure は警告**: GSC 3 日遅延 + 短期ノイズを除外
 - **実行（実ファイル編集）は担当外**: 本スキルは lifecycle 管理専任。実コンテンツ編集は既存の blog-editor 系・theme-component-builder 系スキルに委譲
 - **自己評価の禁止**: 「この learning で playbook を直接書き換える」ような Generator 行為はしない。提案までが責務
