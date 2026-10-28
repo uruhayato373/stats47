@@ -192,8 +192,8 @@ describe('RailLinksCard', () => {
     const row = screen.getByRole('link', { name: /項目1/ });
     expect(more.querySelector('svg')).not.toBeNull();
     // 行の高さの class が同じ
-    expect(more).toHaveClass('min-h-11', 'sm:min-h-9');
-    expect(row).toHaveClass('min-h-11', 'sm:min-h-9');
+    expect(more).toHaveClass('min-h-11', 'sm:min-h-10', 'p-2', 'text-sm');
+    expect(row).toHaveClass('min-h-11', 'sm:min-h-10', 'p-2', 'text-sm');
   });
 
   it('本文の 3 列の関連記事は件数ではなく 1 列 20rem を保てる列数で並べる', () => {

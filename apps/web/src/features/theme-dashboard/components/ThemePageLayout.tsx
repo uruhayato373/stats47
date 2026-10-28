@@ -390,7 +390,6 @@ export async function ThemePageLayout({
                             key={metric.rankingKey}
                             href={hrefFor("ranking", { rankingKey: metric.rankingKey })}
                             chevron={false}
-                            className="px-0"
                           >
                             {metric.label}
                           </RailNavRow>
@@ -405,7 +404,7 @@ export async function ThemePageLayout({
                     <RailNavRow
                       href="/survey"
                       chevron={false}
-                      className="px-0 font-medium"
+                      className="font-medium"
                     >
                       調査一覧へ
                     </RailNavRow>
@@ -416,7 +415,6 @@ export async function ThemePageLayout({
                             key={survey.id}
                             href={hrefFor('survey', { surveyKey: survey.id })}
                             chevron={false}
-                            className="px-0"
                           >
                             {survey.name}
                           </RailNavRow>

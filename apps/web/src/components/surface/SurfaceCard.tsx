@@ -3,7 +3,6 @@ import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import {
   getSurfaceCardClassName,
   railNavRowClassName,
-  type RailNavRowDensity,
 } from "@stats47/components";
 import { ChevronRight } from "lucide-react";
 
@@ -35,7 +34,6 @@ export function SurfaceLinkCard({
 
 interface RailNavRowProps extends Omit<ComponentPropsWithoutRef<typeof Link>, "children"> {
   children: ReactNode;
-  density?: RailNavRowDensity;
   /** 選択中 (現在ページ)。aria-current="page" と active 表示を同時に出す */
   active?: boolean;
   /** 右端に添える件数などの補助テキスト */
@@ -48,7 +46,6 @@ interface RailNavRowProps extends Omit<ComponentPropsWithoutRef<typeof Link>, "c
 export function RailNavRow({
   children,
   className,
-  density,
   active = false,
   trailing,
   chevron = true,
@@ -57,7 +54,7 @@ export function RailNavRow({
   return (
     <Link
       aria-current={active ? "page" : undefined}
-      className={railNavRowClassName({ density, active, className })}
+      className={railNavRowClassName({ active, className })}
       {...props}
     >
       <span className="min-w-0 flex-1 truncate">{children}</span>

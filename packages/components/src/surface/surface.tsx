@@ -346,44 +346,56 @@ export function SectionCard(props: RailCardProps) {
 
 interface RailLinkListProps extends ComponentPropsWithoutRef<"nav"> {
   children: ReactNode;
+  /** 行の間に区切り線を引く (既定: 引かない) */
+  divided?: boolean;
 }
 
 export function RailLinkList({
   children,
   className,
+  divided = false,
   ...props
 }: RailLinkListProps) {
   return (
-    <nav className={cn("flex flex-col gap-0.5", className)} {...props}>
+    <nav
+      className={cn("flex flex-col", divided && "divide-y divide-border", className)}
+      {...props}
+    >
       {children}
     </nav>
   );
 }
 
-export type RailNavRowDensity = "compact" | "default";
+/**
+ * リンクの行の寸法。見本 (shadcndashboard のサイドバーの項目) の値: 文字 14px・余白 8px・最小の高さ 40px。
+ * モバイルはタップ領域 44px (`min-h-11`)、sm 以上で 40px (`sm:min-h-10`)。
+ * 左右の余白 8px は行の外へ -mx-2 で出し、文字の左端をカード本文の端 (見出しの文字) にそろえる
+ * (見本のサイドバーもグループの余白 8px + 項目の余白 8px で文字が見出しとそろう)。
+ * `RailNavRow`・`RailNavRowButton`・`RailLinksCard` の記事の行 (ContentNavigation) が共有する。
+ * 呼び出し側で文字の大きさ・余白・高さを上書きしない (`design-system:check` の `link-row-no-size-override`)。
+ * 正典: docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」のリンクの行
+ */
+export const LINK_ROW_SIZE_CLASS =
+  "-mx-2 w-[calc(100%+1rem)] min-h-11 p-2 text-sm sm:min-h-10";
 
 /**
  * レール内リンク行の共通 class。左右レール・カテゴリ導線・ページ内ナビが同じ行を使う。
  *
+ * - 寸法は `LINK_ROW_SIZE_CLASS` の 1 種類 (密度の切り替えは持たない)
  * - 通常行は透明背景。hover と選択中 (aria-current / aria-pressed) だけ背景を変える
- * - モバイルのタップ領域は 44px (`min-h-11`)。sm 以上では密度を上げる
  * - active はカラーバー (inset shadow / border-l) ではなく `bg-accent font-semibold text-primary`
  */
 export function railNavRowClassName({
-  density = "compact",
   active = false,
   className,
 }: {
-  density?: RailNavRowDensity;
   active?: boolean;
   className?: string;
 } = {}) {
   return cn(
-    "group flex w-full items-center justify-between gap-2 px-2 text-left text-foreground transition-colors",
+    "group flex items-center justify-between gap-2 text-left text-foreground transition-colors",
+    LINK_ROW_SIZE_CLASS,
     "hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
-    density === "compact"
-      ? "min-h-11 py-1.5 text-sm sm:min-h-9"
-      : "min-h-11 py-2 text-[15px] sm:min-h-10",
     active && "bg-accent font-semibold text-primary",
     className,
   );
@@ -391,7 +403,6 @@ export function railNavRowClassName({
 
 interface RailNavRowButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
-  density?: RailNavRowDensity;
   /** 押下状態 (フィルタなど)。aria-pressed と active 表示を同時に出す */
   pressed?: boolean;
   trailing?: ReactNode;
@@ -401,7 +412,6 @@ interface RailNavRowButtonProps extends ComponentPropsWithoutRef<"button"> {
 export function RailNavRowButton({
   children,
   className,
-  density,
   pressed = false,
   trailing,
   ...props
@@ -410,7 +420,7 @@ export function RailNavRowButton({
     <button
       type="button"
       aria-pressed={pressed}
-      className={railNavRowClassName({ density, active: pressed, className })}
+      className={railNavRowClassName({ active: pressed, className })}
       {...props}
     >
       <span className="min-w-0 flex-1 truncate">{children}</span>

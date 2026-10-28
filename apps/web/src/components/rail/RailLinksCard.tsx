@@ -11,7 +11,7 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { LINK_ROW_SIZE_CLASS, RailCard, RailNavRow } from '@/components/surface';
 
 import { navSurfaceProps, type NavSurface } from '@/lib/analytics/events';
 
@@ -135,10 +135,10 @@ function RailLinks({
             data-content-id={item.contentId}
             {...trackingProps(item, trackingSurface)}
             aria-label={item.ariaLabel}
+            // 寸法は RailNavRow と同じ LINK_ROW_SIZE_CLASS (画像の無い行も同じ高さになる)
             className={cn(
-              'group flex min-h-11 items-center gap-3 border-b border-border py-1.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
-              // 画像の無い行は RailNavRow の通常行と同じ高さ (sm 以上 36px)
-              !item.thumbnail && 'sm:min-h-9'
+              'group flex items-center gap-3 border-b border-border leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+              LINK_ROW_SIZE_CLASS
             )}
           >
             {item.thumbnail && (
@@ -180,7 +180,10 @@ function RailLinks({
               href={item.href}
               aria-label={item.ariaLabel}
               {...trackingProps(item, trackingSurface)}
-              className="group flex min-h-11 items-center gap-3 py-1.5 text-sm leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+              className={cn(
+                'group flex items-center gap-3 leading-snug text-foreground transition-colors hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+                LINK_ROW_SIZE_CLASS
+              )}
             >
               {item.thumbnail ? (
                 <span className={THUMBNAIL_FRAME_CLASS}>
@@ -215,7 +218,7 @@ function RailLinks({
 
   if (layout === 'list') {
     return (
-      // 行はカードの本文余白 (16px) の中に区切り線で並べる (行の横余白を外し、-mx-* で打ち消さない)
+      // 行はカードの本文余白 (16px) の中に区切り線で並べる。行の寸法は RailNavRow が持つ (ここで上書きしない)
       <nav className="flex flex-col divide-y divide-border" aria-label="カード内リンク">
         {items.map((item) => (
           <RailNavRow
@@ -223,7 +226,6 @@ function RailLinks({
             href={item.href}
             aria-label={item.ariaLabel}
             active={item.active}
-            className="px-0"
             {...trackingProps(item, trackingSurface)}
             trailing={
               item.count !== undefined
@@ -298,7 +300,7 @@ export function RailLinksCard({
         <div className="border-t border-border">
           <RailNavRow
             href={moreLink.href}
-            className="px-0 font-medium text-primary"
+            className="font-medium text-primary"
             {...trackingProps(moreLink, trackingSurface)}
           >
             {moreLink.label}

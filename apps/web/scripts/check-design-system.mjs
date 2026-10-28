@@ -877,6 +877,33 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       });
     }
   }
+  // リンクの行 (RailNavRow・RailNavRowButton・railNavRowClassName・RailLinkList) の寸法は部品 (LINK_ROW_SIZE_CLASS =
+  // 14px・余白 8px・最小の高さ 40px / モバイル 44px) が持つ。2026-10-28 までは呼び出し側が px-0・-mx-2・15px の密度で
+  // 行ごとに違う寸法にしていた。行には文字の大きさ・行の高さ・余白・高さを、一覧には行の間隔・左右の余白を書かない
+  // (一覧の上下の位置 mt-* / mb-* は一覧の外側なので対象外)。太さ・色は上書きではないので対象外
+  for (const match of text.matchAll(/<(RailNavRow|RailNavRowButton|RailLinkList)\b|railNavRowClassName\(\{/g)) {
+    const isList = match[1] === 'RailLinkList';
+    const tag = match[0].startsWith('<')
+      ? jsxOpeningTag(text, match.index)
+      : text.slice(match.index, text.indexOf('})', match.index) + 2);
+    const depthAt = topLevelMask(tag);
+    for (const prop of tag.matchAll(/className(?:=|:\s*)(?:["'`]([^"'`]*)["'`]|\{\s*["'`]([^"'`]*)["'`]\s*\})/g)) {
+      if (match[0].startsWith('<') && depthAt[prop.index] !== 0) continue;
+      const sizeToken = isList
+        ? /^!?(?:[\w-]+:)*!?(?:-?(?:mx|px|ms|me|ps|pe)-|gap-|space-y-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/
+        : /^!?(?:[\w-]+:)*!?(?:-?(?:p|px|py|pt|pb|pl|pr|ps|pe|m|mx|my|ms|me)-|(?:min-|max-)?h-|size-|w-|text-(?:xs|sm|base|lg|xl|[2-9]xl|\[)|leading-)/;
+      const forced = (prop[1] ?? prop[2] ?? '').split(/\s+/).find((t) => sizeToken.test(t));
+      if (!forced) continue;
+      violations.push({
+        ruleId: 'link-row-no-size-override',
+        message:
+          'Link rows keep the reference size (LINK_ROW_SIZE_CLASS: 14px, padding 8px, min-height 40px / 44px on mobile). Do not set text size, line height, padding, margin or height on RailNavRow / railNavRowClassName, nor row spacing or horizontal padding on RailLinkList.',
+        file,
+        lineNumber: lineOf(match.index + prop.index),
+        line: forced,
+      });
+    }
+  }
   // 数値タイルの値 (大きな等幅数字) は StatTile の書式 (STAT_VALUE_CLASS = 24px / 32px・600) だけで描く。
   // 2026-10-28 までは部品ごとに text-lg〜text-3xl・太さ 600〜700 が混在していた。
   {

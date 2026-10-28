@@ -105,17 +105,21 @@ describe('RailCategoryList', () => {
     );
   });
 
-  it('density=compact は min-h-11 sm:min-h-9 のタップ領域を保つ', () => {
+  it('行は見本のリンクの行の寸法 (14px・余白 8px・sm 以上 40px・モバイル 44px) の 1 種類で、呼び出し側の余白に負けない', () => {
     render(
       <RailCategoryList
         items={ITEMS}
-        density="compact"
         trackingSurface="home_category"
+        moreLink={{ href: '/ranking', label: 'すべて見る' }}
       />
     );
 
-    const link = screen.getByRole('link', { name: /人口・世帯/ });
-    expect(link).toHaveClass('min-h-11', 'sm:min-h-9');
+    // カテゴリの行と「すべて見る」の行が同じ寸法 (太さ・色だけが違う)
+    for (const name of [/人口・世帯/, /すべて見る/]) {
+      const link = screen.getByRole('link', { name });
+      expect(link).toHaveClass('min-h-11', 'sm:min-h-10', 'p-2', 'text-sm', '-mx-2');
+      expect(link).not.toHaveClass('px-0');
+    }
   });
 
   it('Tab でフォーカスできるリンクとして focus-visible:ring-2 を持つ', () => {

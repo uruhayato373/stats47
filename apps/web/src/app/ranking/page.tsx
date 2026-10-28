@@ -72,7 +72,7 @@ export default function RankingIndexPage() {
       <RailCard title="他の探し方" icon={<Compass />}>
         <nav aria-label="他の探し方" className="flex flex-col divide-y divide-border">
           {OTHER_ENTRY_POINTS.map((entry) => (
-            <RailNavRow key={entry.href} href={entry.href} className="px-0">
+            <RailNavRow key={entry.href} href={entry.href}>
               {entry.label}
             </RailNavRow>
           ))}
@@ -127,7 +127,6 @@ export default function RankingIndexPage() {
         >
           <RailCategoryList
             items={CATEGORY_INDEX}
-            density="default"
             trackingSurface="ranking_category"
             moreLink={{
               href: '/search?type=ranking',

@@ -4,7 +4,7 @@ export {
   RailCard,
   RailLinkList,
   RailNavRowButton,
-  type RailNavRowDensity,
+  LINK_ROW_SIZE_CLASS,
   railNavRowClassName,
   SectionCard,
   SurfaceCard,
