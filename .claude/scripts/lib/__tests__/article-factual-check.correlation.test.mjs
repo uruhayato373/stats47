@@ -50,6 +50,25 @@ test("偏相関係数は照合しない (人口統制の値は別物)", () => {
   assert.deepEqual(r.warnings, []);
 });
 
+test("source.json の偏相関 (partialRPopulation) と一致する r= は発火しない", () => {
+  const facts = [{ pearsonR: 0.926, partialR: 0.7131, pointCount: 47 }];
+  const ok = checkCorrelationClaims(article("人口の影響を除いた偏相関係数を計算すると、r=0.713 でした。"), facts);
+  assert.deepEqual(ok.warnings, []);
+  // 偏相関が無い散布図では同じ文が発火する (既知の値として足したことの確認)
+  const none = checkCorrelationClaims(article("人口の影響を除いた偏相関係数を計算すると、r=0.713 でした。"), [{ pearsonR: 0.926, partialR: null, pointCount: 47 }]);
+  assert.equal(none.warnings.length, 1);
+  assert.match(none.warnings[0], /CORRELATION_MISMATCH/);
+});
+
+test("loadCorrelationFacts は partialRPopulation を partialR として読む", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "corr-partial-"));
+  fs.writeFileSync(path.join(dir, "a-scatter.source.json"), JSON.stringify({ pearsonR: 0.88, partialRPopulation: 0.7954 }));
+  fs.writeFileSync(path.join(dir, "b-scatter.source.json"), JSON.stringify({ pearsonR: 0.5 }));
+  const facts = loadCorrelationFacts(dir).sort((x, y) => x.file.localeCompare(y.file));
+  assert.equal(facts[0].partialR, 0.7954);
+  assert.equal(facts[1].partialR, null);
+});
+
 test("相関の文の県数が散布図の点数と違えば warning (47 は許容)", () => {
   const wrong = checkCorrelationClaims(article("44県で計算した相関係数は-0.71です。"), FACT);
   assert.deepEqual(wrong.blockers, []);
@@ -77,7 +96,7 @@ test("checkArticleFactual が data/ の散布図接地物を読んで照合す�
       JSON.stringify({ points: Array.from({ length: 46 }, (_, i) => ({ x: i, y: i, label: `p${i}` })) }),
     );
     assert.deepEqual(loadCorrelationFacts(dir), [
-      { file: "a--b-scatter.source.json", pearsonR: -0.7134, pointCount: 46 },
+      { file: "a--b-scatter.source.json", pearsonR: -0.7134, partialR: null, pointCount: 46 },
     ]);
     const correlationIssues = (r) => r.warnings.filter((w) => w.startsWith("CORRELATION"));
     assert.deepEqual(correlationIssues(checkArticleFactual(article("相関係数は-0.71です。"), dir)), []);

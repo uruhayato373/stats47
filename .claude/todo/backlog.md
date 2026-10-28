@@ -454,6 +454,7 @@ updated: 2026-10-19
 - **証拠 (2026-10-28)**: svg-builder の積み上げ棒に `layout: "mobile"` (640 幅・最小 20px) を足し、`generate-article-charts` が `-mobile.svg` を作るようにした (旧 `BLOG-STACKED-BAR-LABEL-MOBILE-01`)。しかし `apps/web/src/features/blog/lib/responsive-chart.ts` の `RESPONSIVE_RANKING_SUFFIX` はランキングの接尾辞しか `-mobile.svg` に切り替えないので、積み上げ棒 (`-stacked`・`-breakdown`・`-composition`) はスマホでも横長のまま。公開済みの積み上げ棒 (約 4 枚) の作り直しと前後の見た目の比較もしていない。
 - **次**: ① 切り替えの対象に積み上げ棒の接尾辞を足し、`-mobile.svg` が無い記事は今どおり横長を出すことをテストで固定する ② 公開済みの積み上げ棒を作り直し、前後を比べてから R2 へ上げる (承認が要る)。
 - **完了条件**: 積み上げ棒の `-mobile.svg` がある記事で、639px 以下の表示がスマホ用に切り替わる。
+- **進捗 (2026-10-28)**: ① は済み。`responsive-chart.ts` が `-stacked`・`-breakdown`・`-composition` も 639px 以下で `-mobile.svg` に切り替え、読み込めなければ横長に戻す (テストで固定・apps/web vitest 全件 pass)。積み上げ棒は高さが項目数で変わるので 2:3 の枠に固定しない。**残り**: ② 公開済みの積み上げ棒を作り直して前後を比べ、R2 へ上げる (承認が要る)。実機・localhost での見た目は未確認。
 
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト]
@@ -461,6 +462,8 @@ updated: 2026-10-19
 - **証拠 (2026-10-28)**: `safe-driving-5-features/aging-fatality-scatter` は source.json の `year` が 2023 だが、点と見出しは 2024 年の値 (図の年の取り直しの照合で発見)。古い図の一覧 (`build-stale-data-years.mjs`) は source.json の年を読むので、誤った年で判定される。
 - **次**: 散布図の点を R2 と照合して年を決める関数 (`lib/refresh-chart-year.mjs`) で公開済みの散布図を一括で調べ、source.json の年と食い違う図を一覧にして直す。
 - **完了条件**: 公開済みの散布図で source.json の年と点の年の食い違いが 0 件。
+- **調査結果 (2026-10-28・公開 609 記事を読み取り)**: 散布図 196 枚のうち両軸の点が R2 と 95% 以上一致したのは 140 枚。うち source.json の年と一致 66・**食い違い 4**・year 無し 70 (59 は kind `correlation`)。照合できない 56 枚 (点なし 28・どの key/年とも一致しない 16・key なし 9・同じ指標の 2 年 3)。食い違いの 4 枚: `safe-driving-5-features/aging-fatality-scatter` (year 2023 → 点は両軸 2024)、`vacant-house-crisis/vacant-aging-scatter` (2023 → x 2024 / y 2023)、`fertility-fiscal-nexus/fiscal-fertility-scatter` (2022 → x 2022 / y 2023)、`housing-cost-livability-trend/rent-floorarea-scatter` (2024 → x 2024 / y 2023)。両軸の年が違う 3 枚は year 1 つでは表せない。照合関数が略した「京都」を「京」にして外していた不具合は直した (`refresh-chart-year.mjs` の `prefKey`・テストで固定)。
+- **次**: ① 両軸の年が違う図の source.json の書き方 (`xYear`/`yYear` を足すか) を `blog-data-schema.md` §1.5 で決める ② 4 枚の source.json を直して R2 へ上げる (承認が要る) ③ kind `correlation` の 59 枚は `scatterAxisKeys` が `base`/`pair` を読まず、`SCATTER_SOURCE_KINDS` にも無いので年の照合と取り直しの外にある。対象に足すかを決める。
 
 ### [MUNI-WARD-GAP-DISPLAY-01] 東京の特別区に値が無い市区町村指標で、区の値を別の公的資料から足すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:データ]

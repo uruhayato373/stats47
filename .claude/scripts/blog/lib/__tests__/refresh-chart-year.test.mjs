@@ -329,6 +329,19 @@ describe("rebuildScatterData / rebuildScatterSource", () => {
     assert.deepEqual(rebuilt.data.points.map((p) => p.label), ["北海道", "青森", "東京"]);
   });
 
+  it("略した「京都」を「京」にせず、京都府の値と照合する", () => {
+    const kyotoValues = {
+      "vacant-housing-rate": { partitions: [part("2018", [["13000", "東京都", 10.63], ["26000", "京都府", 12.84]]), part("2023", [["13000", "東京都", 10.92], ["26000", "京都府", 13.1]])] },
+      "ratio-65-plus": { partitions: [part("2018", [["13000", "東京都", 23.1], ["26000", "京都府", 29.1]]), part("2023", [["13000", "東京都", 22.8], ["26000", "京都府", 29.8]])] },
+    };
+    const short = { ...scatter2018, points: [{ x: 10.6, y: 23.1, label: "東京" }, { x: 12.8, y: 29.1, label: "京都" }] };
+    const plan = planScatterRefresh({ source: scatterSource, data: short, valuesByKey: kyotoValues });
+    assert.equal(plan.status, "refresh");
+    const rebuilt = rebuildScatterData(short, plan, kyotoValues);
+    assert.deepEqual(rebuilt.data.points.map((p) => p.label), ["東京", "京都"]);
+    assert.deepEqual(rebuilt.excluded, []);
+  });
+
   it("軸の表示ラベルの calculated は指標として扱わない", () => {
     const source = { kind: "scatter", xKey: "vacant-housing-rate", yKey: "calculated", year: "2018" };
     assert.equal(planScatterRefresh({ source, data: scatter2018, valuesByKey: scatterValues }).status, "unsupported");

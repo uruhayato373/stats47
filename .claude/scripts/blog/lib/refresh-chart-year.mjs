@@ -190,7 +190,12 @@ const isScatterShaped = (data) =>
   );
 
 /** 県名の照合キー。図には「東京」のように都府県を落とした名前もあるので落としてそろえる (北海道はそのまま)。 */
-const prefKey = (name) => (name === "北海道" ? name : String(name).replace(/[都府県]$/u, ""));
+// 「東京都」「京都府」の末尾だけを落とす。2 文字の名前は略称なので落とさない (略した「京都」を「京」にしない。
+// 2 文字の正式名の都道府県は無い)。北海道は略さない
+const prefKey = (name) => {
+  const s = String(name);
+  return s === "北海道" || s.length < 3 ? s : s.replace(/[都府県]$/u, "");
+};
 
 const pointName = (p) => prefKey(SCATTER_POINT_LABEL_FIELDS.map((f) => p[f]).find((v) => typeof v === "string" && v));
 

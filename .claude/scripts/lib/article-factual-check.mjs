@@ -843,7 +843,10 @@ export function checkInlineSvgProvenance(content) {
  * 型B の prompt は同じファイルから相関係数を渡すので、本文の相関係数はこれと一致するはず。
  *
  * @param {string|null} dataDir
- * @returns {{file: string, pearsonR: number, pointCount: number|null}[]}
+ * `partialRPopulation` (人口を統制した偏相関) があれば partialR として持つ。本文が「偏相関係数を計算すると r=0.71」と
+ * 書くとき、`(?<!偏)` では r= の形を外せないため、既知の値として照合する (2026-10-28 に公開記事の誤検知 4 件の原因)。
+ *
+ * @returns {{file: string, pearsonR: number, partialR: number|null, pointCount: number|null}[]}
  */
 export function loadCorrelationFacts(dataDir) {
   if (!dataDir || !fs.existsSync(dataDir)) return [];
@@ -859,7 +862,11 @@ export function loadCorrelationFacts(dataDir) {
         const scatter = JSON.parse(fs.readFileSync(scatterPath, "utf8"));
         if (Array.isArray(scatter.points)) pointCount = scatter.points.length;
       }
-      facts.push({ file, pearsonR: source.pearsonR, pointCount });
+      const partialR =
+        typeof source.partialRPopulation === "number" && Number.isFinite(source.partialRPopulation)
+          ? source.partialRPopulation
+          : null;
+      facts.push({ file, pearsonR: source.pearsonR, partialR, pointCount });
     } catch {
       // 壊れた JSON は照合材料にしない (下で「照合先なし」として警告に倒れる)
     }
@@ -878,13 +885,14 @@ const CORRELATION_COUNT_RE = /([0-9]+)\s*(?:都道府県|県)/g;
  * - 本文の値が、書かれた小数桁で丸めたどの相関係数とも一致しない → warning
  *   (unit-semantics-standards.md §5 の段階導入。2026-10-28 に公開 609 記事を走査し、相関係数を書く 91 記事中
  *   7 記事で発火した。散布図に無い別の相関 (部分集合・別指標) を語る文も拾うため、blocker にすると
- *   正しい記事の是正を止める。照合先の無い 54 記事は CORRELATION_NO_TRUTH。新規の型B で誤検出 0 を
- *   確かめてから blocker へ上げる)
+ *   正しい記事の是正を止める。照合先の無い 54 記事は CORRELATION_NO_TRUTH。2026-10-28 に 7 記事の 20 件を文ごとに
+ *   確かめ、散布図の相関の誤りは 0 件・全件が別の相関 (部分集合・偏相関・順位相関・別指標・別の年) だった。
+ *   偏相関 4 件は partialR で解消したが、残りは文面から機械で区別できないので warning のままにする)
  * - 相関係数を書いているのに照合先 (pearsonR を持つ source.json) が無い → warning
  * - 相関係数と同じ文の「N県」が点数とも 47 とも違う → warning (順位の話と混ざるため blocker にしない)
  *
  * @param {string} content - article.md の全文
- * @param {{pearsonR: number, pointCount: number|null}[]} facts
+ * @param {{pearsonR: number, partialR?: number|null, pointCount: number|null}[]} facts
  * @returns {{blockers: string[], warnings: string[]}}
  */
 export function checkCorrelationClaims(content, facts) {
@@ -907,7 +915,8 @@ export function checkCorrelationClaims(content, facts) {
         warnings.push(`CORRELATION_NO_TRUTH: 相関係数 ${m[0].trim()} を照合する散布図の source.json (pearsonR) が無い`);
         continue;
       }
-      const ok = facts.some((f) => Math.abs(Number(f.pearsonR.toFixed(decimals)) - stated) < 1e-9);
+      const known = facts.flatMap((f) => (f.partialR == null ? [f.pearsonR] : [f.pearsonR, f.partialR]));
+      const ok = known.some((r) => Math.abs(Number(r.toFixed(decimals)) - stated) < 1e-9);
       if (!ok) {
         const truth = facts.map((f) => f.pearsonR.toFixed(decimals)).join(" / ");
         warnings.push(`CORRELATION_MISMATCH: 本文の相関係数 ${stated} が散布図の値 ${truth} と一致しない (「${m[0].trim()}」)`);
