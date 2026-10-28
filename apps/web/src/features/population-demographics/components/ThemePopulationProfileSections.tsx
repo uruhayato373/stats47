@@ -1,10 +1,10 @@
+import { ChartPanel } from '@stats47/components';
 import {
   parsePopulationCoreProfile,
   type PopulationCoreProfile,
 } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { PROFILE_KEYS } from '../lib/population-profile-view';
 

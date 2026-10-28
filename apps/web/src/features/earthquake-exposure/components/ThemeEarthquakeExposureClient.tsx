@@ -1,6 +1,7 @@
 'use client';
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -17,7 +18,6 @@ import {
 } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 

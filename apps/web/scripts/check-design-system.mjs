@@ -74,9 +74,8 @@ const rules = [
     message:
       'Do not import shadcn Card directly from app components/features. Use SurfaceCard, SurfaceLinkCard, SurfaceSection, or ChartPanel.',
     pattern: /from\s+["']@stats47\/components\/atoms\/ui\/card["']/,
-    // カード枠の正規の持ち主 (チャート枠と状態表示) はテンプレートの Card で組み立てる (2026-10-27)。
+    // カード枠の正規の持ち主 (状態表示) はテンプレートの Card で組み立てる (2026-10-27)。ChartPanel は 2026-10-28 に @stats47/components へ移した。
     allow: (relativePath) =>
-      relativePath === 'src/components/charts/ChartPanel.tsx' ||
       relativePath === 'src/components/charts/ChartState.tsx',
   },
   {
@@ -555,7 +554,8 @@ for (const match of globalsText.matchAll(cssBorderRadiusPattern)) {
 // ArticleCard は本文カードの正典。外枠を独自クラスで書かず、通常カードと同じ
 // CARD_SURFACE_CLASS (角丸・線色をトークンで決める単一定義) を使うことを要求する。
 // クラス名の完全一致では判定しない (意図が同じでも 1 語足すだけで落ちるため)。
-const surfacePath = 'src/components/surface/SurfaceCard.tsx';
+// 2026-10-28 にパネル部品は @stats47/components (packages/components/src/surface/) へ移した
+const surfacePath = '../../packages/components/src/surface/surface.tsx';
 const surfaceText = readFileSync(path.join(cwd, surfacePath), 'utf8');
 const articleCardBody = surfaceText.match(
   /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/
@@ -753,9 +753,8 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
 //   (補足は CardFooter の帯にせず、ChartPanel の footer でパネルの中の 1 行にする)
 const PANEL_COMPONENTS = ['ChartPanel', 'SurfaceCard', 'SurfaceSection', 'SectionCard', 'RailCard', 'ArticleCard'];
 const PANEL_IMPLEMENTATION_FILES = new Set([
-  'src/components/charts/ChartPanel.tsx',
+  // ChartPanel・SurfaceCard 系は 2026-10-28 に @stats47/components へ移した (packages は走査しない)
   'src/components/charts/ChartState.tsx',
-  'src/components/surface/SurfaceCard.tsx',
 ]);
 const PANEL_CLASS_PROPS = /\b(className|contentClassName|bodyClassName)=(?:"([^"]*)"|\{\s*["'`]([^"'`]*)["'`]\s*\})/g;
 const PANEL_TEXT_SIZE = /(?<![\w-])(?:[\w-]+:)*(?:text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(?:\/[\w.]+)?|leading-[\w.[\]-]+)!?(?![\w-])/;
@@ -880,7 +879,7 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
   }
   // 数値タイルの値 (大きな等幅数字) は StatTile の書式 (STAT_VALUE_CLASS = 24px / 32px・600) だけで描く。
   // 2026-10-28 までは部品ごとに text-lg〜text-3xl・太さ 600〜700 が混在していた。
-  if (file !== 'src/components/surface/StatTile.tsx') {
+  {
     for (const match of text.matchAll(/className="([^"]*)"/g)) {
       const tokens = match[1].split(/\s+/);
       if (!tokens.includes('tabular-nums')) continue;

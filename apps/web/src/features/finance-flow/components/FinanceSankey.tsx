@@ -1,8 +1,9 @@
 "use client";
 
+import { ChartPanel } from "@stats47/components";
+
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { FINANCE_CHART_COLORS } from "@/components/charts/ChartPalette";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { useFlowData } from "@/components/charts/useFlowData";

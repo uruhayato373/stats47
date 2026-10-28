@@ -18,12 +18,12 @@ import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 
 import dynamic from "next/dynamic";
 
+import { ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { Map as MapIcon } from "lucide-react";
 
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { AreaType } from "@/features/area";

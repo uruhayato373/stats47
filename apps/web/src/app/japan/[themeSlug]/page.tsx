@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { ChartPanel } from '@stats47/components';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildEstatTableUrl } from '@stats47/data-configs/data-source';
@@ -11,7 +12,6 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { readJapanSeries } from '@stats47/stats-r2/readers';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { StatisticsScopeNav } from '@/components/navigation';

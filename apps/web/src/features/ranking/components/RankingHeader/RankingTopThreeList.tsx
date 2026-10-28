@@ -1,9 +1,9 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import { formatUnitForDisplay, parseUnit } from '@stats47/data-configs/unit';
 import { Trophy } from 'lucide-react';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ValueDotPlot } from '@/components/charts/ValueDotPlot';
 
 import {

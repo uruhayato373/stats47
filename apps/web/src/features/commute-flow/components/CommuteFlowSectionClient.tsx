@@ -1,5 +1,6 @@
 "use client";
 
+import { ChartPanel } from "@stats47/components";
 import {
   Select,
   SelectContent,
@@ -9,7 +10,6 @@ import {
 } from "@stats47/components/atoms/ui/select";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 

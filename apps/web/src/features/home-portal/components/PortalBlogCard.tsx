@@ -3,13 +3,7 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import {
-  PORTAL_CARD_ASPECT_CLASS,
-  PORTAL_CARD_PADDING_CLASS,
-  PORTAL_CARD_TITLE_CLASS,
-  SurfaceLinkCard,
-} from "@/components/surface";
-import { PORTAL_CARD_CELL_CLASS } from "@/components/surface/SurfaceCard";
+import { PORTAL_CARD_ASPECT_CLASS, PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from "@/components/surface";
 
 import { trackNavClick } from "@/lib/analytics/events";
 import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";

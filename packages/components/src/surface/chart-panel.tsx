@@ -2,7 +2,7 @@
 
 import { type ReactNode, useId } from 'react';
 
-import { cn } from '@stats47/components';
+import { cn } from '../lib/cn';
 import {
   Card,
   CardAction,
@@ -10,7 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@stats47/components/atoms/ui/card';
+} from '../atoms/ui/card';
 
 export interface ChartPanelProps {
   /** 固定キーがあるグラフでは、SSRとクライアントで同じ見出しIDを使う。 */

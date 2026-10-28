@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -18,7 +19,6 @@ import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 

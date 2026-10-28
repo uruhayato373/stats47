@@ -5,12 +5,12 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ChartEmptyState } from '@/components/charts/ChartState';
 import { RankingBarList } from '@/components/charts/RankingBarList';
 

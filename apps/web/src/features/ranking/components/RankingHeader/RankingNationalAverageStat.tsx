@@ -1,10 +1,9 @@
 "use client";
 
-import { cn } from "@stats47/components";
+import { cn, ChartPanel } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { TrendingUp } from "lucide-react";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
 import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from "@/components/surface";
 

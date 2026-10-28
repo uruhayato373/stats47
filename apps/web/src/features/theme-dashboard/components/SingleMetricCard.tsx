@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
 import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from '@/components/surface';
 

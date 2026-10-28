@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
@@ -26,7 +27,6 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { metricDisplayName } from "@stats47/ranking";
 
 import Link from '@/components/atoms/SiteLink';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SurfaceCard } from '@/components/surface';
 

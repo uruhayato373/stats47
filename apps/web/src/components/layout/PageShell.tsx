@@ -123,4 +123,5 @@ export function PageShell({
   );
 }
 
-export { PANEL_GRID_CLASS, PageSections, PanelGrid, ShellColumn } from './PanelGrid';
+export { PANEL_GRID_CLASS, PageSections, PanelGrid } from '@stats47/components';
+export { ShellColumn } from './PanelGrid';

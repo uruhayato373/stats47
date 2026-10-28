@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Select,
   SelectContent,
@@ -21,7 +22,6 @@ import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 

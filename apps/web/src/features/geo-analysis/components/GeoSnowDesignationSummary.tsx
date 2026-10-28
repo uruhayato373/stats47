@@ -1,6 +1,7 @@
 'use client';
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -17,7 +18,6 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import type { GeoAnalysisSnapshot } from '@stats47/gis';
 export function snowNationalValues(

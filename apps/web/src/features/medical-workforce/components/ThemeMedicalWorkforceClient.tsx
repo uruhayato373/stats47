@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -13,7 +14,6 @@ import {
 import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { PanelGrid } from '@/components/layout/PageShell';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';

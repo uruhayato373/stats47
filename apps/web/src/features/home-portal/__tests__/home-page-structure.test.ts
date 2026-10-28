@@ -26,8 +26,9 @@ const FEATURED_RANKINGS = readFileSync(
   ),
   'utf8'
 );
+// ポータルカードの比率・セルのクラスは @stats47/components のパネル部品が持つ (2026-10-28 に apps/web から移した)
 const SURFACE_CARD = readFileSync(
-  path.resolve(process.cwd(), 'src/components/surface/SurfaceCard.tsx'),
+  path.resolve(process.cwd(), '../../packages/components/src/surface/surface.tsx'),
   'utf8'
 );
 const CARD_CAROUSEL = readFileSync(

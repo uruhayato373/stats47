@@ -2,22 +2,9 @@
 
 import React, { useState } from "react";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@stats47/components";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, ChartPanel } from "@stats47/components";
 
 import { ChartFooter, type ChartFooterLink } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { StatsTableRowData } from "../../../types/visualization";

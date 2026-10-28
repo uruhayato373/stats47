@@ -1,8 +1,8 @@
+import { ChartPanel } from "@stats47/components";
 import { resolveAttribution } from "@stats47/data-configs";
 import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { LineChartClient, toLineChartData } from "@/components/stat-charts";
 import { fetchEstatData, toKpiCardData } from "@/components/stat-charts/server";
 import { STAT_VALUE_CLASS } from "@/components/surface";

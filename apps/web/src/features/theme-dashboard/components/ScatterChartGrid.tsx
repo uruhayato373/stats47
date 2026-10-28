@@ -2,7 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartPanel } from "@stats47/components";
+
 import { ChartLoading } from "@/components/charts/ChartState";
 
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";

@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -15,7 +16,6 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { ChartLoadingCard } from '@/components/charts/ChartState';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 

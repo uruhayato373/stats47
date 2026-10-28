@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 
-import { cn } from "@stats47/components";
+import { cn, ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
     Tabs,
@@ -11,7 +11,6 @@ import {
 } from "@stats47/components/atoms/ui/tabs";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { AreaType } from "@/features/area";
 

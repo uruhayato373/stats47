@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 
-import { cn } from "@stats47/components";
+import { cn } from "../lib/cn";
 
-import { SurfaceCard } from "./SurfaceCard";
+import { SurfaceCard } from "./surface";
 
 /*
  * 数値タイル (部品の種類「数値タイル」)。見本 (テンプレートの KPI カード。dashboards/modern/total-orders.tsx) と同じく、
@@ -10,7 +10,7 @@ import { SurfaceCard } from "./SurfaceCard";
  * 仕様: docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「数値タイル」。
  *
  * パネルの中で大きな数値を 1 つ見せる所 (テーマの指標カード・ランキング詳細の平均など) も、値の書式は
- * 下の定数を使う。ページの側で text-xl / text-3xl などの大きさを書かない (`design-system:check` の stat-value-uses-shared-class)。
+ * 下の定数を使う (@stats47/components から import)。ページの側で text-xl / text-3xl などの大きさを書かない (`design-system:check` の stat-value-uses-shared-class)。
  */
 
 /** 指標の名前 */

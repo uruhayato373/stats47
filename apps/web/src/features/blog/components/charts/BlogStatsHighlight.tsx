@@ -2,11 +2,11 @@
 
 import { useMemo } from "react";
 
+import { ChartPanel } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { TrendingUp, BarChart3 } from "lucide-react";
 
 import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
-import { ChartPanel } from "@/components/charts/ChartPanel";
 import { PanelGrid } from "@/components/layout/PageShell";
 import { SurfaceCard } from "@/components/surface";
 

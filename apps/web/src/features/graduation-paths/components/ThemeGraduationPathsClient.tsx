@@ -1,5 +1,6 @@
 'use client';
 
+import { ChartPanel } from '@stats47/components';
 import {
   Table,
   TableBody,
@@ -13,7 +14,6 @@ import {
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 

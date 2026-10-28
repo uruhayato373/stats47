@@ -1,7 +1,7 @@
+import { ChartPanel } from '@stats47/components';
 import { AIRPORT_TRAFFIC_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
-import { ChartPanel } from '@/components/charts/ChartPanel';
 
 import { parseAirportTrafficSnapshot } from '../lib/airport-traffic-snapshot';
 

@@ -4,12 +4,12 @@ import { useMemo, type ReactNode } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { metricDisplayName } from "@stats47/ranking";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { ChartPanel } from '@/components/charts/ChartPanel';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
