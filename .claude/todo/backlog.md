@@ -424,6 +424,14 @@ updated: 2026-10-19
 - **次**: 2 指標の SSDS 項目名を e-Stat のメタで確かめ、title・unit を「人口10万人当たり」の形に直し、人口・面積の換算を外す。同じ形の SSDS `#` 項目を `validate:config` で検出できるか検討する。
 - **完了条件**: 2 指標の title・unit が値の意味と一致し、二重の換算を選べない。
 - **影響の追記 (2026-10-28)**: topic-queue の型B の件数×件数の除外 (`isPopulationCountMetric`・`topic-queue-spurious-core.mjs`) は unit と subtitle・title の「当たり」で判定するので、この 2 指標は率なのに件数と判定されうる。直せば除外の精度も上がる。
+- **影響の追記 2 (2026-10-28)**: 規模×規模の除外 (`size-pair`・`isSizeMetric`) も同じ判定に頼るので、同じ誤判定が及ぶ。
+
+### [METRIC-HOUSEHOLD-ASSET-SUBTITLE-01] 家計の金融資産と農家総所得の指標に「1世帯当たり」の印が無く、総額と判定される
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:データ]
+
+- **証拠 (2026-10-28)**: 金融負債残高・預貯金・有価証券保有額 (statsDataId `0000010112`) と農家総所得は unit が素の「千円」で、title にも subtitle にも世帯あたりの印が無い。topic-queue の型B の規模×規模の除外 (`isMoneyTotalMetric`・`topic-queue-spurious-core.mjs`) はこれを総額と判定する。今のキューには出ていないが、型B の候補になると誤って外れる。読者にも世帯あたりか総額かが分からない。
+- **次**: e-Stat のメタで各指標の値が 1 世帯当たりか (農家総所得は 1 農家当たりか) を確かめ、metric config の subtitle に分母を書く。単位を変えるときは `.claude/rules/unit-semantics-standards.md` に従う。
+- **完了条件**: 該当指標の subtitle が分母を持ち、`isMoneyTotalMetric` が総額と判定しないことをテストで固定している。
 
 ### [BLOG-TOPIC-PAIR-SCALE-01] 型B の題材に残る「規模×規模」の組 (件数×金額の総額) を外す
 タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs] [起票:2026-10-28] [領域:サイト]
