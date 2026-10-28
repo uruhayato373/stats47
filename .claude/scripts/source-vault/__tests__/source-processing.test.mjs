@@ -31,7 +31,7 @@ test('all source profiles have a restorable processing contract', async () => {
   const readiness = JSON.parse(stdout);
   assert.equal(readiness.ready, true);
   assert.equal(readiness.contractOnly, true);
-  assert.equal(readiness.profiles.length, 12);
+  assert.equal(readiness.profiles.length, 15);
   assert.deepEqual(
     readiness.profiles.map((profile) => profile.profile).sort(),
     [
@@ -39,6 +39,7 @@ test('all source profiles have a restorable processing contract', async () => {
       'average-income-ranking',
       'capital-city-guide',
       'claude-skills-guide-2026',
+      'color-japan-map',
       'gis-business-guide',
       'japan-zue',
       'kakei-marketing-2015',
@@ -46,6 +47,8 @@ test('all source profiles have a restorable processing contract', async () => {
       'prefecture-databook-2021',
       'prefecture-deviation',
       'prefecture-ranking-consumption',
+      'tokyo-kakusa-data',
+      'visual-japan-data',
       'yabai-kenmin-ranking',
     ]
   );

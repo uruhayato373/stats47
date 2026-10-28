@@ -23,7 +23,7 @@ test('all reference inventories have 100% resolution coverage', async () => {
     { cwd: PROJECT_ROOT }
   );
   const checked = JSON.parse(stdout);
-  assert.equal(checked.length, 12);
+  assert.equal(checked.length, 15);
   // S4 台帳に到達した profile は coverage 100%、未到達 (S0〜S3) は pending として列挙される
   const built = checked.filter((profile) => profile.inventory !== 'pending');
   const pending = checked.filter((profile) => profile.inventory === 'pending');
@@ -31,7 +31,10 @@ test('all reference inventories have 100% resolution coverage', async () => {
     built.map((profile) => profile.profile).sort(),
     ['amusement-shop-density', 'average-income-ranking', 'capital-city-guide', 'claude-skills-guide-2026', 'gis-business-guide', 'japan-zue', 'kakei-marketing-2015', 'money-health-ranking', 'prefecture-databook-2021', 'prefecture-deviation', 'prefecture-ranking-consumption', 'yabai-kenmin-ranking']
   );
-  assert.equal(pending.length, 0);
+  assert.deepEqual(
+    pending.map((profile) => profile.profile).sort(),
+    ['color-japan-map', 'tokyo-kakusa-data', 'visual-japan-data']
+  );
   for (const profile of built) {
     assert.equal(profile.valid, true);
     assert.equal(profile.coverage, 1);

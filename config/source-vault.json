@@ -485,6 +485,153 @@
           "contentCrop": "2400x2206+0+210"
         }
       }
+    },
+    "visual-japan-data": {
+      "sourceKey": "visual-japan-data",
+      "edition": "2023",
+      "revision": 2,
+      "sourceRootName": "ビジュアルでわかる日本 データに隠された真実",
+      "driveSourceFolderName": "ビジュアルでわかる日本 データに隠された真実",
+      "driveEditionFolderName": "2023年版",
+      "manifestPath": "data/source-inventory/visual-japan-data/2023/source-bundle-manifest.json",
+      "bibliography": {
+        "title": "ビジュアルでわかる日本 データに隠された真実",
+        "author": "にゃんこそば 著、宮路秀作 監修",
+        "publisher": "SBクリエイティブ",
+        "published": "2023-12-19",
+        "isbn": "978-4-8156-1520-8",
+        "verifiedAt": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1652784"
+      },
+      "note": "表紙と奥付ページで書誌確認 (2026-10-28。印刷物 2023-12-19 初版第1刷、電子版 2024-01-01)。紀伊國屋書店の書誌でISBN確認。Kindle画面スキャン330p (800x1030px)。p324-330 は Kindle の読了画面で本文なし",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "theme",
+          "area",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 216,
+          "format": "jpg",
+          "quality": 85,
+          "contentCrop": "2400x3010+0+80"
+        }
+      }
+    },
+    "color-japan-map": {
+      "sourceKey": "color-japan-map",
+      "edition": "2022",
+      "revision": 2,
+      "sourceRootName": "統計から読み解く色分け日本地図",
+      "driveSourceFolderName": "統計から読み解く色分け日本地図",
+      "driveEditionFolderName": "2022年版",
+      "manifestPath": "data/source-inventory/color-japan-map/2022/source-bundle-manifest.json",
+      "bibliography": {
+        "title": "統計から読み解く色分け日本地図",
+        "author": "重永瞬",
+        "publisher": "彩図社",
+        "published": "2022-02-21",
+        "isbn": "978-4-8013-0583-0",
+        "verifiedAt": "https://honto.jp/isbn/9784801305830"
+      },
+      "note": "表紙と奥付ページで書誌確認 (2026-10-28。2022-02-21 第一刷)。honto の書誌でISBN確認。Kindle画面スキャン90p (800x1030px)。p83-90 は Kindle の読了画面で本文なし",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "theme",
+          "area",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 216,
+          "format": "jpg",
+          "quality": 85,
+          "contentCrop": "2400x3010+0+80"
+        }
+      }
+    },
+    "tokyo-kakusa-data": {
+      "sourceKey": "tokyo-kakusa-data",
+      "edition": "2025",
+      "revision": 2,
+      "sourceRootName": "データでわかる東京格差",
+      "driveSourceFolderName": "データでわかる東京格差",
+      "driveEditionFolderName": "2025年版",
+      "manifestPath": "data/source-inventory/tokyo-kakusa-data/2025/source-bundle-manifest.json",
+      "bibliography": {
+        "title": "データでわかる東京格差 数値の「可視化」で真実をあぶりだす",
+        "author": "にゃんこそば",
+        "publisher": "SBクリエイティブ",
+        "published": "2025-10-15",
+        "isbn": "978-4-8156-3123-9",
+        "verifiedAt": "https://www.maruzenjunkudo.co.jp/products/9784815631239"
+      },
+      "note": "表紙と奥付ページで書誌確認 (2026-10-28。印刷物 2025-10-15 発行、電子版 2025-11-01)。丸善ジュンク堂の書誌でISBN確認。Kindle画面スキャン300p (800x1030px)。p300 は Kindle の読了画面で本文なし。visual-japan-data と同著者",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": [
+          "jpn",
+          "eng"
+        ],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": [
+          "transcript",
+          "page-image",
+          "crop"
+        ],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "theme",
+          "area",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ],
+        "pageImage": {
+          "dpi": 216,
+          "format": "jpg",
+          "quality": 85,
+          "contentCrop": "2400x3010+0+80"
+        }
+      }
     }
   }
 }
