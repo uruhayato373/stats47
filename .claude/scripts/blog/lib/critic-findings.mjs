@@ -11,10 +11,31 @@
  */
 
 import { createHash } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 
 const FINDING_LINE = /^\s*[-*]\s*\*{0,2}\[(BLOCK|BLOCKER|MAJOR|MINOR)\](?:\[型[:：]\s*([a-z-]+)\])?\*{0,2}\s*(.+)$/i;
 const SUMMARY_MAX = 120;
 const SERIOUS = new Set(["BLOCK", "MAJOR"]);
+/**
+ * 台帳は日付ごとのファイル `<blog.operations>/critic-findings/<YYYY-MM-DD>.jsonl` に分ける (2026-10-29)。
+ * 1 ファイルのままだと 100 本規模の執筆で 1 日 1MB を超え、リポジトリの容量検査に止められた。
+ * 集計が数えるのは BLOCK・MAJOR だけなので、MINOR は台帳に残さない。
+ */
+export const LEDGER_DIRNAME = "critic-findings";
+export const ledgerFileFor = (blogDir, date) => path.join(blogDir, LEDGER_DIRNAME, `${date}.jsonl`);
+
+/** 台帳の全行 (日付ごとのファイルをすべて読む)。 */
+export function readLedgerRows(blogDir) {
+  const dir = path.join(blogDir, LEDGER_DIRNAME);
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((name) => name.endsWith(".jsonl"))
+    .sort()
+    .flatMap((name) => fs.readFileSync(path.join(dir, name), "utf8").split("\n").filter(Boolean).map((line) => JSON.parse(line)));
+}
+
 /** 型を決められない指摘。格上げの対象にしない。 */
 const UNPROMOTABLE = new Set(["unclassified", "other"]);
 
@@ -79,12 +100,14 @@ export function reviewProblems(review) {
 
 /** 台帳の 1 行。同じ review.md を何度記録しても同じ key になる (重複を書かない)。 */
 export function toLedgerRows(review) {
-  return review.findings.map((finding, index) => {
+  // index は MINOR を含む元の並びのまま key に使う (既に記録した行の key を変えない)
+  return review.findings.flatMap((finding, index) => {
+    if (!SERIOUS.has(finding.severity)) return [];
     const key = createHash("sha1")
       .update([review.slug, review.date, review.mode, index, finding.severity, finding.summary].join("|"))
       .digest("hex")
       .slice(0, 16);
-    return { key, date: review.date, slug: review.slug, mode: review.mode, verdict: review.verdict, ...finding };
+    return [{ key, date: review.date, slug: review.slug, mode: review.mode, verdict: review.verdict, ...finding }];
   });
 }
 

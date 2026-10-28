@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * record-critic-findings.mjs — review.md の指摘を台帳 (blog.operations の critic-findings.jsonl) に追記する。
+ * record-critic-findings.mjs — review.md の BLOCK・MAJOR の指摘を日付ごとの台帳 (blog.operations の critic-findings/<date>.jsonl) に追記する。
  *
  * 呼ぶ場所:
  *   - blog-critic が review.md を書いた直後 (REVISE の指摘は再審で上書きされるので、その前に残す)
@@ -17,10 +17,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import { parseReview, reviewProblems, toLedgerRows } from "./lib/critic-findings.mjs";
+import { ledgerFileFor, parseReview, readLedgerRows, reviewProblems, toLedgerRows } from "./lib/critic-findings.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const LEDGER = path.join(PROJECT_ROOT, datasetDir("blog.operations"), "critic-findings.jsonl");
+const BLOG_DIR = path.join(PROJECT_ROOT, datasetDir("blog.operations"));
 const TYPES = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/config/critic-finding-types.json"), "utf8"));
 
 const targets = process.argv.slice(2);
@@ -29,15 +29,7 @@ if (targets.length === 0) {
   process.exit(1);
 }
 
-const existing = new Set(
-  fs.existsSync(LEDGER)
-    ? fs
-        .readFileSync(LEDGER, "utf8")
-        .split("\n")
-        .filter(Boolean)
-        .map((line) => JSON.parse(line).key)
-    : [],
-);
+const existing = new Set(readLedgerRows(BLOG_DIR).map((row) => row.key));
 
 const added = [];
 const failures = [];
@@ -63,9 +55,12 @@ for (const target of targets) {
   }
 }
 
-if (added.length > 0) {
-  fs.mkdirSync(path.dirname(LEDGER), { recursive: true });
-  fs.appendFileSync(LEDGER, added.map((row) => JSON.stringify(row)).join("\n") + "\n");
+const byDate = new Map();
+for (const row of added) byDate.set(row.date, [...(byDate.get(row.date) ?? []), row]);
+for (const [date, rows] of byDate) {
+  const file = ledgerFileFor(BLOG_DIR, date);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.appendFileSync(file, rows.map((row) => JSON.stringify(row)).join("\n") + "\n");
 }
 const unclassified = added.filter((row) => row.type === "unclassified").length;
 console.log(

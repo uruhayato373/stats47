@@ -105,7 +105,7 @@ REVISE の指摘は執筆側 (headless の author か article-writer) が修正�
 ### critic の指摘の型と格上げ
 
 critic の指摘には型 (`[型:<key>]`、語彙は `.claude/config/critic-finding-types.json`) を付け、review.md を書いた直後に
-`record-critic-findings.mjs` で台帳 `data/blog/critic-findings.jsonl` に残す (公開時の outbox 掃除の直前にも CI が記録する)。
+`record-critic-findings.mjs` で日付ごとの台帳 `data/blog/critic-findings/<date>.jsonl` に BLOCK・MAJOR を残す (2026-10-29 に 1 ファイルから分けた。MINOR は集計に使わないので残さない) (公開時の outbox 掃除の直前にも CI が記録する)。
 headless の経路は語彙を critic の prompt に渡し、`write-blog-headless.ts` が review.md を書くたびに記録する。
 日次の `critic-findings-digest.mjs` が型ごとに数え、窓 (既定 56 日) の中で同じ型の BLOCK/MAJOR が 3 本以上の記事に
 出たら、backlog に `CRITIC-PATTERN-<型>` のカードを起票する。カードは「機械で判定できるなら gate、できなければ

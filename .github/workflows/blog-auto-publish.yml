@@ -239,7 +239,7 @@ jobs:
               node .claude/scripts/blog/record-critic-findings.mjs "contents/blog/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
             fi
           done
-          if [ -f data/blog/critic-findings.jsonl ]; then git add data/blog/critic-findings.jsonl; fi
+          if [ -d data/blog/critic-findings ]; then git add data/blog/critic-findings; fi
           for SLUG in $PUBLISHED; do
             if [ -d "contents/blog/$SLUG" ]; then
               git rm -r -q "contents/blog/$SLUG" && REMOVED="$REMOVED $SLUG"

@@ -18,27 +18,20 @@ import { fileURLToPath } from "node:url";
 
 import { datasetDir } from "../../../config/datasets.mjs";
 import { insertCards } from "../gsc/lib/coverage-backlog.mjs";
-import { aggregateByType, planPatternCards, renderLatest } from "./lib/critic-findings.mjs";
+import { aggregateByType, LEDGER_DIRNAME, planPatternCards, readLedgerRows, renderLatest } from "./lib/critic-findings.mjs";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../lib/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const BLOG_DIR = datasetDir("blog.operations");
-const LEDGER = path.join(PROJECT_ROOT, BLOG_DIR, "critic-findings.jsonl");
 const LATEST = path.join(PROJECT_ROOT, BLOG_DIR, "critic-findings-LATEST.md");
 const BACKLOG = path.join(PROJECT_ROOT, ".claude/todo/backlog.md");
 const CONFIG = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/config/critic-finding-types.json"), "utf8"));
 const DRY_RUN = process.argv.includes("--dry-run");
 const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
 
-const rows = fs.existsSync(LEDGER)
-  ? fs
-      .readFileSync(LEDGER, "utf8")
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => JSON.parse(line))
-  : [];
+const rows = readLedgerRows(path.join(PROJECT_ROOT, BLOG_DIR));
 const settings = { today, windowDays: CONFIG.windowDays, minArticles: CONFIG.minArticles, types: CONFIG.types };
 const aggregate = aggregateByType(rows, settings);
 
@@ -47,7 +40,7 @@ const openIds = parseBacklog(backlog).map((card) => card.id).filter(Boolean);
 const cards = planPatternCards(aggregate, {
   ...settings,
   openIds,
-  ledgerPath: `${BLOG_DIR}/critic-findings.jsonl`,
+  ledgerPath: `${BLOG_DIR}/${LEDGER_DIRNAME}/`,
 });
 
 if (DRY_RUN) {

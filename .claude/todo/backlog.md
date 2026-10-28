@@ -325,6 +325,27 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CI-LIVE-R2-TEST-FLAKE-01] 単体テストと PR のビルドが公開 R2 の一時的な不調で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
+
+- **証拠 (2026-10-28 PR #1194)**: Cloudflare の公式状態ページ (cloudflarestatus.com、2026-10-28 確認) が「Network Performance Issues in Ashburn, IAD」(05:05 UTC から monitoring) を出している間、PR の CI が同じ理由で 6 回落ちた。Unit Tests / Unit Tests (packages) は `packages/product-factory` のテストが公開 R2 から値を読む前処理で `PackSnapshotFetchError ... (terminated)` (読み直し込み)、Build Check は前回の snapshot の HTTP 500・30 秒のタイムアウト、静的ページ生成が 15 分の上限に達して取り消し。日本の手元からは同時刻に 0.2 秒で読めた。前回の snapshot の 5xx は `a74b8e9ff` で読み直すようにした。
+- **次**: ① 単体テストが本番の R2 に依存している箇所を数え、固定の fixture へ置き換えるか、ネットワークを要するテストを別ジョブに分ける ② Build Check の R2 読み取りの件数と所要を測り、15 分の上限の妥当性を決める。
+- **完了条件**: 公開 R2 が不調でも単体テストが落ちない (fixture 化)、またはネットワーク依存のテストが必須チェックから外れている。
+
+### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
+
+- **証拠 (2026-10-28)**: 公開の CI は記事フォルダを丸ごと公開 R2 へ写していたので、`app/blog/<slug>/review.md` が公開 URL から読める (`livable-prefecture-composite-ranking`・`municipality-population-change-census-2025` で HTTP 200)。`380042ccd` でこれからの公開はステージから外したが、既に上がった分は残っている。指摘は台帳 `data/blog/critic-findings/` に残っているので消しても情報は失われない。
+- **次**: ① 公開 R2 の `app/blog/*/review.md` (と `research.md`・`*.prompt.txt`) を列挙する ② `r2-retention.ts` に exact key の target を足し、`r2-maintenance.yml` の dry-run → 承認 → 削除で消す (削除の唯一の入口)。
+- **完了条件**: 公開 R2 に review.md・research.md・prompt が 0 件。
+
+### [BLOG-ALLJSON-MISSING-BODY-01] 記事一覧 all.json に載っているのに R2 に本文が無い 6 記事を調べる
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-29] [領域:サイト]
+
+- **証拠 (2026-10-28)**: 本文の版の初回退避 (`archive-blog-articles.mjs --all`) で、`app/blog/all.json` の 619 記事のうち 6 記事は `app/blog/<slug>/article.md` が無かった (未公開として数えた)。一覧からリンクされていればページが空か 404 になる。
+- **次**: 6 記事の slug を出し、本番のページの応答と all.json の掲載理由 (公開フラグ・別の置き場) を確かめて、本文を戻すか一覧から外す。
+- **完了条件**: all.json の全記事に R2 の本文がある。
+
 ### [WEB-VITEST-SLOW-FILES-01] web の vitest 全件 (約 10 分) のうち遅いファイルを測り、重い import のモックなどで縮める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run --reporter=json --outputFile=/tmp/vitest-web.json] [起票:2026-10-28] [領域:サイト]
 
@@ -889,7 +910,7 @@ updated: 2026-10-19
   - 2026-10-23 automotive-industry-transformation-map: 調査切り替えの注意が、位置と影響範囲の両面で足りない。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `year` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-SOURCE] critic の指摘「出典・統計表」が 6 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
@@ -902,7 +923,7 @@ updated: 2026-10-19
   - 2026-10-23 livable-prefecture-composite-ranking: 数値の根拠が読者に追える形になっていません。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `source` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [KABEUCHI-AGENT-01] サイトと収益化をエージェント相手に「公開壁打ち」できる型を作り、1回目をやる
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:戦略]
@@ -1709,7 +1730,7 @@ updated: 2026-10-19
   - 2026-10-08 bonito-catch-zero-prefectures-gap: 新しい主題 (0トンと行なしの年ごとの入れ替わり) を示す図がありません。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `chart-text` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [YEAR-COV-AREA-AXIS-01] 年カバレッジ監査が、都道府県が分類軸にある表などの取得条件を再現できず、8 指標で値のある年を 0 と数える
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts] [起票:2026-10-08] [領域:データ]
@@ -1740,7 +1761,7 @@ updated: 2026-10-19
   - 2026-10-08 school-teacher-annual-income: タイトルの「大都市が上位とは限らない逆説」は、2023年1年分だけの並びである。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `title-promise` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-CORRELATION] critic の指摘「相関の読み方」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1751,7 +1772,7 @@ updated: 2026-10-19
   - 2026-10-07 vacant-housing-vs-aging: 「山形県はその残りの部分が最も大きく表れた県であり」(決定係数の段落) は、順位差と回帰残差を混同しています。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `correlation` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-READER-VALUE] critic の指摘「読者価値」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1763,7 +1784,7 @@ updated: 2026-10-19
   - 2026-10-08 frozen-gyoza-spending-prefecture-gap: アーキタイプ A の必須視点「なぜ上位/下位か」が、推測の一般論にとどまる。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `reader-value` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-REGION] critic の指摘「地域のくくり」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1776,7 +1797,7 @@ updated: 2026-10-19
   - 2026-10-08 katsuobushi-expenditure-ranking: 「三重・滋賀・岐阜・京都といった近畿・東海の内陸県も6〜10位」は誤り。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `region` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-CAUSAL] critic の指摘「原因の断定」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1789,7 +1810,7 @@ updated: 2026-10-19
   - 2026-10-08 soba-udon-dining-consumption-expenditure-prefecture-gap: 「なぜ香川がこれほど突出しているのか」の節の説明に根拠が無い。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `causal` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-VALUE] critic の指摘「数値・順位の食い違い」が 6 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1802,7 +1823,7 @@ updated: 2026-10-19
   - 2026-10-08 katsuobushi-expenditure-ranking: 最下位グループの「沖縄の4分の1以下の水準」は、下位5県のうち鳥取(566円=23.5%)にしか当てはまらない。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `value` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [CRITIC-PATTERN-DEFINITION] critic の指摘「定義の取り違え」が 9 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -1815,7 +1836,7 @@ updated: 2026-10-19
   - 2026-10-07 sixth-industry-direct-sales: 順位相関の説明で、産出額の暦年 2003 と農家総所得の 2003 年度を「同じ 2003 年」と呼んでいます。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `definition` に `promotedAt: "<入れた日>"` を書いた。
-- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings.jsonl`)
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
 
 ### [NOTE-INDEX-DRIFT-01] note 記事台帳の題名が公開中の題名と食い違う記事を揃える
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run note:catalog:check] [起票:2026-10-08] [領域:商品]

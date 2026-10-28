@@ -23,6 +23,8 @@
  *   node .claude/scripts/blog/build-topic-queue.mjs                       # 構築/更新
  *   node .claude/scripts/blog/build-topic-queue.mjs --week 2026-W26       # GSC 週指定
  *   node .claude/scripts/blog/build-topic-queue.mjs --corr-limit 60       # B型の per-key 相関 fetch 上限
+ *   node .claude/scripts/blog/build-topic-queue.mjs --min-gap-imp 20      # gsc-gap 候補の imp 下限 (既定 50)
+ *   node .claude/scripts/blog/build-topic-queue.mjs --max-pending A=120,D2=80  # 型ごとの pending 上限を上書き
  *   node .claude/scripts/blog/build-topic-queue.mjs --next 5              # pending 上位 N を JSONL で
  *   node .claude/scripts/blog/build-topic-queue.mjs --mark-in-progress <topicKey>
  *   node .claude/scripts/blog/build-topic-queue.mjs --mark-done <topicKey> --slug <slug>
@@ -60,7 +62,8 @@ const GEO_CONTENT_PIPELINE_PATH = path.join(
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 const MUST_WRITE_IMP = 300; // 週 imp がこれ以上ある未記事化テーマは must-write
-const MIN_GAP_IMP = 50; // gsc-gap 候補の下限 imp
+// gsc-gap 候補の下限 imp。題材を広げるときは --min-gap-imp で下げる (需要の小さい題材も拾う)
+const MIN_GAP_IMP = parseInt(getArg("--min-gap-imp", "50"), 10);
 // 0.6 → 0.65 (2026-07-18 TOPIC-QUEUE-SPURIOUS-FILTER-01): |r| 0.60-0.65 帯は 47 点標本では
 // 機序の書けないノイズ相関が多く blog-critic REVISE の温床だった (例 豚肉消費量×労災給付 r=-0.62)
 const CORR_MIN_R = 0.65;
@@ -69,6 +72,12 @@ const COMPETITION_GAP = { F: 1.0, G: 1.0, H: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
 // pending はスコア上位のみ保持 (肥大防止。in-progress/done は無条件保持)。
 // 型別上限で B 一色を防ぎ、型ポートフォリオ (blog-seo-strategist.md §戦略コンテキスト) に沿った候補ミックスを保つ
 const MAX_PENDING_BY_ARCHETYPE = { B: 60, A: 40, D2: 40, F: 15, G: 15, H: 10 };
+// 一度に多く書くとき (wave) は --max-pending A=120,D2=80 で型ごとの上限を上書きする
+for (const pair of String(getArg("--max-pending", "")).split(",").filter(Boolean)) {
+  const [type, n] = pair.split("=");
+  if (!(type in MAX_PENDING_BY_ARCHETYPE) || !/^\d+$/.test(n ?? "")) throw new Error(`--max-pending の形が違う: ${pair} (例 A=120,D2=80)`);
+  MAX_PENDING_BY_ARCHETYPE[type] = Number(n);
+}
 const MAX_PAIRS_PER_BASE = 2; // B型: 同一 base metric からの相関ペアは上位 2 件まで (near-duplicate 防止)
 // 倫理的にセンシティブな指標を B型「意外な関係」クリックベイトの軸にしない (ブランド毀損防止)。
 // 中絶・自殺・死因等を軽い相関ネタにするのは不適切。metric key の部分一致で B候補から除外する。

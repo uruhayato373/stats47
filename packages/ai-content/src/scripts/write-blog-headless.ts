@@ -38,6 +38,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { REGIONS } from "@stats47/area";
+
 import { isClaudeCliAlias, type ClaudeCliAlias } from "../services/claude-cli-output";
 import { callClaudeCli } from "../services/claude-cli-runner";
 import { GeminiTextError, generateContentText, resolveTextModel } from "../services/gemini-text-client";
@@ -51,7 +53,7 @@ const HISTORY = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/headle
 const HISTORY_HEADER =
   "run_id,date,slug,author,critic,effort,author_calls,critic_calls,input_tokens,output_tokens,cost_usd,gate,verdict,seconds\n";
 
-/** critic の指摘の型。台帳 (critic-findings.jsonl) が型ごとに数えて格上げに使う */
+/** critic の指摘の型。台帳 (critic-findings/<date>.jsonl) が型ごとに数えて格上げに使う */
 const FINDING_TYPES = Object.entries(
   (
     JSON.parse(
@@ -175,12 +177,35 @@ function withResearch(prompt: string, dir: string): string {
   ].join("\n");
 }
 
+/**
+ * 地方のくくりと計算した数値の決まり。critic の差し戻しの大半が「新潟を東北に入れる」などの地方区分の誤りと、
+ * 本文で計算した割合・県の数の誤りだった (2026-10-28 の 33 本で blocker の 18/21)。地方区分は @stats47/area の
+ * 7 区分を正とし、県の所属を表で渡す。
+ */
+function buildRegionGuide(): string {
+  const names = new Map(
+    (JSON.parse(
+      fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+    ) as { prefCode: string; prefName: string }[]).map((p) => [p.prefCode, p.prefName]),
+  );
+  return [
+    "# 地方のくくり (この表だけを使います)",
+    ...REGIONS.map((r) => `- ${r.regionName}: ${r.prefectures.map((c) => names.get(c) ?? c).join("、")}`),
+    "県を地方でまとめるときは上の 7 区分だけを使います。北陸・山陰・甲信越・東海などの小区分や「日本海側」のような言い換えで県をくくりません。",
+    "「いずれも◯◯」「◯県が◯◯」とまとめる前に、挙げた県の数と所属を上の表で確かめます。",
+    "",
+    "# 本文で計算する数値",
+    "実データに無い差・割合・平均・県の数を新しく計算して書きません。比べるときは実データの値と順位を並べます。",
+    "倍率を書くのは実データにある最大と最小の比だけにします。",
+  ].join("\n");
+}
+
 function buildAuthorPrompt(
   basePrompt: string,
   blockers: string[],
   revision: { article: string; findings: string[] } | null,
 ): string {
-  const parts = [basePrompt];
+  const parts = [basePrompt, "", buildRegionGuide()];
   if (revision) {
     parts.push(
       "",

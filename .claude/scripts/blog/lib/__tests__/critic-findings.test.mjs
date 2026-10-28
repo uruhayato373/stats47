@@ -16,7 +16,9 @@ import {
   aggregateByType,
   cardIdForType,
   parseReview,
+  ledgerFileFor,
   planPatternCards,
+  readLedgerRows,
   reviewProblems,
   toLedgerRows,
 } from "../critic-findings.mjs";
@@ -131,4 +133,24 @@ test("record-critic-findings は REVISE で指摘 0 件の review.md を exit 1 
   assert.equal(result.status, 1, result.stdout + result.stderr);
   assert.match(result.stderr, /REVISE なのに指摘を 1 件も読めない/);
   assert.match(result.stdout, /追記 0 件/);
+});
+
+test("台帳には集計が使う BLOCK・MAJOR だけを残し、MINOR は残さない", () => {
+  const parsed = parseReview(
+    review("a", "2026-10-29", ["- [BLOCK][型:region] 地方区分が違う。", "- [minor][型:region] 言い回し。", "- [MAJOR][型:region] 割合の計算が違う。"]),
+    { knownTypes: Object.keys(TYPES) },
+  );
+  assert.deepEqual(toLedgerRows(parsed).map((row) => row.severity), ["BLOCK", "MAJOR"]);
+});
+
+test("台帳は日付ごとのファイルに分かれ、readLedgerRows が全部を読む", () => {
+  const blogDir = fs.mkdtempSync(path.join(os.tmpdir(), "critic-ledger-"));
+  for (const [date, slug] of [["2026-10-28", "x"], ["2026-10-29", "y"]]) {
+    const file = ledgerFileFor(blogDir, date);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, JSON.stringify({ key: slug, date, slug, severity: "BLOCK" }) + "\n");
+  }
+  assert.deepEqual(readLedgerRows(blogDir).map((row) => row.slug), ["x", "y"]);
+  assert.equal(path.basename(ledgerFileFor(blogDir, "2026-10-29")), "2026-10-29.jsonl");
+  fs.rmSync(blogDir, { recursive: true, force: true });
 });
