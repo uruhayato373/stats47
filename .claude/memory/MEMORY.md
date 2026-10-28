@@ -165,3 +165,4 @@
 - [batch production builds](feedback_batch_production_builds.md) — 本番ビルド (10 分) を修正ごとに回さない。dev で確かめ、本番は節目に 1 回でまとめて検査。dev が壊れていたら先に dev を直す
 - [local r2 overlay for generated snapshots](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成の R2 snapshot を localhost で見るときは .github/scripts/r2-overlay-server.mjs を使う (自作しない)。R2_S3_ENDPOINT を空に
 - [check ci job scope before launch](feedback_check_ci_job_scope_before_launch.md) — 長い CI ジョブは起動前に作り直す範囲と前回の所要時間を確かめる。data-refresh は snapshot_scope=auto (all を明示しない)。2026-10-28 に 8 指標で 75 分浪費
+- [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は vitest related で触った範囲だけ。web 全件 (約10分) は develop 直前の 1 回。CI は push 後に待たずに次へ進む

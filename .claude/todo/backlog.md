@@ -325,6 +325,14 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [WEB-VITEST-SLOW-FILES-01] web の vitest 全件 (約 10 分) のうち遅いファイルを測り、重い import のモックなどで縮める
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run --reporter=json --outputFile=/tmp/vitest-web.json] [起票:2026-10-28] [領域:サイト]
+
+- **経緯 (2026-10-28)**: web の vitest 全件 (364 ファイル・2,762 件) が Mac (メモリ 8GB・2 並列) で 1 回 10 分ほどかかり、develop へ入れる前に 4 回回して開発が止まった。オーナーから「CI とかテストとかが長すぎて開発の速度が遅くなってないだろうか」と指摘された。進め方 (開発中は `vitest run --related`、全件は develop 直前の 1 回) はメモリ `feedback_test_and_ci_wait_budget` に残した。どのファイルが時間を食っているかはまだ測っていない。
+- **次**: ① JSON reporter でファイルごとの所要時間を出し、上位 20 件と、所要の大半が import (transform) かテスト本体かを分ける ② import が重いもの (R2 reader・全指標 registry・全テーマ定義を丸ごと引くもの。例: `sitemap-index-parity.test.ts` は import だけで Windows 25 秒) はモックか対象を絞った import に替える ③ jsdom が要らないテストに `// @vitest-environment node` を付ける (pre-commit の scripts 系で 152 秒縮んだ実績がある。`local-environment.md`)。テストが確かめている内容は変えない。
+- **禁止**: テストを消して速くしない。並列数を上げてメモリ上限の再起動を起こさない (2 並列は `config/local-resources.json` の予算)。
+- **完了条件**: 同じ Mac で全件の所要が測定前より短くなり、前後の所要と上位ファイルの一覧を本カードか PR に書いてある。
+
 ### [ROOT-TSX-NODE-PIN-01] ルートの npm script が宣言していない tsx と Node の型の除去に頼っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:npm run ui-theme:lyra:test] [起票:2026-10-28] [領域:サイト]
 
