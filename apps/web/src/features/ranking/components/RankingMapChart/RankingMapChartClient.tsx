@@ -75,6 +75,10 @@ interface Props {
   cardSubtitle?: string;
   /** カード下部に表示するコンテンツ（出典等） */
   cardFooter?: React.ReactNode;
+  /** カードの枠を付けずに地図だけを描く (表と 1 枚の枠に並べるランキングページ用) */
+  bare?: boolean;
+  /** 地図の高さのクラス。既定は 500px 固定。bare で並べるときは親の高さに合わせる (h-full) */
+  mapClassName?: string;
 }
 
 /**
@@ -93,6 +97,8 @@ export function RankingMapChartClient({
   cardFooter,
   onPrefectureClick,
   headerActions,
+  bare = false,
+  mapClassName = "h-[500px]",
 }: Props) {
   const { theme } = useTheme();
   const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
@@ -166,22 +172,11 @@ export function RankingMapChartClient({
     onPrefectureClick?.(code === selectedPrefectureCode ? null : code);
   }, [onPrefectureClick, selectedPrefectureCode]);
 
-  return (
-    <ChartPanel
-      title={cardTitle}
-      icon={cardTitle ? <MapIcon /> : undefined}
-      description={cardSubtitle}
-      action={headerActions}
-      footer={cardFooter}
-      // 地図は本文の四辺とも端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と
-      // 出典の上線 (無ければカードの下端) に接する (lyra の .cn-card はレイヤーの外なので ! で上書きする)
-      className="gap-0! pb-0!"
-      contentClassName="px-0!"
-    >
-      {/* Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
-          固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。
-          地図は内側に枠を作らず、カード本文の幅いっぱいに描く (px-0!: lyra の cn-card-content の px-4 に勝たせる)。 */}
-      <div className="relative isolate z-0 w-full overflow-hidden [&_.leaflet-container]:rounded-none!">
+  const body = (
+      // Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
+      // 固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。
+      // 地図は内側に枠を作らず、カード本文の幅いっぱいに描く (px-0!: lyra の cn-card-content の px-4 に勝たせる)。
+      <div className="relative isolate z-0 h-full w-full overflow-hidden [&_.leaflet-container]:rounded-none!">
         {isMapLoading ? (
           <Skeleton className="h-[500px] w-full rounded-none" />
         ) : showFallback ? (
@@ -199,12 +194,13 @@ export function RankingMapChartClient({
             {/* SR-only summary: 地図の代替テキスト (a11y + SEO) */}
             <p className="sr-only">
               {rankingItem.title}の{areaType === "city" ? "市区町村別" : "都道府県別"}カラーマップ。
-              値が高いほど濃い色で表示されます。詳細データは下のテーブルを参照してください。
+              値が高いほど濃い色で表示されます。詳細データは表を参照してください。
             </p>
             {/* role="img" は子を装飾扱いにするため、操作できる地図 (ズーム・県クリック) を
                 包むと axe nested-interactive になる。操作可能な図は figure で名前だけ与える。 */}
             <div
               role="figure"
+              className="h-full"
               aria-label={`${rankingItem.title}の${areaType === "city" ? "市区町村" : "都道府県"}別カラーマップ`}
             >
               <LeafletChoroplethMap
@@ -218,7 +214,7 @@ export function RankingMapChartClient({
                 onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                 borderColor={getLeafletBorderColor(theme)}
-                className="h-[500px]"
+                className={mapClassName}
                 fitToPrefectures
                 valueDisplay={rankingItem.valueDisplay ?? undefined}
                 showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
@@ -228,6 +224,23 @@ export function RankingMapChartClient({
           </>
         )}
       </div>
+  );
+
+  if (bare) return body;
+
+  return (
+    <ChartPanel
+      title={cardTitle}
+      icon={cardTitle ? <MapIcon /> : undefined}
+      description={cardSubtitle}
+      action={headerActions}
+      footer={cardFooter}
+      // 地図は本文の四辺とも端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と
+      // 出典の上線 (無ければカードの下端) に接する (lyra の .cn-card はレイヤーの外なので ! で上書きする)
+      className="gap-0! pb-0!"
+      contentClassName="px-0!"
+    >
+      {body}
     </ChartPanel>
   );
 }

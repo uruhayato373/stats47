@@ -11,6 +11,8 @@ import {
 } from "@stats47/components/atoms/ui/tabs";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import type { AreaType } from "@/features/area";
 
 import { trackUiInteraction } from "@/lib/analytics/events";
@@ -24,14 +26,13 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 type VisualizationTab = "map" | "table";
 
 /**
- * lg 未満: 選んでいない側を隠す (タブ切替として振る舞う)
- * lg 以上: タブ選択に関係なく両方表示する (地図とテーブルを並べる)
+ * 狭い幅: 選んでいない側を隠す (タブ切替として振る舞う)。広い幅: タブ選択に関係なく両方表示する。
  *
  * hidden 属性ではなく Tailwind の `hidden` クラスで隠す。hidden 属性は preflight の
- * `[hidden]{display:none!important}` が lg の表示指定にレイヤー順で勝ち、PC でテーブルが消えていた。
+ * `[hidden]{display:none!important}` が表示指定にレイヤー順で勝ち、両方を並べる幅で表が消えていた。
  */
-function panelClassName(isActive: boolean) {
-    return cn("min-w-0", isActive ? "block" : "hidden lg:block");
+function panelClassName(isActive: boolean, className: string) {
+    return cn("min-w-0", isActive ? "block" : "hidden @min-[640px]/viz:block", className);
 }
 
 interface RankingVisualizationSectionProps {
@@ -44,6 +45,15 @@ interface RankingVisualizationSectionProps {
     isPending?: boolean;
 }
 
+/**
+ * 地図と表を 1 枚の枠に描く。見出し・年の選択・出典は 1 回だけ置く (2026-10-28 までは地図と表が別々の
+ * カードで、見出しと年の選択が 2 つずつ並んでいた)。
+ *
+ * 並べ方は画面の幅ではなく部品の幅 (@container/viz) で決める: 640px (地図 260px + 表 380px) 以上は
+ * 「地図 | 表」の横並び、未満 (スマホ) はタブで切り替える。サイドバーの開閉や右レールの有無に関係なく並びが決まる。
+ * Tailwind はソースの文字列からクラスを作るので、境界の @min-[640px]/viz は組み立てずに書く。
+ * 地図は表と同じ高さに伸び、表の右には線を 1 本だけ引く (カードどうしの余白を置かない)。
+ */
 export function RankingVisualizationSection({
     rankingItem,
     activeRankingItem,
@@ -54,59 +64,66 @@ export function RankingVisualizationSection({
     isPending = false,
 }: RankingVisualizationSectionProps) {
     const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
+    const unitLabel = areaType === "city" ? "市区町村" : "都道府県";
 
     return (
-        // 地図・テーブルとも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。
-        // lg 未満だけタブの切替を出し、パネルは className の切替で出し分ける。
-        <div className="w-full">
-            {/* 年の切替は地図・表それぞれの見出し行の右 (ChartPanel の action) に置く。
-                ここは lg 未満のタブだけの行 (lg 以上は両方並べるので行ごと出さない)。 */}
-            <Tabs
-                value={activeTab}
-                className="mb-4 lg:hidden"
-                onValueChange={(value) => {
-                    const next: VisualizationTab = value === "table" ? "table" : "map";
-                    setActiveTab(next);
-                    trackUiInteraction({ action: "tab_switch", target: next });
-                }}
-            >
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="map" className="flex items-center gap-1.5">
-                        <MapIcon className="size-4" aria-hidden="true" />
-                        地図
-                    </TabsTrigger>
-                    <TabsTrigger value="table" className="flex items-center gap-1.5">
-                        <TableIcon className="size-4" aria-hidden="true" />
-                        テーブル
-                    </TabsTrigger>
-                </TabsList>
-            </Tabs>
-            <div className="relative flex flex-col gap-4 xl:grid xl:grid-cols-2 xl:items-start">
+        <ChartPanel
+            title={`${unitLabel}別の地図と表`}
+            icon={<MapIcon />}
+            action={headerActions}
+            footer={cardFooter}
+            // 地図を枠の端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と出典の上線に接する
+            className="gap-0! pb-0!"
+            contentClassName="px-0!"
+        >
+            {/* 地図・表とも各 1 インスタンスに保つ (地図を 2 つマウントすると Leaflet が二重に動く)。
+                狭い幅だけタブの切替を出し、パネルは className の切替で出し分ける。 */}
+            <div className="@container/viz relative w-full">
+                <Tabs
+                    value={activeTab}
+                    className="border-b px-4 py-2 @min-[640px]/viz:hidden"
+                    onValueChange={(value) => {
+                        const next: VisualizationTab = value === "table" ? "table" : "map";
+                        setActiveTab(next);
+                        trackUiInteraction({ action: "tab_switch", target: next });
+                    }}
+                >
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="map" className="flex items-center gap-1.5">
+                            <MapIcon className="size-4" aria-hidden="true" />
+                            地図
+                        </TabsTrigger>
+                        <TabsTrigger value="table" className="flex items-center gap-1.5">
+                            <TableIcon className="size-4" aria-hidden="true" />
+                            表
+                        </TabsTrigger>
+                    </TabsList>
+                </Tabs>
                 {isPending && (
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/50 backdrop-blur-[1px]">
                         <Skeleton className="h-full w-full opacity-50" />
                     </div>
                 )}
-                <div className={panelClassName(activeTab === "map")}>
-                    <RankingMapChartClient
-                        rankingItem={activeRankingItem}
-                        rankingValues={rankingValues}
-                        areaType={areaType}
-                        cardTitle={areaType === "city" ? "市区町村別の地図" : "都道府県別の地図"}
-                        cardFooter={cardFooter}
-                        headerActions={headerActions}
-                    />
-                </div>
-                <div className={panelClassName(activeTab === "table")}>
-                    <RankingDataTable
-                        rankingValues={rankingValues}
-                        rankingItem={rankingItem}
-                        cardTitle={areaType === "city" ? "市区町村別の表" : "都道府県別の表"}
-                        cardFooter={cardFooter}
-                        headerActions={headerActions}
-                    />
+                <div className="@min-[640px]/viz:grid @min-[640px]/viz:grid-cols-[minmax(0,1fr)_380px]">
+                    {/* 狭い幅は地図だけを 420px で描く。並べる幅では表と同じ高さに伸ばす (最低 440px) */}
+                    <div className={panelClassName(activeTab === "map", "h-[420px] @min-[640px]/viz:h-auto @min-[640px]/viz:min-h-[440px]")}>
+                        <RankingMapChartClient
+                            rankingItem={activeRankingItem}
+                            rankingValues={rankingValues}
+                            areaType={areaType}
+                            bare
+                            mapClassName="h-full"
+                        />
+                    </div>
+                    <div className={panelClassName(activeTab === "table", "px-2.5 py-2 @min-[640px]/viz:border-l")}>
+                        <RankingDataTable
+                            rankingValues={rankingValues}
+                            rankingItem={rankingItem}
+                            bare
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </ChartPanel>
     );
 }
