@@ -18,6 +18,9 @@
  *   /category/<key>… CATEGORY_KEYS (17 軸) 外なら 404
  *   /areas/<code>  … 01000-47000 以外なら 410
  *   /themes/<slug> … ThemeCatalog から生成した IndicatorSet の theme key 外なら 410
+ *   /municipalities/ranking/<key>[/<県コード>]
+ *                  … 生成索引 data/content/pages/municipality-ranking.json の published 外なら 404。
+ *                    県別は MUNICIPALITY_PREFECTURE_RANKING_KEYS 外の key・47 県外のコードなら 404
  * **blog 記事の実在** と tag / survey は ② に委ねる (公開 slug 集合が repo に無く R2 参照が要るため)。
  */
 import fs from "node:fs";
@@ -62,6 +65,10 @@ const SOURCES = {
   metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
   geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
+  // KNOWN_MUNICIPALITY_RANKING_KEYS は TS で計算される集合なので、sync-content-catalog.ts が
+  // それを published に焼き込んだ生成索引を読む (鮮度は npm run content:check が検査する)
+  municipalityRankingPages: path.join(datasetDir("content.pages"), "municipality-ranking.json"),
+  municipalityPrefectureRankingKeys: "packages/data-configs/src/geo-scope/municipality-prefecture-ranking.ts",
 };
 
 /**
@@ -128,7 +135,26 @@ function loadKeySets() {
   if (!geoBlock) throw new Error('internal-link-lint: Geo analysis集合を抽出できません');
   const geoSlugs = new Set([...geoBlock[1].matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]));
   if (!geoSlugs.size) throw new Error('internal-link-lint: Geo analysis集合が空です');
+
+  const municipalityRanking = new Set(
+    JSON.parse(readRequired(SOURCES.municipalityRankingPages))
+      .pages.filter((page) => page.kind === "municipality-ranking" && page.published === true)
+      .map((page) => page.key),
+  );
+  if (!municipalityRanking.size) throw new Error("internal-link-lint: 市区町村ランキング集合が空です");
+  const muniPrefBlock = readRequired(SOURCES.municipalityPrefectureRankingKeys).match(
+    /export const MUNICIPALITY_PREFECTURE_RANKING_KEYS[^=]*= new Set\(\[([\s\S]*?)\]\)/,
+  );
+  if (!muniPrefBlock) throw new Error("internal-link-lint: MUNICIPALITY_PREFECTURE_RANKING_KEYS を抽出できません");
+  const municipalityPrefectureRanking = new Set(
+    [...muniPrefBlock[1].matchAll(/['"]([a-z0-9][a-z0-9-]*)['"]/g)].map((m) => m[1]),
+  );
+  if (!municipalityPrefectureRanking.size) {
+    throw new Error("internal-link-lint: MUNICIPALITY_PREFECTURE_RANKING_KEYS が空です");
+  }
   cache = {
+    municipalityRanking,
+    municipalityPrefectureRanking,
     geoSlugs,
     rankingKnown: known,
     rankingGone: readQuotedSet(SOURCES.goneRankingKeys),
@@ -162,7 +188,7 @@ export function __loadKeySetsForTest() {
   return loadKeySets();
 }
 
-const LINK_TYPES = ["ranking", "blog", "areas", "category", "themes", "survey", "tag", "geo"];
+const LINK_TYPES = ["ranking", "blog", "areas", "category", "themes", "survey", "tag", "geo", "municipalities"];
 const TYPE_RE = LINK_TYPES.join("|");
 /** 自サイトの絶対 URL も内部リンクとして扱う (記事によって相対 / 絶対が混在している) */
 const SITE_ORIGIN_RE = /^(?:https?:)?\/\/(?:www\.)?stats47\.jp/i;
@@ -242,6 +268,24 @@ export function lintInternalLinks(content, opts = {}) {
       if (!valid) {
         broken++;
         blockers.push(`リンク切れ: ${link.href} — Geo公開ルート契約に存在しない (${where})`);
+      }
+    } else if (type === "municipalities") {
+      // 検査するのは市区町村ランキングだけ (/municipalities・/municipalities/themes は対象外)
+      if (key !== "ranking") continue;
+      const [rankingKey, prefCode, ...rest] = link.segments.slice(2);
+      if (!rankingKey) continue;
+      checked++;
+      if (!sets.municipalityRanking.has(rankingKey)) {
+        broken++;
+        blockers.push(`リンク切れ (404): ${link.href} — 公開中の市区町村ランキング key ではない (${where})`);
+      } else if (prefCode !== undefined && !sets.municipalityPrefectureRanking.has(rankingKey)) {
+        broken++;
+        blockers.push(
+          `リンク切れ (404): ${link.href} — 県別ページの対象 (MUNICIPALITY_PREFECTURE_RANKING_KEYS) ではない (${where})`,
+        );
+      } else if (prefCode !== undefined && (!sets.areaCodes.has(prefCode) || rest.length)) {
+        broken++;
+        blockers.push(`リンク切れ (404): ${link.href} — 都道府県コード (01000-47000) の県別ページではない (${where})`);
       }
     } else if (type === "ranking") {
       if (!key) continue;
