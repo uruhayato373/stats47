@@ -130,7 +130,8 @@ describe('章に追加する横断比較', () => {
     await user.click(
       screen.getByRole('combobox', { name: '地図と一覧の指標' })
     );
-    await user.click(screen.getByRole('option', { name: '件数' }));
+    // Base UI の選択肢はポップアップを開いた後に描かれるので、出るまで待ってから押す
+    await user.click(await screen.findByRole('option', { name: '件数' }));
     expect(
       screen.getByRole('button', { name: '地図で東京都を選択: 件数' })
     ).toBeVisible();

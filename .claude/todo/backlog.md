@@ -277,13 +277,6 @@ updated: 2026-10-19
 - **次**: M1 の計測にこのイベントが要るかを仕様の持ち主 (strategy-advisor) と決め、要らないなら catalog・m1 の eventIds・テスト・仕様の記述をまとめて外す。要るなら送信口を戻す。
 - **完了条件**: `npx vitest run --root apps/admin` が通り、catalog・テスト・仕様のどれにも参照の宙ぶらりんが無い。
 
-### [SELECT-ITEM-JSDOM-01] SelectItem から lyra と重なる素のクラスを外すと jsdom のテストが選択肢を取れなくなる
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
-
-- **経緯**: 2026-10-28 に、部品の写しから lyra と同じ性質を決める素のクラスを消して CSS を減らした (96 件)。`packages/components/src/atoms/ui/select.tsx` の `SelectItem` だけは、`gap-1.5 rounded-md py-1 pl-1.5 text-sm` を外すと `ThemeComparisonSection.test.tsx` が option を取れずに落ちたため写しのまま残した。クラスの文字列がテストの結果を変える理由は分かっていない (`packages/ui-theme/README.md` の「見た目は変わらず CSS だけ減る」前提に例外がある)。
-- **次**: 外した状態でテストを 1 本だけ動かし、取れなくなる要素の DOM を出力して、テストの取得方法 (role・name) とクラスのどちらに依存しているかを確かめる。
-- **完了条件**: 原因を README の差分一覧に書き、外せるなら外して web vitest 全件が通る。
-
 ### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]
 
