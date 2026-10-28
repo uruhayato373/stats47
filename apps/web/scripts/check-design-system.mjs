@@ -491,29 +491,39 @@ if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
 // ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
 const globalsPath = 'src/app/globals.css';
 const globalsText = readFileSync(path.join(cwd, globalsPath), 'utf8');
+// 2026-10-28: カード外枠・本文部品の角丸と状態色は 3 アプリ共通の @stats47/ui-theme/theme.css に移した。両方を見る
+const themePath = '../../packages/ui-theme/theme.css';
+const tokenSources = [
+  { file: globalsPath, text: globalsText },
+  { file: themePath, text: readFileSync(path.join(cwd, themePath), 'utf8') },
+];
 const radiusPattern = /--(?:card-)?radius:\s*([^;]+);/g;
-for (const match of globalsText.matchAll(radiusPattern)) {
-  const value = match[1].trim();
-  if (/^0(?:px|rem)?$/.test(value)) continue;
-  const lineNumber = globalsText.slice(0, match.index).split(/\r?\n/).length;
-  violations.push({
-    ruleId: 'no-nonzero-radius-token',
-    message:
-      'Card radius is globally flat. Keep every --radius token at 0; circular UI must use rounded-full explicitly.',
-    file: globalsPath,
-    lineNumber,
-    line: match[0],
-  });
+for (const { file: tokenFile, text: tokenText } of tokenSources) {
+  for (const match of tokenText.matchAll(radiusPattern)) {
+    const value = match[1].trim();
+    if (/^0(?:px|rem)?$/.test(value)) continue;
+    const lineNumber = tokenText.slice(0, match.index).split(/\r?\n/).length;
+    violations.push({
+      ruleId: 'no-nonzero-radius-token',
+      message:
+        'Card radius is globally flat. Keep every --radius token at 0; circular UI must use rounded-full explicitly.',
+      file: tokenFile,
+      lineNumber,
+      line: match[0],
+    });
+  }
 }
 
 // 本文の中に置く部品の角丸 (--content-radius) は 1 か所だけで定義する。ページ種別ごと
 // (.reading-zone / .dark 等) に上書きすると、同じ部品が画面によって違う形になる。
-const contentRadiusDefinitions = [...globalsText.matchAll(/--content-radius:\s*([^;]+);/g)];
+const contentRadiusDefinitions = tokenSources.flatMap(({ text: tokenText }) => [
+  ...tokenText.matchAll(/--content-radius:\s*([^;]+);/g),
+]);
 if (contentRadiusDefinitions.length !== 1) {
   violations.push({
     ruleId: 'content-radius-single-definition',
     message: `--content-radius must be defined exactly once in :root (found ${contentRadiusDefinitions.length}).`,
-    file: globalsPath,
+    file: themePath,
     lineNumber: 1,
     line: '--content-radius',
   });

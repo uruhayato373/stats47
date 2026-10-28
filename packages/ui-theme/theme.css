@@ -1,0 +1,100 @@
+/*
+ * 共有部品 (@stats47/components) の色・角丸の Tailwind テーマと、テンプレートに無い stats47 の値。
+ * 公開サイト (apps/web)・管理画面 (apps/admin)・動画アプリ (apps/remotion) が同じものを読む (2026-10-28 に apps/web の
+ * tailwind.config.ts と globals.css から移した。どのアプリでも bg-card / rounded-card / text-positive が同じ値になる)。
+ *
+ * 読み込み順: base.css → tokens-hsl.css (テンプレートの色の HSL 数値) → このファイル。
+ * 色は HSL の数値を CSS 変数に置き、ここで hsl(var(--x)) に包む (部品が bg-card/50 などの不透明度も使えるように)。
+ */
+
+@theme inline {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  /* 完全な色値 (transparent を取れるよう hsl で包まない)。不透明度の修飾子は使わない */
+  --color-card-outline: var(--card-outline);
+  /* テンプレートの部品スタイル (lyra。部品の className に書き込み済み) が使う色 */
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  /* データの状態色。生の emerald/red/amber/blue-NNN の代わりに使う */
+  --color-positive: hsl(var(--positive));
+  --color-positive-soft: hsl(var(--positive-soft));
+  --color-negative: hsl(var(--negative));
+  --color-negative-soft: hsl(var(--negative-soft));
+  --color-warning: hsl(var(--warning));
+  --color-warning-soft: hsl(var(--warning-soft));
+  --color-info: hsl(var(--info));
+  --color-info-soft: hsl(var(--info-soft));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-card: var(--card-radius);
+  /* 本文の中に置く部品 (callout・本文内カード・コードブロック)。レイアウトのカード外枠とは別の役割 */
+  --radius-content: var(--content-radius);
+}
+
+/* テンプレート (tokens-hsl.css) に無い stats47 の値。テンプレートの色はここで上書きしない */
+@layer base {
+  :root {
+    --destructive-foreground: 0 0% 98%;
+
+    /* カード外枠 (@stats47/components の CARD_SURFACE_CLASS が参照)。テンプレートと同じく角丸なし・線あり */
+    --card-radius: 0px; /* rounded-card */
+    --card-outline: hsl(var(--border)); /* border-card-outline */
+
+    /* 本文の中に置く部品 (callout・本文内のランキングカード・コードブロック) */
+    --content-radius: 6px; /* rounded-content */
+
+    /* データの状態色 (上位・良い値 / 下位・悪い値 / 注意 / 補足)。text-positive, bg-positive-soft 等 */
+    --positive: 161 94% 30%;
+    --positive-soft: 152 81% 96%;
+    --negative: 0 72% 51%;
+    --negative-soft: 0 86% 97%;
+    --warning: 26 90% 37%;
+    --warning-soft: 48 100% 96%;
+    --info: 224 76% 48%;
+    --info-soft: 214 100% 97%;
+  }
+}
+
+/* ダークの値。.dark はレイヤーの外に置き、レイヤー内の :root より優先させる */
+.dark {
+  --destructive-foreground: 0 0% 98%;
+
+  --positive: 158 64% 52%;
+  --positive-soft: 166 91% 9%;
+  --negative: 0 91% 71%;
+  --negative-soft: 0 75% 15%;
+  --warning: 43 96% 56%;
+  --warning-soft: 21 92% 14%;
+  --info: 213 94% 68%;
+  --info-soft: 226 57% 21%;
+}
