@@ -54,30 +54,28 @@ export function SearchResults({ results, query }: SearchResultsProps) {
         );
     }
 
+    // 線の格子のセルとして返す (件数の文章が 1 セル、各結果が 1 セル)。並べる格子は SearchPageClient が持つ
     return (
-        <div className="space-y-3">
+        <>
             <p className="text-sm text-muted-foreground">
                 「{query}」の検索結果: {results.length}件
             </p>
 
-            <div className="space-y-3">
-                {results.map((result, index) => (
-                    <div
-                        key={result.id}
-                        onClickCapture={() =>
-                            trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
-                        }
-                    >
-                        {result.type !== "blog" ? (
-                            <RankingResultCard result={result} />
-                        ) : (
-                            <BlogResultCard result={result} />
-                        )}
-                    </div>
-                )
-                )}
-            </div>
-        </div>
+            {results.map((result, index) => (
+                <div
+                    key={result.id}
+                    onClickCapture={() =>
+                        trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
+                    }
+                >
+                    {result.type !== "blog" ? (
+                        <RankingResultCard result={result} />
+                    ) : (
+                        <BlogResultCard result={result} />
+                    )}
+                </div>
+            ))}
+        </>
     );
 }
 

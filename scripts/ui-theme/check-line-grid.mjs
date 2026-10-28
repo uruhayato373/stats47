@@ -29,6 +29,7 @@ const DEFAULT_PAGES = [
   { name: "blog/*", url: "/blog/livable-prefecture-composite-ranking" },
   { name: "category/*", url: "/category/landweather" },
   { name: "survey", url: "/survey" },
+  { name: "search", url: "/search?q=%E4%BA%BA%E5%8F%A3" },
   { name: "survey/*", url: "/survey/academic-achievement-survey" },
   { name: "tag/*", url: "/tag/%E5%AE%B6%E8%A8%88%E8%AA%BF%E6%9F%BB" },
   { name: "areas/#/*/#", url: "/areas/01000/cities/01100" },

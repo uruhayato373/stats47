@@ -277,27 +277,20 @@ updated: 2026-10-19
 - **次**: `TEXT_STYLE` を消し、パネルの既定 (14px) に任せる。利用規約も同じ書き方をしていないか確かめる。
 - **完了条件**: 3 ページの本文が 390px と 1440px で 14px (描いた画面で測る)。
 
-### [UI-REFERENCE-PARTS-REST-01] 見本合わせの残りの部品 (リンクの行・開閉・空の状態・記事本文の見出し) と develop への取り込み
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-28] [領域:サイト]
-
-- **経緯**: 2026-10-28 に見本 (shadcndashboard) を部品の種類ごとに実測して仕様にし (`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」)、パネル・線の格子・数値タイル・ボタンを済ませた。作業はブランチ `feature/template-base-ui` (worktree `.claude/worktrees/template-base-ui`) にあり、origin へ push 済み・**develop には未取り込み** (最後に develop へ入れたのは 18d122f7b)。
-- **次 (実行順)**:
-  1. ブランチを develop へ入れる (develop へ push はオーナーの確認後。入れる前に `npm run test:run -w apps/web` と本番ビルドの `npm run ui-theme:line-grid -- <baseUrl>` を通す)
-  2. リンクの行 (`RailNavRow`・`RailLinkList`・`ContentNavigation`): 14px・余白 8px・最小の高さ 40px の 1 種類
-  3. 開閉 (`FaqSection`・`ContentDisclosure`): `details` は残し (閉じた本文を SSR に残すため)、質問 14px・500、上下 10px、項目の間に線
-  4. 空の状態 (`ChartEmptyState`・`ChartErrorState`): 余白 24px・間隔 16px・破線の枠
-  5. 記事本文 (`MDContent`・`ArticleShell`): 本文 16px は残し、見出しを 600 にそろえる。利用規約などのパネル内の大きな見出しと下線もここで直す
-- **進め方**: 部品の種類ごとに、見本の値を部品へ入れる → ページ側の上書きを止める検査を `design-system:check` に足す → 本番ビルドで `scripts/ui-theme/measure-design-reference.mjs` と `compare-design-slots.mjs` で測り比べる → 仕様の表の行を「済」にする。
-- **完了条件**: 仕様の表の上記 4 行が「済」になり、各部品に上書きを止める検査がある。ブランチが develop に入っている。
-
-### [LINE-GRID-COLUMN-01] 右レールを線の格子にするか決め、描いた画面の格子検査を定期実行に載せる
+### [UI-REFERENCE-PARTS-REST-01] 見本合わせのブランチ feature/template-base-ui を develop へ取り込む
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
 
-- **経緯**: 2026-10-28 に本文の列全体を 1 本の線の格子にした (`ShellColumn`・`PanelGrid`、`@/components/layout`)。27 画面 × 1440・390px で格子の外のパネルと文章が線に接するセルは 0 件 (`npm run ui-theme:line-grid`)。
-- **残り**:
-  1. 右レール (`RailStack`・`ARTICLE_RAIL_CLASS`) は格子の外で、パネルの間を 12〜16px 空けたまま。広告バナー (`SidebarPromoBanner`) と `hidden … :contents` の包みが混ざるので、格子にするとセルの地が抜ける。見本に右レールは無いので、格子にするか (広告をセルにする形) を決めてから着手する
-  2. `npm run ui-theme:line-grid` は手元の本番ビルドに流す検査で、定期実行に載っていない。週次の page-quality (本番 URL を Playwright で巡回する job) に同じ判定を足すか決める
-- **完了条件**: 1 は決定を本カードか `docs/01_技術設計/04_デザインシステム.md` の「線の格子」の行に書く。2 は週次の結果に違反件数が出る (または載せない理由を書く)。
+- **経緯**: 2026-10-28 に見本 (shadcndashboard) の部品の仕様 (`docs/01_技術設計/04_デザインシステム.md`「見本の実測値と部品の仕様」) をすべて済ませた (パネル・線の格子・数値タイル・ボタン・リンクの行・開閉・空の状態・記事本文の見出し)。管理画面・動画アプリも同じ部品へ寄せた。参考サイトの台帳は `data/design-references/references.json`。作業はブランチ `feature/template-base-ui` (worktree `.claude/worktrees/template-base-ui`) にあり、origin へ push 済み・**develop には未取り込み**。
+- **確かめたこと (2026-10-28)**: 本番ビルドで線の格子の違反 0 件 (28 画面・1440 / 390px)、web の vitest 全件・admin 全件・4 workspace の型チェック・design-system:check・lyra の検査。
+- **次**: オーナーの確認後に develop へ入れる (push からの CI を確認する)。
+- **完了条件**: ブランチが develop に入り、develop の CI が通る。
+
+### [LINE-GRID-COLUMN-01] 描いた画面の線の格子の検査を定期実行に載せる
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run ui-theme:line-grid -- http://127.0.0.1:3200] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 に本文の列全体を 1 本の線の格子にした (`ShellColumn`・`PanelGrid`、`@/components/layout`)。28 画面 × 1440・390px で違反 0 件 (`npm run ui-theme:line-grid`)。右レールは格子にしない (同日オーナー決定。`docs/01_技術設計/04_デザインシステム.md` の「線の格子」の行)。検査の画面に検索を足したところ、検索結果がカードを空けて並べるだけで格子になっていなかった (同日に直した)。検査の一覧に無い画面には同じ取りこぼしが残りうる。
+- **次**: `npm run ui-theme:line-grid` は手元の本番ビルドに流す検査で、定期実行に載っていない。週次の page-quality (本番 URL を Playwright で巡回する job) に同じ判定を足すか決める。足すなら全ルートの代表 URL (`DEFAULT_PAGES`) を page-quality の一覧と揃える。
+- **完了条件**: 週次の結果に違反件数が出る (または載せない理由を本カードに書く)。
 
 ### [MUNI-DATA-PRODUCT-PILOT-01] 市区町村の製造品出荷額を「組替済み時系列 CSV＋GeoJSON」の1商品にし、6週で売れるかを確かめる
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
