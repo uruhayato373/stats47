@@ -256,6 +256,23 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-PARTS-UNIFY-ADMIN-REMOTION-01] 管理画面と動画アプリを公開サイトと同じ部品にそろえる
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 にオーナーが「全部合わせる (テストもコードも減る)」「動画も部品共有」と判断し、同日に「統一は後で」と保留した。着手時の途中作業 (色の値の移動と動画アプリへの Tailwind 追加) は戻してある。
+- **洗い出し (2026-10-28 実測)**:
+  - 管理画面 (`apps/admin`) は 10/27 に Base UI へ移り済みで、Next・React・Tailwind の版は公開サイトと同じ。違いは色の値の形式 (admin は oklch、web は HSL + `hsl(var())`)、Tailwind の設定 (admin は CSS だけ、web は `@config` で `tailwind.config.ts`)、部品のクラス (admin は shadcn 公式どおり、packages/components は lyra + 見本の差分)。`components/ui` 21 部品のうち 19 部品は packages/components に同名がある (無いのは chart・native-select)。admin 専用の検査は 31 ファイル・約 3,070 行 (公式ソースの写し 22 本・parity/debt 検査とテスト)。admin のテスト 64 ファイルは業務ロジックで部品を使わないので残る
+  - **取り消しが要るオーナー決定**: `.claude/rules/admin-ui.md` の「`@stats47/components` を admin に入れない (web 向け (v3) の旧世代部品)」(10/27)。web は Tailwind v4 で見本に寄せ済みなので理由は当たらない
+  - 動画アプリ (`apps/remotion`) は Remotion の要素と inline style だけで描く (className 0 件・Tailwind なし)。色は `src/shared/themes/brand.ts` の hex 直書き (63 ファイルが参照)。公開サイトの部品は `next/link` (SurfaceCard の SiteLink)・`'use client'`・Tailwind と CSS 変数に依存するので、そのままでは使えない。Tailwind は `@remotion/tailwind-v4@4.0.517` (Remotion と同じ版に固定) で通せることを確認済み
+- **手順 (順に)**:
+  1. 色・角丸の Tailwind テーマと stats47 の値 (状態色・カードの線と角丸) を `packages/ui-theme/theme.css` に移し、web の `tailwind.config.ts` の colors / borderRadius と `globals.css` の該当値を消す。移す前後でビルドの CSS と計算後スタイルが変わらないことを確かめる
+  2. 共有する部品 (SurfaceCard 系・StatTile・ChartPanel・PanelGrid) を `packages/components` へ移し、`next/link` への依存はリンク部品を引数で受ける形にする
+  3. 管理画面: admin-ui.md の上の決定を取り消し、`components/ui` を packages/components に置き換える (chart・native-select・Badge の状態 variant は packages へ)。StatCard→StatTile、PanelCard→パネル、Grid→PanelGrid
+  4. 公式との一致検査 (shadcn-parity) と公式ソースの写し、admin-ui-debt 検査を、web の design-system:check と lyra の書き込み検査に一本化して消す (約 27〜30 ファイル)
+  5. 動画アプリ: `@remotion/tailwind-v4` で Tailwind を有効にし、theme.css を読み、共有部品で 1 枚を描いて静止画を書き出して確かめる。brand.ts の色は theme.css の値から作る
+- **完了条件**: 管理画面と動画アプリが packages/components の部品を import し、admin の `components/ui` と専用検査が消え、3 アプリの型検査・テスト・design-system:check が通る。動画アプリで共有部品を使った静止画が書き出せる。
+- **見込み**: 約 60 ファイル・約 5,800 行減、検査のテスト 3 本減 (動画アプリの部品共有分は別途)。
+
 ### [REMOTION-UNDECLARED-VISUALIZATION-DEP-01] 動画アプリが @stats47/visualization を宣言せずに使っている
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:grep -c @stats47/visualization apps/remotion/package.json] [起票:2026-10-28] [領域:SNS]
 
