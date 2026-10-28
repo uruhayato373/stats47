@@ -1,3 +1,4 @@
+import { satisfiesValuePolicy, type MunicipalityMetricSnapshotConfig } from './build-municipality-snapshots';
 import { municipalityRankingDisplayTitle } from './municipality-names';
 
 import type { CityDatabookTheme } from '@stats47/data-configs/geo-scope';
@@ -8,6 +9,8 @@ import type {
   CityDatabookPopulationChange,
   CityDatabookSection,
   CityDatabookSnapshot,
+  CityDatabookWardBreakdown,
+  CityDatabookWardMetric,
 } from '../types/city-databook';
 import type {
   MunicipalityRankingItemSnapshot,
@@ -38,6 +41,68 @@ export interface BuildCityDatabooksInput {
   basisOf: (rankingKey: string) => CityDatabookMetricBasis;
   /** 人口の全年の値 (`app/stats/<人口>/cities.json` の行)。前回の値を求めるのに使う。 */
   populationHistory: readonly CityPopulationHistoryRow[];
+  /** 政令指定都市の行政区の内訳 (buildWardBreakdowns の結果)。無ければ付けない */
+  wardBreakdowns?: ReadonlyMap<string, CityDatabookWardBreakdown>;
+}
+
+export interface WardBreakdownInput {
+  /** 政令指定都市のコード → その行政区 (`@stats47/area` の公開方針で kind が administrative-ward のもの) */
+  wardsByCity: ReadonlyMap<string, ReadonlyArray<{ code: string; name: string }>>;
+  headlineMetricKeys: readonly string[];
+  rankings: BuildCityDatabooksInput['rankings'];
+  /** 指標ごとの e-Stat の観測値 (`app/stats/<key>/cities.json` の行。行政区の行を含む) */
+  observations: ReadonlyMap<string, readonly CityPopulationHistoryRow[]>;
+  /** 市区町村カタログの値の範囲 (市区町村ランキングと同じ判定で行政区の値も選ぶ) */
+  valuePolicyOf: (rankingKey: string) => MunicipalityMetricSnapshotConfig['valuePolicy'];
+}
+
+/**
+ * 政令指定都市ごとに、見出しの指標の行政区の値を束ねる (WardMode `split`。MUNI-DESIGNATED-CITY-WARDS-01)。
+ * 年は市全体の値 (市区町村ランキング) と同じ年に揃え、その年に値の無い行政区は載せない。
+ * 市の中の順位は値の大きい順で、同じ値は同じ順位。行政区に 1 つも値が無い指標は載せない。
+ * 値は市区町村ランキングと同じ値の範囲 (`valuePolicy`) で選ぶ。全区が 0 の指標は、行政区の値が集計されていない
+ * (財政力指数・課税所得は e-Stat で行政区が 0 になる。2026-10-28 に横浜市 18 区で確認) ので載せない。
+ */
+export function buildWardBreakdowns(input: WardBreakdownInput): Map<string, CityDatabookWardBreakdown> {
+  const result = new Map<string, CityDatabookWardBreakdown>();
+  for (const [cityCode, wards] of input.wardsByCity) {
+    const wardCodes = new Set(wards.map((ward) => ward.code));
+    const metrics: Record<string, CityDatabookWardMetric> = {};
+    for (const key of input.headlineMetricKeys) {
+      const ranking = input.rankings.get(key);
+      const rows = input.observations.get(key);
+      if (!ranking || !rows) continue;
+      const yearCode = ranking.values.yearCode;
+      const found = rows.filter(
+        (row): row is CityPopulationHistoryRow & { value: number } =>
+          wardCodes.has(row.areaCode) &&
+          String(row.yearCode).slice(0, 4) === yearCode &&
+          typeof row.value === 'number' &&
+          Number.isFinite(row.value) &&
+          satisfiesValuePolicy(row.value, input.valuePolicyOf(key))
+      );
+      if (found.length === 0 || found.every((row) => row.value === 0)) continue;
+      const sorted = [...found].sort((a, b) => b.value - a.value || a.areaCode.localeCompare(b.areaCode));
+      metrics[key] = {
+        rankingKey: key,
+        label: municipalityRankingDisplayTitle(ranking.item),
+        unit: ranking.values.unit,
+        yearCode,
+        yearName: ranking.values.yearName,
+        values: sorted.map((row) => ({
+          areaCode: row.areaCode,
+          value: row.value,
+          cityRank: 1 + sorted.filter((other) => other.value > row.value).length,
+        })),
+      };
+    }
+    if (Object.keys(metrics).length === 0) continue;
+    result.set(cityCode, {
+      wards: [...wards].sort((a, b) => a.code.localeCompare(b.code)).map((ward) => ({ areaCode: ward.code, areaName: ward.name })),
+      metrics,
+    });
+  }
+  return result;
 }
 
 /** 全国順位の順に並んだ値から、県ごとの順位を数える。同じ全国順位 (同じ値) は同じ県内順位にする。 */
@@ -143,6 +208,7 @@ export function buildCityDatabooks(input: BuildCityDatabooksInput): Map<string, 
       metrics: Object.fromEntries(
         Object.entries(metrics).filter(([key]) => placed.has(key) || input.headlineMetricKeys.includes(key))
       ),
+      ...(input.wardBreakdowns?.get(entity.code) ? { wardBreakdown: input.wardBreakdowns.get(entity.code)! } : {}),
     });
   }
   return result;

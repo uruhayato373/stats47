@@ -150,8 +150,10 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   }
 
   // OLD_CATEGORY_KEYS にマッチしない旧URL構造（subcategory 先頭等）+ dashboard/ranking + prefCode
+  // 県名×市区町村ランキング (/municipalities/ranking/<key>/<県コード>) は旧構造ではない。判定は checkContentTypePolicy が行う
   if (
     segments.length >= 3 &&
+    segments[0] !== 'municipalities' &&
     (segments.includes('dashboard') || segments.includes('ranking'))
   ) {
     if (segments.some((s) => /^\d{5}$/.test(s))) {
@@ -296,8 +298,17 @@ function checkContentTypePolicy(
   }
 
   if (pathname.startsWith('/municipalities/ranking/')) {
-    const key = pathname.slice('/municipalities/ranking/'.length).split('/')[0];
+    const [key, prefCode, ...rest] = pathname.slice('/municipalities/ranking/'.length).split('/');
     if (key && !UrlPolicy.municipality.isKnownRanking(key)) return gone();
+    // 県別ページは対象の指標 × 正しい県コードだけ。それ以外を page の notFound() に渡すと 200 の soft-404 になりうる
+    if (
+      prefCode &&
+      (rest.length > 0 ||
+        !UrlPolicy.municipality.hasPrefectureRanking(key) ||
+        !UrlPolicy.area.isValidPrefCode(prefCode))
+    ) {
+      return gone();
+    }
   }
 
   return null;
@@ -471,6 +482,29 @@ export default function middleware(req: NextRequest) {
     if (landing) {
       const url = new URL(landing, req.url);
       url.search = req.nextUrl.search;
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
+  // 県名×市区町村ランキングを持つ指標の「県だけの絞り込み」(`?pref=23000`) は県別ページへ恒久転送する
+  // (MUNI-PREF-RANKING-ROUTE-01)。自治体名の検索 (q) やページ送り (page) を伴う絞り込みは全国版のまま残す。
+  const municipalityRankingMatch = pathname.match(/^\/municipalities\/ranking\/([^/]+)$/);
+  if (municipalityRankingMatch) {
+    const rankingKey = municipalityRankingMatch[1];
+    const params = req.nextUrl.searchParams;
+    const prefCode = params.get('pref') ?? '';
+    if (
+      UrlPolicy.municipality.hasPrefectureRanking(rankingKey) &&
+      UrlPolicy.area.isValidPrefCode(prefCode) &&
+      !params.get('q') &&
+      (params.get('page') ?? '1') === '1'
+    ) {
+      const url = new URL(
+        hrefFor('municipality-pref-ranking', { rankingKey, prefCode }),
+        req.url
+      );
+      url.search = req.nextUrl.search;
+      for (const key of ['pref', 'q', 'page']) url.searchParams.delete(key);
       return NextResponse.redirect(url, 301);
     }
   }

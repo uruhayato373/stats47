@@ -19,7 +19,7 @@ export const manufacturingShipment: MetricConfig = {
   ],
   "years": {
     "from": 1980,
-    "to": 2022,
+    "to": 2023,
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -17,6 +17,7 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
+  isMunicipalityPrefectureRankingKey,
   scopeHrefsForMunicipalityRanking,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -24,6 +25,7 @@ import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
   isMunicipalityAiContentCurrent,
+  lacksSpecialWards,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
@@ -42,6 +44,7 @@ import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-categ
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
 import {
+  MunicipalityPrefectureLinks,
   MunicipalityRankingCommentary,
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
@@ -50,6 +53,7 @@ import {
 } from '@/features/municipalities';
 import {
   MunicipalityRankingMapSection,
+  getSpecialWardCodes,
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
@@ -418,6 +422,13 @@ export default async function MunicipalityRankingPage({
         </nav>
       )}
 
+      {isMunicipalityPrefectureRankingKey(item.rankingKey) && (
+        <MunicipalityPrefectureLinks
+          rankingKey={item.rankingKey}
+          title={`都道府県別の${municipalityRankingDisplayTitle(item)}ランキング`}
+        />
+      )}
+
       {commentary && <MunicipalityRankingCommentary content={commentary} />}
 
       {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
@@ -448,6 +459,7 @@ export default async function MunicipalityRankingPage({
         surface="municipality_source"
       />
       <footer className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        {lacksSpecialWards(snapshot.values, getSpecialWardCodes()) && <p>東京23区（特別区）は、元の統計に区ごとの値が無いため、このランキングに含まれていません。</p>}
         <p>
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>

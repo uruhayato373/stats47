@@ -24,6 +24,10 @@ describe('hrefFor (routes.json から href を組み立てる)', () => {
       theme: { params: { themeSlug: 'population' }, id: 'theme:population' },
       'area-theme': { params: { areaCode: '13000', themeSlug: 'population' }, id: 'area-theme:13000:population' },
       'municipality-ranking': { params: { rankingKey: 'x' }, id: 'municipality-ranking:x' },
+      'municipality-pref-ranking': {
+        params: { rankingKey: 'x', prefCode: '23000' },
+        id: 'municipality-pref-ranking:x:23000',
+      },
     };
     for (const [name, sample] of Object.entries(samples)) {
       const href = hrefFor(name as HrefRouteName, sample!.params as never);

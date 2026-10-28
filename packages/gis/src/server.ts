@@ -32,3 +32,6 @@ export {
 
 export type { MlitR2PathOptions } from "./mlit";
 
+export { deriveWardModeTopology } from "./mlit";
+export { fetchMunicipalityTopologyForWardMode } from "./mlit/fetch-ward-mode-topology";
+

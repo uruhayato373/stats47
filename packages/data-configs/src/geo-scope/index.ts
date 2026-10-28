@@ -56,6 +56,11 @@ export type {
 } from './municipality-catalog';
 export { buildMunicipalityRankingSubtitles } from './municipality-ranking-titles';
 export {
+  MIN_MUNICIPALITIES_PER_PREFECTURE_RANKING,
+  MUNICIPALITY_PREFECTURE_RANKING_KEYS,
+  isMunicipalityPrefectureRankingKey,
+} from './municipality-prefecture-ranking';
+export {
   CITY_DATABOOK_LAYOUT,
   CITY_DATABOOK_POPULATION_METRIC_KEY,
   listCityDatabookThemes,

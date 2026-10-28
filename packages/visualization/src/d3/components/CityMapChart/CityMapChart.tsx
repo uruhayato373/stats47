@@ -32,6 +32,8 @@ import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
 const VIEWBOX_WIDTH = 600;
 const VIEWBOX_HEIGHT = 480;
 const PADDING = 20;
+/** 市区町村界の線の太さ (viewBox 単位)。地の色の線なので、塗りの間に白い筋として見える太さにする */
+const CITY_BOUNDARY_WIDTH = 0.8;
 
 /** カラーレジェンドの設定 */
 
@@ -217,7 +219,8 @@ export function CityMapChart({
     );
 
     const pathGenerator = d3Module.geoPath().projection(projection);
-    // 選択・ホバーの強調はテンプレートの primary、通常の境界は border (都道府県地図と同じ。2026-10-27)
+    // 選択・ホバーの強調はテンプレートの primary。通常の境界は地の色 (background) の線にする:
+    // border (薄い灰色) の 0.5 では薄い塗りの上で市区町村界が見えなかった (2026-10-28 オーナー指摘)
     const themeColors = getThemeColors();
 
     // メイングループ（ズーム対象）
@@ -234,10 +237,10 @@ export function CityMapChart({
         return colorMapper?.(d.properties.cityCode) ?? DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor;
       })
       .attr("stroke", (d) =>
-        d.properties.cityCode === selectedCityCode ? themeColors.primary : themeColors.border
+        d.properties.cityCode === selectedCityCode ? themeColors.primary : themeColors.background
       )
       .attr("stroke-width", (d) =>
-        d.properties.cityCode === selectedCityCode ? 2 : 0.5
+        d.properties.cityCode === selectedCityCode ? 2 : CITY_BOUNDARY_WIDTH
       )
       .style("cursor", onCityClick ? "pointer" : "default");
 
@@ -281,8 +284,8 @@ export function CityMapChart({
         if (d.properties.cityCode !== selectedCityCode) {
           d3Module
             .select(this)
-            .attr("stroke", themeColors.border)
-            .attr("stroke-width", 0.5);
+            .attr("stroke", themeColors.background)
+            .attr("stroke-width", CITY_BOUNDARY_WIDTH);
         }
         hideTooltip();
       })

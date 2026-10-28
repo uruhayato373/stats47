@@ -2,6 +2,219 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "new-graduate-starting-salary-highschool-female",
+      "pageId": "ranking:new-graduate-starting-salary-highschool-female",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620302"
+        },
+        "derived": false,
+        "configHash": "a8ab8fc03be110bb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-highschool-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-starting-salary-highschool-male",
+      "pageId": "ranking:new-graduate-starting-salary-highschool-male",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620301"
+        },
+        "derived": false,
+        "configHash": "df29673336859950"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-highschool-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-starting-salary-university-female",
+      "pageId": "ranking:new-graduate-starting-salary-university-female",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620305"
+        },
+        "derived": false,
+        "configHash": "a6154b3720f3e74c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-university-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-starting-salary-university-male",
+      "pageId": "ranking:new-graduate-starting-salary-university-male",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620303"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620303"
+        },
+        "derived": false,
+        "configHash": "cf45975184ea3eba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-university-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-hire-count",
+      "pageId": "ranking:new-hire-count",
+      "title": "入職者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003376330",
+          "filters": {
+            "cdCat01": "S100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003376330",
+          "cdCat01": "S100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "b913901ebda1fd39"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:new-hire-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:new-hire-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-housing-construction-ratio",
+      "pageId": "ranking:new-housing-construction-ratio",
+      "title": "着工新設住宅比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01204"
+        },
+        "derived": false,
+        "configHash": "36c62c30b1ac0cc3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:new-housing-construction-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "new-housing-floor-area",
       "pageId": "ranking:new-housing-floor-area",
       "title": "着工新設住宅床面積",
@@ -8352,6 +8565,69 @@
       ]
     },
     {
+      "metricKey": "nursery-within-500m-young-child-household-ratio",
+      "pageId": null,
+      "title": "保育所まで500m未満の子育て世帯の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004025628",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "R1"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004025628",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "R1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004025628",
+          "cdCat01": "R1",
+          "cdTab": "13-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat02",
+            "numeratorCodes": [
+              "1",
+              "2",
+              "3"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "68813e9655155ded"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:nursery-within-500m-young-child-household-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-environment",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:nursery-within-500m-young-child-household-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "nurses-general-hospital-per-100beds",
       "pageId": "ranking:nurses-general-hospital-per-100beds",
       "title": "一般病院看護師・准看護師数",
@@ -10327,286 +10603,6 @@
         },
         {
           "pageId": "ranking:occupation-clerical-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-company-executive-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1303"
-        },
-        "derived": false,
-        "configHash": "ae094354fb5a27a7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-company-executive-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-company-executive-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-engineer-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1308"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1308"
-        },
-        "derived": false,
-        "configHash": "d6532db3337ba64c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-engineer-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-engineer-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-factory-owner-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1305"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1305"
-        },
-        "derived": false,
-        "configHash": "b712df8617c984ed"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-factory-owner-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-factory-owner-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-home-based-piecework-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1318"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1318"
-        },
-        "derived": false,
-        "configHash": "9c3075885e381613"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-home-based-piecework-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-home-based-piecework-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-manager-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1311"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1311"
-        },
-        "derived": false,
-        "configHash": "326d09696b219272"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-manager-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-manager-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-manual-labor-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1315"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1315"
-        },
-        "derived": false,
-        "configHash": "c21975f5e20046de"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-manual-labor-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-manual-labor-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-personal-service-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1316"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1316"
-        },
-        "derived": false,
-        "configHash": "64be8dba639560c5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-personal-service-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupations",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-personal-service-workers",
           "kind": "ranking"
         }
       ],

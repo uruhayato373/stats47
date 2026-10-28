@@ -8,19 +8,21 @@
  */
 export type SiteNavKey =
   | 'ranking'
+  | 'themes'
   | 'areas'
-  | 'municipalities'
   | 'geo'
-  | 'survey'
   | 'blog';
 
-/** 主要ナビ (表示順・ラベル)。 */
+/**
+ * 主要ナビ (表示順・ラベル)。サイトの内容の種類 (ランキング・テーマ・地域・地域分析・ブログ) だけを並べる (2026-10-28 オーナー合意)。
+ * - 地域単位 (47都道府県・市区町村) は項目にせず、各ハブの StatisticsScopeNav で切り替える (docs/01_技術設計/03_情報設計.md「地理スコープ」)
+ * - 調査 (出典をたどる配線) と地域間比較 (条件を選ぶツール) はサイトの切り口ではないので置かず、フッターから入れる
+ */
 export const PRIMARY_NAV_ITEMS = [
   { key: 'ranking', href: '/ranking', label: 'ランキング' },
-  { key: 'areas', href: '/areas', label: '都道府県' },
-  { key: 'municipalities', href: '/municipalities', label: '市区町村' },
+  { key: 'themes', href: '/themes', label: 'テーマ' },
+  { key: 'areas', href: '/areas', label: '地域' },
   { key: 'geo', href: '/geo', label: '地域分析' },
-  { key: 'survey', href: '/survey', label: '調査' },
   { key: 'blog', href: '/blog', label: '統計ブログ' },
 ] as const satisfies ReadonlyArray<{
   key: SiteNavKey;
@@ -35,15 +37,21 @@ export const COMPARE_NAV_ITEM = {
   href: '/category/population/compare',
   label: '地域間比較',
 } as const;
-export const ALL_THEMES_NAV_ITEM = { href: '/themes', label: 'すべてのテーマ' } as const;
-/**
- * サイドバー下端 (SidebarFooter) の出口。主要ナビの「ランキング」と同じ /ranking を指すので、
- * 現在地の判定には加えない (同じ href の項目が 2 つ現在地になるのを防ぐ。AppSidebar の matchActive)。
- */
-export const ALL_RANKINGS_NAV_ITEM = { href: '/ranking', label: 'すべてのランキング' } as const;
+/** サイドバーには置かず、フッターから入る出典の一覧 */
+export const SURVEY_NAV_ITEM = { href: '/survey', label: '調査' } as const;
 
-/** 市区町村ページは URL が /areas の下にあるが、見ているのは市区町村の空間 (2026-09-25 UI 点検の指摘)。 */
-const CITY_PAGE_PATH = /^\/areas\/\d{5}\/cities(?:\/|$)/;
+/**
+ * 市区町村の比較ページは、同じ内容の種類の項目を現在地にする (地域単位は内容の中の切り口)。
+ * 市区町村ページ (/areas/<県>/cities/<市>) は前方一致で「地域」になる。
+ */
+const SCOPE_PATH_ALIASES: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^\/municipalities\/themes(?:\/|$)/, '/themes'],
+  [/^\/municipalities(?:\/|$)/, '/ranking'],
+];
+
+function resolveScopeAlias(pathname: string): string {
+  return SCOPE_PATH_ALIASES.find(([pattern]) => pattern.test(pathname))?.[1] ?? pathname;
+}
 
 function normalize(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith('/')) return pathname.slice(0, -1);
@@ -64,7 +72,7 @@ export function getActiveSidebarHref(
   pathname: string,
   hrefs: readonly string[]
 ): string | null {
-  const path = CITY_PAGE_PATH.test(pathname) ? '/municipalities' : normalize(pathname);
+  const path = resolveScopeAlias(normalize(pathname));
   let best: string | null = null;
   for (const href of hrefs) {
     if (!matches(path, href)) continue;

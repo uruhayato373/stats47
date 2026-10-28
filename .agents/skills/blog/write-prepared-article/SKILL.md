@@ -41,6 +41,38 @@ contents/blog/<slug>/
 
 ## 手順
 
+## headless 経路 (既定・Agent tool を使わない)
+
+本文と審査を `article-writer` / `blog-critic` の Agent tool で回すと、subagent が CLAUDE.md と rules を
+毎ターン読むため是正で約 10 万トークン/本かかる。**既定は headless `claude -p` のバッチ**で、
+repo 外 cwd・ツール無し・独自 system prompt で prompt だけを読ませる (ランキング解説と同じ lean 化)。
+審査は書いたプロセスと別の `claude -p` が記事本文だけを読む (`buildBlogCriticPrompt`) ので、
+「書いた本人が自己採点しない」規約を満たす。
+
+```bash
+# 準備 (上の 2) の後。対象は article.prompt.txt があり article.md が無い slug
+npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --limit 3
+# 明示指定・確認だけ
+npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --slugs <a>,<b>
+npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run
+```
+
+- 流れ: author (sonnet・effort low) → `quality-gate.mjs` + `ci-factual-gate.mjs` (落ちたら blocker を添えて
+  `--retries` 回まで書き直し) → 別プロセスの critic → REVISE なら blocker / major の指摘と原稿を author に返して
+  `--revise-rounds` 回 (既定 1) まで書き直す。**ゲートと critic は緩めない**
+- 記録: `data/blog/headless-runs.csv` (slug ごとの呼び出し数・トークン・API 換算費用・ゲート・verdict) と
+  `.local/ci/<run-id>.json`。費用は CLI の `total_cost_usd` (Pro/Max の OAuth では実請求ではない)
+- **公開しない。** PASS 分も `published: false` のまま残る。確定は下の 5 (`--ingest`) と push を人が行い、
+  本数は週次計画と `data/blog/seo-strategy.json` が決める。Claude を CI の cron で回さない
+- NotebookLM の調査材料 (`contents/blog/<slug>/research.md`) があれば author prompt に足す
+  (`/notebooklm-research` の「新規記事の調査段」)
+- Gemini 無料枠で書く: `--author gemini-api` (critic は claude のまま推奨)。run の最初に極小の実生成で
+  鍵を確かめ、HTTP 402 / クレジット枯渇は billing として止まる。鍵は課金を付けていない project のものを
+  `.env.local` の `GEMINI_API_KEY` に置く (`.claude/todo/backlog.md` の BLOG-GEMINI-AUTHOR-01)
+- 実測 (2026-10-28・型B 3・A 1・D2 1): 15 回の run で 5 本。1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27 (API 換算)・70〜140 秒。決定的ゲートは 1 回目で 13/15 通過。審査の基準を blog-critic に揃えた後の最終 run は 2/4 PASS・PASS 1 本 $0.32 (Agent tool 経路の約 1/25)。残る差し戻しは地理の誤り (隣接県・地方区分) と題の約束不足が多い。詳細は `.claude/todo/backlog.md` の BLOG-HEADLESS-AUTHOR-01
+
+以下の手順 1〜4 は Agent tool で書く旧経路 (headless が使えないときの代替)。5〜6 はどちらの経路でも共通。
+
 ### 1. 対象を確認する
 
 ```bash
@@ -115,5 +147,5 @@ R2 に公開する。公開後は CI が `contents/blog` の当該ドラフト�
   `blog-auto-publish.yml` が push トリガーで発火する
 - 品質基準（正典）: `.claude/rules/blog-quality-standards.md`（§ルール ↔ 機械チェック 対応表）
 - 決定的ゲート: `.claude/scripts/blog/quality-gate.mjs`
-- agent: `article-writer`（執筆）/ `blog-critic`（審査）
+- agent: `article-writer`（執筆）/ `blog-critic`（審査）— 旧経路。既定は headless (`write-blog-headless.ts`)
 - 既存記事の是正は別 skill: `/brushup-blog --target queue`

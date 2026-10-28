@@ -23,6 +23,7 @@ import {
   expandYearSpec,
   formatYearList,
   inheritedExclusionYears,
+  resolveCityLedgerYears,
   resolveLedgerYears,
   YEAR_EXCLUSION_INHERITED,
 } from "../src/estat-availability.js";
@@ -95,8 +96,12 @@ function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skippe
   const ledger = loadLedgerEntries();
   const plans: Plan[] = [];
   const skipped: string[] = [];
-  // years は県の値で決める (市区町村の台帳は報告だけ。市区町村は合併でコードが変わり「全市区町村」の年が定まらない)
-  for (const target of collectTargets().filter((t) => t.level === "prefecture")) {
+  // years は県の値で決める (市区町村は合併でコードが変わり「全市区町村」の年が定まらない)。
+  // 県の値を持たない市区町村だけの metric は県の台帳が無いので、市区町村の台帳から新しい年だけを足す
+  // (resolveCityLedgerYears。2026-10-28 MUNI-YEAR-FRESHNESS-AUDIT-01: 財政力指数などが e-Stat より 1 年遅れていた)
+  for (const target of collectTargets().filter(
+    (t) => t.level === "prefecture" || !t.config.entities.includes("prefecture"),
+  )) {
     const { config } = target;
     const entry = ledger.get(target.table)?.get(target.queryKey);
     if (!entry?.years || entry.error || entry.truncated || entry.duplicateRows) continue;
@@ -105,18 +110,25 @@ function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skippe
 
     const exclusions = [...(config.yearExclusions ?? [])];
     const already = new Set(exclusions.flatMap((e) => e.years));
-    const inherited = migrate
+    const inherited = migrate && target.level === "prefecture"
       ? inheritedExclusionYears(configYears, entry.years).filter((year) => !already.has(year))
       : [];
     if (inherited.length > 0) exclusions.push({ years: inherited, reason: YEAR_EXCLUSION_INHERITED });
 
-    const resolved = resolveLedgerYears({
-      configYears,
-      ledgerYears: entry.years,
-      excludedYears: exclusions.flatMap((e) => e.years),
-      suppliedYears: (config.supplementalSources ?? []).flatMap((s) => s.years),
-      removeMissing,
-    });
+    const resolved =
+      target.level === "city"
+        ? resolveCityLedgerYears({
+            configYears,
+            ledgerYears: entry.years,
+            excludedYears: exclusions.flatMap((e) => e.years),
+          })
+        : resolveLedgerYears({
+            configYears,
+            ledgerYears: entry.years,
+            excludedYears: exclusions.flatMap((e) => e.years),
+            suppliedYears: (config.supplementalSources ?? []).flatMap((s) => s.years),
+            removeMissing,
+          });
     if (resolved.years.length === 0) {
       skipped.push(`${config.key} (台帳に値のある年が無い)`);
       continue;

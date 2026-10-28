@@ -24,7 +24,7 @@ export const realPublicDebtServiceRatioCity: MetricConfig = {
   },
   "years": {
     "from": 2008,
-    "to": 2021,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "isActive": true,

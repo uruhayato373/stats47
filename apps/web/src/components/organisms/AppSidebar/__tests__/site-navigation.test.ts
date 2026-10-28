@@ -1,21 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  ALL_THEMES_NAV_ITEM,
-  COMPARE_NAV_ITEM,
   getActiveSidebarHref,
   HOME_NAV_ITEM,
   PRIMARY_NAV_ITEMS,
 } from '../site-navigation';
 
-// サイドバーに並ぶ href の代表 (主要ナビ・ホーム・比較・テーマ一覧・カテゴリ 1 件・テーマ 1 件)
+// サイドバーに並ぶ href の代表 (ホーム・主要ナビ (テーマ一覧を含む)・カテゴリ 2 件・テーマ 1 件)
 const HREFS = [
   HOME_NAV_ITEM.href,
   ...PRIMARY_NAV_ITEMS.map((item) => item.href),
-  COMPARE_NAV_ITEM.href,
   '/category/laborwage',
   '/category/population',
-  ALL_THEMES_NAV_ITEM.href,
   '/themes/population-dynamics',
 ];
 
@@ -27,12 +23,16 @@ describe('getActiveSidebarHref', () => {
     ['/ranking/', '/ranking'],
     ['/category/laborwage', '/category/laborwage'],
     ['/category/laborwage/sub', '/category/laborwage'],
-    ['/category/population/compare', '/category/population/compare'],
+    // 地域間比較はサイドバーに置かないので、そのカテゴリの項目を現在地にする
+    ['/category/population/compare', '/category/population'],
     ['/areas', '/areas'],
     ['/areas/13000', '/areas'],
-    ['/municipalities', '/municipalities'],
-    ['/municipalities/ranking/example', '/municipalities'],
-    ['/areas/37000/cities/37203', '/municipalities'],
+    // 地域単位は内容の中の切り口: 市区町村の比較は同じ内容の項目、市区町村ページは「地域」(2026-10-28)
+    ['/municipalities', '/ranking'],
+    ['/municipalities/ranking/example', '/ranking'],
+    ['/municipalities/ranking/example/23000', '/ranking'],
+    ['/municipalities/themes/population', '/themes'],
+    ['/areas/37000/cities/37203', '/areas'],
     ['/themes', '/themes'],
     ['/themes/population-dynamics', '/themes/population-dynamics'],
     ['/themes/other-theme', '/themes'],

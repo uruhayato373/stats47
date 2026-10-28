@@ -66,7 +66,7 @@ paths:
 | `/category/[categoryKey]`                 | `app/category/[key]/items.json`                                                 | カテゴリ内 RankingItem 一覧                                                                                                                                                                                     |
 | `/compare/[categoryKey]`                  | `app/category/[key]/items.json`                                                 | 同上（compare と共用）                                                                                                                                                                                          |
 | `/areas/[areaCode]`                       | `app/areas/[code]/databook.json`                                                | 県データブック (指標値 + 全国順位)。県の `profile.json` は読み手 0 のため 2026-10-05 に生成を廃止 (AREA-PROFILE-JSON-RETIRE-01) |
-| `/areas/[areaCode]/cities/[cityCode]`     | `app/areas/[pref]/cities/[city]/databook.json`                                  | 市区町村データブック。市区町村ランキングの配信値を市区町村ごとに束ね、県内順位を足したもの (節 = 市区町村テーマ、並び・見出し = `CITY_DATABOOK_LAYOUT`)。生成は `generate-city-databooks.ts` (deploy の市区町村ランキング生成の直後 / sync-snapshots `city-databook`)。生成時刻を持たない。市区町村の `profile.json` は 2026-10-21 に廃止 |
+| `/areas/[areaCode]/cities/[cityCode]`     | `app/areas/[pref]/cities/[city]/databook.json`                                  | 市区町村データブック。市区町村ランキングの配信値を市区町村ごとに束ね、県内順位を足したもの (節 = 市区町村テーマ、並び・見出し = `CITY_DATABOOK_LAYOUT`)。生成は `generate-city-databooks.ts` (deploy の市区町村ランキング生成の直後 / sync-snapshots `city-databook`)。生成時刻を持たない。政令指定都市 20 市だけ行政区の内訳 `wardBreakdown` (任意項目・2026-10-28) を持つ (値は `app/stats/<key>/cities.json` の行政区の行)。市区町村の `profile.json` は 2026-10-21 に廃止 |
 | `/themes/tourism` | `app/themes/tourism/seasonality.json` | 確定版の月別延べ宿泊者数。年月を独立に保持し、47県と公式全国を分離。 |
 | `/themes/health-checkups` | `app/themes/health-checkups/nutrition.json` | 国民健康・栄養調査の平均・95%信頼区間・人数。47県と公式全国を分離し、年齢調整条件・原典SHAを保持。 |
 | `/themes/local-economy` | `app/themes/local-economy/specialization.json` | 2021年経済センサスの18業種。47県と全国の従業者・割合・特化係数。分類残差も公式分母に保持。 |
@@ -257,6 +257,13 @@ Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<
 `app/`は「すべて置いてよい一般公開フォルダ」ではなく、公開URLの配信契約を持つsnapshot専用。
 販売価格、媒体展開順、draft/gated状態などの運用JSONは`.local/`または型付きgit SSOTへ置き、R2へpushしない。
 `gis/`も原典のライセンスがpublic mirrorを許す場合だけ保持する。非商用原典はローカル作業キャッシュに限定する。
+
+## 市区町村の境界 (`gis/mlit/<版>/<県>/`)
+
+| キー | 中身 | 読み手 |
+|---|---|---|
+| `<県>_city.topojson` | 国土数値情報 行政区域の分割版 (行政区・特別区が別々の形) | **唯一の元**。`fetchMunicipalityTopologyForWardMode` が `merged` / `split` を作る (MUNI-DESIGNATED-CITY-WARDS-01) |
+| `<県>_city_dc.topojson` | 自前の統合版。政令指定都市を 1 つにまとめるが、23 区も特別区部 13100 の 1 つにまとめる | 新しい読み手を作らない。残る読み手は移動フローの地図の中継 (`/api/mf-topo`) と Remotion の人口コロプレス (`MUNI-WARD-MODE-READERS-01` で移す)。読み手が 0 になってから削除を承認制で行う |
 
 ## JSON ファイル命名規則
 

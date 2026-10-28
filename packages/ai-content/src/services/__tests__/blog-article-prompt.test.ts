@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
   buildBlogArticlePrompt,
+  buildBlogCriticPrompt,
+  decideBlogCriticVerdict,
   type BlogArticlePromptInput,
   type GroundTruthMetric,
 } from "../prompts/blog-article-prompt";
@@ -93,5 +95,23 @@ describe("buildBlogArticlePrompt — 読者向けコピーの配線", () => {
 
     expect(prompt).toContain("牛肉への支出が最も多い県は？");
     expect(prompt).toContain("豚肉への支出が最も多い県は？");
+  });
+});
+
+describe("blog critic", () => {
+  it("critic に書き手の制約を渡し、実データ外の指標を求める指摘を禁じる", () => {
+    const prompt = buildBlogCriticPrompt("本文");
+    expect(prompt).toContain("書き手の制約");
+    expect(prompt).toContain("相関係数を示せ");
+    expect(prompt).toContain("blocker が無ければ major や minor が残っていても PASS");
+    // 値と順位は factual gate が照合済み。critic が同順位の飛びを欠落と誤判定した実例 (2026-10-28)
+    expect(prompt).toContain("機械が実データと照合済み");
+  });
+
+  it("verdict は自己申告ではなく blocker の有無で決まる", () => {
+    const head = "---\nverdict: REVISE\n---\n## 評価サマリ\n良い\n## 指摘\n";
+    expect(decideBlogCriticVerdict(`${head}- [major] 図の言い換え\n- [minor] 重複\n`)).toBe("PASS");
+    expect(decideBlogCriticVerdict(`${head.replace("REVISE", "PASS")}- [blocker] 順位の誤り\n`)).toBe("REVISE");
+    expect(decideBlogCriticVerdict("PASS です")).toBeNull();
   });
 });

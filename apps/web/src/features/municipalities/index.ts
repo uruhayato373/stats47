@@ -1,3 +1,4 @@
+export * from './components/MunicipalityPrefectureLinks';
 export * from './components/MunicipalityRankingCommentary';
 export * from './components/MunicipalityRankingViewTracker';
 export * from './components/TrackedMunicipalityThemeLink';

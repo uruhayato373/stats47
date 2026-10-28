@@ -1,9 +1,10 @@
 /**
  * ランキング一覧（索引ハブ）
  *
- * 注目ランキングと、17 カテゴリの索引 (件数付き) + 全ランキングの検索への入口。
+ * 注目ランキングと、17 カテゴリの索引 + 全ランキングの検索への入口。
  * 2026-10-28 に本文のカテゴリ節を撤去したが、390px ではサイドバーが Sheet に畳まれ本文から
- * カテゴリを探せなくなったため、同日に件数付きの索引 (RailCategoryList を本文の密度で流用) を戻した。
+ * カテゴリを探せなくなったため、同日に索引 (RailCategoryList を本文の密度で流用) を戻した。
+ * 件数はサイドバーと同じく出さない (選ぶ判断に役立たず偏りが目立つだけ。2026-10-28 オーナー合意)。
  *
  * 経緯: 2026-05-28 に旧索引（featured の薄い複製）を `/` へ 301 統合したが、
  * 2026-06-15 にカテゴリ網羅ブラウズのハブとして再設計・再設置した（home とは役割が異なる:
@@ -22,6 +23,7 @@ import { Compass, LayoutGrid, TrendingUp } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { PageSections } from '@/components/layout/PageShell';
+import { StatisticsScopeNav } from '@/components/navigation';
 import { RailCategoryList, RailStack } from '@/components/rail';
 import { SectionIndexLink } from '@/components/section';
 import { RailCard, RailNavRow, SectionCard } from '@/components/surface';
@@ -38,13 +40,13 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 import type { Metadata } from 'next';
 
 const RANKING_COUNT = KNOWN_RANKING_KEYS.size;
-/** カテゴリの数と件数は、サイドバーと同じビルド前の生成物から数える (本文と metadata で同じ値を使う) */
+/** カテゴリの並びと数は、サイドバーと同じビルド前の生成物から数える (本文と metadata で同じ値を使う) */
 const CATEGORY_INDEX = RANKING_PROMINENCE_CATEGORIES.map((category) => ({
   categoryKey: category.categoryKey,
   categoryName: category.categoryName,
-  count: category.count,
 }));
 const CATEGORY_COUNT = CATEGORY_INDEX.length;
+const RANKING_SCOPE_HREFS = { prefectures: '/ranking' } as const;
 
 export const dynamic = 'force-dynamic';
 
@@ -86,6 +88,8 @@ export default function RankingIndexPage() {
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: 'ランキング' }]}
       />
+      {/* 市区町村はサイドバーの項目にせず、ここで地域単位を切り替える (2026-10-28・03_情報設計.md「地理スコープ」) */}
+      <StatisticsScopeNav current="prefectures" hrefs={RANKING_SCOPE_HREFS} />
       {/*
         eyebrow と description は置かない。
         - eyebrow「ランキング」は直上のパンくず末尾と完全に同じ語で情報が増えない
@@ -127,6 +131,7 @@ export default function RankingIndexPage() {
         >
           <RailCategoryList
             items={CATEGORY_INDEX}
+            showCount={false}
             trackingSurface="ranking_category"
             moreLink={{
               href: '/search?type=ranking',

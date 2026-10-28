@@ -21,6 +21,7 @@ import { CATEGORY_KEYS, type CategoryKey } from '@stats47/data-configs/categorie
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
+  isMunicipalityPrefectureRankingKey,
 } from '@stats47/data-configs/geo-scope';
 
 import { isPublishableCity } from '@/features/area-profile/constants/publishable-cities';
@@ -162,6 +163,12 @@ export const UrlPolicy = {
       KNOWN_MUNICIPALITY_THEME_SLUGS.has(slug),
     isKnownRanking: (key: string): boolean =>
       KNOWN_MUNICIPALITY_RANKING_KEYS.has(key),
+    /**
+     * 県名×市区町村ランキング (`/municipalities/ranking/<key>/<県コード>`) を持つ指標 (MUNI-PREF-RANKING-ROUTE-01)。
+     * この指標の `?pref=<県コード>` 絞り込みは県別ページへ 301 する。
+     */
+    hasPrefectureRanking: (key: string): boolean =>
+      KNOWN_MUNICIPALITY_RANKING_KEYS.has(key) && isMunicipalityPrefectureRankingKey(key),
   },
   blog: {
     isKnownPublished: (slug: string): boolean =>

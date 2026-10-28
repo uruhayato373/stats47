@@ -654,6 +654,29 @@
       "published": true
     },
     {
+      "id": "municipality-theme:living-environment",
+      "kind": "municipality-theme",
+      "key": "living-environment",
+      "title": "市区町村の住環境",
+      "href": "/municipalities/themes/living-environment",
+      "rankingKeys": [
+        "nursery-within-500m-young-child-household-ratio",
+        "elementary-school-within-1km-household-ratio",
+        "junior-high-school-within-1km-household-ratio",
+        "station-within-1km-household-ratio",
+        "medical-facility-within-500m-household-ratio",
+        "park-within-500m-household-ratio",
+        "evacuation-site-within-500m-household-ratio",
+        "post-office-bank-within-500m-household-ratio",
+        "elderly-day-service-within-500m-household-ratio",
+        "public-sewer-housing-ratio",
+        "vacant-housing-rate-excluding-rental-sale-secondary",
+        "vacant-housing-rate-for-rent",
+        "damaged-vacant-housing-ratio"
+      ],
+      "published": true
+    },
+    {
       "id": "municipality-theme:local-finance",
       "kind": "municipality-theme",
       "key": "local-finance",

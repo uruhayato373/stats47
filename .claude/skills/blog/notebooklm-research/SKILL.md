@@ -194,6 +194,31 @@ content(blog): {slug} を NotebookLM で内容補強
 白書・政府統計から {観点} の根拠を追加し、{H2 section} の散文導入を充実化。
 ```
 
+## 新規記事の調査段 (headless 執筆の前に回す・Claude のトークンを使わない)
+
+`generate-blog-article.ts` が `contents/blog/<slug>/article.prompt.txt` を用意したあと、
+headless 執筆 (`write-blog-headless.ts`、`/write-prepared-article` の「headless 経路」) の**前**に、
+白書の要点と資料名を `contents/blog/<slug>/research.md` に集める。執筆バッチは research.md があれば
+author prompt の末尾に「調査材料」として足す。Claude は NotebookLM の回答を読まないので、この段の
+Claude トークンは 0 である。
+
+```bash
+# 0. ログイン確認 (exit 2 なら人が `~/bin/notebooklm login`。CI では使えない)
+~/bin/notebooklm list --json > /dev/null
+
+# 1. 指標の背景を聞き、回答をそのまま research.md に保存する (1 クエリ ~30 秒)
+node .claude/scripts/notebooklm-cross-query.mjs --notebooks "最新の白書" \
+  "「<指標A の平易な名前>」と「<指標B>」について、都道府県差の背景・関連する制度・白書での扱いを、資料名と章を添えて箇条書きで教えてください。数値は不要です。" \
+  > contents/blog/<slug>/research.md
+```
+
+- **白書の数値は記事に入らない。** 執筆バッチは「調査材料の数値・年・割合は書かない」と指示する。
+  記事の数値は `ci-factual-gate` が実データ (`data/*.json`) と突合するので、白書由来の数値を書くと落ちる
+- 回答が空・的外れなら research.md を消して執筆する (調査材料なしでも記事は書ける)
+- research.md は記事と一緒に outbox に残るが、公開されるのは article.md と図だけ
+- 公式 API がある企業版 (Gemini Notebook Enterprise) は Google Cloud のライセンスが要るため使っていない
+  (`.claude/todo/backlog.md` の BLOG-NOTEBOOKLM-RESEARCH-01)
+
 ## 規約
 
 - **本スキルは aggregator orchestrator**: 新規 API 呼び出しロジックは追加しない、既存ラッパー (`notebooklm-cross-query.mjs`) と Edit の組合せで完結

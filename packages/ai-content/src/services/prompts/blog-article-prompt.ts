@@ -256,6 +256,25 @@ export function buildBlogCriticPrompt(articleMarkdown: string): string {
    (どの記事にも書ける一般論なら価値がありません)
 4. 題と本文が一致しているか。題が煽っているのに中身が伴わないものは落とします
 5. 同じ内容の繰り返しで分量を稼いでいないか
+6. 数え間違い・順位や地方区分の誤りなど、本文の中で確かめられる事実の誤りが無いか
+
+# 書き手の制約 (これを前提に審査します)
+
+書き手は、記事に載っている指標の実データ (都道府県別の値と順位) しか使えません。
+他の指標・相関係数・人口や面積・白書の数値を足すことは禁じられています。
+そのため「別の指標を加えて裏付けよ」「相関係数を示せ」という指摘はしないでください。
+データで裏付けられない断定があれば、それを「仮説として書く・弱める・削る」よう指摘します。
+
+本文に書かれた県の値と順位は、機械が実データと照合済みです。「本文の他の箇所で確認できない」
+ことを理由に値や順位を指摘しないでください。同じ値の県は同じ順位になり、次の順位は飛びます
+(42位が 2 県なら次は 44位) 。これは誤りではありません。
+
+# 重大度の基準
+
+- blocker: 事実の誤り (数え間違い・順位や地域の誤り)、相関を因果として断定している、
+  題が約束したことに本文が答えていない
+- major: 図の数字の言い換えが節の大半を占める、どの記事にも書ける一般論の注記、根拠の弱い推論を断定調で書いている
+- minor: 繰り返し・表現の不自然さ・構成の改善案
 
 # 出力形式
 
@@ -275,10 +294,20 @@ date: <今日の日付 YYYY-MM-DD 形式>
 ## 判定理由
 <PASS か REVISE かの根拠を 2〜3 文>
 
-blocker が 1 件でもあれば verdict は REVISE です。
+blocker が 1 件でもあれば verdict は REVISE、blocker が無ければ major や minor が残っていても PASS です。
 評価サマリと判定理由は合わせて 200 文字以上書いてください。
 
 # 審査対象の記事
 
 ${articleMarkdown}`;
+}
+
+/**
+ * critic の出力から verdict を決める。モデルの自己申告 (verdict 行) ではなく blocker の有無で決める
+ * (blog-critic agent と同じ「BLOCK 0 件なら PASS」)。評価サマリも指摘も無い出力は形式崩れとして null。
+ */
+export function decideBlogCriticVerdict(review: string): "PASS" | "REVISE" | null {
+  const findings = review.match(/^- \[(blocker|major|minor)\]/gm) ?? [];
+  if (findings.length === 0 && !/^## 評価サマリ/m.test(review)) return null;
+  return findings.some((f) => f.includes("[blocker]")) ? "REVISE" : "PASS";
 }
