@@ -4,6 +4,8 @@ main = "src/worker-cache-gateway.ts"
 compatibility_date = "2026-08-04"
 # node:sqlite はアプリで使わない。依存パッケージからの誤った runtime 解決を防ぐため無効化する。
 compatibility_flags = ["nodejs_compat", "disable_nodejs_sqlite_module"]
+# wrangler 4.152 は未指定だとソースマップを送り、上限 60 MiB を超えて deploy が失敗した (2026-10-28 run 40734623801・61,922 KiB)。
+upload_source_maps = false
 
 [assets]
 directory = ".open-next/assets"
