@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**750 件** (最終更新: 2026-10-27)
+**752 件** (最終更新: 2026-10-28)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-28 | 🧵 Threads | area/area-35000-profile | 旅先では見えにくい山口の輪郭。 県木アカマツと特産岩国れんこん、暮らしの統計を同じページで確認できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DfCBqZ3Eege) |
+| 2026-10-28 | 🧵 Threads | ranking/cleaning-shop-count-per-100k | クリーニング店が最も多い県は福井。  人口10万人あたり115.6所で、最も少ない神奈川（37.9所）の3.1倍。 2位… | [🔗](https://www.threads.com/@stats47jp/post/DfBSplokmcA) |
 | 2026-10-27 | 🧵 Threads | area/area-34000-profile | 広島を数字と地域文化の両方から見る。 県鳥アビ、特産メバル、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/De_akZpAoQh) |
 | 2026-10-27 | 🧵 Threads | ranking/final-energy-consumption-per-capita | 1人あたりのエネルギー消費量が最も多い県は？  1位大分308.8GJ、2位山口276.9GJ、3位岡山273.2GJ。… | [🔗](https://www.threads.com/@stats47jp/post/De-sypbk8V8) |
 | 2026-10-26 | 📸 Instagram | ranking-quiz/white-bread-consumption-quantity | 【都道府県クイズ】食パンをいちばん多く買う県は？  A 京都府 B 兵庫県 C 滋賀県  ヒントは2枚目、答えは3枚目�… | [🔗](https://www.instagram.com/p/De9vaK6ldZE/) |
