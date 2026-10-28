@@ -11303,12 +11303,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "5d330cd7339f5408fceec77ef25ccee871a5f818cd8b6365cd8cce1e4dc247c8",
-          "files": 6,
-          "bytes": 260065,
-          "savedAt": "2026-10-24T04:51:02.813Z"
+          "sha256": "e77c0a2c5a160bcd2412c89182a9b39be2fbb1c37439f23d3ec76bba86963195",
+          "files": 10,
+          "bytes": 1892438,
+          "savedAt": "2026-10-28T01:37:31.469Z"
         },
-        "verifiedAt": "2026-10-24T04:51:02.813Z"
+        "verifiedAt": "2026-10-28T01:37:31.469Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
@@ -11327,12 +11327,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "d5f4be44c5a421af228e08696cbd43b225a4fd6b9f74b904537ac3dff0174464",
-          "files": 5,
-          "bytes": 39814,
-          "savedAt": "2026-10-24T01:44:23.008Z"
+          "sha256": "9708c93096f8d784acb0075e514b5b54bc1fdc8f5d40faae604cff247ee3e17d",
+          "files": 10,
+          "bytes": 596128,
+          "savedAt": "2026-10-28T01:46:07.123Z"
         },
-        "verifiedAt": "2026-10-24T01:44:23.008Z"
+        "verifiedAt": "2026-10-28T01:46:07.123Z"
       },
       "stats47Targets": [
         "/ranking/total-population"
