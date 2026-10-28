@@ -345,6 +345,7 @@ const seenPairs = new Set();
 const spuriousTally = {};
 const spuriousExamples = [];
 let countPairOnly = 0;
+let sizePairOnly = 0;
 for (const { key: baseKey, json } of corrData) {
   const baseMetric = metrics.get(baseKey);
   if (!baseMetric) continue;
@@ -377,6 +378,8 @@ for (const { key: baseKey, json } of corrData) {
       }
       // 件数×件数のルールが無ければ候補に残っていた組 (このルールで新たに外れた件数)
       if (spurious.length === 1 && spurious[0] === "count-pair") countPairOnly++;
+      // 規模×規模 (件数×金額の総額・金額の総額どうし) のルールだけで外れた組
+      if (spurious.length === 1 && spurious[0] === "size-pair") sizePairOnly++;
       spuriousExamples.push(`${pairId} (r=${r.toFixed(2)}): ${spurious.join(",")}`);
       continue;
     }
@@ -427,6 +430,11 @@ for (const { key: baseKey, json } of corrData) {
 console.error(
   `[count-pair] 人口で割っていない件数指標どうしの組を除外: ${spuriousTally["count-pair"] || 0} 件` +
     ` (うち他の除外理由が無く、このルールだけで外れた組 ${countPairOnly} 件)`,
+);
+// 件数×金額の総額・金額の総額どうしの組 (BLOG-TOPIC-PAIR-SCALE-01)
+console.error(
+  `[size-pair] 件数×金額の総額・金額の総額どうしの組を除外: ${spuriousTally["size-pair"] || 0} 件` +
+    ` (うち他の除外理由が無く、このルールだけで外れた組 ${sizePairOnly} 件)`,
 );
 if (Object.keys(spuriousTally).length > 0) {
   console.error(`[spurious] 疑似相関の除外: ${JSON.stringify(spuriousTally)}`);
@@ -574,7 +582,7 @@ const result = {
     "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   summary: summarize(queue),
   // 型B 候補から決定的ルールで外した組の件数 (reason code → 件数。1 組が複数 reason を持ちうる)
-  correlationExclusions: { ...spuriousTally, countPairOnly },
+  correlationExclusions: { ...spuriousTally, countPairOnly, sizePairOnly },
   queue,
 };
 saveQueue(result);

@@ -17,6 +17,9 @@
  *  - count-pair       : 両方が人口で割っていない件数指標 (BLOG-TOPIC-PAIR-PER-CAPITA-01)。
  *                       |r| に関係なく除外する。人口の大きい県ほど両方が多くなるだけで、
  *                       本文側では人口で割れない (prompt が実データ以外の数値を禁じる) ため
+ *  - size-pair        : 規模×規模のうち count-pair 以外 (件数×金額の総額、金額の総額×金額の総額)。
+ *                       例 コンビニ店舗数×歳入決算総額 r=0.95・郵便局数×老人福祉費 (BLOG-TOPIC-PAIR-SCALE-01)。
+ *                       count-pair と同じ理由で |r| に関係なく除外する
  */
 import { parseUnit } from "../../lib/unit-semantics.mjs";
 
@@ -78,6 +81,32 @@ export function isPopulationCountMetric({ unit, title = "", subtitle = "", isKak
   if (!COUNT_DIMENSIONS.has(parsed.dimension)) return false;
   if (PER_QUALIFIER_RE.test(subtitle || "") || PER_QUALIFIER_RE.test(title || "")) return false;
   return true;
+}
+
+// 金額の次元でも、1 人・1 世帯・1 か月あたりの値として読む修飾子 (給与・価格・世帯の家計など)。
+// unit は素の「円」「千円」のままで、意味は title / subtitle が持つ (unit-semantics-standards.md §4)
+const PER_UNIT_AMOUNT_RE = /(月額|年額|給与|給料|賃金|初任給|手当|世帯|価格|単価|料金)/u;
+
+/**
+ * 人口で割っていない金額の総額か (歳入決算総額・老人福祉費・製造品出荷額等 など)。
+ *
+ * 次元は unit 正典 (`parseUnit`) の currency。分母つきの単位、subtitle / title の分母修飾子
+ * (`1人当たり`・`平均`)、1 人・1 世帯あたりで読む金額 (給与月額・初任給・世帯の収入・価格) は false。
+ * 家計調査は世帯あたりの値なので false。key 名からは推測しない。
+ */
+export function isMoneyTotalMetric({ unit, title = "", subtitle = "", isKakei = false }) {
+  if (isKakei) return false;
+  const parsed = parseUnit(unit);
+  if (parsed.dimension !== "currency" || parsed.hasDenominator) return false;
+  for (const text of [title || "", subtitle || ""]) {
+    if (PER_QUALIFIER_RE.test(text) || PER_UNIT_AMOUNT_RE.test(text)) return false;
+  }
+  return true;
+}
+
+/** 人口・経済の規模に比例する指標か (人口で割っていない件数、または金額の総額) */
+export function isSizeMetric(meta) {
+  return isPopulationCountMetric(meta) || isMoneyTotalMetric(meta);
 }
 
 /**
@@ -147,6 +176,9 @@ export function spuriousReasons({ base, pair, pearsonR, partialRPopulation, scat
   // 件数×件数 (人口の大きさだけで相関が出る組)。|r| の大小に関係なく外す
   if (isPopulationCountMetric(base) && isPopulationCountMetric(pair)) {
     reasons.push("count-pair");
+  } else if (isSizeMetric(base) && isSizeMetric(pair)) {
+    // 件数×金額の総額・金額の総額どうし (BLOG-TOPIC-PAIR-SCALE-01)。理由は count-pair と同じ
+    reasons.push("size-pair");
   }
 
   // 機序カテゴリ距離 (同一 category は B型の跨ぎ要件を満たさない)

@@ -10,8 +10,10 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   correlationTitle,
+  isMoneyTotalMetric,
   isPopulationCountMetric,
   isScaleMetric,
+  isSizeMetric,
   keyFamily,
   parseMetricConfigSource,
   spuriousReasons,
@@ -78,7 +80,7 @@ test("実例: コンビニ店舗数 × コンビニ店舗数(商業統計) r=0.9
   assert.ok(reasons.includes("self-derived"));
 });
 
-test("実例: 小売販売額 × 歯科診療所数 r=0.99 → scale-pair で除外", () => {
+test("実例: 小売販売額 × 歯科診療所数 r=0.99 → scale-pair と size-pair で除外", () => {
   const reasons = spuriousReasons({
     base: { key: "retail-sales-amount", unit: "百万円", category: "commercial", yearTo: 2021 },
     pair: { key: "dental-clinic-count", unit: "所", category: "socialsecurity", yearTo: 2022 },
@@ -86,7 +88,7 @@ test("実例: 小売販売額 × 歯科診療所数 r=0.99 → scale-pair で除
     partialRPopulation: 0.5,
     scatterData: scatter47,
   });
-  assert.deepEqual(reasons, ["scale-pair"]);
+  assert.deepEqual(reasons, ["scale-pair", "size-pair"]);
 });
 
 test("scale-pair: 偏相関データ無しは閾値を 0.9 に下げる", () => {
@@ -237,7 +239,62 @@ test("count-pair: 片方が人口あたりの版なら除外しない", () => {
   assert.deepEqual(reasons, []);
 });
 
-test("topic-queue.json: 型B の pending に件数×件数の組が無い", () => {
+// ── BLOG-TOPIC-PAIR-SCALE-01: 件数×金額の総額・金額の総額どうし ───────────────
+// 2026-10-28 の型B pending に残っていた実例 (コンビニ店舗数×歳入決算総額 r=0.95、郵便局数×老人福祉費)
+
+const CONVENIENCE = { key: "convenience-store-count", unit: "店", title: "コンビニエンスストア店舗数", category: "commercial", yearTo: 2021 };
+const REVENUE = { key: "revenue-settlement-total", unit: "千円", title: "歳入決算総額", subtitle: "都道府県財政", category: "administrativefinancial", yearTo: 2022 };
+const ELDERLY_WELFARE = { key: "elderly-welfare-cost", unit: "千円", title: "老人福祉費", subtitle: "都道府県財政", category: "socialsecurity", yearTo: 2022 };
+const SHIPMENT = { key: "manufactured-goods-shipment", unit: "百万円", title: "製造品出荷額等", subtitle: "総額", category: "miningindustry", yearTo: 2021 };
+
+test("isMoneyTotalMetric: 分母の無い金額の総額 (財政・出荷額・被害額) は true", () => {
+  assert.equal(isMoneyTotalMetric(REVENUE), true);
+  assert.equal(isMoneyTotalMetric(ELDERLY_WELFARE), true);
+  assert.equal(isMoneyTotalMetric(SHIPMENT), true);
+  assert.equal(isMoneyTotalMetric({ unit: "億円", title: "国民医療費", subtitle: "総額" }), true);
+});
+
+test("isMoneyTotalMetric: 家計調査・人口当たり・平均・給与・世帯・価格・金額以外は false", () => {
+  assert.equal(isMoneyTotalMetric({ unit: "円", title: "豚肉消費支出額", isKakei: true }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "千円", title: "1人当たりの国民医療費" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "千円", title: "老人福祉費", subtitle: "人口1人当たり" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "千円/人", title: "市町村民税" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "円", title: "警察職 平均給与月額" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "千円", title: "新規学卒者初任給", subtitle: "大卒・男性" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "千円", title: "きまって支給する現金給与月額", subtitle: "女性" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "円", title: "教育費", subtitle: "全世帯" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "円", title: "地域別最低賃金" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "施設", title: "一般病院数" }), false);
+  assert.equal(isMoneyTotalMetric({ unit: "％", title: "財政力指数" }), false);
+});
+
+test("size-pair: 件数×金額の総額・金額の総額どうしは |r| が中程度でも除外する", () => {
+  for (const [base, pair] of [
+    [CONVENIENCE, REVENUE],
+    [{ ...HOSPITALS, category: "infrastructure" }, ELDERLY_WELFARE],
+    [SHIPMENT, REVENUE],
+  ]) {
+    const reasons = spuriousReasons({ base, pair, pearsonR: 0.7, partialRPopulation: 0.5, scatterData: scatter47 });
+    assert.deepEqual(reasons, ["size-pair"], `${base.key} × ${pair.key}`);
+  }
+});
+
+test("size-pair: 件数×件数は count-pair のまま (size-pair と二重に数えない)", () => {
+  const reasons = spuriousReasons({ base: HOSPITALS, pair: ELDERLY_SINGLE, pearsonR: 0.7, partialRPopulation: 0.5, scatterData: scatter47 });
+  assert.deepEqual(reasons, ["count-pair"]);
+});
+
+test("size-pair: 片方が家計調査・人口当たり・率なら除外しない", () => {
+  const kakei = { key: "pork-consumption-expenditure", unit: "円", title: "豚肉消費支出額", isKakei: true, category: "laborwage", yearTo: 2024 };
+  const perCapita = { ...ELDERLY_WELFARE, key: "elderly-welfare-cost-per-capita", subtitle: "人口1人当たり" };
+  const rate = { key: "outpatient-rate", unit: "%", title: "通院率", category: "laborwage", yearTo: 2022 };
+  for (const pair of [kakei, perCapita, rate]) {
+    const reasons = spuriousReasons({ base: CONVENIENCE, pair, pearsonR: 0.7, partialRPopulation: 0.5, scatterData: scatter47 });
+    assert.deepEqual(reasons, [], `${CONVENIENCE.key} × ${pair.key}`);
+  }
+});
+
+function loadMetricMetas() {
   const metricsDir = path.join(PROJECT_ROOT, "data/metrics");
   const metas = new Map();
   for (const file of fs.readdirSync(metricsDir)) {
@@ -245,16 +302,32 @@ test("topic-queue.json: 型B の pending に件数×件数の組が無い", () =
     const meta = parseMetricConfigSource(fs.readFileSync(path.join(metricsDir, file), "utf8"));
     if (meta) metas.set(meta.key, meta);
   }
+  return metas;
+}
+
+function pendingBPairs() {
+  const metas = loadMetricMetas();
   const queue = JSON.parse(
     fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/topic-queue.json"), "utf8"),
   ).queue;
   const pendingB = queue.filter((e) => e.status === "pending" && e.archetype === "B");
   // 母集団が空なら何も見ていないのと区別できない
   assert.ok(pendingB.length > 0, "型B の pending が 0 件 (検査対象が無い)");
-  const offenders = pendingB.filter((e) => {
+  return pendingB.map((e) => {
     const [a, b] = e.metricKeys.map((k) => metas.get(k));
     assert.ok(a && b, `metric config が無い: ${e.metricKeys.join(", ")}`);
-    return isPopulationCountMetric(a) && isPopulationCountMetric(b);
+    return { topicKey: e.topicKey, a, b };
   });
+}
+
+test("topic-queue.json: 型B の pending に件数×件数の組が無い", () => {
+  const offenders = pendingBPairs().filter(
+    ({ a, b }) => isPopulationCountMetric(a) && isPopulationCountMetric(b),
+  );
+  assert.deepEqual(offenders.map((e) => e.topicKey), []);
+});
+
+test("topic-queue.json: 型B の pending に規模×規模 (件数・金額の総額) の組が無い", () => {
+  const offenders = pendingBPairs().filter(({ a, b }) => isSizeMetric(a) && isSizeMetric(b));
   assert.deepEqual(offenders.map((e) => e.topicKey), []);
 });
