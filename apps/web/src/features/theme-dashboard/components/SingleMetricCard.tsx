@@ -47,6 +47,11 @@ type Trend =
  * **異なる年が 2 件以上ある場合だけ**小さく描く。空の折れ線枠・ローディング風の
  * 大面積・「推移データがありません」だけの固定高領域は置かない (情報密度を優先)。
  *
+ * 2 列に並ぶので、カードは grid の行の高さいっぱいに伸ばし (h-full + flex-col)、
+ * 出典・ランキングは帯 (CardFooter) にせず本文末の text-xs のリンク行に置く。
+ * 隣のカードと高さ・下端が揃う。推移の有無にかかわらず、見出し・値の行 (text-2xl・テンプレートの KPI と同じ)・
+ * リンク行の位置は隣のカードと同じにする。推移の無いカードは推移の位置に 1 行の案内だけを置く。
+ *
  * 時系列は `MetricSwitcherPanel` と同じ action を、この指標 1 件分だけ遅延取得する
  * (自地域 + 全国。47都道府県・未選択では取得しない = GEO-SCOPE-SEPARATION-01 WP2)。
  * 県系列が空なら 全国 → 47 県平均 の順に退避し、平均を「全国」と呼ばない。
@@ -140,27 +145,20 @@ export function SingleMetricCard({
       data-unit={metric.unit}
       data-year={metric.yearName ?? ''}
       data-series-count={isReady ? 1 : 0}
+      className="h-full"
     >
       <ChartPanel
         id={id}
         title={heading}
-        contentClassName="p-4"
-        footer={
-          <ChartFooter
-            source={metric.sourceName}
-            sourceLink={metric.sourceLink}
-            sourceLinks={metric.sourceLinks}
-            rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
-            rankingLabel="ランキングを見る"
-          />
-        }
+        className="h-full"
+        contentClassName="flex flex-1 flex-col"
       >
         {/* 見出しと同じ文言を本文で繰り返さない。グループ名が別にあるときだけ指標名を添える */}
         {label !== heading && (
           <p className="text-[11px] leading-4 text-muted-foreground">{label}</p>
         )}
         <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
-          <span className="text-xl font-bold tabular-nums text-foreground">
+          <span className="text-2xl font-semibold tabular-nums text-foreground">
             {shown !== null
               ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
               : '—'}
@@ -199,6 +197,15 @@ export function SingleMetricCard({
             {trend.yearName}の単年データのため、推移グラフはありません
           </p>
         ) : null}
+        <div data-slot="metric-card-links" className="mt-auto pt-3">
+          <ChartFooter
+            source={metric.sourceName}
+            sourceLink={metric.sourceLink}
+            sourceLinks={metric.sourceLinks}
+            rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
+            rankingLabel="ランキングを見る"
+          />
+        </div>
       </ChartPanel>
     </div>
   );

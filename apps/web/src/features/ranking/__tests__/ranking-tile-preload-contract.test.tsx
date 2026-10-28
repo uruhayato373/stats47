@@ -46,7 +46,6 @@ describe("ranking tile preload contract", () => {
     const html = renderToStaticMarkup(
       <RankingPageHeadAssets
         structuredData={{}}
-        breadcrumbStructuredData={{}}
         faqStructuredData={null}
         initialTileUrls={tileUrls}
       />,

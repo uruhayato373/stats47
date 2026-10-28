@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { ChartSkeleton, type DashboardComponent, type DashboardComponentType } from "@/components/stat-charts";
+import { ChartLoadingCard, type DashboardComponent, type DashboardComponentType } from "@/components/stat-charts";
 import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 
@@ -95,7 +95,7 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
               key={`${comp.componentKey}-${region.areaCode}`}
               className="min-w-0"
             >
-                <Suspense fallback={<ChartSkeleton />}>
+                <Suspense fallback={<ChartLoadingCard />}>
                   <DashboardComponentRenderer
                     component={pageComponentToDashboard(comp, region.areaName)}
                     area={toArea(region)}

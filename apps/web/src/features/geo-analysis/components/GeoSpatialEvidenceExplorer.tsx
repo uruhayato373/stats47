@@ -235,7 +235,13 @@ function GeoSpatialEvidenceExplorerState({
         ) : (
           <Select
             value={prefCode}
-            onValueChange={changePref}
+            items={PREFECTURE_LIST_2DIGIT.map((pref) => ({
+              value: pref.code,
+              label: pref.name,
+            }))}
+            onValueChange={(value) => {
+              if (value !== null) changePref(value);
+            }}
             disabled={fixedPrefecture}
           >
             <SelectTrigger
@@ -257,6 +263,10 @@ function GeoSpatialEvidenceExplorerState({
       {publicFacility ? (
         <Select
           value={facilityGroup}
+          items={Object.entries(PUBLIC_FACILITY_GROUPS).map(([key, label]) => ({
+            value: key,
+            label,
+          }))}
           onValueChange={(value) => {
             if (value !== 'administrative' && value !== 'meeting') return;
             setFacilityGroup(value);

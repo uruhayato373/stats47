@@ -175,7 +175,7 @@ export function TimelineChoroplethMap({
           max={frames.length - 1}
           step={1}
           value={[frameIndex]}
-          onValueChange={(v) => handleScrubber(v[0])}
+          onValueChange={(v) => handleScrubber(typeof v === "number" ? v : v[0])}
           className="flex-1"
           aria-label="年スクラバー"
         />

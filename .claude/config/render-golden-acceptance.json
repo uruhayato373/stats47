@@ -59,10 +59,10 @@
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/scatterplot-landscape.png",
-      "beforeSha256": "52fa2475a7ab0e1bd79a4e383baeb931e2de8d7a5f34f4092890863fdc5d9637",
-      "afterSha256": "ddd9b8c4661b5fb26c8d035e8bf560591024739fe822205d27cfacbce9e28d8e",
-      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
-      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
+      "beforeSha256": "ddd9b8c4661b5fb26c8d035e8bf560591024739fe822205d27cfacbce9e28d8e",
+      "afterSha256": "1f34974512d6d91a56427cfaf69f74c35b60aec9dce8f41b0b191d17a7bdc625",
+      "cause": "dash the chart gridlines like the shadcndashboard template (CHART_STYLES.grid.dashArray); the 1284px diff is only at gridline intersections",
+      "causeRefs": ["commit-33736d836", "PR-1192/run-40613575667"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/sunburstchart-square.png",

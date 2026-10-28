@@ -680,11 +680,11 @@ export const BUSINESS_PLAN_EVENTS: readonly BusinessPlanEvent[] = [
   {
     id: 'compare-add',
     label: '比較へ追加',
-    canonicalEvent: 'geo_compare_add',
-    status: 'partially-measured',
+    canonicalEvent: null,
+    status: 'not-instrumented',
     owner: 'ga4-analyst',
     implementationPath: 'apps/web/src/lib/analytics/events.ts',
-    note: '比較数と地域コードを送る。GA4登録・反映確認までは部分計測。',
+    note: '比較へ追加する UI がどのページにも無いため、2026-10-28 に送信関数を削除した。比較 UI を作るときにイベントを定義し直す。',
   },
   {
     id: 'data-download',

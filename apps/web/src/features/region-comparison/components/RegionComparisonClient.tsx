@@ -65,7 +65,16 @@ export function RegionComparisonClient({
           <h2 className="text-base font-semibold text-muted-foreground">
             カテゴリ
           </h2>
-          <Select value={currentCategoryKey} onValueChange={handleCategoryChange}>
+          <Select
+            value={currentCategoryKey}
+            onValueChange={(key) => {
+              if (key !== null) handleCategoryChange(key);
+            }}
+            items={categories.map((cat) => ({
+              value: cat.categoryKey,
+              label: cat.categoryName,
+            }))}
+          >
             <SelectTrigger aria-label="比較カテゴリを選択" className="h-10 w-40 rounded-lg border text-sm font-bold">
               <SelectValue>
                 {currentCategory?.categoryName ?? "カテゴリ"}

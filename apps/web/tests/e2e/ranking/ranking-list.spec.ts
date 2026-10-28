@@ -35,7 +35,10 @@ test.describe("ランキング一覧ページ", () => {
   });
 
   test("カテゴリをクリックしてランキングを探せる", async ({ page }) => {
-    const categoryLinks = page.locator("main a[href^='/category/']");
+    // サイドバーと右レールを除いた本文 (shell-main) のカテゴリ索引だけで辿れること。
+    const categoryLinks = page.locator(
+      "main [data-slot='shell-main'] a[href^='/category/']"
+    );
     await expect(categoryLinks.first()).toBeVisible({ timeout: 10000 });
     await categoryLinks.first().click();
     await expect(page).toHaveURL(/\/category\/.+/);

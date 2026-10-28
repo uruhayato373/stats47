@@ -1,4 +1,5 @@
 
+import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
@@ -29,6 +30,20 @@ interface AreaHighlightListProps {
   items: readonly AreaHighlightListItem[];
   /** 「全国」「県内」など順位の母集団 (読み上げ用) */
   rankScope: string;
+  /**
+   * 本文の全幅に置くときの段数の上限。コンテナ幅で 2 段 (@md)・3 段 (@lg) まで増やす。
+   * 半幅のカードの中 (県ページの「特徴」) は既定の 1 段。
+   */
+  columns?: 1 | 3;
+}
+
+/**
+ * 本文の全幅で 3 段まで並べるとき、最後の段の空きが目立たない段数を件数から選ぶ。
+ * 3 で割り切れる件数は 3 段、2 で割り切れて 3 で割り切れない件数 (4・8・10 件) は 2 段にする。
+ * どちらでも割り切れない件数 (5・7 件) は 3 段 (空きが 1 マスで済む)。
+ */
+function prefersThreeColumns(count: number): boolean {
+  return count % 3 === 0 || count % 2 !== 0;
 }
 
 /**
@@ -36,10 +51,18 @@ interface AreaHighlightListProps {
  * (AREA-HIGHLIGHTS-SSOT-01 step 3)。順位チップは RankBadge だけで描く。
  * クリックは共通の NavClickTracker が `data-nav-surface="area_highlights"` で nav_click として数える。
  */
-export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) {
+export function AreaHighlightList({ items, rankScope, columns = 1 }: AreaHighlightListProps) {
   if (items.length === 0) return null;
-  return (
-    <ol className="space-y-1.5" data-nav-surface="area_highlights">
+  const list = (
+    <ol
+      className={cn(
+        // 行の間隔 (12px) は、見出しの下線から 1 行目までの間隔 (呼び出し側の pt-3) と揃える
+        "grid grid-cols-1 gap-y-3",
+        columns === 3 && "gap-x-6 @md:grid-cols-2",
+        columns === 3 && (prefersThreeColumns(items.length) ? "@lg:grid-cols-3" : "@lg:grid-cols-2"),
+      )}
+      data-nav-surface="area_highlights"
+    >
       {items.map((item) => (
         <li key={item.rankingKey} className="flex items-baseline gap-2">
           <RankBadge rank={item.rank} tone={item.tone} />
@@ -63,4 +86,5 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
       ))}
     </ol>
   );
+  return columns === 1 ? list : <div className="@container">{list}</div>;
 }

@@ -1,9 +1,9 @@
 "use client";
 
 import { FLOW_CHART_COLORS } from "@/components/charts/ChartPalette";
+import { ChartEmptyState } from "@/components/charts/ChartState";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { topNWithOther } from "@/components/charts/sankey-helpers";
-import { SankeyFallback } from "@/components/charts/SankeyFallback";
 import { useFlowData } from "@/components/charts/useFlowData";
 
 import type { CommuteFlowData } from "../lib/types";
@@ -28,8 +28,8 @@ interface Props {
 export function CommuteSankey({ code, initialData }: Props) {
   const { data, errored } = useFlowData<CommuteFlowData>("commute", code, initialData);
 
-  if (errored) return <SankeyFallback message="データを読み込めませんでした。" />;
-  if (!data) return <SankeyFallback message="読み込み中…" />;
+  if (errored) return <ChartEmptyState message="データを読み込めませんでした。" height={null} className="aspect-100/73 border bg-muted" />;
+  if (!data) return <ChartEmptyState message="読み込み中…" height={null} className="aspect-100/73 border bg-muted" />;
 
   const totalIn = data.partners.reduce((s, p) => s + p.inflow, 0);
   const totalOut = data.partners.reduce((s, p) => s + p.outflow, 0);

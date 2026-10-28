@@ -1,6 +1,5 @@
 "use client";
 
-export { MapFallback } from "./components/MapFallback";
 export { LEAFLET_MAP_COLORS } from "./utils/map-palette";
 export {
   filterMapDataPoints,

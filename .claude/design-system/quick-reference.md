@@ -8,7 +8,7 @@
 > - **角丸はサイト全体で 0**（`--radius:0`）。下記 `rounded-lg`/`rounded-md` 等は**すべて 0 に解決**される。
 >   手動の `rounded-xl`/`rounded-2xl` は禁止。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
 > - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。
-> - **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由**で統一。左レールは共有 `LeftRailLayout`（992px / 左264〜280px）、右レールは316px。
+> - **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由**で統一。右レールは316px（`@container/shell` の幅 988px 以上で表示）。ページ内ナビ（旧 左レール）は列を作らず、どの幅でも本文の上に置く（2026-10-28）。
 
 ---
 
@@ -17,15 +17,14 @@
 ```
 ページ全体         : bg-background min-h-screen
 ページコンテンツ   : <PageShell>...</PageShell>（@/components/layout、1280px・px-4 sm:px-6 lg:px-10・py-8）
-2/3カラム          : <PageShell ...> / <ArticleShell ...>（左は共有 LeftRailLayout、右316px・併用不可）
+2カラム            : <PageShell ...> / <ArticleShell ...>（右316px。ページ内ナビは本文の上・右レールと併用不可）
 セクション間隔     : space-y-8 〜 space-y-10
 仕切り線           : border-t border-border
 ```
 
-（PC 常設の**サイト全体ナビ**サイドバーは 2026-06 廃止。ナビはヘッダー＋モバイルドロワー。
-例外: **そのページの内容を切り替えるページ内ナビ**は `leftRail` に置いてよい。
-Theme のページ内ナビと home / ranking / category のカテゴリ探索が該当する。条件は
-`.claude/design-system/prohibited.md` の例外節）
+（骨組みはテンプレートのサイドバー型（2026-10-27）。サイト全体のナビはルートレイアウトの `AppSidebar` が持ち、
+lg（1024px）以上は常設・lg 未満は Sheet で開く。**そのページの内容を切り替えるページ内ナビ**は `leftRail` に渡すが、
+列は作らず本文の上に置く。条件は `.claude/design-system/prohibited.md` の例外節）
 
 ## テキスト
 
@@ -63,16 +62,16 @@ Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l
 ## ナビゲーション
 
 ```
-ヘッダー           : glass sticky top-0 h-16（ロゴ + ナビ + カテゴリメガメニュー + 検索 + テーマ切替）
-カテゴリ（PC）      : ヘッダーのドロップダウン（メガメニュー、2列グリッド）
-モバイルナビ        : MobileNavDrawer（Sheet, side=left, w-72）= ハンバーガーで開く
+ヘッダー           : SiteHeader（h-14。サイドバーの開閉 + 検索 + テーマ切替）
+サイト全体のナビ    : AppSidebar（variant="inset"。主要ナビ・カテゴリ・テーマの系統。lg 以上は常設）
+狭い幅のナビ        : AppSidebar を Sheet で開く（SiteHeader の開閉ボタン。lg 未満）
 ナビ nav           : <nav aria-label="メインナビゲーション"> 必須
 ナビ（Active）      : text-foreground bg-accent + aria-current="page"
 ナビ（Default）     : text-muted-foreground hover:bg-accent/60 transition-colors
 パンくずリスト      : text-sm + text-muted-foreground / 現在ページ text-foreground font-medium
 ```
 
-（PC 常設のサイト全体ナビサイドバーは 2026-06 廃止。ページ内ナビの `leftRail` は例外）
+（サイト全体のナビは `AppSidebar` だけが持つ。ページ内ナビの `leftRail` は本文の上に置き、2 本目の列を作らない）
 
 ## シャドウ（4段階のみ）
 

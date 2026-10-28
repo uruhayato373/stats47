@@ -179,7 +179,7 @@ describe('県選択と公表地理を混同しない集落表示', () => {
         .getAttribute('href')
     ).toBe(`${source.url}#page=19`);
     expect(screen.getByRole('table').parentElement?.className).toContain(
-      'overflow-auto'
+      'overflow-x-auto'
     );
   });
   it('不明な県を全国やブロックへ置換しない', () => {

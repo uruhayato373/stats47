@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { TrendingUp, BarChart3 } from "lucide-react";
 
+import { RankBadge, rankToneByPosition } from "@/components/atoms/RankBadge";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { SurfaceCard } from "@/components/surface";
 
-import { RankingRankBadge } from "../../../ranking/components/RankingHighlights/RankingRankBadge";
 import { useChartData } from "../../hooks/useChartData";
 
 import type { BaseChartConfig } from "../../types/chart-config.types";
@@ -114,7 +114,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 className="flex items-center justify-between rounded-sm bg-muted/40 p-3"
               >
                 <div className="flex items-center gap-3">
-                  <RankingRankBadge rank={item.rank} />
+                  <RankBadge rank={item.rank} tone={rankToneByPosition(item.rank)} />
                   <span className="font-bold text-sm">{item.name}</span>
                 </div>
                 <div className="text-right">

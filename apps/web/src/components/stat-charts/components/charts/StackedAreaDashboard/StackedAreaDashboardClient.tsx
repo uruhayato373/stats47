@@ -4,14 +4,14 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 import type { StackedAreaData } from "../../../adapters/toStackedAreaData";
 import type { StackedAreaDataNode } from "@stats47/visualization/d3";
 
 const D3StackedAreaChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3StackedAreaChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 interface StackedAreaDashboardClientProps {

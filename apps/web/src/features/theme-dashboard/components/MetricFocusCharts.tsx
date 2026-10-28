@@ -12,6 +12,7 @@ import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState, ChartLoading } from "@/components/charts/ChartState";
 import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
@@ -21,7 +22,6 @@ import {metricSeriesDomain} from '@/lib/metric-presentation';
 import { type MetricTimeseriesPoint } from "../actions";
 import { fetchMetricTimeseriesBatched } from "../lib/batched-metric-timeseries";
 
-import { ChartEmptyState, ChartLoading } from "./ChartState";
 
 
 const LineChartClient = dynamic(

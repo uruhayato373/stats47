@@ -174,7 +174,7 @@ M1で本文制作を進める先頭2件は「IPSS将来人口を都道府県地�
 | `geo-view`        | `geo_analysis_view`   | `analysis_id`, `analysis_slug`, `geography`, `data_version` |
 | `map-interaction` | `geo_map_interaction` | 共通4項目, `interaction_type`, `area_code`                  |
 | `region-search`   | `geo_region_select`   | 共通4項目, `area_code`                                      |
-| `compare-add`     | `geo_compare_add`     | 共通4項目, `area_code`, `comparison_size`                   |
+| `compare-add`     | （未計装）            | 比較へ追加する UI が無いため 2026-10-28 に送信関数を削除。比較 UI を作るときに定義し直す |
 
 検索語や自由入力は送らない。コードとunit testが通っても、GA4カスタムディメンションの登録と24〜48時間後の
 反映確認が終わるまでは`partially-measured`とし、未計測を0件として報告しない。

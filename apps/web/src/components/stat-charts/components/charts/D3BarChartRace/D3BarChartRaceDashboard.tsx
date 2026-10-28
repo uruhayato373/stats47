@@ -3,10 +3,10 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { resolveChartUnit, toBarChartRaceData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { D3BarChartRaceClient } from "./D3BarChartRaceClient";
 
@@ -41,7 +41,7 @@ export async function D3BarChartRaceDashboard({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={common.title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={common.title} message={fetchErrorMessage} />;
   }
 
   return (

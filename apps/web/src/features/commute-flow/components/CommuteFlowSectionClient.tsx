@@ -40,7 +40,13 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
               都道府県未選択のため{focusName}を例に表示中
             </span>
           )}
-          <Select value={prefCode} onValueChange={setFocus}>
+          <Select
+            value={prefCode}
+            items={options.map((p) => ({ value: p.code, label: p.name }))}
+            onValueChange={(value) => {
+              if (value !== null) setFocus(value);
+            }}
+          >
             <SelectTrigger className="h-8 w-32 text-xs" aria-label="焦点の都道府県">
               <SelectValue />
             </SelectTrigger>

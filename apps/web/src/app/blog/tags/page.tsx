@@ -47,15 +47,11 @@ export default async function TagsIndexPage() {
             <Breadcrumb className="mb-4">
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/">ホーム</Link>
-                        </BreadcrumbLink>
+                        <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/blog">ブログ</Link>
-                        </BreadcrumbLink>
+                        <BreadcrumbLink render={<Link href="/blog" />}>ブログ</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>

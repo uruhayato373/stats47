@@ -19,6 +19,13 @@ const FEATURED_GRID = readFileSync(
   ),
   'utf8'
 );
+const FEATURED_RANKINGS = readFileSync(
+  path.resolve(
+    process.cwd(),
+    'src/features/ranking/components/FeaturedRankings/index.tsx'
+  ),
+  'utf8'
+);
 const SURFACE_CARD = readFileSync(
   path.resolve(process.cwd(), 'src/components/surface/SurfaceCard.tsx'),
   'utf8'
@@ -47,6 +54,25 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toMatch(/text-4xl|text-5xl/);
   });
 
+  it('本文の余白は main の p-4 だけに任せ、PageShell や注目ランキングで二重に足さない', () => {
+    // h1 は PageShell の header に渡し、右レールより上に全幅で置く
+    expect(PAGE).toContain('<PageShell rightRail={rightRail} header={header}>');
+    expect(PAGE).not.toMatch(/<PageShell[^>]*className=/);
+    expect(FEATURED_RANKINGS).not.toContain('SHELL_WIDTH_CLASS');
+  });
+
+  it('見出しの右端は文字の矢印ではなく共通の SectionIndexLink とカルーセルの矢印を置く', () => {
+    expect(PAGE).not.toContain('→');
+    expect(FEATURED_RANKINGS).not.toContain('&rarr;');
+    expect(PAGE).toContain('<SectionIndexLink href="/ranking">');
+    // 矢印は節のカード見出し (HorizontalCardCarouselFrame) の右端が描く
+    expect(PAGE.match(/<HorizontalCardCarouselFrame\b/g)).toHaveLength(3);
+    expect(CARD_CAROUSEL).toMatch(/headerAction=\{\s*<>\s*<HorizontalCardCarouselControls \/>/);
+    // 矢印の操作だけの行をカード列の上に作らない
+    expect(CARD_CAROUSEL).not.toContain('mb-2 justify-end');
+    expect(CARD_CAROUSEL).not.toContain('from-background');
+  });
+
   it('PageHeader (単一 h1) から始まり、重複する本文検索を置かない', () => {
     expect(PAGE).toContain('PageHeader');
     expect(PAGE).not.toContain('type="search"');
@@ -56,9 +82,8 @@ describe('home page structure (portal)', () => {
     expect(pageHeaderUses).toHaveLength(1);
   });
 
-  it('2ペイン内にカテゴリ・ランキング・ブログ・テーマ・都道府県・プロフィールを並べる', () => {
+  it('本文にランキング・ブログ・テーマ・都道府県・プロフィールを順に並べる', () => {
     const order = [
-      'カテゴリから探す',
       '<FeaturedRankings limit',
       '新着ブログ',
       '知りたいことから探す',
@@ -74,13 +99,13 @@ describe('home page structure (portal)', () => {
     }
   });
 
-  it('desktopの左カテゴリ・右コンテンツをPageShellで管理する', () => {
-    expect(PAGE).toContain('const leftRail = (');
-    expect(PAGE).toContain('<PageShell leftRail={leftRail}');
+  it('サイドバーと重複するカテゴリ一覧を置かず、広告をPageShellの右レールへ渡す', () => {
+    expect(PAGE).not.toContain('leftRail');
+    expect(PAGE).not.toContain('RailCategoryList');
+    expect(PAGE).not.toContain('カテゴリから探す');
+    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
-    expect(PAGE).toContain('<RailStack>');
-    expect(PAGE).toContain('<RailCategoryList');
-    expect(PAGE).toContain('trackingSurface="home_category"');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
     expect(PAGE).toContain('showHeader={false} embedded');
     expect(PAGE).not.toContain('overflow-y-auto');
@@ -88,7 +113,7 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('lg:sticky');
   });
 
-  it('全幅広告を置かず、カテゴリ直下のrail広告へ集約する', () => {
+  it('全幅広告を置かず、右レールの広告へ集約する', () => {
     expect(PAGE).toContain('<RailAdSlot slot={RAIL_RECT} />');
     expect(PAGE).not.toContain('InContentAdSlot');
     expect(PAGE).not.toContain('FooterAdSlot');
@@ -122,10 +147,14 @@ describe('home page structure (portal)', () => {
     expect(CARD_CAROUSEL).toContain('<ChevronRight');
   });
 
-  it('比較対象カード3種は共有SSOTの1.47:1を使用する', () => {
+  it('比較対象カード3種は固定比率を持たず、カード見出しの下では枠のないセルになる', () => {
+    // カード全体の固定比率は 390px で地図・値を潰し、ブログ画像を帯にした (2026-10-28 に撤去)
+    expect(SURFACE_CARD).not.toContain('aspect-[1.47/1]');
     expect(SURFACE_CARD).toContain(
-      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-[1.47/1]"'
+      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-video"'
     );
+    expect(SURFACE_CARD).toContain('in-data-[carousel=cells]:border-0');
+    expect(CARD_CAROUSEL).toContain("data-carousel={framed ? 'cells' : 'cards'}");
     expect(FEATURED_GRID).toContain('<FeaturedRankingCard');
     expect(FEATURED_GRID).toContain('model={item.model}');
   });

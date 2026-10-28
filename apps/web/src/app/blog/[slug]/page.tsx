@@ -217,7 +217,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
     const rail = (
         <>
-            <div className="hidden lg:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
+            {/* 出し分けは ArticleShell の右レールと同じ shell コンテナ 988px 基準 (ビューポートの lg を使わない) */}
+            <div className="hidden @min-[988px]/shell:block"><ContentNavigation title="この記事のデータを確かめる" items={dataNavigation} surface="blog_sidebar" /></div>
 
             <SurveyTaxonomyCard
                 surveys={articleSurveys}
@@ -250,7 +251,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 品目を検出できない記事では何も描画しない。 */}
 
             {/* 個別記事では本文後へ積まれるモバイルを長くしないため、追加探索カードは右レールだけに置く。 */}
-            <div className="hidden lg:contents">
+            <div className="hidden @min-[988px]/shell:contents">
                 <RailSearchCard
                     title="記事検索"
                     action="/search"
@@ -268,7 +269,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     })}
                     moreLink={{
                         href: "/blog/tags",
-                        label: "タグ一覧を見る →",
+                        label: "タグ一覧を見る",
                         trackingLabel: "tag:all",
                     }}
                     trackingSurface="blog_sidebar"
@@ -299,18 +300,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <Breadcrumb className="mb-4" data-nav-surface="breadcrumb">
                         <BreadcrumbList>
                             <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/">ホーム</Link>
-                                </BreadcrumbLink>
+                                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/blog">ブログ</Link>
-                                </BreadcrumbLink>
+                                <BreadcrumbLink render={<Link href="/blog" />}>ブログ</BreadcrumbLink>
                             </BreadcrumbItem>
-                            {/* 狭い画面では記事名を出さない (見出しと重なるため。Breadcrumbs と同じ扱い) */}
-                            <BreadcrumbSeparator className={CURRENT_ITEM_CLASS} />
+                            {/* 現在の記事名はどの幅でも出し、長い題は 1 行で省略する (Breadcrumbs と同じクラス) */}
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem className={CURRENT_ITEM_CLASS}>
                                 <BreadcrumbPage>{article.title}</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -321,39 +318,38 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="space-y-6">
                     <ArticleCard>
                             {/* 記事ヘッダー */}
-                            <header className="mb-8 border-b border-border pb-6 font-news-article">
-                                <div className="mb-1 flex flex-wrap items-center gap-x-2 text-[12px] font-medium leading-6 text-muted-foreground">
-                                    <span className="text-primary">stats47 データジャーナル</span>
-                                    <span aria-hidden="true">/</span>
-                                    <span>統計で読む地域ニュース</span>
+                            <header className="border-b border-border pb-4">
+                                {/* 肩書きと PR 表記は別の行の muted テキストにする (区切りの「・」が狭い幅で行末に残らない) */}
+                                <div className="mb-2 text-xs text-muted-foreground">
+                                    <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
+                                    <p>PRを含む場合があります</p>
                                 </div>
-                                {/* PR 表記は肩書きと意味が違うので独立した行にする (2026-10-04 週次 UI 検査) */}
-                                <p className="mb-4 text-[12px] leading-6 text-muted-foreground">PRを含む場合があります</p>
-                                <h1 className="article-title mb-4 text-[1.45rem] font-bold text-foreground sm:text-[28px]">{article.title}</h1>
+                                <h1 className="article-title mb-3 text-xl font-bold text-foreground sm:text-2xl">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
-                                    <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base sm:leading-6">{article.frontmatter.subtitle}</p>
+                                    <p className="mb-3 text-sm text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
                                 )}
-                                <div className="flex flex-wrap items-center gap-3">
-                                    <div className="flex flex-wrap items-center gap-2">
+                                {articleTagData.length > 0 && (
+                                    <div className="mb-3 flex flex-wrap items-center gap-2">
                                         {articleTagData.map((t) => (
                                             <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
                                         ))}
-                                        {article.publishedAt && (
-                                            <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
-                                                公開日 {article.publishedAt.slice(0, 10)}
-                                            </time>
-                                        )}
                                     </div>
-                                    <div className="ml-auto">
-                                        <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="simple" platforms={["X (Twitter)", "LINE"]} />
-                                    </div>
+                                )}
+                                {/* 公開日とシェアは同じ行の左右に置く (390px でもシェアを次の行へ落とさない) */}
+                                <div className="flex items-center justify-between gap-3">
+                                    {article.publishedAt ? (
+                                        <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
+                                            公開日 {article.publishedAt.slice(0, 10)}
+                                        </time>
+                                    ) : (
+                                        <span />
+                                    )}
+                                    <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="simple" platforms={["X (Twitter)", "LINE"]} />
                                 </div>
                             </header>
 
                             {/* 目次 (全幅共通でタイトルの後・本文の前に 1 か所だけ) */}
                             <ArticleTableOfContents content={renderedArticle.content} />
-
-                            <div className="lg:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
 
                             {/* 記事本文 */}
                             <ArticleRenderer
@@ -368,6 +364,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                             {/* データ出典 (chart source.json から派生。本文に手書きしない) */}
                             <DataSourceList sources={dataSources} surface="blog_source" />
+
+                            {/* 右レールが出ない幅では、データの確認先を本文の後ろに置く (本文より先に出さない) */}
+                            <div className="mt-6 @min-[988px]/shell:hidden"><ContentNavigation title="この記事のデータを確かめる" frame="inline" items={dataNavigation.slice(0, 2)} surface="blog_discovery_mobile" /></div>
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

@@ -256,6 +256,46 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [LYRA-DEAD-CALLER-CLASSES-01] 部品の lyra に負けて効いていない呼び出し側の指定 (表の数値見出しの右寄せ・共有ボタンのブランド色など)
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: テンプレート (lyra) の部品は、呼び出し側の className より lyra の値が勝つ (CSS で読んでいた頃はレイヤーの外の規則として、2026-10-28 の CSS-3 以降は className の後ろで合成されて)。勝てるのは `!` 付きだけ。このため、テンプレートへ移した時点から効いていない指定が残っている。2026-10-28 の静的な洗い出しで約 180 件。主なもの: `TableHead` の `text-right` (72 件。数値列の見出しが左寄せのまま)、共有ボタンのブランド色 (`share-brand.palette.ts`。X・Facebook・LINE・はてなの地色が出ず全部 primary)、ブログのタグの Badge の `h-7` (実際は 20px)、Button の `h-11`・`h-9`・`gap-2`、Skeleton の `rounded-md`、SelectTrigger の `text-sm`。CSS-3 では見た目を変えない約束だったので触っていない。
+- **次**: 一覧を作り直し (`scripts/ui-theme/inline-lyra.mjs` の `losesToLyra` で、呼び出し側のクラスと部品の lyra を突き合わせる)、意図どおり効かせるもの (`!` を付ける) と消すものに分ける。効かせるものは画面が変わるので、ページごとに撮って確かめる。
+- **完了条件**: 洗い出しの結果が 0 件、または残すものに理由が書いてある。
+### [MAP-TILE-FOREIGN-LABELS-01] ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **経緯**: 2026-10-28 のテンプレート移行の撮り直しで、`/ranking/total-population` の都道府県別の地図 (1440 幅) の左上に、地理院タイルが描く外国の地名と点が出ていることを確認した。変更前 (develop) の画面にも同じものが出ているので、移行で増えたものではない。
+- **次**: 地図のタイル (地理院の淡色地図) を、地名ラベルを持たない種類か、日本の外を塗りつぶす表示に替えられるかを調べる。地図の部品は `apps/web/src/app/layout.tsx` の `getInitialMapTileUrls` の preload と同じタイルを使う。
+- **禁止**: 出典表示 (地理院タイルの attribution) を外さない。
+- **完了条件**: 同じページの 1440・390 の撮影で、日本の外の地名が出ていない。
+
+### [COMPARE-ADD-REMNANT-01] 送信関数を消した compare-add が、GeoAI の M1 実装仕様と計測の予定にまだ残っている
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:管理]
+
+- **経緯**: 2026-10-28 のテンプレート移行 3 巡目で、公開サイトから compare-add の送信関数を消し、事業計画の catalog で未計測 (canonicalEvent: null) にした。管理画面のテスト (`apps/admin/tests/unit/business-plan.test.ts`) の件数は同日に合わせた (未計測 3→4、M1 のコード対応 4→3)。`docs/02_実装計画/47_GeoAI事業M1実装仕様.md` と m1 の eventIds は、まだこのイベントを M1 の計測の 1 つに数えている。
+- **次**: M1 の計測にこのイベントが要るかを仕様の持ち主 (strategy-advisor) と決め、要らないなら catalog・m1 の eventIds・テスト・仕様の記述をまとめて外す。要るなら送信口を戻す。
+- **完了条件**: M1 の計測の予定 (仕様・m1 の eventIds) と catalog が一致し、`npx vitest run --root apps/admin` が通る。
+
+### [CHECKER-WIRING-ROOT-SCRIPTS-01] check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-28] [期日:2026-12-31] [領域:管理]
+
+- **経緯**: lyra の書き込みスクリプト `scripts/ui-theme/inline-lyra.mjs` は root の `scripts/` にあり、`check-checker-wiring.cjs` の candidateRoots (`.claude/scripts` と `apps|packages/*/scripts`) の外にある。そのため `.claude/config/quality-gates.json` の exceptions に `NOT_A_CHECKER` (期限 2026-12-31) を置いて通している。検査本体の `npm run ui-theme:lyra:test` は pre-commit と PR CI で blocking なので、検査そのものは走っている。
+- **次**: candidateRoots に root の `scripts/` を足すか、スクリプトを探索範囲へ移し、例外を外す。
+- **完了条件**: 例外なしで `node .claude/scripts/lib/check-checker-wiring.cjs --baseline` が通る。
+
+### [DEV-TURBOPACK-NEXT164-01] Next.js 16.4.3 で web の dev が Turbopack で起動しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-27] [領域:サイト]
+
+- **証拠 (2026-10-27)**: `npm run dev:web` が「This build is using Turbopack, with a `webpack` config and no `turbopack` config」で終了する。`apps/web/scripts/dev-server.ts` の `bundlerArgs()` が既定で引数を付けないため。`--turbopack` を明示すると起動はするが、次に「Conflicting route and metadata at /sitemap.xml」で全ページ 500。どちらも 2026-10-26 の Next.js 16.4.3 更新 (`89ef74c19`) 以降。`WEB_DEV_BUNDLER=webpack` なら起動するが、8GB の Mac で数ページ開くとメモリ切れで落ちる。
+- **完了条件**: `npm run dev:web` (Turbopack) で /・/ranking/total-population・/sitemap.xml が 200。
+
+### [MIGRATION-FLOW-TEST-POLICY-01] quality-gates の migration-flow がテスト実在と食い違う
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs] [起票:2026-10-27] [領域:データ]
+
+- **証拠**: `.claude/config/quality-gates.json` の `packages/migration-flow` は `testPolicy: none` (テストなし) だが、`packages/migration-flow/src/lib/__tests__/focus-file.test.ts` がある (2026-10-26 追加)。上の契約テストが `MIGRATION_FLOW_TEST_POLICY_INVALID` で落ちる。
+- **完了条件**: testPolicy を required にして PR の test job に含めるか、テストの置き場を見直し、上の検証コマンドが pass。
+
 ### [PPTX-RANK-ORDER-01] 商品パックの PowerPoint で「上位 10」の棒グラフの 1 位が一番下に並ぶ
 タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run test:run --workspace=@stats47/product-factory] [起票:2026-10-28] [領域:商品]
 
@@ -306,7 +346,7 @@ updated: 2026-10-19
 
 - **経緯 (2026-10-27 実測)**: 公開済み 428 本を `npm run note:unverified:audit` で検査し 17 本が該当 (記録 `data/note/evidence/note-unverified-audit-latest.json`)。2026-10-24 に「未検証範囲を明示すれば公開してよい」と判断して操作記事を公開したのが直接の原因。同日に公開前ゲート (`lib/unverified-disclosure.mjs`。`publish-new-note.sh`・`patch-note-paid-landing.mjs`・週次 note-circulation) を入れた。週次はこの 17 本が直るまで落ち続ける。
 - **進捗 (2026-10-28)**: 17 本中 16 本を、実際に操作した結果で書き直して公開本文を差し替えた。監査 (`audit-note-unverified --published`) は 1/428 (残りはマイマップ KML `h-howto-mymaps-kml`)。商品パック 13 本は private R2 の納品 ZIP (SHA 照合済み) を Microsoft 365 の Excel・PowerPoint (Windows版 16.0 build 17830) で開き、記録を `data/products/note-pack-office-verification-2026-10-28.json` に残した。QGIS の記事は QGIS 3.44.15 で練習キットの全手順を操作し、画像 8 枚を入れた。`b-ref-prc-a24` は通信利用動向調査を stats47 が取り込んでいないことを確かめて文を直した。サイトの商品ページ (`products/[slug]/page.tsx`) の文は直したが、本番には次のデプロイで出る。
-- **残り (マイマップ)**: このブラウザは PC のファイルを選べないので、取り込みの「参照」でのファイル選択だけオーナーが行う。読み込み後に、47 都道府県の色分けと県をクリックした吹き出し (値・順位・時点・URL) を確かめ、画面を撮って書き直す。KML は `C:\Users\m004195\Downloads\total-population.kml`。取り込み画面は待てば表示される (前回の「表示されない」は読み込み待ち)。
+- **完了 (2026-10-28)**: マイマップの記事 `h-howto-mymaps-kml` も、本番の総人口 KML (47 県・輪郭 1,297 本・点が 3 つ未満の輪郭 0 本) を Windows 版 Chrome のマイマップに読み込み、47 県が面として塗られ、東京都の吹き出しに値・順位・時点・URL・境界の出典が出ることを確かめて、画面 4 枚 (03〜06) を入れて公開本文を差し替えた (R2 保存済み)。`audit-note-unverified --published` は **0/428・fetchFailed 0・exit 0** (この PC で `NODE_EXTRA_CA_CERTS` とプロキシの読み込みを付けて実行)。サイトの商品ページの文は PR #1191 のデプロイで本番に出た。完了条件をすべて満たしたので、週次レビューでこのカードを消してよい。
 - **同じ文言がサイトにもある**: `apps/web/src/app/products/[slug]/page.tsx:169`「Office実機での表示・編集互換性は未確認です」。Office 確認と同時に直す。
 - **停止条件**: 実機 (Excel・PowerPoint・QGIS・マイマップ) で試せないものは本文の断り書きだけを消して公開を続けない。試せるまで非公開に戻すかはオーナー判断。
 - **Excel 塗り分けマップ `h-howto-excel-filled-map` は 2026-10-27 に完了**: Microsoft 365 Excel (バージョン 2407) で全手順を操作して書き直し、画像 10 枚とともに note.com の公開本文を差し替えた (題名も「塗り分けマップ」へ。価格・ハッシュタグ 99 個・境界は不変を確認、未ログインの公開ページで画像 10 枚・リンクカード 3 枚の表示を確認)。ハッシュタグの `#塗りつぶされたマップ` は旧名で検索する読者向けに残した。
@@ -720,6 +760,7 @@ updated: 2026-10-19
 - **実機確認は `NOTE-HOWTO-OWNER-CHECK-01` (別PC) に分けた。**
 - **1 巡目の追加 2 本 (2026-10-18・下書き登録と R2 保存済み・note-critic REVISE)**: #9 `h-howto-mymaps-share` (マイマップの共有・埋め込み) は must 3 件を反映済みで、残りはマイマップの「共有」と「自分のサイトに埋め込む」の画面画像 (オーナーが撮る)。#11 `h-howto-excel-filled-map` は 2026-10-27 に実際の Excel で全手順を確かめて書き直し、公開本文を差し替えた (`NOTE-UNVERIFIED-PUBLISHED-01`)。#9 は公開後に案内先を H-01 へ替える。
 - **H-01 の公開条件 (オーナー作業)**: 総人口の KML (`https://stats47.jp/api/ranking/total-population/download?format=kml&basis=original`) を Google マイマップへ 1 回インポートし、①県別の色分けが出るか ②県をクリックした吹き出しに値・順位・時点・URL が出るかを確かめ、「インポート」の位置と読み込み後の地図の 2 枚を撮る。色が出なければ KML の Style 指定を直してから公開する。
+- **2026-10-28 実機確認と差し替え (済)**: H-01 (`h-howto-mymaps-kml`) は本番の KML をマイマップに読み込んだ画面 4 枚を入れて公開本文を差し替えた。#9 (`h-howto-mymaps-share`) もテスト用の地図で共有・埋め込みを操作し、画面 5 枚を入れて書き直した。実際の画面は記事の旧記述と 3 点違った。① 初めて共有すると「共有する前に名前と説明を追加」が先に出る。② スイッチの文言は「このリンクを知っている人なら誰でも表示できる」「インターネットで検索しているユーザーにこの地図を公開する」で、ボタンは「閉じる」(完了・変更を保存は無い)。③ 埋め込みは 1 つ目のスイッチだけで使え、検索公開は要らない (オフだと「この地図は公開されていません」)。どちらも R2 に保存済み。テスト用の地図 3 つと KML 3 つは Google ドライブのゴミ箱へ移した。残りは 28 日の計測だけ。
 - **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
 - **統合 (2026-10-26 オーナー判断): `NOTE-HOWTO-OWNER-CHECK-01`** 別PCでマイマップの表示を確かめ、H-01・#9 の画像を撮る (#11 Excel は 2026-10-27 に完了)
   - **完了条件**: 2 本の画像と確認結果が作業コピーに入り、R2 に保存された。note-critic の再レビューで PASS。公開はその後に 1 本ずつオーナーが判断する。

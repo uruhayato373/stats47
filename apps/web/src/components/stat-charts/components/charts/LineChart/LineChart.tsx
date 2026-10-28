@@ -2,11 +2,11 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toLineChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { LineChartClient } from "./LineChartClient";
 
@@ -52,11 +52,11 @@ export const LineChart = async ({
   }
 
   if (fetchErrorMessage) {
-    return <ErrorDisplay title={title} message={fetchErrorMessage} />;
+    return <ChartErrorState title={title} message={fetchErrorMessage} />;
   }
 
   if (!chartData) {
-    return <ErrorDisplay title={title} message="データがありません" />;
+    return <ChartErrorState title={title} message="データがありません" />;
   }
 
   return (

@@ -31,7 +31,10 @@ export function RailSearchCard({
   return (
     <RailCard
       title={title}
+      icon={<Search />}
       aria-label={title}
+      // 入力欄は行 (py-1.5) を持たないので、罫線から入力欄まで CardContent と同じ 16px を取る
+      bodyClassName="pt-4"
       headerAction={
         moreLink ? (
           <Link

@@ -134,7 +134,7 @@ export function TileGridMap({
         })
         .attr("stroke", (d) => {
           const areaCode = String(d.id).padStart(2, "0") + "000";
-          return areaCode === selectedPrefectureCode ? "#3b82f6" : themeColors.border;
+          return areaCode === selectedPrefectureCode ? themeColors.primary : themeColors.border;
         })
         .attr("stroke-width", (d) => {
           const areaCode = String(d.id).padStart(2, "0") + "000";

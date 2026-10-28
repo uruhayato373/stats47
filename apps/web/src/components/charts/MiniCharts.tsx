@@ -5,7 +5,7 @@
  * D3 の描画ロジックは各チャートに閉じつつ、寸法・空表示・hover 判定は共通化する。
  */
 
-import { type RefObject, useEffect, useRef } from "react";
+import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 import { useD3Tooltip } from "@stats47/visualization";
 import { scaleLinear } from "d3-scale";
@@ -22,7 +22,8 @@ const PRIMARY = "hsl(var(--primary))";
 const MUTED = "hsl(var(--muted-foreground))";
 const MUTED_FILL = "hsl(var(--muted))";
 
-const MINI_CHART_WIDTH = 260;
+/** 親の幅を測る前 (SSR・初回描画) に使う描画幅。測れたら親の幅いっぱいに描き直す */
+const FALLBACK_MINI_CHART_WIDTH = 320;
 const DEFAULT_MINI_CHART_HEIGHT = 84;
 const MINI_CHART_PAD_X = 10;
 const MINI_CHART_PAD_TOP = 8;
@@ -30,12 +31,41 @@ const MINI_CHART_PAD_BOTTOM = 18;
 const MAX_BAR_WIDTH = 26;
 const DEFAULT_STACK_SEGMENT_NAMES = ["財政調整基金", "減債基金", "その他特定目的基金"];
 
-function getMiniChartLayout(height = DEFAULT_MINI_CHART_HEIGHT) {
-  const plotWidth = MINI_CHART_WIDTH - MINI_CHART_PAD_X * 2;
+/**
+ * SVG 自身 (width=100%) の描画幅を測り、viewBox を親の幅に合わせる。
+ * 「データなし」から描画に切り替わったときも測れるよう、callback ref で要素を受け取る。
+ */
+function useMiniChartWidth(svgRef: RefObject<SVGSVGElement | null>) {
+  const [node, setNode] = useState<SVGSVGElement | null>(null);
+  const [width, setWidth] = useState(FALLBACK_MINI_CHART_WIDTH);
+
+  const attachRef = useCallback(
+    (el: SVGSVGElement | null) => {
+      svgRef.current = el;
+      setNode(el);
+    },
+    [svgRef],
+  );
+
+  useEffect(() => {
+    if (!node || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = Math.round(entry.contentRect.width);
+      if (next > 0) setWidth(next);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [node]);
+
+  return { width, attachRef };
+}
+
+function getMiniChartLayout(height = DEFAULT_MINI_CHART_HEIGHT, width = FALLBACK_MINI_CHART_WIDTH) {
+  const plotWidth = width - MINI_CHART_PAD_X * 2;
   const plotHeight = height - MINI_CHART_PAD_TOP - MINI_CHART_PAD_BOTTOM;
 
   return {
-    width: MINI_CHART_WIDTH,
+    width,
     height,
     padX: MINI_CHART_PAD_X,
     padTop: MINI_CHART_PAD_TOP,
@@ -53,8 +83,8 @@ function getBarGeometry(count: number, layout: ReturnType<typeof getMiniChartLay
   return { slot, barWidth };
 }
 
-function getSlotIndex(mouseX: number, count: number, slot: number, padX: number) {
-  const bounded = Math.max(padX, Math.min(MINI_CHART_WIDTH - padX, mouseX));
+function getSlotIndex(mouseX: number, count: number, slot: number, padX: number, width: number) {
+  const bounded = Math.max(padX, Math.min(width - padX, mouseX));
   return Math.max(0, Math.min(count - 1, Math.floor((bounded - padX) / slot)));
 }
 
@@ -113,10 +143,12 @@ function EmptyMiniChart({ height = DEFAULT_MINI_CHART_HEIGHT }: { height?: numbe
 
 function MiniChartSvg({
   svgRef,
+  width,
   height,
   ariaLabel,
 }: {
-  svgRef: RefObject<SVGSVGElement | null>;
+  svgRef: (el: SVGSVGElement | null) => void;
+  width: number;
   height: number;
   ariaLabel: string;
 }) {
@@ -125,7 +157,7 @@ function MiniChartSvg({
       ref={svgRef}
       width="100%"
       height={height}
-      viewBox={`0 0 ${MINI_CHART_WIDTH} ${height}`}
+      viewBox={`0 0 ${width} ${height}`}
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-label={ariaLabel}
@@ -149,12 +181,13 @@ export function MiniLineChart({
   height = DEFAULT_MINI_CHART_HEIGHT,
 }: LineProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { width, attachRef } = useMiniChartWidth(svgRef);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 
   useEffect(() => {
     if (!svgRef.current || points.length === 0) return;
 
-    const layout = getMiniChartLayout(height);
+    const layout = getMiniChartLayout(height, width);
     const ys = points.map((p) => p.value);
     let minY = Math.min(...ys);
     let maxY = Math.max(...ys);
@@ -252,13 +285,13 @@ export function MiniLineChart({
         dot.attr("opacity", 0);
         hideTooltip();
       });
-  }, [points, height, seriesName, unit, showStackedTooltip, hideTooltip]);
+  }, [points, width, height, seriesName, unit, showStackedTooltip, hideTooltip]);
 
   if (points.length === 0) {
     return <EmptyMiniChart height={height} />;
   }
 
-  return <MiniChartSvg svgRef={svgRef} height={height} ariaLabel="推移" />;
+  return <MiniChartSvg svgRef={attachRef} width={width} height={height} ariaLabel="推移" />;
 }
 
 export interface StackPoint {
@@ -284,12 +317,13 @@ export function MiniStackedBarChart({
   unit = "億円",
 }: StackedBarProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { width, attachRef } = useMiniChartWidth(svgRef);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 
   useEffect(() => {
     if (!svgRef.current || points.length === 0) return;
 
-    const layout = getMiniChartLayout(height);
+    const layout = getMiniChartLayout(height, width);
     const totals = points.map((p) => p.segments.reduce((a, b) => a + b, 0));
     const maxY = Math.max(...totals, 0) || 1;
     const n = points.length;
@@ -345,7 +379,7 @@ export function MiniStackedBarChart({
       .style("cursor", "crosshair")
       .on("pointermove", (event: PointerEvent) => {
         const [mouseX] = pointer(event);
-        const index = getSlotIndex(mouseX, n, slot, layout.padX);
+        const index = getSlotIndex(mouseX, n, slot, layout.padX, layout.width);
         const cx = layout.padX + slot * (index + 0.5);
         const current = points[index];
 
@@ -365,13 +399,13 @@ export function MiniStackedBarChart({
         highlight.attr("opacity", 0);
         hideTooltip();
       });
-  }, [points, colors, height, segmentNames, unit, showStackedTooltip, hideTooltip]);
+  }, [points, colors, width, height, segmentNames, unit, showStackedTooltip, hideTooltip]);
 
   if (points.length === 0) {
     return <EmptyMiniChart height={height} />;
   }
 
-  return <MiniChartSvg svgRef={svgRef} height={height} ariaLabel="内訳推移" />;
+  return <MiniChartSvg svgRef={attachRef} width={width} height={height} ariaLabel="内訳推移" />;
 }
 
 interface BarProps {
@@ -388,12 +422,13 @@ export function MiniBarChart({
   unit = "億円",
 }: BarProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { width, attachRef } = useMiniChartWidth(svgRef);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 
   useEffect(() => {
     if (!svgRef.current || points.length === 0) return;
 
-    const layout = getMiniChartLayout(height);
+    const layout = getMiniChartLayout(height, width);
     const values = points.map((p) => p.value);
     const maxY = Math.max(...values, 0);
     const minY = Math.min(...values, 0);
@@ -459,7 +494,7 @@ export function MiniBarChart({
       .style("cursor", "crosshair")
       .on("pointermove", (event: PointerEvent) => {
         const [mouseX] = pointer(event);
-        const index = getSlotIndex(mouseX, n, slot, layout.padX);
+        const index = getSlotIndex(mouseX, n, slot, layout.padX, layout.width);
         const cx = layout.padX + slot * (index + 0.5);
         const current = points[index];
 
@@ -477,11 +512,11 @@ export function MiniBarChart({
         marker.attr("opacity", 0);
         hideTooltip();
       });
-  }, [points, height, seriesName, unit, showStackedTooltip, hideTooltip]);
+  }, [points, width, height, seriesName, unit, showStackedTooltip, hideTooltip]);
 
   if (points.length === 0) {
     return <EmptyMiniChart height={height} />;
   }
 
-  return <MiniChartSvg svgRef={svgRef} height={height} ariaLabel="年次推移" />;
+  return <MiniChartSvg svgRef={attachRef} width={width} height={height} ariaLabel="年次推移" />;
 }

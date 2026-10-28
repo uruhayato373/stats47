@@ -2,9 +2,9 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { fetchEstatDataWithCategories } from "../../../services";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { AttributeMatrixClient } from "./AttributeMatrixClient";
 
@@ -70,7 +70,7 @@ export const AttributeMatrixDashboard = async ({
   }
 
   if (errorMessage || !matrixData) {
-    return <ErrorDisplay title={title} message={errorMessage ?? "データがありません"} />;
+    return <ChartErrorState title={title} message={errorMessage ?? "データがありません"} />;
   }
 
   return (

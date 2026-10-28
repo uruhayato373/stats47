@@ -119,7 +119,13 @@ export function GeoDecisionExplorer({
             順位ではなく、人口・住まい・防災・交通を同じ地域コードで横断します。
           </p>
         </div>
-        <Select value={selectedCode} onValueChange={selectArea}>
+        <Select
+          value={selectedCode}
+          items={rows.map((row) => ({ value: row.areaCode, label: row.areaName }))}
+          onValueChange={(value) => {
+            if (value !== null) selectArea(value);
+          }}
+        >
           <SelectTrigger className="w-full sm:w-56" aria-label="都道府県を選択">
             <SelectValue />
           </SelectTrigger>

@@ -1,3 +1,4 @@
+import { buttonVariants } from "@stats47/components/atoms/ui/button";
 import { ArrowLeftRight } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
@@ -10,7 +11,7 @@ interface Props {
 /**
  * 都道府県ヘッダー（ミニマル）
  *
- * - h1: 都道府県名（PageHeader 内部で text-2xl font-bold 固定）
+ * - h1: 都道府県名（PageHeader の見出しの大きさに従う）
  * - 概要 1 行 + 「他県と比較」CTA
  *
  * 強み指標の KPI は本文側（AreaProfileSidebar / AreaRelatedRankingsCard）に既出のため
@@ -25,9 +26,10 @@ export function AreaProfilePageClient({ profile }: Props) {
             actions={
                 <Link
                     href={`/category/population/compare?areas=${profile.areaCode}`}
-                    className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md border bg-card px-3 py-2 text-sm font-semibold shadow-xs transition-colors hover:bg-accent/40 hover:shadow-md"
+                    data-slot="button"
+                    className={buttonVariants({ variant: "outline" })}
                 >
-                    <ArrowLeftRight className="h-4 w-4" />
+                    <ArrowLeftRight data-icon="inline-start" aria-hidden />
                     他県と比較
                 </Link>
             }

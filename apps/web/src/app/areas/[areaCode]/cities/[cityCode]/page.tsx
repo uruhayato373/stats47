@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildCityPageMeta } from "@stats47/ranking";
 
+import Link from "@/components/atoms/SiteLink";
 import { PageHeader, PageShell } from "@/components/layout";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 import {
-  CityBreadcrumbs,
   CityDatabookView,
   CityPageFooter,
   getCityRouteContext,
@@ -97,18 +98,26 @@ export default async function CityPage({ params }: PageProps) {
 
   return (
     <PageShell>
-      <CityBreadcrumbs
-        areaCode={areaCode}
-        prefName={context.pref.areaName}
-        cityName={context.cityShortName}
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "都道府県一覧", href: "/areas" },
+          { label: context.pref.areaName, href: hrefFor("area", { areaCode }) },
+          { label: context.cityShortName },
+        ]}
       />
       <PageHeader
-        eyebrow={context.pref.areaName}
+        eyebrow={
+          <Link href={hrefFor("area", { areaCode })} className="hover:text-foreground hover:underline">
+            {context.pref.areaName}
+          </Link>
+        }
         title={`${context.cityShortName}の${databook ? "人口・" : ""}統計データ`}
         description={meta?.description ?? `${context.pref.areaName}の市区町村`}
       />
 
-      <main className="min-w-0 space-y-10">
+      {/* main はルートレイアウトの main#main-content だけ (ページ内で入れ子にしない) */}
+      <div className="min-w-0 space-y-6">
         {databook ? (
           <CityDatabookView
             databook={databook}
@@ -137,7 +146,7 @@ export default async function CityPage({ params }: PageProps) {
           prefName={context.pref.areaName}
           activeCityCode={cityCode}
         />
-      </main>
+      </div>
     </PageShell>
   );
 }

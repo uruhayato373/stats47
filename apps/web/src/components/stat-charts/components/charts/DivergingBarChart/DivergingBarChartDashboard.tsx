@@ -2,11 +2,11 @@ import { logger } from "@stats47/logger";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartErrorState } from "@/components/charts/ChartState";
 
 import { toStackedBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { DivergingBarChartClient } from "./DivergingBarChartClient";
 
@@ -31,7 +31,7 @@ export const DivergingBarChartDashboard = async ({
 
   if (!estatParams || estatParams.length < 2) {
     return (
-      <ErrorDisplay title={title} message="設定エラー: 2系列が必要です" />
+      <ChartErrorState title={title} message="設定エラー: 2系列が必要です" />
     );
   }
 
@@ -45,7 +45,7 @@ export const DivergingBarChartDashboard = async ({
 
     const firstError = responses.find((r) => "error" in r);
     if (firstError && "error" in firstError) {
-      return <ErrorDisplay title={title} message={firstError.error} />;
+      return <ChartErrorState title={title} message={firstError.error} />;
     }
 
     const rawDataList = responses.map((r) => ("data" in r ? r.data : []));
@@ -54,7 +54,7 @@ export const DivergingBarChartDashboard = async ({
     const chartData = toStackedBarChartData(rawDataList, seriesLabels);
 
     if (chartData.data.length === 0) {
-      return <ErrorDisplay title={title} message="データがありません" />;
+      return <ChartErrorState title={title} message="データがありません" />;
     }
 
     const positiveKey = chartData.series[0].dataKey;
@@ -134,6 +134,6 @@ export const DivergingBarChartDashboard = async ({
       { error: err },
       "DivergingBarChartDashboardのデータ取得に失敗しました",
     );
-    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
+    return <ChartErrorState title={title} message="データの取得に失敗しました" />;
   }
 };

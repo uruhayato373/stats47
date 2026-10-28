@@ -2,14 +2,14 @@
 
 import dynamic from "next/dynamic";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 import type { BarChartRaceFrame } from "@stats47/visualization/d3";
 
 
 const D3BarChartRace = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3BarChartRace),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 
 const DEFAULT_ASPECT_RATIO = "16/9";

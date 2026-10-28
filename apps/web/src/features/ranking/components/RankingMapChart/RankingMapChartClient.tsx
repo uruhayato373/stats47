@@ -20,15 +20,16 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { Map as MapIcon } from "lucide-react";
 
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { AreaType } from "@/features/area";
 import {
   filterMapDataPoints,
   getLeafletBorderColor,
-  MapFallback,
   rankingItemToMapConfig,
   useThemedLeafletTile,
 } from "@/features/map-visualization/client";
@@ -44,7 +45,7 @@ import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
 
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
-  { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-md" /> }
+  { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-none" /> }
 );
 
 const TileSwitcher = dynamic(
@@ -68,7 +69,7 @@ interface Props {
   onPrefectureClick?: (code: string | null) => void;
   /** CardHeader右側に表示するアクション要素 */
   headerActions?: React.ReactNode;
-  /** カードタイトル（省略時: コロプレスマップ） */
+  /** カードタイトル（省略時は見出しなし） */
   cardTitle?: string;
   /** カードサブタイトル（出典等） */
   cardSubtitle?: string;
@@ -168,15 +169,25 @@ export function RankingMapChartClient({
   return (
     <ChartPanel
       title={cardTitle}
+      icon={cardTitle ? <MapIcon /> : undefined}
       description={cardSubtitle}
       action={headerActions}
       footer={cardFooter}
+      // 地図は本文の四辺とも端まで描く: 横は px-0!、上下は Card の gap-4 / pb-4 を外して見出しの下線と
+      // 出典の上線 (無ければカードの下端) に接する (lyra の .cn-card はレイヤーの外なので ! で上書きする)
+      className="gap-0! pb-0!"
+      contentClassName="px-0!"
     >
-      <div className="relative w-full overflow-hidden rounded-md">
+      {/* Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
+          固定の帯 (Cookie 同意・ヘッダー) の前に地図が出ないようにする。
+          地図は内側に枠を作らず、カード本文の幅いっぱいに描く (px-0!: lyra の cn-card-content の px-4 に勝たせる)。 */}
+      <div className="relative isolate z-0 w-full overflow-hidden [&_.leaflet-container]:rounded-none!">
         {isMapLoading ? (
-          <Skeleton className="h-[500px] w-full rounded-md" />
+          <Skeleton className="h-[500px] w-full rounded-none" />
         ) : showFallback ? (
-          <MapFallback
+          <ChartEmptyState
+            height={null}
+            className="min-h-[200px] bg-muted/50"
             message={
               areaType === "city" && cityTopologyError
               ? "市区町村の地図データを読み込めませんでした"

@@ -1,8 +1,9 @@
 /**
  * ランキング一覧（索引ハブ）
  *
- * 全 17 カテゴリ = 全ランキングの網羅ブラウズ入口。**カテゴリ名だけでなく実際の
- * ランキング名を出す**ことで、探している指標がここにあるかをその場で判断できるようにする。
+ * 注目ランキングと、17 カテゴリの索引 (件数付き) + 全ランキングの検索への入口。
+ * 2026-10-28 に本文のカテゴリ節を撤去したが、390px ではサイドバーが Sheet に畳まれ本文から
+ * カテゴリを探せなくなったため、同日に件数付きの索引 (RailCategoryList を本文の密度で流用) を戻した。
  *
  * 経緯: 2026-05-28 に旧索引（featured の薄い複製）を `/` へ 301 統合したが、
  * 2026-06-15 にカテゴリ網羅ブラウズのハブとして再設計・再設置した（home とは役割が異なる:
@@ -16,16 +17,15 @@
  * build 時の R2 到達可否でカードが欠落しないよう、この索引は request 時に描画する。
  */
 
-import { hrefFor } from "@stats47/data-configs/content/href";
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
-import { metricDisplayName } from "@stats47/ranking";
-import { ChevronRight } from 'lucide-react';
+import { Compass, LayoutGrid, TrendingUp } from 'lucide-react';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { PageSections } from '@/components/layout/PageShell';
 import { RailCategoryList, RailStack } from '@/components/rail';
-import { SectionHeader } from '@/components/section';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { SectionIndexLink } from '@/components/section';
+import { RailCard, RailNavRow, SectionCard } from '@/components/surface';
+import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import { FooterAdSlot } from '@/features/ads';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
@@ -38,10 +38,17 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 import type { Metadata } from 'next';
 
 const RANKING_COUNT = KNOWN_RANKING_KEYS.size;
+/** カテゴリの数と件数は、サイドバーと同じビルド前の生成物から数える (本文と metadata で同じ値を使う) */
+const CATEGORY_INDEX = RANKING_PROMINENCE_CATEGORIES.map((category) => ({
+  categoryKey: category.categoryKey,
+  categoryName: category.categoryName,
+  count: category.count,
+}));
+const CATEGORY_COUNT = CATEGORY_INDEX.length;
 
 export const dynamic = 'force-dynamic';
 
-/** 左レール末尾の「他の探し方」。旧実装は独立セクションで 3 枚のカードだった。 */
+/** 右レールの「他の探し方」。カテゴリ一覧はサイドバー (AppSidebar) と本文の索引が持つので置かない。 */
 const OTHER_ENTRY_POINTS = [
   { href: '/themes', label: 'テーマから探す' },
   { href: '/survey', label: '調査から探す' },
@@ -49,8 +56,8 @@ const OTHER_ENTRY_POINTS = [
 ] as const;
 
 export function generateMetadata(): Metadata {
-  const title = '都道府県ランキング一覧｜全17カテゴリで47都道府県を比較';
-  const description = `人口・経済・教育・医療・治安まで全17カテゴリ、${RANKING_COUNT.toLocaleString()}件超の統計ランキングで47都道府県を比較。気になるカテゴリからランキングを探せます。`;
+  const title = `都道府県ランキング一覧｜全${CATEGORY_COUNT}カテゴリで47都道府県を比較`;
+  const description = `人口・経済・教育・医療・治安まで全${CATEGORY_COUNT}カテゴリ、${RANKING_COUNT.toLocaleString()}件の統計ランキングで47都道府県を比較。気になるカテゴリからランキングを探せます。`;
   return {
     title,
     description,
@@ -60,21 +67,12 @@ export function generateMetadata(): Metadata {
 }
 
 export default function RankingIndexPage() {
-  const leftRail = (
+  const rightRail = (
     <RailStack>
-      <RailCard title="カテゴリ" bodyClassName="px-4 pb-3 pt-0">
-        <RailCategoryList
-          items={RANKING_PROMINENCE_CATEGORIES}
-          showCount={false}
-          trackingSurface="ranking_category"
-          className="-mx-4 border-t-0"
-        />
-      </RailCard>
-
-      <RailCard title="他の探し方">
-        <nav aria-label="他の探し方" className="-mx-2 flex flex-col">
+      <RailCard title="他の探し方" icon={<Compass />}>
+        <nav aria-label="他の探し方" className="flex flex-col divide-y divide-border">
           {OTHER_ENTRY_POINTS.map((entry) => (
-            <RailNavRow key={entry.href} href={entry.href}>
+            <RailNavRow key={entry.href} href={entry.href} className="px-0">
               {entry.label}
             </RailNavRow>
           ))}
@@ -83,8 +81,8 @@ export default function RankingIndexPage() {
     </RailStack>
   );
 
-  return (
-    <PageShell leftRail={leftRail}>
+  const header = (
+    <>
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: 'ランキング' }]}
       />
@@ -97,88 +95,57 @@ export default function RankingIndexPage() {
       */}
       <PageHeader
         title="都道府県ランキング一覧"
-        stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ 17 カテゴリ ・ 47 都道府県`}
+        stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ ${CATEGORY_COUNT} カテゴリ ・ 47 都道府県`}
       />
+    </>
+  );
 
-      <div>
-        <section className="mb-8">
-          <SectionHeader title="注目のランキング" />
+  return (
+    <PageShell rightRail={rightRail} header={header}>
+      {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / category と同じ) */}
+      <PageSections>
+        <HorizontalCardCarouselFrame
+          title="注目のランキング"
+          icon={<TrendingUp />}
+          action={<SectionIndexLink href="/search?type=ranking">もっと見る</SectionIndexLink>}
+        >
           <FeaturedRankings
             limit={4}
             showHeader={false}
             embedded
             trackHomeEvents={false}
           />
-        </section>
+        </HorizontalCardCarouselFrame>
 
-        {/*
-            記事内広告は置かない。注目ストリップと索引の間しか置き場が無く、そこは
-            ファーストビュー内 (実測 1440x900 で 396px / 390x844 で 620px) で、
-            InContentAdSlot の配置規約「ファーストビュー内には置かない」に反する。
-            比較: /category の記事内枠は 390px 幅で 3108px と fold の遥か下にある。
-            索引ハブ (/ranking /themes /survey /tag /blog) は末尾の Multiplex 1 枠に統一する。
-          */}
-        <section className="mb-12">
-          {/* 件数は h1 直下の stats 行が出しているのでここでは繰り返さない */}
-          <SectionHeader
-            title="カテゴリ別のランキング"
-            description="各カテゴリの代表的なランキングを抜粋しています。"
+        {/* カテゴリの索引。390px ではサイドバーが畳まれるので、本文からもカテゴリで探せるようにする。
+            行は区切り線で並べ、罫線から文字までを 16px にする (行の上下 8px + 本文の上下 8px) */}
+        <SectionCard
+          title={`${CATEGORY_COUNT} カテゴリから探す`}
+          icon={<LayoutGrid />}
+          headingAs="h2"
+          bodyClassName="@container py-2"
+        >
+          <RailCategoryList
+            items={CATEGORY_INDEX}
+            density="default"
+            trackingSurface="ranking_category"
+            moreLink={{
+              href: '/search?type=ranking',
+              label: `全 ${RANKING_COUNT.toLocaleString()} ランキングから検索する`,
+              trackingLabel: 'category:all',
+            }}
+            // 列数は本文の幅 (@container) で決める: 48rem 以上で 2 列
+            className="@md:[&>ul]:grid @md:[&>ul]:grid-cols-2 @md:[&>ul]:gap-x-6"
           />
-          <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
-            {RANKING_PROMINENCE_CATEGORIES.map((category) => (
-              <div key={category.categoryKey}>
-                <h3 className="mb-1 flex items-baseline gap-2 border-b border-border pb-1">
-                  <Link
-                    href={hrefFor('category', { categoryKey: category.categoryKey })}
-                    className="text-sm font-bold hover:text-primary"
-                  >
-                    {category.categoryName}
-                  </Link>
-                  <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                    {category.count.toLocaleString()} 件
-                  </span>
-                </h3>
-                <ul className="mb-1">
-                  {category.representatives.map((representative) => (
-                    <li
-                      key={representative.rankingKey}
-                      className="truncate text-[13px] leading-6"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="text-muted-foreground"
-                      >
-                        ・
-                      </span>
-                      <Link
-                        href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
-                        className="hover:text-primary hover:underline"
-                      >
-                        {metricDisplayName(representative)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={hrefFor('category', { categoryKey: category.categoryKey })}
-                  className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:underline"
-                >
-                  {category.categoryName}の全 {category.count.toLocaleString()}{' '}
-                  件
-                  <ChevronRight className="size-3" />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
+        </SectionCard>
+      </PageSections>
 
-        {/*
-            フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと
-            左レール分だけ記事内広告と左端がずれる。他のハブ面 (/category, /blog) は
-            元から両枠が同一カラムにあり、/ranking だけが内側グリッドのせいで外れていた。
-          */}
-        <FooterAdSlot />
-      </div>
+      {/*
+          フッター広告は本文カラム (右ペイン) の中に置く。グリッドの外に出すと
+          左レール分だけ記事内広告と左端がずれる。カードの格子の外 (下) に置く
+          (広告が無効のときは何も描かないので、格子の帯が余らないようにするため)。
+        */}
+      <FooterAdSlot className="mt-4" />
     </PageShell>
   );
 }

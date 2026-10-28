@@ -40,17 +40,18 @@ model: sonnet
 `app/themes/[themeSlug]/page.tsx`（`local-finance` 専用ページを除く全テーマ）:
 
 - `export const dynamic = "force-dynamic"`（SSG にすると build 時 R2 を読めず error fallback。memory `feedback_home_pure_ssg_r2_empty` / `feedback_cloudflare_workers_env_r2_skip`）。
-- レイアウト（2026-08-04〜）: `page.tsx` は `<ThemePageLayout>` を返すだけで **`PageShell` を重ねない**。
-  Shell は `ThemePageLayout` が持ち、`ThemePrefectureProvider` → `PageShell leftRail={<ThemeSideNav/>}`
-  → `ThemeAreaHeader` + `ThemeDashboardClient` の入れ子になる（左レールの都道府県セレクタが
-  Provider の内側でないと動かないため、この順序を崩さない）。
-- **左レール `ThemeSideNav`**（旧 `ThemeSidebar` の後継・2026-06 に一度廃止 → 2026-08-04 にページ内ナビとして復活）:
-  テーマ一覧 (ALL_THEMES = 22 件・現在地に `aria-current="page"`）+ 地域ブロック（全国 pill + `PrefectureSelect` + 一文の説明）。
-  `leftRailNarrowBehavior="hide"` で **xl 未満は非表示**。禁止パターンの例外条件は `.claude/design-system/prohibited.md`。
+- レイアウト（2026-10-28〜・サイドバー型）: `page.tsx` は `<ThemePageLayout>` を返すだけで **`PageShell` を重ねない**。
+  Shell は `ThemePageLayout` が持ち、`ThemePrefectureProvider` → `PageShell`（`leftRail` なし）→ h1 → 切替行 →
+  章のリンク列 → 関連記事 → `ThemeDashboardClient` の順に並べる（都道府県セレクタが Provider の内側でないと動かないため、
+  この入れ子を崩さない）。サイト全体のナビ（テーマの系統別一覧を含む）はルートレイアウトの `AppSidebar` が持つ。
+  旧 左レール `ThemeSideNav` はサイドバーと重複するため 2026-10-28 にページから外した（ページ内に 2 本目の列を作らない）。
+- **切替行**: 地域単位のリンク列（`StatisticsScopeNav`）+ `ThemeSwitcher` + `PrefectureSelect` + 「テーマ一覧」ボタン。
+  狭い幅ではテーマと地域のセレクトを地域単位のリンク列と別の行に置き、選択中の名前を読める幅にする。
+  章のリンク列（`ThemeChapterLinks`）はタブの見た目にせず、ボタン ghost の並び（`LinkRowFrame`）で 1 行に保ち、
+  はみ出す分は右端のフェード付きの横スクロールにする。
 - **見出し `ThemeAreaHeader`**: エリア連動 H1（全国時「{テーマ名}」/ 県選択時「{県名}の{テーマ名}」）。
   **eyebrow は付けない**（「テーマダッシュボード」等の固定ラベル禁止）。
-- **セレクタは同時に 1 つだけ見える状態にする**。xl+ = 左レール `ThemeSideNav`、xl 未満 = `ThemeAreaHeader`
-  の `actions`（`xl:hidden` で囲った `PrefectureSelect`）+ `xl:hidden` の `ThemeSwitcher` 帯。
+- **セレクタは同時に 1 つだけ見える状態にする**。都道府県セレクタは切替行の `PrefectureSelect` だけで、どの幅でも同じ位置。
   `ThemeDashboardTabbed` の hideMap 分岐に本体側 `prefectureSelector` を**二重に出さない**。デフォルト全国・`?pref=` 同期。
 - **ダッシュボード本体 `ThemeMetricsDashboard`**: 指標カードのグリッド + page-components チャート +
   考察 (markdown)。**1 グループ = 1 カードだが、選択 UI と中身は生存指標の実件数で分岐する**（2026-09-17〜。

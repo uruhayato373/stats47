@@ -44,7 +44,7 @@ describe('医療人材profileの表示', () => {
       expect(
         table.querySelector('tfoot [data-total-physicians]')?.textContent
       ).toBe('331,092');
-      expect(table.parentElement?.className).toContain('overflow-auto');
+      expect(table.parentElement?.className).toContain('overflow-x-auto');
       expect(table.className).toContain('min-w-96');
     }
   });

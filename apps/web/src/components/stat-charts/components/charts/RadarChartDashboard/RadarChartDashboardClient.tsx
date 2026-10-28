@@ -4,11 +4,11 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
-import { ChartSkeleton } from "../../shared/ChartSkeleton";
+import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 const D3RadarChart = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.D3RadarChart),
-  { ssr: false, loading: () => <ChartSkeleton /> }
+  { ssr: false, loading: () => <ChartLoadingCard /> }
 );
 import type { RadarChartData } from "../../../adapters/toRadarChartData";
 

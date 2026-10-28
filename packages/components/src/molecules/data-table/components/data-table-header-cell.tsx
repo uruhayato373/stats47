@@ -51,7 +51,7 @@ export function DataTableHeaderCell<TData, TValue>({
             <Button
                 variant="ghost"
                 size="sm"
-                className="-ml-2 h-6 px-2 text-xs data-[state=open]:bg-accent"
+                className="-ml-2 h-6 px-2 text-xs data-open:bg-accent"
                 onClick={() => {
                     const currentSort = header.column.getIsSorted();
                     if (currentSort === false) {

@@ -336,7 +336,7 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     const grids = container.querySelectorAll('[data-theme-panel-grid="compact"]');
     expect(grids).toHaveLength(1);
     const grid = grids[0] as HTMLElement;
-    expect(grid).toHaveClass('grid', 'grid-cols-1', '@md:grid-cols-2');
+    expect(grid).toHaveClass('grid', 'grid-cols-1', 'items-start', '@min-[40rem]:grid-cols-2');
     expect(
       within(grid)
         .getAllByTestId('single-card')
@@ -442,8 +442,9 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
       '/survey/vital-statistics'
     );
     await user.click(screen.getByRole('button', { name: 'ランキング4件を表示' }));
+    // Base UI の Menu は開いた次の描画で項目を出すので、最初の項目は findByRole で待つ
     expect(
-      screen.getByRole('menuitem', { name: '指標の定義・ランキング' })
+      await screen.findByRole('menuitem', { name: '指標の定義・ランキング' })
     ).toHaveAttribute('href', '/ranking/primary');
     expect(screen.getByRole('menuitem', { name: '第2指標の定義・ランキング' })).toBeVisible();
     expect(screen.getByRole('menuitem', { name: '第3指標の定義・ランキング' })).toBeVisible();

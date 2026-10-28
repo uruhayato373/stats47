@@ -64,20 +64,6 @@ export function trackGeoRegionSelect(
   });
 }
 
-/** 比較リストへ都道府県を追加した。 */
-export function trackGeoCompareAdd(
-  params: GeoAnalysisEventParams & {
-    areaCode: string;
-    comparisonSize: number;
-  }
-): void {
-  sendEvent('geo_compare_add', {
-    ...geoAnalysisPayload(params),
-    area_code: params.areaCode,
-    comparison_size: params.comparisonSize,
-  });
-}
-
 // ─── ファイルダウンロード ───────────────────────────────────
 
 /**
@@ -306,13 +292,15 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
 // ─── ナビゲーション (ヘッダー IA・P0-1 効果判定) ──────────────
 
 /**
- * ナビ項目クリック（グローバルヘッダー / モバイルドロワー / 都道府県一覧の選択導線）。
+ * ナビ項目クリック（サイト全体のサイドバー / 都道府県一覧の選択導線）。
  * P0-1 (ヘッダーに「都道府県」追加) や `/areas` の検索・一覧・地図が使われているかを判定する。
  * `nav_label` (項目名) / `nav_href` (遷移先) / `nav_surface` を custom dimension に登録すれば
  * 項目別・導線別の利用度を追える。
  *
  * `nav_surface` の値:
- * - `desktop-header` / `mobile-drawer`: グローバルナビ
+ * - `sidebar` / `sidebar-mobile`: サイト全体のナビ (AppSidebar)。PC の常設サイドバーが `sidebar`、
+ *   lg (1024px) 未満で Sheet として開いたものが `sidebar-mobile`。2026-10-27 のサイドバー型への切替で
+ *   旧 `desktop-header` / `mobile-drawer` を置き換えた (切替日を境に旧値は 0 件になる)
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
  * - `home_category` / `home_use_case` / `home_area_map` / `home_area_list` / `home_blog`:
  *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / ブログ）
@@ -350,8 +338,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * (`.claude/rules/analytics-event-standards.md` §2)。
  */
 export type NavSurface =
-  | 'desktop-header'
-  | 'mobile-drawer'
+  | 'sidebar'
+  | 'sidebar-mobile'
   | 'areas_search'
   | 'areas_list'
   | 'areas_map'
@@ -414,6 +402,8 @@ export type NavSurface =
   | 'unlabeled'
   // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
   | 'footer'
+  // 上端のヘッダー (ロゴ・狭い幅の検索への入口。2026-10-28 値追加。登録済み dimension の値追加)
+  | 'header'
   | 'breadcrumb'
   | 'tag'
   | 'blog_body'

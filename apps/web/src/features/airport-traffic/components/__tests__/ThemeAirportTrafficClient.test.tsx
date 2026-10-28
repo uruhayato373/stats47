@@ -36,7 +36,7 @@ describe('空港の所在地による絞り込み', () => {
     expect(screen.getAllByRole('table')).toHaveLength(2);
     for (const table of screen.getAllByRole('table')) {
       expect(table.querySelectorAll('tbody tr')).toHaveLength(96);
-      expect(table.parentElement?.className).toContain('overflow-auto');
+      expect(table.parentElement?.className).toContain('overflow-x-auto');
     }
     expect(screen.getByText(/96空港合計/)).toBeTruthy();
   });

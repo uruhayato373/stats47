@@ -11,6 +11,8 @@ import { formatValueWithPrecision } from "@stats47/utils";
 export const GRID = {
   /** グリッド線の透明度（0〜1） */
   strokeOpacity: 0.1,
+  /** グリッド線の点線。テンプレート (shadcndashboard の Recharts 版チャート) の横目盛りに合わせる (2026-10-27) */
+  dashArray: "3,3",
 } as const;
 
 /** フォントサイズ計算の比率 */
