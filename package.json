@@ -290,6 +290,9 @@
     "zod": "4.6.7",
     "@node-minify/core": {
       "glob": "10.5.0"
+    },
+    "satori": {
+      "fflate": "0.7.5"
     }
   },
   "packageManager": "npm@10.8.2",

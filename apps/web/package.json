@@ -146,7 +146,7 @@
     "playwright": "^1.58.2",
     "postcss": "^8.5.26",
     "rimraf": "^6.1.0",
-    "satori": "^0.26.0",
+    "satori": "^0.33.5",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.20.6",
