@@ -45,6 +45,11 @@
       "import": "./src/mlit-ksj/index.ts",
       "require": "./src/mlit-ksj/index.ts"
     },
+    "./infra-history": {
+      "types": "./src/infra-history/index.ts",
+      "import": "./src/infra-history/index.ts",
+      "require": "./src/infra-history/index.ts"
+    },
     "./mlit-ksj/catalog": {
       "types": "./src/mlit-ksj/catalog.ts",
       "import": "./src/mlit-ksj/catalog.ts",

@@ -17,6 +17,20 @@ import type { AdFormat } from "./types";
  */
 export const ADSENSE_DISPLAY_ENABLED: boolean = true;
 
+/**
+ * AdSense の script を読み込まないページ。非商用の利用条件の原典を描くページ
+ * (交通網の変遷: 国土数値情報 N05/N06 の時系列) を広告から切り離す。
+ * 手動枠を置かないだけでなく script 自体を読まない (自動広告をオンにしても出ないように)。
+ */
+export const AD_FREE_PATH_PREFIXES: readonly string[] = ['/geo/history'];
+
+export function isAdFreePath(pathname: string | null): boolean {
+  if (!pathname) return false;
+  return AD_FREE_PATH_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+  );
+}
+
 // 以下の slotId はすべて新アカウントで 2026-10-11 に発行した広告ユニット。配置ごとに 1 ユニットを
 // 割り当て、AdSense の広告ユニット別レポートで枠ごとの収益・視認率を比べられるようにしている
 // (ユニット名は stats47-<配置>)。旧アカウント (pub-7995274743017484) の slotId は使えない。

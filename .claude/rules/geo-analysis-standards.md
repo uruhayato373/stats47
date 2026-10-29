@@ -153,6 +153,18 @@ Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形�
 標高は2009年5月時点で約1km平均、人口は2020年国勢調査基準。相対比較に限り、浸水・高潮・津波の発生や安全を示さない。5mと10mに全国共通の公的基準は確認できないため3しきい値を並べ、別metricには分けない（0m以下は国のゼロメートル地帯と定義が異なり、10mは同じ手順の感度分析のため）。公開ページにはG04-aの承認番号付き原典表示（`LOW_ELEVATION_ATTRIBUTION`）と人口のCC BY 4.0表示、取得日、加工主体を載せる。
 主指標のランキング`low-elevation-population-ratio-5m`は`relatedRankingKey`で分析に結び付け、ランキング右レールに「この指標の地域分析」を出す（`nav_surface=ranking_geo`）。
 
+### 交通網の変遷（高速道路・鉄道の時系列）
+
+`/geo/history/<expressway|railway>[/<regionCode|NN>]` は国土数値情報 N06・N05 の時系列を年スライダーで描く。
+台帳は `packages/gis/src/infra-history/networks.ts`（原典URL・版・ZIP SHA・利用条件・公開状態・属性名・種別）。
+どちらも時系列として使うと非商用（N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、2026-10-29 公式ページで確認）。
+そのためページは広告・アフィリエイトを置かず、AdSense の script も読まない（`AD_FREE_PATH_PREFIXES`）。
+公開（R2 反映・検索掲載）は事務局の書面回答を `publication.permissionEvidence` に記録し `public-approved` にしてから行う。
+それまでは `noindex` で、`ksj-publication-guard.ts` が `app/geo/history/` を拒否する。
+区間は頂点間の線分の中点で県を決め（ポリゴン → 海岸線5km、決まらなければ未帰属）、47県＋未帰属＝全国を保存則で検査する。
+原典の「999（年不明）」は推測で年を当てず除外し、manifest と画面に件数・路線名を出す。
+生成は `node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all`。
+
 ### 読者の操作と導線
 
 一覧`/geo`は問いと実データの地図カードを先に置く。プレビューは既存のmanifest・県別データ検証を通し、既定県の兵庫県（淡路島を含む全Polygon。`GEO_DEFAULT_PREF_CODE`）を共通範囲でサーバー側の静的SVGへ変換する。境界は既存のNII/KSJ TopoJSONを再利用し、地名は検証済み駅データの豊岡・姫路・神戸から取得する。県未指定の`/geo/<slug>`・`/geo/layers/<layerSlug>`・`/geo/compare`も同じ既定県を表示し、着地stageは`overlap`に統一する。境界と地名は位置の補助であり計算入力に追加しない。出典・版・加工・ライセンスを一覧に表示する。地図タイルを画像へ焼き込まず、取得失敗時は代替表示と分析リンクを残す。表示例の県・範囲・凡例を明記し、カードから同じ県の重ね合わせへ接続する。`PageShell`の右レールはxl以上で関連情報を表示し、狭幅では本文後へ積む。県別比較の入口は狭幅でも本文上部に残す。

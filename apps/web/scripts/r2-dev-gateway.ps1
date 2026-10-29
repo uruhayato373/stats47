@@ -122,6 +122,7 @@ function Resolve-LocalOverrideFile {
       $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/geo/layers/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/geo/datasets/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/geo/history/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A31b/25/display/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A03/03/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("gis/mlit-ksj/A30a5/11/", [StringComparison]::Ordinal) -or

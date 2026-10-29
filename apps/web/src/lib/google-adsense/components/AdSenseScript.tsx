@@ -12,18 +12,22 @@
 
 import { useEffect } from "react";
 
+import { usePathname } from "next/navigation";
+
 import { SITE } from "@stats47/types";
 
-import { ADSENSE_DISPLAY_ENABLED } from "../constants";
+import { ADSENSE_DISPLAY_ENABLED, isAdFreePath } from "../constants";
 
 /**
  * AdSenseスクリプトコンポーネント
  */
 export function AdSenseScript() {
   const clientId = SITE.adsenseClientId;
+  const pathname = usePathname();
   const isEnabled =
     ADSENSE_DISPLAY_ENABLED &&
-    process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
+    process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true" &&
+    !isAdFreePath(pathname);
 
   useEffect(() => {
     if (!isEnabled || !clientId) return;

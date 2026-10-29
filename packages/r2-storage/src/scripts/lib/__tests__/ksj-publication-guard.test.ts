@@ -60,6 +60,16 @@ describe('KSJ汎用publisherの公開境界', () => {
     }
   });
 
+  it('交通網の変遷 (非商用の時系列原典) は台帳で公開承認されるまで拒否する', () => {
+    for (const key of [
+      'app/geo/history/expressway/summary.json',
+      'app/geo/history/railway/pref/28.topojson',
+      'app/geo/history/unknown/summary.json',
+    ]) {
+      expect(() => assertKsjPublicKeysAllowed([key])).toThrow('交通網の変遷は公開未承認');
+    }
+  });
+
   it('現行Geo原典と別providerの観測値・記事は妨げない', () => {
     expect(() => assertKsjPublicKeysAllowed([
       'gis/mlit-ksj/mesh1000r6/24/source.zip',
