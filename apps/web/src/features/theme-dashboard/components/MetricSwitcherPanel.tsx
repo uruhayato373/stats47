@@ -23,6 +23,7 @@ import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presenta
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
+import { nationalSeriesName } from '../lib/metric-trend';
 
 import { ScrollableRow } from './ScrollableRow';
 
@@ -84,19 +85,6 @@ type ChartState =
   | { kind: 'none' }
   | { kind: 'select-prefecture' };
 
-/**
- * 比較系列の凡例名。
- *
- * ★47 県平均を「全国」と称してはならない (総人口のような実数系は全国値の 1/47 になる)。
- * 判定は action が返す source 申告に従う。正典は aggregate-metric-timeseries.ts。
- * 平均のときは「都道府県平均」と呼び、「全国」の字を含めない
- * (docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md §3.1)。
- */
-export function nationalSeriesName(
-  result: MetricTimeseriesResult | undefined
-): string {
-  return result?.source === 'national' ? '全国' : '都道府県平均';
-}
 
 /**
  * 全国比較の破線を出しても意味がない指標か。

@@ -3,18 +3,17 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
-import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
+import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
-import { STAT_UNIT_CLASS, STAT_VALUE_CLASS } from '@/components/surface';
+import { StatTile } from '@/components/surface';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
-
-import { nationalSeriesName } from './MetricSwitcherPanel';
+import { resolveMetricTrend, shouldFetchMetricTrend } from '../lib/metric-trend';
 
 import type { MetricKpi } from './metric-kpi';
 
@@ -35,27 +34,15 @@ interface SingleMetricCardProps {
   areaName: string;
 }
 
-type Trend =
-  | { kind: 'chart'; points: { year: number; value: number }[]; seriesName: string }
-  | { kind: 'single-year'; yearName: string }
-  | { kind: 'none' };
-
 /**
- * 有効指標が 1 件しかないグループのカード (2026-09-17)。
+ * 有効指標が 1 件しかないグループのカード (2026-09-17。2026-10-29 に数値タイル StatTile へ移した)。
  *
  * 選択肢が 1 つしかないので選択 UI (チェックボックス・タブ・選択タイル) を出さない。
- * 見出し・値・単位・年次・順位・ランキング導線を直接並べ、推移は県選択時に
- * **異なる年が 2 件以上ある場合だけ**小さく描く。空の折れ線枠・ローディング風の
- * 大面積・「推移データがありません」だけの固定高領域は置かない (情報密度を優先)。
+ * 部品は台帳 data/design/components.json の stat-tile: 名前 → 値 + 単位 + 順位バッジ → 年 (補足) の順に並べ、
+ * 推移の小さなチャートは値の下、出典・ランキングのリンク行は下端に置く。
  *
- * 2 列に並ぶので、カードは grid の行の高さいっぱいに伸ばし (h-full + flex-col)、
- * 出典・ランキングは帯 (CardFooter) にせず本文末の text-xs のリンク行に置く。
- * 隣のカードと高さ・下端が揃う。推移の有無にかかわらず、見出し・値の行 (text-2xl・テンプレートの KPI と同じ)・
- * リンク行の位置は隣のカードと同じにする。推移の無いカードは推移の位置に 1 行の案内だけを置く。
- *
- * 時系列は `MetricSwitcherPanel` と同じ action を、この指標 1 件分だけ遅延取得する
- * (自地域 + 全国。47都道府県・未選択では取得しない = GEO-SCOPE-SEPARATION-01 WP2)。
- * 県系列が空なら 全国 → 47 県平均 の順に退避し、平均を「全国」と呼ばない。
+ * 推移を出すかは lib/metric-trend.ts が決める (県を選んでいる・同じ章に詳しい図が無い・異なる年が 2 つ以上)。
+ * 出さないときは何も置かない。取得は県選択時にこの指標 1 件分だけ (自地域 + 全国)。
  * 正典: docs/01_技術設計/04_デザインシステム.md「選択 UI と集合レイアウトの件数規則」
  */
 export function SingleMetricCard({
@@ -70,7 +57,10 @@ export function SingleMetricCard({
   const label = tabLabels[metric.metricKey] ?? metric.title;
   const heading = title ?? label;
   const areaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
-  const wantsTrend = !!selectedPrefectureCode && !summaryOnly;
+  const wantsTrend = shouldFetchMetricTrend({
+    selectedPrefectureCode,
+    coveredByChapterChart: summaryOnly,
+  });
 
   const [series, setSeries] = useState<
     Record<string, MetricTimeseriesResult>
@@ -103,44 +93,33 @@ export function SingleMetricCard({
     };
   }, [wantsTrend, areaCode, metric.metricKey, series]);
 
-  const trend: Trend = useMemo(() => {
-    if (!wantsTrend) return { kind: 'none' };
-    const areaResult = series[areaCode];
-    const nationalResult = series[NATIONAL_AREA_CODE];
-    if (!areaResult || !nationalResult) return { kind: 'none' };
-
-    let points = areaResult.points;
-    let seriesName = areaName;
-    if (points.length === 0 && nationalResult.points.length > 0) {
-      points = nationalResult.points;
-      seriesName = nationalSeriesName(nationalResult);
-    } else if (points.length === 0 && metric.series.length > 0) {
-      points = metric.series.map((p) => ({
-        year: String(p.year),
-        yearName: String(p.year),
-        value: p.value,
-      }));
-      // 47 県平均を「全国」と称さない (実数系は全国値の 1/47 になる)
-      seriesName = '都道府県平均';
-    }
-    const distinctYears = new Set(points.map((p) => p.year));
-    if (distinctYears.size >= 2) {
-      return {
-        kind: 'chart',
-        seriesName,
-        points: points.map((p) => ({ year: Number(p.year), value: p.value })),
-      };
-    }
-    if (points.length === 1) return { kind: 'single-year', yearName: points[0].yearName };
-    return { kind: 'none' };
-  }, [wantsTrend, series, areaCode, areaName, metric.series]);
+  const trend = useMemo(
+    () =>
+      wantsTrend
+        ? resolveMetricTrend({
+            areaName,
+            areaResult: series[areaCode],
+            nationalResult: series[NATIONAL_AREA_CODE],
+            fallbackSeries: metric.series,
+          })
+        : ({ kind: 'none' } as const),
+    [wantsTrend, series, areaCode, areaName, metric.series]
+  );
 
   const isReady =
     metric.topRanked !== null || metric.value !== null || metric.series.length > 0;
   const shown = selectedPrefectureCode ? metric.value : metric.topRanked?.value ?? null;
+  // 47都道府県 (未選択) の値は実在する 1 位県の値 (47県平均でも全国値でもない) なので、県名を補足に添える
+  const meta = [
+    metric.yearName,
+    !selectedPrefectureCode && metric.topRanked ? `1位: ${metric.topRanked.areaName}` : null,
+  ]
+    .filter(Boolean)
+    .join('・');
 
   return (
     <div
+      id={id}
       data-theme-component-type="kpi-card"
       data-data-state={isReady ? 'ready' : 'no-data'}
       data-unit={metric.unit}
@@ -148,57 +127,30 @@ export function SingleMetricCard({
       data-series-count={isReady ? 1 : 0}
       className="h-full"
     >
-      <ChartPanel
-        id={id}
-        title={heading}
+      <StatTile
         className="h-full"
-        contentClassName="flex flex-1 flex-col"
-      >
-        {/* 見出しと同じ文言を本文で繰り返さない。グループ名が別にあるときだけ指標名を添える */}
-        {label !== heading && (
-          <p className="text-xs leading-4 text-muted-foreground">{label}</p>
-        )}
-        <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
-          <span className={STAT_VALUE_CLASS}>
-            {shown !== null
-              ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
-              : '—'}
-            {metric.unit ? (
-              <span className={STAT_UNIT_CLASS}>
-                {formatUnitForDisplay(metric.unit)}
-              </span>
-            ) : null}
-          </span>
-          {metric.yearName && (
-            <span className="text-xs text-muted-foreground">{metric.yearName}</span>
-          )}
-          {selectedPrefectureCode ? (
-            metric.rank !== null ? (
-              <span className="text-xs tabular-nums text-muted-foreground">
-                {metric.rank}位 / {metric.total}
-              </span>
-            ) : null
-          ) : metric.topRanked !== null ? (
-            /* 47都道府県 (未選択): 実在する1位県の事実 (47県平均でも全国値でもない) */
-            <span className="text-xs tabular-nums text-muted-foreground">
-              1位: {metric.topRanked.areaName}
-            </span>
-          ) : null}
-        </p>
-        {trend.kind === 'chart' ? (
-          <div className="mt-2">
-            <MiniLineChart
-              points={trend.points}
-              seriesName={trend.seriesName}
-              unit={formatUnitForDisplay(metric.unit)}
-            />
-          </div>
-        ) : trend.kind === 'single-year' ? (
-          <p className="mt-2 text-xs text-muted-foreground">
-            {trend.yearName}の単年データのため、推移グラフはありません
-          </p>
-        ) : null}
-        <div data-slot="metric-card-links" className="mt-auto pt-3">
+        label={
+          <>
+            {heading}
+            {/* 見出しと同じ文言を繰り返さない。グループ名が別にあるときだけ指標名を添える */}
+            {label !== heading && (
+              <span className="block text-xs leading-4 text-muted-foreground">{label}</span>
+            )}
+          </>
+        }
+        value={
+          shown !== null
+            ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
+            : null
+        }
+        unit={metric.unit ? formatUnitForDisplay(metric.unit) : undefined}
+        badge={
+          selectedPrefectureCode && metric.rank !== null ? (
+            <RankBadge rank={metric.rank} tone={rankToneByPosition(metric.rank, metric.total)} />
+          ) : undefined
+        }
+        meta={meta || undefined}
+        footer={
           <ChartFooter
             source={metric.sourceName}
             sourceLink={metric.sourceLink}
@@ -206,8 +158,16 @@ export function SingleMetricCard({
             rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
             rankingLabel="ランキングを見る"
           />
-        </div>
-      </ChartPanel>
+        }
+      >
+        {trend.kind === 'chart' ? (
+          <MiniLineChart
+            points={trend.points}
+            seriesName={trend.seriesName}
+            unit={formatUnitForDisplay(metric.unit)}
+          />
+        ) : null}
+      </StatTile>
     </div>
   );
 }

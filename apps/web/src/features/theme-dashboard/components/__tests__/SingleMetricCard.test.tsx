@@ -14,7 +14,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
  *  (d) 異なる年が 2 件以上のときだけ MiniLineChart を描く。固定高のローディング枠・
  *      空状態枠は置かない (情報密度優先)
  *  (e) 計算型指標は R2 平均へ退避し「都道府県平均」と称す (「全国」ではない)
- *  (f) 単年しかない指標は「単年データ」と理由を書く (取得失敗と区別する)
+ *  (f) 単年しかない指標は推移も理由の案内も置かない (2026-10-29 に変更。参考サイトも理由を書かない)
+ *  (g) 部品は数値タイル StatTile (台帳 data/design/components.json の stat-tile)
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
@@ -119,38 +120,40 @@ describe('SingleMetricCard — 推移の退避表記', () => {
     );
   });
 
-  it('単年しかない指標は「単年データ」と理由を書く (取得失敗と区別する)', async () => {
-    fetchMock.mockResolvedValue({ points: points([42]), source: 'national' });
-    renderCard({ selectedPrefectureCode: '13000', areaName: '東京都' });
-
-    await waitFor(() =>
-      expect(screen.getByText(/2020年の単年データのため/)).toBeInTheDocument()
-    );
-    expect(screen.queryByText('推移データがありません')).toBeNull();
-    expect(screen.queryByTestId('mini-line-chart')).toBeNull();
-  });
-
-  it('単年のときも重複するカード説明を追加しない', async () => {
-    fetchMock.mockResolvedValue({ points: points([42]), source: 'national' });
-    renderCard({ selectedPrefectureCode: '13000', areaName: '東京都' });
-    await waitFor(() =>
-      expect(screen.getByText(/2020年の単年データのため/)).toBeInTheDocument()
-    );
-    expect(screen.queryByText('2020年時点の値')).toBeNull();
-  });
-
-  it('単年は自然高の案内と実年を示す', async () => {
-    fetchMock.mockResolvedValue({ points: points([1]), source: 'area' });
+  it('単年しかない指標は推移も理由の案内も置かない (値の行に年を示す)', async () => {
+    fetchMock.mockResolvedValue({ points: points([42]), source: 'area' });
     const { container } = renderCard({
       metric: kpi('wage', { yearName: '2020年' }),
       selectedPrefectureCode: '13000',
       areaName: '東京都',
     });
-    const message = await screen.findByText(/2020年の単年データ/);
-    expect(message.tagName).toBe('P');
-    expect(message).not.toHaveStyle({ height: '250px' });
-    // 本文の値行にも実年 (yearName) を示す
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(screen.queryByTestId('mini-line-chart')).toBeNull();
+    expect(screen.queryByText(/単年データ/)).toBeNull();
+    expect(screen.queryByText('推移データがありません')).toBeNull();
+    // 補足の行に実年 (yearName) を示す
     expect(container.textContent).toContain('2020年');
+  });
+});
+
+describe('SingleMetricCard — 数値タイル (部品の台帳 stat-tile)', () => {
+  it('StatTile で描き、県選択時は順位をバッジ、出典・ランキングのリンク行を下端に置く', () => {
+    const { container } = renderCard({
+      metric: kpi('wage', { rank: 3 }),
+      selectedPrefectureCode: '13000',
+      areaName: '東京都',
+    });
+    const tile = container.querySelector('[data-slot-kind="stat-tile"]');
+    expect(tile).not.toBeNull();
+    expect(tile!.textContent).toContain('3位');
+    const footer = tile!.querySelector('[data-slot="stat-tile-footer"]');
+    expect(footer?.querySelector('a[href="/ranking/wage"]')).not.toBeNull();
+  });
+
+  it('47都道府県 (未選択) は順位バッジを出さず、値が 1 位の県のものだと補足に書く', () => {
+    const { container } = renderCard({ metric: kpi('wage', { rank: 3 }) });
+    expect(container.textContent).not.toContain('3位');
+    expect(container.textContent).toContain('1位: 東京都');
   });
 });
 
