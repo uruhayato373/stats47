@@ -276,11 +276,10 @@
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "ページ末の関連コンテンツ型の直後",
+        "position": "関連ランキングの後 (ページの最後)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
         "marker": "{sections.nativeAffiliate}",
-        "condition": "家計調査の品目は楽天の商品カード (モバイル) と 1 位の県の返礼品 (デスクトップ) に置き換わる",
-        "knownAdjacentReason": "2026-10-29 時点のコード。関連コンテンツ型 (AdSense) の直後に PR の列が続く。直すかはオーナー判断待ち"
+        "condition": "家計調査の品目は楽天の商品カード (モバイル) と 1 位の県の返礼品 (デスクトップ) に置き換わる"
       },
       {
         "slot": "adsense-rail-rect",
@@ -288,30 +287,21 @@
         "position": "右レールの関連ナビの後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
         "marker": "<RailAdSlot slot={RANKING_SIDEBAR_TOP} />",
-        "adsenseSlot": "RANKING_SIDEBAR_TOP"
+        "adsenseSlot": "RANKING_SIDEBAR_TOP",
+        "condition": "2026-10-29 に分野のランキング一覧を下へ移したため上に上がった。デスクトップでは最初の画面に入ることがある (共通のルール noFirstView の例外。オーナー判断)"
       },
       {
         "slot": "affiliate-rect",
         "region": "rail",
-        "position": "右レールの AdSense の直後",
+        "position": "調査のカードの後 (PR の枠。固定のバナーと文脈のバナーを合わせて最大 2 枚)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
         "marker": "<SidebarPromoBanner",
-        "condition": "労働系 (labor) のランキングだけ",
-        "knownAdjacentReason": "2026-10-29 時点のコード。右レールの AdSense の直後に固定の PR のバナーが続く。直すかはオーナー判断待ち"
-      },
-      {
-        "slot": "affiliate-rect",
-        "region": "rail",
-        "position": "固定の PR のバナーの後 (最大 2 枚)",
-        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
-        "marker": "{ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}",
-        "condition": "在庫が無いときは AdSense (SIDEBAR_AFFILIATE_FALLBACK) で埋まる。AdSense を止めているときは右レールの上段へ移す",
-        "knownAdjacentReason": "2026-10-29 時点のコード。PR のバナーが最大 3 枚続く (間に楽天の商品カードが入ることがある)。直すかはオーナー判断待ち"
+        "condition": "固定のバナーは労働系 (labor) のランキングだけ。文脈のバナーの在庫が無いときは AdSense (SIDEBAR_AFFILIATE_FALLBACK) で埋まる。品目のランキングは楽天の商品カードも同じ枠に入る。AdSense を止めているときは文脈のバナーを右レールの上段へ移す"
       },
       {
         "slot": "adsense-rail-rect",
         "region": "rail",
-        "position": "右レールの最後",
+        "position": "右レールの最後 (分野のランキング一覧の後)",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx",
         "marker": "slotId={RANKING_PAGE_TABLE_SIDE.slotId}",
         "adsenseSlot": "RANKING_PAGE_TABLE_SIDE",

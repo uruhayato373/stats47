@@ -29,6 +29,12 @@ const AD_COMPONENTS = new Set([
   'AdSenseAd', 'BannerAd', 'AffiliateAdSlot', 'SidebarPromoBanner', 'RakutenItemsCard', 'FurusatoNozeiCard',
 ]);
 
+/**
+ * 特定の指標でしか描かれないカード。隣り合わせの判定で内容に数えない (ほとんどのページで何も描かないため)。
+ * 港湾の地図は港湾の指標だけ。2026-10-29 に、これを区切りに数えて PR と右レールの最後の AdSense の隣り合わせを見落とした
+ */
+const RARELY_RENDERED = new Set(['PortStatisticsMapCard']);
+
 /** 置き方ごとに、ファイルの中の目印の位置を引く */
 function locate(list: Placement[]) {
   return list.map((placement) => {
@@ -74,9 +80,17 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     for (let i = 1; i < located.length; i++) {
       const prev = located[i - 1];
       const cur = located[i];
-      if (cur.placement.source !== prev.placement.source || cur.placement.region !== prev.placement.region) continue;
-      const between = cur.source.slice(prev.index + prev.placement.marker.length, cur.index);
-      const content = [...between.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)].filter((m) => !AD_COMPONENTS.has(m[1]));
+      if (cur.placement.region !== prev.placement.region) continue;
+      // 同じファイルなら 2 つの目印の間。別のファイル (右レールの最後に別のファイルが枠を足す) なら、前のファイルの目印より後ろ全部
+      const between =
+        cur.placement.source === prev.placement.source
+          ? cur.source.slice(prev.index + prev.placement.marker.length, cur.index)
+          : prev.source.slice(prev.index + prev.placement.marker.length);
+      // 内容 = 広告ではない部品のタグか、広告ではない節の差し込み ({sections.relatedRankings} など。名前に affiliate を含む節は広告)
+      const content = [
+        ...[...between.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)].filter((m) => !AD_COMPONENTS.has(m[1]) && !RARELY_RENDERED.has(m[1])),
+        ...[...between.matchAll(/\{sections\.([A-Za-z0-9]+)\}/g)].filter((m) => !/affiliate/i.test(m[1])),
+      ];
       const adjacent = content.length === 0;
       const label = `${page}: ${prev.placement.marker} → ${cur.placement.marker}`;
       if (adjacent) expect(cur.placement.knownAdjacentReason, `${label} が隣り合わせ`).toBeTruthy();

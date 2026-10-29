@@ -82,7 +82,8 @@ export function RankingPageSidebarSection({
       position="sidebar"
       rankingKey={rankingKey}
       bannerOnly
-      bannerLimit={2}
+      // 右レールの PR は固定のバナーと合わせて 2 枚まで (2026-10-29。広告の枠の台帳の「PR のバナー」1 枠にまとめた)
+      bannerLimit={reservedPromo ? 1 : 2}
       excludeAds={reservedPromo ? [...excludeAffiliateAds, reservedPromo] : excludeAffiliateAds}
     />
   );
@@ -124,31 +125,34 @@ export function RankingPageSidebarSection({
           surface="ranking_geo"
         />
       )}
-      <RankingItemsSidebar
-        rankingKey={rankingKey}
-        areaType={areaType}
-        categoryKey={rankingItem.categoryKey}
-      />
-      {/* 本文中段 (RankingPageRakutenNativeSection) のモバイル版と重複させないため、
-          優先表示時の右レール商品カードはデスクトップ限定にする (2026-09-16)。 */}
-      {prioritizeRakutenItems && <div className="hidden lg:block">{rakutenItems}</div>}
       {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
           枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
       {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <RailAdSlot slot={RANKING_SIDEBAR_TOP} />
+      {/* AdSense と PR の間に調査のカードを置き、広告の枠を隣り合わせにしない (広告の枠の台帳 config/ads/placements.json) */}
+      <SurveyCard
+        surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
+        relatedItems={surveyRelatedItems}
+      />
+      {/* PR の枠: 固定のバナー (労働系だけ) と文脈のバナーを合わせて 2 枚まで、続けて 1 か所に置く。
+          ランキング名が品目 (牛肉・うどん等) のときは楽天市場の商品カードも同じ枠に入る (品目でなければ描画しない)。
+          AdSense 再開時は従来の上段から戻し、同一バナーを二重描画しない。 */}
       <SidebarPromoBanner
         index={promoBannerIndex}
         rankingKey={rankingKey}
         vertical={affiliateVertical}
         excludeAds={excludeAffiliateAds}
       />
-      {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
-      {!prioritizeRakutenItems && rakutenItems}
-      {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
+      {/* 家計調査の品目 (優先表示) の商品カードは、本文中段 (RankingPageRakutenNativeSection) のモバイル版と重複させないため
+          デスクトップ限定 (2026-09-16)。2026-10-29 に AdSense 上段の前から PR の枠の中へ移した */}
+      {prioritizeRakutenItems ? <div className="hidden lg:block">{rakutenItems}</div> : rakutenItems}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
-      <SurveyCard
-        surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
-        relatedItems={surveyRelatedItems}
+      {/* 分野のランキング一覧を PR の枠と右レールの最後の AdSense の間に置き、広告の枠を隣り合わせにしない
+          (2026-10-29 オーナー判断。AdSense 上段が上に上がり、デスクトップでは最初の画面に入ることがある) */}
+      <RankingItemsSidebar
+        rankingKey={rankingKey}
+        areaType={areaType}
+        categoryKey={rankingItem.categoryKey}
       />
       <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
     </Suspense>

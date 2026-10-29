@@ -124,8 +124,10 @@ export function RankingPageContentSections({
                 />
             )}
 
-            {sections.nativeAffiliate}
+            {/* 関連ランキングを関連コンテンツ型 (AdSense) と PR の列の間に置き、広告の枠を隣り合わせにしない。
+                PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 config/ads/placements.json) */}
             {sections.relatedRankings}
+            {sections.nativeAffiliate}
         </>
     );
 }
