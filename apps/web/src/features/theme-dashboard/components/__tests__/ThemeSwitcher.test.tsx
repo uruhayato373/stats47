@@ -64,18 +64,16 @@ describe('buildThemeSwitcherOptions', () => {
     expect(keys).toContain('tourism');
   });
 
-  it('通常テーマ間のリンクへ選択中の都道府県を引き継ぐ', () => {
+  // 2026-10-30: 県×テーマの交点は 1 つの URL (/areas/県/テーマ)。?pref を付けた別の URL を作らない
+  it('県を選んでいるときは、県ごとのページを持つテーマはその県のページへ、持たないテーマは ?pref を付ける', () => {
     const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, undefined, '28000');
-    expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe(
-      '/themes/tourism?pref=28000'
-    );
+    expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe('/areas/28000/tourism');
+    expect(opts.find((o) => o.themeKey === 'ports')?.href).toBe('/themes/ports?pref=28000');
   });
 
-  it('47都道府県の明示選択もテーマ間リンクへ引き継ぐ', () => {
+  it('47都道府県 (県を選んでいない) ではテーマのページへ ?pref を付けずに張る', () => {
     const opts = buildThemeSwitcherOptions(THEME_SWITCHER_THEMES, undefined, null);
-    expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe(
-      '/themes/tourism?pref=all'
-    );
+    expect(opts.find((o) => o.themeKey === 'tourism')?.href).toBe('/themes/tourism');
   });
 });
 
@@ -111,7 +109,7 @@ describe('ThemeSwitcher (Sheet)', () => {
     expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/themes/tourism');
   });
 
-  it('Provider 配下では選択中の都道府県をリンクへ引き継ぐ', async () => {
+  it('Provider 配下では選択中の都道府県の、そのテーマのページへ張る', async () => {
     render(
       <ThemePrefectureProvider initialAreaCode="28000" initialAreaName="兵庫県">
         <ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />
@@ -119,7 +117,7 @@ describe('ThemeSwitcher (Sheet)', () => {
     );
     const sheet = await openSheet();
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
-    expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/themes/tourism?pref=28000');
+    expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/areas/28000/tourism');
   });
 
   it('areaContext: 都道府県文脈の /areas/{code}/{key} へ。Type B テーマは出さない', async () => {

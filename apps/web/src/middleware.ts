@@ -509,6 +509,20 @@ export default function middleware(req: NextRequest) {
     }
   }
 
+  // 県ごとのページを持つテーマの「県だけの絞り込み」(`/themes/<テーマ>?pref=16000`) は、同じ内容の
+  // `/areas/<県>/<テーマ>` へ恒久転送する (県×テーマの交点を 1 つの URL にする。2026-10-30 オーナー決定)。
+  // 地方財政 (local-finance) は専用ページが ?pref で市区町村まで切り替えるので対象外。
+  const themeMatch = pathname.match(/^\/themes\/([^/]+)$/);
+  if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1]) && themeMatch[1] !== 'local-finance') {
+    const prefCode = req.nextUrl.searchParams.get('pref') ?? '';
+    if (UrlPolicy.area.isValidPrefCode(prefCode)) {
+      const url = new URL(hrefFor('area-theme', { areaCode: prefCode, themeSlug: themeMatch[1] }), req.url);
+      url.search = req.nextUrl.search;
+      url.searchParams.delete('pref');
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
   // --- Section 2: コンテンツタイプ別 Allowlist 判定 ---
   const cityRankingMatch = pathname.match(/^\/ranking\/([^/]+)$/);
   if (cityRankingMatch && req.nextUrl.searchParams.get('areaType') === 'city') {

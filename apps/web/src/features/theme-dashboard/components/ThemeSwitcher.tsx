@@ -20,7 +20,6 @@ import { trackNavClick } from '@/lib/analytics/events';
 
 import { themeHref } from '../config/theme-href';
 import { THEME_NAV_GROUPS } from '../config/theme-navigation';
-import { THEME_PREFECTURE_SET_VALUE } from '../lib/theme-prefecture-preference';
 
 import { useThemePrefecture } from './ThemePrefectureContext';
 
@@ -41,8 +40,9 @@ export interface ThemeSwitcherOption {
 /**
  * テーマ切替セレクターの選択肢を、サーバーが `ALL_THEMES`（SSOT）から作った一覧から導出する。
  *
- * - 通常テーマ: canonical は `/themes/{themeKey}` のまま、Provider 配下では現在の
- *   `?pref=<5桁コード|all>` をリンクへ付けて選択と prefetch 結果を一致させる。
+ * - 通常テーマ: `/themes/{themeKey}`。県を選んでいるとき、県ごとのページを持つテーマ (`isAreaTheme`) は
+ *   その県の `/areas/{areaCode}/{themeKey}` へ、持たないテーマ (港湾・鉄道・道路) は `?pref=<5桁コード>` を付ける。
+ *   県×テーマの交点は 1 つの URL に着く (2026-10-30 オーナー決定。旧: 全リンクに `?pref=<コード|all>` を付けていた)。
  * - areaContext: 都道府県文脈を維持して `/areas/{areaCode}/{themeKey}` へ。ただし
  *   area ページで 410 になる Type B テーマ（`isAreaTheme=false`）は除外し、
  *   存在しない / 410 対象の URL を生成しない。
@@ -56,19 +56,13 @@ export function buildThemeSwitcherOptions(
     ? allThemes.filter((t) => t.isAreaTheme)
     : allThemes;
   return themes.map((t) => {
-    const href = areaContext
-      ? hrefFor('area-theme', { areaCode: areaContext.areaCode, themeSlug: t.themeKey })
-      : themeHref(t.themeKey);
-    const preference = selectedPrefectureCode ?? THEME_PREFECTURE_SET_VALUE;
-
-    return {
-      themeKey: t.themeKey,
-      title: t.title,
-      href:
-        !areaContext && selectedPrefectureCode !== undefined
-          ? `${href}?pref=${preference}`
-          : href,
-    };
+    const areaCode = areaContext?.areaCode ?? selectedPrefectureCode ?? null;
+    const href = !areaCode
+      ? themeHref(t.themeKey)
+      : t.isAreaTheme
+        ? hrefFor('area-theme', { areaCode, themeSlug: t.themeKey })
+        : `${themeHref(t.themeKey)}?pref=${areaCode}`;
+    return { themeKey: t.themeKey, title: t.title, href };
   });
 }
 

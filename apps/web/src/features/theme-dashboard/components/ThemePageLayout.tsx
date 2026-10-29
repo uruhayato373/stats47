@@ -42,6 +42,8 @@ import {
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
+import { isAreaTheme } from '../config/area-theme-slugs';
+import { themeHref } from '../config/theme-href';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { getAreaThemeHighlights } from '../lib/area-theme-highlights';
@@ -239,16 +241,17 @@ export async function ThemePageLayout({
           {/* 地域単位・テーマ・地域を 1 行の操作群にまとめ、その下に章のリンク列を 1 行で置く。
           テーマは今のテーマ名のボタン 1 つで、押すと Sheet でテーマの一覧が開く (2026-10-29。旧: Select + テーマ一覧ボタン)。
           関連記事はページの最後に置く (同日。h1 の直下では主要データを押し下げていた)。
-          areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
+          areaContext がある場合は都道府県文脈を維持したまま切り替える。
+          県ごとのページを持つテーマでは、県を選ぶとその県のページ (/areas/県/テーマ) へ移り、地域単位の切り替えは
+          テーマのページと県のページの両方に置く (県×テーマの交点を 1 つの URL・同じ部品にする。2026-10-30) */}
           <div className="mb-4 flex flex-col gap-3">
             <div className="flex flex-wrap items-center gap-3">
-              {!areaContext && (
-                <StatisticsScopeNav
-                  current="prefectures"
-                  hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-                  className="mb-0 w-auto"
-                />
-              )}
+              <StatisticsScopeNav
+                current="prefectures"
+                // 「47都道府県」は同じテーマの 47都道府県の表示へ (県のページから戻る先。既定の /themes 一覧ではない)
+                hrefs={{ prefectures: themeHref(theme.themeKey), ...scopeHrefsForPrefectureTheme(theme.themeKey) }}
+                className="mb-0 w-auto"
+              />
               <div
                 role="group"
                 aria-label="テーマと地域"
@@ -263,7 +266,10 @@ export async function ThemePageLayout({
                     }
                   />
                 </div>
-                <PrefectureSelect className="min-w-0 flex-1 sm:w-44 sm:flex-none" />
+                <PrefectureSelect
+                  className="min-w-0 flex-1 sm:w-44 sm:flex-none"
+                  areaPageThemeKey={isAreaTheme(theme.themeKey) ? theme.themeKey : undefined}
+                />
               </div>
             </div>
 
