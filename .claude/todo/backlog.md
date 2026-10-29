@@ -3314,6 +3314,13 @@ updated: 2026-10-19
 - **統合 (2026-10-26 オーナー判断): `DOCS-CHECK-CI-SPEED-01`** docs のチェック CI に時間がかかっているのを短くする
   - `docs:check` のどこに時間がかかっているかを測ってから直す。（出典: 2026-10-07 の手書きメモ・vault dairy/2026-10-07）
 
+### [HOOK-UNPUSHED-CWD-01] push 確認の Stop フックが、作業場所を基準に記録を書き、apps/web/.claude/ のような置き場の外にファイルを作る
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:git status --short apps/web/.claude] [起票:2026-10-29] [領域:管理]
+
+- **現状 (2026-10-29)**: `.claude/hooks/check-unpushed-on-stop.js` は「同じ HEAD では 1 回だけ止める」記録を `path.join(cwd, ".claude", "state", "session-locks")` に書く。セッションの作業場所が `apps/web` に移っていたため、`apps/web/.claude/state/session-locks/unpushed-<session>.txt` ができた (未追跡のファイルとして残っている)。同じ不具合で、作業場所が変わると「1 回だけ」の記録が見つからず、同じ HEAD で何度も止まり得る。
+- **次**: 置き場の基準を `process.env.CLAUDE_PROJECT_DIR`、無ければ `git rev-parse --show-toplevel` にする (他の Stop フック `check-docs-on-stop.js` は `CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..")` の形)。直したら `apps/web/.claude/` を消す。
+- **完了条件**: 作業場所を `apps/web` に移したセッションで Stop しても、記録がリポジトリ直下の `.claude/state/session-locks/` にだけ書かれる。`apps/web/.claude/` が無い。
+
 ### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs] [起票:2026-09-18] [期日:2026-11-30] [領域:管理]
@@ -3321,6 +3328,8 @@ updated: 2026-10-19
 - **経過記録の整理 (2026-10-25)**: 2026-09 以前の経過と完了済みの記録を削除した。削除前の全文は `git log -p -- .claude/todo/backlog.md` で辿れる。
 
 - **owner**: devops-runner
+- **実測 (2026-10-29・会社 Windows)**: 69 ファイル (web・gis・r2-storage・台帳・規約・backlog) のコミットで、時間を表示する検査は「commit 共通静的検査」21.8s (うち Design System 17.2s・ad-placement 11.7s を並列) だけだった。それ以外の段 (型検査・vitest・check-datasets・maintenance-debt・docs など) は所要時間を出していないので、どこが重いかを記録から特定できない。1 回目は maintenance-debt (`SITE_IDENTITY_LITERAL`) で止まり、直して 2 回目で通った (記録 `/tmp/commit-geo{,2}.log` はこの PC だけ)。
+- **オーナーの問い (同日)**: 「Windows では検査を通さないのはまずいか」。結論は丸ごと外さない (develop へ push してから CI で見つかると、その間に別 PC・並行セッションが壊れた develop を取り込む。memory `feedback_develop_had_no_ci_gate`)。代わりの案: ① 全段に所要時間を出して重い上位を特定する、② 重い段のうち CI (`develop-quality-gate.yml`) と同じ検査だけを、Windows では pre-commit から外して preflight:pr / CI に任せる、③ コミットは軽い検査にして push 前に `npm run preflight` を 1 回、④ リポジトリのフォルダをウイルス対策の検査対象から外す (会社 PC の設定なので IT 部門の許可が要る。Claude は変えない)。①から始める。
 - **実測 (2026-09-17)**: `apps/web/scripts/pre-commit-checks.sh` は 718 行・27 セクション。常時実行分は数秒だが、
   パス連動が重い: metric config が staged だと `validate-metric-years` / `validate-metric-config` /
   `audit-seo-meta-facts --only` (R2 ネットワーク) / `validate-polarity` / `generate-runtime-metric-summaries --check` /
