@@ -982,6 +982,22 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       });
     }
   }
+  // 数値タイル (StatTile) は数値タイルの格子 (StatTileGrid) に並べる。PanelGrid に直に入れると列の数をページが決め、
+  // ページごとに 2 列・3 列・4 列とばらつく (2026-10-29 に 4 通り以上あったのをまとめた。台帳 data/design/components.json)
+  if (!file.endsWith('stat-tile-grid.tsx')) {
+    // 数値タイルを 2 枚以上並べる格子だけを見る (地図の横に 1 枚置くような、ページの組み立ての格子は対象外)
+    for (const match of text.matchAll(/<PanelGrid\b[\s\S]*?<\/PanelGrid>/g)) {
+      if ((match[0].match(/<StatTile\b/g) ?? []).length < 2) continue;
+      violations.push({
+        ruleId: 'stat-tile-grid-owns-columns',
+        message:
+          'Place StatTile cells in StatTileGrid (@/components/surface). It owns the column count (1 / 2 / 4 columns at container widths 0 / 480 / 768px); pages do not set grid-cols for numeric tiles.',
+        file,
+        lineNumber: lineOf(match.index),
+        line: match[0].split('\n')[0],
+      });
+    }
+  }
   // パネルを 2 枚以上、隙間 (gap-N / space-y-N) を空けて並べる <div> は線の格子 (PanelGrid / PageSections) にする
   for (const match of text.matchAll(SPACED_STACK_DIV)) {
     if (!SPACED_STACK_CLASS.test(match[1] ?? match[2] ?? match[3] ?? '')) continue;

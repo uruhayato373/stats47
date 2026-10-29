@@ -13,6 +13,7 @@ import { ChartFooter } from '@/components/charts/ChartFooter';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
+import { StatTileGrid } from '@/components/surface';
 
 import {
   PREFECTURE_SET_LABEL,
@@ -354,10 +355,9 @@ export function ThemeMetricsDashboard({
   );
   /**
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
-   * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
-   * 2 列の境界は本文幅 640px (@md の 768px だと 1024px 幅でサイドバーを出したとき 1 列に落ちる)。
-   * 並びは線の格子 (PanelGrid)。隣り合うカードは線を共有し、同じ行のカードは同じ高さに伸ばす
-   * (縮めると格子の線の色の地が見えるため)。
+   * run が 2 件以上のときだけ数値タイルの格子 (StatTileGrid) で包む。1 件の run に grid wrapper は作らない。
+   * 列の数は格子の部品が本文の幅で決める (1 / 2 / 4 列。県データブックなど他の数値の並びと同じ規則。2026-10-29)。
+   * 同じ行のカードは同じ高さに伸びる。
    */
   const renderPanelRuns = (
     list: Panel[],
@@ -379,13 +379,9 @@ export function ThemeMetricsDashboard({
         out.push(renderPanel(panel, summaryOnlyOf(panel)));
       } else {
         out.push(
-          <PanelGrid
-            key={`compact-${panel.key}`}
-            data-theme-panel-grid="compact"
-            className="grid-cols-1 @min-[40rem]:grid-cols-2"
-          >
-            {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
-          </PanelGrid>
+          <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
+            <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item)))}</StatTileGrid>
+          </div>
         );
       }
       i = j;

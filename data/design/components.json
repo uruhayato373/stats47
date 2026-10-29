@@ -41,6 +41,35 @@
       "checks": ["stat-value-uses-shared-class", "no-nested-card-surfaces"]
     },
     {
+      "id": "stat-tile-grid",
+      "name": "数値タイルの格子",
+      "role": "数値タイルを線の格子に並べる。列の数は本文の幅だけで決め、チャートの有無にかかわらずすべて同じ大きさのセルに入れる。ページの側では列の数を指定しない",
+      "implementation": {
+        "package": "@stats47/components",
+        "export": "StatTileGrid",
+        "source": "packages/components/src/surface/stat-tile-grid.tsx",
+        "propsType": "StatTileGridProps"
+      },
+      "slots": [
+        { "prop": "children", "required": true, "what": "数値タイル (StatTile、またはそれを包むだけの要素)。数値の要約の表のカード (地方財政の主要指標) も同じ大きさのセルとして並べてよい" },
+        { "prop": "footnote", "required": false, "what": "格子の最後の 1 行に全幅で置く注記" }
+      ],
+      "spec": {
+        "columns": "本文の幅 480px 未満 = 1 列 / 480px 以上 = 2 列 / 768px 以上 = 4 列。上限はタイルの枚数 (1 枚 = 1、2〜3 枚 = 2、4 枚以上 = 4)",
+        "noThreeColumns": "3 列は使わない (2 枚 1 組のタイルがどの幅でも同じ行に並ぶ)",
+        "cell": "チャートの有無にかかわらず同じ大きさ。同じ行のタイルは高さをそろえる",
+        "filler": "最終行の空きマスは白いセルで埋める"
+      },
+      "reference": { "referenceId": "shadcndashboard", "adoptionPart": "線の格子" },
+      "useWhen": [
+        "数値タイルを 1 枚以上並べる所すべて (県データブック・市区町村・テーマの指標カード・地方財政・ランキングの県詳細)"
+      ],
+      "avoidWhen": [
+        { "when": "題名を持つパネル (大きなチャート・地図・指標の切り替え) を並べる", "use": "chart-panel" }
+      ],
+      "checks": ["stat-tile-grid-owns-columns"]
+    },
+    {
       "id": "chart-panel",
       "name": "パネル",
       "role": "題名 (とアイコン・説明・操作) を見出しの帯に持つ節。大きなチャート・地図・指標の切り替えなど、見出しで何の節かを示す中身を入れる",

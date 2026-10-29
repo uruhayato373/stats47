@@ -68,7 +68,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "agri-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "agricultural-output",
@@ -94,7 +93,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "food-kpi",
-          columns: 3,
           metrics: [
             { rankingKey: "rice-harvest-volume", shortLabel: "コメ収穫量" },
             { rankingKey: "marine-fishery-catch", shortLabel: "海面漁業漁獲量" },
@@ -138,7 +136,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "population-kpi",
-          columns: 4,
           metrics: [
             {
               // 総人口 (外国人を含む)。日本人人口だと東京都が 1,346 万人になり、人口動態ページの
@@ -275,7 +272,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "living-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "current-savings-balance-multi-person-households",
@@ -331,7 +327,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "economy-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "per-capita-prefectural-income-h27",
@@ -413,7 +408,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "industry-kpi",
-          columns: 2,
           metrics: [
             {
               rankingKey: "manufacturing-establishments",
@@ -457,7 +451,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "household-kpi",
-          columns: 3,
           metrics: [
             { rankingKey: "households", shortLabel: "世帯数" },
             {
@@ -486,7 +479,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "climate-kpi",
-          columns: 4,
           metrics: [
             { rankingKey: "average-temperature", shortLabel: "平均気温" },
             { rankingKey: "annual-sunshine-duration", shortLabel: "日照時間" },
@@ -510,7 +502,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "land-nature-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "total-area-excluding-northern-territories-and-takeshima",
@@ -600,7 +591,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "gender-kpi",
-          columns: 2,
           metrics: [
             {
               rankingKey: "sex-ratio-total",
@@ -621,7 +611,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "land-price-kpi",
-          columns: 2,
           metrics: [
             {
               rankingKey: "residential-land-price-change-rate",
@@ -641,7 +630,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "tourism-kpi",
-          columns: 2,
           metrics: [
             {
               rankingKey: "total-overnight-guests",
@@ -676,7 +664,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "facility-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "physicians-in-medical-facilities-per-100k",
@@ -728,7 +715,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "consumption-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey:
@@ -779,7 +765,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
         {
           blockType: "ranked-kpi-grid",
           blockKey: "consumption-items-kpi",
-          columns: 3,
           metrics: [
             {
               rankingKey: "beef-consumption-quantity",

@@ -20,7 +20,6 @@ describe("RankedKpiGrid", () => {
       <RankedKpiGrid
         metrics={[metric("population", "人口")]}
         databook={databook}
-        columns={4}
       />,
     );
 
@@ -41,11 +40,11 @@ describe("RankedKpiGrid", () => {
       metric("d", "D"),
     ];
     const html = renderToStaticMarkup(
-      <RankedKpiGrid metrics={metrics} databook={null} columns={4} />,
+      <RankedKpiGrid metrics={metrics} databook={null} />,
     );
 
     expect(html).toContain("@md:grid-cols-4");
-    expect(html).not.toContain("@lg:grid-cols-4");
+    expect(html).not.toContain("@md:grid-cols-3");
   });
 
   // 2026-09-24 週次 UI 検査: 値の無い指標が「—」の箱で並び、最終行の空きマスが灰色の箱に見えた。
@@ -54,7 +53,6 @@ describe("RankedKpiGrid", () => {
       <RankedKpiGrid
         metrics={[metric("population", "人口"), metric("crime-rate", "犯罪率")]}
         databook={databook}
-        columns={3}
       />,
     );
     expect(html).toContain("人口");
@@ -62,30 +60,25 @@ describe("RankedKpiGrid", () => {
     expect(html).not.toContain("—");
   });
 
-  // 2026-10-28 数値タイル: 線の格子 (PanelGrid) に数値タイル (StatTile) を並べる。格子の地は線の色なので、
-  // 最終行の空きマスは白いセルで埋める。列数は幅で 1 → 2 → 3 と変わるので、幅ごとに必要な数だけ出す。
-  it("指標の数だけ数値タイルを線の格子に並べ、最終行の空きマスは幅ごとに白いセルで埋める", () => {
+  // 2026-10-29 数値タイルの格子 (StatTileGrid): 列の数は本文の幅で 1 → 2 → 4 列 (3 列は使わない)。最終行の空きマスは
+  // 幅ごとに白いセルで埋める (線の格子は空きマスが灰色に見えるため)。
+  it("指標の数だけ数値タイルを数値タイルの格子に並べ、最終行の空きマスは幅ごとに白いセルで埋める", () => {
+    const keys = ["a", "b", "c", "d", "e"];
     const full = {
       metrics: Object.fromEntries(
-        ["a", "b", "c", "d"].map((k) => [
-          k,
-          { value: 1, rank: 1, unit: "人", nationalAvg: 0 },
-        ]),
+        keys.map((k) => [k, { value: 1, rank: 1, unit: "人", nationalAvg: 0 }]),
       ),
     } as unknown as Parameters<typeof RankedKpiGrid>[0]["databook"];
     const html = renderToStaticMarkup(
-      <RankedKpiGrid
-        metrics={["a", "b", "c", "d"].map((k) => metric(k, k.toUpperCase()))}
-        databook={full}
-        columns={3}
-      />,
+      <RankedKpiGrid metrics={keys.map((k) => metric(k, k.toUpperCase()))} databook={full} />,
     );
-    expect(html.match(/data-slot-kind="stat-tile"/g)).toHaveLength(4);
-    expect(html).toContain('data-slot="panel-grid"');
-    // 4 枚: 2 列では空きマス 0、3 列では 2。埋めるセルは 3 列のときだけ出す
+    expect(html.match(/data-slot-kind="stat-tile"/g)).toHaveLength(5);
+    expect(html).toContain('data-slot-kind="stat-tile-grid"');
+    // 5 枚: 2 列では空きマス 1、4 列では 3。2 列の幅では 1 つだけ、4 列の幅では 3 つ見せる
     const fillers = [...html.matchAll(/<div aria-hidden="true" data-cell="flush" class="([^"]*)"/g)].map((m) => m[1]);
-    expect(fillers).toHaveLength(2);
-    for (const className of fillers) {
+    expect(fillers).toHaveLength(3);
+    expect(fillers[0].split(" ")).toEqual(expect.arrayContaining(["hidden", "@sm:block", "@md:block"]));
+    for (const className of fillers.slice(1)) {
       expect(className.split(" ")).toEqual(expect.arrayContaining(["hidden", "@md:block"]));
       expect(className).not.toContain("@sm:block");
     }

@@ -16,6 +16,7 @@ export {
   PORTAL_CARD_TITLE_CLASS,
   getSurfaceCardClassName,
   StatTile,
+  StatTileGrid,
   STAT_LABEL_CLASS,
   STAT_META_CLASS,
   STAT_UNIT_CLASS,
