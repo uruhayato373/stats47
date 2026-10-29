@@ -344,6 +344,30 @@ updated: 2026-10-19
 - **次**: メニューを開く操作 (Base UI の DropdownMenu) がテスト環境で開かなくなった原因を、上の 2 コミットの前後でテストを流して切り分ける。
 - **完了条件**: 同テストが 4 件とも通り、web の vitest 全件が緑。
 
+### [INFRA-HISTORY-R2-PUBLISH-01] 交通網の変遷・IC と JCT・問いのページの計算結果を CI で生成して R2 に反映し、どの PC でも作り直さずに済むようにする
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all] [起票:2026-10-29] [領域:データ]
+
+- **なぜ (2026-10-29 のオーナーの指摘)**: 交通網の変遷 (高速道路・鉄道・空港)・高速道路の接合部 (IC・JCT)・問いのページの計算結果は、作った PC の `.local/r2/` にしか無い。ここは R2 へ送る前の一時置き場で、7 日で自動的に消える (`.claude/rules/local-environment.md` の保持表)。別の PC では毎回作り直す必要があり、本番は R2 を読むので R2 に無い限り表示できない。R2 への書き込みは CI に限る運用で (2026-09-14〜。memory `project_r2_writes_ci_only`)、会社の Windows PC には書き込みの資格情報も無い。
+- **反映するもの (すべて公開バケット `app/` 配下)**:
+
+  | 生成物 | R2 key | 生成 |
+  |---|---|---|
+  | 交通網の変遷 3 網 (summary・manifest・national・region・pref) | `app/geo/history/{expressway,railway,airport}/...` | `packages/gis/src/infra-history/scripts/build-infra-history.ts --network all` |
+  | 高速道路の接合部 (IC・JCT の点) | `app/geo/history/expressway/joints.topojson` | `packages/gis/src/infra-history/scripts/build-expressway-joints.ts` (上の後) |
+  | 問いのページの計算結果 (試作 4 本) | `app/geo/questions/<問い>.json` | `packages/gis/src/geo-questions/scripts/build-geo-questions.ts` (上の 2 つの後) |
+
+- **反映しないもの**: 原典 ZIP (N05・N06・N08)。N05・N06 は時系列が非商用なので、原典を公開バケットに置くことは決まりで禁止 (`.claude/rules/gis-data.md`)。CI では毎回、台帳 (`packages/gis/src/infra-history/networks.ts`) の公式 URL から取得し、bytes と SHA-256 で照合する。残したい場合だけ非公開の置き場 (private R2 `stats47-private` か Drive の参考文献の置き場) を別途決める。
+- **公開の条件 (確認済み)**: 高速道路 N06・鉄道 N05 は事務局の電話の了承 (2026-10-29、`PHONE_PERMISSION_2026_10_29`: 広告なしページでの地図表示 (加工データの配信を含む)・SNS)、空港 N08 は公式ページの条件が商用可。台帳の `isInfraNetworkPublishable` が 3 網とも true。R2 の公開ガード `packages/r2-storage/src/scripts/lib/ksj-publication-guard.ts` は `app/geo/history/` を公開可の網だけ通す。**`app/geo/questions/` はガードの対象外**なので、問いのページの入力 (主題・原典) が公開可かを確かめる検査をガードに足すか、問いの台帳 (`GEO-QUESTION-DESIGN-01`) ができるまで反映を待つかを決める。
+- **手順**:
+  1. 前例 `.github/workflows/geo-source-publish.yml` (dry-run で反映の計画を作り、確認後に同じ計画だけを反映する。広い prefix の同期をしない) にならい、交通網の仕事を作る。既存の `sync-snapshots.yml` のタスクに足すか、専用の workflow にするかを決める (生成に原典 ZIP の取得と市区町村の境界 47 県の取得が要り、数分かかる)。
+  2. 生成 → manifest の保存則の検査 (`conservation.passed`) → 公開ガード → dry-run (反映する key・bytes・SHA の一覧) → オーナーの承認 → 反映 (`push-exact-r2-assets.ts` など、明示した key だけ)。`concurrency: r2-write` を使う。
+  3. `.claude/rules/r2-storage-design.md` の URL → R2 key の表に `app/geo/questions/` を足す (`app/geo/history/` は記載済み)。
+  4. 反映後、dev サーバー (R2 の中継) と本番の `/api/geo/history/<網>/national.topojson` が 200 を返し、R2 の SHA が CI の生成物と一致することを確かめる。
+  5. `GEO-QUESTION-DESIGN-01` と `INFRA-TIMELINE-01` の「別の PC で再現する手順」から「`.local` を作り直す」を外し、R2 から読む形に書き換える。
+- **停止条件・禁止**: 原典 ZIP を公開バケットに置かない。`app/geo/` の広い prefix を同期しない (明示した key だけ)。承認の前に反映しない。保存則が通らない生成物を反映しない。
+- **完了条件**: CI の仕事で 3 網・接合部・(決めた場合は) 問いの計算結果が R2 にあり、SHA が一致し、別の PC で `.local` を作らずに dev と本番の画面が表示できる。
+- **関連**: `INFRA-TIMELINE-01` (交通網の公開。手順 ② の R2 反映をこのカードで行う)、`GEO-QUESTION-DESIGN-01` (問いのページ)、`GEO-OVERLAY-URL-01`。
+
 ### [GIS-SOURCE-PAGE-URL-01] 公式ページの URL が無い登録済み GIS 31 件に URL を足し、利用条件の区分名のずれを個別ページで確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:cd packages/gis && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts] [起票:2026-10-29] [領域:データ]
 
