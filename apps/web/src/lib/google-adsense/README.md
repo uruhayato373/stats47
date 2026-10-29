@@ -54,7 +54,8 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <AdSenseScript />
+        {/* 広告を出さないページの接頭辞は GIS 台帳の利用条件から導く (ad-free-paths.ts) */}
+        <AdSenseScript adFreePathPrefixes={AD_FREE_PATH_PREFIXES} />
         {children}
       </body>
     </html>

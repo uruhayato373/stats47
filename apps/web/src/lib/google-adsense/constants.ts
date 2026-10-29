@@ -17,6 +17,16 @@ import type { AdFormat } from "./types";
  */
 export const ADSENSE_DISPLAY_ENABLED: boolean = true;
 
+/**
+ * AdSense の script を読み込まないページか。広告を出さないページの接頭辞は GIS 台帳の利用条件から
+ * サーバーで導き (`ad-free-paths.ts`)、ここは照合だけを行う。
+ * 手動枠を置かないだけでなく script 自体を読まない (自動広告をオンにしても出ないように)。
+ */
+export function isAdFreePath(pathname: string | null, prefixes: readonly string[]): boolean {
+  if (!pathname) return false;
+  return prefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 // 以下の slotId はすべて新アカウントで 2026-10-11 に発行した広告ユニット。配置ごとに 1 ユニットを
 // 割り当て、AdSense の広告ユニット別レポートで枠ごとの収益・視認率を比べられるようにしている
 // (ユニット名は stats47-<配置>)。旧アカウント (pub-7995274743017484) の slotId は使えない。

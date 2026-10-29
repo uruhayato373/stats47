@@ -290,6 +290,13 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     propertyMap: {},
     simplifyOptions: { quantize: 100000, simplifyQuantile: 0.01 },
   }],
+  ["N05", {
+    dataId: "N05",
+    downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/N05/N05-{VERSION}/N05-{VERSION}_GML.zip",
+    geojsonDirInZip: "UTF-8/",
+    propertyMap: {},
+    simplifyOptions: { quantize: 100000, simplifyQuantile: 0.01 },
+  }],
   ["N07", {
     dataId: "N07",
     downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/N07/N07-{VERSION}/N07-{VERSION}_{PREF}_GML.zip",

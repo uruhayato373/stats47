@@ -1,0 +1,514 @@
+{
+  "$schema": "./subjects.schema.json",
+  "version": 1,
+  "subjects": [
+    {
+      "id": "expressway-sections",
+      "label": "高速道路",
+      "geometry": "line",
+      "source": {
+        "kind": "ksj",
+        "dataId": "N06",
+        "featureType": "HighwaySection"
+      },
+      "time": {
+        "axis": "annual",
+        "match": "validity-range"
+      },
+      "geography": {
+        "unit": "segment",
+        "boundary": null
+      },
+      "scopes": [
+        "national",
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "延長",
+        "unit": "km"
+      },
+      "style": {
+        "kind": "category",
+        "classes": [
+          {
+            "code": "1",
+            "label": "高速自動車国道",
+            "sourceCodes": [
+              "1"
+            ],
+            "color": "hsl(var(--chart-3))"
+          },
+          {
+            "code": "2",
+            "label": "並行する自動車専用道路",
+            "sourceCodes": [
+              "2"
+            ],
+            "color": "hsl(var(--chart-2))"
+          },
+          {
+            "code": "3",
+            "label": "一般国道の自動車専用道路",
+            "sourceCodes": [
+              "3"
+            ],
+            "color": "hsl(var(--chart-4))"
+          },
+          {
+            "code": "4",
+            "label": "本州四国連絡高速道路",
+            "sourceCodes": [
+              "4"
+            ],
+            "color": "hsl(var(--chart-1))"
+          },
+          {
+            "code": "5",
+            "label": "指定都市高速道路",
+            "sourceCodes": [
+              "5"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          },
+          {
+            "code": "6",
+            "label": "その他の道路",
+            "sourceCodes": [
+              "6"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          }
+        ]
+      }
+    },
+    {
+      "id": "expressway-joints",
+      "label": "高速道路のインターチェンジ・ジャンクション",
+      "geometry": "point",
+      "source": {
+        "kind": "ksj",
+        "dataId": "N06",
+        "featureType": "Joint"
+      },
+      "time": {
+        "axis": "annual",
+        "match": "validity-range"
+      },
+      "geography": {
+        "unit": "facility",
+        "boundary": null
+      },
+      "scopes": [
+        "national",
+        "region",
+        "prefecture"
+      ],
+      "measure": null,
+      "style": {
+        "kind": "category",
+        "classes": [
+          {
+            "code": "ic",
+            "label": "インターチェンジ",
+            "sourceCodes": [
+              "1"
+            ],
+            "color": "hsl(var(--chart-3))"
+          },
+          {
+            "code": "smart-ic",
+            "label": "スマートインターチェンジ",
+            "sourceCodes": [
+              "2"
+            ],
+            "color": "hsl(var(--chart-2))"
+          },
+          {
+            "code": "jct",
+            "label": "ジャンクション",
+            "sourceCodes": [
+              "3"
+            ],
+            "color": "hsl(var(--chart-4))"
+          },
+          {
+            "code": "other",
+            "label": "その他の接合部",
+            "sourceCodes": [
+              "4"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          }
+        ]
+      },
+      "unverified": [
+        "区間の初年 (1962 年) より前に開始年を持つ接合部があるかは未確認。"
+      ]
+    },
+    {
+      "id": "railway-sections",
+      "label": "鉄道",
+      "geometry": "line",
+      "source": {
+        "kind": "ksj",
+        "dataId": "N05",
+        "featureType": "RailroadSection2"
+      },
+      "time": {
+        "axis": "annual",
+        "match": "validity-range"
+      },
+      "geography": {
+        "unit": "segment",
+        "boundary": null
+      },
+      "scopes": [
+        "national",
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "延長",
+        "unit": "km"
+      },
+      "style": {
+        "kind": "category",
+        "classes": [
+          {
+            "code": "1",
+            "label": "JR新幹線",
+            "sourceCodes": [
+              "1"
+            ],
+            "color": "hsl(var(--chart-3))"
+          },
+          {
+            "code": "2",
+            "label": "JR在来線",
+            "sourceCodes": [
+              "2"
+            ],
+            "color": "hsl(var(--chart-2))"
+          },
+          {
+            "code": "3",
+            "label": "公営鉄道",
+            "sourceCodes": [
+              "3"
+            ],
+            "color": "hsl(var(--chart-4))"
+          },
+          {
+            "code": "4",
+            "label": "民営鉄道",
+            "sourceCodes": [
+              "4"
+            ],
+            "color": "hsl(var(--chart-1))"
+          },
+          {
+            "code": "5",
+            "label": "第三セクター",
+            "sourceCodes": [
+              "5"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          }
+        ]
+      }
+    },
+    {
+      "id": "railway-current",
+      "label": "鉄道 (現況)",
+      "geometry": "line",
+      "source": {
+        "kind": "ksj",
+        "dataId": "N02",
+        "featureType": "RailroadSection"
+      },
+      "time": {
+        "axis": "snapshot",
+        "match": "exact"
+      },
+      "geography": {
+        "unit": "segment",
+        "boundary": null
+      },
+      "scopes": [
+        "national",
+        "region",
+        "prefecture"
+      ],
+      "measure": null,
+      "style": {
+        "kind": "category",
+        "classes": [
+          {
+            "code": "1",
+            "label": "JR新幹線",
+            "sourceCodes": [
+              "1"
+            ],
+            "color": "hsl(var(--chart-3))"
+          },
+          {
+            "code": "2",
+            "label": "JR在来線",
+            "sourceCodes": [
+              "2"
+            ],
+            "color": "hsl(var(--chart-2))"
+          },
+          {
+            "code": "3",
+            "label": "公営鉄道",
+            "sourceCodes": [
+              "3"
+            ],
+            "color": "hsl(var(--chart-4))"
+          },
+          {
+            "code": "4",
+            "label": "民営鉄道",
+            "sourceCodes": [
+              "4"
+            ],
+            "color": "hsl(var(--chart-1))"
+          },
+          {
+            "code": "5",
+            "label": "第三セクター",
+            "sourceCodes": [
+              "5"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          }
+        ]
+      },
+      "notes": [
+        "鉄道の時系列 (railway-sections) と同じ区分・同じ色で描く (事業者種別のコード表が同じ)。"
+      ]
+    },
+    {
+      "id": "airports",
+      "label": "空港",
+      "geometry": "point",
+      "source": {
+        "kind": "ksj",
+        "dataId": "N08",
+        "featureType": "Airport"
+      },
+      "time": {
+        "axis": "annual",
+        "match": "validity-range"
+      },
+      "geography": {
+        "unit": "facility",
+        "boundary": null
+      },
+      "scopes": [
+        "national",
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "空港数",
+        "unit": "か所"
+      },
+      "style": {
+        "kind": "category",
+        "classes": [
+          {
+            "code": "hub",
+            "label": "拠点空港 (旧第一種・会社管理)",
+            "sourceCodes": [
+              "1",
+              "6"
+            ],
+            "color": "hsl(var(--chart-3))"
+          },
+          {
+            "code": "national",
+            "label": "国管理空港 (旧第二種・国管理)",
+            "sourceCodes": [
+              "2",
+              "7"
+            ],
+            "color": "hsl(var(--chart-2))"
+          },
+          {
+            "code": "local",
+            "label": "地方管理空港 (旧第三種・特定地方管理)",
+            "sourceCodes": [
+              "3",
+              "8",
+              "9"
+            ],
+            "color": "hsl(var(--chart-4))"
+          },
+          {
+            "code": "other",
+            "label": "共用・その他の空港",
+            "sourceCodes": [
+              "4",
+              "5",
+              "10",
+              "11"
+            ],
+            "color": "hsl(var(--muted-foreground))"
+          }
+        ]
+      },
+      "notes": [
+        "2008年の空港法改正の前後で区分が変わるため、近い区分どうしをまとめて同じ色で描く。"
+      ]
+    },
+    {
+      "id": "municipal-population",
+      "label": "市区町村の人口",
+      "geometry": "area",
+      "source": {
+        "kind": "estat-metric",
+        "metricKey": "total-population",
+        "entity": "city"
+      },
+      "time": {
+        "axis": "census-5y",
+        "match": "latest-before"
+      },
+      "geography": {
+        "unit": "municipality",
+        "boundary": "municipality-merged-designated-city"
+      },
+      "scopes": [
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "人口",
+        "unit": "人"
+      },
+      "style": {
+        "kind": "sequential",
+        "scale": "log"
+      },
+      "notes": [
+        "国勢調査の 5 年ごとの値。スライダーの年に調査が無いときは、その年以前で最も近い調査年の値を年を明示して描く。",
+        "合併を今の市区町村の境界に組み替えた系列 (例: 浜松市 22130 の 1980 年は合併前の周辺市町村を含む 698,982 人。2026-10-29 に R2 で確認)。",
+        "政令指定都市は市全体だけを使い、行政区の行と二重に数えない。"
+      ]
+    },
+    {
+      "id": "municipal-population-change",
+      "label": "市区町村の人口の増減率 (1980年比)",
+      "geometry": "area",
+      "source": {
+        "kind": "estat-metric",
+        "metricKey": "total-population",
+        "entity": "city"
+      },
+      "derive": {
+        "kind": "change-rate-from-base-year",
+        "baseYear": 1980
+      },
+      "time": {
+        "axis": "census-5y",
+        "match": "latest-before"
+      },
+      "geography": {
+        "unit": "municipality",
+        "boundary": "municipality-merged-designated-city"
+      },
+      "scopes": [
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "1980年比の増減率",
+        "unit": "%"
+      },
+      "style": {
+        "kind": "diverging"
+      },
+      "notes": [
+        "国勢調査の 1980 年の人口を基準にした増減率。合併を今の市区町村の境界に組み替えた系列なので、合併の前後で比べられる。",
+        "増加は緑、減少は赤。色の濃さは全国の全年の値で決める。"
+      ]
+    },
+    {
+      "id": "municipal-manufacturing-shipment",
+      "label": "市区町村の製造品出荷額",
+      "geometry": "area",
+      "source": {
+        "kind": "estat-metric",
+        "metricKey": "manufacturing-shipment-amount",
+        "entity": "city"
+      },
+      "time": {
+        "axis": "fiscal-annual",
+        "match": "latest-before"
+      },
+      "geography": {
+        "unit": "municipality",
+        "boundary": "municipality-merged-designated-city"
+      },
+      "scopes": [
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "製造品出荷額",
+        "unit": "百万円"
+      },
+      "style": {
+        "kind": "sequential",
+        "scale": "log"
+      },
+      "notes": [
+        "年度ごとの名目値。物価の変化は調整していない。",
+        "政令指定都市は市全体だけを使う。"
+      ],
+      "unverified": [
+        "調査の切り替え (工業統計調査 → 経済センサス・経済構造実態調査) の前後で値がつながるかは未確認。"
+      ]
+    },
+    {
+      "id": "land-price-points",
+      "label": "地価公示の地点",
+      "geometry": "point",
+      "source": {
+        "kind": "ksj",
+        "dataId": "L01",
+        "featureType": "LandPrice"
+      },
+      "time": {
+        "axis": "annual",
+        "match": "exact"
+      },
+      "geography": {
+        "unit": "site",
+        "boundary": null
+      },
+      "scopes": [
+        "region",
+        "prefecture"
+      ],
+      "measure": {
+        "label": "地価",
+        "unit": "円/㎡"
+      },
+      "style": {
+        "kind": "sequential",
+        "scale": "log"
+      },
+      "notes": [
+        "その年に価格の無い地点 (後から選ばれた地点など) は描かない。"
+      ],
+      "unverified": [
+        "価格の列 L01_062〜L01_105 が 1983〜2026 年に対応すること (列の数と最後の列が 2026 年の価格に一致することだけ確認。製品仕様書で未確認)。",
+        "地物の種類名 (featureType) を仮に置いている。原典 ZIP の中の名前で確かめる。"
+      ]
+    }
+  ]
+}

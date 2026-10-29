@@ -1,6 +1,8 @@
 import { TSUNAMI_EXPOSURE_SOURCE } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-source';
 import { assertTsunamiManifest, assertTsunamiSnapshot } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-schema';
 import { assertScopedGeoSourcePublication, isScopedGeoSourceKey } from './scoped-geo-source-publication';
+import { INFRA_HISTORY_PREFIX, infraNetworkOfKey } from '../../../../gis/src/infra-history/keys';
+import { findInfraNetwork, isInfraNetworkPublishable } from '../../../../gis/src/infra-history/networks';
 import { GIS_DATASETS } from '../../../../gis/src/mlit-ksj/datasets';
 import { getKsjLicensePolicy } from '../../../../gis/src/mlit-ksj/license-policy';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
@@ -55,6 +57,17 @@ export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
         getKsjLicensePolicy(dataset.license).sourcePublication !== 'public-r2-eligible'
       ) {
         throw new Error(`KSJ public mirror禁止: ${key} (${dataset?.license ?? 'unassessed'})`);
+      }
+    }
+
+    // 交通網の変遷は非商用の時系列原典 (N05/N06)。台帳で公開承認されるまで出さない
+    const infraNetwork = infraNetworkOfKey(key);
+    if (key.startsWith(INFRA_HISTORY_PREFIX)) {
+      const network = infraNetwork ? findInfraNetwork(infraNetwork) : null;
+      if (!network || !isInfraNetworkPublishable(network)) {
+        throw new Error(
+          `交通網の変遷は公開未承認: ${key} (${network?.publication.blockedReason ?? '台帳に無い路線網'})`
+        );
       }
     }
 

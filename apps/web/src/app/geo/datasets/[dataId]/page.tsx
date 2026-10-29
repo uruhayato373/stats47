@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation';
 
 import { findGeoSourcePage } from '@stats47/data-configs/business-plan';
+import { findInfraNetworksForDataset } from '@stats47/gis/infra-history';
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj/catalog';
+import { findKsjClassification } from '@stats47/gis/mlit-ksj/classifications';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
@@ -16,6 +18,7 @@ import {
   loadGeoSourceCatalog,
   loadGeoSourceItem,
 } from '@/features/geo-analysis';
+import { infraHistoryPath, infraNetworkNoun } from '@/features/infra-history';
 
 import type { Metadata } from 'next';
 type Props = { params: Promise<{ dataId: string }> };
@@ -44,6 +47,8 @@ export default async function GeoDatasetPage({ params }: Props) {
   ]);
   const content = findGeoSourcePage(dataId, meta.latestVersion);
   const sourcePageHref = item?.sourceUrl || meta.sourcePageUrl;
+  // 同じものの変遷ページ (交通網の変遷)。現況の単体ページから時系列へ移れるようにする
+  const historyNetworks = findInfraNetworksForDataset(dataId);
   return (
     <PageShell
       className="py-4 sm:py-5"
@@ -75,6 +80,7 @@ export default async function GeoDatasetPage({ params }: Props) {
           key={`${item.dataId}/${item.version}`}
           item={item}
           fields={content?.fields}
+          classification={findKsjClassification(dataId)}
         />
       ) : catalog &&
         !catalog.items.some((source) => source.dataId === dataId) ? (
@@ -99,6 +105,19 @@ export default async function GeoDatasetPage({ params }: Props) {
         </SurfaceCard>
       )}
       {content && <GeoSourceReading content={content} />}
+      {historyNetworks.length > 0 && (
+        <SurfaceCard className="mt-3 space-y-2">
+          <h3 className="font-semibold">時系列で見る</h3>
+          {historyNetworks.map((network) => (
+            <p key={network.key} className="text-sm leading-relaxed">
+              <Link href={infraHistoryPath(network.key)} className="text-primary underline">
+                {infraNetworkNoun(network)}の変遷（{network.years.first}〜{network.years.last}年）
+              </Link>
+              ：年を動かして、{network.label}がどこで増え、どこで消えたかを全国・地方・都道府県の地図で確かめられます。
+            </p>
+          ))}
+        </SurfaceCard>
+      )}
       <ContentDisclosure
         title="出典・利用条件"
         description={`国土交通省「国土数値情報」・${meta.license === 'cc-by-4.0' ? 'CC BY 4.0' : '商用利用可能（個別条件あり）'}`}

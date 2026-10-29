@@ -50,6 +50,14 @@
       "published": true
     },
     {
+      "id": "page:geo-airport-tourism",
+      "kind": "page",
+      "key": "/geo/airport-tourism",
+      "href": "/geo/airport-tourism",
+      "title": "空港のある県とない県で、宿泊者数の伸び方は違うか",
+      "published": true
+    },
+    {
       "id": "page:geo-compare",
       "kind": "page",
       "key": "/geo/compare",
@@ -66,6 +74,30 @@
       "published": true
     },
     {
+      "id": "page:geo-history",
+      "kind": "page",
+      "key": "/geo/history",
+      "href": "/geo/history",
+      "title": "交通網の変遷",
+      "published": true
+    },
+    {
+      "id": "page:geo-ic-manufacturing",
+      "kind": "page",
+      "key": "/geo/ic-manufacturing",
+      "href": "/geo/ic-manufacturing",
+      "title": "工場はインターチェンジの近くに集まったか",
+      "published": true
+    },
+    {
+      "id": "page:geo-ic-population",
+      "kind": "page",
+      "key": "/geo/ic-population",
+      "href": "/geo/ic-population",
+      "title": "高速道路の IC ができた市区町村は、人口が減りにくかったか",
+      "published": true
+    },
+    {
       "id": "page:geo-layers",
       "kind": "page",
       "key": "/geo/layers",
@@ -74,11 +106,27 @@
       "published": true
     },
     {
+      "id": "page:geo-map",
+      "kind": "page",
+      "key": "/geo/map",
+      "href": "/geo/map",
+      "title": "地図を重ねて見る",
+      "published": true
+    },
+    {
       "id": "page:geo-method",
       "kind": "page",
       "key": "/geo/method",
       "href": "/geo/method",
       "title": "地域分析の方法",
+      "published": true
+    },
+    {
+      "id": "page:geo-shinkansen-population",
+      "kind": "page",
+      "key": "/geo/shinkansen-population",
+      "href": "/geo/shinkansen-population",
+      "title": "新幹線の駅ができた町は、どう変わったか",
       "published": true
     },
     {

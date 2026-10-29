@@ -71,6 +71,12 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^note-hashtag-audit-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
+  // note の週次全量監査 (weekly-audits/note-circulation.sh)。週次 gate は最新 1 本だけを読む
+  "note-circulation-audit": {
+    directory: datasetDir("note.operation-evidence"),
+    pattern: /^note-circulation-audit-\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 4,
+  },
   "note-navigation": {
     directory: datasetDir("note.navigation-pilot"),
     pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,
@@ -134,11 +140,7 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 8,
   },
   // analytics の週次 snapshot ディレクトリ。wave 判定が before 週を参照するため 26 週残す。
-  "analytics-gsc": {
-    directory: datasetDir("gsc.snapshots"),
-    pattern: /^\d{4}-W\d{2}$/,
-    keep: 26,
-  },
+  // GSC (data/gsc/snapshots) は長期の需要推移に使うため削除しない (2026-10-29 オーナー判断。約 0.4 MB/週)。
   "analytics-ga4": {
     directory: datasetDir("ga4.snapshots"),
     pattern: /^\d{4}-W\d{2}$/,

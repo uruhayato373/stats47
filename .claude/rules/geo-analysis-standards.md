@@ -35,13 +35,13 @@ AI/LLMは問い、説明、限界、導線だけを作り、距離・交差・�
 
 - 全`calculation-input`を`datasets.ts`または各providerのライセンスSSOTへ解決する
 - KSJは`license-policy.ts`で、元データpublic mirrorと公開構造化artifactの両方が許可された入力だけを使う
-- `cc-by-4.0-partial`、`non-commercial`、未判定は、書面許諾IDまたは商用可ソースへの置換が無ければ
+- `cc-by-4.0-partial`、`non-commercial`、未判定は、事務局・権利者の許諾の証跡（書面または電話。電話は日付・相手・了承の範囲・要旨を記録）または商用可ソースへの置換が無ければ
   `item.json / manifest.json / pref/*.json`、有料note、広告付きページ、SNS生成を停止する
 - 公開ページと有料成果物にデータ名、提供者、個別ページURL、取得日、加工主体、適用限界を継承する
 - 旧取得分に日時記録が無い場合は「初回取得日時未記録」と明記し、固定版・URL・SHAと今回の検証日時を別に示す。生成日・変換日・mtimeを取得日と偽らない。以後の取得処理は実取得日時を記録する。
 
 `non-commercial`の非データベース空間演算結果には利用余地があるが、Geo bundleは県別JSONとlineageを
-公開するため自動許可しない。画面だけを公開する設計へ縮退する場合も、事務局の書面回答を証跡化してから行う。
+公開するため自動許可しない。画面だけを公開する設計へ縮退する場合も、事務局の確認を証跡化（書面または電話。電話は日付・相手・了承の範囲・要旨を台帳に記録。2026-10-29 オーナー決定）してから行う。
 
 ### J-SHIS県別加工集計の限定契約
 
@@ -152,6 +152,43 @@ ZIP名の河川区分（10=洪水予報河川・水位周知河川、20=その�
 Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形（整数値の浮動小数は整数、itemは2スペース）にする。Webは再直列化してSHAを照合するため、`0.0`が残ると全県が読めなくなる。
 標高は2009年5月時点で約1km平均、人口は2020年国勢調査基準。相対比較に限り、浸水・高潮・津波の発生や安全を示さない。5mと10mに全国共通の公的基準は確認できないため3しきい値を並べ、別metricには分けない（0m以下は国のゼロメートル地帯と定義が異なり、10mは同じ手順の感度分析のため）。公開ページにはG04-aの承認番号付き原典表示（`LOW_ELEVATION_ATTRIBUTION`）と人口のCC BY 4.0表示、取得日、加工主体を載せる。
 主指標のランキング`low-elevation-population-ratio-5m`は`relatedRankingKey`で分析に結び付け、ランキング右レールに「この指標の地域分析」を出す（`nav_surface=ranking_geo`）。
+
+### 交通網の変遷（高速道路・鉄道・空港の時系列）
+
+`/geo/history/<expressway|railway|airport>[/<regionCode|NN>]` は国土数値情報 N06・N05・N08 の時系列を年スライダーで描く。
+台帳は `packages/gis/src/infra-history/networks.ts`（原典URL・版・ZIP SHA・公開状態・属性名・種別・線か点か・現況の dataId）。
+利用条件は網ごとに複製せず `datasets.ts` の `usageTerms`（時系列）から引く。N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、N08「商用可」（2026-10-29 公式ページで確認）。
+広告の有無は台帳から導く（`apps/web/src/lib/google-adsense/ad-free-paths.ts`）。時系列が非商用の網と、出典表示だけで商用利用できない単体 GIS ページ（`/geo/datasets/<id>`）は AdSense の script を読まない。URL を手で列挙しない。
+非商用の網の公開（R2 反映・検索掲載）は、事務局の了承を `publication.permissionEvidence`（方法 official-terms / written / phone・日付・相手・了承の範囲・要旨・記録者）に記録し `public-approved` にしてから行う。電話も認める（2026-10-29 オーナー決定）。公開には範囲に `ad-free-page` と `processed-data-delivery` の両方が要り、判定は `isInfraNetworkPublishable` に集約する（ページの noindex と `ksj-publication-guard.ts` が同じ関数を使う）。
+それまでは `noindex` で、`ksj-publication-guard.ts` が `app/geo/history/` を拒否する。
+空港は点の網で、外周の頂点の平均を代表点にし、県は属性の市区町村コード（`N08_001`）で決める。指標は延長ではなく施設数（関係 ID の重複を除いて数える）。原典の 11 種別は表示の 4 区分へまとめる（`sourceCodes`）。点だけの TopoJSON は簡略化・再量子化しない（点の座標が二重に量子化される）。
+現況の単体ページ（`currentDataId`）と時系列ページは相互にリンクする（`findInfraNetworksForDataset`）。
+種別と色は区分の台帳 `mlit-ksj/classifications.ts` を単体 GIS ページと共有する。凡例 (`ChartLegend`) で種別を切ると、地図・合計・推移・県別の一覧を表示中の種別だけで描く。地図の読み方・利用条件・検算は右から開く Sheet に置き、画面には出典の 1 行を常に出す。
+区間は頂点間の線分の中点で県を決め（ポリゴン → 海岸線5km、決まらなければ未帰属）、47県＋未帰属＝全国を保存則で検査する。
+原典の「999（年不明）」は推測で年を当てず除外し、manifest と画面に件数・路線名を出す。
+原典は会社名・事業者などの属性が変わると同じ区間でも記録を分けるので、記録の開始年を開通と扱わない。
+関係 ID と関係備考で同じ区間の記録をたどり、前年に無ければ開通・前後の線から100m以上離れた部分だけを延伸・短縮、翌年に無ければ廃止とする (`classifyTransitions`)。
+強調線は TopoJSON の `events` に分けて持ち、延長の集計には使わない。
+範囲は共通 7 地方区分から北海道・沖縄を切り出した 9 区分 (`scopes.ts`)。1 道県の区分は県のページを使う。
+県のページは `/api/mf-topo/<県>` の市区町村境界 (政令指定都市は市全体) を補助として重ねる。
+地図データは R2 が CORS を返さないため `/api/geo/history/<network>/<file>` で同一オリジンから配る。
+生成は `node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all`。
+
+### 主題の重ね合わせ (/geo/map)
+
+`/geo/map?base=<背景の主題|none>&subjects=<重ねる主題の id,…>&scope=<national|地方コード|NN>` は、主題の台帳 `data/geo/subjects/subjects.json`
+(主題 = 原典のデータ 1 つを地図にどう描くか。英語 subject、サイトの「テーマ」とは別) の主題を同じ地図に重ねる。
+geo の仕事は重ねて見せるところまでで、関係の有無・因果は判断しない (解釈はブログ・テーマ。2026-10-29 オーナー決定)。
+塗り分けは同時に 1 つまでなので、背景 (塗り分け) は値を 1 つしか持てない `base=`、重ねるもの (線・点) は `subjects=` で受ける (URL の形で守る)。
+正規化は `normalizeGeoMapSubjects` (`@stats47/gis/subjects`) に集約し、台帳に無い・重複・範囲 (`scopes`) で描けない・背景と重ねるものの取り違えを外す。
+重ねる順は塗り分け → 線 → 点。canonical は素の `/geo/map`、クエリ付きは noindex。
+背景を選んだら、年のスライダーは全主題に値がある期間に絞り、絞ったことを 1 行で伝える (背景なしなら全期間)。
+塗り分けの色の基準は全国の全年で固定する (範囲や年を変えても同じ色は同じ値)。正負の色分け (増減率) は増加 `--positive`・減少 `--negative`、濃さは全国の全年の絶対値の 95% 分位点で頭打ち。
+人口の実数は市区町村の大きさで色がほぼ決まり変化が見えないので、既定の背景は 1980 年比の増減率 (`municipal-population-change`。台帳の `derive`)。
+クエリで非商用の主題を足せるので、画面は常に広告なし (`ad-free-paths.ts` に `/geo/map`)。区間・点の主題は交通網の変遷の配信物
+(`/api/geo/history/<網>/...`。接合部は `joints.topojson`) を、公開可 (`isInfraNetworkPublishable`) のときだけ読む。
+市区町村の塗り分けは `app/stats/<metricKey>/cities.json` (合併を今の市域に組み替えた系列) を範囲の県だけに絞り、
+境界は `/api/mf-topo/<県>` (政令指定都市は市全体) に同じコードで結ぶ。行政区の行は境界に形が無いので描かれない。
 
 ### 読者の操作と導線
 

@@ -87,6 +87,7 @@
 - [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guardスクリプト一覧(.claude/scripts/lib/check-*.cjs、refactor前に索引参照)
 - [publish x ui 2026 04](project_publish_x_ui_2026_04.md) — publish-xの2026-04 UI対応(24時間制select、DOM click必須、posted_at JST変換)
 - [youtube shadowban recovery 2026 04](project_youtube_shadowban_recovery_2026_04.md) — Issue#88 2026-05-16 CLOSED。17本public復元済、daily audit verdictはlikely-shadowban継続、SUGGESTED_VIDEO 0
+- [instagram paused 2026 10 27](project_instagram_paused_2026_10_27.md) — 2026-10-27 Instagram 自動投稿を停止。投稿 workflow 5 本を disabled_manually (yml は残置)、計測とトークン延長は継続。勝手に enable しない
 - [instagram graph api setup](project_instagram_graph_api_setup.md) — Instagram Graph APIセットアップ完了(2026-04-25)。stats47jp・トークン60日・business_discovery不可
 - [lcp optimization](feedback_lcp_optimization.md) — LCP改善はLCP要素の特定が先。HTML削減もpreloadもJS描画依存要素には効かない(EXP-002/003)
 - [browser use cleanup](feedback_browser_use_cleanup.md) — browser-useの`close`はpageだけ。daemonは`pkill -KILL -f "browser_use.skill_cli.daemon"`必須
@@ -135,7 +136,7 @@
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
 - [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
 - [worktree junction deletes target](feedback_worktree_junction_deletes_target.md) — worktree に node_modules の junction を張ると worktree remove --force が本体の node_modules を消す (2026-09-16)。先に cmd /c rmdir で外す
-- [worktree symlinked node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktree の node_modules を丸ごと本体へ symlink すると @stats47/* が本体を指し型検査が狂う。@stats47 だけ worktree へ張り直す
+- [worktree symlinked node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktree の node_modules を丸ごと本体へ symlink する、または node_modules が無いと @stats47/* が本体を指し、型検査や pre-commit の索引検査が狂う。@stats47 だけ worktree へ張り直す
 - [cloud session workflow dispatch 403](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。data/workflow-dispatch-requests.jsonをdevelopへpushすればproxyが代理起動する
 - [review agent ran cloud write](feedback_review_agent_ran_cloud_write.md) — 記事のコード例を確かめるsubagentが環境のCLOUDFLARE_API_TOKENでwrangler r2 object put --remoteを実行(403)。手順解説の検証を頼むpromptに外部へ書くコマンドの禁止を書く
 - [x scheduled bulk delete](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
@@ -166,3 +167,4 @@
 - [local r2 overlay for generated snapshots](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成の R2 snapshot を localhost で見るときは .github/scripts/r2-overlay-server.mjs を使う (自作しない)。R2_S3_ENDPOINT を空に
 - [check ci job scope before launch](feedback_check_ci_job_scope_before_launch.md) — 長い CI ジョブは起動前に作り直す範囲と前回の所要時間を確かめる。data-refresh は snapshot_scope=auto (all を明示しない)。2026-10-28 に 8 指標で 75 分浪費
 - [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は vitest related で触った範囲だけ。web 全件 (約10分) は develop 直前の 1 回。CI は push 後に待たずに次へ進む
+- [geo question first](feedback_geo_question_first.md) — 地域分析の組み合わせページは問い→分析の型→見せ方で設計する。表示できるものを並べるのは検索対象外の道具の仕事 (2026-10-29 に 2 回指摘)

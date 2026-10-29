@@ -20,6 +20,7 @@ import { findGeoSourceInitialAsset } from '../lib/geo-source-initial-asset';
 
 import type { GeoSourceItem } from '../lib/geo-source-catalog';
 import type { GeoSourceField } from '@stats47/data-configs/business-plan';
+import type { KsjAttributeClassification } from '@stats47/gis/mlit-ksj/classifications';
 const SourceMap = dynamic(
   () => import('./GeoSourceMap').then((m) => m.GeoSourceMap),
   {
@@ -35,9 +36,12 @@ const subscribe = () => () => {};
 export function GeoSourceExplorer({
   item,
   fields = [],
+  classification = null,
 }: {
   item: GeoSourceItem;
   fields?: GeoSourceField[];
+  /** 区分の台帳 (サーバーで dataId から引いて渡す)。あれば地図を色分けする */
+  classification?: KsjAttributeClassification | null;
 }) {
   const hydrated = useSyncExternalStore(
     subscribe,
@@ -175,10 +179,13 @@ export function GeoSourceExplorer({
           url={`/api/geo/source/${item.dataId}/${opened}?file=${encodeURIComponent(item.assets[opened].key)}`}
           label={item.assets[opened].label}
           fields={fields}
+          classification={classification}
         />
       )}
       <p className="text-xs leading-relaxed text-muted-foreground">
-        青い地物をタップすると属性を表示します。青は位置・形状を示し、値や危険度の大小を表しません。空白は安全・施設の不存在を意味しません。
+        {classification
+          ? `地物をタップすると属性を表示します。色は${classification.label}の区分で、値や危険度の大小を表しません。凡例の項目を押すと表示を切り替えられます。「区分のない地物」は原典で区分の属性を持たない地物です。空白は安全・施設の不存在を意味しません。`
+          : '青い地物をタップすると属性を表示します。青は位置・形状を示し、値や危険度の大小を表しません。空白は安全・施設の不存在を意味しません。'}
       </p>
     </SurfaceCard>
   );

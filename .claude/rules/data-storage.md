@@ -230,7 +230,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | データ | 保存先 |
 |---|---|
-| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が土曜 JST 02:00 に前週分を自動更新。26 週を保持）。`data/adsense/snapshots/` も同じ週次 workflow が取得する (2026-08-29〜10-10 の配信停止中は 0 行、2026-10-11 に手動枠で再開) |
+| GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が土曜 JST 02:00 に前週分を自動更新。GSC は長期の需要推移に使うため削除しない (2026-10-29 オーナー判断)、GA4 は 26 週を保持）。`data/adsense/snapshots/` も同じ週次 workflow が取得する (2026-08-29〜10-10 の配信停止中は 0 行、2026-10-11 に手動枠で再開) |
 | GSC / GA4 の週次集約と要約 | `data/{gsc,ga4}/{history.csv,history-finalized7d.csv,LATEST.md}`（人間は LATEST.md を見れば 10 秒で把握） |
 | GSC カバレッジ | ドリルダウン `data/gsc/coverage-drilldown/<YYYY-Www>/`、件数推移 `data/gsc/coverage-totals-history.csv`、URL Inspection `data/gsc/url-inspection/`（7 回分を保持。2026-10-26 から週次）。是正キュー (状態) は `data/gsc/coverage-remediation/{coverage-remediation-queue.json,LATEST.md}`（`build-coverage-queue.mjs` が生成。正典 `/gsc-coverage-remediation`） |
 | PSI 週次計測（19 URL × mobile/desktop） | `data/psi/{psi-batch-*.json,history.csv,LATEST.md}`（生 JSON は最新 1 件。週次 土曜 JST 00:00、閾値違反時 `[PSI Alert]` Issue）/ URL リスト `config/psi-urls.txt` / 閾値 `.claude/skills/analytics/performance-improvement/budgets.json` |

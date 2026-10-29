@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T22:41:26.059Z",
+  "generatedAt": "2026-10-26T03:08:39.678Z",
   "summary": {
     "metrics": 2236,
     "queries": 2234,
@@ -11241,12 +11241,12 @@
     }
   },
   "citySummary": {
-    "metrics": 728,
+    "metrics": 724,
     "tables": 23,
     "noValueYears": 457,
     "extraYears": 42,
     "clean": 213,
-    "yearsAll": 21,
+    "yearsAll": 17,
     "failures": 0
   },
   "cities": {

@@ -60,6 +60,17 @@ describe('KSJ汎用publisherの公開境界', () => {
     }
   });
 
+  it('交通網の変遷は、事務局の了承 (広告なしページの表示と加工データの配信) を台帳に記録した網だけ通す', () => {
+    // 高速道路・鉄道は 2026-10-29 の電話の了承を記録済み (networks.ts の PHONE_PERMISSION_2026_10_29)
+    expect(() => assertKsjPublicKeysAllowed([
+      'app/geo/history/expressway/summary.json',
+      'app/geo/history/railway/pref/28.topojson',
+      'app/geo/history/airport/national.topojson',
+    ])).not.toThrow();
+    // 台帳にない網は拒否する
+    expect(() => assertKsjPublicKeysAllowed(['app/geo/history/unknown/summary.json'])).toThrow('交通網の変遷は公開未承認');
+  });
+
   it('現行Geo原典と別providerの観測値・記事は妨げない', () => {
     expect(() => assertKsjPublicKeysAllowed([
       'gis/mlit-ksj/mesh1000r6/24/source.zip',

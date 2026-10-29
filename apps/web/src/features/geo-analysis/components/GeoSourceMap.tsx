@@ -1,8 +1,14 @@
 'use client';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '@stats47/components/atoms/ui/button';
+import {
+  KSJ_UNCLASSIFIED_COLOR,
+  KSJ_UNCLASSIFIED_KEY,
+  classifyKsjFeature,
+  type KsjAttributeClassification,
+} from '@stats47/gis/mlit-ksj/classifications';
 import L from 'leaflet';
 import {
   GeoJSON,
@@ -11,6 +17,8 @@ import {
   useMap,
   useMapEvents,
 } from 'react-leaflet';
+
+import { ChartLegend } from '@/components/charts/ChartLegend';
 
 import { fitGeoSourceBounds } from '../lib/fit-geo-source-bounds';
 import {
@@ -22,6 +30,7 @@ import {
   formatGeoSourceProperty,
   visibleGeoSourceFields,
 } from '../lib/geo-source-properties';
+import { resolveCssColor } from '../lib/resolve-css-color';
 
 
 import type { GeoSourceField } from '@stats47/data-configs/business-plan';
@@ -36,18 +45,45 @@ type MapStatus =
   | { error: string }
   | null;
 
+/** 区分の台帳で地物を色分けするときの色。区分の無い地物は既定の色で描く */
+function useClassColors(classification: KsjAttributeClassification | null) {
+  return useMemo(() => {
+    if (!classification) return null;
+    return {
+      byCode: new Map(classification.classes.map((item) => [item.code, resolveCssColor(item.color)])),
+      unclassified: resolveCssColor(KSJ_UNCLASSIFIED_COLOR),
+    };
+  }, [classification]);
+}
+
 function SourceContent({
   url,
   fields,
+  classification,
+  hiddenCodes,
   onBounds,
   onStatus,
 }: {
   url: string;
   fields: GeoSourceField[];
+  classification: KsjAttributeClassification | null;
+  hiddenCodes: ReadonlySet<string>;
   onBounds: (bounds: L.LatLngBoundsExpression) => void;
   onStatus: (status: MapStatus) => void;
 }) {
   const map = useMap();
+  const classColors = useClassColors(classification);
+  // 区分の色 (区分を持たないデータは従来の 1 色)。表示を切った区分は描かない
+  const colorOf = (properties: Record<string, unknown> | null | undefined) => {
+    if (!classification || !classColors) return null;
+    const item = classifyKsjFeature(classification, properties);
+    return item ? (classColors.byCode.get(item.code) ?? classColors.unclassified) : classColors.unclassified;
+  };
+  const isShown = (properties: Record<string, unknown> | null | undefined) => {
+    if (!classification || hiddenCodes.size === 0) return true;
+    const item = classifyKsjFeature(classification, properties);
+    return !hiddenCodes.has(item ? item.code : KSJ_UNCLASSIFIED_KEY);
+  };
   const worker = useRef<Worker | null>(null);
   const [result, setResult] = useState<{
     collection: FeatureCollection;
@@ -125,18 +161,22 @@ function SourceContent({
     <>
       {result && (
         <GeoJSON
-          key={result.revision}
+          key={`${result.revision}-${[...hiddenCodes].join(',')}`}
           data={result.collection}
-          style={{
-            color: GEO_MAP_COLORS.sourceResult.stroke,
-            weight: 1.5,
-            fillColor: GEO_MAP_COLORS.sourceResult.fill,
-            fillOpacity: 0.35,
+          filter={(feature) => isShown(feature.properties)}
+          style={(feature) => {
+            const color = colorOf(feature?.properties);
+            return {
+              color: color ?? GEO_MAP_COLORS.sourceResult.stroke,
+              weight: 1.5,
+              fillColor: color ?? GEO_MAP_COLORS.sourceResult.fill,
+              fillOpacity: color ? 0.6 : 0.35,
+            };
           }}
-          pointToLayer={(_f, ll) =>
+          pointToLayer={(feature, ll) =>
             L.circleMarker(ll, {
               radius: 5,
-              color: GEO_MAP_COLORS.sourceResult.point,
+              color: colorOf(feature.properties) ?? GEO_MAP_COLORS.sourceResult.point,
               weight: 1,
               fillOpacity: 0.8,
             })
@@ -183,11 +223,22 @@ export function GeoSourceMap({
   url,
   label,
   fields = [],
+  classification = null,
 }: {
   url: string;
   label: string;
   fields?: GeoSourceField[];
+  /** 区分の台帳 (`@stats47/gis/mlit-ksj/classifications`)。あれば色分けし、凡例で表示を切り替える */
+  classification?: KsjAttributeClassification | null;
 }) {
+  const [hiddenCodes, setHiddenCodes] = useState<ReadonlySet<string>>(() => new Set());
+  const toggleClass = (code: string) =>
+    setHiddenCodes((current) => {
+      const next = new Set(current);
+      if (next.has(code)) next.delete(code);
+      else next.add(code);
+      return next;
+    });
   const map = useRef<L.Map | null>(null);
   const [bounds, setBounds] = useState<L.LatLngBoundsExpression | null>(null);
   const [status, setStatus] = useState<MapStatus>(null);
@@ -229,11 +280,27 @@ export function GeoSourceMap({
           <SourceContent
             url={url}
             fields={fields}
+            classification={classification}
+            hiddenCodes={hiddenCodes}
             onBounds={setBounds}
             onStatus={setStatus}
           />
         </MapContainer>
       </div>
+      {classification && (
+        <ChartLegend
+          layout="list"
+          label={`表示する${classification.label}`}
+          className="grid gap-x-6 sm:grid-cols-2"
+          items={[
+            ...classification.classes.map((item) => ({ key: item.code, label: item.label, color: item.color })),
+            // 原典で区分の属性を持たない地物 (空港の標点など)。隠すと区分のある地物だけを見られる
+            { key: KSJ_UNCLASSIFIED_KEY, label: '区分のない地物', color: KSJ_UNCLASSIFIED_COLOR },
+          ]}
+          hiddenKeys={hiddenCodes}
+          onToggle={toggleClass}
+        />
+      )}
       <p
         className="text-xs leading-relaxed text-muted-foreground"
         role={error ? 'alert' : 'status'}
@@ -242,7 +309,7 @@ export function GeoSourceMap({
           (!status
             ? '地図データを読み込んでいます…'
             : 'total' in status &&
-              `区画内 ${status.total.toLocaleString('ja-JP')}地物／表示対象候補 ${status.matched.toLocaleString('ja-JP')}地物${status.matched > status.displayed ? `。うち${status.displayed}地物を表示中。拡大すると表示対象を絞れます。` : '。青い地物をタップして属性を確認。'}`)}
+              `区画内 ${status.total.toLocaleString('ja-JP')}地物／表示対象候補 ${status.matched.toLocaleString('ja-JP')}地物${status.matched > status.displayed ? `。うち${status.displayed}地物を表示中。拡大すると表示対象を絞れます。` : classification ? '。地物をタップして属性を確認。' : '。青い地物をタップして属性を確認。'}`)}
       </p>
       <p className="text-xs leading-relaxed text-muted-foreground">
         {GEO_BASEMAP_SHORELINE_ATTRIBUTION}

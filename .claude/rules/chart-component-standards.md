@@ -139,6 +139,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `StatTile` | `@/components/surface` | 数値タイル (名前 / 値・単位・バッジ / 補足 + 子にミニチャート)。旧 `ChartCard` は 2026-10-28 に統合して削除 |
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
+| `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
@@ -183,6 +184,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
 | `MetricYoyChoroplethSection` | `@/features/theme-dashboard/components/MetricYoyChoroplethSection` | データ取得・セクションラッパー。描画は共有 `TimelineChoroplethMap` に委譲 |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
+| `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
 > 時系列再生UIが必要な場合は **`TimelineChoroplethMap`** でラップする。feature 内に独自のコロプレス実装を追加してはならない。

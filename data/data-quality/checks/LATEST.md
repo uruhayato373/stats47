@@ -1,8 +1,8 @@
 # データ品質キュー (LATEST)
 
-- 生成: 2026-10-24T22:02:05.162Z (基準日 2026-10-24)
+- 生成: 2026-10-26T03:01:55.427Z (基準日 2026-10-26)
 - 対象: active metric 3018 件 (配信年あり 2459 件)
-- 入力: ranking-integrity 2026-10-24T21:49:11.069Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-10-23T01:12:07.666Z) GSC impressions
+- 入力: ranking-integrity 2026-10-26T02:57:14.172Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-10-23T01:12:07.666Z) GSC impressions
 - 判定: 1=確認済み時点統計の yearFormat 誤り / 2・3=配信年から推定した周期遅れ (公式最新公表は未照会) / 4=観測1〜2年かつ需要未観測または≤10
 
 ## サマリ

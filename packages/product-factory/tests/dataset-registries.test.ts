@@ -57,6 +57,14 @@ describe("check-datasets の REGISTRIES は TS の正本と同じ ID を読む",
     for (const key of metricKeys) expect(geoPostKeys.has(key), `${key} が Geo の投稿の参照先に無い`).toBe(true);
   });
 
+  it("ksj-datasets = GIS 台帳 (GIS_DATASETS) の dataId", async () => {
+    // packages/gis はこの package の依存の外なので、実行時だけ読む
+    const { GIS_DATASETS } = (await import(pathToFileURL(resolve(ROOT, "packages/gis/src/mlit-ksj/datasets.ts")).href)) as {
+      GIS_DATASETS: { dataId: string }[];
+    };
+    expect(sorted(resolveRegistry(REGISTRIES["ksj-datasets"], readText))).toEqual(sorted(GIS_DATASETS.map((d) => d.dataId)));
+  });
+
   it("[mutation] 読み方を取り違えると 0 件で例外になり、黙って空集合で照合しない", () => {
     expect(() => resolveRegistry({ ...REGISTRIES.metrics, pattern: "^NO_SUCH_LINE_(x)$" }, readText)).toThrow(/1 件も読めない/);
     expect(() => resolveRegistry({ ...REGISTRIES.metrics, between: ["NO_SUCH_START", "NO_SUCH_END"] }, readText)).toThrow(/区切り/);

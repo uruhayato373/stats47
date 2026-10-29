@@ -1,10 +1,7 @@
 {
-  "hash": "2af43ec324606963e98e71c72a9fa34dfbe438181d777b4efe339f148a749ad5",
-  "audited_at": "2026-10-27T03:07:42",
+  "hash": "2fe7841156d0e10e32bcfbe8291ce52ae3899d2cf9bf03c9f1446f3d6742791a",
+  "audited_at": "2026-10-28T11:05:52",
   "files": [
-    ".agents/skills/management/monthly-plan/SKILL.md",
-    ".claude/rules/sns-content-standards.md",
-    ".claude/scripts/lib/strategy-lanes.cjs",
-    ".claude/skills/management/monthly-plan/SKILL.md"
+    ".claude/scripts/blog/fix-broken-internal-links.mjs"
   ]
 }
