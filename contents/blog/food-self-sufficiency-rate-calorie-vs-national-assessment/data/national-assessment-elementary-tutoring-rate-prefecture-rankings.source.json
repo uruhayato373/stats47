@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "national-assessment-elementary-tutoring-rate",
+  "year": "2025",
+  "unit": "％",
+  "label": "学習塾・家庭教師で教わっている小学生の割合",
+  "readerLabel": "学習塾・家庭教師で教わっている小学生の割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/national-assessment-elementary-tutoring-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug food-self-sufficiency-rate-calorie-vs-national-assessment --keys national-assessment-elementary-tutoring-rate --data-name national-assessment-elementary-tutoring-rate-prefecture-rankings",
+  "fetchedAt": "2026-10-28T07:42:29.982Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
