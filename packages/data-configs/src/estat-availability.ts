@@ -167,9 +167,26 @@ export function formatYearList(years: readonly number[]): string {
 
 // ---- 台帳から years を決める (第 2 段) ----
 
-/** 移行時に当時の `years` から引き継いだだけの除外の理由。誰かが判断したら具体的な理由に書き換える。 */
-export const YEAR_EXCLUSION_INHERITED =
-  '2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)';
+/** 年を外してよい理由の種類 (`YearExclusionKind` と同じ並び)。 */
+export const YEAR_EXCLUSION_KINDS = ['series-break', 'definition-change', 'value-error', 'cadence-alignment'] as const;
+
+/**
+ * 除外の書き方の誤りを返す (空なら問題なし)。理由の種類が無い・語彙外・理由が空・未判断の文言の除外を止める
+ * (2026-10-30。移行時の「まだ判断していない」除外が 421 指標・延べ 3,563 年を隠していた)。
+ */
+export function yearExclusionProblems(exclusions: readonly { years?: readonly number[]; kind?: string; reason?: string }[]): string[] {
+  const problems: string[] = [];
+  for (const exclusion of exclusions) {
+    const years = (exclusion.years ?? []).join(', ');
+    if (!exclusion.kind || !(YEAR_EXCLUSION_KINDS as readonly string[]).includes(exclusion.kind)) {
+      problems.push(`${years}: 理由の種類 (kind) が無いか語彙外 (${YEAR_EXCLUSION_KINDS.join(' / ')})`);
+    }
+    const reason = (exclusion.reason ?? '').trim();
+    if (reason.length < 10) problems.push(`${years}: 理由 (reason) が短すぎる`);
+    if (/まだ判断していない|未判断|念のため/.test(reason)) problems.push(`${years}: 判断していない除外は書けない (年を戻す)`);
+  }
+  return problems;
+}
 
 /** 全県の値がある年 (その条件で最も多く値が出た年の県の数に届く年)。 */
 export function fullLedgerYears(ledgerYears: Readonly<Record<string, number>>): number[] {
@@ -178,36 +195,6 @@ export function fullLedgerYears(ledgerYears: Readonly<Record<string, number>>): 
     .filter(([, count]) => full > 0 && count === full)
     .map(([year]) => Number(year))
     .sort((a, b) => a - b);
-}
-
-/** 2 年以上の一定間隔 (5 年おきなど) で並べた設定か。最後の 1 年 (最新年の追加) は間隔に数えない。 */
-function isRegularlySpaced(configYears: readonly number[]): boolean {
-  if (configYears.length < 3) return false;
-  const steps = configYears.slice(1).map((year, i) => year - configYears[i]!).slice(0, -1);
-  return steps.length >= 2 && steps.every((step) => step === steps[0]) && steps[0]! > 1;
-}
-
-/**
- * 移行 (2026-10) で除外として引き継ぐ年。意図して外した可能性がある年だけを残し、穴は埋める。
- * - 複数年の設定で、最初の年より前の全県の年 (基準の切り替えで外した可能性がある)
- * - 一定間隔の設定で、間に挟まった全県の年 (5 年おきに揃えた可能性がある)
- * 1 年だけの設定の古い年は引き継がない (`metric-config-standards.md`「years は最新年だけに絞らない」で既に誤りと決まっている)。
- */
-export function inheritedExclusionYears(
-  configYears: readonly number[],
-  ledgerYears: Readonly<Record<string, number>>,
-): number[] {
-  // e-Stat に無い年は設定の形 (最初の年・間隔) の根拠にしない。人口増減率は 5 年おきの国勢調査年を
-  // 設定していたが、今の取り出し条件にはその年が無く 2021 年以降だけがある (5 年おきの意図は残っていない)
-  const sorted = configYears.filter((year) => (ledgerYears[String(year)] ?? 0) > 0).sort((a, b) => a - b);
-  if (sorted.length <= 1) return [];
-  const configured = new Set(sorted);
-  const first = sorted[0]!;
-  const last = sorted[sorted.length - 1]!;
-  const spaced = isRegularlySpaced(sorted);
-  return fullLedgerYears(ledgerYears).filter(
-    (year) => !configured.has(year) && (year < first || (spaced && year < last)),
-  );
 }
 
 export interface ResolvedLedgerYears {

@@ -19,6 +19,7 @@ export const roomAirconOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   ],
   "years": {
     "years": [
+      1979,
       1984,
       1989,
       1994,
@@ -28,14 +29,6 @@ export const roomAirconOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
       2014,
     ],
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1979,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

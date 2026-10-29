@@ -18,26 +18,9 @@ export const perCapitaNationalTaxCollected: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 1995,
+    "from": 1985,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1985,
-        1986,
-        1987,
-        1988,
-        1989,
-        1990,
-        1991,
-        1992,
-        1993,
-        1994,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

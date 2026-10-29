@@ -684,12 +684,21 @@
               "type": "number"
             }
           },
+          "kind": {
+            "enum": [
+              "series-break",
+              "definition-change",
+              "value-error",
+              "cadence-alignment"
+            ]
+          },
           "reason": {
             "type": "string"
           }
         },
         "required": [
           "years",
+          "kind",
           "reason"
         ],
         "additionalProperties": false

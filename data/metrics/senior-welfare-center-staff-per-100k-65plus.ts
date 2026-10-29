@@ -18,29 +18,9 @@ export const seniorWelfareCenterStaffPer100k65plus: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2015,
+    "from": 2002,
     "to": 2017,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        2002,
-        2003,
-        2004,
-        2005,
-        2006,
-        2007,
-        2008,
-        2009,
-        2010,
-        2011,
-        2012,
-        2013,
-        2014,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
