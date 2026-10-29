@@ -93,7 +93,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
 既存の `MiniLineChart` / `MiniBarChart` / `StatTile` 等が使えるケースでは再実装しない。大きな数値 (KPI) は `StatTile` か `STAT_VALUE_CLASS`（`@/components/surface`）で描き、ページ側で文字の大きさを書かない（`stat-value-uses-shared-class`）。
-部品の種類ごとの役割・枠・使わない場面の正本は部品の台帳 `data/design/components.json`（schema `config/schema/design.components.schema.json`）。登録済みの部品 (`StatTile`・`ChartPanel`) の props を変えたら同じ差分で台帳の `slots` を直す (`design-components-ledger.test.ts` が照合する)。1 指標の値は `stat-tile`、題名を持つ節・大きなチャート・指標の切り替えは `chart-panel`。数値タイルは `StatTileGrid` (`stat-tile-grid`) に並べ、列の数はページで書かない (チャートの有無にかかわらず同じ列数。`stat-tile-grid-owns-columns`)。 記事への入口を本文に並べるときは `ArticleTeaserCard` を `ArticleTeaserGrid` (`@/components/surface`) に並べる (右レールは画像付きのリンク行)。推移の小さなチャートを出すかは部品ではなく呼び出し側が観測値と章の構成から決める (テーマは `features/theme-dashboard/lib/metric-trend.ts`)。指標ごとの表示フラグは持たない。
+部品の種類ごとの役割・枠・使わない場面の正本は部品の台帳 `data/design/components.json`（schema `config/schema/design.components.schema.json`）。登録済みの部品 (`StatTile`・`ChartPanel`) の props を変えたら同じ差分で台帳の `slots` を直す (`design-components-ledger.test.ts` が照合する)。1 指標の値は `stat-tile`、題名を持つ節・大きなチャート・指標の切り替えは `chart-panel`。数値タイルは `StatTileGrid` (`stat-tile-grid`) に並べ、列の数はページで書かない (チャートの有無・枚数にかかわらず同じ列数。1 枚でも 4 列の 1 マスの幅。`stat-tile-grid-owns-columns`)。 記事への入口を本文に並べるときは `ArticleTeaserCard` を `ArticleTeaserGrid` (`@/components/surface`) に並べる (右レールは画像付きのリンク行)。推移の小さなチャートを出すかは部品ではなく呼び出し側が観測値と章の構成から決める (テーマは `features/theme-dashboard/lib/metric-trend.ts`)。指標ごとの表示フラグは持たない。
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 

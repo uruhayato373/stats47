@@ -355,8 +355,8 @@ export function ThemeMetricsDashboard({
   );
   /**
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
-   * run が 2 件以上のときだけ数値タイルの格子 (StatTileGrid) で包む。1 件の run に grid wrapper は作らない。
-   * 列の数は格子の部品が本文の幅で決める (1 / 2 / 4 列。県データブックなど他の数値の並びと同じ規則。2026-10-29)。
+   * run は 1 件でも数値タイルの格子 (StatTileGrid) で包む。列の数は格子の部品が本文の幅だけで決める
+   * (1 / 2 / 4 列。枚数では変えない。県データブックなど他の数値の並びと同じ規則。2026-10-29)。
    * 同じ行のカードは同じ高さに伸びる。
    */
   const renderPanelRuns = (
@@ -375,15 +375,12 @@ export function ThemeMetricsDashboard({
       let j = i;
       while (j < list.length && isCompact(list[j])) j += 1;
       const run = list.slice(i, j);
-      if (run.length === 1) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel)));
-      } else {
-        out.push(
-          <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
-            <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item)))}</StatTileGrid>
-          </div>
-        );
-      }
+      // 1 枚でも数値タイルの格子に入れ、どの章でも 1 マスの幅をそろえる (2026-10-29 オーナー決定「幅を 4 列にそろえる」)
+      out.push(
+        <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
+          <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item)))}</StatTileGrid>
+        </div>
+      );
       i = j;
     }
     return out;

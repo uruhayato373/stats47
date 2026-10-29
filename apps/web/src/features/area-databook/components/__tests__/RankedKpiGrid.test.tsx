@@ -29,7 +29,8 @@ describe("RankedKpiGrid", () => {
     expect(html).toContain("31位");
     expect(html.match(/border-card-outline/g)).toHaveLength(1);
     expect(html).toContain("grid-cols-1");
-    expect(html).not.toContain("@md:grid-cols-4");
+    // 1 枚でも 4 列の 1 マスの幅にそろえる (2026-10-29「幅を 4 列にそろえる」)
+    expect(html).toContain("@md:grid-cols-4");
   });
 
   it("本文幅844pxで4列指定が発動する", () => {
