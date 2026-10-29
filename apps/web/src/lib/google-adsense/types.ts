@@ -57,6 +57,12 @@ export interface AdSlotProps {
   rootMargin?: number;
 
   /**
+   * 広告の枠の台帳 (config/ads/placements.json) の箱。渡すと予約の高さと開発中の代わりの表示がこの寸法になる
+   * (本番の実測に合わせた箱。渡さない枠は形式ごとの既定値 getAdReservedMinHeight を使う)。
+   */
+  slotBox?: { name: string; width: number | 'full'; height: number };
+
+  /**
    * data-full-width-responsive属性を強制的に設定するか
    */
   fullWidthResponsive?: boolean;

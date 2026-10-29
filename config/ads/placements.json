@@ -1,0 +1,93 @@
+{
+  "_doc": "広告の枠の台帳 (2026-10-29)。大きさの語彙・枠の種類 (確保する箱・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルール。形は config/schema/ads.placements.schema.json。広告そのものの正本は apps/web/scripts/affiliate-ads-data.ts と AdSense の枠の定数。ページの置き方は apps/web の ad-placements テストがコードと照合する。ページの種類はテーマから順に載せる。",
+  "sizes": [
+    { "size": "300x250", "status": "standard", "reason": "アフィリエイトの主力 (2026-10-29 時点で有効 137 件)。本文・右レール・PR の列の標準" },
+    { "size": "250x250", "status": "standard", "fitsInto": "300x250", "reason": "正方形のクリエイティブ (有効 11 件)。300x250 の枠の中央に置く" },
+    { "size": "text", "status": "standard", "reason": "テキストリンク (有効 137 件)。本文に差し込む" },
+    { "size": "320x100", "status": "undecided", "adIds": ["af_strategy_career_economy_001"], "reason": "規約の正式サイズだが登録は 1 件だけ。モバイル用の枠を作るか、300x250 へ寄せるかをオーナーが決める" },
+    { "size": "336x280", "status": "undecided", "adIds": ["af_conoha_ai_canvas_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
+    { "size": "300x300", "status": "undecided", "adIds": ["af_economy_banner_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
+    { "size": "320x250", "status": "undecided", "adIds": ["af_population_banner_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
+    { "size": "165x120", "status": "undecided", "adIds": ["af_sbi_inline_001"], "reason": "規約上は新規登録禁止の旧サイズ。受け入れる枠が無い。退役するかをオーナーが決める" },
+    { "size": "160x600", "status": "undecided", "adIds": ["af_conoha_skyscraper_001"], "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める" },
+    { "size": "120x600", "status": "undecided", "adIds": ["af_sbi_skyscraper_001"], "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める" }
+  ],
+  "slotTypes": [
+    {
+      "id": "adsense-body",
+      "name": "本文の AdSense",
+      "provider": "adsense",
+      "box": { "width": "full", "height": 280 },
+      "devices": ["desktop"],
+      "accepts": ["adsense:article", "adsense:rectangle"],
+      "component": "InContentAdSlot",
+      "measured": "2026-10-29 本番 /themes/labor-wages (本文の幅 812px): 記事内 (fluid)・レクタングルとも 780x280 で配信"
+    },
+    {
+      "id": "adsense-rail-rect",
+      "name": "右レールの AdSense",
+      "provider": "adsense",
+      "box": { "width": 300, "height": 250 },
+      "devices": ["desktop"],
+      "accepts": ["adsense:rectangle"],
+      "component": "RailAdSlot"
+    },
+    {
+      "id": "adsense-footer",
+      "name": "ページ末の関連コンテンツ型",
+      "provider": "adsense",
+      "box": { "width": "full", "height": 300 },
+      "devices": ["desktop", "mobile"],
+      "accepts": ["adsense:multiplex"],
+      "component": "FooterAdSlot"
+    },
+    {
+      "id": "affiliate-row",
+      "name": "本文の PR の列",
+      "provider": "affiliate",
+      "box": { "width": "full", "height": 250, "columns": { "desktop": 3, "mobile": 1 } },
+      "devices": ["desktop", "mobile"],
+      "accepts": ["300x250", "250x250"],
+      "component": "NativeAffiliateRow"
+    },
+    {
+      "id": "affiliate-rect",
+      "name": "PR のバナー 1 枚",
+      "provider": "affiliate",
+      "box": { "width": 300, "height": 250 },
+      "devices": ["desktop", "mobile"],
+      "accepts": ["300x250", "250x250"],
+      "component": "BannerAd"
+    },
+    {
+      "id": "affiliate-text",
+      "name": "本文のテキストリンク",
+      "provider": "affiliate",
+      "box": { "width": "full", "height": 24 },
+      "devices": ["desktop", "mobile"],
+      "accepts": ["text"],
+      "component": "AffiliateTextAdList"
+    },
+    {
+      "id": "affiliate-sidebar-sticky",
+      "name": "ホームの左レールの縦長",
+      "provider": "affiliate",
+      "box": { "width": 160, "height": 600 },
+      "devices": ["desktop"],
+      "accepts": ["160x600", "120x600"],
+      "component": "SidebarStickyBannerAd"
+    }
+  ],
+  "pages": {
+    "theme": [
+      { "slot": "adsense-body", "position": "ダッシュボードの後", "adsenseSlot": "HUB_INCONTENT" },
+      { "slot": "adsense-body", "position": "関連の深い指標の後・このテーマを読み解く記事の前", "adsenseSlot": "THEMES_CONTENT" },
+      { "slot": "affiliate-row", "position": "このテーマを読み解く記事の後 (ページの最後)", "trackingPosition": "theme-native" }
+    ]
+  },
+  "rules": {
+    "noAdjacentSlots": true,
+    "noFirstView": true,
+    "maxAdsenseBodyPerPage": 2
+  }
+}

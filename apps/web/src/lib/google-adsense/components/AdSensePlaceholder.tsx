@@ -29,6 +29,9 @@ interface AdSensePlaceholderProps {
    * カスタムクラス名
    */
   className?: string;
+
+  /** 広告の枠の台帳の箱。渡すと、その寸法の破線の箱に枠の名前と大きさを書く (本番で確保する箱と同じ) */
+  slotBox?: { name: string; width: number | 'full'; height: number };
 }
 
 /** フレキシブル枠のプレースホルダーの高さの上限 (px)。固定サイズの枠 (300×250 等) には効かせない */
@@ -40,7 +43,32 @@ const PLACEHOLDER_MAX_HEIGHT = 160;
 export function AdSensePlaceholder({
   format,
   className = "",
+  slotBox,
 }: AdSensePlaceholderProps) {
+  if (slotBox) {
+    const widthLabel = slotBox.width === "full" ? "幅いっぱい" : `${slotBox.width}`;
+    return (
+      <div className={`${AD_CONTAINER_CLASS} ${className}`.trim()}>
+        <div
+          data-ad-placeholder="slot-box"
+          className="flex items-center justify-center border border-dashed border-border text-center"
+          style={{
+            width: slotBox.width === "full" ? "100%" : `${slotBox.width}px`,
+            maxWidth: "100%",
+            height: `${slotBox.height}px`,
+          }}
+        >
+          <div className="p-4">
+            <div className="text-sm font-medium text-muted-foreground">AdSense・{slotBox.name}</div>
+            <div className="mt-1 text-xs tabular-nums text-muted-foreground">
+              {widthLabel} × {slotBox.height}px (本番で確保する箱)
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const size = AD_SIZES[format];
   const isFlexible = isFlexibleAdFormat(format);
   // 本番と同じ予約高を使う。旧実装はフレキシブル枠を一律 250px の固定 height で描いており、

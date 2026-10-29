@@ -47,6 +47,7 @@ export function AdSenseAd({
   showLabel = true,
   lazyLoad = true,
   rootMargin,
+  slotBox,
 }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -129,7 +130,7 @@ export function AdSenseAd({
 
   // 全体表示を再開した状態で、環境変数が無効ならプレースホルダーを表示する。
   if (!isEnabled) {
-    return <AdSensePlaceholder format={format} className={className} />;
+    return <AdSensePlaceholder format={format} slotBox={slotBox} className={className} />;
   }
 
   // AdBlockで広告がブロックされた場合は何も表示しない
@@ -139,8 +140,9 @@ export function AdSenseAd({
 
   const isArticleFormat = format === "article";
   const isMultiplexFormat = format === "multiplex";
-  // 予約高は ad-frame.ts が単一ソース（プレースホルダーと共有する）。
-  const reservedMinHeight = getAdReservedMinHeight(format);
+  // 予約高: 枠の台帳の箱を渡された枠はその高さ (本番の実測)、それ以外は ad-frame.ts の形式ごとの既定値。
+  // どちらもプレースホルダーと共有する。
+  const reservedMinHeight = slotBox?.height ?? getAdReservedMinHeight(format);
 
   return (
     <div

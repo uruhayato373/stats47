@@ -472,6 +472,7 @@ export const DATASETS = [
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
   d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "参考サイト (shadcndashboard・Flowly など) の撮影と部品ごとの実測値。どれを参考にするかは台帳 design.references"),
   d("design.references", "data/design-references/references.json", "ledger", "site", "data", "参考サイトの台帳 (URL・採否と理由・撮影と実測の置き場・反映先)。管理画面「サイト > 参考サイト」が読む", { schema: "config/schema/design.references.schema.json" }),
+  d("ads.placements", "config/ads/placements.json", "config", "site", "config", "広告の枠の台帳 (大きさの語彙・枠の種類と箱の寸法・ページごとの置き方・共通のルール)。ページの置き方は apps/web の ad-placements テストがコードと照合する", { schema: "config/schema/ads.placements.schema.json" }),
   d("design.components", "data/design/components.json", "ledger", "site", "data", "部品の台帳 (部品の種類ごとの役割・正典の実装・枠・寸法・見本の採用元・使わない場面・検査)。props との一致は apps/web の design-components-ledger テストが照合する", { schema: "config/schema/design.components.schema.json" }),
   d("note.assets", "assets/note/{**}", "asset", "product", "assets", "note の背景・見出し・マガジン表紙の原本と生成の説明・マニフェスト"),
   d("affiliate.banners", "assets/affiliate-banners/{name}", "asset", "affiliate", "assets", "note 記事に貼るアフィリエイトのバナー画像"),
