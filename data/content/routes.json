@@ -48,6 +48,23 @@
       ]
     },
     {
+      "id": "route:geo-history:network:scope",
+      "kind": "geo-history",
+      "pattern": "/geo/history/[network]/[scope]",
+      "parameters": [
+        "network",
+        "scope"
+      ]
+    },
+    {
+      "id": "route:geo-history:network",
+      "kind": "geo-history",
+      "pattern": "/geo/history/[network]",
+      "parameters": [
+        "network"
+      ]
+    },
+    {
       "id": "route:geo:analysisSlug:prefCode:stage",
       "kind": "geo",
       "pattern": "/geo/[analysisSlug]/[prefCode]/[stage]",
@@ -163,6 +180,48 @@
       "pattern": "/geo/method",
       "parameters": [],
       "title": "地域分析の方法"
+    },
+    {
+      "id": "page:geo-airport-tourism",
+      "kind": "page",
+      "pattern": "/geo/airport-tourism",
+      "parameters": [],
+      "title": "空港のある県とない県で、宿泊者数の伸び方は違うか"
+    },
+    {
+      "id": "page:geo-history",
+      "kind": "page",
+      "pattern": "/geo/history",
+      "parameters": [],
+      "title": "交通網の変遷"
+    },
+    {
+      "id": "page:geo-ic-manufacturing",
+      "kind": "page",
+      "pattern": "/geo/ic-manufacturing",
+      "parameters": [],
+      "title": "工場はインターチェンジの近くに集まったか"
+    },
+    {
+      "id": "page:geo-ic-population",
+      "kind": "page",
+      "pattern": "/geo/ic-population",
+      "parameters": [],
+      "title": "高速道路の IC ができた市区町村は、人口が減りにくかったか"
+    },
+    {
+      "id": "page:geo-map",
+      "kind": "page",
+      "pattern": "/geo/map",
+      "parameters": [],
+      "title": "地図を重ねて見る"
+    },
+    {
+      "id": "page:geo-shinkansen-population",
+      "kind": "page",
+      "pattern": "/geo/shinkansen-population",
+      "parameters": [],
+      "title": "新幹線の駅ができた町は、どう変わったか"
     },
     {
       "id": "theme:local-finance",

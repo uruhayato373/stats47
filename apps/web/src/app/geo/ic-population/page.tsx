@@ -12,7 +12,7 @@ export function generateMetadata(): Metadata {
   return {
     title: question?.question ?? '地域分析',
     description: question?.lead,
-    alternates: { canonical: '/geo/' + SLUG },
+    alternates: { canonical: '/geo/ic-population' },
     // 試作のあいだは検索に出さない (GEO-OVERLAY-URL-01)
     robots: 'noindex, follow',
   };

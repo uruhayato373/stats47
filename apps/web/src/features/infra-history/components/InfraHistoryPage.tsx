@@ -104,7 +104,7 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\u003c') }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
       />
       <PanelGrid>
         <div className="space-y-1">
