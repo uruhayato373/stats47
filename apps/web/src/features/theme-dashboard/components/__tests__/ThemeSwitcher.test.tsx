@@ -1,7 +1,6 @@
 import {
   render,
   screen,
-  waitFor,
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -80,79 +79,61 @@ describe('buildThemeSwitcherOptions', () => {
   });
 });
 
-describe('ThemeSwitcher', () => {
-  it('aria-label で「テーマを切り替える」目的が分かる (アクセシブル)', () => {
-    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
-    expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
-  });
+describe('ThemeSwitcher (Sheet)', () => {
+  /** ボタンを押して Sheet を開き、テーマのリンクの一覧を返す */
+  async function openSheet() {
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'テーマを切り替える' }));
+    return screen.findByRole('dialog');
+  }
 
-  it('compact 表示では短いラベルを使い、テーマ一覧への出口は切替行 (ThemePageLayout) の右端ボタンに任せる', () => {
-    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" compact />);
-    expect(screen.getByText('テーマ')).toBeInTheDocument();
-    expect(screen.queryByText('テーマを切り替える')).toBeNull();
-    expect(screen.queryByRole('link', { name: 'テーマ一覧' })).toBeNull();
-  });
-
-  it('現在のテーマがセレクターの現在値として表示される', () => {
+  it('ボタンは「テーマを切り替える」と読み上げられ、今のテーマ名を表示する', () => {
     const current = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
     render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="tourism" />);
-    // Radix Select のトリガーは選択中アイテムのテキスト (= 現テーマ名) を表示する
-    expect(screen.getByRole('combobox')).toHaveTextContent(current.title);
+    expect(screen.getByRole('button', { name: 'テーマを切り替える' })).toHaveTextContent(current.title);
   });
 
-  it('別テーマを選択すると /themes/{key} へ遷移する (全国)', async () => {
+  it('Sheet にテーマ一覧への出口と、系統ごとの全テーマのリンクを出す (今のテーマは現在地)', async () => {
     render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
-    const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
-
-    // Base UI の Select は pointer の一連の操作で選ぶので、fireEvent.click ではなく user-event で操作する
-    const user = userEvent.setup();
-    await user.click(screen.getByRole('combobox'));
-    await user.click(await screen.findByRole('option', { name: target.title }));
-
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith('/themes/tourism');
-    });
+    const sheet = await openSheet();
+    expect(within(sheet).getByRole('link', { name: 'テーマ一覧を見る' })).toHaveAttribute('href', '/themes');
+    // どのテーマも Sheet から辿れる (系統に入っていないテーマは「その他」)
+    const themeLinks = within(sheet).getAllByRole('link').filter((a) => a.getAttribute('href')?.startsWith('/themes/'));
+    expect(themeLinks).toHaveLength(THEME_SWITCHER_THEMES.length);
+    const current = ALL_THEMES.find((t) => t.themeKey === 'population-dynamics')!;
+    expect(within(sheet).getByRole('link', { name: current.title })).toHaveAttribute('aria-current', 'page');
   });
 
-  it('Provider 配下では選択中の都道府県を保って別テーマへ遷移する', async () => {
+  it('全国: テーマのリンクは /themes/{key}', async () => {
+    render(<ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
+    const sheet = await openSheet();
+    const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
+    expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/themes/tourism');
+  });
+
+  it('Provider 配下では選択中の都道府県をリンクへ引き継ぐ', async () => {
     render(
       <ThemePrefectureProvider initialAreaCode="28000" initialAreaName="兵庫県">
         <ThemeSwitcher themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />
       </ThemePrefectureProvider>
     );
+    const sheet = await openSheet();
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
-
-    const user = userEvent.setup();
-    await user.click(screen.getByRole('combobox'));
-    await user.click(await screen.findByRole('option', { name: target.title }));
-
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith('/themes/tourism?pref=28000');
-    });
+    expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/themes/tourism?pref=28000');
   });
 
-  it('areaContext: 別テーマを選択すると都道府県文脈を維持した /areas/{code}/{key} へ遷移する', async () => {
+  it('areaContext: 都道府県文脈の /areas/{code}/{key} へ。Type B テーマは出さない', async () => {
     render(
       <ThemeSwitcher themes={THEME_SWITCHER_THEMES}
         currentThemeKey="population-dynamics"
         areaContext={{ areaCode: '13000' }}
       />
     );
+    const sheet = await openSheet();
     const target = ALL_THEMES.find((t) => t.themeKey === 'tourism')!;
-
-    const user = userEvent.setup();
-    await user.click(screen.getByRole('combobox'));
-    const listbox = await screen.findByRole('listbox');
-    // Type B テーマは選択肢に無い (存在しない/410 URL を作らない)
-    expect(
-      within(listbox).queryByRole('option', { name: /港湾|鉄道|道路/ })
-    ).toBeNull();
-    await user.click(
-      within(listbox).getByRole('option', { name: target.title })
-    );
-
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith('/areas/13000/tourism');
-    });
+    expect(within(sheet).getByRole('link', { name: target.title })).toHaveAttribute('href', '/areas/13000/tourism');
+    for (const key of TYPE_B) {
+      expect(within(sheet).queryAllByRole('link').some((a) => a.getAttribute('href')?.endsWith(`/${key}`))).toBe(false);
+    }
   });
 });

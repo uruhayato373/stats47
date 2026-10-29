@@ -35,10 +35,11 @@ Related canon:
 ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
   └─ PageShell (no leftRail, no rightRail)
        └─ breadcrumb / ThemeAreaHeader | ThemeHero
-          / one control row: geography scope tabs (StatisticsScopeNav) + ThemeSwitcher + PrefectureSelect + 「テーマ一覧」
+          / one control row: geography scope tabs (StatisticsScopeNav) + ThemeSwitcher (current theme button → Sheet with grouped themes and the 「テーマ一覧」 exit) + PrefectureSelect
           / one-line chapter nav (tabs look, horizontal scroll on narrow widths)
           / dashboard (ThemeDashboardClient)
-          / 全指標・出典調査 (collapsible) / ThemeRelatedArticles / geo・evidence・correlated sections
+          / 全指標・出典調査 (collapsible) / geo・evidence・correlated sections
+          / ThemeRelatedArticles (last: articles that read the theme, after the reader has seen the data)
 ```
 
 The provider must stay outside `PageShell` because `PrefectureSelect` in the control row reads it and

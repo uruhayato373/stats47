@@ -8,6 +8,11 @@ const source = readFileSync(
   'utf8'
 );
 
+const switcherSource = readFileSync(
+  resolve(import.meta.dirname, '../ThemeSwitcher.tsx'),
+  'utf8'
+);
+
 const navSource = readFileSync(
   resolve(import.meta.dirname, '../../../../components/navigation/StatisticsScopeNav.tsx'),
   'utf8'
@@ -43,17 +48,21 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
     expect(pageNavIndex).toBeGreaterThan(controlsIndex);
   });
 
-  it('左レール (2 本目のナビ列) を作らず、切替行の右端にテーマ一覧ボタンを置く', () => {
+  // 2026-10-29: テーマの切替は今のテーマ名のボタン 1 つ (ThemeSwitcher が Sheet を開き、テーマ一覧への出口も Sheet に置く)。
+  // 切替行に Select とテーマ一覧ボタンを並べると、見出しの下が操作で埋まって主要データを押し下げていた。
+  it('左レール (2 本目のナビ列) を作らず、切替行にはテーマ (Sheet) と地域だけを置く', () => {
     expect(source).not.toMatch(/\bleftRail\b/);
     expect(source).not.toContain('LEFT_RAIL_NARROW_ONLY_CLASS');
     expect(source).not.toContain('ThemeSideNav');
 
     const controlsIndex = source.indexOf('aria-label="テーマと地域"');
-    const themesLinkIndex = source.indexOf('href="/themes"', controlsIndex);
     const pageNavIndex = source.indexOf('label="このページの内容"');
-    expect(themesLinkIndex).toBeGreaterThan(controlsIndex);
-    expect(themesLinkIndex).toBeLessThan(pageNavIndex);
-    expect(source.slice(themesLinkIndex, pageNavIndex)).toContain('buttonVariants');
+    const controls = source.slice(controlsIndex, pageNavIndex);
+    expect(controls).toContain('<ThemeSwitcher');
+    expect(controls).toContain('<PrefectureSelect');
+    expect(controls).not.toContain('href="/themes"');
+    expect(switcherSource).toContain('<SheetContent');
+    expect(switcherSource).toContain('href="/themes"');
   });
 
   it('ページ内の章リンクは狭い幅でも 1 行に保ち、はみ出す分は右端のフェード付きの横スクロールにする (2026-10-28 リンク列)', () => {
@@ -71,14 +80,14 @@ describe('ThemePageLayout — 狭幅の読む順序', () => {
     expect(navSource).not.toContain('cn-tabs');
   });
 
-  it('関連記事は h1 と切替行の下・ダッシュボードの前 (最初の画面) に置き、全指標・出典調査はダッシュボードの後ろに置く', () => {
+  // 2026-10-29: 関連記事は h1 の直下では主要データを押し下げるので、ダッシュボードを読み終えた位置 (ページの最後) へ移した
+  it('関連記事はダッシュボードと全指標・出典調査の後ろ (ページの最後) に置く', () => {
     const dashboardIndex = source.indexOf('<ThemeDashboardClient');
-    const pageNavIndex = source.indexOf('label="このページの内容"');
     const relatedIndex = source.indexOf('<ThemeRelatedArticles');
+    const catalogIndex = source.indexOf('title="全指標・出典調査"');
     expect(dashboardIndex).toBeGreaterThan(-1);
-    expect(relatedIndex).toBeGreaterThan(pageNavIndex);
-    expect(relatedIndex).toBeLessThan(dashboardIndex);
-    expect(source.indexOf('title="全指標・出典調査"')).toBeGreaterThan(dashboardIndex);
+    expect(catalogIndex).toBeGreaterThan(dashboardIndex);
+    expect(relatedIndex).toBeGreaterThan(catalogIndex);
   });
 
   it('全指標・出典調査は狭幅で初期展開しない', () => {

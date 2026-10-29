@@ -1,20 +1,25 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 
-import { cn } from '@stats47/components';
+import { buttonVariants } from '@stats47/components';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@stats47/components/atoms/ui/select';
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@stats47/components/atoms/ui/sheet';
 import { hrefFor } from '@stats47/data-configs/content/href';
+import { ChevronDown } from 'lucide-react';
+
+import Link from '@/components/atoms/SiteLink';
+import { RailNavRow } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
 import { themeHref } from '../config/theme-href';
+import { THEME_NAV_GROUPS } from '../config/theme-navigation';
 import { THEME_PREFECTURE_SET_VALUE } from '../lib/theme-prefecture-preference';
 
 import { useThemePrefecture } from './ThemePrefectureContext';
@@ -68,88 +73,80 @@ export function buildThemeSwitcherOptions(
 }
 
 interface Props {
-  /** 現在表示中のテーマキー（セレクターの現在値・URL/props が正）。 */
+  /** 現在表示中のテーマキー（ボタンの表示・一覧の現在地。URL/props が正）。 */
   currentThemeKey: string;
   /** エリアページ経由時の都道府県コード（5桁）。指定時は都道府県文脈を維持する。 */
   areaContext?: { areaCode: string };
-  /** 本文上部の切替行で使う、短いラベル + 全幅 Select の表示。 */
-  compact?: boolean;
   /** テーマ一覧。サーバーで `THEME_SWITCHER_THEMES` を渡す。 */
   themes: readonly ThemeSwitcherTheme[];
 }
 
 /**
- * テーマ詳細ページ上部のコンパクトなテーマ切替コントロール。
+ * テーマ詳細ページ上部のテーマ切替 (2026-10-29 に Select + 「テーマ一覧」ボタンから Sheet 1 つにまとめた)。
  *
- * `ThemePageLayout` は本文上部の切替行 (テーマ・地域・テーマ一覧ボタン) に全幅で置く。
- * テーマ一覧への出口は切替行の右端のボタンが持つので、ここではラベルと Select だけを描く。
- * 2026-10-28 に左レールのテーマ一覧 (`ThemeSideNav` のグループ一覧) をサイドバーの
- * 「テーマ」と重複するため撤去し、ページ内のテーマ切替は本コンポーネントだけになった。
- *
- * 遷移は `@stats47/components` の `Select` + `useRouter().push()`。現在値は props を正とし
- * ローカル state で二重管理しない。
+ * ボタンは今のテーマ名を示し、押すと右から Sheet が開く。Sheet の中は `THEME_NAV_GROUPS` の系統ごとの
+ * テーマのリンクと、テーマ一覧 (`/themes`) への出口。選択中の都道府県 (Provider 配下) は各リンクへ引き継ぐ。
+ * 系統に入っていないテーマは「その他」に並べ、どのテーマも Sheet から必ず辿れるようにする。
  */
-export function ThemeSwitcher({
-  currentThemeKey,
-  areaContext,
-  compact = false,
-  themes,
-}: Props) {
-  const router = useRouter();
+export function ThemeSwitcher({ currentThemeKey, areaContext, themes }: Props) {
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
     themes,
     areaContext,
     hasProvider ? selectedPrefectureCode : undefined
   );
+  const byKey = new Map(options.map((o) => [o.themeKey, o]));
+  const grouped = new Set<string>(THEME_NAV_GROUPS.flatMap((g) => g.themeKeys));
+  const groups = [
+    ...THEME_NAV_GROUPS.map((g) => ({
+      id: g.id,
+      label: g.label,
+      options: g.themeKeys.flatMap((key) => byKey.get(key) ?? []),
+    })),
+    { id: 'other', label: 'その他', options: options.filter((o) => !grouped.has(o.themeKey)) },
+  ].filter((g) => g.options.length > 0);
+  const currentTitle = byKey.get(currentThemeKey)?.title ?? themes.find((t) => t.themeKey === currentThemeKey)?.title;
 
   return (
-    <div
-      className={cn(
-        compact
-          ? 'min-w-0'
-          : 'mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm'
-      )}
-    >
-      {compact ? (
-        <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
-          テーマ
-        </span>
-      ) : (
-        <span className="block shrink-0 text-xs font-medium text-muted-foreground">
-          テーマを切り替える
-        </span>
-      )}
-      <Select
-        value={currentThemeKey}
-        items={options.map((o) => ({ value: o.themeKey, label: o.title }))}
-        onValueChange={(key) => {
-          if (key === null || key === currentThemeKey) return;
-          const next = options.find((o) => o.themeKey === key);
-          if (next) {
-            trackNavClick({
-              surface: 'theme_switcher',
-              label: key,
-              href: next.href,
-            });
-            router.push(next.href);
-          }
-        }}
+    <Sheet>
+      <SheetTrigger
+        aria-label="テーマを切り替える"
+        className={buttonVariants({ variant: 'outline', className: 'max-w-full justify-between' })}
       >
-        <SelectTrigger
-          className={compact ? 'mt-1 w-full' : 'w-full sm:w-64'}
-          aria-label="テーマを切り替える"
-        >
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((o) => (
-            <SelectItem key={o.themeKey} value={o.themeKey}>
-              {o.title}
-            </SelectItem>
+        <span className="truncate">{currentTitle ?? 'テーマ'}</span>
+        <ChevronDown aria-hidden="true" />
+      </SheetTrigger>
+      {/* サイトの上端のヘッダー (sticky・z-200) と Cookie 同意 (z-[1100]) より前に出す。Sheet の既定は z-50 */}
+      <SheetContent side="right" className="z-[1200]! overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle>テーマを切り替える</SheetTitle>
+          <SheetDescription>
+            <Link href="/themes" className="underline underline-offset-4 hover:text-foreground">
+              テーマ一覧を見る
+            </Link>
+          </SheetDescription>
+        </SheetHeader>
+        <div className="flex flex-col gap-4 px-4 pb-6">
+          {groups.map((group) => (
+            <nav key={group.id} aria-label={group.label}>
+              <p className="mb-1 text-xs font-medium text-muted-foreground">{group.label}</p>
+              {group.options.map((option) => (
+                <RailNavRow
+                  key={option.themeKey}
+                  href={option.href}
+                  active={option.themeKey === currentThemeKey}
+                  chevron={false}
+                  onClick={() =>
+                    trackNavClick({ surface: 'theme_switcher', label: option.themeKey, href: option.href })
+                  }
+                >
+                  {option.title}
+                </RailNavRow>
+              ))}
+            </nav>
           ))}
-        </SelectContent>
-      </Select>
-    </div>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }

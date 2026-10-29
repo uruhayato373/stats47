@@ -1,7 +1,6 @@
 import { Suspense, type ReactNode } from 'react';
 
 
-import { buttonVariants } from '@stats47/components';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -237,12 +236,12 @@ export async function ThemePageLayout({
 
           {toolbar}
 
-          {/* 地域単位・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のリンク列を 1 行で置く。
-          狭い幅ではテーマと地域のセレクトを地域単位のリンク列と別の行にし、選択中の名前を読める幅にする。
-          関連記事は h1 の下の最初の画面に置く (変更前の配置)。全指標・出典調査はダッシュボードの後ろ。
+          {/* 地域単位・テーマ・地域を 1 行の操作群にまとめ、その下に章のリンク列を 1 行で置く。
+          テーマは今のテーマ名のボタン 1 つで、押すと Sheet でテーマの一覧が開く (2026-10-29。旧: Select + テーマ一覧ボタン)。
+          関連記事はページの最後に置く (同日。h1 の直下では主要データを押し下げていた)。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
           <div className="mb-4 flex flex-col gap-3">
-            <div className="flex flex-wrap items-end gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               {!areaContext && (
                 <StatisticsScopeNav
                   current="prefectures"
@@ -253,34 +252,18 @@ export async function ThemePageLayout({
               <div
                 role="group"
                 aria-label="テーマと地域"
-                className="flex min-w-0 basis-full items-end gap-2 sm:flex-1 sm:basis-auto sm:gap-3"
+                className="flex min-w-0 basis-full items-center gap-2 sm:flex-1 sm:basis-auto sm:justify-end"
               >
-                <div className="min-w-0 flex-1 sm:w-56 sm:flex-none">
+                <div className="min-w-0 flex-1 sm:flex-none">
                   <ThemeSwitcher
                     themes={THEME_SWITCHER_THEMES}
                     currentThemeKey={theme.themeKey}
                     areaContext={
                       areaContext ? { areaCode: areaContext.areaCode } : undefined
                     }
-                    compact
                   />
                 </div>
-                <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
-                  <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
-                    地域
-                  </span>
-                  <PrefectureSelect className="mt-1 w-full" />
-                </div>
-                <Link
-                  href="/themes"
-                  data-slot="button"
-                  className={buttonVariants({
-                    variant: 'outline',
-                    className: 'shrink-0 sm:ml-auto',
-                  })}
-                >
-                  テーマ一覧
-                </Link>
+                <PrefectureSelect className="min-w-0 flex-1 sm:w-44 sm:flex-none" />
               </div>
             </div>
 
@@ -297,17 +280,6 @@ export async function ThemePageLayout({
             )}
           </div>
 
-          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
-            <div className="mb-4">
-              <Suspense fallback={null}>
-                <ThemeRelatedArticles
-                  themeKey={theme.themeKey}
-                  tagKeys={theme.relatedArticleTagKeys ?? []}
-                  rankingKeys={theme.rankingKeys}
-                />
-              </Suspense>
-            </div>
-          )}
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (
@@ -447,6 +419,19 @@ export async function ThemePageLayout({
         全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
       */}
           <InContentAdSlot slot={THEMES_CONTENT} />
+
+          {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <div className="mt-8">
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles
+                  themeKey={theme.themeKey}
+                  tagKeys={theme.relatedArticleTagKeys ?? []}
+                  rankingKeys={theme.rankingKeys}
+                />
+              </Suspense>
+            </div>
+          )}
 
           {/* ネイティブアフィリエイト枠。読了位置では広告を二段に分けず、
           desktop 3件 / mobile 最優先1件の単一ブロックにする。 */}
