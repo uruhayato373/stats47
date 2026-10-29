@@ -385,7 +385,7 @@ export function ThemeMetricsDashboard({
     }
     return out;
   };
-  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3) =>
+  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3, hideTitle = false) =>
     chart.componentType === 'markdown-section' ? (
       <ThemeDbChartRenderer
         key={chart.componentKey}
@@ -399,6 +399,7 @@ export function ThemeMetricsDashboard({
       key={chart.componentKey}
       id={`theme-${themeConfig.themeKey}-chart-${chart.componentKey}`}
       title={chart.title}
+      hideTitle={hideTitle}
       footer={
         <ChartFooter
           source={chart.sourceName ?? undefined}
@@ -523,7 +524,9 @@ export function ThemeMetricsDashboard({
       }, chapter.title)}
       {chapter.charts.length > 0 && (
         <PanelGrid className={`grid-cols-1 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
-          {chapter.charts.map((chart) => renderChart(chart))}
+          {chapter.charts.map((chart) =>
+            renderChart(chart, undefined, chapter.charts.length === 1 && chartLegendNamesSeries(chart))
+          )}
         </PanelGrid>
       )}
       {chapter.markdown.length > 0 && (
@@ -580,4 +583,21 @@ export function ThemeMetricsDashboard({
       )}
     </PanelGrid>
   );
+}
+
+/** 系列の名前を凡例 (D3ChartLegend) に並べるチャートの種類。ほかの種類 (構成比・ドーナツ・物価など) は凡例の形が違う */
+const LEGEND_NAMED_CHART_TYPES = new Set(['line-chart', 'mixed-chart']);
+
+/**
+ * 凡例が系列の名前を示すチャートか (折れ線・棒と折れ線で、系列が 2 本以上)。章の中のチャートが 1 枚だけでこれに当たるなら、
+ * 章の見出しが問いを、凡例が系列の名前を示すので、パネルの題名の帯を出さない (題名は読み上げの名前に残す。2026-10-29 オーナー決定)。
+ * 章に 2 枚以上並ぶとき・凡例の無いチャートでは、題名が無いと何のチャートか分からないので帯を残す。
+ */
+export function chartLegendNamesSeries(chart: PageComponent): boolean {
+  if (!LEGEND_NAMED_CHART_TYPES.has(chart.componentType)) return false;
+  const count = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].reduce((sum, field) => {
+    const refs = chart.componentProps[field];
+    return sum + (Array.isArray(refs) ? refs.length : 0);
+  }, 0);
+  return count >= 2;
 }

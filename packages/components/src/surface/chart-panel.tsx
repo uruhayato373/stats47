@@ -16,6 +16,11 @@ export interface ChartPanelProps {
   /** 固定キーがあるグラフでは、SSRとクライアントで同じ見出しIDを使う。 */
   id?: string;
   title?: ReactNode;
+  /**
+   * 題名を画面に出さず、読み上げの名前 (領域の名前) にだけ使う。見出しの帯と線も描かない。
+   * 章の見出しと凡例が何のチャートかを示し、帯の題名が同じことの繰り返しになる所だけで使う (2026-10-29)
+   */
+  hideTitle?: boolean;
   children: ReactNode;
   icon?: ReactNode;
   description?: ReactNode;
@@ -43,6 +48,7 @@ const META_CLASS_NAME = 'flex flex-col px-4 text-xs text-muted-foreground';
 export function ChartPanel({
   id,
   title,
+  hideTitle = false,
   children,
   icon,
   description,
@@ -51,7 +57,7 @@ export function ChartPanel({
   className,
   contentClassName,
 }: ChartPanelProps) {
-  const hasHeader = title || description || action || icon;
+  const hasHeader = (title && !hideTitle) || description || action || icon;
   const generatedId = useId();
   const titleId = title ? `${id ?? generatedId}-title` : undefined;
   const descriptionId = description
@@ -68,7 +74,7 @@ export function ChartPanel({
     >
       {hasHeader && (
         <CardHeader className="border-b">
-          {(icon || title) && (
+          {(icon || (title && !hideTitle)) && (
             <CardTitle className={TITLE_CLASS_NAME}>
               {icon && (
                 <span
@@ -78,7 +84,7 @@ export function ChartPanel({
                   {icon}
                 </span>
               )}
-              {title && (
+              {title && !hideTitle && (
                 <h3 id={titleId} className="min-w-0 font-medium text-foreground">
                   {title}
                 </h3>
@@ -96,6 +102,11 @@ export function ChartPanel({
             </CardAction>
           )}
         </CardHeader>
+      )}
+      {title && hideTitle && (
+        <h3 id={titleId} className="sr-only">
+          {title}
+        </h3>
       )}
       <CardContent className={contentClassName}>{children}</CardContent>
       {footer && (
