@@ -22,7 +22,6 @@ import {
 
 import { RankingItemsSidebar } from "../RankingSidebar";
 import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
-import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
 import type { RankingItem } from "@stats47/ranking";
@@ -90,12 +89,6 @@ export function RankingPageSidebarSection({
 
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      {/* 本文の order-5 枠 (@min-[988px]/shell:hidden) と同じシェル幅基準で出し分け、二重に出さない。
-          contents にして、記事カードが描かれないときに空の枠がレールの先頭に gap の分の段差を作らないようにする
-          (右レールの最初のカードの上端を本文の最初のカードの上端にそろえる)。 */}
-      <div className="hidden @min-[988px]/shell:contents">
-        <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
-      </div>
       {areaType === "prefecture" && (
         <RelatedContentNavigation
           title="この指標を使うテーマ"

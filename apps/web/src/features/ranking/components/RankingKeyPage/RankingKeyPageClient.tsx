@@ -268,7 +268,6 @@ export function RankingKeyPageClient({
                     />
                 </PanelGrid>
 
-                <div className="order-5 @min-[988px]/shell:hidden">{sections.relatedArticles}</div>
                 <PanelGrid className="order-6">
                     <RankingPageContentSections
                         rankingKey={rankingKey}
