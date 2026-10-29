@@ -1,88 +1,324 @@
 {
-  "_doc": "広告の枠の台帳 (2026-10-29)。大きさの語彙・枠の種類 (確保する箱・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルール。形は config/schema/ads.placements.schema.json。広告そのものの正本は apps/web/scripts/affiliate-ads-data.ts と AdSense の枠の定数。ページの置き方は apps/web の ad-placements テストがコードと照合する。ページの種類はテーマから順に載せる。",
+  "_doc": "広告の枠の台帳 (2026-10-29)。大きさの語彙・枠の種類 (確保する箱・受け入れる大きさ・表示する画面幅)・ページごとの置き方・共通のルール。形は config/schema/ads.placements.schema.json。広告そのものの正本は apps/web/scripts/affiliate-ads-data.ts と AdSense の枠の定数。ページの置き方は apps/web の ad-placements テストがコードと照合する。ページの種類はテーマ・ランキングから順に載せる。置き方は source のファイルの marker の位置と順で照合する。",
   "sizes": [
-    { "size": "300x250", "status": "standard", "reason": "アフィリエイトの主力 (2026-10-29 時点で有効 137 件)。本文・右レール・PR の列の標準" },
-    { "size": "250x250", "status": "standard", "fitsInto": "300x250", "reason": "正方形のクリエイティブ (有効 11 件)。300x250 の枠の中央に置く" },
-    { "size": "text", "status": "standard", "reason": "テキストリンク (有効 137 件)。本文に差し込む" },
-    { "size": "320x100", "status": "undecided", "adIds": ["af_strategy_career_economy_001"], "reason": "規約の正式サイズだが登録は 1 件だけ。モバイル用の枠を作るか、300x250 へ寄せるかをオーナーが決める" },
-    { "size": "336x280", "status": "undecided", "adIds": ["af_conoha_ai_canvas_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
-    { "size": "300x300", "status": "undecided", "adIds": ["af_economy_banner_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
-    { "size": "320x250", "status": "undecided", "adIds": ["af_population_banner_001"], "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める" },
-    { "size": "165x120", "status": "undecided", "adIds": ["af_sbi_inline_001"], "reason": "規約上は新規登録禁止の旧サイズ。受け入れる枠が無い。退役するかをオーナーが決める" },
-    { "size": "160x600", "status": "undecided", "adIds": ["af_conoha_skyscraper_001"], "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める" },
-    { "size": "120x600", "status": "undecided", "adIds": ["af_sbi_skyscraper_001"], "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める" }
+    {
+      "size": "300x250",
+      "status": "standard",
+      "reason": "アフィリエイトの主力 (2026-10-29 時点で有効 137 件)。本文・右レール・PR の列の標準"
+    },
+    {
+      "size": "250x250",
+      "status": "standard",
+      "fitsInto": "300x250",
+      "reason": "正方形のクリエイティブ (有効 11 件)。300x250 の枠の中央に置く"
+    },
+    {
+      "size": "text",
+      "status": "standard",
+      "reason": "テキストリンク (有効 137 件)。本文に差し込む"
+    },
+    {
+      "size": "320x100",
+      "status": "undecided",
+      "adIds": [
+        "af_strategy_career_economy_001"
+      ],
+      "reason": "規約の正式サイズだが登録は 1 件だけ。モバイル用の枠を作るか、300x250 へ寄せるかをオーナーが決める"
+    },
+    {
+      "size": "336x280",
+      "status": "undecided",
+      "adIds": [
+        "af_conoha_ai_canvas_001"
+      ],
+      "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める"
+    },
+    {
+      "size": "300x300",
+      "status": "undecided",
+      "adIds": [
+        "af_economy_banner_001"
+      ],
+      "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める"
+    },
+    {
+      "size": "320x250",
+      "status": "undecided",
+      "adIds": [
+        "af_population_banner_001"
+      ],
+      "reason": "規約上は新規登録禁止の旧サイズ。300x250 の素材へ取り直すか退役するかをオーナーが決める"
+    },
+    {
+      "size": "165x120",
+      "status": "undecided",
+      "adIds": [
+        "af_sbi_inline_001"
+      ],
+      "reason": "規約上は新規登録禁止の旧サイズ。受け入れる枠が無い。退役するかをオーナーが決める"
+    },
+    {
+      "size": "160x600",
+      "status": "undecided",
+      "adIds": [
+        "af_conoha_skyscraper_001"
+      ],
+      "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める"
+    },
+    {
+      "size": "120x600",
+      "status": "undecided",
+      "adIds": [
+        "af_sbi_skyscraper_001"
+      ],
+      "reason": "縦長。受け皿はホームの左レール (SidebarStickyBannerAd) だけ。残すかをオーナーが決める"
+    }
   ],
   "slotTypes": [
     {
       "id": "adsense-body",
       "name": "本文の AdSense",
       "provider": "adsense",
-      "box": { "width": "full", "height": 280 },
-      "devices": ["desktop"],
-      "accepts": ["adsense:article", "adsense:rectangle"],
+      "box": {
+        "width": "full",
+        "height": 280
+      },
+      "devices": [
+        "desktop"
+      ],
+      "accepts": [
+        "adsense:article",
+        "adsense:rectangle"
+      ],
       "component": "InContentAdSlot",
       "measured": "2026-10-29 本番 /themes/labor-wages (本文の幅 812px): 記事内 (fluid)・レクタングルとも 780x280 で配信"
+    },
+    {
+      "id": "adsense-body-mobile",
+      "name": "本文の AdSense (モバイル)",
+      "provider": "adsense",
+      "box": {
+        "width": "full",
+        "height": 250
+      },
+      "devices": [
+        "mobile"
+      ],
+      "accepts": [
+        "adsense:article"
+      ],
+      "component": "AdSenseAd",
+      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio (モバイル): 記事内 293x250"
     },
     {
       "id": "adsense-rail-rect",
       "name": "右レールの AdSense",
       "provider": "adsense",
-      "box": { "width": 300, "height": 250 },
-      "devices": ["desktop"],
-      "accepts": ["adsense:rectangle"],
-      "component": "RailAdSlot"
+      "box": {
+        "width": 300,
+        "height": 260,
+        "mobileWidth": "full",
+        "mobileHeight": 375
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "adsense:rectangle"
+      ],
+      "component": "RailAdSlot",
+      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 300x256〜316x258、モバイル (本文の下に積まれる) 375x375"
     },
     {
       "id": "adsense-footer",
       "name": "ページ末の関連コンテンツ型",
       "provider": "adsense",
-      "box": { "width": "full", "height": 300 },
-      "devices": ["desktop", "mobile"],
-      "accepts": ["adsense:multiplex"],
-      "component": "FooterAdSlot"
+      "box": {
+        "width": "full",
+        "height": 466,
+        "mobileHeight": 242
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "adsense:multiplex"
+      ],
+      "component": "FooterAdSlot",
+      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 778x466、モバイル 293x242"
     },
     {
       "id": "affiliate-row",
       "name": "本文の PR の列",
       "provider": "affiliate",
-      "box": { "width": "full", "height": 250, "columns": { "desktop": 3, "mobile": 1 } },
-      "devices": ["desktop", "mobile"],
-      "accepts": ["300x250", "250x250"],
-      "component": "NativeAffiliateRow"
+      "box": {
+        "width": "full",
+        "height": 250,
+        "columns": {
+          "desktop": 3,
+          "mobile": 1
+        }
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "300x250",
+        "250x250"
+      ],
+      "component": "NativeAffiliateRow",
+      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: 300x250 の素材がデスクトップ 254x212 (4 列)、モバイル 293x244"
     },
     {
       "id": "affiliate-rect",
       "name": "PR のバナー 1 枚",
       "provider": "affiliate",
-      "box": { "width": 300, "height": 250 },
-      "devices": ["desktop", "mobile"],
-      "accepts": ["300x250", "250x250"],
+      "box": {
+        "width": 300,
+        "height": 250
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "300x250",
+        "250x250"
+      ],
       "component": "BannerAd"
     },
     {
       "id": "affiliate-text",
       "name": "本文のテキストリンク",
       "provider": "affiliate",
-      "box": { "width": "full", "height": 24 },
-      "devices": ["desktop", "mobile"],
-      "accepts": ["text"],
+      "box": {
+        "width": "full",
+        "height": 24
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "text"
+      ],
       "component": "AffiliateTextAdList"
     },
     {
       "id": "affiliate-sidebar-sticky",
       "name": "ホームの左レールの縦長",
       "provider": "affiliate",
-      "box": { "width": 160, "height": 600 },
-      "devices": ["desktop"],
-      "accepts": ["160x600", "120x600"],
+      "box": {
+        "width": 160,
+        "height": 600
+      },
+      "devices": [
+        "desktop"
+      ],
+      "accepts": [
+        "160x600",
+        "120x600"
+      ],
       "component": "SidebarStickyBannerAd"
     }
   ],
   "pages": {
     "theme": [
-      { "slot": "adsense-body", "position": "ダッシュボードの後", "adsenseSlot": "HUB_INCONTENT" },
-      { "slot": "adsense-body", "position": "関連の深い指標の後・このテーマを読み解く記事の前", "adsenseSlot": "THEMES_CONTENT" },
-      { "slot": "affiliate-row", "position": "このテーマを読み解く記事の後 (ページの最後)", "trackingPosition": "theme-native" }
+      {
+        "slot": "adsense-body",
+        "region": "body",
+        "position": "ダッシュボードの後",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
+        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />",
+        "adsenseSlot": "HUB_INCONTENT"
+      },
+      {
+        "slot": "adsense-body",
+        "region": "body",
+        "position": "関連の深い指標の後・このテーマを読み解く記事の前",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
+        "marker": "<InContentAdSlot slot={THEMES_CONTENT} />",
+        "adsenseSlot": "THEMES_CONTENT"
+      },
+      {
+        "slot": "affiliate-row",
+        "region": "body",
+        "position": "このテーマを読み解く記事の後 (ページの最後)",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
+        "marker": "position=\"theme-native\"",
+        "trackingPosition": "theme-native"
+      }
+    ],
+    "ranking": [
+      {
+        "slot": "adsense-body-mobile",
+        "region": "body",
+        "position": "解説 (AI の考察) の後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
+        "marker": "slotId={RANKING_INCONTENT_MOBILE.slotId}",
+        "adsenseSlot": "RANKING_INCONTENT_MOBILE",
+        "devices": [
+          "mobile"
+        ],
+        "condition": "AdSense を止めているときは同じ位置に PR のバナー 1 枚 (ranking-incontent) を出す"
+      },
+      {
+        "slot": "adsense-footer",
+        "region": "body",
+        "position": "出典・導線の後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
+        "marker": "slotId={RANKING_PAGE_FOOTER.slotId}",
+        "adsenseSlot": "RANKING_PAGE_FOOTER"
+      },
+      {
+        "slot": "affiliate-row",
+        "region": "body",
+        "position": "ページ末の関連コンテンツ型の直後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
+        "marker": "{sections.nativeAffiliate}",
+        "condition": "家計調査の品目は楽天の商品カード (モバイル) と 1 位の県の返礼品 (デスクトップ) に置き換わる",
+        "knownAdjacentReason": "2026-10-29 時点のコード。関連コンテンツ型 (AdSense) の直後に PR の列が続く。直すかはオーナー判断待ち"
+      },
+      {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "右レールの関連ナビの後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
+        "marker": "<RailAdSlot slot={RANKING_SIDEBAR_TOP} />",
+        "adsenseSlot": "RANKING_SIDEBAR_TOP"
+      },
+      {
+        "slot": "affiliate-rect",
+        "region": "rail",
+        "position": "右レールの AdSense の直後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
+        "marker": "<SidebarPromoBanner",
+        "condition": "労働系 (labor) のランキングだけ",
+        "knownAdjacentReason": "2026-10-29 時点のコード。右レールの AdSense の直後に固定の PR のバナーが続く。直すかはオーナー判断待ち"
+      },
+      {
+        "slot": "affiliate-rect",
+        "region": "rail",
+        "position": "固定の PR のバナーの後 (最大 2 枚)",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
+        "marker": "{ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}",
+        "condition": "在庫が無いときは AdSense (SIDEBAR_AFFILIATE_FALLBACK) で埋まる。AdSense を止めているときは右レールの上段へ移す",
+        "knownAdjacentReason": "2026-10-29 時点のコード。PR のバナーが最大 3 枚続く (間に楽天の商品カードが入ることがある)。直すかはオーナー判断待ち"
+      },
+      {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "右レールの最後",
+        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx",
+        "marker": "slotId={RANKING_PAGE_TABLE_SIDE.slotId}",
+        "adsenseSlot": "RANKING_PAGE_TABLE_SIDE",
+        "devices": [
+          "desktop"
+        ]
+      }
     ]
   },
   "rules": {

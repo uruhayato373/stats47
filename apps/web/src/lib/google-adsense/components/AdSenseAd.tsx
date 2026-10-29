@@ -18,8 +18,10 @@ import { AdSlotProps } from "../types";
 
 import {
   AD_CONTAINER_CLASS,
+  SLOT_BOX_HEIGHT_CLASS,
   getAdReservedMinHeight,
   getResponsiveAdFormat,
+  slotBoxStyle,
 } from "./ad-frame";
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
 
@@ -144,11 +146,16 @@ export function AdSenseAd({
   // どちらもプレースホルダーと共有する。
   const reservedMinHeight = slotBox?.height ?? getAdReservedMinHeight(format);
 
+  // 台帳の箱がある枠は、モバイルとデスクトップの予約の高さを CSS 変数で切り替える (本番の実測)
+  const boxStyle = slotBox ? slotBoxStyle(slotBox) : undefined;
+  const reserveClass = slotBox ? SLOT_BOX_HEIGHT_CLASS : "";
+  const reserveStyle = slotBox ? undefined : { minHeight: `${reservedMinHeight}px` };
+
   return (
     <div
       ref={adRef}
-      className={`${AD_CONTAINER_CLASS} ${className}`}
-      style={reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
+      className={`${AD_CONTAINER_CLASS} ${reserveClass} ${className}`}
+      style={slotBox ? boxStyle : reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
     >
       {showLabel && (
         <div className="text-xs text-muted-foreground text-center mb-1">
@@ -171,11 +178,11 @@ export function AdSenseAd({
         ) : isMultiplexFormat ? (
           // Multiplex（関連コンテンツ型グリッド）: Google 推奨の autorelaxed 構成
           <ins
-            className="adsbygoogle"
+            className={`adsbygoogle ${reserveClass}`}
             style={{
               display: "block",
               width: "100%",
-              minHeight: `${reservedMinHeight}px`,
+              ...reserveStyle,
             }}
             data-ad-format="autorelaxed"
             data-ad-client={clientId}
@@ -183,11 +190,11 @@ export function AdSenseAd({
           />
         ) : (
           <ins
-            className="adsbygoogle"
+            className={`adsbygoogle ${reserveClass}`}
             style={{
               display: "block",
               width: "100%",
-              minHeight: `${reservedMinHeight}px`,
+              ...reserveStyle,
             }}
             data-ad-client={clientId}
             data-ad-slot={slotId}
@@ -197,7 +204,7 @@ export function AdSenseAd({
         )
       ) : (
         // 遅延ロード中のスペース確保（CLSの防止）。地の色は付けない (広告カードの中に別の面を作らない)
-        <div style={{ width: "100%", minHeight: `${reservedMinHeight}px` }} />
+        <div className={reserveClass} style={{ width: "100%", ...reserveStyle }} />
       )}
     </div>
   );

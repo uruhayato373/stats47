@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import type { AreaType } from "@/features/area";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
     ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
@@ -95,6 +96,7 @@ export function RankingPageContentSections({
                     <AdSenseAd
                         format={RANKING_INCONTENT_MOBILE.format}
                         slotId={RANKING_INCONTENT_MOBILE.slotId}
+                        slotBox={adSlotBox("adsense-body-mobile")}
                     />
                 </div>
             )}
@@ -118,6 +120,7 @@ export function RankingPageContentSections({
                 <AdSenseAd
                     format={RANKING_PAGE_FOOTER.format}
                     slotId={RANKING_PAGE_FOOTER.slotId}
+                    slotBox={adSlotBox("adsense-footer")}
                 />
             )}
 

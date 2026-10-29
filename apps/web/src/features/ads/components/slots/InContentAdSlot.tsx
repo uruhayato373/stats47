@@ -1,6 +1,6 @@
 import { cn } from "@stats47/components";
 
-import { adSlotType } from "@/lib/ad-placements";
+import { adSlotBox } from "@/lib/ad-placements";
 import {
   ADSENSE_DISPLAY_ENABLED,
   AdSenseAd,
@@ -39,8 +39,6 @@ export function InContentAdSlot({
   className,
 }: InContentAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
-  // 確保する箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい×280)
-  const box = adSlotType("adsense-body");
   return (
     <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, "my-8", className)}>
       {!hideLabel && <AdSlotLabel />}
@@ -48,7 +46,8 @@ export function InContentAdSlot({
         slotId={slot.slotId}
         format={slot.format}
         showLabel={false}
-        slotBox={{ name: box.name, ...box.box }}
+        // 確保する箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい×280)
+        slotBox={adSlotBox("adsense-body")}
       />
     </div>
   );

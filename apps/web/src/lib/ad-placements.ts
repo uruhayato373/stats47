@@ -11,6 +11,9 @@ export interface AdSlotBox {
   /** 数値 (px) か full (本文の幅いっぱい) */
   width: number | 'full';
   height: number;
+  /** モバイルで寸法が違う枠だけ (本番の実測) */
+  mobileWidth?: number | 'full';
+  mobileHeight?: number;
 }
 
 export interface AdSlotType {
@@ -41,4 +44,10 @@ export function adSlotType(id: string): AdSlotType {
 /** ページの種類ごとの置き方 (上から順) */
 export function adPagePlacements(page: string): readonly AdPagePlacement[] {
   return (placements.pages as Record<string, AdPagePlacement[]>)[page] ?? [];
+}
+
+/** AdSenseAd の slotBox に渡す形 (枠の名前と箱の寸法) */
+export function adSlotBox(id: string): { name: string } & AdSlotBox {
+  const slot = adSlotType(id);
+  return { name: slot.name, ...slot.box };
 }

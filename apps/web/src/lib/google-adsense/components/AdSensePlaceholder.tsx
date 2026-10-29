@@ -11,12 +11,15 @@
  * PLACEHOLDER_MAX_HEIGHT までに抑え、本番の予約高を文字で示す。
  */
 
-import { AD_SIZES, AdFormat } from "../types";
+import { AD_SIZES, AdFormat, type AdSlotBoxProp } from "../types";
 
 import {
   AD_CONTAINER_CLASS,
+  SLOT_BOX_HEIGHT_CLASS,
+  SLOT_BOX_WIDTH_CLASS,
   getAdReservedMinHeight,
   isFlexibleAdFormat,
+  slotBoxStyle,
 } from "./ad-frame";
 
 interface AdSensePlaceholderProps {
@@ -31,7 +34,7 @@ interface AdSensePlaceholderProps {
   className?: string;
 
   /** 広告の枠の台帳の箱。渡すと、その寸法の破線の箱に枠の名前と大きさを書く (本番で確保する箱と同じ) */
-  slotBox?: { name: string; width: number | 'full'; height: number };
+  slotBox?: AdSlotBoxProp;
 }
 
 /** フレキシブル枠のプレースホルダーの高さの上限 (px)。固定サイズの枠 (300×250 等) には効かせない */
@@ -46,22 +49,22 @@ export function AdSensePlaceholder({
   slotBox,
 }: AdSensePlaceholderProps) {
   if (slotBox) {
-    const widthLabel = slotBox.width === "full" ? "幅いっぱい" : `${slotBox.width}`;
+    const label = (w: number | "full", h: number) => `${w === "full" ? "幅いっぱい" : w} × ${h}px`;
+    const mobileDiffers = slotBox.mobileHeight !== undefined || slotBox.mobileWidth !== undefined;
     return (
-      <div className={`${AD_CONTAINER_CLASS} ${className}`.trim()}>
+      <div className={`${AD_CONTAINER_CLASS} ${className}`.trim()} style={slotBoxStyle(slotBox)}>
         <div
           data-ad-placeholder="slot-box"
-          className="flex items-center justify-center border border-dashed border-border text-center"
-          style={{
-            width: slotBox.width === "full" ? "100%" : `${slotBox.width}px`,
-            maxWidth: "100%",
-            height: `${slotBox.height}px`,
-          }}
+          className={`flex items-center justify-center border border-dashed border-border text-center ${SLOT_BOX_WIDTH_CLASS} ${SLOT_BOX_HEIGHT_CLASS}`}
         >
           <div className="p-4">
             <div className="text-sm font-medium text-muted-foreground">AdSense・{slotBox.name}</div>
             <div className="mt-1 text-xs tabular-nums text-muted-foreground">
-              {widthLabel} × {slotBox.height}px (本番で確保する箱)
+              {label(slotBox.width, slotBox.height)}
+              {mobileDiffers
+                ? ` (モバイル ${label(slotBox.mobileWidth ?? slotBox.width, slotBox.mobileHeight ?? slotBox.height)})`
+                : ""}
+              ・本番で確保する箱
             </div>
           </div>
         </div>

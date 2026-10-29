@@ -8,7 +8,7 @@
  * 予約高と外枠 class はこのファイルだけが持ち、両方がここを読む。
  */
 
-import { AD_SIZES, type AdFormat } from "../types";
+import { AD_SIZES, type AdFormat, type AdSlotBoxProp } from "../types";
 
 /**
  * 広告枠の最小高さ（CLS 対策）
@@ -56,3 +56,19 @@ export const AD_CONTAINER_CLASS = "ad-container w-full flex flex-col items-cente
 export function isFlexibleAdFormat(format: AdFormat): boolean {
   return format === "infeed" || format === "article" || format === "multiplex";
 }
+
+/**
+ * 広告の枠の台帳の箱を、予約の高さ (と代わりの表示の幅) の CSS 変数に写す。モバイルで寸法が違う枠は md (768px) で切り替える。
+ * class は SLOT_BOX_HEIGHT_CLASS / SLOT_BOX_WIDTH_CLASS と組で使う (本番の予約と代わりの表示が同じ値になる)。
+ */
+export function slotBoxStyle(box: AdSlotBoxProp): Record<string, string> {
+  const px = (value: number | "full") => (value === "full" ? "100%" : `${value}px`);
+  return {
+    "--ad-h": `${box.height}px`,
+    "--ad-h-mobile": `${box.mobileHeight ?? box.height}px`,
+    "--ad-w": px(box.width),
+    "--ad-w-mobile": px(box.mobileWidth ?? box.width),
+  };
+}
+export const SLOT_BOX_HEIGHT_CLASS = "min-h-(--ad-h-mobile) md:min-h-(--ad-h)";
+export const SLOT_BOX_WIDTH_CLASS = "w-(--ad-w-mobile) md:w-(--ad-w) max-w-full";

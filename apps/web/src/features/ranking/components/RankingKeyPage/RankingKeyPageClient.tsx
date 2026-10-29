@@ -17,6 +17,7 @@ import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 import type { AreaType } from "@/features/area";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
     ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
@@ -204,6 +205,7 @@ export function RankingKeyPageClient({
                     <AdSenseAd
                         format={RANKING_PAGE_TABLE_SIDE.format}
                         slotId={RANKING_PAGE_TABLE_SIDE.slotId}
+                        slotBox={adSlotBox("adsense-rail-rect")}
                     />
                 </div>
             )}

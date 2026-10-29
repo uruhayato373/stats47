@@ -583,10 +583,10 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 **広告の枠の台帳 (2026-10-29)**: 大きさの語彙・枠の種類 (確保する箱の寸法・受け入れる大きさ・表示する画面幅)・
 ページごとの置き方・共通のルール (枠同士を隣り合わせにしない・最初の画面に置かない・本文の AdSense の上限) の正本は
-`config/ads/placements.json` (schema `config/schema/ads.placements.schema.json`)。台帳に載せたページの種類 (今はテーマ) は、
+`config/ads/placements.json` (schema `config/schema/ads.placements.schema.json`)。台帳に載せたページの種類 (今はテーマとランキング) は、
 下の表よりも台帳が正で、`apps/web/src/lib/__tests__/ad-placements.test.ts` がコードの枠の並び・隣接・登録の大きさを照合する。
 新しい大きさを登録する前に台帳の `sizes` に載せて判断する (一点物 7 件は `undecided` としてオーナー判断待ち)。
-開発中の広告の代わりの表示は、台帳の箱 (本番の実測) の大きさの破線の箱で描く。
+開発中の広告の代わりの表示と本番の予約の高さは、台帳の箱 (本番の実測。モバイルで違う枠は `mobileHeight`) で描く。置き方は枠を置くファイル (`source`) と目印 (`marker`) で照合し、枠同士の隣り合わせは理由付きの例外 (`knownAdjacentReason`) だけを許す (ランキングの本文末と右レールに 3 件。直すかはオーナー判断待ち)。
 下の表の themes の「theme-end 300×250」は、2026-10-29 時点のコードには存在しない (台帳はコードの実際の配置を書いた)。
 
 ### 枠の現状
