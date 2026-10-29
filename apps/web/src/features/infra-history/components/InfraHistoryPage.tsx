@@ -1,4 +1,8 @@
-import { REGIONS } from '@stats47/area';
+import {
+  INFRA_SCOPE_REGIONS,
+  type InfraHistorySummary,
+  type InfraNetworkDefinition,
+} from '@stats47/gis/infra-history';
 import { BookOpen, FileText, MapPin } from 'lucide-react';
 
 import { ExternalAnchor } from '@/components/atoms/ExternalAnchor';
@@ -8,10 +12,11 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { SectionCard, SurfaceCard } from '@/components/surface';
 
-import { R2_PUBLIC_BASE_URL } from '@/config/site';
-
 import {
+  PREFECTURE_BOUNDARY_PATH,
   infraHistoryPath,
+  infraScopeNavItems,
+  municipalityBoundaryPath,
   prefName,
   type ResolvedInfraScope,
 } from '../lib/infra-history-scope';
@@ -19,15 +24,6 @@ import {
 import { InfraHistoryExplorer, type InfraHistoryRow } from './InfraHistoryExplorer';
 
 import type { InfraHistoryEvidence } from '../lib/load-infra-history';
-import type { InfraHistorySummary, InfraNetworkDefinition } from '@stats47/gis/infra-history';
-
-/** 県境 (表示用。計算は git の県ポリゴンで行う) */
-const BOUNDARY_KEY = 'gis/mlit/20240101/prefecture.topojson';
-
-function publicUrl(key: string): string {
-  const base = process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? R2_PUBLIC_BASE_URL;
-  return `${base.replace(/\/+$/, '')}/${key}`;
-}
 
 function scopeRows(
   network: InfraNetworkDefinition,
@@ -36,8 +32,8 @@ function scopeRows(
 ): { rows: InfraHistoryRow[]; label: string; columnLabel: string } {
   if (scope.kind === 'prefecture') return { rows: [], label: '', columnLabel: '' };
   return {
-    label: scope.kind === 'national' ? '都道府県別' : `${scope.name}の府県別`,
-    columnLabel: scope.kind === 'national' ? '都道府県' : '府県',
+    label: scope.kind === 'national' ? '都道府県別' : `${scope.name}の県別`,
+    columnLabel: scope.kind === 'national' ? '都道府県' : '県',
     rows: scope.prefCodes.map((code) => ({
       code,
       name: prefName(code),
@@ -47,6 +43,10 @@ function scopeRows(
   };
 }
 
+/** 地方・1 道県の区分の行き先 (北海道・沖縄は県のページ) */
+function regionHref(network: InfraNetworkDefinition, region: (typeof INFRA_SCOPE_REGIONS)[number]): string {
+  return infraHistoryPath(network.key, region.prefCodes.length === 1 ? region.prefCodes[0] : region.code);
+}
 
 interface InfraHistoryPageProps {
   readonly network: InfraNetworkDefinition;
@@ -67,7 +67,8 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
   const { rows, label, columnLabel } = summary
     ? scopeRows(network, scope, summary)
     : { rows: [], label: '', columnLabel: '' };
-  const region = scope.regionCode ? REGIONS.find((item) => item.regionCode === scope.regionCode) : null;
+  const region = scope.regionCode ? INFRA_SCOPE_REGIONS.find((item) => item.code === scope.regionCode) : null;
+  const regionHasPages = region !== null && region !== undefined && region.prefCodes.length > 1;
   const title =
     scope.kind === 'national'
       ? `${network.label}網の変遷（${network.years.first}〜${network.years.last}年）`
@@ -86,8 +87,8 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
                 ? [{ label: network.label }]
                 : [
                     { label: network.label, href: infraHistoryPath(network.key) },
-                    ...(scope.kind === 'prefecture' && region
-                      ? [{ label: region.regionName, href: infraHistoryPath(network.key, region.regionCode) }]
+                    ...(scope.kind === 'prefecture' && region && regionHasPages
+                      ? [{ label: region.name, href: infraHistoryPath(network.key, region.code) }]
                       : []),
                     { label: scope.name },
                   ]),
@@ -99,35 +100,16 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
     >
       <PanelGrid>
         <div className="space-y-1">
-          <LinkRowNav
-            label="表示する範囲"
-            items={[
-              {
-                key: 'national',
-                label: '全国',
-                href: infraHistoryPath(network.key),
-                current: scope.kind === 'national',
-              },
-              ...REGIONS.map((item) => ({
-                key: item.regionCode,
-                label: item.regionName,
-                href: infraHistoryPath(network.key, item.regionCode),
-                current: scope.kind === 'region' && scope.regionCode === item.regionCode,
-              })),
-            ]}
-          />
-          {region && scope.kind !== 'national' && (
+          <LinkRowNav label="表示する範囲" items={infraScopeNavItems(network.key, scope)} />
+          {region && regionHasPages && scope.kind !== 'national' && (
             <LinkRowNav
-              label={`${region.regionName}の府県`}
-              items={region.prefectures.map((code5) => {
-                const code = code5.slice(0, 2);
-                return {
-                  key: code,
-                  label: prefName(code),
-                  href: infraHistoryPath(network.key, code),
-                  current: scope.kind === 'prefecture' && scope.slug === code,
-                };
-              })}
+              label={`${region.name}の県`}
+              items={region.prefCodes.map((code) => ({
+                key: code,
+                label: prefName(code),
+                href: infraHistoryPath(network.key, code),
+                current: scope.kind === 'prefecture' && scope.slug === code,
+              }))}
             />
           )}
         </div>
@@ -142,8 +124,9 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
             rows={rows}
             rowsLabel={label}
             rowsColumnLabel={columnLabel}
-            topologyUrl={publicUrl(scope.topologyKey)}
-            boundaryUrl={publicUrl(BOUNDARY_KEY)}
+            topologyUrl={scope.topologyPath}
+            boundaryUrl={PREFECTURE_BOUNDARY_PATH}
+            municipalityUrl={scope.kind === 'prefecture' && scope.slug ? municipalityBoundaryPath(scope.slug) : null}
             prefCodes={scope.prefCodes}
           />
         ) : (
@@ -154,8 +137,16 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
 
         <SectionCard title="地図の読み方" icon={<BookOpen />} headingAs="h2">
           <ul className="list-disc space-y-1 pl-5">
-            <li>年を動かすと、その年に存在した区間を種別の色で描きます。赤い線はその年に開通した区間、点線はその年に廃止・変更された区間です。</li>
+            <li>年を動かすと、その年に存在した区間を種別の色で描きます。</li>
+            <li>
+              赤い線はその年に新しくできた区間 (開通・延伸)、点線はその年に無くなった区間 (廃止・短縮) です。
+              会社名の変更や経営の移管など、同じ場所の区間の記録が付け替わっただけのものは強調しません
+              (原典の関係 ID で同じ区間の記録をたどり、前後の年の線から 100m 以上離れた部分だけを新しくできた・無くなった部分とします)。
+            </li>
             <li>延長は区間の線を都道府県の境で分けて計算しています。境界をまたぐ区間は、それぞれの県に入る長さだけを数えます。</li>
+            {scope.kind === 'prefecture' && (
+              <li>細い線は市区町村の境界です (政令指定都市は市全体で 1 つ。国土数値情報の行政区域、2024年1月1日時点)。</li>
+            )}
             {network.cautions.map((caution) => (
               <li key={caution}>{caution}</li>
             ))}
@@ -196,25 +187,24 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
 
         <SectionCard title="都道府県から選ぶ" icon={<MapPin />} headingAs="h2">
           <div className="grid gap-3 @md:grid-cols-2">
-            {REGIONS.map((item) => (
-              <div key={item.regionCode}>
-                <Link
-                  href={infraHistoryPath(network.key, item.regionCode)}
-                  className="font-medium hover:underline"
-                >
-                  {item.regionName}
+            {INFRA_SCOPE_REGIONS.map((item) => (
+              <div key={item.code}>
+                <Link href={regionHref(network, item)} className="font-medium hover:underline">
+                  {item.name}
                 </Link>
-                <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
-                  {item.prefectures.map((code5) => (
-                    <Link
-                      key={code5}
-                      href={infraHistoryPath(network.key, code5.slice(0, 2))}
-                      className="text-primary hover:underline"
-                    >
-                      {prefName(code5.slice(0, 2))}
-                    </Link>
-                  ))}
-                </p>
+                {item.prefCodes.length > 1 && (
+                  <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+                    {item.prefCodes.map((code) => (
+                      <Link
+                        key={code}
+                        href={infraHistoryPath(network.key, code)}
+                        className="text-primary hover:underline"
+                      >
+                        {prefName(code)}
+                      </Link>
+                    ))}
+                  </p>
+                )}
               </div>
             ))}
           </div>

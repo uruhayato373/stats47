@@ -44,7 +44,14 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
       permissionEvidence: null,
       blockedReason: "非商用データの画面公開は国土数値情報の事務局の書面回答を得てから行う",
     },
-    attributes: { start: "N06_002", end: "N06_003", name: "N06_007", category: "N06_008" },
+    attributes: {
+      start: "N06_002",
+      end: "N06_003",
+      name: "N06_007",
+      category: "N06_008",
+      relation: "N06_004",
+      relationNote: "N06_011",
+    },
     categories: [
       { code: "1", label: "高速自動車国道", color: "hsl(var(--chart-3))" },
       { code: "2", label: "並行する自動車専用道路", color: "hsl(var(--chart-2))" },
@@ -89,7 +96,14 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
       permissionEvidence: null,
       blockedReason: "非商用データの画面公開は国土数値情報の事務局の書面回答を得てから行う",
     },
-    attributes: { start: "N05_005b", end: "N05_005e", name: "N05_002", category: "N05_001" },
+    attributes: {
+      start: "N05_005b",
+      end: "N05_005e",
+      name: "N05_002",
+      category: "N05_001",
+      relation: "N05_006",
+      relationNote: "N05_010",
+    },
     categories: [
       { code: "1", label: "JR新幹線", color: "hsl(var(--chart-3))" },
       { code: "2", label: "JR在来線", color: "hsl(var(--chart-2))" },

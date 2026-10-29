@@ -68,6 +68,10 @@ export interface InfraAttributeMap {
   readonly end: string;
   readonly name: string;
   readonly category: string;
+  /** 関係 ID (同じ区間の記録をつなぐ ID) */
+  readonly relation: string;
+  /** 関係備考 (主たる関係 ID 以外の関係 ID。"+" 区切り) */
+  readonly relationNote: string;
 }
 
 export interface InfraCategory {
@@ -106,6 +110,19 @@ export interface InfraPieceProperties {
   /** 種別コード */
   readonly c: string;
   /** 路線名 */
+  readonly n: string;
+}
+
+/**
+ * 地図で強調する開通・廃止の線 (TopoJSON の `events` オブジェクト) の属性。
+ * 路線網の線 (`lines`) とは別に持ち、延長の集計には使わない。
+ */
+export interface InfraEventProperties {
+  /** open=開通 / extend=延伸 / close=廃止 / shorten=短縮 */
+  readonly k: "open" | "extend" | "close" | "shorten";
+  /** 強調する年 (開通・延伸は開始年、廃止・短縮は無くなった年) */
+  readonly y: number;
+  readonly c: string;
   readonly n: string;
 }
 
@@ -164,6 +181,8 @@ export interface InfraHistoryManifest {
     readonly unassigned: number;
     readonly coastlineToleranceKm: number;
   };
+  /** 開通・延伸・廃止・短縮の件数と延長 (属性だけの変更は数えない) */
+  readonly transitions: Readonly<Record<"open" | "extend" | "close" | "shorten", { readonly count: number; readonly km: number }>>;
   /** 保存則: 県の合計 + 未帰属 = 全国 = 原典 (全年) */
   readonly conservation: {
     readonly maxAbsDiffKm: number;

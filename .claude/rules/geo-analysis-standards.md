@@ -163,6 +163,12 @@ Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形�
 それまでは `noindex` で、`ksj-publication-guard.ts` が `app/geo/history/` を拒否する。
 区間は頂点間の線分の中点で県を決め（ポリゴン → 海岸線5km、決まらなければ未帰属）、47県＋未帰属＝全国を保存則で検査する。
 原典の「999（年不明）」は推測で年を当てず除外し、manifest と画面に件数・路線名を出す。
+原典は会社名・事業者などの属性が変わると同じ区間でも記録を分けるので、記録の開始年を開通と扱わない。
+関係 ID と関係備考で同じ区間の記録をたどり、前年に無ければ開通・前後の線から100m以上離れた部分だけを延伸・短縮、翌年に無ければ廃止とする (`classifyTransitions`)。
+強調線は TopoJSON の `events` に分けて持ち、延長の集計には使わない。
+範囲は共通 7 地方区分から北海道・沖縄を切り出した 9 区分 (`scopes.ts`)。1 道県の区分は県のページを使う。
+県のページは `/api/mf-topo/<県>` の市区町村境界 (政令指定都市は市全体) を補助として重ねる。
+地図データは R2 が CORS を返さないため `/api/geo/history/<network>/<file>` で同一オリジンから配る。
 生成は `node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all`。
 
 ### 読者の操作と導線

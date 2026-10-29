@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import {
   buildLengthSeries,
+  classifyTransitions,
   haversineKm,
   isActiveInYear,
   maxSeriesDiffKm,
@@ -13,6 +14,7 @@ import {
 import { infraHistoryKeys, infraNetworkOfKey } from "../keys";
 import { INFRA_NETWORKS } from "../networks";
 import { parseInfraHistorySummary } from "../parse";
+import { INFRA_REGIONS, INFRA_SCOPE_REGIONS } from "../scopes";
 
 /** 経度 135 未満を "27"、以上を "28"、経度 140 以上をどの県にも入らない海とみなす */
 const assignByLongitude = (lon: number): SegmentAssignment | null => {
@@ -86,6 +88,103 @@ describe("buildLengthSeries", () => {
     );
     expect(maxSeriesDiffKm(sumLengthSeries([a, b], years.length, ["1"]), national)).toBe(0);
     expect(maxSeriesDiffKm(a, national)).toBe(4);
+  });
+});
+
+describe("classifyTransitions", () => {
+  // 東西に 0.1 度ずつ (約 9km) 並ぶ線。y=35 の直線上
+  const line = (fromLon: number, toLon: number): Position[] =>
+    Array.from({ length: Math.round((toLon - fromLon) / 0.1) + 1 }, (_, i) => [fromLon + i * 0.1, 35] as const);
+
+  test("前年に同じ関係 ID の記録が無い区間の始まりは開通、翌年に無い区間の終わりは廃止", () => {
+    const events = classifyTransitions(
+      [{ start: 2000, end: 2009, relationIds: ["A"], lines: [line(135, 135.5)] }],
+      1990,
+      2024,
+    );
+    expect(events.map((e) => [e.kind, e.year])).toEqual([
+      ["open", 2000],
+      ["close", 2010],
+    ]);
+  });
+
+  test("会社名の変更のように同じ場所で記録が付け替わっただけなら開通・廃止にしない", () => {
+    const events = classifyTransitions(
+      [
+        { start: 1990, end: 2009, relationIds: ["A"], lines: [line(135, 135.5)] },
+        { start: 2010, end: 9999, relationIds: ["A"], lines: [line(135, 135.5)] },
+      ],
+      1990,
+      2024,
+    );
+    expect(events).toEqual([]);
+  });
+
+  test("同じ関係 ID で線が伸びたら、伸びた部分だけを延伸として返す", () => {
+    const [event] = classifyTransitions(
+      [
+        { start: 1990, end: 2023, relationIds: ["A"], lines: [line(135, 135.5)] },
+        { start: 2024, end: 9999, relationIds: ["A"], lines: [line(135, 136)] },
+      ],
+      1990,
+      2024,
+    );
+    expect(event.kind).toBe("extend");
+    expect(event.year).toBe(2024);
+    // 伸びた 135.5〜136 の約 45km だけ (元の区間を含めない)
+    expect(event.km).toBeGreaterThan(40);
+    expect(event.km).toBeLessThan(50);
+  });
+
+  test("同じ関係 ID で線が縮んだら、無くなった部分だけを短縮として返す", () => {
+    const [event] = classifyTransitions(
+      [
+        { start: 1990, end: 2023, relationIds: ["A"], lines: [line(135, 136)] },
+        { start: 2024, end: 9999, relationIds: ["A"], lines: [line(135, 135.5)] },
+      ],
+      1990,
+      2024,
+    );
+    expect(event.kind).toBe("shorten");
+    expect(event.year).toBe(2024);
+    expect(event.km).toBeGreaterThan(40);
+  });
+
+  test("関係備考の別 ID でつながる記録も同じ区間として扱う", () => {
+    const events = classifyTransitions(
+      [
+        { start: 1990, end: 2009, relationIds: ["A"], lines: [line(135, 135.5)] },
+        { start: 2010, end: 9999, relationIds: ["B", "A"], lines: [line(135, 135.5)] },
+      ],
+      1990,
+      2024,
+    );
+    expect(events).toEqual([]);
+  });
+
+  test("原典の最初の年に始まる記録と継続中の記録は開通・廃止にしない", () => {
+    const events = classifyTransitions(
+      [{ start: 1950, end: 9999, relationIds: ["A"], lines: [line(135, 135.5)] }],
+      1950,
+      2024,
+    );
+    expect(events).toEqual([]);
+  });
+});
+
+describe("地方の区分", () => {
+  test("北海道と沖縄は単独の区分になり、地方のページは 2 都道府県以上の区分だけ", () => {
+    expect(INFRA_SCOPE_REGIONS.map((region) => region.name)).toEqual([
+      "北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄",
+    ]);
+    expect(INFRA_REGIONS.map((region) => region.code)).not.toContain("hokkaido");
+    expect(INFRA_REGIONS.map((region) => region.code)).not.toContain("okinawa");
+  });
+
+  test("47 都道府県がちょうど 1 つの区分に入る", () => {
+    const codes = INFRA_SCOPE_REGIONS.flatMap((region) => region.prefCodes);
+    expect(codes).toHaveLength(47);
+    expect(new Set(codes).size).toBe(47);
   });
 });
 

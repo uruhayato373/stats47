@@ -16,7 +16,6 @@ import { createHash } from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { REGIONS } from "@stats47/area";
 import * as topojsonClient from "topojson-client";
 import * as topojsonServer from "topojson-server";
 import * as topojsonSimplify from "topojson-simplify";
@@ -29,6 +28,7 @@ import {
 } from "../../mlit-ksj/prefecture-assign";
 import {
   buildLengthSeries,
+  classifyTransitions,
   lineLengthKm,
   maxSeriesDiffKm,
   UNKNOWN_YEAR,
@@ -43,8 +43,10 @@ import {
 } from "../core";
 import { infraHistoryKeys } from "../keys";
 import { INFRA_NETWORKS } from "../networks";
+import { INFRA_REGIONS } from "../scopes";
 import type {
   InfraArtifactRecord,
+  InfraEventProperties,
   InfraHistoryManifest,
   InfraHistorySummary,
   InfraLengthSeries,
@@ -76,8 +78,11 @@ interface SourceFeature {
   readonly end: number;
   readonly category: string;
   readonly name: string;
+  readonly relationIds: string[];
   readonly lines: Position[][];
 }
+
+type Piece<P> = { props: P; coords: readonly Position[] };
 
 function parseArgs(argv: readonly string[]): { networks: InfraNetworkDefinition[] } {
   const index = argv.indexOf("--network");
@@ -148,7 +153,15 @@ async function readSourceFeatures(
     } else if (start === null || end === null || end < start) problems.push(`#${index} 年が不正 (${start}-${end})`);
     else if (!codes.has(category)) problems.push(`#${index} 台帳に無い種別 ${category}`);
     else if (!lines) problems.push(`#${index} 線ではない形状 ${geometry?.type}`);
-    else features.push({ start, end, category, name, lines });
+    else {
+      const relationIds = [
+        String(feature.properties[attributes.relation] ?? ""),
+        ...String(feature.properties[attributes.relationNote] ?? "").split("+"),
+      ]
+        .map((id) => id.trim())
+        .filter((id) => id !== "");
+      features.push({ start, end, category, name, relationIds, lines });
+    }
   });
   if (problems.length > 0) {
     throw new Error(`原典の読み取りで ${problems.length} 件を解釈できません:\n${problems.slice(0, 20).join("\n")}`);
@@ -156,12 +169,8 @@ async function readSourceFeatures(
   return { features, unknownYear };
 }
 
-function toTopology(
-  pieces: ReadonlyArray<{ props: InfraPieceProperties; coords: readonly Position[] }>,
-  quantization: number,
-  quantile: number,
-): string {
-  const collection = {
+function toCollection<P>(pieces: ReadonlyArray<Piece<P>>) {
+  return {
     type: "FeatureCollection" as const,
     features: pieces.map((piece) => ({
       type: "Feature" as const,
@@ -169,7 +178,19 @@ function toTopology(
       geometry: { type: "LineString" as const, coordinates: piece.coords.map((p) => [p[0], p[1]]) },
     })),
   };
-  const topology = topojsonServer.topology({ lines: collection as never }, quantization);
+}
+
+/** 路線網 (`lines`) と開通・廃止の強調線 (`events`) を 1 つの TopoJSON にする */
+function toTopology(
+  pieces: ReadonlyArray<Piece<InfraPieceProperties>>,
+  events: ReadonlyArray<Piece<InfraEventProperties>>,
+  quantization: number,
+  quantile: number,
+): string {
+  const topology = topojsonServer.topology(
+    { lines: toCollection(pieces) as never, events: toCollection(events) as never },
+    quantization,
+  );
   const presimplified = topojsonSimplify.presimplify(topology as never);
   const minWeight = topojsonSimplify.quantile(presimplified, quantile);
   // presimplify は座標を量子化前の小数へ戻すので、簡略化の後に量子化し直す
@@ -197,8 +218,8 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
 
   const sourceSpans: YearSpan[] = [];
   const spansByPref = new Map<string | null, YearSpan[]>();
-  const piecesByPref = new Map<string, Array<{ props: InfraPieceProperties; coords: readonly Position[] }>>();
-  const nationalPieces: Array<{ props: InfraPieceProperties; coords: readonly Position[] }> = [];
+  const piecesByPref = new Map<string, Array<Piece<InfraPieceProperties>>>();
+  const nationalPieces: Array<Piece<InfraPieceProperties>> = [];
   const counts = { segments: 0, polygon: 0, coastline: 0, unassigned: 0 };
 
   for (const feature of features) {
@@ -223,16 +244,50 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
     }
   }
 
+  // 開通・延伸・廃止・短縮 (属性だけの変更は除く)。強調線も県境で分け、県・地方の地図に入れる
+  const transitions = classifyTransitions(
+    features.map((feature) => ({
+      start: feature.start,
+      end: feature.end,
+      relationIds: feature.relationIds,
+      lines: feature.lines,
+    })),
+    network.years.first,
+    network.years.last,
+  );
+  const nationalEvents: Array<Piece<InfraEventProperties>> = [];
+  const eventsByPref = new Map<string, Array<Piece<InfraEventProperties>>>();
+  const transitionTotals = {
+    open: { count: 0, km: 0 },
+    extend: { count: 0, km: 0 },
+    close: { count: 0, km: 0 },
+    shorten: { count: 0, km: 0 },
+  };
+  for (const event of transitions) {
+    const feature = features[event.recordIndex];
+    const props: InfraEventProperties = { k: event.kind, y: event.year, c: feature.category, n: feature.name };
+    transitionTotals[event.kind].count += 1;
+    transitionTotals[event.kind].km += event.km;
+    for (const line of event.lines) {
+      nationalEvents.push({ props, coords: line });
+      for (const piece of splitLineByPrefecture(line, assign)) {
+        if (!piece.prefCode) continue;
+        eventsByPref.set(piece.prefCode, [...(eventsByPref.get(piece.prefCode) ?? []), { props, coords: piece.coords }]);
+      }
+    }
+  }
+  for (const total of Object.values(transitionTotals)) total.km = Math.round(total.km * 10) / 10;
+
   const prefectures: Record<string, InfraLengthSeries> = Object.fromEntries(
     PREF_CODES.map((code) => [code, buildLengthSeries(spansByPref.get(code) ?? [], years, codes)]),
   );
   const unassigned = buildLengthSeries(spansByPref.get(null) ?? [], years, codes);
   const national = buildLengthSeries(sourceSpans, years, codes);
   const regions: Record<string, InfraLengthSeries> = Object.fromEntries(
-    REGIONS.map((region) => [
-      region.regionCode,
+    INFRA_REGIONS.map((region) => [
+      region.code,
       sumLengthSeries(
-        region.prefectures.map((code5) => prefectures[code5.slice(0, 2)]),
+        region.prefCodes.map((code) => prefectures[code]),
         years.length,
         codes,
       ),
@@ -260,14 +315,15 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
     { key: infraHistoryKeys.summary(network.key), body: `${JSON.stringify(summary)}\n` },
     {
       key: infraHistoryKeys.national(network.key),
-      body: toTopology(nationalPieces, QUANTIZATION.national, SIMPLIFY_QUANTILE.national),
+      body: toTopology(nationalPieces, nationalEvents, QUANTIZATION.national, SIMPLIFY_QUANTILE.national),
       features: nationalPieces.length,
     },
-    ...REGIONS.map((region) => {
-      const pieces = region.prefectures.flatMap((code5) => piecesByPref.get(code5.slice(0, 2)) ?? []);
+    ...INFRA_REGIONS.map((region) => {
+      const pieces = region.prefCodes.flatMap((code) => piecesByPref.get(code) ?? []);
+      const events = region.prefCodes.flatMap((code) => eventsByPref.get(code) ?? []);
       return {
-        key: infraHistoryKeys.region(network.key, region.regionCode),
-        body: toTopology(pieces, QUANTIZATION.detail, SIMPLIFY_QUANTILE.detail),
+        key: infraHistoryKeys.region(network.key, region.code),
+        body: toTopology(pieces, events, QUANTIZATION.detail, SIMPLIFY_QUANTILE.detail),
         features: pieces.length,
       };
     }),
@@ -275,7 +331,7 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
       const pieces = piecesByPref.get(code) ?? [];
       return {
         key: infraHistoryKeys.prefecture(network.key, code),
-        body: toTopology(pieces, QUANTIZATION.detail, SIMPLIFY_QUANTILE.detail),
+        body: toTopology(pieces, eventsByPref.get(code) ?? [], QUANTIZATION.detail, SIMPLIFY_QUANTILE.detail),
         features: pieces.length,
       };
     }),
@@ -315,6 +371,7 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
       })),
     },
     assignment: { ...counts, coastlineToleranceKm: DEFAULT_COASTLINE_TOLERANCE_KM },
+    transitions: transitionTotals,
     conservation: { maxAbsDiffKm, toleranceKm: CONSERVATION_TOLERANCE_KM, passed: conservationPassed },
     outputs: records,
   };

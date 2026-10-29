@@ -156,6 +156,142 @@ export function maxSeriesDiffKm(a: InfraLengthSeries, b: InfraLengthSeries): num
   return max;
 }
 
+// ─── 開通・廃止の判定 ─────────────────────────────────────────
+//
+// 原典は会社名・事業者・車線などの属性が変わると、同じ区間でも記録を分ける。記録の開始年を
+// そのまま「開通」と扱うと、箱根登山鉄道→小田急箱根のような名前の変更まで開通に見える。
+// 同じ区間の記録どうしは「関係 ID」(と関係備考に並ぶ別の関係 ID) で結ばれているので、
+//   - 開始年: 前年まで同じ関係 ID の記録が無ければ「開通」。あれば、前年の線から離れた部分だけを「延伸」
+//   - 終了年: 翌年に同じ関係 ID の記録が無ければ「廃止」。あれば、翌年の線から離れた部分だけを「短縮」
+// とし、どちらでもない記録の区切りは「変更」(地図では強調しない) とする。
+
+/** 線が「同じ場所」とみなす距離 (km)。原典の座標の精度と、版ごとの細かな引き直しを吸収する */
+export const SAME_PLACE_TOLERANCE_KM = 0.1;
+/** 延伸・短縮と扱う最小の長さ (km)。これより短い差は線の引き直しとみなす */
+export const MIN_TRANSITION_KM = 0.5;
+
+export interface TransitionRecord {
+  readonly start: number;
+  readonly end: number;
+  /** 関係 ID と関係備考の別 ID */
+  readonly relationIds: readonly string[];
+  readonly lines: readonly (readonly Position[])[];
+}
+
+export type TransitionKind = "open" | "extend" | "close" | "shorten";
+
+export interface TransitionEvent {
+  readonly recordIndex: number;
+  readonly kind: TransitionKind;
+  /** 地図で強調する年。開通・延伸は開始年、廃止・短縮は最後に存在した年の翌年 */
+  readonly year: number;
+  /** 強調する部分の線 (開通・廃止は記録の線全体、延伸・短縮は離れた部分だけ) */
+  readonly lines: readonly (readonly Position[])[];
+  readonly km: number;
+}
+
+const KM_PER_DEGREE = 111.2;
+
+/** 点から線群への最短距離 (km)。経度は緯度の cos で縮めた平面近似 (数百 m の判定に十分) */
+export function distanceToLinesKm(point: Position, lines: readonly (readonly Position[])[]): number {
+  const cosLat = Math.cos(point[1] * DEG_TO_RAD);
+  let best = Infinity;
+  for (const line of lines) {
+    for (let i = 1; i < line.length; i++) {
+      const ax = (line[i - 1][0] - point[0]) * cosLat;
+      const ay = line[i - 1][1] - point[1];
+      const dx = (line[i][0] - point[0]) * cosLat - ax;
+      const dy = line[i][1] - point[1] - ay;
+      const len2 = dx * dx + dy * dy;
+      const t = len2 > 0 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len2)) : 0;
+      const d = Math.hypot(ax + t * dx, ay + t * dy) * KM_PER_DEGREE;
+      if (d < best) best = d;
+    }
+  }
+  return best;
+}
+
+/** lines のうち、others から tolerance を超えて離れた線分をつないだ部分線と、その長さ */
+export function linesAwayFrom(
+  lines: readonly (readonly Position[])[],
+  others: readonly (readonly Position[])[],
+  toleranceKm = SAME_PLACE_TOLERANCE_KM,
+): { lines: Position[][]; km: number } {
+  const out: Position[][] = [];
+  let km = 0;
+  for (const line of lines) {
+    let current: Position[] | null = null;
+    for (let i = 1; i < line.length; i++) {
+      const a = line[i - 1];
+      const b = line[i];
+      const mid: Position = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      const isAway = others.length === 0 || distanceToLinesKm(mid, others) > toleranceKm;
+      if (!isAway) {
+        current = null;
+        continue;
+      }
+      km += haversineKm(a, b);
+      if (current) current.push(b);
+      else {
+        current = [a, b];
+        out.push(current);
+      }
+    }
+  }
+  return { lines: out, km };
+}
+
+function shareRelation(a: TransitionRecord, b: TransitionRecord): boolean {
+  return a.relationIds.some((id) => b.relationIds.includes(id));
+}
+
+/**
+ * 全記録の開始・終了を開通・延伸・廃止・短縮に分ける。変更 (同じ場所の記録の付け替え) は返さない。
+ * `firstYear` 以前から存在した記録 (原典が開始年を丸めた記録) の開始は開通にしない。
+ * `lastYear` まで続く記録 (継続中) の終了は廃止にしない。
+ */
+export function classifyTransitions(
+  records: readonly TransitionRecord[],
+  firstYear: number,
+  lastYear: number,
+): TransitionEvent[] {
+  const byRelation = new Map<string, number[]>();
+  records.forEach((record, index) => {
+    for (const id of record.relationIds) byRelation.set(id, [...(byRelation.get(id) ?? []), index]);
+  });
+  const related = (record: TransitionRecord, pick: (other: TransitionRecord) => boolean) => {
+    const indexes = new Set(record.relationIds.flatMap((id) => byRelation.get(id) ?? []));
+    return [...indexes].map((i) => records[i]).filter((o) => o !== record && shareRelation(o, record) && pick(o));
+  };
+
+  const events: TransitionEvent[] = [];
+  records.forEach((record, recordIndex) => {
+    if (record.start > firstYear) {
+      const before = related(record, (o) => o.end === record.start - 1);
+      const away = linesAwayFrom(record.lines, before.flatMap((o) => o.lines));
+      if (before.length === 0) {
+        events.push({ recordIndex, kind: "open", year: record.start, lines: record.lines.map((l) => [...l]), km: lineSetKm(record.lines) });
+      } else if (away.km >= MIN_TRANSITION_KM) {
+        events.push({ recordIndex, kind: "extend", year: record.start, lines: away.lines, km: away.km });
+      }
+    }
+    if (record.end < lastYear) {
+      const after = related(record, (o) => o.start === record.end + 1);
+      const away = linesAwayFrom(record.lines, after.flatMap((o) => o.lines));
+      if (after.length === 0) {
+        events.push({ recordIndex, kind: "close", year: record.end + 1, lines: record.lines.map((l) => [...l]), km: lineSetKm(record.lines) });
+      } else if (away.km >= MIN_TRANSITION_KM) {
+        events.push({ recordIndex, kind: "shorten", year: record.end + 1, lines: away.lines, km: away.km });
+      }
+    }
+  });
+  return events;
+}
+
+function lineSetKm(lines: readonly (readonly Position[])[]): number {
+  return lines.reduce((sum, line) => sum + lineLengthKm(line), 0);
+}
+
 export function yearRange(first: number, last: number): number[] {
   return Array.from({ length: last - first + 1 }, (_, i) => first + i);
 }

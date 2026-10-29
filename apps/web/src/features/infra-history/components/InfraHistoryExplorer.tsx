@@ -20,7 +20,12 @@ import { feature as topoFeature } from 'topojson-client';
 import Link from '@/components/atoms/SiteLink';
 import { STAT_VALUE_CLASS } from '@/components/surface';
 
-import type { InfraCategory, InfraLengthSeries, InfraPieceProperties } from '@stats47/gis/infra-history';
+import type {
+  InfraCategory,
+  InfraEventProperties,
+  InfraLengthSeries,
+  InfraPieceProperties,
+} from '@stats47/gis/infra-history';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 
@@ -42,10 +47,12 @@ interface InfraHistoryExplorerProps {
   readonly rowsLabel: string;
   /** 表の地域の列の見出し (都道府県 / 府県) */
   readonly rowsColumnLabel: string;
-  /** 地図の線 (R2 公開 URL) */
+  /** 地図の線 (同一オリジンの API) */
   readonly topologyUrl: string;
-  /** 県境 (R2 公開 URL) */
+  /** 県境 (同一オリジンの API) */
   readonly boundaryUrl: string;
+  /** 市区町村境界 (県の範囲だけ。同一オリジンの API) */
+  readonly municipalityUrl: string | null;
   readonly prefCodes: readonly string[];
 }
 
@@ -57,40 +64,62 @@ const PLAY_INTERVAL_MS = 280;
 const PREF_CODE_PROPERTY = 'N03_007';
 
 type LineFeature = Feature<Geometry, InfraPieceProperties>;
+type EventFeature = Feature<Geometry, InfraEventProperties>;
 type BoundaryFeature = Feature<Geometry, Record<string, string>>;
 
 interface LoadedMap {
   readonly lines: readonly { readonly d: string; readonly props: InfraPieceProperties }[];
+  /** 開通・延伸・廃止・短縮の強調線 (属性だけの変更は含まない) */
+  readonly events: readonly { readonly d: string; readonly props: InfraEventProperties }[];
   readonly boundaries: readonly { readonly d: string; readonly code: string }[];
+  /** 市区町村境界 (県の範囲だけ) */
+  readonly municipalities: readonly string[];
+}
+
+function fetchTopology(url: string): Promise<Topology> {
+  return fetch(url).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status)));
+}
+
+function firstObjectFeatures<P>(topology: Topology): Feature<Geometry, P>[] {
+  const object = topology.objects[Object.keys(topology.objects)[0]];
+  return (topoFeature(topology, object as GeometryCollection) as FeatureCollection<Geometry, P>).features;
 }
 
 function useInfraMap(
   topologyUrl: string,
   boundaryUrl: string,
+  municipalityUrl: string | null,
   prefCodes: readonly string[],
   isNational: boolean,
 ): { map: LoadedMap | null; failed: boolean } {
   const prefKey = prefCodes.join(',');
   // 読み込み結果は要求ごとの key と一緒に持ち、別の範囲の古い結果を表示しない (effect 内で同期的に消さない)
-  const requestKey = `${topologyUrl}|${boundaryUrl}|${prefKey}|${isNational}`;
+  const requestKey = `${topologyUrl}|${boundaryUrl}|${municipalityUrl}|${prefKey}|${isNational}`;
   const [loaded, setLoaded] = useState<{ key: string; map: LoadedMap | null; failed: boolean } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch(topologyUrl).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status))),
-      fetch(boundaryUrl).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status))),
+      fetchTopology(topologyUrl),
+      fetchTopology(boundaryUrl),
+      // 市区町村境界は補助。取れなくても路線網は描く
+      municipalityUrl ? fetchTopology(municipalityUrl).catch(() => null) : Promise.resolve(null),
     ])
-      .then(([lineTopo, boundaryTopo]) => {
+      .then(([lineTopo, boundaryTopo, municipalityTopo]) => {
         if (cancelled) return;
         const lineCollection = topoFeature(
           lineTopo,
           lineTopo.objects.lines as GeometryCollection<InfraPieceProperties>,
         ) as FeatureCollection<Geometry, InfraPieceProperties>;
-        const boundaryObject = boundaryTopo.objects[Object.keys(boundaryTopo.objects)[0]];
-        const allBoundaries = (
-          topoFeature(boundaryTopo, boundaryObject as GeometryCollection) as FeatureCollection<Geometry, Record<string, string>>
-        ).features;
+        const eventFeatures = lineTopo.objects.events
+          ? (
+              topoFeature(
+                lineTopo,
+                lineTopo.objects.events as GeometryCollection<InfraEventProperties>,
+              ) as FeatureCollection<Geometry, InfraEventProperties>
+            ).features
+          : [];
+        const allBoundaries = firstObjectFeatures<Record<string, string>>(boundaryTopo);
         const wanted = new Set(prefKey.split(','));
         const scopeBoundaries = allBoundaries.filter((f) => wanted.has(String(f.properties[PREF_CODE_PROPERTY])));
         // 縮尺は全年の路線の広がりで決める。県境で決めると東京都の小笠原諸島などで本土が小さくなる。
@@ -115,9 +144,17 @@ function useInfraMap(
             lines: lineCollection.features
               .map((f: LineFeature) => ({ d: path(f) ?? '', props: f.properties }))
               .filter((line) => line.d !== ''),
+            events: eventFeatures
+              .map((f: EventFeature) => ({ d: path(f) ?? '', props: f.properties }))
+              .filter((line) => line.d !== ''),
             boundaries: drawBoundaries
               .map((f) => ({ d: path(f) ?? '', code: String(f.properties[PREF_CODE_PROPERTY]) }))
               .filter((b) => b.d !== ''),
+            municipalities: municipalityTopo
+              ? firstObjectFeatures<Record<string, string>>(municipalityTopo)
+                  .map((f) => path(f) ?? '')
+                  .filter((d) => d !== '')
+              : [],
           },
         });
       })
@@ -127,7 +164,7 @@ function useInfraMap(
     return () => {
       cancelled = true;
     };
-  }, [requestKey, topologyUrl, boundaryUrl, prefKey, isNational]);
+  }, [requestKey, topologyUrl, boundaryUrl, municipalityUrl, prefKey, isNational]);
 
   const current = loaded?.key === requestKey ? loaded : null;
   return { map: current?.map ?? null, failed: current?.failed ?? false };
@@ -154,13 +191,14 @@ export function InfraHistoryExplorer({
   rowsColumnLabel,
   topologyUrl,
   boundaryUrl,
+  municipalityUrl,
   prefCodes,
 }: InfraHistoryExplorerProps) {
   const first = years[0];
   const last = years[years.length - 1];
   const [year, setYear] = useState(last);
   const [isPlaying, setIsPlaying] = useState(false);
-  const { map, failed } = useInfraMap(topologyUrl, boundaryUrl, prefCodes, prefCodes.length === 47);
+  const { map, failed } = useInfraMap(topologyUrl, boundaryUrl, municipalityUrl, prefCodes, prefCodes.length === 47);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -187,10 +225,10 @@ export function InfraHistoryExplorer({
   const visible = useMemo(() => {
     if (!map) return { active: [], opened: [], closed: [] };
     return {
-      active: map.lines.filter((line) => line.props.s <= year && year <= line.props.e && line.props.s !== year),
-      opened: map.lines.filter((line) => line.props.s === year),
-      // 終了年は「廃止の 1 年前」。前年まで存在して今年は無い区間 = この年に廃止・変更
-      closed: map.lines.filter((line) => line.props.e === year - 1),
+      active: map.lines.filter((line) => line.props.s <= year && year <= line.props.e),
+      // 強調は生成時に判定した開通・延伸 / 廃止・短縮だけ。記録の付け替え (名前の変更など) は含まない
+      opened: map.events.filter((event) => event.props.y === year && (event.props.k === 'open' || event.props.k === 'extend')),
+      closed: map.events.filter((event) => event.props.y === year && (event.props.k === 'close' || event.props.k === 'shorten')),
     };
   }, [map, year]);
 
@@ -239,15 +277,25 @@ export function InfraHistoryExplorer({
                 strokeWidth={0.6}
               />
             ))}
+            {map?.municipalities.map((d, i) => (
+              <path
+                key={`municipality-${i}`}
+                d={d}
+                fill="none"
+                stroke="var(--color-muted-foreground)"
+                strokeWidth={0.4}
+                opacity={0.45}
+              />
+            ))}
             {visible.closed.map((line, i) => (
               <path
                 key={`closed-${i}`}
                 d={line.d}
                 fill="none"
-                stroke="var(--color-muted-foreground)"
-                strokeWidth={1.2}
-                strokeDasharray="3 3"
-                opacity={0.7}
+                stroke="var(--color-foreground)"
+                strokeWidth={2}
+                strokeDasharray="4 3"
+                opacity={0.85}
               />
             ))}
             {visible.active.map((line, i) => (
@@ -301,11 +349,11 @@ export function InfraHistoryExplorer({
         <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
           <li className="flex items-center gap-1.5">
             <span className="inline-block h-1 w-5 rounded-none bg-destructive" aria-hidden />
-            この年に開通
+            この年に開通・延伸
           </li>
           <li className="flex items-center gap-1.5">
-            <span className="inline-block w-5 border-t border-dashed border-muted-foreground" aria-hidden />
-            この年に廃止・変更
+            <span className="inline-block w-5 border-t-2 border-dashed border-foreground" aria-hidden />
+            この年に廃止・短縮
           </li>
         </ul>
       </SectionCard>
