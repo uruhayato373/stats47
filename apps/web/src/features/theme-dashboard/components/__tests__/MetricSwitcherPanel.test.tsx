@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 
@@ -14,6 +14,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  *  (f) 最後の 1 本は外せない (系列ゼロの空カードを作らせない)
  *  (g) ★47都道府県 (未選択) は「全国」の代役ではない。fetch せず、タイルは実在する
  *      1位県の値をそのまま出す (GEO-SCOPE-SEPARATION-01 WP2)
+ *  (h) 値は指標ごとの数値タイル (StatTile)、系列の選択はチャートの凡例 (2026-10-29。値の表示と選択を分けた)
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
@@ -57,13 +58,22 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
 const METRICS: MultiMetricGroup = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
 const LABELS = { wage: "賃金", unemployment: "失業率", "job-ratio": "有効求人倍率" };
 
-/** タイルはタイル全体が 1 つの role="checkbox" */
+/** 系列の選択は凡例の切り替えボタン (押された状態 = aria-pressed) */
 function tile(label: RegExp) {
-  return screen.getByRole("checkbox", { name: label });
+  const legend = screen.getByRole("list", { name: "グラフに表示する指標" });
+  return within(legend).getByRole("button", { name: label });
 }
 
 function toggleTile(label: RegExp) {
   fireEvent.click(tile(label));
+}
+
+/** 指標の値は数値タイル (StatTile)。名前で引く */
+function valueTile(name: string) {
+  const tiles = [...document.querySelectorAll('[data-slot-kind="stat-tile"]')];
+  const found = tiles.find((el) => el.querySelector("dt")?.textContent === name);
+  if (!found) throw new Error(`数値タイル ${name} が無い`);
+  return found as HTMLElement;
 }
 
 /** チェック中の指標は「チャートに載っている系列」で観測する */
@@ -143,7 +153,7 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
 
   it("タイルは実在する1位県の値と県名を表示する (捏造・平均ではない)", async () => {
     renderUnselected();
-    const wageTile = tile(/賃金/);
+    const wageTile = valueTile("賃金");
     expect(wageTile).toHaveTextContent("999");
     expect(wageTile).toHaveTextContent("東京都");
   });
@@ -266,7 +276,7 @@ describe("MetricSwitcherPanel — 最後の 1 本は外せない", () => {
     toggleTile(/賃金/);
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
     expect(chartedKeys()).toEqual(["wage"]);
-    expect(tile(/賃金/)).toHaveAttribute("aria-checked", "true");
+    expect(tile(/賃金/)).toHaveAttribute("aria-pressed", "true");
   });
 
   it("2 本あるときは片方を外せる (ロックが効きすぎていない)", async () => {
@@ -605,13 +615,15 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
 });
 
 describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
-  it("指標選択列はカード左右の余白を予約せず全幅を使う", async () => {
+  it("値は指標ごとの数値タイルを数値タイルの格子に並べ、選択は凡例で行う", async () => {
     renderPanel();
-    const tile = await screen.findByRole("checkbox", { name: /賃金/ });
-    const strip = tile.parentElement;
-    expect(strip).toHaveClass("min-w-full", "divide-x");
-    expect(strip).not.toHaveClass("gap-2");
-    expect(strip?.parentElement).toHaveClass("w-full");
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    const grid = document.querySelector('[data-slot-kind="stat-tile-grid"]');
+    expect(grid?.querySelectorAll('[data-slot-kind="stat-tile"]')).toHaveLength(3);
+    // 県を選んでいるので値はその県の値 (100)。凡例には押せる切り替えボタンが指標の数だけある
+    expect(valueTile("賃金")).toHaveTextContent("100");
+    expect(within(screen.getByRole("list", { name: "グラフに表示する指標" })).getAllByRole("button")).toHaveLength(3);
+    expect(screen.queryByRole("checkbox")).toBeNull();
   });
 
   it("title を渡すとカード見出しになる (グループ名)", async () => {
@@ -626,10 +638,12 @@ describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
     });
   });
 
-  it("代表指標 (編成順の先頭) のランキングへの導線を出す", async () => {
+  it("指標ごとの数値タイルに、その指標のランキングへの導線を出す", async () => {
     renderPanel({ defaultCheckedKeys: ["unemployment", "job-ratio"] });
-    const link = await screen.findByRole("link", { name: /ランキングを見る/ });
-    expect(link).toHaveAttribute("href", "/ranking/unemployment");
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    for (const [name, key] of [["賃金", "wage"], ["失業率", "unemployment"], ["有効求人倍率", "job-ratio"]]) {
+      expect(valueTile(name).querySelector(`a[href="/ranking/${key}"]`)).not.toBeNull();
+    }
   });
 
   it("チェック ON で nav_click を theme_kpi_switcher surface として送る", async () => {
@@ -665,6 +679,8 @@ describe('監査後の表示契約', () => {
     renderPanel({ summaryOnly: true });
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.queryByTestId('line-chart')).not.toBeInTheDocument();
-    expect(screen.getByLabelText('賃金')).toHaveTextContent('100');
+    expect(valueTile('賃金')).toHaveTextContent('100');
+    // 推移を描かないので選択の凡例も出さない
+    expect(screen.queryByRole('list', { name: 'グラフに表示する指標' })).toBeNull();
   });
 });

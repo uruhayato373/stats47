@@ -28,7 +28,7 @@ import {
 import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { RailCard, RailNavRow, StatTile, StatTileGrid } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -330,36 +330,31 @@ export async function ThemePageLayout({
           )}
 
           {areaContext && areaHighlights.length > 0 && (
-            <section
-              aria-labelledby="area-theme-highlights"
-              // 線の格子のセル (余白 16px と上下の線は格子が持つ)
-              className="min-w-0"
-            >
-              <h2
-                id="area-theme-highlights"
-                className="text-base font-semibold"
-              >
-                {areaContext.areaName}の主なデータ
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                このテーマに関連する最新公表値です。
-              </p>
-              <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
+            // 見出しと数値タイルの格子を節ごと線の格子にする (文章とタイルを 1 つの要素に包むと文章が線に接する)
+            <PanelGrid as="section" aria-labelledby="area-theme-highlights">
+              <div>
+                <h2
+                  id="area-theme-highlights"
+                  className="text-base font-semibold"
+                >
+                  {areaContext.areaName}の主なデータ
+                </h2>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  このテーマに関連する最新公表値です。
+                </p>
+              </div>
+              <StatTileGrid>
                 {areaHighlights.map((highlight) => (
-                  <div key={highlight.key}>
-                    <dt className="text-xs text-muted-foreground">
-                      {highlight.title}
-                    </dt>
-                    <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
-                      {highlight.value.toLocaleString('ja-JP')} {formatUnitForDisplay(highlight.unit)}
-                    </dd>
-                    <dd className="text-xs text-muted-foreground">
-                      {highlight.yearName}
-                    </dd>
-                  </div>
+                  <StatTile
+                    key={highlight.key}
+                    label={highlight.title}
+                    value={highlight.value.toLocaleString('ja-JP')}
+                    unit={formatUnitForDisplay(highlight.unit)}
+                    meta={highlight.yearName}
+                  />
                 ))}
-              </dl>
-            </section>
+              </StatTileGrid>
+            </PanelGrid>
           )}
 
           <ThemeDashboardClient

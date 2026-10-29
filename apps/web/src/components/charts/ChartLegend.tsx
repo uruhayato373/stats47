@@ -22,6 +22,8 @@ interface ChartLegendProps {
   onToggle?: (key: string) => void;
   /** 表示を切った項目の key */
   hiddenKeys?: ReadonlySet<string>;
+  /** 今は押しても切り替わらない項目と、その理由 (key → 理由)。aria-disabled と title で伝える */
+  disabledReasons?: ReadonlyMap<string, string>;
   /** 切り替えボタンの集まりの名前 (読み上げ用) */
   label?: string;
 }
@@ -41,8 +43,9 @@ function Marker({ item }: { item: ChartLegendItem }) {
 /**
  * チャート・地図の凡例。色分けの説明だけなら inline、値を並べるなら list。
  * onToggle を渡すと項目を押して表示を切り替えられる (押された状態は aria-pressed で伝える)。
+ * disabledReasons の項目は押しても切り替わらないことを aria-disabled と title (理由) で伝える (onToggle は呼ぶので、切り替えない判断は呼び出し側が持つ)。
  */
-export function ChartLegend({ items, className, layout = "inline", onToggle, hiddenKeys, label }: ChartLegendProps) {
+export function ChartLegend({ items, className, layout = "inline", onToggle, hiddenKeys, disabledReasons, label }: ChartLegendProps) {
   if (items.length === 0) return null;
   const isList = layout === "list";
 
@@ -59,6 +62,7 @@ export function ChartLegend({ items, className, layout = "inline", onToggle, hid
       {items.map((item) => {
         const key = itemKey(item);
         const isHidden = hiddenKeys?.has(key) ?? false;
+        const disabledReason = disabledReasons?.get(key);
         const content = (
           <>
             <span className="flex min-w-0 items-center gap-2">
@@ -81,8 +85,14 @@ export function ChartLegend({ items, className, layout = "inline", onToggle, hid
               <button
                 type="button"
                 aria-pressed={!isHidden}
+                aria-disabled={disabledReason ? true : undefined}
+                title={disabledReason}
                 onClick={() => onToggle(key)}
-                className={cn(rowClass, "cursor-pointer text-left hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring")}
+                className={cn(
+                  rowClass,
+                  "text-left focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
+                  disabledReason ? "cursor-default" : "cursor-pointer hover:text-foreground",
+                )}
               >
                 {content}
               </button>

@@ -205,8 +205,8 @@ backfill の gate (`.claude/scripts/themes/selection-backfill-core.mjs gateEntri
 
 テーマページ上部の「主要指標」は **1 グループ = 1 カード**で描く (生存指標 2 件以上 = 選択 UI 付き
 切替パネル / 1 件 = 選択 UI の無いコンパクトカード / 0 件 = カードごと描かない。判定はカタログ定義件数
-ではなく観測不足フィルタ後の実件数)。切替パネルの中は値付きタイルの横スクロール列で、**タイルのチェック
-で折れ線に系列が重なる** (GA4 のスコアカードと GSC のチェックボックス折れ線の良いとこ取り)。1 ページに
+ではなく観測不足フィルタ後の実件数)。切替パネルは、指標ごとの数値タイル (`StatTile` の格子) と、**凡例で系列を選ぶ折れ線**のパネルで描く
+(2026-10-29 に値の表示と選択を分けた。旧: 値付きタイル自体がチェックボックス)。1 ページに
 複数カードが縦に並ぶ。
 
 ```ts
@@ -404,7 +404,7 @@ harmRelevance: [
 
 | カタログ情報                                       | UI 描画先                                                                                                                                                              | 実装                                                                                              |
 | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `metrics` (role≠context)                           | ページ上部の指標カード群のタイル (値 + 順位)。**チェックすると下の折れ線に系列が重なる**                                                                               | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` → `MetricSwitcherPanel`         |
+| `metrics` (role≠context)                           | ページ上部の指標カード群の数値タイル (値 + 順位)。**凡例で選んだ指標が下の折れ線に重なる**                                                                               | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` → `MetricSwitcherPanel`         |
 | **`metricGroups`**                                 | **1 グループ = 指標カード 1 枚**。1 ページに複数枚が縦に並ぶ。省略時は非 context 指標を 1 枚に倒す                                                                     | `ThemePageLayout` が `THEME_CATALOGS` を直読み → `ThemeDashboardClient` → `ThemeMetricsDashboard` |
 | `metrics` (全 role・context 含む)                  | 左レールの折りたたみ「全指標」。狭幅は本文上部の同等 UI                                                                                                                | `ThemeSideNav` / `ThemePageLayout`                                                                |
 | `metrics.selection` (adoptionCriteria/readerQuestion/targetReaderOrDecision 含む) | **UI 非表示**。採否・再調査用の内部 provenance として SSOT に保持。`/quality/catalog-audit` (§8.1) が読み取り専用表示 | —                                                                                                 |

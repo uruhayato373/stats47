@@ -32,11 +32,11 @@
       },
       "reference": { "referenceId": "shadcndashboard", "adoptionPart": "数値タイル" },
       "useWhen": [
-        "1 つの指標の値を見せる (県データブック・ランキングの県詳細・テーマの指標が 1 つのカード)",
+        "1 つの指標の値を見せる (県データブック・ランキングの県詳細・テーマの指標カード・県×テーマの主なデータ)",
         "値に推移の小さなチャートを添える"
       ],
       "avoidWhen": [
-        { "when": "題名を持つ節、大きなチャートや地図、指標を切り替えるタブ", "use": "chart-panel" }
+        { "when": "題名を持つ節、大きなチャートや地図、系列を選ぶ凡例付きの推移", "use": "chart-panel" }
       ],
       "checks": ["stat-value-uses-shared-class", "no-nested-card-surfaces"]
     },
@@ -96,7 +96,7 @@
       "reference": { "referenceId": "shadcndashboard", "adoptionPart": "パネル" },
       "useWhen": [
         "題名で何の節かを示す (チャート・地図・表)",
-        "指標を切り替えるタブや期間の切り替えなど、見出しに操作を持つ"
+        "系列を選ぶ凡例や期間の切り替えなど、チャートの操作を持つ (テーマの指標を切り替えるカードの推移)"
       ],
       "avoidWhen": [
         { "when": "1 つの指標の値だけを見せる", "use": "stat-tile" }

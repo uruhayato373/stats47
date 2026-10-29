@@ -10,13 +10,14 @@ import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
-import { classifyUnitComparability, formatUnitForDisplay } from '@stats47/data-configs/unit';
-import { Check } from 'lucide-react';
+import { classifyUnitComparability } from '@stats47/data-configs/unit';
 
-import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ChartLegend } from '@/components/charts/ChartLegend';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
+import { PanelGrid } from '@/components/layout';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
+import { StatTileGrid } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presentation';
@@ -25,7 +26,7 @@ import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { nationalSeriesName } from '../lib/metric-trend';
 
-import { ScrollableRow } from './ScrollableRow';
+import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
 
@@ -171,17 +172,18 @@ function emptyMessage(state: ChartState): string {
 }
 
 /**
- * 指標カード 1 枚 — 値付きタイル群 (横スクロール) + チェックで重ねる折れ線。
+ * 指標カード 1 枚 — 指標ごとの数値タイル (StatTile の格子) + 凡例で系列を選ぶ折れ線のパネル。
  *
- * GA4 のスコアカードと GSC のチェックボックス折れ線の良いとこ取り。1 グループ = 1 枚で、
- * 1 ページに複数枚が並ぶ (編成は ThemeCatalog.metricGroups が SSOT)。
+ * 2026-10-29 に、値を見せる役割と系列を選ぶ役割を分けた (旧: 値付きタイル自体がチェックボックス)。値は
+ * テーマ全体で同じ数値タイル (MetricStatTile)、選択はチャートの凡例 (ChartLegend の切り替え) が持つ。
+ * 1 グループ = 1 枚で、1 ページに複数枚が並ぶ (編成は ThemeCatalog.metricGroups が SSOT)。
  *
  * ★有効指標が 2 件以上のグループ専用 (2026-09-17)。1 件しか残らないグループは
- *   選択タイルを持たない `SingleMetricCard` が描く。ここでは「最後の 1 本を外せない」
+ *   選択の凡例を持たない `SingleMetricCard` が描く。ここでは「最後の 1 本を外せない」
  *   ロックは残す (2 件以上から 1 本に絞った状態の話であり、1 件グループとは別)。
  *
  * 設計上の約束と理由:
- * - タイルにミニチャートを置かない。トレンドは下の折れ線が担うので、同じ事実を
+ * - 数値タイルにミニチャートを置かない。トレンドは下の折れ線が担うので、同じ事実を
  *   2 か所に描かない (theme-catalog-standards.md の重複禁止を構造で守る)
  * - チェックされた指標だけを遅延取得する。タイルの値・順位は indicatorDataMap 由来で
  *   即座に出るので初期表示は速い
@@ -200,7 +202,6 @@ export function MetricSwitcherPanel({
   defaultCheckedKeys,
 }: MetricSwitcherPanelProps) {
   const areaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
-  const Tile = summaryOnly ? "div" : "button";
 
   const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
     const known = new Set(metrics.map((m) => m.metricKey));
@@ -486,7 +487,7 @@ export function MetricSwitcherPanel({
 
   const checkedSet = new Set(checkedMetrics.map((m) => m.metricKey));
   const isLastChecked = checkedMetrics.length <= 1;
-  /** フッターのランキング導線。複数チェック時は先頭 (= 編成順で最初) を代表にする */
+  /** 見出しを渡さないときに読み上げ用に残す代表指標 (編成順の先頭) */
   const representative = checkedMetrics[0] ?? metrics[0];
   const contractYear =
     metrics
@@ -507,154 +508,68 @@ export function MetricSwitcherPanel({
       metric.series.length > 0
   ).length;
 
+  // 系列の選択は凡例で行う (2026-10-29。値の表示は数値タイル、選択はチャートの凡例に分けた)。
+  // 押しても切り替わらない項目は理由を添える: 最後の 1 本 (系列ゼロにしない) と、3 種類目の単位 (Y 軸は 2 本まで)
+  const legendItems = metrics.map((m) => ({
+    key: m.metricKey,
+    label: tabLabels[m.metricKey] ?? m.title,
+    color: colorOf.get(m.metricKey) ?? getChartColor(0),
+  }));
+  const hiddenKeys = new Set(
+    metrics.filter((m) => !checkedSet.has(m.metricKey)).map((m) => m.metricKey)
+  );
+  const disabledReasons = new Map<string, string>();
+  for (const m of metrics) {
+    const checked = checkedSet.has(m.metricKey);
+    if (checked && isLastChecked) {
+      disabledReasons.set(m.metricKey, '最後の 1 指標は外せません（別の指標を選ぶと外せます）');
+    } else if (
+      !checked &&
+      withinTwoAxes([...checkedMetrics, m]).length <= checkedMetrics.length
+    ) {
+      disabledReasons.set(
+        m.metricKey,
+        '同時に表示できる単位は2種類までです。他の指標を外すと選択できます'
+      );
+    }
+  }
+
   return (
     <div
+      id={id}
       data-theme-component-type="kpi-card"
       data-data-state={readyMetricCount > 0 ? 'ready' : 'no-data'}
       data-unit={contractUnits}
       data-year={contractYear}
       data-series-count={readyMetricCount}
     >
-      <ChartPanel
-        id={id}
-        title={title}
-        contentClassName="p-0"
-        footer={
-          representative ? (
-            <ChartFooter
-              source={representative.sourceName}
-              sourceLink={representative.sourceLink}
-              sourceLinks={representative.sourceLinks}
-              rankingLink={hrefFor("ranking", { rankingKey: representative.metricKey })}
-              rankingLabel="ランキングを見る"
-            />
-          ) : undefined
-        }
-      >
-        {!title && representative ? (
-          <h3 className="sr-only">{representative.title}</h3>
+      {/* 見出し → 指標ごとの数値タイル → 推移のパネル を 1 本の線の格子に並べる */}
+      <PanelGrid>
+        {title ? (
+          <h3 className="text-base leading-5.5 font-medium text-foreground">{title}</h3>
+        ) : representative ? (
+          <h3 data-cell="flush" className="sr-only">{representative.title}</h3>
         ) : null}
-        <div className="border-b border-border">
-          <ScrollableRow
-            className="snap-x snap-mandatory"
-            controlsMode="overlay"
-          >
-            <div className="inline-flex w-max min-w-full divide-x divide-border">
-              {metrics.map((m) => {
-                const label = tabLabels[m.metricKey] ?? m.title;
-                const checked = checkedSet.has(m.metricKey);
-                const lockedOn = checked && isLastChecked;
-                const axisLimit =
-                  !checked &&
-                  withinTwoAxes([...checkedMetrics, m]).length <=
-                    checkedMetrics.length;
-                const color = colorOf.get(m.metricKey) ?? getChartColor(0);
-                return (
-                  /* タイル全体で 1 つのチェックボックス。
-                     Radix の Checkbox (button) を <label> で包むと、ラベル経由の
-                     activation と直接クリックが二重に発火しうる。入れ子にせず
-                     button 自体を role="checkbox" にして 1 コントロールに保つ。 */
-                  <Tile
-                    key={m.metricKey}
-                    type={summaryOnly ? undefined : "button"}
-                    role={summaryOnly ? undefined : 'checkbox'}
-                    aria-checked={summaryOnly ? undefined : checked}
-                    aria-label={summaryOnly ? label : `${label}をグラフに表示`}
-                    aria-disabled={
-                      summaryOnly ? undefined : lockedOn || axisLimit || undefined
-                    }
-                    onClick={summaryOnly ? undefined : () => toggle(m.metricKey, !checked)}
-                    title={
-                      axisLimit
-                        ? '同時に表示できる単位は2種類までです。他の指標を外すと選択できます'
-                        : lockedOn
-                          ? '最後の 1 指標は外せません（別の指標を選ぶと外せます）'
-                          : // タイル幅に収まらないラベルを hover で読めるようにする
-                            label
-                    }
-                    /* テンプレートの ToggleGroup (outline・spacing 0) と同じ見た目: 隙間なく並べ、
-                       選択中は bg-muted。系列色はチェックの箱だけが持つ (下線のタブにしない) */
-                    className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/50 ${
-                      checked ? 'bg-muted' : 'hover:bg-muted/60'
-                    } ${lockedOn ? 'cursor-default' : 'cursor-pointer'}`}
-                  >
-                    <span className="flex w-full items-center gap-1.5">
-                      {/* チェック状態と系列色を 1 つの箱で示す (色ドットを別に置かない) */}
-                      {!summaryOnly && (
-                        <span
-                          aria-hidden
-                          className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm border"
-                          style={
-                            checked
-                              ? { backgroundColor: color, borderColor: color }
-                              : undefined
-                          }
-                        >
-                          {checked ? (
-                            <Check className="h-3 w-3 text-primary-foreground" />
-                          ) : null}
-                        </span>
-                      )}
-                      <span className="min-h-8 whitespace-normal wrap-break-word text-[11px] leading-4 text-muted-foreground">
-                        {label}
-                      </span>
-                    </span>
-                    {m.yearName && (
-                      <span className="text-[10px] text-muted-foreground">
-                        {m.yearName}
-                      </span>
-                    )}
-                    {selectedPrefectureCode ? (
-                      <>
-                        <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
-                          {m.value !== null
-                            ? m.value.toLocaleString('ja-JP', {
-                                maximumFractionDigits: 2,
-                              })
-                            : '—'}
-                          {m.unit ? (
-                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                              {formatUnitForDisplay(m.unit)}
-                            </span>
-                          ) : null}
-                        </span>
-                        {m.rank !== null ? (
-                          <span className="text-[10px] tabular-nums text-muted-foreground">
-                            {m.rank}位 / {m.total}
-                          </span>
-                        ) : null}
-                      </>
-                    ) : (
-                      /* 47都道府県 (未選択): 実在する1位県の値をそのまま出す
-                       (47県平均でも全国値でもない。GEO-SCOPE-SEPARATION-01 WP2) */
-                      <>
-                        <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
-                          {m.topRanked !== null
-                            ? m.topRanked.value.toLocaleString('ja-JP', {
-                                maximumFractionDigits: 2,
-                              })
-                            : '—'}
-                          {m.unit ? (
-                            <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                              {formatUnitForDisplay(m.unit)}
-                            </span>
-                          ) : null}
-                        </span>
-                        {m.topRanked !== null ? (
-                          <span className="truncate text-[10px] tabular-nums text-muted-foreground">
-                            1位: {m.topRanked.areaName}
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Tile>
-                );
-              })}
-            </div>
-          </ScrollableRow>
-        </div>
+        <StatTileGrid>
+          {metrics.map((m) => (
+            <MetricStatTile
+              key={m.metricKey}
+              metric={m}
+              label={tabLabels[m.metricKey] ?? m.title}
+              selectedPrefectureCode={selectedPrefectureCode}
+            />
+          ))}
+        </StatTileGrid>
         {!summaryOnly && (
-          <div className="p-4">
+          <ChartPanel>
+            <ChartLegend
+              items={legendItems}
+              hiddenKeys={hiddenKeys}
+              disabledReasons={disabledReasons}
+              onToggle={(key) => toggle(key, !checkedSet.has(key))}
+              label="グラフに表示する指標"
+              className="mb-3 text-xs"
+            />
             {isLoadingSeries ? (
               <ChartLoading height={CHART_HEIGHT} />
             ) : chartState.kind === 'chart' ? (
@@ -669,9 +584,9 @@ export function MetricSwitcherPanel({
                 {emptyMessage(chartState)}
               </p>
             )}
-          </div>
+          </ChartPanel>
         )}
-      </ChartPanel>
+      </PanelGrid>
     </div>
   );
 }

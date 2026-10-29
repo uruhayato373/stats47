@@ -3,17 +3,15 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
-import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
-import { ChartFooter } from '@/components/charts/ChartFooter';
 import { MiniLineChart } from '@/components/charts/MiniCharts';
-import { StatTile } from '@/components/surface';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { resolveMetricTrend, shouldFetchMetricTrend } from '../lib/metric-trend';
+
+import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi } from './metric-kpi';
 
@@ -108,15 +106,6 @@ export function SingleMetricCard({
 
   const isReady =
     metric.topRanked !== null || metric.value !== null || metric.series.length > 0;
-  const shown = selectedPrefectureCode ? metric.value : metric.topRanked?.value ?? null;
-  // 47都道府県 (未選択) の値は実在する 1 位県の値 (47県平均でも全国値でもない) なので、県名を補足に添える
-  const meta = [
-    metric.yearName,
-    !selectedPrefectureCode && metric.topRanked ? `1位: ${metric.topRanked.areaName}` : null,
-  ]
-    .filter(Boolean)
-    .join('・');
-
   return (
     <div
       id={id}
@@ -127,8 +116,9 @@ export function SingleMetricCard({
       data-series-count={isReady ? 1 : 0}
       className="h-full"
     >
-      <StatTile
-        className="h-full"
+      <MetricStatTile
+        metric={metric}
+        selectedPrefectureCode={selectedPrefectureCode}
         label={
           <>
             {heading}
@@ -138,27 +128,6 @@ export function SingleMetricCard({
             )}
           </>
         }
-        value={
-          shown !== null
-            ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 })
-            : null
-        }
-        unit={metric.unit ? formatUnitForDisplay(metric.unit) : undefined}
-        badge={
-          selectedPrefectureCode && metric.rank !== null ? (
-            <RankBadge rank={metric.rank} tone={rankToneByPosition(metric.rank, metric.total)} />
-          ) : undefined
-        }
-        meta={meta || undefined}
-        footer={
-          <ChartFooter
-            source={metric.sourceName}
-            sourceLink={metric.sourceLink}
-            sourceLinks={metric.sourceLinks}
-            rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
-            rankingLabel="ランキングを見る"
-          />
-        }
       >
         {trend.kind === 'chart' ? (
           <MiniLineChart
@@ -167,7 +136,7 @@ export function SingleMetricCard({
             unit={formatUnitForDisplay(metric.unit)}
           />
         ) : null}
-      </StatTile>
+      </MetricStatTile>
     </div>
   );
 }
