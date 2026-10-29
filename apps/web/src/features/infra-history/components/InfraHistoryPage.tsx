@@ -1,5 +1,7 @@
 import {
   INFRA_SCOPE_REGIONS,
+  infraNetworkPageUrl,
+  infraNetworkTerms,
   type InfraHistorySummary,
   type InfraNetworkDefinition,
 } from '@stats47/gis/infra-history';
@@ -67,6 +69,7 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
   const { rows, label, columnLabel } = summary
     ? scopeRows(network, scope, summary)
     : { rows: [], label: '', columnLabel: '' };
+  const terms = infraNetworkTerms(network);
   const region = scope.regionCode ? INFRA_SCOPE_REGIONS.find((item) => item.code === scope.regionCode) : null;
   const regionHasPages = region !== null && region !== undefined && region.prefCodes.length > 1;
   const title =
@@ -163,15 +166,15 @@ export function InfraHistoryPage({ network, scope, summary, evidence }: InfraHis
         <SectionCard title="出典と利用条件" icon={<FileText />} headingAs="h2" bodyClassName="space-y-3">
           <p>
             出典：{network.source.provider}「
-            <ExternalAnchor href={network.source.pageUrl} className="text-primary underline">
+            <ExternalAnchor href={infraNetworkPageUrl(network)} className="text-primary underline">
               {network.source.name}
             </ExternalAnchor>
             」（{network.source.version.length === 2 ? `20${network.source.version}` : network.source.version}
             年版、取得 {network.source.retrievedAt.slice(0, 10)}）をもとに stats47 が年別の地図と延長を作成しました。
           </p>
           <p>
-            このデータは時系列として使う場合に非商用の利用条件です（公式ページの記載：「{network.terms.evidence}」、
-            {network.terms.verifiedAt} 確認）。このページには広告とアフィリエイトを掲載していません。
+            このデータは時系列として使う場合に非商用の利用条件です（公式ページの記載：「{terms.evidence}」、
+            {terms.verifiedAt} 確認）。このページには広告とアフィリエイトを掲載していません。
           </p>
           {evidence && (
             <p className="text-xs text-muted-foreground">

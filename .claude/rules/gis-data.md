@@ -85,9 +85,21 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 | `cc-by-4.0-partial` | 不可（個別確認まで） | 個別条件を確認 | 書面/個別条件確認まで不可 |
 | `non-commercial` | **不可。ローカル限定** | 非データベースのGIS空間演算結果だけ利用余地あり。出典・加工者表示必須 | **書面確認または商用可ソースへの置換まで不可** |
 
-`non-commercial`の登録済み11件は`C02, C09, C23, P03, P12, P13, P17, P18, P35, W01, W05`。
-2026-09-05の実R2監査で全11件のpublic mirrorを検出したため、`r2-retention.ts`のexact prefix
+`non-commercial`の登録済みは`C02, C09, C23, N05, P03, P12, P13, P17, P18, P35, W01, W05`の12件。
+うち N05 (鉄道時系列) を除く11件は、2026-09-05の実R2監査でpublic mirrorを検出したため、`r2-retention.ts`のexact prefix
 `license-remediation-ksj-*`で撤去対象に固定した。削除は必ずdry-run→ユーザー承認→R2 workflowの順とする。
+N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は作っていない)。
+
+同じデータでも使い方で条件が変わるもの (N06 高速道路時系列は現況なら CC BY 4.0、時系列なら非商用) は、
+`datasets.ts` の `usageTerms` に使い方ごとの条件と公式ページの文言・確認日を書き、`resolveKsjUsageTerms` で引く。
+利用条件を他の台帳 (交通網の変遷など) に複製しない。
+
+## 台帳の ID と参照整合
+
+`datasets.ts` は `as const satisfies` で書き、dataId から `KsjDataId` 型を導く。gis パッケージ内の台帳は
+`KsjDataId` で参照し、存在しない ID は型検査で落とす。data-configs (GIS 一覧・単体ページ・指標の `ksjDataId`) は
+gis に依存できないので、`packages/gis/src/mlit-ksj/__tests__/dataset-references.test.ts` が R2 なしで参照整合を検査する
+(pre-commit は台帳を積んだときだけ、CI は `test:packages`)。公式ページ URL の既存の欠けは同テストの縮小専用一覧で管理する。
 
 このうち`W01/P03/P12/P35/C09`由来の既存ランキングは、metricの実sourceまで走査すると11本あった
 （GISのrankingConfigだけでは別系列`fishing-port-count`を見落とす）。画面上の図表まで直ちに利用不可と断定しないが、

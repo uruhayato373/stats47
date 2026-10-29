@@ -6,6 +6,8 @@
  * Web は artifact を `parse.ts` の厳格 parser で読む。
  */
 
+import type { GisDatasetUsage, GisDatasetUsageTerms, KsjDataId } from "../mlit-ksj/datasets";
+
 /** URL と R2 key に使う路線網の slug */
 export type InfraNetworkKey = "expressway" | "railway";
 
@@ -16,19 +18,10 @@ export type InfraHistoryScope =
   | { readonly kind: "prefecture"; readonly prefCode: string };
 
 /**
- * 原典の利用条件。国土数値情報は同じデータでも使い方で条件が変わる
- * (N06 は「最新年の現況」なら CC BY 4.0、「時系列」なら非商用)。
- * ここには**このページの使い方**に適用される条件を書く。
+ * このページの使い方に適用される原典の利用条件。台帳には書かず、GIS 台帳 (`datasets.ts`) の
+ * `usageTerms` から `infraNetworkTerms` で引く (利用条件の判断を 1 か所に保つ)。manifest には生成時の写しを残す。
  */
-export interface InfraSourceTerms {
-  /** このページでの使い方 */
-  readonly usage: "time-series";
-  readonly terms: "non-commercial" | "cc-by-4.0";
-  /** 公式ページで確認した日 (YYYY-MM-DD) */
-  readonly verifiedAt: string;
-  /** 公式ページの該当文言 (短い引用) */
-  readonly evidence: string;
-}
+export type InfraSourceTerms = GisDatasetUsageTerms & { readonly usage: GisDatasetUsage };
 
 /**
  * 公開の状態。非商用データは書面確認が取れるまで `local-only` に留め、
@@ -45,12 +38,12 @@ export interface InfraPublication {
 }
 
 export interface InfraSource {
-  readonly dataId: "N05" | "N06";
-  /** 国土数値情報の版 (2 桁) */
+  /** GIS 台帳の dataId。公式ページの URL と利用条件は台帳から引く */
+  readonly dataId: KsjDataId;
+  /** 国土数値情報の版 (2 桁)。GIS 台帳の latestVersion とは別に、この集計に使った版 */
   readonly version: string;
   readonly name: string;
   readonly provider: string;
-  readonly pageUrl: string;
   readonly archiveUrl: string;
   readonly archiveSha256: string;
   readonly archiveBytes: number;
@@ -89,7 +82,8 @@ export interface InfraNetworkDefinition {
   readonly question: string;
   readonly description: string;
   readonly source: InfraSource;
-  readonly terms: InfraSourceTerms;
+  /** このページの使い方。利用条件は GIS 台帳の `usageTerms[usage]` */
+  readonly usage: GisDatasetUsage;
   readonly publication: InfraPublication;
   readonly attributes: InfraAttributeMap;
   readonly categories: readonly InfraCategory[];
@@ -156,7 +150,8 @@ export interface InfraHistoryManifest {
   readonly schemaVersion: 1;
   readonly network: InfraNetworkKey;
   readonly generatedAt: string;
-  readonly source: InfraSource;
+  /** 生成時の出典 (公式ページの URL は GIS 台帳から写す) */
+  readonly source: InfraSource & { readonly pageUrl: string };
   readonly terms: InfraSourceTerms;
   readonly publication: InfraPublication;
   /** 生成コード (core.ts + 生成スクリプト) の SHA-256 */

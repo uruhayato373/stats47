@@ -1,17 +1,16 @@
-import type { InfraNetworkDefinition, InfraNetworkKey } from "./types";
+import { GIS_DATASETS_BY_ID, resolveKsjUsageTerms } from "../mlit-ksj/datasets";
+import type { InfraNetworkDefinition, InfraNetworkKey, InfraSourceTerms } from "./types";
 
 /**
  * 交通網の変遷ページの台帳 (git TS が SSOT)。
  *
- * 原典の版・SHA・利用条件・公開状態をここだけに置く。生成スクリプトは原典 ZIP の SHA が
+ * 原典の版・SHA・公開状態をここに置く。生成スクリプトは原典 ZIP の SHA が
  * ここと一致しなければ止まり、R2 publisher は `publication.status` が `public-approved` で
  * なければ `app/geo/history/<key>/` を拒否する (`ksj-publication-guard.ts`)。
  *
- * 利用条件 (2026-10-29 に公式ページで確認):
- * - N06 高速道路時系列: 「時系列データとして使用する場合：非商用」。最新年の現況としてだけ使うなら CC BY 4.0
- * - N05 鉄道時系列: 「商用利用はできません」(原典の一つが有償刊行物)
- * どちらも時系列として描くので非商用。広告・アフィリエイトを出さず、公開は事務局の書面回答を待つ
- * (`.claude/rules/geo-analysis-standards.md`「商用公開Gate」)。
+ * 利用条件と公式ページの URL はここに書かず、GIS 台帳 (`mlit-ksj/datasets.ts`) の `usageTerms` と
+ * `sourcePageUrl` から引く (`infraNetworkTerms` / `infraNetworkPageUrl`)。どちらも時系列として描くので非商用で、
+ * 広告・アフィリエイトを出さず、公開は事務局の書面回答を待つ (`.claude/rules/geo-analysis-standards.md`「商用公開Gate」)。
  */
 export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
   {
@@ -25,19 +24,13 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
       version: "24",
       name: "国土数値情報 高速道路時系列データ",
       provider: "国土交通省",
-      pageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N06-2024.html",
       archiveUrl: "https://nlftp.mlit.go.jp/ksj/gml/data/N06/N06-24/N06-24_GML.zip",
       archiveSha256: "d93847fd40fad45bf108448d43e1598f1148815fa8d696ec6085976860160969",
       archiveBytes: 7751741,
       entry: "UTF-8/N06-24_HighwaySection.geojson",
       retrievedAt: "2026-10-29T00:18:00.000Z",
     },
-    terms: {
-      usage: "time-series",
-      terms: "non-commercial",
-      verifiedAt: "2026-10-29",
-      evidence: "時系列データとして使用する場合：非商用",
-    },
+    usage: "time-series",
     publication: {
       status: "local-only",
       adPolicy: "none",
@@ -77,19 +70,13 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
       version: "24",
       name: "国土数値情報 鉄道時系列データ",
       provider: "国土交通省",
-      pageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N05-2024.html",
       archiveUrl: "https://nlftp.mlit.go.jp/ksj/gml/data/N05/N05-24/N05-24_GML.zip",
       archiveSha256: "84ce3d3d50ad56aa53970ef2907eab32a8b7d1a2cc894c164ff4107384dff24b",
       archiveBytes: 33268725,
       entry: "UTF-8/N05-24_RailroadSection2.geojson",
       retrievedAt: "2026-10-29T00:18:00.000Z",
     },
-    terms: {
-      usage: "time-series",
-      terms: "non-commercial",
-      verifiedAt: "2026-10-29",
-      evidence: "本データは有償刊行物を使用し作成したものですので商用利用はできません。",
-    },
+    usage: "time-series",
     publication: {
       status: "local-only",
       adPolicy: "none",
@@ -119,6 +106,25 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = [
     ],
   },
 ] as const;
+
+/**
+ * このページの使い方に適用される利用条件 (GIS 台帳の `usageTerms`)。
+ * 台帳に根拠付きの条件が無ければ止める (根拠の無い条件で公開や広告の判断をしない)。
+ */
+export function infraNetworkTerms(network: InfraNetworkDefinition): InfraSourceTerms {
+  const terms = resolveKsjUsageTerms(network.source.dataId, network.usage);
+  if (!terms) {
+    throw new Error(`GIS 台帳に ${network.source.dataId} の「${network.usage}」の利用条件がありません`);
+  }
+  return { ...terms, usage: network.usage };
+}
+
+/** 原典の公式ページ (GIS 台帳の sourcePageUrl) */
+export function infraNetworkPageUrl(network: InfraNetworkDefinition): string {
+  const url = GIS_DATASETS_BY_ID.get(network.source.dataId)?.sourcePageUrl;
+  if (!url) throw new Error(`GIS 台帳に ${network.source.dataId} の公式ページがありません`);
+  return url;
+}
 
 export function findInfraNetwork(key: string): InfraNetworkDefinition | null {
   return INFRA_NETWORKS.find((network) => network.key === key) ?? null;

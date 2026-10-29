@@ -337,6 +337,14 @@ updated: 2026-10-19
 - **停止条件・禁止**: 書面回答の前に R2 へ置かない、広告・アフィリエイト枠を足さない、検索に出さない。年不明 (999) を推測で埋めない。
 - **完了条件**: 回答の証跡が台帳にあり、本番の `/geo/history/expressway` と `/geo/history/railway` が 200・広告なし・地図表示で確認でき、R2 の manifest と summary の SHA がローカル生成と一致する。
 
+### [GIS-SOURCE-PAGE-URL-01] 公式ページの URL が無い登録済み GIS 31 件に URL を足し、利用条件の区分名のずれを個別ページで確かめる
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:cd packages/gis && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts] [起票:2026-10-29] [領域:データ]
+
+- **見つけた経緯 (2026-10-29)**: GIS 台帳の参照整合テスト (`dataset-references.test.ts`) を作ったところ、登録済み 31 件 (A10・A12・A13・A16・A17・A22・A27・A29・A31b・A32・A33・A38・A40・C02・C09・C23・N03・N07・P03・P04・P11・P12・P13・P14・P17・P18・P29・P35・P36・W01・W05) に `sourcePageUrl` が無かった。`geo:check-data-catalog` は同じ欠けをエラーにするが、R2 を読むため手動実行で、CI に載っていなかった。テストの `KNOWN_MISSING_SOURCE_PAGE` (縮小専用) に固定してある。
+- **あわせて確かめること**: 公式利用条件の一覧 (`official-policy.ts`) は m250r6・m500r6 を commercial-ok としているが、2026-10-29 の個別ページはどちらも「オープンデータ (CC_BY_4.0)」。台帳は m250r6 が cc-by-4.0、m500r6 が commercial-ok で揃っていない。扱い (出典表示で商用可・公開可) は同じなのでテストは区分名の違いを許している。
+- **次**: 各データの `KsjTmplt-<ID>-<年>.html` が 200 を返すことを確かめて `datasets.ts` に足し、テストの一覧から消す。区分名は個別ページに合わせる (一般規約より個別ページが優先 — gis-data.md)。
+- **完了条件**: `KNOWN_MISSING_SOURCE_PAGE` が空で、上の検証コマンドが通る。
+
 ### [ROADS-THEME-N06-LICENSE-01] 道路テーマの高速道路タイムライン地図 (N06 の時系列) を、広告のあるページから外すか条件を確かめる
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:データ]
 

@@ -55,6 +55,21 @@ export interface GisDatasetRankingConfig {
   dedupeByProperties?: readonly string[];
 }
 
+/**
+ * 使い方。国土数値情報は同じデータでも使い方で利用条件が変わることがある
+ * (N06 高速道路時系列は「最新年の現況」なら CC BY 4.0、「時系列」なら非商用)。
+ */
+export type GisDatasetUsage = "current" | "time-series";
+
+/** ある使い方に適用される利用条件と、その根拠 (公式ページの文言) */
+export interface GisDatasetUsageTerms {
+  readonly license: KsjLicense;
+  /** 公式の個別データページの該当文言 (短い引用) */
+  readonly evidence: string;
+  /** 公式ページで確認した日 (YYYY-MM-DD) */
+  readonly verifiedAt: string;
+}
+
 export interface GisDatasetMeta {
   dataId: string;
   /** データ名 (日本語) */
@@ -67,13 +82,18 @@ export interface GisDatasetMeta {
   stats47Category: string | null;
   isRankingTarget: boolean;
   /** ranking 対象データセットの ranking 定義 (旧 seed-from-registry.ts RANKINGS を統合) */
-  rankingConfig?: GisDatasetRankingConfig[];
+  rankingConfig?: readonly GisDatasetRankingConfig[];
   /** ranking 集計の基準バージョン (旧 RANKINGS.version)。pipeline download の {VERSION} 既定値 */
   latestVersion?: string;
   /** 国土数値情報の公式データ詳細ページ。配布単位の自動検出にも使う。 */
   sourcePageUrl?: string;
   /** 候補カタログ側で別IDになっている場合のID。 */
   candidateAliases?: readonly string[];
+  /**
+   * 使い方ごとの利用条件。`license` (データ全体の判定) と違う条件が公式ページにある使い方だけを書く。
+   * 書いていない使い方は `license` に従う。読むときは `resolveKsjUsageTerms` を使い、条件を別の台帳へ複製しない。
+   */
+  usageTerms?: Partial<Record<GisDatasetUsage, GisDatasetUsageTerms>>;
 }
 
 /**
@@ -81,8 +101,12 @@ export interface GisDatasetMeta {
  * 本ファイル (datasets.ts) が git TS メタ SSOT (完全DBレス)。
  * 旧 doc 04 の生成表 (generate-docs.ts) は datasets.ts と重複するため 2026-07-12 廃止。
  * ranking 定義は旧 RANKINGS (seed-from-registry.ts) を統合。
+ *
+ * `as const satisfies` で書き、dataId の文字列リテラルから `KsjDataId` 型を導く。
+ * 他の台帳が存在しない dataId を書くと型検査で落ちる (パッケージをまたぐ参照は
+ * `__tests__/dataset-references.test.ts` が検査する)。
  */
-export const GIS_DATASETS: GisDatasetMeta[] = [
+const GIS_DATASET_LIST = [
   // ── 国土 (水・土地) ─────────────────────────────────────────
   { dataId: "A12", name: "農業地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "15" },
   { dataId: "A13", name: "森林地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "15" },
@@ -176,11 +200,28 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
     stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "25", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html",
     rankingConfig: [{ rankingKey: "railway-station-count", rankingName: "鉄道駅数", unit: "駅", categoryKey: "infrastructure", filenamePattern: "Station", yearCode: "2025", description: "国土数値情報に登録されている鉄道駅の都道府県別数" }],
   },
+  // 交通網の変遷 (/geo/history/railway) の原典。原典の一つが有償刊行物のため全体が非商用 (2026-10-29 公式ページで確認)。
+  // public R2 には置かない (license-policy.ts の non-commercial)。
+  {
+    dataId: "N05", name: "鉄道時系列", category: "transport", geometryType: "line", coverage: "national", license: "non-commercial",
+    stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N05-2024.html",
+    usageTerms: {
+      "time-series": { license: "non-commercial", evidence: "本データは有償刊行物を使用し作成したものですので商用利用はできません。", verifiedAt: "2026-10-29" },
+    },
+  },
   // ranking 定義を外した (2026-08-17)。`expressway-junction-count` は metric config も
   // R2 データも存在せず、/ranking/expressway-junction-count は soft 404 を返していた
   // (HTTP 200 + 「ランキングが見つかりません」)。実現しなかった計画が SSOT に残っていた
   // 状態なので、実態に合わせて落とす。作るなら metric config の新設から始める。
-  { dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20" },
+  {
+    dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20",
+    sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N06-2024.html",
+    // 2026-10-29 に公式ページ「データ利用時の注意事項」で確認。2018 年度以降の版を最新年度の現況として使うなら CC BY 4.0
+    usageTerms: {
+      current: { license: "cc-by-4.0", evidence: "整備年度が2018年度以降のものをそれぞれの最新年度の現況データとして使用する場合：CC_BY_4.0", verifiedAt: "2026-10-29" },
+      "time-series": { license: "non-commercial", evidence: "時系列データとして使用する場合：非商用", verifiedAt: "2026-10-29" },
+    },
+  },
   { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "22" },
   { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "25", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html" },
 
@@ -217,9 +258,27 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "S10a", name: "港湾間流通量・海上経路", category: "transport", geometryType: "line", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10a-2016.html" },
   { dataId: "m250r6", name: "250mメッシュ別将来推計人口（R6国政局推計）", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html" },
   { dataId: "m500r6", name: "500mメッシュ別将来推計人口（R6国政局推計）", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "commercial-ok", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html" },
-];
+] as const satisfies readonly GisDatasetMeta[];
+
+/** 登録済みの dataId。台帳にない ID は型検査で落ちる */
+export type KsjDataId = (typeof GIS_DATASET_LIST)[number]["dataId"];
+
+export const GIS_DATASETS: GisDatasetMeta[] = [...GIS_DATASET_LIST];
 
 /** dataId → メタ の索引 */
 export const GIS_DATASETS_BY_ID: Map<string, GisDatasetMeta> = new Map(
   GIS_DATASETS.map((d) => [d.dataId, d]),
 );
+
+/**
+ * 使い方に適用される利用条件。`usageTerms` に書かれた使い方はその条件、無ければデータ全体の `license`。
+ * 根拠 (evidence) が無い条件は null を返す (`license` だけでは「どの使い方で確認したか」が分からないため、
+ * 呼び出し側は根拠の無い条件で公開判断をしない)。
+ */
+export function resolveKsjUsageTerms(
+  dataId: KsjDataId,
+  usage: GisDatasetUsage,
+): GisDatasetUsageTerms | null {
+  const meta = GIS_DATASETS_BY_ID.get(dataId);
+  return meta?.usageTerms?.[usage] ?? null;
+}

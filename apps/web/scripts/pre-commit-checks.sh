@@ -82,6 +82,20 @@ if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -q "^.claude/skills/db/sync-snapsho
   fi
 fi
 
+# 2.2b GIS 台帳の参照整合 (2026-10-29)。datasets.ts を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
+# 指標の ksjDataId・交通網の変遷の台帳が存在しない dataId を指していないかを R2 なしで検査する。
+# geo:check-data-catalog は R2 の在庫まで読むため手動で、台帳どうしのずれを commit 前に止める手段が無かった。
+if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/)"; then
+  echo -e "${GREEN}🗂️  GIS 台帳の参照整合...${NC}"
+  if ! (cd "$GUARD_ROOT/packages/gis" && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts > /tmp/gis-dataset-references.log 2>&1); then
+    tail -30 /tmp/gis-dataset-references.log
+    echo -e "${RED}❌ GIS 台帳の dataId の参照がずれています (存在しない ID・利用条件の食い違い・公式ページの欠けの増加)。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ GIS 台帳の参照整合 OK${NC}"
+  fi
+fi
+
 # 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。

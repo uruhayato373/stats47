@@ -42,7 +42,7 @@ import {
   type YearSpan,
 } from "../core";
 import { infraHistoryKeys } from "../keys";
-import { INFRA_NETWORKS } from "../networks";
+import { INFRA_NETWORKS, infraNetworkPageUrl, infraNetworkTerms } from "../networks";
 import { INFRA_REGIONS } from "../scopes";
 import type {
   InfraArtifactRecord,
@@ -355,8 +355,8 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
     schemaVersion: 1,
     network: network.key,
     generatedAt: new Date().toISOString(),
-    source: network.source,
-    terms: network.terms,
+    source: { ...network.source, pageUrl: infraNetworkPageUrl(network) },
+    terms: infraNetworkTerms(network),
     publication: network.publication,
     definitionSha256,
     input: {

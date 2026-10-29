@@ -12,7 +12,7 @@ import {
   type SegmentAssignment,
 } from "../core";
 import { infraHistoryKeys, infraNetworkOfKey } from "../keys";
-import { INFRA_NETWORKS } from "../networks";
+import { INFRA_NETWORKS, infraNetworkTerms } from "../networks";
 import { parseInfraHistorySummary } from "../parse";
 import { INFRA_REGIONS, INFRA_SCOPE_REGIONS } from "../scopes";
 
@@ -191,7 +191,7 @@ describe("地方の区分", () => {
 describe("台帳", () => {
   test("時系列として使う原典はすべて非商用で、広告を出さず、公開前の状態に留まる", () => {
     for (const network of INFRA_NETWORKS) {
-      expect(network.terms.terms).toBe("non-commercial");
+      expect(infraNetworkTerms(network).license).toBe("non-commercial");
       expect(network.publication.adPolicy).toBe("none");
       if (network.publication.status === "public-approved") {
         expect(network.publication.permissionEvidence).toBeTruthy();
