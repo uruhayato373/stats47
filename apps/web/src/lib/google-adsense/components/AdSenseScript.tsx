@@ -21,13 +21,18 @@ import { ADSENSE_DISPLAY_ENABLED, isAdFreePath } from "../constants";
 /**
  * AdSenseスクリプトコンポーネント
  */
-export function AdSenseScript() {
+export function AdSenseScript({
+  adFreePathPrefixes,
+}: {
+  /** 広告を出さないページの接頭辞 (サーバーで GIS 台帳の利用条件から導く。ad-free-paths.ts) */
+  adFreePathPrefixes: readonly string[];
+}) {
   const clientId = SITE.adsenseClientId;
   const pathname = usePathname();
   const isEnabled =
     ADSENSE_DISPLAY_ENABLED &&
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true" &&
-    !isAdFreePath(pathname);
+    !isAdFreePath(pathname, adFreePathPrefixes);
 
   useEffect(() => {
     if (!isEnabled || !clientId) return;

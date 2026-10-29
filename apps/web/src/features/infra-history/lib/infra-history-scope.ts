@@ -3,6 +3,7 @@ import {
   INFRA_REGIONS,
   INFRA_SCOPE_REGIONS,
   findInfraScopeRegionOfPref,
+  type InfraNetworkDefinition,
   type InfraNetworkKey,
 } from '@stats47/gis/infra-history';
 
@@ -107,6 +108,11 @@ export function infraScopeNavItems(network: InfraNetworkKey, scope: ResolvedInfr
       };
     }),
   ];
+}
+
+/** 見出しの名詞。線は「高速道路網」、点は「空港」 */
+export function infraNetworkNoun(network: InfraNetworkDefinition): string {
+  return network.geometry === 'line' ? `${network.label}網` : network.label;
 }
 
 export function prefName(prefCode: string): string {

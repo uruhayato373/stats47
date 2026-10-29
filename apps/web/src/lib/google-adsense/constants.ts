@@ -18,17 +18,13 @@ import type { AdFormat } from "./types";
 export const ADSENSE_DISPLAY_ENABLED: boolean = true;
 
 /**
- * AdSense の script を読み込まないページ。非商用の利用条件の原典を描くページ
- * (交通網の変遷: 国土数値情報 N05/N06 の時系列) を広告から切り離す。
+ * AdSense の script を読み込まないページか。広告を出さないページの接頭辞は GIS 台帳の利用条件から
+ * サーバーで導き (`ad-free-paths.ts`)、ここは照合だけを行う。
  * 手動枠を置かないだけでなく script 自体を読まない (自動広告をオンにしても出ないように)。
  */
-export const AD_FREE_PATH_PREFIXES: readonly string[] = ['/geo/history'];
-
-export function isAdFreePath(pathname: string | null): boolean {
+export function isAdFreePath(pathname: string | null, prefixes: readonly string[]): boolean {
   if (!pathname) return false;
-  return AD_FREE_PATH_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-  );
+  return prefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 
 // 以下の slotId はすべて新アカウントで 2026-10-11 に発行した広告ユニット。配置ごとに 1 ユニットを

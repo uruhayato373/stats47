@@ -50,10 +50,20 @@
       "import": "./src/infra-history/index.ts",
       "require": "./src/infra-history/index.ts"
     },
+    "./subjects": {
+      "types": "./src/subjects/index.ts",
+      "import": "./src/subjects/index.ts",
+      "require": "./src/subjects/index.ts"
+    },
     "./mlit-ksj/catalog": {
       "types": "./src/mlit-ksj/catalog.ts",
       "import": "./src/mlit-ksj/catalog.ts",
       "require": "./src/mlit-ksj/catalog.ts"
+    },
+    "./mlit-ksj/classifications": {
+      "types": "./src/mlit-ksj/classifications.ts",
+      "import": "./src/mlit-ksj/classifications.ts",
+      "require": "./src/mlit-ksj/classifications.ts"
     }
   },
   "scripts": {

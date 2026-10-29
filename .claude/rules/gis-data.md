@@ -82,8 +82,8 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 | license | 元TopoJSONのpublic R2 | 広告・販売を伴う成果物 | 公開JSON/CSV |
 |---|---|---|---|
 | `cc-by-4.0` / `commercial-ok` | 可 | 出典・加工表示付きで可 | 可 |
-| `cc-by-4.0-partial` | 不可（個別確認まで） | 個別条件を確認 | 書面/個別条件確認まで不可 |
-| `non-commercial` | **不可。ローカル限定** | 非データベースのGIS空間演算結果だけ利用余地あり。出典・加工者表示必須 | **書面確認または商用可ソースへの置換まで不可** |
+| `cc-by-4.0-partial` | 不可（個別確認まで） | 個別条件を確認 | 許諾の証跡/個別条件確認まで不可 |
+| `non-commercial` | **不可。ローカル限定** | 非データベースのGIS空間演算結果だけ利用余地あり。出典・加工者表示必須 | **許諾の証跡（書面または電話）または商用可ソースへの置換まで不可** |
 
 `non-commercial`の登録済みは`C02, C09, C23, N05, P03, P12, P13, P17, P18, P35, W01, W05`の12件。
 うち N05 (鉄道時系列) を除く11件は、2026-09-05の実R2監査でpublic mirrorを検出したため、`r2-retention.ts`のexact prefix
@@ -93,6 +93,13 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 同じデータでも使い方で条件が変わるもの (N06 高速道路時系列は現況なら CC BY 4.0、時系列なら非商用) は、
 `datasets.ts` の `usageTerms` に使い方ごとの条件と公式ページの文言・確認日を書き、`resolveKsjUsageTerms` で引く。
 利用条件を他の台帳 (交通網の変遷など) に複製しない。
+
+## 地物の区分 (色分け) の台帳
+
+属性で地物を色分けする区分は `packages/gis/src/mlit-ksj/classifications.ts` だけに書く (公開口 `@stats47/gis/mlit-ksj/classifications`)。
+コード表ごとに区分 (原典コード → 表示の区分・色トークン) を 1 つ持ち、データごとに引く属性名を持つ (鉄道は N05 `N05_001` と N02 `serviceProviderType` が同じコード表)。
+交通網の変遷 (`infra-history/networks.ts`) と単体 GIS ページの地図・凡例はこの台帳をそのまま使い、区分を複製しない。
+区分の属性を持たない地物 (空港の標点など) は推測で区分を当てず「区分のない地物」として描く。検査は `__tests__/classifications.test.ts`。
 
 ## 台帳の ID と参照整合
 
@@ -104,7 +111,7 @@ gis に依存できないので、`packages/gis/src/mlit-ksj/__tests__/dataset-r
 このうち`W01/P03/P12/P35/C09`由来の既存ランキングは、metricの実sourceまで走査すると11本あった
 （GISのrankingConfigだけでは別系列`fishing-port-count`を見落とす）。画面上の図表まで直ちに利用不可と断定しないが、
 `app/stats/.../values.json`が公開構造化データなので権利確認が必要。`generate-ksj-stats-values.ts`は再生成を停止し、
-商用可の一次資料へ置換、権利者/事務局の書面許諾、または非データベース成果だけに縮退するまで公開更新しない。
+商用可の一次資料へ置換、権利者/事務局の許諾の証跡、または非データベース成果だけに縮退するまで公開更新しない。
 
 生成時だけでなく汎用R2 publisher（diff-push、exact asset、wrangler）も
 `ksj-publication-guard.ts`で全候補をPUT前に検査する。判定は`datasets.ts`、全metricの実source、`license-policy.ts`から導出し、
@@ -114,6 +121,7 @@ sourceを書き換えただけでは同じkeyの旧values.jsonを公開できな
 
 公開時の出典は「データ名、国土交通省、個別ページURL、取得日、stats47が加工した事実」を最低限表示し、
 個別データページの条件が一般規約より優先される。利用範囲が曖昧なら推測せず国土数値情報運営事務局へ確認する。
+**許諾の証跡は書面に限らず電話も認める** (2026-10-29 オーナー決定)。電話は、日付・相手 (部署・担当者)・了承された使い方の範囲・要旨・記録者を台帳に残す。範囲に含まれない使い方 (例: 広告のあるページ・SNS) は了承済みとみなさない。
 
 ## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容
 
@@ -172,7 +180,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
 | **座標から最寄りの県庁所在地で県を決める** | `prefecture-assign.ts` の 3 段 (決まらなければ null) |
 | **全プロパティを走査して「それらしい値」を県コードに使う** | `registry.ts` の `prefectureSource` で明示宣言 |
 | **metric config も R2 データも無い ranking を datasets.ts に残す** | 実体が無ければ `isRankingTarget:false` か定義削除 (soft 404 になる) |
-| **`non-commercial`を「加工したから自由」とみなしてpublic R2/JSONへ置く** | 元データはlocal-only。非DB空間演算結果以外は書面確認か商用可ソースへ置換 |
+| **`non-commercial`を「加工したから自由」とみなしてpublic R2/JSONへ置く** | 元データはlocal-only。非DB空間演算結果以外は許諾の証跡か商用可ソースへ置換 |
 
 ## 検証
 

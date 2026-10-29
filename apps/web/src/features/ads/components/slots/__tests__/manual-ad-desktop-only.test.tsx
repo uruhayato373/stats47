@@ -58,7 +58,7 @@ describe("AdSense停止中の契約", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
     const ad = render(<AdSenseAd format="article" slotId="1234567890" />);
-    const script = render(<AdSenseScript />);
+    const script = render(<AdSenseScript adFreePathPrefixes={[]} />);
 
     expect(ad.container).toBeEmptyDOMElement();
     expect(script.container).toBeEmptyDOMElement();

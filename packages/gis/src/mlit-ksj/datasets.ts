@@ -253,7 +253,12 @@ const GIS_DATASET_LIST = [
   { dataId: "L03-b", name: "土地利用細分メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-2021.html" },
   { dataId: "L03-b-c", name: "土地利用詳細メッシュ", category: "land", geometryType: "mesh", coverage: "region", license: "commercial-ok", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-c-2021.html" },
   { dataId: "L03-b-u", name: "都市地域土地利用細分メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-u-2021.html" },
-  { dataId: "N08", name: "空港時系列", category: "transport", geometryType: "mixed", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html" },
+  {
+    dataId: "N08", name: "空港時系列", category: "transport", geometryType: "mixed", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html",
+    usageTerms: {
+      "time-series": { license: "commercial-ok", evidence: "このデータの使用許諾条件：商用可", verifiedAt: "2026-10-29" },
+    },
+  },
   { dataId: "S05-d", name: "貨物旅客地域流動量", category: "transport", geometryType: "line", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-d-2018.html" },
   { dataId: "S10a", name: "港湾間流通量・海上経路", category: "transport", geometryType: "line", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10a-2016.html" },
   { dataId: "m250r6", name: "250mメッシュ別将来推計人口（R6国政局推計）", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html" },

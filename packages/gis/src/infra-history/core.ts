@@ -127,6 +127,39 @@ export function buildLengthSeries(
   };
 }
 
+export interface CountSpan {
+  /** 同じ施設を表す ID (関係 ID)。同じ年に同じ ID の記録が複数あっても 1 つと数える */
+  readonly relation: string;
+  readonly start: number;
+  readonly end: number;
+  readonly category: string;
+}
+
+/**
+ * 年ごとの施設数の系列。施設 = 関係 ID。空港は同じ年に 1 つの空港が複数の区域の記録を持つことがあるので、
+ * 記録の数ではなく関係 ID の数を数える。種別が年の途中で変わる施設は、その年に存在した種別ごとに数える。
+ */
+export function buildCountSeries(
+  spans: readonly CountSpan[],
+  years: readonly number[],
+  categoryCodes: readonly string[],
+): InfraLengthSeries {
+  const known = new Set(categoryCodes);
+  for (const span of spans) {
+    if (!known.has(span.category)) throw new Error(`台帳に無い種別コード: ${span.category}`);
+  }
+  const countIn = (year: number, category?: string) =>
+    new Set(
+      spans
+        .filter((span) => isActiveInYear(span.start, span.end, year) && (category === undefined || span.category === category))
+        .map((span) => span.relation),
+    ).size;
+  return {
+    total: years.map((year) => countIn(year)),
+    byCategory: Object.fromEntries(categoryCodes.map((code) => [code, years.map((year) => countIn(year, code))])),
+  };
+}
+
 export function sumLengthSeries(
   series: readonly InfraLengthSeries[],
   length: number,

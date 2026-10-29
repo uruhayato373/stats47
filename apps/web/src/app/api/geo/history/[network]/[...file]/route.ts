@@ -8,6 +8,7 @@
  *   /api/geo/history/railway/national.topojson
  *   /api/geo/history/railway/region/kanto.topojson
  *   /api/geo/history/railway/pref/28.topojson
+ *   /api/geo/history/expressway/joints.topojson (接合部 IC・JCT の点。全国 1 ファイル)
  */
 import { infraHistoryKey, isInfraNetworkKey } from '@stats47/gis/infra-history';
 import { fetchFromR2 } from '@stats47/r2-storage/server';
@@ -16,7 +17,7 @@ import { NO_STORE_CACHE_HEADERS, PUBLIC_DATA_CACHE_HEADERS } from '@/lib/cache-p
 
 export const revalidate = 86400;
 
-const FILE_PATTERN = /^(?:national|region\/[a-z_]+|pref\/\d{2})\.topojson$/;
+const FILE_PATTERN = /^(?:national|joints|region\/[a-z_]+|pref\/\d{2})\.topojson$/;
 
 export async function GET(
   _request: Request,

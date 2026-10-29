@@ -25,8 +25,10 @@ import {
   DEFAULT_COASTLINE_TOLERANCE_KM,
   PREF_CODES,
   createPrefectureLocator,
+  prefCodeFromSource,
 } from "../../mlit-ksj/prefecture-assign";
 import {
+  buildCountSeries,
   buildLengthSeries,
   classifyTransitions,
   lineLengthKm,
@@ -36,6 +38,7 @@ import {
   splitLineByPrefecture,
   sumLengthSeries,
   yearRange,
+  type CountSpan,
   type LinePiece,
   type Position,
   type SegmentAssignment,
@@ -79,7 +82,10 @@ interface SourceFeature {
   readonly category: string;
   readonly name: string;
   readonly relationIds: string[];
+  /** 線の網では区間の線。点の網では施設の位置 1 点を長さ 0 の線 [[p, p]] として持つ (開通・廃止の判定を共有するため) */
   readonly lines: Position[][];
+  /** 属性 (`prefectureSource`) から決まった県。決まらなければ null で、位置から決める */
+  readonly prefFromAttribute: string | null;
 }
 
 type Piece<P> = { props: P; coords: readonly Position[] };
@@ -87,7 +93,7 @@ type Piece<P> = { props: P; coords: readonly Position[] };
 function parseArgs(argv: readonly string[]): { networks: InfraNetworkDefinition[] } {
   const index = argv.indexOf("--network");
   const value = index >= 0 ? argv[index + 1] : undefined;
-  if (!value) throw new Error("--network <expressway|railway|all> を指定してください");
+  if (!value) throw new Error("--network <expressway|railway|airport|all> を指定してください");
   if (value === "all") return { networks: [...INFRA_NETWORKS] };
   const network = INFRA_NETWORKS.find((item) => item.key === value);
   if (!network) throw new Error(`台帳に無い路線網: ${value}`);
@@ -130,7 +136,12 @@ async function readSourceFeatures(
   const geojson = JSON.parse((await entry.buffer()).toString("utf8")) as {
     features: Array<{ geometry: { type: string; coordinates: unknown } | null; properties: Record<string, unknown> }>;
   };
-  const codes = new Set(network.categories.map((category) => category.code));
+  // 原典のコード値 → 表示の種別コード (sourceCodes でまとめる種別があれば寄せる)
+  const categoryOfSourceCode = new Map<string, string>(
+    network.categories.flatMap((category) =>
+      (category.sourceCodes ?? [category.code]).map((sourceCode) => [sourceCode, category.code] as const),
+    ),
+  );
   const { attributes } = network;
   const problems: string[] = [];
   const features: SourceFeature[] = [];
@@ -138,29 +149,28 @@ async function readSourceFeatures(
   geojson.features.forEach((feature, index) => {
     const start = parseSourceYear(feature.properties[attributes.start]);
     const end = parseSourceYear(feature.properties[attributes.end]);
-    const category = String(feature.properties[attributes.category] ?? "");
+    const sourceCategory = String(feature.properties[attributes.category] ?? "");
+    const category = categoryOfSourceCode.get(sourceCategory) ?? null;
     const name = String(feature.properties[attributes.name] ?? "").trim();
+    const lines = network.geometry === "point" ? pointAsLines(feature.geometry) : lineGeometry(feature.geometry);
     const geometry = feature.geometry;
-    const lines =
-      geometry?.type === "LineString"
-        ? [geometry.coordinates as Position[]]
-        : geometry?.type === "MultiLineString"
-          ? (geometry.coordinates as Position[][])
-          : null;
     if ((start === UNKNOWN_YEAR || end === UNKNOWN_YEAR) && lines) {
       // 年不明の記録は時系列に置けない。推測せず除外し、件数と延長を manifest に残す
       unknownYear.push({ index, name, start, end, km: lines.reduce((sum, line) => sum + lineLengthKm(line), 0) });
     } else if (start === null || end === null || end < start) problems.push(`#${index} 年が不正 (${start}-${end})`);
-    else if (!codes.has(category)) problems.push(`#${index} 台帳に無い種別 ${category}`);
-    else if (!lines) problems.push(`#${index} 線ではない形状 ${geometry?.type}`);
+    else if (category === null) problems.push(`#${index} 台帳に無い種別 ${sourceCategory}`);
+    else if (!lines) problems.push(`#${index} 台帳の描き方 (${network.geometry}) に合わない形状 ${geometry?.type}`);
     else {
       const relationIds = [
         String(feature.properties[attributes.relation] ?? ""),
-        ...String(feature.properties[attributes.relationNote] ?? "").split("+"),
+        ...(attributes.relationNote ? String(feature.properties[attributes.relationNote] ?? "").split("+") : []),
       ]
         .map((id) => id.trim())
         .filter((id) => id !== "");
-      features.push({ start, end, category, name, relationIds, lines });
+      const prefFromAttribute = attributes.prefectureSource
+        ? prefCodeFromSource(feature.properties, attributes.prefectureSource)
+        : null;
+      features.push({ start, end, category, name, relationIds, lines, prefFromAttribute });
     }
   });
   if (problems.length > 0) {
@@ -169,13 +179,43 @@ async function readSourceFeatures(
   return { features, unknownYear };
 }
 
+type RawGeometry = { type: string; coordinates: unknown } | null;
+
+function lineGeometry(geometry: RawGeometry): Position[][] | null {
+  if (geometry?.type === "LineString") return [geometry.coordinates as Position[]];
+  if (geometry?.type === "MultiLineString") return geometry.coordinates as Position[][];
+  return null;
+}
+
+/** 点・面を施設の位置 1 点にする (面は外周の頂点の平均)。長さ 0 の線 [[p, p]] で返す */
+function pointAsLines(geometry: RawGeometry): Position[][] | null {
+  const ring =
+    geometry?.type === "Point"
+      ? [geometry.coordinates as Position]
+      : geometry?.type === "Polygon"
+        ? (geometry.coordinates as Position[][])[0]
+        : geometry?.type === "MultiPolygon"
+          ? (geometry.coordinates as Position[][][]).flatMap((polygon) => polygon[0])
+          : null;
+  if (!ring || ring.length === 0) return null;
+  const center: Position = [
+    ring.reduce((sum, p) => sum + p[0], 0) / ring.length,
+    ring.reduce((sum, p) => sum + p[1], 0) / ring.length,
+  ];
+  return [[center, center]];
+}
+
+/** 1 点の piece は Point、それ以外は LineString として書く */
 function toCollection<P>(pieces: ReadonlyArray<Piece<P>>) {
   return {
     type: "FeatureCollection" as const,
     features: pieces.map((piece) => ({
       type: "Feature" as const,
       properties: piece.props,
-      geometry: { type: "LineString" as const, coordinates: piece.coords.map((p) => [p[0], p[1]]) },
+      geometry:
+        piece.coords.length === 1
+          ? { type: "Point" as const, coordinates: [piece.coords[0][0], piece.coords[0][1]] }
+          : { type: "LineString" as const, coordinates: piece.coords.map((p) => [p[0], p[1]]) },
     })),
   };
 }
@@ -191,6 +231,9 @@ function toTopology(
     { lines: toCollection(pieces) as never, events: toCollection(events) as never },
     quantization,
   );
+  // 点だけの網は簡略化する線が無い。presimplify は点の座標を量子化したまま残すので、
+  // 量子化し直すと二重に量子化される (2026-10-29 に空港の点が地図の外へ出た)
+  if (topology.arcs.length === 0) return `${JSON.stringify(topology)}\n`;
   const presimplified = topojsonSimplify.presimplify(topology as never);
   const minWeight = topojsonSimplify.quantile(presimplified, quantile);
   // presimplify は座標を量子化前の小数へ戻すので、簡略化の後に量子化し直す
@@ -207,6 +250,7 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
   const { features, unknownYear } = await readSourceFeatures(network, archive);
   const years = yearRange(network.years.first, network.years.last);
   const codes = network.categories.map((category) => category.code);
+  const isPoint = network.geometry === "point";
 
   const locator = createPrefectureLocator(JSON.parse(fs.readFileSync(PREF_TOPOJSON, "utf8")));
   const assign = (lon: number, lat: number): SegmentAssignment | null => {
@@ -218,12 +262,39 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
 
   const sourceSpans: YearSpan[] = [];
   const spansByPref = new Map<string | null, YearSpan[]>();
+  const countSpans: CountSpan[] = [];
+  const countSpansByPref = new Map<string | null, CountSpan[]>();
+  const prefOfFeature: Array<string | null> = [];
   const piecesByPref = new Map<string, Array<Piece<InfraPieceProperties>>>();
   const nationalPieces: Array<Piece<InfraPieceProperties>> = [];
-  const counts = { segments: 0, polygon: 0, coastline: 0, unassigned: 0 };
+  const counts = { segments: 0, attribute: 0, polygon: 0, coastline: 0, unassigned: 0 };
 
   for (const feature of features) {
     const props: InfraPieceProperties = { s: feature.start, e: feature.end, c: feature.category, n: feature.name };
+    if (isPoint) {
+      // 点: 県は属性 → 位置 (ポリゴン → 海岸線) の順。数は関係 ID (同じ施設) で数える
+      const point = feature.lines[0][0];
+      const located = feature.prefFromAttribute ? null : assign(point[0], point[1]);
+      const prefCode = feature.prefFromAttribute ?? located?.prefCode ?? null;
+      counts.segments += 1;
+      if (feature.prefFromAttribute) counts.attribute += 1;
+      else if (located?.method === "polygon") counts.polygon += 1;
+      else if (located?.method === "coastline") counts.coastline += 1;
+      else counts.unassigned += 1;
+      const span: CountSpan = {
+        relation: feature.relationIds[0] ?? `${feature.name}:${feature.start}`,
+        start: feature.start,
+        end: feature.end,
+        category: feature.category,
+      };
+      countSpans.push(span);
+      countSpansByPref.set(prefCode, [...(countSpansByPref.get(prefCode) ?? []), span]);
+      prefOfFeature.push(prefCode);
+      nationalPieces.push({ props, coords: [point] });
+      if (prefCode) piecesByPref.set(prefCode, [...(piecesByPref.get(prefCode) ?? []), { props, coords: [point] }]);
+      continue;
+    }
+    prefOfFeature.push(null);
     for (const line of feature.lines) {
       sourceSpans.push({ start: feature.start, end: feature.end, category: feature.category, km: lineLengthKm(line) });
       nationalPieces.push({ props, coords: line });
@@ -268,6 +339,13 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
     const props: InfraEventProperties = { k: event.kind, y: event.year, c: feature.category, n: feature.name };
     transitionTotals[event.kind].count += 1;
     transitionTotals[event.kind].km += event.km;
+    if (isPoint) {
+      const point = event.lines[0][0];
+      const prefCode = prefOfFeature[event.recordIndex];
+      nationalEvents.push({ props, coords: [point] });
+      if (prefCode) eventsByPref.set(prefCode, [...(eventsByPref.get(prefCode) ?? []), { props, coords: [point] }]);
+      continue;
+    }
     for (const line of event.lines) {
       nationalEvents.push({ props, coords: line });
       for (const piece of splitLineByPrefecture(line, assign)) {
@@ -278,11 +356,16 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
   }
   for (const total of Object.values(transitionTotals)) total.km = Math.round(total.km * 10) / 10;
 
+  // 線は延長 (km)、点は施設数 (関係 ID の数)
+  const seriesOf = (code: string | null): InfraLengthSeries =>
+    isPoint
+      ? buildCountSeries(countSpansByPref.get(code) ?? [], years, codes)
+      : buildLengthSeries(spansByPref.get(code) ?? [], years, codes);
   const prefectures: Record<string, InfraLengthSeries> = Object.fromEntries(
-    PREF_CODES.map((code) => [code, buildLengthSeries(spansByPref.get(code) ?? [], years, codes)]),
+    PREF_CODES.map((code) => [code, seriesOf(code)]),
   );
-  const unassigned = buildLengthSeries(spansByPref.get(null) ?? [], years, codes);
-  const national = buildLengthSeries(sourceSpans, years, codes);
+  const unassigned = seriesOf(null);
+  const national = isPoint ? buildCountSeries(countSpans, years, codes) : buildLengthSeries(sourceSpans, years, codes);
   const regions: Record<string, InfraLengthSeries> = Object.fromEntries(
     INFRA_REGIONS.map((region) => [
       region.code,
@@ -386,9 +469,9 @@ async function buildNetwork(network: InfraNetworkDefinition): Promise<void> {
 
   const totalBytes = records.reduce((sum, record) => sum + record.bytes, 0);
   console.log(`  年不明で除外 ${unknownYear.length} 件`);
-  console.log(`  区間 ${features.length} 件 / 線分 ${counts.segments} (ポリゴン ${counts.polygon}・海岸線 ${counts.coastline}・未帰属 ${counts.unassigned})`);
-  console.log(`  ${years[lastIndex]}年 延長 ${national.total[lastIndex].toFixed(1)} km (未帰属 ${unassigned.total[lastIndex].toFixed(1)} km)`);
-  console.log(`  保存則 最大差 ${maxAbsDiffKm} km / 出力 ${records.length + 1} ファイル ${(totalBytes / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`  記録 ${features.length} 件 / 県の判定 ${counts.segments} (属性 ${counts.attribute}・ポリゴン ${counts.polygon}・海岸線 ${counts.coastline}・未帰属 ${counts.unassigned})`);
+  console.log(`  ${years[lastIndex]}年 ${network.measure.label} ${national.total[lastIndex].toFixed(1)} ${network.measure.unit} (未帰属 ${unassigned.total[lastIndex].toFixed(1)})`);
+  console.log(`  保存則 最大差 ${maxAbsDiffKm} ${network.measure.unit} / 出力 ${records.length + 1} ファイル ${(totalBytes / 1024 / 1024).toFixed(2)} MB`);
   console.log(`  national.topojson ${(records[1].bytes / 1024).toFixed(0)} KB`);
 }
 

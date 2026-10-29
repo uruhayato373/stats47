@@ -2,7 +2,7 @@ import { TSUNAMI_EXPOSURE_SOURCE } from '../../../../data-configs/src/theme-cata
 import { assertTsunamiManifest, assertTsunamiSnapshot } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-schema';
 import { assertScopedGeoSourcePublication, isScopedGeoSourceKey } from './scoped-geo-source-publication';
 import { INFRA_HISTORY_PREFIX, infraNetworkOfKey } from '../../../../gis/src/infra-history/keys';
-import { findInfraNetwork } from '../../../../gis/src/infra-history/networks';
+import { findInfraNetwork, isInfraNetworkPublishable } from '../../../../gis/src/infra-history/networks';
 import { GIS_DATASETS } from '../../../../gis/src/mlit-ksj/datasets';
 import { getKsjLicensePolicy } from '../../../../gis/src/mlit-ksj/license-policy';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
@@ -64,7 +64,7 @@ export function assertKsjPublicKeysAllowed(keys: readonly string[]): void {
     const infraNetwork = infraNetworkOfKey(key);
     if (key.startsWith(INFRA_HISTORY_PREFIX)) {
       const network = infraNetwork ? findInfraNetwork(infraNetwork) : null;
-      if (!network || network.publication.status !== 'public-approved') {
+      if (!network || !isInfraNetworkPublishable(network)) {
         throw new Error(
           `交通網の変遷は公開未承認: ${key} (${network?.publication.blockedReason ?? '台帳に無い路線網'})`
         );

@@ -12,7 +12,8 @@ import {
   type SegmentAssignment,
 } from "../core";
 import { infraHistoryKeys, infraNetworkOfKey } from "../keys";
-import { INFRA_NETWORKS, infraNetworkTerms } from "../networks";
+import { INFRA_PUBLICATION_REQUIRED_SCOPES } from "../types";
+import { INFRA_NETWORKS, findInfraNetworksForDataset, isInfraNetworkPublishable, infraNetworkTerms, isInfraNetworkAdFree } from "../networks";
 import { parseInfraHistorySummary } from "../parse";
 import { INFRA_REGIONS, INFRA_SCOPE_REGIONS } from "../scopes";
 
@@ -189,14 +190,32 @@ describe("地方の区分", () => {
 });
 
 describe("台帳", () => {
-  test("時系列として使う原典はすべて非商用で、広告を出さず、公開前の状態に留まる", () => {
+  test("広告の有無は台帳の使い方の利用条件で決まり、非商用の網は事務局の了承の記録があるときだけ公開扱いになる", () => {
+    const byKey = Object.fromEntries(INFRA_NETWORKS.map((network) => [network.key, network]));
+    expect(isInfraNetworkAdFree(byKey.expressway)).toBe(true);
+    expect(isInfraNetworkAdFree(byKey.railway)).toBe(true);
+    // 空港時系列は商用可なので広告を出せる
+    expect(isInfraNetworkAdFree(byKey.airport)).toBe(false);
     for (const network of INFRA_NETWORKS) {
-      expect(infraNetworkTerms(network).license).toBe("non-commercial");
-      expect(network.publication.adPolicy).toBe("none");
       if (network.publication.status === "public-approved") {
-        expect(network.publication.permissionEvidence).toBeTruthy();
+        expect(network.publication.permissionEvidence).not.toBeNull();
+        for (const scope of INFRA_PUBLICATION_REQUIRED_SCOPES) expect(network.publication.permissionEvidence?.scope, network.key).toContain(scope);
+        expect(network.publication.permissionEvidence?.date, network.key).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(network.publication.permissionEvidence?.counterpart, network.key).toBeTruthy();
+      }
+      // 非商用の網は、公式ページの条件ではなく事務局の了承 (書面・電話) が要り、広告のあるページは範囲に入れない
+      if (infraNetworkTerms(network).license === "non-commercial" && network.publication.status === "public-approved") {
+        expect(network.publication.permissionEvidence?.method, network.key).not.toBe("official-terms");
+        expect(network.publication.permissionEvidence?.scope, network.key).not.toContain("ad-page");
+        expect(isInfraNetworkAdFree(network), network.key).toBe(true);
       }
     }
+  });
+
+  test("現況の単体 GIS ページから時系列ページを逆引きできる", () => {
+    expect(findInfraNetworksForDataset("N02").map((network) => network.key)).toEqual(["railway"]);
+    expect(findInfraNetworksForDataset("N08").map((network) => network.key)).toEqual(["airport"]);
+    expect(findInfraNetworksForDataset("C28")).toEqual([]);
   });
 
   test("R2 key は URL /geo/history/<network> に対応し、路線網を逆引きできる", () => {
@@ -237,5 +256,34 @@ describe("parseInfraHistorySummary", () => {
 
   test("別の路線網の summary は読まない", () => {
     expect(parseInfraHistorySummary(valid, "railway")).toBeNull();
+  });
+});
+
+describe("公開の判定 (isInfraNetworkPublishable)", () => {
+  const evidence = {
+    method: "phone" as const,
+    date: "2026-10-29",
+    counterpart: "国土数値情報 事務局",
+    summary: "広告のないページでの公開を了承",
+    recordedBy: "owner",
+  };
+  test("広告なしページと加工データ配信の両方の了承があるときだけ公開できる", () => {
+    const publication = (scope: readonly ("ad-free-page" | "processed-data-delivery" | "sns" | "ad-page")[]) => ({
+      publication: { status: "public-approved" as const, blockedReason: null, permissionEvidence: { ...evidence, scope } },
+    });
+    expect(isInfraNetworkPublishable(publication(["ad-free-page", "processed-data-delivery"]))).toBe(true);
+    expect(isInfraNetworkPublishable(publication(["ad-free-page"]))).toBe(false);
+    expect(isInfraNetworkPublishable(publication(["sns"]))).toBe(false);
+  });
+  test("status が local-only なら証跡があっても公開しない", () => {
+    expect(
+      isInfraNetworkPublishable({
+        publication: {
+          status: "local-only",
+          blockedReason: "確認中",
+          permissionEvidence: { ...evidence, scope: ["ad-free-page", "processed-data-delivery"] },
+        },
+      }),
+    ).toBe(false);
   });
 });

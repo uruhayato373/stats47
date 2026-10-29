@@ -7,9 +7,26 @@
  */
 
 import type { GisDatasetUsage, GisDatasetUsageTerms, KsjDataId } from "../mlit-ksj/datasets";
+import type { KsjAttributeClass } from "../mlit-ksj/classifications";
+import type { PrefectureSource } from "../mlit-ksj/prefecture-assign";
 
 /** URL と R2 key に使う路線網の slug */
-export type InfraNetworkKey = "expressway" | "railway";
+export type InfraNetworkKey = "expressway" | "railway" | "airport";
+
+/**
+ * 地図の描き方と集計の単位。
+ * line = 区間の線を県境で分けて延長 (km) を集計する (高速道路・鉄道)
+ * point = 施設の位置を点で描き、関係 ID (同じ施設) の数を集計する (空港)
+ */
+export type InfraGeometry = "line" | "point";
+
+/** 集計値の名前と単位 (線は延長 km、点は施設数) */
+export interface InfraMeasure {
+  /** 「延長」「空港数」 */
+  readonly label: string;
+  /** 「km」「か所」 */
+  readonly unit: string;
+}
 
 /** 表示範囲。全国 / 7 地方 (`@stats47/area` の REGIONS) / 都道府県 (2 桁) */
 export type InfraHistoryScope =
@@ -26,13 +43,44 @@ export type InfraSourceTerms = GisDatasetUsageTerms & { readonly usage: GisDatas
 /**
  * 公開の状態。非商用データは書面確認が取れるまで `local-only` に留め、
  * R2 公開 (`assertKsjPublicKeysAllowed`) とサイトマップ掲載を止める。
+ * 広告の有無はここに書かず、GIS 台帳の使い方ごとの利用条件から決める (`isInfraNetworkAdFree`)。
  */
+/** 了承を得た使い方。公開 (R2 反映・検索掲載) には ad-free-page と processed-data-delivery の両方が要る */
+export type InfraPermissionScope =
+  /** 広告・アフィリエイトのないページでの表示 */
+  | "ad-free-page"
+  /** 加工した線・点データを閲覧者のブラウザへ配る */
+  | "processed-data-delivery"
+  /** 同じデータから作った画像・動画の SNS 投稿 */
+  | "sns"
+  /** 広告のあるページ (ブログ・テーマ) での表示 */
+  | "ad-page";
+
+/**
+ * 公開を許す根拠。電話でも認めるが、あとから誰でも範囲を確かめられるよう、
+ * 日付・相手・了承の範囲・要旨を必ず記録する (2026-10-29 オーナー決定。それ以前は書面のみ)
+ */
+export interface InfraPermissionEvidence {
+  /** official-terms: 公式ページの利用条件そのもの / written: メール・書面 / phone: 電話 */
+  readonly method: "official-terms" | "written" | "phone";
+  /** 確認した日 (YYYY-MM-DD) */
+  readonly date: string;
+  /** 相手 (部署・担当者)。official-terms は確認したページの URL */
+  readonly counterpart: string;
+  readonly scope: readonly InfraPermissionScope[];
+  /** 了承の内容の要旨 (相手の言葉に近い形で) */
+  readonly summary: string;
+  /** 記録した人 */
+  readonly recordedBy: string;
+}
+
+/** 公開に要る了承の範囲 */
+export const INFRA_PUBLICATION_REQUIRED_SCOPES: readonly InfraPermissionScope[] = ["ad-free-page", "processed-data-delivery"];
+
 export interface InfraPublication {
   readonly status: "local-only" | "public-approved";
-  /** 広告・アフィリエイトの扱い。非商用データのページは常に none */
-  readonly adPolicy: "none";
-  /** 事務局の書面回答など、公開を許す根拠 (status=public-approved で必須) */
-  readonly permissionEvidence: string | null;
+  /** 公開を許す根拠 (status=public-approved で必須。範囲に INFRA_PUBLICATION_REQUIRED_SCOPES を含む) */
+  readonly permissionEvidence: InfraPermissionEvidence | null;
   /** local-only の理由 */
   readonly blockedReason: string | null;
 }
@@ -63,17 +111,17 @@ export interface InfraAttributeMap {
   readonly category: string;
   /** 関係 ID (同じ区間の記録をつなぐ ID) */
   readonly relation: string;
-  /** 関係備考 (主たる関係 ID 以外の関係 ID。"+" 区切り) */
-  readonly relationNote: string;
+  /** 関係備考 (主たる関係 ID 以外の関係 ID。"+" 区切り)。原典に無ければ省略 */
+  readonly relationNote?: string;
+  /**
+   * 県を属性から決めるときの宣言 (prefecture-assign.ts の 3 段の 1 段目)。省略時は位置から決める。
+   * 空港は所在地の 5 桁市区町村コードを持つので、人工島の空港も海岸線の許容距離に頼らず県が決まる
+   */
+  readonly prefectureSource?: PrefectureSource;
 }
 
-export interface InfraCategory {
-  /** 原典のコード値 */
-  readonly code: string;
-  readonly label: string;
-  /** 地図の線色。`--color-chart-N` は Tailwind v4 が使われない限り出力しないので、トークン `--chart-N` を hsl() で包む */
-  readonly color: string;
-}
+/** 表示の種別。区分の台帳 (`mlit-ksj/classifications.ts`) の区分をそのまま使う */
+export type InfraCategory = KsjAttributeClass;
 
 export interface InfraNetworkDefinition {
   readonly key: InfraNetworkKey;
@@ -84,6 +132,10 @@ export interface InfraNetworkDefinition {
   readonly source: InfraSource;
   /** このページの使い方。利用条件は GIS 台帳の `usageTerms[usage]` */
   readonly usage: GisDatasetUsage;
+  readonly geometry: InfraGeometry;
+  readonly measure: InfraMeasure;
+  /** 同じものの現況を描く単体 GIS ページの dataId (`/geo/datasets/<dataId>`)。無ければ省略 */
+  readonly currentDataId?: KsjDataId;
   readonly publication: InfraPublication;
   readonly attributes: InfraAttributeMap;
   readonly categories: readonly InfraCategory[];
@@ -170,7 +222,10 @@ export interface InfraHistoryManifest {
     }>;
   };
   readonly assignment: {
+    /** 県を判定した単位の数 (線は線分、点は記録) */
     readonly segments: number;
+    /** 属性 (市区町村コード等) で決まった数。点の網だけ */
+    readonly attribute: number;
     readonly polygon: number;
     readonly coastline: number;
     readonly unassigned: number;

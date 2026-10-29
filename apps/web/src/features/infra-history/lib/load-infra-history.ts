@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { cache } from 'react';
+
 import {
   infraHistoryKeys,
   parseInfraHistorySummary,
@@ -9,10 +11,13 @@ import {
 } from '@stats47/gis/infra-history';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
-/** summary.json を読む。読めない・形が合わないときは null (画面は欠損として表示する) */
-export async function loadInfraHistorySummary(
+/**
+ * summary.json を読む。読めない・形が合わないときは null (画面は欠損として表示する)。
+ * metadata とページ本体が同じリクエストで読むので cache で 1 回にまとめる
+ */
+export const loadInfraHistorySummary = cache(async (
   network: InfraNetworkKey,
-): Promise<InfraHistorySummary | null> {
+): Promise<InfraHistorySummary | null> => {
   try {
     return parseInfraHistorySummary(
       await fetchFromR2AsJson<unknown>(infraHistoryKeys.summary(network)),
@@ -21,7 +26,7 @@ export async function loadInfraHistorySummary(
   } catch {
     return null;
   }
-}
+});
 
 /** manifest のうち画面に出す項目 (県帰属・保存則・年不明の除外) だけを確かめて返す */
 export type InfraHistoryEvidence = Pick<

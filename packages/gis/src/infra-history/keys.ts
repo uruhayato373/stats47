@@ -9,6 +9,7 @@ import type { InfraNetworkKey } from "./types";
  * - `national.topojson`           全国表示用 (簡略化)
  * - `region/<regionCode>.topojson` 地方表示用
  * - `pref/<NN>.topojson`          都道府県表示用 (県境で分割した区間だけ)
+ * - `joints.topojson`             接合部 (IC・JCT) の点。全国 1 ファイル (高速道路だけ。主題 expressway-joints)
  */
 export const INFRA_HISTORY_PREFIX = "app/geo/history/";
 
@@ -24,6 +25,7 @@ export const infraHistoryKeys = {
     infraHistoryKey(network, `region/${regionCode}.topojson`),
   prefecture: (network: InfraNetworkKey, prefCode: string) =>
     infraHistoryKey(network, `pref/${prefCode}.topojson`),
+  joints: (network: InfraNetworkKey) => infraHistoryKey(network, "joints.topojson"),
 } as const;
 
 /** key が属する路線網。`app/geo/history/` 以外は null */

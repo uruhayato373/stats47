@@ -5,7 +5,8 @@ import { GEO_SOURCE_PAGES } from '../../../../data-configs/src/business-plan/geo
 import { GEO_SOURCE_POLICY_PAGES } from '../../../../data-configs/src/business-plan/geo-source-policy-pages';
 import { GEO_SOURCE_SERVICE_PAGES } from '../../../../data-configs/src/business-plan/geo-source-service-pages';
 import { METRICS_REGISTRY } from '../../../../data-configs/src/registry';
-import { INFRA_NETWORKS, infraNetworkPageUrl, infraNetworkTerms } from '../../infra-history/networks';
+import { INFRA_PUBLICATION_REQUIRED_SCOPES } from '../../infra-history/types';
+import { INFRA_NETWORKS, infraNetworkPageUrl, infraNetworkTerms, isInfraNetworkAdFree } from '../../infra-history/networks';
 import { GIS_DATASETS, resolveKsjUsageTerms, type KsjDataId } from '../datasets';
 import { getKsjLicensePolicy } from '../license-policy';
 import { PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS, UNREGISTERED_KSJ_OFFICIAL_POLICY } from '../official-policy';
@@ -117,10 +118,18 @@ describe('GIS 台帳を参照する表 (子表)', () => {
       expect(() => infraNetworkPageUrl(network)).not.toThrow();
       const terms = infraNetworkTerms(network);
       if (terms.license === 'non-commercial') {
-        expect(network.publication.adPolicy).toBe('none');
+        expect(isInfraNetworkAdFree(network), network.key).toBe(true);
         if (network.publication.status === 'public-approved') {
-          expect(network.publication.permissionEvidence, network.key).toBeTruthy();
+          expect(network.publication.permissionEvidence).not.toBeNull();
+        for (const scope of INFRA_PUBLICATION_REQUIRED_SCOPES) expect(network.publication.permissionEvidence?.scope, network.key).toContain(scope);
+        expect(network.publication.permissionEvidence?.date, network.key).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(network.publication.permissionEvidence?.counterpart, network.key).toBeTruthy();
         }
+      }
+      // 現況ページへのリンク先は、単体 GIS ページを持つ登録データ
+      if (network.currentDataId) {
+        expect(unknownIds([network.currentDataId]), network.key).toEqual([]);
+        expect(GEO_SOURCE_PAGES.some((page) => page.dataId === network.currentDataId), network.key).toBe(true);
       }
     }
   });

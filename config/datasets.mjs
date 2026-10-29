@@ -152,6 +152,11 @@ export const REGISTRIES = {
     description: "ranking の投稿が指してよいキー (現行の指標と、301 で現行の指標へ届く旧 slug)",
     union: ["metrics", "ranking-slug-redirects"],
   },
+  "ksj-datasets": {
+    description: "国土数値情報の GIS 台帳 (GIS_DATASETS) の dataId",
+    files: ["packages/gis/src/mlit-ksj/datasets.ts"],
+    pattern: '^\\s*\\{?\\s*dataId:\\s*"([A-Za-z0-9-]+)"',
+  },
   "geo-campaign-metric-names": {
     description: "Geo 分析キャンペーン (BUSINESS_PLAN_M1_ANALYSES) の metricKeys の文字列リテラル (Geo の集計値の名前)",
     files: ["packages/data-configs/src/business-plan/m1.ts"],
@@ -409,6 +414,14 @@ export const DATASETS = [
   d("estat.availability", "data/estat/availability/{**}", "state", "data", "data", "e-Stat の表・取り出し条件ごとの実在年 (年ごとの値のある県の数) と、metric config の years との差分"),
   d("geo.sources", "data/geo/{name}", "state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),
   d("geo.scope", "data/geo/scope/{name}", "evidence", "data", "data", "Geo の対象範囲の棚卸しと拡充の検証"),
+  d("geo.subjects", "data/geo/subjects/subjects.json", "config", "data", "data", "主題の台帳 (主題 = 原典のデータ 1 つを地図にどう描くかの定義。英語 subject)。交通網の変遷・単体 GIS ページ・重ね合わせ (/geo/map?subjects=) が参照し、表示名・区分のまとめ方・色を揃える (2026-10-29 オーナー決定)", {
+    schema: "data/geo/subjects/subjects.schema.json",
+    refs: [
+      { field: "subjects[].source.dataId", to: "registry:ksj-datasets" },
+      { field: "subjects[].source.metricKey", to: "registry:metrics" },
+    ],
+  }),
+  d("geo.subjects-schema", "data/geo/subjects/subjects.schema.json", "config", "data", "data", "上の台帳の JSON Schema"),
   d("business.goals", "data/goals/{**}", "state", "strategy", "data", "/goal の目標とサイクル"),
   d("ai-content.remediation", "data/ai-content/remediation/{name}", "state", "data", "data", "ランキング AI 解説の是正キュー・生成失敗・進捗"),
   d("municipalities.expansion", "data/municipalities/{name}", "state", "data", "data", "市区町村データの拡充調査と棚卸し"),

@@ -328,14 +328,21 @@ updated: 2026-10-19
 ### [INFRA-TIMELINE-01] 交通網の変遷 (高速道路・鉄道の時系列 GIS) を公開できる状態にし、見せ方を画像・動画・SNS へ展開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-29] [領域:データ]
 
-- **現状 (2026-10-29)**: `/geo/history/<expressway|railway>[/<regionCode|NN>]` をローカルで実装済み。台帳 `packages/gis/src/infra-history/networks.ts`、生成 `build-infra-history.ts`、成果物は `.local/r2/app/geo/history/` のみ。両原典とも時系列は非商用 (N06「時系列データとして使用する場合：非商用」・N05「商用利用はできません」) のため、ページは広告・アフィリエイトなし・AdSense script 不読込・`noindex`、R2 公開は `ksj-publication-guard.ts` が拒否する。
+- **現状 (2026-10-29)**: `/geo/history/<expressway|railway|airport>[/<regionCode|NN>]` をローカルで実装済み。台帳 `packages/gis/src/infra-history/networks.ts`、生成 `build-infra-history.ts`、成果物は `.local/r2/app/geo/history/` のみ (R2 未反映)。N06・N05 の時系列は非商用だが、2026-10-29 にオーナーが事務局から電話で了承を得た (`PHONE_PERMISSION_2026_10_29`: 広告なしページでの地図表示 (加工データの配信を含む)・SNS)。電話も証跡として認める決まりに変えた (gis-data.md)。台帳は `public-approved` で `isInfraNetworkPublishable` が true (noindex 解除・R2 ガード通過)。ページは広告・アフィリエイトなしのまま (広告のあるページ `ad-page` は了承の範囲外)。
 - **次 (実行順)**:
-  ① 国土数値情報の事務局へ「広告を置かない非商用ページで、年別の地図と県別延長を公開してよいか」(サイト全体には広告がある点を明記) を書面で問い合わせる。送信はオーナー。
-  ② 回答を `publication.permissionEvidence` に記録し `status: public-approved` にしてから、R2 反映・サイトマップ追加・`/geo` からの導線・`noindex` 解除を同じ差分で行う。
-  ③ 見せ方の展開: 全国・地方の年別静止画 (参考書籍『統計から読み解く色分け日本地図』の見開き型: 地図 + 凡例 + 総延長 + 順位表) と Remotion の時系列動画を同じ summary / topojson から作る。SNS 投稿も非商用の範囲かを①の回答で確かめてから行う。
+  ① (済み) 事務局の了承を台帳に記録した。
+  ② R2 反映 (CI の `r2-publisher` 経由。承認のうえ)・サイトマップ追加・`/geo` からの導線を同じまとまりで行い、デプロイはオーナーの指示で 1 回。
+  ③ 見せ方の展開: 全国・地方の年別静止画 (参考書籍『統計から読み解く色分け日本地図』の見開き型: 地図 + 凡例 + 総延長 + 順位表) と Remotion の時系列動画を同じ summary / topojson から作る。SNS 投稿は了承の範囲 (`sns`) に入っている。
   ④ 鉄道の開業年の 1950 年以前 (原典で 1950 に丸め) と、高速道路の延長が公表値 (供用延長) と一致しない点を、画面の注記以上に扱うか決める。
-- **停止条件・禁止**: 書面回答の前に R2 へ置かない、広告・アフィリエイト枠を足さない、検索に出さない。年不明 (999) を推測で埋めない。
-- **完了条件**: 回答の証跡が台帳にあり、本番の `/geo/history/expressway` と `/geo/history/railway` が 200・広告なし・地図表示で確認でき、R2 の manifest と summary の SHA がローカル生成と一致する。
+- **停止条件・禁止**: 了承の証跡 (日付・相手・範囲) を台帳に書く前に R2 へ置かない、検索に出さない。了承の範囲に `ad-page` が無ければ広告・アフィリエイト枠を足さない。年不明 (999) を推測で埋めない。
+- **完了条件**: 本番の `/geo/history/expressway` と `/geo/history/railway` が 200・広告なし・地図表示で確認でき、R2 の manifest と summary の SHA がローカル生成と一致する。
+
+### [CHART-FOOTER-MENU-TEST-01] ChartFooter のメニューのテストが「role=menu が見つからない」で落ちている
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx vitest run src/components/charts/__tests__/ChartFooter.test.tsx] [起票:2026-10-29]
+
+- **現状 (2026-10-29)**: `npx vitest run src/components/charts/__tests__/ChartFooter.test.tsx` (apps/web) で「固定IDのメニューを開くと操作ボタンと内容が相互に対応する」が `Unable to find role="menu"` で失敗する (4 件中 1 件)。交通網の変遷の作業中に見つけた。ChartFooter とそのテストはこの作業で触っておらず、直近の変更は 2026-10-28 の lyra の書き込み (5392747f7・410b2948e)。
+- **次**: メニューを開く操作 (Base UI の DropdownMenu) がテスト環境で開かなくなった原因を、上の 2 コミットの前後でテストを流して切り分ける。
+- **完了条件**: 同テストが 4 件とも通り、web の vitest 全件が緑。
 
 ### [GIS-SOURCE-PAGE-URL-01] 公式ページの URL が無い登録済み GIS 31 件に URL を足し、利用条件の区分名のずれを個別ページで確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:cd packages/gis && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts] [起票:2026-10-29] [領域:データ]
@@ -345,13 +352,153 @@ updated: 2026-10-19
 - **次**: 各データの `KsjTmplt-<ID>-<年>.html` が 200 を返すことを確かめて `datasets.ts` に足し、テストの一覧から消す。区分名は個別ページに合わせる (一般規約より個別ページが優先 — gis-data.md)。
 - **完了条件**: `KNOWN_MISSING_SOURCE_PAGE` が空で、上の検証コマンドが通る。
 
+### [GIS-ATTRIBUTE-LEDGER-01] GIS の属性 (各データが持つ項目と意味) と区分を data/geo/ の JSON 台帳 + Schema に集約し、地図・凡例・吹き出し・集計がそこから引く形にする
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-29] [領域:データ]
+
+- **なぜ (2026-10-29 の作業で実際に困ったこと)**:
+  - 属性の情報が 5 か所に分かれている: 単体 GIS ページの項目説明 `GeoSourceField` (`packages/data-configs/src/business-plan/geo-source-pages.ts`)、区分の台帳 `packages/gis/src/mlit-ksj/classifications.ts`、交通網の `attributes` (`packages/gis/src/infra-history/networks.ts`)、県を決める `prefectureSource` と名前の付け替え `propertyMap` (`registry.ts`。`propertyMap` は 44 件すべて空で未使用)。候補メタ `packages/database/seed/ksj-catalog.json` は属性を持たない。
+  - そのため、実物を開いて初めて分かったことが 3 つあった。① 鉄道の現況 N02 は属性名が `serviceProviderType` (時系列 N05 は `N05_001`。コードの意味は同じ)。② 空港 N08 は 1 ファイルに属性の組が違う 2 種類の地物 (区域 `N08_001〜018` と標点 `N08_019〜025`) が混ざる。③ 標点の `N08_021` は値が 1 と 3 だけで意味が未確認 (区域の種別と 186 件中 22 件しか一致しない)。
+  - 決まり (memory `feedback_authored_ledgers_in_data`・`.claude/rules/data-storage.md`): 人や agent が判断して書く台帳は `data/` か `config/` に JSON + JSON Schema で置き、`config/datasets.mjs` に登録する。packages には読み込み・型・関数だけを置く。今の GIS の台帳 (datasets.ts・registry.ts・networks.ts・classifications.ts) は packages の TS で、`npm run check-datasets` の検査 (Schema・台帳間の ID 参照 `refs`) から外れている。前例はテーマのカタログ `data/themes/catalogs/<key>.json`。
+- **決定 (2026-10-29 オーナー)**: 台帳を 3 つに分ける。① **原典台帳** `data/geo/attributes/<dataId>.json` = 地物の種類・属性の役割・コード表 (公式の意味)・利用条件と了承の記録 (データ × 使い方。今は `networks.ts` の `PHONE_PERMISSION_2026_10_29` と `datasets.ts` の `usageTerms` にある)。② **主題の台帳** `data/geo/subjects/subjects.json` + Schema (作成済み・8 主題。主題 = 原典のデータ 1 つを地図にどう描くか。英語 `subject`、サイトの「テーマ」theme とは別) = 表示名・区分のまとめ方・色・年の合わせ方・描いてよい範囲。③ **生成物の manifest** = 年の範囲・作成済みか・SHA (人が書かない)。区分のまとめ方と色は主題の台帳が正本 (コード表の意味だけが原典台帳)。交通網の `networks.ts` も最終的にこの 2 つの台帳から組み立てる。移行期間は `classifications.ts` と主題の台帳の一致をテスト (`classifications.test.ts` の「移行期間」) で固定している。
+- **方針 (「意味」と「観測」を分ける)**:
+
+  | もの | 置き場 | 書き手 |
+  |---|---|---|
+  | 属性の意味 (キー・名前・説明・単位・値の型・役割・コード表の参照・出典の文書と版) | `data/geo/attributes/<dataId>.json` + `config/schema/geo-attributes.schema.json` (1 データ 1 ファイル。版と地物の種類ごとに属性の組を持つ) | 人・`gis-curator` |
+  | コード表と区分 (原典コード → 表示の区分・色トークン) | `data/geo/classifications.json` + Schema。コード表は共有 (例: 鉄道の事業者種別を N05 と N02 で 1 つ) | 人・`gis-curator` |
+  | 観測した属性の一覧 (版・ファイル・地物の種類ごとのキー・値の型・欠けの件数・値の種類の数) | `data/geo/attribute-inventory.json` (生成物。手で直さない) | 取り込みのパイプライン |
+  | 読み込み・型・判定関数 (`classifyKsjFeature` など) | `packages/gis` | コード |
+
+  役割は固定の語彙にする: `name` (名称)・`startYear`・`endYear`・`category` (区分)・`relation` (同じものの記録をつなぐ ID)・`prefecture` (県の手がかり)・`identifier`・`measure` (数量)・`other`。交通網の `attributes`・`prefectureSource`・区分の属性名・単体ページの吹き出しの項目は、すべてこの役割から引く。
+- **手順 (この順で。各段で検証コマンドを通してから次へ)**:
+  1. **観測を取る**: 取り込み (`run-pipeline.ts` / `acquire-public-ksj.ts`) が TopoJSON を作るときに、属性の一覧を scope 別 manifest に書き出す。既存の公開 50 件は R2 の配布ファイルから同じ一覧を作るスクリプトで一度だけ埋める (R2 は読むだけ)。`config/datasets.mjs` に `data/geo/attribute-inventory.json` の行を足し、Schema を付ける。ここで未整理の規模 (データ数 × 属性数) を数字で出し、カードに追記する。
+  2. **区分を移す**: `packages/gis/src/mlit-ksj/classifications.ts` の中身 (N06・N05・N02・N08) を `data/geo/classifications.json` + Schema へ移し、TS は読み込みと型と `findKsjClassification` / `ksjClassification` / `classifyKsjFeature` だけにする。読む側 (`infra-history/networks.ts`・`GeoSourceMap.tsx`・`/geo/datasets/[dataId]/page.tsx`) の呼び方は変えない。テスト `packages/gis/src/mlit-ksj/__tests__/classifications.test.ts` を JSON 版に向ける。色はチャートのトークン 6 種だけを Schema の enum で許す。
+  3. **(2026-10-29 済み) GIS の ID を参照の正本に登録する** — `config/datasets.mjs` の `REGISTRIES["ksj-datasets"]` (72 件。読み方は `packages/product-factory/tests/dataset-registries.test.ts` で GIS_DATASETS と照合)。最初の利用者は重ね合わせのレイヤー台帳 `data/geo/overlay/layers.json` (`geo.overlay-layers`)。元の手順: `config/datasets.mjs` の `REGISTRIES` に GIS の dataId (正本は `datasets.ts` の `GIS_DATASETS`) を足し、`classifications.json` と `attributes/*.json` の dataId を `refs` で検査する。正規表現と TS の値の一致は既存のテスト (`packages/product-factory/tests/dataset-registries.test.ts`) の形にならう。
+  4. **属性の意味の型を決める**: Schema を作り、まず実際に使っているデータ (交通網の N06・N05・N08、鉄道の現況 N02、単体ページで項目説明を持つデータ) から埋める。意味は国土数値情報の製品仕様書 (各データの属性定義) から取り、文書名と版と確認日を台帳に残す。分からない属性 (例: `N08_021`) は推測で書かず、`meaning: "未確認"` として残す。
+  5. **突き合わせの検査を足す**: R2 なしで走るテストで、観測にあって意味の台帳にない属性を「未整理」として数え、件数を縮小専用の一覧で固定する (`KNOWN_MISSING_SOURCE_PAGE` と同じ形)。意味の台帳にあって観測に無い属性 (名前の付け替え・版の違い) はエラーにする。pre-commit と CI (`test:packages`) に載せる。
+  6. **読む側を役割から引く形に寄せる**: 交通網の `attributes`、`registry.ts` の `prefectureSource`、単体ページの吹き出しの項目 (`GeoSourceField`) を、意味の台帳の役割と説明から引く。`GeoSourceField` は data-configs にあり gis に依存できないので、項目の定義は台帳 (JSON) を data-configs と gis の両方が読む形にし、data-configs には読み物の文章 (読み方・注意) だけを残す。
+  7. **既存の TS 台帳の扱いを決める (別の判断)**: `datasets.ts`・`registry.ts`・`networks.ts` を JSON + Schema へ移すかをオーナーが決める。移すと `KsjDataId` の型 (存在しない ID を型検査で落とす) が弱まるので、Schema の検証と読み込み時の型で補う方法を先に示す。移さない場合は、data-storage.md に「GIS の既存 TS 台帳は例外」と理由付きで書く。
+- **停止条件・禁止**: 製品仕様書で確かめていない意味を書かない (未確認と書く)。観測の生成物を手で直さない。区分やコードの意味を交通網・単体ページ側に複製しない。R2 へは書かない (観測は読むだけ)。手順 7 はオーナーの判断の前に着手しない。
+- **完了条件**: `npm run check-datasets` が `data/geo/classifications.json`・`data/geo/attributes/*.json`・`data/geo/attribute-inventory.json` を Schema と `refs` で検査して通る。区分と役割を読む側がすべて台帳から引いている (`packages/gis` に区分のデータが残っていない)。突き合わせの検査が CI に載り、未整理の件数が数字で分かる。
+
+### [UI-COMPONENT-CONSOLIDATE-01] 同じ役割の UI 部品を 1 つにまとめ、名前を「対象 + 役割」に揃える (推移・数値タイル・凡例・高速道路の時系列地図)
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run design-system:check -w apps/web] [起票:2026-10-29] [領域:サイト]
+
+- **なぜ (2026-10-29 の交通網の変遷の作業で見つけたこと)**:
+  - 「数値 + 推移」という同じ役割に、組み方が 4 つある: 地方財政 `LocalFinanceDashboard` = `StatTile` + `MiniLineChart`、ランキング `RankingNationalAverageStat` = `ChartPanel` の中で `STAT_VALUE_CLASS` を直接使って数字を手組み + `NumericTrendChart`、交通網 `InfraHistoryExplorer` = `StatTile` + `NumericTrendChart`、テーマのダッシュボード = `KpiCard` (`DashboardComponentRenderer` の `stats-card`)。ページごとに見た目と操作 (ツールチップ・選択年の印) が違う。
+  - 名前が作り方・大きさを表していて、何に使う部品か分からない (`Mini`・`Numeric`・`D3`)。どれを使うか迷い、似た部品が増える原因になる。
+  - カタログ `.claude/rules/chart-component-standards.md` が実物から古くなっている。§2-D の `TrendSparklineCard` (`@/features/ranking/components/RankingSidebar`) は、ts/tsx のリテラル検索で定義も呼び出しも見つからなかった (`RankingSidebar/` に該当ファイルが無い)。`stats-card` (KpiCard) も、`apps/web/scripts/data/page-components/`・`data/` の定義データからのリテラル参照は見つからなかった (動的に組み立てていないかは未確認)。
+- **使用箇所の実測 (2026-10-29、apps/web/src と packages の tsx。テストを除く)**:
+
+  | 役割 | 今ある部品 | 呼び出し | 違い |
+  |---|---|---|---|
+  | 推移の線 | `MiniLineChart` (`@/components/charts/MiniCharts`) | `LocalFinanceDashboard` 2 か所 | 軸なし・比較の破線・useD3Tooltip・最後の点を強調 |
+  | 推移の線 | `NumericTrendChart` (`@/components/charts/NumericTrendChart`) | `RankingNationalAverageStat`・`InfraHistoryExplorer` | 数値軸・暦年軸・選択年の印・`NumericDomainPolicy` |
+  | 数値タイル | `StatTile` (`@/components/surface`) | 地方財政・地域データブック・テーマの指標カード・ランキングの詳細パネル・交通網 | バッジ・補足・子にチャート |
+  | 数値タイル | `KpiCard` / `KpiCardClient` (`@/components/stat-charts`) | `DashboardComponentRenderer` 1 か所 | バッジ・増減。`StatTile` と役割が重なる |
+  | 区分の凡例 | `ChartLegend` (`@/components/charts/ChartLegend`) | 地方財政・交通網・単体 GIS 地図 | inline / list・切り替え (`aria-pressed`) |
+  | 区分の凡例 | `D3ChartLegend` (`packages/visualization/src/d3/components/shared`) | D3 の Bar・Line・Mixed・StackedArea の 4 チャート | 四角 / 線の印。切り替えなし |
+  | 連続値の凡例 | `ChoroplethLegend` (visualization) | 都道府県地図・市区町村地図 | 色の濃淡で値の大小。**役割が違うので残す** |
+  | 高速道路の時系列地図 | `HighwayTimelineMap` + `ThemeHighwayTimelineSection` (`@/features/highway-history`) | 道路テーマ (`theme-section-registry.tsx`) | R2 `app/highway-history/` を読む旧系統 |
+  | 高速道路の時系列地図 | `InfraHistoryExplorer` の地図 (`@/features/infra-history`) | `/geo/history/expressway` ほか | 交通網の変遷。鉄道・空港も同じ部品 |
+
+- **方針**:
+  - まとめる基準は「役割と受け取るデータの形が同じ」こと。見た目が似ていても役割が違うもの (`ChartPanel` と `StatTile`、区分の凡例と連続値の凡例) はまとめない (カタログ §2-C「カードフレームの役割分担」の 2026-06-23 の誤判定の記録)。
+  - 名前は「対象 + 役割」にする。作り方 (`D3`)・大きさ (`Mini`)・軸の種類 (`Numeric`) は名前に入れず、引数で表す。候補: 推移 = `TrendChart` (`axis`・`selectedYear`・`comparison` を引数に)、区分の凡例 = `CategoryLegend`、連続値の凡例 = `ScaleLegend`、数値タイル = `StatTile` (据え置き)。最終の名前は手順 1 の棚卸しのあとに決める。
+  - 「数値 + 推移」の組み方は 1 つにする: `StatTile` の子に推移を置く形を正とし、パネルの中で数字を手で組む書き方をやめる。
+- **手順 (この順で。各段で `npm run design-system:check -w apps/web` と、触った workspace の vitest related を通してから次へ)**:
+  1. **棚卸し**: カタログ §2 の全部品について、役割・受け取るデータの形・呼び出し箇所・まとめ先を表にし、このカードへ追記する。カタログにあって実物が無いもの (`TrendSparklineCard` など) と、実物にあってカタログに無いものを洗い出す。`KpiCard` は `stats-card` を組み立てる経路 (page_components・テーマ設定) を実行時の出力まで確かめ、本当に使われているかを決める。
+  2. **推移の線をまとめる**: `MiniLineChart` と `NumericTrendChart` を 1 つの部品にする。軸あり・なしと選択年の印・比較の破線・ツールチップを引数で切り替え、`useD3Tooltip` と `NumericDomainPolicy` を両方保つ。呼び出し 4 か所を移し、旧名は再 export で残さず消す。
+  3. **数値 + 推移の組み方を 1 つにする**: `RankingNationalAverageStat` の手組みを `StatTile` + 推移の部品に置き換える (ランキングの見出し行の高さを隣の「上位3件」と揃える要件は保つ)。`KpiCard` は手順 1 の結果で、使われていれば `StatTile` へ寄せ、使われていなければ消す。
+  4. **区分の凡例をまとめる**: `ChartLegend` と `D3ChartLegend` を 1 つにする。visualization の D3 チャートは apps/web を読めないので、置き場は `packages/components` か `packages/visualization` にする (どちらにするかは依存の向きを確かめて決める)。線・四角の印・値の列・切り替えを引数で持つ。
+  5. **高速道路の時系列地図を 1 系統にする**: 道路テーマの `ThemeHighwayTimelineSection` を、交通網の変遷 (`/geo/history/expressway`) への導線か同じ部品に置き換え、`features/highway-history` を消す。N06 の時系列を広告のあるページで使う問題は `ROADS-THEME-N06-LICENSE-01` と同じ差分で片づける。R2 の `app/highway-history/` の削除は、読み手が無いことを確かめてから承認を得て `r2-maintenance.yml` で行う。
+  6. **名前を揃え、戻らないようにする**: 手順 1 で決めた名前に変え、`check-design-system.mjs` に旧名の import を拒否する規則を足す。カタログ (§2-A〜2-D) と `.claude/rules/ui-components.md` を新しい名前と役割で書き直す。
+- **停止条件・禁止**: 役割が違う部品をまとめない。名前の変更だけを先に行わない (まとめる前に名前を変えると二度手間になる)。旧名を再 export で残さない。手順 5 の R2 削除は承認の前に行わない。見た目の変化 (余白・文字の大きさ) は右ペインで変更前と比べ、テンプレートの見本 (demos.shadcndashboard.dev) から外れていないか確かめる。
+- **完了条件**: 推移・数値タイル・区分の凡例・高速道路の時系列地図が、それぞれ 1 つの部品になっている。カタログに載る部品と実物が一致する (無いものが載っていない)。旧名の import を `design-system:check` が止める。web の vitest 全件が通る。
+
+### [GEO-OVERLAY-URL-01] 交通網と人口などを重ねる画面の URL と、問いの分析の置き場 (geo・ブログ・テーマ) を決めて url-policy に載せる
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-29] [領域:サイト]
+
+- **なぜ (2026-10-29 の議論)**: 鉄道・道路・港湾の時系列に人口 (e-Stat・GIS) を重ねたい。重ね合わせは「レイヤー × 年 × 範囲」の組み合わせで URL が増えやすく、広告の判定 (パスの接頭辞 `apps/web/src/lib/google-adsense/ad-free-paths.ts`) と公開の判定 (網ごとの `publication.status`) の両方に関わる。URL の正本 `apps/web/src/lib/url-policy.ts` は今 `/geo` 配下を管理していない (410・301・既知の URL の判定の対象外)。
+- **今の `/geo` の URL**: `/geo/<分析>` (+ `/<県>/<段階>`・`?pref=&stage=`。問いと計算の正本)、`/geo/layers/<レイヤー>` (閲覧できる表現)、`/geo/datasets/<dataId>` (原典 1 件)、`/geo/history/<網>/<範囲>` (交通網 1 網の時系列)、`/geo/compare` (分析の県別比較)。
+- **決定 (2026-10-29 オーナー)**: 「見る重ね合わせ」は geo の仕事 (重ねて見せ、どう重ねたかを検算できる形まで)。因果の解釈はブログ・テーマの仕事。重ねる単位の名前は「主題」(英語 `subject`)、URL は `/geo/map?base=<背景>&subjects=<重ねるもの,…>&scope=<範囲>` (決定 2 で背景を分けた)。主題の語彙・描いてよい範囲 (`scopes`) は主題の台帳 `data/geo/subjects/subjects.json`。塗り分け (area) は同時に 1 つまでを URL の正規化で守る。以下の 1〜7 は、この決定に合わせて読み替える (2. の `layers=` → `subjects=`)。
+- **決定 3 (2026-10-29 オーナー)**: 公開するのは問いのページ (`/geo/<問い>`)。表示できるものを選んで重ねる `/geo/map` は検索対象外の道具に下げる。問いのページは「問い → 組の推移のグラフ (主役) → 地図 (どこの話か) → 組の決め方 → 読み方 → 言わないこと」の順。試作 4 本 (`/geo/ic-population`・`ic-manufacturing`・`shinkansen-population`・`airport-tourism`) をローカルで作成 (計算 `packages/gis/src/geo-questions/scripts/build-geo-questions.ts` → `.local/r2/app/geo/questions/<問い>.json`、画面 `apps/web/src/features/geo-questions/`、いずれも noindex)。**残り**: 見ながらの調整、問いの定義を台帳 (data/geo/) へ移す、`/geo/map` の noindex 化、R2 反映。
+- **決定 2 (2026-10-29 オーナー)**: 背景 (塗り分け) は `base=` の 1 つ、重ねるもの (線・点) は `subjects=`。背景を選んだらスライダーは全主題に値がある期間に絞る。塗り分けの色の基準は全国の全年で固定。人口は 1980 年比の増減率の主題を足し、既定の背景にした (実装済み)。
+- **進捗 (2026-10-29)**: `/geo/map` をローカルで実装 (`apps/web/src/features/geo-map/`)。主題は台帳の 8 件のうち、高速道路・IC と JCT・鉄道・空港・市区町村の人口・製造品出荷額を描ける。鉄道の現況 (N02) と地価の地点は「地図用のデータを準備中」と表示して外す。正規化・noindex・広告なしは設計どおり。**残り**: 手順 2 (`url-policy.ts` に `/geo` を載せる・middleware のテストと smoke)、地価の範囲別データ、R2 への反映とデプロイ。
+- **方針案 (オーナーの合意が要る)**:
+  1. **「見る重ね合わせ」と「問いの分析」を分ける。** 見る重ね合わせ = 計算をせずレイヤーを重ねて表示する道具。問いの分析 = 空間演算・保存則・lineage を持ち結論を出すもの (`geo-analysis-standards.md` の証拠階段)。
+  2. **見る重ね合わせの URL は 1 つ**: 案 `/geo/map?layers=<id,id>&base=<id>&year=<YYYY>&scope=<9区分 | 県コード>`。canonical は `/geo/map`、クエリ付きは `noindex`。レイヤーの値は台帳の ID だけ (語彙は `GIS-ATTRIBUTE-LEDGER-01` で整える)、並び順を正規化して同じ組み合わせ = 同じ URL にする。範囲の値は交通網と同じ (`packages/gis/src/infra-history/scopes.ts`)。
+  3. **単一網の時系列は `/geo/history/<網>/<範囲>` を正本として残す。** 重ね合わせ画面からリンクする。
+  4. **問いの分析は `/geo/<分析の名前>` に 1 つずつ。** 人が選んだ組み合わせだけを、意味のある名前で作る。
+  5. **広告**: 重ね合わせ画面は常に広告なし (パスで決まる)。クエリで非商用レイヤー (N05・N06・C02 など) を足せるため、パスの接頭辞の判定では止められない。収益は問いの分析・ブログ・テーマで狙う。
+  6. **公開**: 重ね合わせに含まれるレイヤーのうち最も厳しい利用条件・公開状態で、サーバーが表示可否を決める (未許可の非商用レイヤーは選べない)。
+  7. **時間の軸**: `year` は交通網の年と定義する。人口は国勢調査 (5 年ごと・都道府県 / 市区町村) と GIS の人口メッシュ (2020 年と 2050 年推計のみ) で軸が違う。該当年が無いときの扱い (直前の調査年を出して年を明示する / 出さない) を決める。
+- **問いの分析の置き場 (情報設計 `docs/01_技術設計/03_情報設計.md` の役割分担に従う)**:
+  - 正本 = `/geo/<分析>`: 途中の地図・空間演算・検算・集計・限界。
+  - ブログ = 背景と読み方 (元土木職員の視点はここ)。表を複製せず、分析の該当段階へリンクする。
+  - テーマ (`/themes/roads` など。主語は 47 都道府県) = 「この分野の地域分析」の導線。結論が県別の値に収まり既存テーマの章として読めるときだけ、テーマを着地にする (前例: `/themes/earthquake-exposure`)。
+  - `/geo` の分析は、実分析 3 本以上・一次資料・方法・GA4・内容の薄さの監査が揃うまでナビと検索に出さない (情報設計の決まり)。
+  - ブログ・テーマは広告があるので、非商用の N05・N06 の時系列の地図・画像は事務局の回答 (`INFRA-TIMELINE-01` ①) が出るまで載せない。最初の分析は制約のない組み合わせ (空港 N08・鉄道の現況 N02・e-Stat) で作る。
+- **手順**:
+  1. 上の方針 1〜7 をオーナーと確定し、このカードに決定として書き込む。
+  2. `url-policy.ts` に `/geo` 配下 (分析・layers・datasets・history・map) の既知の URL・canonical・noindex の判定を足し、`src/__tests__/middleware.test.ts` と `.github/scripts/smoke-test-routes.sh` に代表 URL を足す。
+  3. 重ね合わせ画面のクエリの型 (レイヤー ID・year・scope) と正規化関数を作り、不正な値は 404 ではなく素の画面へ寄せる (canonical を保つ)。広告なし・公開判定をサーバーで行う。
+  4. 最初の問いの分析を 1 本選び、`/build-geo-analysis` で正本を作る。ブログ 1 本とテーマからの導線を同じ単位で揃える。
+- **停止条件・禁止**: 組み合わせごとに index 対象のページを作らない。非商用レイヤーを広告のあるページ (ブログ・テーマ・問いの分析) に載せない (了承の範囲に `ad-page` が記録されるまで)。年の合わない人口を黙って近い年で埋めない。
+- **完了条件**: 方針がカードに決定として書かれ、`url-policy.ts` が `/geo` を管理し、middleware のテストと smoke に `/geo/map` と `/geo/history` の代表 URL が入っている。
+
+### [GEO-QUESTION-DESIGN-01] 地域分析の「問いのページ」を、分析の型・問いの台帳・回遊・ナビまで設計し、試作 4 本を作り直す
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run content:check] [起票:2026-10-29] [領域:サイト]
+
+- **なぜ (2026-10-29 のオーナーとの議論)**: 交通網 (高速道路・鉄道・空港) と人口・産業を組み合わせる画面を作る中で、2 回「表示できるものを全部選べる画面」を作り込んでしまった (`/geo/map` のチェックリスト化の議論)。公開する組み合わせページは、**どんな問いに対して・どう分析し・どう見せるか**から設計する。表示できるものを並べる画面は検索対象外の道具 (GIS 台帳・単体 GIS ページ・`/geo/map`) に置く。試作 4 本を作った結果、次の 3 つが設計されていないことが分かった: ① ページどうしのつながり (関連ブログ・関連ランキング)、② サイト全体の中での位置 (左サイドメニューは「地域分析」1 項目だけ)、③ 答えを出すための分析の方法 (試作は 4 本とも「組に分けて推移を並べる」1 種類だけ)。
+- **これまでの決定 (同日。詳細は `GEO-OVERLAY-URL-01` の決定 1〜3)**:
+  - geo は重ねて見せ、どう重ねたかを検算できる形まで。因果の解釈はブログ・テーマの仕事。
+  - 公開するのは問いのページ `/geo/<問い>`。`/geo/map` (主題を選んで重ねる道具) は検索対象外に下げる。
+  - 問いのページの順: 問い → 組の推移のグラフ (主役) → 地図 (どこの話か・補助) → 組の決め方 → 読み方の注意 → 言わないこと → あわせて見る → 出典の 1 行。
+  - 重ねる単位の名前は「主題」(英語 subject。サイトの「テーマ」theme とは別)。主題の台帳 `data/geo/subjects/subjects.json` + Schema。
+- **試作 4 本 (2026-10-29。この PC だけにある・未コミット)**:
+
+  | URL | 問い | 今の分析 | 主な数字 |
+  |---|---|---|---|
+  | `/geo/ic-population` | 高速道路の IC ができた市区町村は、人口が減りにくかったか | 最初の IC (一般・スマート) の供用開始年で市区町村を 4 組 → 組の人口合計の指数 (1980=100) | 2025 年: 1980 年までに IC 114.2 / 2000 年以降 91.0 / IC なし 98.8 (1,740/1,765 市区町村) |
+  | `/geo/ic-manufacturing` | 工場はインターチェンジの近くに集まったか | 2023 年の IC までの距離 (中にある / 10km 未満 / 10〜30km / 30km 以上) で 4 組 → 全国の出荷額に占める割合 | 中にある 77.8% → 75.0%、10〜30km 6.5% → 8.7% (1980→2023、1,450 市区町村) |
+  | `/geo/shinkansen-population` | 新幹線の駅ができた町は、どう変わったか | 新幹線の駅 (N05 Station2、事業者種別 1) の最初の開業年で 4 組 → 人口指数 | 駅がある市区町村は 102 だけで、1 都市が組を左右する |
+  | `/geo/airport-tourism` | 空港のある県とない県で、宿泊者数の伸び方は違うか | 2009 年の空港 (拠点・国管理 / 地方管理のみ / なし) で県を 3 組 → 延べ宿泊者数の指数 (2009=100) | 宿泊者数の統計が 2009〜2024 年しかなく、開港の前後は比べられない (元の問い「空港ができた県で観光は伸びたか」から変えた) |
+
+  - 計算: `packages/gis/src/geo-questions/scripts/build-geo-questions.ts` → `.local/r2/app/geo/questions/<問い>.json` (組・推移・地域 → 組・検算の件数・入力の出典)。問いの定義 (問い・読み方・言わないこと・関連) は試作のため `apps/web/src/features/geo-questions/lib/questions.ts` に置いている。画面は `apps/web/src/features/geo-questions/` (QuestionPage・QuestionTrendChart (`D3LineChart`)・QuestionMap (市区町村は地方切り替え、県は全国))、ルートは `apps/web/src/app/geo/<問い>/page.tsx` の 4 つ (すべて noindex)。
+  - 依存する生成物: IC・JCT の点 `.local/r2/app/geo/history/expressway/joints.topojson` (`build-expressway-joints.ts`)、空港の県別の数 `.local/r2/app/geo/history/airport/summary.json` (`build-infra-history.ts --network airport`)、原典 ZIP `.local/infra-history/src/{N05-24,N06-24,N08-21}.zip` (台帳 `networks.ts` の URL・SHA で取得・照合)。
+- **別の PC で再現する手順**:
+  1. この PC の作業 (今日の変更一式) がコミット・push されていることを確かめる。未コミットのままでは別の PC に届かない。
+  2. 原典 ZIP と交通網の生成物を作る: `node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all` (ZIP が無ければ台帳の URL から取得し SHA を照合する)、続けて `node --import tsx packages/gis/src/infra-history/scripts/build-expressway-joints.ts`。
+  3. 問いを計算する: `node --import tsx packages/gis/src/geo-questions/scripts/build-geo-questions.ts`。**会社の Windows PC では Node の fetch がプロキシで止まる**ので、memory `proxy-preload-for-fetch-scripts` の preload (undici の ProxyAgent) を `node --import "file:///<scratchpad>/proxy-preload.mjs" --import tsx ...` で先に読ませる。Mac では不要。
+  4. `npm run dev:web` で開く。Windows では R2 の中継 (`apps/web/scripts/r2-dev-gateway.ps1`) が `app/geo/questions/` と `app/geo/history/` を `.local/r2` から返す (許可リストに追加済み。中継は dev サーバーの起動時に立ち上がるので、許可を変えたら dev を起動し直す)。
+- **決めること (この順で。各段の決定をこのカードに書いてから次へ)**:
+  1. **分析の型を決め、4 つの問いに割り当てる**。候補 (問いごとに組み合わせて使う):
+
+     | 型 | 中身 | 手法 | 合う問い |
+     |---|---|---|---|
+     | 開通を起点に揃える (イベントスタディ) | 開通年を 0 年にして、前後の推移を並べる | 数学 | IC・新幹線の駅ができた前後 |
+     | 似た地域と比べる (差の差) | 人口規模・地方が似た「開通していない市区町村」と組にして差を見る | 数学 | 大都市が組の合計を押し上げる問題を減らす |
+     | 相関 | 距離と増減率の散布図・順位相関 | 数学 | IC までの距離と人口・出荷額 |
+     | 時系列の連動 | 開通と指標が変わった時期のずれ (ラグ) | 数学 | 空港・新幹線と観光 |
+     | 位置関係 | 距離帯 (バッファ)・道路網での到達時間・集まり方の偏り (空間的自己相関) | GIS | 工場は IC の近くに集まったか |
+
+     決めること: 型の一覧と名前、型ごとの検算 (途中の結果と保存則)、図の種類 (折れ線・散布図・差の折れ線・地図)。都道府県の相関は既存の `app/correlation/` があるが、市区町村・距離との相関は新しく作る。どの型でも geo で示すのは計算と並べた結果まで (因果は言わない)。
+  2. **問いの台帳の形を決める**: 問い・系統・分析の型・入力 (主題・指標)・組の決め方・読み方・言わないこと・関係。置き場は `data/geo/` の JSON + Schema (決まり: memory `feedback_authored_ledgers_in_data`)。試作の `questions.ts` をここへ移す。
+  3. **回遊を既存の台帳に載せる**: `data/content/` (routes・tags・navigation。`npm run content:sync` / `content:check`) に問いのページを登録し、関係を張る。使う関係: `uses` (使った指標 → ランキング)、`explains` (読み解くブログ)、`themeContext` (道路・鉄道・港湾・観光のテーマ)、`geo` (逆向き: ランキング・ブログ・テーマから「地図と途中計算で確かめる」)。関連の表示は既存の右レール・回遊の部品を使う。
+  4. **ナビを決める**: 左サイドメニューの「地域分析」をテーマと同じく開閉できるグループにする (例: 問い一覧 `/geo` / 交通網の変遷 / GIS を探す)。問いの一覧は `/geo` のハブで系統別 (例: 交通とまち・災害と人口)。問いのページの中では同じ系統の問いを右レール (狭い画面は本文の下)。Sheet は詳しい説明 (読み方・検算) の置き場のまま。
+  5. 1〜4 に合わせて試作 4 本を作り直し、右ペインで見ながら調整する。
+- **関連カード**: `GEO-OVERLAY-URL-01` (URL・道具と問いの分け方の決定)、`GIS-ATTRIBUTE-LEDGER-01` (原典台帳・主題の台帳)、`UI-COMPONENT-CONSOLIDATE-01` (推移・凡例の部品の統合)、`INFRA-TIMELINE-01` (交通網の変遷の公開)。
+- **停止条件・禁止**: 表示できるものを並べるだけの組み合わせページを公開しない (問いが先)。因果を断定する文言をページに書かない。問いの定義を feature の中に置いたまま公開しない (台帳へ移してから)。組の計算の途中結果 (どの市区町村をどの組にしたか) を捨てない。
+- **完了条件**: 分析の型と問いの台帳が決まって `data/geo/` にあり、4 つの問いのページが台帳から作られ、`data/content/` の関係で関連ブログ・ランキング・テーマとつながり (`npm run content:check` が通る)、サイドメニューと `/geo` のハブから辿れる。
+
 ### [ROADS-THEME-N06-LICENSE-01] 道路テーマの高速道路タイムライン地図 (N06 の時系列) を、広告のあるページから外すか条件を確かめる
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:データ]
 
 - **見つけた経緯 (2026-10-29)**: `/themes/roads` の「高速道路ネットワークの広がり（1962→2020）」(`apps/web/src/features/highway-history/`) は N06 高速道路時系列の開通年 (`N06_002`) で年別の区間数・延長 (`app/highway-history/stats.json`) を出している。N06 の公式ページは「時系列データとして使用する場合：非商用」で、テーマページは広告・アフィリエイトを載せる。生成スクリプトは git に見つからず (`stats.json` は 2026-05-24 生成)、原典は 2020 年版。
 - **次**: INFRA-TIMELINE-01 ①の問い合わせに含めて条件を確かめる。回答まで、テーマのセクションを `/geo/history/expressway` への導線に置き換えるか、最新年の現況表示 (CC BY 4.0 の範囲) だけに縮めるかをオーナーが選ぶ。
 - **停止条件**: R2 の `app/highway-history/` の削除は、読み手を外したあと承認を得て `r2-maintenance.yml` で行う。
-- **完了条件**: 広告のあるページで N06 を時系列として使う箇所が無いか、使ってよい書面の根拠が台帳にある。
+- **完了条件**: 広告のあるページで N06 を時系列として使う箇所が無いか、使ってよい根拠 (了承の範囲に `ad-page`) が台帳にある。
 
 ### [GSC-DEMAND-REPORT-01] 「何にアクセスが集まっているか」に記録 1 枚で答えられるよう、GSC 記録をカテゴリ別・長期で集計して残す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-29] [領域:管理]

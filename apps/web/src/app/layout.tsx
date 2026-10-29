@@ -49,6 +49,7 @@ import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { ReadProgressTracker } from "@/lib/analytics/components/ReadProgressTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
+import { AD_FREE_PATH_PREFIXES } from "@/lib/google-adsense/ad-free-paths";
 import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense/constants";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
@@ -142,7 +143,7 @@ export default function RootLayout({
         {/* Google Analytics 4 スクリプト */}
         <GoogleAnalytics />
         {/* Google AdSense スクリプト（全体停止時はclient component自体を生成しない） */}
-        {ADSENSE_DISPLAY_ENABLED && <AdSenseScript />}
+        {ADSENSE_DISPLAY_ENABLED && <AdSenseScript adFreePathPrefixes={AD_FREE_PATH_PREFIXES} />}
         {/* A8.net リンクマネージャー（通常リンクをアフィリエイトリンクに自動変換） */}
         <A8LinkManager />
         {/* ページビュートラッカー（ルート変更を検知して自動トラッキング） */}

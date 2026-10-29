@@ -1,0 +1,362 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 geo subjects",
+  "description": "主題の台帳。主題 = 原典のデータ 1 つを地図にどう描くかの定義 (英語は subject。サイトの「テーマ」theme とは別物)。交通網の変遷・単体 GIS ページ・重ね合わせ (/geo/map?subjects=...) が同じ主題を参照し、表示名・区分のまとめ方・色を揃える。持つのは見せ方の判断だけ: 原典の事実 (属性の役割・コード表の公式の意味・利用条件と了承) は原典台帳、生成物の状態 (年の範囲・作成済みか・SHA) は生成物の manifest が持つ。dataId・metricKey の実在は config/datasets.mjs の refs が検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "subjects"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "const": 1
+    },
+    "subjects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/subject"
+      }
+    }
+  },
+  "definitions": {
+    "kebabId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "color": {
+      "enum": [
+        "hsl(var(--chart-1))",
+        "hsl(var(--chart-2))",
+        "hsl(var(--chart-3))",
+        "hsl(var(--chart-4))",
+        "hsl(var(--chart-5))",
+        "hsl(var(--muted-foreground))"
+      ],
+      "description": "チャートのトークンだけを使う (Tailwind v4 は --color-chart-N を出力しないので hsl() で包む)"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "geometry",
+        "source",
+        "time",
+        "geography",
+        "scopes",
+        "measure",
+        "style"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/kebabId",
+          "description": "URL の subjects= の値。一度公開したら変えない (原典の版を上げても変えない)"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "読者向けの主題の名前"
+        },
+        "geometry": {
+          "enum": [
+            "line",
+            "point",
+            "area"
+          ],
+          "description": "描き方。重ねる順は area → line → point (下から)"
+        },
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "dataId",
+                "featureType"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "ksj"
+                },
+                "dataId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9-]+$",
+                  "description": "GIS 台帳の dataId。版は原典台帳が持つ"
+                },
+                "featureType": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "原典 ZIP の中の地物の種類 (例: HighwaySection・Joint)"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "metricKey",
+                "entity"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "estat-metric"
+                },
+                "metricKey": {
+                  "$ref": "#/definitions/kebabId",
+                  "description": "指標の台帳のキー (app/stats/<metricKey>/)"
+                },
+                "entity": {
+                  "enum": [
+                    "prefecture",
+                    "city"
+                  ],
+                  "description": "values.json (都道府県) か cities.json (市区町村) か"
+                }
+              }
+            }
+          ]
+        },
+        "time": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "axis",
+            "match"
+          ],
+          "description": "年の範囲は書かない (生成物と指標の meta.yearRange から導く)",
+          "properties": {
+            "axis": {
+              "enum": [
+                "annual",
+                "fiscal-annual",
+                "census-5y",
+                "snapshot"
+              ],
+              "description": "annual: 暦年ごと / fiscal-annual: 年度ごと / census-5y: 国勢調査の 5 年ごと / snapshot: 一時点"
+            },
+            "match": {
+              "enum": [
+                "validity-range",
+                "exact",
+                "latest-before"
+              ],
+              "description": "スライダーの年への合わせ方。validity-range: 地物の開始年〜終了年にその年が入れば描く / exact: その年の値だけ / latest-before: その年以前で最も近い年の値を、年を明示して描く"
+            }
+          }
+        },
+        "geography": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "unit",
+            "boundary"
+          ],
+          "properties": {
+            "unit": {
+              "enum": [
+                "segment",
+                "facility",
+                "municipality",
+                "prefecture",
+                "site"
+              ]
+            },
+            "boundary": {
+              "enum": [
+                null,
+                "municipality-merged-designated-city"
+              ],
+              "description": "area の境界。municipality-merged-designated-city: 今の市区町村の境界で、政令指定都市は市全体 (行政区の行は使わず二重に数えない)"
+            }
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "national",
+              "region",
+              "prefecture"
+            ]
+          },
+          "description": "描いてよい範囲。市区町村の塗り分けは全国だと形が約 1,900 になり重いので、地方・県に限る"
+        },
+        "measure": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "unit"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "style": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "classes"
+              ],
+              "description": "区分で色分けする。原典のどの属性を使うかは原典台帳の役割 category から引く",
+              "properties": {
+                "kind": {
+                  "const": "category"
+                },
+                "classes": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "code",
+                      "label",
+                      "sourceCodes",
+                      "color"
+                    ],
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                        "description": "表示の区分コード (凡例・集計のキー)"
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceCodes": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "この区分にまとめる原典のコード値 (原典台帳のコード表にある値)"
+                      },
+                      "color": {
+                        "$ref": "#/definitions/color"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "scale"
+              ],
+              "description": "数値の濃淡。濃さの基準は全国の全年の最小値・最大値で固定する (範囲や年を変えても同じ色は同じ値)",
+              "properties": {
+                "kind": {
+                  "const": "sequential"
+                },
+                "scale": {
+                  "enum": [
+                    "linear",
+                    "log"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind"
+              ],
+              "description": "正負で色を分ける (増加 = --positive、減少 = --negative。0 が中央)。濃さの基準は全国の全年の絶対値から決める",
+              "properties": {
+                "kind": {
+                  "const": "diverging"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "color"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "single"
+                },
+                "color": {
+                  "$ref": "#/definitions/color"
+                }
+              }
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "見せ方に由来する読み方の注意 (原典の仕様の注意は原典台帳へ)"
+        },
+        "unverified": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "まだ確かめていない前提。空にしてから公開する"
+        },
+        "derive": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "baseYear"
+          ],
+          "description": "原典の値をそのまま描かず、導いた値を描く。change-rate-from-base-year: 基準年の値からの増減率 (%) = (その年 / 基準年 - 1) × 100",
+          "properties": {
+            "kind": {
+              "const": "change-rate-from-base-year"
+            },
+            "baseYear": {
+              "type": "integer",
+              "minimum": 1868,
+              "maximum": 2100
+            }
+          }
+        }
+      }
+    }
+  }
+}
