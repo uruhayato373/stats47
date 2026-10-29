@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-10-28
- * 件数: blog 764 / tag 70 / survey 149
+ * 最終生成日: 2026-10-29
+ * 件数: blog 765 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -259,6 +259,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "food-manufacturing-establishments-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "food-manufacturing-establishments-vs-regional-transport-co2", lastModified: "2026-10-28" },
   { slug: "food-price-regional-2026", lastModified: "2026-05-16" },
+  { slug: "food-self-sufficiency-rate-calorie-vs-national-assessment", lastModified: "2026-10-29" },
   { slug: "food-self-sufficiency-rate-calorie-vs-passport-issuance", lastModified: "2026-10-28" },
   { slug: "food-spending-pattern", lastModified: "2026-03-05" },
   { slug: "food-trio-prefecture-map", lastModified: "2026-04-27" },
