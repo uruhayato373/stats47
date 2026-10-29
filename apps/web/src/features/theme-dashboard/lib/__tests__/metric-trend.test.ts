@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { nationalSeriesName, resolveMetricTrend, shouldFetchMetricTrend } from '../metric-trend';
+import { MIN_TREND_YEARS, nationalSeriesName, resolveMetricTrend, shouldFetchMetricTrend } from '../metric-trend';
 
 /**
  * 数値タイルに推移を添えるかの判定 (2026-10-29)。
@@ -8,11 +8,14 @@ import { nationalSeriesName, resolveMetricTrend, shouldFetchMetricTrend } from '
  * 指標ごとのフラグで持たず、観測値と章の構成から決める。守りたいのは:
  *  (a) 47都道府県の表示では取りに行かない (値が 1 位の県の値なので、推移が何の推移か分からない)
  *  (b) 同じ章の詳しい図が描く指標は取りに行かない (同じ推移を 2 回出さない)
- *  (c) 異なる年が 2 つ以上あるときだけ描く。単年・空は何も置かない
+ *  (c) 異なる年が 5 つ以上あるときだけ描く。2〜4 年は直線か折れの少ない線にしかならないので描かない (2026-10-30)
  *  (d) 県の系列が空なら 全国 → 47 県平均 の順に代え、平均を「全国」と呼ばない
  */
 
 const pts = (years: string[]) => years.map((year, i) => ({ year, yearName: `${year}年`, value: i + 1 }));
+/** 描ける最小の年の数 (5 年) */
+const Y5 = ['2019', '2020', '2021', '2022', '2023'];
+const asPoints = (years: string[]) => years.map((year, i) => ({ year: Number(year), value: i + 1 }));
 
 describe('shouldFetchMetricTrend', () => {
   it('県を選んでいて、章の図が描いていないときだけ取りに行く', () => {
@@ -34,17 +37,18 @@ describe('resolveMetricTrend', () => {
       .toEqual({ kind: 'none' });
   });
 
-  it('(c) 異なる年が 2 つ以上なら自地域の名前で描く', () => {
+  it('(c) 異なる年が 5 つ以上なら自地域の名前で描く', () => {
+    expect(MIN_TREND_YEARS).toBe(5);
     const trend = resolveMetricTrend({
       ...base,
-      areaResult: { points: pts(['2020', '2021']), source: 'area' },
+      areaResult: { points: pts(Y5), source: 'area' },
       nationalResult: { points: [], source: 'none' },
     });
-    expect(trend).toEqual({ kind: 'chart', seriesName: '東京都', points: [{ year: 2020, value: 1 }, { year: 2021, value: 2 }] });
+    expect(trend).toEqual({ kind: 'chart', seriesName: '東京都', points: asPoints(Y5) });
   });
 
-  it('(c) 単年は描かない (同じ年が重なっても 1 年は 1 年)', () => {
-    for (const years of [['2020'], ['2020', '2020']]) {
+  it('(c) 4 年以下は描かない (2023・2024 の 2 点を結んだ直線が並んでいた。同じ年が重なっても 1 年は 1 年)', () => {
+    for (const years of [['2020'], ['2020', '2020'], ['2023', '2024'], ['2020', '2021', '2022', '2023'], ['2019', '2019', '2020', '2021', '2022']]) {
       expect(resolveMetricTrend({ ...base, areaResult: { points: pts(years), source: 'area' }, nationalResult: { points: [], source: 'none' } }))
         .toEqual({ kind: 'none' });
     }
@@ -54,13 +58,13 @@ describe('resolveMetricTrend', () => {
     const national = resolveMetricTrend({
       ...base,
       areaResult: { points: [], source: 'none' },
-      nationalResult: { points: pts(['2020', '2021']), source: 'national' },
+      nationalResult: { points: pts(Y5), source: 'national' },
     });
     expect(national.kind === 'chart' && national.seriesName).toBe('全国');
     const average = resolveMetricTrend({
       ...base,
       areaResult: { points: [], source: 'none' },
-      nationalResult: { points: pts(['2020', '2021']), source: 'average' },
+      nationalResult: { points: pts(Y5), source: 'average' },
     });
     expect(average.kind === 'chart' && average.seriesName).toBe('都道府県平均');
   });
@@ -70,9 +74,9 @@ describe('resolveMetricTrend', () => {
       areaName: '東京都',
       areaResult: { points: [], source: 'none' },
       nationalResult: { points: [], source: 'none' },
-      fallbackSeries: [{ year: 2020, value: 5 }, { year: 2021, value: 6 }],
+      fallbackSeries: asPoints(Y5),
     });
-    expect(trend).toEqual({ kind: 'chart', seriesName: '都道府県平均', points: [{ year: 2020, value: 5 }, { year: 2021, value: 6 }] });
+    expect(trend).toEqual({ kind: 'chart', seriesName: '都道府県平均', points: asPoints(Y5) });
   });
 
   it('nationalSeriesName は申告が national のときだけ「全国」', () => {

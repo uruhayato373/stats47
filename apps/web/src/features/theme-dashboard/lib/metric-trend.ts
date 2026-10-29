@@ -6,10 +6,14 @@ import type { MetricTimeseriesResult } from '@/lib/aggregate-metric-timeseries';
  * チャートを出すかは指標ごとのフラグで持たず、観測値とカタログの章の構成から決める。次の 3 つがそろうときだけ出す:
  *  1. 県を選んでいる (47都道府県の表示では値が「1 位の県」の値なので、推移を描くと何の推移か分からない)
  *  2. 同じ章に、この指標の詳しいチャートが無い (あると同じ推移が 2 回出る。章の構成は ThemeCatalog.sections が決める)
- *  3. 推移に異なる年が 2 つ以上ある (単年に線は描けない)
+ *  3. 推移に異なる年が MIN_TREND_YEARS (5) 以上ある。2〜4 年では直線か折れが 1〜2 回の線にしかならず、
+ *     値と年を読めば足りる (2026-10-30 オーナー指摘。旧: 2 年以上で描き、2 点を結んだ直線が並んでいた)
  * 1・2 は取得の前に決まる (shouldFetchMetricTrend)。3 は取得した系列で決まる (resolveMetricTrend)。
  * 出さないときは何も置かない (理由の案内も出さない)。部品 (StatTile) は渡されたチャートを描くだけで判断しない。
  */
+
+/** 推移の小さなチャートを描く最小の年の数 (異なる年の数) */
+export const MIN_TREND_YEARS = 5;
 
 export interface MetricTrendContext {
   /** 選択中の都道府県コード (null = 47都道府県・未選択) */
@@ -68,7 +72,7 @@ export function resolveMetricTrend({
     points = fallbackSeries.map((p) => ({ year: String(p.year), value: p.value }));
     seriesName = '都道府県平均';
   }
-  if (new Set(points.map((p) => p.year)).size < 2) return { kind: 'none' };
+  if (new Set(points.map((p) => p.year)).size < MIN_TREND_YEARS) return { kind: 'none' };
   return {
     kind: 'chart',
     seriesName,

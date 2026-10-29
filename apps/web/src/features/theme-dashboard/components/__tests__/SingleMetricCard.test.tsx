@@ -11,7 +11,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
  *  (b) 見出しと本文で指標名を重複表示しない
  *  (c) 推移は県選択時だけ、この指標 1 件分を自地域+全国の 2 回で遅延取得する
  *      (summaryOnly / 未選択では取得しない)
- *  (d) 異なる年が 2 件以上のときだけ MiniLineChart を描く。固定高のローディング枠・
+ *  (d) 異なる年が 5 件以上のときだけ MiniLineChart を描く (2〜4 年は直線に近い線にしかならない。2026-10-30)。固定高のローディング枠・
  *      空状態枠は置かない (情報密度優先)
  *  (e) 計算型指標は R2 平均へ退避し「都道府県平均」と称す (「全国」ではない)
  *  (f) 単年しかない指標は推移も理由の案内も置かない (2026-10-29 に変更。参考サイトも理由を書かない)
@@ -103,10 +103,7 @@ describe('SingleMetricCard — 推移の退避表記', () => {
     fetchMock.mockResolvedValue({ points: [], source: 'none' });
     renderCard({
       metric: kpi('calc', {
-        series: [
-          { year: 2020, value: 5 },
-          { year: 2021, value: 6 },
-        ],
+        series: [2020, 2021, 2022, 2023, 2024].map((year, i) => ({ year, value: 5 + i })),
       }),
       selectedPrefectureCode: '13000',
       areaName: '東京都',
@@ -221,9 +218,9 @@ describe('SingleMetricCard — 取得の契約', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('異なる年が 2 件以上のときだけ MiniLineChart を描く', async () => {
+  it('異なる年が 5 件以上のときだけ MiniLineChart を描く', async () => {
     fetchMock.mockResolvedValue({
-      points: points([1, 2]),
+      points: points([1, 2, 3, 4, 5]),
       source: 'area',
     });
     renderCard({ selectedPrefectureCode: '13000', areaName: '東京都' });
@@ -233,7 +230,15 @@ describe('SingleMetricCard — 取得の契約', () => {
     const chartPoints = JSON.parse(
       screen.getByTestId('mini-line-chart').getAttribute('data-points') ?? '[]'
     );
-    expect(chartPoints).toHaveLength(2);
+    expect(chartPoints).toHaveLength(5);
+  });
+
+  it('2 年 (2023・2024 の直線) では描かない', async () => {
+    fetchMock.mockResolvedValue({ points: points([1, 2]), source: 'area' });
+    renderCard({ selectedPrefectureCode: '13000', areaName: '東京都' });
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(screen.queryByTestId('mini-line-chart')).toBeNull();
   });
 });
 
