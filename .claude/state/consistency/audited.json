@@ -1,7 +1,7 @@
 {
-  "hash": "2fe7841156d0e10e32bcfbe8291ce52ae3899d2cf9bf03c9f1446f3d6742791a",
-  "audited_at": "2026-10-28T11:05:52",
+  "hash": "524a1a68bea4e9d0fbe211b877f2e93d285674473751ab8175f5933093e4bd2b",
+  "audited_at": "2026-10-29T10:27:56",
   "files": [
-    ".claude/scripts/blog/fix-broken-internal-links.mjs"
+    ".claude/rules/ui-components.md"
   ]
 }
