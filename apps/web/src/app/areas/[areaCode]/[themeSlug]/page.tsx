@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
@@ -6,6 +8,8 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 import { AREA_THEMES } from "@/features/theme-dashboard/config/area-theme-slugs";
 import {
   ThemePageLayout,
+  areaThemeDescription,
+  getAreaThemeHighlights,
   loadThemeData,
 } from "@/features/theme-dashboard/server";
 
@@ -33,6 +37,12 @@ interface PageProps {
 // 初回アクセス時にレンダリング → R2 incremental cache / エッジに 24h 保存。
 export const revalidate = 86400;
 
+/** 説明文 (generateMetadata) と本文で同じテーマのデータを 1 回だけ読む (React の cache はリクエストごと) */
+const loadAreaThemeData = cache(async (themeKey: string) => {
+  const theme = TYPE_A_THEMES.find((t) => t.themeKey === themeKey);
+  return theme ? loadThemeData(theme) : null;
+});
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { areaCode, themeSlug } = await params;
   const theme = TYPE_A_THEMES.find((t) => t.themeKey === themeSlug);
@@ -41,7 +51,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!theme || !pref) return {};
 
   const title = `${pref.prefName}の${theme.title}`;
-  const description = `${pref.prefName}における${theme.description}全国47都道府県との比較で${pref.prefName}の位置づけを確認できます。`;
+  // その県の主な値と順位を先頭に置く (本文の「主なデータ」・構造化データと同じ文。2026-10-30)
+  const data = await loadAreaThemeData(theme.themeKey);
+  const description = areaThemeDescription(
+    pref.prefName,
+    theme.description,
+    data ? getAreaThemeHighlights(data, areaCode) : [],
+  );
 
   return {
     title,
@@ -59,7 +75,7 @@ export default async function AreaThemePage({ params }: PageProps) {
 
   if (!theme || !pref) notFound();
 
-  const data = await loadThemeData(theme);
+  const data = await loadAreaThemeData(theme.themeKey);
   if (!data) notFound();
 
   return (

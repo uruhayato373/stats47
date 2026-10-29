@@ -46,7 +46,7 @@ import { isAreaTheme } from '../config/area-theme-slugs';
 import { themeHref } from '../config/theme-href';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
-import { getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -103,8 +103,18 @@ export async function ThemePageLayout({
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
-  const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
-  const pageData = generateThemePageStructuredData(theme);
+  const areaHighlights = areaContext
+    ? getAreaThemeHighlights(data, areaContext.areaCode)
+    : [];
+  // 県のページは、構造化データの名前・URL・説明・パンくずをその県のものにする (説明は meta description と同じ文)
+  const structuredArea = areaContext
+    ? {
+        ...areaContext,
+        description: areaThemeDescription(areaContext.areaName, theme.description, areaHighlights),
+      }
+    : undefined;
+  const breadcrumbData = generateThemeBreadcrumbStructuredData(theme, structuredArea);
+  const pageData = generateThemePageStructuredData(theme, structuredArea);
   const catalog = THEME_CATALOGS[theme.themeKey];
   const catalogTaxonomy = catalog
     ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY)
@@ -176,9 +186,6 @@ export async function ThemePageLayout({
   }
   nativeBanners = nativeBanners.filter(isLandscapeBanner);
   const providerPrefecture = areaContext ?? initialPrefecture;
-  const areaHighlights = areaContext
-    ? getAreaThemeHighlights(data, areaContext.areaCode)
-    : [];
 
   return (
     <ThemePrefectureProvider
