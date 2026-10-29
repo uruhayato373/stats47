@@ -61,6 +61,12 @@
           "what": "見出しの太さ 600、本文 16px は残す。静的ページのパネルの題名は SectionCard",
           "state": "done",
           "reflectedIn": "apps/web/src/app/globals.css、article-heading-weight-600・static-panel-heading-uses-section-card"
+        },
+        {
+          "part": "記事カード",
+          "what": "Blog app の記事カード。画像が上 → 題名 2 行 → 補足 1 行を 3 列の線の格子に並べる (閲覧数・コメント数の欄は stats47 に無いので採らない)",
+          "state": "done",
+          "reflectedIn": "apps/web/src/components/surface/ArticleTeaser.tsx"
         }
       ]
     },

@@ -4,6 +4,8 @@ import path from 'node:path';
 import * as components from '@stats47/components';
 import { describe, expect, it } from 'vitest';
 
+import * as surface from '@/components/surface';
+
 /**
  * 部品の台帳 (data/design/components.json) と実装の一致 (2026-10-29 新設)。
  *
@@ -58,9 +60,16 @@ describe('部品の台帳 (data/design/components.json)', () => {
     expect(new Set(ledger.map((c) => c.name)).size).toBe(ledger.length);
   });
 
+  /** 台帳の package ごとの実体 (パッケージ共有の部品と、公開サイト共有の部品) */
+  const MODULES: Record<string, Record<string, unknown>> = {
+    '@stats47/components': components,
+    '@/components/surface': surface,
+  };
+
   it.each(ledger.map((c) => [c.id, c] as const))('%s: 台帳の export が実在する', (_id, component) => {
-    expect(component.implementation.package).toBe('@stats47/components');
-    expect(typeof (components as Record<string, unknown>)[component.implementation.export]).toBe('function');
+    const mod = MODULES[component.implementation.package];
+    expect(mod, `未知の package ${component.implementation.package}`).toBeDefined();
+    expect(typeof mod[component.implementation.export]).toBe('function');
   });
 
   it.each(ledger.filter((c) => c.implementation.propsType).map((c) => [c.id, c] as const))(

@@ -12,14 +12,46 @@
         "propsType": "StatTileProps"
       },
       "slots": [
-        { "prop": "label", "required": true, "what": "指標の名前 (テーマでは CatalogMetric.shortLabel、それ以外は指標の readerLabel)" },
-        { "prop": "value", "required": true, "what": "表示用に整形した値。null は「—」" },
-        { "prop": "unit", "required": false, "what": "値の直後の単位 (指標の設定 MetricConfig.unit を表示用に整えたもの)" },
-        { "prop": "badge", "required": false, "what": "値の右のバッジ (順位は RankBadge)" },
-        { "prop": "meta", "required": false, "what": "値の下の補足 1 行 (年・全国平均など)" },
-        { "prop": "icon", "required": false, "what": "右上の小さなアイコン (lucide)" },
-        { "prop": "children", "required": false, "what": "値の下に全幅で置く小さなチャート。出すかどうかは部品ではなく呼び出し側が決める" },
-        { "prop": "footer", "required": false, "what": "タイルの下端に寄せるリンク行 (出典・ランキングへの導線)" }
+        {
+          "prop": "label",
+          "required": true,
+          "what": "指標の名前 (テーマでは CatalogMetric.shortLabel、それ以外は指標の readerLabel)"
+        },
+        {
+          "prop": "value",
+          "required": true,
+          "what": "表示用に整形した値。null は「—」"
+        },
+        {
+          "prop": "unit",
+          "required": false,
+          "what": "値の直後の単位 (指標の設定 MetricConfig.unit を表示用に整えたもの)"
+        },
+        {
+          "prop": "badge",
+          "required": false,
+          "what": "値の右のバッジ (順位は RankBadge)"
+        },
+        {
+          "prop": "meta",
+          "required": false,
+          "what": "値の下の補足 1 行 (年・全国平均など)"
+        },
+        {
+          "prop": "icon",
+          "required": false,
+          "what": "右上の小さなアイコン (lucide)"
+        },
+        {
+          "prop": "children",
+          "required": false,
+          "what": "値の下に全幅で置く小さなチャート。出すかどうかは部品ではなく呼び出し側が決める"
+        },
+        {
+          "prop": "footer",
+          "required": false,
+          "what": "タイルの下端に寄せるリンク行 (出典・ランキングへの導線)"
+        }
       ],
       "spec": {
         "label": "14px / 20px",
@@ -30,15 +62,24 @@
         "chart": "値の下・全幅の 1 か所だけ (右に置く形は採らない)",
         "divider": "名前の下に線を引かない"
       },
-      "reference": { "referenceId": "shadcndashboard", "adoptionPart": "数値タイル" },
+      "reference": {
+        "referenceId": "shadcndashboard",
+        "adoptionPart": "数値タイル"
+      },
       "useWhen": [
         "1 つの指標の値を見せる (県データブック・ランキングの県詳細・テーマの指標カード・県×テーマの主なデータ)",
         "値に推移の小さなチャートを添える"
       ],
       "avoidWhen": [
-        { "when": "題名を持つ節、大きなチャートや地図、系列を選ぶ凡例付きの推移", "use": "chart-panel" }
+        {
+          "when": "題名を持つ節、大きなチャートや地図、系列を選ぶ凡例付きの推移",
+          "use": "chart-panel"
+        }
       ],
-      "checks": ["stat-value-uses-shared-class", "no-nested-card-surfaces"]
+      "checks": [
+        "stat-value-uses-shared-class",
+        "no-nested-card-surfaces"
+      ]
     },
     {
       "id": "stat-tile-grid",
@@ -51,8 +92,16 @@
         "propsType": "StatTileGridProps"
       },
       "slots": [
-        { "prop": "children", "required": true, "what": "数値タイル (StatTile、またはそれを包むだけの要素)。数値の要約の表のカード (地方財政の主要指標) も同じ大きさのセルとして並べてよい" },
-        { "prop": "footnote", "required": false, "what": "格子の最後の 1 行に全幅で置く注記" }
+        {
+          "prop": "children",
+          "required": true,
+          "what": "数値タイル (StatTile、またはそれを包むだけの要素)。数値の要約の表のカード (地方財政の主要指標) も同じ大きさのセルとして並べてよい"
+        },
+        {
+          "prop": "footnote",
+          "required": false,
+          "what": "格子の最後の 1 行に全幅で置く注記"
+        }
       ],
       "spec": {
         "columns": "本文の幅 480px 未満 = 1 列 / 480px 以上 = 2 列 / 768px 以上 = 4 列。上限はタイルの枚数 (1 枚 = 1、2〜3 枚 = 2、4 枚以上 = 4)",
@@ -60,14 +109,131 @@
         "cell": "チャートの有無にかかわらず同じ大きさ。同じ行のタイルは高さをそろえる",
         "filler": "最終行の空きマスは白いセルで埋める"
       },
-      "reference": { "referenceId": "shadcndashboard", "adoptionPart": "線の格子" },
+      "reference": {
+        "referenceId": "shadcndashboard",
+        "adoptionPart": "線の格子"
+      },
       "useWhen": [
         "数値タイルを 1 枚以上並べる所すべて (県データブック・市区町村・テーマの指標カード・地方財政・ランキングの県詳細)"
       ],
       "avoidWhen": [
-        { "when": "題名を持つパネル (大きなチャート・地図・指標の切り替え) を並べる", "use": "chart-panel" }
+        {
+          "when": "題名を持つパネル (大きなチャート・地図・指標の切り替え) を並べる",
+          "use": "chart-panel"
+        }
       ],
-      "checks": ["stat-tile-grid-owns-columns"]
+      "checks": [
+        "stat-tile-grid-owns-columns"
+      ]
+    },
+    {
+      "id": "article-teaser-card",
+      "name": "記事カード",
+      "role": "記事への入口を 1 件見せる。画像が上 (サムネイルと同じ 40:21) → 題名 2 行 → 必要なら説明 2 行 → 補足 1 行 (日付など)",
+      "implementation": {
+        "package": "@/components/surface",
+        "export": "ArticleTeaserCard",
+        "source": "apps/web/src/components/surface/ArticleTeaser.tsx",
+        "propsType": "ArticleTeaserCardProps"
+      },
+      "slots": [
+        {
+          "prop": "href",
+          "required": true,
+          "what": "記事の URL"
+        },
+        {
+          "prop": "title",
+          "required": true,
+          "what": "記事の題名 (2 行まで)"
+        },
+        {
+          "prop": "thumbnail",
+          "required": true,
+          "what": "記事のサムネイル (ライト・ダーク)"
+        },
+        {
+          "prop": "description",
+          "required": false,
+          "what": "題名の下の説明 (2 行まで)。一覧で記事を選ぶ材料が要るときだけ"
+        },
+        {
+          "prop": "meta",
+          "required": false,
+          "what": "下端の補足 1 行 (更新日など)"
+        },
+        {
+          "prop": "navSurface",
+          "required": false,
+          "what": "クリック計測の導線名"
+        },
+        {
+          "prop": "eager",
+          "required": false,
+          "what": "最初の画面に入るカードは画像を先に読み込む"
+        }
+      ],
+      "spec": {
+        "image": "上に全幅・40:21・下に 1px の線",
+        "title": "16px・600・2 行まで",
+        "description": "14px・muted・2 行まで",
+        "meta": "12px・muted・下端",
+        "padding": "16px"
+      },
+      "reference": {
+        "referenceId": "shadcndashboard",
+        "adoptionPart": "記事カード"
+      },
+      "useWhen": [
+        "記事への入口を並べる (テーマの「このテーマを読み解く記事」・ブログ一覧)"
+      ],
+      "avoidWhen": [
+        {
+          "when": "右レールの狭い列に記事を並べる (画像付きのリンク行で描く)",
+          "use": "chart-panel"
+        }
+      ],
+      "checks": [
+        "no-nested-card-surfaces"
+      ]
+    },
+    {
+      "id": "article-teaser-grid",
+      "name": "記事カードの格子",
+      "role": "記事カードを線の格子に並べる。列の数は本文の幅だけで決め、ページの側では指定しない",
+      "implementation": {
+        "package": "@/components/surface",
+        "export": "ArticleTeaserGrid",
+        "source": "apps/web/src/components/surface/ArticleTeaser.tsx",
+        "propsType": "ArticleTeaserGridProps"
+      },
+      "slots": [
+        {
+          "prop": "children",
+          "required": true,
+          "what": "記事カード (ArticleTeaserCard)"
+        }
+      ],
+      "spec": {
+        "columns": "本文の幅 480px 未満 = 1 列 / 480px 以上 = 2 列 / 768px 以上 = 3 列。上限は枚数 (1 枚 = 1、2 枚 = 2、3 枚以上 = 3)",
+        "filler": "最終行の空きマスは白いセルで埋める"
+      },
+      "reference": {
+        "referenceId": "shadcndashboard",
+        "adoptionPart": "記事カード"
+      },
+      "useWhen": [
+        "記事カードを 1 枚以上並べる所すべて"
+      ],
+      "avoidWhen": [
+        {
+          "when": "数値を並べる",
+          "use": "stat-tile-grid"
+        }
+      ],
+      "checks": [
+        "no-nested-card-surfaces"
+      ]
     },
     {
       "id": "chart-panel",
@@ -80,12 +246,36 @@
         "propsType": "ChartPanelProps"
       },
       "slots": [
-        { "prop": "title", "required": false, "what": "節の題名 (h3)" },
-        { "prop": "icon", "required": false, "what": "題名の左のアイコン (16px・muted)" },
-        { "prop": "description", "required": false, "what": "題名の下の説明" },
-        { "prop": "action", "required": false, "what": "見出しの右の操作 (期間の切り替えなど)" },
-        { "prop": "children", "required": true, "what": "本文 (チャート・地図・表など)" },
-        { "prop": "footer", "required": false, "what": "本文の後の補足 1 行 (出典・注記・関連リンク)。下端の帯にはしない" }
+        {
+          "prop": "title",
+          "required": false,
+          "what": "節の題名 (h3)"
+        },
+        {
+          "prop": "icon",
+          "required": false,
+          "what": "題名の左のアイコン (16px・muted)"
+        },
+        {
+          "prop": "description",
+          "required": false,
+          "what": "題名の下の説明"
+        },
+        {
+          "prop": "action",
+          "required": false,
+          "what": "見出しの右の操作 (期間の切り替えなど)"
+        },
+        {
+          "prop": "children",
+          "required": true,
+          "what": "本文 (チャート・地図・表など)"
+        },
+        {
+          "prop": "footer",
+          "required": false,
+          "what": "本文の後の補足 1 行 (出典・注記・関連リンク)。下端の帯にはしない"
+        }
       ],
       "spec": {
         "title": "16px / 22px・500",
@@ -93,15 +283,25 @@
         "body": "14px / 22.75px・左右 16px",
         "footer": "12px・muted・本文の後の 1 行"
       },
-      "reference": { "referenceId": "shadcndashboard", "adoptionPart": "パネル" },
+      "reference": {
+        "referenceId": "shadcndashboard",
+        "adoptionPart": "パネル"
+      },
       "useWhen": [
         "題名で何の節かを示す (チャート・地図・表)",
         "系列を選ぶ凡例や期間の切り替えなど、チャートの操作を持つ (テーマの指標を切り替えるカードの推移)"
       ],
       "avoidWhen": [
-        { "when": "1 つの指標の値だけを見せる", "use": "stat-tile" }
+        {
+          "when": "1 つの指標の値だけを見せる",
+          "use": "stat-tile"
+        }
       ],
-      "checks": ["panel-no-text-size-override", "panel-parts-only-in-panel-components", "no-nested-card-surfaces"]
+      "checks": [
+        "panel-no-text-size-override",
+        "panel-parts-only-in-panel-components",
+        "no-nested-card-surfaces"
+      ]
     }
   ]
 }

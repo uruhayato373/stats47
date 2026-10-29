@@ -27,9 +27,9 @@
           "required": ["package", "export", "source"],
           "additionalProperties": false,
           "properties": {
-            "package": { "type": "string", "pattern": "^@stats47/" },
+            "package": { "enum": ["@stats47/components", "@/components/surface"], "description": "パッケージ共有の部品は @stats47/components、アプリのリンクや画像部品を使う公開サイト共有の部品は @/components/surface" },
             "export": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
-            "source": { "type": "string", "pattern": "^packages/.+\\.tsx$" },
+            "source": { "type": "string", "pattern": "^(packages|apps/web/src/components)/.+\\.tsx$" },
             "propsType": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$", "description": "props の型名。source の中で interface として宣言されていること" }
           }
         },

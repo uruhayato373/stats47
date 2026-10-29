@@ -1,7 +1,7 @@
 {
-  "hash": "9d2609364a2d1e88581fa71ee99a52c86729582fc67e6f1d3ecb53cd4fb2639d",
-  "audited_at": "2026-10-29T10:52:10",
+  "hash": "606c2baf00cddf3852846d5b81d480d7cbd8e5ad8bec726986c70910d307fd61",
+  "audited_at": "2026-10-29T11:09:05",
   "files": [
-    ".claude/rules/theme-catalog-standards.md"
+    ".claude/rules/ui-components.md"
   ]
 }
