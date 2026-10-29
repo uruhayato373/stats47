@@ -115,9 +115,8 @@ export type DatabookBlock =
       blockType: "ranked-kpi-grid";
       /** テンプレ内一意 (アンカー・計測用) */
       blockKey: string;
+      /** 列の数は数値タイルの格子 (StatTileGrid) が本文の幅で決める。テンプレでは指定しない (2026-10-29) */
       metrics: DatabookMetricRef[];
-      /** PC 幅での列数 (既定 3) */
-      columns?: 2 | 3 | 4;
     }
   | {
       blockType: "gender-paired-kpi";

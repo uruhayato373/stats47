@@ -7,7 +7,7 @@ import { SurfaceCard } from "./surface";
 /*
  * 数値タイル (部品の種類「数値タイル」)。見本 (テンプレートの KPI カード。dashboards/modern/total-orders.tsx) と同じく、
  * 名前 14px → 値 24px / 32px・600 (右に単位とバッジ) → 補足 12px の順に並べ、余白は 16px の 1 種類にする。
- * 仕様: docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」の「数値タイル」。
+ * 仕様の正本は部品の台帳 data/design/components.json の stat-tile (枠と props の一致はテストが照合する)。
  *
  * パネルの中で大きな数値を 1 つ見せる所 (テーマの指標カード・ランキング詳細の平均など) も、値の書式は
  * 下の定数を使う (@stats47/components から import)。ページの側で text-xl / text-3xl などの大きさを書かない (`design-system:check` の stat-value-uses-shared-class)。
@@ -37,8 +37,10 @@ interface StatTileProps {
   meta?: ReactNode;
   /** 右上の小さなアイコン (lucide) */
   icon?: ReactNode;
-  /** 値の下に置く小さなチャートなど */
+  /** 値の下に全幅で置く小さなチャートなど。出すかどうかは呼び出し側が決める */
   children?: ReactNode;
+  /** 下端に寄せるリンク行 (出典・ランキングへの導線)。並べたタイルの高さがそろっても下端の位置がそろう */
+  footer?: ReactNode;
   className?: string;
 }
 
@@ -50,6 +52,7 @@ export function StatTile({
   meta,
   icon,
   children,
+  footer,
   className,
 }: StatTileProps) {
   return (
@@ -80,6 +83,11 @@ export function StatTile({
         ) : null}
       </div>
       {children}
+      {footer ? (
+        <div data-slot="stat-tile-footer" className="mt-auto">
+          {footer}
+        </div>
+      ) : null}
     </SurfaceCard>
   );
 }

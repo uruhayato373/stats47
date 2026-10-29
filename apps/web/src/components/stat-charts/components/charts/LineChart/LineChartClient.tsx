@@ -23,6 +23,8 @@ interface LineChartClientProps {
   yDomain?: [number, number];
   rightYDomain?: [number, number];
   showLatestValues?: boolean;
+  /** 凡例を出さない (系列の名前と色を呼び出し側が別に示しているとき。テーマの数値タイルの色の印など) */
+  hideLegend?: boolean;
 }
 
 export const LineChartClient: React.FC<LineChartClientProps> = ({
@@ -31,10 +33,11 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
   yDomain,
   rightYDomain,
   showLatestValues,
+  hideLegend = false,
 }) => {
   const { xAxisKey, data, lines, unit, rightUnit } = chartData;
   const categoryKey = xAxisKey;
-  const showLegend = lines.length > 1;
+  const showLegend = !hideLegend && lines.length > 1;
   const valueKey = lines.length === 1 ? lines[0]?.dataKey : undefined;
   const onlyRight = lines.length > 0 && lines.every(line => line.yAxis === 'right');
   const series = onlyRight ? lines.map(line => ({...line, yAxis: 'left' as const})) : lines;

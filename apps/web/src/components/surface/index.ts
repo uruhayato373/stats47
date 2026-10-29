@@ -16,10 +16,12 @@ export {
   PORTAL_CARD_TITLE_CLASS,
   getSurfaceCardClassName,
   StatTile,
+  StatTileGrid,
   STAT_LABEL_CLASS,
   STAT_META_CLASS,
   STAT_UNIT_CLASS,
   STAT_VALUE_CLASS,
 } from '@stats47/components';
 export { RailNavRow, SurfaceLinkCard } from './SurfaceCard';
+export { ArticleTeaserCard, ArticleTeaserGrid, articleTeaserGridColumns, articleTeaserGridFillers } from './ArticleTeaser';
 export { HorizontalCardCarousel } from './HorizontalCardCarousel';

@@ -3,6 +3,7 @@
 import { useEffect, useState, useTransition } from 'react';
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { ChartLegendLeadProvider } from '@stats47/visualization/d3/chart-legend-lead';
 
 import { ChartEmptyState, ChartErrorState, ChartLoading } from '@/components/charts/ChartState';
 import type { PageComponent } from '@/components/stat-charts';
@@ -122,6 +123,15 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
   }
 
   const { result } = loadResult;
+  const observationLabel = `${
+    'geography' in result.contract && result.contract.geography
+      ? result.contract.geography
+      : prefCode === '00000'
+        ? '全国'
+        : prefName
+  }${result.contract.year ? ` · ${observationPeriod(result)}` : ''}${
+    result.contract.unit ? ` · ${formatUnitForDisplay(result.contract.unit)}` : ''
+  }`;
   return (
     <div
       data-theme-chart="true"
@@ -131,20 +141,19 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
       data-unit={result.contract.unit}
       data-year={result.contract.year}
       data-series-count={result.contract.seriesCount}
+      className="group/chart"
     >
+      {/* 地域・期間・単位。凡例を持つチャートは凡例と同じ 1 行に置き (ChartLegendLeadProvider)、ここの行は隠す
+          (見本のチャートのカードと同じ「左に名前、右に凡例」。2026-10-29) */}
       <p
-        className="mb-2 text-xs text-muted-foreground"
+        className="mb-2 text-xs text-muted-foreground group-has-data-chart-legend-lead/chart:hidden"
         data-chart-observation-label
       >
-        {'geography' in result.contract && result.contract.geography
-          ? result.contract.geography
-          : prefCode === '00000'
-            ? '全国'
-            : prefName}
-        {result.contract.year ? ` · ${observationPeriod(result)}` : ''}
-        {result.contract.unit ? ` · ${formatUnitForDisplay(result.contract.unit)}` : ''}
+        {observationLabel}
       </p>
-      <ThemeChartResultRenderer chartResult={result} />
+      <ChartLegendLeadProvider lead={observationLabel}>
+        <ThemeChartResultRenderer chartResult={result} />
+      </ChartLegendLeadProvider>
       {'scopeLabel' in result.contract &&
       result.contract.scopeLabel === '47都道府県平均' ? (
         <p

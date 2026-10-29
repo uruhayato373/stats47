@@ -14,6 +14,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  *  (f) 最後の 1 本は外せない (系列ゼロの空カードを作らせない)
  *  (g) ★47都道府県 (未選択) は「全国」の代役ではない。fetch せず、タイルは実在する
  *      1位県の値をそのまま出す (GEO-SCOPE-SEPARATION-01 WP2)
+ *  (h) 値は指標ごとの数値タイル (StatTile)。タイルを押して系列を出し入れする (見本の元の shadcn「Line Chart - Interactive」)。
+ *      出典とランキングはタイルごとに出さず、チャートの下の「出典・指標の定義」の Sheet 1 か所にまとめる (2026-10-29)
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
@@ -57,13 +59,21 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
 const METRICS: MultiMetricGroup = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
 const LABELS = { wage: "賃金", unemployment: "失業率", "job-ratio": "有効求人倍率" };
 
-/** タイルはタイル全体が 1 つの role="checkbox" */
+/** 系列の選択は数値タイルに重ねた切り替えボタン (押された状態 = aria-pressed) */
 function tile(label: RegExp) {
-  return screen.getByRole("checkbox", { name: label });
+  return screen.getByRole("button", { name: new RegExp(`${label.source}をグラフに表示`) });
 }
 
 function toggleTile(label: RegExp) {
   fireEvent.click(tile(label));
+}
+
+/** 指標の値は数値タイル (StatTile)。名前で引く */
+function valueTile(name: string) {
+  const tiles = [...document.querySelectorAll('[data-slot-kind="stat-tile"]')];
+  const found = tiles.find((el) => el.querySelector("dt")?.textContent === name);
+  if (!found) throw new Error(`数値タイル ${name} が無い`);
+  return found as HTMLElement;
 }
 
 /** チェック中の指標は「チャートに載っている系列」で観測する */
@@ -143,7 +153,7 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
 
   it("タイルは実在する1位県の値と県名を表示する (捏造・平均ではない)", async () => {
     renderUnselected();
-    const wageTile = tile(/賃金/);
+    const wageTile = valueTile("賃金");
     expect(wageTile).toHaveTextContent("999");
     expect(wageTile).toHaveTextContent("東京都");
   });
@@ -266,7 +276,7 @@ describe("MetricSwitcherPanel — 最後の 1 本は外せない", () => {
     toggleTile(/賃金/);
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
     expect(chartedKeys()).toEqual(["wage"]);
-    expect(tile(/賃金/)).toHaveAttribute("aria-checked", "true");
+    expect(tile(/賃金/)).toHaveAttribute("aria-pressed", "true");
   });
 
   it("2 本あるときは片方を外せる (ロックが効きすぎていない)", async () => {
@@ -605,13 +615,16 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
 });
 
 describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
-  it("指標選択列はカード左右の余白を予約せず全幅を使う", async () => {
+  it("値は指標ごとの数値タイルを数値タイルの格子に並べ、タイルを押して系列を選ぶ", async () => {
     renderPanel();
-    const tile = await screen.findByRole("checkbox", { name: /賃金/ });
-    const strip = tile.parentElement;
-    expect(strip).toHaveClass("min-w-full", "divide-x");
-    expect(strip).not.toHaveClass("gap-2");
-    expect(strip?.parentElement).toHaveClass("w-full");
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    const grid = document.querySelector('[data-slot-kind="stat-tile-grid"]');
+    expect(grid?.querySelectorAll('[data-slot-kind="stat-tile"]')).toHaveLength(3);
+    // 県を選んでいるので値はその県の値 (100)。タイルごとに押せる切り替えボタンがあり、別の凡例の一覧は持たない
+    expect(valueTile("賃金")).toHaveTextContent("100");
+    expect(screen.getAllByRole("button", { pressed: true }).length + screen.getAllByRole("button", { pressed: false }).length).toBe(3);
+    expect(screen.queryByRole("list", { name: "グラフに表示する指標" })).toBeNull();
+    expect(screen.queryByRole("checkbox")).toBeNull();
   });
 
   it("title を渡すとカード見出しになる (グループ名)", async () => {
@@ -626,10 +639,17 @@ describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
     });
   });
 
-  it("代表指標 (編成順の先頭) のランキングへの導線を出す", async () => {
+  it("出典とランキングはタイルごとに出さず、チャートの下の Sheet 1 か所から全指標へ辿れる", async () => {
     renderPanel({ defaultCheckedKeys: ["unemployment", "job-ratio"] });
-    const link = await screen.findByRole("link", { name: /ランキングを見る/ });
-    expect(link).toHaveAttribute("href", "/ranking/unemployment");
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    for (const name of ["賃金", "失業率", "有効求人倍率"]) {
+      expect(valueTile(name).querySelector('a[href^="/ranking/"]')).toBeNull();
+    }
+    fireEvent.click(screen.getByRole("button", { name: "出典・指標の定義" }));
+    const sheet = await screen.findByRole("dialog");
+    for (const key of ["wage", "unemployment", "job-ratio"]) {
+      expect(sheet.querySelector(`a[href="/ranking/${key}"]`)).not.toBeNull();
+    }
   });
 
   it("チェック ON で nav_click を theme_kpi_switcher surface として送る", async () => {
@@ -665,6 +685,9 @@ describe('監査後の表示契約', () => {
     renderPanel({ summaryOnly: true });
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.queryByTestId('line-chart')).not.toBeInTheDocument();
-    expect(screen.getByLabelText('賃金')).toHaveTextContent('100');
+    expect(valueTile('賃金')).toHaveTextContent('100');
+    // 推移を描かないのでタイルは切り替えボタンにならず、出典は同じ章の詳細図の下に任せる
+    expect(screen.queryByRole('button', { pressed: true })).toBeNull();
+    expect(screen.queryByRole('button', { name: '出典・指標の定義' })).toBeNull();
   });
 });

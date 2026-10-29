@@ -505,3 +505,36 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
     }
   });
 });
+
+// 2026-10-30 オーナー決定: 県×テーマの交点は 1 つの URL (/areas/県/テーマ)。テーマの ?pref= は同じ内容の県のページへ恒久転送する
+describe('テーマの県の絞り込み (?pref=) は県ごとのページへ', () => {
+  // 転送しない場合に middleware が呼ぶ NextResponse.next はテスト環境に無いので、Geo の節と同じく差し替える
+  const originalNext = NextResponse.next;
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(path: string): NextRequest {
+    const nextRequest = new NextRequest(`https://stats47.jp${path}`);
+    Object.defineProperty(nextRequest, 'nextUrl', { value: new URL(nextRequest.url) });
+    return nextRequest;
+  }
+
+  test('県ごとのページを持つテーマは /areas/県/テーマ へ 301 し、ほかのクエリは残す', () => {
+    const response = middleware(request('/themes/living-housing?pref=16000&utm_source=x'));
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe('https://stats47.jp/areas/16000/living-housing?utm_source=x');
+  });
+
+  test('県コードでない値 (47都道府県の all) は転送しない', () => {
+    expect(middleware(request('/themes/living-housing?pref=all')).status).not.toBe(301);
+  });
+
+  test('県ごとのページを持たないテーマ (港湾) と専用ページの地方財政は転送しない', () => {
+    expect(middleware(request('/themes/ports?pref=16000')).status).not.toBe(301);
+    expect(middleware(request('/themes/local-finance?pref=16000')).status).not.toBe(301);
+  });
+});

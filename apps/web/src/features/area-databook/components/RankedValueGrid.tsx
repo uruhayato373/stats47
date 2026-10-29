@@ -1,12 +1,10 @@
 import type { ReactNode } from "react";
 
-import { cn } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { RankBadge, type RankBadgeTone } from "@/components/atoms/RankBadge";
 import Link from "@/components/atoms/SiteLink";
-import { PanelGrid } from "@/components/layout";
-import { STAT_META_CLASS, StatTile } from "@/components/surface";
+import { StatTile, StatTileGrid } from "@/components/surface";
 
 import { navSurfaceProps, type NavSurface } from "@/lib/analytics/events";
 
@@ -29,7 +27,6 @@ export interface RankedValueGridItem {
 
 interface Props {
   items: readonly RankedValueGridItem[];
-  columns?: 2 | 3 | 4;
   navSurface: NavSurface;
   footnote?: ReactNode;
 }
@@ -45,46 +42,16 @@ function formatValue(value: number): string {
   });
 }
 
-const COLS: Record<number, string> = {
-  1: "grid-cols-1",
-  2: "@sm:grid-cols-2",
-  3: "@sm:grid-cols-2 @md:grid-cols-3",
-  4: "@sm:grid-cols-2 @md:grid-cols-4",
-};
-
-/** 最終行の空きマスの数 (列数 cols で n 枚を並べたとき) */
-function remainder(n: number, cols: number): number {
-  return (cols - (n % cols)) % cols;
-}
-
-/**
- * 最終行の空きマスを白いセルで埋める。線の格子は地が線の色なので、空きマスのままだと灰色の箱に見える。
- * 列数は幅 (コンテナクエリ) で 1 → 2 → 3/4 と変わるので、幅ごとに必要な数だけ出す。
- */
-function fillerClassNames(n: number, columns: 1 | 2 | 3 | 4): string[] {
-  const wide = columns >= 3 ? remainder(n, columns) : 0;
-  const mid = columns >= 2 ? remainder(n, 2) : 0;
-  return Array.from({ length: Math.max(wide, mid) }, (_, i) =>
-    cn(
-      "hidden",
-      i < mid && "@sm:block",
-      columns >= 3 && (i < wide ? "@md:block" : "@md:hidden"),
-    ),
-  );
-}
-
 /**
  * 「指標名 + 値 + 順位チップ + 年」の数値タイルを線の格子で並べる。指標 1 つ = 数値タイル (StatTile) 1 枚。
  * 県データブック (RankedKpiGrid・GenderPairedKpiGrid) と市区町村ページの見出し KPI が同じ描画を使う。
- * 値と順位の解決は呼び出し側が行う。最終行の空きマスは白いセルで埋める (fillerClassNames)。
+ * 値と順位の解決は呼び出し側が行う。列の数と最終行の空きマスは数値タイルの格子 (StatTileGrid) が決める。
  */
-export function RankedValueGrid({ items, columns = 3, navSurface, footnote }: Props) {
+export function RankedValueGrid({ items, navSurface, footnote }: Props) {
   if (items.length === 0) return null;
-  const effectiveColumns = Math.min(columns, items.length) as 1 | 2 | 3 | 4;
 
   return (
-    <div className="@container">
-      <PanelGrid className={cn("grid-cols-1", COLS[effectiveColumns])}>
+      <StatTileGrid footnote={footnote}>
         {items.map((item) => {
           const v = item.value;
           return (
@@ -114,12 +81,6 @@ export function RankedValueGrid({ items, columns = 3, navSurface, footnote }: Pr
             />
           );
         })}
-        {fillerClassNames(items.length, effectiveColumns).map((className, i) => (
-          <div key={`filler-${i}`} aria-hidden="true" data-cell="flush" className={className} />
-        ))}
-        {/* 注記も格子の 1 行 (パネルと同じ要素に文章を包むと、文章が線に接する) */}
-        {footnote && <p className={cn(STAT_META_CLASS, "col-span-full")}>{footnote}</p>}
-      </PanelGrid>
-    </div>
+      </StatTileGrid>
   );
 }

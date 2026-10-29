@@ -35,10 +35,11 @@ Related canon:
 ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
   └─ PageShell (no leftRail, no rightRail)
        └─ breadcrumb / ThemeAreaHeader | ThemeHero
-          / one control row: geography scope tabs (StatisticsScopeNav) + ThemeSwitcher + PrefectureSelect + 「テーマ一覧」
+          / one control row: geography scope tabs (StatisticsScopeNav) + ThemeSwitcher (current theme button → Sheet with grouped themes and the 「テーマ一覧」 exit) + PrefectureSelect
           / one-line chapter nav (tabs look, horizontal scroll on narrow widths)
           / dashboard (ThemeDashboardClient)
-          / 全指標・出典調査 (collapsible) / ThemeRelatedArticles / geo・evidence・correlated sections
+          / 全指標・出典調査 (collapsible) / geo・evidence・correlated sections
+          / ThemeRelatedArticles (last: articles that read the theme, after the reader has seen the data)
 ```
 
 The provider must stay outside `PageShell` because `PrefectureSelect` in the control row reads it and
@@ -88,6 +89,8 @@ The migration is specified in
 `ThemeCatalog.sections` owns the reading order: title, short description, metric-group keys, chart keys and embedded-section keys. `ThemePageLayout` passes server-rendered embedded slots through the client dashboard, preserving async maps without importing server components into the browser. Rail and narrow navigation use the same chapter anchors. Each group/chart/embedded slot renders once; unassigned blocks remain visible as a fallback during snapshot updates.
 
 A group whose metrics are all covered by its chapter's selected-area charts renders values only; it does not fetch or repeat the same trend. Every value tile carries the observation year and raw unit. At most two distinct units may share the switcher's axes. A single-year result uses natural-height text or a dated comparison table; it never reserves an empty chart canvas. A multi-year companion keeps its history. Composition charts require common observed years and a common unit; missing segments do not become zero.
+
+Values are drawn by one shared value tile (`MetricStatTile` → `StatTile`) in the shared tile grid (`StatTileGrid`) for both single-metric cards and multi-metric groups; a multi-metric group selects chart series through a toggleable legend (`ChartLegend`) instead of checkbox tiles (2026-10-29). The area×theme "main data" block uses the same tiles.
 
 Each metric group's panel is chosen by its post-filter surviving metric count, not the catalog's defined count (2026-09-17). A fixed-year comparison group always renders `FixedYearComparisonPanel` full-width. Otherwise a group with one surviving metric renders `SingleMetricCard` — no selection UI, no empty trend canvas, a `MiniLineChart` only when the selected prefecture has two or more distinct observed years. A group with two or more surviving metrics renders `MetricSwitcherPanel` with its checkbox/tab selection UI. `ThemeMetricsDashboard.renderPanelRuns` groups consecutive single-metric panels into a `data-theme-panel-grid="compact"` container-query grid (`grid grid-cols-1 gap-4 @md:grid-cols-2`) only when the run has two or more panels; a lone compact panel and the `#theme-charts` fallback chart grid follow the same 0/1/2+ rule.
 

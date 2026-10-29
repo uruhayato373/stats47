@@ -15,6 +15,7 @@ export { ThemeDashboardClient } from "./components/ThemeDashboardClient";
 
 // Server-only loader
 export { loadThemeData } from "./lib/load-theme-data";
+export { areaThemeDescription, getAreaThemeHighlights } from "./lib/area-theme-highlights";
 // 指標 → それを使う公開テーマ (ランキング・ブログ・エリアからの回遊)
 export { listRelatedThemesForRankingKeys, type RelatedThemeLink } from "./lib/related-themes-by-metric";
 export {

@@ -19,8 +19,9 @@ describe("right rail scroll contract", () => {
     // 幅も含めて完全一致で固定する。scroll を有効化するクラスの混入を防ぐのが主目的だが、
     // 寸法を変える変更もここで一度止まるので、意図した変更かを必ず確認できる
     // 316px は PageShell と共通。300×250 バナーは Card なしで等倍表示する。
+    // 本文の下に積んだときは 640px 以上で 2 列の格子 (2026-10-29)。
     expect(source).toContain(
-      "'mt-4 flex flex-col gap-4 @min-[988px]/shell:mt-0 @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3'",
+      "'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 @min-[988px]/shell:mt-0 @min-[988px]/shell:flex @min-[988px]/shell:flex-col @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3'",
     );
     expect(source).toContain("<aside className={ARTICLE_RAIL_CLASS}>{rail}</aside>");
 

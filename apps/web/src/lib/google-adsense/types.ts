@@ -16,6 +16,15 @@ export type AdFormat =
 /**
  * 広告スロットのプロパティ
  */
+/** 広告の枠の台帳の箱 (モバイルで寸法が違う枠は mobileWidth / mobileHeight。境界は md = 768px) */
+export interface AdSlotBoxProp {
+  name: string;
+  width: number | 'full';
+  height: number;
+  mobileWidth?: number | 'full';
+  mobileHeight?: number;
+}
+
 export interface AdSlotProps {
   /**
    * 広告フォーマット
@@ -55,6 +64,12 @@ export interface AdSlotProps {
    * @default undefined — device-aware: desktop 600px / mobile 250px
    */
   rootMargin?: number;
+
+  /**
+   * 広告の枠の台帳 (config/ads/placements.json) の箱。渡すと予約の高さと開発中の代わりの表示がこの寸法になる
+   * (本番の実測に合わせた箱。渡さない枠は形式ごとの既定値 getAdReservedMinHeight を使う)。
+   */
+  slotBox?: AdSlotBoxProp;
 
   /**
    * data-full-width-responsive属性を強制的に設定するか

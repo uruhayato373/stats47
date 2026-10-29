@@ -29,8 +29,7 @@ import {
   type ChartPoint,
   type StackPoint,
 } from '@/components/charts/MiniCharts';
-import { PanelGrid } from '@/components/layout';
-import { StatTile } from '@/components/surface';
+import { StatTile, StatTileGrid } from '@/components/surface';
 
 import {
   FinanceSankey,
@@ -159,7 +158,7 @@ export function LocalFinanceDashboard({
   );
   const embedded: Record<LocalFinanceEmbeddedKey, ReactNode> = {
     'finance-overview': prefCode ? (
-        <PanelGrid className="grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        <StatTileGrid>
           <KeyMetricsTableCard
             title={activeName}
             subtitle="主要指標"
@@ -191,14 +190,14 @@ export function LocalFinanceDashboard({
           <StatTile label="地方債現在高" value={latest ? oku(latest.localDebt) : null}>
             <MiniBarChart points={lineSeries('localDebt', OKU)} />
           </StatTile>
-        </PanelGrid>
+        </StatTileGrid>
     ) : comparisonTable([
       { label: '歳入総額', format: (record) => oku(record.revenue) },
       { label: '歳出総額', format: (record) => oku(record.expenditure) },
       { label: '実質収支', format: (record) => oku(record.realBalance) },
     ]),
     'finance-sustainability': prefCode ? (
-        <PanelGrid className="grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        <StatTileGrid>
           {RATIO_METRICS.map((meta) => {
             const latestVal = latest ? latest[meta.key] : null;
             const points = lineSeries(meta.key, 1);
@@ -218,17 +217,19 @@ export function LocalFinanceDashboard({
                   label={meta.label}
                   value={latestVal == null ? null : latestVal.toFixed(meta.decimals)}
                   unit={formatUnitForDisplay(meta.unit)}
+                  footer={
+                    <ChartFooter
+                      rankingLink={hrefFor("ranking", { rankingKey: meta.rankingKey })}
+                      rankingLabel={`${meta.label}の定義・ランキング`}
+                    />
+                  }
                 >
                   <MiniLineChart points={points} unit={meta.unit} />
-                  <ChartFooter
-                    rankingLink={hrefFor("ranking", { rankingKey: meta.rankingKey })}
-                    rankingLabel={`${meta.label}の定義・ランキング`}
-                  />
                 </StatTile>
               </div>
             );
           })}
-        </PanelGrid>
+        </StatTileGrid>
     ) : comparisonTable(RATIO_METRICS.map((metric) => ({
       label: metric.label,
       format: (record) => `${record[metric.key].toFixed(metric.decimals)}${formatUnitForDisplay(metric.unit)}`,

@@ -16,21 +16,32 @@ interface NativeAffiliateRowProps {
   /** AffiliateLink の category 追跡用 */
   trackingCategory?: string;
   /**
-   * `standard`: mobile 2列 / desktop 4列（一覧・ハブ用）。
-   * `three-up`: mobile は最優先1件 / desktop は3列（読了位置用）。
+   * `standard`: 最大 4 件（一覧・ハブ用）。`three-up`: 最大 3 件（読了位置用）。
+   * どちらも列の数は本文の幅で決め、1 行に入る数だけ見せる (COLUMN_CLASS)。
    */
   variant?: "standard" | "three-up";
 }
 
-function getThreeUpGridClassName(itemCount: number): string {
-  if (itemCount === 1) {
-    return "mx-auto grid max-w-xs grid-cols-1 items-start gap-2";
-  }
-  if (itemCount === 2) {
-    return "mx-auto grid max-w-2xl grid-cols-1 items-start gap-2 md:grid-cols-2";
-  }
-  return "grid grid-cols-1 items-start gap-2 md:grid-cols-3";
-}
+/**
+ * 本文の幅 (コンテナ) で列の数を決める。バナーは原寸 (300px) より縮めず、入る数だけ横に並べる (2026-10-29 オーナー決定)。
+ * 境界 = 原寸 300px × 列の数 + 隙間 8px × (列の数 − 1): 2 列 608px / 3 列 916px / 4 列 1224px。
+ * 旧: ブラウザの幅 768px 以上で一律 3 列 (standard は 4 列・モバイル 2 列) にしていたため、右レールのある本文 (810px) や
+ * タブレットの幅でバナーが 223〜254px に縮み、中の文字が読みにくかった。
+ */
+const COLUMN_CLASS: Record<number, string> = {
+  1: "grid-cols-1",
+  2: "grid-cols-1 @min-[608px]:grid-cols-2",
+  3: "grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3",
+  4: "grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3 @min-[1224px]:grid-cols-4",
+};
+
+/** 1 行に収まらない分は出さない (2 段目に半端な行を作らない)。i 枚目は i+1 列が入る幅から見せる */
+const ITEM_VISIBILITY_CLASS = [
+  undefined,
+  "hidden @min-[608px]:block",
+  "hidden @min-[916px]:block",
+  "hidden @min-[1224px]:block",
+];
 
 /**
  * ネイティブアフィリエイト枠。リンク付きバナー画像を、各画像の上の PR 表記つきでグリッド表示する。
@@ -65,60 +76,57 @@ export function NativeAffiliateRow({
   const visible = banners.filter(isLandscapeBanner).slice(0, itemLimit);
   if (visible.length === 0) return null;
 
-  const isThreeUp = variant === "three-up";
-  const gridClassName = isThreeUp
-    ? getThreeUpGridClassName(visible.length)
-    : "grid grid-cols-2 items-start gap-2 md:grid-cols-4";
-
   return (
-    <div className={gridClassName}>
-      {visible.map((b, index) => (
-        <AdImpressionTracker
-          key={b.href + b.imageUrl}
-          category={b.vertical ?? trackingCategory}
-          label={b.title}
-          position={position}
-          adId={b.id}
-          creativeSize={`${b.width}x${b.height}`}
-          className={isThreeUp && index > 0 ? "hidden md:block" : undefined}
-        >
-          <div className="flex flex-col gap-1">
-            <PrLabel />
-            <TrackedAffiliateLink
-              href={b.href}
-              category={b.vertical ?? trackingCategory}
-              label={b.title}
-              position={position}
-              adId={b.id}
-              className="relative block"
-            >
-              <Image
-                src={b.imageUrl}
-                alt={b.title}
-                width={b.width}
-                height={b.height}
-                sizes={
-                  isThreeUp
-                    ? "(max-width: 767px) 100vw, 33vw"
-                    : "(max-width: 767px) 50vw, 25vw"
-                }
-                className="block h-auto w-full"
-                loading="lazy"
-              />
-              {b.trackingPixelUrl && (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={b.trackingPixelUrl}
-                  alt=""
-                  width={1}
-                  height={1}
-                  className="absolute left-0 top-0 h-px w-px opacity-0"
+    <div className="@container">
+      <div className={`grid items-start gap-2 ${COLUMN_CLASS[visible.length]}`}>
+        {visible.map((b, index) => (
+          <AdImpressionTracker
+            key={b.href + b.imageUrl}
+            category={b.vertical ?? trackingCategory}
+            label={b.title}
+            position={position}
+            adId={b.id}
+            creativeSize={`${b.width}x${b.height}`}
+            className={ITEM_VISIBILITY_CLASS[index]}
+          >
+            {/* 原寸 300px の枠をセルの中央に置き、PR 表記はその左上。250x250 は枠の中央 (広告の枠の台帳の fitsInto)。
+                枠の幅を中身に合わせると、画像の max-w-full と互いを参照して幅 0 になる (2026-10-29 に実測) */}
+            <div className="mx-auto flex w-full max-w-75 flex-col gap-1">
+              <PrLabel />
+              <TrackedAffiliateLink
+                href={b.href}
+                category={b.vertical ?? trackingCategory}
+                label={b.title}
+                position={position}
+                adId={b.id}
+                className="relative block"
+              >
+                <Image
+                  src={b.imageUrl}
+                  alt={b.title}
+                  width={b.width}
+                  height={b.height}
+                  sizes={`${b.width}px`}
+                  // 幅は width 属性 (原寸) のまま、セルが狭いときだけ縮める。幅を auto にすると属性の幅が消え、
+                  // lazy の画像は読み込み前に 0×0 になって読み込まれない (2026-10-29 に実測)
+                  className="mx-auto block h-auto max-w-full"
+                  loading="lazy"
                 />
-              )}
-            </TrackedAffiliateLink>
-          </div>
-        </AdImpressionTracker>
-      ))}
+                {b.trackingPixelUrl && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={b.trackingPixelUrl}
+                    alt=""
+                    width={1}
+                    height={1}
+                    className="absolute left-0 top-0 h-px w-px opacity-0"
+                  />
+                )}
+              </TrackedAffiliateLink>
+            </div>
+          </AdImpressionTracker>
+        ))}
+      </div>
     </div>
   );
 }

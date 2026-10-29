@@ -54,5 +54,6 @@ export * from "./lib/cn";
 // パネル・数値タイル・線の格子 (公開サイト・管理画面・動画アプリが共有する。2026-10-28 に apps/web から移した)
 export * from "./surface/surface";
 export * from "./surface/stat-tile";
+export * from "./surface/stat-tile-grid";
 export * from "./surface/chart-panel";
 export * from "./surface/panel-grid";

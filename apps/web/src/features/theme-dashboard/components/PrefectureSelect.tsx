@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { PREFECTURE_LIST_2DIGIT, to5DigitPrefCode } from '@stats47/area';
 import { cn } from '@stats47/components';
 import {
@@ -9,9 +11,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
+import { hrefFor } from '@stats47/data-configs/content/href';
+
 
 import { trackNavClick } from '@/lib/analytics/events';
 
+import { themeHref } from '../config/theme-href';
 import {
   resolveThemePrefectureCode,
   THEME_PREFECTURE_SET_VALUE,
@@ -28,9 +33,17 @@ import { useThemePrefecture } from './ThemePrefectureContext';
  * テーマダッシュボードの都道府県セレクタ (context 消費型)。
  * デフォルト「47都道府県」(GEO-SCOPE-SEPARATION-01 WP2)。選択でその都道府県のデータに切り替わり、
  * URL `?pref=` も同期される (同期は ThemePrefectureContext 側)。value は 5桁コードに統一。
+ *
+ * areaPageThemeKey を渡したテーマ (県ごとのページ `/areas/{県}/{テーマ}` を持つテーマ) では、選んだ県の
+ * そのページへ移り、「47都道府県」ならテーマのページへ戻る。県×テーマの交点は 1 つの URL に着く
+ * (2026-10-30 オーナー決定。旧: 同じページのまま `?pref=` を書き換え、同じ内容が 2 つの URL にあった)。
  */
-export function PrefectureSelect({ className }: { className?: string } = {}) {
+export function PrefectureSelect({
+  className,
+  areaPageThemeKey,
+}: { className?: string; areaPageThemeKey?: string } = {}) {
   const { selectedPrefectureCode, selectedAreaName, setSelected } = useThemePrefecture();
+  const router = useRouter();
   const selectedLabel = selectedPrefectureCode
     ? (selectedAreaName ?? resolveThemePrefectureCode(selectedPrefectureCode)?.areaName)
     : PREFECTURE_SET_LABEL;
@@ -46,12 +59,20 @@ export function PrefectureSelect({ className }: { className?: string } = {}) {
       ]}
       onValueChange={(v) => {
         if (v === null) return;
-        setSelected(v === THEME_PREFECTURE_SET_VALUE ? null : v);
+        const code = v === THEME_PREFECTURE_SET_VALUE ? null : v;
+        const pageHref = areaPageThemeKey
+          ? code
+            ? hrefFor('area-theme', { areaCode: code, themeSlug: areaPageThemeKey })
+            : themeHref(areaPageThemeKey)
+          : null;
         trackNavClick({
           surface: 'theme_region',
           label: v,
-          href: `?pref=${v}`,
+          href: pageHref ?? `?pref=${v}`,
         });
+        // 県ごとのページへ移るときは今のページの URL (`?pref=`) を書き換えない (戻ると同じ内容の別 URL に戻るため)
+        if (pageHref) router.push(pageHref);
+        else setSelected(code);
       }}
     >
       <SelectTrigger

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { isAreaTheme } from "@/features/theme-dashboard/config/area-theme-slugs";
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 import {
   THEME_PREFECTURE_COOKIE_NAME,
@@ -79,10 +80,15 @@ export default async function ThemeDynamicPage({ params, searchParams }: PagePro
     throw new Error(`theme data unavailable: ${theme.themeKey}`);
   }
 
-  const initialPrefecture = resolveInitialThemePrefecture({
-    urlPreference: query.pref,
-    cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
-  });
+  // 県ごとのページ (/areas/県/テーマ) を持つテーマは、このページを常に 47都道府県の表示にする。県を選んだ表示は
+  // 県のページだけが持つ (県×テーマの交点を 1 つの URL にする。2026-10-30 オーナー決定。`?pref=` は middleware が 301 で移す)。
+  // 持たないテーマ (港湾・鉄道・道路) は従来どおり URL と Cookie から県を引き継ぐ。
+  const initialPrefecture = isAreaTheme(theme.themeKey)
+    ? null
+    : resolveInitialThemePrefecture({
+        urlPreference: query.pref,
+        cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
+      });
 
   // PageShell は ThemePageLayout が持つ (左レール = ThemeSideNav を
   // ThemePrefectureProvider の内側に置く必要があるため)。ここで重ねない。
