@@ -119,7 +119,7 @@
                   "mobile"
                 ],
                 "additionalProperties": false,
-                "description": "1 つの枠に広告を横に並べる数 (PR の列)",
+                "description": "1 つの枠に広告を横に並べる数 (PR の列)。desktop は上限、mobile は最も狭い幅での数。実際の列の数は本文の幅に原寸 (300px) のまま入る数で、入らない分は出さない (2026-10-29)",
                 "properties": {
                   "desktop": {
                     "type": "integer",

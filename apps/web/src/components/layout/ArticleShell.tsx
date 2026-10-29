@@ -26,9 +26,13 @@ interface ArticleShellProps {
   className?: string;
 }
 
-/** 右レール。狭い幅は本文の下 (mt-4・間隔 16px)、988px 以上は幅 316px の列 (間隔 12px) */
+/**
+ * 右レール。狭い幅は本文の下 (mt-4・間隔 16px) に積み、988px 以上は幅 316px の列 (間隔 12px)。
+ * 本文の下に積んだときは、2 つ入る幅 (640px 以上) で 2 列の格子にする (2026-10-29 オーナー決定。旧: 1 列のままで、
+ * 300×250 の広告や PR が 1 枚ずつ縦に並び、右に 400〜500px の空きができていた)
+ */
 export const ARTICLE_RAIL_CLASS =
-  'mt-4 flex flex-col gap-4 @min-[988px]/shell:mt-0 @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3';
+  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 @min-[988px]/shell:mt-0 @min-[988px]/shell:flex @min-[988px]/shell:flex-col @min-[988px]/shell:w-[316px] @min-[988px]/shell:shrink-0 @min-[988px]/shell:self-stretch @min-[988px]/shell:gap-3';
 
 /**
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。

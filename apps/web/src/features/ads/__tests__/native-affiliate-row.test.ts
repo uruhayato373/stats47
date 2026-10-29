@@ -70,29 +70,40 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).not.toContain("group-hover");
     expect(src).toContain("width={b.width}");
     expect(src).toContain("height={b.height}");
-    expect(src).toContain('className="block h-auto w-full"');
   });
 
-  it("読了位置用three-upはdesktop 3列・mobile 最優先1件に制限する", () => {
+  // 2026-10-29 オーナー決定: バナーを原寸より縮めず、本文の幅に入る数だけ 1 行に並べる。
+  // 旧: ブラウザの幅 768px 以上で一律 3 列にし、右レールのある本文 (810px) で 254px、768px の画面で 223px に縮んでいた
+  it("バナーは原寸を上限にし、広げも縮めもしない (w-full で引き伸ばさない)", () => {
+    expect(src).toContain('className="mx-auto block h-auto max-w-full"');
+    // w-auto は width 属性を打ち消し、lazy の画像が読み込み前に 0×0 になる
+    expect(src).not.toContain("w-auto");
+    // 枠は原寸幅で固定する。w-fit にすると画像の max-w-full と循環して幅 0 で描かれる
+    expect(src).toContain('className="mx-auto flex w-full max-w-75 flex-col gap-1"');
+    expect(src).not.toContain("w-fit");
+    expect(src).not.toContain("h-auto w-full");
+    expect(src).toContain("sizes={`${b.width}px`}");
+  });
+
+  it("列の数はブラウザの幅ではなく本文の幅 (コンテナ) で決める", () => {
+    expect(src).toContain('<div className="@container">');
+    expect(src).not.toMatch(/\bmd:grid-cols-/);
+    expect(src).not.toMatch(/\bmd:block/);
+    // 境界 = 300px × 列 + 8px × (列 − 1)
+    expect(src).toContain('"grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3"');
+    expect(src).toContain("@min-[1224px]:grid-cols-4");
+  });
+
+  it("1 行に入らない分は出さず、2 段目に半端な行を作らない", () => {
+    expect(src).toContain('"hidden @min-[608px]:block"');
+    expect(src).toContain('"hidden @min-[916px]:block"');
+    expect(src).toContain("className={ITEM_VISIBILITY_CLASS[index]}");
+  });
+
+  it("three-up は最大 3 件、standard は最大 4 件", () => {
     expect(src).toContain('variant?: "standard" | "three-up"');
     expect(src).toContain('variant === "three-up" ? 3 : 4');
-    expect(src).toContain('"grid grid-cols-1 items-start gap-2 md:grid-cols-3"');
-    expect(src).toContain('index > 0 ? "hidden md:block" : undefined');
-    expect(src).toContain('"(max-width: 767px) 100vw, 33vw"');
-  });
-
-  it("three-upの在庫が1〜2件でも左寄せの空き列を作らない", () => {
-    expect(src).toContain("getThreeUpGridClassName(visible.length)");
-    expect(src).toContain('"mx-auto grid max-w-xs grid-cols-1 items-start gap-2"');
-    expect(src).toContain(
-      '"mx-auto grid max-w-2xl grid-cols-1 items-start gap-2 md:grid-cols-2"',
-    );
-  });
-
-  it("既存一覧面のstandardはmobile 2列・desktop 4列を維持する", () => {
     expect(src).toContain('variant = "standard"');
-    expect(src).toContain('"grid grid-cols-2 items-start gap-2 md:grid-cols-4"');
-    expect(src).toContain('"(max-width: 767px) 50vw, 25vw"');
   });
 });
 
