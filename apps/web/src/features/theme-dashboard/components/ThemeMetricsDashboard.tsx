@@ -316,7 +316,7 @@ export function ThemeMetricsDashboard({
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string) => panel.comparisonYear ? (
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -351,6 +351,7 @@ export function ThemeMetricsDashboard({
       selectedPrefectureCode={selectedPrefectureCode}
       areaName={areaName}
       defaultCheckedKeys={panel.defaultCheckedKeys}
+      annotation={annotation}
     />
   );
   /**
@@ -362,13 +363,14 @@ export function ThemeMetricsDashboard({
   const renderPanelRuns = (
     list: Panel[],
     summaryOnlyOf: (panel: Panel) => boolean = () => false,
-    sectionTitle?: string
+    sectionTitle?: string,
+    annotationOf: (panel: Panel) => string | undefined = () => undefined
   ) => {
     const out: ReactNode[] = [];
     for (let i = 0; i < list.length; ) {
       const panel = list[i];
       if (!isCompact(panel)) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle));
+        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle, annotationOf(panel)));
         i += 1;
         continue;
       }
@@ -485,7 +487,20 @@ export function ThemeMetricsDashboard({
   const renderChapter = (
     chapter: (typeof chapters)[number],
     action?: ReactNode
-  ) => (
+  ) => {
+    // 章のチャートが切り替えカードと同じ指標だけを描くなら、チャートをやめてカードの (系列を選べる) グラフを出す。
+    // 注記はカードの下へ引き継ぐ (2026-10-29 オーナー決定。旧: カードのグラフを止めて選べないチャートを出していた)
+    const merged = chapter.charts.length === 1 ? chapter.charts[0] : undefined;
+    const mergedPanel = merged
+      ? chapter.panels.find(
+          (panel) =>
+            !panel.comparisonYear &&
+            !isSingleMetricGroup(panel.metrics) &&
+            chartDuplicatesMetrics(merged, panel.metrics.map((metric) => metric.metricKey))
+        )
+      : undefined;
+    const charts = mergedPanel ? [] : chapter.charts;
+    return (
     <PanelGrid
       as="section"
       key={chapter.key}
@@ -499,6 +514,7 @@ export function ThemeMetricsDashboard({
         action={action}
       />
       {renderPanelRuns(chapter.panels, (panel) => {
+        if (panel === mergedPanel) return false;
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
             ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
@@ -521,11 +537,13 @@ export function ThemeMetricsDashboard({
         return panel.metrics.every((metric) =>
           coveredKeys.has(metric.metricKey)
         );
-      }, chapter.title)}
-      {chapter.charts.length > 0 && (
-        <PanelGrid className={`grid-cols-1 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
-          {chapter.charts.map((chart) =>
-            renderChart(chart, undefined, chapter.charts.length === 1 && chartLegendNamesSeries(chart))
+      }, chapter.title, (panel) =>
+        panel === mergedPanel && merged ? resolveChartAnnotation(merged) : undefined
+      )}
+      {charts.length > 0 && (
+        <PanelGrid className={`grid-cols-1 ${charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
+          {charts.map((chart) =>
+            renderChart(chart, undefined, charts.length === 1 && chartLegendNamesSeries(chart))
           )}
         </PanelGrid>
       )}
@@ -538,7 +556,8 @@ export function ThemeMetricsDashboard({
         <div key={key}>{embeddedSections[key]}</div>
       ))}
     </PanelGrid>
-  );
+    );
+  };
 
   return (
     <PanelGrid
@@ -600,4 +619,20 @@ export function chartLegendNamesSeries(chart: PageComponent): boolean {
     return sum + (Array.isArray(refs) ? refs.length : 0);
   }, 0);
   return count >= 2;
+}
+
+/**
+ * 章のチャートが、切り替えカードの指標と同じ指標だけを描いているか (折れ線・全国の系列なし・指標の集合が一致)。
+ * 一致するなら同じグラフが 2 つになるので、章のチャートをやめてカードのグラフ (系列を選べる) を出す。
+ */
+export function chartDuplicatesMetrics(chart: PageComponent, metricKeys: readonly string[]): boolean {
+  if (chart.componentType !== 'line-chart') return false;
+  const refs = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap((field) => {
+    const value = chart.componentProps[field];
+    return Array.isArray(value) ? value : [];
+  });
+  if (refs.length !== metricKeys.length || metricKeys.length < 2) return false;
+  if (refs.some((ref) => !ref || typeof ref !== 'object' || ref.area === 'national')) return false;
+  const chartKeys = new Set(refs.map((ref) => ref.metricKey));
+  return chartKeys.size === metricKeys.length && metricKeys.every((key) => chartKeys.has(key));
 }

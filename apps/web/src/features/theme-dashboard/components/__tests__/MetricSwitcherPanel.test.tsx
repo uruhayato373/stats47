@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 
@@ -14,7 +14,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  *  (f) 最後の 1 本は外せない (系列ゼロの空カードを作らせない)
  *  (g) ★47都道府県 (未選択) は「全国」の代役ではない。fetch せず、タイルは実在する
  *      1位県の値をそのまま出す (GEO-SCOPE-SEPARATION-01 WP2)
- *  (h) 値は指標ごとの数値タイル (StatTile)、系列の選択はチャートの凡例 (2026-10-29。値の表示と選択を分けた)
+ *  (h) 値は指標ごとの数値タイル (StatTile)。タイルを押して系列を出し入れする (見本の元の shadcn「Line Chart - Interactive」)。
+ *      出典とランキングはタイルごとに出さず、チャートの下の「出典・指標の定義」の Sheet 1 か所にまとめる (2026-10-29)
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
@@ -58,10 +59,9 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
 const METRICS: MultiMetricGroup = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
 const LABELS = { wage: "賃金", unemployment: "失業率", "job-ratio": "有効求人倍率" };
 
-/** 系列の選択は凡例の切り替えボタン (押された状態 = aria-pressed) */
+/** 系列の選択は数値タイルに重ねた切り替えボタン (押された状態 = aria-pressed) */
 function tile(label: RegExp) {
-  const legend = screen.getByRole("list", { name: "グラフに表示する指標" });
-  return within(legend).getByRole("button", { name: label });
+  return screen.getByRole("button", { name: new RegExp(`${label.source}をグラフに表示`) });
 }
 
 function toggleTile(label: RegExp) {
@@ -615,14 +615,15 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
 });
 
 describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
-  it("値は指標ごとの数値タイルを数値タイルの格子に並べ、選択は凡例で行う", async () => {
+  it("値は指標ごとの数値タイルを数値タイルの格子に並べ、タイルを押して系列を選ぶ", async () => {
     renderPanel();
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
     const grid = document.querySelector('[data-slot-kind="stat-tile-grid"]');
     expect(grid?.querySelectorAll('[data-slot-kind="stat-tile"]')).toHaveLength(3);
-    // 県を選んでいるので値はその県の値 (100)。凡例には押せる切り替えボタンが指標の数だけある
+    // 県を選んでいるので値はその県の値 (100)。タイルごとに押せる切り替えボタンがあり、別の凡例の一覧は持たない
     expect(valueTile("賃金")).toHaveTextContent("100");
-    expect(within(screen.getByRole("list", { name: "グラフに表示する指標" })).getAllByRole("button")).toHaveLength(3);
+    expect(screen.getAllByRole("button", { pressed: true }).length + screen.getAllByRole("button", { pressed: false }).length).toBe(3);
+    expect(screen.queryByRole("list", { name: "グラフに表示する指標" })).toBeNull();
     expect(screen.queryByRole("checkbox")).toBeNull();
   });
 
@@ -638,11 +639,16 @@ describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
     });
   });
 
-  it("指標ごとの数値タイルに、その指標のランキングへの導線を出す", async () => {
+  it("出典とランキングはタイルごとに出さず、チャートの下の Sheet 1 か所から全指標へ辿れる", async () => {
     renderPanel({ defaultCheckedKeys: ["unemployment", "job-ratio"] });
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
-    for (const [name, key] of [["賃金", "wage"], ["失業率", "unemployment"], ["有効求人倍率", "job-ratio"]]) {
-      expect(valueTile(name).querySelector(`a[href="/ranking/${key}"]`)).not.toBeNull();
+    for (const name of ["賃金", "失業率", "有効求人倍率"]) {
+      expect(valueTile(name).querySelector('a[href^="/ranking/"]')).toBeNull();
+    }
+    fireEvent.click(screen.getByRole("button", { name: "出典・指標の定義" }));
+    const sheet = await screen.findByRole("dialog");
+    for (const key of ["wage", "unemployment", "job-ratio"]) {
+      expect(sheet.querySelector(`a[href="/ranking/${key}"]`)).not.toBeNull();
     }
   });
 
@@ -680,7 +686,8 @@ describe('監査後の表示契約', () => {
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.queryByTestId('line-chart')).not.toBeInTheDocument();
     expect(valueTile('賃金')).toHaveTextContent('100');
-    // 推移を描かないので選択の凡例も出さない
-    expect(screen.queryByRole('list', { name: 'グラフに表示する指標' })).toBeNull();
+    // 推移を描かないのでタイルは切り替えボタンにならず、出典は同じ章の詳細図の下に任せる
+    expect(screen.queryByRole('button', { pressed: true })).toBeNull();
+    expect(screen.queryByRole('button', { name: '出典・指標の定義' })).toBeNull();
   });
 });

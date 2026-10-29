@@ -12,7 +12,6 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { classifyUnitComparability } from '@stats47/data-configs/unit';
 
-import { ChartLegend } from '@/components/charts/ChartLegend';
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
 import { PanelGrid } from '@/components/layout';
@@ -26,6 +25,7 @@ import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { nationalSeriesName } from '../lib/metric-trend';
 
+import { MetricSourcesSheet } from './MetricSourcesSheet';
 import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
@@ -65,6 +65,8 @@ interface MetricSwitcherPanelProps {
   areaName: string;
   /** 初期チェックする指標。metrics に無いキーは無視し、全滅したら先頭 1 件に倒す */
   defaultCheckedKeys?: string[];
+  /** チャートの誤読防止の注記 (同じ指標を描いていた章のチャートをこのカードに寄せたとき、その注記を引き継ぐ) */
+  annotation?: string;
 }
 
 /** 系列キャッシュのキー。指標×地域で一意にする */
@@ -195,6 +197,7 @@ export function MetricSwitcherPanel({
   id,
   title,
   summaryOnly = false,
+  annotation,
   metrics,
   tabLabels,
   selectedPrefectureCode,
@@ -508,16 +511,7 @@ export function MetricSwitcherPanel({
       metric.series.length > 0
   ).length;
 
-  // 系列の選択は凡例で行う (2026-10-29。値の表示は数値タイル、選択はチャートの凡例に分けた)。
-  // 押しても切り替わらない項目は理由を添える: 最後の 1 本 (系列ゼロにしない) と、3 種類目の単位 (Y 軸は 2 本まで)
-  const legendItems = metrics.map((m) => ({
-    key: m.metricKey,
-    label: tabLabels[m.metricKey] ?? m.title,
-    color: colorOf.get(m.metricKey) ?? getChartColor(0),
-  }));
-  const hiddenKeys = new Set(
-    metrics.filter((m) => !checkedSet.has(m.metricKey)).map((m) => m.metricKey)
-  );
+  // 押しても切り替わらない数値タイルは理由を添える: 最後の 1 本 (系列ゼロにしない) と、3 種類目の単位 (Y 軸は 2 本まで)
   const disabledReasons = new Map<string, string>();
   for (const m of metrics) {
     const checked = checkedSet.has(m.metricKey);
@@ -550,6 +544,9 @@ export function MetricSwitcherPanel({
         ) : representative ? (
           <h3 data-cell="flush" className="sr-only">{representative.title}</h3>
         ) : null}
+        {/* 数値タイルを押して系列を出し入れする (見本の元の shadcn「Line Chart - Interactive」。2026-10-29)。
+            出典・ランキングはタイルごとに出さず、チャートの下の 1 か所 (Sheet) にまとめる。同じ章に詳細図があるとき
+            (summaryOnly) はその図の下の出典が同じ指標を指すので、ここでは出さない */}
         <StatTileGrid>
           {metrics.map((m) => (
             <MetricStatTile
@@ -557,23 +554,41 @@ export function MetricSwitcherPanel({
               metric={m}
               label={tabLabels[m.metricKey] ?? m.title}
               selectedPrefectureCode={selectedPrefectureCode}
+              hideFooter
+              toggle={
+                summaryOnly
+                  ? undefined
+                  : {
+                      pressed: checkedSet.has(m.metricKey),
+                      color: colorOf.get(m.metricKey) ?? getChartColor(0),
+                      disabledReason: disabledReasons.get(m.metricKey),
+                      onToggle: () => toggle(m.metricKey, !checkedSet.has(m.metricKey)),
+                    }
+              }
             />
           ))}
         </StatTileGrid>
         {!summaryOnly && (
-          <ChartPanel>
-            <ChartLegend
-              items={legendItems}
-              hiddenKeys={hiddenKeys}
-              disabledReasons={disabledReasons}
-              onToggle={(key) => toggle(key, !checkedSet.has(key))}
-              label="グラフに表示する指標"
-              className="mb-3 text-xs"
-            />
+          <ChartPanel
+            footer={
+              <div className="flex flex-col gap-1">
+                {annotation ? <p>{annotation}</p> : null}
+                <div className="flex justify-end">
+                  <MetricSourcesSheet metrics={metrics} labels={tabLabels} />
+                </div>
+              </div>
+            }
+          >
             {isLoadingSeries ? (
               <ChartLoading height={CHART_HEIGHT} />
             ) : chartState.kind === 'chart' ? (
-              <LineChartClient chartData={chartState.data} yDomain={chartState.leftDomain} rightYDomain={chartState.rightDomain} />
+              <LineChartClient
+                chartData={chartState.data}
+                yDomain={chartState.leftDomain}
+                rightYDomain={chartState.rightDomain}
+                // 指標の系列の名前と色は数値タイルの色の印が示す。全国の破線を重ねるとき (県を選び 1 指標) だけ凡例で区別する
+                hideLegend={!chartState.hasComparison}
+              />
             ) : chartState.kind === 'select-prefecture' ? (
               <ChartEmptyState
                 message={emptyMessage(chartState)}

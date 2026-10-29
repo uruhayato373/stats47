@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { PageComponent } from '@/components/stat-charts';
 
-import { chartLegendNamesSeries } from '../ThemeMetricsDashboard';
+import { chartDuplicatesMetrics, chartLegendNamesSeries } from '../ThemeMetricsDashboard';
 
 
 /**
@@ -30,5 +30,28 @@ describe('chartLegendNamesSeries', () => {
   it('凡例の形が違う種類 (物価・構成比など) は系列が多くても対象外', () => {
     expect(chartLegendNamesSeries(chart('cpi-profile', { seriesRefs: refs(10) }))).toBe(false);
     expect(chartLegendNamesSeries(chart('composition-chart', { seriesRefs: refs(4) }))).toBe(false);
+  });
+});
+
+/**
+ * 章のチャートが切り替えカードと同じ指標だけを描くか (2026-10-29 オーナー決定)。一致する章ではチャートをやめ、
+ * カードの系列を選べるグラフを出す。一致しない図 (全国の系列・指標が多い・別の種類) を消すと情報が減るので残す。
+ */
+describe('chartDuplicatesMetrics', () => {
+  const keys = ['vacant', 'owner'];
+  it('同じ指標の集合だけを描く折れ線は重複', () => {
+    expect(chartDuplicatesMetrics(chart('line-chart', { seriesRefs: [{ metricKey: 'owner' }, { metricKey: 'vacant' }] }), keys)).toBe(true);
+  });
+  it('全国の系列を含む図は重複ではない (カードのグラフは全国を重ねない場合がある)', () => {
+    expect(
+      chartDuplicatesMetrics(chart('line-chart', { seriesRefs: [{ metricKey: 'vacant' }, { metricKey: 'owner', area: 'national' }] }), keys)
+    ).toBe(false);
+  });
+  it('指標が多い・少ない図は重複ではない', () => {
+    expect(chartDuplicatesMetrics(chart('line-chart', { seriesRefs: refs(3) }), ['m0', 'm1'])).toBe(false);
+    expect(chartDuplicatesMetrics(chart('line-chart', { seriesRefs: [{ metricKey: 'vacant' }] }), keys)).toBe(false);
+  });
+  it('折れ線以外の種類は重複ではない', () => {
+    expect(chartDuplicatesMetrics(chart('mixed-chart', { columnSeriesRefs: [{ metricKey: 'vacant' }], lineSeriesRefs: [{ metricKey: 'owner' }] }), keys)).toBe(false);
   });
 });
