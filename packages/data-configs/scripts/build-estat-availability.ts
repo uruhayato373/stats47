@@ -28,7 +28,7 @@ import {
   diffYearAvailability,
   expandYearSpec,
   formatYearList,
-  YEAR_EXCLUSION_INHERITED,
+  yearExclusionProblems,
   type EstatAvailabilityEntry,
   type EstatAvailabilityLevel,
   type EstatAvailabilityQuery,
@@ -332,8 +332,9 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
       continue;
     }
     const exclusions = t.config.yearExclusions ?? [];
-    const inherited = exclusions.filter((e) => e.reason === YEAR_EXCLUSION_INHERITED).flatMap((e) => e.years);
-    const judged = exclusions.filter((e) => e.reason !== YEAR_EXCLUSION_INHERITED).flatMap((e) => e.years);
+    // 理由の種類が無い・判断していない除外は「未判断」に数える (PR の年の検査がこの形を止める。2026-10-30)
+    const inherited = exclusions.filter((e) => yearExclusionProblems([e]).length > 0).flatMap((e) => e.years);
+    const judged = exclusions.filter((e) => yearExclusionProblems([e]).length === 0).flatMap((e) => e.years);
     const diff = diffYearAvailability({
       configYears,
       ledgerYears,

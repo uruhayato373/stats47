@@ -18,23 +18,9 @@ export const subsidyExpensesPrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2004,
+    "from": 1997,
     "to": 2022,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1997,
-        1998,
-        1999,
-        2000,
-        2001,
-        2002,
-        2003,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

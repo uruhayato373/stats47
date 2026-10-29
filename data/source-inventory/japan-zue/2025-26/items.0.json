@@ -7140,6 +7140,11 @@
         "datasetId": "0000010206",
         "url": "https://www.stat.go.jp/data/ssds/index.htm",
         "dataYears": [
+          "1975",
+          "1980",
+          "1985",
+          "1990",
+          "1995",
           "2000",
           "2005",
           "2010",

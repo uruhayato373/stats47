@@ -18,25 +18,9 @@ export const stillbirthsAfter22Weeks: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2004,
+    "from": 1995,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1995,
-        1996,
-        1997,
-        1998,
-        1999,
-        2000,
-        2001,
-        2002,
-        2003,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

@@ -18,25 +18,18 @@ export const rentedHousingRatio: MetricConfig = {
   ],
   "years": {
     "years": [
+      1978,
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
       2008,
       2013,
       2018,
       2023,
     ],
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1978,
-        1983,
-        1988,
-        1993,
-        1998,
-        2003,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

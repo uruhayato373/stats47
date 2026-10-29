@@ -18,27 +18,9 @@ export const longAbsenceMiddleSchoolIllnessPer1000: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2002,
+    "from": 1991,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1991,
-        1992,
-        1993,
-        1994,
-        1995,
-        1996,
-        1997,
-        1998,
-        1999,
-        2000,
-        2001,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

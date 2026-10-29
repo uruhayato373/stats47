@@ -17,25 +17,9 @@ export const truckOperators: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 1984,
+    "from": 1975,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1975,
-        1976,
-        1977,
-        1978,
-        1979,
-        1980,
-        1981,
-        1982,
-        1983,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

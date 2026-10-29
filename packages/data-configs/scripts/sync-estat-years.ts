@@ -9,8 +9,9 @@
  *   npx tsx packages/data-configs/scripts/sync-estat-years.ts            # metric config を書き換える (年を足す・除外した年を外す)
  *   npx tsx packages/data-configs/scripts/sync-estat-years.ts --check    # 書き換えが要る metric があれば exit 1
  *   npx tsx packages/data-configs/scripts/sync-estat-years.ts --remove-missing  # 1 県も値が無い年も外す (人が報告を見てから)
- *   npx tsx packages/data-configs/scripts/sync-estat-years.ts --migrate  # 2026-10 の移行 (1 回だけ。--remove-missing を含む)。
- *       意図して外した可能性がある年を `YEAR_EXCLUSION_INHERITED` の除外として残してから合わせる
+ *
+ * 利用できる年は全て使う (2026-10-30 オーナー決定)。`yearExclusions` は理由の種類 (`kind`) と理由がそろったものだけ認め、
+ * `--check` は種類の無い・判断していない除外も止める (移行時の未判断の除外が 421 指標・延べ 3,563 年を隠していた)。
  *
  * 台帳が無い・取得に失敗した・行が切れた・重複行がある条件の metric と、`years: "all"` の metric は触らない。
  * `years` が増えた metric の R2 の値は、次の取り込み (`data-refresh.yml`) で増える。このスクリプトは R2 に触れない。
@@ -22,10 +23,9 @@ import { fileURLToPath } from "node:url";
 import {
   expandYearSpec,
   formatYearList,
-  inheritedExclusionYears,
   resolveCityLedgerYears,
   resolveLedgerYears,
-  YEAR_EXCLUSION_INHERITED,
+  yearExclusionProblems,
 } from "../src/estat-availability.js";
 import type { YearExclusion, YearSpec } from "../src/types.js";
 import { METRICS_DIR, formatTsValue, keyToFilename } from "./_lib.js";
@@ -37,7 +37,6 @@ interface Plan {
   exclusions: YearExclusion[];
   added: number[];
   removed: number[];
-  inherited: number[];
 }
 
 /** 連続した年は `{from, to}`、飛びがあれば `{years}` にする。 */
@@ -92,10 +91,11 @@ export function rewriteYearsBlock(source: string, years: YearSpec, exclusions: r
   return text.slice(0, range.start) + block + text.slice(range.end);
 }
 
-function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skipped: string[] } {
+function plan(removeMissing: boolean): { plans: Plan[]; skipped: string[]; badExclusions: string[] } {
   const ledger = loadLedgerEntries();
   const plans: Plan[] = [];
   const skipped: string[] = [];
+  const badExclusions: string[] = [];
   // years は県の値で決める (市区町村は合併でコードが変わり「全市区町村」の年が定まらない)。
   // 県の値を持たない市区町村だけの metric は県の台帳が無いので、市区町村の台帳から新しい年だけを足す
   // (resolveCityLedgerYears。2026-10-28 MUNI-YEAR-FRESHNESS-AUDIT-01: 財政力指数などが e-Stat より 1 年遅れていた)
@@ -109,11 +109,7 @@ function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skippe
     if (!configYears) continue;
 
     const exclusions = [...(config.yearExclusions ?? [])];
-    const already = new Set(exclusions.flatMap((e) => e.years));
-    const inherited = migrate && target.level === "prefecture"
-      ? inheritedExclusionYears(configYears, entry.years).filter((year) => !already.has(year))
-      : [];
-    if (inherited.length > 0) exclusions.push({ years: inherited, reason: YEAR_EXCLUSION_INHERITED });
+    for (const problem of yearExclusionProblems(exclusions)) badExclusions.push(`${config.key}: ${problem}`);
 
     const resolved =
       target.level === "city"
@@ -133,28 +129,34 @@ function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skippe
       skipped.push(`${config.key} (台帳に値のある年が無い)`);
       continue;
     }
-    if (resolved.added.length === 0 && resolved.removed.length === 0 && inherited.length === 0) continue;
-    plans.push({ key: config.key, ...resolved, exclusions, inherited });
+    if (resolved.added.length === 0 && resolved.removed.length === 0) continue;
+    plans.push({ key: config.key, ...resolved, exclusions });
   }
-  return { plans, skipped };
+  return { plans, skipped, badExclusions };
 }
 
 function main(): void {
   const argv = process.argv.slice(2);
   const check = argv.includes("--check");
-  const migrate = argv.includes("--migrate");
-  const { plans, skipped } = plan(migrate, migrate || argv.includes("--remove-missing"));
+  const { plans, skipped, badExclusions } = plan(argv.includes("--remove-missing"));
 
   const added = plans.filter((p) => p.added.length > 0).length;
   const removed = plans.filter((p) => p.removed.length > 0).length;
-  const inherited = plans.filter((p) => p.inherited.length > 0).length;
   console.log(
     `years を合わせる metric ${plans.length} 件 (年を足す ${added}・外す ${removed}` +
-      `${migrate ? `・除外を引き継ぐ ${inherited}` : ""})`,
+      ")",
   );
   for (const s of skipped) console.log(`  [skip] ${s}`);
 
+  for (const bad of badExclusions) console.error(`  [除外] ${bad}`);
   if (check) {
+    if (badExclusions.length > 0) {
+      console.error(
+        `✗ 理由の種類 (kind) の無い・判断していない yearExclusions が ${badExclusions.length} 件ある。` +
+          "利用できる年は全て使う。外すなら kind (series-break / definition-change / value-error / cadence-alignment) と理由を書く",
+      );
+      process.exit(1);
+    }
     for (const p of plans.slice(0, 30)) {
       console.log(
         `  ${p.key}: ${p.added.length > 0 ? `+${formatYearList(p.added)} ` : ""}` +

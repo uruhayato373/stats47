@@ -19,20 +19,13 @@ export const finalEducationUniversityGraduateSchoolRatio: MetricConfig = {
   ],
   "years": {
     "years": [
+      1980,
       1990,
       2000,
       2010,
       2020,
     ],
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1980,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
