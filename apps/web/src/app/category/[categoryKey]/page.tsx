@@ -274,6 +274,8 @@ export default async function CategoryPage({ params }: PageProps) {
   // 残る出典調査と広告を右レールに置く (左右レールは併存させない契約)。
   const rightRail = (
     <RailStack>
+      {/* AdSense と PR の間に調査のカードを挟む (枠同士を隣り合わせにしない。ランキングのページと同じ形。2026-10-30) */}
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       {sourceSurveys.length > 0 && (
         <SurveyCard
           surveys={sourceSurveys.map((survey) => ({
@@ -284,8 +286,6 @@ export default async function CategoryPage({ params }: PageProps) {
           surface="category_survey"
         />
       )}
-
-      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       <SidebarPromoBanner index={0} />
     </RailStack>
   );
@@ -354,6 +354,15 @@ export default async function CategoryPage({ params }: PageProps) {
           </HorizontalCardCarouselFrame>
         )}
 
+      </PageSections>
+
+      {/* 広告はカードではないので、カードの格子の外に置く (格子を分け、間に置く)。
+          新着ブログの後・全ランキングの前に置き、後ろの PR の列と隣り合わせにしない (2026-10-30)。
+          無効のときは何も描かないので、格子の帯が余らない */}
+      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
+      <PageSections className="mt-4">
         {/* 全件テーブル */}
         {categoryTopics.length > 0 ? (
           <CategoryTopicGroups
@@ -372,11 +381,6 @@ export default async function CategoryPage({ params }: PageProps) {
           </SectionCard>
         )}
       </PageSections>
-
-      {/* 広告はカードではないので、カードの格子の外に置く (格子を 2 つに分け、間に置く)。
-          無効のときは何も描かないので、格子の帯が余らない */}
-      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
       {nativeBanners.length > 0 && (

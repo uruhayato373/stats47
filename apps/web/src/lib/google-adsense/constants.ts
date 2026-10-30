@@ -61,12 +61,6 @@ export const RANKING_SIDEBAR_TOP: AdSlotConfig = {
   format: "rectangle",
 };
 
-/** ランキングページ: 右サイドバー。AdSense ユニット名: stats47-ranking-rail-bottom */
-export const RANKING_PAGE_SIDEBAR: AdSlotConfig = {
-  slotId: "2308454706",
-  format: "skyscraper",
-};
-
 /**
  * 右レール共通のレクタングル枠（RailAdSlot 用）
  * 旧 MAIN_SIDEBAR（未使用スロット 7716393084）を転用。category / areas の右レールに配置する。

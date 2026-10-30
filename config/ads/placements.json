@@ -150,23 +150,6 @@
       "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 300x256〜316x258、モバイル (本文の下に積まれる) 375x375"
     },
     {
-      "id": "adsense-rail-sky",
-      "name": "右レールの縦長の AdSense",
-      "provider": "adsense",
-      "box": {
-        "width": 160,
-        "height": 600
-      },
-      "devices": [
-        "desktop",
-        "mobile"
-      ],
-      "accepts": [
-        "adsense:skyscraper"
-      ],
-      "component": "RailAdSlot"
-    },
-    {
       "id": "adsense-footer",
       "name": "ページ末の関連コンテンツ型",
       "provider": "adsense",
@@ -242,23 +225,6 @@
         "text"
       ],
       "component": "AffiliateTextAdList"
-    },
-    {
-      "id": "affiliate-sidebar-sticky",
-      "name": "ホームの左レールの縦長",
-      "provider": "affiliate",
-      "box": {
-        "width": 160,
-        "height": 600
-      },
-      "devices": [
-        "desktop"
-      ],
-      "accepts": [
-        "160x600",
-        "120x600"
-      ],
-      "component": "SidebarStickyBannerAd"
     }
   ],
   "pages": {
@@ -411,32 +377,6 @@
         "marker": "position=\"blog-sidebar\""
       }
     ],
-    "blog-index": [
-      {
-        "slot": "affiliate-rect",
-        "region": "rail",
-        "position": "右レールの PR",
-        "source": "apps/web/src/components/rail/RightRailWidgets.tsx",
-        "marker": "<SidebarPromoBanner index={promoBannerIndex} />",
-        "condition": "市区町村の一覧 (/municipalities) も同じ右レールを使う"
-      },
-      {
-        "slot": "adsense-rail-rect",
-        "region": "rail",
-        "position": "右レールの PR の後",
-        "source": "apps/web/src/components/rail/RightRailWidgets.tsx",
-        "marker": "<RailAdSlot slot={RANKING_SIDEBAR_TOP} />",
-        "knownAdjacentReason": "右レールの PR と AdSense が続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
-      },
-      {
-        "slot": "adsense-rail-sky",
-        "region": "rail",
-        "position": "右レールの最後",
-        "source": "apps/web/src/components/rail/RightRailWidgets.tsx",
-        "marker": "<RailAdSlot slot={RANKING_PAGE_SIDEBAR} />",
-        "knownAdjacentReason": "右レールの AdSense が 2 枠続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
-      }
-    ],
     "home": [
       {
         "slot": "adsense-rail-rect",
@@ -448,18 +388,9 @@
       {
         "slot": "affiliate-rect",
         "region": "rail",
-        "position": "右レールの AdSense の後",
+        "position": "運営者のプロフィールの後",
         "source": "apps/web/src/app/page.tsx",
-        "marker": "<SidebarPromoBanner index={0} />",
-        "knownAdjacentReason": "ホームの右レールは広告だけを置く (カテゴリの一覧はサイドバーへ移した)。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
-      },
-      {
-        "slot": "affiliate-sidebar-sticky",
-        "region": "rail",
-        "position": "右レールの最後",
-        "source": "apps/web/src/app/page.tsx",
-        "marker": "<SidebarStickyBannerAd",
-        "knownAdjacentReason": "ホームの右レールは広告だけを置く (カテゴリの一覧はサイドバーへ移した)。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
+        "marker": "<SidebarPromoBanner index={0} />"
       },
       {
         "slot": "affiliate-row",
@@ -473,32 +404,31 @@
       {
         "slot": "adsense-rail-rect",
         "region": "rail",
-        "position": "右レール",
+        "position": "右レールの先頭",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
         "slot": "affiliate-rect",
         "region": "rail",
-        "position": "右レールの AdSense の後",
+        "position": "調査のカードの後",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "<SidebarPromoBanner index={0} />",
-        "knownAdjacentReason": "右レールの AdSense と PR が続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
+        "condition": "出典の調査が無いカテゴリでは調査のカードが出ず、AdSense と PR が続く"
       },
       {
         "slot": "adsense-body",
         "region": "body",
-        "position": "カードの格子の間",
+        "position": "新着ブログの後・全ランキングの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
       },
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "記事内広告の後",
+        "position": "全ランキングの後・47都道府県から探すの前",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
-        "marker": "position=\"category-native\"",
-        "knownAdjacentReason": "記事内広告の直後に PR の列が続く (カードの格子の間)。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
+        "marker": "position=\"category-native\""
       },
       {
         "slot": "adsense-footer",
@@ -512,17 +442,9 @@
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "比較の表の後",
+        "position": "比較の表の後 (ページの最後)",
         "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
         "marker": "position=\"compare-native\""
-      },
-      {
-        "slot": "adsense-footer",
-        "region": "body",
-        "position": "ページの最後",
-        "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
-        "marker": "<FooterAdSlot />",
-        "knownAdjacentReason": "ページの最後で PR の列と関連コンテンツ型が続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
       }
     ],
     "survey": [
@@ -536,34 +458,26 @@
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "全ランキングの表の後",
+        "position": "全ランキングの表の後・数字を読むときの注意の前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "position=\"survey-native\""
       },
       {
         "slot": "adsense-footer",
         "region": "body",
-        "position": "ページの最後",
+        "position": "数字を読むときの注意の後 (ページの最後)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
         "marker": "<FooterAdSlot />",
-        "knownAdjacentReason": "ページの最後で PR の列と関連コンテンツ型が続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
+        "condition": "注意 (編集した内容) がある調査だけ。無い調査では PR の列と隣り合わせになるので出さない"
       }
     ],
     "tag": [
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "記事の一覧の後",
+        "position": "記事の一覧の後 (ページの最後)",
         "source": "apps/web/src/app/tag/[tagKey]/page.tsx",
         "marker": "position=\"tag-native\""
-      },
-      {
-        "slot": "adsense-footer",
-        "region": "body",
-        "position": "ページの最後",
-        "source": "apps/web/src/app/tag/[tagKey]/page.tsx",
-        "marker": "<FooterAdSlot />",
-        "knownAdjacentReason": "ページの最後で PR の列と関連コンテンツ型が続く。2026-10-30 に台帳へ載せて判明した実際の隣り合わせ。直し方はオーナー判断待ち"
       }
     ],
     "area": [
@@ -686,6 +600,16 @@
         "position": "テーマの指標の後",
         "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
         "marker": "position=\"municipality-theme-native\""
+      }
+    ],
+    "municipalities-index": [
+      {
+        "slot": "adsense-rail-rect",
+        "region": "rail",
+        "position": "右レールの最初の部品 (はじめに見るテーマ) の後・都道府県から探すの前",
+        "source": "apps/web/src/components/rail/RightRailWidgets.tsx",
+        "marker": "<RailAdSlot slot={RANKING_SIDEBAR_TOP} />",
+        "condition": "ブログ一覧 (/blog) も同じ右レールの部品を使うが、AdSense を出さない (showTopAd={false})"
       }
     ]
   },

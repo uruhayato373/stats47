@@ -489,6 +489,18 @@ export default async function SurveyPage({ params }: PageProps) {
         </SurveyOutboundLinkArea>
       </section>
 
+      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。
+          全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
+      {nativeBanners.length > 0 && (
+        <section className="mb-4">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="survey-native"
+            trackingCategory={`survey-${surveyKey}`}
+          />
+        </section>
+      )}
+
       {editorial && (
         <section id="survey-caveats" className="mb-4 scroll-mt-24">
           <SectionHeader
@@ -502,19 +514,9 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。 */}
-      {nativeBanners.length > 0 && (
-        <section className="mb-4">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="survey-native"
-            trackingCategory={`survey-${surveyKey}`}
-          />
-        </section>
-      )}
-
-      {/* コンテンツ末尾の全幅フッター広告 */}
-      <FooterAdSlot />
+      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「数字を読むときの注意」を挟めるときだけ出す
+          (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
+      {editorial && <FooterAdSlot />}
     </ArticleShell>
   );
 }

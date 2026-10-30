@@ -7,7 +7,7 @@
  *
  * 規約 (affiliate-ads-standards.md §3):
  *   - 縦長 (height > width) は native / 本文枠に出さない — isLandscapeBanner で描画側除外
- *   - 縦長の唯一の受け皿は SidebarStickyBannerAd ("sidebar-sticky" reader の唯一の消費者)
+ *   - 縦長を出す枠は無い (受け皿だったホームの縦長バナーは 2026-10-30 に外した。広告同士の隣り合わせを無くすため)
  *   - NativeAffiliateRow の可視要素はリンク付きバナー画像だけ
  */
 import { readFileSync } from "node:fs";
@@ -104,32 +104,6 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain('variant?: "standard" | "three-up"');
     expect(src).toContain('variant === "three-up" ? 3 : 4');
     expect(src).toContain('variant = "standard"');
-  });
-});
-
-describe("SidebarStickyBannerAd の契約", () => {
-  const src = readComponent("SidebarStickyBannerAd.tsx");
-
-  it("PR 表記は BannerAd に任せ、独自の PR 見出しを重ねない", () => {
-    expect(src).toContain("<BannerAd");
-    expect(src).not.toContain(">PR<");
-    expect(src).not.toContain("<PrLabel");
-  });
-
-  it('sidebar-sticky locationCode を読む (縦長の唯一の受け皿)', () => {
-    expect(src).toContain('"sidebar-sticky"');
-  });
-
-  it("lg 未満では描画しない (サイドバー概念は lg+ のみ)", () => {
-    expect(src).toContain("hidden lg:block");
-  });
-
-  it("sticky を付けない (home 構造テストが aside の lg:sticky 不在を assert)", () => {
-    expect(src).not.toContain("lg:sticky");
-  });
-
-  it("計装済みコンポーネント (BannerAd) に描画を委譲する", () => {
-    expect(src).toContain("<BannerAd");
   });
 });
 

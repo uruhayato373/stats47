@@ -7,7 +7,7 @@ import { type Metadata } from "next";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { FooterAdSlot, NativeAffiliateRow } from "@/features/ads";
+import { NativeAffiliateRow } from "@/features/ads";
 import { resolveAffiliateBannersByCategoryKey } from "@/features/ads/server";
 import { listCategories } from "@/features/category/server";
 import {
@@ -196,8 +196,6 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                     />
                 </div>
             )}
-            {/* コンテンツ末尾の全幅フッター広告 */}
-            <FooterAdSlot />
         </PageShell>
     );
 }

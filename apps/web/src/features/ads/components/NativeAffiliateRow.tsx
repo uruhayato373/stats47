@@ -51,8 +51,8 @@ const ITEM_VISIBILITY_CLASS = [
  * ★ 2026-10-08: PR 表記だけをオーナー判断で戻した (PrLabel)。見出し・商品名・装飾は引き続き足さない。
  *
  * ★ 縦長 (height > width) クリエイティブはここで除外する。本文の横並びグリッドに
- *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長の受け皿は
- *   sidebar-sticky スロット (SidebarStickyBannerAd)。呼び出し元は除外分を見込んで
+ *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長を出す枠は無い
+ *   (ホームの縦長バナーは 2026-10-30 に外した)。呼び出し元は除外分を見込んで
  *   解決 limit を 8 程度にする (正典: .claude/rules/affiliate-ads-standards.md §3)。
  *
  * ★ 2026-08-04: impression 計装を追加した。それまで **クリックだけ送って impression を

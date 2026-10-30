@@ -158,8 +158,8 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 > locationCode を見ない結果、`sidebar-sticky` 登録のスカイスクレイパー (120×600) が本文の
 > 当時の `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
 > `isLandscapeBanner` (`resolve-affiliate-ad.ts`) で除外する (repository は blog レール等と共有
-> するため触らない)。**縦長の唯一の受け皿は `SidebarStickyBannerAd`** (home 左レール・lg+ のみ・
-> sticky なし) = `sidebar-sticky` locationCode を読む唯一の消費者。native の呼び出し元は除外分を
+> するため触らない)。**縦長を出す枠は無い** (唯一の受け皿だったホームの `SidebarStickyBannerAd` は
+> 2026-10-30 に外した。右レールで広告同士が続くのを無くすため。`sidebar-sticky` 登録の縦長は出ない)。native の呼び出し元は除外分を
 > 見込んで解決 limit を 8 にする (native 4 + 末尾 300×250 1 を横長だけで埋める余裕)。
 > **画像バナー枠の可視要素はリンク付きバナー画像と、その上の小さな PR 表記 (`PrLabel`) だけ** —
 > `NativeAffiliateRow`、`SidebarPromoBanner`、`AffiliateAdSlot` の banner 分岐、本文中の `BannerAd` に
@@ -586,7 +586,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 `config/ads/placements.json` (schema `config/schema/ads.placements.schema.json`)。台帳に載せたページの種類 (2026-10-30 から全ページ) は、
 下の表よりも台帳が正で、`apps/web/src/lib/__tests__/ad-placements.test.ts` がコードの枠の並び・隣接・登録の大きさを照合する。
 新しい大きさを登録する前に台帳の `sizes` に載せて判断する (一点物 7 件は `undecided` としてオーナー判断待ち)。
-開発中の広告の代わりの表示と本番の予約の高さは、台帳の箱 (本番の実測。モバイルで違う枠は `mobileHeight`) で描く。AdSense の枠 (`AdSenseAd`) は台帳の箱 `slotBox` が必須で、渡し忘れは型検査で止まる (2026-10-30。それまではブログ本文・ページ末の関連コンテンツ型・市区町村のページ末が台帳を通らず、形式ごとの既定値 120px・300px で本番の実測 280px・466px より小さく確保していた)。台帳のページの一覧 (`pages`) は 2026-10-30 に全ページへ広げ、台帳の枠の部品を置いたファイルが台帳に無いとテストが止める (枠の部品そのものと、ランキングの節を組み立てるファイルは除く)。広げたときに見つかった実際の隣り合わせ 9 か所 (右レールの広告の連続・ページ末の PR の列と関連コンテンツ型) は `knownAdjacentReason` に「オーナー判断待ち」と記録してある。置き方は枠を置くファイル (`source`) と目印 (`marker`) で照合し、枠同士の隣り合わせは理由付きの例外 (`knownAdjacentReason`) だけを許す (2026-10-29 にランキングの 3 件を並べ替えで解消し、例外は 0 件。本文末は関連ランキングを挟み、右レールは PR を 1 つの枠 (固定と文脈のバナーで最大 2 枚・楽天の商品カードも同じ枠) にまとめて調査のカードと分野のランキング一覧の間に置いた。AdSense 上段はデスクトップで最初の画面に入ることがあり、これは共通のルールの例外としてオーナー判断済み)。
+開発中の広告の代わりの表示と本番の予約の高さは、台帳の箱 (本番の実測。モバイルで違う枠は `mobileHeight`) で描く。AdSense の枠 (`AdSenseAd`) は台帳の箱 `slotBox` が必須で、渡し忘れは型検査で止まる (2026-10-30。それまではブログ本文・ページ末の関連コンテンツ型・市区町村のページ末が台帳を通らず、形式ごとの既定値 120px・300px で本番の実測 280px・466px より小さく確保していた)。台帳のページの一覧 (`pages`) は 2026-10-30 に全ページへ広げ、台帳の枠の部品を置いたファイルが台帳に無いとテストが止める (枠の部品そのものと、ランキングの節を組み立てるファイルは除く)。広げたときに見つかった実際の隣り合わせ 9 か所 (右レールの広告の連続・ページ末の PR の列と関連コンテンツ型) は同日に直した: 並べ替え (カテゴリの本文と右レール・調査)、関連コンテンツ型を外す (比較・タグ・注意の無い調査)、縦長の枠を外す (ホームの縦長バナー・一覧の右レールの縦長の AdSense)。ホームの右レールは AdSense と PR の間に運営者のプロフィールを挟む。残る `knownAdjacentReason` は同時には出ない枠 (AdSense の停止/再開・ブログの A/B・描き分けの分岐) だけ。置き方は枠を置くファイル (`source`) と目印 (`marker`) で照合し、枠同士の隣り合わせは理由付きの例外 (`knownAdjacentReason`) だけを許す (2026-10-29 にランキングの 3 件を並べ替えで解消し、例外は 0 件。本文末は関連ランキングを挟み、右レールは PR を 1 つの枠 (固定と文脈のバナーで最大 2 枚・楽天の商品カードも同じ枠) にまとめて調査のカードと分野のランキング一覧の間に置いた。AdSense 上段はデスクトップで最初の画面に入ることがあり、これは共通のルールの例外としてオーナー判断済み)。
 本文の PR の列 (`NativeAffiliateRow`) はバナーを原寸 (300px) より縮めず、本文の幅に入る数だけ 1 行に並べる (2 列 608px / 3 列 916px / 4 列 1224px の本文の幅から。ブラウザの幅では決めない。2026-10-29 オーナー決定)。右レールが本文の下に積まれたときは 640px 以上で 2 列の格子にする (`ArticleShell`)。
 下の表の themes の「theme-end 300×250」は、2026-10-29 時点のコードには存在しない (台帳はコードの実際の配置を書いた)。
 
@@ -605,7 +605,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | japan (`/japan/<themeSlug>`) | native ≤3 (`position=japan-native`) | 都道府県テーマと同じ slug → `THEME_AFFILIATE_MAP` (2026-09-02) |
 | municipalities テーマ (`/municipalities/themes/<slug>`) | native ≤3 (`position=municipality-theme-native`) | `MUNICIPALITY_THEME_AFFILIATE_MAP` (2026-09-02。slug を足したら写像も足す — 契約テストが全件を要求) |
 | municipalities ランキング (`/municipalities/ranking/<key>`) | native ≤3 (`position=municipality-native`) | metric config の `category` → vertical (2026-09-02) |
-| home | ハウス枠 / native ≤4 (economy 固定) / **sidebar-sticky (縦長の受け皿・左レール lg+)** | 無し (vertical 解決の手掛かりが無いページ)・`sidebar-sticky` |
+| home | ハウス枠 / native ≤4 (economy 固定) / 右レールの PR 1 枚 (AdSense との間に運営者のプロフィール。縦長の枠は 2026-10-30 に外した) | 無し (vertical 解決の手掛かりが無いページ) |
 | compare | native ≤4 | categoryKey → vertical |
 
 > blog / areas の楽天導線は 2026-09-08 にローカル実装。オーナー指定により未デプロイ・R2未更新。
