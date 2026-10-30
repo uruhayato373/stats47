@@ -31,7 +31,6 @@ import {
   InContentAdSlot,
   NativeAffiliateRow,
   RailAdSlot,
-  SidebarPromoBanner,
 } from '@/features/ads';
 import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
@@ -274,8 +273,6 @@ export default async function CategoryPage({ params }: PageProps) {
   // 残る出典調査と広告を右レールに置く (左右レールは併存させない契約)。
   const rightRail = (
     <RailStack>
-      {/* AdSense と PR の間に調査のカードを挟む (枠同士を隣り合わせにしない。ランキングのページと同じ形。2026-10-30) */}
-      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       {sourceSurveys.length > 0 && (
         <SurveyCard
           surveys={sourceSurveys.map((survey) => ({
@@ -286,7 +283,10 @@ export default async function CategoryPage({ params }: PageProps) {
           surface="category_survey"
         />
       )}
-      <SidebarPromoBanner index={0} />
+
+      {/* AdSense は調査のカードの後 (最初の画面に置かない)。固定の PR (SidebarPromoBanner) はランキングの指標が
+          労働のときだけ出る部品で、ここでは描かれていなかったので外した (2026-10-30) */}
+      {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
     </RailStack>
   );
 

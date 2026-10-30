@@ -386,13 +386,6 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
-        "slot": "affiliate-rect",
-        "region": "rail",
-        "position": "運営者のプロフィールの後",
-        "source": "apps/web/src/app/page.tsx",
-        "marker": "<SidebarPromoBanner index={0} />"
-      },
-      {
         "slot": "affiliate-row",
         "region": "body",
         "position": "カードの格子の後",
@@ -404,17 +397,9 @@
       {
         "slot": "adsense-rail-rect",
         "region": "rail",
-        "position": "右レールの先頭",
+        "position": "調査のカードの後 (調査のカードが無いカテゴリでは右レールの先頭)",
         "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
-      },
-      {
-        "slot": "affiliate-rect",
-        "region": "rail",
-        "position": "調査のカードの後",
-        "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
-        "marker": "<SidebarPromoBanner index={0} />",
-        "condition": "出典の調査が無いカテゴリでは調査のカードが出ず、AdSense と PR が続く"
       },
       {
         "slot": "adsense-body",

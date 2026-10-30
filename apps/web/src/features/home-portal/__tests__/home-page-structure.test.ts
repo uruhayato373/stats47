@@ -100,14 +100,12 @@ describe('home page structure (portal)', () => {
   });
 
   // 2026-10-30: 右レールで広告同士が続かないよう、運営者プロフィールを本文から右レールの AdSense と PR の間へ移した
-  it('右レールは AdSense・運営者プロフィール・PR の順に置く', () => {
+  it('右レールは AdSense の後に運営者プロフィールを置く', () => {
     const rail = PAGE.slice(PAGE.indexOf('const rightRail'), PAGE.indexOf('</RailStack>'));
     const ad = rail.indexOf('<RailAdSlot');
     const profile = rail.indexOf('<OperatorProfileCard');
-    const promo = rail.indexOf('<SidebarPromoBanner');
     expect(ad).toBeGreaterThan(-1);
     expect(profile).toBeGreaterThan(ad);
-    expect(promo).toBeGreaterThan(profile);
   });
 
   it('サイドバーと重複するカテゴリ一覧を置かず、広告をPageShellの右レールへ渡す', () => {

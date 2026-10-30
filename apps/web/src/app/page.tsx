@@ -14,7 +14,6 @@ import {
   NativeAffiliateRow,
   OperatorProfileCard,
   RailAdSlot,
-  SidebarPromoBanner,
 } from '@/features/ads';
 import {
   resolveAffiliateBannersByVertical,
@@ -118,13 +117,12 @@ export default async function HomePage() {
     8
   ).catch(() => []);
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
-  // 右レールは AdSense と PR の間に運営者プロフィールを挟む (広告同士を隣り合わせにしない。ブログ一覧の右レールと同じ置き方。
-  // 2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった)
+  // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
+  // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
   const rightRail = (
     <RailStack>
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
       <OperatorProfileCard />
-      <SidebarPromoBanner index={0} />
     </RailStack>
   );
 
