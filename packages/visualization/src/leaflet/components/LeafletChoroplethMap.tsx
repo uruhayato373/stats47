@@ -67,23 +67,41 @@ export interface LeafletChoroplethMapProps {
   };
   /** データなし（非公表）の凡例エントリを表示するか */
   showNoDataLabel?: boolean;
-  /** 初期表示とリサイズ時に全都道府県を収める。選択県だけにズームしない。 */
+  /**
+   * 初期表示とリサイズ時に描いている図形を収める。市区町村の層があればその範囲 (1 県の市区町村の地図)、
+   * 無ければ全都道府県。選択県だけにズームしない。
+   */
   fitToPrefectures?: boolean;
+  /** 範囲を合わせる計算からだけ外す地域のコード (遠い島。描画からは外さない。例: 東京都の島嶼部) */
+  fitExcludeCodes?: readonly string[];
 }
 
 /** 全都道府県に合わせるときのズームの刻み */
 export const FIT_ZOOM_SNAP = 0.25;
 
-function FitPrefectureBounds({ geojson }: { geojson: FeatureCollection<Geometry> }) {
+function FitPrefectureBounds({
+  geojson,
+  codeOf,
+  excludeCodes,
+}: {
+  geojson: FeatureCollection<Geometry>;
+  codeOf: (feature: Feature<Geometry>) => string;
+  excludeCodes?: readonly string[];
+}) {
   const map = useMap();
   useEffect(() => {
-    const bounds = geoJSON(geojson).getBounds();
+    const excluded = new Set(excludeCodes ?? []);
+    const target =
+      excluded.size > 0
+        ? { ...geojson, features: geojson.features.filter((feature) => !excluded.has(codeOf(feature))) }
+        : geojson;
+    const bounds = geoJSON(target).getBounds();
     if (!bounds.isValid()) return;
     const fit = () => map.fitBounds(bounds, { padding: [16, 24], animate: false });
     fit();
     map.on('resize', fit);
     return () => { map.off('resize', fit); };
-  }, [map, geojson]);
+  }, [map, geojson, codeOf, excludeCodes]);
   return null;
 }
 
@@ -137,6 +155,7 @@ export function LeafletChoroplethMap({
   valueDisplay,
   showNoDataLabel = false,
   fitToPrefectures = false,
+  fitExcludeCodes,
 }: LeafletChoroplethMapProps) {
   const prefGeojson = useTopoJsonToGeoJson(topology);
 
@@ -206,7 +225,11 @@ export function LeafletChoroplethMap({
         {/* 背景タイルは位置の手がかりだけなので薄く敷く。狭い幅では日本の外側の地名 (ソウル・上海等) が
             色分けより目立った (2026-10-04 週次 UI 検査) */}
         <TileLayer url={tileUrl} attribution={attribution} opacity={BASEMAP_OPACITY} />
-        {fitToPrefectures && prefGeojson && <FitPrefectureBounds geojson={prefGeojson} />}
+        {fitToPrefectures && municipalityGeojson ? (
+          <FitPrefectureBounds geojson={municipalityGeojson} codeOf={extractCityCode} excludeCodes={fitExcludeCodes} />
+        ) : fitToPrefectures && prefGeojson ? (
+          <FitPrefectureBounds geojson={prefGeojson} codeOf={extractPrefCode} excludeCodes={fitExcludeCodes} />
+        ) : null}
 
         {/* 都道府県レイヤー（topology 到着後に重ねる） */}
         {prefGeojson && prefStyle && (

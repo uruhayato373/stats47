@@ -28,7 +28,6 @@
     "./d3/BarChartRace": "./src/d3/components/BarChartRace/index.ts",
     "./d3/BoxplotChart": "./src/d3/components/BoxplotChart/index.ts",
     "./d3/CategoryHeatmap": "./src/d3/components/CategoryHeatmap/index.ts",
-    "./d3/CityMapChart": "./src/d3/components/CityMapChart/index.ts",
     "./d3/ColumnChart": "./src/d3/components/ColumnChart/index.ts",
     "./d3/DivergingBarChart": "./src/d3/components/DivergingBarChart/index.ts",
     "./d3/DonutChart": "./src/d3/components/DonutChart/index.ts",

@@ -5,8 +5,6 @@
  */
 
 // 地図コンポーネント
-export { CityMapChart } from "./CityMapChart";
-export type { CityMapChartProps } from "./CityMapChart";
 export { TileGridMap } from "./TileGridMapChart";
 export * from "./DivergingChoroplethMap";
 
