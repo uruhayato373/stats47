@@ -2,17 +2,21 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('../ThemeOverviewMap', () => ({
-  ThemeOverviewMap: ({
-    data,
-    onSelect,
+// 地図と表はランキングのページと同じ部品 (RankingVisualizationSection) で描く (2026-10-30)。Leaflet を描かない stub にして、
+// 渡された題名・指標・強調する県だけを確かめる
+vi.mock('@/features/ranking/widgets', () => ({
+  RankingVisualizationSection: ({
+    title,
+    rankingItem,
+    highlightAreaCode,
   }: {
-    data: { rankingItem: { title: string } };
-    onSelect: (code: string) => void;
+    title: string;
+    rankingItem: { title: string };
+    highlightAreaCode: string | null;
   }) => (
-    <button onClick={() => onSelect('13000')}>
-      地図で東京都を選択: {data.rankingItem.title}
-    </button>
+    <div data-testid="map-and-table" data-highlight={highlightAreaCode ?? ''}>
+      {title} / {rankingItem.title}
+    </div>
   ),
 }));
 
@@ -88,8 +92,7 @@ function renderSection(groups?: CatalogMetricGroup[]) {
 }
 
 describe('章に追加する横断比較', () => {
-  it('同年県値の中央値とポイント差を表示し、地図の選択を共有する', async () => {
-    const user = userEvent.setup();
+  it('同年県値の中央値とポイント差を表示し、地図と表はランキングと同じ部品で県を強調する', () => {
     renderSection();
     const table = screen.getByRole('table', { name: '指標の横断比較' });
     expect(
@@ -98,15 +101,10 @@ describe('章に追加する横断比較', () => {
       })
     ).toBeVisible();
     expect(screen.getByText('対象は都道府県です。')).toBeVisible();
-    await user.click(
-      screen.getByRole('button', { name: '地図で東京都を選択: 割合' })
-    );
-    expect(
-      within(table).getByRole('row', {
-        name: /割合.*20 15 \+5 ポイント.*2023年.*2県/,
-      })
-    ).toBeVisible();
-    expect(window.location.search).toContain('pref=13000');
+    // 地図と表は 1 枚のパネル。ページの県 (北海道) を強調する
+    const panel = screen.getByTestId('map-and-table');
+    expect(panel).toHaveTextContent('割合の地図と表');
+    expect(panel).toHaveAttribute('data-highlight', '01000');
   });
 
   it('既存グループの地図を複製せず、比較表への到達は残す', () => {
@@ -120,7 +118,7 @@ describe('章に追加する横断比較', () => {
         comparisonMap: true,
       },
     ]);
-    expect(screen.queryByRole('button', { name: /地図で/ })).toBeNull();
+    expect(screen.queryByTestId('map-and-table')).toBeNull();
     expect(screen.getByRole('table', { name: '指標の横断比較' })).toBeVisible();
   });
 
@@ -132,9 +130,7 @@ describe('章に追加する横断比較', () => {
     );
     // Base UI の選択肢はポップアップを開いた後に描かれるので、出るまで待ってから押す
     await user.click(await screen.findByRole('option', { name: '件数' }));
-    expect(
-      screen.getByRole('button', { name: '地図で東京都を選択: 件数' })
-    ).toBeVisible();
+    expect(screen.getByTestId('map-and-table')).toHaveTextContent('件数の地図と表');
     expect(
       within(
         screen.getByRole('table', { name: '指標の横断比較' })

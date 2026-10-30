@@ -60,6 +60,13 @@ interface RankingVisualizationSectionProps {
     headerActions?: ReactNode;
     cardFooter?: ReactNode;
     isPending?: boolean;
+    /** パネルの題名。既定は「都道府県別の地図と表」(テーマの分布の節は指標名を入れる) */
+    title?: string;
+    /**
+     * 県の詳細を開いていないときに地図と表で強調する県 (テーマの県のページの県)。
+     * ランキングのページは渡さない。地図と表の部品はランキングとテーマで 1 つにする (2026-10-30 オーナー決定)
+     */
+    highlightAreaCode?: string | null;
 }
 
 /**
@@ -79,6 +86,8 @@ export function RankingVisualizationSection({
     headerActions,
     cardFooter,
     isPending = false,
+    title,
+    highlightAreaCode = null,
 }: RankingVisualizationSectionProps) {
     const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
     const unitLabel = areaType === "city" ? "市区町村" : "都道府県";
@@ -113,7 +122,7 @@ export function RankingVisualizationSection({
 
     return (
         <ChartPanel
-            title={`${unitLabel}別の地図と表`}
+            title={title ?? `${unitLabel}別の地図と表`}
             icon={<MapIcon />}
             action={headerActions}
             // 補足 (集計条件・最終更新・出典) はパネルの中の下端に置く。地図・表との間は線 1 本で区切る
@@ -161,7 +170,7 @@ export function RankingVisualizationSection({
                             areaType={areaType}
                             bare
                             mapClassName="h-full"
-                            selectedPrefectureCode={detailAreaCode}
+                            selectedPrefectureCode={detailAreaCode ?? highlightAreaCode}
                             onPrefectureClick={(code) => openDetail(code, "map")}
                         />
                     </div>
@@ -171,7 +180,7 @@ export function RankingVisualizationSection({
                             rankingItem={rankingItem}
                             bare
                             onSelectArea={areaType === "prefecture" ? (code) => openDetail(code, "table") : undefined}
-                            selectedAreaCode={detailAreaCode}
+                            selectedAreaCode={detailAreaCode ?? highlightAreaCode}
                         />
                     </div>
                 </div>

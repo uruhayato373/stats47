@@ -5,3 +5,5 @@
  */
 export { RankingMapChartClient } from "./components/RankingMapChart/RankingMapChartClient";
 export { RankingYearSelector } from "./components/RankingPageHeader/RankingYearSelector";
+// 地図と表を 1 枚に描くパネル。ランキングのページとテーマの「都道府県の分布」が同じ部品を使う (2026-10-30)
+export { RankingVisualizationSection } from "./components/RankingKeyPage/RankingVisualizationSection";

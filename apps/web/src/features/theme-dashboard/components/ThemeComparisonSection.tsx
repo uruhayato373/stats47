@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
-import { ChartPanel } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
   SelectContent,
@@ -30,6 +28,8 @@ import Link from '@/components/atoms/SiteLink';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SurfaceCard } from '@/components/surface';
 
+import { RankingVisualizationSection } from '@/features/ranking/widgets';
+
 import { trackNavClick } from '@/lib/analytics/events';
 
 import {
@@ -42,10 +42,7 @@ import {
 } from '../lib/theme-overview';
 import { PREFECTURE_SET_LABEL, type ThemeDashboardClientProps } from '../types';
 
-import { ThemeOverviewMap } from './ThemeOverviewMap';
-import { useThemePrefecture } from './ThemePrefectureContext';
 
-const PREVIEW_ROW_COUNT = 5;
 const areaName = (code: string) => lookupArea(code)?.areaName ?? code;
 
 export function ThemeComparisonSection({
@@ -59,7 +56,6 @@ export function ThemeComparisonSection({
 > & {
   selectedPrefectureCode: string | null;
 }) {
-  const { setSelected } = useThemePrefecture();
   const label = selectedPrefectureCode
     ? areaName(selectedPrefectureCode)
     : PREFECTURE_SET_LABEL;
@@ -78,7 +74,6 @@ export function ThemeComparisonSection({
     [themeConfig.tabIndicators]
   );
   const [metricKey, setMetricKey] = useState(themeConfig.defaultRankingKey);
-  const [showAll, setShowAll] = useState(false);
   const summaries = useMemo(
     () =>
       comparisonKeys.flatMap((key) => {
@@ -111,18 +106,15 @@ export function ThemeComparisonSection({
   const currentName = current
     ? (overviewLabels[current.key] ?? current.data.rankingItem.title)
     : '';
-  const currentSelected = current?.values.find(
-    ({ areaCode }) => areaCode === selectedPrefectureCode
-  );
-  const visibleRows =
-    current?.values.slice(0, showAll ? undefined : PREVIEW_ROW_COUNT) ?? [];
-  if (
-    !showAll &&
-    currentSelected &&
-    !visibleRows.some(({ areaCode }) => areaCode === currentSelected.areaCode)
-  ) {
-    visibleRows.push(currentSelected);
-  }
+  // 比較する年 (グループの comparisonYear か最新年) をランキングの部品の年として渡す
+  const currentRankingItem = current
+    ? {
+        ...current.data.rankingItem,
+        latestYear: current.yearCode
+          ? { yearCode: current.yearCode, yearName: current.yearName }
+          : current.data.rankingItem.latestYear,
+      }
+    : undefined;
 
   if (summaries.length === 0) return null;
 
@@ -146,7 +138,6 @@ export function ThemeComparisonSection({
               onValueChange={(value) => {
                 if (value === null) return;
                 setMetricKey(value);
-                setShowAll(false);
               }}
               items={mapSummaries.map(({ key, data }) => ({
                 value: key,
@@ -180,128 +171,34 @@ export function ThemeComparisonSection({
                   current.data.rankingItem.description ??
                   '値は同じ年次の都道府県で比較しています。指標の定義・対象・単位は出典で確認できます。'}
               </p>
-              <PanelGrid className="@[640px]:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-                <ChartPanel
-                  id={`theme-${themeConfig.themeKey}-map`}
-                  title={`${currentName}の分布`}
-                  contentClassName="p-0"
-                  footer={
-                    <div className="flex flex-wrap justify-between gap-2">
-                      <span>県を選択して比較</span>
-                      <Link
-                        href={hrefFor("ranking", { rankingKey: current.key })}
-                        className="text-primary underline"
-                        onClick={() =>
-                          trackNavClick({
-                            surface: 'theme_ranking',
-                            label: `${themeConfig.themeKey}:comparison-map:${current.key}`,
-                            href: hrefFor("ranking", { rankingKey: current.key }),
-                          })
-                        }
-                      >
-                        定義・出典
-                      </Link>
-                    </div>
-                  }
-                >
-                  <ThemeOverviewMap
-                    data={{
-                      ...current.data,
-                      rankingItem: {
-                        ...current.data.rankingItem,
-                        latestYear: current.yearCode
-                          ? {
-                              yearCode: current.yearCode,
-                              yearName: current.yearName,
-                            }
-                          : undefined,
-                      },
-                      rankingValues: current.values,
-                    }}
-                    selectedCode={selectedPrefectureCode}
-                    onSelect={setSelected}
-                  />
-                </ChartPanel>
-                <ChartPanel
-                  id={`theme-${themeConfig.themeKey}-ranking`}
-                  title="都道府県別の値"
-                  contentClassName="px-2 py-1"
-                >
-                  {selectedPrefectureCode && (
-                    <div
-                      aria-live="polite"
-                      className="flex items-center justify-between border-b border-border px-2"
+              {/* 地図と表はランキングのページと同じ 1 枚のパネル (RankingVisualizationSection) で描く。
+                  県を押すと県の詳細が開き、県のページの県は強調する (2026-10-30 オーナー決定「完全に共通の部品」。
+                  旧: テーマ専用の地図 (ThemeOverviewMap) と上位 5 県の表の 2 枚で、凡例の値も丸めていなかった) */}
+              <RankingVisualizationSection
+                title={`${currentName}の地図と表`}
+                rankingItem={currentRankingItem!}
+                activeRankingItem={currentRankingItem!}
+                rankingValues={current.values}
+                areaType="prefecture"
+                highlightAreaCode={selectedPrefectureCode}
+                cardFooter={
+                  <div className="flex flex-wrap justify-end gap-2 text-xs">
+                    <Link
+                      href={hrefFor("ranking", { rankingKey: current.key })}
+                      className="text-primary underline"
+                      onClick={() =>
+                        trackNavClick({
+                          surface: 'theme_ranking',
+                          label: `${themeConfig.themeKey}:comparison-map:${current.key}`,
+                          href: hrefFor("ranking", { rankingKey: current.key }),
+                        })
+                      }
                     >
-                      <p className="text-xs">選択：{label}</p>
-                      <Button
-                        variant="link"
-                        className="h-9"
-                        aria-label="都道府県の選択を解除"
-                        onClick={() => setSelected(null)}
-                      >
-                        解除
-                      </Button>
-                    </div>
-                  )}
-                  <Table>
-                    <TableCaption>
-                      {showAll ? '全県' : '上位5県＋選択県'} ·
-                      高い順（同値は同順位）
-                    </TableCaption>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>順位</TableHead>
-                        <TableHead>都道府県</TableHead>
-                        <TableHead className="text-right!">
-                          {current.data.rankingItem.unit.normalize('NFKC')}
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {visibleRows.map((row) => (
-                        <TableRow
-                          key={row.areaCode}
-                          data-state={
-                            row.areaCode === selectedPrefectureCode
-                              ? 'selected'
-                              : undefined
-                          }
-                        >
-                          <TableCell className="tabular-nums">
-                            {row.rank}
-                          </TableCell>
-                          <TableCell>
-                            <button
-                              type="button"
-                              onClick={() => setSelected(row.areaCode)}
-                              aria-pressed={
-                                row.areaCode === selectedPrefectureCode
-                              }
-                              className="inline-flex min-h-11 items-center text-primary underline underline-offset-4 sm:min-h-8"
-                            >
-                              {areaName(row.areaCode)}
-                            </button>
-                          </TableCell>
-                          <TableCell className="text-right font-mono tabular-nums">
-                            {formatOverviewValue(row.value)}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                  {current.values.length > PREVIEW_ROW_COUNT && (
-                    <Button
-                      variant="outline"
-                      className="mt-2 h-9 w-full"
-                      onClick={() => setShowAll((value) => !value)}
-                    >
-                      {showAll
-                        ? '上位5県に戻す'
-                        : `${current.values.length}都道府県を表示`}
-                    </Button>
-                  )}
-                </ChartPanel>
-              </PanelGrid>
+                      定義・出典
+                    </Link>
+                  </div>
+                }
+              />
             </>
           ) : (
             <p role="status" className="py-8 text-sm text-muted-foreground">
