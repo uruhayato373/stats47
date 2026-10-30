@@ -40,7 +40,12 @@
         {
           "prop": "icon",
           "required": false,
-          "what": "右上の小さなアイコン (lucide)"
+          "what": "右上の小さなアイコン (lucide)。飾りで押せない"
+        },
+        {
+          "prop": "action",
+          "required": false,
+          "what": "右上に置く押せる操作 (テーマの指標の出典・定義の Sheet を開く枠なしのアイコンボタン)"
         },
         {
           "prop": "children",

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 /**
@@ -243,13 +243,16 @@ describe('SingleMetricCard — 取得の契約', () => {
 });
 
 describe('SingleMetricCard — data 属性とランキング導線', () => {
-  it('data 属性 (kpi-card / ready) とランキング導線を持つ', async () => {
+  // 出典とランキングはタイルの下端に並べず、右上のアイコンから開く Sheet に置く (2026-10-30)
+  it('data 属性 (kpi-card / ready) と、右上のアイコンから開くランキング導線を持つ', async () => {
     const { container } = renderCard({ metric: kpi('wage') });
     const wrapper = container.querySelector(
       '[data-theme-component-type="kpi-card"]'
     );
     expect(wrapper).toHaveAttribute('data-data-state', 'ready');
     expect(wrapper).toHaveAttribute('data-unit', '円');
+    expect(screen.queryByRole('link', { name: /ランキングを見る/ })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義' }));
     const link = await screen.findByRole('link', { name: /ランキングを見る/ });
     expect(link).toHaveAttribute('href', '/ranking/wage');
   });

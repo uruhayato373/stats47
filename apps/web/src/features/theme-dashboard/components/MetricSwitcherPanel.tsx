@@ -554,7 +554,7 @@ export function MetricSwitcherPanel({
               metric={m}
               label={tabLabels[m.metricKey] ?? m.title}
               selectedPrefectureCode={selectedPrefectureCode}
-              hideFooter
+              hideSources
               toggle={
                 summaryOnly
                   ? undefined

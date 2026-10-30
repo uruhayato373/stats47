@@ -17,30 +17,44 @@ import Link from '@/components/atoms/SiteLink';
 import type { MetricKpi } from './metric-kpi';
 
 /**
- * 指標を切り替えるカードの出典と指標の定義 (2026-10-29)。数値タイルごとに出していた「出典・ランキング」の行をやめ、
+ * テーマの指標カードの出典と指標の定義 (2026-10-29)。数値タイルごとに出していた「出典・ランキング」の行をやめ、
  * チャートの下のボタン 1 つにまとめる。押すと右から Sheet が開き、指標ごとに出典 (調査) とランキング (指標の定義) へのリンクを並べる。
  * Sheet はテーマの切り替え (ThemeSwitcher) と同じテンプレートの部品。
+ * 指標が 1 つの数値タイルは、開き口をタイルの右上の枠なしのアイコンにする (trigger="icon"。2026-10-30)。
  */
 export function MetricSourcesSheet({
   metrics,
   labels,
+  trigger = 'button',
 }: {
   metrics: readonly MetricKpi[];
   /** rankingKey → 短い名前 (無ければ title) */
   labels: Record<string, string>;
+  /** 開き口。button = 文字付きのボタン (チャートの下)、icon = 本のアイコンだけ (数値タイルの右上) */
+  trigger?: 'button' | 'icon';
 }) {
   if (metrics.length === 0) return null;
   return (
     <Sheet>
-      <SheetTrigger className={buttonVariants({ variant: 'ghost', size: 'sm', className: 'text-muted-foreground' })}>
-        <BookOpenText aria-hidden="true" />
-        出典・指標の定義
-      </SheetTrigger>
+      {trigger === 'icon' ? (
+        <SheetTrigger
+          aria-label="出典・指標の定義"
+          title="出典・指標の定義"
+          className={buttonVariants({ variant: 'ghost', size: 'icon-sm', className: 'text-muted-foreground' })}
+        >
+          <BookOpenText aria-hidden="true" />
+        </SheetTrigger>
+      ) : (
+        <SheetTrigger className={buttonVariants({ variant: 'ghost', size: 'sm', className: 'text-muted-foreground' })}>
+          <BookOpenText aria-hidden="true" />
+          出典・指標の定義
+        </SheetTrigger>
+      )}
       {/* サイトの上端のヘッダー (sticky・z-200) と Cookie 同意 (z-[1100]) より前に出す。Sheet の既定は z-50 */}
       <SheetContent side="right" className="z-[1200]! overflow-y-auto">
         <SheetHeader>
           <SheetTitle>出典・指標の定義</SheetTitle>
-          <SheetDescription>このグラフの指標ごとの出典と、定義・都道府県ランキングへのリンクです。</SheetDescription>
+          <SheetDescription>指標ごとの出典と、定義・都道府県ランキングへのリンクです。</SheetDescription>
         </SheetHeader>
         <ul className="flex flex-col divide-y divide-border px-4 pb-6">
           {metrics.map((metric) => {

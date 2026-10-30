@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
-import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 
 import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
-import { ChartFooter } from '@/components/charts/ChartFooter';
 import { StatTile } from '@/components/surface';
+
+import { MetricSourcesSheet } from './MetricSourcesSheet';
 
 import type { MetricKpi } from './metric-kpi';
 
@@ -17,7 +17,8 @@ import type { MetricKpi } from './metric-kpi';
  *
  * - 県を選んでいるとき: その県の値 + 順位バッジ + 年
  * - 47都道府県 (未選択): 実在する 1 位県の値 (47 県平均でも全国値でもない) + 年・1 位の県名
- * - 下端に出典・ランキングのリンク行 (hideFooter で外す。切り替えカードはチャートの下の Sheet に 1 か所でまとめる)。
+ * - 右上に出典・指標の定義の Sheet を開く枠なしのアイコン (2026-10-30。旧: 下端の出典・ランキングのリンク行)。
+ *   hideSources で外す (切り替えカードはチャートの下の Sheet に 1 か所でまとめる)。
  *   推移の小さなチャートは children で受け、出すかは呼び出し側が決める
  * - toggle を渡すと、タイル全体がグラフに系列を出し入れするボタンになる (見本の元の shadcn「Line Chart - Interactive」の
  *   数値のボタン。押している間は背景を muted にし、名前の左の色の印が凡例を兼ねる。2026-10-29)
@@ -34,17 +35,20 @@ export interface MetricStatTileToggle {
 export function MetricStatTile({
   metric,
   label,
+  sourcesLabel,
   selectedPrefectureCode,
   children,
-  hideFooter = false,
+  hideSources = false,
   toggle,
 }: {
   metric: MetricKpi;
   /** 指標の名前 (テーマの短い名前。グループ名を添えるときは呼び出し側で組み立てる) */
   label: ReactNode;
+  /** 出典・指標の定義の Sheet に出す指標の名前 (タイルの名前と揃える。無ければ title) */
+  sourcesLabel?: string;
   selectedPrefectureCode: string | null;
   children?: ReactNode;
-  hideFooter?: boolean;
+  hideSources?: boolean;
   toggle?: MetricStatTileToggle;
 }) {
   const shown = selectedPrefectureCode ? metric.value : metric.topRanked?.value ?? null;
@@ -80,15 +84,13 @@ export function MetricStatTile({
         ) : undefined
       }
       meta={meta || undefined}
-      footer={
-        hideFooter ? undefined : (
-        <ChartFooter
-          source={metric.sourceName}
-          sourceLink={metric.sourceLink}
-          sourceLinks={metric.sourceLinks}
-          rankingLink={hrefFor("ranking", { rankingKey: metric.metricKey })}
-          rankingLabel="ランキングを見る"
-        />
+      action={
+        hideSources ? undefined : (
+          <MetricSourcesSheet
+            metrics={[metric]}
+            labels={{ [metric.metricKey]: sourcesLabel ?? metric.title }}
+            trigger="icon"
+          />
         )
       }
     >
