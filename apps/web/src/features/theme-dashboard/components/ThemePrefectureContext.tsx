@@ -18,7 +18,7 @@ import {
 
 // ============================================================================
 // Context — テーマダッシュボードの選択エリア (47都道府県 / 都道府県) の単一ソース。
-// H1 (ThemeAreaHeader)・セレクタ (PrefectureSelect)・ダッシュボード (ThemeDashboardTabbed)
+// H1 (ThemeAreaHeader)・セレクタ (PrefectureSelect)・ダッシュボード (ThemeDashboardClient)
 // が共有する。URL `?pref=NNNNN` と双方向同期し、canonical は pref 無しを維持する。
 // サーバーが URL / Cookie / 初回既定値を解決して initial を渡すため、hydration 後の
 // 表示ジャンプを起こさない。クライアント操作は Cookie と URL に同期する。

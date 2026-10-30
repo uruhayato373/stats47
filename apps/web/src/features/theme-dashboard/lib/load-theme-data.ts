@@ -2,13 +2,12 @@ import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { THEME_CATALOGS, type CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
-import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
   readAllYearsRankingValuesFromR2,
   readRankingItemFromR2,
   readRankingValuesFromR2,
 } from "@stats47/ranking/server";
-import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
+import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
@@ -20,7 +19,6 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  topology: TopoJSONTopology | null;
   /**
    * カタログの指標カード編成。年を固定した比較カードの `comparisonYear` は、全指標に値がそろう
    * R2 の最新年へ進めてある (resolveComparisonYears)。カタログに編成が無いテーマは undefined。
@@ -114,21 +112,7 @@ export async function loadThemeData(
     )
   );
 
-  // 2. 全指標のデータ + TopoJSON を並列取得。
-  //    hideMap テーマは地図を描画しないため、巨大な GIS topology を fetch しない
-  //    (無駄なメモリ消費で dev/本番ともに負荷増・OOM の原因になる。2026-06-20)。
-  const topologyPromise = theme.hideMap
-    ? Promise.resolve(null)
-    : areaType === "city"
-      ? fetchAllCitiesTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: city topology取得失敗");
-          return null;
-        })
-      : fetchPrefectureTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: topology取得失敗");
-          return null;
-        });
-
+  // 2. 全指標のデータを並列取得 (地図の地形はテーマでは読まない。都道府県の地図と表はランキングと同じ部品が自分で読む)
   const valuesPromises = validItems.map(({ key, item }) => {
     const yearCode = comparisonYears.get(key) ?? item.latestYear?.yearCode;
     if (!yearCode)
@@ -175,8 +159,7 @@ export async function loadThemeData(
       });
   });
 
-  const [topology, ...valuesResults] = await Promise.all([
-    topologyPromise,
+  const [...valuesResults] = await Promise.all([
     ...valuesPromises,
   ]);
 
@@ -207,5 +190,5 @@ export async function loadThemeData(
 
   if (Object.keys(indicatorDataMap).length === 0) return null;
 
-  return { indicatorDataMap, topology, ...(metricGroups ? { metricGroups } : {}) };
+  return { indicatorDataMap, ...(metricGroups ? { metricGroups } : {}) };
 }

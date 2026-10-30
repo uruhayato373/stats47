@@ -182,7 +182,6 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
 | `AgeCompositionChart` | `@/features/theme-dashboard/components/AgeCompositionChart` | テーマ専用積み上げ棒 |
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
-| `MetricYoyChoroplethSection` | `@/features/theme-dashboard/components/MetricYoyChoroplethSection` | データ取得・セクションラッパー。描画は共有 `TimelineChoroplethMap` に委譲 |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
 

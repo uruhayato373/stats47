@@ -422,12 +422,11 @@ harmRelevance: [
 | `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
 | `metrics` → 相関 (別途 R2)                          | **「このテーマと関連の深い指標」**。テーマ外の指標のうち、テーマ内指標と人口補正後の順位相関 \|r\|≥0.5 のもの最大 8 件。相関 workflow が `app/correlation/by-theme/<themeKey>.json` に事前計算 | `ThemeCorrelatedMetrics` (`nav_surface=theme_ranking`)                                            |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
-| (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
+| (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
 | (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                            | `ThemePageLayout` の `PageShell leftRail`                                                         |
 
-> `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
-> **page-components チャート・考察 (markdown)・埋め込み section は hideMap に関係なく描画する**
-> (2026-07-04 に `cardsOnly` の付与をやめ完全ダッシュボード化。prop 自体は残存するので付けない)。
+> テーマ専用の地図のタブ (コロプレス/指標タブ/年度セレクタ) は 2026-10-30 に撤去した (2026-06-20 から全テーマで隠していた `hideMap`)。
+> 都道府県の地図と表は、ランキングと同じ部品 (`RankingVisualizationSection`) を `ThemeComparisonSection` が使う。テーマ専用の地図・表を作らない (オーナー決定)。
 > カタログ無しテーマ (climate / local-finance) は
 > IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
 > (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
@@ -469,7 +468,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 ## 9. 問い別の章と継続監査
 
 現行21テーマは `ThemeCatalog.sections` を持つ。`metricGroupKeys` / `chartKeys` /
-`embeddedSectionKeys` が章内配置の正典で、ThemeDashboardTabbedが描画する。
+`embeddedSectionKeys` が章内配置の正典で、ThemeMetricsDashboard (ThemeDashboardClient から) が描画する。
 未配置・未知参照・二重配置はvalidatorで停止。page-componentのsection文字列とは別の契約。
 単年は比較表または数値で示し、複数年だけ推移にする。同じ指標のカードと詳細図は重複させない。
 

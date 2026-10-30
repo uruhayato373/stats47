@@ -39,12 +39,6 @@ describe("直書きの ranking key が KNOWN_RANKING_KEYS に実在する", () =
     expect(unknown(keys)).toEqual([]);
   });
 
-  it("人口動態の散布図の軸", () => {
-    const keys = literalKeys("features/theme-dashboard/components/PopulationScatterSection.tsx", /[xy]Key: "([^"]+)"/g);
-    expect(keys.length).toBeGreaterThan(0);
-    expect(unknown(keys)).toEqual([]);
-  });
-
   it("調査ハブの読者の問い (survey-editorial)", () => {
     const keys = literalKeys("features/survey/survey-editorial.ts", /rankingKey: '([^']+)'/g);
     expect(keys.length).toBeGreaterThan(300);

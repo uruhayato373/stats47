@@ -586,7 +586,7 @@ export function ThemeMetricsDashboard({
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-      {!cardsOnly && themeConfig.hideMap && (
+      {!cardsOnly && (
         <ThemeComparisonSection
           themeConfig={themeConfig}
           metricGroups={metricGroups}

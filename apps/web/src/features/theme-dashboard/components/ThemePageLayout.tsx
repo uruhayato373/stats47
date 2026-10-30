@@ -26,7 +26,6 @@ import {
 } from '@/components/navigation/StatisticsScopeNav';
 import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
-import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
 import { RailCard, RailNavRow, StatTile, StatTileGrid } from '@/components/surface';
 
 import {
@@ -102,7 +101,6 @@ export async function ThemePageLayout({
   toolbar,
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
-  const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
   const areaHighlights = areaContext
     ? getAreaThemeHighlights(data, areaContext.areaCode)
     : [];
@@ -348,11 +346,8 @@ export async function ThemePageLayout({
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
             indicatorDataMap={data.indicatorDataMap}
-            topology={data.topology}
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
-            kpiDataByArea={kpiDataByArea}
-            highlightAreaCode={areaContext?.areaCode}
           />
 
           {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
