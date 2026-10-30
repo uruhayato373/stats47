@@ -3977,6 +3977,13 @@ updated: 2026-10-19
   テーマ (`/themes/living-housing`) の数値タイルに 2023・2024 の 2 点を結んだ直線が並び、オーナーが気づいた。未判断の除外 (421 指標) を解く ② の具体例。
   なお数値タイルの推移は 5 年以上ある指標だけ描くようにした (`MIN_TREND_YEARS`)。年を戻せば、この 4 指標にも推移が出る。
 
+- **② 実施 (2026-10-30、オーナー指示「利用できるデータは全て利用する」)**: 未判断の除外 421 件を全て外し、`sync:estat-years` で年を戻した
+  (dd824aed5。注記と回帰テストが根拠を持つ `patent-inventor-count` の 1 件だけ `kind: definition-change` で除外を戻した)。除外は型で `kind`
+  (series-break / definition-change / value-error / cadence-alignment) を必須にし、`sync:estat-years --check` が kind の無い・判断していない除外を止める。
+  R2 は data-refresh run 40953107078 で 420 件を取り込み済み (本番の R2 で着工新設住宅戸数が 1975〜2024 の 50 年になったことを確認)。
+  **残り**: `private-life-insurance-contracts-per-1000` が通信の失敗 (`fetch failed`) で未取り込み (PR #1200 のマージ後に依頼する)。
+  取り込み中に `employment-insurance-daily-receipt-rate` (単位 %) の最大値が 1,545.5 → 5,025 に増えた (allowlist は legitimate で通過。中身は未確認)。
+
 - **#1094 を取り込むときの注意 (2026-10-08)**: develop で物価地域差指数 12 指標に 2025 年の補完 (`supplementalSources`、yearFormat を calendar に変更) と、魚種別漁獲量 12 指標に 2016〜2018・2023 年の補完を入れた (c8281131a)。#1094 のブランチは物価 9 指標の `years.from` を 2013 に広げる差分を持つが、develop では既に 2013〜2025 になっている。衝突したら develop 側 (補完つき) を残す。
 
 ### [YEARS-DOWNSTREAM-FOLLOW-01] 指標の年が増えたあと、AI 解説・ブログ・計算型 metric・年固定の比較カードが古い年のまま残るのを直す
