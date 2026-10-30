@@ -18,8 +18,10 @@ import { AdSlotProps } from "../types";
 
 import {
   AD_CONTAINER_CLASS,
+  SLOT_BOX_HEIGHT_CLASS,
   getAdReservedMinHeight,
   getResponsiveAdFormat,
+  slotBoxStyle,
 } from "./ad-frame";
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
 
@@ -47,6 +49,7 @@ export function AdSenseAd({
   showLabel = true,
   lazyLoad = true,
   rootMargin,
+  slotBox,
 }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -129,7 +132,7 @@ export function AdSenseAd({
 
   // 全体表示を再開した状態で、環境変数が無効ならプレースホルダーを表示する。
   if (!isEnabled) {
-    return <AdSensePlaceholder format={format} className={className} />;
+    return <AdSensePlaceholder format={format} slotBox={slotBox} className={className} />;
   }
 
   // AdBlockで広告がブロックされた場合は何も表示しない
@@ -139,14 +142,20 @@ export function AdSenseAd({
 
   const isArticleFormat = format === "article";
   const isMultiplexFormat = format === "multiplex";
-  // 予約高は ad-frame.ts が単一ソース（プレースホルダーと共有する）。
-  const reservedMinHeight = getAdReservedMinHeight(format);
+  // 予約高: 枠の台帳の箱を渡された枠はその高さ (本番の実測)、それ以外は ad-frame.ts の形式ごとの既定値。
+  // どちらもプレースホルダーと共有する。
+  const reservedMinHeight = slotBox?.height ?? getAdReservedMinHeight(format);
+
+  // 台帳の箱がある枠は、モバイルとデスクトップの予約の高さを CSS 変数で切り替える (本番の実測)
+  const boxStyle = slotBox ? slotBoxStyle(slotBox) : undefined;
+  const reserveClass = slotBox ? SLOT_BOX_HEIGHT_CLASS : "";
+  const reserveStyle = slotBox ? undefined : { minHeight: `${reservedMinHeight}px` };
 
   return (
     <div
       ref={adRef}
-      className={`${AD_CONTAINER_CLASS} ${className}`}
-      style={reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
+      className={`${AD_CONTAINER_CLASS} ${reserveClass} ${className}`}
+      style={slotBox ? boxStyle : reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
     >
       {showLabel && (
         <div className="text-xs text-muted-foreground text-center mb-1">
@@ -169,11 +178,11 @@ export function AdSenseAd({
         ) : isMultiplexFormat ? (
           // Multiplex（関連コンテンツ型グリッド）: Google 推奨の autorelaxed 構成
           <ins
-            className="adsbygoogle"
+            className={`adsbygoogle ${reserveClass}`}
             style={{
               display: "block",
               width: "100%",
-              minHeight: `${reservedMinHeight}px`,
+              ...reserveStyle,
             }}
             data-ad-format="autorelaxed"
             data-ad-client={clientId}
@@ -181,11 +190,11 @@ export function AdSenseAd({
           />
         ) : (
           <ins
-            className="adsbygoogle"
+            className={`adsbygoogle ${reserveClass}`}
             style={{
               display: "block",
               width: "100%",
-              minHeight: `${reservedMinHeight}px`,
+              ...reserveStyle,
             }}
             data-ad-client={clientId}
             data-ad-slot={slotId}
@@ -195,7 +204,7 @@ export function AdSenseAd({
         )
       ) : (
         // 遅延ロード中のスペース確保（CLSの防止）。地の色は付けない (広告カードの中に別の面を作らない)
-        <div style={{ width: "100%", minHeight: `${reservedMinHeight}px` }} />
+        <div className={reserveClass} style={{ width: "100%", ...reserveStyle }} />
       )}
     </div>
   );

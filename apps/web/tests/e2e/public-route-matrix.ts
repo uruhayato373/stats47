@@ -75,8 +75,10 @@ export const PUBLIC_ROUTE_MATRIX: readonly PublicRouteContract[] = [
 export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   {
     id: "theme-aging",
-    path: "/themes/aging-society",
-    canonicalPath: "/themes/aging-society",
+    // 県のデータが要る図 (人口ピラミッド・物価プロファイル) を含むので、県のページで検証する。テーマのページは
+    // 2026-10-30 から常に 47 都道府県の表示で、これらの図は「都道府県を選択すると…」の案内になる (旧: 既定で兵庫県を表示していた)
+    path: "/areas/28000/aging-society",
+    canonicalPath: "/areas/28000/aging-society",
     heading: "少子高齢化",
     dataSelector: '[data-theme-chart="true"]',
     // 2026-10-07 (#1085): 「高齢世帯の推移」を外し、図は推移・構成・ピラミッドの 3 枚
@@ -85,8 +87,10 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   },
   {
     id: "theme-consumer-prices",
-    path: "/themes/consumer-prices",
-    canonicalPath: "/themes/consumer-prices",
+    // 県のデータが要る図 (人口ピラミッド・物価プロファイル) を含むので、県のページで検証する。テーマのページは
+    // 2026-10-30 から常に 47 都道府県の表示で、これらの図は「都道府県を選択すると…」の案内になる (旧: 既定で兵庫県を表示していた)
+    path: "/areas/28000/consumer-prices",
+    canonicalPath: "/areas/28000/consumer-prices",
     heading: "物価・消費",
     dataSelector: '[data-theme-chart="true"]',
     // 2026-10-08: 総合 1 本の折れ線を 12 費目 × 年の cpi-heatmap に作り替えた (図は物価プロファイルと 2 枚)。

@@ -18,18 +18,9 @@ export const nursingHomeCountPer100k65plus: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 1999,
+    "from": 1997,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1997,
-        1998,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

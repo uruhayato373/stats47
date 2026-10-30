@@ -19,29 +19,9 @@ export const taxpayerCountEqual: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 2023,
+    "from": 2010,
     "to": 2024,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        2010,
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

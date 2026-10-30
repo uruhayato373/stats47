@@ -17,25 +17,9 @@ export const forestRoadLength: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 1989,
+    "from": 1980,
     "to": 2022,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1980,
-        1981,
-        1982,
-        1983,
-        1984,
-        1985,
-        1986,
-        1987,
-        1988,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

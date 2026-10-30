@@ -20,7 +20,7 @@ const GENDER_LABEL: Record<GenderTone, string> = { male: "男性", female: "女�
 
 /**
  * 男女で対比する KPI (初婚年齢・寿命・給与・身長・体重)。男女それぞれを数値タイル 1 枚にし、
- * 県データブックの他の数値 (RankedKpiGrid) と同じ RankedValueGrid で 2 列に並べる (左 = 男性・右 = 女性)。
+ * 県データブックの他の数値 (RankedKpiGrid) と同じ RankedValueGrid で並べる (男性・女性の順。格子は 3 列を使わないので 1 組が同じ行に並ぶ)。
  * 各値は databook.json、47 県比較は `/ranking/<key>` リンクで回遊。
  *
  * 男女は色だけでなく「男性 / 女性」の文字でも区別する (WCAG 1.4.1)。色は GENDER_TONE_TEXT で、
@@ -55,5 +55,5 @@ export function GenderPairedKpiGrid({ pairs, databook }: Props) {
     }),
   );
 
-  return <RankedValueGrid items={items} columns={2} navSurface="area_databook" />;
+  return <RankedValueGrid items={items} navSurface="area_databook" />;
 }

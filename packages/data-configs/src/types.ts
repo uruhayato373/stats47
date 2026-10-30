@@ -272,11 +272,23 @@ export interface SupplementalSource {
 export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
+/**
+ * 年を外す理由の種類 (2026-10-30 オーナー決定「利用できるデータは全て利用する」)。外してよいのは次の 4 つだけで、
+ * 「まだ判断していない」「念のため」は外す理由にならない (PR の年の検査 `sync-estat-years --check` が止める)。
+ * - series-break: 調査の対象・方法が変わり、同じ系列として比べられない
+ * - definition-change: 指標の定義・基準 (基準年・分類) が変わった
+ * - value-error: 公表値の誤り・訂正前の値など、使うと誤った値になる
+ * - cadence-alignment: 系列の間隔をそろえるため (例: 5 年おきの系列の中間年)
+ */
+export type YearExclusionKind = 'series-break' | 'definition-change' | 'value-error' | 'cadence-alignment';
+
 /** `MetricConfig.yearExclusions` の 1 件。 */
 export interface YearExclusion {
   /** 外す年 (4 桁) */
   years: readonly number[];
-  /** 外す理由 (読み手が年を戻すかどうかを判断できる文) */
+  /** 外す理由の種類 */
+  kind: YearExclusionKind;
+  /** 外す理由 (読み手が年を戻すかどうかを判断できる文。根拠の資料があれば URL も書く) */
   reason: string;
 }
 
@@ -415,9 +427,8 @@ export interface MetricConfig {
   years: YearSpec;
   /**
    * 台帳に全県の値があるのに `years` に入れない年と、その理由。
-   * 例: 基準年の切り替え前の旧系列、5 年おきに揃えた系列の中間年。
-   * reason が `YEAR_EXCLUSION_INHERITED` の除外は、2026-10 の移行時に当時の `years` から引き継いだだけで
-   * まだ誰も判断していない (`.claude/todo/backlog.md` ESTAT-YEAR-AVAILABILITY-01)。
+   * 例: 基準年の切り替え前の旧系列、5 年おきに揃えた系列の中間年。利用できる年は全て使うのが原則で、
+   * 外すのは `YearExclusionKind` の理由があるときだけ (2026-10-30 に移行時の未判断の除外 421 件を外して年を戻した)。
    */
   yearExclusions?: readonly YearExclusion[];
   yearFormat?: 'fiscal' | 'calendar' | 'plain';

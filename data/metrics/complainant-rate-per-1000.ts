@@ -19,6 +19,11 @@ export const complainantRatePer1000: MetricConfig = {
   ],
   "years": {
     "years": [
+      1989,
+      1992,
+      1998,
+      2001,
+      2004,
       2007,
       2010,
       2013,
@@ -27,18 +32,6 @@ export const complainantRatePer1000: MetricConfig = {
       2022,
     ],
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1989,
-        1992,
-        1998,
-        2001,
-        2004,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

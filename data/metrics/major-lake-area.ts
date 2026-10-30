@@ -18,20 +18,9 @@ export const majorLakeArea: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 1994,
+    "from": 1990,
     "to": 2024,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1990,
-        1991,
-        1992,
-        1993,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

@@ -6,7 +6,7 @@ import {
   diffYearAvailability,
   expandYearSpec,
   formatYearList,
-  inheritedExclusionYears,
+  yearExclusionProblems,
   resolveCityLedgerYears,
   resolveLedgerYears,
 } from '../estat-availability';
@@ -185,24 +185,24 @@ describe('市区町村だけの metric の years を市区町村の台帳から�
   });
 });
 
-describe('移行で除外として引き継ぐ年', () => {
-  it('1 年だけの設定の古い年は引き継がない (最新年だけに絞った誤りとして年を足す)', () => {
-    expect(inheritedExclusionYears([2021], ALL_47(1996, 2021))).toEqual([]);
+// 2026-10-30 オーナー決定「利用できるデータは全て利用する」: 移行時の未判断の除外が 421 指標・延べ 3,563 年を隠していた。
+// 外してよいのは理由の種類 (kind) と理由がある除外だけ
+describe('年の除外の書き方', () => {
+  it('理由の種類と理由がそろった除外は通す', () => {
+    expect(
+      yearExclusionProblems([{ years: [2015], kind: 'series-break', reason: '2016 年に調査の対象が変わり同じ系列として比べられない' }])
+    ).toEqual([]);
   });
-
-  it('複数年の設定で最初の年より前の年は、基準の切り替えで外した可能性があるので引き継ぐ', () => {
-    expect(inheritedExclusionYears([2000, 2001, 2024], ALL_47(1998, 2024))).toEqual([1998, 1999]);
+  it('理由の種類が無い・語彙外の除外は止める', () => {
+    expect(yearExclusionProblems([{ years: [2015], reason: '2016 年に調査の対象が変わり同じ系列として比べられない' }])).toHaveLength(1);
+    expect(yearExclusionProblems([{ years: [2015], kind: 'just-in-case', reason: '2016 年に調査の対象が変わり同じ系列として比べられない' }])).toHaveLength(1);
   });
-
-  it('e-Stat に無い年は設定の形の根拠にしない (人口増減率: 設定の国勢調査年が無く 2024 年だけが残るなら 1 年の設定と同じ)', () => {
-    expect(inheritedExclusionYears([1985, 1990, 1995, 2000, 2024], ALL_47(2021, 2024))).toEqual([]);
-  });
-
-  it('穴は引き継がずに埋めるが、5 年おきに揃えた設定の間の年は引き継ぐ', () => {
-    expect(inheritedExclusionYears([2009, 2010, 2024], ALL_47(2009, 2024))).toEqual([]);
-    expect(inheritedExclusionYears([2005, 2010, 2015, 2020, 2023], ALL_47(2005, 2024))).toEqual([
-      2006, 2007, 2008, 2009, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2021, 2022,
-    ]);
+  it('判断していない除外は種類があっても止める', () => {
+    expect(
+      yearExclusionProblems([
+        { years: [2015], kind: 'series-break', reason: '2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない)' },
+      ])
+    ).toHaveLength(1);
   });
 });
 
@@ -222,14 +222,14 @@ describe('metric の TS ファイルの years の書き換え', () => {
   ].join('\n');
 
   it('years だけを置き換え、除外はその直後に置き、ほかのプロパティは触らない', () => {
-    const out = rewriteYearsBlock(generated, { from: 2009, to: 2024 }, [{ years: [2001], reason: 'r' }]);
+    const out = rewriteYearsBlock(generated, { from: 2009, to: 2024 }, [{ years: [2001], kind: 'series-break', reason: 'r' }]);
     expect(out).toContain('  "years": {\n    "from": 2009,\n    "to": 2024,\n  },\n  "yearExclusions": [');
     expect(out.startsWith('export const m: MetricConfig = {\n  "key": "m",\n')).toBe(true);
     expect(out.endsWith('  "yearFormat": "fiscal",\n};\n')).toBe(true);
   });
 
   it('手書きのファイル (キーに引用符なし) は書き方を合わせ、除外が空になったら消す', () => {
-    const handwritten = 'const m = {\n  key: "m",\n  years: { from: 2020, to: 2024 },\n  yearExclusions: [{ years: [2019], reason: "r" }],\n  unit: "人",\n};\n';
+    const handwritten = 'const m = {\n  key: "m",\n  years: { from: 2020, to: 2024 },\n  yearExclusions: [{ years: [2019], kind: "series-break", reason: "r" }],\n  unit: "人",\n};\n';
     const out = rewriteYearsBlock(handwritten, { from: 2019, to: 2024 }, []);
     expect(out).toBe('const m = {\n  key: "m",\n  years: {\n    from: 2019,\n    to: 2024,\n  },\n  unit: "人",\n};\n');
   });

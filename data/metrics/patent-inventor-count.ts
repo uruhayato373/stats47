@@ -30,12 +30,9 @@ export const patentInventorCount: MetricConfig = {
   },
   "yearExclusions": [
     {
-      "years": [
-        2013,
-        2014,
-        2015,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+      "years": [2013, 2014, 2015],
+      "kind": "definition-change",
+      "reason": "2016 年から PCT 国内移行の出願を集計に含めた。含まない 2015 年以前とは同じ系列として比べられない (note のとおり)",
     },
   ],
   "yearFormat": "calendar",

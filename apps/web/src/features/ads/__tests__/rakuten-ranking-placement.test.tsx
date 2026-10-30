@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { RankingPageSidebarSection } from "@/features/ranking/components/RankingKeyPage/RankingPageSidebarSection";
 import { RankingItemsSidebar } from "@/features/ranking/components/RankingSidebar";
+import { SurveyCard } from "@/features/ranking/components/RankingSidebar/SurveyCard";
 
 import { RakutenItemsCard } from "../server";
 
@@ -32,6 +33,9 @@ describe("家計調査の既存楽天カードを一度だけ優先表示", () =
     });
     const children = Children.toArray(tree.props.children);
     const rankingIndex = children.findIndex((child) => isValidElement(child) && child.type === RankingItemsSidebar);
+    const surveyIndex = children.findIndex((child) => isValidElement(child) && child.type === SurveyCard);
+    // 2026-10-29: 楽天の商品カードは右レールの PR の枠の中 (調査のカードの後・分野のランキング一覧の前) に置く。
+    // AdSense 上段の直前に置くと広告の枠が隣り合うため (広告の枠の台帳 config/ads/placements.json)
 
     if (!promoted) {
       // 非優先時はラップせず、他の要素に混じって bare で描画する。
@@ -39,12 +43,12 @@ describe("家計調査の既存楽天カードを一度だけ優先表示", () =
       expect(cards).toHaveLength(1);
       const card = cards[0];
       expect(isValidElement<{ position: string }>(card) && card.props.position).toBe("ranking-sidebar");
-      expect(children.indexOf(card)).toBeGreaterThan(rankingIndex);
+      expect(children.indexOf(card)).toBeGreaterThan(surveyIndex);
+      expect(children.indexOf(card)).toBeLessThan(rankingIndex);
       return;
     }
 
-    // 関連記事・テーマ・Geoの入口より後、関連ランキング直後へ優先表示する。
-    // 本文中段のモバイル版と重複させない
+    // 優先表示も同じ PR の枠の中。本文中段のモバイル版と重複させない
     // デスクトップ限定 (hidden lg:block) のラッパーで囲む (2026-09-16)。
     const wrappers = children.filter((child) => {
       if (!isValidElement<{ children?: unknown }>(child)) return false;
@@ -53,7 +57,8 @@ describe("家計調査の既存楽天カードを一度だけ優先表示", () =
     });
     expect(wrappers).toHaveLength(1);
     const wrapper = wrappers[0];
-    expect(children.indexOf(wrapper)).toBe(rankingIndex + 1);
+    expect(children.indexOf(wrapper)).toBeGreaterThan(surveyIndex);
+    expect(children.indexOf(wrapper)).toBeLessThan(rankingIndex);
     expect(children.filter((child) => isValidElement(child) && child.type === RakutenItemsCard)).toHaveLength(0);
     expect(isValidElement<{ className: string }>(wrapper) && wrapper.props.className).toBe("hidden lg:block");
     const wrapped = isValidElement<{ children: unknown }>(wrapper) ? wrapper.props.children : null;

@@ -159,6 +159,7 @@
 - [windows npm install rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
 - [dev streaming hidden dom copies](feedback_dev_streaming_hidden_dom_copies.md) — localhost の DOM 検査は hidden の `body > div[id^="S:"]` に本文の写しが残り件数が 2 倍に見える。可視の木 `body > div.relative` に絞って数える
 - [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)
+- [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — type-check:scripts の差分キャッシュは barrel 経由の新しい型エラーを隠す。push 前は .local/tsbuildinfo を消して回す (2026-10-30 PR #1200)
 - [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
 - [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
 - [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)

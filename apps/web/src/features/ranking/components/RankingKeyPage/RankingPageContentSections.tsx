@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import type { AreaType } from "@/features/area";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
     ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
@@ -95,6 +96,7 @@ export function RankingPageContentSections({
                     <AdSenseAd
                         format={RANKING_INCONTENT_MOBILE.format}
                         slotId={RANKING_INCONTENT_MOBILE.slotId}
+                        slotBox={adSlotBox("adsense-body-mobile")}
                     />
                 </div>
             )}
@@ -118,11 +120,15 @@ export function RankingPageContentSections({
                 <AdSenseAd
                     format={RANKING_PAGE_FOOTER.format}
                     slotId={RANKING_PAGE_FOOTER.slotId}
+                    slotBox={adSlotBox("adsense-footer")}
                 />
             )}
 
-            {sections.nativeAffiliate}
+            {/* 関連ランキングと記事を関連コンテンツ型 (AdSense) と PR の列の間に置き、広告の枠を隣り合わせにしない。
+                記事は記事カードの格子で、PR の列はページの最後 (テーマのページと同じ。広告の枠の台帳 config/ads/placements.json) */}
             {sections.relatedRankings}
+            {sections.relatedArticles}
+            {sections.nativeAffiliate}
         </>
     );
 }

@@ -66,7 +66,6 @@ function renderBlock(
           key={block.blockKey}
           metrics={block.metrics}
           databook={data.databook}
-          columns={block.columns}
         />
       );
     case "gender-paired-kpi":

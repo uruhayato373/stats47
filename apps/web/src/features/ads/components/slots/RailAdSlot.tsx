@@ -2,6 +2,7 @@ import { Megaphone } from "lucide-react";
 
 import { RailCard } from "@/components/surface";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
   ADSENSE_DISPLAY_ENABLED,
   AdSenseAd,
@@ -31,7 +32,13 @@ export function RailAdSlot({ slot }: RailAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
     <RailCard title="広告" icon={<Megaphone />} bodyClassName="flex justify-center overflow-hidden px-[7px] py-2">
-      <AdSenseAd format={slot.format} slotId={slot.slotId} showLabel={false} />
+      <AdSenseAd
+        format={slot.format}
+        slotId={slot.slotId}
+        showLabel={false}
+        // レクタングルの箱は広告の枠の台帳の「右レールの AdSense」(本番の実測)。縦長などはこれまでどおり形式の既定値
+        slotBox={slot.format === "rectangle" ? adSlotBox("adsense-rail-rect") : undefined}
+      />
     </RailCard>
   );
 }

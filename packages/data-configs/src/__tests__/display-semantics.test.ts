@@ -18,7 +18,7 @@ function templateWith(description: string, metrics: Array<{ rankingKey: string; 
         title: "学校・施設",
         description,
         sortOrder: 70,
-        blocks: [{ blockType: "ranked-kpi-grid", blockKey: "facility-kpi", columns: 3, metrics }],
+        blocks: [{ blockType: "ranked-kpi-grid", blockKey: "facility-kpi", metrics }],
       },
     ],
   };

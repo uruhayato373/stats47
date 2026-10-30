@@ -1,14 +1,9 @@
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
-import { ArrowRight } from 'lucide-react';
 
-import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
-import { SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, ArticleTeaserGrid } from '@/components/surface';
 
-import {
-  BLOG_THUMBNAIL_ASPECT_CLASS,
-  blogThumbnailUrl,
-} from '@/lib/metadata/ogp-image';
+import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
 import type { Article } from '../types';
 
@@ -35,72 +30,30 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
     );
   }
 
+  // 記事カードの格子 (列は本文の幅で 1 → 2 → 3 列。部品の台帳 article-teaser-grid)。2026-10-29 にテーマの記事欄と同じ部品へ寄せた
   return (
-    // 右レール有無で本文カラム幅が変動するため、列数はビューポートでなく
-    // コンテナクエリで決める (ui-components.md のカードグリッド規約)。
-    // @container は祖先要素にしか効かないため wrapper で包む
-    <div className="@container">
-      <div className="grid grid-cols-1 gap-3 @sm:grid-cols-2 @md:grid-cols-3">
-        {articles.map((article, index) => {
-          const cardDate = formatCardDate(
-            article.updatedAt ?? article.publishedAt
-          );
-          return (
-            <SurfaceLinkCard
-              key={article.slug}
-              href={hrefFor('blog', { slug: article.slug })}
-              className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              {/* サムネイル (640×336 = 40:21) と同じ縦横比の枠。flex の列で縮ませない (shrink-0)。
-                  縮むと object-cover が上下を切り、絵の端が欠ける */}
-              <div
-                className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full shrink-0 overflow-hidden border-b border-border bg-muted`}
-              >
-                <ThemeAwareImage
-                  lightSrc={blogThumbnailUrl(article.slug, 'light')}
-                  darkSrc={blogThumbnailUrl(article.slug, 'dark')}
-                  alt=""
-                  fill
-                  loading={index < 3 ? 'eager' : 'lazy'}
-                  sizes="(min-width: 1280px) 272px, (min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col p-4">
-                <h2 className="line-clamp-3 text-base font-semibold leading-snug text-foreground group-hover:text-primary">
-                  {article.title}
-                </h2>
-
-                {article.description && (
-                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                    {normalizePercentInText(article.description)}
-                  </p>
-                )}
-
-                <div className="mt-auto flex items-end justify-between gap-3 pt-4">
-                  {cardDate ? (
-                    <time
-                      dateTime={
-                        article.updatedAt ?? article.publishedAt ?? undefined
-                      }
-                      className="text-xs text-muted-foreground"
-                    >
-                      更新 {cardDate}
-                    </time>
-                  ) : (
-                    <span />
-                  )}
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
-                  />
-                </div>
-              </div>
-            </SurfaceLinkCard>
-          );
-        })}
-      </div>
-    </div>
+    <ArticleTeaserGrid>
+      {articles.map((article, index) => {
+        const cardDate = formatCardDate(article.updatedAt ?? article.publishedAt);
+        return (
+          <ArticleTeaserCard
+            key={article.slug}
+            href={hrefFor('blog', { slug: article.slug })}
+            title={article.title}
+            thumbnail={{
+              lightSrc: blogThumbnailUrl(article.slug, 'light'),
+              darkSrc: blogThumbnailUrl(article.slug, 'dark'),
+            }}
+            description={article.description ? normalizePercentInText(article.description) : undefined}
+            meta={
+              cardDate ? (
+                <time dateTime={article.updatedAt ?? article.publishedAt ?? undefined}>更新 {cardDate}</time>
+              ) : undefined
+            }
+            eager={index < 3}
+          />
+        );
+      })}
+    </ArticleTeaserGrid>
   );
 }

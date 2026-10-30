@@ -4,6 +4,10 @@
 
 import { currentPageContext } from './page-context';
 
+// window.gtag の型 (declare global) を読む。読まないと、このファイルだけを取り込む型検査 (OGP 画像の生成スクリプトの
+// tsconfig.ogp.json が部品の barrel 経由で読む) で gtag が未定義になる (2026-10-30 PR #1200 の Contract Tests)
+import type {} from './types';
+
 function sendEvent(name: string, params: Record<string, unknown>): void {
   if (typeof window === 'undefined' || !window.gtag) return;
   window.gtag('event', name, params);

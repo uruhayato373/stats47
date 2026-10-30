@@ -97,7 +97,6 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
         />
         <RankedValueGrid
           navSurface="area_databook"
-          columns={3}
           items={headline.map((metric) => ({
             key: metric.rankingKey,
             label: metric.label,
@@ -128,7 +127,6 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
             bodyClassName="pt-3"
           >
           <AreaHighlightList
-            columns={3}
             rankScope={`${inside}順位`}
             items={highlights.map((metric) => ({
               rankingKey: metric.rankingKey,

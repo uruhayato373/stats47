@@ -1,7 +1,7 @@
 {
-  "hash": "2fe7841156d0e10e32bcfbe8291ce52ae3899d2cf9bf03c9f1446f3d6742791a",
-  "audited_at": "2026-10-28T11:05:52",
+  "hash": "b733e86c9c3327577bf76f1147e187f2c5e1aec1b672333600a31ad6af758cf1",
+  "audited_at": "2026-10-29T11:49:28",
   "files": [
-    ".claude/scripts/blog/fix-broken-internal-links.mjs"
+    ".claude/rules/affiliate-ads-standards.md"
   ]
 }

@@ -307,7 +307,7 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     d1: indicatorData('D指標', '円'),
   };
 
-  it('連続する 1 指標カードが 2 件以上のときだけ compact grid で包み、順序を保ち、切替パネルは grid の外', () => {
+  it('連続する 1 指標カードを compact grid で包み (1 件の run も包む)、順序を保ち、切替パネルは grid の外', () => {
     const { container } = render(
       <ThemeMetricsDashboard
         themeConfig={themeConfig('labor-wages', ['a1', 'b1', 'c1', 'c2', 'd1'])}
@@ -333,14 +333,16 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     );
     expect(order).toEqual(['a1', 'b1', 'c1,c2', 'd1']);
 
+    // A・B の run と、切替パネルの後の単独の D の run で 2 つ (2026-10-29「幅を 4 列にそろえる」)
     const grids = container.querySelectorAll('[data-theme-panel-grid="compact"]');
-    expect(grids).toHaveLength(1);
+    expect(grids).toHaveLength(2);
     const grid = grids[0] as HTMLElement;
-    // 線の格子で並べる: 隣り合うカードが 1px の線を共有し、同じ行のカードは同じ高さに伸びる
-    // (items-start で縮めると、格子の地 (線の色) がカードの下に見えてしまう)
-    expect(grid).toHaveAttribute('data-slot', 'panel-grid');
-    expect(grid).toHaveClass('grid', 'gap-px', 'grid-cols-1', '@min-[40rem]:grid-cols-2');
-    expect(grid).not.toHaveClass('items-start');
+    // 数値タイルの格子 (StatTileGrid) で並べる: 列の数は部品が本文の幅で決め (1 / 2 / 4 列)、ページは指定しない。
+    // 同じ行のカードは同じ高さに伸びる (items-start で縮めると、格子の地 (線の色) がカードの下に見えてしまう)
+    expect(grid.querySelector('[data-slot-kind="stat-tile-grid"]')).not.toBeNull();
+    const lineGrid = grid.querySelector('[data-slot="panel-grid"]') as HTMLElement;
+    expect(lineGrid).toHaveClass('grid', 'gap-px', 'grid-cols-1', '@sm:grid-cols-2');
+    expect(lineGrid).not.toHaveClass('items-start');
     expect(
       within(grid)
         .getAllByTestId('single-card')
@@ -349,20 +351,20 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
 
     // 切替パネル (C) は grid の外
     expect(grid.contains(screen.getByTestId('switcher-panel'))).toBe(false);
-    // 単独の D も grid の外 (連続していないので compact grid に含めない)
+    // 単独の D は A・B と連続しないので別の格子に入る (1 枚でも 4 列の 1 マスの幅にそろえる)
     const dCard = screen
       .getAllByTestId('single-card')
       .find((el) => el.getAttribute('data-keys') === 'd1');
     expect(dCard).toBeDefined();
     expect(grid.contains(dCard!)).toBe(false);
+    expect(grids[1].contains(dCard!)).toBe(true);
   });
 
-  it('1 指標カードが 1 枚だけなら grid wrapper を作らない', () => {
+  it('1 指標カードが 1 枚だけでも数値タイルの格子に入れる (幅を 4 列の 1 マスにそろえる)', () => {
     renderDashboard('labor-wages');
-    expect(
-      document.querySelector('[data-theme-panel-grid="compact"]')
-    ).toBeNull();
-    expect(screen.getByTestId('single-card')).toBeInTheDocument();
+    const grid = document.querySelector('[data-theme-panel-grid="compact"]');
+    expect(grid).not.toBeNull();
+    expect(grid!.contains(screen.getByTestId('single-card'))).toBe(true);
   });
 });
 

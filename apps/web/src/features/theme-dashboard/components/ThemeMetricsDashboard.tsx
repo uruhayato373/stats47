@@ -13,6 +13,7 @@ import { ChartFooter } from '@/components/charts/ChartFooter';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
+import { StatTileGrid } from '@/components/surface';
 
 import {
   PREFECTURE_SET_LABEL,
@@ -315,7 +316,7 @@ export function ThemeMetricsDashboard({
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string) => panel.comparisonYear ? (
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.comparisonYear ? (
     <FixedYearComparisonPanel
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -350,49 +351,43 @@ export function ThemeMetricsDashboard({
       selectedPrefectureCode={selectedPrefectureCode}
       areaName={areaName}
       defaultCheckedKeys={panel.defaultCheckedKeys}
+      annotation={annotation}
     />
   );
   /**
    * パネル列を「連続するコンパクトカードの run」と「全幅パネル」に分け、順序を保ったまま描く。
-   * run が 2 件以上のときだけ container query の 2 列 grid で包む。1 件の run に grid wrapper は作らない。
-   * 2 列の境界は本文幅 640px (@md の 768px だと 1024px 幅でサイドバーを出したとき 1 列に落ちる)。
-   * 並びは線の格子 (PanelGrid)。隣り合うカードは線を共有し、同じ行のカードは同じ高さに伸ばす
-   * (縮めると格子の線の色の地が見えるため)。
+   * run は 1 件でも数値タイルの格子 (StatTileGrid) で包む。列の数は格子の部品が本文の幅だけで決める
+   * (1 / 2 / 4 列。枚数では変えない。県データブックなど他の数値の並びと同じ規則。2026-10-29)。
+   * 同じ行のカードは同じ高さに伸びる。
    */
   const renderPanelRuns = (
     list: Panel[],
     summaryOnlyOf: (panel: Panel) => boolean = () => false,
-    sectionTitle?: string
+    sectionTitle?: string,
+    annotationOf: (panel: Panel) => string | undefined = () => undefined
   ) => {
     const out: ReactNode[] = [];
     for (let i = 0; i < list.length; ) {
       const panel = list[i];
       if (!isCompact(panel)) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle));
+        out.push(renderPanel(panel, summaryOnlyOf(panel), sectionTitle, annotationOf(panel)));
         i += 1;
         continue;
       }
       let j = i;
       while (j < list.length && isCompact(list[j])) j += 1;
       const run = list.slice(i, j);
-      if (run.length === 1) {
-        out.push(renderPanel(panel, summaryOnlyOf(panel)));
-      } else {
-        out.push(
-          <PanelGrid
-            key={`compact-${panel.key}`}
-            data-theme-panel-grid="compact"
-            className="grid-cols-1 @min-[40rem]:grid-cols-2"
-          >
-            {run.map((item) => renderPanel(item, summaryOnlyOf(item)))}
-          </PanelGrid>
-        );
-      }
+      // 1 枚でも数値タイルの格子に入れ、どの章でも 1 マスの幅をそろえる (2026-10-29 オーナー決定「幅を 4 列にそろえる」)
+      out.push(
+        <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
+          <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item)))}</StatTileGrid>
+        </div>
+      );
       i = j;
     }
     return out;
   };
-  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3) =>
+  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3, hideTitle = false) =>
     chart.componentType === 'markdown-section' ? (
       <ThemeDbChartRenderer
         key={chart.componentKey}
@@ -406,6 +401,7 @@ export function ThemeMetricsDashboard({
       key={chart.componentKey}
       id={`theme-${themeConfig.themeKey}-chart-${chart.componentKey}`}
       title={chart.title}
+      hideTitle={hideTitle}
       footer={
         <ChartFooter
           source={chart.sourceName ?? undefined}
@@ -491,7 +487,20 @@ export function ThemeMetricsDashboard({
   const renderChapter = (
     chapter: (typeof chapters)[number],
     action?: ReactNode
-  ) => (
+  ) => {
+    // 章のチャートが切り替えカードと同じ指標だけを描くなら、チャートをやめてカードの (系列を選べる) グラフを出す。
+    // 注記はカードの下へ引き継ぐ (2026-10-29 オーナー決定。旧: カードのグラフを止めて選べないチャートを出していた)
+    const merged = chapter.charts.length === 1 ? chapter.charts[0] : undefined;
+    const mergedPanel = merged
+      ? chapter.panels.find(
+          (panel) =>
+            !panel.comparisonYear &&
+            !isSingleMetricGroup(panel.metrics) &&
+            chartDuplicatesMetrics(merged, panel.metrics.map((metric) => metric.metricKey))
+        )
+      : undefined;
+    const charts = mergedPanel ? [] : chapter.charts;
+    return (
     <PanelGrid
       as="section"
       key={chapter.key}
@@ -505,6 +514,7 @@ export function ThemeMetricsDashboard({
         action={action}
       />
       {renderPanelRuns(chapter.panels, (panel) => {
+        if (panel === mergedPanel) return false;
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
             ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
@@ -527,10 +537,14 @@ export function ThemeMetricsDashboard({
         return panel.metrics.every((metric) =>
           coveredKeys.has(metric.metricKey)
         );
-      }, chapter.title)}
-      {chapter.charts.length > 0 && (
-        <PanelGrid className={`grid-cols-1 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
-          {chapter.charts.map((chart) => renderChart(chart))}
+      }, chapter.title, (panel) =>
+        panel === mergedPanel && merged ? resolveChartAnnotation(merged) : undefined
+      )}
+      {charts.length > 0 && (
+        <PanelGrid className={`grid-cols-1 ${charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
+          {charts.map((chart) =>
+            renderChart(chart, undefined, charts.length === 1 && chartLegendNamesSeries(chart))
+          )}
         </PanelGrid>
       )}
       {chapter.markdown.length > 0 && (
@@ -542,7 +556,8 @@ export function ThemeMetricsDashboard({
         <div key={key}>{embeddedSections[key]}</div>
       ))}
     </PanelGrid>
-  );
+    );
+  };
 
   return (
     <PanelGrid
@@ -587,4 +602,37 @@ export function ThemeMetricsDashboard({
       )}
     </PanelGrid>
   );
+}
+
+/** 系列の名前を凡例 (D3ChartLegend) に並べるチャートの種類。ほかの種類 (構成比・ドーナツ・物価など) は凡例の形が違う */
+const LEGEND_NAMED_CHART_TYPES = new Set(['line-chart', 'mixed-chart']);
+
+/**
+ * 凡例が系列の名前を示すチャートか (折れ線・棒と折れ線で、系列が 2 本以上)。章の中のチャートが 1 枚だけでこれに当たるなら、
+ * 章の見出しが問いを、凡例が系列の名前を示すので、パネルの題名の帯を出さない (題名は読み上げの名前に残す。2026-10-29 オーナー決定)。
+ * 章に 2 枚以上並ぶとき・凡例の無いチャートでは、題名が無いと何のチャートか分からないので帯を残す。
+ */
+export function chartLegendNamesSeries(chart: PageComponent): boolean {
+  if (!LEGEND_NAMED_CHART_TYPES.has(chart.componentType)) return false;
+  const count = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].reduce((sum, field) => {
+    const refs = chart.componentProps[field];
+    return sum + (Array.isArray(refs) ? refs.length : 0);
+  }, 0);
+  return count >= 2;
+}
+
+/**
+ * 章のチャートが、切り替えカードの指標と同じ指標だけを描いているか (折れ線・全国の系列なし・指標の集合が一致)。
+ * 一致するなら同じグラフが 2 つになるので、章のチャートをやめてカードのグラフ (系列を選べる) を出す。
+ */
+export function chartDuplicatesMetrics(chart: PageComponent, metricKeys: readonly string[]): boolean {
+  if (chart.componentType !== 'line-chart') return false;
+  const refs = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap((field) => {
+    const value = chart.componentProps[field];
+    return Array.isArray(value) ? value : [];
+  });
+  if (refs.length !== metricKeys.length || metricKeys.length < 2) return false;
+  if (refs.some((ref) => !ref || typeof ref !== 'object' || ref.area === 'national')) return false;
+  const chartKeys = new Set(refs.map((ref) => ref.metricKey));
+  return chartKeys.size === metricKeys.length && metricKeys.every((key) => chartKeys.has(key));
 }

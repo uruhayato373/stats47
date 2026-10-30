@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**752 件** (最終更新: 2026-10-28)
+**754 件** (最終更新: 2026-10-29)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-29 | 🧵 Threads | area/area-36000-profile | 徳島のデータブックを公開中。 シラサギと鳴門らっきょ、阿波和三盆糖を入口に、人口・産業・消費の数字を県別に深掘り。 続き… | [🔗](https://www.threads.com/@stats47jp/post/DfEi-xHkUuF) |
+| 2026-10-29 | 🧵 Threads | ranking/life-expectancy-0-female | 88.29歳・88.26歳・88.25歳。  女性の平均寿命、上位3府県は岡山・滋賀・京都でほぼ横並び。 最も短い青森は… | [🔗](https://www.threads.com/@stats47jp/post/DfD1Ljuicdp) |
 | 2026-10-28 | 🧵 Threads | area/area-35000-profile | 旅先では見えにくい山口の輪郭。 県木アカマツと特産岩国れんこん、暮らしの統計を同じページで確認できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DfCBqZ3Eege) |
 | 2026-10-28 | 🧵 Threads | ranking/cleaning-shop-count-per-100k | クリーニング店が最も多い県は福井。  人口10万人あたり115.6所で、最も少ない神奈川（37.9所）の3.1倍。 2位… | [🔗](https://www.threads.com/@stats47jp/post/DfBSplokmcA) |
 | 2026-10-27 | 🧵 Threads | area/area-34000-profile | 広島を数字と地域文化の両方から見る。 県鳥アビ、特産メバル、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/De_akZpAoQh) |

@@ -1,7 +1,6 @@
 import { Suspense, type ReactNode } from 'react';
 
 
-import { buttonVariants } from '@stats47/components';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -28,7 +27,7 @@ import {
 import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
-import { RailCard, RailNavRow } from '@/components/surface';
+import { RailCard, RailNavRow, StatTile, StatTileGrid } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -43,9 +42,11 @@ import {
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
+import { isAreaTheme } from '../config/area-theme-slugs';
+import { themeHref } from '../config/theme-href';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
-import { getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -102,8 +103,18 @@ export async function ThemePageLayout({
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
-  const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
-  const pageData = generateThemePageStructuredData(theme);
+  const areaHighlights = areaContext
+    ? getAreaThemeHighlights(data, areaContext.areaCode)
+    : [];
+  // 県のページは、構造化データの名前・URL・説明・パンくずをその県のものにする (説明は meta description と同じ文)
+  const structuredArea = areaContext
+    ? {
+        ...areaContext,
+        description: areaThemeDescription(areaContext.areaName, theme.description, areaHighlights),
+      }
+    : undefined;
+  const breadcrumbData = generateThemeBreadcrumbStructuredData(theme, structuredArea);
+  const pageData = generateThemePageStructuredData(theme, structuredArea);
   const catalog = THEME_CATALOGS[theme.themeKey];
   const catalogTaxonomy = catalog
     ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY)
@@ -175,9 +186,6 @@ export async function ThemePageLayout({
   }
   nativeBanners = nativeBanners.filter(isLandscapeBanner);
   const providerPrefecture = areaContext ?? initialPrefecture;
-  const areaHighlights = areaContext
-    ? getAreaThemeHighlights(data, areaContext.areaCode)
-    : [];
 
   return (
     <ThemePrefectureProvider
@@ -237,50 +245,38 @@ export async function ThemePageLayout({
 
           {toolbar}
 
-          {/* 地域単位・テーマ・地域・テーマ一覧を 1 つの操作群にまとめ、その下に章のリンク列を 1 行で置く。
-          狭い幅ではテーマと地域のセレクトを地域単位のリンク列と別の行にし、選択中の名前を読める幅にする。
-          関連記事は h1 の下の最初の画面に置く (変更前の配置)。全指標・出典調査はダッシュボードの後ろ。
-          areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
+          {/* 地域単位・テーマ・地域を 1 行の操作群にまとめ、その下に章のリンク列を 1 行で置く。
+          テーマは今のテーマ名のボタン 1 つで、押すと Sheet でテーマの一覧が開く (2026-10-29。旧: Select + テーマ一覧ボタン)。
+          関連記事はページの最後に置く (同日。h1 の直下では主要データを押し下げていた)。
+          areaContext がある場合は都道府県文脈を維持したまま切り替える。
+          県ごとのページを持つテーマでは、県を選ぶとその県のページ (/areas/県/テーマ) へ移り、地域単位の切り替えは
+          テーマのページと県のページの両方に置く (県×テーマの交点を 1 つの URL・同じ部品にする。2026-10-30) */}
           <div className="mb-4 flex flex-col gap-3">
-            <div className="flex flex-wrap items-end gap-3">
-              {!areaContext && (
-                <StatisticsScopeNav
-                  current="prefectures"
-                  hrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
-                  className="mb-0 w-auto"
-                />
-              )}
+            <div className="flex flex-wrap items-center gap-3">
+              <StatisticsScopeNav
+                current="prefectures"
+                // 「47都道府県」は同じテーマの 47都道府県の表示へ (県のページから戻る先。既定の /themes 一覧ではない)
+                hrefs={{ prefectures: themeHref(theme.themeKey), ...scopeHrefsForPrefectureTheme(theme.themeKey) }}
+                className="mb-0 w-auto"
+              />
               <div
                 role="group"
                 aria-label="テーマと地域"
-                className="flex min-w-0 basis-full items-end gap-2 sm:flex-1 sm:basis-auto sm:gap-3"
+                className="flex min-w-0 basis-full items-center gap-2 sm:flex-1 sm:basis-auto sm:justify-end"
               >
-                <div className="min-w-0 flex-1 sm:w-56 sm:flex-none">
+                <div className="min-w-0 flex-1 sm:flex-none">
                   <ThemeSwitcher
                     themes={THEME_SWITCHER_THEMES}
                     currentThemeKey={theme.themeKey}
                     areaContext={
                       areaContext ? { areaCode: areaContext.areaCode } : undefined
                     }
-                    compact
                   />
                 </div>
-                <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
-                  <span className="block whitespace-nowrap text-xs font-medium text-muted-foreground">
-                    地域
-                  </span>
-                  <PrefectureSelect className="mt-1 w-full" />
-                </div>
-                <Link
-                  href="/themes"
-                  data-slot="button"
-                  className={buttonVariants({
-                    variant: 'outline',
-                    className: 'shrink-0 sm:ml-auto',
-                  })}
-                >
-                  テーマ一覧
-                </Link>
+                <PrefectureSelect
+                  className="min-w-0 flex-1 sm:w-44 sm:flex-none"
+                  areaPageThemeKey={isAreaTheme(theme.themeKey) ? theme.themeKey : undefined}
+                />
               </div>
             </div>
 
@@ -297,17 +293,6 @@ export async function ThemePageLayout({
             )}
           </div>
 
-          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
-            <div className="mb-4">
-              <Suspense fallback={null}>
-                <ThemeRelatedArticles
-                  themeKey={theme.themeKey}
-                  tagKeys={theme.relatedArticleTagKeys ?? []}
-                  rankingKeys={theme.rankingKeys}
-                />
-              </Suspense>
-            </div>
-          )}
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (
@@ -330,36 +315,31 @@ export async function ThemePageLayout({
           )}
 
           {areaContext && areaHighlights.length > 0 && (
-            <section
-              aria-labelledby="area-theme-highlights"
-              // 線の格子のセル (余白 16px と上下の線は格子が持つ)
-              className="min-w-0"
-            >
-              <h2
-                id="area-theme-highlights"
-                className="text-base font-semibold"
-              >
-                {areaContext.areaName}の主なデータ
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                このテーマに関連する最新公表値です。
-              </p>
-              <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
+            // 見出しと数値タイルの格子を節ごと線の格子にする (文章とタイルを 1 つの要素に包むと文章が線に接する)
+            <PanelGrid as="section" aria-labelledby="area-theme-highlights">
+              <div>
+                <h2
+                  id="area-theme-highlights"
+                  className="text-base font-semibold"
+                >
+                  {areaContext.areaName}の主なデータ
+                </h2>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  このテーマに関連する最新公表値です。
+                </p>
+              </div>
+              <StatTileGrid>
                 {areaHighlights.map((highlight) => (
-                  <div key={highlight.key}>
-                    <dt className="text-xs text-muted-foreground">
-                      {highlight.title}
-                    </dt>
-                    <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
-                      {highlight.value.toLocaleString('ja-JP')} {formatUnitForDisplay(highlight.unit)}
-                    </dd>
-                    <dd className="text-xs text-muted-foreground">
-                      {highlight.yearName}
-                    </dd>
-                  </div>
+                  <StatTile
+                    key={highlight.key}
+                    label={highlight.title}
+                    value={highlight.value.toLocaleString('ja-JP')}
+                    unit={formatUnitForDisplay(highlight.unit)}
+                    meta={highlight.yearName}
+                  />
                 ))}
-              </dl>
-            </section>
+              </StatTileGrid>
+            </PanelGrid>
           )}
 
           <ThemeDashboardClient
@@ -452,6 +432,19 @@ export async function ThemePageLayout({
         全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
       */}
           <InContentAdSlot slot={THEMES_CONTENT} />
+
+          {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <div className="mt-8">
+              <Suspense fallback={null}>
+                <ThemeRelatedArticles
+                  themeKey={theme.themeKey}
+                  tagKeys={theme.relatedArticleTagKeys ?? []}
+                  rankingKeys={theme.rankingKeys}
+                />
+              </Suspense>
+            </div>
+          )}
 
           {/* ネイティブアフィリエイト枠。読了位置では広告を二段に分けず、
           desktop 3件 / mobile 最優先1件の単一ブロックにする。 */}

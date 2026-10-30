@@ -33,6 +33,9 @@ const BASELINE = new Set([
   // 記事系ページ (reading zone) の本文カード。角丸なし + shadow-sm +
   // モバイルフルブリード。ArticleShell と対で使う (2026-07-11 Soft Editorial 移植)。
   "ArticleCard",
+  // 記事への入口のカード (見本の Blog app。部品の台帳 article-teaser-card・2026-10-29)。枠は SurfaceLinkCard のままで、
+  // 画像が上 → 題名 → 補足の並べ方だけを持つ。ブログ一覧の直書きのカードとテーマの記事欄をこの 1 つにまとめた。
+  "ArticleTeaserCard",
   "ChartLoadingCard",
   "CitiesNavCard",
   "DataUsageCard",

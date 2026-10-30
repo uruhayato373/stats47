@@ -26,6 +26,7 @@ export const retailEmployees: MetricConfig = {
   yearExclusions: [
     {
       years: [1976, 1979, 1982, 1985, 1988, 1991, 1994, 1997, 1999, 2002, 2004, 2007, 2011, 2014, 2016],
+      kind: "series-break",
       reason: "過去年は調査対象が違い 2021 年度と同じ系列として比べられないため、この系列は 2021 年度だけを掲載する (note のとおり)",
     },
   ],

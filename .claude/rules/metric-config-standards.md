@@ -167,12 +167,14 @@ ESTAT-YEAR-AVAILABILITY-01)。原因は `years` 1 つに「e-Stat にある年 (
 - **同期**: `npm run sync:estat-years --workspace=@stats47/data-configs` が規則 `resolveLedgerYears`
   (`src/estat-availability.ts`) で `years` を合わせる。全県の値がある年は `yearExclusions` に無ければ足す。
   一部の県だけの年は足しも外しもしない (人が決める)。1 県も値が無い年は `--remove-missing` のときだけ外す。
-- **外したい年は `years` から消さず `yearExclusions` に理由付きで書く** (消しても次の同期で戻る)。
+- **利用できる年は全て使う** (2026-10-30 オーナー決定)。外してよいのは理由の種類 `kind`
+  (`series-break` 系列の断絶 / `definition-change` 定義・基準の変更 / `value-error` 公表値の誤り / `cadence-alignment` 間隔をそろえる)
+  があるときだけ。**外したい年は `years` から消さず `yearExclusions` に `kind` と理由を書く** (消しても次の同期で戻る)。
   理由は読み手が年を戻すかを判断できる文にする (例: 「2015 年基準への切り替え前の旧系列。別 key で配信」)。
-- **未判断の除外**: reason が `YEAR_EXCLUSION_INHERITED` の除外 (422 件) は移行時に当時の `years` から
-  引き継いだだけ。根拠があれば reason を書き換え、無ければ除外を消して同期で年を戻す。一覧は LATEST.md。
+  「まだ判断していない」「念のため」は理由にならない。2026-10 の移行で当時の `years` から引き継いだ未判断の除外が
+  421 指標・延べ 3,563 年を隠しており (テーマの数値タイルに 2 年の直線が並んで発覚)、2026-10-30 に全件外して年を戻した。
 - **検査**: PR CI (`Metric Years Gate`) が `sync:estat-years -- --check` で、台帳にある全県の年の入れ忘れと、
-  除外した年の残りを止める。週次レビューの `npm run weekly:audits` (estat-year-coverage) が台帳を取り直して新しい年を足し、
+  除外した年の残りと、`kind` の無い・判断していない除外を止める (`yearExclusionProblems`)。`kind` は型でも必須。週次レビューの `npm run weekly:audits` (estat-year-coverage) が台帳を取り直して新しい年を足し、
   R2 の値は毎月の `data-refresh.yml` で増える。
 - 台帳が無い・取得に失敗した・行が切れた・重複行がある条件の metric と `years: "all"` は同期の対象外。
 - **市区町村の値も台帳に載る** (行に `level: "city"`、現行の市区町村マスタにあるコードだけを数える)。

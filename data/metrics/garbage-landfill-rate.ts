@@ -17,21 +17,9 @@ export const garbageLandfillRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2004,
+    "from": 1999,
     "to": 2023,
   },
-  "yearExclusions": [
-    {
-      "years": [
-        1999,
-        2000,
-        2001,
-        2002,
-        2003,
-      ],
-      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
-    },
-  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

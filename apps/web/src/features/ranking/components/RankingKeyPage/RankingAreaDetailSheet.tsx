@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-import { PanelGrid, StatTile } from "@stats47/components";
+import { StatTile, StatTileGrid } from "@stats47/components";
 import { Button } from "@stats47/components/atoms/ui/button";
 import {
     Sheet,
@@ -95,7 +95,8 @@ export function RankingAreaDetailSheet({ rankingItem, rows, areaCode, onAreaChan
                             </div>
                         </div>
 
-                        <PanelGrid className="mx-4 grid-cols-2">
+                        <div className="mx-4">
+                        <StatTileGrid>
                             <StatTile
                                 label="値"
                                 value={row.value === null ? null : formatRankingValue(row.value, precision)}
@@ -107,7 +108,8 @@ export function RankingAreaDetailSheet({ rankingItem, rows, areaCode, onAreaChan
                                 value={row.deviationValue === null ? null : row.deviationValue.toFixed(1)}
                                 meta={`${byRank.length}都道府県の中で`}
                             />
-                        </PanelGrid>
+                        </StatTileGrid>
+                        </div>
 
                         <nav aria-label={`${row.areaName}の関連ページ`} className="flex flex-col px-4 pb-4" {...navSurfaceProps("ranking_detail_sheet")}>
                             <RailNavRow href={hrefFor("area", { areaCode: row.areaCode })} prefetch={false}>
