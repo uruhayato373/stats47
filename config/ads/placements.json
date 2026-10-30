@@ -80,9 +80,8 @@
       "name": "本文の AdSense",
       "provider": "adsense",
       "box": {
-        "width": "full",
-        "height": 280,
-        "maxWidth": 780
+        "width": 300,
+        "height": 250
       },
       "devices": [
         "desktop"
@@ -92,14 +91,14 @@
         "adsense:rectangle"
       ],
       "component": "InContentAdSlot",
-      "measured": "2026-10-29 本番 /themes/labor-wages (本文の幅 812px): 記事内 (fluid)・レクタングルとも 780x280 で配信"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
     },
     {
       "id": "adsense-body-mobile",
       "name": "本文の AdSense (モバイル)",
       "provider": "adsense",
       "box": {
-        "width": "full",
+        "width": 300,
         "height": 250
       },
       "devices": [
@@ -109,17 +108,15 @@
         "adsense:article"
       ],
       "component": "AdSenseAd",
-      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio (モバイル): 記事内 293x250"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
     },
     {
       "id": "adsense-body-all",
       "name": "本文の AdSense (全幅・モバイルでも出す)",
       "provider": "adsense",
       "box": {
-        "width": "full",
-        "height": 280,
-        "mobileHeight": 250,
-        "maxWidth": 780
+        "width": 300,
+        "height": 250
       },
       "devices": [
         "desktop",
@@ -129,7 +126,7 @@
         "adsense:article"
       ],
       "component": "AdSenseAd",
-      "measured": "本文の AdSense (2026-10-29 本番 /themes/labor-wages デスクトップ 780x280) と本文の AdSense (モバイル) (同日 /ranking/active-job-opening-ratio 293x250) の実測を合わせた箱。ブログ記事の末尾 (手置きの枠が無い記事) で使う"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
     },
     {
       "id": "adsense-rail-rect",
@@ -137,9 +134,7 @@
       "provider": "adsense",
       "box": {
         "width": 300,
-        "height": 260,
-        "mobileWidth": "full",
-        "mobileHeight": 375
+        "height": 250
       },
       "devices": [
         "desktop",
@@ -149,27 +144,25 @@
         "adsense:rectangle"
       ],
       "component": "RailAdSlot",
-      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 300x256〜316x258、モバイル (本文の下に積まれる) 375x375"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
     },
     {
       "id": "adsense-footer",
-      "name": "ページ末の関連コンテンツ型",
+      "name": "ページ末の AdSense",
       "provider": "adsense",
       "box": {
-        "width": "full",
-        "height": 466,
-        "mobileHeight": 242,
-        "maxWidth": 780
+        "width": 300,
+        "height": 250
       },
       "devices": [
         "desktop",
         "mobile"
       ],
       "accepts": [
-        "adsense:multiplex"
+        "adsense:rectangle"
       ],
       "component": "FooterAdSlot",
-      "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 778x466、モバイル 293x242"
+      "measured": "2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさにする (表示広告は固定サイズの広告コード、記事内広告は箱の幅を 300px にする、関連コンテンツ型は表示広告へ置き換え)。同日の本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、積まれた右レールで 928×280、モバイルの関連コンテンツ型で 308×1503 だったため。記事内広告は幅 308px で 308×257 だった"
     },
     {
       "id": "affiliate-row",

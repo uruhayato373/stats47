@@ -149,6 +149,8 @@ export function AdSenseAd({
 
   // 台帳の箱がある枠は、モバイルとデスクトップの予約の高さを CSS 変数で切り替える (本番の実測)
   const boxStyle = slotBox ? slotBoxStyle(slotBox) : undefined;
+  // 台帳の箱の幅が数値の枠は、その幅の固定の大きさで出す ("full" は幅いっぱい)
+  const fixedWidth = typeof slotBox?.width === "number" ? slotBox.width : undefined;
   const reserveClass = slotBox ? SLOT_BOX_HEIGHT_CLASS : "";
   const reserveStyle = slotBox ? undefined : { minHeight: `${reservedMinHeight}px` };
 
@@ -168,9 +170,11 @@ export function AdSenseAd({
           // 記事内広告（fluid / in-article）: Google 推奨の属性構成。
           // 外枠 (AD_CONTAINER_CLASS) は flex-col + items-center なので、幅を明示しないと ins が
           // 内容幅 0 に縮み「No slot size for availableWidth=0」で配信されない (2026-10-11 本番で実測)。
+          // 2026-10-31 (オーナー決定 300×250 にそろえる): 記事内広告は箱の幅に合わせて大きさを決めるので、
+          // 台帳の箱の幅 (300px) を渡す。幅 308px の本番の実測は 308×257 だった。
           <ins
             className="adsbygoogle"
-            style={{ display: "block", width: "100%", textAlign: "center" }}
+            style={{ display: "block", width: fixedWidth ?? "100%", textAlign: "center" }}
             data-ad-layout="in-article"
             data-ad-format="fluid"
             data-ad-client={clientId}
@@ -186,6 +190,16 @@ export function AdSenseAd({
               ...reserveStyle,
             }}
             data-ad-format="autorelaxed"
+            data-ad-client={clientId}
+            data-ad-slot={slotId}
+          />
+        ) : fixedWidth !== undefined && slotBox ? (
+          // 固定の大きさの表示広告 (2026-10-31 オーナー決定: AdSense は全て 300×250)。data-ad-format を付けない
+          // Google の固定サイズの広告コード。幅に合わせて伸びる広告は、積まれた右レールで 928×280、
+          // 本文で 1200×280 まで広がっていた (同日の本番の実測)
+          <ins
+            className="adsbygoogle"
+            style={{ display: "inline-block", width: fixedWidth, height: slotBox.height }}
             data-ad-client={clientId}
             data-ad-slot={slotId}
           />

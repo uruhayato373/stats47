@@ -120,6 +120,9 @@ test("実 constants.ts をパースできる (0 件ならパーサが空振り�
   }
   // 2026-10-11 の再開で配置ごとに別ユニットにした (旧アカウントでは RANKING_PAGE_FOOTER と
   // CONTENT_FOOTER が 6137206504 を共用していた)。共用の扱いは上の SAMPLE のテストが固定する。
-  const shared = [...idx.bySlotId.entries()].filter(([, entries]) => entries.length > 1);
+  // 一時的な例外 (2026-10-31): ページ末の 2 枠は関連コンテンツ型を固定の大きさ (300×250) にできないので、
+  // 表示広告のユニットを借りている。専用の表示広告ユニットを作ったら外す (backlog ADSENSE-FIXED-UNITS-01)。例外を増やさない
+  const BORROWED = new Set(["9435960671", "8298138821"]);
+  const shared = [...idx.bySlotId.entries()].filter(([slotId, entries]) => entries.length > 1 && !(BORROWED.has(slotId) && entries.length === 2));
   assert.deepEqual(shared.map(([slotId]) => slotId), [], "同じ slot を複数の配置が共用している");
 });

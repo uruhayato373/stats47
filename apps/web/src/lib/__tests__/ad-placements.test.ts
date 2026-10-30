@@ -144,8 +144,11 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     expect(unlisted, '台帳の config/ads/placements.json の pages に載せる').toEqual([]);
   });
 
-  // 幅の上限 780px は本番で測った幅 (2026-10-29 /themes/labor-wages 780×280)。それより広い本文では中央に置く (2026-10-30)
-  it('箱は本番の実測のまま (本文の AdSense 幅いっぱい × 280・幅の上限 780)', () => {
-    expect(adSlotType('adsense-body').box).toEqual({ width: 'full', height: 280, maxWidth: 780 });
+  // 2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさ。幅に合わせて伸びる広告は、同日の本番の実測で
+  // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた
+  it('AdSense の枠は全て 300×250 の固定の大きさ', () => {
+    const adsense = placements.slotTypes.filter((slot) => slot.provider === 'adsense');
+    expect(adsense.length).toBeGreaterThan(0);
+    for (const slot of adsense) expect(adSlotType(slot.id).box, slot.id).toEqual({ width: 300, height: 250 });
   });
 });
