@@ -34,6 +34,7 @@
 - [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — CI が main で生成して develop へコピーすると main の遅れ分の state を巻き戻す (2026-10-04)。blob と run の headSha で判定 (findForeignTreeRestore)
 - [hand synced duplication](feedback_hand_synced_duplication.md) — 「追加時は両方を更新」のコメントで担保する二重管理は必ずドリフトする。件数/idは単一ソースから導出。2026-08-20にsitemap indexでcities1080URLが2か月未提出
 - [page semantic dedup contract](feedback_page_semantic_dedup_contract.md) — 同じ意味のUIを別部品が描画すると単体テストは両方通る。ページ合成のcanonical ownerを1つにし、feature全体のrenderer数を契約テストで固定する
+- [no feature specific components](feedback_no_feature_specific_components.md) — 専用の部品は作らない・残さない。既存の部品を 1 つだけ使い、使われない部品は knip で 0 になるまで消す (2026-10-30)
 - [mutation test passes wrongly](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む
 - [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop pushは長らく無検査で壊れが次のマージ担当に回っていた。2026-08-20にdevelop-quality-gate.yml + npm run preflightで是正
 - [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
