@@ -6,7 +6,7 @@ import {
   type SingleHouseholdsProfile,
   type FiveYearResidenceProfile,
 } from "@stats47/data-configs/theme-catalog";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
@@ -361,19 +361,20 @@ describe("取得境界と出典", () => {
       expect(screen.getByRole("status")).toBeTruthy();
     });
   }
-  it("単独世帯・居住地のChartFooterが対応原表を指す", () => {
+  // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
+  it.each([
+    ["単独世帯", () => household, /12-1表/, "0003445081"],
+    ["居住地", () => residence, /第1表/, "0003447398"],
+  ] as const)("%sのChartFooterが対応原表を指す", async (_name, snapshotOf, linkName, tableId) => {
+    const user = userEvent.setup();
     render(
       <Context>
-        <ThemePopulationPartitionClient snapshot={household} />
-        <ThemePopulationPartitionClient snapshot={residence} />
+        <ThemePopulationPartitionClient snapshot={snapshotOf()} />
       </Context>,
     );
-    expect(
-      screen.getByRole("link", { name: /12-1表/ }).getAttribute("href"),
-    ).toContain("0003445081");
-    expect(
-      screen.getByRole("link", { name: /第1表/ }).getAttribute("href"),
-    ).toContain("0003447398");
+    await user.click(screen.getByRole("button", { name: "出典・指標の定義" }));
+    const sheet = within(await screen.findByRole("dialog"));
+    expect(sheet.getByRole("link", { name: linkName }).getAttribute("href")).toContain(tableId);
   });
   it("若年章は同じ人口移動表の章へリンクする", () => {
     render(<ThemeYoungMigrationLink />);

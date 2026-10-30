@@ -443,18 +443,29 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
     expect(screen.getByRole('region', { name: '出生率の推移' })).toBeVisible();
     expect(screen.queryByText('線の傾きから変化を確認できます。')).toBeNull();
     expect(screen.getByText('2020年に系列が接続しません。')).toBeVisible();
-    expect(screen.getByRole('link', { name: '出典: 人口動態統計' })).toHaveAttribute(
+    // 出典と全 hub はチャートの下のボタン 1 つから開く Sheet にまとめる (2026-10-30)
+    expect(screen.queryByRole('link', { name: '出典: 人口動態統計' })).toBeNull();
+    await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByRole('link', { name: '出典: 人口動態統計' })).toHaveAttribute(
       'href',
       '/survey/vital-statistics'
     );
-    await user.click(screen.getByRole('button', { name: 'ランキング4件を表示' }));
-    // Base UI の Menu は開いた次の描画で項目を出すので、最初の項目は findByRole で待つ
-    expect(
-      await screen.findByRole('menuitem', { name: '指標の定義・ランキング' })
-    ).toHaveAttribute('href', '/ranking/primary');
-    expect(screen.getByRole('menuitem', { name: '第2指標の定義・ランキング' })).toBeVisible();
-    expect(screen.getByRole('menuitem', { name: '第3指標の定義・ランキング' })).toBeVisible();
-    expect(screen.getByRole('menuitem', { name: '第4指標の定義・ランキング' })).toBeVisible();
+    expect(sheet.getByRole('link', { name: '指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/primary');
+    expect(sheet.getByRole('link', { name: '第2指標の定義・ランキング' })).toBeVisible();
+    expect(sheet.getByRole('link', { name: '第3指標の定義・ランキング' })).toBeVisible();
+    expect(sheet.getByRole('link', { name: '第4指標の定義・ランキング' })).toBeVisible();
+  });
+
+  it('先頭の指標ハブもテーマの短い名前で「〇〇の定義・ランキング」にする', async () => {
+    const user = userEvent.setup();
+    renderDashboard('population-dynamics', {
+      themeConfig: { ...themeConfig('population-dynamics'), tabIndicators: [{ rankingKey: 'primary', tabLabel: '出生数' }] },
+      pageCharts: [chart],
+    });
+    await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByRole('link', { name: '出生数の定義・ランキング' })).toHaveAttribute('href', '/ranking/primary');
   });
 });
 

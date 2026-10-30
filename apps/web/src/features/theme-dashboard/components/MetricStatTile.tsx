@@ -5,10 +5,12 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 
 import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
+import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { StatTile } from '@/components/surface';
 
+import { metricSourceGroups } from '../lib/metric-source-groups';
+
 import { formatMetricValue, type MetricKpi } from './metric-kpi';
-import { MetricSourcesSheet } from './MetricSourcesSheet';
 
 
 /**
@@ -86,9 +88,8 @@ export function MetricStatTile({
       meta={meta || undefined}
       action={
         hideSources ? undefined : (
-          <MetricSourcesSheet
-            metrics={[metric]}
-            labels={{ [metric.metricKey]: sourcesLabel ?? metric.title }}
+          <SourcesSheet
+            groups={metricSourceGroups([metric], { [metric.metricKey]: sourcesLabel ?? metric.title })}
             trigger="icon"
           />
         )

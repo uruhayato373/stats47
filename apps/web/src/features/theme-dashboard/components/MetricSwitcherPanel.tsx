@@ -14,6 +14,7 @@ import { classifyUnitComparability } from '@stats47/data-configs/unit';
 
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
+import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 import { StatTileGrid } from '@/components/surface';
@@ -23,9 +24,9 @@ import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presenta
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
+import { metricSourceGroups } from '../lib/metric-source-groups';
 import { nationalSeriesName } from '../lib/metric-trend';
 
-import { MetricSourcesSheet } from './MetricSourcesSheet';
 import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
@@ -574,7 +575,7 @@ export function MetricSwitcherPanel({
               <div className="flex flex-col gap-1">
                 {annotation ? <p>{annotation}</p> : null}
                 <div className="flex justify-end">
-                  <MetricSourcesSheet metrics={metrics} labels={tabLabels} />
+                  <SourcesSheet groups={metricSourceGroups(metrics, tabLabels)} />
                 </div>
               </div>
             }

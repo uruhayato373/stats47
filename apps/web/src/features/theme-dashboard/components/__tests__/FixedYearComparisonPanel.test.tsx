@@ -50,7 +50,10 @@ describe('固定年の県別比較', () => {
     }, selectedPrefectureCode: '13000' }));
     await user.click(screen.getByRole('button', { name: '下請完成工事高' }));
     expect(screen.getByRole('row', { name: '東京都 2023年度 24 百万円' })).toBeVisible();
-    expect(screen.getByRole('link', { name: '指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/second');
+    // 出典・ランキングはボタン 1 つから開く Sheet の中 (2026-10-30)
+    await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByRole('link', { name: '指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/second');
   });
   it('短いタブ名で切り替え、棒グラフにも全県と実測ゼロを残す', async () => {
     const user = userEvent.setup();
