@@ -1,0 +1,7 @@
+{
+  "metric": "private-life-insurance-contracts-per-1000",
+  "since": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": false,
+  "snapshotScope": "ranking"
+}
