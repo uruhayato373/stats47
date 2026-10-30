@@ -34,7 +34,6 @@ Layer 3: UIミニチャート（カード内埋め込み用）
   apps/web/src/components/charts/            ← ミニチャート (数値タイルは @/components/surface の StatTile)
 
 Feature-scoped（明示的に例外認定）
-  features/blog/components/charts/           ← ブログ専用（useChartDataに依存、移動不可）
   features/ranking/components/               ← ランキング専用（AllPrefecturesChart等）
 ```
 
@@ -59,16 +58,13 @@ Feature-scoped（明示的に例外認定）
 | `HorizontalDivergingBarChart` | `D3HorizontalDivergingBarChart` | 水平正負分岐棒 |
 | `LineChart` | `D3LineChart` | 時系列折れ線 |
 | `MixedChart` | `D3MixedChart` | 複合チャート（折れ線＋棒） |
-| `PrefectureMapChart` | `D3PrefectureMapChart` | 都道府県地図チャート |
 | `PyramidChart` | `D3PyramidChart` | 人口ピラミッド |
 | `RadarChart` | `D3RadarChart` | レーダーチャート |
-| `Scatterplot` | `D3Scatterplot` | 散布図 |
 | `StackedAreaChart` | `D3StackedAreaChart` | 積み上げエリアチャート |
 | `SunburstChart` | `D3SunburstChart` | サンバーストチャート（階層内訳） |
 | `TileGridMapChart` | `D3TileGridMapChart` | タイルグリッドマップ（47都道府県） |
 | `TreemapChart` | `D3TreemapChart` | ツリーマップ |
 | `DivergingChoroplethMap` | `DivergingChoroplethMap` | 符号付き増減率コロプレス（RdBu・カスタムtooltip・凡例付き） |
-| `TimelineChoroplethMap` | `TimelineChoroplethMap` | 時系列再生UI付きコロプレス（DivergingChoroplethMapをラップ） |
 
 インポートパス: `@stats47/visualization/d3` または `@stats47/visualization/d3/<ComponentName>`
 
@@ -172,11 +168,6 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | 場所 | 理由 |
 |---|---|---|
-| `BlogBarChart` | `@/features/blog/components/charts/BlogBarChart` | `useChartData`（ブログデータ読込）に依存 |
-| `BlogLineChart` | `@/features/blog/components/charts/BlogLineChart` | 同上 |
-| `BlogChoroplethMap` | `@/features/blog/components/charts/BlogChoroplethMap` | 同上 |
-| `BlogScatterPlot` | `@/features/blog/components/charts/BlogScatterPlot` | 同上 |
-| `BlogStatsHighlight` | `@/features/blog/components/charts/BlogStatsHighlight` | 同上 |
 | `RankingAllPrefecturesChart` | `@/features/ranking/components/RankingBarChart` | ランキングページ専用 |
 | `RankingBoxplotChart` | `@/features/ranking/components/RankingBoxplotChart` | 同上 |
 | `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
@@ -186,7 +177,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
-> 時系列再生UIが必要な場合は **`TimelineChoroplethMap`** でラップする。feature 内に独自のコロプレス実装を追加してはならない。
+> feature 内に独自のコロプレス実装を追加してはならない (時系列再生付きの `TimelineChoroplethMap` は使い手が無く 2026-10-30 に削除した)。
 > feature 内の `*ChoroplethSection` / `*ChoroplethMap` は「データ取得・レイアウト配置」のみを担い、描画は共有コンポーネントに委譲する。
 
 ---

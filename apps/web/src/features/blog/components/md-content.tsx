@@ -41,7 +41,6 @@ import { toCalloutType } from "./callout-config";
 import { preprocessCallouts } from "./md-preprocessor";
 import { RankingLinkCard } from "./RankingLinkCard";
 import { ResponsiveArticleImage } from "./ResponsiveArticleImage";
-import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
 /** 見出しの children から純粋なテキストを抽出 (TOC anchor 用) */
 function extractTextFromChildren(children: ReactNode): string {
@@ -240,7 +239,7 @@ function makeMdComponents(
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "ranking-table" || c.tagName === "site-link"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 // Zenn 準拠: 行間 1.9 / 連続段落間 24px (p+p{margin-top:1.5em} の移植)
@@ -402,22 +401,6 @@ function makeMdComponents(
             </Link>
         ),
 
-        "ranking-table": ({ "ranking-key": rankingKey, title, "value-label": valueLabel, limit, order, paginated, "display-unit": displayUnit }: ComponentProps & { "ranking-key"?: string; "value-label"?: string; "display-unit"?: string }) => {
-            if (!rankingKey) return null;
-            return (
-                <div className="my-6 not-prose">
-                    <MarkdownRankingTable
-                        rankingKey={rankingKey as string}
-                        title={title as string | undefined}
-                        valueLabel={valueLabel as string | undefined}
-                        limit={limit != null ? Number(limit) : undefined}
-                        order={order as "top" | "bottom" | undefined}
-                        paginated={paginated === "true"}
-                        displayUnit={displayUnit as string | undefined}
-                    />
-                </div>
-            );
-        },
 
         "site-link": ({ category }: ComponentProps & { category?: string }) => {
             if (!category) return null;

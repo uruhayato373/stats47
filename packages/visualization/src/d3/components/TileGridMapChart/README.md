@@ -124,17 +124,6 @@ ColorScaleOptions (sequential | diverging | categorical)
 Color Mapper Function (areaCode: string) => string
 ```
 
-## PrefectureMapChartとの違い
-
-| 項目 | PrefectureMapChart | PrefectureTileGridChartChart |
-|------|-------------------|------------------|
-| 表示形式 | 実際の地理的形状 | 格子状の模式図 |
-| 地理データ | TopoJSON（外部ファイル） | 定義済みレイアウト |
-| クリックイベント | なし | あり |
-| 選択状態 | なし | あり |
-| ツールチップ | なし | あり |
-| アニメーション | なし | あり |
-
 ## 関連ファイル
 
 - [index.tsx](./index.tsx) - メインコンポーネント

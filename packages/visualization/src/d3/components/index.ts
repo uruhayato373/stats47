@@ -7,10 +7,8 @@
 // 地図コンポーネント
 export { CityMapChart } from "./CityMapChart";
 export type { CityMapChartProps } from "./CityMapChart";
-export { PrefectureMapChart } from "./PrefectureMapChart";
 export { TileGridMap } from "./TileGridMapChart";
 export * from "./DivergingChoroplethMap";
-export * from "./TimelineChoroplethMap";
 
 // チャートコンポーネント
 export * from "./shared/D3ChartLegend";
@@ -26,7 +24,6 @@ export * from "./LineChart";
 export * from "./MixedChart";
 export * from "./PyramidChart";
 export * from "./RadarChart";
-export * from "./Scatterplot";
 export * from "./StackedAreaChart";
 export * from "./SunburstChart";
 export * from "./TreemapChart";
