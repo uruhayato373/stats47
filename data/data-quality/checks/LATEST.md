@@ -1,19 +1,19 @@
 # データ品質キュー (LATEST)
 
-- 生成: 2026-10-26T03:01:55.427Z (基準日 2026-10-26)
-- 対象: active metric 3018 件 (配信年あり 2459 件)
-- 入力: ranking-integrity 2026-10-26T02:57:14.172Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-10-23T01:12:07.666Z) GSC impressions
+- 生成: 2026-10-30T23:11:32.584Z (基準日 2026-10-30)
+- 対象: active metric 3031 件 (配信年あり 2459 件)
+- 入力: ranking-integrity 2026-10-30T23:04:05.166Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-10-23T01:12:07.666Z) GSC impressions
 - 判定: 1=確認済み時点統計の yearFormat 誤り / 2・3=配信年から推定した周期遅れ (公式最新公表は未照会) / 4=観測1〜2年かつ需要未観測または≤10
 
 ## サマリ
 
-- 1 誤り: 0 / 2 更新: 1049 / 3 調査終了候補: 132 / 4 noindex候補: 146 / 処置なし: 1691
-- 年表記: 誤り 0 / 正しい 464 / 判定不能 (公式表記未確認の調査) 2554
+- 1 誤り: 0 / 2 更新: 1050 / 3 調査終了候補: 132 / 4 noindex候補: 137 / 処置なし: 1712
+- 年表記: 誤り 0 / 正しい 464 / 判定不能 (公式表記未確認の調査) 2567
 
 ## 1. 誤り (0 件・需要順 上位 15)
 
 
-## 2. 更新 (1049 件・需要順 上位 15)
+## 2. 更新 (1050 件・需要順 上位 15)
 
 - `general-hospital-count` — GSC表示 16433 / 最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)
 - `avg-height-high-school-2nd-male` — GSC表示 7547 / 最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)
@@ -34,7 +34,7 @@
 ## 3. 調査終了候補 (132 件・需要順 上位 15)
 
 - `fishing-port-count-by-type` — GSC表示 257 / 最新 2003 年で 21 周期遅れ。調査終了か要確認 (推定)
-- `tertiary-industry-establishment-ratio-census` — GSC表示 196 / 最新 2006 年で 3 周期遅れ。調査終了か要確認 (推定)
+- `tertiary-industry-establishment-ratio-census` — GSC表示 196 / 最新 2006 年で 6 周期遅れ。調査終了か要確認 (推定)
 - `pc-ownership-multi-person-households-per-1000` — GSC表示 165 / 最新 2014 年で 10 周期遅れ。調査終了か要確認 (推定)
 - `annual-minimum-relative-humidity` — GSC表示 152 / 最新 2007 年で 17 周期遅れ。調査終了か要確認 (推定)
 - `tablet-ownership-multi-person-households-per-1000` — GSC表示 134 / 最新 2014 年で 10 周期遅れ。調査終了か要確認 (推定)
@@ -49,7 +49,7 @@
 - `core-agricultural-workers` — GSC表示 31 / 最新 2014 年で 10 周期遅れ。調査終了か要確認 (推定)
 - `national-pension-full-exemption-rate` — GSC表示 31 / 最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)
 
-## 4. noindex候補 (146 件・需要順 上位 15)
+## 4. noindex候補 (137 件・需要順 上位 15)
 
 - `ambulance-transported-deaths` — GSC表示 未観測 / 観測 1 年・GSC 表示 未観測
 - `ambulance-transported-mild` — GSC表示 未観測 / 観測 1 年・GSC 表示 未観測

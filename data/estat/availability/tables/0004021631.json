@@ -1,0 +1,29 @@
+{
+  "statsDataId": "0004021631",
+  "statName": "住宅・土地統計調査",
+  "title": "腐朽･破損の有無 空き家の種類(4区分)、腐朽・破損の有無(2区分)、建て方(2区分)、構造(2区分)別空き家数－全国、都道府県、市区町村",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat02": "0",
+        "cdCat03": "0",
+        "cdCat04": "0",
+        "cdTab": "03-2023",
+        "axisRatio": {
+          "axis": "cat01",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "level": "city",
+      "fetchedAt": "2026-10-30T23:21:39.891Z",
+      "years": { "2023": 1225 },
+      "rawRows": 2566
+    }
+  ]
+}

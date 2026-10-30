@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-26T03:22:13.081Z",
+  "generatedAt": "2026-10-30T22:43:21.696Z",
   "site": "https://stats47.jp",
-  "articles": 609,
-  "totalLinks": 3534,
+  "articles": 765,
+  "totalLinks": 4185,
   "absoluteLinks": 126,
-  "uniqueLinks": 994,
+  "uniqueLinks": 1119,
   "byType": {
     "areas": {
       "total": 50,
@@ -22,9 +22,13 @@
       "total": 7,
       "broken": 0
     },
+    "municipalities": {
+      "total": 2,
+      "broken": 0
+    },
     "ranking": {
-      "total": 711,
-      "broken": 3
+      "total": 834,
+      "broken": 0
     },
     "survey": {
       "total": 1,
@@ -35,36 +39,5 @@
       "broken": 0
     }
   },
-  "broken": [
-    {
-      "href": "/ranking/elderly-population-ratio",
-      "status": 410,
-      "title": "",
-      "ok": false,
-      "reason": "HTTP 410",
-      "referencedBy": [
-        "half-population-elderly-municipalities"
-      ]
-    },
-    {
-      "href": "/ranking/foreign-population-per-100k",
-      "status": 410,
-      "title": "",
-      "ok": false,
-      "reason": "HTTP 410",
-      "referencedBy": [
-        "foreign-resident-five-percent-municipalities"
-      ]
-    },
-    {
-      "href": "/ranking/population-density-habitable",
-      "status": 410,
-      "title": "",
-      "ok": false,
-      "reason": "HTTP 410",
-      "referencedBy": [
-        "population-density-urbanization"
-      ]
-    }
-  ]
+  "broken": []
 }

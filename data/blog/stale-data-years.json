@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-26T03:20:35.399Z",
-  "published": 609,
-  "withRankingRefs": 573,
+  "generatedAt": "2026-10-30T23:31:51.598Z",
+  "published": 765,
+  "withRankingRefs": 729,
   "stale": [
     {
       "slug": "agriculture-output-employment-productivity-gap",
@@ -166,6 +166,17 @@
       ]
     },
     {
+      "slug": "annual-sales-amount-prefecture-gap",
+      "title": "商業の販売額で東京都が突出するのはなぜか？",
+      "stale": [
+        {
+          "rankingKey": "annual-sales-amount",
+          "articleYear": "2022",
+          "latestYear": "2023"
+        }
+      ]
+    },
+    {
       "slug": "bonito-catch-prefecture",
       "title": "カツオ日本一が静岡と宮城で割れる理由",
       "stale": [
@@ -173,6 +184,17 @@
           "rankingKey": "bonito-consumption-quantity",
           "articleYear": "2023",
           "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "cc-estat-16-commerce-bubble",
+      "title": "商業販売額バブルチャート｜人口で重み付けする Claude Code",
+      "stale": [
+        {
+          "rankingKey": "annual-sales-amount",
+          "articleYear": "2022",
+          "latestYear": "2023"
         }
       ]
     },

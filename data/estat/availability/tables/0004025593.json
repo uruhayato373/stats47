@@ -1,0 +1,29 @@
+{
+  "statsDataId": "0004025593",
+  "statName": "住宅・土地統計調査",
+  "title": "住環境 世帯の型(14区分)、最寄りの交通機関までの距離(12区分)別主世帯数－全国、都道府県、市区町村",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "00",
+        "cdTab": "13-2023",
+        "axisRatio": {
+          "axis": "cat02",
+          "numeratorCodes": [
+            "1",
+            "2",
+            "3"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "level": "city",
+      "fetchedAt": "2026-10-30T23:21:57.647Z",
+      "years": { "2023": 1120 },
+      "rawRows": 5132
+    }
+  ]
+}

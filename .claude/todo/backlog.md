@@ -371,6 +371,30 @@ updated: 2026-10-19
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CRITIC-PATTERN-RELATED-LINK] critic の指摘「関連記事の紹介」が 3 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「関連記事の紹介」(`related-link`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-10-28 other-fresh-fish-consumption-quantity-prefecture-gap: 「島根県のデータを見ると、魚介に関わる他の指標でも特徴が見られるかもしれません」は、内容の確認なしに誘導する書き方で、読者への情報価値がありません。
+  - 2026-10-28 hobby-participation-rate-instrument-prefecture-gap: 東京都・神奈川県のデータへのリンク段落は「見比べると背景が見えてくる」と一般論で促すだけで、この指標固有の読みを与えていない。
+  - 2026-10-28 cooking-oil-consumption-quantity-prefecture-gap: マヨネーズやドレッシングとの比較を促す段落は、書き手が他指標を使えないため、この記事では答えが出ません。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `related-link` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-STRUCTURE] critic の指摘「構成・冗長」が 97 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「構成・冗長」(`structure`) の BLOCK/MAJOR を 97 本の記事で 112 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-10-08 cc-estat-09-radar-prefecture: 62〜64、268〜277、423〜425 行で、同じ 6 軸の数値と結論が 3 回出てきます（図カード、直後の段落、Step 2 の箇条書きと段落）。
+  - 2026-10-28 average-height-primary-school-fifth-grade-male-vs-other: 上位・下位の2節は、図に載っている県名と数値を並べ直した文が節の大半を占めています。
+  - 2026-10-28 bacon-consumption-expenditure-prefecture-gap: 「関連品目との対比」の節は、ハムやソーセージのデータがなく、「あれば〜と想像できる」という仮定の話が中心です。
+  - 2026-10-28 cocoa-consumption-expenditure-prefecture-gap: 「関連する品目との対比で考える」は、本文自身が数値比較をしないと断っており、読者に新しい情報を渡していません。
+  - 2026-10-28 cocoa-consumption-expenditure-prefecture-gap: 「上位県の個別の姿」と「下位県の傾向」は、前半で示した順位と「近畿・九州で差が大きい」という指摘の繰り返しです。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `structure` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
 ### [UI-FIX-PREFECTURE-LIST-20261031] UI 是正: prefecture-list の週次 UI 検査の指摘 4 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt] [起票:2026-10-31] [領域:サイト]

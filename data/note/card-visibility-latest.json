@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T03:38:19.198Z",
+  "generatedAt": "2026-10-30T23:30:19.894Z",
   "account": "stats47",
   "summary": {
     "catalogArticles": 428,
@@ -14,7 +14,10 @@
     "unverifiableCards": 0,
     "missingCards": 0,
     "footerWithoutCards": 0,
-    "spacingIssues": 175
+    "spacingIssues": 175,
+    "newIssues": 111,
+    "continuedIssues": 64,
+    "resolvedIssues": 111
   },
   "articles": [
     {
@@ -67,8 +70,8 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/geo/data-catalog",
-          "key": "embde310d2337fd"
+          "url": "https://stats47.jp/geo/data-catalog?s47_ogp=048ec186469d",
+          "key": "emb70e5e99d1057"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -118,13 +121,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/md6aa26278129",
-          "key": "emb6ee52a6bed17"
+          "url": "https://note.com/stats47/m/md6aa26278129?s47_ogp=ef86441e0d01",
+          "key": "emb3e78594f9c23"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-09/from/note/ne6c7d221803a",
-          "key": "emb3424a43acd38"
+          "url": "https://note.com/stats47/n/n2ced199ed715",
+          "key": "emb15873b99abd8"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -146,13 +149,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/me574f67ac47f",
-          "key": "emba9eabc0c9991"
+          "url": "https://note.com/stats47/m/me574f67ac47f?s47_ogp=e03f844a06c6",
+          "key": "embbae490c80898"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-07/from/note/n97ddfadff36a",
-          "key": "embf48e6d5d4a89"
+          "url": "https://note.com/stats47/n/n323af74c09cc",
+          "key": "emb8762c02bb6ab"
         }
       ]
     },
@@ -169,13 +172,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m2604e003aac4",
-          "key": "emb9c78c4471979"
+          "url": "https://note.com/stats47/m/m2604e003aac4?s47_ogp=205976fb901b",
+          "key": "emb65c270b7acbe"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n76446d252957",
-          "key": "embebf02f22913e"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb0ef92a75d21b"
         }
       ]
     },
@@ -192,13 +195,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m2604e003aac4",
-          "key": "embdb3c3eafd914"
+          "url": "https://note.com/stats47/m/m2604e003aac4?s47_ogp=205976fb901b",
+          "key": "emb55bbef39d010"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n89f8035eb53d",
-          "key": "embf09b755b56d4"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb0f21fa00ba40"
         }
       ]
     },
@@ -215,13 +218,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m2604e003aac4",
-          "key": "embf6537d94df7d"
+          "url": "https://note.com/stats47/m/m2604e003aac4?s47_ogp=205976fb901b",
+          "key": "emb5fbbf81ce400"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/nbdbde1672cc0",
-          "key": "emb89e428f2668d"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb501df3fd373f"
         }
       ]
     },
@@ -238,13 +241,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "key": "emb97d0e7395e1c"
+          "url": "https://note.com/stats47/m/meacbafeb15a1?s47_ogp=832674bd406a",
+          "key": "emb6c94b8218676"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/n7a494830e01d",
-          "key": "emb9c8938c6401d"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb750ce4af706e"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -266,8 +269,8 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mc659ce45528f",
-          "key": "emb75f33e4a9139"
+          "url": "https://note.com/stats47/m/mc659ce45528f?s47_ogp=31ca1967d303",
+          "key": "embc0b01178b8ea"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -276,8 +279,8 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-08/from/note/n5b3dbb6c7cef",
-          "key": "emb4bef1288f65e"
+          "url": "https://note.com/stats47/n/nf25cd9ae21e6",
+          "key": "emb1885510e4bca"
         }
       ]
     },
@@ -294,13 +297,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "key": "embb2db22265f6d"
+          "url": "https://note.com/stats47/m/meacbafeb15a1?s47_ogp=832674bd406a",
+          "key": "emb4436acceb4ca"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/nd93084c0cb0c",
-          "key": "embe9c3fa08805b"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "embf3fad96d65bc"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -332,13 +335,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m83c357247e0c",
-          "key": "embb2596e450599"
+          "url": "https://note.com/stats47/m/m83c357247e0c?s47_ogp=fb8cc66d86e0",
+          "key": "emb449f23076eab"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-04/from/note/ncd0aea7cd435",
-          "key": "embd24d03cd114f"
+          "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+          "key": "emb3af5777329b4"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -360,13 +363,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m4709a61adf77",
-          "key": "emb322f9e9e1694"
+          "url": "https://note.com/stats47/m/m4709a61adf77?s47_ogp=ed54a2a84ae1",
+          "key": "embbed232815490"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-02/from/note/n2a465fecbdec",
-          "key": "embce9a4fdc4182"
+          "url": "https://note.com/stats47/n/n46d68c153502",
+          "key": "emb28ae70f5a1af"
         }
       ]
     },
@@ -383,13 +386,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m8c84e9e6e4bd",
-          "key": "emb7ccda9ed7403"
+          "url": "https://note.com/stats47/m/m8c84e9e6e4bd?s47_ogp=1d15373a4056",
+          "key": "embc170a7609868"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-09/from/note/nf28da95897e0",
-          "key": "emb331d1308c652"
+          "url": "https://note.com/stats47/n/n2ced199ed715",
+          "key": "embd18ef6f754e6"
         }
       ]
     },
@@ -406,13 +409,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m87e6a79d821b",
-          "key": "embe880b237d568"
+          "url": "https://note.com/stats47/m/m87e6a79d821b?s47_ogp=f510f377cb6b",
+          "key": "emb185e3e3cbf83"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-07/from/note/na895280512fc",
-          "key": "embb14e1aaf2299"
+          "url": "https://note.com/stats47/n/n7a5f6df6f5ac",
+          "key": "embf12dd23320f5"
         }
       ]
     },
@@ -429,13 +432,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/meacbafeb15a1",
-          "key": "emb9e6aaee8da92"
+          "url": "https://note.com/stats47/m/meacbafeb15a1?s47_ogp=832674bd406a",
+          "key": "emb681281829cbe"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/nf4b16d26f6e8",
-          "key": "emb30943b722a6a"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb22d05bdd7022"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -462,13 +465,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/me574f67ac47f",
-          "key": "emb3a65546131ad"
+          "url": "https://note.com/stats47/m/me574f67ac47f?s47_ogp=e03f844a06c6",
+          "key": "emb7d5e389c7555"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-07/from/note/n91e96edf3950",
-          "key": "embb8d6b943754a"
+          "url": "https://note.com/stats47/n/n323af74c09cc",
+          "key": "emb48cdf77388dd"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -648,8 +651,8 @@
     {
       "key": "paid-n2ed31d721531",
       "noteUrl": "https://note.com/stats47/n/n2ed31d721531",
-      "storedCards": 7,
-      "renderedCards": 7,
+      "storedCards": 9,
+      "renderedCards": 9,
       "issues": []
     },
     {
@@ -690,8 +693,8 @@
     {
       "key": "paid-n67de9d45c426",
       "noteUrl": "https://note.com/stats47/n/n67de9d45c426",
-      "storedCards": 3,
-      "renderedCards": 3,
+      "storedCards": 4,
+      "renderedCards": 4,
       "issues": []
     },
     {
@@ -823,8 +826,8 @@
     {
       "key": "paid-nba8bf272cc2b",
       "noteUrl": "https://note.com/stats47/n/nba8bf272cc2b",
-      "storedCards": 3,
-      "renderedCards": 3,
+      "storedCards": 4,
+      "renderedCards": 4,
       "issues": []
     },
     {
@@ -926,8 +929,8 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "embe3ea5b19f7a2"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embab7fdf6cd45b"
         }
       ]
     },
@@ -944,8 +947,8 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-07/from/note/n023501038bd5",
-          "key": "emba221b9211481"
+          "url": "https://note.com/stats47/n/n323af74c09cc",
+          "key": "emb04c6d2cc482c"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -967,13 +970,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb0d7909d03016"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb4d8d0e4c6c31"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n026bb22ad4eb",
-          "key": "embcff840a86696"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb440c581209c9"
         }
       ]
     },
@@ -990,21 +993,21 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m2604e003aac4",
-          "key": "emb83d7df4d9c61"
+          "url": "https://note.com/stats47/m/m2604e003aac4?s47_ogp=205976fb901b",
+          "key": "embc4532ecc6bb1"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-01/from/note/n03844512d58a",
-          "key": "embe16e030cf18c"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "embee8e28c3943a"
         }
       ]
     },
     {
       "key": "recovered-n03e45e40d3a7",
       "noteUrl": "https://note.com/stats47/n/n03e45e40d3a7",
-      "storedCards": 7,
-      "renderedCards": 7,
+      "storedCards": 6,
+      "renderedCards": 6,
       "issues": []
     },
     {
@@ -1020,13 +1023,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb29be3dffa728"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embd4a3441fc9b7"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n04c2737daf2c",
-          "key": "emb0d784b9dc373"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb4531b04059e5"
         }
       ]
     },
@@ -1038,18 +1041,18 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/n/nded2d34fc978",
-          "key": "embd347c62d30cb"
+          "url": "https://note.com/stats47/n/n20299fc77b17",
+          "key": "emb1d78ca3b7f66"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m30bb1cee28f7",
-          "key": "emb42ded03779bb"
+          "url": "https://note.com/stats47/m/m30bb1cee28f7?s47_ogp=406db48f09a6",
+          "key": "emb6e6e0ab8445a"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-06/from/note/n04d95ae14bc1",
-          "key": "emb653bf6f822ef"
+          "url": "https://note.com/stats47/n/n5da8a99b3506",
+          "key": "emb1e829c36c3b2"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1076,13 +1079,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb70cb99092180"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb5716aacb0562"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n0654ddf27920",
-          "key": "embf49b5b9694da"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb34241ea97d9f"
         }
       ]
     },
@@ -1099,13 +1102,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb58ca826e5ea1"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embadc34b664b8b"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n08eb33492a93",
-          "key": "emb8f9580fc83bc"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb834f0a06d562"
         }
       ]
     },
@@ -1122,8 +1125,8 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb391d42a33810"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embfa80d291b627"
         }
       ]
     },
@@ -1140,18 +1143,18 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m83c357247e0c",
-          "key": "emb0326ed6fe72a"
+          "url": "https://note.com/stats47/m/m83c357247e0c?s47_ogp=fb8cc66d86e0",
+          "key": "emb4d117261195b"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "embdf0490629437"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embfd800c629997"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-04/from/note/n0e8fd0068d4e",
-          "key": "emb0082a33d9535"
+          "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+          "key": "embfa42689e3ab9"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1180,13 +1183,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "embf5d76ea1d1c5"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embf138ad74b3a9"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n14f716fcd76d",
-          "key": "embcc3ad5e7824a"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb5bcd704e1034"
         }
       ]
     },
@@ -1203,18 +1206,18 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m83c357247e0c",
-          "key": "emb325492fc2e6c"
+          "url": "https://note.com/stats47/m/m83c357247e0c?s47_ogp=fb8cc66d86e0",
+          "key": "emb928509537a64"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb9d4b58ae27d9"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embd57f118def0c"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-04/from/note/n15ee88b5169d",
-          "key": "embd7982c579500"
+          "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+          "key": "embd9b71f24832e"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1236,13 +1239,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb14f5c380c6ab"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb2d0cb903f3cb"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n1649910097fb",
-          "key": "emb5fafc60d0979"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb2d8d0377f6da"
         }
       ]
     },
@@ -1254,18 +1257,18 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/n/n2ed31d721531",
-          "key": "emb01545ad09c4c"
+          "url": "https://note.com/stats47/n/n20299fc77b17",
+          "key": "emb0715a70bcd40"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m30bb1cee28f7",
-          "key": "emb55e135d2fa0d"
+          "url": "https://note.com/stats47/m/m30bb1cee28f7?s47_ogp=406db48f09a6",
+          "key": "embbecf8426fade"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-06/from/note/n16950238dfd8",
-          "key": "emb7ed9859dda6d"
+          "url": "https://note.com/stats47/n/n5da8a99b3506",
+          "key": "embaa689ff4ed4c"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1292,13 +1295,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/m83c357247e0c",
-          "key": "emb51f5c491cb23"
+          "url": "https://note.com/stats47/m/m83c357247e0c?s47_ogp=fb8cc66d86e0",
+          "key": "embf6d6da20521f"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-04/from/note/n1b943c7d414d",
-          "key": "emb9be6a85beaf0"
+          "url": "https://note.com/stats47/n/nbdad7c99d4b5",
+          "key": "emb35518875ce4a"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1325,13 +1328,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb9e4089948d3d"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb27a02ee9fc91"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb663cfa6e5737"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "emb44905d3f0a5d"
         }
       ]
     },
@@ -1355,13 +1358,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/md6aa26278129",
-          "key": "emb74b29ccf5da7"
+          "url": "https://note.com/stats47/m/md6aa26278129?s47_ogp=ef86441e0d01",
+          "key": "emb1998770e128d"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-09/from/note/n21cb13582fe6",
-          "key": "emb974cff2a9b2d"
+          "url": "https://note.com/stats47/n/n2ced199ed715",
+          "key": "emb9a57dfc6106f"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1393,18 +1396,18 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb4d25e8c9a74b"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb3e4f86987030"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "embd1825f08a651"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "emb0001b272f07a"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n24b5000d587f",
-          "key": "emb406357d85044"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "embecc72ff3e05f"
         }
       ]
     },
@@ -1421,13 +1424,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb6c77c7a06ec3"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb4e9d2f376d86"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n250b7aab145f",
-          "key": "embc290393227ce"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb08daafbe8886"
         }
       ]
     },
@@ -1444,13 +1447,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb022e67f740ab"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embb98738af18d0"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n279776fbbbb1",
-          "key": "emb2d1ac7682183"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "embc211edb545ad"
         }
       ]
     },
@@ -1467,8 +1470,8 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n27cb4242cb67",
-          "key": "emb464df5d3d212"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "embfb1a8f5aeb0d"
         }
       ]
     },
@@ -1485,13 +1488,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb3219534b8580"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb8fa6b2764bbe"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n285e0ba282d0",
-          "key": "embda375c45822f"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb5018a0ecb0fe"
         }
       ]
     },
@@ -1508,13 +1511,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb64e006920da7"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "embadc84b7b4030"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n28943c36410a",
-          "key": "emb234f60a23a38"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "embdc1f5f25f679"
         }
       ]
     },
@@ -1531,18 +1534,18 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "emb49e1b505b91d"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb07013c0b31ad"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "embcc7cd9400be3"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "emb8c1f50ad8391"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n2b4298e9ac07",
-          "key": "embf6d96d1e0c52"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb230df8e77bec"
         }
       ]
     },
@@ -1559,13 +1562,13 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://note.com/stats47/m/mef7c42c1c86c",
-          "key": "embd2abefc7161a"
+          "url": "https://note.com/stats47/m/mef7c42c1c86c?s47_ogp=dbf37ba2d5c2",
+          "key": "emb7b76fb68b1a0"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/data-p-06/from/note/n361a963fb079",
-          "key": "emb9107a8cd5fd7"
+          "url": "https://note.com/stats47/n/n9f0be14ecc0c",
+          "key": "emb8706a24ccf64"
         }
       ]
     },
@@ -1603,8 +1606,8 @@
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/products/kindle-k-s1-03/from/note/n3a4efa70c02a",
-          "key": "emb765ce21bba26"
+          "url": "https://note.com/stats47/n/ne47eb45f8a15",
+          "key": "emb260ec575aa8f"
         },
         {
           "code": "card_extra_blank_paragraph",
@@ -1736,33 +1739,33 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/university-count-per-100k",
-          "key": "embe56f93abd015"
+          "url": "https://stats47.jp/ranking/university-count-per-100k?s47_ogp=c43c727ba119",
+          "key": "embb51d9a50617f"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/university-capacity-index",
-          "key": "emb451d05fefa3b"
+          "url": "https://stats47.jp/ranking/university-capacity-index?s47_ogp=1612505a6a54",
+          "key": "emb71a6df733b91"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/high-school-advancement-rate",
-          "key": "emb18dfd15e9ff6"
+          "url": "https://stats47.jp/ranking/high-school-advancement-rate?s47_ogp=bb20a3f270e5",
+          "key": "embec77b61d9d76"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio",
-          "key": "embfa2354dc7f56"
+          "url": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio?s47_ogp=dde741bb1ed6",
+          "key": "emb865dbbeb119d"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/blog/university-advancement-capacity",
-          "key": "embd76faef2485b"
+          "url": "https://stats47.jp/blog/university-advancement-capacity?s47_ogp=6f1e3e45b8b8",
+          "key": "emb6a80c0ba7ad0"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb9f6001eb5fb5"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "emb93c1f47be654"
         }
       ]
     },
@@ -1837,33 +1840,33 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/maximum-temperature",
-          "key": "embda1f38239262"
+          "url": "https://stats47.jp/ranking/maximum-temperature?s47_ogp=2f9c30359043",
+          "key": "emb98cef5b16205"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/average-temperature",
-          "key": "emb60a3bcbf2c98"
+          "url": "https://stats47.jp/ranking/average-temperature?s47_ogp=575134f31dc0",
+          "key": "emb3fbc079343c8"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/lowest-temperature",
-          "key": "emb60636a011ae1"
+          "url": "https://stats47.jp/ranking/lowest-temperature?s47_ogp=25e7fdec2d9f",
+          "key": "emb65cec3c1eadd"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/annual-sunshine-duration",
-          "key": "emb0ad3936428a8"
+          "url": "https://stats47.jp/ranking/annual-sunshine-duration?s47_ogp=8d59932b36d9",
+          "key": "emb93559bddcd44"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/blog/temperature-extremes-map",
-          "key": "emb815078675306"
+          "url": "https://stats47.jp/blog/temperature-extremes-map?s47_ogp=6df2ba4788fd",
+          "key": "emb8a5afb404206"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb2de1490e8921"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embcfdf63a7112b"
         }
       ]
     },
@@ -2029,33 +2032,33 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/maximum-temperature",
-          "key": "embcb2129b97ccf"
+          "url": "https://stats47.jp/ranking/maximum-temperature?s47_ogp=2f9c30359043",
+          "key": "emb822310cd6a87"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/average-temperature",
-          "key": "embbdd3c7f6f349"
+          "url": "https://stats47.jp/ranking/average-temperature?s47_ogp=575134f31dc0",
+          "key": "emb768ab7b4a38e"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/lowest-temperature",
-          "key": "embb4f3455c7ad3"
+          "url": "https://stats47.jp/ranking/lowest-temperature?s47_ogp=25e7fdec2d9f",
+          "key": "emb3049eb5d745e"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/annual-sunshine-duration",
-          "key": "emb2d97b093b6f1"
+          "url": "https://stats47.jp/ranking/annual-sunshine-duration?s47_ogp=8d59932b36d9",
+          "key": "emb506331301866"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/blog/temperature-extremes-map",
-          "key": "emb7aae8b327464"
+          "url": "https://stats47.jp/blog/temperature-extremes-map?s47_ogp=6df2ba4788fd",
+          "key": "emb7e78ca8100c1"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb06212dc14589"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "emba1fdc287b661"
         }
       ]
     },
@@ -2123,28 +2126,28 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/population-density-per-km2-total-area",
-          "key": "emba497da24c641"
+          "url": "https://stats47.jp/ranking/population-density-per-km2-total-area?s47_ogp=30e50e16037e",
+          "key": "emb2aa2fb9ca5ad"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/total-population",
-          "key": "emb38f8fac09fa5"
+          "url": "https://stats47.jp/ranking/total-population?s47_ogp=dcfb17b31a1b",
+          "key": "embe70e3c96eb2f"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/total-fertility-rate",
-          "key": "emb2642ad314b48"
+          "url": "https://stats47.jp/ranking/total-fertility-rate?s47_ogp=ddf821261991",
+          "key": "embf3733beff5a1"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/blog/population-density-urbanization",
-          "key": "emb05818feb748f"
+          "url": "https://stats47.jp/blog/population-density-urbanization?s47_ogp=7da95dd76c8a",
+          "key": "emb0aedd683db10"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "emb03f65458ada4"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embf9e97ae11856"
         }
       ]
     },
@@ -2247,33 +2250,33 @@
       "issues": [
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/university-count-per-100k",
-          "key": "emb1417b51629c6"
+          "url": "https://stats47.jp/ranking/university-count-per-100k?s47_ogp=c43c727ba119",
+          "key": "emb761ef9f06401"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/university-capacity-index",
-          "key": "emb5a2b6d6744da"
+          "url": "https://stats47.jp/ranking/university-capacity-index?s47_ogp=1612505a6a54",
+          "key": "emb991e58ec3951"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/high-school-advancement-rate",
-          "key": "emb833de29549e7"
+          "url": "https://stats47.jp/ranking/high-school-advancement-rate?s47_ogp=bb20a3f270e5",
+          "key": "emb07b8375f6e09"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio",
-          "key": "emb3e5ed0cc2c69"
+          "url": "https://stats47.jp/ranking/final-education-university-graduate-school-ratio?s47_ogp=dde741bb1ed6",
+          "key": "emb23b69cf919d8"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/blog/university-advancement-capacity",
-          "key": "emb3bda69d59ab5"
+          "url": "https://stats47.jp/blog/university-advancement-capacity?s47_ogp=6f1e3e45b8b8",
+          "key": "emb1f66473e9913"
         },
         {
           "code": "card_extra_blank_paragraph",
-          "url": "https://stats47.jp/",
-          "key": "embfed556029deb"
+          "url": "https://stats47.jp/?s47_ogp=2f4893b7ea2c",
+          "key": "embeff564e28f2c"
         }
       ]
     },
@@ -3223,687 +3226,687 @@
     {
       "key": "b-ref-inc-a05",
       "noteUrl": "https://note.com/stats47/n/nbaf2ff8914a3",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-inc-a06",
       "noteUrl": "https://note.com/stats47/n/nede8ff7a9eaa",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-inc-a55",
       "noteUrl": "https://note.com/stats47/n/ne243cd01a29a",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-gis-a33",
       "noteUrl": "https://note.com/stats47/n/n835484ded3ef",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a01-04",
       "noteUrl": "https://note.com/stats47/n/n324be1cc99a6",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a04-03",
       "noteUrl": "https://note.com/stats47/n/n7687e091941c",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a05-06",
       "noteUrl": "https://note.com/stats47/n/n25b0a46485dc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-mh-a04",
       "noteUrl": "https://note.com/stats47/n/n9358aa3d39f1",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-mh-a07",
       "noteUrl": "https://note.com/stats47/n/n13ec75728be3",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-mh-a08",
       "noteUrl": "https://note.com/stats47/n/n105ed996a3a3",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-mh-a09",
       "noteUrl": "https://note.com/stats47/n/n194f4e88b9b9",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-mh-a10",
       "noteUrl": "https://note.com/stats47/n/n6004a486c658",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a03",
       "noteUrl": "https://note.com/stats47/n/na31526b66ac4",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a04",
       "noteUrl": "https://note.com/stats47/n/nbd056e7589d0",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a05",
       "noteUrl": "https://note.com/stats47/n/n461e0a05a314",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a06",
       "noteUrl": "https://note.com/stats47/n/nc4fb51684d49",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a07",
       "noteUrl": "https://note.com/stats47/n/nb43e69201497",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a08",
       "noteUrl": "https://note.com/stats47/n/n2a1a5b93cacb",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a09",
       "noteUrl": "https://note.com/stats47/n/n56515e90282e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a11",
       "noteUrl": "https://note.com/stats47/n/nbc4bbe4ef1d8",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a13",
       "noteUrl": "https://note.com/stats47/n/n5c3b0dfd46cc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a15",
       "noteUrl": "https://note.com/stats47/n/n4c5a416b43be",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a17",
       "noteUrl": "https://note.com/stats47/n/nb24b2deeb25d",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a19",
       "noteUrl": "https://note.com/stats47/n/n2d9fab7fc80d",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a21",
       "noteUrl": "https://note.com/stats47/n/na34537eb2b48",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a26",
       "noteUrl": "https://note.com/stats47/n/ncc1cf723e8a4",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a31",
       "noteUrl": "https://note.com/stats47/n/n816c665cb671",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a36",
       "noteUrl": "https://note.com/stats47/n/nc406259524da",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a40",
       "noteUrl": "https://note.com/stats47/n/n0afe52099b5e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a42",
       "noteUrl": "https://note.com/stats47/n/nda788ad0528b",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a45",
       "noteUrl": "https://note.com/stats47/n/nca8939a4a9b3",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a49",
       "noteUrl": "https://note.com/stats47/n/n4ad7022a4411",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a51",
       "noteUrl": "https://note.com/stats47/n/n5443898bbe1c",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a07",
       "noteUrl": "https://note.com/stats47/n/ncd2deb997656",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a09",
       "noteUrl": "https://note.com/stats47/n/n0eda98daf2dd",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a10",
       "noteUrl": "https://note.com/stats47/n/n76d822ca3e90",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a12",
       "noteUrl": "https://note.com/stats47/n/n4503382d72b7",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a13",
       "noteUrl": "https://note.com/stats47/n/n1015730f50b2",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a14",
       "noteUrl": "https://note.com/stats47/n/n44a61a72fdf2",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a15",
       "noteUrl": "https://note.com/stats47/n/n0ad6145d5163",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a16",
       "noteUrl": "https://note.com/stats47/n/nbe45f74f61ee",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a17",
       "noteUrl": "https://note.com/stats47/n/n30dc733b8419",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a18",
       "noteUrl": "https://note.com/stats47/n/nd0c7a5055e26",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a19",
       "noteUrl": "https://note.com/stats47/n/n43512fd5645e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a20",
       "noteUrl": "https://note.com/stats47/n/n3cc132d3422d",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a21",
       "noteUrl": "https://note.com/stats47/n/n0442a497809e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a22",
       "noteUrl": "https://note.com/stats47/n/n30a08f7ac737",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a24",
       "noteUrl": "https://note.com/stats47/n/nb1643889a8a4",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a25",
       "noteUrl": "https://note.com/stats47/n/n7c157e32eb9a",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a26",
       "noteUrl": "https://note.com/stats47/n/n80869eb8b7e8",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a27",
       "noteUrl": "https://note.com/stats47/n/nd6efea2ea009",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a28",
       "noteUrl": "https://note.com/stats47/n/nbb5ce1b6aa23",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a29",
       "noteUrl": "https://note.com/stats47/n/n4f7ddc35ce44",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a30",
       "noteUrl": "https://note.com/stats47/n/n3f73f9d8a5c7",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a31",
       "noteUrl": "https://note.com/stats47/n/n165c2696ddaf",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a32",
       "noteUrl": "https://note.com/stats47/n/n711b217540df",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a33",
       "noteUrl": "https://note.com/stats47/n/nb16d150ee313",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a34",
       "noteUrl": "https://note.com/stats47/n/n019faad2cc71",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a35",
       "noteUrl": "https://note.com/stats47/n/nb25821eb9ef6",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a36",
       "noteUrl": "https://note.com/stats47/n/n0edd260cf676",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a37",
       "noteUrl": "https://note.com/stats47/n/nf9c8f3c2d17e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a38",
       "noteUrl": "https://note.com/stats47/n/n88b905cc0ae7",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a39",
       "noteUrl": "https://note.com/stats47/n/n7813c753c4c8",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a40",
       "noteUrl": "https://note.com/stats47/n/na899f4f02172",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a42",
       "noteUrl": "https://note.com/stats47/n/n9fea483acaf5",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a43",
       "noteUrl": "https://note.com/stats47/n/n245947d339bc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a44",
       "noteUrl": "https://note.com/stats47/n/n3f24f68f03fc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a45",
       "noteUrl": "https://note.com/stats47/n/nadef03ea09ad",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a02",
       "noteUrl": "https://note.com/stats47/n/n0f9c73ec2188",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-dev-a32",
       "noteUrl": "https://note.com/stats47/n/n48f662d1b14e",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a41",
       "noteUrl": "https://note.com/stats47/n/n9c53c03f6b32",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a47",
       "noteUrl": "https://note.com/stats47/n/n23d6898b0f15",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a48",
       "noteUrl": "https://note.com/stats47/n/ndc76fe819d05",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a49",
       "noteUrl": "https://note.com/stats47/n/nbbd5bd83d5fd",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a50",
       "noteUrl": "https://note.com/stats47/n/nd94fc821b273",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a51",
       "noteUrl": "https://note.com/stats47/n/na36328b979fc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-prc-a52",
       "noteUrl": "https://note.com/stats47/n/nd0be61517d63",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a01-05",
       "noteUrl": "https://note.com/stats47/n/ncfb6a1c35121",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-02",
       "noteUrl": "https://note.com/stats47/n/n6be231a3233f",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-04",
       "noteUrl": "https://note.com/stats47/n/nb2e4f5f34f22",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-05",
       "noteUrl": "https://note.com/stats47/n/nd8b1ce95b997",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-06",
       "noteUrl": "https://note.com/stats47/n/n0f84e2661d89",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-07",
       "noteUrl": "https://note.com/stats47/n/n5c964549ec30",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-08",
       "noteUrl": "https://note.com/stats47/n/nde5f16a081f9",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a02-09",
       "noteUrl": "https://note.com/stats47/n/ne8cba9b99137",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a03-01",
       "noteUrl": "https://note.com/stats47/n/n037f42ea22fc",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a03-04",
       "noteUrl": "https://note.com/stats47/n/nb729bb5e7612",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a04-01",
       "noteUrl": "https://note.com/stats47/n/nc421986688b2",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a04-04",
       "noteUrl": "https://note.com/stats47/n/n9777ed7f52b5",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a05-04",
       "noteUrl": "https://note.com/stats47/n/n7cde5e1423f4",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a01-01",
       "noteUrl": "https://note.com/stats47/n/ncba36d395bd7",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "b-ref-kakei-a04-02",
       "noteUrl": "https://note.com/stats47/n/n6aae3232670d",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 1,
+      "renderedCards": 1,
       "issues": []
     },
     {
       "key": "a-active-job-opening-ratio",
       "noteUrl": "https://note.com/stats47/n/n73c710f239ef",
-      "storedCards": 6,
-      "renderedCards": 6,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
       "key": "a-new-graduate-starting-salary-university-male",
       "noteUrl": "https://note.com/stats47/n/nf067364b58fb",
-      "storedCards": 5,
-      "renderedCards": 5,
+      "storedCards": 6,
+      "renderedCards": 6,
       "issues": []
     },
     {
       "key": "a-new-graduate-starting-salary-university-female",
       "noteUrl": "https://note.com/stats47/n/necff830a091b",
-      "storedCards": 6,
-      "renderedCards": 6,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
       "key": "a-main-household-ratio-main-earner-employee-commute-90min",
       "noteUrl": "https://note.com/stats47/n/n7a47171e06f3",
-      "storedCards": 6,
-      "renderedCards": 6,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
       "key": "a-annual-paid-leave-11-days-or-more-ratio",
       "noteUrl": "https://note.com/stats47/n/nfb6a7a246b12",
-      "storedCards": 6,
-      "renderedCards": 6,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
       "key": "a-manufacturing-industry-annual-income",
       "noteUrl": "https://note.com/stats47/n/nb09980b2ef49",
-      "storedCards": 6,
-      "renderedCards": 6,
+      "storedCards": 7,
+      "renderedCards": 7,
       "issues": []
     },
     {
@@ -3930,8 +3933,8 @@
     {
       "key": "h-howto-excel-filled-map",
       "noteUrl": "https://note.com/stats47/n/n800864e68c6b",
-      "storedCards": 0,
-      "renderedCards": 0,
+      "storedCards": 3,
+      "renderedCards": 3,
       "issues": []
     }
   ]

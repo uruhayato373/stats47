@@ -1,0 +1,28 @@
+{
+  "statsDataId": "0004025576",
+  "statName": "住宅・土地統計調査",
+  "title": "住環境 住宅の所有の関係(2区分)、建築の時期(7区分)、公共下水道の有無(2区分)別住宅数－全国、都道府県、市区町村",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat03": "00",
+        "cdTab": "01-2023",
+        "axisRatio": {
+          "axis": "cat02",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "level": "city",
+      "fetchedAt": "2026-10-30T23:21:53.608Z",
+      "years": { "2023": 1184 },
+      "rawRows": 2566
+    }
+  ]
+}
