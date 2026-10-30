@@ -1,7 +1,8 @@
 {
-  "hash": "86f68bee346c6b80eea31223395b44809d7619bf3fc964c63b9132596a4b8e4a",
-  "audited_at": "2026-10-30T13:02:04",
+  "hash": "02059a793fbac45ab5876357bf76858bd8ce5fb17f004ff71c89fa36d5c4873f",
+  "audited_at": "2026-10-30T22:10:52",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md"
+    ".claude/rules/page-quality-standards.md",
+    ".claude/scripts/page-quality/layout-review.ts"
   ]
 }

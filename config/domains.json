@@ -62,6 +62,7 @@
       "manages": "記事・SEO・サイト内の動線・計測 (GSC・GA4・PSI)・OGP",
       "nav": [
         { "label": "ページ品質", "href": "/quality/page-audit", "kind": "results" },
+        { "label": "レイアウト確認", "href": "/quality/layout-review", "kind": "results" },
         { "label": "是正キュー", "href": "/site/queues", "kind": "actions" },
         { "label": "参考サイト", "href": "/site/design-references", "kind": "inventory" }
       ]
