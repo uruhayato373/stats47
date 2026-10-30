@@ -62,6 +62,16 @@ describe('legacy stat params — MetricConfigから正典R2へ解決', () => {
     });
   });
 
+  // 2026-10-30: 全国を指定すると全国の系列を読まず 0 件になり、ランキングの全国の推移のカード (19 ページ) が空だった
+  it('全国 (00000) を指定すると日本系列を読み、全国の行だけを返す', async () => {
+    const result = await fetchEstatData('00000', params);
+    expect(readJapanSeries).toHaveBeenCalledWith('total-population');
+    expect(result).toMatchObject({
+      data: [{ areaCode: '00000', areaName: '全国', value: 124, metricKey: 'total-population' }],
+    });
+    expect('data' in result ? result.data : []).toHaveLength(1);
+  });
+
   it('全地域取得はR2の47県系列と利用可能な日本系列を結合する', async () => {
     const result = await fetchEstatDataAllAreas(params);
     expect(readJapanSeries).toHaveBeenCalledWith('total-population');
