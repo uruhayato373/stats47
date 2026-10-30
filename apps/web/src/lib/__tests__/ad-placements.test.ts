@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -113,6 +113,33 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
       // 判断待ち・退役の大きさは、対象の登録を台帳に名指しする (知らないうちに増えない)
       if (entry && entry.status !== 'standard') expect(entry.adIds, `${ad.id} (${size})`).toContain(ad.id);
     }
+  });
+
+  // 2026-10-30: 台帳がテーマとランキングしか持たず、ブログ・ハブの枠が台帳の箱を使わず小さく確保されていた。
+  // 台帳の枠の部品を置いたファイルは、枠の部品そのもの (features/ads・AdSense の部品) を除いてすべて台帳の source に載せる
+  it('台帳の枠の部品を置いたファイルは、どれも台帳のページの置き方に載っている', () => {
+    const sources = new Set(Object.values(PAGES).flat().map((p) => p.source));
+    const componentFiles = /^apps\/web\/src\/(features\/ads\/components\/|lib\/google-adsense\/)/;
+    // 節を組み立てるだけのファイル。置き場所は台帳の {sections.inContentAffiliate} / {sections.nativeAffiliate} (RankingPageContentSections)
+    const sectionBuilders = new Set([
+      'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx',
+      'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageNativeAffiliateSection.tsx',
+    ]);
+    const unlisted: string[] = [];
+    const walk = (dir: string) => {
+      for (const entry of readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+        const rel = `${dir}/${entry.name}`;
+        if (entry.isDirectory()) {
+          if (entry.name !== '__tests__') walk(rel);
+          continue;
+        }
+        if (!rel.endsWith('.tsx') || componentFiles.test(rel) || sectionBuilders.has(rel) || sources.has(rel)) continue;
+        const source = read(rel);
+        if ([...source.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)].some((m) => SLOT_COMPONENTS.has(m[1]))) unlisted.push(rel);
+      }
+    };
+    walk('apps/web/src');
+    expect(unlisted, '台帳の config/ads/placements.json の pages に載せる').toEqual([]);
   });
 
   it('箱は本番の実測のまま (本文の AdSense 幅いっぱい × 280)', () => {
