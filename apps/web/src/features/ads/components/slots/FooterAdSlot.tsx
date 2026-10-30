@@ -3,6 +3,7 @@ import { Megaphone } from "lucide-react";
 
 import { SectionCard } from "@/components/surface";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
   ADSENSE_DISPLAY_ENABLED,
   AdSenseAd,
@@ -45,6 +46,8 @@ export function FooterAdSlot({
           slotId={CONTENT_FOOTER.slotId}
           format={CONTENT_FOOTER.format}
           showLabel={false}
+          // 箱は広告の枠の台帳の「ページ末の関連コンテンツ型」(本番の実測 デスクトップ 466px)
+          slotBox={adSlotBox("adsense-footer")}
         />
       </SectionCard>
     </div>

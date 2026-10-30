@@ -111,6 +111,25 @@
       "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio (モバイル): 記事内 293x250"
     },
     {
+      "id": "adsense-body-all",
+      "name": "本文の AdSense (全幅・モバイルでも出す)",
+      "provider": "adsense",
+      "box": {
+        "width": "full",
+        "height": 280,
+        "mobileHeight": 250
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "adsense:article"
+      ],
+      "component": "AdSenseAd",
+      "measured": "本文の AdSense (2026-10-29 本番 /themes/labor-wages デスクトップ 780x280) と本文の AdSense (モバイル) (同日 /ranking/active-job-opening-ratio 293x250) の実測を合わせた箱。ブログ記事の末尾 (手置きの枠が無い記事) で使う"
+    },
+    {
       "id": "adsense-rail-rect",
       "name": "右レールの AdSense",
       "provider": "adsense",
@@ -129,6 +148,23 @@
       ],
       "component": "RailAdSlot",
       "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: デスクトップ 300x256〜316x258、モバイル (本文の下に積まれる) 375x375"
+    },
+    {
+      "id": "adsense-rail-sky",
+      "name": "右レールの縦長の AdSense",
+      "provider": "adsense",
+      "box": {
+        "width": 160,
+        "height": 600
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "adsense:skyscraper"
+      ],
+      "component": "RailAdSlot"
     },
     {
       "id": "adsense-footer",

@@ -50,7 +50,7 @@ export function AdSenseAd({
   lazyLoad = true,
   rootMargin,
   slotBox,
-}: AdSlotProps) {
+}: AdSlotProps & { slotBox: NonNullable<AdSlotProps["slotBox"]> }) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
   const [isAdBlocked, setIsAdBlocked] = useState(false);

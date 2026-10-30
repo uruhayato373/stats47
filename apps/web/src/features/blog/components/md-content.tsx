@@ -24,6 +24,7 @@ import { AffiliateTextAdList, BannerAd } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
     ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
@@ -266,6 +267,8 @@ function makeMdComponents(
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
                         showLabel={false}
+                        // 箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい × 280px。デスクトップだけ)
+                        slotBox={adSlotBox("adsense-body")}
                     />
                 </div>
             ) : null,
@@ -569,6 +572,8 @@ export function MDContent({
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
                         showLabel={false}
+                        // モバイルでも出る枠なので、台帳の全幅の箱 (デスクトップ 280px・モバイル 250px)
+                        slotBox={adSlotBox("adsense-body-all")}
                     />
                 </div>
             )}

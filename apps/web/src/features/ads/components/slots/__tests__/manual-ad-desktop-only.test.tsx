@@ -9,6 +9,7 @@ import { SITE } from "@stats47/types";
 import { render } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import { AdSenseAd, AdSenseScript } from "@/lib/google-adsense";
 import * as slotConstants from "@/lib/google-adsense/constants";
 
@@ -57,7 +58,7 @@ describe("AdSense停止中の契約", () => {
   it("環境変数がtrueでもAdSense本体とscriptを生成しない", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
-    const ad = render(<AdSenseAd format="article" slotId="1234567890" />);
+    const ad = render(<AdSenseAd format="article" slotId="1234567890" slotBox={adSlotBox("adsense-body")} />);
     const script = render(<AdSenseScript adFreePathPrefixes={[]} />);
 
     expect(ad.container).toBeEmptyDOMElement();
@@ -98,7 +99,7 @@ describe("AdSense再開後の契約", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
     const { container } = render(
-      <AdSenseAd format="article" slotId={slotConstants.BLOG_ARTICLE_INLINE.slotId} lazyLoad={false} />,
+      <AdSenseAd format="article" slotId={slotConstants.BLOG_ARTICLE_INLINE.slotId} lazyLoad={false} slotBox={adSlotBox("adsense-body")} />,
     );
     const ins = container.querySelector("ins.adsbygoogle");
 
@@ -114,7 +115,7 @@ describe("AdSense再開後の契約", () => {
 
     for (const format of ["article", "multiplex", "rectangle"] as const) {
       const { container, unmount } = render(
-        <AdSenseAd format={format} slotId="1234567890" lazyLoad={false} />,
+        <AdSenseAd format={format} slotId="1234567890" lazyLoad={false} slotBox={adSlotBox("adsense-body")} />,
       );
       const ins = container.querySelector<HTMLElement>("ins.adsbygoogle");
       expect(ins?.style.width, format).toBe("100%");
