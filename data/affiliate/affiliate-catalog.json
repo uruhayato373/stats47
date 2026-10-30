@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-09-08T04:20:11.037Z",
+  "updatedAt": "2026-10-30T23:15:03.195Z",
   "verifiedAt": "2026-08-28",
   "programs": {
     "afb-9156": {
@@ -288,8 +288,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "2626",
-          "status": "none",
-          "appliedAt": "2026-07-28T08:10:00.000Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:04:17.628Z",
           "history": [
             {
               "at": "2026-07-28T08:10:00.000Z",
@@ -299,9 +299,31 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:04:17.628Z",
+              "status": "applying"
             }
           ]
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-7404": {
@@ -551,7 +573,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "5816",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T11:29:06.305Z",
@@ -566,9 +588,35 @@
               "at": "2026-09-08T04:20:11.037Z",
               "status": "none",
               "note": "Stocktake observation only; 否認中; siteId=638943; evidence=.local/affiliate-status/stocktake-20260908/moshimo/live.json. No application or cancellation performed."
+            },
+            {
+              "at": "2026-10-30T23:04:38.027Z",
+              "status": "applying"
             }
-          ]
+          ],
+          "appliedAt": "2026-10-30T23:04:38.027Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-5574": {
@@ -1082,7 +1130,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "7430",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1093,10 +1141,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:04:57.875Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 15000
+          "rewardYen": 15000,
+          "appliedAt": "2026-10-30T23:04:57.875Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-7422": {
@@ -1105,7 +1179,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "7422",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1116,10 +1190,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:05:16.979Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 30000
+          "rewardYen": 30000,
+          "appliedAt": "2026-10-30T23:05:16.979Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-7283": {
@@ -1146,7 +1246,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "7259",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1157,10 +1257,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:05:36.013Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 25000
+          "rewardYen": 25000,
+          "appliedAt": "2026-10-30T23:05:36.013Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-7260": {
@@ -1169,7 +1295,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "7260",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1180,10 +1306,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:05:54.586Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 15000
+          "rewardYen": 15000,
+          "appliedAt": "2026-10-30T23:05:54.586Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-7113": {
@@ -1256,7 +1408,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "6910",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1267,10 +1419,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:06:13.145Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 20000
+          "rewardYen": 20000,
+          "appliedAt": "2026-10-30T23:06:13.145Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-6662": {
@@ -1279,7 +1457,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "6662",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1290,10 +1468,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:06:32.913Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 21538
+          "rewardYen": 21538,
+          "appliedAt": "2026-10-30T23:06:32.913Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-6673": {
@@ -1380,7 +1584,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "6650",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1391,10 +1595,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:06:53.374Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 25000
+          "rewardYen": 25000,
+          "appliedAt": "2026-10-30T23:06:53.374Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-6548": {
@@ -1418,6 +1648,27 @@
           ],
           "rewardYen": 54000
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-6424": {
@@ -1462,7 +1713,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "6128",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1473,10 +1724,36 @@
               "at": "2026-09-08T04:20:11.037Z",
               "status": "none",
               "note": "Stocktake observation only; 否認中; siteId=638943; evidence=.local/affiliate-status/stocktake-20260908/moshimo/live.json. No application or cancellation performed."
+            },
+            {
+              "at": "2026-10-30T23:08:21.039Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 43750
+          "rewardYen": 43750,
+          "appliedAt": "2026-10-30T23:08:21.039Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-3639": {
@@ -1485,7 +1762,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "3639",
-          "status": "none",
+          "status": "applying",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
@@ -1496,10 +1773,36 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:08:48.169Z",
+              "status": "applying"
             }
           ],
-          "rewardYen": 20000
+          "rewardYen": 20000,
+          "appliedAt": "2026-10-30T23:08:48.169Z"
         }
+      },
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "moshimo-1044": {
@@ -1525,8 +1828,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "6928",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:06:14.655Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:09:08.616Z",
           "history": [
             {
               "at": "2026-07-28T12:06:14.655Z",
@@ -1536,20 +1839,45 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:09:08.616Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 15000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-3209": {
       "name": "CLOUD GYM｜パーソナルジムの入会完了",
       "asps": {
         "moshimo": {
           "promotionId": "3209",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:06:27.344Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:09:28.211Z",
           "history": [
             {
               "at": "2026-07-28T12:06:27.344Z",
@@ -1559,20 +1887,42 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:09:28.211Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 15000
         }
       },
-      "vertical": "health"
+      "vertical": "health",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-6955": {
       "name": "PRESENCE（プレゼンス）｜英語コーチングスクールの無料カウンセリング申し込み",
       "asps": {
         "moshimo": {
           "promotionId": "6955",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:06:39.549Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:09:47.194Z",
           "history": [
             {
               "at": "2026-07-28T12:06:39.549Z",
@@ -1582,12 +1932,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:09:47.194Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 15000
         }
       },
-      "vertical": "education"
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-6139": {
       "name": "データラーニングスクール｜データサイエンス講座の無料個別相談への参加",
@@ -1635,8 +2010,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "7562",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:07:16.500Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:10:06.234Z",
           "history": [
             {
               "at": "2026-07-28T12:07:16.500Z",
@@ -1646,12 +2021,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:10:06.234Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 14000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-7102": {
       "name": "インターノウス｜未経験からITエンジニア転職の無料面談予約",
@@ -1722,8 +2122,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "6663",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:08:05.493Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:10:30.417Z",
           "history": [
             {
               "at": "2026-07-28T12:08:05.493Z",
@@ -1733,12 +2133,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:10:30.417Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 13000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-5065": {
       "name": "トーシンパートナーズ｜不動産投資のマンション経営の資料請求",
@@ -1786,8 +2211,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "3833",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:08:41.938Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:10:49.319Z",
           "history": [
             {
               "at": "2026-07-28T12:08:41.938Z",
@@ -1797,12 +2222,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:10:49.319Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 12000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-2932": {
       "name": "火災保険申請ドットコム｜火災保険＆地震保険で自宅を無料リフォームできるかも。保険の調査依頼申込",
@@ -1901,8 +2351,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "6813",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:09:43.996Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:11:07.140Z",
           "history": [
             {
               "at": "2026-07-28T12:09:43.996Z",
@@ -1912,20 +2362,45 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:11:07.140Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 11000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-6599": {
       "name": "ウズカレIT｜わずか1ヶ月のオンライン研修で未経験からITエンジニア就職◆無料カウンセリング実施◆",
       "asps": {
         "moshimo": {
           "promotionId": "6599",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:09:56.240Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:11:24.190Z",
           "history": [
             {
               "at": "2026-07-28T12:09:56.240Z",
@@ -1935,20 +2410,45 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:11:24.190Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 11000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-6398": {
       "name": "WEBCOACH｜インフルエンサー向け！オンラインWebデザインスクールの無料カウンセリング参加",
       "asps": {
         "moshimo": {
           "promotionId": "6398",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:10:08.493Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:11:42.387Z",
           "history": [
             {
               "at": "2026-07-28T12:10:08.493Z",
@@ -1958,20 +2458,45 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:11:42.387Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 11000
         }
       },
-      "vertical": "education"
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-5906": {
       "name": "ウェブスキ｜WEBデザイン×SNS広告運用のオンラインスクールの無料レクチャー・講座申込",
       "asps": {
         "moshimo": {
           "promotionId": "5906",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:10:20.744Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:12:02.543Z",
           "history": [
             {
               "at": "2026-07-28T12:10:20.744Z",
@@ -1981,12 +2506,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:12:02.543Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 11000
         }
       },
-      "vertical": "education"
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-6623": {
       "name": "キャリフト｜40代・50代向けキャリアコーチングの無料相談の面談実施",
@@ -2167,8 +2717,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "6775",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:12:11.146Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:12:24.743Z",
           "history": [
             {
               "at": "2026-07-28T12:12:11.146Z",
@@ -2178,12 +2728,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:12:24.743Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 10000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-5905": {
       "name": "CORPO（コーポ）｜人事・HR業界特化の転職エージェントの新規転職相談の申込",
@@ -2206,7 +2781,28 @@
           "rewardYen": 10000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-5870": {
       "name": "Remoful（リモフル）｜リモートワーク求人に特化した転職支援サービスの新規面談申込",
@@ -2300,8 +2896,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "6171",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:13:13.178Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:13:15.940Z",
           "history": [
             {
               "at": "2026-07-28T12:13:13.178Z",
@@ -2311,12 +2907,34 @@
               "at": "2026-09-08T04:20:11.037Z",
               "status": "none",
               "note": "Stocktake observation only; 否認中; siteId=638943; evidence=.local/affiliate-status/stocktake-20260908/moshimo/live.json. No application or cancellation performed."
+            },
+            {
+              "at": "2026-10-30T23:13:15.940Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 10000
         }
       },
-      "vertical": "health"
+      "vertical": "health",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-7628": {
       "name": "ジョブトレアカデミー｜オンラインマーケティング スクールの個別面談完了",
@@ -2346,8 +2964,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "7180",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:13:37.860Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:13:34.624Z",
           "history": [
             {
               "at": "2026-07-28T12:13:37.860Z",
@@ -2357,12 +2975,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:13:34.624Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 10000
         }
       },
-      "vertical": "education"
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-2341": {
       "name": "cash-engine｜起業スクールの新規会員申込",
@@ -2410,8 +3053,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "5389",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:14:14.585Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:13:53.396Z",
           "history": [
             {
               "at": "2026-07-28T12:14:14.585Z",
@@ -2421,12 +3064,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:13:53.396Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 9000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-1271": {
       "name": "グリエネ【住宅用太陽光発電の無料一括見積もりプロモーション】",
@@ -2472,7 +3140,28 @@
           "rewardYen": 8900
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-5679": {
       "name": "転職×退職サポート窓口｜退職給付金申請サポートの説明会実施",
@@ -2525,8 +3214,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "7173",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:15:16.219Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:14:27.451Z",
           "history": [
             {
               "at": "2026-07-28T12:15:16.219Z",
@@ -2536,20 +3225,45 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:14:27.451Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 8000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-7045": {
       "name": "転職ボックス｜転職エージェントサイト求人掲載希望の企業用（IT/ゲーム職種のみ）",
       "asps": {
         "moshimo": {
           "promotionId": "7045",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:15:28.708Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:14:45.439Z",
           "history": [
             {
               "at": "2026-07-28T12:15:28.708Z",
@@ -2559,12 +3273,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:14:45.439Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 8000
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-7315": {
       "name": "保育士プロデュース｜保育士の求職者登録",
@@ -2589,8 +3328,8 @@
       "asps": {
         "moshimo": {
           "promotionId": "5471",
-          "status": "none",
-          "appliedAt": "2026-07-28T12:15:53.475Z",
+          "status": "applying",
+          "appliedAt": "2026-10-30T23:15:03.194Z",
           "history": [
             {
               "at": "2026-07-28T12:15:53.475Z",
@@ -2600,12 +3339,37 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「否認中」を確認 (SID 638943)"
+            },
+            {
+              "at": "2026-10-30T23:15:03.194Z",
+              "status": "applying"
             }
           ],
           "rewardYen": 9800
         }
       },
-      "vertical": "travel"
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "moshimo-7559": {
       "name": "石垣島ツアーガイド｜石垣島の旅行者向け、オススメのアクティビティの参加",
@@ -3015,6 +3779,28 @@
           ],
           "rewardYen": 33845
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-12310": {
@@ -3037,6 +3823,28 @@
           ],
           "rewardYen": 25383
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-10717": {
@@ -3082,6 +3890,28 @@
           ],
           "rewardYen": 21153
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16654": {
@@ -3127,6 +3957,28 @@
           ],
           "rewardYen": 21153
         }
+      },
+      "vertical": "economy",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-15202": {
@@ -3212,6 +4064,28 @@
           ],
           "rewardYen": 16922
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14863": {
@@ -3234,6 +4108,28 @@
           ],
           "rewardYen": 16922
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-13143": {
@@ -3256,6 +4152,28 @@
           ],
           "rewardYen": 16500
         }
+      },
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-15548": {
@@ -3295,6 +4213,28 @@
           ],
           "rewardYen": 13537
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16418": {
@@ -3317,6 +4257,28 @@
           ],
           "rewardYen": 12691
         }
+      },
+      "vertical": "economy",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14272": {
@@ -3522,6 +4484,28 @@
           ],
           "rewardYen": 11000
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-13856": {
@@ -3613,6 +4597,28 @@
           ],
           "rewardYen": 11000
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-15277": {
@@ -3635,6 +4641,28 @@
           ],
           "rewardYen": 10576
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16736": {
@@ -3755,7 +4783,28 @@
           "rewardYen": 10153
         }
       },
-      "vertical": "labor"
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
+      }
     },
     "afb-6349": {
       "name": "国内最大級のリフォームの一括見積もりサイト【リショップナビ】",
@@ -3800,6 +4849,25 @@
           ],
           "rewardYen": 10153
         }
+      },
+      "vertical": "health",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16731": {
@@ -3822,6 +4890,25 @@
           ],
           "rewardYen": 10153
         }
+      },
+      "vertical": "health",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14567": {
@@ -4032,6 +5119,28 @@
           ],
           "rewardYen": 8461
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16728": {
@@ -4076,6 +5185,28 @@
           ],
           "rewardYen": 6768
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16507": {
@@ -4167,6 +5298,28 @@
           ],
           "rewardYen": 5922
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16330": {
@@ -4258,6 +5411,28 @@
           ],
           "rewardYen": 5500
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16737": {
@@ -4326,6 +5501,28 @@
           ],
           "rewardYen": 4907
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-15177": {
@@ -4404,6 +5601,28 @@
           ],
           "rewardYen": 3663
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16179": {
@@ -4426,6 +5645,28 @@
           ],
           "rewardYen": 3520
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16575": {
@@ -4557,6 +5798,29 @@
           ],
           "rewardYen": 2820
         }
+      },
+      "vertical": "housing",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-11028": {
@@ -4579,6 +5843,29 @@
           ],
           "rewardYen": 2820
         }
+      },
+      "vertical": "housing",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-9679": {
@@ -4697,6 +5984,28 @@
           ],
           "rewardYen": 2537
         }
+      },
+      "vertical": "labor",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16742": {
@@ -4787,6 +6096,29 @@
           ],
           "rewardYen": 2283
         }
+      },
+      "vertical": "housing",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16178": {
@@ -4809,6 +6141,28 @@
           ],
           "rewardYen": 2200
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16177": {
@@ -4831,6 +6185,28 @@
           ],
           "rewardYen": 2200
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14192": {
@@ -4876,6 +6252,29 @@
           ],
           "rewardYen": 1815
         }
+      },
+      "vertical": "housing",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-16748": {
@@ -4967,6 +6366,28 @@
           ],
           "rewardYen": 1268
         }
+      },
+      "vertical": "education",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "category"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-13830": {
@@ -5074,6 +6495,28 @@
           ],
           "rewardYen": 1210
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14263": {
@@ -5096,6 +6539,28 @@
           ],
           "rewardYen": 1100
         }
+      },
+      "vertical": "travel",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [
+          "terms-unverified"
+        ],
+        "allowedPageTypes": [
+          "ranking",
+          "blog",
+          "theme",
+          "area"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-10-30T22:56:42.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-10-31 オーナーが会話で『アフィリエイトも提携できるものは全て提携　利用できるものは全て利用』と明示指示。stats47 のサイトだけで申請する。有料広告の出稿なし、公開は別工程。",
+          "成果条件・掲載条件は申請前に案件ごとには確認していない (terms-unverified)。在庫へ登録する前に inspect-offer で確かめる。"
+        ]
       }
     },
     "afb-14262": {

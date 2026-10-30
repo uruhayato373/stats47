@@ -13270,12 +13270,17 @@
       "epcYen": 2481,
       "confirmRatePct": 95.88,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:57:43.037Z"
         }
       ]
     },
@@ -13467,12 +13472,17 @@
       "rewardYen": 10000,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:57:53.081Z"
         }
       ]
     },
@@ -13488,7 +13498,7 @@
       "epcYen": 134,
       "confirmRatePct": 51.35,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "harvested",
       "history": [
         {
           "from": null,
@@ -13499,6 +13509,66 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-19T07:15:11.820Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-10-30T22:36:02.769Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-30T22:36:19.142Z"
+        }
+      ],
+      "_priority": 20,
+      "_ce": 68.80900000000001,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_s00000022646001_a8_001",
+        "title": "東大生のオンライン個別指導『トウコベ』",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BEK9H+5EORLE+4UQK+5ZU29",
+        "programRef": "a8:s00000022646001",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www21.a8.net/svt/bgt?aid=261019925327&wid=001&eno=01&mid=s00000022646001007000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4BEK9H+5EORLE+4UQK+5ZU29",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      },
+      "pendingDrafts": [
+        {
+          "id": "af_s00000022646001_a8_text_001",
+          "title": "東大生のオンライン個別指導『トウコベ』",
+          "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BEK9H+5EORLE+4UQK+5YRHE",
+          "programRef": "a8:s00000022646001",
+          "areaCode": null,
+          "vertical": "education",
+          "categoryKey": null,
+          "locationCode": "sidebar-bottom",
+          "isActive": true,
+          "priority": 50,
+          "startDate": null,
+          "endDate": null,
+          "targetCategories": null,
+          "adType": "text",
+          "imageUrl": null,
+          "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4BEK9H+5EORLE+4UQK+5YRHE",
+          "width": null,
+          "height": null,
+          "createdAt": null,
+          "updatedAt": null
         }
       ]
     },
@@ -13514,12 +13584,17 @@
       "epcYen": 222,
       "confirmRatePct": 20.31,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:03.042Z"
         }
       ]
     },
@@ -13535,12 +13610,17 @@
       "epcYen": 60,
       "confirmRatePct": 65.21,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:13.232Z"
         }
       ]
     },
@@ -13556,12 +13636,17 @@
       "epcYen": 51,
       "confirmRatePct": 66.66,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:25.038Z"
         }
       ]
     },
@@ -13576,12 +13661,17 @@
       "rewardYen": 10000,
       "confirmRatePct": 83.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:35.789Z"
         }
       ]
     },
@@ -13597,12 +13687,17 @@
       "epcYen": 65,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:45.576Z"
         }
       ]
     },
@@ -13618,12 +13713,17 @@
       "epcYen": 24,
       "confirmRatePct": 67.85,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:54.835Z"
         }
       ]
     },
@@ -13639,12 +13739,17 @@
       "epcYen": 71,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:04.094Z"
         }
       ]
     },
@@ -13660,12 +13765,17 @@
       "epcYen": 11,
       "confirmRatePct": 68.75,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:13.335Z"
         }
       ]
     },
@@ -13707,12 +13817,17 @@
       "epcYen": 3,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:23.259Z"
         }
       ]
     },
@@ -13727,12 +13842,17 @@
       "rewardYen": 15500,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:32.512Z"
         }
       ]
     },
@@ -13747,12 +13867,17 @@
       "rewardYen": 15000,
       "epcYen": 148,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:41.947Z"
         }
       ]
     },
@@ -13768,12 +13893,17 @@
       "epcYen": 76,
       "confirmRatePct": 12.5,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:51.354Z"
         }
       ]
     },
@@ -13789,12 +13919,17 @@
       "epcYen": 7,
       "confirmRatePct": 33.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:00.897Z"
         }
       ]
     },
@@ -13809,12 +13944,17 @@
       "rewardYen": 7500,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
         }
       ]
     },
@@ -13829,12 +13969,17 @@
       "rewardYen": 10000,
       "epcYen": 89,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:18.884Z"
         }
       ]
     },
@@ -13870,12 +14015,17 @@
       "epcYen": 83,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:28.910Z"
         }
       ]
     },
@@ -13890,12 +14040,17 @@
       "rewardYen": 31600,
       "epcYen": 55,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:39.566Z"
         }
       ]
     },
@@ -13981,12 +14136,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:48.912Z"
         }
       ]
     },
@@ -14000,12 +14160,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:58.628Z"
         }
       ]
     },
@@ -14019,12 +14184,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 15000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:08.525Z"
         }
       ]
     },
@@ -14057,12 +14227,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:19.535Z"
         }
       ]
     },
@@ -14076,12 +14251,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 21148,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:29.585Z"
         }
       ]
     },
@@ -14095,12 +14275,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10500,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:39.784Z"
         }
       ]
     },
@@ -14114,12 +14299,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 12000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:49.531Z"
         }
       ]
     },
@@ -14180,12 +14370,17 @@
       "epcYen": 10,
       "confirmRatePct": 40,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:59.234Z"
         }
       ]
     },
@@ -14201,12 +14396,17 @@
       "epcYen": 11,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:08.957Z"
         }
       ]
     },
@@ -14248,12 +14448,17 @@
       "epcYen": 42,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:18.383Z"
         }
       ]
     },
@@ -14268,12 +14473,17 @@
       "rewardYen": 5455,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:27.696Z"
         }
       ]
     },
@@ -14313,12 +14523,17 @@
       "score": 0.4,
       "rewardYen": 9000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:37.191Z"
         }
       ]
     },
@@ -14334,12 +14549,17 @@
       "epcYen": 10,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:46.701Z"
         }
       ]
     },
@@ -14355,12 +14575,17 @@
       "epcYen": 16,
       "confirmRatePct": 16.66,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:56.050Z"
         }
       ]
     },
@@ -14394,12 +14619,17 @@
       "score": 0.38560000000000005,
       "rewardYen": 8640,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:05.397Z"
         }
       ]
     },
@@ -14413,12 +14643,17 @@
       "score": 0.3600000000000001,
       "rewardYen": 8000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:14.727Z"
         }
       ]
     },
@@ -14654,12 +14889,17 @@
       "epcYen": 43,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:11:25.520Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:24.348Z"
         }
       ]
     },
@@ -14674,15 +14914,20 @@
       "rewardRatePct": 20,
       "confirmRatePct": 100,
       "rewardType": "rate",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:11:25.520Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:33.693Z"
         }
       ]
     }
   },
-  "updatedAt": "2026-10-24T22:01:55.504Z"
+  "updatedAt": "2026-10-30T23:03:33.693Z"
 }
