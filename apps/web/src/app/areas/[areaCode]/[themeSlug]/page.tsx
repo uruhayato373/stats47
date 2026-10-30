@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = areaThemeDescription(
     pref.prefName,
     theme.description,
-    data ? getAreaThemeHighlights(data, areaCode) : [],
+    data ? getAreaThemeHighlights(data, areaCode, theme.tabIndicators) : [],
   );
 
   return {

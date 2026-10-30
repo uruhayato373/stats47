@@ -7,9 +7,9 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
 import { StatTile } from '@/components/surface';
 
+import { formatMetricValue, type MetricKpi } from './metric-kpi';
 import { MetricSourcesSheet } from './MetricSourcesSheet';
 
-import type { MetricKpi } from './metric-kpi';
 
 /**
  * テーマの指標 1 件の数値タイル (2026-10-29)。指標が 1 つのカード (SingleMetricCard) と、指標を切り替えるカード
@@ -76,7 +76,7 @@ export function MetricStatTile({
           label
         )
       }
-      value={shown !== null ? shown.toLocaleString('ja-JP', { maximumFractionDigits: 2 }) : null}
+      value={shown !== null ? formatMetricValue(shown) : null}
       unit={metric.unit ? formatUnitForDisplay(metric.unit) : undefined}
       badge={
         selectedPrefectureCode && metric.rank !== null ? (

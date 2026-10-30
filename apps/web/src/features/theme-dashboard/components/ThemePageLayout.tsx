@@ -23,7 +23,6 @@ import {
   LinkRowFrame,
   linkRowItemClass,
 } from '@/components/navigation/StatisticsScopeNav';
-import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { RailCard, RailNavRow } from '@/components/surface';
 
@@ -103,7 +102,7 @@ export async function ThemePageLayout({
   // 県の値と順位は説明文 (meta description・構造化データ) にだけ使う。本文は下の指標カードの 1 か所で見せる
   // (2026-10-30。旧: 本文にも「主なデータ」の節を別に描き、同じ値が名前・丸め・順位なしで 2 回出ていた)
   const areaHighlights = areaContext
-    ? getAreaThemeHighlights(data, areaContext.areaCode)
+    ? getAreaThemeHighlights(data, areaContext.areaCode, theme.tabIndicators)
     : [];
   // 県のページは、構造化データの名前・URL・説明・パンくずをその県のものにする (説明は meta description と同じ文)
   const structuredArea = areaContext
@@ -292,26 +291,6 @@ export async function ThemePageLayout({
             )}
           </div>
 
-
-          {/* エリアページ経由時の視点バナー */}
-          {areaContext && (
-            // 狭い幅では文と導線を縦に積む (横並びだと 1〜2 文字ずつ折り返す。2026-10-04 週次 UI 検査)
-            <div className="mb-4 flex flex-col gap-1 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm sm:flex-row sm:items-center sm:gap-2">
-              <span className="font-medium text-primary">
-                {areaContext.areaName}の視点
-              </span>
-              <span className="text-muted-foreground">
-                — 47都道府県チャートで{areaContext.areaName}
-                をハイライト表示しています
-              </span>
-              <SectionIndexLink
-                href={hrefFor('area', { areaCode: areaContext.areaCode })}
-                className="self-start sm:ml-auto sm:shrink-0 sm:self-auto"
-              >
-                {areaContext.areaName}のプロフィール
-              </SectionIndexLink>
-            </div>
-          )}
 
           <ThemeDashboardClient
             themeConfig={theme}
