@@ -27,6 +27,8 @@ const SLOT_COMPONENTS = new Set(placements.slotTypes.map((slot) => slot.componen
 const AD_COMPONENTS = new Set([
   ...SLOT_COMPONENTS,
   'AdSenseAd', 'BannerAd', 'AffiliateAdSlot', 'SidebarPromoBanner', 'RakutenItemsCard', 'FurusatoNozeiCard',
+  // 本文の広告のセル (広告を包むだけで、内容には数えない)
+  'AdCell',
 ]);
 
 /**
@@ -142,7 +144,8 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     expect(unlisted, '台帳の config/ads/placements.json の pages に載せる').toEqual([]);
   });
 
-  it('箱は本番の実測のまま (本文の AdSense 幅いっぱい × 280)', () => {
-    expect(adSlotType('adsense-body').box).toEqual({ width: 'full', height: 280 });
+  // 幅の上限 780px は本番で測った幅 (2026-10-29 /themes/labor-wages 780×280)。それより広い本文では中央に置く (2026-10-30)
+  it('箱は本番の実測のまま (本文の AdSense 幅いっぱい × 280・幅の上限 780)', () => {
+    expect(adSlotType('adsense-body').box).toEqual({ width: 'full', height: 280, maxWidth: 780 });
   });
 });

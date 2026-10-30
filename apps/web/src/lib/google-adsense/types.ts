@@ -23,6 +23,8 @@ export interface AdSlotBoxProp {
   height: number;
   mobileWidth?: number | 'full';
   mobileHeight?: number;
+  /** 幅いっぱいの箱の上限 (px)。本番で測った幅を超える広い本文では中央に置く */
+  maxWidth?: number;
 }
 
 export interface AdSlotProps {

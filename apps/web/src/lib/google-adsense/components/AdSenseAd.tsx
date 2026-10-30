@@ -19,6 +19,7 @@ import { AdSlotProps } from "../types";
 import {
   AD_CONTAINER_CLASS,
   SLOT_BOX_HEIGHT_CLASS,
+  SLOT_BOX_MAX_WIDTH_CLASS,
   getAdReservedMinHeight,
   getResponsiveAdFormat,
   slotBoxStyle,
@@ -154,7 +155,7 @@ export function AdSenseAd({
   return (
     <div
       ref={adRef}
-      className={`${AD_CONTAINER_CLASS} ${reserveClass} ${className}`}
+      className={`${AD_CONTAINER_CLASS} ${SLOT_BOX_MAX_WIDTH_CLASS} ${reserveClass} ${className}`}
       style={slotBox ? boxStyle : reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
     >
       {showLabel && (

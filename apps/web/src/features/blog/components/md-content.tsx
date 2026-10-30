@@ -20,7 +20,7 @@ import remarkGfm from "remark-gfm";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { AffiliateTextAdList, BannerAd } from "@/features/ads";
+import { AdCell, AffiliateTextAdList, BannerAd } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
@@ -262,7 +262,7 @@ function makeMdComponents(
         // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
         "ad-slot": () =>
             ADSENSE_DISPLAY_ENABLED ? (
-                <div className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose`}>
+                <AdCell label="広告" className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose px-0!`}>
                     <AdSenseAd
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
@@ -270,7 +270,7 @@ function makeMdComponents(
                         // 箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい × 280px。デスクトップだけ)
                         slotBox={adSlotBox("adsense-body")}
                     />
-                </div>
+                </AdCell>
             ) : null,
 
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
@@ -567,7 +567,7 @@ export function MDContent({
             </ReactMarkdown>
             {/* 広告: 記事末尾。手動 <ad-slot> 未設置記事のみ（injectAdSlots の中盤 2 枠に加えて末尾 1 枠）。 */}
             {ADSENSE_DISPLAY_ENABLED && !source.includes("<ad-slot") && (
-                <div className="my-8 not-prose">
+                <AdCell label="広告" className="my-8 not-prose px-0!">
                     <AdSenseAd
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
@@ -575,7 +575,7 @@ export function MDContent({
                         // モバイルでも出る枠なので、台帳の全幅の箱 (デスクトップ 280px・モバイル 250px)
                         slotBox={adSlotBox("adsense-body-all")}
                     />
-                </div>
+                </AdCell>
             )}
         </article>
     );

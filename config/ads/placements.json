@@ -81,7 +81,8 @@
       "provider": "adsense",
       "box": {
         "width": "full",
-        "height": 280
+        "height": 280,
+        "maxWidth": 780
       },
       "devices": [
         "desktop"
@@ -117,7 +118,8 @@
       "box": {
         "width": "full",
         "height": 280,
-        "mobileHeight": 250
+        "mobileHeight": 250,
+        "maxWidth": 780
       },
       "devices": [
         "desktop",
@@ -156,7 +158,8 @@
       "box": {
         "width": "full",
         "height": 466,
-        "mobileHeight": 242
+        "mobileHeight": 242,
+        "maxWidth": 780
       },
       "devices": [
         "desktop",

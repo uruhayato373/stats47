@@ -1,7 +1,4 @@
 import { cn } from "@stats47/components";
-import { Megaphone } from "lucide-react";
-
-import { SectionCard } from "@/components/surface";
 
 import { adSlotBox } from "@/lib/ad-placements";
 import {
@@ -12,9 +9,9 @@ import {
 
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "../../constants/manual-ad-policy";
 
+import { AdCell } from "./AdCell";
+
 interface FooterAdSlotProps {
-  /** "広告" の見出しを隠す (見出しなしのカードにする) */
-  hideLabel?: boolean;
   className?: string;
 }
 
@@ -24,32 +21,27 @@ interface FooterAdSlotProps {
  * 一覧・ハブページのメインコンテンツ最下部専用。rail には置かない（multiplex は全幅のみ）。
  * CONTENT_FOOTER（stats47-content-footer-multiplex）を共用する。
  *
- * 見た目は home の右レールの広告 (RailAdSlot) と同じ見出し付きカード (見出し「広告」) にする。
- * AdSense ポリシー (広告と非広告コンテンツの明確な区別) は見出しが満たす。
+ * 見た目は本文の広告のセル (AdCell。左上に「広告」・中身は中央。2026-10-30。旧: 見出し「広告」のカード)。
+ * AdSense ポリシー (広告と非広告コンテンツの明確な区別) は「広告」のラベルが満たす。
  *
  * **モバイルでは描画しない** (2026-08-04)。理由と実測は
  * `../../constants/manual-ad-policy.ts` を参照。
  */
 export function FooterAdSlot({
-  hideLabel = false,
   className,
 }: FooterAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !CONTENT_FOOTER.slotId) return null;
   return (
     <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, className)}>
-      <SectionCard
-        title={hideLabel ? undefined : "広告"}
-        icon={hideLabel ? undefined : <Megaphone />}
-        aria-label="広告"
-      >
+      {/* 本文の広告のセル。箱は広告の枠の台帳の「ページ末の関連コンテンツ型」(本番の実測 780×466 を上限に中央) */}
+      <AdCell label="広告">
         <AdSenseAd
           slotId={CONTENT_FOOTER.slotId}
           format={CONTENT_FOOTER.format}
           showLabel={false}
-          // 箱は広告の枠の台帳の「ページ末の関連コンテンツ型」(本番の実測 デスクトップ 466px)
           slotBox={adSlotBox("adsense-footer")}
         />
-      </SectionCard>
+      </AdCell>
     </div>
   );
 }

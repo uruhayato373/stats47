@@ -36,8 +36,8 @@ export function RailAdSlot({ slot }: RailAdSlotProps) {
         format={slot.format}
         slotId={slot.slotId}
         showLabel={false}
-        // 箱は広告の枠の台帳の「右レールの AdSense」(本番の実測) か「右レールの縦長の AdSense」(160×600)。右レールの枠はこの 2 形式だけ
-        slotBox={adSlotBox(slot.format === "skyscraper" ? "adsense-rail-sky" : "adsense-rail-rect")}
+        // 箱は広告の枠の台帳の「右レールの AdSense」(本番の実測。縦長の枠は 2026-10-30 に外した)
+        slotBox={adSlotBox("adsense-rail-rect")}
       />
     </RailCard>
   );

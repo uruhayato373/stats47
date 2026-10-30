@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 
+import { AdCell } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 
 import { adSlotBox } from "@/lib/ad-placements";
@@ -92,13 +93,14 @@ export function RankingPageContentSections({
             {!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate}
 
             {ADSENSE_DISPLAY_ENABLED && (
-                <div className="lg:hidden">
+                <AdCell label="広告" className="lg:hidden">
                     <AdSenseAd
                         format={RANKING_INCONTENT_MOBILE.format}
                         slotId={RANKING_INCONTENT_MOBILE.slotId}
+                        showLabel={false}
                         slotBox={adSlotBox("adsense-body-mobile")}
                     />
-                </div>
+                </AdCell>
             )}
 
             {sections.faq}
@@ -117,11 +119,14 @@ export function RankingPageContentSections({
             {sections.funnelCta}
 
             {ADSENSE_DISPLAY_ENABLED && (
-                <AdSenseAd
-                    format={RANKING_PAGE_FOOTER.format}
-                    slotId={RANKING_PAGE_FOOTER.slotId}
-                    slotBox={adSlotBox("adsense-footer")}
-                />
+                <AdCell label="広告">
+                    <AdSenseAd
+                        format={RANKING_PAGE_FOOTER.format}
+                        slotId={RANKING_PAGE_FOOTER.slotId}
+                        showLabel={false}
+                        slotBox={adSlotBox("adsense-footer")}
+                    />
+                </AdCell>
             )}
 
             {/* 関連ランキングと記事を関連コンテンツ型 (AdSense) と PR の列の間に置き、広告の枠を隣り合わせにしない。

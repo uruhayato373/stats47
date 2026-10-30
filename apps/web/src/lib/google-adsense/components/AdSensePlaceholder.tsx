@@ -49,7 +49,8 @@ export function AdSensePlaceholder({
   slotBox,
 }: AdSensePlaceholderProps) {
   if (slotBox) {
-    const label = (w: number | "full", h: number) => `${w === "full" ? "幅いっぱい" : w} × ${h}px`;
+    const label = (w: number | "full", h: number) =>
+      `${w === "full" ? (slotBox.maxWidth ? `幅いっぱい (上限 ${slotBox.maxWidth}px)` : "幅いっぱい") : w} × ${h}px`;
     const mobileDiffers = slotBox.mobileHeight !== undefined || slotBox.mobileWidth !== undefined;
     return (
       <div className={`${AD_CONTAINER_CLASS} ${className}`.trim()} style={slotBoxStyle(slotBox)}>

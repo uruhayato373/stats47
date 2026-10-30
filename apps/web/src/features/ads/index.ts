@@ -18,6 +18,7 @@ export {
   InContentAdSlot,
   FooterAdSlot,
   RailAdSlot,
+  AdCell,
 } from "./components/slots";
 
 // Constants & Types
