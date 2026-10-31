@@ -1,7 +1,7 @@
 {
-  "hash": "b733e86c9c3327577bf76f1147e187f2c5e1aec1b672333600a31ad6af758cf1",
-  "audited_at": "2026-10-29T11:49:28",
+  "hash": "e19b4d545b63bc6b68f28ea77869778aad0c25d1cd011e589fdfa2418bd35c94",
+  "audited_at": "2026-10-31T00:04:43",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md"
+    ".claude/scripts/ads/lib/placement-map-core.mjs"
   ]
 }

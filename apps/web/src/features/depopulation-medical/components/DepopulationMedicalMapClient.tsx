@@ -6,16 +6,9 @@ import dynamic from "next/dynamic";
 
 import { to2DigitPrefCode } from "@stats47/area";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@stats47/components/atoms/ui/table";
 
 import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/client";
+import { RankingVisualizationSection } from "@/features/ranking/widgets";
 
 import { fetchPrefDetail } from "../actions";
 
@@ -23,47 +16,56 @@ import type {
   DepopulationMedicalPrefDetail,
   DepopulationMedicalSummary,
 } from "../lib/types";
-import type { TopoJSONTopology } from "@stats47/types";
-
-
-
+import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 /** 凡例は地図 (PrefectureOverlayMap) と同じ識別配色を参照して色ずれを防ぐ */
 const OVERLAY_COLORS = LEAFLET_MAP_COLORS.depopulationMedical;
 
-const DepopulationChoroplethMap = dynamic(
-  () =>
-    import("./DepopulationChoroplethMap").then(
-      (m) => m.DepopulationChoroplethMap,
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <Skeleton className="h-[420px] lg:h-[520px] w-full" />
-    ),
+/**
+ * 都道府県の地図と表はランキングと同じ部品で 1 枚に描く (2026-10-30。旧: 過疎×医療専用の地図と手書きの順位表)。
+ * 値は比率 (0〜1) を % に直したもの。色は赤の連続色で 0 から塗る
+ */
+const RATIO_ITEM: RankingItem = {
+  rankingKey: "depopulation-medical-ratio",
+  areaType: "prefecture",
+  rankingName: "過疎地域内の医療機関比率",
+  isActive: true,
+  dataSourceId: "gis-cross",
+  // 指標の記録ではないので、掲載の文言と日付は持たない
+  hook: "",
+  createdAt: "",
+  updatedAt: "",
+  title: "過疎地域内の医療機関比率",
+  unit: "%",
+  // 表と同じ小数 1 桁で凡例の境界値を丸める
+  valueDisplay: { decimalPlaces: 1 },
+  visualization: {
+    colorScheme: "interpolateReds",
+    colorSchemeType: "sequential",
+    domain: { mode: "zero" },
+    classification: { method: "equal-interval", classes: 5 },
+    trendDomain: { mode: "extent" },
+    comparisonDomain: { mode: "extent" },
   },
-);
+};
 
 const PrefectureOverlayMap = dynamic(
   () => import("./PrefectureOverlayMap").then((m) => m.PrefectureOverlayMap),
   {
     ssr: false,
-    loading: () => (
-      <Skeleton className="h-[420px] lg:h-[520px] w-full" />
-    ),
+    loading: () => <Skeleton className="h-[420px] lg:h-[520px] w-full" />,
   },
 );
 
 interface Props {
   summary: DepopulationMedicalSummary;
-  topology: TopoJSONTopology | null;
 }
 
 function pct(ratio: number): string {
   return `${(ratio * 100).toFixed(1)}%`;
 }
 
-export function DepopulationMedicalMapClient({ summary, topology }: Props) {
+export function DepopulationMedicalMapClient({ summary }: Props) {
   const [selectedPrefCode5, setSelectedPrefCode5] = useState<string | null>(
     null,
   );
@@ -74,16 +76,30 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
     new Map(),
   );
 
-  // ratio 降順ランキング
-  const ranked = useMemo(
+  // 比率の高い順の順位 (同じ値は同じ順位)
+  const rankingValues = useMemo<RankingValue[]>(
     () =>
-      [...summary.prefectures].sort((a, b) => b.ratio - a.ratio),
+      summary.prefectures.map((pref) => ({
+        metricKey: RATIO_ITEM.rankingKey,
+        areaType: "prefecture",
+        areaCode: pref.prefCode,
+        areaName: pref.prefName,
+        yearCode: "",
+        yearName: "",
+        value: Math.round(pref.ratio * 1000) / 10,
+        unit: RATIO_ITEM.unit,
+        rank:
+          1 +
+          summary.prefectures.filter((other) => other.ratio > pref.ratio)
+            .length,
+      })),
     [summary.prefectures],
   );
 
-  const selectPrefecture = useCallback((code5: string) => {
-    const code2 = to2DigitPrefCode(code5);
+  const selectPrefecture = useCallback((code5: string | null) => {
     setSelectedPrefCode5(code5);
+    if (!code5) return;
+    const code2 = to2DigitPrefCode(code5);
 
     const cached = detailCache.current.get(code2);
     if (cached) {
@@ -118,61 +134,20 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
 
   return (
     <div className="space-y-6">
-      {/* 上段: choropleth + ランキング表 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2">
-          <h2 className="text-base font-bold mb-2">
-            過疎地域内の医療機関比率（都道府県別）
-          </h2>
-          <DepopulationChoroplethMap
-            topology={topology}
-            prefectures={summary.prefectures}
-            selectedPrefectureCode={selectedPrefCode5}
-            onPrefectureClick={selectPrefecture}
-          />
-          <p className="text-xs text-muted-foreground mt-1">
+      <RankingVisualizationSection
+        rankingItem={RATIO_ITEM}
+        activeRankingItem={RATIO_ITEM}
+        rankingValues={rankingValues}
+        areaType="prefecture"
+        title={`${RATIO_ITEM.title}の地図と表`}
+        highlightAreaCode={selectedPrefCode5}
+        onSelectArea={selectPrefecture}
+        cardFooter={
+          <p className="text-xs text-muted-foreground">
             色が濃いほど、県内の医療機関に占める「過疎地域内の医療機関」の比率が高い。
           </p>
-        </div>
-
-        <div className="lg:col-span-1">
-          <h2 className="text-base font-bold mb-2">ランキング</h2>
-          <div className="max-h-[520px] overflow-y-auto rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-10">#</TableHead>
-                  <TableHead>都道府県</TableHead>
-                  <TableHead className="text-right!">過疎内</TableHead>
-                  <TableHead className="text-right!">比率</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {ranked.map((p, i) => (
-                  <TableRow
-                    key={p.prefCode}
-                    className={`cursor-pointer ${
-                      p.prefCode === selectedPrefCode5
-                        ? "bg-muted"
-                        : ""
-                    }`}
-                    onClick={() => selectPrefecture(p.prefCode)}
-                  >
-                    <TableCell className="text-muted-foreground">{i + 1}</TableCell>
-                    <TableCell>{p.prefName}</TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {p.depopulationFacilities}/{p.totalFacilities}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {pct(p.ratio)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
-      </div>
+        }
+      />
 
       {/* 下段: 県別オーバーレイ詳細 */}
       <div>
@@ -215,9 +190,12 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
               <>
                 <PrefectureOverlayMap detail={prefDetail} />
                 <p className="text-xs text-muted-foreground">
-                  <span style={{ color: OVERLAY_COLORS.insideArea }}>●</span> 過疎地域内の医療機関 /{" "}
-                  <span style={{ color: OVERLAY_COLORS.outsideArea }}>●</span> 過疎地域外 /{" "}
-                  <span style={{ color: OVERLAY_COLORS.areaPolygon }}>■</span> 過疎地域
+                  <span style={{ color: OVERLAY_COLORS.insideArea }}>●</span>{" "}
+                  過疎地域内の医療機関 /{" "}
+                  <span style={{ color: OVERLAY_COLORS.outsideArea }}>●</span>{" "}
+                  過疎地域外 /{" "}
+                  <span style={{ color: OVERLAY_COLORS.areaPolygon }}>■</span>{" "}
+                  過疎地域
                 </p>
               </>
             )}

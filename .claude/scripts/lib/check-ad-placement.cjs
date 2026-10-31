@@ -246,11 +246,8 @@ checkForbiddenPatterns(RIGHT_RAIL_FILES.articleShell, articleShell, noIndependen
 checkForbiddenPatterns(RIGHT_RAIL_FILES.sharedWidgets, sharedWidgets, noIndependentScroll);
 checkForbiddenPatterns(RIGHT_RAIL_FILES.areaProfile, areaProfile, noIndependentScroll);
 
-if (!/<SidebarPromoBanner\b/.test(sharedWidgets)) {
-  errors.push(
-    `${RIGHT_RAIL_FILES.sharedWidgets}\n   共通右レールに登録済み画像バナー SidebarPromoBanner がない。`,
-  );
-}
+// 共通右レールの固定の PR は 2026-10-30 に外した (呼び出し元が 1 つも出しておらず、残すと AdSense と隣り合う)。
+// PR を置くなら登録済み画像バナー (SidebarPromoBanner) だけ、という制約は残す
 checkAllowedPromotionalTags(
   RIGHT_RAIL_FILES.sharedWidgets,
   sharedWidgets,

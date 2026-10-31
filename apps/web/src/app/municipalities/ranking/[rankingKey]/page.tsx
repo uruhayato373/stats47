@@ -282,8 +282,10 @@ export default async function MunicipalityRankingPage({
           }
         >
           <MunicipalityRankingMapSection
+            title={item.title}
             visualization={item.visualization}
             unit={snapshot.unit}
+            decimalPlaces={precision}
             prefectureCode={prefectureCode}
             values={snapshot.values}
           />

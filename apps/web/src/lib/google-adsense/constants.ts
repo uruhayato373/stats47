@@ -61,12 +61,6 @@ export const RANKING_SIDEBAR_TOP: AdSlotConfig = {
   format: "rectangle",
 };
 
-/** ランキングページ: 右サイドバー。AdSense ユニット名: stats47-ranking-rail-bottom */
-export const RANKING_PAGE_SIDEBAR: AdSlotConfig = {
-  slotId: "2308454706",
-  format: "skyscraper",
-};
-
 /**
  * 右レール共通のレクタングル枠（RailAdSlot 用）
  * 旧 MAIN_SIDEBAR（未使用スロット 7716393084）を転用。category / areas の右レールに配置する。
@@ -87,8 +81,11 @@ export const RAIL_RECT: AdSlotConfig = {
  * AdSense ユニット: stats47-ranking-footer-multiplex（Multiplex / autorelaxed）
  */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
-  slotId: "2439393208",
-  format: "multiplex",
+  // 2026-10-31 (オーナー決定 AdSense は全て 300×250): 関連コンテンツ型 (2439393208) は固定の大きさにできず、
+  // モバイルで 308×1503 まで伸びていた。表示広告のユニット stats47-hub-rail (ランキングのページには出ない) を
+  // 固定の大きさで使う。この配置専用の表示広告ユニットを作ったら差し替える (backlog ADSENSE-FIXED-UNITS-01)
+  slotId: "9435960671",
+  format: "rectangle",
 };
 
 /** ブログ記事内インライン広告（記事内 / fluid）。AdSense ユニット名: stats47-blog-inarticle */
@@ -142,6 +139,8 @@ export const HUB_INCONTENT: AdSlotConfig = {
  * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
  */
 export const CONTENT_FOOTER: AdSlotConfig = {
-  slotId: "2005202370",
-  format: "multiplex",
+  // 2026-10-31: RANKING_PAGE_FOOTER と同じ理由で、関連コンテンツ型 (2005202370) をやめて表示広告のユニット
+  // stats47-themes-content を固定の大きさで使う (backlog ADSENSE-FIXED-UNITS-01)
+  slotId: "8298138821",
+  format: "rectangle",
 };

@@ -91,7 +91,6 @@ export default async function LocalFinanceThemePage({
     rankingKeys: [...supplementaryKeys],
     tabIndicators: theme.tabIndicators?.filter((indicator) => supplementaryKeys.has(indicator.rankingKey)),
     defaultRankingKey: [...supplementaryKeys][0],
-    hideMap: true,
   };
   const supplementaryData = await loadThemeData(supplementaryConfig);
   const [query, cookieStore] = await Promise.all([searchParams, cookies()]);
@@ -149,7 +148,6 @@ export default async function LocalFinanceThemePage({
           metricGroups={supplementaryData?.metricGroups ?? supplementaryGroups}
           sections={supplementary}
           indicatorDataMap={supplementaryData?.indicatorDataMap ?? {}}
-          topology={null}
         />
 
         {/*

@@ -371,7 +371,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を
 > 追加した。登録済み `nav_surface` / `nav_label` の**値追加**で新しい custom dimension は無い。
-> 呼び出し元は `MunicipalityCityMapClient` / `TrackedMunicipalityThemeCard`
+> 呼び出し元は `RankingMapChartClient` (市区町村の地図。`areaHrefs` と `navSurface` を渡したとき。2026-10-30 に市区町村専用の地図から置き換え) / `TrackedMunicipalityThemeCard`
 > (`apps/web/src/features/municipalities/components/`)。地図・ヒストグラムの hover は
 > 計測しない (新 dimension 登録 = owner 工程が要るため。クリック導線で回遊判定は成立する)。
 >

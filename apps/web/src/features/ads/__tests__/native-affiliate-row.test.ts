@@ -7,7 +7,7 @@
  *
  * 規約 (affiliate-ads-standards.md §3):
  *   - 縦長 (height > width) は native / 本文枠に出さない — isLandscapeBanner で描画側除外
- *   - 縦長の唯一の受け皿は SidebarStickyBannerAd ("sidebar-sticky" reader の唯一の消費者)
+ *   - 縦長を出す枠は無い (受け皿だったホームの縦長バナーは 2026-10-30 に外した。広告同士の隣り合わせを無くすため)
  *   - NativeAffiliateRow の可視要素はリンク付きバナー画像だけ
  */
 import { readFileSync } from "node:fs";
@@ -52,9 +52,11 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain(".filter(isLandscapeBanner)");
   });
 
-  // 2026-10-08 オーナー判断: 画像だけでは記事の図と見分けにくいので PR 表記は付ける (ステマ告示への対応)
-  it("各バナーに PR 表記を付け、見出し・商品名・もっと見る導線は表示しない", () => {
-    expect(src).toContain("<PrLabel />");
+  // 2026-10-08 オーナー判断: 画像だけでは記事の図と見分けにくいので PR 表記は付ける (ステマ告示への対応)。
+  // 2026-10-30 (案 A): 表記は列ごとに 1 つ、本文の広告のセル (AdCell) の左上に置く
+  it("PR 表記を広告のセルに付け、見出し・商品名・もっと見る導線は表示しない", () => {
+    expect(src).toContain('<AdCell label="PR">');
+    expect(src).not.toContain("<PrLabel />");
     expect(src).not.toContain(">PR<");
     expect(src).not.toContain("<h3");
     expect(src).not.toContain("<p");
@@ -79,19 +81,21 @@ describe("NativeAffiliateRow の構造契約", () => {
     // w-auto は width 属性を打ち消し、lazy の画像が読み込み前に 0×0 になる
     expect(src).not.toContain("w-auto");
     // 枠は原寸幅で固定する。w-fit にすると画像の max-w-full と循環して幅 0 で描かれる
-    expect(src).toContain('className="mx-auto flex w-full max-w-75 flex-col gap-1"');
+    expect(src).toContain('className="mx-auto w-full max-w-75"');
     expect(src).not.toContain("w-fit");
     expect(src).not.toContain("h-auto w-full");
     expect(src).toContain("sizes={`${b.width}px`}");
   });
 
   it("列の数はブラウザの幅ではなく本文の幅 (コンテナ) で決める", () => {
-    expect(src).toContain('<div className="@container">');
+    expect(src).toContain('<div className="@container w-full">');
     expect(src).not.toMatch(/\bmd:grid-cols-/);
     expect(src).not.toMatch(/\bmd:block/);
     // 境界 = 300px × 列 + 8px × (列 − 1)
-    expect(src).toContain('"grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3"');
-    expect(src).toContain("@min-[1224px]:grid-cols-4");
+    // 列は原寸 300px の幅で、まとめて中央に置く (2026-10-30 案 A)
+    expect(src).toContain("@min-[608px]:grid-cols-[repeat(2,300px)] @min-[916px]:grid-cols-[repeat(3,300px)]");
+    expect(src).toContain("@min-[1224px]:grid-cols-[repeat(4,300px)]");
+    expect(src).toContain("justify-center");
   });
 
   it("1 行に入らない分は出さず、2 段目に半端な行を作らない", () => {
@@ -104,32 +108,6 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain('variant?: "standard" | "three-up"');
     expect(src).toContain('variant === "three-up" ? 3 : 4');
     expect(src).toContain('variant = "standard"');
-  });
-});
-
-describe("SidebarStickyBannerAd の契約", () => {
-  const src = readComponent("SidebarStickyBannerAd.tsx");
-
-  it("PR 表記は BannerAd に任せ、独自の PR 見出しを重ねない", () => {
-    expect(src).toContain("<BannerAd");
-    expect(src).not.toContain(">PR<");
-    expect(src).not.toContain("<PrLabel");
-  });
-
-  it('sidebar-sticky locationCode を読む (縦長の唯一の受け皿)', () => {
-    expect(src).toContain('"sidebar-sticky"');
-  });
-
-  it("lg 未満では描画しない (サイドバー概念は lg+ のみ)", () => {
-    expect(src).toContain("hidden lg:block");
-  });
-
-  it("sticky を付けない (home 構造テストが aside の lg:sticky 不在を assert)", () => {
-    expect(src).not.toContain("lg:sticky");
-  });
-
-  it("計装済みコンポーネント (BannerAd) に描画を委譲する", () => {
-    expect(src).toContain("<BannerAd");
   });
 });
 

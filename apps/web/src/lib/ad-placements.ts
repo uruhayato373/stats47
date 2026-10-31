@@ -14,6 +14,8 @@ export interface AdSlotBox {
   /** モバイルで寸法が違う枠だけ (本番の実測) */
   mobileWidth?: number | 'full';
   mobileHeight?: number;
+  /** 幅いっぱいの箱の上限 (px)。本番で測った幅を超える広い本文では中央に置く */
+  maxWidth?: number;
 }
 
 export interface AdSlotType {

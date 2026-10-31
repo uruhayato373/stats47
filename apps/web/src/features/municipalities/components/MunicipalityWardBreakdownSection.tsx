@@ -14,7 +14,7 @@ import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils'
 
 import { SectionHeader } from '@/components/section';
 
-import { MunicipalityCityMapClient } from './MunicipalityCityMapClient';
+import { RankingMapChartClient } from '@/features/ranking/widgets';
 
 import type { CityDatabookWardBreakdown } from '@stats47/ranking/types';
 import type { MetricPresentation, TopoJSONTopology } from '@stats47/types';
@@ -86,17 +86,24 @@ export async function MunicipalityWardBreakdownSection({
           <p className="mb-1 text-xs text-muted-foreground">
             {mapMetric.label}（{mapMetric.yearName}）
           </p>
-          <MunicipalityCityMapClient
-            topology={topology}
-            points={mapMetric.values.map((row) => ({
+          {/* 地図はランキングと同じ部品で描く (2026-10-30) */}
+          <RankingMapChartClient
+            rankingItem={{
+              title: mapMetric.label,
+              unit: mapMetric.unit,
+              visualization,
+              // 凡例の境界値を表と同じ桁で丸める
+              valueDisplay: { decimalPlaces: precisionOf[mapKey!] ?? 0 },
+            }}
+            rankingValues={mapMetric.values.map((row) => ({
               areaCode: row.areaCode,
               areaName: nameOf.get(row.areaCode) ?? row.areaCode,
               value: row.value,
-              rank: row.cityRank,
             }))}
-            unit={formatUnitForDisplay(mapMetric.unit)}
-            visualization={visualization}
-            hrefByCode={{}}
+            areaType="city"
+            topology={topology}
+            bare
+            mapClassName="h-[360px]"
           />
         </div>
       )}

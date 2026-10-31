@@ -42,12 +42,13 @@ describe("right rail banner contract", () => {
     // 配置ガードを 2 回実行する。Windows では 1 回 9〜20 秒かかり既定の 10 秒を超える (2026-10-27 実測)
   }, 60_000);
 
-  it("shared right rails render registered image banners instead of text promo cards", () => {
+  // 共通右レールの固定の PR は 2026-10-30 に外した (呼び出し元が出しておらず、残すと AdSense と隣り合う)。
+  // 文字の宣伝カードを置かない制約は残す
+  it("shared right rails do not render text promo cards", () => {
     const rightRail = source(
       "apps/web/src/components/rail/RightRailWidgets.tsx",
     );
 
-    expect(rightRail).toContain("<SidebarPromoBanner");
     expect(rightRail).not.toContain("TechSchoolPromoCard");
     expect(rightRail).not.toContain("FurusatoNozeiCard");
   });

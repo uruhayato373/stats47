@@ -14,6 +14,8 @@ import {
   uniqueAffiliateDestinations,
 } from '../constants/affiliate-delivery-policy';
 
+import { buildPreviewAffiliateAds, isAdSlotPreviewEnabled } from './ad-slot-preview';
+
 import type { AffiliateAd, AffiliateLocationCode } from '../types';
 
 export type AffiliateAdRow = AffiliateAd;
@@ -172,6 +174,8 @@ async function getActive(
   includeExperimentVariants = false
 ): Promise<AffiliateAdRow[]> {
   if (process.env.NEXT_PHASE === 'phase-production-build') return [];
+  // 開発用の広告枠の表示: 在庫を代わりの広告に置き換える (本番では働かない)
+  if (isAdSlotPreviewEnabled()) return buildPreviewAffiliateAds();
   try {
     const snapshot = await loadSnapshot();
     return snapshot.ads

@@ -73,7 +73,8 @@
         "NEXT_PUBLIC_R2_PUBLIC_URL",
         "R2_ACCESS_KEY_ID",
         "R2_SECRET_ACCESS_KEY",
-        "R2_S3_ENDPOINT"
+        "R2_S3_ENDPOINT",
+        "AD_SLOT_PREVIEW"
       ]
     },
     "pipeline:images": {

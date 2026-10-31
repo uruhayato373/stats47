@@ -4,9 +4,8 @@
  * 開発環境で広告の代わりに表示するプレースホルダーです。
  * 外枠 class は本番の `AdSenseAd` と共有（`ad-frame.ts`）しています。
  *
- * 枠と地は広告スロット側のカード (RailAdSlot / FooterAdSlot の見出し「広告」付き Card) が持つので、
- * ここでは枠も地の色も描かず、カードの地の上に文字だけを置く (カードの中に別の面を作らない。
- * 2026-10-28 3 巡目。muted の地がカードの中のもう 1 枚の面に見えていた)。
+ * 広告の枠はカードで囲まない (本文の広告のセル AdCell。2026-10-31)。ここでも地の色を描かず、
+ * 台帳の箱の寸法の破線の箱に文字だけを置く。
  * 高さは本番の予約高と同じだが、フレキシブル枠 (Multiplex 300px など) は本文を占めないよう
  * PLACEHOLDER_MAX_HEIGHT までに抑え、本番の予約高を文字で示す。
  */
@@ -49,7 +48,8 @@ export function AdSensePlaceholder({
   slotBox,
 }: AdSensePlaceholderProps) {
   if (slotBox) {
-    const label = (w: number | "full", h: number) => `${w === "full" ? "幅いっぱい" : w} × ${h}px`;
+    const label = (w: number | "full", h: number) =>
+      `${w === "full" ? (slotBox.maxWidth ? `幅いっぱい (上限 ${slotBox.maxWidth}px)` : "幅いっぱい") : w} × ${h}px`;
     const mobileDiffers = slotBox.mobileHeight !== undefined || slotBox.mobileWidth !== undefined;
     return (
       <div className={`${AD_CONTAINER_CLASS} ${className}`.trim()} style={slotBoxStyle(slotBox)}>

@@ -1,5 +1,4 @@
 import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { TopoJSONTopology } from "@stats47/types";
 
 // ============================================================================
 // テーマダッシュボード固有の型
@@ -111,12 +110,6 @@ export interface ThemeConfig {
    * (例: "depopulation-medical" は healthcare と aging-society の両方で使用)。
    */
   embeddedSections?: string[];
-  /**
-   * 地図を非表示にしカード主役レイアウトにする。
-   * true のとき ThemeDashboardTabbed は地図 (ThemeLeafletMap) を描画せず、
-   * 「全国の主要指標」KPI スタットカード (ThemeMetricsDashboard) を主役として先頭に配置する。
-   */
-  hideMap?: boolean;
 }
 
 /** 指標ごとのプリロード済みデータ */
@@ -151,14 +144,8 @@ export interface ThemeDashboardClientProps {
   embeddedSections?: Record<string, import("react").ReactNode>;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  /** TopoJSON */
-  topology: TopoJSONTopology | null;
   /** DB 管理チャート（page_components + page_component_assignments） */
   pageCharts?: import("@/components/stat-charts/services/load-page-components").PageComponent[];
   /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */
   chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
-  /** KPI カードの全都道府県データ（chartKey → areaCode → KpiCardClientProps） */
-  kpiDataByArea?: Record<string, Record<string, import("@/components/stat-charts/components/cards/KpiCard/KpiCardClient").KpiCardClientProps>>;
-  /** ハイライト対象の都道府県コード（5桁、/areas/[code]/[themeSlug] 経由時に設定） */
-  highlightAreaCode?: string;
 }

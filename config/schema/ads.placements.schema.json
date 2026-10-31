@@ -147,6 +147,11 @@
                 "type": "integer",
                 "minimum": 1,
                 "description": "モバイルで実物の高さが違うときだけ (本番の実測)"
+              },
+              "maxWidth": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "幅いっぱい (full) の箱の上限 (px)。本番で測った幅を超える広い本文では、この幅で中央に置く"
               }
             }
           },

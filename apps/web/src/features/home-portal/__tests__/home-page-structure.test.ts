@@ -83,13 +83,12 @@ describe('home page structure (portal)', () => {
     expect(pageHeaderUses).toHaveLength(1);
   });
 
-  it('本文にランキング・ブログ・テーマ・都道府県・プロフィールを順に並べる', () => {
+  it('本文にランキング・ブログ・テーマ・都道府県を順に並べる', () => {
     const order = [
       '<FeaturedRankings limit',
       '新着ブログ',
       '知りたいことから探す',
       '都道府県から探す',
-      '運営者プロフィール',
     ];
     let cursor = -1;
     for (const marker of order) {
@@ -98,6 +97,15 @@ describe('home page structure (portal)', () => {
       expect(idx, `${marker} の順序が不正`).toBeGreaterThan(cursor);
       cursor = idx;
     }
+  });
+
+  // 2026-10-30: 右レールで広告同士が続かないよう、運営者プロフィールを本文から右レールの AdSense と PR の間へ移した
+  it('右レールは AdSense の後に運営者プロフィールを置く', () => {
+    const rail = PAGE.slice(PAGE.indexOf('const rightRail'), PAGE.indexOf('</RailStack>'));
+    const ad = rail.indexOf('<RailAdSlot');
+    const profile = rail.indexOf('<OperatorProfileCard');
+    expect(ad).toBeGreaterThan(-1);
+    expect(profile).toBeGreaterThan(ad);
   });
 
   it('サイドバーと重複するカテゴリ一覧を置かず、広告をPageShellの右レールへ渡す', () => {

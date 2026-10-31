@@ -10,13 +10,11 @@ import {
 
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "../../constants/manual-ad-policy";
 
-import { AdSlotLabel } from "./AdSlotLabel";
+import { AdCell } from "./AdCell";
 
 interface InContentAdSlotProps {
   /** 表示するスロット定数（slotId が空文字なら描画しない） */
   slot: AdSlotConfig;
-  /** "広告" ラベルを隠す */
-  hideLabel?: boolean;
   className?: string;
 }
 
@@ -35,20 +33,20 @@ interface InContentAdSlotProps {
  */
 export function InContentAdSlot({
   slot,
-  hideLabel = false,
   className,
 }: InContentAdSlotProps) {
   if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
-    <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, "my-8", className)}>
-      {!hideLabel && <AdSlotLabel />}
-      <AdSenseAd
-        slotId={slot.slotId}
-        format={slot.format}
-        showLabel={false}
-        // 確保する箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい×280)
-        slotBox={adSlotBox("adsense-body")}
-      />
+    <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, className)}>
+      {/* 本文の広告のセル (左上に「広告」・中身は中央)。箱は広告の枠の台帳の「本文の AdSense」(本番の実測 780×280 を上限に中央) */}
+      <AdCell label="広告">
+        <AdSenseAd
+          slotId={slot.slotId}
+          format={slot.format}
+          showLabel={false}
+          slotBox={adSlotBox("adsense-body")}
+        />
+      </AdCell>
     </div>
   );
 }

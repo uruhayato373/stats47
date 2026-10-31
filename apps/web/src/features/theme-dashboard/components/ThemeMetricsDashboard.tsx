@@ -93,6 +93,24 @@ function resolveChartRankingLinks(
 }
 
 /**
+ * チャートの先頭の指標ハブ (rankingLink) の名前。2 件目以降 (生成側の rankingLinks) と同じく
+ * 「{テーマの短い名前}の定義・ランキング」にする (2026-10-30。旧: 1 件目だけ「指標の定義・ランキング」で、Sheet の中でどの指標か分からなかった)
+ */
+function primaryRankingLabel(
+  rankingLink: string | null | undefined,
+  tabIndicators: ReadonlyArray<{ rankingKey: string; tabLabel: string }>,
+  indicatorDataMap: Record<string, ThemeIndicatorData>
+): string {
+  const key = rankingLink?.match(/^\/ranking\/([^/?#]+)/)?.[1];
+  const rankingKey = key ? decodeURIComponent(key) : undefined;
+  const name = rankingKey
+    ? (tabIndicators.find((indicator) => indicator.rankingKey === rankingKey)?.tabLabel ??
+      indicatorDataMap[rankingKey]?.rankingItem.title)
+    : undefined;
+  return name ? `${name}の定義・ランキング` : '指標の定義・ランキング';
+}
+
+/**
  * テーマページのフル幅ダッシュボード
  *
  * /areas/[code]/[category] と同様のスタイルで、テーマの主要指標を
@@ -409,7 +427,7 @@ export function ThemeMetricsDashboard({
           sourceLinks={chartSourceLinks?.[chart.componentKey]}
           annotation={resolveChartAnnotation(chart)}
           rankingLink={chart.rankingLink}
-          rankingLabel="指標の定義・ランキング"
+          rankingLabel={primaryRankingLabel(chart.rankingLink, themeConfig.tabIndicators, indicatorDataMap)}
           rankingLinks={resolveChartRankingLinks(chart)}
         />
       }
@@ -586,7 +604,7 @@ export function ThemeMetricsDashboard({
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-      {!cardsOnly && themeConfig.hideMap && (
+      {!cardsOnly && (
         <ThemeComparisonSection
           themeConfig={themeConfig}
           metricGroups={metricGroups}

@@ -95,11 +95,14 @@ async function readCompatibleRows(
   params: LegacyStatParams
 ): Promise<StatsSchema[] | null> {
   const candidates = candidateMetricKeys(params);
+  // 全国 (00000) を求められたときも全国の系列を読む。旧: 地域を指定しないときだけ読み、全国を指定すると
+  // 都道府県の値の中から全国を探して 0 件になり、ランキングの「〇〇の推移」(全国の値と推移のカード) が空だった (2026-10-30)
+  const includeJapan = areaCode === null || areaCode === '00000';
   for (const metricKey of candidates) {
     const config = METRICS_REGISTRY[metricKey];
     const { prefecture, japan } = await cachedReadMetric(
       metricKey,
-      areaCode === null
+      includeJapan
     );
     if (!config || !prefecture) continue;
     const rows: StatsSchema[] = [

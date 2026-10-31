@@ -14,11 +14,9 @@ import {
   NativeAffiliateRow,
   OperatorProfileCard,
   RailAdSlot,
-  SidebarPromoBanner,
 } from '@/features/ads';
 import {
   resolveAffiliateBannersByVertical,
-  SidebarStickyBannerAd,
 } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listLatestArticles } from '@/features/blog/server';
@@ -119,15 +117,12 @@ export default async function HomePage() {
     8
   ).catch(() => []);
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
-  // 残る広告だけを右レールに置く (左右レールは併存させない契約)。
+  // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
+  // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
   const rightRail = (
     <RailStack>
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
-      <SidebarPromoBanner index={0} />
-      <SidebarStickyBannerAd
-        position="home-left-rail"
-        excludeAds={homeNativeBanners}
-      />
+      <OperatorProfileCard />
     </RailStack>
   );
 
@@ -198,9 +193,6 @@ export default async function HomePage() {
               surface="home"
             />
           </SectionCard>
-
-          {/* 運営者プロフィール。カード自身が見出し「運営者」とプロフィールへのリンクを持つ */}
-          <OperatorProfileCard className="overflow-hidden" />
         </PageSections>
 
         {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。

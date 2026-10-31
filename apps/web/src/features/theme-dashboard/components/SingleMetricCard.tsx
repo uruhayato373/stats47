@@ -37,7 +37,7 @@ interface SingleMetricCardProps {
  *
  * 選択肢が 1 つしかないので選択 UI (チェックボックス・タブ・選択タイル) を出さない。
  * 部品は台帳 data/design/components.json の stat-tile: 名前 → 値 + 単位 + 順位バッジ → 年 (補足) の順に並べ、
- * 推移の小さなチャートは値の下、出典・ランキングのリンク行は下端に置く。
+ * 推移の小さなチャートは値の下、出典・指標の定義は右上の枠なしのアイコンから Sheet で開く (2026-10-30)。
  *
  * 推移を出すかは lib/metric-trend.ts が決める (県を選んでいる・同じ章に詳しい図が無い・異なる年が 2 つ以上)。
  * 出さないときは何も置かない。取得は県選択時にこの指標 1 件分だけ (自地域 + 全国)。
@@ -119,6 +119,7 @@ export function SingleMetricCard({
       <MetricStatTile
         metric={metric}
         selectedPrefectureCode={selectedPrefectureCode}
+        sourcesLabel={label}
         label={
           <>
             {heading}

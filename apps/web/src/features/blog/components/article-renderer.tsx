@@ -3,7 +3,6 @@ import type { AffiliateCategory } from "@/features/ads/constants/affiliate-categ
 import { type Article } from "../types";
 
 import { MDContent } from "./md-content";
-import { MDXContent } from "./mdx-content";
 
 import type { InlineAffiliateBanner } from "../utils";
 
@@ -44,9 +43,6 @@ export function ArticleRenderer({
     affiliateVertical,
     affiliateBanners,
 }: ArticleRendererProps) {
-    if (article.format === "mdx") {
-        return <MDXContent source={article.content} />;
-    }
     return (
         <MDContent
             source={article.content}

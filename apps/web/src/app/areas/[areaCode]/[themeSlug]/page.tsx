@@ -51,12 +51,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!theme || !pref) return {};
 
   const title = `${pref.prefName}の${theme.title}`;
-  // その県の主な値と順位を先頭に置く (本文の「主なデータ」・構造化データと同じ文。2026-10-30)
+  // その県の主な値と順位を先頭に置く (構造化データと同じ文。2026-10-30)
   const data = await loadAreaThemeData(theme.themeKey);
   const description = areaThemeDescription(
     pref.prefName,
     theme.description,
-    data ? getAreaThemeHighlights(data, areaCode) : [],
+    data ? getAreaThemeHighlights(data, areaCode, theme.tabIndicators) : [],
   );
 
   return {

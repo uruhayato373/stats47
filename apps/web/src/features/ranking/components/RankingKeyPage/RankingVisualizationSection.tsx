@@ -60,6 +60,18 @@ interface RankingVisualizationSectionProps {
     headerActions?: ReactNode;
     cardFooter?: ReactNode;
     isPending?: boolean;
+    /** パネルの題名。既定は「都道府県別の地図と表」(テーマの分布の節は指標名を入れる) */
+    title?: string;
+    /**
+     * 県の詳細を開いていないときに地図と表で強調する県 (テーマの県のページの県)。
+     * ランキングのページは渡さない。地図と表の部品はランキングとテーマで 1 つにする (2026-10-30 オーナー決定)
+     */
+    highlightAreaCode?: string | null;
+    /**
+     * 押した県を呼び出し側へ渡す (選択中の県は highlightAreaCode で返してもらう)。渡したときは県の詳細の Sheet と
+     * URL の ?pref を使わない (テーマの過疎×医療は、押した県の重なりの地図をパネルの下に開く)
+     */
+    onSelectArea?: (areaCode: string | null) => void;
 }
 
 /**
@@ -79,6 +91,9 @@ export function RankingVisualizationSection({
     headerActions,
     cardFooter,
     isPending = false,
+    title,
+    highlightAreaCode = null,
+    onSelectArea,
 }: RankingVisualizationSectionProps) {
     const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
     const unitLabel = areaType === "city" ? "市区町村" : "都道府県";
@@ -92,14 +107,18 @@ export function RankingVisualizationSection({
 
     // URL の ?pref=NN から開く (共有されたリンク・再読み込み)。SSR の HTML は常に同じにするため、読むのは描画の後
     useEffect(() => {
-        if (areaType !== "prefecture") return;
+        if (areaType !== "prefecture" || onSelectArea) return;
         const fromUrl = areaCodeFromPrefParam(new URLSearchParams(window.location.search).get(PREF_PARAM));
         // 描画の後に 1 度だけ URL を読む (テーマの県選択 ThemePrefectureContext と同じ形)
         // eslint-disable-next-line react-hooks/set-state-in-effect
         if (fromUrl) setDetailAreaCode(fromUrl);
-    }, [areaType]);
+    }, [areaType, onSelectArea]);
 
     const openDetail = useCallback((areaCode: string | null, source: "map" | "table" | "detail_sheet") => {
+        if (onSelectArea) {
+            onSelectArea(areaCode);
+            return;
+        }
         setDetailAreaCode(areaCode);
         writePrefParam(areaCode);
         if (areaCode) {
@@ -109,11 +128,11 @@ export function RankingVisualizationSection({
                 areaCode,
             });
         }
-    }, []);
+    }, [onSelectArea]);
 
     return (
         <ChartPanel
-            title={`${unitLabel}別の地図と表`}
+            title={title ?? `${unitLabel}別の地図と表`}
             icon={<MapIcon />}
             action={headerActions}
             // 補足 (集計条件・最終更新・出典) はパネルの中の下端に置く。地図・表との間は線 1 本で区切る
@@ -161,7 +180,7 @@ export function RankingVisualizationSection({
                             areaType={areaType}
                             bare
                             mapClassName="h-full"
-                            selectedPrefectureCode={detailAreaCode}
+                            selectedPrefectureCode={detailAreaCode ?? highlightAreaCode}
                             onPrefectureClick={(code) => openDetail(code, "map")}
                         />
                     </div>
@@ -171,12 +190,12 @@ export function RankingVisualizationSection({
                             rankingItem={rankingItem}
                             bare
                             onSelectArea={areaType === "prefecture" ? (code) => openDetail(code, "table") : undefined}
-                            selectedAreaCode={detailAreaCode}
+                            selectedAreaCode={detailAreaCode ?? highlightAreaCode}
                         />
                     </div>
                 </div>
             </div>
-            {areaType === "prefecture" && (
+            {areaType === "prefecture" && !onSelectArea && (
                 <RankingAreaDetailSheet
                     rankingItem={activeRankingItem}
                     rows={detailRows}

@@ -6,30 +6,36 @@ describe("getAreaThemeHighlights", () => {
   const data = {
     indicatorDataMap: {
       income: {
-        rankingItem: { title: "実収入", readerLabel: "世帯の実収入", unit: "千円" },
+        rankingItem: { unit: "千円" },
         rankingValues: [
           { areaCode: "13000", value: 700, unit: "千円", yearName: "2024年" },
           { areaCode: "28000", value: 620, unit: "千円", yearName: "2024年", rank: 9 },
         ],
       },
       ratio: {
-        rankingItem: { title: "有効求人倍率", unit: "倍" },
+        rankingItem: { unit: "倍" },
         rankingValues: [
           { areaCode: "28000", value: 1.2, unit: "倍", yearName: "2023年" },
         ],
       },
     },
   };
+  // 画面の指標カードと同じ並び (テーマの tabIndicators) と短い名前で返す (2026-10-30)
+  const indicators = [
+    { rankingKey: "ratio", tabLabel: "求人倍率" },
+    { rankingKey: "missing", tabLabel: "配信に無い指標" },
+    { rankingKey: "income", tabLabel: "実収入" },
+  ];
 
-  test("指定県に存在する実測値だけを指標順に返す", () => {
-    expect(getAreaThemeHighlights(data, "28000")).toEqual([
-      { key: "income", title: "世帯の実収入", value: 620, unit: "千円", yearName: "2024年", rank: 9 },
-      { key: "ratio", title: "有効求人倍率", value: 1.2, unit: "倍", yearName: "2023年", rank: null },
+  test("テーマの指標の並びと短い名前で、指定県に存在する実測値だけを返す", () => {
+    expect(getAreaThemeHighlights(data, "28000", indicators)).toEqual([
+      { key: "ratio", title: "求人倍率", value: 1.2, unit: "倍", yearName: "2023年", rank: null },
+      { key: "income", title: "実収入", value: 620, unit: "千円", yearName: "2024年", rank: 9 },
     ]);
   });
 
   test("対象県の観測値が無ければ空配列", () => {
-    expect(getAreaThemeHighlights(data, "47000")).toEqual([]);
+    expect(getAreaThemeHighlights(data, "47000", indicators)).toEqual([]);
   });
 });
 
@@ -46,6 +52,10 @@ describe("areaThemeDescription", () => {
     expect(text.startsWith("富山県の空き家比率は14.7%（2023年・全国31位）、持ち家比率は74.9%（2023年・全国3位）。")).toBe(true);
     expect(text).toContain("住宅の余り方を比較する。");
     expect(text).not.toContain("3 件目");
+  });
+
+  test("値は数値タイルと同じく小数 2 桁までに丸める", () => {
+    expect(areaThemeDescription("兵庫県", "説明。", [{ ...highlights[0], value: 30.124 }])).toContain("空き家比率は30.12%");
   });
 
   test("順位が無い値は順位を書かず、値が無ければテーマの説明だけにする", () => {

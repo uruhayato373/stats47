@@ -35,8 +35,10 @@ interface StatTileProps {
   badge?: ReactNode;
   /** 値の下の補足 (年・全国平均など) */
   meta?: ReactNode;
-  /** 右上の小さなアイコン (lucide) */
+  /** 右上の小さなアイコン (lucide)。飾りで押せない */
   icon?: ReactNode;
+  /** 右上に置く押せる操作 (出典の Sheet を開く枠なしのアイコンボタンなど)。icon と同じ場所に置く */
+  action?: ReactNode;
   /** 値の下に全幅で置く小さなチャートなど。出すかどうかは呼び出し側が決める */
   children?: ReactNode;
   /** 下端に寄せるリンク行 (出典・ランキングへの導線)。並べたタイルの高さがそろっても下端の位置がそろう */
@@ -51,15 +53,17 @@ export function StatTile({
   badge,
   meta,
   icon,
+  action,
   children,
   footer,
   className,
 }: StatTileProps) {
   return (
-    <SurfaceCard data-slot-kind="stat-tile" className={cn("gap-3", className)}>
+    <SurfaceCard data-slot-kind="stat-tile" className={cn("gap-3", action ? "relative" : undefined, className)}>
       <div className="flex items-start justify-between gap-3">
         <dl className="flex min-w-0 flex-col gap-1">
-          <dt className={STAT_LABEL_CLASS}>{label}</dt>
+          {/* 右上の操作は値の行の幅を削らないよう重ねて置き、名前の行だけその分を空ける */}
+          <dt className={cn(STAT_LABEL_CLASS, action ? "pr-7" : undefined)}>{label}</dt>
           <dd className="flex flex-wrap items-center gap-x-2 gap-y-1">
             {value === null ? (
               <span className="text-sm text-muted-foreground">—</span>
@@ -82,6 +86,7 @@ export function StatTile({
           </span>
         ) : null}
       </div>
+      {action ? <div className="absolute top-3 right-3">{action}</div> : null}
       {children}
       {footer ? (
         <div data-slot="stat-tile-footer" className="mt-auto">

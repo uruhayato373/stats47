@@ -188,8 +188,10 @@ export default async function MunicipalityPrefectureRankingPage({
 
       <Suspense fallback={<div className="mt-5 h-72 animate-pulse bg-muted/40" aria-hidden />}>
         <MunicipalityRankingMapSection
+          title={item.title}
           visualization={item.visualization}
           unit={snapshot.unit}
+          decimalPlaces={precision}
           prefectureCode={prefecture.prefCode}
           values={snapshot.values}
         />

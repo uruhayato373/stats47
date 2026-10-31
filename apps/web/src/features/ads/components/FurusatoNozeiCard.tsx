@@ -1,7 +1,5 @@
 import { ExternalLink } from "lucide-react";
 
-import { getSurfaceCardClassName } from "@/components/surface";
-
 import { buildFurusatoNozeiUrl, getFurusatoNozeiLink } from "../constants/furusato-nozei";
 import { furusatoQualityReasons, selectQualityItems, type FurusatoContext } from "../lib/rakuten-item-quality";
 import { readRakutenFurusatoFromR2 } from "../repositories/rakuten-snapshot";
@@ -56,7 +54,7 @@ export async function FurusatoNozeiCard({
         position={position}
         adId={furusatoAdId}
       >
-      <div className={getSurfaceCardClassName({ className: "p-4" })}>
+      <div className="p-4">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs font-medium text-muted-foreground">PR</span>
           <TrackedAffiliateLink
@@ -130,7 +128,7 @@ export async function FurusatoNozeiCard({
       position={position}
       adId={furusatoAdId}
     >
-    <div className={getSurfaceCardClassName({ className: "p-4" })}>
+    <div className="p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground">PR</span>
       </div>

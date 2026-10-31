@@ -323,6 +323,29 @@ updated: 2026-10-19
 - **停止条件**: 無料の口座開設・A8 と楽天のほかの案件に触らない。提携の解除は急がない (配信を止めれば足りる)。`ASP-CONSOLIDATE-A8-RAKUTEN-01` と同じデプロイ不要の経路でまとめてよい。
 - **完了条件**: 本番の `app/affiliate-ads/all.json` で保険の見積もり・相談の広告が配信中 0 件、金融の配信中は無料の口座開設だけになっている。
 
+### [AFF-AFB-REJECTED-STATUS-01] afb の「提携却下」を台帳に取り込み、もしも・afb の提携済み 115 件を条件確認から在庫まで進める
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-10-31] [領域:アフィリエイト]
+
+- **起点 (2026-10-31 オーナー指示「提携できるものは全て提携　利用できるものは全て利用」)**: A8 36 件・もしも 28 件に申請済み (commit 745d18a7a)。afb の未提携 32 件は申請ボタンが無く送れなかった。検索結果の行を保存して確かめると 14108・16418 はどちらも「提携却下」の札 (画面上部の件数は 却下 41)。`affiliate-status.mjs` は提携中 (`rel=rel`)・申請中 (`rel=1`) しか読まず、却下の一覧を読まないので、台帳 `affiliate-catalog.json` では `none` のまま残る。`affiliate-apply.mjs` の afb 経路も「申請ボタン無し = 申請済みか提携済み」と誤った理由を出す。
+- **次**: ① afb の却下の一覧 (画面上部の「却下」のリンク先) を `affiliate-status.mjs` で読み、台帳の語彙に `rejected` を足して取り込む。申請スクリプトの理由文を「申請ボタン無し (却下・解除・申請済みのいずれか)」に直す ② もしも 3 件 (6548・5905・6970) はサイト ID の読み戻しで止まった。詳細ページを見て終了か確かめる ③ もしも・afb の提携済み 119 件のうち在庫に載るのは 4 件だけ。`moshimo-inspect-offer.mjs` で成果条件を確かめ、掲載適格性 (10-31 に書いた `terms-unverified` を外す) → `moshimo-harvest.mjs` / `afb-harvest.mjs` → `affiliate-ads-data.ts` へ登録する。
+- **停止条件**: `AFF-HEAVY-FINANCE-STOP-01` (保険の見積もり・相談を出さない) を優先する。10-31 に A8 で申請した保険の 4 件 (保険クリニック・保険見直しラボ・保険コンパス・マネカフェ) は承認されても在庫に登録しない。afb のログインは毎回オーナーが要る。
+- **完了条件**: 台帳の afb の `none` が実機の未提携だけになり (却下は `rejected`)、もしも・afb の提携済みのうち規約に合う案件が `affiliate-ads-data.ts` に登録されている。
+
+### [ADSENSE-FIXED-UNITS-01] ページ末の 2 枠に専用の表示広告ユニットを作り、借りているユニットを返す
+タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-31] [領域:サイト]
+
+- **起点 (2026-10-31 オーナー決定「AdSense は全て 300×250」)**: 本番の実測 (9 ページ × 7 幅) で、幅に合わせて伸びる広告が最大 1200×600、モバイルの関連コンテンツ型で 308×1503 だった。表示広告は固定サイズの広告コード、記事内広告は幅 300px にした。関連コンテンツ型 (`RANKING_PAGE_FOOTER` 2439393208・`CONTENT_FOOTER` 2005202370) は固定の大きさにできないので、表示広告のユニット stats47-hub-rail (9435960671)・stats47-themes-content (8298138821) を借りている。借りている間は AdSense のユニット別レポートで、ページ末と元の配置の収益が分けられない。
+- **次**: ① オーナーが AdSense の管理画面で表示広告ユニットを 2 つ作る (名前は stats47-ranking-footer-rect・stats47-content-footer-rect、大きさは固定 300×250) ② `apps/web/src/lib/google-adsense/constants.ts` の 2 定数の slotId を差し替える ③ テスト 2 本 (`manual-ad-desktop-only.test.tsx`・`code-ad-slots.test.mjs`) の `BORROWED` を消す。
+- **停止条件**: ユニットの作成はオーナーだけが行う (AdSense のアカウント操作)。
+- **完了条件**: 全ての slotId がそれぞれ 1 つの配置だけで使われ、`BORROWED` の例外が無い。
+
+### [AFF-PLACEMENT-MAP-SIZE-01] 配置マップ (placement-map-latest.json) を 1MB 以下に分け、週次の更新を戻す
+タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-31] [領域:アフィリエイト]
+
+- **起点 (2026-10-31)**: git の `data/affiliate/placement-map-latest.json` は 2026-08-27 生成のまま。手元で `node .claude/scripts/ads/build-placement-map.mjs` を回すと 9,087,495 バイトになり、リポジトリ衛生の上限 1MB (`check-repo-hygiene.cjs` の LARGE_FILE) を超えてコミットできない。ページごとの明細 (`pages`) が膨らんだと見られる (未確認)。`/register-affiliate-banner propose` と週次の判断が 2 か月前の需要を読んでいる。
+- **次**: ① 週次 workflow (`affiliate-dashboard-refresh.yml`) の直近の実行で、生成・コミットのどちらで止まっているかをログで確かめる ② git には要約 (需要・不足・未解決の理由・逆引き候補) だけを置き、ページごとの明細は R2 の `state/` か `.local/` に分ける (page-quality の `latest.json` と同じ形)。
+- **完了条件**: 週次で `placement-map-latest.json` が 1MB 以下で更新され、`generatedAt` が 8 日以内。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [UI-FIX-PREFECTURE-LIST-20261031] UI 是正: prefecture-list の週次 UI 検査の指摘 4 件を直す

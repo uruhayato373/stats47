@@ -68,7 +68,10 @@ export function slotBoxStyle(box: AdSlotBoxProp): Record<string, string> {
     "--ad-h-mobile": `${box.mobileHeight ?? box.height}px`,
     "--ad-w": px(box.width),
     "--ad-w-mobile": px(box.mobileWidth ?? box.width),
+    "--ad-max-w": box.maxWidth ? `min(100%, ${box.maxWidth}px)` : "100%",
   };
 }
 export const SLOT_BOX_HEIGHT_CLASS = "min-h-(--ad-h-mobile) md:min-h-(--ad-h)";
-export const SLOT_BOX_WIDTH_CLASS = "w-(--ad-w-mobile) md:w-(--ad-w) max-w-full";
+export const SLOT_BOX_WIDTH_CLASS = "w-(--ad-w-mobile) md:w-(--ad-w) max-w-(--ad-max-w)";
+/** 本番の広告の外枠を台帳の幅の上限に収め、中央に置く (代わりの表示は SLOT_BOX_WIDTH_CLASS が同じ上限を持つ) */
+export const SLOT_BOX_MAX_WIDTH_CLASS = "mx-auto max-w-(--ad-max-w)";

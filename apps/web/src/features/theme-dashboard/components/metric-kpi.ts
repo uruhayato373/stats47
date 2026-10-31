@@ -47,6 +47,14 @@ export interface MetricKpi {
  * 判定は ThemeCatalog の定義件数ではなく、観測不足で落とした**後**の実件数で行う。
  * 正典: docs/01_技術設計/04_デザインシステム.md「選択 UI と集合レイアウトの件数規則」
  */
+/**
+ * 指標の値の表示 (小数 2 桁まで)。数値タイルと県のページの説明文で同じ書き方にする (2026-10-30。
+ * 旧: 説明文だけ丸めず「30.124%」、タイルは「30.12%」だった)
+ */
+export function formatMetricValue(value: number): string {
+  return value.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
+}
+
 export type SingleMetricGroup = [MetricKpi];
 export type MultiMetricGroup = [MetricKpi, MetricKpi, ...MetricKpi[]];
 

@@ -1,16 +1,12 @@
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import { metricDisplayName } from "@stats47/ranking";
+
+import { formatMetricValue } from "../components/metric-kpi";
 
 interface AreaThemeHighlightSource {
   indicatorDataMap: Record<
     string,
     {
-      rankingItem: {
-        title: string;
-        readerLabel?: string;
-        subtitle?: string | null;
-        unit: string;
-      };
+      rankingItem: { unit: string };
       rankingValues: Array<{
         areaCode: string;
         value: number | null;
@@ -33,23 +29,27 @@ export interface AreaThemeHighlight {
 }
 
 /**
- * 都道府県×テーマページに、その県固有の観測値をサーバー描画するための要約。
- * chart の選択状態だけに県差を閉じ込めず、本文にも検索エンジンが読める固有情報を置く。
+ * 都道府県×テーマのページの説明文 (meta description・構造化データ) に入れる、その県の主な値。
+ * 画面の指標カードと同じく、テーマの指標の並び (tabIndicators) の順にテーマの短い名前で返す
+ * (2026-10-30。旧: 配信データの並びの先頭から正式名で取り、画面のタイルと名前も順番も違った)。
  */
 export function getAreaThemeHighlights(
   data: AreaThemeHighlightSource,
   areaCode: string,
+  indicators: ReadonlyArray<{ rankingKey: string; tabLabel: string }>,
   limit = 3,
 ): AreaThemeHighlight[] {
   const highlights: AreaThemeHighlight[] = [];
-  for (const [key, indicator] of Object.entries(data.indicatorDataMap)) {
+  for (const { rankingKey: key, tabLabel } of indicators) {
+    const indicator = data.indicatorDataMap[key];
+    if (!indicator) continue;
     const target = indicator.rankingValues.find(
       (value) => value.areaCode === areaCode && Number.isFinite(value.value),
     );
     if (target?.value === null || target?.value === undefined) continue;
     highlights.push({
       key,
-      title: metricDisplayName(indicator.rankingItem),
+      title: tabLabel,
       value: target.value,
       unit: target.unit || indicator.rankingItem.unit,
       yearName: target.yearName,
@@ -72,7 +72,7 @@ export function areaThemeDescription(
 ): string {
   const facts = highlights.slice(0, 2).map((highlight) => {
     const rank = highlight.rank !== null ? `・全国${highlight.rank}位` : '';
-    return `${highlight.title}は${highlight.value.toLocaleString('ja-JP')}${formatUnitForDisplay(highlight.unit)}（${highlight.yearName}${rank}）`;
+    return `${highlight.title}は${formatMetricValue(highlight.value)}${formatUnitForDisplay(highlight.unit)}（${highlight.yearName}${rank}）`;
   });
   const lead = facts.length > 0 ? `${areaName}の${facts.join('、')}。` : '';
   return `${lead}${areaName}における${themeDescription}全国47都道府県との比較で${areaName}の位置づけを確認できます。`;

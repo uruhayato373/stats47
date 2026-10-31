@@ -31,7 +31,6 @@ import {
   InContentAdSlot,
   NativeAffiliateRow,
   RailAdSlot,
-  SidebarPromoBanner,
 } from '@/features/ads';
 import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
@@ -285,8 +284,9 @@ export default async function CategoryPage({ params }: PageProps) {
         />
       )}
 
+      {/* AdSense は調査のカードの後 (最初の画面に置かない)。固定の PR (SidebarPromoBanner) はランキングの指標が
+          労働のときだけ出る部品で、ここでは描かれていなかったので外した (2026-10-30) */}
       {ADSENSE_DISPLAY_ENABLED && <RailAdSlot slot={RAIL_RECT} />}
-      <SidebarPromoBanner index={0} />
     </RailStack>
   );
 
@@ -354,6 +354,15 @@ export default async function CategoryPage({ params }: PageProps) {
           </HorizontalCardCarouselFrame>
         )}
 
+      </PageSections>
+
+      {/* 広告はカードではないので、カードの格子の外に置く (格子を分け、間に置く)。
+          新着ブログの後・全ランキングの前に置き、後ろの PR の列と隣り合わせにしない (2026-10-30)。
+          無効のときは何も描かないので、格子の帯が余らない */}
+      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
+      <PageSections className="mt-4">
         {/* 全件テーブル */}
         {categoryTopics.length > 0 ? (
           <CategoryTopicGroups
@@ -372,11 +381,6 @@ export default async function CategoryPage({ params }: PageProps) {
           </SectionCard>
         )}
       </PageSections>
-
-      {/* 広告はカードではないので、カードの格子の外に置く (格子を 2 つに分け、間に置く)。
-          無効のときは何も描かないので、格子の帯が余らない */}
-      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
       {nativeBanners.length > 0 && (
