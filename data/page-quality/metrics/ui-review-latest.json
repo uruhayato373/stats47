@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-17T20:54:34.995Z",
-  "auditGeneratedAt": "2026-10-17T20:07:33.963Z",
+  "generatedAt": "2026-10-30T21:58:42.962Z",
+  "auditGeneratedAt": "2026-10-30T20:35:34.756Z",
   "reviewStatus": "reviewed",
   "reviewError": null,
   "reviewedPages": [],
   "readCoverage": {
-    "expectedTiles": 187,
-    "readTiles": 17,
+    "expectedTiles": 196,
+    "readTiles": 22,
     "unreadScreens": [
       "home|mobile-390",
       "home|tablet-768",
@@ -23,12 +23,9 @@
       "geo-analysis|mobile-390",
       "geo-analysis|tablet-768",
       "geo-analysis|desktop-1440",
-      "geo-analysis--layer|mobile-390",
-      "geo-analysis--layer|tablet-768",
-      "geo-analysis--layer|desktop-1440",
-      "geo-analysis--analysis|mobile-390",
-      "geo-analysis--analysis|tablet-768",
-      "geo-analysis--analysis|desktop-1440",
+      "geo-analysis--compare|mobile-390",
+      "geo-analysis--compare|tablet-768",
+      "geo-analysis--compare|desktop-1440",
       "theme|mobile-390",
       "theme|tablet-768",
       "theme|desktop-1440",
@@ -50,94 +47,117 @@
       "blog-article|mobile-390",
       "blog-article|tablet-768",
       "blog-article|desktop-1440",
+      "blog-article--charts|mobile-390",
+      "blog-article--charts|tablet-768",
+      "blog-article--charts|desktop-1440",
       "category|mobile-390",
       "category|tablet-768",
       "category|desktop-1440",
       "survey|mobile-390",
       "survey|tablet-768",
       "survey|desktop-1440",
-      "other--japan|mobile-390",
-      "other--japan|tablet-768",
-      "other--japan|desktop-1440",
+      "municipality|mobile-390",
+      "municipality|tablet-768",
+      "municipality|desktop-1440",
+      "municipality--village|mobile-390",
+      "municipality--village|tablet-768",
+      "municipality--village|desktop-1440",
+      "other--municipalities|mobile-390",
+      "other--municipalities|tablet-768",
+      "other--municipalities|desktop-1440",
       "other--municipalities-theme|mobile-390",
       "other--municipalities-theme|tablet-768",
       "other--municipalities-theme|desktop-1440",
-      "municipality|mobile-390",
-      "municipality|desktop-1440",
       "other|mobile-390",
       "other|tablet-768",
       "other|desktop-1440"
     ],
     "fullyReadPages": []
   },
-  "summary": "3 幅 (mobile-390 / tablet-768 / desktop-1440) の一部ページのタイルを確認した (全ページ・全タイルは見ていない)。目的を果たせなくなる崩れは無く、主な指摘は、古い年のデータが目立たない点、ランキング表右端の列切れ、市区町村ページの大きな空白、モバイルのテーマページ内目次の切れの 4 点。",
+  "summary": "3幅の主要ページを確認し、読者が目的を果たせなくなる重大な崩れはなかった。指摘は、古いデータの年の見せ方(2006年度)、時点統計の「年度」表記、右レールの広告が内容に見える点、地図サムネイルの黒つぶれ、都道府県一覧のスマホでの導線の遅さなど。",
   "findings": [
-    {
-      "template": "ranking--old-2years",
-      "device": "desktop-1440",
-      "severity": "medium",
-      "location": "デスクトップ 1 枚目の下部、右カラム内の順位表 (順位・都道府県・値・偏差値) の右端",
-      "issue": "表が枠幅に収まらず、最右列「偏差値」の値が「7」「6」のように 1 文字だけ見えて途中で切れている。機械検査の laptop-1024 の横スクロールと同じ原因とみられるが、1440 でも崩れている。",
-      "suggestion": "表の列幅を詰めるか、表を横スクロール可能なコンテナに入れて切れていることが分かる見た目にする。"
-    },
     {
       "template": "ranking--old-2years",
       "device": "mobile-390",
       "severity": "medium",
-      "location": "スマホ 1 枚目、タイトル「国民年金保険料全額免除割合」直下から折れ線グラフのカードまで (デスクトップ 1 枚目の見出し周辺も同様)",
-      "issue": "データが 2005〜2006 年度と 20 年前なのに、見出しやタイトル付近に年の表示が無い。年は折れ線グラフ内の小さな「2006年度」と軸ラベルにしか出ていないので、最新のランキングだと誤読しやすい。",
-      "suggestion": "タイトル直下に「2006年度のデータ」のような時点表示を出し、古い場合は注記も添える。"
+      "location": "スマホ1〜2枚目、「47都道府県の単純平均」の折れ線と「27%（2006年度）」",
+      "issue": "データが2005〜2006年と20年前なのに、年は値の横の小さな灰色文字だけで、最初の画面では最新に見える。折れ線は縦軸27.0〜27.5に切り詰めた2点だけで、+1.3%が急な上昇に見える。",
+      "suggestion": "古い年(例: 10年以上前)の場合は見出し付近に「最新は2006年度」と目立つ注記を出し、2点だけの折れ線は軸を0基準にするか折れ線をやめる。"
     },
     {
       "template": "municipality",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "スマホ1枚目の「千代田区の主な指標」、「65歳以上人口割合」の「2020年度」",
+      "issue": "同じ一覧で総人口・世帯数は「2025年」「2020年」なのに、国勢調査の時点統計である65歳以上人口割合だけ「2020年度」と表記され、年と年度が混在している。",
+      "suggestion": "時点統計(国勢調査由来)の指標は「年度」ではなく「年」で表記を統一する。"
+    },
+    {
+      "template": "prefecture-detail",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "スマホ1枚目、「東京都が全国上位」の4項目の年表記",
+      "issue": "「警察官数(2024年度)」だけ年度で、他の3項目は「2024年」「2023年」と年表記。「教養娯楽費割合 11%」は何に対する割合か分からず、「平均初婚年齢（妻）（妻の年齢）」は括弧が重複して意味が取りにくい。",
+      "suggestion": "年／年度の表記を指標の性質に合わせて統一し、割合には分母(例: 消費支出に占める)を添え、重複した括弧を整理する。"
+    },
+    {
+      "template": "home",
+      "device": "desktop-1440",
+      "severity": "medium",
+      "location": "デスクトップ1枚目、右レールの「広告」カード(「詳細を見る」「地図を見る」「データ管理を比較」「統計ソフトを試す」)",
+      "issue": "見出しの「広告」が小さく、リンクは本文のサイト内ナビより大きな文字で青系の背景を使っている。サイト内の導線に見え、広告とサイト内リンクを取り違えやすい。",
+      "suggestion": "広告の表記をカード上部に目立つ形で付け、リンク文字をサイト内リンクと同程度の大きさ・色に抑える。"
+    },
+    {
+      "template": "geo-analysis",
       "device": "tablet-768",
       "severity": "medium",
-      "location": "タブレット 1 枚目の下部の市区町村一覧カード下から 2 枚目のほぼ全面にかけて、フッター直前まで",
-      "issue": "一覧カードの後に 400px 以上の何も無い空白が続き、その下にフッターのリンクだけが出ている。内容が欠けたのか読み込み前なのか区別できず、ページが壊れて見える。",
-      "suggestion": "空白の原因 (高さ固定や未描画の領域) を取り除き、コンテンツの直後にフッターが来るようにする。"
+      "location": "タブレット1枚目、「調べたい問いから選ぶ」3枚の地図サムネイルの右端(駅×人口)",
+      "issue": "右のカードの地図は黒い塊でほぼ塗りつぶされ、形も駅の位置も読み取れない。左の2枚が淡い塗りなのに対し1枚だけ濃く、見た目が揃っていない。",
+      "suggestion": "駅メッシュの描画を淡色にするか、サムネイル用に濃度を下げて3枚の見た目を揃える。"
     },
     {
-      "template": "municipality",
-      "device": "tablet-768",
-      "severity": "low",
-      "location": "タブレット 1 枚目、「千代田区の特徴 (県内ランキング上位)」カードの各行 (百貨店数・飲食店数など)",
-      "issue": "「16.76店（2006年度）」のように 20 年前の時点が小さな灰色の括弧書きでしか示されず、順位が現在の評価に見える。「2006年度」は店舗数という時点の統計の表記としても紛らわしい。",
-      "suggestion": "時点を指標名と同じ行に目立つ形で出し、古い年のものには注記を付ける。"
+      "template": "prefecture-list",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "スマホ1枚目、「地方」の7行の縦リストと、その下の「都道府県を選ぶ」",
+      "issue": "地方の絞り込みが縦に7行並んで最初の画面の大半を占め、都道府県名の検索欄は画面の一番下に押し出される。このページの目的である都道府県の選択に届くまでスクロールが要る。",
+      "suggestion": "地方の絞り込みを横スクロールのチップか折りたたみにし、都道府県の検索と一覧を最初の画面に出す。"
     },
     {
       "template": "theme",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ 1 枚目の中ほど、「ページ内」カードの目次リンク行",
-      "issue": "目次が 1 行に押し込まれ、「出生と死亡・転入と転出の内」のように右端で文字が切れている。横にスクロールできることも示されていない。",
-      "suggestion": "目次を折り返して表示するか、右端にフェードや矢印を付けて続きがあると分かるようにする。"
+      "location": "スマホ1枚目、「人口動態」ページ上部の横スクロールタブ(「出生と死亡・転入と転出の内訳」が右端で切れる)",
+      "issue": "タブが右端で文字の途中まで切れているが、横にスクロールできることを示す手がかりが他にない。他のタブがあると気づきにくい。",
+      "suggestion": "右端にフェードや矢印を付けて横スクロールできることを示す。"
     },
     {
-      "template": "geo-analysis--analysis",
+      "template": "other--municipalities-theme",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ 1 枚目の下部、「人口の分布と変化」「住宅地点と人口の重なり」の切替の下",
-      "issue": "1 枚目の画面では切替タブの下に地図が無く、凡例の説明文とボタンだけが並ぶ。地図は 2 枚目まで下がらないと現れず、最初の画面で何を見るページなのか分かりにくい。",
-      "suggestion": "地図をタブの直下に置き、凡例の長い説明は地図の後ろに回す。"
-    },
-    {
-      "template": "home",
-      "device": "desktop-1440",
-      "severity": "low",
-      "location": "デスクトップ 1 枚目、「注目のランキング」「新着ブログ」「知りたいことから探す」の各カルーセル右端",
-      "issue": "最後のカードが右端でフェードして切れている上、見出し行と矢印ボタンの間にも空白があり、カルーセルの余白が不揃いに見える。",
-      "suggestion": "カードを 1 画面に収まる枚数にそろえるか、右端が続きであると分かる見せ方にする。"
+      "location": "スマホ1枚目、各指標カードの灰色ヒストグラム(「65歳以上人口割合」「高齢夫婦のみの世帯数」)",
+      "issue": "ヒストグラムに軸の数値も最大・最小のラベルもなく、何の分布か分からない。「高齢夫婦のみの世帯数」は左端1本だけ高く残りは線に見え、図の意味が読み取れない。",
+      "suggestion": "横軸の最小値と最大値、または「多くの自治体は〇〇付近」のような一言をヒストグラムの下に添える。"
     },
     {
       "template": "ranking--index",
-      "device": "desktop-1440",
+      "device": "mobile-390",
       "severity": "low",
-      "location": "デスクトップ 1 枚目、「カテゴリ別のランキング」の各カテゴリ内の項目リスト",
-      "issue": "「国立公園面積」と「国定公園面積」、「総面積（北方地域及び竹島を除く）」など似た名前の項目が連続し、単位や年の情報が無く違いが分からない。",
-      "suggestion": "各項目に単位や対象年を添えるか、似た項目は説明を足して区別できるようにする。"
+      "location": "スマホ1枚目、「注目のランキング」の横スクロールカード",
+      "issue": "2枚目のカードが右端で切れているだけで、横にスクロールできることが分かりにくい。日本地図は小さく、カード下半分に空白が目立つ。",
+      "suggestion": "スクロールの手がかり(ページ表示や矢印)を足し、地図をカード幅いっぱいに大きくする。"
+    },
+    {
+      "template": "other",
+      "device": "tablet-768",
+      "severity": "low",
+      "location": "タブレット1枚目、タグ「人口」の記事カード一覧の下部(「小学生はなぜ東京に集まるのか | 620,624人と…」「東京の出生率がついに1.0を割った | 沖縄1.60 vs …」)",
+      "issue": "記事タイトルの長さがばらつき、数値や副題を「|」でつないだ長いタイトルが4〜5行になる。同じ行の隣のカードと高さが揃わず、一覧が読みにくい。",
+      "suggestion": "一覧カードではタイトルを2〜3行で省略表示にする。"
     }
   ],
   "rejected": [],
-  "newViolationCount": 43,
+  "newViolationCount": 166,
   "firstRun": false
 }

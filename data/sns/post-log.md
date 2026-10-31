@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**754 件** (最終更新: 2026-10-29)
+**756 件** (最終更新: 2026-10-30)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-30 | 🧵 Threads | area/area-37000-profile | 香川を1位・47位だけで語らない。 県木はオリーブ、県鳥はホトトギス。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DfHKEITkyCG) |
+| 2026-10-30 | 🧵 Threads | ranking/manufacturing-shipment-amount-per-employee | 従業者1人あたりの製造品出荷額、1位は愛知ではなく大分。  大分8,547万円、山口7,917万円、千葉7,254万円。… | [🔗](https://www.threads.com/@stats47jp/post/DfGbwcZEwJ8) |
 | 2026-10-29 | 🧵 Threads | area/area-36000-profile | 徳島のデータブックを公開中。 シラサギと鳴門らっきょ、阿波和三盆糖を入口に、人口・産業・消費の数字を県別に深掘り。 続き… | [🔗](https://www.threads.com/@stats47jp/post/DfEi-xHkUuF) |
 | 2026-10-29 | 🧵 Threads | ranking/life-expectancy-0-female | 88.29歳・88.26歳・88.25歳。  女性の平均寿命、上位3府県は岡山・滋賀・京都でほぼ横並び。 最も短い青森は… | [🔗](https://www.threads.com/@stats47jp/post/DfD1Ljuicdp) |
 | 2026-10-28 | 🧵 Threads | area/area-35000-profile | 旅先では見えにくい山口の輪郭。 県木アカマツと特産岩国れんこん、暮らしの統計を同じページで確認できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DfCBqZ3Eege) |
