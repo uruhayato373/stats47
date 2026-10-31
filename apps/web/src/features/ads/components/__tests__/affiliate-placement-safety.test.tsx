@@ -24,11 +24,11 @@ beforeEach(() => {
 });
 
 describe("掲載文脈と本文・レールの重複防止", () => {
-  it("nullの掲載停止を実験広告も上書きしない", async () => {
-    expect(await AffiliateAdSlot({ categoryKey: "economy", vertical: null })).toBeNull();
+  // 2026-10-31 オーナー決定「すべてのページに広告を出す」: 意図軸が null のページは、実験の広告を出さず汎用の案件 (vertical null) を探す
+  it("nullの意図軸では実験広告を出さず、汎用の案件を探す", async () => {
+    await AffiliateAdSlot({ categoryKey: "economy", vertical: null });
     expect(mocks.variants).not.toHaveBeenCalled();
-    expect(mocks.banners).not.toHaveBeenCalled();
-    expect(mocks.text).not.toHaveBeenCalled();
+    expect(mocks.banners).toHaveBeenCalledWith(null, Infinity, undefined);
   });
 
   it("実験にも解決済みverticalとrankingKeyを渡す", async () => {

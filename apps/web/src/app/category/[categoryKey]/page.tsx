@@ -169,10 +169,8 @@ export default async function CategoryPage({ params }: PageProps) {
     readCategoryTopicsFromR2(categoryKey)
       .then((r) => (isOk(r) ? r.data : []))
       .catch(() => []),
-    affiliateVertical
-      ? // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-        resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
-      : Promise.resolve([]),
+    // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕。意図軸が null のカテゴリは汎用の案件 (2026-10-31)
+    resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
 

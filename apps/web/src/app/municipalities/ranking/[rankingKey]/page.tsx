@@ -129,9 +129,8 @@ export default async function MunicipalityRankingPage({
   })();
   const [{ item, values: snapshot }, nativeBanners, aiContent] = await Promise.all([
     readMunicipalityRanking(rankingKey),
-    affiliateVertical
-      ? resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => [])
-      : Promise.resolve([]),
+    // 意図軸が無い指標は汎用の案件 (2026-10-31)
+    resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
     readMunicipalityRankingCommentary(rankingKey),
   ]);
   if (!item || !snapshot) {

@@ -269,6 +269,33 @@ export async function readActiveBannersByVerticalsFromR2(
 }
 
 /**
+ * 案件 (programRef) を指定してバナー・テキスト広告を取得する。並びは programRefs の順 (同じ案件の中は priority 降順)。
+ * 意図が決まらないページの受け皿 (`GENERIC_HIGH_VALUE_PROGRAM_REFS`) に使う。対象ランキングの指定がある広告は出さない。
+ */
+export async function readActiveAdsByProgramRefsFromR2(
+  programRefs: readonly string[],
+  adType: 'banner' | 'text',
+  limit = 2,
+  locationCode?: AffiliateLocationCode
+): Promise<AffiliateAdRow[]> {
+  if (programRefs.length === 0) return [];
+  const active = await getActive();
+  const order = new Map(programRefs.map((ref, index) => [ref, index]));
+  return uniqueAffiliateDestinations(
+    active
+      .filter(
+        (a) =>
+          a.programRef !== undefined &&
+          order.has(a.programRef) &&
+          a.adType === adType &&
+          (locationCode === undefined || a.locationCode === locationCode) &&
+          (a.targetRankingKeys ?? []).length === 0
+      )
+      .sort((a, b) => (order.get(a.programRef!) ?? 0) - (order.get(b.programRef!) ?? 0) || compareByPriorityDesc(a, b))
+  ).slice(0, limit);
+}
+
+/**
  * A/B テスト (AFF-05) 用: vertical に紐づく experiment variant を全件取得する。
  * experimentId を持つ active エントリのみ (adType は banner/text 両方)。priority 降順。
  * experiment が無い vertical では空配列を返す (呼び出し側は従来解決にフォールバック)。
