@@ -339,6 +339,13 @@ updated: 2026-10-19
 - **停止条件**: ユニットの作成はオーナーだけが行う (AdSense のアカウント操作)。
 - **完了条件**: 全ての slotId がそれぞれ 1 つの配置だけで使われ、`BORROWED` の例外が無い。
 
+### [AFF-PLACEMENT-MAP-SIZE-01] 配置マップ (placement-map-latest.json) を 1MB 以下に分け、週次の更新を戻す
+タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-31] [領域:アフィリエイト]
+
+- **起点 (2026-10-31)**: git の `data/affiliate/placement-map-latest.json` は 2026-08-27 生成のまま。手元で `node .claude/scripts/ads/build-placement-map.mjs` を回すと 9,087,495 バイトになり、リポジトリ衛生の上限 1MB (`check-repo-hygiene.cjs` の LARGE_FILE) を超えてコミットできない。ページごとの明細 (`pages`) が膨らんだと見られる (未確認)。`/register-affiliate-banner propose` と週次の判断が 2 か月前の需要を読んでいる。
+- **次**: ① 週次 workflow (`affiliate-dashboard-refresh.yml`) の直近の実行で、生成・コミットのどちらで止まっているかをログで確かめる ② git には要約 (需要・不足・未解決の理由・逆引き候補) だけを置き、ページごとの明細は R2 の `state/` か `.local/` に分ける (page-quality の `latest.json` と同じ形)。
+- **完了条件**: 週次で `placement-map-latest.json` が 1MB 以下で更新され、`generatedAt` が 8 日以内。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [INFRA-TIMELINE-01] 交通網の変遷 (高速道路・鉄道の時系列 GIS) を公開できる状態にし、見せ方を画像・動画・SNS へ展開する
