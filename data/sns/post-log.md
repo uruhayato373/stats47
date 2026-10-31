@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**756 件** (最終更新: 2026-10-30)
+**758 件** (最終更新: 2026-10-31)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-31 | 🧵 Threads | area/area-38000-profile | 愛媛の「らしさ」をデータでたどる。 県花みかんの花、甘平と紅まどんな、統計ランキングを1ページに整理しました。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DfJwk0JEw-z) |
+| 2026-10-31 | 🧵 Threads | ranking/sports-participation-rate-skiing | この1年でスキー・スノーボードをした人、北海道は8.3％。  2位長野7.8％、3位新潟6.3％。最も低い沖縄は0.2％… | [🔗](https://www.threads.com/@stats47jp/post/DfJCRACgTfE) |
 | 2026-10-30 | 🧵 Threads | area/area-37000-profile | 香川を1位・47位だけで語らない。 県木はオリーブ、県鳥はホトトギス。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DfHKEITkyCG) |
 | 2026-10-30 | 🧵 Threads | ranking/manufacturing-shipment-amount-per-employee | 従業者1人あたりの製造品出荷額、1位は愛知ではなく大分。  大分8,547万円、山口7,917万円、千葉7,254万円。… | [🔗](https://www.threads.com/@stats47jp/post/DfGbwcZEwJ8) |
 | 2026-10-29 | 🧵 Threads | area/area-36000-profile | 徳島のデータブックを公開中。 シラサギと鳴門らっきょ、阿波和三盆糖を入口に、人口・産業・消費の数字を県別に深掘り。 続き… | [🔗](https://www.threads.com/@stats47jp/post/DfEi-xHkUuF) |
