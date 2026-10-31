@@ -398,6 +398,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-cycling",
           "kind": "ranking"
         },
@@ -626,6 +630,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-fishing",
@@ -868,6 +876,10 @@
         {
           "pageId": "blog:sports-urban-paradox",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-golf",
@@ -1178,6 +1190,10 @@
         {
           "pageId": "blog:sports-participation-rate-hiking-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-hiking",
@@ -1516,6 +1532,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-skiing",
@@ -5491,6 +5511,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:subcontractor-completed-construction",
           "kind": "ranking"
         },
@@ -7533,6 +7557,10 @@
         {
           "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:swimming-pool-public",

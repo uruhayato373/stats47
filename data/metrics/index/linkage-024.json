@@ -3706,6 +3706,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:cultural-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:relaxation-avg-time-female",
           "kind": "ranking"
         },
@@ -3930,6 +3934,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:cultural-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:relaxation-avg-time-male",
@@ -7227,6 +7235,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:restaurant-count-per-1000",
           "kind": "municipality-ranking"
         },
@@ -7575,6 +7587,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:retail-employees",
           "kind": "ranking"
         },
@@ -7807,6 +7823,10 @@
         {
           "pageId": "blog:retail-establishments-by-prefecture",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:retail-establishments-by-prefecture",
@@ -8207,6 +8227,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:retail-sales-amount-by-prefecture",
           "kind": "ranking"
         },
@@ -8439,6 +8463,10 @@
         {
           "pageId": "blog:retail-establishments-by-prefecture",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:retail-sales-area-by-class",

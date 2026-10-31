@@ -1786,6 +1786,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:freight-logistics",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "japan-theme:railway",
           "kind": "japan-theme"
         },
@@ -9910,6 +9914,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:gender-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:labor-force-population-ratio-man",
           "kind": "ranking"
         },
@@ -10322,6 +10330,10 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:gender-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:labor-force-population-ratio-woman",

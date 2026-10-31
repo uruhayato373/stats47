@@ -6192,6 +6192,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:community-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:volunteer-activity-annual-participation-rate-10plus",
           "kind": "ranking"
         },
@@ -6619,6 +6623,10 @@
         {
           "pageId": "blog:governor-election-turnout-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:community-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:voter-turnout-governor",
@@ -7514,6 +7522,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:waste-recycling",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:waste-recycling-rate",
           "kind": "municipality-ranking"
         },
@@ -7886,6 +7898,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:water-supply-annual-volume",
           "kind": "ranking"
         },
@@ -8117,6 +8133,10 @@
         {
           "pageId": "blog:water-infrastructure-crisis",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:water-supply-capacity",
@@ -8578,6 +8598,10 @@
         {
           "pageId": "blog:sewerage-water-supply-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:water-supply-population-ratio-2012on",

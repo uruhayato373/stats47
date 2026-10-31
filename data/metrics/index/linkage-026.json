@@ -3125,6 +3125,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:single-father-households",
           "kind": "municipality-ranking"
         },
@@ -4209,6 +4213,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:single-mother-households",
           "kind": "municipality-ranking"
         },
@@ -4581,6 +4589,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-100to199",
           "kind": "ranking"
         },
@@ -4807,6 +4819,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-200to299",
@@ -5037,6 +5053,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-300to399",
           "kind": "ranking"
         },
@@ -5263,6 +5283,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-400to499",
@@ -5493,6 +5517,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-500plus",
           "kind": "ranking"
         },
@@ -5721,6 +5749,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-under100",
           "kind": "ranking"
         },
@@ -5947,6 +5979,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-public-assistance-households",
@@ -7587,6 +7623,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:sleep-avg-time-female",
           "kind": "ranking"
         },
@@ -7811,6 +7851,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sleep-avg-time-male",
@@ -11873,6 +11917,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:sports-annual-participation-rate-10plus",
           "kind": "ranking"
         },
@@ -12451,6 +12499,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-park-count",

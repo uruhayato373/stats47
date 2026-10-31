@@ -2658,6 +2658,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:communication-access",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:broadband-contract-count-excluding-39-4g",
           "kind": "ranking"
         },
@@ -2882,6 +2886,10 @@
         {
           "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:communication-access",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:broadband-service-contract-count",
@@ -3116,6 +3124,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:broadcast-media-time-all",
@@ -4690,6 +4702,10 @@
         {
           "pageId": "area-theme:47000:regional-transport",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:regional-transport",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:bus-operators",
@@ -7272,6 +7288,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:regional-transport",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:car-ownership-multi-person-households-per-1000",
           "kind": "ranking"
         },
@@ -9561,6 +9581,10 @@
           "kind": "area"
         },
         {
+          "pageId": "japan-theme:childcare-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:certified-childcare-center-count-per-100k-0-5",
           "kind": "ranking"
         },
@@ -10666,6 +10690,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:child-rearing-allowance-recipients",

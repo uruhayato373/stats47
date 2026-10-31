@@ -9124,6 +9124,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:gender-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "japan-theme:labor-wages",
           "kind": "japan-theme"
         },

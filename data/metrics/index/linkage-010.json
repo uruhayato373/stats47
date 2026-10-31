@@ -5102,6 +5102,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:information-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:gross-prefectural-product-information-communication-h27",
           "kind": "ranking"
         },

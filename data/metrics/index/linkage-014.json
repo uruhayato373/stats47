@@ -1774,6 +1774,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:laundry-beauty-bath-industry-employees",
           "kind": "ranking"
         },
@@ -2002,6 +2006,10 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:laundry-beauty-bath-industry-establishments",
@@ -4452,6 +4460,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:cultural-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:library-lending-books",
           "kind": "ranking"
         },
@@ -4721,6 +4733,10 @@
         {
           "pageId": "area-theme:47000:community-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:community-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:library-registered-users",

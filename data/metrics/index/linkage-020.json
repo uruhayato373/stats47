@@ -3523,6 +3523,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:public-assistance",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:persons-on-public-assistance-per-1000",
           "kind": "ranking"
         },
@@ -4685,6 +4689,10 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:physical-disability-certificates-issued-per-1000",

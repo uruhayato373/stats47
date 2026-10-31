@@ -4774,6 +4774,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:meal-avg-time-female",
           "kind": "ranking"
         },
@@ -4998,6 +5002,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:meal-avg-time-male",
@@ -5334,6 +5342,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:media-production-employees",
           "kind": "ranking"
         },
@@ -5562,6 +5574,10 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:media-production-establishments",

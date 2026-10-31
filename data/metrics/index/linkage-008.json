@@ -1310,6 +1310,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:financial-assets-balance-multi-person-households",
           "kind": "ranking"
         },
@@ -1725,6 +1729,10 @@
         {
           "pageId": "area:47000",
           "kind": "area"
+        },
+        {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:financial-debt-balance",

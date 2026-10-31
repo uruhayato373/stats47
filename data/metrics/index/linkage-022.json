@@ -4240,6 +4240,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:primary-school-commute-time-weekday",
           "kind": "ranking"
         },
@@ -4467,6 +4471,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:prime-contractor-completed-construction",

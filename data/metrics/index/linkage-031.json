@@ -4533,6 +4533,14 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:forestry-timber",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:woodland-area",
           "kind": "municipality-ranking"
         },
@@ -4812,6 +4820,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:work-avg-time-employed-female",
           "kind": "ranking"
         },
@@ -5036,6 +5048,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:work-avg-time-employed-male",

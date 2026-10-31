@@ -4086,6 +4086,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:forestry-timber",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:forest-area-ratio",
           "kind": "ranking"
         },
@@ -4326,6 +4334,10 @@
         {
           "pageId": "blog:roadside-station-count-vs-forest-road-length",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:forestry-timber",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:forest-road-length",
@@ -11024,6 +11036,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:waste-recycling",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:garbage-final-disposal",
           "kind": "municipality-ranking"
         },
@@ -11303,6 +11319,10 @@
         {
           "pageId": "blog:garbage-total-output",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:waste-recycling",
+          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:garbage-total-output",

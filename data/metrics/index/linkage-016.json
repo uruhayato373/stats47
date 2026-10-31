@@ -880,6 +880,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:communication-access",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:mobile-phone-contract-count-per-1000",
           "kind": "ranking"
         },
@@ -1107,6 +1111,10 @@
         {
           "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:communication-access",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:mobile-phone-ownership-multi-person-households-per-1000",
@@ -8861,6 +8869,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:natural-environment-conservation-area",
           "kind": "ranking"
         },
@@ -9562,6 +9574,10 @@
         {
           "pageId": "area-theme:47000:natural-environment",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nature-park-area",

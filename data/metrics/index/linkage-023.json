@@ -899,6 +899,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:public-assistance",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:public-assistance-expenses-prefecture",
           "kind": "ranking"
         },
@@ -1126,6 +1130,10 @@
         {
           "pageId": "area-theme:47000:public-assistance",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:public-assistance",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-assistance-facility-capacity-per-1000",
@@ -1719,6 +1727,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:public-construction-contract-amount",
           "kind": "ranking"
         },
@@ -1943,6 +1955,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-construction-contract-count",
@@ -2383,6 +2399,10 @@
         {
           "pageId": "blog:sports-urban-paradox",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-gymnasium-count-per-million",
@@ -4328,6 +4348,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:public-swimming-pool-count-per-million",

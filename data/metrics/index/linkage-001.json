@@ -407,6 +407,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:forestry-timber",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:artificial-forest-area",
           "kind": "ranking"
         },
@@ -6847,6 +6855,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:avg-savings-rate-worker-households",
           "kind": "ranking"
         },
@@ -8646,6 +8658,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:baseball-field-public",
           "kind": "ranking"
         },
@@ -9385,6 +9401,10 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:beauty-salon-count",

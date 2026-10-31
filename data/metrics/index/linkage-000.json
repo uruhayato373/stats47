@@ -3505,6 +3505,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:agriculture-production",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:agricultural-farm-count",
           "kind": "ranking"
         },
@@ -4452,6 +4456,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:agriculture-production",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:agricultural-output-per-employed-person",
           "kind": "ranking"
         },
@@ -5070,6 +5078,10 @@
         {
           "pageId": "area-theme:47000:freight-logistics",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:freight-logistics",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:air-cargo-transport",
@@ -8975,6 +8987,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:amusement-industry-employees",
           "kind": "ranking"
         },
@@ -9203,6 +9219,10 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:amusement-industry-establishments",

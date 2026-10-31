@@ -3202,6 +3202,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:regional-transport",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:household-survey-transport-communication-expenditure",
           "kind": "ranking"
         },
@@ -4747,6 +4751,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:public-assistance",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:households-on-public-assistance-per-1000",
           "kind": "ranking"
         },
@@ -5280,6 +5288,14 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:gender-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:housework-avg-time-female",
           "kind": "ranking"
         },
@@ -5697,6 +5713,14 @@
         {
           "pageId": "area-theme:47000:gender-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:gender-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:housework-avg-time-male",
@@ -6424,6 +6448,10 @@
         {
           "pageId": "area-theme:47000:household-assets-debt",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:housing-land-liabilities-ratio-multi-person-households",
@@ -10389,6 +10417,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:information-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:information-private-employees",
           "kind": "municipality-ranking"
         },
@@ -10621,6 +10653,10 @@
         {
           "pageId": "area-theme:47000:information-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:information-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:information-private-establishments",
@@ -12552,6 +12588,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:intellectual-disability-support-facility-capacity-per-100k",
           "kind": "ranking"
         },
@@ -12779,6 +12819,10 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:intellectual-disability-support-facility-count-per-1m",
@@ -13051,6 +13095,10 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:intellectual-disability-support-facility-residents-per-100k",
@@ -13820,6 +13868,10 @@
         {
           "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:communication-access",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:internet-usage-rate-10plus",

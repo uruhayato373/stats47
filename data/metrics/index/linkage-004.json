@@ -455,6 +455,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:construction-employed-age30to54",
           "kind": "ranking"
         },
@@ -704,6 +708,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:construction-employed-age55plus",
           "kind": "ranking"
         },
@@ -938,6 +946,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:construction-employed-female",
           "kind": "ranking"
         },
@@ -1170,6 +1182,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:construction-employed-residents",
@@ -1412,6 +1428,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:construction-employed-under30",
@@ -1867,6 +1887,10 @@
         {
           "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:construction-private-employees",
@@ -7973,6 +7997,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:agriculture-production",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:core-agricultural-workers",
           "kind": "ranking"
         },
@@ -11980,6 +12008,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:agriculture-production",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:cultivated-area",
           "kind": "municipality-ranking"
         },
@@ -13486,6 +13518,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:current-deposit-balance-ratio-multi-person-households",
           "kind": "ranking"
         },
@@ -13951,6 +13987,10 @@
         {
           "pageId": "blog:deposit-securities-prefecture-personality",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:current-life-insurance-balance-ratio-multi-person-households",

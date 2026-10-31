@@ -3339,6 +3339,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:trademark-application-count",
           "kind": "ranking"
         },
@@ -3563,6 +3567,10 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:trademark-registration-count",
@@ -9451,6 +9459,10 @@
         {
           "pageId": "area-theme:47000:freight-logistics",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:freight-logistics",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:truck-operators",

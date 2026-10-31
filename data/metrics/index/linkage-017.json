@@ -2662,6 +2662,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:business-demography",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nonprimary-enterprises-count",
           "kind": "ranking"
         },
@@ -2899,6 +2903,10 @@
         {
           "pageId": "area-theme:47000:business-demography",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:business-demography",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nonprimary-enterprises-employees",
@@ -3140,6 +3148,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:business-demography",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nonprimary-enterprises-under5-count",
           "kind": "ranking"
         },
@@ -3377,6 +3389,10 @@
         {
           "pageId": "area-theme:47000:business-demography",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:business-demography",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nonprimary-enterprises-under5-employees",
@@ -5692,6 +5708,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:freight-logistics",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:number-of-freight-cars",
           "kind": "ranking"
         },
@@ -6107,6 +6127,10 @@
         {
           "pageId": "area-theme:47000:tourism",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:number-of-hotel-facilities",
@@ -6529,6 +6553,10 @@
         {
           "pageId": "area-theme:47000:tourism",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:number-of-hotel-rooms",
@@ -7555,6 +7583,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:childcare-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nursery-children-per-nursery-teacher",
           "kind": "ranking"
         },
@@ -7782,6 +7814,10 @@
         {
           "pageId": "area-theme:47000:childcare-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:childcare-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nursery-count-per-100k-0-5",
@@ -8435,6 +8471,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:childcare-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nursery-utilization-rate",
           "kind": "ranking"
         },
@@ -8662,6 +8702,10 @@
         {
           "pageId": "area-theme:47000:childcare-services",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:childcare-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nursery-waiting-children-count",
@@ -9537,6 +9581,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:long-term-care",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nursing-care-insurance-benefit",
           "kind": "ranking"
         },
@@ -9959,6 +10007,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:long-term-care",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nursing-home-capacity-per-1000-65plus",
           "kind": "ranking"
         },
@@ -10193,6 +10245,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:long-term-care",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:nursing-home-count-per-100k-65plus",
           "kind": "ranking"
         },
@@ -10420,6 +10476,10 @@
         {
           "pageId": "area-theme:47000:long-term-care",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:long-term-care",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:nursing-home-residents-per-1000-65plus",

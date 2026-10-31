@@ -450,6 +450,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:current-securities-balance-ratio-multi-person-households",
           "kind": "ranking"
         },
@@ -8803,6 +8807,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:design-application-count",
           "kind": "ranking"
         },
@@ -9027,6 +9035,10 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:design-registration-count",
@@ -10445,6 +10457,10 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:disabled-employment-rate",

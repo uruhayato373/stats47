@@ -8220,6 +8220,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:securities-balance",
           "kind": "ranking"
         },
@@ -10154,6 +10158,10 @@
         {
           "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sewerage-coverage-rate",
