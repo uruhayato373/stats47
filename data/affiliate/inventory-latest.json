@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-16T23:07:02.837Z",
-  "date": "2026-10-16",
+  "generatedAt": "2026-10-31T00:04:04.420Z",
+  "date": "2026-10-31",
   "totals": {
-    "entries": 300,
-    "active": 288,
-    "uniqueAdvertisers": 176,
-    "uniqueTitles": 176,
-    "uniquePrograms": 145,
+    "entries": 327,
+    "active": 306,
+    "uniqueAdvertisers": 187,
+    "uniqueTitles": 187,
+    "uniquePrograms": 156,
     "programRefMissing": 0
   },
   "byCategory": {
@@ -14,32 +14,32 @@
     "tourism": 5,
     "economy": 8,
     "construction": 2,
-    "(null)": 264,
+    "(null)": 282,
     "laborwage": 3,
     "socialsecurity": 2,
     "population": 2
   },
   "byVertical": {
-    "energy": 30,
-    "travel": 51,
-    "economy": 36,
-    "housing": 28,
-    "education": 42,
-    "labor": 54,
+    "energy": 32,
+    "travel": 48,
+    "economy": 39,
+    "housing": 34,
+    "education": 47,
+    "labor": 53,
     "health": 10,
     "mobility": 13,
     "population": 20,
-    "furusato": 4
+    "furusato": 10
   },
   "byLocation": {
-    "blog-bottom": 146,
+    "blog-bottom": 159,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
-    "sidebar-bottom": 139
+    "sidebar-bottom": 144
   },
   "byAdType": {
-    "banner": 151,
-    "text": 137
+    "banner": 162,
+    "text": 144
   },
   "coverage": {
     "categoriesCovered": 7,
@@ -67,28 +67,28 @@
     "gapVerticals": [],
     "thinVerticals": [],
     "byVerticalText": {
-      "labor": 27,
+      "labor": 28,
       "energy": 15,
       "economy": 15,
-      "housing": 15,
+      "housing": 17,
       "population": 9,
-      "education": 21,
+      "education": 22,
       "mobility": 7,
       "health": 4,
       "travel": 22,
-      "furusato": 2
+      "furusato": 5
     },
     "byVerticalBanner": {
-      "energy": 15,
-      "travel": 29,
-      "economy": 21,
-      "housing": 13,
-      "education": 21,
-      "labor": 27,
+      "energy": 17,
+      "travel": 26,
+      "economy": 24,
+      "housing": 17,
+      "education": 25,
+      "labor": 25,
       "health": 6,
       "mobility": 6,
       "population": 11,
-      "furusato": 2
+      "furusato": 5
     },
     "textGapVerticals": [],
     "bannerGapVerticals": []

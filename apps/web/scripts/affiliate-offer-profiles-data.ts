@@ -2903,6 +2903,155 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
     "allowedPageTypes": [
       "ranking"
     ]
+  },
+  {
+    "programRef": "a8:s00000022646001",
+    "vertical": "education",
+    "allowedVerticals": [
+      "education"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "WEBで問い合わせ後30日以内の無料オンライン面談の実施完了。広告主新規、小学1年生〜高校3年生・浪人生のお子様を持つ保護者が対象",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000022646001) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000022646001-2026-10-31T00-01-42-861Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "theme"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020603002",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "WEBで相談申込後90日以内の入居確認完了。広告主新規、18〜49歳が対象",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000020603002) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000020603002-2026-10-31T00-01-43-169Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "theme",
+      "area"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020603004",
+    "vertical": "housing",
+    "allowedVerticals": [
+      "housing"
+    ],
+    "lane": "decision",
+    "actionType": "contract",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB問い合わせ後90日以内にオーナーと管理契約 (借上げ・サブリース・専任管理) の締結完了。広告主新規",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000020603004) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000020603004-2026-10-31T00-01-43-502Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "theme",
+      "area"
+    ]
+  },
+  {
+    "programRef": "a8:s00000022413003",
+    "vertical": "labor",
+    "allowedVerticals": [
+      "labor"
+    ],
+    "lane": "decision",
+    "actionType": "consultation",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB登録後30日以内のカウンセラーとの面談完了。広告主新規",
+    "personalDataLevel": "basic",
+    "humanContact": "required",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000022413003) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000022413003-2026-10-31T00-01-43-851Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "theme"
+    ]
+  },
+  {
+    "programRef": "a8:s00000021814001",
+    "vertical": "furusato",
+    "allowedVerticals": [
+      "furusato"
+    ],
+    "lane": "decision",
+    "actionType": "purchase",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB申込後30日以内の入金確認",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000021814001) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000021814001-2026-10-31T00-01-44-411Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "area"
+    ]
+  },
+  {
+    "programRef": "a8:s00000020875001",
+    "vertical": "furusato",
+    "allowedVerticals": [
+      "furusato"
+    ],
+    "lane": "decision",
+    "actionType": "purchase",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB注文後30日以内の入金確認",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000020875001) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000020875001-2026-10-31T00-01-44-686Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "area"
+    ]
+  },
+  {
+    "programRef": "a8:s00000021701002",
+    "vertical": "furusato",
+    "allowedVerticals": [
+      "furusato"
+    ],
+    "lane": "decision",
+    "actionType": "purchase",
+    "frictionTier": "F4",
+    "conversionCondition": "WEB注文後の決済完了",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "A8 プログラム詳細 (programId=s00000021701002) を 2026-10-31 に実機で確認 (証拠 .local/a8-offer-inspect/s00000021701002-2026-10-31T00-01-45-005Z.json)",
+    "verifiedAt": "2026-10-31",
+    "portfolioStatus": "candidate",
+    "allowedPageTypes": [
+      "ranking",
+      "blog",
+      "area"
+    ]
   }
 ];
 

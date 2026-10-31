@@ -225,6 +225,15 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   "再生可能エネルギー": "energy", "太陽光発電": "energy", "風力発電": "energy",
   "カーボンニュートラル": "energy", "GX": "energy", "太陽光": "energy",
   "日照時間": "energy", "快晴日数": "energy", "電気代": "energy",
+  // ★ 2026-10-31 追加 (オーナー指示「ページや記事の内容とアフィリエイトの配線をしっかり」): 配置マップ (GSC 2026-W42) の
+  //   「タグが意図軸に届かない記事」121 本・検索表示 25,684 回のタグを、検索表示の多い順に見て意図が明確なものだけ写した。
+  //   通信 (回線・格安 SIM) は energy、通勤は mobility、労災は labor、Claude Code・業務効率化はプログラミング・AI スクールの education。
+  //   「都道府県ランキング」「行政」「自治体」「地名」「公務員」「インフラ」等の汎用タグ、中絶率・女性健康等の医療の当事者のタグは入れない。
+  "公衆電話": "energy", "ICT": "energy", "通勤": "mobility",
+  "労働災害": "labor", "労災": "labor", "労災保険": "labor", "安全衛生": "labor",
+  "旅行行動者率": "travel", "おでかけ格差": "travel",
+  "ClaudeCode": "education", "業務効率化": "education",
+  "昼間人口": "population", "都市圏": "population", "離婚率": "population",
 };
 
 /**
