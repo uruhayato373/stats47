@@ -40,6 +40,7 @@ export function ThemeGeoSnowDesignationClient({
         />
       ) : null}
       <GeoSnowDesignationSummary
+        regionOnly
         snapshot={snapshot}
         selectedAreaCode={selectedPrefectureCode}
         onSelectArea={setSelected}

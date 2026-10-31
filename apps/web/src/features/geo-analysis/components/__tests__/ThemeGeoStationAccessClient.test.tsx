@@ -101,7 +101,8 @@ describe('テーマの駅アクセス分析', () => {
     select(null);
   });
 
-  it('全国表示は47県の原集計を県コード順に表示し、地図は県選択後に読み込む', () => {
+  // テーマのページは今の県の行だけを出す。全国のページに 47 県の表は置かない (2026-10-31。表は Geo の分析ページ)
+  it('全国表示は県の表と地図を出さず、分析詳細への導線を残す', () => {
     render(
       <ThemeGeoStationAccessClient
         analysisId="station-test"
@@ -109,25 +110,11 @@ describe('テーマの駅アクセス分析', () => {
         manifest={manifest}
       />
     );
-    const rows = within(screen.getByRole('table')).getAllByRole('row');
-    expect(rows).toHaveLength(48);
-    expect(rows[1]).toHaveTextContent('北海道');
-    expect(rows[1]).toHaveTextContent('0.2%');
-    expect(rows[1]).toHaveTextContent('0.5%');
-    expect(rows[1]).toHaveTextContent('1,000人');
-    expect(rows[47]).toHaveTextContent('沖縄県');
-    expect(
-      within(rows[47]!).getByRole('cell', { name: '—' })
-    ).toBeInTheDocument();
+    expect(screen.queryByRole('table')).toBeNull();
     expect(GeoSpatialEvidenceExplorer).not.toHaveBeenCalled();
     expect(
       screen.getByRole('link', { name: '駅アクセスの分析詳細を見る' })
     ).toHaveAttribute('href', '/geo/population-station-access');
-    expect(
-      screen.getByRole('link', { name: '沖縄県の地点・検算データ' })
-    ).toHaveAttribute('href', '/geo/data/population-station-access/47');
-    fireEvent.click(screen.getByRole('button', { name: '兵庫県の地図を表示' }));
-    expect(setSelected).toHaveBeenCalledWith('28000', '兵庫県');
   });
 
   it('共通の県選択に地図と集計が追従し、埋込地図はURLを書き換えない', () => {
@@ -178,8 +165,6 @@ describe('テーマの駅アクセス分析', () => {
       />
     );
     expect(screen.queryByTestId('station-map')).not.toBeInTheDocument();
-    expect(within(screen.getByRole('table')).getAllByRole('row')).toHaveLength(
-      48
-    );
+    expect(screen.queryByRole('table')).toBeNull();
   });
 });

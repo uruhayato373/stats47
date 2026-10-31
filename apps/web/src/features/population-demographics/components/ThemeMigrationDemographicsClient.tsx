@@ -58,7 +58,9 @@ export function ThemeMigrationDemographicsClient({
         </p>
       </ChartPanel>
     );
-  const areaLabel = view.isNational ? '全国・47都道府県' : view.area.areaName;
+  const areaLabel = view.isNational ? '全国' : view.area.areaName;
+  // 全国のページは全国の計だけを出し、47 都道府県を並べない (2026-10-31。県の比較はランキングのページ)
+  const shownRows = view.isNational ? [] : view.rows;
   const signed = (value: number) =>
     value > 0 ? `+${format(value)}` : format(value);
   const tableLabel = view.isNational ? '都道府県' : '相手の都道府県';
@@ -113,7 +115,7 @@ export function ThemeMigrationDemographicsClient({
         </div>
         <p className="text-sm text-muted-foreground">
           {view.isNational
-            ? '各都道府県と他県との移動を示します。'
+            ? '全国の県間移動の計を示します。県のページでは、相手の県ごとの移動を示します。'
             : `${view.area.areaName}への移動が転入、${view.area.areaName}からの移動が転出です。`}
           転入超過が負数の場合は転出超過です。進学・就職などの転居理由は区別していません。
         </p>
@@ -141,7 +143,7 @@ export function ThemeMigrationDemographicsClient({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {view.rows.map((row) => (
+            {shownRows.map((row) => (
               <TableRow key={row.areaCode} data-counterpart-code={row.areaCode}>
                 <TableHead scope="row" className="whitespace-normal!">
                   {row.areaName}
@@ -169,7 +171,7 @@ export function ThemeMigrationDemographicsClient({
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableHead scope="row">表示行の計</TableHead>
+              <TableHead scope="row">{view.isNational ? '全国の計' : '表示行の計'}</TableHead>
               <TableCell
                 className="text-right tabular-nums"
                 data-total-inbound={view.total.inbound}

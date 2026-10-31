@@ -20,7 +20,7 @@ import { RailCard } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
-import { PREFECTURE_SET_LABEL } from '../types';
+import { NATIONAL_REGION_LABEL } from '../types';
 
 import { PrefectureSelect } from './PrefectureSelect';
 import { useThemePrefecture } from './ThemePrefectureContext';
@@ -227,7 +227,7 @@ function PrefectureControl({ hasScope }: { hasScope: boolean }) {
           onClick={() => setSelected(null)}
           className="mt-2 min-h-10 text-sm text-muted-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
         >
-          {PREFECTURE_SET_LABEL}に戻す
+          {NATIONAL_REGION_LABEL}に戻す
         </button>
       ) : (
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

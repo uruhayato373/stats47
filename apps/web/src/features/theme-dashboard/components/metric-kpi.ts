@@ -18,33 +18,26 @@ export interface MetricKpi {
   unit: string;
   /** 実際に表示する観測値の年次。 */
   yearName?: string;
-  /** 都道府県選択時のみ、その県の実値。未選択時は null (47県平均や全国値を代入しない)。 */
+  /**
+   * ページの地域の値。県のページはその県の値、全国のページは全国の値 (e-Stat の全国行)。全国行の無い指標の全国のページは
+   * null (47 県の平均や 1 位の県の値を代わりに出さない。2026-10-31)
+   */
   value: number | null;
-  /** 都道府県選択時のみ、その県の全国順位。未選択時は null。 */
+  /** 県のページだけ、その県の全国順位。全国のページは null。 */
   rank: number | null;
   total: number;
   /** ランキング snapshot の provenance。フッターの出典導線に使用する。 */
   sourceName?: string;
   sourceLink?: string;
   sourceLinks?: Array<{ label: string; url: string }>;
-  /** 選択中都道府県の年次推移 (都道府県選択時のみ使用)。 */
+  /** 各年の 47 都道府県の平均 (全国の値ではない。県の系列が取れないときの代わりで「都道府県平均」と呼ぶ) */
   series: { year: number; value: number }[];
-  /**
-   * 未選択 (47都道府県一覧) 時に表示する「1位」の事実。実データの中から実際にランク1位の
-   * 都道府県とその値を渡す (捏造・平均ではない)。都道府県選択時は使わない。
-   */
-  topRanked: { areaCode: string; areaName: string; value: number } | null;
+  /** 公式の全国の系列。全国のページの推移に使う。無い指標は undefined */
+  officialNationalSeries?: { year: number; value: number }[];
   /** 選択中都道府県の値をまだ取得中 (都道府県選択時のみ意味を持つ) */
   isLoading: boolean;
-  /**
-   * 47 都道府県の値を順位の順に並べたもの。推移を描けないカードで「47 都道府県の中の位置」を描く (2026-10-31)。
-   * 問いの型「地域間の比較・順位」に答える (theme-catalog-standards.md §3)
-   */
-  rankedValues?: number[];
-  /** 全国の値 (e-Stat の全国行)。無い指標は undefined (47 県の平均を代わりに作らない) */
+  /** 全国の値 (公式の全国の系列の最新の値)。無い指標は undefined (47 県の平均を代わりに作らない) */
   nationalValue?: number;
-  /** 観測のある年が 1 つだけか (推移を描けない) */
-  isSingleYear?: boolean;
 }
 
 /**

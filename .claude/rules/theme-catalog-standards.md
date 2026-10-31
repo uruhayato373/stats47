@@ -84,15 +84,17 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 | 問いの型 | 見せ方 | 実装 (共通部品) |
 |---|---|---|
 | いまいくつか | 数値 1 つ (値・順位・年) | 1 指標の `metricGroups` → `SingleMetricCard` (`StatTile`) |
-| 47 都道府県の中でどこにいるか | 値の順に並べた小さな棒で選んだ県を濃く塗る | 推移を描けないカードで自動 (`MiniDistributionBars` の `highlightIndex`) |
-| 全国とどれだけ違うか | 県の値の横に全国の値 | 全国行がある指標で自動 (`MetricStatTile` の補足) |
+| 全国とどれだけ違うか | 県の値の横に全国の値 | 公式の全国の系列 (`app/japan/<key>/series.json`) がある指標で自動 (`MetricStatTile` の補足) |
 | 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
 | 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
 | 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |
 
-- **47 都道府県を比べる図 (地図・表・並べた棒) はテーマに置かない** (2026-10-31 オーナー決定)。県の比較はランキングのページ
-  (`/ranking/<key>`) が受け持ち、テーマは 1 つの県 (または全国) の値・推移・内訳・男女差を読む。数値タイルの出典の Sheet から
-  ランキングへ移れる。旧 `comparisonYear` / `comparisonMap` と比較の節 (ThemeComparisonSection) は撤去した
+- **テーマ・地域のページは 1 つの地域 (全国・県・市区町村) を見せ、47 都道府県を比べる図・表 (地図・表・並べた棒・47 の中の位置) を
+  置かない** (2026-10-31 オーナー決定)。県の比較はランキングのページ (`/ranking/<key>`) と Geo の分析ページが受け持つ。
+  地域は覚えている県 (Cookie) から決め、`/themes/<key>` は県を覚えていればその県のページへ移り、覚えていなければ全国の値
+  (公式の全国の系列) を見せる。パンくずに今の地域を出す。47 県の平均を全国として見せない。埋め込みの節は県別の表を
+  今の地域の行だけにする (Geo の集計部品は `regionOnly`)。機械の検査は `apps/web/src/__tests__/region-page-no-comparison.test.ts`
+  (入口から import をたどり、比較の部品と「47都道府県の〜」の見出しを止める)。旧 `comparisonYear` / `comparisonMap` と比較の節は撤去した
 - 単年の指標を折れ線に入れない。単位の違う指標・内数を含む組・一部の項目だけの組を構成比・ドーナツにしない (足しても全体にならない)
 - 1 つの事実は 1 回だけ見せる。推移のカードと全く同じ指標の折れ線は描画側 (`chartDuplicatesMetrics`) が 1 つにまとめる
 - 章の設計案は NotebookLM が白書を参照して作り、`apply-design.ts` が上の規則でデータの形に合わせ直して書く

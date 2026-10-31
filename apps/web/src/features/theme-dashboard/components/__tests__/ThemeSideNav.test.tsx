@@ -104,14 +104,10 @@ describe('ThemeSideNav — 地域ブロック', () => {
       screen.getByRole('navigation', { name: '統計の地域単位' })
     ).toHaveTextContent('比較単位');
     expect(screen.getByText('表示する都道府県')).toBeInTheDocument();
-    expect(screen.getByLabelText('都道府県を選択')).toHaveTextContent(
-      '47都道府県'
-    );
-    expect(screen.getByLabelText('都道府県を選択')).not.toHaveTextContent(
-      '全国'
-    );
+    // 県を選んでいないときは全国の値を見せる (2026-10-31。旧: 「47都道府県」)
+    expect(screen.getByLabelText('都道府県を選択')).toHaveTextContent('全国');
     expect(
-      screen.queryByRole('button', { name: '47都道府県に戻す' })
+      screen.queryByRole('button', { name: '全国に戻す' })
     ).toBeNull();
   });
 
@@ -139,7 +135,7 @@ describe('ThemeSideNav — 地域ブロック', () => {
     expect(screen.getByLabelText('都道府県を選択')).toBeInTheDocument();
   });
 
-  it('県を選ぶと47都道府県へ戻す操作を表示する', async () => {
+  it('県を選ぶと全国へ戻す操作を表示する', async () => {
     renderWithProvider(<ThemeSideNav themes={THEME_SWITCHER_THEMES} currentThemeKey="population-dynamics" />);
 
     // Base UI の Select は pointer の一連の操作で選ぶので、fireEvent.click ではなく user-event で操作する
@@ -153,7 +149,7 @@ describe('ThemeSideNav — 地域ブロック', () => {
       );
     });
     expect(
-      screen.getByRole('button', { name: '47都道府県に戻す' })
+      screen.getByRole('button', { name: '全国に戻す' })
     ).toBeInTheDocument();
   });
 });

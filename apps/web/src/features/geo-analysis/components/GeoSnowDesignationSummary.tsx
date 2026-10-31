@@ -44,22 +44,28 @@ export function snowNationalValues(
 export function GeoSnowDesignationSummary({
   snapshot,
   selectedAreaCode,
+  regionOnly = false,
   onSelectArea,
 }: {
   snapshot: GeoAnalysisSnapshot;
   selectedAreaCode?: string | null;
+  /** テーマのページでは今の地域 (選んだ県、無ければ全国) の行だけを出す。47 都道府県を並べる表はランキングと Geo の分析ページ (2026-10-31) */
+  regionOnly?: boolean;
   onSelectArea?: (code: string, name: string) => void;
 }) {
   const selected = snapshot.rows.find((r) => r.areaCode === selectedAreaCode);
+  const nationalRow = {
+    areaCode: '00000',
+    areaName: '全国（47都道府県計）',
+    rank: 0,
+    values: snowNationalValues(snapshot),
+  };
   const rows = selected
     ? [selected]
-    : [
-        {
-          areaCode: '00000',
-          areaName: '全国（47都道府県計）',
-          rank: 0,
-          values: snowNationalValues(snapshot),
-        },
+    : regionOnly
+      ? [nationalRow]
+      : [
+        nationalRow,
         ...[...snapshot.rows].sort((a, b) =>
           a.areaCode.localeCompare(b.areaCode)
         ),

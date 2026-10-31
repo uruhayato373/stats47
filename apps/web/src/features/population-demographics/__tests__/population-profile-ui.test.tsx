@@ -183,14 +183,15 @@ describe("synthetic profileとカードの同一計算", () => {
   });
 });
 describe("人口移動の共通県選択と男女・年齢・相手県", () => {
-  it("全国47県から東京46相手県・沖縄・全国へ同じsnapshotで切り替わる", () => {
+  it("全国の計から東京46相手県・沖縄・全国へ同じsnapshotで切り替わる", () => {
     const { container } = render(
       <Context>
         <ThemeMigrationDemographicsClient snapshot={migration} />
       </Context>,
     );
+    // 全国は全国の計だけを出し、47 県の行を並べない (2026-10-31。県の比較はランキングのページ)
     expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
-      47,
+      0,
     );
     expect(container.querySelector("[data-total-inbound]")?.textContent).toBe(
       "2,515,731",
@@ -213,7 +214,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "全国へ切替" }));
     expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
-      47,
+      0,
     );
   });
   it("男性20〜24歳・相手北海道の流入方向を取り違えない", async () => {

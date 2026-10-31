@@ -26,10 +26,13 @@ const number = (n: number | null | undefined) =>
 export function GeoLandslideSummary({
   snapshot,
   selectedAreaCode,
+  regionOnly = false,
   onSelectArea,
 }: {
   snapshot: GeoAnalysisSnapshot;
   selectedAreaCode?: string | null;
+  /** テーマのページでは今の地域 (選んだ県、無ければ全国) の行だけを出す。47 都道府県を並べる表はランキングと Geo の分析ページ (2026-10-31) */
+  regionOnly?: boolean;
   onSelectArea?: (code: string, name: string) => void;
 }) {
   const selected = snapshot.rows.find((r) => r.areaCode === selectedAreaCode),
@@ -41,7 +44,7 @@ export function GeoLandslideSummary({
     areaName: '対象46県計（京都府除外）',
     values: landslideNationalValues(snapshot.rows),
   };
-  const shown = selected ? [selected] : [national, ...rows];
+  const shown = selected ? [selected] : regionOnly ? [national] : [national, ...rows];
   return (
     <SurfaceSection data-landslide-summary>
       <SectionHeader

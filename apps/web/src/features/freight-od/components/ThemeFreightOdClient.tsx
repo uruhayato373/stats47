@@ -123,9 +123,10 @@ export function ThemeFreightOdClient({
         <p className="text-sm text-muted-foreground">
           {selectedPrefectureCode
             ? `${selectedAreaName}${direction === 'outbound' ? 'から発送された貨物の到着先' : 'へ到着した貨物の発送元'}です。自県内の輸送も含みます。`
-            : '全国表示は県別の発送・到着合計です。ページ上部で都道府県を選ぶと、相手47県との流動を表示します。'}
+            : `全国の${direction === 'outbound' ? '発送' : '到着'}の合計は ${total.toLocaleString('ja-JP')} ${formatUnitForDisplay(mode.unit)}です。県のページでは、その県と相手の県との流動を表示します。`}
         </p>
-        {rows ? (
+        {/* 全国のページは合計だけ。県別の合計を 47 行並べない (2026-10-31。比較はランキング) */}
+        {!selectedPrefectureCode && rows ? null : rows ? (
           <Table
             aria-label={`${period} ${mode.label} ${area}の${direction === 'outbound' ? '発送先' : '到着元'}`}
             className="min-w-80"

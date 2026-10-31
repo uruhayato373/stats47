@@ -7,6 +7,7 @@ import {
   readRankingItemFromR2,
   readRankingValuesFromR2,
 } from "@stats47/ranking/server";
+import { readJapanSeries } from "@stats47/stats-r2/readers";
 import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
@@ -143,9 +144,17 @@ export async function loadThemeData(
       });
   });
 
-  const [...valuesResults] = await Promise.all([
-    ...valuesPromises,
-  ]);
+  // 公式の全国の系列 (app/japan/<key>/series.json)。全国のページの値と推移に使う。47 県の平均は全国と呼ばない
+  // (2026-10-31。無い指標は null で、全国のページは値を出さない)
+  const japanPromise = Promise.all(
+    validItems.map(({ key }) =>
+      readJapanSeries(key)
+        .then((artifact) => [key, artifact] as const)
+        .catch(() => [key, null] as const)
+    )
+  );
+  const [valuesResults, japanEntries] = await Promise.all([Promise.all(valuesPromises), japanPromise]);
+  const japanByKey = new Map(japanEntries);
 
   // 3. indicatorDataMap を構築（availableYears を含む）
   const indicatorDataMap: Record<string, ThemeIndicatorData> = {};
@@ -166,8 +175,9 @@ export async function loadThemeData(
         },
         rankingValues: values,
         availableYears: (item.availableYears ?? []).map(normalizeYear),
-        nationalValue: valResult?.nationalValue,
+        nationalValue: officialNationalValue(japanByKey.get(key) ?? null) ?? valResult?.nationalValue,
         nationalSeries: valResult?.nationalSeries,
+        officialNationalSeries: officialNationalSeries(japanByKey.get(key) ?? null),
       };
     }
   }
@@ -175,4 +185,23 @@ export async function loadThemeData(
   if (Object.keys(indicatorDataMap).length === 0) return null;
 
   return { indicatorDataMap, ...(metricGroups ? { metricGroups } : {}) };
+}
+
+type JapanSeries = Awaited<ReturnType<typeof readJapanSeries>>;
+
+/** 公式の全国の系列の最新の値 (年の新しい行) */
+function officialNationalValue(artifact: JapanSeries): number | undefined {
+  const rows = artifact?.rows.filter((row) => Number.isFinite(row.value)) ?? [];
+  if (rows.length === 0) return undefined;
+  return [...rows].sort((a, b) => a.yearCode.localeCompare(b.yearCode)).at(-1)!.value;
+}
+
+/** 公式の全国の系列を年の順に (無ければ undefined) */
+function officialNationalSeries(artifact: JapanSeries): { year: number; value: number }[] | undefined {
+  const points = (artifact?.rows ?? [])
+    .filter((row) => Number.isFinite(row.value))
+    .map((row) => ({ year: Number(row.yearCode.slice(0, 4)), value: row.value }))
+    .filter((p) => Number.isFinite(p.year))
+    .sort((a, b) => a.year - b.year);
+  return points.length > 0 ? points : undefined;
 }

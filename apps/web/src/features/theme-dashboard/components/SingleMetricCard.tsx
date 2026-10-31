@@ -6,11 +6,10 @@ import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { MiniLineChart } from '@/components/charts/MiniCharts';
-import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
-import { resolveMetricTrend, shouldFetchMetricTrend } from '../lib/metric-trend';
+import { MIN_TREND_YEARS, resolveMetricTrend, shouldFetchMetricTrend, type MetricTrend } from '../lib/metric-trend';
 
 import { MetricStatTile } from './MetricStatTile';
 
@@ -40,8 +39,9 @@ interface SingleMetricCardProps {
  * 部品は台帳 data/design/components.json の stat-tile: 名前 → 値 + 単位 + 順位バッジ → 年 (補足) の順に並べ、
  * 推移の小さなチャートは値の下、出典・指標の定義は右上の枠なしのアイコンから Sheet で開く (2026-10-30)。
  *
- * 推移を出すかは lib/metric-trend.ts が決める (県を選んでいる・同じ章に詳しい図が無い・異なる年が 2 つ以上)。
- * 出さないときは何も置かない。取得は県選択時にこの指標 1 件分だけ (自地域 + 全国)。
+ * 推移を出すかは lib/metric-trend.ts が決める (同じ章に詳しい図が無い・異なる年が MIN_TREND_YEARS 以上)。県のページは
+ * この指標 1 件分の県と全国の系列を取りに行き、全国のページは手元の全国の系列で描く。出さないときは何も置かない。
+ * 47 都道府県の中の位置のような比較の図は置かない (比較はランキングのページ。2026-10-31 オーナー決定)。
  * 正典: docs/01_技術設計/04_デザインシステム.md「選択 UI と集合レイアウトの件数規則」
  */
 export function SingleMetricCard({
@@ -94,7 +94,10 @@ export function SingleMetricCard({
 
   const trend = useMemo(
     () =>
-      wantsTrend
+      // 全国のページは手元の公式の全国の系列で描く。取りに行かない (47 県の平均は全国と呼ばないので使わない)
+      !selectedPrefectureCode && !summaryOnly
+        ? nationalTrend(metric.officialNationalSeries ?? [])
+        : wantsTrend
         ? resolveMetricTrend({
             areaName,
             areaResult: series[areaCode],
@@ -102,11 +105,10 @@ export function SingleMetricCard({
             fallbackSeries: metric.series,
           })
         : ({ kind: 'none' } as const),
-    [wantsTrend, series, areaCode, areaName, metric.series]
+    [wantsTrend, series, areaCode, areaName, metric.series, metric.officialNationalSeries, selectedPrefectureCode, summaryOnly]
   );
 
-  const isReady =
-    metric.topRanked !== null || metric.value !== null || metric.series.length > 0;
+  const isReady = metric.value !== null || metric.series.length > 0;
   return (
     <div
       id={id}
@@ -137,41 +139,14 @@ export function SingleMetricCard({
             seriesName={trend.seriesName}
             unit={formatUnitForDisplay(metric.unit)}
           />
-        ) : (
-          <PrefecturePositionBars metric={metric} selectedPrefectureCode={selectedPrefectureCode} areaName={areaName} />
-        )}
+        ) : null}
       </MetricStatTile>
     </div>
   );
 }
 
-/** 位置の図を描くのに要る県の数 (欠けの多い指標で並びが意味を持たないときは描かない) */
-const MIN_POSITION_VALUES = 10;
-
-/**
- * 推移を描けないときの小さな図: 47 都道府県の値を順位の順に並べ、選んでいる県 (未選択なら 1 位) を濃く塗る
- * (2026-10-31。問いの型「地域間の比較・順位」。数値だけのタイルに、全体の中の位置を足す)。
- */
-function PrefecturePositionBars({
-  metric,
-  selectedPrefectureCode,
-  areaName,
-}: {
-  metric: MetricKpi;
-  selectedPrefectureCode: string | null;
-  areaName: string;
-}) {
-  const values = metric.rankedValues ?? [];
-  if (values.length < MIN_POSITION_VALUES) return null;
-  const rank = selectedPrefectureCode ? metric.rank : 1;
-  if (rank === null || rank < 1 || rank > values.length) return null;
-  const name = selectedPrefectureCode ? areaName : (metric.topRanked?.areaName ?? '1位の県');
-  return (
-    <MiniDistributionBars
-      bins={values.map((count) => ({ count }))}
-      highlightIndex={rank - 1}
-      label={`${values.length}都道府県を値の順に並べた中の${name} (${rank}位)`}
-      className="mt-2"
-    />
-  );
+/** 全国の系列が MIN_TREND_YEARS 年以上あれば、その推移を描く (全国のページ用) */
+function nationalTrend(points: readonly { year: number; value: number }[]): MetricTrend {
+  if (new Set(points.map((p) => p.year)).size < MIN_TREND_YEARS) return { kind: 'none' };
+  return { kind: 'chart', seriesName: '全国', points: [...points] };
 }

@@ -17,7 +17,7 @@ import type { PageComponent } from '@/components/stat-charts';
 import { StatTileGrid } from '@/components/surface';
 
 import {
-  PREFECTURE_SET_LABEL,
+  NATIONAL_REGION_LABEL,
   type ThemeConfig,
   type ThemeIndicatorData,
 } from '../types';
@@ -112,8 +112,8 @@ function primaryRankingLabel(
  * 「KPI カード + 時系列チャート + 考察」として一画面に集約する。
  *
  * - KPI カード: tabIndicators（role≠context の指標）を indicatorDataMap から導出。
- *   都道府県選択時はその県の値・全国順位、未選択時は実在する1位県の値 (topRanked) を表示する
- *   (47県平均や全国値を「代表値」として作らない。GEO-SCOPE-SEPARATION-01 WP2)。
+ *   県のページはその県の値・全国順位、全国のページは全国の値 (e-Stat の全国行) を表示する
+ *   (47 県の平均を「代表値」として作らない。GEO-SCOPE-SEPARATION-01 WP2)。
  * - 時系列チャート: page_components の line/mixed/composition 等を ThemeDbChartRenderer で描画。
  *   従来 PrefectureStatsPanel は kpi-card 不在のため section 付きチャートを描画できず、
  *   全テーマで埋め草になっていた（本コンポーネントが置き換える）。
@@ -138,7 +138,7 @@ export function ThemeMetricsDashboard({
 }: Props) {
   const areaName = selectedPrefectureCode
     ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
-    : PREFECTURE_SET_LABEL;
+    : NATIONAL_REGION_LABEL;
 
   const kpiKeys = useMemo(
     () =>
@@ -176,55 +176,25 @@ export function ThemeMetricsDashboard({
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
-      const position = {
-        rankedValues: rankedFiniteValues(d.rankingValues),
-        nationalValue: d.nationalValue,
-        isSingleYear: (d.availableYears ?? d.rankingItem.availableYears ?? []).length <= 1,
-      };
+      const nationalValue = d.nationalValue;
 
-      if (selectedPrefectureCode) {
-        return {
-          metricKey: key,
-          title: metricDisplayName(d.rankingItem),
-          unit: target?.unit || d.rankingItem.unit || '',
-          yearName: target?.yearName ?? d.rankingItem.latestYear?.yearName,
-          value: typeof target?.value === 'number' ? target.value : null,
-          rank: target?.rank ?? null,
-          total,
-          ...source,
-          ...position,
-          series: d.nationalSeries ?? [],
-          topRanked: null,
-          isLoading: false,
-        };
-      }
-
-      // 47都道府県 (未選択) 表示: 「全国」「全国平均」の値を作らず、実在する1位県の
-      // 事実をそのまま渡す (ranking を主役にする。doc 43 §7 WP2)。追加 fetch は発生しない
-      // (rankingValues に既にある値)。県選択後だけ MetricSwitcherPanel がその県 + 全国系列を
-      // 取りに行く (isNational チェックは MetricSwitcherPanel 側が持つ)。
-      const top1 = d.rankingValues.find((v) => v.rank === 1);
-      const topRanked =
-        top1 && typeof top1.value === 'number' && Number.isFinite(top1.value)
-          ? {
-              areaCode: top1.areaCode,
-              areaName: lookupArea(top1.areaCode)?.areaName ?? top1.areaCode,
-              value: top1.value,
-            }
-          : null;
-
+      // 県のページはその県の値と順位、全国のページは全国の値 (2026-10-31 オーナー決定。旧: 47 都道府県の表示で 1 位の県の値)
+      // 単位と年は観測の行から取る (全国のページは同じ年のどの県の行でもよい)
+      const observed = target ?? d.rankingValues[0];
       return {
         metricKey: key,
         title: metricDisplayName(d.rankingItem),
-        unit: top1?.unit || d.rankingItem.unit || '',
-        yearName: top1?.yearName ?? d.rankingItem.latestYear?.yearName,
-        value: null,
-        rank: null,
+        unit: observed?.unit || d.rankingItem.unit || '',
+        yearName: observed?.yearName ?? d.rankingItem.latestYear?.yearName,
+        value: selectedPrefectureCode
+          ? typeof target?.value === 'number' ? target.value : null
+          : nationalValue ?? null,
+        rank: selectedPrefectureCode ? (target?.rank ?? null) : null,
         total,
         ...source,
-        ...position,
+        nationalValue,
         series: d.nationalSeries ?? [],
-        topRanked,
+        officialNationalSeries: d.officialNationalSeries,
         isLoading: false,
       };
     });
@@ -599,14 +569,6 @@ export function ThemeMetricsDashboard({
       )}
     </PanelGrid>
   );
-}
-
-/** 47 都道府県の値を順位の順に並べる (単年の指標で、その県が 47 の中のどこにいるかを描く) */
-function rankedFiniteValues(values: ThemeIndicatorData['rankingValues']): number[] {
-  return values
-    .filter((v) => typeof v.rank === 'number' && typeof v.value === 'number' && Number.isFinite(v.value))
-    .sort((a, b) => (a.rank as number) - (b.rank as number))
-    .map((v) => v.value as number);
 }
 
 /** 男女の比較のカード ([男, 女]) の系列色。色の意味はチャートの色の役割 (chart-color-role) にそろえる */

@@ -39,7 +39,6 @@ vi.mock(
 );
 
 import { MetricSwitcherPanel } from "../MetricSwitcherPanel";
-import { ThemePrefectureProvider } from "../ThemePrefectureContext";
 
 import type { MetricKpi, MultiMetricGroup } from "../metric-kpi";
 
@@ -52,7 +51,6 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   rank: null,
   total: 47,
   series: [],
-  topRanked: { areaCode: "13000", areaName: "東京都", value: 999 },
   isLoading: false,
   ...over,
 });
@@ -130,44 +128,29 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
     );
   }
 
-  // 2026-10-31 (オーナー決定): 47 都道府県のページでも推移のカードを空にせず、全国の推移を出す
-  // (旧 GEO-SCOPE-SEPARATION-01 WP2: 何も取得せず「都道府県を選択すると…」の案内を出していた)
-  it("全国の推移だけを取りに行く (県の系列は取らない)", async () => {
-    renderUnselected();
-    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
-    const codes = fetchMock.mock.calls.map((c) => c[1]);
-    expect(new Set(codes)).toEqual(new Set(["00000"]));
+  // 2026-10-31 (オーナー決定): 全国のページは手元の公式の全国の系列で推移を描き、取りに行かない
+  // (47 県の平均を全国として描かない。公式の全国の系列が無い指標は線を出さない)
+  it("全国のページは時系列を取りに行かず、公式の全国の系列で描く", async () => {
+    renderUnselected({
+      metrics: [
+        kpi("wage", { officialNationalSeries: [2019, 2020, 2021].map((year, i) => ({ year, value: 300 + i })) }),
+        kpi("unemployment"),
+      ],
+    });
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.queryByText("推移データがありません")).toBeNull();
   });
 
-  it("タイルは実在する1位県の値と県名を表示する (捏造・平均ではない)", async () => {
+  it("全国のページのタイルは全国の値を出し、1 位の県を出さない (2026-10-31)", async () => {
     renderUnselected();
     const wageTile = valueTile("賃金");
-    expect(wageTile).toHaveTextContent("999");
-    expect(wageTile).toHaveTextContent("東京都");
+    expect(wageTile).toHaveTextContent("100");
+    expect(wageTile).not.toHaveTextContent("1位");
   });
 
   it("「都道府県を選択すると…」の空のカードは出さない", async () => {
     renderUnselected();
-    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
     expect(screen.queryByText(/都道府県を選択すると/)).toBeNull();
-  });
-});
-
-// 2026-10-31 (オーナー決定): 前に選んだ県を覚え、47 都道府県のページでも推移のカードに全国と並べて出す
-describe("MetricSwitcherPanel — 覚えている県の重ね表示", () => {
-  it("覚えている県と全国を取りに行き、外す札を出す。札を押すと全国だけに戻る", async () => {
-    render(
-      <ThemePrefectureProvider rememberedAreaCode="13000">
-        <MetricSwitcherPanel metrics={METRICS} tabLabels={LABELS} selectedPrefectureCode={null} areaName="47都道府県" />
-      </ThemePrefectureProvider>,
-    );
-    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
-    const codes = new Set(fetchMock.mock.calls.map((c) => c[1]));
-    expect(codes).toEqual(new Set(["13000", "00000"]));
-    const chip = screen.getByRole("button", { name: /東京都の重ね表示を外す/ });
-    fireEvent.click(chip);
-    expect(screen.queryByRole("button", { name: /重ね表示を外す/ })).toBeNull();
-    expect(document.cookie).toContain("preferred-prefecture=all");
   });
 });
 

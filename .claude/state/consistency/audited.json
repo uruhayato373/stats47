@@ -1,19 +1,8 @@
 {
-  "hash": "e4027444033e95a5bb59cc8db605d50045e4c3fec642eb4939e890bfd41f9fbf",
-  "audited_at": "2026-10-31T05:59:39",
+  "hash": "d4c46cc9b055d9562da7f93ed29535ffe5741bc9edba9977185db85c03bb8b7e",
+  "audited_at": "2026-10-31T06:52:02",
   "files": [
-    ".agents/skills/theme/research-theme-catalog/SKILL.md",
-    ".claude/agents/theme-ui-manager.md",
     ".claude/rules/chart-component-standards.md",
-    ".claude/rules/theme-catalog-standards.md",
-    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
-    ".claude/scripts/themes/__tests__/theme-followup.test.mjs",
-    ".claude/scripts/themes/audit-theme-runtime.ts",
-    ".claude/scripts/themes/dashboard-design/apply-design.ts",
-    ".claude/scripts/themes/dashboard-design/ask-notebooklm.mjs",
-    ".claude/scripts/themes/dashboard-design/build-inventory.ts",
-    ".claude/scripts/themes/theme-followup-core.mjs",
-    ".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md",
-    ".claude/skills/theme/research-theme-catalog/SKILL.md"
+    ".claude/rules/theme-catalog-standards.md"
   ]
 }

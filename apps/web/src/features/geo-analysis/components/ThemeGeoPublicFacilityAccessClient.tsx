@@ -40,6 +40,7 @@ export function ThemeGeoPublicFacilityAccessClient({
         />
       ) : null}
       <GeoPublicFacilitySummary
+        regionOnly
         snapshot={snapshot}
         selectedAreaCode={selectedPrefectureCode}
         onSelectArea={setSelected}

@@ -11,7 +11,6 @@ import { ChartPanel } from '@stats47/components';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { classifyUnitComparability } from '@stats47/data-configs/unit';
-import { X } from 'lucide-react';
 
 import { getChartColor } from '@/components/charts/ChartPalette';
 import { ChartLoading } from '@/components/charts/ChartState';
@@ -29,7 +28,6 @@ import { metricSourceGroups } from '../lib/metric-source-groups';
 import { nationalSeriesName } from '../lib/metric-trend';
 
 import { MetricStatTile } from './MetricStatTile';
-import { useThemePrefecture } from './ThemePrefectureContext';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
 
@@ -205,12 +203,9 @@ export function MetricSwitcherPanel({
   defaultCheckedKeys,
   seriesColors,
 }: MetricSwitcherPanelProps) {
-  // 推移に出す県: 選んでいる県、無ければ前に選んで覚えている県 (47 都道府県のページ。タイルは 47 都道府県のまま)。
-  // どちらも無ければ全国の推移を出す (2026-10-31 オーナー決定。旧: 「都道府県を選択すると…」の空のカード)
-  const { rememberedPrefecture, clearRemembered } = useThemePrefecture();
-  const trendCode = selectedPrefectureCode ?? rememberedPrefecture?.areaCode ?? null;
-  const trendAreaName = selectedPrefectureCode ? areaName : (rememberedPrefecture?.areaName ?? areaName);
-  const showsRemembered = !selectedPrefectureCode && !!rememberedPrefecture;
+  // 推移に出す地域はページの地域そのもの (県のページは県、全国のページは全国。2026-10-31 オーナー決定)
+  const trendCode = selectedPrefectureCode;
+  const trendAreaName = areaName;
   const areaCode = trendCode ?? NATIONAL_AREA_CODE;
 
   const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
@@ -261,11 +256,12 @@ export function MetricSwitcherPanel({
   // (国土数値情報など) の描画フォールバックに要る。
   //
   // ★47都道府県 (未選択) のときは何も fetch しない (GEO-SCOPE-SEPARATION-01 WP2)。
-  //   タイルは indicatorDataMap 由来の topRanked (実在する1位県の事実) を即座に表示でき、
+  //   タイルは indicatorDataMap 由来の値 (県の値・全国の値) を即座に表示でき、
   //   時系列は「都道府県を選択すると表示されます」という案内に置き換わるため、
   //   ネットワーク往復も「全国」「都道府県平均」の値も一切必要ない。
   useEffect(() => {
-    if (summaryOnly) return;
+    // 全国のページは手元の公式の全国の系列で描くので取りに行かない (2026-10-31)
+    if (summaryOnly || !trendCode) return;
     const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
     if (keys.length === 0) return;
     const wanted = trendCode ? [areaCode, NATIONAL_AREA_CODE] : [NATIONAL_AREA_CODE];
@@ -309,7 +305,7 @@ export function MetricSwitcherPanel({
   // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)。
   // 47都道府県 (未選択) では何も fetch しないので、ローディングにはならない。
   const isLoadingSeries =
-    !summaryOnly && checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
+    !summaryOnly && !!trendCode && checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
 
   const chartState: ChartState = useMemo(() => {
     if (checkedMetrics.length === 0) return { kind: 'none' };
@@ -360,7 +356,14 @@ export function MetricSwitcherPanel({
       let points: { year: string; yearName: string; value: number }[] = [];
       let name = label;
 
-      if (trendCode && areaPoints.length > 0) {
+      if (!trendCode) {
+        // 全国のページ: 公式の全国の系列だけを描く。47 県の平均を全国として描かない (無い指標は線を出さない)
+        points = (metric.officialNationalSeries ?? []).map((p) => ({
+          year: String(p.year),
+          yearName: String(p.year),
+          value: p.value,
+        }));
+      } else if (areaPoints.length > 0) {
         points = areaPoints;
         // 1 本だけのときは従来どおり「地域名」を凡例にする (破線の全国と対になる)。
         // 複数本のときは地域が共通なので指標名で区別する (地域は見出し側が言う)。
@@ -511,7 +514,6 @@ export function MetricSwitcherPanel({
   ].join(' / ');
   const readyMetricCount = metrics.filter(
     (metric) =>
-      metric.topRanked !== null ||
       metric.value !== null ||
       metric.series.length > 0
   ).length;
@@ -584,19 +586,6 @@ export function MetricSwitcherPanel({
               </div>
             }
           >
-            {showsRemembered && rememberedPrefecture ? (
-              <div className="mb-2 flex justify-end">
-                <button
-                  type="button"
-                  onClick={clearRemembered}
-                  aria-label={`${rememberedPrefecture.areaName}の重ね表示を外す`}
-                  className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground hover:bg-muted"
-                >
-                  {rememberedPrefecture.areaName}を重ねて表示中
-                  <X aria-hidden className="size-3" />
-                </button>
-              </div>
-            ) : null}
             {isLoadingSeries ? (
               <ChartLoading height={CHART_HEIGHT} />
             ) : chartState.kind === 'chart' ? (

@@ -4,7 +4,7 @@ import { hydrateRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 
-import { PREFECTURE_SET_LABEL } from '../../types';
+import { NATIONAL_REGION_LABEL } from '../../types';
 import { PrefectureSelect } from '../PrefectureSelect';
 import { ThemePrefectureProvider } from '../ThemePrefectureContext';
 
@@ -14,7 +14,7 @@ describe('PrefectureSelect 初期HTMLとhydration', () => {
   it.each([
     { code: '28000', name: '兵庫県', label: '兵庫県' },
     { code: '13000', name: undefined, label: '東京都' },
-    { code: null, name: null, label: PREFECTURE_SET_LABEL },
+    { code: null, name: null, label: NATIONAL_REGION_LABEL },
   ])('$labelをSSRから表示し、hydrateでトリガーを再生成しない', async ({ code, name, label }) => {
     window.history.replaceState(null, '', `/themes/roads?pref=${code ?? 'all'}`);
     const component = (

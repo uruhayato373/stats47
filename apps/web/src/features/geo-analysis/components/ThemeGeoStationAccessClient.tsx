@@ -52,9 +52,8 @@ export function ThemeGeoStationAccessClient({
   const selectedRow = snapshot.rows.find(
     (row) => row.areaCode === selectedPrefectureCode
   );
-  const rows = selectedPrefectureCode
-    ? snapshot.rows.filter((row) => row.areaCode === selectedPrefectureCode)
-    : [...snapshot.rows].sort((a, b) => a.areaCode.localeCompare(b.areaCode));
+  // テーマのページは今の県の行だけを出す。47 都道府県を並べる表は Geo の分析ページとランキング (2026-10-31)
+  const rows = selectedRow ? [selectedRow] : [];
   const metrics = metricKeys.flatMap((key) =>
     snapshot.metrics.filter((metric) => metric.key === key)
   );
@@ -75,14 +74,12 @@ export function ThemeGeoStationAccessClient({
       ) : null}
       <SurfaceSection>
         <SectionHeader
-          title={
-            selectedRow
-              ? `${selectedRow.areaName}の駅800m圏人口`
-              : '47都道府県の駅800m圏人口'
-          }
+          title={selectedRow ? `${selectedRow.areaName}の駅800m圏人口` : '駅800m圏人口'}
           description="駅の位置を固定し、駅代表点から直線800m以内に中心がある1kmメッシュの人口を比較します。2050年は将来推計人口です。"
           hideRule
         />
+        {/* 県の行だけを出す。全国のページに 47 県の表は置かない (2026-10-31。表は Geo の分析ページ) */}
+        {selectedRow ? (
         <Table className="whitespace-nowrap" scrollRegion aria-label="駅800m圏人口の都道府県別集計">
           <TableHeader>
             <TableRow>
@@ -137,6 +134,7 @@ export function ThemeGeoStationAccessClient({
             ))}
           </TableBody>
         </Table>
+        ) : null}
         <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
           道路網・高低差・運行本数は含みません。バス圏、医療施設への距離、国が定義する交通空白を示す値ではありません。
           県別の途中データと集計を照合済み（

@@ -20,8 +20,11 @@ export type PrefectureView =
   | { scope: "prefecture-set" }
   | { scope: "prefecture"; prefectureCode: string; prefectureName: string };
 
-/** 未選択時の表示名。「全国」ではなく「47都道府県」と呼ぶ (情報設計 §地理スコープ)。 */
-export const PREFECTURE_SET_LABEL = "47都道府県";
+/**
+ * 県を選んでいないときの地域名。テーマのページは 1 つの地域を見せ、県を選ばなければ全国の値 (e-Stat の全国行) を出す
+ * (2026-10-31 オーナー決定。旧: 「47都道府県」と呼び、1 位の県の値を出していた)。47 都道府県の比較はランキングのページ。
+ */
+export const NATIONAL_REGION_LABEL = "全国";
 
 /**
  * 既存の `selectedPrefectureCode: string | null` 表現から `PrefectureView` へ変換する。
@@ -119,16 +122,17 @@ export interface ThemeIndicatorData {
   /** 利用可能年度リスト（年度セレクタ用） */
   availableYears?: { yearCode: string; yearName: string }[];
   /**
-   * 全国値（e-Stat の areaCode "00000" 行の値、最新年度）。
-   * 計算型 / city / port 指標など全国行が無い場合は undefined。
-   * 表示側は undefined なら都道府県値の単純平均にフォールバックする。
+   * 全国の値 (公式の全国の系列 app/japan/<key>/series.json の最新の値)。無い指標は undefined で、
+   * 全国のページは値を出さない (47 県の平均で埋めない。2026-10-31)
    */
   nationalValue?: number;
   /**
-   * 全国行 (areaCode "00000") の値の年次推移。カード内 MiniLineChart 用。
-   * 計算型 / city / port 指標など全国行が無い場合は undefined。
+   * 各年の 47 都道府県の単純平均。全国の値ではない (表示するときは「都道府県平均」と呼ぶ)。
+   * 県の系列が取れない指標の推移の代わりに使う。
    */
   nationalSeries?: { year: number; value: number }[];
+  /** 公式の全国の系列 (app/japan/<key>/series.json)。全国のページの推移に使う。無い指標は undefined (2026-10-31) */
+  officialNationalSeries?: { year: number; value: number }[];
 }
 
 /** Server → Client に渡す props */

@@ -120,8 +120,9 @@ export function ThemeRegionNav({
     const href = code ? prefectureHref(code) : themeHref(themeKey);
     trackNavClick({ surface: 'theme_region', label: code ?? 'all', href });
     setOpen(false);
-    // 選んだ県を覚える (47 都道府県のページの推移のカードに重ねる。2026-10-31)。「47 都道府県を比べる」では消さない
-    if (code) writeThemePrefecturePreference(code);
+    // 選んだ地域を覚える。全国を選んだら覚えている県を消す (テーマのページは覚えている県のページへ移るので、消さないと
+    // 全国へ戻れない。2026-10-31)
+    writeThemePrefecturePreference(code);
     // 県ごとのページを持たないテーマは同じページのまま県を切り替える (旧 PrefectureSelect と同じ)
     if (!hasAreaPages && !areaContext && current === 'prefectures') setSelected(code);
     else router.push(href);
@@ -146,7 +147,13 @@ export function ThemeRegionNav({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <button type="button" className={CRUMB_TRIGGER_CLASS} onClick={() => openAt('national')} aria-label="地域を変える (今: 全国)">
+            <button
+              type="button"
+              className={CRUMB_TRIGGER_CLASS}
+              onClick={() => openAt('national')}
+              aria-label={prefectureName ? '地域を変える' : '地域を変える (今: 全国)'}
+              aria-current={!prefectureName && current !== 'municipalities' ? 'location' : undefined}
+            >
               全国
               <ChevronDown aria-hidden className="size-3.5 text-muted-foreground" />
             </button>
@@ -212,13 +219,13 @@ export function ThemeRegionNav({
                   href={themeHref(themeKey)}
                   active={current === 'prefectures' && !prefectureCode}
                   chevron={false}
-                  trailing="ランキング・地図"
+                  trailing="日本全体の値"
                   onClick={(event) => {
                     event.preventDefault();
                     choosePrefecture(null);
                   }}
                 >
-                  47 都道府県を比べる
+                  全国
                 </RailNavRow>
                 {scopeHrefs.municipalities && (
                   <RailNavRow
@@ -331,13 +338,13 @@ export function ThemeRegionNav({
                 <RailNavRow
                   href={themeHref(themeKey)}
                   chevron={false}
-                  trailing="ランキング・地図"
+                  trailing="日本全体の値"
                   onClick={(event) => {
                     event.preventDefault();
                     choosePrefecture(null);
                   }}
                 >
-                  47 都道府県を比べる
+                  全国
                 </RailNavRow>
                 {scopeHrefs.japan && (
                   <RailNavRow href={scopeHrefs.japan} chevron={false} trailing="日本全体" data-nav-surface="theme_region">

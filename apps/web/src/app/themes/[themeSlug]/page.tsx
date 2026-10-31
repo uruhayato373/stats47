@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+
+import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import { isAreaTheme } from "@/features/theme-dashboard/config/area-theme-slugs";
@@ -77,26 +79,24 @@ export default async function ThemeDynamicPage({ params, searchParams }: PagePro
     notFound();
   }
 
+  // テーマのページは 1 つの地域 (全国・県・市区町村) の値を見せる (2026-10-31 オーナー決定。47 都道府県の比較はランキング)。
+  // 地域は覚えている県 (Cookie) から決める。県ごとのページ (/areas/県/テーマ) を持つテーマは、覚えている県があればその県の
+  // ページへ移る。覚えていなければ、このページは全国の値を見せる。県ごとのページを持たないテーマ (港湾・鉄道・道路) は
+  // 従来どおり URL と Cookie の県をこのページで選んだ状態にする。
+  const rememberedPrefecture = resolveThemePrefectureCode(cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value);
+  if (isAreaTheme(theme.themeKey) && rememberedPrefecture) {
+    redirect(hrefFor('area-theme', { areaCode: rememberedPrefecture.areaCode, themeSlug: theme.themeKey }));
+  }
   const data = await loadThemeData(theme);
   if (!data) {
     throw new Error(`theme data unavailable: ${theme.themeKey}`);
   }
-
-  // 県ごとのページ (/areas/県/テーマ) を持つテーマは、このページを常に 47都道府県の表示にする。県を選んだ表示は
-  // 県のページだけが持つ (県×テーマの交点を 1 つの URL にする。2026-10-30 オーナー決定。`?pref=` は middleware が 301 で移す)。
-  // 持たないテーマ (港湾・鉄道・道路) は従来どおり URL と Cookie から県を引き継ぐ。
   const initialPrefecture = isAreaTheme(theme.themeKey)
     ? null
     : resolveInitialThemePrefecture({
         urlPreference: query.pref,
         cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
       });
-
-  // 前に選んで覚えている県 (県のページや地域の Sheet で選んだ県)。このページの題名とタイルは 47 都道府県のまま、
-  // 推移のカードにだけ全国と並べて出す (2026-10-31 オーナー決定)
-  const rememberedPrefectureCode =
-    resolveThemePrefectureCode(cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value)?.areaCode ?? null;
-
   // PageShell は ThemePageLayout が持つ (左レール = ThemeSideNav を
   // ThemePrefectureProvider の内側に置く必要があるため)。ここで重ねない。
   return (
@@ -104,7 +104,6 @@ export default async function ThemeDynamicPage({ params, searchParams }: PagePro
       theme={theme}
       data={data}
       initialPrefecture={initialPrefecture}
-      rememberedPrefectureCode={isAreaTheme(theme.themeKey) ? rememberedPrefectureCode : null}
     />
   );
 }

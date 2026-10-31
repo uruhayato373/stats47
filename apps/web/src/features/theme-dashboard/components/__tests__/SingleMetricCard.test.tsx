@@ -56,7 +56,6 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   rank: null,
   total: 47,
   series: [],
-  topRanked: { areaCode: '13000', areaName: '東京都', value: 999 },
   isLoading: false,
   ...over,
 });
@@ -88,13 +87,28 @@ beforeEach(() => {
 });
 
 describe('SingleMetricCard — 値の表示', () => {
-  it('topRanked が無い指標は値が「—」になる (0 を捏造しない)', () => {
+  it('全国の値が無い指標は全国のページで値が「—」になる (47 県の平均や 1 位の県で埋めない)', () => {
     const { container } = renderCard({
-      metric: kpi('unsupported-metric', { topRanked: null, value: null }),
+      metric: kpi('unsupported-metric', { value: null }),
     });
     expect(container.textContent).toContain('—');
+    expect(container.textContent).toContain('全国の値は未収録');
     const wrapper = container.querySelector('[data-theme-component-type="kpi-card"]');
     expect(wrapper).toHaveAttribute('data-data-state', 'no-data');
+  });
+});
+
+describe('SingleMetricCard — 全国のページ', () => {
+  it('手元の全国の系列で推移を描き、時系列を取りに行かない', () => {
+    renderCard({
+      metric: kpi('national', { officialNationalSeries: [2020, 2021, 2022, 2023, 2024].map((year, i) => ({ year, value: 5 + i })) }),
+    });
+    expect(screen.getByTestId('mini-line-chart')).toHaveAttribute('data-series-name', '全国');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+  it('47 都道府県を並べる位置の図を置かない (比較はランキングのページ)', () => {
+    const { container } = renderCard({ metric: kpi('single', { yearName: '2020年' }) });
+    expect(container.querySelector('svg[role="img"]')).toBeNull();
   });
 });
 
@@ -147,10 +161,10 @@ describe('SingleMetricCard — 数値タイル (部品の台帳 stat-tile)', () 
     expect(footer?.querySelector('a[href="/ranking/wage"]')).not.toBeNull();
   });
 
-  it('47都道府県 (未選択) は順位バッジを出さず、値が 1 位の県のものだと補足に書く', () => {
+  it('全国のページは順位バッジも 1 位の県も出さない (全国の値だけ)', () => {
     const { container } = renderCard({ metric: kpi('wage', { rank: 3 }) });
     expect(container.textContent).not.toContain('3位');
-    expect(container.textContent).toContain('1位: 東京都');
+    expect(container.textContent).not.toContain('1位');
   });
 });
 

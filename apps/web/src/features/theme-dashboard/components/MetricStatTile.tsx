@@ -17,8 +17,8 @@ import { formatMetricValue, type MetricKpi } from './metric-kpi';
  * テーマの指標 1 件の数値タイル (2026-10-29)。指標が 1 つのカード (SingleMetricCard) と、指標を切り替えるカード
  * (MetricSwitcherPanel) の値の行が同じ描き方になるよう、ここだけで StatTile に写す。
  *
- * - 県を選んでいるとき: その県の値 + 順位バッジ + 年
- * - 47都道府県 (未選択): 実在する 1 位県の値 (47 県平均でも全国値でもない) + 年・1 位の県名
+ * - 県のページ: その県の値 + 順位バッジ + 年 + 全国の値
+ * - 全国のページ: 全国の値 (e-Stat の全国行) + 年。全国行の無い指標は値を出さない (47 県の平均や 1 位の県で埋めない。2026-10-31)
  * - 右上に出典・指標の定義の Sheet を開く枠なしのアイコン (2026-10-30。旧: 下端の出典・ランキングのリンク行)。
  *   hideSources で外す (切り替えカードはチャートの下の Sheet に 1 か所でまとめる)。
  *   推移の小さなチャートは children で受け、出すかは呼び出し側が決める
@@ -53,10 +53,10 @@ export function MetricStatTile({
   hideSources?: boolean;
   toggle?: MetricStatTileToggle;
 }) {
-  const shown = selectedPrefectureCode ? metric.value : metric.topRanked?.value ?? null;
+  const shown = metric.value;
   const meta = [
     metric.yearName,
-    !selectedPrefectureCode && metric.topRanked ? `1位: ${metric.topRanked.areaName}` : null,
+    !selectedPrefectureCode && shown === null ? '全国の値は未収録' : null,
     // 問いの型「全国平均との差」: 県の値の横に全国の値を置く (全国行が無い指標は出さない。2026-10-31)
     selectedPrefectureCode && metric.value !== null && metric.nationalValue !== undefined
       ? `全国 ${formatMetricValue(metric.nationalValue)}`
