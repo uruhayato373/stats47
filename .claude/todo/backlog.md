@@ -2744,6 +2744,8 @@ updated: 2026-10-19
 
 ### [AFF-INTENT-FALLBACK-STOP-01] 意図が解決しない面への配信を止め、priority を期待収益順にする
 
+> **2026-10-31 オーナー決定で「止める」部分を置き換えた**: 意図が解決しない面には、別の意図軸を推測せず、汎用で高単価の案件 (`GENERIC_HIGH_VALUE_PROGRAM_REFS`) を出す (`affiliate-ads-standards.md`「意図が決まらないページの受け皿」)。priority を期待収益順にする部分は残る。
+
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node .claude/scripts/metrics/check-revenue-guards.mjs が exit 0] [起票:2026-09-20] [期日:2026-10-04] [領域:アフィリエイト]
 
 - **owner**: affiliate-manager

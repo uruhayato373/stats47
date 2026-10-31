@@ -101,7 +101,8 @@ export async function AffiliateAdSlot({
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   //    ★ 2026-08-04: 上位 1 件の早期 return をやめ bannerLimit 件まで積む。
-  if (position === "sidebar" && affiliateCategory) {
+  //    意図軸が無いページは汎用の案件 (2026-10-31 オーナー決定「すべてのページに広告を出す」)
+  if (position === "sidebar") {
     const banners = (await resolveAffiliateBannersByVertical(
       affiliateCategory,
       Infinity,

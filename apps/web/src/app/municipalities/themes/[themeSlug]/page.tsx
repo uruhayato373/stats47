@@ -61,9 +61,8 @@ export default async function MunicipalityThemePage({
   const themeVertical = MUNICIPALITY_THEME_AFFILIATE_MAP[theme.slug];
   const [itemsOrNull, nativeBanners] = await Promise.all([
     Promise.all(theme.metricKeys.map((key) => readMunicipalityRankingItem(key))),
-    themeVertical
-      ? resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => [])
-      : Promise.resolve([]),
+    // 写像が無い slug は汎用の案件 (2026-10-31)
+    resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
   ]);
   const items = itemsOrNull.filter((item) => item !== null);
 

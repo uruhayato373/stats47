@@ -110,9 +110,8 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
   const themeVertical = THEME_AFFILIATE_MAP[theme.themeSlug];
   const [metricViews, nativeBanners] = await Promise.all([
     loadMetricSeries(theme.metrics.map((m) => m.metricKey)),
-    themeVertical
-      ? resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => [])
-      : Promise.resolve([]),
+    // 写像が無い slug は汎用の案件 (2026-10-31 オーナー決定「すべてのページに広告を出す」)
+    resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
   ]);
 
   return (
