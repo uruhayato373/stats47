@@ -29,7 +29,7 @@ import { PageHeader, PageShell, PanelGrid } from '@/components/layout';
 
 import { getSpecialWardCodes, readMunicipalityRanking } from '@/features/municipalities/server';
 import { isAreaTheme, ThemeRegionNav } from '@/features/theme-dashboard';
-import { ALL_THEMES, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
+import { ALL_THEMES, prefectureCityOptions, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -108,6 +108,7 @@ export default async function AreaThemeCitiesPage({ params }: { params: Promise<
           hasMunicipalityPages
           scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
           current="prefecture-municipalities"
+          prefectureCities={prefectureCityOptions(prefecture.prefCode)}
         />
         <PageHeader
           title={`${prefecture.prefName}の市区町村別の${theme.title}`}

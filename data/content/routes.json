@@ -11,13 +11,13 @@
       ]
     },
     {
-      "id": "route:areas-cities:areaCode:cityCode:categoryKey",
-      "kind": "areas-cities",
-      "pattern": "/areas/[areaCode]/cities/[cityCode]/[categoryKey]",
+      "id": "route:city-theme:areaCode:cityCode:themeSlug",
+      "kind": "city-theme",
+      "pattern": "/areas/[areaCode]/cities/[cityCode]/[themeSlug]",
       "parameters": [
         "areaCode",
         "cityCode",
-        "categoryKey"
+        "themeSlug"
       ]
     },
     {

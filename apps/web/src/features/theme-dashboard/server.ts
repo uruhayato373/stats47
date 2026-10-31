@@ -24,3 +24,6 @@ export {
 } from "./lib/theme-prefecture-preference";
 
 export { ThemeAreaHeader } from "./components/ThemeAreaHeader";
+
+// 地域の Sheet に出す 1 つの県の市区町村 (2026-10-31 IA-REGION-THEME-01)
+export { prefectureCityOptions } from './lib/prefecture-city-options';

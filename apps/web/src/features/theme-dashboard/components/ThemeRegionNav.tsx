@@ -37,7 +37,13 @@ import { CRUMB_TRIGGER_CLASS, ThemeSwitcher, type ThemeSwitcherTheme } from './T
 const PREFECTURE_NAME = new Map(PREFECTURE_LIST_2DIGIT.map((p) => [to5DigitPrefCode(p.code), p.name]));
 
 /** 地域の Sheet の段。どの段から開いたかで、最初に見せる段を変える */
-type RegionLevel = 'national' | 'prefecture';
+type RegionLevel = 'national' | 'prefecture' | 'city';
+
+interface CityOption {
+  code: string;
+  /** 県名を外した名前 */
+  name: string;
+}
 
 interface Props {
   themeKey: string;
@@ -54,7 +60,11 @@ interface Props {
    * 今のページ。prefectures = テーマ・県のページ / japan = 全国の推移 (`/japan/テーマ`) /
    * prefecture-municipalities = 県内の市区町村を比べる (別の県を選ぶと、その県の同じ比較へ移る)
    */
-  current?: 'prefectures' | 'japan' | 'prefecture-municipalities';
+  current?: 'prefectures' | 'japan' | 'prefecture-municipalities' | 'city';
+  /** 今のページが 1 つの市区町村×テーマ (`/areas/県/cities/市/テーマ`) のときの市区町村 */
+  city?: CityOption;
+  /** 地域の Sheet に出す、今の県の市区町村 (サーバーが渡す。全国 1,913 件をブラウザに送らない) */
+  prefectureCities?: readonly CityOption[];
 }
 
 /**
@@ -73,12 +83,15 @@ export function ThemeRegionNav({
   hasMunicipalityPages = false,
   scopeHrefs,
   current = 'prefectures',
+  city,
+  prefectureCities = [],
 }: Props) {
   const { selectedPrefectureCode, setSelected } = useThemePrefecture();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [level, setLevel] = useState<RegionLevel>('national');
   const [query, setQuery] = useState('');
+  const [cityQuery, setCityQuery] = useState('');
 
   const prefectureCode = areaContext?.areaCode ?? selectedPrefectureCode ?? null;
   const prefectureName = prefectureCode ? PREFECTURE_NAME.get(prefectureCode) : undefined;
@@ -86,9 +99,13 @@ export function ThemeRegionNav({
   const openAt = (next: RegionLevel) => {
     setLevel(next);
     setQuery('');
+    setCityQuery('');
     setOpen(true);
   };
 
+  const cityHref = (code: string) =>
+    hrefFor('city-theme', { areaCode: prefectureCode ?? '', cityCode: code, themeSlug: themeKey });
+  const filteredCities = prefectureCities.filter((c) => !cityQuery.trim() || c.name.includes(cityQuery.trim()));
   const citiesHref = (code: string) => hrefFor('area-theme-cities', { areaCode: code, themeSlug: themeKey });
   const prefectureHref = (code: string) =>
     current === 'prefecture-municipalities' && hasMunicipalityPages
@@ -141,6 +158,17 @@ export function ThemeRegionNav({
               </BreadcrumbItem>
             </>
           )}
+          {city && (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <button type="button" className={CRUMB_TRIGGER_CLASS} onClick={() => openAt('city')} aria-label={`市区町村を変える (今: ${city.name})`}>
+                  {city.name}
+                  <ChevronDown aria-hidden className="size-3.5 text-muted-foreground" />
+                </button>
+              </BreadcrumbItem>
+            </>
+          )}
           <BreadcrumbSeparator />
           <BreadcrumbItem className="min-w-0">
             <ThemeSwitcher themes={themes} currentThemeKey={themeKey} areaContext={areaContext} trigger="crumb" />
@@ -152,7 +180,7 @@ export function ThemeRegionNav({
           type="button"
           aria-label="地域を変える"
           title="地域を変える"
-          onClick={() => openAt(prefectureName ? 'prefecture' : 'national')}
+          onClick={() => openAt(city ? 'city' : prefectureName ? 'prefecture' : 'national')}
           className={buttonVariants({ variant: 'outline', size: 'icon-sm' })}
         >
           <MapPin aria-hidden />
@@ -220,6 +248,35 @@ export function ThemeRegionNav({
                 )}
               </nav>
             )}
+            {prefectureName && hasMunicipalityPages && prefectureCities.length > 0 && (
+              <section aria-label={`${prefectureName}の市区町村`}>
+                <p className="mb-1 text-xs font-medium text-muted-foreground">{prefectureName}の市区町村を詳しく見る</p>
+                <Input
+                  type="search"
+                  value={cityQuery}
+                  onChange={(event) => setCityQuery(event.target.value)}
+                  placeholder="市区町村名で探す (例: 西宮)"
+                  aria-label="市区町村名で探す"
+                  className="mb-2"
+                />
+                <div className="grid max-h-64 grid-cols-3 gap-1 overflow-y-auto">
+                  {filteredCities.map((c) => (
+                    <Link
+                      key={c.code}
+                      href={cityHref(c.code)}
+                      aria-current={c.code === city?.code ? 'page' : undefined}
+                      data-nav-surface="theme_region"
+                      className={cn(
+                        buttonVariants({ variant: c.code === city?.code ? 'default' : 'outline', size: 'sm' }),
+                        'px-1 text-xs'
+                      )}
+                    >
+                      {c.name}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
             <section aria-label="都道府県">
               <p className="mb-1 text-xs font-medium text-muted-foreground">1 つの県を詳しく見る</p>
               <Input
@@ -258,7 +315,7 @@ export function ThemeRegionNav({
                 {groups.length === 0 && <p className="text-sm text-muted-foreground">「{query}」に当たる県がありません</p>}
               </div>
             </section>
-            {level === 'prefecture' && (
+            {level !== 'national' && (
               <nav aria-label="全国">
                 <p className="mb-1 text-xs font-medium text-muted-foreground">全国</p>
                 <RailNavRow

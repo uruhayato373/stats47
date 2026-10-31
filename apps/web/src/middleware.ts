@@ -359,11 +359,21 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
       return gone();
     }
     if (seg.length === 5) {
+      // 市区町村×テーマ (2026-10-31 IA-REGION-THEME-01): 市区町村の対応があるテーマは通す
+      if (
+        TYPE_A_THEME_SLUGS.has(seg[4]) &&
+        Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, seg[4])
+      ) {
+        return null;
+      }
       if (!UrlPolicy.cityCategory.isKnown(seg[4])) return gone();
-      return NextResponse.redirect(
-        new URL(hrefFor('city', { areaCode, cityCode }), req.url),
-        301
-      );
+      // 旧 市区町村×分野: 対応するテーマに市区町村のページがあればそこへ、無ければ市区町村のページへ 301
+      const themeSlug = AREA_CATEGORY_TO_THEME[seg[4]];
+      const dest =
+        themeSlug && Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, themeSlug)
+          ? hrefFor('city-theme', { areaCode, cityCode, themeSlug })
+          : hrefFor('city', { areaCode, cityCode });
+      return NextResponse.redirect(new URL(dest, req.url), 301);
     }
     if (seg.length > 5) return gone();
   }

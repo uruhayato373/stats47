@@ -408,15 +408,23 @@ describe('動的コンテンツの soft-404 防止', () => {
     ).toBe(410);
   });
 
-  test('旧市区町村カテゴリは空ページを返さず市区町村プロフィールへ301', () => {
-    const response = middleware(
-      request('/areas/05000/cities/05212/population')
+  // 2026-10-31 (IA-REGION-THEME-01): 旧 市区町村×分野は、対応するテーマに市区町村のページがあればそこへ 301
+  test('旧市区町村カテゴリは対応するテーマの市区町村ページへ301 (無ければ市区町村プロフィールへ)', () => {
+    const toTheme = middleware(request('/areas/05000/cities/05212/population'));
+    expect(toTheme.status).toBe(301);
+    expect(toTheme.headers.get('location')).toBe(
+      'https://stats47.jp/areas/05000/cities/05212/population-dynamics'
     );
+    // energy は対応するテーマが無い (AREA_CATEGORY_TO_THEME が空)
+    const toCity = middleware(request('/areas/05000/cities/05212/energy'));
+    expect(toCity.status).toBe(301);
+    expect(toCity.headers.get('location')).toBe('https://stats47.jp/areas/05000/cities/05212');
+  });
 
-    expect(response.status).toBe(301);
-    expect(response.headers.get('location')).toBe(
-      'https://stats47.jp/areas/05000/cities/05212'
-    );
+  test('市区町村×テーマは市区町村の対応があるテーマだけ通過', () => {
+    expect(middleware(request('/areas/28000/cities/28202/labor-wages')).status).not.toBe(410);
+    // テーマでも旧分野でもない名前は 410 (tourism は旧分野の名前なので市区町村のページへ 301 する)
+    expect(middleware(request('/areas/28000/cities/28202/not-a-theme')).status).toBe(410);
   });
 
   test('公開記事カタログに無い blog slug は 410、既知記事と tag ハブは通過', () => {

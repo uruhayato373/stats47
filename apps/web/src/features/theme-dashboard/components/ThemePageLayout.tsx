@@ -34,6 +34,7 @@ import { isAreaTheme } from '../config/area-theme-slugs';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { prefectureCityOptions } from '../lib/prefecture-city-options';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -199,6 +200,7 @@ export async function ThemePageLayout({
               hasAreaPages={isAreaTheme(theme.themeKey)}
               hasMunicipalityPages={isAreaTheme(theme.themeKey) && Object.hasOwn(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, theme.themeKey)}
               scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+              prefectureCities={areaContext ? prefectureCityOptions(areaContext.areaCode) : undefined}
             />
           </div>
 
