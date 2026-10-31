@@ -16,6 +16,8 @@ export interface SourcesSheetLink {
 /** Sheet の 1 区切り。指標ごとに分けるときは title に指標の名前を入れる */
 export interface SourcesSheetGroup {
   title?: string;
+  /** 図を読むときの注意 (誤読を防ぐ注記)。Sheet の先頭に出す (2026-11-01。旧: 図の下に段落で出していた) */
+  notes?: readonly string[];
   sources: readonly SourcesSheetLink[];
   /** 出典の補足 (集計の条件など) */
   sourceDetail?: string;
@@ -94,20 +96,27 @@ export function SourcesSheet({
   id,
   groups,
   trigger = 'button',
+  label: labelOverride,
 }: {
   id?: string;
   groups: readonly SourcesSheetGroup[];
   trigger?: 'button' | 'icon';
+  /** 開き口と Sheet の題名 (章の「読むときの注意」など、出典を持たない Sheet に使う) */
+  label?: string;
 }) {
   const sheet = useLoadedSheet();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const shown = groups.filter(
-    (group) => group.sources.length > 0 || group.rankings.length > 0 || group.sourceDetail
+    (group) =>
+      group.sources.length > 0 || group.rankings.length > 0 || group.sourceDetail || (group.notes?.length ?? 0) > 0
   );
   if (shown.length === 0) return null;
 
   const isIcon = trigger === 'icon';
+  // 注意のある図はアイコンに印を付けて、開く前に気づけるようにする
+  const hasNotes = shown.some((group) => (group.notes?.length ?? 0) > 0);
+  const label = labelOverride ?? (hasNotes ? `${LABEL}・読むときの注意` : LABEL);
   return (
     <>
       <Button
@@ -116,8 +125,8 @@ export function SourcesSheet({
         variant="ghost"
         size={isIcon ? 'icon-sm' : 'sm'}
         id={id ? `${id}-trigger` : undefined}
-        aria-label={isIcon ? LABEL : undefined}
-        title={isIcon ? LABEL : undefined}
+        aria-label={isIcon ? label : undefined}
+        title={isIcon ? label : undefined}
         aria-haspopup="dialog"
         aria-expanded={open}
         className="text-muted-foreground"
@@ -129,7 +138,12 @@ export function SourcesSheet({
           setOpen(true);
         }}
       >
-        <BookOpenText aria-hidden="true" />
+        <span className="relative inline-flex">
+          <BookOpenText aria-hidden="true" />
+          {hasNotes ? (
+            <span aria-hidden="true" data-sources-notes-marker className="absolute -right-1 -top-1 size-1.5 rounded-full bg-primary" />
+          ) : null}
+        </span>
         {isIcon ? null : LABEL}
       </Button>
       {sheet && open ? (
@@ -137,13 +151,22 @@ export function SourcesSheet({
           {/* サイトの上端のヘッダー (sticky・z-200) と Cookie 同意 (z-[1100]) より前に出す。Sheet の既定は z-50 */}
           <sheet.SheetContent side="right" className="z-[1200]! overflow-y-auto" finalFocus={triggerRef}>
             <sheet.SheetHeader>
-              <sheet.SheetTitle>{LABEL}</sheet.SheetTitle>
-              <sheet.SheetDescription>出典と、指標の定義・都道府県ランキングへのリンクです。</sheet.SheetDescription>
+              <sheet.SheetTitle>{labelOverride ?? LABEL}</sheet.SheetTitle>
+              <sheet.SheetDescription>
+                {labelOverride
+                  ? 'この章の図と数値を読むときの注意です。'
+                  : `${hasNotes ? '読むときの注意と、' : ''}出典・指標の定義・都道府県ランキングへのリンクです。`}
+              </sheet.SheetDescription>
             </sheet.SheetHeader>
             <ul className="flex flex-col divide-y divide-border px-4 pb-6">
               {shown.map((group, index) => (
                 <li key={group.title ?? index} className="flex flex-col gap-2 py-3">
                   {group.title ? <p className="text-sm font-medium text-foreground">{group.title}</p> : null}
+                  {group.notes?.map((note) => (
+                    <p key={note} className="text-sm leading-relaxed text-foreground" data-sources-note>
+                      {note}
+                    </p>
+                  ))}
                   {group.sources.map((link) => (
                     <SheetRow key={`s-${link.url ?? link.label}`} kind="source" link={link} />
                   ))}

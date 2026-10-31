@@ -579,9 +579,15 @@ export function MetricSwitcherPanel({
           <ChartPanel
             footer={
               <div className="flex flex-col gap-1">
-                {annotation ? <p>{annotation}</p> : null}
+                {/* 注記は図の周りに文章で置かず、Sheet の先頭に入れる (見本のチャートのカード。2026-11-01) */}
                 <div className="flex justify-end">
-                  <SourcesSheet groups={metricSourceGroups(metrics, tabLabels)} />
+                  <SourcesSheet
+                    trigger="icon"
+                    groups={[
+                      ...(annotation ? [{ notes: [annotation], sources: [], rankings: [] }] : []),
+                      ...metricSourceGroups(metrics, tabLabels),
+                    ]}
+                  />
                 </div>
               </div>
             }

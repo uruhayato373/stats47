@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { PageComponent } from '@/components/stat-charts';
@@ -26,7 +26,8 @@ const CHART = {
 describe('ThemeDbChartRenderer', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('全国行の代替値には47都道府県平均であることを近接表示する', async () => {
+  // 47 県の平均を全国として見せない (2026-11-01 オーナー決定)。包むカードは印を見て自分ごと隠れる
+  it('全国のページで 47 都道府県の平均しか描けない図は描かず、隠す印だけを置く', async () => {
     loadThemeChartResult.mockResolvedValue({
       state: 'ready',
       result: {
@@ -41,11 +42,10 @@ describe('ThemeDbChartRenderer', () => {
       },
     });
 
-    render(<ThemeDbChartRenderer chart={CHART} prefCode="00000" prefName="全国" />);
+    const { container } = render(<ThemeDbChartRenderer chart={CHART} prefCode="00000" prefName="全国" />);
 
-    expect(
-      await screen.findByText('表示値は全国値ではなく、値が公表されている都道府県の単純平均です。'),
-    ).toBeInTheDocument();
+    await waitFor(() => expect(container.querySelector('[data-national-average-hidden]')).not.toBeNull());
+    expect(screen.queryByText(/単純平均/)).toBeNull();
   });
 
   it('チャート固有のempty messageを表示する', async () => {

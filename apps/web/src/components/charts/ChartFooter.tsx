@@ -25,6 +25,11 @@ export interface ChartFooterProps {
   rankingLink?: string | null;
   rankingLabel?: string;
   rankingLinks?: ChartFooterLink[];
+  /**
+   * `header`: パネルの見出しの右端に置くアイコンだけを描き、注記も Sheet の中へ入れる (見本のチャートのカードは図の周りに
+   * 文章を置かない。2026-11-01 テーマのダッシュボードから)。既定の `footer` は図の下に注記とボタンを置く
+   */
+  placement?: 'footer' | 'header';
 }
 
 function dedupeLinks(links: readonly ChartFooterLink[]): ChartFooterLink[] {
@@ -55,6 +60,7 @@ export function ChartFooter({
   rankingLink,
   rankingLabel = '関連ランキング',
   rankingLinks,
+  placement = 'footer',
 }: ChartFooterProps) {
   const attributionSourceLinks = (attribution?.originalSurveys ?? [])
     .filter((survey) => isLinkableSurveyId(survey.id))
@@ -97,6 +103,16 @@ export function ChartFooter({
   // url の無い出典 (独自集計など) は名前だけを Sheet に出す
   const sources =
     sourceTargets.length > 0 ? sourceTargets : sourceLabel ? [{ label: sourceLabel }] : [];
+
+  if (placement === 'header') {
+    return (
+      <SourcesSheet
+        id={id ? `${id}-sources` : undefined}
+        trigger="icon"
+        groups={[{ notes: annotation ? [annotation] : [], sources, sourceDetail, rankings: indicatorTargets }]}
+      />
+    );
+  }
 
   return (
     <div className="space-y-1.5">

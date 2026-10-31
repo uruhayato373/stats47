@@ -42,6 +42,7 @@ export function MetricStatTile({
   children,
   hideSources = false,
   toggle,
+  notes,
 }: {
   metric: MetricKpi;
   /** 指標の名前 (テーマの短い名前。グループ名を添えるときは呼び出し側で組み立てる) */
@@ -52,6 +53,8 @@ export function MetricStatTile({
   children?: ReactNode;
   hideSources?: boolean;
   toggle?: MetricStatTileToggle;
+  /** 読むときの注意 (同じ指標の章の図から引き継いだ注記)。出典の Sheet の先頭に出す */
+  notes?: readonly string[];
 }) {
   const shown = metric.value;
   const meta = [
@@ -93,7 +96,10 @@ export function MetricStatTile({
       action={
         hideSources ? undefined : (
           <SourcesSheet
-            groups={metricSourceGroups([metric], { [metric.metricKey]: sourcesLabel ?? metric.title })}
+            groups={metricSourceGroups([metric], { [metric.metricKey]: sourcesLabel ?? metric.title }).map((group) => ({
+              ...group,
+              notes,
+            }))}
             trigger="icon"
           />
         )
