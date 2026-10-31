@@ -43,7 +43,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const theme = getJapanCatalogTheme(themeSlug);
   if (!theme) return {};
   // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)
-  const title = `全国の${theme.title}`;
+  // テーマのページ (/themes/テーマ) が「全国の〇〇」なので、日本全体の変化を見せるこのページは「〜の推移」で区別する (2026-10-31)
+  const title = `全国の${theme.title}の推移`;
   return {
     title,
     description: theme.description,
@@ -128,7 +129,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
       />
       <PageHeader
         eyebrow="日本"
-        title={`全国の${theme.title}`}
+        title={`全国の${theme.title}の推移`}
         description={theme.description}
         stats={`${metricViews.length} 指標 (公式全国値)`}
       />

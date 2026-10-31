@@ -53,8 +53,8 @@ export async function generateMetadata({
   const theme = ALL_THEMES.find((t) => t.themeKey === themeSlug);
   if (!theme) return {};
 
-  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01): 47 都道府県を比べるページ
-  const title = `都道府県別の${theme.title}`;
+  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)。このページは全国の値を見せる (県を覚えていれば県のページへ移る)
+  const title = `全国の${theme.title}`;
   return {
     title,
     description: theme.description,
