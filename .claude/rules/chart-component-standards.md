@@ -135,6 +135,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
+| `BreakdownDonut` / `BreakdownList` | `@/components/charts/BreakdownDonut` | 内訳の図 (共通の D3 のドーナツ + `ChartLegend` の一覧で名前・値・割合)。テーマの構成比 (`composition-chart`) とドーナツ (`donut-chart`) はこれ 1 つで描く。一覧だけの所は `BreakdownList`。部品の中で D3 の円や色の点を手書きしない (`design-system:check` の `no-inline-d3-pie`・`legend-swatch-uses-chart-legend`。2026-11-01) |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |

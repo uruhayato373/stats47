@@ -504,6 +504,16 @@ export function ThemeMetricsDashboard({
     }
     const mergedCharts = new Set([...mergedChartsOf.values()].flat());
     const charts = chapter.charts.filter((chart) => !mergedCharts.has(chart));
+    // 内訳の図 (構成比・ドーナツ) が一覧に値と割合を出すので、同じ指標だけのカードは出さない (同じ値を 2 か所に出さない。2026-11-01)
+    const breakdownKeySets = charts
+      .filter((chart) => BREAKDOWN_CHART_TYPES.has(chart.componentType))
+      .map((chart) => new Set(chartOwnMetricKeys(chart)));
+    const panels = chapter.panels.filter(
+      (panel) =>
+        !breakdownKeySets.some(
+          (keys) => panel.metrics.length > 0 && panel.metrics.every((metric) => keys.has(metric.metricKey))
+        )
+    );
     return (
     <PanelGrid
       as="section"
@@ -530,7 +540,7 @@ export function ThemeMetricsDashboard({
           ) : undefined
         }
       />
-      {renderPanelRuns(chapter.panels, (panel) => {
+      {renderPanelRuns(panels, (panel) => {
         if (mergedChartsOf.has(panel.key)) return false;
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
@@ -618,6 +628,9 @@ export function ThemeMetricsDashboard({
 
 /** 全国の図を描く章の図の種類 (指標の系列を県ごとに読む図)。全国のページでは 47 県の平均になるので出さない */
 const PREFECTURE_SERIES_CHART_TYPES = new Set(['line-chart', 'mixed-chart', 'composition-chart', 'donut-chart']);
+
+/** 一覧に値と割合を出す内訳の図の種類 (共通の BreakdownDonut で描く) */
+const BREAKDOWN_CHART_TYPES = new Set(['composition-chart', 'donut-chart']);
 
 /** 公式の全国の値か推移を持つ指標か (全国のページに出す指標) */
 function hasOfficialNational(data: ThemeIndicatorData): boolean {

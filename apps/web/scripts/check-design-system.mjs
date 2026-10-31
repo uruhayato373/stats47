@@ -24,6 +24,31 @@ const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
   {
+    // 内訳の図 (構成比・ドーナツ) は共通の BreakdownDonut (共通の D3 のドーナツ + ChartLegend の一覧) で描く (2026-11-01)。
+    // ページや部品の中で D3 の円を手書きすると、同じ種類の図が 2 通りの見た目になる
+    id: 'no-inline-d3-pie',
+    message:
+      'Draw breakdowns with BreakdownDonut (@/components/charts/BreakdownDonut), which uses the shared D3 DonutChart. Do not hand-write d3 pie layouts.',
+    pattern: /\bd3\.pie\b|\.pie<|\bpie\(\)\s*\./,
+  },
+  {
+    // 凡例の色見本は ChartLegend (inline / list) が持つ。部品の中で色の点を手書きしない (2026-11-01)。
+    // 既存の手書き (折れ線・正負の棒・GIS の層) は backlog CHART-LEGEND-UNIFY-01 で ChartLegend へ寄せる。縮小専用
+    id: 'legend-swatch-uses-chart-legend',
+    message:
+      'Legend swatches belong to ChartLegend (@/components/charts/ChartLegend). Do not hand-write colored dots with inline backgroundColor.',
+    pattern: /style=\{\{\s*backgroundColor:/,
+    allow: (relativePath) =>
+      [
+        'src/components/charts/ChartLegend.tsx',
+        // 数値タイルを押すと系列を出し入れするボタンの色の印 (凡例ではなくボタンの状態)
+        'src/features/theme-dashboard/components/MetricStatTile.tsx',
+        'src/features/geo-analysis/components/GeoLayerExplorer.tsx',
+        'src/components/stat-charts/components/charts/LineChart/LineChartClient.tsx',
+        'src/components/stat-charts/components/charts/DivergingBarChart/DivergingBarChartClient.tsx',
+      ].includes(relativePath),
+  },
+  {
     id: 'no-outline-none-without-focus-ring',
     message:
       'Do not remove the focus outline unless the same control provides a visible focus ring.',
