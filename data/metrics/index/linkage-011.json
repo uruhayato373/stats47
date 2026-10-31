@@ -1971,7 +1971,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -4320,7 +4320,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:education",
+          "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
         },
         {
@@ -4593,7 +4593,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:education",
+          "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
         },
         {
@@ -4682,7 +4682,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -5083,7 +5083,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:education",
+          "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
         },
         {
@@ -13067,7 +13067,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -13107,7 +13107,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -13179,7 +13179,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {

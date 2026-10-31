@@ -18,8 +18,8 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { NativeAffiliateRow } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
-import { isAreaTheme, ThemeRegionNav } from '@/features/theme-dashboard';
-import { THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
+import { ThemeRegionNav } from '@/features/theme-dashboard';
+import { isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 

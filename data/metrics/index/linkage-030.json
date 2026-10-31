@@ -1205,7 +1205,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -1245,7 +1245,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2020,7 +2020,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2101,7 +2101,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2141,7 +2141,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2407,7 +2407,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -2482,7 +2482,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2599,7 +2599,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2639,7 +2639,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2679,7 +2683,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2719,7 +2723,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -3737,10 +3741,6 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:living-environment",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:vacant-housing-rate-excluding-rental-sale-secondary",
           "kind": "ranking"
         }
@@ -3793,10 +3793,6 @@
         {
           "pageId": "municipality-ranking:vacant-housing-rate-for-rent",
           "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-environment",
-          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:vacant-housing-rate-for-rent",
@@ -4039,7 +4035,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -7055,7 +7051,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7095,7 +7095,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7135,7 +7139,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7175,7 +7183,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7215,7 +7227,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7255,7 +7271,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7498,7 +7518,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -7544,7 +7568,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {

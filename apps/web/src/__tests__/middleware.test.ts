@@ -397,6 +397,15 @@ describe('動的コンテンツの soft-404 防止', () => {
     expect(middleware(request('/areas/99000/labor-wages/cities')).status).toBe(410);
   });
 
+  // 2026-10-31 (IA-REGION-THEME-01 の 4 段目): 全国の市区町村を比べるページの slug を都道府県のテーマ名にそろえた
+  test('市区町村テーマは都道府県のテーマ名の URL が正、旧 slug は 301、知らない slug は 410', () => {
+    expect(middleware(request('/municipalities/themes/labor-wages')).status).not.toBe(410);
+    const old = middleware(request('/municipalities/themes/households'));
+    expect(old.status).toBe(301);
+    expect(old.headers.get('location')).toBe('https://stats47.jp/municipalities/themes/population-dynamics');
+    expect(middleware(request('/municipalities/themes/not-a-theme')).status).toBe(410);
+  });
+
   test('市区町村と親県が不一致なら 410', () => {
     expect(middleware(request('/areas/05000/cities/04103')).status).toBe(410);
   });

@@ -2,7 +2,11 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
+import {
+  MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
+  isMunicipalityThemePageSlug,
+  municipalityThemePageSlugFor,
+} from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { SITE } from '@stats47/types';
 
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
@@ -295,7 +299,12 @@ function checkContentTypePolicy(
 
   if (pathname.startsWith('/municipalities/themes/')) {
     const slug = pathname.slice('/municipalities/themes/'.length).split('/')[0];
-    if (slug && !UrlPolicy.municipality.isKnownTheme(slug)) return gone();
+    // ページの slug は都道府県のテーマ名にそろえた (2026-10-31 IA-REGION-THEME-01)。旧 市区町村テーマの slug は 301
+    if (slug && !isMunicipalityThemePageSlug(slug)) {
+      const pageSlug = municipalityThemePageSlugFor(slug);
+      if (!pageSlug) return gone();
+      return NextResponse.redirect(new URL(hrefFor('municipality-theme', { themeSlug: pageSlug }), baseUrl), 301);
+    }
   }
 
   if (pathname.startsWith('/municipalities/ranking/')) {

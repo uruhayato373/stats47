@@ -31,7 +31,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -71,7 +71,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -111,7 +111,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -151,7 +151,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -191,7 +191,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -231,7 +231,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -271,7 +271,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -311,7 +311,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -351,7 +351,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -391,7 +391,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -431,7 +431,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -471,7 +471,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -511,7 +511,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -551,7 +551,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -591,7 +591,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -631,7 +631,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -671,7 +671,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -711,7 +711,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -751,7 +751,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -791,7 +791,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -831,7 +831,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -871,7 +871,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -911,7 +911,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -951,7 +951,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -991,7 +991,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1031,7 +1031,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1071,7 +1071,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1111,7 +1111,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1151,7 +1151,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1191,7 +1191,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1231,7 +1231,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1271,7 +1271,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1311,7 +1311,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1351,7 +1351,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1391,7 +1391,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1431,7 +1431,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1471,7 +1471,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1511,7 +1511,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1551,7 +1551,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1591,7 +1591,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1631,7 +1631,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1671,7 +1671,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1711,7 +1711,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1751,7 +1751,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1791,7 +1791,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1831,7 +1831,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1871,7 +1871,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1911,7 +1911,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1951,7 +1951,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -1991,7 +1991,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2031,7 +2031,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2071,7 +2071,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2111,7 +2111,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2151,7 +2151,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2191,7 +2191,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2231,7 +2231,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2271,7 +2271,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2311,7 +2311,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2351,7 +2351,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2391,7 +2391,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2431,7 +2431,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2471,7 +2471,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2937,7 +2937,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -3779,7 +3779,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -3819,7 +3823,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5085,10 +5093,6 @@
         {
           "pageId": "municipality-ranking:post-office-bank-within-500m-household-ratio",
           "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-environment",
-          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:post-office-bank-within-500m-household-ratio",

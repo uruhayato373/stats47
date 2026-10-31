@@ -58,9 +58,10 @@ interface Props {
   hasMunicipalityPages?: boolean;
   /**
    * 今のページ。prefectures = テーマ・県のページ / japan = 全国の推移 (`/japan/テーマ`) /
+   * municipalities = 全国の市区町村を比べる (`/municipalities/themes/テーマ`。県を選ぶと、その県内の比較へ移る) /
    * prefecture-municipalities = 県内の市区町村を比べる (別の県を選ぶと、その県の同じ比較へ移る)
    */
-  current?: 'prefectures' | 'japan' | 'prefecture-municipalities' | 'city';
+  current?: 'prefectures' | 'japan' | 'municipalities' | 'prefecture-municipalities' | 'city';
   /** 今のページが 1 つの市区町村×テーマ (`/areas/県/cities/市/テーマ`) のときの市区町村 */
   city?: CityOption;
   /** 地域の Sheet に出す、今の県の市区町村 (サーバーが渡す。全国 1,913 件をブラウザに送らない) */
@@ -108,7 +109,7 @@ export function ThemeRegionNav({
   const filteredCities = prefectureCities.filter((c) => !cityQuery.trim() || c.name.includes(cityQuery.trim()));
   const citiesHref = (code: string) => hrefFor('area-theme-cities', { areaCode: code, themeSlug: themeKey });
   const prefectureHref = (code: string) =>
-    current === 'prefecture-municipalities' && hasMunicipalityPages
+    (current === 'prefecture-municipalities' || current === 'municipalities') && hasMunicipalityPages
       ? citiesHref(code)
       : hasAreaPages
         ? hrefFor('area-theme', { areaCode: code, themeSlug: themeKey })
@@ -217,7 +218,13 @@ export function ThemeRegionNav({
                   47 都道府県を比べる
                 </RailNavRow>
                 {scopeHrefs.municipalities && (
-                  <RailNavRow href={scopeHrefs.municipalities} chevron={false} trailing="全国の市区町村" data-nav-surface="theme_region">
+                  <RailNavRow
+                    href={scopeHrefs.municipalities}
+                    active={current === 'municipalities'}
+                    chevron={false}
+                    trailing="全国の市区町村"
+                    data-nav-surface="theme_region"
+                  >
                     市区町村を比べる
                   </RailNavRow>
                 )}

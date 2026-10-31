@@ -64,3 +64,20 @@ export const PREFECTURE_THEME_FOR_MUNICIPALITY_THEME: Readonly<Record<string, st
   'vital-statistics': 'population-dynamics',
   'welfare-facilities': 'long-term-care',
 };
+
+/**
+ * 「全国の市区町村を比べる」ページの slug (都道府県のテーマ名にそろえる。2026-10-31 オーナー決定 IA-REGION-THEME-01)。
+ * 市区町村の対応がある都道府県のテーマ。ページは対応する市区町村テーマの指標をまとめて出す (`/municipalities/themes/<slug>`)。
+ */
+export function isMunicipalityThemePageSlug(slug: string): boolean {
+  return Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, slug);
+}
+
+/**
+ * 旧 市区町村テーマの slug から、今のページの slug (都道府県のテーマ名) を引く。今の slug と同じなら同じ値を返す。
+ * middleware が旧 URL (`/municipalities/themes/households` など) を 301 するのに使う。
+ */
+export function municipalityThemePageSlugFor(slug: string): string | undefined {
+  if (isMunicipalityThemePageSlug(slug)) return slug;
+  return PREFECTURE_THEME_FOR_MUNICIPALITY_THEME[slug];
+}

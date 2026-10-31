@@ -1873,7 +1873,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -1919,7 +1919,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -1959,7 +1963,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -1999,7 +2003,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7068,7 +7072,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -9378,7 +9382,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -10035,7 +10043,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -11972,7 +11984,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:agriculture-forestry",
+          "pageId": "municipality-theme:agriculture-production",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:forestry-timber",
           "kind": "municipality-theme"
         },
         {

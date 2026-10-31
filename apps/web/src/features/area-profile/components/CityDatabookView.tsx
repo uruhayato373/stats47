@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@stats47/components/atoms/ui/table";
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { listCityDatabookThemes } from "@stats47/data-configs/geo-scope";
+import { listCityDatabookThemes, municipalityThemePageSlugFor } from "@stats47/data-configs/geo-scope";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   prefectureInsideLabel,
@@ -164,7 +164,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                 title={section.title}
                 action={
                   <Link
-                    href={hrefFor("municipality-theme", { themeSlug: section.themeSlug })}
+                    href={hrefFor("municipality-theme", { themeSlug: municipalityThemePageSlugFor(section.themeSlug) ?? section.themeSlug })}
                     data-nav-label={`theme:${section.themeSlug}`}
                     className="text-xs text-primary hover:underline"
                   >
@@ -223,7 +223,7 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
               {otherThemes.map((theme) => (
                 <Link
                   key={theme.slug}
-                  href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
+                  href={hrefFor("municipality-theme", { themeSlug: municipalityThemePageSlugFor(theme.slug) ?? theme.slug })}
                   data-nav-label={`theme:${theme.slug}`}
                 >
                   {theme.title}

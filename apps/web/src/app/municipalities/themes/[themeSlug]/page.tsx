@@ -2,21 +2,22 @@ import { notFound } from 'next/navigation';
 
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
-  KNOWN_MUNICIPALITY_THEME_SLUGS,
-  MUNICIPALITY_THEME_CATALOGS,
-  scopeHrefsForMunicipalityTheme,
+  isMunicipalityThemePageSlug,
+  municipalityMetricKeysForPrefectureTheme,
+  scopeHrefsForPrefectureTheme,
 } from '@stats47/data-configs/geo-scope';
 import { readMunicipalityRankingItem } from '@stats47/ranking/server';
 import { ChartNoAxesColumnIncreasing } from 'lucide-react';
 
 import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
-import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { StatisticsScopeNav } from '@/components/navigation';
+import { PageHeader, PageShell } from '@/components/layout';
 
 import { NativeAffiliateRow } from '@/features/ads';
-import { MUNICIPALITY_THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
+import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
+import { ThemeRegionNav } from '@/features/theme-dashboard';
+import { ALL_THEMES, isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -30,20 +31,30 @@ interface Params {
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * 全国の市区町村を比べるページ。slug は都道府県のテーマ名にそろえ、対応する市区町村テーマの指標をまとめて出す
+ * (2026-10-31 オーナー決定 IA-REGION-THEME-01 の 4 段目。旧: 市区町村テーマ 29 個ごとのページ。旧 slug は middleware が 301)。
+ */
+function resolveTheme(themeSlug: string) {
+  if (!isMunicipalityThemePageSlug(themeSlug)) return null;
+  return ALL_THEMES.find((t) => t.themeKey === themeSlug) ?? null;
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { themeSlug } = await params;
-  const theme = MUNICIPALITY_THEME_CATALOGS[themeSlug];
-  if (!theme || theme.status !== 'active') return {};
-  const title = `${theme.title} | 市区町村の統計`;
+  const theme = resolveTheme(themeSlug);
+  if (!theme) return {};
+  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)
+  const title = `市区町村別の${theme.title}`;
   const description = `${theme.title}を市・町・村のランキングで比較します。`;
   return {
     title,
     description,
-    alternates: { canonical: hrefFor("municipality-theme", { themeSlug: theme.slug }) },
+    alternates: { canonical: hrefFor("municipality-theme", { themeSlug: theme.themeKey }) },
     ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
@@ -54,13 +65,12 @@ export default async function MunicipalityThemePage({
   params: Promise<Params>;
 }) {
   const { themeSlug } = await params;
-  if (!KNOWN_MUNICIPALITY_THEME_SLUGS.has(themeSlug)) notFound();
-  const theme = MUNICIPALITY_THEME_CATALOGS[themeSlug];
-  if (!theme || theme.status !== 'active') notFound();
+  const theme = resolveTheme(themeSlug);
+  if (!theme) notFound();
 
-  const themeVertical = MUNICIPALITY_THEME_AFFILIATE_MAP[theme.slug];
+  const themeVertical = THEME_AFFILIATE_MAP[theme.themeKey];
   const [itemsOrNull, nativeBanners] = await Promise.all([
-    Promise.all(theme.metricKeys.map((key) => readMunicipalityRankingItem(key))),
+    Promise.all(municipalityMetricKeysForPrefectureTheme(theme.themeKey).map((key) => readMunicipalityRankingItem(key))),
     // 写像が無い slug は汎用の案件 (2026-10-31)
     resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
   ]);
@@ -68,20 +78,17 @@ export default async function MunicipalityThemePage({
 
   return (
     <PageShell>
-      <Breadcrumbs
-        items={[
-          { label: 'ホーム', href: '/' },
-          { label: '市区町村', href: '/municipalities' },
-          { label: theme.title },
-        ]}
-      />
-      <StatisticsScopeNav
+      {/* パンくずの各段と右端のアイコンから地域・テーマを Sheet で選ぶ (テーマのページと同じ部品・2026-10-31) */}
+      <ThemeRegionNav
+        themeKey={theme.themeKey}
+        themes={THEME_SWITCHER_THEMES}
+        hasAreaPages={isAreaTheme(theme.themeKey)}
+        hasMunicipalityPages={isAreaTheme(theme.themeKey)}
+        scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
         current="municipalities"
-        hrefs={scopeHrefsForMunicipalityTheme(theme.slug)}
       />
       <PageHeader
-        eyebrow="市区町村テーマ"
-        title={theme.title}
+        title={`市区町村別の${theme.title}`}
         stats={`${items.length} 指標`}
       />
 
@@ -135,7 +142,7 @@ export default async function MunicipalityThemePage({
           <NativeAffiliateRow
             banners={nativeBanners}
             position="municipality-theme-native"
-            trackingCategory={`municipality-theme-${theme.slug}`}
+            trackingCategory={`municipality-theme-${theme.themeKey}`}
             variant="three-up"
           />
         </div>

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from '@stats47/area';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import {
   GEO_ANALYSES,
@@ -19,25 +20,25 @@ import {
   type ContentPage,
   type ContentLink,
 } from '@stats47/data-configs/content';
+import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   JAPAN_CATALOGS,
-  MUNICIPALITY_THEME_CATALOGS,
+  MUNICIPALITY_THEME_PAGE_SLUGS,
   buildMunicipalityRankingSubtitles,
+  municipalityMetricKeysForPrefectureTheme,
 } from '@stats47/data-configs/geo-scope';
-import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
-import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
 import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
-import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from '@stats47/area';
 import { municipalityRankingDisplayTitle } from '@stats47/ranking';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
 import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
-import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../packages/area/src/data/cities.json';
 import prefectures from '../../../packages/area/src/data/prefectures.json';
+import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
+import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
 import surveys from '../../../packages/ranking/src/data/surveys.json';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
@@ -45,6 +46,7 @@ import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';
 import { KNOWN_THEME_SLUGS } from '../src/config/known-theme-slugs';
 import { GEO_CROSS_ANALYSIS_SLUGS } from '../src/features/geo-analysis/lib/geo-cross-analysis';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront.generated';
+import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
 import { AREA_THEMES } from '../src/features/theme-dashboard/config/area-theme-slugs';
 
 async function run() {
@@ -188,16 +190,21 @@ async function run() {
       rankingKeys: theme.metrics.map(metric => metric.metricKey),
       published: true,
     });
-  for (const theme of Object.values(MUNICIPALITY_THEME_CATALOGS))
+  // 「全国の市区町村を比べる」ページ。slug は都道府県のテーマ名にそろえ、対応する市区町村テーマの指標をまとめる
+  // (2026-10-31 IA-REGION-THEME-01。旧: 市区町村テーマ 29 個ごと。旧 URL は middleware が 301)
+  for (const slug of MUNICIPALITY_THEME_PAGE_SLUGS) {
+    const prefectureTheme = ALL_THEMES.find((theme) => theme.themeKey === slug);
+    if (!prefectureTheme) continue;
     add({
-      id: `municipality-theme:${theme.slug}`,
+      id: `municipality-theme:${slug}`,
       kind: 'municipality-theme',
-      key: theme.slug,
-      title: theme.title,
-      href: `/municipalities/themes/${theme.slug}`,
-      rankingKeys: [...theme.metricKeys],
+      key: slug,
+      title: `市区町村別の${prefectureTheme.title}`,
+      href: `/municipalities/themes/${slug}`,
+      rankingKeys: municipalityMetricKeysForPrefectureTheme(slug),
       published: true,
     });
+  }
   for (const product of STOREFRONT_PRODUCTS)
     add({
       id: `product:${product.slug}`,

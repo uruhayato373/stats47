@@ -16,7 +16,7 @@ import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
-  KNOWN_MUNICIPALITY_THEME_SLUGS,
+  MUNICIPALITY_THEME_PAGE_SLUGS,
   MUNICIPALITY_PREFECTURE_RANKING_KEYS,
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
@@ -135,7 +135,8 @@ const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [
     changeFrequency: 'weekly',
     priority: 0.6,
   },
-  ...[...KNOWN_MUNICIPALITY_THEME_SLUGS].map((slug) => ({
+  // 「全国の市区町村を比べる」ページ (slug は都道府県のテーマ名。2026-10-31 IA-REGION-THEME-01)
+  ...MUNICIPALITY_THEME_PAGE_SLUGS.map((slug) => ({
     url: `${BASE_URL}${hrefFor("municipality-theme", { themeSlug: slug })}`,
     changeFrequency: 'monthly' as const,
     priority: 0.5,

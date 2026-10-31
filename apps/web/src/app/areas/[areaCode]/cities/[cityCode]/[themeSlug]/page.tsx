@@ -5,6 +5,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   MUNICIPALITY_THEME_CATALOGS,
   isMunicipalityPrefectureRankingKey,
+  municipalityMetricKeysForPrefectureTheme,
   scopeHrefsForPrefectureTheme,
 } from '@stats47/data-configs/geo-scope';
 import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
@@ -16,8 +17,8 @@ import { PageHeader, PageShell, PanelGrid } from '@/components/layout';
 
 import { getCityRouteContext } from '@/features/area-profile';
 import { getSpecialWardCodes, readMunicipalityRanking } from '@/features/municipalities/server';
-import { isAreaTheme, ThemeRegionNav } from '@/features/theme-dashboard';
-import { ALL_THEMES, prefectureCityOptions, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
+import { ThemeRegionNav } from '@/features/theme-dashboard';
+import { ALL_THEMES, isAreaTheme, prefectureCityOptions, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
 import { UrlPolicy } from '@/lib/url-policy';
 
@@ -82,11 +83,12 @@ export default async function CityThemePage({ params }: PageProps) {
     }
     notFound();
   }
-  const { context, theme, municipalityTheme } = resolved;
+  const { context, theme } = resolved;
   const specialWardCodes = getSpecialWardCodes();
 
   const loaded = await Promise.all(
-    municipalityTheme.metricKeys.map(async (rankingKey) => {
+    // 対応する市区町村テーマ (1 対 1 の対応と、市区町村テーマ側から寄せた分) の指標をまとめる (4 段目でそろえた)
+    municipalityMetricKeysForPrefectureTheme(theme.themeKey).map(async (rankingKey) => {
       const { item, values } = await readMunicipalityRanking(rankingKey).catch(() => ({ item: null, values: null }));
       if (!item || !values) return null;
       const row = values.values.find((v) => v.areaCode === cityCode);

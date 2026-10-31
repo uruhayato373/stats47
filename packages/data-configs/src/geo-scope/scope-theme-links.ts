@@ -13,6 +13,29 @@ export {
   MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
   PREFECTURE_THEME_FOR_MUNICIPALITY_THEME,
 } from './scope-theme-map';
+/** 都道府県のテーマに対応する市区町村テーマ (1 対 1 の対応と、市区町村テーマ側から寄せた分をまとめる)。公開中のものだけ */
+export function municipalityThemesForPrefectureTheme(themeKey: string) {
+  const slugs = new Set<string>();
+  const primary = MUNICIPALITY_THEME_FOR_PREFECTURE_THEME[themeKey];
+  if (primary) slugs.add(primary);
+  for (const [municipalitySlug, prefectureTheme] of Object.entries(PREFECTURE_THEME_FOR_MUNICIPALITY_THEME)) {
+    if (prefectureTheme === themeKey) slugs.add(municipalitySlug);
+  }
+  return [...slugs]
+    .map((slug) => MUNICIPALITY_THEME_CATALOGS[slug])
+    .filter((theme) => theme !== undefined && theme.status === 'active');
+}
+
+/** 都道府県のテーマで見せる市区町村の指標 (対応する市区町村テーマの指標をまとめ、重複を除く) */
+export function municipalityMetricKeysForPrefectureTheme(themeKey: string): string[] {
+  return [...new Set(municipalityThemesForPrefectureTheme(themeKey).flatMap((theme) => theme.metricKeys))];
+}
+
+/** 「全国の市区町村を比べる」ページの slug の一覧 (都道府県のテーマ名。公開中の市区町村テーマを持つもの) */
+export const MUNICIPALITY_THEME_PAGE_SLUGS: readonly string[] = Object.keys(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME).filter(
+  (themeKey) => municipalityThemesForPrefectureTheme(themeKey).length > 0
+);
+
 export type StatisticsScopeHrefs = {
   prefectures?: string;
   municipalities?: string;
@@ -24,7 +47,7 @@ export function scopeHrefsForPrefectureTheme(themeKey: string): StatisticsScopeH
   const municipalityTheme = MUNICIPALITY_THEME_FOR_PREFECTURE_THEME[themeKey];
   return {
     ...(municipalityTheme && KNOWN_MUNICIPALITY_THEME_SLUGS.has(municipalityTheme)
-      ? { municipalities: `/municipalities/themes/${municipalityTheme}` }
+      ? { municipalities: `/municipalities/themes/${themeKey}` }
       : {}),
     ...(JAPAN_CATALOGS[themeKey] ? { japan: `/japan/${themeKey}` } : {}),
   };
@@ -46,7 +69,7 @@ export function scopeHrefsForJapanTheme(themeSlug: string): StatisticsScopeHrefs
   return {
     prefectures: `/themes/${themeSlug}`,
     ...(municipalityTheme && KNOWN_MUNICIPALITY_THEME_SLUGS.has(municipalityTheme)
-      ? { municipalities: `/municipalities/themes/${municipalityTheme}` }
+      ? { municipalities: `/municipalities/themes/${themeSlug}` }
       : {}),
   };
 }
