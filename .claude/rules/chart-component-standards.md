@@ -175,6 +175,11 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
+| `GeoSubjectMap` | `@/features/geo-map/components/GeoSubjectMap` | 主題の重ね合わせ (`/geo/map`)。塗り分け 1 つに線・点の主題を重ね、年のスライダーで描く (d3-geo の SVG)。共通のコロプレスは線・点を重ねられない (2026-11-01 登録) |
+| `QuestionMap` | `@/features/geo-questions/components/QuestionMap` | 問いのページの「どこの話か」を示す補助の地図。問いの組で塗り分け、離島を外して縮尺を決める (d3-geo の SVG。2026-11-01 登録) |
+
+> D3 を直接 import してよいのは、共通の部品 (`components/charts`・`components/stat-charts`) と上の表の feature だけ。
+> `design-system:check` の `d3-only-in-registered-components` が止める (2026-11-01)。
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
 > feature 内に独自のコロプレス実装を追加してはならない (時系列再生付きの `TimelineChoroplethMap` は使い手が無く 2026-10-30 に削除した)。

@@ -369,13 +369,6 @@ updated: 2026-10-19
 - **進捗 (2026-10-31)**: 全 56 テーマを「読者の悩み → 問いの章 → 見せ方」で組み直した (人が問いを決めた章は残し、機械で足した `candidate-*`/`*-overview` の章だけ NotebookLM の設計案 + `apply-design.ts` の機械検査で再編)。47 都道府県の比較の図 (比較の節・年固定の比較カード) はテーマから外しランキングに任せた (オーナー決定)。`/themes/living-housing` の見える文字は 6,930 → 4,180 字。高さは 10,278 → 10,124px でほぼ同じ (カードの数が多い)。
 - **残り**: ① 全テーマで見える文字・高さを測って比べる ② 1 指標カードが 4 列の格子に 1 枚だけ並ぶ章 (空きが目立つ) の扱いを決める ③ 新しい構成比のチャートは page-components (R2) に入るまで本番に出ない。main へのマージ後の sync-snapshots (page-components) で反映する。
 
-### [CHART-LEGEND-UNIFY-01] 折れ線・正負の棒・GIS の層の手書きの凡例を ChartLegend に寄せる
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-01] [領域:サイト]
-
-- **起点 (2026-11-01)**: 内訳の図 (構成比・ドーナツ) を共通の `BreakdownDonut` (共通の D3 のドーナツ + `ChartLegend` の一覧) にまとめ、`design-system:check` に `legend-swatch-uses-chart-legend` (色の点の手書きを止める) を足した。既存の手書きの色の点が 3 か所残り、規則の許可の一覧に入れてある: `LineChartClient.tsx` (折れ線の凡例)・`DivergingBarChartClient.tsx` (正負の棒の凡例)・`GeoLayerExplorer.tsx` (人口の層の凡例)。
-- **次**: 3 か所を `ChartLegend` (inline / list) に置き換え、`scripts/check-design-system.mjs` の許可の一覧から外す (縮小専用)。`MetricStatTile.tsx` の色の印は凡例ではなく系列を出し入れするボタンの状態なので残す。
-- **完了条件**: 許可の一覧が `ChartLegend.tsx` と `MetricStatTile.tsx` だけになり、`npm run design-system:check` が通る。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [UI-FIX-PREFECTURE-LIST-20261031] UI 是正: prefecture-list の週次 UI 検査の指摘 4 件を直す

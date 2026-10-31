@@ -24,6 +24,22 @@ const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
   {
+    // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)
+    id: 'd3-only-in-registered-components',
+    message:
+      'Import d3 only in shared chart components (src/components/charts, src/components/stat-charts) or the feature-scoped exceptions listed in chart-component-standards.md §2-D.',
+    pattern: /from ['"]d3(?:-[a-z]+)?['"]|import\(['"]d3(?:-[a-z]+)?['"]\)/,
+    allow: (relativePath) =>
+      relativePath.startsWith('src/components/charts/') ||
+      relativePath.startsWith('src/components/stat-charts/') ||
+      [
+        'src/features/highway-history/HighwayTimelineMap.tsx',
+        'src/features/infra-history/components/InfraHistoryExplorer.tsx',
+        'src/features/geo-map/components/GeoSubjectMap.tsx',
+        'src/features/geo-questions/components/QuestionMap.tsx',
+      ].includes(relativePath),
+  },
+  {
     // 内訳の図 (構成比・ドーナツ) は共通の BreakdownDonut (共通の D3 のドーナツ + ChartLegend の一覧) で描く (2026-11-01)。
     // ページや部品の中で D3 の円を手書きすると、同じ種類の図が 2 通りの見た目になる
     id: 'no-inline-d3-pie',
@@ -33,7 +49,7 @@ const rules = [
   },
   {
     // 凡例の色見本は ChartLegend (inline / list) が持つ。部品の中で色の点を手書きしない (2026-11-01)。
-    // 既存の手書き (折れ線・正負の棒・GIS の層) は backlog CHART-LEGEND-UNIFY-01 で ChartLegend へ寄せる。縮小専用
+    // 2026-11-01 に折れ線・正負の棒・GIS の層の手書きも ChartLegend へ寄せた (CHART-LEGEND-UNIFY-01)
     id: 'legend-swatch-uses-chart-legend',
     message:
       'Legend swatches belong to ChartLegend (@/components/charts/ChartLegend). Do not hand-write colored dots with inline backgroundColor.',
@@ -43,9 +59,6 @@ const rules = [
         'src/components/charts/ChartLegend.tsx',
         // 数値タイルを押すと系列を出し入れするボタンの色の印 (凡例ではなくボタンの状態)
         'src/features/theme-dashboard/components/MetricStatTile.tsx',
-        'src/features/geo-analysis/components/GeoLayerExplorer.tsx',
-        'src/components/stat-charts/components/charts/LineChart/LineChartClient.tsx',
-        'src/components/stat-charts/components/charts/DivergingBarChart/DivergingBarChartClient.tsx',
       ].includes(relativePath),
   },
   {
