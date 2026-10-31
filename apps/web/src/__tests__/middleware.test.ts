@@ -388,6 +388,15 @@ describe('動的コンテンツの soft-404 防止', () => {
     );
   });
 
+  // 県内の市区町村を比べるページ (2026-10-31 IA-REGION-THEME-01)。市区町村の対応があるテーマだけ通す
+  test('県内の市区町村を比べるページは、市区町村の対応があるテーマだけ通過', () => {
+    expect(middleware(request('/areas/28000/labor-wages/cities')).status).not.toBe(410);
+    // 対応の無いテーマ (カテゴリ名と同じ tourism を含む) と、無効な県は 410
+    expect(middleware(request('/areas/28000/tourism/cities')).status).toBe(410);
+    expect(middleware(request('/areas/28000/not-a-theme/cities')).status).toBe(410);
+    expect(middleware(request('/areas/99000/labor-wages/cities')).status).toBe(410);
+  });
+
   test('市区町村と親県が不一致なら 410', () => {
     expect(middleware(request('/areas/05000/cities/04103')).status).toBe(410);
   });

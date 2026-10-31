@@ -16,6 +16,8 @@ const HREF_ROUTE_IDS = {
   theme: 'route:theme:themeSlug',
   area: 'route:area:areaCode',
   'area-theme': 'route:area-theme:areaCode:themeSlug',
+  // 県内の市区町村を比べる (2026-10-31 IA-REGION-THEME-01)
+  'area-theme-cities': 'route:area-theme-cities:areaCode:themeSlug',
   city: 'route:city:areaCode:cityCode',
   blog: 'route:blog:slug',
   tag: 'route:tag:tagKey',

@@ -354,6 +354,7 @@ updated: 2026-10-19
 - **段 (この順に進める)**: ① 題名・パンくず・Sheet を今あるページ (`/themes/*`・`/areas/県/テーマ`・`/japan/*`) に入れる ② 県内の市区町村を比べる `/areas/県/テーマ/cities` (24 テーマ × 47) ③ 市区町村×テーマ `/areas/県/cities/市/テーマ` (noindex) と、今の分野ページ `/areas/県/cities/市/分野` からの 301 ④ 市区町村テーマの slug をそろえる ⑤ 全国のテーマを増やす。
 - **完了条件**: 5 段がそろい、どの地域×テーマのページでもパンくずの各段から Sheet で移れ、題名に地域が入っている。
 - **進み具合 (2026-10-31)**: ① 済み (commit 6ae8cf607。`ThemeRegionNav` がパンくず・アイコン・地域の Sheet を持ち、`/themes/*`・`/areas/県/テーマ`・`/japan/*` で使う。題名は「都道府県別の / 兵庫県の / 全国の …」。develop には未 push)。
+- **② 済み (2026-10-31)**: `/areas/県/テーマ/cities` を追加 (24 テーマ × 47 県。県内の上位 3 と県内ランキングへの入口)。middleware は対応のあるテーマだけ通し、他の `/cities` は 410。サイトマップにはまだ載せていない (載せるかは公開後の検索の様子で決める)。
 - **② 以降で分かっている前提**: middleware の `checkAreasPolicy` は `/areas/県/テーマ/cities` (4 段) を今は 410 にする。通すなら 4 段目 `cities` かつ市区町村の対応 (`MUNICIPALITY_THEME_FOR_PREFECTURE_THEME`) があるテーマだけを許す。今の市区町村の分野ページ `/areas/県/cities/市/分野` は既に市区町村のページへ 301 している (③ では 5 段目がテーマ slug のときだけ新しいページへ通す)。新しい URL は `data/content/routes.json` と `packages/data-configs/src/content/href.ts` の `HREF_ROUTE_IDS` に足す (`npm run content:check`)。県内の比較は `buildMunicipalityPrefectureRanking` (県内ランキングのページと同じ) で作り、県別の独立ページがある指標 (`MUNICIPALITY_PREFECTURE_RANKING_KEYS`) はそこへ、無い指標は全国の市区町村ランキングへつなぐ。`ThemeRegionNav` の県の段に「この県の市区町村を比べる」を足す。
 
 ## 🟡 中 — 2〜3ヶ月以内

@@ -4,6 +4,7 @@ import { Suspense, type ReactNode } from 'react';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
+import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
@@ -196,6 +197,7 @@ export async function ThemePageLayout({
               themes={THEME_SWITCHER_THEMES}
               areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
               hasAreaPages={isAreaTheme(theme.themeKey)}
+              hasMunicipalityPages={isAreaTheme(theme.themeKey) && Object.hasOwn(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, theme.themeKey)}
               scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
             />
           </div>

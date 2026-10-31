@@ -140,6 +140,15 @@
       ]
     },
     {
+      "id": "route:area-theme-cities:areaCode:themeSlug",
+      "kind": "area-theme-cities",
+      "pattern": "/areas/[areaCode]/[themeSlug]/cities",
+      "parameters": [
+        "areaCode",
+        "themeSlug"
+      ]
+    },
+    {
       "id": "page:blog-tags",
       "kind": "page",
       "pattern": "/blog/tags",

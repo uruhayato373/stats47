@@ -100,6 +100,11 @@
       "import": "./src/geo-scope/index.ts",
       "require": "./src/geo-scope/index.ts"
     },
+    "./geo-scope/scope-theme-map": {
+      "types": "./src/geo-scope/scope-theme-map.ts",
+      "import": "./src/geo-scope/scope-theme-map.ts",
+      "require": "./src/geo-scope/scope-theme-map.ts"
+    },
     "./business-plan": {
       "types": "./src/business-plan/index.ts",
       "import": "./src/business-plan/index.ts",

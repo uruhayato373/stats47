@@ -48,8 +48,13 @@ interface Props {
   hasAreaPages: boolean;
   /** 同じ主題の市区町村・全国のページ (無い主語は渡さない) */
   scopeHrefs: { municipalities?: string; japan?: string };
-  /** 今のページ。prefectures = テーマ・県のページ / japan = 全国の推移 (`/japan/テーマ`) */
-  current?: 'prefectures' | 'japan';
+  /** 県内の市区町村を比べるページ (`/areas/県/テーマ/cities`) を持つテーマか */
+  hasMunicipalityPages?: boolean;
+  /**
+   * 今のページ。prefectures = テーマ・県のページ / japan = 全国の推移 (`/japan/テーマ`) /
+   * prefecture-municipalities = 県内の市区町村を比べる (別の県を選ぶと、その県の同じ比較へ移る)
+   */
+  current?: 'prefectures' | 'japan' | 'prefecture-municipalities';
 }
 
 /**
@@ -60,7 +65,15 @@ interface Props {
  * 地域の Sheet は 全国 (全国の推移・47 都道府県を比べる) → 都道府県 (名前で探す・地方別) → 市区町村 の段に並べ、
  * そのテーマで作れないページは選択肢に出さない。移り先 URL と計測 (nav_click の theme_region) は旧の帯と同じ。
  */
-export function ThemeRegionNav({ themeKey, themes, areaContext, hasAreaPages, scopeHrefs, current = 'prefectures' }: Props) {
+export function ThemeRegionNav({
+  themeKey,
+  themes,
+  areaContext,
+  hasAreaPages,
+  hasMunicipalityPages = false,
+  scopeHrefs,
+  current = 'prefectures',
+}: Props) {
   const { selectedPrefectureCode, setSelected } = useThemePrefecture();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -76,8 +89,13 @@ export function ThemeRegionNav({ themeKey, themes, areaContext, hasAreaPages, sc
     setOpen(true);
   };
 
+  const citiesHref = (code: string) => hrefFor('area-theme-cities', { areaCode: code, themeSlug: themeKey });
   const prefectureHref = (code: string) =>
-    hasAreaPages ? hrefFor('area-theme', { areaCode: code, themeSlug: themeKey }) : `${themeHref(themeKey)}?pref=${code}`;
+    current === 'prefecture-municipalities' && hasMunicipalityPages
+      ? citiesHref(code)
+      : hasAreaPages
+        ? hrefFor('area-theme', { areaCode: code, themeSlug: themeKey })
+        : `${themeHref(themeKey)}?pref=${code}`;
 
   const choosePrefecture = (code: string | null) => {
     const href = code ? prefectureHref(code) : themeHref(themeKey);
@@ -173,6 +191,31 @@ export function ThemeRegionNav({ themeKey, themes, areaContext, hasAreaPages, sc
                 {scopeHrefs.municipalities && (
                   <RailNavRow href={scopeHrefs.municipalities} chevron={false} trailing="全国の市区町村" data-nav-surface="theme_region">
                     市区町村を比べる
+                  </RailNavRow>
+                )}
+              </nav>
+            )}
+            {prefectureCode && prefectureName && hasAreaPages && (
+              <nav aria-label={prefectureName}>
+                <p className="mb-1 text-xs font-medium text-muted-foreground">{prefectureName}</p>
+                <RailNavRow
+                  href={hrefFor('area-theme', { areaCode: prefectureCode, themeSlug: themeKey })}
+                  active={current === 'prefectures'}
+                  chevron={false}
+                  trailing="県のページ"
+                  data-nav-surface="theme_region"
+                >
+                  {prefectureName}の全体
+                </RailNavRow>
+                {hasMunicipalityPages && (
+                  <RailNavRow
+                    href={citiesHref(prefectureCode)}
+                    active={current === 'prefecture-municipalities'}
+                    chevron={false}
+                    trailing="県内の比較"
+                    data-nav-surface="theme_region"
+                  >
+                    {prefectureName}の市区町村を比べる
                   </RailNavRow>
                 )}
               </nav>
