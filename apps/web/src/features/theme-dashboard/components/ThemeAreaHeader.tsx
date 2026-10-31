@@ -17,6 +17,7 @@ export function ThemeAreaHeader({
   themeTitle: string;
 }) {
   const { selectedAreaName } = useThemePrefecture();
-  const title = selectedAreaName ? `${selectedAreaName}の${themeTitle}` : themeTitle;
+  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01): 県を選ぶと「兵庫県の労働・賃金」、選ばないと「都道府県別の労働・賃金」
+  const title = selectedAreaName ? `${selectedAreaName}の${themeTitle}` : `都道府県別の${themeTitle}`;
   return <PageHeader title={title} />;
 }

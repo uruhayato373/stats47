@@ -27,3 +27,7 @@ export type {
 export { PrefectureSelect } from "./components/PrefectureSelect";
 
 export { ThemeChapterLinks } from "./components/ThemeChapterLinks";
+
+// 地域・テーマのパンくずと Sheet (2026-10-31 IA-REGION-THEME-01)。全国のページ (/japan/テーマ) も使う
+export { ThemeRegionNav } from "./components/ThemeRegionNav";
+export { isAreaTheme } from "./config/area-theme-slugs";
