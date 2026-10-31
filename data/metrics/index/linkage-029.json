@@ -31,7 +31,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-households",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -71,7 +71,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-households",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2359,7 +2359,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2442,7 +2442,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2514,7 +2514,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -3010,7 +3010,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -3339,6 +3339,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:trademark-application-count",
           "kind": "ranking"
         },
@@ -3563,6 +3567,10 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:trademark-registration-count",
@@ -4293,7 +4301,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -5583,7 +5595,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -5623,7 +5639,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -5853,7 +5869,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -6162,7 +6178,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -6202,7 +6218,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -6242,7 +6262,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -6282,7 +6302,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -9441,6 +9461,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:freight-logistics",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:truck-operators",
           "kind": "ranking"
         },
@@ -11218,7 +11242,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -11338,7 +11366,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -11378,7 +11406,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -11418,7 +11446,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -12116,7 +12144,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {

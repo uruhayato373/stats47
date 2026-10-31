@@ -32,12 +32,13 @@ describe('主語を切り替えたときの同じ主題への対応表', () => {
   });
 
   it('リンク先は対応のある主語だけを返し、日本のテーマは存在するときだけ', () => {
-    expect(scopeHrefsForPrefectureTheme('living-housing')).toMatchObject({ municipalities: '/municipalities/themes/housing' });
+    // 全国の市区町村を比べるページの slug は都道府県のテーマ名 (2026-10-31 IA-REGION-THEME-01)
+    expect(scopeHrefsForPrefectureTheme('living-housing')).toMatchObject({ municipalities: '/municipalities/themes/living-housing' });
     expect(scopeHrefsForPrefectureTheme('climate').municipalities).toBeUndefined();
     expect(scopeHrefsForMunicipalityTheme('municipal-revenue').prefectures).toBe('/themes/local-finance');
     expect(scopeHrefsForJapanTheme('education-culture')).toEqual({
       prefectures: '/themes/education-culture',
-      municipalities: '/municipalities/themes/education',
+      municipalities: '/municipalities/themes/education-culture',
     });
     for (const slug of KNOWN_MUNICIPALITY_THEME_SLUGS) {
       const japan = scopeHrefsForMunicipalityTheme(slug).japan;

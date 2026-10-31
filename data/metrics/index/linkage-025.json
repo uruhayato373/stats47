@@ -729,7 +729,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -779,7 +779,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -829,7 +829,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -869,7 +869,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -909,7 +909,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -949,7 +949,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -989,7 +989,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -1715,7 +1715,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -1755,7 +1755,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -1795,7 +1795,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -2404,7 +2404,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -4217,7 +4217,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -4747,7 +4751,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -7803,7 +7811,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -7985,7 +7993,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -8210,6 +8218,10 @@
         {
           "pageId": "area-theme:47000:household-assets-debt",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:securities-balance",
@@ -8498,7 +8510,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -8538,7 +8550,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -8578,7 +8590,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -8618,7 +8630,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -9298,7 +9310,15 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:welfare-facilities",
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
           "kind": "municipality-theme"
         },
         {
@@ -9408,7 +9428,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:safety-environment",
+          "pageId": "municipality-theme:safety",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:waste-recycling",
           "kind": "municipality-theme"
         },
         {
@@ -10134,6 +10158,10 @@
         {
           "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sewerage-coverage-rate",

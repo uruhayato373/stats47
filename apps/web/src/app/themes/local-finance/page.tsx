@@ -128,11 +128,8 @@ export default async function LocalFinanceThemePage({
       >
         <nav aria-label="関連する統計範囲" className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
           <span className="text-muted-foreground">市区町村の財政:</span>
-          {[
-            { href: '/municipalities/themes/local-finance', label: '財政指標' },
-            { href: '/municipalities/themes/municipal-revenue', label: '歳入' },
-            { href: '/municipalities/themes/municipal-expenditure', label: '歳出' },
-          ].map((link) => (
+          {/* 財政指標・歳入・歳出は 1 つのページにまとめた (都道府県のテーマ名にそろえた。2026-10-31 IA-REGION-THEME-01) */}
+          {[{ href: '/municipalities/themes/local-finance', label: '財政指標・歳入・歳出' }].map((link) => (
             <Link key={link.href} href={link.href} className="font-medium text-primary hover:underline">
               {link.label} →
             </Link>

@@ -13,6 +13,11 @@ const switcherSource = readFileSync(
   'utf8'
 );
 
+const regionNavSource = readFileSync(
+  resolve(import.meta.dirname, '../ThemeRegionNav.tsx'),
+  'utf8'
+);
+
 const navSource = readFileSync(
   resolve(import.meta.dirname, '../../../../components/navigation/StatisticsScopeNav.tsx'),
   'utf8'
@@ -36,31 +41,31 @@ describe('地方財政 (bespoke ページ) — ページ内ナビの位置', () 
 });
 
 describe('ThemePageLayout — 狭幅の読む順序', () => {
-  it('ページ見出しをスコープ・切替・全指標ナビより先に描画する', () => {
+  // 2026-10-31 (IA-REGION-THEME-01): 地域単位のリンク・テーマのボタン・県の Select を並べた帯をやめ、パンくずの各段と
+  // 右端のアイコンから Sheet で選ぶ形にした。読む順は「パンくず (今いる地域とテーマ) → 題名 → 章のリンク」
+  it('パンくず (地域・テーマの選択) → ページ見出し → 章のリンクの順に描画する', () => {
+    const regionNavIndex = source.indexOf('<ThemeRegionNav');
     const headerIndex = source.indexOf('THEME_HEROES[theme.themeKey] ?');
-    const scopeIndex = source.indexOf('<StatisticsScopeNav');
-    const controlsIndex = source.indexOf('aria-label="テーマと地域"');
     const pageNavIndex = source.indexOf('label="このページの内容"');
 
-    expect(headerIndex).toBeGreaterThan(-1);
-    expect(scopeIndex).toBeGreaterThan(headerIndex);
-    expect(controlsIndex).toBeGreaterThan(scopeIndex);
-    expect(pageNavIndex).toBeGreaterThan(controlsIndex);
+    expect(regionNavIndex).toBeGreaterThan(-1);
+    expect(headerIndex).toBeGreaterThan(regionNavIndex);
+    expect(pageNavIndex).toBeGreaterThan(headerIndex);
   });
 
-  // 2026-10-29: テーマの切替は今のテーマ名のボタン 1 つ (ThemeSwitcher が Sheet を開き、テーマ一覧への出口も Sheet に置く)。
-  // 切替行に Select とテーマ一覧ボタンを並べると、見出しの下が操作で埋まって主要データを押し下げていた。
-  it('左レール (2 本目のナビ列) を作らず、切替行にはテーマ (Sheet) と地域だけを置く', () => {
+  it('左レール (2 本目のナビ列) も、見出しの下の操作の帯も作らない。テーマと地域はパンくずとアイコンの Sheet で選ぶ', () => {
     expect(source).not.toMatch(/\bleftRail\b/);
     expect(source).not.toContain('LEFT_RAIL_NARROW_ONLY_CLASS');
     expect(source).not.toContain('ThemeSideNav');
+    // 旧の帯 (「47都道府県」が意味違いで 2 回出ていた)
+    expect(source).not.toContain('<StatisticsScopeNav');
+    expect(source).not.toContain('<PrefectureSelect');
+    expect(source).not.toContain('aria-label="テーマと地域"');
 
-    const controlsIndex = source.indexOf('aria-label="テーマと地域"');
-    const pageNavIndex = source.indexOf('label="このページの内容"');
-    const controls = source.slice(controlsIndex, pageNavIndex);
-    expect(controls).toContain('<ThemeSwitcher');
-    expect(controls).toContain('<PrefectureSelect');
-    expect(controls).not.toContain('href="/themes"');
+    // テーマの Sheet はパンくずの段と題名の横のアイコンの両方から開く。テーマ一覧への出口は Sheet に置く
+    expect(regionNavSource).toContain('trigger="crumb"');
+    expect(regionNavSource).toContain('trigger="icon"');
+    expect(regionNavSource).toContain('<SheetContent');
     expect(switcherSource).toContain('<SheetContent');
     expect(switcherSource).toContain('href="/themes"');
   });

@@ -1776,7 +1776,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -3125,11 +3125,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:single-father-households",
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -3175,7 +3183,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -3215,7 +3227,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -3255,7 +3271,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -4193,11 +4213,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:single-mother-households",
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -4243,7 +4271,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -4283,7 +4315,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -4323,7 +4359,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -4547,6 +4587,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-100to199",
@@ -4777,6 +4821,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-200to299",
           "kind": "ranking"
         },
@@ -5003,6 +5051,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-300to399",
@@ -5233,6 +5285,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-400to499",
           "kind": "ranking"
         },
@@ -5459,6 +5515,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-500plus",
@@ -5689,6 +5749,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:single-mother-households-income-under100",
           "kind": "ranking"
         },
@@ -5915,6 +5979,10 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:single-parent-households",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-public-assistance-households",
@@ -6531,7 +6599,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -7015,7 +7087,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -7547,6 +7623,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:sleep-avg-time-female",
           "kind": "ranking"
         },
@@ -7771,6 +7851,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sleep-avg-time-male",
@@ -8568,7 +8652,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -9217,7 +9301,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -9821,7 +9905,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -9861,7 +9945,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -10401,7 +10485,15 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:welfare-facilities",
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
           "kind": "municipality-theme"
         },
         {
@@ -10441,7 +10533,15 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:welfare-facilities",
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
           "kind": "municipality-theme"
         },
         {
@@ -11089,7 +11189,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -11813,6 +11917,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:sports-annual-participation-rate-10plus",
           "kind": "ranking"
         },
@@ -12391,6 +12499,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:sports-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-park-count",

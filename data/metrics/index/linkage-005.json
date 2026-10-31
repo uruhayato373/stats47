@@ -450,6 +450,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-assets-debt",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:current-securities-balance-ratio-multi-person-households",
           "kind": "ranking"
         },
@@ -2324,10 +2328,6 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:living-environment",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:damaged-vacant-housing-ratio",
           "kind": "ranking"
         }
@@ -2559,7 +2559,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -2993,7 +2993,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -3492,7 +3492,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:vital-statistics",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -5709,7 +5709,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -5749,7 +5749,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -6351,7 +6351,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -6591,7 +6591,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -6676,7 +6676,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -6716,7 +6716,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -7169,7 +7169,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -7990,7 +7990,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -8065,7 +8065,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -8108,7 +8108,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -8187,7 +8187,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -8234,7 +8234,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -8807,6 +8807,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:design-application-count",
           "kind": "ranking"
         },
@@ -9031,6 +9035,10 @@
         {
           "pageId": "area-theme:47000:innovation-patents",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:innovation-patents",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:design-registration-count",
@@ -9609,7 +9617,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -9649,7 +9657,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -9689,7 +9697,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -10219,7 +10227,15 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:welfare-facilities",
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
           "kind": "municipality-theme"
         },
         {
@@ -10441,6 +10457,10 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:disabled-employment-rate",
@@ -11013,7 +11033,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -11279,7 +11299,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -11354,7 +11374,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -11662,7 +11682,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {

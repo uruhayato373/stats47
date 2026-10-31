@@ -22,6 +22,8 @@
  * 値レベル検証)。詳細は `.claude/todo/backlog.md` の GEO-SCOPE-SEPARATION-01 WP6 完了note。
  * 2026-08-28 に unknown-non-estat 9件を追加審査し、加算可能な4件を採用した。
  * 判断SSOTは `japan-derived-metrics.ts`。
+ * 2026-10-31 に全国のテーマが無い 34 テーマを同じ手順で照合し、全国の値を持つ指標が 3 件以上の 25 テーマを足した
+ * (IA-REGION-THEME-01 の 5 段目。18 → 43 テーマ)。
  * 2026-10-09 に参考文献由来の「日本全体ページへ採用判断が可能」66指標を同じ
  * `verify-japan-candidates.ts` で値レベル検証し、通った estat 7件を既存テーマへ追加した
  * (live-audit は R2 監査形式へ変わり hasNational を持たないため、00000 行の存在は
@@ -702,6 +704,1071 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         shortLabel: "旅客船輸送人員",
       },
     ],
+  },
+  // ★ 2026-10-31 (オーナー決定 IA-REGION-THEME-01 の 5 段目): 全国のテーマが無い 34 テーマの e-Stat 指標 251 件を
+  //   verify-japan-candidates.ts で値レベル照合し (verified-official 178 件)、全国の値を持つ指標が 3 件以上ある 25 テーマを足した。
+  //   1〜2 件のテーマは薄いページになるので足さない。shortLabel はそのテーマの ThemeCatalog の shortLabel。
+  "construction-industry": {
+    themeSlug: "construction-industry",
+    title: "建設業",
+    description: "元請完成工事高・下請完成工事高・従業者数・建設業就業者総数（常住地別）など、建設業に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "建設業",
+      "元請完成工事高",
+      "下請完成工事高",
+      "従業者数",
+      "建設業就業者総数（常住地別）"
+    ],
+    metrics: [
+      {
+        metricKey: "prime-contractor-completed-construction",
+        shortLabel: "元請完成工事高"
+      },
+      {
+        metricKey: "subcontractor-completed-construction",
+        shortLabel: "下請完成工事高"
+      },
+      {
+        metricKey: "construction-private-employees",
+        shortLabel: "従業者数"
+      },
+      {
+        metricKey: "construction-employed-residents",
+        shortLabel: "建設業就業者総数（常住地別）"
+      },
+      {
+        metricKey: "construction-employed-under30",
+        shortLabel: "30歳未満の建設業就業者"
+      },
+      {
+        metricKey: "construction-employed-age30to54",
+        shortLabel: "30〜54歳の建設業就業者"
+      },
+      {
+        metricKey: "construction-employed-age55plus",
+        shortLabel: "55歳以上の建設業就業者"
+      },
+      {
+        metricKey: "construction-employed-female",
+        shortLabel: "女性の建設業就業者"
+      },
+      {
+        metricKey: "public-construction-contract-count",
+        shortLabel: "公共工事の請負契約件数（施工地別）"
+      },
+      {
+        metricKey: "public-construction-contract-amount",
+        shortLabel: "公共工事の請負契約額（施工地別）"
+      }
+    ]
+  },
+  "waste-recycling": {
+    themeSlug: "waste-recycling",
+    title: "ごみ・リサイクル",
+    description: "ごみ排出量・リサイクル率・最終処分量など、ごみ・リサイクルに関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "ごみ・リサイクル",
+      "ごみ排出量",
+      "リサイクル率",
+      "最終処分量"
+    ],
+    metrics: [
+      {
+        metricKey: "garbage-total-output",
+        shortLabel: "ごみ排出量"
+      },
+      {
+        metricKey: "waste-recycling-rate",
+        shortLabel: "リサイクル率"
+      },
+      {
+        metricKey: "garbage-final-disposal",
+        shortLabel: "最終処分量"
+      }
+    ]
+  },
+  "information-industry": {
+    themeSlug: "information-industry",
+    title: "情報通信業",
+    description: "事業所数・従業者数・県内総生産（名目・2015年基準）など、情報通信業に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "情報通信業",
+      "事業所数",
+      "従業者数",
+      "県内総生産（名目・2015年基準）"
+    ],
+    metrics: [
+      {
+        metricKey: "information-private-establishments",
+        shortLabel: "事業所数"
+      },
+      {
+        metricKey: "information-private-employees",
+        shortLabel: "従業者数"
+      },
+      {
+        metricKey: "gross-prefectural-product-information-communication-h27",
+        shortLabel: "県内総生産（名目・2015年基準）"
+      }
+    ]
+  },
+  "agriculture-production": {
+    themeSlug: "agriculture-production",
+    title: "農業の生産力",
+    description: "農業就業者1人当たり農業産出額・農家数・基幹的農業従事者数（販売農家）・耕地面積など、農業の生産力に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "農業の生産力",
+      "農業就業者1人当たり農業産出額",
+      "農家数",
+      "基幹的農業従事者数（販売農家）",
+      "耕地面積"
+    ],
+    metrics: [
+      {
+        metricKey: "agricultural-output-per-employed-person",
+        shortLabel: "農業就業者1人当たり農業産出額"
+      },
+      {
+        metricKey: "agricultural-farm-count",
+        shortLabel: "農家数"
+      },
+      {
+        metricKey: "core-agricultural-workers",
+        shortLabel: "基幹的農業従事者数（販売農家）"
+      },
+      {
+        metricKey: "cultivated-area",
+        shortLabel: "耕地面積"
+      }
+    ]
+  },
+  "forestry-timber": {
+    themeSlug: "forestry-timber",
+    title: "森林・林業・木材産業",
+    description: "森林面積・林野面積割合・人工造林面積・林道延長など、森林・林業・木材産業に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "森林・林業・木材産業",
+      "森林面積",
+      "林野面積割合",
+      "人工造林面積",
+      "林道延長"
+    ],
+    metrics: [
+      {
+        metricKey: "woodland-area",
+        shortLabel: "森林面積"
+      },
+      {
+        metricKey: "forest-area-ratio",
+        shortLabel: "林野面積割合"
+      },
+      {
+        metricKey: "artificial-forest-area",
+        shortLabel: "人工造林面積"
+      },
+      {
+        metricKey: "forest-road-length",
+        shortLabel: "林道延長"
+      }
+    ]
+  },
+  "retail-commerce": {
+    themeSlug: "retail-commerce",
+    title: "商業と小売",
+    description: "小売業事業所数・小売業売場面積・小売業年間商品販売額・小売業従業者数など、商業と小売に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "商業と小売",
+      "小売業事業所数",
+      "小売業売場面積",
+      "小売業年間商品販売額",
+      "小売業従業者数"
+    ],
+    metrics: [
+      {
+        metricKey: "retail-establishments-by-prefecture",
+        shortLabel: "小売業事業所数"
+      },
+      {
+        metricKey: "retail-sales-area-by-class",
+        shortLabel: "小売業売場面積"
+      },
+      {
+        metricKey: "retail-sales-amount-by-prefecture",
+        shortLabel: "小売業年間商品販売額"
+      },
+      {
+        metricKey: "retail-employees",
+        shortLabel: "小売業従業者数"
+      }
+    ]
+  },
+  "local-services": {
+    themeSlug: "local-services",
+    title: "飲食・生活関連サービス",
+    description: "飲食店数（人口千人当たり）・ホテル営業施設数・ホテル営業施設客室数・洗濯・理容・美容・浴場業の事業所数など、飲食・生活関連サービスに関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "飲食・生活関連サービス",
+      "飲食店数（人口千人当たり）",
+      "ホテル営業施設数",
+      "ホテル営業施設客室数",
+      "洗濯・理容・美容・浴場業の事業所数"
+    ],
+    metrics: [
+      {
+        metricKey: "restaurant-count-per-1000",
+        shortLabel: "飲食店数（人口千人当たり）"
+      },
+      {
+        metricKey: "number-of-hotel-facilities",
+        shortLabel: "ホテル営業施設数"
+      },
+      {
+        metricKey: "number-of-hotel-rooms",
+        shortLabel: "ホテル営業施設客室数"
+      },
+      {
+        metricKey: "laundry-beauty-bath-industry-establishments",
+        shortLabel: "洗濯・理容・美容・浴場業の事業所数"
+      },
+      {
+        metricKey: "laundry-beauty-bath-industry-employees",
+        shortLabel: "洗濯・理容・美容・浴場業の従業者数"
+      },
+      {
+        metricKey: "media-production-establishments",
+        shortLabel: "映像・音声・文字情報制作業の事業所数"
+      },
+      {
+        metricKey: "media-production-employees",
+        shortLabel: "映像・音声・文字情報制作業の従業者数"
+      },
+      {
+        metricKey: "amusement-industry-establishments",
+        shortLabel: "娯楽業の事業所数"
+      },
+      {
+        metricKey: "amusement-industry-employees",
+        shortLabel: "娯楽業の従業者数"
+      },
+      {
+        metricKey: "beauty-salon-count",
+        shortLabel: "美容所数"
+      }
+    ]
+  },
+  "business-demography": {
+    themeSlug: "business-demography",
+    title: "起業と開廃業",
+    description: "会社・個人経営の企業総数・常用雇用者0〜4人の企業数・会社・個人経営の従業者総数・常用雇用者0〜4人企業の従業者数など、起業と開廃業に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "起業と開廃業",
+      "会社・個人経営の企業総数",
+      "常用雇用者0〜4人の企業数",
+      "会社・個人経営の従業者総数",
+      "常用雇用者0〜4人企業の従業者数"
+    ],
+    metrics: [
+      {
+        metricKey: "nonprimary-enterprises-count",
+        shortLabel: "会社・個人経営の企業総数"
+      },
+      {
+        metricKey: "nonprimary-enterprises-under5-count",
+        shortLabel: "常用雇用者0〜4人の企業数"
+      },
+      {
+        metricKey: "nonprimary-enterprises-employees",
+        shortLabel: "会社・個人経営の従業者総数"
+      },
+      {
+        metricKey: "nonprimary-enterprises-under5-employees",
+        shortLabel: "常用雇用者0〜4人企業の従業者数"
+      }
+    ]
+  },
+  "innovation-patents": {
+    themeSlug: "innovation-patents",
+    title: "研究開発と特許",
+    description: "特許出願件数（筆頭出願人住所）・特許登録件数（筆頭出願人住所）・出願に記載された延べ発明者数・意匠出願件数など、研究開発と特許に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "研究開発と特許",
+      "特許出願件数（筆頭出願人住所）",
+      "特許登録件数（筆頭出願人住所）",
+      "出願に記載された延べ発明者数",
+      "意匠出願件数"
+    ],
+    metrics: [
+      {
+        metricKey: "patent-application-count",
+        shortLabel: "特許出願件数（筆頭出願人住所）"
+      },
+      {
+        metricKey: "patent-registration-count",
+        shortLabel: "特許登録件数（筆頭出願人住所）"
+      },
+      {
+        metricKey: "patent-inventor-count",
+        shortLabel: "出願に記載された延べ発明者数"
+      },
+      {
+        metricKey: "design-application-count",
+        shortLabel: "意匠出願件数"
+      },
+      {
+        metricKey: "design-registration-count",
+        shortLabel: "意匠登録件数"
+      },
+      {
+        metricKey: "trademark-application-count",
+        shortLabel: "商標出願件数"
+      },
+      {
+        metricKey: "trademark-registration-count",
+        shortLabel: "商標登録件数"
+      }
+    ]
+  },
+  "childcare-services": {
+    themeSlug: "childcare-services",
+    title: "保育の需給",
+    description: "保育所等数（0～5歳人口10万人当たり）・保育所等在所児数（保育士1人当たり）・保育所等利用率（在所児数／定員数）・認定こども園数（0～5歳人口10万人当たり）など、保育の需給に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "保育の需給",
+      "保育所等数（0～5歳人口10万人当たり）",
+      "保育所等在所児数（保育士1人当たり）",
+      "保育所等利用率（在所児数／定員数）",
+      "認定こども園数（0～5歳人口10万人当たり）"
+    ],
+    metrics: [
+      {
+        metricKey: "nursery-count-per-100k-0-5",
+        shortLabel: "保育所等数（0～5歳人口10万人当たり）"
+      },
+      {
+        metricKey: "nursery-children-per-nursery-teacher",
+        shortLabel: "保育所等在所児数（保育士1人当たり）"
+      },
+      {
+        metricKey: "nursery-utilization-rate",
+        shortLabel: "保育所等利用率（在所児数／定員数）"
+      },
+      {
+        metricKey: "certified-childcare-center-count-per-100k-0-5",
+        shortLabel: "認定こども園数（0～5歳人口10万人当たり）"
+      },
+      {
+        metricKey: "nursery-waiting-children-count",
+        shortLabel: "保育所等利用待機児童数"
+      }
+    ]
+  },
+  "single-parent-households": {
+    themeSlug: "single-parent-households",
+    title: "ひとり親家庭の生活",
+    description: "母子世帯数・父子世帯数・生活保護を受ける母子世帯数（年度平均）・児童扶養手当受給者数（年度末）など、ひとり親家庭の生活に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "ひとり親家庭の生活",
+      "母子世帯数",
+      "父子世帯数",
+      "生活保護を受ける母子世帯数（年度平均）",
+      "児童扶養手当受給者数（年度末）"
+    ],
+    metrics: [
+      {
+        metricKey: "single-mother-households",
+        shortLabel: "母子世帯数"
+      },
+      {
+        metricKey: "single-father-households",
+        shortLabel: "父子世帯数"
+      },
+      {
+        metricKey: "single-mother-public-assistance-households",
+        shortLabel: "生活保護を受ける母子世帯数（年度平均）"
+      },
+      {
+        metricKey: "child-rearing-allowance-recipients",
+        shortLabel: "児童扶養手当受給者数（年度末）"
+      },
+      {
+        metricKey: "single-mother-households-income-under100",
+        shortLabel: "母子世帯の所得100万円未満"
+      },
+      {
+        metricKey: "single-mother-households-income-100to199",
+        shortLabel: "母子世帯の所得100〜199万円"
+      },
+      {
+        metricKey: "single-mother-households-income-200to299",
+        shortLabel: "母子世帯の所得200〜299万円"
+      },
+      {
+        metricKey: "single-mother-households-income-300to399",
+        shortLabel: "母子世帯の所得300〜399万円"
+      },
+      {
+        metricKey: "single-mother-households-income-400to499",
+        shortLabel: "母子世帯の所得400〜499万円"
+      },
+      {
+        metricKey: "single-mother-households-income-500plus",
+        shortLabel: "母子世帯の所得500万円以上"
+      }
+    ]
+  },
+  "long-term-care": {
+    themeSlug: "long-term-care",
+    title: "介護認定とサービスの需給",
+    description: "介護保険給付費用額・老人ホーム数（65歳以上人口10万人当たり）・老人ホーム定員数（65歳以上人口千人当たり）・老人ホーム在所者数（65歳以上人口千人当たり）など、介護認定とサービスの需給に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "介護認定とサービスの需給",
+      "介護保険給付費用額",
+      "老人ホーム数（65歳以上人口10万人当たり）",
+      "老人ホーム定員数（65歳以上人口千人当たり）",
+      "老人ホーム在所者数（65歳以上人口千人当たり）"
+    ],
+    metrics: [
+      {
+        metricKey: "nursing-care-insurance-benefit",
+        shortLabel: "介護保険給付費用額"
+      },
+      {
+        metricKey: "nursing-home-count-per-100k-65plus",
+        shortLabel: "老人ホーム数（65歳以上人口10万人当たり）"
+      },
+      {
+        metricKey: "nursing-home-capacity-per-1000-65plus",
+        shortLabel: "老人ホーム定員数（65歳以上人口千人当たり）"
+      },
+      {
+        metricKey: "nursing-home-residents-per-1000-65plus",
+        shortLabel: "老人ホーム在所者数（65歳以上人口千人当たり）"
+      }
+    ]
+  },
+  "disability-support": {
+    themeSlug: "disability-support",
+    title: "障害福祉と社会参加",
+    description: "知的障害者援護施設数（人口100万人当たり）・知的障害者援護施設定員数（人口10万人当たり）・知的障害者援護施設在所者数（人口10万人当たり）・身体障害者手帳交付数（人口千人当たり）など、障害福祉と社会参加に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "障害福祉と社会参加",
+      "知的障害者援護施設数（人口100万人当たり）",
+      "知的障害者援護施設定員数（人口10万人当たり）",
+      "知的障害者援護施設在所者数（人口10万人当たり）",
+      "身体障害者手帳交付数（人口千人当たり）"
+    ],
+    metrics: [
+      {
+        metricKey: "intellectual-disability-support-facility-count-per-1m",
+        shortLabel: "知的障害者援護施設数（人口100万人当たり）"
+      },
+      {
+        metricKey: "intellectual-disability-support-facility-capacity-per-100k",
+        shortLabel: "知的障害者援護施設定員数（人口10万人当たり）"
+      },
+      {
+        metricKey: "intellectual-disability-support-facility-residents-per-100k",
+        shortLabel: "知的障害者援護施設在所者数（人口10万人当たり）"
+      },
+      {
+        metricKey: "physical-disability-certificates-issued-per-1000",
+        shortLabel: "身体障害者手帳交付数（人口千人当たり）"
+      },
+      {
+        metricKey: "disabled-employment-rate",
+        shortLabel: "障害者就職率（ハローワーク）"
+      }
+    ]
+  },
+  "public-assistance": {
+    themeSlug: "public-assistance",
+    title: "生活保護と生活困窮",
+    description: "生活保護被保護実人員（月平均・人口千人当たり）・生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）・生活保護費（都道府県財政）・保護施設定員数（被保護実人員千人当たり）など、生活保護と生活困窮に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "生活保護と生活困窮",
+      "生活保護被保護実人員（月平均・人口千人当たり）",
+      "生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）",
+      "生活保護費（都道府県財政）",
+      "保護施設定員数（被保護実人員千人当たり）"
+    ],
+    metrics: [
+      {
+        metricKey: "persons-on-public-assistance-per-1000",
+        shortLabel: "生活保護被保護実人員（月平均・人口千人当たり）"
+      },
+      {
+        metricKey: "households-on-public-assistance-per-1000",
+        shortLabel: "生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）"
+      },
+      {
+        metricKey: "public-assistance-expenses-prefecture",
+        shortLabel: "生活保護費（都道府県財政）"
+      },
+      {
+        metricKey: "public-assistance-facility-capacity-per-1000",
+        shortLabel: "保護施設定員数（被保護実人員千人当たり）"
+      }
+    ]
+  },
+  "daily-time-use": {
+    themeSlug: "daily-time-use",
+    title: "睡眠と生活時間",
+    description: "女性の睡眠時間・男性の睡眠時間・女性の家事時間・男性の家事時間など、睡眠と生活時間に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "睡眠と生活時間",
+      "女性の睡眠時間",
+      "男性の睡眠時間",
+      "女性の家事時間",
+      "男性の家事時間"
+    ],
+    metrics: [
+      {
+        metricKey: "sleep-avg-time-female",
+        shortLabel: "女性の睡眠時間"
+      },
+      {
+        metricKey: "sleep-avg-time-male",
+        shortLabel: "男性の睡眠時間"
+      },
+      {
+        metricKey: "housework-avg-time-female",
+        shortLabel: "女性の家事時間"
+      },
+      {
+        metricKey: "housework-avg-time-male",
+        shortLabel: "男性の家事時間"
+      },
+      {
+        metricKey: "hobby-leisure-avg-time-employed-female",
+        shortLabel: "女性有業者の趣味・娯楽時間"
+      },
+      {
+        metricKey: "hobby-leisure-avg-time-employed-male",
+        shortLabel: "男性有業者の趣味・娯楽時間"
+      },
+      {
+        metricKey: "work-avg-time-employed-female",
+        shortLabel: "女性有業者の仕事時間"
+      },
+      {
+        metricKey: "work-avg-time-employed-male",
+        shortLabel: "男性有業者の仕事時間"
+      },
+      {
+        metricKey: "hobby-participation-rate-karaoke",
+        shortLabel: "カラオケの行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-video-games",
+        shortLabel: "ゲームの行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-pachinko",
+        shortLabel: "パチンコの行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-gardening",
+        shortLabel: "園芸・庭いじり・ガーデニングの行動者率"
+      },
+      {
+        metricKey: "broadcast-media-time-all",
+        shortLabel: "テレビ・ラジオ・新聞・雑誌の総平均時間"
+      },
+      {
+        metricKey: "meal-avg-time-female",
+        shortLabel: "食事の平均時間（女）"
+      },
+      {
+        metricKey: "meal-avg-time-male",
+        shortLabel: "食事の平均時間（男）"
+      },
+      {
+        metricKey: "primary-school-commute-time-weekday",
+        shortLabel: "小学生の通勤・通学の総平均時間"
+      }
+    ]
+  },
+  "household-assets-debt": {
+    themeSlug: "household-assets-debt",
+    title: "貯蓄と負債",
+    description: "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）・金融負債残高（二人以上世帯）・平均貯蓄率（勤労者世帯）・預貯金が金融資産に占める割合など、貯蓄と負債に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "貯蓄と負債",
+      "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
+      "金融負債残高（二人以上世帯）",
+      "平均貯蓄率（勤労者世帯）",
+      "預貯金が金融資産に占める割合"
+    ],
+    metrics: [
+      {
+        metricKey: "financial-assets-balance-multi-person-households",
+        shortLabel: "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）"
+      },
+      {
+        metricKey: "financial-debt-balance",
+        shortLabel: "金融負債残高（二人以上世帯）"
+      },
+      {
+        metricKey: "avg-savings-rate-worker-households",
+        shortLabel: "平均貯蓄率（勤労者世帯）"
+      },
+      {
+        metricKey: "current-deposit-balance-ratio-multi-person-households",
+        shortLabel: "預貯金が金融資産に占める割合"
+      },
+      {
+        metricKey: "current-life-insurance-balance-ratio-multi-person-households",
+        shortLabel: "生命保険などが金融資産に占める割合"
+      },
+      {
+        metricKey: "current-securities-balance-ratio-multi-person-households",
+        shortLabel: "有価証券が金融資産に占める割合"
+      },
+      {
+        metricKey: "housing-land-liabilities-ratio-multi-person-households",
+        shortLabel: "住宅・土地負債が金融負債に占める割合"
+      },
+      {
+        metricKey: "securities-balance",
+        shortLabel: "有価証券保有額"
+      }
+    ]
+  },
+  "freight-logistics": {
+    themeSlug: "freight-logistics",
+    title: "物流と貨物輸送",
+    description: "JR貨物発送量・航空貨物輸送量・貨物車数・トラック事業者など、物流と貨物輸送に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "物流と貨物輸送",
+      "JR貨物発送量",
+      "航空貨物輸送量",
+      "貨物車数",
+      "トラック事業者"
+    ],
+    metrics: [
+      {
+        metricKey: "jr-freight-shipment",
+        shortLabel: "JR貨物発送量"
+      },
+      {
+        metricKey: "air-cargo-transport",
+        shortLabel: "航空貨物輸送量"
+      },
+      {
+        metricKey: "number-of-freight-cars",
+        shortLabel: "貨物車数"
+      },
+      {
+        metricKey: "truck-operators",
+        shortLabel: "トラック事業者"
+      }
+    ]
+  },
+  "regional-transport": {
+    themeSlug: "regional-transport",
+    title: "自動車依存と移動手段",
+    description: "自動車所有数量（二人以上世帯千世帯当たり）・自家用車通勤・通学者数・乗合バス通勤・通学者数・鉄道・電車通勤・通学者数など、自動車依存と移動手段に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "自動車依存と移動手段",
+      "自動車所有数量（二人以上世帯千世帯当たり）",
+      "自家用車通勤・通学者数",
+      "乗合バス通勤・通学者数",
+      "鉄道・電車通勤・通学者数"
+    ],
+    metrics: [
+      {
+        metricKey: "car-ownership-multi-person-households-per-1000",
+        shortLabel: "自動車所有数量（二人以上世帯千世帯当たり）"
+      },
+      {
+        metricKey: "commute-by-car",
+        shortLabel: "自家用車通勤・通学者数"
+      },
+      {
+        metricKey: "commute-by-bus",
+        shortLabel: "乗合バス通勤・通学者数"
+      },
+      {
+        metricKey: "commute-by-train",
+        shortLabel: "鉄道・電車通勤・通学者数"
+      },
+      {
+        metricKey: "bus-operators",
+        shortLabel: "バス事業者"
+      },
+      {
+        metricKey: "household-survey-transport-communication-expenditure",
+        shortLabel: "交通・通信支出（二人以上世帯・10〜11月の月平均）"
+      },
+      {
+        metricKey: "commuters-total",
+        shortLabel: "自宅外通勤・通学者数"
+      }
+    ]
+  },
+  "water-services": {
+    themeSlug: "water-services",
+    title: "水道の持続性",
+    description: "上水道給水人口比率・下水道処理人口普及率・上水道年間給水量・上水道施設能力など、水道の持続性に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "水道の持続性",
+      "上水道給水人口比率",
+      "下水道処理人口普及率",
+      "上水道年間給水量",
+      "上水道施設能力"
+    ],
+    metrics: [
+      {
+        metricKey: "water-supply-population-ratio-2012on",
+        shortLabel: "上水道給水人口比率"
+      },
+      {
+        metricKey: "sewerage-coverage-rate",
+        shortLabel: "下水道処理人口普及率"
+      },
+      {
+        metricKey: "water-supply-annual-volume",
+        shortLabel: "上水道年間給水量"
+      },
+      {
+        metricKey: "water-supply-capacity",
+        shortLabel: "上水道施設能力"
+      }
+    ]
+  },
+  "communication-access": {
+    themeSlug: "communication-access",
+    title: "通信環境とデジタル基盤",
+    description: "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）・ブロードバンド契約数（携帯電話アクセスを含む旧系列）・携帯電話契約数（人口千人当たり）・携帯電話所有数量（二人以上世帯千世帯当たり）など、通信環境とデジタル基盤に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "通信環境とデジタル基盤",
+      "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
+      "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
+      "携帯電話契約数（人口千人当たり）",
+      "携帯電話所有数量（二人以上世帯千世帯当たり）"
+    ],
+    metrics: [
+      {
+        metricKey: "broadband-contract-count-excluding-39-4g",
+        shortLabel: "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）"
+      },
+      {
+        metricKey: "broadband-service-contract-count",
+        shortLabel: "ブロードバンド契約数（携帯電話アクセスを含む旧系列）"
+      },
+      {
+        metricKey: "mobile-phone-contract-count-per-1000",
+        shortLabel: "携帯電話契約数（人口千人当たり）"
+      },
+      {
+        metricKey: "mobile-phone-ownership-multi-person-households-per-1000",
+        shortLabel: "携帯電話所有数量（二人以上世帯千世帯当たり）"
+      },
+      {
+        metricKey: "internet-usage-rate-10plus",
+        shortLabel: "インターネットの利用行動者率"
+      }
+    ]
+  },
+  "natural-environment": {
+    themeSlug: "natural-environment",
+    title: "森林と自然環境",
+    description: "森林面積・林野面積割合・人工造林面積・自然環境保全地域面積など、森林と自然環境に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "森林と自然環境",
+      "森林面積",
+      "林野面積割合",
+      "人工造林面積",
+      "自然環境保全地域面積"
+    ],
+    metrics: [
+      {
+        metricKey: "woodland-area",
+        shortLabel: "森林面積"
+      },
+      {
+        metricKey: "forest-area-ratio",
+        shortLabel: "林野面積割合"
+      },
+      {
+        metricKey: "artificial-forest-area",
+        shortLabel: "人工造林面積"
+      },
+      {
+        metricKey: "natural-environment-conservation-area",
+        shortLabel: "自然環境保全地域面積"
+      },
+      {
+        metricKey: "nature-park-area",
+        shortLabel: "自然公園面積"
+      }
+    ]
+  },
+  "cultural-participation": {
+    themeSlug: "cultural-participation",
+    title: "文化芸術への参加",
+    description: "美術鑑賞の行動者率・演芸・演劇・舞踊鑑賞の行動者率・クラシック音楽鑑賞の行動者率・絵画・彫刻の制作の行動者率など、文化芸術への参加に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "文化芸術への参加",
+      "美術鑑賞の行動者率",
+      "演芸・演劇・舞踊鑑賞の行動者率",
+      "クラシック音楽鑑賞の行動者率",
+      "絵画・彫刻の制作の行動者率"
+    ],
+    metrics: [
+      {
+        metricKey: "hobby-participation-rate-art-appreciation",
+        shortLabel: "美術鑑賞の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-theater",
+        shortLabel: "演芸・演劇・舞踊鑑賞の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-classical-music",
+        shortLabel: "クラシック音楽鑑賞の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-painting",
+        shortLabel: "絵画・彫刻の制作の行動者率"
+      },
+      {
+        metricKey: "library-lending-books",
+        shortLabel: "図書館館外貸出冊数"
+      },
+      {
+        metricKey: "relaxation-avg-time-male",
+        shortLabel: "男性の休養・くつろぎ時間（週全体総平均・分/日）"
+      },
+      {
+        metricKey: "relaxation-avg-time-female",
+        shortLabel: "女性の休養・くつろぎ時間（週全体総平均・分/日）"
+      },
+      {
+        metricKey: "hobby-leisure-avg-time-employed-male",
+        shortLabel: "有業男性の趣味・娯楽時間（週全体総平均・分/日）"
+      },
+      {
+        metricKey: "hobby-leisure-avg-time-employed-female",
+        shortLabel: "有業女性の趣味・娯楽時間（週全体総平均・分/日）"
+      },
+      {
+        metricKey: "hobby-participation-rate-go",
+        shortLabel: "囲碁の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-shogi",
+        shortLabel: "将棋の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-flower-arrangement",
+        shortLabel: "華道の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-instrument",
+        shortLabel: "楽器の演奏の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-photography",
+        shortLabel: "写真の撮影・プリントの行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-reading",
+        shortLabel: "趣味としての読書の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-calligraphy",
+        shortLabel: "書道の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-tea-ceremony",
+        shortLabel: "茶道の行動者率"
+      },
+      {
+        metricKey: "hobby-participation-rate-knitting",
+        shortLabel: "編み物・手芸の行動者率"
+      }
+    ]
+  },
+  "sports-participation": {
+    themeSlug: "sports-participation",
+    title: "スポーツ施設と利用",
+    description: "スポーツ年間行動者率（10歳以上）・スポーツ観覧の行動者率・社会体育施設数（人口100万人当たり）・運動公園数など、スポーツ施設と利用に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "スポーツ施設と利用",
+      "スポーツ年間行動者率（10歳以上）",
+      "スポーツ観覧の行動者率",
+      "社会体育施設数（人口100万人当たり）",
+      "運動公園数"
+    ],
+    metrics: [
+      {
+        metricKey: "sports-annual-participation-rate-10plus",
+        shortLabel: "スポーツ年間行動者率（10歳以上）"
+      },
+      {
+        metricKey: "hobby-participation-rate-sports-spectating",
+        shortLabel: "スポーツ観覧の行動者率"
+      },
+      {
+        metricKey: "community-sports-facility-count-per-million",
+        shortLabel: "社会体育施設数（人口100万人当たり）"
+      },
+      {
+        metricKey: "sports-park-count",
+        shortLabel: "運動公園数"
+      },
+      {
+        metricKey: "swimming-pool-public",
+        shortLabel: "水泳プール数（公共・実数）"
+      },
+      {
+        metricKey: "public-swimming-pool-count-per-million",
+        shortLabel: "水泳プール数（人口100万人当たり）"
+      },
+      {
+        metricKey: "public-gymnasium-count-per-million",
+        shortLabel: "体育館数"
+      },
+      {
+        metricKey: "baseball-field-public",
+        shortLabel: "野球場・ソフトボール場数（公共）"
+      },
+      {
+        metricKey: "sports-participation-rate-golf",
+        shortLabel: "ゴルフの行動者率"
+      },
+      {
+        metricKey: "sports-participation-rate-cycling",
+        shortLabel: "サイクリングの行動者率"
+      },
+      {
+        metricKey: "sports-participation-rate-skiing",
+        shortLabel: "スキー・スノーボードの行動者率"
+      },
+      {
+        metricKey: "sports-participation-rate-fishing",
+        shortLabel: "つりの行動者率"
+      },
+      {
+        metricKey: "sports-participation-rate-hiking",
+        shortLabel: "登山・ハイキングの行動者率"
+      }
+    ]
+  },
+  "gender-participation": {
+    themeSlug: "gender-participation",
+    title: "地域の男女共同参画",
+    description: "女性労働力人口比率・男性労働力人口比率・女性の家事時間（15歳以上・1日平均）・男性の家事時間（15歳以上・1日平均）など、地域の男女共同参画に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "地域の男女共同参画",
+      "女性労働力人口比率",
+      "男性労働力人口比率",
+      "女性の家事時間（15歳以上・1日平均）",
+      "男性の家事時間（15歳以上・1日平均）"
+    ],
+    metrics: [
+      {
+        metricKey: "labor-force-population-ratio-woman",
+        shortLabel: "女性労働力人口比率"
+      },
+      {
+        metricKey: "labor-force-population-ratio-man",
+        shortLabel: "男性労働力人口比率"
+      },
+      {
+        metricKey: "housework-avg-time-female",
+        shortLabel: "女性の家事時間（15歳以上・1日平均）"
+      },
+      {
+        metricKey: "housework-avg-time-male",
+        shortLabel: "男性の家事時間（15歳以上・1日平均）"
+      },
+      {
+        metricKey: "female-part-time-hourly-wage",
+        shortLabel: "女性パートタイム時給"
+      }
+    ]
+  },
+  "community-participation": {
+    themeSlug: "community-participation",
+    title: "市民参加と地域活動",
+    description: "ボランティア年間行動者率（10歳以上）・都道府県知事選挙投票率・図書館登録者数・まちづくり活動の年間行動者率（10歳以上）など、市民参加と地域活動に関する日本全国の統計を時系列で確認できます。",
+    keywords: [
+      "日本",
+      "全国",
+      "市民参加と地域活動",
+      "ボランティア年間行動者率（10歳以上）",
+      "都道府県知事選挙投票率",
+      "図書館登録者数",
+      "まちづくり活動の年間行動者率（10歳以上）"
+    ],
+    metrics: [
+      {
+        metricKey: "volunteer-activity-annual-participation-rate-10plus",
+        shortLabel: "ボランティア年間行動者率（10歳以上）"
+      },
+      {
+        metricKey: "voter-turnout-governor",
+        shortLabel: "都道府県知事選挙投票率"
+      },
+      {
+        metricKey: "library-registered-users",
+        shortLabel: "図書館登録者数"
+      },
+      {
+        metricKey: "community-building-volunteer-participation-rate-10plus",
+        shortLabel: "まちづくり活動の年間行動者率（10歳以上）"
+      }
+    ]
   },
 };
 

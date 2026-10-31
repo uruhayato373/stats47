@@ -2828,7 +2828,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2868,7 +2868,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2908,7 +2912,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2948,7 +2952,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -3222,7 +3226,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -3517,6 +3521,10 @@
         {
           "pageId": "area-theme:47000:public-assistance",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:public-assistance",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:persons-on-public-assistance-per-1000",
@@ -4005,7 +4013,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -4045,7 +4053,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -4683,6 +4691,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:disability-support",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:physical-disability-certificates-issued-per-1000",
           "kind": "ranking"
         },
@@ -4725,7 +4737,15 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:welfare-facilities",
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
           "kind": "municipality-theme"
         },
         {
@@ -4908,7 +4928,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -5025,7 +5045,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -5394,7 +5414,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -5864,7 +5884,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:medical-welfare",
+          "pageId": "municipality-theme:healthcare",
           "kind": "municipality-theme"
         },
         {
@@ -8806,7 +8826,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -8846,7 +8866,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -8886,7 +8906,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -8926,7 +8946,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -8966,7 +8986,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -9006,7 +9026,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure-by-sex",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -9046,7 +9066,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:age-structure",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {

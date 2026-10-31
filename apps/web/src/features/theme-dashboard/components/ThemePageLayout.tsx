@@ -1,24 +1,15 @@
 import { Suspense, type ReactNode } from 'react';
 
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
+import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PanelGrid } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
-import { StatisticsScopeNav } from '@/components/navigation';
 import {
   LinkRowFrame,
   linkRowItemClass,
@@ -40,16 +31,15 @@ import {
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
-import { themeHref } from '../config/theme-href';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { prefectureCityOptions } from '../lib/prefecture-city-options';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
 } from '../utils';
 
-import { PrefectureSelect } from './PrefectureSelect';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeChapterLinks } from './ThemeChapterLinks';
 import { ThemeCorrelatedMetrics } from './ThemeCorrelatedMetrics';
@@ -58,8 +48,8 @@ import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
 import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
+import { ThemeRegionNav } from './ThemeRegionNav';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 import type { ThemePageData } from '../lib/load-theme-data';
 import type { ThemeConfig } from '../types';
@@ -200,35 +190,19 @@ export async function ThemePageLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
           />
-          <Breadcrumb className="mb-4">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              {areaContext ? (
-                <>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink render={<Link href="/areas" />}>都道府県一覧</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink render={<Link href={hrefFor('area', { areaCode: areaContext.areaCode })} />}>
-                        {areaContext.areaName}
-                      </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>{theme.title}</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </>
-              ) : (
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{theme.title}</BreadcrumbPage>
-                </BreadcrumbItem>
-              )}
-            </BreadcrumbList>
-          </Breadcrumb>
+          {/* パンくずの各段と右端のアイコンから、地域・テーマを Sheet で選ぶ (2026-10-31 IA-REGION-THEME-01)。
+          旧: パンくずとは別に、地域単位のリンク・テーマのボタン・県の Select を並べた帯を置いていた */}
+          <div className="mb-4">
+            <ThemeRegionNav
+              themeKey={theme.themeKey}
+              themes={THEME_SWITCHER_THEMES}
+              areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+              hasAreaPages={isAreaTheme(theme.themeKey)}
+              hasMunicipalityPages={isAreaTheme(theme.themeKey) && Object.hasOwn(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, theme.themeKey)}
+              scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+              prefectureCities={areaContext ? prefectureCityOptions(areaContext.areaCode) : undefined}
+            />
+          </div>
 
           {/* h1 は狭幅ナビより先に置き、画面を開いた時点でページの主語を示す。
           hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
@@ -250,34 +224,6 @@ export async function ThemePageLayout({
           県ごとのページを持つテーマでは、県を選ぶとその県のページ (/areas/県/テーマ) へ移り、地域単位の切り替えは
           テーマのページと県のページの両方に置く (県×テーマの交点を 1 つの URL・同じ部品にする。2026-10-30) */}
           <div className="mb-4 flex flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-3">
-              <StatisticsScopeNav
-                current="prefectures"
-                // 「47都道府県」は同じテーマの 47都道府県の表示へ (県のページから戻る先。既定の /themes 一覧ではない)
-                hrefs={{ prefectures: themeHref(theme.themeKey), ...scopeHrefsForPrefectureTheme(theme.themeKey) }}
-                className="mb-0 w-auto"
-              />
-              <div
-                role="group"
-                aria-label="テーマと地域"
-                className="flex min-w-0 basis-full items-center gap-2 sm:flex-1 sm:basis-auto sm:justify-end"
-              >
-                <div className="min-w-0 flex-1 sm:flex-none">
-                  <ThemeSwitcher
-                    themes={THEME_SWITCHER_THEMES}
-                    currentThemeKey={theme.themeKey}
-                    areaContext={
-                      areaContext ? { areaCode: areaContext.areaCode } : undefined
-                    }
-                  />
-                </div>
-                <PrefectureSelect
-                  className="min-w-0 flex-1 sm:w-44 sm:flex-none"
-                  areaPageThemeKey={isAreaTheme(theme.themeKey) ? theme.themeKey : undefined}
-                />
-              </div>
-            </div>
-
             {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査)。
             狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (右端のフェードで続きを示すリンク列) */}
             {pageLinks.length > 1 && (
