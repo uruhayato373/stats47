@@ -362,6 +362,11 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > テーマは主要ナビの直後で 5 系統を既定で開き、カテゴリは既定で閉じた。`nav_surface` は `sidebar` / `sidebar-mobile` のままで、`nav_label` の値が変わる。
 > デプロイ前後のラベル別の件数を単純比較しない。
 >
+> **サイドバーの項目の変更 (2026-10-31・地域の 3 段)**: 「地域」を全国 (`/japan`)・都道府県 (`/areas`)・市区町村 (`/municipalities`) の
+> 3 段を開閉できる項目にし、`nav_label` に「全国」「都道府県」「市区町村」が加わる (「地域」は開閉のボタンになりクリックを送らない)。
+> テーマページの帯をパンくずと地域の Sheet に替え (`theme_region` は今までどおり)、市区町村の比較の現在地を地域の段に寄せた。
+> 登録済み `nav_surface` / `nav_label` の値の変化で新しい custom dimension は無い。デプロイ前後のラベル別の件数を単純比較しない。
+>
 > **nav_surface の値追加 (2026-10-28・県名×市区町村ランキング、MUNI-PREF-RANKING-ROUTE-01、未デプロイ)**: 新設した
 > `/municipalities/ranking/<key>/<県コード>` への導線 (全国版の「都道府県別に見る」・県別ページ同士の 47 県リンク・県ページの
 > 「県内の市町村ランキング」) に `municipality_prefecture` を付けた (`MunicipalityPrefectureLinks` / 県ページの `RailLinksCard`)。

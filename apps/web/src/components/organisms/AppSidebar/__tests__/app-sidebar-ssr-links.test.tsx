@@ -98,9 +98,12 @@ describe('AppSidebar', () => {
     ['/', '/'],
     ['/ranking/annual-income', '/ranking'],
     ['/category/laborwage', '/category/laborwage'],
-    ['/municipalities/themes/aging-society', '/themes'],
-    ['/areas/37000/cities/37203', '/areas'],
-    ['/municipalities/ranking/manufacturing-shipment-amount/23000', '/ranking'],
+    // 地域の 3 段をメニューに出した (2026-10-31): 市区町村の比較・市区町村のページは「市区町村」、全国は「全国」
+    ['/municipalities/themes/aging-society', '/municipalities'],
+    ['/areas/37000/cities/37203', '/municipalities'],
+    ['/municipalities/ranking/manufacturing-shipment-amount/23000', '/municipalities'],
+    ['/areas/37000', '/areas'],
+    ['/japan/labor-wages', '/japan'],
     ['/themes', '/themes'],
     [themeHref(NAV_THEMES[0].themeKey), themeHref(NAV_THEMES[0].themeKey)],
   ])('%s ではサイドバー内の現在地が %s の 1 件だけ', (pathname, expectedHref) => {

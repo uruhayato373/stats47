@@ -1,7 +1,8 @@
 {
-  "hash": "bc7a5266ff30aafa684478ce4704d6bca67b4b5375947a75d6fcba5e68ae9390",
-  "audited_at": "2026-10-31T00:59:50",
+  "hash": "e084db9ae49db0f0aa7c77b7ec655da8823c15f633990158e820404664fa04ba",
+  "audited_at": "2026-10-31T04:03:37",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md"
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/rules/ui-components.md"
   ]
 }

@@ -4,12 +4,14 @@ import {
   getActiveSidebarHref,
   HOME_NAV_ITEM,
   PRIMARY_NAV_ITEMS,
+  REGION_NAV_ITEMS,
 } from '../site-navigation';
 
 // サイドバーに並ぶ href の代表 (ホーム・主要ナビ (テーマ一覧を含む)・カテゴリ 2 件・テーマ 1 件)
 const HREFS = [
   HOME_NAV_ITEM.href,
-  ...PRIMARY_NAV_ITEMS.map((item) => item.href),
+  ...PRIMARY_NAV_ITEMS.map((item) => item.href).filter((href) => href !== '/areas'),
+  ...REGION_NAV_ITEMS.map((item) => item.href),
   '/category/laborwage',
   '/category/population',
   '/themes/population-dynamics',
@@ -27,12 +29,18 @@ describe('getActiveSidebarHref', () => {
     ['/category/population/compare', '/category/population'],
     ['/areas', '/areas'],
     ['/areas/13000', '/areas'],
-    // 地域単位は内容の中の切り口: 市区町村の比較は同じ内容の項目、市区町村ページは「地域」(2026-10-28)
-    ['/municipalities', '/ranking'],
-    ['/municipalities/ranking/example', '/ranking'],
-    ['/municipalities/ranking/example/23000', '/ranking'],
-    ['/municipalities/themes/population', '/themes'],
-    ['/areas/37000/cities/37203', '/areas'],
+    // 地域の 3 段 (全国・都道府県・市区町村) をメニューに出した (2026-10-31 オーナー決定)。
+    // 市区町村の比較・市区町村のページ・県内の市区町村の比較は「市区町村」、全国のテーマは「全国」
+    ['/municipalities', '/municipalities'],
+    ['/municipalities/ranking/example', '/municipalities'],
+    ['/municipalities/ranking/example/23000', '/municipalities'],
+    ['/municipalities/themes/population-dynamics', '/municipalities'],
+    ['/areas/37000/cities/37203', '/municipalities'],
+    ['/areas/37000/cities/37203/labor-wages', '/municipalities'],
+    ['/areas/28000/labor-wages/cities', '/municipalities'],
+    ['/areas/28000/labor-wages', '/areas'],
+    ['/japan', '/japan'],
+    ['/japan/labor-wages', '/japan'],
     ['/themes', '/themes'],
     ['/themes/population-dynamics', '/themes/population-dynamics'],
     ['/themes/other-theme', '/themes'],
