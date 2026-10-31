@@ -59,17 +59,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "public-assistance-indicator-1",
-      "title": "生活困窮者支援の新規相談受付件数",
-      "rankingKeys": [
-        "poverty-support-new-consultation-cases"
-      ],
-      "defaultCheckedKeys": [
-        "poverty-support-new-consultation-cases"
-      ]
-    },
-    {
-      "key": "public-assistance-indicator-2",
+      "key": "public-assistance-recipient-trend-1",
       "title": "生活保護被保護実人員（月平均・人口千人当たり）",
       "rankingKeys": [
         "persons-on-public-assistance-per-1000"
@@ -79,7 +69,7 @@
       ]
     },
     {
-      "key": "public-assistance-indicator-3",
+      "key": "public-assistance-households-and-budget-1",
       "title": "生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）",
       "rankingKeys": [
         "households-on-public-assistance-per-1000"
@@ -89,7 +79,7 @@
       ]
     },
     {
-      "key": "public-assistance-indicator-4",
+      "key": "public-assistance-households-and-budget-2",
       "title": "生活保護費（都道府県財政）",
       "rankingKeys": [
         "public-assistance-expenses-prefecture"
@@ -99,7 +89,17 @@
       ]
     },
     {
-      "key": "public-assistance-indicator-5",
+      "key": "poverty-support-consultation-1",
+      "title": "生活困窮者支援の新規相談受付件数",
+      "rankingKeys": [
+        "poverty-support-new-consultation-cases"
+      ],
+      "defaultCheckedKeys": [
+        "poverty-support-new-consultation-cases"
+      ]
+    },
+    {
+      "key": "public-assistance-facility-capacity-1",
       "title": "保護施設定員数（被保護実人員千人当たり）",
       "rankingKeys": [
         "public-assistance-facility-capacity-per-1000"
@@ -111,15 +111,36 @@
   ],
   "sections": [
     {
-      "key": "public-assistance-overview",
-      "title": "生活保護と生活困窮を都道府県別に見る",
-      "description": "生活保護の受給状況・保護費と、生活困窮者自立支援の新規相談受付件数を分けて比較します。2024年4月〜2025年3月の新規受付。管内市区町村を含む都道府県枠に、同じ県の指定都市・中核市の別掲分を一度ずつ加算する。継続相談の延べ回数や困窮者・生活保護受給者の人数ではない。実施機関の管轄を県に集約し、相談者の居住県別人数とはしない。人口10万人当たりの月平均値は使用しない。",
+      "key": "public-assistance-recipient-trend",
+      "title": "生活保護を受ける住民の割合はどのように推移しているか",
+      "concern": "地域で経済的に困窮し生活保護を必要とする人が増えているのか不安だ。",
       "metricGroupKeys": [
-        "public-assistance-indicator-1",
-        "public-assistance-indicator-2",
-        "public-assistance-indicator-3",
-        "public-assistance-indicator-4",
-        "public-assistance-indicator-5"
+        "public-assistance-recipient-trend-1"
+      ]
+    },
+    {
+      "key": "public-assistance-households-and-budget",
+      "title": "生活保護世帯の割合や自治体の財政負担はどのくらいか",
+      "concern": "生活保護を受給する世帯の多さや自治体財政への影響を知りたい。",
+      "metricGroupKeys": [
+        "public-assistance-households-and-budget-1",
+        "public-assistance-households-and-budget-2"
+      ]
+    },
+    {
+      "key": "poverty-support-consultation",
+      "title": "生活保護に至る前の生活困窮に関する相談はどれくらいあるか",
+      "concern": "生活困窮者のセーフティネットとなる相談窓口が機能しているか気になる。",
+      "metricGroupKeys": [
+        "poverty-support-consultation-1"
+      ]
+    },
+    {
+      "key": "public-assistance-facility-capacity",
+      "title": "受給者を支援する保護施設の受け入れ容量は十分か",
+      "concern": "施設入所が必要な受給者が適切に保護施設を利用できているか知りたい。",
+      "metricGroupKeys": [
+        "public-assistance-facility-capacity-1"
       ]
     }
   ],

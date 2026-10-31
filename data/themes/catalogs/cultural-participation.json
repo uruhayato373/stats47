@@ -194,7 +194,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "cultural-participation-indicator-1",
+      "key": "cultural-participation-1",
       "title": "美術鑑賞の行動者率",
       "rankingKeys": [
         "hobby-participation-rate-art-appreciation"
@@ -204,7 +204,7 @@
       ]
     },
     {
-      "key": "cultural-participation-indicator-2",
+      "key": "cultural-participation-2",
       "title": "演芸・演劇・舞踊鑑賞の行動者率",
       "rankingKeys": [
         "hobby-participation-rate-theater"
@@ -214,7 +214,7 @@
       ]
     },
     {
-      "key": "cultural-participation-indicator-3",
+      "key": "cultural-participation-3",
       "title": "クラシック音楽鑑賞の行動者率",
       "rankingKeys": [
         "hobby-participation-rate-classical-music"
@@ -224,7 +224,7 @@
       ]
     },
     {
-      "key": "cultural-participation-indicator-4",
+      "key": "cultural-participation-4",
       "title": "絵画・彫刻の制作の行動者率",
       "rankingKeys": [
         "hobby-participation-rate-painting"
@@ -234,7 +234,7 @@
       ]
     },
     {
-      "key": "cultural-participation-indicator-5",
+      "key": "cultural-facilities-1",
       "title": "図書館館外貸出冊数",
       "rankingKeys": [
         "library-lending-books"
@@ -244,7 +244,7 @@
       ]
     },
     {
-      "key": "cultural-participation-indicator-6",
+      "key": "cultural-facilities-2",
       "title": "博物館総数",
       "rankingKeys": [
         "total-museum-count"
@@ -254,76 +254,60 @@
       ]
     },
     {
-      "key": "candidate-119-1",
-      "title": "男性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "key": "leisure-and-relaxation-time-1",
+      "title": "男性と女性の休養・くつろぎ時間",
       "rankingKeys": [
-        "relaxation-avg-time-male"
-      ],
-      "defaultCheckedKeys": [
-        "relaxation-avg-time-male"
-      ]
-    },
-    {
-      "key": "candidate-119-2",
-      "title": "女性の休養・くつろぎ時間（週全体総平均・分/日）",
-      "rankingKeys": [
+        "relaxation-avg-time-male",
         "relaxation-avg-time-female"
       ],
       "defaultCheckedKeys": [
+        "relaxation-avg-time-male",
         "relaxation-avg-time-female"
-      ]
-    },
-    {
-      "key": "candidate-115-1",
-      "title": "有業男性の趣味・娯楽時間（週全体総平均・分/日）",
-      "rankingKeys": [
-        "hobby-leisure-avg-time-employed-male"
       ],
-      "defaultCheckedKeys": [
-        "hobby-leisure-avg-time-employed-male"
-      ]
+      "view": "sex"
     },
     {
-      "key": "candidate-115-2",
-      "title": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
+      "key": "leisure-and-relaxation-time-2",
+      "title": "有業男性と有業女性の趣味・娯楽時間",
       "rankingKeys": [
+        "hobby-leisure-avg-time-employed-male",
         "hobby-leisure-avg-time-employed-female"
       ],
       "defaultCheckedKeys": [
+        "hobby-leisure-avg-time-employed-male",
         "hobby-leisure-avg-time-employed-female"
-      ]
+      ],
+      "view": "sex"
     }
   ],
   "sections": [
     {
-      "key": "cultural-participation-overview",
-      "title": "文化芸術への参加を都道府県別に見る",
-      "description": "美術・演劇などの鑑賞行動者率、図書館利用、博物館数を参加・施設の軸に分けて比較します。行動者率と施設数を合算しません。",
+      "key": "cultural-participation",
+      "title": "地域で文化芸術の鑑賞や制作活動に親しむ機会はあるか",
+      "concern": "日々の生活で美術鑑賞や舞台芸術、創作活動に親しむ機会があるか気になります。",
       "metricGroupKeys": [
-        "cultural-participation-indicator-1",
-        "cultural-participation-indicator-2",
-        "cultural-participation-indicator-3",
-        "cultural-participation-indicator-4",
-        "cultural-participation-indicator-5",
-        "cultural-participation-indicator-6"
+        "cultural-participation-1",
+        "cultural-participation-2",
+        "cultural-participation-3",
+        "cultural-participation-4"
       ]
     },
     {
-      "key": "candidate-119",
-      "title": "休養・くつろぎの時間",
-      "description": "2021年社会生活基本調査の、休養・くつろぎに使う1日当たり時間です。週全体の総平均を男女別に比較します。上の趣味・娯楽時間は有業者に限る系列なので、これらを足して総余暇時間にはしません。",
+      "key": "cultural-facilities",
+      "title": "博物館や図書館など身近な文化施設は充実しているか",
+      "concern": "身近な地域に博物館や図書館など文化に触れられる施設があるか不安です。",
       "metricGroupKeys": [
-        "candidate-119-1",
-        "candidate-119-2"
+        "cultural-facilities-1",
+        "cultural-facilities-2"
       ]
     },
     {
-      "key": "candidate-115",
-      "title": "文化・趣味への参加と使う時間",
-      "description": "2021年社会生活基本調査の有業者について、趣味・娯楽に使う1日当たり時間を男女別に比較します。週全体の総平均なので、調査日にその活動をしなかった人も含みます。文化芸術以外のゲームや観光なども含む時間です。",
+      "key": "leisure-and-relaxation-time",
+      "title": "趣味や娯楽、くつろぎ時間をどれくらい確保できているか",
+      "concern": "忙しい生活の中で趣味・娯楽や休養の時間を十分に確保できているか心配です。",
       "metricGroupKeys": [
-        "candidate-115-1",
-        "candidate-115-2"
+        "leisure-and-relaxation-time-1",
+        "leisure-and-relaxation-time-2"
       ]
     }
   ],

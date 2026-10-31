@@ -127,7 +127,7 @@
     {
       "rankingKey": "university-count",
       "shortLabel": "大学数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "学校基本調査（政府統計の総合窓口 e-Stat 掲載「調査の概要」、文部科学省実施）",
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003274920",
@@ -144,7 +144,7 @@
     {
       "rankingKey": "elementary-school-count",
       "shortLabel": "小学校数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "文部科学省が令和6年度学校基本調査結果を公表（NIC-Japan、高等教育資格承認情報センター）",
         "sourceUrl": "https://www.nicjp.niad.ac.jp/news/schoolbasicsurvey2024.html",
@@ -161,7 +161,7 @@
     {
       "rankingKey": "junior-high-school-count",
       "shortLabel": "中学校数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "文部科学省が令和6年度学校基本調査結果を公表（NIC-Japan、高等教育資格承認情報センター）",
         "sourceUrl": "https://www.nicjp.niad.ac.jp/news/schoolbasicsurvey2024.html",
@@ -568,7 +568,7 @@
       ]
     },
     {
-      "key": "candidate-52-1",
+      "key": "school-environment-and-closures-1",
       "title": "公立学校廃校発生数（2004〜2023年度累計）",
       "rankingKeys": [
         "public-school-closures-cumulative"
@@ -578,57 +578,7 @@
       ]
     },
     {
-      "key": "candidate-52-2",
-      "title": "小学校数",
-      "rankingKeys": [
-        "elementary-school-count"
-      ],
-      "defaultCheckedKeys": [
-        "elementary-school-count"
-      ]
-    },
-    {
-      "key": "candidate-52-3",
-      "title": "中学校数",
-      "rankingKeys": [
-        "junior-high-school-count"
-      ],
-      "defaultCheckedKeys": [
-        "junior-high-school-count"
-      ]
-    },
-    {
-      "key": "candidate-53-1",
-      "title": "高等学校卒業者の進学率",
-      "rankingKeys": [
-        "high-school-advancement-rate"
-      ],
-      "defaultCheckedKeys": [
-        "high-school-advancement-rate"
-      ]
-    },
-    {
-      "key": "candidate-54-1",
-      "title": "大学数",
-      "rankingKeys": [
-        "university-count"
-      ],
-      "defaultCheckedKeys": [
-        "university-count"
-      ]
-    },
-    {
-      "key": "candidate-54-2",
-      "title": "大学数（人口10万人当たり）",
-      "rankingKeys": [
-        "university-count-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "university-count-per-100k"
-      ]
-    },
-    {
-      "key": "candidate-55-1",
+      "key": "school-environment-and-closures-2",
       "title": "小学校教育費",
       "rankingKeys": [
         "elementary-school-education-cost-per-student"
@@ -638,7 +588,39 @@
       ]
     },
     {
-      "key": "candidate-56-1",
+      "key": "higher-education-and-advancement-1",
+      "title": "高等学校卒業者の進学率",
+      "rankingKeys": [
+        "high-school-advancement-rate"
+      ],
+      "defaultCheckedKeys": [
+        "high-school-advancement-rate"
+      ]
+    },
+    {
+      "key": "higher-education-and-advancement-2",
+      "title": "大学数（人口10万人当たり）",
+      "rankingKeys": [
+        "university-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "university-count-per-100k"
+      ]
+    },
+    {
+      "key": "lifelong-learning-and-libraries-1",
+      "title": "図書館の蔵書冊数と貸出冊数の推移",
+      "rankingKeys": [
+        "library-books",
+        "library-lending-books"
+      ],
+      "defaultCheckedKeys": [
+        "library-books",
+        "library-lending-books"
+      ]
+    },
+    {
+      "key": "lifelong-learning-and-libraries-2",
       "title": "商業実務・ビジネス関係の学習行動者率",
       "rankingKeys": [
         "study-participation-rate-business"
@@ -648,57 +630,19 @@
       ]
     },
     {
-      "key": "candidate-113-1",
-      "title": "図書館蔵書数",
+      "key": "cultural-facilities-and-arts-1",
+      "title": "施設種別ごとの博物館等入館者数内訳",
       "rankingKeys": [
-        "library-books"
-      ],
-      "defaultCheckedKeys": [
-        "library-books"
-      ]
-    },
-    {
-      "key": "candidate-113-2",
-      "title": "図書館貸出冊数",
-      "rankingKeys": [
-        "library-lending-books"
-      ],
-      "defaultCheckedKeys": [
-        "library-lending-books"
-      ]
-    },
-    {
-      "key": "candidate-114-1",
-      "title": "登録博物館の入館者数",
-      "rankingKeys": [
-        "registered-museum-visitors"
+        "registered-museum-visitors",
+        "designated-museum-visitors",
+        "museum-like-facility-visitors"
       ],
       "defaultCheckedKeys": [
         "registered-museum-visitors"
       ]
     },
     {
-      "key": "candidate-114-2",
-      "title": "指定施設の入館者数",
-      "rankingKeys": [
-        "designated-museum-visitors"
-      ],
-      "defaultCheckedKeys": [
-        "designated-museum-visitors"
-      ]
-    },
-    {
-      "key": "candidate-114-3",
-      "title": "博物館類似施設の入館者数",
-      "rankingKeys": [
-        "museum-like-facility-visitors"
-      ],
-      "defaultCheckedKeys": [
-        "museum-like-facility-visitors"
-      ]
-    },
-    {
-      "key": "candidate-114-4",
+      "key": "cultural-facilities-and-arts-2",
       "title": "博物館総数",
       "rankingKeys": [
         "total-museum-count"
@@ -708,7 +652,7 @@
       ]
     },
     {
-      "key": "candidate-114-5",
+      "key": "cultural-facilities-and-arts-3",
       "title": "美術博物館数",
       "rankingKeys": [
         "art-museum-count"
@@ -718,7 +662,7 @@
       ]
     },
     {
-      "key": "candidate-116-1",
+      "key": "cultural-property-preservation-1",
       "title": "県指定等文化財件数",
       "rankingKeys": [
         "prefecture-designated-cultural-property-count"
@@ -728,7 +672,7 @@
       ]
     },
     {
-      "key": "candidate-116-2",
+      "key": "cultural-property-preservation-2",
       "title": "県政府の文化財保護経費",
       "rankingKeys": [
         "prefectural-cultural-property-protection-expenditure"
@@ -738,7 +682,7 @@
       ]
     },
     {
-      "key": "candidate-116-3",
+      "key": "cultural-property-preservation-3",
       "title": "埋蔵文化財専門職員数",
       "rankingKeys": [
         "buried-cultural-property-specialist-count"
@@ -796,6 +740,43 @@
       "sortOrder": 20,
       "annotation": "国勢調査の最終学歴における卒業者総数が分母です。住民全員や当年の高校卒業者・大学入学者に対する割合ではありません。",
       "section": "higher-education"
+    },
+    {
+      "componentKey": "education-culture-cultural-facilities-and-arts-composition-1",
+      "componentType": "composition-chart",
+      "title": "施設種別ごとの博物館等入館者数内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "registered-museum-visitors",
+            "label": "登録博物館の入館者数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "designated-museum-visitors",
+            "label": "指定施設の入館者数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "museum-like-facility-visitors",
+            "label": "博物館類似施設の入館者数",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "registered-museum-visitors",
+        "designated-museum-visitors",
+        "museum-like-facility-visitors"
+      ],
+      "sourceName": "社会教育調査",
+      "sourceLink": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040439522&fileKind=0",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "cultural-facilities-and-arts",
+      "sortOrder": 100
     }
   ],
   "evidenceTopics": [
@@ -835,12 +816,12 @@
         "final-education-university-graduate-school-ratio",
         "in-pref-university-entrance-ratio-by-highschool-origin"
       ],
-      "relatedChartKeys": [
-        "theme-edu-higher-education-trend"
-      ],
       "relatedThemeKeys": [
         "labor-mobility",
         "population-dynamics"
+      ],
+      "relatedChartKeys": [
+        "theme-edu-higher-education-trend"
       ]
     },
     {
@@ -885,8 +866,7 @@
       "metricGroupKeys": [
         "schools-1",
         "schools-2"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "higher-education",
@@ -907,80 +887,59 @@
       "metricGroupKeys": [
         "culture-1",
         "culture-2"
-      ],
-      "chartKeys": []
-    },
-    {
-      "key": "candidate-52",
-      "title": "学校の規模と廃校の実績",
-      "description": "学校数の推移と、2004〜2023年度の公立学校廃校発生延べ数を別々に確認します。廃校の累計は2024年5月1日現在に把握した実績で、単年度件数や現存施設数ではありません。県別の廃校活用率はこの原表から算出できません。",
-      "metricGroupKeys": [
-        "candidate-52-1",
-        "candidate-52-2",
-        "candidate-52-3"
       ]
     },
     {
-      "key": "candidate-53",
-      "title": "高校卒業後の進路",
-      "description": "2025年3月に国公私立高校の全日制・定時制を卒業した人を、卒業校の所在地別に8つの進路へ分けます。進学しながら就職している人は進学区分の内数で、不詳・死亡は独立した区分です。通信制高校などを含まず、進学率カードとは対象年と定義を分けて読みます。",
+      "key": "school-environment-and-closures",
+      "title": "身近な学校環境や小中学校の統廃合リスクはどう推移しているか",
+      "concern": "少子化に伴う学校の統廃合や通学距離の遠大化、教員の負担感が気になります。",
       "metricGroupKeys": [
-        "candidate-53-1"
+        "school-environment-and-closures-1",
+        "school-environment-and-closures-2"
+      ]
+    },
+    {
+      "key": "higher-education-and-advancement",
+      "title": "地元での進学機会や大学の選択肢は十分にあるか",
+      "concern": "地元に大学が少なく進学時に県外へ流出してしまわないかや選択肢の少なさが心配です。",
+      "metricGroupKeys": [
+        "higher-education-and-advancement-1",
+        "higher-education-and-advancement-2"
       ],
       "embeddedSectionKeys": [
         "graduation-paths"
       ]
     },
     {
-      "key": "candidate-54",
-      "title": "大学と地域人材",
+      "key": "lifelong-learning-and-libraries",
+      "title": "図書館や公民館など身近な生涯学習の環境は整っているか",
+      "concern": "身近に図書館や公民館があり、読書や学び直しができる環境があるか気になります。",
       "metricGroupKeys": [
-        "candidate-54-1",
-        "candidate-54-2"
+        "lifelong-learning-and-libraries-1",
+        "lifelong-learning-and-libraries-2"
       ]
     },
     {
-      "key": "candidate-55",
-      "title": "教育費と学習環境",
+      "key": "cultural-facilities-and-arts",
+      "title": "博物館や美術鑑賞など文化・芸術に触れる機会はあるか",
+      "concern": "地域で美術鑑賞や演劇などの文化芸術活動に親しむ施設や機会があるか不安です。",
       "metricGroupKeys": [
-        "candidate-55-1"
+        "cultural-facilities-and-arts-1",
+        "cultural-facilities-and-arts-2",
+        "cultural-facilities-and-arts-3"
+      ],
+      "chartKeys": [
+        "education-culture-cultural-facilities-and-arts-composition-1"
       ]
     },
     {
-      "key": "candidate-56",
-      "title": "生涯学習と学び直し",
+      "key": "cultural-property-preservation",
+      "title": "地域の歴史的文化財の保護や専門体制は維持されているか",
+      "concern": "地域の歴史的な文化財や遺跡が適切に保護され後世に継承されているか気になります。",
       "metricGroupKeys": [
-        "candidate-56-1"
-      ]
-    },
-    {
-      "key": "candidate-113",
-      "title": "図書館と読書環境",
-      "metricGroupKeys": [
-        "candidate-113-1",
-        "candidate-113-2"
-      ]
-    },
-    {
-      "key": "candidate-114",
-      "title": "博物館・美術館の供給と利用",
-      "description": "2023年度の入館者数を登録博物館・指定施設・博物館類似施設に分けます。美術博物館のほか科学・歴史博物館や動植物園等を含むため、美術館だけの利用者数ではありません。特別展は内数で、実人数や住民利用率とも異なります。施設数とは年と法的区分を揃えるまで1施設当たり値を作りません。",
-      "metricGroupKeys": [
-        "candidate-114-1",
-        "candidate-114-2",
-        "candidate-114-3",
-        "candidate-114-4",
-        "candidate-114-5"
-      ]
-    },
-    {
-      "key": "candidate-116",
-      "title": "文化財の指定・保護と所在地",
-      "description": "県指定等文化財件数、県政府の保護経費、県・市町村・調査組織の埋蔵文化財専門職員を別々に比較します。指定件数・職員は2025年5月、保護経費は2024年度です。対象範囲が異なるため、1件当たり経費・職員には換算しません。別表では2026年9月11日に国指定文化財等DBへ収録された特別史跡・特別名勝・特別天然記念物167件の種類・名称・所在地を確認できます。県指定文化財とは別の範囲で、地域を定めない14件は県へ配分しません。",
-      "metricGroupKeys": [
-        "candidate-116-1",
-        "candidate-116-2",
-        "candidate-116-3"
+        "cultural-property-preservation-1",
+        "cultural-property-preservation-2",
+        "cultural-property-preservation-3"
       ],
       "embeddedSectionKeys": [
         "cultural-heritage-locations"

@@ -23,7 +23,7 @@ export const ENVIRONMENTAL_QUALITY_SET: IndicatorSet = {
     {
       "rankingKey": "pm25-valid-general-station-count",
       "shortLabel": "PM2.5有効測定局数（一般局）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "pm25-general-station-count",

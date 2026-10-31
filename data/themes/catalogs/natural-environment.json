@@ -28,7 +28,7 @@
     {
       "rankingKey": "artificial-forest-area",
       "shortLabel": "人工造林面積",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -69,7 +69,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "natural-environment-indicator-1",
+      "key": "forest-coverage-1",
       "title": "森林面積",
       "rankingKeys": [
         "woodland-area"
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "key": "natural-environment-indicator-2",
+      "key": "forest-coverage-2",
       "title": "林野面積割合",
       "rankingKeys": [
         "forest-area-ratio"
@@ -89,37 +89,19 @@
       ]
     },
     {
-      "key": "natural-environment-indicator-3",
-      "title": "人工造林面積",
+      "key": "nature-conservation-area-1",
+      "title": "自然環境保全地域面積と自然公園面積の推移",
       "rankingKeys": [
-        "artificial-forest-area"
-      ],
-      "defaultCheckedKeys": [
-        "artificial-forest-area"
-      ]
-    },
-    {
-      "key": "natural-environment-indicator-4",
-      "title": "自然環境保全地域面積",
-      "rankingKeys": [
-        "natural-environment-conservation-area"
-      ],
-      "defaultCheckedKeys": [
-        "natural-environment-conservation-area"
-      ]
-    },
-    {
-      "key": "natural-environment-indicator-5",
-      "title": "自然公園面積",
-      "rankingKeys": [
+        "natural-environment-conservation-area",
         "nature-park-area"
       ],
       "defaultCheckedKeys": [
+        "natural-environment-conservation-area",
         "nature-park-area"
       ]
     },
     {
-      "key": "natural-environment-indicator-6",
+      "key": "national-park-visitors-1",
       "title": "国立・国定公園の年間延べ利用者数",
       "rankingKeys": [
         "national-quasi-national-park-visits"
@@ -131,16 +113,28 @@
   ],
   "sections": [
     {
-      "key": "natural-environment-overview",
-      "title": "森林と自然環境を都道府県別に見る",
-      "description": "森林面積・林野面積割合、人工造林面積、自然環境保全地域、自然公園を別々に比較します。人工造林面積は植林した面積で、人工林全体の面積ではありません。保全地域と森林面積を足して自然面積とは扱いません。2024年の国立・国定公園の年間延べ利用者数も比較できます。利用者数は県立公園を含まないため、自然公園全体の面積との比率は計算しません。",
+      "key": "forest-coverage",
+      "title": "地域の国土に森林はどれくらい広がっているか",
+      "concern": "自然災害の防止や環境保全の基盤となる森林がどれだけ存在するか知りたい。",
       "metricGroupKeys": [
-        "natural-environment-indicator-1",
-        "natural-environment-indicator-2",
-        "natural-environment-indicator-3",
-        "natural-environment-indicator-4",
-        "natural-environment-indicator-5",
-        "natural-environment-indicator-6"
+        "forest-coverage-1",
+        "forest-coverage-2"
+      ]
+    },
+    {
+      "key": "nature-conservation-area",
+      "title": "自然環境保全地域や自然公園の保全状況はどう推移しているか",
+      "concern": "豊かな生態系や自然景観が指定地域として継続的に保全されているか気になる。",
+      "metricGroupKeys": [
+        "nature-conservation-area-1"
+      ]
+    },
+    {
+      "key": "national-park-visitors",
+      "title": "国立公園や国定公園はどれくらい人々に利用されているか",
+      "concern": "地域内の豊かな自然がレクリエーションや観光の場として活用されているか知りたい。",
+      "metricGroupKeys": [
+        "national-park-visitors-1"
       ]
     }
   ],

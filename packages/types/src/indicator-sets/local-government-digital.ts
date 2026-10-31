@@ -23,7 +23,7 @@ export const LOCAL_GOVERNMENT_DIGITAL_SET: IndicatorSet = {
     {
       "rankingKey": "prefectural-dx-applicable-procedure-count",
       "shortLabel": "実施している対象手続数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "prefectural-eltax-online-application-rate",

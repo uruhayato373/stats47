@@ -7,6 +7,7 @@ import { lookupArea } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
+import { resolveChartColorHex, type CatalogMetricGroup, type CatalogSection } from '@stats47/data-configs/theme-catalog';
 import { metricDisplayName } from "@stats47/ranking";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -21,7 +22,6 @@ import {
   type ThemeIndicatorData,
 } from '../types';
 
-import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
 import {
   isMultiMetricGroup,
   isSingleMetricGroup,
@@ -31,13 +31,8 @@ import {
 } from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
 import { SingleMetricCard } from './SingleMetricCard';
-import { ThemeComparisonSection } from './ThemeComparisonSection';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
-import type {
-  CatalogMetricGroup,
-  CatalogSection,
-} from '@stats47/data-configs/theme-catalog';
 
 interface Props {
   /** テーマ設定 */
@@ -147,9 +142,10 @@ export function ThemeMetricsDashboard({
 
   const kpiKeys = useMemo(
     () =>
+      // カードに並べると決めた指標は role (context を含む) に関わらず値を出す
       [...new Set([
         ...themeConfig.tabIndicators.map((t) => t.rankingKey),
-        ...(metricGroups ?? []).filter((group) => group.comparisonYear).flatMap((group) => group.rankingKeys),
+        ...(metricGroups ?? []).flatMap((group) => group.rankingKeys),
       ])].filter(
           (k) =>
             indicatorDataMap[k] &&
@@ -180,6 +176,11 @@ export function ThemeMetricsDashboard({
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
+      const position = {
+        rankedValues: rankedFiniteValues(d.rankingValues),
+        nationalValue: d.nationalValue,
+        isSingleYear: (d.availableYears ?? d.rankingItem.availableYears ?? []).length <= 1,
+      };
 
       if (selectedPrefectureCode) {
         return {
@@ -191,6 +192,7 @@ export function ThemeMetricsDashboard({
           rank: target?.rank ?? null,
           total,
           ...source,
+          ...position,
           series: d.nationalSeries ?? [],
           topRanked: null,
           isLoading: false,
@@ -220,6 +222,7 @@ export function ThemeMetricsDashboard({
         rank: null,
         total,
         ...source,
+        ...position,
         series: d.nationalSeries ?? [],
         topRanked,
         isLoading: false,
@@ -252,8 +255,7 @@ export function ThemeMetricsDashboard({
   const panels = useMemo(() => {
     type Panel = {
       key: string;
-      comparisonYear: string | undefined;
-      comparisonMap: boolean | undefined;
+      view: CatalogMetricGroup['view'];
       title: string | undefined;
       metrics: SingleMetricGroup | MultiMetricGroup;
       defaultCheckedKeys: string[];
@@ -268,8 +270,7 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
-              comparisonYear: undefined,
-              comparisonMap: undefined,
+              view: undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
               title: undefined,
@@ -292,8 +293,7 @@ export function ThemeMetricsDashboard({
       return [
         {
           key: group.key,
-          comparisonYear: group.comparisonYear,
-          comparisonMap: group.comparisonMap,
+          view: group.view,
           title: group.title as string | undefined,
           metrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
@@ -329,25 +329,12 @@ export function ThemeMetricsDashboard({
   type Panel = (typeof panels)[number];
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
-    !panel.comparisonYear && isSingleMetricGroup(panel.metrics);
+    isSingleMetricGroup(panel.metrics);
   /**
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.comparisonYear ? (
-    <FixedYearComparisonPanel
-      key={panel.key}
-      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
-      title={panel.title}
-      metrics={panel.metrics}
-      comparisonYear={panel.comparisonYear}
-      indicatorDataMap={indicatorDataMap}
-      selectedPrefectureCode={selectedPrefectureCode}
-      defaultMetricKey={panel.defaultCheckedKeys[0]}
-      tabLabels={tabLabels}
-      showMap={panel.comparisonMap}
-    />
-  ) : isSingleMetricGroup(panel.metrics) ? (
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -370,6 +357,7 @@ export function ThemeMetricsDashboard({
       areaName={areaName}
       defaultCheckedKeys={panel.defaultCheckedKeys}
       annotation={annotation}
+      seriesColors={panel.view === 'sex' ? sexSeriesColors(panel.metrics) : undefined}
     />
   );
   /**
@@ -512,7 +500,6 @@ export function ThemeMetricsDashboard({
     const mergedPanel = merged
       ? chapter.panels.find(
           (panel) =>
-            !panel.comparisonYear &&
             !isSingleMetricGroup(panel.metrics) &&
             chartDuplicatesMetrics(merged, panel.metrics.map((metric) => metric.metricKey))
         )
@@ -604,14 +591,6 @@ export function ThemeMetricsDashboard({
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-      {!cardsOnly && (
-        <ThemeComparisonSection
-          themeConfig={themeConfig}
-          metricGroups={metricGroups}
-          indicatorDataMap={indicatorDataMap}
-          selectedPrefectureCode={selectedPrefectureCode}
-        />
-      )}
       {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
         <PanelGrid>
@@ -620,6 +599,23 @@ export function ThemeMetricsDashboard({
       )}
     </PanelGrid>
   );
+}
+
+/** 47 都道府県の値を順位の順に並べる (単年の指標で、その県が 47 の中のどこにいるかを描く) */
+function rankedFiniteValues(values: ThemeIndicatorData['rankingValues']): number[] {
+  return values
+    .filter((v) => typeof v.rank === 'number' && typeof v.value === 'number' && Number.isFinite(v.value))
+    .sort((a, b) => (a.rank as number) - (b.rank as number))
+    .map((v) => v.value as number);
+}
+
+/** 男女の比較のカード ([男, 女]) の系列色。色の意味はチャートの色の役割 (chart-color-role) にそろえる */
+function sexSeriesColors(metrics: readonly MetricKpi[]): Record<string, string> {
+  const [male, female] = metrics;
+  return {
+    ...(male ? { [male.metricKey]: resolveChartColorHex('male') } : {}),
+    ...(female ? { [female.metricKey]: resolveChartColorHex('female') } : {}),
+  };
 }
 
 /** 系列の名前を凡例 (D3ChartLegend) に並べるチャートの種類。ほかの種類 (構成比・ドーナツ・物価など) は凡例の形が違う */

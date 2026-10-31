@@ -38,7 +38,7 @@
     {
       "rankingKey": "residential-official-land-point-count",
       "shortLabel": "住宅地の公示標準地数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -69,27 +69,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "land-property-market-indicator-1",
-      "title": "住宅地の取引単価中央値（100〜300㎡未満）",
-      "rankingKeys": [
-        "residential-land-transaction-median-price"
-      ],
-      "defaultCheckedKeys": [
-        "residential-land-transaction-median-price"
-      ]
-    },
-    {
-      "key": "land-property-market-indicator-2",
-      "title": "住宅地の取引価格標本数",
-      "rankingKeys": [
-        "residential-land-transaction-sample-count"
-      ],
-      "defaultCheckedKeys": [
-        "residential-land-transaction-sample-count"
-      ]
-    },
-    {
-      "key": "land-property-market-indicator-3",
+      "key": "residential-land-prices-1",
       "title": "住宅地の公示価格中央値（100〜300㎡未満）",
       "rankingKeys": [
         "residential-official-land-median-price"
@@ -99,17 +79,27 @@
       ]
     },
     {
-      "key": "land-property-market-indicator-4",
-      "title": "住宅地の公示標準地数",
+      "key": "residential-land-prices-2",
+      "title": "住宅地の取引単価中央値（100〜300㎡未満）",
       "rankingKeys": [
-        "residential-official-land-point-count"
+        "residential-land-transaction-median-price"
       ],
       "defaultCheckedKeys": [
-        "residential-official-land-point-count"
+        "residential-land-transaction-median-price"
       ]
     },
     {
-      "key": "land-property-market-indicator-5",
+      "key": "residential-land-prices-3",
+      "title": "住宅地の取引価格標本数",
+      "rankingKeys": [
+        "residential-land-transaction-sample-count"
+      ],
+      "defaultCheckedKeys": [
+        "residential-land-transaction-sample-count"
+      ]
+    },
+    {
+      "key": "residential-land-price-trends-1",
       "title": "住宅地地価変動率",
       "rankingKeys": [
         "residential-land-price-change-rate"
@@ -119,7 +109,7 @@
       ]
     },
     {
-      "key": "land-property-market-indicator-6",
+      "key": "industrial-land-price-trends-1",
       "title": "標準価格変動率（工業地）",
       "rankingKeys": [
         "industrial-land-price-change-rate"
@@ -131,19 +121,32 @@
   ],
   "sections": [
     {
-      "key": "land-property-market-overview",
-      "title": "不動産取引と地価を都道府県別に見る",
-      "description": "2025年の住宅地について、100㎡以上300㎡未満の土地の取引単価と公示価格の分布・標本数を示します。住宅地の区分と基準時点が異なるため、両系列は分けて読みます。住宅地・工業地の地価変動率も確認できます。",
+      "key": "residential-land-prices",
+      "title": "住宅地の実際の取引価格や公示価格の相場はどれくらいか",
+      "concern": "マイホーム購入や土地売買の検討にあたり実際の取引単価や公示価格の相場感がわかりません。",
       "metricGroupKeys": [
-        "land-property-market-indicator-1",
-        "land-property-market-indicator-2",
-        "land-property-market-indicator-3",
-        "land-property-market-indicator-4",
-        "land-property-market-indicator-5",
-        "land-property-market-indicator-6"
+        "residential-land-prices-1",
+        "residential-land-prices-2",
+        "residential-land-prices-3"
       ],
       "embeddedSectionKeys": [
         "property-prices"
+      ]
+    },
+    {
+      "key": "residential-land-price-trends",
+      "title": "住宅地の地価は上昇傾向にあるか下落傾向にあるか",
+      "concern": "住宅地の価格変動や今後の地価動向が資産価値や売買タイミングにどう影響するか不安です。",
+      "metricGroupKeys": [
+        "residential-land-price-trends-1"
+      ]
+    },
+    {
+      "key": "industrial-land-price-trends",
+      "title": "工業地の地価や標準価格は長期的にどのように推移しているか",
+      "concern": "産業立地や物流拠点等の検討において工業地の地価の長期推移や価格動向が気になります。",
+      "metricGroupKeys": [
+        "industrial-land-price-trends-1"
       ]
     }
   ],

@@ -5,6 +5,7 @@ export const newCondoStarts: MetricConfig = {
   "key": "new-condo-starts",
   "title": "着工新設分譲住宅数",
   "unit": "戸",
+  "description": "国土交通省『建築着工統計調査』の新設住宅のうち、利用関係が「分譲住宅」(建て売り・分譲の目的で建てる住宅) の着工戸数。社会・人口統計体系の都道府県別の値。",
   "category": "construction",
   "source": {
     "kind": "estat",

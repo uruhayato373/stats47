@@ -60,8 +60,6 @@ async function main() {
       count: number;
       cards: number;
       expectedCards: number;
-      expectedFixedYears: string[];
-      fixedTables: { year: string; rows: number }[];
     }[];
     expectedChartKeys: string[];
     cards: { state: string | null }[];
@@ -215,7 +213,6 @@ async function main() {
             count,
             cards: -1,
             ...expectedSectionPanels(catalog, section),
-            fixedTables: [],
           });
           if (count) await locator.first().scrollIntoViewIfNeeded();
         }
@@ -241,21 +238,6 @@ async function main() {
               `#theme-section-${section.key} [data-theme-component-type="kpi-card"]`
             )
             .count();
-        }
-        for (const section of r.sections) {
-          section.fixedTables = await page
-            .locator(
-              `#theme-section-${section.key} table[aria-label$="年の都道府県比較"]`
-            )
-            .evaluateAll((tables) =>
-              tables.map((table) => ({
-                year: (table.getAttribute('aria-label') ?? '').replace(
-                  '年の都道府県比較',
-                  ''
-                ),
-                rows: table.querySelectorAll('tbody tr').length,
-              }))
-            );
         }
         r.h1 = await page.locator('h1').allTextContents();
         r.cards = await page

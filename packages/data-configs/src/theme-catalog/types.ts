@@ -188,13 +188,11 @@ export interface CatalogChart {
  */
 export interface CatalogMetricGroup {
   /**
-   * 固定年の県別比較の起点の年。指定時は時系列を描かない。グループの全指標に値がそろう、より新しい年が R2 に
-   * 入れば実行時にその最新年へ進む (`resolve-comparison-years.ts`)。1 指標でも欠ける年へは進めず、
-   * 指標ごとの最新年へも代替しない。
+   * 見せ方の型 (2026-10-31)。省略時はデータの形で決まる (複数年 = 推移・単年 = 数値と 47 都道府県の中の位置)。
+   * 47 都道府県を比べる図はテーマに置かず、ランキングのページが受け持つ (オーナー決定)。`sex` は rankingKeys を [男, 女] の 2 件にし、男女の色で重ねて比べる。
+   * 問いの型との対応は theme-catalog-standards.md §3。
    */
-  comparisonYear?: string;
-  /** 固定年の県別比較にタイル地図を追加する（率など地域差の比較用）。 */
-  comparisonMap?: boolean;
+  view?: 'sex';
   /** kebab-case。テーマ内で一意 (React key・計測ラベルに使う) */
   key: string;
   /** カード見出し (例 "賃金水準と格差") */
@@ -215,6 +213,11 @@ export interface CatalogSection {
   title: string;
   /** 図を読むための短い説明。内部の選定理由は selection に置く。 */
   description?: string;
+  /**
+   * この章が答える読者の悩み (1 文)。ページには出さない設計の記録 (2026-10-31)。章の title (問い) と見せ方は
+   * この悩みから決める (theme-catalog-standards.md §3)
+   */
+  concern?: string;
   metricGroupKeys: string[];
   chartKeys?: string[];
   embeddedSectionKeys?: string[];

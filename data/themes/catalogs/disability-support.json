@@ -59,37 +59,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "disability-support-indicator-1",
-      "title": "知的障害者援護施設数（人口100万人当たり）",
-      "rankingKeys": [
-        "intellectual-disability-support-facility-count-per-1m"
-      ],
-      "defaultCheckedKeys": [
-        "intellectual-disability-support-facility-count-per-1m"
-      ]
-    },
-    {
-      "key": "disability-support-indicator-2",
-      "title": "知的障害者援護施設定員数（人口10万人当たり）",
-      "rankingKeys": [
-        "intellectual-disability-support-facility-capacity-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "intellectual-disability-support-facility-capacity-per-100k"
-      ]
-    },
-    {
-      "key": "disability-support-indicator-3",
-      "title": "知的障害者援護施設在所者数（人口10万人当たり）",
-      "rankingKeys": [
-        "intellectual-disability-support-facility-residents-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "intellectual-disability-support-facility-residents-per-100k"
-      ]
-    },
-    {
-      "key": "disability-support-indicator-4",
+      "key": "disability-prevalence-and-certificates-1",
       "title": "身体障害者手帳交付数（人口千人当たり）",
       "rankingKeys": [
         "physical-disability-certificates-issued-per-1000"
@@ -99,7 +69,7 @@
       ]
     },
     {
-      "key": "disability-support-indicator-5",
+      "key": "disability-employment-and-work-1",
       "title": "障害者就職率（ハローワーク）",
       "rankingKeys": [
         "disabled-employment-rate"
@@ -107,19 +77,45 @@
       "defaultCheckedKeys": [
         "disabled-employment-rate"
       ]
+    },
+    {
+      "key": "facility-support-and-capacity-1",
+      "title": "知的障害者援護施設数・定員数・在所者数の推移",
+      "rankingKeys": [
+        "intellectual-disability-support-facility-count-per-1m",
+        "intellectual-disability-support-facility-capacity-per-100k",
+        "intellectual-disability-support-facility-residents-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "intellectual-disability-support-facility-count-per-1m",
+        "intellectual-disability-support-facility-capacity-per-100k",
+        "intellectual-disability-support-facility-residents-per-100k"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "disability-support-overview",
-      "title": "障害福祉と社会参加を都道府県別に見る",
-      "description": "知的障害者援護施設の数・定員・在所者と身体障害者手帳交付数を比較します。制度区分の異なる人数を合算しません。障害者就職率は公共職業安定所における就職件数を新規求職申込件数で割った割合で、企業の実雇用率や障害者全体の就業率とは異なります。",
+      "key": "disability-prevalence-and-certificates",
+      "title": "地域で障害者手帳の交付を受ける人の割合はどのように推移しているか",
+      "concern": "障害のある家族や自身が地域社会で適切な支援や手帳交付を受けられているか気になります。",
       "metricGroupKeys": [
-        "disability-support-indicator-1",
-        "disability-support-indicator-2",
-        "disability-support-indicator-3",
-        "disability-support-indicator-4",
-        "disability-support-indicator-5"
+        "disability-prevalence-and-certificates-1"
+      ]
+    },
+    {
+      "key": "disability-employment-and-work",
+      "title": "障害のある人の就職や働く機会は確保されているか",
+      "concern": "障害があっても希望する仕事に就き自立した社会参加ができるか不安です。",
+      "metricGroupKeys": [
+        "disability-employment-and-work-1"
+      ]
+    },
+    {
+      "key": "facility-support-and-capacity",
+      "title": "知的障害者の支援施設や受け皿は十分にあるか",
+      "concern": "必要としたときに知的障害者援護施設や定員・入所枠が確保されているか心配です。",
+      "metricGroupKeys": [
+        "facility-support-and-capacity-1"
       ]
     }
   ],

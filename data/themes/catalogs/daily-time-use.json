@@ -129,67 +129,43 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "daily-time-use-indicator-1",
-      "title": "女性の睡眠時間",
+      "key": "sleep-duration-1",
+      "title": "男女の睡眠時間",
       "rankingKeys": [
+        "sleep-avg-time-male",
         "sleep-avg-time-female"
       ],
       "defaultCheckedKeys": [
+        "sleep-avg-time-male",
         "sleep-avg-time-female"
-      ]
-    },
-    {
-      "key": "daily-time-use-indicator-2",
-      "title": "男性の睡眠時間",
-      "rankingKeys": [
-        "sleep-avg-time-male"
       ],
-      "defaultCheckedKeys": [
-        "sleep-avg-time-male"
-      ]
+      "view": "sex"
     },
     {
-      "key": "daily-time-use-indicator-3",
-      "title": "女性の家事時間",
+      "key": "housework-burden-1",
+      "title": "男女の家事時間",
       "rankingKeys": [
+        "housework-avg-time-male",
         "housework-avg-time-female"
       ],
       "defaultCheckedKeys": [
+        "housework-avg-time-male",
         "housework-avg-time-female"
-      ]
+      ],
+      "view": "sex"
     },
     {
-      "key": "daily-time-use-indicator-4",
-      "title": "男性の家事時間",
+      "key": "work-time-and-balance-1",
+      "title": "男性有業者の仕事時間",
       "rankingKeys": [
-        "housework-avg-time-male"
+        "work-avg-time-employed-male"
       ],
       "defaultCheckedKeys": [
-        "housework-avg-time-male"
+        "work-avg-time-employed-male"
       ]
     },
     {
-      "key": "daily-time-use-indicator-5",
-      "title": "女性有業者の趣味・娯楽時間",
-      "rankingKeys": [
-        "hobby-leisure-avg-time-employed-female"
-      ],
-      "defaultCheckedKeys": [
-        "hobby-leisure-avg-time-employed-female"
-      ]
-    },
-    {
-      "key": "daily-time-use-indicator-6",
-      "title": "男性有業者の趣味・娯楽時間",
-      "rankingKeys": [
-        "hobby-leisure-avg-time-employed-male"
-      ],
-      "defaultCheckedKeys": [
-        "hobby-leisure-avg-time-employed-male"
-      ]
-    },
-    {
-      "key": "daily-time-use-indicator-7",
+      "key": "work-time-and-balance-2",
       "title": "女性有業者の仕事時間",
       "rankingKeys": [
         "work-avg-time-employed-female"
@@ -199,30 +175,51 @@
       ]
     },
     {
-      "key": "daily-time-use-indicator-8",
-      "title": "男性有業者の仕事時間",
+      "key": "leisure-and-recreation-1",
+      "title": "有業者男女の趣味・娯楽時間",
       "rankingKeys": [
-        "work-avg-time-employed-male"
+        "hobby-leisure-avg-time-employed-male",
+        "hobby-leisure-avg-time-employed-female"
       ],
       "defaultCheckedKeys": [
-        "work-avg-time-employed-male"
-      ]
+        "hobby-leisure-avg-time-employed-male",
+        "hobby-leisure-avg-time-employed-female"
+      ],
+      "view": "sex"
     }
   ],
   "sections": [
     {
-      "key": "daily-time-use-overview",
-      "title": "睡眠と生活時間を都道府県別に見る",
-      "description": "睡眠・家事の平均時間と、有業者に限った仕事・趣味娯楽の平均時間を男女別に比較します。対象が異なるため合計しません。平均時間は一日の行動配分であり、生活の良否を示す指標ではありません。",
+      "key": "sleep-duration",
+      "title": "睡眠時間は十分に確保できているか",
+      "concern": "仕事や家事に追われて睡眠不足になり健康を損なわないか心配です。",
       "metricGroupKeys": [
-        "daily-time-use-indicator-1",
-        "daily-time-use-indicator-2",
-        "daily-time-use-indicator-3",
-        "daily-time-use-indicator-4",
-        "daily-time-use-indicator-5",
-        "daily-time-use-indicator-6",
-        "daily-time-use-indicator-7",
-        "daily-time-use-indicator-8"
+        "sleep-duration-1"
+      ]
+    },
+    {
+      "key": "housework-burden",
+      "title": "家事の負担は男女で偏っているか",
+      "concern": "家事負担が女性に偏り自分の時間やキャリアを諦めざるを得ないか不安です。",
+      "metricGroupKeys": [
+        "housework-burden-1"
+      ]
+    },
+    {
+      "key": "work-time-and-balance",
+      "title": "仕事による生活時間の圧迫は解消されているか",
+      "concern": "長時間労働によって家族と過ごす時間や休養が削られていないか心配です。",
+      "metricGroupKeys": [
+        "work-time-and-balance-1",
+        "work-time-and-balance-2"
+      ]
+    },
+    {
+      "key": "leisure-and-recreation",
+      "title": "趣味やリフレッシュの時間は取れているか",
+      "concern": "忙しい日々の中で自分のための趣味やリフレッシュの時間が持てないことが不安です。",
+      "metricGroupKeys": [
+        "leisure-and-recreation-1"
       ]
     }
   ],

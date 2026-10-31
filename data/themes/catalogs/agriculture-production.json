@@ -192,37 +192,19 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "agriculture-production-indicator-1",
-      "title": "農業産出額",
+      "key": "overall-production-1",
+      "title": "農業産出額と耕地面積の長期推移",
       "rankingKeys": [
-        "agricultural-output"
+        "agricultural-output",
+        "cultivated-area"
       ],
       "defaultCheckedKeys": [
-        "agricultural-output"
+        "agricultural-output",
+        "cultivated-area"
       ]
     },
     {
-      "key": "agriculture-production-indicator-2",
-      "title": "農業就業者1人当たり農業産出額",
-      "rankingKeys": [
-        "agricultural-output-per-employed-person"
-      ],
-      "defaultCheckedKeys": [
-        "agricultural-output-per-employed-person"
-      ]
-    },
-    {
-      "key": "agriculture-production-indicator-3",
-      "title": "農家数",
-      "rankingKeys": [
-        "agricultural-farm-count"
-      ],
-      "defaultCheckedKeys": [
-        "agricultural-farm-count"
-      ]
-    },
-    {
-      "key": "agriculture-production-indicator-4",
+      "key": "agricultural-workforce-1",
       "title": "基幹的農業従事者数（販売農家）",
       "rankingKeys": [
         "core-agricultural-workers"
@@ -232,17 +214,27 @@
       ]
     },
     {
-      "key": "agriculture-production-indicator-5",
-      "title": "耕地面積",
+      "key": "agricultural-workforce-2",
+      "title": "農家数",
       "rankingKeys": [
-        "cultivated-area"
+        "agricultural-farm-count"
       ],
       "defaultCheckedKeys": [
-        "cultivated-area"
+        "agricultural-farm-count"
       ]
     },
     {
-      "key": "candidate-10-1",
+      "key": "agricultural-workforce-3",
+      "title": "農業就業者1人当たり農業産出額",
+      "rankingKeys": [
+        "agricultural-output-per-employed-person"
+      ],
+      "defaultCheckedKeys": [
+        "agricultural-output-per-employed-person"
+      ]
+    },
+    {
+      "key": "dairy-farming-production-1",
       "title": "年間生乳生産量（t）",
       "rankingKeys": [
         "raw-milk-production"
@@ -252,7 +244,7 @@
       ]
     },
     {
-      "key": "candidate-10-2",
+      "key": "dairy-farming-production-2",
       "title": "乳用牛飼養頭数",
       "rankingKeys": [
         "dairy-cattle-count"
@@ -262,7 +254,7 @@
       ]
     },
     {
-      "key": "candidate-10-3",
+      "key": "dairy-farming-production-3",
       "title": "乳用牛の飼養戸数",
       "rankingKeys": [
         "dairy-cattle-holdings"
@@ -272,7 +264,7 @@
       ]
     },
     {
-      "key": "candidate-10-4",
+      "key": "livestock-production-1",
       "title": "肉用牛飼養頭数",
       "rankingKeys": [
         "beef-cattle-count"
@@ -282,7 +274,7 @@
       ]
     },
     {
-      "key": "candidate-10-5",
+      "key": "livestock-production-2",
       "title": "豚飼養頭数",
       "rankingKeys": [
         "pig-count"
@@ -292,7 +284,7 @@
       ]
     },
     {
-      "key": "candidate-10-6",
+      "key": "livestock-production-3",
       "title": "採卵鶏の成鶏めす（千羽）",
       "rankingKeys": [
         "layer-hen-count"
@@ -304,28 +296,41 @@
   ],
   "sections": [
     {
-      "key": "agriculture-production-overview",
-      "title": "農業の生産力を都道府県別に見る",
-      "description": "農業産出額、農家数、基幹的農業従事者を別々の指標として比較します。総額は人口規模の影響を受けるため、1人当たり指標と混同しません。",
+      "key": "overall-production",
+      "title": "地域の農業全体の生産規模や耕地面積はどう推移しているか",
+      "concern": "地域の農業産出額の動向や農地の維持・活用状況がどうなっているか心配です。",
       "metricGroupKeys": [
-        "agriculture-production-indicator-1",
-        "agriculture-production-indicator-2",
-        "agriculture-production-indicator-3",
-        "agriculture-production-indicator-4",
-        "agriculture-production-indicator-5"
+        "overall-production-1"
       ]
     },
     {
-      "key": "candidate-10",
-      "title": "畜産・酪農の飼養規模と生産量",
-      "description": "乳用牛・肉用牛は2025年、豚・採卵鶏は2024年の2月1日時点です。生乳生産量は2025年1〜12月の確報で、出荷分に自家飲用・子牛ほ乳用など未出荷分を含みます。飼養規模と年間の生産量を別々に読み、異なる時点・単位の値を構成比にしません。",
+      "key": "agricultural-workforce",
+      "title": "農業の担い手や農家数はどのように変化しているか",
+      "concern": "農業従事者の高齢化や後継者不足により地域の農業生産体制が維持できるか不安です。",
       "metricGroupKeys": [
-        "candidate-10-1",
-        "candidate-10-2",
-        "candidate-10-3",
-        "candidate-10-4",
-        "candidate-10-5",
-        "candidate-10-6"
+        "agricultural-workforce-1",
+        "agricultural-workforce-2",
+        "agricultural-workforce-3"
+      ]
+    },
+    {
+      "key": "dairy-farming-production",
+      "title": "酪農の生産規模や生乳の供給状況はどうなっているか",
+      "concern": "飼料価格の高騰や経営体減少のなかで十分な生乳生産が維持されているか気になります。",
+      "metricGroupKeys": [
+        "dairy-farming-production-1",
+        "dairy-farming-production-2",
+        "dairy-farming-production-3"
+      ]
+    },
+    {
+      "key": "livestock-production",
+      "title": "肉用牛や豚、採卵鶏など畜産生産の基盤はどうなっているか",
+      "concern": "地域の畜産物の生産規模や供給能力がどのように分布しているか気になります。",
+      "metricGroupKeys": [
+        "livestock-production-1",
+        "livestock-production-2",
+        "livestock-production-3"
       ]
     }
   ],

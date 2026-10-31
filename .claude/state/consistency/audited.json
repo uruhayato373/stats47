@@ -1,8 +1,19 @@
 {
-  "hash": "e084db9ae49db0f0aa7c77b7ec655da8823c15f633990158e820404664fa04ba",
-  "audited_at": "2026-10-31T04:03:37",
+  "hash": "e4027444033e95a5bb59cc8db605d50045e4c3fec642eb4939e890bfd41f9fbf",
+  "audited_at": "2026-10-31T05:59:39",
   "files": [
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/rules/ui-components.md"
+    ".agents/skills/theme/research-theme-catalog/SKILL.md",
+    ".claude/agents/theme-ui-manager.md",
+    ".claude/rules/chart-component-standards.md",
+    ".claude/rules/theme-catalog-standards.md",
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
+    ".claude/scripts/themes/__tests__/theme-followup.test.mjs",
+    ".claude/scripts/themes/audit-theme-runtime.ts",
+    ".claude/scripts/themes/dashboard-design/apply-design.ts",
+    ".claude/scripts/themes/dashboard-design/ask-notebooklm.mjs",
+    ".claude/scripts/themes/dashboard-design/build-inventory.ts",
+    ".claude/scripts/themes/theme-followup-core.mjs",
+    ".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md",
+    ".claude/skills/theme/research-theme-catalog/SKILL.md"
   ]
 }

@@ -17,6 +17,13 @@
       ]
     },
     {
+      "name": "NLM_NOTEBOOK",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "NOTE_BU_CDP",
       "visibility": "server",
       "contexts": [

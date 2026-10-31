@@ -4,21 +4,40 @@
     {
       "name": "web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev:web"],
+      "runtimeArgs": [
+        "run",
+        "dev:web"
+      ],
       "port": 3000,
       "autoPort": false
     },
     {
       "name": "web-ad-preview",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev:web:ad-preview"],
+      "runtimeArgs": [
+        "run",
+        "dev:web:ad-preview"
+      ],
+      "port": 3000,
+      "autoPort": false
+    },
+    {
+      "name": "web-r2-overlay",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "node .github/scripts/r2-overlay-server.mjs 4790 & R2_S3_ENDPOINT= R2_PUBLIC_FETCH_URL=http://127.0.0.1:4790 npm run dev:web"
+      ],
       "port": 3000,
       "autoPort": false
     },
     {
       "name": "admin",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "admin"],
+      "runtimeArgs": [
+        "run",
+        "admin"
+      ],
       "port": 4747,
       "autoPort": false
     }

@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalMetricRefs": 162,
-  "distinctMetricRefs": 147,
+  "totalMetricRefs": 218,
+  "distinctMetricRefs": 203,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -10,6 +10,46 @@
       "componentType": "line-chart",
       "expectedUnit": "千円",
       "expectedConfigHash": "4592c1fe7b4b6461"
+    },
+    {
+      "metricKey": "ambulance-transported-deaths",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b85f5e1f22c9a056"
+    },
+    {
+      "metricKey": "ambulance-transported-mild",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b85f5e1f22c9a056"
+    },
+    {
+      "metricKey": "ambulance-transported-moderate",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b85f5e1f22c9a056"
+    },
+    {
+      "metricKey": "ambulance-transported-other",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b85f5e1f22c9a056"
+    },
+    {
+      "metricKey": "ambulance-transported-severe",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b85f5e1f22c9a056"
     },
     {
       "metricKey": "annual-emergency-dispatches-per-1000",
@@ -44,6 +84,70 @@
       "expectedConfigHash": "131aed39051698ea"
     },
     {
+      "metricKey": "births-first-child",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9a994963862a408c"
+    },
+    {
+      "metricKey": "births-mother-age25to29",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "f4ac85fb248f4ea8"
+    },
+    {
+      "metricKey": "births-mother-age30to34",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d986898413613e9f"
+    },
+    {
+      "metricKey": "births-mother-age35to39",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5ddf4c9d426a47ea"
+    },
+    {
+      "metricKey": "births-mother-age40plus",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "75f5204fb42606ec"
+    },
+    {
+      "metricKey": "births-mother-under25",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "7ffd315b1c16b518"
+    },
+    {
+      "metricKey": "births-second-child",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c7f348ea145e47e1"
+    },
+    {
+      "metricKey": "births-third-child-plus",
+      "themeKey": "population-dynamics",
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "8b1003e58d4e53be"
+    },
+    {
       "metricKey": "building-fire-count-per-100-thousand-people",
       "themeKey": "safety",
       "componentKey": "fire-emergency-trend-fire",
@@ -66,6 +170,30 @@
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "a9acb4835081e684"
+    },
+    {
+      "metricKey": "construction-employed-age30to54",
+      "themeKey": "construction-industry",
+      "componentKey": "construction-industry-workforce-demographics-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5c77583f9ea7cfee"
+    },
+    {
+      "metricKey": "construction-employed-age55plus",
+      "themeKey": "construction-industry",
+      "componentKey": "construction-industry-workforce-demographics-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b136b64dc75e5516"
+    },
+    {
+      "metricKey": "construction-employed-under30",
+      "themeKey": "construction-industry",
+      "componentKey": "construction-industry-workforce-demographics-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "a15be6a781793d5e"
     },
     {
       "metricKey": "consumer-price-difference-index-clothing-footwear",
@@ -228,6 +356,30 @@
       "expectedConfigHash": "101bf6282998c893"
     },
     {
+      "metricKey": "debris-flow-special-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-special-hazard-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
+    },
+    {
+      "metricKey": "debris-flow-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-disaster-type-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
+    },
+    {
+      "metricKey": "designated-museum-visitors",
+      "themeKey": "education-culture",
+      "componentKey": "education-culture-cultural-facilities-and-arts-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3b4c4683883b0612"
+    },
+    {
       "metricKey": "doctor-annual-income",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
@@ -258,6 +410,22 @@
       "componentType": "donut-chart",
       "expectedUnit": "人",
       "expectedConfigHash": "fbd70cea74a41f25"
+    },
+    {
+      "metricKey": "fit-fip-new-approved-installed-capacity",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-renewable-energy-adoption-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "kW",
+      "expectedConfigHash": "40c0277a5c1741d5"
+    },
+    {
+      "metricKey": "fit-transition-installed-capacity",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-renewable-energy-adoption-composition-3",
+      "componentType": "composition-chart",
+      "expectedUnit": "kW",
+      "expectedConfigHash": "40c0277a5c1741d5"
     },
     {
       "metricKey": "floor-area-per-dwelling-owner",
@@ -444,6 +612,22 @@
       "expectedConfigHash": "f5db56c7cae2e704"
     },
     {
+      "metricKey": "landslip-special-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-special-hazard-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
+    },
+    {
+      "metricKey": "landslip-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-disaster-type-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
+    },
+    {
       "metricKey": "late-elderly-medical-expense-per-insured",
       "themeKey": "aging-society",
       "componentKey": "theme-late-elderly-medical-expense-trend",
@@ -524,6 +708,30 @@
       "expectedConfigHash": "7192e85c2d860d07"
     },
     {
+      "metricKey": "medical-physicians-age-40-59",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-medical-system-and-resources-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "79071138a38a3ff3"
+    },
+    {
+      "metricKey": "medical-physicians-age-60-plus",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-medical-system-and-resources-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "79071138a38a3ff3"
+    },
+    {
+      "metricKey": "medical-physicians-under-40",
+      "themeKey": "healthcare",
+      "componentKey": "healthcare-medical-system-and-resources-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "79071138a38a3ff3"
+    },
+    {
       "metricKey": "movers-in",
       "themeKey": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
@@ -540,12 +748,92 @@
       "expectedConfigHash": "eb9ce6c3641db260"
     },
     {
+      "metricKey": "museum-like-facility-visitors",
+      "themeKey": "education-culture",
+      "componentKey": "education-culture-cultural-facilities-and-arts-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "b0ce21c6a8a06c71"
+    },
+    {
       "metricKey": "national-medical-expense-per-person",
       "themeKey": "healthcare",
       "componentKey": "theme-health-expense-trend",
       "componentType": "line-chart",
       "expectedUnit": "千円",
       "expectedConfigHash": "87c34ae4c4af8dbf"
+    },
+    {
+      "metricKey": "natural-disaster-deaths",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "natural-disaster-destroyed-houses",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "棟",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "natural-disaster-half-destroyed-houses",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "棟",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "natural-disaster-injured-persons",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "natural-disaster-missing-persons",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "natural-disaster-partially-damaged-houses",
+      "themeKey": "safety",
+      "componentKey": "safety-natural-disaster-impact-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "棟",
+      "expectedConfigHash": "99154ada25889751"
+    },
+    {
+      "metricKey": "new-condo-starts",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-housing-construction-trends-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "90ab8c8f8ab8c6d4"
+    },
+    {
+      "metricKey": "new-owner-occupied-starts",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-housing-construction-trends-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "13efd401d3f2880a"
+    },
+    {
+      "metricKey": "new-rental-starts",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-housing-construction-trends-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "db1fa55a7d20f549"
     },
     {
       "metricKey": "nuclear-family-households-ratio",
@@ -644,12 +932,108 @@
       "expectedConfigHash": "17c063fa3045cce5"
     },
     {
+      "metricKey": "regional-business-co2-emissions-estimate",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-regional-co2-emissions-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "千t-CO₂",
+      "expectedConfigHash": "abadda9630686945"
+    },
+    {
+      "metricKey": "regional-business-final-energy-consumption",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-sector-energy-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "TJ",
+      "expectedConfigHash": "200ef7c7c8f2a342"
+    },
+    {
+      "metricKey": "regional-household-car-final-energy-consumption",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-sector-energy-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "TJ",
+      "expectedConfigHash": "200ef7c7c8f2a342"
+    },
+    {
+      "metricKey": "regional-household-co2-emissions-estimate",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-regional-co2-emissions-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "千t-CO₂",
+      "expectedConfigHash": "abadda9630686945"
+    },
+    {
+      "metricKey": "regional-household-final-energy-consumption",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-sector-energy-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "TJ",
+      "expectedConfigHash": "200ef7c7c8f2a342"
+    },
+    {
+      "metricKey": "regional-industry-co2-emissions-estimate",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-regional-co2-emissions-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "千t-CO₂",
+      "expectedConfigHash": "abadda9630686945"
+    },
+    {
+      "metricKey": "regional-industry-final-energy-consumption",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-sector-energy-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "TJ",
+      "expectedConfigHash": "200ef7c7c8f2a342"
+    },
+    {
+      "metricKey": "regional-transport-co2-emissions-estimate",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-regional-co2-emissions-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "千t-CO₂",
+      "expectedConfigHash": "abadda9630686945"
+    },
+    {
+      "metricKey": "regional-waste-co2-emissions-estimate",
+      "themeKey": "regional-energy",
+      "componentKey": "regional-energy-regional-co2-emissions-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "千t-CO₂",
+      "expectedConfigHash": "abadda9630686945"
+    },
+    {
+      "metricKey": "registered-museum-visitors",
+      "themeKey": "education-culture",
+      "componentKey": "education-culture-cultural-facilities-and-arts-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3b4c4683883b0612"
+    },
+    {
       "metricKey": "rice-consumption-expenditure",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-staple-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
       "expectedConfigHash": "9094842e2aabc0d5"
+    },
+    {
+      "metricKey": "road-bridge-condition-iii-count",
+      "themeKey": "roads",
+      "componentKey": "roads-road-bridge-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "橋",
+      "expectedConfigHash": "695c945d74c9f96e"
+    },
+    {
+      "metricKey": "road-bridge-condition-iv-count",
+      "themeKey": "roads",
+      "componentKey": "roads-road-bridge-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "橋",
+      "expectedConfigHash": "695c945d74c9f96e"
     },
     {
       "metricKey": "road-expressway-length",
@@ -666,6 +1050,22 @@
       "componentType": "line-chart",
       "expectedUnit": "km",
       "expectedConfigHash": "27f624a5d853d6ae"
+    },
+    {
+      "metricKey": "road-tunnel-condition-iii-count",
+      "themeKey": "roads",
+      "componentKey": "roads-road-tunnel-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "本",
+      "expectedConfigHash": "7adfe276daccfb1d"
+    },
+    {
+      "metricKey": "road-tunnel-condition-iv-count",
+      "themeKey": "roads",
+      "componentKey": "roads-road-tunnel-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "expectedUnit": "本",
+      "expectedConfigHash": "7adfe276daccfb1d"
     },
     {
       "metricKey": "sake-consumption-expenditure",
@@ -770,6 +1170,22 @@
       "componentType": "line-chart",
       "expectedUnit": "万円",
       "expectedConfigHash": "f00643aba840e510"
+    },
+    {
+      "metricKey": "steep-slope-special-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-special-hazard-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
+    },
+    {
+      "metricKey": "steep-slope-warning-zone-count",
+      "themeKey": "landslide-exposure",
+      "componentKey": "landslide-exposure-disaster-type-breakdown-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "区域",
+      "expectedConfigHash": "c70ba9d36e19c3e6"
     },
     {
       "metricKey": "system-consultant-annual-income",
@@ -1148,12 +1564,44 @@
       "expectedConfigHash": "b65036a86a06863b"
     },
     {
+      "metricKey": "vacant-housing-excluding-rental-sale-secondary",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-vacant-housing-and-safety-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "397c046a9f8af891"
+    },
+    {
+      "metricKey": "vacant-housing-for-rent",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-vacant-housing-and-safety-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "57d4e3f5f31e97f2"
+    },
+    {
+      "metricKey": "vacant-housing-for-sale",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-vacant-housing-and-safety-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "966e261c248d8a8f"
+    },
+    {
       "metricKey": "vacant-housing-ratio",
       "themeKey": "living-housing",
       "componentKey": "vacancy-ownership-rate-trend",
       "componentType": "line-chart",
       "expectedUnit": "％",
       "expectedConfigHash": "bf75e5eb28c6223c"
+    },
+    {
+      "metricKey": "vacant-housing-secondary-residences",
+      "themeKey": "living-housing",
+      "componentKey": "living-housing-vacant-housing-and-safety-composition-1",
+      "componentType": "composition-chart",
+      "expectedUnit": "戸",
+      "expectedConfigHash": "1f22656f1c328908"
     },
     {
       "metricKey": "violent-crime-per-100k",

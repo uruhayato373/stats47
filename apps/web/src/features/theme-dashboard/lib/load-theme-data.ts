@@ -11,7 +11,6 @@ import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
-import { resolveComparisonYears } from "./resolve-comparison-years";
 import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -19,10 +18,7 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  /**
-   * カタログの指標カード編成。年を固定した比較カードの `comparisonYear` は、全指標に値がそろう
-   * R2 の最新年へ進めてある (resolveComparisonYears)。カタログに編成が無いテーマは undefined。
-   */
+  /** カタログの指標カード編成。カタログに編成が無いテーマは undefined。 */
   metricGroups?: CatalogMetricGroup[];
 }
 
@@ -98,23 +94,11 @@ export async function loadThemeData(
 
   if (validItems.length === 0) return null;
 
-  const metricGroups = catalogGroups
-    ? resolveComparisonYears(
-        catalogGroups,
-        new Map(validItems.map(({ key, item }) => [key, item.availableYears?.map((y) => y.yearCode)])),
-      )
-    : undefined;
-  const comparisonYears = new Map(
-    (metricGroups ?? []).flatMap((group) =>
-      group.comparisonYear
-        ? group.rankingKeys.map((key) => [key, group.comparisonYear] as const)
-        : []
-    )
-  );
+  const metricGroups = catalogGroups;
 
   // 2. 全指標のデータを並列取得 (地図の地形はテーマでは読まない。都道府県の地図と表はランキングと同じ部品が自分で読む)
   const valuesPromises = validItems.map(({ key, item }) => {
-    const yearCode = comparisonYears.get(key) ?? item.latestYear?.yearCode;
+    const yearCode = item.latestYear?.yearCode;
     if (!yearCode)
       return Promise.resolve({
         key,

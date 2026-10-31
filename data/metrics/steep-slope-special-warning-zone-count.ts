@@ -5,7 +5,7 @@ export const steepSlopeSpecialWarningZoneCount: MetricConfig = {
   "key": "steep-slope-special-warning-zone-count",
   "title": "急傾斜地崩壊の特別警戒区域数",
   "subtitle": "2026年6月30日時点の指定区域数",
-  "description": "土砂災害防止法に基づく指定区域数を比較します。特別警戒区域は警戒区域の内数で、両者は足し合わせません。",
+  "description": "土砂災害防止法に基づき都道府県が指定した土砂災害特別警戒区域のうち、急傾斜地の崩壊を対象とする区域の数。急傾斜地の崩壊の警戒区域の内数で、警戒区域の数と足し合わせない。",
   "note": "区域数は危険の総量だけでなく指定・調査進捗にも左右されます。面積、区域内人口や施設数を表す指標ではありません。国交省の集計時点と自治体の公表時点の違いにより値が異なる場合があります。原表右側の基礎調査公表済区域（2026年3月末）とは区別します。",
   "unit": "区域",
   "category": "safetyenvironment",

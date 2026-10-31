@@ -28,7 +28,7 @@
     {
       "rankingKey": "prefectural-dx-applicable-procedure-count",
       "shortLabel": "実施している対象手続数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -89,7 +89,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "local-government-digital-indicator-1",
+      "key": "online-procedure-progress-1",
       "title": "手続オンライン化率（2023年調査）",
       "rankingKeys": [
         "prefectural-dx-online-procedure-rate"
@@ -99,7 +99,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-2",
+      "key": "online-procedure-progress-2",
       "title": "オンライン化済手続数",
       "rankingKeys": [
         "prefectural-dx-online-procedure-count"
@@ -109,17 +109,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-3",
-      "title": "実施している対象手続数",
-      "rankingKeys": [
-        "prefectural-dx-applicable-procedure-count"
-      ],
-      "defaultCheckedKeys": [
-        "prefectural-dx-applicable-procedure-count"
-      ]
-    },
-    {
-      "key": "local-government-digital-indicator-4",
+      "key": "tax-and-recruitment-dx-1",
       "title": "eLTAX申請利用率（2022年度）",
       "rankingKeys": [
         "prefectural-eltax-online-application-rate"
@@ -129,7 +119,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-5",
+      "key": "tax-and-recruitment-dx-2",
       "title": "採用試験申請利用率（2022年度）",
       "rankingKeys": [
         "prefectural-recruitment-online-application-rate"
@@ -139,7 +129,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-6",
+      "key": "auto-tax-dx-1",
       "title": "環境性能割申告のオンライン利用率（2023年度）",
       "rankingKeys": [
         "prefectural-auto-environment-tax-online-application-rate"
@@ -149,7 +139,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-7",
+      "key": "auto-tax-dx-2",
       "title": "環境性能割のオンライン申請件数",
       "rankingKeys": [
         "prefectural-auto-environment-tax-online-application-count"
@@ -159,7 +149,7 @@
       ]
     },
     {
-      "key": "local-government-digital-indicator-8",
+      "key": "auto-tax-dx-3",
       "title": "環境性能割の申請総件数",
       "rankingKeys": [
         "prefectural-auto-environment-tax-application-count"
@@ -171,18 +161,31 @@
   ],
   "sections": [
     {
-      "key": "local-government-digital-overview",
-      "title": "自治体DXを都道府県別に見る",
-      "description": "都道府県行政のオンライン化と申請利用を分けて比較します。eLTAX・採用申請は2022年度、環境性能割は2023年度の実績、手続のオンライン化状況は2023年4月1日調査時点です。利用率をオンライン化率と混同せず、市町村分を合算しません。",
+      "key": "online-procedure-progress",
+      "title": "行政手続のオンライン化はどれくらい進んでいるか",
+      "concern": "自治体の各種申請や手続を窓口に行かずオンラインで完結できるか気になります。",
       "metricGroupKeys": [
-        "local-government-digital-indicator-1",
-        "local-government-digital-indicator-2",
-        "local-government-digital-indicator-3",
-        "local-government-digital-indicator-4",
-        "local-government-digital-indicator-5",
-        "local-government-digital-indicator-6",
-        "local-government-digital-indicator-7",
-        "local-government-digital-indicator-8"
+        "online-procedure-progress-1",
+        "online-procedure-progress-2"
+      ]
+    },
+    {
+      "key": "tax-and-recruitment-dx",
+      "title": "地方税の申告や採用試験のオンライン申請は利用されているか",
+      "concern": "税申告や職員採用試験などの手続がオンラインでスムーズに行えるか気になります。",
+      "metricGroupKeys": [
+        "tax-and-recruitment-dx-1",
+        "tax-and-recruitment-dx-2"
+      ]
+    },
+    {
+      "key": "auto-tax-dx",
+      "title": "自動車税環境性能割のオンライン申告はどれくらい活用されているか",
+      "concern": "自動車購入時の税申告手続きでオンライン利用が浸透しているか気になります。",
+      "metricGroupKeys": [
+        "auto-tax-dx-1",
+        "auto-tax-dx-2",
+        "auto-tax-dx-3"
       ]
     }
   ],

@@ -34,7 +34,7 @@
     {
       "rankingKey": "criminal-recognition-count",
       "shortLabel": "認知件数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和6年版 犯罪白書 第1編第1章第1節1「認知件数と発生率」（法務省）",
         "sourceUrl": "https://hakusyo1.moj.go.jp/jp/71/nfm/n71_2_1_1_1_1.html",
@@ -160,7 +160,7 @@
     {
       "rankingKey": "traffic-accident-count",
       "shortLabel": "事故件数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和7年版 交通安全白書 第1部第1章第2節「令和6年中の道路交通事故の状況」（内閣府）",
         "sourceUrl": "https://www8.cao.go.jp/koutu/taisaku/r07kou_haku/zenbun/genkyo/h1/h1b1s1_2.html",
@@ -349,7 +349,7 @@
     {
       "rankingKey": "flood-damage-general-assets",
       "shortLabel": "水害一般資産等被害額",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "水害統計調査の概要（国土交通省水管理・国土保全局）",
         "sourceUrl": "https://www.mlit.go.jp/statistics/details/t-other-2_tk_000289.html",
@@ -366,7 +366,7 @@
     {
       "rankingKey": "flood-affected-municipalities",
       "shortLabel": "水害被災市区町村数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "水害統計調査の概要（国土交通省水管理・国土保全局）",
         "sourceUrl": "https://www.mlit.go.jp/statistics/details/t-other-2_tk_000289.html",
@@ -885,6 +885,80 @@
       "dataSource": "ranking",
       "section": "fire-emergency",
       "sortOrder": 60
+    },
+    {
+      "componentKey": "safety-natural-disaster-impact-composition-1",
+      "componentType": "composition-chart",
+      "title": "自然災害による人的被害の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "natural-disaster-deaths",
+            "label": "自然災害による死者数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "natural-disaster-missing-persons",
+            "label": "自然災害による行方不明者数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "natural-disaster-injured-persons",
+            "label": "自然災害による負傷者数",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "natural-disaster-deaths",
+        "natural-disaster-missing-persons",
+        "natural-disaster-injured-persons"
+      ],
+      "sourceName": "消防庁「消防白書」自然災害等の被害状況",
+      "sourceLink": "https://www.fdma.go.jp/publication/hakusho/r7/files/excel/siryo1-5-2.xlsx",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "natural-disaster-impact",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "safety-natural-disaster-impact-composition-2",
+      "componentType": "composition-chart",
+      "title": "自然災害による住家被害の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "natural-disaster-destroyed-houses",
+            "label": "自然災害による全壊住家棟数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "natural-disaster-half-destroyed-houses",
+            "label": "自然災害による半壊住家棟数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "natural-disaster-partially-damaged-houses",
+            "label": "自然災害による一部破損住家棟数",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "natural-disaster-destroyed-houses",
+        "natural-disaster-half-destroyed-houses",
+        "natural-disaster-partially-damaged-houses"
+      ],
+      "sourceName": "消防庁「消防白書」自然災害等の被害状況",
+      "sourceLink": "https://www.fdma.go.jp/publication/hakusho/r7/files/excel/siryo1-5-2.xlsx",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "natural-disaster-impact",
+      "sortOrder": 101
     }
   ],
   "evidenceTopics": [
@@ -978,72 +1052,66 @@
       ]
     },
     {
-      "key": "candidate-88",
-      "title": "交通安全と高齢者の死傷",
-      "description": "交通事故件数・死亡率に加え、65歳以上の死傷者数を比較します。高齢者の被害を捉える年齢区分であり、高齢運転者が起こした事故件数や事故原因を表すものではありません。",
+      "key": "crime-safety",
+      "title": "地域の治安や犯罪の取り締まり状況はどうなっているか",
+      "concern": "自分の住む地域で犯罪が多発していないか、警察の防犯体制が整っているか不安だ。",
       "metricGroupKeys": [
-        "candidate-88-1",
-        "candidate-88-3"
+        "crime-safety-1"
       ]
     },
     {
-      "key": "candidate-106",
-      "title": "洪水と浸水",
+      "key": "traffic-safety",
+      "title": "交通事故の発生率や死傷者の危険性は高いか",
+      "concern": "毎日の通勤・通学時や高齢の家族が交通事故に遭わないか心配だ。",
       "metricGroupKeys": [
-        "candidate-106-1",
-        "candidate-106-2"
+        "traffic-safety-1"
       ]
     },
     {
-      "key": "candidate-109",
-      "title": "自然災害の人的・住家被害と復旧支出",
-      "description": "2024年中に発生した自然災害等の被害を、2025年4月1日現在の集計で掲載します。死者には災害関連死を含み、負傷者は重傷と軽傷の合計です。住家の全壊・半壊・一部破損は棟数で、浸水のみの被害を含む総数ではありません。既存の被害額や復旧支出は対象年・年度・単位を別に確認し、支出の多さを復旧速度とみなしません。",
+      "key": "fire-and-emergency",
+      "title": "火災のリスクや消防・救急の態勢は十分か",
+      "concern": "火災発生時の被害や急病時に救急車や消防車が速やかに到着できるか不安だ。",
       "metricGroupKeys": [
-        "candidate-109-1",
-        "candidate-109-2",
-        "candidate-109-3",
-        "candidate-109-4",
-        "candidate-109-5",
-        "candidate-109-6",
-        "candidate-109-7",
-        "candidate-109-8"
+        "fire-and-emergency-1",
+        "fire-and-emergency-2",
+        "fire-and-emergency-3"
       ]
     },
     {
-      "key": "candidate-110",
-      "title": "消防・救急の人員と車両",
-      "description": "消防吏員・消防ポンプ自動車等は2022年、救急自動車は2024年の人口10万人当たりの値です。車両や人員の実数ではなく、各県の人口規模をそろえた供給量として読みます。異なる年の値を同年の構成比にはしません。",
+      "key": "natural-disaster-impact",
+      "title": "自然災害による人的・物的被害や復旧費用はどれくらいか",
+      "concern": "大規模な地震や風水害が起きた際の人命や住まいへの被害が心配だ。",
       "metricGroupKeys": [
-        "candidate-110-1",
-        "candidate-110-3",
-        "candidate-110-4",
-        "candidate-110-5"
+        "natural-disaster-impact-1",
+        "natural-disaster-impact-2",
+        "natural-disaster-impact-3",
+        "natural-disaster-impact-4"
+      ],
+      "chartKeys": [
+        "safety-natural-disaster-impact-composition-1",
+        "safety-natural-disaster-impact-composition-2"
       ]
     },
     {
-      "key": "candidate-111",
-      "title": "避難施設と個別避難計画の整備",
-      "description": "個別避難計画は2026年4月1日現在、名簿に載る要支援者のうち計画が作成された人数と割合です。自治体ごとに名簿の対象基準が異なり、過去の累計や優先作成対象者数は分母にしません。施設数と計画作成率は実際の避難成功率ではありません。津波避難施設の対象外7県は0へ置き換えず、他災害の施設総数にも読み替えません。",
+      "key": "evacuation-and-disaster-prevention",
+      "title": "災害時の避難体制や要支援者の個別避難計画は整備されているか",
+      "concern": "災害発生時に津波からの避難場所や高齢者等の避難支援策があるか知りたい。",
       "metricGroupKeys": [
-        "candidate-111-1",
-        "candidate-111-2",
-        "candidate-111-3",
-        "candidate-111-4",
-        "candidate-111-5",
-        "candidate-111-6"
+        "evacuation-and-disaster-prevention-1",
+        "evacuation-and-disaster-prevention-2",
+        "evacuation-and-disaster-prevention-3",
+        "evacuation-and-disaster-prevention-4"
       ],
       "embeddedSectionKeys": [
         "shelter-applicability"
       ]
     },
     {
-      "key": "candidate-112",
-      "title": "犯罪と消費者被害",
-      "description": "2025年度調査で把握した2024年度中の受付件数。都道府県・政令市・市区町村・広域連合・一部事務組合を含む県別の公表合計を使用する。「うちあっせん件数」は内数であり加算しない。相談者の実人数や認定された消費者被害の件数、犯罪認知件数とは異なる。窓口の県別集計であり、相談者の居住県別とはしない。",
+      "key": "consumer-trouble-safety",
+      "title": "悪質商法や詐欺などの消費者トラブルの相談窓口は活用されているか",
+      "concern": "契約トラブルや悪質商法の被害に遭った際の相談実績を知りたい。",
       "metricGroupKeys": [
-        "candidate-112-1",
-        "candidate-112-2",
-        "candidate-112-3"
+        "consumer-trouble-safety-1"
       ]
     }
   ],
@@ -1113,18 +1181,18 @@
       ]
     },
     {
-      "key": "candidate-88-1",
-      "title": "交通事故発生件数",
+      "key": "crime-safety-1",
+      "title": "警察官数（人口千人当たり）",
       "rankingKeys": [
-        "traffic-accident-count"
+        "police-officer-count-per-population"
       ],
       "defaultCheckedKeys": [
-        "traffic-accident-count"
+        "police-officer-count-per-population"
       ]
     },
     {
-      "key": "candidate-88-3",
-      "title": "交通事故死傷者数（65歳以上）",
+      "key": "traffic-safety-1",
+      "title": "高齢者事故",
       "rankingKeys": [
         "traffic-accident-casualties-elderly-65plus"
       ],
@@ -1133,137 +1201,7 @@
       ]
     },
     {
-      "key": "candidate-106-1",
-      "title": "水害一般資産等被害額",
-      "rankingKeys": [
-        "flood-damage-general-assets"
-      ],
-      "defaultCheckedKeys": [
-        "flood-damage-general-assets"
-      ]
-    },
-    {
-      "key": "candidate-106-2",
-      "title": "水害被災市区町村数",
-      "rankingKeys": [
-        "flood-affected-municipalities"
-      ],
-      "defaultCheckedKeys": [
-        "flood-affected-municipalities"
-      ]
-    },
-    {
-      "key": "candidate-109-1",
-      "title": "自然災害による死者数",
-      "rankingKeys": [
-        "natural-disaster-deaths"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-deaths"
-      ]
-    },
-    {
-      "key": "candidate-109-2",
-      "title": "自然災害による行方不明者数",
-      "rankingKeys": [
-        "natural-disaster-missing-persons"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-missing-persons"
-      ]
-    },
-    {
-      "key": "candidate-109-3",
-      "title": "自然災害による負傷者数",
-      "rankingKeys": [
-        "natural-disaster-injured-persons"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-injured-persons"
-      ]
-    },
-    {
-      "key": "candidate-109-4",
-      "title": "自然災害による全壊住家棟数",
-      "rankingKeys": [
-        "natural-disaster-destroyed-houses"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-destroyed-houses"
-      ]
-    },
-    {
-      "key": "candidate-109-5",
-      "title": "自然災害による半壊住家棟数",
-      "rankingKeys": [
-        "natural-disaster-half-destroyed-houses"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-half-destroyed-houses"
-      ]
-    },
-    {
-      "key": "candidate-109-6",
-      "title": "自然災害による一部破損住家棟数",
-      "rankingKeys": [
-        "natural-disaster-partially-damaged-houses"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-partially-damaged-houses"
-      ]
-    },
-    {
-      "key": "candidate-109-7",
-      "title": "災害復旧費（都道府県財政）",
-      "rankingKeys": [
-        "disaster-recovery-expenses-prefecture"
-      ],
-      "defaultCheckedKeys": [
-        "disaster-recovery-expenses-prefecture"
-      ]
-    },
-    {
-      "key": "candidate-109-8",
-      "title": "1人当たり災害被害額",
-      "rankingKeys": [
-        "disaster-damage-amount-per-person"
-      ],
-      "defaultCheckedKeys": [
-        "disaster-damage-amount-per-person"
-      ]
-    },
-    {
-      "key": "candidate-110-1",
-      "title": "消防水利数",
-      "rankingKeys": [
-        "fire-department-water-count-per-100-thousand-people"
-      ],
-      "defaultCheckedKeys": [
-        "fire-department-water-count-per-100-thousand-people"
-      ]
-    },
-    {
-      "key": "candidate-110-3",
-      "title": "消防吏員数（人口10万人当たり）",
-      "rankingKeys": [
-        "fire-department-member-count-per-100-thousand-people"
-      ],
-      "defaultCheckedKeys": [
-        "fire-department-member-count-per-100-thousand-people"
-      ]
-    },
-    {
-      "key": "candidate-110-4",
-      "title": "消防ポンプ自動車等現有数（人口10万人当たり）",
-      "rankingKeys": [
-        "fire-department-pump-car-count-per-100-thousand-people"
-      ],
-      "defaultCheckedKeys": [
-        "fire-department-pump-car-count-per-100-thousand-people"
-      ]
-    },
-    {
-      "key": "candidate-110-5",
+      "key": "fire-and-emergency-1",
       "title": "救急自動車数（人口10万人当たり）",
       "rankingKeys": [
         "fire-department-emergency-car-count-per-100k"
@@ -1273,7 +1211,75 @@
       ]
     },
     {
-      "key": "candidate-111-1",
+      "key": "fire-and-emergency-2",
+      "title": "消防吏員数と消防ポンプ自動車等現有数の推移",
+      "rankingKeys": [
+        "fire-department-member-count-per-100-thousand-people",
+        "fire-department-pump-car-count-per-100-thousand-people"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-member-count-per-100-thousand-people",
+        "fire-department-pump-car-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "key": "fire-and-emergency-3",
+      "title": "消防水利数",
+      "rankingKeys": [
+        "fire-department-water-count-per-100-thousand-people"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-water-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-1",
+      "title": "自然災害による人的被害の内訳",
+      "rankingKeys": [
+        "natural-disaster-deaths",
+        "natural-disaster-missing-persons",
+        "natural-disaster-injured-persons"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-deaths"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-2",
+      "title": "自然災害による住家被害の内訳",
+      "rankingKeys": [
+        "natural-disaster-destroyed-houses",
+        "natural-disaster-half-destroyed-houses",
+        "natural-disaster-partially-damaged-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-destroyed-houses"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-3",
+      "title": "災害被害額（人口1人当たり）",
+      "rankingKeys": [
+        "disaster-damage-amount-per-person"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-damage-amount-per-person"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-4",
+      "title": "都道府県財政における災害復旧費と災害救助費の推移",
+      "rankingKeys": [
+        "disaster-recovery-expenses-prefecture",
+        "disaster-relief-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-recovery-expenses-prefecture",
+        "disaster-relief-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "evacuation-and-disaster-prevention-1",
       "title": "個別避難計画の作成率",
       "rankingKeys": [
         "individual-evacuation-plan-coverage-rate"
@@ -1283,7 +1289,7 @@
       ]
     },
     {
-      "key": "candidate-111-2",
+      "key": "evacuation-and-disaster-prevention-2",
       "title": "避難行動要支援者名簿の掲載人数",
       "rankingKeys": [
         "individual-evacuation-plan-listed-persons"
@@ -1293,7 +1299,7 @@
       ]
     },
     {
-      "key": "candidate-111-3",
+      "key": "evacuation-and-disaster-prevention-3",
       "title": "個別避難計画が作成された人数",
       "rankingKeys": [
         "individual-evacuation-plan-covered-persons"
@@ -1303,63 +1309,25 @@
       ]
     },
     {
-      "key": "candidate-111-4",
-      "title": "津波避難ビル数",
+      "key": "evacuation-and-disaster-prevention-4",
+      "title": "津波避難ビル数と津波避難タワー等数の推移",
       "rankingKeys": [
-        "tsunami-evacuation-building-count"
-      ],
-      "defaultCheckedKeys": [
-        "tsunami-evacuation-building-count"
-      ]
-    },
-    {
-      "key": "candidate-111-5",
-      "title": "津波避難タワー等数",
-      "rankingKeys": [
+        "tsunami-evacuation-building-count",
         "tsunami-evacuation-tower-count"
       ],
       "defaultCheckedKeys": [
+        "tsunami-evacuation-building-count",
         "tsunami-evacuation-tower-count"
       ]
     },
     {
-      "key": "candidate-111-6",
-      "title": "災害救助費",
-      "rankingKeys": [
-        "disaster-relief-expenses-prefecture"
-      ],
-      "defaultCheckedKeys": [
-        "disaster-relief-expenses-prefecture"
-      ]
-    },
-    {
-      "key": "candidate-112-1",
+      "key": "consumer-trouble-safety-1",
       "title": "消費生活相談受付件数（年度）",
       "rankingKeys": [
         "consumer-consultation-accepted-cases"
       ],
       "defaultCheckedKeys": [
         "consumer-consultation-accepted-cases"
-      ]
-    },
-    {
-      "key": "candidate-112-2",
-      "title": "刑法犯認知件数",
-      "rankingKeys": [
-        "criminal-recognition-count"
-      ],
-      "defaultCheckedKeys": [
-        "criminal-recognition-count"
-      ]
-    },
-    {
-      "key": "candidate-112-3",
-      "title": "警察官数（人口千人当たり）",
-      "rankingKeys": [
-        "police-officer-count-per-population"
-      ],
-      "defaultCheckedKeys": [
-        "police-officer-count-per-population"
       ]
     }
   ]

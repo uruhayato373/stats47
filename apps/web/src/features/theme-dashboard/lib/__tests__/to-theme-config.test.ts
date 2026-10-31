@@ -69,10 +69,16 @@ describe("toThemeConfig", () => {
 
 /** 人口規模と増減の入口と、拡充した出生・移動の章を分ける。 */
 describe("population-dynamics の指標カード", () => {
-  it("出生年齢・順位の追加指標は専用章に接続する", () => {
+  // 章は読者の問いで組み直す (2026-10-31) ので章の key には依存せず、指標どうしが同じ章にまとまっていることを見る
+  const chapterKeysOf = (metricKey: string) => {
     const catalog = THEME_CATALOGS["population-dynamics"];
-    const section = catalog.sections!.find((entry) => entry.key === "candidate-41")!;
-    const keys = section.metricGroupKeys.flatMap((key) => catalog.metricGroups!.find((group) => group.key === key)!.rankingKeys);
+    const section = catalog.sections!.find((entry) =>
+      entry.metricGroupKeys.some((key) => catalog.metricGroups!.find((group) => group.key === key)!.rankingKeys.includes(metricKey))
+    )!;
+    return section.metricGroupKeys.flatMap((key) => catalog.metricGroups!.find((group) => group.key === key)!.rankingKeys);
+  };
+  it("出生年齢・順位の追加指標は出生数と同じ章に置く", () => {
+    const keys = chapterKeysOf("births");
     expect(keys).toEqual(expect.arrayContaining(["births", "total-fertility-rate", "births-mother-under25", "births-third-child-plus"]));
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
     for (const key of keys) expect(config.tabIndicators.some((tab) => tab.rankingKey === key)).toBe(true);
@@ -89,7 +95,6 @@ describe("population-dynamics の指標カード", () => {
       "total-population", "population-growth-rate", "natural-increase-rate",
     ]));
     for (const key of entryKeys) expect(config.tabIndicators.some((tab) => tab.rankingKey === key)).toBe(true);
-
   });
 
   it("人口構造などの補足6指標はカードへ重複表示しない", () => {

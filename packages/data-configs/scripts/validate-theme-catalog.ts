@@ -236,7 +236,6 @@ export function validateMetricGroups(
   const seenTitles = new Set<string>();
   const assigned = new Set<string>();
   const groupsByKey = new Map<string, string[]>();
-  const comparisonYears = new Map<string, string>();
 
   for (const g of groups) {
     if (seenGroupKeys.has(g.key)) {
@@ -256,19 +255,8 @@ export function validateMetricGroups(
       errors.push(`[group-empty] ${c.key}/${g.key}: rankingKeys が空`);
     }
 
-    if (g.comparisonYear !== undefined && !/^\d{4}$/.test(g.comparisonYear)) {
-      errors.push(`[group-comparison-year] ${c.key}/${g.key}: comparisonYear は4桁年にする`);
-    }
-
     // rankingKeys ⊆ metrics
     for (const k of g.rankingKeys) {
-      if (g.comparisonYear) {
-        const previous = comparisonYears.get(k);
-        if (previous && previous !== g.comparisonYear) {
-          errors.push(`[group-comparison-year] ${c.key}/${g.key}: "${k}" に異なる比較年を指定できない`);
-        }
-        comparisonYears.set(k, g.comparisonYear);
-      }
       if (!metricKeys.has(k)) {
         errors.push(
           `[group-key] ${c.key}/${g.key}: rankingKey "${k}" が metrics に不在`
@@ -305,6 +293,13 @@ export function validateMetricGroups(
       errors.push(
         `[group-units] ${c.key}/${g.key}: 単位が ${units.size} 種 (${[...units].join(' / ')}) — ` +
           `Y 軸は左右 2 本までなので 2 種以内に分割する`
+      );
+    }
+
+    // 男女の比較は [男, 女] の 2 件・同じ単位 (同じ軸で重ねて差を読む)
+    if (g.view === 'sex' && (g.rankingKeys.length !== 2 || units.size !== 1)) {
+      errors.push(
+        `[group-view-sex] ${c.key}/${g.key}: view "sex" は同じ単位の [男, 女] 2 件にする (現在 ${g.rankingKeys.length} 件・単位 ${units.size} 種)`
       );
     }
 

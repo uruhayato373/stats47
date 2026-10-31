@@ -37,9 +37,6 @@ vi.mock('../ThemeDbChartRenderer', () => ({
     />
   ),
 }));
-vi.mock('../ThemeComparisonSection', () => ({
-  ThemeComparisonSection: () => <div data-block="comparison" />,
-}));
 vi.mock('../../actions', () => ({
   fetchMetricTimeseriesAction: vi.fn(),
 }));
@@ -119,12 +116,11 @@ describe('ThemeMetricsDashboard — 考察・FAQ の置き場所', () => {
     expect(reading?.querySelector('[data-block="md:md-faq"]')).not.toBeNull();
   });
 
-  it('FAQ だけの章は比較の節の後ろに置き、どの章にも属さない markdown は最後に残す', () => {
+  it('FAQ だけの章は指標の章の後ろに置き、どの章にも属さない markdown は最後に残す', () => {
     const { container } = renderDashboard();
     expect(pageOrder(container)).toEqual([
       'theme-section-level',
       'card:price',
-      'comparison',
       'theme-section-reading',
       'md:md-faq',
       'md:md-unassigned',

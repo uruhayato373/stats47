@@ -36,6 +36,15 @@ export interface MetricKpi {
   topRanked: { areaCode: string; areaName: string; value: number } | null;
   /** 選択中都道府県の値をまだ取得中 (都道府県選択時のみ意味を持つ) */
   isLoading: boolean;
+  /**
+   * 47 都道府県の値を順位の順に並べたもの。推移を描けないカードで「47 都道府県の中の位置」を描く (2026-10-31)。
+   * 問いの型「地域間の比較・順位」に答える (theme-catalog-standards.md §3)
+   */
+  rankedValues?: number[];
+  /** 全国の値 (e-Stat の全国行)。無い指標は undefined (47 県の平均を代わりに作らない) */
+  nationalValue?: number;
+  /** 観測のある年が 1 つだけか (推移を描けない) */
+  isSingleYear?: boolean;
 }
 
 /**

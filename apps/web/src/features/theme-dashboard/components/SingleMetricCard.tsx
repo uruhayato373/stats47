@@ -6,6 +6,7 @@ import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { MiniLineChart } from '@/components/charts/MiniCharts';
+import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
@@ -136,8 +137,41 @@ export function SingleMetricCard({
             seriesName={trend.seriesName}
             unit={formatUnitForDisplay(metric.unit)}
           />
-        ) : null}
+        ) : (
+          <PrefecturePositionBars metric={metric} selectedPrefectureCode={selectedPrefectureCode} areaName={areaName} />
+        )}
       </MetricStatTile>
     </div>
+  );
+}
+
+/** 位置の図を描くのに要る県の数 (欠けの多い指標で並びが意味を持たないときは描かない) */
+const MIN_POSITION_VALUES = 10;
+
+/**
+ * 推移を描けないときの小さな図: 47 都道府県の値を順位の順に並べ、選んでいる県 (未選択なら 1 位) を濃く塗る
+ * (2026-10-31。問いの型「地域間の比較・順位」。数値だけのタイルに、全体の中の位置を足す)。
+ */
+function PrefecturePositionBars({
+  metric,
+  selectedPrefectureCode,
+  areaName,
+}: {
+  metric: MetricKpi;
+  selectedPrefectureCode: string | null;
+  areaName: string;
+}) {
+  const values = metric.rankedValues ?? [];
+  if (values.length < MIN_POSITION_VALUES) return null;
+  const rank = selectedPrefectureCode ? metric.rank : 1;
+  if (rank === null || rank < 1 || rank > values.length) return null;
+  const name = selectedPrefectureCode ? areaName : (metric.topRanked?.areaName ?? '1位の県');
+  return (
+    <MiniDistributionBars
+      bins={values.map((count) => ({ count }))}
+      highlightIndex={rank - 1}
+      label={`${values.length}都道府県を値の順に並べた中の${name} (${rank}位)`}
+      className="mt-2"
+    />
   );
 }

@@ -34,12 +34,8 @@ export function expectedSectionPanels(catalog, section) {
   const groups = section.metricGroupKeys.map((key) =>
     catalog.metricGroups?.find((group) => group.key === key)
   );
-  return {
-    expectedCards: groups.filter((group) => !group?.comparisonYear).length,
-    expectedFixedYears: groups
-      .filter((group) => group?.comparisonYear)
-      .map((group) => group.comparisonYear),
-  };
+  // 年を固定した県別の比較表は 2026-10-31 に撤去した (県の比較はランキングのページ)。章のカードはすべて指標カード
+  return { expectedCards: groups.filter(Boolean).length };
 }
 
 export function runtimeFindings(r) {
@@ -57,17 +53,6 @@ export function runtimeFindings(r) {
   for (const s of r.sections ?? [])
     if (s.expectedCards !== undefined && s.cards !== s.expectedCards)
       findings.push(`section-cards:${s.key}:${s.cards}/${s.expectedCards}`);
-  for (const section of r.sections ?? []) {
-    if (
-      section.expectedFixedYears &&
-      (JSON.stringify([...section.expectedFixedYears].sort()) !==
-        JSON.stringify(
-          (section.fixedTables ?? []).map((table) => table.year).sort()
-        ) ||
-        section.fixedTables?.some((table) => table.rows < 1))
-    )
-      findings.push(`fixed-year-tables:${section.key}`);
-  }
   for (const key of r.expectedChartKeys ?? [])
     if (!(r.charts ?? []).some((c) => c.key === key))
       findings.push(`missing-chart:${key}`);

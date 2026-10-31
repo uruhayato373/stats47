@@ -30,12 +30,15 @@ describe('人口動態テーマの可視化構成', () => {
       (chart) => chart.componentType !== 'markdown-section'
     );
 
+    // 母の年齢・出生順位の構成比 (2026-10-31) は出生数の内訳で、年齢構造の図の重複ではない
     expect(visualCharts.map((chart) => chart.componentKey)).toEqual([
       'birth-death-count-trend',
       'theme-pop-migration-trend',
+      'population-dynamics-birth-rate-and-maternity-composition-2',
+      'population-dynamics-birth-rate-and-maternity-composition-3',
     ]);
     expect(visualCharts.map((chart) => chart.sortOrder)).toEqual([
-      10, 20,
+      10, 20, 100, 101,
     ]);
     expect(
       visualCharts.find(

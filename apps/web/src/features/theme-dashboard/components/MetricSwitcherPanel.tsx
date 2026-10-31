@@ -69,6 +69,8 @@ interface MetricSwitcherPanelProps {
   defaultCheckedKeys?: string[];
   /** チャートの誤読防止の注記 (同じ指標を描いていた章のチャートをこのカードに寄せたとき、その注記を引き継ぐ) */
   annotation?: string;
+  /** 指標ごとの系列色 (男女の比較など意味のある色)。無い指標は定義順の既定色 */
+  seriesColors?: Record<string, string>;
 }
 
 /** 系列キャッシュのキー。指標×地域で一意にする */
@@ -201,6 +203,7 @@ export function MetricSwitcherPanel({
   selectedPrefectureCode,
   areaName,
   defaultCheckedKeys,
+  seriesColors,
 }: MetricSwitcherPanelProps) {
   // 推移に出す県: 選んでいる県、無ければ前に選んで覚えている県 (47 都道府県のページ。タイルは 47 都道府県のまま)。
   // どちらも無ければ全国の推移を出す (2026-10-31 オーナー決定。旧: 「都道府県を選択すると…」の空のカード)
@@ -237,9 +240,9 @@ export function MetricSwitcherPanel({
   /** 系列色。グループ内の定義順で固定 = 他をチェックしても自分の色は変わらない */
   const colorOf = useMemo(() => {
     const map = new Map<string, string>();
-    metrics.forEach((m, i) => map.set(m.metricKey, getChartColor(i)));
+    metrics.forEach((m, i) => map.set(m.metricKey, seriesColors?.[m.metricKey] ?? getChartColor(i)));
     return map;
-  }, [metrics]);
+  }, [metrics, seriesColors]);
 
   /**
    * `${metricKey}:${areaCode}` をキーにした取得済み系列。

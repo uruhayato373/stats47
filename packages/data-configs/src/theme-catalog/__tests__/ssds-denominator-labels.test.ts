@@ -50,7 +50,7 @@ describe("SSDS denominator labels", () => {
     expect(chart?.annotation).toContain("日本人人口10万人");
     expect(chart?.annotation).toContain("5死因の合計を100%");
     for (const section of THEME_CATALOGS.healthcare.sections ?? []) {
-      expect(section.description).not.toContain("系列は実数です");
+      expect(section.description ?? "").not.toContain("系列は実数です");
     }
   });
 

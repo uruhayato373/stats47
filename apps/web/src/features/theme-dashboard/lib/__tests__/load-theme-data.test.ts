@@ -10,7 +10,7 @@ vi.mock('@stats47/ranking/server', () => ({
 }));
 vi.mock('@stats47/gis/geoshape', () => ({ fetchPrefectureTopology: vi.fn(), fetchAllCitiesTopology: vi.fn() }));
 vi.mock('@stats47/data-configs/theme-catalog', () => ({ THEME_CATALOGS: {
-  fixed: { metricGroups: [{ rankingKeys: ['value'], comparisonYear: '2021' }] },
+  grouped: { metricGroups: [{ key: 'group', rankingKeys: ['value'] }] },
 } }));
 
 import { loadThemeData } from '../load-theme-data';
@@ -23,39 +23,15 @@ beforeEach(() => {
   readItem.mockResolvedValue({ success: true, data: { latestYear: { yearCode: '2024' } } });
   readValues.mockResolvedValue({ success: true, data: [row('2021'), row('2024')] });
 });
-describe('テーマの固定比較年', () => {
-  it('最新年ではなくカタログの比較年を読み込む', async () => {
-    const result = await loadThemeData(config('fixed'));
-    expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2021')]);
+describe('テーマの観測年', () => {
+  // 47 都道府県の比較はランキングが受け持つので、テーマは年を固定せず最新年を読む (2026-10-31)
+  it('カードの編成があっても最新年を読み、編成をそのまま返す', async () => {
+    const result = await loadThemeData(config('grouped'));
+    expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
+    expect(result?.metricGroups?.[0].key).toBe('group');
   });
-  it('指定年が欠けている場合は他年で穴埋めしない', async () => {
-    readValues.mockResolvedValue({ success: true, data: [row('2024')] });
-    expect(await loadThemeData(config('fixed'))).toBeNull();
-  });
-  it('比較年を固定しない既存テーマは最新年を使う', async () => {
+  it('編成の無いテーマも最新年を使う', async () => {
     const result = await loadThemeData(config('existing'));
     expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
   });
-  it('R2 に新しい年が入れば比較年をその年へ進め、カードにも同じ年を渡す', async () => {
-    readItem.mockResolvedValue({ success: true, data: {
-      latestYear: { yearCode: '2024' },
-      availableYears: [{ yearCode: '2024', yearName: '2024年' }, { yearCode: '2021', yearName: '2021年' }],
-    } });
-    const result = await loadThemeData(config('fixed'));
-    expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
-    expect(result?.metricGroups?.[0].comparisonYear).toBe('2024');
-  });
-});
-
-
-it('暦年のラベルを最新年・選択肢・県値すべてで揃える', async () => {
-  readItem.mockResolvedValue({ success: true, data: {
-    latestYear: { yearCode: '2024100000', yearName: '2024年度' },
-    availableYears: [{ yearCode: '2024100000', yearName: '2024年度' }],
-  } });
-  readValues.mockResolvedValue({ success: true, data: [{ ...row('2024'), yearName: '2024年度' }] });
-  const data = (await loadThemeData(config('existing')))?.indicatorDataMap.value;
-  expect(data?.rankingItem.latestYear?.yearName).toBe('2024年');
-  expect(data?.availableYears?.[0].yearName).toBe('2024年');
-  expect(data?.rankingValues[0].yearName).toBe('2024年');
 });

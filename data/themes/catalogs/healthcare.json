@@ -420,7 +420,7 @@
     {
       "rankingKey": "ambulance-transported-persons",
       "shortLabel": "救急自動車による搬送人員",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和7年版 消防白書 附属資料2-5-4「救急自動車による都道府県別事故種別救急搬送人員」（総務省消防庁）",
         "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69513.html",
@@ -868,39 +868,6 @@
       "sortOrder": 30
     },
     {
-      "componentKey": "md-healthcare-discussion",
-      "componentType": "markdown-section",
-      "title": "数値を比較するときの注意",
-      "componentProps": {
-        "markdown": "医師・看護師・准看護師・一般病院を人口10万人当たりで比較します。医療人材は医療施設の従事者が対象です。\n\n人口10万人当たり病床数、病床利用率、在院日数は別の側面です。値の大小だけで医療の質は判断できません。\n\n1人当たりの医療費は年齢構成や受療状況の影響を受けます。"
-      },
-      "sourceName": "厚生労働白書 (令和7年版) / 地方財政白書 (令和8年版) / 経済財政白書 (令和7年版) / 地域医療構想・病床機能報告 (厚生労働省) / 医師の働き方改革 (厚生労働省)",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 40
-    },
-    {
-      "componentKey": "md-healthcare-faq",
-      "componentType": "markdown-section",
-      "title": "よくある質問",
-      "componentProps": {
-        "displayMode": "faq",
-        "markdown": "### Q1: 医療人材と施設を見るときの注意は？\n\n医師・看護師・准看護師・一般病院を人口10万人当たりで比較します。医療人材は医療施設の従事者が対象です。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n供給・利用・費用・健康結果を分けて読み、単一指標から医療の良し悪しを決めないようにします。"
-      },
-      "sourceName": "厚生労働白書 (令和7年版) / 地域医療構想 (厚生労働省) / 医師の働き方改革 (厚生労働省) / 健康日本21(第三次) (厚生労働省)",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 50
-    },
-    {
       "componentKey": "theme-health-death-causes-donut",
       "componentType": "donut-chart",
       "title": "主要5死因内の構成",
@@ -950,6 +917,125 @@
       "section": "causes-of-death",
       "sortOrder": 60,
       "annotation": "日本人人口10万人当たりの死亡率を使い、同じ地域・年の5死因の合計を100%として示します。各数値は死亡者の実人数ではありません。全死因の構成比や年齢調整死亡率ではありません。"
+    },
+    {
+      "componentKey": "healthcare-medical-system-and-resources-composition-1",
+      "componentType": "composition-chart",
+      "title": "年齢階層別の医療施設従事医師数内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "medical-physicians-under-40",
+            "label": "40歳未満の医療施設従事医師数（2024年末）",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "medical-physicians-age-40-59",
+            "label": "40〜59歳の医療施設従事医師数（2024年末）",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "medical-physicians-age-60-plus",
+            "label": "60歳以上の医療施設従事医師数（2024年末）",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "medical-physicians-under-40",
+        "medical-physicians-age-40-59",
+        "medical-physicians-age-60-plus"
+      ],
+      "sourceName": "厚生労働省「令和6年医師・歯科医師・薬剤師統計」",
+      "sourceLink": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040383757&fileKind=1",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "medical-system-and-resources",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "healthcare-emergency-medical-care-composition-3",
+      "componentType": "composition-chart",
+      "title": "傷病程度別の救急搬送人員内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "ambulance-transported-deaths",
+            "label": "救急搬送人員（初診時死亡）",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "ambulance-transported-severe",
+            "label": "救急搬送人員（重症）",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "ambulance-transported-moderate",
+            "label": "救急搬送人員（中等症）",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "ambulance-transported-mild",
+            "label": "救急搬送人員（軽症）",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "ambulance-transported-other",
+            "label": "救急搬送人員（その他）",
+            "colorRole": "series-5"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "ambulance-transported-deaths",
+        "ambulance-transported-severe",
+        "ambulance-transported-moderate",
+        "ambulance-transported-mild",
+        "ambulance-transported-other"
+      ],
+      "sourceName": "消防庁「救急・救助の現況」",
+      "sourceLink": "https://www.fdma.go.jp/publication/rescue/items/kkkg_r07_01_kyukyu.pdf",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "emergency-medical-care",
+      "sortOrder": 101
+    },
+    {
+      "componentKey": "md-healthcare-discussion",
+      "componentType": "markdown-section",
+      "title": "数値を比較するときの注意",
+      "componentProps": {
+        "markdown": "医師・看護師・准看護師・一般病院を人口10万人当たりで比較します。医療人材は医療施設の従事者が対象です。\n\n人口10万人当たり病床数、病床利用率、在院日数は別の側面です。値の大小だけで医療の質は判断できません。\n\n1人当たりの医療費は年齢構成や受療状況の影響を受けます。"
+      },
+      "sourceName": "厚生労働白書 (令和7年版) / 地方財政白書 (令和8年版) / 経済財政白書 (令和7年版) / 地域医療構想・病床機能報告 (厚生労働省) / 医師の働き方改革 (厚生労働省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 40
+    },
+    {
+      "componentKey": "md-healthcare-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 医療人材と施設を見るときの注意は？\n\n医師・看護師・准看護師・一般病院を人口10万人当たりで比較します。医療人材は医療施設の従事者が対象です。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n供給・利用・費用・健康結果を分けて読み、単一指標から医療の良し悪しを決めないようにします。"
+      },
+      "sourceName": "厚生労働白書 (令和7年版) / 地域医療構想 (厚生労働省) / 医師の働き方改革 (厚生労働省) / 健康日本21(第三次) (厚生労働省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 50
     }
   ],
   "evidenceTopics": [
@@ -1018,8 +1104,7 @@
         "hospital-use-1",
         "hospital-use-2",
         "hospital-use-3"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "medical-expense",
@@ -1047,8 +1132,7 @@
       "description": "日常生活に制限のない期間の平均を男女別に確認します。推計値のため小さな県差を過度に読み取らないでください。",
       "metricGroupKeys": [
         "healthy-years"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "access",
@@ -1057,89 +1141,79 @@
       "metricGroupKeys": [
         "access"
       ],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "depopulation-medical"
       ]
     },
     {
-      "key": "candidate-57",
-      "title": "診療科と年齢から見る医療人材",
-      "description": "2024年12月31日の医療施設従事医師を、主たる従業地別に診療科と年齢で比較します。40歳未満・40〜59歳・60歳以上は同じ総数の内訳です。小児科・産婦人科系・救急科は主たる診療科の人数で、全診療科の内訳は専用図表から確認できます。人口当たり指標と人数は区別して読みます。",
+      "key": "life-expectancy-and-health",
+      "title": "健康寿命や平均寿命は延伸し生活習慣病のリスクを抑えられているか",
+      "concern": "長生きするだけでなく健康で元気に過ごせる期間が十分にあるかや重大な病気のリスクが心配です。",
       "metricGroupKeys": [
-        "candidate-57-3",
-        "candidate-57-4",
-        "candidate-57-5",
-        "candidate-57-6",
-        "candidate-57-7",
-        "candidate-57-8"
+        "life-expectancy-and-health-1",
+        "life-expectancy-and-health-2",
+        "life-expectancy-and-health-3"
+      ]
+    },
+    {
+      "key": "medical-system-and-resources",
+      "title": "地域の病院数や医師・看護師などの医療提供体制は維持されているか",
+      "concern": "いざというときに近くで必要な医療を受けられる体制や病床が確保されているか不安です。",
+      "metricGroupKeys": [
+        "medical-system-and-resources-1"
+      ],
+      "chartKeys": [
+        "healthcare-medical-system-and-resources-composition-1"
       ],
       "embeddedSectionKeys": [
         "medical-workforce"
       ]
     },
     {
-      "key": "candidate-58",
-      "title": "救急搬送の所要時間と初診時の傷病程度",
-      "description": "2024年中の救急自動車による搬送人員を、初診時の医師の診断による死亡・重症・中等症・軽症・その他に分けます。5区分は同じ搬送総数の内訳で、出動件数を分母にしません。軽症は入院加療が不要という分類で、早期治療が必要な人も含みます。搬送時間だけから傷病程度や治療の成否を判断しません。",
+      "key": "emergency-medical-care",
+      "title": "救急搬送の要請時に迅速な受け入れや体制が確保されているか",
+      "concern": "救急車の要請から病院収容までの時間や救急医療の受け入れ態勢が気になります。",
       "metricGroupKeys": [
-        "candidate-58-1",
-        "candidate-58-2",
-        "candidate-58-3",
-        "candidate-58-4",
-        "candidate-58-5",
-        "candidate-58-6",
-        "candidate-58-8"
+        "emergency-medical-care-1",
+        "emergency-medical-care-2",
+        "emergency-medical-care-3"
+      ],
+      "chartKeys": [
+        "healthcare-emergency-medical-care-composition-3"
       ]
     },
     {
-      "key": "candidate-59",
-      "title": "出産と周産期医療の施設供給",
-      "description": "分娩取扱病院・診療所は2023年10月、総合・地域周産期母子医療センターは2026年4月の施設数です。9月の分娩実績がない取扱施設も含み、病院とセンターは重複するため合算しません。施設数はNICU病床数や患者の受入能力とは異なります。",
+      "key": "perinatal-and-pediatric-care",
+      "title": "妊娠・出産や子どもへの専門医療体制は地域で確保されているか",
+      "concern": "身近な地域に分娩を扱う施設や小児科・産婦人科の医師が十分いるか心配です。",
       "metricGroupKeys": [
-        "candidate-59-1",
-        "candidate-59-2",
-        "candidate-59-3",
-        "candidate-59-4"
+        "perinatal-and-pediatric-care-1",
+        "perinatal-and-pediatric-care-2",
+        "perinatal-and-pediatric-care-3",
+        "perinatal-and-pediatric-care-4",
+        "perinatal-and-pediatric-care-5",
+        "perinatal-and-pediatric-care-6"
       ]
     },
     {
-      "key": "candidate-61",
-      "title": "訪問診療と訪問看護の実施",
-      "description": "2023年9月の1か月間、病院・一般診療所による医療保険等の訪問診療と訪問看護・指導の実施件数を比較します。県は医療施設所在地で、患者の居住地ではありません。実人数や年間件数ではなく、訪問看護ステーション、精神科の別項目、介護保険による訪問看護は含みません。訪問介護の利用者数・給与は別の指標です。",
+      "key": "home-care-and-nursing",
+      "title": "在宅での医療・看護や介護サービスを受けられる環境は整っているか",
+      "concern": "住み慣れた自宅で医療や介護を受け続けられる基盤や介護人材が足りているか不安です。",
       "metricGroupKeys": [
-        "candidate-61-1",
-        "candidate-61-2",
-        "candidate-61-3",
-        "candidate-61-4"
+        "home-care-and-nursing-1",
+        "home-care-and-nursing-2",
+        "home-care-and-nursing-3",
+        "home-care-and-nursing-4"
       ]
     },
     {
-      "key": "candidate-65",
-      "title": "健康寿命と平均寿命",
-      "description": "健康寿命は2022年、0歳平均余命である平均寿命は2020年の値です。健康寿命は日常生活に制限のない期間を表します。年と算定方法が異なるため、2系列を差し引いて不健康な期間を求めません。",
+      "key": "mental-health-support",
+      "title": "心の健康やメンタルヘルスの相談・支援体制は機能しているか",
+      "concern": "ストレスや精神的な不調を感じた際に応じる相談窓口や医療環境があるか気になります。",
       "metricGroupKeys": [
-        "candidate-65-3",
-        "candidate-65-4"
-      ]
-    },
-    {
-      "key": "candidate-67",
-      "title": "がんの新規罹患と疾病の死亡",
-      "description": "2023年の悪性新生物（全部位C00-C96）の罹患数を診断時住所の県別で確認します。多重原発がんは別腫瘍となるため単位は例です。上皮内新生物は含まず、性別不詳4例は総数に含みます。人口や年齢構成を調整したリスクではなく、既存の生活習慣病死亡率とも別の指標です。",
-      "metricGroupKeys": [
-        "candidate-67-1",
-        "candidate-67-2"
-      ]
-    },
-    {
-      "key": "candidate-68",
-      "title": "こころの状態と相談・受療",
-      "description": "K6は2025年6月5日調査の12歳以上・入院者除外。不詳を除く公表級別推計人数を分母に使用し、年齢調整はしていません。人数は千人単位の丸めた推計値で実回答者数ではありません。相談は2024年度の市区町村での延人員です。受療率とも対象・時点が異なり、同じ人の流れを表しません。",
-      "metricGroupKeys": [
-        "candidate-68-1",
-        "candidate-68-2",
-        "candidate-68-3"
+        "mental-health-support-1",
+        "mental-health-support-2",
+        "mental-health-support-3"
       ]
     },
     {
@@ -1239,237 +1313,30 @@
       ]
     },
     {
-      "key": "candidate-57-3",
-      "title": "40歳未満の医療施設従事医師数（2024年末）",
+      "key": "life-expectancy-and-health-1",
+      "title": "男女の平均寿命の推移",
       "rankingKeys": [
-        "medical-physicians-under-40"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-under-40"
-      ]
-    },
-    {
-      "key": "candidate-57-4",
-      "title": "40〜59歳の医療施設従事医師数（2024年末）",
-      "rankingKeys": [
-        "medical-physicians-age-40-59"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-age-40-59"
-      ]
-    },
-    {
-      "key": "candidate-57-5",
-      "title": "60歳以上の医療施設従事医師数（2024年末）",
-      "rankingKeys": [
-        "medical-physicians-age-60-plus"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-age-60-plus"
-      ]
-    },
-    {
-      "key": "candidate-57-6",
-      "title": "小児科の医師数（2024年末）",
-      "rankingKeys": [
-        "medical-physicians-pediatrics"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-pediatrics"
-      ]
-    },
-    {
-      "key": "candidate-57-7",
-      "title": "産婦人科系の医師数（2024年末）",
-      "rankingKeys": [
-        "medical-physicians-obstetrics-gynecology"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-obstetrics-gynecology"
-      ]
-    },
-    {
-      "key": "candidate-57-8",
-      "title": "救急科の医師数（2024年末）",
-      "rankingKeys": [
-        "medical-physicians-emergency-medicine"
-      ],
-      "defaultCheckedKeys": [
-        "medical-physicians-emergency-medicine"
-      ]
-    },
-    {
-      "key": "candidate-58-1",
-      "title": "救急自動車による搬送人員",
-      "rankingKeys": [
-        "ambulance-transported-persons"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-persons"
-      ]
-    },
-    {
-      "key": "candidate-58-2",
-      "title": "救急搬送人員（初診時死亡）",
-      "rankingKeys": [
-        "ambulance-transported-deaths"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-deaths"
-      ]
-    },
-    {
-      "key": "candidate-58-3",
-      "title": "救急搬送人員（重症）",
-      "rankingKeys": [
-        "ambulance-transported-severe"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-severe"
-      ]
-    },
-    {
-      "key": "candidate-58-4",
-      "title": "救急搬送人員（中等症）",
-      "rankingKeys": [
-        "ambulance-transported-moderate"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-moderate"
-      ]
-    },
-    {
-      "key": "candidate-58-5",
-      "title": "救急搬送人員（軽症）",
-      "rankingKeys": [
-        "ambulance-transported-mild"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-mild"
-      ]
-    },
-    {
-      "key": "candidate-58-6",
-      "title": "救急搬送人員（その他）",
-      "rankingKeys": [
-        "ambulance-transported-other"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-transported-other"
-      ]
-    },
-    {
-      "key": "candidate-58-8",
-      "title": "救急出動件数（人口千人当たり）",
-      "rankingKeys": [
-        "annual-emergency-dispatches-per-1000"
-      ],
-      "defaultCheckedKeys": [
-        "annual-emergency-dispatches-per-1000"
-      ]
-    },
-    {
-      "key": "candidate-59-1",
-      "title": "分娩取扱病院数（2023年）",
-      "rankingKeys": [
-        "delivery-hospital-count"
-      ],
-      "defaultCheckedKeys": [
-        "delivery-hospital-count"
-      ]
-    },
-    {
-      "key": "candidate-59-2",
-      "title": "分娩取扱診療所数（2023年）",
-      "rankingKeys": [
-        "delivery-clinic-count"
-      ],
-      "defaultCheckedKeys": [
-        "delivery-clinic-count"
-      ]
-    },
-    {
-      "key": "candidate-59-3",
-      "title": "総合周産期母子医療センター（2026年）",
-      "rankingKeys": [
-        "general-perinatal-center-count"
-      ],
-      "defaultCheckedKeys": [
-        "general-perinatal-center-count"
-      ]
-    },
-    {
-      "key": "candidate-59-4",
-      "title": "地域周産期母子医療センター（2026年）",
-      "rankingKeys": [
-        "regional-perinatal-center-count"
-      ],
-      "defaultCheckedKeys": [
-        "regional-perinatal-center-count"
-      ]
-    },
-    {
-      "key": "candidate-61-1",
-      "title": "訪問診療実施件数（2023年9月）",
-      "rankingKeys": [
-        "home-medical-visit-cases"
-      ],
-      "defaultCheckedKeys": [
-        "home-medical-visit-cases"
-      ]
-    },
-    {
-      "key": "candidate-61-2",
-      "title": "訪問看護・指導実施件数（2023年9月）",
-      "rankingKeys": [
-        "home-nursing-visit-cases"
-      ],
-      "defaultCheckedKeys": [
-        "home-nursing-visit-cases"
-      ]
-    },
-    {
-      "key": "candidate-61-3",
-      "title": "訪問介護利用者数（1事業所当たり）",
-      "rankingKeys": [
-        "home-helper-users-per-office"
-      ],
-      "defaultCheckedKeys": [
-        "home-helper-users-per-office"
-      ]
-    },
-    {
-      "key": "candidate-61-4",
-      "title": "訪問介護従事者平均年収",
-      "rankingKeys": [
-        "home-care-worker-annual-income"
-      ],
-      "defaultCheckedKeys": [
-        "home-care-worker-annual-income"
-      ]
-    },
-    {
-      "key": "candidate-65-3",
-      "title": "男性平均寿命（2020年）",
-      "rankingKeys": [
-        "life-expectancy-0-male"
-      ],
-      "defaultCheckedKeys": [
-        "life-expectancy-0-male"
-      ]
-    },
-    {
-      "key": "candidate-65-4",
-      "title": "女性平均寿命（2020年）",
-      "rankingKeys": [
+        "life-expectancy-0-male",
         "life-expectancy-0-female"
       ],
       "defaultCheckedKeys": [
+        "life-expectancy-0-male",
         "life-expectancy-0-female"
+      ],
+      "view": "sex"
+    },
+    {
+      "key": "life-expectancy-and-health-2",
+      "title": "生活習慣病死亡（日本人人口10万人当たり）",
+      "rankingKeys": [
+        "deaths-lifestyle-diseases-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "deaths-lifestyle-diseases-per-100k"
       ]
     },
     {
-      "key": "candidate-67-1",
+      "key": "life-expectancy-and-health-3",
       "title": "がんの新規罹患数（2023年）",
       "rankingKeys": [
         "new-cancer-incidence-count"
@@ -1479,17 +1346,153 @@
       ]
     },
     {
-      "key": "candidate-67-2",
-      "title": "生活習慣病死亡率",
+      "key": "medical-system-and-resources-1",
+      "title": "年齢階層別の医療施設従事医師数内訳",
       "rankingKeys": [
-        "deaths-lifestyle-diseases-per-100k"
+        "medical-physicians-under-40",
+        "medical-physicians-age-40-59",
+        "medical-physicians-age-60-plus"
       ],
       "defaultCheckedKeys": [
-        "deaths-lifestyle-diseases-per-100k"
+        "medical-physicians-under-40"
       ]
     },
     {
-      "key": "candidate-68-1",
+      "key": "emergency-medical-care-1",
+      "title": "救急出動件数（人口千人当たり）",
+      "rankingKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ]
+    },
+    {
+      "key": "emergency-medical-care-2",
+      "title": "救急科の医師数（2024年末）",
+      "rankingKeys": [
+        "medical-physicians-emergency-medicine"
+      ],
+      "defaultCheckedKeys": [
+        "medical-physicians-emergency-medicine"
+      ]
+    },
+    {
+      "key": "emergency-medical-care-3",
+      "title": "傷病程度別の救急搬送人員内訳",
+      "rankingKeys": [
+        "ambulance-transported-deaths",
+        "ambulance-transported-severe",
+        "ambulance-transported-moderate",
+        "ambulance-transported-mild",
+        "ambulance-transported-other"
+      ],
+      "defaultCheckedKeys": [
+        "ambulance-transported-deaths"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-1",
+      "title": "小児科の医師数（2024年末）",
+      "rankingKeys": [
+        "medical-physicians-pediatrics"
+      ],
+      "defaultCheckedKeys": [
+        "medical-physicians-pediatrics"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-2",
+      "title": "産婦人科系の医師数（2024年末）",
+      "rankingKeys": [
+        "medical-physicians-obstetrics-gynecology"
+      ],
+      "defaultCheckedKeys": [
+        "medical-physicians-obstetrics-gynecology"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-3",
+      "title": "分娩取扱病院数（2023年）",
+      "rankingKeys": [
+        "delivery-hospital-count"
+      ],
+      "defaultCheckedKeys": [
+        "delivery-hospital-count"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-4",
+      "title": "分娩取扱診療所数（2023年）",
+      "rankingKeys": [
+        "delivery-clinic-count"
+      ],
+      "defaultCheckedKeys": [
+        "delivery-clinic-count"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-5",
+      "title": "総合周産期母子医療センター（2026年）",
+      "rankingKeys": [
+        "general-perinatal-center-count"
+      ],
+      "defaultCheckedKeys": [
+        "general-perinatal-center-count"
+      ]
+    },
+    {
+      "key": "perinatal-and-pediatric-care-6",
+      "title": "地域周産期母子医療センター（2026年）",
+      "rankingKeys": [
+        "regional-perinatal-center-count"
+      ],
+      "defaultCheckedKeys": [
+        "regional-perinatal-center-count"
+      ]
+    },
+    {
+      "key": "home-care-and-nursing-1",
+      "title": "訪問診療実施件数（2023年9月）",
+      "rankingKeys": [
+        "home-medical-visit-cases"
+      ],
+      "defaultCheckedKeys": [
+        "home-medical-visit-cases"
+      ]
+    },
+    {
+      "key": "home-care-and-nursing-2",
+      "title": "訪問看護・指導実施件数（2023年9月）",
+      "rankingKeys": [
+        "home-nursing-visit-cases"
+      ],
+      "defaultCheckedKeys": [
+        "home-nursing-visit-cases"
+      ]
+    },
+    {
+      "key": "home-care-and-nursing-3",
+      "title": "訪問介護利用者数（1事業所当たり）",
+      "rankingKeys": [
+        "home-helper-users-per-office"
+      ],
+      "defaultCheckedKeys": [
+        "home-helper-users-per-office"
+      ]
+    },
+    {
+      "key": "home-care-and-nursing-4",
+      "title": "訪問介護従事者平均年収",
+      "rankingKeys": [
+        "home-care-worker-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "home-care-worker-annual-income"
+      ]
+    },
+    {
+      "key": "mental-health-support-1",
       "title": "K6が10点以上の割合（12歳以上・不詳除外）",
       "rankingKeys": [
         "k6-score10plus-rate-12plus"
@@ -1499,23 +1502,23 @@
       ]
     },
     {
-      "key": "candidate-68-2",
+      "key": "mental-health-support-2",
+      "title": "気分障害の外来受療率（人口10万人当たり）",
+      "rankingKeys": [
+        "treatment-rate-mood-disorder-outpatient"
+      ],
+      "defaultCheckedKeys": [
+        "treatment-rate-mood-disorder-outpatient"
+      ]
+    },
+    {
+      "key": "mental-health-support-3",
       "title": "市区町村の精神保健福祉相談延人員",
       "rankingKeys": [
         "municipal-mental-health-consultation-extended-persons"
       ],
       "defaultCheckedKeys": [
         "municipal-mental-health-consultation-extended-persons"
-      ]
-    },
-    {
-      "key": "candidate-68-3",
-      "title": "気分障害外来受療率",
-      "rankingKeys": [
-        "treatment-rate-mood-disorder-outpatient"
-      ],
-      "defaultCheckedKeys": [
-        "treatment-rate-mood-disorder-outpatient"
       ]
     }
   ]

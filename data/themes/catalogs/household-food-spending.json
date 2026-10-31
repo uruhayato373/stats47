@@ -923,10 +923,8 @@
         "consumption-expenditure-total"
       ],
       "defaultCheckedKeys": [
-        "food-expenditure-total",
-        "consumption-expenditure-total"
-      ],
-      "comparisonYear": "2024"
+        "food-expenditure-total"
+      ]
     },
     {
       "key": "rice",
@@ -936,10 +934,8 @@
         "rice-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "rice-consumption-expenditure",
-        "rice-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "rice-consumption-expenditure"
+      ]
     },
     {
       "key": "bread-noodles",
@@ -953,10 +949,8 @@
         "instant-noodles-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "bread-consumption-quantity",
-        "white-bread-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "bread-consumption-quantity"
+      ]
     },
     {
       "key": "seafood-total",
@@ -967,10 +961,8 @@
         "shellfish-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "fresh-seafood-consumption-quantity",
-        "seafood-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "fresh-seafood-consumption-quantity"
+      ]
     },
     {
       "key": "fish-everyday",
@@ -984,10 +976,8 @@
         "sardine-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "salmon-consumption-expenditure",
-        "salmon-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "salmon-consumption-expenditure"
+      ]
     },
     {
       "key": "fish-white",
@@ -999,10 +989,8 @@
         "flounder-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "sea-bream-consumption-expenditure",
-        "sea-bream-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "sea-bream-consumption-expenditure"
+      ]
     },
     {
       "key": "shellfish-crustacean",
@@ -1018,10 +1006,8 @@
         "octopus-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "clam-consumption-expenditure",
-        "freshwater-clam-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "clam-consumption-expenditure"
+      ]
     },
     {
       "key": "dashi-seaweed",
@@ -1033,10 +1019,8 @@
         "katsuobushi-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "konbu-consumption-expenditure",
-        "konbu-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "konbu-consumption-expenditure"
+      ]
     },
     {
       "key": "meat",
@@ -1050,10 +1034,8 @@
         "other-meat-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "beef-consumption-quantity",
-        "pork-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "beef-consumption-quantity"
+      ]
     },
     {
       "key": "dairy-fats",
@@ -1064,10 +1046,8 @@
         "margarine-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "milk-consumption-quantity",
-        "butter-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "milk-consumption-quantity"
+      ]
     },
     {
       "key": "vegetables-total",
@@ -1077,10 +1057,8 @@
         "fresh-vegetables-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "fresh-vegetables-consumption-quantity",
-        "fresh-vegetables-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "fresh-vegetables-consumption-quantity"
+      ]
     },
     {
       "key": "leafy-vegetables",
@@ -1094,10 +1072,8 @@
         "spinach-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "cabbage-consumption-quantity",
-        "chinese-cabbage-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "cabbage-consumption-quantity"
+      ]
     },
     {
       "key": "root-vegetables",
@@ -1111,10 +1087,8 @@
         "lotus-root-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "daikon-consumption-quantity",
-        "carrot-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "daikon-consumption-quantity"
+      ]
     },
     {
       "key": "fruit-vegetables",
@@ -1127,10 +1101,8 @@
         "bean-sprouts-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "tomato-consumption-quantity",
-        "cucumber-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "tomato-consumption-quantity"
+      ]
     },
     {
       "key": "fruit",
@@ -1146,10 +1118,8 @@
         "other-citrus-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "fresh-fruit-consumption-quantity",
-        "apple-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "fresh-fruit-consumption-quantity"
+      ]
     },
     {
       "key": "seasonings",
@@ -1162,10 +1132,8 @@
         "margarine-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "miso-consumption-quantity",
-        "soy-sauce-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "miso-consumption-quantity"
+      ]
     },
     {
       "key": "sweets-processed",
@@ -1178,10 +1146,8 @@
         "frozen-food-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "confectionery-consumption-expenditure",
-        "jam-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "confectionery-consumption-expenditure"
+      ]
     },
     {
       "key": "dining-out-total",
@@ -1192,10 +1158,8 @@
         "drinking-out-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "dining-out-consumption-expenditure",
-        "coffee-shop-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "dining-out-consumption-expenditure"
+      ]
     },
     {
       "key": "dining-cuisines",
@@ -1210,10 +1174,8 @@
         "hamburger-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "japanese-food-dining-consumption-expenditure",
-        "western-food-dining-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "japanese-food-dining-consumption-expenditure"
+      ]
     },
     {
       "key": "tea-coffee",
@@ -1227,10 +1189,8 @@
         "black-tea-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "coffee-consumption-expenditure",
-        "coffee-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "coffee-consumption-expenditure"
+      ]
     },
     {
       "key": "soft-drinks",
@@ -1240,10 +1200,8 @@
         "carbonated-drink-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "mineral-water-consumption-expenditure",
-        "carbonated-drink-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "mineral-water-consumption-expenditure"
+      ]
     },
     {
       "key": "alcohol-spending",
@@ -1257,10 +1215,8 @@
         "shochu-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "beer-consumption-expenditure",
-        "happoshu-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "beer-consumption-expenditure"
+      ]
     },
     {
       "key": "alcohol-volume",
@@ -1271,10 +1227,8 @@
         "shochu-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "beer-consumption-quantity",
-        "happoshu-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "beer-consumption-quantity"
+      ]
     },
     {
       "key": "communication",
@@ -1288,10 +1242,8 @@
         "other-broadcast-fee-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "internet-fee-consumption-expenditure",
-        "mobile-phone-bill-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "internet-fee-consumption-expenditure"
+      ]
     },
     {
       "key": "leisure",
@@ -1306,10 +1258,8 @@
         "golf-equipment-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "movie-theater-consumption-expenditure",
-        "cultural-facility-admission-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "movie-theater-consumption-expenditure"
+      ]
     },
     {
       "key": "travel",
@@ -1320,10 +1270,8 @@
         "accommodation-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "domestic-package-tour-consumption-expenditure",
-        "overseas-package-tour-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "domestic-package-tour-consumption-expenditure"
+      ]
     },
     {
       "key": "schooling",
@@ -1333,10 +1281,8 @@
         "domestic-student-remittance-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "tuition-consumption-expenditure",
-        "domestic-student-remittance-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "tuition-consumption-expenditure"
+      ]
     },
     {
       "key": "home-goods",
@@ -1348,10 +1294,8 @@
         "kerosene-consumption-expenditure"
       ],
       "defaultCheckedKeys": [
-        "curtain-consumption-expenditure",
-        "interior-decoration-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "curtain-consumption-expenditure"
+      ]
     },
     {
       "key": "clothing-spending",
@@ -1363,10 +1307,8 @@
         "womens-stockings-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "necktie-consumption-expenditure",
-        "hat-consumption-expenditure"
-      ],
-      "comparisonYear": "2024"
+        "necktie-consumption-expenditure"
+      ]
     },
     {
       "key": "clothing-pieces",
@@ -1376,10 +1318,8 @@
         "hat-consumption-quantity"
       ],
       "defaultCheckedKeys": [
-        "necktie-consumption-quantity",
-        "hat-consumption-quantity"
-      ],
-      "comparisonYear": "2024"
+        "necktie-consumption-quantity"
+      ]
     }
   ],
   "sections": [

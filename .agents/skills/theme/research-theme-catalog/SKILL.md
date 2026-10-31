@@ -130,6 +130,21 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
    呼び元が自分で確認する (`/inspect-estat-meta <statsDataId>` or `curl` e-Stat API)。実在しなければ破棄。
 4. 合格したら呼び元が backlog へ append (同一ファイルへの並列書込を避けるため、agent には返させ呼び元が書く)。
 
+## 章と見せ方の一括設計 (2026-10-31)
+
+テーマの章 (読者の悩み → 問い) と指標カードの見せ方 (推移・数値・県別比較・男女・構成比) は、NotebookLM が白書を参照して
+作った設計案を `.local/theme-design/proposals/<theme>.json` に置き、機械の検査を通して catalog に書く。
+見せ方の型と問いの対応は `.claude/rules/theme-catalog-standards.md` §3.0。
+見せ方はモデルの判断を信用せず、年数・単位・件数でデータの形に合わせ直す。
+
+```bash
+npx tsx .claude/scripts/themes/dashboard-design/build-inventory.ts               # 指標ごとの年数・単位を R2 から数える
+node .claude/scripts/themes/dashboard-design/ask-notebooklm.mjs [theme ...]     # 設計案 (1 テーマ 1〜3 分。保存済みは飛ばす)
+npx tsx .claude/scripts/themes/dashboard-design/apply-design.ts <theme>          # 差分の要約だけ
+npx tsx .claude/scripts/themes/dashboard-design/apply-design.ts --write <theme>  # catalog に書く
+npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:catalog --workspace=@stats47/data-configs
+```
+
 ## 完了後の引き継ぎ (このスキルの外)
 
 ```

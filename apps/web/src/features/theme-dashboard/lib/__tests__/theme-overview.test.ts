@@ -115,7 +115,6 @@ it('比較指標は既存グループとタブから重複なく導出する', (
           title: '章',
           rankingKeys: ['main', 'fixed-context'],
           defaultCheckedKeys: ['main'],
-          comparisonYear: '2021',
         },
       ]
     )

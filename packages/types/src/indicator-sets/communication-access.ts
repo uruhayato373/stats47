@@ -18,7 +18,7 @@ export const COMMUNICATION_ACCESS_SET: IndicatorSet = {
     {
       "rankingKey": "broadband-service-contract-count",
       "shortLabel": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "mobile-phone-contract-count-per-1000",

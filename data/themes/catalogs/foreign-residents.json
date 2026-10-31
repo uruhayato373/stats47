@@ -221,11 +221,11 @@
         "foreign-resident-count",
         "foreign-resident-count-per-100k"
       ],
-      "relatedChartKeys": [
-        "theme-foreign-total-trend"
-      ],
       "relatedThemeKeys": [
         "population-dynamics"
+      ],
+      "relatedChartKeys": [
+        "theme-foreign-total-trend"
       ]
     },
     {
@@ -241,11 +241,11 @@
         "foreign-resident-count-china-per-100k",
         "foreign-resident-count-korea-per-100k"
       ],
-      "relatedChartKeys": [
-        "theme-foreign-nationality-trend"
-      ],
       "relatedThemeKeys": [
         "population-dynamics"
+      ],
+      "relatedChartKeys": [
+        "theme-foreign-nationality-trend"
       ]
     }
   ],
@@ -281,12 +281,19 @@
       ]
     },
     {
-      "key": "candidate-40",
-      "title": "外国人の雇用と事業所",
-      "description": "2025年10月末の事業主による外国人雇用届出を集計しています。特別永住者と在留資格「外交」「公用」は対象外です。外国人住民の総数や年間の新規採用人数とは異なり、事業所数は企業数ではありません。",
+      "key": "foreign-workers",
+      "title": "地域の産業で働く外国人労働者の規模はどれくらいか",
+      "concern": "深刻な人手不足の中で外国人労働者の受入や雇用が拡大しているか気になります。",
       "metricGroupKeys": [
-        "candidate-40-1",
-        "candidate-40-2"
+        "foreign-workers-1"
+      ]
+    },
+    {
+      "key": "foreign-employing-establishments",
+      "title": "外国人を雇用する事業所の受け入れ基盤は整っているか",
+      "concern": "地域の事業所における外国人雇用の浸透度や受け入れ環境が気になります。",
+      "metricGroupKeys": [
+        "foreign-employing-establishments-1"
       ]
     }
   ],
@@ -314,7 +321,7 @@
       ]
     },
     {
-      "key": "candidate-40-1",
+      "key": "foreign-workers-1",
       "title": "外国人労働者数（雇用届出）",
       "rankingKeys": [
         "foreign-worker-count"
@@ -324,7 +331,7 @@
       ]
     },
     {
-      "key": "candidate-40-2",
+      "key": "foreign-employing-establishments-1",
       "title": "外国人を雇用する事業所数",
       "rankingKeys": [
         "foreign-employing-establishment-count"

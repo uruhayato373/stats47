@@ -269,7 +269,7 @@
     {
       "rankingKey": "employees-weekly-hours-60plus-count",
       "shortLabel": "週60時間以上の雇用者数（年間200日以上）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -348,6 +348,35 @@
       "sortOrder": 10
     },
     {
+      "componentKey": "theme-lm-employment-mobility-trend",
+      "componentType": "line-chart",
+      "title": "就業異動率の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "employment-mobility-rate"
+          }
+        ],
+        "labels": [
+          "就業異動率"
+        ],
+        "seriesColors": [
+          "danger"
+        ]
+      },
+      "relatedRankingKeys": [
+        "employment-mobility-rate"
+      ],
+      "sourceName": "総務省 社会・人口統計体系（労働）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "employment-mobility",
+      "sortOrder": 40
+    },
+    {
       "componentKey": "md-labor-mobility-discussion",
       "componentType": "markdown-section",
       "title": "数値を比較するときの注意",
@@ -379,35 +408,6 @@
       "dataSource": "ranking",
       "section": "reading",
       "sortOrder": 30
-    },
-    {
-      "componentKey": "theme-lm-employment-mobility-trend",
-      "componentType": "line-chart",
-      "title": "就業異動率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "employment-mobility-rate"
-          }
-        ],
-        "labels": [
-          "就業異動率"
-        ],
-        "seriesColors": [
-          "danger"
-        ]
-      },
-      "relatedRankingKeys": [
-        "employment-mobility-rate"
-      ],
-      "sourceName": "総務省 社会・人口統計体系（労働）",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "employment-mobility",
-      "sortOrder": 40
     }
   ],
   "evidenceTopics": [
@@ -425,13 +425,13 @@
         "job-change-rate",
         "employment-mobility-rate"
       ],
-      "relatedChartKeys": [
-        "labor-mobility-turnover-vs-jobchange",
-        "theme-lm-employment-mobility-trend"
-      ],
       "relatedThemeKeys": [
         "labor-wages",
         "local-economy"
+      ],
+      "relatedChartKeys": [
+        "labor-mobility-turnover-vs-jobchange",
+        "theme-lm-employment-mobility-trend"
       ]
     },
     {
@@ -470,8 +470,7 @@
         "job-market-1",
         "job-market-2",
         "job-market-3"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "turnover",
@@ -489,7 +488,6 @@
       "title": "就業の状態と働き方",
       "description": "働き方と昼夜間人口を確認します。昼夜間人口比率には通勤だけでなく通学も含まれます。",
       "metricGroupKeys": [],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "commute-flow"
       ]
@@ -506,40 +504,33 @@
       ]
     },
     {
-      "key": "candidate-37",
-      "title": "非正規雇用と雇用の安定性",
-      "description": "非正規雇用率に加え、2022年就業構造基本調査の非正規の職員・従業員数と、継続・転職希望の割合を比較します。希望割合の分母は希望不詳を含む非正規の職員・従業員総数です。継続希望は追加就業希望を含まず、転職希望は実際の転職とは異なります。",
+      "key": "non-regular-employment-conditions",
+      "title": "非正規雇用の割合や働き手ごとの就業希望はどうなっているか",
+      "concern": "非正規雇用が多く雇用が不安定でキャリア変更の希望が叶うか心配です。",
       "metricGroupKeys": [
-        "candidate-37-1",
-        "candidate-37-2",
-        "candidate-37-3",
-        "candidate-37-4"
+        "non-regular-employment-conditions-1",
+        "non-regular-employment-conditions-2",
+        "non-regular-employment-conditions-3",
+        "non-regular-employment-conditions-4"
       ]
     },
     {
-      "key": "candidate-38",
-      "title": "労働時間と長時間就業",
-      "description": "月間平均実労働時間と、2022年就業構造基本調査の週60時間以上就業する雇用者数・割合を比較します。週60時間以上の指標は役員を除く雇用者のうち年間200日以上就業する人が対象で、割合の分母には週間時間不詳を含みます。主な仕事のふだんの時間を表し、平均実労働時間の系列とは調査と対象が異なります。",
+      "key": "working-hours-and-flexible-work",
+      "title": "長時間労働の是正やテレワークなど柔軟な働き方は進んでいるか",
+      "concern": "過度な長時間労働で健康を害さないかや柔軟な働き方が選べるか不安です。",
       "metricGroupKeys": [
-        "candidate-38-1",
-        "candidate-38-2",
-        "candidate-38-3",
-        "candidate-38-4"
+        "working-hours-and-flexible-work-1",
+        "working-hours-and-flexible-work-2",
+        "working-hours-and-flexible-work-3",
+        "working-hours-and-flexible-work-4"
       ]
     },
     {
-      "key": "candidate-39",
-      "title": "テレワークと通勤",
+      "key": "regional-commute-and-daytime-population",
+      "title": "職住近接や他市区町村への通勤など就業者の移動実態はどうなっているか",
+      "concern": "地元に就職先が少なく長時間の広域通勤を余儀なくされていないか気になります。",
       "metricGroupKeys": [
-        "candidate-39-1"
-      ]
-    },
-    {
-      "key": "candidate-84",
-      "title": "通勤通学と昼間人口",
-      "metricGroupKeys": [
-        "candidate-84-1",
-        "candidate-84-2"
+        "regional-commute-and-daytime-population-1"
       ]
     },
     {
@@ -607,7 +598,7 @@
       ]
     },
     {
-      "key": "candidate-37-1",
+      "key": "non-regular-employment-conditions-1",
       "title": "非正規雇用率",
       "rankingKeys": [
         "non-regular-employment-rate"
@@ -617,17 +608,7 @@
       ]
     },
     {
-      "key": "candidate-37-2",
-      "title": "非正規の職員・従業員数（15歳以上）",
-      "rankingKeys": [
-        "nonregular-employees-count"
-      ],
-      "defaultCheckedKeys": [
-        "nonregular-employees-count"
-      ]
-    },
-    {
-      "key": "candidate-37-3",
+      "key": "non-regular-employment-conditions-2",
       "title": "非正規の継続就業希望割合",
       "rankingKeys": [
         "nonregular-continuation-wish-rate"
@@ -637,7 +618,7 @@
       ]
     },
     {
-      "key": "candidate-37-4",
+      "key": "non-regular-employment-conditions-3",
       "title": "非正規の転職希望割合",
       "rankingKeys": [
         "nonregular-job-change-wish-rate"
@@ -647,8 +628,18 @@
       ]
     },
     {
-      "key": "candidate-38-1",
-      "title": "男性月間平均実労働時間",
+      "key": "non-regular-employment-conditions-4",
+      "title": "非正規の職員・従業員数（15歳以上）",
+      "rankingKeys": [
+        "nonregular-employees-count"
+      ],
+      "defaultCheckedKeys": [
+        "nonregular-employees-count"
+      ]
+    },
+    {
+      "key": "working-hours-and-flexible-work-1",
+      "title": "月間平均実労働時間（男性）",
       "rankingKeys": [
         "monthly-average-actual-working-hours-male"
       ],
@@ -657,7 +648,7 @@
       ]
     },
     {
-      "key": "candidate-38-2",
+      "key": "working-hours-and-flexible-work-2",
       "title": "女性月間平均実労働時間",
       "rankingKeys": [
         "monthly-average-actual-working-hours-female"
@@ -667,17 +658,7 @@
       ]
     },
     {
-      "key": "candidate-38-3",
-      "title": "週60時間以上の雇用者数（年間200日以上）",
-      "rankingKeys": [
-        "employees-weekly-hours-60plus-count"
-      ],
-      "defaultCheckedKeys": [
-        "employees-weekly-hours-60plus-count"
-      ]
-    },
-    {
-      "key": "candidate-38-4",
+      "key": "working-hours-and-flexible-work-3",
       "title": "週60時間以上の雇用者割合（年間200日以上）",
       "rankingKeys": [
         "employees-weekly-hours-60plus-rate"
@@ -687,8 +668,8 @@
       ]
     },
     {
-      "key": "candidate-39-1",
-      "title": "テレワーク実施率",
+      "key": "working-hours-and-flexible-work-4",
+      "title": "テレワーク率",
       "rankingKeys": [
         "telework-rate"
       ],
@@ -697,22 +678,14 @@
       ]
     },
     {
-      "key": "candidate-84-1",
-      "title": "昼夜間人口比率",
+      "key": "regional-commute-and-daytime-population-1",
+      "title": "昼夜間人口比率と他市区町村通勤者比率の推移",
       "rankingKeys": [
-        "day-time-population-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "day-time-population-ratio"
-      ]
-    },
-    {
-      "key": "candidate-84-2",
-      "title": "他市区町村への通勤者比率",
-      "rankingKeys": [
+        "day-time-population-ratio",
         "commuter-ratio-to-other-municipalities"
       ],
       "defaultCheckedKeys": [
+        "day-time-population-ratio",
         "commuter-ratio-to-other-municipalities"
       ]
     }

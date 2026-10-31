@@ -53,7 +53,7 @@
     {
       "rankingKey": "health-checkup-recipients",
       "shortLabel": "生活習慣病健康診断受診延人員",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "総務省統計局「地域保健・健康増進事業報告（地域保健・老人保健事業報告）令和２年度地域保健・健康増進事業報告 地域保健編 第１章 総括編」第1表 保健所及び市区町村が実施した健康診断受診延人員",
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004027740",
@@ -219,7 +219,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "health-checkups-indicator-1",
+      "key": "health-checkup-and-metabolic-1",
       "title": "特定健診受診率（県別推計対象者が分母）",
       "rankingKeys": [
         "specific-health-checkup-participation-rate"
@@ -229,7 +229,7 @@
       ]
     },
     {
-      "key": "health-checkups-indicator-2",
+      "key": "health-checkup-and-metabolic-2",
       "title": "特定保健指導実施率",
       "rankingKeys": [
         "specific-health-guidance-completion-rate"
@@ -239,7 +239,7 @@
       ]
     },
     {
-      "key": "health-checkups-indicator-3",
+      "key": "health-checkup-and-metabolic-3",
       "title": "特定健診受診者のメタボ該当割合",
       "rankingKeys": [
         "metabolic-syndrome-prevalence-among-checkup-recipients"
@@ -249,17 +249,7 @@
       ]
     },
     {
-      "key": "health-checkups-indicator-4",
-      "title": "生活習慣病健康診断受診延人員",
-      "rankingKeys": [
-        "health-checkup-recipients"
-      ],
-      "defaultCheckedKeys": [
-        "health-checkup-recipients"
-      ]
-    },
-    {
-      "key": "health-checkups-indicator-5",
+      "key": "dental-health-checkup-1",
       "title": "歯科健診受診延人員（人口千人当たり）",
       "rankingKeys": [
         "dental-checkup-persons-per-1000"
@@ -269,7 +259,7 @@
       ]
     },
     {
-      "key": "candidate-69-1",
+      "key": "eating-lifestyle-habits-1",
       "title": "就寝前2時間以内の夕食が週3回以上",
       "rankingKeys": [
         "health-checkup-late-dinner-rate"
@@ -279,7 +269,7 @@
       ]
     },
     {
-      "key": "candidate-69-2",
+      "key": "eating-lifestyle-habits-2",
       "title": "朝食を抜くことが週3回以上",
       "rankingKeys": [
         "health-checkup-breakfast-skipping-rate"
@@ -289,7 +279,7 @@
       ]
     },
     {
-      "key": "candidate-69-3",
+      "key": "vegetable-and-salt-intake-1",
       "title": "男性の野菜摂取量（年齢調整）",
       "rankingKeys": [
         "vegetable-intake-male-age-adjusted"
@@ -299,7 +289,7 @@
       ]
     },
     {
-      "key": "candidate-69-4",
+      "key": "vegetable-and-salt-intake-2",
       "title": "女性の野菜摂取量（年齢調整）",
       "rankingKeys": [
         "vegetable-intake-female-age-adjusted"
@@ -309,7 +299,7 @@
       ]
     },
     {
-      "key": "candidate-69-5",
+      "key": "vegetable-and-salt-intake-3",
       "title": "男性の食塩摂取量（年齢調整）",
       "rankingKeys": [
         "salt-intake-male-age-adjusted"
@@ -319,7 +309,7 @@
       ]
     },
     {
-      "key": "candidate-69-6",
+      "key": "vegetable-and-salt-intake-4",
       "title": "女性の食塩摂取量（年齢調整）",
       "rankingKeys": [
         "salt-intake-female-age-adjusted"
@@ -331,28 +321,41 @@
   ],
   "sections": [
     {
-      "key": "health-checkups-overview",
-      "title": "生活習慣と健診を都道府県別に見る",
-      "description": "40〜74歳の特定健診受診率、保健指導の実施率、受診者のメタボ該当割合を比較します。受診率の分母は県人口に基づく対象者の推計で、県民全体の健康状態を示す値ではありません。歯科健診は別の対象・分母で表示します。",
+      "key": "health-checkup-and-metabolic",
+      "title": "特定健診の受診や保健指導、メタボの該当状況はどうなっているか",
+      "concern": "定期的に健診を受け生活習慣病の予防や早期改善につなげられているか不安です。",
       "metricGroupKeys": [
-        "health-checkups-indicator-1",
-        "health-checkups-indicator-2",
-        "health-checkups-indicator-3",
-        "health-checkups-indicator-4",
-        "health-checkups-indicator-5"
+        "health-checkup-and-metabolic-1",
+        "health-checkup-and-metabolic-2",
+        "health-checkup-and-metabolic-3"
       ]
     },
     {
-      "key": "candidate-69",
-      "title": "対象を分けて見る食習慣と栄養",
-      "description": "夕食・朝食の割合は2023年度の40〜74歳の健診受診者で、有効回答者が分母です。栄養摂取量は2024年の20歳以上の標本調査を59歳に年齢調整した値で、下の表に95%信頼区間と集計人数を示します。対象の違う両調査の値から因果関係や県民全体の食習慣を判断しません。",
+      "key": "dental-health-checkup",
+      "title": "歯の健康維持や予防のための歯科健診は受診されているか",
+      "concern": "定期的な歯科健診を通じてお口の健康維持や疾病予防ができているか気になります。",
       "metricGroupKeys": [
-        "candidate-69-1",
-        "candidate-69-2",
-        "candidate-69-3",
-        "candidate-69-4",
-        "candidate-69-5",
-        "candidate-69-6"
+        "dental-health-checkup-1"
+      ]
+    },
+    {
+      "key": "eating-lifestyle-habits",
+      "title": "遅い夕食や朝食抜きなど日々の食生活の乱れはないか",
+      "concern": "不規則な食事時間や欠食が習慣化し健康に悪影響を与えていないか心配です。",
+      "metricGroupKeys": [
+        "eating-lifestyle-habits-1",
+        "eating-lifestyle-habits-2"
+      ]
+    },
+    {
+      "key": "vegetable-and-salt-intake",
+      "title": "野菜不足や塩分の摂りすぎなど栄養バランスは整っているか",
+      "concern": "高血圧や生活習慣病予防に必要な野菜摂取や減塩が達成できているか不安です。",
+      "metricGroupKeys": [
+        "vegetable-and-salt-intake-1",
+        "vegetable-and-salt-intake-2",
+        "vegetable-and-salt-intake-3",
+        "vegetable-and-salt-intake-4"
       ],
       "embeddedSectionKeys": [
         "nutrition"

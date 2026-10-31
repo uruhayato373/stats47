@@ -1141,12 +1141,10 @@
         "defaultCheckedKeys"
       ],
       "properties": {
-        "comparisonYear": {
-          "type": "string",
-          "pattern": "^\\d{4}$"
-        },
-        "comparisonMap": {
-          "type": "boolean"
+        "view": {
+          "enum": [
+            "sex"
+          ]
         },
         "key": {
           "$ref": "#/definitions/kebabKey"
@@ -1185,6 +1183,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "concern": {
+          "$ref": "#/definitions/text"
         },
         "metricGroupKeys": {
           "type": "array",

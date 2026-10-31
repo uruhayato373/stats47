@@ -49,7 +49,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "community-participation-indicator-1",
+      "key": "volunteer-and-community-activities-1",
       "title": "ボランティア年間行動者率（10歳以上）",
       "rankingKeys": [
         "volunteer-activity-annual-participation-rate-10plus"
@@ -59,7 +59,17 @@
       ]
     },
     {
-      "key": "community-participation-indicator-2",
+      "key": "volunteer-and-community-activities-2",
+      "title": "まちづくり活動の年間行動者率（10歳以上）",
+      "rankingKeys": [
+        "community-building-volunteer-participation-rate-10plus"
+      ],
+      "defaultCheckedKeys": [
+        "community-building-volunteer-participation-rate-10plus"
+      ]
+    },
+    {
+      "key": "civic-engagement-and-elections-1",
       "title": "都道府県知事選挙投票率",
       "rankingKeys": [
         "voter-turnout-governor"
@@ -69,7 +79,7 @@
       ]
     },
     {
-      "key": "community-participation-indicator-3",
+      "key": "library-and-cultural-participation-1",
       "title": "図書館登録者数",
       "rankingKeys": [
         "library-registered-users"
@@ -77,28 +87,32 @@
       "defaultCheckedKeys": [
         "library-registered-users"
       ]
-    },
-    {
-      "key": "community-participation-indicator-4",
-      "title": "まちづくり活動の年間行動者率（10歳以上）",
-      "rankingKeys": [
-        "community-building-volunteer-participation-rate-10plus"
-      ],
-      "defaultCheckedKeys": [
-        "community-building-volunteer-participation-rate-10plus"
-      ]
     }
   ],
   "sections": [
     {
-      "key": "community-participation-overview",
-      "title": "市民参加と地域活動を都道府県別に見る",
-      "description": "ボランティア活動の年間行動者率・まちづくり活動の参加率と、選挙投票率・図書館登録者数を比較します。まちづくり活動は2021年社会生活基本調査の10歳以上が対象で、過去1年間の清掃や地域おこしなどの活動を捉えます。活動種類は重複し、自治会加入率や孤独感とは異なります。",
+      "key": "volunteer-and-community-activities",
+      "title": "地域でのボランティアや社会貢献活動は活発に行われているか",
+      "concern": "助け合いや地域奉仕活動への住民参加が減っていないか心配です。",
       "metricGroupKeys": [
-        "community-participation-indicator-1",
-        "community-participation-indicator-2",
-        "community-participation-indicator-3",
-        "community-participation-indicator-4"
+        "volunteer-and-community-activities-1",
+        "volunteer-and-community-activities-2"
+      ]
+    },
+    {
+      "key": "civic-engagement-and-elections",
+      "title": "地域の政治や自治に対する住民の関心は高いか",
+      "concern": "地方選挙の投票率低下など住民の政治や行政への関心薄れが懸念されます。",
+      "metricGroupKeys": [
+        "civic-engagement-and-elections-1"
+      ]
+    },
+    {
+      "key": "library-and-cultural-participation",
+      "title": "身近な生涯学習や文化施設の利用は進んでいるか",
+      "concern": "地域の図書館など生涯学習や読書環境の利用状況が十分か気になります。",
+      "metricGroupKeys": [
+        "library-and-cultural-participation-1"
       ]
     }
   ],

@@ -16,7 +16,7 @@ import type { ThemeConfig, ThemeIndicatorData } from '../../types';
  *
  * metrics-dashboard-switcher.test.tsx / MetricSwitcherPanel.test.tsx / SingleMetricCard.test.tsx は
  * 合成データで契約の細部 (取得・軸・退避表記など) を見る。ここは「実際の 55 テーマの
- * metricGroups 編成を渡したとき、comparisonYear/rankingKeys 件数どおりのパネル種別が
+ * metricGroups 編成を渡したとき、rankingKeys 件数どおりのパネル種別が
  * 定義順どおりに現れるか」だけを見る回帰テスト (件数リテラルは書かない。テーマの追加・削除に
  * 追従する)。
  */
@@ -38,23 +38,8 @@ vi.mock('../SingleMetricCard', () => ({
     <div data-testid="single-card" data-keys={metric.metricKey} />
   ),
 }));
-vi.mock('../FixedYearComparisonPanel', () => ({
-  FixedYearComparisonPanel: ({
-    metrics,
-  }: {
-    metrics: { metricKey: string }[];
-  }) => (
-    <div
-      data-testid="fixed-year-panel"
-      data-keys={metrics.map((m) => m.metricKey).join(',')}
-    />
-  ),
-}));
 vi.mock('../ThemeDbChartRenderer', () => ({
   ThemeDbChartRenderer: () => <div />,
-}));
-vi.mock('../ThemeComparisonSection', () => ({
-  ThemeComparisonSection: () => null,
 }));
 
 
@@ -92,14 +77,12 @@ function expectedGroups(catalog: ThemeCatalog, themeConfig: ThemeConfig) {
     return catalog.metricGroups.map((g) => ({
       key: g.key,
       rankingKeys: g.rankingKeys,
-      comparisonYear: g.comparisonYear,
     }));
   }
   return [
     {
       key: 'default',
       rankingKeys: themeConfig.tabIndicators.map((t) => t.rankingKey),
-      comparisonYear: undefined as string | undefined,
     },
   ];
 }
@@ -115,7 +98,7 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
   (themeKey, themeConfig) => {
     const catalog = THEME_CATALOGS[themeKey];
 
-    it('comparisonYear/rankingKeys 件数どおりのパネル種別が、定義順どおりに現れる', () => {
+    it('rankingKeys 件数どおりのパネル種別が、定義順どおりに現れる', () => {
       expect(catalog).toBeDefined();
       const indicatorDataMap = buildIndicatorDataMap(catalog);
 
@@ -135,11 +118,7 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
       expect(rendered).toHaveLength(groups.length);
       rendered.forEach((el, i) => {
         const group = groups[i];
-        const expectedKind = group.comparisonYear
-          ? 'fixed-year-panel'
-          : group.rankingKeys.length === 1
-            ? 'single-card'
-            : 'switcher-panel';
+        const expectedKind = group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
         expect(el.getAttribute('data-testid')).toBe(expectedKind);
         expect(el.getAttribute('data-keys')).toBe(group.rankingKeys.join(','));
       });
@@ -150,7 +129,7 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
 describe('ThemeMetricsDashboard — 観測不足での降格 (実カタログ)', () => {
   const degradableEntry = Object.entries(THEME_CATALOGS).find(([, catalog]) =>
     (catalog.metricGroups ?? []).some(
-      (g) => !g.comparisonYear && g.rankingKeys.length === 2
+      (g) => g.rankingKeys.length === 2
     )
   );
 
@@ -158,7 +137,7 @@ describe('ThemeMetricsDashboard — 観測不足での降格 (実カタログ)',
     expect(degradableEntry).toBeDefined();
     const [themeKey, catalog] = degradableEntry!;
     const group = catalog.metricGroups!.find(
-      (g) => !g.comparisonYear && g.rankingKeys.length === 2
+      (g) => g.rankingKeys.length === 2
     )!;
     const themeConfig = ALL_THEMES.find((t) => t.themeKey === themeKey);
     expect(themeConfig).toBeDefined();

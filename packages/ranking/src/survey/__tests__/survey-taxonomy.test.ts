@@ -207,12 +207,12 @@ describe('resolveThemeSurveyTaxonomy', () => {
     ).toBe('missing-lineage');
   });
 
-  it('固定年比較を含む指標カードを図とは別に監査し、一部だけの解決を成功にしない', () => {
+  it('指標カードを図とは別に監査し、一部だけの解決を成功にしない', () => {
     const withGroups: ThemeCatalog = {
       ...catalog,
       charts: [],
       metricGroups: [
-        { key: 'comparison', title: '比較', rankingKeys: ['grilled-eel-consumption-expenditure'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'], comparisonYear: '2023' },
+        { key: 'comparison', title: '比較', rankingKeys: ['grilled-eel-consumption-expenditure'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'] },
         { key: 'partial', title: '一部未解決', rankingKeys: ['grilled-eel-consumption-expenditure', 'unknown-metric'], defaultCheckedKeys: ['grilled-eel-consumption-expenditure'] },
         { key: 'empty', title: '空', rankingKeys: [], defaultCheckedKeys: [] },
       ],

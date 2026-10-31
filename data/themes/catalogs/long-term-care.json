@@ -59,7 +59,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "long-term-care-indicator-1",
+      "key": "care-needs-and-fiscal-scale-1",
       "title": "要支援・要介護認定者数（2024年度末）",
       "rankingKeys": [
         "long-term-care-certified-persons"
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "key": "long-term-care-indicator-2",
+      "key": "care-needs-and-fiscal-scale-2",
       "title": "介護保険給付費用額",
       "rankingKeys": [
         "nursing-care-insurance-benefit"
@@ -79,27 +79,19 @@
       ]
     },
     {
-      "key": "long-term-care-indicator-3",
-      "title": "老人ホーム数（65歳以上人口10万人当たり）",
+      "key": "nursing-home-capacity-1",
+      "title": "人口当たりの老人ホーム数と定員数の推移",
       "rankingKeys": [
-        "nursing-home-count-per-100k-65plus"
-      ],
-      "defaultCheckedKeys": [
-        "nursing-home-count-per-100k-65plus"
-      ]
-    },
-    {
-      "key": "long-term-care-indicator-4",
-      "title": "老人ホーム定員数（65歳以上人口千人当たり）",
-      "rankingKeys": [
+        "nursing-home-count-per-100k-65plus",
         "nursing-home-capacity-per-1000-65plus"
       ],
       "defaultCheckedKeys": [
+        "nursing-home-count-per-100k-65plus",
         "nursing-home-capacity-per-1000-65plus"
       ]
     },
     {
-      "key": "long-term-care-indicator-5",
+      "key": "nursing-home-utilization-1",
       "title": "老人ホーム在所者数（65歳以上人口千人当たり）",
       "rankingKeys": [
         "nursing-home-residents-per-1000-65plus"
@@ -111,15 +103,28 @@
   ],
   "sections": [
     {
-      "key": "long-term-care-overview",
-      "title": "介護認定とサービスの需給を都道府県別に見る",
-      "description": "2024年度末の要支援・要介護認定者総数と、介護保険給付・老人ホームの供給を比較します。認定者数は保険者報告の県別集計で、サービス利用人数や人口当たり認定率ではありません。異なる年の給付や施設数との単純な割り算は行いません。",
+      "key": "care-needs-and-fiscal-scale",
+      "title": "介護を必要とする人や介護保険給付費の規模は地域でどれくらいか",
+      "concern": "高齢化が進む中で要介護者の増加や介護給付費の膨張が地域の負担に与える影響が心配です。",
       "metricGroupKeys": [
-        "long-term-care-indicator-1",
-        "long-term-care-indicator-2",
-        "long-term-care-indicator-3",
-        "long-term-care-indicator-4",
-        "long-term-care-indicator-5"
+        "care-needs-and-fiscal-scale-1",
+        "care-needs-and-fiscal-scale-2"
+      ]
+    },
+    {
+      "key": "nursing-home-capacity",
+      "title": "高齢者施設数や定員など入所受け入れ基盤は整っているか",
+      "concern": "介護が必要になった際に希望する老人ホームや施設にスムーズに入所できるか不安です。",
+      "metricGroupKeys": [
+        "nursing-home-capacity-1"
+      ]
+    },
+    {
+      "key": "nursing-home-utilization",
+      "title": "老人ホームでの実際の在所・利用状況はどのように推移しているか",
+      "concern": "施設利用が必要な高齢者が実際にどの程度施設に入所できているか気になります。",
+      "metricGroupKeys": [
+        "nursing-home-utilization-1"
       ]
     }
   ],

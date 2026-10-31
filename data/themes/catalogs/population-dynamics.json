@@ -491,187 +491,17 @@
       ]
     },
     {
-      "key": "candidate-34-1",
-      "title": "15〜24歳の県間転入超過数",
+      "key": "population-trend-and-future-1",
+      "title": "2020～2050年の人口増減率（推計）",
       "rankingKeys": [
-        "interprefecture-net-migration-age15to24"
+        "future-population-change-rate-2050"
       ],
       "defaultCheckedKeys": [
-        "interprefecture-net-migration-age15to24"
+        "future-population-change-rate-2050"
       ]
     },
     {
-      "key": "candidate-34-2",
-      "title": "25〜34歳の県間転入超過数",
-      "rankingKeys": [
-        "interprefecture-net-migration-age25to34"
-      ],
-      "defaultCheckedKeys": [
-        "interprefecture-net-migration-age25to34"
-      ]
-    },
-    {
-      "key": "candidate-34-3",
-      "title": "高校卒業就職者のうち県外就職者の割合",
-      "rankingKeys": [
-        "high-school-graduates-out-of-prefecture-job-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "high-school-graduates-out-of-prefecture-job-ratio"
-      ]
-    },
-    {
-      "key": "candidate-34-4",
-      "title": "高等学校卒業者の進学率",
-      "rankingKeys": [
-        "high-school-advancement-rate"
-      ],
-      "defaultCheckedKeys": [
-        "high-school-advancement-rate"
-      ]
-    },
-    {
-      "key": "candidate-41-1",
-      "title": "出生数",
-      "rankingKeys": [
-        "births"
-      ],
-      "defaultCheckedKeys": [
-        "births"
-      ]
-    },
-    {
-      "key": "candidate-41-2",
-      "title": "合計特殊出生率",
-      "rankingKeys": [
-        "total-fertility-rate"
-      ],
-      "defaultCheckedKeys": [
-        "total-fertility-rate"
-      ]
-    },
-    {
-      "key": "candidate-41-3",
-      "title": "母が25歳未満の出生数",
-      "rankingKeys": [
-        "births-mother-under25"
-      ],
-      "defaultCheckedKeys": [
-        "births-mother-under25"
-      ]
-    },
-    {
-      "key": "candidate-41-4",
-      "title": "母が25〜29歳の出生数",
-      "rankingKeys": [
-        "births-mother-age25to29"
-      ],
-      "defaultCheckedKeys": [
-        "births-mother-age25to29"
-      ]
-    },
-    {
-      "key": "candidate-41-5",
-      "title": "母が30〜34歳の出生数",
-      "rankingKeys": [
-        "births-mother-age30to34"
-      ],
-      "defaultCheckedKeys": [
-        "births-mother-age30to34"
-      ]
-    },
-    {
-      "key": "candidate-41-6",
-      "title": "母が35〜39歳の出生数",
-      "rankingKeys": [
-        "births-mother-age35to39"
-      ],
-      "defaultCheckedKeys": [
-        "births-mother-age35to39"
-      ]
-    },
-    {
-      "key": "candidate-41-7",
-      "title": "母が40歳以上の出生数",
-      "rankingKeys": [
-        "births-mother-age40plus"
-      ],
-      "defaultCheckedKeys": [
-        "births-mother-age40plus"
-      ]
-    },
-    {
-      "key": "candidate-41-8",
-      "title": "第1子の出生数",
-      "rankingKeys": [
-        "births-first-child"
-      ],
-      "defaultCheckedKeys": [
-        "births-first-child"
-      ]
-    },
-    {
-      "key": "candidate-41-9",
-      "title": "第2子の出生数",
-      "rankingKeys": [
-        "births-second-child"
-      ],
-      "defaultCheckedKeys": [
-        "births-second-child"
-      ]
-    },
-    {
-      "key": "candidate-41-10",
-      "title": "第3子以降の出生数",
-      "rankingKeys": [
-        "births-third-child-plus"
-      ],
-      "defaultCheckedKeys": [
-        "births-third-child-plus"
-      ]
-    },
-    {
-      "key": "candidate-43-1",
-      "title": "5年前と同じ住所に住む5歳以上人口",
-      "rankingKeys": [
-        "five-year-residence-same-address"
-      ],
-      "defaultCheckedKeys": [
-        "five-year-residence-same-address"
-      ]
-    },
-    {
-      "key": "candidate-43-2",
-      "title": "5年前は他県に住んでいた5歳以上人口",
-      "rankingKeys": [
-        "five-year-residence-other-prefecture"
-      ],
-      "defaultCheckedKeys": [
-        "five-year-residence-other-prefecture"
-      ]
-    },
-    {
-      "key": "candidate-43-3",
-      "title": "外国人の転入者数",
-      "rankingKeys": [
-        "movers-in"
-      ],
-      "defaultCheckedKeys": [
-        "movers-in"
-      ]
-    },
-    {
-      "key": "candidate-43-4",
-      "title": "外国人の転出者数",
-      "rankingKeys": [
-        "movers-out"
-      ],
-      "defaultCheckedKeys": [
-        "movers-out"
-      ]
-    },
-    {
-      "key": "candidate-47-1",
+      "key": "population-trend-and-future-2",
       "title": "将来推計人口",
       "rankingKeys": [
         "future-population"
@@ -681,13 +511,105 @@
       ]
     },
     {
-      "key": "candidate-47-2",
-      "title": "2020～2050年の人口増減率（推計）",
+      "key": "birth-rate-and-maternity-1",
+      "title": "合計特殊出生率と出生数の推移",
       "rankingKeys": [
-        "future-population-change-rate-2050"
+        "total-fertility-rate",
+        "births"
       ],
       "defaultCheckedKeys": [
-        "future-population-change-rate-2050"
+        "total-fertility-rate",
+        "births"
+      ]
+    },
+    {
+      "key": "birth-rate-and-maternity-2",
+      "title": "母の年齢階級別出生数の内訳",
+      "rankingKeys": [
+        "births-mother-under25",
+        "births-mother-age25to29",
+        "births-mother-age30to34",
+        "births-mother-age35to39",
+        "births-mother-age40plus"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-under25"
+      ]
+    },
+    {
+      "key": "birth-rate-and-maternity-3",
+      "title": "出生順位別の出生数内訳",
+      "rankingKeys": [
+        "births-first-child",
+        "births-second-child",
+        "births-third-child-plus"
+      ],
+      "defaultCheckedKeys": [
+        "births-first-child"
+      ]
+    },
+    {
+      "key": "youth-migration-and-education-1",
+      "title": "高校卒業者の進学率と県外就職率の推移",
+      "rankingKeys": [
+        "high-school-advancement-rate",
+        "high-school-graduates-out-of-prefecture-job-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "high-school-advancement-rate",
+        "high-school-graduates-out-of-prefecture-job-ratio"
+      ]
+    },
+    {
+      "key": "youth-migration-and-education-2",
+      "title": "15〜24歳の県間転入超過数",
+      "rankingKeys": [
+        "interprefecture-net-migration-age15to24"
+      ],
+      "defaultCheckedKeys": [
+        "interprefecture-net-migration-age15to24"
+      ]
+    },
+    {
+      "key": "youth-migration-and-education-3",
+      "title": "25〜34歳の県間転入超過数",
+      "rankingKeys": [
+        "interprefecture-net-migration-age25to34"
+      ],
+      "defaultCheckedKeys": [
+        "interprefecture-net-migration-age25to34"
+      ]
+    },
+    {
+      "key": "residence-and-foreign-population-1",
+      "title": "外国人転入者数と転出者数の推移",
+      "rankingKeys": [
+        "movers-in",
+        "movers-out"
+      ],
+      "defaultCheckedKeys": [
+        "movers-in",
+        "movers-out"
+      ]
+    },
+    {
+      "key": "residence-and-foreign-population-2",
+      "title": "5年前と同じ住所に住む5歳以上人口",
+      "rankingKeys": [
+        "five-year-residence-same-address"
+      ],
+      "defaultCheckedKeys": [
+        "five-year-residence-same-address"
+      ]
+    },
+    {
+      "key": "residence-and-foreign-population-3",
+      "title": "5年前は他県に住んでいた5歳以上人口",
+      "rankingKeys": [
+        "five-year-residence-other-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "five-year-residence-other-prefecture"
       ]
     }
   ],
@@ -759,6 +681,92 @@
       "visualizationRationale": "こちらも交差の有無が焦点のため、自然増減チャートと同じ折れ線形式に揃えテーマ内の視覚的一貫性を保つ。"
     },
     {
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-2",
+      "componentType": "composition-chart",
+      "title": "母の年齢階級別出生数の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "births-mother-under25",
+            "label": "母が25歳未満の出生数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "births-mother-age25to29",
+            "label": "母が25〜29歳の出生数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "births-mother-age30to34",
+            "label": "母が30〜34歳の出生数",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "births-mother-age35to39",
+            "label": "母が35〜39歳の出生数",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "births-mother-age40plus",
+            "label": "母が40歳以上の出生数",
+            "colorRole": "series-5"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "births-mother-under25",
+        "births-mother-age25to29",
+        "births-mother-age30to34",
+        "births-mother-age35to39",
+        "births-mother-age40plus"
+      ],
+      "sourceName": "人口動態統計",
+      "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0003411631",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "birth-rate-and-maternity",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "population-dynamics-birth-rate-and-maternity-composition-3",
+      "componentType": "composition-chart",
+      "title": "出生順位別の出生数内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "births-first-child",
+            "label": "第1子の出生数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "births-second-child",
+            "label": "第2子の出生数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "births-third-child-plus",
+            "label": "第3子以降の出生数",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "births-first-child",
+        "births-second-child",
+        "births-third-child-plus"
+      ],
+      "sourceName": "人口動態統計",
+      "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0003411918",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "birth-rate-and-maternity",
+      "sortOrder": 101
+    },
+    {
       "componentKey": "md-population-dynamics-discussion",
       "componentType": "markdown-section",
       "title": "数値を比較するときの注意",
@@ -807,11 +815,11 @@
         "crude-birth-rate",
         "crude-death-rate"
       ],
-      "relatedChartKeys": [
-        "birth-death-count-trend"
-      ],
       "relatedThemeKeys": [
         "aging-society"
+      ],
+      "relatedChartKeys": [
+        "birth-death-count-trend"
       ]
     },
     {
@@ -827,7 +835,6 @@
         "young-population-ratio",
         "ratio-65-plus"
       ],
-      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "aging-society"
       ]
@@ -853,8 +860,7 @@
       "metricGroupKeys": [
         "population-change-1",
         "population-change-2"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "natural-social-change",
@@ -873,64 +879,58 @@
       "title": "どこからどこへ移動するか",
       "description": "地域間の移動方向を確認します。移動の集計対象と基準年は図ごとに確認できます。",
       "metricGroupKeys": [],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "migration-flow"
       ]
     },
     {
-      "key": "candidate-34",
-      "title": "若年層の県間移動と卒業後の進路",
-      "description": "2025年の15〜24歳・25〜34歳の県間転入超過数は外国人を含む移動者です。年齢・男女別の詳細は「年齢・男女別にみる県間の人口移動」で確認できます。県外就職割合は高校卒業後に就職した人、進学率は卒業者全体が分母で、就職先と住所の移動は別に読みます。",
+      "key": "population-trend-and-future",
+      "title": "人口減少や将来の人口規模はどのように推移しているか",
+      "concern": "自分の住む地域で人口減少や自然減が進み将来の地域存続が危ぶまれないか心配だ。",
       "metricGroupKeys": [
-        "candidate-34-1",
-        "candidate-34-2",
-        "candidate-34-3",
-        "candidate-34-4"
+        "population-trend-and-future-1",
+        "population-trend-and-future-2"
+      ]
+    },
+    {
+      "key": "birth-rate-and-maternity",
+      "title": "少子化の進行や出産年齢・出生数の状況はどうなっているか",
+      "concern": "地域で子どもが生まれる環境や少子化の現状がどう変化しているか知りたい。",
+      "metricGroupKeys": [
+        "birth-rate-and-maternity-1",
+        "birth-rate-and-maternity-2",
+        "birth-rate-and-maternity-3"
+      ],
+      "chartKeys": [
+        "population-dynamics-birth-rate-and-maternity-composition-2",
+        "population-dynamics-birth-rate-and-maternity-composition-3"
+      ]
+    },
+    {
+      "key": "youth-migration-and-education",
+      "title": "若者の進学や就職に伴う地域外への流出はどれくらいあるか",
+      "concern": "地域で育った若い世代が進学や就職のタイミングで県外へ流出していないか気になる。",
+      "metricGroupKeys": [
+        "youth-migration-and-education-1",
+        "youth-migration-and-education-2",
+        "youth-migration-and-education-3"
       ],
       "embeddedSectionKeys": [
         "young-migration-link"
       ]
     },
     {
-      "key": "candidate-41",
-      "title": "出生と母の年齢・出生順位",
-      "description": "2024年の日本における日本人の出生を、母の年齢5区分と出生順位3区分で比較します。地域は子の住所です。年齢不詳は5区分に含めず、全国12人を原典に保持しています。全国は住所が外国の18人を含み、47県合計と異なります。出生順位は同じ母親がこれまでに生んだ出生子を数えた順序です。",
+      "key": "residence-and-foreign-population",
+      "title": "地域への定住状況や外国人住民の流出入はどのような傾向か",
+      "concern": "地域に長く住み続ける人が多いのか、外国人の流出入がどう影響しているか知りたい。",
       "metricGroupKeys": [
-        "candidate-41-1",
-        "candidate-41-2",
-        "candidate-41-3",
-        "candidate-41-4",
-        "candidate-41-5",
-        "candidate-41-6",
-        "candidate-41-7",
-        "candidate-41-8",
-        "candidate-41-9",
-        "candidate-41-10"
-      ]
-    },
-    {
-      "key": "candidate-43",
-      "title": "県間の人口移動と5年前の居住地",
-      "description": "県間移動の詳細表は2025年の外国人を含む移動者を年齢・男女・相手県別に比較します。5年前の居住地は2020年の5歳以上住民を2015年と比較したもので、5年間の転居回数ではありません。外国人の転入・転出カードは外国人だけを対象とする別系列です。",
-      "metricGroupKeys": [
-        "candidate-43-1",
-        "candidate-43-2",
-        "candidate-43-3",
-        "candidate-43-4"
+        "residence-and-foreign-population-1",
+        "residence-and-foreign-population-2",
+        "residence-and-foreign-population-3"
       ],
       "embeddedSectionKeys": [
         "migration-demographics",
         "five-year-residence"
-      ]
-    },
-    {
-      "key": "candidate-47",
-      "title": "人口の将来推計",
-      "description": "社人研の令和5年推計です。2020年の国勢調査人口と将来推計を区別し、2050年の値は実績ではなく出生・死亡・移動の仮定に基づく推計として読みます。",
-      "metricGroupKeys": [
-        "candidate-47-1",
-        "candidate-47-2"
       ]
     },
     {

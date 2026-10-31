@@ -74,7 +74,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "regional-transport-indicator-1",
+      "key": "car-dependency-1",
       "title": "自動車所有数量（二人以上世帯千世帯当たり）",
       "rankingKeys": [
         "car-ownership-multi-person-households-per-1000"
@@ -84,37 +84,21 @@
       ]
     },
     {
-      "key": "regional-transport-indicator-2",
-      "title": "自家用車通勤・通学者数",
+      "key": "commute-modes-1",
+      "title": "移動手段別の通勤・通学者数の推移",
       "rankingKeys": [
-        "commute-by-car"
-      ],
-      "defaultCheckedKeys": [
-        "commute-by-car"
-      ]
-    },
-    {
-      "key": "regional-transport-indicator-3",
-      "title": "乗合バス通勤・通学者数",
-      "rankingKeys": [
-        "commute-by-bus"
-      ],
-      "defaultCheckedKeys": [
-        "commute-by-bus"
-      ]
-    },
-    {
-      "key": "regional-transport-indicator-4",
-      "title": "鉄道・電車通勤・通学者数",
-      "rankingKeys": [
+        "commute-by-car",
+        "commute-by-bus",
         "commute-by-train"
       ],
       "defaultCheckedKeys": [
+        "commute-by-car",
+        "commute-by-bus",
         "commute-by-train"
       ]
     },
     {
-      "key": "regional-transport-indicator-5",
+      "key": "public-bus-operators-1",
       "title": "バス事業者",
       "rankingKeys": [
         "bus-operators"
@@ -124,7 +108,7 @@
       ]
     },
     {
-      "key": "candidate-79-1",
+      "key": "transport-expenditure-1",
       "title": "交通・通信支出（二人以上世帯・10〜11月の月平均）",
       "rankingKeys": [
         "household-survey-transport-communication-expenditure"
@@ -136,23 +120,35 @@
   ],
   "sections": [
     {
-      "key": "regional-transport-overview",
-      "title": "自動車依存と移動手段を都道府県別に見る",
-      "description": "自動車保有、通勤・通学の交通手段、バス事業者を別々に比較します。自動車保有台数から交通空白を直接判定しません。",
+      "key": "car-dependency",
+      "title": "自家用車への依存度はどれくらい高いか",
+      "concern": "日常生活や移動で自動車がどれくらい必須になっているか知りたい。",
       "metricGroupKeys": [
-        "regional-transport-indicator-1",
-        "regional-transport-indicator-2",
-        "regional-transport-indicator-3",
-        "regional-transport-indicator-4",
-        "regional-transport-indicator-5"
+        "car-dependency-1"
       ]
     },
     {
-      "key": "candidate-79",
-      "title": "車・交通手段と交通通信支出",
-      "description": "交通・通信支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。通信費を含むため純粋な移動費ではありません。自動車保有台数・通勤手段と支出は別の調査です。",
+      "key": "commute-modes",
+      "title": "通勤や通学の移動手段は車と公共交通のどちらが中心か",
+      "concern": "毎日の通勤や通学で自家用車と公共交通機関のどちらが多く使われているか知りたい。",
       "metricGroupKeys": [
-        "candidate-79-1"
+        "commute-modes-1"
+      ]
+    },
+    {
+      "key": "public-bus-operators",
+      "title": "地域の公共交通を支えるバス事業者は十分に確保されているか",
+      "concern": "自家用車に乗れない場合の移動手段として路線バスなどが維持されているか不安だ。",
+      "metricGroupKeys": [
+        "public-bus-operators-1"
+      ]
+    },
+    {
+      "key": "transport-expenditure",
+      "title": "移動や通信にかかる家計の費用負担は変化しているか",
+      "concern": "自動車の維持費や交通費など移動に伴う家計への影響が心配だ。",
+      "metricGroupKeys": [
+        "transport-expenditure-1"
       ]
     }
   ],

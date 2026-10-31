@@ -57,6 +57,10 @@ export function MetricStatTile({
   const meta = [
     metric.yearName,
     !selectedPrefectureCode && metric.topRanked ? `1位: ${metric.topRanked.areaName}` : null,
+    // 問いの型「全国平均との差」: 県の値の横に全国の値を置く (全国行が無い指標は出さない。2026-10-31)
+    selectedPrefectureCode && metric.value !== null && metric.nationalValue !== undefined
+      ? `全国 ${formatMetricValue(metric.nationalValue)}`
+      : null,
   ]
     .filter(Boolean)
     .join('・');

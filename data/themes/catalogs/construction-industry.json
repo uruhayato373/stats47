@@ -190,7 +190,45 @@
       }
     }
   ],
-  "charts": [],
+  "charts": [
+    {
+      "componentKey": "construction-industry-workforce-demographics-composition-1",
+      "componentType": "composition-chart",
+      "title": "年齢階層別の建設業就業者数（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "construction-employed-under30",
+            "label": "30歳未満の建設業就業者",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "construction-employed-age30to54",
+            "label": "30〜54歳の建設業就業者",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "construction-employed-age55plus",
+            "label": "55歳以上の建設業就業者",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "construction-employed-under30",
+        "construction-employed-age30to54",
+        "construction-employed-age55plus"
+      ],
+      "sourceName": "総務省「令和2年国勢調査」就業状態等基本集計 第4表",
+      "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0003450610",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "workforce-demographics",
+      "sortOrder": 100
+    }
+  ],
   "metricGroups": [
     {
       "key": "completed-construction",
@@ -201,8 +239,7 @@
       ],
       "defaultCheckedKeys": [
         "prime-contractor-completed-construction"
-      ],
-      "comparisonYear": "2023"
+      ]
     },
     {
       "key": "contractors",
@@ -212,8 +249,7 @@
       ],
       "defaultCheckedKeys": [
         "construction-industry-count"
-      ],
-      "comparisonYear": "2023"
+      ]
     },
     {
       "key": "construction-employment",
@@ -223,51 +259,34 @@
       ],
       "defaultCheckedKeys": [
         "construction-private-employees"
-      ],
-      "comparisonYear": "2021"
-    },
-    {
-      "key": "candidate-2-1",
-      "title": "建設業就業者総数（常住地別）",
-      "rankingKeys": [
-        "construction-employed-residents"
-      ],
-      "defaultCheckedKeys": [
-        "construction-employed-residents"
       ]
     },
     {
-      "key": "candidate-2-2",
-      "title": "30歳未満の建設業就業者",
+      "key": "construction-demand-1",
+      "title": "公共工事の請負契約件数と契約額の推移",
       "rankingKeys": [
-        "construction-employed-under30"
+        "public-construction-contract-count",
+        "public-construction-contract-amount"
       ],
       "defaultCheckedKeys": [
-        "construction-employed-under30"
+        "public-construction-contract-count",
+        "public-construction-contract-amount"
       ]
     },
     {
-      "key": "candidate-2-3",
-      "title": "30〜54歳の建設業就業者",
+      "key": "workforce-demographics-1",
+      "title": "年齢階層別の建設業就業者数",
       "rankingKeys": [
-        "construction-employed-age30to54"
-      ],
-      "defaultCheckedKeys": [
-        "construction-employed-age30to54"
-      ]
-    },
-    {
-      "key": "candidate-2-4",
-      "title": "55歳以上の建設業就業者",
-      "rankingKeys": [
+        "construction-employed-under30",
+        "construction-employed-age30to54",
         "construction-employed-age55plus"
       ],
       "defaultCheckedKeys": [
-        "construction-employed-age55plus"
+        "construction-employed-under30"
       ]
     },
     {
-      "key": "candidate-2-5",
+      "key": "workforce-demographics-2",
       "title": "女性の建設業就業者",
       "rankingKeys": [
         "construction-employed-female"
@@ -277,33 +296,23 @@
       ]
     },
     {
-      "key": "candidate-2-6",
+      "key": "business-base-and-workers-1",
+      "title": "建設業就業者総数（常住地別）",
+      "rankingKeys": [
+        "construction-employed-residents"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-residents"
+      ]
+    },
+    {
+      "key": "architect-wages-1",
       "title": "建築技術者の推計年収（2022年）",
       "rankingKeys": [
         "architect-annual-income"
       ],
       "defaultCheckedKeys": [
         "architect-annual-income"
-      ]
-    },
-    {
-      "key": "candidate-4-1",
-      "title": "公共工事の請負契約件数（施工地別）",
-      "rankingKeys": [
-        "public-construction-contract-count"
-      ],
-      "defaultCheckedKeys": [
-        "public-construction-contract-count"
-      ]
-    },
-    {
-      "key": "candidate-4-2",
-      "title": "公共工事の請負契約額（施工地別）",
-      "rankingKeys": [
-        "public-construction-contract-amount"
-      ],
-      "defaultCheckedKeys": [
-        "public-construction-contract-amount"
       ]
     }
   ],
@@ -333,25 +342,39 @@
       ]
     },
     {
-      "key": "candidate-2",
-      "title": "建設業の担い手構成と職種別待遇",
-      "description": "2020年国勢調査の常住地別の15歳以上就業者です。30歳未満・30〜54歳・55歳以上は重ならない年齢区分で、女性は各区分に含まれます。事業所所在地別の従業者数とは別集計で、年齢だけから技能継承の成否を判断しません。建築技術者の推計年収は2022年の一般労働者・男女計で、6月の月例給与を12倍し前年の賞与等を加えた額です。就業者数と給与の母集団・年を分けて読みます。",
+      "key": "construction-demand",
+      "title": "公共工事や地域内の建設需要はどのように推移しているか",
+      "concern": "公共事業の縮小や地域建設需要の変動が地元の建設業経営に影響しないか不安です。",
       "metricGroupKeys": [
-        "candidate-2-1",
-        "candidate-2-2",
-        "candidate-2-3",
-        "candidate-2-4",
-        "candidate-2-5",
-        "candidate-2-6"
+        "construction-demand-1"
       ]
     },
     {
-      "key": "candidate-4",
-      "title": "施工地別の公共工事受注",
-      "description": "公共機関から受注した1件500万円以上の工事の年度計です。施工地別に集計しており、上の業者所在地別の完成工事高とは合算しません。",
+      "key": "workforce-demographics",
+      "title": "建設業を支える技術者や職人の高齢化は進んでいるか",
+      "concern": "高齢熟練者の退職や若手の入職不足による将来の担い手不足が懸念されます。",
       "metricGroupKeys": [
-        "candidate-4-1",
-        "candidate-4-2"
+        "workforce-demographics-1",
+        "workforce-demographics-2"
+      ],
+      "chartKeys": [
+        "construction-industry-workforce-demographics-composition-1"
+      ]
+    },
+    {
+      "key": "business-base-and-workers",
+      "title": "地域の建設業者数や就業者規模は維持されているか",
+      "concern": "地域のインフラ維持や災害対応を担う地元建設業の縮小が心配です。",
+      "metricGroupKeys": [
+        "business-base-and-workers-1"
+      ]
+    },
+    {
+      "key": "architect-wages",
+      "title": "建設技術者の給与や処遇水準は改善されているか",
+      "concern": "他産業と比べた建設技術者の賃金水準や処遇がどうなっているか気になります。",
+      "metricGroupKeys": [
+        "architect-wages-1"
       ]
     }
   ],

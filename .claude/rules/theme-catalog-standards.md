@@ -75,6 +75,30 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 
 ## 3. チャート選定文法 (データ形状 → componentType)
 
+### 3.0 読者の問いの型 → 見せ方 (2026-10-31 オーナー指示)
+
+章は「読者の悩み → 問い」で切り (`sections[].concern` に悩み、`title` に問い)、章の中の各カードの見せ方は問いの型と
+データの形で決める。対応は NotebookLM の「データサイエンス」ノート (ダッシュボードデザインの実践ガイドブック・
+データ視覚化のデザイン・データ可視化の基本が全部わかる本) から引いた。
+
+| 問いの型 | 見せ方 | 実装 (共通部品) |
+|---|---|---|
+| いまいくつか | 数値 1 つ (値・順位・年) | 1 指標の `metricGroups` → `SingleMetricCard` (`StatTile`) |
+| 47 都道府県の中でどこにいるか | 値の順に並べた小さな棒で選んだ県を濃く塗る | 推移を描けないカードで自動 (`MiniDistributionBars` の `highlightIndex`) |
+| 全国とどれだけ違うか | 県の値の横に全国の値 | 全国行がある指標で自動 (`MetricStatTile` の補足) |
+| 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
+| 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
+| 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |
+
+- **47 都道府県を比べる図 (地図・表・並べた棒) はテーマに置かない** (2026-10-31 オーナー決定)。県の比較はランキングのページ
+  (`/ranking/<key>`) が受け持ち、テーマは 1 つの県 (または全国) の値・推移・内訳・男女差を読む。数値タイルの出典の Sheet から
+  ランキングへ移れる。旧 `comparisonYear` / `comparisonMap` と比較の節 (ThemeComparisonSection) は撤去した
+- 単年の指標を折れ線に入れない。単位の違う指標・内数を含む組・一部の項目だけの組を構成比・ドーナツにしない (足しても全体にならない)
+- 1 つの事実は 1 回だけ見せる。推移のカードと全く同じ指標の折れ線は描画側 (`chartDuplicatesMetrics`) が 1 つにまとめる
+- 章の設計案は NotebookLM が白書を参照して作り、`apply-design.ts` が上の規則でデータの形に合わせ直して書く
+  (`.claude/skills/theme/research-theme-catalog/SKILL.md`「章と見せ方の一括設計」)。モデルが書いた注意書きは確かめていない
+  事実を含むので章の説明に使わない
+
 **テーマページ (`/themes/*`) は `ThemeDbChartRenderer`**
 (`apps/web/src/features/theme-dashboard/`) で描画される。これは stat-charts の `DashboardComponentRenderer`
 (area 系ページ) とは**別 renderer・別型集合**なので注意 (area の bar-chart/sunburst/radar 等は
@@ -236,13 +260,8 @@ metricGroups: [
 
 ### 横断比較
 
-`ThemeComparisonSection` は既存の章の後で、`metricGroups.rankingKeys` と `tabIndicators` から
-比較対象を導出する。専用の overview 指標リストは持たない。県の中央値・差分・指標切替地図には
-同じ年次の有限な都道府県値だけを使い、全国・市区町村・別年を混ぜない。`comparisonYear` は
-起点の年で、グループの全指標に値がそろう新しい年が R2 に入ると実行時にその最新年へ進む
-(`apps/web/src/features/theme-dashboard/lib/resolve-comparison-years.ts`。1 指標でも欠ける年へは進めず、
-指標ごとの最新年にも代替しない。新しい年を R2 へ入れればカタログを書き換えずに追従する)。既存 `comparisonMap` の地図は重複表示しない。比較地図は県選択だけで、章の配置や既存
-セレクタを置き換えない。誤読防止注記は公開 `RankingItem.annotation` / `description` を使う。
+テーマに 47 都道府県を比べる節は置かない (2026-10-31 オーナー決定。旧 `ThemeComparisonSection` と年固定の比較カードは撤去)。
+県の比較は各指標のランキングのページ (`/ranking/<key>`) が地図・並べた棒・表で受け持つ。
 
 ### 実行時の振る舞い (UI 側の約束)
 
@@ -426,7 +445,7 @@ harmRelevance: [
 | (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                            | `ThemePageLayout` の `PageShell leftRail`                                                         |
 
 > テーマ専用の地図のタブ (コロプレス/指標タブ/年度セレクタ) は 2026-10-30 に撤去した (2026-06-20 から全テーマで隠していた `hideMap`)。
-> 都道府県の地図と表は、ランキングと同じ部品 (`RankingVisualizationSection`) を `ThemeComparisonSection` が使う。テーマ専用の地図・表を作らない (オーナー決定)。
+> 都道府県の地図と表はテーマに置かず、ランキングのページが受け持つ (2026-10-31 オーナー決定)。テーマ専用の地図・表を作らない。
 > カタログ無しテーマ (climate / local-finance) は
 > IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
 > (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。

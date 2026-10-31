@@ -57,7 +57,9 @@ developer_instructions = '''
   `MetricSwitcherPanel`。連続する 1 件カードは 2 枚以上まとまったときだけ `data-theme-panel-grid="compact"` の
   container query grid（`@md:grid-cols-2`）で包む（`ThemeMetricsDashboard.renderPanelRuns`）。
   選択肢が 1 件しかないのに checkbox / tab / 選択タイルを出す、または空の折れ線枠を置くのは DRIFT。
-  **データのみ KPI カード（KpiCardClient）・上位県バー（RankingBarList）・大トレンド・旧「指標タブ (1 指標 1 タブ)」・地図は出さない**。
+  **データのみ KPI カード（KpiCardClient）・上位県バー・大トレンド・旧「指標タブ (1 指標 1 タブ)」・地図は出さない**。
+  **47 都道府県を比べる図 (地図・表・並べた棒) はテーマに置かない** (2026-10-31 オーナー決定。県の比較はランキングのページが受け持つ。
+  単年の指標は数値タイル + 47 都道府県の中の位置の小さな棒で見せる。正典 `theme-catalog-standards.md` §3.0)。
   **`cardsOnly` prop は付けない**（付けるとチャートと考察が消える。2026-07-04 に付与をやめた。prop 自体は残存）。
   **指標カードの枚数は下のチャートとの重複を避けて絞る**（2026-08-04 に population-dynamics を 10 → 4）。
 - **データソースは R2 のみ**: `loadThemeData` → `readAllYearsRankingValuesFromR2`（`app/ranking/<key>/values.json`）。

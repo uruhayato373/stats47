@@ -28,7 +28,7 @@
     {
       "rankingKey": "pm25-valid-general-station-count",
       "shortLabel": "PM2.5有効測定局数（一般局）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -69,7 +69,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "environmental-quality-indicator-1",
+      "key": "air-quality-and-pm25-1",
       "title": "PM2.5環境基準達成率（一般局）",
       "rankingKeys": [
         "pm25-general-station-compliance-rate"
@@ -79,37 +79,19 @@
       ]
     },
     {
-      "key": "environmental-quality-indicator-2",
-      "title": "PM2.5環境基準達成局数（一般局）",
+      "key": "air-quality-and-pm25-2",
+      "title": "PM2.5総測定局数と環境基準達成局数の推移",
       "rankingKeys": [
+        "pm25-general-station-count",
         "pm25-compliant-general-station-count"
       ],
       "defaultCheckedKeys": [
+        "pm25-general-station-count",
         "pm25-compliant-general-station-count"
       ]
     },
     {
-      "key": "environmental-quality-indicator-3",
-      "title": "PM2.5有効測定局数（一般局）",
-      "rankingKeys": [
-        "pm25-valid-general-station-count"
-      ],
-      "defaultCheckedKeys": [
-        "pm25-valid-general-station-count"
-      ]
-    },
-    {
-      "key": "environmental-quality-indicator-4",
-      "title": "PM2.5総測定局数（一般局）",
-      "rankingKeys": [
-        "pm25-general-station-count"
-      ],
-      "defaultCheckedKeys": [
-        "pm25-general-station-count"
-      ]
-    },
-    {
-      "key": "environmental-quality-indicator-5",
+      "key": "river-water-quality-1",
       "title": "BOD汚濁負荷量",
       "rankingKeys": [
         "bod-pollution-load"
@@ -119,7 +101,7 @@
       ]
     },
     {
-      "key": "environmental-quality-indicator-6",
+      "key": "lake-sea-water-quality-1",
       "title": "COD汚濁負荷量",
       "rankingKeys": [
         "cod-pollution-load"
@@ -131,19 +113,31 @@
   ],
   "sections": [
     {
-      "key": "environmental-quality-overview",
-      "title": "大気と水環境を都道府県別に見る",
-      "description": "PM2.5の一般環境大気測定局について、有効測定局を分母とした環境基準達成率と局数を比較します。自動車排出ガス測定局や住民の平均曝露濃度は含みません。河川・湖沼・海域の水質は2023年度の県別原表掲載行と達成判定を確認できます。汚濁負荷量は濃度・環境基準達成割合と分けて表示します。",
+      "key": "air-quality-and-pm25",
+      "title": "地域の空気は安全でPM2.5の環境基準を満たしているか",
+      "concern": "大気汚染やPM2.5による健康影響や地域の環境基準達成状況が気になります。",
       "metricGroupKeys": [
-        "environmental-quality-indicator-1",
-        "environmental-quality-indicator-2",
-        "environmental-quality-indicator-3",
-        "environmental-quality-indicator-4",
-        "environmental-quality-indicator-5",
-        "environmental-quality-indicator-6"
+        "air-quality-and-pm25-1",
+        "air-quality-and-pm25-2"
       ],
       "embeddedSectionKeys": [
         "water-quality"
+      ]
+    },
+    {
+      "key": "river-water-quality",
+      "title": "河川の水質汚濁や有機物による環境負荷はどれくらいか",
+      "concern": "身近な河川の汚れや生活排水等による有機汚濁負荷が気になります。",
+      "metricGroupKeys": [
+        "river-water-quality-1"
+      ]
+    },
+    {
+      "key": "lake-sea-water-quality",
+      "title": "湖沼や海域の水質保全や汚濁負荷の状況はどうなっているか",
+      "concern": "湖沼や海域における富栄養化や水質悪化が進んでいないか不安です。",
+      "metricGroupKeys": [
+        "lake-sea-water-quality-1"
       ]
     }
   ],
