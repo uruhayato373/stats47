@@ -9,6 +9,7 @@ import {
 import { metricDisplayName } from '@stats47/ranking';
 import { BookOpenText } from 'lucide-react';
 
+import { ContentDisclosure } from '@/components/content';
 import { PanelGrid } from '@/components/layout';
 import { SectionCard } from '@/components/surface';
 
@@ -27,23 +28,14 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
   if (topics.length === 0) return null;
 
   return (
-    <PanelGrid as="section"
-      id="theme-evidence"
-      aria-labelledby="theme-evidence-topics-title"
-    >
-      <div className="flex items-center gap-2">
-        <BookOpenText className="h-4 w-4 text-muted-foreground" aria-hidden />
-        <h2
-          id="theme-evidence-topics-title"
-          className="text-xl font-bold text-foreground"
-        >
-          白書・統計から見る論点
-        </h2>
-      </div>
-      <p className="mt-1 text-sm text-muted-foreground">
-        公的資料の論点から、関連する都道府県データと次に読むテーマを整理しています。
-      </p>
-
+    <PanelGrid as="section" id="theme-evidence" aria-label="白書・統計から見る論点">
+      {/* 最初は閉じて題名だけを見せる (2026-10-31 オーナー決定: 可視化を先に並べる)。details なので本文は HTML に残る */}
+      <ContentDisclosure
+        title="白書・統計から見る論点"
+        leading={<BookOpenText className="h-4 w-4 text-muted-foreground" aria-hidden />}
+        description="公的資料の論点から、関連する都道府県データと次に読むテーマを整理しています。"
+        bordered={false}
+      >
       <SectionCard
         className="mt-3"
         bodyClassName="grid grid-cols-1 gap-6 md:grid-cols-2"
@@ -204,6 +196,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
           );
         })}
       </SectionCard>
+      </ContentDisclosure>
     </PanelGrid>
   );
 }

@@ -9,6 +9,7 @@ import {
   ThemePageLayout,
   loadThemeData,
   resolveInitialThemePrefecture,
+  resolveThemePrefectureCode,
 } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -91,6 +92,11 @@ export default async function ThemeDynamicPage({ params, searchParams }: PagePro
         cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
       });
 
+  // 前に選んで覚えている県 (県のページや地域の Sheet で選んだ県)。このページの題名とタイルは 47 都道府県のまま、
+  // 推移のカードにだけ全国と並べて出す (2026-10-31 オーナー決定)
+  const rememberedPrefectureCode =
+    resolveThemePrefectureCode(cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value)?.areaCode ?? null;
+
   // PageShell は ThemePageLayout が持つ (左レール = ThemeSideNav を
   // ThemePrefectureProvider の内側に置く必要があるため)。ここで重ねない。
   return (
@@ -98,6 +104,7 @@ export default async function ThemeDynamicPage({ params, searchParams }: PagePro
       theme={theme}
       data={data}
       initialPrefecture={initialPrefecture}
+      rememberedPrefectureCode={isAreaTheme(theme.themeKey) ? rememberedPrefectureCode : null}
     />
   );
 }

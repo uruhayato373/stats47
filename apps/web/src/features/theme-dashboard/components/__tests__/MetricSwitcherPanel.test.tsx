@@ -39,6 +39,7 @@ vi.mock(
 );
 
 import { MetricSwitcherPanel } from "../MetricSwitcherPanel";
+import { ThemePrefectureProvider } from "../ThemePrefectureContext";
 
 import type { MetricKpi, MultiMetricGroup } from "../metric-kpi";
 
@@ -129,26 +130,13 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
     );
   }
 
-  it("★fetch を一切行わない (ネットワーク往復ゼロ)", async () => {
+  // 2026-10-31 (オーナー決定): 47 都道府県のページでも推移のカードを空にせず、全国の推移を出す
+  // (旧 GEO-SCOPE-SEPARATION-01 WP2: 何も取得せず「都道府県を選択すると…」の案内を出していた)
+  it("全国の推移だけを取りに行く (県の系列は取らない)", async () => {
     renderUnselected();
-    // 案内テキストが出るまで待ってから確認する (非同期の取りこぼしを避ける)
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
-    );
-    expect(fetchMock).not.toHaveBeenCalled();
-  });
-
-  it("複数チェックしても fetch は発生しない", async () => {
-    renderUnselected({ defaultCheckedKeys: ["wage", "unemployment"] });
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
-    );
-    toggleTile(/有効求人倍率/);
-    expect(fetchMock).not.toHaveBeenCalled();
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    const codes = fetchMock.mock.calls.map((c) => c[1]);
+    expect(new Set(codes)).toEqual(new Set(["00000"]));
   });
 
   it("タイルは実在する1位県の値と県名を表示する (捏造・平均ではない)", async () => {
@@ -158,28 +146,28 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
     expect(wageTile).toHaveTextContent("東京都");
   });
 
-  it("チャート領域は選択案内になる (エラー文言ではない)", async () => {
+  it("「都道府県を選択すると…」の空のカードは出さない", async () => {
     renderUnselected();
-    const prompt = await screen.findByText(
-      "都道府県を選択すると、その県の推移が表示されます",
-    );
-    expect(prompt).toHaveStyle({ height: "80px" });
-    expect(screen.queryByText("推移データがありません")).toBeNull();
-    expect(screen.queryByTestId("line-chart")).toBeNull();
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(screen.queryByText(/都道府県を選択すると/)).toBeNull();
   });
+});
 
-  it("★画面のどこにも「全国」「全国平均」「（平均）」の文字列を含まない", async () => {
-    const { container } = renderUnselected({
-      defaultCheckedKeys: ["wage", "unemployment"],
-    });
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
+// 2026-10-31 (オーナー決定): 前に選んだ県を覚え、47 都道府県のページでも推移のカードに全国と並べて出す
+describe("MetricSwitcherPanel — 覚えている県の重ね表示", () => {
+  it("覚えている県と全国を取りに行き、外す札を出す。札を押すと全国だけに戻る", async () => {
+    render(
+      <ThemePrefectureProvider rememberedAreaCode="13000">
+        <MetricSwitcherPanel metrics={METRICS} tabLabels={LABELS} selectedPrefectureCode={null} areaName="47都道府県" />
+      </ThemePrefectureProvider>,
     );
-    const text = container.textContent ?? "";
-    expect(text).not.toContain("全国");
-    expect(text).not.toContain("（平均）");
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    const codes = new Set(fetchMock.mock.calls.map((c) => c[1]));
+    expect(codes).toEqual(new Set(["13000", "00000"]));
+    const chip = screen.getByRole("button", { name: /東京都の重ね表示を外す/ });
+    fireEvent.click(chip);
+    expect(screen.queryByRole("button", { name: /重ね表示を外す/ })).toBeNull();
+    expect(document.cookie).toContain("preferred-prefecture=all");
   });
 });
 

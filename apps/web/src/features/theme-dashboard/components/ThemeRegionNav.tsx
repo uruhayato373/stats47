@@ -30,6 +30,7 @@ import { RailNavRow } from '@/components/surface';
 import { trackNavClick } from '@/lib/analytics/events';
 
 import { themeHref } from '../config/theme-href';
+import { writeThemePrefecturePreference } from '../lib/theme-prefecture-preference';
 
 import { useThemePrefecture } from './ThemePrefectureContext';
 import { CRUMB_TRIGGER_CLASS, ThemeSwitcher, type ThemeSwitcherTheme } from './ThemeSwitcher';
@@ -119,6 +120,8 @@ export function ThemeRegionNav({
     const href = code ? prefectureHref(code) : themeHref(themeKey);
     trackNavClick({ surface: 'theme_region', label: code ?? 'all', href });
     setOpen(false);
+    // 選んだ県を覚える (47 都道府県のページの推移のカードに重ねる。2026-10-31)。「47 都道府県を比べる」では消さない
+    if (code) writeThemePrefecturePreference(code);
     // 県ごとのページを持たないテーマは同じページのまま県を切り替える (旧 PrefectureSelect と同じ)
     if (!hasAreaPages && !areaContext && current === 'prefectures') setSelected(code);
     else router.push(href);

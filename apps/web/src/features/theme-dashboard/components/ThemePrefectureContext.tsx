@@ -33,6 +33,13 @@ interface ThemePrefectureContextValue {
   selectedAreaName: string | null;
   /** 都道府県を選択 (null = 47都道府県)。name 省略時は code から解決する。 */
   setSelected: (code: string | null, name?: string | null) => void;
+  /**
+   * 前に選んで覚えている県 (cookie)。47 都道府県のページでも、推移のカードにこの県を全国と並べて出す
+   * (題名とタイルは 47 都道府県のまま。2026-10-31 オーナー決定)。null = 覚えていない (全国だけを出す)
+   */
+  rememberedPrefecture?: { areaCode: string; areaName: string } | null;
+  /** 覚えている県を外す (推移のカードは全国だけに戻る) */
+  clearRemembered?: () => void;
 }
 
 type ThemeServerSelection = Pick<
@@ -48,6 +55,8 @@ const ThemePrefectureContext = createContext<
   selectedPrefectureCode: null,
   selectedAreaName: null,
   setSelected: () => {},
+  rememberedPrefecture: null,
+  clearRemembered: () => {},
 });
 
 // ============================================================================
@@ -57,13 +66,25 @@ const ThemePrefectureContext = createContext<
 export function ThemePrefectureProvider({
   initialAreaCode = null,
   initialAreaName = null,
+  rememberedAreaCode = null,
   children,
 }: {
   /** サーバーで解決済みの初期エリア。null は明示的な 47都道府県表示。 */
   initialAreaCode?: string | null;
   initialAreaName?: string | null;
+  /** 前に選んで覚えている県 (サーバーが cookie から引く)。47 都道府県のページの推移のカードに重ねる */
+  rememberedAreaCode?: string | null;
   children: ReactNode;
 }) {
+  const [rememberedCode, setRememberedCode] = useState<string | null>(rememberedAreaCode);
+  const rememberedPrefecture = useMemo(
+    () => (rememberedCode ? resolveThemePrefectureCode(rememberedCode) : null),
+    [rememberedCode]
+  );
+  const clearRemembered = useCallback(() => {
+    setRememberedCode(null);
+    writeThemePrefecturePreference(null);
+  }, []);
   const [selectedPrefectureCode, setCode] = useState<string | null>(
     initialAreaCode
   );
@@ -84,9 +105,11 @@ export function ThemePrefectureProvider({
     []
   );
 
-  // URL / Cookie / 初回既定値からサーバーが解決した選択を、次回アクセス用に保存する。
+  // URL / Cookie / 初回既定値からサーバーが解決した県を、次回アクセス用に保存する。
+  // 47 都道府県のページ (initialAreaCode = null) を開いただけでは消さない (2026-10-31。旧: 「47都道府県」で上書きし、
+  // 県を選んでから戻ると覚えた県が消えて、推移のカードが空になっていた)
   useEffect(() => {
-    writeThemePrefecturePreference(initialAreaCode);
+    if (initialAreaCode) writeThemePrefecturePreference(initialAreaCode);
   }, [initialAreaCode]);
 
   // Provider をサーバー初期値なしで使う既存画面向けの後方互換。
@@ -113,6 +136,8 @@ export function ThemePrefectureProvider({
         selectedPrefectureCode,
         selectedAreaName,
         setSelected,
+        rememberedPrefecture,
+        clearRemembered,
       }}
     >
       {children}

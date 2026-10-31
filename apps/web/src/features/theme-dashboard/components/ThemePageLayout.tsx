@@ -61,6 +61,8 @@ interface Props {
   areaContext?: { areaCode: string; areaName: string };
   /** 通常テーマ画面で URL / Cookie / 初回既定値から解決した初期都道府県 */
   initialPrefecture?: { areaCode: string; areaName: string } | null;
+  /** 前に選んで覚えている県 (cookie)。47 都道府県のページの推移のカードに重ねる (2026-10-31) */
+  rememberedPrefectureCode?: string | null;
   /**
    * パンくず直下に差し込むページ固有のコントロール
    * （テーマ固有の補助ナビゲーションなど）。
@@ -86,6 +88,7 @@ export async function ThemePageLayout({
   data,
   areaContext,
   initialPrefecture,
+  rememberedPrefectureCode = null,
   toolbar,
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
@@ -179,6 +182,7 @@ export async function ThemePageLayout({
     <ThemePrefectureProvider
       initialAreaCode={providerPrefecture?.areaCode ?? null}
       initialAreaName={providerPrefecture?.areaName ?? null}
+      rememberedAreaCode={areaContext ? null : rememberedPrefectureCode}
     >
       <PageShell>
         <PanelGrid className="text-foreground">

@@ -21,6 +21,7 @@ export { listRelatedThemesForRankingKeys, type RelatedThemeLink } from "./lib/re
 export {
   THEME_PREFECTURE_COOKIE_NAME,
   resolveInitialThemePrefecture,
+  resolveThemePrefectureCode,
 } from "./lib/theme-prefecture-preference";
 
 export { ThemeAreaHeader } from "./components/ThemeAreaHeader";
