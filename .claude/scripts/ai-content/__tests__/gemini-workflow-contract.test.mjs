@@ -12,6 +12,8 @@ test("Gemini日次は少量・直列・structured preflight・独立criticを固
   assert.match(daily, /verify_only:[\s\S]*?default: true/);
   assert.match(daily, /LIMIT="\$\{\{ inputs\.verify_only && '1' \|\| inputs\.limit \|\| '3' \}\}"/);
   assert.match(daily, /GEMINI_TEXT_MODEL:.*gemini-2\.5-flash-lite/);
+  assert.doesNotMatch(daily, /GEMINI_TEXT_MODEL:.*vars\.GEMINI_TEXT_MODEL/);
+  assert.match(daily, /NODE_OPTIONS: --conditions react-server/);
   assert.match(daily, /default: "3"/);
   assert.match(daily, /--model gemini-api/);
   assert.match(daily, /--critic gemini-api/);
