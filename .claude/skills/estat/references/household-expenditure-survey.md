@@ -1,5 +1,7 @@
 # 家計調査 — 取得範囲とサイト展開の参照表
 
+実装用の切り口台帳は `packages/data-configs/src/kakei-analysis-catalog.ts`。`npm run metrics:check` で既存指標・ページ参照との整合を検査し、`npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts --list` で全行を表示する。`proposed` は図・記事の完成を示さない。表メタデータの126件確認は本資料の棚卸しであり、切り口台帳の17件はその中の制作候補と既存入口である。
+
 調査: 家計調査（総務省）。家計収支編の二人以上・総世帯・単身世帯と、貯蓄・負債編の二人以上世帯を分けて扱う。
 
 ## 2025年の既存品目更新
