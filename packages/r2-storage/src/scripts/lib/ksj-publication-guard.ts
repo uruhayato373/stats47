@@ -109,6 +109,12 @@ export function assertKsjPublicAssetsAllowed(
     if (source?.kind !== 'external' || source.fetcherKey !== 'manual') continue;
     const input = source.config;
     if (typeof input?.sourceSha256 !== 'string') continue;
+    // 市区町村だけの手動指標 (例: 待機児童率) は cities.json を出典の版と年で検査する。
+    // 都道府県の 47 県保存則は当てはまらないので、自治体コードの重複と値の形を見る (2026-11-01)
+    if (key === `app/stats/${metric.key}/cities.json` && metric.entities?.includes('city')) {
+      assertManualCitySnapshot(key, metric, input, JSON.parse(readBody(key).toString('utf8')));
+      continue;
+    }
     if (key !== `app/stats/${metric.key}/values.json`) {
       throw new Error(`一次資料移行後の未検証artifact: ${key}`);
     }
@@ -135,5 +141,35 @@ export function assertKsjPublicAssetsAllowed(
     ) {
       throw new Error(`一次資料移行後の旧版・出典・47県保存則不一致: ${key}`);
     }
+  }
+}
+
+function assertManualCitySnapshot(
+  key: string,
+  metric: (typeof METRICS_REGISTRY)[string],
+  input: { sourceSha256?: unknown; dataDate?: unknown },
+  payload: {
+    metricKey?: string;
+    rows?: { areaCode: string; yearCode: string; value: number | null }[];
+    meta?: { rowCount?: number; recipe?: { configHash?: string }; source?: {
+      sourceSha256?: string; sha256?: string; dataDate?: string;
+    } };
+  },
+): void {
+  const evidence = payload.meta?.source;
+  const rows = payload.rows;
+  const expectedYear = String(input.dataDate).slice(0, 4);
+  if (
+    payload.metricKey !== metric.key ||
+    payload.meta?.recipe?.configHash !== buildRecipe(metric).configHash ||
+    evidence?.sourceSha256 !== input.sourceSha256 || evidence?.sha256 !== input.sourceSha256 ||
+    evidence?.dataDate !== input.dataDate ||
+    !Array.isArray(rows) || rows.length === 0 || payload.meta?.rowCount !== rows.length ||
+    new Set(rows.map((row) => row.areaCode)).size !== rows.length ||
+    rows.some((row) => !/^\d{5}$/.test(row.areaCode) || row.areaCode.endsWith('000') ||
+      row.yearCode !== expectedYear ||
+      (row.value !== null && (!Number.isFinite(row.value) || row.value < 0)))
+  ) {
+    throw new Error(`一次資料の市区町村 snapshot の旧版・出典不一致: ${key}`);
   }
 }

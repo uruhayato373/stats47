@@ -105,6 +105,12 @@ async function main() {
       areaCount: new Set(rows.map((r) => r.areaCode)).size,
       generatedAt: new Date().toISOString(),
       recipe: buildRecipe(config),
+      // R2 へ送るときの検査 (ksj-publication-guard の assertManualCitySnapshot) が config と照合する
+      source: {
+        sourceSha256: sha,
+        sha256: sha,
+        dataDate: (config.source as { config?: { dataDate?: string } }).config?.dataDate,
+      },
     },
   };
   if (dryRun) {
