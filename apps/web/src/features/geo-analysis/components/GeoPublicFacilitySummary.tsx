@@ -46,10 +46,13 @@ const share = (value: number | null | undefined) =>
 export function GeoPublicFacilitySummary({
   snapshot,
   selectedAreaCode,
+  regionOnly = false,
   onSelectArea,
 }: {
   snapshot: GeoAnalysisSnapshot;
   selectedAreaCode?: string | null;
+  /** テーマのページでは今の地域 (選んだ県、無ければ全国) の行だけを出す。47 都道府県を並べる表はランキングと Geo の分析ページ (2026-10-31) */
+  regionOnly?: boolean;
   onSelectArea?: (code: string, name: string) => void;
 }) {
   const [group, setGroup] = useState<PublicFacilityGroup>('administrative');
@@ -159,6 +162,7 @@ export function GeoPublicFacilitySummary({
         分母：{people(values[`population${year}`])}
         。全国比率は人口の合算から計算します。表示時に丸めるため、比率の合計が100%にならない場合があります。
       </p>
+      {!regionOnly && (
       <div className="mt-5 min-w-0 overflow-x-auto">
         <Table className="whitespace-nowrap" scrollRegion aria-label="47都道府県の距離帯別人口">
           <TableHeader>
@@ -223,6 +227,7 @@ export function GeoPublicFacilitySummary({
           </TableBody>
         </Table>
       </div>
+      )}
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
         {PUBLIC_FACILITY_LIMIT}
       </p>

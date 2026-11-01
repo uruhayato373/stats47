@@ -48,7 +48,7 @@
     {
       "rankingKey": "business-opening-base-establishments",
       "shortLabel": "分母となる前年度末の適用事業所数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -99,57 +99,31 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "business-demography-indicator-1",
-      "title": "開業率（雇用保険適用事業所）",
+      "key": "business-metabolism-1",
+      "title": "開業率と廃業率の推移",
       "rankingKeys": [
-        "business-opening-rate"
-      ],
-      "defaultCheckedKeys": [
-        "business-opening-rate"
-      ]
-    },
-    {
-      "key": "business-demography-indicator-2",
-      "title": "廃業率（雇用保険適用事業所）",
-      "rankingKeys": [
+        "business-opening-rate",
         "business-closure-rate"
       ],
       "defaultCheckedKeys": [
+        "business-opening-rate",
         "business-closure-rate"
       ]
     },
     {
-      "key": "business-demography-indicator-3",
-      "title": "年度内の新規成立事業所数",
+      "key": "business-metabolism-2",
+      "title": "新規成立事業所数と消滅事業所数の推移",
       "rankingKeys": [
-        "business-opening-establishments"
-      ],
-      "defaultCheckedKeys": [
-        "business-opening-establishments"
-      ]
-    },
-    {
-      "key": "business-demography-indicator-4",
-      "title": "年度内の消滅事業所数",
-      "rankingKeys": [
+        "business-opening-establishments",
         "business-closure-establishments"
       ],
       "defaultCheckedKeys": [
+        "business-opening-establishments",
         "business-closure-establishments"
       ]
     },
     {
-      "key": "business-demography-indicator-5",
-      "title": "分母となる前年度末の適用事業所数",
-      "rankingKeys": [
-        "business-opening-base-establishments"
-      ],
-      "defaultCheckedKeys": [
-        "business-opening-base-establishments"
-      ]
-    },
-    {
-      "key": "candidate-19-1",
+      "key": "enterprise-structure-1",
       "title": "会社・個人経営の企業総数",
       "rankingKeys": [
         "nonprimary-enterprises-count"
@@ -159,7 +133,7 @@
       ]
     },
     {
-      "key": "candidate-19-2",
+      "key": "enterprise-structure-2",
       "title": "常用雇用者0〜4人の企業数",
       "rankingKeys": [
         "nonprimary-enterprises-under5-count"
@@ -169,7 +143,7 @@
       ]
     },
     {
-      "key": "candidate-19-3",
+      "key": "employment-and-small-business-1",
       "title": "会社・個人経営の従業者総数",
       "rankingKeys": [
         "nonprimary-enterprises-employees"
@@ -179,7 +153,7 @@
       ]
     },
     {
-      "key": "candidate-19-4",
+      "key": "employment-and-small-business-2",
       "title": "常用雇用者0〜4人企業の従業者数",
       "rankingKeys": [
         "nonprimary-enterprises-under5-employees"
@@ -191,26 +165,30 @@
   ],
   "sections": [
     {
-      "key": "business-demography-overview",
-      "title": "起業と開廃業を都道府県別に見る",
-      "description": "雇用保険適用事業所の新規成立・消滅と、前年度末の適用事業所数を分母にした開業率・廃業率を比較します。雇用者のいない事業を含まず、企業単位の設立・倒産件数とは異なります。",
+      "key": "business-metabolism",
+      "title": "地域における企業の開業や廃業の動きはどう推移しているか",
+      "concern": "新規起業の動きや廃業による事業消失の割合が地域の産業代謝にどう影響しているか不安です。",
       "metricGroupKeys": [
-        "business-demography-indicator-1",
-        "business-demography-indicator-2",
-        "business-demography-indicator-3",
-        "business-demography-indicator-4",
-        "business-demography-indicator-5"
+        "business-metabolism-1",
+        "business-metabolism-2"
       ]
     },
     {
-      "key": "candidate-19",
-      "title": "企業規模別の事業基盤",
-      "description": "2021年経済センサスの非農林漁業（公務を除く）、会社企業と個人経営の合計です。本所所在地に企業全体を集計しています。常用雇用者0〜4人は統計上の区分で、法定の中小・小規模企業とは異なります。従業者は役員・個人業主等を含み、常用雇用者だけの人数ではありません。",
+      "key": "enterprise-structure",
+      "title": "地域の企業数や事業基盤の規模はどれくらいか",
+      "concern": "地域の事業主体の数や経済活動を支える企業基盤が十分にあるか気になります。",
       "metricGroupKeys": [
-        "candidate-19-1",
-        "candidate-19-2",
-        "candidate-19-3",
-        "candidate-19-4"
+        "enterprise-structure-1",
+        "enterprise-structure-2"
+      ]
+    },
+    {
+      "key": "employment-and-small-business",
+      "title": "地域の雇用を支える従業者の規模や小規模企業の割合はどうか",
+      "concern": "地域の雇用が小規模企業にどの程度依存しているかや雇用の受け皿が気になります。",
+      "metricGroupKeys": [
+        "employment-and-small-business-1",
+        "employment-and-small-business-2"
       ]
     }
   ],

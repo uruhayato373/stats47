@@ -193,7 +193,8 @@ describe("contract: 軸・凡例を描く D3 チャートは fitSvgViewBox を�
     .filter((file) => AXIS_USAGE.test(readFileSync(file, "utf8")));
 
   it("対象コンポーネントを検出できている", () => {
-    expect(files.length).toBeGreaterThanOrEqual(12);
+    // 2026-10-30 に使われていない散布図・都道府県地図などを消して 12 → 11
+    expect(files.length).toBeGreaterThanOrEqual(11);
   });
 
   it.each(files)("%s", (file) => {

@@ -64,37 +64,29 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "childcare-services-indicator-1",
-      "title": "保育所等数（0～5歳人口10万人当たり）",
+      "key": "childcare-demand-1",
+      "title": "保育所等利用申込者数（4月1日時点）",
       "rankingKeys": [
-        "nursery-count-per-100k-0-5"
+        "childcare-applicants"
       ],
       "defaultCheckedKeys": [
-        "nursery-count-per-100k-0-5"
+        "childcare-applicants"
       ]
     },
     {
-      "key": "childcare-services-indicator-2",
-      "title": "保育所等在所児数（保育士1人当たり）",
+      "key": "facility-capacity-and-utilization-1",
+      "title": "人口当たりの保育所等数と利用率の推移",
       "rankingKeys": [
-        "nursery-children-per-nursery-teacher"
-      ],
-      "defaultCheckedKeys": [
-        "nursery-children-per-nursery-teacher"
-      ]
-    },
-    {
-      "key": "childcare-services-indicator-3",
-      "title": "保育所等利用率（在所児数／定員数）",
-      "rankingKeys": [
+        "nursery-count-per-100k-0-5",
         "nursery-utilization-rate"
       ],
       "defaultCheckedKeys": [
+        "nursery-count-per-100k-0-5",
         "nursery-utilization-rate"
       ]
     },
     {
-      "key": "childcare-services-indicator-4",
+      "key": "facility-capacity-and-utilization-2",
       "title": "認定こども園数（0～5歳人口10万人当たり）",
       "rankingKeys": [
         "certified-childcare-center-count-per-100k-0-5"
@@ -104,27 +96,40 @@
       ]
     },
     {
-      "key": "childcare-services-indicator-5",
-      "title": "保育所等利用申込者数（4月1日時点）",
+      "key": "childcare-quality-and-staffing-1",
+      "title": "保育所等在所児数（保育士1人当たり）",
       "rankingKeys": [
-        "childcare-applicants"
+        "nursery-children-per-nursery-teacher"
       ],
       "defaultCheckedKeys": [
-        "childcare-applicants"
+        "nursery-children-per-nursery-teacher"
       ]
     }
   ],
   "sections": [
     {
-      "key": "childcare-services-overview",
-      "title": "保育の需給を都道府県別に見る",
-      "description": "保育所等の数・在所児・利用率と認定こども園数に加え、2025年4月1日の保育所等利用申込者数を比較します。申込者には利用中の児童も含まれます。指標によって対象年や集計範囲が異なるため、申込者と別の指標の定員を差し引いて待機児童数とはしません。",
+      "key": "childcare-demand",
+      "title": "保育所等の利用申し込みや需要の状況はどうか",
+      "concern": "子どもを預けたい希望者に対し実際の利用申し込みがどれくらいあるか気になります。",
       "metricGroupKeys": [
-        "childcare-services-indicator-1",
-        "childcare-services-indicator-2",
-        "childcare-services-indicator-3",
-        "childcare-services-indicator-4",
-        "childcare-services-indicator-5"
+        "childcare-demand-1"
+      ]
+    },
+    {
+      "key": "facility-capacity-and-utilization",
+      "title": "保育施設や定員の確保状況は十分か",
+      "concern": "地域に保育所や認定こども園が十分にあり定員に余裕があるか心配です。",
+      "metricGroupKeys": [
+        "facility-capacity-and-utilization-1",
+        "facility-capacity-and-utilization-2"
+      ]
+    },
+    {
+      "key": "childcare-quality-and-staffing",
+      "title": "保育士の配置状況や保育の質は保たれているか",
+      "concern": "保育士不足によって1人当たりの負担が重く手厚い保育が受けられないか心配です。",
+      "metricGroupKeys": [
+        "childcare-quality-and-staffing-1"
       ]
     }
   ],

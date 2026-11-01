@@ -43,17 +43,6 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
   //   自前で持つため、汎用 embeddedSections には登録しない。
 };
 
-/**
- * 2026-06-20 デザイン整理: 全テーマを hideMap (stats-card 主役) に統一。
- * hideMap = ThemeDashboardTabbed の地図タブ UI (コロプレス/指標タブ/年度セレクタ) を
- * 非表示にしカード主役にするフラグ。
- *
- * 地図タブ UI を戻したいテーマは themeKey を MAP_VISIBLE_THEMES に追加する (既定は空)。
- *
- * ※ 埋め込み GIS セクション (EMBEDDED_SECTIONS: 移動フロー/駅乗降/高速道路/過疎×医療/日照) は
- *   hideMap とは独立に描画する (2026-07-04〜)。カード主役のまま主題深掘り GIS を出す。
- */
-const MAP_VISIBLE_THEMES = new Set<string>([]);
 
 /** 全テーマ一覧（表示順） */
 export const ALL_THEMES: ThemeConfig[] = THEME_SETS.map((set) => {
@@ -62,6 +51,5 @@ export const ALL_THEMES: ThemeConfig[] = THEME_SETS.map((set) => {
   const withEmbedded = embeddedSections
     ? { ...config, embeddedSections }
     : config;
-  const hideMap = !MAP_VISIBLE_THEMES.has(config.themeKey);
-  return hideMap ? { ...withEmbedded, hideMap: true } : withEmbedded;
+  return withEmbedded;
 });

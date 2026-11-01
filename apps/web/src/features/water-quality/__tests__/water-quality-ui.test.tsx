@@ -38,7 +38,8 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe('水質原表の共通県選択と状態表示', () => {
-  it.each(snapshot.prefectures)('全国47行から$areaName欄だけへ切り替え、全国表示へ戻る', (p) => {
+  // 全国のページは全国の公式集計だけを出し、47 都道府県の行を並べない (2026-10-31。県の比較はランキングのページ)
+  it.each(snapshot.prefectures)('全国は県の行を並べず、$areaName欄だけへ切り替え、全国表示へ戻る', (p) => {
     const { container } = render(
       <ThemePrefectureProvider initialAreaCode={null}>
         <Controls />
@@ -46,7 +47,7 @@ describe('水質原表の共通県選択と状態表示', () => {
       </ThemePrefectureProvider>
     );
     expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
-      47
+      0
     );
     fireEvent.click(screen.getByRole('button', { name: p.areaName }));
     expect(
@@ -65,7 +66,7 @@ describe('水質原表の共通県選択と状態表示', () => {
     fireEvent.click(screen.getByRole('button', { name: '全国' }));
     expect(container.querySelectorAll('[data-water-row]')).toHaveLength(0);
     expect(container.querySelectorAll('[data-prefecture-code]')).toHaveLength(
-      47
+      0
     );
   });
   it('下限未満の記号と平均値を別々の列で保持する', () => {

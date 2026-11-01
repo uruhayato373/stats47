@@ -11,13 +11,13 @@
       ]
     },
     {
-      "id": "route:areas-cities:areaCode:cityCode:categoryKey",
-      "kind": "areas-cities",
-      "pattern": "/areas/[areaCode]/cities/[cityCode]/[categoryKey]",
+      "id": "route:city-theme:areaCode:cityCode:themeSlug",
+      "kind": "city-theme",
+      "pattern": "/areas/[areaCode]/cities/[cityCode]/[themeSlug]",
       "parameters": [
         "areaCode",
         "cityCode",
-        "categoryKey"
+        "themeSlug"
       ]
     },
     {
@@ -134,6 +134,15 @@
       "id": "route:area-theme:areaCode:themeSlug",
       "kind": "area-theme",
       "pattern": "/areas/[areaCode]/[themeSlug]",
+      "parameters": [
+        "areaCode",
+        "themeSlug"
+      ]
+    },
+    {
+      "id": "route:area-theme-cities:areaCode:themeSlug",
+      "kind": "area-theme-cities",
+      "pattern": "/areas/[areaCode]/[themeSlug]/cities",
       "parameters": [
         "areaCode",
         "themeSlug"

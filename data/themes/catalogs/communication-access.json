@@ -18,7 +18,7 @@
     {
       "rankingKey": "broadband-service-contract-count",
       "shortLabel": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -54,7 +54,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "communication-access-indicator-1",
+      "key": "fixed-broadband-environment-1",
       "title": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
       "rankingKeys": [
         "broadband-contract-count-excluding-39-4g"
@@ -64,17 +64,7 @@
       ]
     },
     {
-      "key": "communication-access-indicator-2",
-      "title": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
-      "rankingKeys": [
-        "broadband-service-contract-count"
-      ],
-      "defaultCheckedKeys": [
-        "broadband-service-contract-count"
-      ]
-    },
-    {
-      "key": "communication-access-indicator-3",
+      "key": "mobile-contract-prevalence-1",
       "title": "携帯電話契約数（人口千人当たり）",
       "rankingKeys": [
         "mobile-phone-contract-count-per-1000"
@@ -84,7 +74,7 @@
       ]
     },
     {
-      "key": "communication-access-indicator-4",
+      "key": "household-mobile-ownership-1",
       "title": "携帯電話所有数量（二人以上世帯千世帯当たり）",
       "rankingKeys": [
         "mobile-phone-ownership-multi-person-households-per-1000"
@@ -96,14 +86,27 @@
   ],
   "sections": [
     {
-      "key": "communication-access-overview",
-      "title": "通信環境とデジタル基盤を都道府県別に見る",
-      "description": "ブロードバンド契約数と携帯電話の契約・保有を比較します。ブロードバンドはBWAを含み、携帯電話アクセスを含む旧系列と除く系列を別々に表示します。契約数は世帯普及率や通信速度とは異なります。",
+      "key": "fixed-broadband-environment",
+      "title": "自宅や地域の光回線・ブロードバンド環境は整っているか",
+      "concern": "テレワークやオンライン学習に必要な固定ブロードバンドの普及状況が十分か心配です。",
       "metricGroupKeys": [
-        "communication-access-indicator-1",
-        "communication-access-indicator-2",
-        "communication-access-indicator-3",
-        "communication-access-indicator-4"
+        "fixed-broadband-environment-1"
+      ]
+    },
+    {
+      "key": "mobile-contract-prevalence",
+      "title": "携帯電話やモバイル通信の普及率は地域でどう違うか",
+      "concern": "移動体通信の普及やスマートフォンの浸透度合いに地域差がないか気になります。",
+      "metricGroupKeys": [
+        "mobile-contract-prevalence-1"
+      ]
+    },
+    {
+      "key": "household-mobile-ownership",
+      "title": "世帯における携帯電話や端末の所有状況はどうなっているか",
+      "concern": "世帯単位での情報通信機器の所有やデジタル化の基盤状況が気になります。",
+      "metricGroupKeys": [
+        "household-mobile-ownership-1"
       ]
     }
   ],

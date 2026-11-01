@@ -1,6 +1,6 @@
 # e-Stat の実在年と metric config の years の差分 (LATEST)
 
-- 生成: 2026-10-29T20:45:55.792Z
+- 生成: 2026-10-30T23:23:29.563Z
 - 対象: 県の値を e-Stat (estat / kakei-chousa) から取り込む有効な metric 2236 件 (表 144・取り出し条件 2234)。市区町村の値は対象外
 - 台帳: `data/estat/availability/tables/<statsDataId>.json`。取り込みと同じ取得と県の判定で、`years` で絞らずに年ごとの値のある県を数えたもの
 - 全県: その条件で最も多く値が出た年の県の数 (港湾・漁業のように 47 県がそろわない統計があるため 47 に固定しない)。一部の県だけの年は分類に入れない (diff.json の `partial`)
@@ -63,7 +63,7 @@
 
 - 対象: 市区町村の値を e-Stat から取り込む有効な metric 737 件 (市区町村の表 35)。数えるのは取り込みと同じく現行の市区町村マスタにあるコードだけ
 - **報告だけで years は変えない** (years は県の値で決める。市区町村は合併でコードが変わり、古い年ほど数が減るため「全市区町村の年」が定まらない)
-- 設定の年に市区町村の値が無い: 483 件 / 設定に無い年に市区町村の 90% 以上の値がある: 8 件 / 差分なし: 219 件 / years: "all": 17 件 / 台帳なし・失敗等: 13 件
+- 設定の年に市区町村の値が無い: 483 件 / 設定に無い年に市区町村の 90% 以上の値がある: 8 件 / 差分なし: 232 件 / years: "all": 17 件 / 台帳なし・失敗等: 0 件
 
 該当する年の多い順。上位 40 件 (全件は diff.json の cities)。
 
@@ -109,22 +109,6 @@
 | `unemployed-persons` | 0000020206 | 1980–2020 | 1981–1984, 1986–1989, 1991–1994, 1996–1999, 2001–2004, 2006–2009, 2011–2014, 2016–2019 |  | 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020 (1911) |
 | `workers-by-place-of-work` | 0000020206 | 1980–2020 | 1981–1984, 1986–1989, 1991–1994, 1996–1999, 2001–2004, 2006–2009, 2011–2014, 2016–2019 |  | 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020 (1911) |
 | `workers-in-own-municipality` | 0000020206 | 1980–2020 | 1981–1984, 1986–1989, 1991–1994, 1996–1999, 2001–2004, 2006–2009, 2011–2014, 2016–2019 |  | 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020 (1911) |
-
-| 指標 (市区町村) | 表 | 状態 | 理由 |
-|---|---|---|---|
-| `damaged-vacant-housing-ratio` | 0004021631 | no-ledger |  |
-| `elderly-day-service-within-500m-household-ratio` | 0004025626 | no-ledger |  |
-| `elementary-school-within-1km-household-ratio` | 0004025630 | no-ledger |  |
-| `evacuation-site-within-500m-household-ratio` | 0004025597 | no-ledger |  |
-| `junior-high-school-within-1km-household-ratio` | 0004025631 | no-ledger |  |
-| `medical-facility-within-500m-household-ratio` | 0004025621 | no-ledger |  |
-| `nursery-within-500m-young-child-household-ratio` | 0004025628 | no-ledger |  |
-| `park-within-500m-household-ratio` | 0004025595 | no-ledger |  |
-| `post-office-bank-within-500m-household-ratio` | 0004025627 | no-ledger |  |
-| `public-sewer-housing-ratio` | 0004025576 | no-ledger |  |
-| `station-within-1km-household-ratio` | 0004025593 | no-ledger |  |
-| `vacant-housing-rate-excluding-rental-sale-secondary` | 0004021421 | no-ledger |  |
-| `vacant-housing-rate-for-rent` | 0004021421 | no-ledger |  |
 
 ## 台帳なし・取得失敗・打ち切り・重複行
 

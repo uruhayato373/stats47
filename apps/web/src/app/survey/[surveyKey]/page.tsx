@@ -190,13 +190,11 @@ export default async function SurveyPage({ params }: PageProps) {
   // ★ 2026-09-03: 調査ハブは調査そのものが主題なので SURVEY_AFFILIATE_MAP を最優先する
   //   (家計調査 → furusato、学校保健統計 → 広告なし)。載っていない調査は従来の最頻カテゴリ。
   const surveyVertical = SURVEY_AFFILIATE_MAP[surveyKey];
-  const nativeBanners =
-    surveyVertical === null
-      ? []
-      : await resolveAffiliateBannersByVertical(
-          surveyVertical ?? dominantVertical(rankingItems),
-          8
-        ).catch(() => []);
+  // 2026-10-31 (オーナー決定「すべてのページに広告を出す」): 写像が null の調査も汎用の案件を出す
+  const nativeBanners = await resolveAffiliateBannersByVertical(
+    surveyVertical === null ? null : (surveyVertical ?? dominantVertical(rankingItems)),
+    8
+  ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
 
   // Hero KPI: 最新年, 代表件数, etc.
@@ -489,6 +487,18 @@ export default async function SurveyPage({ params }: PageProps) {
         </SurveyOutboundLinkArea>
       </section>
 
+      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。
+          全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
+      {nativeBanners.length > 0 && (
+        <section className="mb-4">
+          <NativeAffiliateRow
+            banners={nativeBanners}
+            position="survey-native"
+            trackingCategory={`survey-${surveyKey}`}
+          />
+        </section>
+      )}
+
       {editorial && (
         <section id="survey-caveats" className="mb-4 scroll-mt-24">
           <SectionHeader
@@ -502,19 +512,9 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。 */}
-      {nativeBanners.length > 0 && (
-        <section className="mb-4">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="survey-native"
-            trackingCategory={`survey-${surveyKey}`}
-          />
-        </section>
-      )}
-
-      {/* コンテンツ末尾の全幅フッター広告 */}
-      <FooterAdSlot />
+      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「数字を読むときの注意」を挟めるときだけ出す
+          (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
+      {editorial && <FooterAdSlot />}
     </ArticleShell>
   );
 }

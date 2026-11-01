@@ -446,8 +446,7 @@
       "description": "漁獲と養殖の対象範囲を確認します。海のない県など対象外の値を0に置き換えて比較しません。",
       "metricGroupKeys": [
         "catch"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "aquaculture",
@@ -456,8 +455,7 @@
       "metricGroupKeys": [
         "marine",
         "inland"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "species",
@@ -465,8 +463,7 @@
       "description": "魚種別の漁獲量は2018年までと2023年の値です。2019〜2022年は都道府県の値がそろって公表されていないため、推移は2018年の次が2023年になります。海のない8県は対象外で、0ではありません。",
       "metricGroupKeys": [
         "species"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "output-workers",
@@ -485,8 +482,7 @@
       "description": "漁業就業者数は2003年まで毎年、2008年からは5年ごとの漁業センサスの値です。間の年は補っていません。",
       "metricGroupKeys": [
         "output-workers-2"
-      ],
-      "chartKeys": []
+      ]
     }
   ],
   "metricGroups": [

@@ -570,7 +570,6 @@
         "local-tax-ratio-pref-finance",
         "local-allocation-tax-ratio-pref-finance"
       ],
-      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "local-economy"
       ]
@@ -588,7 +587,6 @@
         "real-public-debt-service-ratio",
         "future-burden-ratio"
       ],
-      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "local-economy"
       ]

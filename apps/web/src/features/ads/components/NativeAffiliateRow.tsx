@@ -3,7 +3,7 @@ import Image from "next/image";
 import { isLandscapeBanner } from "../utils";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
-import { PrLabel } from "./PrLabel";
+import { AdCell } from "./slots/AdCell";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 import type { ResolvedAffiliateBanner } from "../types";
@@ -29,10 +29,10 @@ interface NativeAffiliateRowProps {
  * タブレットの幅でバナーが 223〜254px に縮み、中の文字が読みにくかった。
  */
 const COLUMN_CLASS: Record<number, string> = {
-  1: "grid-cols-1",
-  2: "grid-cols-1 @min-[608px]:grid-cols-2",
-  3: "grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3",
-  4: "grid-cols-1 @min-[608px]:grid-cols-2 @min-[916px]:grid-cols-3 @min-[1224px]:grid-cols-4",
+  1: "grid-cols-[minmax(0,300px)]",
+  2: "grid-cols-[minmax(0,300px)] @min-[608px]:grid-cols-[repeat(2,300px)]",
+  3: "grid-cols-[minmax(0,300px)] @min-[608px]:grid-cols-[repeat(2,300px)] @min-[916px]:grid-cols-[repeat(3,300px)]",
+  4: "grid-cols-[minmax(0,300px)] @min-[608px]:grid-cols-[repeat(2,300px)] @min-[916px]:grid-cols-[repeat(3,300px)] @min-[1224px]:grid-cols-[repeat(4,300px)]",
 };
 
 /** 1 行に収まらない分は出さない (2 段目に半端な行を作らない)。i 枚目は i+1 列が入る幅から見せる */
@@ -44,15 +44,15 @@ const ITEM_VISIBILITY_CLASS = [
 ];
 
 /**
- * ネイティブアフィリエイト枠。リンク付きバナー画像を、各画像の上の PR 表記つきでグリッド表示する。
+ * ネイティブアフィリエイト枠。リンク付きバナー画像を、本文の広告のセル (左上に「PR」) の中にグリッド表示する。
  *
  * ★ 2026-08-14: PR ラベル・見出し・商品名・もっと見る導線・カード装飾を廃止した。
  *   ASP 提供バナーの意匠をそのまま表示し、サイト側の可視テキストや装飾を重ねない。
  * ★ 2026-10-08: PR 表記だけをオーナー判断で戻した (PrLabel)。見出し・商品名・装飾は引き続き足さない。
  *
  * ★ 縦長 (height > width) クリエイティブはここで除外する。本文の横並びグリッドに
- *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長の受け皿は
- *   sidebar-sticky スロット (SidebarStickyBannerAd)。呼び出し元は除外分を見込んで
+ *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長を出す枠は無い
+ *   (ホームの縦長バナーは 2026-10-30 に外した)。呼び出し元は除外分を見込んで
  *   解決 limit を 8 程度にする (正典: .claude/rules/affiliate-ads-standards.md §3)。
  *
  * ★ 2026-08-04: impression 計装を追加した。それまで **クリックだけ送って impression を
@@ -76,57 +76,62 @@ export function NativeAffiliateRow({
   const visible = banners.filter(isLandscapeBanner).slice(0, itemLimit);
   if (visible.length === 0) return null;
 
+  // 本文の広告のセル (左上に「PR」1 つ・バナーは原寸 300px の列を中央にまとめる。2026-10-30 オーナー決定 案 A。
+  // 旧: バナーごとに「PR」を置き、列を本文の幅いっぱいに割って各バナーを列の中央に置いていた)
   return (
-    <div className="@container">
-      <div className={`grid items-start gap-2 ${COLUMN_CLASS[visible.length]}`}>
-        {visible.map((b, index) => (
-          <AdImpressionTracker
-            key={b.href + b.imageUrl}
-            category={b.vertical ?? trackingCategory}
-            label={b.title}
-            position={position}
-            adId={b.id}
-            creativeSize={`${b.width}x${b.height}`}
-            className={ITEM_VISIBILITY_CLASS[index]}
-          >
-            {/* 原寸 300px の枠をセルの中央に置き、PR 表記はその左上。250x250 は枠の中央 (広告の枠の台帳の fitsInto)。
+    <AdCell label="PR">
+      <div className="@container w-full">
+        <div
+          className={`grid items-start justify-center gap-2 ${COLUMN_CLASS[visible.length]}`}
+        >
+          {visible.map((b, index) => (
+            <AdImpressionTracker
+              key={b.href + b.imageUrl}
+              category={b.vertical ?? trackingCategory}
+              label={b.title}
+              position={position}
+              adId={b.id}
+              creativeSize={`${b.width}x${b.height}`}
+              className={ITEM_VISIBILITY_CLASS[index]}
+            >
+              {/* 原寸 300px の列。250x250 は列の中央 (広告の枠の台帳の fitsInto)。
                 枠の幅を中身に合わせると、画像の max-w-full と互いを参照して幅 0 になる (2026-10-29 に実測) */}
-            <div className="mx-auto flex w-full max-w-75 flex-col gap-1">
-              <PrLabel />
-              <TrackedAffiliateLink
-                href={b.href}
-                category={b.vertical ?? trackingCategory}
-                label={b.title}
-                position={position}
-                adId={b.id}
-                className="relative block"
-              >
-                <Image
-                  src={b.imageUrl}
-                  alt={b.title}
-                  width={b.width}
-                  height={b.height}
-                  sizes={`${b.width}px`}
-                  // 幅は width 属性 (原寸) のまま、セルが狭いときだけ縮める。幅を auto にすると属性の幅が消え、
-                  // lazy の画像は読み込み前に 0×0 になって読み込まれない (2026-10-29 に実測)
-                  className="mx-auto block h-auto max-w-full"
-                  loading="lazy"
-                />
-                {b.trackingPixelUrl && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={b.trackingPixelUrl}
-                    alt=""
-                    width={1}
-                    height={1}
-                    className="absolute left-0 top-0 h-px w-px opacity-0"
+              <div className="mx-auto w-full max-w-75">
+                <TrackedAffiliateLink
+                  href={b.href}
+                  category={b.vertical ?? trackingCategory}
+                  label={b.title}
+                  position={position}
+                  adId={b.id}
+                  className="relative block"
+                >
+                  <Image
+                    src={b.imageUrl}
+                    alt={b.title}
+                    width={b.width}
+                    height={b.height}
+                    sizes={`${b.width}px`}
+                    // 幅は width 属性 (原寸) のまま、セルが狭いときだけ縮める。幅を auto にすると属性の幅が消え、
+                    // lazy の画像は読み込み前に 0×0 になって読み込まれない (2026-10-29 に実測)
+                    className="mx-auto block h-auto max-w-full"
+                    loading="lazy"
                   />
-                )}
-              </TrackedAffiliateLink>
-            </div>
-          </AdImpressionTracker>
-        ))}
+                  {b.trackingPixelUrl && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={b.trackingPixelUrl}
+                      alt=""
+                      width={1}
+                      height={1}
+                      className="absolute left-0 top-0 h-px w-px opacity-0"
+                    />
+                  )}
+                </TrackedAffiliateLink>
+              </div>
+            </AdImpressionTracker>
+          ))}
+        </div>
       </div>
-    </div>
+    </AdCell>
   );
 }

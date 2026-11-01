@@ -269,17 +269,17 @@
     {
       "key": "japan-theme",
       "kind": "japan-theme",
-      "count": 18
+      "count": 43
     },
     {
       "key": "municipality-ranking",
       "kind": "municipality-ranking",
-      "count": 762
+      "count": 763
     },
     {
       "key": "municipality-theme",
       "kind": "municipality-theme",
-      "count": 30
+      "count": 24
     },
     {
       "key": "page",
@@ -294,7 +294,7 @@
     {
       "key": "ranking",
       "kind": "ranking",
-      "count": 3186
+      "count": 3187
     },
     {
       "key": "survey",

@@ -1,7 +1,5 @@
 import { ExternalLink } from "lucide-react";
 
-import { getSurfaceCardClassName } from "@/components/surface";
-
 import { AFFILIATE_THEME, type AffiliateCategory } from "../constants/affiliate-category";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
@@ -48,12 +46,9 @@ export function AffiliateTextAdList({
           experimentId={experimentId}
           variantId={variantId}
         >
-          <div
-            className={`relative rounded-card border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
-          >
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground">PR</span>
-            </div>
+          {/* 色の箱とカードで囲まない (2026-10-31 オーナー判断)。小さな「PR」とリンクの 1 行だけ */}
+          <div className="relative flex flex-col gap-1">
+            <span className="text-xs font-medium leading-none text-muted-foreground">PR</span>
             <TrackedAffiliateLink
               href={ad.href}
               category={ad.vertical ?? affiliateCategory ?? "other"}
@@ -62,10 +57,7 @@ export function AffiliateTextAdList({
               adId={ad.id}
               experimentId={experimentId}
               variantId={variantId}
-              className={getSurfaceCardClassName({
-                interactive: true,
-                className: "flex items-center justify-between gap-3 px-4 py-3",
-              })}
+              className="flex items-center justify-between gap-3 py-1 hover:underline"
             >
               <p className="text-sm font-bold text-foreground">
                 {theme?.emoji ? `${theme.emoji} ` : ""}

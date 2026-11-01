@@ -237,6 +237,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "natural-disaster-partially-damaged-houses": { polarity: "higher-is-worse", evidence: "消防庁の自然災害による住家一部破損棟数は建物被害の実数であり、増加は復旧負担の拡大を示す。" },
   "new-cancer-incidence-count": { polarity: "higher-is-worse", evidence: "全国がん登録の新規悪性新生物罹患数は疾病負担を示す。検診・登録把握や年齢構成の差を調整した予防成績ではない。" },
   "nursery-waiting-children-count": { polarity: "neutral", evidence: "保育所等利用待機児童数は受入体制の不足と保育需要(共働き世帯増・転入等)の双方で増減し、件数だけで施策の成果を判定しない。" },
+  "nursery-waiting-children-rate": { polarity: "higher-is-worse", evidence: "保育利用の申込者のうち待機児童となった割合で、申込者数で割るため需要の大きさは打ち消され、利用を希望した家庭から見て高いほど入りにくいことを直接表す (件数の nursery-waiting-children-count は需要の増減でも動くため neutral)。" },
   "nonprimary-enterprises-count": { polarity: "neutral", evidence: "非農林漁業の会社個人企業数は本所所在地別の事業規模と集約度であり、純創業や事業持続性の成果ではない。" },
   "nonprimary-enterprises-employees": { polarity: "neutral", evidence: "企業本所所在地に帰属する非農林漁業の従業者実数であり、実際の勤務地別雇用や住民の雇用機会とは異なる。" },
   "nonprimary-enterprises-under5-count": { polarity: "neutral", evidence: "常用雇用者0〜4人の企業数は規模構成の内訳で、小規模企業の多さを大企業に対する優劣へ読み替えない。" },
@@ -1067,7 +1068,7 @@ export const EXCLUDED_FROM_SEED: ReadonlyArray<{ key: string; reason: string }> 
  * 極性が付いた metric を**減らさない**ための床。metric を消して分母が減るのは正常なので
  * 件数そのものではなく「収載件数」で見る。増やすときだけこの定数を上げる。
  */
-export const MIN_POLARITY_COVERAGE = 67;
+export const MIN_POLARITY_COVERAGE = 68;
 
 /** 極性を引く。未収載なら null (既定に化けない)。 */
 export function findMetricPolarity(key: string): PolarityEntry | null {

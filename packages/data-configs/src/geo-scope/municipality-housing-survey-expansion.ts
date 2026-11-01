@@ -47,7 +47,7 @@ export const MUNICIPALITY_HOUSING_SURVEY_KEYS = [
   'damaged-vacant-housing-ratio',
 ] as const;
 
-export const MUNICIPALITY_HOUSING_SURVEY_STATUS: 'candidate' | 'published' = 'candidate';
+export const MUNICIPALITY_HOUSING_SURVEY_STATUS: 'candidate' | 'published' = 'published';
 
 export const MUNICIPALITY_HOUSING_SURVEY_CANDIDATE_REASON =
   'e-Stat の実測で値のある市区町村を確認済み。R2 の cities.json が未取り込み (data-refresh の承認待ち) のため公開集合に入れない';

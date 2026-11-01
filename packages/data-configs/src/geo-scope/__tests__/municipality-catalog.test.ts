@@ -87,7 +87,7 @@ describe('municipality geo scope and catalog', () => {
       getMunicipalityMetricAvailability(
         'culture-recreation-cost-all-households'
       ).status
-    ).toBe('unknown');
+    ).toBe('unsupported');
     expect(MUNICIPALITY_THEME_CATALOGS['aging-society'].status).toBe('active');
     expect(MUNICIPALITY_THEME_CATALOGS['local-finance'].status).toBe('active');
 
@@ -99,7 +99,9 @@ describe('municipality geo scope and catalog', () => {
     // 2026-10-22: 主要湖沼面積を 0 (湖が無い) を除いて公開、工業地地価は 2005 年のみのため非公開に確定 (174 → 175)。
     // 2026-10-22: 社会・人口統計体系の未使用コード 733 を e-Stat 実測で判定し 541 件を公開 (175 → 716)。
     // 判定の記録と件数の内訳は municipality-ssds-expansion.ts。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(716);
+    // 2026-11-01: 住宅・土地統計調査の 13 指標と待機児童率を R2 に取り込んで公開 (716 → 730)。家計の費目 4 件は
+    // 市区町村の表が無いと確かめて unknown → unsupported。
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(730);
     for (const key of [
       'total-population',
       'fiscal-strength-index',
@@ -123,7 +125,8 @@ describe('municipality geo scope and catalog', () => {
       expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(key)).toBe(false);
     }
     // 2026-10-22: 拡充分を受けるテーマを 10 件新設 (19 → 29)
-    expect(KNOWN_MUNICIPALITY_THEME_SLUGS.size).toBe(29);
+    // 2026-11-01: 住宅・土地統計調査の住環境のテーマを公開 (29 → 30)
+    expect(KNOWN_MUNICIPALITY_THEME_SLUGS.size).toBe(30);
     for (const slug of ['aging-society', 'population', 'local-finance', 'establishments']) {
       expect(KNOWN_MUNICIPALITY_THEME_SLUGS.has(slug)).toBe(true);
     }

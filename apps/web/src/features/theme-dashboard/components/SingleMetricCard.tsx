@@ -9,7 +9,7 @@ import { MiniLineChart } from '@/components/charts/MiniCharts';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
-import { resolveMetricTrend, shouldFetchMetricTrend } from '../lib/metric-trend';
+import { MIN_TREND_YEARS, resolveMetricTrend, shouldFetchMetricTrend, type MetricTrend } from '../lib/metric-trend';
 
 import { MetricStatTile } from './MetricStatTile';
 
@@ -22,6 +22,8 @@ interface SingleMetricCardProps {
   title?: string;
   /** 同じ章の詳細図が系列を描く場合は値だけを出し、推移を取りに行かない */
   summaryOnly?: boolean;
+  /** 読むときの注意 (同じ指標を描いていた章の図から引き継いだ注記)。出典の Sheet に入れる */
+  annotation?: string;
   /** このカードが表す唯一の指標 */
   metric: MetricKpi;
   /** rankingKey → 短ラベル (tabIndicators の tabLabel) */
@@ -37,16 +39,18 @@ interface SingleMetricCardProps {
  *
  * 選択肢が 1 つしかないので選択 UI (チェックボックス・タブ・選択タイル) を出さない。
  * 部品は台帳 data/design/components.json の stat-tile: 名前 → 値 + 単位 + 順位バッジ → 年 (補足) の順に並べ、
- * 推移の小さなチャートは値の下、出典・ランキングのリンク行は下端に置く。
+ * 推移の小さなチャートは値の下、出典・指標の定義は右上の枠なしのアイコンから Sheet で開く (2026-10-30)。
  *
- * 推移を出すかは lib/metric-trend.ts が決める (県を選んでいる・同じ章に詳しい図が無い・異なる年が 2 つ以上)。
- * 出さないときは何も置かない。取得は県選択時にこの指標 1 件分だけ (自地域 + 全国)。
+ * 推移を出すかは lib/metric-trend.ts が決める (同じ章に詳しい図が無い・異なる年が MIN_TREND_YEARS 以上)。県のページは
+ * この指標 1 件分の県と全国の系列を取りに行き、全国のページは手元の全国の系列で描く。出さないときは何も置かない。
+ * 47 都道府県の中の位置のような比較の図は置かない (比較はランキングのページ。2026-10-31 オーナー決定)。
  * 正典: docs/01_技術設計/04_デザインシステム.md「選択 UI と集合レイアウトの件数規則」
  */
 export function SingleMetricCard({
   id,
   title,
   summaryOnly = false,
+  annotation,
   metric,
   tabLabels,
   selectedPrefectureCode,
@@ -93,7 +97,10 @@ export function SingleMetricCard({
 
   const trend = useMemo(
     () =>
-      wantsTrend
+      // 全国のページは手元の公式の全国の系列で描く。取りに行かない (47 県の平均は全国と呼ばないので使わない)
+      !selectedPrefectureCode && !summaryOnly
+        ? nationalTrend(metric.officialNationalSeries ?? [])
+        : wantsTrend
         ? resolveMetricTrend({
             areaName,
             areaResult: series[areaCode],
@@ -101,11 +108,10 @@ export function SingleMetricCard({
             fallbackSeries: metric.series,
           })
         : ({ kind: 'none' } as const),
-    [wantsTrend, series, areaCode, areaName, metric.series]
+    [wantsTrend, series, areaCode, areaName, metric.series, metric.officialNationalSeries, selectedPrefectureCode, summaryOnly]
   );
 
-  const isReady =
-    metric.topRanked !== null || metric.value !== null || metric.series.length > 0;
+  const isReady = metric.value !== null || metric.series.length > 0;
   return (
     <div
       id={id}
@@ -119,6 +125,8 @@ export function SingleMetricCard({
       <MetricStatTile
         metric={metric}
         selectedPrefectureCode={selectedPrefectureCode}
+        sourcesLabel={label}
+        notes={annotation ? [annotation] : undefined}
         label={
           <>
             {heading}
@@ -139,4 +147,10 @@ export function SingleMetricCard({
       </MetricStatTile>
     </div>
   );
+}
+
+/** 全国の系列が MIN_TREND_YEARS 年以上あれば、その推移を描く (全国のページ用) */
+function nationalTrend(points: readonly { year: number; value: number }[]): MetricTrend {
+  if (new Set(points.map((p) => p.year)).size < MIN_TREND_YEARS) return { kind: 'none' };
+  return { kind: 'chart', seriesName: '全国', points: [...points] };
 }

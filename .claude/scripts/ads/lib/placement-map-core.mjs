@@ -256,7 +256,9 @@ export function aggregateDemand(rows, maps, ads = null, today) {
     const { verticals, reason } = resolveVerticalsForPage(page, maps);
     pages.push({ url: r.url, ...page, gsc: { imp: r.imp, clicks: r.clicks }, intent: { verticals, reason }, eligible: eligibleAdsForPage(page, maps, ads, today) });
     if (verticals.length === 0) {
-      unmapped.push({ url: r.url, type: t, key: page.key, imp: r.imp, clicks: r.clicks, reason });
+      // ブログでタグが意図軸に届かないときは、どのタグを写せば効くかを数えられるように記事のタグを残す
+      const tagKeys = reason === "tags-unmapped" ? maps.articleContent?.[page.key]?.tagKeys ?? [] : undefined;
+      unmapped.push({ url: r.url, type: t, key: page.key, imp: r.imp, clicks: r.clicks, reason, ...(tagKeys ? { tagKeys } : {}) });
       continue;
     }
     for (const v of verticals) {
@@ -304,6 +306,16 @@ export function buildGapReport({ byVertical, unmapped, inventoryByVertical, text
     byReason[u.reason].imp += u.imp;
     byReason[u.reason].pages += 1;
     if (byReason[u.reason].examples.length < 3) byReason[u.reason].examples.push(u.key ?? u.url);
+    // タグ別の検索表示回数 (1 記事の imp を、その記事の全タグに数える。合計は記事の imp の和と一致しない)
+    for (const tag of u.tagKeys ?? []) {
+      byReason[u.reason].tags = byReason[u.reason].tags || {};
+      byReason[u.reason].tags[tag] = (byReason[u.reason].tags[tag] ?? 0) + u.imp;
+    }
+  }
+  for (const entry of Object.values(byReason)) {
+    if (!entry.tags) continue;
+    entry.topTags = Object.entries(entry.tags).sort((a, b) => b[1] - a[1]).slice(0, 40).map(([tag, imp]) => ({ tag, imp }));
+    delete entry.tags;
   }
   return {
     gaps,

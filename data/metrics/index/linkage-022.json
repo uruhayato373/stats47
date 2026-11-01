@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pots-kettles-consumption-expenditure",
+      "pageId": "ranking:pots-kettles-consumption-expenditure",
+      "title": "鍋・やかん消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "266743edbe0fb77a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pots-kettles-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "pots-kettles-consumption-quantity",
       "pageId": "ranking:pots-kettles-consumption-quantity",
       "title": "鍋・やかん消費量",
@@ -1698,7 +1738,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -4006,7 +4046,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -4240,6 +4280,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:primary-school-commute-time-weekday",
           "kind": "ranking"
         },
@@ -4469,6 +4513,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:construction-industry",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:prime-contractor-completed-construction",
           "kind": "ranking"
         },
@@ -4690,7 +4738,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4730,7 +4778,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4770,7 +4818,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4810,7 +4858,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4850,7 +4898,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4890,7 +4938,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4930,7 +4978,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4970,7 +5018,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5010,7 +5058,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5050,7 +5098,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5308,7 +5356,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5348,7 +5400,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5388,7 +5444,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5428,7 +5488,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5468,7 +5532,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5508,7 +5576,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5548,7 +5620,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5588,7 +5664,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5628,7 +5708,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -5668,7 +5752,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -6750,7 +6838,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -7002,7 +7090,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7042,7 +7130,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7082,7 +7170,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7122,7 +7214,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7162,7 +7254,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7274,7 +7366,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7350,7 +7442,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7426,7 +7518,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7502,7 +7594,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7578,7 +7670,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7654,7 +7746,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -7845,46 +7937,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-revenue",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:property-income-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "property-income-prefecture",
-      "pageId": "ranking:property-income-prefecture",
-      "title": "財産収入",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310110"
-        },
-        "derived": false,
-        "configHash": "341e4ba55dda99ce"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:property-income-prefecture",
           "kind": "ranking"
         }
       ],

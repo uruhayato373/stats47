@@ -40,9 +40,10 @@ export function ThemeWaterQualityClient({
   const { selectedPrefectureCode, selectedAreaName } = useThemePrefecture();
   const [kind, setKind] = useState<(typeof waterKinds)[number]>('river');
   const national = snapshot.national[kind];
+  // 県のページはその県の行だけ。全国のページは全国の公式集計の行だけを出す (47 都道府県を並べない。2026-10-31)
   const prefs = selectedPrefectureCode
     ? snapshot.prefectures.filter((p) => p.areaCode === selectedPrefectureCode)
-    : snapshot.prefectures;
+    : [];
   const rows = selectedPrefectureCode
     ? summarizeWaterRows(snapshot, selectedPrefectureCode, kind).rows
     : [];
@@ -54,7 +55,7 @@ export function ThemeWaterQualityClient({
     >
       <ChartPanel
         title="水域ごとの水質と基準達成"
-        description={`2023年度 · ${selectedPrefectureCode ? selectedAreaName : '全国・47都道府県'}`}
+        description={`2023年度 · ${selectedPrefectureCode ? selectedAreaName : '全国'}`}
         contentClassName="min-w-0 space-y-4"
         footer={
           <ChartFooter
@@ -90,6 +91,7 @@ export function ThemeWaterQualityClient({
           全国の公式集計：{f(national.compliant)} / {f(national.total)}
           水域が達成（{f((national.compliant / national.total) * 100)}%）
         </p>
+        {prefs.length > 0 && (
         <Table
           aria-label={`${WATER_QUALITY_SOURCE.kinds[kind]}の県別掲載行と達成割合`}
         >
@@ -132,6 +134,7 @@ export function ThemeWaterQualityClient({
             })}
           </TableBody>
         </Table>
+        )}
         {selectedPrefectureCode ? (
           <Table
             aria-label={`${selectedAreaName}の${WATER_QUALITY_SOURCE.kinds[kind]}原表一覧`}

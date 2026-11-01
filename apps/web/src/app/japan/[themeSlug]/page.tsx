@@ -12,13 +12,14 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { readJapanSeries } from '@stats47/stats-r2/readers';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
-import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { PageShell, PageHeader } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
-import { StatisticsScopeNav } from '@/components/navigation';
 
 import { NativeAffiliateRow } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { ThemeRegionNav } from '@/features/theme-dashboard';
+import { isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -41,7 +42,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const {themeSlug} = await params;
   const theme = getJapanCatalogTheme(themeSlug);
   if (!theme) return {};
-  const title = `${theme.title} | 日本の統計`;
+  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)
+  // テーマのページ (/themes/テーマ) が「全国の〇〇」なので、日本全体の変化を見せるこのページは「〜の推移」で区別する (2026-10-31)
+  const title = `全国の${theme.title}の推移`;
   return {
     title,
     description: theme.description,
@@ -110,24 +113,23 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
   const themeVertical = THEME_AFFILIATE_MAP[theme.themeSlug];
   const [metricViews, nativeBanners] = await Promise.all([
     loadMetricSeries(theme.metrics.map((m) => m.metricKey)),
-    themeVertical
-      ? resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => [])
-      : Promise.resolve([]),
+    // 写像が無い slug は汎用の案件 (2026-10-31 オーナー決定「すべてのページに広告を出す」)
+    resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
   ]);
 
   return (
     <PageShell>
-      <Breadcrumbs
-        items={[
-          { label: 'ホーム', href: '/' },
-          { label: '日本', href: '/japan' },
-          { label: theme.title },
-        ]}
+      {/* パンくずの各段と右端のアイコンから地域・テーマを Sheet で選ぶ (テーマのページと同じ部品・2026-10-31) */}
+      <ThemeRegionNav
+        themeKey={theme.themeSlug}
+        themes={THEME_SWITCHER_THEMES}
+        hasAreaPages={isAreaTheme(theme.themeSlug)}
+        scopeHrefs={{ ...scopeHrefsForJapanTheme(theme.themeSlug), japan: hrefFor('japan-theme', { themeSlug: theme.themeSlug }) }}
+        current="japan"
       />
-      <StatisticsScopeNav current="japan" hrefs={scopeHrefsForJapanTheme(theme.themeSlug)} />
       <PageHeader
         eyebrow="日本"
-        title={theme.title}
+        title={`全国の${theme.title}の推移`}
         description={theme.description}
         stats={`${metricViews.length} 指標 (公式全国値)`}
       />

@@ -33,7 +33,7 @@ export const PORTS_SET: IndicatorSet = {
     {
       "rankingKey": "maritime-import-export-cargo",
       "shortLabel": "海上出入貨物(統計体系)",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "port-inbound-ships",

@@ -123,9 +123,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
               trackingPosition="blog-sidebar"
             />
           }
-          showPromoBanner={false}
           showTopAd={false}
-          showBottomAd={false}
         />
       }
     >

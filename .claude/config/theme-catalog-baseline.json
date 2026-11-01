@@ -60,11 +60,11 @@
       "waste-recycling",
       "water-services"
     ],
-    "charts": 68,
+    "charts": 85,
     "chartsByType": {
       "line-chart": 43,
       "mixed-chart": 1,
-      "composition-chart": 3,
+      "composition-chart": 20,
       "donut-chart": 3,
       "cpi-profile": 1,
       "cpi-heatmap": 1,
@@ -72,15 +72,15 @@
       "markdown-section": 15,
       "pyramid-chart": 1
     },
-    "chartsWithRelatedRankingKeys": 53,
+    "chartsWithRelatedRankingKeys": 70,
     "chartsWithRawEstatParams": 0,
     "rawEstatRequests": 0,
     "rawColorPlaces": 0,
     "distinctColors": 0,
-    "totalMetricRefs": 162,
-    "distinctMetricKeys": 147,
-    "indicatorHubKeys": 107,
-    "authoredNoteKeys": 69,
+    "totalMetricRefs": 218,
+    "distinctMetricKeys": 203,
+    "indicatorHubKeys": 163,
+    "authoredNoteKeys": 122,
     "migrationContractRows": 19
   }
 }

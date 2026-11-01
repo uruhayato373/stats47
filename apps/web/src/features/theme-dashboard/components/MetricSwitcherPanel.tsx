@@ -13,7 +13,8 @@ import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types'
 import { classifyUnitComparability } from '@stats47/data-configs/unit';
 
 import { getChartColor } from '@/components/charts/ChartPalette';
-import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
+import { ChartLoading } from '@/components/charts/ChartState';
+import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 import { StatTileGrid } from '@/components/surface';
@@ -23,15 +24,14 @@ import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presenta
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
+import { metricSourceGroups } from '../lib/metric-source-groups';
 import { nationalSeriesName } from '../lib/metric-trend';
 
-import { MetricSourcesSheet } from './MetricSourcesSheet';
 import { MetricStatTile } from './MetricStatTile';
 
 import type { MetricKpi, MultiMetricGroup } from './metric-kpi';
 
 const CHART_HEIGHT = 250;
-const PREFECTURE_PROMPT_HEIGHT = 80;
 
 const LineChartClient = dynamic(
   () =>
@@ -67,6 +67,8 @@ interface MetricSwitcherPanelProps {
   defaultCheckedKeys?: string[];
   /** チャートの誤読防止の注記 (同じ指標を描いていた章のチャートをこのカードに寄せたとき、その注記を引き継ぐ) */
   annotation?: string;
+  /** 指標ごとの系列色 (男女の比較など意味のある色)。無い指標は定義順の既定色 */
+  seriesColors?: Record<string, string>;
 }
 
 /** 系列キャッシュのキー。指標×地域で一意にする */
@@ -85,8 +87,7 @@ const cacheKey = (metricKey: string, areaCode: string) =>
 type ChartState =
   | { kind: 'chart'; data: LineChartData; leftDomain?: [number,number]; rightDomain?: [number,number]; hasComparison: boolean }
   | { kind: 'single-year'; yearName: string }
-  | { kind: 'none' }
-  | { kind: 'select-prefecture' };
+  | { kind: 'none' };
 
 
 /**
@@ -167,9 +168,6 @@ function emptyMessage(state: ChartState): string {
   if (state.kind === 'single-year') {
     return `${state.yearName}の単年データのため、推移グラフはありません`;
   }
-  if (state.kind === 'select-prefecture') {
-    return '都道府県を選択すると、その県の推移が表示されます';
-  }
   return '推移データがありません';
 }
 
@@ -203,8 +201,12 @@ export function MetricSwitcherPanel({
   selectedPrefectureCode,
   areaName,
   defaultCheckedKeys,
+  seriesColors,
 }: MetricSwitcherPanelProps) {
-  const areaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
+  // 推移に出す地域はページの地域そのもの (県のページは県、全国のページは全国。2026-10-31 オーナー決定)
+  const trendCode = selectedPrefectureCode;
+  const trendAreaName = areaName;
+  const areaCode = trendCode ?? NATIONAL_AREA_CODE;
 
   const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
     const known = new Set(metrics.map((m) => m.metricKey));
@@ -233,9 +235,9 @@ export function MetricSwitcherPanel({
   /** 系列色。グループ内の定義順で固定 = 他をチェックしても自分の色は変わらない */
   const colorOf = useMemo(() => {
     const map = new Map<string, string>();
-    metrics.forEach((m, i) => map.set(m.metricKey, getChartColor(i)));
+    metrics.forEach((m, i) => map.set(m.metricKey, seriesColors?.[m.metricKey] ?? getChartColor(i)));
     return map;
-  }, [metrics]);
+  }, [metrics, seriesColors]);
 
   /**
    * `${metricKey}:${areaCode}` をキーにした取得済み系列。
@@ -254,14 +256,15 @@ export function MetricSwitcherPanel({
   // (国土数値情報など) の描画フォールバックに要る。
   //
   // ★47都道府県 (未選択) のときは何も fetch しない (GEO-SCOPE-SEPARATION-01 WP2)。
-  //   タイルは indicatorDataMap 由来の topRanked (実在する1位県の事実) を即座に表示でき、
+  //   タイルは indicatorDataMap 由来の値 (県の値・全国の値) を即座に表示でき、
   //   時系列は「都道府県を選択すると表示されます」という案内に置き換わるため、
   //   ネットワーク往復も「全国」「都道府県平均」の値も一切必要ない。
   useEffect(() => {
-    if (!selectedPrefectureCode || summaryOnly) return;
+    // 全国のページは手元の公式の全国の系列で描くので取りに行かない (2026-10-31)
+    if (summaryOnly || !trendCode) return;
     const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
     if (keys.length === 0) return;
-    const wanted = [areaCode, NATIONAL_AREA_CODE];
+    const wanted = trendCode ? [areaCode, NATIONAL_AREA_CODE] : [NATIONAL_AREA_CODE];
     const missing: Array<[string, string]> = [];
     for (const key of keys) {
       for (const code of wanted) {
@@ -294,7 +297,7 @@ export function MetricSwitcherPanel({
   }, [
     checkedKeysKey,
     areaCode,
-    selectedPrefectureCode,
+    trendCode,
     seriesCache,
     summaryOnly,
   ]);
@@ -302,11 +305,9 @@ export function MetricSwitcherPanel({
   // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)。
   // 47都道府県 (未選択) では何も fetch しないので、ローディングにはならない。
   const isLoadingSeries =
-    !!selectedPrefectureCode &&
-    checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
+    !summaryOnly && !!trendCode && checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
 
   const chartState: ChartState = useMemo(() => {
-    if (!selectedPrefectureCode) return { kind: 'select-prefecture' };
     if (checkedMetrics.length === 0) return { kind: 'none' };
 
     const { axisOf, leftUnit, rightUnit } = assignAxes(checkedMetrics);
@@ -355,11 +356,18 @@ export function MetricSwitcherPanel({
       let points: { year: string; yearName: string; value: number }[] = [];
       let name = label;
 
-      if (selectedPrefectureCode && areaPoints.length > 0) {
+      if (!trendCode) {
+        // 全国のページ: 公式の全国の系列だけを描く。47 県の平均を全国として描かない (無い指標は線を出さない)
+        points = (metric.officialNationalSeries ?? []).map((p) => ({
+          year: String(p.year),
+          yearName: String(p.year),
+          value: p.value,
+        }));
+      } else if (areaPoints.length > 0) {
         points = areaPoints;
         // 1 本だけのときは従来どおり「地域名」を凡例にする (破線の全国と対になる)。
         // 複数本のときは地域が共通なので指標名で区別する (地域は見出し側が言う)。
-        name = single ? areaName : label;
+        name = single ? trendAreaName : label;
       } else {
         // 県を選んでいてもその県の系列が取れない指標 (この時点で selectedPrefectureCode は
         // 必ず設定されている。47都道府県・未選択は chartState が手前で select-prefecture を
@@ -401,7 +409,7 @@ export function MetricSwitcherPanel({
     // 2 本以上に足すと系列が倍になって読めない (GSC も比較線は出さない)。
     // 「全国=100」の指数は全国が常に 100 の水平線になるので出さない。
     let hasComparison = false;
-    if (single && selectedPrefectureCode) {
+    if (single && trendCode) {
       const areaResult = seriesCache[cacheKey(single.metricKey, areaCode)];
       const nationalResult =
         seriesCache[cacheKey(single.metricKey, NATIONAL_AREA_CODE)];
@@ -450,10 +458,10 @@ export function MetricSwitcherPanel({
     };
   }, [
     checkedMetrics,
-    selectedPrefectureCode,
+    trendCode,
     seriesCache,
     areaCode,
-    areaName,
+    trendAreaName,
     tabLabels,
     colorOf,
   ]);
@@ -506,7 +514,6 @@ export function MetricSwitcherPanel({
   ].join(' / ');
   const readyMetricCount = metrics.filter(
     (metric) =>
-      metric.topRanked !== null ||
       metric.value !== null ||
       metric.series.length > 0
   ).length;
@@ -554,7 +561,7 @@ export function MetricSwitcherPanel({
               metric={m}
               label={tabLabels[m.metricKey] ?? m.title}
               selectedPrefectureCode={selectedPrefectureCode}
-              hideFooter
+              hideSources
               toggle={
                 summaryOnly
                   ? undefined
@@ -572,9 +579,15 @@ export function MetricSwitcherPanel({
           <ChartPanel
             footer={
               <div className="flex flex-col gap-1">
-                {annotation ? <p>{annotation}</p> : null}
+                {/* 注記は図の周りに文章で置かず、Sheet の先頭に入れる (見本のチャートのカード。2026-11-01) */}
                 <div className="flex justify-end">
-                  <MetricSourcesSheet metrics={metrics} labels={tabLabels} />
+                  <SourcesSheet
+                    trigger="icon"
+                    groups={[
+                      ...(annotation ? [{ notes: [annotation], sources: [], rankings: [] }] : []),
+                      ...metricSourceGroups(metrics, tabLabels),
+                    ]}
+                  />
                 </div>
               </div>
             }
@@ -588,11 +601,6 @@ export function MetricSwitcherPanel({
                 rightYDomain={chartState.rightDomain}
                 // 指標の系列の名前と色は数値タイルの色の印が示す。全国の破線を重ねるとき (県を選び 1 指標) だけ凡例で区別する
                 hideLegend={!chartState.hasComparison}
-              />
-            ) : chartState.kind === 'select-prefecture' ? (
-              <ChartEmptyState
-                message={emptyMessage(chartState)}
-                height={PREFECTURE_PROMPT_HEIGHT}
               />
             ) : (
               <p className="text-xs text-muted-foreground">

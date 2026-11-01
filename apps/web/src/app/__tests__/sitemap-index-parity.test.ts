@@ -10,7 +10,7 @@ vi.mock('@stats47/ranking/server', () => ({ readActiveKeysForSitemapFromR2: vi.f
 vi.mock('@/features/blog/server', () => ({ listLatestArticles: vi.fn(), listAllTagsWithCount: vi.fn() }));
 vi.mock('@/features/theme-dashboard/config/all-themes', () => ({ ALL_THEMES: [] }));
 vi.mock('@stats47/data-configs', () => ({ CATEGORY_KEYS: [] }));
-vi.mock('@stats47/data-configs/geo-scope', () => ({ KNOWN_MUNICIPALITY_RANKING_KEYS: [], KNOWN_MUNICIPALITY_THEME_SLUGS: [], MUNICIPALITY_PREFECTURE_RANKING_KEYS: [], listJapanCatalogThemes: () => [] }));
+vi.mock('@stats47/data-configs/geo-scope', () => ({ KNOWN_MUNICIPALITY_RANKING_KEYS: [], MUNICIPALITY_THEME_PAGE_SLUGS: [], MUNICIPALITY_PREFECTURE_RANKING_KEYS: [], listJapanCatalogThemes: () => [] }));
 
 /**
  * sitemap index (`/sitemap.xml`) と各 shard (`/sitemap/<id>.xml`) の件数一致を固定する。

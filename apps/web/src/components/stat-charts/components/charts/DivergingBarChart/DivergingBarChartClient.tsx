@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
+import { ChartLegend } from "@/components/charts/ChartLegend";
 import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 const DivergingBarChart = dynamic(
@@ -59,10 +60,7 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
         <div className="mb-3">
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col items-center gap-0.5">
-              <div className="flex items-center gap-1.5">
-                <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: positiveColor }} />
-                <span className="text-xs text-muted-foreground">{latestValues.positiveName}</span>
-              </div>
+              <ChartLegend items={[{ label: latestValues.positiveName, color: positiveColor }]} />
               <div className="tabular-nums">
                 <span className="text-lg font-bold">{latestValues.positive.toLocaleString()}</span>
                 <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(latestValues.unit)}</span>
@@ -72,10 +70,7 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
               )}
             </div>
             <div className="flex flex-col items-center gap-0.5">
-              <div className="flex items-center gap-1.5">
-                <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: negativeColor }} />
-                <span className="text-xs text-muted-foreground">{latestValues.negativeName}</span>
-              </div>
+              <ChartLegend items={[{ label: latestValues.negativeName, color: negativeColor }]} />
               <div className="tabular-nums">
                 <span className="text-lg font-bold">{latestValues.negative.toLocaleString()}</span>
                 <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(latestValues.unit)}</span>

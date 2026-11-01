@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W43",
+  "decidedAt": "2026-10-30T21:37:08.180Z",
+  "assessmentContractVersion": 1,
+  "thresholdsVersion": "1.0.0",
+  "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
+  "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
+  "summary": {
+    "total": 2,
+    "byLabel": {
+      "effect/pending": 2
+    },
+    "byGuard": {
+      "insufficient-window": 2,
+      "insufficient-target": 1
+    }
+  },
+  "verdicts": [
+    {
+      "domainId": "adsense",
+      "subjectId": "ADSENSE-PLACEMENT-01",
+      "assessment": {
+        "kind": "baseline-observation",
+        "subjectId": "ADSENSE-PLACEMENT-01",
+        "domainId": "adsense",
+        "accountId": "pub-9055416085403520",
+        "deployWeek": "2026-W41",
+        "firstWeek": "2026-W42",
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "observation": {
+        "status": "pending",
+        "observedWeeks": [
+          "2026-W42",
+          "2026-W43"
+        ],
+        "missingWeeks": [
+          "2026-W44",
+          "2026-W45"
+        ],
+        "overdue": false
+      },
+      "label": "effect/pending",
+      "reason": "baseline pending: 2/4週 / review 2026-11-13",
+      "guards": [
+        {
+          "code": "insufficient-window",
+          "detail": "baseline未取得: 2026-W44, 2026-W45"
+        }
+      ],
+      "target": null,
+      "before": null,
+      "after": null,
+      "delta": null,
+      "attainment": null,
+      "sources": [
+        {
+          "name": "adsense:data/adsense/history.csv",
+          "accountId": "pub-9055416085403520",
+          "firstWeek": "2026-W42",
+          "identityBasis": "restart-cohort; explicit accountId checked when available"
+        }
+      ],
+      "window": {
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "reproduceCommand": "node .claude/scripts/metrics/measure-adsense-impact.mjs --deployed 2026-10-11 --label ADSENSE-PLACEMENT-01",
+      "skipped": false
+    },
+    {
+      "domainId": "gsc-improvement",
+      "subjectId": "SEO-TITLE-CTR-EFFECT-01",
+      "assessment": {
+        "kind": "effect-experiment"
+      },
+      "label": "effect/pending",
+      "reason": "ガード insufficient-window, insufficient-target により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-window",
+          "detail": "判定窓が不足 (経過 0 週 < window.minWeeks 2)"
+        },
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        }
+      ],
+      "before": {
+        "value": 737,
+        "impressions": 78238
+      },
+      "after": {
+        "value": 813,
+        "impressions": 67357
+      },
+      "delta": 76,
+      "relativeDelta": 0.103121,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W42",
+        "afterWeek": "2026-W43",
+        "elapsedWeeks": 0,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W43/pages.csv",
+          "observedAt": "2026-10-25",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/ranking/public-phone-count",
+        "/ranking/total-fertility-rate",
+        "/blog/public-phone-count",
+        "/blog/roadside-station-count-prefecture-gap",
+        "/blog/avg-height-high-school-2nd-male",
+        "/blog/health-life-expectancy-structure",
+        "/blog/livable-prefecture-composite-ranking",
+        "/blog/automotive-industry-transformation-map",
+        "/blog/rice-harvest-volume-prefecture-gap",
+        "/blog/precipitation-snow-regional-gap"
+      ],
+      "logPath": "data/improvement/gsc-improvement/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-25 --end 2026-10-22 --dims page --filter 'page*=/ranking/public-phone-count'",
+      "skipped": false
+    }
+  ]
+}

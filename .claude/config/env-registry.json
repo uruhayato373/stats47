@@ -17,6 +17,13 @@
       ]
     },
     {
+      "name": "NLM_NOTEBOOK",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "NOTE_BU_CDP",
       "visibility": "server",
       "contexts": [
@@ -199,6 +206,14 @@
       "contexts": [
         "process"
       ]
+    },
+    {
+      "name": "AD_SLOT_PREVIEW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "1 で開発サーバーのアフィリエイト在庫を全ての意図軸の代わりの広告に置き換え、広告枠の配置をローカルで確かめる (npm run dev:web:ad-preview)。本番のビルドでは働かない"
     },
     {
       "name": "ANALYZE",

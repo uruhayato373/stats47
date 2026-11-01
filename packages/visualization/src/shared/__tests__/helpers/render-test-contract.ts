@@ -9,8 +9,6 @@ export const OPT_IN_RENDER_TEST_FILES = [
   "src/d3/components/ColumnChart/__tests__/ColumnChartImage.test.tsx",
   "src/d3/components/DonutChart/__tests__/DonutChartImage.test.tsx",
   "src/d3/components/PyramidChart/__tests__/PyramidChartImage.test.tsx",
-  "src/d3/components/Scatterplot/__tests__/Scatterplot.test.tsx",
-  "src/d3/components/Scatterplot/__tests__/ScatterplotImage.test.tsx",
   "src/d3/components/SunburstChart/__tests__/SunburstChartImage.test.tsx",
   "src/d3/components/TreemapChart/__tests__/TreemapChartImage.test.tsx",
 ] as const;

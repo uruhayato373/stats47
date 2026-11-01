@@ -17,8 +17,12 @@ const CULTURE_KEYS = [
 
 describe("education-culture visualization composition", () => {
   it("学校密度・学習環境・進路・文化施設・鑑賞行動を分母ごとの5群に分ける", () => {
-    // candidate-* は 2026-09-09 の章追加のカード (1 カード 1 指標)。構成は expansion-semantics.test.ts が見る
-    const groups = (EDUCATION_CULTURE_CATALOG.metricGroups ?? []).filter(({ key }) => !key.startsWith("candidate-"));
+    // 人が問いを決めた章のカードだけを見る。読者の悩みから組み直した章 (concern を持つ。2026-10-31) は
+    // expansion-semantics.test.ts が指標の到達を見る
+    const designed = new Set(
+      (EDUCATION_CULTURE_CATALOG.sections ?? []).filter((section) => !section.concern).flatMap((section) => section.metricGroupKeys),
+    );
+    const groups = (EDUCATION_CULTURE_CATALOG.metricGroups ?? []).filter(({ key }) => designed.has(key));
     expect(groups.map(({ key, rankingKeys }) => ({ key, rankingKeys }))).toEqual([
       { key: "schools-1", rankingKeys: SCHOOL_KEYS },
       { key: "schools-2", rankingKeys: ["elementary-school-students-per-teacher"] },
@@ -38,9 +42,11 @@ describe("education-culture visualization composition", () => {
       (chart) => chart.componentKey,
     );
 
+    // 博物館等の入館者の施設別の構成比 (2026-10-31) は値のカードと別の事実 (割合) を見せるので重複に当たらない
     expect(chartKeys).toEqual([
       "theme-edu-higher-education-trend",
       "theme-edu-higher-education-trend-attainment",
+      "education-culture-cultural-facilities-and-arts-composition-1",
     ]);
     expect(chartKeys).not.toContain("theme-edu-school-trend");
     expect(chartKeys).not.toContain("theme-edu-culture-trend");

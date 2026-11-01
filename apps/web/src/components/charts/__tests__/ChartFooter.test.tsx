@@ -1,94 +1,72 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import { ChartFooter } from '../ChartFooter';
 
+// 2026-10-30 オーナー決定: 注記はチャートの下に見せ、出典・指標の定義・ランキングへのリンクは
+// 「出典・指標の定義」のボタン 1 つから開く Sheet にまとめる (旧: 「出典」「ランキング」のリンクと件数付きのメニュー)
+async function openSheet() {
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+  return screen.findByRole('dialog');
+}
+
 describe('ChartFooter', () => {
-  it('固定IDのメニューを開くと操作ボタンと内容が相互に対応する', async () => {
-    const user = userEvent.setup();
-    render(<ChartFooter id="theme-ports-footer" rankingLinks={[{ label: '輸出', url: '/ranking/export' }, { label: '輸入', url: '/ranking/import' }]} />);
-    const trigger = screen.getByRole('button', { name: 'ランキング2件を表示' });
-    expect(trigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
-    await user.click(trigger);
-    const menu = await screen.findByRole('menu');
-    // メニューの JS は初回操作で読むため、開いた後のボタンは読み込んだ本物 (同じ id・名前) に置き換わる
-    const openedTrigger = screen.getByRole('button', { name: 'ランキング2件を表示' });
-    expect(openedTrigger).toHaveAttribute('id', 'theme-ports-footer-ranking-trigger');
-    expect(openedTrigger).toHaveAttribute('aria-controls', 'theme-ports-footer-ranking-content');
-    expect(menu).toHaveAttribute('id', 'theme-ports-footer-ranking-content');
-    expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', openedTrigger.id);
-  });
-  it('単一の出典・ランキングをアイコン付きの短い導線で表示する', async () => {
-    const user = userEvent.setup();
+  it('チャートの下には注記とボタン 1 つだけを置き、出典・ランキングのリンクは出さない', () => {
     render(
       <ChartFooter
+        annotation="2020年に系列が接続しません。"
         source="人口動態統計"
         sourceLinks={[{ label: '人口動態統計', url: '/survey/vital-statistics' }]}
         rankingLink="/ranking/primary"
         rankingLabel="指標の定義・ランキング"
       />
     );
-
-    const sourceLink = screen.getByRole('link', { name: '出典: 人口動態統計' });
-    expect(sourceLink).toHaveAttribute('href', '/survey/vital-statistics');
-    expect(screen.getByText('出典')).toBeVisible();
-    expect(screen.queryByText('人口動態統計')).toBeNull();
-    await user.hover(sourceLink);
-    // Base UI の Tooltip は視覚専用で role="tooltip" を持たない (読み上げはトリガーの aria-label が担う)。
-    // 表示された補助ラベルの本文で確かめる。
-    await waitFor(() =>
-      expect(document.querySelector('[data-slot="tooltip-content"]')).toHaveTextContent(
-        '出典: 人口動態統計'
-      )
-    );
-    expect(screen.getByText('ランキング')).toBeVisible();
-    expect(
-      screen.getByRole('link', { name: '指標の定義・ランキング' })
-    ).toHaveAttribute('href', '/ranking/primary');
+    expect(screen.getByText('2020年に系列が接続しません。')).toBeVisible();
+    expect(screen.getByRole('button', { name: '出典・指標の定義' })).toHaveAttribute('aria-haspopup', 'dialog');
+    expect(screen.queryByRole('link')).toBeNull();
   });
 
-  it('複数の出典・指標ハブを省略せず操作可能なメニューへまとめる', async () => {
-    const user = userEvent.setup();
+  it('ボタンを押すと、複数の出典とランキングを省略せず Sheet に並べる', async () => {
     render(
       <ChartFooter
-        annotation="2020年に系列が接続しません。"
         source="複数調査"
         sourceLinks={[
           { label: '人口動態統計', url: '/survey/vital-statistics' },
           { label: '国勢調査', url: '/survey/census' },
         ]}
+        sourceDetail="各年10月1日現在"
         rankingLink="/ranking/primary"
         rankingLabel="指標の定義・ランキング"
-        rankingLinks={[
-          {
-            label: '関連指標の定義・ランキング',
-            url: '/ranking/secondary',
-          },
-        ]}
+        rankingLinks={[{ label: '関連指標の定義・ランキング', url: '/ranking/secondary' }]}
       />
     );
-
-    expect(screen.getByText('2020年に系列が接続しません。')).toBeVisible();
-    await user.click(screen.getByRole('button', { name: '出典2件を表示' }));
-    expect(await screen.findByRole('menuitem', { name: '人口動態統計' })).toHaveAttribute(
-      'href',
-      '/survey/vital-statistics'
-    );
-    fireEvent.keyDown(document, { key: 'Escape' });
-
-    await user.click(screen.getByRole('button', { name: 'ランキング2件を表示' }));
-    expect(
-      await screen.findByRole('menuitem', { name: '指標の定義・ランキング' })
-    ).toHaveAttribute('href', '/ranking/primary');
-    expect(
-      screen.getByRole('menuitem', { name: '関連指標の定義・ランキング' })
-    ).toHaveAttribute('href', '/ranking/secondary');
+    const sheet = within(await openSheet());
+    expect(sheet.getByRole('link', { name: '出典: 人口動態統計' })).toHaveAttribute('href', '/survey/vital-statistics');
+    expect(sheet.getByRole('link', { name: '出典: 国勢調査' })).toHaveAttribute('href', '/survey/census');
+    expect(sheet.getByText('各年10月1日現在')).toBeVisible();
+    expect(sheet.getByRole('link', { name: '指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/primary');
+    expect(sheet.getByRole('link', { name: '関連指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/secondary');
   });
 
-  it('リンク先が無い出典はアイコン付き文字列として残す', () => {
+  it('固定 ID を渡すとボタンの id に使う', () => {
+    render(<ChartFooter id="theme-ports-footer" rankingLinks={[{ label: '輸出', url: '/ranking/export' }]} />);
+    expect(screen.getByRole('button', { name: '出典・指標の定義' })).toHaveAttribute(
+      'id',
+      'theme-ports-footer-sources-trigger'
+    );
+  });
+
+  it('リンク先が無い出典は名前だけを Sheet に残す', async () => {
     render(<ChartFooter source="独自集計" />);
-    expect(screen.getByText('独自集計')).toBeVisible();
-    expect(screen.queryByRole('link')).toBeNull();
+    const sheet = within(await openSheet());
+    expect(sheet.getByText('出典: 独自集計')).toBeVisible();
+    expect(sheet.queryByRole('link', { name: /独自集計/ })).toBeNull();
+  });
+
+  it('出典もランキングも注記も無ければ何も描かない', () => {
+    const { container } = render(<ChartFooter />);
+    expect(container).toBeEmptyDOMElement();
   });
 });

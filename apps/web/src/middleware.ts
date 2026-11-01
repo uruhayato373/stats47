@@ -2,6 +2,11 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 import { hrefFor } from '@stats47/data-configs/content/href';
+import {
+  MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
+  isMunicipalityThemePageSlug,
+  municipalityThemePageSlugFor,
+} from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { SITE } from '@stats47/types';
 
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
@@ -294,7 +299,12 @@ function checkContentTypePolicy(
 
   if (pathname.startsWith('/municipalities/themes/')) {
     const slug = pathname.slice('/municipalities/themes/'.length).split('/')[0];
-    if (slug && !UrlPolicy.municipality.isKnownTheme(slug)) return gone();
+    // ページの slug は都道府県のテーマ名にそろえた (2026-10-31 IA-REGION-THEME-01)。旧 市区町村テーマの slug は 301
+    if (slug && !isMunicipalityThemePageSlug(slug)) {
+      const pageSlug = municipalityThemePageSlugFor(slug);
+      if (!pageSlug) return gone();
+      return NextResponse.redirect(new URL(hrefFor('municipality-theme', { themeSlug: pageSlug }), baseUrl), 301);
+    }
   }
 
   if (pathname.startsWith('/municipalities/ranking/')) {
@@ -358,11 +368,21 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
       return gone();
     }
     if (seg.length === 5) {
+      // 市区町村×テーマ (2026-10-31 IA-REGION-THEME-01): 市区町村の対応があるテーマは通す
+      if (
+        TYPE_A_THEME_SLUGS.has(seg[4]) &&
+        Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, seg[4])
+      ) {
+        return null;
+      }
       if (!UrlPolicy.cityCategory.isKnown(seg[4])) return gone();
-      return NextResponse.redirect(
-        new URL(hrefFor('city', { areaCode, cityCode }), req.url),
-        301
-      );
+      // 旧 市区町村×分野: 対応するテーマに市区町村のページがあればそこへ、無ければ市区町村のページへ 301
+      const themeSlug = AREA_CATEGORY_TO_THEME[seg[4]];
+      const dest =
+        themeSlug && Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, themeSlug)
+          ? hrefFor('city-theme', { areaCode, cityCode, themeSlug })
+          : hrefFor('city', { areaCode, cityCode });
+      return NextResponse.redirect(new URL(dest, req.url), 301);
     }
     if (seg.length > 5) return gone();
   }
@@ -386,6 +406,21 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
       : hrefFor('area', { areaCode: seg[1] });
     return NextResponse.redirect(new URL(dest, req.url), { status: 301 });
   }
+
+  // /areas/{prefCode}/{themeSlug}/cities — 県内の市区町村を比べるページ (2026-10-31 IA-REGION-THEME-01)。
+  // 市区町村のデータの対応 (MUNICIPALITY_THEME_FOR_PREFECTURE_THEME) があるテーマだけを通し、他は下の 410 に落とす
+  if (
+    seg.length === 4 &&
+    seg[3] === 'cities' &&
+    UrlPolicy.area.isValidPrefCode(seg[1]) &&
+    TYPE_A_THEME_SLUGS.has(seg[2]) &&
+    Object.prototype.hasOwnProperty.call(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, seg[2])
+  ) {
+    return null; // Next.js に委譲
+  }
+  // 市区町村の対応が無いテーマの `/cities` は 410 (page の notFound() は OpenNext で 200 soft-404 になりうる)。
+  // tourism のようにカテゴリ名と同じテーマ名は、下のカテゴリの判定を通り抜けるのでここで止める
+  if (seg.length === 4 && seg[3] === 'cities' && /^\d{5}$/.test(seg[1])) return gone();
 
   // /areas/{prefCode}/{themeSlug} — Type A テーマページは通過させる (410 対象外)
   // TYPE_A_THEME_SLUGS は module スコープに hoist 済 (per-request の new Set を回避)。

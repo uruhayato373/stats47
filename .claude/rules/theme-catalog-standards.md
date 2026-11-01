@@ -75,6 +75,40 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 
 ## 3. チャート選定文法 (データ形状 → componentType)
 
+### 3.0 読者の問いの型 → 見せ方 (2026-10-31 オーナー指示)
+
+章は「読者の悩み → 問い」で切り (`sections[].concern` に悩み、`title` に問い)、章の中の各カードの見せ方は問いの型と
+データの形で決める。対応は NotebookLM の「データサイエンス」ノート (ダッシュボードデザインの実践ガイドブック・
+データ視覚化のデザイン・データ可視化の基本が全部わかる本) から引いた。
+
+| 問いの型 | 見せ方 | 実装 (共通部品) |
+|---|---|---|
+| いまいくつか | 数値 1 つ (値・順位・年) | 1 指標の `metricGroups` → `SingleMetricCard` (`StatTile`) |
+| 全国とどれだけ違うか | 県の値の横に全国の値 | 公式の全国の系列 (`app/japan/<key>/series.json`) がある指標で自動 (`MetricStatTile` の補足) |
+| 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
+| 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
+| 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |
+
+- **テーマ・地域のページは 1 つの地域 (全国・県・市区町村) を見せ、47 都道府県を比べる図・表 (地図・表・並べた棒・47 の中の位置) を
+  置かない** (2026-10-31 オーナー決定)。県の比較はランキングのページ (`/ranking/<key>`) と Geo の分析ページが受け持つ。
+  地域は覚えている県 (Cookie) から決め、`/themes/<key>` は県を覚えていればその県のページへ移り、覚えていなければ全国の値
+  (公式の全国の系列) を見せる。パンくずに今の地域を出す。47 県の平均を全国として見せない。埋め込みの節は県別の表を
+  今の地域の行だけにする (Geo の集計部品は `regionOnly`)。機械の検査は `apps/web/src/__tests__/region-page-no-comparison.test.ts`
+  (入口から import をたどり、比較の部品と「47都道府県の〜」の見出しを止める)。旧 `comparisonYear` / `comparisonMap` と比較の節は撤去した
+- 単年の指標を折れ線に入れない。単位の違う指標・内数を含む組・一部の項目だけの組を構成比・ドーナツにしない (足しても全体にならない)
+- 1 つの事実は 1 回だけ見せる。章の図がカードと同じ指標だけを描く (線 1 本の図が何枚か合わさってカードの指標をちょうど覆う
+  場合も含む) なら、描画側 (`ThemeMetricsDashboard` の `chartDuplicatesMetrics`) が図をやめてカードの推移を出し、図の注記を
+  カードの Sheet へ引き継ぐ
+- **地域ごとに出す指標を変える** (2026-11-01 オーナー決定)。全国のページは公式の全国の値 (`app/japan`) がある指標だけを出し、
+  県の系列を読む章の図 (折れ線・棒と折れ線・構成比・ドーナツ) は出さない (全国では 47 県の平均になるため)。県のページは県の値が
+  ある指標を出す。市区町村は市区町村の指標の別ページ。描くものが無い章は出さず、章へのリンクも描かれた章だけにする
+- **図を見せ、説明は Sheet に入れる** (2026-11-01 オーナー決定。見本 shadcndashboard のチャートのカード)。章の図のカードは
+  見出しの帯に題名と、右端に出典・指標の定義・読むときの注意を開くアイコン (注意があれば点の印)、本文は地域・期間・単位の 1 行、
+  最新の値と前回からの増減、図だけ。章の説明 (`sections[].description`) も見出しの右端のアイコンから開く Sheet に入れる
+- 章の設計案は NotebookLM が白書を参照して作り、`apply-design.ts` が上の規則でデータの形に合わせ直して書く
+  (`.claude/skills/theme/research-theme-catalog/SKILL.md`「章と見せ方の一括設計」)。モデルが書いた注意書きは確かめていない
+  事実を含むので章の説明に使わない
+
 **テーマページ (`/themes/*`) は `ThemeDbChartRenderer`**
 (`apps/web/src/features/theme-dashboard/`) で描画される。これは stat-charts の `DashboardComponentRenderer`
 (area 系ページ) とは**別 renderer・別型集合**なので注意 (area の bar-chart/sunburst/radar 等は
@@ -236,13 +270,8 @@ metricGroups: [
 
 ### 横断比較
 
-`ThemeComparisonSection` は既存の章の後で、`metricGroups.rankingKeys` と `tabIndicators` から
-比較対象を導出する。専用の overview 指標リストは持たない。県の中央値・差分・指標切替地図には
-同じ年次の有限な都道府県値だけを使い、全国・市区町村・別年を混ぜない。`comparisonYear` は
-起点の年で、グループの全指標に値がそろう新しい年が R2 に入ると実行時にその最新年へ進む
-(`apps/web/src/features/theme-dashboard/lib/resolve-comparison-years.ts`。1 指標でも欠ける年へは進めず、
-指標ごとの最新年にも代替しない。新しい年を R2 へ入れればカタログを書き換えずに追従する)。既存 `comparisonMap` の地図は重複表示しない。比較地図は県選択だけで、章の配置や既存
-セレクタを置き換えない。誤読防止注記は公開 `RankingItem.annotation` / `description` を使う。
+テーマに 47 都道府県を比べる節は置かない (2026-10-31 オーナー決定。旧 `ThemeComparisonSection` と年固定の比較カードは撤去)。
+県の比較は各指標のランキングのページ (`/ranking/<key>`) が地図・並べた棒・表で受け持つ。
 
 ### 実行時の振る舞い (UI 側の約束)
 
@@ -414,7 +443,7 @@ harmRelevance: [
 | `harmRelevance`                                    | **UI 非表示**。企画側の参照材料。`/quality/catalog-audit` (§8.1) が読み取り専用表示                                                                                    | —                                                                                                 |
 | `charts.componentProps`                            | チャート本体 (line/mixed/composition/donut/cpi/pyramid)                                                                                                                | `ThemeDbChartRenderer`                                                                            |
 | `charts.annotation`                                | 系列断絶・母集団差・比較不能条件など、この可視化固有の誤読防止注釈                                                                                                     | generator → `componentProps.annotation` → `ChartFooter`                                           |
-| `charts.sourceName` / `sourceLink`                 | チャートカード footer の出典                                                                                                                                            | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer)                                        |
+| `charts.sourceName` / `sourceLink`                 | チャートの下の「出典・指標の定義」のボタンから開く Sheet の出典 (2026-10-30。注記はチャートの下に見せる)                                                                 | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer)                                        |
 | `charts.relatedRankingKeys`                        | `markdown-section` 以外で必須の指標ハブ導線。先頭を primary `rankingLink`、残りを `rankingLinks` へ決定生成                                                            | `catalogToPageComponentsJson` → `ChartFooter`                                                     |
 | `charts.section`                                   | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用)                                                                                                 | —                                                                                                 |
 | `keywords`                                         | `<meta>` / 構造化データ                                                                                                                                                | theme utils                                                                                       |
@@ -422,12 +451,11 @@ harmRelevance: [
 | `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
 | `metrics` → 相関 (別途 R2)                          | **「このテーマと関連の深い指標」**。テーマ外の指標のうち、テーマ内指標と人口補正後の順位相関 \|r\|≥0.5 のもの最大 8 件。相関 workflow が `app/correlation/by-theme/<themeKey>.json` に事前計算 | `ThemeCorrelatedMetrics` (`nav_surface=theme_ranking`)                                            |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
-| (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
+| (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
 | (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                            | `ThemePageLayout` の `PageShell leftRail`                                                         |
 
-> `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
-> **page-components チャート・考察 (markdown)・埋め込み section は hideMap に関係なく描画する**
-> (2026-07-04 に `cardsOnly` の付与をやめ完全ダッシュボード化。prop 自体は残存するので付けない)。
+> テーマ専用の地図のタブ (コロプレス/指標タブ/年度セレクタ) は 2026-10-30 に撤去した (2026-06-20 から全テーマで隠していた `hideMap`)。
+> 都道府県の地図と表はテーマに置かず、ランキングのページが受け持つ (2026-10-31 オーナー決定)。テーマ専用の地図・表を作らない。
 > カタログ無しテーマ (climate / local-finance) は
 > IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
 > (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
@@ -469,7 +497,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 ## 9. 問い別の章と継続監査
 
 現行21テーマは `ThemeCatalog.sections` を持つ。`metricGroupKeys` / `chartKeys` /
-`embeddedSectionKeys` が章内配置の正典で、ThemeDashboardTabbedが描画する。
+`embeddedSectionKeys` が章内配置の正典で、ThemeMetricsDashboard (ThemeDashboardClient から) が描画する。
 未配置・未知参照・二重配置はvalidatorで停止。page-componentのsection文字列とは別の契約。
 単年は比較表または数値で示し、複数年だけ推移にする。同じ指標のカードと詳細図は重複させない。
 

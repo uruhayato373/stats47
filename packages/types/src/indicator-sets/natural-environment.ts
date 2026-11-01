@@ -23,7 +23,7 @@ export const NATURAL_ENVIRONMENT_SET: IndicatorSet = {
     {
       "rankingKey": "artificial-forest-area",
       "shortLabel": "人工造林面積",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "natural-environment-conservation-area",

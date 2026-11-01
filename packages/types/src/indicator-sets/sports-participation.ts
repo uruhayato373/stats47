@@ -18,7 +18,7 @@ export const SPORTS_PARTICIPATION_SET: IndicatorSet = {
     {
       "rankingKey": "hobby-participation-rate-sports-spectating",
       "shortLabel": "スポーツ観覧の行動者率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "community-sports-facility-count-per-million",

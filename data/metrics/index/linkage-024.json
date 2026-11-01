@@ -2,6 +2,244 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "real-public-debt-service-ratio",
+      "pageId": "ranking:real-public-debt-service-ratio",
+      "title": "実質公債費比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2111"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2111"
+        },
+        "derived": false,
+        "configHash": "7c823776a326f6a5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fiscal-self-reliance-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:local-government-debt-burden",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:local-finance",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:real-public-debt-service-ratio",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
       "metricKey": "real-public-debt-service-ratio-city",
       "pageId": null,
       "title": "実質公債費比率（市町村財政）",
@@ -3398,7 +3636,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:labor",
+          "pageId": "municipality-theme:labor-wages",
           "kind": "municipality-theme"
         },
         {
@@ -3438,7 +3676,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -3478,7 +3716,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -3700,6 +3942,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:cultural-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:relaxation-avg-time-female",
@@ -3926,6 +4172,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:cultural-participation",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:relaxation-avg-time-male",
@@ -4251,7 +4501,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -4331,7 +4581,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -4371,7 +4621,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -4727,7 +4977,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -5253,7 +5503,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:households",
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
         },
         {
@@ -5293,7 +5547,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -5333,7 +5587,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -5373,7 +5627,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -5413,7 +5667,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {
@@ -5591,7 +5845,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:urban-structure",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -5631,7 +5885,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing-size-age",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -6992,7 +7246,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -7219,11 +7473,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:local-services",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:restaurant-count-per-1000",
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -7341,7 +7599,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -7565,6 +7823,10 @@
         {
           "pageId": "area-theme:47000:retail-commerce",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:retail-employees",
@@ -7801,6 +8063,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:retail-establishments-by-prefecture",
           "kind": "ranking"
         },
@@ -7843,7 +8109,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -7917,7 +8183,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -7957,7 +8223,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -8195,6 +8465,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:retail-sales-amount-by-prefecture",
           "kind": "ranking"
         },
@@ -8429,6 +8703,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:retail-commerce",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:retail-sales-area-by-class",
           "kind": "ranking"
         },
@@ -8478,7 +8756,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -8564,7 +8842,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -8642,7 +8920,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -9705,7 +9983,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:municipal-expenditure",
+          "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
         },
         {
@@ -10032,55 +10310,6 @@
         },
         {
           "pageId": "ranking:road-prefectural-route-length",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-total-length",
-      "pageId": "ranking:road-total-length",
-      "title": "道路実延長",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H7110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H7110"
-        },
-        "derived": false,
-        "configHash": "abbbf458100da6eb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:highway-japan-58years",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-total-length",
           "kind": "ranking"
         },
         {

@@ -21,7 +21,7 @@ import {
   resolveThemePrefectureCode,
   THEME_PREFECTURE_SET_VALUE,
 } from '../lib/theme-prefecture-preference';
-import { PREFECTURE_SET_LABEL } from '../types';
+import { NATIONAL_REGION_LABEL } from '../types';
 
 import { useThemePrefecture } from './ThemePrefectureContext';
 
@@ -46,12 +46,12 @@ export function PrefectureSelect({
   const router = useRouter();
   const selectedLabel = selectedPrefectureCode
     ? (selectedAreaName ?? resolveThemePrefectureCode(selectedPrefectureCode)?.areaName)
-    : PREFECTURE_SET_LABEL;
+    : NATIONAL_REGION_LABEL;
   return (
     <Select
       value={selectedPrefectureCode ?? THEME_PREFECTURE_SET_VALUE}
       items={[
-        { value: THEME_PREFECTURE_SET_VALUE, label: PREFECTURE_SET_LABEL },
+        { value: THEME_PREFECTURE_SET_VALUE, label: NATIONAL_REGION_LABEL },
         ...PREFECTURE_LIST_2DIGIT.map((p) => ({
           value: to5DigitPrefCode(p.code),
           label: p.name,
@@ -83,7 +83,7 @@ export function PrefectureSelect({
       </SelectTrigger>
       <SelectContent>
         <SelectItem value={THEME_PREFECTURE_SET_VALUE}>
-          {PREFECTURE_SET_LABEL}
+          {NATIONAL_REGION_LABEL}
         </SelectItem>
         {PREFECTURE_LIST_2DIGIT.map((p) => (
           <SelectItem key={p.code} value={to5DigitPrefCode(p.code)}>

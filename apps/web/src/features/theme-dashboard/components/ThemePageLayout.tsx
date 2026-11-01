@@ -1,33 +1,21 @@
 import { Suspense, type ReactNode } from 'react';
 
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
+import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
-import Link from '@/components/atoms/SiteLink';
 import { PageShell, PanelGrid } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
-import { StatisticsScopeNav } from '@/components/navigation';
 import {
   LinkRowFrame,
   linkRowItemClass,
 } from '@/components/navigation/StatisticsScopeNav';
-import { SectionIndexLink } from '@/components/section';
 import { loadPageComponents } from '@/components/stat-charts/server';
-import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
-import { RailCard, RailNavRow, StatTile, StatTileGrid } from '@/components/surface';
+import { RailCard, RailNavRow } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -43,16 +31,15 @@ import {
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
-import { themeHref } from '../config/theme-href';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { prefectureCityOptions } from '../lib/prefecture-city-options';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
 } from '../utils';
 
-import { PrefectureSelect } from './PrefectureSelect';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeChapterLinks } from './ThemeChapterLinks';
 import { ThemeCorrelatedMetrics } from './ThemeCorrelatedMetrics';
@@ -61,8 +48,8 @@ import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
 import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
+import { ThemeRegionNav } from './ThemeRegionNav';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 import type { ThemePageData } from '../lib/load-theme-data';
 import type { ThemeConfig } from '../types';
@@ -102,9 +89,10 @@ export async function ThemePageLayout({
   toolbar,
 }: Props) {
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
-  const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
+  // 県の値と順位は説明文 (meta description・構造化データ) にだけ使う。本文は下の指標カードの 1 か所で見せる
+  // (2026-10-30。旧: 本文にも「主なデータ」の節を別に描き、同じ値が名前・丸め・順位なしで 2 回出ていた)
   const areaHighlights = areaContext
-    ? getAreaThemeHighlights(data, areaContext.areaCode)
+    ? getAreaThemeHighlights(data, areaContext.areaCode, theme.tabIndicators)
     : [];
   // 県のページは、構造化データの名前・URL・説明・パンくずをその県のものにする (説明は meta description と同じ文)
   const structuredArea = areaContext
@@ -202,35 +190,19 @@ export async function ThemePageLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
           />
-          <Breadcrumb className="mb-4">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href="/" />}>ホーム</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              {areaContext ? (
-                <>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink render={<Link href="/areas" />}>都道府県一覧</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink render={<Link href={hrefFor('area', { areaCode: areaContext.areaCode })} />}>
-                        {areaContext.areaName}
-                      </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>{theme.title}</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </>
-              ) : (
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{theme.title}</BreadcrumbPage>
-                </BreadcrumbItem>
-              )}
-            </BreadcrumbList>
-          </Breadcrumb>
+          {/* パンくずの各段と右端のアイコンから、地域・テーマを Sheet で選ぶ (2026-10-31 IA-REGION-THEME-01)。
+          旧: パンくずとは別に、地域単位のリンク・テーマのボタン・県の Select を並べた帯を置いていた */}
+          <div className="mb-4">
+            <ThemeRegionNav
+              themeKey={theme.themeKey}
+              themes={THEME_SWITCHER_THEMES}
+              areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+              hasAreaPages={isAreaTheme(theme.themeKey)}
+              hasMunicipalityPages={isAreaTheme(theme.themeKey) && Object.hasOwn(MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, theme.themeKey)}
+              scopeHrefs={scopeHrefsForPrefectureTheme(theme.themeKey)}
+              prefectureCities={areaContext ? prefectureCityOptions(areaContext.areaCode) : undefined}
+            />
+          </div>
 
           {/* h1 は狭幅ナビより先に置き、画面を開いた時点でページの主語を示す。
           hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
@@ -252,34 +224,6 @@ export async function ThemePageLayout({
           県ごとのページを持つテーマでは、県を選ぶとその県のページ (/areas/県/テーマ) へ移り、地域単位の切り替えは
           テーマのページと県のページの両方に置く (県×テーマの交点を 1 つの URL・同じ部品にする。2026-10-30) */}
           <div className="mb-4 flex flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-3">
-              <StatisticsScopeNav
-                current="prefectures"
-                // 「47都道府県」は同じテーマの 47都道府県の表示へ (県のページから戻る先。既定の /themes 一覧ではない)
-                hrefs={{ prefectures: themeHref(theme.themeKey), ...scopeHrefsForPrefectureTheme(theme.themeKey) }}
-                className="mb-0 w-auto"
-              />
-              <div
-                role="group"
-                aria-label="テーマと地域"
-                className="flex min-w-0 basis-full items-center gap-2 sm:flex-1 sm:basis-auto sm:justify-end"
-              >
-                <div className="min-w-0 flex-1 sm:flex-none">
-                  <ThemeSwitcher
-                    themes={THEME_SWITCHER_THEMES}
-                    currentThemeKey={theme.themeKey}
-                    areaContext={
-                      areaContext ? { areaCode: areaContext.areaCode } : undefined
-                    }
-                  />
-                </div>
-                <PrefectureSelect
-                  className="min-w-0 flex-1 sm:w-44 sm:flex-none"
-                  areaPageThemeKey={isAreaTheme(theme.themeKey) ? theme.themeKey : undefined}
-                />
-              </div>
-            </div>
-
             {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査)。
             狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする (右端のフェードで続きを示すリンク列) */}
             {pageLinks.length > 1 && (
@@ -294,65 +238,14 @@ export async function ThemePageLayout({
           </div>
 
 
-          {/* エリアページ経由時の視点バナー */}
-          {areaContext && (
-            // 狭い幅では文と導線を縦に積む (横並びだと 1〜2 文字ずつ折り返す。2026-10-04 週次 UI 検査)
-            <div className="mb-4 flex flex-col gap-1 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm sm:flex-row sm:items-center sm:gap-2">
-              <span className="font-medium text-primary">
-                {areaContext.areaName}の視点
-              </span>
-              <span className="text-muted-foreground">
-                — 47都道府県チャートで{areaContext.areaName}
-                をハイライト表示しています
-              </span>
-              <SectionIndexLink
-                href={hrefFor('area', { areaCode: areaContext.areaCode })}
-                className="self-start sm:ml-auto sm:shrink-0 sm:self-auto"
-              >
-                {areaContext.areaName}のプロフィール
-              </SectionIndexLink>
-            </div>
-          )}
-
-          {areaContext && areaHighlights.length > 0 && (
-            // 見出しと数値タイルの格子を節ごと線の格子にする (文章とタイルを 1 つの要素に包むと文章が線に接する)
-            <PanelGrid as="section" aria-labelledby="area-theme-highlights">
-              <div>
-                <h2
-                  id="area-theme-highlights"
-                  className="text-base font-semibold"
-                >
-                  {areaContext.areaName}の主なデータ
-                </h2>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  このテーマに関連する最新公表値です。
-                </p>
-              </div>
-              <StatTileGrid>
-                {areaHighlights.map((highlight) => (
-                  <StatTile
-                    key={highlight.key}
-                    label={highlight.title}
-                    value={highlight.value.toLocaleString('ja-JP')}
-                    unit={formatUnitForDisplay(highlight.unit)}
-                    meta={highlight.yearName}
-                  />
-                ))}
-              </StatTileGrid>
-            </PanelGrid>
-          )}
-
           <ThemeDashboardClient
             themeConfig={theme}
             metricGroups={data.metricGroups}
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
             indicatorDataMap={data.indicatorDataMap}
-            topology={data.topology}
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
-            kpiDataByArea={kpiDataByArea}
-            highlightAreaCode={areaContext?.areaCode}
           />
 
           {(themeMetrics.length > 0 || themeSurveys.length > 0) && (

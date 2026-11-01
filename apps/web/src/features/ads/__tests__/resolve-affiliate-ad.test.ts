@@ -4,6 +4,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 vi.mock('../repositories/affiliate-ad-snapshot');
 
 import {
+  readActiveAdsByProgramRefsFromR2,
   readActiveTextAdByVerticalFromR2,
   readActiveBannersByVerticalsFromR2,
   readActiveTextAdsByVerticalsFromR2,
@@ -17,9 +18,18 @@ import {
 const mockFindActiveAd = vi.mocked(readActiveTextAdByVerticalFromR2);
 const mockFindBanners = vi.mocked(readActiveBannersByVerticalsFromR2);
 const mockFindTextAds = vi.mocked(readActiveTextAdsByVerticalsFromR2);
+const mockFindGeneric = vi.mocked(readActiveAdsByProgramRefsFromR2);
+
+const GENERIC_BANNER = {
+  id: 'generic-1', title: '汎用の案件', htmlContent: 'https://example.com/generic', programRef: 'a8:generic',
+  areaCode: null, categoryKey: null, locationCode: 'blog-bottom', isActive: true, priority: 10,
+  startDate: null, endDate: null, targetCategories: null, adType: 'banner', imageUrl: 'https://example.com/g.png',
+  trackingPixelUrl: null, width: 300, height: 250, vertical: 'energy',
+} as never;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockFindGeneric.mockResolvedValue([]);
 });
 
 describe('resolveAffiliateAd', () => {
@@ -64,10 +74,13 @@ describe('resolveAffiliateAd', () => {
 });
 
 describe('resolveAffiliateBanners', () => {
-  it('マッチするタグがない場合、空配列を返す', async () => {
+  // 2026-10-31 オーナー決定「すべてのページに広告を出す」: 意図軸が決まらないタグは、別の意図軸を推測せず汎用の案件を出す
+  it('マッチするタグがない場合、意図軸を推測せず汎用の案件を返す', async () => {
+    mockFindGeneric.mockResolvedValue([GENERIC_BANNER]);
     const result = await resolveAffiliateBanners(['unknown-tag']);
-    expect(result).toEqual([]);
+    expect(result.map((b) => b.id)).toEqual(['generic-1']);
     expect(mockFindBanners).not.toHaveBeenCalled();
+    expect(mockFindGeneric).toHaveBeenCalledWith(expect.any(Array), 'banner', 2);
   });
 
   it('マッチするタグから vertical を収集し一括クエリする', async () => {
@@ -207,10 +220,11 @@ describe('resolveAffiliateBanners', () => {
 });
 
 describe('resolveAffiliateTextAdsByTagKeys', () => {
-  it('tagをverticalへ解決できない場合はeconomyへ推測フォールバックしない', async () => {
+  it('tagをverticalへ解決できない場合はeconomyへ推測フォールバックせず、汎用の案件だけを探す', async () => {
     const result = await resolveAffiliateTextAdsByTagKeys(['unknown-tag']);
     expect(result).toEqual([]);
     expect(mockFindTextAds).not.toHaveBeenCalled();
+    expect(mockFindGeneric).toHaveBeenCalledWith(expect.any(Array), 'text', 2, 'sidebar-bottom');
   });
 
   it('一致verticalに在庫がなくてもeconomyへ再クエリしない', async () => {
@@ -221,5 +235,7 @@ describe('resolveAffiliateTextAdsByTagKeys', () => {
     expect(result).toEqual([]);
     expect(mockFindTextAds).toHaveBeenCalledTimes(1);
     expect(mockFindTextAds).toHaveBeenCalledWith(['labor'], 'sidebar-bottom');
+    // 在庫が無いときの受け皿は汎用の案件だけ (別の意図軸へは再クエリしない)
+    expect(mockFindGeneric).toHaveBeenCalledWith(expect.any(Array), 'text', 2, 'sidebar-bottom');
   });
 });

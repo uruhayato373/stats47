@@ -244,37 +244,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "forestry-timber-indicator-1",
-      "title": "森林面積",
-      "rankingKeys": [
-        "woodland-area"
-      ],
-      "defaultCheckedKeys": [
-        "woodland-area"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-2",
-      "title": "林野面積割合",
-      "rankingKeys": [
-        "forest-area-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "forest-area-ratio"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-3",
-      "title": "人工造林面積",
-      "rankingKeys": [
-        "artificial-forest-area"
-      ],
-      "defaultCheckedKeys": [
-        "artificial-forest-area"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-4",
+      "key": "forest-resources-and-roads-1",
       "title": "林道延長",
       "rankingKeys": [
         "forest-road-length"
@@ -284,87 +254,37 @@
       ]
     },
     {
-      "key": "forestry-timber-indicator-5",
-      "title": "素材生産量（2024年確報）",
+      "key": "forest-resources-and-roads-2",
+      "title": "森林面積",
       "rankingKeys": [
-        "roundwood-production-volume"
+        "woodland-area"
       ],
       "defaultCheckedKeys": [
-        "roundwood-production-volume"
+        "woodland-area"
       ]
     },
     {
-      "key": "forestry-timber-indicator-6",
-      "title": "すぎの素材生産量",
+      "key": "forest-resources-and-roads-3",
+      "title": "林野面積割合",
       "rankingKeys": [
-        "roundwood-sugi-production-volume"
+        "forest-area-ratio"
       ],
       "defaultCheckedKeys": [
-        "roundwood-sugi-production-volume"
+        "forest-area-ratio"
       ]
     },
     {
-      "key": "forestry-timber-indicator-7",
-      "title": "ひのきの素材生産量",
+      "key": "forest-resources-and-roads-4",
+      "title": "人工造林面積",
       "rankingKeys": [
-        "roundwood-hinoki-production-volume"
+        "artificial-forest-area"
       ],
       "defaultCheckedKeys": [
-        "roundwood-hinoki-production-volume"
+        "artificial-forest-area"
       ]
     },
     {
-      "key": "forestry-timber-indicator-8",
-      "title": "製材工場数（7.5kW以上）",
-      "rankingKeys": [
-        "sawmill-count"
-      ],
-      "defaultCheckedKeys": [
-        "sawmill-count"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-9",
-      "title": "製材品出荷量",
-      "rankingKeys": [
-        "sawnwood-shipment-volume"
-      ],
-      "defaultCheckedKeys": [
-        "sawnwood-shipment-volume"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-10",
-      "title": "林業経営体数（2025年調査）",
-      "rankingKeys": [
-        "forestry-management-entities"
-      ],
-      "defaultCheckedKeys": [
-        "forestry-management-entities"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-11",
-      "title": "林業経営体の雇用者数（2025年調査）",
-      "rankingKeys": [
-        "forestry-hired-workers"
-      ],
-      "defaultCheckedKeys": [
-        "forestry-hired-workers"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-12",
-      "title": "林業経営体の内部労働者数（2025年調査）",
-      "rankingKeys": [
-        "forestry-internal-workers"
-      ],
-      "defaultCheckedKeys": [
-        "forestry-internal-workers"
-      ]
-    },
-    {
-      "key": "forestry-timber-indicator-13",
+      "key": "timber-production-and-output-1",
       "title": "林業産出額（2024年確報）",
       "rankingKeys": [
         "forestry-output-value"
@@ -374,7 +294,37 @@
       ]
     },
     {
-      "key": "forestry-timber-indicator-14",
+      "key": "timber-production-and-output-2",
+      "title": "素材生産量（2024年確報）",
+      "rankingKeys": [
+        "roundwood-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-production-volume"
+      ]
+    },
+    {
+      "key": "timber-production-and-output-3",
+      "title": "すぎの素材生産量",
+      "rankingKeys": [
+        "roundwood-sugi-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-sugi-production-volume"
+      ]
+    },
+    {
+      "key": "timber-production-and-output-4",
+      "title": "ひのきの素材生産量",
+      "rankingKeys": [
+        "roundwood-hinoki-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-hinoki-production-volume"
+      ]
+    },
+    {
+      "key": "timber-production-and-output-5",
       "title": "木材生産産出額（2024年確報）",
       "rankingKeys": [
         "forestry-timber-output-value"
@@ -384,7 +334,7 @@
       ]
     },
     {
-      "key": "forestry-timber-indicator-15",
+      "key": "timber-production-and-output-6",
       "title": "栽培きのこ類産出額（2024年確報）",
       "rankingKeys": [
         "forestry-mushroom-output-value"
@@ -392,29 +342,100 @@
       "defaultCheckedKeys": [
         "forestry-mushroom-output-value"
       ]
+    },
+    {
+      "key": "lumber-processing-industry-1",
+      "title": "製材工場数（7.5kW以上）",
+      "rankingKeys": [
+        "sawmill-count"
+      ],
+      "defaultCheckedKeys": [
+        "sawmill-count"
+      ]
+    },
+    {
+      "key": "lumber-processing-industry-2",
+      "title": "製材品出荷量",
+      "rankingKeys": [
+        "sawnwood-shipment-volume"
+      ],
+      "defaultCheckedKeys": [
+        "sawnwood-shipment-volume"
+      ]
+    },
+    {
+      "key": "forestry-workforce-and-entities-1",
+      "title": "林業経営体数（2025年調査）",
+      "rankingKeys": [
+        "forestry-management-entities"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-management-entities"
+      ]
+    },
+    {
+      "key": "forestry-workforce-and-entities-2",
+      "title": "林業経営体の雇用者数（2025年調査）",
+      "rankingKeys": [
+        "forestry-hired-workers"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-hired-workers"
+      ]
+    },
+    {
+      "key": "forestry-workforce-and-entities-3",
+      "title": "林業経営体の内部労働者数（2025年調査）",
+      "rankingKeys": [
+        "forestry-internal-workers"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-internal-workers"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "forestry-timber-overview",
-      "title": "森林・林業・木材産業を都道府県別に見る",
-      "description": "森林資源と木材の生産・出荷に加え、2025年農林業センサスの経営体・労働力と2024年の林業産出額を比較します。労働力は経営体ごとの過去1年間の人数で、雇用と経営内部を分けます。県別産出額は全国表と集計対象が異なり、木材・きのこ以外に薪炭・林野副産物を含みます。",
+      "key": "forest-resources-and-roads",
+      "title": "豊かな森林資源や林業を支える路網は確保されているか",
+      "concern": "森林の適切な維持管理や林業経営に必要な林道整備が進んでいるか気になります。",
       "metricGroupKeys": [
-        "forestry-timber-indicator-1",
-        "forestry-timber-indicator-2",
-        "forestry-timber-indicator-3",
-        "forestry-timber-indicator-4",
-        "forestry-timber-indicator-5",
-        "forestry-timber-indicator-6",
-        "forestry-timber-indicator-7",
-        "forestry-timber-indicator-8",
-        "forestry-timber-indicator-9",
-        "forestry-timber-indicator-10",
-        "forestry-timber-indicator-11",
-        "forestry-timber-indicator-12",
-        "forestry-timber-indicator-13",
-        "forestry-timber-indicator-14",
-        "forestry-timber-indicator-15"
+        "forest-resources-and-roads-1",
+        "forest-resources-and-roads-2",
+        "forest-resources-and-roads-3",
+        "forest-resources-and-roads-4"
+      ]
+    },
+    {
+      "key": "timber-production-and-output",
+      "title": "素材生産量や林業産出額の規模と内訳はどうなっているか",
+      "concern": "地域における木材生産や特用林産物（きのこ類）の産出規模が気になります。",
+      "metricGroupKeys": [
+        "timber-production-and-output-1",
+        "timber-production-and-output-2",
+        "timber-production-and-output-3",
+        "timber-production-and-output-4",
+        "timber-production-and-output-5",
+        "timber-production-and-output-6"
+      ]
+    },
+    {
+      "key": "lumber-processing-industry",
+      "title": "伐採された木材を加工・出荷する製材産業の供給能力はあるか",
+      "concern": "地元産木材の活用や木材加工・製材品の供給体制が整っているか不安です。",
+      "metricGroupKeys": [
+        "lumber-processing-industry-1",
+        "lumber-processing-industry-2"
+      ]
+    },
+    {
+      "key": "forestry-workforce-and-entities",
+      "title": "林業を担う経営体や労働力は維持されているか",
+      "concern": "人手不足や高齢化が進む中で林業経営体や現場の労働者が確保されているか心配です。",
+      "metricGroupKeys": [
+        "forestry-workforce-and-entities-1",
+        "forestry-workforce-and-entities-2",
+        "forestry-workforce-and-entities-3"
       ]
     }
   ],

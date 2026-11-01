@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T20:45:55.792Z",
+  "generatedAt": "2026-10-30T23:23:29.563Z",
   "summary": {
     "metrics": 2236,
     "queries": 2234,
@@ -957,9 +957,9 @@
     "tables": 35,
     "noValueYears": 483,
     "extraYears": 8,
-    "clean": 219,
+    "clean": 232,
     "yearsAll": 17,
-    "failures": 13
+    "failures": 0
   },
   "cities": {
     "accommodation-food-services-private-employees": {
@@ -1906,11 +1906,6 @@
         1979
       ]
     },
-    "damaged-vacant-housing-ratio": {
-      "statsDataId": "0004021631",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "death-count": {
       "statsDataId": "0000020201",
       "configYears": "1975–2023",
@@ -2767,11 +2762,6 @@
         1985
       ]
     },
-    "elderly-day-service-within-500m-household-ratio": {
-      "statsDataId": "0004025626",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "elderly-equipment-dwellings": {
       "statsDataId": "0000020208",
       "configYears": "2003–2023",
@@ -2942,11 +2932,6 @@
         1979,
         1980
       ]
-    },
-    "elementary-school-within-1km-household-ratio": {
-      "statsDataId": "0004025630",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "employed-people-ratio-primary": {
       "statsDataId": "0000020306",
@@ -3414,11 +3399,6 @@
         2018,
         2019
       ]
-    },
-    "evacuation-site-within-500m-household-ratio": {
-      "statsDataId": "0004025597",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "exclusive-industrial-district-area": {
       "statsDataId": "0000020208",
@@ -4568,11 +4548,6 @@
         1979
       ]
     },
-    "junior-high-school-within-1km-household-ratio": {
-      "statsDataId": "0004025631",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "labor-force-population-city": {
       "statsDataId": "0000020206",
       "configYears": "1980–2020",
@@ -4899,7 +4874,7 @@
     },
     "manufacturing-employees": {
       "statsDataId": "0000020203",
-      "configYears": "1975–2014, 2016–2024",
+      "configYears": "1975–2014, 2016–2025",
       "status": "diff",
       "cityYears": "1980–2014, 2016–2024",
       "maxCount": 1913,
@@ -4908,12 +4883,13 @@
         1976,
         1977,
         1978,
-        1979
+        1979,
+        2025
       ]
     },
     "manufacturing-establishments": {
       "statsDataId": "0000020203",
-      "configYears": "1975–2014, 2016–2024",
+      "configYears": "1975–2014, 2016–2025",
       "status": "diff",
       "cityYears": "2000–2014, 2016–2024",
       "maxCount": 1913,
@@ -4942,7 +4918,8 @@
         1996,
         1997,
         1998,
-        1999
+        1999,
+        2025
       ]
     },
     "manufacturing-net-value-added-private": {
@@ -5002,7 +4979,7 @@
     },
     "manufacturing-shipment-amount": {
       "statsDataId": "0000020203",
-      "configYears": "1975–2023",
+      "configYears": "1975–2024",
       "status": "diff",
       "cityYears": "1980–2023",
       "maxCount": 1857,
@@ -5011,7 +4988,8 @@
         1976,
         1977,
         1978,
-        1979
+        1979,
+        2024
       ]
     },
     "marriages": {
@@ -5044,11 +5022,6 @@
         2018,
         2019
       ]
-    },
-    "medical-facility-within-500m-household-ratio": {
-      "statsDataId": "0004025621",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "medical-welfare-private-employees": {
       "statsDataId": "0000020203",
@@ -5972,11 +5945,6 @@
         1978
       ]
     },
-    "nursery-within-500m-young-child-household-ratio": {
-      "statsDataId": "0004025628",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "nursing-welfare-facility-count-per-100k-65plus": {
       "statsDataId": "0000020310",
       "configYears": "1997–2023",
@@ -6759,11 +6727,6 @@
       "noValueYears": [
         1978
       ]
-    },
-    "park-within-500m-household-ratio": {
-      "statsDataId": "0004025595",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "part-time-workers": {
       "statsDataId": "0000020206",
@@ -8881,11 +8844,6 @@
         2019
       ]
     },
-    "post-office-bank-within-500m-household-ratio": {
-      "statsDataId": "0004025627",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "primary-industry-workers": {
       "statsDataId": "0000020206",
       "configYears": "1980–2020",
@@ -9562,11 +9520,6 @@
         2021,
         2022
       ]
-    },
-    "public-sewer-housing-ratio": {
-      "statsDataId": "0004025576",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "public-ur-corporation-rented-dwellings": {
       "statsDataId": "0000020208",
@@ -10615,11 +10568,6 @@
         1999
       ]
     },
-    "station-within-1km-household-ratio": {
-      "statsDataId": "0004025593",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
     "steel-frame-dwellings": {
       "statsDataId": "0000020208",
       "configYears": "2003–2023",
@@ -11538,16 +11486,6 @@
         2021,
         2022
       ]
-    },
-    "vacant-housing-rate-excluding-rental-sale-secondary": {
-      "statsDataId": "0004021421",
-      "configYears": "2023",
-      "status": "no-ledger"
-    },
-    "vacant-housing-rate-for-rent": {
-      "statsDataId": "0004021421",
-      "configYears": "2023",
-      "status": "no-ledger"
     },
     "vacant-housing-ratio": {
       "statsDataId": "0000020308",

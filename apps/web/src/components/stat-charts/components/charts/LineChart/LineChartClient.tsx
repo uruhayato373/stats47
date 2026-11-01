@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
+import { ChartLegend } from "@/components/charts/ChartLegend";
 import { ChartLoadingCard } from "@/components/charts/ChartState";
 
 import type { LineChartData } from "../../../types/visualization";
@@ -75,25 +76,25 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
       {showLatestValues && latest && lines.length > 1 && (
         <div className="mt-3 pt-2 border-t">
           <div className="text-xs text-muted-foreground mb-1.5">{latestLabel}</div>
-          <ul className="divide-y divide-border">
-            {lines.map((line) => {
+          {/* 系列ごとの最新の値は共通の凡例 (ChartLegend の一覧) で描く (2026-11-01。旧: 色の点と一覧の手書き) */}
+          <ChartLegend
+            layout="list"
+            items={lines.map((line) => {
               const value = latest[line.dataKey];
               const lineUnit = line.yAxis === "right" ? rightUnit : unit;
-              return (
-                <li key={line.dataKey} className="flex items-center gap-2 py-1 text-xs">
-                  <span
-                    className="inline-block h-2 w-2 rounded-full shrink-0"
-                    style={{ backgroundColor: line.color }}
-                  />
-                  <span className="text-foreground/80">{line.name}</span>
-                  <span className="ml-auto tabular-nums font-medium">
+              return {
+                key: line.dataKey,
+                label: line.name,
+                color: line.color,
+                value: (
+                  <span className="tabular-nums font-medium">
                     {typeof value === "number" && Number.isFinite(value) ? formatValueWithPrecision(value, precisionByAxis[line.yAxis ?? "left"]) : "—"}
                     {lineUnit ? <span className="font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(lineUnit)}</span> : null}
                   </span>
-                </li>
-              );
+                ),
+              };
             })}
-          </ul>
+          />
         </div>
       )}
     </div>

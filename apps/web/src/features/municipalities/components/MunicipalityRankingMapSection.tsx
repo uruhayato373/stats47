@@ -1,15 +1,15 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { fetchMunicipalityTopologyForWardMode } from '@stats47/gis/server';
 import { municipalityLeafName } from '@stats47/ranking';
 
 import { SectionHeader } from '@/components/section';
 
+import { RankingMapChartClient } from '@/features/ranking/widgets';
+
 import { UrlPolicy } from '@/lib/url-policy';
 
 
-import { MunicipalityCityMapClient } from './MunicipalityCityMapClient';
 
 import type { MunicipalityRankingValue } from '@stats47/ranking/types';
 import type { MetricPresentation, TopoJSONTopology } from '@stats47/types';
@@ -17,8 +17,12 @@ import type { MetricPresentation, TopoJSONTopology } from '@stats47/types';
 import { TOKYO_ISLAND_EXCLUDE_CODES } from '@/constants/tokyo-islands';
 
 interface Props {
+  /** 指標の名前 (地図の読み上げ用の名前に使う) */
+  title?: string;
   visualization: MetricPresentation;
   unit: string;
+  /** 表と同じ小数桁 (凡例の境界値をこの桁で丸める) */
+  decimalPlaces: number;
   /** 5 桁の都道府県コード (?pref=) */
   prefectureCode: string;
   values: readonly MunicipalityRankingValue[];
@@ -39,8 +43,10 @@ const FIT_EXCLUDE_BY_PREF: Readonly<Record<string, readonly string[]>> = {
  * pref 未指定時は一切読み込まれない。取得失敗は地図なしへ degrade する。
  */
 export async function MunicipalityRankingMapSection({
+  title,
   visualization,
   unit,
+  decimalPlaces,
   prefectureCode,
   values,
 }: Props) {
@@ -68,22 +74,26 @@ export async function MunicipalityRankingMapSection({
     <section aria-label={`${prefName}の分布地図`} className="mt-5">
       <SectionHeader title={`${prefName}の分布地図`} hideRule className="mb-0" />
       <div className="mt-2 border border-border p-2">
-        <MunicipalityCityMapClient
-          topology={topology}
-          points={rows.map((row) => ({
+        {/* 地図はランキングと同じ部品 (Leaflet) で描く。県内は分位 5 段・島嶼部は範囲の計算から外し、押すと市区町村のページへ (2026-10-30) */}
+        <RankingMapChartClient
+          rankingItem={{
+            title: title ?? `${prefName}の分布`,
+            unit,
+            visualization,
+            valueDisplay: { decimalPlaces },
+          }}
+          rankingValues={rows.map((row) => ({
             areaCode: row.areaCode,
             areaName: municipalityLeafName(row.areaName),
             value: row.value,
-            rank: row.rank,
           }))}
-          unit={formatUnitForDisplay(unit)}
-          visualization={visualization}
-          hrefByCode={hrefByCode}
-          fitExcludeCodes={
-            FIT_EXCLUDE_BY_PREF[prefectureCode]
-              ? [...FIT_EXCLUDE_BY_PREF[prefectureCode]]
-              : undefined
-          }
+          areaType="city"
+          topology={topology}
+          fitExcludeCodes={FIT_EXCLUDE_BY_PREF[prefectureCode]}
+          areaHrefs={hrefByCode}
+          navSurface="municipalities_map"
+          bare
+          mapClassName="h-[420px]"
         />
       </div>
       <p className="mt-1 text-xs text-muted-foreground">

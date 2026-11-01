@@ -7,21 +7,22 @@ import { lookupArea } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
+import { resolveChartColorHex, type CatalogMetricGroup, type CatalogSection } from '@stats47/data-configs/theme-catalog';
 import { metricDisplayName } from "@stats47/ranking";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 import { StatTileGrid } from '@/components/surface';
 
 import {
-  PREFECTURE_SET_LABEL,
+  NATIONAL_REGION_LABEL,
   type ThemeConfig,
   type ThemeIndicatorData,
 } from '../types';
 
-import { FixedYearComparisonPanel } from './FixedYearComparisonPanel';
 import {
   isMultiMetricGroup,
   isSingleMetricGroup,
@@ -31,13 +32,8 @@ import {
 } from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
 import { SingleMetricCard } from './SingleMetricCard';
-import { ThemeComparisonSection } from './ThemeComparisonSection';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
-import type {
-  CatalogMetricGroup,
-  CatalogSection,
-} from '@stats47/data-configs/theme-catalog';
 
 interface Props {
   /** テーマ設定 */
@@ -93,14 +89,32 @@ function resolveChartRankingLinks(
 }
 
 /**
+ * チャートの先頭の指標ハブ (rankingLink) の名前。2 件目以降 (生成側の rankingLinks) と同じく
+ * 「{テーマの短い名前}の定義・ランキング」にする (2026-10-30。旧: 1 件目だけ「指標の定義・ランキング」で、Sheet の中でどの指標か分からなかった)
+ */
+function primaryRankingLabel(
+  rankingLink: string | null | undefined,
+  tabIndicators: ReadonlyArray<{ rankingKey: string; tabLabel: string }>,
+  indicatorDataMap: Record<string, ThemeIndicatorData>
+): string {
+  const key = rankingLink?.match(/^\/ranking\/([^/?#]+)/)?.[1];
+  const rankingKey = key ? decodeURIComponent(key) : undefined;
+  const name = rankingKey
+    ? (tabIndicators.find((indicator) => indicator.rankingKey === rankingKey)?.tabLabel ??
+      indicatorDataMap[rankingKey]?.rankingItem.title)
+    : undefined;
+  return name ? `${name}の定義・ランキング` : '指標の定義・ランキング';
+}
+
+/**
  * テーマページのフル幅ダッシュボード
  *
  * /areas/[code]/[category] と同様のスタイルで、テーマの主要指標を
  * 「KPI カード + 時系列チャート + 考察」として一画面に集約する。
  *
  * - KPI カード: tabIndicators（role≠context の指標）を indicatorDataMap から導出。
- *   都道府県選択時はその県の値・全国順位、未選択時は実在する1位県の値 (topRanked) を表示する
- *   (47県平均や全国値を「代表値」として作らない。GEO-SCOPE-SEPARATION-01 WP2)。
+ *   県のページはその県の値・全国順位、全国のページは全国の値 (e-Stat の全国行) を表示する
+ *   (47 県の平均を「代表値」として作らない。GEO-SCOPE-SEPARATION-01 WP2)。
  * - 時系列チャート: page_components の line/mixed/composition 等を ThemeDbChartRenderer で描画。
  *   従来 PrefectureStatsPanel は kpi-card 不在のため section 付きチャートを描画できず、
  *   全テーマで埋め草になっていた（本コンポーネントが置き換える）。
@@ -125,19 +139,23 @@ export function ThemeMetricsDashboard({
 }: Props) {
   const areaName = selectedPrefectureCode
     ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
-    : PREFECTURE_SET_LABEL;
+    : NATIONAL_REGION_LABEL;
 
   const kpiKeys = useMemo(
     () =>
+      // カードに並べると決めた指標は role (context を含む) に関わらず値を出す
       [...new Set([
         ...themeConfig.tabIndicators.map((t) => t.rankingKey),
-        ...(metricGroups ?? []).filter((group) => group.comparisonYear).flatMap((group) => group.rankingKeys),
+        ...(metricGroups ?? []).flatMap((group) => group.rankingKeys),
       ])].filter(
           (k) =>
             indicatorDataMap[k] &&
-            indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI
+            indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI &&
+            // 地域ごとに出す指標を変える (2026-11-01 オーナー決定): 全国のページは公式の全国の値がある指標だけ。
+            // 県のページは県の値がある指標 (上の観測数)。市区町村は別のページ (市区町村の指標) が受け持つ
+            (selectedPrefectureCode !== null || hasOfficialNational(indicatorDataMap[k]))
         ),
-    [themeConfig.tabIndicators, metricGroups, indicatorDataMap]
+    [themeConfig.tabIndicators, metricGroups, indicatorDataMap, selectedPrefectureCode]
   );
 
   const kpis = useMemo<MetricKpi[]>(() => {
@@ -162,48 +180,25 @@ export function ThemeMetricsDashboard({
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
+      const nationalValue = d.nationalValue;
 
-      if (selectedPrefectureCode) {
-        return {
-          metricKey: key,
-          title: metricDisplayName(d.rankingItem),
-          unit: target?.unit || d.rankingItem.unit || '',
-          yearName: target?.yearName ?? d.rankingItem.latestYear?.yearName,
-          value: typeof target?.value === 'number' ? target.value : null,
-          rank: target?.rank ?? null,
-          total,
-          ...source,
-          series: d.nationalSeries ?? [],
-          topRanked: null,
-          isLoading: false,
-        };
-      }
-
-      // 47都道府県 (未選択) 表示: 「全国」「全国平均」の値を作らず、実在する1位県の
-      // 事実をそのまま渡す (ranking を主役にする。doc 43 §7 WP2)。追加 fetch は発生しない
-      // (rankingValues に既にある値)。県選択後だけ MetricSwitcherPanel がその県 + 全国系列を
-      // 取りに行く (isNational チェックは MetricSwitcherPanel 側が持つ)。
-      const top1 = d.rankingValues.find((v) => v.rank === 1);
-      const topRanked =
-        top1 && typeof top1.value === 'number' && Number.isFinite(top1.value)
-          ? {
-              areaCode: top1.areaCode,
-              areaName: lookupArea(top1.areaCode)?.areaName ?? top1.areaCode,
-              value: top1.value,
-            }
-          : null;
-
+      // 県のページはその県の値と順位、全国のページは全国の値 (2026-10-31 オーナー決定。旧: 47 都道府県の表示で 1 位の県の値)
+      // 単位と年は観測の行から取る (全国のページは同じ年のどの県の行でもよい)
+      const observed = target ?? d.rankingValues[0];
       return {
         metricKey: key,
         title: metricDisplayName(d.rankingItem),
-        unit: top1?.unit || d.rankingItem.unit || '',
-        yearName: top1?.yearName ?? d.rankingItem.latestYear?.yearName,
-        value: null,
-        rank: null,
+        unit: observed?.unit || d.rankingItem.unit || '',
+        yearName: observed?.yearName ?? d.rankingItem.latestYear?.yearName,
+        value: selectedPrefectureCode
+          ? typeof target?.value === 'number' ? target.value : null
+          : nationalValue ?? null,
+        rank: selectedPrefectureCode ? (target?.rank ?? null) : null,
         total,
         ...source,
+        nationalValue,
         series: d.nationalSeries ?? [],
-        topRanked,
+        officialNationalSeries: d.officialNationalSeries,
         isLoading: false,
       };
     });
@@ -234,8 +229,7 @@ export function ThemeMetricsDashboard({
   const panels = useMemo(() => {
     type Panel = {
       key: string;
-      comparisonYear: string | undefined;
-      comparisonMap: boolean | undefined;
+      view: CatalogMetricGroup['view'];
       title: string | undefined;
       metrics: SingleMetricGroup | MultiMetricGroup;
       defaultCheckedKeys: string[];
@@ -250,8 +244,7 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
-              comparisonYear: undefined,
-              comparisonMap: undefined,
+              view: undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
               title: undefined,
@@ -274,8 +267,7 @@ export function ThemeMetricsDashboard({
       return [
         {
           key: group.key,
-          comparisonYear: group.comparisonYear,
-          comparisonMap: group.comparisonMap,
+          view: group.view,
           title: group.title as string | undefined,
           metrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
@@ -294,7 +286,12 @@ export function ThemeMetricsDashboard({
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
     ? []
-    : (pageCharts ?? []).filter((c) => !NON_CHART_TYPES.has(c.componentType));
+    : (pageCharts ?? []).filter(
+        (c) =>
+          !NON_CHART_TYPES.has(c.componentType) &&
+          // 全国のページは指標の図を出さない。章の図は全国で 47 県の平均を描くため (公式の全国の推移は指標のカードが描く)
+          (selectedPrefectureCode !== null || !PREFECTURE_SERIES_CHART_TYPES.has(c.componentType))
+      );
   const markdownComponents = cardsOnly
     ? []
     : (pageCharts ?? []).filter((c) => c.componentType === 'markdown-section');
@@ -311,29 +308,17 @@ export function ThemeMetricsDashboard({
   type Panel = (typeof panels)[number];
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
-    !panel.comparisonYear && isSingleMetricGroup(panel.metrics);
+    isSingleMetricGroup(panel.metrics);
   /**
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.comparisonYear ? (
-    <FixedYearComparisonPanel
-      key={panel.key}
-      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
-      title={panel.title}
-      metrics={panel.metrics}
-      comparisonYear={panel.comparisonYear}
-      indicatorDataMap={indicatorDataMap}
-      selectedPrefectureCode={selectedPrefectureCode}
-      defaultMetricKey={panel.defaultCheckedKeys[0]}
-      tabLabels={tabLabels}
-      showMap={panel.comparisonMap}
-    />
-  ) : isSingleMetricGroup(panel.metrics) ? (
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
       summaryOnly={summaryOnly}
+      annotation={annotation}
       title={panel.title}
       metric={panel.metrics[0]}
       tabLabels={tabLabels}
@@ -352,6 +337,7 @@ export function ThemeMetricsDashboard({
       areaName={areaName}
       defaultCheckedKeys={panel.defaultCheckedKeys}
       annotation={annotation}
+      seriesColors={panel.view === 'sex' ? sexSeriesColors(panel.metrics) : undefined}
     />
   );
   /**
@@ -380,14 +366,14 @@ export function ThemeMetricsDashboard({
       // 1 枚でも数値タイルの格子に入れ、どの章でも 1 マスの幅をそろえる (2026-10-29 オーナー決定「幅を 4 列にそろえる」)
       out.push(
         <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
-          <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item)))}</StatTileGrid>
+          <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item), sectionTitle, annotationOf(item)))}</StatTileGrid>
         </div>
       );
       i = j;
     }
     return out;
   };
-  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3, hideTitle = false) =>
+  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3) =>
     chart.componentType === 'markdown-section' ? (
       <ThemeDbChartRenderer
         key={chart.componentKey}
@@ -397,19 +383,22 @@ export function ThemeMetricsDashboard({
         headingLevel={headingLevel}
       />
     ) : (
+    // 見本のチャートのカード (2026-11-01): 見出しの帯に題名と、右端に出典・指標の定義・読むときの注意の Sheet のアイコン。
+    // 図の周りに文章を置かない。全国のページで 47 県の平均しか描けない図はカードごと隠す (ThemeDbChartRenderer の印)
     <ChartPanel
       key={chart.componentKey}
       id={`theme-${themeConfig.themeKey}-chart-${chart.componentKey}`}
       title={chart.title}
-      hideTitle={hideTitle}
-      footer={
+      className="has-[[data-national-average-hidden]]:hidden"
+      action={
         <ChartFooter
+          placement="header"
           source={chart.sourceName ?? undefined}
           sourceLink={chart.sourceLink}
           sourceLinks={chartSourceLinks?.[chart.componentKey]}
           annotation={resolveChartAnnotation(chart)}
           rankingLink={chart.rankingLink}
-          rankingLabel="指標の定義・ランキング"
+          rankingLabel={primaryRankingLabel(chart.rankingLink, themeConfig.tabIndicators, indicatorDataMap)}
           rankingLinks={resolveChartRankingLinks(chart)}
         />
       }
@@ -459,12 +448,18 @@ export function ThemeMetricsDashboard({
   });
   // 考察・FAQ だけの章 (読み方章) は比較の節の後ろへ回し、FAQ をページの最後に置く
   // (2026-10-06 に読み方章を末尾へ移した判断と同じ。THEME-READING-CHAPTER-EMPTY-01)
+  // 地域の指標を絞った結果、何も描くものが無い章は出さない (見出しだけの章を残さない)
+  const isEmpty = (chapter: (typeof chapters)[number]) =>
+    chapter.panels.length === 0 &&
+    chapter.charts.length === 0 &&
+    chapter.markdown.length === 0 &&
+    chapter.embedded.length === 0;
   const isTextOnly = (chapter: (typeof chapters)[number]) =>
     chapter.markdown.length > 0 &&
     chapter.panels.length === 0 &&
     chapter.charts.length === 0 &&
     chapter.embedded.length === 0;
-  const leadingChapters = chapters.filter((chapter) => !isTextOnly(chapter));
+  const leadingChapters = chapters.filter((chapter) => !isEmpty(chapter) && !isTextOnly(chapter));
   const trailingChapters = chapters.filter(isTextOnly);
   const remainingMarkdown = markdownComponents.filter(
     (chart) => !usedCharts.has(chart.componentKey)
@@ -488,18 +483,37 @@ export function ThemeMetricsDashboard({
     chapter: (typeof chapters)[number],
     action?: ReactNode
   ) => {
-    // 章のチャートが切り替えカードと同じ指標だけを描くなら、チャートをやめてカードの (系列を選べる) グラフを出す。
-    // 注記はカードの下へ引き継ぐ (2026-10-29 オーナー決定。旧: カードのグラフを止めて選べないチャートを出していた)
-    const merged = chapter.charts.length === 1 ? chapter.charts[0] : undefined;
-    const mergedPanel = merged
-      ? chapter.panels.find(
-          (panel) =>
-            !panel.comparisonYear &&
-            !isSingleMetricGroup(panel.metrics) &&
-            chartDuplicatesMetrics(merged, panel.metrics.map((metric) => metric.metricKey))
+    // 章のチャートがカードと同じ指標だけを描くなら、チャートをやめてカードのグラフを出す (同じ値を 2 か所に出さない)。
+    // 1 指標のカードも対象にする (2026-11-01)。注記はカードの出典の Sheet へ引き継ぐ
+    // 線 1 本ずつの図が何枚か合わさってカードの指標をちょうど覆う場合も同じ扱いにする (例: 単独世帯と核家族世帯の図 2 枚と、
+    // その 2 指標のカード)
+    const mergedChartsOf = new Map<string, PageComponent[]>();
+    for (const panel of chapter.panels) {
+      const keys = panel.metrics.map((metric) => metric.metricKey);
+      const whole = chapter.charts.find((chart) => chartDuplicatesMetrics(chart, keys));
+      if (whole) {
+        mergedChartsOf.set(panel.key, [whole]);
+        continue;
+      }
+      const parts = chapter.charts.filter((chart) => {
+        const own = chartOwnMetricKeys(chart);
+        return chart.componentType === 'line-chart' && own.length === 1 && keys.includes(own[0]);
+      });
+      const covered = new Set(parts.flatMap(chartOwnMetricKeys));
+      if (keys.length > 1 && keys.every((key) => covered.has(key))) mergedChartsOf.set(panel.key, parts);
+    }
+    const mergedCharts = new Set([...mergedChartsOf.values()].flat());
+    const charts = chapter.charts.filter((chart) => !mergedCharts.has(chart));
+    // 内訳の図 (構成比・ドーナツ) が一覧に値と割合を出すので、同じ指標だけのカードは出さない (同じ値を 2 か所に出さない。2026-11-01)
+    const breakdownKeySets = charts
+      .filter((chart) => BREAKDOWN_CHART_TYPES.has(chart.componentType))
+      .map((chart) => new Set(chartOwnMetricKeys(chart)));
+    const panels = chapter.panels.filter(
+      (panel) =>
+        !breakdownKeySets.some(
+          (keys) => panel.metrics.length > 0 && panel.metrics.every((metric) => keys.has(metric.metricKey))
         )
-      : undefined;
-    const charts = mergedPanel ? [] : chapter.charts;
+    );
     return (
     <PanelGrid
       as="section"
@@ -508,13 +522,26 @@ export function ThemeMetricsDashboard({
       aria-label={chapter.title}
       className="scroll-mt-24"
     >
+      {/* 章の説明は見出しの下に文章で置かず、右端のアイコンから開く Sheet に入れる (2026-11-01 オーナー決定) */}
       <SectionHeader
         title={chapter.title}
-        description={chapter.description}
-        action={action}
+        action={
+          action || chapter.description ? (
+            <span className="flex items-center gap-1">
+              {action}
+              {chapter.description ? (
+                <SourcesSheet
+                  trigger="icon"
+                  label="読むときの注意"
+                  groups={[{ notes: [chapter.description], sources: [], rankings: [] }]}
+                />
+              ) : null}
+            </span>
+          ) : undefined
+        }
       />
-      {renderPanelRuns(chapter.panels, (panel) => {
-        if (panel === mergedPanel) return false;
+      {renderPanelRuns(panels, (panel) => {
+        if (mergedChartsOf.has(panel.key)) return false;
         const coveredKeys = new Set(
           chapter.charts.flatMap((chart) =>
             ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
@@ -537,13 +564,16 @@ export function ThemeMetricsDashboard({
         return panel.metrics.every((metric) =>
           coveredKeys.has(metric.metricKey)
         );
-      }, chapter.title, (panel) =>
-        panel === mergedPanel && merged ? resolveChartAnnotation(merged) : undefined
-      )}
+      }, chapter.title, (panel) => {
+        const notes = (mergedChartsOf.get(panel.key) ?? [])
+          .map((chart) => resolveChartAnnotation(chart))
+          .filter((note): note is string => Boolean(note));
+        return notes.length > 0 ? notes.join(' ') : undefined;
+      })}
       {charts.length > 0 && (
         <PanelGrid className={`grid-cols-1 ${charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
           {charts.map((chart) =>
-            renderChart(chart, undefined, charts.length === 1 && chartLegendNamesSeries(chart))
+            renderChart(chart)
           )}
         </PanelGrid>
       )}
@@ -586,14 +616,6 @@ export function ThemeMetricsDashboard({
       {remainingEmbedded.map((key) => (
         <div key={key}>{embeddedSections[key]}</div>
       ))}
-      {!cardsOnly && themeConfig.hideMap && (
-        <ThemeComparisonSection
-          themeConfig={themeConfig}
-          metricGroups={metricGroups}
-          indicatorDataMap={indicatorDataMap}
-          selectedPrefectureCode={selectedPrefectureCode}
-        />
-      )}
       {trailingChapters.map((chapter) => renderChapter(chapter))}
       {remainingMarkdown.length > 0 && (
         <PanelGrid>
@@ -604,34 +626,49 @@ export function ThemeMetricsDashboard({
   );
 }
 
-/** 系列の名前を凡例 (D3ChartLegend) に並べるチャートの種類。ほかの種類 (構成比・ドーナツ・物価など) は凡例の形が違う */
-const LEGEND_NAMED_CHART_TYPES = new Set(['line-chart', 'mixed-chart']);
+/** 全国の図を描く章の図の種類 (指標の系列を県ごとに読む図)。全国のページでは 47 県の平均になるので出さない */
+const PREFECTURE_SERIES_CHART_TYPES = new Set(['line-chart', 'mixed-chart', 'composition-chart', 'donut-chart']);
 
-/**
- * 凡例が系列の名前を示すチャートか (折れ線・棒と折れ線で、系列が 2 本以上)。章の中のチャートが 1 枚だけでこれに当たるなら、
- * 章の見出しが問いを、凡例が系列の名前を示すので、パネルの題名の帯を出さない (題名は読み上げの名前に残す。2026-10-29 オーナー決定)。
- * 章に 2 枚以上並ぶとき・凡例の無いチャートでは、題名が無いと何のチャートか分からないので帯を残す。
- */
-export function chartLegendNamesSeries(chart: PageComponent): boolean {
-  if (!LEGEND_NAMED_CHART_TYPES.has(chart.componentType)) return false;
-  const count = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].reduce((sum, field) => {
-    const refs = chart.componentProps[field];
-    return sum + (Array.isArray(refs) ? refs.length : 0);
-  }, 0);
-  return count >= 2;
+/** 一覧に値と割合を出す内訳の図の種類 (共通の BreakdownDonut で描く) */
+const BREAKDOWN_CHART_TYPES = new Set(['composition-chart', 'donut-chart']);
+
+/** 公式の全国の値か推移を持つ指標か (全国のページに出す指標) */
+function hasOfficialNational(data: ThemeIndicatorData): boolean {
+  return data.nationalValue !== undefined || (data.officialNationalSeries?.length ?? 0) > 0;
+}
+
+/** 男女の比較のカード ([男, 女]) の系列色。色の意味はチャートの色の役割 (chart-color-role) にそろえる */
+function sexSeriesColors(metrics: readonly MetricKpi[]): Record<string, string> {
+  const [male, female] = metrics;
+  return {
+    ...(male ? { [male.metricKey]: resolveChartColorHex('male') } : {}),
+    ...(female ? { [female.metricKey]: resolveChartColorHex('female') } : {}),
+  };
 }
 
 /**
- * 章のチャートが、切り替えカードの指標と同じ指標だけを描いているか (折れ線・全国の系列なし・指標の集合が一致)。
+ * 章のチャートが、カードの指標と同じ指標だけを描いているか (折れ線・全国の系列なし・指標の集合が一致。1 指標のカードも含む)。
  * 一致するなら同じグラフが 2 つになるので、章のチャートをやめてカードのグラフ (系列を選べる) を出す。
  */
+/** 章の図が描く指標 (全国の系列を除く) */
+function chartOwnMetricKeys(chart: PageComponent): string[] {
+  return ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap((field) => {
+    const value = chart.componentProps[field];
+    return Array.isArray(value)
+      ? value.flatMap((ref) =>
+          ref && typeof ref === 'object' && typeof ref.metricKey === 'string' && ref.area !== 'national' ? [ref.metricKey as string] : []
+        )
+      : [];
+  });
+}
+
 export function chartDuplicatesMetrics(chart: PageComponent, metricKeys: readonly string[]): boolean {
   if (chart.componentType !== 'line-chart') return false;
   const refs = ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap((field) => {
     const value = chart.componentProps[field];
     return Array.isArray(value) ? value : [];
   });
-  if (refs.length !== metricKeys.length || metricKeys.length < 2) return false;
+  if (refs.length !== metricKeys.length || metricKeys.length < 1) return false;
   if (refs.some((ref) => !ref || typeof ref !== 'object' || ref.area === 'national')) return false;
   const chartKeys = new Set(refs.map((ref) => ref.metricKey));
   return chartKeys.size === metricKeys.length && metricKeys.every((key) => chartKeys.has(key));

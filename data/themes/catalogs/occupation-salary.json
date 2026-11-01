@@ -680,12 +680,12 @@
         "nurse-annual-income",
         "care-worker-annual-income"
       ],
-      "relatedChartKeys": [
-        "theme-occ-medical-trend"
-      ],
       "relatedThemeKeys": [
         "labor-wages",
         "healthcare"
+      ],
+      "relatedChartKeys": [
+        "theme-occ-medical-trend"
       ]
     },
     {
@@ -701,11 +701,11 @@
         "system-consultant-annual-income",
         "software-engineer-annual-income"
       ],
-      "relatedChartKeys": [
-        "theme-occ-it-trend"
-      ],
       "relatedThemeKeys": [
         "labor-wages"
+      ],
+      "relatedChartKeys": [
+        "theme-occ-it-trend"
       ]
     }
   ],

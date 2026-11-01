@@ -2,17 +2,16 @@ import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { THEME_CATALOGS, type CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
-import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
   readAllYearsRankingValuesFromR2,
   readRankingItemFromR2,
   readRankingValuesFromR2,
 } from "@stats47/ranking/server";
-import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
+import { readJapanSeries } from "@stats47/stats-r2/readers";
+import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
-import { resolveComparisonYears } from "./resolve-comparison-years";
 import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -20,11 +19,7 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  topology: TopoJSONTopology | null;
-  /**
-   * カタログの指標カード編成。年を固定した比較カードの `comparisonYear` は、全指標に値がそろう
-   * R2 の最新年へ進めてある (resolveComparisonYears)。カタログに編成が無いテーマは undefined。
-   */
+  /** カタログの指標カード編成。カタログに編成が無いテーマは undefined。 */
   metricGroups?: CatalogMetricGroup[];
 }
 
@@ -100,37 +95,11 @@ export async function loadThemeData(
 
   if (validItems.length === 0) return null;
 
-  const metricGroups = catalogGroups
-    ? resolveComparisonYears(
-        catalogGroups,
-        new Map(validItems.map(({ key, item }) => [key, item.availableYears?.map((y) => y.yearCode)])),
-      )
-    : undefined;
-  const comparisonYears = new Map(
-    (metricGroups ?? []).flatMap((group) =>
-      group.comparisonYear
-        ? group.rankingKeys.map((key) => [key, group.comparisonYear] as const)
-        : []
-    )
-  );
+  const metricGroups = catalogGroups;
 
-  // 2. 全指標のデータ + TopoJSON を並列取得。
-  //    hideMap テーマは地図を描画しないため、巨大な GIS topology を fetch しない
-  //    (無駄なメモリ消費で dev/本番ともに負荷増・OOM の原因になる。2026-06-20)。
-  const topologyPromise = theme.hideMap
-    ? Promise.resolve(null)
-    : areaType === "city"
-      ? fetchAllCitiesTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: city topology取得失敗");
-          return null;
-        })
-      : fetchPrefectureTopology().catch((error) => {
-          logger.error({ error }, "テーマダッシュボード: topology取得失敗");
-          return null;
-        });
-
+  // 2. 全指標のデータを並列取得 (地図の地形はテーマでは読まない。都道府県の地図と表はランキングと同じ部品が自分で読む)
   const valuesPromises = validItems.map(({ key, item }) => {
-    const yearCode = comparisonYears.get(key) ?? item.latestYear?.yearCode;
+    const yearCode = item.latestYear?.yearCode;
     if (!yearCode)
       return Promise.resolve({
         key,
@@ -175,10 +144,17 @@ export async function loadThemeData(
       });
   });
 
-  const [topology, ...valuesResults] = await Promise.all([
-    topologyPromise,
-    ...valuesPromises,
-  ]);
+  // 公式の全国の系列 (app/japan/<key>/series.json)。全国のページの値と推移に使う。47 県の平均は全国と呼ばない
+  // (2026-10-31。無い指標は null で、全国のページは値を出さない)
+  const japanPromise = Promise.all(
+    validItems.map(({ key }) =>
+      readJapanSeries(key)
+        .then((artifact) => [key, artifact] as const)
+        .catch(() => [key, null] as const)
+    )
+  );
+  const [valuesResults, japanEntries] = await Promise.all([Promise.all(valuesPromises), japanPromise]);
+  const japanByKey = new Map(japanEntries);
 
   // 3. indicatorDataMap を構築（availableYears を含む）
   const indicatorDataMap: Record<string, ThemeIndicatorData> = {};
@@ -199,13 +175,33 @@ export async function loadThemeData(
         },
         rankingValues: values,
         availableYears: (item.availableYears ?? []).map(normalizeYear),
-        nationalValue: valResult?.nationalValue,
+        nationalValue: officialNationalValue(japanByKey.get(key) ?? null) ?? valResult?.nationalValue,
         nationalSeries: valResult?.nationalSeries,
+        officialNationalSeries: officialNationalSeries(japanByKey.get(key) ?? null),
       };
     }
   }
 
   if (Object.keys(indicatorDataMap).length === 0) return null;
 
-  return { indicatorDataMap, topology, ...(metricGroups ? { metricGroups } : {}) };
+  return { indicatorDataMap, ...(metricGroups ? { metricGroups } : {}) };
+}
+
+type JapanSeries = Awaited<ReturnType<typeof readJapanSeries>>;
+
+/** 公式の全国の系列の最新の値 (年の新しい行) */
+function officialNationalValue(artifact: JapanSeries): number | undefined {
+  const rows = artifact?.rows.filter((row) => Number.isFinite(row.value)) ?? [];
+  if (rows.length === 0) return undefined;
+  return [...rows].sort((a, b) => a.yearCode.localeCompare(b.yearCode)).at(-1)!.value;
+}
+
+/** 公式の全国の系列を年の順に (無ければ undefined) */
+function officialNationalSeries(artifact: JapanSeries): { year: number; value: number }[] | undefined {
+  const points = (artifact?.rows ?? [])
+    .filter((row) => Number.isFinite(row.value))
+    .map((row) => ({ year: Number(row.yearCode.slice(0, 4)), value: row.value }))
+    .filter((p) => Number.isFinite(p.year))
+    .sort((a, b) => a.year - b.year);
+  return points.length > 0 ? points : undefined;
 }

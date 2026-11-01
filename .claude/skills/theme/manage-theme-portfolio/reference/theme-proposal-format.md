@@ -55,7 +55,7 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
    - remove は「別テーマに主担当がある」「推移を描けない」など視点で理由を書く。
 5. **表 2: 現行チャート・カード・章** — 3 つの小表に分ける。
    - チャート: `componentKey | 提案 | 理由 / 実装差分`。
-   - カード: `key | 提案 | 内容` (new / revise / merge。merge は残す key と `comparisonYear` を書く)。
+   - カード: `key | 提案 | 内容` (new / revise / merge。merge は残す key と見せ方 (推移・数値・男女・構成比) を書く。47 都道府県の比較はランキングに任せる)。
    - 章: `順 | 章 | 提案` (改題・説明文の追加・章ごと外す)。
 6. **表 3: 不採用候補** — `rankingKey / 候補 | reason | reconsider condition`。rankingKey が実在する候補は、実装時に catalog の `rejectedCandidates` にも残す。
 7. **想定実装差分と検証** — 編集するファイル、R2 に影響するもの (page-components・観測値)、件数基準の更新、検証コマンド、デプロイの条件。

@@ -116,6 +116,43 @@ describe('商用一次資料への置換後も旧stagingを拒否する', () => 
       }
     });
   }
+  describe('市区町村だけの手動指標は cities.json を出典の版と年で検査する', () => {
+    const key = 'nursery-waiting-children-rate';
+    const metric = METRICS_REGISTRY[key];
+    const input = metric.source.kind === 'external' ? metric.source.config! : {};
+    const makePayload = () => ({
+      metricKey: key,
+      rows: [
+        { areaCode: '13381', yearCode: String(input.dataDate).slice(0, 4), value: 24.4898 as number | null },
+        { areaCode: '01100', yearCode: String(input.dataDate).slice(0, 4), value: 0 as number | null },
+        { areaCode: '47357', yearCode: String(input.dataDate).slice(0, 4), value: null as number | null },
+      ],
+      meta: { rowCount: 3, recipe: buildRecipe(metric), source: {
+        sourceSha256: input.sourceSha256, sha256: input.sourceSha256, dataDate: input.dataDate,
+      } },
+    });
+    const check = (payload: unknown, file = 'cities.json') => assertKsjPublicAssetsAllowed(
+      [`app/stats/${key}/${file}`], () => Buffer.from(JSON.stringify(payload)),
+    );
+    it('現行版を許可する', () => {
+      expect(() => check(makePayload())).not.toThrow();
+    });
+    it('旧版・出典欠落・重複・県コード・負の値を拒否する', () => {
+      const oldYear = makePayload(); oldYear.rows[0].yearCode = '2024';
+      const oldRecipe = makePayload(); oldRecipe.meta.recipe.configHash = 'stale';
+      const wrongSource = makePayload(); wrongSource.meta.source.sha256 = 'stale';
+      const duplicate = makePayload(); duplicate.rows[1].areaCode = '13381';
+      const prefecture = makePayload(); prefecture.rows[1].areaCode = '13000';
+      const negative = makePayload(); negative.rows[0].value = -1;
+      const countMismatch = makePayload(); countMismatch.meta.rowCount = 4;
+      for (const payload of [{}, oldYear, oldRecipe, wrongSource, duplicate, prefecture, negative, countMismatch]) {
+        expect(() => check(payload)).toThrow('一次資料の市区町村 snapshot');
+      }
+    });
+    it('都道府県の values.json は従来どおり 47 県保存則で拒否する', () => {
+      expect(() => check(makePayload(), 'values.json')).toThrow('一次資料移行後の旧版');
+    });
+  });
   it('無関係な大容量assetは読み込まない', () => {
     assertKsjPublicAssetsAllowed(['app/geo/example/item.json'], () => {
       throw new Error('不要なbody read');

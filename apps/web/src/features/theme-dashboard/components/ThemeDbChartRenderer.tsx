@@ -7,6 +7,7 @@ import { ChartLegendLeadProvider } from '@stats47/visualization/d3/chart-legend-
 
 import { ChartEmptyState, ChartErrorState, ChartLoading } from '@/components/charts/ChartState';
 import type { PageComponent } from '@/components/stat-charts';
+import { STAT_META_CLASS, STAT_UNIT_CLASS, STAT_VALUE_CLASS } from '@/components/surface';
 
 import { loadThemeChartResultBatched } from '../lib/batched-theme-chart-result';
 import { type ThemeChartLoadResult } from '../lib/theme-chart-result';
@@ -123,6 +124,16 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
   }
 
   const { result } = loadResult;
+  // 全国のページで 47 県の平均しか描けない図は出さない (47 県の平均を全国として見せない。2026-11-01 オーナー決定)。
+  // 包むカード (ChartPanel) はこの印を見て自分ごと隠れる
+  if (
+    prefCode === '00000' &&
+    'scopeLabel' in result.contract &&
+    result.contract.scopeLabel === '47都道府県平均'
+  ) {
+    return <div hidden data-national-average-hidden data-theme-component-key={chart.componentKey} />;
+  }
+  const headline = result.type === 'line' ? latestHeadline(result.data) : null;
   const observationLabel = `${
     'geography' in result.contract && result.contract.geography
       ? result.contract.geography
@@ -151,20 +162,47 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
       >
         {observationLabel}
       </p>
+      {/* 見本のチャートのカード: 本文の最初に最新の値を大きく、横に前回からの増減 (2026-11-01) */}
+      {headline ? (
+        <p className="mb-2 flex items-baseline gap-2" data-chart-headline>
+          <span className={STAT_VALUE_CLASS}>
+            {headline.value.toLocaleString('ja-JP', { maximumFractionDigits: 2 })}
+            {result.contract.unit ? <span className={STAT_UNIT_CLASS}>{formatUnitForDisplay(result.contract.unit)}</span> : null}
+          </span>
+          {headline.change !== null ? (
+            <span className={STAT_META_CLASS}>
+              {headline.change > 0 ? '+' : ''}
+              {headline.change.toLocaleString('ja-JP', { maximumFractionDigits: 2 })} ({headline.previousLabel}から)
+            </span>
+          ) : null}
+        </p>
+      ) : null}
       <ChartLegendLeadProvider lead={observationLabel}>
         <ThemeChartResultRenderer chartResult={result} />
       </ChartLegendLeadProvider>
-      {'scopeLabel' in result.contract &&
-      result.contract.scopeLabel === '47都道府県平均' ? (
-        <p
-          className="mt-2 text-xs text-muted-foreground"
-          data-national-average-label
-        >
-          表示値は全国値ではなく、値が公表されている都道府県の単純平均です。
-        </p>
-      ) : null}
     </div>
   );
+}
+
+/**
+ * 折れ線の最初の系列の最新の値と、1 つ前の観測からの増減 (系列が 1 本のときだけ。複数本はどの値か決まらないので出さない)
+ */
+function latestHeadline(data: {
+  xAxisKey: string;
+  data: Array<Record<string, string | number>>;
+  lines: Array<{ dataKey: string }>;
+}): { value: number; change: number | null; previousLabel: string } | null {
+  if (data.lines.length !== 1) return null;
+  const key = data.lines[0].dataKey;
+  const points = data.data.filter((row) => typeof row[key] === 'number' && Number.isFinite(row[key] as number));
+  const last = points.at(-1);
+  if (!last) return null;
+  const previous = points.at(-2);
+  return {
+    value: last[key] as number,
+    change: previous ? (last[key] as number) - (previous[key] as number) : null,
+    previousLabel: previous ? String(previous[data.xAxisKey]) : '',
+  };
 }
 
 function parseMarkdownSectionComponentProps(

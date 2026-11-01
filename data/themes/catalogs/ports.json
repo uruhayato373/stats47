@@ -52,7 +52,7 @@
     {
       "rankingKey": "maritime-import-export-cargo",
       "shortLabel": "海上出入貨物(統計体系)",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -141,11 +141,11 @@
         "port-cargo-total",
         "port-container-count"
       ],
-      "relatedChartKeys": [
-        "ports-cargo-trend"
-      ],
       "relatedThemeKeys": [
         "roads"
+      ],
+      "relatedChartKeys": [
+        "ports-cargo-trend"
       ]
     },
     {
@@ -189,8 +189,7 @@
       "metricGroupKeys": [
         "cargo-1",
         "cargo-2"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "trade",
@@ -209,14 +208,6 @@
       "description": "入港隻数、総トン数、旅客人員は別の利用側面です。",
       "metricGroupKeys": [
         "ships-passengers"
-      ],
-      "chartKeys": []
-    },
-    {
-      "key": "candidate-86",
-      "title": "港湾と国際物流",
-      "metricGroupKeys": [
-        "candidate-86-1"
       ]
     }
   ],
@@ -261,16 +252,6 @@
       ],
       "defaultCheckedKeys": [
         "port-inbound-ships"
-      ]
-    },
-    {
-      "key": "candidate-86-1",
-      "title": "海上出入貨物",
-      "rankingKeys": [
-        "maritime-import-export-cargo"
-      ],
-      "defaultCheckedKeys": [
-        "maritime-import-export-cargo"
       ]
     }
   ]

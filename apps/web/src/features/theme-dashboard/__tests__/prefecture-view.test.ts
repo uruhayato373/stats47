@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { PREFECTURE_SET_LABEL, toPrefectureView } from "../types";
+import { NATIONAL_REGION_LABEL, toPrefectureView } from "../types";
 
 describe("toPrefectureView", () => {
   it("未選択 (null) は prefecture-set になる ('00000' を作らない)", () => {
@@ -21,9 +21,8 @@ describe("toPrefectureView", () => {
     }
   });
 
-  it("prefecture-set の表示名は「47都道府県」であり「全国」ではない", () => {
-    expect(PREFECTURE_SET_LABEL).toBe("47都道府県");
-    expect(PREFECTURE_SET_LABEL).not.toContain("全国");
+  it("県を選んでいないときの地域名は「全国」(テーマは 1 つの地域を見せる。2026-10-31)", () => {
+    expect(NATIONAL_REGION_LABEL).toBe("全国");
   });
 
   it("prefecture-set は e-Stat 全国コード '00000' を一切含まない", () => {

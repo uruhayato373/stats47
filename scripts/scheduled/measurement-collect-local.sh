@@ -36,11 +36,7 @@ git add data/authenticated/latest.json data/authenticated/revenue-history.json d
 if ! git diff --cached --quiet; then
   # データだけの記録なので pre-commit (型検査など数分) は通さない。CI の record job も同じ扱いだった。
   git -c core.hooksPath=/dev/null commit --quiet -m 'chore(metrics): authenticated measurement status (Mac)'
-  for attempt in 1 2 3; do
-    if git pull --quiet --rebase origin develop && git push --quiet origin HEAD:develop; then break; fi
-    if [ "$attempt" = 3 ]; then exit 1; fi
-    sleep 5
-  done
+  push_clone_records measurement || exit 1
 fi
 
 # 取得元に失敗があれば Issue で知らせ、全件そろえば閉じる (CI の record job と同じ規則)。

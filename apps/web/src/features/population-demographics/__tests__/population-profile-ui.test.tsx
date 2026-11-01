@@ -6,7 +6,7 @@ import {
   type SingleHouseholdsProfile,
   type FiveYearResidenceProfile,
 } from "@stats47/data-configs/theme-catalog";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
@@ -183,14 +183,15 @@ describe("synthetic profileとカードの同一計算", () => {
   });
 });
 describe("人口移動の共通県選択と男女・年齢・相手県", () => {
-  it("全国47県から東京46相手県・沖縄・全国へ同じsnapshotで切り替わる", () => {
+  it("全国の計から東京46相手県・沖縄・全国へ同じsnapshotで切り替わる", () => {
     const { container } = render(
       <Context>
         <ThemeMigrationDemographicsClient snapshot={migration} />
       </Context>,
     );
+    // 全国は全国の計だけを出し、47 県の行を並べない (2026-10-31。県の比較はランキングのページ)
     expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
-      47,
+      0,
     );
     expect(container.querySelector("[data-total-inbound]")?.textContent).toBe(
       "2,515,731",
@@ -213,7 +214,7 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "全国へ切替" }));
     expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(
-      47,
+      0,
     );
   });
   it("男性20〜24歳・相手北海道の流入方向を取り違えない", async () => {
@@ -361,19 +362,20 @@ describe("取得境界と出典", () => {
       expect(screen.getByRole("status")).toBeTruthy();
     });
   }
-  it("単独世帯・居住地のChartFooterが対応原表を指す", () => {
+  // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
+  it.each([
+    ["単独世帯", () => household, /12-1表/, "0003445081"],
+    ["居住地", () => residence, /第1表/, "0003447398"],
+  ] as const)("%sのChartFooterが対応原表を指す", async (_name, snapshotOf, linkName, tableId) => {
+    const user = userEvent.setup();
     render(
       <Context>
-        <ThemePopulationPartitionClient snapshot={household} />
-        <ThemePopulationPartitionClient snapshot={residence} />
+        <ThemePopulationPartitionClient snapshot={snapshotOf()} />
       </Context>,
     );
-    expect(
-      screen.getByRole("link", { name: /12-1表/ }).getAttribute("href"),
-    ).toContain("0003445081");
-    expect(
-      screen.getByRole("link", { name: /第1表/ }).getAttribute("href"),
-    ).toContain("0003447398");
+    await user.click(screen.getByRole("button", { name: "出典・指標の定義" }));
+    const sheet = within(await screen.findByRole("dialog"));
+    expect(sheet.getByRole("link", { name: linkName }).getAttribute("href")).toContain(tableId);
   });
   it("若年章は同じ人口移動表の章へリンクする", () => {
     render(<ThemeYoungMigrationLink />);

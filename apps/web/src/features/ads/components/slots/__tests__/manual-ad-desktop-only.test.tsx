@@ -9,6 +9,7 @@ import { SITE } from "@stats47/types";
 import { render } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import { AdSenseAd, AdSenseScript } from "@/lib/google-adsense";
 import * as slotConstants from "@/lib/google-adsense/constants";
 
@@ -57,7 +58,7 @@ describe("AdSense停止中の契約", () => {
   it("環境変数がtrueでもAdSense本体とscriptを生成しない", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
-    const ad = render(<AdSenseAd format="article" slotId="1234567890" />);
+    const ad = render(<AdSenseAd format="article" slotId="1234567890" slotBox={adSlotBox("adsense-body")} />);
     const script = render(<AdSenseScript adFreePathPrefixes={[]} />);
 
     expect(ad.container).toBeEmptyDOMElement();
@@ -98,7 +99,7 @@ describe("AdSense再開後の契約", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
     const { container } = render(
-      <AdSenseAd format="article" slotId={slotConstants.BLOG_ARTICLE_INLINE.slotId} lazyLoad={false} />,
+      <AdSenseAd format="article" slotId={slotConstants.BLOG_ARTICLE_INLINE.slotId} lazyLoad={false} slotBox={adSlotBox("adsense-body")} />,
     );
     const ins = container.querySelector("ins.adsbygoogle");
 
@@ -107,17 +108,23 @@ describe("AdSense再開後の契約", () => {
     expect(ins?.getAttribute("data-ad-slot")).toBe(slotConstants.BLOG_ARTICLE_INLINE.slotId);
   });
 
-  it("全フォーマットの広告タグが外枠の幅いっぱいに広がる", () => {
+  it("広告タグは台帳の箱の幅 (300px) を持ち、0 幅に縮まない", () => {
     // 外枠は flex-col + items-center。幅を明示しない ins は 0 幅に縮み、AdSense が
     // 「No slot size for availableWidth=0」を投げて枠ごと消える (記事内広告で本番に出た)。
+    // 2026-10-31 から AdSense は全て 300×250 (台帳の箱)。表示広告は固定サイズの広告コード、記事内広告は幅 300px
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
 
-    for (const format of ["article", "multiplex", "rectangle"] as const) {
+    for (const format of ["article", "rectangle"] as const) {
       const { container, unmount } = render(
-        <AdSenseAd format={format} slotId="1234567890" lazyLoad={false} />,
+        <AdSenseAd format={format} slotId="1234567890" lazyLoad={false} slotBox={adSlotBox("adsense-body")} />,
       );
       const ins = container.querySelector<HTMLElement>("ins.adsbygoogle");
-      expect(ins?.style.width, format).toBe("100%");
+      expect(ins?.style.width, format).toBe("300px");
+      if (format === "rectangle") {
+        // 固定サイズの広告コード: 高さも固定し、幅に合わせて伸ばす指定 (data-ad-format) を付けない
+        expect(ins?.style.height).toBe("250px");
+        expect(ins?.hasAttribute("data-ad-format")).toBe(false);
+      }
       unmount();
     }
   });
@@ -131,6 +138,12 @@ describe("AdSense再開後の契約", () => {
 
     expect(slotIds.length).toBeGreaterThanOrEqual(10);
     expect(slotIds.every((id) => /^\d{10}$/.test(id))).toBe(true);
-    expect(new Set(slotIds).size).toBe(slotIds.length);
+    // 一時的な例外 (2026-10-31): ページ末の 2 枠は関連コンテンツ型を固定の大きさにできないので、表示広告のユニットを
+    // 借りている。専用の表示広告ユニットを作ったら外す (backlog ADSENSE-FIXED-UNITS-01)。例外を増やさない
+    const BORROWED = new Set(["9435960671", "8298138821"]);
+    const counts = new Map<string, number>();
+    for (const id of slotIds) counts.set(id, (counts.get(id) ?? 0) + 1);
+    const shared = [...counts].filter(([, n]) => n > 1).map(([id]) => id);
+    expect(shared.every((id) => BORROWED.has(id) && counts.get(id) === 2), shared.join(",")).toBe(true);
   });
 });

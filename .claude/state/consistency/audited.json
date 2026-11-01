@@ -1,7 +1,7 @@
 {
-  "hash": "b733e86c9c3327577bf76f1147e187f2c5e1aec1b672333600a31ad6af758cf1",
-  "audited_at": "2026-10-29T11:49:28",
+  "hash": "ec5eb70dbe69c2ed554e47ac4551d052c0ddf0bb49968279657ffad6ea22e7e0",
+  "audited_at": "2026-10-31T23:54:35",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md"
+    ".claude/rules/chart-component-standards.md"
   ]
 }

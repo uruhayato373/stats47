@@ -91,12 +91,12 @@ function findSingleYearTrends(
       });
     }
     for (const group of c.metricGroups ?? []) {
-      if (group.comparisonYear) continue;
-      if (group.rankingKeys.length === 0 || !group.rankingKeys.every(isSingleYear)) continue;
+      // 1 指標の単年カードは数値と 47 都道府県の中の位置で見せる (2026-10-31)。数えるのは推移の切り替えカードだけ
+      if (group.rankingKeys.length < 2 || !group.rankingKeys.every(isSingleYear)) continue;
       hits.push({
         themeKey: c.key,
         target: group.key,
-        detail: `カード「${group.title}」の指標がすべて 1 年分で推移を描けない (e-Stat で年を広げられるか確かめるか、comparisonYear を付けた比較カードにする)`,
+        detail: `カード「${group.title}」の指標がすべて 1 年分で推移を描けない (e-Stat で年を広げられるか確かめるか、1 指標ずつの数値カードに分ける)`,
       });
     }
   }

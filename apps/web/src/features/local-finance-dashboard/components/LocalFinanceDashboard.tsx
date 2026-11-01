@@ -5,19 +5,10 @@ import type { ReactNode } from 'react';
 
 
 import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from '@stats47/area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartLegend } from '@/components/charts/ChartLegend';
 import { getChartColors } from '@/components/charts/ChartPalette';
@@ -123,39 +114,7 @@ export function LocalFinanceDashboard({
     ? latest.fundAdjust + latest.fundRedemption + latest.fundOther
     : 0;
 
-  const comparisonTable = (
-    columns: { label: string; format: (record: YearRecord) => string }[]
-  ) => (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>都道府県</TableHead>
-          {columns.map((column) => (
-            <TableHead key={column.label} className="text-right!">{column.label}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {Object.entries(cards.cards).map(([code, card]) => {
-          const record = card.years[String(latestYear)];
-          return (
-            <TableRow key={code}>
-              <TableCell>
-                <Link href={`/themes/local-finance?pref=${code}000`} className="text-primary hover:underline">
-                  {card.name}
-                </Link>
-              </TableCell>
-              {columns.map((column) => (
-                <TableCell key={column.label} className="text-right tabular-nums">
-                  {record ? column.format(record) : '—'}
-                </TableCell>
-              ))}
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
-  );
+  // 県を選んでいないときに 47 都道府県を並べていた比較の表は外した (2026-10-31。比較はランキングのページ)
   const embedded: Record<LocalFinanceEmbeddedKey, ReactNode> = {
     'finance-overview': prefCode ? (
         <StatTileGrid>
@@ -191,11 +150,7 @@ export function LocalFinanceDashboard({
             <MiniBarChart points={lineSeries('localDebt', OKU)} />
           </StatTile>
         </StatTileGrid>
-    ) : comparisonTable([
-      { label: '歳入総額', format: (record) => oku(record.revenue) },
-      { label: '歳出総額', format: (record) => oku(record.expenditure) },
-      { label: '実質収支', format: (record) => oku(record.realBalance) },
-    ]),
+    ) : null,
     'finance-sustainability': prefCode ? (
         <StatTileGrid>
           {RATIO_METRICS.map((meta) => {
@@ -230,10 +185,7 @@ export function LocalFinanceDashboard({
             );
           })}
         </StatTileGrid>
-    ) : comparisonTable(RATIO_METRICS.map((metric) => ({
-      label: metric.label,
-      format: (record) => `${record[metric.key].toFixed(metric.decimals)}${formatUnitForDisplay(metric.unit)}`,
-    }))),
+    ) : null,
     'finance-flow': prefCode ? (
       <>
         <p className="mb-3 text-sm text-muted-foreground">
@@ -264,7 +216,7 @@ export function LocalFinanceDashboard({
     <div className="space-y-8 py-2">
       <div className="border-b border-border pb-3">
         <p className="font-semibold text-foreground">
-          {prefCode ? `${prefName}の地方財政` : '47都道府県の決算比較'}
+          {prefCode ? `${prefName}の地方財政` : '全国の地方財政'}
           <span className="ml-2 text-base font-normal text-muted-foreground">{latestYear}年度</span>
         </p>
         <ChartFooter

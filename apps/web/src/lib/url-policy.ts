@@ -20,8 +20,8 @@ import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { CATEGORY_KEYS, type CategoryKey } from '@stats47/data-configs/categories';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
-  KNOWN_MUNICIPALITY_THEME_SLUGS,
   isMunicipalityPrefectureRankingKey,
+  isMunicipalityThemePageSlug,
 } from '@stats47/data-configs/geo-scope';
 
 import { isPublishableCity } from '@/features/area-profile/constants/publishable-cities';
@@ -159,8 +159,8 @@ export const UrlPolicy = {
     isKnown: (slug: string): boolean => KNOWN_JAPAN_SLUGS.has(slug),
   },
   municipality: {
-    isKnownTheme: (slug: string): boolean =>
-      KNOWN_MUNICIPALITY_THEME_SLUGS.has(slug),
+    // 「全国の市区町村を比べる」ページの slug (都道府県のテーマ名。2026-10-31 IA-REGION-THEME-01)
+    isKnownTheme: (slug: string): boolean => isMunicipalityThemePageSlug(slug),
     isKnownRanking: (key: string): boolean =>
       KNOWN_MUNICIPALITY_RANKING_KEYS.has(key),
     /**

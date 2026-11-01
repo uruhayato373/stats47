@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
+import { BreakdownDonut } from '@/components/charts/BreakdownDonut';
 import { ChartEmptyState, ChartLoading } from '@/components/charts/ChartState';
 
 import {metricSeriesDomain} from '@/lib/metric-presentation';
@@ -37,17 +38,6 @@ const D3MixedChart = dynamic(
   () =>
     import('@stats47/visualization/d3/MixedChart').then(
       (mod) => mod.MixedChart
-    ),
-  {
-    ssr: false,
-    loading: () => <ChartLoading height={200} />,
-  }
-);
-
-const DonutChart = dynamic(
-  () =>
-    import('@stats47/visualization/d3/DonutChart').then(
-      (mod) => mod.DonutChart
     ),
   {
     ssr: false,
@@ -213,41 +203,17 @@ function DonutResultChart({ result }: { result: DonutResult }) {
     return <ChartEmptyState message="構成データがありません" />;
   }
 
-  const total = data.reduce(
-    (sum: number, d: { value: number }) => sum + d.value,
-    0
-  );
-  const topItem = data[0];
-  const topPct = total > 0 ? ((topItem.value / total) * 100).toFixed(1) : '0';
-
+  // 構成比の図と同じ共通の内訳の図で描く (2026-11-01。旧: 中央に 1 位の割合、下に 10px の手書きの凡例)
   return (
-    <>
-      {/* ★同上。DonutChart は正方形なので width/height で上限 200px に絞る */}
-      <DonutChart
-        data={data.map((d: { name: string; value: number; color: string }) => ({
-          ...d,
-        }))}
-        centerText={`${topPct}%`}
-        width={200}
-        height={200}
-      />
-      <div className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1">
-        {data
-          .slice(0, 5)
-          .map((d: { name: string; value: number; color: string }) => (
-            <div
-              key={d.name}
-              className="flex items-center gap-1 text-[10px] text-muted-foreground"
-            >
-              <span
-                className="inline-block h-2 w-2 rounded-full"
-                style={{ backgroundColor: d.color }}
-              />
-              {d.name} {total > 0 ? ((d.value / total) * 100).toFixed(1) : 0}%
-            </div>
-          ))}
-      </div>
-    </>
+    <BreakdownDonut
+      items={data.map((d: { name: string; value: number; color: string }) => ({
+        key: d.name,
+        label: d.name,
+        value: d.value,
+        color: d.color,
+      }))}
+      unit={result.contract.unit}
+    />
   );
 }
 

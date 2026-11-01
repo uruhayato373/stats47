@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from '@stats47/components/atoms/ui/sheet';
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, LayoutGrid } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { RailNavRow } from '@/components/surface';
@@ -73,7 +73,16 @@ interface Props {
   areaContext?: { areaCode: string };
   /** テーマ一覧。サーバーで `THEME_SWITCHER_THEMES` を渡す。 */
   themes: readonly ThemeSwitcherTheme[];
+  /**
+   * 開くボタンの形。button = 今のテーマ名の枠付きボタン / crumb = パンくずの段 (テーマ名 + ⌄) /
+   * icon = 題名の横のアイコン (2026-10-31 IA-REGION-THEME-01: パンくずとアイコンから同じ Sheet を開く)
+   */
+  trigger?: 'button' | 'crumb' | 'icon';
 }
+
+/** パンくずの段から Sheet を開くボタンの見た目 (地域の段と共有) */
+export const CRUMB_TRIGGER_CLASS =
+  'inline-flex items-center gap-0.5 rounded-sm px-1 -mx-1 text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring';
 
 /**
  * テーマ詳細ページ上部のテーマ切替 (2026-10-29 に Select + 「テーマ一覧」ボタンから Sheet 1 つにまとめた)。
@@ -82,7 +91,7 @@ interface Props {
  * テーマのリンクと、テーマ一覧 (`/themes`) への出口。選択中の都道府県 (Provider 配下) は各リンクへ引き継ぐ。
  * 系統に入っていないテーマは「その他」に並べ、どのテーマも Sheet から必ず辿れるようにする。
  */
-export function ThemeSwitcher({ currentThemeKey, areaContext, themes }: Props) {
+export function ThemeSwitcher({ currentThemeKey, areaContext, themes, trigger = 'button' }: Props) {
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
     themes,
@@ -103,13 +112,28 @@ export function ThemeSwitcher({ currentThemeKey, areaContext, themes }: Props) {
 
   return (
     <Sheet>
-      <SheetTrigger
-        aria-label="テーマを切り替える"
-        className={buttonVariants({ variant: 'outline', className: 'max-w-full justify-between' })}
-      >
-        <span className="truncate">{currentTitle ?? 'テーマ'}</span>
-        <ChevronDown aria-hidden="true" />
-      </SheetTrigger>
+      {trigger === 'icon' ? (
+        <SheetTrigger
+          aria-label="テーマを変える"
+          title="テーマを変える"
+          className={buttonVariants({ variant: 'outline', size: 'icon-sm' })}
+        >
+          <LayoutGrid aria-hidden="true" />
+        </SheetTrigger>
+      ) : trigger === 'crumb' ? (
+        <SheetTrigger aria-label={`テーマを変える (今: ${currentTitle ?? 'テーマ'})`} className={CRUMB_TRIGGER_CLASS}>
+          <span className="truncate">{currentTitle ?? 'テーマ'}</span>
+          <ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
+        </SheetTrigger>
+      ) : (
+        <SheetTrigger
+          aria-label="テーマを切り替える"
+          className={buttonVariants({ variant: 'outline', className: 'max-w-full justify-between' })}
+        >
+          <span className="truncate">{currentTitle ?? 'テーマ'}</span>
+          <ChevronDown aria-hidden="true" />
+        </SheetTrigger>
+      )}
       {/* サイトの上端のヘッダー (sticky・z-200) と Cookie 同意 (z-[1100]) より前に出す。Sheet の既定は z-50 */}
       <SheetContent side="right" className="z-[1200]! overflow-y-auto">
         <SheetHeader>

@@ -1,5 +1,5 @@
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import type { FinanceFlowData } from '@/features/finance-flow';
@@ -29,21 +29,25 @@ describe('地方財政の地域・年次整合', () => {
     expect(screen.getByText(/決算カードは2024年度/)).toHaveTextContent('年度が異なる場合があります');
     expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
   });
-  it('47都道府県表示で東京を代入せず県別比較表を表示する', () => {
+  // 県を選んでいないときに 47 都道府県を並べていた比較の表は外した (2026-10-31。比較はランキングのページ)
+  it('県を選んでいないときは東京を代入せず、県別の比較表も出さない', () => {
     render(<LocalFinanceDashboard cards={cards} sections={sections} prefCode={null} />);
     expect(screen.queryByTestId('flow')).not.toBeInTheDocument();
-    for (const link of screen.getAllByRole('link', { name: '兵庫県' })) {
-      expect(link).toHaveAttribute('href', '/themes/local-finance?pref=28000');
-    }
-    expect(screen.getAllByRole('table')).toHaveLength(2);
+    expect(screen.queryByRole('table')).toBeNull();
     for (const section of sections) expect(document.getElementById(`theme-section-${section.key}`)).not.toBeNull();
   });
-  it('Catalogの章順・文言を使い、専用ブロックを一度ずつ表示する', () => {
+  it('Catalogの章順・文言を使い、専用ブロックを一度ずつ表示する', async () => {
     const reordered = [...sections].reverse().map((section) => ({ ...section, title: `問い: ${section.title}` }));
     const { container } = render(<LocalFinanceDashboard cards={cards} sections={reordered} prefCode="28" />);
     expect(screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent)).toEqual(reordered.map((section) => section.title));
     expect(container.querySelectorAll('[data-theme-embedded-key]')).toHaveLength(3);
     expect(screen.getAllByTestId('flow')).toHaveLength(1);
-    expect(screen.getByRole('link', { name: '財政力指数の定義・ランキング' })).toHaveAttribute('href', '/ranking/fiscal-strength-index-prefecture');
+    // 指標の定義・ランキングへのリンクはボタンから開く Sheet の中 (2026-10-30)
+    const opener = screen.getAllByRole('button', { name: '出典・指標の定義' }).find((button) =>
+      button.closest('section')?.textContent?.includes('財政力指数')
+    );
+    fireEvent.click(opener!);
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByRole('link', { name: '財政力指数の定義・ランキング' })).toHaveAttribute('href', '/ranking/fiscal-strength-index-prefecture');
   });
 });

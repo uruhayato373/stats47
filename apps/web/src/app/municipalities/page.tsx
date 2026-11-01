@@ -8,7 +8,10 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   MUNICIPALITY_THEME_CATALOGS,
+  MUNICIPALITY_THEME_PAGE_SLUGS,
   getMunicipalityMetricAvailability,
+  municipalityMetricKeysForPrefectureTheme,
+  municipalityThemePageSlugFor,
 } from '@stats47/data-configs/geo-scope';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
@@ -24,6 +27,8 @@ import {
 } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
+
+import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -73,7 +78,13 @@ export default function MunicipalitiesHubPage() {
   const policy = buildMunicipalityEntityPolicy();
   const entityCount = listPublishableMunicipalities(policy).length;
   const themes = Object.values(MUNICIPALITY_THEME_CATALOGS);
-  const activeThemes = themes.filter((theme) => theme.status === 'active');
+  // 公開中のテーマは都道府県のテーマ名のページ (対応する市区町村テーマの指標をまとめる。2026-10-31 IA-REGION-THEME-01)
+  const activeThemes = MUNICIPALITY_THEME_PAGE_SLUGS.flatMap((slug) => {
+    const prefectureTheme = ALL_THEMES.find((t) => t.themeKey === slug);
+    return prefectureTheme
+      ? [{ slug, title: prefectureTheme.title, metricKeys: municipalityMetricKeysForPrefectureTheme(slug) }]
+      : [];
+  });
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
   const prefectures = fetchPrefectures();
   const activeThemeBySlug = new Map(
@@ -81,7 +92,7 @@ export default function MunicipalitiesHubPage() {
   );
   const starterThemeItems = MUNICIPALITY_STARTER_THEMES.flatMap(
     ({ slug, imageSrc }): RailLinksCardItem[] => {
-      const theme = activeThemeBySlug.get(slug);
+      const theme = activeThemeBySlug.get(municipalityThemePageSlugFor(slug) ?? slug);
       if (!theme) return [];
 
       return [

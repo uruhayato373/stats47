@@ -16,7 +16,7 @@ import { DepopulationMedicalMapClient } from "./DepopulationMedicalMapClient";
  * 旧 /gis-cross/depopulation-medical 独立ページを 2026-05-29 にテーマへ統合した際、
  * GIS オーバーレイ機能を失わないよう本セクションとして移設。
  * ThemeMigrationFlowSection と同型 (client + IntersectionObserver lazy)。
- * topology (~0.5-1MB) はスクロール到達時に server action で取得し、初期 SSR を膨らませない。
+ * サマリと地図はスクロール到達時に取得し、初期 SSR を膨らませない。
  */
 export function ThemeDepopulationMedicalSection() {
   const [visible, setVisible] = useState(false);
@@ -57,14 +57,11 @@ export function ThemeDepopulationMedicalSection() {
       </h2>
       <p className="mb-3 text-sm text-muted-foreground">
         県内の医療機関のうち過疎地域に立地する割合を 47 都道府県で可視化します。
-        地図の県をクリックすると、過疎地域（面）と医療機関（点）の重なりを詳細表示します。
+        地図か表の県を押すと、過疎地域（面）と医療機関（点）の重なりを詳細表示します。
       </p>
 
       {data ? (
-        <DepopulationMedicalMapClient
-          summary={data.summary}
-          topology={data.topology}
-        />
+        <DepopulationMedicalMapClient summary={data.summary} />
       ) : (
         <div
           className="w-full rounded-md border bg-muted"

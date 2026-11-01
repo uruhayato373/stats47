@@ -40,6 +40,7 @@ export function ThemeGeoLandslideExposureClient({
         />
       ) : null}
       <GeoLandslideSummary
+        regionOnly
         snapshot={snapshot}
         selectedAreaCode={selectedPrefectureCode}
         onSelectArea={setSelected}

@@ -11,14 +11,15 @@ import {
 } from "./helpers/render-test-contract";
 
 describe("opt-in render suite inventory", () => {
-  it("既存9 filesを固定し、全fileが実在する", () => {
-    expect(OPT_IN_RENDER_TEST_FILES).toHaveLength(9);
+  it("既存7 filesを固定し、全fileが実在する", () => {
+    // 2026-10-30 に使われていない散布図 (Scatterplot) を消して 9 → 7
+    expect(OPT_IN_RENDER_TEST_FILES).toHaveLength(7);
     for (const file of OPT_IN_RENDER_TEST_FILES) {
       expect(existsSync(resolve(__dirname, "../../..", file)), file).toBe(true);
     }
   });
 
-  it("RUN_RENDER_TESTS未設定では9 filesを除外し、opt-in時だけ全件を開く", () => {
+  it("RUN_RENDER_TESTS未設定では7 filesを除外し、opt-in時だけ全件を開く", () => {
     expect(renderTestExcludes(false)).toEqual(OPT_IN_RENDER_TEST_FILES);
     expect(renderTestExcludes(true)).toEqual([]);
   });

@@ -49,27 +49,17 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "freight-logistics-indicator-1",
-      "title": "JR貨物発送量",
+      "key": "road-freight-and-operators-1",
+      "title": "トラック事業者",
       "rankingKeys": [
-        "jr-freight-shipment"
+        "truck-operators"
       ],
       "defaultCheckedKeys": [
-        "jr-freight-shipment"
+        "truck-operators"
       ]
     },
     {
-      "key": "freight-logistics-indicator-2",
-      "title": "航空貨物輸送量",
-      "rankingKeys": [
-        "air-cargo-transport"
-      ],
-      "defaultCheckedKeys": [
-        "air-cargo-transport"
-      ]
-    },
-    {
-      "key": "freight-logistics-indicator-3",
+      "key": "road-freight-and-operators-2",
       "title": "貨物車数",
       "rankingKeys": [
         "number-of-freight-cars"
@@ -79,29 +69,53 @@
       ]
     },
     {
-      "key": "freight-logistics-indicator-4",
-      "title": "トラック事業者",
+      "key": "rail-freight-transport-1",
+      "title": "JR貨物発送量",
       "rankingKeys": [
-        "truck-operators"
+        "jr-freight-shipment"
       ],
       "defaultCheckedKeys": [
-        "truck-operators"
+        "jr-freight-shipment"
+      ]
+    },
+    {
+      "key": "air-cargo-transportation-1",
+      "title": "航空貨物輸送量",
+      "rankingKeys": [
+        "air-cargo-transport"
+      ],
+      "defaultCheckedKeys": [
+        "air-cargo-transport"
       ]
     }
   ],
   "sections": [
     {
-      "key": "freight-logistics-overview",
-      "title": "物流と貨物輸送を都道府県別に見る",
-      "description": "発送県と到着県の組合せを鉄道・自動車・海運・航空別に確認します。2024年度の貨物流動が基本ですが、海運は2024暦年のフレートトンです。単位と期間を分け、輸送機関横断の合計は作りません。",
+      "key": "road-freight-and-operators",
+      "title": "トラック事業者や貨物車両の供給体制は維持されているか",
+      "concern": "物流の2024年問題や人手不足の中で道路貨物を担う事業者や車両が十分か不安です。",
       "metricGroupKeys": [
-        "freight-logistics-indicator-1",
-        "freight-logistics-indicator-2",
-        "freight-logistics-indicator-3",
-        "freight-logistics-indicator-4"
+        "road-freight-and-operators-1",
+        "road-freight-and-operators-2"
       ],
       "embeddedSectionKeys": [
         "freight-od"
+      ]
+    },
+    {
+      "key": "rail-freight-transport",
+      "title": "モーダルシフトを支える鉄道貨物輸送の利用は進んでいるか",
+      "concern": "環境負荷軽減やドライバー不足に対応する鉄道貨物の活用が進んでいるか気になります。",
+      "metricGroupKeys": [
+        "rail-freight-transport-1"
+      ]
+    },
+    {
+      "key": "air-cargo-transportation",
+      "title": "緊急・高付加価値品を運ぶ航空貨物輸送の拠点機能はあるか",
+      "concern": "スピードが求められる高価格帯製品や緊急物資の航空輸送能力が気になります。",
+      "metricGroupKeys": [
+        "air-cargo-transportation-1"
       ]
     }
   ],

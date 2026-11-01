@@ -1,5 +1,5 @@
-import { SurfaceCard } from "@/components/surface";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
   ADSENSE_DISPLAY_ENABLED,
   RANKING_PAGE_FOOTER,
@@ -17,6 +17,7 @@ import {
 import { AdSenseAdWrapper } from "./AdSenseAdWrapper";
 import { AffiliateTextAdList } from "./AffiliateTextAdList";
 import { BannerAd } from "./BannerAd";
+import { AdCell } from "./slots/AdCell";
 import { VariantAdSlot } from "./VariantAdSlot";
 
 import type { AffiliateLocationCode } from "../types";
@@ -100,7 +101,8 @@ export async function AffiliateAdSlot({
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   //    ★ 2026-08-04: 上位 1 件の早期 return をやめ bannerLimit 件まで積む。
-  if (position === "sidebar" && affiliateCategory) {
+  //    意図軸が無いページは汎用の案件 (2026-10-31 オーナー決定「すべてのページに広告を出す」)
+  if (position === "sidebar") {
     const banners = (await resolveAffiliateBannersByVertical(
       affiliateCategory,
       Infinity,
@@ -160,11 +162,14 @@ export async function AffiliateAdSlot({
     position === "footer" ? RANKING_PAGE_FOOTER : SIDEBAR_AFFILIATE_FALLBACK;
 
   return (
-    <SurfaceCard className="p-3">
+    // カードで囲まない (2026-10-31)。右レールは余白 0 で 300px の幅を残し、ページ末は本文の広告のセルと同じ余白
+    <AdCell label="広告" className={position === "footer" ? undefined : "p-0"}>
       <AdSenseAdWrapper
         format={adSlot.format}
         slotId={adSlot.slotId}
+        // 箱は広告の枠の台帳 (本番の実測): ページ末は関連コンテンツ型、それ以外は右レールのレクタングル
+        slotBox={adSlotBox(position === "footer" ? "adsense-footer" : "adsense-rail-rect")}
       />
-    </SurfaceCard>
+    </AdCell>
   );
 }

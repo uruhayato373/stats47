@@ -201,3 +201,11 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 - 既存のPSI/Lighthouse: `.claude/skills/analytics/performance-improvement/SKILL.md` (別系統・変更しない)
 - URL/テンプレートSSOT: `apps/web/src/lib/url-policy.ts` / `apps/web/src/config/sitemap-segments.ts` (直接importせず、sitemap.xml経由で参照する)
 - テスト: `npm run page-quality:test`
+
+## 広告の配置のレイアウト確認 (ローカル・2026-10-31)
+
+広告の配置を画面の幅ごとに目で比べるための撮影。週次の監査とは別で、判定も通知もしない。
+`npm run dev:web:ad-preview` (広告の在庫を代わりの広告で満たす開発サーバー) のあと
+`npm run layout:review` (`.claude/scripts/page-quality/layout-review.ts`) が、9 種類のページ × `VIEWPORTS` の 7 幅を撮る。
+右レールが本文の下に積まれる幅では、今のまま・案 1 (積まれた右レールの広告を出さない)・案 2 (全幅の行にする) の 3 通りを撮る。
+撮影は `.local/layout-review/latest/` (git にも R2 にも置かない) に置き、管理画面の「レイアウト確認」(`/quality/layout-review`) で並べて見る。

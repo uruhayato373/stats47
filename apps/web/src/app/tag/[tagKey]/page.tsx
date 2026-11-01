@@ -7,7 +7,7 @@ import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
-import { FooterAdSlot, NativeAffiliateRow } from '@/features/ads';
+import { NativeAffiliateRow } from '@/features/ads';
 import { resolveAffiliateBanners } from '@/features/ads/server';
 import {
   listAllUniqueTags,
@@ -154,8 +154,6 @@ export default async function TagArticlesPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* コンテンツ末尾の全幅フッター広告 */}
-      <FooterAdSlot />
     </PageShell>
   );
 }

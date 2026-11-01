@@ -99,7 +99,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "water-services-indicator-1",
+      "key": "pipe-aging-rate-1",
       "title": "水道管路の経年化率",
       "rankingKeys": [
         "public-water-pipe-aging-rate"
@@ -109,17 +109,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-2",
-      "title": "水道管路の更新率",
-      "rankingKeys": [
-        "public-water-pipe-renewal-rate"
-      ],
-      "defaultCheckedKeys": [
-        "public-water-pipe-renewal-rate"
-      ]
-    },
-    {
-      "key": "water-services-indicator-3",
+      "key": "pipe-aging-rate-2",
       "title": "水道管路の総延長",
       "rankingKeys": [
         "public-water-pipe-length"
@@ -129,7 +119,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-4",
+      "key": "pipe-aging-rate-3",
       "title": "法定耐用年数を経過した水道管路延長",
       "rankingKeys": [
         "public-water-aged-pipe-length"
@@ -139,7 +129,17 @@
       ]
     },
     {
-      "key": "water-services-indicator-5",
+      "key": "pipe-renewal-pace-1",
+      "title": "水道管路の更新率",
+      "rankingKeys": [
+        "public-water-pipe-renewal-rate"
+      ],
+      "defaultCheckedKeys": [
+        "public-water-pipe-renewal-rate"
+      ]
+    },
+    {
+      "key": "pipe-renewal-pace-2",
       "title": "年度内に更新した水道管路延長",
       "rankingKeys": [
         "public-water-renewed-pipe-length"
@@ -149,7 +149,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-6",
+      "key": "water-sewerage-coverage-1",
       "title": "上水道給水人口比率",
       "rankingKeys": [
         "water-supply-population-ratio-2012on"
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-7",
+      "key": "water-sewerage-coverage-2",
       "title": "下水道処理人口普及率",
       "rankingKeys": [
         "sewerage-coverage-rate"
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-8",
+      "key": "water-supply-demand-1",
       "title": "上水道年間給水量",
       "rankingKeys": [
         "water-supply-annual-volume"
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "key": "water-services-indicator-9",
+      "key": "water-supply-demand-2",
       "title": "上水道施設能力",
       "rankingKeys": [
         "water-supply-capacity"
@@ -191,19 +191,40 @@
   ],
   "sections": [
     {
-      "key": "water-services-overview",
-      "title": "水道の持続性を都道府県別に見る",
-      "description": "2024年度の法適用水道について、経年管・更新管を同じ総延長で比較します。末端給水・用水供給・法適用簡易水道を含み、同一会計内簡易水道の内数は二重計上しません。法非適用・民営等は除外し、事業団体の所属県別で集計しています。管路の物理所在地別や破損確率ではありません。上水道給水量・能力と下水道普及率は対象を分けて読みます。",
+      "key": "pipe-aging-rate",
+      "title": "水道管の老朽化はどこまで進んでいるか",
+      "concern": "古くなった水道管の破裂や濁水事故が身近な地域で起きないか不安だ。",
       "metricGroupKeys": [
-        "water-services-indicator-1",
-        "water-services-indicator-2",
-        "water-services-indicator-3",
-        "water-services-indicator-4",
-        "water-services-indicator-5",
-        "water-services-indicator-6",
-        "water-services-indicator-7",
-        "water-services-indicator-8",
-        "water-services-indicator-9"
+        "pipe-aging-rate-1",
+        "pipe-aging-rate-2",
+        "pipe-aging-rate-3"
+      ]
+    },
+    {
+      "key": "pipe-renewal-pace",
+      "title": "老朽化した水道管の更新作業は追いついているか",
+      "concern": "老朽化が進む一方で水道管の交換や更新工事が間に合っているか心配だ。",
+      "metricGroupKeys": [
+        "pipe-renewal-pace-1",
+        "pipe-renewal-pace-2"
+      ]
+    },
+    {
+      "key": "water-sewerage-coverage",
+      "title": "上水道や下水道は生活圏にどれくらい普及しているか",
+      "concern": "住んでいる地域や移住先で水インフラ環境が十分に整っているか確かめたい。",
+      "metricGroupKeys": [
+        "water-sewerage-coverage-1",
+        "water-sewerage-coverage-2"
+      ]
+    },
+    {
+      "key": "water-supply-demand",
+      "title": "将来の需要に対して水道施設の規模は適正か",
+      "concern": "人口減少に伴い水道施設が過剰になり将来の管理費高騰に繋がらないか不安だ。",
+      "metricGroupKeys": [
+        "water-supply-demand-1",
+        "water-supply-demand-2"
       ]
     }
   ],

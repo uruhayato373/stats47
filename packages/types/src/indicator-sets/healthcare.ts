@@ -158,7 +158,7 @@ export const HEALTHCARE_SET: IndicatorSet = {
     {
       "rankingKey": "ambulance-transported-persons",
       "shortLabel": "救急自動車による搬送人員",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "ambulance-transported-deaths",

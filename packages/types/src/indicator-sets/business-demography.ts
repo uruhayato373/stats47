@@ -33,7 +33,7 @@ export const BUSINESS_DEMOGRAPHY_SET: IndicatorSet = {
     {
       "rankingKey": "business-opening-base-establishments",
       "shortLabel": "分母となる前年度末の適用事業所数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "nonprimary-enterprises-count",

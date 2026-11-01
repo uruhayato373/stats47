@@ -23,7 +23,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "criminal-recognition-count",
       "shortLabel": "認知件数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "violent-crime-per-100k",
@@ -73,7 +73,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "traffic-accident-count",
       "shortLabel": "事故件数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "traffic-accident-deaths-per-100-accidents",
@@ -143,12 +143,12 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "flood-damage-general-assets",
       "shortLabel": "水害一般資産等被害額",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "flood-affected-municipalities",
       "shortLabel": "水害被災市区町村数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "natural-disaster-deaths",

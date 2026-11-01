@@ -281,7 +281,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "local-services-indicator-1",
+      "key": "eating-out-and-accommodation-1",
       "title": "飲食店数（人口千人当たり）",
       "rankingKeys": [
         "restaurant-count-per-1000"
@@ -291,27 +291,19 @@
       ]
     },
     {
-      "key": "local-services-indicator-2",
-      "title": "ホテル営業施設数",
+      "key": "eating-out-and-accommodation-2",
+      "title": "ホテル営業施設数と客室数の推移",
       "rankingKeys": [
-        "number-of-hotel-facilities"
-      ],
-      "defaultCheckedKeys": [
-        "number-of-hotel-facilities"
-      ]
-    },
-    {
-      "key": "local-services-indicator-3",
-      "title": "ホテル営業施設客室数",
-      "rankingKeys": [
+        "number-of-hotel-facilities",
         "number-of-hotel-rooms"
       ],
       "defaultCheckedKeys": [
+        "number-of-hotel-facilities",
         "number-of-hotel-rooms"
       ]
     },
     {
-      "key": "local-services-indicator-4",
+      "key": "living-related-services-1",
       "title": "洗濯・理容・美容・浴場業の事業所数",
       "rankingKeys": [
         "laundry-beauty-bath-industry-establishments"
@@ -321,7 +313,7 @@
       ]
     },
     {
-      "key": "local-services-indicator-5",
+      "key": "living-related-services-2",
       "title": "洗濯・理容・美容・浴場業の従業者数",
       "rankingKeys": [
         "laundry-beauty-bath-industry-employees"
@@ -331,7 +323,7 @@
       ]
     },
     {
-      "key": "local-services-indicator-6",
+      "key": "living-related-services-3",
       "title": "洗濯・理容・美容・浴場業の企業売上高",
       "rankingKeys": [
         "laundry-beauty-bath-industry-revenue"
@@ -341,7 +333,7 @@
       ]
     },
     {
-      "key": "local-services-indicator-7",
+      "key": "living-related-services-4",
       "title": "洗濯・理容・美容・浴場業の企業純付加価値額",
       "rankingKeys": [
         "laundry-beauty-bath-industry-net-value-added"
@@ -351,7 +343,7 @@
       ]
     },
     {
-      "key": "candidate-120-1",
+      "key": "media-and-information-production-1",
       "title": "映像・音声・文字情報制作業の事業所数",
       "rankingKeys": [
         "media-production-establishments"
@@ -361,7 +353,7 @@
       ]
     },
     {
-      "key": "candidate-120-2",
+      "key": "media-and-information-production-2",
       "title": "映像・音声・文字情報制作業の従業者数",
       "rankingKeys": [
         "media-production-employees"
@@ -371,7 +363,7 @@
       ]
     },
     {
-      "key": "candidate-120-3",
+      "key": "media-and-information-production-3",
       "title": "映像・音声・文字情報制作業の企業売上高",
       "rankingKeys": [
         "media-production-revenue"
@@ -381,7 +373,7 @@
       ]
     },
     {
-      "key": "candidate-120-4",
+      "key": "media-and-information-production-4",
       "title": "映像・音声・文字情報制作業の企業純付加価値額",
       "rankingKeys": [
         "media-production-net-value-added"
@@ -391,7 +383,7 @@
       ]
     },
     {
-      "key": "candidate-120-5",
+      "key": "amusement-and-recreation-1",
       "title": "娯楽業の事業所数",
       "rankingKeys": [
         "amusement-industry-establishments"
@@ -401,7 +393,7 @@
       ]
     },
     {
-      "key": "candidate-120-6",
+      "key": "amusement-and-recreation-2",
       "title": "娯楽業の従業者数",
       "rankingKeys": [
         "amusement-industry-employees"
@@ -411,7 +403,7 @@
       ]
     },
     {
-      "key": "candidate-120-7",
+      "key": "amusement-and-recreation-3",
       "title": "娯楽業の企業売上高",
       "rankingKeys": [
         "amusement-industry-revenue"
@@ -421,7 +413,7 @@
       ]
     },
     {
-      "key": "candidate-120-8",
+      "key": "amusement-and-recreation-4",
       "title": "娯楽業の企業純付加価値額",
       "rankingKeys": [
         "amusement-industry-net-value-added"
@@ -433,32 +425,45 @@
   ],
   "sections": [
     {
-      "key": "local-services-overview",
-      "title": "飲食・生活関連サービスを都道府県別に見る",
-      "description": "飲食店数と、洗濯・理容・美容・浴場業の事業活動を比較します。事業所・従業者は2021年6月1日の事業所所在地別、売上・純付加価値は2020年の企業本所所在地別です。対象年と県への帰属が異なるため、両者を割って生産性とはしません。産業中分類78で、その他の生活関連サービス79と娯楽80を含みません。",
+      "key": "eating-out-and-accommodation",
+      "title": "飲食店や宿泊施設など街の賑わいや観光を支える基盤はあるか",
+      "concern": "外食や旅行・滞在のしやすさ、地域の賑わいを生む基盤が整っているか気になります。",
       "metricGroupKeys": [
-        "local-services-indicator-1",
-        "local-services-indicator-2",
-        "local-services-indicator-3",
-        "local-services-indicator-4",
-        "local-services-indicator-5",
-        "local-services-indicator-6",
-        "local-services-indicator-7"
+        "eating-out-and-accommodation-1",
+        "eating-out-and-accommodation-2"
       ]
     },
     {
-      "key": "candidate-120",
-      "title": "映像制作・娯楽関連産業の事業活動",
-      "description": "産業中分類41「映像・音声・文字情報制作業」と80「娯楽業」を別々に比較します。事業所・従業者は2021年6月1日の事業所所在地別、売上・純付加価値は2020年実績の企業本所所在地別です。対象と年が異なるため両者を割って生産性とはしません。金額は必要な回答が得られた企業等の集計で、文化産業全体や地域GDPではありません。",
+      "key": "living-related-services",
+      "title": "理美容や洗濯など身近な生活サービスの提供体制は維持されているか",
+      "concern": "日常の身近な生活衛生サービスの維持や地域での事業規模・雇用が気になります。",
       "metricGroupKeys": [
-        "candidate-120-1",
-        "candidate-120-2",
-        "candidate-120-3",
-        "candidate-120-4",
-        "candidate-120-5",
-        "candidate-120-6",
-        "candidate-120-7",
-        "candidate-120-8"
+        "living-related-services-1",
+        "living-related-services-2",
+        "living-related-services-3",
+        "living-related-services-4"
+      ]
+    },
+    {
+      "key": "media-and-information-production",
+      "title": "コンテンツ制作や出版など地域の情報発信・文化産業の規模はどうか",
+      "concern": "地域からの情報発信や映像・出版等クリエイティブ分野の雇用が十分か気になります。",
+      "metricGroupKeys": [
+        "media-and-information-production-1",
+        "media-and-information-production-2",
+        "media-and-information-production-3",
+        "media-and-information-production-4"
+      ]
+    },
+    {
+      "key": "amusement-and-recreation",
+      "title": "余暇や休日を楽しむ娯楽・レジャー産業の規模はどれくらいあるか",
+      "concern": "身近に楽しめる娯楽施設やレジャー産業がもたらす雇用・経済規模が気になります。",
+      "metricGroupKeys": [
+        "amusement-and-recreation-1",
+        "amusement-and-recreation-2",
+        "amusement-and-recreation-3",
+        "amusement-and-recreation-4"
       ]
     }
   ],

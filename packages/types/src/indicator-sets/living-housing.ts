@@ -123,7 +123,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "vacant-housing-rate",
       "shortLabel": "空き家率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "vacant-housing-excluding-rental-sale-secondary",
@@ -173,7 +173,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     {
       "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
       "shortLabel": "負債現在高",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "urban-planning-area",

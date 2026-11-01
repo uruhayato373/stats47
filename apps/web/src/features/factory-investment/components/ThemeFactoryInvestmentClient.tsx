@@ -26,10 +26,11 @@ export function ThemeFactoryInvestmentClient({
   snapshot: FactoryInvestmentSnapshot;
 }) {
   const { selectedPrefectureCode, selectedAreaName } = useThemePrefecture();
+  // 県のページはその県の行だけ。全国のページは全国の合計だけを出す (47 都道府県を並べない。2026-10-31)
   const rows = selectedPrefectureCode
     ? snapshot.rows.filter((row) => row.areaCode === selectedPrefectureCode)
-    : snapshot.rows;
-  const area = selectedPrefectureCode ? selectedAreaName : '全国・47都道府県';
+    : [];
+  const area = selectedPrefectureCode ? selectedAreaName : '全国';
   return (
     <div
       data-theme-component-key="factory-investment"
@@ -57,6 +58,7 @@ export function ThemeFactoryInvestmentClient({
           </span>{' '}
           百万円
         </p>
+        {rows.length > 0 && (
         <Table aria-label={`${area}の設備投資計画額`}>
           <TableCaption>
             県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。
@@ -87,6 +89,7 @@ export function ThemeFactoryInvestmentClient({
             ))}
           </TableBody>
         </Table>
+        )}
         <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
           {snapshot.notes.map((note) => (
             <li key={note}>{note}</li>

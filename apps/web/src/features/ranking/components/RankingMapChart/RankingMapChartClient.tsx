@@ -17,6 +17,7 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 import { ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
@@ -34,7 +35,10 @@ import {
   useThemedLeafletTile,
 } from "@/features/map-visualization/client";
 
+import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
+
 import { useTheme } from "@/hooks/useTheme";
+
 
 import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
 
@@ -57,10 +61,10 @@ const TileSwitcher = dynamic(
  * RankingMapCardのProps型定義
  */
 interface Props {
-  /** ランキング項目情報（色スキーム設定を含む） */
-  rankingItem: RankingItem;
-  /** ランキングデータ */
-  rankingValues: (StatsSchema | RankingValue)[];
+  /** ランキング項目情報（色スキーム設定を含む）。題名・単位・表示設定・値の表示だけを使う */
+  rankingItem: Pick<RankingItem, "title" | "unit" | "visualization" | "valueDisplay">;
+  /** ランキングデータ (地域コード・値・名前があればよい。市区町村のランキングの値もそのまま渡せる) */
+  rankingValues: ReadonlyArray<Pick<StatsSchema | RankingValue, "areaCode" | "value"> & { areaName?: string }>;
   /** 地域タイプ */
   areaType: AreaType;
   /** 選択中の都道府県コード */
@@ -79,6 +83,28 @@ interface Props {
   bare?: boolean;
   /** 地図の高さのクラス。既定は 500px 固定。bare で並べるときは親の高さに合わせる (h-full) */
   mapClassName?: string;
+  /**
+   * 地図の形を外から渡す (1 県の市区町村・1 市の行政区)。渡すと取得はしない。範囲はこの形に合わせる。
+   * 市区町村の地図と表をランキングと同じ部品で描くため (2026-10-30。旧: 市区町村専用の D3 の地図)
+   */
+  topology?: TopoJSONTopology | null;
+  /** 範囲を合わせる計算からだけ外す地域 (遠い島。描画からは外さない) */
+  fitExcludeCodes?: readonly string[];
+  /** 地域を押したときに移る先 (コード → URL)。無い地域は押しても移らない */
+  areaHrefs?: Readonly<Record<string, string>>;
+  /** 移るときのクリック計測の導線名 */
+  navSurface?: NavSurface;
+}
+
+/** 市区町村の地図は、連続色の指標を分位 5 段階で塗る (2026-10-28)。
+ * 県内に飛び抜けた自治体があると、等間隔では他がすべて一番薄い段に入る (愛知県の製造品出荷額: 豊田市 20.5 兆円・2 位 3.5 兆円で
+ * 53 市町村が同じ色)。分位は段の順番で色を付けるので、外れ値があっても下の段の色が薄まらない。発散色 (正負) は設定のまま */
+const CITY_MAP_CLASSES = 5;
+export function toCityMapConfig(
+  config: ReturnType<typeof rankingItemToMapConfig>,
+): ReturnType<typeof rankingItemToMapConfig> {
+  if (config.colorSchemeType !== "sequential") return config;
+  return { ...config, classification: { method: "quantile", classes: CITY_MAP_CLASSES } };
 }
 
 /**
@@ -99,15 +125,23 @@ export function RankingMapChartClient({
   headerActions,
   bare = false,
   mapClassName = "h-[500px]",
+  topology: providedTopology,
+  fitExcludeCodes,
+  areaHrefs,
+  navSurface,
 }: Props) {
+  const router = useRouter();
   const { theme } = useTheme();
   const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
 
-  const mapConfig = useMemo(() => rankingItemToMapConfig(rankingItem), [rankingItem]);
+  const mapConfig = useMemo(() => {
+    const config = rankingItemToMapConfig(rankingItem);
+    return areaType === "city" ? toCityMapConfig(config) : config;
+  }, [rankingItem, areaType]);
 
   // areaCode=00000（全国合計）と value=null を除外（型ガードで MapDataPoint[] に絞り込む）
   const filteredData = useMemo(() => {
-    return filterMapDataPoints(rankingValues);
+    return filterMapDataPoints([...rankingValues]);
   }, [rankingValues]);
 
   // --- 都道府県 TopoJSON のオンデマンド取得 ---
@@ -116,7 +150,7 @@ export function RankingMapChartClient({
   const [prefTopologyError, setPrefTopologyError] = useState(false);
 
   useEffect(() => {
-    if (prefTopology || prefTopologyError) return;
+    if (providedTopology !== undefined || prefTopology || prefTopologyError) return;
     let cancelled = false;
     fetch(PREFECTURE_TOPOJSON_PATH)
       .then((response) => {
@@ -132,7 +166,7 @@ export function RankingMapChartClient({
     return () => {
       cancelled = true;
     };
-  }, [prefTopology, prefTopologyError]);
+  }, [providedTopology, prefTopology, prefTopologyError]);
 
   // --- 市区町村 TopoJSON のオンデマンド取得・キャッシュ ---
   const [cityTopology, setCityTopology] = useState<TopoJSONTopology | null>(null);
@@ -140,7 +174,7 @@ export function RankingMapChartClient({
   const [cityTopologyError, setCityTopologyError] = useState(false);
 
   useEffect(() => {
-    if (areaType === "city" && !cityTopology && !cityTopologyError) {
+    if (providedTopology === undefined && areaType === "city" && !cityTopology && !cityTopologyError) {
       startCityTopologyTransition(async () => {
         const result = await fetchCityTopologyAction();
         if (result) {
@@ -150,12 +184,16 @@ export function RankingMapChartClient({
         }
       });
     }
-  }, [areaType, cityTopology, cityTopologyError]);
+  }, [providedTopology, areaType, cityTopology, cityTopologyError]);
 
   // 現在の areaType に応じた TopoJSON を選択
-  const activeTopology = areaType === "city" ? cityTopology : prefTopology;
+  const activeTopology =
+    providedTopology !== undefined ? providedTopology : areaType === "city" ? cityTopology : prefTopology;
   // 取得中に「読み込めませんでした」を出さない。失敗が確定して初めて fallback へ落とす
-  const topologyError = areaType === "city" ? cityTopologyError : prefTopologyError;
+  const topologyError =
+    providedTopology !== undefined
+      ? providedTopology === null
+      : areaType === "city" ? cityTopologyError : prefTopologyError;
 
   // 市区町村は利用者の操作による切替なので、従来どおり取得完了まで Skeleton を出す。
   // 都道府県は初期表示そのもの。ここで Skeleton を挟むと LeafletChoroplethMap が
@@ -164,13 +202,31 @@ export function RankingMapChartClient({
   // タイルが 1MB の TopoJSON を待つことになる (2026-09-06 PSI 実測 LCP 12,650ms)。
   // topology=null のまま先に render し、ベースマップと chunk 取得を並行させる。
   const isMapLoading =
-    areaType === "city" && isCityTopologyLoading && cityTopology === null;
+    providedTopology === undefined && areaType === "city" && isCityTopologyLoading && cityTopology === null;
   const showFallback = topologyError && activeTopology === null;
 
   // 都道府県クリック時のトグル動作
   const handlePrefectureClick = useCallback((code: string) => {
     onPrefectureClick?.(code === selectedPrefectureCode ? null : code);
   }, [onPrefectureClick, selectedPrefectureCode]);
+
+  // 地域を押したら移る (市区町村の地図から市区町村のページへ)。計測に失敗しても移る
+  const handleAreaNavigate = useCallback((code: string) => {
+    const href = areaHrefs?.[code];
+    if (!href) return;
+    if (navSurface) {
+      try {
+        trackNavClick({
+          label: filteredData.find((point) => point.areaCode === code)?.areaName ?? code,
+          href,
+          surface: navSurface,
+        });
+      } catch {
+        // 計測の失敗で遷移を止めない
+      }
+    }
+    router.push(href);
+  }, [areaHrefs, navSurface, filteredData, router]);
 
   const body = (
       // Leaflet の pane は z-index 400 以上を持つ。isolate で地図の重なりをこの枠の中に閉じ込め、
@@ -211,11 +267,14 @@ export function RankingMapChartClient({
                 tileUrl={currentTile.url}
                 attribution={currentTile.attribution}
                 unit={formatUnitForDisplay(rankingItem.unit)}
-                onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
+                onPrefectureClick={
+                  areaHrefs ? handleAreaNavigate : areaType === "prefecture" ? handlePrefectureClick : undefined
+                }
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                 borderColor={getLeafletBorderColor(theme)}
                 className={mapClassName}
                 fitToPrefectures
+                fitExcludeCodes={fitExcludeCodes}
                 valueDisplay={rankingItem.valueDisplay ?? undefined}
                 showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
               />

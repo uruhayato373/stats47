@@ -39,7 +39,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "geographic-access-indicator-1",
+      "key": "railway-access-1",
       "title": "鉄道駅数",
       "rankingKeys": [
         "railway-station-count"
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "key": "geographic-access-indicator-2",
+      "key": "bus-transportation-1",
       "title": "バス事業者数",
       "rankingKeys": [
         "bus-operators"
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "key": "geographic-access-indicator-3",
+      "key": "car-dependent-commute-1",
       "title": "自家用車通勤・通学者数",
       "rankingKeys": [
         "commute-by-car"
@@ -71,17 +71,31 @@
   ],
   "sections": [
     {
-      "key": "geographic-access-overview",
-      "title": "交通空白と生活アクセスを都道府県別に見る",
-      "description": "駅から直線800m以内に中心点がある1km人口メッシュの人口割合を、2020年と2050年推計で比較します。徒歩経路・運行頻度を考慮した交通空白認定ではありません。駅数・バス事業者数は供給の基礎情報として別に掲載します。",
+      "key": "railway-access",
+      "title": "地域の鉄道駅や鉄道網は移動手段として機能しているか",
+      "concern": "ローカル線の減便や廃線が進み地域外への移動手段が失われないか不安です。",
       "metricGroupKeys": [
-        "geographic-access-indicator-1",
-        "geographic-access-indicator-2",
-        "geographic-access-indicator-3"
+        "railway-access-1"
       ],
       "embeddedSectionKeys": [
         "geo-station-access",
         "geo-public-facility-access"
+      ]
+    },
+    {
+      "key": "bus-transportation",
+      "title": "日常の移動を支える路線バスや事業者は維持されているか",
+      "concern": "バス事業者の減少や路線廃止により身近な移動手段がなくなるか心配です。",
+      "metricGroupKeys": [
+        "bus-transportation-1"
+      ]
+    },
+    {
+      "key": "car-dependent-commute",
+      "title": "通勤・通学における自家用車依存や車に乗れない人の移動環境はどうか",
+      "concern": "自家用車への依存度が高まり車を運転できない高齢者等の移動が心配です。",
+      "metricGroupKeys": [
+        "car-dependent-commute-1"
       ]
     }
   ],

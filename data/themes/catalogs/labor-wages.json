@@ -342,7 +342,7 @@
       ]
     },
     {
-      "key": "candidate-35-1",
+      "key": "female-labor-participation-and-earnings-1",
       "title": "女性労働力人口比率",
       "rankingKeys": [
         "labor-force-population-ratio-woman"
@@ -352,7 +352,7 @@
       ]
     },
     {
-      "key": "candidate-35-2",
+      "key": "female-labor-participation-and-earnings-2",
       "title": "女性所定内給与額",
       "rankingKeys": [
         "female-scheduled-earnings"
@@ -376,7 +376,6 @@
         "active-job-opening-ratio",
         "unemployment-rate"
       ],
-      "relatedChartKeys": [],
       "relatedThemeKeys": [
         "labor-mobility"
       ]
@@ -393,11 +392,11 @@
       "relatedRankingKeys": [
         "gender-wage-gap"
       ],
-      "relatedChartKeys": [
-        "labor-wages-gender-gap"
-      ],
       "relatedThemeKeys": [
         "occupation-salary"
+      ],
+      "relatedChartKeys": [
+        "labor-wages-gender-gap"
       ]
     }
   ],
@@ -417,8 +416,7 @@
       "description": "地域別最低賃金は時間額です。適用時点と対象年を確認します。",
       "metricGroupKeys": [
         "minimum-wage"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "starting-pay",
@@ -426,8 +424,7 @@
       "description": "初任給は学歴別の月額です。最低賃金の時間額とは直接比較できません。",
       "metricGroupKeys": [
         "starting-pay"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "wage-differences",
@@ -443,11 +440,12 @@
       ]
     },
     {
-      "key": "candidate-35",
-      "title": "女性の就業と賃金",
+      "key": "female-labor-participation-and-earnings",
+      "title": "女性の就労参加や給料水準は改善されているか",
+      "concern": "女性が地域で就労し十分な収入を得て活躍できる環境があるか気になります。",
       "metricGroupKeys": [
-        "candidate-35-1",
-        "candidate-35-2"
+        "female-labor-participation-and-earnings-1",
+        "female-labor-participation-and-earnings-2"
       ]
     },
     {

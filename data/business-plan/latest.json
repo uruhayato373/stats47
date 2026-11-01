@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-23T23:10:38.312Z",
+  "generatedAt": "2026-11-01T00:02:33.345Z",
   "catalogId": "stats47-business-plan-2026",
   "catalogVersion": "2026-09-01.1",
   "sourceSha256": "04f678551e1395a2033d8d6e34e7b6029932792f61e9dd178aedaa690de510c8",
@@ -25,18 +25,18 @@
     "deferred": 2
   },
   "eventCounts": {
-    "partially-measured": 5,
+    "partially-measured": 4,
+    "not-instrumented": 4,
     "measured": 2,
-    "not-instrumented": 3,
     "manual": 2
   },
   "sourceFreshness": {
-    "ga4": "2026-10-22T23:00:45.000Z",
-    "x": "2026-10-23T18:48:16.000Z",
-    "note": "2026-10-19T11:34:13.000Z",
-    "affiliate": "2026-10-20T07:24:51.000Z",
-    "products": "2026-10-19T02:23:55.000Z",
-    "ci": "2026-10-20T03:31:12.000Z"
+    "ga4": "2026-10-30T21:37:32.000Z",
+    "x": "2026-10-30T19:46:06.000Z",
+    "note": "2026-10-30T22:35:32.581Z",
+    "affiliate": "2026-10-31T00:05:25.000Z",
+    "products": "2026-10-27T22:49:10.000Z",
+    "ci": "2026-10-29T09:03:16.000Z"
   },
   "nextActions": [
     {

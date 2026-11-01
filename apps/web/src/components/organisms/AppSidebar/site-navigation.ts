@@ -15,7 +15,8 @@ export type SiteNavKey =
 
 /**
  * 主要ナビ (表示順・ラベル)。サイトの内容の種類 (ランキング・テーマ・地域・地域分析・ブログ) だけを並べる (2026-10-28 オーナー合意)。
- * - 地域単位 (47都道府県・市区町村) は項目にせず、各ハブの StatisticsScopeNav で切り替える (docs/01_技術設計/03_情報設計.md「地理スコープ」)
+ * - 「地域」はサイドバーでは全国・都道府県・市区町村の 3 段を開閉できる項目にする (REGION_NAV_ITEMS。2026-10-31 オーナー決定。
+ *   旧: 地域単位は項目にせず各ハブの切り替えの帯で選んだ。テーマページの帯をパンくずと Sheet に替えたので、地域の階層をメニューにも出す)
  * - 調査 (出典をたどる配線) と地域間比較 (条件を選ぶツール) はサイトの切り口ではないので置かず、フッターから入れる
  */
 export const PRIMARY_NAV_ITEMS = [
@@ -32,6 +33,16 @@ export const PRIMARY_NAV_ITEMS = [
 
 export type PrimaryNavKey = (typeof PRIMARY_NAV_ITEMS)[number]['key'];
 
+/**
+ * 「地域」の中の 3 段 (全国 › 都道府県 › 市区町村)。パンくずの地域の段と同じ並び (2026-10-31 オーナー決定 IA-REGION-THEME-01)。
+ * サイドバーは「地域」を開閉できる項目にし、この 3 つを子に置く。フッターは従来どおり「地域」(/areas) 1 つ。
+ */
+export const REGION_NAV_ITEMS = [
+  { key: 'japan', href: '/japan', label: '全国' },
+  { key: 'prefectures', href: '/areas', label: '都道府県' },
+  { key: 'municipalities', href: '/municipalities', label: '市区町村' },
+] as const;
+
 export const HOME_NAV_ITEM = { href: '/', label: 'ホーム' } as const;
 export const COMPARE_NAV_ITEM = {
   href: '/category/population/compare',
@@ -41,12 +52,13 @@ export const COMPARE_NAV_ITEM = {
 export const SURVEY_NAV_ITEM = { href: '/survey', label: '調査' } as const;
 
 /**
- * 市区町村の比較ページは、同じ内容の種類の項目を現在地にする (地域単位は内容の中の切り口)。
- * 市区町村ページ (/areas/<県>/cities/<市>) は前方一致で「地域」になる。
+ * 地域の 3 段 (全国・都道府県・市区町村) のどれを現在地にするか (2026-10-31)。
+ * 市区町村の比較 (/municipalities/*)・市区町村のページ (/areas/<県>/cities/<市>…)・県内の市区町村の比較
+ * (/areas/<県>/<テーマ>/cities) は「市区町村」。全国のテーマ (/japan/*) は前方一致で「全国」、それ以外の /areas/* は「都道府県」。
+ * (旧: 市区町村の比較はテーマ・ランキングを現在地にしていた。地域の段をメニューに出したので地域の段に寄せる)
  */
 const SCOPE_PATH_ALIASES: ReadonlyArray<readonly [RegExp, string]> = [
-  [/^\/municipalities\/themes(?:\/|$)/, '/themes'],
-  [/^\/municipalities(?:\/|$)/, '/ranking'],
+  [/^\/areas\/\d{5}\/(?:cities\/|[^/]+\/cities(?:\/|$))/, '/municipalities'],
 ];
 
 function resolveScopeAlias(pathname: string): string {

@@ -26,7 +26,7 @@
     {
       "rankingKey": "hobby-participation-rate-sports-spectating",
       "shortLabel": "スポーツ観覧の行動者率",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和3年社会生活基本調査 生活行動に関する結果（茨城県版）第4節「趣味・娯楽」スポーツ観覧の項（茨城県企画部統計課）",
         "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/syakai/syakaichor3/kodo.html",
@@ -312,7 +312,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "sports-participation-indicator-1",
+      "key": "resident-exercise-habits-1",
       "title": "スポーツ年間行動者率（10歳以上）",
       "rankingKeys": [
         "sports-annual-participation-rate-10plus"
@@ -322,37 +322,7 @@
       ]
     },
     {
-      "key": "sports-participation-indicator-2",
-      "title": "スポーツ観覧の行動者率",
-      "rankingKeys": [
-        "hobby-participation-rate-sports-spectating"
-      ],
-      "defaultCheckedKeys": [
-        "hobby-participation-rate-sports-spectating"
-      ]
-    },
-    {
-      "key": "sports-participation-indicator-3",
-      "title": "社会体育施設数（人口100万人当たり）",
-      "rankingKeys": [
-        "community-sports-facility-count-per-million"
-      ],
-      "defaultCheckedKeys": [
-        "community-sports-facility-count-per-million"
-      ]
-    },
-    {
-      "key": "sports-participation-indicator-4",
-      "title": "運動公園数",
-      "rankingKeys": [
-        "sports-park-count"
-      ],
-      "defaultCheckedKeys": [
-        "sports-park-count"
-      ]
-    },
-    {
-      "key": "candidate-70-1",
+      "key": "resident-exercise-habits-2",
       "title": "男性の歩数（20〜64歳・年齢調整）",
       "rankingKeys": [
         "daily-steps-male-20to64-age-adjusted"
@@ -362,7 +332,7 @@
       ]
     },
     {
-      "key": "candidate-70-2",
+      "key": "resident-exercise-habits-3",
       "title": "女性の歩数（20〜64歳・年齢調整）",
       "rankingKeys": [
         "daily-steps-female-20to64-age-adjusted"
@@ -372,7 +342,27 @@
       ]
     },
     {
-      "key": "candidate-118-1",
+      "key": "sports-facilities-environment-1",
+      "title": "社会体育施設数（人口100万人当たり）",
+      "rankingKeys": [
+        "community-sports-facility-count-per-million"
+      ],
+      "defaultCheckedKeys": [
+        "community-sports-facility-count-per-million"
+      ]
+    },
+    {
+      "key": "sports-facilities-environment-2",
+      "title": "運動公園数",
+      "rankingKeys": [
+        "sports-park-count"
+      ],
+      "defaultCheckedKeys": [
+        "sports-park-count"
+      ]
+    },
+    {
+      "key": "sports-facilities-environment-3",
       "title": "小学校体育館設置箇所数",
       "rankingKeys": [
         "elementary-school-gymnasium-count"
@@ -382,7 +372,7 @@
       ]
     },
     {
-      "key": "candidate-118-2",
+      "key": "sports-facilities-environment-4",
       "title": "中学校体育館設置箇所数",
       "rankingKeys": [
         "junior-high-school-gymnasium-count"
@@ -392,27 +382,7 @@
       ]
     },
     {
-      "key": "candidate-118-3",
-      "title": "小学5年男子の体力合計点",
-      "rankingKeys": [
-        "elementary5-fitness-score-male"
-      ],
-      "defaultCheckedKeys": [
-        "elementary5-fitness-score-male"
-      ]
-    },
-    {
-      "key": "candidate-118-4",
-      "title": "小学5年女子の体力合計点",
-      "rankingKeys": [
-        "elementary5-fitness-score-female"
-      ],
-      "defaultCheckedKeys": [
-        "elementary5-fitness-score-female"
-      ]
-    },
-    {
-      "key": "candidate-118-5",
+      "key": "children-fitness-and-exercise-1",
       "title": "小学5年男子の週420分以上運動割合",
       "rankingKeys": [
         "elementary5-weekly-exercise-420min-rate-male"
@@ -422,7 +392,7 @@
       ]
     },
     {
-      "key": "candidate-118-6",
+      "key": "children-fitness-and-exercise-2",
       "title": "小学5年女子の週420分以上運動割合",
       "rankingKeys": [
         "elementary5-weekly-exercise-420min-rate-female"
@@ -430,43 +400,62 @@
       "defaultCheckedKeys": [
         "elementary5-weekly-exercise-420min-rate-female"
       ]
+    },
+    {
+      "key": "children-fitness-and-exercise-3",
+      "title": "小学5年男子の体力合計点",
+      "rankingKeys": [
+        "elementary5-fitness-score-male"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-fitness-score-male"
+      ]
+    },
+    {
+      "key": "children-fitness-and-exercise-4",
+      "title": "小学5年女子の体力合計点",
+      "rankingKeys": [
+        "elementary5-fitness-score-female"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-fitness-score-female"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "sports-participation-overview",
-      "title": "スポーツ施設と利用を都道府県別に見る",
-      "description": "スポーツの年間行動者率・観覧率と社会体育施設数を参加と供給に分けて比較します。施設数から利用者数は推計しません。",
+      "key": "resident-exercise-habits",
+      "title": "住民の運動習慣や日常の歩数は十分か",
+      "concern": "日頃から身体を動かす習慣や歩数が健康的に維持されているか知りたい。",
       "metricGroupKeys": [
-        "sports-participation-indicator-1",
-        "sports-participation-indicator-2",
-        "sports-participation-indicator-3",
-        "sports-participation-indicator-4"
-      ]
-    },
-    {
-      "key": "candidate-70",
-      "title": "成人の身体活動と歩数",
-      "description": "2024年国民健康・栄養調査の20〜64歳の1日歩数を、男女とも46歳に年齢調整して比較します。95%信頼区間と集計人数を併記し、順位差を有意差とみなしません。石川県は能登半島地震の影響で8地区です。10歳以上の年間運動参加率や公立小学5年生の体力とは母集団を分けて読みます。",
-      "metricGroupKeys": [
-        "candidate-70-1",
-        "candidate-70-2"
+        "resident-exercise-habits-1",
+        "resident-exercise-habits-2",
+        "resident-exercise-habits-3"
       ],
       "embeddedSectionKeys": [
         "physical-activity"
       ]
     },
     {
-      "key": "candidate-118",
-      "title": "子どもの体力・運動習慣と学校体育館",
-      "description": "公立小学5年生の体力・運動習慣に加え、2024年10月1日現在の小中学校の体育館設置箇所数を比較します。施設は公私立の学校が対象で国立大学附属学校を除き、公立小5の体力調査とは対象・時点が異なります。保有学校数や整備率ではなく、回答施設の設置箇所数です。市町村教育委員会の回答率は97.5%で、未回答は補完していません。",
+      "key": "sports-facilities-environment",
+      "title": "地域内で利用できるスポーツ施設は充実しているか",
+      "concern": "運動やスポーツ活動を行うための地域施設や公園が整っているか確かめたい。",
       "metricGroupKeys": [
-        "candidate-118-1",
-        "candidate-118-2",
-        "candidate-118-3",
-        "candidate-118-4",
-        "candidate-118-5",
-        "candidate-118-6"
+        "sports-facilities-environment-1",
+        "sports-facilities-environment-2",
+        "sports-facilities-environment-3",
+        "sports-facilities-environment-4"
+      ]
+    },
+    {
+      "key": "children-fitness-and-exercise",
+      "title": "子どもの運動時間と体力水準は保たれているか",
+      "concern": "小学生の運動習慣の定着や体力低下がないか気になる。",
+      "metricGroupKeys": [
+        "children-fitness-and-exercise-1",
+        "children-fitness-and-exercise-2",
+        "children-fitness-and-exercise-3",
+        "children-fitness-and-exercise-4"
       ]
     }
   ],

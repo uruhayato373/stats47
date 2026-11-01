@@ -330,7 +330,7 @@
     {
       "rankingKey": "vacant-housing-rate",
       "shortLabel": "空き家率",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
         "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
@@ -497,7 +497,7 @@
     {
       "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
       "shortLabel": "負債現在高",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -587,39 +587,6 @@
       "sortOrder": 10
     },
     {
-      "componentKey": "md-living-housing-discussion",
-      "componentType": "markdown-section",
-      "title": "数値を比較するときの注意",
-      "componentProps": {
-        "markdown": "空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n持ち家と借家の平均面積に加え、世帯人数に応じた最低居住面積水準を満たす世帯の割合を確認します。\n\n単独世帯と核家族世帯は、それぞれの対象年を確認します。単年の値を過去まで延長して読みません。"
-      },
-      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省)",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "md-living-housing-faq",
-      "componentType": "markdown-section",
-      "title": "よくある質問",
-      "componentProps": {
-        "displayMode": "faq",
-        "markdown": "### Q1: 住宅ストックは余っているかを見るときの注意は？\n\n空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。"
-      },
-      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 立地適正化計画 (国土交通省)",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 30
-    },
-    {
       "componentKey": "lh-dwelling-floor-area-trend",
       "componentType": "line-chart",
       "title": "持ち家・借家の延べ面積（1住宅当たり）",
@@ -703,6 +670,119 @@
       "sortOrder": 60,
       "annotation": "単独世帯は現在配信している2020年の値です。",
       "section": "households"
+    },
+    {
+      "componentKey": "living-housing-vacant-housing-and-safety-composition-1",
+      "componentType": "composition-chart",
+      "title": "目的別空き家戸数の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "vacant-housing-excluding-rental-sale-secondary",
+            "label": "賃貸・売却用及び二次的住宅を除く空き家",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "vacant-housing-for-rent",
+            "label": "賃貸用の空き家",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "vacant-housing-for-sale",
+            "label": "売却用の空き家",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "vacant-housing-secondary-residences",
+            "label": "二次的住宅",
+            "colorRole": "series-4"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "vacant-housing-excluding-rental-sale-secondary",
+        "vacant-housing-for-rent",
+        "vacant-housing-for-sale",
+        "vacant-housing-secondary-residences"
+      ],
+      "sourceName": "住宅・土地統計調査",
+      "sourceLink": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "vacant-housing-and-safety",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "living-housing-housing-construction-trends-composition-2",
+      "componentType": "composition-chart",
+      "title": "利用関係別新設住宅着工戸数の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "new-owner-occupied-starts",
+            "label": "持家の新設着工戸数",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "new-rental-starts",
+            "label": "貸家の新設着工戸数",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "new-condo-starts",
+            "label": "分譲住宅の新設着工戸数",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "new-owner-occupied-starts",
+        "new-rental-starts",
+        "new-condo-starts"
+      ],
+      "sourceName": "社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "housing-construction-trends",
+      "sortOrder": 101
+    },
+    {
+      "componentKey": "md-living-housing-discussion",
+      "componentType": "markdown-section",
+      "title": "数値を比較するときの注意",
+      "componentProps": {
+        "markdown": "空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n持ち家と借家の平均面積に加え、世帯人数に応じた最低居住面積水準を満たす世帯の割合を確認します。\n\n単独世帯と核家族世帯は、それぞれの対象年を確認します。単年の値を過去まで延長して読みません。"
+      },
+      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "md-living-housing-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 住宅ストックは余っているかを見るときの注意は？\n\n空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。"
+      },
+      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 立地適正化計画 (国土交通省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 30
     }
   ],
   "evidenceTopics": [
@@ -720,11 +800,11 @@
         "owner-occupied-housing-ratio",
         "vacant-housing-ratio"
       ],
-      "relatedChartKeys": [
-        "vacancy-ownership-rate-trend"
-      ],
       "relatedThemeKeys": [
         "aging-society"
+      ],
+      "relatedChartKeys": [
+        "vacancy-ownership-rate-trend"
       ]
     },
     {
@@ -740,11 +820,11 @@
         "floor-area-per-dwelling-owner",
         "floor-area-per-dwelling-rented"
       ],
-      "relatedChartKeys": [
-        "lh-dwelling-floor-area-trend"
-      ],
       "relatedThemeKeys": [
         "real-income"
+      ],
+      "relatedChartKeys": [
+        "lh-dwelling-floor-area-trend"
       ]
     }
   ],
@@ -794,82 +874,61 @@
       ]
     },
     {
-      "key": "candidate-5",
-      "title": "住宅着工の利用関係別比較",
-      "description": "2023・2024年度の新設住宅を持家・貸家・分譲住宅に分けて比較します。給与住宅はこの3分類に含まれないため、3つの合計を新設住宅全体とは扱いません。",
+      "key": "housing-cost-and-space",
+      "title": "住まいの費用負担や広さの地域差はどれくらいあるか",
+      "concern": "高額な家賃や住まいの狭さ、住宅ローンの負担が生活を圧迫していないか心配です。",
       "metricGroupKeys": [
-        "candidate-5-1",
-        "candidate-5-2",
-        "candidate-5-3",
-        "candidate-5-4"
+        "housing-cost-and-space-1",
+        "housing-cost-and-space-2"
       ]
     },
     {
-      "key": "candidate-6",
-      "title": "改修・リフォーム需要",
+      "key": "vacant-housing-and-safety",
+      "title": "空き家の増加や住宅の安全対策は十分か",
+      "concern": "近隣の空き家放置による防犯・防災上の懸念や住宅の耐震化遅れが心配です。",
       "metricGroupKeys": [
-        "candidate-6-1",
-        "candidate-6-2"
+        "vacant-housing-and-safety-1",
+        "vacant-housing-and-safety-2",
+        "vacant-housing-and-safety-3"
+      ],
+      "chartKeys": [
+        "living-housing-vacant-housing-and-safety-composition-1"
       ]
     },
     {
-      "key": "candidate-8",
-      "title": "空き家の用途と住宅ストック",
-      "description": "2023年10月1日の空き家を賃貸用・売却用・二次的住宅・それ以外に分けて比較します。標本調査の推計値は100戸単位に丸められ、内訳の合計と総数が一致しない場合があります。二次的住宅には別荘等を含み、それ以外の空き家を管理不全空家の認定件数とはみなしません。",
+      "key": "household-structure-and-elderly",
+      "title": "世帯の少人数化や高齢者の単身化は進んでいるか",
+      "concern": "高齢単身世帯の急増に伴う孤立化や見守り不足、地域コミュニティの衰退が懸念されます。",
       "metricGroupKeys": [
-        "candidate-8-1",
-        "candidate-8-3",
-        "candidate-8-4",
-        "candidate-8-5",
-        "candidate-8-6"
-      ]
-    },
-    {
-      "key": "candidate-44",
-      "title": "単身化と一人暮らし",
-      "description": "2020年国勢調査の単独世帯を男女・年齢別に比較します。65歳以上の人数と単独世帯全体の割合は分母が異なります。年齢不詳を独立した区分として残し、施設等の世帯は含めません。",
-      "metricGroupKeys": [
-        "candidate-44-1",
-        "candidate-44-2"
+        "household-structure-and-elderly-1",
+        "household-structure-and-elderly-2",
+        "household-structure-and-elderly-3",
+        "household-structure-and-elderly-4"
       ],
       "embeddedSectionKeys": [
         "single-households-demographics"
       ]
     },
     {
-      "key": "candidate-45",
-      "title": "世帯構成の変化",
+      "key": "urban-environment-and-parks",
+      "title": "身近な生活環境や公園緑地は確保されているか",
+      "concern": "子育てや健康維持に必要な身近な都市公園や良好な住環境が整っているか気になります。",
       "metricGroupKeys": [
-        "candidate-45-1",
-        "candidate-45-2"
+        "urban-environment-and-parks-1",
+        "urban-environment-and-parks-2",
+        "urban-environment-and-parks-3"
       ]
     },
     {
-      "key": "candidate-74",
-      "title": "住居費と住宅取得の負債",
-      "description": "2019年の総世帯における住宅・土地のための負債残高を、家賃支出や二人以上世帯の金融負債と区別して確認します。住宅・土地負債はローンのない世帯も含む平均で、年間返済額ではありません。対象年・世帯区分が異なる指標から返済負担率は計算しません。",
+      "key": "housing-construction-trends",
+      "title": "住宅の新設着工や供給バランスはどう推移しているか",
+      "concern": "地域の人口動態に合わせた新築住宅供給や選択肢の推移がどうなっているか不安です。",
       "metricGroupKeys": [
-        "candidate-74-1",
-        "candidate-74-2",
-        "candidate-74-3"
-      ]
-    },
-    {
-      "key": "candidate-93",
-      "title": "都市の人口集積と計画上の区域",
-      "description": "人口集中地区は実際の人口集積、都市計画区域や市街化調整区域は計画上の指定です。区域面積は3月31日時点で、調整区域の割合は都市計画区域を分母とします。非線引区域もあるため、残りを市街化区域の割合とは扱いません。",
-      "metricGroupKeys": [
-        "candidate-93-1",
-        "candidate-93-2",
-        "candidate-93-3"
-      ]
-    },
-    {
-      "key": "candidate-94",
-      "title": "公園と都市緑地",
-      "metricGroupKeys": [
-        "candidate-94-1",
-        "candidate-94-2"
+        "housing-construction-trends-1",
+        "housing-construction-trends-2"
+      ],
+      "chartKeys": [
+        "living-housing-housing-construction-trends-composition-2"
       ]
     },
     {
@@ -931,167 +990,7 @@
       ]
     },
     {
-      "key": "candidate-5-1",
-      "title": "着工新設住宅戸数",
-      "rankingKeys": [
-        "new-housing-starts"
-      ],
-      "defaultCheckedKeys": [
-        "new-housing-starts"
-      ]
-    },
-    {
-      "key": "candidate-5-2",
-      "title": "持家の新設着工戸数",
-      "rankingKeys": [
-        "new-owner-occupied-starts"
-      ],
-      "defaultCheckedKeys": [
-        "new-owner-occupied-starts"
-      ]
-    },
-    {
-      "key": "candidate-5-3",
-      "title": "貸家の新設着工戸数",
-      "rankingKeys": [
-        "new-rental-starts"
-      ],
-      "defaultCheckedKeys": [
-        "new-rental-starts"
-      ]
-    },
-    {
-      "key": "candidate-5-4",
-      "title": "分譲住宅の新設着工戸数",
-      "rankingKeys": [
-        "new-condo-starts"
-      ],
-      "defaultCheckedKeys": [
-        "new-condo-starts"
-      ]
-    },
-    {
-      "key": "candidate-6-1",
-      "title": "リフォーム工事実施率",
-      "rankingKeys": [
-        "renovation-rate"
-      ],
-      "defaultCheckedKeys": [
-        "renovation-rate"
-      ]
-    },
-    {
-      "key": "candidate-6-2",
-      "title": "耐震改修工事実施率",
-      "rankingKeys": [
-        "earthquake-renovation-rate"
-      ],
-      "defaultCheckedKeys": [
-        "earthquake-renovation-rate"
-      ]
-    },
-    {
-      "key": "candidate-8-1",
-      "title": "空き家率",
-      "rankingKeys": [
-        "vacant-housing-rate"
-      ],
-      "defaultCheckedKeys": [
-        "vacant-housing-rate"
-      ]
-    },
-    {
-      "key": "candidate-8-3",
-      "title": "賃貸・売却用及び二次的住宅を除く空き家",
-      "rankingKeys": [
-        "vacant-housing-excluding-rental-sale-secondary"
-      ],
-      "defaultCheckedKeys": [
-        "vacant-housing-excluding-rental-sale-secondary"
-      ]
-    },
-    {
-      "key": "candidate-8-4",
-      "title": "賃貸用の空き家",
-      "rankingKeys": [
-        "vacant-housing-for-rent"
-      ],
-      "defaultCheckedKeys": [
-        "vacant-housing-for-rent"
-      ]
-    },
-    {
-      "key": "candidate-8-5",
-      "title": "売却用の空き家",
-      "rankingKeys": [
-        "vacant-housing-for-sale"
-      ],
-      "defaultCheckedKeys": [
-        "vacant-housing-for-sale"
-      ]
-    },
-    {
-      "key": "candidate-8-6",
-      "title": "二次的住宅",
-      "rankingKeys": [
-        "vacant-housing-secondary-residences"
-      ],
-      "defaultCheckedKeys": [
-        "vacant-housing-secondary-residences"
-      ]
-    },
-    {
-      "key": "candidate-44-1",
-      "title": "65歳以上の男性単独世帯数",
-      "rankingKeys": [
-        "single-households-age65plus-male"
-      ],
-      "defaultCheckedKeys": [
-        "single-households-age65plus-male"
-      ]
-    },
-    {
-      "key": "candidate-44-2",
-      "title": "65歳以上の女性単独世帯数",
-      "rankingKeys": [
-        "single-households-age65plus-female"
-      ],
-      "defaultCheckedKeys": [
-        "single-households-age65plus-female"
-      ]
-    },
-    {
-      "key": "candidate-45-1",
-      "title": "一般世帯数",
-      "rankingKeys": [
-        "households"
-      ],
-      "defaultCheckedKeys": [
-        "households"
-      ]
-    },
-    {
-      "key": "candidate-45-2",
-      "title": "一般世帯の平均人員",
-      "rankingKeys": [
-        "average-persons-per-general-household"
-      ],
-      "defaultCheckedKeys": [
-        "average-persons-per-general-household"
-      ]
-    },
-    {
-      "key": "candidate-74-1",
-      "title": "住宅・土地のための負債（総世帯平均）",
-      "rankingKeys": [
-        "housing-land-debt-per-household"
-      ],
-      "defaultCheckedKeys": [
-        "housing-land-debt-per-household"
-      ]
-    },
-    {
-      "key": "candidate-74-2",
+      "key": "housing-cost-and-space-1",
       "title": "家賃支出",
       "rankingKeys": [
         "private-rent-consumption-expenditure"
@@ -1101,37 +1000,114 @@
       ]
     },
     {
-      "key": "candidate-74-3",
-      "title": "負債現在高",
+      "key": "housing-cost-and-space-2",
+      "title": "住宅・土地のための負債（総世帯平均）",
       "rankingKeys": [
-        "current-liabilities-balance-multi-person-households-per-household"
+        "housing-land-debt-per-household"
       ],
       "defaultCheckedKeys": [
-        "current-liabilities-balance-multi-person-households-per-household"
+        "housing-land-debt-per-household"
       ]
     },
     {
-      "key": "candidate-93-1",
-      "title": "人口集中地区人口密度",
+      "key": "vacant-housing-and-safety-1",
+      "title": "目的別空き家戸数の内訳",
       "rankingKeys": [
-        "densely-inhabited-district-population-density"
+        "vacant-housing-excluding-rental-sale-secondary",
+        "vacant-housing-for-rent",
+        "vacant-housing-for-sale",
+        "vacant-housing-secondary-residences"
       ],
       "defaultCheckedKeys": [
-        "densely-inhabited-district-population-density"
+        "vacant-housing-excluding-rental-sale-secondary"
       ]
     },
     {
-      "key": "candidate-93-2",
-      "title": "都市計画区域の指定面積",
+      "key": "vacant-housing-and-safety-2",
+      "title": "リフォーム工事実施率",
       "rankingKeys": [
+        "renovation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "renovation-rate"
+      ]
+    },
+    {
+      "key": "vacant-housing-and-safety-3",
+      "title": "耐震改修工事実施率",
+      "rankingKeys": [
+        "earthquake-renovation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "earthquake-renovation-rate"
+      ]
+    },
+    {
+      "key": "household-structure-and-elderly-1",
+      "title": "世帯数",
+      "rankingKeys": [
+        "households"
+      ],
+      "defaultCheckedKeys": [
+        "households"
+      ]
+    },
+    {
+      "key": "household-structure-and-elderly-2",
+      "title": "65歳以上の男性単独世帯数",
+      "rankingKeys": [
+        "single-households-age65plus-male"
+      ],
+      "defaultCheckedKeys": [
+        "single-households-age65plus-male"
+      ]
+    },
+    {
+      "key": "household-structure-and-elderly-3",
+      "title": "65歳以上の女性単独世帯数",
+      "rankingKeys": [
+        "single-households-age65plus-female"
+      ],
+      "defaultCheckedKeys": [
+        "single-households-age65plus-female"
+      ]
+    },
+    {
+      "key": "household-structure-and-elderly-4",
+      "title": "一般世帯の平均人員",
+      "rankingKeys": [
+        "average-persons-per-general-household"
+      ],
+      "defaultCheckedKeys": [
+        "average-persons-per-general-household"
+      ]
+    },
+    {
+      "key": "urban-environment-and-parks-1",
+      "title": "都市公園数と都市公園面積の推移",
+      "rankingKeys": [
+        "urban-parks",
+        "urban-parks-area"
+      ],
+      "defaultCheckedKeys": [
+        "urban-parks",
+        "urban-parks-area"
+      ]
+    },
+    {
+      "key": "urban-environment-and-parks-2",
+      "title": "DID人口密度と都市計画区域面積の推移",
+      "rankingKeys": [
+        "densely-inhabited-district-population-density",
         "urban-planning-area"
       ],
       "defaultCheckedKeys": [
+        "densely-inhabited-district-population-density",
         "urban-planning-area"
       ]
     },
     {
-      "key": "candidate-93-3",
+      "key": "urban-environment-and-parks-3",
       "title": "都市計画区域に占める市街化調整区域の割合",
       "rankingKeys": [
         "urbanization-control-area-ratio"
@@ -1141,23 +1117,25 @@
       ]
     },
     {
-      "key": "candidate-94-1",
-      "title": "都市公園数",
+      "key": "housing-construction-trends-1",
+      "title": "着工新設住宅戸数",
       "rankingKeys": [
-        "urban-parks"
+        "new-housing-starts"
       ],
       "defaultCheckedKeys": [
-        "urban-parks"
+        "new-housing-starts"
       ]
     },
     {
-      "key": "candidate-94-2",
-      "title": "都市公園面積",
+      "key": "housing-construction-trends-2",
+      "title": "利用関係別新設住宅着工戸数の内訳",
       "rankingKeys": [
-        "urban-parks-area"
+        "new-owner-occupied-starts",
+        "new-rental-starts",
+        "new-condo-starts"
       ],
       "defaultCheckedKeys": [
-        "urban-parks-area"
+        "new-owner-occupied-starts"
       ]
     }
   ]

@@ -14,6 +14,8 @@ import {
   uniqueAffiliateDestinations,
 } from '../constants/affiliate-delivery-policy';
 
+import { buildPreviewAffiliateAds, isAdSlotPreviewEnabled } from './ad-slot-preview';
+
 import type { AffiliateAd, AffiliateLocationCode } from '../types';
 
 export type AffiliateAdRow = AffiliateAd;
@@ -172,6 +174,8 @@ async function getActive(
   includeExperimentVariants = false
 ): Promise<AffiliateAdRow[]> {
   if (process.env.NEXT_PHASE === 'phase-production-build') return [];
+  // 開発用の広告枠の表示: 在庫を代わりの広告に置き換える (本番では働かない)
+  if (isAdSlotPreviewEnabled()) return buildPreviewAffiliateAds();
   try {
     const snapshot = await loadSnapshot();
     return snapshot.ads
@@ -261,6 +265,33 @@ export async function readActiveBannersByVerticalsFromR2(
           matchesRankingTarget(a, rankingKey)
       )
       .sort(compareByPriorityDesc)
+  ).slice(0, limit);
+}
+
+/**
+ * 案件 (programRef) を指定してバナー・テキスト広告を取得する。並びは programRefs の順 (同じ案件の中は priority 降順)。
+ * 意図が決まらないページの受け皿 (`GENERIC_HIGH_VALUE_PROGRAM_REFS`) に使う。対象ランキングの指定がある広告は出さない。
+ */
+export async function readActiveAdsByProgramRefsFromR2(
+  programRefs: readonly string[],
+  adType: 'banner' | 'text',
+  limit = 2,
+  locationCode?: AffiliateLocationCode
+): Promise<AffiliateAdRow[]> {
+  if (programRefs.length === 0) return [];
+  const active = await getActive();
+  const order = new Map(programRefs.map((ref, index) => [ref, index]));
+  return uniqueAffiliateDestinations(
+    active
+      .filter(
+        (a) =>
+          a.programRef !== undefined &&
+          order.has(a.programRef) &&
+          a.adType === adType &&
+          (locationCode === undefined || a.locationCode === locationCode) &&
+          (a.targetRankingKeys ?? []).length === 0
+      )
+      .sort((a, b) => (order.get(a.programRef!) ?? 0) - (order.get(b.programRef!) ?? 0) || compareByPriorityDesc(a, b))
   ).slice(0, limit);
 }
 

@@ -1,0 +1,4 @@
+agent|prefecture-list
+machine|https://stats47.jp/areas|a11y_violations
+machine|https://stats47.jp/areas|mobile_page_height
+machine|prefecture-list|title_changed

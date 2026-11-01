@@ -51,7 +51,6 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   rank: null,
   total: 47,
   series: [],
-  topRanked: { areaCode: "13000", areaName: "東京都", value: 999 },
   isLoading: false,
   ...over,
 });
@@ -129,57 +128,29 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
     );
   }
 
-  it("★fetch を一切行わない (ネットワーク往復ゼロ)", async () => {
-    renderUnselected();
-    // 案内テキストが出るまで待ってから確認する (非同期の取りこぼしを避ける)
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
-    );
+  // 2026-10-31 (オーナー決定): 全国のページは手元の公式の全国の系列で推移を描き、取りに行かない
+  // (47 県の平均を全国として描かない。公式の全国の系列が無い指標は線を出さない)
+  it("全国のページは時系列を取りに行かず、公式の全国の系列で描く", async () => {
+    renderUnselected({
+      metrics: [
+        kpi("wage", { officialNationalSeries: [2019, 2020, 2021].map((year, i) => ({ year, value: 300 + i })) }),
+        kpi("unemployment"),
+      ],
+    });
     expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.queryByText("推移データがありません")).toBeNull();
   });
 
-  it("複数チェックしても fetch は発生しない", async () => {
-    renderUnselected({ defaultCheckedKeys: ["wage", "unemployment"] });
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
-    );
-    toggleTile(/有効求人倍率/);
-    expect(fetchMock).not.toHaveBeenCalled();
-  });
-
-  it("タイルは実在する1位県の値と県名を表示する (捏造・平均ではない)", async () => {
+  it("全国のページのタイルは全国の値を出し、1 位の県を出さない (2026-10-31)", async () => {
     renderUnselected();
     const wageTile = valueTile("賃金");
-    expect(wageTile).toHaveTextContent("999");
-    expect(wageTile).toHaveTextContent("東京都");
+    expect(wageTile).toHaveTextContent("100");
+    expect(wageTile).not.toHaveTextContent("1位");
   });
 
-  it("チャート領域は選択案内になる (エラー文言ではない)", async () => {
+  it("「都道府県を選択すると…」の空のカードは出さない", async () => {
     renderUnselected();
-    const prompt = await screen.findByText(
-      "都道府県を選択すると、その県の推移が表示されます",
-    );
-    expect(prompt).toHaveStyle({ height: "80px" });
-    expect(screen.queryByText("推移データがありません")).toBeNull();
-    expect(screen.queryByTestId("line-chart")).toBeNull();
-  });
-
-  it("★画面のどこにも「全国」「全国平均」「（平均）」の文字列を含まない", async () => {
-    const { container } = renderUnselected({
-      defaultCheckedKeys: ["wage", "unemployment"],
-    });
-    await waitFor(() =>
-      expect(
-        screen.getByText(/都道府県を選択すると、その県の推移が表示されます/),
-      ).toBeInTheDocument(),
-    );
-    const text = container.textContent ?? "";
-    expect(text).not.toContain("全国");
-    expect(text).not.toContain("（平均）");
+    expect(screen.queryByText(/都道府県を選択すると/)).toBeNull();
   });
 });
 

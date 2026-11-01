@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
@@ -156,7 +156,7 @@ describe('進路8区分と同一分母', () => {
     expect(screen.queryByRole('table')).toBeNull();
     expect(screen.getByRole('status').textContent).toContain('選択した地域');
   });
-  it('学校所在地・課程・卒業年・別定義の就職割合を明記する', () => {
+  it('学校所在地・課程・卒業年・別定義の就職割合を明記する', async () => {
     render(
       <Context>
         <ThemeGraduationPathsClient snapshot={snapshot} />
@@ -169,14 +169,17 @@ describe('進路8区分と同一分母', () => {
     expect(screen.getByText(/この表の「就職者等」/).textContent).toContain(
       '公式の就職割合とは定義が異なります'
     );
-    expect(
-      screen
-        .getByRole('link', { name: '出典: ' + GRADUATION_PATHS_SOURCE.title })
-        .getAttribute('href')
-    ).toBe(GRADUATION_PATHS_SOURCE.url);
     expect(screen.getByRole('table').parentElement?.className).toContain(
       'overflow-x-auto'
     );
+    // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
+    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(
+      sheet
+        .getByRole('link', { name: '出典: ' + GRADUATION_PATHS_SOURCE.title })
+        .getAttribute('href')
+    ).toBe(GRADUATION_PATHS_SOURCE.url);
   });
 });
 describe('R2取得境界', () => {

@@ -437,8 +437,7 @@
         "consumer-price-difference-index-food",
         "consumer-price-difference-index-housing",
         "consumer-price-difference-index-utilities"
-      ],
-      "relatedChartKeys": []
+      ]
     }
   ],
   "keywords": [
@@ -458,8 +457,7 @@
       "description": "全国を100とした同じ年の地域間の価格差です。前年比の物価上昇率とは異なります。",
       "metricGroupKeys": [
         "overall"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "expenses",
@@ -482,12 +480,19 @@
       ]
     },
     {
-      "key": "candidate-75",
-      "title": "物価指数と家計の支出額",
-      "description": "家計支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。物価地域差指数とは単位と対象が異なり、支出額の差だけで同じ商品の価格差とは判断できません。光熱・水道と食料の物価地域差指数は「何の費目が高いか」で見られます。",
+      "key": "food-prices-and-expenditure",
+      "title": "食料品の値上がりや毎月の食費負担はどれくらい大きいか",
+      "concern": "相次ぐ食品価格の値上がりが日々の食費や家計繰りを圧迫していないか心配です。",
       "metricGroupKeys": [
-        "candidate-75-2",
-        "candidate-76-2"
+        "food-prices-and-expenditure-1"
+      ]
+    },
+    {
+      "key": "utilities-prices-and-expenditure",
+      "title": "電気・ガス・水道料金の価格水準や光熱費負担は高いか",
+      "concern": "気候や地域による光熱・水道費の違いやエネルギー高騰の影響が気になります。",
+      "metricGroupKeys": [
+        "utilities-prices-and-expenditure-1"
       ]
     },
     {
@@ -527,23 +532,23 @@
       ]
     },
     {
-      "key": "candidate-75-2",
-      "title": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
-      "rankingKeys": [
-        "household-survey-utilities-expenditure"
-      ],
-      "defaultCheckedKeys": [
-        "household-survey-utilities-expenditure"
-      ]
-    },
-    {
-      "key": "candidate-76-2",
+      "key": "food-prices-and-expenditure-1",
       "title": "食料支出（二人以上世帯・10〜11月の月平均）",
       "rankingKeys": [
         "household-survey-food-expenditure"
       ],
       "defaultCheckedKeys": [
         "household-survey-food-expenditure"
+      ]
+    },
+    {
+      "key": "utilities-prices-and-expenditure-1",
+      "title": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
+      "rankingKeys": [
+        "household-survey-utilities-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "household-survey-utilities-expenditure"
       ]
     }
   ],

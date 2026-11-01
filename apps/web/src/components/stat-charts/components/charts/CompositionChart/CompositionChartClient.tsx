@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@stats47/components";
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { compactAxisFormat, useD3Tooltip } from "@stats47/visualization/d3";
+
+import { BreakdownDonut, BreakdownList, type BreakdownItem } from "@/components/charts/BreakdownDonut";
 
 import type { CompositionChartData } from "../../../adapters/toCompositionChartData";
 
@@ -36,7 +37,7 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
         )}
       </div>
       <TabsContent value="composition" className="mt-0">
-        <DonutChart chartData={chartData} />
+        <CompositionDonut chartData={chartData} />
       </TabsContent>
       <TabsContent value="trend" className="mt-0">
         <VerticalStacked chartData={chartData} />
@@ -49,117 +50,22 @@ export const CompositionChartClient: React.FC<CompositionChartClientProps> = ({
 // ドーナツチャート（最新年の構成比）
 // ---------------------------------------------------------------------------
 
-function DonutChart({ chartData }: { chartData: CompositionChartData }) {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
+/** 最新年の構成比。共通の内訳の図 (BreakdownDonut) で描く (2026-11-01。旧: この部品の中で円と一覧を手書きしていた) */
+function CompositionDonut({ chartData }: { chartData: CompositionChartData }) {
   const { trendData, series, unit } = chartData;
-
-  const latest =
-    trendData.length > 0 ? trendData[trendData.length - 1] : null;
-
-  const filteredSeries = series.filter((s) => s.label !== "その他");
-
-  const total = latest
-    ? filteredSeries.reduce((sum, s) => sum + (Number(latest[s.key]) || 0), 0)
-    : 0;
-
-  useEffect(() => {
-    if (!svgRef.current || !latest || total === 0) return;
-    let cancelled = false;
-
-    import("d3").then((d3) => {
-      if (cancelled || !svgRef.current) return;
-
-      const svg = d3.select(svgRef.current);
-      svg.selectAll("*").remove();
-
-      const size = 200;
-      const outerRadius = size / 2;
-      const innerRadius = outerRadius * 0.6;
-
-      const pieData = filteredSeries.map((s) => ({
-        ...s,
-        value: Number(latest[s.key]) || 0,
-        pct: total > 0 ? ((Number(latest[s.key]) || 0) / total * 100).toFixed(1) : "0.0",
-      }));
-
-      const pie = d3
-        .pie<(typeof pieData)[0]>()
-        .value((d) => d.value)
-        .sort(null)
-        .padAngle(0.02);
-
-      const arc = d3
-        .arc<d3.PieArcDatum<(typeof pieData)[0]>>()
-        .innerRadius(innerRadius)
-        .outerRadius(outerRadius)
-        .cornerRadius(2);
-
-      const g = svg
-        .append("g")
-        .attr("transform", `translate(${size / 2},${size / 2})`);
-
-      g.selectAll("path")
-        .data(pie(pieData))
-        .join("path")
-        .attr("d", arc)
-        .attr("fill", (d) => d.data.color)
-        .attr("cursor", "pointer")
-        .on("mouseenter", (event, d) => {
-          d3.select(event.currentTarget).attr("opacity", 0.8);
-          showTooltip(event, d.data.label, {
-            value: d.data.value,
-            unit,
-            metricTitle: `構成比 ${d.data.pct}%`,
-          });
-        })
-        .on("mousemove", (event) => updateTooltipPosition(event))
-        .on("mouseleave", (event) => {
-          d3.select(event.currentTarget).attr("opacity", 1);
-          hideTooltip();
-        });
-    });
-
-    return () => { cancelled = true; };
-  }, [latest, filteredSeries, total, unit, showTooltip, updateTooltipPosition, hideTooltip]);
-
+  const latest = trendData.length > 0 ? trendData[trendData.length - 1] : null;
   if (!latest) return null;
+  return <BreakdownDonut items={breakdownItems(series, latest)} unit={unit} />;
+}
 
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <svg
-        ref={svgRef}
-        viewBox="0 0 200 200"
-        className="w-40 h-40"
-        role="img"
-        aria-label={`構成比ドーナツチャート。単位: ${unit || "未設定"}`}
-      />
-      <div className="w-full border-t pt-2">
-        <ul className="divide-y divide-border">
-          {filteredSeries.map((s, i) => {
-            const value = Number(latest[s.key]) || 0;
-            const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
-            return (
-              <li key={`${s.key}-${i}`} className="flex items-center gap-2 py-1.5 text-sm">
-                <span
-                  className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
-                  style={{ backgroundColor: s.color }}
-                />
-                <span className="text-foreground/80">{s.label}</span>
-                <span className="ml-auto tabular-nums font-semibold">
-                  {value.toLocaleString()}
-                  {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(unit)}</span> : null}
-                </span>
-                <span className="text-muted-foreground tabular-nums w-14 text-right">
-                  {pct}%
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
+/** 「その他」を除いた系列を内訳の項目にする */
+function breakdownItems(
+  series: CompositionChartData["series"],
+  latest: Record<string, string | number>
+): BreakdownItem[] {
+  return series
+    .filter((s) => s.label !== "その他")
+    .map((s) => ({ key: s.key, label: s.label, value: Number(latest[s.key]) || 0, color: s.color }));
 }
 
 // ---------------------------------------------------------------------------
@@ -292,9 +198,6 @@ function VerticalStacked({
   }, [trendData, series, unit, showTooltip, updateTooltipPosition, hideTooltip]);
 
   const latest = trendData.length > 0 ? trendData[trendData.length - 1] : null;
-  const total = latest
-    ? series.reduce((sum, s) => sum + (Number(latest[s.key]) || 0), 0)
-    : 0;
 
   return (
     <div className="flex flex-col gap-2">
@@ -309,30 +212,7 @@ function VerticalStacked({
       {latest && (
         <div className="mt-3 pt-2 border-t">
           <div className="text-xs text-muted-foreground mb-1.5">{latestYearLabel}</div>
-          <ul className="divide-y divide-border">
-            {series
-              .filter((s) => s.label !== "その他")
-              .map((s, i) => {
-                const value = Number(latest[s.key]) || 0;
-                const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
-                return (
-                  <li key={`${s.key}-${i}`} className="flex items-center gap-2 py-1.5 text-sm">
-                    <span
-                      className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
-                      style={{ backgroundColor: s.color }}
-                    />
-                    <span className="text-foreground/80">{s.label}</span>
-                    <span className="ml-auto tabular-nums font-semibold">
-                      {value.toLocaleString()}
-                      {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(unit)}</span> : null}
-                    </span>
-                    <span className="text-muted-foreground tabular-nums w-14 text-right">
-                      {pct}%
-                    </span>
-                  </li>
-                );
-              })}
-          </ul>
+          <BreakdownList items={breakdownItems(series, latest)} unit={unit} />
         </div>
       )}
     </div>

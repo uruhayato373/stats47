@@ -18,7 +18,7 @@ import {
 
 // ============================================================================
 // Context — テーマダッシュボードの選択エリア (47都道府県 / 都道府県) の単一ソース。
-// H1 (ThemeAreaHeader)・セレクタ (PrefectureSelect)・ダッシュボード (ThemeDashboardTabbed)
+// H1 (ThemeAreaHeader)・セレクタ (PrefectureSelect)・ダッシュボード (ThemeDashboardClient)
 // が共有する。URL `?pref=NNNNN` と双方向同期し、canonical は pref 無しを維持する。
 // サーバーが URL / Cookie / 初回既定値を解決して initial を渡すため、hydration 後の
 // 表示ジャンプを起こさない。クライアント操作は Cookie と URL に同期する。
@@ -84,9 +84,10 @@ export function ThemePrefectureProvider({
     []
   );
 
-  // URL / Cookie / 初回既定値からサーバーが解決した選択を、次回アクセス用に保存する。
+  // URL / Cookie / 初回既定値からサーバーが解決した県を、次回アクセス用に保存する。
+  // 全国のページ (initialAreaCode = null) を開いただけでは消さない。全国へ戻るのは地域の Sheet で「全国」を選んだときだけ
   useEffect(() => {
-    writeThemePrefecturePreference(initialAreaCode);
+    if (initialAreaCode) writeThemePrefecturePreference(initialAreaCode);
   }, [initialAreaCode]);
 
   // Provider をサーバー初期値なしで使う既存画面向けの後方互換。

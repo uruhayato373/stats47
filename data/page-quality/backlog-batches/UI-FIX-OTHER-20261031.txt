@@ -1,0 +1,10 @@
+machine|https://stats47.jp/japan|a11y_violations
+machine|https://stats47.jp/municipalities/ranking/junior-high-school-count|a11y_violations
+machine|https://stats47.jp/municipalities/ranking/manufacturing-shipment-amount/23000|a11y_violations
+machine|https://stats47.jp/municipalities/ranking/per-taxpayer-income/13000|a11y_violations
+machine|https://stats47.jp/municipalities/themes/aging-society|a11y_violations
+machine|https://stats47.jp/municipalities|a11y_violations
+machine|https://stats47.jp/products/data-p-01|a11y_violations
+machine|https://stats47.jp/products|a11y_violations
+machine|https://stats47.jp/tag/population|a11y_violations
+machine|other|title_changed

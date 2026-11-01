@@ -189,40 +189,17 @@ test('unchanged reviewed evidence stays quiet but unfinished source checks resum
   );
 });
 
-test('fixed-year comparison tables count separately from switcher cards and must contain rows', () => {
+test('every metric group in a section counts as a card (no fixed-year comparison tables since 2026-10-31)', () => {
   const expected = expectedSectionPanels(
-    {
-      metricGroups: [
-        { key: 'fixed', comparisonYear: '2023' },
-        { key: 'latest' },
-      ],
-    },
-    { metricGroupKeys: ['fixed', 'latest'] }
+    { metricGroups: [{ key: 'trend' }, { key: 'latest' }] },
+    { metricGroupKeys: ['trend', 'latest', 'missing'] }
   );
-  assert.deepEqual(expected, {
-    expectedCards: 1,
-    expectedFixedYears: ['2023'],
-  });
-  const section = {
-    key: 'overview',
-    count: 1,
-    cards: 1,
-    ...expected,
-    fixedTables: [{ year: '2023', rows: 47 }],
-  };
+  assert.deepEqual(expected, { expectedCards: 2 });
+  const section = { key: 'overview', count: 1, cards: 2, ...expected };
   assert.deepEqual(runtimeFindings({ ...good(), sections: [section] }), []);
-  for (const fixedTables of [
-    [],
-    [{ year: '2022', rows: 47 }],
-    [{ year: '2023', rows: 0 }],
-  ])
-    assert.ok(
-      runtimeFindings({
-        ...good(),
-        sections: [{ ...section, fixedTables }],
-      }).includes('fixed-year-tables:overview')
-    );
+  assert.deepEqual(runtimeFindings({ ...good(), sections: [{ ...section, cards: 1 }] }), ['section-cards:overview:1/2']);
 });
+
 
 test('an unfinished response body cannot hold the entire browser audit open', async () => {
   assert.equal(

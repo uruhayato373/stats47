@@ -365,7 +365,7 @@
       "sourceLink": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/L",
       "dataSource": "ranking",
       "gridColumnSpan": 12,
-      "section": "candidate-77",
+      "section": "household-income",
       "sortOrder": 40
     },
     {
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "key": "candidate-77-1",
+      "key": "household-consumption-expenditure-1",
       "title": "消費支出（全費目）",
       "rankingKeys": [
         "household-survey-consumption-expenditure"
@@ -506,7 +506,7 @@
       ]
     },
     {
-      "key": "candidate-80-1",
+      "key": "income-and-asset-inequality-1",
       "title": "等価可処分所得ジニ係数（総世帯）",
       "rankingKeys": [
         "gini-coefficient-disposable-income"
@@ -516,7 +516,7 @@
       ]
     },
     {
-      "key": "candidate-80-2",
+      "key": "income-and-asset-inequality-2",
       "title": "等価金融資産残高ジニ係数（総世帯）",
       "rankingKeys": [
         "gini-coefficient-financial-assets"
@@ -540,12 +540,12 @@
         "actual-income-worker-households-per-month",
         "disposable-income-worker-households"
       ],
-      "relatedChartKeys": [
-        "theme-real-income-actual-vs-disposable"
-      ],
       "relatedThemeKeys": [
         "local-economy",
         "labor-wages"
+      ],
+      "relatedChartKeys": [
+        "theme-real-income-actual-vs-disposable"
       ]
     },
     {
@@ -563,12 +563,12 @@
         "disposable-income-after-rent",
         "consumer-price-difference-index-overall"
       ],
-      "relatedChartKeys": [
-        "real-income-cpi-breakdown"
-      ],
       "relatedThemeKeys": [
         "consumer-prices",
         "living-housing"
+      ],
+      "relatedChartKeys": [
+        "real-income-cpi-breakdown"
       ]
     },
     {
@@ -585,12 +585,12 @@
         "consumption-expenditure-multi-person-households-per-month",
         "per-capita-prefectural-income-h27"
       ],
-      "relatedChartKeys": [
-        "real-income-cpi-breakdown"
-      ],
       "relatedThemeKeys": [
         "consumer-prices",
         "local-economy"
+      ],
+      "relatedChartKeys": [
+        "real-income-cpi-breakdown"
       ]
     }
   ],
@@ -614,7 +614,8 @@
         "household-income-2"
       ],
       "chartKeys": [
-        "theme-real-income-actual-vs-disposable"
+        "theme-real-income-actual-vs-disposable",
+        "real-income-household-composition"
       ]
     },
     {
@@ -623,8 +624,7 @@
       "description": "可処分所得を地域の物価指数で補正した参考値です。個々の世帯の購買力を直接表すものではありません。",
       "metricGroupKeys": [
         "purchasing-power"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "after-rent",
@@ -632,8 +632,7 @@
       "description": "勤労者世帯の可処分所得から、二人以上の全世帯の年間家賃支出を12で割って差し引いた参考計算です。母集団が完全には一致せず、実際の平均的な手残りを示すものではありません。県庁所在市の市場家賃は別の関連指標です。",
       "metricGroupKeys": [
         "after-rent"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "prices",
@@ -646,23 +645,20 @@
       ]
     },
     {
-      "key": "candidate-77",
-      "title": "家計の消費配分",
-      "description": "全国家計構造調査の都道府県全域・二人以上世帯が対象です。10〜11月の1世帯当たり月平均で、県庁所在市の通年家計調査とは異なります。総額と10費目の構成を分けて確認します。",
+      "key": "household-consumption-expenditure",
+      "title": "毎月の生活費や消費支出はどれくらいかかっているか",
+      "concern": "地域ごとの物価や生活水準による消費支出の違いを把握したい。",
       "metricGroupKeys": [
-        "candidate-77-1"
-      ],
-      "chartKeys": [
-        "real-income-household-composition"
+        "household-consumption-expenditure-1"
       ]
     },
     {
-      "key": "candidate-80",
-      "title": "所得と金融資産の分布",
-      "description": "2019年全国家計構造調査の総世帯について、県内の分布の不均等度を示すジニ係数を比較します。所得と金融資産では有効回答世帯が異なるため、同一標本の差ではありません。金融資産は負債控除前の貯蓄現在高です。",
+      "key": "income-and-asset-inequality",
+      "title": "地域内の所得や金融資産の格差は大きいか",
+      "concern": "住民間の経済的格差や不平等の程度がどのくらいか知りたい。",
       "metricGroupKeys": [
-        "candidate-80-1",
-        "candidate-80-2"
+        "income-and-asset-inequality-1",
+        "income-and-asset-inequality-2"
       ]
     }
   ]

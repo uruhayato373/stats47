@@ -34,16 +34,13 @@ it('全国は分母を合計し、都道府県率の単純平均を使わない'
   expect(values.designatedCenterPopulation).toBe(50.0001);
   expect(values.designatedCenterPopulationShare).toBe(50.0001/9300.0047*100);
 });
-it('全国と47県を県コード順で表示し、地図の取得は県選択後に行う', () => {
+// テーマのページは今の地域の行だけを出す。全国のページは全国の行だけ (2026-10-31。47 県の表は Geo の分析ページ)
+it('全国は全国の行だけを表示し、地図の取得は県選択後に行う', () => {
   render(<ThemeGeoSnowDesignationClient analysisId="snow-test" snapshot={snapshot} manifest={manifest} />);
   const rows = within(screen.getByRole('table')).getAllByRole('row');
-  expect(rows).toHaveLength(49);
+  expect(rows).toHaveLength(2);
   expect(rows[1]).toHaveTextContent('全国');
-  expect(rows[2]).toHaveTextContent('北海道');
-  expect(rows[48]).toHaveTextContent('沖縄県');
   expect(GeoSpatialEvidenceExplorer).not.toHaveBeenCalled();
-  fireEvent.click(screen.getByRole('button', { name: '新潟県' }));
-  expect(setSelected).toHaveBeenCalledWith('15000', '新潟県');
 });
 it('47県の共通セレクタに追従し、県固定の地図と同じ県の表を表示する', () => {
   const view = render(<ThemeGeoSnowDesignationClient analysisId="snow-test" snapshot={snapshot} manifest={manifest} />);

@@ -20,15 +20,20 @@ describe('拡充テーマの地域・母集団・分母', () => {
     }
   });
   it('就業・進学・将来推計の問いを別の指標で代用しない', () => {
-    const keys = (theme: string, id: number) => THEME_CATALOGS[theme].metricGroups!
-      .filter((group) => group.key.startsWith(`candidate-${id}-`)).flatMap((group) => group.rankingKeys);
-    expect(keys('aging-society', 36)).toEqual(['elderly-workers-ratio']);
-    expect(keys('education-culture', 53)).toEqual(['high-school-advancement-rate']);
-    expect(keys('labor-mobility', 37)).toEqual([
-      'non-regular-employment-rate', 'nonregular-employees-count',
-      'nonregular-continuation-wish-rate', 'nonregular-job-change-wish-rate',
-    ]);
-    expect(keys('population-dynamics', 47)).toEqual(['future-population', 'future-population-change-rate-2050']);
+    // 章は読者の問いで組み直す (2026-10-31) ので章の key には依存せず、その問いに答える指標そのものがカードに出ていることを見る
+    const shown = (theme: string) => new Set(THEME_CATALOGS[theme].metricGroups!.flatMap((group) => group.rankingKeys));
+    const expected: Record<string, string[]> = {
+      'aging-society': ['elderly-workers-ratio'],
+      'education-culture': ['high-school-advancement-rate'],
+      'labor-mobility': [
+        'non-regular-employment-rate', 'nonregular-employees-count',
+        'nonregular-continuation-wish-rate', 'nonregular-job-change-wish-rate',
+      ],
+      'population-dynamics': ['future-population', 'future-population-change-rate-2050'],
+    };
+    for (const [theme, keys] of Object.entries(expected)) {
+      for (const key of keys) expect(shown(theme), `${theme}/${key}`).toContain(key);
+    }
   });
   it('ひとり親と単身世帯を分け、保育士当たりの児童数を総数と呼ばない', () => {
     expect(THEME_CATALOGS['single-parent-households'].metrics.map((metric) => metric.rankingKey)).not.toContain('single-person-household-ratio');

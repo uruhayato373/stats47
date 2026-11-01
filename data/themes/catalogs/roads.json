@@ -248,6 +248,68 @@
       "dataSource": "ranking",
       "section": "road-stock",
       "sortOrder": 10
+    },
+    {
+      "componentKey": "roads-road-bridge-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "title": "措置が必要な道路橋の内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "road-bridge-condition-iii-count",
+            "label": "道路橋の早期措置段階（Ⅲ）",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "road-bridge-condition-iv-count",
+            "label": "道路橋の緊急措置段階（Ⅳ）",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "road-bridge-condition-iii-count",
+        "road-bridge-condition-iv-count"
+      ],
+      "sourceName": "国土交通省「道路メンテナンス年報（令和7年度）」",
+      "sourceLink": "https://www.mlit.go.jp/road/sisaku/yobohozen/yobohozen_maint_r07.html",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "road-bridge-maintenance",
+      "sortOrder": 100
+    },
+    {
+      "componentKey": "roads-road-tunnel-maintenance-composition-2",
+      "componentType": "composition-chart",
+      "title": "措置が必要なトンネルの内訳（構成比）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "road-tunnel-condition-iii-count",
+            "label": "トンネルの早期措置段階（Ⅲ）",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "road-tunnel-condition-iv-count",
+            "label": "トンネルの緊急措置段階（Ⅳ）",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "road-tunnel-condition-iii-count",
+        "road-tunnel-condition-iv-count"
+      ],
+      "sourceName": "国土交通省「道路メンテナンス年報（令和7年度）」",
+      "sourceLink": "https://www.mlit.go.jp/road/sisaku/yobohozen/yobohozen_maint_r07.html",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "road-tunnel-maintenance",
+      "sortOrder": 101
     }
   ],
   "evidenceTopics": [
@@ -265,11 +327,11 @@
         "road-length-per-km2",
         "average-road-traffic-volume"
       ],
-      "relatedChartKeys": [
-        "roads-length-trend"
-      ],
       "relatedThemeKeys": [
         "local-economy"
+      ],
+      "relatedChartKeys": [
+        "roads-length-trend"
       ]
     },
     {
@@ -285,11 +347,11 @@
         "road-total-length-with-expressway",
         "main-road-paving-rate"
       ],
-      "relatedChartKeys": [
-        "roads-length-trend"
-      ],
       "relatedThemeKeys": [
         "local-finance"
+      ],
+      "relatedChartKeys": [
+        "roads-length-trend"
       ]
     }
   ],
@@ -329,7 +391,6 @@
       "metricGroupKeys": [
         "expressways"
       ],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "highway"
       ]
@@ -341,23 +402,33 @@
       "metricGroupKeys": [
         "condition-use-1",
         "condition-use-2"
-      ],
-      "chartKeys": []
+      ]
     },
     {
-      "key": "candidate-89",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性",
-      "description": "2025年度末時点の全道路管理者の施設を所在地の県別に比較します。2014〜2025年度の最新診断による総数と、その内数である早期措置段階（Ⅲ）・緊急措置段階（Ⅳ）を掲載します。3巡目だけの点検実施数、修繕未着手数、倒壊確率とは異なります。架設年度分布は2025年度に点検・掲載された橋だけを別の分母にし、年度末に診断中の橋を除きます。全管理橋の年齢構成へ一般化しません。",
+      "key": "road-bridge-maintenance",
+      "title": "老朽化した道路橋の点検や修繕対策は追いついているか",
+      "concern": "身近にある道路橋が老朽化し崩落や通行止めの危険がないか不安だ。",
       "metricGroupKeys": [
-        "candidate-89-1",
-        "candidate-89-2",
-        "candidate-89-3",
-        "candidate-89-4",
-        "candidate-89-5",
-        "candidate-89-6"
+        "road-bridge-maintenance-1",
+        "road-bridge-maintenance-2"
+      ],
+      "chartKeys": [
+        "roads-road-bridge-maintenance-composition-2"
       ],
       "embeddedSectionKeys": [
         "bridge-inspection-age"
+      ]
+    },
+    {
+      "key": "road-tunnel-maintenance",
+      "title": "トンネルの点検状況や危険な状態の施設はどのくらいあるか",
+      "concern": "山間部などのトンネルの老朽化が進み安全に通行できるか心配だ。",
+      "metricGroupKeys": [
+        "road-tunnel-maintenance-1",
+        "road-tunnel-maintenance-2"
+      ],
+      "chartKeys": [
+        "roads-road-tunnel-maintenance-composition-2"
       ]
     }
   ],
@@ -413,7 +484,7 @@
       ]
     },
     {
-      "key": "candidate-89-1",
+      "key": "road-bridge-maintenance-1",
       "title": "道路橋の診断済総数",
       "rankingKeys": [
         "road-bridge-diagnosed-count"
@@ -423,27 +494,18 @@
       ]
     },
     {
-      "key": "candidate-89-2",
-      "title": "道路橋の早期措置段階（Ⅲ）",
+      "key": "road-bridge-maintenance-2",
+      "title": "措置が必要な道路橋の内訳",
       "rankingKeys": [
-        "road-bridge-condition-iii-count"
+        "road-bridge-condition-iii-count",
+        "road-bridge-condition-iv-count"
       ],
       "defaultCheckedKeys": [
         "road-bridge-condition-iii-count"
       ]
     },
     {
-      "key": "candidate-89-3",
-      "title": "道路橋の緊急措置段階（Ⅳ）",
-      "rankingKeys": [
-        "road-bridge-condition-iv-count"
-      ],
-      "defaultCheckedKeys": [
-        "road-bridge-condition-iv-count"
-      ]
-    },
-    {
-      "key": "candidate-89-4",
+      "key": "road-tunnel-maintenance-1",
       "title": "トンネルの診断済総数",
       "rankingKeys": [
         "road-tunnel-diagnosed-count"
@@ -453,23 +515,14 @@
       ]
     },
     {
-      "key": "candidate-89-5",
-      "title": "トンネルの早期措置段階（Ⅲ）",
+      "key": "road-tunnel-maintenance-2",
+      "title": "措置が必要なトンネルの内訳",
       "rankingKeys": [
-        "road-tunnel-condition-iii-count"
-      ],
-      "defaultCheckedKeys": [
-        "road-tunnel-condition-iii-count"
-      ]
-    },
-    {
-      "key": "candidate-89-6",
-      "title": "トンネルの緊急措置段階（Ⅳ）",
-      "rankingKeys": [
+        "road-tunnel-condition-iii-count",
         "road-tunnel-condition-iv-count"
       ],
       "defaultCheckedKeys": [
-        "road-tunnel-condition-iv-count"
+        "road-tunnel-condition-iii-count"
       ]
     }
   ]

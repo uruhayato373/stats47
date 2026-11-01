@@ -20,10 +20,11 @@ import remarkGfm from "remark-gfm";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { AffiliateTextAdList, BannerAd } from "@/features/ads";
+import { AdCell, AffiliateTextAdList, BannerAd } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
+import { adSlotBox } from "@/lib/ad-placements";
 import {
     ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
@@ -41,7 +42,6 @@ import { toCalloutType } from "./callout-config";
 import { preprocessCallouts } from "./md-preprocessor";
 import { RankingLinkCard } from "./RankingLinkCard";
 import { ResponsiveArticleImage } from "./ResponsiveArticleImage";
-import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
 
 /** 見出しの children から純粋なテキストを抽出 (TOC anchor 用) */
 function extractTextFromChildren(children: ReactNode): string {
@@ -240,7 +240,7 @@ function makeMdComponents(
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "ranking-table" || c.tagName === "site-link"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 // Zenn 準拠: 行間 1.9 / 連続段落間 24px (p+p{margin-top:1.5em} の移植)
@@ -262,13 +262,15 @@ function makeMdComponents(
         // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
         "ad-slot": () =>
             ADSENSE_DISPLAY_ENABLED ? (
-                <div className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose`}>
+                <AdCell label="広告" className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose px-0!`}>
                     <AdSenseAd
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
                         showLabel={false}
+                        // 箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい × 280px。デスクトップだけ)
+                        slotBox={adSlotBox("adsense-body")}
                     />
-                </div>
+                </AdCell>
             ) : null,
 
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
@@ -402,22 +404,6 @@ function makeMdComponents(
             </Link>
         ),
 
-        "ranking-table": ({ "ranking-key": rankingKey, title, "value-label": valueLabel, limit, order, paginated, "display-unit": displayUnit }: ComponentProps & { "ranking-key"?: string; "value-label"?: string; "display-unit"?: string }) => {
-            if (!rankingKey) return null;
-            return (
-                <div className="my-6 not-prose">
-                    <MarkdownRankingTable
-                        rankingKey={rankingKey as string}
-                        title={title as string | undefined}
-                        valueLabel={valueLabel as string | undefined}
-                        limit={limit != null ? Number(limit) : undefined}
-                        order={order as "top" | "bottom" | undefined}
-                        paginated={paginated === "true"}
-                        displayUnit={displayUnit as string | undefined}
-                    />
-                </div>
-            );
-        },
 
         "site-link": ({ category }: ComponentProps & { category?: string }) => {
             if (!category) return null;
@@ -581,13 +567,15 @@ export function MDContent({
             </ReactMarkdown>
             {/* 広告: 記事末尾。手動 <ad-slot> 未設置記事のみ（injectAdSlots の中盤 2 枠に加えて末尾 1 枠）。 */}
             {ADSENSE_DISPLAY_ENABLED && !source.includes("<ad-slot") && (
-                <div className="my-8 not-prose">
+                <AdCell label="広告" className="my-8 not-prose px-0!">
                     <AdSenseAd
                         format={BLOG_ARTICLE_INLINE.format}
                         slotId={BLOG_ARTICLE_INLINE.slotId}
                         showLabel={false}
+                        // モバイルでも出る枠なので、台帳の全幅の箱 (デスクトップ 280px・モバイル 250px)
+                        slotBox={adSlotBox("adsense-body-all")}
                     />
-                </div>
+                </AdCell>
             )}
         </article>
     );

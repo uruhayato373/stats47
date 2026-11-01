@@ -94,7 +94,7 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "gender-participation-indicator-1",
+      "key": "work-and-wage-gap-1",
       "title": "男女間賃金比（女性／男性）",
       "rankingKeys": [
         "gender-wage-gap"
@@ -104,47 +104,7 @@
       ]
     },
     {
-      "key": "gender-participation-indicator-2",
-      "title": "女性労働力人口比率",
-      "rankingKeys": [
-        "labor-force-population-ratio-woman"
-      ],
-      "defaultCheckedKeys": [
-        "labor-force-population-ratio-woman"
-      ]
-    },
-    {
-      "key": "gender-participation-indicator-3",
-      "title": "男性労働力人口比率",
-      "rankingKeys": [
-        "labor-force-population-ratio-man"
-      ],
-      "defaultCheckedKeys": [
-        "labor-force-population-ratio-man"
-      ]
-    },
-    {
-      "key": "gender-participation-indicator-4",
-      "title": "女性の家事時間（15歳以上・1日平均）",
-      "rankingKeys": [
-        "housework-avg-time-female"
-      ],
-      "defaultCheckedKeys": [
-        "housework-avg-time-female"
-      ]
-    },
-    {
-      "key": "gender-participation-indicator-5",
-      "title": "男性の家事時間（15歳以上・1日平均）",
-      "rankingKeys": [
-        "housework-avg-time-male"
-      ],
-      "defaultCheckedKeys": [
-        "housework-avg-time-male"
-      ]
-    },
-    {
-      "key": "gender-participation-indicator-6",
+      "key": "work-and-wage-gap-2",
       "title": "女性パートタイム時給",
       "rankingKeys": [
         "female-part-time-hourly-wage"
@@ -154,7 +114,20 @@
       ]
     },
     {
-      "key": "gender-participation-indicator-7",
+      "key": "housework-and-family-1",
+      "title": "男女の家事時間の比較",
+      "rankingKeys": [
+        "housework-avg-time-male",
+        "housework-avg-time-female"
+      ],
+      "defaultCheckedKeys": [
+        "housework-avg-time-male",
+        "housework-avg-time-female"
+      ],
+      "view": "sex"
+    },
+    {
+      "key": "decision-making-participation-1",
       "title": "都道府県の管理職に占める女性の割合",
       "rankingKeys": [
         "prefectural-manager-female-share"
@@ -164,7 +137,7 @@
       ]
     },
     {
-      "key": "gender-participation-indicator-8",
+      "key": "decision-making-participation-2",
       "title": "都道府県議会議員に占める女性の割合",
       "rankingKeys": [
         "prefectural-assembly-female-share"
@@ -172,22 +145,62 @@
       "defaultCheckedKeys": [
         "prefectural-assembly-female-share"
       ]
+    },
+    {
+      "key": "labor-force-participation-1",
+      "title": "男性労働力人口比率",
+      "rankingKeys": [
+        "labor-force-population-ratio-man"
+      ],
+      "defaultCheckedKeys": [
+        "labor-force-population-ratio-man"
+      ]
+    },
+    {
+      "key": "labor-force-participation-2",
+      "title": "女性労働力人口比率",
+      "rankingKeys": [
+        "labor-force-population-ratio-woman"
+      ],
+      "defaultCheckedKeys": [
+        "labor-force-population-ratio-woman"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "gender-participation-overview",
-      "title": "地域の男女共同参画を都道府県別に見る",
-      "description": "男女の賃金・労働力人口比率に加え、15歳以上の男女の家事時間を比較します。家事時間は行わなかった人を含む1日当たりの総平均で、夫婦に限定した値ではありません。管理職は原則2025年4月1日、県議会議員は2024年12月31日現在。管理職は都道府県職員の部局長・次長・課長相当職で、教職員を除きます。議員の分母は定数ではなく現員数です。政令市・市区町村は両系列から除き、各対象の公表割合を比較します。",
+      "key": "work-and-wage-gap",
+      "title": "就業や賃金における男女格差は改善されているか",
+      "concern": "働く女性が増えても男女間の賃金差やパートタイムの時給水準が低いのではないか心配です。",
       "metricGroupKeys": [
-        "gender-participation-indicator-1",
-        "gender-participation-indicator-2",
-        "gender-participation-indicator-3",
-        "gender-participation-indicator-4",
-        "gender-participation-indicator-5",
-        "gender-participation-indicator-6",
-        "gender-participation-indicator-7",
-        "gender-participation-indicator-8"
+        "work-and-wage-gap-1",
+        "work-and-wage-gap-2"
+      ]
+    },
+    {
+      "key": "housework-and-family",
+      "title": "家事や育児などの家庭内での負担は男女で均等になっているか",
+      "concern": "女性に家事負担が偏り仕事との両立や自己実現が難しくなっていないか不安です。",
+      "metricGroupKeys": [
+        "housework-and-family-1"
+      ]
+    },
+    {
+      "key": "decision-making-participation",
+      "title": "都道府県の行政や議会など意思決定の場への女性進出は進んでいるか",
+      "concern": "地域の政策決定や管理職における女性割合が低く女性の意見が反映されにくいのではないか気になります。",
+      "metricGroupKeys": [
+        "decision-making-participation-1",
+        "decision-making-participation-2"
+      ]
+    },
+    {
+      "key": "labor-force-participation",
+      "title": "地域社会において男女ともに就業参加が進んでいるか",
+      "concern": "地域の労働力不足の中で女性や男性の就業参加状況がどうなっているか気になります。",
+      "metricGroupKeys": [
+        "labor-force-participation-1",
+        "labor-force-participation-2"
       ]
     }
   ],

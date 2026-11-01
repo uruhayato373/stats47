@@ -1,1 +1,0 @@
-export { PrefectureMapChart } from "./PrefectureMapChart";

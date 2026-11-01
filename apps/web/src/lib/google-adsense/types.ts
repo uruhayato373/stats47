@@ -23,6 +23,8 @@ export interface AdSlotBoxProp {
   height: number;
   mobileWidth?: number | 'full';
   mobileHeight?: number;
+  /** 幅いっぱいの箱の上限 (px)。本番で測った幅を超える広い本文では中央に置く */
+  maxWidth?: number;
 }
 
 export interface AdSlotProps {
@@ -66,8 +68,9 @@ export interface AdSlotProps {
   rootMargin?: number;
 
   /**
-   * 広告の枠の台帳 (config/ads/placements.json) の箱。渡すと予約の高さと開発中の代わりの表示がこの寸法になる
-   * (本番の実測に合わせた箱。渡さない枠は形式ごとの既定値 getAdReservedMinHeight を使う)。
+   * 広告の枠の台帳 (config/ads/placements.json) の箱。予約の高さと開発中の代わりの表示がこの寸法になる
+   * (本番の実測に合わせた箱)。AdSenseAd では必須 (2026-10-30。渡さない枠が形式ごとの既定値 120px・300px で
+   * 本番の実測 280px・466px より小さく確保していた)。
    */
   slotBox?: AdSlotBoxProp;
 

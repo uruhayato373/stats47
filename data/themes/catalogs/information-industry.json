@@ -49,8 +49,7 @@
       ],
       "defaultCheckedKeys": [
         "information-private-establishments"
-      ],
-      "comparisonYear": "2021"
+      ]
     },
     {
       "key": "information-employment",
@@ -60,8 +59,7 @@
       ],
       "defaultCheckedKeys": [
         "information-private-employees"
-      ],
-      "comparisonYear": "2021"
+      ]
     },
     {
       "key": "information-value-added",

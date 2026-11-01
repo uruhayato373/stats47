@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
-import { FaqSection } from "@/components/content";
+import { ContentDisclosure, FaqSection } from "@/components/content";
 import { SurfaceSection } from "@/components/surface";
 
 import type { MarkdownSectionComponentProps } from "../types";
@@ -41,7 +41,6 @@ const proseClasses =
  */
 export function MarkdownSectionRenderer({ title, props, fallbackSourceName, headingLevel = 2 }: Props) {
   const { subtitle, sources } = props;
-  const Heading = headingLevel === 3 ? "h3" : "h2";
 
   if (props.displayMode === "faq") {
     const faqSources = sources?.length
@@ -67,15 +66,11 @@ export function MarkdownSectionRenderer({ title, props, fallbackSourceName, head
     );
   }
 
+  // 文章の章 (読み方・比較するときの注意など) は最初は閉じ、題名だけを見せる (2026-10-31 オーナー決定:
+  // テーマページはダッシュボードなので可視化を先に並べる)。details なので閉じた本文も HTML に残る (検索から見える)
   return (
-    <SurfaceSection
-      aria-label={title}
-      className="p-6"
-    >
-      <Heading className="text-base font-semibold text-foreground mb-1">{title}</Heading>
-      {subtitle && (
-        <p className="text-xs text-muted-foreground mb-3">{subtitle}</p>
-      )}
+    <SurfaceSection aria-label={title} className="px-6 py-2">
+      <ContentDisclosure title={title} description={subtitle} headingLevel={headingLevel} bordered={false}>
       <div className={proseClasses}>
         <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
           {props.markdown}
@@ -109,6 +104,7 @@ export function MarkdownSectionRenderer({ title, props, fallbackSourceName, head
           出典: {fallbackSourceName}
         </p>
       )}
+      </ContentDisclosure>
     </SurfaceSection>
   );
 }

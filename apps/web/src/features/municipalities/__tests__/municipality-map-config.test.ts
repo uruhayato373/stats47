@@ -1,7 +1,8 @@
 import { resolveColorEncoding } from '@stats47/types';
 import { describe, expect, it } from 'vitest';
 
-import { toMunicipalityMapConfig } from '../components/MunicipalityCityMapClient';
+// 市区町村の地図はランキングと同じ部品で描き、県内の分位 5 段の規則もその部品が持つ (2026-10-30)
+import { toCityMapConfig as toMunicipalityMapConfig } from '@/features/ranking/components/RankingMapChart/RankingMapChartClient';
 
 import type { MapVisualizationConfig } from '@stats47/visualization/d3';
 

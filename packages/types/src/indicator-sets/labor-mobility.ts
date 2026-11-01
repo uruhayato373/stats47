@@ -93,7 +93,7 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
     {
       "rankingKey": "employees-weekly-hours-60plus-count",
       "shortLabel": "週60時間以上の雇用者数（年間200日以上）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "employees-weekly-hours-60plus-rate",

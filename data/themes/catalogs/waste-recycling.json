@@ -50,20 +50,17 @@
       ],
       "defaultCheckedKeys": [
         "garbage-total-output"
-      ],
-      "comparisonYear": "2023"
+      ]
     },
     {
       "key": "recycling-rate",
-      "comparisonMap": true,
       "title": "リサイクル率",
       "rankingKeys": [
         "waste-recycling-rate"
       ],
       "defaultCheckedKeys": [
         "waste-recycling-rate"
-      ],
-      "comparisonYear": "2023"
+      ]
     }
   ],
   "sections": [

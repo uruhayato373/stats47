@@ -28,7 +28,7 @@ export const LAND_PROPERTY_MARKET_SET: IndicatorSet = {
     {
       "rankingKey": "residential-official-land-point-count",
       "shortLabel": "住宅地の公示標準地数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "residential-land-price-change-rate",

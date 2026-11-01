@@ -695,7 +695,9 @@
         "birth-aging-1",
         "birth-aging-2"
       ],
-      "chartKeys": []
+      "embeddedSectionKeys": [
+        "depopulated-settlements"
+      ]
     },
     {
       "key": "age-structure",
@@ -710,28 +712,11 @@
       ]
     },
     {
-      "key": "candidate-42",
-      "title": "婚姻と家族形成",
-      "metricGroupKeys": [
-        "candidate-42-1"
-      ],
-      "description": "婚姻率は総人口千人当たりの件数です。結婚の多い年齢層の人口が少ない県ほど低く出るため、年齢構成の違いと合わせて読みます。"
-    },
-    {
       "key": "elderly-households",
       "title": "高齢者はどの世帯で暮らすか",
       "description": "高齢者の一人暮らしの割合は65歳以上人口に対する割合（高齢者本人の独居率）です。高齢単独世帯の割合は一般世帯に対する割合で、分母が違うため値も順位も一致しません。",
       "metricGroupKeys": [
         "elderly-households"
-      ],
-      "chartKeys": []
-    },
-    {
-      "key": "candidate-36",
-      "title": "高齢者の就業",
-      "description": "高齢就業者割合を掲載します。65～69歳など年齢階級別の有業率は含みません。",
-      "metricGroupKeys": [
-        "candidate-36-1"
       ]
     },
     {
@@ -749,12 +734,19 @@
       ]
     },
     {
-      "key": "candidate-48",
-      "title": "過疎地域等の集落と高齢化",
-      "description": "2024年4月1日時点の調査対象78,485集落について、住民に占める65歳以上割合の7区分を全国・10地方ブロックで示します。県を選択した場合も、その県に対応する地方ブロック全体の集計です。北海道・沖縄県を除く県別内訳は本表に公表されていません。無回答と内数を保持します。県全体の高齢化率とは対象を分けて読みます。",
-      "metricGroupKeys": [],
-      "embeddedSectionKeys": [
-        "depopulated-settlements"
+      "key": "birth-and-marriage",
+      "title": "結婚や出産は減少しているか",
+      "concern": "地域で結婚や子育てをする人が減り少子化が進んでいないか不安です。",
+      "metricGroupKeys": [
+        "birth-and-marriage-1"
+      ]
+    },
+    {
+      "key": "elderly-work-and-care",
+      "title": "高齢者の就業や介護の受け皿は確保されているか",
+      "concern": "高齢期の働く場の確保や介護が必要になった際の施設整備状況が気になります。",
+      "metricGroupKeys": [
+        "elderly-work-and-care-1"
       ]
     },
     {
@@ -802,16 +794,6 @@
       ]
     },
     {
-      "key": "candidate-42-1",
-      "title": "婚姻率",
-      "rankingKeys": [
-        "marriages-per-total-population"
-      ],
-      "defaultCheckedKeys": [
-        "marriages-per-total-population"
-      ]
-    },
-    {
       "key": "elderly-households",
       "title": "高齢者はどの世帯で暮らすか",
       "rankingKeys": [
@@ -826,16 +808,6 @@
       ]
     },
     {
-      "key": "candidate-36-1",
-      "title": "高齢就業者割合",
-      "rankingKeys": [
-        "elderly-workers-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "elderly-workers-ratio"
-      ]
-    },
-    {
       "key": "elderly-care",
       "title": "老人ホームの定員",
       "rankingKeys": [
@@ -843,6 +815,26 @@
       ],
       "defaultCheckedKeys": [
         "nursing-home-capacity-per-1000-65plus"
+      ]
+    },
+    {
+      "key": "birth-and-marriage-1",
+      "title": "婚姻率（人口千人）",
+      "rankingKeys": [
+        "marriages-per-total-population"
+      ],
+      "defaultCheckedKeys": [
+        "marriages-per-total-population"
+      ]
+    },
+    {
+      "key": "elderly-work-and-care-1",
+      "title": "高齢就業者割合",
+      "rankingKeys": [
+        "elderly-workers-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "elderly-workers-ratio"
       ]
     }
   ],

@@ -30,12 +30,11 @@ afterEach(() => {
 });
 const snapshot = () => freightOdSnapshotSchema.parse(freightOdFixture());
 describe('貨物ODの県・機関・方向表示', () => {
-  it('全国の47県別合計から相手県表示へ誘導する', () => {
+  // 全国のページは全国の合計だけを出し、県別の合計を 47 行並べない (2026-10-31。県の比較はランキングのページ)
+  it('全国は合計だけを出し、県別の表を並べない', () => {
     render(<ThemeFreightOdClient snapshot={snapshot()} />);
-    expect(screen.getByRole('table').querySelectorAll('tbody tr')).toHaveLength(
-      47
-    );
-    expect(screen.getByText(/ページ上部で都道府県を選ぶ/)).toBeTruthy();
+    expect(screen.queryByRole('table')).toBeNull();
+    expect(screen.getByText(/全国の発送の合計は/)).toBeTruthy();
   });
   it('選択県の発送先と到着元を切り替える', () => {
     selection.code = '01000';
@@ -48,6 +47,8 @@ describe('貨物ODの県・機関・方向表示', () => {
     expect(table.querySelectorAll('tbody tr')).toHaveLength(47);
   });
   it('海運に切り替えると暦年・フレートトンを表示する', () => {
+    selection.code = '01000';
+    selection.name = '北海道';
     render(<ThemeFreightOdClient snapshot={snapshot()} />);
     fireEvent.click(screen.getByRole('button', { name: '海運' }));
     expect(screen.getByRole('table').getAttribute('aria-label')).toContain(

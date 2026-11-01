@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { DEPOPULATED_SETTLEMENTS_SOURCE as source } from '@stats47/data-configs/theme-catalog';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
@@ -160,7 +160,7 @@ describe('県選択と公表地理を混同しない集落表示', () => {
     fireEvent.click(screen.getByRole('button', { name: '全国へ切替' }));
     expect(screen.getAllByRole('table')).toHaveLength(2);
   });
-  it('年・調査対象区域・原表・ブロック定義を読者へ表示する', () => {
+  it('年・調査対象区域・原表・ブロック定義を読者へ表示する', async () => {
     render(
       <Context code="15000">
         <ThemeDepopulatedSettlementsClient snapshot={snapshot} />
@@ -170,17 +170,20 @@ describe('県選択と公表地理を混同しない集落表示', () => {
     expect(screen.getByText(source.universe)).toBeTruthy();
     expect(
       screen
-        .getByRole('link', { name: `出典: ${source.title}` })
-        .getAttribute('href')
-    ).toBe(`${source.url}#page=81`);
-    expect(
-      screen
         .getByRole('link', { name: /原典の地方ブロック定義/ })
         .getAttribute('href')
     ).toBe(`${source.url}#page=19`);
     expect(screen.getByRole('table').parentElement?.className).toContain(
       'overflow-x-auto'
     );
+    // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
+    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(
+      sheet
+        .getByRole('link', { name: `出典: ${source.title}` })
+        .getAttribute('href')
+    ).toBe(`${source.url}#page=81`);
   });
   it('不明な県を全国やブロックへ置換しない', () => {
     render(

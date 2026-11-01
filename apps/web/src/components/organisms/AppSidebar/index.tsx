@@ -70,6 +70,7 @@ import {
 import {
   HOME_NAV_ITEM,
   PRIMARY_NAV_ITEMS,
+  REGION_NAV_ITEMS,
   type PrimaryNavKey,
 } from './site-navigation';
 
@@ -108,6 +109,11 @@ interface ThemeNavSection {
   label: string;
   icon: LucideIcon;
   items: Array<{ href: string; label: string }>;
+}
+
+/** 「地域」の中の 3 段 (全国・都道府県・市区町村) */
+function getRegionNavItems(): Array<{ href: string; label: string }> {
+  return REGION_NAV_ITEMS.map(({ href, label }) => ({ href, label }));
 }
 
 /** 主要ナビ (常に展開) */
@@ -170,13 +176,15 @@ function NavLinkMenu({ items }: { items: NavLinkItem[] }) {
 
 export function AppSidebar() {
   const primary = getPrimaryNavItems();
+  const regions = getRegionNavItems();
   const categories = getCategoryNavItems();
   const themeSections = getThemeNavSections();
   const themeHrefs = themeSections.flatMap((section) =>
     section.items.map((item) => item.href)
   );
   const hrefs = [
-    ...primary.map((item) => item.href),
+    ...primary.map((item) => item.href).filter((href) => href !== '/areas'),
+    ...regions.map((item) => item.href),
     ...categories.map((item) => item.href),
     ...themeHrefs,
   ];
@@ -225,7 +233,33 @@ export function AppSidebar() {
               メニュー
             </div>
             <SidebarGroupContent>
-              <NavLinkMenu items={primary} />
+              <SidebarMenu>
+                {primary.map(({ href, label, icon: Icon }) =>
+                  href === '/areas' ? (
+                    // 「地域」は全国・都道府県・市区町村の 3 段を開閉できる項目 (2026-10-31 オーナー決定)。主要ナビなので既定で開く
+                    <SidebarCollapsibleItem
+                      key={href}
+                      label={label}
+                      hrefs={regions.map((item) => item.href)}
+                      icon={<Icon />}
+                      defaultOpen
+                    >
+                      {regions.map((item) => (
+                        <SidebarMenuSubItem key={item.href}>
+                          <SidebarNavSubLink href={item.href} label={item.label} />
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarCollapsibleItem>
+                  ) : (
+                    <SidebarMenuItem key={href}>
+                      <SidebarNavLink href={href} label={label}>
+                        <Icon />
+                        <span>{label}</span>
+                      </SidebarNavLink>
+                    </SidebarMenuItem>
+                  )
+                )}
+              </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
           <SidebarCollapsibleGroup label="テーマ" hrefs={themeHrefs}>

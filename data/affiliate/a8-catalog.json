@@ -721,7 +721,7 @@
       "name": "日本語教師を目指すなら、東京・大阪・京都・兵庫のKEC日本語学院",
       "genre": "education 日本語教師を目指すなら、東京・大阪・京都・兵庫のKEC日本語学院",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "education",
       "score": 0.46499,
       "status": "applied",
       "history": [
@@ -759,7 +759,8 @@
         "checkedAt": "2026-09-08T04:04:23.979Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000023920003",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000023920003.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000025720001": {
       "programId": "s00000025720001",
@@ -1076,7 +1077,7 @@
       "name": "フリーコンサルタントのための案件紹介サービス【フリーコンサルタント.jp】",
       "genre": "labor フリーコンサルタントのための案件紹介サービス【フリーコンサルタント.jp】",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "labor",
       "score": 0.44000000000000006,
       "status": "applied",
       "history": [
@@ -1107,7 +1108,8 @@
         "checkedAt": "2026-09-08T04:04:37.957Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026477001",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026477001.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000010261001": {
       "programId": "s00000010261001",
@@ -8616,7 +8618,7 @@
       "name": "手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
       "genre": "population 手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "population",
       "score": 0.49099000000000015,
       "status": "applied",
       "history": [
@@ -8643,7 +8645,8 @@
         "checkedAt": "2026-09-08T04:04:41.274Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000019877001",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000019877001.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000024191001": {
       "programId": "s00000024191001",
@@ -8748,7 +8751,7 @@
       "name": "骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
       "genre": "health 骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "health",
       "score": 0.44900000000000007,
       "status": "applied",
       "history": [
@@ -8775,7 +8778,8 @@
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000027372001",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000027372001.txt"
       },
-      "epcYen": 6
+      "epcYen": 6,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000017718022": {
       "programId": "s00000017718022",
@@ -8876,7 +8880,7 @@
       "name": "当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
       "genre": "health 当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "health",
       "score": 0.44000000000000006,
       "status": "applied",
       "history": [
@@ -8901,7 +8905,8 @@
         "checkedAt": "2026-09-08T04:04:48.234Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000010841004",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000010841004.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000002404014": {
       "programId": "s00000002404014",
@@ -9067,7 +9072,7 @@
       "name": "【公式】BIGLOBE WiMAX +5G",
       "genre": "energy 【公式】BIGLOBE WiMAX +5G",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "energy",
       "score": 0.48131499999999994,
       "status": "applied",
       "history": [
@@ -9094,7 +9099,8 @@
         "checkedAt": "2026-09-08T04:05:01.871Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000000040014",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000000040014.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000024161001": {
       "programId": "s00000024161001",
@@ -9168,7 +9174,7 @@
       "name": "花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
       "genre": "population 花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "population",
       "score": 0.57196,
       "status": "applied",
       "history": [
@@ -9186,7 +9192,8 @@
       "rewardYen": 7974,
       "epcYen": 126,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000022413001": {
       "programId": "s00000022413001",
@@ -9544,9 +9551,9 @@
       "name": "フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
       "genre": "labor フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "labor",
       "score": 0.3600000000000001,
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -9563,12 +9570,52 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:01:11.926Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_it-sap-it-consultant-bank_a8_001"
         }
       ],
       "rewardYen": 8000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_it-sap-it-consultant-bank_a8_001",
+        "title": "フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4W+8NDQ5U+4SXU+HVNAP",
+        "programRef": "a8:s00000022413003",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260728160523&wid=001&eno=01&mid=s00000022413003003000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B8B4W+8NDQ5U+4SXU+HVNAP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "software-engineer-annual-income",
+          "system-consultant-annual-income"
+        ]
+      }
     },
     "s00000008714006": {
       "programId": "s00000008714006",
@@ -9831,7 +9878,7 @@
       "genre": "housing くふうイエタテカウンター｜家づくりの無料相談サービス",
       "company": "株式会社くふう住まい",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.53,
       "rewardYen": 20000,
       "epcYen": 40,
@@ -9858,7 +9905,8 @@
         "checkedAt": "2026-09-08T04:05:16.357Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000026422001",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000026422001.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000022438001": {
       "programId": "s00000022438001",
@@ -9866,7 +9914,7 @@
       "genre": "housing お家づくりなら、LIFULL HOME'S【住まいの窓口】へご相談ください",
       "company": "ＬＩＦＵＬＬ",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.5985,
       "rewardYen": 12500,
       "epcYen": 17,
@@ -9893,7 +9941,8 @@
         "checkedAt": "2026-09-08T04:05:19.734Z",
         "sourceURL": "https://media-console.a8.net/program/detail-not-partnered?programId=s00000022438001",
         "evidencePath": ".local/affiliate-status/stocktake-20260908/a8/details/s00000022438001.txt"
-      }
+      },
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000025809001": {
       "programId": "s00000025809001",
@@ -10036,12 +10085,12 @@
       "genre": "housing 都内3.8万円〜家具家電付き【クロスワンルーム】",
       "company": "株式会社クロスハウス",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.491,
       "rewardYen": 15000,
       "epcYen": 102,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -10058,10 +10107,52 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.857Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:00:59.990Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_3-8_a8_001"
         }
       ],
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_3-8_a8_001",
+        "title": "都内3.8万円〜家具家電付き【クロスワンルーム】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4W+7CXWZ6+4EZ2+BYDTT",
+        "programRef": "a8:s00000020603002",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260728160445&wid=001&eno=01&mid=s00000020603002008000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4B8B4W+7CXWZ6+4EZ2+BYDTT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "interprefecture-net-migration-age15to24",
+          "interprefecture-net-migration-age25to34",
+          "japanese-movers-in",
+          "floor-area-per-dwelling-rented"
+        ]
+      }
     },
     "s00000026609001": {
       "programId": "s00000026609001",
@@ -10112,11 +10203,11 @@
       "genre": "housing 空室対策・収益最大化なら、借上げ実績１万室のクロスハウス",
       "company": "株式会社クロスハウス",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.44000000000000006,
       "rewardYen": 35000,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -10133,10 +10224,51 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:01:05.884Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_s00000020603004_a8_001"
         }
       ],
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000020603004_a8_001",
+        "title": "空室対策・収益最大化なら、借上げ実績１万室のクロスハウス",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4W+7VZSC2+4EZ2+NX735",
+        "programRef": "a8:s00000020603004",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260728160477&wid=001&eno=01&mid=s00000020603004018000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B8B4W+7VZSC2+4EZ2+NX735",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "vacant-housing-for-rent",
+          "vacant-housing-rate",
+          "vacant-housing-ratio"
+        ]
+      }
     },
     "s00000024144004": {
       "programId": "s00000024144004",
@@ -10753,11 +10885,11 @@
       "genre": "羽田空港が運営する産地直送通販サイト【羽田産直セレクション】",
       "company": "羽田空港公式通販サイト",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "furusato",
       "score": 0.10400000000000001,
       "rewardRatePct": 8,
       "rewardType": "rate",
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -10781,10 +10913,52 @@
           "note": "live-site001-reconciled-approved; unknown-journal-preserved; no-resend",
           "operationId": "a8-s00000021701002-2026-09-08T02-52-42-796Z",
           "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T02-53-12-533Z/haneda-reconciliation.json"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:01:29.549Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_s00000021701002_a8_001"
         }
       ],
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000021701002_a8_001",
+        "title": "羽田空港が運営する産地直送通販サイト【羽田産直セレクション】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BC6AX+CZDANM+4NG2+BZVU9",
+        "programRef": "a8:s00000021701002",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260908521785&wid=001&eno=01&mid=s00000021701002015000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4BC6AX+CZDANM+4NG2+BZVU9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "fresh-seafood-consumption-quantity",
+          "other-fresh-fish-consumption-expenditure",
+          "fresh-fruit-consumption-quantity",
+          "fresh-vegetables-consumption-expenditure"
+        ]
+      }
     },
     "s00000027147001": {
       "programId": "s00000027147001",
@@ -10792,7 +10966,7 @@
       "genre": "地域特産品やお土産が買える通販サイト【JR西日本公式/WESTERモール】",
       "company": "西日本旅客鉄道株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "furusato",
       "score": 0.2743,
       "rewardRatePct": 7.35,
       "epcYen": 51,
@@ -10821,7 +10995,8 @@
           "operationId": "a8-s00000027147001-2026-09-08T03-03-35-168Z",
           "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T03-03-52-925Z/wester-reconciliation.json"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000020875001": {
       "programId": "s00000020875001",
@@ -10829,12 +11004,12 @@
       "genre": "九州に眠る、まぼろしのグルメ産直サイト。全品送料無料【九州お取り寄せ本舗】",
       "company": "九州お取り寄せ本舗",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "furusato",
       "score": 0.22,
       "rewardRatePct": 15,
       "confirmRatePct": 40,
       "rewardType": "rate",
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -10858,10 +11033,51 @@
           "note": "live-site001-detail-partnered",
           "operationId": "a8-s00000020875001-2026-09-08T03-03-39-619Z",
           "evidencePath": "C:/Users/m004195/stats47/.local/affiliate-ops/evidence/a8-four-2026-09-08T03-07-00-589Z/s00000020875001-confirmed-detail.txt"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:01:23.517Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_s00000020875001_a8_001"
         }
       ],
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000020875001_a8_001",
+        "title": "九州に眠る、まぼろしのグルメ産直サイト。全品送料無料【九州お取り寄せ本舗】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BC6AX+F5YIIA+4H2M+6BEQ9",
+        "programRef": "a8:s00000020875001",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260908521917&wid=001&eno=01&mid=s00000020875001061000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4BC6AX+F5YIIA+4H2M+6BEQ9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "cod-roe-consumption-expenditure",
+          "cod-roe-consumption-quantity",
+          "chicken-consumption-expenditure"
+        ]
+      }
     },
     "s00000021814001": {
       "programId": "s00000021814001",
@@ -10869,12 +11085,12 @@
       "genre": "カニ・ほたて・いくらが『送料無料』 でお取り寄せ【北海道ぎょれん】",
       "company": "ぎょれん販売株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "furusato",
       "score": 0.23,
       "rewardRatePct": 5,
       "confirmRatePct": 100,
       "rewardType": "rate",
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -10895,10 +11111,53 @@
           "from": "applied",
           "to": "approved",
           "at": "2026-09-25T14:13:52.095Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-31T00:01:17.700Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_s00000021814001_a8_001"
         }
       ],
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる",
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000021814001_a8_001",
+        "title": "カニ・ほたて・いくらが『送料無料』 でお取り寄せ【北海道ぎょれん】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BC6AX+F75DPU+4OBG+626XT",
+        "programRef": "a8:s00000021814001",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=260908521919&wid=001&eno=01&mid=s00000021814001018000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4BC6AX+F75DPU+4OBG+626XT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "crab-consumption-expenditure",
+          "crab-consumption-quantity",
+          "salmon-consumption-expenditure",
+          "fishery-species-catch-scallop",
+          "fishery-species-catch-snow-crab"
+        ]
+      }
     },
     "s00000026077001": {
       "programId": "s00000026077001",
@@ -13212,7 +13471,7 @@
       "genre": "economy 年会費永年無料！キャッシュレス時代のスタンダード【三井住友カード （NL）】",
       "company": "三井住友カード株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "economy",
       "score": 0.527255,
       "rewardYen": 4800,
       "epcYen": 578,
@@ -13230,7 +13489,8 @@
           "to": "applied",
           "at": "2026-10-19T06:36:45.796Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027364001": {
       "programId": "s00000027364001",
@@ -13264,20 +13524,26 @@
       "genre": "中古トラック買取の【トラックファイブ】",
       "company": "株式会社ＺＥＡＬ．ＴＥＡＭ",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "mobility",
       "score": 0.83382,
       "rewardYen": 10000,
       "epcYen": 2481,
       "confirmRatePct": 95.88,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:57:43.037Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027520001": {
       "programId": "s00000027520001",
@@ -13306,7 +13572,7 @@
       "genre": "お支払は使った分だけ！【リボンエナジー】",
       "company": "株式会社リボンエナジー",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "energy",
       "score": 0.74729,
       "rewardYen": 7692,
       "epcYen": 603,
@@ -13324,7 +13590,8 @@
           "to": "applied",
           "at": "2026-10-19T07:12:30.300Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000026570001": {
       "programId": "s00000026570001",
@@ -13467,12 +13734,17 @@
       "rewardYen": 10000,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:57:53.081Z"
         }
       ]
     },
@@ -13488,7 +13760,7 @@
       "epcYen": 134,
       "confirmRatePct": 51.35,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -13499,8 +13771,56 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-10-19T07:15:11.820Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-10-30T22:36:02.769Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-10-30T22:36:19.142Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-10-31T00:04:05.127Z",
+          "adId": "af_s00000022646001_a8_001"
         }
-      ]
+      ],
+      "_priority": 20,
+      "_ce": 68.80900000000001,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_s00000022646001_a8_001",
+        "title": "東大生のオンライン個別指導『トウコベ』",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4BEK9H+5EORLE+4UQK+5ZU29",
+        "programRef": "a8:s00000022646001",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www21.a8.net/svt/bgt?aid=261019925327&wid=001&eno=01&mid=s00000022646001007000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4BEK9H+5EORLE+4UQK+5ZU29",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null,
+        "targetRankingKeys": [
+          "elementary-tutoring-consumption-expenditure",
+          "junior-high-tutoring-consumption-expenditure",
+          "high-school-tutoring-consumption-expenditure",
+          "cram-school-establishment-count"
+        ]
+      }
     },
     "s00000020940002": {
       "programId": "s00000020940002",
@@ -13508,20 +13828,26 @@
       "genre": "重機買取【建機買取屋.コム】は中間マージンなし高額買取、無料スピード査定が特徴",
       "company": "株式会社リペスタ",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "mobility",
       "score": 0.581465,
       "rewardYen": 11000,
       "epcYen": 222,
       "confirmRatePct": 20.31,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:03.042Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000014783001": {
       "programId": "s00000014783001",
@@ -13535,12 +13861,17 @@
       "epcYen": 60,
       "confirmRatePct": 65.21,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:13.232Z"
         }
       ]
     },
@@ -13550,20 +13881,26 @@
       "genre": "【累計お問合わせ数10万件突破！】＜LED照明工事＞業者ご紹介サービス【EMEAO ! 】",
       "company": "株式会社ｅｃｌｏｒｅ",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.56549,
       "rewardYen": 10000,
       "epcYen": 51,
       "confirmRatePct": 66.66,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:25.038Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000024144003": {
       "programId": "s00000024144003",
@@ -13571,19 +13908,25 @@
       "genre": "空き家・中古戸建て買取専門【ラクウル】",
       "company": "株式会社ネクサスプロパティマネジメント",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.564995,
       "rewardYen": 10000,
       "confirmRatePct": 83.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:35.789Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027367001": {
       "programId": "s00000027367001",
@@ -13597,12 +13940,17 @@
       "epcYen": 65,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:45.576Z"
         }
       ]
     },
@@ -13618,12 +13966,17 @@
       "epcYen": 24,
       "confirmRatePct": 67.85,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:58:54.835Z"
         }
       ]
     },
@@ -13639,12 +13992,17 @@
       "epcYen": 71,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:04.094Z"
         }
       ]
     },
@@ -13654,20 +14012,26 @@
       "genre": "認知症による資産凍結から親を守る｜家族信託の「おやとこ」",
       "company": "株式会社こころのカンパニー",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "economy",
       "score": 0.548625,
       "rewardYen": 10000,
       "epcYen": 11,
       "confirmRatePct": 68.75,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:13.335Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027407001": {
       "programId": "s00000027407001",
@@ -13707,12 +14071,17 @@
       "epcYen": 3,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:23.259Z"
         }
       ]
     },
@@ -13727,12 +14096,17 @@
       "rewardYen": 15500,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:32.512Z"
         }
       ]
     },
@@ -13747,12 +14121,17 @@
       "rewardYen": 15000,
       "epcYen": 148,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:41.947Z"
         }
       ]
     },
@@ -13768,12 +14147,17 @@
       "epcYen": 76,
       "confirmRatePct": 12.5,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T22:59:51.354Z"
         }
       ]
     },
@@ -13789,12 +14173,17 @@
       "epcYen": 7,
       "confirmRatePct": 33.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:00.897Z"
         }
       ]
     },
@@ -13809,12 +14198,17 @@
       "rewardYen": 7500,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
         }
       ]
     },
@@ -13829,12 +14223,17 @@
       "rewardYen": 10000,
       "epcYen": 89,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:18.884Z"
         }
       ]
     },
@@ -13870,12 +14269,17 @@
       "epcYen": 83,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:28.910Z"
         }
       ]
     },
@@ -13890,12 +14294,17 @@
       "rewardYen": 31600,
       "epcYen": 55,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:39.566Z"
         }
       ]
     },
@@ -13981,12 +14390,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:48.912Z"
         }
       ]
     },
@@ -13996,18 +14410,24 @@
       "genre": "東証スタンダード上場グループが高値売却を徹底サポート！【明和地所の仲介】",
       "company": "明和地所株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:00:58.628Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027858001": {
       "programId": "s00000027858001",
@@ -14015,18 +14435,24 @@
       "genre": "住み慣れた家に暮らし続けながら資金を確保【つなぎ家】",
       "company": "りたコンサルタンツ株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.44000000000000006,
       "rewardYen": 15000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:08.525Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000024898001": {
       "programId": "s00000024898001",
@@ -14057,12 +14483,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:19.535Z"
         }
       ]
     },
@@ -14076,12 +14507,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 21148,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:29.585Z"
         }
       ]
     },
@@ -14095,12 +14531,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10500,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:39.784Z"
         }
       ]
     },
@@ -14114,12 +14555,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 12000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:49.531Z"
         }
       ]
     },
@@ -14180,12 +14626,17 @@
       "epcYen": 10,
       "confirmRatePct": 40,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:01:59.234Z"
         }
       ]
     },
@@ -14201,12 +14652,17 @@
       "epcYen": 11,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:08.957Z"
         }
       ]
     },
@@ -14248,12 +14704,17 @@
       "epcYen": 42,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:18.383Z"
         }
       ]
     },
@@ -14268,12 +14729,17 @@
       "rewardYen": 5455,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:27.696Z"
         }
       ]
     },
@@ -14313,12 +14779,17 @@
       "score": 0.4,
       "rewardYen": 9000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:37.191Z"
         }
       ]
     },
@@ -14328,20 +14799,26 @@
       "genre": "無料査定依頼キャンペーン【ノムコム】",
       "company": "ノムコム",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "housing",
       "score": 0.395,
       "rewardYen": 5000,
       "epcYen": 10,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:46.701Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000027443001": {
       "programId": "s00000027443001",
@@ -14355,12 +14832,17 @@
       "epcYen": 16,
       "confirmRatePct": 16.66,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:02:56.050Z"
         }
       ]
     },
@@ -14394,12 +14876,17 @@
       "score": 0.38560000000000005,
       "rewardYen": 8640,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:05.397Z"
         }
       ]
     },
@@ -14413,12 +14900,17 @@
       "score": 0.3600000000000001,
       "rewardYen": 8000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:09:23.435Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:14.727Z"
         }
       ]
     },
@@ -14648,20 +15140,26 @@
       "genre": "education 累計10万人受講のロボット&プログラミング教室【ヒューマンアカデミージュニア】",
       "company": "ヒューマンアカデミー株式会社",
       "a8mat": null,
-      "vertical": null,
+      "vertical": "education",
       "score": 0.35150000000000003,
       "rewardYen": 3500,
       "epcYen": 43,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:11:25.520Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:24.348Z"
         }
-      ]
+      ],
+      "verticalNote": "2026-10-31 オーナー指示「未提携のやつもできるだけ利用するように配線」で案件名から付けた。承認後の登録時に確かめる"
     },
     "s00000024621002": {
       "programId": "s00000024621002",
@@ -14674,15 +15172,20 @@
       "rewardRatePct": 20,
       "confirmRatePct": 100,
       "rewardType": "rate",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-10-19T07:11:25.520Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-10-30T23:03:33.693Z"
         }
       ]
     }
   },
-  "updatedAt": "2026-10-24T22:01:55.504Z"
+  "updatedAt": "2026-10-31T00:04:05.128Z"
 }

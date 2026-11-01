@@ -34,7 +34,6 @@ Layer 3: UIミニチャート（カード内埋め込み用）
   apps/web/src/components/charts/            ← ミニチャート (数値タイルは @/components/surface の StatTile)
 
 Feature-scoped（明示的に例外認定）
-  features/blog/components/charts/           ← ブログ専用（useChartDataに依存、移動不可）
   features/ranking/components/               ← ランキング専用（AllPrefecturesChart等）
 ```
 
@@ -52,23 +51,19 @@ Feature-scoped（明示的に例外認定）
 | `BarChartRace` | `D3BarChartRace` | バーチャートレース（アニメーション） |
 | `BoxplotChart` | `D3BoxplotChart` | 箱ひげ図（分布） |
 | `CategoryHeatmap` | `D3CategoryHeatmap` | カテゴリ別ヒートマップ |
-| `CityMapChart` | `D3CityMapChart` | 市区町村地図チャート |
 | `ColumnChart` | `D3ColumnChart` | 横棒グラフ |
 | `DivergingBarChart` | `D3DivergingBarChart` | 正負分岐棒グラフ |
 | `DonutChart` | `D3DonutChart` | ドーナツ円グラフ |
 | `HorizontalDivergingBarChart` | `D3HorizontalDivergingBarChart` | 水平正負分岐棒 |
 | `LineChart` | `D3LineChart` | 時系列折れ線 |
 | `MixedChart` | `D3MixedChart` | 複合チャート（折れ線＋棒） |
-| `PrefectureMapChart` | `D3PrefectureMapChart` | 都道府県地図チャート |
 | `PyramidChart` | `D3PyramidChart` | 人口ピラミッド |
 | `RadarChart` | `D3RadarChart` | レーダーチャート |
-| `Scatterplot` | `D3Scatterplot` | 散布図 |
 | `StackedAreaChart` | `D3StackedAreaChart` | 積み上げエリアチャート |
 | `SunburstChart` | `D3SunburstChart` | サンバーストチャート（階層内訳） |
 | `TileGridMapChart` | `D3TileGridMapChart` | タイルグリッドマップ（47都道府県） |
 | `TreemapChart` | `D3TreemapChart` | ツリーマップ |
 | `DivergingChoroplethMap` | `DivergingChoroplethMap` | 符号付き増減率コロプレス（RdBu・カスタムtooltip・凡例付き） |
-| `TimelineChoroplethMap` | `TimelineChoroplethMap` | 時系列再生UI付きコロプレス（DivergingChoroplethMapをラップ） |
 
 インポートパス: `@stats47/visualization/d3` または `@stats47/visualization/d3/<ComponentName>`
 
@@ -140,6 +135,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
+| `BreakdownDonut` / `BreakdownList` | `@/components/charts/BreakdownDonut` | 内訳の図 (共通の D3 のドーナツ + `ChartLegend` の一覧で名前・値・割合)。テーマの構成比 (`composition-chart`) とドーナツ (`donut-chart`) はこれ 1 つで描く。一覧だけの所は `BreakdownList`。部品の中で D3 の円や色の点を手書きしない (`design-system:check` の `no-inline-d3-pie`・`legend-swatch-uses-chart-legend`。2026-11-01) |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
@@ -172,22 +168,21 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 
 | コンポーネント | 場所 | 理由 |
 |---|---|---|
-| `BlogBarChart` | `@/features/blog/components/charts/BlogBarChart` | `useChartData`（ブログデータ読込）に依存 |
-| `BlogLineChart` | `@/features/blog/components/charts/BlogLineChart` | 同上 |
-| `BlogChoroplethMap` | `@/features/blog/components/charts/BlogChoroplethMap` | 同上 |
-| `BlogScatterPlot` | `@/features/blog/components/charts/BlogScatterPlot` | 同上 |
-| `BlogStatsHighlight` | `@/features/blog/components/charts/BlogStatsHighlight` | 同上 |
 | `RankingAllPrefecturesChart` | `@/features/ranking/components/RankingBarChart` | ランキングページ専用 |
 | `RankingBoxplotChart` | `@/features/ranking/components/RankingBoxplotChart` | 同上 |
 | `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
 | `AgeCompositionChart` | `@/features/theme-dashboard/components/AgeCompositionChart` | テーマ専用積み上げ棒 |
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
-| `MetricYoyChoroplethSection` | `@/features/theme-dashboard/components/MetricYoyChoroplethSection` | データ取得・セクションラッパー。描画は共有 `TimelineChoroplethMap` に委譲 |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
+| `GeoSubjectMap` | `@/features/geo-map/components/GeoSubjectMap` | 主題の重ね合わせ (`/geo/map`)。塗り分け 1 つに線・点の主題を重ね、年のスライダーで描く (d3-geo の SVG)。共通のコロプレスは線・点を重ねられない (2026-11-01 登録) |
+| `QuestionMap` | `@/features/geo-questions/components/QuestionMap` | 問いのページの「どこの話か」を示す補助の地図。問いの組で塗り分け、離島を外して縮尺を決める (d3-geo の SVG。2026-11-01 登録) |
+
+> D3 を直接 import してよいのは、共通の部品 (`components/charts`・`components/stat-charts`) と上の表の feature だけ。
+> `design-system:check` の `d3-only-in-registered-components` が止める (2026-11-01)。
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
-> 時系列再生UIが必要な場合は **`TimelineChoroplethMap`** でラップする。feature 内に独自のコロプレス実装を追加してはならない。
+> feature 内に独自のコロプレス実装を追加してはならない (時系列再生付きの `TimelineChoroplethMap` は使い手が無く 2026-10-30 に削除した)。
 > feature 内の `*ChoroplethSection` / `*ChoroplethMap` は「データ取得・レイアウト配置」のみを担い、描画は共有コンポーネントに委譲する。
 
 ---
@@ -224,7 +219,6 @@ tooltip.style("left", ...).style("top", ...);  // ← useD3Tooltip を使う
 | ボーダー | `hsl(var(--border))` |
 | 地図背景（データなし） | `hsl(var(--muted))` |
 | 境界線（地図） | `hsl(var(--border))` |
-| 境界線（市区町村地図 `CityMapChart`） | `hsl(var(--background))`（地の色の線。`--border` の 0.5 では薄い塗りの上で市区町村界が見えなかった。2026-10-28） |
 | ホバー強調（地図） | `hsl(var(--foreground))` |
 | 道路・特殊用途 | `hsl(var(--warning))` |
 

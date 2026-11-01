@@ -2,6 +2,41 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "welfare-commissioner-consultations-per-person",
+      "pageId": "ranking:welfare-commissioner-consultations-per-person",
+      "title": "民生委員1人当たり相談・支援件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J05201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J05201"
+        },
+        "derived": false,
+        "configHash": "76056a82fe5d68c5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:welfare-commissioner-consultations-per-person",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "welfare-commissioner-count-per-100k",
       "pageId": "ranking:welfare-commissioner-count-per-100k",
       "title": "民生委員数",
@@ -1981,7 +2016,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -2021,7 +2056,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commerce",
+          "pageId": "municipality-theme:retail-commerce",
           "kind": "municipality-theme"
         },
         {
@@ -2061,7 +2096,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2101,7 +2136,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2141,7 +2180,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:employees",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2181,7 +2220,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:establishments",
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2221,7 +2264,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -2261,7 +2304,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:business-sales",
+          "pageId": "municipality-theme:local-economy",
           "kind": "municipality-theme"
         },
         {
@@ -4025,7 +4068,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -4065,7 +4108,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:housing",
+          "pageId": "municipality-theme:living-housing",
           "kind": "municipality-theme"
         },
         {
@@ -4525,11 +4568,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:forestry-timber",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:natural-environment",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "municipality-ranking:woodland-area",
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:agriculture-forestry",
+          "pageId": "municipality-theme:agriculture-production",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:forestry-timber",
           "kind": "municipality-theme"
         },
         {
@@ -4800,6 +4855,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:work-avg-time-employed-female",
           "kind": "ranking"
         },
@@ -5026,6 +5085,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "japan-theme:daily-time-use",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:work-avg-time-employed-male",
           "kind": "ranking"
         },
@@ -5071,7 +5134,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:agriculture-forestry",
+          "pageId": "municipality-theme:agriculture-production",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:forestry-timber",
           "kind": "municipality-theme"
         },
         {
@@ -5111,7 +5178,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5187,7 +5258,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5227,7 +5302,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5267,7 +5346,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5307,7 +5390,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5347,7 +5434,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5387,7 +5478,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5427,7 +5522,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5467,7 +5566,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5507,7 +5610,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -5547,7 +5654,11 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:commuting",
+          "pageId": "municipality-theme:labor-mobility",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:regional-transport",
           "kind": "municipality-theme"
         },
         {
@@ -6654,7 +6765,7 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:population",
+          "pageId": "municipality-theme:population-dynamics",
           "kind": "municipality-theme"
         },
         {

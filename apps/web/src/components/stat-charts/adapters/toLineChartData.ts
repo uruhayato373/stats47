@@ -33,14 +33,17 @@ export function toLineChartData(
     String(a.yearCode).localeCompare(String(b.yearCode))
   );
 
+  // 値が 1 つも無い系列は線も凡例も出さない (色は元の並び順で決める)。
+  // 2026-10-30: 全国の値が R2 に無い「充足率」が、線の無いまま凡例にだけ出ていた
+  const hasValue = (label: string) => data.some((row) => typeof row[label] === "number");
   return {
     xAxisKey: "year",
     data,
-    lines: labels.map((label, i) => ({
-      dataKey: label,
-      name: label,
-      color: seriesColors?.[i] ?? CHART_COLORS[i % CHART_COLORS.length],
-    })),
+    lines: labels.flatMap((label, i) =>
+      hasValue(label)
+        ? [{ dataKey: label, name: label, color: seriesColors?.[i] ?? CHART_COLORS[i % CHART_COLORS.length] }]
+        : []
+    ),
     unit: resolveChartUnit(unit, rawDataList),
   };
 }

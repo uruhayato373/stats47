@@ -178,23 +178,25 @@
       "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0004008606",
       "dataSource": "ranking",
       "gridColumnSpan": 12,
-      "section": "single-parent-households-overview",
+      "section": "single-parent-households-trend",
       "sortOrder": 10
     }
   ],
   "metricGroups": [
     {
-      "key": "single-parent-households-indicator-1",
-      "title": "母子世帯の母の就業割合（労働状態不詳を除く）",
+      "key": "single-parent-households-trend-1",
+      "title": "母子世帯数と父子世帯数の推移",
       "rankingKeys": [
-        "single-mother-employment-rate"
+        "single-mother-households",
+        "single-father-households"
       ],
       "defaultCheckedKeys": [
-        "single-mother-employment-rate"
+        "single-mother-households",
+        "single-father-households"
       ]
     },
     {
-      "key": "single-parent-households-indicator-2",
+      "key": "single-parent-employment-rate-1",
       "title": "父子世帯の父の就業割合（労働状態不詳を除く）",
       "rankingKeys": [
         "single-father-employment-rate"
@@ -204,37 +206,17 @@
       ]
     },
     {
-      "key": "single-parent-households-indicator-3",
-      "title": "母子世帯数",
+      "key": "single-parent-employment-rate-2",
+      "title": "母子世帯の母の就業割合（労働状態不詳を除く）",
       "rankingKeys": [
-        "single-mother-households"
+        "single-mother-employment-rate"
       ],
       "defaultCheckedKeys": [
-        "single-mother-households"
+        "single-mother-employment-rate"
       ]
     },
     {
-      "key": "single-parent-households-indicator-4",
-      "title": "父子世帯数",
-      "rankingKeys": [
-        "single-father-households"
-      ],
-      "defaultCheckedKeys": [
-        "single-father-households"
-      ]
-    },
-    {
-      "key": "single-parent-households-indicator-5",
-      "title": "生活保護を受ける母子世帯数（年度平均）",
-      "rankingKeys": [
-        "single-mother-public-assistance-households"
-      ],
-      "defaultCheckedKeys": [
-        "single-mother-public-assistance-households"
-      ]
-    },
-    {
-      "key": "single-parent-households-indicator-6",
+      "key": "child-rearing-allowance-status-1",
       "title": "児童扶養手当受給者数（年度末）",
       "rankingKeys": [
         "child-rearing-allowance-recipients"
@@ -242,23 +224,53 @@
       "defaultCheckedKeys": [
         "child-rearing-allowance-recipients"
       ]
+    },
+    {
+      "key": "single-mother-public-assistance-1",
+      "title": "生活保護を受ける母子世帯数（年度平均）",
+      "rankingKeys": [
+        "single-mother-public-assistance-households"
+      ],
+      "defaultCheckedKeys": [
+        "single-mother-public-assistance-households"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "single-parent-households-overview",
-      "title": "ひとり親家庭の生活を都道府県別に見る",
-      "description": "母子・父子世帯の就業、母子世帯の所得構成、公的支援の利用を別々に比較します。就業は子20歳未満、所得は子18歳未満の世帯が対象です。生活保護は年度平均世帯数、児童扶養手当は年度末受給者数で、同じ母数の率ではありません。",
+      "key": "single-parent-households-trend",
+      "title": "ひとり親家庭の数はどのように推移しているか",
+      "concern": "地域のひとり親家庭が増加傾向にあるのか変化を把握したい。",
       "metricGroupKeys": [
-        "single-parent-households-indicator-1",
-        "single-parent-households-indicator-2",
-        "single-parent-households-indicator-3",
-        "single-parent-households-indicator-4",
-        "single-parent-households-indicator-5",
-        "single-parent-households-indicator-6"
+        "single-parent-households-trend-1"
       ],
       "chartKeys": [
         "single-parent-income-composition"
+      ]
+    },
+    {
+      "key": "single-parent-employment-rate",
+      "title": "ひとり親家庭の親の就業状況に男女差はあるか",
+      "concern": "ひとり親として働くにあたり地域での就業割合や男女差が気になる。",
+      "metricGroupKeys": [
+        "single-parent-employment-rate-1",
+        "single-parent-employment-rate-2"
+      ]
+    },
+    {
+      "key": "child-rearing-allowance-status",
+      "title": "児童扶養手当の受給者はどれくらいいるか",
+      "concern": "自立支援や生活費補助となる手当の受給状況を把握したい。",
+      "metricGroupKeys": [
+        "child-rearing-allowance-status-1"
+      ]
+    },
+    {
+      "key": "single-mother-public-assistance",
+      "title": "生活保護を受けている母子世帯はどれくらいあるか",
+      "concern": "困窮時のセーフティネットとなる生活保護の受給実態を知りたい。",
+      "metricGroupKeys": [
+        "single-mother-public-assistance-1"
       ]
     }
   ],

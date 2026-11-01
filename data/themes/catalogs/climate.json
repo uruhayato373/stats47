@@ -162,8 +162,7 @@
       "description": "代表観測地点の日照時間と快晴日数です。県内全域の平均ではありません。",
       "metricGroupKeys": [
         "sunshine"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "temperature",
@@ -183,15 +182,13 @@
       "metricGroupKeys": [
         "rain-snow-1",
         "rain-snow-2"
-      ],
-      "chartKeys": []
+      ]
     },
     {
       "key": "snow-designation-population",
       "title": "豪雪指定区域と人口",
       "description": "2016年度の指定区域と2020年基準人口の250mメッシュを重ね、区域内人口・面積と境界格子の感度を確認します。",
       "metricGroupKeys": [],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "snow-designation-population"
       ]
@@ -201,25 +198,25 @@
       "title": "県内の日照分布",
       "description": "地図は県内の日照分布を示します。代表観測地点の統計とは解像度・対象期間が異なります。",
       "metricGroupKeys": [],
-      "chartKeys": [],
       "embeddedSectionKeys": [
         "sunshine-map"
       ]
     },
     {
-      "key": "candidate-96",
-      "title": "雪国の暮らしと除雪",
+      "key": "climate-warming-and-heatstroke",
+      "title": "地球温暖化や猛暑による健康被害のリスクは高まっているか",
+      "concern": "近年夏の暑さが厳しく熱中症リスクや平均気温の上昇が気になります。",
       "metricGroupKeys": [
-        "candidate-96-2"
+        "climate-warming-and-heatstroke-1",
+        "climate-warming-and-heatstroke-2"
       ]
     },
     {
-      "key": "candidate-104",
-      "title": "暑さと熱中症の救急搬送",
-      "description": "熱中症救急搬送は2025年5〜9月の確定値です。搬送人員は発症者の全数ではありません。気温・日照は代表観測地点の年間値なので、期間と地理の違いを保って読み、同期間の比較や対策の効果を示すものとは扱いません。",
+      "key": "snowfall-and-accumulation",
+      "title": "降雪や積雪による冬の生活・災害リスクは地域によってどう違うか",
+      "concern": "豪雪地帯での除雪負担やドカ雪による交通遮断・雪害事故が懸念されます。",
       "metricGroupKeys": [
-        "candidate-104-1",
-        "candidate-104-2"
+        "snowfall-and-accumulation-1"
       ]
     }
   ],
@@ -265,17 +262,17 @@
       ]
     },
     {
-      "key": "candidate-96-2",
-      "title": "最深積雪",
+      "key": "climate-warming-and-heatstroke-1",
+      "title": "最高気温",
       "rankingKeys": [
-        "maximum-snow-depth"
+        "maximum-temperature"
       ],
       "defaultCheckedKeys": [
-        "maximum-snow-depth"
+        "maximum-temperature"
       ]
     },
     {
-      "key": "candidate-104-1",
+      "key": "climate-warming-and-heatstroke-2",
       "title": "熱中症救急搬送人員",
       "rankingKeys": [
         "heatstroke-emergency-transports"
@@ -285,13 +282,13 @@
       ]
     },
     {
-      "key": "candidate-104-2",
-      "title": "最高気温",
+      "key": "snowfall-and-accumulation-1",
+      "title": "最深積雪",
       "rankingKeys": [
-        "maximum-temperature"
+        "maximum-snow-depth"
       ],
       "defaultCheckedKeys": [
-        "maximum-temperature"
+        "maximum-snow-depth"
       ]
     }
   ]

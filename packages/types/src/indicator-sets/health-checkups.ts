@@ -28,7 +28,7 @@ export const HEALTH_CHECKUPS_SET: IndicatorSet = {
     {
       "rankingKey": "health-checkup-recipients",
       "shortLabel": "生活習慣病健康診断受診延人員",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "dental-checkup-persons-per-1000",

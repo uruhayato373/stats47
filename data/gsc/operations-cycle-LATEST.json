@@ -1,34 +1,34 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T15:01:17.535Z",
-  "stage": "monitor",
+  "generatedAt": "2026-11-01T00:32:35.684Z",
+  "stage": "monthly",
   "status": "fail",
-  "measurementWeek": "2026-W42",
+  "measurementWeek": "2026-W43",
   "expectedCompletedWeek": "2026-W43",
-  "expectedPlanWeek": "2026-W44",
-  "currentMonth": "2026-10",
+  "expectedPlanWeek": "2026-W45",
+  "currentMonth": "2026-11",
   "summary": {
-    "pass": 10,
+    "pass": 11,
     "warn": 1,
-    "fail": 3
+    "fail": 1
   },
   "checks": [
     {
       "code": "snapshot-period",
       "level": "pass",
-      "detail": "2026-W42 finalized7d coverage complete",
+      "detail": "2026-W43 finalized7d coverage complete",
       "action": null
     },
     {
       "code": "snapshot-freshness",
-      "level": "fail",
-      "detail": "latest=2026-W42, expected>=2026-W43",
-      "action": "npm run fetch-gsc-snapshot -- 2026-W43"
+      "level": "pass",
+      "detail": "latest=2026-W43, expected>=2026-W43",
+      "action": null
     },
     {
       "code": "effect-verdict",
       "level": "pass",
-      "detail": "2026-W42 verdict 2件 / data/effect-verdict/verdicts-2026-W42.json / decidedAt=2026-10-22T23:00:25.740Z",
+      "detail": "2026-W43 verdict 2件 / data/effect-verdict/verdicts-2026-W43.json / decidedAt=2026-10-30T21:37:08.180Z",
       "action": null
     },
     {
@@ -40,7 +40,7 @@
     {
       "code": "baseline-observation",
       "level": "warn",
-      "detail": "ADSENSE-PLACEMENT-01: 1/4週 / missing=2026-W43,2026-W44,2026-W45 / review=2026-11-13",
+      "detail": "ADSENSE-PLACEMENT-01: 2/4週 / missing=2026-W44,2026-W45 / review=2026-11-13",
       "action": null
     },
     {
@@ -52,7 +52,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W43, age=3d",
+      "detail": "week=2026-W44, age=2d",
       "action": null
     },
     {
@@ -64,31 +64,25 @@
     {
       "code": "search-growth-decision",
       "level": "pass",
-      "detail": "2026-W42 の承認/却下 2件（必要 1件以上）",
+      "detail": "2026-W43 の承認/却下 2件（必要 1件以上）",
       "action": null
     },
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-10-25, age=1d",
+      "detail": "latest=2026-10-31, age=1d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
-      "detail": "2026-W42 review の search-growth 節=あり",
+      "detail": "2026-W43 review の search-growth 節=あり",
       "action": null
-    },
-    {
-      "code": "weekly-plan",
-      "level": "fail",
-      "detail": "plan=2026-W43, expected=2026-W44",
-      "action": "/weekly-plan 2026-W44"
     },
     {
       "code": "monthly-plan",
       "level": "pass",
-      "detail": "month=2026-10, GSC運用サイクル節=あり",
+      "detail": "month=2026-11, GSC運用サイクル節=あり",
       "action": null
     },
     {
