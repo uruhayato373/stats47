@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "tatami-per-person-owner",
+      "pageId": "ranking:tatami-per-person-owner",
+      "title": "持ち家住宅の畳数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0220301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0220301"
+        },
+        "derived": false,
+        "configHash": "6fa9cf7bc87891d8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-per-person-owner",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "tatami-per-person-rented",
       "pageId": "ranking:tatami-per-person-rented",
       "title": "借家住宅の畳数",
@@ -6458,45 +6490,6 @@
         "aging-society",
         "population-dynamics"
       ]
-    },
-    {
-      "metricKey": "total-general-project-investment",
-      "pageId": "ranking:total-general-project-investment",
-      "title": "一般事業総投資額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D5200"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D5200"
-        },
-        "derived": false,
-        "configHash": "56325dee5e2b7b95"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:total-general-project-investment",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

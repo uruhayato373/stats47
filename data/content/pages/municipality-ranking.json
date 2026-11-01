@@ -3194,6 +3194,14 @@
       "published": true
     },
     {
+      "id": "municipality-ranking:nursery-waiting-children-rate",
+      "kind": "municipality-ranking",
+      "key": "nursery-waiting-children-rate",
+      "title": "保育所等利用待機児童率の市区町村ランキング",
+      "href": "/municipalities/ranking/nursery-waiting-children-rate",
+      "published": false
+    },
+    {
       "id": "municipality-ranking:nursery-within-500m-young-child-household-ratio",
       "kind": "municipality-ranking",
       "key": "nursery-within-500m-young-child-household-ratio",

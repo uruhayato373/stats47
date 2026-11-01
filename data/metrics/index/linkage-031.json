@@ -2,6 +2,41 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "welfare-commissioner-consultations-per-person",
+      "pageId": "ranking:welfare-commissioner-consultations-per-person",
+      "title": "民生委員1人当たり相談・支援件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J05201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J05201"
+        },
+        "derived": false,
+        "configHash": "76056a82fe5d68c5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:welfare-commissioner-consultations-per-person",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "welfare-commissioner-count-per-100k",
       "pageId": "ranking:welfare-commissioner-count-per-100k",
       "title": "民生委員数",

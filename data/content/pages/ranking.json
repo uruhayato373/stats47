@@ -14266,6 +14266,14 @@
       "published": true
     },
     {
+      "id": "ranking:nursery-waiting-children-rate",
+      "kind": "ranking",
+      "key": "nursery-waiting-children-rate",
+      "title": "保育所等利用待機児童率",
+      "href": "/ranking/nursery-waiting-children-rate",
+      "published": false
+    },
+    {
       "id": "ranking:nursery-within-500m-young-child-household-ratio",
       "kind": "ranking",
       "key": "nursery-within-500m-young-child-household-ratio",

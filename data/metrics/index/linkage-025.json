@@ -2,6 +2,55 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "road-total-length",
+      "pageId": "ranking:road-total-length",
+      "title": "道路実延長",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7110"
+        },
+        "derived": false,
+        "configHash": "abbbf458100da6eb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:highway-japan-58years",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-total-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
       "metricKey": "road-total-length-with-expressway",
       "pageId": "ranking:road-total-length-with-expressway",
       "title": "道路実延長（高速道路を含む）",
@@ -10286,38 +10335,6 @@
       "consumers": [
         {
           "pageId": "ranking:sewerage-penetration-rate-pre2011",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sex-old-population-ratio",
-      "pageId": "ranking:sex-old-population-ratio",
-      "title": "人口性比",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A02104"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A02104"
-        },
-        "derived": false,
-        "configHash": "f52f959e2a471ffd"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:sex-old-population-ratio",
           "kind": "ranking"
         }
       ],

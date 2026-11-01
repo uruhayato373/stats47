@@ -74,6 +74,10 @@ updated: 2026-10-19
 - **次**: ① 待機児童率の metric (manual・provenance 付き) と取り込みスクリプトを作る ② 承認待ちの 2 指標が取り込まれたら公開へ切り替える (`MUNI-RANKING-EXPANSION-01`) ③ `MUNI-KOSODATE-PAGES-01` で公開と内部リンク。
 - **完了条件**: 指標のセットと各指標の最新年が決まり、足りない指標が取り込まれるか見送り理由が書かれている。→ セット・最新年・見送り理由は済み。残りは待機児童率の取り込み。
 
+- **待機児童率を作った (2026-11-01・W45 Must 3・未コミット→同日コミット・R2 未反映)**: metric `nursery-waiting-children-rate` (単位 ％・manual・provenance 9 点セット・市区町村専用) と取り込み `packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (純粋関数とテスト 7 件)。dryRun で 1,741 市区町村すべてに結合し、待機児童のいる自治体 211・合計 2,254 人 (申込者 2,765,235 人) が公表値と一致した (`--dry-run --file <Excel>`。Excel の sha256 `5f3e86aa…664b9bca`)。申込者 0 の 8 自治体は値なし、待機児童 0 の 1,530 自治体は順位なし (config の note に記載)。表記ゆれ 1 件 (梼原町 / 檮原町) は別名表で結合。
+  - **気づいたこと**: 上位は三宅村 24.5%・伊平屋村 8.9% など申込者の少ない村が並ぶ (分母が小さい)。県別ページや子育てのランキングで見せるときに、申込者数の下限を設けるかを公開前に決める。
+  - **R2 反映の承認依頼 (オーナー)**: ① `npx tsx packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (dryRun なし・`.local/r2` に書く) ② `diff-push-r2 --prefix app/stats` か `data-refresh.yml` で R2 へ ③ 反映後に `municipality-catalog.ts` の候補を published にする。子育ての 2 指標 (保育所まで 500m・小学校まで 1km、`MUNI-RANKING-EXPANSION-01`) と 1 回にまとめてよい。
+  - **公開までの残り**: ranking-items・content の派生物の生成、極性 (polarity) の割り当て (人の判断)、取り込み後の `/audit-ranking-data-integrity`。
 ### [MUNI-DATA-PRODUCT-BUILD-01] 製造品出荷額 (manufacturing-shipment-amount) を最新境域に組み替えた時系列 CSV と、結合用の GeoJSON を作る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
 
@@ -163,6 +167,14 @@ updated: 2026-10-19
 - **残り**: ① 全テーマで見える文字・高さを測って比べる ② 1 指標カードが 4 列の格子に 1 枚だけ並ぶ章 (空きが目立つ) の扱いを決める ③ 新しい構成比のチャートは page-components (R2) に入るまで本番に出ない。main へのマージ後の sync-snapshots (page-components) で反映する。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [XLSX-FURIGANA-INGEST-01] ingest-nier-achievement.ts の xlsx 読み取りが、共有文字列のふりがなを本文に混ぜる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-01] [領域:データ]
+
+- **事象 (2026-11-01)**: 待機児童率の取り込みを作る途中で、`packages/data-configs/scripts/ingest-nier-achievement.ts` と同じ xlsx の読み方 (共有文字列の `<rPh>` を除かない) では市区町村名にふりがなが混ざり、結合が 0 件になった。新しく作った `packages/data-configs/scripts/lib/read-xlsx-sheet.ts` は `<rPh>` を除く。`ingest-nier-achievement.ts` は複製の読み方のまま。
+- **次**: ① `ingest-nier-achievement.ts` の読み取りを `lib/read-xlsx-sheet.ts` に差し替える ② 既存の取り込み結果 (学力調査) にふりがな混入による結合漏れが無かったかを、同じ入力で新旧の出力を比べて確かめる。
+- **完了条件**: 2 本の取り込みが同じ読み取りの部品を使い、新旧の出力の差が 0 件か、差の理由が記録されている。
+
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]

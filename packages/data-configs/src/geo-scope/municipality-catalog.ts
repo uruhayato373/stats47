@@ -1005,6 +1005,16 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
     status: 'unknown',
     reason: 'WP0でcities.json artifact不在。未取得と非対応を区別できないため',
   },
+  // 2026-11-01 保育所等利用待機児童率 (こども家庭庁の参考 Excel から年 1 回の手動取り込み・MUNI-KOSODATE-METRICS-01)。
+  // 1,741 市区町村のうち待機児童がいるのは 211 で、残りの 1,530 は値 0 (うち申込者 0 の 8 は値なし)。
+  // 0 は「待機児童がいない」であって順位の対象ではないため、公開するときは valuePolicy: {minExclusive: 0} で 0 を除く。
+  // R2 の cities.json が未取り込みのうちは公開集合に入れない (空のページが sitemap に載る)。取り込み後に件数
+  // (値が正の自治体 211) を確かめてから status を 'published' に切り替える。
+  'nursery-waiting-children-rate': {
+    status: 'candidate',
+    reason:
+      'こども家庭庁の参考 Excel から手動取り込み (ingest-childcare-waiting-rate.ts)。R2 の cities.json が未取り込みのため公開集合に入れない。公開時は valuePolicy {minExclusive: 0} で待機児童 0 の自治体を除く',
+  },
   // 2026-10-22 社会・人口統計体系の未使用コードの公開判断 (判定の記録は municipality-ssds-expansion.ts)
   ...ssdsExpansionAvailability(),
   // 2026-10-28 住宅・土地統計調査の市区町村表から足す指標 (判定の記録は municipality-housing-survey-expansion.ts)

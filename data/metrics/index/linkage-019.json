@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "other-noodles-consumption-quantity",
+      "pageId": "ranking:other-noodles-consumption-quantity",
+      "title": "他の麺類消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010130070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010130070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "641df498b6f7a00b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-noodles-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-parking-fee-consumption-expenditure",
       "pageId": "ranking:other-parking-fee-consumption-expenditure",
       "title": "他の駐車場借料消費支出額",
@@ -6124,38 +6164,6 @@
       "consumers": [
         {
           "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
-      "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
-      "title": "老人福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0330403"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0330403"
-        },
-        "derived": false,
-        "configHash": "5b211f2ce0e75197"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
           "kind": "ranking"
         }
       ],

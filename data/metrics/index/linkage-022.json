@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pots-kettles-consumption-expenditure",
+      "pageId": "ranking:pots-kettles-consumption-expenditure",
+      "title": "鍋・やかん消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "266743edbe0fb77a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pots-kettles-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "pots-kettles-consumption-quantity",
       "pageId": "ranking:pots-kettles-consumption-quantity",
       "title": "鍋・やかん消費量",
@@ -7902,41 +7942,6 @@
         },
         {
           "pageId": "ranking:property-income-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "property-income-prefecture",
-      "pageId": "ranking:property-income-prefecture",
-      "title": "財産収入",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310110"
-        },
-        "derived": false,
-        "configHash": "341e4ba55dda99ce"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:property-income-prefecture",
           "kind": "ranking"
         }
       ],
