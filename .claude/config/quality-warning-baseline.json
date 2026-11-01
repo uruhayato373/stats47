@@ -7,7 +7,7 @@
       "count": 0,
       "owner": "theme-designer",
       "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "theme-catalog",
@@ -15,7 +15,7 @@
       "count": 0,
       "owner": "theme-component-builder",
       "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "theme-catalog",
@@ -23,7 +23,7 @@
       "count": 0,
       "owner": "theme-designer",
       "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "theme-catalog",
@@ -31,7 +31,7 @@
       "count": 0,
       "owner": "theme-component-builder",
       "reason": "55テーマの現行構成で解消済み。専用カードを含む実配置を監査し、警告ゼロを維持する",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "theme-catalog",
@@ -39,7 +39,7 @@
       "count": 250,
       "owner": "theme-designer",
       "reason": "adoptionCriteria requires evidence-backed selection rationale per metric; recording without evidence is worse than leaving it unrecorded",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "theme-catalog",
@@ -55,7 +55,7 @@
       "count": 2284,
       "owner": "data-ingester",
       "reason": "polarity needs evidence-backed assignment instead of bulk inference",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "metric-config",
@@ -63,7 +63,7 @@
       "count": 46,
       "owner": "data-ingester",
       "reason": "unknown units require evidence before parser vocabulary expansion",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     },
     {
       "source": "metric-config",
@@ -71,7 +71,7 @@
       "count": 1,
       "owner": "data-ingester",
       "reason": "inactive municipality migration source awaits official identifier",
-      "expiresAt": "2026-10-31"
+      "expiresAt": "2026-11-30"
     }
   ]
 }

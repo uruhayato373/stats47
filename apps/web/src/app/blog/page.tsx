@@ -44,30 +44,36 @@ const BLOG_INDEX_TITLE = 'ブログ';
 const BLOG_INDEX_DESCRIPTION =
   '都道府県の統計データを分析した記事一覧。人口、経済、教育、福祉などのランキングや時系列分析を掲載。';
 
-export const metadata: Metadata = {
-  title: BLOG_INDEX_TITLE,
-  description: BLOG_INDEX_DESCRIPTION,
-  alternates: {
-    canonical: '/blog',
-  },
-  // per-page R2 OGP を持たない一覧ページは静的 /og-image.jpg を明示する。
-  // 未指定だと Next が root の opengraph-image.tsx (ランタイム next/og) を自動注入し、
-  // Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
-  ...generateOGMetadata({
-    title: formatOgpTitle(BLOG_INDEX_TITLE),
-    description: BLOG_INDEX_DESCRIPTION,
-    imageUrl: DEFAULT_OGP_IMAGE_PATH,
-    url: `${SITE_ORIGIN}/blog`,
-  }),
-};
-
 interface PageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
+function blogPageNumber(page?: string): number {
+  return Math.max(1, parseInt(page ?? '1', 10) || 1);
+}
+
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+  const { page } = await searchParams;
+  const currentPage = blogPageNumber(page);
+  const canonical = currentPage === 1 ? '/blog' : `/blog?page=${currentPage}`;
+  const title = currentPage === 1 ? BLOG_INDEX_TITLE : `${BLOG_INDEX_TITLE} · ${currentPage}ページ目`;
+  return {
+    title,
+    description: BLOG_INDEX_DESCRIPTION,
+    alternates: { canonical },
+    // 一覧は静的 OGP を使う。未指定だと root の next/og が Workers で 500 になる。
+    ...generateOGMetadata({
+      title: formatOgpTitle(title),
+      description: BLOG_INDEX_DESCRIPTION,
+      imageUrl: DEFAULT_OGP_IMAGE_PATH,
+      url: `${SITE_ORIGIN}${canonical}`,
+    }),
+  };
+}
+
 export default async function BlogIndexPage({ searchParams }: PageProps) {
   const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, parseInt(pageParam ?? '1', 10) || 1);
+  const currentPage = blogPageNumber(pageParam);
   const offset = (currentPage - 1) * PAGE_SIZE;
 
   // 記事・meta・次ページ判定を snapshot 1 回読みでまとめて取る。

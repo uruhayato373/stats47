@@ -950,3 +950,12 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **取得コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-30 --end 2026-10-27 --dims page --filter 'page*=/municipalities/ranking/' --limit 500` (全国版)、`--start 2026-10-28 --end 2026-10-29 --limit 2000` の出力から `/<key>/<5 桁>` の行を集計 (県別)。
 - **想定効果**: 置かない [根拠が無い: 県別ページの前例が無く、全国版の流入と置き換わる分を分けられない]。判定エンジンの対象外 (完了条件が記録であり増減判定でないため)。
 - **観測期限**: 2026-11-26。記録する項目と期日後の次の一手は improvements.md の行に書いた。
+
+### [GSC-INDEXING-2026-11-01] 内部リンク・blog 分割ページ canonical の是正と sitemap 再送信
+
+- **観測**: 2026-10-17 取得の coverage queue に未登録の都道府県×テーマ 401 URL があり、2026-11-01 の本番 HTML 実測では親の県ページから直接リンクされるのは 15 URL。blog 未登録 32 URL は分割一覧から到達可能だったが、`/blog?page=2` 以降も canonical が `/blog` を指していた。
+- **変更**: `codex/gsc-indexing-20261101` で県ページの全 53 テーマへの HTML リンクと、blog 分割ページ固有の canonical を実装。2 コミット `f1b150c1a` / `3f4dbb482`。本番未反映。
+- **追加で見つけた入口不具合**: 本番 `/blog/tags` は 200 でも「タグはまだありません」を表示し、未登録の `/tag/生活コスト` へリンクしていなかった。レスポンスに `x-nextjs-prerender: 1` があり、ビルド時に R2 の空 fallback を静的化していた。タグ詳細は 200 で記事を表示するため、タグ一覧だけを `force-dynamic` に変更した。本番未反映。
+- **本番確認**: sitemap index と子 11 件は HTTP 200。公開 sitemap の URL は 9,137 件。代表 24 URL の Googlebot UA 応答は 23 件が 200、意図的廃止 1 件が 410。5xx・空本文・UA 差は検出されなかった。
+- **GSC 操作**: 2026-11-01 09:17 JST に `https://stats47.jp/sitemap.xml` を Search Console API で再送信。直後の API 応答は `lastSubmitted=2026-11-01T00:17:50.344Z`、`isPending=true`、warnings/errors は各 0。Google の再取得・登録増は未確認。
+- **検証と次の観測**: Web 型チェック、対象テスト 18 件、対象 ESLint、docs check は通過。GSC coverage の最新認証取得は `auth_required` で、比較可能な母集団は 2026-10-17 のまま。次回の認証付き週次取得後に対象 URL の URL Inspection 状態と `indexed_by_inspection` を比較し、効果を判定する。
