@@ -1,0 +1,83 @@
+<!-- data-source: rice-consumption-quantity-timeseries.json | generated: 2026-11-01T06:40:52.358Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="米の年間購入量の推移">
+  <title>米の年間購入量の推移</title>
+  <desc>二人以上世帯・全国・2000〜2025年</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">米の年間購入量の推移</text>
+  <text x="340" y="37" text-anchor="middle" font-size="9" class="svg-tick">二人以上世帯・全国・2000〜2025年</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(kg)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="302.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="336.2" x2="666.0" y2="336.2" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="339.7" text-anchor="end" font-size="8.5" class="svg-tick">60</text>
+  <line x1="55.0" y1="265.3" x2="666.0" y2="265.3" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="268.8" text-anchor="end" font-size="8.5" class="svg-tick">70</text>
+  <line x1="55.0" y1="194.4" x2="666.0" y2="194.4" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="197.9" text-anchor="end" font-size="8.5" class="svg-tick">80</text>
+  <line x1="55.0" y1="123.5" x2="666.0" y2="123.5" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="127.0" text-anchor="end" font-size="8.5" class="svg-tick">90</text>
+
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2000</text>
+  <text x="128.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2003</text>
+  <text x="201.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2006</text>
+  <text x="275.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2009</text>
+  <text x="348.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2012</text>
+  <text x="421.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2015</text>
+  <text x="494.9" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2018</text>
+  <text x="568.2" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2021</text>
+  <text x="666.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="middle">2025</text>
+
+  <!-- 系列 -->
+  <polyline points="55.0,58.0 79.4,71.8 103.9,96.3 128.3,95.4 152.8,140.4 177.2,127.2 201.6,158.3 226.1,156.6 250.5,133.8 275.0,158.2 299.4,173.1 323.8,190.3 348.3,203.1 372.7,228.7 397.2,243.7 421.6,268.8 446.0,274.3 470.5,284.7 494.9,295.5 519.4,320.6 543.8,304.1 568.2,330.6 592.7,354.8 617.1,360.0 641.6,334.8 666.0,327.0" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="58.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="79.4" cy="71.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="103.9" cy="96.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="128.3" cy="95.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="152.8" cy="140.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="177.2" cy="127.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="201.6" cy="158.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="226.1" cy="156.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="250.5" cy="133.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="275.0" cy="158.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="299.4" cy="173.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="323.8" cy="190.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="348.3" cy="203.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="372.7" cy="228.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="397.2" cy="243.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="421.6" cy="268.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="446.0" cy="274.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="470.5" cy="284.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="494.9" cy="295.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="519.4" cy="320.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="543.8" cy="304.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="568.2" cy="330.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="592.7" cy="354.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="617.1" cy="360.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="641.6" cy="334.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="327.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+
+  <!-- 軸ラベル -->
+
+
+</svg>
