@@ -3,8 +3,8 @@
   "_comment": "A8 レポート CSV（fetch-a8-ui-csv.mjs）の正規化 SSOT。A8 は確定処理で過去分が遡及変化するため upsert 運用（最新 fetch が正）。手で編集しない。",
   "_siteScopeNote": "siteSummary のみ対象サイトに完全分離された実績（真実源）。monthly / daily / programPeriod は **口座横断**（doboku-note 込み）で、programPeriod は programIdMap の allowlist で対象サイト分だけを抽出したもの。crossCheck が siteSummary との突合結果。",
   "site": "統計で見る都道府県",
-  "updatedAt": "2026-10-22T08:48:41.758Z",
-  "lastRun": "2026-10-22T08-48-21Z",
+  "updatedAt": "2026-10-30T22:25:21.449Z",
+  "lastRun": "2026-10-30T22-24-39Z",
   "period": {
     "raw": "202610-202610",
     "start": "2026-10",
@@ -45,8 +45,8 @@
     },
     {
       "site": "統計で見る都道府県",
-      "impressions": 141073,
-      "clicks": 314,
+      "impressions": 168087,
+      "clicks": 522,
       "conversions": 0,
       "grossRevenueYen": 0,
       "approved": 0,
@@ -55,7 +55,7 @@
       "cancelledYen": 0,
       "pendingCount": 0,
       "pendingRevenueYen": 0,
-      "fetchedAt": "2026-10-22T08:48:21.586Z",
+      "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
     }
   ],
@@ -4859,25 +4859,25 @@
   "crossCheck": {
     "comparable": true,
     "exceeded": false,
-    "hasShortfall": false,
-    "withinBounds": true,
+    "hasShortfall": true,
+    "withinBounds": false,
     "shortfall": {
-      "clicks": 0,
+      "clicks": 180,
       "revenueYen": 0
     },
     "deltas": {
       "clicks": {
-        "site": 314,
+        "site": 522,
         "picked": 342,
         "exclusive": 276,
         "shared": 66,
         "lowerBound": 276,
         "upperBound": 342,
-        "delta": 28,
+        "delta": -180,
         "toleranceBasis": "other-site-clicks",
-        "otherSiteClicks": 102,
+        "otherSiteClicks": 182,
         "unmappedClicks": 11,
-        "tolerance": 25
+        "tolerance": 105
       },
       "conversions": {
         "site": 0,
@@ -4918,7 +4918,32 @@
     },
     "period": "202610-202610"
   },
-  "unmapped": [],
+  "unmapped": [
+    {
+      "programId": "s00000020569001",
+      "programRaw": "本格オンラインヨガ・フィットネスのSOELU",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000021719001",
+      "programRaw": "【国産高品質】ULTORAプロテイン",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000027681001",
+      "programRaw": "自宅でプロの味！低温調理器【エンペラータマリン】",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000008903004",
+      "programRaw": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
+      "clicks": 1,
+      "grossRevenueYen": 0
+    }
+  ],
   "notAttributable": [
     {
       "program": "af_tvcm-up-web_a8_001+af_tvcm-up-web_a8_text_001",
@@ -4942,34 +4967,59 @@
       "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
     }
   ],
-  "missingProgramCandidates": [],
+  "missingProgramCandidates": [
+    {
+      "programId": "s00000020569001",
+      "programRaw": "本格オンラインヨガ・フィットネスのSOELU",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000021719001",
+      "programRaw": "【国産高品質】ULTORAプロテイン",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000027681001",
+      "programRaw": "自宅でプロの味！低温調理器【エンペラータマリン】",
+      "clicks": 2,
+      "grossRevenueYen": 0
+    },
+    {
+      "programId": "s00000008903004",
+      "programRaw": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
+      "clicks": 1,
+      "grossRevenueYen": 0
+    }
+  ],
   "unmappedCount": 5,
   "otherSiteSummary": [
     {
       "site": "KAZU（X @uruhayato373）",
-      "clicks": 24,
+      "clicks": 33,
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-10-22T08:48:21.586Z",
+      "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
     },
     {
       "site": "KAZU（kazu-note）",
-      "clicks": 9,
+      "clicks": 11,
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-10-22T08:48:21.586Z",
+      "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
     },
     {
       "site": "doboku-note",
-      "clicks": 62,
+      "clicks": 131,
       "conversions": 1,
       "grossRevenueYen": 13534,
       "revenueYen": 0,
-      "fetchedAt": "2026-10-22T08:48:21.586Z",
+      "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
     },
     {
@@ -4978,7 +5028,7 @@
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-10-22T08:48:21.586Z",
+      "fetchedAt": "2026-10-30T22:24:39.433Z",
       "period": "202610-202610"
     }
   ]
