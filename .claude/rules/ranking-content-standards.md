@@ -263,12 +263,11 @@ quarantine は持たない。
 
 ### Gemini 無料枠の日次 CI を正典にする
 
-> **2026-10-11 から定期実行を停止中。** 導入 (2026-08-30) から 48 run 中 44 run が preflight の billing / HTTP 402 で止まり、
-> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。2026-10-26 のオーナー判断で Gemini の経路はやめた
-> (workflow は手動起動だけ残す)。未生成 (2026-10-11 時点で 363 件) は
-> 次節の headless `claude -p` 経路で、量と時期を週次・月次計画で決めて消化する。
+> **2026-11-01 のオーナー指示で無料枠経路を再採用。** 以前のキーは 48 run 中 44 run が billing / HTTP 402 で止まり、
+> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。新しい無料枠キーで1件の実生成・監査・審査が通るまで、
+> 日次 job は repository variable `GEMINI_FREE_TIER_VERIFIED` で skip する。手動確認は `verify_only=true` で行い、git/R2 へ公開しない。
 
-`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (上の停止中を除く)。既定 3 件、並列数 1、
+`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (無料枠確認までは skip)。既定 3 件、並列数 1、
 `gemini-2.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
@@ -374,7 +373,7 @@ $ は約 1/17、トークンは約 1/120。本日通算 (実験込み・10 run):
 08-20 の run は `rate_limit_event: 1` を記録し、turns も cost も平常の 1/3 で途中終了した
 (最終メッセージ「I'll wait for it to complete before proceeding」)。
 
-**当時の暂定運用** (現在は 2026-08-30 の Gemini 日次 CI が正典):
+**当時の暫定運用** (現在は無料枠確認後の Gemini 日次 CI が正典):
 
 1. **月次計画 (`.claude/todo/monthly.md`) が月間の本数目標を持つ。** 対話セッションの
    1 件あたり消費は測っていないので、控えめに置いて翌月に実績で見直す。

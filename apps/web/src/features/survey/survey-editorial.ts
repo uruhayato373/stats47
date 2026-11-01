@@ -147,16 +147,16 @@ const SURVEY_EDITORIAL_CONTENT = {
     ],
     readerQuestions: [
       {
-        question: 'パンへの年間支出が多い都市は？',
-        rankingKey: 'bread-consumption-expenditure',
+        question: '納豆への年間支出が多い都市は？',
+        rankingKey: 'natto-consumption-expenditure',
+      },
+      {
+        question: '米の年間購入数量が多い都市は？',
+        rankingKey: 'rice-consumption-quantity',
       },
       {
         question: '外食への年間支出が多い都市は？',
         rankingKey: 'dining-out-consumption-expenditure',
-      },
-      {
-        question: '年間の電気使用量が多い都市は？',
-        rankingKey: 'electricity-consumption-quantity',
       },
       {
         question: '二人以上世帯の消費支出総額が多い都市は？',

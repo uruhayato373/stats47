@@ -65,7 +65,7 @@ chmod +x ~/bin/notebooklm
 
 ### stats47 用ノートブック (要事前作成)
 
-stats47 ではまだ専用ノートブックが未作成。**初回利用時にユーザーが NotebookLM UI から作成する必要あり**。推奨ノートブック構成:
+専用ノートブックは `notebooklm create "名前" --json` で作成できる (CLI 0.4.1 実測)。一次資料の公開 URL は `notebooklm source add <URL> -n <ID> --json` で登録する。推奨ノートブック構成:
 
 | ノートブック名 | 推奨ソース |
 |---|---|
@@ -81,6 +81,7 @@ stats47 ではまだ専用ノートブックが未作成。**初回利用時に�
 | ノートブック名 | ID | 用途 |
 |---|---|---|
 | **最新の白書** | `2bf7f0dd-3935-49be-8cef-2d428c59eaa9` | 令和6-8年度の各種白書 (GX/カーボンニュートラル、人口減少・少子高齢化、Society 5.0/AI/DX) |
+| **stats47 家計調査 2025** | `6b590884-03de-4b4c-bd73-96cf55e5eed4` | 総務省統計局の2025年報・品目別単年表・調査結果・地域/世帯の定義。支出額と購入数量、単年と3年平均、都市と県の区別を調べる |
 | 国土交通白書 | `19206d1e-53c0-4648-ae22-5efe9b710d5b` | 国土交通省刊行白書 (社会基盤・インフラ) |
 | 記述式問題の模範解答例 | `05559725-23ed-47ec-b7d3-ab9cdef030dd` | (doboku-note 由来、stats47 では補助参照) |
 | 令和7年度技術士試験：総合技術監理部門記述問題 | `4785aea5-f3e7-4d17-b593-0855e4a0087f` | (doboku-note 由来、stats47 では補助参照) |
@@ -215,6 +216,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --notebooks "最新の白書" \
 - **白書の数値は記事に入らない。** 執筆バッチは「調査材料の数値・年・割合は書かない」と指示する。
   記事の数値は `ci-factual-gate` が実データ (`data/*.json`) と突合するので、白書由来の数値を書くと落ちる
 - 回答が空・的外れなら research.md を消して執筆する (調査材料なしでも記事は書ける)
+- 家計調査の企画では `stats47 家計調査 2025` を選び、対象世帯・都市単位・品目分類を確認する。NotebookLM の数値や順位は記事に使わず、公式表と R2 観測値で別途照合する。Web の Deep Research は出典候補の探索に限り、採用した一次資料だけをノートへ追加する
 - research.md は記事と一緒に outbox に残るが、公開されるのは article.md と図だけ
 - 公式 API がある企業版 (Gemini Notebook Enterprise) は Google Cloud のライセンスが要るため使っていない
   (`.claude/todo/backlog.md` の BLOG-NOTEBOOKLM-RESEARCH-01)
@@ -229,8 +231,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --notebooks "最新の白書" \
 
 ## 既知の制約
 
-- ノートブック作成は NotebookLM UI 経由 (CLI でのフル自動化は未対応)
-- ノートブックのソース更新 (新規 PDF 追加) もユーザー手動
+- CLI 0.4.1 でノート作成・公開 URL のソース追加は可能。非公式 API なので、失敗時の再試行と原典照合は人が行う。CI の無人経路には入れない
 - クエリ結果の品質は登録 PDF の質に依存 (高品質白書ほど精度高)
 - 1 クエリあたり ~30 秒 (notebooklm CLI の API 待ち)、複数ノートブック横断は逐次なので時間がかかる
 

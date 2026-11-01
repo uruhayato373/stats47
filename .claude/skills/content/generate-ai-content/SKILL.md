@@ -19,7 +19,7 @@ primary_agent: ranking-content-author
 
 ## モデル運用ポリシー（★コストゲート・2026-08-30）
 
-定期量産は **Gemini API 無料枠**、agent は例外是正に限定する。
+定期量産の採用経路は **Gemini API 無料枠**、agent は例外是正に限定する。現在は無料枠キーの実生成確認待ちで、`GEMINI_FREE_TIER_VERIFIED` が `true` になるまで定期 job は起動しない。
 
 | 役割 | 実行者 | 品質 / コスト契約 |
 |---|---|---|
@@ -57,8 +57,17 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 
 ## クイックスタート
 
-> **現在の日次正典**: `.github/workflows/ai-content-gemini-daily.yml` (07:15 JST、既定3件)。
+> **日次正典**: `.github/workflows/ai-content-gemini-daily.yml` (07:15 JST、既定3件)。無料枠の実生成確認後に有効化する。
 > 件数は `data/ai-content/history.csv` で 7 run 以上を観測した後だけ見直す。
+
+### 無料枠キーの復旧と公開前確認
+
+1. 課金設定のない専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` に登録する。公開済みの統計・公開用原稿以外を送らない。
+2. `ai-content-gemini-daily.yml` を `workflow_dispatch` で `verify_only=true`、`dry_run=false` で起動する。`limit` は強制的に 1 件となり、preflight → 実生成 → 決定的監査 → 独立 critic まで実行する。結果は workflow summary に出す。git と R2 には反映しない。
+3. summary の実生成が `1 PASS`、HTTP 402/429 がなく、キーの project に課金設定がないことを Secret 所有者が確認した後、repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定する。これで日次 job が起動する。成功を確認する前に変数を立てない。
+4. 最初の定期 run で `data/ai-content/history.csv` の PASS 件数と `publish-ai-content.yml` の R2 反映を確認する。7 run 分の通過率と token を見て、件数を変えるか決める。
+
+キー交換時・quota 異常時は `GEMINI_FREE_TIER_VERIFIED=false` に戻し、同じ canary からやり直す。code はキーの課金契約を証明できないため、変数を立てる判断は Secret 所有者が行う。
 
 > Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。

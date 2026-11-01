@@ -21,7 +21,7 @@ updated: 2026-10-19
 
 ## 🔴 高 — 今月中に着手したい
 
-並び順が着手順。上限 10 枚 (DG081)。2026-11-01 の月次計画で 11 月の重点「サイト」「商品」(市区町村 × GIS。2026-10-28 オーナー決定) に合わせて付け替えた: 13 枚 → 8 枚 (重点の構成タスク 5・記録が消える不具合 1・デプロイの不具合 1・2026-10-31 オーナー指示のテーマ・地域 2 の計 8 枚を残し、10 月の重点の残り・30 日超の未着手・維持領域の 8 枚を 🟡 の先頭へ)。
+並び順が着手順。上限 10 枚 (DG081)。2026-11-01 の月次計画で 13 枚 → 8 枚に整理した後、同日のオーナー判断で Gemini 無料枠の復旧を追加し、子育ての2枚を 🟡 へ移し、家計調査の1枚を 🔴 に上げて 8 枚。サイト重点は家計調査へ変更、商品重点は製造品出荷額を維持。10 月の重点の残り・30 日超の未着手・維持領域のカードは 🟡 へ送った。
 
 ### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を土曜の Mac の取得だけにし、残っている CI 専用のコードと Secrets を撤去する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run measurement:test] [起票:2026-10-19] [期日:2026-11-05] [領域:管理]
@@ -48,39 +48,6 @@ updated: 2026-10-19
   - **停止条件**: A8・楽天 (直接) の広告に触らない。②の前に計測を止めない (配信中の広告の成果が記録されなくなる)。
   - **完了条件**: 本番の `app/affiliate-ads/all.json` で moshimo・afi-b・valuecommerce の広告が配信中 0 件、計測の定期実行が moshimo・afb を取得しようとせず、計測の鮮度の分母が更新され、使わなくなった Secrets が削除されている。
 
-### [MUNI-KOSODATE-METRICS-01] 子育て世帯の住む市選びに使う市区町村指標を選び、足りない指標 (待機児童・こども医療費助成) の取得元を決める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:データ]
-
-- **親**: `MUNI-KOSODATE-RANKING-01` (打ち手台帳 EXP-008)。
-- **既にある市区町村指標 (data/municipalities/wp0-inventory.json)**: `young-population-ratio` (15 歳未満人口割合)・`births`・`elementary-school-children-count`・`elementary-school-count`・`integrated-kindergarten-enrollment`・`nuclear-family-households-ratio`・`general-clinic-count-per-100k`・`general-hospital-count-per-100k`・`movers-in` / `movers-out`。
-- **足りない指標の取得元候補 (要確認)**: 待機児童数はこども家庭庁「保育所等関連状況取りまとめ」(市区町村別の表)。こども医療費助成の対象年齢は各都道府県・市の公表で、全国一覧の公的な表があるかを確かめる。小児科のある医療機関数は厚生労働省の医療施設調査。
-- **済み (2026-10-28) 公開中の候補の実測** (R2 `app/municipalities/ranking/<key>/values.json`。全国の地域数は 1,741 = 市区町村 1,718 + 東京 23 区):
-  | key | 最新年 | 単位 | 値のある地域 | 0 の地域 | 判断 |
-  |---|---|---|---|---|---|
-  | `young-population-ratio` | 2025 | ％ | 1,741 | 0 | 採る |
-  | `births` | 2023 | 人 | 1,741 | 8 | 採る |
-  | `nursery-facility-count` | 2023 | 所 | 1,741 | 170 | 採る |
-  | `elementary-school-children-count` | 2024年度 | 人 | 1,741 | 42 | 採る |
-  | `child-welfare-expense-municipal` | 2022年度 | 千円 | 1,741 | 0 | 採る (総額。子ども 1 人当たりは未作成) |
-  | `nuclear-family-households-ratio` | 2020 | ％ | 1,740 | 0 | 採る |
-  | `nursery-enrolled-children` | 2017 | 人 | 1,741 | 61 | 外す (8 年前で古い) |
-  | `integrated-ece-center-enrolled-children` | 2017 | 人 | 714 | 0 | 外す (古く、半数に値が無い) |
-  | `kindergarten-count-city` | 2024年度 | 園 | 1,741 | 615 | 外す (0 が 35%) |
-  | `general-clinic-count-per-100k` | 2020年度 | 施設 | 1,740 | 3 | 外す (小児科ではない。単位が「施設」で人口当たりの表記と合わない → 起票候補) |
-- **済み (2026-10-28) 待機児童 → 取り込む (次)**: こども家庭庁「保育所等関連状況取りまとめ（令和7年4月1日）」の参考 Excel「定員・申込者の状況」(`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1aa96453/20250828_policies_hoiku_torimatome_r7_04.xlsx`、シート「申込者の状況」、合計の「申込者数」列と「待機児童」列) に全 1,741 市区町村の行がある。待機児童のいる自治体は 211、合計 2,254 人で、本文の公表値と一致した。地域コードは無く、県名＋市区町村名で結ぶ (同じ組の重複 0 件を確認)。e-Stat に無いので `fetcherKey: "manual"` と provenance 9 点セット (`.claude/rules/data-provenance-standards.md`) が要る。毎年 8 月末の公表で、ファイルの URL が年ごとに変わるため cron には向かず、年 1 回の手動取り込みにする。順位は「待機児童率 (待機児童 ÷ 申込者)」を 0 を除いて付け (211 自治体)、0 の自治体数を注記に書く。
-- **済み (2026-10-28) こども医療費助成 → ランキングとしては見送る**: こども家庭庁「こども医療費に対する助成の実施状況調査」(令和7年4月1日時点) の別紙3 (`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/6a9b8926-411c-4044-81aa-d8c26b21aaf5/12ae0d40/20251224policies-boshihoken-kodomoiryouhityousa-r7-03.pdf`、32 ページ) に全 1,741 市区町村の対象年齢・所得制限・一部自己負担がある。ただし通院の対象年齢は「18歳年度末」が 1,576 (90.5%) で、順位がほぼ同値になり比較の役に立たない。PDF だけで地域コードも無い。近隣市の比較ページを作るとき (`MUNI-KOSODATE-PAGES-01` の判定後) に属性として載せる候補に留める。
-- **済み (2026-10-28) 新しく作った子育て向けの指標** (`MUNI-RANKING-EXPANSION-01` の住宅・土地統計調査分。R2 取り込みは承認待ち): `nursery-within-500m-young-child-household-ratio` (保育所まで 500m 未満の子育て世帯の割合・1,178 地域) と `elementary-school-within-1km-household-ratio` (小学校まで 1km 未満の世帯の割合・1,235 地域)。
-- **決めたセット (9)**: `young-population-ratio`・`births`・`nursery-facility-count`・`elementary-school-children-count`・`child-welfare-expense-municipal`・`nuclear-family-households-ratio`・`nursery-within-500m-young-child-household-ratio` (承認待ち)・`elementary-school-within-1km-household-ratio` (承認待ち)・待機児童率 (未作成)。小児科のある医療機関数は医療施設調査の市区町村表が 2019 年で止まっていて (カタログ 0003421874 等)、今回は入れない。
-- **次**: ① 待機児童率の metric (manual・provenance 付き) と取り込みスクリプトを作る ② 承認待ちの 2 指標が取り込まれたら公開へ切り替える (`MUNI-RANKING-EXPANSION-01`) ③ `MUNI-KOSODATE-PAGES-01` で公開と内部リンク。
-- **完了条件**: 指標のセットと各指標の最新年が決まり、足りない指標が取り込まれるか見送り理由が書かれている。→ セット・最新年・見送り理由は済み。残りは待機児童率の取り込み。
-
-- **待機児童率を作った (2026-11-01・W45 Must 3・未コミット→同日コミット・R2 未反映)**: metric `nursery-waiting-children-rate` (単位 ％・manual・provenance 9 点セット・市区町村専用) と取り込み `packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (純粋関数とテスト 7 件)。dryRun で 1,741 市区町村すべてに結合し、待機児童のいる自治体 211・合計 2,254 人 (申込者 2,765,235 人) が公表値と一致した (`--dry-run --file <Excel>`。Excel の sha256 `5f3e86aa…664b9bca`)。申込者 0 の 8 自治体は値なし、待機児童 0 の 1,530 自治体は順位なし (config の note に記載)。表記ゆれ 1 件 (梼原町 / 檮原町) は別名表で結合。
-  - **気づいたこと**: 上位は三宅村 24.5%・伊平屋村 8.9% など申込者の少ない村が並ぶ (分母が小さい)。県別ページや子育てのランキングで見せるときに、申込者数の下限を設けるかを公開前に決める。
-  - **R2 反映 (2026-11-01・オーナー承認済み)**: 3 指標とも R2 に入れた。読み戻し (公開 URL) で確認:
-    - `nursery-waiting-children-rate`: 手元で取り込み `diff-push-r2 --prefix app/stats/nursery-waiting-children-rate`。1,741 行・順位あり 211・値なし 8・出典 SHA `5f3e86aa` 一致。出典 SHA を持つ市区町村の手動指標を送れるよう、送信の守り (`ksj-publication-guard.ts`) に cities.json の検査を足した (`f7728be6c`)。
-    - `nursery-within-500m-young-child-household-ratio`: `data-refresh.yml` run 41259477757 (dry_run の run 41259244491 も success)。1,228 行・2023 年・順位あり 1,171 (推計の丸めで 100% を超える自治体は順位から除く。最大 100.3)。
-    - `elementary-school-within-1km-household-ratio`: 同じ run。1,228 行・2023 年・順位あり 1,228。
-  - **公開までの残り**: ① `municipality-catalog.ts` で 3 指標を published にする (2 指標は `MUNICIPALITY_HOUSING_SURVEY_STATUS` が 13 指標をまとめて切り替える作りなので、2 指標だけ先に出すか 13 指標を同時に取り込むかを決める) ② ranking-items・content の派生物の生成と極性 (polarity) の割り当て (人の判断) ③ `/audit-ranking-data-integrity` ④ デプロイ (溜めて 1 回)。待機児童率は、申込者の少ない村が上位に並ぶので、見せるときの申込者数の下限を公開前に決める。
 ### [MUNI-DATA-PRODUCT-BUILD-01] 製造品出荷額 (manufacturing-shipment-amount) を最新境域に組み替えた時系列 CSV と、結合用の GeoJSON を作る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
 
@@ -95,14 +62,6 @@ updated: 2026-10-19
   - 空の値: 自治体で 1980 年 81 件・2023 年 57 件。秘匿 (X) か取れない (－) かは R2 では区別できない。行政区は区ができる前の年が空 (1980 年 127 区 → 2023 年 194 区)。
   - 照合の目安: 2023 年の自治体合計 373,168,258 百万円。県別 (0000010103) と年ごとに比べる。
 - **次 (③ 以降、W46)**: 元データは `manufacturing-shipment-amount` の cities.json 1 本、対象は自治体 1,719 件 (行政区は外すか別表)。年の表記は SSDS の項目定義 C3401 (https://www.stat.go.jp/data/ssds/9.html) で何年の実績かを決めてから列に書く。空の値は e-Stat API で取り直して記号を注記の列に残す。2021 年経済センサスでの事業所の捉え方の変化を注記する。
-
-### [MUNI-KOSODATE-PAGES-01] 子育ての市区町村ランキングと県別ページを公開し、県版の子育てページから内部リンクを張る
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
-
-- **親**: `MUNI-KOSODATE-RANKING-01` (EXP-008)。前提は `MUNI-KOSODATE-METRICS-01` と `MUNI-PREF-RANKING-ROUTE-01`。
-- **次**: ① 指標セットのランキングを公開する (cron 生成のまま。手作業の記事は書かない) ② 市区町村テーマ (`packages/data-configs/src/geo-scope/municipality-catalog.ts`) に子育てのテーマを足すか、既存の `education`・`vital-statistics` に寄せるかを決める ③ 県版の子育てランキング・記事から、市区町村版と県別ページへのリンクを張り、`nav_click` で計測する ④ 公開日を打ち手台帳 EXP-008 の started_at にして running にし、8 週後の判定日を next_check_date に書く。
-- **判定**: 親カードの基準 (8 週で該当ページの GSC 28 日表示 3,000 以上かつ 1 ページ PV 44.7 以上 → 近隣市比較を自動生成で広げる。下回れば止める)。
-- **完了条件**: ページが公開され、台帳 EXP-008 が running で判定日が入っている。
 
 ### [MUNI-DATA-PRODUCT-SALE-01] 製造品出荷額のデータ商品を stats47 の note で売り、ランキングページに 1 行の案内を置いて 6 週計測する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
@@ -169,7 +128,68 @@ updated: 2026-10-19
 - **進捗 (2026-10-31)**: 全 56 テーマを「読者の悩み → 問いの章 → 見せ方」で組み直した (人が問いを決めた章は残し、機械で足した `candidate-*`/`*-overview` の章だけ NotebookLM の設計案 + `apply-design.ts` の機械検査で再編)。47 都道府県の比較の図 (比較の節・年固定の比較カード) はテーマから外しランキングに任せた (オーナー決定)。`/themes/living-housing` の見える文字は 6,930 → 4,180 字。高さは 10,278 → 10,124px でほぼ同じ (カードの数が多い)。
 - **残り**: ① 全テーマで見える文字・高さを測って比べる ② 1 指標カードが 4 列の格子に 1 枚だけ並ぶ章 (空きが目立つ) の扱いを決める ③ 新しい構成比のチャートは page-components (R2) に入るまで本番に出ない。main へのマージ後の sync-snapshots (page-components) で反映する。
 
+### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
+
+- **2026-11-01 オーナー判断**: 11月のサイト重点を子育て市区町村ランキングから家計調査へ変更。対象は新規品目の量産より、既存の検索入口と年次・調査粒度の是正、`/survey/kakei-chousa` → `/themes/household-food-spending` → 代表ランキング → ブログの説明と回遊。月次の範囲は `.claude/todo/monthly.md` 重点1。
+- **11月の実行順**: ①同じ GSC 28日窓で品目ごとに query/page・表示・click・代表 URL・重複 URL と欠けたリンクを記録 ②上位品目の2025年年次値、2023〜2025年平均、世帯/都市単位を公式表で分けて `KAKEI-EXPANSION-02` に渡す ③代表4面の説明・出典・文脈リンクを localhost で確認 ④公開後4週の対象 URL と2ページ目到達を観測。NotebookLM は背景・定義の資料収集、Gemini は監査可能な解説候補に使う。
+- **停止条件**: 年次値と3年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。検索・回遊の基準値を取る前に全品目へ展開しない。
+- **優先理由**: 「家計のクリック率が高いので、展開できるものはすべてnoteやサイトで展開」という2026-10-19のユーザー判断。今回CTRを実測したものではない。
+- **次・担当**: W45 は blog-seo-strategist が検索入口と既存記事・note の重複を棚卸しし、W46 は data-ingester が上位品目の2025年値を照合する。W47 は survey / theme / ranking / blog の担当が代表4面の説明と文脈リンクを整える。新規記事・note は重複しない検索意図と一次データを確かめてから個別に決める。
+- **境界・停止条件**: 数値・単位・都市/県の範囲・出典を検証できない候補は進めず、単なる品目差し替えで重複・薄い記事を量産しない。データ更新・追加指標は `KAKEI-EXPANSION-02`、既存の食関連導線整理は `CONTENT-FOOD-TRIVIA-01`、SNSは `SNS-KAKEI-EXPANSION-01`。記事生成・公開はこの計画変更だけでは実行しない。
+- **完了条件**: 月次で選んだ代表4面のデータ・説明・出典・リンクが照合済みで公開され、入口 URL の検索指標と2ページ目到達の観測開始日が記録される。非採用候補は理由を追える。
+
+### [AI-CONTENT-GEMINI-KEY-01] 無料枠キーでランキング解説の1件審査を通し、日次量産を起動する
+タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ai-content/__tests__/gemini-workflow-contract.test.mjs] [起票:2026-11-01] [領域:サイト]
+
+- **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。新しい課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録する (キーの文字列は git・会話へ出さない)。
+- **次**: ① `ai-content-gemini-daily.yml` を `verify_only=true`・`dry_run=false` で手動実行し、1件の実生成・決定的監査・独立 critic が PASS、git/R2 の反映なしを確認 ② Secret 所有者が project の課金無効を確認して repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
+- **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
+- **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [MUNI-KOSODATE-METRICS-01] 子育て世帯の住む市選びに使う市区町村指標を選び、足りない指標 (待機児童・こども医療費助成) の取得元を決める
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:データ]
+
+- **親**: `MUNI-KOSODATE-RANKING-01` (打ち手台帳 EXP-008)。
+- **既にある市区町村指標 (data/municipalities/wp0-inventory.json)**: `young-population-ratio` (15 歳未満人口割合)・`births`・`elementary-school-children-count`・`elementary-school-count`・`integrated-kindergarten-enrollment`・`nuclear-family-households-ratio`・`general-clinic-count-per-100k`・`general-hospital-count-per-100k`・`movers-in` / `movers-out`。
+- **足りない指標の取得元候補 (要確認)**: 待機児童数はこども家庭庁「保育所等関連状況取りまとめ」(市区町村別の表)。こども医療費助成の対象年齢は各都道府県・市の公表で、全国一覧の公的な表があるかを確かめる。小児科のある医療機関数は厚生労働省の医療施設調査。
+- **済み (2026-10-28) 公開中の候補の実測** (R2 `app/municipalities/ranking/<key>/values.json`。全国の地域数は 1,741 = 市区町村 1,718 + 東京 23 区):
+  | key | 最新年 | 単位 | 値のある地域 | 0 の地域 | 判断 |
+  |---|---|---|---|---|---|
+  | `young-population-ratio` | 2025 | ％ | 1,741 | 0 | 採る |
+  | `births` | 2023 | 人 | 1,741 | 8 | 採る |
+  | `nursery-facility-count` | 2023 | 所 | 1,741 | 170 | 採る |
+  | `elementary-school-children-count` | 2024年度 | 人 | 1,741 | 42 | 採る |
+  | `child-welfare-expense-municipal` | 2022年度 | 千円 | 1,741 | 0 | 採る (総額。子ども 1 人当たりは未作成) |
+  | `nuclear-family-households-ratio` | 2020 | ％ | 1,740 | 0 | 採る |
+  | `nursery-enrolled-children` | 2017 | 人 | 1,741 | 61 | 外す (8 年前で古い) |
+  | `integrated-ece-center-enrolled-children` | 2017 | 人 | 714 | 0 | 外す (古く、半数に値が無い) |
+  | `kindergarten-count-city` | 2024年度 | 園 | 1,741 | 615 | 外す (0 が 35%) |
+  | `general-clinic-count-per-100k` | 2020年度 | 施設 | 1,740 | 3 | 外す (小児科ではない。単位が「施設」で人口当たりの表記と合わない → 起票候補) |
+- **済み (2026-10-28) 待機児童 → 取り込む (次)**: こども家庭庁「保育所等関連状況取りまとめ（令和7年4月1日）」の参考 Excel「定員・申込者の状況」(`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1aa96453/20250828_policies_hoiku_torimatome_r7_04.xlsx`、シート「申込者の状況」、合計の「申込者数」列と「待機児童」列) に全 1,741 市区町村の行がある。待機児童のいる自治体は 211、合計 2,254 人で、本文の公表値と一致した。地域コードは無く、県名＋市区町村名で結ぶ (同じ組の重複 0 件を確認)。e-Stat に無いので `fetcherKey: "manual"` と provenance 9 点セット (`.claude/rules/data-provenance-standards.md`) が要る。毎年 8 月末の公表で、ファイルの URL が年ごとに変わるため cron には向かず、年 1 回の手動取り込みにする。順位は「待機児童率 (待機児童 ÷ 申込者)」を 0 を除いて付け (211 自治体)、0 の自治体数を注記に書く。
+- **済み (2026-10-28) こども医療費助成 → ランキングとしては見送る**: こども家庭庁「こども医療費に対する助成の実施状況調査」(令和7年4月1日時点) の別紙3 (`https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/6a9b8926-411c-4044-81aa-d8c26b21aaf5/12ae0d40/20251224policies-boshihoken-kodomoiryouhityousa-r7-03.pdf`、32 ページ) に全 1,741 市区町村の対象年齢・所得制限・一部自己負担がある。ただし通院の対象年齢は「18歳年度末」が 1,576 (90.5%) で、順位がほぼ同値になり比較の役に立たない。PDF だけで地域コードも無い。近隣市の比較ページを作るとき (`MUNI-KOSODATE-PAGES-01` の判定後) に属性として載せる候補に留める。
+- **済み (2026-10-28) 新しく作った子育て向けの指標** (`MUNI-RANKING-EXPANSION-01` の住宅・土地統計調査分。R2 取り込みは承認待ち): `nursery-within-500m-young-child-household-ratio` (保育所まで 500m 未満の子育て世帯の割合・1,178 地域) と `elementary-school-within-1km-household-ratio` (小学校まで 1km 未満の世帯の割合・1,235 地域)。
+- **決めたセット (9)**: `young-population-ratio`・`births`・`nursery-facility-count`・`elementary-school-children-count`・`child-welfare-expense-municipal`・`nuclear-family-households-ratio`・`nursery-within-500m-young-child-household-ratio` (承認待ち)・`elementary-school-within-1km-household-ratio` (承認待ち)・待機児童率 (未作成)。小児科のある医療機関数は医療施設調査の市区町村表が 2019 年で止まっていて (カタログ 0003421874 等)、今回は入れない。
+- **次**: ① 待機児童率の metric (manual・provenance 付き) と取り込みスクリプトを作る ② 承認待ちの 2 指標が取り込まれたら公開へ切り替える (`MUNI-RANKING-EXPANSION-01`) ③ `MUNI-KOSODATE-PAGES-01` で公開と内部リンク。
+- **完了条件**: 指標のセットと各指標の最新年が決まり、足りない指標が取り込まれるか見送り理由が書かれている。→ セット・最新年・見送り理由は済み。残りは待機児童率の取り込み。
+
+- **待機児童率を作った (2026-11-01・W45 Must 3・未コミット→同日コミット・R2 未反映)**: metric `nursery-waiting-children-rate` (単位 ％・manual・provenance 9 点セット・市区町村専用) と取り込み `packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (純粋関数とテスト 7 件)。dryRun で 1,741 市区町村すべてに結合し、待機児童のいる自治体 211・合計 2,254 人 (申込者 2,765,235 人) が公表値と一致した (`--dry-run --file <Excel>`。Excel の sha256 `5f3e86aa…664b9bca`)。申込者 0 の 8 自治体は値なし、待機児童 0 の 1,530 自治体は順位なし (config の note に記載)。表記ゆれ 1 件 (梼原町 / 檮原町) は別名表で結合。
+  - **気づいたこと**: 上位は三宅村 24.5%・伊平屋村 8.9% など申込者の少ない村が並ぶ (分母が小さい)。県別ページや子育てのランキングで見せるときに、申込者数の下限を設けるかを公開前に決める。
+  - **R2 反映 (2026-11-01・オーナー承認済み)**: 3 指標とも R2 に入れた。読み戻し (公開 URL) で確認:
+    - `nursery-waiting-children-rate`: 手元で取り込み `diff-push-r2 --prefix app/stats/nursery-waiting-children-rate`。1,741 行・順位あり 211・値なし 8・出典 SHA `5f3e86aa` 一致。出典 SHA を持つ市区町村の手動指標を送れるよう、送信の守り (`ksj-publication-guard.ts`) に cities.json の検査を足した (`f7728be6c`)。
+    - `nursery-within-500m-young-child-household-ratio`: `data-refresh.yml` run 41259477757 (dry_run の run 41259244491 も success)。1,228 行・2023 年・順位あり 1,171 (推計の丸めで 100% を超える自治体は順位から除く。最大 100.3)。
+    - `elementary-school-within-1km-household-ratio`: 同じ run。1,228 行・2023 年・順位あり 1,228。
+  - **公開までの残り**: ① `municipality-catalog.ts` で 3 指標を published にする (2 指標は `MUNICIPALITY_HOUSING_SURVEY_STATUS` が 13 指標をまとめて切り替える作りなので、2 指標だけ先に出すか 13 指標を同時に取り込むかを決める) ② ranking-items・content の派生物の生成と極性 (polarity) の割り当て (人の判断) ③ `/audit-ranking-data-integrity` ④ デプロイ (溜めて 1 回)。待機児童率は、申込者の少ない村が上位に並ぶので、見せるときの申込者数の下限を公開前に決める。
+
+### [MUNI-KOSODATE-PAGES-01] 子育ての市区町村ランキングと県別ページを公開し、県版の子育てページから内部リンクを張る
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
+
+- **親**: `MUNI-KOSODATE-RANKING-01` (EXP-008)。前提は `MUNI-KOSODATE-METRICS-01` と `MUNI-PREF-RANKING-ROUTE-01`。
+- **次**: ① 指標セットのランキングを公開する (cron 生成のまま。手作業の記事は書かない) ② 市区町村テーマ (`packages/data-configs/src/geo-scope/municipality-catalog.ts`) に子育てのテーマを足すか、既存の `education`・`vital-statistics` に寄せるかを決める ③ 県版の子育てランキング・記事から、市区町村版と県別ページへのリンクを張り、`nav_click` で計測する ④ 公開日を打ち手台帳 EXP-008 の started_at にして running にし、8 週後の判定日を next_check_date に書く。
+- **判定**: 親カードの基準 (8 週で該当ページの GSC 28 日表示 3,000 以上かつ 1 ページ PV 44.7 以上 → 近隣市比較を自動生成で広げる。下回れば止める)。
+- **完了条件**: ページが公開され、台帳 EXP-008 が running で判定日が入っている。
 
 ### [XLSX-FURIGANA-INGEST-01] ingest-nier-achievement.ts の xlsx 読み取りが、共有文字列のふりがなを本文に混ぜる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-01] [領域:データ]
@@ -1650,14 +1670,6 @@ updated: 2026-10-19
 - **2026-10-16 オーナー指示「できることはすべてやって」**: 産業別は (b) を採り、製造業 (`manufacturing-industry-annual-income`・隣り合う年の順位相関 0.94〜0.95) と医療・福祉 (`medical-welfare-industry-annual-income`・0.69〜0.75) を足した。記事は製造業 (`a-manufacturing-industry-annual-income`・2023 年 1 位神奈川・カバー `NCI-00501`) で下書き済み。情報通信業・医療福祉はランキングのみ。4 指標は PR #1136 で本番反映する (CI の書き戻し commit が develop の先頭に重なり必須チェックが 2 回外れたため、実 commit を積んで CI を起こし直した)。
 - **情報通信業の note は保留 → 製造業に置き換え (上の行)**: R2 の 2020〜2023 年で隣り合う年の順位相関が 0.55〜0.68 (介護職員の年収は 0.74〜0.77)。2023 年 1 位の石川県は 2022 年に 22 位で、「1 位は石川県」を見出しにすると標本の振れを結論として出すことになる。選択肢: (a) 注記付きでそのまま記事化 (b) 標本の大きい産業 (製造業・医療福祉など) に替える (c) 産業別は見送り、旧雛形を外すだけにする。
 - **完了条件**: 2 本の雛形が記事台帳から消え、置き換えの記事が公開済み (または指標が組めず見送りを記録)。
-
-### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
-
-- **優先理由**: 「家計のクリック率が高いので、展開できるものはすべてnoteやサイトで展開」という2026-10-19のユーザー判断。今回CTRを実測したものではない。
-- **次・担当**: blog-seo-strategist / note-managerが、既存716ランキング・47都市noteを起点に個別品目・費目グループ・都市の特徴・比較切り口を棚卸しし、重複と未展開を一覧化する。一次データと読者価値を満たす候補をすべて実行キューへ入れ、既存記事へ統合または記事化する。
-- **境界・停止条件**: 数値・単位・都市/県の範囲・出典を検証できない候補は進めず、単なる品目差し替えで重複・薄い記事を量産しない。データ更新・追加指標は `KAKEI-EXPANSION-02`、既存の食関連導線整理は `CONTENT-FOOD-TRIVIA-01`、参考文献由来企画は既存展開カードと重複させない。SNSは `SNS-KAKEI-EXPANSION-01`。今回は起票のみとし、記事生成・公開は実行しない。
-- **完了条件**: 展開可能な候補がnote・サイトの公開コンテンツに対応し、非採用候補は理由を追える。
 
 ### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13]
@@ -4716,13 +4728,13 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **禁止**: 結論が出るまで今の地図を消さない (止める根拠はまだ無い)。R2 の境界の差し替えは承認制。
 - **完了条件**: サイトの地図の境界を移すか据え置くかが決まり、据え置くなら理由 (地図の挿入に当たる等) が、移すなら移行のカードがある。
 
-### [BLOG-GEMINI-AUTHOR-01] Gemini の無料枠でブログ下書きを書く経路を動かすか決める (鍵の作り直し・審査に使うか)
-タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
+### [BLOG-GEMINI-AUTHOR-01] Gemini 無料枠でブログ下書き3本を小試験し、型別の通過率を比べる
+タグ: [コンテンツ品質] [種類:制作] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
 
+- **2026-11-01 オーナー判断**: Gemini を量産手段として再採用する。新しい無料枠キーを登録する。ブログは当面 author=Gemini、critic=Claude headless で3本を小試験し、型別の PASS 率・事実誤り・費用を既存の Claude author と比べる。品質ゲートは緩めない。
 - **用意済み (branch `claude/determined-newton-2d077c`)**: `write-blog-headless.ts --author gemini-api` で既存の `gemini-text-client.ts` を使って下書きを書き、決定的ゲートと Claude の critic に通す。run の最初に極小の実生成で鍵を確かめ、HTTP 402 / クレジット枯渇は billing として止まる (以前は 402 を bad-request に分類していたので直し、単体テストを足した)。手元の `.env.local` に `GEMINI_API_KEY` は無い (GitHub Secrets 専任) ので、実際の生成は試していない。
 - **根拠**: 公式料金表 (https://ai.google.dev/gemini-api/docs/pricing・2026-10-28 確認) では 2.5 Pro / 2.5 Flash / 2.5 Flash-Lite / 3.x Flash / 3.5 Flash-Lite に無料枠があり、3.1 Pro Preview と画像系には無い。無料枠の入出力は Google の製品改善に使われうるので、公開データ (R2 の観測値と記事) だけを渡す。今の鍵は課金 project の前払いクレジット枯渇で 402 (ランキング解説の日次 run で 48 run 中 44)。2026-10-26 にオーナー判断で Gemini の経路は中止した。
-- **決めてほしいこと**: ① 課金を付けていない Google AI Studio project で鍵を作り直すか (オーナー操作。作ったら `.env.local` に `GEMINI_API_KEY` を置く) ② 作り直すなら author だけに使うか、critic にも使うか。案: author は Gemini (無料枠)、critic は Claude headless (sonnet・1 本 $0.03 前後) のまま。critic まで Gemini にすると書き手と審査が同じモデル系列になり、見落としの傾向が揃う。
-- **決まったら**: 鍵を置いて `--author gemini-api` で 3 本試し、headless-runs.csv で Claude author と通過率を比べる。
+- **次**: キーを `.env.local` に置くか、コマンド実行時の環境変数として渡す。`--author gemini-api --critic claude-sonnet` で3本試し、`headless-runs.csv` で Claude author と通過率を比べる。GitHub Secret だけでは手元の blog CLI は鍵を読めない。
 
 ### [BLOG-MONTHLY-CAP-01] ブログの月の本数上限 (月 15〜20 本) を、headless 化で 1 本の費用が下がった後も据え置くか決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-28] [領域:サイト]
