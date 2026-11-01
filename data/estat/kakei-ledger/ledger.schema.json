@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "家計調査の台帳",
+  "description": "data/estat/kakei-ledger/ledger.json の形の契約。npm run estat:kakei-ledger:build が e-Stat カタログ (R2 estat-catalog) と metric config と decisions.json から生成する。手で編集しない。家計調査 (00200561) の全表と、年次品目表の品目ごとに、指標の有無と採否を持つ。型の正本は .claude/scripts/lib/estat-catalog/kakei-ledger.mjs の JSDoc。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "source", "summary", "tables", "items"],
+  "definitions": {
+    "status": { "enum": ["adopted", "planned", "excluded", "undecided"] },
+    "statsDataId": { "type": "string", "pattern": "^\\d{10}$" }
+  },
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statCode", "catalogGeneratedAt", "itemTables"],
+      "properties": {
+        "statCode": { "const": "00200561" },
+        "catalogGeneratedAt": { "type": ["string", "null"] },
+        "itemTables": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["amount", "quantity"],
+          "properties": { "amount": { "$ref": "#/definitions/statsDataId" }, "quantity": { "$ref": "#/definitions/statsDataId" } }
+        }
+      }
+    },
+    "summary": { "type": "object" },
+    "tables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["statsDataId", "title", "cycle", "updatedDate", "collectAreas", "timeKind", "years", "areaCount", "dims", "metrics", "status", "reason"],
+        "properties": {
+          "statsDataId": { "$ref": "#/definitions/statsDataId" },
+          "title": { "type": "string" },
+          "cycle": { "type": ["string", "null"] },
+          "updatedDate": { "type": ["string", "null"] },
+          "collectAreas": { "type": "array", "items": { "enum": ["0", "1", "2", "3"] } },
+          "timeKind": { "type": ["string", "null"] },
+          "years": {
+            "oneOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["from", "to", "count"],
+                "properties": { "from": { "type": "string" }, "to": { "type": "string" }, "count": { "type": "integer", "minimum": 1 } }
+              }
+            ]
+          },
+          "areaCount": { "type": ["integer", "null"] },
+          "dims": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "name", "count"],
+              "properties": { "id": { "type": "string" }, "name": { "type": ["string", "null"] }, "count": { "type": "integer" } }
+            }
+          },
+          "metrics": { "type": "array", "items": { "type": "string" } },
+          "status": { "$ref": "#/definitions/status" },
+          "reason": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "name", "measure", "statsDataId", "kind", "level", "parentCode", "unit", "metrics", "status", "reason"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "name": { "type": "string" },
+          "measure": { "enum": ["amount", "quantity"] },
+          "statsDataId": { "$ref": "#/definitions/statsDataId" },
+          "kind": { "enum": ["item", "group", "other"] },
+          "level": { "type": ["string", "null"] },
+          "parentCode": { "type": ["string", "null"] },
+          "unit": { "type": ["string", "null"] },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["key", "via"],
+              "properties": { "key": { "type": "string" }, "via": { "enum": ["single", "sum"] } }
+            }
+          },
+          "status": { "$ref": "#/definitions/status" },
+          "reason": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

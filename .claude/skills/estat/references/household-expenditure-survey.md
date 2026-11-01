@@ -2,6 +2,8 @@
 
 実装用の切り口台帳は `packages/data-configs/src/kakei-analysis-catalog.ts`。`npm run metrics:check` で既存指標・ページ参照との整合を検査し、`npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts --list` で全行を表示する。`proposed` は図・記事の完成を示さない。表メタデータの126件確認は本資料の棚卸しであり、切り口台帳の17件はその中の制作候補と既存入口である。
 
+**表と品目の採否は台帳 `data/estat/kakei-ledger/ledger.json` が正本** (全表の周期・年・地域数・分類軸と、年次品目表の品目ごとの指標の有無・採否)。e-Stat カタログ (`npm run estat:catalog:pull`) と metric config から `npm run estat:kakei-ledger:build` で作り、手で編集しない。指標を作らない・作る予定の判断は理由付きで `data/estat/kakei-ledger/decisions.json` に書く。`npm run estat:kakei-ledger:check` (PR CI) が台帳・config・判断の食い違いを止める。下の件数・表一覧は棚卸し時点の記録で、現在の件数は台帳の `summary` を読む。
+
 調査: 家計調査（総務省）。家計収支編の二人以上・総世帯・単身世帯と、貯蓄・負債編の二人以上世帯を分けて扱う。
 
 ## 2025年の既存品目更新
