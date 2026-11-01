@@ -160,6 +160,13 @@ updated: 2026-10-19
 - **引き継いだ事実 (旧 `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`)**: KDP の Reports は 2 段階認証を求めることがあり、そのときは本人の入力が要る (`refresh-session.mjs kdp --wait-human`)。note は短い集計期間で 1 記事が一覧に出ない欠けを、条件付きで既知の欠けとして pass にしている (`note-inventory.mjs` の `acceptedNoteGap`。値は null のまま)。KDP の速報売上・KENP は確定ロイヤリティや週次の純収益に入れない。
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
 - **完了条件**: 土曜の Mac の取得が記録まで通り、CI 専用のコードと Secrets が残っていない。
+- **2026-11-01 観測 (週次レビュー W43)**: 10-22 と 10-31 の 2 回とも、取得は通った (10-31 は a8・note・gsc・rakuten が pass、kdp は auth_required) のに記録が develop に届いていない。
+  `measurement-collect-local.sh` が専用 clone (`~/stats47-measurement`) で記録をコミットしたあと、`git pull --rebase` が
+  「cannot pull with rebase: You have unstaged changes」で 3 回とも拒否された (`~/Library/Logs/stats47/measurement-collect-local.log`)。
+  `git add` する 3 ファイル以外の追跡ファイルが収集中に書き換わっているとみられる (どのファイルかは未特定。次の run の前に clone の `git status` を残して確かめる)。
+  失敗後に土曜ランナーの次の段が `reset --hard origin/develop` を行い、記録のコミット (10-22 `8a8cc4ba1`・10-31 `f12d16efe`) は reflog にだけ残った。
+  10-31 の分と週次監査の記録 (`9ca0e5eef`、push 前に同じく残っていた) は 11-01 にレビューの作業ブランチへ取り込んだ (未 push)。
+  - **次**: ① pull の前に、記録の 3 ファイル以外の変更を捨てるか (`git stash -u` → 記録後に drop)、`--autostash` を付ける ② 失敗したら次の段の `reset --hard` の前に止め、ログに残す ③ 次の土曜 (11-07) に develop の「(Mac)」の記録コミットを確かめる。
 - **統合 (2026-10-26 オーナー判断): `ASP-CONSOLIDATE-A8-RAKUTEN-01`** アフィリエイトを A8 と楽天 (直接) に集約し、もしも・afb・バリューコマースの配信と計測を止める
   - **次 (実行順)**: ① 上の 9 件の一覧をオーナーが確認する ② 9 件を `isActive: false` にし (削除はせず、履歴の照合に残す)、develop へ push して `publish-affiliate-ads.yml` で R2 へ公開し、本番の対象ページから消えたことを確かめる (デプロイ不要) ③ 計測から moshimo・afb を外す: `.claude/scripts/measurement/sources.mjs` の取得元・`collect-local.mjs` の afb キー読み込み・`measurement-session-refresh.sh` の moshimo・`authenticated-measurement.yml` と `affiliate-ga4-weekly.yml` の該当段・テストを同じ差分で直し、計測の鮮度 (`measurement-freshness`) の分母と月次ゴール「12/14」を新しい取得元数で書き直す ④ 提携の解除・アカウントの扱いは急がない (配信と計測を止めれば足りる)。
   - **残り (急がない)**: GitHub Secrets `AFB_API_KEY`・`MEASUREMENT_SESSION_MOSHIMO`・`MEASUREMENT_SESSION_AFB`・`STATS47_AUTH_MOSHIMO_*` の削除と `env-registry.json` の 3 行の削除は、`MEASUREMENT-MAC-DIRECT-01` で CI の取得経路を撤去するときにまとめて行う。ASP の提携操作ツール (`.claude/scripts/ads/moshimo-*`・`afb-*`)、管理画面の表示、提携の解除はそのまま残す (配信と計測を止めれば足りる)。この 3 点が済んだらカードを削除する。

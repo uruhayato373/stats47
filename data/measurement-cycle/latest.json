@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W43",
   "asOf": "2026-10-25",
-  "generatedAt": "2026-10-30T21:37:13.438Z",
+  "generatedAt": "2026-11-01T00:07:09.747Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -178,7 +178,7 @@
         "status": "ok",
         "value": "100.0% (2459/2459)",
         "previous": "99.5%",
-        "note": "監査 2026-10-26",
+        "note": "監査 2026-10-30",
         "improvements": []
       },
       {
@@ -219,9 +219,9 @@
         "source": "data/measurement-cycle/latest.json",
         "focus": true,
         "status": "degraded",
-        "value": "9/11",
+        "value": "10/11",
         "previous": null,
-        "note": "欠測・古い・認証切れ: gsc(auth_required), kdp(auth_required)",
+        "note": "欠測・古い・認証切れ: kdp(auth_required)",
         "improvements": []
       }
     ],
