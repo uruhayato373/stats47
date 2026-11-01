@@ -7,7 +7,7 @@
  * 遥かに機械的に config 化できる。これが「増やせるだけ増やす」の本命ソース。
  *
  * getMetaInfo の cat01 は全値が要るため fetch-estat-meta (12件cap) と別実装。
- * e-Stat APP_ID は CI 専任 (secrets)。R2/D1 非書込 read-only。
+ * e-Stat appId は共通 API が CI の Repository Variable またはローカル設定から読む。
  *
  * Usage: node .claude/scripts/estat/enumerate-ssds-indicators.mjs
  * 出力:
@@ -15,23 +15,17 @@
  *   data/estat/ssds-candidates-summary.json  (件数サマリ)
  */
 
-import { config } from "dotenv";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { getAppId } from "../lib/estat-catalog/api.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
-config({ path: path.join(PROJECT_ROOT, ".env.local") });
-
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-if (!APP_ID) {
-  console.error("❌ NEXT_PUBLIC_ESTAT_APP_ID 未設定 (CI: secrets)");
-  process.exit(1);
-}
+const APP_ID = getAppId();
 
 // SSDS 都道府県データの統計表 (既存 config が使う 0000010101-112 / 0000010201-213 系)。
 // 存在しない ID は getMetaInfo が error を返すのでスキップする。

@@ -15,13 +15,16 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { ESTAT_STATS_DATA_URL } = require("../lib/estat-catalog/endpoints.cjs");
-require("dotenv").config({
+const dotenv = require("dotenv");
+dotenv.config({
   path: path.resolve(__dirname, "../../../.env.local"),
+  quiet: true,
 });
+dotenv.config({ path: path.resolve(__dirname, "../../../apps/web/.env.development"), quiet: true });
 
 const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
 if (!APP_ID) {
-  console.error("NEXT_PUBLIC_ESTAT_APP_ID is required");
+  console.error("NEXT_PUBLIC_ESTAT_APP_ID is required (CI variable or local apps/web/.env.development)");
   process.exit(1);
 }
 

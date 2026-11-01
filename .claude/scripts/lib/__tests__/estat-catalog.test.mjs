@@ -3,7 +3,24 @@ import test from "node:test";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { loadMetricLinkage, loadPulled } from '../estat-catalog/pulled.mjs';
+
+test("getAppId は既存ローカル設定を読み、CI の注入値を優先する", () => {
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+  const env = { ...process.env };
+  delete env.NEXT_PUBLIC_ESTAT_APP_ID;
+  const probe = (environment, expression) => spawnSync(process.execPath, [
+    "--input-type=module", "-e",
+    `import { getAppId } from "./.claude/scripts/lib/estat-catalog/api.mjs"; if (!(${expression})) process.exit(1);`,
+  ], { cwd: root, env: environment, encoding: "utf8" });
+
+  const local = probe(env, "getAppId().length > 0");
+  assert.equal(local.status, 0, local.stderr);
+  const ci = probe({ ...env, NEXT_PUBLIC_ESTAT_APP_ID: "ci-test-id" }, 'getAppId() === "ci-test-id"');
+  assert.equal(ci.status, 0, ci.stderr);
+});
 
 test('metric linkage reads every shard and rejects missing or duplicate metric IDs', () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-metric-linkage-'));

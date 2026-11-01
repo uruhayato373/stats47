@@ -8,7 +8,7 @@ estat スキル（`/search-estat`, `/inspect-estat-meta`, `/fetch-estat-data`）
 | ファイル | statsDataId | 調査名 |
 |---|---|---|
 | `social-life-survey-participation-rates.md` | 0003456409, 0003456573, 0003456245, 0003456093 | 社会生活基本調査 — 種目別行動者率 |
-| `household-expenditure-survey.md` | 0003348239（旧系列） | 家計調査 — 2025年の地域・時系列・収入階級の表と分析軸 |
+| `household-expenditure-survey.md` | 0003348239（旧系列）, 0004023605〜0004023608（2025年分類） | 家計調査 — 2025年の地域・時系列・収入階級の表と分析軸 |
 | `port-statistics.md` | 0003130814, 0003130803, 0003130773, 0003130738 等 | 港湾統計（年報）— 港湾別・都道府県別統計データ（DB投入済み: ports + port_statistics） |
 | `wage-structure-survey-occupations.md` | 0003445758 | 賃金構造基本統計調査 — 145職種×47都道府県の年収データ（39職種登録済み） |
 

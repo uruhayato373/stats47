@@ -37,38 +37,19 @@ Phase 1 の生 API 呼び出しへ進む。
 
 ### Phase 1: メタデータ取得
 
-1. 一時スクリプトを作成してメタ情報を取得する:
-
-```js
-// scripts/temp-inspect-meta.mjs
-import { config } from "dotenv";
-import path from "path";
-import { ProxyAgent } from "undici";
-config({ path: path.resolve(process.cwd(), ".env.local") });
-
-const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
-const statsDataId = process.argv[2];
-
-const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=${appId}&lang=J&statsDataId=${statsDataId}`;
-const res = await fetch(url, fetchOpts);
-const json = await res.json();
-const classObjs = json.GET_META_INFO?.METADATA_INF?.CLASS_INF?.CLASS_OBJ;
-
-for (const obj of classObjs) {
-  const id = obj["@id"];
-  const classes = Array.isArray(obj.CLASS) ? obj.CLASS : [obj.CLASS];
-  console.log(`\n--- ${id}: ${obj["@name"]} (${classes.length} items) ---`);
-  for (const c of classes.slice(0, 20)) {
-    console.log(`  ${c["@code"]} | ${c["@name"]}${c["@unit"] ? " (" + c["@unit"] + ")" : ""}`);
-  }
-  if (classes.length > 20) console.log(`  ... and ${classes.length - 20} more`);
-}
-```
+1. 共通 API から取得する。appId は CI の Repository Variable、ローカルの `.env.local`、`apps/web/.env.development` の順で解決する。値は出力しない。
 
 ```bash
-node scripts/temp-inspect-meta.mjs <statsDataId>
+node --input-type=module - <statsDataId> <<'JS'
+import { fetchMetaInfo } from "./.claude/scripts/lib/estat-catalog/api.mjs";
+const json = await fetchMetaInfo(process.argv[2]);
+for (const obj of [].concat(json.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ)) {
+  const classes = [].concat(obj.CLASS);
+  console.log(`${obj["@id"]}: ${obj["@name"]} (${classes.length})`);
+  for (const item of classes.slice(0, 20)) console.log(`  ${item["@code"]} | ${item["@name"]} | ${item["@unit"] ?? ""}`);
+  if (classes.length > 20) console.log(`  ... and ${classes.length - 20} more`);
+}
+JS
 ```
 
 ### Phase 2: 構造分析
@@ -91,10 +72,6 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
 4. **CLASS_INF は e-Stat API (`getMetaInfo`) から毎回再取得できる**ため、永続キャッシュは不要。旧 D1 `estat_metainfo.class_inf` への書き戻しは廃止（8,000 行の自動カタログは retired D1 由来で git 再生成不可。DBレスの恒久カタログは **git-tracked `.claude/skills/estat/references/*.md` + e-Stat API**）。
 
    **頻繁に使う統計表**だけ、把握した構造（ディメンション一覧・各項目数・都道府県ランキング取得の推奨パラメータ）を `.claude/skills/estat/references/<調査名>.md` に追記しておく。これが次回以降 API を叩かずに参照できる恒久カタログになる（`references/README.md` の索引にも 1 行追加する）。
-
-### Phase 4: 後処理
-
-5. 一時スクリプトを削除
 
 ## 出力例
 
@@ -122,21 +99,12 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
   ...
 ```
 
-## クロスプラットフォーム注意事項
+## クロスプラットフォーム
 
-このスキルは Windows / macOS 両環境で使用される。
-
-| 項目 | Windows | macOS |
-|---|---|---|
-| プロキシ制約 | あり（企業ネットワーク、`undici.ProxyAgent` 必須） | なし（自宅ネットワーク） |
-| `ProxyAgent` import | 必須（`HTTP_PROXY` / `HTTPS_PROXY` 環境変数から検出） | 不要（環境変数が未設定なら自動スキップ） |
-
-スクリプトテンプレートの `ProxyAgent` 処理は環境変数の有無で自動判定するため、**コード変更は不要**。
+共通 API が `HTTP_PROXY` / `HTTPS_PROXY` を検出する。
 
 ## 注意
 
-- **プロキシ**: 企業ネットワークでは `undici` の `ProxyAgent` が必須（スクリプトテンプレートが自動検出する）
-- **環境変数**: `NEXT_PUBLIC_ESTAT_APP_ID` が `.env.local` に設定されていること
 - **カテゴリ名の接頭辞**: e-Stat のカテゴリ名は `"J250502_保育所等利用待機児童数"` のようにコード接頭辞がつく場合がある
 
 ## 関連スキル
