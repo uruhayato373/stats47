@@ -88,20 +88,23 @@ export async function fetchStatsListPage(collectArea, startPosition, appId = get
  * getStatsList を全ページ収集する。1 ページごとに onPage を呼ぶ (呼び出し側で delay を挟める)。
  * @param {string|number|null} collectArea null なら全表
  * @param {{ delayMs?: number, onPage?: (info: any) => unknown }} [options]
- * @returns {Promise<object[]>} 生の TABLE_INF 行の配列 (未正規化)
+ * @returns {Promise<{ rows: object[], total: number | null }>} 生の TABLE_INF 行 (未正規化) と、最初のページが示した総件数 (NUMBER)
  */
 export async function listAllTables(collectArea, { delayMs = 300, onPage } = {}) {
   const rows = [];
+  let total = null;
   let startPosition = 1;
   while (true) {
-    const { tables, nextKey } = await fetchStatsListPage(collectArea, startPosition);
+    const page = await fetchStatsListPage(collectArea, startPosition);
+    const { tables, nextKey } = page;
+    if (total === null && page.total != null) total = Number(page.total);
     rows.push(...tables);
     if (onPage) onPage({ collectArea, count: rows.length, page: tables.length });
     if (tables.length === 0 || !nextKey) break;
     startPosition = nextKey;
     await sleep(delayMs);
   }
-  return rows;
+  return { rows, total };
 }
 
 /** getMetaInfo を 1 件取得する。エラー時は例外を投げる (呼び出し側で manifest.failed に記録する) */

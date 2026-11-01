@@ -36,12 +36,14 @@ import {
   classifyTimeKind,
   classRows,
   normalizeCollectArea,
+  normalizeListRows,
   normalizeTableRow,
   PREFECTURE_CODES,
   summarizeMeta,
 } from "../estat-catalog/normalize.mjs";
 import {
   buildPlan,
+  checkListCompleteness,
   computeSurveysSummary,
   MAX_ATTEMPTS,
   markRemoved,
@@ -125,6 +127,26 @@ test("normalizeTableRow: 日本語ラベルのCOLLECT_AREAでも正しい数字�
   assert.equal(normalizeTableRow(rawNone, "2").collectArea, "0"); // 該当なしもラベルとして読む
   const rawUnknown = { "@id": "0000010101", COLLECT_AREA: "不明な値" };
   assert.equal(normalizeTableRow(rawUnknown, "2").collectArea, "2"); // 読めなければfallbackへ
+});
+
+test("normalizeListRows: 区分ごとに別の行で返る同じ表を 1 表にまとめ、全区分を残す", () => {
+  // 国勢調査の実例: 1 表が 全国・都道府県・市区町村 の 3 行で返る (2026-11-02)
+  const rows = normalizeListRows([
+    { "@id": "A", COLLECT_AREA: "全国" },
+    { "@id": "A", COLLECT_AREA: "市区町村" },
+    { "@id": "A", COLLECT_AREA: "都道府県" },
+    { "@id": "B", COLLECT_AREA: "該当なし" },
+  ]);
+  assert.equal(rows.size, 2);
+  assert.deepEqual(rows.get("A").collectAreas, ["1", "2", "3"]);
+  assert.equal(rows.get("A").collectArea, "3"); // 最も細かい区分
+  assert.deepEqual(rows.get("B").collectAreas, ["0"]);
+});
+
+test("buildPlan: 区分を複数持つ表は、どれか 1 つが metaScope に入れば meta を取る", () => {
+  const fresh = new Map([["A", row("A", { collectArea: "2", collectAreas: ["1", "2"] })]]);
+  const plan = buildPlan({ existingTables: [], freshRows: fresh, manifest: {}, metaScope: [1] });
+  assert.deepEqual(plan.toFetchMeta.map((r) => r.statsDataId), ["A"]);
 });
 
 test("classifyTimeKind: 名称の末尾から年次/年度/月次を判定する", () => {
@@ -304,6 +326,15 @@ test("buildPlan: 取得対象外で一覧が変わらない meta 未取得の表
   });
   assert.deepEqual(plan.updatedRows.map((r) => r.statsDataId), ["Y"]); // 一覧の更新日が変わった Y だけ索引を書き直す
   assert.deepEqual(plan.toFetchMeta, []);
+});
+
+test("checkListCompleteness: 取得件数が e-Stat の総件数と一致しなければ止める", () => {
+  assert.equal(checkListCompleteness({ expectedTotal: 238822, fetchedRows: 238822 }).ok, true);
+  // 2026-10-02 の索引は collectArea=1/2/3 だけを取り 23,849 表で、該当なしの約 20 万表が欠けていた
+  const short = checkListCompleteness({ expectedTotal: 238822, fetchedRows: 23849 });
+  assert.equal(short.ok, false);
+  assert.match(short.reason, /23849/);
+  assert.equal(checkListCompleteness({ expectedTotal: null, fetchedRows: 10 }).ok, false); // 総件数を読めないときも通さない
 });
 
 test("buildPlan: maxMeta で優先度順 (new→updated→retry) に打ち切る", () => {

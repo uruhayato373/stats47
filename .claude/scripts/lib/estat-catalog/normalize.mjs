@@ -29,7 +29,7 @@ export function asArray(x) {
 /**
  * e-Stat の COLLECT_AREA は API 仕様上 "1"/"2"/"3" だが、実測 (2026-09-16 初回run) では
  * getStatsList が日本語ラベル ("全国"/"都道府県"/"市区町村") を返す。
- * "該当なし" は "0" にする。e-Stat DB の約 85% (2026-11-02 実測 238,822 表中 203,348) がこれで、
+ * "該当なし" は "0" にする。e-Stat DB の約 85% (2026-11-02 実測 238,822 行中 203,348 行) がこれで、
  * 家計調査は 126 表すべてが該当なし (都市別の値を持つ表も含む)。collectArea=1/2/3 の一覧には出てこない。
  * それ以外の読めない値は null を返し、呼び出し側の fallbackCollectArea に委ねる。
  */
@@ -65,6 +65,25 @@ export function normalizeTableRow(raw, fallbackCollectArea = null) {
       ? { code: raw.SUB_CATEGORY["@no"] ?? null, name: pickString(raw.SUB_CATEGORY) }
       : null,
   };
+}
+
+/**
+ * getStatsList の生の行を表 (statsDataId) ごとにまとめる。
+ * 1 つの表が複数の集計地域区分を持つと、区分ごとに別の行として返る (2026-11-02 実測: 国勢調査は 6,237 表中
+ * 1,282 表が「全国+都道府県+市区町村」など。全表では 238,822 行 = 227,205 表)。
+ * `collectAreas` に全区分を昇順で持ち、`collectArea` には最も細かい区分 (数字の大きいもの) を入れる。
+ * @returns {Map<string, object>} key=statsDataId
+ */
+export function normalizeListRows(rawRows) {
+  const byId = new Map();
+  for (const raw of rawRows) {
+    const row = normalizeTableRow(raw);
+    const existing = byId.get(row.statsDataId);
+    const areas = new Set([...(existing?.collectAreas ?? []), row.collectArea].filter((a) => a != null));
+    const collectAreas = [...areas].sort();
+    byId.set(row.statsDataId, { ...(existing ?? row), collectArea: collectAreas.at(-1) ?? null, collectAreas });
+  }
+  return byId;
 }
 
 /** @name の末尾から年次/年度/月次を推定する (e-Stat の time コードは体系が表ごとに異なるため名称で判定) */

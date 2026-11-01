@@ -16,9 +16,10 @@ import { fileURLToPath } from "node:url";
 import { METRIC_LINKAGE_DIR } from '../../../config/paths.mjs';
 
 import { fetchMetaInfo, getAppId, listAllTables, sleep } from "../lib/estat-catalog/api.mjs";
-import { classRows, normalizeTableRow, summarizeMeta } from "../lib/estat-catalog/normalize.mjs";
+import { classRows, normalizeListRows, summarizeMeta } from "../lib/estat-catalog/normalize.mjs";
 import {
   buildPlan,
+  checkListCompleteness,
   computeSurveysSummary,
   markRemoved,
   recordFetchFailure,
@@ -100,13 +101,12 @@ async function cmdRun(args) {
 
   // --- L1: getStatsList を collectArea で絞らずに全表 crawl ---
   // collectArea=1/2/3 の 3 回に分けると、集計地域区分が「該当なし」の表 (DB の約 85%。家計調査は全表) が漏れる (2026-11-02)
-  const freshRows = new Map();
   console.log(`\n--- L1 全表 ---`);
-  const raw = await listAllTables(null, {
+  const { rows: raw, total: listTotal } = await listAllTables(null, {
     delayMs: LIST_DELAY_MS,
     onPage: ({ count }) => process.stdout.write(`\r  ...${count} 件`),
   });
-  for (const r of raw) freshRows.set(String(r["@id"]), normalizeTableRow(r));
+  const freshRows = normalizeListRows(raw);
   const collectAreaCounts = {};
   for (const row of freshRows.values()) {
     const ca = row.collectArea ?? "unknown";
@@ -114,6 +114,12 @@ async function cmdRun(args) {
   }
   console.log(`\nL1 合計 (重複排除後): ${freshRows.size} 件 / 取得 ${raw.length} 行`);
   console.log(JSON.stringify({ collectAreaCounts }, null, 2));
+  const completeness = checkListCompleteness({ expectedTotal: listTotal, fetchedRows: raw.length });
+  if (!completeness.ok) {
+    console.error(`❌ 一覧が欠けている: ${completeness.reason} — 索引を書かずに停止 (fail-closed)`);
+    process.exit(1);
+  }
+  console.log(`✓ 一覧の件数照合: e-Stat ${listTotal} 行 = 取得 ${raw.length} 行 (${freshRows.size} 表)`);
 
   if (dryRun) {
     console.log("\n【DRY RUN】ここで停止 (getMetaInfo は呼ばない・R2 も読まない)");
@@ -279,7 +285,7 @@ async function cmdRun(args) {
     metaScope,
     metaStatCodes,
     collectAreas,
-    lastRun: { startedAt, finishedAt, fetched: attempted, failed: failedCount, timeBudgetHit },
+    lastRun: { startedAt, finishedAt, listRows: raw.length, listTables: freshRows.size, fetched: attempted, failed: failedCount, timeBudgetHit },
   };
   fs.writeFileSync(path.join(STAGING_DIR, "manifest.json"), JSON.stringify(finalManifest, null, 2));
 
@@ -357,7 +363,7 @@ async function cmdSearch(args) {
     if (!needles.every((n) => hay(t).includes(n))) return false;
     if (prefOnly && !t.meta?.has47Pref) return false;
     if (year && !(t.meta?.years ?? []).includes(year)) return false;
-    if (collectArea && String(t.collectArea) !== collectArea) return false;
+    if (collectArea && !(t.collectAreas ?? [t.collectArea]).map(String).includes(collectArea)) return false;
     return true;
   });
   console.log(`${hits.length} 件`);

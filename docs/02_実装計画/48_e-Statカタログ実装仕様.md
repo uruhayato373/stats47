@@ -29,10 +29,15 @@ GSC実測で伸びたカテゴリだけ深掘りする方針、`.claude/agents/r
 
 ## 1. スコープ
 
-- 一覧 (getStatsList) はcollectAreaで絞らず全表 (2026-11-02 実測 238,822表)。collectArea=1/2/3 の
-  3回に分けると、集計地域区分が「該当なし」の表 (203,348表・約85%) が漏れる。家計調査は126表すべて、
-  国勢調査は8,732表中4,902表が該当なしで、2026-10-02のカタログには家計調査が1表も無かった。
+- 一覧 (getStatsList) はcollectAreaで絞らず全表 (2026-11-02 実測 238,822行 = 227,205表)。collectArea=1/2/3 の
+  3回に分けると、集計地域区分が「該当なし」の行 (203,348行・約85%) が漏れる。家計調査は126表すべて、
+  国勢調査は8,732行中4,902行が該当なしで、2026-10-02のカタログには家計調査が1表も無かった。
   該当なしは `collectArea: "0"` として索引に入れる
+- 1つの表が複数の集計地域区分を持つと、区分ごとに別の行で返る (国勢調査は6,237表中1,282表)。
+  表行は `collectAreas` に全区分を昇順で持ち、`collectArea` は最も細かい区分とする
+- **一覧の件数照合 (fail-closed)**: 取得行数が getStatsList の総件数 `NUMBER` と一致しなければ索引を
+  書かずに exit 1。件数を照合していなかったため、上の欠けに1か月以上気づかなかった。
+  manifest の `lastRun.listRows` / `listTables` に実数を残す
 - 次元台帳 (getMetaInfo) は都道府県+市区町村を全件 (≈12,000表) と、`--meta-stat-codes` で指定した
   調査の全表 (既定は家計調査 `00200561`)。全国・該当なしの全件は取らない (§6)
 - 観測値は対象外。既存の`page-data-batch → app/stats/`経路のまま
@@ -47,7 +52,7 @@ estat-catalog/
                                     lastRun{startedAt,finishedAt,fetched,failed,timeBudgetHit}
   index/surveys.json               調査(statCode)の名簿: {statCode,statName,govOrg,tablesByCollectArea,metaFetched}
   index/tables/<statCode>.json     表行 (全collectArea混在): L1 {statsDataId,statCode,statName,title,govOrg,
-                                    cycle,surveyDate,openDate,updatedDate,collectArea,mainCategory,subCategory}
+                                    cycle,surveyDate,openDate,updatedDate,collectArea,collectAreas,mainCategory,subCategory}
                                     + meta要約 (取得済のみ) {sourceUpdatedDate,fetchedAt,dims,years,timeKind,
                                     prefDim,has47Pref,areaKind,areaCount} + removedAt (L1から消えた表)
   index/classes/<statCode>.json    分類行 (meta取得済の表のみ): {statsDataId,dim,code,name,unit,level,parentCode}
@@ -121,7 +126,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 
 ## 6. 全国 (collectArea=1) と該当なし (0) のmeta対象
 
-2026-11-02 実測で全国22,017表・該当なし203,348表。月150分の時間予算 (1件1〜5秒) では全件のmetaを
+2026-11-02 実測で全国22,017行・該当なし203,348行。月150分の時間予算 (1件1〜5秒) では全件のmetaを
 回せないため、調査コードのallowlist (`--meta-stat-codes`、workflow入力 `meta_stat_codes`) で
 必要な調査だけ全表のmetaを取る。調査を足すときはallowlistに加える。meta未取得の表も一覧の行
 (表題・調査・更新日) は索引に入るので、`search`で存在は引ける。

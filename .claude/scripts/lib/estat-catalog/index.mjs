@@ -18,7 +18,8 @@ export const MAX_ATTEMPTS = 5;
 export function buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes = [], maxMeta = Infinity }) {
   const existingById = new Map(existingTables.map((t) => [t.statsDataId, t]));
   const statCodes = new Set(metaStatCodes);
-  const inScope = (row) => metaScope.includes(Number(row.collectArea)) || statCodes.has(row.statCode);
+  const inScope = (row) =>
+    (row.collectAreas ?? [row.collectArea]).some((ca) => metaScope.includes(Number(ca))) || statCodes.has(row.statCode);
   const quarantined = new Set((manifest.quarantined ?? []).map((q) => q.id));
   const failedById = new Map((manifest.failed ?? []).map((f) => [f.id, f]));
 
@@ -54,6 +55,23 @@ export function buildPlan({ existingTables, freshRows, manifest, metaScope, meta
   const toFetchMeta = [...newRows, ...updatedRows, ...retryRows].filter(inScope).slice(0, maxMeta);
 
   return { newRows, updatedRows, removedIds, retryRows, toFetchMeta };
+}
+
+/**
+ * 一覧 (L1) の取得行数を e-Stat が示した総件数 (getStatsList の NUMBER) と照合する。
+ * NUMBER は表の数ではなく行の数 (複数の集計地域区分を持つ表は区分ごとに 1 行) なので、重複を除く前の行数と比べる。
+ * 合わなければ索引を書かずに止める (fail-closed)。件数を照合していなかったため、集計地域区分「該当なし」の
+ * 約 20 万表と全国区分の約 8 千表が欠けたまま 1 か月以上気づかれなかった (2026-11-02)。
+ * crawl 中に e-Stat 側で表が増減するとずれることがあるが、許容幅は設けない (翌回の run で再取得する)。
+ */
+export function checkListCompleteness({ expectedTotal, fetchedRows }) {
+  if (!Number.isFinite(expectedTotal) || expectedTotal <= 0) {
+    return { ok: false, expectedTotal, fetchedRows, reason: "e-Stat の総件数 (NUMBER) を読めない" };
+  }
+  if (fetchedRows !== expectedTotal) {
+    return { ok: false, expectedTotal, fetchedRows, reason: `取得 ${fetchedRows} 行 ≠ e-Stat の総件数 ${expectedTotal} 行` };
+  }
+  return { ok: true, expectedTotal, fetchedRows, reason: null };
 }
 
 /** meta 取得結果 (成功/未実施/既存流用) を表行にマージする */
