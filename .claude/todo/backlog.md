@@ -81,6 +81,7 @@ updated: 2026-10-19
     - `nursery-within-500m-young-child-household-ratio`: `data-refresh.yml` run 41259477757 (dry_run の run 41259244491 も success)。1,228 行・2023 年・順位あり 1,171 (推計の丸めで 100% を超える自治体は順位から除く。最大 100.3)。
     - `elementary-school-within-1km-household-ratio`: 同じ run。1,228 行・2023 年・順位あり 1,228。
   - **公開までの残り**: ① `municipality-catalog.ts` で 3 指標を published にする (2 指標は `MUNICIPALITY_HOUSING_SURVEY_STATUS` が 13 指標をまとめて切り替える作りなので、2 指標だけ先に出すか 13 指標を同時に取り込むかを決める) ② ranking-items・content の派生物の生成と極性 (polarity) の割り当て (人の判断) ③ `/audit-ranking-data-integrity` ④ デプロイ (溜めて 1 回)。待機児童率は、申込者の少ない村が上位に並ぶので、見せるときの申込者数の下限を公開前に決める。
+- **公開 (2026-11-01・PR #1204・deploy-workers run 41271572737)**: 3 指標を published にして本番へ出した。Googlebot UA で `/municipalities/ranking/nursery-waiting-children-rate` 200 (R2 の `app/municipalities/ranking/<key>/values.json` 211 行)、`/municipalities/themes/childcare-services` と `/municipalities/themes/long-term-care` に待機児童率のリンク、`/municipalities/themes/living-housing` に住環境 13 指標のリンク、神戸市のデータブックに住環境の節。極性は待機児童率を「高いほど悪い」で登録。**このカードの完了条件は満たした** (週次レビューで削除してよい)。残る子育てページの公開と内部リンクは `MUNI-KOSODATE-PAGES-01`。
 ### [MUNI-DATA-PRODUCT-BUILD-01] 製造品出荷額 (manufacturing-shipment-amount) を最新境域に組み替えた時系列 CSV と、結合用の GeoJSON を作る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
 
