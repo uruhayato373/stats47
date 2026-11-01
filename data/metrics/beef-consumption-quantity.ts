@@ -14,7 +14,7 @@ export const beefConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010310010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const beefConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const beefConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "牛肉消費は関西が独占｜兵庫・大阪が1・2位、東北・関東は3.3倍差の下位 (2024)",
-  "seoDescription": "牛肉消費の地域差は関西 vs 東北で3.3倍。1位兵庫7,899g・2位大阪7,722gが上位を占め、最下位岩手2,417gとの差はなぜ生まれるか？47都道府県の牛肉消費量を地図とグラフで解説（2024年）。",
+  "seoTitle": "牛肉の年間購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の牛肉の年間購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

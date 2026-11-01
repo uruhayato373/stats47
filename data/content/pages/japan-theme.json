@@ -302,6 +302,25 @@
       "published": true
     },
     {
+      "id": "japan-theme:household-appliances",
+      "kind": "japan-theme",
+      "key": "household-appliances",
+      "title": "日本の家電と住まいの用品",
+      "href": "/japan/household-appliances",
+      "rankingKeys": [
+        "air-conditioner-consumption-expenditure",
+        "air-conditioner-consumption-quantity",
+        "heater-consumption-expenditure",
+        "cooking-appliance-consumption-expenditure",
+        "washing-machine-consumption-expenditure",
+        "vacuum-cleaner-consumption-expenditure",
+        "refrigerator-consumption-expenditure",
+        "refrigerator-consumption-quantity",
+        "microwave-consumption-expenditure"
+      ],
+      "published": true
+    },
+    {
       "id": "japan-theme:household-assets-debt",
       "kind": "japan-theme",
       "key": "household-assets-debt",
@@ -316,6 +335,117 @@
         "current-securities-balance-ratio-multi-person-households",
         "housing-land-liabilities-ratio-multi-person-households",
         "securities-balance"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-clothing",
+      "kind": "japan-theme",
+      "key": "household-clothing",
+      "title": "日本の衣服の購入",
+      "href": "/japan/household-clothing",
+      "rankingKeys": [
+        "childrens-clothing-consumption-expenditure",
+        "other-womens-underwear-consumption-expenditure",
+        "mens-coat-consumption-expenditure",
+        "mens-sweater-consumption-expenditure",
+        "mens-underwear-consumption-expenditure",
+        "mens-clothing-consumption-expenditure",
+        "womens-coat-consumption-expenditure",
+        "womens-coat-consumption-quantity",
+        "womens-sweater-consumption-expenditure",
+        "womens-sweater-consumption-quantity",
+        "womens-clothing-consumption-expenditure"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-education-leisure",
+      "kind": "japan-theme",
+      "key": "household-education-leisure",
+      "title": "日本の教育と娯楽への支出",
+      "href": "/japan/household-education-leisure",
+      "rankingKeys": [
+        "camera-consumption-expenditure",
+        "cable-tv-fee-consumption-expenditure",
+        "television-consumption-expenditure",
+        "television-consumption-quantity",
+        "personal-computer-consumption-expenditure",
+        "recorded-media-consumption-expenditure",
+        "language-lesson-consumption-expenditure",
+        "high-school-tutoring-consumption-expenditure",
+        "public-university-consumption-expenditure",
+        "private-university-consumption-expenditure"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-food-spending",
+      "kind": "japan-theme",
+      "key": "household-food-spending",
+      "title": "日本の食費と食品購入",
+      "href": "/japan/household-food-spending",
+      "rankingKeys": [
+        "consumption-expenditure-total",
+        "food-expenditure-total",
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity",
+        "natto-consumption-expenditure",
+        "green-tea-consumption-quantity",
+        "cup-noodles-consumption-expenditure",
+        "beef-consumption-quantity",
+        "coffee-consumption-expenditure",
+        "sugar-consumption-expenditure",
+        "sugar-consumption-quantity"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-health-spending",
+      "kind": "japan-theme",
+      "key": "household-health-spending",
+      "title": "日本の医療と健康への支出",
+      "href": "/japan/household-health-spending",
+      "rankingKeys": [
+        "contact-lens-consumption-expenditure",
+        "massage-fee-consumption-expenditure",
+        "medical-fee-consumption-expenditure",
+        "supplement-consumption-expenditure",
+        "cold-medicine-consumption-expenditure",
+        "eyeglasses-consumption-expenditure",
+        "dental-fee-consumption-expenditure"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-other-purchases",
+      "kind": "japan-theme",
+      "key": "household-other-purchases",
+      "title": "日本の身の回り品と仕送り",
+      "href": "/japan/household-other-purchases",
+      "rankingKeys": [
+        "tobacco-consumption-expenditure",
+        "handbag-consumption-expenditure",
+        "handbag-consumption-quantity",
+        "domestic-student-remittance-consumption-expenditure",
+        "umbrella-consumption-expenditure",
+        "umbrella-consumption-quantity",
+        "wristwatch-consumption-expenditure"
+      ],
+      "published": true
+    },
+    {
+      "id": "japan-theme:household-transport-spending",
+      "kind": "japan-theme",
+      "key": "household-transport-spending",
+      "title": "日本の自動車と移動への支出",
+      "href": "/japan/household-transport-spending",
+      "rankingKeys": [
+        "gasoline-consumption-expenditure",
+        "gasoline-consumption-quantity",
+        "rental-car-consumption-expenditure",
+        "car-purchase-consumption-expenditure",
+        "car-purchase-consumption-quantity"
       ],
       "published": true
     },

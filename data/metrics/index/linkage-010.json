@@ -1481,7 +1481,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "050220060",
             "cdCat02": "03"
@@ -1491,7 +1491,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "050220060",
           "cdCat02": "03"
         },
@@ -1499,7 +1499,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "438b0b21ef62848a"
+        "configHash": "9751f4b9873401d6"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1521,7 +1521,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "050220060",
             "cdCat02": "03"
@@ -1531,7 +1531,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "050220060",
           "cdCat02": "03"
         },
@@ -1539,7 +1539,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "dd562efd53cb8d9e"
+        "configHash": "a072b12808474af3"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1561,7 +1561,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "050600040",
             "cdCat02": "03"
@@ -1571,7 +1571,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "050600040",
           "cdCat02": "03"
         },
@@ -1579,7 +1579,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "e7aad239da26b3be"
+        "configHash": "d16c15f107da4d72"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1601,7 +1601,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "050600040",
             "cdCat02": "03"
@@ -1611,7 +1611,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "050600040",
           "cdCat02": "03"
         },
@@ -1619,7 +1619,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "cdff3465be6c9d1a"
+        "configHash": "8b018b60638cdc73"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1720,7 +1720,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "090202010",
             "cdCat02": "03"
@@ -1730,7 +1730,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "090202010",
           "cdCat02": "03"
         },
@@ -1738,7 +1738,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "5a9c55e6370182dd"
+        "configHash": "18405c4e63a0ae19"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1962,7 +1962,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "090442030",
             "cdCat02": "03"
@@ -1972,7 +1972,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "090442030",
           "cdCat02": "03"
         },
@@ -1980,7 +1980,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "0df4214ee6c4b32d"
+        "configHash": "fda27eb62cba7189"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2607,7 +2607,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010610070",
             "cdCat02": "03"
@@ -2617,7 +2617,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010610070",
           "cdCat02": "03"
         },
@@ -2625,7 +2625,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "d68678819b577392"
+        "configHash": "0ae884194cc7837e"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2667,7 +2667,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010610070",
             "cdCat02": "03"
@@ -2677,7 +2677,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010610070",
           "cdCat02": "03"
         },
@@ -2685,7 +2685,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "69194c5d18b40f46"
+        "configHash": "03392c885e4ed6eb"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2763,7 +2763,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010513010",
             "cdCat02": "03"
@@ -2773,7 +2773,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010513010",
           "cdCat02": "03"
         },
@@ -2781,7 +2781,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "1454bb8b935aefa4"
+        "configHash": "e304fdffb2ad4ad8"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -3029,7 +3029,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010513010",
             "cdCat02": "03"
@@ -3039,7 +3039,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010513010",
           "cdCat02": "03"
         },
@@ -3047,7 +3047,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "1a54e11f5a655be0"
+        "configHash": "b84b99b23a0cf8a5"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -3295,7 +3295,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010513060",
             "cdCat02": "03"
@@ -3305,7 +3305,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010513060",
           "cdCat02": "03"
         },
@@ -3313,7 +3313,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "f9154f9c633fc447"
+        "configHash": "a86c48086f83a813"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -3359,7 +3359,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010513060",
             "cdCat02": "03"
@@ -3369,7 +3369,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010513060",
           "cdCat02": "03"
         },
@@ -3377,7 +3377,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "0ca5c0d00e75a63b"
+        "configHash": "b01b9f99cd77515e"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -3419,7 +3419,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "011010010",
             "cdCat02": "03"
@@ -3429,7 +3429,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "011010010",
           "cdCat02": "03"
         },
@@ -3437,7 +3437,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "588fd506794f5b4d"
+        "configHash": "edee466e9ed54529"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -3905,7 +3905,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "011010010",
             "cdCat02": "03"
@@ -3915,7 +3915,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "011010010",
           "cdCat02": "03"
         },
@@ -3923,7 +3923,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "4d90745ace15d151"
+        "configHash": "dfefdb8bab5d7590"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -4188,6 +4188,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-food-spending",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:green-tea-consumption-quantity",
           "kind": "ranking"
         },
@@ -4207,7 +4211,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010920010",
             "cdCat02": "03"
@@ -4217,7 +4221,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010920010",
           "cdCat02": "03"
         },
@@ -4225,7 +4229,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "d60c5d758e3ea30e"
+        "configHash": "0c80df7d6dd0be9a"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5445,7 +5449,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010310040",
             "cdCat02": "03"
@@ -5455,7 +5459,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010310040",
           "cdCat02": "03"
         },
@@ -5463,7 +5467,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "559222ff260e7330"
+        "configHash": "137b43731043a0c4"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5509,7 +5513,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010310040",
             "cdCat02": "03"
@@ -5519,7 +5523,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010310040",
           "cdCat02": "03"
         },
@@ -5527,7 +5531,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "a4e1e26b6db67eac"
+        "configHash": "0c1b4a76f9147469"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5573,7 +5577,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010920070",
             "cdCat02": "03"
@@ -5583,7 +5587,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010920070",
           "cdCat02": "03"
         },
@@ -5591,7 +5595,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "c15fce57bcc7a674"
+        "configHash": "482336abbafd6708"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6107,7 +6111,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100121150",
             "cdCat02": "03"
@@ -6117,7 +6121,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100121150",
           "cdCat02": "03"
         },
@@ -6125,7 +6129,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "6205dee5eae9156e"
+        "configHash": "517f146dec9d01a2"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6147,7 +6151,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100121070",
             "cdCat02": "03"
@@ -6157,7 +6161,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100121070",
           "cdCat02": "03"
         },
@@ -6165,7 +6169,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "c3fe61702b571f5b"
+        "configHash": "dc12ac9c64881e3f"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6187,7 +6191,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100121090",
             "cdCat02": "03"
@@ -6197,7 +6201,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100121090",
           "cdCat02": "03"
         },
@@ -6205,7 +6209,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "c9c06e9a143b5005"
+        "configHash": "87a61c62dc4a7ee1"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6227,7 +6231,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100110040",
             "cdCat02": "03"
@@ -6237,7 +6241,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100110040",
           "cdCat02": "03"
         },
@@ -6245,7 +6249,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "43ac3e3bbcc7813c"
+        "configHash": "1e3e0d6ffad7fb80"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6267,7 +6271,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "100110040",
             "cdCat02": "03"
@@ -6277,7 +6281,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "100110040",
           "cdCat02": "03"
         },
@@ -6285,7 +6289,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "1bf84a0ffd039e88"
+        "configHash": "74c95ba22d9b0f51"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6307,7 +6311,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010320010",
             "cdCat02": "03"
@@ -6317,7 +6321,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010320010",
           "cdCat02": "03"
         },
@@ -6325,7 +6329,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "ecc71b1baea8b328"
+        "configHash": "98ff87cf13f2c264"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6355,7 +6359,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010320010",
             "cdCat02": "03"
@@ -6365,7 +6369,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010320010",
           "cdCat02": "03"
         },
@@ -6373,7 +6377,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "b5deffef05d9220c"
+        "configHash": "85f58682d2b24c71"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6403,7 +6407,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010920090",
             "cdCat02": "03"
@@ -6413,7 +6417,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010920090",
           "cdCat02": "03"
         },
@@ -6421,7 +6425,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "ea17bdbd941b0356"
+        "configHash": "a68519a57b5a5f22"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6443,7 +6447,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "011211090",
             "cdCat02": "03"
@@ -6453,7 +6457,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "011211090",
           "cdCat02": "03"
         },
@@ -6461,7 +6465,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "6e39960123312dd6"
+        "configHash": "a29ba1992f55b1f2"
       },
       "dependencies": [],
       "normalizationDependencies": [

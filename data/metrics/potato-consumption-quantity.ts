@@ -14,7 +14,7 @@ export const potatoConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010512020",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const potatoConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const potatoConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "じゃがいも消費量ランキング都道府県【2024】産地王者・北海道は何位? 1位は岐阜",
-  "seoDescription": "じゃがいもの産地といえば北海道、では最も食べる県は?──答えは岐阜県(10,467g)。最下位沖縄(6,331g)まで1.7倍の差。2024年最新ランキングを地図とグラフで47都道府県比較。",
+  "seoTitle": "じゃがいも消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のじゃがいも消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

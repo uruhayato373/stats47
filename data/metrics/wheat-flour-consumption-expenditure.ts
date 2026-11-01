@@ -14,7 +14,7 @@ export const wheatFlourConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "010140010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const wheatFlourConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const wheatFlourConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "小麦粉消費支出額ランキング都道府県【2024】1位は消費量首位の三重でなく岐阜?",
-  "seoDescription": "小麦粉に最もお金をかける県は?──消費量1位の三重ではなく岐阜県(1,042円)。2位三重(912円)、3位福岡(900円)、最下位山梨(482円)で2.2倍の格差。量と金額で首位が入れ替わる2024年の支出額ランキングを47都道府県で比較。",
+  "seoTitle": "小麦粉消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の小麦粉消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

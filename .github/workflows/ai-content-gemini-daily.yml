@@ -9,10 +9,12 @@ name: 🤖 Ranking AI Content / Gemini daily
 #   コードから billing の ON/OFF は照合できないため、ここは Secret 所有者の運用ゲート。
 
 #
-# 2026-10-11 定期実行を外した: 導入 (2026-08-30) から 48 run 中 44 run が preflight で止まり (billing / HTTP 402 bad-request)、
-# 解説を 1 件も生成していない。GEMINI_API_KEY の project が無料枠で使えることを確かめてから schedule を戻す
-# (確認は workflow_dispatch の dry_run=false・limit=1)。backlog: AI-CONTENT-GEMINI-KEY-01
+# 2026-10-11 定期実行を停止した: 48 run 中 44 run が billing / HTTP 402 で止まり生成 0 件。
+# 新しい無料枠キーで verify_only=true・limit=1 の実生成が PASS した後だけ、
+# repository variable GEMINI_FREE_TIER_VERIFIED=true で schedule job を有効にする。
 on:
+  schedule:
+    - cron: "15 22 * * *" # 07:15 JST
   workflow_dispatch:
     inputs:
       limit:
@@ -20,10 +22,20 @@ on:
         required: false
         default: "3"
         type: string
+      keys:
+        description: "優先するランキングキー (カンマ区切り、空ならキュー順。要needs-regen)"
+        required: false
+        default: ""
+        type: string
       dry_run:
         description: "API/R2/git 書き込みを行わず対象選定と入力だけ検証"
         required: false
         default: false
+        type: boolean
+      verify_only:
+        description: "1件を実生成・審査するが、git/R2 に公開しない (無料枠キーの確認用)"
+        required: false
+        default: true
         type: boolean
 
 permissions:
@@ -37,17 +49,19 @@ concurrency:
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL || 'gemini-2.5-flash-lite' }}
+  GEMINI_TEXT_MODEL: gemini-3.5-flash-lite
+  NODE_OPTIONS: --conditions react-server
 
 jobs:
   generate:
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.verify_only) || vars.GEMINI_FREE_TIER_VERIFIED == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: 🧰 Checkout develop
+      - name: 🧰 Checkout canary ref or develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: develop
+          ref: ${{ inputs.verify_only && github.ref_name || 'develop' }}
           fetch-depth: 2
 
       - name: 🟢 Setup Node.js
@@ -62,17 +76,36 @@ jobs:
       - name: 📋 Rebuild queue and select targets
         id: targets
         shell: bash
+        env:
+          TARGET_KEYS: ${{ inputs.keys || '' }}
         run: |
           set -euo pipefail
-          LIMIT="${{ inputs.limit || '3' }}"
+          LIMIT="${{ inputs.verify_only && '1' || inputs.limit || '3' }}"
           if ! [[ "$LIMIT" =~ ^[0-9]+$ ]] || [ "$LIMIT" -lt 1 ] || [ "$LIMIT" -gt 10 ]; then
             echo "::error::limit は 1〜10 の整数です: $LIMIT"
             exit 1
           fi
           mkdir -p .local/ci
           node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all
-          node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "$LIMIT" \
-            > .local/ci/targets.txt
+          if [ -n "$TARGET_KEYS" ]; then
+            node - "$LIMIT" "$TARGET_KEYS" <<'NODE' > .local/ci/targets.txt
+          const fs = require('node:fs');
+          const keys = process.argv[3].split(',').map(key => key.trim()).filter(Boolean);
+          const limit = Number(process.argv[2]);
+          if (!keys.length || keys.length > limit || new Set(keys).size !== keys.length ||
+              keys.some(key => !/^[a-z0-9][a-z0-9-]*$/.test(key))) {
+            throw new Error('keys は重複なしのランキングキーを limit 件以内で指定してください');
+          }
+          const queue = JSON.parse(fs.readFileSync('data/ai-content/remediation/remediation-queue.json', 'utf8'));
+          const pending = new Set(queue.entries.filter(entry => entry.status === 'needs-regen').map(entry => entry.rankingKey));
+          const unavailable = keys.filter(key => !pending.has(key));
+          if (unavailable.length) throw new Error(`needs-regen ではないキー: ${unavailable.join(',')}`);
+          process.stdout.write(keys.join('\n') + '\n');
+          NODE
+          else
+            node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "$LIMIT" \
+              > .local/ci/targets.txt
+          fi
           COUNT=$(sed '/^$/d' .local/ci/targets.txt | wc -l | tr -d ' ')
           KEYS_CSV=$(paste -sd, .local/ci/targets.txt)
           KEYS_SPACE=$(tr '\n' ' ' < .local/ci/targets.txt | xargs || true)
@@ -119,8 +152,13 @@ jobs:
             echo "status=failure" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: 🧪 Enforce one reviewed canary
+        if: ${{ always() && inputs.verify_only && !inputs.dry_run }}
+        run: |
+          node -e 'const fs=require("node:fs");const p=".local/ci/gemini-run.json";if(!fs.existsSync(p))process.exit(1);const r=JSON.parse(fs.readFileSync(p,"utf8"));if(r.dryRun||r.targets!==1||r.counters.ok!==1||r.critic!=="gemini-api"||r.requests.critic<1||r.results[0]?.reason!=="passed-all-gates")process.exit(1);console.log("Gemini canary: 1 PASS, independent critic completed")'
+
       - name: 📊 Record token usage and pass rate
-        if: ${{ always() && !inputs.dry_run && steps.targets.outputs.count != '0' }}
+        if: ${{ always() && !inputs.dry_run && !inputs.verify_only && steps.targets.outputs.count != '0' }}
         run: |
           ARGS=(--preflight-report .local/ci/gemini-preflight.json)
           if [ -f .local/ci/gemini-run.json ]; then ARGS+=(--report .local/ci/gemini-run.json); fi
@@ -129,7 +167,7 @@ jobs:
 
       - name: 🧮 Update per-key failure/quarantine state
         id: outcomes
-        if: ${{ always() && !inputs.dry_run && steps.generate.outputs.status != '' }}
+        if: ${{ always() && !inputs.dry_run && !inputs.verify_only && steps.generate.outputs.status != '' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -145,7 +183,7 @@ jobs:
             --reason gemini-daily
 
       - name: 💾 Commit outbox and operational state
-        if: ${{ always() && !inputs.dry_run }}
+        if: ${{ always() && !inputs.dry_run && !inputs.verify_only }}
         shell: bash
         run: |
           set -euo pipefail
@@ -180,7 +218,7 @@ jobs:
           exit 1
 
       - name: 📤 Dispatch R2 publisher and wait for completion
-        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.generate.outputs.status == 'success' && steps.outcomes.outputs.passed_space != '' }}
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && !inputs.verify_only && steps.generate.outputs.status == 'success' && steps.outcomes.outputs.passed_space != '' }}
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -204,12 +242,18 @@ jobs:
 
       - name: 📝 Summary
         if: always()
+        shell: bash
         run: |
+          if [ -f .local/ci/gemini-run.json ]; then
+            node -e 'const r=require("./.local/ci/gemini-run.json");console.log("- 実生成: "+r.counters.ok+" PASS / "+r.counters.rejected+" REJECT / "+r.counters.fail+" FAIL");console.log("- token: input "+r.usage.inputTokens+" / output "+r.usage.outputTokens)' >> "$GITHUB_STEP_SUMMARY"
+          fi
           {
             echo "- 対象: ${{ steps.targets.outputs.count || '0' }}"
             echo "- keys: ${{ steps.targets.outputs.keys_space || 'なし' }}"
             echo "- 生成step: ${{ steps.generate.outputs.status || 'skipped' }}"
+            echo "- verify_only: ${{ inputs.verify_only || false }}"
             echo "- PASS keys: ${{ steps.outcomes.outputs.passed_space || 'なし' }}"
             echo "- model: ${GEMINI_TEXT_MODEL}"
             echo "- 無料運用条件: GEMINI_API_KEY の project で billing が無効"
+            echo "- 定期実行条件: GEMINI_FREE_TIER_VERIFIED=true"
           } >> "$GITHUB_STEP_SUMMARY"

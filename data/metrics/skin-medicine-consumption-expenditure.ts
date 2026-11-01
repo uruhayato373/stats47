@@ -14,7 +14,7 @@ export const skinMedicineConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "060100040",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const skinMedicineConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const skinMedicineConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "外傷・皮膚病薬消費支出額ランキング都道府県【2024年】｜1位大阪府（1,318円）",
-  "seoDescription": "2024年の外傷・皮膚病薬消費支出額の都道府県別ランキング。1位大阪府（1,318円）、最下位大分県（587円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "外傷・皮膚病薬消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の外傷・皮膚病薬消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

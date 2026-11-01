@@ -14,7 +14,7 @@ export const watermelonConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010610100",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const watermelonConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const watermelonConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "すいか消費量ランキング都道府県【2024年】｜1位熊本県（5,710g）",
-  "seoDescription": "2024年のすいか消費量の都道府県別ランキング。1位熊本県（5,710g）、最下位岩手県（1,270g）で4.5倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "すいか消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のすいか消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

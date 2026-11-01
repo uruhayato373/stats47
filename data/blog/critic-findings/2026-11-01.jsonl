@@ -1,0 +1,3 @@
+{"key":"cfd315aefee1cbe4","date":"2026-11-01","slug":"rice-spending-quantity-gap-2025","mode":"expert","verdict":"REVISE","severity":"BLOCK","type":"structure","summary":"7行目で `archetype: C` を宣言していますが、22〜56行目は全国の推移と2025年の所得層別比較だけです。"}
+{"key":"71cd952a536da81e","date":"2026-11-01","slug":"rice-spending-quantity-gap-2025","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"chart-text","summary":"24・35行目の図はどちらも2000〜2025年の単位が異なる折れ線で、記事の中心である2024→2025年の増加率の差（支出約57.2％、数量約1.8％）を図だけで直接比較できません。"}
+{"key":"40399d00728b2989","date":"2026-11-01","slug":"rice-spending-quantity-gap-2025","mode":"expert","verdict":"REVISE","severity":"BLOCK","type":"definition","summary":"54行目の「県庁所在市47市」「47市すべて」と56行目の「47市のうち」は地域の定義と食い違います。"}

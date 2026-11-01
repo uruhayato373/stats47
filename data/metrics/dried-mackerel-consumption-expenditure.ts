@@ -14,7 +14,7 @@ export const driedMackerelConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "010220040",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const driedMackerelConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const driedMackerelConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "干しあじ消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,100円）",
-  "seoDescription": "2024年の干しあじ消費支出額の都道府県別ランキング。1位神奈川県（1,100円）、最下位沖縄県（67円）で16.4倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "干しあじ消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の干しあじ消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

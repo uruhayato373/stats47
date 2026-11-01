@@ -14,7 +14,7 @@ export const otherToysConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "090203020",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const otherToysConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const otherToysConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "他の玩具消費支出額ランキング都道府県【2024年】｜1位大分県（9,614円）",
-  "seoDescription": "2024年の他の玩具消費支出額の都道府県別ランキング。1位大分県（9,614円）、最下位兵庫県（3,382円）で2.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "他の玩具消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の他の玩具消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

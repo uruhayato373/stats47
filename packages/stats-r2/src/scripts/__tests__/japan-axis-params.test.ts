@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { axisParams, generateOneMetric } from "../generate-japan-series";
+import { alignEstatUnit, axisParams, generateOneMetric, officialParams } from "../generate-japan-series";
+import { getMetricConfig } from "@stats47/data-configs";
+import { nattoConsumptionExpenditure } from "../../../../../data/metrics/natto-consumption-expenditure";
 
 /**
  * e-Stat の分類軸を**取りこぼさない**ことを固定する。
@@ -49,6 +51,32 @@ describe("axisParams — e-Stat 分類軸の取りこぼし防止", () => {
       },
     });
     expect(p).toEqual({ cdCat01: "1" });
+  });
+});
+
+describe("officialParams — 家計調査の取得条件", () => {
+  it("nested filter の品目・世帯を含める", () => {
+    const config = nattoConsumptionExpenditure;
+    expect(officialParams(config)).toEqual({
+      statsDataId: "0004023605",
+      axes: { cdCat01: "010530030", cdCat02: "03" },
+    });
+  });
+  it("計算値を公式全国値として取得しない", () => {
+    const config = getMetricConfig("laspeyres-index-prefecture")!;
+    expect(officialParams(config)).toBeUndefined();
+  });
+  it("複数品目を合算する家計指標を単独の公式値として取得しない", () => {
+    const config = getMetricConfig("bread-consumption-quantity")!;
+    expect(officialParams(config)).toBeUndefined();
+  });
+});
+
+describe("alignEstatUnit", () => {
+  it("倍率1の表記だけを同じ単位とみなす", () => {
+    expect(alignEstatUnit("1kg", "kg")).toBe("kg");
+    expect(alignEstatUnit("1台", "台")).toBe("台");
+    expect(alignEstatUnit("100g", "g")).toBe("100g");
   });
 });
 

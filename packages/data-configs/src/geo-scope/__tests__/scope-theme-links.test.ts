@@ -40,6 +40,10 @@ describe('主語を切り替えたときの同じ主題への対応表', () => {
       prefectures: '/themes/education-culture',
       municipalities: '/municipalities/themes/education-culture',
     });
+    expect(scopeHrefsForJapanTheme('household-appliances')).toEqual({});
+    expect(scopeHrefsForJapanTheme('household-food-spending')).toMatchObject({
+      prefectures: '/themes/household-food-spending',
+    });
     for (const slug of KNOWN_MUNICIPALITY_THEME_SLUGS) {
       const japan = scopeHrefsForMunicipalityTheme(slug).japan;
       if (japan) expect(JAPAN_CATALOGS[japan.replace('/japan/', '')]).toBeDefined();

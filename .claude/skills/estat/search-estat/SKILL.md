@@ -48,7 +48,7 @@ git-tracked references を確認する。**恒久カタログは git-tracked `.c
 
 ```bash
 # references 索引をキーワードで検索（statsDataId が見つかれば API 不要）
-grep -rniE "キーワード" .claude/skills/estat/references/*.md
+rg -n "キーワード" .claude/skills/estat/references/*.md
 cat .claude/skills/estat/references/README.md   # 分野別索引（社会・人口統計体系のコード体系を含む）
 ```
 
@@ -57,20 +57,20 @@ cat .claude/skills/estat/references/README.md   # 分野別索引（社会・人
 
 ### Phase 1: e-Stat API 検索（カタログにない場合のみ）
 
-1. 一時スクリプトを作成して検索を実行:
+1. 共通 API で appId を解決してから検索する。値は出力しない:
 
-```ts
-// scripts/temp-search-estat.mts
-import { config } from "dotenv";
-import path from "path";
-config({ path: path.resolve(process.cwd(), ".env.local") });
+```bash
+node --import tsx --input-type=module <<'JS'
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+const api = pathToFileURL(path.resolve(process.cwd(), ".claude/scripts/lib/estat-catalog/api.mjs")).href;
+const { getAppId } = await import(api);
+getAppId(); // import 前に NEXT_PUBLIC_ESTAT_APP_ID を解決する。値は表示しない
 
-const { EstatStatsListFetcher } = await import(
-  "../packages/estat-api/src/stats-list/services/fetcher.ts"
-);
-const { EstatStatsListFormatter } = await import(
-  "../packages/estat-api/src/stats-list/services/formatter.ts"
-);
+const { EstatStatsListFetcher } = await import(pathToFileURL(path.resolve(process.cwd(),
+  "packages/estat-api/src/stats-list/services/fetcher.ts")).href);
+const { EstatStatsListFormatter } = await import(pathToFileURL(path.resolve(process.cwd(),
+  "packages/estat-api/src/stats-list/services/formatter.ts")).href);
 
 // --- 検索パラメータ（案件ごとにカスタマイズ） ---
 const response = await EstatStatsListFetcher.searchByKeyword("<KEYWORD>", {
@@ -97,10 +97,7 @@ for (const t of result.tables) {
 if (result.pagination.nextKey) {
   console.log(`\n次ページ: startPosition=${result.pagination.nextKey}`);
 }
-```
-
-```bash
-npx tsx scripts/temp-search-estat.mts
+JS
 ```
 
 ### Phase 2: 結果分析
@@ -111,10 +108,6 @@ npx tsx scripts/temp-search-estat.mts
    - 目的に合いそうな候補の推薦
 
 3. ユーザーが特定の statsDataId を選んだら、`/fetch-estat-data` スキルへ誘導
-
-### Phase 3: 後処理
-
-4. 一時スクリプトを削除
 
 ## 検索メソッド一覧
 
@@ -166,21 +159,12 @@ npx tsx scripts/temp-search-estat.mts
 ```
 
 
-## クロスプラットフォーム注意事項
+## クロスプラットフォーム
 
-このスキルは Windows / macOS 両環境で使用される。
-
-| 項目 | Windows | macOS |
-|---|---|---|
-| プロキシ制約 | あり（企業ネットワーク） | なし（自宅ネットワーク） |
-| `packages/estat-api` HTTP クライアント | `undici.ProxyAgent` を自動検出・適用 | プロキシ環境変数が未設定のためスキップ |
-
-`packages/estat-api` の HTTP クライアント（`http-client.ts`）が `HTTP_PROXY` / `HTTPS_PROXY` 環境変数を自動検出するため、**コード変更は不要**。
+`packages/estat-api` の HTTP クライアントが `HTTP_PROXY` / `HTTPS_PROXY` を検出する。
 
 ## 注意
 
-- **プロキシ**: `packages/estat-api` の HTTP クライアントにプロキシ対応済み（`undici.ProxyAgent` 自動検出）
-- **環境変数**: `NEXT_PUBLIC_ESTAT_APP_ID` が `.env.local` に設定されていること
 - **レートリミット**: e-Stat API は公称 60req/min。`fetchAllWithPaging` は内部で遅延制御する
 - **TABLE_INF 構造**: API レスポンスの `TABLE_INF` は `DATALIST_INF` 直下に配置される（`LIST_INF` ネストなし）
 

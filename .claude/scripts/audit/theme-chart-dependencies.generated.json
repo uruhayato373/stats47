@@ -73,7 +73,7 @@
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "2bd4dbfedcdda4b1"
+      "expectedConfigHash": "70dd3b26b3d987bd"
     },
     {
       "metricKey": "births",
@@ -489,7 +489,7 @@
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "276f71870b430a78"
+      "expectedConfigHash": "58edd09baeae556c"
     },
     {
       "metricKey": "household-survey-clothing-footwear-expenditure",
@@ -881,7 +881,7 @@
       "componentKey": "household-food-spending-staple-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "3425ac66c4e76cfd"
+      "expectedConfigHash": "f1c9b2ce77434e19"
     },
     {
       "metricKey": "owner-occupied-housing-ratio",
@@ -1017,7 +1017,7 @@
       "componentKey": "household-food-spending-staple-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "9094842e2aabc0d5"
+      "expectedConfigHash": "ac80b8165fbb9ed1"
     },
     {
       "metricKey": "road-bridge-condition-iii-count",
@@ -1073,7 +1073,7 @@
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "3a3ce380d8de5333"
+      "expectedConfigHash": "ea31aa2c6a07bfdf"
     },
     {
       "metricKey": "school-teacher-annual-income",
@@ -1105,7 +1105,7 @@
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "83d8fea3edfcbbac"
+      "expectedConfigHash": "1e1045378e858138"
     },
     {
       "metricKey": "single-mother-households-income-100to199",
@@ -1617,7 +1617,7 @@
       "componentKey": "household-food-spending-staple-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "5c07db8d7a4fca46"
+      "expectedConfigHash": "4c3d2d35960b6162"
     },
     {
       "metricKey": "wine-consumption-expenditure",
@@ -1625,7 +1625,7 @@
       "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart",
       "expectedUnit": "円",
-      "expectedConfigHash": "f9379ab47379871f"
+      "expectedConfigHash": "6ded04c0c4874df3"
     }
   ]
 }

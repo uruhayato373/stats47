@@ -14,7 +14,7 @@ export const chickenConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010310030",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const chickenConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const chickenConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "なぜ島根が鶏肉消費1位？東北・九州・東海が上位圏、関東が最下位の1.9倍格差（2024）",
-  "seoDescription": "鶏肉消費量1位は島根県（24,769g）、最下位は茨城県（12,994g）で1.9倍差。地鶏文化・食文化圏ごとの消費パターンを47都道府県ランキングで解説（2024年）。",
+  "seoTitle": "鶏肉消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の鶏肉消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

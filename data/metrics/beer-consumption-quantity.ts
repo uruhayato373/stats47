@@ -14,7 +14,7 @@ export const beerConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "011100030",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const beerConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const beerConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ビール消費量ランキング都道府県【2024年】｜1位岩手県（33.17l）",
-  "seoDescription": "2024年のビール消費量の都道府県別ランキング。1位岩手県（33.17l）、最下位三重県（14.2l）で2.3倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "ビール消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のビール消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

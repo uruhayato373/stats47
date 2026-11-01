@@ -13,7 +13,9 @@ export { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL };
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..", "..");
 
-config({ path: path.join(PROJECT_ROOT, ".env.local") });
+// CI の注入値を優先し、ローカルでは既存の設定ファイルを順に読む。
+config({ path: path.join(PROJECT_ROOT, ".env.local"), quiet: true });
+config({ path: path.join(PROJECT_ROOT, "apps/web/.env.development"), quiet: true });
 
 const LIST_URL = ESTAT_STATS_LIST_URL;
 const META_URL = ESTAT_META_INFO_URL;
@@ -24,7 +26,7 @@ const RETRY_BASE_DELAY_MS = 1000;
 export function getAppId() {
   const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
   if (!appId) {
-    throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が未設定 (ローカル: .env.local / CI: vars)");
+    throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が未設定 (CI: Repository Variable / ローカル: apps/web/.env.development または .env.local)");
   }
   return appId;
 }
@@ -113,4 +115,19 @@ export async function fetchMetaInfo(statsDataId, appId = getAppId()) {
     if (!json?.GET_META_INFO?.METADATA_INF) throw new Error("no METADATA_INF in response");
     return json;
   }, `getMetaInfo(${statsDataId})`);
+}
+
+/** 指定座標の観測値を取得する。メタデータ取得と同じ appId・proxy・エラー処理を使う。 */
+export async function fetchStatsData(params, appId = getAppId()) {
+  return withRetry(async () => {
+    const query = new URLSearchParams({ appId, lang: "J", ...params });
+    const res = await fetch(`${ESTAT_STATS_DATA_URL}?${query.toString()}`, fetchOpts());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const result = json?.GET_STATS_DATA?.RESULT;
+    if (Number(result?.STATUS) !== 0 || !json?.GET_STATS_DATA?.STATISTICAL_DATA) {
+      throw new Error(result?.ERROR_MSG ?? `STATUS ${result?.STATUS ?? "unknown"}`);
+    }
+    return json;
+  }, `getStatsData(${params.statsDataId})`);
 }

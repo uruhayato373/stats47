@@ -14,7 +14,7 @@ export const craftMaterialsConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "090204070",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const craftMaterialsConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const craftMaterialsConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "手芸・工芸材料消費支出額ランキング都道府県【2024年】｜1位長野県（1,234円）",
-  "seoDescription": "2024年の手芸・工芸材料消費支出額の都道府県別ランキング。1位長野県（1,234円）、最下位岐阜県（154円）で8.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "手芸・工芸材料消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の手芸・工芸材料消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

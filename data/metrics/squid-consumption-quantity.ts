@@ -14,7 +14,7 @@ export const squidConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010211110",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const squidConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const squidConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "いか消費量ランキング都道府県【2024】1位は意外な富山、最下位沖縄と4.3倍差",
-  "seoDescription": "いかを最も食べる県は?──意外にも富山県(2,014g)が1位。最下位沖縄(463g)まで4.3倍の差。2024年最新ランキングを地図とグラフで47都道府県比較。",
+  "seoTitle": "いか消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のいか消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

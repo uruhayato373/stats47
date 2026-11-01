@@ -209,3 +209,4 @@ export {
 } from "./business-plan";
 
 export { WELL_KNOWN_DENOMINATORS, type WellKnownDenominator } from "../../../data/metrics/defaults/normalization";
+export { KAKEI_ANALYSES } from './kakei-analysis-catalog';

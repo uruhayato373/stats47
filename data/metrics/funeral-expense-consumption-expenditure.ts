@@ -14,7 +14,7 @@ export const funeralExpenseConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "100150040",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const funeralExpenseConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const funeralExpenseConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "葬儀関係費消費支出額ランキング都道府県【2024年】｜1位栃木県（54,998円）",
-  "seoDescription": "2024年の葬儀関係費消費支出額の都道府県別ランキング。1位栃木県（54,998円）、最下位福岡県（346円）で159.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "葬儀関係費消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の葬儀関係費消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };
