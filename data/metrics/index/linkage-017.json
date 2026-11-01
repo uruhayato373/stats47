@@ -8721,6 +8721,47 @@
       ]
     },
     {
+      "metricKey": "nursery-waiting-children-rate",
+      "pageId": null,
+      "title": "保育所等利用待機児童率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/b0a8057b-34bf-4c20-84fb-ae592708ca9b/1aa96453/20250828_policies_hoiku_torimatome_r7_04.xlsx",
+          "extractionHash": "326b9c6af9c46de1"
+        },
+        "fetcherKey": "manual",
+        "configHash": "af0baf8deaff85ba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:nursery-waiting-children-rate",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:nursery-waiting-children-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "nursery-within-500m-young-child-household-ratio",
       "pageId": null,
       "title": "保育所まで500m未満の子育て世帯の割合",
@@ -8771,6 +8812,10 @@
         {
           "pageId": "municipality-ranking:nursery-within-500m-young-child-household-ratio",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:nursery-within-500m-young-child-household-ratio",
@@ -10731,46 +10776,6 @@
         },
         {
           "pageId": "ranking:occupation-agriculture-forestry-fishery-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-clerical-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1312"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1312"
-        },
-        "derived": false,
-        "configHash": "edbf709e92115529"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-clerical-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-clerical-workers",
           "kind": "ranking"
         }
       ],

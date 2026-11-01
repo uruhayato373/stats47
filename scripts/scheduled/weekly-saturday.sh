@@ -75,12 +75,7 @@ weekly_audits() (
     # データだけの記録なので pre-commit は通さない。1MB 超のファイルだけは同じ検査で止める (全員のコミットが止まるため)
     node .claude/scripts/lib/check-repo-hygiene.cjs --staged --baseline || return 1
     git -c core.hooksPath=/dev/null commit --quiet -m "chore(weekly-audits): Saturday audit records $day (Mac)" || return 1
-    local attempt
-    for attempt in 1 2 3; do
-      if git pull --quiet --rebase origin develop && git push --quiet origin HEAD:develop; then break; fi
-      if [ "$attempt" = 3 ]; then return 1; fi
-      sleep 5
-    done
+    push_clone_records weekly-audits || return 1
   fi
   return "$rc"
 )

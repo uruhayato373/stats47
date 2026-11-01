@@ -1,8 +1,7 @@
 {
-  "hash": "d4c46cc9b055d9562da7f93ed29535ffe5741bc9edba9977185db85c03bb8b7e",
-  "audited_at": "2026-10-31T06:52:02",
+  "hash": "ec5eb70dbe69c2ed554e47ac4551d052c0ddf0bb49968279657ffad6ea22e7e0",
+  "audited_at": "2026-10-31T23:54:35",
   "files": [
-    ".claude/rules/chart-component-standards.md",
-    ".claude/rules/theme-catalog-standards.md"
+    ".claude/rules/chart-component-standards.md"
   ]
 }

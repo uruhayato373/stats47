@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "population-aged-0-3",
+      "pageId": null,
+      "title": "0～3歳人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020201",
+          "filters": {
+            "cdCat01": "A1404"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020201",
+          "cdCat01": "A1404"
+        },
+        "derived": false,
+        "configHash": "3d7c9e6a38068e55"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:population-aged-0-3",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:population-dynamics",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:population-aged-0-3",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "population-aged-0-3-female",
       "pageId": null,
       "title": "0～3歳人口",
@@ -5095,6 +5135,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:post-office-bank-within-500m-household-ratio",
           "kind": "ranking"
         }
@@ -5770,46 +5814,6 @@
       "themes": [
         "household-food-spending"
       ]
-    },
-    {
-      "metricKey": "pots-kettles-consumption-expenditure",
-      "pageId": "ranking:pots-kettles-consumption-expenditure",
-      "title": "鍋・やかん消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348239",
-          "filters": {
-            "cdCat01": "040400030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348239",
-          "cdCat01": "040400030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "266743edbe0fb77a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:pots-kettles-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

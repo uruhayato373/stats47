@@ -1,8 +1,8 @@
 # 図の年が古い公開記事 (stale-data-years)
 
-- 生成: 2026-10-26T03:20:35.399Z
-- 公開記事 609 件のうち、使う指標を snapshot から読めた記事 573 件を判定
-- 図の年が指標の最新年より古い記事: **25 件**。遅れの大きい順
+- 生成: 2026-10-30T23:31:51.598Z
+- 公開記事 765 件のうち、使う指標を snapshot から読めた記事 729 件を判定
+- 図の年が指標の最新年より古い記事: **27 件**。遅れの大きい順
 - 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。本文がその年そのものを主題にした図だけ、取り直さず source.json に `yearPinnedReason` を書く (本文が図の年を語っていない図は図だけの食い違いなので取り直す)
 
 | 記事 | 指標 (図の年 → 最新年) |
@@ -19,7 +19,9 @@
 | `manufacturing-productivity` | `manufacturing-employees` 2022 → 2024<br>`manufacturing-industry-added-value` 2022 → 2023<br>`manufacturing-shipment-amount` 2022 → 2023 |
 | `safe-driving-5-features` | `ratio-65-plus` 2023 → 2025<br>`traffic-accident-deaths-per-100-accidents` 2023 → 2024 |
 | `vacant-house-crisis` | `ratio-65-plus` 2023 → 2025 |
+| `annual-sales-amount-prefecture-gap` | `annual-sales-amount` 2022 → 2023 |
 | `bonito-catch-prefecture` | `bonito-consumption-quantity` 2023 → 2024 |
+| `cc-estat-16-commerce-bubble` | `annual-sales-amount` 2022 → 2023 |
 | `consumer-price-difference-index-utilities-prefecture-gap` | `consumer-price-difference-index-utilities` 2024 → 2025 |
 | `consumer-price-regional-gap` | `consumer-price-difference-index-clothing-footwear` 2024 → 2025<br>`consumer-price-difference-index-culture-recreation` 2024 → 2025<br>`consumer-price-difference-index-education` 2024 → 2025<br>`consumer-price-difference-index-food` 2024 → 2025<br>`consumer-price-difference-index-furniture-household` 2024 → 2025<br>`consumer-price-difference-index-healthcare` 2024 → 2025<br>`consumer-price-difference-index-housing` 2024 → 2025<br>`consumer-price-difference-index-miscellaneous` 2024 → 2025<br>`consumer-price-difference-index-overall` 2024 → 2025<br>`consumer-price-difference-index-transport-communication` 2024 → 2025<br>`consumer-price-difference-index-utilities` 2024 → 2025 |
 | `designated-difficult-disease-prefecture-gap` | `designated-difficult-disease` 2020 → 2021 |

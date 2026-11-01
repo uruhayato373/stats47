@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T21:37:20.978Z",
+  "generatedAt": "2026-11-01T00:13:01.994Z",
   "gscWeek": "2026-W43",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -11,9 +11,9 @@
     "byArchetype": {
       "B": 12,
       "A": 40,
-      "D2": 8,
       "G": 15,
-      "F": 15
+      "F": 15,
+      "D2": 8
     }
   },
   "correlationExclusions": {
@@ -29,6 +29,78 @@
     "sizePairOnly": 13
   },
   "queue": [
+    {
+      "topicKey": "corr-high-school-graduates-job-ratio--high-school-teacher-annual-income",
+      "archetype": "B",
+      "metricKeys": [
+        "high-school-teacher-annual-income",
+        "high-school-graduates-job-ratio"
+      ],
+      "label": "高等学校教員の平均年収 × 高等学校卒業者に占める就職者の割合 (r=-0.69)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6822236958083521,
+        "seasonality": 1,
+        "surprise": 0.692,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": -0.692,
+        "partialRPopulation": -0.523,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "economy",
+          "educationsports"
+        ],
+        "gscImp": 755,
+        "rankingUrls": [
+          "/ranking/high-school-teacher-annual-income",
+          "/ranking/high-school-graduates-job-ratio"
+        ]
+      },
+      "suggestedTitle": "高等学校教員の平均年収が多い県は高等学校卒業者に占める就職者のが少ない?",
+      "combinedScore": 0.787,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 1
+    },
+    {
+      "topicKey": "corr-high-school-teacher-annual-income--male-scheduled-earnings",
+      "archetype": "B",
+      "metricKeys": [
+        "high-school-teacher-annual-income",
+        "male-scheduled-earnings"
+      ],
+      "label": "高等学校教員の平均年収 × 男性所定内給与額 (r=0.69)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6822236958083521,
+        "seasonality": 1,
+        "surprise": 0.688,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.688,
+        "partialRPopulation": 0.492,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "economy",
+          "laborwage"
+        ],
+        "gscImp": 755,
+        "rankingUrls": [
+          "/ranking/high-school-teacher-annual-income",
+          "/ranking/male-scheduled-earnings"
+        ]
+      },
+      "suggestedTitle": "高等学校教員の平均年収が多い県は男性所定内給与も多い?",
+      "combinedScore": 0.786,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 2
+    },
     {
       "topicKey": "corr-average-persons-per-general-household--general-hospital-count",
       "archetype": "B",
@@ -61,78 +133,6 @@
       },
       "suggestedTitle": "一般病院が多い県は一般世帯の平均人員が少ない?",
       "combinedScore": 0.727,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 1
-    },
-    {
-      "topicKey": "corr-high-school-graduates-job-ratio--high-school-teacher-annual-income",
-      "archetype": "B",
-      "metricKeys": [
-        "high-school-teacher-annual-income",
-        "high-school-graduates-job-ratio"
-      ],
-      "label": "高等学校教員の平均年収 × 高等学校卒業者に占める就職者の割合 (r=-0.69)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6822236958083521,
-        "seasonality": 0.3,
-        "surprise": 0.692,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": -0.692,
-        "partialRPopulation": -0.523,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "economy",
-          "educationsports"
-        ],
-        "gscImp": 755,
-        "rankingUrls": [
-          "/ranking/high-school-teacher-annual-income",
-          "/ranking/high-school-graduates-job-ratio"
-        ]
-      },
-      "suggestedTitle": "高等学校教員の平均年収が多い県は高等学校卒業者に占める就職者のが少ない?",
-      "combinedScore": 0.612,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 2
-    },
-    {
-      "topicKey": "corr-high-school-teacher-annual-income--male-scheduled-earnings",
-      "archetype": "B",
-      "metricKeys": [
-        "high-school-teacher-annual-income",
-        "male-scheduled-earnings"
-      ],
-      "label": "高等学校教員の平均年収 × 男性所定内給与額 (r=0.69)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6822236958083521,
-        "seasonality": 0.3,
-        "surprise": 0.688,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.688,
-        "partialRPopulation": 0.492,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "economy",
-          "laborwage"
-        ],
-        "gscImp": 755,
-        "rankingUrls": [
-          "/ranking/high-school-teacher-annual-income",
-          "/ranking/male-scheduled-earnings"
-        ]
-      },
-      "suggestedTitle": "高等学校教員の平均年収が多い県は男性所定内給与も多い?",
-      "combinedScore": 0.611,
       "lane": "must-write",
       "status": "pending",
       "priority": 3
@@ -867,58 +867,31 @@
       "priority": 27
     },
     {
-      "topicKey": "gap-domestic-travel-consumption-by-destination",
-      "archetype": "D2",
+      "topicKey": "gap-architect-annual-income",
+      "archetype": "A",
       "metricKeys": [
-        "domestic-travel-consumption-by-destination"
+        "architect-annual-income"
       ],
-      "label": "日本人旅行者の県内消費額",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5483978093051687,
-        "seasonality": 1,
-        "surprise": 0,
-        "competitionGap": 0.6
-      },
-      "evidence": {
-        "gscImp": 205,
-        "gscClicks": 12,
-        "gscPosition": 6.23,
-        "seasonLabel": "観光・宿泊",
-        "rankingUrl": "/ranking/domestic-travel-consumption-by-destination"
-      },
-      "suggestedTitle": "日本人旅行者の県内消費消費量 日本一はどこ",
-      "combinedScore": 0.562,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 28
-    },
-    {
-      "topicKey": "gap-inbound-travel-consumption-by-destination",
-      "archetype": "D2",
-      "metricKeys": [
-        "inbound-travel-consumption-by-destination"
-      ],
-      "label": "訪日外国人旅行者の県内消費額",
+      "label": "建築技術者の平均年収",
       "source": "gsc-gap",
       "scores": {
         "queryGap": 0.4953176978695397,
         "seasonality": 1,
         "surprise": 0,
-        "competitionGap": 0.6
+        "competitionGap": 0.5
       },
       "evidence": {
         "gscImp": 122,
-        "gscClicks": 18,
-        "gscPosition": 6.81,
-        "seasonLabel": "観光・宿泊",
-        "rankingUrl": "/ranking/inbound-travel-consumption-by-destination"
+        "gscClicks": 3,
+        "gscPosition": 7.66,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/architect-annual-income"
       },
-      "suggestedTitle": "訪日外国人旅行者の県内消費消費量 日本一はどこ",
-      "combinedScore": 0.543,
+      "suggestedTitle": "建築技術者の平均年収が多い県はどこ",
+      "combinedScore": 0.523,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 29
+      "priority": 28
     },
     {
       "topicKey": "migration-01000",
@@ -943,7 +916,7 @@
       "combinedScore": 0.52,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 30
+      "priority": 29
     },
     {
       "topicKey": "migration-27000",
@@ -974,28 +947,55 @@
       "measured": null
     },
     {
-      "topicKey": "gap-number-of-hotel-facilities",
+      "topicKey": "gap-nursery-teacher-annual-income",
       "archetype": "A",
       "metricKeys": [
-        "number-of-hotel-facilities"
+        "nursery-teacher-annual-income"
       ],
-      "label": "ホテル営業施設数",
+      "label": "保育士の平均年収",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.45967551632956605,
+        "queryGap": 0.4608518709508698,
         "seasonality": 1,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 86,
-        "gscClicks": 1,
-        "gscPosition": 7.06,
-        "seasonLabel": "観光・宿泊",
-        "rankingUrl": "/ranking/number-of-hotel-facilities"
+        "gscImp": 87,
+        "gscClicks": 0,
+        "gscPosition": 7.66,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/nursery-teacher-annual-income"
       },
-      "suggestedTitle": "ホテル営業施設が多い県はどこ",
+      "suggestedTitle": "保育士の平均年収が多い県はどこ",
       "combinedScore": 0.511,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 30
+    },
+    {
+      "topicKey": "gap-gini-coefficient-disposable-income",
+      "archetype": "A",
+      "metricKeys": [
+        "gini-coefficient-disposable-income"
+      ],
+      "label": "等価可処分所得ジニ係数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4471074968571692,
+        "seasonality": 1,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 76,
+        "gscClicks": 4,
+        "gscPosition": 7.16,
+        "seasonLabel": "ボーナス・貯蓄",
+        "rankingUrl": "/ranking/gini-coefficient-disposable-income"
+      },
+      "suggestedTitle": "等価可処分所得ジニ係が多い県はどこ",
+      "combinedScore": 0.506,
       "lane": "opportunity",
       "status": "pending",
       "priority": 31
@@ -2025,6 +2025,33 @@
       "measured": null
     },
     {
+      "topicKey": "gap-domestic-travel-consumption-by-destination",
+      "archetype": "D2",
+      "metricKeys": [
+        "domestic-travel-consumption-by-destination"
+      ],
+      "label": "日本人旅行者の県内消費額",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5483978093051687,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 205,
+        "gscClicks": 12,
+        "gscPosition": 6.23,
+        "seasonLabel": "観光・宿泊",
+        "rankingUrl": "/ranking/domestic-travel-consumption-by-destination"
+      },
+      "suggestedTitle": "日本人旅行者の県内消費消費量 日本一はどこ",
+      "combinedScore": 0.387,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 62
+    },
+    {
       "topicKey": "finance-gap-15000",
       "archetype": "F",
       "metricKeys": [],
@@ -2049,6 +2076,33 @@
       "done_at": "2026-09-02",
       "published_slug": "niigata-municipal-finance",
       "measured": null
+    },
+    {
+      "topicKey": "gap-inbound-travel-consumption-by-destination",
+      "archetype": "D2",
+      "metricKeys": [
+        "inbound-travel-consumption-by-destination"
+      ],
+      "label": "訪日外国人旅行者の県内消費額",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.4953176978695397,
+        "seasonality": 0.3,
+        "surprise": 0,
+        "competitionGap": 0.6
+      },
+      "evidence": {
+        "gscImp": 122,
+        "gscClicks": 18,
+        "gscPosition": 6.81,
+        "seasonLabel": "観光・宿泊",
+        "rankingUrl": "/ranking/inbound-travel-consumption-by-destination"
+      },
+      "suggestedTitle": "訪日外国人旅行者の県内消費消費量 日本一はどこ",
+      "combinedScore": 0.368,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 63
     },
     {
       "topicKey": "finance-gap-14000",
@@ -2129,82 +2183,28 @@
       "measured": null
     },
     {
-      "topicKey": "gap-architect-annual-income",
+      "topicKey": "gap-number-of-hotel-facilities",
       "archetype": "A",
       "metricKeys": [
-        "architect-annual-income"
+        "number-of-hotel-facilities"
       ],
-      "label": "建築技術者の平均年収",
+      "label": "ホテル営業施設数",
       "source": "gsc-gap",
       "scores": {
-        "queryGap": 0.4953176978695397,
+        "queryGap": 0.45967551632956605,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 0.5
       },
       "evidence": {
-        "gscImp": 122,
-        "gscClicks": 3,
-        "gscPosition": 7.66,
-        "seasonLabel": "ボーナス・貯蓄",
-        "rankingUrl": "/ranking/architect-annual-income"
+        "gscImp": 86,
+        "gscClicks": 1,
+        "gscPosition": 7.06,
+        "seasonLabel": "観光・宿泊",
+        "rankingUrl": "/ranking/number-of-hotel-facilities"
       },
-      "suggestedTitle": "建築技術者の平均年収が多い県はどこ",
-      "combinedScore": 0.348,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 62
-    },
-    {
-      "topicKey": "gap-nursery-teacher-annual-income",
-      "archetype": "A",
-      "metricKeys": [
-        "nursery-teacher-annual-income"
-      ],
-      "label": "保育士の平均年収",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.4608518709508698,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 87,
-        "gscClicks": 0,
-        "gscPosition": 7.66,
-        "seasonLabel": "ボーナス・貯蓄",
-        "rankingUrl": "/ranking/nursery-teacher-annual-income"
-      },
-      "suggestedTitle": "保育士の平均年収が多い県はどこ",
+      "suggestedTitle": "ホテル営業施設が多い県はどこ",
       "combinedScore": 0.336,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 63
-    },
-    {
-      "topicKey": "gap-gini-coefficient-disposable-income",
-      "archetype": "A",
-      "metricKeys": [
-        "gini-coefficient-disposable-income"
-      ],
-      "label": "等価可処分所得ジニ係数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.4471074968571692,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 76,
-        "gscClicks": 4,
-        "gscPosition": 7.16,
-        "seasonLabel": "ボーナス・貯蓄",
-        "rankingUrl": "/ranking/gini-coefficient-disposable-income"
-      },
-      "suggestedTitle": "等価可処分所得ジニ係が多い県はどこ",
-      "combinedScore": 0.331,
       "lane": "opportunity",
       "status": "pending",
       "priority": 64

@@ -56,6 +56,7 @@ function indicatorData(title: string): ThemeIndicatorData {
       { year: 2020, value: 1 },
       { year: 2021, value: 2 },
     ],
+    nationalValue: 50,
   } as unknown as ThemeIndicatorData;
 }
 

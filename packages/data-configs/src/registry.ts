@@ -1788,6 +1788,7 @@ import { nurseryTeacherAnnualIncome } from "../../../data/metrics/nursery-teache
 import { nurseryTypeEceCenterEnrolledChildren } from "../../../data/metrics/nursery-type-ece-center-enrolled-children";
 import { nurseryUtilizationRate } from "../../../data/metrics/nursery-utilization-rate";
 import { nurseryWaitingChildrenCount } from "../../../data/metrics/nursery-waiting-children-count";
+import { nurseryWaitingChildrenRate } from "../../../data/metrics/nursery-waiting-children-rate";
 import { nurseryWithin500mYoungChildHouseholdRatio } from "../../../data/metrics/nursery-within-500m-young-child-household-ratio";
 import { nursesGeneralHospitalPer100beds } from "../../../data/metrics/nurses-general-hospital-per-100beds";
 import { nursesInMedicalFacilitiesPer100k } from "../../../data/metrics/nurses-in-medical-facilities-per-100k";
@@ -4978,6 +4979,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "nursery-type-ece-center-enrolled-children": nurseryTypeEceCenterEnrolledChildren,
   "nursery-utilization-rate": nurseryUtilizationRate,
   "nursery-waiting-children-count": nurseryWaitingChildrenCount,
+  "nursery-waiting-children-rate": nurseryWaitingChildrenRate,
   "nursery-within-500m-young-child-household-ratio": nurseryWithin500mYoungChildHouseholdRatio,
   "nurses-general-hospital-per-100beds": nursesGeneralHospitalPer100beds,
   "nurses-in-medical-facilities-per-100k": nursesInMedicalFacilitiesPer100k,

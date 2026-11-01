@@ -898,6 +898,9 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **search-growth 台帳**: 承認済み 2 件 (`ctr-opportunity::/ranking/public-phone-count`・`striking-distance::/ranking/total-fertility-rate`) の計測日は 2026-11-03 (14 日)・11-17 (28 日)・12-15 (56 日)。blog 8 本の承認は W44 以降の枠 (週 2 件上限)。
 - **未確定 / 仮説**: [仮説] Google が検索結果に別の title を表示している。検証: 検索 3 クエリ (道の駅が多い県 / 公衆電話 なぜ減った / 高校2年生 平均身長) の実表示 title を取得日付きで記録する。検証期日: 2026-11-24。期日後の判定: 表示 title が新案と一致していて CTR が動かなければ title の切り口が原因、不一致なら description と H1 を揃える案を `SEO-CTR-CANDIDATES-01` へ。
 
+- **判定 (2026-11-01・improvement-triage): 判定不能として improvements.md の行を閉じた**。理由: 想定効果値 `[target:]` に置ける根拠が無い。このログ内の前例 (BLOG-WAVE-2026-05-25-auto の clicks 127→94、BLOG-CTR-05 の 59→11) はどちらも effect/none で上向きでなく、`PV-100K-LEVERS-01` の CTR 4.0% は目標であって実測ではない。根拠の無い値を足すと `.claude/rules/evidence-based-judgment.md` 状況 4 に反するため付けない。W43 verdict (`data/effect-verdict/verdicts-2026-W43.json`) は `insufficient-target` と `insufficient-window` (経過 0 週)。効果ラベルは付けていない。
+- **引き継ぎ**: 観測の手順 (上の baseline・対照群 123 ページ・検証コマンド・期日 2026-11-24 と「動かなかった場合の次」) はこの節に残す。実施する場合は、行を立て直さずに 11-21 以降にこの節のコマンドで 10 ページを取り、差の差を追記する。search-growth 台帳の 2 件 (11-03・11-17・12-15) は `npm run search-growth:measure` が別系統で測るので影響しない。
+
 ### [MUNI-PAGE-SEO-01] 市区町村ページのデータブック化・title の人口化・索引対象の全市区町村化 (2026-10-21 デプロイ)
 
 - **デプロイ日**: 2026-10-21 (JST)。PR #1165 (main db5b5aeb8) のデプロイは Build で止まり (Next.js 15 のサポート期限による OpenNext の拒否。R2 の指標スナップショットとデータブックはその前の段で反映済み)、PR #1166 (main 7dfe689a7) の deploy run 39596982885 で本番へ出た。
@@ -937,3 +940,13 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **観測期限と判定手順**: 2026-11-22 (after 窓 2026-10-23〜11-19 の 28 日 + 取得遅延 3 日)。新規 541 件の imp の合計と表示が付いた URL の割合を出し、上の計算式と比べる。既存 175 件の clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で、対照の都道府県ランキングが同方向に動いていなければ、薄いページの増加による共食いを疑い、表示の付かなかった新規 key の noindex を検討する (backlog `MUNI-RANKING-EXPANSION-01`)。active 施策の一覧への登録は improvement-triage が行う。
 - **未確定 / 仮説**: [仮説] 実数の細目 (業種別・年齢別・住宅の細目) は検索需要が小さく、表示の大半は財政・人口・空き家・福祉施設に集まる。検証コマンドは上と同じ。検証期日: 2026-11-22。期日後の判定: テーマ別の imp の分布を出し、表示の付いたテーマから順にブログ連載 (`BLOG-MUNI-SERIES-01`) の題材にする。
 - **交絡の記録 (2026-10-28)**: after 窓の途中で PR #1193 が県名×市区町村ランキング 470 URL を `/municipalities/ranking/<key>/<県コード>` に足す。新規 541 件の数え方 (`municipality-ssds-expansion.ts` の key に当たる URL) は 1 段の URL だけにし、2 段の URL を含めない。
+
+
+### [MUNI-PREF-RANKING-OBS-01] 県名×市区町村ランキングの公開後 4 週の観測を登録 (2026-11-01)
+
+- **引き渡し**: backlog `MUNI-PREF-RANKING-ROUTE-01` (実装・公開は完了) の残りの完了条件「4 週のインデックス登録数と表示の記録」を improvements.md の `MUNI-PREF-RANKING-OBS-01` が引き継いだ。カードは削除済み。
+- **デプロイ日**: 2026-10-28 (PR #1193、deploy-workers 22:17Z success)。本番確認 2026-11-01: `/municipalities/ranking/manufacturing-shipment-amount/23000` が 200・canonical は自分、sitemap に県別 URL 470 件。
+- **baseline (GSC)**: 公開前 28 日 (2026-09-30〜10-27) に県別 URL (`/municipalities/ranking/<key>/<5 桁>`) の行は 0。全国版 10 指標 (query 付き除く) は 546 click / 3,855 imp (製造品出荷額 459/2,480、年間商品販売額 37/371、出生数 14/253、年少人口割合 14/96、中学校生徒数 9/241 ほか)。公開直後の 10-28〜10-29 は県別 URL 190 件に 45 click / 1,223 imp。
+- **取得コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-30 --end 2026-10-27 --dims page --filter 'page*=/municipalities/ranking/' --limit 500` (全国版)、`--start 2026-10-28 --end 2026-10-29 --limit 2000` の出力から `/<key>/<5 桁>` の行を集計 (県別)。
+- **想定効果**: 置かない [根拠が無い: 県別ページの前例が無く、全国版の流入と置き換わる分を分けられない]。判定エンジンの対象外 (完了条件が記録であり増減判定でないため)。
+- **観測期限**: 2026-11-26。記録する項目と期日後の次の一手は improvements.md の行に書いた。

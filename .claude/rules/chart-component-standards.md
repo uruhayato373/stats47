@@ -135,6 +135,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
+| `BreakdownDonut` / `BreakdownList` | `@/components/charts/BreakdownDonut` | 内訳の図 (共通の D3 のドーナツ + `ChartLegend` の一覧で名前・値・割合)。テーマの構成比 (`composition-chart`) とドーナツ (`donut-chart`) はこれ 1 つで描く。一覧だけの所は `BreakdownList`。部品の中で D3 の円や色の点を手書きしない (`design-system:check` の `no-inline-d3-pie`・`legend-swatch-uses-chart-legend`。2026-11-01) |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
@@ -174,6 +175,11 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
 | `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 | `InfraHistoryExplorer` の地図 | `@/features/infra-history/components/InfraHistoryExplorer` | 交通網の変遷の線・点を年ごとに描く (d3-geo の SVG)。数値は `StatTile` + `NumericTrendChart`、凡例は `ChartLegend` の共通部品を使う |
+| `GeoSubjectMap` | `@/features/geo-map/components/GeoSubjectMap` | 主題の重ね合わせ (`/geo/map`)。塗り分け 1 つに線・点の主題を重ね、年のスライダーで描く (d3-geo の SVG)。共通のコロプレスは線・点を重ねられない (2026-11-01 登録) |
+| `QuestionMap` | `@/features/geo-questions/components/QuestionMap` | 問いのページの「どこの話か」を示す補助の地図。問いの組で塗り分け、離島を外して縮尺を決める (d3-geo の SVG。2026-11-01 登録) |
+
+> D3 を直接 import してよいのは、共通の部品 (`components/charts`・`components/stat-charts`) と上の表の feature だけ。
+> `design-system:check` の `d3-only-in-registered-components` が止める (2026-11-01)。
 
 > **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
 > feature 内に独自のコロプレス実装を追加してはならない (時系列再生付きの `TimelineChoroplethMap` は使い手が無く 2026-10-30 に削除した)。

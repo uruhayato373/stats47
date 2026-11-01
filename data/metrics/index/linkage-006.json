@@ -6435,6 +6435,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elderly-day-service-within-500m-household-ratio",
           "kind": "ranking"
         }

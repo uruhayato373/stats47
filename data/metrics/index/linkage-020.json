@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+      "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+      "title": "老人福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0330403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0330403"
+        },
+        "derived": false,
+        "configHash": "5b211f2ce0e75197"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "per-capita-firefighting-expenditure-tokyo-municipal",
       "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
       "title": "消防費",
@@ -9031,46 +9063,6 @@
         },
         {
           "pageId": "ranking:population-aged-0-17-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-3",
-      "pageId": null,
-      "title": "0～3歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A1404"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A1404"
-        },
-        "derived": false,
-        "configHash": "3d7c9e6a38068e55"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-3",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-3",
           "kind": "ranking"
         }
       ],

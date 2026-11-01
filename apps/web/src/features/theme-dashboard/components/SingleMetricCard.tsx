@@ -22,6 +22,8 @@ interface SingleMetricCardProps {
   title?: string;
   /** 同じ章の詳細図が系列を描く場合は値だけを出し、推移を取りに行かない */
   summaryOnly?: boolean;
+  /** 読むときの注意 (同じ指標を描いていた章の図から引き継いだ注記)。出典の Sheet に入れる */
+  annotation?: string;
   /** このカードが表す唯一の指標 */
   metric: MetricKpi;
   /** rankingKey → 短ラベル (tabIndicators の tabLabel) */
@@ -48,6 +50,7 @@ export function SingleMetricCard({
   id,
   title,
   summaryOnly = false,
+  annotation,
   metric,
   tabLabels,
   selectedPrefectureCode,
@@ -123,6 +126,7 @@ export function SingleMetricCard({
         metric={metric}
         selectedPrefectureCode={selectedPrefectureCode}
         sourcesLabel={label}
+        notes={annotation ? [annotation] : undefined}
         label={
           <>
             {heading}

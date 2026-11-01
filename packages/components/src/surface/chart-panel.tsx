@@ -36,7 +36,7 @@ export interface ChartPanelProps {
  * 見出しは h3 として CardTitle の中に置き、領域は見出し・説明で命名する。
  *
  * 寸法は Card 部品が見本 (docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」) の値で持つ:
- * 見出し行は上 16px (Card の py-4)・下 16px + 下線、題は 16px / 22px・500、本文は 14px で下線から 16px。
+ * 見出し行は上 16px (Card の py-4)、題は 16px / 22px・500、本文は 14px で見出しから 16px。題名と本文を線で分けない (2026-11-01)。
  * SurfaceCard (RailCard・SectionCard) も同じ寸法。ページの側から見出し・余白・補足の位置を変える口は持たない
  * (`design-system:check` の panel-* 規則)。
  *
@@ -73,7 +73,8 @@ export function ChartPanel({
       aria-describedby={descriptionId}
     >
       {hasHeader && (
-        <CardHeader className="border-b">
+        // 題名と図を線で分けない (2026-11-01 オーナー決定「タイトルとチャートを分離するのはやめる」。旧: 見出しの下に 1px の線)
+        <CardHeader>
           {(icon || (title && !hideTitle)) && (
             <CardTitle className={TITLE_CLASS_NAME}>
               {icon && (

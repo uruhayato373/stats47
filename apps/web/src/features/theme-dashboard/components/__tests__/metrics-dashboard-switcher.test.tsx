@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -83,6 +83,8 @@ function indicatorData(
       { year: 2020, value: 1 },
       { year: 2021, value: 2 },
     ],
+    // 全国のページは公式の全国の値がある指標だけを出す (2026-11-01)。全国の表示を見るテストのために持たせる
+    nationalValue: 50,
   } as unknown as ThemeIndicatorData;
 }
 
@@ -386,8 +388,10 @@ describe('ThemeMetricsDashboard — 未割当チャートのグリッド', () =>
     sortOrder: 0,
   });
 
+  // 章の図は県のページで描く (全国のページは 47 県の平均になるので出さない。2026-11-01)
   it('1 chart しか無い未割当チャートは 2 列 grid にしない', () => {
     renderDashboard('population-dynamics', {
+      selectedPrefectureCode: '13000',
       pageCharts: [minimalChart('only-chart')],
     });
     const grid = document.getElementById('theme-charts');
@@ -397,6 +401,7 @@ describe('ThemeMetricsDashboard — 未割当チャートのグリッド', () =>
 
   it('2 chart 以上の未割当チャートは 2 列 grid にする', () => {
     renderDashboard('population-dynamics', {
+      selectedPrefectureCode: '13000',
       pageCharts: [minimalChart('chart-a'), minimalChart('chart-b')],
     });
     const grid = document.getElementById('theme-charts');
@@ -429,9 +434,10 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
     sortOrder: 0,
   };
 
-  it('header定型文を隠し、footerへ固有注釈・全hub・調査導線を置く', async () => {
+  it('定型文を出さず、固有注釈・全hub・調査導線を見出しのアイコンの Sheet に入れる', async () => {
     const user = userEvent.setup();
     renderDashboard('population-dynamics', {
+      selectedPrefectureCode: '13000',
       pageCharts: [chart],
       chartSourceLinks: {
         'test-trend': [
@@ -442,11 +448,12 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
 
     expect(screen.getByRole('region', { name: '出生率の推移' })).toBeVisible();
     expect(screen.queryByText('線の傾きから変化を確認できます。')).toBeNull();
-    expect(screen.getByText('2020年に系列が接続しません。')).toBeVisible();
-    // 出典と全 hub はチャートの下のボタン 1 つから開く Sheet にまとめる (2026-10-30)
+    // 注記は図の周りに文章で置かず、見出しのアイコンから開く Sheet の先頭に入れる (2026-11-01。見本のチャートのカード)
+    expect(screen.queryByText('2020年に系列が接続しません。')).toBeNull();
     expect(screen.queryByRole('link', { name: '出典: 人口動態統計' })).toBeNull();
-    await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    await user.click(screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' }));
     const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByText('2020年に系列が接続しません。')).toBeVisible();
     expect(sheet.getByRole('link', { name: '出典: 人口動態統計' })).toHaveAttribute(
       'href',
       '/survey/vital-statistics'
@@ -461,11 +468,23 @@ describe('ThemeMetricsDashboard — chart編集情報', () => {
     const user = userEvent.setup();
     renderDashboard('population-dynamics', {
       themeConfig: { ...themeConfig('population-dynamics'), tabIndicators: [{ rankingKey: 'primary', tabLabel: '出生数' }] },
+      selectedPrefectureCode: '13000',
       pageCharts: [chart],
     });
-    await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    await user.click(screen.getByRole('button', { name: /^出典・指標の定義/ }));
     const sheet = within(await screen.findByRole('dialog'));
     expect(sheet.getByRole('link', { name: '出生数の定義・ランキング' })).toHaveAttribute('href', '/ranking/primary');
+  });
+});
+
+describe('地域ごとに出す指標 (2026-11-01 オーナー決定)', () => {
+  it('全国のページは公式の全国の値が無い指標を出さず、県のページでは出す', () => {
+    const noNational = { ...indicatorData('賃金', '円'), nationalValue: undefined } as ThemeIndicatorData;
+    renderDashboard('labor-wages', { indicatorDataMap: { ...indicatorDataMap, [METRIC_KEY]: noNational } });
+    expect(screen.queryByTestId('single-card')).toBeNull();
+    cleanup();
+    renderDashboard('labor-wages', { indicatorDataMap: { ...indicatorDataMap, [METRIC_KEY]: noNational }, selectedPrefectureCode: '13000' });
+    expect(screen.getByTestId('single-card')).toBeInTheDocument();
   });
 });
 

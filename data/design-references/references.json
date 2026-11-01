@@ -16,7 +16,7 @@
       "adoptions": [
         {
           "part": "パネル",
-          "what": "中の文字 14px、題名 16px / 22px・500、見出しの下 16px + 線、補足はパネルの中の下端 1 行",
+          "what": "中の文字 14px、題名 16px / 22px・500、見出しの下 16px (見本の線は 2026-11-01 にオーナー決定でやめた)、補足はパネルの中の下端 1 行",
           "state": "done",
           "reflectedIn": "packages/components/src/surface/surface.tsx・chart-panel.tsx、packages/ui-theme/style-reference.css"
         },

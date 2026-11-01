@@ -687,7 +687,7 @@
       "key": "damaged-vacant-housing-ratio",
       "title": "腐朽・破損のある空き家の割合の市区町村ランキング",
       "href": "/municipalities/ranking/damaged-vacant-housing-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:day-time-population",
@@ -1183,7 +1183,7 @@
       "key": "elderly-day-service-within-500m-household-ratio",
       "title": "老人デイサービスセンターまで500m未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/elderly-day-service-within-500m-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:elderly-equipment-dwellings",
@@ -1303,7 +1303,7 @@
       "key": "elementary-school-within-1km-household-ratio",
       "title": "小学校まで1km未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/elementary-school-within-1km-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:employed-people-ratio",
@@ -1487,7 +1487,7 @@
       "key": "evacuation-site-within-500m-household-ratio",
       "title": "緊急避難場所まで500m未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/evacuation-site-within-500m-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:exclusive-industrial-district-area",
@@ -2239,7 +2239,7 @@
       "key": "junior-high-school-within-1km-household-ratio",
       "title": "中学校まで1km未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/junior-high-school-within-1km-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:kei-car-count",
@@ -2599,7 +2599,7 @@
       "key": "medical-facility-within-500m-household-ratio",
       "title": "医療機関まで500m未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/medical-facility-within-500m-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:medical-welfare-private-employees",
@@ -3194,12 +3194,20 @@
       "published": true
     },
     {
+      "id": "municipality-ranking:nursery-waiting-children-rate",
+      "kind": "municipality-ranking",
+      "key": "nursery-waiting-children-rate",
+      "title": "保育所等利用待機児童率の市区町村ランキング",
+      "href": "/municipalities/ranking/nursery-waiting-children-rate",
+      "published": true
+    },
+    {
       "id": "municipality-ranking:nursery-within-500m-young-child-household-ratio",
       "kind": "municipality-ranking",
       "key": "nursery-within-500m-young-child-household-ratio",
       "title": "保育所まで500m未満の子育て世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/nursery-within-500m-young-child-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:nursing-welfare-facilities-basic-tabulation-6510-per",
@@ -3559,7 +3567,7 @@
       "key": "park-within-500m-household-ratio",
       "title": "公園まで500m未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/park-within-500m-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:part-time-workers",
@@ -4287,7 +4295,7 @@
       "key": "post-office-bank-within-500m-household-ratio",
       "title": "郵便局・銀行まで500m未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/post-office-bank-within-500m-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:prefectural-disbursements-municipal",
@@ -4711,7 +4719,7 @@
       "key": "public-sewer-housing-ratio",
       "title": "公共下水道のある住宅の割合の市区町村ランキング",
       "href": "/municipalities/ranking/public-sewer-housing-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:public-ur-corporation-rented-dwellings",
@@ -5391,7 +5399,7 @@
       "key": "station-within-1km-household-ratio",
       "title": "駅まで1km未満の世帯の割合の市区町村ランキング",
       "href": "/municipalities/ranking/station-within-1km-household-ratio",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:steel-frame-dwellings",
@@ -5815,7 +5823,7 @@
       "key": "vacant-housing-rate-excluding-rental-sale-secondary",
       "title": "賃貸・売却用及び二次的住宅を除く空き家率の市区町村ランキング",
       "href": "/municipalities/ranking/vacant-housing-rate-excluding-rental-sale-secondary",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:vacant-housing-rate-for-rent",
@@ -5823,7 +5831,7 @@
       "key": "vacant-housing-rate-for-rent",
       "title": "賃貸用の空き家率の市区町村ランキング",
       "href": "/municipalities/ranking/vacant-housing-rate-for-rent",
-      "published": false
+      "published": true
     },
     {
       "id": "municipality-ranking:vacant-housing-ratio",

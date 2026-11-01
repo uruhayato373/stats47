@@ -2,6 +2,45 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "total-general-project-investment",
+      "pageId": "ranking:total-general-project-investment",
+      "title": "一般事業総投資額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D5200"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D5200"
+        },
+        "derived": false,
+        "configHash": "56325dee5e2b7b95"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:total-general-project-investment",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "total-household-members-housing-survey",
       "pageId": null,
       "title": "総世帯人員",
@@ -12164,42 +12203,6 @@
         "labor-mobility",
         "labor-wages"
       ]
-    },
-    {
-      "metricKey": "unemployment-rate-man",
-      "pageId": null,
-      "title": "完全失業率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0130101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0130101"
-        },
-        "derived": false,
-        "configHash": "41a2c4a99ab08982"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:unemployment-structure",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:unemployment-rate-man",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

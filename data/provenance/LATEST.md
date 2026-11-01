@@ -1,10 +1,10 @@
 # データ出典・再現性 (provenance) 棚卸し (LATEST)
 
-棚卸し日時: 2026-10-26T02:55:54.639Z
+棚卸し日時: 2026-10-30T23:00:07.374Z
 正典: `.claude/rules/data-provenance-standards.md`
 
 ## metric 再現性クラス分布
-- A (statsDataId 再取得可): **2929**
+- A (statsDataId 再取得可): **2942**
 - A' (機械ID付き external): **29**
 - B (fetcher依存・出典薄): **13**
 - C (手動抽出・provenance): **202**

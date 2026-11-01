@@ -1,14 +1,14 @@
 # e-Stat 年カバレッジ監査 (LATEST)
 
-- 生成: 2026-10-26T03:03:16.835Z
-- 対象母集団: 単年設定の active e-Stat metric 259 件 (今回確認 100 件)
+- 生成: 2026-10-30T23:13:49.360Z
+- 対象母集団: 単年設定の active e-Stat metric 271 件 (今回確認 100 件)
 - 判定: 都道府県1件 (北海道) をサンプルに `getStatsData` を実測し、値が non-null な年の件数を
   config の `years` と比較する。全 47 都道府県の精査ではなく代表 1 件によるスクリーニング
 
 ## サマリ
 
 - **要拡張候補 (extend-candidate)**: 29 件
-- 単年で確定 (confirmed-single-year): 201 件
+- 単年で確定 (confirmed-single-year): 214 件
 - 複数年の config が実在年を含む (config-covers): 171 件
 - 監査の取得では値が無く判定できない (no-sample-values): 37 件 — `dairy-cattle-count`, `fishery-household-sex-age`, `fishery-management-orgs`, `fishery-workers-coastal-offshore`, `fishing-port-count-by-type`, `fishing-vessel-crew`, `fishing-vessel-tonnage-class`, `inpatient-rate-per-100k`, `outpatient-rate-per-100k`, `port-entry-vessel-count`, `recreational-fishing-count`, `treatment-rate-arthrosis-inpatient`, `treatment-rate-arthrosis-outpatient`, `treatment-rate-asthma-inpatient`, `treatment-rate-asthma-outpatient`, `treatment-rate-cancer-inpatient`, `treatment-rate-cancer-outpatient`, `treatment-rate-cerebrovascular-inpatient`, `treatment-rate-cerebrovascular-outpatient`, `treatment-rate-circulatory-inpatient`, `treatment-rate-circulatory-outpatient`, `treatment-rate-diabetes-inpatient`, `treatment-rate-diabetes-outpatient`, `treatment-rate-hypertension-inpatient`, `treatment-rate-hypertension-outpatient`, `treatment-rate-mental-disorder-inpatient`, `treatment-rate-mental-disorder-outpatient`, `treatment-rate-mood-disorder-inpatient`, `treatment-rate-mood-disorder-outpatient`, `treatment-rate-musculoskeletal-inpatient`, `treatment-rate-musculoskeletal-outpatient`, `treatment-rate-neurosis-inpatient`, `treatment-rate-neurosis-outpatient`, `treatment-rate-osteoporosis-inpatient`, `treatment-rate-osteoporosis-outpatient`, `treatment-rate-schizophrenia-inpatient`, `treatment-rate-schizophrenia-outpatient`
 - 取得失敗 (fetch-failed・次回再試行): 16 件

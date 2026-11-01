@@ -17,6 +17,7 @@ import {
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
+import { ChartLegend } from '@/components/charts/ChartLegend';
 import { SurfaceCard } from '@/components/surface';
 
 import { fetchGeoLayerAction } from '../actions';
@@ -176,27 +177,17 @@ export function GeoLayerExplorer({
             : '白い点：駅代表点。点の数は原典の駅施設数や路線数とは異なります。'}
       </p>
       {layer.kind === 'population' && (
-        <ul
-          aria-label="人口の凡例"
-          className="mb-4 flex flex-wrap gap-x-4 gap-y-2 text-xs"
-        >
-          {[
+        <ChartLegend
+          label="人口の凡例"
+          className="mb-4"
+          items={[
             { value: 0, label: '0人' },
             { value: 1, label: '1〜99人' },
             { value: 100, label: '100〜999人' },
             { value: 1000, label: '1,000〜4,999人' },
             { value: 5000, label: '5,000人以上' },
-          ].map((item) => (
-            <li key={item.value} className="inline-flex items-center gap-1.5">
-              <span
-                aria-hidden="true"
-                className="h-3 w-3 border"
-                style={{ backgroundColor: populationLayerColor(item.value) }}
-              />
-              {item.label}
-            </li>
-          ))}
-        </ul>
+          ].map((item) => ({ key: String(item.value), label: item.label, color: populationLayerColor(item.value) }))}
+        />
       )}
       <div className="mb-3 flex flex-wrap gap-2">
         <Button

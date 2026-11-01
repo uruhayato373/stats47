@@ -20,7 +20,7 @@ export const manufacturingIndustryAddedValue: MetricConfig = {
   ],
   "years": {
     "from": 2000,
-    "to": 2023,
+    "to": 2024,
   },
   "yearFormat": "calendar",
   "visualization": {

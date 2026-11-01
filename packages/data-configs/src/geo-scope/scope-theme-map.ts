@@ -49,6 +49,7 @@ export const PREFECTURE_THEME_FOR_MUNICIPALITY_THEME: Readonly<Record<string, st
   housing: 'living-housing',
   'housing-households': 'living-housing',
   'housing-size-age': 'living-housing',
+  'living-environment': 'living-housing',
   labor: 'labor-wages',
   'land-area': 'land-property-market',
   'local-finance': 'local-finance',

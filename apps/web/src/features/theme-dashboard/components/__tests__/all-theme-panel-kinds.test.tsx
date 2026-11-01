@@ -54,6 +54,7 @@ function indicatorData(key: string, valueCount = 12): ThemeIndicatorData {
       rank: i + 1,
     })),
     nationalSeries: [],
+    nationalValue: 50,
   } as unknown as ThemeIndicatorData;
 }
 

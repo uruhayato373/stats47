@@ -1,0 +1,44 @@
+{
+  "statsDataId": "0004021421",
+  "statName": "住宅・土地統計調査",
+  "title": "住宅及び世帯総数 居住世帯の有無(8区分)別住宅数－全国、都道府県、市区町村",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdTab": "01-2023",
+        "axisRatio": {
+          "axis": "cat01",
+          "numeratorCodes": [
+            "221"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "level": "city",
+      "fetchedAt": "2026-10-30T23:21:28.623Z",
+      "years": { "2023": 1228 },
+      "rawRows": 2566
+    },
+    {
+      "query": {
+        "cdTab": "01-2023",
+        "axisRatio": {
+          "axis": "cat01",
+          "numeratorCodes": [
+            "222"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "level": "city",
+      "fetchedAt": "2026-10-30T23:21:28.639Z",
+      "years": { "2023": 1226 },
+      "rawRows": 2566
+    }
+  ]
+}

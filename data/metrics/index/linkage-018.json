@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "occupation-clerical-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1312"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1312"
+        },
+        "derived": false,
+        "configHash": "edbf709e92115529"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-clerical-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupation-salary",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-clerical-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "occupation-company-executive-workers",
       "pageId": null,
       "title": "職業別就業者数",
@@ -6205,46 +6245,6 @@
         },
         {
           "pageId": "ranking:other-noodles-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-noodles-consumption-quantity",
-      "pageId": "ranking:other-noodles-consumption-quantity",
-      "title": "他の麺類消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348235",
-          "filters": {
-            "cdCat01": "010130070",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0003348235",
-          "cdCat01": "010130070",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "641df498b6f7a00b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:other-noodles-consumption-quantity",
           "kind": "ranking"
         }
       ],

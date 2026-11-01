@@ -48,8 +48,8 @@
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 1625,
-    "minResolvedCharts": 1499,
+    "minCharts": 1950,
+    "minResolvedCharts": 1799,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0,
