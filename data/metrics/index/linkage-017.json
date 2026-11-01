@@ -8743,6 +8743,18 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:childcare-services",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:disability-support",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:long-term-care",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:nursery-waiting-children-rate",
           "kind": "ranking"
         }
@@ -8800,6 +8812,10 @@
         {
           "pageId": "municipality-ranking:nursery-within-500m-young-child-household-ratio",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:nursery-within-500m-young-child-household-ratio",

@@ -4162,6 +4162,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:public-sewer-housing-ratio",
           "kind": "ranking"
         }

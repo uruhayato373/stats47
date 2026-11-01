@@ -124,7 +124,8 @@
         "integrated-ece-center-enrolled-children",
         "nursery-type-ece-center-enrolled-children",
         "physical-disability-participation-facility-count",
-        "disability-support-facility-count"
+        "disability-support-facility-count",
+        "nursery-waiting-children-rate"
       ],
       "published": true
     },
@@ -160,7 +161,8 @@
         "integrated-ece-center-enrolled-children",
         "nursery-type-ece-center-enrolled-children",
         "physical-disability-participation-facility-count",
-        "disability-support-facility-count"
+        "disability-support-facility-count",
+        "nursery-waiting-children-rate"
       ],
       "published": true
     },
@@ -513,6 +515,19 @@
         "minimum-housing-standard-households",
         "induced-housing-standard-households",
         "rent-per-tatami-exclusive-dwellings",
+        "nursery-within-500m-young-child-household-ratio",
+        "elementary-school-within-1km-household-ratio",
+        "junior-high-school-within-1km-household-ratio",
+        "station-within-1km-household-ratio",
+        "medical-facility-within-500m-household-ratio",
+        "park-within-500m-household-ratio",
+        "evacuation-site-within-500m-household-ratio",
+        "post-office-bank-within-500m-household-ratio",
+        "elderly-day-service-within-500m-household-ratio",
+        "public-sewer-housing-ratio",
+        "vacant-housing-rate-excluding-rental-sale-secondary",
+        "vacant-housing-rate-for-rent",
+        "damaged-vacant-housing-ratio",
         "densely-inhabited-district-population",
         "densely-inhabited-district-population-density",
         "densely-populated-area",
@@ -777,7 +792,8 @@
         "integrated-ece-center-enrolled-children",
         "nursery-type-ece-center-enrolled-children",
         "physical-disability-participation-facility-count",
-        "disability-support-facility-count"
+        "disability-support-facility-count",
+        "nursery-waiting-children-rate"
       ],
       "published": true
     },

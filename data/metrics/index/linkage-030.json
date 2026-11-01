@@ -3777,6 +3777,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:vacant-housing-rate-excluding-rental-sale-secondary",
           "kind": "ranking"
         }
@@ -3829,6 +3833,10 @@
         {
           "pageId": "municipality-ranking:vacant-housing-rate-for-rent",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:vacant-housing-rate-for-rent",

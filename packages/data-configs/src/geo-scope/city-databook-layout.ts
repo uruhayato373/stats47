@@ -65,6 +65,7 @@ export const CITY_DATABOOK_LAYOUT: CityDatabookLayout = {
     'housing',
     'housing-size-age',
     'housing-households',
+    'living-environment',
     'safety-environment',
     'land-area',
   ],

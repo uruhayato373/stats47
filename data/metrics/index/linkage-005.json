@@ -2328,6 +2328,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:damaged-vacant-housing-ratio",
           "kind": "ranking"
         }

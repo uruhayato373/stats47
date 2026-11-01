@@ -1764,6 +1764,10 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
           "pageId": "ranking:elementary-school-within-1km-household-ratio",
           "kind": "ranking"
         }
@@ -7960,6 +7964,10 @@
         {
           "pageId": "municipality-ranking:evacuation-site-within-500m-household-ratio",
           "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
         },
         {
           "pageId": "ranking:evacuation-site-within-500m-household-ratio",
