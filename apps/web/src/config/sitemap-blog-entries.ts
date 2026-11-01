@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-10-29
- * 件数: blog 765 / tag 70 / survey 149
+ * 最終生成日: 2026-11-01
+ * 件数: blog 766 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -606,6 +606,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "retail-store-count-vs-nurses-per-100k-population", lastModified: "2026-08-13" },
   { slug: "rice-consumption-quantity-ranking", lastModified: "2026-07-10" },
   { slug: "rice-harvest-volume-prefecture-gap", lastModified: "2026-05-17" },
+  { slug: "rice-spending-quantity-gap-2025", lastModified: "2026-11-01" },
   { slug: "road-bridge-diagnosed-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "road-infrastructure-density", lastModified: "2026-03-06" },
   { slug: "road-length-per-km2-vs-average-road-traffic-volume", lastModified: "2026-08-30" },
@@ -819,7 +820,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "地方財政", lastModified: "2026-08-28" },
   { tagKey: "子育て", lastModified: "2026-07-11" },
   { tagKey: "家計", lastModified: "2026-08-29" },
-  { tagKey: "家計調査", lastModified: "2026-09-06" },
+  { tagKey: "家計調査", lastModified: "2026-11-01" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
   { tagKey: "市区町村", lastModified: "2026-10-23" },
   { tagKey: "年収", lastModified: "2026-09-05" },
@@ -830,7 +831,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "東京都", lastModified: "2026-10-23" },
   { tagKey: "東北", lastModified: "2026-07-12" },
   { tagKey: "格差", lastModified: "2026-09-05" },
-  { tagKey: "消費", lastModified: "2026-09-05" },
+  { tagKey: "消費", lastModified: "2026-11-01" },
   { tagKey: "消費支出", lastModified: "2026-09-06" },
   { tagKey: "消費者物価指数", lastModified: "2026-09-05" },
   { tagKey: "消費量", lastModified: "2026-08-04" },
@@ -859,7 +860,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-07-11" },
-  { tagKey: "食費", lastModified: "2026-07-10" },
+  { tagKey: "食費", lastModified: "2026-11-01" },
   { tagKey: "高齢化", lastModified: "2026-07-20" },
 ];
 
