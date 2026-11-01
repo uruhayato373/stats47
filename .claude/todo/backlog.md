@@ -3845,6 +3845,7 @@ updated: 2026-11-01
 - **2026-11-01 API照合**: 既存の `apps/web/.env.development` に e-Stat appId があり、CI は Repository Variable `NEXT_PUBLIC_ESTAT_APP_ID` を利用する。2025年次の都市表IDは支出額 `0004023605`・数量 `0004023606`。上位5品目の9桁 `cdCat01` は旧設定と一致するが、表IDは異なる。Excelの282等はAPIコードではない。詳細は `.claude/skills/estat/references/household-expenditure-survey.md`。
 - **上位5件の実装 (2026-11-01)**: 納豆支出・米数量・緑茶数量・カップ麺支出・牛肉数量の新表IDと `years.to=2025` を設定。2007〜2024年の旧表/新表は各946地域年セルで一致し、2025年は各全国＋52市の53実値。page-data-batch のローカル dry-run は5件とも47市×19年=893行・形状PASS。年・順位・県別と誤認させる固定SEO文は都市別/世帯別の一般説明へ修正。R2と本番は未反映。
 - **11-01 staging**: activeの家計調査713指標中、安全に接続できる697件と需要上位5件の設定を2025年表へ更新し、702件すべての値をローカルR2 stagingへ取得した。各指標の2025年値は47市・重複なし、合計32,994都市行。668件の固定2024年SEO文は都市・世帯を明記した通年文へ変更。旧年のAI解説は別の表示ガードで抑止する。R2へは未反映。
+- **11-01 公開検証**: 固定SHAの763ファイルをR2で全件照合し、PR #1205 をmainへ統合。配信用 `ranking-values` と正規化値を別途同期し、米・納豆・パンの通常値と米の人口/面積あたり値は2025年・47市を確認。公開データ契約監査は指摘0件、代表のランキング・全国テーマ・調査ハブ7URLはGooglebot UAで200。記事本文と図はR2に公開済みで、記事URLの公開判定はPR #1206で反映中。デプロイ後の全体スモークは今回の変更前と同じ10件で失敗（別途是正）。
 - **実行順・停止条件**: ① 763ファイル（702都市観測値、60全国系列、1比較図artifact）の固定SHA manifestでR2へ反映 ② ranking item/survey snapshotを再生成し、年・順位・単位を検証 ③ コードを一括デプロイし、代表URLと回遊を検証 ④ 合算6件を個別照合し、分類変更5件は新定義に合わせて採否を決める。未投入の2025値を公開ページへ書かない。
 
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 11 件
@@ -4316,6 +4317,7 @@ updated: 2026-11-01
   `packages/stats-r2/src/scripts/generate-japan-series.ts` の official モードが `source.kind=kakei-chousa` に未対応 (`verify-japan-candidates.ts` で verified-unsupported)。
   `data/source-inventory/placement-decisions.json` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
 - **11-01 staging / R2 反映**: 生成器を家計調査レシピと公式値の全ページ取得に対応。55件をすべて2025年まで値レベルで検証し、追加5件を含む60全国系列を7つの日本テーマへ配線した。採用済み55件は `placement-decisions.json` から除き、日本テーマのカタログを正本とした。763ファイルのR2反映と公開URLの全件SHA照合は済み。サイトの公開確認はmainデプロイ後に行う。
+- **11-01 サイト確認**: PR #1205 のmainデプロイ成功。`/japan/household-food-spending` と `/japan/household-assets-debt` はGooglebot UAで200を確認し、全国系列の配信元はR2の固定SHA照合を通過。
 - **次**: 固定SHAのrelease manifestでR2へ全国系列を反映し、7ページの実表示と導線を確認する。
 - **完了条件**: 55 件が /japan に載るか、載せないと判断して placement-decisions.ts に rejected と理由が残る。
 
