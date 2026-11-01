@@ -27,7 +27,7 @@ test("無料枠canaryは実生成・審査するがgitとR2へ公開しない", 
   assert.match(daily, /!inputs\.verify_only && steps\.generate\.outputs\.status != ''/);
   assert.match(daily, /!inputs\.verify_only && steps\.generate\.outputs\.status == 'success'/);
   assert.match(daily, /always\(\) && !inputs\.dry_run && !inputs\.verify_only/);
-  assert.match(daily, /- 実生成: \$\{r\.counters\.ok\} PASS/);
+  assert.match(daily, /- 実生成: "\+r\.counters\.ok\+" PASS/);
   assert.match(daily, /r\.dryRun\|\|r\.targets!==1\|\|r\.counters\.ok!==1\|\|r\.critic!=="gemini-api"\|\|r\.requests\.critic<1/);
 });
 
