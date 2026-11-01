@@ -4315,7 +4315,7 @@ updated: 2026-11-01
 - **観測 (2026-10-09)**: 参考文献由来の /japan 候補 66 件のうち 55 件は家計調査の品目で、全国値はあるが
   `packages/stats-r2/src/scripts/generate-japan-series.ts` の official モードが `source.kind=kakei-chousa` に未対応 (`verify-japan-candidates.ts` で verified-unsupported)。
   `data/source-inventory/placement-decisions.json` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
-- **11-01 staging**: 生成器を家計調査レシピと公式値の全ページ取得に対応。55件をすべて2025年まで値レベルで検証し、追加5件を含む60全国系列を7つの日本テーマへ配線した。`placement-decisions.json` の55件は blocked→planned に更新。R2未反映のため公開確認は残る。
+- **11-01 staging / R2 反映**: 生成器を家計調査レシピと公式値の全ページ取得に対応。55件をすべて2025年まで値レベルで検証し、追加5件を含む60全国系列を7つの日本テーマへ配線した。採用済み55件は `placement-decisions.json` から除き、日本テーマのカタログを正本とした。763ファイルのR2反映と公開URLの全件SHA照合は済み。サイトの公開確認はmainデプロイ後に行う。
 - **次**: 固定SHAのrelease manifestでR2へ全国系列を反映し、7ページの実表示と導線を確認する。
 - **完了条件**: 55 件が /japan に載るか、載せないと判断して placement-decisions.ts に rejected と理由が残る。
 
