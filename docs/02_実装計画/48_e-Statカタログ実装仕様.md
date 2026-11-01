@@ -100,7 +100,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 ## 4. CI workflow `.github/workflows/estat-catalog-monthly.yml`
 
 - trigger: 月次cron (`0 18 2 * *` UTC = 3日03:00 JST。data-refresh 5日03:00 UTCと非重複) +
-  `workflow_dispatch` (inputs: `meta_scope`既定`2,3` / `time_budget_min`既定150) +
+  `workflow_dispatch` (inputs: `meta_scope`既定`2,3` / `time_budget_min`既定120。job の timeout 180 分から全表の一覧取得と R2 反映の時間を残す) +
   `push: branches: [estat-catalog-run]` (cloud環境代替、既存estat系と同じ)
 - 1 job: checkout develop → `npm ci` → `catalog.mjs run` →
   `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix estat-catalog`。timeout 180分
@@ -126,7 +126,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 
 ## 6. 全国 (collectArea=1) と該当なし (0) のmeta対象
 
-2026-11-02 実測で全国22,017行・該当なし203,348行。月150分の時間予算 (1件1〜5秒) では全件のmetaを
+2026-11-02 実測で全国22,017行・該当なし203,348行。月120分の時間予算 (1件1〜5秒) では全件のmetaを
 回せないため、調査コードのallowlist (`--meta-stat-codes`、workflow入力 `meta_stat_codes`) で
 必要な調査だけ全表のmetaを取る。調査を足すときはallowlistに加える。meta未取得の表も一覧の行
 (表題・調査・更新日) は索引に入るので、`search`で存在は引ける。

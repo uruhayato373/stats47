@@ -35,9 +35,11 @@ on:
         required: false
         default: "00200561"
       time_budget_min:
+        # job の timeout (180 分) から、全表の一覧取得 (約 10 分)・索引の書き出し・R2 への反映の時間を残す。
+        # 2026-11-02 に一覧を全 23 万表へ広げたので 150 → 120 に下げた (150 のままだと反映の途中で打ち切られうる)
         description: "getMetaInfo に使う時間予算 (分)"
         required: false
-        default: "150"
+        default: "120"
       max_meta:
         description: "getMetaInfo の上限件数 (空なら時間予算のみで制御)"
         required: false
@@ -92,7 +94,7 @@ jobs:
         run: |
           ARGS=(run --meta-scope "${{ github.event.inputs.meta_scope || '2,3' }}" \
                      --meta-stat-codes "$META_STAT_CODES" \
-                     --time-budget-min "${{ github.event.inputs.time_budget_min || '150' }}")
+                     --time-budget-min "${{ github.event.inputs.time_budget_min || '120' }}")
           MAX_META="${{ github.event.inputs.max_meta }}"
           if [ -n "$MAX_META" ]; then ARGS+=(--max-meta "$MAX_META"); fi
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
