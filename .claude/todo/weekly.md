@@ -30,7 +30,7 @@ W43 のレビューの「来週への申し送り」13 件を照合した。
 |---|---|---|
 | 認証付き計測の記録の push が専用 clone で拒否される件を直す | `MEASUREMENT-MAC-DIRECT-01` | **Must 1** (11-07 の土曜より前に直す) |
 | KDP の再ログイン | `AUTH-CREDENTIAL-REGISTER-01` | オーナー作業 |
-| `SEO-TITLE-CTR-EFFECT-01` の `[target:]` (2 週目) | `SEO-TITLE-CTR-EFFECT-01` | **Must 2** に含める (improvement-triage への引き渡し) |
+| `SEO-TITLE-CTR-EFFECT-01` の `[target:]` (2 週目) | `SEO-TITLE-CTR-CLOSE-01` | **Must 2** に含める (improvement-triage への引き渡し) |
 | Workers CPU の反映後 7 日の比較と引き渡し | `CF-CPU-SURGE-01` | Should 2 |
 | KDP の販売台帳の自動記録 | `KDP-LEDGER-AUTO-01` | Should 3 (KDP の再ログインが済んだ週だけ) |
 | 導線名なしの割合を反映後の窓で読み直す | `NAV-CLICK-COVERAGE-01` | Could 1 |
@@ -45,7 +45,7 @@ W43 のレビューの「来週への申し送り」13 件を照合した。
 ## 今月の重点（10-28 のオーナー決定より）
 
 - **重点領域**: サイト・商品。市区町村 × GIS を軸に、打ち手は並行して試し、判定日の実測で配分を決める (打ち手の台帳 `data/business/experiments.json` の EXP-007〜012。どれもまだ proposed)。
-- **サイト**: 県名×市区町村ランキング `MUNI-PREF-RANKING-ROUTE-01` → 子育ての市区町村ランキング `MUNI-KOSODATE-METRICS-01` → `MUNI-KOSODATE-PAGES-01`。
+- **サイト**: 県名×市区町村ランキング (10-28 公開済み。観測は `MUNI-PREF-RANKING-OBS-01`) → 子育ての市区町村ランキング `MUNI-KOSODATE-METRICS-01` → `MUNI-KOSODATE-PAGES-01`。
 - **商品**: 製造品出荷額の加工済みデータを 1 商品売る。販売条件の確認 (`MUNI-DATA-LICENSE-CHECK-01`) は 10-28 に済み、次は `MUNI-DATA-PRODUCT-BUILD-01` → `MUNI-DATA-PRODUCT-SALE-01`。
 - **今週この重点で進めること**: 県名×市区町村ランキングの効果観測を立てる (Must 2)、待機児童率を作る (Must 3)、製造品出荷額の組替の下調べ (Should 1)。
 
@@ -96,7 +96,7 @@ W44 の計画が無いので、W43 のレビュー (11-01) の結果をそのま
 
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
-| 1 | gsc | SEO-TITLE-CTR-EFFECT-01 | effect/pending | 2026-11-24 | claude |
+| 2 | gsc | MUNI-PREF-RANKING-OBS-01 | effect/pending | 2026-11-26 | claude |
 | 1 | adsense | ADSENSE-PLACEMENT-01 | pending | 2026-11-14 | claude |
 
 `ADSENSE-PLACEMENT-01` は再開後 4 週のベースライン (W42〜W45) の最後の週で、配置は変えない。判定は 11-13 以降。
@@ -112,13 +112,12 @@ W44 の計画が無いので、W43 のレビュー (11-01) の結果をそのま
   ② `scripts/scheduled/measurement-collect-local.sh` の pull を失敗しない形にし、失敗したら次の段の `reset --hard` の前に止めてログに残す
   ③ 単体の確認 (bash の構文検査と、未コミットの変更がある clone での手動実行) を 11-06（金）までに済ませる。
   11-07（土）の朝に develop に「(Mac)」の記録コミットが入り、`npm run measurement:status` で stale が出なければ完了。
-- [ ] **県名×市区町村ランキングの効果観測と、title の効果観測の目標値を improvement-triage へ渡す** [S] — `MUNI-PREF-RANKING-ROUTE-01`（🔴 1 番目・サイト領域）/ `SEO-TITLE-CTR-EFFECT-01`。
-  県別ページは 10-28 の PR #1193 で本番に入り、470 URL が sitemap にある (11-01 確認)。残りは公開後 4 週の観測なので、
-  backlog から外して improvements の別 ID へ引き渡す (lifecycle の規則)。基準値 (公開時点の GSC の登録数・表示) を記録し、
-  `[kpi:]` と根拠のある `[target:]` (根拠が無ければ `[target:]` を付けずに判定不能と書く) を付ける。
-  同じ引き渡しで、`SEO-TITLE-CTR-EFFECT-01` に根拠のある `[target:]` を付けるか、判定不能として終了するかを決める (GSC 運用サイクルの FAIL を閉じる)。
-  improvements に新しい行があり、`MUNI-PREF-RANKING-ROUTE-01` のカードを削除し、`node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week 2026-W44` の
-  `effect-target-ratchet` が FAIL でなければ完了。使用: improvement-triage
+  **途中経過 (2026-11-01)**: ①② 済み。原因は 2 つ (収集の段は A8・楽天・note の取得が clone の追跡ファイルを書き換えて pull が拒否、週次監査の段はキーチェーンの古いトークンで push が拒否)。共通の `push_clone_records` (`scripts/scheduled/_common.sh`) で直し、手元の bare リポジトリで成功と失敗の経路を確かめた (`ef186fe02`)。残りは 11-07 の本番の確認。
+- [x] **県名×市区町村ランキングの効果観測と、title の効果観測の目標値を improvement-triage へ渡す** [S] — `MUNI-PREF-RANKING-OBS-01` / `SEO-TITLE-CTR-CLOSE-01`（サイト領域）。
+  県別ページは 10-28 の PR #1193 で本番に入り、470 URL が sitemap にある (11-01 確認)。残りは公開後 4 週の観測なので、backlog から improvements の別 ID へ引き渡す。
+  **結果 (2026-11-01)**: improvement-triage が `MUNI-PREF-RANKING-OBS-01` (`[kpi: search-clicks]`・期日 11-26) を起こし、基準値 (公開前 28 日の県別 URL 0 件、公開直後 10-28〜29 の県別 190 URL で 45 click / 1,223 imp。`gsc-query.mjs`) を詳細ログに書いて、元のカードを削除した。
+  `SEO-TITLE-CTR-EFFECT-01` は根拠のある `[target:]` を置けない (過去の title 差し替え 2 件は effect/none) ため、判定不能として improvements から外した。
+  GSC 運用サイクルの `effect-target-ratchet` は確定済みの W43 の判定記録を読むので FAIL が残る。閉じた施策の台帳への登録はオーナー判断なので `SEO-TITLE-CTR-CLOSE-01` (🟣) へ渡した。
 - [ ] **待機児童率の市区町村指標を作り、R2 反映の承認依頼を出す** [M] — `MUNI-KOSODATE-METRICS-01`（🔴 2 番目・データ領域）。
   こども家庭庁「保育所等関連状況取りまとめ（令和7年4月1日）」の参考 Excel (カードに URL・シート・列を記録済み) から、
   待機児童率 (待機児童 ÷ 申込者、0 を除いて順位) の metric を `fetcherKey: "manual"` と provenance 9 点セットで作り、取り込みスクリプトを書く。
@@ -128,22 +127,26 @@ W44 の計画が無いので、W43 のレビュー (11-01) の結果をそのま
 
 ### Should（できればやる、3件）
 
-- [ ] **製造品出荷額の組替の下調べ (①②)** [M] — `MUNI-DATA-PRODUCT-BUILD-01`（商品領域）。
+- [x] **製造品出荷額の組替の下調べ (①②)** [M] — `MUNI-DATA-PRODUCT-BUILD-01`（商品領域）。
   ① `cities.json` と `manufacturing-shipment-amount` の値が今の境域にそろっているか、合併前の値をどう扱っているかを確かめ、似た指標 `manufacturing-shipment` との違いを書く
   ② 境域の基準日と、合併した市町村の過去の値を合算する組替表の出典 (総務省の合併の記録) を決める。CSV と GeoJSON の作成 (③以降) は W46。
   ①② の結果がカードにあれば完了。成果物は repo に置かない。
+  **結果 (2026-11-01)**: 元データ (SSDS) が既に合併後の境域へ組み替え済みで、組替表は要らない。2 指標 (`-amount` と `manufacturing-shipment`) は R2 で値が全く同じだった (`MUNI-DATA-DEDUP-01` を起票)。詳細はカード。
 - [ ] **Workers CPU の反映後 7 日を比べ、効果観測を引き渡してカードを閉じる** [S] — `CF-CPU-SURGE-01`（🔴・管理領域・不具合・KPI `operating-cost`）。
   W43 から持ち越し。③ 反映後 7 日 (10-17〜10-23) の 1 件あたりの CPU と `_rsc` の割合を反映前と並べる ④ `[kpi: operating-cost]` と根拠つきの `[target:]` を付けた別 ID で improvement-triage へ渡し、カードを閉じる。
+  **途中経過 (2026-11-01)**: ③ の 1 件あたりの CPU は反映前 2 日 555 ms → 反映後 7 日 681 ms で下がっていない。反映前の窓が 2 日しか無く、効果は判定できない。`_rsc` の割合は Observability で取り直す (検証期日 11-14)。④ は根拠のある目標値が置けず行っていない。
 - [ ] **KDP の月次売上が販売台帳へ自動で入ることを確かめて閉じる** [S] — `KDP-LEDGER-AUTO-01`（管理領域）。
   KDP の再ログイン (オーナー作業) が 11-07 より前に済んだときだけ行う。11-07 の計測のあと `npm run products:sales --workspace=@stats47/product-factory -- validate` が PASS し、
   KPI ツリーの `paid-purchases` の KDP 分が判定不能でなくなっていればカードを閉じる。再ログインが無ければ W46 へ送る。
 
 ### Could（余力があれば、2件）
 
-- [ ] **導線名なしの割合を 10-19 の反映後だけの窓で読み直し、次の部品を選ぶ** [S] — `NAV-CLICK-COVERAGE-01`（管理領域）。
+- [x] **導線名なしの割合を 10-19 の反映後だけの窓で読み直し、次の部品を選ぶ** [S] — `NAV-CLICK-COVERAGE-01`（管理領域）。
   W43 の 60.5% は rolling 28 日で、反映前の日を含む。`gsc-query.mjs` / `ga4-query.mjs` の read-only 照会で 10-20 以降の 7 日を取り、上位の行き先 (ranking・geo・municipalities) の部品を 1 つ選ぶ。
-- [ ] **note の回遊の error 24 件の置換案を作る** [S] — `NOTE-CIRCULATION-LINK-FIX-01`（SNS 領域・不具合）。
+  **結果 (2026-11-01)**: 10-20〜10-31 の `nav_click` 8,794 件のうち導線名なし 51.5% (W41 53.9%)。行き先の上位は ranking 1,247・geo 1,085・municipalities 730。次は geo への導線 (部品は未特定)。
+- [x] **note の回遊の error 24 件の置換案を作る** [S] — `NOTE-CIRCULATION-LINK-FIX-01`（SNS 領域・不具合）。
   公開済み記事の本文を変えるのは note への外部変更なので、置換案をオーナーに見せるところまで。商品カードの HTTP 403 6 件は、次の土曜の監査で再発したら原因を調べる。
+  **結果 (2026-11-01)**: リンク切れ 13 件の置換案をカードの表にした (置換先は本番で 200 を確認)。意味が変わるおそれのある 4 件とホテルの記事 1 件はオーナーの確認が要る。
 
 ### 定常
 
@@ -191,8 +194,8 @@ W44 の計画が無いので、W43 のレビュー (11-01) の結果をそのま
 - 前週レビュー: `data/reviews/weekly/2026-W43.md` (W44 のレビューは無い)
 - 11 月の重点: `.claude/todo/monthly.md`「11 月の重点（2026-10-28 オーナー決定）」
 - 週次 snapshot: `data/nsm/weekly-snapshots/2026-W43.json`、計測サイクル `data/measurement-cycle/LATEST.md` (W43)
-- backlog: `MEASUREMENT-MAC-DIRECT-01` / `MUNI-PREF-RANKING-ROUTE-01` / `MUNI-KOSODATE-METRICS-01` / `MUNI-DATA-PRODUCT-BUILD-01` / `CF-CPU-SURGE-01` / `KDP-LEDGER-AUTO-01` / `NAV-CLICK-COVERAGE-01` / `NOTE-CIRCULATION-LINK-FIX-01`
-- 改善施策: `SEO-TITLE-CTR-EFFECT-01` / `ADSENSE-PLACEMENT-01`
+- backlog: `MEASUREMENT-MAC-DIRECT-01` / `MUNI-KOSODATE-METRICS-01` / `MUNI-DATA-PRODUCT-BUILD-01` / `CF-CPU-SURGE-01` / `KDP-LEDGER-AUTO-01` / `NAV-CLICK-COVERAGE-01` / `NOTE-CIRCULATION-LINK-FIX-01`
+- 改善施策: `MUNI-PREF-RANKING-OBS-01` / `ADSENSE-PLACEMENT-01` (`SEO-TITLE-CTR-EFFECT-01` は 11-01 に外した。判断待ちは `SEO-TITLE-CTR-CLOSE-01`)
 - 打ち手の台帳: `data/business/experiments.json` (EXP-007・EXP-008)
 
 ## 次週への申し送り候補
