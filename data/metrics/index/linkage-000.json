@@ -326,7 +326,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100133010",
             "cdCat02": "03"
@@ -336,7 +336,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100133010",
           "cdCat02": "03"
         },
@@ -344,7 +344,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "8b97212362bf87c0"
+        "configHash": "25ce67b70805f21c"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -630,7 +630,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "090410001",
             "cdCat02": "03"
@@ -640,7 +640,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "090410001",
           "cdCat02": "03"
         },
@@ -648,7 +648,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "c3dd630f46edb478"
+        "configHash": "fbd88803d10997ec"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2479,7 +2479,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "050700020",
             "cdCat02": "03"
@@ -2489,7 +2489,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "050700020",
           "cdCat02": "03"
         },
@@ -2497,7 +2497,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "7dbf163ee8c9ba65"
+        "configHash": "da87596668e280c1"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2519,7 +2519,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "050700020",
             "cdCat02": "03"
@@ -2529,7 +2529,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "050700020",
           "cdCat02": "03"
         },
@@ -2537,7 +2537,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "5142e9a2084f6f09"
+        "configHash": "563f5623e914b338"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2559,7 +2559,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "050700010",
             "cdCat02": "03"
@@ -2569,7 +2569,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "050700010",
           "cdCat02": "03"
         },
@@ -2577,7 +2577,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "28e62725a4fee782"
+        "configHash": "dd60c6adaa4c8f2e"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2599,7 +2599,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "050700010",
             "cdCat02": "03"
@@ -2609,7 +2609,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "050700010",
           "cdCat02": "03"
         },
@@ -2617,7 +2617,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "a5c4acf9c8449e96"
+        "configHash": "b458ec8c04900bef"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5103,7 +5103,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "040120010",
             "cdCat02": "03"
@@ -5113,7 +5113,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "040120010",
           "cdCat02": "03"
         },
@@ -5121,7 +5121,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "c5fc11286884edab"
+        "configHash": "1196fa94d7c5877f"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5129,6 +5129,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "japan-theme:household-appliances",
+          "kind": "japan-theme"
+        },
         {
           "pageId": "ranking:air-conditioner-consumption-expenditure",
           "kind": "ranking"
@@ -5143,7 +5147,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "040120010",
             "cdCat02": "03"
@@ -5153,7 +5157,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "040120010",
           "cdCat02": "03"
         },
@@ -5161,7 +5165,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "1bb6c6a480bc1747"
+        "configHash": "a1451ed546be8cda"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5172,6 +5176,10 @@
         {
           "pageId": "blog:air-conditioner-consumption-quantity-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:household-appliances",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:air-conditioner-consumption-quantity",
@@ -5187,7 +5195,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "070100080",
             "cdCat02": "03"
@@ -5197,7 +5205,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "070100080",
           "cdCat02": "03"
         },
@@ -5205,7 +5213,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "39a4026c16c635af"
+        "configHash": "786ca3d8462e5d43"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5227,7 +5235,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "040503040",
             "cdCat02": "03"
@@ -5237,7 +5245,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "040503040",
           "cdCat02": "03"
         },
@@ -5245,7 +5253,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "1982ddc4564b94d7"
+        "configHash": "83a6d0d0753134cb"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -9680,7 +9688,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "090442070",
             "cdCat02": "03"
@@ -9690,7 +9698,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "090442070",
           "cdCat02": "03"
         },
@@ -9698,7 +9706,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "d93ada3231b19cc9"
+        "configHash": "2f86e03a29e67fed"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -12945,7 +12953,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010610010",
             "cdCat02": "03"
@@ -12955,7 +12963,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010610010",
           "cdCat02": "03"
         },
@@ -12963,7 +12971,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "b3a6063b2c015a74"
+        "configHash": "8e37d56f8b1f8ca8"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -13005,7 +13013,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010610010",
             "cdCat02": "03"
@@ -13015,7 +13023,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010610010",
           "cdCat02": "03"
         },
@@ -13023,7 +13031,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "8bf2120f4a68c510"
+        "configHash": "e4c323a2e9ed181d"
       },
       "dependencies": [],
       "normalizationDependencies": [

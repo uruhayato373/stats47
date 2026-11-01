@@ -286,7 +286,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "090204020",
             "cdCat02": "03"
@@ -296,7 +296,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "090204020",
           "cdCat02": "03"
         },
@@ -304,7 +304,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "bacb97bf0ebd4168"
+        "configHash": "b84e5633147341fc"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -312,6 +312,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "japan-theme:household-education-leisure",
+          "kind": "japan-theme"
+        },
         {
           "pageId": "ranking:recorded-media-consumption-expenditure",
           "kind": "ranking"
@@ -358,7 +362,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "040110040",
             "cdCat02": "03"
@@ -368,7 +372,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "040110040",
           "cdCat02": "03"
         },
@@ -376,7 +380,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "957d84407122f673"
+        "configHash": "db71bdec85de085f"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -387,6 +391,10 @@
         {
           "pageId": "blog:refrigerator-expenditure-ranking",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:household-appliances",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:refrigerator-consumption-expenditure",
@@ -402,7 +410,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "040110040",
             "cdCat02": "03"
@@ -412,7 +420,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "040110040",
           "cdCat02": "03"
         },
@@ -420,7 +428,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "0444540c111fa8e7"
+        "configHash": "762aea8dd7f57992"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -428,6 +436,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "japan-theme:household-appliances",
+          "kind": "japan-theme"
+        },
         {
           "pageId": "ranking:refrigerator-consumption-quantity",
           "kind": "ranking"
@@ -4197,7 +4209,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100150010",
             "cdCat02": "03"
@@ -4207,7 +4219,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100150010",
           "cdCat02": "03"
         },
@@ -4215,7 +4227,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "73de7d1e8e30ba65"
+        "configHash": "f3d45646320cc5d9"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -4518,7 +4530,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "070230080",
             "cdCat02": "03"
@@ -4528,7 +4540,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "070230080",
           "cdCat02": "03"
         },
@@ -4536,7 +4548,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "108c894ae2cfaefd"
+        "configHash": "fa8204521e436781"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -4544,6 +4556,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "japan-theme:household-transport-spending",
+          "kind": "japan-theme"
+        },
         {
           "pageId": "ranking:rental-car-consumption-expenditure",
           "kind": "ranking"
@@ -4670,7 +4686,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "020210020",
             "cdCat02": "03"
@@ -4680,7 +4696,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "020210020",
           "cdCat02": "03"
         },
@@ -4688,7 +4704,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "9019cbf790ff0ff0"
+        "configHash": "b969c94b792a04ac"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -8961,7 +8977,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010110001",
             "cdCat02": "03"
@@ -8971,7 +8987,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010110001",
           "cdCat02": "03"
         },
@@ -8979,7 +8995,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "9094842e2aabc0d5"
+        "configHash": "ac80b8165fbb9ed1"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -9206,6 +9222,10 @@
         {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:household-food-spending",
+          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:rice-consumption-expenditure",
@@ -9462,6 +9482,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "japan-theme:household-food-spending",
+          "kind": "japan-theme"
+        },
+        {
           "pageId": "ranking:rice-consumption-quantity",
           "kind": "ranking"
         },
@@ -9481,7 +9505,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "010800090",
             "cdCat02": "03"
@@ -9491,7 +9515,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "010800090",
           "cdCat02": "03"
         },
@@ -9499,7 +9523,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "acde500ea0303c35"
+        "configHash": "70d0b476c9d80831"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -9830,7 +9854,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat01": "100150020",
             "cdCat02": "03"
@@ -9840,7 +9864,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat01": "100150020",
           "cdCat02": "03"
         },
@@ -9848,7 +9872,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "86d312050da1bc42"
+        "configHash": "ff9bbf0d057ebe56"
       },
       "dependencies": [],
       "normalizationDependencies": [

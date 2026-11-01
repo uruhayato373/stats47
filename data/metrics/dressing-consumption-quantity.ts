@@ -14,7 +14,7 @@ export const dressingConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010720090",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const dressingConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2010,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const dressingConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ドレッシング消費量ランキング都道府県【2024年】｜1位岐阜県（2,781ml）",
-  "seoDescription": "2024年のドレッシング消費量の都道府県別ランキング。1位岐阜県（2,781ml）、最下位秋田県（1,481ml）で1.9倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "ドレッシング消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のドレッシング消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

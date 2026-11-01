@@ -14,7 +14,7 @@ export const sakeConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "011100010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const sakeConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const sakeConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "清酒消費量1位は福島11,756ml、沖縄の15.3倍差｜47都道府県2024",
-  "seoDescription": "日本酒(清酒)の1人あたり消費量は1位福島(11,756ml)、最下位沖縄(766ml)で15.3倍の地域差。47都道府県を地図とグラフで比較する2024年最新ランキング。",
+  "seoTitle": "清酒消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の清酒消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

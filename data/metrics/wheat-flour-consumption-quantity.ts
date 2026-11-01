@@ -14,7 +14,7 @@ export const wheatFlourConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010140010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const wheatFlourConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const wheatFlourConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "小麦粉消費量ランキング都道府県【2024】うどん県・香川は何位? 1位は三重",
-  "seoDescription": "うどんの本場は香川、では小麦粉を最も使う県は?──答えは三重県(3,072g)。2位千葉(2,807g)、3位長野(2,799g)、最下位山梨(1,284g)まで2.4倍の地域差。2024年最新ランキングを地図とグラフで47都道府県比較。",
+  "seoTitle": "小麦粉消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の小麦粉消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

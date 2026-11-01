@@ -14,7 +14,7 @@ export const adultSneakersConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "050700010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const adultSneakersConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const adultSneakersConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "大人用運動靴消費量ランキング都道府県【2024年】｜1位高知県（1.46足）",
-  "seoDescription": "2024年の大人用運動靴消費量の都道府県別ランキング。1位高知県（1.46足）、最下位鹿児島県（0.49足）で3.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "大人用運動靴消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の大人用運動靴消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };
