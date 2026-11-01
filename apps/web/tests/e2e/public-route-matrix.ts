@@ -65,7 +65,8 @@ export const PUBLIC_ROUTE_MATRIX: readonly PublicRouteContract[] = [
     id: "city-category",
     path: "/municipalities/themes/aging-society",
     canonicalPath: "/municipalities/themes/aging-society",
-    heading: "市区町村の高齢化",
+    // 2026-10-31 に市区町村のテーマの slug と題名を都道府県のテーマにそろえた (IA-REGION-THEME-01 ④)
+    heading: "市区町村別の少子高齢化",
     dataSelector: 'main a[href^="/municipalities/ranking/"], main [role="status"]',
   },
 ] as const;
@@ -100,20 +101,20 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   },
   {
     id: "theme-education",
-    path: "/themes/education-culture",
-    canonicalPath: "/themes/education-culture",
+    // 2026-11-01 から /themes/* は公式の全国の値だけを見せ、県の系列を読む図 (折れ線・構成比・ドーナツ) を出さない。
+    // 図は県のページで検証する (theme-catalog-standards.md §3.0「地域ごとに出す指標を変える」)
+    path: "/areas/28000/education-culture",
+    canonicalPath: "/areas/28000/education-culture",
     heading: "教育・文化",
     dataSelector: '[data-theme-chart="true"]',
     expectedChartCount: 2,
-    representativeTypes: ["line-chart"],
+    representativeTypes: ["line-chart", "composition-chart"],
   },
   {
     id: "theme-fishery",
-    // Release CI は候補ブランチのコードと現在の本番 R2 snapshot を組み合わせて動く。
-    // 全国チャートの scope override が R2 へ同期される前後のどちらでも、
-    // component-type 契約を同じ全国表示で検証する。
-    path: "/themes/fishery-marine?pref=all",
-    canonicalPath: "/themes/fishery-marine",
+    // 2026-11-01 から県のページで検証する (theme-education と同じ理由)
+    path: "/areas/28000/fishery-marine",
+    canonicalPath: "/areas/28000/fishery-marine",
     heading: "漁業（水産業）",
     dataSelector: '[data-theme-chart="true"]',
     // 2026-10-07 (#1085): 指標カードと重複する 4 図を外し、海面漁業産出額の長期推移 1 枚だけ
@@ -123,12 +124,13 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   // theme-local-economy は 2026-10-07 (#1085) で図を外し、指標カードと比較カードだけになったため対象外
   {
     id: "theme-healthcare",
-    path: "/themes/healthcare",
-    canonicalPath: "/themes/healthcare",
+    // 2026-11-01 から県のページで検証する (theme-education と同じ理由)
+    path: "/areas/28000/healthcare",
+    canonicalPath: "/areas/28000/healthcare",
     heading: "医療・健康",
     dataSelector: '[data-theme-chart="true"]',
     expectedChartCount: 4,
-    representativeTypes: ["donut-chart"],
+    representativeTypes: ["donut-chart", "composition-chart"],
   },
   {
     id: "theme-local-finance",
