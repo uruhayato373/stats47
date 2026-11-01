@@ -143,6 +143,7 @@ updated: 2026-10-19
 タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ai-content/__tests__/gemini-workflow-contract.test.mjs] [起票:2026-11-01] [領域:サイト]
 
 - **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。新しい課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録する (キーの文字列は git・会話へ出さない)。
+- **配線検証 (2026-11-01)**: 確認用 branch `codex/gemini-kakei-20261101` の `workflow_dispatch`、`verify_only=true`・`dry_run=true` は run `41269551327` で PASS。R2 からキューを再構築し、1件の入力を組み立てた。公開系 step は skip。最初の run `41269171927` は生成 CLI の `NODE_OPTIONS` 欠落で失敗し、修正した。モデルは公式料金表に無料枠がある `gemini-2.5-flash-lite` に workflow で固定。Secret の更新日時は 2026-07-13 のままで、新キーの実生成と課金無効の確認は未実施。repository variable は未設定。
 - **次**: ① `ai-content-gemini-daily.yml` を `verify_only=true`・`dry_run=false` で手動実行し、1件の実生成・決定的監査・独立 critic が PASS、git/R2 の反映なしを確認 ② Secret 所有者が project の課金無効を確認して repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
 - **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
 - **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
