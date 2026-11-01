@@ -14,7 +14,7 @@ export const greenTeaConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "011010010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const greenTeaConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const greenTeaConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "緑茶消費量ランキング都道府県【2024年】｜1位静岡県（1,415g）",
-  "seoDescription": "2024年の緑茶消費量の都道府県別ランキング。1位静岡県（1,415g）、最下位沖縄県（336g）で4.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "緑茶の年間購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の緑茶の年間購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

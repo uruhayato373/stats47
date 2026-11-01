@@ -27,6 +27,7 @@ import {
   type NationalAveragePoint,
 } from "../lib/build-national-average-series";
 import { cachedFindRankingItem } from "../lib/cached-ranking-item";
+import { selectCurrentAiContent } from "../lib/select-current-ai-content";
 
 const AREA_TYPE = "prefecture" as const;
 
@@ -155,6 +156,9 @@ export async function loadRankingPageModel(rankingKey: string) {
     categoryPromise,
     nativeBannersPromise,
   ]);
+  // 観測値の年を更新した直後に旧年の考察を表示すると、順位・数値の説明が誤る。
+  // 新年の審査済み解説が R2 に入るまでは考察を隠す。
+  const currentAiContent = selectCurrentAiContent(aiContent, selectedYear);
 
   // 選択年の 47 行 (従来 readRankingValuesFromR2 が返していたもの)
   const rankingValues = selectedYear
@@ -186,7 +190,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     selectedYear,
     rankingValues,
     nationalAverageSeries,
-    aiContent,
+    aiContent: currentAiContent,
     cityRankingItem,
     surveyName,
     originalSurveys,

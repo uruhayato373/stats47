@@ -15,7 +15,7 @@ export const nattoConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "010530030",
       "cdCat02": "03",
     },
@@ -27,7 +27,7 @@ export const nattoConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -59,7 +59,7 @@ export const nattoConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "納豆消費なぜ東北が独占？関西は3倍差の最下位圏・17年で+17%増（2024）",
-  "seoDescription": "1位福島7,830円〜最下位和歌山2,627円で3.0倍差。上位10は東北・北関東が独占し、関西以西で急減する食文化の境界線とは？健康志向で全体+17%増の中でも東北が強い理由を47都道府県で解説（2024年）。",
+  "seoTitle": "納豆の年間支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の納豆への年間支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

@@ -10226,7 +10226,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat01": "010310010",
             "cdCat02": "03"
@@ -10236,7 +10236,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat01": "010310010",
           "cdCat02": "03"
         },
@@ -10244,7 +10244,7 @@
           "areaRemap": "kakei-capital-city"
         },
         "derived": true,
-        "configHash": "b8a5424af89a19f5"
+        "configHash": "67e82d3bc48c72b8"
       },
       "dependencies": [],
       "normalizationDependencies": [
