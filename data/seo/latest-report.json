@@ -1,13 +1,31 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-31",
+  "date": "2026-11-01",
   "period": {
-    "periodStart": "2026-10-22",
-    "periodEnd": "2026-10-28",
+    "periodStart": "2026-10-23",
+    "periodEnd": "2026-10-29",
     "windowDays": 7
   },
-  "inputHash": "04b6e846f5e4e2e2244b04e86a2e57824b401c5a759c6161b08ea1ae2d6c66fc",
+  "inputHash": "137092ed2721f8e73d48252d88d66c9b63df485fd2937fe5d3813acd379dcb5f",
   "movements": [
+    {
+      "keyword": "苫小牧市 人口",
+      "targetPath": "/areas/01000/cities/01213",
+      "before": 74,
+      "after": 10.15,
+      "beforeImpressions": 1,
+      "impressions": 20,
+      "change": 63.85
+    },
+    {
+      "keyword": "警察 官 年収 ランキング",
+      "targetPath": "/ranking/avg-salary-police-prefecture",
+      "before": 68,
+      "after": 5.285714285714286,
+      "beforeImpressions": 1,
+      "impressions": 7,
+      "change": 62.714285714285715
+    },
     {
       "keyword": "地方交付税交付金 ランキング",
       "targetPath": "/ranking/local-tax-prefecture",
@@ -27,6 +45,24 @@
       "change": 57
     },
     {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 67,
+      "after": 10,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": 57
+    },
+    {
+      "keyword": "尾鷲市 人口",
+      "targetPath": "/areas/24000/cities/24209",
+      "before": 64,
+      "after": 8.421052631578949,
+      "beforeImpressions": 1,
+      "impressions": 19,
+      "change": 55.578947368421055
+    },
+    {
       "keyword": "高校教師年収",
       "targetPath": "/ranking/high-school-teacher-annual-income",
       "before": 63,
@@ -36,13 +72,22 @@
       "change": 53
     },
     {
+      "keyword": "サンマ 漁獲量",
+      "targetPath": "/ranking/fishery-species-catch-pacific-saury",
+      "before": 54,
+      "after": 9,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 45
+    },
+    {
       "keyword": "東成瀬村 人口",
       "targetPath": "/areas/05000/cities/05464",
       "before": 53,
-      "after": 8.75,
+      "after": 8.615384615384615,
       "beforeImpressions": 1,
-      "impressions": 8,
-      "change": 44.25
+      "impressions": 13,
+      "change": 44.38461538461539
     },
     {
       "keyword": "出生率 日本 ランキング 市町村",
@@ -52,51 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 3,
       "change": 44
-    },
-    {
-      "keyword": "能代市 人口",
-      "targetPath": "/areas/05000/cities/05202",
-      "before": 48,
-      "after": 10.5,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 37.5
-    },
-    {
-      "keyword": "私立高校教師 年収ランキング",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 18,
-      "after": 55,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -37
-    },
-    {
-      "keyword": "警察 官 年収 ランキング",
-      "targetPath": "/ranking/avg-salary-police-prefecture",
-      "before": 41.5,
-      "after": 5.285714285714286,
-      "beforeImpressions": 2,
-      "impressions": 7,
-      "change": 36.214285714285715
-    },
-    {
-      "keyword": "財政力指数",
-      "targetPath": "/blog/fiscal-health-50years-trend",
-      "before": 37,
-      "after": 1,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 36
-    },
-    {
-      "keyword": "都 道府県 別 出生率 ランキング",
-      "targetPath": "/ranking/total-fertility-rate",
-      "before": 10,
-      "after": 46,
-      "beforeImpressions": 2,
-      "impressions": 2,
-      "change": -36
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "岡山市 人口",
     "targetPath": "/areas/33000/cities/33100",
-    "rank": 8.298245614035087,
-    "impressions": 570,
+    "rank": 8.339089481946624,
+    "impressions": 637,
     "clicks": 1,
     "group": 5,
     "previousMethod": null,
