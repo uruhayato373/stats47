@@ -84,7 +84,7 @@ tags: []
   - 年次値と2023〜2025年平均を混ぜず、上位品目の出典・年・都市・二人以上世帯・支出額/購入数量を検証して更新する [M] — `KAKEI-EXPANSION-02` / `METRIC-YEARFORMAT-KAKEI-01` (W46)
   - 調査ハブ→テーマ→代表ランキング→関連記事の本文説明と文脈リンクを整える。NotebookLM は背景調査に限り使い、Gemini の解説は機械監査と別審査の PASS 分だけ採用する [M] — `CONTENT-KAKEI-EXPANSION-01` (W47)
   - localhost で代表4面のスマホ/PC表示・出典・リンクを確認し、まとめて1回の本番反映を準備する [S]。公開後に対象 URL の計測日を置く (W48)
-- **依存・ブロッカー**: e-Stat の取得権限と R2 反映、本番デプロイは既存の承認境界に従う。Gemini の定期生成は無料枠キーの実生成確認が通るまで起動しない。NotebookLM の調査結果は原典を照合し、統計値の正本にしない。
+- **依存・ブロッカー**: e-Stat の取得権限と R2 反映、本番デプロイは既存の承認境界に従う。Gemini は無料枠キーの1件実生成・監査・独立審査が PASS 済みで、定期公開の起動は別判断とする。NotebookLM の調査結果は原典を照合し、統計値の正本にしない。
 - **真実源リンク**: `backlog.md#CONTENT-KAKEI-EXPANSION-01`、`backlog.md#KAKEI-EXPANSION-02`、`backlog.md#CONTENT-FOOD-TRIVIA-01`、`backlog.md#METRIC-YEARFORMAT-KAKEI-01`
 
 ### 重点2: 製造品出荷額の加工済みデータを 1 商品として note で売り始める (領域: 商品)

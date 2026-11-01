@@ -128,7 +128,7 @@ W44 の計画が無いので、W43 のレビュー (11-01) の結果をそのま
 ### Should（できればやる、5件）
 
 - [ ] **家計調査の検索入口と既存ページの重複を棚卸しする** [S] — `CONTENT-KAKEI-EXPANSION-01`（サイト領域）。記録済みの GSC query/page を同じ28日窓で突合し、表示・click 上位の品目、代表 URL、同じ品目の別 URL、欠けた調査・テーマ・ランキング・ブログ間リンクを短い一覧にする。W46 の年次更新対象をその一覧から選ぶ。
-- [ ] **Gemini 無料枠の公開しない1件確認** [S] — `ai-content-gemini-daily.yml` の `verify_only=true`。新しい無料枠キーが GitHub Secret に登録された後、実生成・監査・別リクエスト審査が1件 PASS するまで定期 job の変数は立てない。
+- [x] **Gemini 無料枠の公開しない1件確認** [S] — `ai-content-gemini-daily.yml` の `verify_only=true`。run `41271164945` で実生成・監査・別リクエスト審査が1件 PASS。日次公開を起動する変数は未設定。
 
 - [x] **製造品出荷額の組替の下調べ (①②)** [M] — `MUNI-DATA-PRODUCT-BUILD-01`（商品領域）。
   ① `cities.json` と `manufacturing-shipment-amount` の値が今の境域にそろっているか、合併前の値をどう扱っているかを確かめ、似た指標 `manufacturing-shipment` との違いを書く
