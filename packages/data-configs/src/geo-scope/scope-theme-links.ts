@@ -1,4 +1,5 @@
 import { JAPAN_CATALOGS } from './japan-catalog';
+import { THEME_CATALOGS } from '../theme-catalog';
 import { KNOWN_MUNICIPALITY_THEME_SLUGS, MUNICIPALITY_THEME_CATALOGS } from './municipality-catalog';
 import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME, PREFECTURE_THEME_FOR_MUNICIPALITY_THEME } from './scope-theme-map';
 
@@ -67,7 +68,7 @@ export function scopeHrefsForMunicipalityTheme(themeSlug: string): StatisticsSco
 export function scopeHrefsForJapanTheme(themeSlug: string): StatisticsScopeHrefs {
   const municipalityTheme = MUNICIPALITY_THEME_FOR_PREFECTURE_THEME[themeSlug];
   return {
-    prefectures: `/themes/${themeSlug}`,
+    ...(THEME_CATALOGS[themeSlug] ? { prefectures: `/themes/${themeSlug}` } : {}),
     ...(municipalityTheme && KNOWN_MUNICIPALITY_THEME_SLUGS.has(municipalityTheme)
       ? { municipalities: `/municipalities/themes/${themeSlug}` }
       : {}),

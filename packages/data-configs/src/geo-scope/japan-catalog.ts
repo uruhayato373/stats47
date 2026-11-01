@@ -1,3 +1,5 @@
+import { KAKEI_JAPAN_CATALOGS } from './kakei-japan-catalog';
+
 /**
  * `/japan` の git TS catalog (GEO-SCOPE-SEPARATION-01 WP4/WP6)。
  *
@@ -1770,6 +1772,7 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       }
     ]
   },
+  ...KAKEI_JAPAN_CATALOGS,
 };
 
 export function getJapanCatalogTheme(themeSlug: string): JapanCatalogTheme | undefined {

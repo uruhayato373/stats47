@@ -1,7 +1,7 @@
 /**
  * 家計調査の分析単位。既存指標の出典・値は metric config / R2 が正本。
  * ここには「同じ統計表のどの切り口を、どのページで答えるか」だけを置く。
- * proposed は公開・図の実装を意味しない。
+ * staged は値と図をローカル生成済み、proposed は候補。どちらも公開済みを意味しない。
  */
 export interface KakeiAnalysis {
   id: string;
@@ -19,6 +19,7 @@ export interface KakeiAnalysis {
       | 'income-18-class'
       | 'age'
       | 'household-size'
+      | 'household-type'
       | 'housing-tenure';
     year: 2025;
     /** 実際の metric config と対応する場合だけ固定する。 */
@@ -28,7 +29,7 @@ export interface KakeiAnalysis {
   placement: {
     pageId: string;
     form: 'ranking' | 'line-chart' | 'bar-chart' | 'article';
-    state: 'configured' | 'proposed';
+    state: 'configured' | 'staged' | 'proposed';
     metricKey?: string;
   };
 }
@@ -146,11 +147,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '010110001', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'line-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -165,11 +166,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       year: 2025,
       filters: { cdCat01: '010110001', cdCat02: '03' },
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'line-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -185,9 +186,9 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -203,9 +204,9 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -219,11 +220,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       axis: 'income-quintile',
       year: 2025,
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -237,11 +238,11 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       axis: 'age',
       year: 2025,
     },
-    evidence: 'metadata-checked',
+    evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -257,9 +258,9 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-food-spending',
+      pageId: 'japan-theme:household-food-spending',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -270,14 +271,15 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       frequency: 'annual',
       household: 'all',
       geography: 'national',
-      axis: 'item',
+      axis: 'household-type',
       year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '11' },
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'survey:kakei-chousa',
-      form: 'article',
-      state: 'proposed',
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'staged',
     },
   },
   {
@@ -288,14 +290,15 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
       frequency: 'annual',
       household: 'single',
       geography: 'national',
-      axis: 'item',
+      axis: 'household-type',
       year: 2025,
+      filters: { cdCat01: '010110001', cdCat02: '21' },
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'survey:kakei-chousa',
-      form: 'article',
-      state: 'proposed',
+      pageId: 'japan-theme:household-food-spending',
+      form: 'bar-chart',
+      state: 'staged',
     },
   },
   {
@@ -329,9 +332,9 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-assets-debt',
+      pageId: 'japan-theme:household-assets-debt',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
   {
@@ -347,9 +350,9 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
     },
     evidence: 'value-checked',
     placement: {
-      pageId: 'theme:household-assets-debt',
+      pageId: 'japan-theme:household-assets-debt',
       form: 'bar-chart',
-      state: 'proposed',
+      state: 'staged',
     },
   },
 ] as const;
@@ -402,9 +405,11 @@ export function validateKakeiAnalyses(
       errors.push(
         `${analysis.id}: destination page is not published: ${placement.pageId}`
       );
-    if (placement.state === 'proposed') {
+    if (placement.state === 'proposed' || placement.state === 'staged') {
       if (placement.metricKey)
-        errors.push(`${analysis.id}: proposed output cannot claim a metric`);
+        errors.push(`${analysis.id}: unpublished output cannot claim a metric`);
+      if (placement.state === 'staged' && (analysis.evidence !== 'value-checked' || placement.form === 'article'))
+        errors.push(`${analysis.id}: staged output needs checked values and a chart`);
       continue;
     }
     if (analysis.evidence !== 'value-checked')

@@ -5,13 +5,16 @@ import {
 import type { EntityKind } from "@stats47/data-configs";
 import {
   parseJapanSeriesArtifact,
+  parseKakeiAxisArtifact,
   parseMigrationFlowPayload,
   parseStatsValuesPayload,
 } from "../schemas";
 import {
+  KAKEI_AXIS_R2_KEY,
   japanR2Key,
   statsR2Key,
   type JapanSeriesArtifact,
+  type KakeiAxisArtifact,
   type MigrationFlowPayload,
   type StatsValuesPayload,
 } from "../types";
@@ -96,6 +99,14 @@ export async function readJapanSeriesResult(
     `japan-series:${metricKey}`,
     parseJapanSeriesArtifact,
   ).readResult();
+}
+
+export async function readKakeiAxisCharts(): Promise<KakeiAxisArtifact | null> {
+  return unwrapNullable(await createStatsReader(
+    KAKEI_AXIS_R2_KEY,
+    "kakei-axis-charts",
+    parseKakeiAxisArtifact,
+  ).readResult());
 }
 
 function createStatsReader<T>(

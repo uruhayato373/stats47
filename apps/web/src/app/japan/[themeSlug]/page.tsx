@@ -9,11 +9,12 @@ import {
   scopeHrefsForJapanTheme,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import { readJapanSeries } from '@stats47/stats-r2/readers';
+import { readJapanSeries, readKakeiAxisCharts } from '@stats47/stats-r2/readers';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { PageShell, PageHeader } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
+import { SectionHeader } from '@/components/section';
 
 import { NativeAffiliateRow } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
@@ -26,6 +27,7 @@ import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import { JapanMetricChart } from './JapanMetricChart';
+import { KakeiAxisChart } from './KakeiAxisChart';
 
 import type { NumericDomainPolicy } from '@stats47/types';
 import type { Metadata } from 'next';
@@ -89,10 +91,14 @@ async function loadMetricSeries(
       metricKey,
       // 分母は subtitle が持つ (unit-semantics-standards §4)。落とすと人口100万人当たりの 27 が
       // 「図書館数 27館」と全国の総数に見える (2026-09-27)
-      title: config.subtitle && !config.title.includes(config.subtitle) ? `${config.title}（${config.subtitle}）` : config.title,
+      title: config.source.kind === 'kakei-chousa'
+        ? config.title
+        : config.subtitle && !config.title.includes(config.subtitle) ? `${config.title}（${config.subtitle}）` : config.title,
       description:
-        config.description ??
-        `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
+        config.source.kind === 'kakei-chousa'
+          ? '家計調査の二人以上世帯について、品目分類の公式全国値を年次で表示します。支出額はその年の合計で、物価変動の影響も含みます。'
+          : config.description ??
+            `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
       unit: series.rows[0].unit,
       sourceId: series.meta.sourceId,
       trendDomain: config.visualization.trendDomain,
@@ -111,11 +117,15 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
   // 全国テーマは都道府県テーマと同じ slug を使うので、同じ意図軸の広告を出す
   // (THEME_AFFILIATE_MAP の写像を共有。写像が無い slug は空 = 何も描画しない)。
   const themeVertical = THEME_AFFILIATE_MAP[theme.themeSlug];
-  const [metricViews, nativeBanners] = await Promise.all([
+  const [metricViews, nativeBanners, axisArtifact] = await Promise.all([
     loadMetricSeries(theme.metrics.map((m) => m.metricKey)),
     // 写像が無い slug は汎用の案件 (2026-10-31 オーナー決定「すべてのページに広告を出す」)
     resolveAffiliateBannersByVertical(themeVertical, 8).catch(() => []),
+    (themeSlug === 'household-food-spending' || themeSlug === 'household-assets-debt')
+      ? readKakeiAxisCharts()
+      : Promise.resolve(null),
   ]);
+  const axisCharts = axisArtifact?.charts.filter(chart => chart.themeSlug === themeSlug) ?? [];
 
   return (
     <PageShell>
@@ -161,7 +171,9 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
                   source={`e-Stat 統計表 ${m.sourceId} (公式全国値)`}
                   sourceLink={buildEstatTableUrl(m.sourceId)}
                   rankingLink={hrefFor("ranking", { rankingKey: m.metricKey })}
-                  rankingLabel="都道府県ランキングを見る"
+                  rankingLabel={getMetricConfig(m.metricKey)?.source.kind === 'kakei-chousa'
+                    ? '県庁所在市のランキングを見る'
+                    : '都道府県ランキングを見る'}
                 />
               }
             >
@@ -174,6 +186,30 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
             </ChartPanel>
           ))}
         </PanelGrid>
+      )}
+
+      {axisCharts.length > 0 && (
+        <section className="mt-10" aria-label="家計調査の分類軸別比較">
+          <SectionHeader title="2025年の世帯別比較" />
+          <p className="mb-5 text-sm text-muted-foreground">
+            全国の年間収入・世帯人数・世帯類型などの分類別の値を示します。各図に記載した世帯区分を確認してください。県庁所在市の順位や全国時系列とは集計軸が異なります。
+          </p>
+          <PanelGrid className="grid-cols-1 @md:grid-cols-2">
+            {axisCharts.map(chart => <ChartPanel
+              key={chart.id}
+              title={chart.title}
+              description={chart.description}
+              footer={<ChartFooter
+                source={`e-Stat 家計調査 ${(chart.sourceIds ?? [chart.sourceId]).join('・')}（2025年）`}
+                sourceLink={buildEstatTableUrl(chart.sourceId)}
+                sourceLinks={chart.sourceIds?.map(sourceId => ({ label: `e-Stat 統計表 ${sourceId}`, url: buildEstatTableUrl(sourceId) }))}
+                annotation={`${chart.household}・${chart.axis}・${chart.period === 'monthly-average' ? '1か月平均' : chart.period === 'annual-total' ? '年間合計' : '残高'}・${chart.unit}`}
+              />}
+            >
+              <KakeiAxisChart chart={chart} />
+            </ChartPanel>)}
+          </PanelGrid>
+        </section>
       )}
 
       {/* ネイティブアフィリエイト枠 (テーマページと同じ vertical 解決・読了位置) */}

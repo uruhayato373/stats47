@@ -67,4 +67,12 @@ describe('家計調査の切り口台帳', () => {
       `${row.id}: destination page is not published: ${row.placement.pageId}`
     );
   });
+  it('ローカル生成済みの図には実値確認が必要で、未公開のmetricを名乗れない', () => {
+    const row = KAKEI_ANALYSES.find((item) => item.id === 'food-income-quintile')!;
+    expect(row.placement.state).toBe('staged');
+    const bad = { ...row, evidence: 'metadata-checked' as const, placement: { ...row.placement, metricKey: 'fake-key' } };
+    const errors = validateKakeiAnalyses([bad], { pages, metrics });
+    expect(errors).toContain(`${row.id}: staged output needs checked values and a chart`);
+    expect(errors).toContain(`${row.id}: unpublished output cannot claim a metric`);
+  });
 });

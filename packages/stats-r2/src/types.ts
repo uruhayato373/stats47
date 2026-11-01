@@ -103,6 +103,32 @@ export function japanR2Key(metricKey: string): string {
   return `${JAPAN_R2_PREFIX}/${metricKey}/series.json`;
 }
 
+/** 家計調査の全国・単年の分類軸比較。都道府県ランキングや全国時系列とは別。 */
+export const KAKEI_AXIS_R2_KEY = "app/survey/kakei-chousa/axis-charts.json";
+
+export interface KakeiAxisChart {
+  id: string;
+  themeSlug: string;
+  title: string;
+  description: string;
+  sourceId: string;
+  sourceIds?: string[];
+  household: string;
+  axis: string;
+  period: "monthly-average" | "annual-total" | "balance";
+  unit: string;
+  filters: Record<string, string>;
+  rows: { code: string; label: string; value: number }[];
+}
+
+export interface KakeiAxisArtifact {
+  schemaVersion: 1;
+  year: 2025;
+  geographyScope: "japan";
+  charts: KakeiAxisChart[];
+  meta: { generatedAt: string };
+}
+
 /** 日本全国値の由来。`resolveJapanValue` (data-configs/geo-scope) が判定する値と対応する。 */
 export type JapanSourceMode = "official" | "derived-additive" | "derived-ratio";
 

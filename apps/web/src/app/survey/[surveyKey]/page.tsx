@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
+import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   CATEGORY_TOPIC_CATALOGS,
@@ -186,6 +187,9 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title }));
+  const relatedJapanThemes = surveyKey === 'kakei-chousa'
+    ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
+    : [];
   const relatedArticles = await listArticleSummariesBySurveyId(
     surveyKey,
     6
@@ -326,6 +330,9 @@ export default async function SurveyPage({ params }: PageProps) {
     ...(relatedThemes.length > 0
       ? [{ href: '#related-themes', label: '関連テーマ' } as const]
       : []),
+    ...(relatedJapanThemes.length > 0
+      ? [{ href: '#related-japan-themes', label: '日本全国の時系列' } as const]
+      : []),
     ...(relatedArticles.length > 0
       ? [{ href: '#related-articles', label: '関連記事' } as const]
       : []),
@@ -459,6 +466,31 @@ export default async function SurveyPage({ params }: PageProps) {
                 <SurfaceLinkCard
                   key={theme.key}
                   href={themeHref(theme.key)}
+                  className="text-sm font-medium text-foreground hover:bg-accent/50"
+                >
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="min-w-0">{theme.title}</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                  </span>
+                </SurfaceLinkCard>
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
+      {relatedJapanThemes.length > 0 && (
+        <section id="related-japan-themes" className="mb-4 scroll-mt-24">
+          <SectionHeader title="日本全国の時系列" />
+          <p className="mb-3 text-sm text-muted-foreground">
+            都市別ランキングと対象地域が異なります。全国の二人以上世帯について、年ごとの変化を確認できます。
+          </p>
+          <SurveyOutboundLinkArea surface="survey_theme">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedJapanThemes.map((theme) => (
+                <SurfaceLinkCard
+                  key={theme.themeSlug}
+                  href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
                   className="text-sm font-medium text-foreground hover:bg-accent/50"
                 >
                   <span className="flex items-center justify-between gap-2">
