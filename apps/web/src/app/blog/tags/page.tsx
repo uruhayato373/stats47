@@ -24,6 +24,9 @@ import type { Metadata } from "next";
 const TAGS_TITLE = "タグ一覧 | ブログ";
 const TAGS_DESCRIPTION = "都道府県統計ブログの記事をタグから探す。";
 
+// タグ一覧は R2 snapshot を読む。ビルド時の空 fallback を静的 HTML に焼き込まない。
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: TAGS_TITLE,
     description: TAGS_DESCRIPTION,

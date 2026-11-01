@@ -937,3 +937,12 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **観測期限と判定手順**: 2026-11-22 (after 窓 2026-10-23〜11-19 の 28 日 + 取得遅延 3 日)。新規 541 件の imp の合計と表示が付いた URL の割合を出し、上の計算式と比べる。既存 175 件の clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で、対照の都道府県ランキングが同方向に動いていなければ、薄いページの増加による共食いを疑い、表示の付かなかった新規 key の noindex を検討する (backlog `MUNI-RANKING-EXPANSION-01`)。active 施策の一覧への登録は improvement-triage が行う。
 - **未確定 / 仮説**: [仮説] 実数の細目 (業種別・年齢別・住宅の細目) は検索需要が小さく、表示の大半は財政・人口・空き家・福祉施設に集まる。検証コマンドは上と同じ。検証期日: 2026-11-22。期日後の判定: テーマ別の imp の分布を出し、表示の付いたテーマから順にブログ連載 (`BLOG-MUNI-SERIES-01`) の題材にする。
 - **交絡の記録 (2026-10-28)**: after 窓の途中で PR #1193 が県名×市区町村ランキング 470 URL を `/municipalities/ranking/<key>/<県コード>` に足す。新規 541 件の数え方 (`municipality-ssds-expansion.ts` の key に当たる URL) は 1 段の URL だけにし、2 段の URL を含めない。
+
+### [GSC-INDEXING-2026-11-01] 内部リンク・blog 分割ページ canonical の是正と sitemap 再送信
+
+- **観測**: 2026-10-17 取得の coverage queue に未登録の都道府県×テーマ 401 URL があり、2026-11-01 の本番 HTML 実測では親の県ページから直接リンクされるのは 15 URL。blog 未登録 32 URL は分割一覧から到達可能だったが、`/blog?page=2` 以降も canonical が `/blog` を指していた。
+- **変更**: `codex/gsc-indexing-20261101` で県ページの全 53 テーマへの HTML リンクと、blog 分割ページ固有の canonical を実装。2 コミット `f1b150c1a` / `3f4dbb482`。本番未反映。
+- **追加で見つけた入口不具合**: 本番 `/blog/tags` は 200 でも「タグはまだありません」を表示し、未登録の `/tag/生活コスト` へリンクしていなかった。レスポンスに `x-nextjs-prerender: 1` があり、ビルド時に R2 の空 fallback を静的化していた。タグ詳細は 200 で記事を表示するため、タグ一覧だけを `force-dynamic` に変更した。本番未反映。
+- **本番確認**: sitemap index と子 11 件は HTTP 200。公開 sitemap の URL は 9,137 件。代表 24 URL の Googlebot UA 応答は 23 件が 200、意図的廃止 1 件が 410。5xx・空本文・UA 差は検出されなかった。
+- **GSC 操作**: 2026-11-01 09:17 JST に `https://stats47.jp/sitemap.xml` を Search Console API で再送信。直後の API 応答は `lastSubmitted=2026-11-01T00:17:50.344Z`、`isPending=true`、warnings/errors は各 0。Google の再取得・登録増は未確認。
+- **検証と次の観測**: Web 型チェック、対象テスト 18 件、対象 ESLint、docs check は通過。GSC coverage の最新認証取得は `auth_required` で、比較可能な母集団は 2026-10-17 のまま。次回の認証付き週次取得後に対象 URL の URL Inspection 状態と `indexed_by_inspection` を比較し、効果を判定する。
