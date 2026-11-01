@@ -18,12 +18,14 @@ import { checkKakeiMetric } from "./lib/kakei-classification.mjs";
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 /**
- * 2020年改定の品目分類を使う家計調査の表 → 品目コード表を持つ表。
+ * 家計調査の表 → 改定年と品目コード表を持つ表。
  * 数量の表 (0003348235) は金額の表 (0003348239) と同じ cdCat01 を使う (2026-10-08 に かつお 010211040 等で確認)。
  */
 const TABLES: Record<string, { revision: string; codeTable: string }> = {
   "0003348235": { revision: "2020", codeTable: "0003348239" },
   "0003348239": { revision: "2020", codeTable: "0003348239" },
+  "0004023605": { revision: "2025", codeTable: "0004023605" },
+  "0004023606": { revision: "2025", codeTable: "0004023606" },
 };
 
 interface CheckResult {

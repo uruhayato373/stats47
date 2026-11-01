@@ -320,7 +320,7 @@ export async function buildDataCard(
   // A single kakei series fixes household type, annual period, unit, and capital-city remap.
   if (
     metric.config.source.kind !== 'kakei-chousa' ||
-    metric.config.source.filter?.statsDataId !== '0003348239' ||
+    !['0003348239', '0004023605'].includes(String(metric.config.source.filter?.statsDataId ?? '')) ||
     metric.config.source.filter?.cdCat02 !== '03' ||
     !request.key.endsWith('-consumption-expenditure') ||
     metric.item.unit !== '円' ||
