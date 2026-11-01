@@ -144,7 +144,8 @@ updated: 2026-10-19
 
 - **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。新しい課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録する (キーの文字列は git・会話へ出さない)。
 - **配線検証 (2026-11-01)**: 確認用 branch `codex/gemini-kakei-20261101` の `workflow_dispatch`、`verify_only=true`・`dry_run=true` は run `41269551327` で PASS。R2 からキューを再構築し、1件の入力を組み立て、公開系 step を skip した。最初の run `41269171927` は生成 CLI の `NODE_OPTIONS` 欠落で失敗し、修正済み。ユーザーが専用無料枠 project のキーを Secret に保存し、更新日時 `2026-11-01T03:50:46Z` を確認。実生成 run `41270810211` は `gemini-2.5-flash-lite` の structured preflight で HTTP 404 となり、公開前に停止した。公式料金表で無料枠を確認した `gemini-3.5-flash-lite` へ切り替えて再試験する。repository variable は未設定。
-- **次**: ① `ai-content-gemini-daily.yml` を `verify_only=true`・`dry_run=false` で手動実行し、1件の実生成・決定的監査・独立 critic が PASS、git/R2 の反映なしを確認 ② Secret 所有者が project の課金無効を確認して repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
+- **実生成確認 (2026-11-01)**: `gemini-3.5-flash-lite` を使った run `41271164945` は structured preflight、1件の生成、決定的監査、独立 Gemini critic がすべて PASS。`verify_only=true` により token/状態の記録、git commit、R2 publish は skip。キー全文が AI Studio 詳細画面の内部ツール出力に表示されたため、ユーザーに事故を説明しローテーションを推奨済み。文字列はコード・会話に転記していない。
+- **次**: ① ユーザーが同じ無料枠 project でキーを再発行して Secret を更新し、旧キーを失効させる ② 更新後に `verify_only=true`・`dry_run=false` の1件審査を再実行 ③ Secret 所有者が project の課金無効を確認し、日次公開を承認した後だけ repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ④ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ⑤ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
 - **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
 - **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
 
