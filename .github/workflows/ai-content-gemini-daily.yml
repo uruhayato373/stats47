@@ -44,7 +44,7 @@ concurrency:
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  GEMINI_TEXT_MODEL: gemini-2.5-flash-lite
+  GEMINI_TEXT_MODEL: gemini-3.5-flash-lite
   NODE_OPTIONS: --conditions react-server
 
 jobs:
