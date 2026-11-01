@@ -4,7 +4,7 @@ name: 📚 e-Stat Catalog (monthly)
 # 完全DBレス・read-only な発見基盤 (観測値は対象外・既存 app/stats/ 経路のまま)。
 #
 # パイプライン:
-#   1. catalog.mjs run: getStatsList (全国/都道府県/市区町村) → S3 から既存索引取得 →
+#   1. catalog.mjs run: getStatsList (全表。集計地域区分「該当なし」を含む) → S3 から既存索引取得 →
 #      差分 plan → getMetaInfo を時間予算まで → .local/r2/estat-catalog/ に staging
 #   2. diff-push-r2 --prefix estat-catalog: R2 へ push
 #
@@ -27,9 +27,13 @@ on:
   workflow_dispatch:
     inputs:
       meta_scope:
-        description: "getMetaInfo を取る collectArea (カンマ区切り。1=全国 2=都道府県 3=市区町村)"
+        description: "getMetaInfo を取る collectArea (カンマ区切り。0=該当なし 1=全国 2=都道府県 3=市区町村)"
         required: false
         default: "2,3"
+      meta_stat_codes:
+        description: "collectArea に関係なく getMetaInfo を取る調査コード (カンマ区切り。例 00200561=家計調査)"
+        required: false
+        default: "00200561"
       time_budget_min:
         description: "getMetaInfo に使う時間予算 (分)"
         required: false
@@ -83,8 +87,11 @@ jobs:
         run: npm ci
 
       - name: 📚 Run catalog crawl
+        env:
+          META_STAT_CODES: ${{ github.event.inputs.meta_stat_codes || '00200561' }}
         run: |
           ARGS=(run --meta-scope "${{ github.event.inputs.meta_scope || '2,3' }}" \
+                     --meta-stat-codes "$META_STAT_CODES" \
                      --time-budget-min "${{ github.event.inputs.time_budget_min || '150' }}")
           MAX_META="${{ github.event.inputs.max_meta }}"
           if [ -n "$MAX_META" ]; then ARGS+=(--max-meta "$MAX_META"); fi

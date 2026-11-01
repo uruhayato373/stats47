@@ -112,14 +112,18 @@ test("normalizeCollectArea: e-Stat実測の日本語ラベルを数字コード�
   assert.equal(normalizeCollectArea("都道府県"), "2");
   assert.equal(normalizeCollectArea("市区町村"), "3");
   assert.equal(normalizeCollectArea("2"), "2");
-  assert.equal(normalizeCollectArea("該当なし"), null); // getMetaInfo で観測される値
+  // 該当なしは "0"。DB の約 85% (家計調査は全 126 表) がこれで、collectArea=1/2/3 の一覧に出ない (2026-11-02 実測)
+  assert.equal(normalizeCollectArea("該当なし"), "0");
+  assert.equal(normalizeCollectArea("不明な値"), null);
   assert.equal(normalizeCollectArea(null), null);
 });
 
 test("normalizeTableRow: 日本語ラベルのCOLLECT_AREAでも正しい数字コードになる", () => {
   const raw = { "@id": "0000010101", COLLECT_AREA: "都道府県" };
   assert.equal(normalizeTableRow(raw, "9").collectArea, "2"); // ラベルが読めればfallbackより優先
-  const rawUnknown = { "@id": "0000010101", COLLECT_AREA: "該当なし" };
+  const rawNone = { "@id": "0000010101", COLLECT_AREA: "該当なし" };
+  assert.equal(normalizeTableRow(rawNone, "2").collectArea, "0"); // 該当なしもラベルとして読む
+  const rawUnknown = { "@id": "0000010101", COLLECT_AREA: "不明な値" };
   assert.equal(normalizeTableRow(rawUnknown, "2").collectArea, "2"); // 読めなければfallbackへ
 });
 
@@ -276,6 +280,29 @@ test("buildPlan: collectArea が metaScope 外なら toFetchMeta から除外す
   const fresh = new Map([["A", row("A", { collectArea: "1" })]]);
   const plan = buildPlan({ existingTables: [], freshRows: fresh, manifest: {}, metaScope: [2, 3] });
   assert.deepEqual(plan.newRows.map((r) => r.statsDataId), ["A"]);
+  assert.deepEqual(plan.toFetchMeta, []);
+});
+
+test("buildPlan: metaStatCodes の調査は collectArea が該当なし (0) でも meta を取る", () => {
+  const fresh = new Map([
+    ["K", row("K", { statCode: "00200561", collectArea: "0" })],
+    ["X", row("X", { statCode: "00200521", collectArea: "0" })],
+  ]);
+  const plan = buildPlan({ existingTables: [], freshRows: fresh, manifest: {}, metaScope: [2, 3], metaStatCodes: ["00200561"] });
+  assert.deepEqual(plan.toFetchMeta.map((r) => r.statsDataId), ["K"]);
+});
+
+test("buildPlan: 取得対象外で一覧が変わらない meta 未取得の表は updated にしない (全 shard を毎回書き直さない)", () => {
+  const plan = buildPlan({
+    existingTables: [row("X", { collectArea: "0", meta: null }), row("Y", { collectArea: "0", meta: null })],
+    freshRows: new Map([
+      ["X", row("X", { collectArea: "0" })],
+      ["Y", row("Y", { collectArea: "0", updatedDate: "2024-06-01" })],
+    ]),
+    manifest: {},
+    metaScope: [2, 3],
+  });
+  assert.deepEqual(plan.updatedRows.map((r) => r.statsDataId), ["Y"]); // 一覧の更新日が変わった Y だけ索引を書き直す
   assert.deepEqual(plan.toFetchMeta, []);
 });
 

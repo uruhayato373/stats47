@@ -11,11 +11,14 @@ export const MAX_ATTEMPTS = 5;
  * @param {object[]} p.existingTables 既存 index/tables/<statCode>.json を統合した現在の行
  * @param {Map<string, object>} p.freshRows 今回の L1 (getStatsList 全 collectArea) を正規化した行。key=statsDataId
  * @param {object} p.manifest 直前の manifest ({ failed, quarantined })
- * @param {number[]} p.metaScope meta を取る collectArea (例 [2,3])
+ * @param {number[]} p.metaScope meta を取る collectArea (例 [2,3]。0 = 該当なし)
+ * @param {string[]} [p.metaStatCodes] collectArea に関係なく meta を取る調査コード (例 家計調査 "00200561")
  * @param {number} [p.maxMeta] 今回 fetch する上限件数
  */
-export function buildPlan({ existingTables, freshRows, manifest, metaScope, maxMeta = Infinity }) {
+export function buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes = [], maxMeta = Infinity }) {
   const existingById = new Map(existingTables.map((t) => [t.statsDataId, t]));
+  const statCodes = new Set(metaStatCodes);
+  const inScope = (row) => metaScope.includes(Number(row.collectArea)) || statCodes.has(row.statCode);
   const quarantined = new Set((manifest.quarantined ?? []).map((q) => q.id));
   const failedById = new Map((manifest.failed ?? []).map((f) => [f.id, f]));
 
@@ -28,7 +31,13 @@ export function buildPlan({ existingTables, freshRows, manifest, metaScope, maxM
     const existing = existingById.get(id);
     if (!existing || existing.removedAt) {
       newRows.push(row);
-    } else if (!existing.meta || existing.meta.sourceUpdatedDate !== row.updatedDate) {
+    } else if (
+      existing.meta
+        ? existing.meta.sourceUpdatedDate !== row.updatedDate
+        : // meta の無い表は、取得対象か一覧の更新日が変わったときだけ動かす。対象外の表 (該当なし約 20 万件) を
+          // 毎回 updated にすると、全 shard を毎月書き直すことになる
+          inScope(row) || existing.updatedDate !== row.updatedDate
+    ) {
       updatedRows.push(row);
     }
   }
@@ -42,7 +51,6 @@ export function buildPlan({ existingTables, freshRows, manifest, metaScope, maxM
     .map(([id]) => freshRows.get(id))
     .filter(Boolean);
 
-  const inScope = (row) => metaScope.includes(Number(row.collectArea));
   const toFetchMeta = [...newRows, ...updatedRows, ...retryRows].filter(inScope).slice(0, maxMeta);
 
   return { newRows, updatedRows, removedIds, retryRows, toFetchMeta };

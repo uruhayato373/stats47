@@ -3,7 +3,7 @@
  * e-Stat メタデータ完全カタログ CLI。
  *
  * サブコマンド:
- *   run    L1 (getStatsList 全 collectArea) → 差分 plan → getMetaInfo (時間予算まで) →
+ *   run    L1 (getStatsList 全表。集計地域区分「該当なし」を含む) → 差分 plan → getMetaInfo (時間予算まで) →
  *          .local/r2/estat-catalog/ に staging (diff-push-r2.ts --prefix estat-catalog で R2 反映)
  *   pull   公開 URL から manifest + 索引を .local/estat-catalog/ へ取得 (ローカル検索用)
  *   search <語...>  pull 済みの索引をキーワード検索
@@ -89,28 +89,30 @@ async function cmdRun(args) {
   const metaScope = parseIntList(args["meta-scope"], DEFAULT_META_SCOPE);
   const timeBudgetMin = args["time-budget-min"] ? Number(args["time-budget-min"]) : DEFAULT_TIME_BUDGET_MIN;
   const maxMeta = args["max-meta"] ? Number(args["max-meta"]) : Infinity;
+  const metaStatCodes = args["meta-stat-codes"] ? String(args["meta-stat-codes"]).split(",").map((x) => x.trim()).filter(Boolean) : [];
 
   getAppId(); // dry-run でも早期に fail させる (plan だけでも実行環境の確認になる)
 
   console.log(
-    `📡 estat-catalog run (metaScope=${metaScope.join(",")} timeBudget=${timeBudgetMin}min ` +
+    `📡 estat-catalog run (metaScope=${metaScope.join(",")} metaStatCodes=${metaStatCodes.join(",") || "-"} timeBudget=${timeBudgetMin}min ` +
       `maxMeta=${maxMeta === Infinity ? "∞" : maxMeta} dryRun=${dryRun})`,
   );
 
-  // --- L1: getStatsList を全 collectArea (1=全国 2=都道府県 3=市区町村) で crawl ---
+  // --- L1: getStatsList を collectArea で絞らずに全表 crawl ---
+  // collectArea=1/2/3 の 3 回に分けると、集計地域区分が「該当なし」の表 (DB の約 85%。家計調査は全表) が漏れる (2026-11-02)
   const freshRows = new Map();
+  console.log(`\n--- L1 全表 ---`);
+  const raw = await listAllTables(null, {
+    delayMs: LIST_DELAY_MS,
+    onPage: ({ count }) => process.stdout.write(`\r  ...${count} 件`),
+  });
+  for (const r of raw) freshRows.set(String(r["@id"]), normalizeTableRow(r));
   const collectAreaCounts = {};
-  for (const ca of [1, 2, 3]) {
-    console.log(`\n--- L1 collectArea=${ca} ---`);
-    const raw = await listAllTables(ca, {
-      delayMs: LIST_DELAY_MS,
-      onPage: ({ count }) => process.stdout.write(`\r  ...${count} 件`),
-    });
-    collectAreaCounts[ca] = raw.length;
-    for (const r of raw) freshRows.set(String(r["@id"]), normalizeTableRow(r, String(ca)));
-    console.log(`\n  → collectArea=${ca}: ${raw.length} 件`);
+  for (const row of freshRows.values()) {
+    const ca = row.collectArea ?? "unknown";
+    collectAreaCounts[ca] = (collectAreaCounts[ca] ?? 0) + 1;
   }
-  console.log(`\nL1 合計 (重複排除後): ${freshRows.size} 件`);
+  console.log(`\nL1 合計 (重複排除後): ${freshRows.size} 件 / 取得 ${raw.length} 行`);
   console.log(JSON.stringify({ collectAreaCounts }, null, 2));
 
   if (dryRun) {
@@ -132,7 +134,7 @@ async function cmdRun(args) {
   console.log(`既存索引: ${existingTables.length} 件 (${surveysIndex.length} 調査)`);
 
   // --- 差分 plan ---
-  const plan = buildPlan({ existingTables, freshRows, manifest, metaScope, maxMeta });
+  const plan = buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes, maxMeta });
   console.log(
     `plan: new=${plan.newRows.length} updated=${plan.updatedRows.length} ` +
       `retry=${plan.retryRows.length} removed=${plan.removedIds.length} toFetchMeta=${plan.toFetchMeta.length}`,
@@ -263,7 +265,7 @@ async function cmdRun(args) {
   fs.writeFileSync(path.join(STAGING_DIR, "index/surveys.json"), JSON.stringify(surveys, null, 1));
 
   const collectAreas = {};
-  for (const ca of [1, 2, 3]) {
+  for (const ca of [0, 1, 2, 3]) {
     const tablesForCa = allTables.filter((t) => String(t.collectArea) === String(ca) && !t.removedAt);
     collectAreas[ca] = {
       tables: tablesForCa.length,
@@ -275,6 +277,7 @@ async function cmdRun(args) {
     ...m,
     generatedAt: finishedAt,
     metaScope,
+    metaStatCodes,
     collectAreas,
     lastRun: { startedAt, finishedAt, fetched: attempted, failed: failedCount, timeBudgetHit },
   };

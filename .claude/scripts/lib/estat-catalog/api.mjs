@@ -54,16 +54,19 @@ async function withRetry(fn, label) {
   throw new Error(`${label} failed after ${RETRY_COUNT} attempts: ${lastErr?.message ?? lastErr}`);
 }
 
-/** getStatsList を 1 ページ取得する。生の TABLE_INF 配列と NEXT_KEY を返す */
+/**
+ * getStatsList を 1 ページ取得する。生の TABLE_INF 配列と NEXT_KEY を返す。
+ * collectArea が null なら絞らない (集計地域区分が「該当なし」の表も含む全表)。
+ */
 export async function fetchStatsListPage(collectArea, startPosition, appId = getAppId()) {
   return withRetry(async () => {
     const params = new URLSearchParams({
       appId,
       lang: "J",
-      collectArea: String(collectArea),
       limit: String(LIST_BATCH_SIZE),
       startPosition: String(startPosition),
     });
+    if (collectArea != null) params.set("collectArea", String(collectArea));
     const res = await fetch(`${LIST_URL}?${params.toString()}`, fetchOpts());
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -83,7 +86,7 @@ export async function fetchStatsListPage(collectArea, startPosition, appId = get
 
 /**
  * getStatsList を全ページ収集する。1 ページごとに onPage を呼ぶ (呼び出し側で delay を挟める)。
- * @param {string|number} collectArea
+ * @param {string|number|null} collectArea null なら全表
  * @param {{ delayMs?: number, onPage?: (info: any) => unknown }} [options]
  * @returns {Promise<object[]>} 生の TABLE_INF 行の配列 (未正規化)
  */

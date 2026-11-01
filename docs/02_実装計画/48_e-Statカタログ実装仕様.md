@@ -2,7 +2,7 @@
 title: e-Statカタログ実装仕様
 type: implementation-spec
 status: active
-updated: 2026-09-25
+updated: 2026-11-02
 related_backlog: ESTAT-CATALOG-SSDS-DERIVE-01
 tags: [estat, r2, catalog, ci, data-discovery]
 ---
@@ -29,9 +29,12 @@ GSC実測で伸びたカテゴリだけ深掘りする方針、`.claude/agents/r
 
 ## 1. スコープ
 
-- 一覧 (getStatsList) はcollectArea 1/2/3 (全国/都道府県/市区町村) すべて
-- 次元台帳 (getMetaInfo) は都道府県+市区町村を全件 (≈12,000表)。全国 (推定20万表超) は
-  初回runで実件数を見てから対象を決める (§6)
+- 一覧 (getStatsList) はcollectAreaで絞らず全表 (2026-11-02 実測 238,822表)。collectArea=1/2/3 の
+  3回に分けると、集計地域区分が「該当なし」の表 (203,348表・約85%) が漏れる。家計調査は126表すべて、
+  国勢調査は8,732表中4,902表が該当なしで、2026-10-02のカタログには家計調査が1表も無かった。
+  該当なしは `collectArea: "0"` として索引に入れる
+- 次元台帳 (getMetaInfo) は都道府県+市区町村を全件 (≈12,000表) と、`--meta-stat-codes` で指定した
+  調査の全表 (既定は家計調査 `00200561`)。全国・該当なしの全件は取らない (§6)
 - 観測値は対象外。既存の`page-data-batch → app/stats/`経路のまま
 - 索引はR2のみ。ローカルは`.local/estat-catalog/`へpullして検索。gitに大きいJSONを入れない
 
@@ -55,7 +58,7 @@ estat-catalog/
 ### 設計判断
 
 - **collectAreaを索引パスの軸にしない**。既存metric 159表のうち40表はcollectArea=2の一覧に無い
-  (e-Stat側の分類がlossy)。shardは調査コード`statCode`のみ、collectAreaとmeta由来の`areaKind`はfield
+  (都道府県の値を持っていても集計地域区分が「全国」や「該当なし」の表がある)。shardは調査コード`statCode`のみ、collectAreaとmeta由来の`areaKind`はfield
 - **47県判定は全dimを走査する**。都道府県が`area`でなく`cat01/cat02`に入る表があるため、
   01000〜47000 (または47件一致) を持つdimを`prefDim`として記録する
   (実装: `.claude/scripts/lib/estat-catalog/normalize.mjs` `summarizeMeta`)
@@ -78,9 +81,9 @@ estat-catalog/
 
 | サブコマンド | 役割 |
 |---|---|
-| `run [--meta-scope 2,3] [--time-budget-min 150] [--max-meta N] [--dry-run]` | CI用一発。L1全collectArea取得→S3から差分plan→getMetaInfoを時間予算まで→`.local/r2/estat-catalog/`にstaging |
+| `run [--meta-scope 2,3] [--meta-stat-codes 00200561] [--time-budget-min 150] [--max-meta N] [--dry-run]` | CI用一発。L1全collectArea取得→S3から差分plan→getMetaInfoを時間予算まで→`.local/r2/estat-catalog/`にstaging |
 | `pull` | 公開URLからmanifest+索引を`.local/estat-catalog/`へ |
-| `search <語...> [--id <statsDataId>] [--pref-only] [--year 2020] [--collect-area 2]` | pull済み索引をキーワード検索 |
+| `search <語...> [--id <statsDataId>] [--pref-only] [--year 2020] [--collect-area 2]` (0=該当なし) | pull済み索引をキーワード検索 |
 
 lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,normalize,index,s3}.mjs`。
 テスト: `npm run estat:catalog:test` (`node --import tsx --test .claude/scripts/lib/__tests__/estat-catalog.test.mjs`)。
@@ -116,11 +119,12 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 
 `find-metrics` / `ranking-expander` (`ssds-candidates.json`) は今回触らない (§7)。
 
-## 6. 全国 (collectArea=1) の判断基準
+## 6. 全国 (collectArea=1) と該当なし (0) のmeta対象
 
-初回runのL1で実件数がmanifestの`collectAreas.1.tables`に出る。数万件以下なら`meta-scope`に
-1を足す。数十万件なら調査コードallowlist案 (§7) を別途起票する。**この判断は実測後に行う
-(推測で決めない)**。
+2026-11-02 実測で全国22,017表・該当なし203,348表。月150分の時間予算 (1件1〜5秒) では全件のmetaを
+回せないため、調査コードのallowlist (`--meta-stat-codes`、workflow入力 `meta_stat_codes`) で
+必要な調査だけ全表のmetaを取る。調査を足すときはallowlistに加える。meta未取得の表も一覧の行
+(表題・調査・更新日) は索引に入るので、`search`で存在は引ける。
 
 ## 7. スコープ外 (後続カード)
 
