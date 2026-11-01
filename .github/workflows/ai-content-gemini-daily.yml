@@ -245,7 +245,7 @@ jobs:
         shell: bash
         run: |
           if [ -f .local/ci/gemini-run.json ]; then
-            node -e 'const r=require("./.local/ci/gemini-run.json");console.log(`- 実生成: ${r.counters.ok} PASS / ${r.counters.rejected} REJECT / ${r.counters.fail} FAIL`);console.log(`- token: input ${r.usage.inputTokens} / output ${r.usage.outputTokens}`)' >> "$GITHUB_STEP_SUMMARY"
+            node -e 'const r=require("./.local/ci/gemini-run.json");console.log("- 実生成: "+r.counters.ok+" PASS / "+r.counters.rejected+" REJECT / "+r.counters.fail+" FAIL");console.log("- token: input "+r.usage.inputTokens+" / output "+r.usage.outputTokens)' >> "$GITHUB_STEP_SUMMARY"
           fi
           {
             echo "- 対象: ${{ steps.targets.outputs.count || '0' }}"
