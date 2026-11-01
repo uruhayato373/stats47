@@ -14,7 +14,7 @@ export const mandarinConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010610020",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const mandarinConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const mandarinConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "みかん消費量ランキング都道府県【2024年】｜1位和歌山県（13,425g）",
-  "seoDescription": "2024年のみかん消費量の都道府県別ランキング。1位和歌山県（13,425g）、最下位山口県（4,744g）で2.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "みかん消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のみかん消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

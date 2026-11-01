@@ -10,7 +10,15 @@ import { notFound } from 'next/navigation';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
+import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import {
+  CATEGORY_TOPIC_CATALOGS,
+  OTHER_TOPIC_KEY,
+  OTHER_TOPIC_LABEL,
+  resolveTopicKey,
+  toTopicResolutionInput,
+} from '@stats47/data-configs/topics';
 import {
   readRankingItemsBySurveyFromR2,
   readRankingValuesFromR2,
@@ -179,6 +187,9 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title }));
+  const relatedJapanThemes = surveyKey === 'kakei-chousa'
+    ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
+    : [];
   const relatedArticles = await listArticleSummariesBySurveyId(
     surveyKey,
     6
@@ -196,6 +207,12 @@ export default async function SurveyPage({ params }: PageProps) {
     8
   ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
+  const isKakei = surveyKey === 'kakei-chousa';
+  const economyTopics = CATEGORY_TOPIC_CATALOGS.economy;
+  const topicLabels = new Map(
+    economyTopics?.topics.map((topic) => [topic.key, topic.label]) ?? []
+  );
+  topicLabels.set(OTHER_TOPIC_KEY, OTHER_TOPIC_LABEL);
 
   // Hero KPI: 最新年, 代表件数, etc.
   const latestYear =
@@ -207,6 +224,10 @@ export default async function SurveyPage({ params }: PageProps) {
 
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
+    const config = isKakei ? METRICS_REGISTRY[item.rankingKey] : undefined;
+    const topicKey = config && economyTopics
+      ? resolveTopicKey(toTopicResolutionInput(config), economyTopics)
+      : OTHER_TOPIC_KEY;
     return {
       rankingKey: item.rankingKey,
       areaType: 'prefecture',
@@ -220,8 +241,17 @@ export default async function SurveyPage({ params }: PageProps) {
       description: item.description,
       demographicAttr: item.demographicAttr,
       normalizationBasis: item.normalizationBasis,
+      ...(isKakei ? { topicLabel: topicLabels.get(topicKey) ?? OTHER_TOPIC_LABEL } : {}),
     };
   });
+  const availableTopicLabels = new Set(
+    allItems.map((item) => item.topicLabel ?? OTHER_TOPIC_LABEL)
+  );
+  const topicOptions = isKakei
+    ? [...topicLabels.values()]
+        .filter((label) => availableTopicLabels.has(label))
+        .map((label) => ({ value: label, label }))
+    : undefined;
 
   // サイト共通の代表集合を優先しつつ、調査固有のカテゴリ分散フォールバックを持つ。
   // 最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
@@ -274,7 +304,7 @@ export default async function SurveyPage({ params }: PageProps) {
     // 調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
     // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
     latestYear ? `掲載データの最新${latestYear}年` : null,
-    '47都道府県',
+    isKakei ? '主に県庁所在市などの都市別' : '47都道府県',
   ].filter((item): item is string => item !== null);
   const statsText = (
     <span className="flex flex-wrap gap-x-3 gap-y-0.5">
@@ -299,6 +329,9 @@ export default async function SurveyPage({ params }: PageProps) {
       : []),
     ...(relatedThemes.length > 0
       ? [{ href: '#related-themes', label: '関連テーマ' } as const]
+      : []),
+    ...(relatedJapanThemes.length > 0
+      ? [{ href: '#related-japan-themes', label: '日本全国の時系列' } as const]
       : []),
     ...(relatedArticles.length > 0
       ? [{ href: '#related-articles', label: '関連記事' } as const]
@@ -446,6 +479,31 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {relatedJapanThemes.length > 0 && (
+        <section id="related-japan-themes" className="mb-4 scroll-mt-24">
+          <SectionHeader title="日本全国の時系列" />
+          <p className="mb-3 text-sm text-muted-foreground">
+            都市別ランキングと対象地域が異なります。全国の二人以上世帯について、年ごとの変化を確認できます。
+          </p>
+          <SurveyOutboundLinkArea surface="survey_theme">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedJapanThemes.map((theme) => (
+                <SurfaceLinkCard
+                  key={theme.themeSlug}
+                  href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
+                  className="text-sm font-medium text-foreground hover:bg-accent/50"
+                >
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="min-w-0">{theme.title}</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                  </span>
+                </SurfaceLinkCard>
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
       {relatedArticles.length > 0 && (
         <section id="related-articles" className="mb-4 scroll-mt-24">
           <SectionHeader
@@ -482,9 +540,12 @@ export default async function SurveyPage({ params }: PageProps) {
         <SectionHeader
           title={`全${rankingItems.length}件のランキング`}
         />
-        <SurveyOutboundLinkArea surface="survey_ranking">
-          <CategoryRankingTable items={allItems} />
-        </SurveyOutboundLinkArea>
+        {isKakei && (
+          <p className="mb-3 text-sm leading-6 text-muted-foreground">
+            品目名または分類から探せます。各ランキングの年・単位と、対象都市を確認して比較してください。
+          </p>
+        )}
+        <CategoryRankingTable items={allItems} topicOptions={topicOptions} trackingSurface="survey_ranking" />
       </section>
 
       {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。

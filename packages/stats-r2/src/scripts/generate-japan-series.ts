@@ -109,7 +109,26 @@ export function axisParams(config: { source: Record<string, unknown> }): Record<
   return out;
 }
 
-async function fetchEstatRaw(
+/** 家計調査の nested filter も、metric と同じ取得レシピから解決する。 */
+export function officialParams(config: NonNullable<ReturnType<typeof getMetricConfig>>) {
+  if (config.source.kind !== "estat" && config.source.kind !== "kakei-chousa") return undefined;
+  const recipe = buildRecipe(config);
+  const params = recipe.estatParams;
+  // 都市→県の表示写像は公式全国行には不要。それ以外の演算は生の全国行と同一視しない。
+  if (!params || Object.keys(recipe.ops ?? {}).some((key) => key !== "areaRemap")) return undefined;
+  return {
+    statsDataId: params.statsDataId,
+    axes: axisParams({ source: params as unknown as Record<string, unknown> }),
+  };
+}
+
+/** e-Stat の「1kg」「1台」は config の「kg」「台」と同量。倍率1だけを認める。 */
+export function alignEstatUnit(rawUnit: string | null | undefined, expectedUnit: string): string | null | undefined {
+  if (rawUnit?.normalize("NFKC") === `1${expectedUnit.normalize("NFKC")}`) return expectedUnit;
+  return rawUnit;
+}
+
+export async function fetchEstatRaw(
   statsDataId: string,
   axes: Record<string, string>,
 ): Promise<EstatStatsDataResponse> {
@@ -118,25 +137,38 @@ async function fetchEstatRaw(
   const dispatcher = proxyUrl
     ? new (await import("undici")).ProxyAgent(proxyUrl)
     : undefined;
-  const query = new URLSearchParams({
-    appId,
-    statsDataId,
-    limit: "1000",
-    ...axes,
-  });
-  const url = `${ESTAT_API.BASE_URL}/app/json/getStatsData?${query}`;
-  const fetchOptions: RequestInit & { dispatcher?: unknown } = {
-    signal: AbortSignal.timeout(30_000),
-  };
-  if (dispatcher) fetchOptions.dispatcher = dispatcher;
-  const res = await fetch(url, fetchOptions);
-  if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
-  const body = (await res.json()) as EstatStatsDataResponse;
-  const status = body?.GET_STATS_DATA?.RESULT?.STATUS;
-  if (status !== 0) {
-    throw new Error(`e-Stat error: ${body?.GET_STATS_DATA?.RESULT?.ERROR_MSG ?? status}`);
+  let first: EstatStatsDataResponse | undefined;
+  const values: unknown[] = [];
+  let startPosition = 1;
+  for (let page = 0; page < 100; page++) {
+    const query = new URLSearchParams({
+      appId, statsDataId, limit: "100000", startPosition: String(startPosition), ...axes,
+    });
+    const url = `${ESTAT_API.BASE_URL}/app/json/getStatsData?${query}`;
+    const fetchOptions: RequestInit & { dispatcher?: unknown } = {
+      signal: AbortSignal.timeout(60_000),
+    };
+    if (dispatcher) fetchOptions.dispatcher = dispatcher;
+    const res = await fetch(url, fetchOptions);
+    if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
+    const body = (await res.json()) as EstatStatsDataResponse;
+    const status = body?.GET_STATS_DATA?.RESULT?.STATUS;
+    if (status !== 0) throw new Error(`e-Stat error: ${body?.GET_STATS_DATA?.RESULT?.ERROR_MSG ?? status}`);
+    first ??= body;
+    const raw = body.GET_STATS_DATA.STATISTICAL_DATA.DATA_INF.VALUE;
+    values.push(...(Array.isArray(raw) ? raw : [raw]));
+    const info = body.GET_STATS_DATA.STATISTICAL_DATA as typeof body.GET_STATS_DATA.STATISTICAL_DATA & {
+      RESULT_INF?: { NEXT_KEY?: number | string };
+    };
+    const next = Number(info.RESULT_INF?.NEXT_KEY);
+    if (!Number.isFinite(next) || next === 0) {
+      first.GET_STATS_DATA.STATISTICAL_DATA.DATA_INF.VALUE = values as typeof raw;
+      return first;
+    }
+    if (next <= startPosition) throw new Error(`e-Stat pagination did not advance: ${next}`);
+    startPosition = next;
   }
-  return body;
+  throw new Error(`e-Stat pagination exceeded 100 pages: ${statsDataId}`);
 }
 
 const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
@@ -195,11 +227,11 @@ export async function generateOneMetric(
   let sourceId: string;
 
   if (sourceMode === "official") {
-    if (config.source.kind !== "estat") {
+    const official = officialParams(config);
+    if (!official) {
       return { ok: false, metricKey, reason: `officialでは扱えないsource.kind: ${config.source.kind}` };
     }
-    const statsDataId = config.source.statsDataId;
-    const axes = axisParams(config as unknown as { source: Record<string, unknown> });
+    const { statsDataId, axes } = official;
     const response = await fetchEstatRaw(statsDataId, axes);
     const formatted = formatStatsData(response);
     const schema = formatted.values
@@ -211,7 +243,7 @@ export async function generateOneMetric(
         yearCode: row.yearCode,
         yearName: row.yearName,
         value: row.value,
-        unit: row.unit,
+        unit: alignEstatUnit(row.unit, config.unit),
       }));
     built = buildJapanSeriesRows(nationalRaw, config.unit);
     recipeHashInput = { statsDataId, axes, areaCode: JAPAN_NATIONAL_AREA_CODE };

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
 import { JAPAN_CATALOGS, getJapanCatalogTheme, listJapanCatalogThemes } from "../japan-catalog";
+import { KAKEI_JAPAN_CATALOGS } from "../kakei-japan-catalog";
 
 describe("JAPAN_CATALOGS (GEO-SCOPE-SEPARATION-01 WP4)", () => {
   it("catalog は空ではない (education-culture pilot が採用されている)", () => {
@@ -44,5 +45,20 @@ describe("JAPAN_CATALOGS (GEO-SCOPE-SEPARATION-01 WP4)", () => {
 
   it("getJapanCatalogTheme: 登録済みスラッグは正しいテーマを返す", () => {
     expect(getJapanCatalogTheme("education-culture")?.title).toBe("教育・文化");
+  });
+});
+
+describe("家計調査の全国時系列", () => {
+  it("検証した60系列を7つの主題に一度ずつ配置する", () => {
+    const themes = Object.values(KAKEI_JAPAN_CATALOGS);
+    const keys = themes.flatMap(theme => theme.metrics.map(metric => metric.metricKey));
+    expect(themes).toHaveLength(7);
+    expect(keys).toHaveLength(60);
+    expect(new Set(keys).size).toBe(keys.length);
+    for (const key of keys) {
+      const config = getMetricConfig(key);
+      expect(config?.source.kind, key).toBe('kakei-chousa');
+      expect(typeof config?.years === 'object' && 'to' in config.years ? config.years.to : 0, key).toBe(2025);
+    }
   });
 });

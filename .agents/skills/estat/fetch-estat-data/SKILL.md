@@ -35,80 +35,20 @@ e-Stat API から指定カテゴリのランキングデータを取得する。
 
 ### Phase 1: データ取得
 
-1. 一時スクリプトでデータを取得・整形:
+1. 共通 API で取得する。`statsDataId`、`cdCat01`、必要な `cdCat02`・`cdTime` などを指定し、返った地域コード・単位をメタデータと照合する。家計調査の県庁所在市に `lvArea=2` を付けない。
 
-```js
-// scripts/temp-fetch-ranking.mjs
-import fs from "fs";
-import path from "path";
-import { config } from "dotenv";
-import { ProxyAgent } from "undici";
-config({ path: path.resolve(process.cwd(), ".env.local") });
-
-const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
-
-async function fetchEstat(params) {
-  const sp = new URLSearchParams({ appId, lang: "J", ...params });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${sp}`;
-  const res = await fetch(url, fetchOpts);
-  const json = await res.json();
-  return json.GET_STATS_DATA?.STATISTICAL_DATA;
-}
-
-// --- ここを案件ごとにカスタマイズ ---
-const statData = await fetchEstat({
-  statsDataId: "<ID>",
-  cdCat01: "<CODE>",
-  lvArea: "2",
-});
-
-const classObjs = [].concat(statData.CLASS_INF.CLASS_OBJ);
-const values = [].concat(statData.DATA_INF.VALUE);
-
-// areaMap
-const areaMap = new Map();
-for (const obj of classObjs) {
-  if (obj["@id"] === "area") {
-    for (const c of [].concat(obj.CLASS)) areaMap.set(c["@code"], c["@name"]);
-  }
-}
-
-// 実データの最新年を取得
-const times = [...new Set(values.map(v => v["@time"]))].sort().reverse();
-const latestTime = times[0];
-const yearCode = latestTime.slice(0, 4);
-
-// 都道府県フィルタ + ランク付け
-const prefData = values
-  .filter(v => v["@time"] === latestTime && /^\d{2}000$/.test(v["@area"]) && v["@area"] !== "00000")
-  .map(v => ({ areaCode: v["@area"], areaName: areaMap.get(v["@area"]), value: Number(v.$) }))
-  .filter(v => !isNaN(v.value))
-  .sort((a, b) => b.value - a.value);
-
-let rank = 1;
-for (let i = 0; i < prefData.length; i++) {
-  if (i > 0 && prefData[i].value !== prefData[i - 1].value) rank = i + 1;
-  prefData[i].rank = rank;
-}
-
-const result = {
-  rankingKey: "<RANKING_KEY>",
-  yearCode,
-  yearName: yearCode + "年度",
-  categoryName: "<CATEGORY_NAME>",
-  unit: "<UNIT>",
-  data: prefData,
-};
-
-const outputPath = "<OUTPUT_PATH>";
-fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-console.log(`Saved: ${outputPath} (${prefData.length} prefectures)`);
+```bash
+node --input-type=module - '{"statsDataId":"<ID>","cdCat01":"<CODE>","cdTime":"<TIME>"}' <<'JS'
+import { fetchStatsData } from "./.claude/scripts/lib/estat-catalog/api.mjs";
+const json = await fetchStatsData(JSON.parse(process.argv[2]));
+const stat = json.GET_STATS_DATA.STATISTICAL_DATA;
+const values = [].concat(stat.DATA_INF.VALUE);
+console.log(`rows=${values.length}`);
+console.log(JSON.stringify(values.slice(0, 5), null, 2));
+JS
 ```
 
-2. スクリプトの `<...>` プレースホルダーを実パラメータに置換して実行
+ランキング用 JSON を作る場合は、取得した `VALUE` から対象年・地域・世帯区分を選び、`/fetch-estat-data` の出力形式に整形する。一時成果物は `/tmp/` に置く。
 
 ### Phase 2: 検証
 
@@ -119,8 +59,7 @@ console.log(`Saved: ${outputPath} (${prefData.length} prefectures)`);
 
 ### Phase 3: 後処理
 
-4. 一時スクリプトを削除
-5. 取得結果のサマリーをユーザーに報告
+4. 取得結果のサマリーをユーザーに報告
 
 ## 出力形式
 
@@ -158,23 +97,14 @@ for (const v of values.filter(v => v["@time"] === latestTime)) {
 }
 ```
 
-## クロスプラットフォーム注意事項
+## クロスプラットフォーム
 
-このスキルは Windows / macOS 両環境で使用される。
-
-| 項目 | Windows | macOS |
-|---|---|---|
-| プロキシ制約 | あり（企業ネットワーク、`undici.ProxyAgent` 必須） | なし（自宅ネットワーク） |
-| `ProxyAgent` import | 必須（`HTTP_PROXY` / `HTTPS_PROXY` 環境変数から検出） | 不要（環境変数が未設定なら自動スキップ） |
-
-スクリプトテンプレートの `ProxyAgent` 処理は環境変数の有無で自動判定するため、**コード変更は不要**。
+共通 API が `HTTP_PROXY` / `HTTPS_PROXY` を検出する。
 
 ## 注意
 
-- **プロキシ**: 企業ネットワークでは `undici` の `ProxyAgent` が必須（スクリプトテンプレートが自動検出する）
 - **時間コード**: メタデータの最新年と実データの最新年は異なる場合がある。必ず実データ側の年で判定する
 - **カテゴリ名の接頭辞**: e-Stat のカテゴリ名は `"J250502_保育所等利用待機児童数"` のようにコード接頭辞がつく。`.replace(/^[A-Z]\d+_/, "")` で除去
-- **環境変数**: `NEXT_PUBLIC_ESTAT_APP_ID` が `.env.local` に設定されていること
 - **レートリミット**: e-Stat API は公称 60req/min。大量取得時は間隔を空ける
 
 ## データ鮮度の落とし穴（取得前に必ず確認）

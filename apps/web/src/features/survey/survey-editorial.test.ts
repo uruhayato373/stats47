@@ -22,6 +22,18 @@ describe('getSurveyEditorialContent', () => {
     expect(content?.caveats.length).toBeGreaterThan(0);
   });
 
+  it('家計調査は検索流入上位の品目と集計期間の違いを案内する', () => {
+    const content = getSurveyEditorialContent('kakei-chousa');
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'natto-consumption-expenditure',
+      'rice-consumption-quantity',
+      'green-tea-consumption-quantity',
+      'cup-noodles-consumption-expenditure',
+      'beef-consumption-quantity',
+    ]);
+    expect(content?.caveats).toContainEqual(expect.stringContaining('3年平均'));
+  });
+
   it('賃金構造基本統計調査の編集情報を返す', () => {
     const content = getSurveyEditorialContent('wage-structure-survey');
 

@@ -15,7 +15,7 @@ export const educationExpenditureTotal: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "080000000",
       "cdCat02": "03",
     },
@@ -27,7 +27,7 @@ export const educationExpenditureTotal: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {

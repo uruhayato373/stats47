@@ -138,15 +138,16 @@ export function readAppId(): string {
   if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) {
     return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
   }
-  const envPath = resolve(REPO_ROOT, ".env.local");
-  if (existsSync(envPath)) {
+  for (const envFile of [".env.local", "apps/web/.env.development"]) {
+    const envPath = resolve(REPO_ROOT, envFile);
+    if (!existsSync(envPath)) continue;
     const line = readFileSync(envPath, "utf8")
       .split("\n")
       .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
     const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
     if (id) return id;
   }
-  throw new Error("NEXT_PUBLIC_ESTAT_APP_ID not set (process.env nor .env.local)");
+  throw new Error("NEXT_PUBLIC_ESTAT_APP_ID not set (process.env, .env.local, apps/web/.env.development)");
 }
 
 /** R2 file 最終更新時刻を取得 (since フィルタ用) */

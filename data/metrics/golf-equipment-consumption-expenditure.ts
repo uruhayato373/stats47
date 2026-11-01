@@ -14,7 +14,7 @@ export const golfEquipmentConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "090202010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const golfEquipmentConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const golfEquipmentConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ゴルフ用具消費支出額ランキング都道府県【2024年】｜1位茨城県（3,767円）",
-  "seoDescription": "2024年のゴルフ用具消費支出額の都道府県別ランキング。1位茨城県（3,767円）、最下位青森県（16円）で235.4倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "ゴルフ用具消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のゴルフ用具消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

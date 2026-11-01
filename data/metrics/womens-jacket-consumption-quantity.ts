@@ -14,7 +14,7 @@ export const womensJacketConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "050220020",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const womensJacketConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const womensJacketConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "婦人用上着消費量ランキング都道府県【2024年】｜1位山梨県（0.43着）",
-  "seoDescription": "2024年の婦人用上着消費量の都道府県別ランキング。1位山梨県（0.43着）、最下位和歌山県（0.12着）で3.7倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "婦人用上着消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の婦人用上着消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

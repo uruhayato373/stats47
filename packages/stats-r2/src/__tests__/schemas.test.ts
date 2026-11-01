@@ -2,10 +2,32 @@ import { buildRecipe } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import {
+  parseKakeiAxisArtifact,
   parseJapanSeriesArtifact,
   parseMigrationFlowPayload,
   parseStatsValuesPayload,
 } from "../schemas";
+
+describe("parseKakeiAxisArtifact", () => {
+  const chart = {
+    id: "food-income-quintile", themeSlug: "household-food-spending", title: "食費", description: "1か月平均",
+    sourceId: "0002070005", household: "二人以上世帯", axis: "年収五分位", period: "monthly-average",
+    unit: "円", filters: { cdCat01: "060", cdCat02: "03", cdTime: "2025000000", cdArea: "00000" },
+    rows: [{ code: "01", label: "年収五分位1", value: 70883 }],
+  };
+  const artifact = { schemaVersion: 1, year: 2025, geographyScope: "japan", charts: [chart], meta: { generatedAt: "2026-11-01T00:00:00Z" } };
+
+  it("2025年の全国・月平均の比較を読む", () => {
+    expect(parseKakeiAxisArtifact(artifact).charts[0].period).toBe("monthly-average");
+  });
+  it("期間の区別が欠けた値を拒否する", () => {
+    expect(() => parseKakeiAxisArtifact({ ...artifact, charts: [{ ...chart, period: undefined }] })).toThrow("invalid kakei period");
+  });
+  it("軸ごとの欠測や重複図を拒否する", () => {
+    expect(() => parseKakeiAxisArtifact({ ...artifact, charts: [{ ...chart, rows: [{ ...chart.rows[0], value: NaN }] }] })).toThrow("invalid kakei value");
+    expect(() => parseKakeiAxisArtifact({ ...artifact, charts: [chart, chart] })).toThrow("duplicate kakei chart");
+  });
+});
 
 const statsPayload = {
   metricKey: "population",

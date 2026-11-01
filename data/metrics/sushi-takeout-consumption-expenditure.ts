@@ -14,7 +14,7 @@ export const sushiTakeoutConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "010910020",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const sushiTakeoutConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const sushiTakeoutConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "すし(弁当)消費支出額ランキング都道府県【2024年】｜1位奈良県（19,518円）",
-  "seoDescription": "2024年のすし(弁当)消費支出額の都道府県別ランキング。1位奈良県（19,518円）、最下位秋田県（11,798円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "すし(弁当)消費支出額ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のすし(弁当)消費支出額を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

@@ -178,7 +178,7 @@
     "evidence:diff": "tsx scripts/evidence/japan-zue.ts diff",
     "metrics:generate-schema": "tsx scripts/generate-metric-schema.ts",
     "metrics:build-index": "tsx scripts/check-metric-contract.ts --write-index",
-    "metrics:check": "tsx scripts/check-metric-contract.ts"
+    "metrics:check": "tsx scripts/check-metric-contract.ts && tsx scripts/check-kakei-analysis-catalog.ts"
   },
   "dependencies": {
     "@stats47/area": "*",

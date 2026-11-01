@@ -14,7 +14,7 @@ export const jamConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010720100",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const jamConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const jamConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ジャム消費量ランキング都道府県【2024年】｜1位和歌山県（1,639g）",
-  "seoDescription": "2024年のジャム消費量の都道府県別ランキング。1位和歌山県（1,639g）、最下位高知県（553g）で3.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "ジャム消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のジャム消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

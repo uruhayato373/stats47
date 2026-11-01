@@ -68,7 +68,7 @@ npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run
   (`/notebooklm-research` の「新規記事の調査段」)
 - Gemini 無料枠で書く: `--author gemini-api` (critic は claude のまま推奨)。run の最初に極小の実生成で
   鍵を確かめ、HTTP 402 / クレジット枯渇は billing として止まる。鍵は課金を付けていない project のものを
-  `.env.local` の `GEMINI_API_KEY` に置く (`.claude/todo/backlog.md` の BLOG-GEMINI-AUTHOR-01)
+  `.env.local` の `GEMINI_API_KEY` に置き、実行時は `DOTENV_CONFIG_PATH=.env.local npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --author gemini-api --critic claude-sonnet --limit 3` とする。GitHub Secret はローカル CLI から読めない (`.claude/todo/backlog.md` の BLOG-GEMINI-AUTHOR-01)
 - 実測 (2026-10-28・型B 3・A 1・D2 1): 15 回の run で 5 本。1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27 (API 換算)・70〜140 秒。決定的ゲートは 1 回目で 13/15 通過。審査の基準を blog-critic に揃えた後の最終 run は 2/4 PASS・PASS 1 本 $0.32 (Agent tool 経路の約 1/25)。残る差し戻しは地理の誤り (隣接県・地方区分) と題の約束不足が多い。詳細は `.claude/todo/backlog.md` の BLOG-HEADLESS-AUTHOR-01
 
 以下の手順 1〜4 は Agent tool で書く旧経路 (headless が使えないときの代替)。5〜6 はどちらの経路でも共通。

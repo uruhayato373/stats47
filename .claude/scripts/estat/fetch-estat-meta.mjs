@@ -6,7 +6,7 @@
  * ための素材。多次元クロス集計テーブルの各次元 (cat01/cat02/.../area/time) とその値一覧を
  * 人 (LLM) が読んで意味あるスライスを選抜する。
  *
- * e-Stat APP_ID は CI 専任 (vars.NEXT_PUBLIC_ESTAT_APP_ID)。R2/D1 は書かない read-only。
+ * e-Stat appId は共通 API が CI の Repository Variable またはローカル設定から読む。
  *
  * Usage:
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --list <statsids.json>
@@ -19,23 +19,17 @@
  * 更新日が変わった表について `--full --no-summary` で呼ぶ。
  */
 
-import { config } from "dotenv";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { getAppId } from "../lib/estat-catalog/api.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
-config({ path: path.join(PROJECT_ROOT, ".env.local") });
-
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-if (!APP_ID) {
-  console.error("❌ NEXT_PUBLIC_ESTAT_APP_ID 未設定 (CI: secrets)");
-  process.exit(1);
-}
+const APP_ID = getAppId();
 
 const args = process.argv.slice(2);
 function argVal(flag) {

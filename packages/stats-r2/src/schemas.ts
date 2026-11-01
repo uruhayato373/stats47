@@ -1,6 +1,8 @@
 import { parseRecipe } from "@stats47/data-configs";
 
 import type {
+  KakeiAxisArtifact,
+  KakeiAxisChart,
   JapanSeriesArtifact,
   JapanSeriesRow,
   JapanSourceMode,
@@ -17,6 +19,38 @@ const JAPAN_SOURCE_MODES = new Set<JapanSourceMode>([
 ]);
 
 const ENTITY_KINDS = new Set(["prefecture", "city", "port"]);
+
+export function parseKakeiAxisArtifact(value: unknown): KakeiAxisArtifact {
+  if (!isRecord(value) || value.schemaVersion !== 1 || value.year !== 2025 || value.geographyScope !== "japan" || !Array.isArray(value.charts)) {
+    throw new Error("invalid kakei axis artifact header");
+  }
+  if (!isRecord(value.meta) || typeof value.meta.generatedAt !== "string") throw new Error("invalid kakei axis generatedAt");
+  const ids = new Set<string>();
+  const charts = value.charts.map((chart, index) => {
+    if (!isRecord(chart) || !Array.isArray(chart.rows) || !isRecord(chart.filters)) throw new Error(`invalid kakei chart ${index}`);
+    const id = assertString(chart.id, `charts[${index}].id`);
+    if (ids.has(id)) throw new Error(`duplicate kakei chart: ${id}`);
+    ids.add(id);
+    const rows = chart.rows.map((row, rowIndex) => {
+      if (!isRecord(row) || typeof row.value !== "number" || !Number.isFinite(row.value)) throw new Error(`invalid kakei value ${index}:${rowIndex}`);
+      return { code: assertString(row.code, "code"), label: assertString(row.label, "label"), value: row.value };
+    });
+    if (rows.length === 0) throw new Error(`empty kakei chart: ${id}`);
+    if (chart.period !== "monthly-average" && chart.period !== "annual-total" && chart.period !== "balance") throw new Error(`invalid kakei period: ${id}`);
+    const filters = Object.fromEntries(Object.entries(chart.filters).map(([key, filter]) => [key, assertString(filter, `filter.${key}`)]));
+    const sourceIds = chart.sourceIds === undefined ? undefined :
+      Array.isArray(chart.sourceIds) && chart.sourceIds.length > 0
+        ? chart.sourceIds.map((sourceId, sourceIndex) => assertString(sourceId, `sourceIds[${sourceIndex}]`))
+        : (() => { throw new Error(`invalid kakei sources: ${id}`); })();
+    return {
+      id, themeSlug: assertString(chart.themeSlug, "themeSlug"), title: assertString(chart.title, "title"),
+      description: assertString(chart.description, "description"), sourceId: assertString(chart.sourceId, "sourceId"), sourceIds,
+      household: assertString(chart.household, "household"), axis: assertString(chart.axis, "axis"), period: chart.period as KakeiAxisChart["period"],
+      unit: assertString(chart.unit, "unit"), filters, rows,
+    };
+  });
+  return { schemaVersion: 1, year: 2025, geographyScope: "japan", charts, meta: { generatedAt: value.meta.generatedAt } };
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);

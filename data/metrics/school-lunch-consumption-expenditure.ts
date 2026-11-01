@@ -14,7 +14,7 @@ export const schoolLunchConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0004023605",
       "cdCat01": "011220001",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const schoolLunchConsumptionExpenditure: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {

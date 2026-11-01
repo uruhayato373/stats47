@@ -19,7 +19,7 @@ function columnLabel<TData>(column: Column<TData, unknown>): string {
     return typeof column.columnDef.header === "string" ? column.columnDef.header : column.id;
 }
 
-function SelectColumnFilter<TData>({ column }: { column: Column<TData, unknown> }) {
+function SelectColumnFilter<TData>({ column, table }: { column: Column<TData, unknown>; table: Table<TData> }) {
     const filterOptions = column.columnDef.meta?.filterOptions;
     const facetedValues = column.getFacetedUniqueValues();
 
@@ -47,7 +47,10 @@ function SelectColumnFilter<TData>({ column }: { column: Column<TData, unknown> 
                 aria-label={columnLabel(column)}
                 triggerClassName={DATA_TABLE_STYLES.selectTrigger}
                 contentClassName={DATA_TABLE_STYLES.selectContent}
-                onValueChange={(next) => column.setFilterValue(next === ALL_VALUE ? "" : next)}
+                onValueChange={(next) => {
+                    column.setFilterValue(next === ALL_VALUE ? "" : next);
+                    table.setPageIndex(0);
+                }}
             />
         </div>
     );
@@ -71,7 +74,7 @@ export function DataTableToolbar<TData>({
                 {filterableColumns.map((column) => {
                     const meta = column.columnDef.meta;
                     if (meta?.filterType === "select") {
-                        return <SelectColumnFilter key={column.id} column={column} />;
+                        return <SelectColumnFilter key={column.id} column={column} table={table} />;
                     }
                     // テキストフィルター
                     const rawValue = column.getFilterValue();
@@ -81,7 +84,10 @@ export function DataTableToolbar<TData>({
                             <Input
                                 placeholder={meta?.filterPlaceholder || "フィルター..."}
                                 value={typeof rawValue === "string" ? rawValue : ""}
-                                onChange={(event) => column.setFilterValue(event.target.value)}
+                                onChange={(event) => {
+                                    column.setFilterValue(event.target.value);
+                                    table.setPageIndex(0);
+                                }}
                                 className={DATA_TABLE_STYLES.textInput}
                             />
                         </div>

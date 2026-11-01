@@ -14,7 +14,7 @@ export const freshUdonSobaConsumptionQuantity: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348235",
+      "statsDataId": "0004023606",
       "cdCat01": "010130010",
       "cdCat02": "03",
     },
@@ -26,7 +26,7 @@ export const freshUdonSobaConsumptionQuantity: MetricConfig = {
   ],
   "years": {
     "from": 2007,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -58,7 +58,7 @@ export const freshUdonSobaConsumptionQuantity: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "生うどん・そば消費量1位は香川16,788g、沖縄の3.8倍｜47都道府県2024",
-  "seoDescription": "うどん県・香川の生うどん/そば消費量は1位16,788gで圧倒、最下位沖縄(4,378g)まで3.8倍差。47都道府県を地図とグラフで比較する2024年最新ランキング。",
+  "seoTitle": "生うどん・そば消費量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の生うどん・そば消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

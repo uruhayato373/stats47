@@ -263,13 +263,12 @@ quarantine は持たない。
 
 ### Gemini 無料枠の日次 CI を正典にする
 
-> **2026-10-11 から定期実行を停止中。** 導入 (2026-08-30) から 48 run 中 44 run が preflight の billing / HTTP 402 で止まり、
-> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。2026-10-26 のオーナー判断で Gemini の経路はやめた
-> (workflow は手動起動だけ残す)。未生成 (2026-10-11 時点で 363 件) は
-> 次節の headless `claude -p` 経路で、量と時期を週次・月次計画で決めて消化する。
+> **2026-11-01 のオーナー指示で無料枠経路を再採用。** 以前のキーは 48 run 中 44 run が billing / HTTP 402 で止まり、
+> 解説を 1 件も生成していなかった (`data/ai-content/history.csv`)。新しい無料枠キーで1件の実生成・監査・審査が通るまで、
+> 日次 job は repository variable `GEMINI_FREE_TIER_VERIFIED` で skip する。手動確認は `verify_only=true` で行い、git/R2 へ公開しない。
 
-`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (上の停止中を除く)。既定 3 件、並列数 1、
-`gemini-2.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
+`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する (無料枠確認までは skip)。既定 3 件、並列数 1、
+`gemini-3.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。2026-11-01 の無料枠キーでは `gemini-2.5-flash-lite` が structured 実生成で HTTP 404 だったため切り替えた。実行経路は次の通り。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
 2. 極小の structured generateContent で preflight する。ListModels は失敗時の候補提示にしか使わない。
@@ -374,7 +373,7 @@ $ は約 1/17、トークンは約 1/120。本日通算 (実験込み・10 run):
 08-20 の run は `rate_limit_event: 1` を記録し、turns も cost も平常の 1/3 で途中終了した
 (最終メッセージ「I'll wait for it to complete before proceeding」)。
 
-**当時の暂定運用** (現在は 2026-08-30 の Gemini 日次 CI が正典):
+**当時の暫定運用** (現在は無料枠確認後の Gemini 日次 CI が正典):
 
 1. **月次計画 (`.claude/todo/monthly.md`) が月間の本数目標を持つ。** 対話セッションの
    1 件あたり消費は測っていないので、控えめに置いて翌月に実績で見直す。
@@ -420,7 +419,7 @@ push トリガーは**発火しない**。初めて生成が成功した回に 2
 |---|---|
 | 生成 | `--model gemini-api` (`packages/ai-content/src/services/gemini-text-client.ts`)。**CLI 非依存**。CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない |
 | 認証 | `GEMINI_API_KEY` (GitHub Secrets 専任。画像生成と共用) |
-| **モデル** | 既定は `gemini-text-client.ts` の `GEMINI_TEXT_MODEL`。**リポジトリ変数 `GEMINI_TEXT_MODEL` で上書きできる** (提供終了時にコード変更 + デプロイを待たず復旧するため) |
+| **モデル** | 日次 CI は workflow 内の pinned `GEMINI_TEXT_MODEL`。手動 CLI は `gemini-text-client.ts` の既定値を使い、環境変数で上書きできる。変更時はモデル名を review し、同じ無料枠キーで実生成 preflight と1件審査を通す |
 | 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す。**★この 40 はクォータ実測に基づいていない** (下記) |
 | 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
 | 費用 | flash 系に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
@@ -504,10 +503,10 @@ ListModels の一覧照合だけで作ったところ、`gemini-2.5-flash` は**
 **モデル選定 (2026-07-31 に `gemini-2.5-flash` → `gemini-3.5-flash`)**: 既定は **pinned なモデル名**にする。
 `gemini-flash-latest` のような浮動 alias は 404 を避けられる代わりに**品質もコストも黙って変わる**。
 提供終了は preflight が実生成で必ず検出するので、pinned でも気づけないまま止まることはない。
-lite ではなく flash (47 県の解説を書かせるため)、preview / experimental は使わない。
+47 県の解説を含むため、lite の品質が足りなければ独立審査の REVISE 率を見て flash を再検討する。preview / experimental は使わない。
 
 候補は**提案であって自動選択ではない** (勝手に別モデルへ切り替えると品質もコストも黙って変わる)。
-復旧はリポジトリ変数 `GEMINI_TEXT_MODEL` に実在モデルを設定するか、`GEMINI_TEXT_MODEL` 既定値を更新する。
+復旧は pinned `GEMINI_TEXT_MODEL` を更新し、実生成 preflight と1件審査を再実行する。
 
 **HTTP status での切り分け** (実測 2026-07-30): 無効キーは **400** (`API_KEY_INVALID`) を返す。
 したがって **404 が出たらキーではなくモデル名**を疑う。400 / 401 / 403 のときはキーか
@@ -533,7 +532,7 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 | 工程 | 担当 | 成果物 |
 |---|---|---|
 | 仕様・基準設計 / effect 判定 | ranking-content-author / improvement-triage | 仕様・判定 |
-| 日次解説生成 | Gemini API author (`gemini-2.5-flash-lite`) | ai-content.json 候補 |
+| 日次解説生成 | Gemini API author (`gemini-3.5-flash-lite`) | ai-content.json 候補 |
 | 日次意味レビュー | 別リクエストの Gemini critic | PASS / REVISE JSON |
 | quarantine ・高流入キーの例外是正 | `ranking-content-author` + `ranking-content-critic` | ai-content.json・手動レビュー |
 | 数値照合・文字数床・リンク数 | 決定的スクリプト (audit-ai-content.mjs) | gate 結果 |
