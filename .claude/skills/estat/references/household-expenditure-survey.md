@@ -1,16 +1,33 @@
-# 家計調査 — 品目分類別都道府県庁所在市データ
+# 家計調査 — 地域・時系列・収入階級の表と分析軸
 
 調査: 家計調査 家計収支編 二人以上の世帯（総務省, 年次更新）
+
+## 2025年の表・軸インベントリ（2026-11-01 公式 Excel を照合）
+
+| 分析軸 | 2025年の表 | 地域・世帯 | 時間・項目 | この軸で見せる図 |
+|---|---|---|---|---|
+| 品目の長期推移 | 年報 [6-1（支出額）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=4&statInfId=000040424632)・[6-2（購入数量）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=4&statInfId=000040424635) | 全国・二人以上世帯 | 2000〜2025年の単年、品目別。品目によって途中年は `...` | 支出額と数量を別軸にした折れ線、比較年の差分 |
+| 都市ごとの品目比較 | 年報 [7-1（支出額）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=4&statInfId=000040424636)・[7-2（購入数量）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=4&statInfId=000040424639)、詳細結果表 [4-1](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040409546) | 県庁所在市47市＋一部政令指定都市・二人以上世帯。4-1は勤労・無職世帯の全国値も収録 | 2025年単年。4-1は支出額・購入数量・平均価格・購入頻度 | 順位棒、都市差のドットプロット。県名で表示する場合は「県庁所在市の値」と明記 |
+| 年間収入階級 | 詳細結果表 [4-2](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040409547) | 全国・二人以上世帯または勤労者世帯。都市別の列は無い | 2025年単年、200万円未満からの年収帯別に品目の支出額・購入数量・平均価格・購入頻度 | 幅の異なる年収帯をカテゴリとして並べるドット図。品目ごとの構成比は別に計算・検算 |
+| 年間収入五分位 | 詳細結果表 [4-3](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040409548) | 全国・二人以上世帯または勤労者世帯。都市別の列は無い | 2025年単年、平均と第I〜V階級、支出額・購入数量・平均価格・購入頻度が別シート | 五分位の並列棒、費目構成比の100%積み上げ棒 |
+| 年間収入と貯蓄・負債 | 貯蓄・負債編 [8-1（都市）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040456238)・[8-2（収入階級）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040456239)・[8-3（五分位・十分位）](https://www.e-stat.go.jp/stat-search/file-download?fileKind=0&statInfId=000040456240) | 8-1は全国・地方・県庁所在市など、8-2/8-3は全国。二人以上世帯と勤労者世帯は別シート | 2025年単年の年間収入（万円）・貯蓄/負債現在高（万円）。時系列には過去年表の追加照合が必要 | 年収推移は年別折れ線、2025年の貯蓄/負債と収入は別軸の並列図 |
+
+- **存在しない交差軸**: 家計調査は都道府県全体の結果を集計しておらず、4-2/4-3にも都市×収入階級の列は無い。県別所得格差や「高所得者が多い都市ほど〇〇を買う」という地域×階級の結論には使わない。地域と所得を同時に比べたいなら、別調査の実在表を探してから企画する。[総務省の説明](https://www.stat.go.jp/data/kakei/search/before.htm)。
+- **真の都道府県別年収**: 別調査の令和6年[全国家計構造調査・時系列表3-1](https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004062104) は、都道府県別の1世帯当たり年間収入額を収録する (`statsDataId=0004062104`)。家計調査の県庁所在市値と同じ母集団・年次として混ぜず、県別比較を作るなら別の出典・ページ責務で扱う。
+- **期間・単位**: 品目分類の年次表は年間合計、用途分類の年次表は月平均。全国の時系列と都市の単年値、年収階級と五分位、二人以上世帯と勤労者世帯を同じ系列として接続しない。[総務省の説明](https://www.stat.go.jp/data/kakei/search/before.htm)。
+- **収入の意味**: 貯蓄・負債編の「年間収入」（万円）と、家計収支編の「実収入」「可処分所得」（1か月平均、円）は別系列。単純に同じ年収推移として連結しない。[総務省のFAQ](https://www.stat.go.jp/library/faq/faq19/faq19a04.html)。4-3の五分位は世帯主年齢と世帯人員も大きく異なるため、支出差を収入だけの効果と書かない。
+- **2025年改定**: 2025年1月に収支項目分類が改定された。旧 e-Stat `statsDataId` と `cdCat01` のまま年だけ2025へ伸ばさない。対象品目の定義・新旧対応と年別の欠測を照合する。[改定案内](https://www.stat.go.jp/data/kakei/change2025.html)。
+- **API メタデータの残り**: 上表は公式 Excel の列・シート・年・単位から確認した取得可能性。現行 `.local/estat-catalog` の公開索引には家計調査 `00200561` がなく、この作業環境にも e-Stat appId が無いため、2025年の `getMetaInfo` による `statsDataId`、`cat01〜`、`area`、`time` の全コード検査は未了。投入の前に `/inspect-estat-meta` で対象表を確定する。
+- **分析の順序**: ①表ID・分類コード・世帯・地域・期間・単位・欠測を確定 ②読者の問いと GSC 需要を照合 ③その軸に合う図を選ぶ ④数値と出典を確かめた説明をランキング・テーマ・ブログへ置く。参考書の `data/source-inventory/kakei-marketing/2015/analyses.json` は問いの候補であり、値・図・本文の出典にはしない。NotebookLM の回答も公式表で照合する。
 
 ## 登録済みデータ
 
 - **survey_id**: `kakei-chousa`
-- **ranking_items**: 675件（支出額488件 + 数量187件）
-- **ranking_data**: 約56万行（47都道府県 × ~18年 × 675品目）
+- **metric config**: `data/metrics/*-consumption-{expenditure,quantity}.ts` など（件数は config から再集計する）
 - **ranking_key パターン**: `{key}-consumption-expenditure` / `{key}-consumption-quantity`
 - **group_key**: `{key}-consumption`（支出額・数量ペア）
 
-## 2つのテーブル
+## 旧分類の2つのテーブル（既存ランキングの取得設定）
 
 | テーブル | statsDataId | 内容 | 品目数(level 5) |
 |---|---|---|---|
@@ -52,25 +69,14 @@
 | `40003` | 北九州市 | 福岡県 |
 | `40004` | 福岡市 | 福岡県 |
 
-**対処法**: area code の先頭2桁でグルーピングし、各都道府県の**最初の行**（県庁所在市）を採用する。
+**対処法**: 現行 `page-data-batch.ts` の `KAKEI_CITY_TO_PREF` で県庁所在市だけを明示的に写像する。福岡市は例外コード `40004`。ファイルの並び順で「各県の最初の行」を選ぶと北九州市などを誤採用するため使わない。
 
-```javascript
-const seen = new Set();
-const prefData = [];
-for (const v of values) {
-  if (v['@area'] === '00000') continue; // 全国を除外
-  const prefCode = v['@area'].substring(0, 2);
-  if (seen.has(prefCode)) continue;
-  seen.add(prefCode);
-  prefData.push({ areaCode: prefCode, value: parseInt(v['$']) });
-}
-```
+### 3. 標準バッチと2025年分類
 
-### 3. 標準バッチは非対応
-
-標準の `/page-data-batch` (TS-config 駆動、Phase 6 で旧 `populate-all-rankings.ts` を置換・削除) は
-社会・人口統計体系向け。家計調査データは専用スクリプト（extract-items → bulk-register → populate-data）で
-投入済み。追加登録が必要な場合は同様のパターンで R2 (`app/stats/<key>/cities.json` 等) へ直接投入する。
+現行 `packages/data-configs/scripts/page-data-batch.ts` は `kakeiEstatSource` で既存の
+`kakei-chousa` 設定を e-Stat 取得へ渡し、`remapKakeiAreas` で県庁所在市を県表示へ対応させる。
+ただし、既存設定の表 ID・品目コードは2024年までの系列であり、2025年改定との対応を確認せずに
+`years.to` だけ変更してはならない。R2 は `app/stats/<key>/values.json` を配信する。
 
 ## 品目コード体系（cat01）
 
@@ -93,7 +99,7 @@ for (const v of values) {
 └ ...
 ```
 
-### 主要品目コード（よく使うもの）
+### 主要品目コード（2024年までの旧分類）
 
 | cat01 | 品目名 | ranking_key 候補 |
 |---|---|---|
@@ -156,7 +162,7 @@ for (const v of values) {
 | `130000000` | 教養娯楽関係費 | 教養娯楽の耐久財/他 |
 | `140000000` | 消費支出（基礎・選択） | 基礎的支出 vs 選択的支出の分析 |
 
-## 年間収入五分位階級別テーブル
+## 年間収入五分位階級別テーブル（2024年までの旧 e-Stat ID）
 
 年収別の消費パターン分析用。**地域: 全国のみ**（都道府県別なし）。
 
@@ -241,7 +247,7 @@ const params: GetStatsDataParams = {
 
 - **データ**: `0003348239` の個別品目（level 4-5）
 - **記事例**: 「ぎょうざ消費額ランキング」「ビール vs ワイン 地域差」「コーヒー vs 紅茶」
-- **DB 登録済み**: 675品目が ranking_items に登録済み、即利用可能
+- **既存候補**: `data/metrics/` の家計調査 config と R2 配信値を照合してから使う
 
 ## 出典表記
 
@@ -253,29 +259,4 @@ const params: GetStatsDataParams = {
 本記事のランキングは、総務省が実施している「家計調査」の品目分類別都道府県庁所在市データ（<YEAR>年）を元に、独自に集計・作成しています。
 
 [家計調査 | 政府統計の総合窓口](https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561)
-```
-
-## ranking_items 登録時の設定
-
-```javascript
-{
-  data_source_id: "estat",
-  source_config: JSON.stringify({
-    source: {
-      name: "家計調査",
-      url: "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561"
-    },
-    statsDataId: "0003348239",
-    cdCat01: "<品目コード>",
-    cdCat02: "03"
-  }),
-  value_display_config: JSON.stringify({ conversionFactor: 1, decimalPlaces: 0 }),
-  visualization_config: JSON.stringify({
-    colorScheme: "interpolateReds",  // 食品系は赤系が直感的
-    colorSchemeType: "sequential",
-    minValueType: "zero"
-  }),
-  unit: "円",
-  category_key: "economy"
-}
 ```

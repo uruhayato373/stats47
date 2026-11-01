@@ -140,7 +140,7 @@ const SURVEY_EDITORIAL_CONTENT = {
     summary:
       '家計調査は、総務省統計局が世帯を継続的に抽出して、収入と支出、品目別の購入量などを毎月調べる基幹統計調査です。このハブでは、主に都道府県庁所在市の二人以上世帯について、年間の品目別支出額や購入量を比較できます。',
     whatYouCanLearn: [
-      'パンや米など品目別の年間支出額と購入量の地域差',
+      '納豆・カップ麺の支出額と、米・緑茶・牛肉の購入数量の地域差',
       '外食費や宿泊料などサービス支出の違い',
       '電気・ガス・上下水道に対する世帯支出の差',
       '食料費と消費支出総額から見た家計配分の違い',
@@ -155,18 +155,23 @@ const SURVEY_EDITORIAL_CONTENT = {
         rankingKey: 'rice-consumption-quantity',
       },
       {
-        question: '外食への年間支出が多い都市は？',
-        rankingKey: 'dining-out-consumption-expenditure',
+        question: '緑茶の年間購入数量が多い都市は？',
+        rankingKey: 'green-tea-consumption-quantity',
       },
       {
-        question: '二人以上世帯の消費支出総額が多い都市は？',
-        rankingKey: 'consumption-expenditure-total',
+        question: 'カップ麺への年間支出が多い都市は？',
+        rankingKey: 'cup-noodles-consumption-expenditure',
+      },
+      {
+        question: '牛肉の年間購入数量が多い都市は？',
+        rankingKey: 'beef-consumption-quantity',
       },
     ],
     caveats: [
       '都道府県全体ではなく、都道府県庁所在市を中心とする都市別の標本調査結果です。県民全体の消費傾向とは一致しません。',
       '主な品目ランキングは二人以上世帯を対象とします。単身世帯や世帯人員が異なる集計と直接比較しないでください。',
       '支出額は価格と購入量の両方に左右されます。消費量の多さを判断するときは、数量の指標がある品目では数量も併せて確認してください。',
+      '単年の年間値と3年平均の都市別ランキングは集計期間が異なります。同じ年の値として順位や増減を比較しないでください。',
     ],
   },
   'commercial-dynamics-survey': {

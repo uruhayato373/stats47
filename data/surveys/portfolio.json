@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30",
+  "generatedAt": "2026-11-01",
   "linkage": {
-    "auditedAt": "2026-10-30",
+    "auditedAt": "2026-11-01",
     "metrics": 2603,
     "resolved": 2514,
     "unresolved": 0,
@@ -3193,7 +3193,7 @@
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": true,
-      "readerQuestionCount": 4,
+      "readerQuestionCount": 5,
       "relatedArticleCount": null,
       "gscSnapshotRef": "data/gsc/snapshots/2026-W43/pages.csv",
       "ga4SnapshotRef": "data/ga4/snapshots/2026-W43/pages.csv",
