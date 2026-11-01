@@ -57,14 +57,16 @@ const AREA_DATABOOK_TOC_ITEMS = [...AREA_DATABOOK_TEMPLATE.sections]
 
 /** 特別区を持つのは東京都だけ (カードの見出しの「市区町村 / 市町村」) */
 const TOKYO_AREA_CODE = '13000';
+const FEATURED_THEME_COUNT = 8;
 
 /** 県内の市町村ランキング (県名×市区町村ランキング・MUNI-PREF-RANKING-ROUTE-01) への導線。 */
 const MUNICIPALITY_PREFECTURE_RANKING_LINKS = [...MUNICIPALITY_PREFECTURE_RANKING_KEYS].map(
   (rankingKey) => ({ rankingKey, label: getMetricConfig(rankingKey)?.title ?? rankingKey })
 );
 
-/** 県トップから掘り下げやすい主要テーマ。表示順はテーマ一覧の SSOT に従う。 */
-const AREA_FEATURED_THEMES = AREA_THEMES.slice(0, 8);
+/** 県トップから全ての県×テーマページを辿れるよう、主要テーマと残りを分ける。 */
+const FEATURED_AREA_THEMES = AREA_THEMES.slice(0, FEATURED_THEME_COUNT);
+const OTHER_AREA_THEMES = AREA_THEMES.slice(FEATURED_THEME_COUNT);
 
 /**
  * オンデマンド ISR（24時間）。
@@ -232,7 +234,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
             <PanelGrid className="grid-cols-1 @min-[40rem]:grid-cols-2">
               <RailLinksCard
                 title={`${profile.areaName}をテーマから見る`}
-                items={AREA_FEATURED_THEMES.map((theme) => ({
+                items={FEATURED_AREA_THEMES.map((theme) => ({
                   id: theme.themeKey,
                   label: theme.title,
                   href: hrefFor('area-theme', { areaCode, themeSlug: theme.themeKey }),
@@ -240,8 +242,19 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 layout="list"
                 moreLink={{
                   href: '/themes',
-                  label: 'すべてのテーマを見る →',
+                  label: '全国のテーマ一覧を見る →',
                 }}
+                trackingSurface="area_sidebar"
+              />
+              <RailLinksCard
+                title={`${profile.areaName}のその他のテーマ`}
+                items={OTHER_AREA_THEMES.map((theme) => ({
+                  id: theme.themeKey,
+                  label: theme.title,
+                  href: hrefFor('area-theme', { areaCode, themeSlug: theme.themeKey }),
+                }))}
+                layout="list"
+                collapsible
                 trackingSurface="area_sidebar"
               />
               <RelatedAreas areaCode={areaCode} />
