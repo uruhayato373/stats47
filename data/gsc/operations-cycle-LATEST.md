@@ -1,6 +1,6 @@
 # GSC Operations Cycle — 2026-W43
 
-**Status**: FAIL / **Stage**: review / **Generated**: 2026-11-01T00:09:45.357Z
+**Status**: FAIL / **Stage**: plan / **Generated**: 2026-11-01T00:14:52.384Z
 
 計測週: 2026-W43 / 次週計画: 2026-W45 / 月次: 2026-11
 
@@ -17,6 +17,7 @@
 | search-growth-decision | PASS | 2026-W43 の承認/却下 2件（必要 1件以上） |
 | url-inspection-freshness | PASS | latest=2026-10-31, age=1d |
 | weekly-review | PASS | 2026-W43 review の search-growth 節=あり |
+| weekly-plan | PASS | plan=2026-W45, expected=2026-W45 |
 
 ## 次のアクション
 
