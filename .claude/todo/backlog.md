@@ -76,8 +76,11 @@ updated: 2026-10-19
 
 - **待機児童率を作った (2026-11-01・W45 Must 3・未コミット→同日コミット・R2 未反映)**: metric `nursery-waiting-children-rate` (単位 ％・manual・provenance 9 点セット・市区町村専用) と取り込み `packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (純粋関数とテスト 7 件)。dryRun で 1,741 市区町村すべてに結合し、待機児童のいる自治体 211・合計 2,254 人 (申込者 2,765,235 人) が公表値と一致した (`--dry-run --file <Excel>`。Excel の sha256 `5f3e86aa…664b9bca`)。申込者 0 の 8 自治体は値なし、待機児童 0 の 1,530 自治体は順位なし (config の note に記載)。表記ゆれ 1 件 (梼原町 / 檮原町) は別名表で結合。
   - **気づいたこと**: 上位は三宅村 24.5%・伊平屋村 8.9% など申込者の少ない村が並ぶ (分母が小さい)。県別ページや子育てのランキングで見せるときに、申込者数の下限を設けるかを公開前に決める。
-  - **R2 反映の承認依頼 (オーナー)**: ① `npx tsx packages/data-configs/scripts/ingest-childcare-waiting-rate.ts` (dryRun なし・`.local/r2` に書く) ② `diff-push-r2 --prefix app/stats` か `data-refresh.yml` で R2 へ ③ 反映後に `municipality-catalog.ts` の候補を published にする。子育ての 2 指標 (保育所まで 500m・小学校まで 1km、`MUNI-RANKING-EXPANSION-01`) と 1 回にまとめてよい。
-  - **公開までの残り**: ranking-items・content の派生物の生成、極性 (polarity) の割り当て (人の判断)、取り込み後の `/audit-ranking-data-integrity`。
+  - **R2 反映 (2026-11-01・オーナー承認済み)**: 3 指標とも R2 に入れた。読み戻し (公開 URL) で確認:
+    - `nursery-waiting-children-rate`: 手元で取り込み `diff-push-r2 --prefix app/stats/nursery-waiting-children-rate`。1,741 行・順位あり 211・値なし 8・出典 SHA `5f3e86aa` 一致。出典 SHA を持つ市区町村の手動指標を送れるよう、送信の守り (`ksj-publication-guard.ts`) に cities.json の検査を足した (`f7728be6c`)。
+    - `nursery-within-500m-young-child-household-ratio`: `data-refresh.yml` run 41259477757 (dry_run の run 41259244491 も success)。1,228 行・2023 年・順位あり 1,171 (推計の丸めで 100% を超える自治体は順位から除く。最大 100.3)。
+    - `elementary-school-within-1km-household-ratio`: 同じ run。1,228 行・2023 年・順位あり 1,228。
+  - **公開までの残り**: ① `municipality-catalog.ts` で 3 指標を published にする (2 指標は `MUNICIPALITY_HOUSING_SURVEY_STATUS` が 13 指標をまとめて切り替える作りなので、2 指標だけ先に出すか 13 指標を同時に取り込むかを決める) ② ranking-items・content の派生物の生成と極性 (polarity) の割り当て (人の判断) ③ `/audit-ranking-data-integrity` ④ デプロイ (溜めて 1 回)。待機児童率は、申込者の少ない村が上位に並ぶので、見せるときの申込者数の下限を公開前に決める。
 ### [MUNI-DATA-PRODUCT-BUILD-01] 製造品出荷額 (manufacturing-shipment-amount) を最新境域に組み替えた時系列 CSV と、結合用の GeoJSON を作る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:商品]
 
