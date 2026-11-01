@@ -1442,6 +1442,7 @@ updated: 2026-10-19
 - **次 / 順序**: ①現行index対象URLから優先調査 ②実際に矛盾/連鎖のある写像だけ是正 ③通常UA・Googlebot UAとURL Inspectionで着地を確認する。ブログ統合先の判断はBLOG-DUPLICATE-AUDIT-01が所有する。
 - **停止条件**: 内容の違うページを一律canonical化しない。全旧URLをトップへ転送しない。過去のGSC分類だけで現行転送を変更しない。公開は別途指示で行う。
 - **完了条件**: 対象ごとの正規URL・処置・根拠があり、採用箇所の信号が一致する。案20は連鎖解消または維持理由を記録する。
+- **2026-11-01 実測・局所修正（未デプロイ）**: ブログ一覧の2・10・24・25ページの本番HTMLは全て canonical `/blog`。未完了ブログ32 URLはページ分割の一覧（1〜32ページ）から全件HTMLリンクで辿れたため、親一覧のcanonical矛盾を修正。1ページ目は`/blog`、2ページ目以降は各`?page=n`をcanonical/OG URLに使う。公式根拠: https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading 。**次**: デプロイ後に2・10・32ページのcanonicalと次ページの`<a href>`を本番で確認し、32 URLの再クロール・登録をURL Inspectionで観測する。Google側の登録改善は未判定。
 
 ### [GSC-404-VALUE-TRIAGE-01] 内部リンク・被リンク・過去流入のある404を優先分類する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
