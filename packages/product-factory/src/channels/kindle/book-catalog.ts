@@ -80,6 +80,26 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     status: "generated",
   },
   {
+    // 章立て設計 (切り口台帳 data/surveys/lenses/kakei-chousa.json の channels.kindle = K-S1-02、2026-11-02)。
+    // 本は「都市の間で比べる」(kakei-city-comparison) を軸に、「数量と単価」(kakei-price-quantity) と
+    // 「定義を読む」(kakei-definition-reading) を読み方の章で束ねる。値は公開済み metric と台帳の表だけから取る:
+    //   0004023605 = 品目分類の年次・金額 / 0004023606 = 同・数量 (県庁所在市・二人以上世帯)。
+    // 章 → 切り口 / 使う metric (data/metrics/<key>.ts) / 書き下ろし:
+    //   はじめに        : city-comparison                       / -                                          / fresh 100%
+    //   第0章 読み方    : definition-reading + price-quantity   / -                                          / fresh 100%
+    //   麺類            : city-comparison + definition-reading  / fresh-udon-soba-consumption-expenditure・-quantity,
+    //                     instant-noodles-consumption-expenditure・-quantity, pasta-consumption-expenditure・-quantity,
+    //                     ramen-dining-consumption-expenditure (家庭向けと外食を混ぜない)    / blog 再構成 (校訂)
+    //   みそ            : price-quantity                        / miso-consumption-quantity (+ -expenditure)  / blog 再構成
+    //   砂糖            : price-quantity                        / sugar-consumption-expenditure・-quantity   / blog 再構成
+    //   かに            : city-comparison (cross-metric は限界を明記) / crab-consumption-expenditure          / blog 再構成
+    //   さば            : city-comparison                       / mackerel-consumption-expenditure           / blog 再構成
+    //   終章            : price-quantity + definition-reading   / -                                          / fresh 100%
+    // 書き下ろし比率の見込み: 直近の生成 (v4-20260920-imagegen) で実測 35.55% (fresh 8457 / blog 15332 字)。
+    //   30% に対する余裕は 5.55pt。blog 章を足す・fresh 章を削ると下回るので、章を足すときは fresh も同量足す。
+    // 載せない切り口 (台帳の判断): kakei-long-term-trend は「市場の盛衰を束ねる本」の別企画 (本書は単年の地域差)、
+    //   kakei-seasonality は月次表 (0004023601/2) の blog・X 用で kindle の役割なし、
+    //   kakei-income-class / budget-structure / savings-debt は K-S1-01 側。
     id: "K-S1-02",
     series: "S1-issues",
     title: "食卓の支出と購入数量 — 家計調査の地域差を読む",
@@ -107,7 +127,7 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     ],
     priceYen: 800,
     newContentNote: "はじめに・読み方・終章で支出額と購入数量、購入と消費、調査都市と県全体の違いを解説し、各章の家計調査を再構成する。",
-    sourceIdeas: ["pdf-book-survey:消費地バトル", "blog-quality-standards:D2 型クラスタ"],
+    sourceIdeas: ["pdf-book-survey:消費地バトル", "blog-quality-standards:D2 型クラスタ", "kakei-chousa:lens:kakei-city-comparison", "kakei-chousa:lens:kakei-price-quantity", "kakei-chousa:lens:kakei-definition-reading"],
     keywords: ["都道府県", "食文化", "家計調査", "県民性", "消費量", "雑学"],
     status: "planned",
   },
