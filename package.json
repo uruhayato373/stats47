@@ -238,6 +238,7 @@
     "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
     "metrics:check": "npm run metrics:check --workspace packages/data-configs",
     "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs",
+    "metrics:regen-derived": "bash .claude/scripts/metrics/regen-derived.sh",
     "media:check": "node .claude/scripts/media/check-workspace.mjs",
     "media:test": "node --test .claude/scripts/media/__tests__/*.test.mjs",
     "media:inventory": "node .claude/scripts/media/sync-image-inventory.mjs",

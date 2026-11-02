@@ -196,6 +196,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [R2-WRITE-PENDING-DISPLACE-01] R2 書き込みの待ち枠を後続の実行が奪い、新規ランキングの OGP 生成が始まる前に取り消される
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
+
+- **証拠 (2026-11-02)**: develop への push で起動した `ranking-ogp-new-keys.yml` (run 41401652806) が、ジョブを 1 つも始めずに 15 秒で `cancelled` になった。concurrency group `r2-write` は待ち枠を 1 つしか持たず、後から来た R2 書き込みが待ちの実行を取り消すため。結果、家計調査の貯蓄・負債の 4 指標の OGP が作られないまま main へ出て、デプロイ後スモークが og:image 404 で落ちた (run 41406310986)。同じ罠は 2026-09-06 にブログ公開でも踏んでいる (memory `project_kakei_marketing_book_pipeline`)。今回は `gh run rerun 41401652806` で作り直した。
+- **なぜ構造で直すか**: 取り消しは無言で、気づくのはデプロイ後スモークか本番の 404 になってから。手で再実行する運用では毎回同じ順に踏む。
+- **次 (案)**: ① `r2-write` の workflow のうち、取りこぼすと困るもの (OGP の新規キー・ブログ公開) を、取り消されても後で拾う形にする。例: sync-snapshots の最後で「新規キーの OGP 欠落」を検査して足りない分を作る、または取り消し済みでジョブ未開始の r2-write run を一定間隔で再実行する見張りを置く ② main へのマージ前に、増えた既知キーの og:image が R2 にあるかを確かめる。
+- **完了条件**: 待ち枠を奪われた OGP 生成が人手を介さず作り直され、デプロイ後スモークが新規キーの og:image で落ちない。
+
 ### [IG-AREA-PROPS-SCHEMA-VERSION-01] Instagram の県カードの台本が、県データブックの snapshot の版を上げるたびに止まる
 タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-11-02] [領域:SNS]
 
@@ -555,6 +563,8 @@ updated: 2026-11-01
 - **次**: ① オーナーが AdSense の管理画面で表示広告ユニットを 2 つ作る (名前は stats47-ranking-footer-rect・stats47-content-footer-rect、大きさは固定 300×250) ② `apps/web/src/lib/google-adsense/constants.ts` の 2 定数の slotId を差し替える ③ テスト 2 本 (`manual-ad-desktop-only.test.tsx`・`code-ad-slots.test.mjs`) の `BORROWED` を消す。
 - **停止条件**: ユニットの作成はオーナーだけが行う (AdSense のアカウント操作)。
 - **完了条件**: 全ての slotId がそれぞれ 1 つの配置だけで使われ、`BORROWED` の例外が無い。
+- **進み具合 (2026-11-03)**: ①② は済み。オーナーの依頼でブラウザから作成した (stats47-ranking-footer-rect = 3686603642・stats47-content-footer-rect = 6994459114、どちらもディスプレイ・固定 300×250)。③ も済み (`BORROWED` を消し、全 slotId が 1 配置だけで使われることをテストで固定)。develop には入ったが**本番は借りたユニットのまま**で、次の develop→main の反映で切り替わる。本番に出た日を境に、ページ末の 2 枠は新しいユニットで数える。
+- **判定への影響 (2026-11-03 確認)**: 固定サイズへの変更 (e7eefcafa) は 2026-11-01 に本番へ出ており、`ADSENSE-PLACEMENT-01` の観測期間 (W42〜W45・配置を変えない約束) の途中に入った。W44 以降は stats47-hub-rail・stats47-themes-content の数字にページ末の分が混ざるので、11-14 の判定ではこの 2 ユニットとページ末の枠を W43 以前と比べない。
 
 ### [AFF-PLACEMENT-MAP-SIZE-01] 配置マップ (placement-map-latest.json) を 1MB 以下に分け、週次の更新を戻す
 タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-31] [領域:アフィリエイト]

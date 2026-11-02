@@ -138,12 +138,6 @@ describe("AdSense再開後の契約", () => {
 
     expect(slotIds.length).toBeGreaterThanOrEqual(10);
     expect(slotIds.every((id) => /^\d{10}$/.test(id))).toBe(true);
-    // 一時的な例外 (2026-10-31): ページ末の 2 枠は関連コンテンツ型を固定の大きさにできないので、表示広告のユニットを
-    // 借りている。専用の表示広告ユニットを作ったら外す (backlog ADSENSE-FIXED-UNITS-01)。例外を増やさない
-    const BORROWED = new Set(["9435960671", "8298138821"]);
-    const counts = new Map<string, number>();
-    for (const id of slotIds) counts.set(id, (counts.get(id) ?? 0) + 1);
-    const shared = [...counts].filter(([, n]) => n > 1).map(([id]) => id);
-    expect(shared.every((id) => BORROWED.has(id) && counts.get(id) === 2), shared.join(",")).toBe(true);
+    expect(new Set(slotIds).size).toBe(slotIds.length);
   });
 });

@@ -1,3 +1,5 @@
+import { Briefcase, HeartPulse, Palette, Plane, Users, type LucideIcon } from 'lucide-react';
+
 export interface ThemeNavGroup {
   id: string;
   label: string;
@@ -86,3 +88,17 @@ export const THEME_NAV_GROUPS = [
     ],
   },
 ] as const satisfies readonly ThemeNavGroup[];
+
+/** テーマの 5 系統 (THEME_NAV_GROUPS の id) のアイコン。サイドバーと調査ハブのテーマのカードが共有する */
+export const THEME_NAV_GROUP_ICONS: Record<(typeof THEME_NAV_GROUPS)[number]['id'], LucideIcon> = {
+  'population-life': Users,
+  'work-economy': Briefcase,
+  'health-education-safety': HeartPulse,
+  'tourism-transport-nature': Plane,
+  'culture-community-digital': Palette,
+};
+
+/** テーマが属する系統 (どの系統にも無いテーマは undefined) */
+export function themeNavGroupOf(themeKey: string): (typeof THEME_NAV_GROUPS)[number] | undefined {
+  return THEME_NAV_GROUPS.find((group) => (group.themeKeys as readonly string[]).includes(themeKey));
+}

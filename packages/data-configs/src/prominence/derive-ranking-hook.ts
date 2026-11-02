@@ -19,7 +19,14 @@ export type HookAdjective = "長い" | "多い" | "高い" | "広い";
 export interface RankingHookInput {
   readonly title: string;
   readonly unit: string;
+  /**
+   * 問いの地域の呼び方。値が県庁所在市の値の指標 (家計調査。`isCapitalCityValueMetric`) は「都市」にする。
+   * 省略時は「県」。
+   */
+  readonly areaNoun?: RankingHookAreaNoun;
 }
+
+export type RankingHookAreaNoun = "県" | "都市";
 
 interface ParticipationReaderCopy {
   readonly readerLabel: string;
@@ -220,5 +227,5 @@ export function deriveRankingHook(input: RankingHookInput): string {
 
   const subject = deriveRankingReaderLabel(input.title);
   const adjective = resolveHookAdjective(input);
-  return `${subject}が最も${adjective}県は？`;
+  return `${subject}が最も${adjective}${input.areaNoun ?? "県"}は？`;
 }

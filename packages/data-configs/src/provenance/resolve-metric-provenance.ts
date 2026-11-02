@@ -13,6 +13,7 @@
  * ビルド/exporter で使う。最終的に snapshot に originalSurveys を焼き込み、アプリは snapshot を読む。
  */
 
+import type { RankingHookAreaNoun } from '../prominence/derive-ranking-hook';
 import type { MetricConfig, MetricRegistry, SourceConfig } from '../types';
 import { DISPLAYNAME_TO_SURVEY } from '../ssds/displayname-to-survey';
 import estatProvenanceJson from '../ssds/estat-provenance.generated.json';
@@ -215,4 +216,20 @@ export function resolveAttribution(
       : null,
     originalSurveys: resolveProvenanceByParams(statsDataId, cdCat01),
   };
+}
+
+/** 値が県庁所在市の値である調査 (家計調査の品目別と、社会・人口統計体系経由の家計調査)。 */
+const CAPITAL_CITY_VALUE_SURVEY_IDS: ReadonlySet<string> = new Set(['kakei-chousa', 'household-survey']);
+
+/**
+ * metric の値が「県全体」ではなく「県庁所在市」の値か。家計調査は県庁所在市の値を県のコードへ写して配信するので、
+ * 地域名を市で書く面 (調査ハブの代表ランキングの 1 位など) はこの判定を使う。
+ */
+export function isCapitalCityValueMetric(metric: MetricConfig, registry?: MetricRegistry): boolean {
+  return resolveMetricProvenance(metric, registry).some((survey) => CAPITAL_CITY_VALUE_SURVEY_IDS.has(survey.id));
+}
+
+/** ランキングの問い (hook) の地域の呼び方。県庁所在市の値の指標は「都市」、それ以外は「県」。 */
+export function rankingHookAreaNoun(metric: MetricConfig, registry?: MetricRegistry): RankingHookAreaNoun {
+  return isCapitalCityValueMetric(metric, registry) ? '都市' : '県';
 }

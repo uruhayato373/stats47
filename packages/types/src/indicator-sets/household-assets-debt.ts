@@ -17,7 +17,7 @@ export const HOUSEHOLD_ASSETS_DEBT_SET: IndicatorSet = {
     },
     {
       "rankingKey": "household-securities-balance",
-      "shortLabel": "有価証券の保有額（県庁所在市）",
+      "shortLabel": "有価証券の現在高（県庁所在市）",
       "role": "secondary"
     },
     {

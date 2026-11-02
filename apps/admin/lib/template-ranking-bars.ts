@@ -3,6 +3,7 @@ import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingBarAxis, rankingSampleLabels } from './template-ranking-data';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
+import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 
 export const RANKING_BAR_SAMPLE_ID = 'maximum-temperature-bars';
 export const RANKING_BAR_FRAME = { width: 1080, height: 1350 } as const;
@@ -40,6 +41,8 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
   const rows = { top: allRows.slice(0, 5), bottom: allRows.slice(-5) };
   const axis = rankingBarAxis(allRows.map((row) => row.value), presentation);
   const label = rankingSampleLabels();
+  // The metric's own colour (strong end of its scheme), so its bars and its map share one hue.
+  const color = resolveMetricColor(presentation) ?? BRAND.primary;
   const plot = { left: 352, width: 536 };
   const rowGap = 80;
   const top = sampleBodyTop(Boolean(label.subtitle)) + 44;
@@ -50,8 +53,8 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
     ${data.map((r, i) => {
       const baseline = y + 84 + i * rowGap;
       const origin = xAt(axis.baseline), end = xAt(r.value);
-      const marker = axis.truncated && Math.abs(end - origin) < 0.5 ? `<circle cx="${end}" cy="${baseline - 12}" r="5" fill="${BRAND.primary}"/>` : '';
-      return `<g data-rank="${r.rank}" data-value="${r.value}"><text x="96" y="${baseline}" text-anchor="end" font-size="30" fill="${BRAND.muted}">${r.rank}</text><text x="128" y="${baseline}" font-size="44" font-weight="600">${escapeXml(r.area_name)}</text><rect data-bar-track="true" x="${plot.left}" y="${baseline - 32}" width="${plot.width}" height="42" rx="6" fill="${BRAND.wash}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${baseline - 32}" width="${Math.abs(end - origin)}" height="42" rx="6" fill="${BRAND.primary}"/>${marker}<text x="1016" y="${baseline}" text-anchor="end" font-size="44" font-weight="700" fill="${BRAND.primary}">${label.formatValue(r.value)}</text></g>`;
+      const marker = axis.truncated && Math.abs(end - origin) < 0.5 ? `<circle cx="${end}" cy="${baseline - 12}" r="5" fill="${color}"/>` : '';
+      return `<g data-rank="${r.rank}" data-value="${r.value}"><text x="96" y="${baseline}" text-anchor="end" font-size="30" fill="${BRAND.muted}">${r.rank}</text><text x="128" y="${baseline}" font-size="44" font-weight="600">${escapeXml(r.area_name)}</text><rect data-bar-track="true" x="${plot.left}" y="${baseline - 32}" width="${plot.width}" height="42" rx="6" fill="${BRAND.wash}"/><rect data-bar-value="true" x="${Math.min(origin, end)}" y="${baseline - 32}" width="${Math.abs(end - origin)}" height="42" rx="6" fill="${color}"/>${marker}<text x="1016" y="${baseline}" text-anchor="end" font-size="44" font-weight="700" fill="${color}">${label.formatValue(r.value)}</text></g>`;
     }).join('')}`;
   return sampleFrame({
     title: label.title,

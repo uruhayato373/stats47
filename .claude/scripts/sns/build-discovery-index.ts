@@ -12,7 +12,8 @@
  */
 import * as path from "path";
 import * as fs from "fs";
-import { listAllMetrics } from "../../../packages/data-configs/src/registry";
+import { listAllMetrics, METRICS_REGISTRY } from "../../../packages/data-configs/src/registry";
+import { rankingHookAreaNoun } from "../../../packages/data-configs/src/provenance/resolve-metric-provenance";
 import {
   resolveRankingHook,
   resolveRankingReaderLabel,
@@ -52,7 +53,7 @@ function buildIndex(): DiscoveryEntry[] {
     key: m.key,
     title: m.title,
     readerLabel: resolveRankingReaderLabel({ rankingKey: m.key, title: m.title }),
-    hook: resolveRankingHook({ rankingKey: m.key, title: m.title, unit: m.unit }),
+    hook: resolveRankingHook({ rankingKey: m.key, title: m.title, unit: m.unit, areaNoun: rankingHookAreaNoun(m, METRICS_REGISTRY) }),
     subtitle: m.subtitle ?? null,
     description: m.description ?? null,
     seoTitle: m.seoTitle ?? null,

@@ -4,9 +4,9 @@
     {
       "id": "bar",
       "label": "棒グラフ",
-      "policy": "順位・県名・棒・数値を分け、数値を直接表示する。軸目盛り・目盛線は省く。表示範囲は指標台帳に従い、0を含まない場合は最小–最大を短く示す。上位・下位は同じ青とし、順位と余白で区別する。行列で数値を読む表はテーブルに分類する。",
+      "policy": "順位・県名・棒・数値を分け、数値を直接表示する。軸目盛り・目盛線は省く。表示範囲は指標台帳に従い、0を含まない場合は最小–最大を短く示す。上位・下位は指標の色（指標台帳の配色の濃い側・tile-scale.ts の resolveMetricColor）1色とし、順位と余白で区別する。同じ指標の地図・タイルと色合いをそろえる。行列で数値を読む表はテーブルに分類する。",
       "renderer": "packages/svg-builder/src/",
-      "version": 6,
+      "version": 7,
       "profiles": {
         "note": "note・X・Instagramの棒グラフは共通の4:5（1080×1350px）で制作する。同じ固定入力・色・目盛り・描画部品を使い、元の年・単位・地域・世帯区分と掲載範囲を保持する。文字が読めない場合は枚数を分けて調整する。",
         "x": "共通の4:5（1080×1350px）で制作し、数値・年・単位・比較基準を保持する。単年の都道府県ランキングは全47県表示の契約を維持する。",
@@ -16,14 +16,15 @@
       "purposes": [
         "ranking",
         "comparison"
-      ]
+      ],
+      "metricColor": "single"
     },
     {
       "id": "table",
       "label": "テーブル",
-      "policy": "行と列で項目・順位・数値を読む。単位・年と抜粋範囲を明記し、320px幅で文字を読める列数に絞る。補助の棒があっても行列が主役ならテーブル。上位・下位は同じ青を使い、見出し・順位・余白で区別する。下位だけを薄くしない。",
+      "policy": "行と列で項目・順位・数値を読む。4:5画像では上位10県を見本の枠の大きさで描き（ブログ用の小さい表を引き伸ばさない）、行の高さで本文の縦を使い切る。単位は値の列見出しに、年と抜粋範囲は見出しの条件行に置く。順位の数字は指標の色（resolveMetricColor）、行は交互の淡い地色で区別し、下位だけを薄くしない。補助の棒があっても行列が主役ならテーブル。上位・下位の比較は棒グラフを使う。",
       "renderer": "packages/svg-builder/src/",
-      "version": 5,
+      "version": 6,
       "profiles": {
         "note": "試作方針: note本文は640×960で上位5県・下位5県を縦積み。県名・値28px（320px表示で14px）。全47県データを保存し、抜粋の範囲を明記。単位・年・順位を維持。 見た目の型はテーブルを維持する。",
         "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
@@ -34,14 +35,15 @@
         "ranking",
         "comparison",
         "composition"
-      ]
+      ],
+      "metricColor": "single"
     },
     {
       "id": "tile-map",
       "label": "タイルマップ",
-      "policy": "4:5の画像（note・X・Threads・Instagram・管理画面の見本）は、サイトの配置表（packages/visualization の TILE_GRID_LAYOUT）をそのまま使い、日本列島の形（北海道2×2、新潟・福島・京都などの縦横、九州から離した沖縄）を保つ。県のない海峡の段だけを縮め、タイルを横幅いっぱいまで大きくする（apps/remotion/src/features/data-cards/tile-layout.ts の IMAGE_TILE_LAYOUT）。描画は apps/remotion/src/features/data-cards/all47-svg.ts の1つだけを使い、媒体ごとに別の配置や配色を作らない。形は模式図で、タイルの面積は統計値や実面積を表さない。県名・値・年・単位・色の段階を示し、県庁所在市の値は都市名で示す。地理的な輪郭を読む地図は「地図（実際の形）」を使う。 色は指標台帳の配色をサイトのランキングと同じ設定で解決する（配色の指定が無い呼び出しはブランドの青5段）。タイルの文字は中央揃えで、地色との明暗差が大きい方（白か濃紺）を自動で選ぶ。値の小数桁は図全体で1回だけ決めてそろえる。左上の日本海側の空きに上位3県（同値は同順位）、右下の太平洋側に凡例（区分の境界値つき）を置く。背景と文字色はほかの型の見本と同じ。",
+      "policy": "【使い分け】全47都道府県の値を1枚で読ませる型（ランキング・2時点の増減）。地理的なまとまりを見せたいときは「地図（実際の形）」を使う。【タイルマップと地図の共通の形（2026-11-02 オーナー決定）】見出し（指標名・年と単位・定義1行）と出典の位置・文字の大きさ・背景はほかの見本の枠と同じ。左上の日本海側に上位3県（同値は同順位）。右下に凡例を区分ごとの1行（色・範囲・県の数）で高い順に並べ、色だけに頼らせない（data-cards/all47-svg.ts の renderTopThree と renderClassLegend を両方の型で使う。連続の配色だけは両端つきの帯）。配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。 4:5画像はサイトの配置表（packages/visualization の TILE_GRID_LAYOUT）をそのまま使い、日本列島の形（北海道2×2、新潟・福島・京都などの縦横、九州から離した沖縄）を保つ。県のない海峡の段だけを縮める（data-cards/tile-layout.ts の IMAGE_TILE_LAYOUT）。描画は all47-svg.ts の1つだけで、媒体ごとに別の配置や配色を作らない。タイルには県名と値を中央揃えで置き、文字色は地色との明暗差が大きい方（白か濃紺）。値の小数桁は図全体で1回だけ決める。形は模式図で、タイルの面積は統計値や実面積を表さない。県庁所在市の値は都市名で示す。",
       "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
-      "version": 6,
+      "version": 7,
       "profiles": {
         "note": "note・X・Instagramとも共通の4:5（1080×1350px）で同じ画像を使う。",
         "x": "共通の4:5（1080×1350px）。ランキングカード（quick-still）が同じ描画を使う。",
@@ -75,14 +77,15 @@
           "label": "候補を伏せる（クイズのヒント）",
           "status": "ready"
         }
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "choropleth",
       "label": "地図（実際の形）",
-      "policy": "実際の県形状の地図。地図の計算はバズ地図と同じ apps/remotion/src/features/buzz-map/geo.ts の computeBuzzMapGeo を使う（本土を画面いっぱいに大きく、沖縄は左上の海の大きな枠に本島〜先島の弧で。大東諸島・奄美より南の離島など範囲外の島は描かない）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。塗りの配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。凡例は右下に区分ごとの色・範囲・県の数を並べる。単位は見出しに置く。県の値を一覧で読ませる用途はタイルマップを使う。",
+      "policy": "【使い分け】地理的なまとまり（分布・点・線）を見せる型。県ごとの値は地図に書かず、値を読ませるときはタイルマップを使う。【タイルマップと地図の共通の形（2026-11-02 オーナー決定）】見出し（指標名・年と単位・定義1行）と出典の位置・文字の大きさ・背景はほかの見本の枠と同じ。左上の日本海側に上位3県（同値は同順位）。右下に凡例を区分ごとの1行（色・範囲・県の数）で高い順に並べ、色だけに頼らせない（data-cards/all47-svg.ts の renderTopThree と renderClassLegend を両方の型で使う。連続の配色だけは両端つきの帯）。配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。 地図の計算はバズ地図と同じ buzz-map/geo.ts の computeBuzzMapGeo（本土を大きく。大東諸島・奄美より南の離島など範囲外の島は描かない）。沖縄は上位3県の下に、島の範囲に合わせた小さい枠で描く（computeBuzzMapGeo の insetBox。バズ地図の既定の大きい枠は点・線の描き分けで使う）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。",
       "renderer": "apps/remotion/src/features/buzz-map/",
-      "version": 6,
+      "version": 7,
       "profiles": {
         "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
         "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
@@ -150,14 +153,15 @@
             "flow"
           ]
         }
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "line",
       "label": "折れ線グラフ",
-      "policy": "線で結ぶ順序・期間・単位を明記する。始点・終点と欠測を確認し、過密な系列を分ける。",
+      "policy": "線で結ぶ順序・期間・単位を明記する。4:5画像では見本の枠の大きさで描き、枠線の箱を付けず、値の目盛線は淡く数本だけ。始点の値は点の下、終点の値は点の右に置き、線に重ねない。年の目盛りは間引き、最後の年は必ず示す。欠測は線で結ばず止める。過密な系列は分ける。",
       "renderer": "packages/svg-builder/src/",
-      "version": 2,
+      "version": 3,
       "profiles": {
         "note": "期間を本文と揃える。",
         "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
@@ -166,14 +170,15 @@
       "group": "chart",
       "purposes": [
         "trend"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "stacked-bar",
       "label": "積み上げ棒グラフ",
-      "policy": "積み上げの合計・母数・区分・単位を照合する。実数と構成比を区別し、凡例と並び順を揃える。",
+      "policy": "積み上げの合計・母数・区分・単位を照合する。実数と構成比を区別する。4:5画像では見本の枠の大きさで描き、構成比は区分の幅が足りるときだけ帯の中に書く（文字色は地色との明暗差が大きい方）。凡例は1か所だけで、帯ごとの一覧を重ねない。凡例と帯の並び順をそろえる。",
       "renderer": "packages/svg-builder/src/",
-      "version": 1,
+      "version": 2,
       "profiles": {
         "note": "本文幅320pxで確認する。",
         "x": "投稿時のトリミングと可読性を確認する。",
@@ -183,7 +188,8 @@
       "group": "chart",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "scatter",
@@ -200,7 +206,8 @@
       "group": "chart",
       "purposes": [
         "relationship"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "radar",
@@ -217,7 +224,8 @@
       "group": "chart-minor",
       "purposes": [
         "comparison"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "sankey",
@@ -235,7 +243,8 @@
       "purposes": [
         "relationship",
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "waterfall",
@@ -252,7 +261,8 @@
       "group": "chart-minor",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "boxplot",
@@ -269,7 +279,8 @@
       "group": "chart-minor",
       "purposes": [
         "distribution"
-      ]
+      ],
+      "metricColor": "single"
     },
     {
       "id": "pie",
@@ -286,7 +297,8 @@
       "group": "chart-minor",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "heatmap",
@@ -304,7 +316,8 @@
       "purposes": [
         "distribution",
         "trend"
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "unclassified",

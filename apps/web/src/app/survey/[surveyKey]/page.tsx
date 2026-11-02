@@ -7,6 +7,7 @@
 
 import { notFound, permanentRedirect } from 'next/navigation';
 
+import { PanelGrid, StatTile, StatTileGrid } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
@@ -27,11 +28,21 @@ import {
 } from '@stats47/ranking/server';
 import { resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 import { isOk } from '@stats47/types';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import {
+  ArrowRight,
+  CalendarDays,
+  ChartLine,
+  CircleCheck,
+  ExternalLink,
+  FolderTree,
+  LayoutGrid,
+  ListOrdered,
+  TriangleAlert,
+} from 'lucide-react';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, ArticleTeaserGrid, SurfaceLinkCard } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -61,9 +72,14 @@ import {
   type SurveyPageNavLink,
 } from '@/features/survey';
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
+import {
+  THEME_NAV_GROUP_ICONS,
+  themeNavGroupOf,
+} from "@/features/theme-dashboard/config/theme-navigation";
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
+import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
@@ -202,7 +218,7 @@ export default async function SurveyPage({ params }: PageProps) {
         (entry) => sourceIds.includes(entry.id)
       )
     )
-    .map((catalog) => ({ key: catalog.key, title: catalog.title }));
+    .map((catalog) => ({ key: catalog.key, title: catalog.title, metricCount: catalog.metrics.length }));
   const relatedJapanThemes = surveyKey === 'kakei-chousa'
     ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
     : [];
@@ -290,6 +306,13 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
   );
+  // 読者の問いは代表ランキングと同じ地図付きのカードで答える。問いが 4 件を超える調査は 2 段 (8 件) にする
+  const readerQuestionCount = new Set(
+    editorial?.readerQuestions
+      .map((item) => item.rankingKey)
+      .filter((key) => rankingItems.some((item) => item.rankingKey === key)) ?? []
+  ).size;
+  const featuredLimit = readerQuestionCount > 4 ? 8 : 4;
   const featuredItems = featuredRaw
     .flatMap((item, idx) => {
       const latestYear = parseLatestYear(item.latestYear);
@@ -315,27 +338,13 @@ export default async function SurveyPage({ params }: PageProps) {
         },
       ];
     })
-    .slice(0, 4);
+    .slice(0, featuredLimit);
 
-  // メタ行は項目ごとに折り返さない span にし、数字と単位を詰めて書く (「全716件のランキング」)。
-  // 狭い幅では項目の境目で折り返す (項目の途中で行が割れない)
-  const statsItems = [
-    `全${rankingItems.length}件のランキング`,
-    featuredItems.length > 0 ? `代表${featuredItems.length}件` : null,
-    // 調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
-    // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
-    latestYear ? `掲載データの最新${latestYear}年` : null,
-    editorial?.areaLabel ?? '47都道府県',
-  ].filter((item): item is string => item !== null);
-  const statsText = (
-    <span className="flex flex-wrap gap-x-3 gap-y-0.5">
-      {statsItems.map((item) => (
-        <span key={item} className="whitespace-nowrap">
-          {item}
-        </span>
-      ))}
-    </span>
-  );
+  // 調査の規模は文字の 1 行ではなく数値タイルで見せる (2026-11-02)。
+  // 最新年は調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
+  // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
+  const areaLabel = editorial?.areaLabel ?? '47都道府県';
+  const themeCount = relatedThemes.length + relatedJapanThemes.length;
   const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
   const readerQuestions = excludeFeaturedQuestions(
     editorial?.readerQuestions.filter((item) =>
@@ -390,7 +399,6 @@ export default async function SurveyPage({ params }: PageProps) {
             )}
           </>
         }
-        stats={statsText}
         actions={
           survey.url ? (
             <a
@@ -406,6 +414,41 @@ export default async function SurveyPage({ params }: PageProps) {
           ) : undefined
         }
       />
+
+      <StatTileGrid>
+        <StatTile
+          label="ランキング"
+          value={rankingItems.length.toLocaleString('ja-JP')}
+          unit="件"
+          meta={featuredItems.length > 0 ? `代表 ${featuredItems.length} 件` : undefined}
+          icon={<ListOrdered aria-hidden />}
+        />
+        <StatTile
+          label="データの最新年"
+          value={latestYear || null}
+          unit={latestYear ? '年' : undefined}
+          meta={areaLabel}
+          icon={<CalendarDays aria-hidden />}
+        />
+        <StatTile
+          label="関連テーマ"
+          value={themeCount.toLocaleString('ja-JP')}
+          unit="件"
+          meta={relatedJapanThemes.length > 0 ? `うち全国の時系列 ${relatedJapanThemes.length} 件` : undefined}
+          icon={<LayoutGrid aria-hidden />}
+        />
+        <StatTile
+          label="関連する分類"
+          value={relatedCategories.length.toLocaleString('ja-JP')}
+          unit="分類"
+          meta={
+            relatedCategories.length > 0
+              ? `最多は${[...relatedCategories].sort((a, b) => b.count - a.count)[0].label}`
+              : undefined
+          }
+          icon={<FolderTree aria-hidden />}
+        />
+      </StatTileGrid>
 
       {/* ページ内ナビは本文上部に置く (サイドバーの右に 2 本目の列を作らない)。
       広い幅はカード 2 枚、狭い幅は折りたたみ 1 つ。 */}
@@ -424,8 +467,12 @@ export default async function SurveyPage({ params }: PageProps) {
             {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
             <ul className="grid gap-x-6 sm:grid-cols-2">
               {editorial.whatYouCanLearn.map((item) => (
-                <li key={item} className="border-b border-border py-2.5 text-sm leading-6 text-foreground">
-                  {item}
+                <li
+                  key={item}
+                  className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-foreground"
+                >
+                  <CircleCheck className="mt-1 size-4 shrink-0 text-positive" aria-hidden />
+                  <span className="min-w-0">{item}</span>
                 </li>
               ))}
             </ul>
@@ -485,18 +532,29 @@ export default async function SurveyPage({ params }: PageProps) {
           />
           <SurveyOutboundLinkArea surface="survey_theme">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedThemes.map((theme) => (
-                <SurfaceLinkCard
-                  key={theme.key}
-                  href={themeHref(theme.key)}
-                  className="text-sm font-medium text-foreground hover:bg-accent/50"
-                >
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="min-w-0">{theme.title}</span>
-                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-                  </span>
-                </SurfaceLinkCard>
-              ))}
+              {relatedThemes.map((theme) => {
+                const group = themeNavGroupOf(theme.key);
+                const Icon = group ? THEME_NAV_GROUP_ICONS[group.id] : LayoutGrid;
+                return (
+                  <SurfaceLinkCard
+                    key={theme.key}
+                    href={themeHref(theme.key)}
+                    className="text-sm text-foreground hover:bg-accent/50"
+                  >
+                    <span className="flex items-center gap-3">
+                      <Icon className="size-5 shrink-0 text-muted-foreground" aria-hidden />
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-medium">{theme.title}</span>
+                        <span className="block text-xs text-muted-foreground">
+                          {group ? `${group.label}・` : ''}
+                          {theme.metricCount} 指標
+                        </span>
+                      </span>
+                      <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                    </span>
+                  </SurfaceLinkCard>
+                );
+              })}
             </div>
           </SurveyOutboundLinkArea>
         </section>
@@ -514,10 +572,14 @@ export default async function SurveyPage({ params }: PageProps) {
                 <SurfaceLinkCard
                   key={theme.themeSlug}
                   href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
-                  className="text-sm font-medium text-foreground hover:bg-accent/50"
+                  className="text-sm text-foreground hover:bg-accent/50"
                 >
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="min-w-0">{theme.title}</span>
+                  <span className="flex items-center gap-3">
+                    <ChartLine className="size-5 shrink-0 text-muted-foreground" aria-hidden />
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-medium">{theme.title}</span>
+                      <span className="block text-xs text-muted-foreground">全国・{theme.metrics.length} 指標</span>
+                    </span>
                     <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
                   </span>
                 </SurfaceLinkCard>
@@ -528,27 +590,25 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {relatedArticles.length > 0 && (
-        <section id="related-articles" className="mb-4 scroll-mt-24">
-          <SectionHeader
-            title="この調査を使う記事"
-          />
+        // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
+        <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
+          <SectionHeader title="この調査を使う記事" hideRule />
           <SurveyOutboundLinkArea surface="survey_blog">
-            <div className="grid gap-3 sm:grid-cols-2">
+            <ArticleTeaserGrid>
               {relatedArticles.map((article) => (
-                <SurfaceLinkCard
+                <ArticleTeaserCard
                   key={article.slug}
                   href={hrefFor('blog', { slug: article.slug })}
-                  className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
-                >
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="min-w-0">{article.title}</span>
-                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-                  </span>
-                </SurfaceLinkCard>
+                  title={article.title}
+                  thumbnail={{
+                    lightSrc: blogThumbnailUrl(article.slug, 'light'),
+                    darkSrc: blogThumbnailUrl(article.slug, 'dark'),
+                  }}
+                />
               ))}
-            </div>
+            </ArticleTeaserGrid>
           </SurveyOutboundLinkArea>
-        </section>
+        </PanelGrid>
       )}
 
       {/*
@@ -587,10 +647,17 @@ export default async function SurveyPage({ params }: PageProps) {
         <section id="survey-caveats" className="mb-4 scroll-mt-24">
           <SectionHeader
             title="数字を読むときの注意"
+            icon={<TriangleAlert aria-hidden />}
           />
-          <ul className="space-y-3 border bg-muted/30 p-5 text-sm leading-7 text-muted-foreground">
+          <ul className="grid gap-x-6 @md:grid-cols-2">
             {editorial.caveats.map((caveat) => (
-              <li key={caveat}>・{caveat}</li>
+              <li
+                key={caveat}
+                className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-muted-foreground"
+              >
+                <TriangleAlert className="mt-1 size-4 shrink-0 text-warning" aria-hidden />
+                <span className="min-w-0">{caveat}</span>
+              </li>
             ))}
           </ul>
         </section>

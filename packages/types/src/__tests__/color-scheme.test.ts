@@ -18,6 +18,7 @@ import {
   assertKnownColorScheme,
   colorSchemeTypeOf,
   isKnownColorScheme,
+  metricHueOf,
   normalizeColorScheme,
   toShortColorScheme,
 } from "../color-scheme";
@@ -107,5 +108,21 @@ describe("★mutation — 現行バグの再現で感度を固定する", () => 
     const without = COLOR_SCHEME_CATALOG.filter((e) => e.short !== "Blues");
     const lookup = new Map<string, unknown>(without.map((e) => [e.canonical, e]));
     expect(lookup.has("interpolateBlues")).toBe(false);
+  });
+});
+
+describe("指標の色相 (棒など一色で描く図)", () => {
+  it("単方向の配色は表記によらず同じ色相を返す", () => {
+    expect(metricHueOf("interpolateGreens")).toBe("green");
+    expect(metricHueOf("Greens")).toBe("green");
+    expect(metricHueOf("interpolateOranges")).toBe("orange");
+    expect(metricHueOf("YlOrRd")).toBe("red");
+    expect(metricHueOf(DEFAULT_SEQUENTIAL_SCHEME)).toBe("blue");
+  });
+  it("発散色・灰色・知覚均一・未知は色相を持たない (図の既定色に任せる)", () => {
+    expect(metricHueOf(DEFAULT_DIVERGING_SCHEME)).toBeNull();
+    expect(metricHueOf("Greys")).toBeNull();
+    expect(metricHueOf("Viridis")).toBeNull();
+    expect(metricHueOf("nope")).toBeNull();
   });
 });

@@ -190,6 +190,24 @@ export function d3KeyOfColorScheme(value: string | null | undefined): string | n
   return findColorScheme(value)?.d3Key ?? null;
 }
 
+/** 一色で描く図 (棒・強調) が使う、指標の配色の色相。 */
+export type MetricHue = "blue" | "red" | "orange" | "green" | "purple";
+const HUE_OF_SHORT: Partial<Record<ShortColorScheme, MetricHue>> = {
+  Blues: "blue", PuBu: "blue", GnBu: "blue", YlGnBu: "blue",
+  Reds: "red", YlOrRd: "red", OrRd: "red", PuRd: "red", RdPu: "red",
+  Oranges: "orange", YlOrBr: "orange",
+  Greens: "green", BuGn: "green", YlGn: "green", PuBuGn: "green",
+  Purples: "purple", BuPu: "purple",
+};
+/**
+ * 指標の単方向配色が表す色相 (棒グラフなど一色で描く図の色)。地図・タイルは配色の濃淡で塗り、
+ * 棒は長さで値を表すので濃淡を重ねず、この色相 1 色で描く。発散色・灰色・知覚均一は null (図の既定色)。
+ */
+export function metricHueOf(value: string | null | undefined): MetricHue | null {
+  const entry = findColorScheme(value);
+  return entry && entry.type === "sequential" ? HUE_OF_SHORT[entry.short] ?? null : null;
+}
+
 /** カタログの type を引く。未知なら null。 */
 export function colorSchemeTypeOf(value: string | null | undefined): ColorSchemeType | null {
   return findColorScheme(value)?.type ?? null;

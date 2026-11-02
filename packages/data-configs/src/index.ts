@@ -89,6 +89,8 @@ export {
   type CategoryMeta,
 } from "./categories";
 export {
+  isCapitalCityValueMetric,
+  rankingHookAreaNoun,
   resolveMetricProvenance,
   resolveSourceProvenance,
   resolveProvenanceByParams,

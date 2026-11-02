@@ -19,7 +19,9 @@ describe('ranking table basic form', () => {
     expect(svg).not.toContain('を抜粋');
     expect(svg).not.toContain('data-category');
     expect(svg).not.toContain('<rect x="352"');
-    expect(svg.match(/text-anchor="end" font-size="12"/g)).toHaveLength(10);
+    // Ten rows drawn at frame size (not the blog table scaled up), ranks in the metric colour.
+    expect(svg.match(/data-rank="/g)).toHaveLength(10);
+    expect(svg).not.toContain('viewBox="0 0 340');
     const png = await sharp(Buffer.from(svg)).png().toBuffer();
     expect(await sharp(png).metadata()).toMatchObject({ width: 1080, height: 1350, format: 'png' });
     expect(input.data).toHaveLength(47);

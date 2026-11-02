@@ -48,7 +48,8 @@ const MAP = { left: 60, width: 960, top: 262, bottom: 1262 } as const;
 const TILE_GAP = 4;
 // Top three go in the empty Sea of Japan area left of Hokkaido, above the Ishikawa row (site grid row 6).
 const TOP_PANEL = { rowLimit: 6, colLimit: 8, count: 3 } as const;
-const LEGEND = { width: 440, height: 22, labelSize: 20 } as const;
+// Legend rows (colour, range, count), shared with the real-shape map; a gradient bar only for a continuous scale.
+const LEGEND = { width: 330, rowHeight: 44, swatch: 30, labelSize: 24, barWidth: 440, barHeight: 22 } as const;
 // Value column of the top-three panel, measured from the panel's left edge.
 const TOP_VALUE_RIGHT = 380;
 
@@ -171,11 +172,66 @@ export interface All47Panel {
   valueColor?: string;
 }
 
+/** The value formatter of a whole map: one precision for every value (blog-svg-chart-standards §3). */
+export function mapValueFormatter(values: number[]) {
+  const precision = resolveValuePrecision(values);
+  return (v: number) => formatValueWithPrecision(v, precision);
+}
+
+/** Top three (ties share a rank), shared by the tile map and the real-shape map. */
+export function renderTopThree(
+  entries: All47Entry[],
+  opts: { x: number; top: number; width: number; rowGap: number; unit: string; format: (v: number) => string; capitalCities?: boolean }
+) {
+  const sorted = [...entries].sort((a, b) => b.value - a.value);
+  const ranked = sorted.map((r) => ({ r, rank: sorted.findIndex((o) => o.value === r.value) + 1 }));
+  const top = ranked.filter(({ rank }) => rank <= TOP_PANEL.count).slice(0, TOP_PANEL.count + 1);
+  const { x, unit } = opts;
+  return [
+    text(opts.capitalCities ? '上位3市' : '上位3県', x, opts.top + 24, 26, opts.width, MUTED, 700),
+    ...top.map(({ r, rank }, i) => {
+      const y = opts.top + 84 + i * opts.rowGap;
+      return `<g data-top="${rank}">${text(String(rank), x + 18, y, 34, 40, MUTED, 700, 'middle')}${text(nameOf(r, opts.capitalCities), x + 52, y, 40, 180, INK, 700)}${text(opts.format(r.value), x + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, INK, 800, 'end')}${text(unit, x + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, MUTED, 700, 'end')}</g>`;
+    }),
+  ].join('');
+}
+
+/**
+ * Legend in the bottom-right corner, shared by the tile map and the real-shape map: one row per class,
+ * high to low, with its colour, range and the number of prefectures (so colour is never the only cue).
+ * A continuous scale has no classes and gets a gradient bar with its two ends.
+ */
+export function renderClassLegend(
+  scale: All47Scale,
+  values: number[],
+  opts: { right: number; bottom: number; format: (v: number) => string; countUnit?: string }
+) {
+  const f = opts.format;
+  if (!scale.colors.length) {
+    const x = opts.right - LEGEND.barWidth, y = opts.bottom - 52, steps = 60;
+    const [lo, hi] = scale.boundaries;
+    const bar = Array.from({ length: steps }, (_, i) => `<rect x="${(x + LEGEND.barWidth * i / steps).toFixed(1)}" y="${y}" width="${(LEGEND.barWidth / steps + 0.5).toFixed(1)}" height="${LEGEND.barHeight}" fill="${scale.colorAt(lo + (hi - lo) * i / (steps - 1))}"/>`).join('');
+    return bar + text(f(lo), x, y + LEGEND.barHeight + 28, LEGEND.labelSize, 120, MUTED, 400) + text(f(hi), opts.right, y + LEGEND.barHeight + 28, LEGEND.labelSize, 120, MUTED, 400, 'end');
+  }
+  const last = scale.colors.length - 1;
+  const rows = scale.colors.map((color, i) => {
+    const lo = scale.boundaries[i], hi = scale.boundaries[i + 1];
+    const label = scale.labelEnds === false && i === 0 ? `${f(hi)}未満`
+      : scale.labelEnds === false && i === last ? `${f(lo)}以上`
+      : `${f(lo)}〜${f(hi)}`;
+    return { color, label, count: values.filter((v) => scale.colorAt(v) === color).length };
+  }).reverse();
+  const top = opts.bottom - rows.length * LEGEND.rowHeight, left = opts.right - LEGEND.width;
+  return rows.map((row, i) => {
+    const y = top + i * LEGEND.rowHeight;
+    return `<g data-legend-row="${i}"><rect x="${left}" y="${y}" width="${LEGEND.swatch}" height="${LEGEND.swatch}" rx="4" fill="${row.color}"/>${text(row.label, left + LEGEND.swatch + 14, y + 23, LEGEND.labelSize, LEGEND.width - LEGEND.swatch - 90, INK, 400)}${text(row.count + (opts.countUnit ?? '県'), opts.right, y + 23, LEGEND.labelSize, 70, INK, 700, 'end')}</g>`;
+  }).join('');
+}
+
 export function renderAll47TileSvg(
   entries: All47Entry[],
   opts: All47Options
 ): string {
-  const sorted = [...entries].sort((a, b) => b.value - a.value);
   const body = renderTileMapBody(entries, {
     width: MAP.width, height: MAP.bottom - MAP.top,
     scale: opts.scale, capitalCities: opts.capitalCities, formatValue: opts.formatValue,
@@ -186,11 +242,8 @@ export function renderAll47TileSvg(
   const fmtBoundary = scale.formatBoundary ?? fmt;
   const tiles = `<g transform="translate(${MAP.left},${MAP.top})">${body.svg}</g>`;
 
-  // Top three (ties share a rank) in the empty sea area left of Hokkaido.
-  const ranked = sorted.map((r) => ({ r, rank: sorted.findIndex((o) => o.value === r.value) + 1 }));
-  const top = ranked.filter(({ rank }) => rank <= TOP_PANEL.count).slice(0, TOP_PANEL.count + 1);
   const panelWidth = left + TOP_PANEL.colLimit * pitch - 40 - MAP.left;
-  const panelTop = MAP.top + 24, rowGap = Math.min(76, (IMAGE_TILE_LAYOUT.rowAt(TOP_PANEL.rowLimit) * pitch - 90) / top.length);
+  const panelTop = MAP.top + 24, rowGap = Math.min(76, (IMAGE_TILE_LAYOUT.rowAt(TOP_PANEL.rowLimit) * pitch - 90) / TOP_PANEL.count);
   const unit = opts.unit === 'l' ? 'L' : opts.unit;
   const topPanel = opts.panel
     ? [
@@ -198,26 +251,8 @@ export function renderAll47TileSvg(
       `<g data-panel="headline">${text(opts.panel.value, MAP.left, panelTop + 120, 92, panelWidth, opts.panel.valueColor ?? INK, 800)}</g>`,
       opts.panel.caption ? text(opts.panel.caption, MAP.left, panelTop + 176, 30, panelWidth, INK, 700) : '',
     ].join('')
-    : [
-      text(opts.capitalCities ? '上位3市' : '上位3県', MAP.left, panelTop + 24, 26, panelWidth, MUTED, 700),
-      ...top.map(({ r, rank }, i) => {
-        const y = panelTop + 84 + i * rowGap;
-        return `<g data-top="${rank}">${text(String(rank), MAP.left + 18, y, 34, 40, MUTED, 700, 'middle')}${text(nameOf(r, opts.capitalCities), MAP.left + 52, y, 40, 180, INK, 700)}${text(fmt(r.value), MAP.left + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, INK, 800, 'end')}${text(unit, MAP.left + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, MUTED, 700, 'end')}</g>`;
-      }),
-    ].join('');
-
-  // Legend in the bottom-right corner: class colours with their boundaries (or a gradient for continuous).
-  const legendX = MAP.left + MAP.width - LEGEND.width, legendY = MAP.bottom - 64;
-  const steps = scale.colors.length || 60;
-  const swatches = Array.from({ length: steps }, (_, i) => {
-    const fill = scale.colors.length ? scale.colors[i] : scale.colorAt(scale.boundaries[0] + (scale.boundaries[1] - scale.boundaries[0]) * i / (steps - 1));
-    return `<rect x="${(legendX + LEGEND.width * i / steps).toFixed(1)}" y="${legendY}" width="${(LEGEND.width / steps + 0.5).toFixed(1)}" height="${LEGEND.height}" fill="${fill}"/>`;
-  }).join('');
-  const marks = scale.boundaries.map((value, i, all) => {
-    if (scale.labelEnds === false && (i === 0 || i === all.length - 1)) return '';
-    const x = legendX + LEGEND.width * i / (all.length - 1);
-    return text(fmtBoundary(value), x, legendY + LEGEND.height + 26, LEGEND.labelSize, 64, MUTED, 400, i === 0 ? 'start' : i === all.length - 1 ? 'end' : 'middle');
-  }).join('');
+    : renderTopThree(entries, { x: MAP.left, top: panelTop, width: panelWidth, rowGap, unit, format: fmt, capitalCities: opts.capitalCities });
+  const legend = renderClassLegend(scale, entries.map((r) => r.value), { right: MAP.left + MAP.width, bottom: MAP.bottom - 12, format: fmtBoundary, countUnit: opts.capitalCities ? '市' : '県' });
 
   // Minimal copy (chart-image-copy.md): metric, year, unit, the city/prefecture scope, legend and source.
   // No publisher, slogans or how-to-read notes; those belong to the post text.
@@ -226,11 +261,11 @@ export function renderAll47TileSvg(
   // A lowercase l reads as 1 at phone width; show the litre symbol as L.
   const meta = `${opts.year} · 単位：${unit}${scope}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350"><rect width="1080" height="1350" fill="${PAPER}"/><g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif">
-    ${text(opts.title, 60, 120, 64, 960)}${text(meta, 60, 180, 30, 960, MUTED, 400)}
-    ${opts.note ? text(opts.note, 60, 222, 24, 960, MUTED, 400) : ''}
+    ${text(opts.title, 64, 120, 72, 952)}${text(meta, 64, 184, 32, 952, MUTED, 400)}
+    ${opts.note ? text(opts.note, 64, 230, 28, 952, MUTED, 400) : ''}
     ${topPanel}
     ${tiles}
-    ${swatches}${marks}
-    ${text('出典：' + opts.source, 60, 1310, 22, 960, MUTED, 400)}
+    ${legend}
+    ${text('出典：' + opts.source, 64, 1310, 26, 952, MUTED, 400)}
   </g></svg>`;
 }

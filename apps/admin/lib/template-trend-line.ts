@@ -2,7 +2,8 @@ import { engelCoefficient } from '../../../data/metrics/engel-coefficient';
 import { foodExpenditureTotal } from '../../../data/metrics/food-expenditure-total';
 import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas';
 import { assertMetricPresentation, resolveNumericDomain, type MetricPresentation } from '../../../packages/types/src/metric-presentation';
-import { generateLineSvg } from '../../../packages/svg-builder/src/charts/line';
+import { niceTicks } from '../../../packages/types/src/numeric-ticks';
+import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 export const TREND_SAMPLE_METRIC = engelCoefficient;
@@ -37,21 +38,26 @@ export function renderTrendLine(raw: unknown, presentation: MetricPresentation =
   const domain = resolveNumericDomain(values, presentation.trendDomain);
   if (!domain || values.some((value) => value < domain[0] || value > domain[1]))
     throw Error('推移の表示範囲に値が収まりません。');
-  const chart = generateLineSvg(rows.map(row => ({
-    metricKey: TREND_SAMPLE_METRIC.key,
-    areaCode: TREND_SAMPLE_SERIES.areaCode, areaName: TREND_SAMPLE_SERIES.name,
-    yearCode: String(row.year), yearName: String(row.year),
-    value: row.value * factor, unit: TREND_SAMPLE_METRIC.display?.displayUnit ?? TREND_SAMPLE_METRIC.unit,
-  })), {
-    title: `${TREND_SAMPLE_SERIES.name}の${TREND_SAMPLE_METRIC.title}`,
-    xKey: 'yearCode', seriesKey: 'areaCode',
-    yDomain: [domain[0] * factor, domain[1] * factor],
-    frame: { width: 340, height: 290 }, showHeading: false,
-    showEndpointValues: true,
-  });
+  // Drawn at frame size: light value gridlines, no plot box, the first and last values next to their points.
+  const decimals = TREND_SAMPLE_METRIC.display?.decimalPlaces ?? 1;
+  const top = sampleBodyTop(true) + 40;
+  const plot = { left: 150, right: SAMPLE_FRAME.right - 110, top: top + 40, bottom: SAMPLE_FRAME.bodyBottom - 70 };
+  const xAt = (year: number) => plot.left + (plot.right - plot.left) * (year - TREND_SAMPLE_SERIES.from) / (TREND_SAMPLE_SERIES.to - TREND_SAMPLE_SERIES.from);
+  const yAt = (value: number) => plot.bottom - (plot.bottom - plot.top) * (value - domain[0]) / (domain[1] - domain[0]);
+  const grid = niceTicks(domain[0] * factor, domain[1] * factor, 5).filter((t) => t >= domain[0] * factor && t <= domain[1] * factor).map((tick) => {
+    const y = yAt(tick / factor);
+    return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="${BRAND.line}" stroke-width="1.5"/><text x="${plot.left - 20}" y="${y + 10}" text-anchor="end" font-size="28" fill="${BRAND.muted}">${tick}</text>`;
+  }).join('');
+  const years = rows.map((row) => row.year).filter((year, i, all) => (year - TREND_SAMPLE_SERIES.from) % 3 === 0 || i === all.length - 1);
+  const xLabels = years.filter((year, i, all) => i === all.length - 1 || all[all.length - 1] - year >= 2)
+    .map((year) => `<text x="${xAt(year)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="28" fill="${BRAND.muted}">${year}</text>`).join('');
+  const points = rows.map((row) => `${xAt(row.year).toFixed(1)},${yAt(row.value).toFixed(1)}`).join(' ');
+  const dots = rows.map((row) => `<circle cx="${xAt(row.year).toFixed(1)}" cy="${yAt(row.value).toFixed(1)}" r="8" fill="${BRAND.primary}" stroke="${BRAND.paper}" stroke-width="3"/>`).join('');
+  const first = rows[0], last = rows[rows.length - 1];
+  // First value below its point, last value to the right of its point, so neither sits on the line.
+  const endLabel = (row: typeof first, position: 'below' | 'right') => `<text x="${xAt(row.year) + (position === 'right' ? 18 : 0)}" y="${yAt(row.value) + (position === 'right' ? 14 : 58)}" text-anchor="start" font-size="40" font-weight="700" fill="${BRAND.primary}">${(row.value * factor).toFixed(decimals)}</text>`;
+  const body = `<g data-points="${rows.length}">${grid}${xLabels}<polyline points="${points}" fill="none" stroke="${BRAND.primary}" stroke-width="5" stroke-linejoin="round"/>${dots}${endLabel(first, 'below')}${endLabel(last, 'right')}</g>`;
   const source = 'displayName' in foodExpenditureTotal.source ? foodExpenditureTotal.source.displayName : '';
-  const top = sampleBodyTop(true) + 24;
-  const width = SAMPLE_FRAME.right - SAMPLE_FRAME.left, height = Math.min(SAMPLE_FRAME.bodyBottom - top, width * 290 / 340);
   return sampleFrame({
     title: `${TREND_SAMPLE_METRIC.title}の推移`,
     meta: `${TREND_SAMPLE_SERIES.from}–${TREND_SAMPLE_SERIES.to}年 · 単位：${TREND_SAMPLE_METRIC.display?.displayUnit ?? TREND_SAMPLE_METRIC.unit}`,
@@ -59,6 +65,6 @@ export function renderTrendLine(raw: unknown, presentation: MetricPresentation =
     source: source ?? '',
     ariaLabel: `${TREND_SAMPLE_SERIES.name}の${TREND_SAMPLE_METRIC.title}・${TREND_SAMPLE_SERIES.from}〜${TREND_SAMPLE_SERIES.to}年`,
     attributes: `data-domain-min="${domain[0]}" data-domain-max="${domain[1]}"`,
-    body: `<svg x="${SAMPLE_FRAME.left}" y="${top}" width="${width}" height="${height}" viewBox="0 0 340 290" data-points="${rows.length}">${chart}</svg>`,
+    body,
   });
 }
