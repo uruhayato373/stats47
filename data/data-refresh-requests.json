@@ -1,0 +1,1 @@
+{ "metric": "bread-consumption-quantity,fresh-fruit-consumption-quantity,fresh-seafood-consumption-quantity,fresh-vegetables-consumption-quantity,shellfish-consumption-quantity,information-communication-expenditure,engel-coefficient", "since": "", "dryRun": false, "migrateLegacyRecipes": false, "snapshotScope": "auto" }
