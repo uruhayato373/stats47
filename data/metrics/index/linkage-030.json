@@ -4393,10 +4393,7 @@
         "configHash": "e20ba92d59006b8a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-appliances",
@@ -4412,7 +4409,7 @@
     {
       "metricKey": "vacuum-cleaner-consumption-quantity",
       "pageId": "ranking:vacuum-cleaner-consumption-quantity",
-      "title": "電気掃除機消費量",
+      "title": "電気掃除機購入数量",
       "sources": [
         {
           "role": "primary",
@@ -4437,10 +4434,7 @@
         "configHash": "b903cf0c36a13da7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:vacuum-cleaner-consumption-quantity",
@@ -5323,10 +5317,7 @@
         "configHash": "f886a8c91697008a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:yamaguchi-food-culture",
@@ -5402,10 +5393,7 @@
         "configHash": "80a2cfc1546a9802"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:vet-fee-consumption-expenditure",
@@ -5442,10 +5430,7 @@
         "configHash": "d6bba592eaba92fd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:video-recorder-consumption-expenditure",
@@ -5457,7 +5442,7 @@
     {
       "metricKey": "video-recorder-consumption-quantity",
       "pageId": "ranking:video-recorder-consumption-quantity",
-      "title": "ビデオレコーダー・プレイヤー消費量",
+      "title": "ビデオレコーダー・プレイヤー購入数量",
       "sources": [
         {
           "role": "primary",
@@ -5482,10 +5467,7 @@
         "configHash": "cd112e5f2005dd64"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:video-recorder-consumption-quantity",
@@ -5522,10 +5504,7 @@
         "configHash": "a5743cef82e9fcfc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kagoshima-food-culture",
@@ -5582,10 +5561,7 @@
         "configHash": "fbff8b2227878511"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kagoshima-food-culture",
@@ -5879,10 +5855,7 @@
         "configHash": "e3bab35c4b95f83f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:vocational-school-consumption-expenditure",
@@ -6881,10 +6854,7 @@
         "configHash": "b1e10f74a00f09af"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:hokkaido-food-culture",
@@ -6953,10 +6923,7 @@
         "configHash": "b76e63359d0710c2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:hokkaido-food-culture",
@@ -7025,10 +6992,7 @@
         "configHash": "df323be6071dec95"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-appliances",
@@ -7044,7 +7008,7 @@
     {
       "metricKey": "washing-machine-consumption-quantity",
       "pageId": "ranking:washing-machine-consumption-quantity",
-      "title": "電気洗濯機消費量",
+      "title": "電気洗濯機購入数量",
       "sources": [
         {
           "role": "primary",
@@ -7069,10 +7033,7 @@
         "configHash": "5aea38a318c2f6a0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:washing-machine-consumption-quantity",
@@ -7713,10 +7674,7 @@
         "configHash": "d543053e64862bf5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:water-sewer-expenditure-ranking",
@@ -8728,10 +8686,7 @@
         "configHash": "994be989bb69863a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aomori-food-culture",
@@ -8808,10 +8763,7 @@
         "configHash": "b4192cf8a0de68cb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -9078,10 +9030,7 @@
         "configHash": "f5f3e74cccb189e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:wedding-expense-consumption-expenditure",

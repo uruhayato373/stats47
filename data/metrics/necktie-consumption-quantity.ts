@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const necktieConsumptionQuantity: MetricConfig = {
   "key": "necktie-consumption-quantity",
-  "title": "ネクタイ消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間ネクタイ消費量",
+  "title": "ネクタイ購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間ネクタイ購入数量",
   "unit": "本",
   "category": "economy",
   "source": {
@@ -40,25 +40,9 @@ export const necktieConsumptionQuantity: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "本/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "本/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
     "isCalculated": false,
   },
-  "seoTitle": "ネクタイ消費量ランキング都道府県【2024年】｜1位熊本県（0.21本）",
-  "seoDescription": "2024年のネクタイ消費量の都道府県別ランキング。1位熊本県（0.21本）、最下位滋賀県（0.02本）で13.9倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "ネクタイ購入数量ランキング都道府県【2024年】｜1位熊本県（0.21本）",
+  "seoDescription": "2024年のネクタイ購入数量の都道府県別ランキング。1位熊本県（0.21本）、最下位滋賀県（0.02本）で13.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

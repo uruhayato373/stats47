@@ -17,7 +17,7 @@ node --import tsx .claude/scripts/estat/catalog.mjs pull        # .local/estat-c
 node --import tsx .claude/scripts/estat/catalog.mjs search --id <statsDataId>
 ```
 
-見つからない (未取得・全国collectArea=1で対象外・カタログ自体が初回backfill未実施) 場合のみ
+見つからない (未取得・全国 collectArea=1 や該当なし 0 で meta 対象外・カタログ自体が初回backfill未実施) 場合のみ
 Phase 1 の生 API 呼び出しへ進む。
 また `.claude/skills/estat/references/README.md` を確認し、既知のテーブル構造やコード体系を把握すること。該当する調査のリファレンスファイルがあれば、そちらも読むこと。
 

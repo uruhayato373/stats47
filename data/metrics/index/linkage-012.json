@@ -4874,10 +4874,7 @@
         "configHash": "522577556f493166"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:housekeeping-service-consumption-expenditure",
@@ -5768,10 +5765,7 @@
         "configHash": "e739e87512f9738a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:housing-charges-consumption-expenditure",
@@ -6804,10 +6798,7 @@
         "configHash": "6659dba91867b5de"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:banana-consumption-quantity",
@@ -9343,10 +9334,7 @@
         "configHash": "657fd0061ee08eed"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:infant-clothes-consumption-expenditure",
@@ -9358,7 +9346,7 @@
     {
       "metricKey": "infant-clothes-consumption-quantity",
       "pageId": "ranking:infant-clothes-consumption-quantity",
-      "title": "乳児服消費量",
+      "title": "乳児服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -9383,10 +9371,7 @@
         "configHash": "c8790543caeec6e4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:infant-clothes-consumption-quantity",
@@ -11544,10 +11529,7 @@
         "configHash": "4c1b2476b77c3071"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:insecticide-consumption-expenditure",
@@ -11584,10 +11566,7 @@
         "configHash": "c962208133f34c9a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:chinese-noodles-expenditure-ranking",
@@ -11632,10 +11611,7 @@
         "configHash": "e1dd85b0e7d1ffcb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -13216,10 +13192,7 @@
         "configHash": "ae254ce3d8206d9c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -13450,10 +13423,7 @@
         "configHash": "cddb160890ee11a3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",

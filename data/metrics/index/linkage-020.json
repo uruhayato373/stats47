@@ -2352,10 +2352,7 @@
         "configHash": "385cd2781c0f90eb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:perm-consumption-expenditure",
@@ -2392,10 +2389,7 @@
         "configHash": "1d8f8f0944aa42c2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:perm-consumption-quantity",
@@ -2432,10 +2426,7 @@
         "configHash": "5e711df6cd879c0d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:chiba-food-culture",
@@ -2508,10 +2499,7 @@
         "configHash": "65d116f32fbd4338"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:chiba-food-culture",
@@ -2580,10 +2568,7 @@
         "configHash": "6c99fba30a648d0c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:personal-computer-expenditure-ranking",
@@ -2628,10 +2613,7 @@
         "configHash": "9108286a10feac0d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:local-services",
@@ -3603,10 +3585,7 @@
         "configHash": "438380e26800e5ed"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:pet-food-consumption-expenditure-prefecture-gap",
@@ -3647,10 +3626,7 @@
         "configHash": "30a7ed85fc189fc6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pet-supplies-consumption-expenditure",
@@ -4463,10 +4439,7 @@
         "configHash": "11bd24d201287121"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:photo-printing-consumption-expenditure",
@@ -5997,10 +5970,7 @@
         "configHash": "f535a732c4c27c8d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukuoka-food-culture",
@@ -6053,10 +6023,7 @@
         "configHash": "1fef0b7fa5899c3c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukuoka-food-culture",
@@ -6109,10 +6076,7 @@
         "configHash": "45edd7d5a11795c6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukushima-food-culture",
@@ -6157,10 +6121,7 @@
         "configHash": "b63fb3948a953b27"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukushima-food-culture",
@@ -6205,10 +6166,7 @@
         "configHash": "217079f4bca7c9ff"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aomori-food-culture",
@@ -6277,10 +6235,7 @@
         "configHash": "26fdcdb5e2f00bae"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aomori-food-culture",
@@ -7042,10 +6997,7 @@
         "configHash": "2afbb0fd7c4dd7de"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:plastic-bags-wrap-consumption-expenditure",
@@ -7082,10 +7034,7 @@
         "configHash": "f740a9662328ed31"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:plumbing-construction-consumption-expenditure",

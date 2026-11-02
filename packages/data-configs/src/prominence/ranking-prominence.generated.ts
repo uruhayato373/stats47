@@ -354,10 +354,10 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
       },
       {
         "rankingKey": "air-conditioner-consumption-quantity",
-        "title": "エアコン消費量",
-        "readerLabel": "エアコン消費量",
-        "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン消費量",
-        "hook": "エアコン消費量が最も多い県は？"
+        "title": "エアコン購入数量",
+        "readerLabel": "エアコン購入数量",
+        "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン購入数量",
+        "hook": "エアコン購入数量が最も多い県は？"
       }
     ]
   },

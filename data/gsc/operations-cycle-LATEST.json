@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T00:32:35.684Z",
-  "stage": "monthly",
+  "generatedAt": "2026-11-01T17:13:49.871Z",
+  "stage": "monitor",
   "status": "fail",
   "measurementWeek": "2026-W43",
-  "expectedCompletedWeek": "2026-W43",
+  "expectedCompletedWeek": "2026-W44",
   "expectedPlanWeek": "2026-W45",
   "currentMonth": "2026-11",
   "summary": {
     "pass": 11,
     "warn": 1,
-    "fail": 1
+    "fail": 2
   },
   "checks": [
     {
@@ -21,9 +21,9 @@
     },
     {
       "code": "snapshot-freshness",
-      "level": "pass",
-      "detail": "latest=2026-W43, expected>=2026-W43",
-      "action": null
+      "level": "fail",
+      "detail": "latest=2026-W43, expected>=2026-W44",
+      "action": "npm run fetch-gsc-snapshot -- 2026-W44"
     },
     {
       "code": "effect-verdict",
@@ -52,7 +52,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W44, age=2d",
+      "detail": "week=2026-W44, age=3d",
       "action": null
     },
     {
@@ -70,13 +70,19 @@
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-10-31, age=1d",
+      "detail": "latest=2026-10-31, age=2d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
       "detail": "2026-W43 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "pass",
+      "detail": "plan=2026-W45, expected=2026-W45",
       "action": null
     },
     {

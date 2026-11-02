@@ -157,7 +157,7 @@
       "id": "ranking:adult-sandals-consumption-quantity",
       "kind": "ranking",
       "key": "adult-sandals-consumption-quantity",
-      "title": "大人用サンダル消費量",
+      "title": "大人用サンダル購入数量",
       "href": "/ranking/adult-sandals-consumption-quantity",
       "published": true
     },
@@ -173,7 +173,7 @@
       "id": "ranking:adult-sneakers-consumption-quantity",
       "kind": "ranking",
       "key": "adult-sneakers-consumption-quantity",
-      "title": "大人用運動靴消費量",
+      "title": "大人用運動靴購入数量",
       "href": "/ranking/adult-sneakers-consumption-quantity",
       "published": true
     },
@@ -381,7 +381,7 @@
       "id": "ranking:air-conditioner-consumption-quantity",
       "kind": "ranking",
       "key": "air-conditioner-consumption-quantity",
-      "title": "エアコン消費量",
+      "title": "エアコン購入数量",
       "href": "/ranking/air-conditioner-consumption-quantity",
       "published": true
     },
@@ -1453,7 +1453,7 @@
       "id": "ranking:bed-consumption-quantity",
       "kind": "ranking",
       "key": "bed-consumption-quantity",
-      "title": "ベッド消費量",
+      "title": "ベッド購入数量",
       "href": "/ranking/bed-consumption-quantity",
       "published": true
     },
@@ -1661,7 +1661,7 @@
       "id": "ranking:blouse-consumption-quantity",
       "kind": "ranking",
       "key": "blouse-consumption-quantity",
-      "title": "ブラウス消費量",
+      "title": "ブラウス購入数量",
       "href": "/ranking/blouse-consumption-quantity",
       "published": true
     },
@@ -1765,7 +1765,7 @@
       "id": "ranking:boys-school-uniform-consumption-quantity",
       "kind": "ranking",
       "key": "boys-school-uniform-consumption-quantity",
-      "title": "男子用学校制服消費量",
+      "title": "男子用学校制服購入数量",
       "href": "/ranking/boys-school-uniform-consumption-quantity",
       "published": true
     },
@@ -2125,7 +2125,7 @@
       "id": "ranking:car-purchase-consumption-quantity",
       "kind": "ranking",
       "key": "car-purchase-consumption-quantity",
-      "title": "自動車購入消費量",
+      "title": "自動車購入購入数量",
       "href": "/ranking/car-purchase-consumption-quantity",
       "published": true
     },
@@ -2309,7 +2309,7 @@
       "id": "ranking:chest-consumption-quantity",
       "kind": "ranking",
       "key": "chest-consumption-quantity",
-      "title": "たんす消費量",
+      "title": "たんす購入数量",
       "href": "/ranking/chest-consumption-quantity",
       "published": true
     },
@@ -2453,7 +2453,7 @@
       "id": "ranking:childrens-clothes-consumption-quantity",
       "kind": "ranking",
       "key": "childrens-clothes-consumption-quantity",
-      "title": "子供服消費量",
+      "title": "子供服購入数量",
       "href": "/ranking/childrens-clothes-consumption-quantity",
       "published": true
     },
@@ -2477,7 +2477,7 @@
       "id": "ranking:childrens-shoes-consumption-quantity",
       "kind": "ranking",
       "key": "childrens-shoes-consumption-quantity",
-      "title": "子供用靴・サンダル消費量",
+      "title": "子供用靴・サンダル購入数量",
       "href": "/ranking/childrens-shoes-consumption-quantity",
       "published": true
     },
@@ -2501,7 +2501,7 @@
       "id": "ranking:childrens-socks-consumption-quantity",
       "kind": "ranking",
       "key": "childrens-socks-consumption-quantity",
-      "title": "子供用靴下消費量",
+      "title": "子供用靴下購入数量",
       "href": "/ranking/childrens-socks-consumption-quantity",
       "published": true
     },
@@ -3549,7 +3549,7 @@
       "id": "ranking:cooking-appliance-consumption-quantity",
       "kind": "ranking",
       "key": "cooking-appliance-consumption-quantity",
-      "title": "炊事用電気器具消費量",
+      "title": "炊事用電気器具購入数量",
       "href": "/ranking/cooking-appliance-consumption-quantity",
       "published": true
     },
@@ -3957,7 +3957,7 @@
       "id": "ranking:cupboard-consumption-quantity",
       "kind": "ranking",
       "key": "cupboard-consumption-quantity",
-      "title": "食器戸棚消費量",
+      "title": "食器戸棚購入数量",
       "href": "/ranking/cupboard-consumption-quantity",
       "published": true
     },
@@ -4909,7 +4909,7 @@
       "id": "ranking:dress-shirt-consumption-quantity",
       "kind": "ranking",
       "key": "dress-shirt-consumption-quantity",
-      "title": "ワイシャツ消費量",
+      "title": "ワイシャツ購入数量",
       "href": "/ranking/dress-shirt-consumption-quantity",
       "published": true
     },
@@ -7685,7 +7685,7 @@
       "id": "ranking:futon-consumption-quantity",
       "kind": "ranking",
       "key": "futon-consumption-quantity",
-      "title": "布団消費量",
+      "title": "布団購入数量",
       "href": "/ranking/futon-consumption-quantity",
       "published": true
     },
@@ -7733,7 +7733,7 @@
       "id": "ranking:game-console-consumption-quantity",
       "kind": "ranking",
       "key": "game-console-consumption-quantity",
-      "title": "ゲーム機消費量",
+      "title": "ゲーム機購入数量",
       "href": "/ranking/game-console-consumption-quantity",
       "published": true
     },
@@ -8213,7 +8213,7 @@
       "id": "ranking:girls-school-uniform-consumption-quantity",
       "kind": "ranking",
       "key": "girls-school-uniform-consumption-quantity",
-      "title": "女子用学校制服消費量",
+      "title": "女子用学校制服購入数量",
       "href": "/ranking/girls-school-uniform-consumption-quantity",
       "published": true
     },
@@ -8229,7 +8229,7 @@
       "id": "ranking:gloves-consumption-quantity",
       "kind": "ranking",
       "key": "gloves-consumption-quantity",
-      "title": "手袋消費量",
+      "title": "手袋購入数量",
       "href": "/ranking/gloves-consumption-quantity",
       "published": true
     },
@@ -8813,7 +8813,7 @@
       "id": "ranking:handbag-consumption-quantity",
       "kind": "ranking",
       "key": "handbag-consumption-quantity",
-      "title": "ハンドバッグ消費量",
+      "title": "ハンドバッグ購入数量",
       "href": "/ranking/handbag-consumption-quantity",
       "published": true
     },
@@ -8845,7 +8845,7 @@
       "id": "ranking:hat-consumption-quantity",
       "kind": "ranking",
       "key": "hat-consumption-quantity",
-      "title": "帽子消費量",
+      "title": "帽子購入数量",
       "href": "/ranking/hat-consumption-quantity",
       "published": true
     },
@@ -8981,7 +8981,7 @@
       "id": "ranking:heater-consumption-quantity",
       "kind": "ranking",
       "key": "heater-consumption-quantity",
-      "title": "ストーブ・温風ヒーター消費量",
+      "title": "ストーブ・温風ヒーター購入数量",
       "href": "/ranking/heater-consumption-quantity",
       "published": true
     },
@@ -10053,7 +10053,7 @@
       "id": "ranking:infant-clothes-consumption-quantity",
       "kind": "ranking",
       "key": "infant-clothes-consumption-quantity",
-      "title": "乳児服消費量",
+      "title": "乳児服購入数量",
       "href": "/ranking/infant-clothes-consumption-quantity",
       "published": true
     },
@@ -12461,7 +12461,7 @@
       "id": "ranking:mens-coat-consumption-quantity",
       "kind": "ranking",
       "key": "mens-coat-consumption-quantity",
-      "title": "男子用コート消費量",
+      "title": "男子用コート購入数量",
       "href": "/ranking/mens-coat-consumption-quantity",
       "published": true
     },
@@ -12477,7 +12477,7 @@
       "id": "ranking:mens-jacket-consumption-quantity",
       "kind": "ranking",
       "key": "mens-jacket-consumption-quantity",
-      "title": "男子用上着消費量",
+      "title": "男子用上着購入数量",
       "href": "/ranking/mens-jacket-consumption-quantity",
       "published": true
     },
@@ -12493,7 +12493,7 @@
       "id": "ranking:mens-pants-consumption-quantity",
       "kind": "ranking",
       "key": "mens-pants-consumption-quantity",
-      "title": "男子用ズボン消費量",
+      "title": "男子用ズボン購入数量",
       "href": "/ranking/mens-pants-consumption-quantity",
       "published": true
     },
@@ -12509,7 +12509,7 @@
       "id": "ranking:mens-shoes-consumption-quantity",
       "kind": "ranking",
       "key": "mens-shoes-consumption-quantity",
-      "title": "男子靴消費量",
+      "title": "男子靴購入数量",
       "href": "/ranking/mens-shoes-consumption-quantity",
       "published": true
     },
@@ -12533,7 +12533,7 @@
       "id": "ranking:mens-socks-consumption-quantity",
       "kind": "ranking",
       "key": "mens-socks-consumption-quantity",
-      "title": "男子用靴下消費量",
+      "title": "男子用靴下購入数量",
       "href": "/ranking/mens-socks-consumption-quantity",
       "published": true
     },
@@ -12549,7 +12549,7 @@
       "id": "ranking:mens-suit-consumption-quantity",
       "kind": "ranking",
       "key": "mens-suit-consumption-quantity",
-      "title": "背広服消費量",
+      "title": "背広服購入数量",
       "href": "/ranking/mens-suit-consumption-quantity",
       "published": true
     },
@@ -12565,7 +12565,7 @@
       "id": "ranking:mens-sweater-consumption-quantity",
       "kind": "ranking",
       "key": "mens-sweater-consumption-quantity",
-      "title": "男子用セーター消費量",
+      "title": "男子用セーター購入数量",
       "href": "/ranking/mens-sweater-consumption-quantity",
       "published": true
     },
@@ -12613,7 +12613,7 @@
       "id": "ranking:microwave-consumption-quantity",
       "kind": "ranking",
       "key": "microwave-consumption-quantity",
-      "title": "電子レンジ消費量",
+      "title": "電子レンジ購入数量",
       "href": "/ranking/microwave-consumption-quantity",
       "published": true
     },
@@ -13445,7 +13445,7 @@
       "id": "ranking:necktie-consumption-quantity",
       "kind": "ranking",
       "key": "necktie-consumption-quantity",
-      "title": "ネクタイ消費量",
+      "title": "ネクタイ購入数量",
       "href": "/ranking/necktie-consumption-quantity",
       "published": true
     },
@@ -15149,7 +15149,7 @@
       "id": "ranking:other-mens-shirt-consumption-quantity",
       "kind": "ranking",
       "key": "other-mens-shirt-consumption-quantity",
-      "title": "他の男子用シャツ消費量",
+      "title": "他の男子用シャツ購入数量",
       "href": "/ranking/other-mens-shirt-consumption-quantity",
       "published": true
     },
@@ -15581,7 +15581,7 @@
       "id": "ranking:other-womens-shirt-consumption-quantity",
       "kind": "ranking",
       "key": "other-womens-shirt-consumption-quantity",
-      "title": "他の婦人用シャツ消費量",
+      "title": "他の婦人用シャツ購入数量",
       "href": "/ranking/other-womens-shirt-consumption-quantity",
       "published": true
     },
@@ -17613,7 +17613,7 @@
       "id": "ranking:pots-kettles-consumption-quantity",
       "kind": "ranking",
       "key": "pots-kettles-consumption-quantity",
-      "title": "鍋・やかん消費量",
+      "title": "鍋・やかん購入数量",
       "href": "/ranking/pots-kettles-consumption-quantity",
       "published": true
     },
@@ -19245,7 +19245,7 @@
       "id": "ranking:refrigerator-consumption-quantity",
       "kind": "ranking",
       "key": "refrigerator-consumption-quantity",
-      "title": "電気冷蔵庫消費量",
+      "title": "電気冷蔵庫購入数量",
       "href": "/ranking/refrigerator-consumption-quantity",
       "published": true
     },
@@ -20469,7 +20469,7 @@
       "id": "ranking:school-bag-consumption-quantity",
       "kind": "ranking",
       "key": "school-bag-consumption-quantity",
-      "title": "通学用かばん消費量",
+      "title": "通学用かばん購入数量",
       "href": "/ranking/school-bag-consumption-quantity",
       "published": true
     },
@@ -20869,7 +20869,7 @@
       "id": "ranking:sheets-consumption-quantity",
       "kind": "ranking",
       "key": "sheets-consumption-quantity",
-      "title": "敷布消費量",
+      "title": "敷布購入数量",
       "href": "/ranking/sheets-consumption-quantity",
       "published": true
     },
@@ -21213,7 +21213,7 @@
       "id": "ranking:skirt-consumption-quantity",
       "kind": "ranking",
       "key": "skirt-consumption-quantity",
-      "title": "スカート消費量",
+      "title": "スカート購入数量",
       "href": "/ranking/skirt-consumption-quantity",
       "published": true
     },
@@ -22325,7 +22325,7 @@
       "id": "ranking:tableware-consumption-quantity",
       "kind": "ranking",
       "key": "tableware-consumption-quantity",
-      "title": "茶わん・皿・鉢消費量",
+      "title": "茶わん・皿・鉢購入数量",
       "href": "/ranking/tableware-consumption-quantity",
       "published": true
     },
@@ -22517,7 +22517,7 @@
       "id": "ranking:television-consumption-quantity",
       "kind": "ranking",
       "key": "television-consumption-quantity",
-      "title": "テレビ消費量",
+      "title": "テレビ購入数量",
       "href": "/ranking/television-consumption-quantity",
       "published": true
     },
@@ -23581,7 +23581,7 @@
       "id": "ranking:travel-bag-consumption-quantity",
       "kind": "ranking",
       "key": "travel-bag-consumption-quantity",
-      "title": "旅行用かばん消費量",
+      "title": "旅行用かばん購入数量",
       "href": "/ranking/travel-bag-consumption-quantity",
       "published": true
     },
@@ -23949,7 +23949,7 @@
       "id": "ranking:umbrella-consumption-quantity",
       "kind": "ranking",
       "key": "umbrella-consumption-quantity",
-      "title": "傘消費量",
+      "title": "傘購入数量",
       "href": "/ranking/umbrella-consumption-quantity",
       "published": true
     },
@@ -24389,7 +24389,7 @@
       "id": "ranking:vacuum-cleaner-consumption-quantity",
       "kind": "ranking",
       "key": "vacuum-cleaner-consumption-quantity",
-      "title": "電気掃除機消費量",
+      "title": "電気掃除機購入数量",
       "href": "/ranking/vacuum-cleaner-consumption-quantity",
       "published": true
     },
@@ -24453,7 +24453,7 @@
       "id": "ranking:video-recorder-consumption-quantity",
       "kind": "ranking",
       "key": "video-recorder-consumption-quantity",
-      "title": "ビデオレコーダー・プレイヤー消費量",
+      "title": "ビデオレコーダー・プレイヤー購入数量",
       "href": "/ranking/video-recorder-consumption-quantity",
       "published": true
     },
@@ -24653,7 +24653,7 @@
       "id": "ranking:washing-machine-consumption-quantity",
       "kind": "ranking",
       "key": "washing-machine-consumption-quantity",
-      "title": "電気洗濯機消費量",
+      "title": "電気洗濯機購入数量",
       "href": "/ranking/washing-machine-consumption-quantity",
       "published": true
     },
@@ -25101,7 +25101,7 @@
       "id": "ranking:womens-coat-consumption-quantity",
       "kind": "ranking",
       "key": "womens-coat-consumption-quantity",
-      "title": "婦人用コート消費量",
+      "title": "婦人用コート購入数量",
       "href": "/ranking/womens-coat-consumption-quantity",
       "published": true
     },
@@ -25117,7 +25117,7 @@
       "id": "ranking:womens-dress-consumption-quantity",
       "kind": "ranking",
       "key": "womens-dress-consumption-quantity",
-      "title": "婦人服消費量",
+      "title": "婦人服購入数量",
       "href": "/ranking/womens-dress-consumption-quantity",
       "published": true
     },
@@ -25141,7 +25141,7 @@
       "id": "ranking:womens-jacket-consumption-quantity",
       "kind": "ranking",
       "key": "womens-jacket-consumption-quantity",
-      "title": "婦人用上着消費量",
+      "title": "婦人用上着購入数量",
       "href": "/ranking/womens-jacket-consumption-quantity",
       "published": true
     },
@@ -25157,7 +25157,7 @@
       "id": "ranking:womens-pants-consumption-quantity",
       "kind": "ranking",
       "key": "womens-pants-consumption-quantity",
-      "title": "婦人用スラックス消費量",
+      "title": "婦人用スラックス購入数量",
       "href": "/ranking/womens-pants-consumption-quantity",
       "published": true
     },
@@ -25173,7 +25173,7 @@
       "id": "ranking:womens-shoes-consumption-quantity",
       "kind": "ranking",
       "key": "womens-shoes-consumption-quantity",
-      "title": "婦人靴消費量",
+      "title": "婦人靴購入数量",
       "href": "/ranking/womens-shoes-consumption-quantity",
       "published": true
     },
@@ -25197,7 +25197,7 @@
       "id": "ranking:womens-socks-consumption-quantity",
       "kind": "ranking",
       "key": "womens-socks-consumption-quantity",
-      "title": "婦人用ソックス消費量",
+      "title": "婦人用ソックス購入数量",
       "href": "/ranking/womens-socks-consumption-quantity",
       "published": true
     },
@@ -25213,7 +25213,7 @@
       "id": "ranking:womens-stockings-consumption-quantity",
       "kind": "ranking",
       "key": "womens-stockings-consumption-quantity",
-      "title": "婦人用ストッキング消費量",
+      "title": "婦人用ストッキング購入数量",
       "href": "/ranking/womens-stockings-consumption-quantity",
       "published": true
     },
@@ -25229,7 +25229,7 @@
       "id": "ranking:womens-sweater-consumption-quantity",
       "kind": "ranking",
       "key": "womens-sweater-consumption-quantity",
-      "title": "婦人用セーター消費量",
+      "title": "婦人用セーター購入数量",
       "href": "/ranking/womens-sweater-consumption-quantity",
       "published": true
     },

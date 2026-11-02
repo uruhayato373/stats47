@@ -632,10 +632,7 @@
         "configHash": "04327947f8623818"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -866,10 +863,7 @@
         "configHash": "e16505f3087833f4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:ehime-food-culture",
@@ -934,10 +928,7 @@
         "configHash": "da050cf690e281e5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:ehime-food-culture",
@@ -1014,10 +1005,7 @@
         "configHash": "645c2821102c2fb6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -1284,10 +1272,7 @@
         "configHash": "189da1d06b4325bb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",
@@ -1364,10 +1349,7 @@
         "configHash": "4c3d2d35960b6162"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -1606,10 +1588,7 @@
         "configHash": "46afd97415f0b0b7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -1852,10 +1831,7 @@
         "configHash": "0d273940ea676ff3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:gunma-food-culture",
@@ -1928,10 +1904,7 @@
         "configHash": "ed93ca513510257e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:gunma-food-culture",
@@ -2516,10 +2489,7 @@
         "configHash": "6ded04c0c4874df3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -2810,10 +2780,7 @@
         "configHash": "4e5995d1c073087e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",
@@ -2902,10 +2869,7 @@
         "configHash": "401cd48fbf6e49bc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:womens-clothing-expenditure-ranking",
@@ -2950,10 +2914,7 @@
         "configHash": "fc24d7a2498c6e0d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:winter-coat-bargain-purchase-price",
@@ -2973,7 +2934,7 @@
     {
       "metricKey": "womens-coat-consumption-quantity",
       "pageId": "ranking:womens-coat-consumption-quantity",
-      "title": "婦人用コート消費量",
+      "title": "婦人用コート購入数量",
       "sources": [
         {
           "role": "primary",
@@ -2998,10 +2959,7 @@
         "configHash": "a599896f6ae2afd0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:winter-coat-bargain-purchase-price",
@@ -3046,10 +3004,7 @@
         "configHash": "126c90dec6a50e11"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-dress-consumption-expenditure",
@@ -3061,7 +3016,7 @@
     {
       "metricKey": "womens-dress-consumption-quantity",
       "pageId": "ranking:womens-dress-consumption-quantity",
-      "title": "婦人服消費量",
+      "title": "婦人服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3086,10 +3041,7 @@
         "configHash": "0ceababbdb3b5424"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-dress-consumption-quantity",
@@ -3126,10 +3078,7 @@
         "configHash": "d3fb1488bd22f16b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-foundation-garment-consumption-expenditure",
@@ -3166,10 +3115,7 @@
         "configHash": "861212459590504a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-jacket-consumption-expenditure",
@@ -3181,7 +3127,7 @@
     {
       "metricKey": "womens-jacket-consumption-quantity",
       "pageId": "ranking:womens-jacket-consumption-quantity",
-      "title": "婦人用上着消費量",
+      "title": "婦人用上着購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3206,10 +3152,7 @@
         "configHash": "44189584402a01c7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-jacket-consumption-quantity",
@@ -3246,10 +3189,7 @@
         "configHash": "b87dd0f3f44e8048"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-pants-consumption-expenditure",
@@ -3261,7 +3201,7 @@
     {
       "metricKey": "womens-pants-consumption-quantity",
       "pageId": "ranking:womens-pants-consumption-quantity",
-      "title": "婦人用スラックス消費量",
+      "title": "婦人用スラックス購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3286,10 +3226,7 @@
         "configHash": "b11dd7f61944ffb5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-pants-consumption-quantity",
@@ -3326,10 +3263,7 @@
         "configHash": "31cd4e00e404c33b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-shoes-consumption-expenditure",
@@ -3341,7 +3275,7 @@
     {
       "metricKey": "womens-shoes-consumption-quantity",
       "pageId": "ranking:womens-shoes-consumption-quantity",
-      "title": "婦人靴消費量",
+      "title": "婦人靴購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3366,10 +3300,7 @@
         "configHash": "e82d5e1122a5f86a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-shoes-consumption-quantity",
@@ -3406,10 +3337,7 @@
         "configHash": "17dd2352ca91901d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-sleepwear-consumption-expenditure",
@@ -3446,10 +3374,7 @@
         "configHash": "10a9403a3a5dcd55"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-socks-consumption-expenditure",
@@ -3461,7 +3386,7 @@
     {
       "metricKey": "womens-socks-consumption-quantity",
       "pageId": "ranking:womens-socks-consumption-quantity",
-      "title": "婦人用ソックス消費量",
+      "title": "婦人用ソックス購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3486,10 +3411,7 @@
         "configHash": "2371c707b315f81c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:womens-socks-consumption-quantity",
@@ -3526,10 +3448,7 @@
         "configHash": "3cf3d31726feed00"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -3739,7 +3658,7 @@
     {
       "metricKey": "womens-stockings-consumption-quantity",
       "pageId": "ranking:womens-stockings-consumption-quantity",
-      "title": "婦人用ストッキング消費量",
+      "title": "婦人用ストッキング購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3764,10 +3683,7 @@
         "configHash": "4c99ff33b385a25c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -3998,10 +3914,7 @@
         "configHash": "e2b520f91bf21b76"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-clothing",
@@ -4017,7 +3930,7 @@
     {
       "metricKey": "womens-sweater-consumption-quantity",
       "pageId": "ranking:womens-sweater-consumption-quantity",
-      "title": "婦人用セーター消費量",
+      "title": "婦人用セーター購入数量",
       "sources": [
         {
           "role": "primary",
@@ -4042,10 +3955,7 @@
         "configHash": "ea728968b4e6e8db"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-clothing",
@@ -5716,10 +5626,7 @@
         "configHash": "f1efccac6a642bc7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-other-purchases",
@@ -5760,10 +5667,7 @@
         "configHash": "132c1fad7c3a4a6e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:writing-drawing-tools-consumption-expenditure",
@@ -5800,10 +5704,7 @@
         "configHash": "4009b7f839950e2b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:food-consumption-prefecture-battle",
@@ -5852,10 +5753,7 @@
         "configHash": "37096bc4f0e6b99f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:yakitori-consumption-expenditure",
@@ -5892,10 +5790,7 @@
         "configHash": "a2c83cc8c2cae7ab"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fish-catch-vs-consumption-prefecture",
@@ -5972,10 +5867,7 @@
         "configHash": "e1818f5918d865a2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukui-food-culture",
@@ -6044,10 +5936,7 @@
         "configHash": "39de0a7766d43fcc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:yamagata-food-culture",
@@ -6092,10 +5981,7 @@
         "configHash": "7871be3e05e0cf69"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:castella-expenditure-ranking",

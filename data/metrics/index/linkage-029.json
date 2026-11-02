@@ -3150,10 +3150,7 @@
         "configHash": "ecafd728cfa0bb83"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:towel-consumption-expenditure",
@@ -5751,10 +5748,7 @@
         "configHash": "3ff4148b543b6b94"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:train-commuter-pass-consumption-expenditure",
@@ -5791,10 +5785,7 @@
         "configHash": "c77be491bd686a32"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:train-fare-consumption-expenditure",
@@ -5831,10 +5822,7 @@
         "configHash": "03c643da8f3f5ed5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:train-student-pass-consumption-expenditure",
@@ -6379,10 +6367,7 @@
         "configHash": "dfae1324e630e95f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:travel-bag-consumption-expenditure",
@@ -6394,7 +6379,7 @@
     {
       "metricKey": "travel-bag-consumption-quantity",
       "pageId": "ranking:travel-bag-consumption-quantity",
-      "title": "旅行用かばん消費量",
+      "title": "旅行用かばん購入数量",
       "sources": [
         {
           "role": "primary",
@@ -6419,10 +6404,7 @@
         "configHash": "6727036585012aba"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:travel-bag-consumption-quantity",
@@ -10366,10 +10348,7 @@
         "configHash": "68c6ef4011fbff6b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tsuyu-tare-consumption-expenditure",
@@ -10406,10 +10385,7 @@
         "configHash": "8c536d57ce9fb570"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -10644,10 +10620,7 @@
         "configHash": "9df5af82361ff1e9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",
@@ -10736,10 +10709,7 @@
         "configHash": "b0ffb0cf66b2ad6c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",
@@ -11323,10 +11293,7 @@
         "configHash": "754be1fdf4cf351a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-other-purchases",
@@ -11342,7 +11309,7 @@
     {
       "metricKey": "umbrella-consumption-quantity",
       "pageId": "ranking:umbrella-consumption-quantity",
-      "title": "傘消費量",
+      "title": "傘購入数量",
       "sources": [
         {
           "role": "primary",
@@ -11367,10 +11334,7 @@
         "configHash": "7c31c69cc8a8c4bf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-other-purchases",

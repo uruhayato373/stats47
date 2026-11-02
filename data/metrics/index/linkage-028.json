@@ -93,10 +93,7 @@
         "configHash": "fa1a16ad4de5a02a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tatami-replacement-consumption-expenditure",
@@ -133,10 +130,7 @@
         "configHash": "d1123c8c2668304f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tatami-replacement-consumption-quantity",
@@ -466,10 +460,7 @@
         "configHash": "fc81c7271d4d7e80"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:taxi-fare-consumption-expenditure",
@@ -1026,10 +1017,7 @@
         "configHash": "2be04643d379dd3c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tea-drink-consumption-expenditure",
@@ -1136,10 +1124,7 @@
         "configHash": "ca9508bf8ae2d1d8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-education-leisure",
@@ -1155,7 +1140,7 @@
     {
       "metricKey": "television-consumption-quantity",
       "pageId": "ranking:television-consumption-quantity",
-      "title": "テレビ消費量",
+      "title": "テレビ購入数量",
       "sources": [
         {
           "role": "primary",
@@ -1180,10 +1165,7 @@
         "configHash": "a68ebd720b3a4271"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-education-leisure",
@@ -1728,10 +1710,7 @@
         "configHash": "95c4dd31805d17ce"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tempura-fry-consumption-expenditure-prefecture-gap",
@@ -2113,10 +2092,7 @@
         "configHash": "a2c4d59c8c516d77"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:textbook-expenditure-ranking",
@@ -2157,10 +2133,7 @@
         "configHash": "19c3f6dd22e9bf7e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:textbooks-consumption-expenditure",
@@ -4523,10 +4496,7 @@
         "configHash": "db7e36b7c7be6fb0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tissue-paper-consumption-expenditure-prefecture-gap",
@@ -4571,10 +4541,7 @@
         "configHash": "cc74e4a7437608e8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tobacco-expenditure-ranking",
@@ -4619,10 +4586,7 @@
         "configHash": "f3c7348a9b284801"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:iwate-food-culture",
@@ -4667,10 +4631,7 @@
         "configHash": "ae2401176558d7e0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:food-trio-prefecture-map",
@@ -4723,10 +4684,7 @@
         "configHash": "a79f9bac4606cba7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:toilet-paper-consumption-expenditure-prefecture-gap",
@@ -4767,10 +4725,7 @@
         "configHash": "454521f9f420fd6a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:toll-road-fee-consumption-expenditure",
@@ -4807,10 +4762,7 @@
         "configHash": "eb2551e35ac0f364"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukuoka-food-culture",
@@ -4863,10 +4815,7 @@
         "configHash": "7f809926cc6cb4e1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -5109,10 +5058,7 @@
         "configHash": "51b13a58d234cdc3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:toothbrush-consumption-expenditure",
@@ -5149,10 +5095,7 @@
         "configHash": "fc70f1b3d40590c0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:toothpaste-consumption-expenditure",

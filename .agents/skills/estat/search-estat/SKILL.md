@@ -38,7 +38,7 @@ e-Stat API の統計表を検索し、statsDataId を特定する。
 
 ```bash
 node --import tsx .claude/scripts/estat/catalog.mjs pull   # 初回のみ (.local/estat-catalog/ へ取得)
-node --import tsx .claude/scripts/estat/catalog.mjs search <キーワード> [--pref-only] [--collect-area 2]
+node --import tsx .claude/scripts/estat/catalog.mjs search <キーワード> [--pref-only] [--collect-area 2]  # collect-area 0 = 集計地域区分「該当なし」 (家計調査など)
 ```
 
 見つかればそのstatsDataIdで`/inspect-estat-meta`へ進む (Phase 1をスキップ)。見つからない場合だけ

@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const heaterConsumptionQuantity: MetricConfig = {
   "key": "heater-consumption-quantity",
-  "title": "ストーブ・温風ヒーター消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間ストーブ・温風ヒーター消費量",
+  "title": "ストーブ・温風ヒーター購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間ストーブ・温風ヒーター購入数量",
   "unit": "台",
   "category": "economy",
   "source": {
@@ -40,25 +40,9 @@ export const heaterConsumptionQuantity: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "台/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "台/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
     "isCalculated": false,
   },
-  "seoTitle": "ストーブ・温風ヒーター消費量ランキング｜県庁所在市の二人以上世帯",
-  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のストーブ・温風ヒーター消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
+  "seoTitle": "ストーブ・温風ヒーター購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のストーブ・温風ヒーター購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

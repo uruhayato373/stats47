@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const womensDressConsumptionQuantity: MetricConfig = {
   "key": "womens-dress-consumption-quantity",
-  "title": "婦人服消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人服消費量",
+  "title": "婦人服購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人服購入数量",
   "unit": "着",
   "category": "economy",
   "source": {
@@ -40,25 +40,9 @@ export const womensDressConsumptionQuantity: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "着/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "着/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
     "isCalculated": false,
   },
-  "seoTitle": "婦人服消費量ランキング｜県庁所在市の二人以上世帯",
-  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の婦人服消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
+  "seoTitle": "婦人服購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の婦人服購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

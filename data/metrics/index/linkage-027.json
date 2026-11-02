@@ -2107,10 +2107,7 @@
         "configHash": "8608668717c44f60"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -2345,10 +2342,7 @@
         "configHash": "6867a1d4077b813f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:sportswear-consumption-expenditure",
@@ -2420,10 +2414,7 @@
         "configHash": "5d9869a92573ff3a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -2666,10 +2657,7 @@
         "configHash": "ddf2619858180593"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:squid-consumption-quantity",
@@ -4337,10 +4325,7 @@
         "configHash": "c07973a3a40f529c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:stomach-medicine-consumption-expenditure",
@@ -4377,10 +4362,7 @@
         "configHash": "0a745303cf3b9bfc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:chiba-food-culture",
@@ -4441,10 +4423,7 @@
         "configHash": "0db0b5c64bbf07f5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -4727,10 +4706,7 @@
         "configHash": "4af1f3d7c9e5bac0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:study-desk-chair-consumption-expenditure",
@@ -4767,10 +4743,7 @@
         "configHash": "3e44f9d6eb433e71"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:study-materials-consumption-expenditure",
@@ -5911,10 +5884,7 @@
         "configHash": "7d4e8f3e945cf9e9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:yamaguchi-food-culture",
@@ -5959,10 +5929,7 @@
         "configHash": "312f2f9b74fb1b44"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -7133,10 +7100,7 @@
         "configHash": "2a9b1d925537d66d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-health-spending",
@@ -7177,10 +7141,7 @@
         "configHash": "c8c0043cc5ff78b7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -7423,10 +7384,7 @@
         "configHash": "57b36e1ba40fc6fc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:nara-food-culture",
@@ -7467,10 +7425,7 @@
         "configHash": "36b6de067d33d3b5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:ibaraki-food-culture",
@@ -7539,10 +7494,7 @@
         "configHash": "99b0134393a54bc8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kagoshima-food-culture",
@@ -8116,10 +8068,7 @@
         "configHash": "8a15ad5374ce57b0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:gunma-food-culture",
@@ -8176,10 +8125,7 @@
         "configHash": "19231c5608511535"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -8434,10 +8380,7 @@
         "configHash": "6e63a9d97afeff32"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:table-sofa-consumption-expenditure",
@@ -8509,10 +8452,7 @@
         "configHash": "6a39d01f30cfc4a8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tableware-consumption-expenditure",
@@ -8524,7 +8464,7 @@
     {
       "metricKey": "tableware-consumption-quantity",
       "pageId": "ranking:tableware-consumption-quantity",
-      "title": "茶わん・皿・鉢消費量",
+      "title": "茶わん・皿・鉢購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8549,10 +8489,7 @@
         "configHash": "7a45d552bd537fb1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tableware-consumption-quantity",
@@ -8589,10 +8526,7 @@
         "configHash": "eea3110c5376cd5f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",
@@ -8653,10 +8587,7 @@
         "configHash": "17aaeb2d831b985a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:aichi-food-culture",

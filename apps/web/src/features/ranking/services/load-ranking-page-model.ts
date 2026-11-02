@@ -19,6 +19,8 @@ import {
   generateRankingFAQStructuredData,
   generateRankingPageStructuredData,
 } from "@/features/ranking";
+import { prioritizeSurveyRankings } from "@/features/survey/select-survey-representative-rankings";
+import { getSurveyEditorialContent } from "@/features/survey/survey-editorial";
 
 import { logger } from "@/lib/logger";
 
@@ -81,13 +83,17 @@ export async function loadRankingPageModel(rankingKey: string) {
   const originalSurveys = rankingItem.originalSurveys ?? [];
   const surveyName = originalSurveys[0]?.name ?? null;
 
-  // 同じ調査の関連ランキング (先頭 survey の items.json 上位、自分自身を除く)
+  // 同じ調査の関連ランキング (先頭 survey の items.json、自分自身を除く)。調査の編集設定の
+  // 「読者の問い」が指すランキングを先頭にする (items.json の順だと家計調査はエアコン消費量・情報通信係数が先に出た)
   const primarySurveyId = rankingItem.surveyIds?.[0] ?? rankingItem.surveyId ?? null;
+  const surveyPreferredKeys = primarySurveyId
+    ? (getSurveyEditorialContent(primarySurveyId)?.readerQuestions.map((q) => q.rankingKey) ?? [])
+    : [];
   const surveyRelatedItemsPromise = primarySurveyId
     ? readRankingItemsBySurveyFromR2(primarySurveyId)
         .then((r) =>
           isOk(r)
-            ? r.data
+            ? prioritizeSurveyRankings(r.data, surveyPreferredKeys)
                 .filter((it) => it.rankingKey !== rankingKey)
                 .slice(0, 5)
                 .map((it) => ({ rankingKey: it.rankingKey, title: it.title }))

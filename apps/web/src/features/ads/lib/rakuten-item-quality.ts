@@ -26,6 +26,13 @@ const normalize = (value: string) => value.normalize("NFKC").toLowerCase()
 const SPELLINGS = [["さんま", "秋刀魚"], ["コーヒー", "珈琲"], ["さけ", "鮭", "サーモン"]];
 const NON_FOOD_KINDS = /衣料|衣類|肌着|シャツ|ブラジャー|ナイトブラ|ショーツ|パンツ|スカート|ワンピース|コート|タオル|カーテン|クッション|ぬいぐるみ|フィギュア|サプリメント|レザー|額装|スーツ/;
 const COFFEE_ACCESSORIES = /(?:コーヒー|珈琲)(?:用|色|カラー|カップ|メーカー|ミル|ドリッパー|フィルター|サーバー)|(?:カップ|ポット|ドリッパー|フィルター|ミル|メーカー).*?(?:コーヒー|珈琲)/;
+/**
+ * 検索語を含むが別の商品を指す語。商品名の中の検索語がこれらの語の一部としてしか現れないなら別の商品とみなす。
+ * 「納豆」で甘納豆 (和菓子) が「納豆の人気商品」に出ていた (2026-11-02)。
+ */
+const DIFFERENT_PRODUCT_COMPOUNDS: Readonly<Record<string, readonly string[]>> = {
+  納豆: ["甘納豆"],
+};
 const VOUCHERS = /券|チケット|ギフトカード|地域通貨|ポイント|ウエディング|ウェディング|あとからセレクト|旅行クーポン|宿泊クーポン/;
 
 export function isShippingFeeItem(name: string): boolean {
@@ -58,6 +65,10 @@ export function productQualityReasons(item: RakutenQualityItem, query: string): 
   if (!hasProductTitleMatch(item.name, query)) reasons.push("title-mismatch");
   if (NON_FOOD_KINDS.test(item.name) && !NON_FOOD_KINDS.test(query)) reasons.push("product-kind-mismatch");
   if (/^(?:コーヒー|珈琲)$/.test(query) && COFFEE_ACCESSORIES.test(item.name)) reasons.push("product-accessory");
+  const compounds = DIFFERENT_PRODUCT_COMPOUNDS[query.trim()];
+  if (compounds && !compounds.reduce((name, word) => name.replaceAll(word, ""), item.name).includes(query.trim())) {
+    reasons.push("different-product");
+  }
   return reasons;
 }
 

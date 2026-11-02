@@ -813,6 +813,15 @@ jobs:
           npm run estat:kakei-classification:check
         continue-on-error: false
 
+      - name: 🧾 Kakei Ledger Gate
+        run: |
+          # 家計調査の台帳 (data/estat/kakei-ledger/ledger.json) が今の metric config・採否判断と一致することを担保。
+          # 家計調査の表・品目のうち何を指標にし何を見送ったかを機械で照合できる記録が無く、e-Stat カタログにも
+          # 家計調査が 1 表も入っていなかった再発防止 (2026-11-02)。指標を足したら npm run estat:kakei-ledger:build で作り直す。
+          npm run estat:kakei-ledger:test
+          npm run estat:kakei-ledger:check
+        continue-on-error: false
+
       - name: 📏 Unit Semantics Mirror Gate
         run: |
           # 単位の解釈は packages/data-configs/src/unit/unit-semantics.ts が正典で、

@@ -13,7 +13,9 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 の運用スペック（編集文法・ハブ構成・SSOT/境界・禁止事項）を本 rule へ抽出し、運用 SSOT を `.claude/` に一本化した。旧版が必要な場合は Git 履歴を参照する。
 
 > **実装済み SSOT**: survey 編集情報の git TS は `apps/web/src/features/survey/survey-editorial.ts`
-> (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]`)。
+> (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
+> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
+> `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
 > **紐付け (ranking↔survey) の正典は別**: `.claude/rules/survey-linkage-standards.md` (surveys.json / provenance)。
 > 本 rule は**編集コンテンツ**、linkage-standards は**紐付けメタ**。両方 survey-curator が所有する。
 > 横展開の進捗・census 実験の計測は `data/surveys/{portfolio,experiments}.json`
@@ -79,6 +81,7 @@ apps/web/src/features/survey/survey-editorial.ts  ← survey 編集情報の git
   ├─ whatYouCanLearn[]
   ├─ readerQuestions[] { question, rankingKey }
   ├─ caveats[]
+  ├─ areaLabel / relatedHubs[]
   └─ relatedArticleSlugs[]
 
 R2 app/survey/<id>/items.json
