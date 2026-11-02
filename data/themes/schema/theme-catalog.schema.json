@@ -1143,7 +1143,8 @@
       "properties": {
         "view": {
           "enum": [
-            "sex"
+            "sex",
+            "tiles"
           ]
         },
         "key": {

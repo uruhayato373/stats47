@@ -913,6 +913,7 @@
   ],
   "metricGroups": [
     {
+      "view": "tiles",
       "key": "household-totals",
       "title": "消費支出と食料費",
       "rankingKeys": [
@@ -924,6 +925,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "household-engel",
       "title": "エンゲル係数",
       "rankingKeys": [
@@ -934,6 +936,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "rice",
       "title": "米",
       "rankingKeys": [
@@ -945,6 +948,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "bread-noodles",
       "title": "パンと即席麺",
       "rankingKeys": [
@@ -960,6 +964,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "seafood-total",
       "title": "魚介類の合計",
       "rankingKeys": [
@@ -972,6 +977,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "fish-everyday",
       "title": "さけ・さば・さんま・あじ・いわし",
       "rankingKeys": [
@@ -987,6 +993,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "fish-white",
       "title": "たい・かれい",
       "rankingKeys": [
@@ -1000,6 +1007,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "shellfish-crustacean",
       "title": "貝・えび・かに・いか・たこ",
       "rankingKeys": [
@@ -1017,6 +1025,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "dashi-seaweed",
       "title": "こんぶ・かつお節",
       "rankingKeys": [
@@ -1030,6 +1039,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "meat",
       "title": "牛肉・豚肉・その他の生鮮肉",
       "rankingKeys": [
@@ -1045,6 +1055,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "dairy-fats",
       "title": "牛乳・バター・マーガリン",
       "rankingKeys": [
@@ -1057,6 +1068,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "vegetables-total",
       "title": "生鮮野菜の合計",
       "rankingKeys": [
@@ -1068,6 +1080,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "leafy-vegetables",
       "title": "キャベツ・はくさい・レタス・ほうれんそう",
       "rankingKeys": [
@@ -1083,6 +1096,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "root-vegetables",
       "title": "だいこん・にんじん・たまねぎ・じゃがいも・れんこん",
       "rankingKeys": [
@@ -1098,6 +1112,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "fruit-vegetables",
       "title": "トマト・きゅうり・さやまめ・もやし",
       "rankingKeys": [
@@ -1112,6 +1127,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "fruit",
       "title": "果物",
       "rankingKeys": [
@@ -1129,6 +1145,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "seasonings",
       "title": "みそ・しょう油・砂糖・食塩・マーガリン",
       "rankingKeys": [
@@ -1143,6 +1160,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "sweets-processed",
       "title": "菓子・ジャム・加工食品",
       "rankingKeys": [
@@ -1157,6 +1175,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "dining-out-total",
       "title": "外食・喫茶・飲酒代",
       "rankingKeys": [
@@ -1169,6 +1188,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "dining-cuisines",
       "title": "外食の種類",
       "rankingKeys": [
@@ -1185,6 +1205,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "tea-coffee",
       "title": "コーヒー・緑茶・紅茶",
       "rankingKeys": [
@@ -1200,6 +1221,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "soft-drinks",
       "title": "ミネラルウォーター・炭酸飲料",
       "rankingKeys": [
@@ -1211,6 +1233,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "alcohol-spending",
       "title": "酒類の支出額",
       "rankingKeys": [
@@ -1226,6 +1249,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "alcohol-volume",
       "title": "酒類の消費量",
       "rankingKeys": [
@@ -1238,6 +1262,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "communication",
       "title": "通信・放送",
       "rankingKeys": [
@@ -1253,6 +1278,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "leisure",
       "title": "教養娯楽",
       "rankingKeys": [
@@ -1269,6 +1295,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "travel",
       "title": "旅行と宿泊",
       "rankingKeys": [
@@ -1281,6 +1308,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "schooling",
       "title": "授業料と仕送り",
       "rankingKeys": [
@@ -1292,6 +1320,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "home-goods",
       "title": "住まいの手入れと暖房",
       "rankingKeys": [
@@ -1305,6 +1334,7 @@
       ]
     },
     {
+      "view": "tiles",
       "key": "clothing-spending",
       "title": "帽子の支出と購入数",
       "rankingKeys": [
@@ -1319,16 +1349,17 @@
   "sections": [
     {
       "key": "household-food-spending-totals",
-      "title": "暮らし全体と食料費",
+      "title": "食費は家計のどれくらいを占めるか",
       "description": "消費支出総額と食料費を、県庁所在市の二人以上世帯で比べます。県全体の値ではありません。",
       "metricGroupKeys": [
         "household-totals",
         "household-engel"
-      ]
+      ],
+      "concern": "物価高で食費が家計を圧迫していないか知りたい"
     },
     {
       "key": "household-food-spending-grains",
-      "title": "米・パン・麺",
+      "title": "主食には米とパンのどちらにお金を使っているか",
       "description": "主食の支出額と購入量を比べます。支出額は円、購入量は重さで、尺度が異なるため同じ軸で優劣を決めません。",
       "metricGroupKeys": [
         "rice",
@@ -1336,11 +1367,12 @@
       ],
       "chartKeys": [
         "household-food-spending-staple-trend"
-      ]
+      ],
+      "concern": "この地域の主食の傾向を知りたい"
     },
     {
       "key": "household-food-spending-seafood",
-      "title": "魚介類",
+      "title": "魚介をよく買う地域か",
       "description": "魚介の支出額と購入量を魚種別に比べます。県庁所在市の家庭が買った量で、漁獲量や水揚げ量ではありません。",
       "metricGroupKeys": [
         "seafood-total",
@@ -1348,20 +1380,22 @@
         "fish-white",
         "shellfish-crustacean",
         "dashi-seaweed"
-      ]
+      ],
+      "concern": "魚中心の食卓かどうか、どの魚をよく買うか知りたい"
     },
     {
       "key": "household-food-spending-meat-dairy",
-      "title": "肉・乳製品",
+      "title": "肉や乳製品をよく買う地域か",
       "description": "牛肉・豚肉と乳製品の購入量と支出額を比べます。",
       "metricGroupKeys": [
         "meat",
         "dairy-fats"
-      ]
+      ],
+      "concern": "牛肉と豚肉のどちらをよく買うかなど、肉の好みを知りたい"
     },
     {
       "key": "household-food-spending-vegetables-fruit",
-      "title": "野菜・果物",
+      "title": "野菜や果物をよく買う地域か",
       "description": "生鮮野菜と果物の購入量を品目別に比べます。家庭で買った量で、産地の生産量ではありません。",
       "metricGroupKeys": [
         "vegetables-total",
@@ -1369,29 +1403,32 @@
         "root-vegetables",
         "fruit-vegetables",
         "fruit"
-      ]
+      ],
+      "concern": "野菜や果物をどれだけ食べている地域か知りたい"
     },
     {
       "key": "household-food-spending-pantry",
-      "title": "調味料・菓子・加工食品",
+      "title": "調味料や菓子にどれだけ使うか",
       "description": "調味料の購入量と、菓子・加工食品の支出額を比べます。",
       "metricGroupKeys": [
         "seasonings",
         "sweets-processed"
-      ]
+      ],
+      "concern": "味付けやおやつの好みに地域の特徴があるか知りたい"
     },
     {
       "key": "household-food-spending-dining-out",
-      "title": "外食",
+      "title": "外食や喫茶にどれだけ使うか",
       "description": "外食・喫茶・飲酒代の支出額と、外食の種類別の支出額を比べます。",
       "metricGroupKeys": [
         "dining-out-total",
         "dining-cuisines"
-      ]
+      ],
+      "concern": "外で食べる文化の強い地域か知りたい"
     },
     {
       "key": "household-food-spending-drinks",
-      "title": "飲料と酒類",
+      "title": "どんなお茶やお酒をよく飲むか",
       "description": "茶・コーヒー・清涼飲料・酒類の支出額と購入量を比べます。",
       "metricGroupKeys": [
         "tea-coffee",
@@ -1401,11 +1438,12 @@
       ],
       "chartKeys": [
         "household-food-spending-alcohol-trend"
-      ]
+      ],
+      "concern": "飲み物やお酒の好みを知りたい"
     },
     {
       "key": "household-food-spending-beyond-food",
-      "title": "食料以外の家計支出",
+      "title": "食費以外には何にお金を使っているか",
       "description": "通信・教養娯楽・旅行・住まい・被服などの支出額を比べます。食卓の支出と並べて家計全体の使い方を見るための参考です。",
       "metricGroupKeys": [
         "communication",
@@ -1417,7 +1455,8 @@
       ],
       "chartKeys": [
         "md-household-food-spending-faq"
-      ]
+      ],
+      "concern": "食費以外の暮らしのお金の使い道を知りたい"
     }
   ],
   "keywords": [

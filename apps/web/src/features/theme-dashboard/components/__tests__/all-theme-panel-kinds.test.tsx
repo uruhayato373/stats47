@@ -77,12 +77,14 @@ function expectedGroups(catalog: ThemeCatalog, themeConfig: ThemeConfig) {
   if (catalog.metricGroups && catalog.metricGroups.length > 0) {
     return catalog.metricGroups.map((g) => ({
       key: g.key,
+      view: g.view,
       rankingKeys: g.rankingKeys,
     }));
   }
   return [
     {
       key: 'default',
+      view: undefined,
       rankingKeys: themeConfig.tabIndicators.map((t) => t.rankingKey),
     },
   ];
@@ -113,7 +115,12 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
         />
       );
 
-      const groups = expectedGroups(catalog, themeConfig);
+      // view "tiles" のグループは指標ごとに 1 枚の数値タイル (SingleMetricCard) に分かれる (2026-11-03)
+      const groups = expectedGroups(catalog, themeConfig).flatMap((group) =>
+        group.view === 'tiles'
+          ? group.rankingKeys.map((key) => ({ ...group, rankingKeys: [key] }))
+          : [group]
+      );
       const rendered = [...container.querySelectorAll('[data-testid]')];
 
       expect(rendered).toHaveLength(groups.length);

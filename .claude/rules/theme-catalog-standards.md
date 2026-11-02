@@ -86,6 +86,7 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 | いまいくつか | 数値 1 つ (値・順位・年) | 1 指標の `metricGroups` → `SingleMetricCard` (`StatTile`) |
 | 全国とどれだけ違うか | 県の値の横に全国の値 | 公式の全国の系列 (`app/japan/<key>/series.json`) がある指標で自動 (`MetricStatTile` の補足) |
 | 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
+| 品目ごとに いくつか・増えたか (並べて一度に見る) | 指標ごとの数値タイル + 小さな推移を格子に並べる | `metricGroups[].view: "tiles"` → 指標ごとに `SingleMetricCard` (切り替えのチャートを使わない。2026-11-03 試行: household-food-spending) |
 | 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
 | 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |
 
@@ -105,6 +106,12 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 - **図を見せ、説明は Sheet に入れる** (2026-11-01 オーナー決定。見本 shadcndashboard のチャートのカード)。章の図のカードは
   見出しの帯に題名と、右端に出典・指標の定義・読むときの注意を開くアイコン (注意があれば点の印)、本文は地域・期間・単位の 1 行、
   最新の値と前回からの増減、図だけ。章の説明 (`sections[].description`) も見出しの右端のアイコンから開く Sheet に入れる
+- **章の答えの文** (2026-11-03 試行)。`view: "tiles"` のグループを持つ章は、見出しの下にデータから決まった手順で作る 1〜2 文を出す
+  (`features/theme-dashboard/lib/section-answer.ts`。県のページ = 先頭の指標の値・年・順位と全国との差 + 章の中で全国 5 位以内の指標、
+  全国のページ = 最新の値と全国の系列の最初の年からの増減)。モデルの書いた文は使わない。順位に「多い・少ない」の向きの言葉を付けない
+- 論点の切り口 (読者の問い・よく使われる図・代表的な指標) は、テーマごとの NotebookLM ノートに Web の Deep Research
+  (`notebooklm source add-research "<問い>" --mode deep --import-all`) でソースを集めて聞く。47 都道府県の比較が主題の切り口
+  (首位争い・東西の地図・相関) はランキングのページに任せ、テーマには「その地域の答え」になる切り口だけを章にする
 - 章の設計案は NotebookLM が白書を参照して作り、`apply-design.ts` が上の規則でデータの形に合わせ直して書く
   (`.claude/skills/theme/research-theme-catalog/SKILL.md`「章と見せ方の一括設計」)。モデルが書いた注意書きは確かめていない
   事実を含むので章の説明に使わない

@@ -18,6 +18,7 @@ import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 import { StatTileGrid } from '@/components/surface';
 
+import { buildSectionAnswer } from '../lib/section-answer';
 import {
   NATIONAL_REGION_LABEL,
   type ThemeConfig,
@@ -233,6 +234,8 @@ export function ThemeMetricsDashboard({
   const panels = useMemo(() => {
     type Panel = {
       key: string;
+      /** 章 (sections[].metricGroupKeys) が引くグループの key。tiles で分けたパネルも元のグループの key を持つ */
+      groupKey: string;
       view: CatalogMetricGroup['view'];
       title: string | undefined;
       metrics: SingleMetricGroup | MultiMetricGroup;
@@ -248,6 +251,7 @@ export function ThemeMetricsDashboard({
         ? [
             {
               key: 'default',
+              groupKey: 'default',
               view: undefined,
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
@@ -268,9 +272,22 @@ export function ThemeMetricsDashboard({
       // 全滅したグループはカードごと出さない (空のカードは「壊れている」と読める)
       if (!metrics) return [];
       const alive = new Set(metrics.map((m) => m.metricKey));
+      // view "tiles": 指標ごとに数値タイル + 小さな推移のカード (SingleMetricCard) に分け、数値タイルの格子に並べる。
+      // 数値タイルを切り替えボタンにしたチャート (MetricSwitcherPanel) は使わない (空きマス・凡例のずれ。2026-11-03)
+      if (group.view === 'tiles') {
+        return metrics.map((metric) => ({
+          key: `${group.key}--${metric.metricKey}`,
+          groupKey: group.key,
+          view: group.view,
+          title: undefined,
+          metrics: [metric] as SingleMetricGroup,
+          defaultCheckedKeys: [metric.metricKey],
+        }));
+      }
       return [
         {
           key: group.key,
+          groupKey: group.key,
           view: group.view,
           title: group.title as string | undefined,
           metrics,
@@ -421,7 +438,7 @@ export function ThemeMetricsDashboard({
   const chapters = (sections ?? []).map((section) => {
     const chapterPanels = panels.filter(
       (panel) =>
-        section.metricGroupKeys.includes(panel.key) &&
+        section.metricGroupKeys.includes(panel.groupKey) &&
         !usedPanels.has(panel.key)
     );
     const chapterCharts = chartComponents.filter(
@@ -518,6 +535,15 @@ export function ThemeMetricsDashboard({
           (keys) => panel.metrics.length > 0 && panel.metrics.every((metric) => keys.has(metric.metricKey))
         )
     );
+    // 章の問いへの答えの文 (データから決まった手順で作る)。まずは数値タイルの見せ方 (view "tiles") の章だけに出す (2026-11-03 試行)
+    const answer = panels.some((panel) => panel.view === 'tiles')
+      ? buildSectionAnswer({
+          metrics: panels.flatMap((panel) => panel.metrics),
+          labels: tabLabels,
+          areaName,
+          isPrefecture: selectedPrefectureCode !== null,
+        })
+      : null;
     return (
     <PanelGrid
       as="section"
@@ -544,6 +570,11 @@ export function ThemeMetricsDashboard({
           ) : undefined
         }
       />
+      {answer && (
+        <p className="text-sm leading-6 text-foreground" data-section-answer>
+          {answer}
+        </p>
+      )}
       {renderPanelRuns(panels, (panel) => {
         if (mergedChartsOf.has(panel.key)) return false;
         const coveredKeys = new Set(
