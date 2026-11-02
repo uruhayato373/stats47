@@ -64,7 +64,7 @@ paths:
 画像の型は、この配色を型台帳 `data/content-operations/image-templates.json` の `metricColor` で決めた方法で使う。描画側で配色を独自に選ばない。
 
 - `scale` (タイルマップ・地図・ヒートマップ): 値の濃淡で塗る。`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale` (サイトのランキング地図と同じ色・境界)
-- `single` (棒グラフ・テーブルの順位): 指標の色 1 色。同じファイルの `resolveMetricColor` (配色の濃い側の色)。棒は長さで値を表すので濃淡を重ねない。発散色の指標は図の既定色
+- `single` (棒グラフ・テーブルの順位・箱ひげ): 指標の色 1 色。同じファイルの `resolveMetricColor` (配色の濃い側の色)。棒は長さで値を表すので濃淡を重ねない。発散色の指標は図の既定色
 - `none` (折れ線・積み上げ・散布図など): 系列・区分を見分ける色で、指標の配色は使わない
 - ブログの図は、記事データか出典 manifest の `rankingKey` / `metricKey` から同じ規則で色を決める (`.claude/scripts/blog/generate-article-charts.ts`)。記事データに配色を書いた場合はそちらが優先
 

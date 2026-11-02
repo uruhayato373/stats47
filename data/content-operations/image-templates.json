@@ -280,7 +280,7 @@
       "purposes": [
         "distribution"
       ],
-      "metricColor": "none"
+      "metricColor": "single"
     },
     {
       "id": "pie",

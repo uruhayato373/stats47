@@ -16,6 +16,7 @@ import { TREND_SAMPLE_SOURCE, renderTrendLine } from '../lib/template-trend-line
 import { COMPOSITION_SAMPLE_SOURCE, COMPOSITION_SAMPLE_PROVENANCE, renderCompositionStacked } from '../lib/template-composition-stacked';
 import { RELATIONSHIP_SAMPLE_SOURCES, renderRelationshipScatter } from '../lib/template-relationship-scatter';
 import { renderDistributionMap } from '../lib/template-distribution-map';
+import { renderCompositionHeatmap, renderCompositionPie, renderDistributionBoxplot } from '../lib/template-minor-charts';
 
 /** Explicit publishing only. GET requests never generate or upload samples. */
 async function main() {
@@ -37,11 +38,11 @@ async function main() {
   const collection = trend ? 'trend' : composition ? 'composition' : relationship ? 'relationship' : distribution ? 'distribution' : change ? 'change' : 'ranking';
   const root = path.resolve(__dirname, '../../..');
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
-  const sourceFiles = trend ? ['apps/admin/lib/template-trend-line.ts', `${datasetDir('metrics.definitions')}/engel-coefficient.ts`, `${datasetDir('metrics.definitions')}/food-expenditure-total.ts`] : composition ? ['apps/admin/lib/template-composition-stacked.ts'] : relationship ? [
+  const sourceFiles = trend ? ['apps/admin/lib/template-trend-line.ts', `${datasetDir('metrics.definitions')}/engel-coefficient.ts`, `${datasetDir('metrics.definitions')}/food-expenditure-total.ts`] : composition ? ['apps/admin/lib/template-composition-stacked.ts', 'apps/admin/lib/template-minor-charts.ts'] : relationship ? [
     'apps/admin/lib/template-relationship-scatter.ts', 'apps/admin/lib/template-ranking-bars.ts', 'packages/svg-builder/src/shared/regression.ts',
     `${datasetDir('metrics.definitions')}/average-temperature.ts`, `${datasetDir('metrics.definitions')}/kerosene-consumption-quantity.ts`,
   ] : distribution ? [
-    'apps/admin/lib/template-distribution-map.ts', 'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
+    'apps/admin/lib/template-distribution-map.ts', 'apps/admin/lib/template-minor-charts.ts', 'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
     'apps/remotion/src/features/buzz-map/geo.ts', 'apps/remotion/src/features/buzz-map/tokens.ts',
     'apps/remotion/public/prefecture.topojson', 'apps/remotion/src/features/data-cards/tile-scale.ts',
   ] : change ? [
@@ -91,8 +92,8 @@ async function main() {
   const raws = snapshots.map((snapshot) => JSON.parse(snapshot.toString('utf8')));
   const sourceEvidence = composition ? await readPinned(COMPOSITION_SAMPLE_PROVENANCE) : undefined;
   const input = relationship ? { x: raws[0], y: raws[1] } : change ? { item: raws[0], values: raws[1] } : trend || composition ? raws[0] : rankingInputFromStats(raws[0]);
-  const renderers = trend ? { 'engel-trend': renderTrendLine } : composition ? { 'liquor-breakdown': renderCompositionStacked }
-    : relationship ? { 'temperature-kerosene': renderRelationshipScatter } : distribution ? { 'maximum-temperature-map': renderDistributionMap }
+  const renderers = trend ? { 'engel-trend': renderTrendLine } : composition ? { 'liquor-breakdown': renderCompositionStacked, 'liquor-shares': renderCompositionPie, 'liquor-heatmap': renderCompositionHeatmap }
+    : relationship ? { 'temperature-kerosene': renderRelationshipScatter } : distribution ? { 'maximum-temperature-map': renderDistributionMap, 'maximum-temperature-distribution': renderDistributionBoxplot }
     : change ? { 'population-change': renderTileChangeSample }
     : { bars: renderRankingBars, table: renderRankingTable, 'tile-map': renderRankingTileMap };
   // Validate every image before writing any object or changing the active references.

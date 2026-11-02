@@ -37,7 +37,7 @@ export interface StatisticalSample {
   label?: string;
   topic?: string;
   imageId?: string;
-  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked' | 'relationship-scatter' | 'distribution-map' | 'tile-change';
+  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked' | 'relationship-scatter' | 'distribution-map' | 'tile-change' | 'distribution-boxplot' | 'composition-pie' | 'composition-heatmap';
   referenceImages?: { imageId: string; label: string }[];
 }
 /** A small curated sample per form, not a menu of every article using the form. */
@@ -137,8 +137,8 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'maximum-temperature-distribution',
     templateId: 'boxplot',
     purpose: 'distribution',
-    statistic: '都道府県別の最高気温（2024年）',
-    imageId: 'IMG-ec111f9fb7067e3d8c9628c1',
+    statistic: '都道府県別の最高気温の分布（2024年）',
+    renderer: 'distribution-boxplot',
   },
   {
     id: 'maximum-temperature-map',
@@ -171,19 +171,36 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'household-radar',
     templateId: 'radar',
     purpose: 'comparison',
-    statistic: '家計支出の10分類（47市平均との比較）',
+    statistic: '東京都と京都府の複数指標（公開済みのブログ図）',
+    imageId: 'IMG-aa74a92f96d3efece1b494cf',
+  },
+  {
+    id: 'agri-sankey',
+    templateId: 'sankey',
+    purpose: 'composition',
+    statistic: '農業産出額の流れ（公開済みのブログ図）',
+    imageId: 'IMG-9f08b92fd59478e733d467ae',
+  },
+  {
+    id: 'inflation-waterfall',
+    templateId: 'waterfall',
+    purpose: 'composition',
+    statistic: '物価高の前後で変わった品目別の支出（公開済みのブログ図）',
+    imageId: 'IMG-9126437b511e9d15e056f2d1',
   },
   {
     id: 'liquor-shares',
     templateId: 'pie',
     purpose: 'composition',
-    statistic: '酒類の品目別販売構成比',
+    statistic: '酒類別の販売数量構成比（2018年度）',
+    renderer: 'composition-pie',
   },
   {
-    id: 'population-time-heatmap',
+    id: 'liquor-heatmap',
     templateId: 'heatmap',
-    purpose: 'distribution',
-    statistic: '都道府県別人口の年次推移',
+    purpose: 'trend',
+    statistic: '酒類別の販売数量構成比（2008・2013・2018年度）',
+    renderer: 'composition-heatmap',
   },
 ];
 export interface SampleImage {
