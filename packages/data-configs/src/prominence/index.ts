@@ -17,6 +17,7 @@ export {
   isCrossDimensionMismatch,
   resolveHookAdjective,
   type HookAdjective,
+  type RankingHookAreaNoun,
   type RankingHookInput,
 } from "./derive-ranking-hook";
 

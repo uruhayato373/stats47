@@ -35,6 +35,8 @@ import {
   collectTemplateMetricKeys,
   listAllMetrics,
   listCategories,
+  METRICS_REGISTRY,
+  rankingHookAreaNoun,
 } from "@stats47/data-configs";
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import {
@@ -170,6 +172,13 @@ function buildSubtitleIndex(): Map<string, string> {
   );
 }
 
+/** 問いの地域の呼び方 (家計調査は県庁所在市の値なので「都市」)。 */
+function buildAreaNounIndex(): Map<string, "県" | "都市"> {
+  return new Map(
+    listAllMetrics().map((metric) => [metric.key, rankingHookAreaNoun(metric, METRICS_REGISTRY)]),
+  );
+}
+
 function buildUnitIndex(): Map<string, string> {
   return new Map(
     (listAllMetrics() as unknown as MetricLike[]).map((metric) => [
@@ -202,6 +211,7 @@ function toRepresentative(
   result: ProminenceResult,
   units: Map<string, string>,
   subtitles: Map<string, string>,
+  areaNouns: Map<string, "県" | "都市">,
 ): { rankingKey: string; title: string; readerLabel: string; subtitle?: string; hook: string } {
   const subtitle = subtitles.get(result.rankingKey);
   return {
@@ -216,6 +226,7 @@ function toRepresentative(
       rankingKey: result.rankingKey,
       title: result.title,
       unit: units.get(result.rankingKey) ?? "",
+      areaNoun: areaNouns.get(result.rankingKey),
     }),
   };
 }
@@ -228,6 +239,7 @@ function build(): string {
 
   const inputs = buildInputs(impressions);
   const units = buildUnitIndex();
+  const areaNouns = buildAreaNounIndex();
   const subtitles = buildSubtitleIndex();
   const results = computeProminenceScores(inputs, {
     currentYear: resolveReferenceYear(inputs),
@@ -249,7 +261,7 @@ function build(): string {
       representatives: selectRepresentatives(
         inCategory,
         REPRESENTATIVES_PER_CATEGORY,
-      ).map((result) => toRepresentative(result, units, subtitles)),
+      ).map((result) => toRepresentative(result, units, subtitles, areaNouns)),
     };
   });
 
@@ -257,7 +269,7 @@ function build(): string {
     limit: HOME_FEATURED_LIMIT,
     maxPerCategory: HOME_FEATURED_MAX_PER_CATEGORY,
   }).map((result, index) => ({
-    ...toRepresentative(result, units, subtitles),
+    ...toRepresentative(result, units, subtitles, areaNouns),
     categoryKey: result.categoryKey,
     order: index + 1,
   }));
@@ -347,12 +359,14 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
 
 function runAudit(): void {
   const units = buildUnitIndex();
+  const areaNouns = buildAreaNounIndex();
   const inputs = (listAllMetrics() as unknown as MetricLike[])
     .filter((metric) => metric.isActive)
     .map((metric) => ({
       rankingKey: metric.key,
       title: metric.title,
       unit: units.get(metric.key) ?? "",
+      areaNoun: areaNouns.get(metric.key),
     }));
 
   const coverage = summarizeReaderLabelCoverage(inputs);

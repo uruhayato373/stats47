@@ -1,6 +1,12 @@
 import "server-only";
 
-import { getMetricConfig } from "@stats47/data-configs";
+import { PREFECTURE_CAPITAL_CITY_NAMES } from "@stats47/area";
+import {
+  getMetricConfig,
+  isCapitalCityValueMetric,
+  METRICS_REGISTRY,
+  rankingHookAreaNoun,
+} from "@stats47/data-configs";
 import { resolveRankingHook } from "@stats47/data-configs/prominence";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
@@ -55,7 +61,12 @@ export function buildFeaturedRankingCardModel({
   const representativeHook =
     REPRESENTATIVE_HOOK_BY_KEY.get(rankingKey) ??
     (metricConfig
-      ? resolveRankingHook({ rankingKey, title: metricConfig.title, unit: metricConfig.unit })
+      ? resolveRankingHook({
+          rankingKey,
+          title: metricConfig.title,
+          unit: metricConfig.unit,
+          areaNoun: rankingHookAreaNoun(metricConfig, METRICS_REGISTRY),
+        })
       : undefined);
   const representativeDefinition = representativeHook ? { hook: representativeHook } : null;
 
@@ -78,13 +89,24 @@ export function buildFeaturedRankingCardModel({
     }
   );
 
+  // 家計調査の値は県庁所在市の値なので、1 位の名前も市で書く (問いが「都市は？」なのに「福島県」と答えていた。2026-11-02)
+  const isCapitalCityValue = metricConfig
+    ? isCapitalCityValueMetric(metricConfig, METRICS_REGISTRY)
+    : false;
+  const topValues = isCapitalCityValue
+    ? values.map((value) => ({
+        ...value,
+        areaName: PREFECTURE_CAPITAL_CITY_NAMES[value.areaCode] ?? value.areaName,
+      }))
+    : values;
+
   return resolveFeaturedRankingCardModel(
     {
       // 都市別の調査では、導出した「〜が最も多い県は？」が対象 (県庁所在市) とずれる。編集した問いを先に使う (2026-11-02)
       definition: hook
         ? { hook }
         : (getFeaturedRankingCardDefinition(rankingKey) ?? representativeDefinition),
-      featuredTop: deriveFeaturedTop(values),
+      featuredTop: deriveFeaturedTop(topValues),
       tileMapSvg,
     },
     title

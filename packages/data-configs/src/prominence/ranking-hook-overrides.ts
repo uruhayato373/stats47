@@ -29,10 +29,10 @@ export const RANKING_HOOK_OVERRIDES: Readonly<Record<string, string>> = {
   "retirement-allowance-admin-prefecture": "退職手当が最も多い県は？",
   // 「1世帯当たり1か月間の消費支出」相当の長い title を短く言い換える。
   "consumption-expenditure-multi-person-households-per-month":
-    "最も消費支出が多い県は？",
+    "最も消費支出が多い都市は？",
   "convenience-store-sales-monthly": "コンビニの販売額が多い県は？",
   "designated-difficult-disease": "難病受給者証を持つ人が多い県は？",
-  "disposable-income-worker-households": "勤労者世帯の可処分所得が高い県は？",
+  "disposable-income-worker-households": "勤労者世帯の可処分所得が高い都市は？",
   "elderly-household-detail": "高齢者がいる世帯が多い県は？",
   "fishery-management-orgs": "漁業管理組織が多い県は？",
   "hobby-activity-singleperson": "単身世帯主で趣味をした人が多い県は？",
@@ -41,8 +41,8 @@ export const RANKING_HOOK_OVERRIDES: Readonly<Record<string, string>> = {
   "industrial-land-price": "工業地の価格が高い県は？",
   "mental-health-application": "精神障害に関する申請等が多い県は？",
   "non-car-vehicle-insurance-consumption-expenditure":
-    "自動車以外の輸送保険料が多い県は？",
-  "rental-car-consumption-expenditure": "レンタカー等への支出が多い県は？",
+    "自動車以外の輸送保険料が多い都市は？",
+  "rental-car-consumption-expenditure": "レンタカー等への支出が多い都市は？",
   "retail-sales-amount-by-prefecture": "小売業の年間販売額が多い県は？",
   "retail-sales-area-by-class": "小売業の売場面積が広い県は？",
   "smartphone-usage-students": "スマホを使う学生の学業時間が長い県は？",

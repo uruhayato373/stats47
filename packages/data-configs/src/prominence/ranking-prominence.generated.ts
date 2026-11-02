@@ -322,42 +322,42 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "牛肉消費量",
         "readerLabel": "牛肉消費量",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
-        "hook": "牛肉消費量が最も多い県は？"
+        "hook": "牛肉消費量が最も多い都市は？"
       },
       {
         "rankingKey": "coffee-consumption-quantity",
         "title": "コーヒー消費量",
         "readerLabel": "コーヒー消費量",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間コーヒー消費量",
-        "hook": "コーヒー消費量が最も多い県は？"
+        "hook": "コーヒー消費量が最も多い都市は？"
       },
       {
         "rankingKey": "natto-consumption-expenditure",
         "title": "納豆消費支出額",
         "readerLabel": "納豆への支出",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間納豆消費支出額",
-        "hook": "納豆への支出が最も多い県は？"
+        "hook": "納豆への支出が最も多い都市は？"
       },
       {
         "rankingKey": "rice-consumption-quantity",
         "title": "米消費量",
         "readerLabel": "米消費量",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間米消費量",
-        "hook": "米消費量が最も多い県は？"
+        "hook": "米消費量が最も多い都市は？"
       },
       {
         "rankingKey": "consumption-expenditure-multi-person-households-per-month",
         "title": "消費支出",
         "readerLabel": "二人以上世帯の1か月の消費支出",
         "subtitle": "1世帯当たり1か月間・二人以上の世帯・1か月平均",
-        "hook": "最も消費支出が多い県は？"
+        "hook": "最も消費支出が多い都市は？"
       },
       {
         "rankingKey": "air-conditioner-consumption-quantity",
         "title": "エアコン購入数量",
         "readerLabel": "エアコン購入数量",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン購入数量",
-        "hook": "エアコン購入数量が最も多い県は？"
+        "hook": "エアコン購入数量が最も多い都市は？"
       }
     ]
   },
@@ -428,7 +428,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "utilities-expenditure-ratio-multi-person-households",
         "title": "光熱・水道費割合",
         "readerLabel": "光熱・水道費割合",
-        "hook": "光熱・水道費割合が最も高い県は？"
+        "hook": "光熱・水道費割合が最も高い都市は？"
       },
       {
         "rankingKey": "city-gas-supply-area-households",
@@ -772,21 +772,21 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "transport-communication-expenditure-ratio-multi-person-households",
         "title": "交通・通信費割合",
         "readerLabel": "交通・通信費割合",
-        "hook": "交通・通信費割合が最も高い県は？"
+        "hook": "交通・通信費割合が最も高い都市は？"
       },
       {
         "rankingKey": "information-communication-expenditure",
         "title": "情報通信関係費",
         "readerLabel": "情報通信関係費",
         "subtitle": "都道府県庁所在市の二人以上世帯の年間支出額（固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計）",
-        "hook": "情報通信関係費が最も多い県は？"
+        "hook": "情報通信関係費が最も多い都市は？"
       },
       {
         "rankingKey": "information-communication-coefficient",
         "title": "情報通信係数",
         "readerLabel": "情報通信係数",
         "subtitle": "都道府県庁所在市の二人以上世帯の消費支出に占める情報通信関係費（通信料・放送受信料）の割合",
-        "hook": "情報通信係数が最も多い県は？"
+        "hook": "情報通信係数が最も多い都市は？"
       }
     ]
   }
@@ -851,7 +851,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "title": "牛肉消費量",
     "readerLabel": "牛肉消費量",
     "subtitle": "都道府県庁所在市の二人以上世帯の年間牛肉消費量",
-    "hook": "牛肉消費量が最も多い県は？",
+    "hook": "牛肉消費量が最も多い都市は？",
     "categoryKey": "economy",
     "order": 7
   },
