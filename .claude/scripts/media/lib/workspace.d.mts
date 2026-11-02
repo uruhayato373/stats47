@@ -60,6 +60,10 @@ export interface Template {
   policy: string;
   profiles: { note: string; x: string; instagram: string; web?: string };
   renderer: string | null;
+  /** chart = main statistical form, chart-minor = rarely used form, asset (default) = non-chart material. */
+  group?: 'chart' | 'chart-minor' | 'asset';
+  purposes?: string[];
+  variants?: { id: string; label: string; status: 'ready' | 'planned'; buzzMapTypes?: string[] }[];
 }
 export interface Item {
   id: string;

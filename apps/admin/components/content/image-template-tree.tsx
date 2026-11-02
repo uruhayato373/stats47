@@ -2,94 +2,73 @@
 import { useState, type ReactNode } from 'react';
 import { ChevronRight } from 'lucide-react';
 import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
-import { IMAGE_PURPOSES } from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
+import { TEMPLATE_GROUPS, templateGroup } from '@/lib/image-template-basics';
 import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 
-export type GalleryBranch = {
-  key: string;
-  templateId: string;
-  purpose: string;
-  template: Template;
-};
-
-function ClassificationGroup({
-  label,
-  active,
-  children,
-}: {
-  label: string;
-  active: boolean;
-  children: ReactNode;
-}) {
+function FoldedGroup({ label, count, active, children }: { label: string; count: number; active: boolean; children: ReactNode }) {
   const [open, setOpen] = useState(active);
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      <CollapsibleTrigger render={<Button variant="ghost"
-          size="sm"
-          className="group w-full justify-start"
-          aria-label={label + 'の分類を開閉'} />}>
-          <ChevronRight
-            aria-hidden="true"
-            strokeWidth={1.5}
-            className="size-4 shrink-0 text-muted-foreground transition-transform group-data-[state=open]:rotate-90"
-          />
-          <span className="truncate">{label}</span>
-        </CollapsibleTrigger>
+      <CollapsibleTrigger render={<Button variant="ghost" size="sm" className="group w-full justify-start" aria-label={label + 'を開閉'} />}>
+        <ChevronRight aria-hidden="true" strokeWidth={1.5} className="size-4 shrink-0 text-muted-foreground transition-transform group-data-[state=open]:rotate-90" />
+        <span className="truncate">{label}</span>
+        <span className="ml-auto text-xs text-muted-foreground">{count}</span>
+      </CollapsibleTrigger>
       <CollapsibleContent className="pl-3">{children}</CollapsibleContent>
     </Collapsible>
   );
 }
 
-/** The left menu navigates purpose + visual type independently of existing images. */
+/** One entry per visual form, grouped as the ledger declares; main charts stay open. */
 export function ImageTemplateTree({
-  branches,
+  templates,
   selected,
   dirty,
   onSelect,
 }: {
-  branches: GalleryBranch[];
+  templates: Template[];
   selected?: string;
   dirty: Set<string>;
-  onSelect: (branch: GalleryBranch) => void;
+  onSelect: (template: Template) => void;
 }) {
-  const active = branches.find((branch) => branch.key === selected);
+  const active = templates.find((template) => template.id === selected);
   return (
-    <nav aria-label="型分類" className="space-y-1">
-      {Object.entries(IMAGE_PURPOSES).map(([purpose, label]) => {
-        const children = branches.filter(
-          (branch) => branch.purpose === purpose
+    <nav aria-label="図の型" className="space-y-3">
+      {TEMPLATE_GROUPS.map((group) => {
+        const members = templates.filter((template) => templateGroup(template) === group.id);
+        if (!members.length) return null;
+        const list = (
+          <ul className="space-y-1">
+            {members.map((template) => (
+              <li key={template.id}>
+                <Button
+                  variant={selected === template.id ? 'secondary' : 'ghost'}
+                  size="sm"
+                  className="w-full justify-start"
+                  aria-pressed={selected === template.id}
+                  onClick={() => onSelect(template)}
+                >
+                  <span className="truncate">
+                    {template.label}
+                    {dirty.has(template.id) ? ' ＊' : ''}
+                  </span>
+                </Button>
+              </li>
+            ))}
+          </ul>
         );
-        if (!children.length) return null;
-        return (
-          <ClassificationGroup
-            key={purpose + String(active?.purpose === purpose)}
-            label={label}
-            active={active?.purpose === purpose}
-          >
-            <ul className="space-y-1">
-              {children.map((branch) => (
-                <li key={branch.key}>
-                  <Button
-                    variant={selected === branch.key ? 'secondary' : 'ghost'}
-                    size="sm"
-                    className="w-full justify-start"
-                    aria-pressed={selected === branch.key}
-                    onClick={() => onSelect(branch)}
-                  >
-                    <span className="truncate">
-                      {branch.template.label}
-                      {dirty.has(branch.templateId) ? ' ＊' : ''}
-                    </span>
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </ClassificationGroup>
+        return group.id === 'chart' ? (
+          <section key={group.id} aria-label={group.label} className="space-y-1">
+            <h3 className="px-2 text-xs font-medium text-muted-foreground">{group.label}</h3>
+            {list}
+          </section>
+        ) : (
+          <FoldedGroup key={group.id + String(active && templateGroup(active) === group.id)} label={group.label} count={members.length} active={!!active && templateGroup(active) === group.id}>
+            {list}
+          </FoldedGroup>
         );
       })}
-      {!branches.length && (
-        <p className="text-sm text-muted-foreground">該当する分類はありません。</p>
-      )}
+      {!templates.length && <p className="text-sm text-muted-foreground">該当する型はありません。</p>}
     </nav>
   );
 }

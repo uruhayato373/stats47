@@ -2,18 +2,6 @@
   "schemaVersion": 1,
   "templates": [
     {
-      "id": "unclassified",
-      "version": 1,
-      "label": "未分類",
-      "policy": "用途と入力データを確認してから図の型を指定する。",
-      "profiles": {
-        "note": "用途を確認する。",
-        "x": "用途を確認する。",
-        "instagram": "用途を確認する。"
-      },
-      "renderer": null
-    },
-    {
       "id": "bar",
       "label": "棒グラフ",
       "policy": "順位・県名・棒・数値を分け、数値を直接表示する。軸目盛り・目盛線は省く。表示範囲は指標台帳に従い、0を含まない場合は最小–最大を短く示す。上位・下位は同じ青とし、順位と余白で区別する。行列で数値を読む表はテーブルに分類する。",
@@ -23,7 +11,12 @@
         "note": "note・X・Instagramの棒グラフは共通の4:5（1080×1350px）で制作する。同じ固定入力・色・目盛り・描画部品を使い、元の年・単位・地域・世帯区分と掲載範囲を保持する。文字が読めない場合は枚数を分けて調整する。",
         "x": "共通の4:5（1080×1350px）で制作し、数値・年・単位・比較基準を保持する。単年の都道府県ランキングは全47県表示の契約を維持する。",
         "instagram": "共通の4:5（1080×1350px）で制作し、必要に応じて同じデータを複数枚へ分ける。表紙・出典は別の型として管理する。"
-      }
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "comparison"
+      ]
     },
     {
       "id": "table",
@@ -35,7 +28,107 @@
         "note": "試作方針: note本文は640×960で上位5県・下位5県を縦積み。県名・値28px（320px表示で14px）。全47県データを保存し、抜粋の範囲を明記。単位・年・順位を維持。 見た目の型はテーブルを維持する。",
         "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
         "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。"
-      }
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "comparison",
+        "composition"
+      ]
+    },
+    {
+      "id": "tile-map",
+      "label": "タイルマップ",
+      "policy": "4:5の画像（note・X・Threads・Instagram・管理画面の見本）は、サイトの配置表（packages/visualization の TILE_GRID_LAYOUT）をそのまま使い、日本列島の形（北海道2×2、新潟・福島・京都などの縦横、九州から離した沖縄）を保つ。県のない海峡の段だけを縮め、タイルを横幅いっぱいまで大きくする（apps/remotion/src/features/data-cards/tile-layout.ts の IMAGE_TILE_LAYOUT）。描画は apps/remotion/src/features/data-cards/all47-svg.ts の1つだけを使い、媒体ごとに別の配置や配色を作らない。形は模式図で、タイルの面積は統計値や実面積を表さない。県名・値・年・単位・色の段階を示し、県庁所在市の値は都市名で示す。地理的な輪郭を読む地図は「地図（実際の形）」を使う。 色は指標台帳の配色をサイトのランキングと同じ設定で解決する（配色の指定が無い呼び出しはブランドの青5段）。タイルの文字は中央揃えで、地色との明暗差が大きい方（白か濃紺）を自動で選ぶ。値の小数桁は図全体で1回だけ決めてそろえる。左上の日本海側の空きに上位3県（同値は同順位）、右下の太平洋側に凡例（区分の境界値つき）を置く。背景と文字色はほかの型の見本と同じ。",
+      "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
+      "version": 5,
+      "profiles": {
+        "note": "note・X・Instagramとも共通の4:5（1080×1350px）で同じ画像を使う。",
+        "x": "共通の4:5（1080×1350px）。ランキングカード（quick-still）が同じ描画を使う。",
+        "instagram": "共通の4:5（1080×1350px）。地図カルーセルも同じ描画を使う。表紙・クイズのヒントは移行中。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "distribution",
+        "trend"
+      ]
+    },
+    {
+      "id": "choropleth",
+      "label": "地図（実際の形）",
+      "policy": "実際の県形状の地図。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズマップ型C〜E）。全47県の値と色の対応・対象年・地域粒度を明記し、塗りの配色はサイトのランキングと同じ設定で解決する。沖縄は同じ色尺度の別枠に置く。凡例に最小・最大値（区分なら境界値）を示し、単位は見出しに置く。県の値を一覧で読ませる用途はタイルマップを使う。",
+      "renderer": "apps/remotion/src/features/buzz-map/",
+      "version": 5,
+      "profiles": {
+        "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
+        "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
+        "instagram": "共通の4:5（1080×1350px）で制作する。表紙・出典は別の型として管理する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "distribution",
+        "trend"
+      ],
+      "variants": [
+        {
+          "id": "fill",
+          "label": "地域の塗り",
+          "status": "ready",
+          "buzzMapTypes": [
+            "A"
+          ]
+        },
+        {
+          "id": "fill-animation",
+          "label": "塗りの時系列（動画）",
+          "status": "ready",
+          "buzzMapTypes": [
+            "B"
+          ]
+        },
+        {
+          "id": "point",
+          "label": "点",
+          "status": "ready",
+          "buzzMapTypes": [
+            "C"
+          ]
+        },
+        {
+          "id": "line",
+          "label": "線",
+          "status": "ready",
+          "buzzMapTypes": [
+            "D"
+          ]
+        },
+        {
+          "id": "overlay",
+          "label": "塗り・点・線の組み合わせ",
+          "status": "ready",
+          "buzzMapTypes": [
+            "E"
+          ]
+        },
+        {
+          "id": "mesh",
+          "label": "メッシュの塗り",
+          "status": "planned",
+          "buzzMapTypes": [
+            "F"
+          ]
+        },
+        {
+          "id": "flow",
+          "label": "流れの矢印",
+          "status": "planned",
+          "buzzMapTypes": [
+            "flow"
+          ]
+        }
+      ]
     },
     {
       "id": "line",
@@ -47,45 +140,11 @@
         "note": "期間を本文と揃える。",
         "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
         "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。"
-      }
-    },
-    {
-      "id": "scatter",
-      "label": "散布図",
-      "policy": "既存SVGカタログの generateScatterSvg を使用する。固定入力・単位・年を維持し、原寸と320pxで文字と凡例を確認する。 試作方針: note本文は640×960。全47点、両軸の指標・年・単位・分母を保持。軸と目盛24〜26px、注目県は最大2県の番号付き注記。相関を因果としない。",
-      "renderer": "packages/svg-builder/src/",
-      "version": 3,
-      "profiles": {
-        "note": "試作方針: note本文は640×960。全47点、両軸の指標・年・単位・分母を保持。軸と目盛24〜26px、注目県は最大2県の番号付き注記。相関を因果としない。",
-        "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
-        "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。",
-        "web": "使用ページの幅とlight/dark表示を確認する。"
-      }
-    },
-    {
-      "id": "choropleth",
-      "label": "地図（地域を色分け）",
-      "policy": "正確な地理形状を使い、数値と色の対応・欠測・対象年・地域粒度を明記する。 試作方針: note本文は640×960。正確な県形状と全47県の値を保持し、沖縄は同一色尺度の別枠。最小・最大値と単位を大きな連続凡例に表示し、注目県を図と本文で対応させる。",
-      "renderer": "apps/remotion/src/features/buzz-map/",
-      "version": 3,
-      "profiles": {
-        "note": "試作方針: note本文は640×960。正確な県形状と全47県の値を保持し、沖縄は同一色尺度の別枠。最小・最大値と単位を大きな連続凡例に表示し、注目県を図と本文で対応させる。",
-        "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
-        "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。"
-      }
-    },
-    {
-      "id": "tile-map",
-      "label": "タイルマップ",
-      "policy": "公開済みnote・サイト・SNSの列島配置を基準とし、北海道の大きさ、県の縦横、沖縄の分離を保つ。タイルを一律の正方形に詰め直さない。形は模式図で、タイル面積は統計値や実面積を表さない。県名・値・年・単位・色尺度を示す。地理的輪郭を読む地図とは分ける。",
-      "renderer": "packages/svg-builder/src/",
-      "version": 2,
-      "profiles": {
-        "note": "本文幅320pxで確認する。",
-        "x": "投稿時のトリミングと可読性を確認する。",
-        "instagram": "スライドの比率と可読性を確認する。",
-        "web": "使用ページの幅とlight/dark表示を確認する。"
-      }
+      },
+      "group": "chart",
+      "purposes": [
+        "trend"
+      ]
     },
     {
       "id": "stacked-bar",
@@ -98,7 +157,144 @@
         "x": "投稿時のトリミングと可読性を確認する。",
         "instagram": "スライドの比率と可読性を確認する。",
         "web": "使用ページの幅とlight/dark表示を確認する。"
-      }
+      },
+      "group": "chart",
+      "purposes": [
+        "composition"
+      ]
+    },
+    {
+      "id": "scatter",
+      "label": "散布図",
+      "policy": "全47点を単色で描き、両軸の指標・年・単位と調査範囲（県庁所在市など）を保持する。回帰線は破線で示す。県名は他の点と重ならない端の点に最大2県まで付ける。相関を因果としない。",
+      "renderer": "packages/svg-builder/src/",
+      "version": 4,
+      "profiles": {
+        "note": "note・X・Instagramの散布図は共通の4:5（1080×1350px）で制作する。同じ固定入力・軸範囲・描画部品を使い、軸ラベルと目盛りは320px表示で読める大きさ（原寸28px以上）にする。",
+        "x": "共通の4:5（1080×1350px）で制作し、両軸の年・単位・調査範囲を保持する。",
+        "instagram": "共通の4:5（1080×1350px）で制作する。表紙・出典は別の型として管理する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "relationship"
+      ]
+    },
+    {
+      "id": "radar",
+      "label": "レーダーチャート",
+      "policy": "各軸の尺度・方向・正規化を照合する。比較対象と軸名を明瞭に示す。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "comparison"
+      ]
+    },
+    {
+      "id": "sankey",
+      "label": "サンキー・流れの量",
+      "policy": "流入・流出・枝の合計を照合する。量と方向を誤読しないラベルにする。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "relationship",
+        "composition"
+      ]
+    },
+    {
+      "id": "waterfall",
+      "label": "ウォーターフォール",
+      "policy": "増減の符号・基準値・累積値を照合する。項目名と増減をスマホ幅で追えるようにする。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "composition"
+      ]
+    },
+    {
+      "id": "boxplot",
+      "label": "箱ひげ図・分布",
+      "policy": "四分位・中央値・外れ値の定義と固定入力を照合する。スマホで軸と凡例が読めるようにする。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "distribution"
+      ]
+    },
+    {
+      "id": "pie",
+      "label": "円・ドーナツグラフ",
+      "policy": "母数・構成比の合計・分類の重複を照合する。小さな区分には本文や数表を併用する。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "composition"
+      ]
+    },
+    {
+      "id": "heatmap",
+      "label": "ヒートマップ",
+      "policy": "行列の意味・色の尺度・欠損の表現を照合する。凡例とラベルをスマホ幅で確認する。",
+      "renderer": null,
+      "version": 1,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart-minor",
+      "purposes": [
+        "distribution",
+        "trend"
+      ]
+    },
+    {
+      "id": "unclassified",
+      "version": 1,
+      "label": "未分類",
+      "policy": "用途と入力データを確認してから図の型を指定する。",
+      "profiles": {
+        "note": "用途を確認する。",
+        "x": "用途を確認する。",
+        "instagram": "用途を確認する。"
+      },
+      "renderer": null
     }
   ],
   "history": [
@@ -296,6 +492,100 @@
         "x": "共通の4:5（1080×1350px）で制作し、数値・年・単位・比較基準を保持する。単年の都道府県ランキングは全47県表示の契約を維持する。",
         "instagram": "共通の4:5（1080×1350px）で制作し、必要に応じて同じデータを複数枚へ分ける。表紙・出典は別の型として管理する。"
       }
+    },
+    {
+      "id": "scatter",
+      "label": "散布図",
+      "policy": "既存SVGカタログの generateScatterSvg を使用する。固定入力・単位・年を維持し、原寸と320pxで文字と凡例を確認する。 試作方針: note本文は640×960。全47点、両軸の指標・年・単位・分母を保持。軸と目盛24〜26px、注目県は最大2県の番号付き注記。相関を因果としない。",
+      "renderer": "packages/svg-builder/src/",
+      "version": 3,
+      "profiles": {
+        "note": "試作方針: note本文は640×960。全47点、両軸の指標・年・単位・分母を保持。軸と目盛24〜26px、注目県は最大2県の番号付き注記。相関を因果としない。",
+        "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
+        "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      }
+    },
+    {
+      "id": "choropleth",
+      "label": "地図（地域を色分け）",
+      "policy": "正確な地理形状を使い、数値と色の対応・欠測・対象年・地域粒度を明記する。 試作方針: note本文は640×960。正確な県形状と全47県の値を保持し、沖縄は同一色尺度の別枠。最小・最大値と単位を大きな連続凡例に表示し、注目県を図と本文で対応させる。",
+      "renderer": "apps/remotion/src/features/buzz-map/",
+      "version": 3,
+      "profiles": {
+        "note": "試作方針: note本文は640×960。正確な県形状と全47県の値を保持し、沖縄は同一色尺度の別枠。最小・最大値と単位を大きな連続凡例に表示し、注目県を図と本文で対応させる。",
+        "x": "同じ型を維持し、投稿時の比率・文字サイズ・掲載範囲を調整する。",
+        "instagram": "同じ型を維持し、必要なら複数枚へ分ける。表紙と出典は用途を分ける。"
+      }
+    },
+    {
+      "id": "choropleth",
+      "label": "地図（地域を色分け）",
+      "policy": "正確な県形状と全47県の値を使い、数値と色の対応・対象年・地域粒度を明記する。配色はサイトのランキングと同じ設定で解決する。沖縄は同じ色尺度の別枠に置く。凡例に最小・最大値（区分なら境界値）を示し、単位は見出しに置く。",
+      "renderer": "apps/remotion/src/features/buzz-map/",
+      "version": 4,
+      "profiles": {
+        "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
+        "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
+        "instagram": "共通の4:5（1080×1350px）で制作する。表紙・出典は別の型として管理する。"
+      }
+    },
+    {
+      "id": "tile-map",
+      "label": "タイルマップ",
+      "policy": "公開済みnote・サイト・SNSの列島配置を基準とし、北海道の大きさ、県の縦横、沖縄の分離を保つ。タイルを一律の正方形に詰め直さない。形は模式図で、タイル面積は統計値や実面積を表さない。県名・値・年・単位・色尺度を示す。地理的輪郭を読む地図とは分ける。",
+      "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
+      "version": 2,
+      "profiles": {
+        "note": "本文幅320pxで確認する。",
+        "x": "投稿時のトリミングと可読性を確認する。",
+        "instagram": "スライドの比率と可読性を確認する。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "distribution",
+        "trend"
+      ]
+    },
+    {
+      "id": "tile-map",
+      "label": "タイルマップ",
+      "policy": "4:5の画像（note・X・Threads・Instagram・管理画面の見本）は全47県を同じ大きさの正方形タイルで詰めて並べる（12×11マス、北海道が右上・沖縄は鹿児島の隣）。描画は apps/remotion/src/features/data-cards/all47-svg.ts の1つだけを使い、媒体ごとに別の配置や配色を作らない。サイトのページの地図はサイトの配置表（北海道2×2・沖縄を離す）のまま。形は模式図で、タイルの面積は統計値や実面積を表さない。県名・値・年・単位・色の段階を示し、県庁所在市の値は都市名で示す。地理的な輪郭を読む地図は「地図（実際の形）」を使う。",
+      "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
+      "version": 3,
+      "profiles": {
+        "note": "note・X・Instagramとも共通の4:5（1080×1350px）で同じ画像を使う。",
+        "x": "共通の4:5（1080×1350px）。ランキングカード（quick-still）が同じ描画を使う。",
+        "instagram": "共通の4:5（1080×1350px）。地図カルーセルも同じ描画を使う。表紙・クイズのヒントは移行中。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "distribution",
+        "trend"
+      ]
+    },
+    {
+      "id": "tile-map",
+      "label": "タイルマップ",
+      "policy": "4:5の画像（note・X・Threads・Instagram・管理画面の見本）は、サイトの配置表（packages/visualization の TILE_GRID_LAYOUT）をそのまま使い、日本列島の形（北海道2×2、新潟・福島・京都などの縦横、九州から離した沖縄）を保つ。県のない海峡の段だけを縮め、タイルを横幅いっぱいまで大きくする（apps/remotion/src/features/data-cards/tile-layout.ts の IMAGE_TILE_LAYOUT）。描画は apps/remotion/src/features/data-cards/all47-svg.ts の1つだけを使い、媒体ごとに別の配置や配色を作らない。形は模式図で、タイルの面積は統計値や実面積を表さない。県名・値・年・単位・色の段階を示し、県庁所在市の値は都市名で示す。地理的な輪郭を読む地図は「地図（実際の形）」を使う。",
+      "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
+      "version": 4,
+      "profiles": {
+        "note": "note・X・Instagramとも共通の4:5（1080×1350px）で同じ画像を使う。",
+        "x": "共通の4:5（1080×1350px）。ランキングカード（quick-still）が同じ描画を使う。",
+        "instagram": "共通の4:5（1080×1350px）。地図カルーセルも同じ描画を使う。表紙・クイズのヒントは移行中。",
+        "web": "使用ページの幅とlight/dark表示を確認する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "ranking",
+        "distribution",
+        "trend"
+      ]
     }
   ]
 }
