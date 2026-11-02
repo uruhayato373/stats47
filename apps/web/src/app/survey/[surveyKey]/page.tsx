@@ -31,12 +31,11 @@ import { isOk } from '@stats47/types';
 import {
   ArrowRight,
   ChartLine,
-  CircleCheck,
   ExternalLink,
   LayoutGrid,
-  TriangleAlert,
 } from 'lucide-react';
 
+import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
 import { ArticleTeaserCard, CardGrid, SurfaceLinkCard } from '@/components/surface';
@@ -398,18 +397,36 @@ export default async function SurveyPage({ params }: PageProps) {
           </>
         }
         actions={
-          survey.url ? (
-            <a
-              href={survey.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-slot="button"
-              className={buttonVariants({ variant: 'outline', size: 'sm' })}
-            >
-              公式サイト
-              <ExternalLink data-icon="inline-end" aria-hidden />
-            </a>
-          ) : undefined
+          <>
+            {/* 読むときの注意・分かること・出典は、テーマのページと同じ共通のシートで開く (2026-11-03)。
+                先頭に置き、ページの最初から誤読の注意 (県庁所在市の値など) に届くようにする */}
+            {editorial && (
+              <SourcesSheet
+                id="survey-sources"
+                groups={[
+                  {
+                    title: '数字を読むときの注意',
+                    notes: editorial.caveats,
+                    sources: [{ label: `${survey.organization}「${survey.name}」`, url: survey.url }],
+                    rankings: [],
+                  },
+                  { title: 'この調査で分かること', notes: editorial.whatYouCanLearn, sources: [], rankings: [] },
+                ]}
+              />
+            )}
+            {survey.url && (
+              <a
+                href={survey.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-slot="button"
+                className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              >
+                公式サイト
+                <ExternalLink data-icon="inline-end" aria-hidden />
+              </a>
+            )}
+          </>
         }
       />
 
@@ -572,48 +589,16 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 調査の要約はページに残す。シートの中身は押すまで読み込まないので、ページの説明文がゼロにならないようにし、
+          PR の列とページ末の広告の間も空ける (2026-11-03) */}
       {editorial && (
         <section id="survey-overview" className="mb-4 scroll-mt-24">
           <SectionHeader title="この調査について" />
-          <p className="mb-4 text-sm leading-6 text-foreground">
-            {editorial.summary}
-          </p>
-          {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
-          <ul className="grid gap-x-6 sm:grid-cols-2">
-            {editorial.whatYouCanLearn.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-foreground"
-              >
-                <CircleCheck className="mt-1 size-4 shrink-0 text-positive" aria-hidden />
-                <span className="min-w-0">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <p className="text-sm leading-6 text-foreground">{editorial.summary}</p>
         </section>
       )}
 
-      {editorial && (
-        <section id="survey-caveats" className="mb-4 scroll-mt-24">
-          <SectionHeader
-            title="数字を読むときの注意"
-            icon={<TriangleAlert aria-hidden />}
-          />
-          <ul className="grid gap-x-6 @md:grid-cols-2">
-            {editorial.caveats.map((caveat) => (
-              <li
-                key={caveat}
-                className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-muted-foreground"
-              >
-                <TriangleAlert className="mt-1 size-4 shrink-0 text-warning" aria-hidden />
-                <span className="min-w-0">{caveat}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「数字を読むときの注意」を挟めるときだけ出す
+      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「この調査について」を挟めるときだけ出す
           (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
       {editorial && <FooterAdSlot />}
     </ArticleShell>
