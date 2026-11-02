@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-28T06:59:37.712Z",
+  "generatedAt": "2026-10-30T22:20:18.918Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "observedAt": "2026-10-02"
   },
   "scan": {
-    "dirs": 5,
-    "transcripts": 67,
+    "dirs": 8,
+    "transcripts": 78,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -746,16 +746,16 @@
       "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 6,
-      "calls": 2679,
+      "runs": 10,
+      "calls": 5453,
       "tokens": {
-        "input": 661344,
-        "output": 1750958,
+        "input": 666892,
+        "output": 3329181,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 6251490,
-        "cacheRead": 1359371880
+        "cacheWrite1h": 13168946,
+        "cacheRead": 2773729947
       },
-      "costUsd": 359.5508
+      "costUsd": 729.3487
     },
     {
       "week": "2026-W44",
@@ -773,6 +773,23 @@
         "cacheRead": 248125060
       },
       "costUsd": 69.9542
+    },
+    {
+      "week": "2026-W44",
+      "scope": "sub",
+      "agentType": "blog-critic",
+      "model": "claude-sonnet-5-5",
+      "effort": "high",
+      "runs": 1,
+      "calls": 6,
+      "tokens": {
+        "input": 14,
+        "output": 4079,
+        "cacheWrite5m": 159470,
+        "cacheWrite1h": 0,
+        "cacheRead": 520863
+      },
+      "costUsd": 0.5437
     },
     {
       "week": "2026-W44",
@@ -814,16 +831,16 @@
       "agentType": "general-purpose",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 9,
-      "calls": 379,
+      "runs": 15,
+      "calls": 749,
       "tokens": {
-        "input": 778,
-        "output": 229489,
-        "cacheWrite5m": 1728418,
+        "input": 1546,
+        "output": 482857,
+        "cacheWrite5m": 3228437,
         "cacheWrite1h": 0,
-        "cacheRead": 62115461
+        "cacheRead": 145110466
       },
-      "costUsd": 25.6581
+      "costUsd": 54.8276
     },
     {
       "week": "2026-W44",
