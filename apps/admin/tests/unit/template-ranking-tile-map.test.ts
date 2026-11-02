@@ -28,11 +28,17 @@ describe('compact tile-map basic form (4:5 images)', () => {
       { title: '最高気温', year: '2024年', unit: '℃', source: '社会・人口統計体系', note: '日最高気温の月平均の最高値' }
     );
     // Same layout and copy as the shared renderer; only the fills differ (metric scale vs default blue).
-    const strip = (s: string) => s.replace(/fill="[^"]+"/g, '');
+    // Legend rows carry each scale's own ranges and counts, so they are checked separately below.
+    const strip = (s: string) => s.replace(/<g data-legend-row="\d+">.*?<\/g>/g, '').replace(/fill="[^"]+"/g, '');
     expect(strip(svg).replace(/<text[^>]*>[\d.,]+<\/text>/g, '')).toBe(strip(plain).replace(/<text[^>]*>[\d.,]+<\/text>/g, ''));
     expect(svg).not.toBe(plain);
     expect(svg.match(/data-top="/g)?.length).toBeGreaterThanOrEqual(3);
     expect(svg).toContain('上位3県');
+    // One legend row per class (colour, range, number of prefectures); the counts cover all 47.
+    const scale = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, input.data.map((r) => r.value))!;
+    const counts = [...svg.matchAll(/<g data-legend-row="\d+">.*?>(\d+)県<\/text><\/g>/g)].map((m) => Number(m[1]));
+    expect(counts).toHaveLength(scale.colors.length);
+    expect(counts.reduce((a, b) => a + b, 0)).toBe(47);
   });
   it('keeps the archipelago shape of the site layout with every prefecture joined by code', async () => {
     const input = fixture();

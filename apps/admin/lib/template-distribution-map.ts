@@ -3,19 +3,22 @@ import path from 'node:path';
 import type { Topology } from 'topojson-specification';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { computeBuzzMapGeo } from '../../remotion/src/features/buzz-map/geo';
+import { mapValueFormatter, renderClassLegend, renderTopThree } from '../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
 import { rankingRows } from './template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
-import { escapeXml, sampleFrame } from './template-sample-frame';
+import { SAMPLE_FRAME, sampleFrame } from './template-sample-frame';
 
 export const DISTRIBUTION_MAP_SAMPLE_ID = 'maximum-temperature-map';
 // Same prefecture boundaries the buzz-map cards draw from.
 const PREFECTURE_TOPOLOGY = path.resolve(__dirname, '../../remotion/public/prefecture.topojson');
-const LEGEND = { right: 1016, bottom: 1250, rowHeight: 44, swatch: 30, width: 330 } as const;
+// Top three in the upper Sea of Japan corner (as on the tile map); Okinawa in a frame sized to the islands below it.
+const TOP_THREE = { top: 286, width: 420, rowGap: 76 } as const;
+const OKINAWA_BOX = { x: SAMPLE_FRAME.left, y: 560, width: 300, height: 240 } as const;
 
 /**
- * Real-shape map: the buzz-map geometry (mainland filling the frame, a large Okinawa inset in the
- * Sea of Japan corner) coloured by the metric's authored scale, with a buzz-map style legend card.
+ * Real-shape map: the buzz-map geometry (mainland filling the frame, Okinawa in a frame sized to the
+ * islands) coloured by the metric's authored scale. The top three and the legend are the tile map's.
  */
 export async function renderDistributionMap(raw: unknown) {
   const rows = rankingRows(raw);
@@ -24,7 +27,7 @@ export async function renderDistributionMap(raw: unknown) {
   const scale = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, rows.map((row) => row.value), RANKING_SAMPLE_METRIC.display);
   if (!scale) throw Error('地図の配色を解決できません。');
   const topology = JSON.parse(fs.readFileSync(PREFECTURE_TOPOLOGY, 'utf8')) as Topology;
-  const geo = computeBuzzMapGeo(topology, null, { level: 'pref', ratio: '45', type: 'A' });
+  const geo = computeBuzzMapGeo(topology, null, { level: 'pref', ratio: '45', type: 'A', insetBox: OKINAWA_BOX });
   const drawn = [...geo.mainland, ...(geo.inset ?? [])];
   const codes = new Set(drawn.map((shape) => shape.code.slice(0, 2)));
   if (codes.size !== 47 || rows.some((row) => !codes.has(row.area_code.slice(0, 2))))
@@ -36,27 +39,16 @@ export async function renderDistributionMap(raw: unknown) {
   const box = geo.insetBox!;
   const inset = `<rect x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}" rx="10" fill="none" stroke="${BRAND.line}" stroke-width="2"/>
     <text x="${box.x + 16}" y="${box.y + 34}" font-size="24" fill="${BRAND.muted}">沖縄</text>`;
-  // Legend card: one row per class with its range and the number of prefectures in it.
-  const format = scale.formatBoundary ?? ((v: number) => String(v));
-  const classes = scale.colors.length
-    ? scale.colors.map((color, i) => {
-      const lo = scale.boundaries[i], hi = scale.boundaries[i + 1];
-      const count = rows.filter((row) => (i === scale.colors.length - 1 ? row.value >= lo && row.value <= hi : row.value >= lo && row.value < hi)).length;
-      return { color, label: `${format(lo)}〜${format(hi)}`, count };
-    }).reverse()
-    : [];
-  const legendTop = LEGEND.bottom - classes.length * LEGEND.rowHeight;
-  const legendLeft = LEGEND.right - LEGEND.width;
-  const legend = classes.map((c, i) => {
-    const y = legendTop + i * LEGEND.rowHeight;
-    return `<g data-legend-row="${i}"><rect x="${legendLeft}" y="${y}" width="${LEGEND.swatch}" height="${LEGEND.swatch}" rx="4" fill="${c.color}"/><text x="${legendLeft + LEGEND.swatch + 14}" y="${y + 23}" font-size="24">${escapeXml(c.label)}</text><text x="${LEGEND.right}" y="${y + 23}" text-anchor="end" font-size="24" font-weight="700">${c.count}県</text></g>`;
-  }).join('');
+  const all = rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value }));
+  const format = mapValueFormatter(all.map((r) => r.value));
+  const topThree = renderTopThree(all, { x: SAMPLE_FRAME.left, ...TOP_THREE, unit: label.unit, format });
+  const legend = renderClassLegend(scale, all.map((r) => r.value), { right: SAMPLE_FRAME.right, bottom: 1250, format: scale.formatBoundary ?? format });
   return sampleFrame({
     title: RANKING_SAMPLE_METRIC.title,
     meta: `${RANKING_SAMPLE_YEAR}年 · 単位：${label.unit}`,
     note: label.subtitle || undefined,
     source: label.source,
     ariaLabel: `${RANKING_SAMPLE_METRIC.title}・全47都道府県の地図`,
-    body: `<g data-map="mainland">${geo.mainland.map(shape).join('')}</g>${inset}<g data-map="okinawa">${(geo.inset ?? []).map(shape).join('')}</g>${legend}`,
+    body: `<g data-map="mainland">${geo.mainland.map(shape).join('')}</g>${inset}<g data-map="okinawa">${(geo.inset ?? []).map(shape).join('')}</g>${topThree}${legend}`,
   });
 }
