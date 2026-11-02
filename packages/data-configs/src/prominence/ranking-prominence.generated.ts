@@ -1017,7 +1017,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "education-expenditure-ratio-multi-person-households": 0.775,
   "elderly-couple-only-household-ratio": 0.4326,
   "employee-ratio-10-29-employee-establishments-private": 0.4762,
-  "engel-coefficient": 0.8242,
+  "engel-coefficient": 0.8278,
   "female-scheduled-earnings": 0.6025,
   "final-energy-consumption-per-capita": 0.5164,
   "financial-debt-balance": 0.4438,
