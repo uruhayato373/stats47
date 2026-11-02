@@ -94,7 +94,7 @@ describe('representative statistics for image template basics', () => {
         samples: [{ ...definition, media: {} }],
       })
     );
-    expect(html).toContain('家計支出の10分類');
+    expect(html).toContain('東京都と京都府の複数指標');
     expect(html.match(/サンプル画像を準備中/g)).toHaveLength(4);
     expect(html).not.toContain('<svg');
     expect(html).not.toContain('<img');
