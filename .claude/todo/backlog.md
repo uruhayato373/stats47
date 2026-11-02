@@ -225,6 +225,15 @@ updated: 2026-11-01
 - **証拠 (2026-11-02)**: `develop-quality-gate.yml` の Catalog Gates (preflight:pr) が 03:15・03:28・03:44 の 3 run (`66e538a97`・`64a913bae`・`c3e1bab27`、run 41384694381 ほか) で失敗。失敗は 50 ゲート中 2 つ: ❌ Survey Taxonomy（`theme taxonomy state が現行 ThemeCatalog と drift`）、❌ Sitemap / Tag Keys（`blog sourceless: cc-estat-17-edu-slope-graph`）。同日のブログ記事の書き直し・追加の push から始まっている。
 - **次**: ① テーマの分類の状態を full audit で作り直す ② `cc-estat-17-edu-slope-graph` の出典 (source.json) を補うか、sitemap・tag の生成物を作り直す ③ `npm run preflight:pr` がローカルで通ることを確かめて push。
 - **完了条件**: develop の Quality Gate が緑になる。
+- **是正 (2026-11-02)**: ① Survey Taxonomy は `audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json` でランキング・テーマの部分だけ作り直した（差分2行。ブログの部分は前回の記録のまま）。「blog sourceless」の行は上限内の参考表示で、止めていた原因ではなかった ② Sitemap / Tag Keys は5本のうち `generate-ranking-prominence.ts` だけが古く、作り直した。ローカルの `npm run preflight:pr` で両ゲートが ✅（残る Unit Semantics Mirror はこの PC の改行コードだけの差で、再生成しても git 差分なし）。push 後の CI が緑になれば削除してよい。
+
+### [BLOG-CHART-LINEAGE-R2-01] 公開ブログ37記事の図で survey の系譜が R2 から辿れない (missing-lineage 37・unresolved 4)
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
+
+- **証拠 (2026-11-02)**: R2 を読むオンラインの `audit-survey-taxonomy.ts --json` を実行すると、ブログの図で missing-lineage 37・unresolved 4 が出て、縮小専用の上限 (0) を超える。対象は dual-income-reversal・alcohol-prefecture-map・advancement-plus-employment-rate-prefecture・consumer-price-regional-gap・air-conditioner-consumption-quantity-prefecture-gap など以前からの記事。コミット済みの state (前回生成) では 0 件なので、前回の生成以後に R2 の図の source.json が欠けたか、判定側が変わった可能性がある (原因は未確認)。
+- **次**: 1記事を選び R2 の `app/blog/<slug>/data/*.source.json` の有無と中身を確かめ、欠けた時期を `git log`・publish-blog の run から特定する。補えるなら source.json を補い、オンラインの監査で 0 に戻ったことを確かめてから state を作り直す。
+- **停止条件**: 図の値を推定で補わない。R2 への書き込みは publish-blog の経路で行う。
+- **完了条件**: オンラインの `audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` が missing-lineage 0・unresolved 0 で、`--offline --check` も通る。
 
 ### [BUZZ-MAP-CONTENT-ROLLOUT-01] バズ地図の候補160件がブログ・note・SNSにほとんど展開されていない
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
