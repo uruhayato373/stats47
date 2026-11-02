@@ -4,16 +4,32 @@
   "description": "data/estat/kakei-ledger/decisions.json の形の契約。家計調査 (00200561) の表と、年次品目表の品目について、指標を作らないもの (excluded) と作る予定のもの (planned) を理由付きで記録する。指標があるもの (adopted) は metric config から導出するのでここに書かない (書くと kakei-ledger check が DECISION_CONFLICT で止める)。itemTables は品目ごとの採否を持つ年次の品目表。",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "itemTables", "tables", "items"],
+  "required": [
+    "schemaVersion",
+    "itemTables",
+    "tables",
+    "items"
+  ],
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": {
+      "const": 1
+    },
     "itemTables": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["amount", "quantity"],
+      "required": [
+        "amount",
+        "quantity"
+      ],
       "properties": {
-        "amount": { "type": "string", "pattern": "^\\d{10}$" },
-        "quantity": { "type": "string", "pattern": "^\\d{10}$" }
+        "amount": {
+          "type": "string",
+          "pattern": "^\\d{10}$"
+        },
+        "quantity": {
+          "type": "string",
+          "pattern": "^\\d{10}$"
+        }
       }
     },
     "tables": {
@@ -21,13 +37,36 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["statsDataId", "status", "reason", "decidedAt", "decidedBy"],
+        "required": [
+          "statsDataId",
+          "status",
+          "reason",
+          "decidedAt",
+          "decidedBy"
+        ],
         "properties": {
-          "statsDataId": { "type": "string", "pattern": "^\\d{10}$" },
-          "status": { "enum": ["planned", "excluded"] },
-          "reason": { "type": "string", "minLength": 1 },
-          "decidedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-          "decidedBy": { "type": "string", "minLength": 1 }
+          "statsDataId": {
+            "type": "string",
+            "pattern": "^\\d{10}$"
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "excluded"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decidedAt": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "decidedBy": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     },
@@ -36,16 +75,50 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["code", "measure", "status", "reason", "decidedAt", "decidedBy"],
+        "required": [
+          "code",
+          "measure",
+          "status",
+          "reason",
+          "decidedAt",
+          "decidedBy"
+        ],
         "properties": {
-          "code": { "type": "string", "minLength": 1 },
-          "measure": { "enum": ["amount", "quantity"] },
-          "status": { "enum": ["planned", "excluded"] },
-          "reason": { "type": "string", "minLength": 1 },
-          "decidedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-          "decidedBy": { "type": "string", "minLength": 1 }
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "measure": {
+            "enum": [
+              "amount",
+              "quantity"
+            ]
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "excluded"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decidedAt": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "decidedBy": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
+    },
+    "maxUndecidedTables": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "未判断の表の上限。縮小専用で、表を判断したら下げる (estat:kakei-ledger:check が超過を止める)"
     }
   }
 }

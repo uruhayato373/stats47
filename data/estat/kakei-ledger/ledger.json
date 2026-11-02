@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T03:01:30.398Z",
+ "generatedAt": "2026-11-02T05:06:46.802Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -13,8 +13,10 @@
   "tables": 126,
   "tablesWithMeta": 126,
   "tablesByStatus": {
-   "undecided": 122,
-   "adopted": 4
+   "undecided": 102,
+   "planned": 7,
+   "adopted": 13,
+   "excluded": 4
   },
   "tablesByCycle": {
    "月次": 18,
@@ -92,6 +94,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -138,6 +141,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -184,8 +188,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "都市ごとの十大費目の構成比 (家計の配分の切り口)。県庁所在市の年次・用途分類で、品目分類の合計では作れない費目の割合を出す"
   },
   {
    "statsDataId": "0002070004",
@@ -235,6 +240,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -286,7 +292,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -337,6 +346,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -388,6 +398,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -439,6 +450,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -490,7 +502,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-household-size"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -541,6 +556,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -592,8 +608,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年齢階級別。品目分類の年齢階級別 (0004023609/0004023610) で同じ問いに答えられるので二重に持たない"
   },
   {
    "statsDataId": "0002070012",
@@ -643,6 +660,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -694,6 +712,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -745,6 +764,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -796,6 +816,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -847,6 +868,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -898,8 +920,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "持家と借家で家計の支出がどう違うか (世帯の属性の切り口)。全国の集計なのでランキングにはしない"
   },
   {
    "statsDataId": "0002070018",
@@ -944,6 +967,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -990,6 +1014,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1036,6 +1061,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1082,6 +1108,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1128,6 +1155,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1174,6 +1202,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1225,6 +1254,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1276,6 +1306,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1332,8 +1363,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "総世帯・単身世帯の年齢・性別の支出 (世帯の属性の切り口)。二人以上世帯の表と対象が違うので混ぜずに別の図にする"
   },
   {
    "statsDataId": "0002190005",
@@ -1378,6 +1410,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1424,6 +1457,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1475,6 +1509,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1526,8 +1561,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "総世帯の用途分類の年収五分位。二人以上世帯の五分位 (0002070005) で答え、集計対象の違う総世帯を混ぜない"
   },
   {
    "statsDataId": "0002200005",
@@ -1577,6 +1613,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1628,8 +1665,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "総世帯の用途分類の年収十分位。五分位で足り、集計対象の違う総世帯を混ぜない"
   },
   {
    "statsDataId": "0002200007",
@@ -1674,6 +1712,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1720,6 +1759,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1776,6 +1816,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1832,6 +1873,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1878,6 +1920,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -1924,7 +1967,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "savings-city"
+   ],
+   "status": "planned",
    "reason": null
   },
   {
@@ -1975,6 +2021,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2026,7 +2073,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "savings-income-18-class"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -2082,6 +2132,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2138,7 +2189,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "savings-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -2194,6 +2248,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2250,8 +2305,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年収十分位。五分位 (0002210012) と 18 階級 (0002210010) で足りる"
   },
   {
    "statsDataId": "0002210015",
@@ -2306,6 +2362,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2362,6 +2419,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2418,6 +2476,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2474,6 +2533,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2525,6 +2585,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2576,6 +2637,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2627,6 +2689,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2678,6 +2741,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2729,6 +2793,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2780,6 +2845,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2831,6 +2897,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2882,6 +2949,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2938,6 +3006,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -2984,6 +3053,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3040,6 +3110,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3086,6 +3157,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3132,6 +3204,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3178,6 +3251,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3224,6 +3298,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3270,6 +3345,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3316,6 +3392,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3367,6 +3444,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3418,6 +3496,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3469,6 +3548,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3520,6 +3600,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3566,6 +3647,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3612,6 +3694,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3658,6 +3741,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3704,6 +3788,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3750,6 +3835,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3796,6 +3882,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3842,6 +3929,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3888,6 +3976,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3934,6 +4023,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -3985,6 +4075,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4031,6 +4122,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4082,6 +4174,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4128,6 +4221,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4179,6 +4273,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4230,6 +4325,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4276,6 +4372,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4322,6 +4419,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4368,6 +4466,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4414,6 +4513,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4460,6 +4560,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4506,6 +4607,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4552,6 +4654,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4598,6 +4701,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4649,6 +4753,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4700,6 +4805,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4751,6 +4857,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4797,6 +4904,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4848,6 +4956,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4894,6 +5003,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4940,6 +5050,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -4986,6 +5097,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5032,6 +5144,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5078,6 +5191,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5124,6 +5238,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5170,6 +5285,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5216,6 +5332,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5265,6 +5382,7 @@
     "necktie-consumption-quantity",
     "womens-stockings-consumption-quantity"
    ],
+   "analyses": [],
    "status": "adopted",
    "reason": null
   },
@@ -5316,6 +5434,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5367,6 +5486,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5418,6 +5538,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5468,6 +5589,7 @@
     "other-clothing-misc-consumption-expenditure",
     "womens-stockings-consumption-expenditure"
    ],
+   "analyses": [],
    "status": "adopted",
    "reason": null
   },
@@ -5519,6 +5641,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5565,6 +5688,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5611,8 +5735,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "品目の月次の支出額 (季節の切り口)。ブログの接地器 fetch-kakei-monthly.mjs が使う。年の途中の月を年計として扱わない"
   },
   {
    "statsDataId": "0004023602",
@@ -5657,8 +5782,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "品目の月次の購入数量 (季節の切り口)。数量の月次は全国のみ"
   },
   {
    "statsDataId": "0004023603",
@@ -5703,6 +5829,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -5749,6 +5876,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -6311,6 +6439,11 @@
     "yogurt-consumption-expenditure",
     "yokan-consumption-expenditure"
    ],
+   "analyses": [
+    "cup-noodles-city-spending",
+    "natto-city-spending",
+    "rice-national-spending-trend"
+   ],
    "status": "adopted",
    "reason": null
   },
@@ -6551,6 +6684,12 @@
     "womens-sweater-consumption-quantity",
     "yellowtail-consumption-quantity"
    ],
+   "analyses": [
+    "beef-city-quantity",
+    "green-tea-city-quantity",
+    "rice-city-quantity",
+    "rice-national-quantity-trend"
+   ],
    "status": "adopted",
    "reason": null
   },
@@ -6602,7 +6741,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-spending-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6653,7 +6795,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-quantity-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6704,7 +6849,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-spending-age"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6755,8 +6903,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "世帯主の年齢と購入数量 (世帯の属性の切り口)。金額の分析単位 (0004023609) と対で、量の年齢差を出す"
   },
   {
    "statsDataId": "0004023611",
@@ -6801,6 +6950,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -6847,7 +6997,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-all-households"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6893,6 +7046,7 @@
     }
    ],
    "metrics": [],
+   "analyses": [],
    "status": "undecided",
    "reason": null
   },
@@ -6939,7 +7093,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-single-households"
+   ],
+   "status": "adopted",
    "reason": null
   }
  ],

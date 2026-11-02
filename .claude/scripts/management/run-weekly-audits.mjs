@@ -32,7 +32,7 @@ const AUDITS = [
   { id: "ranking-integrity", label: "ランキングのデータ整合・データ品質キュー", timeout: 30 },
   { id: "estat-year-coverage", label: "e-Stat の年カバレッジ", timeout: 60 },
   { id: "estat-ssds", label: "SSDS 指標の列挙", timeout: 20 },
-  { id: "survey-taxonomy", label: "調査分類・survey portfolio", timeout: 35 },
+  { id: "survey-taxonomy", label: "調査分類・survey portfolio・調査の台帳と切り口台帳", timeout: 35 },
   { id: "note-circulation", label: "note の公開記事・導線・マガジン・カード", timeout: 60 },
   { id: "note-product-cards", label: "note の商品カード", timeout: 30 },
   { id: "blog-remediation", label: "ブログの是正キュー・公開済み原稿の掃除", timeout: 25 },

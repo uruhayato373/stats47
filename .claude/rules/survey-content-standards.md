@@ -125,6 +125,19 @@ R2 app/survey/<id>/items.json
   品目単位の「どの品目を指標にし、どれを見送ったか」は調査ごとの台帳 (家計調査は `data/estat/kakei-ledger/`) が持ち、切り口台帳には書かない。
 - 新しい調査に切り口台帳を作るときは、表の棚卸し (e-Stat カタログ `npm run estat:catalog:search`) を先に行い、切り口ごとに使う表を確かめてから書く。
 
+### コンテンツのサイクル (台帳 → 切り口 → 指標 → ページ・2026-11-02)
+
+同じ見落としを繰り返さないため、展開は次の鎖でだけ進め、各段の決まりを検査で止める。ページ側に「出す・出さない」の一覧を持たない。
+
+1. **e-Stat カタログ → 調査の台帳** (家計調査は `data/estat/kakei-ledger/`): すべての表に採用・予定・除外を理由付きで書く。
+   採用は指標か作成済みの分析単位から自動で決まり、予定・除外は `decisions.json` に書く。未判断の数は `maxUndecidedTables` を超えられない (縮小専用。判断したら下げる)
+2. **台帳 ↔ 切り口台帳**: 切り口が使う表は未判断にできない (`LENS_TABLE_UNDECIDED`)。採用・予定の表はどれかの切り口に属させる (`TABLE_WITHOUT_LENS`)。除外した表を切り口が使わない (`LENS_USES_EXCLUDED`)
+3. **台帳 → 指標・分析単位**: 指標 (`kind: kakei-chousa`) と分析単位 (`kakei-analysis-catalog.ts`) の両方を表の使い手として数える。予定の表を使う指標・図ができたら台帳を作り直す (`npm run estat:kakei-ledger:build`)
+4. **指標 → ページ**: テーマ・調査ハブ・ランキング・県ページは指標の定義と台帳を読むだけにする
+5. **週次レビュー**: `npm run weekly:audits` の survey-taxonomy が台帳と切り口台帳を検査し、予定のまま作られていない表 (`PLANNED_TABLES`) と未判断の数 (`UNDECIDED_TABLES`) を出す。レビュー本文の課題へ書き、backlog へ流す
+
+検査は `npm run estat:kakei-ledger:check` と `npm run surveys:lenses:check` (PR CI と週次)。
+
 ### 面ごとの点検表 (切り口を展開するとき・2026-11-02)
 
 切り口をサイトへ展開するときは、切り口 1 つずつ、代表のページを localhost (`npm run dev:web`) で開いて下の面を点検する。

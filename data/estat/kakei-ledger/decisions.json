@@ -4,7 +4,79 @@
     "amount": "0004023605",
     "quantity": "0004023606"
   },
-  "tables": [],
+  "maxUndecidedTables": 102,
+  "tables": [
+    {
+      "statsDataId": "0002070003",
+      "status": "planned",
+      "reason": "都市ごとの十大費目の構成比 (家計の配分の切り口)。県庁所在市の年次・用途分類で、品目分類の合計では作れない費目の割合を出す",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002070017",
+      "status": "planned",
+      "reason": "持家と借家で家計の支出がどう違うか (世帯の属性の切り口)。全国の集計なのでランキングにはしない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002190004",
+      "status": "planned",
+      "reason": "総世帯・単身世帯の年齢・性別の支出 (世帯の属性の切り口)。二人以上世帯の表と対象が違うので混ぜずに別の図にする",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0004023601",
+      "status": "planned",
+      "reason": "品目の月次の支出額 (季節の切り口)。ブログの接地器 fetch-kakei-monthly.mjs が使う。年の途中の月を年計として扱わない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0004023602",
+      "status": "planned",
+      "reason": "品目の月次の購入数量 (季節の切り口)。数量の月次は全国のみ",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0004023610",
+      "status": "planned",
+      "reason": "世帯主の年齢と購入数量 (世帯の属性の切り口)。金額の分析単位 (0004023609) と対で、量の年齢差を出す",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002070011",
+      "status": "excluded",
+      "reason": "用途分類の年齢階級別。品目分類の年齢階級別 (0004023609/0004023610) で同じ問いに答えられるので二重に持たない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002200004",
+      "status": "excluded",
+      "reason": "総世帯の用途分類の年収五分位。二人以上世帯の五分位 (0002070005) で答え、集計対象の違う総世帯を混ぜない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002200006",
+      "status": "excluded",
+      "reason": "総世帯の用途分類の年収十分位。五分位で足り、集計対象の違う総世帯を混ぜない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    },
+    {
+      "statsDataId": "0002210014",
+      "status": "excluded",
+      "reason": "貯蓄・負債の年収十分位。五分位 (0002210012) と 18 階級 (0002210010) で足りる",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "owner-session (2026-11-02 オーナー承認: 台帳で表の採否を決めきる)"
+    }
+  ],
   "items": [
     {
       "code": "000100000",

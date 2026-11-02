@@ -14,7 +14,8 @@ export const KAKEI_HOUSEHOLD_TWO_PLUS = "03";
  * @typedef {"item" | "group" | "other"} KakeiItemKind
  *   item = 品目番号を持つ品目 (「371 ぎょうざ」)、group = 十大費目・中分類 (「1.1 穀類」)、other = 世帯属性や合計 (「世帯人員」「消費支出」)
  * @typedef {"adopted" | "planned" | "excluded" | "undecided"} KakeiStatus
- *   adopted = 指標がある (metric config から導出)、planned / excluded = decisions.json の判断、undecided = 判断なし
+ *   adopted = 指標か作成済みの分析単位がある (metric config・kakei-analysis-catalog.ts から導出)、planned = 候補の分析単位か decisions.json の予定、
+ *   excluded = decisions.json の判断、undecided = 判断なし
  * @typedef {{ key: string, via: "single" | "sum" }} KakeiMetricLink  sum = 複数品目の合算 (axisSum) の一部
  *
  * @typedef {object} KakeiLedgerTable
@@ -28,6 +29,7 @@ export const KAKEI_HOUSEHOLD_TWO_PLUS = "03";
  * @property {number | null} areaCount
  * @property {{ id: string, name: string | null, count: number }[]} dims
  * @property {string[]} metrics  この表を使う指標の key
+ * @property {string[]} analyses  この表を使う分析単位の id (kakei-analysis-catalog.ts)
  * @property {KakeiStatus} status
  * @property {string | null} reason
  *
@@ -48,6 +50,7 @@ export const KAKEI_HOUSEHOLD_TWO_PLUS = "03";
  * @property {1} schemaVersion
  * @property {Record<KakeiMeasure, string>} itemTables  品目ごとの採否を持つ年次の品目表
  * @property {{ statsDataId: string, status: "planned" | "excluded", reason: string, decidedAt: string, decidedBy: string }[]} tables
+ * @property {number} [maxUndecidedTables]  未判断の表の上限 (縮小専用)
  * @property {{ code: string, measure: KakeiMeasure, status: "planned" | "excluded", reason: string, decidedAt: string, decidedBy: string }[]} items
  *
  * @typedef {object} KakeiMetricInput  metric config から必要な部分だけ
@@ -90,17 +93,41 @@ export function kakeiMetricInput(metric) {
 }
 
 /**
+ * 分析単位 (packages/data-configs/src/kakei-analysis-catalog.ts) を表ごとにまとめる。
+ * 指標だけを使い手として数えると、全国ページの図やブログで使っている表が「未判断」に見えていた (2026-11-02)。
+ * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} analyses
+ */
+function groupAnalysesByTable(analyses) {
+  const byTable = new Map();
+  for (const a of analyses) byTable.set(a.statsDataId, [...(byTable.get(a.statsDataId) ?? []), a]);
+  return byTable;
+}
+
+/**
+ * 表の状態。指標か、作成済み・生成済みの分析単位があれば adopted。候補の分析単位だけなら planned。
+ * どちらも無ければ decisions.json の判断、それも無ければ undecided。
+ * @returns {KakeiStatus}
+ */
+function tableStatus(metricKeys, analyses, decided) {
+  if (metricKeys.length || analyses.some((a) => a.state !== "proposed")) return "adopted";
+  if (analyses.length) return "planned";
+  return decided?.status ?? "undecided";
+}
+
+/**
  * @param {object} p
  * @param {object[]} p.tables  カタログ index/tables/00200561.json の行 (removedAt のない現行の表)
  * @param {{ statsDataId: string, dim: string, code: string, name: string, unit: string | null, level: string | null, parentCode: string | null }[]} p.classes
  *   カタログ index/classes/00200561.json の行
  * @param {KakeiMetricInput[]} p.metrics
+ * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} [p.analyses]  分析単位 (kakei-analysis-catalog.ts)
  * @param {KakeiDecisions} p.decisions
  * @param {string} p.generatedAt
  * @param {string | null} p.catalogGeneratedAt
  */
-export function buildKakeiLedger({ tables, classes, metrics, decisions, generatedAt, catalogGeneratedAt }) {
+export function buildKakeiLedger({ tables, classes, metrics, analyses = [], decisions, generatedAt, catalogGeneratedAt }) {
   const current = tables.filter((t) => !t.removedAt);
+  const analysesByTable = groupAnalysesByTable(analyses);
   const metricsByTable = new Map();
   for (const m of metrics) {
     if (!metricsByTable.has(m.statsDataId)) metricsByTable.set(m.statsDataId, []);
@@ -112,7 +139,9 @@ export function buildKakeiLedger({ tables, classes, metrics, decisions, generate
   const ledgerTables = current
     .map((t) => {
       const used = [...new Set(metricsByTable.get(t.statsDataId) ?? [])].sort();
+      const usedBy = analysesByTable.get(t.statsDataId) ?? [];
       const decided = tableDecision.get(t.statsDataId);
+      const status = tableStatus(used, usedBy, decided);
       const years = t.meta?.years ?? [];
       return {
         statsDataId: t.statsDataId,
@@ -125,8 +154,9 @@ export function buildKakeiLedger({ tables, classes, metrics, decisions, generate
         areaCount: t.meta?.areaCount ?? null,
         dims: (t.meta?.dims ?? []).map((d) => ({ id: d.id, name: d.name ?? null, count: d.count })),
         metrics: used,
-        status: /** @type {KakeiStatus} */ (used.length ? "adopted" : decided?.status ?? "undecided"),
-        reason: used.length ? null : decided?.reason ?? null,
+        analyses: usedBy.map((a) => a.id).sort(),
+        status,
+        reason: status === decided?.status ? decided.reason : null,
       };
     })
     .sort((a, b) => a.statsDataId.localeCompare(b.statsDataId));
@@ -200,10 +230,12 @@ function summarize(tables, items) {
  * @param {object} p
  * @param {ReturnType<typeof buildKakeiLedger>} p.ledger  ファイルの台帳
  * @param {KakeiMetricInput[]} p.metrics  現在の metric config
+ * @param {{ id: string, statsDataId: string, state: "configured" | "staged" | "proposed" }[]} [p.analyses]  現在の分析単位
+ * @param {Map<string, string[]> | null} [p.lensTables]  切り口台帳の表 → その表を使う切り口 (null なら切り口との整合は見ない)
  * @param {KakeiDecisions} p.decisions
  * @returns {{ level: "error" | "warn", code: string, message: string }[]}
  */
-export function checkKakeiLedger({ ledger, metrics, decisions }) {
+export function checkKakeiLedger({ ledger, metrics, analyses = [], lensTables = null, decisions }) {
   /** @type {{ level: "error" | "warn", code: string, message: string }[]} */
   const findings = [];
   const tableIds = new Set(ledger.tables.map((t) => t.statsDataId));
@@ -258,11 +290,42 @@ export function checkKakeiLedger({ ledger, metrics, decisions }) {
     }
   }
 
+  const analysesByTable = groupAnalysesByTable(analyses);
+  for (const t of ledger.tables) {
+    const now = (analysesByTable.get(t.statsDataId) ?? []).map((a) => a.id).sort().join(",");
+    if (now !== [...(t.analyses ?? [])].sort().join(",")) {
+      findings.push({ level: "error", code: "STALE_LEDGER", message: `${t.statsDataId}: 表を使う分析単位が台帳と kakei-analysis-catalog.ts で違う。npm run estat:kakei-ledger:build で作り直す` });
+    }
+  }
+
   // 3. 判断の参照先が実在し、採用済みのものに見送り・予定を付けていないか
   for (const d of decisions.tables) {
     const t = ledger.tables.find((x) => x.statsDataId === d.statsDataId);
     if (!t) findings.push({ level: "error", code: "UNKNOWN_DECISION", message: `decisions.tables の ${d.statsDataId} が家計調査の表に無い` });
-    else if (t.metrics.length) findings.push({ level: "error", code: "DECISION_CONFLICT", message: `${d.statsDataId} は指標があるのに ${d.status} の判断がある` });
+    else if (t.metrics.length || (t.analyses ?? []).length) findings.push({ level: "error", code: "DECISION_CONFLICT", message: `${d.statsDataId} は指標か分析単位があるのに ${d.status} の判断がある` });
+  }
+
+  // 3b. 切り口台帳と表の判断をつなぐ (2026-11-02)。切り口が使う表を未判断のまま残さず、
+  //     採用・予定の表はどれかの切り口に属させる。台帳の外でページが表を使い始めるのを止める
+  if (lensTables) {
+    for (const t of ledger.tables) {
+      const lenses = lensTables.get(t.statsDataId) ?? [];
+      if (lenses.length && t.status === "undecided") {
+        findings.push({ level: "error", code: "LENS_TABLE_UNDECIDED", message: `${t.statsDataId} (${t.title}) は切り口 ${lenses.join(",")} が使うのに未判断。decisions.json に planned か excluded を理由付きで書く (除外なら切り口の dataTables からも外す)` });
+      }
+      if (!lenses.length && (t.status === "adopted" || t.status === "planned")) {
+        findings.push({ level: "error", code: "TABLE_WITHOUT_LENS", message: `${t.statsDataId} (${t.title}) は ${t.status} なのにどの切り口にも属さない。切り口台帳 (surveys.lenses の kakei-chousa) の dataTables に足す` });
+      }
+      if (lenses.length && t.status === "excluded") {
+        findings.push({ level: "error", code: "LENS_USES_EXCLUDED", message: `${t.statsDataId} は除外の判断なのに切り口 ${lenses.join(",")} が使う` });
+      }
+    }
+  }
+
+  // 3c. 未判断の表は増やさない (縮小専用。減ったら decisions.json の maxUndecidedTables を下げる)
+  const undecidedTables = ledger.tables.filter((t) => t.status === "undecided").length;
+  if (typeof decisions.maxUndecidedTables === "number" && undecidedTables > decisions.maxUndecidedTables) {
+    findings.push({ level: "error", code: "UNDECIDED_GREW", message: `未判断の表が ${undecidedTables} 件で上限 ${decisions.maxUndecidedTables} を超えた。新しい表に判断を書く` });
   }
   const seen = new Set();
   for (const d of decisions.items) {
@@ -272,6 +335,15 @@ export function checkKakeiLedger({ ledger, metrics, decisions }) {
     const item = itemsByKey.get(k);
     if (!item) findings.push({ level: "error", code: "UNKNOWN_DECISION", message: `decisions.items の ${k} が品目表に無い` });
     else if (item.metrics.length) findings.push({ level: "error", code: "DECISION_CONFLICT", message: `${k} (${item.name}) は指標があるのに ${d.status} の判断がある` });
+  }
+
+  // 3d. 予定のまま作られていない表と、未判断の残りを知らせる (止めない。週次レビューが読み、backlog へ流す)
+  const planned = ledger.tables.filter((t) => t.status === "planned");
+  if (planned.length) {
+    findings.push({ level: "warn", code: "PLANNED_TABLES", message: `予定のまま指標・作成済みの分析単位が無い表 ${planned.length} 件: ${planned.map((t) => t.statsDataId).join(", ")}` });
+  }
+  if (undecidedTables) {
+    findings.push({ level: "warn", code: "UNDECIDED_TABLES", message: `未判断の表 ${undecidedTables} 件 (上限 ${decisions.maxUndecidedTables ?? "なし"})` });
   }
 
   // 4. 判断のない品目は件数だけ知らせる (止めない。判断の作業は backlog が持つ)
