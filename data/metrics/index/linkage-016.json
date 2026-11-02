@@ -2,6 +2,151 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "miscellaneous-income-prefecture",
+      "pageId": "ranking:miscellaneous-income-prefecture",
+      "title": "諸収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310114"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310114"
+        },
+        "derived": false,
+        "configHash": "ebdb35792e7c2262"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:miscellaneous-income-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "miscellaneous-revenue-municipal",
+      "pageId": null,
+      "title": "諸収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320120"
+        },
+        "derived": false,
+        "configHash": "a846a68ba34de770"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:miscellaneous-revenue-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:miscellaneous-revenue-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "miscellaneous-school-count",
+      "pageId": "ranking:miscellaneous-school-count",
+      "title": "各種学校数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010105",
+          "filters": {
+            "cdCat01": "E7102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010105",
+          "cdCat01": "E7102"
+        },
+        "derived": false,
+        "configHash": "9b3443039840bd34"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:miscellaneous-school-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "miscellaneous-school-count-per-100k",
+      "pageId": "ranking:miscellaneous-school-count-per-100k",
+      "title": "各種学校数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E08102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E08102"
+        },
+        "derived": false,
+        "configHash": "23ceabc6c1726875"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:miscellaneous-school-count-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "miscellaneous-school-students",
       "pageId": "ranking:miscellaneous-school-students",
       "title": "各種学校生徒数",
@@ -10768,146 +10913,6 @@
       "consumers": [
         {
           "pageId": "ranking:new-graduate-scheduled-salary-highschool-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "new-graduate-scheduled-salary-university-female",
-      "pageId": "ranking:new-graduate-scheduled-salary-university-female",
-      "title": "新規学卒者所定内給与額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0620312"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0620312"
-        },
-        "derived": false,
-        "configHash": "855e58af47426af4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:new-graduate-scheduled-salary-university-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "new-graduate-scheduled-salary-university-male",
-      "pageId": "ranking:new-graduate-scheduled-salary-university-male",
-      "title": "新規学卒者所定内給与額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0620311"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0620311"
-        },
-        "derived": false,
-        "configHash": "d68ec4fcb4c1a0a7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:new-graduate-scheduled-salary-university-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "new-graduate-starting-salary-college-female",
-      "pageId": "ranking:new-graduate-starting-salary-college-female",
-      "title": "新規学卒者初任給",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0620304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0620304"
-        },
-        "derived": false,
-        "configHash": "2c9c85fe5bc88ead"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:new-graduate-starting-salary-college-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "new-graduate-starting-salary-college-male",
-      "pageId": "ranking:new-graduate-starting-salary-college-male",
-      "title": "新規学卒者初任給",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0620306"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0620306"
-        },
-        "derived": false,
-        "configHash": "f1a35f246d901dc7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:new-graduate-starting-salary-college-male",
           "kind": "ranking"
         }
       ],

@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T05:06:46.802Z",
+ "generatedAt": "2026-11-02T05:18:03.440Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -14,8 +14,8 @@
   "tablesWithMeta": 126,
   "tablesByStatus": {
    "undecided": 102,
-   "planned": 7,
-   "adopted": 13,
+   "planned": 6,
+   "adopted": 14,
    "excluded": 4
   },
   "tablesByCycle": {
@@ -1966,11 +1966,16 @@
      "count": 24
     }
    ],
-   "metrics": [],
+   "metrics": [
+    "household-debt-balance",
+    "household-housing-debt-balance",
+    "household-savings-balance",
+    "household-securities-balance"
+   ],
    "analyses": [
     "savings-city"
    ],
-   "status": "planned",
+   "status": "adopted",
    "reason": null
   },
   {

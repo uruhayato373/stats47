@@ -2,6 +2,355 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "sewerage-coverage-rate",
+      "pageId": "ranking:sewerage-coverage-rate",
+      "title": "下水道処理人口普及率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H5411"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H5411"
+        },
+        "derived": false,
+        "configHash": "e11822faf387fd5d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:water-services",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:sewerage-coverage-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "sewerage-drainage-population",
+      "pageId": "ranking:sewerage-drainage-population",
+      "title": "下水道排水区域人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H540301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H540301"
+        },
+        "derived": false,
+        "configHash": "dbc0fbea2e756e09"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:water-infrastructure-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-drainage-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sewerage-penetration-rate-2012on",
+      "pageId": "ranking:sewerage-penetration-rate-2012on",
+      "title": "下水道普及率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0530401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0530401"
+        },
+        "derived": false,
+        "configHash": "be3d171cd65381c7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sewerage-water-supply-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:water-sewage-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-penetration-rate-2012on",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sewerage-penetration-rate-pre2011",
+      "pageId": "ranking:sewerage-penetration-rate-pre2011",
+      "title": "下水道普及率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H05304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H05304"
+        },
+        "derived": false,
+        "configHash": "d4c73bb94427719a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sewerage-penetration-rate-pre2011",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "sex-old-population-ratio",
       "pageId": "ranking:sex-old-population-ratio",
       "title": "人口性比",
@@ -11895,348 +12244,6 @@
       "themes": [
         "sports-participation"
       ]
-    },
-    {
-      "metricKey": "sports-club-fee-consumption-expenditure",
-      "pageId": "ranking:sports-club-fee-consumption-expenditure",
-      "title": "スポーツクラブ使用料消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "090442040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "090442040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "f049b5f1100309a2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:sports-club-fee-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "sports-drink-consumption-expenditure",
-      "pageId": "ranking:sports-drink-consumption-expenditure",
-      "title": "スポーツドリンク消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "011030060",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "011030060",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "c57db91774d35174"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:sports-drink-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sports-facility-count",
-      "pageId": "ranking:sports-facility-count",
-      "title": "社会体育施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348896",
-          "filters": {
-            "cdCat01": "010",
-            "cdCat02": "001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003348896",
-          "cdCat01": "010",
-          "cdCat02": "001"
-        },
-        "derived": false,
-        "configHash": "6fa4c273c7d77528"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:sports-facility-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sports-lesson-consumption-expenditure",
-      "pageId": "ranking:sports-lesson-consumption-expenditure",
-      "title": "スポーツ月謝消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "090430050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "090430050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "be89da4fa3df8be4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:sports-lesson-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

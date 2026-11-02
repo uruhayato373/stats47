@@ -2,6 +2,150 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "propane-gas-consumption-quantity",
+      "pageId": "ranking:propane-gas-consumption-quantity",
+      "title": "プロパンガス消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "030200020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "030200020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6d01660cc5e66b6f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:propane-gas-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-expenses-prefecture",
+      "pageId": "ranking:property-expenses-prefecture",
+      "title": "物件費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310402"
+        },
+        "derived": false,
+        "configHash": "edf67035fae698a2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:property-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-income-h27",
+      "pageId": null,
+      "title": "財産所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C1223"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C1223"
+        },
+        "derived": false,
+        "configHash": "d86271f54d8967ba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:property-income-h27",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "property-income-municipal",
+      "pageId": null,
+      "title": "財産収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320116"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320116"
+        },
+        "derived": false,
+        "configHash": "eeb0dee43caf1faf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:property-income-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:property-income-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "property-income-prefecture",
       "pageId": "ranking:property-income-prefecture",
       "title": "財産収入",
@@ -8512,170 +8656,6 @@
       "themes": [
         "real-income"
       ]
-    },
-    {
-      "metricKey": "real-estate-leasing-private-employees",
-      "pageId": null,
-      "title": "従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C220845"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C220845"
-        },
-        "derived": false,
-        "configHash": "c79330549276c9d7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-employees",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-establishments",
-      "pageId": null,
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C210845"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C210845"
-        },
-        "derived": false,
-        "configHash": "553fce3b7e966280"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-establishments",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:business-demography",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-net-value-added",
-      "pageId": null,
-      "title": "業種別の純付加価値額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C620115"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C620115"
-        },
-        "derived": false,
-        "configHash": "2c888dda07efce35"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-net-value-added",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-net-value-added",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "real-estate-leasing-private-sales",
-      "pageId": null,
-      "title": "売上金額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C610115"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C610115"
-        },
-        "derived": false,
-        "configHash": "08c62abd7bee376a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:real-estate-leasing-private-sales",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:real-estate-leasing-private-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

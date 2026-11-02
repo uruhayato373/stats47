@@ -11,6 +11,26 @@ export const HOUSEHOLD_ASSETS_DEBT_SET: IndicatorSet = {
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "household-savings-balance",
+      "shortLabel": "貯蓄現在高（県庁所在市）",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "household-securities-balance",
+      "shortLabel": "有価証券の保有額（県庁所在市）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "household-debt-balance",
+      "shortLabel": "負債現在高（県庁所在市）",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "household-housing-debt-balance",
+      "shortLabel": "住宅・土地のための負債（県庁所在市）",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "financial-assets-balance-multi-person-households",
       "shortLabel": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
       "role": "primary"

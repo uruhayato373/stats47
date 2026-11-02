@@ -6,6 +6,46 @@
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "household-savings-balance",
+      "shortLabel": "貯蓄現在高（県庁所在市）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "家計調査の切り口台帳 kakei-savings-debt (2026-11-02)",
+        "surveyedAt": "2026-11-02",
+        "rationale": "家計調査の貯蓄・負債編で、県庁所在市の二人以上世帯の貯蓄現在高を毎年 (2002〜2025 年) 比べる。全国家計構造調査 (5 年おき) の値を毎年の値で補う"
+      }
+    },
+    {
+      "rankingKey": "household-securities-balance",
+      "shortLabel": "有価証券の保有額（県庁所在市）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "家計調査の切り口台帳 kakei-savings-debt (2026-11-02)",
+        "surveyedAt": "2026-11-02",
+        "rationale": "貯蓄現在高のうち株式・債券・投資信託の保有額。資産の運用の地域差を見る"
+      }
+    },
+    {
+      "rankingKey": "household-debt-balance",
+      "shortLabel": "負債現在高（県庁所在市）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "家計調査の切り口台帳 kakei-savings-debt (2026-11-02)",
+        "surveyedAt": "2026-11-02",
+        "rationale": "家計調査の貯蓄・負債編で、県庁所在市の二人以上世帯の負債現在高を毎年比べる"
+      }
+    },
+    {
+      "rankingKey": "household-housing-debt-balance",
+      "shortLabel": "住宅・土地のための負債（県庁所在市）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "家計調査の切り口台帳 kakei-savings-debt (2026-11-02)",
+        "surveyedAt": "2026-11-02",
+        "rationale": "負債現在高のうち住宅ローンなど住宅・土地のための負債"
+      }
+    },
+    {
       "rankingKey": "financial-assets-balance-multi-person-households",
       "shortLabel": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
       "role": "primary",
@@ -89,6 +129,28 @@
   "charts": [],
   "metricGroups": [
     {
+      "key": "capital-city-savings",
+      "title": "貯蓄現在高と有価証券（県庁所在市）",
+      "rankingKeys": [
+        "household-savings-balance",
+        "household-securities-balance"
+      ],
+      "defaultCheckedKeys": [
+        "household-savings-balance"
+      ]
+    },
+    {
+      "key": "capital-city-debt",
+      "title": "負債現在高と住宅・土地のための負債（県庁所在市）",
+      "rankingKeys": [
+        "household-debt-balance",
+        "household-housing-debt-balance"
+      ],
+      "defaultCheckedKeys": [
+        "household-debt-balance"
+      ]
+    },
+    {
       "key": "savings-rate-trend-1",
       "title": "平均貯蓄率（勤労者世帯）",
       "rankingKeys": [
@@ -160,6 +222,15 @@
     }
   ],
   "sections": [
+    {
+      "key": "capital-city-savings-debt",
+      "title": "県庁所在市の貯蓄と負債は毎年どう違うか",
+      "description": "家計調査の貯蓄・負債編 (二人以上の世帯) の県庁所在市の値で、県全体の値ではありません。平均値なので一部の高額世帯に引っ張られます。",
+      "metricGroupKeys": [
+        "capital-city-savings",
+        "capital-city-debt"
+      ]
+    },
     {
       "key": "savings-rate-trend",
       "title": "勤労者世帯の貯蓄割合はどのように変化しているか",

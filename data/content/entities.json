@@ -294,7 +294,7 @@
     {
       "key": "ranking",
       "kind": "ranking",
-      "count": 3187
+      "count": 3191
     },
     {
       "key": "survey",
@@ -2484,6 +2484,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:household-debt-balance",
+      "to": "theme:household-assets-debt",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-housing-debt-balance",
+      "to": "theme:household-assets-debt",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:household-ratio-above-minimum-housing-area",
       "to": "theme:living-housing",
       "relation": "contains"
@@ -2491,6 +2501,16 @@
     {
       "from": "ranking:household-ratio-with-65plus",
       "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-savings-balance",
+      "to": "theme:household-assets-debt",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-securities-balance",
+      "to": "theme:household-assets-debt",
       "relation": "contains"
     },
     {

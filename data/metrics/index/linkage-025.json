@@ -2,6 +2,211 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "road-length-per-km2",
+      "pageId": "ranking:road-length-per-km2",
+      "title": "道路実延長",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06401"
+        },
+        "derived": false,
+        "configHash": "0d748666545898a5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:habitable-area-land-use",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:road-infrastructure-density",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:road-length-per-km2-vs-average-road-traffic-volume",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:road-length-per-km2-vs-local-special-grant-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:road-length-per-km2-vs-residential-building-starts",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:safe-driving-5-features",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:traffic-accident-deaths-regional-risk",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-length-per-km2",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-municipal-length",
+      "pageId": "ranking:road-municipal-length",
+      "title": "道路実延長（市町村道）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7112"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7112"
+        },
+        "derived": false,
+        "configHash": "4eb347b6572b6ea1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-municipal-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-national-route-length",
+      "pageId": "ranking:road-national-route-length",
+      "title": "道路実延長（一般国道）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H711101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H711101"
+        },
+        "derived": false,
+        "configHash": "b97c6b6894f63a3b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-national-route-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
+      "metricKey": "road-prefectural-route-length",
+      "pageId": "ranking:road-prefectural-route-length",
+      "title": "道路実延長（主要地方道）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H711102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H711102"
+        },
+        "derived": false,
+        "configHash": "08ef962bb00af85c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "japan-theme:roads",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:road-prefectural-route-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "roads"
+      ]
+    },
+    {
       "metricKey": "road-total-length",
       "pageId": "ranking:road-total-length",
       "title": "道路実延長",
@@ -9908,355 +10113,6 @@
         },
         {
           "pageId": "ranking:sewage-treatment-coverage-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sewerage-coverage-rate",
-      "pageId": "ranking:sewerage-coverage-rate",
-      "title": "下水道処理人口普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H5411"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H5411"
-        },
-        "derived": false,
-        "configHash": "e11822faf387fd5d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:sewerage-coverage-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:water-services",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "water-services"
-      ]
-    },
-    {
-      "metricKey": "sewerage-drainage-population",
-      "pageId": "ranking:sewerage-drainage-population",
-      "title": "下水道排水区域人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H540301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H540301"
-        },
-        "derived": false,
-        "configHash": "dbc0fbea2e756e09"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:water-infrastructure-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-drainage-population",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sewerage-penetration-rate-2012on",
-      "pageId": "ranking:sewerage-penetration-rate-2012on",
-      "title": "下水道普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H0530401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H0530401"
-        },
-        "derived": false,
-        "configHash": "be3d171cd65381c7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sewerage-water-supply-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:water-sewage-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-penetration-rate-2012on",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sewerage-penetration-rate-pre2011",
-      "pageId": "ranking:sewerage-penetration-rate-pre2011",
-      "title": "下水道普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H05304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H05304"
-        },
-        "derived": false,
-        "configHash": "d4c73bb94427719a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:sewerage-penetration-rate-pre2011",
           "kind": "ranking"
         }
       ],
