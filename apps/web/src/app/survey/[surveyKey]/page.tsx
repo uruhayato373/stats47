@@ -308,7 +308,7 @@ export default async function SurveyPage({ params }: PageProps) {
     // 調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
     // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
     latestYear ? `掲載データの最新${latestYear}年` : null,
-    isKakei ? '主に県庁所在市などの都市別' : '47都道府県',
+    editorial?.areaLabel ?? '47都道府県',
   ].filter((item): item is string => item !== null);
   const statsText = (
     <span className="flex flex-wrap gap-x-3 gap-y-0.5">
@@ -410,6 +410,23 @@ export default async function SurveyPage({ params }: PageProps) {
                 </li>
               ))}
             </ul>
+            {/* 同じ調査の別のハブ (家計調査は品目別と、社会・人口統計体系経由の収支に分かれている) */}
+            {(editorial.relatedHubs?.length ?? 0) > 0 && (
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {editorial.relatedHubs?.map((hub) => (
+                  <SurfaceLinkCard
+                    key={hub.surveyKey}
+                    href={hrefFor('survey', { surveyKey: hub.surveyKey })}
+                    className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
+                  >
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="min-w-0">同じ調査の{hub.label}</span>
+                      <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                    </span>
+                  </SurfaceLinkCard>
+                ))}
+              </div>
+            )}
           </div>
 
           {readerQuestions.length > 0 && (
