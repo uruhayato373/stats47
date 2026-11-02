@@ -10,7 +10,7 @@
  */
 
 import { geoCentroid, geoMercator, geoPath } from "d3-geo";
-import type { Feature, FeatureCollection, Polygon } from "geojson";
+import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 
@@ -133,6 +133,26 @@ function inInsetDomain(lon: number, lat: number): boolean {
   return lon >= 122 && lon <= 129.5 && lat >= 23.5 && lat <= 28.7;
 }
 
+/**
+ * 1 つの県 (MultiPolygon) の中の島ごとに、重心が範囲内のものだけ残す。
+ * 県単位の重心判定だけだと、沖縄県の大東諸島や鹿児島県の奄美・トカラが同じ県として残り、
+ * インセットの fit が間延びする・本土の描画が region の下へはみ出す (2026-11-02)。
+ */
+function keepPolygonsWithin(f: Feature, inside: (lon: number, lat: number) => boolean): Feature | null {
+  const g = f.geometry;
+  if (!g || (g.type !== "Polygon" && g.type !== "MultiPolygon")) return f;
+  const polygons = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+  const kept = polygons.filter((coordinates) => {
+    const [lon, lat] = geoCentroid({ type: "Polygon", coordinates });
+    return inside(lon, lat);
+  });
+  if (!kept.length) return null;
+  const geometry: MultiPolygon = { type: "MultiPolygon", coordinates: kept };
+  return { ...f, geometry };
+}
+const inMainlandBox = (lon: number, lat: number) =>
+  lon >= MAINLAND_BBOX.west && lon <= MAINLAND_BBOX.east && lat >= MAINLAND_BBOX.south && lat <= MAINLAND_BBOX.north;
+
 /** 本土 bbox 内に重心があるか（小笠原・大東諸島等を落とす） */
 function inMainland(f: Feature): boolean {
   const [lon, lat] = geoCentroid(f);
@@ -226,12 +246,18 @@ export function computeBuzzMapGeo(
     };
   }
 
-  const mainFeatures = features.filter((f) => !isOkinawa(codeOf(f)) && inMainland(f));
-  const okinawaFeatures = features.filter((f) => {
-    if (!isOkinawa(codeOf(f))) return false;
-    const [lon, lat] = geoCentroid(f);
-    return inInsetDomain(lon, lat);
-  });
+  const mainFeatures = features
+    .filter((f) => !isOkinawa(codeOf(f)) && inMainland(f))
+    .map((f) => keepPolygonsWithin(f, inMainlandBox))
+    .filter((f): f is Feature => f !== null);
+  const okinawaFeatures = features
+    .filter((f) => {
+      if (!isOkinawa(codeOf(f))) return false;
+      const [lon, lat] = geoCentroid(f);
+      return inInsetDomain(lon, lat);
+    })
+    .map((f) => keepPolygonsWithin(f, inInsetDomain))
+    .filter((f): f is Feature => f !== null);
 
   const frame = bboxPolygon();
   const mainland = fitAndRender(mainFeatures, frame, region);

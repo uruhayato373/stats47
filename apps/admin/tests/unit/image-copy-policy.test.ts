@@ -12,6 +12,8 @@ describe('shared minimum chart-copy policy', () => {
     '47都道府県のうち上位10県を抜粋',
     '都道府県統計',
     '画像をクリックすると原寸で開きます',
+    'stats47',
+    '出典：家計調査を加工して作成 / stats47.jp',
   ])('rejects reintroduced explanatory text: %s', (text) => {
     expect(() => assertMinimalChartCopy('<svg><text>' + text + '</text></svg>')).toThrow();
   });

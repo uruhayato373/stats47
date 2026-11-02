@@ -67,7 +67,11 @@ export function BuzzMapCard({ entry }: { entry: BuzzMapEntryDTO }) {
 
         <div className="flex flex-wrap gap-2 text-muted-foreground">
           <span>{entry.category || "-"}</span>
-          <span>{entry.recommendedType ? `型${entry.recommendedType}` : ""}</span>
+          <span>
+            {entry.imageType
+              ? entry.imageType.label + (entry.imageType.status === "planned" ? "（未実装）" : "")
+              : entry.recommendedType ? `型${entry.recommendedType}` : ""}
+          </span>
           <span>{entry.sourceKind || ""}</span>
           <span>{entry.feasibility || ""}</span>
         </div>

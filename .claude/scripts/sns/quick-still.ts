@@ -36,6 +36,7 @@ import { fileURLToPath } from "node:url";
 
 import { PREF_CAPITAL_COORDS } from '../../../packages/migration-flow/src/lib/pref-capitals';
 import { renderAll47TileSvg } from "../../../apps/remotion/src/features/data-cards/all47-svg";
+import { resolveTileScale, type TileValueDisplay } from "../../../apps/remotion/src/features/data-cards/tile-scale";
 import { STORY_LAYOUTS, renderRankingStoryCard } from "./lib/ranking-story-card.ts";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
@@ -108,6 +109,9 @@ interface RankingItemPayload {
     // ★出典名は sourceConfig.source.name (sourceConfig.name というキーは存在しない)
     sourceConfig?: { source?: { name?: string } };
     source?: { name?: string };
+    /** The metric's authored colour encoding, baked by the ranking builder. */
+    visualization?: Parameters<typeof resolveTileScale>[0];
+    valueDisplay?: TileValueDisplay;
   };
 }
 
@@ -186,8 +190,11 @@ async function main() {
 
   const capitalCities = /県庁所在市/.test(item?.subtitle || "");
   const tileRows = capitalCities ? sorted.map(r => ({ ...r, areaName: r.areaCode === "13000" ? "東京区部" : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name })) : sorted;
+  // Same colours as the ranking page; without an authored encoding the renderer falls back to brand blue.
+  const scale = item?.visualization ? resolveTileScale(item.visualization, sorted.map((r) => r.value), item.valueDisplay) : undefined;
   const baseOptions = {
     capitalCities,
+    scale,
     note: item?.subtitle,
     title,
     subtitle: `${year}年`,

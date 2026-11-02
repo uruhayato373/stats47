@@ -32,8 +32,9 @@ describe('ranking bar basic form', () => {
     expect(svg).toContain('data-domain-min="31.4"');
     expect(svg).toContain('data-domain-max="36"');
     expect(svg).not.toContain('data-axis-break');
-    // The sole remaining line separates the source; there are no axis/grid lines.
-    expect(svg.match(/<line /g)).toHaveLength(1);
+    // No axis, grid or source divider lines: the shared frame keeps only data marks.
+    expect(svg).not.toContain('<line ');
+    expect(svg).not.toContain('stats47');
     expect(svg).not.toContain('text-anchor="middle"');
     expect(svg).toContain('範囲：31.4–36.0');
     expect(svg).not.toContain('0省略');

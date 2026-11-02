@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   STATISTICAL_SAMPLES,
-  basicTemplateBranches,
   basicTemplateQuery,
+  imageTypeOfBuzzMap,
+  templateCatalog,
+  templateGroup,
 } from '@/lib/image-template-basics';
 import { readTemplates } from '../../../../.claude/scripts/media/lib/workspace.mjs';
 import { createElement } from 'react';
@@ -10,19 +12,31 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { TemplateStatisticalPreview } from '@/components/content/template-statistical-preview';
 
 describe('representative statistics for image template basics', () => {
-  it('builds purpose/type choices from the catalogue without requiring articles', () => {
-    const branches = basicTemplateBranches(readTemplates().templates);
-    expect(
-      branches.some((b) => b.templateId === 'bar' && b.purpose === 'ranking')
-    ).toBe(true);
-    expect(
-      branches.some((b) => b.templateId === 'bar' && b.purpose === 'comparison')
-    ).toBe(true);
-    expect(new Set(branches.map((b) => b.key)).size).toBe(branches.length);
-    expect(branches.every((b) => !('images' in b) && !('topic' in b))).toBe(
-      true
+  it('lists each visual form once from the ledger, with purposes as an attribute', () => {
+    const templates = readTemplates().templates;
+    const catalog = templateCatalog(templates);
+    expect(new Set(catalog.map((t) => t.id)).size).toBe(catalog.length);
+    expect(catalog.map((t) => t.id)).not.toContain('unclassified');
+    expect(catalog.map((t) => t.id)).not.toContain('note-cover');
+    // Seven main statistical forms; maps are exactly the tile map and the real-shape map.
+    expect(catalog.filter((t) => templateGroup(t) === 'chart').map((t) => t.id).sort()).toEqual(
+      ['bar', 'choropleth', 'line', 'scatter', 'stacked-bar', 'table', 'tile-map']
     );
-    expect(basicTemplateBranches([])).toEqual([]);
+    // A purpose filter narrows the list without duplicating forms.
+    expect(templateCatalog(templates, 'ranking').map((t) => t.id)).toEqual(expect.arrayContaining(['bar', 'table', 'tile-map']));
+    expect(templateCatalog(templates, 'ranking').map((t) => t.id)).not.toContain('scatter');
+    expect(templateCatalog([])).toEqual([]);
+  });
+  it('maps every buzz-map type to one drawing variant of the real-shape map', () => {
+    const map = readTemplates().templates.find((t) => t.id === 'choropleth')!;
+    const types = map.variants!.flatMap((v) => v.buzzMapTypes ?? []);
+    expect(types.sort()).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'flow']);
+    expect(new Set(types).size).toBe(types.length);
+    const templates = readTemplates().templates;
+    expect(imageTypeOfBuzzMap('C', templates)).toEqual({ templateId: 'choropleth', label: '地図（実際の形）・点', status: 'ready' });
+    expect(imageTypeOfBuzzMap('F', templates)?.status).toBe('planned');
+    expect(imageTypeOfBuzzMap('Z', templates)).toBeNull();
+    expect(imageTypeOfBuzzMap(undefined, templates)).toBeNull();
   });
   it('removes article/media/sample choices from old bookmarks while retaining purpose and type', () => {
     expect(

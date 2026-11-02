@@ -7,16 +7,16 @@ export const TREND_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/c628ba8ac92bcaed8aa16f17ed46dcdf33f118ef9658603f4139328dc2490385.png",
-      "sha256": "c628ba8ac92bcaed8aa16f17ed46dcdf33f118ef9658603f4139328dc2490385",
-      "bytes": 114611
+      "key": "media-workspace/images/43404e5a870843ccb8d9b1f7ab9258de63976341bc69b08815951d5c67edc7f8.png",
+      "sha256": "43404e5a870843ccb8d9b1f7ab9258de63976341bc69b08815951d5c67edc7f8",
+      "bytes": 109886
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/ea77b709f771e70f3ebef7a67d6a889235904ce4ff5b5df6241382113bd224fe.json",
-      "sha256": "ea77b709f771e70f3ebef7a67d6a889235904ce4ff5b5df6241382113bd224fe",
-      "bytes": 160730
+      "key": "media-workspace/inputs/6b2fe05191f8c8e981d22771e5b6aca1c6dd9bc1fa9933295a4cbd3678206398.json",
+      "sha256": "6b2fe05191f8c8e981d22771e5b6aca1c6dd9bc1fa9933295a4cbd3678206398",
+      "bytes": 170074
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

@@ -6,6 +6,8 @@ import path from "node:path";
 import { projectRoot, localSnsDir, R2_BASE } from "./project-root";
 import { query as queryPosts } from "./posts-store";
 import { datasetDir } from "../../../../config/datasets.mjs";
+import { readTemplates } from "../../../../.claude/scripts/media/lib/workspace.mjs";
+import { imageTypeOfBuzzMap } from "@/lib/image-template-basics";
 
 /**
  * buzz-map カタログの読み取り + 表示用 decorate。
@@ -141,6 +143,8 @@ export interface BuzzMapCatalogSummary {
 }
 
 export interface BuzzMapDecoratedEntry extends BuzzMapEntry {
+  /** The image-type ledger form for this idea's buzz-map type; the catalog keeps only A–F. */
+  imageType: ReturnType<typeof imageTypeOfBuzzMap>;
   assets: BuzzMapAssetStatus | null;
   post: BuzzMapPostStatus | null;
   r2AssetBaseUrl: string | null;
@@ -161,12 +165,14 @@ export function readBuzzMapCatalog(opts: { lane?: string } = {}): BuzzMapCatalog
   const lane = opts.lane ?? "curated";
   const filtered = lane === "all" ? catalog.entries : catalog.entries.filter((e) => e.lane === lane);
 
+  const templates = readTemplates(projectRoot()).templates;
   const entries: BuzzMapDecoratedEntry[] = filtered.map((e) => {
     const ideaId = e.ideaId ?? null;
     const assets = ideaId ? scanIdeaAssets(ideaId) : null;
     const post = ideaId ? findPostForIdea(ideaId) : null;
     return {
       ...e,
+      imageType: imageTypeOfBuzzMap(e.recommendedType, templates),
       assets,
       post,
       r2AssetBaseUrl: ideaId ? `${R2_BASE}/sns/buzz-map/${ideaId}` : null,

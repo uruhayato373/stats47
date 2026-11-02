@@ -89,7 +89,7 @@ function SampleRow({ sample }: { sample: StatisticalSampleView }) {
       </div>
       {sample.binding && (
         <div aria-label="データと表示設定" className="space-y-1 border-t border-border pt-3 text-sm text-muted-foreground">
-          {sample.templateId === 'tile-map' && <p>
+          {sample.templateId === 'choropleth' && <p>
             配色：{sample.binding.visualization.colorScheme.replace(/^interpolate/, '')}
             {' · '}{sample.binding.visualization.colorSchemeType === 'diverging' ? '発散色' : '単方向'}
             {' · '}{sample.binding.visualization.classification.method === 'equal-interval' ? '等間隔' : sample.binding.visualization.classification.method === 'quantile' ? '分位' : sample.binding.visualization.classification.method === 'threshold' ? '指定した境界値' : '連続階調'}
