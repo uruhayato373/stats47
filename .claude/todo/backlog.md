@@ -563,6 +563,7 @@ updated: 2026-11-01
 - **次**: ① オーナーが AdSense の管理画面で表示広告ユニットを 2 つ作る (名前は stats47-ranking-footer-rect・stats47-content-footer-rect、大きさは固定 300×250) ② `apps/web/src/lib/google-adsense/constants.ts` の 2 定数の slotId を差し替える ③ テスト 2 本 (`manual-ad-desktop-only.test.tsx`・`code-ad-slots.test.mjs`) の `BORROWED` を消す。
 - **停止条件**: ユニットの作成はオーナーだけが行う (AdSense のアカウント操作)。
 - **完了条件**: 全ての slotId がそれぞれ 1 つの配置だけで使われ、`BORROWED` の例外が無い。
+- **判定への影響 (2026-11-03 確認)**: 固定サイズへの変更 (e7eefcafa) は 2026-11-01 に本番へ出ており、`ADSENSE-PLACEMENT-01` の観測期間 (W42〜W45・配置を変えない約束) の途中に入った。W44 以降は stats47-hub-rail・stats47-themes-content の数字にページ末の分が混ざるので、11-14 の判定ではこの 2 ユニットとページ末の枠を W43 以前と比べない。
 
 ### [AFF-PLACEMENT-MAP-SIZE-01] 配置マップ (placement-map-latest.json) を 1MB 以下に分け、週次の更新を戻す
 タグ: [収益化] [種類:不具合] [実行:sweep] [起票:2026-10-31] [領域:アフィリエイト]
