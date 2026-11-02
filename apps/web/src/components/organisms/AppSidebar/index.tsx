@@ -26,23 +26,21 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
 import {
   BookOpen,
-  Briefcase,
-  HeartPulse,
   Home,
   LayoutGrid,
   Map as MapIcon,
   MapPin,
-  Palette,
-  Plane,
   TrendingUp,
-  Users,
   type LucideIcon,
 } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 
-import { THEME_NAV_GROUPS } from '@/features/theme-dashboard/config/theme-navigation';
+import {
+  THEME_NAV_GROUP_ICONS,
+  THEME_NAV_GROUPS,
+} from '@/features/theme-dashboard/config/theme-navigation';
 import {
   NAV_THEMES,
   themeHref,
@@ -80,18 +78,6 @@ const PRIMARY_NAV_ICONS: Record<PrimaryNavKey, LucideIcon> = {
   areas: MapPin,
   geo: MapIcon,
   blog: BookOpen,
-};
-
-/** テーマの 5 系統 (THEME_NAV_GROUPS の id) のアイコン */
-const THEME_GROUP_ICONS: Record<
-  (typeof THEME_NAV_GROUPS)[number]['id'],
-  LucideIcon
-> = {
-  'population-life': Users,
-  'work-economy': Briefcase,
-  'health-education-safety': HeartPulse,
-  'tourism-transport-nature': Plane,
-  'culture-community-digital': Palette,
 };
 
 const CATEGORY_ICON_NAMES = new Map(
@@ -145,7 +131,7 @@ export function getThemeNavSections(): ThemeNavSection[] {
   return THEME_NAV_GROUPS.map((group) => ({
     id: group.id,
     label: group.label,
-    icon: THEME_GROUP_ICONS[group.id],
+    icon: THEME_NAV_GROUP_ICONS[group.id],
     items: group.themeKeys.flatMap((themeKey) => {
       const title = titles.get(themeKey);
       return title ? [{ href: themeHref(themeKey), label: title }] : [];
