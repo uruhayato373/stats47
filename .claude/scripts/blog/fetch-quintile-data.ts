@@ -8,11 +8,11 @@
  *
  * Usage:
  *   # 五分位バー（1品目・6本=平均+I〜V or 5本）
- *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-overview --name accommodation --item 090410001 [--year 2024] [--no-average]
+ *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-overview --name accommodation --item 090410001 [--year 2025] [--no-average]
  *   # 時系列折れ線（I/III/V の3系列 × 全年）
  *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-regressive --name tobacco --item 100140001 --mode line [--from 1985]
  *   # スキャン（全品目の V/I 比を一括算出 → /tmp/quintile-scan.json）
- *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode scan [--year 2024]
+ *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode scan [--year 2025]
  *
  * 出力: contents/blog/<slug>/data/<name>-quintile[.-timeseries].{json,source.json,svg}
  */
@@ -23,7 +23,9 @@ import { generateBarChartSvg, generateLineSvg } from "../../../packages/svg-buil
 import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATS_DATA_ID_AMOUNT = "0003348240"; // 品目分類2020年改定・年間収入五分位・金額
+// 品目分類2025年改定・年間収入五分位・金額。2024年以前の値は旧表 0003348240 (2020年改定) と同じコード・同じ値で接続している
+// (2026-11-02 に たばこ・宿泊料・食料 の 2024 年で全 6 区分の一致を確認)。改定で分割・統合した品目は旧コードで値が返らない
+const STATS_DATA_ID_AMOUNT = "0004023607";
 const CAT02_TWO_PERSON = "03"; // 二人以上の世帯（2000年～）
 
 function getAppId(): string {
@@ -78,7 +80,7 @@ async function runBar() {
   const slug = arg("slug")!;
   const name = arg("name")!;
   const item = arg("item")!;
-  const year = arg("year", "2024")!;
+  const year = arg("year", "2025")!;
   const includeAverage = !flag("no-average");
   const title = arg("title") || name;
   const unit = arg("unit") || "円";
@@ -202,7 +204,7 @@ async function runLine() {
 
 // ---------- scan モード ----------
 async function runScan() {
-  const year = arg("year", "2024")!;
+  const year = arg("year", "2025")!;
   // メタから品目名（L3-4のみ）を取得
   const metaUrl = `${ESTAT_META_INFO_URL}?appId=${APP_ID}&statsDataId=${STATS_DATA_ID_AMOUNT}`;
   const meta = await (await fetch(metaUrl)).json();

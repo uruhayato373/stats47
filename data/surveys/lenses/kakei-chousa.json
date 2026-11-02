@@ -1,7 +1,9 @@
 {
   "schemaVersion": 1,
   "surveyId": "kakei-chousa",
-  "relatedSurveyIds": ["household-survey"],
+  "relatedSurveyIds": [
+    "household-survey"
+  ],
   "statCode": "00200561",
   "lenses": [
     {
@@ -9,9 +11,17 @@
       "name": "都市の間で比べる",
       "readerQuestion": "その品目・費目に最もお金をかける (多く買う) 都市はどこか",
       "description": "県庁所在市など 52 市の年次の支出額・購入数量を並べ、地域差と食文化を読む。サイトのランキングの中心で、検索の入口になる。",
-      "grain": ["capital-cities"],
-      "dataTables": ["0004023605", "0004023606"],
-      "axes": ["item", "city"],
+      "grain": [
+        "capital-cities"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0004023606"
+      ],
+      "axes": [
+        "item",
+        "city"
+      ],
       "caveats": [
         "値は県庁所在市の二人以上世帯で、県全体の値ではない",
         "標本調査なので単年の小さな順位差より複数年の傾向を見る",
@@ -33,9 +43,18 @@
       "name": "支出額を数量と単価に分ける",
       "readerQuestion": "多く買っているのか、高いものを買っているのか",
       "description": "支出額 = 購入数量 × 平均単価に分け、支出の多さが量と単価のどちらから来るかを読む。数量と金額の両方がある品目 (食料が中心) で使える。",
-      "grain": ["capital-cities", "national"],
-      "dataTables": ["0004023605", "0004023606"],
-      "axes": ["item", "city"],
+      "grain": [
+        "capital-cities",
+        "national"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0004023606"
+      ],
+      "axes": [
+        "item",
+        "city"
+      ],
       "caveats": [
         "平均単価は購入品の支出額 ÷ 購入数量で、店頭価格や物価指数ではない",
         "数量の表は食料が中心で、耐久財などは数量の単位が台・着など品目ごとに違う",
@@ -53,9 +72,21 @@
       "name": "年収階級で比べる",
       "readerQuestion": "収入の多い世帯ほど何にお金を使い、何に使わないのか",
       "description": "年間収入の五分位・十分位・18 階級で品目と費目の支出を比べる。全国の集計で、都市別の列は無い。",
-      "grain": ["national"],
-      "dataTables": ["0004023607", "0004023608", "0003348240", "0002070005", "0002200004", "0002200006"],
-      "axes": ["income-quintile", "income-class", "item"],
+      "grain": [
+        "national"
+      ],
+      "dataTables": [
+        "0004023607",
+        "0004023608",
+        "0002070005",
+        "0002200004",
+        "0002200006"
+      ],
+      "axes": [
+        "income-quintile",
+        "income-class",
+        "item"
+      ],
       "caveats": [
         "全国の集計で都道府県・都市の値は無い。ランキングにしない",
         "五分位の階級は世帯主の年齢や世帯人員も違うので、差を収入だけの効果と書かない",
@@ -66,10 +97,6 @@
         "blog": "高所得世帯に売れる品目・低所得ほど支出が大きい品目の記事 (型 D)",
         "note": "年収階級で読む家計の有料記事",
         "kindle": "年収階級で読む消費の本 1 冊の候補"
-      },
-      "readiness": {
-        "state": "blocked",
-        "blockers": ["接地器 .claude/scripts/blog/fetch-quintile-data.ts は 2020 年改定の表 0003348240 (2024 年まで) を読む。2025 年改定の表 0004023607 / 0004023608 への切替が要る"]
       }
     },
     {
@@ -77,9 +104,26 @@
       "name": "世帯の属性で比べる",
       "readerQuestion": "世帯主の年齢・世帯の人数・単身かどうかで、家計はどう違うのか",
       "description": "世帯主の年齢階級、世帯人員、世帯類型、住居の所有、総世帯・単身世帯の別で支出を比べる。全国の集計が中心。",
-      "grain": ["national"],
-      "dataTables": ["0004023609", "0004023610", "0004023612", "0004023614", "0002070009", "0002070011", "0002070017", "0002190004"],
-      "axes": ["age", "household-size", "household-type", "housing-tenure", "item"],
+      "grain": [
+        "national"
+      ],
+      "dataTables": [
+        "0004023609",
+        "0004023610",
+        "0004023612",
+        "0004023614",
+        "0002070009",
+        "0002070011",
+        "0002070017",
+        "0002190004"
+      ],
+      "axes": [
+        "age",
+        "household-size",
+        "household-type",
+        "housing-tenure",
+        "item"
+      ],
       "caveats": [
         "二人以上の世帯・総世帯・単身世帯は対象が違うので混ぜない",
         "全国の集計で都道府県の値は無い"
@@ -95,9 +139,17 @@
       "name": "長期推移と市場の盛衰を見る",
       "readerQuestion": "その品目の市場は何年でどれだけ伸びた・縮んだのか",
       "description": "全国の年次系列 (二人以上の世帯は 2000 年から) で、品目の盛衰や置き換わり (ビールから他の酒、米とパン) を読む。",
-      "grain": ["national"],
-      "dataTables": ["0004023605", "0004023606"],
-      "axes": ["year", "item"],
+      "grain": [
+        "national"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0004023606"
+      ],
+      "axes": [
+        "year",
+        "item"
+      ],
       "caveats": [
         "2025 年 1 月に品目分類が改定された。分割・統合・名称変更の品目は接続を確かめる",
         "名目の支出額は物価の影響を含む。量の変化は購入数量で見る"
@@ -114,9 +166,18 @@
       "name": "月次・季節の変化を見る",
       "readerQuestion": "その品目はいつ買われ、季節の山はどう変わったのか",
       "description": "月次の支出額・購入数量で季節性やバーゲン・増税前後の行動を読む。",
-      "grain": ["national", "capital-cities"],
-      "dataTables": ["0004023601", "0004023602", "0003343671", "0003343670"],
-      "axes": ["month", "item"],
+      "grain": [
+        "national",
+        "capital-cities"
+      ],
+      "dataTables": [
+        "0004023601",
+        "0004023602"
+      ],
+      "axes": [
+        "month",
+        "item"
+      ],
       "caveats": [
         "年の途中の月を年計として扱わない",
         "数量の月次は全国のみ"
@@ -124,10 +185,6 @@
       "channels": {
         "blog": "季節の山と行動の変化の記事 (型 C)",
         "x": "季節の時事に合わせた投稿"
-      },
-      "readiness": {
-        "state": "blocked",
-        "blockers": ["接地器 .claude/scripts/blog/fetch-kakei-monthly.mjs は 2020 年改定の月次表 0003343671 / 0003343670 を読む。2025 年改定の月次表 0004023601 / 0004023602 への切替が要る"]
       }
     },
     {
@@ -135,9 +192,19 @@
       "name": "家計の配分 (費目構成) を見る",
       "readerQuestion": "家計のどこにお金が回っているのか (エンゲル係数・十大費目)",
       "description": "十大費目の構成比やエンゲル係数で、家計の配分を都市間・年齢間で比べる。",
-      "grain": ["capital-cities", "national"],
-      "dataTables": ["0004023605", "0002070003"],
-      "axes": ["category-share", "city", "age"],
+      "grain": [
+        "capital-cities",
+        "national"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0002070003"
+      ],
+      "axes": [
+        "category-share",
+        "city",
+        "age"
+      ],
       "caveats": [
         "エンゲル係数の高低は生活水準の高低を直接示さない (年齢・世帯構成・食の嗜好が効く)",
         "品目分類の年間額と用途分類の 1 か月平均は期間の単位が違う"
@@ -156,9 +223,21 @@
       "name": "貯蓄と負債を見る",
       "readerQuestion": "貯蓄や住宅ローンなどの負債は、都市や年収でどう違うのか",
       "description": "貯蓄・負債編の年次表で、都市別・年収階級別の貯蓄現在高と負債現在高を読む。",
-      "grain": ["capital-cities", "national"],
-      "dataTables": ["0002210008", "0002210010", "0002210012", "0002210014"],
-      "axes": ["city", "income-class", "income-quintile"],
+      "grain": [
+        "capital-cities",
+        "national"
+      ],
+      "dataTables": [
+        "0002210008",
+        "0002210010",
+        "0002210012",
+        "0002210014"
+      ],
+      "axes": [
+        "city",
+        "income-class",
+        "income-quintile"
+      ],
       "caveats": [
         "貯蓄・負債編の年間収入 (万円) は家計収支編の収入と別系列",
         "平均値は高額世帯に引っ張られる。中央値との違いを書く"
@@ -174,9 +253,17 @@
       "name": "定義を読む (何を数えているか)",
       "readerQuestion": "「消費日本一」は何を数えていて、何を数えていないのか",
       "description": "品目の範囲 (収支項目分類の例示)、対象世帯、対象都市、テイクアウトや冷凍品の扱いを確かめ、誤読を防ぐ。",
-      "grain": ["capital-cities", "national"],
-      "dataTables": ["0004023605", "0004023606"],
-      "axes": ["item"],
+      "grain": [
+        "capital-cities",
+        "national"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0004023606"
+      ],
+      "axes": [
+        "item"
+      ],
       "caveats": [
         "品目の範囲は data/estat/kakei-classification/<改定>.json の例示で確かめる (e-Stat の分類名だけでは分からない)"
       ],
@@ -192,9 +279,18 @@
       "name": "ほかの指標と照らす",
       "readerQuestion": "その消費は、所得・気候・産地・学力などとどう重なるのか",
       "description": "家計調査の都市値を、県単位の別の指標 (県民所得・農業産出額・気候など) と並べる。相関は因果ではないことを示す型。",
-      "grain": ["capital-cities", "prefecture"],
-      "dataTables": ["0004023605", "0004023606"],
-      "axes": ["city", "other-metric"],
+      "grain": [
+        "capital-cities",
+        "prefecture"
+      ],
+      "dataTables": [
+        "0004023605",
+        "0004023606"
+      ],
+      "axes": [
+        "city",
+        "other-metric"
+      ],
       "caveats": [
         "家計調査は県庁所在市の値、相手の指標は県全体の値であることが多い。対象の違いを書く",
         "相関を因果や説明割合として書かない"
