@@ -20,14 +20,14 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L01204"
         },
-        "derived": false,
-        "configHash": "5a49fd438cef2b68"
+        "ops": {
+          "valueScale": 1000
+        },
+        "derived": true,
+        "configHash": "e25e8bc2302d9395"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-reversal",

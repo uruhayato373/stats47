@@ -32,23 +32,7 @@ export const spouseIncome: MetricConfig = {
     "displayUnit": "万円",
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
   "groupKey": "household-income",
   "seoTitle": "配偶者の収入（勤労者世帯）ランキング都道府県【2024年】｜1位山形県（159,360円）",

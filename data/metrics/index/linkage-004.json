@@ -6551,14 +6551,14 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L02211"
         },
-        "derived": false,
-        "configHash": "0d3f982cb4910c27"
+        "ops": {
+          "valueScale": 1000
+        },
+        "derived": true,
+        "configHash": "3ab82b816ada4294"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",

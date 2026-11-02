@@ -5,12 +5,13 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "key": "household-head-income-worker-households-per-month",
   "title": "世帯主収入",
   "subtitle": "1世帯当たり1か月間",
-  "unit": "千円",
+  "unit": "円",
   "category": "economy",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010212",
     "cdCat01": "#L01204",
+    "valueScale": 1000,
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
   },
@@ -29,28 +30,12 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 1,
+    "decimalPlaces": 0,
   },
   "calculation": {
-    "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    "isCalculated": false
   },
-  "seoTitle": "世帯主収入ランキング都道府県【2024年】｜1位埼玉県（605.2千円）",
-  "seoDescription": "2024年の世帯主収入の都道府県別ランキング。1位埼玉県（605.2千円）、最下位沖縄県（344.7千円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "世帯主収入のランキング｜県庁所在市の勤労者世帯の月額",
+  "seoDescription": "家計調査の二人以上の勤労者世帯について、県庁所在市ごとの世帯主の 1 か月の収入を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

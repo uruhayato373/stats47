@@ -31,6 +31,7 @@ import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from '@stats47/types';
 
 import { CATEGORY_KEYS } from '../src/types';
 import { moneyUnitExponent } from '../src/money-unit';
+import { resolveMetricProvenance } from '../src/provenance/resolve-metric-provenance';
 import { METRICS_REGISTRY, getMetricConfig } from '../src/registry';
 import {
   THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
@@ -82,6 +83,8 @@ interface Row {
   sourceKind: string;
   /** normalizationOptions の件数 */
   normalizationCount: number;
+  /** 出典の調査 (家計調査の判定に使う。社会・人口統計体系経由の指標は kind が estat なので kind だけでは分からない) */
+  surveyIds: string[];
   seriesEnd: { lastYear: number; reason: string; successorKey?: string } | null;
 }
 
@@ -151,6 +154,7 @@ function main() {
       ).filter((option) => option.unit.startsWith('‐/')).length,
       sourceKind: source.kind,
       normalizationCount: metric.calculation?.normalizationOptions?.length ?? 0,
+      surveyIds: resolveMetricProvenance(metric, METRICS_REGISTRY).map((s) => s.id),
       seriesEnd: metric.seriesEnd ?? null,
     });
   }
@@ -297,7 +301,9 @@ function main() {
   // error: 家計調査の指標に人口・面積あたりの換算を付けない。値は県庁所在市の 1 世帯あたりの支出額・購入数量で、
   // 県の人口や面積で割ると意味をなさない (2026-11-02 に 697 指標から外した。CONTENT-KAKEI-EXPANSION-01)
   for (const r of rows) {
-    if (r.sourceKind === 'kakei-chousa' && r.normalizationCount > 0) {
+    // 社会・人口統計体系経由の家計調査 (household-survey) の 1 世帯あたりの指標も同じ (2026-11-02 に消費支出・世帯主収入・配偶者の収入で見つかった)
+    const isKakei = r.sourceKind === 'kakei-chousa' || r.surveyIds.some((id) => id === 'kakei-chousa' || id === 'household-survey');
+    if (isKakei && r.normalizationCount > 0) {
       errors.push(
         `[kakei-normalization] ${r.file}: 家計調査の指標に normalizationOptions がある。値は 1 世帯あたりなので人口・面積あたりの換算を外す`
       );
