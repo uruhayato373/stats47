@@ -1,0 +1,13 @@
+{
+  "title": "牛肉消費量 年別の首位と最下位",
+  "rankingKey": "beef-consumption-quantity",
+  "unit": "g",
+  "source": "r2:app/stats/beef-consumption-quantity/values.json",
+  "data": [
+    {"year": 2021, "top": "奈良県", "topValue": 10415, "bottom": "群馬県", "bottomValue": 3627},
+    {"year": 2022, "top": "大分県", "topValue": 9628, "bottom": "群馬県", "bottomValue": 2969},
+    {"year": 2023, "top": "京都府", "topValue": 8471, "bottom": "新潟県", "bottomValue": 2618},
+    {"year": 2024, "top": "兵庫県", "topValue": 7899, "bottom": "岩手県", "bottomValue": 2417},
+    {"year": 2025, "top": "京都府", "topValue": 8679, "bottom": "新潟県", "bottomValue": 2681}
+  ]
+}
