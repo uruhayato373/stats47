@@ -241,14 +241,19 @@ export async function readArticleSummariesByTagKeysFromR2(
 }
 
 export async function readArticleSummariesBySurveyIdFromR2(
-  surveyId: string,
+  /** 調査 ID。同じ調査の別 ID をまとめたハブは配列で渡す */
+  surveyId: string | readonly string[],
   limit = 6,
   /** 調査ハブの編集で選んだ記事 (survey-editorial の relatedArticleSlugs)。公開済みなら与えた順に先頭へ置く */
   preferredSlugs: readonly string[] = []
 ): Promise<Array<{ slug: string; title: string; description: string | null }>> {
   const snapshot = await loadSnapshot();
-  const indexedSlugs = snapshot.surveyArticleIndex?.[surveyId];
-  const indexedSlugSet = indexedSlugs ? new Set(indexedSlugs) : null;
+  const surveyIds = typeof surveyId === 'string' ? [surveyId] : surveyId;
+  const index = snapshot.surveyArticleIndex;
+  const indexedSlugSet =
+    index && surveyIds.some((id) => index[id])
+      ? new Set(surveyIds.flatMap((id) => index[id] ?? []))
+      : null;
   const preferredOrder = new Map(preferredSlugs.map((slug, index) => [slug, index]));
   const preferred = snapshot.articles
     .filter((article) => article.published === true && preferredOrder.has(article.slug))
@@ -263,7 +268,7 @@ export async function readArticleSummariesBySurveyIdFromR2(
         (indexedSlugSet
           ? indexedSlugSet.has(article.slug)
           : Array.isArray(article.surveyIds) &&
-            article.surveyIds.includes(surveyId))
+            article.surveyIds.some((id) => surveyIds.includes(id)))
     )
     .sort(compareByPublishedAtDesc);
   return [...preferred, ...rest]

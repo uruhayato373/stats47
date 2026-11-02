@@ -66,11 +66,11 @@ function withMasterName(survey: ProvenanceSurvey): ProvenanceSurvey {
   return name && name !== survey.name ? { id: survey.id, name } : survey;
 }
 
-// kind:"kakei-chousa" は家計調査（品目別）= survey マスタの "kakei-chousa" バケット
+// kind:"kakei-chousa" は家計調査の品目別の表 = survey マスタの "kakei-chousa" バケット
 // (surveys.json で parentSourceId: "household-survey" = 家計調査の子として明示)
 const KAKEI_SURVEY: ProvenanceSurvey = withMasterName({
   id: 'kakei-chousa',
-  name: '家計調査（品目別）',
+  name: '家計調査',
 });
 
 function dedupe(surveys: ProvenanceSurvey[]): ProvenanceSurvey[] {

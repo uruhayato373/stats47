@@ -19,6 +19,9 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
 > `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
+> **同じ調査の別 ID は 1 つのハブにまとめる**: 指標の紐付けで ID が分かれていても (家計調査は品目別 `kakei-chousa` と社会・人口統計体系経由の
+> `household-survey`)、読者にとって 1 つの調査ならハブは 1 つにする。表は `packages/data-configs/src/content/href.ts` の `SURVEY_HUB_ALIASES`
+> (リンク・一覧・サイトマップ・301 がこの表を読む)。紐付けの ID は変えない。2 つ目の編集ハブを作らない (2026-11-02 オーナー判断)。
 > **紐付け (ranking↔survey) の正典は別**: `.claude/rules/survey-linkage-standards.md` (surveys.json / provenance)。
 > 本 rule は**編集コンテンツ**、linkage-standards は**紐付けメタ**。両方 survey-curator が所有する。
 > 横展開の進捗・census 実験の計測は `data/surveys/{portfolio,experiments}.json`

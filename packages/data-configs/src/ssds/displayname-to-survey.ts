@@ -222,9 +222,9 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003348240
   // 確認: 2026-09-06。月次の総数・金額/数量は公式API変更告知でIDを確認。
   // https://www.e-stat.go.jp/api/node/208
-  '0003348240': { id: 'kakei-chousa', name: '家計調査（品目別）' },
-  '0003343671': { id: 'kakei-chousa', name: '家計調査（品目別）' },
-  '0003343670': { id: 'kakei-chousa', name: '家計調査（品目別）' },
+  '0003348240': { id: 'kakei-chousa', name: '家計調査' },
+  '0003343671': { id: 'kakei-chousa', name: '家計調査' },
+  '0003343670': { id: 'kakei-chousa', name: '家計調査' },
   // 月次CPIは年報そのものではなく同一統計の時系列。cpi-annualは既存URL互換のID。
   // master名称は「消費者物価指数」、年次/月次を含む公式結果ページへ接続する。
   // https://www.e-stat.go.jp/stat-search/database?layout=dataset&statdisp_id=0003427113

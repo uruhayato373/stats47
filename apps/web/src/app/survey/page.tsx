@@ -4,7 +4,7 @@
  * `/survey` でアクセスされ、全調査の一覧を表示。
  */
 
-import { hrefFor } from "@stats47/data-configs/content/href";
+import { canonicalSurveyHubKey, hrefFor } from "@stats47/data-configs/content/href";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
@@ -58,9 +58,14 @@ export default async function SurveyIndexPage() {
       return [s.id, isOk(result) ? result.data.length : 0] as const;
     }),
   );
-  const countMap = new Map<string, number>(counts);
+  // 同じ調査の別 ID の件数はハブ側へ足し、別 ID のカードは出さない (家計調査のハブを 1 つにまとめた。2026-11-02)
+  const countMap = new Map<string, number>();
+  for (const [id, count] of counts) {
+    const hub = canonicalSurveyHubKey(id);
+    countMap.set(hub, (countMap.get(hub) ?? 0) + count);
+  }
 
-  const sortedSurveys = surveys.filter((s) => {
+  const sortedSurveys = surveys.filter((s) => canonicalSurveyHubKey(s.id) === s.id).filter((s) => {
     const count = countMap.get(s.id) ?? 0;
     return count > 0;
   });

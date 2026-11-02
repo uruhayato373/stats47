@@ -11,6 +11,7 @@
  * 「R2 が空のとき」を明示的に再現して守る。
  */
 import { CATEGORY_KEYS } from "@stats47/data-configs";
+import { SURVEY_HUB_ALIASES } from "@stats47/data-configs/content/href";
 import { ok } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
@@ -78,7 +79,8 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
   it("surveys: 配信されている調査が全件出る (/survey + 各調査)", async () => {
     const entries = await sitemap({ id: SEGMENT_ID.surveys });
     expect(SITEMAP_SURVEY_IDS.length).toBeGreaterThan(0);
-    expect(entries).toHaveLength(SITEMAP_SURVEY_IDS.length + 1);
+    // 同じ調査の別 ID (301 で寄せるハブ) はサイトマップに出さない
+    expect(entries).toHaveLength(SITEMAP_SURVEY_IDS.filter((id) => !SURVEY_HUB_ALIASES[id]).length + 1);
   });
 
   it("tags: 記事 5 本以上のタグが出る", async () => {

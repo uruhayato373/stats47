@@ -5,11 +5,11 @@
  * 調査概要 + 関連ランキング一覧を表示。
  */
 
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
-import { hrefFor } from "@stats47/data-configs/content/href";
+import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
 import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
@@ -155,8 +155,21 @@ export default async function SurveyPage({ params }: PageProps) {
     notFound();
   }
 
-  const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
-  const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  // 同じ調査の別 ID は middleware が 301 で寄せるが、直接描画されたときも同じハブへ送る
+  if (canonicalSurveyHubKey(surveyKey) !== surveyKey) {
+    permanentRedirect(hrefFor('survey', { surveyKey }));
+  }
+  // ハブに集める調査 ID (家計調査は品目別と、社会・人口統計体系経由の収入・支出割合の 2 つ。2026-11-02)
+  const sourceIds = surveyHubSourceIds(surveyKey);
+  const rankingResults = await Promise.all(sourceIds.map((id) => readRankingItemsBySurveyFromR2(id)));
+  const seenRankingKeys = new Set<string>();
+  const rankingItems = rankingResults
+    .flatMap((result) => (isOk(result) ? result.data : []))
+    .filter((item) => {
+      if (seenRankingKeys.has(item.rankingKey)) return false;
+      seenRankingKeys.add(item.rankingKey);
+      return true;
+    });
   if (rankingItems.length === 0) {
     notFound();
   }
@@ -184,7 +197,7 @@ export default async function SurveyPage({ params }: PageProps) {
   const relatedThemes = Object.values(THEME_CATALOGS)
     .filter((catalog) =>
       resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).surveys.some(
-        (entry) => entry.id === surveyKey
+        (entry) => sourceIds.includes(entry.id)
       )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title }));
@@ -192,7 +205,7 @@ export default async function SurveyPage({ params }: PageProps) {
     ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
     : [];
   const relatedArticles = await listArticleSummariesBySurveyId(
-    surveyKey,
+    sourceIds,
     6,
     getSurveyEditorialContent(surveyKey)?.relatedArticleSlugs ?? []
   ).catch(() => []);
@@ -418,23 +431,6 @@ export default async function SurveyPage({ params }: PageProps) {
                 </li>
               ))}
             </ul>
-            {/* 同じ調査の別のハブ (家計調査は品目別と、社会・人口統計体系経由の収支に分かれている) */}
-            {(editorial.relatedHubs?.length ?? 0) > 0 && (
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {editorial.relatedHubs?.map((hub) => (
-                  <SurfaceLinkCard
-                    key={hub.surveyKey}
-                    href={hrefFor('survey', { surveyKey: hub.surveyKey })}
-                    className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
-                  >
-                    <span className="flex items-center justify-between gap-2">
-                      <span className="min-w-0">同じ調査の{hub.label}</span>
-                      <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-                    </span>
-                  </SurfaceLinkCard>
-                ))}
-              </div>
-            )}
           </div>
 
           {readerQuestions.length > 0 && (

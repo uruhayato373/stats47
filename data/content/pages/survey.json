@@ -389,7 +389,7 @@
       "id": "survey:household-survey",
       "kind": "survey",
       "key": "household-survey",
-      "title": "家計調査",
+      "title": "家計調査（家計収支）",
       "href": "/survey/household-survey",
       "published": true
     },
@@ -477,7 +477,7 @@
       "id": "survey:kakei-chousa",
       "kind": "survey",
       "key": "kakei-chousa",
-      "title": "家計調査（品目別）",
+      "title": "家計調査",
       "href": "/survey/kakei-chousa",
       "published": true
     },

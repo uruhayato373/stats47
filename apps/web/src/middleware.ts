@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
-import { hrefFor } from '@stats47/data-configs/content/href';
+import { hrefFor, SURVEY_HUB_ALIASES } from '@stats47/data-configs/content/href';
 import {
   MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
   isMunicipalityThemePageSlug,
@@ -68,6 +68,11 @@ export const isValidPrefCode = UrlPolicy.area.isValidPrefCode;
 
 function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   const segments = pathname.split('/').filter(Boolean);
+
+  // /survey/{別名} → 同じ調査のハブ (家計調査の 2 つのハブを 1 つにまとめた。2026-11-02)
+  if (segments.length === 2 && segments[0] === 'survey' && SURVEY_HUB_ALIASES[segments[1]]) {
+    return NextResponse.redirect(new URL(hrefFor('survey', { surveyKey: segments[1] }), baseUrl), 301);
+  }
 
   // /{cat}/{sub}/dashboard/{prefCode} → /areas/{prefCode}
   // /{cat}/{sub}/ranking/{rankingKey} → /ranking/{rankingKey}

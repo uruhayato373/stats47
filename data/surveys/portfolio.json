@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01",
+  "generatedAt": "2026-11-02",
   "linkage": {
-    "auditedAt": "2026-11-01",
+    "auditedAt": "2026-11-02",
     "metrics": 2603,
     "resolved": 2514,
     "unresolved": 0,
@@ -2593,18 +2593,18 @@
     },
     {
       "surveyId": "household-survey",
-      "name": "家計調査",
+      "name": "家計調査（家計収支）",
       "organization": "総務省統計局",
-      "lifecycleStatus": "observe",
+      "lifecycleStatus": "keep",
       "linkageStatus": "ok",
-      "editorialStatus": "implemented",
+      "editorialStatus": "rejected",
       "itemCount": 25,
       "activeItemCount": 25,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
-      "editorialContentExists": true,
-      "readerQuestionCount": 4,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
       "relatedArticleCount": null,
       "gscSnapshotRef": "data/gsc/snapshots/2026-W43/pages.csv",
       "ga4SnapshotRef": "data/ga4/snapshots/2026-W43/pages.csv",
@@ -2640,7 +2640,7 @@
           "rankingOutboundClicks": 8
         }
       },
-      "currentHypothesis": null,
+      "currentHypothesis": "家計調査の品目別ハブ (kakei-chousa) へ統合した。/survey/household-survey は 301 (SURVEY_HUB_ALIASES)。2026-11-02 オーナー判断",
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
@@ -3182,7 +3182,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "name": "家計調査（品目別）",
+      "name": "家計調査",
       "organization": "総務省統計局",
       "lifecycleStatus": "editorial-candidate",
       "linkageStatus": "ok",
@@ -3194,7 +3194,7 @@
       "orphanStatus": false,
       "editorialContentExists": true,
       "readerQuestionCount": 5,
-      "relatedArticleCount": null,
+      "relatedArticleCount": 6,
       "gscSnapshotRef": "data/gsc/snapshots/2026-W43/pages.csv",
       "ga4SnapshotRef": "data/ga4/snapshots/2026-W43/pages.csv",
       "metrics": {
