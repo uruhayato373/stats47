@@ -203,20 +203,20 @@
       ]
     },
     {
-      "id": "article-teaser-grid",
-      "name": "記事カードの格子",
-      "role": "記事カードを線の格子に並べる。列の数は本文の幅だけで決め、ページの側では指定しない",
+      "id": "card-grid",
+      "name": "カードの格子",
+      "role": "記事カードとランキングカードを線の格子に並べる。列の数は本文の幅だけで決め、ページの側では指定しない。記事とランキングで列をそろえるため、同じ格子を使う (2026-11-03)",
       "implementation": {
         "package": "@/components/surface",
-        "export": "ArticleTeaserGrid",
+        "export": "CardGrid",
         "source": "apps/web/src/components/surface/ArticleTeaser.tsx",
-        "propsType": "ArticleTeaserGridProps"
+        "propsType": "CardGridProps"
       },
       "slots": [
         {
           "prop": "children",
           "required": true,
-          "what": "記事カード (ArticleTeaserCard)"
+          "what": "記事カード (ArticleTeaserCard) またはランキングカード (FeaturedRankingCard)"
         }
       ],
       "spec": {
@@ -228,7 +228,8 @@
         "adoptionPart": "記事カード"
       },
       "useWhen": [
-        "記事カードを 1 枚以上並べる所すべて"
+        "記事カードを 1 枚以上並べる所すべて",
+        "ランキングカードを本文に並べる所 (横スクロールのカルーセルを除く)"
       ],
       "avoidWhen": [
         {

@@ -44,6 +44,8 @@ export function FeaturedRankingCard({
   return (
     <SurfaceLinkCard
       href={hrefFor("ranking", { rankingKey: rankingKey })}
+      // 線の格子 (CardGrid) はカード (data-slot="card") を余白なしのセルとして扱う。記事カードと同じ印 (2026-11-03)
+      data-slot="card"
       className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2`}
     >
       <span className={PORTAL_CARD_TITLE_CLASS}>{model.hook}</span>

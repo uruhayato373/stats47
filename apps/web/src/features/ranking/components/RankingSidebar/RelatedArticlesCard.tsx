@@ -2,7 +2,7 @@ import { PanelGrid } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { Newspaper } from 'lucide-react';
 
-import { ArticleTeaserCard, ArticleTeaserGrid } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
 import { readContentRecommendations } from '@/features/content-navigation/server';
 import { findKindleProductForBlog, TrackedProductLink } from '@/features/products';
@@ -28,7 +28,7 @@ export async function RelatedArticlesCard({ rankingKey, areaType }: Props) {
         <Newspaper aria-hidden="true" className="size-4 text-muted-foreground" />
         このランキングを読み解く記事
       </h2>
-      <ArticleTeaserGrid>
+      <CardGrid>
         {items.map((item) => (
           <ArticleTeaserCard
             key={item.id}
@@ -41,7 +41,7 @@ export async function RelatedArticlesCard({ rankingKey, areaType }: Props) {
             navSurface="ranking_blog"
           />
         ))}
-      </ArticleTeaserGrid>
+      </CardGrid>
       {product && (
         <TrackedProductLink href={hrefFor('product', { slug: product.slug })} label={`${product.id}:${product.title}`} surface="ranking_product" className="text-sm text-foreground underline-offset-4 hover:underline">
           この記事を収録した本：{product.title}（Kindle）

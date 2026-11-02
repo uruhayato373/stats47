@@ -39,7 +39,7 @@ import {
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { ArticleTeaserCard, ArticleTeaserGrid, SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid, SurfaceLinkCard } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -282,13 +282,13 @@ export default async function SurveyPage({ params }: PageProps) {
     : undefined;
 
   // 編集設定の「読者の問い」が指すランキングを最優先にし、残りはサイト共通の代表集合と
-  // カテゴリ分散で選ぶ。最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
+  // カテゴリ分散で選ぶ。最大12候補まで値を確認し、欠測があっても 3 列の格子を埋める枚数 (最大 9 件) を残す。
   const questionByKey = new Map(
     editorial?.readerQuestions.map((item) => [item.rankingKey, item.question]) ?? []
   );
   const featuredRaw = selectSurveyRepresentativeRankings(
     rankingItems,
-    8,
+    12,
     editorial?.readerQuestions.map((item) => item.rankingKey) ?? []
   );
   // home/category と同じカードモデルを、1 回の全47件 read から導出する。
@@ -302,13 +302,13 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
   );
-  // 読者の問いは代表ランキングと同じ地図付きのカードで答える。問いが 4 件を超える調査は 2 段 (8 件) にする
+  // 読者の問いは地図付きのカードで答える。カードの格子は 3 列なので、問いの数を 3 の倍数に切り上げる (最大 3 段)
   const readerQuestionCount = new Set(
     editorial?.readerQuestions
       .map((item) => item.rankingKey)
       .filter((key) => rankingItems.some((item) => item.rankingKey === key)) ?? []
   ).size;
-  const featuredLimit = readerQuestionCount > 4 ? 8 : 4;
+  const featuredLimit = Math.min(9, Math.max(3, Math.ceil(readerQuestionCount / 3) * 3));
   const featuredItems = featuredRaw
     .flatMap((item, idx) => {
       const latestYear = parseLatestYear(item.latestYear);
@@ -393,12 +393,12 @@ export default async function SurveyPage({ params }: PageProps) {
 
       {/* 読者の問いに地図付きのカードで答えるのを最初に置く。目次や分類の一覧を先に出さない (2026-11-03) */}
       {featuredItems.length > 0 && (
-        <section id="representative-rankings" className="mb-4 scroll-mt-24">
-          <SectionHeader
-            title={`${survey.name}で答えられる問い`}
-          />
+        // カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
+        <PanelGrid as="section" id="representative-rankings" className="scroll-mt-24">
+          <SectionHeader title="ランキング" hideRule />
           <SurveyOutboundLinkArea surface="survey_ranking">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* 記事と同じカードの格子に並べ、列をそろえる (2026-11-03) */}
+            <CardGrid>
               {featuredItems.map((item) => (
                 <FeaturedRankingCard
                   key={item.rankingKey}
@@ -408,14 +408,14 @@ export default async function SurveyPage({ params }: PageProps) {
                   model={item.model}
                 />
               ))}
-            </div>
+            </CardGrid>
           </SurveyOutboundLinkArea>
-        </section>
+        </PanelGrid>
       )}
 
       {readerQuestions.length > 0 && (
         <section id="more-questions" className="mb-4 scroll-mt-24">
-          <SectionHeader title="ほかの問い" />
+          <SectionHeader title="ほかのランキング" />
           <SurveyOutboundLinkArea surface="survey_ranking">
             <div className="grid gap-3 sm:grid-cols-2">
               {readerQuestions.map((item) => (
@@ -438,9 +438,9 @@ export default async function SurveyPage({ params }: PageProps) {
       {relatedArticles.length > 0 && (
         // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
         <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
-          <SectionHeader title="理由と背景を読む" hideRule />
+          <SectionHeader title="ブログ記事" hideRule />
           <SurveyOutboundLinkArea surface="survey_blog">
-            <ArticleTeaserGrid>
+            <CardGrid>
               {relatedArticles.map((article) => (
                 <ArticleTeaserCard
                   key={article.slug}
@@ -452,7 +452,7 @@ export default async function SurveyPage({ params }: PageProps) {
                   }}
                 />
               ))}
-            </ArticleTeaserGrid>
+            </CardGrid>
           </SurveyOutboundLinkArea>
         </PanelGrid>
       )}
@@ -460,7 +460,7 @@ export default async function SurveyPage({ params }: PageProps) {
       {relatedThemes.length > 0 && (
         <section id="related-themes" className="mb-4 scroll-mt-24">
           <SectionHeader
-            title="テーマで深掘りする"
+            title="テーマ"
           />
           <SurveyOutboundLinkArea surface="survey_theme">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

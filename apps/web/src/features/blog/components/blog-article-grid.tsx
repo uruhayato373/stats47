@@ -1,7 +1,7 @@
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 
-import { ArticleTeaserCard, ArticleTeaserGrid } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
 import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
@@ -30,9 +30,9 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
     );
   }
 
-  // 記事カードの格子 (列は本文の幅で 1 → 2 → 3 列。部品の台帳 article-teaser-grid)。2026-10-29 にテーマの記事欄と同じ部品へ寄せた
+  // 記事カードの格子 (列は本文の幅で 1 → 2 → 3 列。部品の台帳 card-grid)。2026-10-29 にテーマの記事欄と同じ部品へ寄せた
   return (
-    <ArticleTeaserGrid>
+    <CardGrid>
       {articles.map((article, index) => {
         const cardDate = formatCardDate(article.updatedAt ?? article.publishedAt);
         return (
@@ -54,6 +54,6 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
           />
         );
       })}
-    </ArticleTeaserGrid>
+    </CardGrid>
   );
 }

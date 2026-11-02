@@ -13,7 +13,7 @@ import { SurfaceLinkCard } from './SurfaceCard';
  * 記事カードと記事カードの格子 (部品の種類「記事カード」。2026-10-29)。見本の Blog app の記事カードに寄せる:
  * 画像が上 (サムネイルと同じ 40:21) → 題名 2 行 → 補足 1 行 (日付など)。並べる所は記事カードの格子に入れ、
  * 列の数は本文の幅で 1 → 2 → 3 列 (上限は枚数)。カード同士は線の格子で接ぎ、間を空けない。
- * 仕様の正本は部品の台帳 data/design/components.json の article-teaser-card / article-teaser-grid。
+ * 仕様の正本は部品の台帳 data/design/components.json の article-teaser-card / card-grid。
  */
 
 interface ArticleTeaserCardProps {
@@ -76,7 +76,7 @@ export function ArticleTeaserCard({
 }
 
 /** 枚数から列の数の上限を決める (1 枚 = 1 列、2 枚 = 2 列、3 枚以上 = 3 列) */
-export function articleTeaserGridColumns(count: number): 1 | 2 | 3 {
+export function cardGridColumns(count: number): 1 | 2 | 3 {
   if (count <= 1) return 1;
   if (count === 2) return 2;
   return 3;
@@ -93,8 +93,8 @@ function remainder(n: number, cols: number): number {
 }
 
 /** 最終行の空きマスを埋める白いセル。2 列の幅と 3 列の幅で必要な数が違うので、幅ごとに出し分ける */
-export function articleTeaserGridFillers(count: number): string[] {
-  const columns = articleTeaserGridColumns(count);
+export function cardGridFillers(count: number): string[] {
+  const columns = cardGridColumns(count);
   const two = columns >= 2 ? remainder(count, 2) : 0;
   const three = columns === 3 ? remainder(count, 3) : 0;
   return Array.from({ length: Math.max(two, three) }, (_, i) =>
@@ -102,19 +102,19 @@ export function articleTeaserGridFillers(count: number): string[] {
   );
 }
 
-interface ArticleTeaserGridProps {
+interface CardGridProps {
   /** 記事カード (ArticleTeaserCard) */
   children: ReactNode;
 }
 
-export function ArticleTeaserGrid({ children }: ArticleTeaserGridProps) {
+export function CardGrid({ children }: CardGridProps) {
   const count = Children.toArray(children).length;
   if (count === 0) return null;
   return (
-    <div data-slot-kind="article-teaser-grid" className="@container">
-      <PanelGrid className={COLUMN_CLASS[articleTeaserGridColumns(count)]}>
+    <div data-slot-kind="card-grid" className="@container">
+      <PanelGrid className={COLUMN_CLASS[cardGridColumns(count)]}>
         {children}
-        {articleTeaserGridFillers(count).map((className, i) => (
+        {cardGridFillers(count).map((className, i) => (
           <div key={`filler-${i}`} aria-hidden="true" data-cell="flush" className={className} />
         ))}
       </PanelGrid>
