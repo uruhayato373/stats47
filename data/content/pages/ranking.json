@@ -9583,7 +9583,7 @@
       "key": "household-debt-balance",
       "title": "負債現在高",
       "href": "/ranking/household-debt-balance",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:household-head-allowance-consumption-expenditure",
@@ -9615,7 +9615,7 @@
       "key": "household-housing-debt-balance",
       "title": "住宅・土地のための負債",
       "href": "/ranking/household-housing-debt-balance",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:household-income-by-type",
@@ -9663,7 +9663,7 @@
       "key": "household-savings-balance",
       "title": "貯蓄現在高",
       "href": "/ranking/household-savings-balance",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:household-securities-balance",
@@ -9671,7 +9671,7 @@
       "key": "household-securities-balance",
       "title": "有価証券の保有額",
       "href": "/ranking/household-securities-balance",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:household-survey-clothing-footwear-expenditure",

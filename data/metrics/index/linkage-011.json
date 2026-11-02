@@ -13250,7 +13250,7 @@
     },
     {
       "metricKey": "household-debt-balance",
-      "pageId": null,
+      "pageId": "ranking:household-debt-balance",
       "title": "負債現在高",
       "sources": [
         {

@@ -46,7 +46,7 @@
     },
     {
       "metricKey": "household-housing-debt-balance",
-      "pageId": null,
+      "pageId": "ranking:household-housing-debt-balance",
       "title": "住宅・土地のための負債",
       "sources": [
         {
@@ -845,7 +845,7 @@
     },
     {
       "metricKey": "household-savings-balance",
-      "pageId": null,
+      "pageId": "ranking:household-savings-balance",
       "title": "貯蓄現在高",
       "sources": [
         {
@@ -1076,7 +1076,7 @@
     },
     {
       "metricKey": "household-securities-balance",
-      "pageId": null,
+      "pageId": "ranking:household-securities-balance",
       "title": "有価証券の保有額",
       "sources": [
         {

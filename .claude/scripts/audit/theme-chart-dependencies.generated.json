@@ -8,8 +8,8 @@
       "themeKey": "real-income",
       "componentKey": "theme-real-income-actual-vs-disposable",
       "componentType": "line-chart",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "4592c1fe7b4b6461"
+      "expectedUnit": "円",
+      "expectedConfigHash": "50d5ad3b5efb307a"
     },
     {
       "metricKey": "ambulance-transported-deaths",
