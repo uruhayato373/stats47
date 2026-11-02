@@ -403,6 +403,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a05-05",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:frozen-gyoza-spending-prefecture-gap",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-05",
       "channel": "note",
       "status": "done",
       "target": "note:b-kakei-gyoza-counting",

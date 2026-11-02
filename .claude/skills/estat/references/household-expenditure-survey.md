@@ -4,6 +4,8 @@
 
 **分析の切り口 (都市比較・数量と単価・年収階級・長期推移・季節など) は調査の切り口台帳 `data/surveys/lenses/kakei-chousa.json` が正本** (担当 survey-curator、展開状況は `npm run surveys:lenses:status`)。**表と品目の採否は台帳 `data/estat/kakei-ledger/ledger.json` が正本** (全表の周期・年・地域数・分類軸と、年次品目表の品目ごとの指標の有無・採否)。e-Stat カタログ (`npm run estat:catalog:pull`) と metric config から `npm run estat:kakei-ledger:build` で作り、手で編集しない。指標を作らない・作る予定の判断は理由付きで `data/estat/kakei-ledger/decisions.json` に書く。`npm run estat:kakei-ledger:check` (PR CI) が台帳・config・判断の食い違いを止める。下の件数・表一覧は棚卸し時点の記録で、現在の件数は台帳の `summary` を読む。
 
+報道やクイズの「○○日本一」「○○市は全国 3 位」は、総務省が公表する県庁所在市と政令指定都市の **52 市・3 年平均** の順位で、サイトの都道府県別ランキング (県庁所在市の単年値) とは集計が違う (浜松・堺などの政令市は都道府県別に入らない)。この順位を記事に使うときは `node .claude/scripts/blog/fetch-kakei-city-average.mjs --slug <slug> --name <base> --item <cdCat01>:<品目名>` で e-Stat から作る (年次値の単純平均。静岡県の公表値と一致を確認済み)。切り口台帳の「定義を読む」「都市の間で比べる」の材料。
+
 年次値を新しい年へ更新したら、題 (title / seoTitle) に旧年の値が残る家計調査の記事を `node .claude/scripts/blog/find-kakei-stale-title-values.mjs` で一覧し、本文・図とあわせて書き直す (2026-11-02 に 2025 年へ更新した時点で 138 本)。
 
 調査: 家計調査（総務省）。家計収支編の二人以上・総世帯・単身世帯と、貯蓄・負債編の二人以上世帯を分けて扱う。
