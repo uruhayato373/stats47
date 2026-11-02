@@ -19,6 +19,7 @@ import {
   resolveTopicKey,
   toTopicResolutionInput,
 } from '@stats47/data-configs/topics';
+import { metricDisplayName } from '@stats47/ranking';
 import {
   readRankingItemsBySurveyFromR2,
   readRankingValuesFromR2,
@@ -47,7 +48,6 @@ import { listArticleSummariesBySurveyId } from '@/features/blog/server';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
-  isCaveatNote,
   type CategoryRankingListItem,
 } from '@/features/ranking';
 import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
@@ -248,10 +248,9 @@ export default async function SurveyPage({ params }: PageProps) {
     return {
       rankingKey: item.rankingKey,
       areaType: 'prefecture',
-      title:
-        item.subtitle && !isCaveatNote(item.subtitle)
-          ? `${item.title}（${item.subtitle}）`
-          : item.title,
+      // 名前の組み立ては共通関数に寄せる。補足が題を含む家計調査の指標で「納豆消費支出額（…年間納豆消費支出額）」と
+      // 同じ語が 2 回並んでいた (2026-11-02)
+      title: metricDisplayName(item),
       subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
@@ -297,10 +296,7 @@ export default async function SurveyPage({ params }: PageProps) {
       const valuesResult = featuredValues[idx];
       if (!isOk(valuesResult) || valuesResult.data.length === 0) return [];
 
-      const title =
-        item.subtitle && !isCaveatNote(item.subtitle)
-          ? `${item.title}（${item.subtitle}）`
-          : item.title;
+      const title = metricDisplayName(item);
       const model = buildFeaturedRankingCardModel({
         rankingKey: item.rankingKey,
         title,
