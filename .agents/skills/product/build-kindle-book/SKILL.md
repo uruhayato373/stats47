@@ -35,6 +35,10 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
 
 ## フロー（1 冊を出品可能にする）
 
+0. **切り口から企画する**: 調査の切り口台帳で Kindle の役割を持つ切り口を読む
+   (`npm run surveys:lenses:status -- --survey kakei-chousa`)。1 冊は 1 つの切り口 (または組み合わせ) を体系的に読む本として設計し、
+   教材の企画を章にしたら `npm run reference:expansion -- record --channel kindle --status planned --target kindle:<書籍ID> --by kindle-publisher` で記録する
+   (規約 `.claude/rules/survey-content-standards.md`「調査の切り口台帳」)。
 1. **企画を manuscript へ昇格**: `book-catalog.ts` の対象書籍に fresh 章（はじめに/読み方/終章 横断分析）を
    `freshFile` で割り当て、blog 章の `blogSlug` が R2 実在することを確認して `status: "manuscript"` にする。
 2. **書き下ろしを執筆・レビュー**: fresh 章の本文は `article-writer` が起草 → `blog-critic` が別コンテキストで

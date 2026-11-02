@@ -157,7 +157,8 @@
               "note",
               "x",
               "instagram",
-              "youtube"
+              "youtube",
+              "kindle"
             ]
           }
         },
@@ -196,6 +197,14 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "lensIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)+$"
+          },
+          "description": "この問いが属する調査の切り口 (data/surveys/lenses/<surveyId>.json の lenses[].id)。切り口は資料ではなく調査の持ち物で、資料ごとに分類を作らない。surveyIds に切り口台帳のある調査を持つ企画は 1 つ以上必須 (npm run surveys:lenses:check)"
         }
       },
       "allOf": [

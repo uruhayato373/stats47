@@ -28,6 +28,12 @@ const TABLES: Record<string, { revision: string; codeTable: string }> = {
   "0004023606": { revision: "2025", codeTable: "0004023606" },
 };
 
+/**
+ * 品目分類 (収支項目分類) ではない家計調査の表。品目コードの照合の対象外 (2026-11-02)。
+ * 貯蓄・負債編は貯蓄・負債の項目 (cat01 = 012 貯蓄・028 負債 など) で、収支項目分類の改定と関係しない。
+ */
+const NON_ITEM_CLASSIFICATION_TABLES = new Set(["0002210008"]);
+
 interface CheckResult {
   key: string;
   item: string | null;
@@ -65,6 +71,7 @@ function main(): void {
     const filter = config.source.filter ?? {};
     // 総数コードの無い費目は品目の合算 (axisSum) で持つ。合算する品目それぞれを検査する
     const codes = filter.cdCat01 ? [filter.cdCat01] : filter.axisSum?.axis === "cat01" ? filter.axisSum.codes : [];
+    if (NON_ITEM_CLASSIFICATION_TABLES.has(statsDataId)) continue;
     const table = TABLES[statsDataId];
     if (!table) {
       unknownTables.set(statsDataId, (unknownTables.get(statsDataId) ?? 0) + 1);

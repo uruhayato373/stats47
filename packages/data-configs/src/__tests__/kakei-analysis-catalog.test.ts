@@ -24,7 +24,7 @@ const metrics = new Map(
   )
 );
 
-describe('家計調査の切り口台帳', () => {
+describe('家計調査の分析単位の台帳', () => {
   it('出典の分類条件と公開先の参照が一意である', () => {
     expect(validateKakeiAnalyses(KAKEI_ANALYSES, { pages, metrics })).toEqual(
       []

@@ -71,6 +71,7 @@ import {
  */
 
 import { FONT_FAMILY } from "../shared/color";
+import { TILE_GRID_LAYOUT } from "@stats47/visualization/d3/constants/tile-grid-layout";
 import { formatValueLabel, resolveValuePrecision } from "../shared/axis";
 // D3 カラースキーム (d3-scale-chromatic) を「生成時」に評価し、結果の rgb() を静的 SVG へ焼き込む。
 // （SVG 実行時に D3 は不要。）依存はモノレポ root に hoist 済（migration-flow / remotion が宣言）。
@@ -179,55 +180,12 @@ function resolveInterp(scheme?: string): ((t: number) => string) | null {
  * 実測で完全な均等格子（ピッチ 38.167 / 原点 33,45・丸め誤差 0.0175px）と確認できたので
  * 格子表現に置き換えた。サイズ変更は {@link TILE} と {@link GAP} だけで済む。
  */
-const TILE_GRID: Record<string, readonly [number, number, number, number]> = {
-  "01": [12, 0, 2, 2], // 北海道
-  "02": [12, 3, 2, 1], // 青森
-  "03": [13, 4, 1, 1], // 岩手
-  "04": [13, 5, 1, 1], // 宮城
-  "05": [12, 4, 1, 1], // 秋田
-  "06": [12, 5, 1, 1], // 山形
-  "07": [12, 6, 2, 1], // 福島
-  "08": [13, 7, 1, 1], // 茨城
-  "09": [12, 7, 1, 1], // 栃木
-  "10": [11, 7, 1, 1], // 群馬
-  "11": [12, 8, 1, 1], // 埼玉
-  "12": [13, 8, 1, 2], // 千葉
-  "13": [12, 9, 1, 1], // 東京
-  "14": [12, 10, 1, 1], // 神奈川
-  "15": [10, 6, 2, 1], // 新潟
-  "16": [9, 6, 1, 1], // 富山
-  "17": [8, 6, 1, 1], // 石川
-  "18": [8, 7, 1, 1], // 福井
-  "19": [11, 8, 1, 1], // 山梨
-  "20": [10, 7, 1, 2], // 長野
-  "21": [9, 7, 1, 2], // 岐阜
-  "22": [10, 9, 2, 1], // 静岡
-  "23": [9, 9, 1, 1], // 愛知
-  "24": [8, 9, 1, 2], // 三重
-  "25": [8, 8, 1, 1], // 滋賀
-  "26": [6, 8, 2, 1], // 京都
-  "27": [6, 9, 1, 1], // 大阪
-  "28": [5, 8, 1, 2], // 兵庫
-  "29": [7, 9, 1, 1], // 奈良
-  "30": [6, 10, 2, 1], // 和歌山
-  "31": [4, 8, 1, 1], // 鳥取
-  "32": [3, 8, 1, 1], // 島根
-  "33": [4, 9, 1, 1], // 岡山
-  "34": [3, 9, 1, 1], // 広島
-  "35": [2, 8, 1, 2], // 山口
-  "36": [4, 12, 1, 1], // 徳島
-  "37": [4, 11, 1, 1], // 香川
-  "38": [3, 11, 1, 1], // 愛媛
-  "39": [3, 12, 1, 1], // 高知
-  "40": [1, 10, 1, 1], // 福岡
-  "41": [0, 10, 1, 1], // 佐賀
-  "42": [0, 11, 1, 1], // 長崎
-  "43": [0, 12, 1, 1], // 熊本
-  "44": [1, 11, 1, 1], // 大分
-  "45": [1, 12, 1, 1], // 宮崎
-  "46": [0, 13, 2, 1], // 鹿児島
-  "47": [0, 15, 1, 1], // 沖縄
-};
+const TILE_GRID: Record<string, readonly [number, number, number, number]> = Object.fromEntries(
+  // The site layout is the single source; keep prefecture-code order so blog SVG output stays byte-stable.
+  [...TILE_GRID_LAYOUT]
+    .sort((a, b) => a.id - b.id)
+    .map((cell) => [String(cell.id).padStart(2, "0"), [cell.x, cell.y, cell.w ?? 1, cell.h ?? 1] as const])
+);
 
 /**
  * 都道府県コード → 正式名称。`@stats47/area` の prefectures.json から引く (独自の表を持たない)。

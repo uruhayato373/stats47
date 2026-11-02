@@ -1,1 +1,0 @@
-../../../../../.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md

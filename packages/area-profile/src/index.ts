@@ -25,5 +25,6 @@ export * from "./highlights";
 export type {
   AreaDatabookSnapshot,
   DatabookHighlightMeta,
+  DatabookKakeiTopItem,
   DatabookMetricValue,
 } from "./types/databook-snapshot";

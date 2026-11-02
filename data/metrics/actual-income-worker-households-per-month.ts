@@ -35,8 +35,8 @@ export const actualIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "実収入ランキング都道府県【2024年】｜1位東京都（794.2千円）",
-  "seoDescription": "2024年の実収入の都道府県別ランキング。1位東京都（794.2千円）、最下位沖縄県（493.6千円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "実収入のランキング｜県庁所在市の二人以上の勤労者世帯の月額",
+  "seoDescription": "家計調査の二人以上の勤労者世帯について、県庁所在市ごとの 1 世帯当たり月額の実収入を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
   "subtitle": "二人以上の勤労者世帯・1世帯当たり月額"
 };

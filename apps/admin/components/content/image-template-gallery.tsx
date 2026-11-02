@@ -6,14 +6,16 @@ import type { Template } from '../../../../.claude/scripts/media/lib/workspace.m
 import { IMAGE_PURPOSES } from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
 import { CHART_IMAGE_COPY_POLICY } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 import {
-  basicTemplateBranches,
   basicTemplateQuery,
+  templateCatalog,
+  templateGroup,
+  TEMPLATE_GROUPS,
   type StatisticalSampleView,
 } from '@/lib/image-template-basics';
 import { mediaUrl } from '@/lib/media-workspace-navigation';
 import { TEMPLATE_CHANNELS } from '@/lib/media-template-examples';
 import { MediaWorkspaceNav } from './media-workspace-nav';
-import { ImageTemplateTree, type GalleryBranch } from './image-template-tree';
+import { ImageTemplateTree } from './image-template-tree';
 import { TemplateStatisticalPreview } from './template-statistical-preview';
 import { PanelCard, StatusBadge } from '@/components/admin-ui';
 import { Button, buttonVariants, Input, Textarea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@stats47/components';
@@ -36,6 +38,28 @@ function updateView(values: Record<string, string>) {
   url.search = new URLSearchParams(values).toString();
   window.history.replaceState(null, '', url);
 }
+/** Purposes offered as filters: only those some statistical form declares. */
+const FILTER_PURPOSES = ['ranking', 'comparison', 'trend', 'composition', 'relationship', 'distribution'] as const;
+function MapVariants({ template }: { template: EditableTemplate }) {
+  if (!template.variants?.length) return null;
+  const hasBuzzMap = template.variants.some((variant) => variant.buzzMapTypes?.length);
+  return (
+    <PanelCard title="描き分け" description={hasBuzzMap ? '同じ型の中の重ね方・出し方。バズ地図の型はこの描き分けに当たる。' : '同じ型・同じ描画部品の中の出し方。'}>
+      <ul className="divide-y divide-border text-sm">
+        {template.variants.map((variant) => (
+          <li key={variant.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
+            <span className="min-w-40 font-medium">{variant.label}</span>
+            <StatusBadge tone={variant.status === 'ready' ? 'good' : 'neutral'}>{variant.status === 'ready' ? '描画あり' : '未実装'}</StatusBadge>
+            {!!variant.buzzMapTypes?.length && (
+              <span className="text-muted-foreground">バズ地図 {variant.buzzMapTypes.map((type) => (type === 'flow' ? 'flow' : '型' + type)).join('・')}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+      {hasBuzzMap && <Link href="/buzz-map" className={buttonVariants({ variant: 'ghost', size: 'sm' })}>バズ地図の候補を見る</Link>}
+    </PanelCard>
+  );
+}
 function TemplateCard({
   template,
   purpose,
@@ -45,7 +69,7 @@ function TemplateCard({
   samples,
 }: {
   template: EditableTemplate;
-  purpose: string;
+  purpose?: string;
   draft?: PolicyDraft;
   onDraft: (draft: PolicyDraft | null) => void;
   onSave: Save;
@@ -59,19 +83,30 @@ function TemplateCard({
     JSON.stringify(profiles) !== JSON.stringify(template.profiles);
   const edit = (patch: Partial<PolicyDraft>) =>
     onDraft({ policy, profiles, revision, ...patch });
-  const returnTo = mediaUrl('templates', { template: template.id, purpose });
+  const returnTo = mediaUrl('templates', { template: template.id, ...(purpose ? { purpose } : {}) });
+  const group = templateGroup(template);
+  const isChart = group !== 'asset';
   return (
     <section aria-label="共通の基本形" className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-base font-semibold">
-          {IMAGE_PURPOSES[purpose]} / {template.label}
-        </h2>
-        <StatusBadge tone="neutral">基本形を検討中</StatusBadge>
+        <div className="space-y-1">
+          <h2 className="text-base font-semibold">{template.label}</h2>
+          <p className="text-sm text-muted-foreground">
+            {TEMPLATE_GROUPS.find((g) => g.id === group)?.label}
+            {template.purposes?.length ? ' · 用途：' + template.purposes.map((p) => IMAGE_PURPOSES[p as keyof typeof IMAGE_PURPOSES]).join('・') : ''}
+          </p>
+        </div>
+        {isChart && <StatusBadge tone="neutral">基本形を検討中</StatusBadge>}
       </div>
-      <TemplateStatisticalPreview samples={samples} />
+      {isChart ? (
+        <TemplateStatisticalPreview samples={samples} />
+      ) : (
+        <p className="text-sm text-muted-foreground">統計図ではないため、型の見本はありません。実物は「この型の使用先」で確認します。</p>
+      )}
+      <MapVariants template={template} />
       <PanelCard title="共通ルール">
         <p className="text-sm">{policy}</p>
-        <p className="text-sm">{CHART_IMAGE_COPY_POLICY}</p>
+        {isChart && <p className="text-sm">{CHART_IMAGE_COPY_POLICY}</p>}
       </PanelCard>
       <div className="flex flex-wrap gap-2">
         <Sheet>
@@ -140,7 +175,7 @@ function TemplateCard({
         </Sheet>
         <Link href={mediaUrl('images', {
               template: template.id,
-              purpose,
+              ...(purpose ? { purpose } : {}),
               returnTo,
             })} className={buttonVariants({ variant: "ghost", size: "sm" })}>
             この型の使用先
@@ -163,32 +198,23 @@ export function TemplateGallery({
   const [drafts, setDrafts] = useState<Record<string, PolicyDraft>>({});
   const [listOpen, setListOpen] = useState(false);
   const query = params.get('q') ?? '';
+  const purpose = params.get('purpose') ?? '';
   const dirty = new Set(Object.keys(drafts));
-  const branches = useMemo(() => basicTemplateBranches(templates), [templates]);
-  const shown = branches.filter((branch) =>
-    [IMAGE_PURPOSES[branch.purpose], branch.template.label]
-      .join(' ')
-      .includes(query)
+  const shown = useMemo(
+    () => templateCatalog(templates, purpose || undefined).filter((template) => template.label.includes(query)),
+    [templates, purpose, query]
   );
-  const selected =
-    shown.find(
-      (branch) =>
-        branch.templateId === params.get('template') &&
-        (!params.get('purpose') || branch.purpose === params.get('purpose'))
-    ) ??
-    shown.find((branch) => branch.purpose === params.get('purpose')) ??
-    shown[0];
+  const selected = shown.find((template) => template.id === params.get('template')) ?? shown[0];
   useEffect(() => {
     if (!selected) return;
     const values = basicTemplateQuery(Object.fromEntries(params));
-    values.template = selected.templateId;
-    values.purpose = selected.purpose;
+    values.template = selected.id;
     if (new URLSearchParams(values).toString() !== params.toString())
       updateView(values);
   }, [params, selected]);
   useEffect(() => {
     if (content.current) content.current.scrollTop = 0;
-  }, [selected?.key]);
+  }, [selected?.id]);
   useEffect(() => {
     if (!dirty.size) return;
     const warn = (event: BeforeUnloadEvent) => event.preventDefault();
@@ -220,20 +246,19 @@ export function TemplateGallery({
       document.removeEventListener('click', navigate, true);
     };
   }, [dirty.size]);
-  const choose = (branch: GalleryBranch) => {
-    updateView({
-      template: branch.templateId,
-      purpose: branch.purpose,
-      ...(query ? { q: query } : {}),
-    });
-    setListOpen(false);
+  const view = (patch: Record<string, string>) => {
+    const values = { ...basicTemplateQuery(Object.fromEntries(params)), ...patch };
+    updateView(Object.fromEntries(Object.entries(values).filter(([, v]) => v)));
   };
   const tree = (
     <ImageTemplateTree
-      branches={shown}
-      selected={selected?.key}
+      templates={shown}
+      selected={selected?.id}
       dirty={dirty}
-      onSelect={choose}
+      onSelect={(template) => {
+        view({ template: template.id });
+        setListOpen(false);
+      }}
     />
   );
   return (
@@ -241,17 +266,17 @@ export function TemplateGallery({
       aria-label="型の基本形を確認"
       className="@container flex min-h-0 flex-1 flex-col gap-3"
     >
-      <MediaWorkspaceNav active="templates" template={selected?.templateId} />
+      <MediaWorkspaceNav active="templates" template={selected?.id} />
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border pb-3">
         <div className="@min-[760px]:hidden">
           <Sheet open={listOpen} onOpenChange={setListOpen}>
             <SheetTrigger render={<Button variant="outline" size="sm" />}>
-                型分類を選ぶ
+                図の型を選ぶ
               </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>型分類</SheetTitle>
-                <SheetDescription>目的と図の形を選びます。</SheetDescription>
+                <SheetTitle>図の型</SheetTitle>
+                <SheetDescription>図の形を選びます。用途は上の絞り込みで選びます。</SheetDescription>
               </SheetHeader>
               <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
                 {tree}
@@ -260,17 +285,25 @@ export function TemplateGallery({
           </Sheet>
         </div>
         <Input
-          aria-label="型分類を検索"
-          placeholder="型分類を検索"
-          className="max-w-xs"
+          aria-label="図の型を検索"
+          placeholder="図の型を検索"
+          className="max-w-48"
           value={query}
-          onChange={(e) =>
-            updateView({
-              ...basicTemplateQuery(Object.fromEntries(params)),
-              q: e.target.value,
-            })
-          }
+          onChange={(e) => view({ q: e.target.value })}
         />
+        <div role="group" aria-label="用途で絞る" className="flex flex-wrap gap-1">
+          {['', ...FILTER_PURPOSES].map((id) => (
+            <Button
+              key={id || 'all'}
+              size="sm"
+              variant={purpose === id ? 'secondary' : 'ghost'}
+              aria-pressed={purpose === id}
+              onClick={() => view({ purpose: id })}
+            >
+              {id ? IMAGE_PURPOSES[id as keyof typeof IMAGE_PURPOSES] : 'すべての用途'}
+            </Button>
+          ))}
+        </div>
         {dirty.size > 0 && (
           <StatusBadge tone="warn">未保存の方針 {dirty.size}件</StatusBadge>
         )}
@@ -278,9 +311,9 @@ export function TemplateGallery({
       <div className="grid min-h-0 flex-1 gap-4 @min-[760px]:grid-cols-[216px_minmax(0,1fr)]">
         <aside
           className="hidden min-h-0 flex-col gap-3 border-r border-border pr-3 @min-[760px]:flex"
-          aria-label="型分類を一覧から選ぶ"
+          aria-label="図の型を一覧から選ぶ"
         >
-          <h2 className="shrink-0 font-semibold">型分類</h2>
+          <h2 className="shrink-0 font-semibold">図の型</h2>
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
             {tree}
           </div>
@@ -294,34 +327,34 @@ export function TemplateGallery({
         >
           {selected ? (
             <TemplateCard
-              key={selected.templateId}
-              template={selected.template}
-              purpose={selected.purpose}
+              key={selected.id}
+              template={selected}
+              purpose={purpose || undefined}
               samples={samples.filter(
                 (sample) =>
-                  sample.templateId === selected.templateId &&
-                  sample.purpose === selected.purpose
+                  sample.templateId === selected.id &&
+                  (!purpose || sample.purpose === purpose)
               )}
-              draft={drafts[selected.templateId]}
+              draft={drafts[selected.id]}
               onSave={onSave}
               onDraft={(draft) =>
                 setDrafts((current) => {
                   const next = { ...current };
                   if (
                     draft &&
-                    (draft.policy !== selected.template.policy ||
+                    (draft.policy !== selected.policy ||
                       JSON.stringify(draft.profiles) !==
-                        JSON.stringify(selected.template.profiles))
+                        JSON.stringify(selected.profiles))
                   )
-                    next[selected.templateId] = draft;
-                  else delete next[selected.templateId];
+                    next[selected.id] = draft;
+                  else delete next[selected.id];
                   return next;
                 })
               }
             />
           ) : (
             <p className="text-sm text-muted-foreground">
-              該当する分類はありません。
+              該当する型はありません。
             </p>
           )}
         </div>

@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   collectTemplateMetricKeys,
+  listAllMetrics,
   AREA_DATABOOK_TEMPLATE,
   METRIC_POLARITY,
 } from "@stats47/data-configs";
@@ -13,6 +14,12 @@ import { writeR2Staging } from "@stats47/r2-storage/server";
 import { readJapanSeries } from "@stats47/stats-r2/readers";
 
 import { assertAreaHighlightsHealthy } from "../highlights/check-area-highlights";
+import {
+  KAKEI_TOP_RANK_LIMIT,
+  groupKakeiItemKeys,
+  pickKakeiTopItems,
+  type KakeiTopCandidate,
+} from "./kakei-top-items";
 import { resolveNationalComparison } from "./national-comparison";
 import {
   buildQualifiedLabel,
@@ -27,6 +34,7 @@ import type {
   DatabookMetricValue,
 } from "../types/databook-snapshot";
 import { AREA_DATABOOK_SCHEMA_VERSION, areaDatabookKeyPath } from "../types/databook-snapshot";
+import type { RankedValue } from "../highlights/select-area-highlights";
 import type { RankingItem } from "@stats47/ranking";
 
 const AREA_TYPE = "prefecture";
@@ -107,6 +115,8 @@ export async function buildAreaDatabookSnapshots(
     metricsResolved += 1;
   }
 
+  const kakeiCandidates = await collectKakeiTopCandidates(areaFilter);
+
   const now = new Date().toISOString();
   const snapshots: AreaDatabookSnapshot[] = [...byArea.entries()].map(
     ([areaCode, entry]) => ({
@@ -115,10 +125,72 @@ export async function buildAreaDatabookSnapshots(
       areaName: entry.areaName,
       metrics: entry.metrics,
       agriTop10: [],
+      kakeiTopItems: pickKakeiTopItems(kakeiCandidates.get(areaCode) ?? []),
       generatedAt: now,
     }),
   );
   return { snapshots, metricsResolved, metricsMissing };
+}
+
+/** 家計調査の指標を R2 から並行して読む本数。 */
+const KAKEI_READ_CONCURRENCY = 12;
+
+/**
+ * 家計調査の品目 (kakeiDetailItemCode) の指標すべての最新年を読み、県ごとに全国 3 位以内の候補を集める。
+ * 公開中 (KNOWN_RANKING_KEYS) の指標だけを対象にする (県ページからのリンク先が無い品目を出さない)。
+ * 読めなかった指標は候補に入れない。
+ */
+async function collectKakeiTopCandidates(
+  areaFilter: Set<string> | null,
+): Promise<Map<string, KakeiTopCandidate[]>> {
+  const groups = groupKakeiItemKeys(listAllMetrics().filter((m) => m.isActive === true));
+  const targets = [...groups.entries()].flatMap(([itemCode, keys]) =>
+    keys.filter((key) => KNOWN_RANKING_KEYS.has(key)).map((key) => ({ itemCode, key })),
+  );
+  const candidatesByArea = new Map<string, KakeiTopCandidate[]>();
+  let unreadable = 0;
+
+  for (let start = 0; start < targets.length; start += KAKEI_READ_CONCURRENCY) {
+    await Promise.all(
+      targets.slice(start, start + KAKEI_READ_CONCURRENCY).map(async ({ itemCode, key }) => {
+        const itemResult = await readRankingItemFromR2(key, AREA_TYPE);
+        const item = itemResult.success ? itemResult.data : null;
+        const latest = item?.latestYear;
+        if (!item || !latest?.yearCode) {
+          unreadable += 1;
+          return;
+        }
+        const valuesResult = await listRankingValues(key, AREA_TYPE, latest.yearCode);
+        if (!valuesResult.success || valuesResult.data.length === 0) {
+          unreadable += 1;
+          return;
+        }
+        const ranked: RankedValue[] = valuesResult.data
+          .filter((rv) => rv.value !== null && rv.rank >= 1)
+          .map((rv) => ({ rank: rv.rank, value: rv.value as number }));
+        for (const rv of valuesResult.data) {
+          if (rv.value === null || rv.rank < 1 || rv.rank > KAKEI_TOP_RANK_LIMIT) continue;
+          if (areaFilter && !areaFilter.has(rv.areaCode)) continue;
+          const list = candidatesByArea.get(rv.areaCode) ?? [];
+          list.push({
+            itemCode,
+            rankingKey: key,
+            label: item.readerLabel || item.title || item.rankingName || key,
+            value: rv.value,
+            unit: item.unit,
+            year: latest.yearName,
+            rank: rv.rank,
+            ranked,
+          });
+          candidatesByArea.set(rv.areaCode, list);
+        }
+      }),
+    );
+  }
+  if (unreadable > 0) {
+    logger.warn({ unreadable, targets: targets.length }, "家計調査の上位品目: R2 から読めない指標があり候補に入れなかった");
+  }
+  return candidatesByArea;
 }
 
 /** item.json から県の「特徴」の候補メタ (県に依存しない部分) を作る。margin は県ごとに足す。 */

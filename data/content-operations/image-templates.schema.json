@@ -60,6 +60,38 @@
             "null"
           ]
         },
+        "group": {
+          "description": "chart = 主な統計図、chart-minor = 使用例の少ない統計図、asset = 統計図以外の素材 (カード・カバー等)。省略時は asset",
+          "enum": ["chart", "chart-minor", "asset"]
+        },
+        "purposes": {
+          "description": "この型で描ける用途 (taxonomy.mjs の IMAGE_PURPOSES)。型の木構造ではなく属性として持つ",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["ranking", "comparison", "trend", "composition", "relationship", "distribution", "explanation", "navigation", "reference"]
+          }
+        },
+        "variants": {
+          "description": "同じ型の中の描き分け (地図の重ね方・出し方)。別の型にはしない",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "status"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z-]+$" },
+              "label": { "type": "string", "minLength": 1 },
+              "status": { "enum": ["ready", "planned"] },
+              "buzzMapTypes": {
+                "description": "バズ地図の型 (buzz-map-standards.md §1) のうち、この描き分けに当たるもの",
+                "type": "array",
+                "uniqueItems": true,
+                "items": { "type": "string", "pattern": "^([A-F]|flow)$" }
+              }
+            }
+          }
+        },
         "profiles": {
           "type": "object",
           "additionalProperties": false,

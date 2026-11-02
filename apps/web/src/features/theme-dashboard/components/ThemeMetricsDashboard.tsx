@@ -9,6 +9,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { resolveChartColorHex, type CatalogMetricGroup, type CatalogSection } from '@stats47/data-configs/theme-catalog';
 import { metricDisplayName } from "@stats47/ranking";
+import { resolveValuePrecision } from "@stats47/utils";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { SourcesSheet } from '@/components/charts/SourcesSheet';
@@ -195,6 +196,9 @@ export function ThemeMetricsDashboard({
           : nationalValue ?? null,
         rank: selectedPrefectureCode ? (target?.rank ?? null) : null,
         total,
+        precision: resolveValuePrecision(
+          d.rankingValues.flatMap((v) => (typeof v.value === 'number' ? [v.value] : []))
+        ),
         ...source,
         nationalValue,
         series: d.nationalSeries ?? [],

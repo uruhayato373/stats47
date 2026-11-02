@@ -17,6 +17,7 @@ co_agents: [note-critic]
 
 ```bash
 npm run reference:expansion -- pending --channel note          # 未着手の企画
+npm run surveys:lenses:status -- --survey kakei-chousa   # 切り口ごとの役割と未着手 (家計調査など切り口台帳のある調査)
 npx tsx .claude/scripts/note/reference/build-reference-note.ts --analysis <企画ID> --register
 npx tsx .claude/scripts/note/reference/build-reference-note.ts --pending --register   # 都道府県の値で答える未着手の企画をすべて
 ```

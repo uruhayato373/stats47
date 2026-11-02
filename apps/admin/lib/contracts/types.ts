@@ -489,6 +489,8 @@ export interface BuzzMapEntryDTO {
   primaryUrl?: string | null;
   breakdown?: Record<string, number>;
   aliasesOf?: string[];
+  /** Image-type ledger form + drawing variant resolved from recommendedType (A–F, flow). */
+  imageType: { templateId: string; label: string; status: 'ready' | 'planned' } | null;
   assets: BuzzMapAssetStatusDTO | null;
   post: BuzzMapPostStatusDTO | null;
   r2AssetBaseUrl: string | null;

@@ -3,6 +3,9 @@ paths:
   - "apps/web/src/{features/survey,app/survey}/**"
   - ".claude/{scripts/surveys,skills/survey}/**"
   - "data/surveys/**"
+  - "config/schema/surveys.lenses.schema.json"
+  - ".claude/scripts/lib/survey-lenses.mjs"
+  - "packages/data-configs/src/kakei-analysis-catalog.ts"
   - ".claude/agents/survey-curator.md"
 ---
 # survey コンテンツクラスター標準 (survey-content-standards)
@@ -16,6 +19,9 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
 > `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
+> **同じ調査の別 ID は 1 つのハブにまとめる**: 指標の紐付けで ID が分かれていても (家計調査は品目別 `kakei-chousa` と社会・人口統計体系経由の
+> `household-survey`)、読者にとって 1 つの調査ならハブは 1 つにする。表は `packages/data-configs/src/content/href.ts` の `SURVEY_HUB_ALIASES`
+> (リンク・一覧・サイトマップ・301 がこの表を読む)。紐付けの ID は変えない。2 つ目の編集ハブを作らない (2026-11-02 オーナー判断)。
 > **紐付け (ranking↔survey) の正典は別**: `.claude/rules/survey-linkage-standards.md` (surveys.json / provenance)。
 > 本 rule は**編集コンテンツ**、linkage-standards は**紐付けメタ**。両方 survey-curator が所有する。
 > 横展開の進捗・census 実験の計測は `data/surveys/{portfolio,experiments}.json`
@@ -84,6 +90,8 @@ apps/web/src/features/survey/survey-editorial.ts  ← survey 編集情報の git
   ├─ areaLabel / relatedHubs[]
   └─ relatedArticleSlugs[]
 
+data/surveys/lenses/<surveyId>.json  ← 調査の切り口台帳 (下の「調査の切り口台帳」)
+
 R2 app/survey/<id>/items.json
   └─ survey に属する ranking 一覧: 既存の導出を維持
 ```
@@ -94,6 +102,57 @@ R2 app/survey/<id>/items.json
 - 実装前に確認: survey page.tsx の exports・取得境界 / article repository・`related-articles.ts` の再利用可否 /
   既存 page_components・SectionHeader・ArticleShell / rules `coding-standards.md`・`ui-components.md`・`survey-linkage-standards.md` /
   docs `03_情報設計.md`・`04_デザインシステム.md`・`02_データアーキテクチャ.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
+
+## 調査の切り口台帳 (2026-11-02)
+
+1 つの統計調査が持つ分析の切り口 (家計調査なら「都市の間で比べる」「支出額を数量と単価に分ける」「年収階級で比べる」
+「長期推移を見る」など) は、**調査ごとの台帳** `data/surveys/lenses/<surveyId>.json` (JSON Schema
+`config/schema/surveys.lenses.schema.json`) を正本にする。担当は survey-curator。コンテンツの展開 (ランキング・テーマ・
+ブログ・note・Kindle・SNS) は、まずこの台帳の切り口と、切り口ごとのチャネルの役割から考える。
+
+- **切り口は資料 (本) の持ち物ではなく、調査の持ち物**。参考文献の規約が禁じる「資料ごとの分類」とは別物である
+  (`reference-source-standards.md` §5)。本・NotebookLM・自分たちの発想は、切り口に問いを足す材料にすぎない。
+  2026-11-02 に「資料ごとに分類を作らない」を「切り口の台帳を作らない」と読み違え、切り口を本の企画に付ける札へ格下げしかけた。
+- 台帳が持つもの: 切り口ごとの読者の問いの型・説明・地域の粒度 (`capital-cities` は県全体の値ではない、`national` はランキングにしない)・
+  使う表 (statsDataId)・軸・誤読の注意・チャネルごとの役割 (書いたチャネルが展開先の候補)・準備状況 (データの取得手段が無ければ
+  `blocked` と理由)。
+- 台帳が持たないもの: **展開の進み具合**。済み・企画中・見送りは展開記録 (`data/source-inventory/expansion.json`) と各チャネルの
+  正本から集計する (`npm run surveys:lenses:status`)。同じ状態を 2 か所に書くとずれる。
+- 参照の向き: 資料の問い (`data/source-inventory/<source>/<edition>/analyses.json` の `lensIds`) と、調査ごとの分析単位
+  (家計調査は `packages/data-configs/src/kakei-analysis-catalog.ts` の `lensId`。問い × 表の軸 × 載せるページ) が切り口を参照する。
+  **切り口台帳のある調査を `surveyIds` に持つ問いは、資料を問わず 1 つ以上の切り口に結ぶ** (文脈だけの資料は任意)。
+- 検査: `npm run surveys:lenses:check` (PR CI)。調査 id・表 id の実在、問いと分析単位からの参照の実在、未接続の問いを止める。
+  品目単位の「どの品目を指標にし、どれを見送ったか」は調査ごとの台帳 (家計調査は `data/estat/kakei-ledger/`) が持ち、切り口台帳には書かない。
+- 新しい調査に切り口台帳を作るときは、表の棚卸し (e-Stat カタログ `npm run estat:catalog:search`) を先に行い、切り口ごとに使う表を確かめてから書く。
+
+### コンテンツのサイクル (台帳 → 切り口 → 指標 → ページ・2026-11-02)
+
+同じ見落としを繰り返さないため、展開は次の鎖でだけ進め、各段の決まりを検査で止める。ページ側に「出す・出さない」の一覧を持たない。
+
+1. **e-Stat カタログ → 調査の台帳** (家計調査は `data/estat/kakei-ledger/`): すべての表に採用・予定・除外を理由付きで書く。
+   採用は指標か作成済みの分析単位から自動で決まり、予定・除外は `decisions.json` に書く。未判断の数は `maxUndecidedTables` を超えられない (縮小専用。判断したら下げる)
+2. **台帳 ↔ 切り口台帳**: 切り口が使う表は未判断にできない (`LENS_TABLE_UNDECIDED`)。採用・予定の表はどれかの切り口に属させる (`TABLE_WITHOUT_LENS`)。除外した表を切り口が使わない (`LENS_USES_EXCLUDED`)
+3. **台帳 → 指標・分析単位**: 指標 (`kind: kakei-chousa`) と分析単位 (`kakei-analysis-catalog.ts`) の両方を表の使い手として数える。予定の表を使う指標・図ができたら台帳を作り直す (`npm run estat:kakei-ledger:build`)
+4. **指標 → ページ**: テーマ・調査ハブ・ランキング・県ページは指標の定義と台帳を読むだけにする
+5. **週次レビュー**: `npm run weekly:audits` の survey-taxonomy が台帳と切り口台帳を検査し、予定のまま作られていない表 (`PLANNED_TABLES`) と未判断の数 (`UNDECIDED_TABLES`) を出す。レビュー本文の課題へ書き、backlog へ流す
+
+検査は `npm run estat:kakei-ledger:check` と `npm run surveys:lenses:check` (PR CI と週次)。
+
+### 面ごとの点検表 (切り口を展開するとき・2026-11-02)
+
+切り口をサイトへ展開するときは、切り口 1 つずつ、代表のページを localhost (`npm run dev:web`) で開いて下の面を点検する。
+1 ページで見つけた問題は型として扱い、同じ調査の全ページへ機械で直す (1 ページだけ手で直して終えない)。
+
+- **ランキング** (`/ranking/<key>`): 題・小見出しが台帳の地域の粒度と合う (家計調査は「県庁所在市の二人以上世帯」で、県全体の値と書かない)。
+  単位が測っているものと合う (食品は消費量、耐久財などは購入数量)。誤読しやすい品目に定義の注記がある (`kakei-definition-reading`)。
+  「同じ調査のランキング」が編集の `readerQuestions` を先に出す。
+- **テーマ** (`/themes/<key>`): 切り口のチャネルに `theme` があるとき、その指標が ThemeCatalog に入っている。全国集計 (`national`) の切り口を県の地図にしない。
+- **調査ハブ** (`/survey/<key>`): 地域の表記 (`areaLabel`)・読者の問い・注意点が台帳の `readerQuestion`・`caveats` と食い違わない。同じ調査の別ハブ (`relatedHubs`) へ行ける。
+- **導線**: ランキング → 調査ハブ → 関連記事 → ランキングの往復がどれも実在するページへ届く (soft 404 は `audit-site-links.mjs` で見る)。
+  切り口の記事 (ブログ) が、その指標のランキングの関連記事に出る (`rankingArticleIndex`)。
+- **UI**: 代表カードのフック文が値と単位を取り違えない。スマホ幅 (375px) で題・単位・注記が切れない。
+
+点検で見つけた型は、直す仕組み (lint・生成スクリプト・編集 TS) と一緒に記録する。直せないものは backlog にカードを起票する。
 
 ## 横展開の進め方 (小さく実証してから)
 

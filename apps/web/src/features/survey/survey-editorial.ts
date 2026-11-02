@@ -3,12 +3,6 @@ export interface SurveyReaderQuestion {
   rankingKey: string;
 }
 
-export interface SurveyRelatedHub {
-  surveyKey: string;
-  /** リンクの文言 (「品目別の支出額・購入数量のランキング」など、そのハブで何が分かるか) */
-  label: string;
-}
-
 export interface SurveyEditorialContent {
   summary: string;
   whatYouCanLearn: readonly string[];
@@ -16,8 +10,8 @@ export interface SurveyEditorialContent {
   caveats: readonly string[];
   /** ハブ冒頭の地域の表記。省略時は「47都道府県」。都市別の値を集める調査はここで言い換える */
   areaLabel?: string;
-  /** 同じ調査の別のハブ (家計調査は品目別と、社会・人口統計体系経由の収支の 2 つに分かれている) */
-  relatedHubs?: readonly SurveyRelatedHub[];
+  /** 「この調査を使う記事」の先頭に置く記事 (公開済みのものだけ出る)。残りは公開日の新しい順 */
+  relatedArticleSlugs?: readonly string[];
 }
 
 export function requiredSurveyReaderQuestionCount(
@@ -148,16 +142,22 @@ const SURVEY_EDITORIAL_CONTENT = {
   },
   'kakei-chousa': {
     summary:
-      '家計調査は、総務省統計局が世帯を継続的に抽出して、収入と支出、品目別の購入量などを毎月調べる基幹統計調査です。このハブでは、主に都道府県庁所在市の二人以上世帯について、年間の品目別支出額や購入量を比較できます。',
+      '家計調査は、総務省統計局が世帯を継続的に抽出し、家計簿から収入と支出、品目別の購入量などを毎月調べる基幹統計調査です。このハブでは、主に都道府県庁所在市の二人以上世帯について、品目別の支出額・購入数量と、勤労者世帯の実収入・可処分所得・費目別の支出割合を比較できます。',
+    // 2026-11-02 に収入・支出割合のハブ (household-survey) をこのハブへまとめた (/survey/household-survey は 301)
     areaLabel: '主に県庁所在市などの都市別',
-    relatedHubs: [
-      { surveyKey: 'household-survey', label: '収入・可処分所得・費目別の支出割合のランキング' },
+    relatedArticleSlugs: [
+      'frozen-gyoza-spending-prefecture-gap',
+      'bread-city-ranking-kyoto-quiz',
+      'rice-spending-quantity-gap-2025',
+      'tofu-consumption-prefecture-gap',
+      'wheat-flour-consumption-prefecture',
+      'mochi-consumption-prefecture-gap',
     ],
     whatYouCanLearn: [
       '納豆・カップ麺の支出額と、米・緑茶・牛肉の購入数量の地域差',
       '外食費や宿泊料などサービス支出の違い',
-      '電気・ガス・上下水道に対する世帯支出の差',
-      '食料費と消費支出総額から見た家計配分の違い',
+      '勤労者世帯の実収入と可処分所得、消費と貯蓄の配分の地域差',
+      '食料、住居、教育、交通・通信など費目別の支出割合と、食料費と消費支出総額から見た家計配分',
     ],
     readerQuestions: [
       {
@@ -177,8 +177,8 @@ const SURVEY_EDITORIAL_CONTENT = {
         rankingKey: 'cup-noodles-consumption-expenditure',
       },
       {
-        question: '牛肉の年間購入数量が多い都市は？',
-        rankingKey: 'beef-consumption-quantity',
+        question: '勤労者世帯の月間実収入が多い都市は？',
+        rankingKey: 'actual-income-worker-households-per-month',
       },
     ],
     caveats: [
@@ -186,6 +186,7 @@ const SURVEY_EDITORIAL_CONTENT = {
       '主な品目ランキングは二人以上世帯を対象とします。単身世帯や世帯人員が異なる集計と直接比較しないでください。',
       '支出額は価格と購入量の両方に左右されます。消費量の多さを判断するときは、数量の指標がある品目では数量も併せて確認してください。',
       '単年の年間値と3年平均の都市別ランキングは集計期間が異なります。同じ年の値として順位や増減を比較しないでください。',
+      '実収入と可処分所得は世帯人員、世帯主年齢、有業人員などの構成に影響されます。個人の賃金や生活水準そのものを示す値ではありません。',
     ],
   },
   'commercial-dynamics-survey': {
@@ -580,44 +581,6 @@ const SURVEY_EDITORIAL_CONTENT = {
       '住民基本台帳上の住所異動を集計したフロー統計であり、各地域に住む人口の総数を示す人口推計とは異なります。',
       '日本人移動者と外国人移動者では対象となる移動者の範囲が異なります。対象区分が同じ指標同士で比較してください。',
       '実数は人口規模の影響を強く受けます。転入率・転出率・転入超過率を見る際も、分母、集計期間、国内移動と国外移動の扱いを各ランキングの注記で確認してください。',
-    ],
-  },
-  'household-survey': {
-    summary:
-      '家計調査は、総務省統計局が全国約9千世帯を抽出し、家計簿などから収入・支出、貯蓄・負債を毎月調べる基幹統計調査です。このハブでは、二人以上の世帯や勤労者世帯の実収入、可処分所得、消費性向、費目別支出割合を比較できます。',
-    areaLabel: '主に県庁所在市などの都市別',
-    relatedHubs: [
-      { surveyKey: 'kakei-chousa', label: '品目別の支出額・購入数量のランキング (納豆・米など)' },
-    ],
-    whatYouCanLearn: [
-      '勤労者世帯の実収入と可処分所得の地域差',
-      '可処分所得に対する消費と貯蓄の配分',
-      '食料、住居、教育、交通・通信など費目別支出割合',
-      '二人以上世帯の月間消費支出の違い',
-    ],
-    readerQuestions: [
-      {
-        question: '勤労者世帯の月間実収入が多い都道府県は？',
-        rankingKey: 'actual-income-worker-households-per-month',
-      },
-      {
-        question: '勤労者世帯の可処分所得が多い都道府県は？',
-        rankingKey: 'disposable-income-worker-households',
-      },
-      {
-        question: '平均消費性向が高い都道府県は？',
-        rankingKey: 'avg-propensity-to-consume-worker-households',
-      },
-      {
-        question: '二人以上世帯の月間消費支出が多い都道府県は？',
-        rankingKey: 'consumption-expenditure-multi-person-households-per-month',
-      },
-    ],
-    caveats: [
-      '都道府県別の値は、各都道府県の県庁所在市の世帯を集計したものです (社会・人口統計体系の注記)。県全域の平均ではありません。',
-      '標本調査のため、地域別の値には標本誤差があります。単年の小さな順位差より、複数年の傾向を重視してください。',
-      '二人以上の世帯、勤労者世帯、単身世帯では対象が異なります。世帯区分が同じ指標同士で比較してください。',
-      '実収入と可処分所得は世帯人員、世帯主年齢、有業人員などの構成に影響されます。個人の賃金や生活水準そのものを示す値ではありません。',
     ],
   },
   'commercial-statistics': {

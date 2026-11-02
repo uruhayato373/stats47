@@ -56,5 +56,8 @@ export const MapCarouselDataSchema = z.object({
   canonicalUrl: z.string(),
   generatedAt: z.string(),
   sourceKeys: z.array(z.string()),
+  /** The ranking item's authored colour encoding (item.json `visualization`), resolved by tile-scale.ts. */
+  visualization: z.object({ colorScheme: z.string().optional(), colorSchemeType: z.string().optional() }).passthrough().optional(),
+  valueDisplay: z.object({ conversionFactor: z.number().optional(), decimalPlaces: z.number().optional() }).optional(),
 });
 export type MapCarouselData = z.infer<typeof MapCarouselDataSchema>;

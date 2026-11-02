@@ -20,6 +20,7 @@ export const EXPANSION_OWNERS: Record<ExpansionChannel, string> = {
   japan: "theme-designer",
   blog: "blog-seo-strategist",
   note: "note-manager",
+  kindle: "kindle-publisher",
   x: "x-strategist",
   instagram: "instagram-strategist",
   youtube: "strategy-advisor",

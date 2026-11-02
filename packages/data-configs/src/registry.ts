@@ -1202,14 +1202,18 @@ import { hospitalBedCount } from "../../../data/metrics/hospital-bed-count";
 import { hospitalCountCity } from "../../../data/metrics/hospital-count-city";
 import { hospitalStaffByOccupation } from "../../../data/metrics/hospital-staff-by-occupation";
 import { hospitalsWithLongTermCareBeds } from "../../../data/metrics/hospitals-with-long-term-care-beds";
+import { householdDebtBalance } from "../../../data/metrics/household-debt-balance";
 import { householdHeadAllowanceConsumptionExpenditure } from "../../../data/metrics/household-head-allowance-consumption-expenditure";
 import { householdHeadAnnualIncomePerHousehold } from "../../../data/metrics/household-head-annual-income-per-household";
 import { householdHeadIncomeWorkerHouseholdsPerMonth } from "../../../data/metrics/household-head-income-worker-households-per-month";
+import { householdHousingDebtBalance } from "../../../data/metrics/household-housing-debt-balance";
 import { householdIncomeByType } from "../../../data/metrics/household-income-by-type";
 import { householdMembersOutsideDwellings } from "../../../data/metrics/household-members-outside-dwellings";
 import { householdRatioAboveMinimumHousingArea } from "../../../data/metrics/household-ratio-above-minimum-housing-area";
 import { householdRatioMainEarnerEmployeeCommute90min } from "../../../data/metrics/household-ratio-main-earner-employee-commute-90min";
 import { householdRatioWith65plus } from "../../../data/metrics/household-ratio-with-65plus";
+import { householdSavingsBalance } from "../../../data/metrics/household-savings-balance";
+import { householdSecuritiesBalance } from "../../../data/metrics/household-securities-balance";
 import { householdSurveyClothingFootwearExpenditure } from "../../../data/metrics/household-survey-clothing-footwear-expenditure";
 import { householdSurveyConsumptionExpenditure } from "../../../data/metrics/household-survey-consumption-expenditure";
 import { householdSurveyCultureRecreationExpenditure } from "../../../data/metrics/household-survey-culture-recreation-expenditure";
@@ -4393,14 +4397,18 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "hospital-count-city": hospitalCountCity,
   "hospital-staff-by-occupation": hospitalStaffByOccupation,
   "hospitals-with-long-term-care-beds": hospitalsWithLongTermCareBeds,
+  "household-debt-balance": householdDebtBalance,
   "household-head-allowance-consumption-expenditure": householdHeadAllowanceConsumptionExpenditure,
   "household-head-annual-income-per-household": householdHeadAnnualIncomePerHousehold,
   "household-head-income-worker-households-per-month": householdHeadIncomeWorkerHouseholdsPerMonth,
+  "household-housing-debt-balance": householdHousingDebtBalance,
   "household-income-by-type": householdIncomeByType,
   "household-members-outside-dwellings": householdMembersOutsideDwellings,
   "household-ratio-above-minimum-housing-area": householdRatioAboveMinimumHousingArea,
   "household-ratio-main-earner-employee-commute-90min": householdRatioMainEarnerEmployeeCommute90min,
   "household-ratio-with-65plus": householdRatioWith65plus,
+  "household-savings-balance": householdSavingsBalance,
+  "household-securities-balance": householdSecuritiesBalance,
   "household-survey-clothing-footwear-expenditure": householdSurveyClothingFootwearExpenditure,
   "household-survey-consumption-expenditure": householdSurveyConsumptionExpenditure,
   "household-survey-culture-recreation-expenditure": householdSurveyCultureRecreationExpenditure,

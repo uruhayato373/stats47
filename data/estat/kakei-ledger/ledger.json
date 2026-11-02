@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T00:33:03.705Z",
+ "generatedAt": "2026-11-02T05:25:55.250Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -13,8 +13,9 @@
   "tables": 126,
   "tablesWithMeta": 126,
   "tablesByStatus": {
-   "undecided": 122,
-   "adopted": 4
+   "excluded": 106,
+   "planned": 6,
+   "adopted": 14
   },
   "tablesByCycle": {
    "月次": 18,
@@ -25,13 +26,15 @@
    "amount": {
     "total": 689,
     "byStatus": {
-     "undecided": 175,
-     "adopted": 514
+     "excluded": 60,
+     "undecided": 114,
+     "adopted": 514,
+     "planned": 1
     },
     "undecidedByKind": {
-     "other": 58,
-     "group": 115,
-     "item": 2
+     "other": 7,
+     "group": 106,
+     "item": 1
     }
    },
    "quantity": {
@@ -90,8 +93,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（総数）)。都市別の十大費目は0002070003で答え、地方・都市階級の集計は県庁所在市のランキングにならないため採らない。再検討の条件: 地方別の費目構成の問いが出たとき"
   },
   {
    "statsDataId": "0002070002",
@@ -136,8 +140,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の総数の四半期表(用途分類（総数）)。全国の用途分類は年次の0002070003で答えられ、月次・四半期の細かい粒度は季節の切り口が品目表で担うため二重に持たない。再検討の条件: 用途分類の季節性を扱うとき"
   },
   {
    "statsDataId": "0002070003",
@@ -182,8 +187,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "都市ごとの十大費目の構成比 (家計の配分の切り口)。県庁所在市の年次・用途分類で、品目分類の合計では作れない費目の割合を出す"
   },
   {
    "statsDataId": "0002070004",
@@ -233,8 +239,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（年間収入五分位階級別）)。収入階級別は0002070005と品目分類の0004023607/0004023608で答えるため二重に持たない。再検討の条件: 十分位など細かい階級の問いが出たとき"
   },
   {
    "statsDataId": "0002070005",
@@ -284,7 +291,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -335,8 +345,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（世帯主の定期収入五分位階級別）)。収入階級別は0002070005と品目分類の0004023607/0004023608で答えるため二重に持たない。再検討の条件: 十分位など細かい階級の問いが出たとき"
   },
   {
    "statsDataId": "0002070007",
@@ -386,8 +397,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（世帯主の定期収入五分位階級別）)。収入階級別は0002070005と品目分類の0004023607/0004023608で答えるため二重に持たない。再検討の条件: 十分位など細かい階級の問いが出たとき"
   },
   {
    "statsDataId": "0002070008",
@@ -437,8 +449,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（世帯人員別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070009",
@@ -488,7 +501,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-household-size"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -539,8 +555,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（世帯主の年齢階級別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070011",
@@ -590,8 +607,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年齢階級別。品目分類の年齢階級別 (0004023609/0004023610) で同じ問いに答えられるので二重に持たない"
   },
   {
    "statsDataId": "0002070012",
@@ -641,8 +659,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（世帯主の職業別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070013",
@@ -692,8 +711,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（世帯主の職業別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070014",
@@ -743,8 +763,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（世帯主の勤め先企業規模別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070015",
@@ -794,8 +815,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（世帯主の勤め先企業規模別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070016",
@@ -845,8 +867,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の月次表(用途分類（住居の所有関係別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0002070017",
@@ -896,8 +919,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "持家と借家で家計の支出がどう違うか (世帯の属性の切り口)。全国の集計なのでランキングにはしない"
   },
   {
    "statsDataId": "0002070018",
@@ -942,8 +966,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070019",
@@ -988,8 +1013,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の四半期表。四半期の数量は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070020",
@@ -1034,8 +1060,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070021",
@@ -1080,8 +1107,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070022",
@@ -1126,8 +1154,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070023",
@@ -1172,8 +1201,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070024",
@@ -1223,8 +1253,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002070025",
@@ -1274,8 +1305,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002190004",
@@ -1330,8 +1362,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "総世帯・単身世帯の年齢・性別の支出 (世帯の属性の切り口)。二人以上世帯の表と対象が違うので混ぜずに別の図にする"
   },
   {
    "statsDataId": "0002190005",
@@ -1376,8 +1409,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002190006",
@@ -1422,8 +1456,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002200003",
@@ -1473,8 +1508,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（年間収入五分位階級別）)。収入階級別は0002070005と品目分類の0004023607/0004023608で答えるため二重に持たない。再検討の条件: 十分位など細かい階級の問いが出たとき"
   },
   {
    "statsDataId": "0002200004",
@@ -1524,8 +1560,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "総世帯の用途分類の年収五分位。二人以上世帯の五分位 (0002070005) で答え、集計対象の違う総世帯を混ぜない"
   },
   {
    "statsDataId": "0002200005",
@@ -1575,8 +1612,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（年間収入十分位階級別）)。収入階級別は0002070005と品目分類の0004023607/0004023608で答えるため二重に持たない。再検討の条件: 十分位など細かい階級の問いが出たとき"
   },
   {
    "statsDataId": "0002200006",
@@ -1626,8 +1664,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "総世帯の用途分類の年収十分位。五分位で足り、集計対象の違う総世帯を混ぜない"
   },
   {
    "statsDataId": "0002200007",
@@ -1672,8 +1711,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002200008",
@@ -1718,8 +1758,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成17年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0002210005",
@@ -1774,8 +1815,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（貯蓄・純貯蓄現在高五分位階級別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0002210006",
@@ -1830,8 +1872,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（貯蓄・純貯蓄現在高五分位階級別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0002210007",
@@ -1876,8 +1919,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(都市階級・地方・県庁所在市別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210008",
@@ -1921,8 +1965,16 @@
      "count": 24
     }
    ],
-   "metrics": [],
-   "status": "undecided",
+   "metrics": [
+    "household-debt-balance",
+    "household-housing-debt-balance",
+    "household-savings-balance",
+    "household-securities-balance"
+   ],
+   "analyses": [
+    "savings-city"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -1973,8 +2025,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(年間収入階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210010",
@@ -2024,7 +2077,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "savings-income-18-class"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -2080,8 +2136,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(年間収入五分位階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210012",
@@ -2136,7 +2193,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "savings-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -2192,8 +2252,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(年間収入十分位階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210014",
@@ -2248,8 +2309,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年収十分位。五分位 (0002210012) と 18 階級 (0002210010) で足りる"
   },
   {
    "statsDataId": "0002210015",
@@ -2304,8 +2366,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(世帯主の職業別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210016",
@@ -2360,8 +2423,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(世帯主の職業別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210017",
@@ -2416,8 +2480,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(世帯主の年齢階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210018",
@@ -2472,8 +2537,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(世帯主の年齢階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210019",
@@ -2523,8 +2589,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(住居の所有関係別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210020",
@@ -2574,8 +2641,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(世帯主の勤め先企業規模別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210021",
@@ -2625,8 +2693,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(世帯類型別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210022",
@@ -2676,8 +2745,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(妻の就業状態，世帯類型別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210023",
@@ -2727,8 +2797,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(（高齢者のいる世帯）世帯主の就業状態別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210024",
@@ -2778,8 +2849,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(貯蓄・純貯蓄・負債現在高階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210025",
@@ -2829,8 +2901,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の四半期表(住宅・土地の購入・建築計画の有無別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210026",
@@ -2880,8 +2953,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(住宅・土地の購入・建築計画の有無別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0002210027",
@@ -2936,8 +3010,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "貯蓄・負債の年次表(貯蓄・純貯蓄現在高五分位階級別)。切り口の問いは都市と年収の違いで、0002210008/0002210010/0002210012で答えられる。この表は世帯の属性・階級の内訳で問いの外。再検討の条件: 属性別の貯蓄・負債を独立した切り口に立てるとき"
   },
   {
    "statsDataId": "0003000773",
@@ -2982,8 +3057,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の総数の四半期表(用途分類（総数） 全国)。全国の用途分類は年次の0002070003で答えられ、月次・四半期の細かい粒度は季節の切り口が品目表で担うため二重に持たない。再検討の条件: 用途分類の季節性を扱うとき"
   },
   {
    "statsDataId": "0003000795",
@@ -3038,8 +3114,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（年齢階級別）)。世帯の属性別は品目分類の0004023609/0004023610・単身と総世帯の0002190004・持家借家の0002070017で答えるため二重に持たない。再検討の条件: 職業・企業規模・世帯人員を切り口に立てるとき"
   },
   {
    "statsDataId": "0003000797",
@@ -3084,8 +3161,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の総数の年次表(用途分類（総数） 全国)。全国の用途分類は年次の0002070003で答えられ、月次・四半期の細かい粒度は季節の切り口が品目表で担うため二重に持たない。再検討の条件: 用途分類の季節性を扱うとき"
   },
   {
    "statsDataId": "0003000798",
@@ -3130,8 +3208,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（総数） 都市階級・地方)。都市別の十大費目は0002070003で答え、地方・都市階級の集計は県庁所在市のランキングにならないため採らない。再検討の条件: 地方別の費目構成の問いが出たとき"
   },
   {
    "statsDataId": "0003000799",
@@ -3176,8 +3255,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の総数の四半期表(用途分類（総数） 全国)。全国の用途分類は年次の0002070003で答えられ、月次・四半期の細かい粒度は季節の切り口が品目表で担うため二重に持たない。再検討の条件: 用途分類の季節性を扱うとき"
   },
   {
    "statsDataId": "0003000800",
@@ -3222,8 +3302,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（総数） 都市階級・地方)。都市別の十大費目は0002070003で答え、地方・都市階級の集計は県庁所在市のランキングにならないため採らない。再検討の条件: 地方別の費目構成の問いが出たとき"
   },
   {
    "statsDataId": "0003000807",
@@ -3268,8 +3349,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の総数の年次表(用途分類（総数） 全国)。全国の用途分類は年次の0002070003で答えられ、月次・四半期の細かい粒度は季節の切り口が品目表で担うため二重に持たない。再検討の条件: 用途分類の季節性を扱うとき"
   },
   {
    "statsDataId": "0003000808",
@@ -3314,8 +3396,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（総数） 都市階級・地方)。都市別の十大費目は0002070003で答え、地方・都市階級の集計は県庁所在市のランキングにならないため採らない。再検討の条件: 地方別の費目構成の問いが出たとき"
   },
   {
    "statsDataId": "0003003309",
@@ -3365,8 +3448,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（貯蓄・純貯蓄・負債現在高階級別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0003003311",
@@ -3416,8 +3500,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（住宅・土地の購入・建築計画の有無別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0003003312",
@@ -3467,8 +3552,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（貯蓄・純貯蓄・負債現在高階級別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0003003313",
@@ -3518,8 +3604,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の年次表(用途分類（住宅・土地の購入・建築計画の有無別）)。支出を貯蓄・住宅計画の階級で分ける内訳で、十大費目の構成と都市比較の問いの外。再検討の条件: 貯蓄階級別の支出を切り口に立てるとき"
   },
   {
    "statsDataId": "0003005368",
@@ -3564,8 +3651,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "用途分類の四半期表(用途分類（総数） 都市階級・地方)。都市別の十大費目は0002070003で答え、地方・都市階級の集計は県庁所在市のランキングにならないため採らない。再検討の条件: 地方別の費目構成の問いが出たとき"
   },
   {
    "statsDataId": "0003013276",
@@ -3610,8 +3698,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003013860",
@@ -3656,8 +3745,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003015133",
@@ -3702,8 +3792,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003015134",
@@ -3748,8 +3839,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003015188",
@@ -3794,8 +3886,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003015189",
@@ -3840,8 +3933,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の四半期表。四半期の数量は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003016656",
@@ -3886,8 +3980,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003016657",
@@ -3932,8 +4027,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003021325",
@@ -3983,8 +4079,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003021326",
@@ -4029,8 +4126,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003021327",
@@ -4080,8 +4178,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003021328",
@@ -4126,8 +4225,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003031475",
@@ -4177,8 +4277,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003031476",
@@ -4228,8 +4329,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成22年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003103522",
@@ -4274,8 +4376,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003103532",
@@ -4320,8 +4423,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003105161",
@@ -4366,8 +4470,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の四半期表。四半期の数量は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003105162",
@@ -4412,8 +4517,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003105173",
@@ -4458,8 +4564,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003105193",
@@ -4504,8 +4611,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125092",
@@ -4550,8 +4658,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125093",
@@ -4596,8 +4705,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125094",
@@ -4647,8 +4757,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125148",
@@ -4698,8 +4809,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125168",
@@ -4749,8 +4861,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125169",
@@ -4795,8 +4908,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。都市別の年次は現行の0004023605/0004023606で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125170",
@@ -4846,8 +4960,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003125188",
@@ -4892,8 +5007,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(平成27年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003343670",
@@ -4938,8 +5054,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003343671",
@@ -4984,8 +5101,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の月次表。月次は現行の0004023601/0004023602で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348230",
@@ -5030,8 +5148,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の四半期表。四半期の数量は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348231",
@@ -5076,8 +5195,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348232",
@@ -5122,8 +5242,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348233",
@@ -5168,8 +5289,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の四半期表。四半期の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348234",
@@ -5214,8 +5336,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348235",
@@ -5260,14 +5383,10 @@
     }
    ],
    "metrics": [
-    "bread-consumption-quantity",
-    "fresh-fruit-consumption-quantity",
-    "fresh-seafood-consumption-quantity",
-    "fresh-vegetables-consumption-quantity",
     "necktie-consumption-quantity",
-    "shellfish-consumption-quantity",
     "womens-stockings-consumption-quantity"
    ],
+   "analyses": [],
    "status": "adopted",
    "reason": null
   },
@@ -5319,8 +5438,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348237",
@@ -5370,8 +5490,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348238",
@@ -5421,8 +5542,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。世帯主の年齢別は現行の0004023609/0004023610で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348239",
@@ -5467,11 +5589,11 @@
     }
    ],
    "metrics": [
-    "information-communication-expenditure",
     "necktie-consumption-expenditure",
     "other-clothing-misc-consumption-expenditure",
     "womens-stockings-consumption-expenditure"
    ],
+   "analyses": [],
    "status": "adopted",
    "reason": null
   },
@@ -5523,8 +5645,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。収入階級別は現行の0004023607/0004023608で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0003348241",
@@ -5569,8 +5692,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "旧分類(2020年改定)の年次表。年次の金額は現行表で答える。分類改定をまたいで品目を継ぎ足すと同じ品目として扱えないため採らない。再検討の条件: 改定前の年を採る分析が必要になったとき"
   },
   {
    "statsDataId": "0004023601",
@@ -5615,8 +5739,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "品目の月次の支出額 (季節の切り口)。ブログの接地器 fetch-kakei-monthly.mjs が使う。年の途中の月を年計として扱わない"
   },
   {
    "statsDataId": "0004023602",
@@ -5661,8 +5786,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "品目の月次の購入数量 (季節の切り口)。数量の月次は全国のみ"
   },
   {
    "statsDataId": "0004023603",
@@ -5707,8 +5833,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "2025年改定の四半期表。年次の0004023605/0004023606と月次の0004023601/0004023602で同じ問いに答えられ、四半期は追加の問いを持たないため二重に持たない。再検討の条件: 四半期単位の季節分析の需要が出たとき"
   },
   {
    "statsDataId": "0004023604",
@@ -5753,8 +5880,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "2025年改定の四半期表。年次の0004023605/0004023606と月次の0004023601/0004023602で同じ問いに答えられ、四半期は追加の問いを持たないため二重に持たない。再検討の条件: 四半期単位の季節分析の需要が出たとき"
   },
   {
    "statsDataId": "0004023605",
@@ -5994,6 +6122,7 @@
     "housing-expenditure-total",
     "icecream-consumption-expenditure",
     "infant-clothes-consumption-expenditure",
+    "information-communication-expenditure",
     "insecticide-consumption-expenditure",
     "instant-noodles-consumption-expenditure",
     "interior-decoration-consumption-expenditure",
@@ -6314,6 +6443,11 @@
     "yogurt-consumption-expenditure",
     "yokan-consumption-expenditure"
    ],
+   "analyses": [
+    "cup-noodles-city-spending",
+    "natto-city-spending",
+    "rice-national-spending-trend"
+   ],
    "status": "adopted",
    "reason": null
   },
@@ -6376,6 +6510,7 @@
     "blouse-consumption-quantity",
     "bonito-consumption-quantity",
     "boys-school-uniform-consumption-quantity",
+    "bread-consumption-quantity",
     "broccoli-consumption-quantity",
     "burdock-consumption-quantity",
     "butter-consumption-quantity",
@@ -6412,8 +6547,11 @@
     "electricity-consumption-quantity",
     "enoki-consumption-quantity",
     "flounder-consumption-quantity",
+    "fresh-fruit-consumption-quantity",
+    "fresh-seafood-consumption-quantity",
     "fresh-shiitake-consumption-quantity",
     "fresh-udon-soba-consumption-quantity",
+    "fresh-vegetables-consumption-quantity",
     "freshwater-clam-consumption-quantity",
     "futon-consumption-quantity",
     "game-console-consumption-quantity",
@@ -6509,6 +6647,7 @@
     "school-bag-consumption-quantity",
     "sea-bream-consumption-quantity",
     "sheets-consumption-quantity",
+    "shellfish-consumption-quantity",
     "shimeji-consumption-quantity",
     "shochu-consumption-quantity",
     "shrimp-consumption-quantity",
@@ -6548,6 +6687,12 @@
     "womens-socks-consumption-quantity",
     "womens-sweater-consumption-quantity",
     "yellowtail-consumption-quantity"
+   ],
+   "analyses": [
+    "beef-city-quantity",
+    "green-tea-city-quantity",
+    "rice-city-quantity",
+    "rice-national-quantity-trend"
    ],
    "status": "adopted",
    "reason": null
@@ -6600,7 +6745,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-spending-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6651,7 +6799,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-quantity-income-quintile"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6702,7 +6853,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "item-spending-age"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6753,8 +6907,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "planned",
+   "reason": "世帯主の年齢と購入数量 (世帯の属性の切り口)。金額の分析単位 (0004023609) と対で、量の年齢差を出す"
   },
   {
    "statsDataId": "0004023611",
@@ -6799,8 +6954,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "2025年改定の四半期表。年次の0004023605/0004023606と月次の0004023601/0004023602で同じ問いに答えられ、四半期は追加の問いを持たないため二重に持たない。再検討の条件: 四半期単位の季節分析の需要が出たとき"
   },
   {
    "statsDataId": "0004023612",
@@ -6845,7 +7001,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-all-households"
+   ],
+   "status": "adopted",
    "reason": null
   },
   {
@@ -6891,8 +7050,9 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "analyses": [],
+   "status": "excluded",
+   "reason": "2025年改定の四半期表。年次の0004023605/0004023606と月次の0004023601/0004023602で同じ問いに答えられ、四半期は追加の問いを持たないため二重に持たない。再検討の条件: 四半期単位の季節分析の需要が出たとき"
   },
   {
    "statsDataId": "0004023614",
@@ -6937,7 +7097,10 @@
     }
    ],
    "metrics": [],
-   "status": "undecided",
+   "analyses": [
+    "food-single-households"
+   ],
+   "status": "adopted",
    "reason": null
   }
  ],
@@ -6952,8 +7115,8 @@
    "parentCode": null,
    "unit": "一万分比",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "000200000",
@@ -6965,8 +7128,8 @@
    "parentCode": null,
    "unit": "世帯",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "000300000",
@@ -13767,8 +13930,8 @@
    "parentCode": "050600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "planned",
+   "reason": "2025年改定でネクタイ・ストッキングなどを含む範囲に広がった「659 他の被服のその他」。旧範囲の指標 other-clothing-misc-consumption-expenditure は2024年までで接続しないので、新しい範囲の2025年以降を別指標にする候補"
   },
   {
    "code": "050700000",
@@ -14940,6 +15103,10 @@
    "unit": "円",
    "metrics": [
     {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
+    {
      "key": "landline-bill-consumption-expenditure",
      "via": "single"
     }
@@ -14957,6 +15124,10 @@
    "parentCode": "070300000",
    "unit": "円",
    "metrics": [
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
     {
      "key": "mobile-phone-bill-consumption-expenditure",
      "via": "single"
@@ -16387,6 +16558,10 @@
    "unit": "円",
    "metrics": [
     {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
+    {
      "key": "nhk-fee-consumption-expenditure",
      "via": "single"
     }
@@ -16407,6 +16582,10 @@
     {
      "key": "cable-tv-fee-consumption-expenditure",
      "via": "single"
+    },
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -16422,6 +16601,10 @@
    "parentCode": "090441000",
    "unit": "円",
    "metrics": [
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
     {
      "key": "other-broadcast-fee-consumption-expenditure",
      "via": "single"
@@ -17725,8 +17908,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100000",
@@ -17738,8 +17921,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100010",
@@ -17751,8 +17934,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100020",
@@ -17764,8 +17947,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100030",
@@ -17777,8 +17960,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110200000",
@@ -17790,8 +17973,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300000",
@@ -17803,8 +17986,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300010",
@@ -17816,8 +17999,8 @@
    "parentCode": "110300000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300020",
@@ -17829,8 +18012,8 @@
    "parentCode": "110300000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400000",
@@ -17842,8 +18025,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400010",
@@ -17855,8 +18038,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400020",
@@ -17868,8 +18051,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400030",
@@ -17881,8 +18064,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500000",
@@ -17894,8 +18077,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500010",
@@ -17907,8 +18090,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500020",
@@ -17920,8 +18103,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500030",
@@ -17933,8 +18116,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500040",
@@ -17946,8 +18129,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600000",
@@ -17959,8 +18142,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600010",
@@ -17972,8 +18155,8 @@
    "parentCode": "110600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600020",
@@ -17985,8 +18168,8 @@
    "parentCode": "110600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700000",
@@ -17998,8 +18181,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700010",
@@ -18011,8 +18194,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700020",
@@ -18024,8 +18207,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700030",
@@ -18037,8 +18220,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700040",
@@ -18050,8 +18233,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800000",
@@ -18063,8 +18246,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800010",
@@ -18076,8 +18259,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800020",
@@ -18089,8 +18272,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800030",
@@ -18102,8 +18285,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800040",
@@ -18115,8 +18298,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900000",
@@ -18128,8 +18311,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900010",
@@ -18141,8 +18324,8 @@
    "parentCode": "110900000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900020",
@@ -18154,8 +18337,8 @@
    "parentCode": "110900000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000000",
@@ -18167,8 +18350,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000010",
@@ -18180,8 +18363,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000020",
@@ -18193,8 +18376,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000030",
@@ -18206,8 +18389,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000040",
@@ -18219,8 +18402,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100000",
@@ -18232,8 +18415,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100010",
@@ -18245,8 +18428,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100020",
@@ -18258,8 +18441,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100030",
@@ -18271,8 +18454,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100040",
@@ -18284,8 +18467,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "120000001",
@@ -18297,8 +18480,8 @@
    "parentCode": null,
    "unit": "世帯",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "130000000",
@@ -18310,8 +18493,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130100000",
@@ -18323,8 +18506,8 @@
    "parentCode": "130000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200000",
@@ -18336,8 +18519,8 @@
    "parentCode": "130000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200010",
@@ -18349,8 +18532,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200020",
@@ -18362,8 +18545,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200030",
@@ -18375,8 +18558,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200040",
@@ -18388,8 +18571,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200050",
@@ -18401,8 +18584,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200060",
@@ -18414,8 +18597,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200070",
@@ -18427,8 +18610,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "140000000",
@@ -18440,8 +18623,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "140100000",
@@ -18453,8 +18636,8 @@
    "parentCode": "140000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "140200000",
@@ -18466,8 +18649,8 @@
    "parentCode": "140000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "010110001",
@@ -18511,6 +18694,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "bread-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "white-bread-consumption-quantity",
      "via": "single"
     }
@@ -18528,6 +18715,10 @@
    "parentCode": "010120000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "bread-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-bread-consumption-quantity",
      "via": "single"
@@ -18779,6 +18970,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "tuna-consumption-quantity",
      "via": "single"
     }
@@ -18797,6 +18992,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "horse-mackerel-consumption-quantity",
      "via": "single"
     }
@@ -18814,6 +19013,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "sardine-consumption-quantity",
      "via": "single"
@@ -18835,6 +19038,10 @@
     {
      "key": "bonito-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -18853,6 +19060,10 @@
     {
      "key": "flounder-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -18868,6 +19079,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "salmon-consumption-quantity",
      "via": "single"
@@ -18887,6 +19102,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "mackerel-consumption-quantity",
      "via": "single"
     }
@@ -18904,6 +19123,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "saury-consumption-quantity",
      "via": "single"
@@ -18923,6 +19146,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "sea-bream-consumption-quantity",
      "via": "single"
     }
@@ -18940,6 +19167,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "yellowtail-consumption-quantity",
      "via": "single"
@@ -18959,6 +19190,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "squid-consumption-quantity",
      "via": "single"
     }
@@ -18977,6 +19212,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "octopus-consumption-quantity",
      "via": "single"
     }
@@ -18994,6 +19233,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "shrimp-consumption-quantity",
      "via": "single"
@@ -19015,6 +19258,10 @@
     {
      "key": "crab-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19030,6 +19277,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-fresh-fish-consumption-quantity",
      "via": "single"
@@ -19048,6 +19299,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "sashimi-platter-consumption-quantity",
      "via": "single"
@@ -19082,6 +19337,14 @@
     {
      "key": "clam-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19098,8 +19361,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "freshwater-clam-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19116,8 +19387,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "oyster-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19134,8 +19413,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "scallop-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19152,8 +19439,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "other-shellfish-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19543,6 +19838,10 @@
     {
      "key": "cabbage-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19558,6 +19857,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "spinach-consumption-quantity",
      "via": "single"
@@ -19579,6 +19882,10 @@
     {
      "key": "chinese-cabbage-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19594,6 +19901,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "leek-consumption-quantity",
      "via": "single"
@@ -19612,6 +19923,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "lettuce-consumption-quantity",
      "via": "single"
@@ -19633,6 +19948,10 @@
     {
      "key": "broccoli-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19651,6 +19970,10 @@
     {
      "key": "bean-sprouts-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19666,6 +19989,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-leafy-vegetables-consumption-quantity",
      "via": "single"
@@ -19698,6 +20025,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "sweet-potato-consumption-quantity",
      "via": "single"
     }
@@ -19716,6 +20047,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "potato-consumption-quantity",
      "via": "single"
     }
@@ -19733,6 +20068,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "taro-consumption-quantity",
      "via": "single"
@@ -19754,6 +20093,10 @@
     {
      "key": "daikon-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19772,6 +20115,10 @@
     {
      "key": "carrot-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19790,6 +20137,10 @@
     {
      "key": "burdock-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19805,6 +20156,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "onion-consumption-quantity",
      "via": "single"
@@ -19823,6 +20178,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "lotus-root-consumption-quantity",
      "via": "single"
@@ -19844,6 +20203,10 @@
     {
      "key": "bamboo-shoot-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19859,6 +20222,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-root-vegetables-consumption-quantity",
      "via": "single"
@@ -19891,6 +20258,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "green-beans-consumption-quantity",
      "via": "single"
     }
@@ -19908,6 +20279,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "pumpkin-consumption-quantity",
      "via": "single"
@@ -19929,6 +20304,10 @@
     {
      "key": "cucumber-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19947,6 +20326,10 @@
     {
      "key": "eggplant-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19962,6 +20345,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "tomato-consumption-quantity",
      "via": "single"
@@ -19980,6 +20367,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "green-pepper-consumption-quantity",
      "via": "single"
@@ -20001,6 +20392,10 @@
     {
      "key": "fresh-shiitake-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20016,6 +20411,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "shimeji-consumption-quantity",
      "via": "single"
@@ -20037,6 +20436,10 @@
     {
      "key": "enoki-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20052,6 +20455,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-mushroom-consumption-quantity",
      "via": "single"
@@ -20070,6 +20477,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-vegetables-consumption-quantity",
      "via": "single"
@@ -20248,6 +20659,10 @@
     {
      "key": "apple-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20263,6 +20678,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "mandarin-consumption-quantity",
      "via": "single"
@@ -20282,6 +20701,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "orange-consumption-quantity",
      "via": "single"
     }
@@ -20299,6 +20722,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-citrus-consumption-quantity",
      "via": "single"
@@ -20318,6 +20745,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "pear-consumption-quantity",
      "via": "single"
     }
@@ -20335,6 +20766,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "grape-consumption-quantity",
      "via": "single"
@@ -20354,6 +20789,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "persimmon-consumption-quantity",
      "via": "single"
     }
@@ -20371,6 +20810,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "peach-consumption-quantity",
      "via": "single"
@@ -20390,6 +20833,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "watermelon-consumption-quantity",
      "via": "single"
     }
@@ -20408,6 +20855,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "melon-consumption-quantity",
      "via": "single"
     }
@@ -20425,6 +20876,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "strawberry-consumption-quantity",
      "via": "single"
@@ -20446,6 +20901,10 @@
     {
      "key": "banana-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20461,6 +20920,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "kiwi-consumption-quantity",
      "via": "single"
@@ -20479,6 +20942,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-fresh-fruit-consumption-quantity",
      "via": "single"

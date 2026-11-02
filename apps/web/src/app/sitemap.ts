@@ -13,7 +13,7 @@ import { PREFECTURE_AREA_CODES } from '@stats47/area';
 import { readCategoriesFromR2 } from '@stats47/category/server';
 import { CATEGORY_KEYS } from '@stats47/data-configs';
 import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
-import { hrefFor } from "@stats47/data-configs/content/href";
+import { hrefFor, SURVEY_HUB_ALIASES } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
@@ -286,7 +286,7 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
       : [...SITEMAP_SURVEY_IDS];
   return [
     { url: `${BASE_URL}/survey`, changeFrequency: 'weekly', priority: 0.6 },
-    ...ids.map((id) => ({
+    ...ids.filter((id) => !SURVEY_HUB_ALIASES[id]).map((id) => ({
       url: `${BASE_URL}${hrefFor('survey', { surveyKey: id })}`,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
@@ -465,7 +465,7 @@ export default async function sitemap({
             changeFrequency: 'weekly',
             priority: 0.6,
           },
-          ...SITEMAP_SURVEY_IDS.map((id2) => ({
+          ...SITEMAP_SURVEY_IDS.filter((id2) => !SURVEY_HUB_ALIASES[id2]).map((id2) => ({
             url: `${BASE_URL}${hrefFor('survey', { surveyKey: id2 })}`,
             changeFrequency: 'monthly' as const,
             priority: 0.5,

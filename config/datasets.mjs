@@ -456,6 +456,7 @@ export const DATASETS = [
   d("source-inventory.placement-decisions", "data/source-inventory/placement-decisions.json", "config", "data", "data", "参考文献由来の指標の展開判断 (展開先ごとの planned / rejected / blocked と理由)", { schema: "data/source-inventory/placement-decisions.schema.json" }),
   d("source-inventory.placement-decisions-schema", "data/source-inventory/placement-decisions.schema.json", "config", "data", "data", "上の展開判断の JSON Schema"),
   d("surveys.portfolio", "data/surveys/{name}", "state", "data", "data", "調査ポートフォリオ・分類・実験"),
+  d("surveys.lenses", "data/surveys/lenses/{name}.json", "config", "data", "data", "統計調査の切り口台帳 (調査ごとの分析の切り口・使う表と軸・粒度・誤読の注意・チャネルの役割。資料の問いと分析単位はここを参照する。展開の状況は持たない)", { schema: "config/schema/surveys.lenses.schema.json" }),
   d("themes.portfolio", "data/themes/{name}", "state", "data", "data", "テーマのポートフォリオ・品質・実験・CI レビュー"),
   d("themes.role-review", "data/themes/role-review/{name}", "state", "data", "data", "テーマの指標の役割レビューキュー"),
   d("themes.chart-audit", "data/themes/charts/{name}", "state", "data", "data", "テーマのチャートの本番監査"),

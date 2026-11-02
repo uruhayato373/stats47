@@ -2,6 +2,146 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "new-graduate-scheduled-salary-university-female",
+      "pageId": "ranking:new-graduate-scheduled-salary-university-female",
+      "title": "新規学卒者所定内給与額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620312"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620312"
+        },
+        "derived": false,
+        "configHash": "855e58af47426af4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-scheduled-salary-university-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-scheduled-salary-university-male",
+      "pageId": "ranking:new-graduate-scheduled-salary-university-male",
+      "title": "新規学卒者所定内給与額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620311"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620311"
+        },
+        "derived": false,
+        "configHash": "d68ec4fcb4c1a0a7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-scheduled-salary-university-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-starting-salary-college-female",
+      "pageId": "ranking:new-graduate-starting-salary-college-female",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620304"
+        },
+        "derived": false,
+        "configHash": "2c9c85fe5bc88ead"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-college-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "new-graduate-starting-salary-college-male",
+      "pageId": "ranking:new-graduate-starting-salary-college-male",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620306"
+        },
+        "derived": false,
+        "configHash": "f1a35f246d901dc7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-college-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "new-graduate-starting-salary-highschool-female",
       "pageId": "ranking:new-graduate-starting-salary-highschool-female",
       "title": "新規学卒者初任給",
@@ -10588,173 +10728,6 @@
         },
         {
           "pageId": "ranking:nursing-welfare-facilities-basic-tabulation-6510-per",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "nursing-welfare-facilities-detailed-tabulation-6510-per",
-      "pageId": null,
-      "title": "介護老人福祉施設（詳細票）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020310",
-          "filters": {
-            "cdCat01": "#J02205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020310",
-          "cdCat01": "#J02205"
-        },
-        "derived": false,
-        "configHash": "43d148997bae6512"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "nursing-welfare-facility-count-per-100k-65plus",
-      "pageId": "ranking:nursing-welfare-facility-count-per-100k-65plus",
-      "title": "介護老人福祉施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010210",
-          "filters": {
-            "cdCat01": "#J02205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010210",
-          "cdCat01": "#J02205"
-        },
-        "derived": false,
-        "configHash": "2c7c613369d02a9c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:aging-solo-living-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nursing-care-shortage-2040",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:nursing-welfare-facility-count-per-100k-65plus",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:healthcare",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:nursing-welfare-facility-count-per-100k-65plus",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-agriculture-forestry-fishery-employee-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1302"
-        },
-        "derived": false,
-        "configHash": "a7b9669d991bd8ca"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-agriculture-forestry-fishery-employee-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-agriculture-forestry-fishery-employee-workers",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "occupation-agriculture-forestry-fishery-workers",
-      "pageId": null,
-      "title": "職業別就業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F1301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F1301"
-        },
-        "derived": false,
-        "configHash": "4bb4eec242e5abf1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:occupation-agriculture-forestry-fishery-workers",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:occupation-salary",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:occupation-agriculture-forestry-fishery-workers",
           "kind": "ranking"
         }
       ],

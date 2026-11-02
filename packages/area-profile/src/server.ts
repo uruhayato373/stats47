@@ -30,6 +30,7 @@ export {
 export type {
   AreaDatabookSnapshot,
   DatabookHighlightMeta,
+  DatabookKakeiTopItem,
   DatabookMetricValue,
   DatabookAgriItem,
 } from "./types/databook-snapshot";

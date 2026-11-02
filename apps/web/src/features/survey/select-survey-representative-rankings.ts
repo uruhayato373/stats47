@@ -83,3 +83,15 @@ export function prioritizeSurveyRankings<T extends { rankingKey: string }>(
     .sort((a, b) => (order.get(a.rankingKey) ?? 0) - (order.get(b.rankingKey) ?? 0));
   return [...preferred, ...items.filter((item) => !order.has(item.rankingKey))];
 }
+
+/**
+ * 代表カードに出したランキングの問いを、上の「答えを探す」の一覧から外す。
+ * 同じ問いをカードと一覧の両方に並べると、ハブの冒頭で同じ導線が 2 度続く (2026-11-02)。
+ */
+export function excludeFeaturedQuestions<T extends { rankingKey: string }>(
+  questions: readonly T[],
+  featuredKeys: readonly string[]
+): T[] {
+  const featured = new Set(featuredKeys);
+  return questions.filter((question) => !featured.has(question.rankingKey));
+}

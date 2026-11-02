@@ -2,6 +2,144 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pension-benefit-total",
+      "pageId": "ranking:pension-benefit-total",
+      "title": "厚生年金受給権者年金総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J5104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J5104"
+        },
+        "derived": false,
+        "configHash": "0a1d2fbae26e3ae1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pension-benefit-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0330503"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0330503"
+        },
+        "derived": false,
+        "configHash": "94f64329fddb1e9e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0332103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0332103"
+        },
+        "derived": false,
+        "configHash": "37cb1037e8d04490"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-education-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+      "title": "教育費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0331403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0331403"
+        },
+        "derived": false,
+        "configHash": "a617b3cff5122c04"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
       "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
       "title": "老人福祉費",
@@ -8856,166 +8994,6 @@
         },
         {
           "pageId": "ranking:population-aged-0-15-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-15-male",
-      "pageId": null,
-      "title": "0～15歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140601"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140601"
-        },
-        "derived": false,
-        "configHash": "ee5fccf9bbe01126"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-15-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-15-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-17",
-      "pageId": null,
-      "title": "0～17歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A1407"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A1407"
-        },
-        "derived": false,
-        "configHash": "d8ed5c192b53172e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-17",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-17",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-17-female",
-      "pageId": null,
-      "title": "0～17歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140702"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140702"
-        },
-        "derived": false,
-        "configHash": "2cc5bbcb756794a8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-17-female",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-17-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "population-aged-0-17-male",
-      "pageId": null,
-      "title": "0～17歳人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A140701"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A140701"
-        },
-        "derived": false,
-        "configHash": "b9432b9852d43793"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:population-aged-0-17-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:population-aged-0-17-male",
           "kind": "ranking"
         }
       ],

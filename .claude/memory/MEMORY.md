@@ -25,7 +25,7 @@
 - [geo publication boundary](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
 - [business plan adaptation contract](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
 - [kindle publishing factory](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・30%書き下ろし必須。KDPアップロードは人間工程。正典coconala-product-standards.md §8
-- [coconala publish automation](project_coconala_publish_automation.md) — ココナラ出品自動化。期待アカウントはconfigのみ参照。本人プロフィールのプレビューリンクでIDを照合（おすすめ出品者の先頭リンクは禁止）。価格・修正回数・提供形式は保存後にread-backし、警告時は公開しない。
+- [coconala publish automation](project_coconala_publish_automation.md) — ココナラ出品自動化。アカウントは config で照合、本人プロフィールの ID で確認。価格等は保存後に read-back、警告時は公開しない
 - [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 ココナラ撤退。14件受付休止・計測除外。出品台帳のwithdrawnはnote版公開後(先に変えるとnoteのリンク切れ)
 - [coconala product factory](project_coconala_product_factory.md) — 商品設計・公開記録・固定納品版・販売準備を分離。件数はTSとproducts:reportを参照。改訂版上書き・監査による公開state変更を禁止
 - [note product rollout](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
@@ -132,6 +132,7 @@
 - [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
 - [source vault expanded layout](project_source_vault_expanded_layout.md) — 参考文献 vault は 2026-09-10 から Drive の版フォルダへ展開配置 (PDF・pages・md・figures)。マウント自動解決・差分 upload と readback
 - [kakei marketing book pipeline](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』を source-vault で保全・全 307 ページ解決。企画 analyses.json・展開記録 expansion.json
+- [lens belongs to survey](feedback_lens_belongs_to_survey.md) — 切り口は本でなく調査の持ち物。data/surveys/lenses/<調査ID>.json が正本、本の問いは lensIds で結ぶ
 
 - [ssds denominator evidence](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法

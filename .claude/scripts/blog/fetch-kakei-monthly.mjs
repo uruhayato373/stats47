@@ -7,8 +7,8 @@
  * (blog-data-schema.md §1.5「metric 化していない e-Stat 直叩き」)。
  *
  * 表:
- *   kakei-expenditure  0003343671 家計調査 家計収支編 二人以上の世帯 品目分類 (2020年改定) 月次 金額 (2000-01〜)
- *   kakei-quantity     0003343670 同 数量
+ *   kakei-expenditure  0004023601 家計調査 家計収支編 二人以上の世帯 品目分類 (2025年改定) 月次 金額 (2000-01〜)
+ *   kakei-quantity     0004023602 同 数量
  *   kakei-unit-price   金額 ÷ 数量 の購入単価 (上 2 表から算出。円/単位)
  *   cpi                0003427113 2020年基準 消費者物価指数 品目別 (指数, 1970-01〜)
  * いずれも area=00000 (全国)。家計調査は cat02=03 (二人以上の世帯 2000年〜)、CPI は tab=1 (指数)。
@@ -36,12 +36,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const CACHE_DIR = path.join(os.tmpdir(), "stats47-kakei-monthly-cache");
 
+// 家計調査の月次は 2025 年改定の表。2024 年以前は旧表 0003343671 / 0003343670 (2020 年改定) と同じコード・同じ値で接続している
+// (2026-11-02 に米の 2024 年 12 月で金額・数量とも一致を確認)。改定で分割・統合した品目は旧コードで値が返らない
 const SOURCES = {
-  "kakei-expenditure": { statsDataId: "0003343671", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2020年改定) 月次 (金額)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "sum" },
-  "kakei-quantity": { statsDataId: "0003343670", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2020年改定) 月次 (数量)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "sum" },
+  "kakei-expenditure": { statsDataId: "0004023601", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2025年改定) 月次 (金額)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "sum" },
+  "kakei-quantity": { statsDataId: "0004023602", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2025年改定) 月次 (数量)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "sum" },
   cpi: { statsDataId: "0003427113", name: "2020年基準 消費者物価指数 品目別 (全国・指数)", fixed: { cdArea: "00000", cdTab: "1" }, annual: "mean" },
   // 購入単価 = 金額 ÷ 数量 (同じ品目コードを金額表と数量表の両方から取る)。年次は 12 か月の金額合計 ÷ 数量合計
-  "kakei-unit-price": { statsDataId: "0003343671,0003343670", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2020年改定) 月次 (金額 ÷ 数量 = 購入単価)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "ratio" },
+  "kakei-unit-price": { statsDataId: "0004023601,0004023602", name: "家計調査 家計収支編 二人以上の世帯 品目分類(2025年改定) 月次 (金額 ÷ 数量 = 購入単価)", fixed: { cdArea: "00000", cdCat02: "03" }, annual: "ratio" },
 };
 
 const args = process.argv.slice(2);

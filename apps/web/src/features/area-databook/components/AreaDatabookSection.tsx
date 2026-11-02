@@ -14,6 +14,7 @@ import { getAreaDatabook, type AreaDatabookViewData } from "../server/get-area-d
 import { GenderPairedKpiGrid } from "./GenderPairedKpiGrid";
 import { PrefSymbolPanel } from "./PrefSymbolPanel";
 import { RankedKpiGrid } from "./RankedKpiGrid";
+import { KAKEI_TOP_ITEMS_SECTION_KEY, renderKakeiTopItems } from "./renderKakeiTopItems";
 import { SpecialtyList } from "./SpecialtyList";
 
 import type {
@@ -162,6 +163,7 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
   const sections = [...data.template.sections]
     .sort((a, b) => a.sortOrder - b.sortOrder)
     .filter((s) => sectionHasContent(s, data));
+  const kakeiTopItems = renderKakeiTopItems(data.databook);
 
   return (
     <PanelGrid as="section" aria-labelledby="area-databook-title">
@@ -217,6 +219,9 @@ export async function AreaDatabookSection({ areaCode, areaName }: Props) {
                 </div>
               );
               })}
+              {section.sectionKey === KAKEI_TOP_ITEMS_SECTION_KEY && kakeiTopItems && (
+                <div className="col-span-12">{kakeiTopItems}</div>
+              )}
             </PanelGrid>
           </PanelGrid>
         );

@@ -8,6 +8,13 @@ import {
 // isExcludedCorrelationPair
 // ---------------------------------------------------------------------------
 describe("isExcludedCorrelationPair", () => {
+  it("家計調査の同じ品目の支出額と購入数量は自明な組として外し、別の品目の組は残す", () => {
+    expect(isExcludedCorrelationPair("kerosene-consumption-expenditure", "kerosene-consumption-quantity")).toBe(true);
+    expect(isExcludedCorrelationPair("kerosene-consumption-quantity", "kerosene-consumption-expenditure")).toBe(true);
+    expect(isExcludedCorrelationPair("bread-consumption-expenditure", "other-bread-consumption-expenditure")).toBe(false);
+    expect(isExcludedCorrelationPair("bread-consumption-quantity", "rice-consumption-quantity")).toBe(false);
+  });
+
   // --- Explicit pair exclusion (EXCLUDED_PAIRS) ---
 
   it("should detect excluded pair in forward order", () => {

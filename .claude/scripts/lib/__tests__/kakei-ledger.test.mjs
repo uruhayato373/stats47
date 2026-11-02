@@ -87,10 +87,10 @@ test("buildKakeiLedger: 二人以上の世帯 (cdCat02=03) 以外の指標は品
   assert.equal(ledger.items.find((i) => i.measure === "amount" && i.code === "010110001").status, "undecided");
 });
 
-test("checkKakeiLedger: 作ったばかりの台帳はエラーなし (未判断の品目は warn)", () => {
+test("checkKakeiLedger: 作ったばかりの台帳はエラーなし (未判断の表・品目は warn)", () => {
   const findings = checkKakeiLedger({ ledger: build(), metrics, decisions });
   assert.deepEqual(findings.filter((f) => f.level === "error"), []);
-  assert.deepEqual(findings.map((f) => f.code), ["UNDECIDED_ITEMS"]);
+  assert.deepEqual(findings.map((f) => f.code), ["UNDECIDED_TABLES", "UNDECIDED_ITEMS"]);
 });
 
 test("checkKakeiLedger: 指標を足して台帳を作り直していなければ STALE_LEDGER で止める", () => {
@@ -124,4 +124,43 @@ test("checkKakeiLedger: 指標のある品目への見送り判断と、存在�
   const codes = checkKakeiLedger({ ledger: build({ decisions: conflicting }), metrics, decisions: conflicting }).map((f) => f.code);
   assert.ok(codes.includes("DECISION_CONFLICT"));
   assert.ok(codes.includes("UNKNOWN_DECISION"));
+});
+
+// ── 2026-11-02: 分析単位も使い手として数え、切り口台帳との整合と未判断の上限を検査する ──
+const QUINTILE = "0002070005";
+const lensTables = (entries) => new Map(entries);
+const errorCodes = (findings) => findings.filter((f) => f.level === "error").map((f) => f.code);
+
+test("buildKakeiLedger: 作成済みの分析単位がある表は adopted、候補だけなら planned", () => {
+  const staged = build({ analyses: [{ id: "food-quintile", statsDataId: QUINTILE, state: "staged" }] });
+  assert.equal(staged.tables.find((t) => t.statsDataId === QUINTILE).status, "adopted");
+  assert.deepEqual(staged.tables.find((t) => t.statsDataId === QUINTILE).analyses, ["food-quintile"]);
+  const proposed = build({ analyses: [{ id: "food-quintile", statsDataId: QUINTILE, state: "proposed" }] });
+  assert.equal(proposed.tables.find((t) => t.statsDataId === QUINTILE).status, "planned");
+});
+
+test("checkKakeiLedger: 切り口が使う表を未判断のままにすると LENS_TABLE_UNDECIDED で止め、判断を書けば通す", () => {
+  const lenses = lensTables([[AMOUNT, ["city"]], [QUANTITY, ["city"]], [QUINTILE, ["income"]]]);
+  assert.ok(errorCodes(checkKakeiLedger({ ledger: build(), metrics, lensTables: lenses, decisions })).includes("LENS_TABLE_UNDECIDED"));
+  const decided = { ...decisions, tables: [{ statsDataId: QUINTILE, status: "planned", reason: "年収五分位の図", decidedAt: "2026-11-02", decidedBy: "test" }] };
+  assert.deepEqual(errorCodes(checkKakeiLedger({ ledger: build({ decisions: decided }), metrics, lensTables: lenses, decisions: decided })), []);
+});
+
+test("checkKakeiLedger: 採用した表がどの切り口にも無ければ TABLE_WITHOUT_LENS、除外した表を切り口が使えば LENS_USES_EXCLUDED", () => {
+  const onlyAmount = lensTables([[AMOUNT, ["city"]]]);
+  assert.ok(errorCodes(checkKakeiLedger({ ledger: build(), metrics, lensTables: onlyAmount, decisions })).includes("TABLE_WITHOUT_LENS"));
+  const excluded = { ...decisions, tables: [{ statsDataId: QUINTILE, status: "excluded", reason: "二重", decidedAt: "2026-11-02", decidedBy: "test" }] };
+  const lenses = lensTables([[AMOUNT, ["city"]], [QUANTITY, ["city"]], [QUINTILE, ["income"]]]);
+  assert.ok(errorCodes(checkKakeiLedger({ ledger: build({ decisions: excluded }), metrics, lensTables: lenses, decisions: excluded })).includes("LENS_USES_EXCLUDED"));
+});
+
+test("checkKakeiLedger: 未判断の表が上限を超えたら UNDECIDED_GREW で止め、上限内なら通す", () => {
+  const ledger = build();
+  assert.ok(errorCodes(checkKakeiLedger({ ledger, metrics, decisions: { ...decisions, maxUndecidedTables: 0 } })).includes("UNDECIDED_GREW"));
+  assert.ok(!errorCodes(checkKakeiLedger({ ledger, metrics, decisions: { ...decisions, maxUndecidedTables: 1 } })).includes("UNDECIDED_GREW"));
+});
+
+test("checkKakeiLedger: 分析単位を足して台帳を作り直していなければ STALE_LEDGER で止める", () => {
+  const codes = errorCodes(checkKakeiLedger({ ledger: build(), metrics, analyses: [{ id: "new", statsDataId: QUINTILE, state: "staged" }], decisions }));
+  assert.ok(codes.includes("STALE_LEDGER"));
 });

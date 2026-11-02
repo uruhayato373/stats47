@@ -13,7 +13,7 @@ import Ajv from 'ajv';
 import { datasetDir, datasetPath } from '../../../../config/datasets.mjs';
 
 export const EXPANSION_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
-export const CHANNELS = ['ranking', 'survey', 'theme', 'area', 'japan', 'blog', 'note', 'x', 'instagram', 'youtube'];
+export const CHANNELS = ['ranking', 'survey', 'theme', 'area', 'japan', 'blog', 'note', 'kindle', 'x', 'instagram', 'youtube'];
 /** 指標・調査が公開ページに載っていれば、記録なしで済みとみなす展開先 */
 export const DERIVED_CHANNELS = new Set(['ranking', 'survey', 'theme', 'japan']);
 const ADOPTED = new Set(['reuse-existing-metric', 'new-metric', 'combined-analysis']);
@@ -25,6 +25,7 @@ const TARGET_KINDS = {
   japan: ['japan-theme'],
   blog: ['blog'],
   note: ['note'],
+  kindle: ['kindle'],
   x: ['sns'],
   instagram: ['sns'],
   youtube: ['sns'],
@@ -55,7 +56,7 @@ export function loadExpansion(root = EXPANSION_ROOT) {
   return ledger;
 }
 
-/** 各チャネルの正本から、ページ ID → 状態 の索引を作る。note は記事台帳、SNS は投稿台帳、ほかはページ ID の台帳 */
+/** 各チャネルの正本から、ページ ID → 状態 の索引を作る。note は記事台帳、Kindle は書籍の状態、SNS は投稿台帳、ほかはページ ID の台帳 */
 export function loadChannelIndex(root = EXPANSION_ROOT) {
   const pages = new Map();
   const pagesDir = path.join(root, datasetDir('content.pages'));
@@ -67,6 +68,12 @@ export function loadChannelIndex(root = EXPANSION_ROOT) {
   for (const a of readJson(path.join(root, datasetPath('note.articles'))).articles) {
     const rankingKeys = (a.stats47Targets ?? []).map((t) => t.match(/^\/ranking\/([^/?#]+)/)?.[1]).filter(Boolean);
     pages.set(`note:${a.key}`, { kind: 'note', published: a.status === 'published', rankingKeys, title: a.title });
+  }
+  // Kindle は book catalog から生成した状態 (products:report が書く)。公開 = KDP 公開済み (status published)
+  const kindleStatus = path.join(root, datasetDir('kindle.archives'), 'kindle-status.json');
+  if (fs.existsSync(kindleStatus)) {
+    for (const b of readJson(kindleStatus).books ?? [])
+      pages.set(`kindle:${b.id}`, { kind: 'kindle', published: b.status === 'published', rankingKeys: [], title: b.title });
   }
   for (const p of readJson(path.join(root, datasetPath('sns.posts'))).posts ?? []) {
     pages.set(`sns:${p.id}`, {

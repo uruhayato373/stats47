@@ -12,9 +12,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { KAKEI_ANALYSES } from "@stats47/data-configs";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 
-import { datasetPath } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../lib/dataset-shape.mjs";
 import {
   buildKakeiLedger,
@@ -42,6 +43,20 @@ function loadMetrics(): KakeiMetricInput[] {
     .filter((m) => m.isActive !== false)
     .map((m) => kakeiMetricInput(m))
     .filter((m): m is KakeiMetricInput => m !== null);
+}
+
+/** 分析単位 (全国ページの図など)。指標と同じく表の使い手として数える */
+function loadAnalyses(): { id: string; statsDataId: string; state: "configured" | "staged" | "proposed" }[] {
+  return KAKEI_ANALYSES.map((a) => ({ id: a.id, statsDataId: a.source.statsDataId, state: a.placement.state }));
+}
+
+/** 切り口台帳 (data/surveys/lenses/kakei-chousa.json) の表 → その表を使う切り口 */
+function loadLensTables(): Map<string, string[]> {
+  const file = path.join(PROJECT_ROOT, datasetDir("surveys.lenses"), "kakei-chousa.json");
+  const doc = readJson<{ lenses: { id: string; dataTables: string[] }[] }>(file);
+  const byTable = new Map<string, string[]>();
+  for (const lens of doc.lenses) for (const t of lens.dataTables) byTable.set(t, [...(byTable.get(t) ?? []), lens.id]);
+  return byTable;
 }
 
 function loadDecisions(): KakeiDecisions {
@@ -79,6 +94,7 @@ function build(): void {
     tables,
     classes,
     metrics: loadMetrics(),
+    analyses: loadAnalyses(),
     decisions,
     generatedAt: new Date().toISOString(),
     catalogGeneratedAt,
@@ -95,7 +111,13 @@ function check(): void {
   if (!fs.existsSync(file)) fail(`${datasetPath("estat.kakei-ledger")} が無い。npm run estat:kakei-ledger:build で作る`);
   const ledger = readJson<ReturnType<typeof buildKakeiLedger>>(file);
   assertDatasetShape("estat.kakei-ledger", ledger);
-  const findings = checkKakeiLedger({ ledger, metrics: loadMetrics(), decisions: loadDecisions() });
+  const findings = checkKakeiLedger({
+    ledger,
+    metrics: loadMetrics(),
+    analyses: loadAnalyses(),
+    lensTables: loadLensTables(),
+    decisions: loadDecisions(),
+  });
   for (const f of findings) console.log(`${f.level === "error" ? "✗" : "⚠"} [${f.code}] ${f.message}`);
   const errors = findings.filter((f) => f.level === "error").length;
   if (errors) fail(`家計調査の台帳: error ${errors} 件`);

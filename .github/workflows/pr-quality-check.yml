@@ -822,6 +822,15 @@ jobs:
           npm run estat:kakei-ledger:check
         continue-on-error: false
 
+      - name: 🔭 Survey Lens Ledger Gate
+        run: |
+          # 調査の切り口台帳 (data/surveys/lenses/<surveyId>.json) と、資料の問い (analyses.json の lensIds)・分析単位
+          # (kakei-analysis-catalog.ts の lensId) の整合を担保。切り口を資料ごとの札にして散らした再発防止 (2026-11-02)。
+          # 規約: .claude/rules/survey-content-standards.md「調査の切り口台帳」
+          npm run surveys:lenses:test
+          npm run surveys:lenses:check
+        continue-on-error: false
+
       - name: 📏 Unit Semantics Mirror Gate
         run: |
           # 単位の解釈は packages/data-configs/src/unit/unit-semantics.ts が正典で、

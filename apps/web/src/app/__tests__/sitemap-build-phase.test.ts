@@ -10,6 +10,7 @@
  * ビルド成果物そのものを手元で作れない。その代替検証がこのテスト。
  */
 import { CATEGORY_KEYS } from "@stats47/data-configs";
+import { SURVEY_HUB_ALIASES } from "@stats47/data-configs/content/href";
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
@@ -47,7 +48,8 @@ describe("sitemap: NEXT_PHASE=phase-production-build (実 reader)", () => {
   it("surveys segment がビルド時も配信中の調査を全件出す", async () => {
     // 修正前はここが 1 (/survey のみ) だった
     const entries = await sitemap({ id: SEGMENT_ID.surveys });
-    expect(entries.length).toBe(SITEMAP_SURVEY_IDS.length + 1);
+    // 同じ調査の別 ID (301 で寄せるハブ) はサイトマップに出さない
+    expect(entries.length).toBe(SITEMAP_SURVEY_IDS.filter((id) => !SURVEY_HUB_ALIASES[id]).length + 1);
   });
 
   it("tags segment がビルド時もタグを出す", async () => {

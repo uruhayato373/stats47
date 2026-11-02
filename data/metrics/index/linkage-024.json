@@ -2,6 +2,170 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "real-estate-leasing-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220845"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220845"
+        },
+        "derived": false,
+        "configHash": "c79330549276c9d7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:real-estate-leasing-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:real-estate-leasing-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "real-estate-leasing-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210845"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210845"
+        },
+        "derived": false,
+        "configHash": "553fce3b7e966280"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:real-estate-leasing-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:real-estate-leasing-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "real-estate-leasing-private-net-value-added",
+      "pageId": null,
+      "title": "業種別の純付加価値額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C620115"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C620115"
+        },
+        "derived": false,
+        "configHash": "2c888dda07efce35"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:real-estate-leasing-private-net-value-added",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:real-estate-leasing-private-net-value-added",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "real-estate-leasing-private-sales",
+      "pageId": null,
+      "title": "売上金額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C610115"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C610115"
+        },
+        "derived": false,
+        "configHash": "08c62abd7bee376a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:real-estate-leasing-private-sales",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:real-estate-leasing-private-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "real-public-debt-service-ratio",
       "pageId": "ranking:real-public-debt-service-ratio",
       "title": "実質公債費比率",
@@ -10109,211 +10273,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "road-length-per-km2",
-      "pageId": "ranking:road-length-per-km2",
-      "title": "道路実延長",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H06401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H06401"
-        },
-        "derived": false,
-        "configHash": "0d748666545898a5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:habitable-area-land-use",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:road-infrastructure-density",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:road-length-per-km2-vs-average-road-traffic-volume",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:road-length-per-km2-vs-local-special-grant-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:road-length-per-km2-vs-residential-building-starts",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:safe-driving-5-features",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:traffic-accident-deaths-regional-risk",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-length-per-km2",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-municipal-length",
-      "pageId": "ranking:road-municipal-length",
-      "title": "道路実延長（市町村道）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H7112"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H7112"
-        },
-        "derived": false,
-        "configHash": "4eb347b6572b6ea1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-municipal-length",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-national-route-length",
-      "pageId": "ranking:road-national-route-length",
-      "title": "道路実延長（一般国道）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H711101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H711101"
-        },
-        "derived": false,
-        "configHash": "b97c6b6894f63a3b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-national-route-length",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
-    },
-    {
-      "metricKey": "road-prefectural-route-length",
-      "pageId": "ranking:road-prefectural-route-length",
-      "title": "道路実延長（主要地方道）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H711102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H711102"
-        },
-        "derived": false,
-        "configHash": "08ef962bb00af85c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "ranking:road-prefectural-route-length",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:roads",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "roads"
-      ]
     }
   ]
 }

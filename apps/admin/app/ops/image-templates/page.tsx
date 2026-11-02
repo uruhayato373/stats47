@@ -5,7 +5,7 @@ import {
 } from '../../../../../.claude/scripts/media/lib/workspace.mjs';
 import { projectRoot } from '@/lib/server/project-root';
 import {
-  basicTemplateBranches,
+  templateCatalog,
   basicTemplateQuery,
 } from '@/lib/image-template-basics';
 import { redirect } from 'next/navigation';
@@ -46,11 +46,7 @@ export default async function Page({
   }));
   if (
     query.template &&
-    !basicTemplateBranches(templates).some(
-      (branch) =>
-        branch.templateId === query.template &&
-        (!query.purpose || branch.purpose === query.purpose)
-    )
+    !templateCatalog(templates).some((template) => template.id === query.template)
   )
     redirect(
       '/ops/image-library?' +

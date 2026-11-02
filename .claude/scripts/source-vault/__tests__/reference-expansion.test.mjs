@@ -60,3 +60,12 @@ test('suggestions list published pages of the channel kind that share a metric',
   assert.deepEqual(suggestTargets(analysis(), 'blog', index).map((h) => h.id), ['blog:post']);
   assert.deepEqual(suggestTargets(analysis(), 'x', index).map((h) => h.id), ['sns:7']);
 });
+
+test('kindle records point at a book (kindle:<id>) and are done only when the book is published', () => {
+  const kindleIndex = new Map([...index, ['kindle:K-S1-02', { kind: 'kindle', published: false, rankingKeys: [] }], ['kindle:K-S1-01', { kind: 'kindle', published: true, rankingKeys: [] }]]);
+  const a = analysis({ contentRoles: ['blog', 'kindle'] });
+  assert.deepEqual(checkRecord(rec({ channel: 'kindle', status: 'planned', target: 'kindle:K-S1-02' }), a, kindleIndex), []);
+  assert.ok(checkRecord(rec({ channel: 'kindle', status: 'done', target: 'kindle:K-S1-02' }), a, kindleIndex).some((e) => e.includes('公開中でない')));
+  assert.ok(checkRecord(rec({ channel: 'kindle', status: 'planned', target: 'blog:post' }), a, kindleIndex).some((e) => e.includes('ページ ID ではない')));
+  assert.equal(states(expansionStatus([a], { records: [rec({ channel: 'kindle', target: 'kindle:K-S1-01' })] }, kindleIndex)).kindle, 'done');
+});

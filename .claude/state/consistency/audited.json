@@ -1,7 +1,8 @@
 {
-  "hash": "ec5eb70dbe69c2ed554e47ac4551d052c0ddf0bb49968279657ffad6ea22e7e0",
-  "audited_at": "2026-10-31T23:54:35",
+  "hash": "b41a91daaa578f1d1a5ac40cca4c2b4b35e652cb78f3ecbcf5c3184d5eb47045",
+  "audited_at": "2026-11-02T03:19:46",
   "files": [
-    ".claude/rules/chart-component-standards.md"
+    ".claude/scripts/blog/fetch-kakei-city-average.mjs",
+    ".claude/skills/estat/references/household-expenditure-survey.md"
   ]
 }

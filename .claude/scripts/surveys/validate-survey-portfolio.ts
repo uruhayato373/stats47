@@ -39,6 +39,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs";
+import { surveyHubSourceIds } from "@stats47/data-configs/content/href";
 
 import {
   getSurveyEditorialContent,
@@ -171,7 +172,8 @@ function validateEditorial() {
       v("S8", `${surveyId}: summary は2〜3文が必須 (現在 ${summarySentences}文)`);
     if (content.whatYouCanLearn.length < 3 || content.whatYouCanLearn.length > 5)
       v("S8", `${surveyId}: whatYouCanLearn は3〜5件が必須 (現在 ${content.whatYouCanLearn.length}件)`);
-    const surveyKeys = membership.get(surveyId) ?? new Set<string>();
+    // ハブは同じ調査の別 ID の指標も載せる (家計調査は kakei-chousa に household-survey を統合。2026-11-02)
+    const surveyKeys = new Set(surveyHubSourceIds(surveyId).flatMap((id) => [...(membership.get(id) ?? [])]));
     const requiredReaderQuestions = requiredSurveyReaderQuestionCount(surveyKeys.size);
     if (content.readerQuestions.length < requiredReaderQuestions || content.readerQuestions.length > 5)
       v(

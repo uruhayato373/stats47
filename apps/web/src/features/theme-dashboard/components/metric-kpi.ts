@@ -1,3 +1,5 @@
+import { formatValueWithPrecision } from "@stats47/utils";
+
 import type {NumericDomainPolicy} from "@stats47/types";
 /**
  * テーマページの KPI 1 件。
@@ -26,6 +28,8 @@ export interface MetricKpi {
   /** 県のページだけ、その県の全国順位。全国のページは null。 */
   rank: number | null;
   total: number;
+  /** 47 都道府県の値から決めた小数桁 (resolveValuePrecision)。値の表示をこの桁で揃える */
+  precision?: number;
   /** ランキング snapshot の provenance。フッターの出典導線に使用する。 */
   sourceName?: string;
   sourceLink?: string;
@@ -53,7 +57,9 @@ export interface MetricKpi {
  * 指標の値の表示 (小数 2 桁まで)。数値タイルと県のページの説明文で同じ書き方にする (2026-10-30。
  * 旧: 説明文だけ丸めず「30.124%」、タイルは「30.12%」だった)
  */
-export function formatMetricValue(value: number): string {
+export function formatMetricValue(value: number, precision?: number): string {
+  // 47 県の値から決めた桁があればそれで揃える。無いと 33.0% が「33%」になり、隣の県の 33.6% と桁がずれる (2026-11-02)
+  if (precision !== undefined) return formatValueWithPrecision(value, precision);
   return value.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
 }
 

@@ -9578,6 +9578,14 @@
       "published": false
     },
     {
+      "id": "ranking:household-debt-balance",
+      "kind": "ranking",
+      "key": "household-debt-balance",
+      "title": "負債現在高",
+      "href": "/ranking/household-debt-balance",
+      "published": true
+    },
+    {
       "id": "ranking:household-head-allowance-consumption-expenditure",
       "kind": "ranking",
       "key": "household-head-allowance-consumption-expenditure",
@@ -9599,6 +9607,14 @@
       "key": "household-head-income-worker-households-per-month",
       "title": "世帯主収入",
       "href": "/ranking/household-head-income-worker-households-per-month",
+      "published": true
+    },
+    {
+      "id": "ranking:household-housing-debt-balance",
+      "kind": "ranking",
+      "key": "household-housing-debt-balance",
+      "title": "住宅・土地のための負債",
+      "href": "/ranking/household-housing-debt-balance",
       "published": true
     },
     {
@@ -9639,6 +9655,22 @@
       "key": "household-ratio-with-65plus",
       "title": "65歳以上の世帯員のいる世帯割合",
       "href": "/ranking/household-ratio-with-65plus",
+      "published": true
+    },
+    {
+      "id": "ranking:household-savings-balance",
+      "kind": "ranking",
+      "key": "household-savings-balance",
+      "title": "貯蓄現在高",
+      "href": "/ranking/household-savings-balance",
+      "published": true
+    },
+    {
+      "id": "ranking:household-securities-balance",
+      "kind": "ranking",
+      "key": "household-securities-balance",
+      "title": "有価証券の保有額",
+      "href": "/ranking/household-securities-balance",
       "published": true
     },
     {

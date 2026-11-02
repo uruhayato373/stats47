@@ -201,7 +201,7 @@ export function buildRankingItemFromMetric(
     categoryKey: config.category,
     additionalCategories: config.additionalCategories ?? null,
     ...(config.groupKey ? { groupKey: config.groupKey } : {}),
-    ...(config.note ? { annotation: config.note } : {}),
+    ...(annotationOf(config) ? { annotation: annotationOf(config) } : {}),
     ...(config.description ? { description: config.description } : {}),
     latestYear,
     availableYears,
@@ -230,4 +230,16 @@ export function buildRankingItemFromMetric(
     createdAt: ctx.existing?.createdAt ?? ctx.now,
     updatedAt: ctx.now,
   };
+}
+
+/**
+ * データ注釈 = config.note と、系列が終わっていればその旨 (seriesEnd)。
+ * 終わった系列を「最新」と誤読させない (2026-11-02。2007 年で止まった全世帯の費目が調査ハブに並んでいた)
+ */
+function annotationOf(config: MetricConfig): string | undefined {
+  const end = config.seriesEnd
+    ? `この系列は ${config.seriesEnd.lastYear} 年で終わっている (${config.seriesEnd.reason})。`
+    : null;
+  const text = [end, config.note].filter(Boolean).join(" ");
+  return text || undefined;
 }

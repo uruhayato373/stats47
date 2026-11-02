@@ -2,6 +2,780 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "total-expenditure-municipal",
+      "pageId": null,
+      "title": "歳出決算総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D3203"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D3203"
+        },
+        "derived": false,
+        "configHash": "bf7da8074e736a90"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:total-expenditure-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:total-expenditure-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-expenditure-prefecture",
+      "pageId": "ranking:total-expenditure-prefecture",
+      "title": "歳出決算総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103"
+        },
+        "derived": false,
+        "configHash": "faaa2974400b3117"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:total-expenditure-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-farm-household-income",
+      "pageId": "ranking:total-farm-household-income",
+      "title": "農家総所得",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L01100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L01100"
+        },
+        "derived": false,
+        "configHash": "293ae194476d486f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sixth-industry-direct-sales",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:total-farm-household-income",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-fertility-rate",
+      "pageId": "ranking:total-fertility-rate",
+      "title": "合計特殊出生率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A4103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A4103"
+        },
+        "derived": false,
+        "configHash": "2e538863462fb508"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:abortion-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:birth-death-gap-decline",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:cc-estat-07-birthrate-line",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:divorces-per-total-population",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:dual-income-childcare-dilemma",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:elementary-school-children-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fertility-fiscal-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fertility-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:future-population-disappearing-prefectures",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:future-population-tokyo-paradox",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:livable-prefecture-composite-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:total-fertility-rate",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:unmarried-rate-40years-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:total-fertility-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:population-dynamics",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society",
+        "population-dynamics"
+      ]
+    },
+    {
       "metricKey": "total-general-project-investment",
       "pageId": "ranking:total-general-project-investment",
       "title": "一般事業総投資額",
@@ -11426,755 +12200,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "unemployed-persons-male",
-      "pageId": null,
-      "title": "完全失業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020206",
-          "filters": {
-            "cdCat01": "F110701"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020206",
-          "cdCat01": "F110701"
-        },
-        "derived": false,
-        "configHash": "6fe1c8074b14fa30"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:unemployed-persons-male",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-wages",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:unemployed-persons-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "unemployment-measures-expenses-prefecture",
-      "pageId": "ranking:unemployment-measures-expenses-prefecture",
-      "title": "失業対策費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103053"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103053"
-        },
-        "derived": false,
-        "configHash": "f6114b220559f385"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:unemployment-measures-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "unemployment-measures-project-expenses-prefecture",
-      "pageId": null,
-      "title": "失業対策事業費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310408"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310408"
-        },
-        "derived": false,
-        "configHash": "b8f4306bc4e82cf4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:unemployment-measures-project-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "unemployment-rate",
-      "pageId": "ranking:unemployment-rate",
-      "title": "完全失業率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F01301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F01301"
-        },
-        "derived": false,
-        "configHash": "5497b6b82fc01813"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:labor-mobility",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:labor-wages",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:livable-prefecture-composite-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:unemployment-structure",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:unemployment-tertiary-industry-link",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:labor-mobility",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:local-economy",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "municipality-ranking:unemployment-rate",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-wages",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:unemployment-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:labor-mobility",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:labor-wages",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "labor-mobility",
-        "labor-wages"
-      ]
     }
   ]
 }

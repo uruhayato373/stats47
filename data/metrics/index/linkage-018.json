@@ -2,6 +2,173 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "nursing-welfare-facilities-detailed-tabulation-6510-per",
+      "pageId": null,
+      "title": "介護老人福祉施設（詳細票）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020310",
+          "filters": {
+            "cdCat01": "#J02205"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020310",
+          "cdCat01": "#J02205"
+        },
+        "derived": false,
+        "configHash": "43d148997bae6512"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "nursing-welfare-facility-count-per-100k-65plus",
+      "pageId": "ranking:nursing-welfare-facility-count-per-100k-65plus",
+      "title": "介護老人福祉施設数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J02205"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J02205"
+        },
+        "derived": false,
+        "configHash": "2c7c613369d02a9c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:aging-solo-living-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nursing-care-shortage-2040",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:nursing-welfare-facility-count-per-100k-65plus",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:healthcare",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:nursing-welfare-facility-count-per-100k-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-agriculture-forestry-fishery-employee-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1302"
+        },
+        "derived": false,
+        "configHash": "a7b9669d991bd8ca"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-agriculture-forestry-fishery-employee-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupation-salary",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-agriculture-forestry-fishery-employee-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "occupation-agriculture-forestry-fishery-workers",
+      "pageId": null,
+      "title": "職業別就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F1301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F1301"
+        },
+        "derived": false,
+        "configHash": "4bb4eec242e5abf1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:occupation-agriculture-forestry-fishery-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:occupation-salary",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:occupation-agriculture-forestry-fishery-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "occupation-clerical-workers",
       "pageId": null,
       "title": "職業別就業者数",
@@ -5883,158 +6050,6 @@
       "consumers": [
         {
           "pageId": "ranking:other-mushroom-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-mushroom-consumption-quantity",
-      "pageId": "ranking:other-mushroom-consumption-quantity",
-      "title": "他のきのこ消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010513100",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010513100",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "1f81d148353044db"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-mushroom-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-non-savings-insurance-consumption-expenditure",
-      "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
-      "title": "他の非貯蓄型保険料消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "100150070",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "100150070",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "97ba54e0e845e7d3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-noodle-dining-consumption-expenditure",
-      "pageId": "ranking:other-noodle-dining-consumption-expenditure",
-      "title": "他の麺類外食消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "011211030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "011211030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "10a71f2bd2c6d874"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:other-noodle-dining-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "other-noodles-consumption-expenditure",
-      "pageId": "ranking:other-noodles-consumption-expenditure",
-      "title": "他の麺類消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010130070",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010130070",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "d7898620ef32a6e3"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:other-noodles-consumption-expenditure",
           "kind": "ranking"
         }
       ],

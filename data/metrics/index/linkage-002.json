@@ -1958,7 +1958,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "filters": {
             "cdCat02": "03"
           }
@@ -1967,7 +1967,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348235",
+          "statsDataId": "0004023606",
           "cdCat02": "03"
         },
         "ops": {
@@ -1981,7 +1981,7 @@
           }
         },
         "derived": true,
-        "configHash": "2f8fe5efbd265176"
+        "configHash": "4be8dc407406f52b"
       },
       "dependencies": [],
       "normalizationDependencies": [],

@@ -29,7 +29,7 @@ describe('getSurveyEditorialContent', () => {
       'rice-consumption-quantity',
       'green-tea-consumption-quantity',
       'cup-noodles-consumption-expenditure',
-      'beef-consumption-quantity',
+      'actual-income-worker-households-per-month',
     ]);
     expect(content?.caveats).toContainEqual(expect.stringContaining('3年平均'));
   });
@@ -92,5 +92,23 @@ describe('getSurveyEditorialContent', () => {
     expect(content?.caveats).toContainEqual(
       expect.stringContaining('1年間の増減率ではありません')
     );
+  });
+});
+
+describe('家計調査のハブ', () => {
+  it('収入・支出割合のハブ (household-survey) は品目別ハブへまとめ、編集定義を持たない', () => {
+    expect(getSurveyEditorialContent('household-survey')).toBeNull();
+  });
+});
+
+describe('都市別の値を集める調査の問い', () => {
+  it('地域の表記が都市別の調査は、問いで「都道府県」「県」を名指ししない (値は県庁所在市で、県全体ではない)', () => {
+    for (const surveyKey of ['kakei-chousa']) {
+      const editorial = getSurveyEditorialContent(surveyKey);
+      expect(editorial?.areaLabel).toContain('都市');
+      for (const { question } of editorial?.readerQuestions ?? []) {
+        expect(question).not.toMatch(/都道府県は|県は/);
+      }
+    }
   });
 });

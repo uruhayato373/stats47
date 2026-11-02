@@ -7,6 +7,7 @@
  *
  * 正典: `.claude/rules/survey-linkage-standards.md`
  */
+import { canonicalSurveyHubKey } from '@stats47/data-configs/content/href';
 import { resolveProvenanceByParams } from '@stats47/data-configs/provenance';
 import { resolveSurveyId as resolveSurveyIdBySourceName } from '@stats47/data-configs/source-name-to-survey';
 import type { MetricRegistry, ProvenanceSurvey } from '@stats47/data-configs';
@@ -107,7 +108,8 @@ function dedupeSurveys(
 export function getSurveyTaxonomyEntries(
   ids: readonly string[]
 ): ProvenanceSurvey[] {
-  return unique(ids).flatMap((id) => {
+  // 同じ調査の別 ID は表示するハブへ寄せてから重複を除く (家計調査の 2 つの ID が「家計調査」を 2 回並べていた。2026-11-02)
+  return unique(ids.map(canonicalSurveyHubKey)).flatMap((id) => {
     const survey = MASTER_BY_ID.get(id);
     return survey ? [{ id: survey.id, name: survey.name }] : [];
   });

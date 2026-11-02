@@ -48,6 +48,10 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   // https://www.mhlw.go.jp/content/11201000/001282630.pdf
   // 大綱の「週40時間以上」分母を、本カタログの「年間200日以上」の分母へ転用しない。
   // 2026-10-16 労働・賃金の 4 指標 (NOTE-LABOR-METRICS-ADD-01)。定義は各 metrics/<key>.ts の description・note。
+  "household-savings-balance": { polarity: "neutral", evidence: "県庁所在市の二人以上世帯の平均の貯蓄現在高で、世帯主の年齢構成と一部の高額世帯に大きく左右され、暮らし向きの良否を一方向に読めない。" },
+  "household-securities-balance": { polarity: "neutral", evidence: "貯蓄現在高のうち株式・債券・投資信託の保有額の平均で、資産の運用の仕方と高額世帯の有無を表し、良否を一方向に決められない。" },
+  "household-debt-balance": { polarity: "neutral", evidence: "負債の大半は住宅ローンで、持家を取得した若い世帯が多い都市ほど大きくなるため、家計の苦しさを直接表さない。" },
+  "household-housing-debt-balance": { polarity: "neutral", evidence: "住宅・土地のための負債現在高の平均で、住宅取得の時期と地価・世帯の年齢構成を反映し、良否を一方向に読めない。" },
   "annual-paid-leave-11-days-or-more-ratio": { polarity: "neutral", evidence: "取得日数の区分の割合で、付与日数そのものが勤続年数や雇用形態で違うため取得率ではなく、休みやすさの良否を一方向に決められない。" },
   "information-communication-industry-annual-income": { polarity: "neutral", evidence: "県内の情報通信業の事業所で働く一般労働者の推計年収で、職種構成・企業規模・物価水準の違いを含み、標本の小さい県では年ごとに大きく振れる。" },
   "manufacturing-industry-annual-income": { polarity: "neutral", evidence: "県内の製造業の事業所で働く一般労働者の推計年収で、業種構成・企業規模・物価水準の違いを含み、住民の暮らし向きの良否を直接表さない。" },

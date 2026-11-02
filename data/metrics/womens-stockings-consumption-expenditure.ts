@@ -5,6 +5,7 @@ export const womensStockingsConsumptionExpenditure: MetricConfig = {
   "key": "womens-stockings-consumption-expenditure",
   "title": "婦人用ストッキング消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人用ストッキング消費支出額",
+  "note": "2025年1月の品目分類改定でストッキングは「他の被服のその他」(品目番号659) に統合されたため、この指標は2024年が最終の値 (総務省「収支項目分類及びその内容例示」2025年改定)",
   "unit": "円",
   "category": "economy",
   "source": {
@@ -44,5 +45,6 @@ export const womensStockingsConsumptionExpenditure: MetricConfig = {
   },
   "seoTitle": "婦人用ストッキング消費支出額ランキング都道府県【2024年】｜1位石川県（502円）",
   "seoDescription": "2024年の婦人用ストッキング消費支出額の都道府県別ランキング。1位石川県（502円）、最下位群馬県（129円）で3.9倍の格差。地図やグラフで47都道府県を比較。",
+  "seriesEnd": { "lastYear": 2024, "reason": "家計調査の 2025 年の品目分類の改定で「他の被服のその他」に統合され、単独の品目でなくなった" },
   "isActive": true,
 };

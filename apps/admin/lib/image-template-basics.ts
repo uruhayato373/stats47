@@ -2,18 +2,33 @@ import type { Template } from '../../../.claude/scripts/media/lib/workspace.mjs'
 import { taxonomyQuery } from '../../../.claude/scripts/media/lib/taxonomy.mjs';
 import type { MetricPresentation } from '@stats47/types';
 
-/** Basic forms are chosen from the type catalogue, never from article/image inventory. */
-const PURPOSE_TYPES: Record<string, string[]> = {
-  ranking: ['bar', 'table', 'tile-map'],
-  comparison: ['bar', 'table', 'radar', 'waterfall'],
-  trend: ['line', 'tile-map'],
-  composition: ['stacked-bar', 'pie', 'table'],
-  relationship: ['scatter', 'sankey'],
-  distribution: ['choropleth', 'tile-map', 'boxplot', 'heatmap'],
-  explanation: ['diagram', 'summary-card'],
-  navigation: ['link-card', 'cta-card'],
-  reference: ['source-card'],
-};
+/**
+ * The type ledger lists each visual form once. Purposes are an attribute of the form
+ * (`purposes`), not a tree position, so one form never appears under several headings.
+ */
+export const TEMPLATE_GROUPS = [
+  { id: 'chart', label: '統計図' },
+  { id: 'chart-minor', label: '使用例の少ない統計図' },
+  { id: 'asset', label: '図以外の素材' },
+] as const;
+export type TemplateGroupId = (typeof TEMPLATE_GROUPS)[number]['id'];
+// The classification queue and the note cover studio own these two.
+const MANAGED_ELSEWHERE = new Set(['unclassified', 'note-cover']);
+export const templateGroup = (template: Template): TemplateGroupId => template.group ?? 'asset';
+/** Resolve a buzz-map type (A–F, flow) to the ledger form and drawing variant it belongs to. */
+export function imageTypeOfBuzzMap(buzzMapType: string | undefined, templates: Template[]) {
+  if (!buzzMapType) return null;
+  for (const template of templates)
+    for (const variant of template.variants ?? [])
+      if (variant.buzzMapTypes?.includes(buzzMapType))
+        return { templateId: template.id, label: template.label + '・' + variant.label, status: variant.status };
+  return null;
+}
+/** Forms shown on the type page, optionally narrowed to one purpose. */
+export function templateCatalog<T extends Template>(templates: T[], purpose?: string) {
+  return templates.filter((template) => !MANAGED_ELSEWHERE.has(template.id) &&
+    (!purpose || (template.purposes ?? []).includes(purpose)));
+}
 export interface StatisticalSample {
   id: string;
   templateId: string;
@@ -22,7 +37,7 @@ export interface StatisticalSample {
   label?: string;
   topic?: string;
   imageId?: string;
-  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked';
+  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked' | 'relationship-scatter' | 'distribution-map' | 'tile-change';
   referenceImages?: { imageId: string; label: string }[];
 }
 /** A small curated sample per form, not a menu of every article using the form. */
@@ -105,8 +120,9 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'temperature-kerosene',
     templateId: 'scatter',
     purpose: 'relationship',
-    statistic: '平均気温と灯油購入数量',
-    imageId: 'IMG-53b2df4d3e2fb0581af64f02',
+    statistic: '年平均気温と灯油消費量（2024年）',
+    renderer: 'relationship-scatter',
+    referenceImages: [{ imageId: 'IMG-53b2df4d3e2fb0581af64f02', label: '平均気温と灯油購入数量（公開済み）' }],
   },
   {
     id: 'liquor-breakdown',
@@ -129,7 +145,8 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     templateId: 'choropleth',
     purpose: 'distribution',
     statistic: '都道府県別の最高気温（2024年）',
-    imageId: 'IMG-b853d348f90285971268e44e',
+    renderer: 'distribution-map',
+    referenceImages: [{ imageId: 'IMG-b853d348f90285971268e44e', label: '最高気温の地図（公開済み）' }],
   },
   {
     id: 'maximum-temperature-tile-map',
@@ -146,8 +163,9 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'population-change',
     templateId: 'tile-map',
     purpose: 'trend',
-    statistic: '都道府県別人口の長期変化',
-    imageId: 'IMG-165950508e29a5c24d5893f8',
+    statistic: '都道府県別人口の長期変化（1975→2025年）',
+    renderer: 'tile-change',
+    referenceImages: [{ imageId: 'IMG-165950508e29a5c24d5893f8', label: 'X：人口の長期変化（旧デザイン・公開済み）' }],
   },
   {
     id: 'household-radar',
@@ -186,16 +204,6 @@ export type StatisticalSampleView = StatisticalSample & {
   media: Partial<Record<'note' | 'web' | 'x' | 'instagram', SampleImage>>;
   basisImages?: { src: string; label: string; pageUrl?: string | null }[];
 };
-export function basicTemplateBranches<T extends Template>(templates: T[]) {
-  return Object.entries(PURPOSE_TYPES).flatMap(([purpose, ids]) =>
-    ids.flatMap((templateId) => {
-      const template = templates.find((t) => t.id === templateId);
-      return template
-        ? [{ key: templateId + ':' + purpose, templateId, purpose, template }]
-        : [];
-    })
-  );
-}
 /** Saved topic/media/sample bookmarks resolve to the same type without selecting an article. */
 export function basicTemplateQuery(raw: Record<string, string | undefined>) {
   const query = taxonomyQuery(raw);

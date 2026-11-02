@@ -1,8 +1,9 @@
-export type ExpansionChannel = 'ranking' | 'survey' | 'theme' | 'area' | 'japan' | 'blog' | 'note' | 'x' | 'instagram' | 'youtube';
+export type ExpansionChannel = 'ranking' | 'survey' | 'theme' | 'area' | 'japan' | 'blog' | 'note' | 'kindle' | 'x' | 'instagram' | 'youtube';
 export type ExpansionState = 'done' | 'derived' | 'planned' | 'declined' | 'pending';
 export interface ReferenceAnalysis {
   id: string; sourceKey: string; edition: string; chapter: number; question: string; thesis: string; resolution: string;
   metricKeys: string[]; surveyIds: string[]; geoScopes: string[]; contentRoles: ExpansionChannel[]; nextAction: string;
+  lensIds?: string[];
   resolutionReason?: string;
   primarySources?: { organization: string; publicationOrDataset: string; url: string; dataYears?: string[] }[];
 }

@@ -41,6 +41,14 @@ test('欠測・重複・非有限値は描画を止める', () => {
 test('県庁所在市の値を県全体と誤認させず都市名で表示する', () => {
   const svg = renderAll47TileSvg(rows, { ...opts, capitalCities: true });
   for (const city of ['札幌市', 'さいたま市', '東京区部', '横浜市', '那覇市']) assert.ok(svg.includes(city));
-  assert.ok(svg.includes('47都市を見比べる'));
-  assert.ok(!svg.includes('全47都道府県を見比べる'));
+  assert.ok(svg.includes('県庁所在市'));
+});
+test('発行元・宣伝文・読み方の注記を画像に入れない (chart-image-copy.md)', async () => {
+  const { assertMinimalChartCopy } = await import('../../media/lib/image-copy.mjs');
+  for (const capitalCities of [false, true]) {
+    const svg = renderAll47TileSvg(rows, { ...opts, capitalCities });
+    assertMinimalChartCopy(svg);
+    for (const text of ['stats47', '見比べる', '一枚で', '色が濃いほど', '模式図']) assert.ok(!svg.includes(text), text);
+    for (const text of ['2024年', '単位：人', '出典：出典']) assert.ok(svg.includes(text), text);
+  }
 });

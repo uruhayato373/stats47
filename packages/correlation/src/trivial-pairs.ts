@@ -591,7 +591,24 @@ export function isExcludedCorrelationPair(
   rankingKeyX: string,
   rankingKeyY: string
 ): boolean {
-  return excludedPairSet.has(pairKey(rankingKeyX, rankingKeyY));
+  return (
+    excludedPairSet.has(pairKey(rankingKeyX, rankingKeyY)) ||
+    isSameItemSpendAndQuantity(rankingKeyX, rankingKeyY)
+  );
+}
+
+const KAKEI_ITEM_KEY = /^(.+)-consumption-(?:expenditure|quantity)$/;
+
+/**
+ * 家計調査の同じ品目の支出額と購入数量 (`<品目>-consumption-expenditure` と `-quantity`)。
+ * 支出額は数量 × 単価なので相関が高いのは当たり前で、テーマの「関連の深い指標」に
+ * 灯油の支出額と数量 (+1.00) のような組が並んでいた (2026-11-02)。191 品目が対になる。
+ */
+function isSameItemSpendAndQuantity(keyA: string, keyB: string): boolean {
+  if (keyA === keyB) return false;
+  const a = KAKEI_ITEM_KEY.exec(keyA);
+  const b = KAKEI_ITEM_KEY.exec(keyB);
+  return a !== null && b !== null && a[1] === b[1];
 }
 
 /**

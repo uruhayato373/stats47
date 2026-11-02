@@ -28,6 +28,7 @@ primary_agent: trend-scout
 
 ```bash
 npm run reference:expansion -- pending --channel blog
+npm run surveys:lenses:status -- --survey kakei-chousa   # 切り口ごとの役割と未着手 (家計調査など切り口台帳のある調査)
 ```
 
 書籍の問いから作るブログ候補。同じ指標の公開記事が候補に出るので、問いが同じなら `record --status done --target blog:<slug>`、

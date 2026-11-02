@@ -33,6 +33,12 @@ const COFFEE_ACCESSORIES = /(?:コーヒー|珈琲)(?:用|色|カラー|カッ�
 const DIFFERENT_PRODUCT_COMPOUNDS: Readonly<Record<string, readonly string[]>> = {
   納豆: ["甘納豆"],
 };
+/**
+ * 家電を検索語にしたとき、商品名に家電名を並べただけの付属品・周辺品。
+ * 「電気冷蔵庫」で冷蔵庫に貼るホワイトボードのシートが「電気冷蔵庫の人気商品」に出ていた (2026-11-02)。
+ */
+const APPLIANCE_QUERIES = /冷蔵庫|洗濯機|エアコン|掃除機|電子レンジ|炊飯器|テレビ|食器洗い機/;
+const APPLIANCE_ACCESSORIES = /ホワイトボード|マグネット|カバー|マット|ラック|防振|かさ上げ|置き台|収納|リモコン|ホース|ステッカー|シール/;
 const VOUCHERS = /券|チケット|ギフトカード|地域通貨|ポイント|ウエディング|ウェディング|あとからセレクト|旅行クーポン|宿泊クーポン/;
 
 export function isShippingFeeItem(name: string): boolean {
@@ -65,6 +71,9 @@ export function productQualityReasons(item: RakutenQualityItem, query: string): 
   if (!hasProductTitleMatch(item.name, query)) reasons.push("title-mismatch");
   if (NON_FOOD_KINDS.test(item.name) && !NON_FOOD_KINDS.test(query)) reasons.push("product-kind-mismatch");
   if (/^(?:コーヒー|珈琲)$/.test(query) && COFFEE_ACCESSORIES.test(item.name)) reasons.push("product-accessory");
+  if (APPLIANCE_QUERIES.test(query) && APPLIANCE_ACCESSORIES.test(item.name) && !APPLIANCE_ACCESSORIES.test(query)) {
+    reasons.push("product-accessory");
+  }
   const compounds = DIFFERENT_PRODUCT_COMPOUNDS[query.trim()];
   if (compounds && !compounds.reduce((name, word) => name.replaceAll(word, ""), item.name).includes(query.trim())) {
     reasons.push("different-product");

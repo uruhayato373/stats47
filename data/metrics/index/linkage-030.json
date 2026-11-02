@@ -2,6 +2,755 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "unemployed-persons-male",
+      "pageId": null,
+      "title": "完全失業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F110701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F110701"
+        },
+        "derived": false,
+        "configHash": "6fe1c8074b14fa30"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:unemployed-persons-male",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:unemployed-persons-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unemployment-measures-expenses-prefecture",
+      "pageId": "ranking:unemployment-measures-expenses-prefecture",
+      "title": "失業対策費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103053"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103053"
+        },
+        "derived": false,
+        "configHash": "f6114b220559f385"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:unemployment-measures-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unemployment-measures-project-expenses-prefecture",
+      "pageId": null,
+      "title": "失業対策事業費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310408"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310408"
+        },
+        "derived": false,
+        "configHash": "b8f4306bc4e82cf4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:unemployment-measures-project-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "unemployment-rate",
+      "pageId": "ranking:unemployment-rate",
+      "title": "完全失業率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F01301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F01301"
+        },
+        "derived": false,
+        "configHash": "5497b6b82fc01813"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:livable-prefecture-composite-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:unemployment-structure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:unemployment-tertiary-industry-link",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:labor-mobility",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:labor-wages",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "japan-theme:local-economy",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "municipality-ranking:unemployment-rate",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:unemployment-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:labor-mobility",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:labor-wages",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "labor-mobility",
+        "labor-wages"
+      ]
+    },
+    {
       "metricKey": "unemployment-rate-man",
       "pageId": null,
       "title": "完全失業率",
@@ -8625,419 +9374,6 @@
       "themes": [
         "water-services"
       ]
-    },
-    {
-      "metricKey": "water-supply-population-ratio-pre2011",
-      "pageId": "ranking:water-supply-population-ratio-pre2011",
-      "title": "上水道給水人口比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H05201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H05201"
-        },
-        "derived": false,
-        "configHash": "085009cd3980b916"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:water-supply-population-ratio-pre2011",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "watermelon-consumption-expenditure",
-      "pageId": "ranking:watermelon-consumption-expenditure",
-      "title": "すいか消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010610100",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010610100",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "994be989bb69863a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:aomori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:watermelon-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:watermelon-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "watermelon-consumption-quantity",
-      "pageId": "ranking:watermelon-consumption-quantity",
-      "title": "すいか消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010610100",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010610100",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b4192cf8a0de68cb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:aomori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:watermelon-consumption-quantity",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "wedding-expense-consumption-expenditure",
-      "pageId": "ranking:wedding-expense-consumption-expenditure",
-      "title": "婚礼関係費消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "100150030",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "100150030",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "f5f3e74cccb189e7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:wedding-expense-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

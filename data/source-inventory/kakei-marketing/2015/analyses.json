@@ -26,6 +26,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-cross-metric"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -132,6 +135,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-cross-metric"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -176,6 +182,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-cross-metric"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -226,6 +235,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-cross-metric"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -279,6 +292,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-long-term-trend"
+      ],
       "geoScopes": [
         "japan"
       ],
@@ -327,6 +344,9 @@
       "resolutionReason": "家計調査の年間収入五分位別データで背景として確認できるが、独立指標にはしない",
       "metricKeys": [],
       "surveyIds": [],
+      "lensIds": [
+        "kakei-income-class"
+      ],
       "geoScopes": [
         "japan"
       ],
@@ -401,6 +421,11 @@
       "resolutionReason": "方法論であり数値投入対象ではないが、stats47の年収五分位記事の設計原則として採用する",
       "metricKeys": [],
       "surveyIds": [],
+      "lensIds": [
+        "kakei-definition-reading",
+        "kakei-income-class",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "japan"
       ],
@@ -445,6 +470,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-budget-structure"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -493,6 +522,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -548,6 +580,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -601,6 +636,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -660,6 +699,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -713,6 +756,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -768,6 +815,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-city-comparison"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -816,6 +867,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -876,6 +930,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -921,6 +978,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-seasonality",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "japan"
@@ -987,6 +1048,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-long-term-trend"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -1038,6 +1102,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-income-class",
+        "kakei-long-term-trend"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -1083,6 +1151,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-budget-structure",
+        "kakei-definition-reading"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -1155,6 +1227,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-budget-structure",
+        "kakei-household-attributes"
+      ],
       "geoScopes": [
         "japan"
       ],
@@ -1199,6 +1275,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-budget-structure",
+        "kakei-cross-metric"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -1267,6 +1347,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-budget-structure"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -1321,6 +1404,11 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-long-term-trend",
+        "kakei-seasonality",
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -1387,6 +1475,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-price-quantity",
+        "kakei-long-term-trend"
+      ],
       "geoScopes": [
         "prefecture-set",
         "japan"
@@ -1449,6 +1541,9 @@
       "resolutionReason": "政策論であり観測値ではない。酒類記事の背景注記としてのみ使う",
       "metricKeys": [],
       "surveyIds": [],
+      "lensIds": [
+        "kakei-long-term-trend"
+      ],
       "geoScopes": [
         "japan"
       ],
@@ -1498,6 +1593,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-income-class"
       ],
       "geoScopes": [
         "prefecture-set",
@@ -1554,6 +1652,10 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-definition-reading",
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -1630,6 +1732,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -1683,6 +1788,10 @@
       "resolutionReason": "方法論であり数値投入対象ではないが、都道府県の食文化記事の型として採用する",
       "metricKeys": [],
       "surveyIds": [],
+      "lensIds": [
+        "kakei-price-quantity",
+        "kakei-definition-reading"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -1721,6 +1830,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -1767,6 +1880,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -1811,6 +1928,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -1857,6 +1978,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -1901,6 +2026,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -1952,6 +2081,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -1996,6 +2129,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2042,6 +2179,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2086,6 +2227,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2132,6 +2277,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2176,6 +2325,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2222,6 +2375,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2267,6 +2424,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2311,6 +2472,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2362,6 +2527,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2406,6 +2575,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2452,6 +2625,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2496,6 +2673,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2542,6 +2723,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2586,6 +2771,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2632,6 +2821,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2676,6 +2869,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2722,6 +2919,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2767,6 +2968,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2811,6 +3016,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -2862,6 +3071,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2907,6 +3120,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -2951,6 +3168,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3002,6 +3223,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3046,6 +3271,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3092,6 +3321,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3136,6 +3369,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3182,6 +3419,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3226,6 +3467,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3277,6 +3522,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3321,6 +3570,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3367,6 +3620,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3412,6 +3669,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3456,6 +3717,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3507,6 +3772,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3551,6 +3820,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3597,6 +3870,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3641,6 +3918,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3687,6 +3968,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3731,6 +4016,10 @@
       "metricKeys": [],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
       ],
       "geoScopes": [
         "prefecture"
@@ -3782,6 +4071,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3832,6 +4125,10 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison",
+        "kakei-price-quantity"
+      ],
       "geoScopes": [
         "prefecture"
       ],
@@ -3880,6 +4177,9 @@
       "resolutionReason": "結論的な主張であり観測値ではないが、産地×消費地の記事の視点として使える",
       "metricKeys": [],
       "surveyIds": [],
+      "lensIds": [
+        "kakei-cross-metric"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

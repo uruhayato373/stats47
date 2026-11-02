@@ -18,7 +18,7 @@ export const engelCoefficient: MetricConfig = {
   entities: ['prefecture'],
   years: {
     from: 2007,
-    to: 2024,
+    to: 2025,
   },
   yearFormat: 'calendar',
   visualization: {

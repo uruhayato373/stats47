@@ -197,6 +197,32 @@ describe('旧 ranking slug の現行ページ移行', () => {
   });
 });
 
+describe('同じ調査の別ハブの統合', () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(path: string): NextRequest {
+    const nextRequest = new NextRequest('https://stats47.jp' + path);
+    Object.defineProperty(nextRequest, 'nextUrl', { value: new URL(nextRequest.url) });
+    return nextRequest;
+  }
+
+  test('家計調査の収入・支出割合のハブを品目別ハブへ 301 し、ほかの調査は通す', () => {
+    const response = middleware(request('/survey/household-survey'));
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe('https://stats47.jp/survey/kakei-chousa');
+
+    expect(middleware(request('/survey/census')).status).not.toBe(301);
+  });
+});
+
 describe('県別テーマURLの正規化', () => {
   const originalNext = NextResponse.next;
 

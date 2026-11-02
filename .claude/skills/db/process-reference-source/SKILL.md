@@ -102,9 +102,14 @@ npm run source-vault:inventory -- coverage --profile <profile> --check
 分析企画 (`data/source-inventory/<sourceKey>/<edition>/analyses.json`。形は `analyses.schema.json`) の `contentRoles` が展開先の宛先になる。
 企画を足した・変えたら次を実行し、展開先ごとの未着手を担当へ渡す。記録の仕方と担当の一覧は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
 
+企画が切り口台帳のある調査 (`data/surveys/lenses/<surveyId>.json`。家計調査など) を `surveyIds` に持つなら、`lensIds` でその調査の切り口に結ぶ。
+切り口は資料ではなく調査の持ち物なので、資料ごとに切り口の一覧や論点カタログを作らない (2026-11-02 に本の論点カタログを廃止し、切り口台帳へ統合した)。
+台帳に無い切り口が要るときは、切り口台帳の担当 survey-curator へ追加を依頼する。
+
 ```bash
 npm run reference:expansion -- check
 npm run reference:expansion -- status
+npm run surveys:lenses:check     # 問いの lensIds と切り口台帳の整合 (未接続を止める)
 ```
 
 テーマ・県・全国に載せる指標単位の判断は `data/source-inventory/placement-decisions.json` に書く。

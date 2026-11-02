@@ -2,6 +2,1362 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "manufacturing-employees",
+      "pageId": "ranking:manufacturing-employees",
+      "title": "製造業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3404"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3404"
+        },
+        "derived": false,
+        "configHash": "ddd03e98dfef2353"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:automotive-industry-transformation-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-aichi-dominance",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-labor-productivity-pref",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-productivity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:manufacturing",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "municipality-ranking:manufacturing-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:manufacturing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:manufacturing-employees",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
+      "metricKey": "manufacturing-establishment-site-area",
+      "pageId": "ranking:manufacturing-establishment-site-area",
+      "title": "製造業事業所敷地面積",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3405"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3405"
+        },
+        "derived": false,
+        "configHash": "02746b7d9d2b3dea"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:manufacturing",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:manufacturing-establishment-site-area",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
+      "metricKey": "manufacturing-establishments",
+      "pageId": "ranking:manufacturing-establishments",
+      "title": "製造業事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3403"
+        },
+        "derived": false,
+        "configHash": "f921d6b35c801470"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "japan-theme:manufacturing",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "municipality-ranking:manufacturing-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:manufacturing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:manufacturing-establishments",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
+      "metricKey": "manufacturing-industry-added-value",
+      "pageId": "ranking:manufacturing-industry-added-value",
+      "title": "製造業付加価値額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3402"
+        },
+        "derived": false,
+        "configHash": "673878a62cab0381"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:manufacturing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:automotive-industry-transformation-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:industrial-water-manufacturing-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-industry-added-value-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-productivity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:manufacturing",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:manufacturing-industry-added-value",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:manufacturing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "manufacturing"
+      ]
+    },
+    {
       "metricKey": "manufacturing-industry-annual-income",
       "pageId": "ranking:manufacturing-industry-annual-income",
       "title": "製造業で働く人の平均年収",
@@ -10571,151 +11927,6 @@
         },
         {
           "pageId": "ranking:mining-private-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "miscellaneous-income-prefecture",
-      "pageId": "ranking:miscellaneous-income-prefecture",
-      "title": "諸収入",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310114"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310114"
-        },
-        "derived": false,
-        "configHash": "ebdb35792e7c2262"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:miscellaneous-income-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "miscellaneous-revenue-municipal",
-      "pageId": null,
-      "title": "諸収入",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020204",
-          "filters": {
-            "cdCat01": "D320120"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020204",
-          "cdCat01": "D320120"
-        },
-        "derived": false,
-        "configHash": "a846a68ba34de770"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:miscellaneous-revenue-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:miscellaneous-revenue-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "miscellaneous-school-count",
-      "pageId": "ranking:miscellaneous-school-count",
-      "title": "各種学校数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010105",
-          "filters": {
-            "cdCat01": "E7102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010105",
-          "cdCat01": "E7102"
-        },
-        "derived": false,
-        "configHash": "9b3443039840bd34"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:miscellaneous-school-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "miscellaneous-school-count-per-100k",
-      "pageId": "ranking:miscellaneous-school-count-per-100k",
-      "title": "各種学校数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E08102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E08102"
-        },
-        "derived": false,
-        "configHash": "23ceabc6c1726875"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:miscellaneous-school-count-per-100k",
           "kind": "ranking"
         }
       ],

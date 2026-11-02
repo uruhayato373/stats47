@@ -2,6 +2,277 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "household-head-income-worker-households-per-month",
+      "pageId": "ranking:household-head-income-worker-households-per-month",
+      "title": "世帯主収入",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L01204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L01204"
+        },
+        "derived": false,
+        "configHash": "5a49fd438cef2b68"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:dual-income-reversal",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:savings-balance-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:household-head-income-worker-households-per-month",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "household-housing-debt-balance",
+      "pageId": "ranking:household-housing-debt-balance",
+      "title": "住宅・土地のための負債",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002210008",
+          "filters": {
+            "cdCat01": "029",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002210008",
+          "cdCat01": "029",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "680d5eb0124c1e43"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:household-housing-debt-balance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-assets-debt",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-assets-debt"
+      ]
+    },
+    {
       "metricKey": "household-income-by-type",
       "pageId": "ranking:household-income-by-type",
       "title": "年間収入階級別主世帯数（総数）",
@@ -567,6 +838,468 @@
       ],
       "themes": [
         "aging-society"
+      ]
+    },
+    {
+      "metricKey": "household-savings-balance",
+      "pageId": "ranking:household-savings-balance",
+      "title": "貯蓄現在高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002210008",
+          "filters": {
+            "cdCat01": "012",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002210008",
+          "cdCat01": "012",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ae996eaef2911881"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:household-savings-balance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-assets-debt",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-assets-debt"
+      ]
+    },
+    {
+      "metricKey": "household-securities-balance",
+      "pageId": "ranking:household-securities-balance",
+      "title": "有価証券の保有額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0002210008",
+          "filters": {
+            "cdCat01": "021",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0002210008",
+          "cdCat01": "021",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "3eccd2e8c2f4c55b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:household-securities-balance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-assets-debt",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-assets-debt"
       ]
     },
     {
@@ -10015,7 +10748,7 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "filters": {
             "cdCat02": "03"
           }
@@ -10024,7 +10757,7 @@
       "recipe": {
         "kind": "kakei-chousa",
         "estatParams": {
-          "statsDataId": "0003348239",
+          "statsDataId": "0004023605",
           "cdCat02": "03"
         },
         "ops": {
@@ -10041,7 +10774,7 @@
           }
         },
         "derived": true,
-        "configHash": "28c1e0d1541a6084"
+        "configHash": "7a97afc94c67cea4"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -14102,360 +14835,6 @@
       "themes": [
         "population-dynamics"
       ]
-    },
-    {
-      "metricKey": "interprefecture-net-migration-age25to34",
-      "pageId": "ranking:interprefecture-net-migration-age25to34",
-      "title": "25〜34歳の県間転入超過数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003419944",
-          "filters": {
-            "cdTab": "04",
-            "cdCat02": "0",
-            "cdCat03": "60000"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003419944",
-          "cdCat02": "0",
-          "cdCat03": "60000",
-          "cdTab": "04"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat01",
-            "codes": [
-              "026",
-              "027",
-              "028",
-              "029",
-              "030",
-              "031",
-              "032",
-              "033",
-              "034",
-              "035"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "8c881b38fdf2e2fb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:interprefecture-net-migration-age25to34",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "inventory-change-nominal-h27",
-      "pageId": null,
-      "title": "在庫変動",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C132302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C132302"
-        },
-        "derived": false,
-        "configHash": "03a0a93e249300f1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:inventory-change-nominal-h27",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "investment-contributions-prefecture",
-      "pageId": "ranking:investment-contributions-prefecture",
-      "title": "投資及び出資金",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D310411"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D310411"
-        },
-        "derived": false,
-        "configHash": "e9be22e5e1f786f6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:investment-contributions-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "investment-expenditure-municipal",
-      "pageId": null,
-      "title": "投資的経費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020204",
-          "filters": {
-            "cdCat01": "D2210"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020204",
-          "cdCat01": "D2210"
-        },
-        "derived": false,
-        "configHash": "f49c6a40e9c90e93"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:investment-expenditure-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:investment-expenditure-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

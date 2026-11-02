@@ -175,6 +175,8 @@ updated: 2026-11-01
 - **低コスト生成の配線 (11-01)**: NotebookLMの公式資料ノートで定義・期間・地域の注意点を取得し、数値はe-Statの実値のみ使った。Gemini Actionsは `keys` 入力で家計調査の需要上位キーを指定できるようにし、キューの `needs-regen` だけを最大10件受け付ける。生成・独立critic・機械監査の既存ゲートを通す。定期公開は無料枠の継続観測とリポジトリ変数の起動判断が済むまで停止したまま。
 - **2026-11-02 ローカル確認 (localhost・R2 実データ)**: 年次は 713 指標中 702 が 2025 年。GSC W43 (09-25〜10-22) は家計調査ランキング 574 URL で 2,781 click / 51,316 imp、713 指標中 150 は GSC に 1 行も無い。画面で見つけた要対応: ①1 世帯あたりの支出額・購入数量に「人口10万人あたり・面積100km²あたり」の計算切替が出る (納豆ほか、意味をなさない) ②調査ハブが `/survey/kakei-chousa` (品目別 716 件) と `/survey/household-survey` (SSDS 由来 25 件・「47都道府県」と表示) に分かれ、消費支出が両方に載る ③品目別ハブの代表ランキングと「同じ調査のランキング」がエアコン消費量 (0.186 台)・情報通信係数で、需要上位 (納豆・米・緑茶・カップ麺・牛肉) と合わない ④数量の指標 194 件の名前が「消費量」で、e-Stat の定義は購入数量 (エアコン「消費量」台など耐久財で不自然。検索語は「消費量」が多いので名称方針はオーナー判断) ⑤関連記事の題に旧年の値 (納豆「福島7830円vs和歌山2627円」、2025 年は 7,658 / 2,733) ⑥楽天の商品枠が甘納豆・きくらげを「納豆の人気商品」に出す。台帳 `data/estat/kakei-ledger/ledger.json` は kind=kakei-chousa の指標だけを数え、`household-survey` ハブの SSDS 由来 25 件は含まない。
 - **2026-11-02 是正 (develop・本番未反映)**: ①家計調査 697 指標から `normalizationOptions` を外し、`validate-metric-config` の `kakei-normalization` で再混入を止めた。画面はローカルの item.json 生成 (`generate-ranking-items --only natto-consumption-expenditure --stage-dir .local/r2`) とオーバーレイで切替が消えたことを確認。本番は main マージ後に sync-snapshots (ranking-items) で 697 件の item.json を作り直して反映する ③調査ハブの代表と、ランキングページの「同じ調査のランキング」を、`survey-editorial.ts` の読者の問いが指すランキング優先にした (家計調査は納豆・米・緑茶・カップ麺・牛肉)。代表以外の注目カードの題名も `resolveRankingHook` で「〜が最も多い県は？」にそろえた (カテゴリページにも効く)。残りは ②④⑤⑥。 ②2 つのハブに「主に県庁所在市などの都市別」の表記と相互リンクを付けた (統合・301 はしていない) ⑤題 (title / seoTitle) に 2024 年の値が残る家計調査の記事は 138 本 (数値 261 件)。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`。図の年は既存の data-refresh レーンが作り直すが題は直さないので、`KAKEI-EXPANSION-02` ③ の書き直しで題・本文・図をそろえる ⑥楽天枠の「甘納豆」は `rakuten-item-quality.ts` の別商品判定で除いた。商品名に「納豆」を詰め込んだ出品 (きくらげの佃煮) は語の判定では除けず残る。④ 2026-11-02 オーナー判断「食品は消費量のまま、耐久財などは購入数量」: 食料以外で単位が台・足・着・枚・本・個・組の 53 指標の title・subtitle・seoTitle・seoDescription を「購入数量」に直した。燃料 3 件 (灯油・ガソリン・プロパンガス) は消費量のまま。サービスと家賃の 7 件 (単位 回・畳: 理髪料・カット代・パーマネント代・給与住宅/民営/公営家賃・畳替え) は「購入数量」も不自然なので名前を保留 (候補: 利用回数・延べ畳数)。
+- **2026-11-02 面ごとの点検 1 周目 (都市比較・定義の切り口・localhost)**: 点検表は `survey-content-standards.md`「面ごとの点検表」。直したもの: 調査ハブの代表カードの題名を編集した問い (〜が多い都市は？) にし、カードと同じ問いを上の一覧から外した。家計収支編のハブの問いも「都市」にそろえ、都市別の調査で県と書く問いをテストで止める。全値が 1 未満の指標は小数第 3 位まで出す (冷蔵庫の購入数量で上位 3 都市が 0.09 で並び「1位と2位の差 0.00台」だった)。家電の楽天枠から付属品 (冷蔵庫に貼るホワイトボード) を外した。同じ品目の支出額と購入数量 191 組を自明な相関として除外 (反映は相関 snapshot の再計算後)。2024 年で終わったネクタイ・ストッキングの 4 指標を食卓と家計のテーマから外した。**未確認**: エンゲル係数はテーマのローカル表示に出ていない (data-refresh の R2 反映待ち。反映後に確認)。ランキングの「読み解く記事」の題は書き直した記事の公開 (blog-auto-publish) 後に新しくなる。
+- **2026-11-02 面ごとの点検 2 周目 (localhost)**: 直したもの: 全国の時系列ページ (`/japan/household-*`) で全カードに同じ説明文を付け、購入数量のカードにまで「支出額は…」と書いていたので、注記をページ冒頭に 1 回だけ出す形にした。調査ハブの「この調査を使う記事」は公開日順で、同日公開分が slug の ABC 順 (bacon・blanket…) に並んでいたため、`survey-editorial.ts` の `relatedArticleSlugs` (規約にあったが未実装) を先頭に出す配線を入れ、書き直した 6 本を指定した。テーマの関連指標から |r| ≥ 0.99 の組 (負債現在高と金融負債残高 +1.00 など、同じデータの別名) を外した (top-pairs と同じ基準。反映は相関 snapshot の再計算後)。**直していないもの (要判断)**: ① (2026-11-02 オーナー判断で解決: 同じ調査なので統合。`/survey/household-survey` は `/survey/kakei-chousa` へ 301、表は `SURVEY_HUB_ALIASES`。ハブ名の「家計調査」への変更は R2 の調査マスタの再出力後に出る) ② 統合したハブに 2007 年で止まった全世帯の指標が 3 件 (教養娯楽費・教育費・保健医療費) ③ 実収入は千円・可処分所得は円で、隣り合うカードの単位がそろわない (元データの単位。指標の `display.displayUnit` は 71 指標が持つがランキングページもカードも使っていない) ⑤ 県ページの「食の消費（品目別）」は 47 県共通の 6 品目 (牛肉・鶏肉・うどん・中華麺・緑茶・清酒) で、栃木 (宇都宮) が 2025 年に県庁所在市 1 位の餃子のような、その県が上位の品目が出ない。県ごとに上位の品目を出す欄は `area-databook-standards.md` のテンプレ変更なので area-databook-designer の判断 ④ 貯蓄と負債のテーマは全国家計構造調査 2019 年だけで、家計調査の貯蓄・負債編 (切り口 `kakei-savings-debt`、2025 年・都市別) を使っていない。
 - **停止条件**: 年次値と3年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。既存URLと同じ答えの別ページを作らない。
 - **優先理由**: 「家計のクリック率が高いので、展開できるものはすべてnoteやサイトで展開」という2026-10-19のユーザー判断。今回CTRを実測したものではない。
 - **次・担当**: W45 は調査ハブと上位5品目を確認。W46 は data-ingester が2025年の都市値を費目単位で照合し、survey / theme / ranking の担当が導線を整える。独立した問いが実値と資料で裏づけられる記事・note も制作対象とする。
@@ -194,6 +196,118 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [IG-AREA-PROPS-SCHEMA-VERSION-01] Instagram の県カードの台本が、県データブックの snapshot の版を上げるたびに止まる
+タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-11-02] [領域:SNS]
+
+- **証拠 (2026-11-02)**: `.claude/scripts/sns/build-ig-area-props.ts` は `schemaVersion` が現行より古い `databook.json` を拒否する。県ページに家計調査の上位品目を足して版を 2 から 3 に上げたので、R2 の snapshot が再生成されるまでこの台本は「旧版」で止まる (Instagram の自動投稿は 2026-10-27 から停止中なので実害はまだ無い)。
+- **次**: 足した項目は任意 (optional) なので、版の比較を「読めるかどうか」(parseAreaDatabookSnapshot) に寄せ、版の数字の完全一致を求めない。
+- **完了条件**: 任意の項目を足した snapshot の版上げで台本が止まらないことをテストで固定する。
+
+### [METRIC-DISPLAY-UNIT-WIRING-01] 指標の定義の表示単位 (display) を全画面で効かせる前に、71 指標の換算を監査する
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:サイト]
+
+- **証拠 (2026-11-02)**: `display.displayUnit` を 71 指標 (うち換算倍率が 1 でないもの 63) が持つが、ランキングページ・注目カード・テーマのどれも読まず、元データの単位で表示している (可処分所得は設定が万円なのにページもカードも 637,958 円)。家計調査のハブでは実収入 (千円) と可処分所得 (円) が隣り合い単位がそろわない。
+- **なぜ一斉に有効にしないか**: 設定が一度も画面に出ていないので、換算倍率・小数桁の正しさを誰も確かめていない。有効にすると誤りが全画面へ出る。
+- **次**: ① 71 指標の `conversionFactor`・`displayUnit`・`decimalPlaces` を元の単位と照らして監査し、誤りを直す (検査を validate-metric-config に足す) ② 整形を 1 か所 (`@stats47/utils` の数値整形) にまとめ、ランキング・カード・テーマ・CSV が同じ関数を読む ③ ローカルで代表 5 指標を右ペインで確認。
+- **関連 (2026-11-02)**: 立方メートルの単位の表記が指標の定義で混在している (全角 `ｍ3` 14 件・半角 `m3` 6 件。家計調査はプロパンガスの購入数量 1 件が `ｍ3`)。表示の整形をまとめるときに、単位の表記も 1 つに正規化する。
+- **家計調査の月額の単位 (2026-11-02)**: 消費支出・実収入・世帯主収入 (千円) と可処分所得・配偶者の収入 (円) の不一致を、値の換算 (valueScale) で円にそろえかけたが、実収入はテーマ「実質収入」の旧グラフの移行契約 (series-ref-migration-contract: 旧グラフと値が一致するよう換算を禁じる) の対象で、PR #1211 の CI が止めたので戻した。この不一致は表示の層の換算 (このカード) で直す。
+- **完了条件**: 監査済みの表示単位が全画面で同じ値・単位で出て、検査が誤った換算を止める。
+
+### [NOTE-KAKEI-GYOZA-DRAFT-01] 家計調査の「餃子日本一は数え方で変わる」の note 原稿を台帳に登録し、カバーと本文の保存をそろえる
+タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-11-02] [領域:SNS]
+
+- **状態 (2026-11-02)**: 切り口「定義を読む」「都市の間で比べる」から作った無料記事の原稿が作業場 `docs/31_note記事原稿/b-kakei-gyoza-52cities/` (draft.md・chart-data.json。gitignore) にある。agent が記事台帳 `data/note/articles.json` に下書きとして登録したが、カバーの台帳 (`note:assets:validate` の cover catalog coverage) と本文の R2 保存が無く検査が落ちたため、登録は取り消した。同じ題材の記事は 2026-09-06 に公開済みなので、別稿としての差 (52 市・3 年平均・冷凍とテイクアウトの範囲) を確かめてから進める。
+- **次**: ① 既存の公開記事との重複を確かめる ② `npm run note:article` の手順で台帳登録・本文保存・カバー作成をそろえる ③ note-critic の審査。
+- **完了条件**: 台帳・カバー・本文の保存がそろい、`npm run note:assets:validate` が通る。公開はオーナーの承認後。
+
+### [KINDLE-K-S1-02-STATUS-DRIFT-01] Kindle の K-S1-02 で、カタログの元定義と状態ファイルの状態・章数が食い違う
+タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npm run products:kindle:validate --workspace packages/product-factory] [起票:2026-11-02] [領域:商品]
+
+- **証拠 (2026-11-02、kindle の agent の報告)**: `data/products/kindle-status.json` は K-S1-02 を generated・8 章としているが、`packages/product-factory/src/channels/kindle/book-catalog.ts` の元定義は planned・5 章。`withS1Fresh` が実行時に generated へ上書きするため、元定義の `status: "planned"` が読み手を誤らせる。章立ての切り口 ID はコメントにしか無く、`BookChapter` 型に欄が無い。
+- **次**: 元定義の状態と章を実際に合わせるか、上書きの仕組みを元定義に寄せる。`BookChapter` に切り口 ID の欄を足し、切り口台帳と検査でつなぐ。
+- **完了条件**: 元定義と状態ファイルが一致し、章ごとの切り口 ID が型付きで検査される。
+
+### [ESTAT-PROVENANCE-GENERATED-STALE-01] 出典の生成物 estat-provenance.generated.json が指標定義より古い
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npx vitest run packages/data-configs/src/provenance] [起票:2026-11-02] [領域:データ]
+
+- **証拠 (2026-11-02)**: `npx tsx packages/data-configs/scripts/ssds/build-estat-provenance.ts` で作り直すと、コミット済みの生成物と比べて `ssdsTableIds` から市区町村の SSDS の表 7 件 (0000020202・0000020205〜0000020210) が抜け、住宅・土地統計調査の表 13 件が `statsDataIdToSurvey` に加わる。作り直した状態では `broadcast-reception-contracts` など 2 指標の出典が合成 ID `ssds-src:放送受信契約数統計要覧` に落ち、`survey-master-consistency.test.ts` の縮小専用ラチェット (合成 id 55 種) が落ちる。家計調査のハブ統合ではこの作り直しを戻し、名前 3 か所だけを書き換えた。
+- **次**: 市区町村の SSDS の表を `ssdsTableIds` に残す条件 (生成スクリプトの抽出条件) を確かめ、放送受信契約の原典を surveys.json と辞書へ登録してから作り直す。生成物の鮮度を検査する仕組みが無いので、`metrics:check` に入れるか決める。
+- **完了条件**: 生成スクリプトの出力がコミット済みの生成物と一致し、合成 ID が増えない。
+
+### [FACTUAL-CHECK-CROSS-METRIC-RANK-01] 事実確認が別系列の順位・値・差を記事の主指標と取り違える誤検知を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/lib/__tests__/article-factual-check.detection.test.mjs] [起票:2026-11-02] [領域:サイト]
+
+- **症状 (2026-11-02 実測)**: 家計調査の記事の書き直しで、`article-factual-check.mjs` (quality-gate の VALUE_MISMATCH / rank 照合) が次を誤検知した。① 52 市・3 年平均の都市の順位 (`*-city-ranking.json`。浜松は 1 位) を、県庁所在市の単年値の県順位として照合した ② 「宇都宮との差は 1,000 円」のような差や増減を、県の値として照合した。製造業の記事 (2026-10-23) でも「県名の直後の工業地帯の合計値」を県の値と取り違えている (warning 3 件)。
+- **次**: 照合の前に、data JSON ごとの系列 (label・都市/県・年・平均かどうか) を索引に持たせ、本文の数値をどの系列の主張かで振り分ける。差・増減・合計の語 (差・増え・減り・合計・平均) が直前にある数値は値の照合から外す。
+- **追加の誤検知 (2026-11-02 の書き直しで再発)**: ③ 8 年平均の順位「平均 4.8 位」を県の順位として照合した (じゃがいもの記事では「位」を外して回避した) ④ 5 年平均の値を 2025 年の単年値と照合して VALUE_MISMATCH の警告が 7 件出た (チョコレートの記事)。平均・推移・差を書くほど誤検知が増え、書き手が表現を曲げている。
+- **停止条件**: 見逃しを増やさない。既存の検出テスト (誤り 5 件中 5 件検出) を落とさない。
+- **完了条件**: 上の 3 種を再現する非検出テストと、本物の取り違えを検出するテストの両方が通る。
+
+### [BLOG-DATA-PRIOR-YEAR-KEEP-01] ブログの data JSON に前年までの値を残し、年の推移を書き直しのたびに失わないようにする
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:サイト]
+
+- **症状 (2026-11-02)**: `refresh-article-data-years.mjs --apply` は図の data JSON を最新年の値で上書きし、前年の値を残さない。家計調査の記事を 2025 年へ書き直したとき、「2024 年は何位だったか」を本文に書くには、e-Stat から別の接地器 (`fetch-kakei-city-average.mjs` の byYear や、小麦粉の順位推移の JSON) を個別に作る必要があった。
+- **次**: 取り直しのとき旧年の値を同じ basename の `*-history.json` (or data JSON の `previousYears`) に移す案と、R2 の metric 値 (全年を持つ) から推移を作る接地器を共通化する案を比べ、後者で済むなら前者は作らない。
+- **完了条件**: 書き直しで年を進めた記事が、追加の手作業なしに前年との比較の図か値を持てる。
+
+### [KAKEI-GROUNDER-2025-01] 年収階級と月次の接地器を家計調査 2025 年改定の表へ切り替える
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
+
+- **証拠**: 切り口台帳 `data/surveys/lenses/kakei-chousa.json` で 2 つの切り口が `blocked`。`kakei-income-class` の接地器 `.claude/scripts/blog/fetch-quintile-data.ts` は 2020 年改定の表 `0003348240` (2024 年まで)、`kakei-seasonality` の接地器 `.claude/scripts/blog/fetch-kakei-monthly.mjs` は 2020 年改定の月次表 `0003343671` / `0003343670` を読む。2025 年改定の表は `0004023607` / `0004023608` (年収五分位) と `0004023601` / `0004023602` (月次)。
+- **次**: 2024 年以前の値が旧表と新表で一致するかを品目ごとに照合し (改定で分割・統合・名称変更した品目は接続を確かめる)、接地器を新表へ切り替える。通ったら切り口台帳の `readiness` を外す。
+- **完了条件**: 2 つの接地器が 2025 年の値を返し、`npm run surveys:lenses:status -- --survey kakei-chousa` で 2 つの切り口が blocked でなくなる。
+- **完了の証拠 (2026-11-02)**: 新表と旧表で 2024 年の値が一致することを確認 (年収五分位: たばこ・宿泊料・食料の全 6 区分、月次: 米の 2024 年 12 月の金額・数量)。`fetch-quintile-data.ts` を `0004023607`・既定 2025 年に、`fetch-kakei-monthly.mjs` を `0004023601` / `0004023602` に切り替え、使い捨ての記事名で 2025 年の図データを生成できた (たばこ V/I 比 1.55 倍、ビールの月別 2024・2025 年各 12 点)。切り口台帳の 2 切り口の `readiness` を外した。週次レビューで削除してよい。
+
+### [DEVELOP-GATE-CATALOG-DRIFT-01] develop の Quality Gate が「調査の分類の状態」と「サイトマップ・タグ」で失敗し続けている
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:管理]
+
+- **証拠 (2026-11-02)**: `develop-quality-gate.yml` の Catalog Gates (preflight:pr) が 03:15・03:28・03:44 の 3 run (`66e538a97`・`64a913bae`・`c3e1bab27`、run 41384694381 ほか) で失敗。失敗は 50 ゲート中 2 つ: ❌ Survey Taxonomy（`theme taxonomy state が現行 ThemeCatalog と drift`）、❌ Sitemap / Tag Keys（`blog sourceless: cc-estat-17-edu-slope-graph`）。同日のブログ記事の書き直し・追加の push から始まっている。
+- **次**: ① テーマの分類の状態を full audit で作り直す ② `cc-estat-17-edu-slope-graph` の出典 (source.json) を補うか、sitemap・tag の生成物を作り直す ③ `npm run preflight:pr` がローカルで通ることを確かめて push。
+- **完了条件**: develop の Quality Gate が緑になる。
+- **是正 (2026-11-02)**: ① Survey Taxonomy は `audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json` でランキング・テーマの部分だけ作り直した（差分2行。ブログの部分は前回の記録のまま）。「blog sourceless」の行は上限内の参考表示で、止めていた原因ではなかった ② Sitemap / Tag Keys は5本のうち `generate-ranking-prominence.ts` だけが古く、作り直した。ローカルの `npm run preflight:pr` で両ゲートが ✅（残る Unit Semantics Mirror はこの PC の改行コードだけの差で、再生成しても git 差分なし）。push 後の CI が緑になれば削除してよい。
+- **完了の証拠 (2026-11-02)**: 家計のテーマ修正 (`household-food-spending.json`) で再び drift したため同じ手順で作り直して push (`2b91c1948`)。Develop Quality Gate の run 41389375017 が 4 ジョブとも success。週次レビューで削除してよい。再発防止: テーマのカタログを変えるコミットで `audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json` も作り直す。
+
+### [BLOG-CHART-LINEAGE-R2-01] 今日の家計調査の新記事の図6枚で survey が判定できない (unresolved 6)
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
+
+- **原因と是正 (2026-11-02)**: 最初に見えた missing-lineage 37 は誤検知だった。監査の `fetchText` が 404 と通信の失敗・時間切れ・5xx を区別せず null を返していたため、社内プロキシ経由の取得が揺れると実在する図まで「系譜なし」に数えていた（実行ごとに 41 → 11 → 6 と変動。dual-income-reversal・alcohol-prefecture-map・consumer-price-regional-gap の source.json はすべて R2 で HTTP 200）。404 だけを「無し」とし、それ以外は3回やり直して取れなければ監査を止めるように直した。修正後は2回続けて missing-lineage 0・unresolved 6 で一致。
+- **残り (unresolved 6)**: 同日に別作業で追加・書き直した家計調査の記事の図。`bread-city-ranking-kyoto-quiz/bread-city-ranking`、`frozen-gyoza-spending-prefecture-gap/gyoza-city-spending-timeseries`、`rice-spending-quantity-gap-2025/{rice-consumption-expenditure-timeseries,rice-consumption-quantity-timeseries,rice-spending-quantity-index-timeseries,rice-city-spending-growth-ranking}`。source.json はあるが survey を判定できない（52市・複数年平均の新しい接地器の出典形式を survey-taxonomy が知らない可能性。未確認）。CI のゲートはコミット済み state のブログ部分 (0) を使うので今は止まらないが、オンラインで state を作り直すと上限 0 を超える。
+- **次**: 1枚の source.json の `kind`・出典を見て、`resolveBlogChartSurveyTaxonomy` が家計調査 (kakei-chousa) に解決できない理由を確かめ、判定側か source.json のどちらを直すか決める。家計調査の記事を進めている作業と重ならないよう確認してから着手する。
+- **停止条件**: 図の値を推定で補わない。R2 への書き込みは publish-blog の経路で行う。
+- **完了条件**: オンラインの `audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` が missing-lineage 0・unresolved 0 で、`--offline --check` も通る。
+
+### [BUZZ-MAP-CONTENT-ROLLOUT-01] バズ地図の候補160件がブログ・note・SNSにほとんど展開されていない
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
+
+- **実測 (2026-11-02)**: `data/sns/buzz-map-catalog.json` の curated 160 件のうち、着地先が実在するのは15件（ブログ7・ランキング2・テーマ4ほか）。ブログ7件はどれも 2026-03〜06 公開の既存記事を当てたもので、バズ地図から新しく書いた記事は0件。`create-blog` 69件中62件は記事なし。note 記事台帳 (`data/note/articles.json`) に候補とつながる記事は0件。SNS は posts.json の domain=buzz-map が下書き11件（IG6・X5）で投稿0件。候補台帳の `generatedAt` が 2026-08-28 のままで、`landingReadiness` は当時の値。
+- **型の扱い**: バズ地図の型 A〜F・flow は型台帳の「地図（実際の形）」の描き分けに統合済み（`buzz-map-standards.md` §1 冒頭・`/buzz-map` は型台帳の言葉で表示）。
+- **① 台帳の作り直し (2026-11-02 済)**: プロキシ経由で `build-buzz-map-catalog.ts` を実行（`generatedAt` 2026-11-02）。curated 160件の着地先は live 15件のままで、8月以降に増えていない。変化は気候4件（blocked→needs-content、`/themes/climate` ができたため）。全体は 912→1,470件（DPF・地理院地名レーンの追加）。
+- **② 候補 (2026-11-02 選定・オーナー判断待ち)**: P0・`feasibility=now`・ライセンス allowed・記事なしから2本。
+  - ブログ: `children-more-than-elderly-muni`「15歳未満が65歳以上より多い街」。R2 `cities.json` で実測すると該当自治体は 1980年1,776 → 2000年375 → 2010年45 → 2015年14 → 2020年6（長久手市・新宮町・粕屋町・南風原町・御蔵島村・小笠原村）→ 2025年0。二値1枚ではなく年ごとの地図（型B=塗りの時系列）で「消えるまで」を見せる構成にする。**2025年値は別表 `0004065933` の補完なので、定義の連続性を確かめるまで「0になった」と書かない。**
+  - note: 食の東西境界（`natto-east-west-boundary`・`udon-soba-territory`・`mayonnaise-vs-sauce`・`meat-preference-map`）の4枚を1記事に。家計調査は県庁所在市の値（都道府県単位の `values.json` のみ、市区町村データなし）。
+- **次・実行順**: ③オーナーが2本の採否を決める → ブログは2025年値の定義確認 → 地図生成 → 記事、note は4枚の地図 → 記事 ④下書き11件の投稿可否を決める（予約・投稿は承認後）。
+- **停止条件**: ライセンス `review-required` の候補（26件）は確認前に公開しない。投稿・公開・R2 反映はオーナー承認後。
+- **完了条件**: 候補台帳が最新の公開物で判定し直され、P0 候補のうち少なくとも1件がブログまたは note の記事として公開され、その地図画像が SNS に投稿されている。
+
+### [IMAGE-PUBLISHER-REMOVAL-01] 統計画像の生成経路から発行元表記（stats47・stats47.jp）を外し、地図をタイル・実形状の2型へ寄せる
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
+
+- **起点 (2026-11-02 オーナー決定)**: 統計画像に発行元・透かしを入れない（`chart-image-copy.md`）。地図はタイルマップと実形状の地図（塗り・点・線のレイヤー）の2型だけにする。管理画面の型見本7型は対応済みで、`assertMinimalChartCopy` が `stats47` を拒否する。
+- **残り**: 既存の生成経路に表記が残る。Remotion `features/data-cards/{DataCard.tsx,TileChange.tsx,all47-svg.ts}`・`ig-series/IgSeriesFooter.tsx`・`shared/components/charts/BarChartRaceScene.tsx`・`ranking-youtube/NormalOutro.tsx`、`.claude/scripts/sns/{quick-still.ts,lib/ranking-story-card.ts}`、バズマップの spec 生成 (`build-buzz-map-spec*.ts`・`merge-buzz-map-specs.ts`) とブランド行の描画。投稿済み画像は差し替えない。タイルマップは媒体ごとに4通りの見た目（青＋赤帯・紫・生成り増減・黄クイズ）に分かれているので、管理画面のタイルマップ見本へ寄せる。
+- **① ランキングカード (2026-11-02 済)**: `apps/remotion/src/features/data-cards/all47-svg.ts`（quick-still の X/Threads カードと Instagram 地図カルーセルの共通部品）から stats47・宣伝文2行・「色が濃いほど」・模式図注記・stats47.jp を外し、県庁所在市は1回だけ、単位 l は L で表示。`all47-svg.test.ts` が `assertMinimalChartCopy` を掛ける。未登録の X 下書き5件は予約時に新画像で再生成される。X 側に旧画像で予約済みの12件（11/2以降）は差し替え未実施（X の予約操作が要るためオーナー判断待ち）。凡例の最大値ラベルがバー右端に揃っていない・数字が明朝体で描かれる（PNG 変換の書体）点は既存の別課題。
+- **タイル配置表の集約 (2026-11-02)**: 配置表は3つあった。`packages/visualization` の `TILE_GRID_LAYOUT`（サイト・IG表紙/地図/クイズ・動画）、`packages/svg-builder` の `TILE_GRID`（ブログ・管理画面見本。47県とも前者と完全一致の写し）、Remotion `data-cards/tile-layout.ts` の `CHANGE_TILE_LAYOUT`（Xカード・増減タイル。全県1×1の12×11）。`TILE_GRID` は `TILE_GRID_LAYOUT` から導出する形にし、ブログのタイル地図の出力が1バイトも変わらないことを3設定で確認（`@stats47/visualization` を svg-builder の依存に追加・lock 1行）。**決定 (2026-11-02 オーナー・同日改訂)**: 詰めた配置は列島の形が崩れるとの指摘で、両方の良さを合わせた形に改めた。4:5画像はサイトの配置表 `TILE_GRID_LAYOUT` をそのまま使い（北海道2×2・県の縦横・沖縄の分離を保つ）、県のない海峡の段だけ0.3段に縮めた `IMAGE_TILE_LAYOUT`（`data-cards/tile-layout.ts`・正本から導出）でタイルを約69pxに拡大。描画は `all47-svg.ts` 1つ、型台帳 tile-map v5。同日オーナー指摘で元の図（ブログの `generateChoroplethSvg`）の良さも戻した: 指標の配色（呼び出し側が解決した scale を渡す。未指定はブランドの青5段）・タイルの明暗に応じた白/濃紺の文字・中央揃え・図全体で小数桁をそろえる・左上の空きに上位3県・右下に境界値つき凡例・背景はほかの見本と同じ。配色は同期の共通関数 `data-cards/tile-scale.ts` の `resolveTileScale`（サイトの `resolveChoroplethScale` と色・境界・塗りが一致することをテストで固定）で解決し、管理画面見本・quick-still（item.json の `visualization`/`valueDisplay`）・IG 地図カルーセル（`build-ig-map-props.ts` が props に写す）の3経路とも同じ描画・同じ配色になった（2026-11-02）。既存の IG 地図カルーセル props（`.local/r2/sns/map-carousel/*/props.json`）は作り直すまで青5段。**残り**: IG 表紙・クイズのヒント・地図カルーセルの塗り分けスライド・増減タイル（`TileChange.tsx`）を共通の描画へ。**地図（実際の形）(2026-11-02)**: 見本はバズ地図と同じ `buzz-map/geo.ts` の `computeBuzzMapGeo` で描くように改めた（本土を大きく・沖縄の弧を左上の大きな枠に・右下に件数つき凡例）。同時に geo.ts で県内の島ごとに範囲外を落とすようにし、沖縄の大東諸島（インセットが間延びしていた）と鹿児島の奄美以南（本土の描画が下にはみ出していた）を描かない（規約 §3 の記載どおりに）。型台帳 choropleth の方針も更新。増減タイル（`TileChange.tsx`）はまだ旧 `CHANGE_TILE_LAYOUT`（全県1×1）。以下は1回目の決定時の記録: 4:5画像は全県1×1の詰めた配置（12×11・`CHANGE_TILE_LAYOUT`）を正にし、描画は `all47-svg.ts` 1つにする。サイトのページはサイトの配置表のまま。型台帳 tile-map v3 の方針・renderer を更新し、管理画面のタイルマップ見本も `all47-svg.ts` で描いて private R2 に再保存した（数字の書体を Yu Gothic/Meiryo へ・凡例の最大値を右端揃えに是正）。**残り**: Instagram の表紙（`ranking-instagram/CoverSlide.tsx`）・クイズのヒント（`ranking-quiz-instagram/QuizHintSlide.tsx`・`reel/QuizReelHint.tsx`）・地図カルーセルの塗り分けスライド（`map-carousel-instagram/MapChoroplethSlide.tsx`）がサイトの配置表 `TILE_GRID_LAYOUT` で独自に描いている。`all47-svg.ts` は指標台帳の配色（colorScheme）を使わず緑5段の固定配色。
+- **② タイルの共通化 (2026-11-02 済)**: 増減タイル（`TileChange.tsx`）・IG 表紙（`CoverSlide.tsx`）・クイズのヒント（`QuizHintSlide.tsx`・`reel/QuizReelHint.tsx`）・地図カルーセルの塗り分け（`MapChoroplethSlide.tsx`）を `all47-svg.ts` の `renderTileMapBody`（`IMAGE_TILE_LAYOUT`・明暗で白/濃紺の文字）へ移し、独自のタイル描画は無くなった。型台帳 tile-map v6 に描き分け4つ（値の塗り・2時点の増減率・県名だけ・候補を伏せる）、管理画面に増減タイルの実データ見本（総人口 1975→2025年・`publish-ranking-samples.ts --change`・private R2）。確認は react-dom の静的描画＋Playwright のスクリーンショットで、Remotion の本描画は未確認（`REMOTION-RSPACK-WIN-01`）。予約中の IG 素材の再レンダーも未実施。表紙のフッター（stats47.jp）と `IgSeriesFooter.tsx` の発行元表記は残る。地図カルーセルは塗り分けと上位・下位の2枚がタイル地図で重なる（統合はオーナー判断）。
+- **次・実行順**: ①（済） ②（済・本描画の確認と予約素材の再レンダーが残る） ③バズマップ（投稿0件のため投稿開始前に）。各段で予約中の素材を再生成する（予約の本文・日時・ID は保つ）。
+- **停止条件**: 予約中投稿の差し替えで本文・日時・IDが変わる、公開済み投稿の素材を上書きする場合は止める。動画の終端カード（YouTube のアウトロ）は統計画像ではないので外すかを別途確認する。
+- **完了条件**: 上記の生成経路の可視テキストに発行元が無く、各経路の出力に `assertMinimalChartCopy` 相当の検査が掛かる。
+
+### [REMOTION-RSPACK-WIN-01] Windows で Remotion の描画が rspack のネイティブ部品欠落で起動しない
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-02] [領域:SNS]
+
+- **証拠 (2026-11-02)**: `npx remotion still` が `@rspack/binding` の `requireNative` で `MODULE_NOT_FOUND`。`package-lock.json` は `@rspack/binding` の optionalDependencies に `@rspack/binding-win32-x64-msvc` 1.7.11 を挙げるが、`node_modules/@rspack/binding-win32-x64-msvc` の項目が無い（Windows 用 Rolldown 部品の lock 欠落と同じ型。memory `feedback_windows_npm_install_rolldown_binding`）。
+- **次**: 親と同版の lock metadata（resolved・integrity・cpu/os）を足して `npm install` し、`npx remotion still src/index.ts RankingInstagram-Cover` が通ることを確かめる。依存の変更は他の作業と排他（`local-environment.md`「検証コマンドの粒度」）。
+- **完了条件**: この PC で Remotion の静止画が描け、Mac の lock 再生成で項目が消えないことを確認した。
+
 ### [ESTAT-CATALOG-NOAREA-01] e-Stat カタログが「集計地域区分=該当なし」の表を 1 件も取得していない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 
@@ -211,7 +325,7 @@ updated: 2026-11-01
 - **根拠**: 2025年の表・地域/世帯/期間/単位・図の候補は `.claude/skills/estat/references/household-expenditure-survey.md`。参考PDFの論点台帳 `data/source-inventory/kakei-marketing/2015/analyses.json` に収入階級と食料・教育費の問いがあるが、書籍の値や図は使わない。GSC W43 の「収入階級」「年収別 消費」の明確な検索需要は 0 件で、まず既存の食テーマやブログへの小さな図として試す。
 - **2026-11-01 API実値照合済み**: 品目年次 `0004023605/06`（全国＋52市）、五分位 `0004023607/08`（全国のみ）、年齢別 `0004023609/10`（全国のみ）、用途分類の五分位 `0002070005`（全国のみ）を確認。年間収入 `cat01=264` は同表の二人以上世帯で2000〜2025年の26値を取得できる。納豆など需要上位5品目の2024年値は旧表と新表で各53地域一致。月次表はメタデータ上2026年8月までだが、年計へ混ぜない。詳細は `.claude/skills/estat/references/household-expenditure-survey.md`。
 - **全表棚卸し (2026-11-01)**: 家計調査のDB表126/126件でメタデータ取得成功。貯蓄・負債編に年次の地域 `0002210008`、年収18階級 `0002210010`、五分位 `0002210012`、十分位 `0002210014` があり、2025年の年間収入・貯蓄・負債の実値も取得できた。従来の「四半期系列しか未確認」という記述を訂正。2025年詳細表の年収帯×品目や妻の就業×世帯類型など、Excel限定の交差軸は別の取込検証が必要。
-- **11-01 の制作状況**: 17切り口を台帳化し、5件は既存ランキング、2件は米の全国時系列、9件は全国の年収・年齢・人数・世帯類型・貯蓄/負債の比較図（貯蓄と負債を別図にしたため図は10枚）としてローカル生成済み。比較図は `app/survey/kakei-chousa/axis-charts.json` のR2 stagingに置き、用途分類=1か月平均、品目分類=年間合計、貯蓄/負債=残高を型で区別した。米の支出と数量を比べるブログ下書き・SVG4図（派生の縦長画像を含め6ファイル）は独立criticのPASSまで済んだ。R2 push・本番公開・効果観測は未実施。残る貯蓄/負債の都市比較1切り口は地域軸の図契約を要するため引き続きこのカードで扱う。
+- **11-01 の制作状況**: 17件の分析単位を台帳化し (`kakei-analysis-catalog.ts`。2026-11-02 から各行が切り口台帳の切り口を `lensId` で参照する)、5件は既存ランキング、2件は米の全国時系列、9件は全国の年収・年齢・人数・世帯類型・貯蓄/負債の比較図（貯蓄と負債を別図にしたため図は10枚）としてローカル生成済み。比較図は `app/survey/kakei-chousa/axis-charts.json` のR2 stagingに置き、用途分類=1か月平均、品目分類=年間合計、貯蓄/負債=残高を型で区別した。米の支出と数量を比べるブログ下書き・SVG4図（派生の縦長画像を含め6ファイル）は独立criticのPASSまで済んだ。R2 push・本番公開・効果観測は未実施。残る貯蓄/負債の都市比較1件は地域軸の図契約を要するため引き続きこのカードで扱う。
 - **実行順**: ①全国時系列と金額/数量が揃う品目を検証 ②年収階級/五分位と世帯別の対象・実値を検証 ③貯蓄/負債の都市値と全国の年収別値を別面で検証 ④既存テーマの図・ブログで答えられない問いを制作し、相互にリンクする。各切り口の検証は並行してよい。
 - **停止条件**: 家計調査の県全体値や都市×収入階級の交差表は存在しない。県別地図に全国の収入階級値を載せない。用途分類の月平均と品目分類の年間合計、2024年以前と2025年改定後の未接続系列を混ぜない。API の軸メタデータと公式値の照合前に図を公開しない。
 - **完了条件**: 上記4系統で取得可能な図/記事の候補をすべて採否判定し、採用したものは一次資料・単位・世帯構成・導線の検査を通して公開後の閲覧/回遊の観測日を置ける。
@@ -3794,6 +3908,7 @@ updated: 2026-11-01
 - **旧ID**: `NOTE-ARTICLE-QUALITY-PILOT-01` (2026-10-18 改名。`NOTE-ARTICLE-` で始まる ID は個別記事の写しとしてコンテンツ運用の監査が止めるため。調査記録 `data/note/evidence/note-article-quality-audit-20261016.json` は旧IDのまま)
 - **owner**: note-manager（本文・導線と公開段取り）/ chart-author（決定的な統計図）
 - **2026-10-19 develop統合・R2確認**: 画像索引259ファイルをprivate R2のmanifest SHAと照合し、家計3都市の共通候補3実体と公開済み参考図2枚の取得・SHA一致を確認。家計はnote/X/Instagramの9候補参照を保持するが、型方針変更で `candidateMatches=false` のため基本形から非表示になる。再開時は固定した検討見本の表示と候補採用を分け、候補のbasis更新・自動採用で隠さず4媒体に表示できるようにする。ランキング3型の見本PNGはR2固定入力から都度生成し、PNG自体はR2未保存。
+- **散布図・地図の4媒体見本（2026-11-02）**: `/ops/image-templates` の散布図（年平均気温×灯油消費量・2024年・47点）と地域色分け地図（最高気温2024年・正確な県形状・沖縄本島の別枠・サイトと同じ配色解決）を1080×1350の共通見本として追加。`publish-ranking-samples.ts --relationship|--distribution --apply` でprivate R2へSHA照合保存し、旧公開図は基準画像として残した。同日オーナー指示で2型の方針も共通4:5へ揃えた（`image-templates.json` v4）。全7型とも基本形は未確定。
 - **優先順位**: カバー残件の一括展開より本文品質のpilotを先に試す案。カバーの残計画は `NOTE-COVER-IMAGEGEN-ROLLOUT-01` を保持する。
 - **基本形の確認入口（2026-10-19更新）**: `/ops/image-templates` は左を「目的 → 図の形」の二階層に整理（比較 → 棒グラフなど）。図形以下の枝は固定せず制作で必要な違いを見て検討する。掲載範囲は各見本の補足へ、確認待ちは画像ライブラリへ分離し、分類案・未確定の目的/範囲を型見本へ混ぜない。旧selectionは絞込を解除して保持先を画像の補足へ移す。家計は右側の題材選択で同じ都市のnote固定サイズ試作1枚・X1枚・IG共通型候補1枚を同時表示する。制作記録と原記事keyから紐付け、保存原図の所属/ID/previewOnlyと投稿状態を維持。3都市の表示・画像取得・再読込・390px・darkを確認。Webだけの見本はWeb参考表示にし、未確認しかない旧URLはライブラリへ案内する。左には媒体・記事名・範囲・確認待ちの枝を置かず、shadcn標準Collapsibleと線の矢印を使用。目的/型/題材/媒体/見本/復帰位置をURLに保持し、未保存方針は保持する。比率選択と制作サイズの目安一覧を外し、家計のnote/X/IGは共通4:5（1080×1350）固定と表示する。制作仕様を常時表示し、重複説明を除去、型の方針・試作メモの編集は別パネルへ分離。原寸は画像から開き、画像ごとの操作は詳細へまとめる。原本・個別方針・旧候補6件を保持。青の統一・旧候補再確認・未登録媒体の試作と残分類は継続する。
 - **noteも型の固定サイズへ（2026-10-19）**: 家計3都市のnote用棒グラフを共通4:5（1080×1350）で試作し、元記事の画像IDへprivate R2の候補として保存・SHA照合した。X/IGと同じ固定入力・十大費目・47県庁所在市単純平均・年・世帯区分を保持。「型の試作見本」に表示名を統一し、旧note画像は詳細の旧新比較へ分離。現行候補が失効・修正待ち・未生成なら旧原図を型見本として代用しない。2:3の旧試作は履歴へ残し、オーナー指示でnote/X/IGを同じ4:5・データ・色・目盛り・描画部品へ統一。候補の採用・公開本文差し替えは未実施。
@@ -3849,7 +3964,7 @@ updated: 2026-11-01
 - **trigger**: e-Statで2025年年報の公表を確認できること。
 - **次**: 上位5品目を先頭に2025年値と公式表を照合し、通過した既存metricを費目単位で更新する。各費目の定義改定・欠測を検査し、可能な費目を順次処理する。
 - **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
-- **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
+- **正典**: 切り口台帳 `data/surveys/lenses/kakei-chousa.json` (旧論点カタログは 2026-11-02 に廃止し、品目の採否は `data/estat/kakei-ledger/decisions.json` へ移記)
 - **trigger を満たした (2026-10-28 確認)**: 総務省は 2026 年 2 月に「品目別都道府県庁所在市及び政令指定都市ランキング」(2023〜2025 年平均・52 市) を公表した (山梨県の資料 https://www.pref.yamanashi.jp/documents/126644/05-07kakeiranking.pdf ・埼玉県 https://www.pref.saitama.lg.jp/a0206/kakeichiyousa/2023-2025kakeichiyousa.html)。R2 の品目別 (bread / natto / mackerel の consumption-expenditure) は最新年が 2024 のまま。
 - **需要の証拠 (GSC 2026-W42 のクエリ)**: 「納豆消費量 ランキング 2026」728 表示・「餃子 消費量 ランキング 2026」83・「パンの消費量 都道府県」256 など年付き・品目の検索があり、2023〜2025 年平均を使ったクイズ文がそのまま検索されている (2 通りの表記で計 556 表示)。家計調査の品目別記事 (型D2) は CTR の勝ち組 (`data/blog/winning-patterns.json`: サバ 21%・ふりかけ 14%)。
 - **次 (追記)**: ① 上位5品目を先に2025年表へ切り替え、残る既存指標を分類改定と欠測の検査が通った費目から更新する ② 3年平均は別系列として扱う (年次値の単純平均で代用しない) ③ 既存記事の年・図の更新はランキングの値が確認できてから行う。
@@ -3860,6 +3975,7 @@ updated: 2026-11-01
 - **11-01 公開検証**: 固定SHAの763ファイルをR2で全件照合し、PR #1205 をmainへ統合。配信用 `ranking-values` と正規化値を別途同期し、米・納豆・パンの通常値と米の人口/面積あたり値は2025年・47市を確認。公開データ契約監査は指摘0件、代表のランキング・全国テーマ・調査ハブ7URLはGooglebot UAで200。記事本文と図はR2に公開済みで、記事URLの公開判定はPR #1206で反映中。デプロイ後の全体スモークは今回の変更前と同じ10件で失敗（別途是正）。
 - **実行順・停止条件**: ① 763ファイル（702都市観測値、60全国系列、1比較図artifact）の固定SHA manifestでR2へ反映 ② ranking item/survey snapshotを再生成し、年・順位・単位を検証 ③ コードを一括デプロイし、代表URLと回遊を検証 ④ 合算6件を個別照合し、分類変更5件は新定義に合わせて採否を決める。未投入の2025値を公開ページへ書かない。
 
+- **2026-11-02 進捗**: ① 旧表に残っていた 6 指標 (パン・生鮮果物・生鮮魚介・生鮮野菜・貝類の数量、情報通信関係費) を、2024 年の値が 53 都市すべてで一致することを確かめて新表へ移し、エンゲル係数・情報通信係数も 2025 年へ伸ばした (R2 取り込みは data-refresh run 41382000728)。ネクタイ・ストッキングは 2025 年改定で 659 他の被服のその他 に統合されたので 2024 年が最終と注記。② 3 年平均は「年次値の単純平均」が静岡県の公表値 (令和4〜6年) と一致することを確かめた。指標にはせず、記事の接地器 `.claude/scripts/blog/fetch-kakei-city-average.mjs` (52 市・N 年平均) で扱う。③ 題に旧年の値が残る記事のうち流入上位から、餃子 (2025 年に県庁所在市で首位交代・52 市との違い)・豆腐・カレールウ・もち・小麦粉を書き直し、パンの 52 市 3 年平均の新記事 (京都のクイズの答え) を足した。次は流入上位の残り (チョコレート・すし・緑茶・即席麺・清酒・牛肉 など。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`)。こんにゃくは図 1 枚が手作業 (data JSON が取得器の形でない)。
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 11 件
 
 タグ: [種類:不具合] [実行:ユーザー] [起票:2026-07-30] [領域:管理]

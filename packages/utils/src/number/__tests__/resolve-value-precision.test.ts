@@ -29,6 +29,12 @@ describe("resolveValuePrecision", () => {
     expect(resolveValuePrecision([1.23456789, 2], 1)).toBe(1);
   });
 
+  it("★全値が 1 未満なら既定の上限を 3 にする (0.086 台を 0.09 に丸めて上位が同値に並ばない)", () => {
+    expect(resolveValuePrecision([0.086, 0.085, 0.012])).toBe(3);
+    expect(resolveValuePrecision([0.086, 1.5])).toBe(2);
+    expect(resolveValuePrecision([0.0864], 2)).toBe(2);
+  });
+
   it("空・非有限値でも落ちない", () => {
     expect(resolveValuePrecision([])).toBe(0);
     expect(resolveValuePrecision([Number.NaN, Number.POSITIVE_INFINITY])).toBe(0);

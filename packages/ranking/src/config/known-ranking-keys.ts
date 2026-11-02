@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-10-21
- * 件数: 2459
+ * 最終生成日: 2026-11-02
+ * 件数: 2463
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -980,13 +980,17 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "horse-mackerel-consumption-quantity",
   "hospital-bed-count",
   "hospital-staff-by-occupation",
+  "household-debt-balance",
   "household-head-allowance-consumption-expenditure",
   "household-head-annual-income-per-household",
   "household-head-income-worker-households-per-month",
+  "household-housing-debt-balance",
   "household-income-by-type",
   "household-ratio-above-minimum-housing-area",
   "household-ratio-main-earner-employee-commute-90min",
   "household-ratio-with-65plus",
+  "household-savings-balance",
+  "household-securities-balance",
   "household-survey-clothing-footwear-expenditure",
   "household-survey-consumption-expenditure",
   "household-survey-culture-recreation-expenditure",
