@@ -1,2 +1,0 @@
-{ "metric": "household-savings-balance,household-debt-balance,household-securities-balance,household-housing-debt-balance,information-communication-coefficient", "since": "", "dryRun": false, "migrateLegacyRecipes": false, "snapshotScope": "auto" }
-{ "metric": "consumption-expenditure-multi-person-households-per-month,actual-income-worker-households-per-month,household-head-income-worker-households-per-month,spouse-income", "since": "", "dryRun": false, "migrateLegacyRecipes": false, "snapshotScope": "auto" }
