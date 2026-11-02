@@ -202,6 +202,13 @@ updated: 2026-11-01
 - **完了条件**: 2 つの接地器が 2025 年の値を返し、`npm run surveys:lenses:status -- --survey kakei-chousa` で 2 つの切り口が blocked でなくなる。
 - **完了の証拠 (2026-11-02)**: 新表と旧表で 2024 年の値が一致することを確認 (年収五分位: たばこ・宿泊料・食料の全 6 区分、月次: 米の 2024 年 12 月の金額・数量)。`fetch-quintile-data.ts` を `0004023607`・既定 2025 年に、`fetch-kakei-monthly.mjs` を `0004023601` / `0004023602` に切り替え、使い捨ての記事名で 2025 年の図データを生成できた (たばこ V/I 比 1.55 倍、ビールの月別 2024・2025 年各 12 点)。切り口台帳の 2 切り口の `readiness` を外した。週次レビューで削除してよい。
 
+### [DEVELOP-GATE-CATALOG-DRIFT-01] develop の Quality Gate が「調査の分類の状態」と「サイトマップ・タグ」で失敗し続けている
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:管理]
+
+- **証拠 (2026-11-02)**: `develop-quality-gate.yml` の Catalog Gates (preflight:pr) が 03:15・03:28・03:44 の 3 run (`66e538a97`・`64a913bae`・`c3e1bab27`、run 41384694381 ほか) で失敗。失敗は 50 ゲート中 2 つ: ❌ Survey Taxonomy（`theme taxonomy state が現行 ThemeCatalog と drift`）、❌ Sitemap / Tag Keys（`blog sourceless: cc-estat-17-edu-slope-graph`）。同日のブログ記事の書き直し・追加の push から始まっている。
+- **次**: ① テーマの分類の状態を full audit で作り直す ② `cc-estat-17-edu-slope-graph` の出典 (source.json) を補うか、sitemap・tag の生成物を作り直す ③ `npm run preflight:pr` がローカルで通ることを確かめて push。
+- **完了条件**: develop の Quality Gate が緑になる。
+
 ### [BUZZ-MAP-CONTENT-ROLLOUT-01] バズ地図の候補160件がブログ・note・SNSにほとんど展開されていない
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
 
