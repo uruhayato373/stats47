@@ -82,6 +82,7 @@ interface Row {
   sourceKind: string;
   /** normalizationOptions の件数 */
   normalizationCount: number;
+  seriesEnd: { lastYear: number; reason: string; successorKey?: string } | null;
 }
 
 /**
@@ -150,6 +151,7 @@ function main() {
       ).filter((option) => option.unit.startsWith('‐/')).length,
       sourceKind: source.kind,
       normalizationCount: metric.calculation?.normalizationOptions?.length ?? 0,
+      seriesEnd: metric.seriesEnd ?? null,
     });
   }
 
@@ -299,6 +301,20 @@ function main() {
       errors.push(
         `[kakei-normalization] ${r.file}: 家計調査の指標に normalizationOptions がある。値は 1 世帯あたりなので人口・面積あたりの換算を外す`
       );
+    }
+  }
+
+  // error: 系列の終わり (seriesEnd) の書き方。理由が空・後継が実在しない (か自分自身・非公開)・最終年が整数でない
+  for (const r of rows) {
+    const end = r.seriesEnd;
+    if (!end) continue;
+    if (!Number.isInteger(end.lastYear)) errors.push(`[series-end] ${r.file}: seriesEnd.lastYear は西暦の整数で書く`);
+    if (!end.reason?.trim()) errors.push(`[series-end] ${r.file}: seriesEnd.reason が空。なぜ更新されないか (改定・廃止) を書く`);
+    if (end.successorKey !== undefined) {
+      const successor = getMetricConfig(end.successorKey);
+      if (!successor || successor.isActive === false || end.successorKey === r.key) {
+        errors.push(`[series-end] ${r.file}: seriesEnd.successorKey ${end.successorKey} は実在する公開中の別の指標でない`);
+      }
     }
   }
 

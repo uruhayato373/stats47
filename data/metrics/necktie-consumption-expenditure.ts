@@ -45,5 +45,6 @@ export const necktieConsumptionExpenditure: MetricConfig = {
   },
   "seoTitle": "ネクタイ消費支出額ランキング都道府県【2024年】｜1位熊本県（1,265円）",
   "seoDescription": "2024年のネクタイ消費支出額の都道府県別ランキング。1位熊本県（1,265円）、最下位滋賀県（6円）で210.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seriesEnd": { "lastYear": 2024, "reason": "家計調査の 2025 年の品目分類の改定で「他の被服のその他」に統合され、単独の品目でなくなった" },
   "isActive": true,
 };

@@ -33,5 +33,6 @@ export const healthcareCostAllHouseholds: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": []
   },
+  "seriesEnd": { "lastYear": 2007, "reason": "社会・人口統計体系の全世帯 (単身を含む) の費目は 2007 年までで、以後は二人以上の世帯の費目割合だけが続く" },
   "isActive": true,
 };

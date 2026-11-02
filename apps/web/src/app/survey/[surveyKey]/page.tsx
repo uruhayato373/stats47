@@ -165,6 +165,8 @@ export default async function SurveyPage({ params }: PageProps) {
   const seenRankingKeys = new Set<string>();
   const rankingItems = rankingResults
     .flatMap((result) => (isOk(result) ? result.data : []))
+    // 終わった系列 (指標の定義の seriesEnd) はハブの一覧に出さない。ランキングページは残す (2026-11-02)
+    .filter((item) => !METRICS_REGISTRY[item.rankingKey]?.seriesEnd)
     .filter((item) => {
       if (seenRankingKeys.has(item.rankingKey)) return false;
       seenRankingKeys.add(item.rankingKey);

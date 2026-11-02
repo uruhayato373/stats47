@@ -3,16 +3,16 @@
   "generatedAt": "2026-10-31T05:51:18.074Z",
   "masterSurveyCount": 151,
   "ranking": {
-    "metrics": 2603,
-    "activeMetrics": 2459,
-    "applicableMetrics": 2514,
-    "activeApplicableMetrics": 2371,
+    "metrics": 2607,
+    "activeMetrics": 2463,
+    "applicableMetrics": 2518,
+    "activeApplicableMetrics": 2375,
     "notApplicable": 89,
     "activeNotApplicable": 88,
-    "resolved": 2514,
+    "resolved": 2518,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2371,
+    "activeResolved": 2375,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -165,7 +165,7 @@
       "japan-post-statistics": 6,
       "job-placement-statistics": 11,
       "junior-high-athletics-membership-survey": 10,
-      "kakei-chousa": 716,
+      "kakei-chousa": 720,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "life-insurance-business-statistics": 4,
@@ -261,9 +261,9 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 451,
+      "total": 453,
       "byStatus": {
-        "resolved": 396,
+        "resolved": 398,
         "unresolved": 0,
         "not-applicable": 55,
         "missing-lineage": 0
@@ -462,6 +462,7 @@
       ],
       "kakei-chousa": [
         "earthquake-exposure",
+        "household-assets-debt",
         "household-food-spending",
         "living-housing",
         "local-services",
@@ -3220,9 +3221,10 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 716,
+      "rankingCount": 720,
       "themeKeys": [
         "earthquake-exposure",
+        "household-assets-debt",
         "household-food-spending",
         "living-housing",
         "local-services",

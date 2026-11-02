@@ -19,6 +19,25 @@
     "absentValueReason": {
       "type": "string"
     },
+    "seriesEnd": {
+      "type": "object",
+      "properties": {
+        "lastYear": {
+          "type": "number"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "successorKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lastYear",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
     "description": {
       "type": "string"
     },

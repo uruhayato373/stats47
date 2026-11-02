@@ -395,6 +395,12 @@ export interface MetricConfig {
    * 例: 将来負担比率の「―」は将来負担が無いことを表す。市区町村ランキングは、この句で居ない自治体の数と理由を書く。
    */
   absentValueReason?: string;
+  /**
+   * 系列の終わり (2026-11-02)。統計の改定・調査の廃止で、この指標の値がこれ以上更新されない。
+   * 調査ハブの一覧はこの指標を出さず、ランキングページの注記に終わった年と理由を出す。
+   * 後継の指標があれば successorKey に書く (isActive の実在する指標)。
+   */
+  seriesEnd?: { lastYear: number; reason: string; successorKey?: string };
   /** 指標の定義・説明 (散文)。「統計の定義」カードに表示。 */
   description?: string;
   /** 単位 (例: "人", "万円")。空文字・"‐" は禁止。 */

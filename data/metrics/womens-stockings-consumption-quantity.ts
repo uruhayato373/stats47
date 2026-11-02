@@ -45,5 +45,6 @@ export const womensStockingsConsumptionQuantity: MetricConfig = {
   },
   "seoTitle": "婦人用ストッキング購入数量ランキング都道府県【2024年】｜1位富山県（1.5足）",
   "seoDescription": "2024年の婦人用ストッキング購入数量の都道府県別ランキング。1位富山県（1.5足）、最下位愛媛県（0.4足）で3.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seriesEnd": { "lastYear": 2024, "reason": "家計調査の 2025 年の品目分類の改定で「他の被服のその他」に統合され、単独の品目でなくなった" },
   "isActive": true,
 };
