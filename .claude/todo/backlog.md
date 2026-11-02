@@ -196,6 +196,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [IG-AREA-PROPS-SCHEMA-VERSION-01] Instagram の県カードの台本が、県データブックの snapshot の版を上げるたびに止まる
+タグ: [SNS・マーケ] [種類:不具合] [実行:sweep] [起票:2026-11-02] [領域:SNS]
+
+- **証拠 (2026-11-02)**: `.claude/scripts/sns/build-ig-area-props.ts` は `schemaVersion` が現行より古い `databook.json` を拒否する。県ページに家計調査の上位品目を足して版を 2 から 3 に上げたので、R2 の snapshot が再生成されるまでこの台本は「旧版」で止まる (Instagram の自動投稿は 2026-10-27 から停止中なので実害はまだ無い)。
+- **次**: 足した項目は任意 (optional) なので、版の比較を「読めるかどうか」(parseAreaDatabookSnapshot) に寄せ、版の数字の完全一致を求めない。
+- **完了条件**: 任意の項目を足した snapshot の版上げで台本が止まらないことをテストで固定する。
+
 ### [METRIC-DISPLAY-UNIT-WIRING-01] 指標の定義の表示単位 (display) を全画面で効かせる前に、71 指標の換算を監査する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:サイト]
 

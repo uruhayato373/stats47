@@ -59,10 +59,27 @@ export interface DatabookMetricValue {
 }
 
 /**
- * databook.json の版。2 = highlight メタを焼き込んだ版。
+ * databook.json の版。2 = highlight メタを焼き込んだ版。3 = 家計調査の上位品目 (kakeiTopItems) を足した版。
  * 1 (フィールド無し) の R2 を読んだ場合、選定は候補 0 件になる (再生成が必要)。
+ * 2 の R2 は kakeiTopItems が無いだけで、ページは上位品目の欄を出さずに表示できる。
  */
-export const AREA_DATABOOK_SCHEMA_VERSION = 2;
+export const AREA_DATABOOK_SCHEMA_VERSION = 3;
+
+/**
+ * 県庁所在市の家計調査で全国 3 位以内に入った品目 (最大 5 件)。値は県全体ではなく県庁所在市の最新年。
+ * 選び方は exporters/kakei-top-items.ts だけが決める。
+ */
+export interface DatabookKakeiTopItem {
+  rankingKey: string;
+  /** 表示名 (例 "ぎょうざ消費支出額") */
+  label: string;
+  value: number;
+  unit: string;
+  /** データ年度 (yearName) */
+  year: string;
+  /** 全国順位 (1-3) */
+  rank: number;
+}
 
 /** 農業産出額 上位品目 (Phase 3 で 生産農業所得統計から焼き込み)。 */
 export interface DatabookAgriItem {
@@ -81,6 +98,8 @@ export interface AreaDatabookSnapshot {
   metrics: Record<string, DatabookMetricValue>;
   /** 農業産出額 上位品目 (未整備の間は空配列) */
   agriTop10: DatabookAgriItem[];
+  /** 県庁所在市の家計調査で全国 3 位以内の品目。schemaVersion 3 以降。無い版では欄を出さない */
+  kakeiTopItems?: DatabookKakeiTopItem[];
   generatedAt: string;
 }
 
@@ -102,6 +121,24 @@ function parseHighlightMeta(key: string, meta: unknown): void {
   if (meta.rankDirection !== "desc" && meta.rankDirection !== "asc") {
     throw new Error(`metrics.${key}.highlight.rankDirection is invalid`);
   }
+}
+
+function parseKakeiTopItems(value: unknown): DatabookKakeiTopItem[] {
+  if (!Array.isArray(value)) throw new Error("area databook kakeiTopItems must be an array");
+  return value.map((item, index) => {
+    if (
+      !isRecord(item) ||
+      typeof item.rankingKey !== "string" ||
+      typeof item.label !== "string" ||
+      typeof item.unit !== "string" ||
+      typeof item.year !== "string" ||
+      !Number.isFinite(item.value) ||
+      !Number.isFinite(item.rank)
+    ) {
+      throw new Error(`kakeiTopItems[${index}] is schema-invalid`);
+    }
+    return item as unknown as DatabookKakeiTopItem;
+  });
 }
 
 export function parseAreaDatabookSnapshot(value: unknown): AreaDatabookSnapshot {
@@ -135,12 +172,14 @@ export function parseAreaDatabookSnapshot(value: unknown): AreaDatabookSnapshot 
     }
     return item as unknown as DatabookAgriItem;
   });
+  const kakeiTopItems = value.kakeiTopItems === undefined ? undefined : parseKakeiTopItems(value.kakeiTopItems);
   return {
     ...(typeof value.schemaVersion === "number" ? { schemaVersion: value.schemaVersion } : {}),
     areaCode: value.areaCode,
     areaName: value.areaName,
     metrics,
     agriTop10,
+    ...(kakeiTopItems ? { kakeiTopItems } : {}),
     generatedAt: value.generatedAt,
   };
 }
