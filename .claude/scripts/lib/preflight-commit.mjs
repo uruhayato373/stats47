@@ -289,6 +289,19 @@ export const PR_GATES = [
     hint: `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json ${datasetDir("surveys.portfolio")}/taxonomy.json`,
   },
   {
+    // main PR の CI (pr-quality-check.yml) にしか無く、家計調査の表を足した PR が main PR で初めて落ちた (2026-11-02 PR #1211)
+    name: "Kakei Ledger / Lenses",
+    why: "家計調査の指標・表を足すと、品目分類・表の台帳・切り口台帳の整合が崩れる",
+    run: async () => {
+      for (const script of ["estat:kakei-classification:check", "estat:kakei-ledger:check", "surveys:lenses:check"]) {
+        const result = await tryRun("npm", ["run", script]);
+        if (!result.ok) return result;
+      }
+      return { ok: true, output: "家計調査の品目分類・表の台帳・切り口台帳 すべて整合" };
+    },
+    hint: "npm run estat:kakei-ledger:build で台帳を作り直し、新しい表は decisions.json と切り口台帳に載せる",
+  },
+  {
     name: "Sitemap / Tag Keys",
     why: "公開記事の増減で sitemap・tag・prominence が古くなる (R2 実測)",
     run: async () => {
