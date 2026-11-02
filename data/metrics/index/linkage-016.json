@@ -10025,7 +10025,7 @@
     {
       "metricKey": "necktie-consumption-quantity",
       "pageId": "ranking:necktie-consumption-quantity",
-      "title": "ネクタイ消費量",
+      "title": "ネクタイ購入数量",
       "sources": [
         {
           "role": "primary",

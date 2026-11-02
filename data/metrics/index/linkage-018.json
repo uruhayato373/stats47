@@ -5780,7 +5780,7 @@
     {
       "metricKey": "other-mens-shirt-consumption-quantity",
       "pageId": "ranking:other-mens-shirt-consumption-quantity",
-      "title": "他の男子用シャツ消費量",
+      "title": "他の男子用シャツ購入数量",
       "sources": [
         {
           "role": "primary",

@@ -9346,7 +9346,7 @@
     {
       "metricKey": "infant-clothes-consumption-quantity",
       "pageId": "ranking:infant-clothes-consumption-quantity",
-      "title": "乳児服消費量",
+      "title": "乳児服購入数量",
       "sources": [
         {
           "role": "primary",

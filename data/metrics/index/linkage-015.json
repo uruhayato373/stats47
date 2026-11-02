@@ -7945,7 +7945,7 @@
     {
       "metricKey": "mens-coat-consumption-quantity",
       "pageId": "ranking:mens-coat-consumption-quantity",
-      "title": "男子用コート消費量",
+      "title": "男子用コート購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8019,7 +8019,7 @@
     {
       "metricKey": "mens-jacket-consumption-quantity",
       "pageId": "ranking:mens-jacket-consumption-quantity",
-      "title": "男子用上着消費量",
+      "title": "男子用上着購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8093,7 +8093,7 @@
     {
       "metricKey": "mens-pants-consumption-quantity",
       "pageId": "ranking:mens-pants-consumption-quantity",
-      "title": "男子用ズボン消費量",
+      "title": "男子用ズボン購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8167,7 +8167,7 @@
     {
       "metricKey": "mens-shoes-consumption-quantity",
       "pageId": "ranking:mens-shoes-consumption-quantity",
-      "title": "男子靴消費量",
+      "title": "男子靴購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8278,7 +8278,7 @@
     {
       "metricKey": "mens-socks-consumption-quantity",
       "pageId": "ranking:mens-socks-consumption-quantity",
-      "title": "男子用靴下消費量",
+      "title": "男子用靴下購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8352,7 +8352,7 @@
     {
       "metricKey": "mens-suit-consumption-quantity",
       "pageId": "ranking:mens-suit-consumption-quantity",
-      "title": "背広服消費量",
+      "title": "背広服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8430,7 +8430,7 @@
     {
       "metricKey": "mens-sweater-consumption-quantity",
       "pageId": "ranking:mens-sweater-consumption-quantity",
-      "title": "男子用セーター消費量",
+      "title": "男子用セーター購入数量",
       "sources": [
         {
           "role": "primary",
@@ -8838,7 +8838,7 @@
     {
       "metricKey": "microwave-consumption-quantity",
       "pageId": "ranking:microwave-consumption-quantity",
-      "title": "電子レンジ消費量",
+      "title": "電子レンジ購入数量",
       "sources": [
         {
           "role": "primary",

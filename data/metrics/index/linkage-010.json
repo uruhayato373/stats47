@@ -1514,7 +1514,7 @@
     {
       "metricKey": "girls-school-uniform-consumption-quantity",
       "pageId": "ranking:girls-school-uniform-consumption-quantity",
-      "title": "女子用学校制服消費量",
+      "title": "女子用学校制服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -1588,7 +1588,7 @@
     {
       "metricKey": "gloves-consumption-quantity",
       "pageId": "ranking:gloves-consumption-quantity",
-      "title": "手袋消費量",
+      "title": "手袋購入数量",
       "sources": [
         {
           "role": "primary",

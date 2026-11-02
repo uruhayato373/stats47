@@ -8464,7 +8464,7 @@
     {
       "metricKey": "tableware-consumption-quantity",
       "pageId": "ranking:tableware-consumption-quantity",
-      "title": "茶わん・皿・鉢消費量",
+      "title": "茶わん・皿・鉢購入数量",
       "sources": [
         {
           "role": "primary",

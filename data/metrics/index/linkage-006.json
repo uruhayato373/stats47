@@ -1679,7 +1679,7 @@
     {
       "metricKey": "dress-shirt-consumption-quantity",
       "pageId": "ranking:dress-shirt-consumption-quantity",
-      "title": "ワイシャツ消費量",
+      "title": "ワイシャツ購入数量",
       "sources": [
         {
           "role": "primary",

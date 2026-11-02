@@ -400,7 +400,7 @@
     {
       "metricKey": "refrigerator-consumption-quantity",
       "pageId": "ranking:refrigerator-consumption-quantity",
-      "title": "電気冷蔵庫消費量",
+      "title": "電気冷蔵庫購入数量",
       "sources": [
         {
           "role": "primary",

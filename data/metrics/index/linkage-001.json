@@ -9417,7 +9417,7 @@
     {
       "metricKey": "bed-consumption-quantity",
       "pageId": "ranking:bed-consumption-quantity",
-      "title": "ベッド消費量",
+      "title": "ベッド購入数量",
       "sources": [
         {
           "role": "primary",

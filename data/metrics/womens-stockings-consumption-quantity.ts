@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const womensStockingsConsumptionQuantity: MetricConfig = {
   "key": "womens-stockings-consumption-quantity",
-  "title": "婦人用ストッキング消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人用ストッキング消費量",
+  "title": "婦人用ストッキング購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人用ストッキング購入数量",
   "unit": "足",
   "category": "economy",
   "source": {
@@ -42,7 +42,7 @@ export const womensStockingsConsumptionQuantity: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "婦人用ストッキング消費量ランキング都道府県【2024年】｜1位富山県（1.5足）",
-  "seoDescription": "2024年の婦人用ストッキング消費量の都道府県別ランキング。1位富山県（1.5足）、最下位愛媛県（0.4足）で3.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "婦人用ストッキング購入数量ランキング都道府県【2024年】｜1位富山県（1.5足）",
+  "seoDescription": "2024年の婦人用ストッキング購入数量の都道府県別ランキング。1位富山県（1.5足）、最下位愛媛県（0.4足）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

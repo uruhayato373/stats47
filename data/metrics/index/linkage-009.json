@@ -9633,7 +9633,7 @@
     {
       "metricKey": "futon-consumption-quantity",
       "pageId": "ranking:futon-consumption-quantity",
-      "title": "布団消費量",
+      "title": "布団購入数量",
       "sources": [
         {
           "role": "primary",
@@ -10634,7 +10634,7 @@
     {
       "metricKey": "game-console-consumption-quantity",
       "pageId": "ranking:game-console-consumption-quantity",
-      "title": "ゲーム機消費量",
+      "title": "ゲーム機購入数量",
       "sources": [
         {
           "role": "primary",

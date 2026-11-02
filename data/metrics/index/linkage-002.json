@@ -771,7 +771,7 @@
     {
       "metricKey": "blouse-consumption-quantity",
       "pageId": "ranking:blouse-consumption-quantity",
-      "title": "ブラウス消費量",
+      "title": "ブラウス購入数量",
       "sources": [
         {
           "role": "primary",
@@ -1848,7 +1848,7 @@
     {
       "metricKey": "boys-school-uniform-consumption-quantity",
       "pageId": "ranking:boys-school-uniform-consumption-quantity",
-      "title": "男子用学校制服消費量",
+      "title": "男子用学校制服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -7301,7 +7301,7 @@
     {
       "metricKey": "car-purchase-consumption-quantity",
       "pageId": "ranking:car-purchase-consumption-quantity",
-      "title": "自動車購入消費量",
+      "title": "自動車購入購入数量",
       "sources": [
         {
           "role": "primary",
@@ -9704,7 +9704,7 @@
     {
       "metricKey": "chest-consumption-quantity",
       "pageId": "ranking:chest-consumption-quantity",
-      "title": "たんす消費量",
+      "title": "たんす購入数量",
       "sources": [
         {
           "role": "primary",

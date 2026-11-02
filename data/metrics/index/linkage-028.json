@@ -1140,7 +1140,7 @@
     {
       "metricKey": "television-consumption-quantity",
       "pageId": "ranking:television-consumption-quantity",
-      "title": "テレビ消費量",
+      "title": "テレビ購入数量",
       "sources": [
         {
           "role": "primary",

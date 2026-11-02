@@ -7669,7 +7669,7 @@
     {
       "metricKey": "cooking-appliance-consumption-quantity",
       "pageId": "ranking:cooking-appliance-consumption-quantity",
-      "title": "炊事用電気器具消費量",
+      "title": "炊事用電気器具購入数量",
       "sources": [
         {
           "role": "primary",
@@ -12949,7 +12949,7 @@
     {
       "metricKey": "cupboard-consumption-quantity",
       "pageId": "ranking:cupboard-consumption-quantity",
-      "title": "食器戸棚消費量",
+      "title": "食器戸棚購入数量",
       "sources": [
         {
           "role": "primary",

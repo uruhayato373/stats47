@@ -2934,7 +2934,7 @@
     {
       "metricKey": "womens-coat-consumption-quantity",
       "pageId": "ranking:womens-coat-consumption-quantity",
-      "title": "婦人用コート消費量",
+      "title": "婦人用コート購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3016,7 +3016,7 @@
     {
       "metricKey": "womens-dress-consumption-quantity",
       "pageId": "ranking:womens-dress-consumption-quantity",
-      "title": "婦人服消費量",
+      "title": "婦人服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3127,7 +3127,7 @@
     {
       "metricKey": "womens-jacket-consumption-quantity",
       "pageId": "ranking:womens-jacket-consumption-quantity",
-      "title": "婦人用上着消費量",
+      "title": "婦人用上着購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3201,7 +3201,7 @@
     {
       "metricKey": "womens-pants-consumption-quantity",
       "pageId": "ranking:womens-pants-consumption-quantity",
-      "title": "婦人用スラックス消費量",
+      "title": "婦人用スラックス購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3275,7 +3275,7 @@
     {
       "metricKey": "womens-shoes-consumption-quantity",
       "pageId": "ranking:womens-shoes-consumption-quantity",
-      "title": "婦人靴消費量",
+      "title": "婦人靴購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3386,7 +3386,7 @@
     {
       "metricKey": "womens-socks-consumption-quantity",
       "pageId": "ranking:womens-socks-consumption-quantity",
-      "title": "婦人用ソックス消費量",
+      "title": "婦人用ソックス購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3658,7 +3658,7 @@
     {
       "metricKey": "womens-stockings-consumption-quantity",
       "pageId": "ranking:womens-stockings-consumption-quantity",
-      "title": "婦人用ストッキング消費量",
+      "title": "婦人用ストッキング購入数量",
       "sources": [
         {
           "role": "primary",
@@ -3930,7 +3930,7 @@
     {
       "metricKey": "womens-sweater-consumption-quantity",
       "pageId": "ranking:womens-sweater-consumption-quantity",
-      "title": "婦人用セーター消費量",
+      "title": "婦人用セーター購入数量",
       "sources": [
         {
           "role": "primary",

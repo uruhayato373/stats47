@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const potsKettlesConsumptionQuantity: MetricConfig = {
   "key": "pots-kettles-consumption-quantity",
-  "title": "鍋・やかん消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間鍋・やかん消費量",
+  "title": "鍋・やかん購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間鍋・やかん購入数量",
   "unit": "個",
   "category": "economy",
   "source": {
@@ -42,7 +42,7 @@ export const potsKettlesConsumptionQuantity: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "鍋・やかん消費量ランキング｜県庁所在市の二人以上世帯",
-  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の鍋・やかん消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
+  "seoTitle": "鍋・やかん購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市の鍋・やかん購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

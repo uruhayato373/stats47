@@ -1788,7 +1788,7 @@
     {
       "metricKey": "other-womens-shirt-consumption-quantity",
       "pageId": "ranking:other-womens-shirt-consumption-quantity",
-      "title": "他の婦人用シャツ消費量",
+      "title": "他の婦人用シャツ購入数量",
       "sources": [
         {
           "role": "primary",

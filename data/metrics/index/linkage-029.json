@@ -6379,7 +6379,7 @@
     {
       "metricKey": "travel-bag-consumption-quantity",
       "pageId": "ranking:travel-bag-consumption-quantity",
-      "title": "旅行用かばん消費量",
+      "title": "旅行用かばん購入数量",
       "sources": [
         {
           "role": "primary",
@@ -11309,7 +11309,7 @@
     {
       "metricKey": "umbrella-consumption-quantity",
       "pageId": "ranking:umbrella-consumption-quantity",
-      "title": "傘消費量",
+      "title": "傘購入数量",
       "sources": [
         {
           "role": "primary",

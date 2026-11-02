@@ -421,7 +421,7 @@
     {
       "metricKey": "childrens-clothes-consumption-quantity",
       "pageId": "ranking:childrens-clothes-consumption-quantity",
-      "title": "子供服消費量",
+      "title": "子供服購入数量",
       "sources": [
         {
           "role": "primary",
@@ -536,7 +536,7 @@
     {
       "metricKey": "childrens-shoes-consumption-quantity",
       "pageId": "ranking:childrens-shoes-consumption-quantity",
-      "title": "子供用靴・サンダル消費量",
+      "title": "子供用靴・サンダル購入数量",
       "sources": [
         {
           "role": "primary",
@@ -647,7 +647,7 @@
     {
       "metricKey": "childrens-socks-consumption-quantity",
       "pageId": "ranking:childrens-socks-consumption-quantity",
-      "title": "子供用靴下消費量",
+      "title": "子供用靴下購入数量",
       "sources": [
         {
           "role": "primary",

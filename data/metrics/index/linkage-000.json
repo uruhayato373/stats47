@@ -2506,7 +2506,7 @@
     {
       "metricKey": "adult-sandals-consumption-quantity",
       "pageId": "ranking:adult-sandals-consumption-quantity",
-      "title": "大人用サンダル消費量",
+      "title": "大人用サンダル購入数量",
       "sources": [
         {
           "role": "primary",
@@ -2580,7 +2580,7 @@
     {
       "metricKey": "adult-sneakers-consumption-quantity",
       "pageId": "ranking:adult-sneakers-consumption-quantity",
-      "title": "大人用運動靴消費量",
+      "title": "大人用運動靴購入数量",
       "sources": [
         {
           "role": "primary",
@@ -5122,7 +5122,7 @@
     {
       "metricKey": "air-conditioner-consumption-quantity",
       "pageId": "ranking:air-conditioner-consumption-quantity",
-      "title": "エアコン消費量",
+      "title": "エアコン購入数量",
       "sources": [
         {
           "role": "primary",

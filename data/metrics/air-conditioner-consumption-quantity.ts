@@ -3,8 +3,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const airConditionerConsumptionQuantity: MetricConfig = {
   "key": "air-conditioner-consumption-quantity",
-  "title": "エアコン消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン消費量",
+  "title": "エアコン購入数量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間エアコン購入数量",
   "unit": "台",
   "category": "economy",
   "source": {
@@ -42,7 +42,7 @@ export const airConditionerConsumptionQuantity: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "エアコン消費量ランキング｜県庁所在市の二人以上世帯",
-  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のエアコン消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
+  "seoTitle": "エアコン購入数量ランキング｜県庁所在市の二人以上世帯",
+  "seoDescription": "家計調査の二人以上世帯について、県庁所在市のエアコン購入数量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
 };

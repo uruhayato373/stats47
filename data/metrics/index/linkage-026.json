@@ -849,7 +849,7 @@
     {
       "metricKey": "sheets-consumption-quantity",
       "pageId": "ranking:sheets-consumption-quantity",
-      "title": "敷布消費量",
+      "title": "敷布購入数量",
       "sources": [
         {
           "role": "primary",
@@ -7359,7 +7359,7 @@
     {
       "metricKey": "skirt-consumption-quantity",
       "pageId": "ranking:skirt-consumption-quantity",
-      "title": "スカート消費量",
+      "title": "スカート購入数量",
       "sources": [
         {
           "role": "primary",

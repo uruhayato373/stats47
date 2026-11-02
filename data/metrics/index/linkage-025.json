@@ -6439,7 +6439,7 @@
     {
       "metricKey": "school-bag-consumption-quantity",
       "pageId": "ranking:school-bag-consumption-quantity",
-      "title": "通学用かばん消費量",
+      "title": "通学用かばん購入数量",
       "sources": [
         {
           "role": "primary",

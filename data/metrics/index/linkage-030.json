@@ -4409,7 +4409,7 @@
     {
       "metricKey": "vacuum-cleaner-consumption-quantity",
       "pageId": "ranking:vacuum-cleaner-consumption-quantity",
-      "title": "電気掃除機消費量",
+      "title": "電気掃除機購入数量",
       "sources": [
         {
           "role": "primary",
@@ -5442,7 +5442,7 @@
     {
       "metricKey": "video-recorder-consumption-quantity",
       "pageId": "ranking:video-recorder-consumption-quantity",
-      "title": "ビデオレコーダー・プレイヤー消費量",
+      "title": "ビデオレコーダー・プレイヤー購入数量",
       "sources": [
         {
           "role": "primary",
@@ -7008,7 +7008,7 @@
     {
       "metricKey": "washing-machine-consumption-quantity",
       "pageId": "ranking:washing-machine-consumption-quantity",
-      "title": "電気洗濯機消費量",
+      "title": "電気洗濯機購入数量",
       "sources": [
         {
           "role": "primary",

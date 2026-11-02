@@ -41,7 +41,7 @@
     {
       "metricKey": "pots-kettles-consumption-quantity",
       "pageId": "ranking:pots-kettles-consumption-quantity",
-      "title": "鍋・やかん消費量",
+      "title": "鍋・やかん購入数量",
       "sources": [
         {
           "role": "primary",

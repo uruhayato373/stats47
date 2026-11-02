@@ -45,7 +45,7 @@
     {
       "metricKey": "handbag-consumption-quantity",
       "pageId": "ranking:handbag-consumption-quantity",
-      "title": "ハンドバッグ消費量",
+      "title": "ハンドバッグ購入数量",
       "sources": [
         {
           "role": "primary",
@@ -815,7 +815,7 @@
     {
       "metricKey": "hat-consumption-quantity",
       "pageId": "ranking:hat-consumption-quantity",
-      "title": "帽子消費量",
+      "title": "帽子購入数量",
       "sources": [
         {
           "role": "primary",
@@ -2947,7 +2947,7 @@
     {
       "metricKey": "heater-consumption-quantity",
       "pageId": "ranking:heater-consumption-quantity",
-      "title": "ストーブ・温風ヒーター消費量",
+      "title": "ストーブ・温風ヒーター購入数量",
       "sources": [
         {
           "role": "primary",
