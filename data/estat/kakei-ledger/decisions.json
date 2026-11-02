@@ -5,5 +5,486 @@
     "quantity": "0004023606"
   },
   "tables": [],
-  "items": []
+  "items": [
+    {
+      "code": "000100000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "000200000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110000000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110100000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110100010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110100020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110100030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110200000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110300000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110300010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110300020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110400000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110400010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110400020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110400030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110500000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110500010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110500020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110500030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110500040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110600000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110600010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110600020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110700000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110700010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110700020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110700030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110700040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110800000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110800010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110800020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110800030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110800040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110900000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110900010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "110900020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111000000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111000010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111000020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111000030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111000040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111100000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111100010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111100020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111100030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "111100040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "120000001",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130000000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130100000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200010",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200020",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200030",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200040",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200050",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200060",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "130200070",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "140000000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "140100000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "140200000",
+      "measure": "amount",
+      "status": "excluded",
+      "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断",
+      "decidedAt": "2026-07-10",
+      "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    }
+  ]
 }

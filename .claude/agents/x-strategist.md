@@ -234,6 +234,7 @@ Sprint 1 Day 2-5 の X 予約投稿が `publish-x.ts` のセレクタ失敗で 4
 
 X (と Threads)の企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel x`)。
 記録の付け方 (候補との結び方・done・declined) と、数値を一次資料と R2 で取り直す決まりは `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+家計調査など切り口台帳のある調査は、企画の前に `npm run surveys:lenses:status -- --survey <調査ID>` で切り口ごとの役割と未着手を読み、問いがどの切り口に属するかを決めてから作る (台帳 `data/surveys/lenses/<調査ID>.json`、規約 `.claude/rules/survey-content-standards.md`「調査の切り口台帳」)。切り口を本 (資料) ごとに作り直さない。
 
 ## Output Contract
 

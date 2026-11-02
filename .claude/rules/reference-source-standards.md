@@ -4,7 +4,7 @@ paths:
   - "data/source-inventory/**"
   - "config/source-vault.json"
   - "docs/02_実装計画/**"
-  - ".claude/agents/{area-curator,area-databook-designer,open-data-curator,blog-seo-strategist,note-manager,x-strategist,instagram-strategist,theme-designer,ranking-expander,survey-curator}.md"
+  - ".claude/agents/{area-curator,area-databook-designer,open-data-curator,blog-seo-strategist,note-manager,x-strategist,instagram-strategist,theme-designer,ranking-expander,survey-curator,kindle-publisher}.md"
 ---
 # 参考文献の保存・利用実装規約
 
@@ -156,6 +156,8 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 参考文献は論点、候補、書誌上の手掛かりを見つける evidence source として使う。
 - 数値、事実、表現は一次資料で検証する。書籍や二次資料の数値を観測値へ直接投入しない。
 - 新しい公開 taxonomy や保存層を資料ごとに作らず、既存の Category / Theme / Tag、metric、survey、R2、記事・SNS台帳へ写像する。
+  分析の切り口は資料ではなく調査の持ち物なので、調査ごとの切り口台帳 (`data/surveys/lenses/<surveyId>.json`) に置き、
+  資料の問いは `lensIds` でそこへ結ぶ。これは「資料ごとの分類」ではない (規約 `survey-content-standards.md`「調査の切り口台帳」)。
 - 一次資料を特定できない項目は `primary-source-unavailable`、利用条件が不明な項目は `rights-hold` として公開しない。
 - OCR、ページ画像、cropは候補発見と原本照合だけに使い、原文、数値列、元図、レイアウト、crop画像を公開SSOTへ移さない。
 - crop specは`internalUseOnly:true`、`publicOriginalReuse:"forbidden"`、出典ページ、用途、
@@ -185,10 +187,12 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 教材ごとの分析企画 (問い・主張・採否・展開先) は`data/source-inventory/<sourceKey>/<edition>/analyses.json`
 (JSON Schema `analyses.schema.json`) を正本にする。採択した企画 (`reuse-existing-metric`・`new-metric`・`combined-analysis`) の
 `contentRoles` が展開先の宛先で、企画 × 展開先ごとの結果は展開記録`data/source-inventory/expansion.json` (JSON Schema 付き) に置く。
+切り口台帳のある調査 (家計調査など) を `surveyIds` に持つ企画は、`lensIds` で調査の切り口に結ぶ (`npm run surveys:lenses:check` が未接続を止める)。
+展開は企画単位で記録し、切り口単位の進み具合は `npm run surveys:lenses:status` で集計して読む。
 
 | 状態 | 決まり方 |
 |---|---|
-| 済み (記録) | `status: "done"` + `target` に公開中のページ ID (`data/content` の id 体系。`blog:<slug>`・`note:<記事key>`・`sns:<投稿ID>`・`theme:<key>`・`area-theme:<code>:<theme>` など) |
+| 済み (記録) | `status: "done"` + `target` に公開中のページ ID (`data/content` の id 体系。`blog:<slug>`・`note:<記事key>`・`sns:<投稿ID>`・`theme:<key>`・`area-theme:<code>:<theme>` など)。Kindle は `kindle:<書籍ID>` で、KDP 公開済み (`data/products/kindle-status.json` の status published) だけが済み |
 | 済み (自動) | ランキング・調査・テーマ・全国だけ。企画の指標がすべて公開中のランキング / テーマ / 全国ページに、調査がすべて公開中の調査ページに載っていれば記録なしで済み |
 | 企画中 | `status: "planned"` (`target` は下書きのページ ID でもよい) |
 | 見送り | `status: "declined"` + `reason` (読み手にとって載せる価値が無い・一次資料で再検証できない等) |
@@ -198,7 +202,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   問いを読んで同じなら`done`で結ぶ。
 - 入口は`npm run reference:expansion -- <status|pending|record|check>`。記録は`record`だけで書き (`--by` に担当 agent の名前)、`check`が PR・pre-commit で
   企画の実在・展開先・ページ ID の種類・SNS の媒体・公開状態を検査する。
-- 担当: ブログ = blog-seo-strategist (`/plan-article-queue`)・note = note-manager (`/expand-reference-notes`)・X / Threads = x-strategist (`/post-x-batch`)・
+- 担当: ブログ = blog-seo-strategist (`/plan-article-queue`)・note = note-manager (`/expand-reference-notes`)・Kindle = kindle-publisher (`/build-kindle-book`)・X / Threads = x-strategist (`/post-x-batch`)・
   Instagram = instagram-strategist・YouTube = strategy-advisor (pilot 保留中)・テーマと全国 = theme-designer・県 = area-curator・
   ランキング = ranking-expander・調査 = survey-curator。各担当は企画・制作の前に自分の展開先の`pending`を読み、作ったら`done`、
   作らないと決めたら`declined`を記録する。週次は`/weekly-review`が`status --json`の未着手数を読む。

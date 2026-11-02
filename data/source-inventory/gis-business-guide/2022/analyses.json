@@ -791,6 +791,9 @@
       "surveyIds": [
         "kakei-chousa"
       ],
+      "lensIds": [
+        "kakei-city-comparison"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

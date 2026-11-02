@@ -192,6 +192,8 @@ OCRとクロップは、掲載テーマ、統計名、調査主体、調査年�
 | 第2部 47都市 | 48 | `context-only`（凡例）、`combined-analysis`×47（`areaCodes`付き） | `<pref>-food-culture`記事シリーズ（既存9本の更新＋38本の新規）、areaページの食文化編集候補 |
 | おわりに | 1 | `context-only`（地産地消の光と影） | 産地×消費地の型B記事 |
 
+- 各論点は家計調査の切り口台帳 `data/surveys/lenses/kakei-chousa.json` の切り口へ `lensIds` で結ぶ (2026-11-02)。章ごとの受け皿 (上表) は
+  論点の出どころの記録で、展開の単位は切り口である。切り口 × チャネルの進み具合は `npm run surveys:lenses:status -- --survey kakei-chousa`。
 - 年間収入五分位階級別・世帯主年齢階級別・月次の分析は**全国集計**であり、都道府県値ではない。`geoScopes: ["japan"]`の項目は
   `/ranking`へ載せず、`/japan`時系列と記事（`fetch-quintile-data.ts`等の接地器）で扱う。
 - 都道府県庁所在市の値は県全体ではない。第2部の県別項目は`areaCodes`で県へ写像するが、記事・areaページでは

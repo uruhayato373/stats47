@@ -36,6 +36,9 @@
         "kakei-chousa",
         "household-survey"
       ],
+      "lensIds": [
+        "kakei-city-comparison"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -82,6 +85,10 @@
       "surveyIds": [
         "kakei-chousa",
         "household-survey"
+      ],
+      "lensIds": [
+        "kakei-cross-metric",
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -139,6 +146,9 @@
       "surveyIds": [
         "kakei-chousa",
         "household-survey"
+      ],
+      "lensIds": [
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -508,6 +518,9 @@
         "kakei-chousa",
         "school-basic-survey"
       ],
+      "lensIds": [
+        "kakei-cross-metric"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -594,6 +607,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-city-comparison"
       ],
       "geoScopes": [
         "prefecture-set"
@@ -738,6 +754,9 @@
       ],
       "surveyIds": [
         "kakei-chousa"
+      ],
+      "lensIds": [
+        "kakei-savings-debt"
       ],
       "geoScopes": [
         "prefecture-set"

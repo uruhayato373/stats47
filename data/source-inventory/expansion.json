@@ -427,11 +427,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-01",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:hokkaido-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-01",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-hokkaido",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-02",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:aomori-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-02",
@@ -443,11 +459,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-03",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:iwate-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-03",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-iwate",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-04",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:miyagi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-04",
@@ -459,11 +491,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-05",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:akita-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-05",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-akita",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-06",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:yamagata-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-06",
@@ -475,11 +523,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-07",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:fukushima-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-07",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-fukushima",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-08",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:ibaraki-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-08",
@@ -491,11 +555,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-09",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:tochigi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-09",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-tochigi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-10",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:gunma-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-10",
@@ -507,11 +587,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-11",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:saitama-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-11",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-saitama",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-12",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:chiba-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-12",
@@ -523,11 +619,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-13",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:tokyo-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-13",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-tokyo",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-14",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kanagawa-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-14",
@@ -539,11 +651,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-15",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:niigata-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-15",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-niigata",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-16",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:toyama-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-16",
@@ -555,11 +683,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-17",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:ishikawa-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-17",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-ishikawa",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-18",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:fukui-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-18",
@@ -571,11 +715,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-19",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:yamanashi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-19",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-yamanashi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-20",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:nagano-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-20",
@@ -587,11 +747,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-21",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:gifu-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-21",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-gifu",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-22",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:shizuoka-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-22",
@@ -603,11 +779,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-23",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:aichi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-23",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-aichi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-24",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:mie-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-24",
@@ -619,11 +811,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-25",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:shiga-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-25",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-shiga",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-26",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kyoto-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-26",
@@ -635,11 +843,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-27",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:osaka-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-27",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-osaka",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-28",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:hyogo-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-28",
@@ -651,11 +875,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-29",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:nara-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-29",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-nara",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-30",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:wakayama-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-30",
@@ -667,11 +907,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-31",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:tottori-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-31",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-tottori",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-32",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:shimane-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-32",
@@ -683,11 +939,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-33",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:okayama-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-33",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-okayama",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-34",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:hiroshima-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-34",
@@ -699,11 +971,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-35",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:yamaguchi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-35",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-yamaguchi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-36",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:tokushima-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-36",
@@ -715,11 +1003,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-37",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kagawa-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-37",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-kagawa",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-38",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:ehime-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-38",
@@ -731,11 +1035,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-39",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kochi-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-39",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-kochi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-40",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:fukuoka-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-40",
@@ -747,11 +1067,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-41",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:saga-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-41",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-saga",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-42",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:nagasaki-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-42",
@@ -763,11 +1099,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-43",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kumamoto-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-43",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-kumamoto",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-44",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:oita-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-44",
@@ -779,6 +1131,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-45",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:miyazaki-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-45",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-miyazaki",
@@ -787,11 +1147,27 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-46",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:kagoshima-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-46",
       "channel": "note",
       "status": "done",
       "target": "note:a-kakei-kagoshima",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-47",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:okinawa-food-culture",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "kakei-marketing-2015-a06-47",

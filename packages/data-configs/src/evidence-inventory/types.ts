@@ -30,6 +30,7 @@ export const EVIDENCE_CONTENT_ROLES = [
   "japan",
   "blog",
   "note",
+  "kindle",
   "youtube",
   "instagram",
   "x",
@@ -166,6 +167,8 @@ export interface KakeiMarketingAnalysis {
   resolutionReason: string;
   metricKeys: string[];
   surveyIds: string[];
+  /** 調査の切り口 (data/surveys/lenses/<surveyId>.json の lenses[].id) */
+  lensIds?: string[];
   themeSlugs?: string[];
   /** 第2部の県庁所在市プロファイルだけが持つ都道府県コード (5桁) */
   areaCodes?: string[];

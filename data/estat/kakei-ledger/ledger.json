@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T00:33:03.705Z",
+ "generatedAt": "2026-11-02T02:26:08.320Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -25,12 +25,13 @@
    "amount": {
     "total": 689,
     "byStatus": {
-     "undecided": 175,
+     "excluded": 60,
+     "undecided": 115,
      "adopted": 514
     },
     "undecidedByKind": {
-     "other": 58,
-     "group": 115,
+     "other": 7,
+     "group": 106,
      "item": 2
     }
    },
@@ -6952,8 +6953,8 @@
    "parentCode": null,
    "unit": "一万分比",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "000200000",
@@ -6965,8 +6966,8 @@
    "parentCode": null,
    "unit": "世帯",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "000300000",
@@ -17725,8 +17726,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100000",
@@ -17738,8 +17739,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100010",
@@ -17751,8 +17752,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100020",
@@ -17764,8 +17765,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110100030",
@@ -17777,8 +17778,8 @@
    "parentCode": "110100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110200000",
@@ -17790,8 +17791,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300000",
@@ -17803,8 +17804,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300010",
@@ -17816,8 +17817,8 @@
    "parentCode": "110300000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110300020",
@@ -17829,8 +17830,8 @@
    "parentCode": "110300000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400000",
@@ -17842,8 +17843,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400010",
@@ -17855,8 +17856,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400020",
@@ -17868,8 +17869,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110400030",
@@ -17881,8 +17882,8 @@
    "parentCode": "110400000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500000",
@@ -17894,8 +17895,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500010",
@@ -17907,8 +17908,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500020",
@@ -17920,8 +17921,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500030",
@@ -17933,8 +17934,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110500040",
@@ -17946,8 +17947,8 @@
    "parentCode": "110500000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600000",
@@ -17959,8 +17960,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600010",
@@ -17972,8 +17973,8 @@
    "parentCode": "110600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110600020",
@@ -17985,8 +17986,8 @@
    "parentCode": "110600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700000",
@@ -17998,8 +17999,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700010",
@@ -18011,8 +18012,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700020",
@@ -18024,8 +18025,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700030",
@@ -18037,8 +18038,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110700040",
@@ -18050,8 +18051,8 @@
    "parentCode": "110700000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800000",
@@ -18063,8 +18064,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800010",
@@ -18076,8 +18077,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800020",
@@ -18089,8 +18090,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800030",
@@ -18102,8 +18103,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110800040",
@@ -18115,8 +18116,8 @@
    "parentCode": "110800000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900000",
@@ -18128,8 +18129,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900010",
@@ -18141,8 +18142,8 @@
    "parentCode": "110900000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "110900020",
@@ -18154,8 +18155,8 @@
    "parentCode": "110900000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000000",
@@ -18167,8 +18168,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000010",
@@ -18180,8 +18181,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000020",
@@ -18193,8 +18194,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000030",
@@ -18206,8 +18207,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111000040",
@@ -18219,8 +18220,8 @@
    "parentCode": "111000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100000",
@@ -18232,8 +18233,8 @@
    "parentCode": "110000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100010",
@@ -18245,8 +18246,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100020",
@@ -18258,8 +18259,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100030",
@@ -18271,8 +18272,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "111100040",
@@ -18284,8 +18285,8 @@
    "parentCode": "111100000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "財・サービス区分 (分析用の組替区分)。品目や費目と重なり、ランキングとしての読者価値が低い"
   },
   {
    "code": "120000001",
@@ -18297,8 +18298,8 @@
    "parentCode": null,
    "unit": "世帯",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "調査の設計上の値 (世帯数の分布・集計世帯数)。地域差を比べる指標ではない"
   },
   {
    "code": "130000000",
@@ -18310,8 +18311,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130100000",
@@ -18323,8 +18324,8 @@
    "parentCode": "130000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200000",
@@ -18336,8 +18337,8 @@
    "parentCode": "130000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200010",
@@ -18349,8 +18350,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200020",
@@ -18362,8 +18363,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200030",
@@ -18375,8 +18376,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200040",
@@ -18388,8 +18389,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200050",
@@ -18401,8 +18402,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200060",
@@ -18414,8 +18415,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "130200070",
@@ -18427,8 +18428,8 @@
    "parentCode": "130200000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "教養娯楽関係費の組替区分 (分析用)。教養娯楽の費目・品目と重なる"
   },
   {
    "code": "140000000",
@@ -18440,8 +18441,8 @@
    "parentCode": null,
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "140100000",
@@ -18453,8 +18454,8 @@
    "parentCode": "140000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "140200000",
@@ -18466,8 +18467,8 @@
    "parentCode": "140000000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "excluded",
+   "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断"
   },
   {
    "code": "010110001",

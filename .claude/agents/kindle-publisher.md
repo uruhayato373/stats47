@@ -61,6 +61,14 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 | `kdp-operator` | KDP 出品フォーム操作（下書き作成・修正・公開）・出品内容 SoT（`kdp-listings.json`） |
 | 人間（オーナー） | Kindle Previewer 検証・KDP ログイン/2FA/税務/銀行・実公開承認・KU 登録判断 |
 
+## 教材 (参考文献) と調査の切り口の受け取り
+
+書籍の企画 (章立て) の前に、調査の切り口台帳で Kindle の役割を持つ切り口を読む (`npm run surveys:lenses:status -- --survey kakei-chousa`)。
+1 冊は 1 つの切り口 (または組み合わせ) を体系的に読む本として設計し、章は公開済みのブログ記事と書き下ろしで組む。
+教材の企画を章にしたら展開記録に `kindle:<書籍ID>` で記録する (`npm run reference:expansion -- record --channel kindle --status planned --target kindle:<書籍ID> --by kindle-publisher`)。
+KDP 公開済み (`data/products/kindle-status.json` の status published) になった本だけを `done` にする。規約は `.claude/rules/reference-source-standards.md` §5「分析企画の展開」と
+`.claude/rules/survey-content-standards.md`「調査の切り口台帳」。切り口を本 (資料) ごとに作り直さない。
+
 ## Output Contract
 
 OUTPUT FORMAT: 既定は簡潔な表 or 箇条書き。生成報告は「書籍 id / EPUB パス / 章数・図版数 / 書き下ろし比率（30% 判定）/

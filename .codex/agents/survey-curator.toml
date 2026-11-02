@@ -12,7 +12,9 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 > **役割分担 (重複しない)**
 > - **survey-curator (本エージェント)**: surveys.json マスタ / 導出辞書 / config.surveyId の管理と監査、
 >   ranking / theme / blog の横断 taxonomy state、survey-editorial.ts の編集、
->   **ポートフォリオ評価 + 編集ハブ化の優先順位 + 実験台帳**
+>   **ポートフォリオ評価 + 編集ハブ化の優先順位 + 実験台帳**、
+>   **調査の切り口台帳** (`data/surveys/lenses/<surveyId>.json`。調査ごとの分析の切り口とチャネルの役割。
+>   規約 `survey-content-standards.md`「調査の切り口台帳」)
 >   (真実源 = `data/surveys/{taxonomy,portfolio,experiments}.json`)。
 > - `data-ingester`: metric config 作成・観測値投入 (投入後の紐付け確認は本エージェントに委譲される)。
 > - `r2-publisher` / CI (sync-snapshots): R2 push。
@@ -115,6 +117,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
   `data/metrics/<key>.ts` の `surveyId` フィールドのみ /
   `apps/web/src/features/survey/survey-editorial.ts` (survey 編集情報 git TS SSOT) /
   `data/surveys/*` (builder スクリプト経由) /
+  `data/surveys/lenses/<surveyId>.json` (調査の切り口台帳。人が判断して書く正本。展開の状況は書かない) /
   `.claude/skills/survey/manage-survey-portfolio/reference/**` (運用設計・reviews・audits) / 自分の監査レポート出力
 - **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`data/{gsc,ga4}/snapshots/`) /
   `.claude/todo/improvements.md` (変更が必要なら main セッションか担当 agent に返す)
@@ -129,6 +132,8 @@ npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check 
 npm run validate:config --workspace=@stats47/data-configs             # surveyId 実在 lint
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts             # portfolio 再導出 (upsert)
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # schema + 判定規律 + drift
+npm run surveys:lenses:check                                          # 切り口台帳: 調査・表の実在、問い・分析単位からの参照、未接続の問い
+npm run surveys:lenses:status -- --survey kakei-chousa                # 切り口 × チャネルの展開状況 (展開記録から集計)
 cd packages/ranking && npx vitest run src/exporters/survey-bucketing.test.ts src/builders
 ```
 
@@ -136,6 +141,7 @@ cd packages/ranking && npx vitest run src/exporters/survey-bucketing.test.ts src
 
 調査ハブの企画・制作の前に、教材の分析企画のうち自分の展開先が未着手のものを読む (`npm run reference:expansion -- pending --channel survey`)。
 記録の付け方 (候補との結び方・done・declined) と、数値を一次資料と R2 で取り直す決まりは `.claude/rules/reference-source-standards.md` §5「分析企画の展開」。
+家計調査など切り口台帳のある調査は、企画の前に `npm run surveys:lenses:status -- --survey <調査ID>` で切り口ごとの役割と未着手を読み、問いがどの切り口に属するかを決めてから作る (台帳 `data/surveys/lenses/<調査ID>.json`、規約 `.claude/rules/survey-content-standards.md`「調査の切り口台帳」)。切り口を本 (資料) ごとに作り直さない。
 
 ## Output Contract
 

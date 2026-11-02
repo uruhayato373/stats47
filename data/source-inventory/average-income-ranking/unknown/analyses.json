@@ -160,6 +160,10 @@
         "national-household-survey",
         "wage-structure-survey"
       ],
+      "lensIds": [
+        "kakei-cross-metric",
+        "kakei-budget-structure"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -3386,6 +3390,9 @@
         "wage-structure-survey",
         "household-survey",
         "retail-price-survey"
+      ],
+      "lensIds": [
+        "kakei-cross-metric"
       ],
       "geoScopes": [
         "prefecture-set"

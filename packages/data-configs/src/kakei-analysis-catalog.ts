@@ -1,10 +1,14 @@
 /**
- * 家計調査の分析単位。既存指標の出典・値は metric config / R2 が正本。
- * ここには「同じ統計表のどの切り口を、どのページで答えるか」だけを置く。
+ * 家計調査の分析単位の台帳。既存指標の出典・値は metric config / R2 が正本。
+ * ここには「どの表のどの軸 (都市・年・年収階級など) を、どのページで答えるか」だけを置く。
+ * 切り口 (数量と単価に分ける・年収階級で比べる など) そのものは調査の切り口台帳
+ * data/surveys/lenses/kakei-chousa.json が正本で、各行は lensId でそこを参照する。
  * staged は値と図をローカル生成済み、proposed は候補。どちらも公開済みを意味しない。
  */
 export interface KakeiAnalysis {
   id: string;
+  /** 調査の切り口 (data/surveys/lenses/kakei-chousa.json の lenses[].id)。参照の実在は npm run surveys:lenses:check が見る */
+  lensId: string;
   question: string;
   source: {
     statsDataId: string;
@@ -37,6 +41,7 @@ export interface KakeiAnalysis {
 export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   {
     id: 'natto-city-spending',
+    lensId: 'kakei-city-comparison',
     question: '納豆への年間支出は都市でどう違うか',
     source: {
       statsDataId: '0004023605',
@@ -57,6 +62,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'rice-city-quantity',
+    lensId: 'kakei-city-comparison',
     question: '米の年間購入量は都市でどう違うか',
     source: {
       statsDataId: '0004023606',
@@ -77,6 +83,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'green-tea-city-quantity',
+    lensId: 'kakei-city-comparison',
     question: '緑茶の年間購入量は都市でどう違うか',
     source: {
       statsDataId: '0004023606',
@@ -97,6 +104,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'cup-noodles-city-spending',
+    lensId: 'kakei-city-comparison',
     question: 'カップ麺への年間支出は都市でどう違うか',
     source: {
       statsDataId: '0004023605',
@@ -117,6 +125,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'beef-city-quantity',
+    lensId: 'kakei-city-comparison',
     question: '牛肉の年間購入量は都市でどう違うか',
     source: {
       statsDataId: '0004023606',
@@ -137,6 +146,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'rice-national-spending-trend',
+    lensId: 'kakei-long-term-trend',
     question: '米への年間支出は全国でどう変化したか',
     source: {
       statsDataId: '0004023605',
@@ -156,6 +166,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'rice-national-quantity-trend',
+    lensId: 'kakei-long-term-trend',
     question: '米の年間購入量は全国でどう変化したか',
     source: {
       statsDataId: '0004023606',
@@ -175,6 +186,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'food-income-quintile',
+    lensId: 'kakei-income-class',
     question: '食費は年収五分位でどう違うか',
     source: {
       statsDataId: '0002070005',
@@ -193,6 +205,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'item-spending-income-quintile',
+    lensId: 'kakei-income-class',
     question: '同じ品目の支出は年収層でどう違うか',
     source: {
       statsDataId: '0004023607',
@@ -211,6 +224,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'item-quantity-income-quintile',
+    lensId: 'kakei-income-class',
     question: '同じ品目の購入量は年収層でどう違うか',
     source: {
       statsDataId: '0004023608',
@@ -229,6 +243,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'item-spending-age',
+    lensId: 'kakei-household-attributes',
     question: '同じ品目の支出は世帯主年齢でどう違うか',
     source: {
       statsDataId: '0004023609',
@@ -247,6 +262,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'food-household-size',
+    lensId: 'kakei-household-attributes',
     question: '食費は世帯人数でどう違うか',
     source: {
       statsDataId: '0002070009',
@@ -265,6 +281,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'food-all-households',
+    lensId: 'kakei-household-attributes',
     question: '総世帯の品目支出は二人以上世帯とどう違うか',
     source: {
       statsDataId: '0004023612',
@@ -284,6 +301,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'food-single-households',
+    lensId: 'kakei-household-attributes',
     question: '単身世帯の品目支出は二人以上世帯とどう違うか',
     source: {
       statsDataId: '0004023614',
@@ -303,6 +321,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'savings-city',
+    lensId: 'kakei-savings-debt',
     question: '二人以上世帯の貯蓄と負債は都市でどう違うか',
     source: {
       statsDataId: '0002210008',
@@ -321,6 +340,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'savings-income-18-class',
+    lensId: 'kakei-savings-debt',
     question: '貯蓄と負債は年間収入18階級でどう違うか',
     source: {
       statsDataId: '0002210010',
@@ -339,6 +359,7 @@ export const KAKEI_ANALYSES: readonly KakeiAnalysis[] = [
   },
   {
     id: 'savings-income-quintile',
+    lensId: 'kakei-savings-debt',
     question: '貯蓄と負債は年間収入五分位でどう違うか',
     source: {
       statsDataId: '0002210012',
@@ -395,6 +416,8 @@ export function validateKakeiAnalyses(
     if (slices.has(slice))
       errors.push(`${analysis.id}: duplicate source slice`);
     slices.add(slice);
+    if (!/^kakei-[a-z0-9-]+$/.test(analysis.lensId))
+      errors.push(`${analysis.id}: lensId must be a kakei-chousa lens id`);
     if (!/^\d{10}$/.test(source.statsDataId))
       errors.push(`${analysis.id}: invalid statsDataId`);
     if (source.axis.startsWith('income-') && source.geography !== 'national')

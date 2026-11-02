@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "統計調査の切り口台帳",
+  "description": "data/surveys/lenses/<surveyId>.json の形の契約。1 つの統計調査が持つ分析の切り口 (数量と単価に分ける・年収階級で比べる・長期推移を見る など) を、読者の問いの型・使う表と軸・地域の粒度・誤読の注意・チャネルごとの役割とともに持つ。切り口は資料 (本) ではなく調査の持ち物で、資料の問い (analyses.json の lensIds) と分析単位 (例: kakei-analysis-catalog.ts の lensId) はここを参照する。展開の進み具合 (済み・企画中・見送り) は書かない (展開記録と各チャネルの正本から集計する)。規約: .claude/rules/survey-content-standards.md「調査の切り口台帳」",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "surveyId", "statCode", "lenses"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "surveyId": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "packages/ranking/src/data/surveys.json の id。ファイル名と一致させる" },
+    "relatedSurveyIds": {
+      "type": "array",
+      "description": "同じ e-Stat の調査を別のハブで扱う調査 id (家計調査は品目別 kakei-chousa と社会・人口統計体系経由の household-survey)",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+    },
+    "statCode": { "type": "string", "pattern": "^\\d{8}$", "description": "e-Stat の政府統計コード" },
+    "lenses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "readerQuestion", "description", "grain", "dataTables", "axes", "caveats", "channels"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)+$", "description": "調査の略称を先頭に付ける (kakei-price-quantity)。全調査で一意" },
+          "name": { "type": "string", "minLength": 1 },
+          "readerQuestion": { "type": "string", "minLength": 1, "description": "この切り口が答える読者の問いの型" },
+          "description": { "type": "string", "minLength": 1 },
+          "grain": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["capital-cities", "prefecture", "regions", "national"] },
+            "description": "capital-cities = 県庁所在市など (県全体の値ではない)、national = 全国のみ (ランキングにしない)"
+          },
+          "dataTables": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^\\d{10}$" },
+            "description": "使う e-Stat の表 (statsDataId)。カタログ・調査の台帳に実在するものだけ"
+          },
+          "axes": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["item", "city", "year", "month", "income-quintile", "income-class", "age", "household-size", "household-type", "housing-tenure", "category-share", "other-metric"] }
+          },
+          "caveats": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 },
+            "description": "この切り口で誤読しやすい点 (対象世帯・地域・期間の型・単年の標本誤差など)"
+          },
+          "channels": {
+            "type": "object",
+            "additionalProperties": false,
+            "minProperties": 1,
+            "description": "チャネルごとの役割。書いたチャネルが展開先の候補になる。役割を書けないチャネルは書かない",
+            "properties": {
+              "ranking": { "type": "string", "minLength": 1 },
+              "survey": { "type": "string", "minLength": 1 },
+              "theme": { "type": "string", "minLength": 1 },
+              "japan": { "type": "string", "minLength": 1 },
+              "area": { "type": "string", "minLength": 1 },
+              "blog": { "type": "string", "minLength": 1 },
+              "note": { "type": "string", "minLength": 1 },
+              "kindle": { "type": "string", "minLength": 1 },
+              "x": { "type": "string", "minLength": 1 },
+              "instagram": { "type": "string", "minLength": 1 }
+            }
+          },
+          "readiness": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["state"],
+            "properties": {
+              "state": { "enum": ["ready", "blocked"] },
+              "blockers": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+            },
+            "description": "省略時は ready。データの取得手段などが無く制作できないときだけ blocked と理由を書く"
+          }
+        }
+      }
+    }
+  }
+}

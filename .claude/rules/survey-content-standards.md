@@ -3,6 +3,9 @@ paths:
   - "apps/web/src/{features/survey,app/survey}/**"
   - ".claude/{scripts/surveys,skills/survey}/**"
   - "data/surveys/**"
+  - "config/schema/surveys.lenses.schema.json"
+  - ".claude/scripts/lib/survey-lenses.mjs"
+  - "packages/data-configs/src/kakei-analysis-catalog.ts"
   - ".claude/agents/survey-curator.md"
 ---
 # survey コンテンツクラスター標準 (survey-content-standards)
@@ -84,6 +87,8 @@ apps/web/src/features/survey/survey-editorial.ts  ← survey 編集情報の git
   ├─ areaLabel / relatedHubs[]
   └─ relatedArticleSlugs[]
 
+data/surveys/lenses/<surveyId>.json  ← 調査の切り口台帳 (下の「調査の切り口台帳」)
+
 R2 app/survey/<id>/items.json
   └─ survey に属する ranking 一覧: 既存の導出を維持
 ```
@@ -94,6 +99,28 @@ R2 app/survey/<id>/items.json
 - 実装前に確認: survey page.tsx の exports・取得境界 / article repository・`related-articles.ts` の再利用可否 /
   既存 page_components・SectionHeader・ArticleShell / rules `coding-standards.md`・`ui-components.md`・`survey-linkage-standards.md` /
   docs `03_情報設計.md`・`04_デザインシステム.md`・`02_データアーキテクチャ.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
+
+## 調査の切り口台帳 (2026-11-02)
+
+1 つの統計調査が持つ分析の切り口 (家計調査なら「都市の間で比べる」「支出額を数量と単価に分ける」「年収階級で比べる」
+「長期推移を見る」など) は、**調査ごとの台帳** `data/surveys/lenses/<surveyId>.json` (JSON Schema
+`config/schema/surveys.lenses.schema.json`) を正本にする。担当は survey-curator。コンテンツの展開 (ランキング・テーマ・
+ブログ・note・Kindle・SNS) は、まずこの台帳の切り口と、切り口ごとのチャネルの役割から考える。
+
+- **切り口は資料 (本) の持ち物ではなく、調査の持ち物**。参考文献の規約が禁じる「資料ごとの分類」とは別物である
+  (`reference-source-standards.md` §5)。本・NotebookLM・自分たちの発想は、切り口に問いを足す材料にすぎない。
+  2026-11-02 に「資料ごとに分類を作らない」を「切り口の台帳を作らない」と読み違え、切り口を本の企画に付ける札へ格下げしかけた。
+- 台帳が持つもの: 切り口ごとの読者の問いの型・説明・地域の粒度 (`capital-cities` は県全体の値ではない、`national` はランキングにしない)・
+  使う表 (statsDataId)・軸・誤読の注意・チャネルごとの役割 (書いたチャネルが展開先の候補)・準備状況 (データの取得手段が無ければ
+  `blocked` と理由)。
+- 台帳が持たないもの: **展開の進み具合**。済み・企画中・見送りは展開記録 (`data/source-inventory/expansion.json`) と各チャネルの
+  正本から集計する (`npm run surveys:lenses:status`)。同じ状態を 2 か所に書くとずれる。
+- 参照の向き: 資料の問い (`data/source-inventory/<source>/<edition>/analyses.json` の `lensIds`) と、調査ごとの分析単位
+  (家計調査は `packages/data-configs/src/kakei-analysis-catalog.ts` の `lensId`。問い × 表の軸 × 載せるページ) が切り口を参照する。
+  **切り口台帳のある調査を `surveyIds` に持つ問いは、資料を問わず 1 つ以上の切り口に結ぶ** (文脈だけの資料は任意)。
+- 検査: `npm run surveys:lenses:check` (PR CI)。調査 id・表 id の実在、問いと分析単位からの参照の実在、未接続の問いを止める。
+  品目単位の「どの品目を指標にし、どれを見送ったか」は調査ごとの台帳 (家計調査は `data/estat/kakei-ledger/`) が持ち、切り口台帳には書かない。
+- 新しい調査に切り口台帳を作るときは、表の棚卸し (e-Stat カタログ `npm run estat:catalog:search`) を先に行い、切り口ごとに使う表を確かめてから書く。
 
 ## 横展開の進め方 (小さく実証してから)
 
