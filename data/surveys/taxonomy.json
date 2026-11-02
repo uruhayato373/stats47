@@ -261,9 +261,9 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 452,
+      "total": 451,
       "byStatus": {
-        "resolved": 397,
+        "resolved": 396,
         "unresolved": 0,
         "not-applicable": 55,
         "missing-lineage": 0
