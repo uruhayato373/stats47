@@ -196,6 +196,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [ADMIN-DISTMAP-TEST-STACK-01] 管理画面の地図の見本のテストが Mac の手元でだけスタックあふれで落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/admin && npx vitest run tests/unit/template-distribution-map.test.ts] [起票:2026-11-03]
+
+2026-11-03 に Mac (Node v22.23.3) の本体と origin/develop の作業ツリーの両方で、`template-distribution-map.test.ts` の「keeps far islands out…」が `RangeError: Maximum call stack size exceeded` で落ちた。同じコミットの CI (PR #1213 の Unit Tests) では通っている。push 前に admin の vitest 全件を回すと毎回 1 件赤になり、本物の失敗と見分けにくい。
+次: スタックの深さを使う処理 (地図の境界の再帰・巨大な配列の展開 `push(...arr)` など) をスタックトレースで特定し、Node の版の差か入力の差かを切り分ける。
+完了条件: Mac の手元で同テストが通り、原因をコードで直したか、版の差なら CI と手元の Node を揃えた。
+
 ### [CARD-GRID-HOME-01] ホームの注目ランキングを共通のカードの格子 (CardGrid) に揃える
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
 
