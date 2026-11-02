@@ -21,6 +21,19 @@ describe('geographic distribution map basic form', () => {
     expect(svg.split('data-map="okinawa"')[1]).toContain('data-pref="47"');
     expect(fillOf(svg, '47')).not.toBe(fillOf(svg, '01'));
   }, 20000); // First render also loads the site's D3 scale implementation.
+  it('keeps far islands out: mainland stays above the source line and Okinawa fills its inset', async () => {
+    const svg = await renderDistributionMap(fixture());
+    const ys = (part: string) => [...part.matchAll(/ d="([^"]+)"/g)].flatMap((m) => [...m[1].matchAll(/[\d.]+,([\d.]+)/g)].map((p) => Number(p[1])));
+    const mainland = ys(svg.split('data-map="mainland"')[1].split('</g>')[0]);
+    expect(Math.max(...mainland)).toBeLessThan(1262);
+    // Without the Daito islands the arc spans most of the inset height (not a dot in a corner).
+    const inset = /<rect x="[\d.]+" y="([\d.]+)" width="[\d.]+" height="([\d.]+)" rx="10"/.exec(svg)!;
+    const okinawa = ys(svg.split('data-map="okinawa"')[1].split('</g>')[0]);
+    expect(Math.max(...okinawa) - Math.min(...okinawa)).toBeGreaterThan(Number(inset[2]) * 0.6);
+    // Legend card counts every prefecture once.
+    const counts = [...svg.matchAll(/>(\d+)県<\/text>/g)].map((m) => Number(m[1]));
+    expect(counts.reduce((a, b) => a + b, 0)).toBe(47);
+  });
   it('renders a 4:5 PNG with a legend and minimal copy, and rejects an incomplete snapshot', async () => {
     const input = fixture(), svg = await renderDistributionMap(input);
     expect(svg).toContain('全47都道府県');

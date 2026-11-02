@@ -58,9 +58,9 @@
     {
       "id": "choropleth",
       "label": "地図（実際の形）",
-      "policy": "実際の県形状の地図。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズマップ型C〜E）。全47県の値と色の対応・対象年・地域粒度を明記し、塗りの配色はサイトのランキングと同じ設定で解決する。沖縄は同じ色尺度の別枠に置く。凡例に最小・最大値（区分なら境界値）を示し、単位は見出しに置く。県の値を一覧で読ませる用途はタイルマップを使う。",
+      "policy": "実際の県形状の地図。地図の計算はバズ地図と同じ apps/remotion/src/features/buzz-map/geo.ts の computeBuzzMapGeo を使う（本土を画面いっぱいに大きく、沖縄は左上の海の大きな枠に本島〜先島の弧で。大東諸島・奄美より南の離島など範囲外の島は描かない）。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズ地図型C〜E）。塗りの配色は指標台帳の設定をサイトのランキングと同じ方法で解決する（data-cards/tile-scale.ts）。凡例は右下に区分ごとの色・範囲・県の数を並べる。単位は見出しに置く。県の値を一覧で読ませる用途はタイルマップを使う。",
       "renderer": "apps/remotion/src/features/buzz-map/",
-      "version": 5,
+      "version": 6,
       "profiles": {
         "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
         "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
@@ -585,6 +585,81 @@
         "ranking",
         "distribution",
         "trend"
+      ]
+    },
+    {
+      "id": "choropleth",
+      "label": "地図（実際の形）",
+      "policy": "実際の県形状の地図。白地図に「塗り」「点」「線」のレイヤーを重ねる（塗りだけ＝色分け地図、点・線はバズマップ型C〜E）。全47県の値と色の対応・対象年・地域粒度を明記し、塗りの配色はサイトのランキングと同じ設定で解決する。沖縄は同じ色尺度の別枠に置く。凡例に最小・最大値（区分なら境界値）を示し、単位は見出しに置く。県の値を一覧で読ませる用途はタイルマップを使う。",
+      "renderer": "apps/remotion/src/features/buzz-map/",
+      "version": 5,
+      "profiles": {
+        "note": "note・X・Instagramの地図は共通の4:5（1080×1350px）で制作する。同じ固定入力・配色・描画部品を使い、元の年・単位・地域粒度を保持する。",
+        "x": "共通の4:5（1080×1350px）で制作し、年・単位・地域粒度を保持する。",
+        "instagram": "共通の4:5（1080×1350px）で制作する。表紙・出典は別の型として管理する。"
+      },
+      "group": "chart",
+      "purposes": [
+        "distribution",
+        "trend"
+      ],
+      "variants": [
+        {
+          "id": "fill",
+          "label": "地域の塗り",
+          "status": "ready",
+          "buzzMapTypes": [
+            "A"
+          ]
+        },
+        {
+          "id": "fill-animation",
+          "label": "塗りの時系列（動画）",
+          "status": "ready",
+          "buzzMapTypes": [
+            "B"
+          ]
+        },
+        {
+          "id": "point",
+          "label": "点",
+          "status": "ready",
+          "buzzMapTypes": [
+            "C"
+          ]
+        },
+        {
+          "id": "line",
+          "label": "線",
+          "status": "ready",
+          "buzzMapTypes": [
+            "D"
+          ]
+        },
+        {
+          "id": "overlay",
+          "label": "塗り・点・線の組み合わせ",
+          "status": "ready",
+          "buzzMapTypes": [
+            "E"
+          ]
+        },
+        {
+          "id": "mesh",
+          "label": "メッシュの塗り",
+          "status": "planned",
+          "buzzMapTypes": [
+            "F"
+          ]
+        },
+        {
+          "id": "flow",
+          "label": "流れの矢印",
+          "status": "planned",
+          "buzzMapTypes": [
+            "flow"
+          ]
+        }
       ]
     }
   ]

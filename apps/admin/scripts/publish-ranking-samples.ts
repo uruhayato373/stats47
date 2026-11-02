@@ -40,7 +40,8 @@ async function main() {
     `${datasetDir('metrics.definitions')}/average-temperature.ts`, `${datasetDir('metrics.definitions')}/kerosene-consumption-quantity.ts`,
   ] : distribution ? [
     'apps/admin/lib/template-distribution-map.ts', 'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
-    'packages/visualization/src/server/generate-mini-prefecture-svg.ts', 'packages/visualization/src/server/prefecture-topology.generated.json',
+    'apps/remotion/src/features/buzz-map/geo.ts', 'apps/remotion/src/features/buzz-map/tokens.ts',
+    'apps/remotion/public/prefecture.topojson', 'apps/remotion/src/features/data-cards/tile-scale.ts',
   ] : [
     'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
     'apps/admin/lib/template-ranking-table.ts', 'apps/admin/lib/template-ranking-tile-map.ts',
