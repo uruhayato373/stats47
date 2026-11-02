@@ -1,0 +1,1 @@
+{ "metric": "household-savings-balance,household-debt-balance,household-securities-balance,household-housing-debt-balance,information-communication-coefficient", "since": "", "dryRun": false, "migrateLegacyRecipes": false, "snapshotScope": "auto" }
