@@ -63,13 +63,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 interface MetricSeriesView {
   metricKey: string;
   title: string;
-  description: string;
+  description: string | null;
+  isKakei: boolean;
   unit: string;
   sourceId: string;
   trendDomain: NumericDomainPolicy;
   points: { yearName: string; value: number }[];
   latest: { yearName: string; value: number } | null;
 }
+
+const KAKEI_SERIES_NOTE =
+  '家計調査の二人以上世帯の全国値 (品目分類・年次) です。支出額は 1 年の合計で物価の変動を含み、購入数量は買った量の変化を表します。';
 
 async function loadMetricSeries(
   metricKeys: string[]
@@ -94,11 +98,14 @@ async function loadMetricSeries(
       title: config.source.kind === 'kakei-chousa'
         ? config.title
         : config.subtitle && !config.title.includes(config.subtitle) ? `${config.title}（${config.subtitle}）` : config.title,
+      // 家計調査は全カード共通の注記をページ冒頭に 1 度だけ出す (KAKEI_SERIES_NOTE)。カードごとに同じ文を 11 回並べ、
+      // 購入数量のカードにまで「支出額は…」と書いていた (2026-11-02)
       description:
         config.source.kind === 'kakei-chousa'
-          ? '家計調査の二人以上世帯について、品目分類の公式全国値を年次で表示します。支出額はその年の合計で、物価変動の影響も含みます。'
+          ? null
           : config.description ??
             `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
+      isKakei: config.source.kind === 'kakei-chousa',
       unit: series.rows[0].unit,
       sourceId: series.meta.sourceId,
       trendDomain: config.visualization.trendDomain,
@@ -143,6 +150,9 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
         description={theme.description}
         stats={`${metricViews.length} 指標 (公式全国値)`}
       />
+      {metricViews.some((m) => m.isKakei) && (
+        <p className="mb-4 text-sm text-muted-foreground">{KAKEI_SERIES_NOTE}</p>
+      )}
 
       {metricViews.length === 0 ? (
         <p className="text-sm text-muted-foreground">
@@ -156,7 +166,7 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
               title={m.title}
               description={
                 <>
-                  <span className="block">{m.description}</span>
+                  {m.description && <span className="block">{m.description}</span>}
                   {m.latest && (
                     <span className="mt-1 block font-medium text-foreground">
                       最新: {m.latest.yearName}{' '}

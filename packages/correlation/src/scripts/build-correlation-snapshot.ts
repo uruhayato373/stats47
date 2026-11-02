@@ -484,6 +484,7 @@ class TopByPopulationAdjusted {
  */
 const THEME_LINK_LIMIT = 8;
 const THEME_LINK_MIN_ABS_R = 0.5;
+const THEME_LINK_SAME_DATA_ABS_R = 0.99;
 
 /** ThemeCatalog のテーマ → 指標 (テーマページの「全指標」と同じ catalog.metrics)。 */
 export function listThemeMembers(): Array<[string, string[]]> {
@@ -499,7 +500,7 @@ export function listThemeMembers(): Array<[string, string[]]> {
  * テーマ外の指標を、テーマ内のいずれかの指標との人口補正後の順位相関 (絶対値) が最大のものから並べる。
  * 候補は各テーマ内指標の per-key top-N (ランキングページの「相関が高い指標」と同じ母集団)。
  */
-function buildThemeLinks(
+export function buildThemeLinks(
   members: readonly string[],
   perKeyTop: ReadonlyMap<string, TopByPopulationAdjusted>,
   metaMap: Map<string, MetricDisplayMeta>
@@ -512,6 +513,9 @@ function buildThemeLinks(
       if (memberSet.has(other)) continue;
       const r = cand.populationAdjustedRankR;
       if (Math.abs(r) < THEME_LINK_MIN_ABS_R) continue;
+      // top-pairs と同じく |pearsonR| ≥ 0.99 は同じデータの別名とみなして出さない。
+      // 貯蓄と負債のテーマで「負債現在高」と「金融負債残高」(+1.00) が関連指標に並んでいた (2026-11-02)
+      if (Math.abs(cand.pearsonR) >= THEME_LINK_SAME_DATA_ABS_R) continue;
       const prev = best.get(other);
       if (
         !prev ||

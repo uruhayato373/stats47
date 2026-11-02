@@ -267,6 +267,27 @@ describe('readArticleSummariesBySurveyIdFromR2', () => {
     expect(articles.map((article) => article.slug)).toEqual(['new']);
   });
 
+  it('編集で選んだ公開記事を与えた順に先頭へ置き、未公開の指定は無視する', async () => {
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [
+        article('newest', '2026-09-01', true, ['kakei-chousa']),
+        article('pick-b', '2026-01-01', true, ['kakei-chousa']),
+        article('pick-a', '2026-02-01', true),
+        article('pick-draft', '2026-03-01', false, ['kakei-chousa']),
+      ],
+    });
+    const { readArticleSummariesBySurveyIdFromR2 } = await importReader();
+
+    const articles = await readArticleSummariesBySurveyIdFromR2('kakei-chousa', 6, [
+      'pick-a',
+      'pick-draft',
+      'pick-b',
+    ]);
+
+    expect(articles.map((article) => article.slug)).toEqual(['pick-a', 'pick-b', 'newest']);
+  });
+
   it('旧 snapshot の surveyIds 欠落を安全に空配列として扱う', async () => {
     const { readArticleSummariesBySurveyIdFromR2 } = await importReader();
 

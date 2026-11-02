@@ -62,7 +62,7 @@ export function MetricStatTile({
     !selectedPrefectureCode && shown === null ? '全国の値は未収録' : null,
     // 問いの型「全国平均との差」: 県の値の横に全国の値を置く (全国行が無い指標は出さない。2026-10-31)
     selectedPrefectureCode && metric.value !== null && metric.nationalValue !== undefined
-      ? `全国 ${formatMetricValue(metric.nationalValue)}`
+      ? `全国 ${formatMetricValue(metric.nationalValue, metric.precision)}`
       : null,
   ]
     .filter(Boolean)
@@ -85,7 +85,7 @@ export function MetricStatTile({
           label
         )
       }
-      value={shown !== null ? formatMetricValue(shown) : null}
+      value={shown !== null ? formatMetricValue(shown, metric.precision) : null}
       unit={metric.unit ? formatUnitForDisplay(metric.unit) : undefined}
       badge={
         selectedPrefectureCode && metric.rank !== null ? (

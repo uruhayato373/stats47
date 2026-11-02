@@ -193,7 +193,8 @@ export default async function SurveyPage({ params }: PageProps) {
     : [];
   const relatedArticles = await listArticleSummariesBySurveyId(
     surveyKey,
-    6
+    6,
+    getSurveyEditorialContent(surveyKey)?.relatedArticleSlugs ?? []
   ).catch(() => []);
   // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。

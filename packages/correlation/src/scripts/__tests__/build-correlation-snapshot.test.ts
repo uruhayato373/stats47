@@ -100,7 +100,7 @@ function makeRows(fn: (i: number) => number) {
 const STATS: Record<string, ReturnType<typeof makeRows>> = {
   'metric-a': makeRows((i) => i + 1),
   // a と強相関だが完全線形ではない (ノイズ付与) → r≈0.9 で 0.99 フィルタを通過し top に出る
-  'metric-b': makeRows((i) => (i + 1) * 2 + 3 + ((i * 13) % 7)),
+  'metric-b': makeRows((i) => (i + 1) * 2 + 3 + ((i * 13) % 17) * 2), // r≈0.94 (0.99 以上は同じデータとして外れる)
   'metric-c': makeRows((i) => ((i * 7) % 47) + 1), // 疑似ランダム
   'total-population': makeRows((i) => 1000 + i * 13),
   'total-area-excluding-northern-territories-and-takeshima': makeRows(
@@ -497,5 +497,40 @@ describe('buildCorrelationSnapshot の順位相関', () => {
       STATS['metric-b'] = original.b;
       STATS['metric-c'] = original.c;
     }
+  });
+});
+
+describe('buildThemeLinks', () => {
+  const candidate = (keyY: string, pearsonR: number, populationAdjustedRankR: number) => ({
+    keyX: 'member',
+    keyY,
+    pearsonR,
+    partialRPopulation: null,
+    partialRArea: null,
+    partialRAging: null,
+    partialRDensity: null,
+    effectiveAbsR: Math.abs(pearsonR),
+    populationAdjustedRankR,
+  });
+  const meta = (title: string) => ({ title, subtitle: null, unit: '', normalizationBasis: null });
+
+  it('|pearsonR| が 0.99 以上の組は同じデータの別名とみなして出さず、それ未満は残す', async () => {
+    const { buildThemeLinks } = await import('../build-correlation-snapshot');
+    const perKeyTop = new Map([
+      ['member', { values: () => [candidate('same-data', 0.999, 1), candidate('related', 0.8, 0.7)] }],
+    ]);
+    const metaMap = new Map([
+      ['member', meta('テーマ内')],
+      ['same-data', meta('別名')],
+      ['related', meta('関連')],
+    ]);
+
+    const links = buildThemeLinks(
+      ['member'],
+      perKeyTop as unknown as Parameters<typeof buildThemeLinks>[1],
+      metaMap
+    );
+
+    expect(links.map((link) => link.rankingKey)).toEqual(['related']);
   });
 });

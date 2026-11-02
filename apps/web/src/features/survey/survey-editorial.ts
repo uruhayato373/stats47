@@ -18,6 +18,8 @@ export interface SurveyEditorialContent {
   areaLabel?: string;
   /** 同じ調査の別のハブ (家計調査は品目別と、社会・人口統計体系経由の収支の 2 つに分かれている) */
   relatedHubs?: readonly SurveyRelatedHub[];
+  /** 「この調査を使う記事」の先頭に置く記事 (公開済みのものだけ出る)。残りは公開日の新しい順 */
+  relatedArticleSlugs?: readonly string[];
 }
 
 export function requiredSurveyReaderQuestionCount(
@@ -152,6 +154,14 @@ const SURVEY_EDITORIAL_CONTENT = {
     areaLabel: '主に県庁所在市などの都市別',
     relatedHubs: [
       { surveyKey: 'household-survey', label: '収入・可処分所得・費目別の支出割合のランキング' },
+    ],
+    relatedArticleSlugs: [
+      'frozen-gyoza-spending-prefecture-gap',
+      'bread-city-ranking-kyoto-quiz',
+      'rice-spending-quantity-gap-2025',
+      'tofu-consumption-prefecture-gap',
+      'wheat-flour-consumption-prefecture',
+      'mochi-consumption-prefecture-gap',
     ],
     whatYouCanLearn: [
       '納豆・カップ麺の支出額と、米・緑茶・牛肉の購入数量の地域差',

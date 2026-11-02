@@ -242,21 +242,31 @@ export async function readArticleSummariesByTagKeysFromR2(
 
 export async function readArticleSummariesBySurveyIdFromR2(
   surveyId: string,
-  limit = 6
+  limit = 6,
+  /** 調査ハブの編集で選んだ記事 (survey-editorial の relatedArticleSlugs)。公開済みなら与えた順に先頭へ置く */
+  preferredSlugs: readonly string[] = []
 ): Promise<Array<{ slug: string; title: string; description: string | null }>> {
   const snapshot = await loadSnapshot();
   const indexedSlugs = snapshot.surveyArticleIndex?.[surveyId];
   const indexedSlugSet = indexedSlugs ? new Set(indexedSlugs) : null;
-  return snapshot.articles
+  const preferredOrder = new Map(preferredSlugs.map((slug, index) => [slug, index]));
+  const preferred = snapshot.articles
+    .filter((article) => article.published === true && preferredOrder.has(article.slug))
+    .sort((a, b) => (preferredOrder.get(a.slug) ?? 0) - (preferredOrder.get(b.slug) ?? 0));
+  // 編集の指定が無い残りは公開日の新しい順。同じ日に一括公開した記事は slug の順に並ぶだけなので、
+  // 家計調査のハブでは bacon・blanket・burdock… と ABC 順の記事が冒頭を占めていた (2026-11-02)
+  const rest = snapshot.articles
     .filter(
       (article) =>
         article.published === true &&
+        !preferredOrder.has(article.slug) &&
         (indexedSlugSet
           ? indexedSlugSet.has(article.slug)
           : Array.isArray(article.surveyIds) &&
             article.surveyIds.includes(surveyId))
     )
-    .sort(compareByPublishedAtDesc)
+    .sort(compareByPublishedAtDesc);
+  return [...preferred, ...rest]
     .slice(0, limit)
     .map((article) => ({
       slug: article.slug,
