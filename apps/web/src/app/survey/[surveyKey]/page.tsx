@@ -7,7 +7,7 @@
 
 import { notFound, permanentRedirect } from 'next/navigation';
 
-import { PanelGrid, StatTile, StatTileGrid } from '@stats47/components';
+import { PanelGrid } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
@@ -30,13 +30,10 @@ import { resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 import { isOk } from '@stats47/types';
 import {
   ArrowRight,
-  CalendarDays,
   ChartLine,
   CircleCheck,
   ExternalLink,
-  FolderTree,
   LayoutGrid,
-  ListOrdered,
   TriangleAlert,
 } from 'lucide-react';
 
@@ -66,10 +63,7 @@ import {
   excludeFeaturedQuestions,
   getSurveyEditorialContent,
   selectSurveyRepresentativeRankings,
-  SurveyMobileNav,
   SurveyOutboundLinkArea,
-  SurveySideNav,
-  type SurveyPageNavLink,
 } from '@/features/survey';
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 import {
@@ -78,6 +72,7 @@ import {
 } from "@/features/theme-dashboard/config/theme-navigation";
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
+import { getIcon } from '@/lib/icons';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
@@ -207,6 +202,7 @@ export default async function SurveyPage({ params }: PageProps) {
           {
             categoryKey: category.categoryKey,
             label: category.categoryName,
+            icon: category.icon,
             count,
           },
         ]
@@ -340,11 +336,9 @@ export default async function SurveyPage({ params }: PageProps) {
     })
     .slice(0, featuredLimit);
 
-  // 調査の規模は文字の 1 行ではなく数値タイルで見せる (2026-11-02)。
   // 最新年は調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
   // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
   const areaLabel = editorial?.areaLabel ?? '47都道府県';
-  const themeCount = relatedThemes.length + relatedJapanThemes.length;
   const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
   const readerQuestions = excludeFeaturedQuestions(
     editorial?.readerQuestions.filter((item) =>
@@ -352,28 +346,6 @@ export default async function SurveyPage({ params }: PageProps) {
     ) ?? [],
     featuredItems.map((item) => item.rankingKey)
   );
-  const pageLinks: SurveyPageNavLink[] = [
-    ...(editorial
-      ? [{ href: '#survey-overview', label: 'この調査で分かること' } as const]
-      : []),
-    ...(featuredItems.length > 0
-      ? [{ href: '#representative-rankings', label: '代表ランキング' } as const]
-      : []),
-    ...(relatedThemes.length > 0
-      ? [{ href: '#related-themes', label: '関連テーマ' } as const]
-      : []),
-    ...(relatedJapanThemes.length > 0
-      ? [{ href: '#related-japan-themes', label: '日本全国の時系列' } as const]
-      : []),
-    ...(relatedArticles.length > 0
-      ? [{ href: '#related-articles', label: '関連記事' } as const]
-      : []),
-    { href: '#all-rankings', label: `全${rankingItems.length}件のランキング` },
-    ...(editorial
-      ? [{ href: '#survey-caveats', label: '数字を読むときの注意' } as const]
-      : []),
-  ];
-
   return (
     <ArticleShell
       breadcrumb={
@@ -391,8 +363,12 @@ export default async function SurveyPage({ params }: PageProps) {
         title={survey.name}
         description={
           <>
-            <span className="font-medium text-foreground">
-              {survey.organization}
+            {/* 調査の規模と対象は数値タイルにせず 1 行にまとめ、最初の画面を問いと答えに使う (2026-11-03) */}
+            <span className="block">
+              <span className="font-medium text-foreground">{survey.organization}</span>
+              {` ・ ランキング ${rankingItems.length.toLocaleString('ja-JP')} 件`}
+              {latestYear && ` ・ 最新 ${latestYear} 年`}
+              {` ・ ${areaLabel}`}
             </span>
             {survey.description && (
               <span className="mt-1 block">{survey.description}</span>
@@ -415,99 +391,11 @@ export default async function SurveyPage({ params }: PageProps) {
         }
       />
 
-      <StatTileGrid>
-        <StatTile
-          label="ランキング"
-          value={rankingItems.length.toLocaleString('ja-JP')}
-          unit="件"
-          meta={featuredItems.length > 0 ? `代表 ${featuredItems.length} 件` : undefined}
-          icon={<ListOrdered aria-hidden />}
-        />
-        <StatTile
-          label="データの最新年"
-          value={latestYear || null}
-          unit={latestYear ? '年' : undefined}
-          meta={areaLabel}
-          icon={<CalendarDays aria-hidden />}
-        />
-        <StatTile
-          label="関連テーマ"
-          value={themeCount.toLocaleString('ja-JP')}
-          unit="件"
-          meta={relatedJapanThemes.length > 0 ? `うち全国の時系列 ${relatedJapanThemes.length} 件` : undefined}
-          icon={<LayoutGrid aria-hidden />}
-        />
-        <StatTile
-          label="関連する分類"
-          value={relatedCategories.length.toLocaleString('ja-JP')}
-          unit="分類"
-          meta={
-            relatedCategories.length > 0
-              ? `最多は${[...relatedCategories].sort((a, b) => b.count - a.count)[0].label}`
-              : undefined
-          }
-          icon={<FolderTree aria-hidden />}
-        />
-      </StatTileGrid>
-
-      {/* ページ内ナビは本文上部に置く (サイドバーの右に 2 本目の列を作らない)。
-      広い幅はカード 2 枚、狭い幅は折りたたみ 1 つ。 */}
-      <SurveySideNav pageLinks={pageLinks} categories={relatedCategories} />
-      <SurveyMobileNav pageLinks={pageLinks} categories={relatedCategories} />
-
-      {editorial && (
-        <section id="survey-overview" className="mb-4 scroll-mt-24 space-y-4">
-          <div>
-            <SectionHeader
-              title="この調査で分かること"
-            />
-            <p className="mb-4 text-sm leading-6 text-foreground">
-              {editorial.summary}
-            </p>
-            {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
-            <ul className="grid gap-x-6 sm:grid-cols-2">
-              {editorial.whatYouCanLearn.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-foreground"
-                >
-                  <CircleCheck className="mt-1 size-4 shrink-0 text-positive" aria-hidden />
-                  <span className="min-w-0">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {readerQuestions.length > 0 && (
-            <div>
-              <SectionHeader
-                title={`${survey.name}から答えを探す`}
-              />
-              <SurveyOutboundLinkArea surface="survey_ranking">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {readerQuestions.map((item) => (
-                    <SurfaceLinkCard
-                      key={item.rankingKey}
-                      href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                      className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
-                    >
-                      <span className="flex items-center justify-between gap-2">
-                        <span className="min-w-0">{item.question}</span>
-                        <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-                      </span>
-                    </SurfaceLinkCard>
-                  ))}
-                </div>
-              </SurveyOutboundLinkArea>
-            </div>
-          )}
-        </section>
-      )}
-
+      {/* 読者の問いに地図付きのカードで答えるのを最初に置く。目次や分類の一覧を先に出さない (2026-11-03) */}
       {featuredItems.length > 0 && (
         <section id="representative-rankings" className="mb-4 scroll-mt-24">
           <SectionHeader
-            title="代表ランキング"
+            title={`${survey.name}で答えられる問い`}
           />
           <SurveyOutboundLinkArea surface="survey_ranking">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -525,10 +413,54 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {readerQuestions.length > 0 && (
+        <section id="more-questions" className="mb-4 scroll-mt-24">
+          <SectionHeader title="ほかの問い" />
+          <SurveyOutboundLinkArea surface="survey_ranking">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {readerQuestions.map((item) => (
+                <SurfaceLinkCard
+                  key={item.rankingKey}
+                  href={hrefFor("ranking", { rankingKey: item.rankingKey })}
+                  className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
+                >
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="min-w-0">{item.question}</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                  </span>
+                </SurfaceLinkCard>
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
+      {relatedArticles.length > 0 && (
+        // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
+        <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
+          <SectionHeader title="理由と背景を読む" hideRule />
+          <SurveyOutboundLinkArea surface="survey_blog">
+            <ArticleTeaserGrid>
+              {relatedArticles.map((article) => (
+                <ArticleTeaserCard
+                  key={article.slug}
+                  href={hrefFor('blog', { slug: article.slug })}
+                  title={article.title}
+                  thumbnail={{
+                    lightSrc: blogThumbnailUrl(article.slug, 'light'),
+                    darkSrc: blogThumbnailUrl(article.slug, 'dark'),
+                  }}
+                />
+              ))}
+            </ArticleTeaserGrid>
+          </SurveyOutboundLinkArea>
+        </PanelGrid>
+      )}
+
       {relatedThemes.length > 0 && (
         <section id="related-themes" className="mb-4 scroll-mt-24">
           <SectionHeader
-            title="この調査を使うテーマ"
+            title="テーマで深掘りする"
           />
           <SurveyOutboundLinkArea surface="survey_theme">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -589,28 +521,6 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {relatedArticles.length > 0 && (
-        // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
-        <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
-          <SectionHeader title="この調査を使う記事" hideRule />
-          <SurveyOutboundLinkArea surface="survey_blog">
-            <ArticleTeaserGrid>
-              {relatedArticles.map((article) => (
-                <ArticleTeaserCard
-                  key={article.slug}
-                  href={hrefFor('blog', { slug: article.slug })}
-                  title={article.title}
-                  thumbnail={{
-                    lightSrc: blogThumbnailUrl(article.slug, 'light'),
-                    darkSrc: blogThumbnailUrl(article.slug, 'dark'),
-                  }}
-                />
-              ))}
-            </ArticleTeaserGrid>
-          </SurveyOutboundLinkArea>
-        </PanelGrid>
-      )}
-
       {/*
         記事内広告はランキング表の「前」に置く。表より後ろに置くと、そこから
         フッター広告までの間は「数字を読むときの注意」(editorial 定義は 75 調査中 1 件)と
@@ -631,6 +541,34 @@ export default async function SurveyPage({ params }: PageProps) {
         <CategoryRankingTable items={allItems} topicOptions={topicOptions} trackingSurface="survey_ranking" />
       </section>
 
+      {relatedCategories.length > 0 && (
+        <section id="related-categories" className="mb-4 scroll-mt-24">
+          <SectionHeader title="分類から探す" />
+          {/* 件数はこの調査のランキング数で、分類全体の件数ではない */}
+          <SurveyOutboundLinkArea surface="survey_category">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedCategories.map((category) => {
+              const Icon = getIcon(category.icon);
+              return (
+                <SurfaceLinkCard
+                  key={category.categoryKey}
+                  href={hrefFor('category', { categoryKey: category.categoryKey })}
+                  className="text-sm text-foreground hover:bg-accent/50"
+                >
+                  <span className="flex items-center gap-3">
+                    <Icon className="size-5 shrink-0 text-muted-foreground" aria-hidden />
+                    <span className="min-w-0 flex-1 font-medium">{category.label}</span>
+                    <span className="shrink-0 text-xs text-muted-foreground">{category.count} 件</span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                  </span>
+                </SurfaceLinkCard>
+              );
+            })}
+          </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
       {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。
           全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
       {nativeBanners.length > 0 && (
@@ -640,6 +578,27 @@ export default async function SurveyPage({ params }: PageProps) {
             position="survey-native"
             trackingCategory={`survey-${surveyKey}`}
           />
+        </section>
+      )}
+
+      {editorial && (
+        <section id="survey-overview" className="mb-4 scroll-mt-24">
+          <SectionHeader title="この調査について" />
+          <p className="mb-4 text-sm leading-6 text-foreground">
+            {editorial.summary}
+          </p>
+          {/* 押せない項目なので、カードにせず枠の無いリスト行にする (押せるリンクだけをカードにする) */}
+          <ul className="grid gap-x-6 sm:grid-cols-2">
+            {editorial.whatYouCanLearn.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-2 border-b border-border py-2.5 text-sm leading-6 text-foreground"
+              >
+                <CircleCheck className="mt-1 size-4 shrink-0 text-positive" aria-hidden />
+                <span className="min-w-0">{item}</span>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 

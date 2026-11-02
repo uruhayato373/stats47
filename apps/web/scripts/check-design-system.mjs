@@ -530,28 +530,6 @@ for (const root of scanRoots) {
   }
 }
 
-const surveyNavPath = 'src/features/survey/components/SurveySideNav.tsx';
-const surveyNavSource = readFileSync(path.join(cwd, surveyNavPath), 'utf8');
-// 2026-10-28 (テンプレート寄せ): 調査のページ内ナビは左レールを使わず本文上部に置く。広い幅の
-// カード 2 枚 (SurveySideNav) と狭い幅の折りたたみ (SurveyMobileNav) が同じ shell コンテナ境界で
-// 入れ替わること (二重表示・欠落なし) を、2 つのクラス定数が同じ境界値を持つことで検査する。
-const surveyWide = surveyNavSource.match(
-  /WIDE_ONLY_CLASS = 'hidden @min-\[(\d+)px\]\/shell:grid'/,
-);
-const surveyNarrow = surveyNavSource.match(
-  /NARROW_ONLY_CLASS = '@min-\[(\d+)px\]\/shell:hidden'/,
-);
-if (!surveyWide || !surveyNarrow || surveyWide[1] !== surveyNarrow[1]) {
-  violations.push({
-    ruleId: 'survey-mobile-nav-must-share-left-rail-breakpoint',
-    message:
-      'SurveySideNav (WIDE_ONLY_CLASS) and SurveyMobileNav (NARROW_ONLY_CLASS) must switch at the same @container/shell width.',
-    file: surveyNavPath,
-    lineNumber: 1,
-    line: 'SurveyMobileNav',
-  });
-}
-
 // 操作部品の --radius はテンプレートの値 (@stats47/ui-theme の tokens-hsl.css・2026-10-27 オーナー決定
 // 「テンプレートを正とする」) で、globals.css では定義しない。部品の角はテンプレートの lyra スタイルが決める。
 // globals.css に残るのはカード外枠の --card-radius (0) で、ここに非ゼロを入れたらこの検査が止める。
