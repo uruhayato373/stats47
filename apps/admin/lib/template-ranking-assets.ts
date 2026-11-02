@@ -7,16 +7,16 @@ export const RANKING_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/44295f56a3297ad779a853b598f48742227449b2372ba7348299ccea02d69146.png",
-      "sha256": "44295f56a3297ad779a853b598f48742227449b2372ba7348299ccea02d69146",
-      "bytes": 127882
+      "key": "media-workspace/images/a6805256791e97a95a217807a087e1a3670c1ddba1852c28555ae2db8a88c3a7.png",
+      "sha256": "a6805256791e97a95a217807a087e1a3670c1ddba1852c28555ae2db8a88c3a7",
+      "bytes": 128477
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/25443874071df286f193b399d379316cbbb5b8ed9296188ed1e7f690466a43f8.json",
-      "sha256": "25443874071df286f193b399d379316cbbb5b8ed9296188ed1e7f690466a43f8",
-      "bytes": 191039
+      "key": "media-workspace/inputs/6fdc13335f288874972a0c4a4e02c5bbe44164b43db14bcbcb57bd9554741650.json",
+      "sha256": "6fdc13335f288874972a0c4a4e02c5bbe44164b43db14bcbcb57bd9554741650",
+      "bytes": 193353
     }
   },
   "table": {
@@ -30,9 +30,9 @@ export const RANKING_SAMPLE_ASSETS = {
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/bbd293f95bad3519728504a8a7647f7a5202207718bd12ebafb93909a8e4feab.json",
-      "sha256": "bbd293f95bad3519728504a8a7647f7a5202207718bd12ebafb93909a8e4feab",
-      "bytes": 191040
+      "key": "media-workspace/inputs/b3c2b06725bfacfc14b2f4964b7561121af5fd28fa8b2a94f52484f1f21e7bdf.json",
+      "sha256": "b3c2b06725bfacfc14b2f4964b7561121af5fd28fa8b2a94f52484f1f21e7bdf",
+      "bytes": 193354
     }
   },
   "tile-map": {
@@ -46,9 +46,9 @@ export const RANKING_SAMPLE_ASSETS = {
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/e3dcac1aeee227c39df1501a6719fabf3017403ce9e35b0967d17de53f5f6629.json",
-      "sha256": "e3dcac1aeee227c39df1501a6719fabf3017403ce9e35b0967d17de53f5f6629",
-      "bytes": 191044
+      "key": "media-workspace/inputs/e7abddd38269f15c6ea9d3819a93405ef61bf9554b97a77e3e85f3ce02e04d52.json",
+      "sha256": "e7abddd38269f15c6ea9d3819a93405ef61bf9554b97a77e3e85f3ce02e04d52",
+      "bytes": 193358
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

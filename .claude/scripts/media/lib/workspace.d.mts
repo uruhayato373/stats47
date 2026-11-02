@@ -63,6 +63,8 @@ export interface Template {
   /** chart = main statistical form, chart-minor = rarely used form, asset (default) = non-chart material. */
   group?: 'chart' | 'chart-minor' | 'asset';
   purposes?: string[];
+  /** How the metric's authored colour scheme is used: scale = shade by value, single = the metric's one colour, none = series/category colours. */
+  metricColor?: 'scale' | 'single' | 'none';
   variants?: { id: string; label: string; status: 'ready' | 'planned'; buzzMapTypes?: string[] }[];
 }
 export interface Item {

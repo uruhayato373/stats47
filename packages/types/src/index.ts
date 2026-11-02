@@ -27,6 +27,8 @@ export {
   colorSchemeTypeOf,
   d3KeyOfColorScheme,
   assertKnownColorScheme,
+  metricHueOf,
+  type MetricHue,
 } from './color-scheme';
 
 export type {

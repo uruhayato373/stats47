@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { rankingBarRows, renderRankingBars } from '@/lib/template-ranking-bars';
+import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
+import { resolveMetricColor } from '../../../remotion/src/features/data-cards/tile-scale';
 
 // Synthetic values test the renderer contract only; they are never used in the sample UI.
 const fixture = () => ({
@@ -28,7 +30,10 @@ describe('ranking bar basic form', () => {
     expect(svg.match(/data-rank=/g)).toHaveLength(10);
     expect(svg.match(/data-bar-track="true"/g)).toHaveLength(10);
     expect(svg.match(/data-bar-value="true"/g)).toHaveLength(10);
-    expect(svg.match(/fill="#304BC6"\/>/g)).toHaveLength(11);
+    // Bars and value labels take the metric's own colour (its scheme's strong end), like its map.
+    const color = resolveMetricColor(RANKING_SAMPLE_METRIC.visualization)!;
+    expect(color).not.toBe('#304BC6');
+    expect(svg.split(`fill="${color}"/>`).length - 1).toBe(11);
     expect(svg).toContain('data-domain-min="31.4"');
     expect(svg).toContain('data-domain-max="36"');
     expect(svg).not.toContain('data-axis-break');

@@ -16,7 +16,8 @@
       "purposes": [
         "ranking",
         "comparison"
-      ]
+      ],
+      "metricColor": "single"
     },
     {
       "id": "table",
@@ -34,7 +35,8 @@
         "ranking",
         "comparison",
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "tile-map",
@@ -75,7 +77,8 @@
           "label": "候補を伏せる（クイズのヒント）",
           "status": "ready"
         }
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "choropleth",
@@ -150,7 +153,8 @@
             "flow"
           ]
         }
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "line",
@@ -166,7 +170,8 @@
       "group": "chart",
       "purposes": [
         "trend"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "stacked-bar",
@@ -183,7 +188,8 @@
       "group": "chart",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "scatter",
@@ -200,7 +206,8 @@
       "group": "chart",
       "purposes": [
         "relationship"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "radar",
@@ -217,7 +224,8 @@
       "group": "chart-minor",
       "purposes": [
         "comparison"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "sankey",
@@ -235,7 +243,8 @@
       "purposes": [
         "relationship",
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "waterfall",
@@ -252,7 +261,8 @@
       "group": "chart-minor",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "boxplot",
@@ -269,7 +279,8 @@
       "group": "chart-minor",
       "purposes": [
         "distribution"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "pie",
@@ -286,7 +297,8 @@
       "group": "chart-minor",
       "purposes": [
         "composition"
-      ]
+      ],
+      "metricColor": "none"
     },
     {
       "id": "heatmap",
@@ -304,7 +316,8 @@
       "purposes": [
         "distribution",
         "trend"
-      ]
+      ],
+      "metricColor": "scale"
     },
     {
       "id": "unclassified",

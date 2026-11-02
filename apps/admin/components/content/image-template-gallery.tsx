@@ -38,6 +38,12 @@ function updateView(values: Record<string, string>) {
   url.search = new URLSearchParams(values).toString();
   window.history.replaceState(null, '', url);
 }
+/** How each form uses the metric's authored colour scheme (image-templates.json `metricColor`). */
+const METRIC_COLOR_LABELS = {
+  scale: '値の濃淡で塗る',
+  single: '指標の色1色',
+  none: '使わない（系列・区分の色）',
+} as const;
 /** Purposes offered as filters: only those some statistical form declares. */
 const FILTER_PURPOSES = ['ranking', 'comparison', 'trend', 'composition', 'relationship', 'distribution'] as const;
 function MapVariants({ template }: { template: EditableTemplate }) {
@@ -94,6 +100,7 @@ function TemplateCard({
           <p className="text-sm text-muted-foreground">
             {TEMPLATE_GROUPS.find((g) => g.id === group)?.label}
             {template.purposes?.length ? ' · 用途：' + template.purposes.map((p) => IMAGE_PURPOSES[p as keyof typeof IMAGE_PURPOSES]).join('・') : ''}
+            {template.metricColor ? ' · 指標の配色：' + METRIC_COLOR_LABELS[template.metricColor] : ''}
           </p>
         </div>
         {isChart && <StatusBadge tone="neutral">基本形を検討中</StatusBadge>}
