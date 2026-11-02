@@ -93,7 +93,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
 既存の `MiniLineChart` / `MiniBarChart` / `StatTile` 等が使えるケースでは再実装しない。大きな数値 (KPI) は `StatTile` か `STAT_VALUE_CLASS`（`@/components/surface`）で描き、ページ側で文字の大きさを書かない（`stat-value-uses-shared-class`）。
-部品の種類ごとの役割・枠・使わない場面の正本は部品の台帳 `data/design/components.json`（schema `config/schema/design.components.schema.json`）。登録済みの部品 (`StatTile`・`ChartPanel`) の props を変えたら同じ差分で台帳の `slots` を直す (`design-components-ledger.test.ts` が照合する)。1 指標の値は `stat-tile`、題名を持つ節・大きなチャート・指標の切り替えは `chart-panel`。数値タイルは `StatTileGrid` (`stat-tile-grid`) に並べ、列の数はページで書かない (チャートの有無・枚数にかかわらず同じ列数。1 枚でも 4 列の 1 マスの幅。`stat-tile-grid-owns-columns`)。 記事への入口を本文に並べるときは `ArticleTeaserCard` を `CardGrid` (`@/components/surface`) に並べる (右レールは画像付きのリンク行)。ランキングカード (`FeaturedRankingCard`) を本文に並べるときも同じ `CardGrid` を使い、記事と列をそろえる (1 → 2 → 3 列。ページで `grid-cols-*` を書かない。2026-11-03)。節の題は「ランキング」「ブログ記事」のように中身の種類で書き、「〜で答えられる問い」のような言い換えにしない。推移の小さなチャートを出すかは部品ではなく呼び出し側が観測値と章の構成から決める (テーマは `features/theme-dashboard/lib/metric-trend.ts`)。指標ごとの表示フラグは持たない。
+部品の種類ごとの役割・枠・使わない場面の正本は部品の台帳 `data/design/components.json`（schema `config/schema/design.components.schema.json`）。登録済みの部品 (`StatTile`・`ChartPanel`) の props を変えたら同じ差分で台帳の `slots` を直す (`design-components-ledger.test.ts` が照合する)。1 指標の値は `stat-tile`、題名を持つ節・大きなチャート・指標の切り替えは `chart-panel`。数値タイルは `StatTileGrid` (`stat-tile-grid`) に並べ、列の数はページで書かない (チャートの有無・枚数にかかわらず同じ列数。1 枚でも 4 列の 1 マスの幅。`stat-tile-grid-owns-columns`)。 記事への入口を本文に並べるときは `ArticleTeaserCard` を `CardGrid` (`@/components/surface`) に並べる (右レールは画像付きのリンク行)。ランキングカード (`FeaturedRankingCard`) を本文に並べるときも同じ `CardGrid` を使い、記事と列をそろえる (1 → 2 → 3 列。ページで `grid-cols-*` を書かない。2026-11-03)。横スクロールのカルーセルも 1 画面の枚数を同じ段で決める (下の「レスポンシブブレイクポイントの使い分け」)。節の題は「ランキング」「ブログ記事」のように中身の種類で書き、「〜で答えられる問い」のような言い換えにしない。推移の小さなチャートを出すかは部品ではなく呼び出し側が観測値と章の構成から決める (テーマは `features/theme-dashboard/lib/metric-trend.ts`)。指標ごとの表示フラグは持たない。
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 
@@ -121,6 +121,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 | ページレイアウト（右レールの表示） | `@min-[988px]/shell:` (名前付きコンテナ) | サイドバーの開閉で本文幅が変わるため。値は `PageShell` / `ArticleShell` だけが持つ (ページ内ナビは列を作らないので境界を持たない) |
 | テキスト・ボタンのサイズ調整                      | `sm:` / `md:` (ビューポート)              | デバイスサイズで決まる                                       |
 | ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
+| カードの並び（`CardGrid` と横スクロールのカルーセル `HorizontalCardCarousel`） | `@sm:` / `@md:` (コンテナクエリ) だけ | 本文 480px 未満 = 1 枚 (カルーセルは次の端が見える 85%) / 480px 以上 = 2 / 768px 以上 = 3。**上限 3**。両方が同じ段を使い、同じ本文幅なら同じ枚数になる。ビューポートの `sm:`/`lg:`/`xl:` や `@lg:` で 4 枚目の段を作らない (2026-11-03。窓 1280px で格子 3 列・カルーセル 4 枚とずれた。`HorizontalCardCarousel.test.tsx` が固定) |
 
 コンテナクエリのブレイクポイントは `apps/web/src/app/globals.css` の `@custom-variant` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。Tailwind v4 の既定値（24 / 28 / 32rem）とは異なるので注意。テーマ値（`--container-*`）を変えると `max-w-sm/md/lg` まで変わるため、variant だけを上書きしている。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えると右レールあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
 
