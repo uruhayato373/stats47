@@ -78,13 +78,12 @@ export const RAIL_RECT: AdSlotConfig = {
  * ランキングページ: メインコンテンツ最下部
  * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 2607536637・W26 viewability 26.2%) を
  * Multiplex (関連コンテンツ型グリッド・横長) に差し替え。読了後の全幅フッターに適した形式。
- * AdSense ユニット: stats47-ranking-footer-multiplex（Multiplex / autorelaxed）
+ * 2026-10-31 (オーナー決定 AdSense は全て 300×250): 関連コンテンツ型 (2439393208) は固定の大きさにできず、
+ * モバイルで 308×1503 まで伸びていた。2026-11-03 にこの配置専用の表示広告ユニットを作った。
+ * AdSense ユニット: stats47-ranking-footer-rect（ディスプレイ / 固定 300×250）
  */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
-  // 2026-10-31 (オーナー決定 AdSense は全て 300×250): 関連コンテンツ型 (2439393208) は固定の大きさにできず、
-  // モバイルで 308×1503 まで伸びていた。表示広告のユニット stats47-hub-rail (ランキングのページには出ない) を
-  // 固定の大きさで使う。この配置専用の表示広告ユニットを作ったら差し替える (backlog ADSENSE-FIXED-UNITS-01)
-  slotId: "9435960671",
+  slotId: "3686603642",
   format: "rectangle",
 };
 
@@ -136,11 +135,11 @@ export const HUB_INCONTENT: AdSlotConfig = {
  * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 6635359989・W26 viewability 49.1%) を
  * Multiplex に差し替え。2026-10-11 の再開時に RANKING_PAGE_FOOTER との slot 共用をやめ、
  * ランキング末尾とそれ以外の末尾を別ユニットで計測する。
- * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
+ * 2026-10-31: RANKING_PAGE_FOOTER と同じ理由で関連コンテンツ型 (2005202370) をやめ、2026-11-03 に
+ * この配置専用の表示広告ユニットを作った。
+ * AdSense ユニット: stats47-content-footer-rect（ディスプレイ / 固定 300×250）
  */
 export const CONTENT_FOOTER: AdSlotConfig = {
-  // 2026-10-31: RANKING_PAGE_FOOTER と同じ理由で、関連コンテンツ型 (2005202370) をやめて表示広告のユニット
-  // stats47-themes-content を固定の大きさで使う (backlog ADSENSE-FIXED-UNITS-01)
-  slotId: "8298138821",
+  slotId: "6994459114",
   format: "rectangle",
 };
