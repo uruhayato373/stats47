@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { selectSurveyRepresentativeRankings } from './select-survey-representative-rankings';
+import {
+  prioritizeSurveyRankings,
+  selectSurveyRepresentativeRankings,
+} from './select-survey-representative-rankings';
 
 describe('selectSurveyRepresentativeRankings', () => {
   it('サイト共通代表が無い調査でも、カテゴリを分散して上限まで返す', () => {
@@ -41,5 +44,34 @@ describe('selectSurveyRepresentativeRankings', () => {
         0
       )
     ).toEqual([]);
+  });
+
+  it('読者の問いが指すランキングを、カテゴリ分散より先に与えた順で取る', () => {
+    // 家計調査の実例: 件数の少ない分類の情報通信係数が、需要上位の納豆・米より先に代表になっていた
+    const items = [
+      { rankingKey: 'aircon', title: 'エアコン消費量', categoryKey: 'economy' },
+      { rankingKey: 'ict', title: '情報通信係数', categoryKey: 'ict' },
+      { rankingKey: 'natto', title: '納豆消費支出額', categoryKey: 'economy' },
+      { rankingKey: 'rice', title: '米消費量', categoryKey: 'economy' },
+    ];
+
+    expect(
+      selectSurveyRepresentativeRankings(items, 3, ['rice', 'natto', 'missing']).map(
+        (item) => item.rankingKey
+      )
+    ).toEqual(['rice', 'natto', 'ict']);
+  });
+});
+
+describe('prioritizeSurveyRankings', () => {
+  it('指定したランキングを指定順で先頭に並べ、残りは元の順を保つ', () => {
+    const items = [{ rankingKey: 'a' }, { rankingKey: 'b' }, { rankingKey: 'c' }, { rankingKey: 'd' }];
+
+    expect(prioritizeSurveyRankings(items, ['c', 'x', 'b']).map((item) => item.rankingKey)).toEqual([
+      'c',
+      'b',
+      'a',
+      'd',
+    ]);
   });
 });

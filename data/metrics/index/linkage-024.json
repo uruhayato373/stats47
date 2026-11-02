@@ -307,10 +307,7 @@
         "configHash": "b84e5633147341fc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-education-leisure",
@@ -383,10 +380,7 @@
         "configHash": "db71bdec85de085f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:refrigerator-expenditure-ranking",
@@ -431,10 +425,7 @@
         "configHash": "762aea8dd7f57992"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-appliances",
@@ -4230,10 +4221,7 @@
         "configHash": "f3d45646320cc5d9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:religious-expense-consumption-expenditure",
@@ -4551,10 +4539,7 @@
         "configHash": "fa8204521e436781"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-transport-spending",
@@ -4707,10 +4692,7 @@
         "configHash": "b969c94b792a04ac"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:repair-materials-consumption-expenditure",
@@ -8998,10 +8980,7 @@
         "configHash": "ac80b8165fbb9ed1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -9268,10 +9247,7 @@
         "configHash": "fb8c78139d894a48"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -9526,10 +9502,7 @@
         "configHash": "70d0b476c9d80831"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
@@ -9875,10 +9848,7 @@
         "configHash": "ff9bbf0d057ebe56"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:ritual-goods-tombstone-consumption-expenditure",

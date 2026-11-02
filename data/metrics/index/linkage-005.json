@@ -494,10 +494,7 @@
         "configHash": "e50b94ac5782fc1f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:niigata-food-culture",
@@ -538,10 +535,7 @@
         "configHash": "f3623a4d4f2cd186"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:curry-roux-consumption-gap",
@@ -582,10 +576,7 @@
         "configHash": "a04fce75e65684e6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -816,10 +807,7 @@
         "configHash": "32545870c101dc8b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:cut-flowers-consumption-expenditure-prefecture-gap",
@@ -860,10 +848,7 @@
         "configHash": "652bff50de6016cb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:cutlet-consumption-expenditure",
@@ -900,10 +885,7 @@
         "configHash": "f0e5277b6d2e842c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:daikon-consumption-expenditure",
@@ -940,10 +922,7 @@
         "configHash": "2776129edabe2039"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -5791,10 +5770,7 @@
         "configHash": "1e0e21a9507ade52"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kagawa-food-culture",
@@ -6053,10 +6029,7 @@
         "configHash": "16d2a81664e6a271"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:delivery-fee-consumption-expenditure-prefecture-gap",
@@ -7281,10 +7254,7 @@
         "configHash": "a59eb9fe3d4a0a59"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-health-spending",
@@ -9987,10 +9957,7 @@
         "configHash": "70ffec16fbf41fad"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",

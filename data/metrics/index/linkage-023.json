@@ -1395,10 +1395,7 @@
         "configHash": "245dc3026d7bc255"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-bath-consumption-expenditure",
@@ -2036,10 +2033,7 @@
         "configHash": "fa1bbac6489302a1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-elementary-school-consumption-expenditure",
@@ -3182,10 +3176,7 @@
         "configHash": "2c31c38a08a81485"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-high-school-consumption-expenditure",
@@ -3318,10 +3309,7 @@
         "configHash": "fc3b4bcca1611ac7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-junior-high-school-consumption-expenditure",
@@ -3763,10 +3751,7 @@
         "configHash": "5b0046ff4d8f16c8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-rent-consumption-expenditure",
@@ -3803,10 +3788,7 @@
         "configHash": "3046e2b292df0371"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-rent-consumption-quantity",
@@ -4433,10 +4415,7 @@
         "configHash": "9e01b960cdf5391b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:income-quintile-education",
@@ -5916,10 +5895,7 @@
         "configHash": "bab630f8919cc6a3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:chiba-food-culture",
@@ -5960,10 +5936,7 @@
         "configHash": "a1f779949c0ab707"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kanagawa-food-culture",
@@ -6016,10 +5989,7 @@
         "configHash": "31a59dd5a563c792"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:kanagawa-food-culture",
@@ -6547,10 +6517,7 @@
         "configHash": "460a7bfa7c3a8b55"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",

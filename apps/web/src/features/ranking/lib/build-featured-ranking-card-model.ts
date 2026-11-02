@@ -1,6 +1,7 @@
 import "server-only";
 
 import { getMetricConfig } from "@stats47/data-configs";
+import { resolveRankingHook } from "@stats47/data-configs/prominence";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
   deriveFeaturedTop,
@@ -45,10 +46,16 @@ export function buildFeaturedRankingCardModel({
 }: BuildFeaturedRankingCardModelInput): FeaturedRankingCardModel | null {
   if (values.length === 0) return null;
 
-  const representativeHook = REPRESENTATIVE_HOOK_BY_KEY.get(rankingKey);
+  const metricConfig = getMetricConfig(rankingKey);
+  // サイト共通の代表でない指標も、同じ規則 (個別の上書き → 導出) で問いかけにする。
+  // 指標名をそのまま題名にすると「緑茶消費量（都道府県庁所在市の…）」のように並びがそろわなかった (2026-11-02)
+  const representativeHook =
+    REPRESENTATIVE_HOOK_BY_KEY.get(rankingKey) ??
+    (metricConfig
+      ? resolveRankingHook({ rankingKey, title: metricConfig.title, unit: metricConfig.unit })
+      : undefined);
   const representativeDefinition = representativeHook ? { hook: representativeHook } : null;
 
-  const metricConfig = getMetricConfig(rankingKey);
   const tileMapSvg = generateRankingThumbnailMapSvg(
     values.flatMap((value) =>
       value.value !== null

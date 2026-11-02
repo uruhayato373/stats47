@@ -3695,10 +3695,7 @@
         "configHash": "febe542add864535"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:earthquake-exposure",
@@ -4621,10 +4618,7 @@
         "configHash": "def098ede2d0b3c6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fish-canned-consumption-expenditure",
@@ -4898,10 +4892,7 @@
         "configHash": "d7d19aa3908111a8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:miyagi-food-culture",
@@ -4942,10 +4933,7 @@
         "configHash": "3a165d1bc5d929ac"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
@@ -4986,10 +4974,7 @@
         "configHash": "6a72926a83095e8d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fish-tsukudani-type2-consumption-expenditure",
@@ -11079,10 +11064,7 @@
         "configHash": "6bb725a601559005"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:flavor-seasoning-consumption-expenditure-prefecture-gap",
@@ -12586,10 +12568,7 @@
         "configHash": "64f7749469a734cf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:floor-covering-consumption-expenditure",
@@ -12626,10 +12605,7 @@
         "configHash": "6fb04c3e33cdce8d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -12908,10 +12884,7 @@
         "configHash": "2390ec9b5adf48b0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",

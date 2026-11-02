@@ -1107,10 +1107,7 @@
         "configHash": "ed5832f51758d096"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:newspaper-consumption-expenditure",
@@ -1187,10 +1184,7 @@
         "configHash": "5288e63f93b42318"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-food-spending",
@@ -1689,10 +1683,7 @@
         "configHash": "cb67785f0c091c44"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:non-car-vehicle-insurance-consumption-expenditure",
@@ -1729,10 +1720,7 @@
         "configHash": "790e6497fa42989c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:non-car-vehicle-maintenance-consumption-expenditure",
@@ -1769,10 +1757,7 @@
         "configHash": "cd332c52e3cc8ca1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:non-car-vehicle-purchase-consumption-expenditure",
@@ -4155,10 +4140,7 @@
         "configHash": "c1d88e779a1b2a50"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:notebooks-paper-consumption-expenditure",
@@ -9397,10 +9379,7 @@
         "configHash": "dd734edc1910460f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:nursing-care-consumption-expenditure",

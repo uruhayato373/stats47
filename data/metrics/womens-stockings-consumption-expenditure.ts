@@ -40,22 +40,6 @@ export const womensStockingsConsumptionExpenditure: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
     "isCalculated": false,
   },
   "seoTitle": "婦人用ストッキング消費支出額ランキング都道府県【2024年】｜1位石川県（502円）",

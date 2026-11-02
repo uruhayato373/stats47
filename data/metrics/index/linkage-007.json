@@ -1802,10 +1802,7 @@
         "configHash": "e22becac8159a4e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tuition-expenditure-ranking",
@@ -7301,10 +7298,7 @@
         "configHash": "6adab7171fa2d950"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukushima-food-culture",
@@ -7353,10 +7347,7 @@
         "configHash": "b07dea8a9db5a3ad"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fukushima-food-culture",
@@ -7619,10 +7610,7 @@
         "configHash": "0732d7f8d981cb33"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:entertainment-durables-repair-consumption-expenditure",
@@ -7659,10 +7647,7 @@
         "configHash": "19d79e3b32b7ad24"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:entertainment-goods-repair-consumption-expenditure",
@@ -7699,10 +7684,7 @@
         "configHash": "10941fe31dbc77c4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:entertainment-rental-consumption-expenditure",
@@ -8124,10 +8106,7 @@
         "configHash": "a8c68577795e7b94"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:exterior-construction-consumption-expenditure",
@@ -8164,10 +8143,7 @@
         "configHash": "2f3fb6284db5aa63"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-health-spending",
@@ -8208,10 +8184,7 @@
         "configHash": "bcca8d2cd243df87"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fabric-consumption-expenditure",
@@ -8248,10 +8221,7 @@
         "configHash": "5a296247a702d4c0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:fabric-softener-consumption-expenditure-prefecture-gap",
@@ -8292,10 +8262,7 @@
         "configHash": "a6b5df7087bd2ffb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:facility-equipment-consumption-expenditure",

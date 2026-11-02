@@ -253,9 +253,13 @@ export default async function SurveyPage({ params }: PageProps) {
         .map((label) => ({ value: label, label }))
     : undefined;
 
-  // サイト共通の代表集合を優先しつつ、調査固有のカテゴリ分散フォールバックを持つ。
-  // 最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
-  const featuredRaw = selectSurveyRepresentativeRankings(rankingItems, 8);
+  // 編集設定の「読者の問い」が指すランキングを最優先にし、残りはサイト共通の代表集合と
+  // カテゴリ分散で選ぶ。最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
+  const featuredRaw = selectSurveyRepresentativeRankings(
+    rankingItems,
+    8,
+    editorial?.readerQuestions.map((item) => item.rankingKey) ?? []
+  );
   // home/category と同じカードモデルを、1 回の全47件 read から導出する。
   // (旧: 独自の縦型カード + baseThumbnailUrl の画像サムネイル)。
   const featuredValues = await Promise.all(

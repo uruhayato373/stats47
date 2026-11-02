@@ -46,22 +46,6 @@ export const breadConsumptionQuantity: MetricConfig = {
     "decimalPlaces": 0,
   },
   "calculation": {
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "g/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "g/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
     "isCalculated": false,
   },
   "isActive": true,

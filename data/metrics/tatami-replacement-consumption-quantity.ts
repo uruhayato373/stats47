@@ -41,22 +41,6 @@ export const tatamiReplacementConsumptionQuantity: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "畳/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "畳/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "畳替え消費量ランキング｜県庁所在市の二人以上世帯",
   "seoDescription": "家計調査の二人以上世帯について、県庁所在市の畳替え消費量を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",

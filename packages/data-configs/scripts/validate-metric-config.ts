@@ -13,6 +13,7 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし /
  *       seoTitle・seoDescription の数字の直後の "‐" (seo-unit-dash)。
  *       換算単位 normalizationOptions[].unit の「‐/…」(normalization-unit-dash)。
+ *       家計調査 (kakei-chousa) の指標の normalizationOptions (kakei-normalization)。
  *     ※ 旧 warn だった 5 系統 (title-year/title-note, subtitle-note/redundant, unit, dup-title) は
  *       Phase 3 のデータ是正で warn=0 を達成 (2026-06) → error に昇格済。これにより量産時の再混入を CI/pre-commit で阻止する。
  *       category は型 (CategoryKey union) でもコンパイル時にブロックされ、本 lint はその runtime backstop。
@@ -77,6 +78,10 @@ interface Row {
   seoDescription: string | null;
   /** 換算単位 (normalizationOptions[].unit) が「‐/10万人」のように「‐」で始まる件数 */
   normalizationUnitDash: number;
+  /** source.kind (家計調査の判定に使う) */
+  sourceKind: string;
+  /** normalizationOptions の件数 */
+  normalizationCount: number;
 }
 
 /**
@@ -143,6 +148,8 @@ function main() {
       normalizationUnitDash: (
         metric.calculation?.normalizationOptions ?? []
       ).filter((option) => option.unit.startsWith('‐/')).length,
+      sourceKind: source.kind,
+      normalizationCount: metric.calculation?.normalizationOptions?.length ?? 0,
     });
   }
 
@@ -281,6 +288,16 @@ function main() {
     if (r.normalizationUnitDash > 0) {
       errors.push(
         `[normalization-unit-dash] ${r.file}: 換算単位が「‐/…」(${r.normalizationUnitDash} 箇所)。割合・指数の指標なら normalizationOptions を外し、実数なら元の単位を書く`
+      );
+    }
+  }
+
+  // error: 家計調査の指標に人口・面積あたりの換算を付けない。値は県庁所在市の 1 世帯あたりの支出額・購入数量で、
+  // 県の人口や面積で割ると意味をなさない (2026-11-02 に 697 指標から外した。CONTENT-KAKEI-EXPANSION-01)
+  for (const r of rows) {
+    if (r.sourceKind === 'kakei-chousa' && r.normalizationCount > 0) {
+      errors.push(
+        `[kakei-normalization] ${r.file}: 家計調査の指標に normalizationOptions がある。値は 1 世帯あたりなので人口・面積あたりの換算を外す`
       );
     }
   }

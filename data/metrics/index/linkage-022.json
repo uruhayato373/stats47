@@ -29,10 +29,7 @@
         "configHash": "b0d767158d85bd46"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pots-kettles-consumption-expenditure",
@@ -69,10 +66,7 @@
         "configHash": "4b751fd405cc2437"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pots-kettles-consumption-quantity",
@@ -327,10 +321,7 @@
         "configHash": "8497b06c91199017"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:powdered-milk-consumption-expenditure",
@@ -3940,10 +3931,7 @@
         "configHash": "f6c80b4ece2e1c29"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:preschool-fee-consumption-expenditure",
@@ -4696,10 +4684,7 @@
         "configHash": "05e3238df413f64e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-elementary-school-consumption-expenditure",
@@ -5858,10 +5843,7 @@
         "configHash": "853f86c191d55982"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-high-school-consumption-expenditure",
@@ -5898,10 +5880,7 @@
         "configHash": "1e74553b37ee20a4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-junior-high-school-consumption-expenditure",
@@ -6123,10 +6102,7 @@
         "configHash": "19f2c294f957194f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:living-housing",
@@ -6554,10 +6530,7 @@
         "configHash": "a9a0e6d5b22886ee"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-rent-consumption-quantity",
@@ -6943,10 +6916,7 @@
         "configHash": "0bf6823ff1ea9698"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "japan-theme:household-education-leisure",
@@ -7019,10 +6989,7 @@
         "configHash": "d659454ac52e39f5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:probiotic-drink-consumption-expenditure",
@@ -7788,10 +7755,7 @@
         "configHash": "9609402d923182ee"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:gas-expenditure-ranking",
@@ -7832,10 +7796,7 @@
         "configHash": "6d01660cc5e66b6f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:propane-gas-consumption-quantity",
