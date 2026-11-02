@@ -218,6 +218,28 @@ export default async function SurveyPage({ params }: PageProps) {
   const relatedJapanThemes = surveyKey === 'kakei-chousa'
     ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
     : [];
+  // 全国の時系列 (/japan/<slug>) は同じテーマの比較の単位違い (slug が同じ)。テーマは 1 枚のカードにまとめ、
+  // 県で比べられるテーマはテーマのページへ、全国版しか無いテーマは全国のページへつなぐ (2026-11-03)
+  const japanThemeSlugs = new Set(relatedJapanThemes.map((theme) => theme.themeSlug));
+  const prefectureThemeKeys = new Set(relatedThemes.map((theme) => theme.key));
+  const themeCards = [
+    ...relatedThemes.map((theme) => ({
+      key: theme.key,
+      title: theme.title,
+      href: themeHref(theme.key),
+      groupKey: theme.key,
+      meta: `${theme.metricCount} 指標${japanThemeSlugs.has(theme.key) ? '・全国の推移もあり' : ''}`,
+    })),
+    ...relatedJapanThemes
+      .filter((theme) => !prefectureThemeKeys.has(theme.themeSlug))
+      .map((theme) => ({
+        key: theme.themeSlug,
+        title: theme.title,
+        href: hrefFor('japan-theme', { themeSlug: theme.themeSlug }),
+        groupKey: null,
+        meta: `全国の推移・${theme.metrics.length} 指標`,
+      })),
+  ];
   const relatedArticles = await listArticleSummariesBySurveyId(
     sourceIds,
     6,
@@ -457,20 +479,18 @@ export default async function SurveyPage({ params }: PageProps) {
         </PanelGrid>
       )}
 
-      {relatedThemes.length > 0 && (
+      {themeCards.length > 0 && (
         <section id="related-themes" className="mb-4 scroll-mt-24">
-          <SectionHeader
-            title="テーマ"
-          />
+          <SectionHeader title="テーマ" />
           <SurveyOutboundLinkArea surface="survey_theme">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedThemes.map((theme) => {
-                const group = themeNavGroupOf(theme.key);
-                const Icon = group ? THEME_NAV_GROUP_ICONS[group.id] : LayoutGrid;
+              {themeCards.map((theme) => {
+                const group = theme.groupKey ? themeNavGroupOf(theme.groupKey) : undefined;
+                const Icon = group ? THEME_NAV_GROUP_ICONS[group.id] : theme.groupKey ? LayoutGrid : ChartLine;
                 return (
                   <SurfaceLinkCard
                     key={theme.key}
-                    href={themeHref(theme.key)}
+                    href={theme.href}
                     className="text-sm text-foreground hover:bg-accent/50"
                   >
                     <span className="flex items-center gap-3">
@@ -479,7 +499,7 @@ export default async function SurveyPage({ params }: PageProps) {
                         <span className="block font-medium">{theme.title}</span>
                         <span className="block text-xs text-muted-foreground">
                           {group ? `${group.label}・` : ''}
-                          {theme.metricCount} 指標
+                          {theme.meta}
                         </span>
                       </span>
                       <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
@@ -487,35 +507,6 @@ export default async function SurveyPage({ params }: PageProps) {
                   </SurfaceLinkCard>
                 );
               })}
-            </div>
-          </SurveyOutboundLinkArea>
-        </section>
-      )}
-
-      {relatedJapanThemes.length > 0 && (
-        <section id="related-japan-themes" className="mb-4 scroll-mt-24">
-          <SectionHeader title="日本全国の時系列" />
-          <p className="mb-3 text-sm text-muted-foreground">
-            都市別ランキングと対象地域が異なります。全国の二人以上世帯について、年ごとの変化を確認できます。
-          </p>
-          <SurveyOutboundLinkArea surface="survey_theme">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedJapanThemes.map((theme) => (
-                <SurfaceLinkCard
-                  key={theme.themeSlug}
-                  href={hrefFor('japan-theme', { themeSlug: theme.themeSlug })}
-                  className="text-sm text-foreground hover:bg-accent/50"
-                >
-                  <span className="flex items-center gap-3">
-                    <ChartLine className="size-5 shrink-0 text-muted-foreground" aria-hidden />
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-medium">{theme.title}</span>
-                      <span className="block text-xs text-muted-foreground">全国・{theme.metrics.length} 指標</span>
-                    </span>
-                    <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-                  </span>
-                </SurfaceLinkCard>
-              ))}
             </div>
           </SurveyOutboundLinkArea>
         </section>
