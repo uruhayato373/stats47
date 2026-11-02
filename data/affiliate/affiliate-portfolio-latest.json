@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T18:19:35.651Z",
+  "generatedAt": "2026-11-02T22:15:08.286Z",
   "sources": {
     "ga4": {
       "path": "data/affiliate/ga4-affiliate-2026-10-31.json",
-      "generatedAt": "2026-11-01T18:19:12.548Z",
+      "generatedAt": "2026-11-02T22:14:46.761Z",
       "schemaVersion": 3
     },
     "a8": {
@@ -19,7 +19,7 @@
         "generatedAt": "2026-10-18T08:34:59.747Z",
         "status": "blocked",
         "reasons": [
-          "moshimo-results-stale(14d>10d)"
+          "moshimo-results-stale(15d>10d)"
         ],
         "required": false,
         "programRefPrefix": "moshimo:"
@@ -125,8 +125,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -191,8 +191,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -256,8 +256,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -324,8 +324,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -390,8 +390,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -456,8 +456,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -522,8 +522,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -588,8 +588,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -655,8 +655,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -721,8 +721,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -786,8 +786,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -851,8 +851,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -917,8 +917,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -984,8 +984,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1050,8 +1050,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1117,8 +1117,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1182,8 +1182,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1248,8 +1248,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1314,8 +1314,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1380,8 +1380,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1446,8 +1446,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1569,8 +1569,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1635,8 +1635,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1700,8 +1700,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1766,8 +1766,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1832,8 +1832,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1898,8 +1898,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -1965,8 +1965,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2030,8 +2030,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2096,8 +2096,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2162,8 +2162,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2228,8 +2228,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2294,8 +2294,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2361,8 +2361,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2427,8 +2427,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2493,8 +2493,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2559,8 +2559,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2625,8 +2625,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2691,8 +2691,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2757,8 +2757,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2823,8 +2823,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2890,8 +2890,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -2956,8 +2956,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3023,8 +3023,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3089,8 +3089,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3156,8 +3156,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3222,8 +3222,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3288,8 +3288,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3354,8 +3354,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3420,8 +3420,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3486,8 +3486,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3553,8 +3553,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3619,8 +3619,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3685,8 +3685,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3751,8 +3751,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3817,8 +3817,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3883,8 +3883,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -3949,8 +3949,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4015,8 +4015,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4081,8 +4081,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4147,8 +4147,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4213,8 +4213,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4279,8 +4279,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4345,8 +4345,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4411,8 +4411,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4477,8 +4477,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4600,8 +4600,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4666,8 +4666,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4732,8 +4732,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4798,8 +4798,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4864,8 +4864,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -4986,8 +4986,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5052,8 +5052,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5118,8 +5118,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5185,8 +5185,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5251,8 +5251,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5317,8 +5317,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5383,8 +5383,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5449,8 +5449,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5515,8 +5515,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5581,8 +5581,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5647,8 +5647,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5713,8 +5713,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5779,8 +5779,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5845,8 +5845,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5911,8 +5911,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -5977,8 +5977,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6101,8 +6101,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6168,8 +6168,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6234,8 +6234,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6301,8 +6301,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6367,8 +6367,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6433,8 +6433,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6499,8 +6499,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6564,8 +6564,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6630,8 +6630,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6696,8 +6696,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6762,8 +6762,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6830,8 +6830,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6896,8 +6896,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -6962,8 +6962,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7028,8 +7028,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7094,8 +7094,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7160,8 +7160,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7226,8 +7226,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7293,8 +7293,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7359,8 +7359,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7425,8 +7425,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7490,8 +7490,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7556,8 +7556,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7622,8 +7622,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7688,8 +7688,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7754,8 +7754,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7823,8 +7823,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7889,8 +7889,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -7955,8 +7955,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8021,8 +8021,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8087,8 +8087,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8153,8 +8153,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8219,8 +8219,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8285,8 +8285,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8488,19 +8488,19 @@
         },
         "conversions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "approved": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenueYen": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenuePer1000ViewableImpressions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         }
       },
       "sourceQuality": {
@@ -8510,9 +8510,9 @@
         },
         "outcome": {
           "status": "blocked",
-          "ageDays": 14,
+          "ageDays": 15,
           "reasons": [
-            "moshimo-results-stale(14d>10d)"
+            "moshimo-results-stale(15d>10d)"
           ]
         }
       }
@@ -8545,19 +8545,19 @@
         },
         "conversions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "approved": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenueYen": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenuePer1000ViewableImpressions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         }
       },
       "sourceQuality": {
@@ -8567,9 +8567,9 @@
         },
         "outcome": {
           "status": "blocked",
-          "ageDays": 14,
+          "ageDays": 15,
           "reasons": [
-            "moshimo-results-stale(14d>10d)"
+            "moshimo-results-stale(15d>10d)"
           ]
         }
       }
@@ -8602,19 +8602,19 @@
         },
         "conversions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "approved": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenueYen": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenuePer1000ViewableImpressions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         }
       },
       "sourceQuality": {
@@ -8624,9 +8624,9 @@
         },
         "outcome": {
           "status": "blocked",
-          "ageDays": 14,
+          "ageDays": 15,
           "reasons": [
-            "moshimo-results-stale(14d>10d)"
+            "moshimo-results-stale(15d>10d)"
           ]
         }
       }
@@ -8659,19 +8659,19 @@
         },
         "conversions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "approved": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenueYen": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         },
         "confirmedRevenuePer1000ViewableImpressions": {
           "value": null,
-          "unavailableReason": "moshimo-results-stale(14d>10d)"
+          "unavailableReason": "moshimo-results-stale(15d>10d)"
         }
       },
       "sourceQuality": {
@@ -8681,9 +8681,9 @@
         },
         "outcome": {
           "status": "blocked",
-          "ageDays": 14,
+          "ageDays": 15,
           "reasons": [
-            "moshimo-results-stale(14d>10d)"
+            "moshimo-results-stale(15d>10d)"
           ]
         }
       }
@@ -8915,8 +8915,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -8981,8 +8981,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9047,8 +9047,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9113,8 +9113,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9179,8 +9179,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9245,8 +9245,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9311,8 +9311,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9377,8 +9377,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9442,8 +9442,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9508,8 +9508,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9574,8 +9574,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9640,8 +9640,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9706,8 +9706,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9772,8 +9772,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9838,8 +9838,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9904,8 +9904,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -9970,8 +9970,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10035,8 +10035,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10100,8 +10100,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10165,8 +10165,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10230,8 +10230,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10295,8 +10295,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10360,8 +10360,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10425,8 +10425,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10490,8 +10490,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10555,8 +10555,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10620,8 +10620,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10685,8 +10685,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10750,8 +10750,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10815,8 +10815,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10881,8 +10881,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -10947,8 +10947,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -11013,8 +11013,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -11079,8 +11079,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -11145,8 +11145,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -11211,8 +11211,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
@@ -11277,8 +11277,8 @@
             "singleMonth": "2026-10"
           },
           "freshness": {
-            "reportDays": 1,
-            "resultsDays": 1,
+            "reportDays": 2,
+            "resultsDays": 2,
             "maxAgeDays": 35
           }
         }
