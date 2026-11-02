@@ -306,16 +306,6 @@ export const HOUSEHOLD_FOOD_SPENDING_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "necktie-consumption-expenditure",
-      "shortLabel": "ネクタイの支出額",
-      "role": "context"
-    },
-    {
-      "rankingKey": "necktie-consumption-quantity",
-      "shortLabel": "ネクタイの購入量",
-      "role": "context"
-    },
-    {
       "rankingKey": "chinese-cabbage-consumption-expenditure",
       "shortLabel": "はくさいの支出額",
       "role": "context"
@@ -633,16 +623,6 @@ export const HOUSEHOLD_FOOD_SPENDING_SET: IndicatorSet = {
     {
       "rankingKey": "happoshu-consumption-quantity",
       "shortLabel": "発泡酒・ビール風アルコール飲料の購入量",
-      "role": "context"
-    },
-    {
-      "rankingKey": "womens-stockings-consumption-expenditure",
-      "shortLabel": "婦人用ストッキングの支出額",
-      "role": "context"
-    },
-    {
-      "rankingKey": "womens-stockings-consumption-quantity",
-      "shortLabel": "婦人用ストッキングの購入量",
       "role": "context"
     },
     {

@@ -3429,16 +3429,6 @@
       "relation": "contains"
     },
     {
-      "from": "ranking:necktie-consumption-expenditure",
-      "to": "theme:household-food-spending",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:necktie-consumption-quantity",
-      "to": "theme:household-food-spending",
-      "relation": "contains"
-    },
-    {
       "from": "ranking:new-cancer-incidence-count",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -5370,16 +5360,6 @@
     },
     {
       "from": "ranking:wine-consumption-expenditure",
-      "to": "theme:household-food-spending",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:womens-stockings-consumption-expenditure",
-      "to": "theme:household-food-spending",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:womens-stockings-consumption-quantity",
       "to": "theme:household-food-spending",
       "relation": "contains"
     },

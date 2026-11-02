@@ -94,3 +94,15 @@ describe('getSurveyEditorialContent', () => {
     );
   });
 });
+
+describe('都市別の値を集める調査の問い', () => {
+  it('地域の表記が都市別の調査は、問いで「都道府県」「県」を名指ししない (値は県庁所在市で、県全体ではない)', () => {
+    for (const surveyKey of ['kakei-chousa', 'household-survey']) {
+      const editorial = getSurveyEditorialContent(surveyKey);
+      expect(editorial?.areaLabel).toContain('都市');
+      for (const { question } of editorial?.readerQuestions ?? []) {
+        expect(question).not.toMatch(/都道府県は|県は/);
+      }
+    }
+  });
+});

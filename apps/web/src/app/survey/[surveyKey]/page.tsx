@@ -52,6 +52,7 @@ import {
 } from '@/features/ranking';
 import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
 import {
+  excludeFeaturedQuestions,
   getSurveyEditorialContent,
   selectSurveyRepresentativeRankings,
   SurveyMobileNav,
@@ -255,6 +256,9 @@ export default async function SurveyPage({ params }: PageProps) {
 
   // 編集設定の「読者の問い」が指すランキングを最優先にし、残りはサイト共通の代表集合と
   // カテゴリ分散で選ぶ。最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
+  const questionByKey = new Map(
+    editorial?.readerQuestions.map((item) => [item.rankingKey, item.question]) ?? []
+  );
   const featuredRaw = selectSurveyRepresentativeRankings(
     rankingItems,
     8,
@@ -285,6 +289,7 @@ export default async function SurveyPage({ params }: PageProps) {
         rankingKey: item.rankingKey,
         title,
         values: valuesResult.data,
+        hook: questionByKey.get(item.rankingKey),
       });
       if (!model) return [];
 
@@ -320,10 +325,12 @@ export default async function SurveyPage({ params }: PageProps) {
     </span>
   );
   const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
-  const readerQuestions =
+  const readerQuestions = excludeFeaturedQuestions(
     editorial?.readerQuestions.filter((item) =>
       rankingKeys.has(item.rankingKey)
-    ) ?? [];
+    ) ?? [],
+    featuredItems.map((item) => item.rankingKey)
+  );
   const pageLinks: SurveyPageNavLink[] = [
     ...(editorial
       ? [{ href: '#survey-overview', label: 'この調査で分かること' } as const]

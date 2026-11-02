@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  excludeFeaturedQuestions,
   prioritizeSurveyRankings,
   selectSurveyRepresentativeRankings,
 } from './select-survey-representative-rankings';
@@ -73,5 +74,21 @@ describe('prioritizeSurveyRankings', () => {
       'a',
       'd',
     ]);
+  });
+});
+
+describe('excludeFeaturedQuestions', () => {
+  it('代表カードに出した問いだけを一覧から外し、残りの順を保つ', () => {
+    const questions = [
+      { question: 'A は？', rankingKey: 'a' },
+      { question: 'B は？', rankingKey: 'b' },
+      { question: 'C は？', rankingKey: 'c' },
+    ];
+
+    expect(excludeFeaturedQuestions(questions, ['b']).map((q) => q.rankingKey)).toEqual(['a', 'c']);
+  });
+
+  it('全部カードに出たら空になり、一覧の節を描かない', () => {
+    expect(excludeFeaturedQuestions([{ question: 'A は？', rankingKey: 'a' }], ['a'])).toEqual([]);
   });
 });

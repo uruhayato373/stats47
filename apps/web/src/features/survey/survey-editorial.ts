@@ -597,19 +597,19 @@ const SURVEY_EDITORIAL_CONTENT = {
     ],
     readerQuestions: [
       {
-        question: '勤労者世帯の月間実収入が多い都道府県は？',
+        question: '勤労者世帯の月間実収入が多い都市は？',
         rankingKey: 'actual-income-worker-households-per-month',
       },
       {
-        question: '勤労者世帯の可処分所得が多い都道府県は？',
+        question: '勤労者世帯の可処分所得が多い都市は？',
         rankingKey: 'disposable-income-worker-households',
       },
       {
-        question: '平均消費性向が高い都道府県は？',
+        question: '平均消費性向が高い都市は？',
         rankingKey: 'avg-propensity-to-consume-worker-households',
       },
       {
-        question: '二人以上世帯の月間消費支出が多い都道府県は？',
+        question: '二人以上世帯の月間消費支出が多い都市は？',
         rankingKey: 'consumption-expenditure-multi-person-households-per-month',
       },
     ],

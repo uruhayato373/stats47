@@ -33,6 +33,8 @@ interface BuildFeaturedRankingCardModelInput {
   rankingKey: string;
   title: string;
   values: readonly HomeFeaturedValueRow[];
+  /** 表示面の編集で書いた問い (調査ハブの「読者の問い」)。あれば導出した問いより優先する */
+  hook?: string;
 }
 
 /**
@@ -43,6 +45,7 @@ export function buildFeaturedRankingCardModel({
   rankingKey,
   title,
   values,
+  hook,
 }: BuildFeaturedRankingCardModelInput): FeaturedRankingCardModel | null {
   if (values.length === 0) return null;
 
@@ -77,7 +80,10 @@ export function buildFeaturedRankingCardModel({
 
   return resolveFeaturedRankingCardModel(
     {
-      definition: getFeaturedRankingCardDefinition(rankingKey) ?? representativeDefinition,
+      // 都市別の調査では、導出した「〜が最も多い県は？」が対象 (県庁所在市) とずれる。編集した問いを先に使う (2026-11-02)
+      definition: hook
+        ? { hook }
+        : (getFeaturedRankingCardDefinition(rankingKey) ?? representativeDefinition),
       featuredTop: deriveFeaturedTop(values),
       tileMapSvg,
     },

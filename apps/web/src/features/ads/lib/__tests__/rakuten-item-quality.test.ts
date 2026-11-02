@@ -19,6 +19,11 @@ describe("productQualityReasons", () => {
     expect(productQualityReasons({ ...item, name: "珈琲豆 500g" }, "コーヒー")).toEqual([]);
     expect(productQualityReasons({ ...item, name: "コーヒー ドリップバッグ" }, "コーヒー")).toEqual([]);
   });
+  it("家電の検索語で、家電名を並べただけの付属品を落とし、本体は残す", () => {
+    expect(productQualityReasons({ ...item, name: "A3ホワイトボード シート マグネット 鉄製キャビネット 電気冷蔵庫" }, "電気冷蔵庫")).toContain("product-accessory");
+    expect(productQualityReasons({ ...item, name: "冷蔵庫 2ドア 電気冷蔵庫 一人暮らし 小型" }, "電気冷蔵庫")).toEqual([]);
+  });
+
   it("検索語を含む別の商品 (納豆に対する甘納豆) を落とし、両方を含む商品名は残す", () => {
     expect(productQualityReasons({ ...item, name: "芋甘納豆 100g 甘納豆 ギフト" }, "納豆")).toContain("different-product");
     expect(productQualityReasons({ ...item, name: "国産 小粒納豆 40g×3" }, "納豆")).toEqual([]);

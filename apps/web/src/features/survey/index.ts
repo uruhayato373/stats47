@@ -13,6 +13,7 @@ export {
   type SurveyPageNavLink,
 } from './components/SurveySideNav';
 export {
+  excludeFeaturedQuestions,
   prioritizeSurveyRankings,
   selectSurveyRepresentativeRankings,
   type SurveyRepresentativeCandidate,
