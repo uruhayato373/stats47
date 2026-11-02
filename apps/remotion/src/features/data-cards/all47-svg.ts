@@ -1,6 +1,7 @@
 import { PREF_CAPITAL_COORDS } from '../../../../../packages/migration-flow/src/lib/pref-capitals';
 import { IMAGE_TILE_LAYOUT } from './tile-layout';
 import { prefectureShortName } from '@stats47/area/short-name';
+import { prefectureNameOf } from '@stats47/area';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 
 export interface All47Entry {
@@ -16,6 +17,8 @@ export interface All47Scale {
   /** Class boundaries (colors.length + 1 values), or [min, max] for a continuous scale. */
   boundaries: number[];
   formatBoundary?: (value: number) => string;
+  /** false for open-ended classes (e.g. "under −30%"): the legend labels only the inner boundaries. */
+  labelEnds?: boolean;
 }
 export interface All47Options {
   title: string;
@@ -25,6 +28,8 @@ export interface All47Options {
   note?: string;
   capitalCities?: boolean;
   scale?: All47Scale;
+  formatValue?: (value: number) => string;
+  panel?: All47Panel;
 }
 const escape = (s: string) =>
   s
@@ -70,10 +75,22 @@ function defaultScale(lo: number, hi: number): All47Scale {
   };
 }
 
-export function renderAll47TileSvg(
-  entries: All47Entry[],
-  opts: All47Options
-): string {
+const text = (
+  s: string,
+  x: number,
+  y: number,
+  size: number,
+  maxWidth: number,
+  color = INK,
+  weight = 700,
+  anchor: 'start' | 'middle' | 'end' = 'start'
+) =>
+  `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.min(size, maxWidth / Math.max(1, widthOf(s))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
+const nameOf = (r: All47Entry, capitalCities?: boolean) => capitalCities
+  ? (r.areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name)
+  : prefectureShortName(r.areaName);
+
+function assertAll47(entries: All47Entry[]) {
   const rows = new Map(entries.map((r) => [Number(r.areaCode.slice(0, 2)), r]));
   if (
     entries.length !== 47 ||
@@ -84,38 +101,90 @@ export function renderAll47TileSvg(
     )
   )
     throw new Error('全47県タイル図は47県の重複・欠測なし有限値が必要です');
-  const sorted = [...entries].sort((a, b) => b.value - a.value);
-  const lo = sorted.at(-1)!.value, hi = sorted[0].value;
+  return rows;
+}
+
+/** 47 entries with names only, for slides whose every tile is overridden (e.g. a quiz hint). */
+export function prefectureEntries(): All47Entry[] {
+  return Array.from({ length: 47 }, (_, i) => {
+    const code = String(i + 1).padStart(2, '0');
+    return { areaCode: code + '000', areaName: prefectureNameOf(code) ?? code, value: 0 };
+  });
+}
+
+/** A tile drawn differently from the value colouring (e.g. a quiz hiding candidates with "?"). */
+export interface TileOverride {
+  fill: string;
+  /** One or two centred lines; the first is the larger one when `emphasis` is set. */
+  lines: string[];
+  emphasis?: boolean;
+}
+export interface TileMapBodyOptions {
+  width: number;
+  height: number;
+  scale?: All47Scale;
+  capitalCities?: boolean;
+  /** false draws prefecture names only (cover slides). Default true. */
+  showValues?: boolean;
+  /** Overrides the dataset-precision number (e.g. signed change "+4.1%"). */
+  formatValue?: (value: number) => string;
+  tileOverride?: (areaCode: string) => TileOverride | undefined;
+}
+
+/**
+ * The one tile drawing used by every 4:5 image and Instagram slide: the site layout with strait
+ * rows compressed, colours from the given scale, centred labels in white or ink by contrast.
+ * Returns an SVG fragment in a `width`×`height` box plus the grid geometry for placing panels.
+ */
+export function renderTileMapBody(entries: All47Entry[], opts: TileMapBodyOptions) {
+  const rows = assertAll47(entries);
+  const values = entries.map((r) => r.value);
+  const lo = Math.min(...values), hi = Math.max(...values);
   const scale = opts.scale ?? defaultScale(lo, hi);
   // One precision for the whole map so 33 and 33.8 read as 33.0 and 33.8 (blog-svg-chart-standards §3).
-  const precision = resolveValuePrecision(entries.map((r) => r.value));
-  const fmt = (v: number) => formatValueWithPrecision(v, precision);
-  const fmtBoundary = scale.formatBoundary ?? fmt;
-  const text = (
-    s: string,
-    x: number,
-    y: number,
-    size: number,
-    maxWidth: number,
-    color = INK,
-    weight = 700,
-    anchor: 'start' | 'middle' | 'end' = 'start'
-  ) =>
-    `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.min(size, maxWidth / Math.max(1, widthOf(s))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
-  const nameOf = (r: All47Entry) => opts.capitalCities
-    ? (r.areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name)
-    : prefectureShortName(r.areaName);
-
-  const pitch = Math.min(MAP.width / IMAGE_TILE_LAYOUT.cols, (MAP.bottom - MAP.top) / IMAGE_TILE_LAYOUT.rows);
-  const left = MAP.left + (MAP.width - IMAGE_TILE_LAYOUT.cols * pitch) / 2;
+  const precision = resolveValuePrecision(values);
+  const fmt = opts.formatValue ?? ((v: number) => formatValueWithPrecision(v, precision));
+  const pitch = Math.min(opts.width / IMAGE_TILE_LAYOUT.cols, opts.height / IMAGE_TILE_LAYOUT.rows);
+  const left = (opts.width - IMAGE_TILE_LAYOUT.cols * pitch) / 2;
   const nameSize = Math.round(pitch * 0.27), valueSize = Math.round(pitch * 0.34);
-  const tiles = IMAGE_TILE_LAYOUT.cells.map(({ id, x, y, w, h }) => {
+  const showValues = opts.showValues ?? true;
+  const svg = IMAGE_TILE_LAYOUT.cells.map(({ id, x, y, w, h }) => {
     const r = rows.get(id)!;
-    const fill = scale.colorAt(r.value), ink = textOn(fill);
+    const override = opts.tileOverride?.(r.areaCode);
+    const fill = override?.fill ?? scale.colorAt(r.value), ink = textOn(fill);
     const width = w * pitch - TILE_GAP, height = h * pitch - TILE_GAP;
     const cx = width / 2, cy = height / 2;
-    return `<g transform="translate(${(left + x * pitch).toFixed(1)},${(MAP.top + y * pitch).toFixed(1)})" data-area="${r.areaCode}" data-value="${r.value}"><rect width="${width.toFixed(1)}" height="${height.toFixed(1)}" rx="6" fill="${fill}"/>${text(nameOf(r), cx, cy - 3, nameSize, width - 8, ink, 700, 'middle')}${text(fmt(r.value), cx, cy + valueSize - 1, valueSize, width - 8, ink, 800, 'middle')}</g>`;
+    const lines = override?.lines ?? (showValues ? [nameOf(r, opts.capitalCities), fmt(r.value)] : [nameOf(r, opts.capitalCities)]);
+    const labels = lines.length === 1
+      ? text(lines[0], cx, cy + (override?.emphasis ? valueSize : nameSize) * 0.36, override?.emphasis ? valueSize * 1.3 : nameSize * 1.05, width - 8, ink, override?.emphasis ? 800 : 700, 'middle')
+      : text(lines[0], cx, cy - 3, nameSize, width - 8, ink, 700, 'middle') + text(lines[1], cx, cy + valueSize - 1, valueSize, width - 8, ink, 800, 'middle');
+    return `<g transform="translate(${(left + x * pitch).toFixed(1)},${(y * pitch).toFixed(1)})" data-area="${r.areaCode}" data-value="${r.value}"><rect width="${width.toFixed(1)}" height="${height.toFixed(1)}" rx="6" fill="${fill}"/>${labels}</g>`;
   }).join('');
+  return { svg, pitch, left, scale, format: fmt };
+}
+
+/** The left-top panel: the top three by default, or one headline figure (e.g. the 47-prefecture total). */
+export interface All47Panel {
+  heading: string;
+  value: string;
+  caption?: string;
+  valueColor?: string;
+}
+
+export function renderAll47TileSvg(
+  entries: All47Entry[],
+  opts: All47Options
+): string {
+  const sorted = [...entries].sort((a, b) => b.value - a.value);
+  const body = renderTileMapBody(entries, {
+    width: MAP.width, height: MAP.bottom - MAP.top,
+    scale: opts.scale, capitalCities: opts.capitalCities, formatValue: opts.formatValue,
+  });
+  const { scale, pitch } = body;
+  const left = MAP.left + body.left;
+  const fmt = body.format;
+  const fmtBoundary = scale.formatBoundary ?? fmt;
+  const tiles = `<g transform="translate(${MAP.left},${MAP.top})">${body.svg}</g>`;
 
   // Top three (ties share a rank) in the empty sea area left of Hokkaido.
   const ranked = sorted.map((r) => ({ r, rank: sorted.findIndex((o) => o.value === r.value) + 1 }));
@@ -123,13 +192,19 @@ export function renderAll47TileSvg(
   const panelWidth = left + TOP_PANEL.colLimit * pitch - 40 - MAP.left;
   const panelTop = MAP.top + 24, rowGap = Math.min(76, (IMAGE_TILE_LAYOUT.rowAt(TOP_PANEL.rowLimit) * pitch - 90) / top.length);
   const unit = opts.unit === 'l' ? 'L' : opts.unit;
-  const topPanel = [
-    text(opts.capitalCities ? '上位3市' : '上位3県', MAP.left, panelTop + 24, 26, panelWidth, MUTED, 700),
-    ...top.map(({ r, rank }, i) => {
-      const y = panelTop + 84 + i * rowGap;
-      return `<g data-top="${rank}">${text(String(rank), MAP.left + 18, y, 34, 40, MUTED, 700, 'middle')}${text(nameOf(r), MAP.left + 52, y, 40, 180, INK, 700)}${text(fmt(r.value), MAP.left + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, INK, 800, 'end')}${text(unit, MAP.left + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, MUTED, 700, 'end')}</g>`;
-    }),
-  ].join('');
+  const topPanel = opts.panel
+    ? [
+      text(opts.panel.heading, MAP.left, panelTop + 24, 26, panelWidth, MUTED, 700),
+      `<g data-panel="headline">${text(opts.panel.value, MAP.left, panelTop + 120, 92, panelWidth, opts.panel.valueColor ?? INK, 800)}</g>`,
+      opts.panel.caption ? text(opts.panel.caption, MAP.left, panelTop + 176, 30, panelWidth, INK, 700) : '',
+    ].join('')
+    : [
+      text(opts.capitalCities ? '上位3市' : '上位3県', MAP.left, panelTop + 24, 26, panelWidth, MUTED, 700),
+      ...top.map(({ r, rank }, i) => {
+        const y = panelTop + 84 + i * rowGap;
+        return `<g data-top="${rank}">${text(String(rank), MAP.left + 18, y, 34, 40, MUTED, 700, 'middle')}${text(nameOf(r, opts.capitalCities), MAP.left + 52, y, 40, 180, INK, 700)}${text(fmt(r.value), MAP.left + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, INK, 800, 'end')}${text(unit, MAP.left + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, MUTED, 700, 'end')}</g>`;
+      }),
+    ].join('');
 
   // Legend in the bottom-right corner: class colours with their boundaries (or a gradient for continuous).
   const legendX = MAP.left + MAP.width - LEGEND.width, legendY = MAP.bottom - 64;
@@ -139,6 +214,7 @@ export function renderAll47TileSvg(
     return `<rect x="${(legendX + LEGEND.width * i / steps).toFixed(1)}" y="${legendY}" width="${(LEGEND.width / steps + 0.5).toFixed(1)}" height="${LEGEND.height}" fill="${fill}"/>`;
   }).join('');
   const marks = scale.boundaries.map((value, i, all) => {
+    if (scale.labelEnds === false && (i === 0 || i === all.length - 1)) return '';
     const x = legendX + LEGEND.width * i / (all.length - 1);
     return text(fmtBoundary(value), x, legendY + LEGEND.height + 26, LEGEND.labelSize, 64, MUTED, 400, i === 0 ? 'start' : i === all.length - 1 ? 'end' : 'middle');
   }).join('');

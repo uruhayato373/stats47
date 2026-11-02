@@ -1,25 +1,38 @@
 import React from "react";
 
-import { TILE_GRID_LAYOUT } from "@stats47/visualization";
+import { prefectureShortName } from "@stats47/area/short-name";
+
+import { IMAGE_TILE_LAYOUT } from "@/features/data-cards/tile-layout";
+import { prefectureEntries, renderTileMapBody } from "@/features/data-cards/all47-svg";
 
 import { IG_FONT, IG_HEADLINE_STYLE, IG_SERIES, IgSeriesCard, IgSeriesFrame } from "@/features/ig-series";
 
 import { toPrefCode, type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
 
-const CELL = 46;
-const GAP = 5;
 /** 地図下端とブランド行の間隔（ブランド行は下端から約 76px を占める） */
 const FOOTER_CLEARANCE = 90;
-const minX = Math.min(...TILE_GRID_LAYOUT.map((c) => c.x));
-const maxX = Math.max(...TILE_GRID_LAYOUT.map((c) => c.x + (c.w ?? 1)));
-const maxY = Math.max(...TILE_GRID_LAYOUT.map((c) => c.y + (c.h ?? 1)));
 
 const palette = IG_SERIES.quiz;
 /** タイル地図はカード内（白地）に置くので、塗りはカード基準の色（#111 系）で作る */
 const TILE_MASKED_FILL = palette.accent; // 「?」= 伏せた候補（濃い金）
 const TILE_REVEALED_FILL = palette.bg; // 順位を明かした県（黄）
 const TILE_DEFAULT_FILL = "#F1F5F9"; // それ以外の県（淡いグレー）
-const TILE_DEFAULT_LABEL = "#475569"; // 淡いグレー地に対し contrast 6.92:1
+/** The shared tile map (all47-svg.ts): candidates as "?", revealed ranks, everything else name only. */
+export const HINT_MAP = { width: IMAGE_TILE_LAYOUT.cols * 46, height: IMAGE_TILE_LAYOUT.rows * 46 };
+export function hintTiles(quiz: ResolvedRankingQuiz) {
+  const entries = prefectureEntries();
+  const names = new Map(entries.map((e) => [e.areaCode.slice(0, 2), prefectureShortName(e.areaName)]));
+  return renderTileMapBody(entries, {
+    ...HINT_MAP,
+    tileOverride: (areaCode) => {
+      const code = toPrefCode(areaCode.slice(0, 2));
+      if (quiz.maskedPrefCodes.has(code)) return { fill: TILE_MASKED_FILL, lines: ["?"], emphasis: true };
+      const rank = quiz.revealedRanks.get(code);
+      if (rank !== undefined) return { fill: TILE_REVEALED_FILL, lines: [names.get(code)!, `${rank}位`] };
+      return { fill: TILE_DEFAULT_FILL, lines: [names.get(code)!] };
+    },
+  }).svg;
+}
 
 interface QuizHintSlideProps {
   spec: RankingQuizSpec;
@@ -59,39 +72,10 @@ export const QuizHintSlide: React.FC<QuizHintSlideProps> = ({ spec, quiz }) => (
       style={{ flex: 1, minHeight: 0, marginTop: 22, marginBottom: FOOTER_CLEARANCE, padding: 16 }}
     >
       <svg
-        viewBox={`0 0 ${(maxX - minX) * CELL} ${maxY * CELL}`}
+        viewBox={`0 0 ${HINT_MAP.width} ${HINT_MAP.height}`}
         style={{ width: "100%", height: "100%" }}
-      >
-        {TILE_GRID_LAYOUT.map((cell) => {
-          const code = toPrefCode(cell.id);
-          const w = (cell.w ?? 1) * CELL - GAP;
-          const h = (cell.h ?? 1) * CELL - GAP;
-          const x = (cell.x - minX) * CELL;
-          const y = cell.y * CELL;
-          const masked = quiz.maskedPrefCodes.has(code);
-          const rank = quiz.revealedRanks.get(code);
-          const fill = masked ? TILE_MASKED_FILL : rank !== undefined ? TILE_REVEALED_FILL : TILE_DEFAULT_FILL;
-          const label = masked ? "?" : rank !== undefined ? `${rank}位` : cell.name;
-          const emphasized = masked || rank !== undefined;
-          return (
-            <g key={cell.id}>
-              <rect x={x} y={y} width={w} height={h} rx={8} fill={fill} />
-              <text
-                x={x + w / 2}
-                y={y + h / 2}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontFamily={IG_FONT.body}
-                fontSize={masked ? 34 : rank !== undefined ? 19 : 14}
-                fontWeight={emphasized ? IG_FONT.weight.black : 500}
-                fill={masked ? "#FFFFFF" : rank !== undefined ? "#111111" : TILE_DEFAULT_LABEL}
-              >
-                {label}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
+        dangerouslySetInnerHTML={{ __html: hintTiles(quiz) }}
+      />
     </IgSeriesCard>
   </IgSeriesFrame>
 );

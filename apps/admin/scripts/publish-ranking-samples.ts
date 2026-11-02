@@ -11,6 +11,7 @@ import {
 import { renderRankingBars } from '../lib/template-ranking-bars';
 import { renderRankingTable } from '../lib/template-ranking-table';
 import { renderRankingTileMap } from '../lib/template-ranking-tile-map';
+import { CHANGE_SAMPLE_SOURCES, renderTileChangeSample } from '../lib/template-tile-change';
 import { TREND_SAMPLE_SOURCE, renderTrendLine } from '../lib/template-trend-line';
 import { COMPOSITION_SAMPLE_SOURCE, COMPOSITION_SAMPLE_PROVENANCE, renderCompositionStacked } from '../lib/template-composition-stacked';
 import { RELATIONSHIP_SAMPLE_SOURCES, renderRelationshipScatter } from '../lib/template-relationship-scatter';
@@ -24,15 +25,16 @@ async function main() {
   const { assertMinimalChartCopy } = await import('../../../.claude/scripts/media/lib/image-copy.mjs');
   const { datasetDir } = await import('../../../config/datasets.mjs');
   const args = process.argv.slice(2);
-  const flags = ['--trend', '--composition', '--relationship', '--distribution'];
-  if (args.some((arg) => arg !== '--apply' && !flags.includes(arg))) throw Error('Usage: publish-ranking-samples.ts [--trend | --composition | --relationship | --distribution] [--apply]');
+  const flags = ['--trend', '--composition', '--relationship', '--distribution', '--change'];
+  if (args.some((arg) => arg !== '--apply' && !flags.includes(arg))) throw Error('Usage: publish-ranking-samples.ts [--trend | --composition | --relationship | --distribution | --change] [--apply]');
   const apply = args.includes('--apply');
   const trend = args.includes('--trend');
   const composition = args.includes('--composition');
   const relationship = args.includes('--relationship');
   const distribution = args.includes('--distribution');
+  const change = args.includes('--change');
   if (flags.filter((flag) => args.includes(flag)).length > 1) throw Error('Choose one sample collection.');
-  const collection = trend ? 'trend' : composition ? 'composition' : relationship ? 'relationship' : distribution ? 'distribution' : 'ranking';
+  const collection = trend ? 'trend' : composition ? 'composition' : relationship ? 'relationship' : distribution ? 'distribution' : change ? 'change' : 'ranking';
   const root = path.resolve(__dirname, '../../..');
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
   const sourceFiles = trend ? ['apps/admin/lib/template-trend-line.ts', `${datasetDir('metrics.definitions')}/engel-coefficient.ts`, `${datasetDir('metrics.definitions')}/food-expenditure-total.ts`] : composition ? ['apps/admin/lib/template-composition-stacked.ts'] : relationship ? [
@@ -42,6 +44,10 @@ async function main() {
     'apps/admin/lib/template-distribution-map.ts', 'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
     'apps/remotion/src/features/buzz-map/geo.ts', 'apps/remotion/src/features/buzz-map/tokens.ts',
     'apps/remotion/public/prefecture.topojson', 'apps/remotion/src/features/data-cards/tile-scale.ts',
+  ] : change ? [
+    'apps/admin/lib/template-tile-change.ts', '.claude/scripts/sns/lib/data-card-input.ts',
+    'apps/remotion/src/features/data-cards/TileChange.tsx', 'apps/remotion/src/features/data-cards/all47-svg.ts',
+    'apps/remotion/src/features/data-cards/tile-layout.ts', `${datasetDir('metrics.definitions')}/total-population.ts`,
   ] : [
     'apps/admin/lib/template-ranking-data.ts', 'apps/admin/lib/template-ranking-bars.ts',
     'apps/admin/lib/template-ranking-table.ts', 'apps/admin/lib/template-ranking-tile-map.ts',
@@ -69,13 +75,15 @@ async function main() {
   const modifiedSources = execFileSync('git', ['status', '--porcelain', '--', ...sourceFiles], { cwd: root, encoding: 'utf8' }).trim().length > 0;
   // A relationship sample joins two fixed snapshots; every other collection reads one.
   const sourceReferences = relationship ? [RELATIONSHIP_SAMPLE_SOURCES.x, RELATIONSHIP_SAMPLE_SOURCES.y]
+    : change ? [CHANGE_SAMPLE_SOURCES.item, CHANGE_SAMPLE_SOURCES.values]
     : [trend ? TREND_SAMPLE_SOURCE : composition ? COMPOSITION_SAMPLE_SOURCE : RANKING_SAMPLE_SOURCE];
   const snapshots = await Promise.all(sourceReferences.map((reference) => readVerified(reference)));
   const raws = snapshots.map((snapshot) => JSON.parse(snapshot.toString('utf8')));
   const sourceEvidence = composition ? await readVerified(COMPOSITION_SAMPLE_PROVENANCE) : undefined;
-  const input = relationship ? { x: raws[0], y: raws[1] } : trend || composition ? raws[0] : rankingInputFromStats(raws[0]);
+  const input = relationship ? { x: raws[0], y: raws[1] } : change ? { item: raws[0], values: raws[1] } : trend || composition ? raws[0] : rankingInputFromStats(raws[0]);
   const renderers = trend ? { 'engel-trend': renderTrendLine } : composition ? { 'liquor-breakdown': renderCompositionStacked }
     : relationship ? { 'temperature-kerosene': renderRelationshipScatter } : distribution ? { 'maximum-temperature-map': renderDistributionMap }
+    : change ? { 'population-change': renderTileChangeSample }
     : { bars: renderRankingBars, table: renderRankingTable, 'tile-map': renderRankingTileMap };
   // Validate every image before writing any object or changing the active references.
   const outputs = [];
@@ -103,7 +111,7 @@ async function main() {
     const png = await storeVerified(store, candidateKey(sha(output.png), 'png'), output.png);
     const provenance = Buffer.from(JSON.stringify({
       schemaVersion: 1, sampleId: collection === 'ranking' ? 'maximum-temperature-' + output.kind : output.kind,
-      input: relationship ? savedInputs : savedInputs[0], source: relationship ? sourceReferences : sourceReferences[0],
+      input: relationship || change ? savedInputs : savedInputs[0], source: relationship || change ? sourceReferences : sourceReferences[0],
       sourceEvidence: savedEvidence, svg, png,
       width: 1080, height: 1350, media: ['note', 'web', 'x', 'instagram'],
       renderer: { commit, modifiedSources, sources, versions: sharp.versions, platform: process.platform },

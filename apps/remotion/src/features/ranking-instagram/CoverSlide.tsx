@@ -1,7 +1,6 @@
 import { resolveColorEncoding } from '@stats47/types';
 import React, { useMemo } from "react";
 import { AbsoluteFill } from "remotion";
-import { TILE_GRID_LAYOUT } from "@stats47/visualization";
 import * as chromatic from "d3-scale-chromatic";
 
 import {
@@ -15,6 +14,9 @@ import {
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { SITE } from "@stats47/types";
 import { to2DigitPrefCode } from "@stats47/area";
+import { prefectureShortName } from "@stats47/area/short-name";
+import { prefectureEntries, renderTileMapBody } from "../data-cards/all47-svg";
+import { IMAGE_TILE_LAYOUT } from "../data-cards/tile-layout";
 
 /** D3 の interpolator 関数名から関数を取得 */
 function getInterpolator(name: string): (t: number) => string {
@@ -22,6 +24,8 @@ function getInterpolator(name: string): (t: number) => string {
   if (typeof fn === "function") return fn as (t: number) => string;
   return chromatic.interpolateBlues;
 }
+
+const SHORT_NAMES = new Map(prefectureEntries().map((e) => [e.areaCode, prefectureShortName(e.areaName)]));
 
 interface CoverSlideProps {
   meta: RankingMeta;
@@ -45,29 +49,12 @@ interface CoverSlideProps {
 // ---------------------------------------------------------------------------
 
 const TILE_CELL = 56;
-const TILE_GAP = 4;
-const TILE_RADIUS = 6;
-
-const tileMinX = Math.min(...TILE_GRID_LAYOUT.map((c) => c.x));
-const tileMaxX = Math.max(...TILE_GRID_LAYOUT.map((c) => c.x + (c.w ?? 1)));
-const tileMaxY = Math.max(...TILE_GRID_LAYOUT.map((c) => c.y + (c.h ?? 1)));
-const tileCols = tileMaxX - tileMinX;
-const tileRows = tileMaxY;
-const tileSvgW = tileCols * TILE_CELL;
-const tileSvgH = tileRows * TILE_CELL;
+const tileSvgW = IMAGE_TILE_LAYOUT.cols * TILE_CELL;
+const tileSvgH = IMAGE_TILE_LAYOUT.rows * TILE_CELL;
 
 /** 都道府県コードを2桁に正規化 */
 /** `@stats47/area` の単一実装 ("01000" / "13" / 1 → "01" / "13" / "01") */
 const normalizePrefId = to2DigitPrefCode;
-
-/** 背景色からテキスト色を自動判定 */
-function getContrastTextColor(bgColor: string): string {
-  const match = bgColor.match(/\d+/g);
-  if (!match || match.length < 3) return "#FFFFFF";
-  const [r, g, b] = match.map(Number);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? "#0F172A" : "#FFFFFF";
-}
 
 /**
  * カルーセル表紙スライド (1080x1350, 4:5)
@@ -115,6 +102,21 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
     const config = meta.presentation ?? {colorSchemeType, divergingMidpoint: divergingMidpointValue ?? 'zero'};
     return resolveColorEncoding(config, values, getInterpolator(meta.presentation?.colorScheme ?? colorScheme), '#e0e0e0').colorAtValue;
   }, [allEntries, colorScheme, colorSchemeType, divergingMidpointValue, meta.presentation]);
+
+  // 共通のタイル地図 (data-cards/all47-svg.ts) に名前だけを載せる
+  const tileSvg = useMemo(() => {
+    const entries = prefectureEntries();
+    const colorAt = (areaCode: string) => {
+      const entry = entryMap?.get(normalizePrefId(areaCode));
+      return entry && getColor ? getColor(entry.value) : fallbackColor;
+    };
+    return renderTileMapBody(entries, {
+      width: tileSvgW,
+      height: tileSvgH,
+      showValues: false,
+      tileOverride: (areaCode) => ({ fill: colorAt(areaCode), lines: [SHORT_NAMES.get(areaCode) ?? ""] }),
+    }).svg;
+  }, [entryMap, getColor, fallbackColor]);
 
   return (
     <AbsoluteFill
@@ -219,46 +221,8 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
             viewBox={`0 0 ${tileSvgW} ${tileSvgH}`}
             width={tileSvgW * 1.0}
             height={tileSvgH * 1.0}
-          >
-            {TILE_GRID_LAYOUT.map((cell) => {
-              const w = (cell.w ?? 1) * TILE_CELL;
-              const h = (cell.h ?? 1) * TILE_CELL;
-              const x = (cell.x - tileMinX) * TILE_CELL;
-              const y = cell.y * TILE_CELL;
-              const code = normalizePrefId(cell.id);
-              const entry = entryMap?.get(code);
-              const fill = entry && getColor ? getColor(entry.value) : fallbackColor;
-              const textColor = "#FFFFFF";
-              const nameLen = cell.name.length;
-              const fontSize = nameLen >= 3 ? 13 : 16;
-              return (
-                <g key={cell.id}>
-                  <rect
-                    x={x + TILE_GAP / 2}
-                    y={y + TILE_GAP / 2}
-                    width={w - TILE_GAP}
-                    height={h - TILE_GAP}
-                    rx={TILE_RADIUS}
-                    ry={TILE_RADIUS}
-                    fill={fill}
-                  />
-                  <text
-                    x={x + w / 2}
-                    y={y + h / 2}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill={textColor}
-                    fontSize={fontSize}
-                    fontWeight={700}
-                    fontFamily={FONT.family}
-                    style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.5))" }}
-                  >
-                    {cell.name}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
+            dangerouslySetInnerHTML={{ __html: tileSvg }}
+          />
         </div>
 
         {/* 下部テキスト */}

@@ -5,6 +5,7 @@ import { TREND_SAMPLE_ASSETS } from '@/lib/template-trend-assets';
 import { COMPOSITION_SAMPLE_ASSETS } from '@/lib/template-composition-assets';
 import { RELATIONSHIP_SAMPLE_ASSETS } from '@/lib/template-relationship-assets';
 import { DISTRIBUTION_SAMPLE_ASSETS } from '@/lib/template-distribution-assets';
+import { CHANGE_SAMPLE_ASSETS } from '@/lib/template-change-assets';
 
 const SAMPLE_ASSETS = {
   'maximum-temperature-bars': RANKING_SAMPLE_ASSETS.bars,
@@ -14,6 +15,7 @@ const SAMPLE_ASSETS = {
   ...COMPOSITION_SAMPLE_ASSETS,
   ...RELATIONSHIP_SAMPLE_ASSETS,
   ...DISTRIBUTION_SAMPLE_ASSETS,
+  ...CHANGE_SAMPLE_ASSETS,
 };
 
 // Read the saved sample version. Missing/changed objects fail, never silently regenerate.
