@@ -43,6 +43,17 @@ export interface StatisticalSample {
 /** A small curated sample per form, not a menu of every article using the form. */
 export const STATISTICAL_SAMPLES: StatisticalSample[] = [
   {
+    id: 'maximum-temperature-bars',
+    templateId: 'bar',
+    purpose: 'ranking',
+    statistic: '都道府県別の最高気温（2024年）',
+    imageId: 'IMG-37a9dcaff111583e70fc2cf7',
+    renderer: 'ranking-bars',
+    referenceImages: [
+      { imageId: 'IMG-37a9dcaff111583e70fc2cf7', label: 'note：最高気温（公開済み）' },
+      { imageId: 'IMG-0c14873010e41a46fd627e96', label: 'Instagram：副業者の割合（公開済み）' },
+    ],
+  },  {
     id: 'household-nagoya',
     templateId: 'bar',
     purpose: 'comparison',
@@ -66,18 +77,7 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     label: '札幌市',
     topic: 'a-kakei-hokkaido',
   },
-  {
-    id: 'maximum-temperature-bars',
-    templateId: 'bar',
-    purpose: 'ranking',
-    statistic: '都道府県別の最高気温（2024年）',
-    imageId: 'IMG-37a9dcaff111583e70fc2cf7',
-    renderer: 'ranking-bars',
-    referenceImages: [
-      { imageId: 'IMG-37a9dcaff111583e70fc2cf7', label: 'note：最高気温（公開済み）' },
-      { imageId: 'IMG-0c14873010e41a46fd627e96', label: 'Instagram：副業者の割合（公開済み）' },
-    ],
-  },
+
   {
     id: 'maximum-temperature-table',
     templateId: 'table',

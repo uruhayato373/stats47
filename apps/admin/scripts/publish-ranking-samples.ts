@@ -77,9 +77,19 @@ async function main() {
   const sourceReferences = relationship ? [RELATIONSHIP_SAMPLE_SOURCES.x, RELATIONSHIP_SAMPLE_SOURCES.y]
     : change ? [CHANGE_SAMPLE_SOURCES.item, CHANGE_SAMPLE_SOURCES.values]
     : [trend ? TREND_SAMPLE_SOURCE : composition ? COMPOSITION_SAMPLE_SOURCE : RANKING_SAMPLE_SOURCE];
-  const snapshots = await Promise.all(sourceReferences.map((reference) => readVerified(reference)));
+  // A public snapshot can be refreshed after a sample was pinned; the exact pinned bytes stay in the
+  // private input copy saved by the previous publish, verified by the same SHA-256.
+  const readPinned = async (reference: { key: string; sha256: string; bytes: number }) => {
+    try { return await readVerified(reference); } catch (error) {
+      const copy = await mediaStore().get(inputKey(reference.sha256));
+      if (!copy || copy.length !== reference.bytes || sha(copy) !== reference.sha256) throw error;
+      console.log(JSON.stringify({ pinnedInputFrom: inputKey(reference.sha256), publicKey: reference.key }));
+      return copy;
+    }
+  };
+  const snapshots = await Promise.all(sourceReferences.map((reference) => readPinned(reference)));
   const raws = snapshots.map((snapshot) => JSON.parse(snapshot.toString('utf8')));
-  const sourceEvidence = composition ? await readVerified(COMPOSITION_SAMPLE_PROVENANCE) : undefined;
+  const sourceEvidence = composition ? await readPinned(COMPOSITION_SAMPLE_PROVENANCE) : undefined;
   const input = relationship ? { x: raws[0], y: raws[1] } : change ? { item: raws[0], values: raws[1] } : trend || composition ? raws[0] : rankingInputFromStats(raws[0]);
   const renderers = trend ? { 'engel-trend': renderTrendLine } : composition ? { 'liquor-breakdown': renderCompositionStacked }
     : relationship ? { 'temperature-kerosene': renderRelationshipScatter } : distribution ? { 'maximum-temperature-map': renderDistributionMap }
