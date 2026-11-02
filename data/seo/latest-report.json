@@ -1,48 +1,30 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-01",
+  "date": "2026-11-02",
   "period": {
-    "periodStart": "2026-10-23",
-    "periodEnd": "2026-10-29",
+    "periodStart": "2026-10-24",
+    "periodEnd": "2026-10-30",
     "windowDays": 7
   },
-  "inputHash": "9ad00733f11f087b4f621e455e962b332bd48f10c43e7c2f4d0aa66082682fdd",
+  "inputHash": "3a8ddf32e15ec23a50bc92ca2aed8fe59ed91dd12f49f6b88ee70910fa4cc33f",
   "movements": [
     {
       "keyword": "苫小牧市 人口",
       "targetPath": "/areas/01000/cities/01213",
       "before": 74,
-      "after": 10.15,
+      "after": 10.2,
       "beforeImpressions": 1,
-      "impressions": 20,
-      "change": 63.85
+      "impressions": 30,
+      "change": 63.8
     },
     {
       "keyword": "警察 官 年収 ランキング",
       "targetPath": "/ranking/avg-salary-police-prefecture",
       "before": 68,
-      "after": 5.285714285714286,
+      "after": 6.555555555555555,
       "beforeImpressions": 1,
-      "impressions": 7,
-      "change": 62.714285714285715
-    },
-    {
-      "keyword": "地方交付税交付金 ランキング",
-      "targetPath": "/ranking/local-tax-prefecture",
-      "before": 79,
-      "after": 19,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 60
-    },
-    {
-      "keyword": "財政力指数",
-      "targetPath": "/blog/fiscal-self-reliance-gap",
-      "before": 60,
-      "after": 3,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 57
+      "impressions": 9,
+      "change": 61.44444444444444
     },
     {
       "keyword": "高校 教師 年収",
@@ -57,10 +39,10 @@
       "keyword": "尾鷲市 人口",
       "targetPath": "/areas/24000/cities/24209",
       "before": 64,
-      "after": 8.421052631578949,
+      "after": 8.333333333333332,
       "beforeImpressions": 1,
-      "impressions": 19,
-      "change": 55.578947368421055
+      "impressions": 24,
+      "change": 55.66666666666667
     },
     {
       "keyword": "高校教師年収",
@@ -81,22 +63,40 @@
       "change": 45
     },
     {
-      "keyword": "東成瀬村 人口",
-      "targetPath": "/areas/05000/cities/05464",
-      "before": 53,
-      "after": 8.615384615384615,
+      "keyword": "岡山市 人工",
+      "targetPath": "/areas/33000/cities/33100",
+      "before": 52,
+      "after": 10,
       "beforeImpressions": 1,
-      "impressions": 13,
-      "change": 44.38461538461539
+      "impressions": 1,
+      "change": 42
     },
     {
-      "keyword": "出生率 日本 ランキング 市町村",
-      "targetPath": "/municipalities/ranking/births",
-      "before": 51,
-      "after": 7,
+      "keyword": "甲府 人流",
+      "targetPath": "/areas/19000/cities/19201",
+      "before": 53,
+      "after": 15,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 38
+    },
+    {
+      "keyword": "能代市 人口",
+      "targetPath": "/areas/05000/cities/05202",
+      "before": 48,
+      "after": 10.666666666666666,
       "beforeImpressions": 1,
       "impressions": 3,
-      "change": 44
+      "change": 37.333333333333336
+    },
+    {
+      "keyword": "私立高校教師 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 43,
+      "after": 80,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -37
     }
   ],
   "verdicts": [
@@ -107,11 +107,11 @@
     }
   ],
   "selected": {
-    "keyword": "岡山市 人口",
-    "targetPath": "/areas/33000/cities/33100",
-    "rank": 8.339089481946624,
-    "impressions": 637,
-    "clicks": 1,
+    "keyword": "酷暑日の都道府県数",
+    "targetPath": "/blog/extreme-heat-days-prefecture",
+    "rank": 9.076109936575053,
+    "impressions": 946,
+    "clicks": 0,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
