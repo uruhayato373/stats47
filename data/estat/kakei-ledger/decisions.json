@@ -485,6 +485,14 @@
       "reason": "基礎的支出・選択的支出の組替区分 (分析用)。ランキングとしての読者価値が低いと判断",
       "decidedAt": "2026-07-10",
       "decidedBy": "kakei-topic-catalog (2026-07-10 の判断。2026-11-02 に論点カタログの廃止に伴い移記)"
+    },
+    {
+      "code": "050600090",
+      "measure": "amount",
+      "status": "planned",
+      "reason": "2025年改定でネクタイ・ストッキングなどを含む範囲に広がった「659 他の被服のその他」。旧範囲の指標 other-clothing-misc-consumption-expenditure は2024年までで接続しないので、新しい範囲の2025年以降を別指標にする候補",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "data-ingester (2026-11-02 新旧表の照合で範囲の変更を確認)"
     }
   ]
 }

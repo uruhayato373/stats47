@@ -1442,6 +1442,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "prefecture-deviation-2018-a15",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "指標 current-savings-balance-multi-person-households は最新年が 2014 年の古い系列。貯蓄と負債テーマには同じ貯蓄現在高の新しい系列 financial-assets-balance-multi-person-households (2019 年) が載っているので重ねない",
+      "decidedAt": "2026-11-02",
+      "decidedBy": "theme-designer"
+    },
+    {
       "analysis": "prefecture-deviation-2018-a17",
       "channel": "note",
       "status": "planned",

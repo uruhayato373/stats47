@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-11-02T02:26:08.320Z",
+ "generatedAt": "2026-11-02T03:01:30.398Z",
  "source": {
   "statCode": "00200561",
   "catalogGeneratedAt": "2026-11-02T00:24:21.612Z",
@@ -26,13 +26,14 @@
     "total": 689,
     "byStatus": {
      "excluded": 60,
-     "undecided": 115,
-     "adopted": 514
+     "undecided": 114,
+     "adopted": 514,
+     "planned": 1
     },
     "undecidedByKind": {
      "other": 7,
      "group": 106,
-     "item": 2
+     "item": 1
     }
    },
    "quantity": {
@@ -5261,12 +5262,7 @@
     }
    ],
    "metrics": [
-    "bread-consumption-quantity",
-    "fresh-fruit-consumption-quantity",
-    "fresh-seafood-consumption-quantity",
-    "fresh-vegetables-consumption-quantity",
     "necktie-consumption-quantity",
-    "shellfish-consumption-quantity",
     "womens-stockings-consumption-quantity"
    ],
    "status": "adopted",
@@ -5468,7 +5464,6 @@
     }
    ],
    "metrics": [
-    "information-communication-expenditure",
     "necktie-consumption-expenditure",
     "other-clothing-misc-consumption-expenditure",
     "womens-stockings-consumption-expenditure"
@@ -5995,6 +5990,7 @@
     "housing-expenditure-total",
     "icecream-consumption-expenditure",
     "infant-clothes-consumption-expenditure",
+    "information-communication-expenditure",
     "insecticide-consumption-expenditure",
     "instant-noodles-consumption-expenditure",
     "interior-decoration-consumption-expenditure",
@@ -6377,6 +6373,7 @@
     "blouse-consumption-quantity",
     "bonito-consumption-quantity",
     "boys-school-uniform-consumption-quantity",
+    "bread-consumption-quantity",
     "broccoli-consumption-quantity",
     "burdock-consumption-quantity",
     "butter-consumption-quantity",
@@ -6413,8 +6410,11 @@
     "electricity-consumption-quantity",
     "enoki-consumption-quantity",
     "flounder-consumption-quantity",
+    "fresh-fruit-consumption-quantity",
+    "fresh-seafood-consumption-quantity",
     "fresh-shiitake-consumption-quantity",
     "fresh-udon-soba-consumption-quantity",
+    "fresh-vegetables-consumption-quantity",
     "freshwater-clam-consumption-quantity",
     "futon-consumption-quantity",
     "game-console-consumption-quantity",
@@ -6510,6 +6510,7 @@
     "school-bag-consumption-quantity",
     "sea-bream-consumption-quantity",
     "sheets-consumption-quantity",
+    "shellfish-consumption-quantity",
     "shimeji-consumption-quantity",
     "shochu-consumption-quantity",
     "shrimp-consumption-quantity",
@@ -13768,8 +13769,8 @@
    "parentCode": "050600000",
    "unit": "円",
    "metrics": [],
-   "status": "undecided",
-   "reason": null
+   "status": "planned",
+   "reason": "2025年改定でネクタイ・ストッキングなどを含む範囲に広がった「659 他の被服のその他」。旧範囲の指標 other-clothing-misc-consumption-expenditure は2024年までで接続しないので、新しい範囲の2025年以降を別指標にする候補"
   },
   {
    "code": "050700000",
@@ -14941,6 +14942,10 @@
    "unit": "円",
    "metrics": [
     {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
+    {
      "key": "landline-bill-consumption-expenditure",
      "via": "single"
     }
@@ -14958,6 +14963,10 @@
    "parentCode": "070300000",
    "unit": "円",
    "metrics": [
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
     {
      "key": "mobile-phone-bill-consumption-expenditure",
      "via": "single"
@@ -16388,6 +16397,10 @@
    "unit": "円",
    "metrics": [
     {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
+    {
      "key": "nhk-fee-consumption-expenditure",
      "via": "single"
     }
@@ -16408,6 +16421,10 @@
     {
      "key": "cable-tv-fee-consumption-expenditure",
      "via": "single"
+    },
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -16423,6 +16440,10 @@
    "parentCode": "090441000",
    "unit": "円",
    "metrics": [
+    {
+     "key": "information-communication-expenditure",
+     "via": "sum"
+    },
     {
      "key": "other-broadcast-fee-consumption-expenditure",
      "via": "single"
@@ -18512,6 +18533,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "bread-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "white-bread-consumption-quantity",
      "via": "single"
     }
@@ -18529,6 +18554,10 @@
    "parentCode": "010120000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "bread-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-bread-consumption-quantity",
      "via": "single"
@@ -18780,6 +18809,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "tuna-consumption-quantity",
      "via": "single"
     }
@@ -18798,6 +18831,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "horse-mackerel-consumption-quantity",
      "via": "single"
     }
@@ -18815,6 +18852,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "sardine-consumption-quantity",
      "via": "single"
@@ -18836,6 +18877,10 @@
     {
      "key": "bonito-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -18854,6 +18899,10 @@
     {
      "key": "flounder-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -18869,6 +18918,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "salmon-consumption-quantity",
      "via": "single"
@@ -18888,6 +18941,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "mackerel-consumption-quantity",
      "via": "single"
     }
@@ -18905,6 +18962,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "saury-consumption-quantity",
      "via": "single"
@@ -18924,6 +18985,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "sea-bream-consumption-quantity",
      "via": "single"
     }
@@ -18941,6 +19006,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "yellowtail-consumption-quantity",
      "via": "single"
@@ -18960,6 +19029,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "squid-consumption-quantity",
      "via": "single"
     }
@@ -18978,6 +19051,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "octopus-consumption-quantity",
      "via": "single"
     }
@@ -18995,6 +19072,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "shrimp-consumption-quantity",
      "via": "single"
@@ -19016,6 +19097,10 @@
     {
      "key": "crab-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19031,6 +19116,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-fresh-fish-consumption-quantity",
      "via": "single"
@@ -19049,6 +19138,10 @@
    "parentCode": "010211000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "sashimi-platter-consumption-quantity",
      "via": "single"
@@ -19083,6 +19176,14 @@
     {
      "key": "clam-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19099,8 +19200,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "freshwater-clam-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19117,8 +19226,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "oyster-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19135,8 +19252,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "scallop-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19153,8 +19278,16 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-seafood-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "other-shellfish-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "shellfish-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19544,6 +19677,10 @@
     {
      "key": "cabbage-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19559,6 +19696,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "spinach-consumption-quantity",
      "via": "single"
@@ -19580,6 +19721,10 @@
     {
      "key": "chinese-cabbage-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19595,6 +19740,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "leek-consumption-quantity",
      "via": "single"
@@ -19613,6 +19762,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "lettuce-consumption-quantity",
      "via": "single"
@@ -19634,6 +19787,10 @@
     {
      "key": "broccoli-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19652,6 +19809,10 @@
     {
      "key": "bean-sprouts-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19667,6 +19828,10 @@
    "parentCode": "010511000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-leafy-vegetables-consumption-quantity",
      "via": "single"
@@ -19699,6 +19864,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "sweet-potato-consumption-quantity",
      "via": "single"
     }
@@ -19717,6 +19886,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "potato-consumption-quantity",
      "via": "single"
     }
@@ -19734,6 +19907,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "taro-consumption-quantity",
      "via": "single"
@@ -19755,6 +19932,10 @@
     {
      "key": "daikon-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19773,6 +19954,10 @@
     {
      "key": "carrot-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19791,6 +19976,10 @@
     {
      "key": "burdock-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19806,6 +19995,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "onion-consumption-quantity",
      "via": "single"
@@ -19824,6 +20017,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "lotus-root-consumption-quantity",
      "via": "single"
@@ -19845,6 +20042,10 @@
     {
      "key": "bamboo-shoot-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19860,6 +20061,10 @@
    "parentCode": "010512000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-root-vegetables-consumption-quantity",
      "via": "single"
@@ -19892,6 +20097,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "green-beans-consumption-quantity",
      "via": "single"
     }
@@ -19909,6 +20118,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "pumpkin-consumption-quantity",
      "via": "single"
@@ -19930,6 +20143,10 @@
     {
      "key": "cucumber-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19948,6 +20165,10 @@
     {
      "key": "eggplant-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -19963,6 +20184,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "tomato-consumption-quantity",
      "via": "single"
@@ -19981,6 +20206,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "green-pepper-consumption-quantity",
      "via": "single"
@@ -20002,6 +20231,10 @@
     {
      "key": "fresh-shiitake-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20017,6 +20250,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "shimeji-consumption-quantity",
      "via": "single"
@@ -20038,6 +20275,10 @@
     {
      "key": "enoki-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20053,6 +20294,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-mushroom-consumption-quantity",
      "via": "single"
@@ -20071,6 +20316,10 @@
    "parentCode": "010513000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-vegetables-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-vegetables-consumption-quantity",
      "via": "single"
@@ -20249,6 +20498,10 @@
     {
      "key": "apple-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20264,6 +20517,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "mandarin-consumption-quantity",
      "via": "single"
@@ -20283,6 +20540,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "orange-consumption-quantity",
      "via": "single"
     }
@@ -20300,6 +20561,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-citrus-consumption-quantity",
      "via": "single"
@@ -20319,6 +20584,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "pear-consumption-quantity",
      "via": "single"
     }
@@ -20336,6 +20605,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "grape-consumption-quantity",
      "via": "single"
@@ -20355,6 +20628,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "persimmon-consumption-quantity",
      "via": "single"
     }
@@ -20372,6 +20649,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "peach-consumption-quantity",
      "via": "single"
@@ -20391,6 +20672,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "watermelon-consumption-quantity",
      "via": "single"
     }
@@ -20409,6 +20694,10 @@
    "unit": "1g",
    "metrics": [
     {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
+    {
      "key": "melon-consumption-quantity",
      "via": "single"
     }
@@ -20426,6 +20715,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "strawberry-consumption-quantity",
      "via": "single"
@@ -20447,6 +20740,10 @@
     {
      "key": "banana-consumption-quantity",
      "via": "single"
+    },
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
     }
    ],
    "status": "adopted",
@@ -20462,6 +20759,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "kiwi-consumption-quantity",
      "via": "single"
@@ -20480,6 +20781,10 @@
    "parentCode": "010610000",
    "unit": "1g",
    "metrics": [
+    {
+     "key": "fresh-fruit-consumption-quantity",
+     "via": "sum"
+    },
     {
      "key": "other-fresh-fruit-consumption-quantity",
      "via": "single"

@@ -46,6 +46,11 @@ export const HOUSEHOLD_FOOD_SPENDING_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "engel-coefficient",
+      "shortLabel": "エンゲル係数",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "fresh-seafood-consumption-quantity",
       "shortLabel": "生鮮魚介の購入量",
       "role": "secondary"

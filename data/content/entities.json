@@ -1709,6 +1709,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:engel-coefficient",
+      "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:enterprise-net-value-added-all-industries",
       "to": "theme:local-economy",
       "relation": "contains"

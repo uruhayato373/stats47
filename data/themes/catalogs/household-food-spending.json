@@ -126,6 +126,23 @@
       }
     },
     {
+      "rankingKey": "engel-coefficient",
+      "shortLabel": "エンゲル係数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-11-02",
+        "rationale": "消費支出に占める食料費の割合で、食料費と消費支出総額の関係を 1 つの値で比べる。高い都市には食の負担が重い場合だけでなく外食や高級食材に使う場合も含まれ、高い＝暮らしが苦しいとは読めない。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "家計のうち食べることに回る割合が大きい都市はどこか",
+        "targetReaderOrDecision": "生活費の配分を都市間で比べる読者"
+      }
+    },
+    {
       "rankingKey": "fresh-seafood-consumption-quantity",
       "shortLabel": "生鮮魚介の購入量",
       "role": "secondary",
@@ -927,6 +944,16 @@
       ]
     },
     {
+      "key": "household-engel",
+      "title": "エンゲル係数",
+      "rankingKeys": [
+        "engel-coefficient"
+      ],
+      "defaultCheckedKeys": [
+        "engel-coefficient"
+      ]
+    },
+    {
       "key": "rice",
       "title": "米",
       "rankingKeys": [
@@ -1328,7 +1355,8 @@
       "title": "暮らし全体と食料費",
       "description": "消費支出総額と食料費を、県庁所在市の二人以上世帯で比べます。県全体の値ではありません。",
       "metricGroupKeys": [
-        "household-totals"
+        "household-totals",
+        "household-engel"
       ]
     },
     {
