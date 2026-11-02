@@ -265,15 +265,25 @@ async function fetchText(key: string): Promise<string | null> {
     const target = path.join(ROOT, '.local/r2', key);
     return fs.existsSync(target) ? fs.readFileSync(target, 'utf8') : null;
   }
-  try {
-    const response = await fetch(noCache(`${R2}/${key}`), {
-      signal: AbortSignal.timeout(20_000),
-    });
-    return response.ok ? await response.text() : null;
-  } catch {
-    return null;
+  // Only a 404 means "absent". A timeout, network error or 5xx used to return null too, so a
+  // flaky connection counted existing charts as missing-lineage (41 → 11 → 6 across reruns,
+  // 2026-11-02). Retry those, and fail the audit rather than record a false gap.
+  let lastError = '';
+  for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+    try {
+      const response = await fetch(noCache(`${R2}/${key}`), {
+        signal: AbortSignal.timeout(20_000),
+      });
+      if (response.ok) return await response.text();
+      if (response.status === 404) return null;
+      lastError = `HTTP ${response.status}`;
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+    }
   }
+  throw new Error(`R2 の取得に ${FETCH_ATTEMPTS} 回失敗: ${key} (${lastError})`);
 }
+const FETCH_ATTEMPTS = 3;
 
 async function fetchJson(key: string): Promise<unknown | null> {
   const text = await fetchText(key);

@@ -233,12 +233,14 @@ updated: 2026-11-01
 - **次**: ① テーマの分類の状態を full audit で作り直す ② `cc-estat-17-edu-slope-graph` の出典 (source.json) を補うか、sitemap・tag の生成物を作り直す ③ `npm run preflight:pr` がローカルで通ることを確かめて push。
 - **完了条件**: develop の Quality Gate が緑になる。
 - **是正 (2026-11-02)**: ① Survey Taxonomy は `audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json` でランキング・テーマの部分だけ作り直した（差分2行。ブログの部分は前回の記録のまま）。「blog sourceless」の行は上限内の参考表示で、止めていた原因ではなかった ② Sitemap / Tag Keys は5本のうち `generate-ranking-prominence.ts` だけが古く、作り直した。ローカルの `npm run preflight:pr` で両ゲートが ✅（残る Unit Semantics Mirror はこの PC の改行コードだけの差で、再生成しても git 差分なし）。push 後の CI が緑になれば削除してよい。
+- **完了の証拠 (2026-11-02)**: 家計のテーマ修正 (`household-food-spending.json`) で再び drift したため同じ手順で作り直して push (`2b91c1948`)。Develop Quality Gate の run 41389375017 が 4 ジョブとも success。週次レビューで削除してよい。再発防止: テーマのカタログを変えるコミットで `audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json` も作り直す。
 
-### [BLOG-CHART-LINEAGE-R2-01] 公開ブログ37記事の図で survey の系譜が R2 から辿れない (missing-lineage 37・unresolved 4)
+### [BLOG-CHART-LINEAGE-R2-01] 今日の家計調査の新記事の図6枚で survey が判定できない (unresolved 6)
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 
-- **証拠 (2026-11-02)**: R2 を読むオンラインの `audit-survey-taxonomy.ts --json` を実行すると、ブログの図で missing-lineage 37・unresolved 4 が出て、縮小専用の上限 (0) を超える。対象は dual-income-reversal・alcohol-prefecture-map・advancement-plus-employment-rate-prefecture・consumer-price-regional-gap・air-conditioner-consumption-quantity-prefecture-gap など以前からの記事。コミット済みの state (前回生成) では 0 件なので、前回の生成以後に R2 の図の source.json が欠けたか、判定側が変わった可能性がある (原因は未確認)。
-- **次**: 1記事を選び R2 の `app/blog/<slug>/data/*.source.json` の有無と中身を確かめ、欠けた時期を `git log`・publish-blog の run から特定する。補えるなら source.json を補い、オンラインの監査で 0 に戻ったことを確かめてから state を作り直す。
+- **原因と是正 (2026-11-02)**: 最初に見えた missing-lineage 37 は誤検知だった。監査の `fetchText` が 404 と通信の失敗・時間切れ・5xx を区別せず null を返していたため、社内プロキシ経由の取得が揺れると実在する図まで「系譜なし」に数えていた（実行ごとに 41 → 11 → 6 と変動。dual-income-reversal・alcohol-prefecture-map・consumer-price-regional-gap の source.json はすべて R2 で HTTP 200）。404 だけを「無し」とし、それ以外は3回やり直して取れなければ監査を止めるように直した。修正後は2回続けて missing-lineage 0・unresolved 6 で一致。
+- **残り (unresolved 6)**: 同日に別作業で追加・書き直した家計調査の記事の図。`bread-city-ranking-kyoto-quiz/bread-city-ranking`、`frozen-gyoza-spending-prefecture-gap/gyoza-city-spending-timeseries`、`rice-spending-quantity-gap-2025/{rice-consumption-expenditure-timeseries,rice-consumption-quantity-timeseries,rice-spending-quantity-index-timeseries,rice-city-spending-growth-ranking}`。source.json はあるが survey を判定できない（52市・複数年平均の新しい接地器の出典形式を survey-taxonomy が知らない可能性。未確認）。CI のゲートはコミット済み state のブログ部分 (0) を使うので今は止まらないが、オンラインで state を作り直すと上限 0 を超える。
+- **次**: 1枚の source.json の `kind`・出典を見て、`resolveBlogChartSurveyTaxonomy` が家計調査 (kakei-chousa) に解決できない理由を確かめ、判定側か source.json のどちらを直すか決める。家計調査の記事を進めている作業と重ならないよう確認してから着手する。
 - **停止条件**: 図の値を推定で補わない。R2 への書き込みは publish-blog の経路で行う。
 - **完了条件**: オンラインの `audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` が missing-lineage 0・unresolved 0 で、`--offline --check` も通る。
 
