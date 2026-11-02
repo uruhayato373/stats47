@@ -83,7 +83,8 @@ export function resolveStatisticalSamples(
     });
     const metric = sample.renderer === 'trend-line' ? TREND_SAMPLE_METRIC : RANKING_SAMPLE_METRIC;
     const source = sample.renderer === 'trend-line' ? TREND_SAMPLE_SOURCE : RANKING_SAMPLE_SOURCE;
-    const binding = sample.renderer && sample.renderer !== 'composition-stacked' ? {
+    // Composition and relationship samples carry their own inputs, not the ranking metric binding.
+    const binding = sample.renderer && sample.renderer !== 'composition-stacked' && sample.renderer !== 'relationship-scatter' ? {
       metricKey: metric.key,
       definitionPath: `${datasetDir('metrics.definitions')}/${metric.key}.ts`,
       dataKey: source.key,

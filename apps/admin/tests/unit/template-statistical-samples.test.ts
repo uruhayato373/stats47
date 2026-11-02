@@ -56,7 +56,7 @@ describe('fixed real-statistic sample resolution', () => {
     expect(resolveStatisticalSamples([unrelated]).find((s) => s.id === 'tokyo-osaka')!.media).toEqual({});
     expect(result.find((s) => s.id === 'household-radar')!.media).toEqual({});
   });
-  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend', 'liquor-breakdown'])('uses generated %s for all four media without article inventory', (id) => {
+  it.each(['maximum-temperature-bars', 'maximum-temperature-table', 'maximum-temperature-tile-map', 'engel-trend', 'liquor-breakdown', 'temperature-kerosene', 'maximum-temperature-map'])('uses generated %s for all four media without article inventory', (id) => {
     const media = resolveStatisticalSamples([]).find((s) => s.id === id)!.media;
     expect(Object.keys(media)).toEqual(['note', 'web', 'x', 'instagram']);
     expect(media.note).toMatchObject({ src: '/api/template-samples/' + id, kind: 'trial', width: 1080, height: 1350 });

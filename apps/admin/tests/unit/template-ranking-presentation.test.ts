@@ -68,12 +68,12 @@ describe('shared ranking/image presentation contract', () => {
       )
     ).toThrow();
   });
-  it('binds all three ranking forms to the same authored presentation and canonical data, without replacing household samples', () => {
+  it('binds every maximum-temperature form (bars, table, tile map, real-shape map) to the same authored presentation and canonical data, without replacing household samples', () => {
     const samples = resolveStatisticalSamples([]);
     const bindings = samples
-      .filter((sample) => sample.renderer && sample.purpose === 'ranking')
+      .filter((sample) => sample.renderer && sample.binding?.metricKey === RANKING_SAMPLE_METRIC.key)
       .map((sample) => sample.binding);
-    expect(bindings).toHaveLength(3);
+    expect(bindings).toHaveLength(4);
     for (const binding of bindings) {
       expect(binding?.visualization).toEqual(
         RANKING_SAMPLE_METRIC.visualization

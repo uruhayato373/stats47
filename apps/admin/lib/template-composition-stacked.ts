@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { generateStackedBarSvg } from '../../../packages/svg-builder/src/charts/stacked-bar';
 import type { StatsSchema } from '../../../packages/types/src';
-import { BRAND } from '../../web/src/features/ogp/brand';
+import { SAMPLE_FRAME, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 export const COMPOSITION_SAMPLE_SOURCE = {
   bucket: 'stats47',
@@ -53,14 +53,10 @@ export function renderCompositionStacked(raw: unknown) {
     normalized: true, horizontal: true, width: 340, showHeading: false,
   });
   const viewBox = /viewBox="([^"]+)"/.exec(chart)![1];
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="酒類別の販売数量構成比">
-    <rect width="1080" height="1350" fill="${BRAND.paper}"/>
-    <g font-family="Noto Sans JP, Yu Gothic, Meiryo, sans-serif" fill="${BRAND.ink}">
-      <text x="64" y="86" font-size="42" font-weight="700">stats47</text>
-      <text x="64" y="184" font-size="64" font-weight="700">酒類別の販売数量構成比</text>
-      <text x="64" y="246" font-size="32" fill="${BRAND.muted}">2008・2013・2018年度 · 全国</text>
-      <svg x="64" y="350" width="952" height="812" viewBox="${viewBox}">${chart}</svg>
-      <line x1="64" x2="1016" y1="1190" y2="1190" stroke="${BRAND.line}"/>
-      <text x="64" y="1235" font-size="28" fill="${BRAND.muted}">出典：国税庁「酒のしおり」</text>
-    </g></svg>`;
+  const top = sampleBodyTop(false) + 24;
+  const width = SAMPLE_FRAME.right - SAMPLE_FRAME.left;
+  return sampleFrame({
+    title: '酒類別の販売数量構成比', titleSize: 64, meta: '2008・2013・2018年度 · 全国', source: '国税庁「酒のしおり」',
+    body: `<svg x="${SAMPLE_FRAME.left}" y="${top}" width="${width}" height="${SAMPLE_FRAME.bodyBottom - top}" viewBox="${viewBox}">${chart}</svg>`,
+  });
 }

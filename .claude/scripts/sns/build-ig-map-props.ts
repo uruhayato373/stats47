@@ -64,6 +64,9 @@ interface RankingItemPayload {
     subtitle?: string;
     sourceConfig?: { source?: { name?: string }; recipe?: { kind?: string } };
     attribution?: { compilation?: { name?: string } | null; originalSurveys?: { name?: string }[] };
+    /** Authored colour encoding baked by the ranking builder; the slide resolves it like the ranking page. */
+    visualization?: { colorScheme?: string; colorSchemeType?: string; [key: string]: unknown };
+    valueDisplay?: { conversionFactor?: number; decimalPlaces?: number };
   };
 }
 
@@ -165,6 +168,8 @@ async function main() {
     canonicalUrl: `${SITE_ORIGIN}/ranking/${rankingKey}`,
     generatedAt: new Date().toISOString(),
     sourceKeys: [...sourceKeys].sort(),
+    visualization: item.visualization,
+    valueDisplay: item.valueDisplay,
   };
 
   const outDir = out ?? join(PROJECT_ROOT, ".local/r2/sns/map-carousel", rankingKey, "instagram");
