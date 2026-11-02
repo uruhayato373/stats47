@@ -1,0 +1,87 @@
+{
+ "kind": "calculated",
+ "label": "チョコレート消費支出額 年ごとの1位・47位と直近5年平均",
+ "unit": "円",
+ "inputs": [
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2007"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2008"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2009"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2010"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2011"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2012"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2013"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2014"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2015"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2016"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2017"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2018"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2019"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2020"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2021"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2022"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2023"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2024"
+  },
+  {
+   "rankingKey": "chocolate-consumption-expenditure",
+   "year": "2025"
+  }
+ ],
+ "formula": "各年の values.json から rank=1 と rank=47 を抽出。5年平均は 2021〜2025 年の各県の値の単純平均を四捨五入",
+ "source": "r2:app/ranking/chocolate-consumption-expenditure/values.json",
+ "upstream": "metric config (packages/data-configs) → e-Stat 家計調査 → R2 app/ranking",
+ "generatedBy": "article-writer (python, 2026-11-02)"
+}

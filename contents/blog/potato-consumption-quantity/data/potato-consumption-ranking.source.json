@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "potato-consumption-quantity",
+  "year": "2025",
+  "unit": "g",
+  "label": "じゃがいも消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/potato-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug potato-consumption-quantity --keys potato-consumption-quantity --data-name potato-consumption-ranking",
+  "fetchedAt": "2026-11-02T05:25:27.307Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "refreshedFromYear": "2024"
+}
