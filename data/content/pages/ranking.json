@@ -9669,7 +9669,7 @@
       "id": "ranking:household-securities-balance",
       "kind": "ranking",
       "key": "household-securities-balance",
-      "title": "有価証券の保有額",
+      "title": "有価証券の現在高",
       "href": "/ranking/household-securities-balance",
       "published": true
     },

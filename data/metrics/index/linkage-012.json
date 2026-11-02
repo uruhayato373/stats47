@@ -1074,7 +1074,7 @@
     {
       "metricKey": "household-securities-balance",
       "pageId": "ranking:household-securities-balance",
-      "title": "有価証券の保有額",
+      "title": "有価証券の現在高",
       "sources": [
         {
           "role": "primary",

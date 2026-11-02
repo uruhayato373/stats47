@@ -46,7 +46,7 @@ paths:
 正規化optionは元単位の固定域を引き継がず、必要なら `visualization` を基準別に上書きする。
 正規化分母と単位倍率は `data/metrics/defaults/normalization.ts` のみで定義する。
 `metrics:generate-schema` → `content:sync` → `metrics:build-index` → `metrics:check` で生成・整合性を確認する。
-指標を足す・変える・テーマや調査マスタを変えた後は、`npm run metrics:regen-derived` で決定的に作れる生成物 (schema・コンテンツ索引・逆引き索引・調査の分類・テーマの依存の写し・掲載価値) を 1 回で作り直してから commit する。1 つずつ作り直すと pre-commit と CI で順に落ちる (2026-11-02 に家計調査の 4 指標で 7 回落ちた)。既知キーと sitemap は R2 の item.json が要るので CI (sync-ranking-keys) が作り、極性は判断なので手で足す。
+指標を足す・変える・テーマや調査マスタを変えた後は、`npm run metrics:regen-derived` で決定的に作れる生成物 (schema・コンテンツ索引・逆引き索引・調査の分類・テーマカタログ・テーマの依存の写し・掲載価値) を 1 回で作り直してから commit する。1 つずつ作り直すと pre-commit と CI で順に落ちる (2026-11-02 に家計調査の 4 指標で 7 回落ちた)。既知キーと sitemap は R2 の item.json が要るので CI (sync-ranking-keys) が作り、極性は判断なので手で足す。
 利用ページ・統計表分類条件の逆引きは `data/metrics/index/linkage-*.json`。生のクエリをtheme chartへ残さない。
 
 ## category キー (17 軸固定)

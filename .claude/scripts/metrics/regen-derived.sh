@@ -19,6 +19,7 @@ run npm --workspace packages/data-configs run metrics:generate-schema
 run npm run content:sync
 run npm run metrics:build-index
 run npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json
+run npm run generate:catalog --workspace=@stats47/data-configs
 run npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts
 (cd apps/web && run npx tsx scripts/generate-ranking-prominence.ts)
 
