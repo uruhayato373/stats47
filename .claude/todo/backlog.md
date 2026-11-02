@@ -199,7 +199,7 @@ updated: 2026-11-01
 - **影響**: find-metrics・拡充キュー・調査ごとの「取れるデータ」の把握が、表の多い調査ほど欠ける。家計調査の 126 表の棚卸しは `.claude/skills/estat/references/household-expenditure-survey.md` に手書きで残っているだけで、機械可読の台帳が無い。
 - **2026-11-02 実装 (develop・未 push)**: 一覧を collectArea で絞らず全表取得し、該当なしを `collectArea: "0"`、表ごとの全区分を `collectAreas` に持たせた。meta は `--meta-stat-codes` (月次の既定は家計調査 `00200561`) で調査単位に取る。取得行数が e-Stat の総件数 `NUMBER` と合わなければ索引を書かずに止める (dry-run で 238,822 行一致を確認)。
 - **2026-11-02 台帳**: 家計調査の台帳 `data/estat/kakei-ledger/ledger.json` (Schema 付き・生成 `npm run estat:kakei-ledger:build`) と採否判断 `decisions.json` を作り、`npm run estat:kakei-ledger:check` を PR CI に入れた。初版はローカルで取った staging (`--catalog-dir .local/r2/estat-catalog`) から生成: 126 表、年次品目表は金額 689 行 (指標 514)・数量 204 行 (指標 188)。指標も判断もない品目は 2 件 (659 他の被服のその他・715 マスク)、分類・属性の行は金額 173・数量 16 が未判断。
-- **次**: push → `estat-catalog-run` で CI を回して R2 へ反映 (R2 write はオーナー承認が要る) → `npm run estat:catalog:pull` 後に台帳を作り直し、R2 の索引から生成した版に置き換える。未判断の行の採否は `KAKEI-EXPANSION-02` / `CONTENT-KAKEI-EXPANSION-01` が decisions.json に理由付きで書く。
+- **完了の証拠 (2026-11-02)**: オーナー承認のうえ push し、`estat-catalog-run` の run 41363684093 が success (一覧の件数照合 238,822 行一致・meta 1,544 件取得 failed 0・R2 アップロード 1,821 件成功)。pull した R2 の manifest は `lastRun.listRows=238822`・`listTables=227205`、調査 294 (旧 96)、家計調査 126 表すべて meta 取得済み。台帳を R2 の索引で作り直し、staging 版と生成時刻以外が一致、`estat:kakei-ledger:check` 通過。meta の時間予算の既定は 150 → 120 分に下げた (job timeout 180 分に反映の時間を残すため)。完了条件を満たしたので週次レビューで削除してよい。未判断の行の採否は `KAKEI-EXPANSION-02` / `CONTENT-KAKEI-EXPANSION-01` が decisions.json に理由付きで書く。
 - **完了条件**: R2 カタログの manifest `lastRun.listRows` が getStatsList の総件数と一致し、家計調査が 126 表・meta 取得済み。
 
 ### [KAKEI-MULTIAXIS-01] 家計調査の全国時系列・収入階級・世帯・貯蓄負債を図と記事へ展開する
