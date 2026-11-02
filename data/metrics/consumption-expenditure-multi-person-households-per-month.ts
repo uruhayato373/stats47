@@ -5,13 +5,12 @@ export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig =
   "key": "consumption-expenditure-multi-person-households-per-month",
   "title": "消費支出",
   "subtitle": "1世帯当たり1か月間・二人以上の世帯・1か月平均",
-  "unit": "円",
+  "unit": "千円",
   "category": "economy",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010212",
     "cdCat01": "#L02211",
-    "valueScale": 1000,
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
   },
@@ -30,7 +29,7 @@ export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig =
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
   },
   "calculation": {
     "isCalculated": false

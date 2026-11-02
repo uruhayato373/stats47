@@ -6551,11 +6551,8 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L02211"
         },
-        "ops": {
-          "valueScale": 1000
-        },
-        "derived": true,
-        "configHash": "3ab82b816ada4294"
+        "derived": false,
+        "configHash": "0d3f982cb4910c27"
       },
       "dependencies": [],
       "normalizationDependencies": [],

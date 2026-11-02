@@ -5,13 +5,12 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "key": "household-head-income-worker-households-per-month",
   "title": "世帯主収入",
   "subtitle": "1世帯当たり1か月間",
-  "unit": "円",
+  "unit": "千円",
   "category": "economy",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010212",
     "cdCat01": "#L01204",
-    "valueScale": 1000,
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
   },
@@ -30,7 +29,7 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
   },
   "calculation": {
     "isCalculated": false

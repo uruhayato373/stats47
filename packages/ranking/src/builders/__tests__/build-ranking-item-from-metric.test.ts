@@ -237,13 +237,13 @@ describe("系列の終わり (seriesEnd) の注記", () => {
   it("終わった年と理由を注記の先頭に出し、既存の note を後ろに続ける。無ければ note だけ", () => {
     const ended = buildRankingItemFromMetric(
       { ...baseConfig, note: "県庁所在市の値", seriesEnd: { lastYear: 2024, reason: "品目の統合" } },
-      { values: { yearCodes: ["2024"] }, now: NOW, existing: null },
+      { values: { yearCodes: ["2024"] }, now: NOW },
     );
     expect(ended.annotation).toBe("この系列は 2024 年で終わっている (品目の統合)。 県庁所在市の値");
 
     const ongoing = buildRankingItemFromMetric(
       { ...baseConfig, note: "県庁所在市の値" },
-      { values: { yearCodes: ["2024"] }, now: NOW, existing: null },
+      { values: { yearCodes: ["2024"] }, now: NOW },
     );
     expect(ongoing.annotation).toBe("県庁所在市の値");
   });

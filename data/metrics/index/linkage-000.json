@@ -1917,11 +1917,8 @@
           "statsDataId": "0000010212",
           "cdCat01": "#L01201"
         },
-        "ops": {
-          "valueScale": 1000
-        },
-        "derived": true,
-        "configHash": "50d5ad3b5efb307a"
+        "derived": false,
+        "configHash": "4592c1fe7b4b6461"
       },
       "dependencies": [],
       "normalizationDependencies": [],
