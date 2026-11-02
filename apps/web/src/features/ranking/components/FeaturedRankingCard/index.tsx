@@ -31,7 +31,8 @@ export function featuredValueSizeClass(valueWithUnit: string): string {
  * 高さは中身で決める (固定比率を持たない)。上から 問い → 1 位の県 → 値 → 年 → 地図 の順に縦に積む。
  * 問いと値は省略しない (2026-10-28 3 巡目。値が「58,021,…」と切れて単位も消え、問いが語の途中で切れていた)。
  * 値と単位は折り返さない 1 塊にし、桁の多い値は文字を段階で小さくする。
- * 地図はセルの下半分に全幅の高さ 96px で置く (値の横の 64px では形が読めなかった)。
+ * 地図はセルの下に全幅で置き、高さは地図の SVG と同じ縦横比 (320:190) で幅から決める。
+ * 高さ 96px 固定では 3 列のカード (幅約 300px) で地図が小さく、小さな県の色が読めなかった (2026-11-03)。
  * カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
  */
 export function FeaturedRankingCard({
@@ -79,7 +80,7 @@ export function FeaturedRankingCard({
       {/* 1 位の値と地図は別の領域に置く。値の背後に地図を敷くと数字が地図に重なって読みにくい。 */}
       <div
         aria-hidden="true"
-        className="pointer-events-none mt-auto h-24 w-full [&>svg]:h-full [&>svg]:w-full"
+        className="pointer-events-none mt-auto aspect-[320/190] w-full [&>svg]:h-full [&>svg]:w-full"
         dangerouslySetInnerHTML={{ __html: model.mapSvg }}
       />
     </SurfaceLinkCard>

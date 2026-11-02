@@ -115,8 +115,6 @@ export default function RankingIndexPage() {
         >
           <FeaturedRankings
             limit={4}
-            showHeader={false}
-            embedded
             trackHomeEvents={false}
           />
         </HorizontalCardCarouselFrame>

@@ -203,13 +203,6 @@ updated: 2026-11-01
 次: スタックの深さを使う処理 (地図の境界の再帰・巨大な配列の展開 `push(...arr)` など) をスタックトレースで特定し、Node の版の差か入力の差かを切り分ける。
 完了条件: Mac の手元で同テストが通り、原因をコードで直したか、版の差なら CI と手元の Node を揃えた。
 
-### [CARD-GRID-HOME-01] ホームの注目ランキングを共通のカードの格子 (CardGrid) に揃える
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
-
-2026-11-03 にランキングカードと記事カードを同じ `CardGrid` (本文幅で 1→2→3 列・線の格子) に並べる規約にした (`.claude/rules/ui-components.md`・台帳 `card-grid`)。調査ハブは移行済み。ホームの `FeaturedRankingGrid` (`apps/web/src/features/ranking/components/FeaturedRankings/FeaturedRankingGrid.tsx`) は今も画面幅で 2→3→4→5 列を手書きしている。
-次: compact でない分岐を `CardGrid` に替え、表示件数を 3 の倍数にする。カテゴリの横スクロールのカルーセルは規約の例外なので触らない。
-完了条件: `FeaturedRankingGrid` に `grid-cols-*` の手書きが無く、ホームを localhost で PC 幅 3 列・スマホ幅 1 列で確認し、web の vitest 全件が通る。
-
 ### [R2-WRITE-PENDING-DISPLACE-01] R2 書き込みの待ち枠を後続の実行が奪い、新規ランキングの OGP 生成が始まる前に取り消される
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 

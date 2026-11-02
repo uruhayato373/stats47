@@ -148,7 +148,7 @@ export default async function HomePage() {
               <SectionIndexLink href="/ranking">もっと見る</SectionIndexLink>
             }
           >
-            <FeaturedRankings limit={6} showHeader={false} embedded />
+            <FeaturedRankings limit={6} />
           </HorizontalCardCarouselFrame>
 
           {latestArticles.length > 0 && (

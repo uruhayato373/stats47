@@ -116,7 +116,8 @@ describe('home page structure (portal)', () => {
     expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
     expect(PAGE).not.toContain('<PortalCategoryGrid');
-    expect(PAGE).toContain('showHeader={false} embedded');
+    // 注目ランキングは見出しを持たず、カルーセルの枠 (見出し付き) の中に埋め込む
+    expect(PAGE).toMatch(/<HorizontalCardCarouselFrame[\s\S]*?<FeaturedRankings limit=\{6\} \/>\s*<\/HorizontalCardCarouselFrame>/);
     expect(PAGE).not.toContain('overflow-y-auto');
     expect(PAGE).not.toContain('lg:max-h-');
     expect(PAGE).not.toContain('lg:sticky');
