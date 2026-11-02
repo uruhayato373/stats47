@@ -1,0 +1,249 @@
+{
+  "title": "パン消費支出額",
+  "subtitle": "2025年",
+  "label": "パン消費支出額",
+  "readerLabel": "パンへの支出",
+  "hook": "パンへの支出が最も多い県は？",
+  "unit": "円",
+  "year": "2025",
+  "rankingKey": "bread-consumption-expenditure",
+  "source": "家計調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 42199
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 41846
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 41671
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 39256
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 38960
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 38432
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 37586
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 36876
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 36870
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 36846
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 36802
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 36781
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 36696
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 36662
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 36374
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 36147
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 36120
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 35963
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 35220
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 34596
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 34549
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 33939
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 33554
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 33041
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 32974
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 32841
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 32652
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 32272
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 32206
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 32062
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 31985
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 31828
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 31686
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 31660
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 31541
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 31399
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 30642
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 30343
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 30007
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 29863
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 29380
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 28074
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 27995
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 27681
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 27527
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 26936
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 26587
+    }
+  ]
+}
