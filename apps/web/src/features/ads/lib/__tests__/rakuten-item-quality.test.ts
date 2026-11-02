@@ -19,6 +19,11 @@ describe("productQualityReasons", () => {
     expect(productQualityReasons({ ...item, name: "珈琲豆 500g" }, "コーヒー")).toEqual([]);
     expect(productQualityReasons({ ...item, name: "コーヒー ドリップバッグ" }, "コーヒー")).toEqual([]);
   });
+  it("検索語を含む別の商品 (納豆に対する甘納豆) を落とし、両方を含む商品名は残す", () => {
+    expect(productQualityReasons({ ...item, name: "芋甘納豆 100g 甘納豆 ギフト" }, "納豆")).toContain("different-product");
+    expect(productQualityReasons({ ...item, name: "国産 小粒納豆 40g×3" }, "納豆")).toEqual([]);
+    expect(productQualityReasons({ ...item, name: "甘納豆と納豆の食べ比べ" }, "納豆")).toEqual([]);
+  });
   it("寄附・送料だけの商品・通常URL・画像なしを落とす", () => {
     expect(productQualityReasons({ ...item, name: "【ふるさと納税】さんま" }, "さんま")).toContain("donation-product");
     expect(productQualityReasons({ ...item, name: "《送料700円》さんま配送分" }, "さんま")).toContain("shipping-fee");

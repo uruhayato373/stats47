@@ -4,6 +4,8 @@
 
 **表と品目の採否は台帳 `data/estat/kakei-ledger/ledger.json` が正本** (全表の周期・年・地域数・分類軸と、年次品目表の品目ごとの指標の有無・採否)。e-Stat カタログ (`npm run estat:catalog:pull`) と metric config から `npm run estat:kakei-ledger:build` で作り、手で編集しない。指標を作らない・作る予定の判断は理由付きで `data/estat/kakei-ledger/decisions.json` に書く。`npm run estat:kakei-ledger:check` (PR CI) が台帳・config・判断の食い違いを止める。下の件数・表一覧は棚卸し時点の記録で、現在の件数は台帳の `summary` を読む。
 
+年次値を新しい年へ更新したら、題 (title / seoTitle) に旧年の値が残る家計調査の記事を `node .claude/scripts/blog/find-kakei-stale-title-values.mjs` で一覧し、本文・図とあわせて書き直す (2026-11-02 に 2025 年へ更新した時点で 138 本)。
+
 調査: 家計調査（総務省）。家計収支編の二人以上・総世帯・単身世帯と、貯蓄・負債編の二人以上世帯を分けて扱う。
 
 ## 2025年の既存品目更新
