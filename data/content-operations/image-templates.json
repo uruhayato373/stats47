@@ -41,11 +41,11 @@
       "label": "タイルマップ",
       "policy": "4:5の画像（note・X・Threads・Instagram・管理画面の見本）は、サイトの配置表（packages/visualization の TILE_GRID_LAYOUT）をそのまま使い、日本列島の形（北海道2×2、新潟・福島・京都などの縦横、九州から離した沖縄）を保つ。県のない海峡の段だけを縮め、タイルを横幅いっぱいまで大きくする（apps/remotion/src/features/data-cards/tile-layout.ts の IMAGE_TILE_LAYOUT）。描画は apps/remotion/src/features/data-cards/all47-svg.ts の1つだけを使い、媒体ごとに別の配置や配色を作らない。形は模式図で、タイルの面積は統計値や実面積を表さない。県名・値・年・単位・色の段階を示し、県庁所在市の値は都市名で示す。地理的な輪郭を読む地図は「地図（実際の形）」を使う。 色は指標台帳の配色をサイトのランキングと同じ設定で解決する（配色の指定が無い呼び出しはブランドの青5段）。タイルの文字は中央揃えで、地色との明暗差が大きい方（白か濃紺）を自動で選ぶ。値の小数桁は図全体で1回だけ決めてそろえる。左上の日本海側の空きに上位3県（同値は同順位）、右下の太平洋側に凡例（区分の境界値つき）を置く。背景と文字色はほかの型の見本と同じ。",
       "renderer": "apps/remotion/src/features/data-cards/all47-svg.ts",
-      "version": 5,
+      "version": 6,
       "profiles": {
         "note": "note・X・Instagramとも共通の4:5（1080×1350px）で同じ画像を使う。",
         "x": "共通の4:5（1080×1350px）。ランキングカード（quick-still）が同じ描画を使う。",
-        "instagram": "共通の4:5（1080×1350px）。地図カルーセルも同じ描画を使う。表紙・クイズのヒントは移行中。",
+        "instagram": "共通の4:5（1080×1350px）。地図カルーセル・ランキングの表紙・クイズのヒント（静止画とリール）も同じ描画（renderTileMapBody）を使う。",
         "web": "使用ページの幅とlight/dark表示を確認する。"
       },
       "group": "chart",
@@ -53,6 +53,28 @@
         "ranking",
         "distribution",
         "trend"
+      ],
+      "variants": [
+        {
+          "id": "fill",
+          "label": "値の塗り（県名と値）",
+          "status": "ready"
+        },
+        {
+          "id": "change",
+          "label": "2時点の増減率",
+          "status": "ready"
+        },
+        {
+          "id": "names",
+          "label": "県名だけ（表紙）",
+          "status": "ready"
+        },
+        {
+          "id": "mask",
+          "label": "候補を伏せる（クイズのヒント）",
+          "status": "ready"
+        }
       ]
     },
     {

@@ -131,3 +131,16 @@ test('片年で1県欠けた比較を作らない', async () => {
     )
   );
 });
+
+test('増減タイルは共通のタイル地図で描き、符号付きの値と合計を出し、発行元や読み方の注記を入れない', async () => {
+  const { renderTileChangeSvg } = await import('../../../../apps/remotion/src/features/data-cards/TileChange');
+  const { assertMinimalChartCopy } = await import('../../media/lib/image-copy.mjs');
+  const card = await buildDataCard({ kind: 'tile-change', key: 'total-population', from: '1975', to: '2025' }, read, shape);
+  if (card.kind !== 'tile-change') throw new Error('kind');
+  const svg = renderTileChangeSvg(card);
+  assert.equal((svg.match(/data-area="/g) || []).length, 47);
+  assert.ok(svg.includes('+50.0%') && svg.includes('-50.0%'));
+  assert.ok(svg.includes('47都道府県の合計'));
+  assertMinimalChartCopy(svg);
+  for (const text of ['stats47', 'あなたの県', '模式図']) assert.ok(!svg.includes(text), text);
+});

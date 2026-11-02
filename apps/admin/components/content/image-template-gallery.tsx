@@ -42,8 +42,9 @@ function updateView(values: Record<string, string>) {
 const FILTER_PURPOSES = ['ranking', 'comparison', 'trend', 'composition', 'relationship', 'distribution'] as const;
 function MapVariants({ template }: { template: EditableTemplate }) {
   if (!template.variants?.length) return null;
+  const hasBuzzMap = template.variants.some((variant) => variant.buzzMapTypes?.length);
   return (
-    <PanelCard title="描き分け" description="同じ型の中の重ね方・出し方。バズ地図の型はこの描き分けに当たる。">
+    <PanelCard title="描き分け" description={hasBuzzMap ? '同じ型の中の重ね方・出し方。バズ地図の型はこの描き分けに当たる。' : '同じ型・同じ描画部品の中の出し方。'}>
       <ul className="divide-y divide-border text-sm">
         {template.variants.map((variant) => (
           <li key={variant.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
@@ -55,7 +56,7 @@ function MapVariants({ template }: { template: EditableTemplate }) {
           </li>
         ))}
       </ul>
-      <Link href="/buzz-map" className={buttonVariants({ variant: 'ghost', size: 'sm' })}>バズ地図の候補を見る</Link>
+      {hasBuzzMap && <Link href="/buzz-map" className={buttonVariants({ variant: 'ghost', size: 'sm' })}>バズ地図の候補を見る</Link>}
     </PanelCard>
   );
 }

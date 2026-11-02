@@ -37,7 +37,7 @@ export interface StatisticalSample {
   label?: string;
   topic?: string;
   imageId?: string;
-  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked' | 'relationship-scatter' | 'distribution-map';
+  renderer?: 'ranking-bars' | 'ranking-table' | 'ranking-tile-map' | 'trend-line' | 'composition-stacked' | 'relationship-scatter' | 'distribution-map' | 'tile-change';
   referenceImages?: { imageId: string; label: string }[];
 }
 /** A small curated sample per form, not a menu of every article using the form. */
@@ -163,8 +163,9 @@ export const STATISTICAL_SAMPLES: StatisticalSample[] = [
     id: 'population-change',
     templateId: 'tile-map',
     purpose: 'trend',
-    statistic: '都道府県別人口の長期変化',
-    imageId: 'IMG-165950508e29a5c24d5893f8',
+    statistic: '都道府県別人口の長期変化（1975→2025年）',
+    renderer: 'tile-change',
+    referenceImages: [{ imageId: 'IMG-165950508e29a5c24d5893f8', label: 'X：人口の長期変化（旧デザイン・公開済み）' }],
   },
   {
     id: 'household-radar',
