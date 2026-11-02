@@ -222,10 +222,14 @@ export function computeBuzzMapGeo(
     /** 型D: 線フィーチャ（LineString/MultiLineString）と年属性名 */
     lineFeatures?: Feature[];
     lineYearProp?: string;
+    /** 沖縄インセット枠の差し替え（型台帳「地図（実際の形）」は島の範囲に合わせた小さい枠を使う） */
+    insetBox?: { x: number; y: number; width: number; height: number };
   }
 ): BuzzMapGeo {
   const { level, ratio, type } = opts;
-  const { W, H, region, insetBox } = buzzMapLayout(ratio, type);
+  const layout = buzzMapLayout(ratio, type);
+  const { W, H, region } = layout;
+  const insetBox = layout.insetBox && opts.insetBox ? opts.insetBox : layout.insetBox;
   const features = toFeatures(topology);
 
   // 県トリム（muni:NN）: その県だけに最適フィット。インセットなし

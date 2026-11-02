@@ -57,6 +57,8 @@ import {
   generateStackedBarSvg,
   generateFindingsCardSvg,
 } from '../../../packages/svg-builder/src/charts/index.ts';
+import { getMetricConfig } from '../../../packages/data-configs/src/registry';
+import { metricHueOf, toShortColorScheme } from '../../../packages/types/src/color-scheme';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -786,16 +788,46 @@ function writeChartSourceIfMissing(
   fs.writeFileSync(sourcePath, JSON.stringify(manifest, null, 2));
 }
 
+/**
+ * The metric behind a chart (data json `rankingKey`, else its source manifest), so its colours follow
+ * the metric's authored scheme: maps shade with the scheme, bars use its single hue. A colour set in
+ * the data json (scheme / palette) still wins; charts without a metric keep the generator defaults.
+ */
+function metricVisualizationOf(baseName: string, parsed: unknown) {
+  const p = (parsed && !Array.isArray(parsed) ? parsed : {}) as Record<string, unknown>;
+  let key = (p.rankingKey ?? (p.rankings as Record<string, unknown> | undefined)?.rankingKey) as string | undefined;
+  const manifestPath = path.join(DATA_DIR, `${baseName}.source.json`);
+  if (!key && fs.existsSync(manifestPath)) {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
+    key = (manifest.kind === 'ranking' ? manifest.rankingKey : manifest.kind === 'metric' ? manifest.metricKey : undefined) as string | undefined;
+  }
+  return key ? getMetricConfig(key)?.visualization : undefined;
+}
+function withMetricColors(parsed: any, type: string, visualization: ReturnType<typeof metricVisualizationOf>) {
+  if (!visualization) return parsed;
+  const data = Array.isArray(parsed) ? { data: parsed } : parsed;
+  if (type === 'bar') {
+    const hue = visualization.colorSchemeType === 'diverging' ? null : metricHueOf(visualization.colorScheme);
+    return hue ? { ...data, palette: data.palette ?? hue, rightPalette: data.rightPalette ?? data.palette ?? hue } : parsed;
+  }
+  if (type === 'tile-grid') {
+    const scheme = toShortColorScheme(visualization.colorScheme);
+    return scheme && data.scheme === undefined && data.colorScheme === undefined ? { ...data, scheme } : parsed;
+  }
+  return parsed;
+}
+
 // Default mode: generate SVGs
 const chartNames: string[] = [];
 for (const { file, type, parsed } of jsonMeta) {
   const baseName = file.replace(/\.json$/, '');
   const svgPath = path.join(DATA_DIR, `${baseName}.svg`);
   let svg;
+  const colored = withMetricColors(parsed, type ?? "", metricVisualizationOf(baseName, parsed));
   if (type === 'bar') {
-    svg = genBarChartSvg(parsed);
+    svg = genBarChartSvg(colored);
   } else if (type === 'tile-grid') {
-    svg = genTileGridMapSvg(parsed);
+    svg = genTileGridMapSvg(colored);
   } else if (type === 'line') {
     svg = genLineChartSvg(parsed);
     if (svg === null) {

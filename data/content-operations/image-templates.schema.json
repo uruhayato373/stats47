@@ -72,6 +72,10 @@
             "enum": ["ranking", "comparison", "trend", "composition", "relationship", "distribution", "explanation", "navigation", "reference"]
           }
         },
+        "metricColor": {
+          "description": "指標台帳の配色 (data/metrics/<key>.ts の visualization) の使い方。scale = 値の濃淡で塗る (tile-scale.ts の resolveTileScale)、single = 指標の色 1 色 (resolveMetricColor)、none = 系列・区分の色で指標の配色を使わない",
+          "enum": ["scale", "single", "none"]
+        },
         "variants": {
           "description": "同じ型の中の描き分け (地図の重ね方・出し方)。別の型にはしない",
           "type": "array",

@@ -2,6 +2,7 @@ import * as d3chromatic from 'd3-scale-chromatic';
 import {
   DEFAULT_SEQUENTIAL_SCHEME,
   d3KeyOfColorScheme,
+  metricHueOf,
   resolveColorEncoding,
   type NumericColorEncoding,
 } from '@stats47/types';
@@ -43,4 +44,19 @@ export function resolveTileScale(
       resolved.method === 'threshold' ? undefined : display.decimalPlaces
     ),
   };
+}
+
+/** Position on the metric's scheme used for one-colour marks: dark enough for text on paper. */
+const STRONG_T = 0.85;
+
+/**
+ * The metric's own colour for one-colour figures (bar charts, value text): the strong end of its
+ * sequential scheme, so a metric's bars and its map share one hue. Maps and tiles shade by value
+ * instead; bars already encode the value by length, so they use this single colour.
+ * Diverging and non-hue schemes have no single colour and return undefined (the figure's default).
+ */
+export function resolveMetricColor(visualization: { colorScheme?: string | null; colorSchemeType?: string | null }) {
+  if (visualization.colorSchemeType === 'diverging' || !metricHueOf(visualization.colorScheme)) return undefined;
+  const interpolate = (d3chromatic as unknown as Record<string, unknown>)[d3KeyOfColorScheme(visualization.colorScheme) ?? ''];
+  return typeof interpolate === 'function' ? (interpolate as (t: number) => string)(STRONG_T) : undefined;
 }

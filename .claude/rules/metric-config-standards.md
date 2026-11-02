@@ -49,6 +49,26 @@ paths:
 指標を足す・変える・テーマや調査マスタを変えた後は、`npm run metrics:regen-derived` で決定的に作れる生成物 (schema・コンテンツ索引・逆引き索引・調査の分類・テーマカタログ・テーマの依存の写し・掲載価値) を 1 回で作り直してから commit する。1 つずつ作り直すと pre-commit と CI で順に落ちる (2026-11-02 に家計調査の 4 指標で 7 回落ちた)。既知キーと sitemap は R2 の item.json が要るので CI (sync-ranking-keys) が作り、極性は判断なので手で足す。
 利用ページ・統計表分類条件の逆引きは `data/metrics/index/linkage-*.json`。生のクエリをtheme chartへ残さない。
 
+### 配色の選び方と、画像の型での使い方 (2026-11-02)
+
+配色は指標の意味で選ぶ。指標を新しく作るとき・定義を直すときに当てはめ、既存の指定は一括で塗り替えない (明示指定が優先)。
+
+| 指標の意味 | 配色 |
+|---|---|
+| 値が大きいほど負担・危険・不足 (犯罪・事故・死亡・失業・空き家・高齢化など) | Reds (OrRd・YlOrRd も可) |
+| 自然・農林水産・環境 | Greens |
+| 気温・熱・エネルギー | Oranges |
+| 教育・文化・観光 | Purples |
+| 上記以外の中立の量 (人口・経済・産業など) | Blues (既定) |
+| 0 や基準からの差・増減率など、正負に意味がある値 | 発散色 RdBu (`colorSchemeType: "diverging"`) |
+
+画像の型は、この配色を型台帳 `data/content-operations/image-templates.json` の `metricColor` で決めた方法で使う。描画側で配色を独自に選ばない。
+
+- `scale` (タイルマップ・地図・ヒートマップ): 値の濃淡で塗る。`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale` (サイトのランキング地図と同じ色・境界)
+- `single` (棒グラフ・テーブルの順位・箱ひげ): 指標の色 1 色。同じファイルの `resolveMetricColor` (配色の濃い側の色)。棒は長さで値を表すので濃淡を重ねない。発散色の指標は図の既定色
+- `none` (折れ線・積み上げ・散布図など): 系列・区分を見分ける色で、指標の配色は使わない
+- ブログの図は、記事データか出典 manifest の `rankingKey` / `metricKey` から同じ規則で色を決める (`.claude/scripts/blog/generate-article-charts.ts`)。記事データに配色を書いた場合はそちらが優先
+
 ## category キー (17 軸固定)
 
 `landweather` / `population` / `laborwage` / `agriculture` / `miningindustry` / `commercial` /
