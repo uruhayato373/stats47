@@ -202,6 +202,30 @@ updated: 2026-11-01
 - **完了条件**: 2 つの接地器が 2025 年の値を返し、`npm run surveys:lenses:status -- --survey kakei-chousa` で 2 つの切り口が blocked でなくなる。
 - **完了の証拠 (2026-11-02)**: 新表と旧表で 2024 年の値が一致することを確認 (年収五分位: たばこ・宿泊料・食料の全 6 区分、月次: 米の 2024 年 12 月の金額・数量)。`fetch-quintile-data.ts` を `0004023607`・既定 2025 年に、`fetch-kakei-monthly.mjs` を `0004023601` / `0004023602` に切り替え、使い捨ての記事名で 2025 年の図データを生成できた (たばこ V/I 比 1.55 倍、ビールの月別 2024・2025 年各 12 点)。切り口台帳の 2 切り口の `readiness` を外した。週次レビューで削除してよい。
 
+### [BUZZ-MAP-CONTENT-ROLLOUT-01] バズ地図の候補160件がブログ・note・SNSにほとんど展開されていない
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
+
+- **実測 (2026-11-02)**: `data/sns/buzz-map-catalog.json` の curated 160 件のうち、着地先が実在するのは15件（ブログ7・ランキング2・テーマ4ほか）。ブログ7件はどれも 2026-03〜06 公開の既存記事を当てたもので、バズ地図から新しく書いた記事は0件。`create-blog` 69件中62件は記事なし。note 記事台帳 (`data/note/articles.json`) に候補とつながる記事は0件。SNS は posts.json の domain=buzz-map が下書き11件（IG6・X5）で投稿0件。候補台帳の `generatedAt` が 2026-08-28 のままで、`landingReadiness` は当時の値。
+- **型の扱い**: バズ地図の型 A〜F・flow は型台帳の「地図（実際の形）」の描き分けに統合済み（`buzz-map-standards.md` §1 冒頭・`/buzz-map` は型台帳の言葉で表示）。
+- **① 台帳の作り直し (2026-11-02 済)**: プロキシ経由で `build-buzz-map-catalog.ts` を実行（`generatedAt` 2026-11-02）。curated 160件の着地先は live 15件のままで、8月以降に増えていない。変化は気候4件（blocked→needs-content、`/themes/climate` ができたため）。全体は 912→1,470件（DPF・地理院地名レーンの追加）。
+- **② 候補 (2026-11-02 選定・オーナー判断待ち)**: P0・`feasibility=now`・ライセンス allowed・記事なしから2本。
+  - ブログ: `children-more-than-elderly-muni`「15歳未満が65歳以上より多い街」。R2 `cities.json` で実測すると該当自治体は 1980年1,776 → 2000年375 → 2010年45 → 2015年14 → 2020年6（長久手市・新宮町・粕屋町・南風原町・御蔵島村・小笠原村）→ 2025年0。二値1枚ではなく年ごとの地図（型B=塗りの時系列）で「消えるまで」を見せる構成にする。**2025年値は別表 `0004065933` の補完なので、定義の連続性を確かめるまで「0になった」と書かない。**
+  - note: 食の東西境界（`natto-east-west-boundary`・`udon-soba-territory`・`mayonnaise-vs-sauce`・`meat-preference-map`）の4枚を1記事に。家計調査は県庁所在市の値（都道府県単位の `values.json` のみ、市区町村データなし）。
+- **次・実行順**: ③オーナーが2本の採否を決める → ブログは2025年値の定義確認 → 地図生成 → 記事、note は4枚の地図 → 記事 ④下書き11件の投稿可否を決める（予約・投稿は承認後）。
+- **停止条件**: ライセンス `review-required` の候補（26件）は確認前に公開しない。投稿・公開・R2 反映はオーナー承認後。
+- **完了条件**: 候補台帳が最新の公開物で判定し直され、P0 候補のうち少なくとも1件がブログまたは note の記事として公開され、その地図画像が SNS に投稿されている。
+
+### [IMAGE-PUBLISHER-REMOVAL-01] 統計画像の生成経路から発行元表記（stats47・stats47.jp）を外し、地図をタイル・実形状の2型へ寄せる
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
+
+- **起点 (2026-11-02 オーナー決定)**: 統計画像に発行元・透かしを入れない（`chart-image-copy.md`）。地図はタイルマップと実形状の地図（塗り・点・線のレイヤー）の2型だけにする。管理画面の型見本7型は対応済みで、`assertMinimalChartCopy` が `stats47` を拒否する。
+- **残り**: 既存の生成経路に表記が残る。Remotion `features/data-cards/{DataCard.tsx,TileChange.tsx,all47-svg.ts}`・`ig-series/IgSeriesFooter.tsx`・`shared/components/charts/BarChartRaceScene.tsx`・`ranking-youtube/NormalOutro.tsx`、`.claude/scripts/sns/{quick-still.ts,lib/ranking-story-card.ts}`、バズマップの spec 生成 (`build-buzz-map-spec*.ts`・`merge-buzz-map-specs.ts`) とブランド行の描画。投稿済み画像は差し替えない。タイルマップは媒体ごとに4通りの見た目（青＋赤帯・紫・生成り増減・黄クイズ）に分かれているので、管理画面のタイルマップ見本へ寄せる。
+- **① ランキングカード (2026-11-02 済)**: `apps/remotion/src/features/data-cards/all47-svg.ts`（quick-still の X/Threads カードと Instagram 地図カルーセルの共通部品）から stats47・宣伝文2行・「色が濃いほど」・模式図注記・stats47.jp を外し、県庁所在市は1回だけ、単位 l は L で表示。`all47-svg.test.ts` が `assertMinimalChartCopy` を掛ける。未登録の X 下書き5件は予約時に新画像で再生成される。X 側に旧画像で予約済みの12件（11/2以降）は差し替え未実施（X の予約操作が要るためオーナー判断待ち）。凡例の最大値ラベルがバー右端に揃っていない・数字が明朝体で描かれる（PNG 変換の書体）点は既存の別課題。
+- **タイル配置表の集約 (2026-11-02)**: 配置表は3つあった。`packages/visualization` の `TILE_GRID_LAYOUT`（サイト・IG表紙/地図/クイズ・動画）、`packages/svg-builder` の `TILE_GRID`（ブログ・管理画面見本。47県とも前者と完全一致の写し）、Remotion `data-cards/tile-layout.ts` の `CHANGE_TILE_LAYOUT`（Xカード・増減タイル。全県1×1の12×11）。`TILE_GRID` は `TILE_GRID_LAYOUT` から導出する形にし、ブログのタイル地図の出力が1バイトも変わらないことを3設定で確認（`@stats47/visualization` を svg-builder の依存に追加・lock 1行）。**決定 (2026-11-02 オーナー・同日改訂)**: 詰めた配置は列島の形が崩れるとの指摘で、両方の良さを合わせた形に改めた。4:5画像はサイトの配置表 `TILE_GRID_LAYOUT` をそのまま使い（北海道2×2・県の縦横・沖縄の分離を保つ）、県のない海峡の段だけ0.3段に縮めた `IMAGE_TILE_LAYOUT`（`data-cards/tile-layout.ts`・正本から導出）でタイルを約69pxに拡大。描画は `all47-svg.ts` 1つ、型台帳 tile-map v5。同日オーナー指摘で元の図（ブログの `generateChoroplethSvg`）の良さも戻した: 指標の配色（呼び出し側が解決した scale を渡す。未指定はブランドの青5段）・タイルの明暗に応じた白/濃紺の文字・中央揃え・図全体で小数桁をそろえる・左上の空きに上位3県・右下に境界値つき凡例・背景はほかの見本と同じ。配色は同期の共通関数 `data-cards/tile-scale.ts` の `resolveTileScale`（サイトの `resolveChoroplethScale` と色・境界・塗りが一致することをテストで固定）で解決し、管理画面見本・quick-still（item.json の `visualization`/`valueDisplay`）・IG 地図カルーセル（`build-ig-map-props.ts` が props に写す）の3経路とも同じ描画・同じ配色になった（2026-11-02）。既存の IG 地図カルーセル props（`.local/r2/sns/map-carousel/*/props.json`）は作り直すまで青5段。**残り**: IG 表紙・クイズのヒント・地図カルーセルの塗り分けスライド・増減タイル（`TileChange.tsx`）を共通の描画へ。**地図（実際の形）(2026-11-02)**: 見本はバズ地図と同じ `buzz-map/geo.ts` の `computeBuzzMapGeo` で描くように改めた（本土を大きく・沖縄の弧を左上の大きな枠に・右下に件数つき凡例）。同時に geo.ts で県内の島ごとに範囲外を落とすようにし、沖縄の大東諸島（インセットが間延びしていた）と鹿児島の奄美以南（本土の描画が下にはみ出していた）を描かない（規約 §3 の記載どおりに）。型台帳 choropleth の方針も更新。増減タイル（`TileChange.tsx`）はまだ旧 `CHANGE_TILE_LAYOUT`（全県1×1）。以下は1回目の決定時の記録: 4:5画像は全県1×1の詰めた配置（12×11・`CHANGE_TILE_LAYOUT`）を正にし、描画は `all47-svg.ts` 1つにする。サイトのページはサイトの配置表のまま。型台帳 tile-map v3 の方針・renderer を更新し、管理画面のタイルマップ見本も `all47-svg.ts` で描いて private R2 に再保存した（数字の書体を Yu Gothic/Meiryo へ・凡例の最大値を右端揃えに是正）。**残り**: Instagram の表紙（`ranking-instagram/CoverSlide.tsx`）・クイズのヒント（`ranking-quiz-instagram/QuizHintSlide.tsx`・`reel/QuizReelHint.tsx`）・地図カルーセルの塗り分けスライド（`map-carousel-instagram/MapChoroplethSlide.tsx`）がサイトの配置表 `TILE_GRID_LAYOUT` で独自に描いている。`all47-svg.ts` は指標台帳の配色（colorScheme）を使わず緑5段の固定配色。
+- **次・実行順**: ①（済） ②Instagram のランキング・地図カルーセルのタイル ③バズマップ（投稿0件のため投稿開始前に）。各段で予約中の素材を再生成する（予約の本文・日時・ID は保つ）。
+- **停止条件**: 予約中投稿の差し替えで本文・日時・IDが変わる、公開済み投稿の素材を上書きする場合は止める。動画の終端カード（YouTube のアウトロ）は統計画像ではないので外すかを別途確認する。
+- **完了条件**: 上記の生成経路の可視テキストに発行元が無く、各経路の出力に `assertMinimalChartCopy` 相当の検査が掛かる。
+
 ### [ESTAT-CATALOG-NOAREA-01] e-Stat カタログが「集計地域区分=該当なし」の表を 1 件も取得していない
 タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 
@@ -3802,6 +3826,7 @@ updated: 2026-11-01
 - **旧ID**: `NOTE-ARTICLE-QUALITY-PILOT-01` (2026-10-18 改名。`NOTE-ARTICLE-` で始まる ID は個別記事の写しとしてコンテンツ運用の監査が止めるため。調査記録 `data/note/evidence/note-article-quality-audit-20261016.json` は旧IDのまま)
 - **owner**: note-manager（本文・導線と公開段取り）/ chart-author（決定的な統計図）
 - **2026-10-19 develop統合・R2確認**: 画像索引259ファイルをprivate R2のmanifest SHAと照合し、家計3都市の共通候補3実体と公開済み参考図2枚の取得・SHA一致を確認。家計はnote/X/Instagramの9候補参照を保持するが、型方針変更で `candidateMatches=false` のため基本形から非表示になる。再開時は固定した検討見本の表示と候補採用を分け、候補のbasis更新・自動採用で隠さず4媒体に表示できるようにする。ランキング3型の見本PNGはR2固定入力から都度生成し、PNG自体はR2未保存。
+- **散布図・地図の4媒体見本（2026-11-02）**: `/ops/image-templates` の散布図（年平均気温×灯油消費量・2024年・47点）と地域色分け地図（最高気温2024年・正確な県形状・沖縄本島の別枠・サイトと同じ配色解決）を1080×1350の共通見本として追加。`publish-ranking-samples.ts --relationship|--distribution --apply` でprivate R2へSHA照合保存し、旧公開図は基準画像として残した。同日オーナー指示で2型の方針も共通4:5へ揃えた（`image-templates.json` v4）。全7型とも基本形は未確定。
 - **優先順位**: カバー残件の一括展開より本文品質のpilotを先に試す案。カバーの残計画は `NOTE-COVER-IMAGEGEN-ROLLOUT-01` を保持する。
 - **基本形の確認入口（2026-10-19更新）**: `/ops/image-templates` は左を「目的 → 図の形」の二階層に整理（比較 → 棒グラフなど）。図形以下の枝は固定せず制作で必要な違いを見て検討する。掲載範囲は各見本の補足へ、確認待ちは画像ライブラリへ分離し、分類案・未確定の目的/範囲を型見本へ混ぜない。旧selectionは絞込を解除して保持先を画像の補足へ移す。家計は右側の題材選択で同じ都市のnote固定サイズ試作1枚・X1枚・IG共通型候補1枚を同時表示する。制作記録と原記事keyから紐付け、保存原図の所属/ID/previewOnlyと投稿状態を維持。3都市の表示・画像取得・再読込・390px・darkを確認。Webだけの見本はWeb参考表示にし、未確認しかない旧URLはライブラリへ案内する。左には媒体・記事名・範囲・確認待ちの枝を置かず、shadcn標準Collapsibleと線の矢印を使用。目的/型/題材/媒体/見本/復帰位置をURLに保持し、未保存方針は保持する。比率選択と制作サイズの目安一覧を外し、家計のnote/X/IGは共通4:5（1080×1350）固定と表示する。制作仕様を常時表示し、重複説明を除去、型の方針・試作メモの編集は別パネルへ分離。原寸は画像から開き、画像ごとの操作は詳細へまとめる。原本・個別方針・旧候補6件を保持。青の統一・旧候補再確認・未登録媒体の試作と残分類は継続する。
 - **noteも型の固定サイズへ（2026-10-19）**: 家計3都市のnote用棒グラフを共通4:5（1080×1350）で試作し、元記事の画像IDへprivate R2の候補として保存・SHA照合した。X/IGと同じ固定入力・十大費目・47県庁所在市単純平均・年・世帯区分を保持。「型の試作見本」に表示名を統一し、旧note画像は詳細の旧新比較へ分離。現行候補が失効・修正待ち・未生成なら旧原図を型見本として代用しない。2:3の旧試作は履歴へ残し、オーナー指示でnote/X/IGを同じ4:5・データ・色・目盛り・描画部品へ統一。候補の採用・公開本文差し替えは未実施。
