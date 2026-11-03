@@ -4,10 +4,9 @@ import { type ReactNode } from "react";
 
 
 import { cn } from "@stats47/components";
-import { Table, TableBody, TableCell, TableRow } from "@stats47/components/atoms/ui/table";
 
 import Link from "@/components/atoms/SiteLink";
-import { SurfaceCard } from "@/components/surface";
+import { SurfaceCard, ValueTable } from "@/components/surface";
 
 export interface KeyMetricsTableRow {
   label: ReactNode;
@@ -42,51 +41,25 @@ export function KeyMetricsTableCard({
         </div>
       </div>
       <div className="p-3 pt-1">
-        <Table>
-          <TableBody>
-            {rows.map((row, index) => {
-              const content = (
-                <>
-                  <TableCell className="text-muted-foreground">
-                    <div className="line-clamp-2">{row.label}</div>
-                    {row.meta && <div className="mt-0.5 text-[10px]">{row.meta}</div>}
-                  </TableCell>
-                  <TableCell className="text-right font-bold tabular-nums text-foreground">
-                    {row.value}
-                  </TableCell>
-                </>
-              );
-
-              return (
-                <TableRow
-                  key={index}
-                  className="border-border/50"
-                >
-                  {row.href ? (
-                    <>
-                      <TableCell colSpan={2}>
-                        <Link
-                          href={row.href}
-                          className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 hover:text-primary"
-                        >
-                          <span className="text-muted-foreground">
-                            <span className="line-clamp-2">{row.label}</span>
-                            {row.meta && <span className="mt-0.5 block text-[10px]">{row.meta}</span>}
-                          </span>
-                          <span className="text-right font-bold tabular-nums text-foreground">
-                            {row.value}
-                          </span>
-                        </Link>
-                      </TableCell>
-                    </>
-                  ) : (
-                    content
-                  )}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        {/* 項目と値の対だけの表。見出しの行は画面に出さない (共通の静的な表 ValueTable。2026-11-03) */}
+        <ValueTable
+          hideHeader
+          ariaLabel={typeof title === "string" ? title : undefined}
+          columns={[
+            { key: "label", header: "項目", rowHeader: true },
+            { key: "value", header: "値", className: "font-bold text-foreground" },
+          ]}
+          rows={rows.map((row, index) => ({
+            key: String(index),
+            cells: [
+              <>
+                {row.href ? <Link href={row.href}>{row.label}</Link> : row.label}
+                {row.meta && <small className="block">{row.meta}</small>}
+              </>,
+              row.value,
+            ],
+          }))}
+        />
         {footer && (
           <div className="mt-1 text-[10px] text-muted-foreground">{footer}</div>
         )}

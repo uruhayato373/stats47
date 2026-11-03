@@ -4,20 +4,11 @@ import { useState } from 'react';
 
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -127,62 +118,40 @@ export function ThemeFreightOdClient({
         </p>
         {/* 全国のページは合計だけ。県別の合計を 47 行並べない (2026-10-31。比較はランキング) */}
         {!selectedPrefectureCode && rows ? null : rows ? (
-          <Table
-            aria-label={`${period} ${mode.label} ${area}の${direction === 'outbound' ? '発送先' : '到着元'}`}
+          <ValueTable
+            ariaLabel={`${period} ${mode.label} ${area}の${direction === 'outbound' ? '発送先' : '到着元'}`}
             className="min-w-80"
             scrollRegion
             containerClassName="min-w-0 max-w-full max-h-96"
-          >
-            <TableCaption>
-              {period}・{mode.label}。単位は{formatUnitForDisplay(mode.unit)}
-              。輸送機関をまたいだ合計・構成比は計算しません。
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">
-                  {selectedPrefectureCode
-                    ? '相手県'
-                    : direction === 'outbound'
-                      ? '発送県'
-                      : '到着県'}
-                </TableHead>
-                <TableHead scope="col" className="text-right!">
-                  輸送量（{formatUnitForDisplay(mode.unit)}）
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.areaCode}
-                  data-partner-area-code={row.areaCode}
-                >
-                  <TableHead scope="row">
-                    {
-                      snapshot.prefectures.find(
-                        (pref) => pref.areaCode === row.areaCode
-                      )?.areaName
-                    }
+            caption={
+              <>
+                {period}・{mode.label}。単位は{formatUnitForDisplay(mode.unit)}
+                。輸送機関をまたいだ合計・構成比は計算しません。
+              </>
+            }
+            columns={[
+              {
+                key: 'partner',
+                header: selectedPrefectureCode ? '相手県' : direction === 'outbound' ? '発送県' : '到着県',
+                rowHeader: true,
+              },
+              { key: 'value', header: `輸送量（${formatUnitForDisplay(mode.unit)}）` },
+            ]}
+            rows={[
+              ...rows.map((row) => ({
+                key: row.areaCode,
+                attrs: { 'data-partner-area-code': row.areaCode },
+                cells: [
+                  <>
+                    {snapshot.prefectures.find((pref) => pref.areaCode === row.areaCode)?.areaName}
                     {row.areaCode === selectedPrefectureCode ? '（県内）' : ''}
-                  </TableHead>
-                  <TableCell
-                    className="text-right tabular-nums"
-                    data-flow-value={row.value}
-                  >
-                    {row.value.toLocaleString('ja-JP')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TableHead scope="row">表の47県合計</TableHead>
-                <TableCell className="text-right tabular-nums">
-                  {total.toLocaleString('ja-JP')}
-                </TableCell>
-              </TableRow>
-            </TableFooter>
-          </Table>
+                  </>,
+                  { content: row.value.toLocaleString('ja-JP'), attrs: { 'data-flow-value': row.value } },
+                ],
+              })),
+              { key: 'total', total: true, cells: ['表の47県合計', total.toLocaleString('ja-JP')] },
+            ]}
+          />
         ) : (
           <p role="status" className="text-sm text-muted-foreground">
             選択した地域の確認済みデータを取得できません。

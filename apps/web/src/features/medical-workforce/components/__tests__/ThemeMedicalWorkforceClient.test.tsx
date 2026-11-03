@@ -32,8 +32,8 @@ describe('医療人材profileの表示', () => {
     const tables = screen.getAllByRole('table');
     expect(tables).toHaveLength(2);
     expect(tables[0].getAttribute('aria-label')).toContain('全国（公式集計）');
-    expect(tables[0].querySelectorAll('tbody tr')).toHaveLength(14);
-    expect(tables[1].querySelectorAll('tbody tr')).toHaveLength(45);
+    expect(tables[0].querySelectorAll('tbody tr[data-workforce-category]')).toHaveLength(14);
+    expect(tables[1].querySelectorAll('tbody tr[data-workforce-category]')).toHaveLength(45);
     expect(
       within(tables[0]).getByRole('rowheader', { name: '85歳以上' })
     ).toBeTruthy();
@@ -42,7 +42,7 @@ describe('医療人材profileの表示', () => {
     ).toBeTruthy();
     for (const table of tables) {
       expect(
-        table.querySelector('tfoot [data-total-physicians]')?.textContent
+        table.querySelector('[data-total-physicians]')?.textContent
       ).toBe('331,092');
       expect(table.parentElement?.className).toContain('overflow-x-auto');
       expect(table.className).toContain('min-w-96');

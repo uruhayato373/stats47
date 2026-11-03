@@ -1,19 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -62,61 +53,42 @@ export function ThemeGraduationPathsClient({
         <p className="text-sm text-muted-foreground">
           卒業した学校の所在地で集計しています。通信制高校・中等教育学校・特別支援学校は含みません。表示する県は、ページ共通の地域選択で切り替えられます。
         </p>
-        <Table
-          aria-label={`${areaLabel}の高校卒業後の進路`}
+        <ValueTable
+          ariaLabel={`${areaLabel}の高校卒業後の進路`}
           className="min-w-96"
           scrollRegion
-          containerClassName="min-w-0 max-w-full"
-        >
-          <TableCaption>
-            構成割合の分母は、同じ地域・学校課程の卒業者総数{format(view.total)}
-            人です。不詳・死亡を含む8区分の合計は総数と一致し、割合は小数第2位まで丸めています。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">進路</TableHead>
-              <TableHead scope="col" className="text-right!">
-                卒業者数（人）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                構成割合（%）
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {view.categories.map((category) => (
-              <TableRow key={category.key} data-category-key={category.key}>
-                <TableHead scope="row" className="min-w-40 whitespace-normal!">
-                  {category.label}
-                </TableHead>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-count={category.count}
-                >
-                  {format(category.count)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-share={category.share}
-                >
-                  {format(category.share, 2)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableHead scope="row">卒業者総数</TableHead>
-              <TableCell
-                className="text-right tabular-nums"
-                data-total={view.total}
-              >
-                {format(view.total)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">100</TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+          caption={
+            <>
+              構成割合の分母は、同じ地域・学校課程の卒業者総数{format(view.total)}
+              人です。不詳・死亡を含む8区分の合計は総数と一致し、割合は小数第2位まで丸めています。
+            </>
+          }
+          columns={[
+            { key: 'category', header: '進路', rowHeader: true, className: 'min-w-40' },
+            { key: 'count', header: '卒業者数（人）' },
+            { key: 'share', header: '構成割合（%）' },
+          ]}
+          rows={[
+            ...view.categories.map((category) => ({
+              key: category.key,
+              attrs: { 'data-category-key': category.key },
+              cells: [
+                category.label,
+                { content: format(category.count), attrs: { 'data-count': category.count } },
+                { content: format(category.share, 2), attrs: { 'data-share': category.share } },
+              ],
+            })),
+            {
+              key: 'total',
+              total: true,
+              cells: [
+                '卒業者総数',
+                { content: format(view.total), attrs: { 'data-total': view.total } },
+                '100',
+              ],
+            },
+          ]}
+        />
         <p
           className="text-sm text-muted-foreground"
           data-overlap-employed={view.overlapEmployed}

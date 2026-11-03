@@ -3,18 +3,9 @@
 import { useState } from 'react';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -119,80 +110,40 @@ export function ThemeMigrationDemographicsClient({
             : `${view.area.areaName}への移動が転入、${view.area.areaName}からの移動が転出です。`}
           転入超過が負数の場合は転出超過です。進学・就職などの転居理由は区別していません。
         </p>
-        <Table
-          aria-label={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
+        <ValueTable
+          ariaLabel={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
           className="min-w-96"
           scrollRegion
-          containerClassName="min-w-0 max-w-full"
-        >
-          <TableCaption>
-            県コード順。県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">{tableLabel}</TableHead>
-              <TableHead scope="col" className="text-right!">
-                転入（人）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                転出（人）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                転入超過（人）
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {shownRows.map((row) => (
-              <TableRow key={row.areaCode} data-counterpart-code={row.areaCode}>
-                <TableHead scope="row" className="whitespace-normal!">
-                  {row.areaName}
-                </TableHead>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-inbound={row.inbound}
-                >
-                  {format(row.inbound)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-outbound={row.outbound}
-                >
-                  {format(row.outbound)}
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-net={row.net}
-                >
-                  {signed(row.net)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableHead scope="row">{view.isNational ? '全国の計' : '表示行の計'}</TableHead>
-              <TableCell
-                className="text-right tabular-nums"
-                data-total-inbound={view.total.inbound}
-              >
-                {format(view.total.inbound)}
-              </TableCell>
-              <TableCell
-                className="text-right tabular-nums"
-                data-total-outbound={view.total.outbound}
-              >
-                {format(view.total.outbound)}
-              </TableCell>
-              <TableCell
-                className="text-right tabular-nums"
-                data-total-net={view.total.net}
-              >
-                {signed(view.total.net)}
-              </TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+          caption="県コード順。県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。"
+          columns={[
+            { key: 'area', header: tableLabel, rowHeader: true },
+            { key: 'inbound', header: '転入（人）' },
+            { key: 'outbound', header: '転出（人）' },
+            { key: 'net', header: '転入超過（人）' },
+          ]}
+          rows={[
+            ...shownRows.map((row) => ({
+              key: row.areaCode,
+              attrs: { 'data-counterpart-code': row.areaCode },
+              cells: [
+                row.areaName,
+                { content: format(row.inbound), attrs: { 'data-inbound': row.inbound } },
+                { content: format(row.outbound), attrs: { 'data-outbound': row.outbound } },
+                { content: signed(row.net), attrs: { 'data-net': row.net } },
+              ],
+            })),
+            {
+              key: 'total',
+              total: true,
+              cells: [
+                view.isNational ? '全国の計' : '表示行の計',
+                { content: format(view.total.inbound), attrs: { 'data-total-inbound': view.total.inbound } },
+                { content: format(view.total.outbound), attrs: { 'data-total-outbound': view.total.outbound } },
+                { content: signed(view.total.net), attrs: { 'data-total-net': view.total.net } },
+              ],
+            },
+          ]}
+        />
         {view.withinPrefecture !== null && (
           <p
             className="text-sm text-muted-foreground"

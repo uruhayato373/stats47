@@ -24,6 +24,20 @@ const extensions = new Set(['.ts', '.tsx']);
 
 const rules = [
   {
+    // 表は 2 種類だけ: 静的な表 ValueTable (@/components/surface) と、並べ替え・絞り込みのある DataTable (@stats47/components)。
+    // ページや feature で表の部品を直接組み立てると、見出しの行の書式・右寄せ・枠がページごとにずれる (2026-11-03 に 27 か所を寄せた)
+    id: 'tables-use-value-table',
+    message:
+      'Render static tables with ValueTable (@/components/surface) and interactive ones with DataTable (@stats47/components). Do not assemble Table/TableRow/TableCell directly.',
+    pattern: /from ['"]@stats47\/components\/atoms\/ui\/table['"]/,
+    allow: (relativePath) =>
+      [
+        'src/components/surface/ValueTable.tsx',
+        // ブログ本文の Markdown の表 (記事の部品。本文の書式で描く)
+        'src/features/blog/components/md-content.tsx',
+      ].includes(relativePath),
+  },
+  {
     // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)
     id: 'd3-only-in-registered-components',
     message:
@@ -377,6 +391,19 @@ function checkFile(relativePath) {
       });
     }
   });
+
+  // 表の部品を入口 (@stats47/components) から複数行の import で読む書き方は、1 行ずつの規則では捕まらないのでファイル全体で見る
+  const tableRule = rules.find((rule) => rule.id === 'tables-use-value-table');
+  const barrelTableImport = /import\s*\{[^}]*\bTable(?:Body|Row|Cell|Head|Header|Caption|Footer)?\b[^}]*\}\s*from\s*['"]@stats47\/components['"]/;
+  if (tableRule && !tableRule.allow(relativePath) && barrelTableImport.test(text)) {
+    violations.push({
+      ruleId: tableRule.id,
+      message: tableRule.message,
+      file: relativePath,
+      lineNumber: text.slice(0, text.search(barrelTableImport)).split(/\r?\n/).length,
+      line: 'import { Table… } from "@stats47/components"',
+    });
+  }
 
   return violations;
 }

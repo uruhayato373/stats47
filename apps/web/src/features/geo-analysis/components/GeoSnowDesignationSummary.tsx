@@ -3,21 +3,13 @@
 import { to2DigitPrefCode } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import type { GeoAnalysisSnapshot } from '@stats47/gis';
 export function snowNationalValues(
@@ -82,58 +74,48 @@ export function GeoSnowDesignationSummary({
         />
       }
     >
-      <Table aria-label="豪雪指定区域に中心があるメッシュ人口と面積">
-        <TableCaption>
-          特別豪雪は指定区域全体の内数です。全国割合は県の割合を平均せず、人口を合計して計算しています。
-        </TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead scope="col">地域</TableHead>
-            {snapshot.metrics.map((m) => (
-              <TableHead
-                key={m.key}
-                scope="col"
-                className="text-right! whitespace-nowrap"
+      <ValueTable
+        ariaLabel="豪雪指定区域に中心があるメッシュ人口と面積"
+        caption="特別豪雪は指定区域全体の内数です。全国割合は県の割合を平均せず、人口を合計して計算しています。"
+        columns={[
+          { key: 'area', header: '地域', rowHeader: true, className: 'whitespace-nowrap!' },
+          ...snapshot.metrics.map((m) => ({
+            key: m.key,
+            header: `${m.label}（${formatUnitForDisplay(m.unit)}）`,
+            className: 'whitespace-nowrap',
+          })),
+        ]}
+        rows={rows.map((r) => ({
+          key: r.areaCode,
+          attrs: { 'data-snow-area': r.areaCode },
+          cells: [
+            onSelectArea && !selected && r.areaCode !== '00000' ? (
+              <Button
+                key="area"
+                variant="link"
+                className="p-0"
+                onClick={() => onSelectArea(r.areaCode, r.areaName)}
               >
-                {m.label}（{formatUnitForDisplay(m.unit)}）
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {rows.map((r) => (
-            <TableRow key={r.areaCode} data-snow-area={r.areaCode}>
-              <TableHead scope="row" className="whitespace-nowrap">
-                {onSelectArea && !selected && r.areaCode !== '00000' ? (
-                  <Button
-                    variant="link"
-                    className="p-0"
-                    onClick={() => onSelectArea(r.areaCode, r.areaName)}
-                  >
-                    {r.areaName}
-                  </Button>
-                ) : (
-                  r.areaName
-                )}
-              </TableHead>
-              {snapshot.metrics.map((m) => (
-                <TableCell
-                  key={m.key}
-                  className="text-right whitespace-nowrap tabular-nums"
-                  data-snow-metric={m.key}
-                  data-value={r.values[m.key] ?? undefined}
-                >
-                  {typeof r.values[m.key] === 'number'
-                    ? Number(r.values[m.key]).toLocaleString('ja-JP', {
-                        maximumFractionDigits: m.unit === '人' ? 4 : 3,
-                      })
-                    : '—'}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                {r.areaName}
+              </Button>
+            ) : (
+              r.areaName
+            ),
+            ...snapshot.metrics.map((m) => ({
+              content:
+                typeof r.values[m.key] === 'number'
+                  ? Number(r.values[m.key]).toLocaleString('ja-JP', {
+                      maximumFractionDigits: m.unit === '人' ? 4 : 3,
+                    })
+                  : '—',
+              attrs: {
+                'data-snow-metric': m.key,
+                'data-value': r.values[m.key] ?? undefined,
+              },
+            })),
+          ],
+        }))}
+      />
       <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
         {SNOW_DESIGNATION_SOURCE.notes.map((note) => (
           <li key={note}>{note}</li>

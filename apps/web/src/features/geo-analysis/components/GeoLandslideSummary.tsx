@@ -1,14 +1,6 @@
 'use client';
 
 import { Button } from '@stats47/components/atoms/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { LANDSLIDE_EXPOSURE_SOURCE as S } from '@stats47/data-configs/theme-catalog';
 import {
@@ -18,7 +10,7 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable } from '@/components/surface';
 const number = (n: number | null | undefined) =>
   typeof n === 'number'
     ? n.toLocaleString('ja-JP', { maximumFractionDigits: 0 })
@@ -68,81 +60,82 @@ export function GeoLandslideSummary({
         tabIndex={0}
         aria-label="人口と施設の表。横方向にスクロールできます"
       >
-        <Table className="whitespace-nowrap" scrollRegion aria-label="指定区域面と人口・公共施設の県別集計">
-          <TableHeader>
-            <TableRow>
-              <TableHead>地域</TableHead>
-              <TableHead className="text-right! whitespace-nowrap">
-                区域面の和集合
-                <br />
-                中心人口（人）
-              </TableHead>
-              <TableHead className="text-right! whitespace-nowrap">
-                人口分母（人）
-              </TableHead>
-              <TableHead className="text-right! whitespace-nowrap">
-                割合
-              </TableHead>
-              <TableHead className="text-right! whitespace-nowrap">
-                市町村役場等
-                <br />
-                区域内／全体
-              </TableHead>
-              <TableHead className="text-right! whitespace-nowrap">
-                公的集会施設
-                <br />
-                区域内／全体
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {shown.map((r) => {
-              const v = r.values,
-                share =
-                  typeof v.exposedCenterPopulation === 'number' &&
-                  typeof v.population2020 === 'number' &&
-                  v.population2020 > 0
-                    ? (v.exposedCenterPopulation / v.population2020) * 100
-                    : null;
-              return (
-                <TableRow key={r.areaCode} data-area-code={r.areaCode}>
-                  <TableHead scope="row" className="whitespace-nowrap">
-                    {onSelectArea && r.areaCode !== 'all' ? (
-                      <Button
-                        variant="link"
-                        className="p-0!"
-                        onClick={() => onSelectArea(r.areaCode, r.areaName)}
-                      >
-                        {r.areaName}
-                      </Button>
-                    ) : (
-                      r.areaName
-                    )}
-                  </TableHead>
-                  <TableCell className="text-right tabular-nums">
-                    {number(v.exposedCenterPopulation)}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {number(v.population2020)}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {share === null ? '対象外' : `${share.toFixed(2)}%`}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums whitespace-nowrap">
-                    {r.areaCode === '26000'
-                      ? '対象外'
-                      : `${number(v.exposedAdministrativeFacilities)}／${number(v.administrativeFacilities)}`}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums whitespace-nowrap">
-                    {r.areaCode === '26000'
-                      ? '対象外'
-                      : `${number(v.exposedMeetingFacilities)}／${number(v.meetingFacilities)}`}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <ValueTable
+          className="whitespace-nowrap"
+          scrollRegion
+          ariaLabel="指定区域面と人口・公共施設の県別集計"
+          columns={[
+            { key: 'area', header: '地域', rowHeader: true, className: 'whitespace-nowrap!' },
+            {
+              key: 'exposed',
+              header: (
+                <>
+                  区域面の和集合
+                  <br />
+                  中心人口（人）
+                </>
+              ),
+            },
+            { key: 'population', header: '人口分母（人）' },
+            { key: 'share', header: '割合' },
+            {
+              key: 'administrative',
+              header: (
+                <>
+                  市町村役場等
+                  <br />
+                  区域内／全体
+                </>
+              ),
+            },
+            {
+              key: 'meeting',
+              header: (
+                <>
+                  公的集会施設
+                  <br />
+                  区域内／全体
+                </>
+              ),
+            },
+          ]}
+          rows={shown.map((r) => {
+            const v = r.values,
+              share =
+                typeof v.exposedCenterPopulation === 'number' &&
+                typeof v.population2020 === 'number' &&
+                v.population2020 > 0
+                  ? (v.exposedCenterPopulation / v.population2020) * 100
+                  : null;
+            return {
+              key: r.areaCode,
+              attrs: { 'data-area-code': r.areaCode },
+              cells: [
+                onSelectArea && r.areaCode !== 'all' ? (
+                  <Button
+                    key="area"
+                    variant="link"
+                    className="p-0!"
+                    onClick={() => onSelectArea(r.areaCode, r.areaName)}
+                  >
+                    {r.areaName}
+                  </Button>
+                ) : (
+                  r.areaName
+                ),
+                number(v.exposedCenterPopulation),
+                number(v.population2020),
+                share === null ? '対象外' : `${share.toFixed(2)}%`,
+                r.areaCode === '26000'
+                  ? '対象外'
+                  : `${number(v.exposedAdministrativeFacilities)}／${number(v.administrativeFacilities)}`,
+                r.areaCode === '26000'
+                  ? '対象外'
+                  : `${number(v.exposedMeetingFacilities)}／${number(v.meetingFacilities)}`,
+              ],
+            };
+          })}
+        />
       </div>
       {selected && selected.areaCode !== '26000' ? (
         <p className="mt-3 text-xs text-muted-foreground">

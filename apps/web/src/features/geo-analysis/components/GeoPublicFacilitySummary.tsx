@@ -11,19 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
-import { SurfaceSection } from '@/components/surface';
+import { SurfaceSection, ValueTable } from '@/components/surface';
 
 import {
   PUBLIC_FACILITY_BAND_LABELS,
@@ -129,34 +121,22 @@ export function GeoPublicFacilitySummary({
         件（2022年4月）。行政施設と公的集会施設は同じ人口をそれぞれ分類します。両群の人口は合算しません。
       </p>
       <div className="mt-3 min-w-0 overflow-x-auto">
-        <Table aria-label="選択地域の距離帯別人口と比率">
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">最寄り施設への距離帯</TableHead>
-              <TableHead scope="col" className="text-right!">
-                {year}年人口
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                比率
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
-              <TableRow key={label}>
-                <TableHead scope="row" className="whitespace-nowrap">
-                  {label}
-                </TableHead>
-                <TableCell className="text-right whitespace-nowrap tabular-nums">
-                  {people(values[`${group}Band${band}Population${year}`])}
-                </TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {share(values[`${group}Band${band}Share${year}`])}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel="選択地域の距離帯別人口と比率"
+          columns={[
+            { key: 'band', header: '最寄り施設への距離帯', rowHeader: true, className: 'whitespace-nowrap!' },
+            { key: 'population', header: `${year}年人口`, className: 'whitespace-nowrap' },
+            { key: 'share', header: '比率' },
+          ]}
+          rows={PUBLIC_FACILITY_BAND_LABELS.map((label, band) => ({
+            key: label,
+            cells: [
+              label,
+              people(values[`${group}Band${band}Population${year}`]),
+              share(values[`${group}Band${band}Share${year}`]),
+            ],
+          }))}
+        />
       </div>
       <p className="mt-3 text-xs text-muted-foreground">
         分母：{people(values[`population${year}`])}
@@ -164,68 +144,54 @@ export function GeoPublicFacilitySummary({
       </p>
       {!regionOnly && (
       <div className="mt-5 min-w-0 overflow-x-auto">
-        <Table className="whitespace-nowrap" scrollRegion aria-label="47都道府県の距離帯別人口">
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">都道府県</TableHead>
-              {PUBLIC_FACILITY_BAND_LABELS.map((label) => (
-                <TableHead
-                  key={label}
-                  scope="col"
-                  className="text-right! whitespace-nowrap"
+        <ValueTable
+          className="whitespace-nowrap"
+          scrollRegion
+          ariaLabel="47都道府県の距離帯別人口"
+          columns={[
+            { key: 'area', header: '都道府県', rowHeader: true, className: 'whitespace-nowrap!' },
+            ...PUBLIC_FACILITY_BAND_LABELS.map((label) => ({ key: label, header: label })),
+            { key: 'audit', header: '検算', align: 'left' as const },
+          ]}
+          rows={rows.map((row) => ({
+            key: row.areaCode,
+            cells: [
+              onSelectArea && !selected ? (
+                <Button
+                  key="area"
+                  variant="link"
+                  className="p-0"
+                  onClick={() => onSelectArea(row.areaCode, row.areaName)}
+                  aria-label={`${row.areaName}の公共施設地図を表示`}
                 >
-                  {label}
-                </TableHead>
-              ))}
-              <TableHead scope="col">検算</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.areaCode}>
-                <TableHead scope="row" className="whitespace-nowrap">
-                  {onSelectArea && !selected ? (
-                    <Button
-                      variant="link"
-                      className="p-0"
-                      onClick={() => onSelectArea(row.areaCode, row.areaName)}
-                      aria-label={`${row.areaName}の公共施設地図を表示`}
-                    >
-                      {row.areaName}
-                    </Button>
-                  ) : (
-                    <Link
-                      className="inline-flex min-h-11 items-center text-primary underline"
-                      href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
-                    >
-                      {row.areaName}
-                    </Link>
-                  )}
-                </TableHead>
-                {PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
-                  <TableCell
-                    key={label}
-                    className="text-right whitespace-nowrap tabular-nums"
-                  >
-                    {people(row.values[`${group}Band${band}Population${year}`])}
-                    <br />
-                    <span className="text-xs text-muted-foreground">
-                      {share(row.values[`${group}Band${band}Share${year}`])}
-                    </span>
-                  </TableCell>
-                ))}
-                <TableCell className="whitespace-nowrap">
-                  <Link
-                    className="inline-flex min-h-11 items-center text-primary underline"
-                    href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
-                  >
-                    地点・検算
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                  {row.areaName}
+                </Button>
+              ) : (
+                <Link
+                  key="area"
+                  className="inline-flex min-h-11 items-center text-primary underline"
+                  href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
+                >
+                  {row.areaName}
+                </Link>
+              ),
+              ...PUBLIC_FACILITY_BAND_LABELS.map((label, band) => (
+                <span key={label}>
+                  {people(row.values[`${group}Band${band}Population${year}`])}
+                  <br />
+                  <small>{share(row.values[`${group}Band${band}Share${year}`])}</small>
+                </span>
+              )),
+              <Link
+                key="audit"
+                className="inline-flex min-h-11 items-center text-primary underline"
+                href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
+              >
+                地点・検算
+              </Link>,
+            ],
+          }))}
+        />
       </div>
       )}
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">

@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import { cn, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stats47/components";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
+import { ValueTable } from "@/components/surface";
 
 import type { AttributeMatrixData } from "../../../types/visualization";
 
@@ -36,41 +37,24 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
   };
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-left" />
-          {columns.map((col) => (
-            <TableHead
-              key={col}
-              className="text-center! whitespace-nowrap"
-            >
-              {col}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.label}>
-            <TableCell className="font-medium whitespace-nowrap">{row.label}</TableCell>
-            {row.values.map((value, i) => (
-              <TableCell
-                key={columns[i]}
-                className={cn(
-                  "text-center tabular-nums transition-colors",
-                  value !== null && "font-medium"
-                )}
-                style={value !== null ? { backgroundColor: getCellBg(value) } : undefined}
-              >
-                {value !== null
-                  ? `${value.toLocaleString()}${unit ? ` ${unit}` : ""}`
-                  : "-"}
-              </TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <ValueTable
+      columns={[
+        { key: "__label", header: null, rowHeader: true, className: "whitespace-nowrap!" },
+        ...columns.map((col) => ({ key: col, header: col, className: "whitespace-nowrap" })),
+      ]}
+      rows={rows.map((row) => ({
+        key: row.label,
+        cells: [
+          row.label,
+          ...row.values.map((value) => ({
+            content:
+              value !== null
+                ? `${value.toLocaleString()}${unit ? ` ${unit}` : ""}`
+                : "-",
+            attrs: value !== null ? { style: { backgroundColor: getCellBg(value) } } : undefined,
+          })),
+        ],
+      }))}
+    />
   );
 };

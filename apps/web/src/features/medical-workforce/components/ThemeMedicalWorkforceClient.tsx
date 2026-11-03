@@ -1,20 +1,11 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { PanelGrid } from '@/components/layout/PageShell';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -38,61 +29,45 @@ function WorkforceTable({
   total: number;
 }) {
   return (
-    <Table
-      aria-label={`${areaName}の医師の${kind}別人数と構成割合`}
+    <ValueTable
+      ariaLabel={`${areaName}の医師の${kind}別人数と構成割合`}
       className="min-w-96"
       scrollRegion
-      containerClassName="min-w-0 max-w-full"
-    >
-      <TableCaption>
-        構成割合は同じ地域・同じ年の医療施設従事医師{format(total)}
-        人が分母です。表示は四捨五入しています。
-      </TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead scope="col">{kind}</TableHead>
-          <TableHead scope="col" className="text-right!">
-            医師数（人）
-          </TableHead>
-          <TableHead scope="col" className="text-right!">
-            構成割合（%）
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.label} data-workforce-category={row.label}>
-            <TableHead scope="row" className="min-w-36 whitespace-normal!">
-              {row.label}
-            </TableHead>
-            <TableCell
-              className="text-right tabular-nums"
-              data-physicians={row.physicians}
-            >
-              {format(row.physicians)}
-            </TableCell>
-            <TableCell
-              className="text-right tabular-nums"
-              data-share={(row.physicians / total) * 100}
-            >
-              {format((row.physicians / total) * 100, 2)}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableHead scope="row">合計</TableHead>
-          <TableCell
-            className="text-right tabular-nums"
-            data-total-physicians={total}
-          >
-            {format(total)}
-          </TableCell>
-          <TableCell className="text-right tabular-nums">100</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+      caption={
+        <>
+          構成割合は同じ地域・同じ年の医療施設従事医師{format(total)}
+          人が分母です。表示は四捨五入しています。
+        </>
+      }
+      columns={[
+        { key: 'label', header: kind, rowHeader: true, className: 'min-w-36' },
+        { key: 'physicians', header: '医師数（人）' },
+        { key: 'share', header: '構成割合（%）' },
+      ]}
+      rows={[
+        ...rows.map((row) => ({
+          key: row.label,
+          attrs: { 'data-workforce-category': row.label },
+          cells: [
+            row.label,
+            { content: format(row.physicians), attrs: { 'data-physicians': row.physicians } },
+            {
+              content: format((row.physicians / total) * 100, 2),
+              attrs: { 'data-share': (row.physicians / total) * 100 },
+            },
+          ],
+        })),
+        {
+          key: 'total',
+          total: true,
+          cells: [
+            '合計',
+            { content: format(total), attrs: { 'data-total-physicians': total } },
+            '100',
+          ],
+        },
+      ]}
+    />
   );
 }
 

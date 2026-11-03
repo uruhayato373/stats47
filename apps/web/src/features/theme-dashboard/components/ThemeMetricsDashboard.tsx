@@ -16,7 +16,7 @@ import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
-import { MetricRowTable, StatTileGrid } from '@/components/surface';
+import { StatTileGrid, ValueTable } from '@/components/surface';
 
 import { metricSourceGroups } from '../lib/metric-source-groups';
 import { buildMetricTableRows } from '../lib/metric-table-rows';
@@ -337,25 +337,33 @@ export function ThemeMetricsDashboard({
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
   const renderTablePanel = (panel: Panel, sectionTitle?: string) => {
-    const { extraHeaders, rows } = buildMetricTableRows(panel.metrics, tabLabels, selectedPrefectureCode !== null);
+    const inChapter = sectionTitle !== undefined;
+    const { columns, rows } = buildMetricTableRows(
+      panel.metrics,
+      tabLabels,
+      selectedPrefectureCode !== null,
+      inChapter ? (panel.title ?? '指標') : '指標'
+    );
     if (rows.length === 0) return null;
-    const years = new Set(rows.map((row) => row.year));
+    // 章の中の表は枠の見出しの帯を置かない (章の見出し・答えの文と見出しが 3 段に重なるため。2026-11-03)。
+    // グループ名は表の 1 列目の見出し、年は行ごと、出典は章の見出しの帯のシートにまとめる
+    if (inChapter) {
+      return <ValueTable key={panel.key} ariaLabel={panel.title ?? sectionTitle} columns={columns} rows={rows} />;
+    }
     return (
       <ChartPanel
         key={panel.key}
         id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
-        title={panel.title === sectionTitle ? undefined : panel.title}
-        // 年がそろう表は年を見出しの下に 1 回だけ書く (行ごとの年は出したまま)
-        description={years.size === 1 ? [...years][0] : undefined}
+        title={panel.title}
         action={<SourcesSheet trigger="icon" groups={metricSourceGroups(panel.metrics, tabLabels)} />}
         contentClassName="p-0!"
       >
-        <MetricRowTable extraHeaders={extraHeaders} rows={rows} />
+        <ValueTable columns={columns} rows={rows} />
       </ChartPanel>
     );
   };
   const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.view === 'table' ? (
-    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)。枠は共通の ChartPanel、表は共通の MetricRowTable
+    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)。表は共通の静的な表 ValueTable (章の外だけ ChartPanel に入れる)
     renderTablePanel(panel, sectionTitle)
   ) : isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
@@ -567,6 +575,12 @@ export function ThemeMetricsDashboard({
           isPrefecture: selectedPrefectureCode !== null,
         })
       : null;
+    // 章の中の表は枠の帯を持たないので、その出典は章の見出しの帯のシートにまとめる (2026-11-03)
+    const tableMetrics = panels.filter((panel) => panel.view === 'table').flatMap((panel) => panel.metrics);
+    const chapterSheetGroups = [
+      ...(chapter.description ? [{ notes: [chapter.description], sources: [], rankings: [] }] : []),
+      ...metricSourceGroups(tableMetrics, tabLabels),
+    ];
     return (
     <PanelGrid
       as="section"
@@ -587,14 +601,15 @@ export function ThemeMetricsDashboard({
           ) : undefined
         }
         action={
-          action || chapter.description ? (
+          action || chapterSheetGroups.length > 0 ? (
             <span className="flex items-center gap-1">
               {action}
-              {chapter.description ? (
+              {chapterSheetGroups.length > 0 ? (
                 <SourcesSheet
                   trigger="icon"
-                  label="読むときの注意"
-                  groups={[{ notes: [chapter.description], sources: [], rankings: [] }]}
+                  // 表の出典が入るときは既定の題 (出典・指標の定義・読むときの注意)、章の説明だけなら「読むときの注意」
+                  label={tableMetrics.length > 0 ? undefined : '読むときの注意'}
+                  groups={chapterSheetGroups}
                 />
               ) : null}
             </span>

@@ -2,18 +2,10 @@
 
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { SHELTER_APPLICABILITY_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -56,86 +48,63 @@ export function ThemeShelterApplicabilityClient({
               この地域の最新DB更新日は{row.latestDatabaseUpdate}
               です。指定日・開設日ではありません。
             </p>
-            <Table
-              aria-label={`${row.areaName}の指定緊急避難場所と災害種別`}
+            <ValueTable
+              ariaLabel={`${row.areaName}の指定緊急避難場所と災害種別`}
               className="min-w-96"
               scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
-            >
-              <TableCaption>
-                各行の母数は指定緊急避難場所の掲載
-                {format(row.emergency.facilities)}件です。
-                複数の災害に該当する場所があるため、災害種別の件数は合算しません。
-              </TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead scope="col">災害の種類</TableHead>
-                  {['該当', '非該当', '不明'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right!">
-                      {label}（件）
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {row.emergency.hazards.map((h, i) => (
-                  <TableRow key={h.key} data-hazard-key={h.key}>
-                    <TableHead scope="row" className="whitespace-normal!">
-                      {source.hazards[i]!.label}
-                    </TableHead>
-                    <TableCell
-                      className="text-right tabular-nums"
-                      data-applicable={h.applicable}
-                    >
-                      {format(h.applicable)}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {format(h.notApplicable)}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {format(h.unknown)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+              caption={
+                <>
+                  各行の母数は指定緊急避難場所の掲載
+                  {format(row.emergency.facilities)}件です。
+                  複数の災害に該当する場所があるため、災害種別の件数は合算しません。
+                </>
+              }
+              columns={[
+                { key: 'hazard', header: '災害の種類', rowHeader: true },
+                ...['該当', '非該当', '不明'].map((label) => ({ key: label, header: `${label}（件）` })),
+              ]}
+              rows={row.emergency.hazards.map((h, i) => ({
+                key: h.key,
+                attrs: { 'data-hazard-key': h.key },
+                cells: [
+                  source.hazards[i]!.label,
+                  { content: format(h.applicable), attrs: { 'data-applicable': h.applicable } },
+                  format(h.notApplicable),
+                  format(h.unknown),
+                ],
+              }))}
+            />
             <p className="text-xs leading-relaxed text-muted-foreground">
               原典の「1」を該当、空欄を非該当として集計しています。本取得分に不明の記号はありません。
               非該当は、安全・危険の判定を意味しません。
             </p>
-            <Table
-              aria-label={`${row.areaName}の指定避難所の掲載件数`}
+            <ValueTable
+              ariaLabel={`${row.areaName}の指定避難所の掲載件数`}
               className="min-w-96"
               scrollRegion
-              containerClassName="min-w-0 max-w-full"
-            >
-              <TableCaption>
-                指定避難所は被災者等が一定期間滞在する施設です。指定緊急避難場所とは別に集計します。
-                災害種別の集計は対象外（この原典には属性がありません）。
-              </TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead scope="col">指定避難所の区分</TableHead>
-                  <TableHead scope="col" className="text-right!">
-                    掲載件数（件）
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[
+              caption={
+                <>
+                  指定避難所は被災者等が一定期間滞在する施設です。指定緊急避難場所とは別に集計します。
+                  災害種別の集計は対象外（この原典には属性がありません）。
+                </>
+              }
+              columns={[
+                { key: 'label', header: '指定避難所の区分', rowHeader: true },
+                { key: 'count', header: '掲載件数（件）' },
+              ]}
+              rows={(
+                [
                   ['一般避難所', row.shelter.general],
                   ['福祉避難所', row.shelter.welfare],
                   ['指定避難所の合計', row.shelter.facilities],
-                ].map(([label, n]) => (
-                  <TableRow key={label}>
-                    <TableHead scope="row">{label}</TableHead>
-                    <TableCell className="text-right tabular-nums">
-                      {format(Number(n))}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                ] as const
+              ).map(([label, n]) => ({
+                key: label,
+                total: label === '指定避難所の合計',
+                cells: [label, format(Number(n))],
+              }))}
+            />
             <p className="text-xs leading-relaxed text-muted-foreground">
               この地域の公開一覧は{format(row.coverage.catalogMunicipalities)}
               自治体等です。 両方を公開：{format(row.coverage.bothPublished)}

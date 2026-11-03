@@ -3,14 +3,6 @@ import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import {
@@ -36,6 +28,7 @@ import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
+import { ValueTable } from '@/components/surface';
 
 import {
   MunicipalityPrefectureLinks,
@@ -200,39 +193,25 @@ export default async function MunicipalityPrefectureRankingPage({
       <section aria-label={`${prefecture.prefName}の順位`} className="mt-5">
         <SectionHeader title={`${prefecture.prefName}の順位`} hideRule className="mb-2" />
         <div className="overflow-x-auto border border-border">
-          <Table>
-            <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
-              <TableRow>
-                <TableHead className="w-20">県内順位</TableHead>
-                <TableHead>{areaLabel}</TableHead>
-                <TableHead className="text-right!">値</TableHead>
-                <TableHead className="w-24 text-right!">全国順位</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {ranking.rows.map((row) => (
-                <TableRow key={row.areaCode}>
-                  <TableCell className="tabular-nums text-muted-foreground">
-                    {row.prefectureRank}位
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    <Link
-                      href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}
-                      className="text-primary hover:underline"
-                    >
-                      {listName(row.areaName)}
-                    </Link>
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {formatValue(row.value)} {unit}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums text-muted-foreground">
-                    {row.rank}位
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ValueTable
+            columns={[
+              { key: 'prefRank', header: '県内順位', className: 'w-20' },
+              { key: 'area', header: areaLabel, rowHeader: true, align: 'left' },
+              { key: 'value', header: '値' },
+              { key: 'rank', header: '全国順位', className: 'w-24' },
+            ]}
+            rows={ranking.rows.map((row) => ({
+              key: row.areaCode,
+              cells: [
+                `${row.prefectureRank}位`,
+                <Link key="area" href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}>
+                  {listName(row.areaName)}
+                </Link>,
+                `${formatValue(row.value)} ${unit}`,
+                `${row.rank}位`,
+              ],
+            }))}
+          />
         </div>
       </section>
 

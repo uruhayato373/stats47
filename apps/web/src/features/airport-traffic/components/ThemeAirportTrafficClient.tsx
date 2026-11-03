@@ -2,18 +2,10 @@
 
 import { lookupArea } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { AIRPORT_TRAFFIC_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -71,101 +63,58 @@ export function ThemeAirportTrafficClient({
                 トン。ヘリポートを除き、複数県にまたがる空港も1回だけ集計しています。
               </p>
             )}
-            <Table
-              aria-label={`${area}の空港別旅客取扱い`}
+            <ValueTable
+              ariaLabel={`${area}の空港別旅客取扱い`}
               className="min-w-96"
               scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
-            >
-              <TableCaption>
-                旅客は乗客・降客・国際線通過客の延べ取扱い（人）。国際線の通過客は国際線合計の内数です。
-              </TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead scope="col">空港・所在地</TableHead>
-                  {['国内線', '国際線', 'うち通過客', '合計'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right!">
-                      {label}（人）
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.airportName}
-                    data-airport-name={row.airportName}
-                  >
-                    <TableHead scope="row" className="whitespace-normal!">
-                      {row.airportName}
-                      <span className="block text-xs font-normal text-muted-foreground">
-                        {row.areaCodes
-                          .map((code) => lookupArea(code)?.areaName)
-                          .join('・')}
-                        {row.areaCodes.length > 1 ? '（複数県にまたがる）' : ''}
-                      </span>
-                    </TableHead>
-                    {[
-                      row.passengers.domesticTotal,
-                      row.passengers.internationalTotal,
-                      row.passengers.internationalTransit,
-                      row.passengers.total,
-                    ].map((n, i) => (
-                      <TableCell
-                        key={i}
-                        className="text-right tabular-nums"
-                        data-passenger-value={n}
-                      >
-                        {format(n)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <Table
-              aria-label={`${area}の空港別貨物取扱い`}
+              caption="旅客は乗客・降客・国際線通過客の延べ取扱い（人）。国際線の通過客は国際線合計の内数です。"
+              columns={[
+                { key: 'airport', header: '空港・所在地', rowHeader: true },
+                ...['国内線', '国際線', 'うち通過客', '合計'].map((label) => ({ key: label, header: `${label}（人）` })),
+              ]}
+              rows={rows.map((row) => ({
+                key: row.airportName,
+                attrs: { 'data-airport-name': row.airportName },
+                cells: [
+                  <>
+                    {row.airportName}
+                    <small className="block font-normal">
+                      {row.areaCodes.map((code) => lookupArea(code)?.areaName).join('・')}
+                      {row.areaCodes.length > 1 ? '（複数県にまたがる）' : ''}
+                    </small>
+                  </>,
+                  ...[
+                    row.passengers.domesticTotal,
+                    row.passengers.internationalTotal,
+                    row.passengers.internationalTransit,
+                    row.passengers.total,
+                  ].map((n) => ({ content: format(n), attrs: { 'data-passenger-value': n } })),
+                ],
+              }))}
+            />
+            <ValueTable
+              ariaLabel={`${area}の空港別貨物取扱い`}
               className="min-w-96"
               scrollRegion
               containerClassName="min-w-0 max-w-full max-h-96"
-            >
-              <TableCaption>
-                貨物は積込・取卸の合計（トン）。郵便取扱量は含みません。
-              </TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead scope="col">空港</TableHead>
-                  {['国内線', '国際線', '合計'].map((label) => (
-                    <TableHead key={label} scope="col" className="text-right!">
-                      {label}（トン）
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.airportName}
-                    data-cargo-airport-name={row.airportName}
-                  >
-                    <TableHead scope="row">{row.airportName}</TableHead>
-                    {[
-                      row.cargo.domesticTotal,
-                      row.cargo.internationalTotal,
-                      row.cargo.total,
-                    ].map((n, i) => (
-                      <TableCell
-                        key={i}
-                        className="text-right tabular-nums"
-                        data-cargo-value={n}
-                      >
-                        {format(n)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+              caption="貨物は積込・取卸の合計（トン）。郵便取扱量は含みません。"
+              columns={[
+                { key: 'airport', header: '空港', rowHeader: true },
+                ...['国内線', '国際線', '合計'].map((label) => ({ key: label, header: `${label}（トン）` })),
+              ]}
+              rows={rows.map((row) => ({
+                key: row.airportName,
+                attrs: { 'data-cargo-airport-name': row.airportName },
+                cells: [
+                  row.airportName,
+                  ...[row.cargo.domesticTotal, row.cargo.internationalTotal, row.cargo.total].map((n) => ({
+                    content: format(n),
+                    attrs: { 'data-cargo-value': n },
+                  })),
+                ],
+              }))}
+            />
           </>
         )}
         <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">

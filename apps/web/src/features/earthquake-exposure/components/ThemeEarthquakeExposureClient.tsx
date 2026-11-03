@@ -3,21 +3,13 @@
 import { to2DigitPrefCode } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
-import {
   EARTHQUAKE_EXPOSURE_SOURCE,
   selectEarthquakePopulationRow,
   type EarthquakePopulationSnapshot,
 } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -78,60 +70,73 @@ export function ThemeEarthquakeExposureClient({
         <p className="text-sm leading-relaxed text-muted-foreground">
           各地点で30年間に3%の確率で超える地震動の水準ごとに、地域人口を集計しています。
         </p>
-        <Table aria-label={`${area}の震度帯別人口`}>
-          <TableCaption>
-            各年の総人口を分母にした割合です。人口は小数第1位まで表示し、丸めにより合計が一致しない場合があります。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">震度帯</TableHead>
-              <TableHead scope="col" className="text-right!">
-                2020年人口
-                <br />
-                （人・割合）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                2050年推計人口
-                <br />
-                （人・割合）
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((b) => (
-              <TableRow key={b.key} data-band={b.key}>
-                <TableHead scope="row">{b.label}</TableHead>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-population2020={b.population2020}
-                >
-                  {formatPeople(b.population2020)}
-                  <span className="block text-xs text-muted-foreground">
-                    {formatPercent(b.population2020, row.total.population2020)}%
-                  </span>
-                </TableCell>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-population2050={b.population2050}
-                >
-                  {formatPeople(b.population2050)}
-                  <span className="block text-xs text-muted-foreground">
-                    {formatPercent(b.population2050, row.total.population2050)}%
-                  </span>
-                </TableCell>
-              </TableRow>
-            ))}
-            <TableRow>
-              <TableHead scope="row">総人口</TableHead>
-              <TableCell className="text-right tabular-nums">
-                {formatPeople(row.total.population2020)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {formatPeople(row.total.population2050)}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel={`${area}の震度帯別人口`}
+          caption="各年の総人口を分母にした割合です。人口は小数第1位まで表示し、丸めにより合計が一致しない場合があります。"
+          columns={[
+            { key: 'band', header: '震度帯', rowHeader: true },
+            {
+              key: 'population2020',
+              header: (
+                <>
+                  2020年人口
+                  <br />
+                  （人・割合）
+                </>
+              ),
+            },
+            {
+              key: 'population2050',
+              header: (
+                <>
+                  2050年推計人口
+                  <br />
+                  （人・割合）
+                </>
+              ),
+            },
+          ]}
+          rows={[
+            ...rows.map((b) => ({
+              key: b.key,
+              attrs: { 'data-band': b.key },
+              cells: [
+                b.label,
+                {
+                  content: (
+                    <>
+                      {formatPeople(b.population2020)}
+                      <small className="block">
+                        {formatPercent(b.population2020, row.total.population2020)}%
+                      </small>
+                    </>
+                  ),
+                  attrs: { 'data-population2020': b.population2020 },
+                },
+                {
+                  content: (
+                    <>
+                      {formatPeople(b.population2050)}
+                      <small className="block">
+                        {formatPercent(b.population2050, row.total.population2050)}%
+                      </small>
+                    </>
+                  ),
+                  attrs: { 'data-population2050': b.population2050 },
+                },
+              ],
+            })),
+            {
+              key: 'total',
+              total: true,
+              cells: [
+                '総人口',
+                formatPeople(row.total.population2020),
+                formatPeople(row.total.population2050),
+              ],
+            },
+          ]}
+        />
         <p className="text-xs leading-relaxed text-muted-foreground">
           同じ2024年基準の地震動に人口を重ねた比較です。特定の地震の被害人数や2050年の地震を予測した値ではありません。住宅棟数・建築時期の分布は含みません。
         </p>

@@ -97,7 +97,7 @@ describe('県選択と公表地理を混同しない集落表示', () => {
     );
     expect(screen.getAllByRole('table')).toHaveLength(2);
     expect(
-      screen.getAllByRole('table')[0].querySelectorAll('tbody tr')
+      screen.getAllByRole('table')[0].querySelectorAll('tbody tr[data-category-key]')
     ).toHaveLength(7);
     expect(
       screen.getAllByRole('table')[1].querySelectorAll('tbody tr')

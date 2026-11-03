@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, ChartPanel } from "@stats47/components";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, ChartPanel } from "@stats47/components";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 import { ChartFooter, type ChartFooterLink } from "@/components/charts/ChartFooter";
 import { ChartEmptyState } from "@/components/charts/ChartState";
+import { ValueTable } from "@/components/surface";
 
 import type { StatsTableRowData } from "../../../types/visualization";
 
@@ -77,36 +79,22 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
               </Select>
             </div>
           )}
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>指標名</TableHead>
-                <TableHead className="text-right!">値</TableHead>
-                <TableHead>単位</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((row, i) => (
-                <TableRow key={i}>
-                  <TableCell>
-                    {row.rankingLink ? (
-                      <a href={row.rankingLink} className="text-primary hover:underline">
-                        {row.label}
-                      </a>
-                    ) : (
-                      row.label
-                    )}
-                  </TableCell>
-                  <TableCell className="text-right font-semibold tabular-nums">
-                    {row.value !== null ? row.value.toLocaleString() : "---"}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {row.unit ?? ""}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ValueTable
+            columns={[
+              { key: "label", header: "指標名", rowHeader: true },
+              { key: "value", header: "値" },
+              { key: "unit", header: "単位", align: "left" },
+            ]}
+            rows={rows.map((row, i) => ({
+              key: String(i),
+              cells: [
+                row.rankingLink ? <a key="label" href={row.rankingLink}>{row.label}</a> : row.label,
+                // 行ごとに別の指標 (単位も違う) なので、桁は行の値から決める
+                row.value !== null ? formatValueWithPrecision(row.value, resolveValuePrecision([row.value])) : "---",
+                row.unit ?? "",
+              ],
+            }))}
+          />
         </>
       )}
     </ChartPanel>

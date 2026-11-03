@@ -1,18 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { BRIDGE_INSPECTION_AGE_SOURCE as SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -61,61 +53,51 @@ export function ThemeBridgeInspectionAgeClient({
           {selected.knownYearCount.toLocaleString('ja-JP')}橋、不明は
           {selected.unknownYearCount.toLocaleString('ja-JP')}橋です。
         </p>
-        <Table aria-label={`${area}の当年度点検橋の架設年度分布`}>
-          <TableCaption>
-            年度差＝2025年度−架設年度。割合は架設年度不明を含む掲載橋数が分母です。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">
-                架設年度
-                <br />
-                （西暦）
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                年度差
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                橋数
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                割合
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {SOURCE.bands.map((band) => {
-              const count = selected.bands.find(
-                (b) => b.key === band.key
-              )!.count;
-              const share =
-                selected.publishedCount === 0
-                  ? null
-                  : (count / selected.publishedCount) * 100;
-              return (
-                <TableRow key={band.key} data-band-key={band.key}>
-                  <TableHead scope="row">{band.constructionLabel}</TableHead>
-                  <TableCell className="text-right whitespace-nowrap">
-                    {band.label}
-                  </TableCell>
-                  <TableCell
-                    className="text-right tabular-nums"
-                    data-count={count}
-                  >
-                    {count.toLocaleString('ja-JP')}
-                  </TableCell>
-                  <TableCell
-                    className="text-right tabular-nums whitespace-nowrap"
-                    data-share={share}
-                    data-denominator={selected.publishedCount}
-                  >
-                    {share === null ? '—' : `${share.toFixed(1)}%`}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel={`${area}の当年度点検橋の架設年度分布`}
+          caption="年度差＝2025年度−架設年度。割合は架設年度不明を含む掲載橋数が分母です。"
+          columns={[
+            {
+              key: 'construction',
+              header: (
+                <>
+                  架設年度
+                  <br />
+                  （西暦）
+                </>
+              ),
+              rowHeader: true,
+            },
+            { key: 'diff', header: '年度差', className: 'whitespace-nowrap' },
+            { key: 'count', header: '橋数' },
+            { key: 'share', header: '割合', className: 'whitespace-nowrap' },
+          ]}
+          rows={SOURCE.bands.map((band) => {
+            const count = selected.bands.find(
+              (b) => b.key === band.key
+            )!.count;
+            const share =
+              selected.publishedCount === 0
+                ? null
+                : (count / selected.publishedCount) * 100;
+            return {
+              key: band.key,
+              attrs: { 'data-band-key': band.key },
+              cells: [
+                band.constructionLabel,
+                band.label,
+                { content: count.toLocaleString('ja-JP'), attrs: { 'data-count': count } },
+                {
+                  content: share === null ? '—' : `${share.toFixed(1)}%`,
+                  attrs: {
+                    'data-share': share,
+                    'data-denominator': selected.publishedCount,
+                  },
+                },
+              ],
+            };
+          })}
+        />
         <p className="text-xs text-muted-foreground">
           管理者別の掲載数：国土交通省{' '}
           {selected.managerCounts.mlit.toLocaleString('ja-JP')}橋、高速道路会社{' '}

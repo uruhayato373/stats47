@@ -2,14 +2,6 @@ import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import {
   MUNICIPALITY_THEME_CATALOGS,
@@ -27,6 +19,7 @@ import {
 
 import Link from '@/components/atoms/SiteLink';
 import { PageHeader, PageShell, PanelGrid } from '@/components/layout';
+import { ValueTable } from '@/components/surface';
 
 import { getSpecialWardCodes, readMunicipalityRanking } from '@/features/municipalities/server';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
@@ -141,27 +134,22 @@ export default async function AreaThemeCitiesPage({ params }: { params: Promise<
                     </Link>
                   }
                 >
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-14">県内</TableHead>
-                        <TableHead>{areaLabel}</TableHead>
-                        <TableHead className="text-right!">値</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {ranking.rows.slice(0, TOP_ROWS).map((row) => (
-                        <TableRow key={row.areaCode}>
-                          <TableCell className="tabular-nums">{row.prefectureRank}位</TableCell>
-                          {/* 値の名前は「兵庫県 南あわじ市」の形。県のページなので県名を外す */}
-                          <TableCell>{row.areaName.replace(`${prefecture.prefName} `, '')}</TableCell>
-                          <TableCell className="text-right tabular-nums">
-                            {row.value.toLocaleString('ja-JP', { maximumFractionDigits: 2 })} {unit}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                  <ValueTable
+                    columns={[
+                      { key: 'rank', header: '県内', className: 'w-14' },
+                      { key: 'area', header: areaLabel, rowHeader: true, align: 'left' },
+                      { key: 'value', header: '値' },
+                    ]}
+                    rows={ranking.rows.slice(0, TOP_ROWS).map((row) => ({
+                      key: row.areaCode,
+                      cells: [
+                        `${row.prefectureRank}位`,
+                        // 値の名前は「兵庫県 南あわじ市」の形。県のページなので県名を外す
+                        row.areaName.replace(`${prefecture.prefName} `, ''),
+                        `${row.value.toLocaleString('ja-JP', { maximumFractionDigits: 2 })} ${unit}`,
+                      ],
+                    }))}
+                  />
                 </ChartPanel>
               );
             })}

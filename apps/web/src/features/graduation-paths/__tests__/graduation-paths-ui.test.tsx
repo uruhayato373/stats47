@@ -89,7 +89,7 @@ describe('進路8区分と同一分母', () => {
         <ThemeGraduationPathsClient snapshot={snapshot} />
       </Context>
     );
-    expect(screen.getByRole('table').querySelectorAll('tbody tr')).toHaveLength(
+    expect(screen.getByRole('table').querySelectorAll('tbody tr[data-category-key]')).toHaveLength(
       8
     );
     expect(container.querySelector('[data-total]')?.textContent).toBe(

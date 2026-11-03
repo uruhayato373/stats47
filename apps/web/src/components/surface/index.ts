@@ -25,4 +25,4 @@ export {
 export { RailNavRow, SurfaceLinkCard } from './SurfaceCard';
 export { ArticleTeaserCard, CardGrid, cardGridColumns, cardGridFillers } from './ArticleTeaser';
 export { HorizontalCardCarousel } from './HorizontalCardCarousel';
-export { MetricRowTable, type MetricRowTableRow } from './MetricRowTable';
+export { ValueTable, type ValueTableCell, type ValueTableColumn, type ValueTableRow } from './ValueTable';

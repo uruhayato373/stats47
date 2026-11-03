@@ -21,23 +21,25 @@ function kpi(overrides: Partial<MetricKpi>): MetricKpi {
   };
 }
 
+const headers = (columns: { header: unknown }[]) => columns.map((column) => column.header);
+
 describe('buildMetricTableRows', () => {
-  it('県のページは全国順位の列を持ち、全国の値がどの行にも無ければ全国の列を作らない', () => {
-    const { extraHeaders, rows } = buildMetricTableRows([kpi({}), kpi({ metricKey: 'b', rank: 1 })], {}, true);
-    expect(extraHeaders).toEqual(['全国順位']);
-    expect(rows.map((row) => row.cells)).toEqual([['23位'], ['1位']]);
+  it('1 列目の見出しはグループ名で、県のページは全国順位の列を持ち、全国の値がどの行にも無ければ全国の列を作らない', () => {
+    const { columns, rows } = buildMetricTableRows([kpi({}), kpi({ metricKey: 'b', rank: 1 })], {}, true, 'お茶');
+    expect(headers(columns)).toEqual(['お茶', '値', '全国順位']);
+    expect(rows.map((row) => row.cells[2])).toEqual(['23位', '1位']);
   });
 
   it('全国の値がある行があれば、全国の値と全国との差の列を足す', () => {
-    const { extraHeaders, rows } = buildMetricTableRows([kpi({ nationalValue: 2000 }), kpi({ metricKey: 'b' })], {}, true);
-    expect(extraHeaders).toEqual(['全国順位', '全国', '全国との差']);
-    expect(rows[0].cells).toEqual(['23位', '2,000', '+36%']);
-    expect(rows[1].cells).toEqual(['23位', '—', '—']);
+    const { columns, rows } = buildMetricTableRows([kpi({ nationalValue: 2000 }), kpi({ metricKey: 'b' })], {}, true);
+    expect(headers(columns)).toEqual(['指標', '値', '全国順位', '全国', '全国との差']);
+    expect(rows[0].cells.slice(2)).toEqual(['23位', '2,000', '+36%']);
+    expect(rows[1].cells.slice(2)).toEqual(['23位', '—', '—']);
   });
 
   it('全国のページは順位の列を持たず、値の無い指標は行にしない', () => {
-    const { extraHeaders, rows } = buildMetricTableRows([kpi({ rank: null }), kpi({ metricKey: 'b', value: null })], {}, false);
-    expect(extraHeaders).toEqual([]);
+    const { columns, rows } = buildMetricTableRows([kpi({ rank: null }), kpi({ metricKey: 'b', value: null })], {}, false);
+    expect(headers(columns)).toEqual(['指標', '値']);
     expect(rows).toHaveLength(1);
   });
 });

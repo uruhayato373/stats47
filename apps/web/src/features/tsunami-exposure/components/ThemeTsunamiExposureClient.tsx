@@ -3,15 +3,6 @@ import { to2DigitPrefCode } from '@stats47/area';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
-import {
   TSUNAMI_EXPOSURE_SOURCE as source,
   selectTsunamiCounty,
   tsunamiCoverage,
@@ -21,6 +12,7 @@ import {
 } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 const people = (n: number) =>
@@ -112,61 +104,71 @@ export function ThemeTsunamiExposureClient({
                 ? 'このKSJ固定版は歴史的な想定を含み、現在の最新想定とは限りません。'
                 : ''}
             </p>
-            <Table aria-label={`${row.areaName}の津波浸水深別人口と公共施設`}>
-              <TableCaption>
-                人口は250mメッシュ中心で判定した近似です。施設は2022年4月の所在地を使用しています。人口は小数第1位に丸めています。
-              </TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead scope="col">浸水深</TableHead>
-                  <TableHead scope="col" className="text-right!">
-                    2020年人口
-                    <br />
-                    （人）
-                  </TableHead>
-                  <TableHead scope="col" className="text-right!">
-                    2050年推計人口
-                    <br />
-                    （人）
-                  </TableHead>
-                  <TableHead scope="col" className="text-right!">
-                    市町村役場等
-                    <br />
-                    （施設）
-                  </TableHead>
-                  <TableHead scope="col" className="text-right!">
-                    公的集会施設
-                    <br />
-                    （施設）
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[
-                  ...row.bands.map((b, i) => ({
-                    ...b,
-                    label: tsunamiBands(row.areaCode)[i].label,
-                  })),
-                  { key: 'total', ...row.total, label: '県全体の原典総数' },
-                ].map((b) => (
-                  <TableRow key={b.key} data-band={b.key}>
-                    <TableHead scope="row">{b.label}</TableHead>
-                    <TableCell className="text-right tabular-nums">
-                      {people(b.population2020Units)}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {people(b.population2050Units)}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {b.administrativeFacilities.toLocaleString('ja-JP')}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {b.publicMeetingFacilities.toLocaleString('ja-JP')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <ValueTable
+              ariaLabel={`${row.areaName}の津波浸水深別人口と公共施設`}
+              caption="人口は250mメッシュ中心で判定した近似です。施設は2022年4月の所在地を使用しています。人口は小数第1位に丸めています。"
+              columns={[
+                { key: 'depth', header: '浸水深', rowHeader: true },
+                {
+                  key: 'population2020',
+                  header: (
+                    <>
+                      2020年人口
+                      <br />
+                      （人）
+                    </>
+                  ),
+                },
+                {
+                  key: 'population2050',
+                  header: (
+                    <>
+                      2050年推計人口
+                      <br />
+                      （人）
+                    </>
+                  ),
+                },
+                {
+                  key: 'administrative',
+                  header: (
+                    <>
+                      市町村役場等
+                      <br />
+                      （施設）
+                    </>
+                  ),
+                },
+                {
+                  key: 'meeting',
+                  header: (
+                    <>
+                      公的集会施設
+                      <br />
+                      （施設）
+                    </>
+                  ),
+                },
+              ]}
+              rows={[
+                ...row.bands.map((b, i) => ({
+                  ...b,
+                  label: tsunamiBands(row.areaCode)[i].label,
+                })),
+                { key: 'total', ...row.total, label: '県全体の原典総数' },
+              ].map((b) => ({
+                key: b.key,
+                attrs: { 'data-band': b.key },
+                total: b.key === 'total',
+                cells: [
+                  b.label,
+                  people(b.population2020Units),
+                  people(b.population2050Units),
+                  b.administrativeFacilities.toLocaleString('ja-JP'),
+                  b.publicMeetingFacilities.toLocaleString('ja-JP'),
+                ],
+              }))}
+            />
             <p className="text-xs leading-relaxed text-muted-foreground">
               浸水ポリゴン非該当でも浸水が起こる可能性があります。東京都の非該当・未対象区分は浸水区域外の確定値ではありません。人口は被害人数の予測ではなく、施設は津波避難施設や避難容量ではありません。2050年の施設の存続や将来の津波を予測した値でもありません。
             </p>

@@ -9,19 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@stats47/components/atoms/ui/select';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -92,78 +84,49 @@ export function ThemeWaterQualityClient({
           水域が達成（{f((national.compliant / national.total) * 100)}%）
         </p>
         {prefs.length > 0 && (
-        <Table
-          aria-label={`${WATER_QUALITY_SOURCE.kinds[kind]}の県別掲載行と達成割合`}
-        >
-          <TableCaption>
-            県別の分母は各県欄の掲載行です。全国の公式水域数とは集計範囲が異なります。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">都道府県</TableHead>
-              <TableHead scope="col" className="text-right!">
-                達成 / 掲載行
-              </TableHead>
-              <TableHead scope="col" className="text-right!">
-                達成割合
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {prefs.map((p) => {
-              const s = summarizeWaterRows(snapshot, p.areaCode, kind);
-              return (
-                <TableRow
-                  key={p.areaCode}
-                  data-prefecture-code={p.areaCode}
-                  data-water-kind={kind}
-                >
-                  <TableHead scope="row">{p.areaName}</TableHead>
-                  <TableCell
-                    className="text-right tabular-nums"
-                    data-compliant={s.compliant}
-                    data-total={s.total}
-                  >
-                    {s.total ? `${f(s.compliant)} / ${f(s.total)}` : '掲載なし'}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {s.rate === null ? '—' : `${f(s.rate)}%`}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <ValueTable
+          ariaLabel={`${WATER_QUALITY_SOURCE.kinds[kind]}の県別掲載行と達成割合`}
+          caption="県別の分母は各県欄の掲載行です。全国の公式水域数とは集計範囲が異なります。"
+          columns={[
+            { key: 'area', header: '都道府県', rowHeader: true },
+            { key: 'compliant', header: '達成 / 掲載行' },
+            { key: 'rate', header: '達成割合' },
+          ]}
+          rows={prefs.map((p) => {
+            const s = summarizeWaterRows(snapshot, p.areaCode, kind);
+            return {
+              key: p.areaCode,
+              attrs: { 'data-prefecture-code': p.areaCode, 'data-water-kind': kind },
+              cells: [
+                p.areaName,
+                {
+                  content: s.total ? `${f(s.compliant)} / ${f(s.total)}` : '掲載なし',
+                  attrs: { 'data-compliant': s.compliant, 'data-total': s.total },
+                },
+                s.rate === null ? '—' : `${f(s.rate)}%`,
+              ],
+            };
+          })}
+        />
         )}
         {selectedPrefectureCode ? (
-          <Table
-            aria-label={`${selectedAreaName}の${WATER_QUALITY_SOURCE.kinds[kind]}原表一覧`}
-          >
-            <TableCaption>
-              {rows.length
-                ? `濃度の単位はmg/Lです。原表の平均値と75%値の最大値を分けて示します。`
-                : 'この県欄には選択した種類の水域が掲載されていません。'}
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead scope="col">水域 / 関係県</TableHead>
-                <TableHead scope="col">類型</TableHead>
-                <TableHead scope="col" className="text-right!">
-                  基準値
-                </TableHead>
-                <TableHead scope="col" className="text-right!">
-                  75%値の最大値
-                </TableHead>
-                <TableHead scope="col" className="text-right!">
-                  平均値
-                </TableHead>
-                <TableHead scope="col">判定</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((r) => (
-                <TableRow key={r.id} data-water-row={r.id}>
-                  <TableHead scope="row">
+          rows.length ? (
+            <ValueTable
+              ariaLabel={`${selectedAreaName}の${WATER_QUALITY_SOURCE.kinds[kind]}原表一覧`}
+              caption="濃度の単位はmg/Lです。原表の平均値と75%値の最大値を分けて示します。"
+              columns={[
+                { key: 'name', header: '水域 / 関係県', rowHeader: true },
+                { key: 'class', header: '類型', align: 'left' },
+                { key: 'limit', header: '基準値' },
+                { key: 'value75', header: '75%値の最大値' },
+                { key: 'mean', header: '平均値' },
+                { key: 'judge', header: '判定', align: 'left' },
+              ]}
+              rows={rows.map((r) => ({
+                key: r.id,
+                attrs: { 'data-water-row': r.id },
+                cells: [
+                  <>
                     <ExternalAnchor
                       href={`${WATER_QUALITY_SOURCE.url}#page=${r.page}`}
                       className="underline underline-offset-2"
@@ -171,7 +134,7 @@ export function ThemeWaterQualityClient({
                       {r.name}
                     </ExternalAnchor>
                     {r.relatedAreaCodes.length > 1 ? (
-                      <span className="block text-xs text-muted-foreground">
+                      <small className="block">
                         {r.relatedAreaCodes
                           .map(
                             (c) =>
@@ -179,35 +142,25 @@ export function ThemeWaterQualityClient({
                                 ?.areaName
                           )
                           .join('・')}
-                      </span>
+                      </small>
                     ) : null}
                     {r.id === WATER_QUALITY_SOURCE.anomaly.id ? (
-                      <span className="block text-xs text-muted-foreground">
-                        類型と基準値に原典間の相違あり
-                      </span>
+                      <small className="block">類型と基準値に原典間の相違あり</small>
                     ) : null}
-                  </TableHead>
-                  <TableCell>{r.class}</TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {r.limit}
-                  </TableCell>
-                  <TableCell
-                    className="text-right tabular-nums"
-                    data-value75={r.value75}
-                  >
-                    {r.value75}
-                  </TableCell>
-                  <TableCell
-                    className="text-right tabular-nums"
-                    data-mean={r.mean}
-                  >
-                    {r.mean}
-                  </TableCell>
-                  <TableCell>{r.compliant ? '達成' : '未達成'}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                  </>,
+                  r.class,
+                  r.limit,
+                  { content: r.value75, attrs: { 'data-value75': r.value75 } },
+                  { content: r.mean, attrs: { 'data-mean': r.mean } },
+                  r.compliant ? '達成' : '未達成',
+                ],
+              }))}
+            />
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              この県欄には選択した種類の水域が掲載されていません。
+            </p>
+          )
         ) : (
           <p className="text-sm text-muted-foreground">
             都道府県を選ぶと、水域名・類型・濃度・達成判定と原表へのリンクを確認できます。

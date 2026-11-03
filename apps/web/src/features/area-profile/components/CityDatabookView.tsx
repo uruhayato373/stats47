@@ -12,7 +12,7 @@ import { TrendingUp } from "lucide-react";
 import Link from "@/components/atoms/SiteLink";
 import { PanelGrid } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
-import { MetricRowTable, SectionCard } from "@/components/surface";
+import { SectionCard, ValueTable } from "@/components/surface";
 
 import { RankedValueGrid } from "@/features/area-databook";
 
@@ -31,7 +31,7 @@ const CITY_HIGHLIGHTS_LIMIT = 8;
 
 /**
  * 分野へのリンクを outline の小ボタン (buttonVariants outline sm と同じ見た目) で並べる。
- * 30 件前後並ぶので、共通の表 (MetricRowTable) と同じくクラスは親に 1 回だけ書く (ページの重さの予算)。
+ * 30 件前後並ぶので、共通の表 (ValueTable) と同じくクラスは親に 1 回だけ書く (ページの重さの予算)。
  */
 const FIELD_LINKS_CLASS =
   "flex flex-wrap gap-1.5 " +
@@ -155,19 +155,29 @@ export function CityDatabookView({ databook, cityShortName, prefName }: Props) {
                 }
               />
               <div className="overflow-x-auto border border-border">
-                <MetricRowTable
-                  extraHeaders={[inside, '全国']}
+                <ValueTable
+                  ariaLabel={section.title}
+                  columns={[
+                    { key: 'metric', header: '指標', rowHeader: true, className: 'min-w-40' },
+                    { key: 'value', header: '値' },
+                    { key: 'inside', header: inside },
+                    { key: 'national', header: '全国' },
+                  ]}
                   rows={section.metricKeys.map((key) => {
                     const metric = metrics[key]!;
                     return {
                       key,
-                      label: metric.label,
-                      href: metricHref(metric),
-                      navLabel: key,
-                      year: metric.yearName,
-                      value: formatValue(metric.value),
-                      unit: formatUnitForDisplay(metric.unit),
                       cells: [
+                        <>
+                          <Link href={metricHref(metric)} data-nav-label={key}>
+                            {metric.label}
+                          </Link>
+                          <small className="block">{metric.yearName}</small>
+                        </>,
+                        <>
+                          {formatValue(metric.value)}
+                          <small className="ml-0.5">{formatUnitForDisplay(metric.unit)}</small>
+                        </>,
                         <>
                           {`${metric.prefectureRank}位`}
                           <small>{`/${metric.prefectureCount}`}</small>

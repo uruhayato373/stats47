@@ -1,18 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@stats47/components/atoms/ui/table';
 import { FACTORY_INVESTMENT_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ValueTable } from '@/components/surface';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -58,38 +50,28 @@ export function ThemeFactoryInvestmentClient({
           </span>{' '}
           百万円
         </p>
-        {rows.length > 0 && (
-        <Table aria-label={`${area}の設備投資計画額`}>
-          <TableCaption>
-            県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">都道府県</TableHead>
-              <TableHead scope="col" className="text-right!">
-                設備投資額（百万円）
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.areaCode}
-                data-prefecture-code={row.areaCode}
-                data-value-status={row.status}
-              >
-                <TableHead scope="row">{row.areaName}</TableHead>
-                <TableCell
-                  className="text-right tabular-nums"
-                  data-value={row.value ?? undefined}
-                >
-                  {row.value === null ? '非公表（原表X）' : format(row.value)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        )}
+        <ValueTable
+          ariaLabel={`${area}の設備投資計画額`}
+          caption="県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。"
+          columns={[
+            { key: 'area', header: '都道府県', rowHeader: true },
+            { key: 'value', header: '設備投資額（百万円）' },
+          ]}
+          rows={rows.map((row) => ({
+            key: row.areaCode,
+            attrs: {
+              'data-prefecture-code': row.areaCode,
+              'data-value-status': row.status,
+            },
+            cells: [
+              row.areaName,
+              {
+                content: row.value === null ? '非公表（原表X）' : format(row.value),
+                attrs: { 'data-value': row.value ?? undefined },
+              },
+            ],
+          }))}
+        />
         <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
           {snapshot.notes.map((note) => (
             <li key={note}>{note}</li>

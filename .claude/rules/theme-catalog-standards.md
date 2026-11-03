@@ -87,7 +87,7 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 | 全国とどれだけ違うか | 県の値の横に全国の値 | 公式の全国の系列 (`app/japan/<key>/series.json`) がある指標で自動 (`MetricStatTile` の補足) |
 | 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
 | 品目ごとに いくつか・増えたか (並べて一度に見る) | 指標ごとの数値タイル + 小さな推移を格子に並べる | `metricGroups[].view: "tiles"` → 指標ごとに `SingleMetricCard` (切り替えのチャートを使わない。2026-11-03 試行: household-food-spending) |
-| 品目が多い (5 件以上) | この地域の 1 行ずつの表 (値・全国順位・全国・全国との差) | `metricGroups[].view: "table"` → `ChartPanel` + 共通の表 `MetricRowTable` (推移は取りに行かない。全国の値がどの行にも無ければ全国の列を出さない) |
+| 品目が多い (5 件以上) | この地域の 1 行ずつの表 (値・全国順位・全国・全国との差) | `metricGroups[].view: "table"` → 共通の静的な表 `ValueTable` (章の中では枠の見出しの帯を置かず、1 列目の見出しをグループ名にし、出典は章の帯のシートへ。推移は取りに行かない。全国の値がどの行にも無ければ全国の列を出さない) |
 | 長く続く増減が論点 (例: 緑茶が減り炭酸飲料が増えた) | 章の折れ線 (2〜4 本・同じ単位) | 章の `charts` の `line-chart`。入れる指標は 10 年以上の値があり直近 10 年で ±20% 以上動いたものだけ (機械で判定)。題が言う増減は 47 都市 (県) 平均の傾向なので、注記に「この地域の線が同じ向きとは限らない」と書く |
 | 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
 | 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |

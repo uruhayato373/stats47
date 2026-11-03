@@ -316,35 +316,60 @@
       ]
     },
     {
-      "id": "metric-row-table",
-      "name": "地域の指標の表",
-      "role": "1 つの地域の指標を 1 行ずつ「指標 (年)・値・呼び出し側の列 (順位・全国との差など)」で並べる。枠は持たず、呼び出し側が ChartPanel などに入れる",
+      "id": "value-table",
+      "name": "静的な表",
+      "role": "並べ替え・絞り込みの要らない表をすべてこれで描く (要る表は DataTable)。見出しの行は表の部品の既定のまま、1 列目以外は右寄せ・桁そろえ、行の見出しは th scope=\"row\"。枠は持たず、置く場所 (章の格子・ChartPanel など) が決める",
       "implementation": {
         "package": "@/components/surface",
-        "export": "MetricRowTable",
-        "source": "apps/web/src/components/surface/MetricRowTable.tsx",
-        "propsType": "MetricRowTableProps"
+        "export": "ValueTable",
+        "source": "apps/web/src/components/surface/ValueTable.tsx",
+        "propsType": "ValueTableProps"
       },
       "slots": [
         {
-          "prop": "extraHeaders",
-          "required": false,
-          "what": "3 列目以降の見出し (指標・値の後ろ。行の cells と同じ数・同じ順)"
+          "prop": "columns",
+          "required": true,
+          "what": "列 (見出し・行の見出しの列か・文字の列は align: left)"
         },
         {
           "prop": "rows",
           "required": true,
-          "what": "行 (指標名・リンク・年・整形した値・単位・3 列目以降のセル)"
+          "what": "行 (列と同じ数・同じ順のセル。補足は <small>。合計の行は total)"
+        },
+        {
+          "prop": "ariaLabel",
+          "required": false,
+          "what": "表の名前 (読み上げ・横スクロールの領域名)"
+        },
+        {
+          "prop": "caption",
+          "required": false,
+          "what": "表の下の注記"
+        },
+        {
+          "prop": "scrollRegion",
+          "required": false,
+          "what": "幅を絞って横スクロールさせる表"
+        },
+        {
+          "prop": "hideHeader",
+          "required": false,
+          "what": "項目と値の対だけの表で、見出しの行を画面に出さない (読み上げには残す)"
+        },
+        {
+          "prop": "containerClassName",
+          "required": false,
+          "what": "スクロールを担う外側の箱の class (長い一覧の高さを抑える max-h-96 など)"
         }
       ],
       "spec": {
-        "columns": "指標 (年を下に小さく)・値 (単位を小さく) のあとに呼び出し側の列。2 列目以降は右寄せの数値",
-        "classOnce": "class は表に 1 回だけ書く (行の多いページの重さの予算)",
+        "classOnce": "右寄せ・補足・リンクの書式は表に 1 回だけ書く (行の多いページの重さの予算)",
+        "header": "見出しの行の背景・文字の大きさをページで上書きしない",
         "rank": "順位は文字のまま書く (RankBadge にしない)",
-        "notForComparison": "47 都道府県・市区町村どうしを並べて比べる表には使わない (地域どうしの比較はランキングのページ)"
+        "inChapter": "テーマの章の中に置く表は枠の見出しの帯を持たず、1 列目の見出しで何の表かを示す"
       },
       "useWhen": [
-        "1 つの地域の指標を表で並べる所 (市区町村のデータブック・テーマの品目の多いグループ)"
+        "並べ替え・絞り込みの要らない表すべて (地域の指標の一覧・年ごとの値・区分ごとの値・市区町村などの一覧)"
       ],
       "avoidWhen": [
         {
