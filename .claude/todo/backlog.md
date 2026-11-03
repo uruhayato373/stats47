@@ -733,6 +733,8 @@ updated: 2026-11-01
 ### [INFRA-HISTORY-R2-PUBLISH-01] 交通網の変遷・IC と JCT・問いのページの計算結果を CI で生成して R2 に反映し、どの PC でも作り直さずに済むようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all] [起票:2026-10-29] [領域:データ]
 
+- **観測 (2026-11-03)**: 本番 `https://stats47.jp/geo/history/{expressway,railway,airport}` の 3 ページとも「〜のデータを読み込めませんでした。」(`InfraHistoryPage.tsx` の role=alert) を返している (curl で確認)。ローカルの開発サーバー (リモートの R2 を読む) でも同じ。データが R2 に無いことと整合する。ページは公開されたまま中身が出ない状態なので、反映するまで導線 (サイドバー・Geo の一覧) から外すかも判断が要る。
+
 - **なぜ (2026-10-29 のオーナーの指摘)**: 交通網の変遷 (高速道路・鉄道・空港)・高速道路の接合部 (IC・JCT)・問いのページの計算結果は、作った PC の `.local/r2/` にしか無い。ここは R2 へ送る前の一時置き場で、7 日で自動的に消える (`.claude/rules/local-environment.md` の保持表)。別の PC では毎回作り直す必要があり、本番は R2 を読むので R2 に無い限り表示できない。R2 への書き込みは CI に限る運用で (2026-09-14〜。memory `project_r2_writes_ci_only`)、会社の Windows PC には書き込みの資格情報も無い。
 - **反映するもの (すべて公開バケット `app/` 配下)**:
 

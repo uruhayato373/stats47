@@ -3,7 +3,7 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
-import { SectionCard } from "@/components/surface";
+import { SectionCard, ValueTable } from "@/components/surface";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
@@ -43,35 +43,38 @@ export function CorrelationSectionClient({
             <p className="mb-2 text-xs text-muted-foreground">
                 人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
             </p>
-            <nav className="flex flex-col" {...navSurfaceProps("ranking_correlation")}>
-                {correlatedItems.map((item) => {
-                    const article = articleByPairKey[item.rankingKey];
-                    return (
-                        <div key={item.rankingKey} className="flex items-center justify-between gap-2 py-1.5">
-                            <Link
-                                href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-                                className="truncate text-sm hover:text-primary transition-colors"
-                            >
-                                {item.title}
-                            </Link>
-                            <span className="flex shrink-0 items-center gap-3">
-                                {article && (
-                                    <Link
-                                        href={hrefFor("blog", { slug: article.slug })}
-                                        title={article.title}
-                                        className="text-xs text-primary hover:underline"
-                                    >
+            {/* 指標・解説記事・順位相関を行ごとに比べて読むので、共通の静的な表で描く (2026-11-03。旧: リンクの一覧) */}
+            <div {...navSurfaceProps("ranking_correlation")}>
+                <ValueTable
+                    ariaLabel="相関が高い指標"
+                    columns={[
+                        { key: "metric", header: "指標", rowHeader: true },
+                        { key: "article", header: "解説", align: "left" },
+                        { key: "r", header: "順位相関" },
+                    ]}
+                    rows={correlatedItems.map((item) => {
+                        const article = articleByPairKey[item.rankingKey];
+                        return {
+                            key: item.rankingKey,
+                            cells: [
+                                <Link key="metric" href={hrefFor("ranking", { rankingKey: item.rankingKey })}>
+                                    {item.title}
+                                </Link>,
+                                article ? (
+                                    <Link key="article" href={hrefFor("blog", { slug: article.slug })} title={article.title}>
                                         解説記事
                                     </Link>
-                                )}
-                                <span className={`font-mono text-xs tabular-nums ${correlationColorClass(item.populationAdjustedR)}`}>
+                                ) : (
+                                    "—"
+                                ),
+                                <span key="r" className={correlationColorClass(item.populationAdjustedR)}>
                                     {formatCorrelation(item.populationAdjustedR)}
-                                </span>
-                            </span>
-                        </div>
-                    );
-                })}
-            </nav>
+                                </span>,
+                            ],
+                        };
+                    })}
+                />
+            </div>
         </SectionCard>
     );
 }

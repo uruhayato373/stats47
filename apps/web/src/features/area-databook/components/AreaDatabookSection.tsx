@@ -5,7 +5,7 @@ import { PanelGrid } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
 import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
-import { getSurfaceCardClassName } from "@/components/surface";
+import { getSurfaceCardClassName, ValueTable } from "@/components/surface";
 
 import { AreaChartSection } from "@/features/area-profile";
 
@@ -83,28 +83,28 @@ function renderBlock(
       return <PrefSymbolPanel key={block.blockKey} editorial={data.editorial} />;
     case "agri-top10":
       if (!data.databook || data.databook.agriTop10.length === 0) return null;
+      // 順位・品目・産出額を行ごとに読む表なので、共通の静的な表 (ValueTable) で描く (2026-11-03。旧: 2〜3 列の格子)
       return (
-        <div key={block.blockKey} className="@container">
-          <ul
-            className={getSurfaceCardClassName({
-              className: "grid grid-cols-2 gap-px overflow-hidden bg-border p-0 @sm:grid-cols-3",
-            })}
-          >
-            {data.databook.agriTop10.map((it, i) => (
-              <li
-                key={it.name}
-                className="flex items-baseline justify-between bg-card px-2.5 py-1.5 text-sm"
-              >
-                <span className="text-muted-foreground">
-                  {i + 1}. {it.name}
-                </span>
-                <span className="font-bold tabular-nums">
+        <div key={block.blockKey} className={getSurfaceCardClassName({ className: "overflow-hidden p-0" })}>
+          <ValueTable
+            ariaLabel="農業産出額の上位品目"
+            columns={[
+              { key: "rank", header: "順位" },
+              { key: "name", header: "品目", rowHeader: true },
+              { key: "value", header: "産出額" },
+            ]}
+            rows={data.databook.agriTop10.map((it, i) => ({
+              key: it.name,
+              cells: [
+                i + 1,
+                it.name,
+                <>
                   {it.value.toLocaleString("ja-JP")}
-                  <span className="ml-0.5 text-[11px] text-muted-foreground">{formatUnitForDisplay(it.unit)}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+                  <small> {formatUnitForDisplay(it.unit)}</small>
+                </>,
+              ],
+            }))}
+          />
         </div>
       );
     case "chart": {

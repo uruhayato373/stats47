@@ -12,7 +12,7 @@ import { feature as topoFeature } from 'topojson-client';
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
 import { NumericTrendChart } from '@/components/charts/NumericTrendChart';
-import { STAT_VALUE_CLASS, StatTile } from '@/components/surface';
+import { STAT_VALUE_CLASS, StatTile, ValueTable } from '@/components/surface';
 
 import type {
   InfraCategory,
@@ -490,29 +490,33 @@ export function InfraHistoryExplorer({
           headingAs="h2"
           className="@lg:col-span-3"
         >
-          <p className="mb-2 text-xs text-muted-foreground">
-            右端は前年からの増減です。{isFiltered && '表示中の種別だけで集計しています。'}
-          </p>
-          {/* 幅に応じて 1〜3 段に分け、順位は段ごとに上から下へ読む */}
-          <ol className="gap-x-6 @md:columns-2 @lg:columns-3">
-            {rankedRows.map((row, i) => (
-              <li key={row.code} className="break-inside-avoid border-b border-border py-1.5">
-                <div className="flex items-baseline gap-2">
-                  <span className="w-6 shrink-0 text-right tabular-nums text-muted-foreground">{i + 1}</span>
-                  <Link href={row.href} className="min-w-0 flex-1 truncate hover:underline">
-                    {row.name}
-                  </Link>
-                  <span className="tabular-nums">{formatValue(row.value, measure.unit)}</span>
-                  <span className="w-20 shrink-0 text-right text-xs tabular-nums text-muted-foreground">
-                    {index > 0 ? formatDiff(row.value - row.previous, measure.unit) : '—'}
-                  </span>
-                </div>
-                <div className="mt-1 ml-8 h-1 bg-muted" aria-hidden>
-                  <div className="h-full bg-primary/60" style={{ width: `${(row.value / maxRowValue) * 100}%` }} />
-                </div>
-              </li>
-            ))}
-          </ol>
+          {/* 順位・県・値・前年からの増減を行ごとに読む表なので、共通の静的な表 (ValueTable) で描く (2026-11-03。旧: 段組みの番号付きリスト) */}
+          <ValueTable
+            ariaLabel={`${rowsLabel}の${measure.label}（${year}年）`}
+            caption={isFiltered ? '表示中の種別だけで集計しています。' : undefined}
+            columns={[
+              { key: 'rank', header: '順位' },
+              { key: 'name', header: '県', rowHeader: true },
+              { key: 'value', header: measure.label },
+              { key: 'diff', header: '前年からの増減' },
+            ]}
+            rows={rankedRows.map((row, i) => ({
+              key: row.code,
+              cells: [
+                i + 1,
+                <Link key="link" href={row.href}>
+                  {row.name}
+                </Link>,
+                <>
+                  {formatValue(row.value, measure.unit)}
+                  <div className="mt-1 ml-auto h-1 w-24 bg-muted" aria-hidden>
+                    <div className="h-full bg-primary/60" style={{ width: `${(row.value / maxRowValue) * 100}%` }} />
+                  </div>
+                </>,
+                <small key="diff">{index > 0 ? formatDiff(row.value - row.previous, measure.unit) : '—'}</small>,
+              ],
+            }))}
+          />
         </SectionCard>
       )}
     </PanelGrid>

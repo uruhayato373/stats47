@@ -29,11 +29,12 @@ describe("CorrelationSectionClient", () => {
             />,
         );
 
-        const withArticle = screen.getByRole("link", { name: "65歳以上人口割合" }).parentElement!;
+        // 指標・解説記事・順位相関は同じ行に並ぶ (共通の静的な表。2026-11-03)
+        const withArticle = screen.getByRole("row", { name: /65歳以上人口割合/ });
         expect(within(withArticle).getByRole("link", { name: "解説記事" })).toHaveAttribute("href", "/blog/aging-death-rate");
         expect(screen.getByRole("link", { name: "65歳以上人口割合" })).toHaveAttribute("href", "/ranking/ratio-65-plus");
 
-        const withoutArticle = screen.getByRole("link", { name: "自然増減率" }).parentElement!;
+        const withoutArticle = screen.getByRole("row", { name: /自然増減率/ });
         expect(within(withoutArticle).queryByRole("link", { name: "解説記事" })).toBeNull();
         expect(screen.getAllByRole("link", { name: "解説記事" })).toHaveLength(1);
     });
