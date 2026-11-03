@@ -217,6 +217,14 @@ updated: 2026-11-01
 - **やること**: e-Stat の元の表 (`data/metrics/convenience-store-sales.ts` の statsDataId) で期間と単位を確かめ、値か単位か説明文を直す。
 - **完了条件**: 期間と単位を出典で確かめた記録があり、値・単位・説明が一致する。
 
+### [HIGHWAY-THEME-N06-GUARD-01] テーマの高速道路の地図が、国土数値情報の時系列データを利用条件の検査を通さずに R2 から読んでいる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
+
+2026-11-03 にテーマの「高速道路網の広がり」の地図を交通網の変遷の地図へ置き換えようとして見つかった。`apps/web/src/features/highway-history/HighwayTimelineMap.tsx` は高速道路時系列データ (N06) を R2 の `app/highway-history/highway-sections.topojson` から直接読み、`isInfraNetworkPublishable` と利用条件の検査を通っていない。置き場の `app/highway-history/` は配信を拒む検査 `ksj-publication-guard.ts` の対象 (`app/geo/history/<key>/`) に入っていない。
+N06 は時系列で使うと非商用で、事務局の了承 (2026-10-29) は広告のないページだけ (`packages/gis/src/infra-history/networks.ts`)。テーマのページ (/themes/roads) は広告がある。今の地図は最新年の 1 枚だけなので「最新年度を現況データとして使う」(CC BY 4.0) に当たりうるが、年の変遷 (スライダー) に置き換えると時系列の利用になる。
+次: (1) 置き換えるか・広告を止めるか・事務局に確認するかをオーナーが決める。(2) どれにしても `app/highway-history/` を配信の検査の対象に入れ、現況 1 年だけを配っていることを検査で固定する。
+完了条件: テーマの高速道路の地図が利用条件の範囲で描かれ、`app/highway-history/` が配信の検査に掛かる。
+
 ### [GEO-STAT-BOX-STATTILE-01] Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
 
