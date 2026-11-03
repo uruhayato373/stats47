@@ -17,6 +17,24 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const HOUSEHOLD_SURVEY_KEY = /-consumption-(?:quantity|expenditure)$/;
 /** 表を分ける行数。スマホの Kindle アプリ相当 (390×700) で 1 ページに約 14 行なので、見出し行込みで 1 ページに収まる 12 にする (表の途中で改ページしない) */
 export const TABLE_CHUNK_ROWS = 12;
+/** 見出しから落とさない副題・括弧書き (分母・対象)。落とすと「島根県 40.5 所」が県全体の実数に読める (2026-11-03 v6 レビュー K-S1-04 B01 ほか) */
+const KEEP_QUALIFIER = /当たり|あたり|男性|女性|有業者/;
+/**
+ * 指標の定義の名前・単位が値と合わない指標の上書き (2026-11-03 v6 レビュー)。指標の定義そのものの誤りは別に直す。
+ * - library-count-per-million: 値は人口 10 万人当たり (山梨 6.58 館) なのに定義の副題が 100 万人当たり
+ * - library-lending-books: 値は人口 1 人当たりの冊数 (滋賀 7.08) なのに名前が総数に読める
+ * - work-accident-severity: 強度率は延べ実労働時間 1,000 時間当たりの労働損失日数
+ */
+const TABLE_OVERRIDES: Readonly<Record<string, { readonly label?: string; readonly unit?: string }>> = {
+  "library-count-per-million": { label: "図書館数（人口10万人当たり）", unit: "館" },
+  "library-lending-books": { label: "図書館館外貸出冊数（人口1人当たり）", unit: "冊" },
+  "work-accident-severity": { unit: "日/千時間" },
+};
+
+/** 単位の書き方をそろえる: 全角英数を半角に、外側の括弧を外す (「（件/百万時間）」「Ｍｗｈ」) */
+export function normalizeUnit(unit: string): string {
+  return unit.normalize("NFKC").replace(/^\((.*)\)$/, "$1").trim();
+}
 
 export interface FullTable {
   readonly label: string;
@@ -147,11 +165,13 @@ export async function fullTablesForArticle(
     // 3〜4 行になり、改ページで取り残される (2026-11-03 K-S1-01)。家計調査の対象は表の下の注記に書く
     if (cfg) {
       const sub = typeof cfg.subtitle === "string" ? cfg.subtitle : "";
-      const label = sub && sub.length > 12 && typeof cfg.title === "string" ? cfg.title : productIndicatorLabel(table.rankingKey as string, cfg);
+      const label = sub && sub.length > 12 && !KEEP_QUALIFIER.test(sub) && typeof cfg.title === "string" ? cfg.title : productIndicatorLabel(table.rankingKey as string, cfg);
       table = { ...table, label };
     }
-    // 指標名が 20 字を超えるときは、最後の括弧書き (「（家計調査結果）」など) を外す (見出しが長いとスマホ幅で取り残される)
-    if (table.label.length > 20) table = { ...table, label: table.label.replace(/（[^（）]*）$/, "") };
+    // 指標名が 20 字を超えるときは、最後の括弧書き (「（家計調査結果）」など) を外す (見出しが長いとスマホ幅で取り残される)。分母・対象の括弧は外さない
+    if (table.label.length > 20) table = { ...table, label: table.label.replace(/（([^（）]*)）$/, (all, inner: string) => (KEEP_QUALIFIER.test(inner) ? all : "")) };
+    const override = table.rankingKey ? TABLE_OVERRIDES[table.rankingKey] : undefined;
+    table = { ...table, label: override?.label ?? table.label, unit: normalizeUnit(override?.unit ?? table.unit) };
     // 同じ年・同じ県の並びの表は、単位や丸めが違っても 1 つだけ載せる (百万円と兆円換算の重複を防ぐ)
     // 上位 10 県の並びで比べる (丸めた表は下位で同値が出て並びが揺れるため)
     const order = `${table.year}|${ranked(table.rows).slice(0, 10).map((row) => row.name).join(",")}`;

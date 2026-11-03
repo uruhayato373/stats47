@@ -218,6 +218,22 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BLOG-FIGURE-REDRAW-REGRESSION-01] ブログの図の一括の描き直しで出た型の不具合 (出典欄が空・題の右端が切れる・年度が「年」) をサイト側で直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
+
+- **事象 (2026-11-03・Kindle S1 v6 の差分レビューで発覚)**: R2 の `app/blog/<slug>/data/*.svg` の描き直し版に 3 種の型の不具合。① 新しい地図の型が「出典：」だけの行を出す (S1 の図だけで 12 枚: crab-expenditure-ranking-map・health-map・fiscal-strength-map・taiwan-guest-map・foreign-guests-map・foreign-guest-ratio-map・gas-ratio-map・gasoline-map・theft-map・convenience-map・black-tea-expenditure-map・engel-tilemap) ② 横幅 1080 の型の題 (72px) が長いと右端で切れる (「外国人延べ宿泊者数 都道府県ランキング」「コンビニエンスストア数ランキング」、教養娯楽費割合は「…ランキング（2024年）ランキング」と二重) ③ 年度の指標の副題が「2021年」「2022年」 (per-capita-income-gap の income-map・income-ranking、fiscal-health-50years-trend/fiscal-map) と、1 人当たりの図の題が総額と同じ「製造品出荷額等」(manufacturing-aichi-dominance/shipment-per-employee-ranking)。
+- **本で当てた直し**: `figure-corrections.ts` の `fixFigureTemplate` (空の出典行を消す・題の字を縮める) と個別の校訂。サイトの図は直っていない。
+- **次**: 描き直しの型 (地図・ランキング) で ① 出典名を指標の定義から入れる ② 題を幅に合わせて縮めるか折り返す ③ 副題の年に `yearFormat` を使う。直したら Kindle の対応する校訂を外す (置換元が消えると生成が止まるので同じ PR で)。
+- **完了条件**: 全ブログの SVG で「出典：」だけの行 0・72px の題の推定幅超え 0・年度の指標の副題が「年度」。
+
+### [METRIC-LIBRARY-PER-MILLION-LABEL-01] library-count-per-million の副題「人口100万人当たり」が値 (人口 10 万人当たり) と合わない
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
+
+- **事象**: 山梨県 6.58 館。山梨の図書館は約 54 館・人口約 81 万人なので 10 万人当たりの値。METRICS_REGISTRY と `verified-product-labels` は「人口100万人当たり」、ブログの図の単位は「館/10万人」。サイトのランキングの見出しも誤っている可能性がある。
+- **本の対処**: `full-tables.ts` の `TABLE_OVERRIDES` で見出しを「人口10万人当たり」にした。
+- **次**: e-Stat の元の表で分母を確かめ、定義 (と key 名) を直す。直したら `TABLE_OVERRIDES` の該当行を外す。同じ系列の `community-sports-facility-count-per-million`・`public-gymnasium-count-per-million` (秋田 906.9 施設) も分母を確かめる。
+
+
 ### [RANKING-PAGE-DISPLAY-UNIT-01] ランキングページの値も、図と同じ表示単位 (億円・万人など) で出す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-03] [領域:サイト]
 

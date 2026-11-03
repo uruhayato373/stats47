@@ -41,3 +41,13 @@ describe("full-tables (章末の全 47 都道府県の表)", () => {
     expect(yearSuffixOf(null)).toBe("年");
   });
 });
+
+describe("normalizeUnit", () => {
+  it("全角英数を半角に、外側の括弧を外す", async () => {
+    const { normalizeUnit } = await import("../full-tables");
+    expect(normalizeUnit("Ｍｗｈ")).toBe("Mwh");
+    expect(normalizeUnit("（件/百万時間）")).toBe("件/百万時間");
+    expect(normalizeUnit("（全国=100）")).toBe("全国=100");
+    expect(normalizeUnit("円")).toBe("円");
+  });
+});

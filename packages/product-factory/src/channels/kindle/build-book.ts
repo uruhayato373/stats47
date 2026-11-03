@@ -423,7 +423,10 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     try {
       // 承認済みの文字なし背景はR2をSSOTとし、SHA検証済みローカルcacheを再利用する。
       const backgroundJpeg = await loadCoverBackground(book);
-      coverPng = await buildCoverPng({
+      // 書名ごと描いた表紙は文字を重ねない (cover-design.ts の textBaked)
+      coverPng = book.coverDesign?.backgroundAsset?.textBaked && backgroundJpeg
+        ? await sharp(backgroundJpeg).resize(1600, 2560, { fit: "fill" }).png().toBuffer()
+        : await buildCoverPng({
         title: book.title,
         subtitle: book.subtitle,
         series: book.series,

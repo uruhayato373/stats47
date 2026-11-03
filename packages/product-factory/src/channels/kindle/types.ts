@@ -67,6 +67,12 @@ export interface KindleCoverBackgroundAsset {
   readonly bytes: number;
   readonly width: 1600;
   readonly height: 2560;
+  /**
+   * 書名ごと画像に描いた表紙 (オーナー判断 2026-11-03: ポップで目立つ表紙にするため、S1 は Codex に文字ごと描かせる)。
+   * あると satori で文字を重ねず、画像をそのまま表紙にする。画像生成は日本語を崩すので、描かれた文字を 1 字ずつ
+   * 照合した結果をここに書く。`checkedText` に書名 (主題・副題) が入っていないと検査で落ちる (書名を変えたら描き直し)。
+   */
+  readonly textBaked?: { readonly checkedText: readonly string[]; readonly checkedAt: string };
 }
 
 export interface KindleCoverDesign {

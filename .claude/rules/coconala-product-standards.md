@@ -268,6 +268,11 @@ S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章�
     タイトル・著者は satori が**実テキストとして重ねる**。生成 AI に日本語や数字を焼き込ませない家ルールは
     ブログ OGP と同一（`.claude/rules/ogp-image-standards.md` §5）。生成時はR2取得物をSHA検証して`.local`へcacheし、
     背景が未承認の書籍はシリーズ基調色の無地にdegradeする。
+  - **例外: 書名ごと描いた表紙 (オーナー判断 2026-11-03・S1)**: ポップで目立つ表紙にするため、S1 は Codex imagegen に
+    書名・副題・帯の文字ごと描かせた 1 枚をそのまま表紙にする (`cover-design.ts` の `textBaked`。satori は重ねない)。
+    日本語が崩れる危険は消えないので、**描かれた文字を拡大して 1 字ずつ照合し、誤字 0 の画像だけ**を採る。照合した文字列を
+    `textBaked.checkedText` に書き、書名を変えたら `cover.test.ts` が落ちる (描き直す)。プロンプトの型は `prompt-b.txt`
+    (各冊の `.local/kindle-cover-drafts/<id>/` と Drive の候補置き場)。地図・人物の顔・指定外の文字は描かせない。
 - **著作権規律（`data-provenance-standards.md` / pdf-book-survey と同一）**: 参照書籍からは論点・見せ方の型のみ。文言・図案・写真・編集構成は複製しない。数値は e-Stat / R2 の自社データのみ。自ブログの再利用は自己著作物。**内部編集基準として、各書籍は再構成 + 30% 以上の書き下ろし（はじめに / おわりに / 章横断の合成分析）を必須**とし、validator が `newContentNote` 非空 + manuscript 以降の fresh 章 1 つ以上を強制する。KU（KDP Select 独占）登録は当面見送り（販売のみ・¥500-1,000）。
 
 内部比率はAmazonの許諾・審査合格基準ではない。著作権者自身のWeb公開素材と他者の素材を区別し、AI生成内容の申告を別途確認する（[KDPコンテンツガイドライン](https://kdp.amazon.com/en_US/help/topic/G200635600)）。

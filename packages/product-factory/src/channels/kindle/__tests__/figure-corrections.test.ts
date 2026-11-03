@@ -27,3 +27,15 @@ describe("figure corrections (SVG text only)", () => {
     expect(ins.some((c) => c.before.includes("2024年"))).toBe(false);
   });
 });
+
+describe("fixFigureTemplate", () => {
+  it("空の出典行を消し、横幅 1080 の型で収まらない題の字を小さくする", async () => {
+    const { fixFigureTemplate } = await import("../figure-corrections");
+    const svg = '<svg viewBox="0 0 1080 1350"><text x="64" y="120" font-size="72" font-weight="700">外国人延べ宿泊者数 都道府県ランキング</text><text x="64" y="1310.0" font-size="26.0">出典：</text></svg>';
+    const out = fixFigureTemplate(svg);
+    expect(out).not.toContain("出典：");
+    expect(out).toContain('font-size="50"');
+    const short = '<svg viewBox="0 0 1080 1350"><text x="64" y="120" font-size="72">財政力指数</text><text>出典：総務省</text></svg>';
+    expect(fixFigureTemplate(short)).toBe(short);
+  });
+});
