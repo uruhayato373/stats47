@@ -34,10 +34,15 @@ describe("isAdFreePath (台帳から導いた接頭辞)", () => {
     expect(isAdFree("/geo/datasets/N08")).toBe(false);
   });
 
+  it("高速道路網の変遷の節 (非商用の時系列) を埋め込む道路のテーマは広告なし", () => {
+    expect(isAdFree("/themes/roads")).toBe(true);
+  });
+
   it("同じ接頭辞で始まる別のページや他の地域分析には影響しない", () => {
     expect(isAdFree("/geo/history/railwayx")).toBe(false);
     expect(isAdFree("/geo/population-station-access")).toBe(false);
-    expect(isAdFree("/themes/roads")).toBe(false);
+    expect(isAdFree("/themes/roadsx")).toBe(false);
+    expect(isAdFree("/themes/railway")).toBe(false);
     expect(isAdFree(null)).toBe(false);
   });
 });

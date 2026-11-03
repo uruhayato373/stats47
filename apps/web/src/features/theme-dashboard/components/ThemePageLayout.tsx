@@ -29,6 +29,7 @@ import {
 } from '@/features/ads/server';
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
 import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
@@ -157,13 +158,15 @@ export async function ThemePageLayout({
   // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
   // ★ 2026-08-06: 縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で除外。
   //   受け皿は sidebar-sticky スロット)。除外後も3件が埋まる余裕を持たせるためlimitは8を維持する。
+  // 非商用データの節を埋め込むテーマは広告・アフィリエイトを出さない (ad-free-paths.ts。AdSense の script も止まる)
+  const isAdFree = AD_FREE_THEME_KEYS.includes(theme.themeKey);
   let nativeBanners =
-    theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
+    !isAdFree && theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
       ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 8).catch(
           () => []
         )
       : [];
-  if (nativeBanners.length === 0) {
+  if (!isAdFree && nativeBanners.length === 0) {
     const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
     if (vertical) {
       nativeBanners = await resolveAffiliateBannersByVertical(
@@ -302,7 +305,7 @@ export async function ThemePageLayout({
 
 
           {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-          <InContentAdSlot slot={HUB_INCONTENT} />
+          {!isAdFree && <InContentAdSlot slot={HUB_INCONTENT} />}
 
           <Suspense fallback={null}>
             <ThemeGeoInsightsSection
@@ -324,7 +327,7 @@ export async function ThemePageLayout({
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
         全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
       */}
-          <InContentAdSlot slot={THEMES_CONTENT} />
+          {!isAdFree && <InContentAdSlot slot={THEMES_CONTENT} />}
 
           {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
           {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (

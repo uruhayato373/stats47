@@ -217,14 +217,6 @@ updated: 2026-11-01
 - **やること**: e-Stat の元の表 (`data/metrics/convenience-store-sales.ts` の statsDataId) で期間と単位を確かめ、値か単位か説明文を直す。
 - **完了条件**: 期間と単位を出典で確かめた記録があり、値・単位・説明が一致する。
 
-### [HIGHWAY-THEME-N06-GUARD-01] テーマの高速道路の地図が、国土数値情報の時系列データを利用条件の検査を通さずに R2 から読んでいる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
-
-2026-11-03 にテーマの「高速道路網の広がり」の地図を交通網の変遷の地図へ置き換えようとして見つかった。`apps/web/src/features/highway-history/HighwayTimelineMap.tsx` は高速道路時系列データ (N06) を R2 の `app/highway-history/highway-sections.topojson` から直接読み、`isInfraNetworkPublishable` と利用条件の検査を通っていない。置き場の `app/highway-history/` は配信を拒む検査 `ksj-publication-guard.ts` の対象 (`app/geo/history/<key>/`) に入っていない。
-N06 は時系列で使うと非商用で、事務局の了承 (2026-10-29) は広告のないページだけ (`packages/gis/src/infra-history/networks.ts`)。テーマのページ (/themes/roads) は広告がある。今の地図は最新年の 1 枚だけなので「最新年度を現況データとして使う」(CC BY 4.0) に当たりうるが、年の変遷 (スライダー) に置き換えると時系列の利用になる。
-次: (1) 置き換えるか・広告を止めるか・事務局に確認するかをオーナーが決める。(2) どれにしても `app/highway-history/` を配信の検査の対象に入れ、現況 1 年だけを配っていることを検査で固定する。
-完了条件: テーマの高速道路の地図が利用条件の範囲で描かれ、`app/highway-history/` が配信の検査に掛かる。
-
 ### [GEO-STAT-BOX-STATTILE-01] Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
 
@@ -762,6 +754,8 @@ N06 は時系列で使うと非商用で、事務局の了承 (2026-10-29) は�
 
 ### [INFRA-HISTORY-R2-PUBLISH-01] 交通網の変遷・IC と JCT・問いのページの計算結果を CI で生成して R2 に反映し、どの PC でも作り直さずに済むようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all] [起票:2026-10-29] [領域:データ]
+
+- **依存の追加 (2026-11-03)**: テーマ /themes/roads の高速道路の節を、最新年 1 枚の独自の地図から交通網の変遷の地図 (InfraHistoryExplorer・全国) に置き換え、このテーマを広告なしにした (オーナー決定。N06 の時系列は非商用・広告のないページだけ了承)。**このカードの反映が済むまで、本番へ出すとテーマの節も「延長のデータを読み込めませんでした。」になる** ので、develop→main のリリースはこのカードの完了を待つか、節の置き換えを外して出す。旧地図が読んでいた R2 の `app/highway-history/` (stats.json・highway-sections.topojson) はコードから参照されなくなったので、反映と同じ CI で消す。
 
 - **観測 (2026-11-03)**: 本番 `https://stats47.jp/geo/history/{expressway,railway,airport}` の 3 ページとも「〜のデータを読み込めませんでした。」(`InfraHistoryPage.tsx` の role=alert) を返している (curl で確認)。ローカルの開発サーバー (リモートの R2 を読む) でも同じ。データが R2 に無いことと整合する。ページは公開されたまま中身が出ない状態なので、反映するまで導線 (サイドバー・Geo の一覧) から外すかも判断が要る。
 
