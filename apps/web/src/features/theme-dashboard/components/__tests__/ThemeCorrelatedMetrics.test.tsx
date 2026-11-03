@@ -37,8 +37,10 @@ describe("ThemeCorrelatedMetrics", () => {
     expect(readMock).toHaveBeenCalledWith("climate");
     const link = screen.getByRole("link", { name: /灯油消費量/ });
     expect(link).toHaveAttribute("href", "/ranking/kerosene-consumption-quantity");
-    expect(link).toHaveTextContent("年平均気温との相関");
-    expect(link).toHaveTextContent("-0.87");
+    // 指標・相関の相手・順位相関を同じ行に並べる表 (2026-11-03)
+    const row = screen.getByRole("row", { name: /灯油消費量/ });
+    expect(row).toHaveTextContent("年平均気温");
+    expect(row).toHaveTextContent("-0.87");
 
     link.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(link);
