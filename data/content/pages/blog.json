@@ -419,6 +419,18 @@
       ]
     },
     {
+      "id": "blog:annual-sales-amount-prefecture-gap",
+      "kind": "blog",
+      "key": "annual-sales-amount-prefecture-gap",
+      "title": "商業の販売額で東京都が突出するのはなぜか？",
+      "href": "/blog/annual-sales-amount-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "annual-sales-amount"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:annual-sunshine-duration-prefecture-gap",
       "kind": "blog",
       "key": "annual-sunshine-duration-prefecture-gap",
@@ -493,6 +505,18 @@
       ]
     },
     {
+      "id": "blog:aquaculture-harvest-prefecture-gap",
+      "kind": "blog",
+      "key": "aquaculture-harvest-prefecture-gap",
+      "title": "養殖収獲量が最も多い県はどこで、差は何倍なのか",
+      "href": "/blog/aquaculture-harvest-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "aquaculture-harvest"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:area-ratio-prefecture-gap",
       "kind": "blog",
       "key": "area-ratio-prefecture-gap",
@@ -542,6 +566,43 @@
         "tag:automobiles",
         "tag:industrial-structural-change"
       ]
+    },
+    {
+      "id": "blog:average-age-of-first-marriage-wife-prefecture-gap",
+      "kind": "blog",
+      "key": "average-age-of-first-marriage-wife-prefecture-gap",
+      "title": "妻の平均初婚年齢が最も高い県はどこでしょう？",
+      "href": "/blog/average-age-of-first-marriage-wife-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "average-age-of-first-marriage-wife"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:average-height-primary-school-fifth-grade-male-vs-other",
+      "kind": "blog",
+      "key": "average-height-primary-school-fifth-grade-male-vs-other",
+      "title": "平均身長が高い県は魚介加工品の支出も多い?",
+      "href": "/blog/average-height-primary-school-fifth-grade-male-vs-other",
+      "published": true,
+      "rankingKeys": [
+        "average-height-primary-school-fifth-grade-male",
+        "other-processed-fish-ext-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:average-length-of-stay-prefecture-gap",
+      "kind": "blog",
+      "key": "average-length-of-stay-prefecture-gap",
+      "title": "高知県が最長、東京都が最短。差は何を示すか",
+      "href": "/blog/average-length-of-stay-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "average-length-of-stay"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:avg-height-high-school-2nd-male",
@@ -622,6 +683,31 @@
       "published": true,
       "rankingKeys": [
         "avg-salary-police-prefecture"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:avg-salary-police-prefecture-vs-community-sports-facility",
+      "kind": "blog",
+      "key": "avg-salary-police-prefecture-vs-community-sports-facility",
+      "title": "警察職の給与が高い県は体育施設が少ないのか?",
+      "href": "/blog/avg-salary-police-prefecture-vs-community-sports-facility",
+      "published": true,
+      "rankingKeys": [
+        "avg-salary-police-prefecture",
+        "community-sports-facility-count-per-million"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:bacon-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "bacon-consumption-expenditure-prefecture-gap",
+      "title": "ベーコンへの支出、首位と最下位はほぼ2倍？",
+      "href": "/blog/bacon-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "bacon-consumption-expenditure"
       ],
       "tagIds": []
     },
@@ -720,7 +806,7 @@
       "id": "blog:beef-consumption-quantity",
       "kind": "blog",
       "key": "beef-consumption-quantity",
-      "title": "和牛王国・兵庫が牛肉消費でも頂点、なぜ前沢牛の岩手は食卓で逆転されるのか (2024)",
+      "title": "牛肉消費の首位、なぜ毎年入れ替わる?",
       "href": "/blog/beef-consumption-quantity",
       "published": true,
       "rankingKeys": [
@@ -879,6 +965,18 @@
       ]
     },
     {
+      "id": "blog:blanket-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "blanket-consumption-expenditure-prefecture-gap",
+      "title": "毛布への支出が最も多いのはどの県か？",
+      "href": "/blog/blanket-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "blanket-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:bonito-catch-prefecture",
       "kind": "blog",
       "key": "bonito-catch-prefecture",
@@ -954,6 +1052,25 @@
       ]
     },
     {
+      "id": "blog:bread-city-ranking-kyoto-quiz",
+      "kind": "blog",
+      "key": "bread-city-ranking-kyoto-quiz",
+      "title": "京都のパンは全国何位?",
+      "href": "/blog/bread-city-ranking-kyoto-quiz",
+      "published": true,
+      "rankingKeys": [
+        "bread-consumption-expenditure",
+        "bread-consumption-quantity"
+      ],
+      "tagIds": [
+        "tag:t-433c68371a3d",
+        "tag:t-5f9fd605f1f7",
+        "tag:t-ba8e4beb69bf",
+        "tag:consumption-expenditure",
+        "tag:t-a29f6cf0520d"
+      ]
+    },
+    {
       "id": "blog:bread-consumption-expenditure-vs-final-education-university",
       "kind": "blog",
       "key": "bread-consumption-expenditure-vs-final-education-university",
@@ -1013,6 +1130,18 @@
       ]
     },
     {
+      "id": "blog:burdock-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "burdock-consumption-quantity-prefecture-gap",
+      "title": "ごぼうを一番買う県と買わない県はどこか？",
+      "href": "/blog/burdock-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "burdock-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:butter-vs-margarine-expenditure",
       "kind": "blog",
       "key": "butter-vs-margarine-expenditure",
@@ -1030,6 +1159,18 @@
         "tag:t-7b96c26b45e8",
         "tag:t-3dfcbdc38d3e"
       ]
+    },
+    {
+      "id": "blog:cabbage-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "cabbage-consumption-quantity-prefecture-gap",
+      "title": "キャベツ消費量が最も多い県は？鹿児島と岐阜の接戦",
+      "href": "/blog/cabbage-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "cabbage-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:cake-consumption-expenditure-prefecture-gap",
@@ -1173,6 +1314,18 @@
         "tag:t-89a80a8abda1",
         "tag:t-e200e46ce1e5"
       ]
+    },
+    {
+      "id": "blog:carrot-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "carrot-consumption-quantity-prefecture-gap",
+      "title": "にんじん消費量が最も多い県はどこ？",
+      "href": "/blog/carrot-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "carrot-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:castella-expenditure-ranking",
@@ -1721,6 +1874,18 @@
       ]
     },
     {
+      "id": "blog:childrens-clothes-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "childrens-clothes-consumption-expenditure-prefecture-gap",
+      "title": "子供服への支出が最も多い県は？埼玉県と長崎県の開き",
+      "href": "/blog/childrens-clothes-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "childrens-clothes-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:chinese-noodles-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "chinese-noodles-consumption-expenditure-prefecture-gap",
@@ -1756,7 +1921,7 @@
       "id": "blog:chocolate-expenditure-ranking",
       "kind": "blog",
       "key": "chocolate-expenditure-ranking",
-      "title": "チョコレート消費支出は山形が最多9,262円｜和歌山と1.8倍差、なぜ東北が強い?",
+      "title": "チョコ消費の王者、なぜ毎年入れ替わる?",
       "href": "/blog/chocolate-expenditure-ranking",
       "published": true,
       "rankingKeys": [
@@ -1784,6 +1949,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:clam-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "clam-consumption-quantity-prefecture-gap",
+      "title": "あさり消費量1位は、なぜ海のない山梨なのか？",
+      "href": "/blog/clam-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "clam-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:climate-lifestyle-connection",
       "kind": "blog",
       "key": "climate-lifestyle-connection",
@@ -1798,6 +1975,30 @@
         "tag:temperature",
         "tag:t-6a709e7a0043"
       ]
+    },
+    {
+      "id": "blog:clothing-footwear-expenditure-total-prefecture-gap",
+      "kind": "blog",
+      "key": "clothing-footwear-expenditure-total-prefecture-gap",
+      "title": "被服及び履物費、埼玉と東京は293円差の首位争い？",
+      "href": "/blog/clothing-footwear-expenditure-total-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "clothing-footwear-expenditure-total"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:cocoa-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "cocoa-consumption-expenditure-prefecture-gap",
+      "title": "ココア支出が多い県はどこ？沖縄は最下位の3倍超",
+      "href": "/blog/cocoa-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "cocoa-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:coffee-consumption-prefecture-gap",
@@ -1816,6 +2017,18 @@
         "tag:food-culture",
         "tag:t-71e69a814d46"
       ]
+    },
+    {
+      "id": "blog:coffee-drink-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "coffee-drink-consumption-expenditure-prefecture-gap",
+      "title": "コーヒー飲料の支出が多いのは青森県？",
+      "href": "/blog/coffee-drink-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "coffee-drink-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:coffee-shop-consumption-expenditure-prefecture-gap",
@@ -1906,6 +2119,42 @@
       "published": true,
       "rankingKeys": [
         "commute-by-car"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:complainant-count-prefecture-gap",
+      "kind": "blog",
+      "key": "complainant-count-prefecture-gap",
+      "title": "有訴者率1位の兵庫県と最下位の東京都、差は何倍？",
+      "href": "/blog/complainant-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "complainant-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:confectionery-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "confectionery-consumption-expenditure-prefecture-gap",
+      "title": "菓子類への支出が最も多い県はどこか？",
+      "href": "/blog/confectionery-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "confectionery-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:construction-employed-residents-prefecture-gap",
+      "kind": "blog",
+      "key": "construction-employed-residents-prefecture-gap",
+      "title": "建設業就業者が最多の東京は最少の約15倍？",
+      "href": "/blog/construction-employed-residents-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "construction-employed-residents"
       ],
       "tagIds": []
     },
@@ -2020,6 +2269,42 @@
       "tagIds": []
     },
     {
+      "id": "blog:cooking-oil-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "cooking-oil-consumption-quantity-prefecture-gap",
+      "title": "食用油の消費量が最も多い県はどこか？",
+      "href": "/blog/cooking-oil-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "cooking-oil-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:cpi-change-rate-culture-recreation-prefecture-gap",
+      "kind": "blog",
+      "key": "cpi-change-rate-culture-recreation-prefecture-gap",
+      "title": "物価上昇率、最高の県は最低の何倍なのか",
+      "href": "/blog/cpi-change-rate-culture-recreation-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "cpi-change-rate-culture-recreation"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:cpi-change-rate-food-prefecture-gap",
+      "kind": "blog",
+      "key": "cpi-change-rate-food-prefecture-gap",
+      "title": "物価の上がり方が最も大きい県はどこか？",
+      "href": "/blog/cpi-change-rate-food-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "cpi-change-rate-food"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:cpi-change-regional-pattern",
       "kind": "blog",
       "key": "cpi-change-regional-pattern",
@@ -2090,6 +2375,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:culture-recreation-expenditure-total-prefecture-gap",
+      "kind": "blog",
+      "key": "culture-recreation-expenditure-total-prefecture-gap",
+      "title": "教養娯楽費の首位と最下位、差は何倍か？",
+      "href": "/blog/culture-recreation-expenditure-total-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "culture-recreation-expenditure-total"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:cup-noodles-consumption-expenditure-vs-fire-damage",
       "kind": "blog",
       "key": "cup-noodles-consumption-expenditure-vs-fire-damage",
@@ -2150,7 +2447,7 @@
       "id": "blog:curry-roux-consumption-gap",
       "kind": "blog",
       "key": "curry-roux-consumption-gap",
-      "title": "カレールウは新潟が茨城の2倍｜新潟1815g・茨城885g、なぜ雪国で多い? (2024)",
+      "title": "カレールウ購入量、首位は鳥取?",
       "href": "/blog/curry-roux-consumption-gap",
       "published": true,
       "rankingKeys": [
@@ -2161,7 +2458,7 @@
         "tag:t-3dfcbdc38d3e",
         "tag:t-ba8e4beb69bf",
         "tag:food-culture",
-        "tag:t-7ab4225df7fc"
+        "tag:t-9ac700004f54"
       ]
     },
     {
@@ -2173,6 +2470,18 @@
       "published": true,
       "rankingKeys": [
         "cut-flowers-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:daikon-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "daikon-consumption-quantity-prefecture-gap",
+      "title": "だいこん消費量が最も多い県は？東北勢が上位に",
+      "href": "/blog/daikon-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "daikon-consumption-quantity"
       ],
       "tagIds": []
     },
@@ -2222,6 +2531,18 @@
       ]
     },
     {
+      "id": "blog:dairy-cattle-holdings-prefecture-gap",
+      "kind": "blog",
+      "key": "dairy-cattle-holdings-prefecture-gap",
+      "title": "乳牛を飼う農家は北海道に何倍集中する？",
+      "href": "/blog/dairy-cattle-holdings-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "dairy-cattle-holdings"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:day-time-population-prefecture-gap",
       "kind": "blog",
       "key": "day-time-population-prefecture-gap",
@@ -2238,6 +2559,42 @@
       ]
     },
     {
+      "id": "blog:deaths-cerebrovascular-disease-prefecture-gap",
+      "kind": "blog",
+      "key": "deaths-cerebrovascular-disease-prefecture-gap",
+      "title": "脳血管疾患の死亡者数、東京都は鳥取県の何倍?",
+      "href": "/blog/deaths-cerebrovascular-disease-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "deaths-cerebrovascular-disease"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:deaths-hypertensive-diseases-prefecture-gap",
+      "kind": "blog",
+      "key": "deaths-hypertensive-diseases-prefecture-gap",
+      "title": "高血圧で亡くなる人が最多の県はどこ？",
+      "href": "/blog/deaths-hypertensive-diseases-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "deaths-hypertensive-diseases"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:deaths-lifestyle-diseases-prefecture-gap",
+      "kind": "blog",
+      "key": "deaths-lifestyle-diseases-prefecture-gap",
+      "title": "生活習慣病の死亡者数、東京都と鳥取県の差は何倍？",
+      "href": "/blog/deaths-lifestyle-diseases-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "deaths-lifestyle-diseases"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:delivery-fee-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "delivery-fee-consumption-expenditure-prefecture-gap",
@@ -2246,6 +2603,30 @@
       "published": true,
       "rankingKeys": [
         "delivery-fee-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:delivery-hospital-count-prefecture-gap",
+      "kind": "blog",
+      "key": "delivery-hospital-count-prefecture-gap",
+      "title": "分娩取扱病院が最多の東京都は大分県の何倍？",
+      "href": "/blog/delivery-hospital-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "delivery-hospital-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:densely-inhabited-district-population-density-prefecture-gap",
+      "kind": "blog",
+      "key": "densely-inhabited-district-population-density-prefecture-gap",
+      "title": "人口集中地区の人口密度、上位と下位はなぜ分かれる？",
+      "href": "/blog/densely-inhabited-district-population-density-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "densely-inhabited-district-population-density"
       ],
       "tagIds": []
     },
@@ -2270,6 +2651,18 @@
       "published": true,
       "rankingKeys": [
         "dental-checkup-persons-per-1000"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:dental-clinic-count-prefecture-gap",
+      "kind": "blog",
+      "key": "dental-clinic-count-prefecture-gap",
+      "title": "歯科診療所が最多の東京都は最少の何倍か？",
+      "href": "/blog/dental-clinic-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "dental-clinic-count"
       ],
       "tagIds": []
     },
@@ -2308,6 +2701,18 @@
         "tag:t-c298da13d5ef",
         "tag:t-89a80a8abda1"
       ]
+    },
+    {
+      "id": "blog:department-supermarket-count-per-100k-prefecture-gap",
+      "kind": "blog",
+      "key": "department-supermarket-count-per-100k-prefecture-gap",
+      "title": "百貨店・総合スーパーが最多の沖縄県、最少の山形県との差は?",
+      "href": "/blog/department-supermarket-count-per-100k-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "department-supermarket-count-per-100k"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:depopulation-area-medical-facilities",
@@ -2446,6 +2851,18 @@
       ]
     },
     {
+      "id": "blog:divorces-prefecture-gap",
+      "kind": "blog",
+      "key": "divorces-prefecture-gap",
+      "title": "離婚件数が最も多いのは？1位と47位は何倍か",
+      "href": "/blog/divorces-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "divorces"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:doctor-income-prefecture-gap",
       "kind": "blog",
       "key": "doctor-income-prefecture-gap",
@@ -2480,6 +2897,18 @@
         "tag:t-96e193df934f",
         "tag:t-decf01aa9d63"
       ]
+    },
+    {
+      "id": "blog:dried-udon-soba-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "dried-udon-soba-consumption-expenditure-prefecture-gap",
+      "title": "乾うどん・そば支出、香川と大分で何倍違う？",
+      "href": "/blog/dried-udon-soba-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "dried-udon-soba-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:dual-income-childcare-dilemma",
@@ -2519,6 +2948,19 @@
       ]
     },
     {
+      "id": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "kind": "blog",
+      "key": "dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "title": "共働きが多い県は高齢者の生活保護が少ない?",
+      "href": "/blog/dual-income-household-ratio-vs-elderly-on-public-assistance",
+      "published": true,
+      "rankingKeys": [
+        "dual-income-household-ratio",
+        "elderly-on-public-assistance-per-1000-65plus"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
       "kind": "blog",
       "key": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
@@ -2548,6 +2990,19 @@
         "tag:welfare",
         "tag:t-5dd7af9d19a3"
       ]
+    },
+    {
+      "id": "blog:dual-income-household-ratio-vs-public-assistance-medical",
+      "kind": "blog",
+      "key": "dual-income-household-ratio-vs-public-assistance-medical",
+      "title": "共働きが多い県は医療扶助が少ないのか?",
+      "href": "/blog/dual-income-household-ratio-vs-public-assistance-medical",
+      "published": true,
+      "rankingKeys": [
+        "dual-income-household-ratio",
+        "public-assistance-medical-beneficiaries-per-1000"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:dual-income-household-ratio-vs-rooms-per-dwelling",
@@ -2598,6 +3053,18 @@
         "tag:monthly-income",
         "tag:worker-households"
       ]
+    },
+    {
+      "id": "blog:early-neonatal-deaths-prefecture-gap",
+      "kind": "blog",
+      "key": "early-neonatal-deaths-prefecture-gap",
+      "title": "早期新生児死亡が最も多い県はどこでしょうか？",
+      "href": "/blog/early-neonatal-deaths-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "early-neonatal-deaths"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:earthquake-insurance-prefecture-gap",
@@ -2775,6 +3242,18 @@
       ]
     },
     {
+      "id": "blog:electricity-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "electricity-consumption-quantity-prefecture-gap",
+      "title": "電気使用量が最も多い県はどこ？福井県の実力",
+      "href": "/blog/electricity-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "electricity-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:electricity-demand-gap",
       "kind": "blog",
       "key": "electricity-demand-gap",
@@ -2813,6 +3292,42 @@
         "tag:education",
         "tag:population"
       ]
+    },
+    {
+      "id": "blog:elementary-school-teachers-prefecture-gap",
+      "kind": "blog",
+      "key": "elementary-school-teachers-prefecture-gap",
+      "title": "小学校教員が最も多いのは東京都、では最少は？",
+      "href": "/blog/elementary-school-teachers-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "elementary-school-teachers"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:emergency-hospital-general-clinic-count-per-100k-prefecture",
+      "kind": "blog",
+      "key": "emergency-hospital-general-clinic-count-per-100k-prefecture",
+      "title": "救急の受け皿が手厚い県はどこ？福井が首位",
+      "href": "/blog/emergency-hospital-general-clinic-count-per-100k-prefecture",
+      "published": true,
+      "rankingKeys": [
+        "emergency-hospital-general-clinic-count-per-100k"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:employed-people-ratio-primary-prefecture-gap",
+      "kind": "blog",
+      "key": "employed-people-ratio-primary-prefecture-gap",
+      "title": "第1次産業で働く人の割合が最も高い県はどこか？",
+      "href": "/blog/employed-people-ratio-primary-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "employed-people-ratio-primary"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:energy-consumption-structure-shift",
@@ -3005,6 +3520,18 @@
       ]
     },
     {
+      "id": "blog:eyeglasses-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "eyeglasses-consumption-expenditure-prefecture-gap",
+      "title": "眼鏡への支出が最も多い県はどこか？",
+      "href": "/blog/eyeglasses-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "eyeglasses-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:fabric-softener-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "fabric-softener-consumption-expenditure-prefecture-gap",
@@ -3013,6 +3540,18 @@
       "published": true,
       "rankingKeys": [
         "fabric-softener-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:factory-location-area-annual-prefecture-gap",
+      "kind": "blog",
+      "key": "factory-location-area-annual-prefecture-gap",
+      "title": "工場の敷地が最も広いのは北海道なのか？",
+      "href": "/blog/factory-location-area-annual-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "factory-location-area-annual"
       ],
       "tagIds": []
     },
@@ -3056,6 +3595,18 @@
       ]
     },
     {
+      "id": "blog:female-scheduled-earnings-prefecture-gap",
+      "kind": "blog",
+      "key": "female-scheduled-earnings-prefecture-gap",
+      "title": "女性所定内給与が最も多い県はどこ？",
+      "href": "/blog/female-scheduled-earnings-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "female-scheduled-earnings"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:fertility-fiscal-nexus",
       "kind": "blog",
       "key": "fertility-fiscal-nexus",
@@ -3093,6 +3644,42 @@
         "tag:late-marriage",
         "tag:population-dynamics"
       ]
+    },
+    {
+      "id": "blog:final-disposal-site-remaining-capacity-prefecture-gap",
+      "kind": "blog",
+      "key": "final-disposal-site-remaining-capacity-prefecture-gap",
+      "title": "最終処分場の残余容量が最も多い県はどこ？",
+      "href": "/blog/final-disposal-site-remaining-capacity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "final-disposal-site-remaining-capacity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:fire-deaths-per-100k-prefecture-gap",
+      "kind": "blog",
+      "key": "fire-deaths-per-100k-prefecture-gap",
+      "title": "火災死亡者が最も多い県は？東京都と高知県の差",
+      "href": "/blog/fire-deaths-per-100k-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fire-deaths-per-100k"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:fire-department-pump-car-count-per-100-thousand-people",
+      "kind": "blog",
+      "key": "fire-department-pump-car-count-per-100-thousand-people",
+      "title": "消防ポンプ車は東北に集中しているのか?",
+      "href": "/blog/fire-department-pump-car-count-per-100-thousand-people",
+      "published": true,
+      "rankingKeys": [
+        "fire-department-pump-car-count-per-100-thousand-people"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:firefighting-capacity-gap",
@@ -3155,6 +3742,18 @@
         "tag:current-account-ratio",
         "tag:fiscal-soundness"
       ]
+    },
+    {
+      "id": "blog:fish-canned-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "fish-canned-consumption-expenditure-prefecture-gap",
+      "title": "魚介の缶詰、沖縄が1位なのはなぜ？",
+      "href": "/blog/fish-canned-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fish-canned-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:fish-catch-vs-consumption-prefecture",
@@ -3267,6 +3866,42 @@
       "tagIds": []
     },
     {
+      "id": "blog:flood-damage-public-infrastructure-prefecture-gap",
+      "kind": "blog",
+      "key": "flood-damage-public-infrastructure-prefecture-gap",
+      "title": "水害の公共土木施設被害、1位は最下位の約165倍？",
+      "href": "/blog/flood-damage-public-infrastructure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "flood-damage-public-infrastructure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:flood-damage-total-prefecture-gap",
+      "kind": "blog",
+      "key": "flood-damage-total-prefecture-gap",
+      "title": "水害被害額が最も多い県は？広島県が1位の顔ぶれ",
+      "href": "/blog/flood-damage-total-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "flood-damage-total"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:floor-area-per-dwelling-owner-prefecture-gap",
+      "kind": "blog",
+      "key": "floor-area-per-dwelling-owner-prefecture-gap",
+      "title": "持ち家の広さ、富山と東京で何倍違う？",
+      "href": "/blog/floor-area-per-dwelling-owner-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "floor-area-per-dwelling-owner"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:food-consumption-prefecture-battle",
       "kind": "blog",
       "key": "food-consumption-prefecture-battle",
@@ -3308,6 +3943,31 @@
       ]
     },
     {
+      "id": "blog:food-manufacturing-establishments-prefecture-gap",
+      "kind": "blog",
+      "key": "food-manufacturing-establishments-prefecture-gap",
+      "title": "食料品製造業の事業所は北海道が最多なのでしょうか",
+      "href": "/blog/food-manufacturing-establishments-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "food-manufacturing-establishments"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:food-manufacturing-establishments-vs-regional-transport-co2",
+      "kind": "blog",
+      "key": "food-manufacturing-establishments-vs-regional-transport-co2",
+      "title": "食料品の工場が多い県ほど運輸のCO₂も多いのか?",
+      "href": "/blog/food-manufacturing-establishments-vs-regional-transport-co2",
+      "published": true,
+      "rankingKeys": [
+        "food-manufacturing-establishments",
+        "regional-transport-co2-emissions-estimate"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:food-price-regional-2026",
       "kind": "blog",
       "key": "food-price-regional-2026",
@@ -3325,6 +3985,32 @@
         "tag:t-e142f2bc0d0b",
         "tag:household-finance"
       ]
+    },
+    {
+      "id": "blog:food-self-sufficiency-rate-calorie-vs-national-assessment",
+      "kind": "blog",
+      "key": "food-self-sufficiency-rate-calorie-vs-national-assessment",
+      "title": "食料自給率が高い県は学習塾が少ないのか?",
+      "href": "/blog/food-self-sufficiency-rate-calorie-vs-national-assessment",
+      "published": true,
+      "rankingKeys": [
+        "food-self-sufficiency-rate-calorie",
+        "national-assessment-elementary-tutoring-rate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",
+      "kind": "blog",
+      "key": "food-self-sufficiency-rate-calorie-vs-passport-issuance",
+      "title": "食料自給率が高い県ほど旅券発行が少ないのは本当か？",
+      "href": "/blog/food-self-sufficiency-rate-calorie-vs-passport-issuance",
+      "published": true,
+      "rankingKeys": [
+        "food-self-sufficiency-rate-calorie",
+        "passport-issuance-count-per-thousand"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:food-spending-pattern",
@@ -3420,6 +4106,18 @@
       ]
     },
     {
+      "id": "blog:foreign-resident-population-prefecture-gap",
+      "kind": "blog",
+      "key": "foreign-resident-population-prefecture-gap",
+      "title": "外国人住民が最も多い都道府県はどこか？",
+      "href": "/blog/foreign-resident-population-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "foreign-resident-population"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:foreign-residents-diversity-map",
       "kind": "blog",
       "key": "foreign-residents-diversity-map",
@@ -3442,6 +4140,18 @@
       ]
     },
     {
+      "id": "blog:foreign-worker-count-prefecture-gap",
+      "kind": "blog",
+      "key": "foreign-worker-count-prefecture-gap",
+      "title": "外国人労働者が突出して多い都道府県はどこ？",
+      "href": "/blog/foreign-worker-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "foreign-worker-count"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:forest-coverage-woodland-economy",
       "kind": "blog",
       "key": "forest-coverage-woodland-economy",
@@ -3461,6 +4171,42 @@
         "tag:t-55b34108c19b",
         "tag:carbon-neutral"
       ]
+    },
+    {
+      "id": "blog:fresh-fruit-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "fresh-fruit-consumption-quantity-prefecture-gap",
+      "title": "山形が果物消費で首位、産地と消費量は一致する？",
+      "href": "/blog/fresh-fruit-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fresh-fruit-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:fresh-seafood-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "fresh-seafood-consumption-quantity-prefecture-gap",
+      "title": "魚を食べる量の上位は、東北だけなのか？",
+      "href": "/blog/fresh-seafood-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fresh-seafood-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:fresh-shiitake-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "fresh-shiitake-consumption-quantity-prefecture-gap",
+      "title": "生しいたけ、秋田県と沖縄県で何倍違うのか？",
+      "href": "/blog/fresh-shiitake-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fresh-shiitake-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:fresh-udon-soba-consumption-prefecture-gap",
@@ -3486,6 +4232,18 @@
       ]
     },
     {
+      "id": "blog:fresh-vegetables-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "fresh-vegetables-consumption-quantity-prefecture-gap",
+      "title": "生鮮野菜の消費量が最も多い県はどこ？",
+      "href": "/blog/fresh-vegetables-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fresh-vegetables-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:freshwater-clam-expenditure-ranking",
       "kind": "blog",
       "key": "freshwater-clam-expenditure-ranking",
@@ -3504,14 +4262,37 @@
       ]
     },
     {
+      "id": "blog:fried-tofu-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "fried-tofu-consumption-expenditure-prefecture-gap",
+      "title": "油揚げ支出、福井は沖縄の3倍超なのはなぜ?",
+      "href": "/blog/fried-tofu-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "fried-tofu-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:frozen-food-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "frozen-food-consumption-expenditure-prefecture-gap",
+      "title": "冷凍調理食品、支出が最も多い県はどこか？",
+      "href": "/blog/frozen-food-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "frozen-food-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:frozen-gyoza-spending-prefecture-gap",
       "kind": "blog",
       "key": "frozen-gyoza-spending-prefecture-gap",
-      "title": "ぎょうざ消費支出トップは宮崎3,517円｜浜松の静岡が中位に沈む意外、高知とは3.18倍(2024)",
+      "title": "宇都宮と浜松、餃子日本一はどっち?",
       "href": "/blog/frozen-gyoza-spending-prefecture-gap",
       "published": true,
       "rankingKeys": [
-        "chinese-food-dining-consumption-expenditure",
         "gyoza-frozen-consumption-expenditure"
       ],
       "tagIds": [
@@ -3666,6 +4447,18 @@
       ]
     },
     {
+      "id": "blog:furusato-fundraising-cost-prefecture-prefecture-gap",
+      "kind": "blog",
+      "key": "furusato-fundraising-cost-prefecture-prefecture-gap",
+      "title": "ふるさと納税の募集経費、1位と46位は約1,300倍？",
+      "href": "/blog/furusato-fundraising-cost-prefecture-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "furusato-fundraising-cost-prefecture"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:future-burden-ratio-extreme-gap",
       "kind": "blog",
       "key": "future-burden-ratio-extreme-gap",
@@ -3738,6 +4531,42 @@
         "tag:net-migration",
         "tag:2050"
       ]
+    },
+    {
+      "id": "blog:game-console-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "game-console-consumption-expenditure-prefecture-gap",
+      "title": "ゲーム機への支出、静岡と新潟が上位で0円の県も?",
+      "href": "/blog/game-console-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "game-console-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:game-software-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "game-software-consumption-expenditure-prefecture-gap",
+      "title": "ゲームソフト支出の県差、1位の岡山は本当に突出か？",
+      "href": "/blog/game-software-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "game-software-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:garbage-final-disposal-prefecture-gap",
+      "kind": "blog",
+      "key": "garbage-final-disposal-prefecture-gap",
+      "title": "ごみ最終処分量は大阪府と高知県で何倍違うのか？",
+      "href": "/blog/garbage-final-disposal-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "garbage-final-disposal"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:garbage-total-output",
@@ -3834,6 +4663,19 @@
       "tagIds": []
     },
     {
+      "id": "blog:gasoline-consumption-quantity-vs-public-assistance",
+      "kind": "blog",
+      "key": "gasoline-consumption-quantity-vs-public-assistance",
+      "title": "ガソリン消費が多い県ほど扶助が少ない?",
+      "href": "/blog/gasoline-consumption-quantity-vs-public-assistance",
+      "published": true,
+      "rankingKeys": [
+        "gasoline-consumption-quantity",
+        "public-assistance-education-beneficiaries-per-1000"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:gasoline-expenditure-ranking",
       "kind": "blog",
       "key": "gasoline-expenditure-ranking",
@@ -3922,6 +4764,18 @@
       ]
     },
     {
+      "id": "blog:general-perinatal-center-count-prefecture-gap",
+      "kind": "blog",
+      "key": "general-perinatal-center-count-prefecture-gap",
+      "title": "周産期の最重症拠点、1施設の県が最多?",
+      "href": "/blog/general-perinatal-center-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "general-perinatal-center-count"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:geothermal-power-plant-count-prefecture-gap",
       "kind": "blog",
       "key": "geothermal-power-plant-count-prefecture-gap",
@@ -3977,6 +4831,18 @@
         "tag:t-38e4a61b098e",
         "tag:food-culture"
       ]
+    },
+    {
+      "id": "blog:golf-course-public-prefecture-gap",
+      "kind": "blog",
+      "key": "golf-course-public-prefecture-gap",
+      "title": "公共ゴルフ場、北海道66施設で0施設の県も4つ",
+      "href": "/blog/golf-course-public-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "golf-course-public"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:golf-green-fee-consumption-ranking",
@@ -4254,6 +5120,19 @@
       ]
     },
     {
+      "id": "blog:high-school-teacher-annual-income-vs-new-graduate-starting",
+      "kind": "blog",
+      "key": "high-school-teacher-annual-income-vs-new-graduate-starting",
+      "title": "教員の年収が高い県は初任給も高いのか?",
+      "href": "/blog/high-school-teacher-annual-income-vs-new-graduate-starting",
+      "published": true,
+      "rankingKeys": [
+        "high-school-teacher-annual-income",
+        "new-graduate-starting-salary-college-male"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:high-school-teacher-salary-prefecture-gap",
       "kind": "blog",
       "key": "high-school-teacher-salary-prefecture-gap",
@@ -4349,6 +5228,42 @@
         "tag:t-0bad53f75af1",
         "tag:food-culture"
       ]
+    },
+    {
+      "id": "blog:hobby-activity-singleperson-prefecture-gap",
+      "kind": "blog",
+      "key": "hobby-activity-singleperson-prefecture-gap",
+      "title": "趣味人の数、東京都は福井県の何倍？",
+      "href": "/blog/hobby-activity-singleperson-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "hobby-activity-singleperson"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:hobby-participation-rate-instrument-prefecture-gap",
+      "kind": "blog",
+      "key": "hobby-participation-rate-instrument-prefecture-gap",
+      "title": "楽器の演奏者は東京都と青森県で2.6倍違う",
+      "href": "/blog/hobby-participation-rate-instrument-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-instrument"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:hobby-participation-rate-tea-ceremony-prefecture-gap",
+      "kind": "blog",
+      "key": "hobby-participation-rate-tea-ceremony-prefecture-gap",
+      "title": "茶道をした人が多い県はどこか？",
+      "href": "/blog/hobby-participation-rate-tea-ceremony-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-tea-ceremony"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:hokkaido-food-culture",
@@ -4639,6 +5554,18 @@
         "tag:single-parent-households",
         "tag:dual-income-households"
       ]
+    },
+    {
+      "id": "blog:household-survey-clothing-footwear-expenditure-prefecture",
+      "kind": "blog",
+      "key": "household-survey-clothing-footwear-expenditure-prefecture",
+      "title": "衣料と靴への支出が最も多いのはどこ？",
+      "href": "/blog/household-survey-clothing-footwear-expenditure-prefecture",
+      "published": true,
+      "rankingKeys": [
+        "household-survey-clothing-footwear-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:households-on-public-assistance-per-1000-prefecture-gap",
@@ -5466,6 +6393,54 @@
       ]
     },
     {
+      "id": "blog:junior-high-club-per100-badminton-prefecture-gap",
+      "kind": "blog",
+      "key": "junior-high-club-per100-badminton-prefecture-gap",
+      "title": "部員数、首位と最下位は約20倍も違う？",
+      "href": "/blog/junior-high-club-per100-badminton-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-club-per100-badminton"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:junior-high-club-per100-soft-tennis-prefecture-gap",
+      "kind": "blog",
+      "key": "junior-high-club-per100-soft-tennis-prefecture-gap",
+      "title": "中学部活動の部員、山口県は沖縄県の何倍？",
+      "href": "/blog/junior-high-club-per100-soft-tennis-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-club-per100-soft-tennis"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:junior-high-club-per100-track-and-field-prefecture-gap",
+      "kind": "blog",
+      "key": "junior-high-club-per100-track-and-field-prefecture-gap",
+      "title": "中学部活動の部員数、福島県は沖縄県を除くと？",
+      "href": "/blog/junior-high-club-per100-track-and-field-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-club-per100-track-and-field"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:junior-high-school-students-count-prefecture-gap",
+      "kind": "blog",
+      "key": "junior-high-school-students-count-prefecture-gap",
+      "title": "中学校生徒数、1位と47位は約22倍の差？",
+      "href": "/blog/junior-high-school-students-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "junior-high-school-students-count"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:kagawa-food-culture",
       "kind": "blog",
       "key": "kagawa-food-culture",
@@ -5665,6 +6640,30 @@
         "tag:t-0d9bb64036cb",
         "tag:regional-disparity"
       ]
+    },
+    {
+      "id": "blog:ketchup-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "ketchup-consumption-expenditure-prefecture-gap",
+      "title": "ケチャップ支出、岐阜は秋田の約2倍？",
+      "href": "/blog/ketchup-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "ketchup-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:ketchup-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "ketchup-consumption-quantity-prefecture-gap",
+      "title": "ケチャップ消費量が多い県はどこか？岐阜と大阪の接戦",
+      "href": "/blog/ketchup-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "ketchup-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:kochi-food-culture",
@@ -5920,6 +6919,30 @@
       "tagIds": []
     },
     {
+      "id": "blog:landslide-special-warning-zone-count-prefecture-gap",
+      "kind": "blog",
+      "key": "landslide-special-warning-zone-count-prefecture-gap",
+      "title": "土砂災害特別警戒区域が多い県はどこか？",
+      "href": "/blog/landslide-special-warning-zone-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "landslide-special-warning-zone-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:landslide-warning-zone-count-prefecture-gap",
+      "kind": "blog",
+      "key": "landslide-warning-zone-count-prefecture-gap",
+      "title": "土砂災害警戒区域が最も多いのはどの県？",
+      "href": "/blog/landslide-warning-zone-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "landslide-warning-zone-count"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:late-elderly-medical-expense-prefecture-gap",
       "kind": "blog",
       "key": "late-elderly-medical-expense-prefecture-gap",
@@ -5934,6 +6957,30 @@
         "tag:t-5e631b14cc84",
         "tag:medical-care"
       ]
+    },
+    {
+      "id": "blog:layer-hen-count-prefecture-gap",
+      "kind": "blog",
+      "key": "layer-hen-count-prefecture-gap",
+      "title": "採卵鶏が最も多い千葉県、首都圏に近いからだけか",
+      "href": "/blog/layer-hen-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "layer-hen-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:lettuce-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "lettuce-consumption-quantity-prefecture-gap",
+      "title": "レタス消費量が多い県はどこ？最大は最小の約2倍",
+      "href": "/blog/lettuce-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "lettuce-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:library-books-prefecture-gap",
@@ -5953,6 +7000,18 @@
         "tag:t-db83c3b2e6e6",
         "tag:cultural-capital"
       ]
+    },
+    {
+      "id": "blog:library-lending-books-prefecture-gap",
+      "kind": "blog",
+      "key": "library-lending-books-prefecture-gap",
+      "title": "図書館の貸出冊数、東京都は2位の何倍か？",
+      "href": "/blog/library-lending-books-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "library-lending-books"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:library-museum-cultural-capital",
@@ -5976,6 +7035,18 @@
         "tag:social-education",
         "tag:cultural-capital"
       ]
+    },
+    {
+      "id": "blog:lipstick-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "lipstick-consumption-expenditure-prefecture-gap",
+      "title": "口紅への支出が最も多い県はなぜ愛知なのか？",
+      "href": "/blog/lipstick-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "lipstick-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:livable-prefecture-composite-ranking",
@@ -6282,6 +7353,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:manager-annual-income-prefecture-gap",
+      "kind": "blog",
+      "key": "manager-annual-income-prefecture-gap",
+      "title": "管理職の平均年収、東京と青森の差は何倍？",
+      "href": "/blog/manager-annual-income-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "manager-annual-income"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:mandarin-expenditure-ranking",
       "kind": "blog",
       "key": "mandarin-expenditure-ranking",
@@ -6404,6 +7487,32 @@
       ]
     },
     {
+      "id": "blog:manufacturing-shipment-amount-vs-manufacturing",
+      "kind": "blog",
+      "key": "manufacturing-shipment-amount-vs-manufacturing",
+      "title": "出荷額が多い県ほど工場の敷地も広い?",
+      "href": "/blog/manufacturing-shipment-amount-vs-manufacturing",
+      "published": true,
+      "rankingKeys": [
+        "manufacturing-establishment-site-area",
+        "manufacturing-shipment-amount"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:manufacturing-shipment-amount-vs-regional-industry-co2",
+      "kind": "blog",
+      "key": "manufacturing-shipment-amount-vs-regional-industry-co2",
+      "title": "出荷額が多い県ほどCO₂も多い?相関0.65の見方",
+      "href": "/blog/manufacturing-shipment-amount-vs-regional-industry-co2",
+      "published": true,
+      "rankingKeys": [
+        "manufacturing-shipment-amount",
+        "regional-industry-co2-emissions-estimate"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:manufacturing-shipment-prefecture-ranking",
       "kind": "blog",
       "key": "manufacturing-shipment-prefecture-ranking",
@@ -6514,6 +7623,30 @@
         "tag:t-edc0d3debdc2",
         "tag:t-69363e7f12cb"
       ]
+    },
+    {
+      "id": "blog:mens-clothing-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "mens-clothing-consumption-expenditure-prefecture-gap",
+      "title": "男子用洋服の支出、愛知県は島根県の何倍か",
+      "href": "/blog/mens-clothing-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "mens-clothing-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:metabolic-syndrome-prevalence-among-checkup-recipients",
+      "kind": "blog",
+      "key": "metabolic-syndrome-prevalence-among-checkup-recipients",
+      "title": "メタボ該当が最も多いのは秋田県なのか？",
+      "href": "/blog/metabolic-syndrome-prevalence-among-checkup-recipients",
+      "published": true,
+      "rankingKeys": [
+        "metabolic-syndrome-prevalence-among-checkup-recipients"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:middle-school-height-east-west-puzzle",
@@ -6795,7 +7928,7 @@
       "id": "blog:mochi-consumption-prefecture-gap",
       "kind": "blog",
       "key": "mochi-consumption-prefecture-gap",
-      "title": "餅を最も食べる県は意外にも茨城3367g｜餅どころ新潟・北陸を抑えた謎 (2024)",
+      "title": "餅の購入量、新潟より栃木が多い?",
       "href": "/blog/mochi-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -6804,7 +7937,7 @@
       "tagIds": [
         "tag:t-76fbcc59f4bf",
         "tag:t-3dfcbdc38d3e",
-        "tag:t-edc0d3debdc2",
+        "tag:t-325f33cbff00",
         "tag:t-ba8e4beb69bf",
         "tag:food-culture"
       ]
@@ -7074,6 +8207,18 @@
       ]
     },
     {
+      "id": "blog:national-park-area-prefecture-gap",
+      "kind": "blog",
+      "key": "national-park-area-prefecture-gap",
+      "title": "北海道が突出し0ｈａの県もあるのはなぜ？",
+      "href": "/blog/national-park-area-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "national-park-area"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:national-pension-full-exemption-rate-prefecture-gap",
       "kind": "blog",
       "key": "national-pension-full-exemption-rate-prefecture-gap",
@@ -7094,6 +8239,18 @@
       "published": true,
       "rankingKeys": [
         "national-pension-payment-rate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:national-treasury-disbursement-prefecture-prefecture-gap",
+      "kind": "blog",
+      "key": "national-treasury-disbursement-prefecture-prefecture-gap",
+      "title": "国庫支出金が最も多い県は？上位と下位の開きを読む",
+      "href": "/blog/national-treasury-disbursement-prefecture-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "national-treasury-disbursement-prefecture"
       ],
       "tagIds": []
     },
@@ -7207,6 +8364,30 @@
       ]
     },
     {
+      "id": "blog:new-condo-starts-prefecture-gap",
+      "kind": "blog",
+      "key": "new-condo-starts-prefecture-gap",
+      "title": "分譲住宅の着工が多い県はどこ？東京都が首位",
+      "href": "/blog/new-condo-starts-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "new-condo-starts"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:new-graduate-scheduled-salary-university-male-prefecture-gap",
+      "kind": "blog",
+      "key": "new-graduate-scheduled-salary-university-male-prefecture-gap",
+      "title": "新規学卒者の所定内給与は県でどれだけ違うのか",
+      "href": "/blog/new-graduate-scheduled-salary-university-male-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "new-graduate-scheduled-salary-university-male"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:new-hire-count-prefecture-gap",
       "kind": "blog",
       "key": "new-hire-count-prefecture-gap",
@@ -7215,6 +8396,18 @@
       "published": true,
       "rankingKeys": [
         "new-hire-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:new-housing-starts-prefecture-gap",
+      "kind": "blog",
+      "key": "new-housing-starts-prefecture-gap",
+      "title": "新設住宅の着工が最も多い県はどこか？",
+      "href": "/blog/new-housing-starts-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "new-housing-starts"
       ],
       "tagIds": []
     },
@@ -7310,6 +8503,18 @@
         "fresh-udon-soba-consumption-quantity",
         "ramen-dining-consumption-expenditure",
         "soba-udon-dining-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:notebooks-paper-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "notebooks-paper-consumption-expenditure-prefecture-gap",
+      "title": "ノート・紙製品への支出が最も多い県は？",
+      "href": "/blog/notebooks-paper-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "notebooks-paper-consumption-expenditure"
       ],
       "tagIds": []
     },
@@ -7538,6 +8743,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:onion-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "onion-consumption-quantity-prefecture-gap",
+      "title": "たまねぎ消費量が最も多い県は？隣県で割れる理由",
+      "href": "/blog/onion-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "onion-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:osaka-food-culture",
       "kind": "blog",
       "key": "osaka-food-culture",
@@ -7614,6 +8831,102 @@
       "published": true,
       "rankingKeys": [
         "other-cosmetics-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-fresh-fish-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "other-fresh-fish-consumption-quantity-prefecture-gap",
+      "title": "他の鮮魚の消費量、1位と最下位は何倍違う？",
+      "href": "/blog/other-fresh-fish-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-fresh-fish-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-fresh-fruit-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "other-fresh-fruit-consumption-quantity-prefecture-gap",
+      "title": "他の果物消費量は最大で何倍の差があるのか？",
+      "href": "/blog/other-fresh-fruit-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-fresh-fruit-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-japanese-sweets-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "other-japanese-sweets-consumption-expenditure-prefecture-gap",
+      "title": "他の和生菓子への支出が最も多い県はどこ？",
+      "href": "/blog/other-japanese-sweets-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-japanese-sweets-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-meat-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "other-meat-consumption-quantity-prefecture-gap",
+      "title": "他の生鮮肉の消費が最も多い県はどこ？",
+      "href": "/blog/other-meat-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-meat-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-processed-meat-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "other-processed-meat-consumption-expenditure-prefecture-gap",
+      "title": "他の加工肉の支出、沖縄と奈良で何倍違う？",
+      "href": "/blog/other-processed-meat-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-processed-meat-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-stationery-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "other-stationery-consumption-expenditure-prefecture-gap",
+      "title": "他の文房具への支出が最も多い県はどこでしょうか？",
+      "href": "/blog/other-stationery-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-stationery-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:other-vegetable-pickles-consumption-expenditure-prefecture",
+      "kind": "blog",
+      "key": "other-vegetable-pickles-consumption-expenditure-prefecture",
+      "title": "京都府の漬物支出は最少の高知県の何倍？",
+      "href": "/blog/other-vegetable-pickles-consumption-expenditure-prefecture",
+      "published": true,
+      "rankingKeys": [
+        "other-vegetable-pickles-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:outpatient-rate-per-1000-prefecture-gap",
+      "kind": "blog",
+      "key": "outpatient-rate-per-1000-prefecture-gap",
+      "title": "秋田と沖縄の通院者率の差をどう読むか？",
+      "href": "/blog/outpatient-rate-per-1000-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "outpatient-rate-per-1000"
       ],
       "tagIds": []
     },
@@ -7832,6 +9145,30 @@
       ]
     },
     {
+      "id": "blog:pc-ownership-multi-person-households-per-1000-prefecture-gap",
+      "kind": "blog",
+      "key": "pc-ownership-multi-person-households-per-1000-prefecture-gap",
+      "title": "パソコンが最も多い県は？東京都と福井県の僅差",
+      "href": "/blog/pc-ownership-multi-person-households-per-1000-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "pc-ownership-multi-person-households-per-1000"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:peach-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "peach-consumption-expenditure-prefecture-gap",
+      "title": "桃への支出、福島県は岡山県の約何倍か",
+      "href": "/blog/peach-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "peach-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:peach-consumption-quantity-vs-disaster-relief-expenses",
       "kind": "blog",
       "key": "peach-consumption-quantity-vs-disaster-relief-expenses",
@@ -7904,6 +9241,42 @@
         "tag:regional-economy",
         "tag:income-inequality"
       ]
+    },
+    {
+      "id": "blog:per-capita-prefectural-income-h27-prefecture-gap",
+      "kind": "blog",
+      "key": "per-capita-prefectural-income-h27-prefecture-gap",
+      "title": "1人当たり県民所得、東京都は2位の何千円上か",
+      "href": "/blog/per-capita-prefectural-income-h27-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "per-capita-prefectural-income-h27"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:persimmon-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "persimmon-consumption-expenditure-prefecture-gap",
+      "title": "柿への支出、奈良は群馬の約5倍も多い？",
+      "href": "/blog/persimmon-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "persimmon-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:persimmon-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "persimmon-consumption-quantity-prefecture-gap",
+      "title": "柿を最も食べる県はどこ？岐阜が突き抜ける理由",
+      "href": "/blog/persimmon-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "persimmon-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:personal-computer-expenditure-ranking",
@@ -8062,6 +9435,30 @@
       "tagIds": []
     },
     {
+      "id": "blog:pm25-general-station-compliance-rate-prefecture-gap",
+      "kind": "blog",
+      "key": "pm25-general-station-compliance-rate-prefecture-gap",
+      "title": "PM2.5の環境基準、未達成は2県だけ？その読み方",
+      "href": "/blog/pm25-general-station-compliance-rate-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "pm25-general-station-compliance-rate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:pneumonia-death-rate-prefecture-gap",
+      "kind": "blog",
+      "key": "pneumonia-death-rate-prefecture-gap",
+      "title": "肺炎の死亡者数、青森県と沖縄県で約2.9倍の差はなぜ？",
+      "href": "/blog/pneumonia-death-rate-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "pneumonia-death-rate"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:police-officer-density-vs-crime-gap",
       "kind": "blog",
       "key": "police-officer-density-vs-crime-gap",
@@ -8128,7 +9525,7 @@
       "rankingKeys": [
         "day-time-population-ratio",
         "densely-inhabited-district-population-density",
-        "population-density-habitable"
+        "population-density-per-km2-inhabitable-area"
       ],
       "tagIds": [
         "tag:population-density",
@@ -8222,7 +9619,7 @@
       "id": "blog:potato-consumption-quantity",
       "kind": "blog",
       "key": "potato-consumption-quantity",
-      "title": "じゃがいもを最も食べる県は産地でない岐阜10,467g｜なぜ北海道は上位に入らないのか (2024)",
+      "title": "じゃがいも消費、首位はなぜ毎年入れ替わる?",
       "href": "/blog/potato-consumption-quantity",
       "published": true,
       "rankingKeys": [
@@ -8450,6 +9847,90 @@
       "tagIds": []
     },
     {
+      "id": "blog:psychiatric-hospital-avg-length-of-stay-prefecture-gap",
+      "kind": "blog",
+      "key": "psychiatric-hospital-avg-length-of-stay-prefecture-gap",
+      "title": "精神科の平均在院日数、富山県と大阪府で約2.8倍の開き",
+      "href": "/blog/psychiatric-hospital-avg-length-of-stay-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "psychiatric-hospital-avg-length-of-stay"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:psychiatric-hospital-bed-occupancy-rate-prefecture-gap",
+      "kind": "blog",
+      "key": "psychiatric-hospital-bed-occupancy-rate-prefecture-gap",
+      "title": "精神科病院の病床が埋まる県はどこか",
+      "href": "/blog/psychiatric-hospital-bed-occupancy-rate-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "psychiatric-hospital-bed-occupancy-rate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:psychiatric-hospital-count-prefecture-gap",
+      "kind": "blog",
+      "key": "psychiatric-hospital-count-prefecture-gap",
+      "title": "精神科病院が最も多い県はどこでしょうか？",
+      "href": "/blog/psychiatric-hospital-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "psychiatric-hospital-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:public-bath-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "public-bath-consumption-expenditure-prefecture-gap",
+      "title": "温泉・銭湯への支出が最も多い県はどこ？",
+      "href": "/blog/public-bath-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-bath-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:public-bath-count-per-100k-prefecture-gap",
+      "kind": "blog",
+      "key": "public-bath-count-per-100k-prefecture-gap",
+      "title": "公衆浴場数が最も多い県は？青森県が首位",
+      "href": "/blog/public-bath-count-per-100k-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-bath-count-per-100k"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:public-construction-contract-count-prefecture-gap",
+      "kind": "blog",
+      "key": "public-construction-contract-count-prefecture-gap",
+      "title": "公共工事の契約件数、石川県が2位に入るのはなぜ？",
+      "href": "/blog/public-construction-contract-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-construction-contract-count"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:public-health-nurse-annual-income-prefecture-gap",
+      "kind": "blog",
+      "key": "public-health-nurse-annual-income-prefecture-gap",
+      "title": "保健師の年収が最も高い県は？大阪府と長崎県の差",
+      "href": "/blog/public-health-nurse-annual-income-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-health-nurse-annual-income"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:public-phone-count",
       "kind": "blog",
       "key": "public-phone-count",
@@ -8484,6 +9965,30 @@
         "tag:t-3dfcbdc38d3e",
         "tag:t-79ed467ae71d"
       ]
+    },
+    {
+      "id": "blog:public-phone-count-per-1000-prefecture-gap",
+      "kind": "blog",
+      "key": "public-phone-count-per-1000-prefecture-gap",
+      "title": "公衆電話が最も多い県は？高知県と埼玉県の差",
+      "href": "/blog/public-phone-count-per-1000-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-phone-count-per-1000"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:public-phone-count-prefecture-gap",
+      "kind": "blog",
+      "key": "public-phone-count-prefecture-gap",
+      "title": "公衆電話の設置台数が最も多い県はどこ？",
+      "href": "/blog/public-phone-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "public-phone-count"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:public-phone-prefecture-vanishing",
@@ -8652,6 +10157,30 @@
       ]
     },
     {
+      "id": "blog:regional-co2-emissions-estimate-prefecture-gap",
+      "kind": "blog",
+      "key": "regional-co2-emissions-estimate-prefecture-gap",
+      "title": "CO₂排出量の最多と最少は約17倍の開き",
+      "href": "/blog/regional-co2-emissions-estimate-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "regional-co2-emissions-estimate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:regular-cash-salary-male-prefecture-gap",
+      "kind": "blog",
+      "key": "regular-cash-salary-male-prefecture-gap",
+      "title": "現金給与は東京と鳥取でなぜ137.5千円違う？",
+      "href": "/blog/regular-cash-salary-male-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "regular-cash-salary-male"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:renewable-energy-regional-gap",
       "kind": "blog",
       "key": "renewable-energy-regional-gap",
@@ -8758,6 +10287,36 @@
       ]
     },
     {
+      "id": "blog:rice-spending-quantity-gap-2025",
+      "kind": "blog",
+      "key": "rice-spending-quantity-gap-2025",
+      "title": "米を買う量はほぼ横ばいなのに、支出が大きく増えた",
+      "href": "/blog/rice-spending-quantity-gap-2025",
+      "published": true,
+      "rankingKeys": [
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity"
+      ],
+      "tagIds": [
+        "tag:t-ba8e4beb69bf",
+        "tag:t-1aac8b956f80",
+        "tag:t-7b96c26b45e8",
+        "tag:consumption"
+      ]
+    },
+    {
+      "id": "blog:road-bridge-diagnosed-count-prefecture-gap",
+      "kind": "blog",
+      "key": "road-bridge-diagnosed-count-prefecture-gap",
+      "title": "道路橋の診断済みが最多なのは岡山県?",
+      "href": "/blog/road-bridge-diagnosed-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "road-bridge-diagnosed-count"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:road-infrastructure-density",
       "kind": "blog",
       "key": "road-infrastructure-density",
@@ -8813,6 +10372,19 @@
       "rankingKeys": [
         "residential-building-starts",
         "road-length-per-km2"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:road-total-length-vs-core-agricultural-workers",
+      "kind": "blog",
+      "key": "road-total-length-vs-core-agricultural-workers",
+      "title": "道路が長い県は農業の担い手も多いのか?",
+      "href": "/blog/road-total-length-vs-core-agricultural-workers",
+      "published": true,
+      "rankingKeys": [
+        "core-agricultural-workers",
+        "road-total-length"
       ],
       "tagIds": []
     },
@@ -9021,6 +10593,30 @@
       ]
     },
     {
+      "id": "blog:sashimi-platter-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "sashimi-platter-consumption-quantity-prefecture-gap",
+      "title": "さしみ盛合わせの消費量が多い県はどこか？",
+      "href": "/blog/sashimi-platter-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sashimi-platter-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:sausage-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "sausage-consumption-quantity-prefecture-gap",
+      "title": "ソーセージ消費量1位の新潟県、最下位沖縄県との差は2,776g",
+      "href": "/blog/sausage-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sausage-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:savings-balance-gap",
       "kind": "blog",
       "key": "savings-balance-gap",
@@ -9058,6 +10654,18 @@
         "tag:worker-households",
         "tag:regional-disparity"
       ]
+    },
+    {
+      "id": "blog:savory-bread-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "savory-bread-consumption-expenditure-prefecture-gap",
+      "title": "調理パンの支出、1位と最下位で何倍の差？",
+      "href": "/blog/savory-bread-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "savory-bread-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:scallop-expenditure-ranking",
@@ -9507,6 +11115,30 @@
       ]
     },
     {
+      "id": "blog:sleep-avg-time-female-prefecture-gap",
+      "kind": "blog",
+      "key": "sleep-avg-time-female-prefecture-gap",
+      "title": "睡眠が最も長い青森県と最も短い岡山県の差は？",
+      "href": "/blog/sleep-avg-time-female-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sleep-avg-time-female"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:sleep-avg-time-male-prefecture-gap",
+      "kind": "blog",
+      "key": "sleep-avg-time-male-prefecture-gap",
+      "title": "男性の睡眠が最も長い県は？高知県と東京都の差",
+      "href": "/blog/sleep-avg-time-male-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sleep-avg-time-male"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:small-business-dominance-map",
       "kind": "blog",
       "key": "small-business-dominance-map",
@@ -9620,6 +11252,30 @@
       ]
     },
     {
+      "id": "blog:solar-power-housing-prefecture-gap",
+      "kind": "blog",
+      "key": "solar-power-housing-prefecture-gap",
+      "title": "太陽光住宅数、愛知は秋田の約24.8倍なのはなぜ?",
+      "href": "/blog/solar-power-housing-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "solar-power-housing"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:sole-proprietor-sales-prefecture-gap",
+      "kind": "blog",
+      "key": "sole-proprietor-sales-prefecture-gap",
+      "title": "個人企業の売上高、愛知は徳島の何倍か",
+      "href": "/blog/sole-proprietor-sales-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sole-proprietor-sales"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "soy-sauce-consumption-expenditure-prefecture-gap",
@@ -9628,6 +11284,31 @@
       "published": true,
       "rankingKeys": [
         "soy-sauce-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:specific-health-checkup-participation-rate-prefecture-gap",
+      "kind": "blog",
+      "key": "specific-health-checkup-participation-rate-prefecture-gap",
+      "title": "特定健診受診率、東京都と北海道の差は何倍か？",
+      "href": "/blog/specific-health-checkup-participation-rate-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "specific-health-checkup-participation-rate"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:specific-health-checkup-participation-rate-vs-taxpayer",
+      "kind": "blog",
+      "key": "specific-health-checkup-participation-rate-vs-taxpayer",
+      "title": "健診を受ける県は納税者も多いのでしょうか?",
+      "href": "/blog/specific-health-checkup-participation-rate-vs-taxpayer",
+      "published": true,
+      "rankingKeys": [
+        "specific-health-checkup-participation-rate",
+        "taxpayer-ratio-per-pref-resident"
       ],
       "tagIds": []
     },
@@ -9688,6 +11369,18 @@
       ]
     },
     {
+      "id": "blog:sports-participation-rate-basketball-prefecture-gap",
+      "kind": "blog",
+      "key": "sports-participation-rate-basketball-prefecture-gap",
+      "title": "バスケットボールをした人が多い県はどこ？",
+      "href": "/blog/sports-participation-rate-basketball-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-basketball"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:sports-participation-rate-hiking-prefecture-gap",
       "kind": "blog",
       "key": "sports-participation-rate-hiking-prefecture-gap",
@@ -9696,6 +11389,30 @@
       "published": true,
       "rankingKeys": [
         "sports-participation-rate-hiking"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:sports-participation-rate-kendo-prefecture-gap",
+      "kind": "blog",
+      "key": "sports-participation-rate-kendo-prefecture-gap",
+      "title": "剣道をした人が多い県と少ない県の顔ぶれは？",
+      "href": "/blog/sports-participation-rate-kendo-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-kendo"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:sports-participation-rate-softball-prefecture-gap",
+      "kind": "blog",
+      "key": "sports-participation-rate-softball-prefecture-gap",
+      "title": "ソフトボールをした人が多い県はどこ？",
+      "href": "/blog/sports-participation-rate-softball-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-softball"
       ],
       "tagIds": []
     },
@@ -10033,6 +11750,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:tablet-ownership-multi-person-households-per-1000",
+      "kind": "blog",
+      "key": "tablet-ownership-multi-person-households-per-1000",
+      "title": "福井県はなぜ3位か、データで言えることと言えないこと",
+      "href": "/blog/tablet-ownership-multi-person-households-per-1000",
+      "published": true,
+      "rankingKeys": [
+        "tablet-ownership-multi-person-households-per-1000"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:taro-consumption-quantity-prefecture-gap",
       "kind": "blog",
       "key": "taro-consumption-quantity-prefecture-gap",
@@ -10061,6 +11790,18 @@
         "tag:t-3dfcbdc38d3e",
         "tag:regional-disparity"
       ]
+    },
+    {
+      "id": "blog:taxi-fare-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "taxi-fare-consumption-expenditure-prefecture-gap",
+      "title": "タクシー代が最も高いのは奈良県？1位と47位は7倍超",
+      "href": "/blog/taxi-fare-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "taxi-fare-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:telework-gap-tokyo-6x",
@@ -10144,6 +11885,18 @@
       "published": true,
       "rankingKeys": [
         "tempura-fry-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:tennis-court-public-prefecture-gap",
+      "kind": "blog",
+      "key": "tennis-court-public-prefecture-gap",
+      "title": "公共テニスコートが最も多い県はどこ？",
+      "href": "/blog/tennis-court-public-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "tennis-court-public"
       ],
       "tagIds": []
     },
@@ -10253,7 +12006,7 @@
       "id": "blog:tofu-consumption-prefecture-gap",
       "kind": "blog",
       "key": "tofu-consumption-prefecture-gap",
-      "title": "豆腐消費量トップは宮城116.57丁｜佐賀のほぼ2倍、なぜ東北と日本海側が多い?",
+      "title": "豆腐消費、首位が宮城から富山へ?",
       "href": "/blog/tofu-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -10385,6 +12138,30 @@
         "tag:cost-of-living",
         "tag:t-3dfcbdc38d3e"
       ]
+    },
+    {
+      "id": "blog:toothbrush-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "toothbrush-consumption-expenditure-prefecture-gap",
+      "title": "歯ブラシに一番お金を使う県はどこ？",
+      "href": "/blog/toothbrush-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "toothbrush-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:toothpaste-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "toothpaste-consumption-expenditure-prefecture-gap",
+      "title": "歯磨きへの支出が最も多い県はどこなのか？",
+      "href": "/blog/toothpaste-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "toothpaste-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:total-fertility-rate",
@@ -10557,6 +12334,18 @@
       ]
     },
     {
+      "id": "blog:train-fare-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "train-fare-consumption-expenditure-prefecture-gap",
+      "title": "鉄道運賃への支出が最も多い県はどこ？",
+      "href": "/blog/train-fare-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "train-fare-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:travel-behavior-gender-gap",
       "kind": "blog",
       "key": "travel-behavior-gender-gap",
@@ -10576,6 +12365,42 @@
         "tag:domestic-travel",
         "tag:leisure"
       ]
+    },
+    {
+      "id": "blog:travel-participation-rate-homecoming-prefecture-gap",
+      "kind": "blog",
+      "key": "travel-participation-rate-homecoming-prefecture-gap",
+      "title": "帰省・訪問の旅行は京都府と沖縄県で何倍違う?",
+      "href": "/blog/travel-participation-rate-homecoming-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-homecoming"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:treatment-rate-cerebrovascular-outpatient-prefecture-gap",
+      "kind": "blog",
+      "key": "treatment-rate-cerebrovascular-outpatient-prefecture-gap",
+      "title": "脳血管疾患の外来、和歌山と埼玉で約5倍も違う?",
+      "href": "/blog/treatment-rate-cerebrovascular-outpatient-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "treatment-rate-cerebrovascular-outpatient"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:treatment-rate-diabetes-outpatient-prefecture-gap",
+      "kind": "blog",
+      "key": "treatment-rate-diabetes-outpatient-prefecture-gap",
+      "title": "糖尿病で外来に通う人が多い県はどこか？",
+      "href": "/blog/treatment-rate-diabetes-outpatient-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "treatment-rate-diabetes-outpatient"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:treatment-rate-hypertension-outpatient-prefecture-gap",
@@ -10662,6 +12487,18 @@
         "tag:2024-problem",
         "tag:t-3dfcbdc38d3e"
       ]
+    },
+    {
+      "id": "blog:tsunami-evacuation-tower-count-prefecture-gap",
+      "kind": "blog",
+      "key": "tsunami-evacuation-tower-count-prefecture-gap",
+      "title": "津波避難タワー等が多い県はどこ？",
+      "href": "/blog/tsunami-evacuation-tower-count-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "tsunami-evacuation-tower-count"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:tuition-expenditure-ranking",
@@ -10832,6 +12669,18 @@
         "tag:t-df4ca97a1669",
         "tag:t-ba8e4beb69bf"
       ]
+    },
+    {
+      "id": "blog:umbrella-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "umbrella-consumption-quantity-prefecture-gap",
+      "title": "傘を最も買う県はどこ？埼玉と秋田の開き",
+      "href": "/blog/umbrella-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "umbrella-consumption-quantity"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:unemployment-structure",
@@ -11084,6 +12933,42 @@
       ]
     },
     {
+      "id": "blog:vaccination-recipients-disease-prefecture-gap",
+      "kind": "blog",
+      "key": "vaccination-recipients-disease-prefecture-gap",
+      "title": "ＨＰＶワクチンの定期接種者が最も多いのはどこか？",
+      "href": "/blog/vaccination-recipients-disease-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "vaccination-recipients-disease"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:vacuum-cleaner-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "vacuum-cleaner-consumption-quantity-prefecture-gap",
+      "title": "掃除機の購入数量は埼玉と大阪で約6倍違う",
+      "href": "/blog/vacuum-cleaner-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "vacuum-cleaner-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:vinegar-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "vinegar-consumption-quantity-prefecture-gap",
+      "title": "酢の消費量は岐阜と石川で何倍違う？",
+      "href": "/blog/vinegar-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "vinegar-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:voluntary-car-insurance-rate-bodily-injury-prefecture-gap",
       "kind": "blog",
       "key": "voluntary-car-insurance-rate-bodily-injury-prefecture-gap",
@@ -11185,6 +13070,18 @@
       "published": true,
       "rankingKeys": [
         "population-migration-inter-prefecture"
+      ],
+      "tagIds": []
+    },
+    {
+      "id": "blog:washing-machine-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "washing-machine-consumption-quantity-prefecture-gap",
+      "title": "洗濯機の購入数量、最多と最少で9.8倍の差があるのはなぜ？",
+      "href": "/blog/washing-machine-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "washing-machine-consumption-quantity"
       ],
       "tagIds": []
     },
@@ -11317,6 +13214,18 @@
       ]
     },
     {
+      "id": "blog:western-food-dining-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "western-food-dining-consumption-expenditure-prefecture-gap",
+      "title": "洋食への支出が最も多い県はどこ？",
+      "href": "/blog/western-food-dining-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "western-food-dining-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:wheat-flour-consumption-food-culture-gap",
       "kind": "blog",
       "key": "wheat-flour-consumption-food-culture-gap",
@@ -11338,7 +13247,7 @@
       "id": "blog:wheat-flour-consumption-prefecture",
       "kind": "blog",
       "key": "wheat-flour-consumption-prefecture",
-      "title": "小麦粉を最も買う県は三重、なぜ「ほうとう県」山梨が最下位?",
+      "title": "小麦粉の購入量、なぜ長野は福井の4倍超?",
       "href": "/blog/wheat-flour-consumption-prefecture",
       "published": true,
       "rankingKeys": [
@@ -11520,6 +13429,18 @@
         "tag:t-ee848e5b9553",
         "tag:t-6f414497615e"
       ]
+    },
+    {
+      "id": "blog:wooden-housing-ratio-prefecture-gap",
+      "kind": "blog",
+      "key": "wooden-housing-ratio-prefecture-gap",
+      "title": "木造住宅率が最も高い県はなぜ秋田なのか？",
+      "href": "/blog/wooden-housing-ratio-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "wooden-housing-ratio"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:working-hours-overtime-gap",
