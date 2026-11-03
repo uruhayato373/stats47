@@ -57,7 +57,7 @@ import {
   CategoryRankingTable,
   type CategoryRankingListItem,
 } from '@/features/ranking';
-import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
+import { buildFeaturedRankingCardModel, rankingTop1Label } from '@/features/ranking/server';
 import {
   excludeFeaturedQuestions,
   getSurveyEditorialContent,
@@ -290,6 +290,7 @@ export default async function SurveyPage({ params }: PageProps) {
       description: item.description,
       demographicAttr: item.demographicAttr,
       normalizationBasis: item.normalizationBasis,
+      top1: rankingTop1Label(item),
       ...(isKakei ? { topicLabel: topicLabels.get(topicKey) ?? OTHER_TOPIC_LABEL } : {}),
     };
   });

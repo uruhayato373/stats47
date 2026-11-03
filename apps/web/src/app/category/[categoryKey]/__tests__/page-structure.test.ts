@@ -89,9 +89,9 @@ describe('category page featured ranking cards', () => {
   });
 
   it('独立した情報セクションの見出しに連番を表示しない', () => {
-    // 節はカードの見出し (SectionCard / HorizontalCardCarouselFrame / CategoryTopicGroups の title) に置く
+    // 節はカードの見出し (SectionCard / HorizontalCardCarouselFrame の title) に置く
     const sectionHeadings = Array.from(
-      PAGE.matchAll(/<(?:SectionCard|HorizontalCardCarouselFrame|CategoryTopicGroups)\b([\s\S]*?)>/g),
+      PAGE.matchAll(/<(?:SectionCard|HorizontalCardCarouselFrame)\b([\s\S]*?)>/g),
       (match) => match[1]
     );
 

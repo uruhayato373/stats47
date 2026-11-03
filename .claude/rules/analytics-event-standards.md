@@ -342,7 +342,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > `unlabeled` だったので、部品側の送信も導線名も持たない上位の部品に導線名を付けた。ランキングの順位表の県名 (`RankingDataTable`) =
 > `ranking_table`、「相関が高い指標」(`CorrelationSectionClient`) = `ranking_correlation`、「同カテゴリの関連ランキング」(`RelatedRankingsGrid`) =
 > `ranking_related`、県データブックの指標 (`RankedKpiGrid` / `GenderPairedKpiGrid`) = `area_databook`、カテゴリ・調査の全件一覧
-> (`CategoryRankingTable` / `CategoryTopicGroups`) = `category_ranking_list`、Geo の出典データ一覧 (`GeoSourceNavigationList`) = `geo_source_list`。
+> (`CategoryRankingTable`) = `category_ranking_list`、Geo の出典データ一覧 (`GeoSourceNavigationList`) = `geo_source_list`。
 > 送信は共通のクリック監視だけが行い (部品側の `trackNavClick` は足していない)、属性は `navSurfaceProps()` (`NavSurface` で型を縛る) で付ける。
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。**デプロイ日を境に `unlabeled` の件数が減り、上の値が増える**
 > (クリックの総数は変わらない)。デプロイ前後の `unlabeled` を単純比較しない。

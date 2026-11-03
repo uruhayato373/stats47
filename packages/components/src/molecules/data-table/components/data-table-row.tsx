@@ -25,8 +25,9 @@ export function DataTableRow<TData>({ row, onClick, className }: DataTableRowPro
             {row.getVisibleCells().map((cell) => {
                 const width = cell.column.columnDef.meta?.width;
                 const minWidth = cell.column.columnDef.meta?.minWidth;
+                const wrap = cell.column.columnDef.meta?.wrap;
                 return (
-                    <TableCell key={cell.id} style={{ width, minWidth }}>
+                    <TableCell key={cell.id} style={{ width, minWidth }} className={cn(wrap && "whitespace-normal!")}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                 );
