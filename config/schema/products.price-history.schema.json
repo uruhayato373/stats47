@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品の価格実験と価格変更の履歴",
+  "description": "data/products/price-history.json の形状契約。価格を変えるときは先に実験と変更をここへ書く",
+  "type": "object",
+  "required": ["schemaVersion", "experiments", "changes"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "startedOn", "reviewOn", "status", "hypothesis", "evidence", "decisionRule", "metric"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^PRICE-[A-Z0-9-]+$" },
+          "startedOn": { "type": "string", "format": "date" },
+          "reviewOn": { "type": "string", "format": "date" },
+          "status": { "enum": ["running", "kept", "changed", "stopped"] },
+          "hypothesis": { "type": "string", "minLength": 1 },
+          "evidence": { "type": "string", "minLength": 1 },
+          "decisionRule": { "type": "string", "minLength": 1 },
+          "metric": { "type": "string", "minLength": 1 },
+          "result": { "type": "string" }
+        }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["experimentId", "channel", "productKey", "fromYen", "toYen", "status", "appliedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "experimentId": { "type": "string" },
+          "channel": { "enum": ["note", "kdp"] },
+          "productKey": { "type": "string", "minLength": 1 },
+          "fromYen": { "type": "integer", "minimum": 0 },
+          "toYen": { "type": "integer", "minimum": 0 },
+          "status": { "enum": ["planned", "applied"] },
+          "appliedAt": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

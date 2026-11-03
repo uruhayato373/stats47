@@ -96,7 +96,7 @@ jobs:
         id: review
         if: steps.plan.outputs.review == 'true'
         timeout-minutes: 15
-        uses: anthropics/claude-code-base-action@33edbb44fb532939e88135c89311b5c20a0524de # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
+        uses: anthropics/claude-code-base-action@a020ffdbe9f330845a556ed9f53d247394ef7fe4 # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:

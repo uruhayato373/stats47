@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品戦略の台帳",
+  "description": "data/products/product-strategy.json の形状契約。商品群ごとの判断、決定の記録、次に議論する論点を人が書く。価格と実績は持たない",
+  "type": "object",
+  "required": ["schemaVersion", "fees", "lines", "decisions", "agenda"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "notebook": { "type": "object" },
+    "fees": { "type": "object" },
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "stance", "audience", "harm", "payReason", "priceRule", "demandEvidence", "nextReviewOn", "match"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "stance": { "enum": ["price-test", "keep", "hold", "stop"] },
+          "audience": { "type": "string", "minLength": 1 },
+          "harm": { "type": "string", "minLength": 1 },
+          "payReason": { "type": "string", "minLength": 1 },
+          "priceRule": { "type": "string", "minLength": 1 },
+          "demandEvidence": { "type": "string", "minLength": 1 },
+          "nextReviewOn": { "type": "string", "format": "date" },
+          "match": {
+            "type": "object",
+            "required": ["channel", "status"],
+            "additionalProperties": false,
+            "properties": {
+              "channel": { "enum": ["note", "kdp"] },
+              "status": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "vertical": { "type": "string" },
+              "minYen": { "type": "integer" },
+              "maxYen": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "topic", "decision", "reason", "by"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "topic": { "type": "string", "minLength": 1 },
+          "decision": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "by": { "enum": ["owner"] }
+        }
+      }
+    },
+    "agenda": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["topic", "question", "evidenceNeeded"],
+        "additionalProperties": false,
+        "properties": {
+          "topic": { "type": "string", "minLength": 1 },
+          "question": { "type": "string", "minLength": 1 },
+          "evidenceNeeded": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
