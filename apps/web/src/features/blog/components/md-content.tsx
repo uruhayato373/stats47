@@ -20,7 +20,7 @@ import remarkGfm from "remark-gfm";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { AdCell, AffiliateTextAdList, BannerAd } from "@/features/ads";
+import { AdCell, AdRow, type AdRowCell, AffiliateTextAdList, BannerAd } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
@@ -33,9 +33,9 @@ import {
 
 import { R2_PUBLIC_BASE_URL } from "@/config/site";
 
+import { injectAdRows } from "../lib/ad-row-positions";
 import { buildHeadingSlug } from "../lib/heading-slug";
 import { blogR2Key } from "../r2-key";
-import { type InlineAffiliateBanner } from "../utils";
 
 import { Callout } from "./Callout";
 import { toCalloutType } from "./callout-config";
@@ -85,10 +85,10 @@ interface MDContentProps {
     /** テキストリンクのテーマ色に使う vertical。 */
     affiliateVertical?: AffiliateCategory | null;
     /**
-     * 本文・記事末尾に差し込む 300x250 バナー。記事の tagKeys から解決済みで、
-     * `<affiliate-banner index="N">` が順に 1 件ずつ消費する。
+     * 広告の段 (AdSense と PR。2026-11-03 オーナー決定)。最後の 1 段を記事の末尾に、残りを本文の h2 の
+     * 2・4・6 番目の直前に置く (`<ad-row index="N">`)。見出しが足りなければ本文の段は減らす
      */
-    affiliateBanners?: InlineAffiliateBanner[];
+    adRows?: AdRowCell[][];
 }
 
 interface ComponentProps {
@@ -101,7 +101,7 @@ function makeMdComponents(
     affiliateBannersByCategory?: Record<string, AffiliateBannerData>,
     affiliateTextAds?: AffiliateTextAdData[],
     affiliateVertical?: AffiliateCategory | null,
-    affiliateBanners?: InlineAffiliateBanner[],
+    adRows?: AdRowCell[][],
 ): Record<string, React.ComponentType<ComponentProps>> {
     return {
         // 見出し・リンクの見た目は globals.css の .blog-news-article が持つ (Soft Editorial)。
@@ -258,7 +258,18 @@ function makeMdComponents(
             </div>
         ),
 
-        // モバイルでは手置き枠を描画しない (2026-08-04)。
+        // 本文の広告の段 (injectAdRows が h2 の直前に差し込む)。中身が無い段は何も描かない
+        "ad-row": ({ index }: ComponentProps & { index?: string }) => {
+            const cells = adRows?.[Number(index)];
+            if (!cells || cells.length === 0) return null;
+            return (
+                <div className="my-8 not-prose">
+                    <AdRow cells={cells} position={`blog-row-${Number(index) + 1}`} trackingCategory={affiliateVertical ?? "other"} />
+                </div>
+            );
+        },
+
+        // 記事に手で置いた <ad-slot> (自動の差し込みは広告の段に移した)。モバイルでは描画しない (2026-08-04)。
         // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
         "ad-slot": () =>
             ADSENSE_DISPLAY_ENABLED ? (
@@ -318,32 +329,9 @@ function makeMdComponents(
             );
         },
 
-        "affiliate-banner": ({ src, href, tracking, width, height, label, category, index, slot }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string; index?: string; slot?: string }) => {
-            // index 指定 = 自動挿入されたバナー枠。解決済み配列から 1 件消費する。
-            // 在庫が index に足りなければ何も出さない (空枠を残さない)。
-            if (index != null) {
-                const i = Number(index);
-                const b = affiliateBanners?.[Number.isFinite(i) ? i : 0];
-                if (!b) return null;
-                return (
-                    <div className="my-8 not-prose">
-                        <BannerAd
-                            href={b.href}
-                            imageUrl={b.imageUrl}
-                            trackingPixelUrl={b.trackingPixelUrl}
-                            width={b.width}
-                            height={b.height}
-                            label={b.title}
-                            // ★ vertical を渡さないと BannerAd の既定 "other" が
-                            //   affiliate_vertical に流れ内訳が壊れる。
-                            category={b.vertical ?? affiliateVertical ?? "other"}
-                            position={slot === "end" ? "article-end" : "article-inline"}
-                            adId={b.id}
-                            creativeSize={`${b.width}x${b.height}`}
-                        />
-                    </div>
-                );
-            }
+        "affiliate-banner": ({ src, href, tracking, width, height, label, category, index }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string; index?: string }) => {
+            // index 指定は旧来の自動挿入のバナー枠 (2026-11-03 に広告の段へ移した)。手で書く記法ではないので何も出さない
+            if (index != null) return null;
             if (category && affiliateBannersByCategory?.[category]) {
                 const b = affiliateBannersByCategory[category];
                 return (
@@ -422,107 +410,6 @@ function makeMdComponents(
     };
 }
 
-/**
- * 手動 <ad-slot> 未設置の記事に、本文中盤の <ad-slot> を注入する。
- * 記事末尾 1 枠より viewability が高い中盤配置にするための処理。
- * h2 見出しの 2 番目・中盤の直前に挿入し、手動配置記事の ~2 枠パターンに合わせる。
- */
-function injectAdSlots(md: string): string {
-    if (md.includes("<ad-slot")) return md; // 手動配置済みの記事は触らない
-    const lines = md.split("\n");
-    // h2 見出し行を収集（コードフェンス内の "## " は誤検出しないよう除外）
-    const h2Indices: number[] = [];
-    let inFence = false;
-    lines.forEach((line, i) => {
-        if (line.trimStart().startsWith("```")) {
-            inFence = !inFence;
-        } else if (!inFence && /^##\s/.test(line)) {
-            h2Indices.push(i);
-        }
-    });
-    if (h2Indices.length < 2) return md; // 見出しが少ない記事は対象外
-    const targets = [h2Indices[1]];
-    if (h2Indices.length >= 5) targets.push(h2Indices[Math.floor(h2Indices.length / 2)]);
-    const result = [...lines];
-    // 行番号のズレを防ぐため後ろから挿入する
-    for (const idx of [...new Set(targets)].sort((a, b) => b - a)) {
-        result.splice(idx, 0, "", "<ad-slot></ad-slot>", "");
-    }
-    return result.join("\n");
-}
-
-/**
- * 本文中と記事末尾に広告枠を自動挿入する。
- *
- * 読了文脈に乗るのは本文中なので、テキストリンクだけでなく画像バナーも本文へ出す。
- * 手動で `<affiliate-text` / `<affiliate-banner` を置いた記事は一切触らない。
- *
- * 配置:
- *   - 本文: h2 見出しの2・4・6番目の直前に最大3枠の300x250バナー。
- *   - 記事末尾: バナー1枠（読了直後は完読者で意図が強い）。
- *
- * `injectAdSlots` が使う h2 (2 番目・中盤) と重ならないよう、衝突する位置は 1 つ後ろの h2 へずらす。
- * 在庫を超えては挿入しない — 空枠を作らないため。
- */
-// export はユニットテスト用 (inject-affiliate-units.test.ts)。本文への広告挿入は
-// 位置計算・衝突回避・在庫不足時の抑制が絡み、目視では退行を検知できないため。
-export function injectAffiliateUnits(
-    md: string,
-    opts: { bannerCount: number },
-): string {
-    const { bannerCount } = opts;
-    // 記事末尾のバナー1本を残し、残りを本文枠へ使う。
-    const bodyStock = Math.max(0, bannerCount - 1);
-    const hasEndBanner = bannerCount > 0;
-    if (bodyStock <= 0 && !hasEndBanner) return md;
-    // 手動配置済みの記事は触らない
-    if (md.includes("<affiliate-text") || md.includes("<affiliate-banner")) return md;
-    const availableCount = bodyStock;
-
-    const lines = md.split("\n");
-    const h2Indices: number[] = [];
-    let inFence = false;
-    lines.forEach((line, i) => {
-        if (line.trimStart().startsWith("```")) {
-            inFence = !inFence;
-        } else if (!inFence && /^##\s/.test(line)) {
-            h2Indices.push(i);
-        }
-    });
-
-    // injectAdSlots が既に <ad-slot> を差し込んだ行を避ける (広告が連続して並ぶのを防ぐ)
-    const adSlotLines = new Set<number>();
-    lines.forEach((line, i) => {
-        if (line.includes("<ad-slot")) adSlotLines.add(i);
-    });
-    const collidesWithAdSlot = (h2Index: number) =>
-        adSlotLines.has(h2Index - 1) || adSlotLines.has(h2Index - 2);
-
-    const bodySlots = Math.min(availableCount, 3);
-    const targets: number[] = [];
-    for (let n = 1; targets.length < bodySlots && n < h2Indices.length; n += 2) {
-        // 2・4・6 番目の h2 (0 始まりで 1,3,5)
-        let idx = h2Indices[n];
-        if (collidesWithAdSlot(idx) && h2Indices[n + 1] != null) idx = h2Indices[n + 1];
-        if (!targets.includes(idx)) targets.push(idx);
-    }
-
-    const result = [...lines];
-    // 行番号のズレを防ぐため後ろから挿入する
-    const unit = (i: number) => `<affiliate-banner index="${i}"></affiliate-banner>`;
-    let slot = targets.length - 1;
-    for (const idx of [...targets].sort((a, b) => b - a)) {
-        result.splice(idx, 0, "", unit(slot), "");
-        slot--;
-    }
-    // 記事末尾は本文で使った分の次を消費する。
-    if (hasEndBanner) {
-        const endIndex = targets.length;
-        result.push("", `<affiliate-banner index="${endIndex}" slot="end"></affiliate-banner>`, "");
-    }
-    return result.join("\n");
-}
-
 export function MDContent({
     source,
     slug,
@@ -530,7 +417,7 @@ export function MDContent({
     affiliateBannersByCategory,
     affiliateTextAds,
     affiliateVertical,
-    affiliateBanners,
+    adRows,
 }: MDContentProps) {
     const mdComponents = useMemo(
         () =>
@@ -539,19 +426,16 @@ export function MDContent({
                 affiliateBannersByCategory,
                 affiliateTextAds,
                 affiliateVertical,
-                affiliateBanners,
+                adRows,
             ),
-        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, affiliateBanners],
+        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, adRows],
     );
+    const endRow = adRows?.[adRows.length - 1];
     const processed = useMemo(
         () =>
-            injectAffiliateUnits(
-                injectAdSlots(preprocessCallouts(source, relatedArticleTitles)),
-                {
-                    bannerCount: affiliateBanners?.length ?? 0,
-                },
-            ),
-        [source, relatedArticleTitles, affiliateBanners],
+            // 最後の 1 段は記事の末尾 (下) に置くので、本文には残りを差し込む
+            injectAdRows(preprocessCallouts(source, relatedArticleTitles), Math.max(0, (adRows?.length ?? 0) - 1)),
+        [source, relatedArticleTitles, adRows],
     );
     return (
         <article
@@ -565,17 +449,11 @@ export function MDContent({
             >
                 {processed}
             </ReactMarkdown>
-            {/* 広告: 記事末尾。手動 <ad-slot> 未設置記事のみ（injectAdSlots の中盤 2 枠に加えて末尾 1 枠）。 */}
-            {ADSENSE_DISPLAY_ENABLED && !source.includes("<ad-slot") && (
-                <AdCell label="広告" className="my-8 not-prose px-0!">
-                    <AdSenseAd
-                        format={BLOG_ARTICLE_INLINE.format}
-                        slotId={BLOG_ARTICLE_INLINE.slotId}
-                        showLabel={false}
-                        // モバイルでも出る枠なので、台帳の全幅の箱 (デスクトップ 280px・モバイル 250px)
-                        slotBox={adSlotBox("adsense-body-all")}
-                    />
-                </AdCell>
+            {/* 記事の末尾の広告の段 (手で広告を置いた記事にも出す) */}
+            {endRow && endRow.length > 0 && (
+                <div className="my-8 not-prose">
+                    <AdRow cells={endRow} position="blog-row-end" trackingCategory={affiliateVertical ?? "other"} />
+                </div>
             )}
         </article>
     );

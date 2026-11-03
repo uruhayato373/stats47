@@ -23,5 +23,5 @@ export { ArticleTableOfContents } from './components/ArticleTableOfContents';
 export { generateBlogMetadata } from './utils/generate-blog-metadata';
 export {
   BLOG_IN_BODY_BANNER_COUNT,
-  type InlineAffiliateBanner,
 } from './utils/inline-affiliate-banner';
+export { adRowTargets } from './lib/ad-row-positions';

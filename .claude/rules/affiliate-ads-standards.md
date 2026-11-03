@@ -26,6 +26,13 @@ paths:
 > ページで共通の案件を上回ると実測できた場合だけ残す。下の vertical の解決は切り替えが済むまでの現行の実装で、切り替えの実装と
 > 本文の広告の段の試験は backlog `AFFILIATE-COMMON-PRODUCTS-01`。案件の条件記録・評価指標・同時入れ替えの禁止は変えない。
 
+> **広告の段 (2026-11-03 オーナー決定)**: テーマ・ランキング・ブログの本文の広告は、AdSense と PR を 1 行に並べる広告の段
+> (`AdRow`・`features/ads/components/slots/AdRow.tsx`) にした。本文の幅に原寸 300px のまま入る数だけ左から出す
+> (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠)。段の中身は `composeAdRows` が上の段から割り当て、AdSense は段ごとに別の
+> ユニットを使う。置き場所と段の中身の正本は `config/ads/placements.json` (`ad-row`)。本文の AdSense の上限は 4 枠 (広告の段の
+> AdSense も数える)。ブログの本文の自動の `<ad-slot>`・バナーの差し込みは段に置き換えた (手で広告を置いた記事は手の位置のまま)。
+> 下の §4・§12 にある本文のバナー・テキストの自動挿入の記述は、この日より前の配置である。
+
 ## 0. 意図軸 (10 vertical) — 広告解決の実軸
 
 `AffiliateVertical` (`apps/web/src/features/ads/constants/affiliate-category.ts`):

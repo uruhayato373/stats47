@@ -1,10 +1,9 @@
+import type { AdRowCell } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 
 import { type Article } from "../types";
 
 import { MDContent } from "./md-content";
-
-import type { InlineAffiliateBanner } from "../utils";
 
 interface ArticleRendererProps {
     article: Article;
@@ -30,8 +29,8 @@ interface ArticleRendererProps {
     }>;
     /** テキストリンクのテーマ色に使う vertical。 */
     affiliateVertical?: AffiliateCategory | null;
-    /** 本文・記事末尾に自動挿入する 300x250 バナー (記事の tagKeys から解決済み)。 */
-    affiliateBanners?: InlineAffiliateBanner[];
+    /** 広告の段 (AdSense と PR)。最後の 1 段が記事の末尾、残りが本文の h2 の前 */
+    adRows?: AdRowCell[][];
 }
 
 export function ArticleRenderer({
@@ -41,7 +40,7 @@ export function ArticleRenderer({
     affiliateBannersByCategory,
     affiliateTextAds,
     affiliateVertical,
-    affiliateBanners,
+    adRows,
 }: ArticleRendererProps) {
     return (
         <MDContent
@@ -51,7 +50,7 @@ export function ArticleRenderer({
             affiliateBannersByCategory={affiliateBannersByCategory}
             affiliateTextAds={affiliateTextAds}
             affiliateVertical={affiliateVertical}
-            affiliateBanners={affiliateBanners}
+            adRows={adRows}
         />
     );
 }

@@ -4,5 +4,4 @@
 export { generateBlogMetadata } from "./generate-blog-metadata";
 export {
   BLOG_IN_BODY_BANNER_COUNT,
-  type InlineAffiliateBanner,
 } from "./inline-affiliate-banner";

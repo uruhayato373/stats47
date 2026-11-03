@@ -25,14 +25,16 @@ import { ArticleCard } from "@/components/surface";
 
 import {
     BannerAd,
+    composeAdRows,
     OperatorProfileCard,
+    type AdRowPattern,
     RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
 import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
 import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
-import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
+import { adRowTargets, BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
     listLatestArticles,
@@ -49,6 +51,7 @@ import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
+import { BLOG_ARTICLE_INLINE, CONTENT_FOOTER, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -70,6 +73,9 @@ const BLOG_RAIL_CATEGORIES = CATEGORIES.slice(0, 6).map((category) => ({
 }));
 const BLOG_RAIL_PREFECTURES = fetchPrefectures();
 
+
+/** ブログの本文の広告の段の中身 (上から。モバイルは各段の先頭の 1 枠) */
+const BLOG_BODY_AD_ROW_PATTERNS: AdRowPattern[] = [["adsense", "affiliate"], ["affiliate", "adsense"], ["adsense", "affiliate"]];
 export async function generateStaticParams() {
     const articles = await listLatestArticles(1000).catch(() => []);
     return articles.map((a) => ({ slug: a.slug }));
@@ -167,6 +173,15 @@ export default async function BlogPostPage({ params }: PageProps) {
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
     const affiliateBannerPool = await resolveAffiliateBannersForContent(bannerInput, BLOG_IN_BODY_BANNER_COUNT + 2);
     const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
+    // 広告の段 (2026-11-03 オーナー決定): 本文の h2 の 2・4・6 番目の前と記事の末尾。本文の幅 (約 780px) では 2 枠、
+    // モバイルは先頭の 1 枠で上から AdSense → PR → AdSense → PR。AdSense は段ごとに別のユニット。
+    // 見出しの数で本文の段が減るので、差し込める段だけに広告を割り当てる (使わない段にバナーを取られない)
+    const bodyRowCount = adRowTargets(article.content, BLOG_BODY_AD_ROW_PATTERNS.length).length;
+    const adRows = composeAdRows(
+        [...BLOG_BODY_AD_ROW_PATTERNS.slice(0, bodyRowCount), ["affiliate", "adsense"]],
+        [BLOG_ARTICLE_INLINE, HUB_INCONTENT, CONTENT_FOOTER, THEMES_CONTENT],
+        articleBanners,
+    );
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
     const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const bannerVertical = resolveContentVertical(bannerInput).vertical;
@@ -359,7 +374,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 affiliateBannersByCategory={affiliateBannersByCategory}
                                 affiliateTextAds={affiliateTextAds}
                                 affiliateVertical={bannerVertical}
-                                affiliateBanners={articleBanners}
+                                adRows={adRows}
                             />
 
                             {/* データ出典 (chart source.json から派生。本文に手書きしない) */}
