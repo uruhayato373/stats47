@@ -17,7 +17,8 @@ describe("Kindle indicator definitions", () => {
   it("escapes generated table cells and preserves surrounding paragraphs", () => {
     const xhtml = mdToXhtml('前文\n\n| 県 | 値 |\n| --- | ---: |\n| <script> | 1 & 2 |\n\n後文');
     expect(xhtml).toContain('<td>&lt;script&gt;</td>');
-    expect(xhtml).toContain('<td>1 &amp; 2</td>');
+    // `---:` の列は右寄せの class が付く (数値の桁をそろえる)
+    expect(xhtml).toContain('<td class="num">1 &amp; 2</td>');
     expect(xhtml).toContain('<p>前文</p>');
     expect(xhtml).toContain('<p>後文</p>');
     expect(xhtml).not.toContain('<script>');

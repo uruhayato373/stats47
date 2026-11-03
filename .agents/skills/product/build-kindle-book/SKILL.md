@@ -98,6 +98,7 @@ npm run kindle:quality -- --write                                    # 1 段目:
 npm run admin                                                        # 2 段目の前に管理画面を起動 (/content/kindle/<id> を撮る)
 node .claude/scripts/kdp/capture-figures.mjs K-S1-07 K-S1-02         # 2 段目: 図を 600px 幅で 1 枚ずつ撮る → .local/kindle-quality/<id>/manifest.json
 npx tsx .claude/scripts/kdp/notebooklm-review.ts K-S1-07 K-S1-02     # 3 段目: NotebookLM に本文を入れ、決めた問いを 1 冊 1 回で聞く
+node .claude/scripts/kdp/capture-tables.mjs K-S1-02 --version <版>   # 改訂の確認: 全県表を本の CSS のまま 390px / 600px で撮る (Kindle Previewer の代わりではない)
 ```
 
 2 段目の評価は manifest の `reviewed: false` の図だけを小さいモデル (Haiku) に渡し、結果を
