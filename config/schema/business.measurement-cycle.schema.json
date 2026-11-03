@@ -10,6 +10,12 @@
         "string"
       ]
     },
+    "adminAudit": {
+      "type": [
+        "null",
+        "object"
+      ]
+    },
     "dimensionGaps": {
       "type": [
         "null",

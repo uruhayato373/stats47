@@ -550,6 +550,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:landslide-special-warning-zone-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:landslide-special-warning-zone-count",
           "kind": "ranking"
         },
@@ -766,6 +770,10 @@
         {
           "pageId": "area-theme:47000:landslide-exposure",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:landslide-warning-zone-count-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:landslide-warning-zone-count",
@@ -3276,6 +3284,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:layer-hen-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:layer-hen-count",
           "kind": "ranking"
         },
@@ -3660,6 +3672,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:lettuce-consumption-quantity-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:lettuce-consumption-quantity",
@@ -4780,6 +4796,10 @@
         {
           "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:library-lending-books-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "blog:library-museum-cultural-capital",
@@ -6225,6 +6245,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:lipstick-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:lipstick-consumption-expenditure",
           "kind": "ranking"
@@ -10525,6 +10549,10 @@
         {
           "pageId": "area-theme:47000:occupation-salary",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:manager-annual-income-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:manager-annual-income",

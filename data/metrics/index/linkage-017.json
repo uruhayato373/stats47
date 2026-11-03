@@ -65,6 +65,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:new-graduate-scheduled-salary-university-male-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:new-graduate-scheduled-salary-university-male",
           "kind": "ranking"
         }
@@ -134,6 +138,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:high-school-teacher-annual-income-vs-new-graduate-starting",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:new-graduate-starting-salary-college-male",
           "kind": "ranking"
@@ -615,6 +623,10 @@
         },
         {
           "pageId": "blog:cc-estat-12-housing-treemap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:new-housing-starts-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -4282,6 +4294,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:notebooks-paper-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:notebooks-paper-consumption-expenditure",
           "kind": "ranking"

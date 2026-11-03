@@ -10,7 +10,10 @@ import {
   coverOperationVersion,
   findCoverOperation,
   assertPublicCoverPixels,
+  comparePublicCover,
+  publishedRevisionAfterArchive,
 } from '../lib/cover-update.mjs';
+import sharp from 'sharp';
 import fs from 'node:fs';
 import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
 
@@ -187,6 +190,22 @@ test('note PNG optimization passes, but a different or locally changed image sto
   assert.throws(() => assertPublicCoverPixels(changedTextArea, expected), /public image differs/);
   assert.throws(() => assertPublicCoverPixels(Buffer.alloc(2999), expected), /image channels/);
 });
+test('a newly published cover links to the adopted revision only when delivery and original agree', async () => {
+  const text = (label) => Buffer.from(`<svg width="1280" height="670"><rect width="1280" height="670" fill="#fde68a"/><text x="60" y="360" font-size="220" fill="#1e3a8a">${label}</text></svg>`);
+  const adopted = await sharp(text('Tokyo')).png().toBuffer();
+  const delivered = await sharp(adopted).png({ palette: true, colours: 64 }).toBuffer();
+  const other = await sharp(text('Osaka 47')).png().toBuffer();
+  const same = await comparePublicCover(delivered, adopted);
+  const different = await comparePublicCover(other, adopted);
+  assert.equal(same.matched, true);
+  assert.equal(different.matched, false);
+  assert.equal(publishedRevisionAfterArchive('archived', 'adopted', same), 'adopted');
+  assert.equal(publishedRevisionAfterArchive('archived', 'adopted', different), 'archived');
+  assert.equal(publishedRevisionAfterArchive('archived', 'adopted', different, true), 'adopted');
+  // Older articles without an adopted revision keep pointing at the preserved public copy.
+  assert.equal(publishedRevisionAfterArchive('archived', undefined, same, true), 'archived');
+});
+
 test('upload contract sends only the four observed image fields, never the article body', async () => {
   const requests = [];
   const fakeWindow = {

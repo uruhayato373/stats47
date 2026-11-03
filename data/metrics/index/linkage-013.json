@@ -2806,6 +2806,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:junior-high-club-per100-badminton-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:junior-high-club-per100-badminton",
           "kind": "ranking"
         },
@@ -3896,6 +3900,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:junior-high-club-per100-soft-tennis-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:junior-high-club-per100-soft-tennis",
           "kind": "ranking"
         },
@@ -4548,6 +4556,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:junior-high-club-per100-track-and-field-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:junior-high-club-per100-track-and-field",
@@ -5983,6 +5995,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:junior-high-school-students-count-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "municipality-ranking:junior-high-school-students-count",
           "kind": "municipality-ranking"
@@ -8067,6 +8083,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:ketchup-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:ketchup-consumption-expenditure",
           "kind": "ranking"
         }
@@ -8105,6 +8125,10 @@
       "consumers": [
         {
           "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ketchup-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {

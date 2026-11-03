@@ -106,6 +106,7 @@ const PERMANENT_DATED_DIRS = [
   "data/sns", // バズマップ投稿の流入計測
   "data/seo/rank-history", // キーワード改善サイクルの日次観測。保持期間は未決 (SEO サイクル側で決める)
   "data/seo/selections", // 同上の週ごとの対象選定。保持期間は未決
+  "data/google-admin/audits", // GA4 の設定がいつ変わったかを追う履歴。週 25 KB なので削除しない (2026-11-04 オーナー判断)
 ];
 
 test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / baseline) を持つ", () => {

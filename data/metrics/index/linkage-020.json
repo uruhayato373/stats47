@@ -1281,6 +1281,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:per-capita-prefectural-income-h27-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:purchasing-power-adjusted",
           "kind": "blog"
         },
@@ -2591,6 +2595,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:persimmon-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
@@ -2661,6 +2669,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:persimmon-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -7605,6 +7617,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:pm25-general-station-compliance-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:pm25-general-station-compliance-rate",
           "kind": "ranking"
         },
@@ -8120,6 +8136,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:pneumonia-death-rate-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:pneumonia-death-rate",
           "kind": "ranking"

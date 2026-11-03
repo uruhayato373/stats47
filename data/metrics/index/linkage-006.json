@@ -218,6 +218,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:divorces-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:living-housing",
           "kind": "japan-theme"
         },
@@ -2224,6 +2228,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:dried-udon-soba-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ehime-food-culture",
           "kind": "blog"
         },
@@ -2882,11 +2890,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
           "kind": "blog"
         },
         {
           "pageId": "blog:dual-income-household-ratio-vs-public-assistance-housing",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:dual-income-household-ratio-vs-public-assistance-medical",
           "kind": "blog"
         },
         {
@@ -3736,6 +3752,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:early-neonatal-deaths-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:early-neonatal-deaths",
           "kind": "ranking"
@@ -6831,6 +6851,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:elderly-on-public-assistance-per-1000-65plus",
           "kind": "ranking"
         }
@@ -7745,6 +7769,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:electricity-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:electricity-consumption-quantity",
           "kind": "ranking"

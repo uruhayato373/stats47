@@ -37,3 +37,5 @@ WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区�
 - **証拠**: `npm run note:assets:test`の固定年/47県/同率/単位修復/入力SHAテストと、`data/note/ranking-question-cover-latest.json`の90本生成・remote読戻し記録。公開前比較元は`note:assets prepare --source ledger`で保全済み画像を使用でき、公開観測時刻は更新しない。
 
 **2026-09-30 追記:** 生成AI画像は「作り直せない入力」なので二層保管(Drive 候補 / R2 承認版 / git は SHA・モデル・指示文)。note は `ingest-note-background.mjs`、Kindle は `stash-cover-candidate.mts`。画像の生成口は1つ: note 4枚は `render-ranking-images.mjs` だけ(pipeline:sns の note 出力は廃止)。公開入口は `ensure-note-images.mjs` が PNG を揃え、カバー無し公開を止める。SVG は git に置く(正本・約1.5MB・koumuin 268枚は手作り)。Kindle 元画像12冊は Drive `Kindle表紙/<id>/candidates/` に移設済み。レンダーは bit 単位で決定的(同一 SHA を実測)。
+
+**2026-11-04 管理画面の「未公開」99本は誤表示だった**: 新規公開は `update-note-covers` を通らず公開ポインタが採用版へ結ばれないため、公開済みでも未公開と出た。公開画像の実物は全件採用版と一致していた。`note:assets archive` が画素照合のうえ採用版へ結ぶよう直し、減色で落ちた4本は目視のうえ `--reviewed-match` で結んだ。既存の画素判定は同型カバー (`b-ref-prc-a48`/`a50`) の取り違えを通すので、これだけを別画像の否定に使わない ([[project_note_update_mode_learnings]])。

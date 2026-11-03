@@ -98,6 +98,8 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週土曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
+| GA4の設定 | `data/measurement-cycle/LATEST.md` の「GA4 の設定の変化」(週次の記録は `data/google-admin/audits/<週>.json`)。追加・削除・問題があれば意図した変更か確かめ、意図しないものはバックログへ起票して改善につなげる |
+| SEOの提案 | `data/seo/latest-review.json` と `data/seo/proposals/`。サイトを変えない提案は PR を作らず develop へ記録されるので、ここで読み、担当へ渡すものを起票する |
 | データ品質キュー | `data/data-quality/checks/{LATEST.md,queue.json}`（Phase 0b の `npm run weekly:audits` (ranking-integrity) が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (`docs31Tracked` = docs/31 に紛れ込んだ追跡ファイル数。0 以外は違反)。週次CIの `note-circulation-audit` artifact の `note-image-assets.json` は `--verify-r2` 付きで、公開 R2 の本文・生成 AI 背景の欠落 (`NOTE_R2_BODY_MISSING` / `NOTE_BACKGROUND_MISSING`) を示す。正典 `.claude/rules/note-image-assets.md` |

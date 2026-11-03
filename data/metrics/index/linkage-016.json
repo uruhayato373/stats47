@@ -5915,6 +5915,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:food-self-sufficiency-rate-calorie-vs-national-assessment",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:national-assessment-elementary-tutoring-rate",
           "kind": "ranking"
         },
@@ -6420,6 +6424,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:national-park-area-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:park-green-space-gap",
           "kind": "blog"
         },
@@ -6884,6 +6892,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:national-treasury-disbursement-prefecture-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:national-treasury-disbursement-prefecture",
           "kind": "ranking"
@@ -10724,6 +10736,10 @@
         {
           "pageId": "area-theme:47000:living-housing",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:new-condo-starts-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "municipality-ranking:new-condo-starts",

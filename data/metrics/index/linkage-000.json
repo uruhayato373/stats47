@@ -11882,6 +11882,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:annual-sales-amount-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:cc-estat-16-commerce-bubble",
           "kind": "blog"
         },
@@ -13428,6 +13432,10 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:aquaculture-harvest-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:fishery-marine",

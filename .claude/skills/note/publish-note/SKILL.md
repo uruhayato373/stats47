@@ -28,7 +28,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `/image-prompt --use-case note-header` の
 Codex imagegen文字込み生成 → `prepare-image` → `note:assets import` → 管理画面で採用、を終えてから公開する。
 `editor-helpers.sh` は `materialize-cover.mjs <articleKey>` でSHA検証済みの採用版を一時領域へ復元し、アップロード後に削除する。
-公開後は記事台帳 `data/note/articles.json` へURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
+公開後は記事台帳 `data/note/articles.json` へURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像を保全し、採用版との画素照合が通れば公開ポインタを採用版へ結ぶ。「Public cover not linked」と出たら原寸で見比べ、同じ画像なら `--reviewed-match <articleKey>` を足して再実行する。
 以下のPNG再生成は本文画像の準備であり、カバー採用の代用にしない。正典は `.claude/rules/note-image-assets.md`。
 SVG から作れる PNG は作業コピーで作り直してよい (`note:article save` で保存すると R2 の正本になる)。checkout 直後や公開・更新の前に PNG が無ければ
 `npm run note:images:regen -- --slug <slug>` で復元する。ランキング記事 (a-<rankingKey>) の 4 枚は

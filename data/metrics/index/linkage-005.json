@@ -1113,6 +1113,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:daikon-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:daikon-consumption-quantity",
           "kind": "ranking"
         },
@@ -2207,6 +2211,10 @@
         },
         {
           "pageId": "blog:dairy-cattle-hokkaido-monopoly",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:dairy-cattle-holdings-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -3751,6 +3759,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:deaths-cerebrovascular-disease-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:deaths-cerebrovascular-disease",
           "kind": "ranking"
         }
@@ -4503,6 +4515,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:deaths-hypertensive-diseases-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:deaths-hypertensive-diseases",
           "kind": "ranking"
         }
@@ -4763,6 +4779,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:deaths-lifestyle-diseases-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:deaths-lifestyle-diseases",
           "kind": "ranking"
@@ -6248,6 +6268,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:delivery-hospital-count-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:delivery-hospital-count",
           "kind": "ranking"
         },
@@ -6550,6 +6574,10 @@
         {
           "pageId": "area-theme:47000:living-housing",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:densely-inhabited-district-population-density-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "blog:gasoline-consumption-quantity-vs-densely-inhabited-district",
@@ -7141,6 +7169,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:dental-clinic-count-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "municipality-ranking:dental-clinic-count",
           "kind": "municipality-ranking"
@@ -8205,6 +8237,10 @@
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:department-supermarket-count-per-100k-prefecture-gap",
           "kind": "blog"
         },
         {

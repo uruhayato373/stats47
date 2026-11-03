@@ -24,11 +24,13 @@ import { chromium, type Page } from "playwright";
 import { VIEWPORTS, type ViewportSpec } from "../page-quality/lib/screenshots";
 import { scrollThroughPage } from "../page-quality/lib/ui-probe";
 
-import { unitOfEntry } from "./lib/ad-layout-ledger";
+import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
 
 const REPO_ROOT = resolve(__dirname, "../../..");
 const PLACEMENTS_PATH = join(REPO_ROOT, "config/ads/placements.json");
 const OUT_ROOT = join(REPO_ROOT, ".local/ad-layout");
+/** slotId (番号) → ユニットの定数名 */
+const unitNames = adsenseUnitNames(REPO_ROOT);
 
 /** 撮る幅 (page-quality の VIEWPORTS の id) */
 const VIEWPORT_IDS = ["mobile-390", "tablet-768", "desktop-1440"] as const;
@@ -93,6 +95,8 @@ interface RawAd {
   region: "body" | "rail";
   banners: number;
   textLinks: number;
+  /** PR の中身の名前 (バナーの画像の alt と、テキストリンクの文字)。どの案件が出ているかを画面で読むため */
+  titles: string[];
   x: number;
   y: number;
   width: number;
@@ -106,6 +110,8 @@ export interface DetectedAd {
   /** AdSense のユニット (台帳の adsenseSlot か marker の定数名) */
   unit: string | null;
   label: string;
+  /** PR の中身の名前 (案件のバナーの題)。AdSense は空 */
+  titles: string[];
   region: "body" | "rail";
   x: number;
   y: number;
@@ -140,7 +146,12 @@ export interface AdLayoutManifest {
 }
 
 /** 検出した AdSense の枠に、そのページの台帳の同じ種類の行を出現順に当ててユニットを決める */
-export function assignUnits(raw: RawAd[], pageType: string, ledger: PlacementsLedger): DetectedAd[] {
+export function assignUnits(
+  raw: RawAd[],
+  pageType: string,
+  ledger: PlacementsLedger,
+  unitNames: Map<string, string> = new Map(),
+): DetectedAd[] {
   const typeByName = new Map(ledger.slotTypes.map((t) => [t.name, t.id]));
   const entries = ledger.pages[pageType] ?? [];
   const seen = new Map<string, number>();
@@ -148,13 +159,15 @@ export function assignUnits(raw: RawAd[], pageType: string, ledger: PlacementsLe
     .slice()
     .sort((a, b) => a.y - b.y || a.x - b.x)
     .map((ad) => {
-      const base = { kind: ad.kind, region: ad.region, x: ad.x, y: ad.y, width: ad.width, height: ad.height };
+      const base = { kind: ad.kind, titles: ad.kind === "pr" ? ad.titles : [], region: ad.region, x: ad.x, y: ad.y, width: ad.width, height: ad.height };
       if (ad.kind === "pr") {
         const parts = [ad.banners ? `バナー ${ad.banners}` : "", ad.textLinks ? `テキスト ${ad.textLinks}` : ""].filter(Boolean);
-        return { ...base, slotType: null, unit: null, label: parts.length ? `PR (${parts.join("・")})` : "PR" };
+        const what = ad.titles.length ? ad.titles.join("・") : parts.join("・");
+        return { ...base, slotType: null, unit: null, label: what ? `PR (${what})` : "PR" };
       }
       const slotType = ad.slotTypeName ? (typeByName.get(ad.slotTypeName) ?? null) : null;
-      let unit: string | null = ad.slotId;
+      // 番号は台帳と同じ定数名に直す (広告の段は番号でしか枠を記録できない)
+      let unit: string | null = ad.slotId ? (unitNames.get(ad.slotId) ?? ad.slotId) : null;
       if (slotType && !unit) {
         const index = seen.get(slotType) ?? 0;
         seen.set(slotType, index + 1);
@@ -215,6 +228,10 @@ function collectAds(): RawAd[] {
     const nameMatch = (placeholder?.textContent ?? "").match(/AdSense・(.+?)(?:\d|幅いっぱい|$)/);
     const images = Array.from(el.querySelectorAll("a[href] img")).filter((img) => img.getBoundingClientRect().width > 2);
     const links = Array.from(el.querySelectorAll("a[href]")).filter((a) => !a.querySelector("img"));
+    const titles = [
+      ...images.map((img) => img.getAttribute("alt") ?? ""),
+      ...links.map((a) => (a.textContent ?? "").trim().slice(0, 30)),
+    ].filter((t, i, all) => t && all.indexOf(t) === i);
     return {
       kind: placeholder || ins ? "adsense" : "pr",
       slotTypeName: nameMatch ? nameMatch[1].trim() : null,
@@ -223,6 +240,7 @@ function collectAds(): RawAd[] {
       region: main && !main.contains(el) ? "rail" : "body",
       banners: images.length,
       textLinks: links.length,
+      titles,
       x: Math.round(r.left + window.scrollX),
       y: Math.round(r.top + window.scrollY),
       width: Math.round(r.width),
@@ -329,7 +347,7 @@ async function captureOne(
       await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => undefined);
       await scrollThroughPage(page, MAX_SHOT_HEIGHT);
       const raw = await waitForStableAds(page);
-      const ads = assignUnits(raw, pageType, ledger);
+      const ads = assignUnits(raw, pageType, ledger, unitNames);
       await inBrowser(page, drawOverlays, ads);
       const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
       const imageHeight = Math.min(pageHeight, MAX_SHOT_HEIGHT);

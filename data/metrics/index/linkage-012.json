@@ -1516,6 +1516,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:household-survey-clothing-footwear-expenditure-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:household-survey-clothing-footwear-expenditure",
           "kind": "ranking"
         },

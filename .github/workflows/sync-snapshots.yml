@@ -283,7 +283,7 @@ jobs:
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
           done
 
-      - name: 🔀 Open PR if keys changed
+      - name: 🔀 Record keys on develop (PR only when keys decrease)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -338,9 +338,18 @@ jobs:
             cat "$DELTA_FILE"
           } >> "$GITHUB_STEP_SUMMARY"
 
-          BRANCH="chore/ranking-keys-sync"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 減少が無ければ develop へ直接記録し、次のデプロイで本番へ出す (2026-11-04。main 宛ての PR が
+          # 開いたまま溜まり、閉じられて本番へ届かないことが多かった)。減少だけ人が確かめるので PR にする。
+          if ! grep -q '減少' "$DELTA_FILE"; then
+            git add "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"
+            git commit -m "chore(keys): sync known ranking / sitemap / tag keys from R2 [skip ci]"
+            git pull --rebase --autostash origin develop
+            git push origin develop
+            exit 0
+          fi
+          BRANCH="chore/ranking-keys-sync"
           git switch -C "$BRANCH"
           git add "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"
           git commit -m "chore(keys): sync known ranking / sitemap / tag keys from R2 [skip ci]"

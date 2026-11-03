@@ -623,6 +623,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:taxi-fare-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:taxi-fare-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1130,6 +1134,10 @@
         },
         {
           "pageId": "blog:real-income-taxpayer",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:specific-health-checkup-participation-rate-vs-taxpayer",
           "kind": "blog"
         },
         {
@@ -1911,6 +1919,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:tennis-court-public-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:tennis-court-public",
           "kind": "ranking"
@@ -5221,6 +5233,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:toothbrush-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:toothbrush-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5257,6 +5273,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:toothpaste-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:toothpaste-consumption-expenditure",
           "kind": "ranking"

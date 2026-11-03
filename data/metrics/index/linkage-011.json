@@ -5339,6 +5339,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:high-school-teacher-annual-income-vs-new-graduate-starting",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:high-school-teacher-salary-prefecture-gap",
           "kind": "blog"
         },
@@ -5551,6 +5555,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:hobby-activity-singleperson-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:hobby-activity-singleperson",
           "kind": "ranking"
@@ -8314,6 +8322,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:hobby-participation-rate-instrument-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:cultural-participation",
           "kind": "japan-theme"
         },
@@ -10674,6 +10686,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:hobby-participation-rate-tea-ceremony-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:cultural-participation",

@@ -713,6 +713,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:sports-participation-rate-basketball-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-basketball",
           "kind": "ranking"
         }
@@ -1885,6 +1889,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:sports-participation-rate-kendo-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-kendo",
           "kind": "ranking"
         }
@@ -2190,6 +2198,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:sports-participation-rate-softball-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:sports-participation-rate-softball",
           "kind": "ranking"
@@ -8756,6 +8768,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:tablet-ownership-multi-person-households-per-1000",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:tablet-ownership-multi-person-households-per-1000",
           "kind": "ranking"

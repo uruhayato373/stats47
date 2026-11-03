@@ -31,8 +31,8 @@ primary_agent: ranking-publisher
 2. **ranking-publisher agent を起動** (`mode: "bypassPermissions"`)。agent が下記を一括管理:
    - 観測値投入が未済なら data-ingester に `/page-data-batch --metric <key>` を委譲
    - `gh workflow run sync-snapshots.yml -f only=ranking-items` で R2 item.json 生成 (完了待ち)
-   - sync-snapshots の後段 `sync-ranking-keys` job が KNOWN/SITEMAP を再生成し PR を自動作成
-     (この PR のマージ = 本番デプロイ。**まとめて承認**する)
+   - sync-snapshots の後段 `sync-ranking-keys` job が KNOWN/SITEMAP を再生成して develop へ直接記録する
+     (本番へ出るのは次の develop→main のデプロイ。キーが減るときだけ main 宛ての PR になり、人が確かめる)
    - GONE 誤登録がないか `ranking-key-consistency.test.ts` を確認
    - deploy 後に **Googlebot UA で本番 200 を実測** (agent の OUTPUT FORMAT で必須)
 3. **月次バッチ運用**: 月末に当月 config 化分をまとめて 1 回起動する (毎回デプロイしない・デプロイ規律)。
@@ -40,7 +40,7 @@ primary_agent: ranking-publisher
 ## 規約
 
 - **コードを書かない** (orchestrator)。公開ロジックは ranking-publisher agent に閉じる。
-- **デプロイ規律**: keys PR のマージ = 本番反映。ユーザー承認を得てまとめてマージする (`.claude/rules/branch-workflow.md`)。
+- **デプロイ規律**: キーの本番反映は次の develop→main のデプロイ。ユーザー承認を得てまとめて出す (`.claude/rules/branch-workflow.md`)。キーが減るときの PR は、減少に心当たりがあるときだけマージする。
 - **実証ベース**: 本番 200 を Googlebot UA で実測してから「公開済み」と言う (`.claude/rules/evidence-based-judgment.md`)。
 - **KNOWN を手で再生成して develop 経由で出す場合**: `sync-ranking-keys` job の画像生成段は通らないが、develop への push で
   `ranking-ogp-new-keys.yml` が動き、その push で `known-ranking-keys.ts` に足されたキー (最大 50 件) の OGP とリンクカードを R2 に作る

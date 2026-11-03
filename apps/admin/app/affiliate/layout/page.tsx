@@ -22,6 +22,11 @@ export const dynamic = "force-dynamic";
 
 /** 手置きの AdSense を出す境界 (apps/web の MANUAL_AD_DESKTOP_ONLY_CLASS = md:block と同じ 768px) */
 const DESKTOP_MIN_WIDTH = 768;
+/**
+ * 右レールが本文の横に出る画面の幅。右レールは Shell の幅 988px 以上で出る (RAIL_AD_BESIDE_BODY_ONLY_CLASS)。
+ * 撮影の幅 (390 / 768 / 1440) のうち 1440 だけがこれに当たる (サイドバー 256px を引いても 988px を超える)
+ */
+const RAIL_MIN_WIDTH = 1280;
 
 const REGION_LABEL: Record<string, string> = { body: "本文", rail: "右レール" };
 const DEVICE_LABEL: Record<string, string> = { desktop: "デスクトップ", mobile: "モバイル" };
@@ -38,13 +43,34 @@ function deviceOf(width: number) {
  * 台帳と撮影の AdSense のユニットの違い (その幅で出るはずの行だけと比べる)。
  * 条件付きの行 (condition) は出ないことがあるので、写っていなくても「条件付き」として分ける。
  */
+type ExpectedUnit = { unit: string | null; slot: string; slotName: string; condition: string | null };
+
+/** その幅で出るはずの AdSense の枠。広告の段は枠ごとに分け、2 枠目以降は本文の幅で出たり出なかったりするので条件付きにする */
+function expectedAdsense(shot: AdLayoutShot, defs: PlacementDefinition[]): ExpectedUnit[] {
+  return defs
+    .filter((d) => d.devices.includes(deviceOf(shot.width)) && (d.region !== "rail" || shot.width >= RAIL_MIN_WIDTH))
+    .flatMap((d): ExpectedUnit[] => {
+      if (d.provider === "adsense") return [{ unit: d.unit, slot: d.slot, slotName: d.slotName, condition: d.condition }];
+      if (!d.cells) return [];
+      return d.cells.flatMap((c, i) =>
+        c.kind === "adsense"
+          ? [{ unit: c.unit, slot: "adsense-body", slotName: d.slotName, condition: i === 0 ? d.condition : "段の 2 枠目以降 (本文の幅で出る)" }]
+          : [],
+      );
+    });
+}
+
 function adsenseDiff(shot: AdLayoutShot, defs: PlacementDefinition[]) {
-  const expected = defs.filter((d) => d.provider === "adsense" && d.devices.includes(deviceOf(shot.width)));
+  const expected = expectedAdsense(shot, defs);
   // ユニットが分かる枠はユニットで、分からない枠 (ブログ本文など) は枠の種類で突き合わせる
   const remaining = shot.ads.filter((a) => a.kind === "adsense");
-  const missing: PlacementDefinition[] = [];
-  for (const d of expected) {
-    const i = remaining.findIndex((a) => (a.unit ?? a.slotType) === (d.unit ?? d.slot));
+  const missing: ExpectedUnit[] = [];
+  // ユニットを決めていない段の枠 (ブログの末尾など) は、名前の決まった枠を当てた後に本文の残りの AdSense を当てる
+  const ordered = [...expected.filter((d) => !(d.slot === "adsense-body" && !d.unit)), ...expected.filter((d) => d.slot === "adsense-body" && !d.unit)];
+  for (const d of ordered) {
+    const i = remaining.findIndex((a) =>
+      d.slot === "adsense-body" && !d.unit ? a.region === "body" : (a.unit ?? a.slotType) === (d.unit ?? d.slot),
+    );
     if (i >= 0) remaining.splice(i, 1);
     else missing.push(d);
   }
@@ -125,7 +151,7 @@ function PageTypePanel({ manifest, pageType, defs }: { manifest: AdLayoutManifes
             </Cell>
             <Cell>{d.position}</Cell>
             <Cell nowrap muted>
-              {d.unit ?? "—"}
+              {d.cells ? d.cells.map((c) => (c.kind === "adsense" ? (c.unit ?? "AdSense") : "PR")).join(" / ") : (d.unit ?? "—")}
             </Cell>
             <Cell nowrap muted>
               {d.devices.map((v) => DEVICE_LABEL[v] ?? v).join("・") || "—"}
@@ -170,8 +196,9 @@ export default async function AdLayoutPage({ searchParams }: { searchParams: Pro
       <Stack>
         <p className="m-0 text-sm text-muted-foreground">
           {new Date(manifest.generatedAt).toLocaleString("ja-JP")} に {manifest.baseUrl} から撮影 ({manifest.shots.length} 枚
-          {failed > 0 ? `・撮れなかった ${failed} 枚` : ""})。赤い枠は AdSense (開発中は代わりの表示)、橙の枠は PR。手置きの AdSense は
-          {DESKTOP_MIN_WIDTH}px 以上だけに出る。AdSense のユニットは、枠の種類が同じ台帳の行を上から順に当てたもの。
+          {failed > 0 ? `・撮れなかった ${failed} 枚` : ""})。赤い枠は AdSense (開発中は代わりの表示)、橙の枠は PR。PR の括弧の中は出ている案件の名前。
+          広告の段は本文の幅で枠の数が変わる (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠) ので、2 枠目以降は条件付きとして照らす。
+          右レールの AdSense は本文の横に右レールが出る幅 ({RAIL_MIN_WIDTH}px 以上) だけで照らす。
         </p>
         <div className="flex flex-wrap gap-2">
           <Link href={filterHref()} className={buttonVariants({ variant: pageFilter ? "outline" : "default", size: "sm" })}>
