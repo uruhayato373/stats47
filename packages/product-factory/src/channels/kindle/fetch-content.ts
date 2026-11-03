@@ -166,7 +166,7 @@ export async function fetchBlogArticle(
   const base = rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, originalBody)));
   // 全県表 (full-tables.ts) は図と同じデータから作り、出典の見出しの前に入れる。本ごとに catalog の fullTables で有効にする
   const tables = options.fullTables
-    ? await fullTablesForArticle(slug, [...base.matchAll(/!\[[^\]]*\]\(data\/([a-z0-9-]+)\.svg\)/gi)].map((m) => m[1]), options.seenTables)
+    ? await fullTablesForArticle(slug, [...base.matchAll(/!\[[^\]]*\]\(data\/([a-z0-9-]+)\.svg\)/gi)].map((m) => m[1]), options.seenTables, base)
     : "";
   const body = appendDataSourceSection(insertBeforeSources(base, tables));
   if (!body.trim()) throw new Error(`Empty blog body: ${slug}`);

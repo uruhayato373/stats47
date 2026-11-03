@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { fullTableMarkdown, insertBeforeSources, tableFromFigureData } from "../full-tables";
+import { fullTableMarkdown, insertBeforeSources, tableFromFigureData, yearSuffixOf } from "../full-tables";
 
 const PREFS = Array.from({ length: 47 }, (_, i) => `県${String(i + 1).padStart(2, "0")}`);
 
@@ -34,5 +34,10 @@ describe("full-tables (章末の全 47 都道府県の表)", () => {
     expect(insertBeforeSources("本文\n\n## データ出典\n\n- e-Stat", "### 表")).toBe("本文\n\n### 表\n\n## データ出典\n\n- e-Stat");
     expect(insertBeforeSources("本文", "### 表")).toBe("本文\n\n### 表\n");
     expect(insertBeforeSources("本文", "")).toBe("本文");
+  });
+  it("指標の定義が年度なら見出しも年度にする (書籍版で年度に直した図と食い違わせない)", () => {
+    expect(yearSuffixOf("active-job-opening-ratio")).toBe("年度");
+    expect(yearSuffixOf("crab-consumption-expenditure")).toBe("年");
+    expect(yearSuffixOf(null)).toBe("年");
   });
 });

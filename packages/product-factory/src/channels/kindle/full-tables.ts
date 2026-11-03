@@ -7,7 +7,7 @@
  * `app/ranking/<key>/values.json` を読む (年が一致しないときは表を作らない。図と別の年の値を並べない)。
  * 同じ指標・年の図 (ランキングと地図) は 1 表にまとめる。3 列 (順位・都道府県・値) に限る (小さい画面で崩さない)。
  */
-import { SITE } from "@stats47/data-configs";
+import { METRICS_REGISTRY, SITE } from "@stats47/data-configs";
 
 import { fetchRankingValues } from "../../data/load-ranking-values";
 import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
@@ -22,6 +22,8 @@ export interface FullTable {
   readonly year: string;
   readonly unit: string;
   readonly rankingKey: string | null;
+  /** 章の本文がこの年を「年度」と書いていれば年度 (本の中で表記をそろえる)。未設定なら指標の定義で決める */
+  readonly yearSuffix?: "年" | "年度";
   readonly rows: readonly { readonly name: string; readonly value: number }[];
 }
 
@@ -35,8 +37,18 @@ function ranked(rows: FullTable["rows"]) {
   return sorted.map((row) => ({ ...row, rank: rankOf.get(row.value) as number }));
 }
 
+/**
+ * 年の書き方。指標の定義が年度 (yearFormat: fiscal) なら「年度」。図は書籍版で年度に直しているので、表も合わせる
+ * (2026-11-03: 年度の指標を「2023年」と書き、verify-epub の year-nendo-mix が S1 の 5 冊で増えた)。
+ */
+export function yearSuffixOf(rankingKey: string | null): "年" | "年度" {
+  const cfg = rankingKey ? (METRICS_REGISTRY as unknown as Record<string, { yearFormat?: string } | undefined>)[rankingKey] : undefined;
+  return cfg?.yearFormat === "fiscal" ? "年度" : "年";
+}
+
 export function fullTableMarkdown(table: FullTable): string {
   const unit = table.unit ? `・${table.unit}` : "";
+  const yearLabel = `${table.year}${table.yearSuffix ?? yearSuffixOf(table.rankingKey)}`;
   const notes = ["順位は値の大きい順で、同じ値は同じ順位です。"];
   if (table.rankingKey && HOUSEHOLD_SURVEY_KEY.test(table.rankingKey)) {
     notes.push("家計調査の値は、各県の県庁所在市（東京都は区部）の二人以上の世帯のものです。");
@@ -53,10 +65,10 @@ export function fullTableMarkdown(table: FullTable): string {
   for (let start = 0; start < rows.length; start += TABLE_CHUNK_ROWS) {
     const part = rows.slice(start, start + TABLE_CHUNK_ROWS);
     // つづきの小見出しは見出し (h5) にする。段落だと「直後で改ページしない」が効かず、ページ末に取り残される
-    if (start > 0) chunks.push(`#### ${table.label}（${table.year}年${unit}）のつづき・${start + 1}〜${start + part.length}番目`);
+    if (start > 0) chunks.push(`#### ${table.label}（${yearLabel}${unit}）のつづき・${start + 1}〜${start + part.length}番目`);
     chunks.push(header + part.map((row) => `| ${row.rank} | ${row.name} | ${fmt(row.value)} |`).join("\n"));
   }
-  return [`### 全47都道府県の値：${table.label}（${table.year}年${unit}）`, ...chunks, notes.join("")].join("\n\n");
+  return [`### 全47都道府県の値：${table.label}（${yearLabel}${unit}）`, ...chunks, notes.join("")].join("\n\n");
 }
 
 /** 図の元データ (data/<name>.json) を表の形にする。47 県の値がそろわないものは表にしない。 */
@@ -97,6 +109,8 @@ export async function fullTablesForArticle(
   figureNames: readonly string[],
   /** 本全体で載せた表の印。前の章と同じ指標・年の表は載せない (同じ本で同じ表を繰り返さない) */
   seen: Set<string> = new Set(),
+  /** 章の本文 (書籍版の校訂後)。この年を「年度」と書いていれば表も年度にする (指標の定義と本の表記が違う指標がある) */
+  chapterText = "",
 ): Promise<string> {
   const tables: FullTable[] = [];
   for (const name of figureNames) {
@@ -123,6 +137,7 @@ export async function fullTablesForArticle(
       }
     }
     if (!table) continue;
+    if (chapterText.includes(`${table.year}年度`)) table = { ...table, yearSuffix: "年度" };
     const key = `${table.rankingKey ?? table.label}|${table.year}|${table.unit}`;
     if (seen.has(key)) continue;
     seen.add(key);
