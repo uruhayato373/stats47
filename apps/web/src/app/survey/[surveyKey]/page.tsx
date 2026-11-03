@@ -45,12 +45,7 @@ import {
   FooterAdSlot,
   NativeAffiliateRow,
 } from '@/features/ads';
-import {
-  CATEGORY_AFFILIATE_MAP,
-  SURVEY_AFFILIATE_MAP,
-  type AffiliateVertical,
-} from '@/features/ads/constants/affiliate-category';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { listArticleSummariesBySurveyId } from '@/features/blog/server';
 import {
   FeaturedRankingCard,
@@ -77,7 +72,6 @@ import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
-import type { CategoryRankingItem } from '@stats47/ranking/types';
 import type { Metadata } from 'next';
 
 /** 24時間 ISR */
@@ -85,31 +79,6 @@ export const revalidate = 86400;
 
 interface PageProps {
   params: Promise<{ surveyKey: string }>;
-}
-
-/**
- * 調査に属するランキングの categoryKey 最頻値から広告の意図軸 (vertical) を導出する。
- * 写像を持つランキングが 1 件も無い調査 (統計表しか無い等) は economy にフォールバックする。
- */
-function dominantVertical(
-  items: readonly CategoryRankingItem[]
-): AffiliateVertical {
-  const counts = new Map<AffiliateVertical, number>();
-  for (const item of items) {
-    const vertical = item.categoryKey
-      ? CATEGORY_AFFILIATE_MAP[item.categoryKey]
-      : undefined;
-    if (vertical) counts.set(vertical, (counts.get(vertical) ?? 0) + 1);
-  }
-  let best: AffiliateVertical = 'economy';
-  let bestCount = 0;
-  for (const [vertical, count] of counts) {
-    if (count > bestCount) {
-      best = vertical;
-      bestCount = count;
-    }
-  }
-  return best;
 }
 
 function parseLatestYear(latestYear: unknown): string {
@@ -247,15 +216,9 @@ export default async function SurveyPage({ params }: PageProps) {
   // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
   //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
-  // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
-  // ★ 2026-09-03: 調査ハブは調査そのものが主題なので SURVEY_AFFILIATE_MAP を最優先する
-  //   (家計調査 → furusato、学校保健統計 → 広告なし)。載っていない調査は従来の最頻カテゴリ。
-  const surveyVertical = SURVEY_AFFILIATE_MAP[surveyKey];
-  // 2026-10-31 (オーナー決定「すべてのページに広告を出す」): 写像が null の調査も汎用の案件を出す
-  const nativeBanners = await resolveAffiliateBannersByVertical(
-    surveyVertical === null ? null : (surveyVertical ?? dominantVertical(rankingItems)),
-    8
-  ).catch(() => []);
+  // 2026-11-03 (オーナー決定・収益化戦略 §3.2): 調査ごとの文脈の案件 (家計調査 → ふるさと納税など) をやめ、
+  // 共通の案件 (対象者が広く気軽に始められる商品) を本文の広告の段に横 3 枠で出す。狭い幅では入る数だけ (モバイルは 1 枠)
+  const nativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
   const isKakei = surveyKey === 'kakei-chousa';
   const economyTopics = CATEGORY_TOPIC_CATALOGS.economy;
@@ -586,6 +549,7 @@ export default async function SurveyPage({ params }: PageProps) {
             banners={nativeBanners}
             position="survey-native"
             trackingCategory={`survey-${surveyKey}`}
+            variant="three-up"
           />
         </section>
       )}

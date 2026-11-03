@@ -22,11 +22,7 @@ import {
   isLandscapeBanner,
   NativeAffiliateRow,
 } from '@/features/ads';
-import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
-import {
-  resolveAffiliateBanners,
-  resolveAffiliateBannersByVertical,
-} from '@/features/ads/server';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
@@ -153,28 +149,11 @@ export async function ThemePageLayout({
     })
   );
 
-  // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
-  // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
-  // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
-  // ★ 2026-08-06: 縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で除外。
-  //   受け皿は sidebar-sticky スロット)。除外後も3件が埋まる余裕を持たせるためlimitは8を維持する。
+  // 本文の広告の段 (PR の列)。2026-11-03 (オーナー決定・収益化戦略 §3.2) からテーマごとの文脈の案件をやめ、
+  // 共通の案件 (対象者が広く気軽に始められる商品) を横 3 枠で出す。
   // 非商用データの節を埋め込むテーマは広告・アフィリエイトを出さない (ad-free-paths.ts。AdSense の script も止まる)
   const isAdFree = AD_FREE_THEME_KEYS.includes(theme.themeKey);
-  let nativeBanners =
-    !isAdFree && theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
-      ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 8).catch(
-          () => []
-        )
-      : [];
-  if (!isAdFree && nativeBanners.length === 0) {
-    const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
-    if (vertical) {
-      nativeBanners = await resolveAffiliateBannersByVertical(
-        vertical,
-        8
-      ).catch(() => []);
-    }
-  }
+  let nativeBanners = isAdFree ? [] : await resolveGenericAffiliateBanners(3).catch(() => []);
   nativeBanners = nativeBanners.filter(isLandscapeBanner);
   const providerPrefecture = areaContext ?? initialPrefecture;
 

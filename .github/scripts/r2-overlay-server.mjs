@@ -46,8 +46,15 @@ export function localPageComponentsFile(urlPath, localDir = LOCAL_DIR) {
 }
 
 /** Only generated metric metadata (and the city databooks built from it) is overlaid; observation data still comes from R2. */
+/**
+ * 指標の公開の定義 (OVERLAY_PATH_PATTERN) とは別に、手元で生成したときだけ重ねる snapshot。
+ * 広告の台帳 (export-affiliate-ads-snapshot.ts の出力) を、本番の R2 へ書く前に localhost の画面で確かめるため (2026-11-03)。
+ * 指標の公開 (deploy の exact manifest) には入れない。
+ */
+const LOCAL_ONLY_SNAPSHOT_PATHS = new Set(["/app/affiliate-ads/all.json"]);
+
 export function localMetricSnapshotFile(urlPath, snapshotDir = LOCAL_SNAPSHOT_DIR) {
-  if (!OVERLAY_PATH_PATTERN.test(urlPath)) return null;
+  if (!OVERLAY_PATH_PATTERN.test(urlPath) && !LOCAL_ONLY_SNAPSHOT_PATHS.has(urlPath)) return null;
   const target = path.resolve(snapshotDir, ...urlPath.slice(1).split('/'));
   if (!target.startsWith(path.resolve(snapshotDir) + path.sep)) return null;
   return fs.existsSync(target) ? target : null;

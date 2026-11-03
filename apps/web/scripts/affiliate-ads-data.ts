@@ -7144,6 +7144,28 @@ const AFFILIATE_ADS_BASE: AffiliateAd[] = [
     "createdAt": "2026-10-31 09:03:55",
     "updatedAt": "2026-10-31 09:03:55"
   },
+  {
+    "id": "af_rakuten_card_banner_001",
+    "title": "楽天カード 300x250",
+    "programRef": "rakuten:card",
+    "htmlContent": "https://hb.afl.rakuten.co.jp/hsc/5916703c.605026c8.5447808b.00360286/?link_type=hybrid_url&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJoeWJyaWRfdXJsIiwiY29sIjoxLCJjYXQiOjEsImJhbiI6MTY3NDAxLCJhbXAiOmZhbHNlfQ%3D%3D",
+    "areaCode": null,
+    "vertical": "economy",
+    "categoryKey": "economy",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 30,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://affiliate.rakuten.co.jp/group/card/img/bn_300x250.gif",
+    "trackingPixelUrl": null,
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-11-03 16:40:00",
+    "updatedAt": "2026-11-03 16:40:00"
+  },
 ];
 
 const OFFER_PROFILE_BY_PROGRAM_REF = new Map(

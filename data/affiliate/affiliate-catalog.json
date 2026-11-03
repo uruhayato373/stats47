@@ -10,8 +10,8 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-10-30T23:15:03.195Z",
-  "verifiedAt": "2026-08-28",
+  "updatedAt": "2026-11-03T06:20:59.977Z",
+  "verifiedAt": "2026-11-03",
   "programs": {
     "afb-9156": {
       "name": "ふるさと納税・寄付なら【ふるさとプレミアム】商品申し込み",
@@ -111,7 +111,7 @@
       "asps": {
         "moshimo": {
           "promotionId": "3831",
-          "status": "applying",
+          "status": "approved",
           "rewardYen": 500,
           "history": [
             {
@@ -122,6 +122,11 @@
             {
               "at": "2026-09-08T01:45:15.044Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-11-03T06:20:59.975Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "appliedAt": "2026-09-08T01:45:15.044Z"
@@ -1677,12 +1682,17 @@
       "asps": {
         "moshimo": {
           "promotionId": "6424",
-          "status": "applying",
+          "status": "approved",
           "history": [
             {
               "at": "2026-07-28T12:05:42.091Z",
               "status": "applying",
               "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-11-03T06:20:59.975Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 25000
@@ -2658,12 +2668,17 @@
       "asps": {
         "moshimo": {
           "promotionId": "7309",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T12:11:34.395Z",
           "history": [
             {
               "at": "2026-07-28T12:11:34.395Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-11-03T06:20:59.975Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 10000
@@ -3012,12 +3027,17 @@
       "asps": {
         "moshimo": {
           "promotionId": "2341",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T12:13:50.052Z",
           "history": [
             {
               "at": "2026-07-28T12:13:50.052Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-11-03T06:20:59.975Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 10000
@@ -6626,6 +6646,114 @@
               "at": "2026-08-28T03:01:42.345Z",
               "status": "none",
               "note": "affiliate-status もしも詳細ページ「未申請」を確認 (SID 638943)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7276": {
+      "name": "楽天カード・楽天プレミアムカード｜クレジットカードの発行",
+      "vertical": "economy",
+      "eligibility": {
+        "status": "approved",
+        "riskFlags": [],
+        "allowedPageTypes": [
+          "survey",
+          "theme"
+        ],
+        "allowedRankingKeys": [],
+        "allowedTagKeys": [],
+        "minimumEligibleImpressions": null,
+        "reviewedAt": "2026-11-03T07:30:00.000Z",
+        "reviewedBy": "owner",
+        "evidence": [
+          "2026-11-03 オーナーが会話で共通の商品 (年会費無料のクレジットカード・銀行口座・無料体験) への提携申請を明示承認 (「全部やろうか」)。収益化戦略 §3.2 の共通の商品の試験 (AFFILIATE-COMMON-PRODUCTS-01) 用。",
+          "もしもの検索 (2026-11-03 moshimo-scan) で 7276 楽天カード・楽天プレミアムカード｜クレジットカードの発行、成果 2,800円、未申請を確認。stats47 SID638943。",
+          "掲載前に成果条件 (発行完了で承認・キャンペーンページ経由の除外など) を申請の詳細ページで確認して記録する。有料広告の出稿なし、本番反映は別工程。"
+        ]
+      },
+      "asps": {
+        "moshimo": {
+          "promotionId": "7276",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-11-03T07:30:00.000Z",
+              "status": "none",
+              "note": "moshimo-scan 2026-11-03 で未申請を確認"
+            },
+            {
+              "at": "2026-11-03T06:19:42.281Z",
+              "status": "applying"
+            }
+          ],
+          "appliedAt": "2026-11-03T06:19:42.281Z"
+        }
+      }
+    },
+    "moshimo-4183": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "4183",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-11-03T06:20:59.977Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7797": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7797",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-11-03T06:20:59.977Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3802": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "3802",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-11-03T06:20:59.977Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2502": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "2502",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-11-03T06:20:59.977Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
             }
           ]
         }
