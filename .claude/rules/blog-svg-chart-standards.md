@@ -16,20 +16,23 @@ paths:
 
 ## 0. ランキングと地図は共通の型の画像 (2026-11-03 オーナー決定)
 
-**47 都道府県がそろうランキング棒 (`*-ranking.json` 系) とタイルマップ (`*-map.json` 系) は、svg-builder ではなく
-note・X・Instagram と同じ 4:5 の型の画像で描く。** 下の §2〜§6 のうち bar / tile-grid の寸法・配色・透過背景の
-規定は、型にできなかった図 (47 県がそろわない・指標名か年が無い) にだけ適用する。
+**47 都道府県がそろうランキング棒 (`*-ranking.json` 系)・タイルマップ (`*-map.json` 系)・散布図 (`*-scatter.json` 系、
+2026-11-04〜) は、svg-builder ではなく note・X・Instagram と同じ 4:5 の型の画像で描く。** 下の §2〜§6 のうち
+bar / tile-grid / scatter の寸法・配色・透過背景の規定は、型にできなかった図 (47 県がそろわない・指標名か年が無い・
+散布図の点が観測値と一致しない) にだけ適用する。
 
 | 項目 | 型の画像の契約 |
 |---|---|
-| 描画 | `apps/admin/lib/template-ranking-bars.ts` (`renderRankingBarsChart`) / `template-ranking-tile-map.ts` (`renderTileMapChart`)。入力は `RankingChart` (`.claude/scripts/blog/lib/type-chart-input.ts` が記事の data JSON と指標定義から作る) |
+| 描画 | `apps/admin/lib/template-ranking-bars.ts` (`renderRankingBarsChart`) / `template-ranking-tile-map.ts` (`renderTileMapChart`) / `template-relationship-scatter.ts` (`renderRelationshipScatterChart`)。入力は `.claude/scripts/blog/lib/type-chart-input.ts` が記事の data JSON と指標定義から作る |
+| 散布図の形 | 47 点を同じ灰色で描き、回帰の破線と県名 2 つ (本文の `labelPoints` を先に、次に端の県。点と重なる名前は出さない)。軸は指標ごとに表示単位 (万円など) をそろえる。暗い版は点と線を明るくする |
+| 散布図の年 | data JSON に年が無いので、`source.json` の 2 指標 (`xKey`/`yKey` か `base`/`pair`) の R2 観測値 (`app/stats/<key>/values.json`) から、47 点が丸めた値で完全に一致する年を軸ごとに 1 つ探す (`matchScatterYear`)。一致する年が無い・2 つ以上ある図は型にせず svg-builder の図のまま残す。両軸の年が違えば「横軸 2024年・縦軸 2021年度」と出す |
 | 寸法 | 1080×1350 (4:5)。PC もスマホも同じ画像。`-mobile.svg` と `-ig.svg` は明るい版と同じ中身 (記事の切り替えと Instagram のファイル名を保つため) |
 | 棒グラフの形 | 上位5県・下位5県のカード。色の帯の見出し・丸い順位・1行おきの色・名前の下の細い棒・右の値と単位。色は指標の色 1 色 (`resolveMetricColor`)、下位は同じ色の薄い版 |
 | 地図の形 | 管理画面のタイルマップの型。左上に上位3県、右下に区分ごとの凡例 (色・範囲・県の数)。区分は指標の `classification` |
 | 暗い表示 | `<name>-dark.svg` を必ず 1 組で出す。地色 #262626、県境・タイル・凡例の色見本・棒の行に #8A8A8A の線。色の組は `apps/remotion/src/features/data-cards/chart-theme.ts` (`CHART_THEMES`) が正典 |
 | 切り替え | サイトの暗い表示は class 方式で `<img>` の中から見えないので、記事の画像部品 (`ResponsiveArticleImage`) が 2 枚を置いて CSS (`dark:`) で切り替える。`-dark.svg` が無ければ明るい版に戻る |
-| 印 | root `<svg>` に `data-image-template` (bar / tile-map) と `data-theme` (light / dark) |
-| 検査 | `lintImageTypeSvg` (1080×1350・data-theme) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査は型の画像を対象外にする |
+| 印 | root `<svg>` に `data-image-template` (bar / tile-map / scatter) と `data-theme` (light / dark) |
+| 検査 | `lintImageTypeSvg` (1080×1350・data-theme) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査・`lintScatterQuality` (720×720) は型の画像を対象外にする。`lintScatterParity` は型の画像の点を `data-pref` で数える。週次の `rerender-scatter-canonical.mts` は型の画像を svg-builder の図に戻さず、点の数だけを照らす |
 | 年 | data JSON の `subtitle` が「2022年度」なら年度で、そうでなければ `year` に「年」を付けて出す |
 | 単位・桁 | 桁の大きい指標は図ごとに 1 つの表示単位 (億円・万人など) で描く。決め方と台帳は `unit-semantics-standards.md` §2.6 |
 

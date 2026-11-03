@@ -1,11 +1,13 @@
 {
-  "hash": "5529e95744b69e65d80f9eee0dc3826bf8884d4627e1d6a32ebffea270cdd0fa",
-  "audited_at": "2026-11-03T07:02:34",
+  "hash": "ca437c4c371ecf605e7923159b1336fa14e07b808fac4ecd18382df5b308a3e4",
+  "audited_at": "2026-11-03T22:27:36",
   "files": [
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/agents/kindle-publisher.md",
-    ".claude/rules/coconala-product-standards.md",
-    ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/rules/blog-svg-chart-standards.md",
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/lib/__tests__/generate-article-charts-ranks.test.mjs",
+    ".claude/scripts/blog/lib/type-chart-input.ts",
+    ".claude/scripts/blog/rerender-scatter-canonical.mts",
+    ".claude/scripts/lib/__tests__/svg-lint.image-type.test.mjs",
+    ".claude/scripts/lib/svg-lint.mjs"
   ]
 }

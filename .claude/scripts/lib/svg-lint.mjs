@@ -186,12 +186,12 @@ const SIZE_ENFORCED = new Set([
 ]);
 
 // ---------- 共通の型の画像 (2026-11-03) ----------
-// ランキングと47県地図は、note・X・Instagram と同じ 4:5 の型の画像 (apps/admin/lib/template-*.ts) で描く。
+// ランキング・47県地図・47県の散布図は、note・X・Instagram と同じ 4:5 の型の画像 (apps/admin/lib/template-*.ts) で描く。
 // 生成器が root <svg> に data-image-template と data-theme を付け、明るい版 <name>.svg と
 // 暗い版 <name>-dark.svg を 1 組で出す。旧 svg-builder の寸法・透過背景の不変量はこの画像には当てはめない。
 export const IMAGE_TYPE_CANVAS = { w: 1080, h: 1350 };
 
-/** 型の画像なら型 id (bar / tile-map / choropleth)、そうでなければ null。 */
+/** 型の画像なら型 id (bar / tile-map / scatter)、そうでなければ null。 */
 export function imageTemplateOf(svg) {
   return /<svg[^>]*data-image-template="([^"]+)"/.exec(String(svg))?.[1] ?? null;
 }
@@ -527,9 +527,11 @@ export function lintScatterParity(filename, svgContent, jsonData) {
       Number.isFinite(point.x) &&
       Number.isFinite(point.y)
   ).length;
-  const renderedPointCount = (
-    String(svgContent).match(/<circle\b[^>]*>\s*<title>[^<]*：X=/g) || []
-  ).length;
+  // 型の画像は点ごとに data-pref を持ち、svg-builder の図は点ごとに <title>…：X= を持つ
+  const dotPattern = imageTemplateOf(svgContent)
+    ? /<circle\b[^>]*\bdata-pref="/g
+    : /<circle\b[^>]*>\s*<title>[^<]*：X=/g;
+  const renderedPointCount = (String(svgContent).match(dotPattern) || []).length;
   if (renderedPointCount !== validPointCount) {
     errors.push(
       `散布図の点数不一致: JSON=${validPointCount} 件 / SVG=${renderedPointCount} 件。JSONから再生成する`
@@ -551,6 +553,8 @@ export function lintScatterQuality(filename, svgContent, jsonData) {
   const warnings = [];
   const ct = scatterChartType(filename, jsonData);
   if (ct !== 'scatter') return { errors, warnings };
+  // 型の画像 (4:5・明るい版と暗い版) は 720×720 の svg-builder とは別の契約で、lintImageTypeSvg が見る
+  if (imageTemplateOf(svgContent)) return { errors, warnings };
   const svg = String(svgContent);
   const { w: CW, h: CH } = SCATTER_CANVAS;
 
