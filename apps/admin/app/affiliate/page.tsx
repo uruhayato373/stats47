@@ -13,6 +13,7 @@ import {
   TriangleAlertIcon,
   WalletIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
@@ -20,6 +21,7 @@ import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { affiliateResults, ZERO_CLICK_IMPRESSION_THRESHOLD } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
 import { hasError } from "@/lib/server/state-io";
+import { buttonVariants } from "@stats47/components";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +48,13 @@ export default function AffiliateResultsPage() {
 
   return (
     <>
-      <PageHeading title="アフィリエイト 成果" source={`${datasetDir("affiliate.audits")}/ + ${datasetDir("affiliate.audits")}/`} />
+      <PageHeading title="アフィリエイト 成果" source={`${datasetDir("affiliate.audits")}/ + ${datasetDir("affiliate.audits")}/`}>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/affiliate/layout" className={buttonVariants({ variant: "outline", size: "sm" })}>
+            広告の配置 (ページの種類 × 画面の幅のスクショ)
+          </Link>
+        </div>
+      </PageHeading>
 
       {hasError(r) ? (
         <ErrorNote error={r.error} />

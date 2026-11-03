@@ -15,9 +15,7 @@ import {
   OperatorProfileCard,
   RailAdSlot,
 } from '@/features/ads';
-import {
-  resolveAffiliateBannersByVertical,
-} from '@/features/ads/server';
+import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { PrefectureNavigator } from '@/features/area-profile';
 import { listLatestArticles } from '@/features/blog/server';
 import { PortalBlogCard, PortalUseCaseGrid } from '@/features/home-portal';
@@ -111,11 +109,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(8).catch(() => []);
   const prefectures = fetchPrefectures();
-  // limit 8 = 縦長 (sidebar-sticky 在庫) を描画側で除外しても 4 件残すための余裕
-  const homeNativeBanners = await resolveAffiliateBannersByVertical(
-    'economy',
-    8
-  ).catch(() => []);
+  // トップは読者の意図が決まらないので、共通の案件 (楽天カード・TOSSY) を出す (2026-11-03。旧: economy 軸で FP 相談等が出ていた)
+  const homeNativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
   // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
   // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
@@ -181,6 +176,18 @@ export default async function HomePage() {
             <PortalUseCaseGrid />
           </HorizontalCardCarouselFrame>
 
+          {/* PR の列は本文の最後に置かない。右レールが本文の下に回る幅で、レール先頭の AdSense と隣り合うため (2026-11-03) */}
+          {homeNativeBanners.length > 0 && (
+            <section>
+              <NativeAffiliateRow
+                banners={homeNativeBanners}
+                position="home-native"
+                trackingCategory="home"
+                variant="three-up"
+              />
+            </section>
+          )}
+
           <SectionCard
             title="都道府県から探す"
             icon={<MapPin />}
@@ -195,17 +202,6 @@ export default async function HomePage() {
           </SectionCard>
         </PageSections>
 
-        {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。
-            広告はカードの格子の外に置く (カードではないので格子に入れない) */}
-        {homeNativeBanners.length > 0 && (
-          <div className="mt-4">
-            <NativeAffiliateRow
-              banners={homeNativeBanners}
-              position="home-native"
-              trackingCategory="home"
-            />
-          </div>
-        )}
       </PageShell>
     </div>
   );

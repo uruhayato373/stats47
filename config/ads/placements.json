@@ -384,7 +384,7 @@
       {
         "slot": "affiliate-row",
         "region": "body",
-        "position": "カードの格子の後",
+        "position": "「知りたいことから探す」と「都道府県から探す」の間 (共通の案件の横 3 枠)",
         "source": "apps/web/src/app/page.tsx",
         "marker": "position=\"home-native\""
       }
