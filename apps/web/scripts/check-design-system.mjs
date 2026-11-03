@@ -38,11 +38,13 @@ const rules = [
       ].includes(relativePath),
   },
   {
-    // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)
+    // D3 を直接 import してよいのは共通の部品と、例外として登録した地図だけ (chart-component-standards.md §2-D。2026-11-01)。
+    // 描画の土台の部品 (`@stats47/visualization/d3/BarChart` など大文字で始まるパス。遅延読み込みの import() を含む) も
+    // 同じ扱いにする (2026-11-03)。型・定数・凡例の文脈 (`d3/constants/*`・`d3/chart-legend-lead`) は描画ではないので対象外
     id: 'd3-only-in-registered-components',
     message:
-      'Import d3 only in shared chart components (src/components/charts, src/components/stat-charts) or the feature-scoped exceptions listed in chart-component-standards.md §2-D.',
-    pattern: /from ['"]d3(?:-[a-z]+)?['"]|import\(['"]d3(?:-[a-z]+)?['"]\)/,
+      'Import d3 and the D3 chart primitives (@stats47/visualization/d3/<Component>) only in shared chart components (src/components/charts, src/components/stat-charts) or the feature-scoped exceptions listed in chart-component-standards.md §2-D.',
+    pattern: /from ['"]d3(?:-[a-z]+)?['"]|import\(['"]d3(?:-[a-z]+)?['"]\)|['"]@stats47\/visualization\/d3\/[A-Z]/,
     allow: (relativePath) =>
       relativePath.startsWith('src/components/charts/') ||
       relativePath.startsWith('src/components/stat-charts/') ||
@@ -51,6 +53,8 @@ const rules = [
         'src/features/infra-history/components/InfraHistoryExplorer.tsx',
         'src/features/geo-map/components/GeoSubjectMap.tsx',
         'src/features/geo-questions/components/QuestionMap.tsx',
+        // 2 県の市区町村の並列表示。描画は共通の DivergingChoroplethMap に任せる (§2-D)
+        'src/features/region-comparison/components/MunicipalityChoroplethSection.tsx',
       ].includes(relativePath),
   },
   {
@@ -63,11 +67,12 @@ const rules = [
   },
   {
     // 凡例の色見本は ChartLegend (inline / list) が持つ。部品の中で色の点を手書きしない (2026-11-01)。
-    // 2026-11-01 に折れ線・正負の棒・GIS の層の手書きも ChartLegend へ寄せた (CHART-LEGEND-UNIFY-01)
+    // 2026-11-01 に折れ線・正負の棒・GIS の層の手書きも ChartLegend へ寄せた (CHART-LEGEND-UNIFY-01)。
+    // 連続色の帯 (テンプレート文字列の linear-gradient) も ChartLegend の scale で描く (2026-11-03)
     id: 'legend-swatch-uses-chart-legend',
     message:
-      'Legend swatches belong to ChartLegend (@/components/charts/ChartLegend). Do not hand-write colored dots with inline backgroundColor.',
-    pattern: /style=\{\{\s*backgroundColor:/,
+      'Legend swatches and color scales belong to ChartLegend (@/components/charts/ChartLegend, `scale` for gradients). Do not hand-write colored dots with inline backgroundColor or gradient bars.',
+    pattern: /style=\{\{\s*backgroundColor:|`linear-gradient\(/,
     allow: (relativePath) =>
       [
         'src/components/charts/ChartLegend.tsx',

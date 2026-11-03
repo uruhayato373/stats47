@@ -1,16 +1,9 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
 import { ChartPanel } from '@stats47/components';
 import { TrendingUp } from 'lucide-react';
 
-import type { D3LineChartProps } from '@stats47/visualization/d3';
-
-const LineChart = dynamic<D3LineChartProps>(
-  () => import('@stats47/visualization/d3/LineChart').then((mod) => mod.D3LineChart),
-  { ssr: false },
-);
+import { LineChartClient } from '@/components/stat-charts/components/charts/LineChart/LineChartClient';
 
 interface QuestionTrendChartProps {
   readonly title: string;
@@ -23,17 +16,23 @@ interface QuestionTrendChartProps {
 
 /** 組ごとの推移 (問いの答えの主役)。組の数を凡例の名前に添える */
 export function QuestionTrendChart({ title, note, unit, years, groups, series }: QuestionTrendChartProps) {
+  // 欠測 (null) は値を持たない行として渡し、線を途切れさせる
   const data = years.map((year, i) => ({
     category: String(year),
-    ...Object.fromEntries(groups.map((group) => [group.code, series[group.code]?.[i] ?? null])),
+    ...Object.fromEntries(groups.flatMap((group) => {
+      const value = series[group.code]?.[i];
+      return typeof value === 'number' ? [[group.code, value]] : [];
+    })),
   }));
   return (
     <ChartPanel title={title} icon={<TrendingUp />} footer={note}>
-      <LineChart
-        data={data}
-        series={groups.map((group) => ({ dataKey: group.code, name: `${group.label} (${group.count})`, color: group.color }))}
-        showLegend
-        unit={unit}
+      <LineChartClient
+        chartData={{
+          xAxisKey: 'category',
+          data,
+          lines: groups.map((group) => ({ dataKey: group.code, name: `${group.label} (${group.count})`, color: group.color })),
+          unit,
+        }}
         height={360}
       />
     </ChartPanel>

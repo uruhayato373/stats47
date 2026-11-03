@@ -5,7 +5,6 @@
  */
 
 // 地図コンポーネント
-export { TileGridMap } from "./TileGridMapChart";
 export * from "./DivergingChoroplethMap";
 
 // チャートコンポーネント

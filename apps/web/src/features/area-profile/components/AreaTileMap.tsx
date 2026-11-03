@@ -2,7 +2,7 @@ import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
-
+import { ChartLegend } from "@/components/charts/ChartLegend";
 
 import { regionStyle } from "../constants/region-styles.palette";
 
@@ -10,6 +10,18 @@ import type { AreaTile } from "../utils";
 
 const FOCUS_RING =
   "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+
+/**
+ * 地方の色見本の Tailwind クラス (背景色のクラスと dark: の背景色のクラス) を、凡例に渡せる CSS の色の値にする。
+ * 色の正本は region-styles.palette の swatch のまま。dark: は Tailwind 既定の
+ * prefers-color-scheme なので、同じ切り替えをする light-dark() で写す。
+ */
+function swatchColor(swatchClass: string): string {
+  const light = swatchClass.match(/(?:^|\s)bg-([\w-]+)/)?.[1];
+  const dark = swatchClass.match(/(?:^|\s)dark:bg-([\w-]+)/)?.[1];
+  const lightColor = `var(--color-${light ?? "muted-foreground"})`;
+  return dark ? `light-dark(${lightColor}, var(--color-${dark}))` : lightColor;
+}
 
 interface AreaTileMapProps {
   tiles: AreaTile[];
@@ -71,23 +83,15 @@ export function AreaTileMap({
       </div>
 
       {/* 凡例（色 + 地方名。色のみで地方を区別させない） */}
-      <ul className="flex flex-wrap gap-x-3 gap-y-1" aria-label="地方区分の凡例">
-        {regionLegend.map((region) => (
-          <li
-            key={region.regionCode}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground"
-          >
-            <span
-              aria-hidden="true"
-              className={cn(
-                "inline-block size-2.5 rounded-none",
-                regionStyle(region.regionCode).swatch,
-              )}
-            />
-            {region.regionName}
-          </li>
-        ))}
-      </ul>
+      <ChartLegend
+        label="地方区分の凡例"
+        className="gap-y-1 text-xs"
+        items={regionLegend.map((region) => ({
+          key: region.regionCode,
+          label: region.regionName,
+          color: swatchColor(regionStyle(region.regionCode).swatch),
+        }))}
+      />
     </div>
   );
 }

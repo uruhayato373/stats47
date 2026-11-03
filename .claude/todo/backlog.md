@@ -196,18 +196,6 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [CHART-GUARD-GAPS-01] チャートの共通化を守る検査の漏れと、チャートの台帳の古い記載を直す
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
-
-2026-11-03 のチャート・地図の棚卸しで見つかった (地図とチャートの 2 体のエージェントの判定。主要な主張は呼び元が grep・diff で確認)。
-- `d3-only-in-registered-components` は `from "d3"` しか見ず、`@stats47/visualization/d3/*` の直接の import (遅延読み込みの `import()` を含む) を見逃す。実例: `app/japan/[themeSlug]/KakeiAxisChart.tsx`・`features/geo-questions/components/QuestionTrendChart.tsx`・`features/theme-dashboard/components/ThemeChartResultRenderer.tsx`
-- `legend-swatch-uses-chart-legend` は `style={{ backgroundColor }}` しか見ず、`style={{ color }}`・`background:` のグラデーション・className の色見本を見逃す。実例: DepopulationMedicalMapClient・SunshineMapClient・GeoSubjectMap・AreaTileMap
-- `chart-component-standards.md` §2-D に、実体の無い部品 (AgeCompositionChart・RankingAllPrefecturesChart・RankingBoxplotChart・TrendSparklineCard) が残っている。実質の共通部品の `RankingMapChartClient` が台帳に載っていない
-- 使い手の無い共通部品: `D3TileGridMapChart`・`ChoroplethLegend` (テストだけ)、`toPyramidChartData` (本番の呼び元 0)、`features/blog/utils/convert-chart-data.ts` (テストだけ)
-- 背景地図の地理院淡色の URL が `geo-basemap.ts` と packages の `tile-providers.ts` の 2 か所に別々に書かれている
-次: 検査 2 つの条件を広げ (広げた条件で今ある違反は理由付きの例外か是正)、§2-D を実体に合わせ、使い手の無い部品を knip で確かめて消す。
-完了条件: 上の実例が検査に掛かるか例外として登録され、§2-D の部品名がすべて src に実在し、使い手の無い部品が 0。
-
 ### [GEO-STAT-BOX-STATTILE-01] Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
 

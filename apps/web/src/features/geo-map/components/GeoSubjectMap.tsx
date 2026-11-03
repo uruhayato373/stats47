@@ -347,32 +347,30 @@ export function GeoSubjectMap({ scopeName, prefCodes, isNational, layers, firstY
                 : `${municipalYear}年の値${municipalYear !== year ? ` (${year}年以前で最も近い年)` : ''}`}
             </p>
             <div className="space-y-1">
-              <div
-                className="h-2 w-full"
-                style={{
-                  background:
-                    municipal.domain.kind === 'diverging'
-                      ? `linear-gradient(to right, ${NEGATIVE_COLOR}, transparent, ${POSITIVE_COLOR})`
-                      : `linear-gradient(to right, color-mix(in srgb, ${AREA_COLOR} ${AREA_OPACITY.min * 100}%, transparent), ${AREA_COLOR})`,
-                }}
-                aria-hidden
+              <ChartLegend
+                label={`${municipal.label}の色`}
+                scale={
+                  municipal.domain.kind === 'diverging'
+                    ? {
+                        colors: [NEGATIVE_COLOR, 'transparent', POSITIVE_COLOR],
+                        labels: [
+                          `−${formatNumber(municipal.domain.maxAbs)}${municipal.measure.unit} 以下`,
+                          '0',
+                          `+${formatNumber(municipal.domain.maxAbs)}${municipal.measure.unit} 以上`,
+                        ],
+                      }
+                    : {
+                        colors: [
+                          `color-mix(in srgb, ${AREA_COLOR} ${AREA_OPACITY.min * 100}%, transparent)`,
+                          AREA_COLOR,
+                        ],
+                        labels: [
+                          `${formatNumber(municipal.domain.min)} ${municipal.measure.unit}`,
+                          `${formatNumber(municipal.domain.max)} ${municipal.measure.unit}`,
+                        ],
+                      }
+                }
               />
-              {municipal.domain.kind === 'diverging' ? (
-                <p className="flex justify-between text-xs tabular-nums text-muted-foreground">
-                  <span>−{formatNumber(municipal.domain.maxAbs)}{municipal.measure.unit} 以下</span>
-                  <span>0</span>
-                  <span>+{formatNumber(municipal.domain.maxAbs)}{municipal.measure.unit} 以上</span>
-                </p>
-              ) : (
-                <p className="flex justify-between text-xs tabular-nums text-muted-foreground">
-                  <span>
-                    {formatNumber(municipal.domain.min)} {municipal.measure.unit}
-                  </span>
-                  <span>
-                    {formatNumber(municipal.domain.max)} {municipal.measure.unit}
-                  </span>
-                </p>
-              )}
               <p className="text-xs text-muted-foreground">色の基準は全国の全年で固定しています。</p>
             </div>
           </div>

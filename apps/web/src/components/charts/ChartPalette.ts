@@ -25,6 +25,15 @@ export const FLOW_CHART_COLORS = {
   subtext: CHART_MUTED_COLOR,
 } as const;
 
+/** 正負で塗り分けるチャート (増減の棒など) の色 */
+export const DIVERGING_CHART_COLORS = {
+  positive: "hsl(var(--positive))",
+  negative: "hsl(var(--negative))",
+} as const;
+
+/** 系列の色が決まらないときの色 */
+export const CHART_FALLBACK_COLOR = CHART_MUTED_COLOR;
+
 export function getChartColor(index: number): string {
   return CHART_COLORS[((index % CHART_COLORS.length) + CHART_COLORS.length) % CHART_COLORS.length];
 }

@@ -16,10 +16,19 @@ const MixedChart = dynamic(
 
 interface MixedChartClientProps {
   chartData: MixedChartData;
+  /** 左Y軸 (棒) の範囲。共通の軸の方針で決めた範囲を渡す */
+  leftYDomain?: [number, number];
+  /** 右Y軸 (折れ線) の範囲 */
+  rightYDomain?: [number, number];
+  /** SVG の高さ (既定 280) */
+  height?: number;
 }
 
 export const MixedChartClient: React.FC<MixedChartClientProps> = ({
   chartData,
+  leftYDomain,
+  rightYDomain,
+  height = 280,
 }) => {
   const { xAxisKey, data, columns, lines, leftUnit, rightUnit } = chartData;
 
@@ -31,7 +40,9 @@ export const MixedChartClient: React.FC<MixedChartClientProps> = ({
       lines={lines}
       leftUnit={leftUnit}
       rightUnit={rightUnit}
-      height={280}
+      leftYDomain={leftYDomain}
+      rightYDomain={rightYDomain}
+      height={height}
     />
   );
 };
