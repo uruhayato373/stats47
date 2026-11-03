@@ -86,7 +86,8 @@ const rules = [
     id: 'legend-swatch-uses-chart-legend',
     message:
       'Legend swatches and color scales belong to ChartLegend (@/components/charts/ChartLegend, `scale` for gradients). Do not hand-write colored dots with inline backgroundColor or gradient bars.',
-    pattern: /style=\{\{\s*backgroundColor:|`linear-gradient\(/,
+    // 2026-11-03: 色の class で描いた小さな色見本 (size-2 / h-1 w-5 などに bg-*・border-dashed) も止める
+    pattern: /style=\{\{\s*backgroundColor:|`linear-gradient\(|className="[^"]*\b(?:size-[23](?![.\d])|h-1 w-[45]|w-[45] border-t-2)\b[^"]*\b(?:bg-[a-z]|border-dashed)/,
     allow: (relativePath) =>
       [
         'src/components/charts/ChartLegend.tsx',

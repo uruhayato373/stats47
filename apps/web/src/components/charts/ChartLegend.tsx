@@ -7,8 +7,8 @@ export interface ChartLegendItem {
   key?: string;
   label: string;
   color: string;
-  /** 色見本の形 (既定は四角。線の地図は line) */
-  marker?: "square" | "line";
+  /** 色見本の形 (既定は四角。線の地図は line、廃止した線などの点線は dashed-line) */
+  marker?: "square" | "line" | "dashed-line";
   /** 右端に出す値 (layout="list" のときだけ) */
   value?: ReactNode;
 }
@@ -42,6 +42,15 @@ interface ChartLegendProps {
 const itemKey = (item: ChartLegendItem) => item.key ?? item.label;
 
 function Marker({ item }: { item: ChartLegendItem }) {
+  if (item.marker === "dashed-line") {
+    return (
+      <span
+        className="inline-block w-4 shrink-0 border-t-2 border-dashed"
+        style={{ borderColor: item.color }}
+        aria-hidden="true"
+      />
+    );
+  }
   return (
     <span
       className={cn("inline-block shrink-0", item.marker === "line" ? "h-1 w-4" : "size-2")}

@@ -3,19 +3,16 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { PanelGrid, SectionCard } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
-import { Slider } from '@stats47/components/atoms/ui/slider';
-import { geoContains, geoMercator, geoPath } from 'd3-geo';
+import { geoContains, geoPath } from 'd3-geo';
 import { scaleLinear, scaleLog } from 'd3-scale';
-import { Pause, Play } from 'lucide-react';
-import { feature as topoFeature } from 'topojson-client';
 
 import { ChartLegend } from '@/components/charts/ChartLegend';
+import { fetchTopology, fitGeoSvgMercator, GEO_SVG_MAP, topologyFeatures, withoutFarIslands } from '@/components/charts/geo-topology';
+import { useYearPlayback, YearPlayer } from '@/components/charts/YearPlayer';
 import { STAT_VALUE_CLASS } from '@/components/surface';
 
 import type { GeoMapLayer } from '../lib/load-geo-map';
-import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
-import type { GeometryCollection, Topology } from 'topojson-specification';
+import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
 
 type FeatureLayer = Extract<GeoMapLayer, { kind: 'features' }>;
 type MunicipalLayer = Extract<GeoMapLayer, { kind: 'municipal' }>;
@@ -32,11 +29,6 @@ interface GeoSubjectMapProps {
   readonly rangeNote: string | null;
 }
 
-const MAP_WIDTH = 640;
-const MAP_HEIGHT = 640;
-const MAP_PADDING = 16;
-/** 再生時の 1 年あたりの間隔 (ms) */
-const PLAY_INTERVAL_MS = 280;
 /** 県・市区町村の境界の行政コード */
 const CODE_PROPERTY = 'N03_007';
 /** 塗り分けの色。区分の色 (chart-1〜4・muted) と重ならないトークン */
@@ -67,15 +59,6 @@ interface LoadedMap {
   readonly shapes: Readonly<Record<string, readonly DrawnShape[]>>;
 }
 
-function fetchTopology(url: string): Promise<Topology> {
-  return fetch(url).then((res) => (res.ok ? (res.json() as Promise<Topology>) : Promise.reject(res.status)));
-}
-
-function featuresOf<P>(topology: Topology, names: readonly string[]): Feature<Geometry, P>[] {
-  const name = names.find((item) => topology.objects[item]) ?? Object.keys(topology.objects)[0];
-  return (topoFeature(topology, topology.objects[name] as GeometryCollection) as FeatureCollection<Geometry, P>).features;
-}
-
 function useGeoMap(
   prefCodes: readonly string[],
   isNational: boolean,
@@ -97,20 +80,16 @@ function useGeoMap(
     ])
       .then(([prefTopo, muniTopos, layerTopos]) => {
         if (cancelled) return;
-        const allBoundaries = featuresOf<Record<string, string>>(prefTopo, []);
+        const allBoundaries = topologyFeatures<Record<string, string>>(prefTopo, []);
         const scopeBoundaries = isNational
           ? allBoundaries
           : allBoundaries.filter((f) => wanted.has(String(f.properties[CODE_PROPERTY])));
-        const layerFeatures = featureLayers.map((layer, i) => featuresOf<ShapeProps>(layerTopos[i], ['lines', 'points']));
+        const layerFeatures = featureLayers.map((layer, i) => topologyFeatures<ShapeProps>(layerTopos[i], ['lines', 'points']));
         // 線の主題があれば、全年の線の広がりで縮尺を決める (県境で決めると東京都の小笠原諸島などで本土が小さくなる)。
         // 線が無ければ範囲の県境で決める (点の主題は全国 1 ファイルのものがあり、広がりの手がかりにならない)
         const lineFeatures = featureLayers.flatMap((layer, i) => (layer.geometry === 'line' ? layerFeatures[i] : []));
-        const projection = geoMercator().fitExtent(
-          [
-            [MAP_PADDING, MAP_PADDING],
-            [MAP_WIDTH - MAP_PADDING, MAP_HEIGHT - MAP_PADDING],
-          ],
-          { type: 'FeatureCollection', features: lineFeatures.length > 0 ? lineFeatures : scopeBoundaries } as FeatureCollection,
+        const projection = fitGeoSvgMercator(
+          lineFeatures.length > 0 ? lineFeatures : isNational ? scopeBoundaries : withoutFarIslands(scopeBoundaries),
         );
         const path = geoPath(projection);
         const draw = <P extends GeoJsonProperties>(f: Feature<Geometry, P>) => {
@@ -141,7 +120,7 @@ function useGeoMap(
               .map((f) => ({ d: path(f) ?? '', code: String(f.properties[CODE_PROPERTY]) }))
               .filter((b) => b.d !== ''),
             municipalities: muniTopos
-              .flatMap((topology) => featuresOf<Record<string, string>>(topology, []))
+              .flatMap((topology) => topologyFeatures<Record<string, string>>(topology, []))
               .map((f) => ({ d: path(f) ?? '', code: String(f.properties[CODE_PROPERTY]) }))
               .filter((m) => m.d !== ''),
             shapes,
@@ -184,25 +163,12 @@ function formatMunicipalValue(layer: MunicipalLayer, value: number): string {
 }
 
 export function GeoSubjectMap({ scopeName, prefCodes, isNational, layers, firstYear, lastYear, rangeNote }: GeoSubjectMapProps) {
-  const [year, setYear] = useState(lastYear);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const playback = useYearPlayback(firstYear, lastYear);
+  const { year } = playback;
   const featureLayers = useMemo(() => layers.filter((layer): layer is FeatureLayer => layer.kind === 'features'), [layers]);
   const municipal = useMemo(() => layers.find((layer): layer is MunicipalLayer => layer.kind === 'municipal') ?? null, [layers]);
   const { map, failed } = useGeoMap(prefCodes, isNational, featureLayers, municipal !== null);
 
-  useEffect(() => {
-    if (!isPlaying) return;
-    const timer = window.setInterval(() => {
-      setYear((current) => {
-        if (current >= lastYear) {
-          setIsPlaying(false);
-          return current;
-        }
-        return current + 1;
-      });
-    }, PLAY_INTERVAL_MS);
-    return () => window.clearInterval(timer);
-  }, [isPlaying, lastYear]);
 
   // 塗り分けの色。基準は全国の全年で固定 (サーバーが決める)。範囲や年を変えても、同じ色は同じ値を表す
   const fillOf = useMemo(() => {
@@ -231,15 +197,6 @@ export function GeoSubjectMap({ scopeName, prefCodes, isNational, layers, firstY
     return years.length > 0 ? years[years.length - 1] : null;
   }, [municipal, year]);
 
-  const handlePlay = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      return;
-    }
-    if (year >= lastYear) setYear(firstYear);
-    setIsPlaying(true);
-  };
-
   const title = `${year}年の${scopeName}`;
 
   return (
@@ -249,7 +206,7 @@ export function GeoSubjectMap({ scopeName, prefCodes, isNational, layers, firstY
           <p className={`pointer-events-none absolute top-0 left-0 tabular-nums ${STAT_VALUE_CLASS}`} aria-hidden>
             {year}年
           </p>
-          <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} className="h-auto w-full" role="img" aria-label={title}>
+          <svg viewBox={`0 0 ${GEO_SVG_MAP.width} ${GEO_SVG_MAP.height}`} className="h-auto w-full" role="img" aria-label={title}>
             {map?.boundaries.map((boundary) => (
               <path key={`pref-${boundary.code}-${boundary.d.length}`} d={boundary.d} fill="var(--color-muted)" stroke="none" />
             ))}
@@ -311,29 +268,7 @@ export function GeoSubjectMap({ scopeName, prefCodes, isNational, layers, firstY
             </p>
           )}
         </div>
-        <div className="flex items-center gap-3">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={handlePlay}
-            aria-label={isPlaying ? '再生を止める' : `${firstYear}年から再生する`}
-          >
-            {isPlaying ? <Pause /> : <Play />}
-          </Button>
-          <Slider
-            min={firstYear}
-            max={lastYear}
-            step={1}
-            value={year}
-            onValueChange={(value) => {
-              setIsPlaying(false);
-              setYear(Array.isArray(value) ? value[0] : value);
-            }}
-            aria-label="表示する年"
-            className="flex-1"
-          />
-        </div>
+        <YearPlayer playback={playback} />
         {rangeNote && <p className="text-xs text-muted-foreground">{rangeNote}</p>}
       </SectionCard>
 
