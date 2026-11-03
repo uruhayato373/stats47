@@ -127,6 +127,33 @@ export function summarizeDimensionGaps({ ledgerEntries, registeredParams, eventV
   return { absentParams: new Set(absent.map((r) => r.param)).size, groups };
 }
 
+const diffList = (current, previous) => ({
+  added: current.filter((v) => !previous.includes(v)).sort(),
+  removed: previous.filter((v) => !current.includes(v)).sort(),
+});
+
+/**
+ * GA4 Admin の週次監査を前の週の記録と比べる。読めなかった項目は「変化なし」にせず null にする
+ * (API の失敗を設定の削除と取り違えないため)。
+ */
+export function summarizeAdminAuditChanges({ current, previous, previousWeek }) {
+  const dimensions = (a) => (a?.customDimensions?.status === "ok" && Array.isArray(a.customDimensions.params) ? a.customDimensions.params : null);
+  const keyEvents = (a) => {
+    const k = a?.settings?.keyEvents;
+    return k?.status === "ok" && Array.isArray(k.eventNames) ? k.eventNames : null;
+  };
+  const compare = (read) => {
+    const [now, before] = [read(current?.audit), read(previous?.audit)];
+    return now && before ? diffList(now, before) : null;
+  };
+  return {
+    previousWeek: previous ? previousWeek : null,
+    customDimensions: compare(dimensions),
+    keyEvents: compare(keyEvents),
+    problems: (current?.problems ?? []).map((p) => (typeof p === "string" ? p : JSON.stringify(p))),
+  };
+}
+
 /** effect/pending を含む active 施策のうち、期日が asOf より前のもの。 */
 export function summarizeOverdue(entries, asOf) {
   const overdue = entries
@@ -561,6 +588,20 @@ export function renderCycleMarkdown(state) {
     for (const g of d.groups) {
       lines.push(`- ${g.breakdownReady ? "🟢 登録すれば内訳を読める" : "⚪ 発火量不足"} \`${g.events.join("` / `")}\`（28 日 ${g.eventCount28d} 件）: ${g.params.map((p) => `\`${p}\``).join(", ")}`);
     }
+    lines.push("");
+  }
+  if (state.adminAudit) {
+    const a = state.adminAudit;
+    const describe = (label, diff) => {
+      if (!diff) return `- ${label}: 比べられない (どちらかの週の監査で読めていない)`;
+      if (diff.added.length === 0 && diff.removed.length === 0) return `- ${label}: 変化なし`;
+      return `- ${label}: 追加 ${diff.added.join("・") || "なし"} / 削除 ${diff.removed.join("・") || "なし"}`;
+    };
+    lines.push(`**GA4 の設定の変化**（比較元: ${a.previousWeek ?? "前の記録なし"}。意図しない変化と問題はバックログへ起票する）`);
+    lines.push("");
+    lines.push(describe("custom dimension", a.customDimensions));
+    lines.push(describe("キーイベント", a.keyEvents));
+    lines.push(`- 監査の問題: ${a.problems.length === 0 ? "なし" : a.problems.join(" / ")}`);
     lines.push("");
   }
   if (state.engine) {

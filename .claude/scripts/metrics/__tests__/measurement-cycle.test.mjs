@@ -3,9 +3,46 @@ import { test } from 'node:test';
 import {
   countOpsImprovements, MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeCloudflare,
   summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns,
-  summarizeWorkContext, summarizeKpiTree, shiftIsoWeek, summarizeDataQuality, summarizePaidPurchases,
+  summarizeAdminAuditChanges, summarizeWorkContext, summarizeKpiTree, shiftIsoWeek, summarizeDataQuality, summarizePaidPurchases,
 } from '../lib/measurement-cycle.mjs';
 import { buildQuery, parseFilterExpr } from '../lib/ga4-query.mjs';
+
+test('admin audit diff names what was added and removed since the previous week', () => {
+  const record = (params, events, extra = {}) => ({
+    audit: { customDimensions: { status: 'ok', params }, settings: { keyEvents: { status: 'ok', eventNames: events } } },
+    problems: [],
+    ...extra,
+  });
+  const diff = summarizeAdminAuditChanges({
+    current: record(['a', 'c'], ['purchase'], { problems: ['GSC に届かない'] }),
+    previous: record(['a', 'b'], ['purchase', 'cta_click']),
+    previousWeek: '2026-W43',
+  });
+  assert.equal(diff.previousWeek, '2026-W43');
+  assert.deepEqual(diff.customDimensions, { added: ['c'], removed: ['b'] });
+  assert.deepEqual(diff.keyEvents, { added: [], removed: ['cta_click'] });
+  assert.deepEqual(diff.problems, ['GSC に届かない']);
+});
+
+test('admin audit diff does not read an API failure as a removed setting', () => {
+  const ok = { audit: { customDimensions: { status: 'ok', params: ['a'] } }, problems: [] };
+  const failed = { audit: { customDimensions: { status: 'error' } }, problems: [] };
+  assert.equal(summarizeAdminAuditChanges({ current: failed, previous: ok, previousWeek: '2026-W43' }).customDimensions, null);
+  assert.equal(summarizeAdminAuditChanges({ current: ok, previous: null, previousWeek: null }).previousWeek, null);
+});
+
+test('admin audit changes reach the weekly markdown', () => {
+  const state = {
+    week: '2026-W44',
+    sources: { ga4: { status: 'ok' } },
+    adminAudit: { previousWeek: '2026-W43', customDimensions: { added: ['c'], removed: [] }, keyEvents: null, problems: [] },
+    improvements: { overdue: [] },
+    operations: null,
+  };
+  const md = renderCycleMarkdown(state);
+  assert.match(md, /custom dimension: 追加 c/);
+  assert.match(md, /キーイベント: 比べられない/);
+});
 
 test('csv parser keeps quoted commas so page paths with commas do not shift columns', () => {
   const rows = parseCsv('landingPage,sessions\n"/blog/a,b",12\n/blog/c,3\n');

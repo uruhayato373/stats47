@@ -235,8 +235,10 @@ applyは1件ずつ作成・verifyし、`applied`/`no-op`以外が出たら残り
 - responseのemail、token、OAuth client情報はstateへ書かない。
 - API errorは200文字程度へsanitizeし、statusを`error`として返す。
 - 一部API失敗を`ok`へ読み替えない。
-- stateは`.claude/state/metrics/google-admin/api-latest.json`へ保存できるが、
-  scheduleからrepoへ自動commitしない。Workflow artifactとStep Summaryを一次出力にする。
+- 作業用のstateは`.claude/state/metrics/google-admin/api-latest.json`で、commitしない。
+  週次の記録は`refresh-measurement-cycle.sh`が`data/google-admin/audits/<週>.json`へ残し、
+  前の週との差分を`data/measurement-cycle/LATEST.md`に出す (2026-11-04 オーナー判断)。
+  手動の`google-admin-settings.yml`はWorkflow artifactとStep Summaryを一次出力にする。
 
 CLI / package scripts:
 

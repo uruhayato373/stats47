@@ -18,6 +18,7 @@ import { join } from "node:path";
 import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
+  summarizeAdminAuditChanges,
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
   summarizeDataQuality, summarizeJourney, summarizeKpiTree, summarizePaidPurchases, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
@@ -115,6 +116,20 @@ function buildOperations(week, asOf, pending) {
   };
 }
 
+/** 対象週より前で最も新しい GA4 Admin の監査の記録 (refresh-measurement-cycle.sh が週ごとに残す) */
+function readPreviousAdminAudit(week) {
+  const dir = join(PROJECT_ROOT, datasetDir("ga4.admin-audits"));
+  if (!existsSync(dir)) return { previous: null, previousWeek: null };
+  const previousWeek = readdirSync(dir)
+    .filter((f) => /^\d{4}-W\d{2}\.json$/.test(f))
+    .map((f) => f.replace(".json", ""))
+    .filter((w) => w < week)
+    .sort()
+    .at(-1);
+  if (!previousWeek) return { previous: null, previousWeek: null };
+  return { previous: JSON.parse(readFileSync(join(dir, `${previousWeek}.json`), "utf8")), previousWeek };
+}
+
 function main() {
   const week = arg("--week");
   if (!/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--week YYYY-Www が必要");
@@ -135,10 +150,13 @@ function main() {
   let registeredParams = null;
   let adminStatus = { status: "not-run", detail: "--admin-audit 未指定" };
   let settingsStatus = { status: "not-run", detail: "--admin-audit 未指定" };
+  let adminAudit = null;
   if (auditPath) {
     if (!existsSync(auditPath)) adminStatus = { status: "missing", detail: auditPath };
     else {
-      const audit = JSON.parse(readFileSync(auditPath, "utf8")).audit;
+      const auditRecord = JSON.parse(readFileSync(auditPath, "utf8"));
+      const audit = auditRecord.audit;
+      adminAudit = summarizeAdminAuditChanges({ current: auditRecord, ...readPreviousAdminAudit(week) });
       settingsStatus = summarizeGa4Settings(audit?.settings);
       const cd = audit?.customDimensions;
       if (cd?.status === "ok" && Array.isArray(cd.params)) {
@@ -209,6 +227,7 @@ function main() {
     dimensionGaps: registeredParams && events.rows
       ? summarizeDimensionGaps({ ledgerEntries, registeredParams, eventVolume: events.rows })
       : null,
+    adminAudit,
     improvements: summarizeOverdue(pending, asOf),
   };
 
