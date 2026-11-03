@@ -3446,6 +3446,8 @@ updated: 2026-11-01
   チャート部品の設計なので `chart-component-builder` の範囲で、積み上げ面・折れ線・複合・ヒストグラムを同じ仕組みで直す。
 - **別経路のもの**: ブログの図は静的 SVG なので、直すには図の再生成と R2 反映 (承認が要る) が要る。サンキー図・物価指数の縦軸 (0 始まり) は部品ごとの修正。
 - **追記 (2026-10-08)**: ブログの折れ線は生成器側でも 0 始まりに固定される。`packages/svg-builder/src/charts/line.ts` は `yMin` (既定 0) を受け取れるが、`.claude/scripts/blog/generate-article-charts.ts` の `genLineChartSvg` が `yMin` を渡さないため、平均年齢 (30〜60 歳) のような系列も 0 から描かれる (school-teacher-annual-income の writer が報告し、コードで確認)。data JSON に `yMin` を持たせて渡す形が最小の修正。
+- **2026-11-03 追記 (`KINDLE-QUALITY-LOOP-01` の図の評価から)**: R2 のブログの図に、題が汎用語だけのものが残っている (例: `mackerel-expenditure-ranking.svg` の「都道府県別ランキング」、`taiwan-guest-map.svg` の「都道府県マップ」。いずれも 2026-08-31 の版)。今の生成器はこの題を出さないので、全記事の図の描き直しで消えるはず。Kindle は書籍版だけ `figure-corrections.ts` で直してあり、描き直しで元の文字が消えると本の生成が止まる (エントリを消す合図)。描き直しの後に、R2 の SVG の `svg-title` が指標名になっていることを確かめる。
+
 
 ### [UNIT-NOTATION-FORMAT-01] 単位と数値の表記がページごとに不揃い
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]

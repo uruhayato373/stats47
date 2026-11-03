@@ -127,6 +127,9 @@ node .claude/scripts/kdp/kdp-batch.mjs --phase status --ids K-S1-01,K-S1-02,K-S1
 
 # listings + sales-ledger から週次ゲートを決定的に再生成
 npm run kdp:weekly -- --week [YYYY-Www] --write
+
+# 既刊の中身の機械の検査 (Mac だけ。EPUB は .local にしか無い。KINDLE-QUALITY-LOOP-01)
+npm run kindle:quality -- --write
 ```
 
 本棚同期がログイン・2FA・UI変更で失敗した場合は、古い状態をfreshとみなさず`Blockers`へ記録する。

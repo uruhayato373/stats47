@@ -1,11 +1,11 @@
 {
-  "hash": "6a2a8bd863352eb3dd74f0076806837b6dfa4911d1c852f1b01c8c6a2ccbdb8d",
-  "audited_at": "2026-11-03T06:56:39",
+  "hash": "5529e95744b69e65d80f9eee0dc3826bf8884d4627e1d6a32ebffea270cdd0fa",
+  "audited_at": "2026-11-03T07:02:34",
   "files": [
-    ".agents/skills/product/build-kindle-book/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/agents/kindle-publisher.md",
+    ".claude/rules/coconala-product-standards.md",
     ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/scripts/kdp/capture-pages.mjs",
-    ".claude/scripts/kdp/capture-tables.mjs",
-    ".claude/skills/product/build-kindle-book/SKILL.md"
+    ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }

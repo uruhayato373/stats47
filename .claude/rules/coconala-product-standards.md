@@ -127,6 +127,18 @@ npm run test:run   --workspace=@stats47/product-factory
 - **別PC復元の正典**は `data/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
+#### 既刊の点検と改訂 (KINDLE-QUALITY-LOOP-01)
+
+- **全県表**: 図だけでは中位の県の値が本に無いので、ブログ章の末尾に「全47都道府県の値」を付ける (`full-tables.ts`・catalog の `fullTables: true`)。
+  表は**図と同じデータ** (R2 `app/blog/<slug>/data/<name>.json`、無ければ同じ年の `app/ranking/<key>/values.json`) から作り、年が違えば作らない。
+  3 列 (順位・都道府県・値)・12 行ずつに分け、2 つ目から「<指標>（年・単位）のつづき・n〜m番目」(h5) を付ける (Kindle は表の見出し行を繰り返さない)。
+  注記は表の下。表は書き下ろし比率の分母に数えない。**新しく作る本・作り直す本は `fullTables: true` を付ける** (付けない本は理由を catalog に書く)。
+- **図の題**: 図だけで「何の指標・何年・単位」が分かること。ブログの図の題が汎用語 (「都道府県別ランキング」「都道府県マップ」) のままなら、
+  ブログの図を描き直すまでは `figure-corrections.ts` で書籍版だけ直す (描き直して元の文字が消えると生成が止まるので、そのときエントリを消す)。
+- **入稿前の確認**: Kindle Previewer の代わりに `capture-pages.mjs` (本の CSS のまま 1 段 = 1 ページ・600×800 と 390×700) で、
+  全県表の見出し・つづきの小見出しの取り残しと 1〜2 行だけのページが 0 であることを確かめる。Send to Kindle で Amazon の変換は確かめられるが、
+  Kindle for Web はパーソナル・ドキュメントを表示しないので、変換後の見た目は Kindle アプリか端末でしか見られない。
+
 #### 編集設計 (design) が無い本は作らない (2026-09-19 確定)
 
 2026-09-19 の全 32 冊監査で、カタログは「データが何か」(`concept`) しか持たず、**誰のどんな悩みを解決するか・

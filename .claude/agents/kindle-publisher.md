@@ -46,6 +46,10 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   出ていた当時、epubcheck は全 32 冊で 0 error 0 warning だった（素の `<img>` 表紙は構文として
   妥当で、壊れるのはレイアウトだけ）。正典: `coconala-product-standards.md` §8。
 - 出品前チェック（各書籍 `.local/.../READINESS.md`）の整備とオーナーへの受け渡し。
+- **既刊の中身の点検と改訂 (KINDLE-QUALITY-LOOP-01)**。手順は `build-kindle-book` SKILL の「既刊の中身の点検」、規約は
+  `coconala-product-standards.md` §8「既刊の点検と改訂」。トークンを使う段ほど対象を絞る: ① `npm run kindle:quality` (機械・0 トークン)
+  ② `capture-figures.mjs` → Haiku (印の付いた図だけ・評価済みの図は sha256 で飛ばす) ③ `notebooklm-review.ts` (1 冊 1 notebook)。
+  改訂の版は `/content/kindle/<id>?version=<版>` で見比べ、全県表を付けた版は `capture-pages.mjs` で改ページの取り残し 0 を確かめてから渡す。
 - `/content/kindle` でcatalog / manuscripts / `.local` EPUB・表紙 / KDP listingの集合と状態を確認し、
   `npm run audit:content-operations` がerror 0であることを出品前の横断ゲートにする。
 
