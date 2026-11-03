@@ -909,6 +909,654 @@
       "dataSource": "ranking",
       "section": "reading",
       "sortOrder": 90
+    },
+    {
+      "componentKey": "household-food-spending-trend-seafood-total",
+      "componentType": "line-chart",
+      "title": "生鮮魚介や貝類の購入量が大幅減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "fresh-seafood-consumption-quantity",
+            "label": "生鮮魚介の購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "shellfish-consumption-quantity",
+            "label": "貝類の購入量",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "fresh-seafood-consumption-quantity",
+        "shellfish-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 101,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-fish-everyday",
+      "componentType": "line-chart",
+      "title": "さけ・さば・さんまの購入量が減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "salmon-consumption-quantity",
+            "label": "さけの購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "mackerel-consumption-quantity",
+            "label": "さばの購入量",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "saury-consumption-quantity",
+            "label": "さんまの購入量",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "salmon-consumption-quantity",
+        "mackerel-consumption-quantity",
+        "saury-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 102,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-fish-everyday-2",
+      "componentType": "line-chart",
+      "title": "あじといわしの支出額がともに減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "horse-mackerel-consumption-expenditure",
+            "label": "あじの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "sardine-consumption-expenditure",
+            "label": "いわしの支出額",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "horse-mackerel-consumption-expenditure",
+        "sardine-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 103,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-fish-white",
+      "componentType": "line-chart",
+      "title": "たいとかれいの購入量が大きく低下",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "sea-bream-consumption-quantity",
+            "label": "たいの購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "flounder-consumption-quantity",
+            "label": "かれいの購入量",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "sea-bream-consumption-quantity",
+        "flounder-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 104,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-shellfish-crustacean",
+      "componentType": "line-chart",
+      "title": "あさりやほたて貝など貝・いかの支出額が減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "clam-consumption-expenditure",
+            "label": "あさりの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "scallop-consumption-expenditure",
+            "label": "ほたて貝の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "squid-consumption-expenditure",
+            "label": "いかの支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "clam-consumption-expenditure",
+        "scallop-consumption-expenditure",
+        "squid-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 105,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-dashi-seaweed",
+      "componentType": "line-chart",
+      "title": "こんぶとかつお節の購入量が減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "konbu-consumption-quantity",
+            "label": "こんぶの購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "katsuobushi-consumption-quantity",
+            "label": "かつお節・削り節の購入量",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "konbu-consumption-quantity",
+        "katsuobushi-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-seafood",
+      "sortOrder": 106,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-meat",
+      "componentType": "line-chart",
+      "title": "豚肉やその他の生鮮肉への支出額が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "pork-consumption-expenditure",
+            "label": "豚肉の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "other-meat-consumption-expenditure",
+            "label": "他の生鮮肉の支出額",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "pork-consumption-expenditure",
+        "other-meat-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-meat-dairy",
+      "sortOrder": 107,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-root-vegetables",
+      "componentType": "line-chart",
+      "title": "だいこんとじゃがいもの購入量が減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "daikon-consumption-quantity",
+            "label": "だいこんの購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "potato-consumption-quantity",
+            "label": "じゃがいもの購入量",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "daikon-consumption-quantity",
+        "potato-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-vegetables-fruit",
+      "sortOrder": 108,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-fruit",
+      "componentType": "line-chart",
+      "title": "りんご・みかん・すいか等の購入量が低下",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "apple-consumption-quantity",
+            "label": "りんごの購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "watermelon-consumption-quantity",
+            "label": "すいかの購入量",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "mandarin-consumption-quantity",
+            "label": "みかんの購入量",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "other-citrus-consumption-quantity",
+            "label": "他の柑きつ類の購入量",
+            "colorRole": "series-4"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "apple-consumption-quantity",
+        "watermelon-consumption-quantity",
+        "mandarin-consumption-quantity",
+        "other-citrus-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-vegetables-fruit",
+      "sortOrder": 109,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-seasonings",
+      "componentType": "line-chart",
+      "title": "基礎調味料の購入量が大幅に減少",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "miso-consumption-quantity",
+            "label": "みその購入量",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "sugar-consumption-quantity",
+            "label": "砂糖の購入量",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "table-salt-consumption-quantity",
+            "label": "食塩の購入量",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "miso-consumption-quantity",
+        "sugar-consumption-quantity",
+        "table-salt-consumption-quantity"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-pantry",
+      "sortOrder": 110,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-sweets-processed",
+      "componentType": "line-chart",
+      "title": "冷凍食品・菓子・納豆への支出額が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "confectionery-consumption-expenditure",
+            "label": "菓子類の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "natto-consumption-expenditure",
+            "label": "納豆の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "frozen-food-consumption-expenditure",
+            "label": "冷凍調理食品の支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "confectionery-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "frozen-food-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-pantry",
+      "sortOrder": 111,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-dining-cuisines",
+      "componentType": "line-chart",
+      "title": "中華そば・うどん・ハンバーガー等の外食費が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "ramen-dining-consumption-expenditure",
+            "label": "中華そばの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "soba-udon-dining-consumption-expenditure",
+            "label": "日本そば・うどんの支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "hamburger-consumption-expenditure",
+            "label": "ハンバーガーの支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "ramen-dining-consumption-expenditure",
+        "soba-udon-dining-consumption-expenditure",
+        "hamburger-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-dining-out",
+      "sortOrder": 112,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-tea-coffee",
+      "componentType": "line-chart",
+      "title": "緑茶の支出が減りコーヒーと紅茶が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "coffee-consumption-expenditure",
+            "label": "コーヒーの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "green-tea-consumption-expenditure",
+            "label": "緑茶の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "black-tea-consumption-expenditure",
+            "label": "紅茶の支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "coffee-consumption-expenditure",
+        "green-tea-consumption-expenditure",
+        "black-tea-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-drinks",
+      "sortOrder": 113,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-soft-drinks",
+      "componentType": "line-chart",
+      "title": "ミネラルウォーターと炭酸飲料の支出が急増",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "mineral-water-consumption-expenditure",
+            "label": "ミネラルウォーターの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "carbonated-drink-consumption-expenditure",
+            "label": "炭酸飲料の支出額",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "mineral-water-consumption-expenditure",
+        "carbonated-drink-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-drinks",
+      "sortOrder": 114,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-alcohol-spending",
+      "componentType": "line-chart",
+      "title": "発泡酒等の支出が減りウイスキーが増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "happoshu-consumption-expenditure",
+            "label": "発泡酒・ビール風アルコール飲料の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "whisky-consumption-expenditure",
+            "label": "ウイスキーの支出額",
+            "colorRole": "series-2"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "happoshu-consumption-expenditure",
+        "whisky-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-drinks",
+      "sortOrder": 115,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-communication",
+      "componentType": "line-chart",
+      "title": "固定電話費等が減りネット接続料が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "internet-fee-consumption-expenditure",
+            "label": "インターネット接続料の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "landline-bill-consumption-expenditure",
+            "label": "固定電話通信料の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "other-broadcast-fee-consumption-expenditure",
+            "label": "他の放送受信料の支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "internet-fee-consumption-expenditure",
+        "landline-bill-consumption-expenditure",
+        "other-broadcast-fee-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-beyond-food",
+      "sortOrder": 116,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-leisure",
+      "componentType": "line-chart",
+      "title": "文化施設・遊園地やスポーツ観覧の支出が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "cultural-facility-admission-consumption-expenditure",
+            "label": "文化施設入場料の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "amusement-park-consumption-expenditure",
+            "label": "遊園地入場・乗物代の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "sports-spectating-consumption-expenditure",
+            "label": "スポーツ観覧料の支出額",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "golf-equipment-consumption-expenditure",
+            "label": "ゴルフ用具の支出額",
+            "colorRole": "series-4"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "cultural-facility-admission-consumption-expenditure",
+        "amusement-park-consumption-expenditure",
+        "sports-spectating-consumption-expenditure",
+        "golf-equipment-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-beyond-food",
+      "sortOrder": 117,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
+    },
+    {
+      "componentKey": "household-food-spending-trend-travel",
+      "componentType": "line-chart",
+      "title": "パック旅行費が減少し個別宿泊料が増加",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "domestic-package-tour-consumption-expenditure",
+            "label": "国内パック旅行費の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "overseas-package-tour-consumption-expenditure",
+            "label": "外国パック旅行費の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "accommodation-consumption-expenditure",
+            "label": "宿泊料の支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "domestic-package-tour-consumption-expenditure",
+        "overseas-package-tour-consumption-expenditure",
+        "accommodation-consumption-expenditure"
+      ],
+      "sourceName": "家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "household-food-spending-beyond-food",
+      "sortOrder": 118,
+      "annotation": "図の題は 47 都市（県庁所在市）平均の直近 10 年の増減。この都市の線が同じ向きとは限らない。"
     }
   ],
   "metricGroups": [
@@ -948,7 +1596,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "bread-noodles",
       "title": "パンと即席麺",
       "rankingKeys": [
@@ -977,7 +1625,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "fish-everyday",
       "title": "さけ・さば・さんま・あじ・いわし",
       "rankingKeys": [
@@ -1007,7 +1655,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "shellfish-crustacean",
       "title": "貝・えび・かに・いか・たこ",
       "rankingKeys": [
@@ -1039,7 +1687,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "meat",
       "title": "牛肉・豚肉・その他の生鮮肉",
       "rankingKeys": [
@@ -1080,7 +1728,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "leafy-vegetables",
       "title": "キャベツ・はくさい・レタス・ほうれんそう",
       "rankingKeys": [
@@ -1096,7 +1744,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "root-vegetables",
       "title": "だいこん・にんじん・たまねぎ・じゃがいも・れんこん",
       "rankingKeys": [
@@ -1112,7 +1760,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "fruit-vegetables",
       "title": "トマト・きゅうり・さやまめ・もやし",
       "rankingKeys": [
@@ -1127,7 +1775,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "fruit",
       "title": "果物",
       "rankingKeys": [
@@ -1145,7 +1793,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "seasonings",
       "title": "みそ・しょう油・砂糖・食塩・マーガリン",
       "rankingKeys": [
@@ -1160,7 +1808,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "sweets-processed",
       "title": "菓子・ジャム・加工食品",
       "rankingKeys": [
@@ -1188,7 +1836,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "dining-cuisines",
       "title": "外食の種類",
       "rankingKeys": [
@@ -1205,7 +1853,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "tea-coffee",
       "title": "コーヒー・緑茶・紅茶",
       "rankingKeys": [
@@ -1233,7 +1881,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "alcohol-spending",
       "title": "酒類の支出額",
       "rankingKeys": [
@@ -1262,7 +1910,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "communication",
       "title": "通信・放送",
       "rankingKeys": [
@@ -1278,7 +1926,7 @@
       ]
     },
     {
-      "view": "tiles",
+      "view": "table",
       "key": "leisure",
       "title": "教養娯楽",
       "rankingKeys": [
@@ -1381,7 +2029,15 @@
         "shellfish-crustacean",
         "dashi-seaweed"
       ],
-      "concern": "魚中心の食卓かどうか、どの魚をよく買うか知りたい"
+      "concern": "魚中心の食卓かどうか、どの魚をよく買うか知りたい",
+      "chartKeys": [
+        "household-food-spending-trend-seafood-total",
+        "household-food-spending-trend-fish-everyday",
+        "household-food-spending-trend-fish-everyday-2",
+        "household-food-spending-trend-fish-white",
+        "household-food-spending-trend-shellfish-crustacean",
+        "household-food-spending-trend-dashi-seaweed"
+      ]
     },
     {
       "key": "household-food-spending-meat-dairy",
@@ -1391,7 +2047,10 @@
         "meat",
         "dairy-fats"
       ],
-      "concern": "牛肉と豚肉のどちらをよく買うかなど、肉の好みを知りたい"
+      "concern": "牛肉と豚肉のどちらをよく買うかなど、肉の好みを知りたい",
+      "chartKeys": [
+        "household-food-spending-trend-meat"
+      ]
     },
     {
       "key": "household-food-spending-vegetables-fruit",
@@ -1404,7 +2063,11 @@
         "fruit-vegetables",
         "fruit"
       ],
-      "concern": "野菜や果物をどれだけ食べている地域か知りたい"
+      "concern": "野菜や果物をどれだけ食べている地域か知りたい",
+      "chartKeys": [
+        "household-food-spending-trend-root-vegetables",
+        "household-food-spending-trend-fruit"
+      ]
     },
     {
       "key": "household-food-spending-pantry",
@@ -1414,7 +2077,11 @@
         "seasonings",
         "sweets-processed"
       ],
-      "concern": "味付けやおやつの好みに地域の特徴があるか知りたい"
+      "concern": "味付けやおやつの好みに地域の特徴があるか知りたい",
+      "chartKeys": [
+        "household-food-spending-trend-seasonings",
+        "household-food-spending-trend-sweets-processed"
+      ]
     },
     {
       "key": "household-food-spending-dining-out",
@@ -1424,7 +2091,10 @@
         "dining-out-total",
         "dining-cuisines"
       ],
-      "concern": "外で食べる文化の強い地域か知りたい"
+      "concern": "外で食べる文化の強い地域か知りたい",
+      "chartKeys": [
+        "household-food-spending-trend-dining-cuisines"
+      ]
     },
     {
       "key": "household-food-spending-drinks",
@@ -1437,7 +2107,10 @@
         "alcohol-volume"
       ],
       "chartKeys": [
-        "household-food-spending-alcohol-trend"
+        "household-food-spending-alcohol-trend",
+        "household-food-spending-trend-tea-coffee",
+        "household-food-spending-trend-soft-drinks",
+        "household-food-spending-trend-alcohol-spending"
       ],
       "concern": "飲み物やお酒の好みを知りたい"
     },
@@ -1454,7 +2127,10 @@
         "clothing-spending"
       ],
       "chartKeys": [
-        "md-household-food-spending-faq"
+        "md-household-food-spending-faq",
+        "household-food-spending-trend-communication",
+        "household-food-spending-trend-leisure",
+        "household-food-spending-trend-travel"
       ],
       "concern": "食費以外の暮らしのお金の使い道を知りたい"
     }

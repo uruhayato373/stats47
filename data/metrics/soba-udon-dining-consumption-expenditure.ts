@@ -5,6 +5,7 @@ export const sobaUdonDiningConsumptionExpenditure: MetricConfig = {
   "key": "soba-udon-dining-consumption-expenditure",
   "title": "日本そば・うどん消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間日本そば・うどん消費支出額（外食の食事代）",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に外食の日本そば・うどんに支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

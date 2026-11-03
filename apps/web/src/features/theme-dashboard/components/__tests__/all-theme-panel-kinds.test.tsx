@@ -38,6 +38,11 @@ vi.mock('../SingleMetricCard', () => ({
     <div data-testid="single-card" data-keys={metric.metricKey} />
   ),
 }));
+vi.mock('../MetricTable', () => ({
+  MetricTable: ({ metrics }: { metrics: { metricKey: string }[] }) => (
+    <div data-testid="table-card" data-keys={metrics.map((m) => m.metricKey).join(',')} />
+  ),
+}));
 vi.mock('../ThemeDbChartRenderer', () => ({
   ThemeDbChartRenderer: () => <div />,
 }));
@@ -126,7 +131,9 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
       expect(rendered).toHaveLength(groups.length);
       rendered.forEach((el, i) => {
         const group = groups[i];
-        const expectedKind = group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
+        // view "table" のグループは 1 枚の表 (MetricTable)。件数によらない (2026-11-03)
+        const expectedKind =
+          group.view === 'table' ? 'table-card' : group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
         expect(el.getAttribute('data-testid')).toBe(expectedKind);
         expect(el.getAttribute('data-keys')).toBe(group.rankingKeys.join(','));
       });

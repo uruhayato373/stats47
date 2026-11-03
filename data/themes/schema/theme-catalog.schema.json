@@ -1144,7 +1144,8 @@
         "view": {
           "enum": [
             "sex",
-            "tiles"
+            "tiles",
+            "table"
           ]
         },
         "key": {

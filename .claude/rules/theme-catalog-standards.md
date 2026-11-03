@@ -87,6 +87,8 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 | 全国とどれだけ違うか | 県の値の横に全国の値 | 公式の全国の系列 (`app/japan/<key>/series.json`) がある指標で自動 (`MetricStatTile` の補足) |
 | 増えたか減ったか | 折れ線 (県 + 全国の破線) | 2 年以上ある指標の `metricGroups` (1 枚 3 指標・単位 2 種まで) → `MetricSwitcherPanel` |
 | 品目ごとに いくつか・増えたか (並べて一度に見る) | 指標ごとの数値タイル + 小さな推移を格子に並べる | `metricGroups[].view: "tiles"` → 指標ごとに `SingleMetricCard` (切り替えのチャートを使わない。2026-11-03 試行: household-food-spending) |
+| 品目が多い (5 件以上) | この地域の 1 行ずつの表 (値・全国順位・全国・全国との差) | `metricGroups[].view: "table"` → `MetricTable` (推移は取りに行かない。全国の値がどの行にも無ければ全国の列を出さない) |
+| 長く続く増減が論点 (例: 緑茶が減り炭酸飲料が増えた) | 章の折れ線 (2〜4 本・同じ単位) | 章の `charts` の `line-chart`。入れる指標は 10 年以上の値があり直近 10 年で ±20% 以上動いたものだけ (機械で判定)。題が言う増減は 47 都市 (県) 平均の傾向なので、注記に「この地域の線が同じ向きとは限らない」と書く |
 | 男女でどう違うか | 男女の色で重ねる | `metricGroups[].view: "sex"` (同じ単位の [男, 女]) |
 | 何が多いか (内訳) | 構成比 | 同じ単位の部分を `composition-chart` (値のタイルは同じ章の `metricGroups`) |
 
@@ -109,6 +111,11 @@ ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
 - **章の答えの文** (2026-11-03 試行)。`view: "tiles"` のグループを持つ章は、見出しの下にデータから決まった手順で作る 1〜2 文を出す
   (`features/theme-dashboard/lib/section-answer.ts`。県のページ = 先頭の指標の値・年・順位と全国との差 + 章の中で全国 5 位以内の指標、
   全国のページ = 最新の値と全国の系列の最初の年からの増減)。モデルの書いた文は使わない。順位に「多い・少ない」の向きの言葉を付けない
+- **見せ方の相談** (2026-11-03): グループごとの見せ方 (tiles / table) と時系列の図の組は、各指標の期間と直近 10 年の増減の事実
+  (R2 の全年度の値から集計) をテーマの NotebookLM ノートに渡して案を出させ、上の機械の基準 (件数・年数・増減幅・単位) で直してから書く。
+  ノートが付けた図の題の増減は、実データの増減と突き合わせてから使う。ノートが書く背景 (原因の説明) はページに出さない
+- 図に出す指標 (`charts[].relatedRankingKeys`) は指標の定義文 (`description`) が必須 (`theme-metric-description-regression`)。
+  無い指標は定義文を書いてから図に入れる (外して検査を通さない)
 - 論点の切り口 (読者の問い・よく使われる図・代表的な指標) は、テーマごとの NotebookLM ノートに Web の Deep Research
   (`notebooklm source add-research "<問い>" --mode deep --import-all`) でソースを集めて聞く。47 都道府県の比較が主題の切り口
   (首位争い・東西の地図・相関) はランキングのページに任せ、テーマには「その地域の答え」になる切り口だけを章にする

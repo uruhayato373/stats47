@@ -10,7 +10,7 @@ import { type RefObject, useCallback, useEffect, useRef, useState } from "react"
 import { useD3Tooltip } from "@stats47/visualization";
 import { scaleLinear } from "d3-scale";
 import { pointer, select } from "d3-selection";
-import { line } from "d3-shape";
+import { curveMonotoneX, line } from "d3-shape";
 
 export interface ChartPoint {
   year: number;
@@ -203,7 +203,8 @@ export function MiniLineChart({
     const yScale = scaleLinear()
       .domain([minY, maxY])
       .range([layout.plotBottom, layout.padTop]);
-    const lineFn = line<ChartPoint>((_, i) => xScale(i), (d) => yScale(d.value));
+    // 点を越えない曲線 (年と年の間に実際より高い山・低い谷を描かない。2026-11-03)
+    const lineFn = line<ChartPoint>((_, i) => xScale(i), (d) => yScale(d.value)).curve(curveMonotoneX);
 
     const svg = select(svgRef.current);
     svg.selectAll("*").remove();

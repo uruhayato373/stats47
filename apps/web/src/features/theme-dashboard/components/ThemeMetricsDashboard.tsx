@@ -33,6 +33,7 @@ import {
   type SingleMetricGroup,
 } from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
+import { MetricTable } from './MetricTable';
 import { SingleMetricCard } from './SingleMetricCard';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
@@ -329,12 +330,22 @@ export function ThemeMetricsDashboard({
   type Panel = (typeof panels)[number];
   /** 固定年比較と複数指標切替は全幅、1 指標カードはコンパクト (複数並ぶときだけ 2 列) */
   const isCompact = (panel: Panel) =>
-    isSingleMetricGroup(panel.metrics);
+    panel.view !== 'table' && isSingleMetricGroup(panel.metrics);
   /**
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
-  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => isSingleMetricGroup(panel.metrics) ? (
+  const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.view === 'table' ? (
+    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)
+    <MetricTable
+      key={panel.key}
+      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
+      title={panel.title === sectionTitle ? undefined : panel.title}
+      metrics={panel.metrics}
+      tabLabels={tabLabels}
+      selectedPrefectureCode={selectedPrefectureCode}
+    />
+  ) : isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
       key={panel.key}
       id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
@@ -535,8 +546,8 @@ export function ThemeMetricsDashboard({
           (keys) => panel.metrics.length > 0 && panel.metrics.every((metric) => keys.has(metric.metricKey))
         )
     );
-    // 章の問いへの答えの文 (データから決まった手順で作る)。まずは数値タイルの見せ方 (view "tiles") の章だけに出す (2026-11-03 試行)
-    const answer = panels.some((panel) => panel.view === 'tiles')
+    // 章の問いへの答えの文 (データから決まった手順で作る)。まずは数値タイル・表の見せ方 (view "tiles" / "table") の章だけに出す (2026-11-03 試行)
+    const answer = panels.some((panel) => panel.view === 'tiles' || panel.view === 'table')
       ? buildSectionAnswer({
           metrics: panels.flatMap((panel) => panel.metrics),
           labels: tabLabels,
@@ -553,8 +564,16 @@ export function ThemeMetricsDashboard({
       className="scroll-mt-24"
     >
       {/* 章の説明は見出しの下に文章で置かず、右端のアイコンから開く Sheet に入れる (2026-11-01 オーナー決定) */}
+      {/* 問いの見出しと答えの文を 1 つのセルにまとめる (答えは本文の色。2026-11-03) */}
       <SectionHeader
         title={chapter.title}
+        description={
+          answer ? (
+            <span className="mt-1 block leading-6 text-foreground" data-section-answer>
+              {answer}
+            </span>
+          ) : undefined
+        }
         action={
           action || chapter.description ? (
             <span className="flex items-center gap-1">
@@ -570,11 +589,6 @@ export function ThemeMetricsDashboard({
           ) : undefined
         }
       />
-      {answer && (
-        <p className="text-sm leading-6 text-foreground" data-section-answer>
-          {answer}
-        </p>
-      )}
       {renderPanelRuns(panels, (panel) => {
         if (mergedChartsOf.has(panel.key)) return false;
         const coveredKeys = new Set(

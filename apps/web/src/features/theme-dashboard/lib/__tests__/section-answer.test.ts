@@ -44,6 +44,20 @@ describe('buildSectionAnswer', () => {
     expect(answer).not.toContain('米');
   });
 
+  it('全国順位が最下位から 5 位以内の指標を下位として挙げ、全国の系列があれば全国の動きを書く', () => {
+    const answer = buildSectionAnswer({
+      metrics: [
+        kpi({ officialNationalSeries: [{ year: 2008, value: 900000 }, { year: 2025, value: 1138736 }] }),
+        kpi({ metricKey: 'miso', title: 'みそ消費量', rank: 43 }),
+      ],
+      labels: {},
+      areaName: '兵庫県',
+      isPrefecture: true,
+    });
+    expect(answer).toContain('下位なのはみそ消費量（43位）。');
+    expect(answer).toContain('全国の食料費は2008年（900,000円）から27%増えた。');
+  });
+
   it('全国との差が 1% 未満なら多い・少ないと言わない', () => {
     const answer = buildSectionAnswer({
       metrics: [kpi({ value: 1000, nationalValue: 1005 })],

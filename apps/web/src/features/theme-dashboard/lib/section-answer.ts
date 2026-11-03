@@ -4,8 +4,10 @@ import { formatMetricValue, type MetricKpi } from '../components/metric-kpi';
 
 /** 全国との差がこの割合未満なら「ほぼ同じ」と書く (丸めた値の差を多い・少ないと言わない) */
 const SAME_AS_NATIONAL_RATIO = 0.01;
-/** この順位以内の指標を章の答えで「上位」として挙げる */
+/** この順位以内の指標を章の答えで「上位」として挙げる (下位は最下位からこの数以内) */
 const TOP_RANK_TO_MENTION = 5;
+/** 上位・下位として挙げる指標の数 */
+const MAX_ITEMS_TO_MENTION = 2;
 
 interface SectionAnswerInput {
   /** 章に並ぶ指標 (表示順) */
@@ -26,6 +28,24 @@ function valueText(metric: MetricKpi, value: number): string {
 function ratioText(ratio: number, more: string, less: string): string {
   const percent = Math.round(Math.abs(ratio) * 100);
   return `${percent}%${ratio > 0 ? more : less}`;
+}
+
+/** 全国の系列の最初の年から最新の年までの増減 (2 年以上あるときだけ) */
+function nationalTrendText(metric: MetricKpi, latest: number, prefix: string): string | null {
+  const series = metric.officialNationalSeries ?? [];
+  const first = series[0];
+  if (!first || first.value === 0 || series.length < 2) return null;
+  const ratio = latest / first.value - 1;
+  return Math.abs(ratio) < SAME_AS_NATIONAL_RATIO
+    ? `${prefix}${first.year}年（${valueText(metric, first.value)}）とほぼ同じ。`
+    : `${prefix}${first.year}年（${valueText(metric, first.value)}）から${ratioText(ratio, '増えた', '減った')}。`;
+}
+
+function rankedLabels(metrics: readonly MetricKpi[], labels: Readonly<Record<string, string>>): string {
+  return metrics
+    .slice(0, MAX_ITEMS_TO_MENTION)
+    .map((metric) => `${labels[metric.metricKey] ?? metric.title}（${metric.rank}位）`)
+    .join('・');
 }
 
 /**
@@ -51,24 +71,22 @@ export function buildSectionAnswer({ metrics, labels, areaName, isPrefecture }: 
           : `全国（${valueText(lead, lead.nationalValue)}）より${ratioText(ratio, '多い', '少ない')}。`
       );
     }
-    const top = metrics
-      .filter((metric) => metric !== lead && metric.rank !== null && metric.rank <= TOP_RANK_TO_MENTION)
-      .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))
-      .slice(0, 2)
-      .map((metric) => `${labels[metric.metricKey] ?? metric.title}（${metric.rank}位）`);
-    if (top.length > 0) sentences.push(`この章で全国順位が上位なのは${top.join('・')}。`);
+    const others = metrics.filter((metric) => metric !== lead && metric.rank !== null);
+    const top = others
+      .filter((metric) => (metric.rank ?? 0) <= TOP_RANK_TO_MENTION)
+      .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0));
+    const bottom = others
+      .filter((metric) => (metric.rank ?? 0) > metric.total - TOP_RANK_TO_MENTION)
+      .sort((a, b) => (b.rank ?? 0) - (a.rank ?? 0));
+    if (top.length > 0) sentences.push(`この章で全国順位が上位なのは${rankedLabels(top, labels)}。`);
+    if (bottom.length > 0) sentences.push(`下位なのは${rankedLabels(bottom, labels)}。`);
+    // 全国の動き (県の系列はタイルが取りに行くので、ここでは手元にある全国の系列だけを使う)
+    const trend = lead.nationalValue !== undefined ? nationalTrendText(lead, lead.nationalValue, `全国の${label}は`) : null;
+    if (trend) sentences.push(trend);
     return sentences.join('');
   }
 
-  const series = lead.officialNationalSeries ?? [];
-  const first = series[0];
-  if (first && first.value !== 0 && series.length >= 2) {
-    const ratio = lead.value / first.value - 1;
-    sentences.push(
-      Math.abs(ratio) < SAME_AS_NATIONAL_RATIO
-        ? `${first.year}年（${valueText(lead, first.value)}）とほぼ同じ。`
-        : `${first.year}年（${valueText(lead, first.value)}）から${ratioText(ratio, '増えた', '減った')}。`
-    );
-  }
+  const trend = nationalTrendText(lead, lead.value, '');
+  if (trend) sentences.push(trend);
   return sentences.join('');
 }

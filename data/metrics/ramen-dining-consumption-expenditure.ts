@@ -5,6 +5,7 @@ export const ramenDiningConsumptionExpenditure: MetricConfig = {
   "key": "ramen-dining-consumption-expenditure",
   "title": "中華そば消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間中華そば消費支出額",
+  "description": "家計調査で、都道府県庁所在市（東京都は区部）の二人以上の世帯が1年間に外食の中華そばに支出した1世帯当たりの金額。県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {
