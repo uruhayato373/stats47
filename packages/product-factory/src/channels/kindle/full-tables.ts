@@ -10,6 +10,7 @@
 import { METRICS_REGISTRY, SITE } from "@stats47/data-configs";
 
 import { fetchRankingValues } from "../../data/load-ranking-values";
+import { productIndicatorLabel } from "../../data/product-indicator-label";
 import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
@@ -83,7 +84,8 @@ export function tableFromFigureData(data: unknown, source: unknown): FullTable |
     .map((row) => ({ name: String(row.areaName), value: Number(row.value) }));
   const year = String(d.year ?? s.year ?? "");
   const label = String(d.label ?? s.label ?? d.title ?? "");
-  if (rows.length < 47 || new Set(rows.map((row) => row.name)).size !== rows.length || !year || !label) return null;
+  // 年が 1 つの 4 桁でない表 (2 時点の差など) は見出しの年を正しく書けないので表にしない
+  if (rows.length < 47 || new Set(rows.map((row) => row.name)).size !== rows.length || !/^\d{4}$/.test(year) || !label) return null;
   return {
     label,
     year,
@@ -138,6 +140,23 @@ export async function fullTablesForArticle(
     }
     if (!table) continue;
     if (chapterText.includes(`${table.year}年度`)) table = { ...table, yearSuffix: "年度" };
+    // 指標が分かるときは指標の定義の正式名を使う。ブログの図のデータの label は誤ることがある
+    // (2026-11-03: 従業者 1 人当たりの図の label が「製造品出荷額等」のままで、表の題を誤った)
+    const cfg = table.rankingKey ? (METRICS_REGISTRY as unknown as Record<string, Record<string, unknown> | undefined>)[table.rankingKey] : undefined;
+    // 副題は短いとき (「従業者1人当たり」など 12 字以内) だけ付ける。長い説明文の副題を付けると見出しがスマホ幅で
+    // 3〜4 行になり、改ページで取り残される (2026-11-03 K-S1-01)。家計調査の対象は表の下の注記に書く
+    if (cfg) {
+      const sub = typeof cfg.subtitle === "string" ? cfg.subtitle : "";
+      const label = sub && sub.length > 12 && typeof cfg.title === "string" ? cfg.title : productIndicatorLabel(table.rankingKey as string, cfg);
+      table = { ...table, label };
+    }
+    // 指標名が 20 字を超えるときは、最後の括弧書き (「（家計調査結果）」など) を外す (見出しが長いとスマホ幅で取り残される)
+    if (table.label.length > 20) table = { ...table, label: table.label.replace(/（[^（）]*）$/, "") };
+    // 同じ年・同じ県の並びの表は、単位や丸めが違っても 1 つだけ載せる (百万円と兆円換算の重複を防ぐ)
+    // 上位 10 県の並びで比べる (丸めた表は下位で同値が出て並びが揺れるため)
+    const order = `${table.year}|${ranked(table.rows).slice(0, 10).map((row) => row.name).join(",")}`;
+    if (seen.has(order)) continue;
+    seen.add(order);
     const key = `${table.rankingKey ?? table.label}|${table.year}|${table.unit}`;
     if (seen.has(key)) continue;
     seen.add(key);

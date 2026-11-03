@@ -3,10 +3,11 @@ import { correctBookFigure, KINDLE_FIGURE_CORRECTIONS } from "../figure-correcti
 
 describe("figure corrections (SVG text only)", () => {
   it("rewrites every occurrence of the label and leaves numbers untouched", () => {
-    const svg = '<svg><title>2023年</title><text>2023年</text><text>3.29</text></svg>';
+    // 2026-11-03 の図の描き直しで題が「2023年 · 単位：件」の形になった
+    const svg = '<svg><title>2023年 · 単位：件</title><text>2023年 · 単位：件</text><text>3.29</text></svg>';
     const out = correctBookFigure("crime-rate-regional-gap", "theft-map", svg);
-    expect(out).toContain("<title>2023年度</title>");
-    expect(out).toContain("<text>2023年度</text>");
+    expect(out).toContain("<title>2023年度 · 単位：件</title>");
+    expect(out).toContain("<text>2023年度 · 単位：件</text>");
     expect(out).toContain("<text>3.29</text>");
   });
   it("stops the edition when the R2 figure no longer contains the source text", () => {

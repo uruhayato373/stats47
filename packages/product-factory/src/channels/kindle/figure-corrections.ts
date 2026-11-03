@@ -21,17 +21,11 @@ const NENDO = (y: string, before: string) => ({ before, after: before.replace(`$
 /** key は `<slug>/<figure name>` (article.md の `![..](data/<name>.svg)`)。 */
 export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly EditorialCorrection[]>> = {
   // ── K-S1-06 自治体財政 (F-003-16: 地方財政状況調査系はすべて年度。F-004-07: 「全国推移」は 47 県単純平均) ──
-  "fiscal-self-reliance-gap/current-balance-ratio-prefecture-rankings": [{ ...NENDO("2022", ">経常収支比率 都道府県ランキング（2022年）<"), reason: "[K-S1-06 F-003-16] 年度" }],
-  "fiscal-self-reliance-gap/real-public-debt-service-ratio-prefecture-rankings": [{ ...NENDO("2022", ">実質公債費比率 都道府県ランキング（2022年）<"), reason: "[K-S1-06 F-003-16] 年度" }],
-  "fiscal-health-50years-trend/fiscal-ranking": [{ ...NENDO("2022", ">　2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
-  "fiscal-health-50years-trend/fiscal-trend": [
-    { before: ">財政力指数 全国推移<", after: ">財政力指数 47都道府県単純平均の推移<", reason: "[K-S1-06 F-004-07/F-009-02] 全国集計値ではなく 47 県の単純平均 (R2 values.json で 1991 0.508 / 2008 0.521 / 2022 0.494 を確認)" },
-  ],
+  // 2026-11-03: 経常収支比率・実質公債費比率・地方債・財政力の推移の図は描き直しで年度・単純平均になったので校訂を外した (KINDLE-S1-BLOG-REWRITE-RECONCILE-01)
+  "fiscal-health-50years-trend/fiscal-ranking": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 F-003-16] 年度 (2026-11-03 描き直しで置換元の全角空白が消えたので合わせた)" }],
   "local-tax-revenue-gap/local-tax-ratio-ranking": [{ ...NENDO("2022", ">　2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
   "local-tax-revenue-gap/allocation-tax-map": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 F-003-16] 年度 (title と表示の 2 か所)" }],
   "local-tax-revenue-gap/national-treasury-disbursement-ratio-pref-finance-prefecture-rankings": [{ ...NENDO("2022", ">国庫支出金割合 都道府県ランキング（2022年）<"), reason: "[K-S1-06 F-003-16] 年度" }],
-  "local-government-debt-burden/local-debt-ratio-ranking": [{ ...NENDO("2022", ">　2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
-  "local-government-debt-burden/local-debt-map": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
   "future-burden-ratio-extreme-gap/future-burden-ratio-prefecture-rankings": [{ ...NENDO("2022", ">　2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
   "future-burden-ratio-extreme-gap/future-burden-ratio-tile-grid": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
   // ── K-S1-08 エネルギー (F-05-13: 9 指標すべて yearFormat=fiscal) ──
@@ -39,13 +33,13 @@ export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly Editori
   // solar-power-housing-map は外した (2026-09-27): 原典の住宅・土地統計調査は 10 月 1 日時点で公式表記も「令和5年住宅・土地統計調査」。
   // config を yearFormat: calendar に直したので、図の「2023年」が正しく、年度へ書き換えると誤りになる。
   "electricity-demand-gap/electricity-demand-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],
-  "energy-infrastructure-gas-electricity/gas-ratio-map": [{ ...NENDO("2016", ">2016年<"), reason: "[K-S1-08 F-05-13] 年度" }],
+  "energy-infrastructure-gas-electricity/gas-ratio-map": [{ ...NENDO("2016", ">2016年 · 単位：%<"), reason: "[K-S1-08 F-05-13] 年度 (2026-11-03 図の描き直しで題の形が変わったので合わせた)" }],
   "gasoline-car-society-map/gasoline-map": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],
   "gasoline-car-society-map/gasoline-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],
   // ── K-S1-10 安全と環境 (F-B-01: 社会・人口統計体系 13 指標は年度。N20: 保険散布図の題名と縦軸) ──
-  "crime-rate-regional-gap/theft-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
-  "crime-rate-regional-gap/theft-map": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
-  "crime-rate-regional-gap/arrest-rate-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
+  "crime-rate-regional-gap/theft-ranking": [{ ...NENDO("2023", ">2023年 · 単位：件 · 範囲：1.68–6.65<"), reason: "[K-S1-10 F-B-01] 年度 (2026-11-03 図の描き直しで題の形が変わったので合わせた)" }],
+  "crime-rate-regional-gap/theft-map": [{ ...NENDO("2023", ">2023年 · 単位：件<"), reason: "[K-S1-10 F-B-01] 年度 (2026-11-03 図の描き直しで題の形が変わったので合わせた)" }],
+  "crime-rate-regional-gap/arrest-rate-ranking": [{ ...NENDO("2023", ">2023年 · 単位：% · 範囲：26.7–72.7<"), reason: "[K-S1-10 F-B-01] 年度 (2026-11-03 図の描き直しで題の形が変わったので合わせた)" }],
   "workplace-accident-regional-map/frequency-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
   "workplace-accident-regional-map/severity-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
   "workplace-accident-regional-map/freq-severity-scatter": [{ ...NENDO("2023", ">労災の頻度 × 重さ（47都道府県・2023年）<"), reason: "[K-S1-10 F-B-01] 年度" }],
