@@ -73,7 +73,8 @@ env:
 jobs:
   regenerate:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # R2 からの取り込みに約 30 分、全 777 記事の描き直しに 30 分超かかる (2026-11-03 実測で 45 分に収まらなかった)
+    timeout-minutes: 120
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

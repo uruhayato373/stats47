@@ -856,7 +856,16 @@ function withMetricColors(parsed: any, type: string, visualization: ReturnType<t
 
 // Default mode: generate SVGs
 const chartNames: string[] = [];
+const failedCharts: string[] = [];
+// 負の値を含む棒 (人口の転入超過など) は 1 列の形でしか描けない (svg-builder の bar-chart)。横長・スマホ・Instagram の
+// 形は作らず、記事の画像部品は -mobile.svg が無ければ元の図を出す
+const isSignedBar = (parsed: unknown) => {
+  const rows = Array.isArray(parsed) ? parsed : ((parsed as { data?: unknown[] } | null)?.data ?? []);
+  return observedOnly(rows as { value?: unknown }[]).some((row) => typeof row.value === 'number' && row.value < 0);
+};
 for (const { file, type, parsed } of jsonMeta) {
+ // 1 つの図が描けなくても記事の残りの図は作り直す。描けない図は今の SVG を残して警告する
+ try {
   const baseName = file.replace(/\.json$/, '');
   const svgPath = path.join(DATA_DIR, `${baseName}.svg`);
   let svg;
@@ -866,7 +875,7 @@ for (const { file, type, parsed } of jsonMeta) {
   if (typeSvg) {
     svg = typeSvg;
   } else if (type === 'bar') {
-    svg = genBarChartSvg(colored);
+    svg = genBarChartSvg(colored, isSignedBar(parsed) ? 'single' : undefined);
   } else if (type === 'tile-grid') {
     svg = genTileGridMapSvg(colored);
   } else if (type === 'line') {
@@ -913,7 +922,7 @@ for (const { file, type, parsed } of jsonMeta) {
   // - <name>.svg: PC / X 用の横長 columns
   // - <name>-mobile.svg: ブログ mobile / note 本文用の可読性優先レイアウト
   // - <name>-ig.svg: Instagram 専用 4:5。記事 markdown には埋め込まない
-  if (type === 'bar' && !typeSvg) {
+  if (type === 'bar' && !typeSvg && !isSignedBar(parsed)) {
     const mobileSvg = genBarChartSvg(parsed, 'mobile');
     fs.writeFileSync(
       path.join(DATA_DIR, `${baseName}-mobile.svg`),
@@ -952,7 +961,12 @@ for (const { file, type, parsed } of jsonMeta) {
       );
     }
   }
+ } catch (error) {
+  warn(`${file}: 図を描けない (${error instanceof Error ? error.message : String(error)})。今の SVG を残す`);
+  failedCharts.push(file);
+ }
 }
+if (failedCharts.length) warn(`描けなかった図 ${failedCharts.length} 件: ${failedCharts.join(', ')}`);
 
 // Phase 3: placeholder replacement
 const replaced = replacePlaceholders(chartNames);
