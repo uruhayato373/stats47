@@ -1,10 +1,9 @@
-
-import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from '@stats47/data-configs/unit';
+import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 
-import { RankBadge } from '@/components/atoms/RankBadge';
 import Link from '@/components/atoms/SiteLink';
+import { ValueTable } from '@/components/surface';
 
 import type { HighlightTone } from '@stats47/area-profile';
 
@@ -22,69 +21,59 @@ export interface AreaHighlightListItem {
   tone: HighlightTone;
   /** 家計調査など、値の範囲の注記 (例: 県庁所在市の値) */
   note?: string;
-  /** 年の後ろに続ける補足 (例: 全国の順位) */
+  /** 全国の順位 (例: 「全国 1位/1,015」)。市区町村ページだけが渡す */
   detail?: string;
 }
 
 interface AreaHighlightListProps {
   items: readonly AreaHighlightListItem[];
-  /** 「全国」「県内」など順位の母集団 (読み上げ用) */
+  /** 順位の列の見出し (「全国順位」「県内順位」など) */
   rankScope: string;
-  /**
-   * 本文の全幅に置くときの段数の上限。コンテナ幅で 2 段 (@md)・3 段 (@lg) まで増やす。
-   * 半幅のカードの中 (県ページの「特徴」) は既定の 1 段。
-   */
-  columns?: 1 | 3;
 }
 
 /**
- * 本文の全幅で 3 段まで並べるとき、最後の段の空きが目立たない段数を件数から選ぶ。
- * 3 で割り切れる件数は 3 段、2 で割り切れて 3 で割り切れない件数 (4・8・10 件) は 2 段にする。
- * どちらでも割り切れない件数 (5・7 件) は 3 段 (空きが 1 マスで済む)。
- */
-function prefersThreeColumns(count: number): boolean {
-  return count % 3 === 0 || count % 2 !== 0;
-}
-
-/**
- * 「順位 + 指標 + 値」の一覧。県ページの「特徴」カードと市区町村ページで共用する唯一の部品
- * (AREA-HIGHLIGHTS-SSOT-01 step 3)。順位チップは RankBadge だけで描く。
+ * 「指標・値・順位」の表。県ページの「特徴」カードと市区町村ページで共用する唯一の部品
+ * (AREA-HIGHLIGHTS-SSOT-01 step 3)。2026-11-03 に色付きの順位チップのリストから共通の静的な表 (ValueTable) にした。
+ * 市区町村ページは、すぐ下の「分野別のデータ」の表と同じ列 (指標・値・県内・全国) になる。
  * クリックは共通の NavClickTracker が `data-nav-surface="area_highlights"` で nav_click として数える。
  */
-export function AreaHighlightList({ items, rankScope, columns = 1 }: AreaHighlightListProps) {
+export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) {
   if (items.length === 0) return null;
-  const list = (
-    <ol
-      className={cn(
-        // 行の間隔 (12px) は、見出しの下線から 1 行目までの間隔 (呼び出し側の pt-3) と揃える
-        "grid grid-cols-1 gap-y-3",
-        columns === 3 && "gap-x-6 @md:grid-cols-2",
-        columns === 3 && (prefersThreeColumns(items.length) ? "@lg:grid-cols-3" : "@lg:grid-cols-2"),
-      )}
-      data-nav-surface="area_highlights"
-    >
-      {items.map((item) => (
-        <li key={item.rankingKey} className="flex items-baseline gap-2">
-          <RankBadge rank={item.rank} tone={item.tone} />
-          <span className="sr-only">{rankScope}</span>
-          <div className="min-w-0 flex-1">
-            <Link
-              href={item.href ?? hrefFor("ranking", { rankingKey: item.rankingKey })}
-              data-nav-label={item.rankingKey}
-              className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
-            >
-              {item.label}
-            </Link>
-            <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
-              {item.value.toLocaleString('ja-JP')}
-              {formatUnitForDisplay(item.unit)}（{item.year}）
-              {item.detail ? ` ・ ${item.detail}` : ''}
-              {item.note ? ` ※${item.note}` : ''}
-            </p>
-          </div>
-        </li>
-      ))}
-    </ol>
+  const hasNational = items.some((item) => item.detail);
+  return (
+    <div data-nav-surface="area_highlights">
+      <ValueTable
+        ariaLabel={rankScope}
+        columns={[
+          { key: 'metric', header: '指標', rowHeader: true, className: 'min-w-40' },
+          { key: 'value', header: '値' },
+          { key: 'rank', header: rankScope },
+          ...(hasNational ? [{ key: 'national', header: '全国' }] : []),
+        ]}
+        rows={items.map((item) => ({
+          key: item.rankingKey,
+          cells: [
+            <>
+              <Link
+                href={item.href ?? hrefFor('ranking', { rankingKey: item.rankingKey })}
+                data-nav-label={item.rankingKey}
+              >
+                {item.label}
+              </Link>
+              <small className="block">
+                {item.year}
+                {item.note ? ` ※${item.note}` : ''}
+              </small>
+            </>,
+            <>
+              {formatValueWithPrecision(item.value, resolveValuePrecision([item.value]))}
+              <small className="ml-0.5">{formatUnitForDisplay(item.unit)}</small>
+            </>,
+            `${item.rank}位`,
+            ...(hasNational ? [item.detail?.replace(/^全国\s*/, '') ?? '—'] : []),
+          ],
+        }))}
+      />
+    </div>
   );
-  return columns === 1 ? list : <div className="@container">{list}</div>;
 }
