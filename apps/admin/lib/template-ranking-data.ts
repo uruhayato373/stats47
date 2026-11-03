@@ -9,6 +9,8 @@ import {
 import { niceTicks } from '../../../packages/svg-builder/src/shared/axis';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 import type { TileValueDisplay } from '../../remotion/src/features/data-cards/tile-scale';
+import { formatChartValue, resolveChartDisplayScale } from '../../../packages/data-configs/src/unit/chart-display-scale';
+import { formatUnitForDisplay } from '../../../packages/data-configs/src/unit/unit-display';
 
 /** A fixed real-data example; article associations are managed as usage, not input. */
 export const RANKING_SAMPLE_METRIC = maximumTemperature;
@@ -47,7 +49,7 @@ export function rankingSampleLabels() {
   const factor = metric.display?.conversionFactor ?? 1;
   return {
     title: metric.title + 'ランキング', subtitle: metric.subtitle ?? '',
-    unit: metric.display?.displayUnit ?? metric.unit,
+    unit: formatUnitForDisplay(metric.display?.displayUnit ?? metric.unit),
     source: 'displayName' in metric.source ? metric.source.displayName ?? '' : '',
     formatValue: (value: number) => format.format(value * factor),
   };
@@ -103,12 +105,31 @@ export function datasetFormatter(values: number[]) {
   return (value: number) => formatValueWithPrecision(value, precision);
 }
 
+/**
+ * The unit a chart writes and how its values read: large quantities in 万・億・兆 with one unit for the
+ * whole chart (resolveChartDisplayScale, the unit canon), otherwise the stored unit with the metric's
+ * decimal places or the dataset's precision. Values stay as stored; only their text changes.
+ */
+export function chartValueLabels(unit: string, values: number[], decimalPlaces?: number) {
+  const scale = resolveChartDisplayScale(unit, values);
+  if (scale.reason === 'rescaled') {
+    return {
+      unit: scale.unit,
+      display: { conversionFactor: scale.factor, decimalPlaces: scale.decimals ?? undefined } as TileValueDisplay,
+      formatValue: (value: number) => formatChartValue(value, scale),
+    };
+  }
+  if (decimalPlaces === undefined) return { unit: scale.unit, display: undefined, formatValue: datasetFormatter(values) };
+  return { unit: scale.unit, display: { decimalPlaces } as TileValueDisplay, formatValue: (value: number) => formatChartValue(value, { factor: 1, decimals: decimalPlaces }) };
+}
+
 /** The fixed real-data sample as a chart, optionally with another bar/colour policy. */
 export function sampleRankingChart(raw: { data: RankingChartRow[] }, presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization): RankingChart {
   const label = rankingSampleLabels();
+  const rows = assertRankingRows(raw.data);
+  const values = chartValueLabels(RANKING_SAMPLE_METRIC.unit, rows.map((r) => r.value), RANKING_SAMPLE_METRIC.display?.decimalPlaces);
   return {
-    title: RANKING_SAMPLE_METRIC.title, yearLabel: `${RANKING_SAMPLE_YEAR}年`, unit: label.unit, source: label.source,
-    note: label.subtitle || undefined, presentation, display: RANKING_SAMPLE_METRIC.display,
-    rows: assertRankingRows(raw.data), formatValue: label.formatValue,
+    title: RANKING_SAMPLE_METRIC.title, yearLabel: `${RANKING_SAMPLE_YEAR}年`, source: label.source,
+    note: label.subtitle || undefined, presentation, rows, ...values,
   };
 }

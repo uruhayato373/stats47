@@ -26,7 +26,7 @@ describe('shared minimum chart-copy policy', () => {
       data: Array.from({ length: 47 }, (_, i) => ({ rank: i + 1, area_code: String(i + 1).padStart(2, '0') + '000', area_name: '県' + i, year: '2024', value: 36 - i / 10 })),
     });
     expect(() => assertMinimalChartCopy(svg)).not.toThrow();
-    for (const required of ['2024年', '℃', '日最高気温の月平均の最高値', '出典：']) expect(svg).toContain(required);
+    for (const required of ['2024年', '°C', '日最高気温の月平均の最高値', '出典：']) expect(svg).toContain(required);
     expect(svg.match(/出典：/g)).toHaveLength(1);
   });
 });

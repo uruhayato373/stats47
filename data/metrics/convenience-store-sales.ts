@@ -31,7 +31,7 @@ export const convenienceStoreSales: MetricConfig = {
     domain: { mode: "zero" },
   },
   "display": {
-    "conversionFactor": 0.0001,
+    "conversionFactor": 0.01,
     "decimalPlaces": 0,
     "displayUnit": "億円",
   },

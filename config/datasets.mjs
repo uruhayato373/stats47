@@ -234,6 +234,8 @@ export const DATASETS = [
   d("metrics.sources", `${P.METRIC_SOURCES_DIR}/{name}.ts`, "config", "data", "data", "指標の公表資料・抽出レシピの正本"),
   d("metrics.schema", `${P.METRIC_DEFINITIONS_DIR}/schema/{name}.schema.json`, "state", "data", "data", "MetricConfig型から生成する形状契約"),
   d("metrics.index", `${P.METRIC_DEFINITIONS_DIR}/index/{name}.json`, "state", "data", "data", "指標の出典座標と利用先の逆引き索引"),
+  d("metrics.display-units", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.json`, "state", "data", "data", "公開中の都道府県ランキングごとの図の表示単位・倍率・小数桁と最新年の最大・最小 (build-chart-display-units.ts が R2 の値と規則から生成。手で編集しない)", { schema: `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json` }),
+  d("metrics.display-units-schema", `${P.METRIC_DEFINITIONS_DIR}/display-units/ledger.schema.json`, "config", "data", "data", "上の台帳の JSON Schema"),
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "config", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", { schema: "data/themes/schema/theme-catalog.schema.json" }),
   d("content.tags", "data/content/tags.json", "config", "data", "data", "タグの不変ID・表示名・既存URLキー・別名", { schema: "data/content/schema/tags.schema.json" }),
   d("content.routes", "data/content/routes.json", "config", "data", "data", "全公開ページ種別のIDとURLパラメータ契約", { schema: "data/content/schema/routes.schema.json" }),

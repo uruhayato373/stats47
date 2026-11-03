@@ -3,7 +3,7 @@ import path from 'node:path';
 import type { Topology } from 'topojson-specification';
 import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { computeBuzzMapGeo } from '../../remotion/src/features/buzz-map/geo';
-import { mapValueFormatter, renderClassLegend, renderTopThree } from '../../remotion/src/features/data-cards/all47-svg';
+import { renderClassLegend, renderTopThree } from '../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
 import { rankingRows } from './template-ranking-bars';
 import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
@@ -71,7 +71,7 @@ export function renderDistributionMapChart(chart: RankingChart, theme: ChartThem
   const inset = `<line data-okinawa-rule="" x1="${rule.from.x}" y1="${rule.from.y}" x2="${rule.to.x}" y2="${rule.to.y}" stroke="${theme.line}" stroke-width="2"/>
     <text x="${rule.label.x}" y="${rule.label.y}" text-anchor="middle" font-size="24" fill="${theme.muted}">沖縄</text>`;
   const all = rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value }));
-  const format = mapValueFormatter(all.map((r) => r.value));
+  const format = chart.formatValue;
   const topThree = renderTopThree(all, { x: SAMPLE_FRAME.left, ...TOP_THREE, unit: chart.unit, format, theme });
   const legend = renderClassLegend(scale, all.map((r) => r.value), { right: SAMPLE_FRAME.right, bottom: 1250, format: scale.formatBoundary ?? format, theme });
   return sampleFrame({

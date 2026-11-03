@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "図の表示単位の台帳",
+  "description": "data/metrics/display-units/ledger.json の形の契約。npx tsx packages/data-configs/scripts/build-chart-display-units.ts が R2 の最新年の値と規則 (packages/data-configs/src/unit/chart-display-scale.ts) から生成する。手で編集しない。公開中の都道府県ランキングごとに、図に書く単位・倍率・小数桁を持つ。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "source", "summary", "rows"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["values", "rule"],
+      "properties": { "values": { "type": "string" }, "rule": { "type": "string" } }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metrics", "byReason", "rescaled", "unparsedLarge"],
+      "properties": {
+        "metrics": { "type": "integer", "minimum": 0 },
+        "byReason": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "rescaled": { "type": "integer", "minimum": 0 },
+        "unparsedLarge": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "title", "unit", "year", "count", "max", "min", "minNonZeroAbs", "chartUnit", "factor", "decimals", "reason"],
+        "properties": {
+          "key": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "unit": { "type": "string" },
+          "year": { "type": ["string", "null"] },
+          "count": { "type": "integer", "minimum": 0 },
+          "max": { "type": ["number", "null"] },
+          "min": { "type": ["number", "null"] },
+          "minNonZeroAbs": { "type": ["number", "null"] },
+          "chartUnit": { "type": "string" },
+          "factor": { "type": "number", "exclusiveMinimum": 0 },
+          "decimals": { "type": ["integer", "null"], "minimum": 0 },
+          "reason": { "enum": ["rescaled", "small", "not-quantity", "unparsed", "no-values", "fetch-failed"] }
+        }
+      }
+    }
+  }
+}

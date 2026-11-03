@@ -26,7 +26,7 @@ describe('compact tile-map basic form (4:5 images)', () => {
     const svg = await renderRankingTileMap(input);
     const plain = renderAll47TileSvg(
       input.data.map((r) => ({ areaCode: r.area_code, areaName: r.area_name, value: r.value })),
-      { title: '最高気温', year: '2024年', unit: '℃', source: '社会・人口統計体系', note: '日最高気温の月平均の最高値' }
+      { title: '最高気温', year: '2024年', unit: '°C', source: '社会・人口統計体系', note: '日最高気温の月平均の最高値' }
     );
     // Same layout and copy as the shared renderer; only the fills differ (metric scale vs default blue).
     // Legend rows carry each scale's own ranges and counts, so they are checked separately below.

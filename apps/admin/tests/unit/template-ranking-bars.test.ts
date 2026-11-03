@@ -40,7 +40,7 @@ describe('ranking bar basic form', () => {
     expect(lower).not.toBe(color);
     // Ranks are badges, values sit right with their unit; the minimum keeps a visible marker.
     expect(svg).toMatch(/text-anchor="middle"[^>]*>1<\/text>/);
-    expect(svg).toContain('>36.0<tspan font-size="26" dx="4">℃</tspan>');
+    expect(svg).toContain('>36.0<tspan font-size="26" dx="4">°C</tspan>');
     expect(svg).toContain('>31.4<tspan');
     expect(svg).toContain('data-domain-min="31.4"');
     expect(svg).toContain('data-domain-max="36"');

@@ -6,7 +6,7 @@
  */
 import { DEFAULT_SEQUENTIAL_SCHEME, colorSchemeTypeOf, normalizeColorScheme } from '../../../../packages/types/src/color-scheme';
 import { assertMetricPresentation, type MetricPresentation } from '../../../../packages/types/src/metric-presentation';
-import { datasetFormatter, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
+import { chartValueLabels, type RankingChart, type RankingChartRow } from '../../../../apps/admin/lib/template-ranking-data';
 
 export interface ArticleMetric {
   title?: string;
@@ -79,15 +79,13 @@ export function rankingChartFromArticleData(
   return {
     title,
     yearLabel,
-    unit: text(data.unit),
     source: text(data.source),
     note: text(opts.metric?.subtitle) || undefined,
     presentation: presentationOf(data, opts.metric),
-    // Legend boundaries round to the metric's decimal places. Article values are stored values in the
-    // data's own unit, so a unit conversion (e.g. 円 → 万円) is not applied here.
-    display: opts.metric?.display && (opts.metric.display.conversionFactor ?? 1) === 1 && text(opts.metric.unit) === text(data.unit)
-      ? { decimalPlaces: opts.metric.display.decimalPlaces } : undefined,
     rows,
-    formatValue: datasetFormatter(rows.map((r) => r.value)),
+    // Large quantities read in 万・億・兆 (one unit per chart, from the unit canon). Otherwise the
+    // metric's decimal places apply when the article's unit is the metric's own unit.
+    ...chartValueLabels(text(data.unit), rows.map((r) => r.value),
+      text(opts.metric?.unit) === text(data.unit) ? opts.metric?.display?.decimalPlaces : undefined),
   };
 }

@@ -31,6 +31,7 @@ note・X・Instagram と同じ 4:5 の型の画像で描く。** 下の §2〜§
 | 印 | root `<svg>` に `data-image-template` (bar / tile-map) と `data-theme` (light / dark) |
 | 検査 | `lintImageTypeSvg` (1080×1350・data-theme) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査は型の画像を対象外にする |
 | 年 | data JSON の `subtitle` が「2022年度」なら年度で、そうでなければ `year` に「年」を付けて出す |
+| 単位・桁 | 桁の大きい指標は図ごとに 1 つの表示単位 (億円・万人など) で描く。決め方と台帳は `unit-semantics-standards.md` §2.6 |
 
 型の画像の見た目を変えるときは、管理画面の型 (`/ops/image-templates`) で見本を確かめてから変える。ブログ専用の版を作らない。
 

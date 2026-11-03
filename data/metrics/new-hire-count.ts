@@ -29,7 +29,7 @@ export const newHireCount: MetricConfig = {
     domain: { mode: "zero" },
   },
   "display": {
-    "conversionFactor": 0.001,
+    "conversionFactor": 0.1,
     "decimalPlaces": 1,
     "displayUnit": "万人",
   },

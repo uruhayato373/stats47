@@ -7,48 +7,48 @@ export const RANKING_SAMPLE_ASSETS = {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/1a4f5ae51b17a883ded71f488e25051d6ed436dc97c475bc448ec9cf1285d011.png",
-      "sha256": "1a4f5ae51b17a883ded71f488e25051d6ed436dc97c475bc448ec9cf1285d011",
-      "bytes": 136761
+      "key": "media-workspace/images/f47a633328419c749c91ad0f206523f47eac1b22ed5f8806082f763ccf9f30f6.png",
+      "sha256": "f47a633328419c749c91ad0f206523f47eac1b22ed5f8806082f763ccf9f30f6",
+      "bytes": 136835
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/bcd05854b15e1bd7736ed720c104e8ca450215f12034ab7ca771a36bcdfbaa0e.json",
-      "sha256": "bcd05854b15e1bd7736ed720c104e8ca450215f12034ab7ca771a36bcdfbaa0e",
-      "bytes": 202345
+      "key": "media-workspace/inputs/497c37670f1319ce6a189e54331bffc53d55c27708a8b3f9ac02ec0967b4976f.json",
+      "sha256": "497c37670f1319ce6a189e54331bffc53d55c27708a8b3f9ac02ec0967b4976f",
+      "bytes": 203778
     }
   },
   "table": {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/c7c18b6ca97c5ea63fc6b43bf97994a8cefc5e2f8a01be96f494a66942835c51.png",
-      "sha256": "c7c18b6ca97c5ea63fc6b43bf97994a8cefc5e2f8a01be96f494a66942835c51",
-      "bytes": 124332
+      "key": "media-workspace/images/d2a33fc307bfaeaa988094e9ace70a4ae5eaa28b794ebd3c12a9a82663d07f82.png",
+      "sha256": "d2a33fc307bfaeaa988094e9ace70a4ae5eaa28b794ebd3c12a9a82663d07f82",
+      "bytes": 124337
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/d66cb2d391461afc817678cecac610939e2263dea1587269419d505bcacfefa3.json",
-      "sha256": "d66cb2d391461afc817678cecac610939e2263dea1587269419d505bcacfefa3",
-      "bytes": 202346
+      "key": "media-workspace/inputs/3932b95767b0c1a01030c3c8ad0de9c7ef0bed502c3bc9741d2383eaf0700086.json",
+      "sha256": "3932b95767b0c1a01030c3c8ad0de9c7ef0bed502c3bc9741d2383eaf0700086",
+      "bytes": 203779
     }
   },
   "tile-map": {
     "png": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/images/564c2b4b471892a8bddf6d36ce694b3e119d0717a90b2fe16bcdecaa8ebb71ab.png",
-      "sha256": "564c2b4b471892a8bddf6d36ce694b3e119d0717a90b2fe16bcdecaa8ebb71ab",
-      "bytes": 183432
+      "key": "media-workspace/images/69556c90678770983ef9cb4f0341c34a7368620ae9e47f62b49686160fd78f0c.png",
+      "sha256": "69556c90678770983ef9cb4f0341c34a7368620ae9e47f62b49686160fd78f0c",
+      "bytes": 183422
     },
     "manifest": {
       "provider": "r2-private",
       "bucket": "stats47-private",
-      "key": "media-workspace/inputs/85ab5d010d41210866ad66e2300f7700e57ece8cfdec8befd7939198bc577b43.json",
-      "sha256": "85ab5d010d41210866ad66e2300f7700e57ece8cfdec8befd7939198bc577b43",
-      "bytes": 202350
+      "key": "media-workspace/inputs/905e3778e053327b045c55b5cbba9618bbfa5776c7433cb2e11db961b633b132.json",
+      "sha256": "905e3778e053327b045c55b5cbba9618bbfa5776c7433cb2e11db961b633b132",
+      "bytes": 203783
     }
   }
 } as const satisfies Record<string, { png: StoredObject; manifest: StoredObject }>;

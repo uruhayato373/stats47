@@ -8,3 +8,4 @@
 export * from "./unit-semantics";
 export * from "./unit-comparability";
 export * from "./unit-display";
+export * from "./chart-display-scale";

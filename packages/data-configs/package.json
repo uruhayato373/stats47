@@ -162,6 +162,8 @@
     "validate:polarity": "tsx scripts/validate-polarity.ts",
     "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
     "build:estat-availability": "tsx scripts/build-estat-availability.ts",
+    "build:display-units": "tsx scripts/build-chart-display-units.ts",
+    "check:display-units": "tsx scripts/build-chart-display-units.ts --check",
     "sync:estat-years": "tsx scripts/sync-estat-years.ts",
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts",
     "validate:business-plan": "tsx scripts/validate-business-plan.ts",
