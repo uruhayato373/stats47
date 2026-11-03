@@ -16,12 +16,13 @@ import { PageShell, PageHeader } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 
-import { NativeAffiliateRow } from '@/features/ads';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { ThemeRegionNav } from '@/features/theme-dashboard';
 import { isAreaTheme, THEME_SWITCHER_THEMES } from '@/features/theme-dashboard/server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -134,6 +135,8 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
   ]);
   const axisCharts = axisArtifact?.charts.filter(chart => chart.themeSlug === themeSlug) ?? [];
 
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
       {/* パンくずの各段と右端のアイコンから地域・テーマを Sheet で選ぶ (テーマのページと同じ部品・2026-10-31) */}
@@ -223,14 +226,9 @@ export default async function JapanThemePage({ params }: { params: Promise<Param
       )}
 
       {/* ネイティブアフィリエイト枠 (テーマページと同じ vertical 解決・読了位置) */}
-      {nativeBanners.length > 0 && (
+      {rowCells.length > 0 && (
         <div className="mt-8">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="japan-native"
-            trackingCategory={`japan-${theme.themeSlug}`}
-            variant="three-up"
-          />
+          <AdRow cells={rowCells} position="japan-row-1" trackingCategory={`japan-${theme.themeSlug}`} />
         </div>
       )}
     </PageShell>

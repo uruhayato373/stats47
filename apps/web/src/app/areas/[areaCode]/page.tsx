@@ -24,10 +24,10 @@ import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { RailLinksCard } from '@/components/rail';
 
 import {
-  FooterAdSlot,
-  InContentAdSlot,
+  AdRow,
+  composeAdRows,
 } from '@/features/ads';
-import { FurusatoNozeiCard } from '@/features/ads/server';
+import { FurusatoNozeiCard, resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { AreaDatabookSection } from '@/features/area-databook';
 import { getAreaDatabook } from '@/features/area-databook/server';
 import {
@@ -43,7 +43,7 @@ import {
 import { AreaGeoInsightsSection } from '@/features/geo-analysis/area';
 import { AREA_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { ADSENSE_DISPLAY_ENABLED, HUB_INCONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 
 import type { Metadata } from 'next';
 
@@ -146,6 +146,13 @@ export default async function AreaProfilePage({ params }: PageProps) {
   });
   const structuredData = generateAreaProfileStructuredData({ profile, highlights });
   const breadcrumbStructuredData = generateAreaProfileBreadcrumbStructuredData({ profile });
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  // 旧: デスクトップだけの本文とページ末の AdSense。PR は共通の案件 (県の返礼品のカードは別に残る)
+  const [areaRow1, areaRow2] = composeAdRows(
+    [['adsense', 'affiliate'], ['affiliate', 'adsense']],
+    [HUB_INCONTENT, CONTENT_FOOTER],
+    await resolveGenericAffiliateBanners(2).catch(() => []),
+  );
   return (
     <>
       {/* 構造化データ */}
@@ -226,7 +233,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
           </Suspense>
 
           {/* AdSense再開時にだけ共通枠を戻す。県別の収益導線は上の返礼品リンクへ集約する。 */}
-          {ADSENSE_DISPLAY_ENABLED && <InContentAdSlot slot={HUB_INCONTENT} />}
+          {areaRow1.length > 0 && (
+            <AdRow cells={areaRow1} position="area-row-1" trackingCategory={`area-${areaCode}`} />
+          )}
 
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
@@ -280,7 +289,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
                       本文末尾の Multiplex に揃える (2026-07-29 是正)。RAIL_RECT は
                       home の左レールが引き続き使う。
                     */}
-          <FooterAdSlot />
+          {areaRow2.length > 0 && (
+            <AdRow cells={areaRow2} position="area-row-2" trackingCategory={`area-${areaCode}`} />
+          )}
         </PanelGrid>
       </PageShell>
     </>

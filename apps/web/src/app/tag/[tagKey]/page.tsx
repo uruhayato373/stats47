@@ -7,13 +7,14 @@ import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
-import { NativeAffiliateRow } from '@/features/ads';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { resolveAffiliateBanners } from '@/features/ads/server';
 import {
   listAllUniqueTags,
   listArticleSummariesByTagKey,
 } from '@/features/blog/server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { MIN_INDEXABLE_TAG_ARTICLES } from '@/lib/url-policy';
 
 import type { Metadata } from 'next';
@@ -95,6 +96,8 @@ export default async function TagArticlesPage({ params }: PageProps) {
     notFound();
   }
 
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
       <Breadcrumbs
@@ -144,13 +147,9 @@ export default async function TagArticlesPage({ params }: PageProps) {
               無い日にフッター広告と隣接して広告 2 連になる (2026-07-29 是正)。
             */}
       {/* ネイティブアフィリエイト (D Phase 4) */}
-      {nativeBanners.length > 0 && (
+      {rowCells.length > 0 && (
         <div className="mt-10">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="tag-native"
-            trackingCategory={`tag-${tagKey}`}
-          />
+          <AdRow cells={rowCells} position="tag-row-1" trackingCategory={`tag-${tagKey}`} />
         </div>
       )}
 

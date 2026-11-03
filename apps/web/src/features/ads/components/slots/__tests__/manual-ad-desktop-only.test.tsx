@@ -79,15 +79,15 @@ describe("AdSense再開後の契約", () => {
     expect(actual.ADSENSE_DISPLAY_ENABLED).toBe(true);
   });
 
-  it("記事内枠とフッター枠はdesktop-onlyのコンテナで包む", () => {
+  it("記事内枠はdesktop-onlyのコンテナで包み、フッター枠はモバイルでも出す (2026-11-03)", () => {
     expect(MANUAL_AD_DESKTOP_ONLY_CLASS).toBe("hidden md:block");
-    for (const element of [<InContentAdSlot key="in" slot={SLOT} />, <FooterAdSlot key="footer" />]) {
-      const { container, unmount } = render(element);
-      const wrapper = container.firstElementChild;
-      expect(wrapper?.classList.contains("hidden")).toBe(true);
-      expect(wrapper?.classList.contains("md:block")).toBe(true);
-      unmount();
-    }
+    const inContent = render(<InContentAdSlot slot={SLOT} />);
+    expect(inContent.container.firstElementChild?.classList.contains("hidden")).toBe(true);
+    expect(inContent.container.firstElementChild?.classList.contains("md:block")).toBe(true);
+    inContent.unmount();
+    const footer = render(<FooterAdSlot />);
+    expect(footer.container.firstElementChild?.classList.contains("hidden")).toBe(false);
+    footer.unmount();
   });
 
   it("slotIdが空の枠は描画しない", () => {

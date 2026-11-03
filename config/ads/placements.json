@@ -575,130 +575,304 @@
     ],
     "category-compare": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "比較の表の後 (ページの最後)",
+        "position": "比較の後 (ページの最後)",
         "source": "apps/web/src/app/category/[categoryKey]/compare/page.tsx",
-        "marker": "position=\"compare-native\""
+        "marker": "position=\"compare-row-1\"",
+        "trackingPosition": "compare-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "survey": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "代表ランキングの後・全ランキングの表の前",
+        "position": "全ランキングの前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"survey-row-1\"",
+        "trackingPosition": "survey-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全ランキングの表の後・数字を読むときの注意の前",
+        "position": "全ランキングの後・注意の前",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "position=\"survey-native\""
+        "marker": "position=\"survey-row-2\"",
+        "trackingPosition": "survey-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
-        "position": "数字を読むときの注意の後 (ページの最後)",
+        "position": "この調査についての後 (ページの最後)",
         "source": "apps/web/src/app/survey/[surveyKey]/page.tsx",
-        "marker": "<FooterAdSlot />",
-        "condition": "注意 (編集した内容) がある調査だけ。無い調査では PR の列と隣り合わせになるので出さない"
+        "marker": "position=\"survey-row-3\"",
+        "trackingPosition": "survey-row-3",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "「この調査について」がある調査だけ (PR の段と隣り合わせにしない)"
       }
     ],
     "tag": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
         "position": "記事の一覧の後 (ページの最後)",
         "source": "apps/web/src/app/tag/[tagKey]/page.tsx",
-        "marker": "position=\"tag-native\""
+        "marker": "position=\"tag-row-1\"",
+        "trackingPosition": "tag-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "area": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "県データブックの後・市区町村の一覧の前",
+        "position": "県のデータブックの後・市区町村の一覧の前",
         "source": "apps/web/src/app/areas/[areaCode]/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"area-row-1\"",
+        "trackingPosition": "area-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "PR は共通の案件。県の返礼品のカードは別に出る"
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/areas/[areaCode]/page.tsx",
-        "marker": "<FooterAdSlot />"
+        "marker": "position=\"area-row-2\"",
+        "trackingPosition": "area-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "city": [
       {
         "slot": "adsense-footer",
         "region": "body",
-        "position": "ページの最後 (市区町村の一覧・返礼品の後)",
+        "position": "市区町村の一覧の前 (後ろの県のバナー・返礼品のカードと隣り合わせにしない。2026-11-03)",
         "source": "apps/web/src/features/area-profile/components/CityPageFooter.tsx",
         "marker": "slotBox={adSlotBox(\"adsense-footer\")}"
       }
     ],
     "theme-local-finance": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "ダッシュボードの後",
+        "position": "ダッシュボードの後・全指標の前",
         "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />"
+        "marker": "position=\"local-finance-row-1\"",
+        "trackingPosition": "local-finance-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全指標の節の後 (ページの最後)",
+        "position": "全指標の後 (ページの最後)",
         "source": "apps/web/src/app/themes/local-finance/page.tsx",
-        "marker": "<InContentAdSlot slot={THEMES_CONTENT} />"
+        "marker": "position=\"local-finance-row-2\"",
+        "trackingPosition": "local-finance-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       }
     ],
     "ranking-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/ranking/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"ranking-index-row\"",
+        "trackingPosition": "ranking-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "themes-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/themes/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"themes-index-row\"",
+        "trackingPosition": "themes-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "areas-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/areas/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"areas-index-row\"",
+        "trackingPosition": "areas-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "survey-index": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/survey/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"survey-index-row\"",
+        "trackingPosition": "survey-index-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "blog-tags": [
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "ページの最後",
         "source": "apps/web/src/app/blog/tags/page.tsx",
-        "marker": "<FooterAdSlot"
+        "marker": "position=\"blog-tags-row\"",
+        "trackingPosition": "blog-tags-row",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
+        ],
+        "condition": "PR は共通の案件"
       }
     ],
     "search": [
@@ -712,29 +886,71 @@
     ],
     "japan-theme": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "全国の時系列の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/japan/[themeSlug]/page.tsx",
-        "marker": "position=\"japan-native\""
+        "marker": "position=\"japan-row-1\"",
+        "trackingPosition": "japan-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipality-ranking": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "市区町村の順位の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
-        "marker": "position=\"municipality-native\""
+        "marker": "position=\"municipality-row-1\"",
+        "trackingPosition": "municipality-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipality-theme": [
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
-        "position": "テーマの指標の後",
+        "position": "ページの最後",
         "source": "apps/web/src/app/municipalities/themes/[themeSlug]/page.tsx",
-        "marker": "position=\"municipality-theme-native\""
+        "marker": "position=\"municipality-theme-row-1\"",
+        "trackingPosition": "municipality-theme-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          }
+        ]
       }
     ],
     "municipalities-index": [

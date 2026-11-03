@@ -31,7 +31,7 @@ import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 import { STAT_VALUE_CLASS, ValueTable } from '@/components/surface';
 
-import { NativeAffiliateRow } from '@/features/ads';
+import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
 import { CATEGORY_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import { RelatedContentNavigation } from '@/features/content-navigation/RelatedContentNavigation';
@@ -51,6 +51,7 @@ import {
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
@@ -184,6 +185,8 @@ export default async function MunicipalityRankingPage({
     snapshot,
   });
 
+  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+  const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], nativeBanners.filter(isLandscapeBanner));
   return (
     <PageShell>
       <MunicipalityRankingViewTracker
@@ -420,14 +423,9 @@ export default async function MunicipalityRankingPage({
       {commentary && <MunicipalityRankingCommentary content={commentary} />}
 
       {/* ネイティブアフィリエイト枠 (categoryKey → vertical。写像が無ければ描画しない) */}
-      {nativeBanners.length > 0 && (
+      {rowCells.length > 0 && (
         <div className="mt-8">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="municipality-native"
-            trackingCategory={`municipality-${item.rankingKey}`}
-            variant="three-up"
-          />
+          <AdRow cells={rowCells} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} />
         </div>
       )}
 

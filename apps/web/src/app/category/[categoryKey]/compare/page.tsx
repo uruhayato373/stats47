@@ -7,7 +7,7 @@ import { type Metadata } from "next";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { NativeAffiliateRow } from "@/features/ads";
+import { AdRow, composeAdRows, isLandscapeBanner } from "@/features/ads";
 import { resolveAffiliateBannersByCategoryKey } from "@/features/ads/server";
 import { listCategories } from "@/features/category/server";
 import {
@@ -19,6 +19,7 @@ import {
 } from "@/features/region-comparison";
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
+import { CONTENT_FOOTER, HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { formatOgpTitle } from "@/lib/metadata/site-title";
 
@@ -144,6 +145,8 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
         8,
     ).catch(() => []);
 
+    // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
+    const [rowCells] = composeAdRows([['adsense', 'affiliate', 'adsense']], [HUB_INCONTENT, CONTENT_FOOTER], compareNativeBanners.filter(isLandscapeBanner));
     return (
         <PageShell>
             <Breadcrumbs
@@ -187,15 +190,11 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
             </RegionComparisonClient>
             {/* ★ 2026-07-28: compare はアフィリエイト枠がゼロだった。categoryKey が
                 確定しているページなので、その軸の native 行を 1 つだけ置く。 */}
-            {compareNativeBanners.length > 0 && (
+            {rowCells.length > 0 && (
                 <div className="mt-8">
-                    <NativeAffiliateRow
-                        banners={compareNativeBanners}
-                        position="compare-native"
-                        trackingCategory={`compare-${categoryKey}`}
-                    />
+                  <AdRow cells={rowCells} position="compare-row-1" trackingCategory={`compare-${categoryKey}`} />
                 </div>
-            )}
+              )}
         </PageShell>
     );
 }
