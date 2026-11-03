@@ -39,8 +39,8 @@ export interface KindleBookView {
 
 /** 実行されるもの: script / style の要素と開き・閉じタグの残り、イベント属性 (引用符の種類を問わない) */
 const EXECUTABLE_PATTERNS = [
-  /<script\b[\s\S]*?<\/script\s*>/gi,
-  /<style\b[\s\S]*?<\/style\s*>/gi,
+  /<script\b[\s\S]*?<\/script\b[^>]*>/gi,
+  /<style\b[\s\S]*?<\/style\b[^>]*>/gi,
   /<\/?(?:script|style)\b[^>]*>/gi,
   /\son[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
 ];
