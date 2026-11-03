@@ -97,7 +97,7 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
       const content = [
         ...[...between.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)].filter((m) => !AD_COMPONENTS.has(m[1]) && !RARELY_RENDERED.has(m[1])),
         ...between.matchAll(/\brender[A-Z][A-Za-z0-9]*\(/g),
-        ...[...between.matchAll(/\{sections\.([A-Za-z0-9]+)\}/g)].filter((m) => !/affiliate/i.test(m[1])),
+        ...[...between.matchAll(/\{sections\.([A-Za-z0-9]+)\}/g)].filter((m) => !/affiliate|adRow/i.test(m[1])),
       ];
       const adjacent = content.length === 0;
       const label = `${page}: ${prev.placement.marker} → ${cur.placement.marker}`;

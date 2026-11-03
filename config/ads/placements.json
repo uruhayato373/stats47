@@ -314,33 +314,47 @@
     ],
     "ranking": [
       {
-        "slot": "affiliate-rect",
+        "slot": "ad-row",
         "region": "body",
         "position": "解説 (AI の考察) の後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "{!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate}",
-        "condition": "AdSense を止めているときだけ出る (再開中は下のモバイルの AdSense が同じ位置に出る)"
-      },
-      {
-        "slot": "adsense-body-mobile",
-        "region": "body",
-        "position": "解説 (AI の考察) の後",
-        "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "slotId={RANKING_INCONTENT_MOBILE.slotId}",
-        "adsenseSlot": "RANKING_INCONTENT_MOBILE",
-        "devices": [
-          "mobile"
+        "marker": "{sections.adRowMid}",
+        "trackingPosition": "ranking-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RANKING_INCONTENT_MOBILE"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          }
         ],
-        "condition": "AdSense を止めているときは同じ位置に PR のバナー 1 枚 (ranking-incontent) を出す",
-        "knownAdjacentReason": "AdSense の停止中と再開中で入れ替わる枠で、同時には出ない枠がファイルの中で並んでいるだけ"
+        "condition": "解説の後に PR を出さない指標 (ranking-incontent-affiliate-policy) は AdSense だけ。家計調査の品目は A8 を出さず AdSense だけ。右レールのある本文 (810px) では先頭 2 枠"
       },
       {
-        "slot": "adsense-footer",
+        "slot": "ad-row",
         "region": "body",
         "position": "出典・導線の後",
         "source": "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageContentSections.tsx",
-        "marker": "slotId={RANKING_PAGE_FOOTER.slotId}",
-        "adsenseSlot": "RANKING_PAGE_FOOTER"
+        "marker": "{sections.adRowFooter}",
+        "trackingPosition": "ranking-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RANKING_PAGE_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ],
+        "condition": "家計調査の品目は A8 を出さず AdSense だけ"
       },
       {
         "slot": "affiliate-row",
