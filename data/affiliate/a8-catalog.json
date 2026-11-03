@@ -8608,9 +8608,9 @@
         }
       ],
       "lastError": {
-        "step": "harvest",
+        "step": "scout",
         "error": "session-expired",
-        "at": "2026-10-24T22:01:55.487Z"
+        "at": "2026-11-03T05:02:21.303Z"
       }
     },
     "s00000019877001": {
@@ -13472,10 +13472,10 @@
       "company": "三井住友カード株式会社",
       "a8mat": null,
       "vertical": "economy",
-      "score": 0.527255,
+      "score": 0.4850749999999999,
       "rewardYen": 4800,
-      "epcYen": 578,
-      "confirmRatePct": 30.17,
+      "epcYen": 419,
+      "confirmRatePct": 29.05,
       "rewardType": "fixed",
       "status": "applied",
       "history": [
@@ -15185,7 +15185,928 @@
           "at": "2026-10-30T23:03:33.693Z"
         }
       ]
+    },
+    "s00000027484001": {
+      "programId": "s00000027484001",
+      "name": "借入不要で支払日を最大60日延長！請求書のクレカ支払いで資金繰りを改善【Fintoカード後払い】",
+      "genre": "借入不要で支払日を最大60日延長！請求書のクレカ支払いで資金繰りを改善【Fintoカード後払い】",
+      "company": "トラボックス株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.8400000000000001,
+      "rewardYen": 10000,
+      "epcYen": 3114,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000025057001": {
+      "programId": "s00000025057001",
+      "name": "受け取った請求書を クレジットカードでお支払い【INVOY】",
+      "genre": "受け取った請求書を クレジットカードでお支払い【INVOY】",
+      "company": "ＦＩＮＵＸ株式会社",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.749275,
+      "rewardYen": 16000,
+      "epcYen": 490,
+      "confirmRatePct": 42.85,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000027493001": {
+      "programId": "s00000027493001",
+      "name": "マイナビグループ×手数料上限7％で最短即日入金！【マイナビブリッジ法人専用ファクタリング】",
+      "genre": "マイナビグループ×手数料上限7％で最短即日入金！【マイナビブリッジ法人専用ファクタリング】",
+      "company": "株式会社マイナビブリッジ",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.71142,
+      "rewardYen": 10000,
+      "epcYen": 981,
+      "confirmRatePct": 14.28,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000015855001": {
+      "programId": "s00000015855001",
+      "name": "いつでもどこでも『いつも』がサポート 【全国ご融資開始キャンペーン！】",
+      "genre": "いつでもどこでも『いつも』がサポート 【全国ご融資開始キャンペーン！】",
+      "company": "株式会社いつも",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.6911250000000001,
+      "rewardYen": 12600,
+      "epcYen": 1888,
+      "confirmRatePct": 0.75,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000021817001": {
+      "programId": "s00000021817001",
+      "name": "ファクタリングで資金調達！簡単ＷＥＢ契約で即資金化できます。【エスコム】",
+      "genre": "ファクタリングで資金調達！簡単ＷＥＢ契約で即資金化できます。【エスコム】",
+      "company": "株式会社エスコム",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.63632,
+      "rewardYen": 25000,
+      "epcYen": 366,
+      "confirmRatePct": 8.88,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000027242001": {
+      "programId": "s00000027242001",
+      "name": "三菱ＵＦＪ銀行の中小企業向けオンライン融資サービス「Biz LENDING」",
+      "genre": "三菱ＵＦＪ銀行の中小企業向けオンライン融資サービス「Biz LENDING」",
+      "company": "株式会社三菱ＵＦＪ銀行",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.62899,
+      "rewardYen": 22000,
+      "epcYen": 178,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000027458001": {
+      "programId": "s00000027458001",
+      "name": "業界最安級の手数料で法人口座を即日開設！【ラクスルバンク】",
+      "genre": "業界最安級の手数料で法人口座を即日開設！【ラクスルバンク】",
+      "company": "ラクスルバンク株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.5900000000000001,
+      "rewardYen": 10000,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000004526005": {
+      "programId": "s00000004526005",
+      "name": "【ＧＭＯクリック証券】FXネオ口座開設",
+      "genre": "【ＧＭＯクリック証券】FXネオ口座開設",
+      "company": "ＧＭＯクリック証券",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.5900000000000001,
+      "rewardYen": 10500,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000026698001": {
+      "programId": "s00000026698001",
+      "name": "Hostinger - Webサイト作成に必要なすべてがここに",
+      "genre": "Hostinger - Webサイト作成に必要なすべてがここに",
+      "company": "Ｈｏｓｔｉｎｇｅｒ＿Ｉｎｔｅｒｎａｔｉｏｎａｌ＿ＬＴＤ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.5900000000000001,
+      "rewardRatePct": 80,
+      "confirmRatePct": 100,
+      "rewardType": "rate",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000027114001": {
+      "programId": "s00000027114001",
+      "name": "最短即日！オンライン完結の資金調達なら【エーストラスト】",
+      "genre": "最短即日！オンライン完結の資金調達なら【エーストラスト】",
+      "company": "株式会社エーストラスト",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.569,
+      "rewardYen": 15000,
+      "epcYen": 249,
+      "confirmRatePct": 3,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000019242004": {
+      "programId": "s00000019242004",
+      "name": "GMOあおぞらネット銀行 【法人口座開設】",
+      "genre": "GMOあおぞらネット銀行 【法人口座開設】",
+      "company": "ＧＭＯあおぞらネット銀行株式会社",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.4937600000000001,
+      "rewardYen": 3609,
+      "epcYen": 541,
+      "confirmRatePct": 39.6,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000010019001": {
+      "programId": "s00000010019001",
+      "name": "スキャルピングなら【JFX】2年連続！2026年 オリコン顧客満足度(R)ランキング FX 総合 第1位！",
+      "genre": "スキャルピングなら【JFX】2年連続！2026年 オリコン顧客満足度(R)ランキング FX 総合 第1位！",
+      "company": "ＪＦＸ株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.48450000000000004,
+      "rewardYen": 15000,
+      "epcYen": 14,
+      "confirmRatePct": 25,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000026956001": {
+      "programId": "s00000026956001",
+      "name": "ドコモSMTBネット銀行【法人口座開設】",
+      "genre": "ドコモSMTBネット銀行【法人口座開設】",
+      "company": "株式会社ドコモＳＭＴＢネット銀行",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.47213000000000005,
+      "rewardYen": 3000,
+      "epcYen": 637,
+      "confirmRatePct": 41.42,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000019746001": {
+      "programId": "s00000019746001",
+      "name": "【FX始めるなら｜FXTF】口座開設キャンペーン",
+      "genre": "【FX始めるなら｜FXTF】口座開設キャンペーン",
+      "company": "ゴールデンウェイ・ジャパン株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.46757000000000004,
+      "rewardYen": 15000,
+      "epcYen": 24,
+      "confirmRatePct": 10.38,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000023381002": {
+      "programId": "s00000023381002",
+      "name": "法人限定【ファクタリングのTRY】",
+      "genre": "法人限定【ファクタリングのTRY】",
+      "company": "ファクタリングのＴＲＹ",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.46499,
+      "rewardYen": 30000,
+      "confirmRatePct": 16.66,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000014546014": {
+      "programId": "s00000014546014",
+      "name": "業界最安級！中国地方限定【MEGA・EGG（メガ・エッグ）】",
+      "genre": "業界最安級！中国地方限定【MEGA・EGG（メガ・エッグ）】",
+      "company": "株式会社ＮＥＸＴ【優良代理店表彰実績多数】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.45299500000000004,
+      "rewardYen": 9000,
+      "epcYen": 6,
+      "confirmRatePct": 33.33,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000020226002": {
+      "programId": "s00000020226002",
+      "name": "＜NISA口座開設＞独自に発掘した成長企業に投資する投資信託【ひふみ】",
+      "genre": "＜NISA口座開設＞独自に発掘した成長企業に投資する投資信託【ひふみ】",
+      "company": "レオス・キャピタルワークス株式会社",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.4475,
+      "rewardYen": 15000,
+      "epcYen": 15,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000018633001": {
+      "programId": "s00000018633001",
+      "name": "みんなのＦＸ 口座開設プロモーション",
+      "genre": "みんなのＦＸ 口座開設プロモーション",
+      "company": "トレイダーズ証券株式会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "rewardYen": 12000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000019554001": {
+      "programId": "s00000019554001",
+      "name": "キャンペーン実施中！FXはじめるなら【LIGHT FX】口座開設",
+      "genre": "キャンペーン実施中！FXはじめるなら【LIGHT FX】口座開設",
+      "company": "ＬＩＧＨＴＦＸ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "rewardYen": 12000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000016275015": {
+      "programId": "s00000016275015",
+      "name": "【最短開通確認後即日】最大50,000円キャッシュバック！【メガ・エッグ】",
+      "genre": "【最短開通確認後即日】最大50,000円キャッシュバック！【メガ・エッグ】",
+      "company": "株式会社アウンカンパニー",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "rewardYen": 18000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000025205001": {
+      "programId": "s00000025205001",
+      "name": "JAバンクのクレジットカード【JAカード】",
+      "genre": "JAバンクのクレジットカード【JAカード】",
+      "company": "三菱ＵＦＪニコス株式会社",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.4015200000000001,
+      "rewardYen": 4963,
+      "epcYen": 26,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000026339001": {
+      "programId": "s00000026339001",
+      "name": "【USENPAY】売上アップ・コストダウンを実現する新しい決済サービス",
+      "genre": "【USENPAY】売上アップ・コストダウンを実現する新しい決済サービス",
+      "company": "株式会社ＵＳＥＮ＿ＰＡＹ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.38029500000000005,
+      "rewardYen": 3195,
+      "epcYen": 133,
+      "confirmRatePct": 97.33,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000023181001": {
+      "programId": "s00000023181001",
+      "name": "コスパ良しのバーチャルオフィスなら【GMOバーチャルオフィス】",
+      "genre": "コスパ良しのバーチャルオフィスなら【GMOバーチャルオフィス】",
+      "company": "ＧＭＯオフィスサポート株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.37934500000000004,
+      "rewardYen": 5000,
+      "epcYen": 20,
+      "confirmRatePct": 86.23,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:08:32.468Z"
+        }
+      ]
+    },
+    "s00000007478002": {
+      "programId": "s00000007478002",
+      "name": "高還元率ポイントサイト【ハピタス】 無料会員登録プロモーション",
+      "genre": "高還元率ポイントサイト【ハピタス】 無料会員登録プロモーション",
+      "company": "株式会社オズビジョン",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.108575,
+      "rewardYen": 300,
+      "epcYen": 2,
+      "confirmRatePct": 37.05,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000013107008": {
+      "programId": "s00000013107008",
+      "name": "高還元クレジットカード【リクルートカード】",
+      "genre": "高還元クレジットカード【リクルートカード】",
+      "company": "株式会社リクルート",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.1645,
+      "rewardYen": 1200,
+      "epcYen": 3,
+      "confirmRatePct": 50,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000013470008": {
+      "programId": "s00000013470008",
+      "name": "若者ファーストのGOLDカード【dカード GOLD U】",
+      "genre": "若者ファーストのGOLDカード【dカード GOLD U】",
+      "company": "株式会社ＮＴＴドコモフィナンシャルグループ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.1544,
+      "rewardYen": 2860,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000013554002": {
+      "programId": "s00000013554002",
+      "name": "アンケートモニタになってお小遣い稼ぎ☆【マクロミル新規モニタ募集】",
+      "genre": "アンケートモニタになってお小遣い稼ぎ☆【マクロミル新規モニタ募集】",
+      "company": "株式会社マクロミル",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.18972999999999998,
+      "rewardYen": 280,
+      "epcYen": 4,
+      "confirmRatePct": 91.02,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000015067001": {
+      "programId": "s00000015067001",
+      "name": "サービス運営20年！500万人が利用する安心・信頼のポイントサイト！【ちょびリッチ】",
+      "genre": "サービス運営20年！500万人が利用する安心・信頼のポイントサイト！【ちょびリッチ】",
+      "company": "株式会社ちょびリッチ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.086985,
+      "rewardYen": 200,
+      "confirmRatePct": 25.99,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000015110001": {
+      "programId": "s00000015110001",
+      "name": "年会費永久無料【エポスカード発行】",
+      "genre": "年会費永久無料【エポスカード発行】",
+      "company": "株式会社エポスカード",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.25934,
+      "rewardYen": 2600,
+      "epcYen": 10,
+      "confirmRatePct": 73.56,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000015110002": {
+      "programId": "s00000015110002",
+      "name": "★即時提携★年会費永久無料【エポスカード発行】",
+      "genre": "★即時提携★年会費永久無料【エポスカード発行】",
+      "company": "株式会社エポスカード",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.21741000000000002,
+      "rewardYen": 2600,
+      "epcYen": 24,
+      "confirmRatePct": 40.94,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000015142001": {
+      "programId": "s00000015142001",
+      "name": "アンケートモニター【infoQ】",
+      "genre": "アンケートモニター【infoQ】",
+      "company": "ｉｎｆｏＱ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.1948,
+      "rewardYen": 120,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000015623001": {
+      "programId": "s00000015623001",
+      "name": "オーディオブック配信サービス【audiobook.jp（オーディオブックジェイピー）】",
+      "genre": "オーディオブック配信サービス【audiobook.jp（オーディオブックジェイピー）】",
+      "company": "株式会社オトバンク",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.25492500000000007,
+      "rewardRatePct": 10,
+      "confirmRatePct": 89.95,
+      "rewardType": "rate",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000017962001": {
+      "programId": "s00000017962001",
+      "name": "アニメ見放題サービス ｄアニメストア！31日間無料・月額660円（税込）！",
+      "genre": "アニメ見放題サービス ｄアニメストア！31日間無料・月額660円（税込）！",
+      "company": "株式会社ドコモ・アニメストア",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.17204,
+      "rewardYen": 625,
+      "epcYen": 12,
+      "confirmRatePct": 67.36,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000018660001": {
+      "programId": "s00000018660001",
+      "name": "ポイ活ならワラウ【ワラウ】",
+      "genre": "ポイ活ならワラウ【ワラウ】",
+      "company": "株式会社オープンスマイル",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.12743000000000002,
+      "rewardYen": 100,
+      "confirmRatePct": 55.62,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000020550001": {
+      "programId": "s00000020550001",
+      "name": "ABEMAプレミアム",
+      "genre": "ABEMAプレミアム",
+      "company": "ＡＢＥＭＡ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.22608,
+      "rewardYen": 902,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000021432001": {
+      "programId": "s00000021432001",
+      "name": "三菱UFJ eスマート証券（旧：auカブコム証券）の証券口座開設プロモーション",
+      "genre": "三菱UFJ eスマート証券（旧：auカブコム証券）の証券口座開設プロモーション",
+      "company": "三菱ＵＦＪ＿ｅスマート証券株式会社（旧：ａｕカブコム証券）",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.31500000000000006,
+      "rewardYen": 3000,
+      "epcYen": 10,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000023325001": {
+      "programId": "s00000023325001",
+      "name": "光回線【ビッグローブ光】",
+      "genre": "光回線【ビッグローブ光】",
+      "company": "株式会社ＩＮＥ",
+      "a8mat": null,
+      "vertical": "energy",
+      "score": 0.28400000000000003,
+      "rewardYen": 6100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000024593001": {
+      "programId": "s00000024593001",
+      "name": "アニメ・エンタメ見放題！14日間無料！【DMMプレミアム（DMM TV）】",
+      "genre": "アニメ・エンタメ見放題！14日間無料！【DMMプレミアム（DMM TV）】",
+      "company": "合同会社ＤＭＭ．ｃｏｍ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.25112,
+      "rewardYen": 1503,
+      "epcYen": 2,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000024593002": {
+      "programId": "s00000024593002",
+      "name": "アニメ・エンタメ見放題！14日間無料！【アプリ：DMMプレミアム（DMM TV）】",
+      "genre": "アニメ・エンタメ見放題！14日間無料！【アプリ：DMMプレミアム（DMM TV）】",
+      "company": "合同会社ＤＭＭ．ｃｏｍ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.07608000000000001,
+      "rewardYen": 902,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000025070001": {
+      "programId": "s00000025070001",
+      "name": "【映画・スポーツ・海外ドラマみるなら】WOWOWオンデマンド",
+      "genre": "【映画・スポーツ・海外ドラマみるなら】WOWOWオンデマンド",
+      "company": "株式会社ＷＯＷＯＷ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.2392,
+      "rewardYen": 1230,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000025908001": {
+      "programId": "s00000025908001",
+      "name": "会員数500万人突破！ポイ活サイト【ポイントインカム】",
+      "genre": "会員数500万人突破！ポイ活サイト【ポイントインカム】",
+      "company": "株式会社セレス",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.18755000000000002,
+      "rewardYen": 100,
+      "epcYen": 3,
+      "confirmRatePct": 94.7,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000026427001": {
+      "programId": "s00000026427001",
+      "name": "いつでも、どこでも【Amazon Prime Video】",
+      "genre": "いつでも、どこでも【Amazon Prime Video】",
+      "company": "アマゾンジャパン合同会社",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.11823,
+      "rewardYen": 500,
+      "confirmRatePct": 38.82,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000026575005": {
+      "programId": "s00000026575005",
+      "name": "MUJI Card 新規発券プロモーション",
+      "genre": "MUJI Card 新規発券プロモーション",
+      "company": "株式会社クレディセゾン",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.15745000000000003,
+      "rewardYen": 1842,
+      "epcYen": 33,
+      "confirmRatePct": 18.18,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000027126001": {
+      "programId": "s00000027126001",
+      "name": "AmazonのオーディオブックAudible",
+      "genre": "AmazonのオーディオブックAudible",
+      "company": "Ａｕｄｉｂｌｅ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.2278,
+      "rewardYen": 1500,
+      "epcYen": 45,
+      "confirmRatePct": 70.2,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
+    },
+    "s00000027734001": {
+      "programId": "s00000027734001",
+      "name": "SBI証券連携で高金利！ATM手数料もお得な銀行口座【SBI新生銀行】",
+      "genre": "SBI証券連携で高金利！ATM手数料もお得な銀行口座【SBI新生銀行】",
+      "company": "株式会社ＳＢＩ新生銀行",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.24100000000000002,
+      "rewardYen": 500,
+      "epcYen": 62,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-11-03T06:10:15.535Z"
+        }
+      ]
     }
   },
-  "updatedAt": "2026-10-31T00:04:05.128Z"
+  "updatedAt": "2026-11-03T06:10:15.540Z"
 }
