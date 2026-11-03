@@ -28,7 +28,7 @@ interface NativeAffiliateRowProps {
  * 旧: ブラウザの幅 768px 以上で一律 3 列 (standard は 4 列・モバイル 2 列) にしていたため、右レールのある本文 (810px) や
  * タブレットの幅でバナーが 223〜254px に縮み、中の文字が読みにくかった。
  */
-const COLUMN_CLASS: Record<number, string> = {
+export const COLUMN_CLASS: Record<number, string> = {
   1: "grid-cols-[minmax(0,300px)]",
   2: "grid-cols-[minmax(0,300px)] @min-[608px]:grid-cols-[repeat(2,300px)]",
   3: "grid-cols-[minmax(0,300px)] @min-[608px]:grid-cols-[repeat(2,300px)] @min-[916px]:grid-cols-[repeat(3,300px)]",
@@ -36,7 +36,7 @@ const COLUMN_CLASS: Record<number, string> = {
 };
 
 /** 1 行に収まらない分は出さない (2 段目に半端な行を作らない)。i 枚目は i+1 列が入る幅から見せる */
-const ITEM_VISIBILITY_CLASS = [
+export const ITEM_VISIBILITY_CLASS = [
   undefined,
   "hidden @min-[608px]:block",
   "hidden @min-[916px]:block",
@@ -85,53 +85,78 @@ export function NativeAffiliateRow({
           className={`grid items-start justify-center gap-2 ${COLUMN_CLASS[visible.length]}`}
         >
           {visible.map((b, index) => (
-            <AdImpressionTracker
+            <NativeBannerTile
               key={b.href + b.imageUrl}
-              category={b.vertical ?? trackingCategory}
-              label={b.title}
+              banner={b}
               position={position}
-              adId={b.id}
-              creativeSize={`${b.width}x${b.height}`}
+              trackingCategory={trackingCategory}
               className={ITEM_VISIBILITY_CLASS[index]}
-            >
-              {/* 原寸 300px の列。250x250 は列の中央 (広告の枠の台帳の fitsInto)。
-                枠の幅を中身に合わせると、画像の max-w-full と互いを参照して幅 0 になる (2026-10-29 に実測) */}
-              <div className="mx-auto w-full max-w-75">
-                <TrackedAffiliateLink
-                  href={b.href}
-                  category={b.vertical ?? trackingCategory}
-                  label={b.title}
-                  position={position}
-                  adId={b.id}
-                  className="relative block"
-                >
-                  <Image
-                    src={b.imageUrl}
-                    alt={b.title}
-                    width={b.width}
-                    height={b.height}
-                    sizes={`${b.width}px`}
-                    // 幅は width 属性 (原寸) のまま、セルが狭いときだけ縮める。幅を auto にすると属性の幅が消え、
-                    // lazy の画像は読み込み前に 0×0 になって読み込まれない (2026-10-29 に実測)
-                    className="mx-auto block h-auto max-w-full"
-                    loading="lazy"
-                  />
-                  {b.trackingPixelUrl && (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={b.trackingPixelUrl}
-                      alt=""
-                      width={1}
-                      height={1}
-                      className="absolute left-0 top-0 h-px w-px opacity-0"
-                    />
-                  )}
-                </TrackedAffiliateLink>
-              </div>
-            </AdImpressionTracker>
+            />
           ))}
         </div>
       </div>
     </AdCell>
+  );
+}
+
+/**
+ * 本文の横並びの 1 枚 (リンク付きのバナー画像と計測)。PR の列と広告の段 (AdRow) が共有する。
+ * 計測の `category` には banner の vertical (10 軸) を渡す (理由は NativeAffiliateRow の説明)。
+ */
+export function NativeBannerTile({
+  banner: b,
+  position,
+  trackingCategory,
+  className,
+}: {
+  banner: ResolvedAffiliateBanner;
+  position: string;
+  trackingCategory: string;
+  className?: string;
+}) {
+  return (
+    <AdImpressionTracker
+      category={b.vertical ?? trackingCategory}
+      label={b.title}
+      position={position}
+      adId={b.id}
+      creativeSize={`${b.width}x${b.height}`}
+      className={className}
+    >
+      {/* 原寸 300px の列。250x250 は列の中央 (広告の枠の台帳の fitsInto)。
+        枠の幅を中身に合わせると、画像の max-w-full と互いを参照して幅 0 になる (2026-10-29 に実測) */}
+      <div className="mx-auto w-full max-w-75">
+        <TrackedAffiliateLink
+          href={b.href}
+          category={b.vertical ?? trackingCategory}
+          label={b.title}
+          position={position}
+          adId={b.id}
+          className="relative block"
+        >
+          <Image
+            src={b.imageUrl}
+            alt={b.title}
+            width={b.width}
+            height={b.height}
+            sizes={`${b.width}px`}
+            // 幅は width 属性 (原寸) のまま、セルが狭いときだけ縮める。幅を auto にすると属性の幅が消え、
+            // lazy の画像は読み込み前に 0×0 になって読み込まれない (2026-10-29 に実測)
+            className="mx-auto block h-auto max-w-full"
+            loading="lazy"
+          />
+          {b.trackingPixelUrl && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={b.trackingPixelUrl}
+              alt=""
+              width={1}
+              height={1}
+              className="absolute left-0 top-0 h-px w-px opacity-0"
+            />
+          )}
+        </TrackedAffiliateLink>
+      </div>
+    </AdImpressionTracker>
   );
 }

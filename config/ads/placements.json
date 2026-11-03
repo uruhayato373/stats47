@@ -188,6 +188,31 @@
       "measured": "2026-10-29 本番 /ranking/active-job-opening-ratio: 300x250 の素材がデスクトップ 254x212 (4 列)、モバイル 293x244"
     },
     {
+      "id": "ad-row",
+      "name": "本文の広告の段 (AdSense と PR)",
+      "provider": "mixed",
+      "box": {
+        "width": "full",
+        "height": 250,
+        "columns": {
+          "desktop": 3,
+          "mobile": 1
+        }
+      },
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "accepts": [
+        "300x250",
+        "250x250",
+        "adsense:rectangle",
+        "adsense:article"
+      ],
+      "component": "AdRow",
+      "measured": "2026-11-03 オーナー決定: AdSense と PR を 1 行に並べ、本文の幅に原寸 300px のまま入る数だけ左から出す (608px 未満 1 枠・608px 以上 2 枠・916px 以上 3 枠)。AdSense の箱は 300×250"
+    },
+    {
       "id": "affiliate-rect",
       "name": "PR のバナー 1 枚",
       "provider": "affiliate",
@@ -226,28 +251,65 @@
   "pages": {
     "theme": [
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "ダッシュボードの後",
-        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "<InContentAdSlot slot={HUB_INCONTENT} />",
-        "adsenseSlot": "HUB_INCONTENT"
+        "position": "2 章目の後 (3 章以上あるとき。1 章目の後はモバイルの最初の画面に入る)",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
+        "marker": "position=\"theme-row-1\"",
+        "trackingPosition": "theme-row-1",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "HUB_INCONTENT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "THEMES_CONTENT"
+          }
+        ]
       },
       {
-        "slot": "adsense-body",
+        "slot": "ad-row",
         "region": "body",
-        "position": "関連の深い指標の後・このテーマを読み解く記事の前",
-        "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "<InContentAdSlot slot={THEMES_CONTENT} />",
-        "adsenseSlot": "THEMES_CONTENT"
+        "position": "4 章目の後 (4 章以上あるとき)",
+        "source": "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx",
+        "marker": "position=\"theme-row-2\"",
+        "trackingPosition": "theme-row-2",
+        "cells": [
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "adsense",
+            "adsenseSlot": "CONTENT_FOOTER"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       },
       {
-        "slot": "affiliate-row",
+        "slot": "ad-row",
         "region": "body",
         "position": "このテーマを読み解く記事の後 (ページの最後)",
         "source": "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
-        "marker": "position=\"theme-native\"",
-        "trackingPosition": "theme-native"
+        "marker": "position=\"theme-row-end\"",
+        "trackingPosition": "theme-row-end",
+        "cells": [
+          {
+            "kind": "adsense",
+            "adsenseSlot": "RAIL_RECT"
+          },
+          {
+            "kind": "affiliate"
+          },
+          {
+            "kind": "affiliate"
+          }
+        ]
       }
     ],
     "ranking": [
@@ -597,6 +659,6 @@
   "rules": {
     "noAdjacentSlots": true,
     "noFirstView": true,
-    "maxAdsenseBodyPerPage": 2
+    "maxAdsenseBodyPerPage": 4
   }
 }

@@ -22,6 +22,7 @@ export function ThemeDashboardClient({
   indicatorDataMap,
   pageCharts,
   chartSourceLinks,
+  chapterAdRows,
 }: ThemeDashboardClientProps) {
   const { selectedPrefectureCode } = useThemePrefecture();
   return (
@@ -35,6 +36,7 @@ export function ThemeDashboardClient({
         pageCharts={pageCharts}
         chartSourceLinks={chartSourceLinks}
         selectedPrefectureCode={selectedPrefectureCode}
+        chapterAdRows={chapterAdRows}
       />
     </div>
   );

@@ -85,8 +85,10 @@
           "provider": {
             "enum": [
               "adsense",
-              "affiliate"
-            ]
+              "affiliate",
+              "mixed"
+            ],
+            "description": "mixed = AdSense と PR を 1 行に並べる広告の段 (2026-11-03)"
           },
           "box": {
             "type": "object",
@@ -260,6 +262,31 @@
               "type": "string",
               "minLength": 4,
               "description": "直前の枠と隣り合わせになっている (共通のルールの例外) 理由。直す判断が出るまでの記録で、増やさない"
+            },
+            "cells": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "description": "広告の段 (ad-row) の左から順の枠。幅に入る数だけ出る (モバイルは先頭の 1 枠)",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "adsense",
+                      "affiliate"
+                    ]
+                  },
+                  "adsenseSlot": {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Z0-9_]*$"
+                  }
+                }
+              }
             }
           }
         }
@@ -285,7 +312,7 @@
         "maxAdsenseBodyPerPage": {
           "type": "integer",
           "minimum": 0,
-          "description": "本文の AdSense の枠の上限"
+          "description": "本文の AdSense の枠の上限 (広告の段の AdSense の枠も数える)。2026-11-03 オーナー決定で 2 → 4"
         }
       }
     }

@@ -18,6 +18,8 @@ import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
 import { StatTileGrid, ValueTable } from '@/components/surface';
 
+import { AdRow, type AdRowCell } from '@/features/ads';
+
 import { metricSourceGroups } from '../lib/metric-source-groups';
 import { buildMetricTableRows } from '../lib/metric-table-rows';
 import { buildSectionAnswer } from '../lib/section-answer';
@@ -62,6 +64,12 @@ interface Props {
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
    */
   cardsOnly?: boolean;
+  /**
+   * 章の間に入れる広告の段 (2026-11-03 オーナー決定)。[0] = 2 章目の後 (3 章以上あるとき)、
+   * [1] = 4 章目の後 (4 章以上あるとき)。段の後ろと段の間には必ず章を挟む。1 章目の後に置くと、
+   * 短い章のテーマでモバイルの最初の画面に入る (labor-wages で 567px に出た)
+   */
+  chapterAdRows?: AdRowCell[][];
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -140,6 +148,7 @@ export function ThemeMetricsDashboard({
   chartSourceLinks,
   selectedPrefectureCode,
   cardsOnly,
+  chapterAdRows,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
@@ -677,9 +686,17 @@ export function ThemeMetricsDashboard({
       {profileLink && leadingChapters.length === 0 && (
         <div className="flex justify-end">{profileLink}</div>
       )}
-      {leadingChapters.map((chapter, index) =>
+      {leadingChapters.slice(0, 2).map((chapter, index) =>
         renderChapter(chapter, index === 0 ? profileLink : undefined)
       )}
+      {leadingChapters.length >= 3 && chapterAdRows?.[0] && (
+        <AdRow cells={chapterAdRows[0]} position="theme-row-1" trackingCategory={`theme-${themeConfig.themeKey}`} />
+      )}
+      {leadingChapters.slice(2, 4).map((chapter) => renderChapter(chapter))}
+      {leadingChapters.length >= 4 && chapterAdRows?.[1] && (
+        <AdRow cells={chapterAdRows[1]} position="theme-row-2" trackingCategory={`theme-${themeConfig.themeKey}`} />
+      )}
+      {leadingChapters.slice(4).map((chapter) => renderChapter(chapter))}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <PanelGrid

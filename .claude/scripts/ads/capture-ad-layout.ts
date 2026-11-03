@@ -218,7 +218,8 @@ function collectAds(): RawAd[] {
     return {
       kind: placeholder || ins ? "adsense" : "pr",
       slotTypeName: nameMatch ? nameMatch[1].trim() : null,
-      slotId: ins?.getAttribute("data-ad-slot") ?? null,
+      // 広告の段 (AdRow) は開発中でもセルに slotId を載せる
+      slotId: ins?.getAttribute("data-ad-slot") ?? el.getAttribute("data-ad-slot-id"),
       region: main && !main.contains(el) ? "rail" : "body",
       banners: images.length,
       textLinks: links.length,

@@ -152,4 +152,6 @@ export interface ThemeDashboardClientProps {
   pageCharts?: import("@/components/stat-charts/services/load-page-components").PageComponent[];
   /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */
   chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
+  /** 章の間に入れる広告の段 (ThemeMetricsDashboard の chapterAdRows) */
+  chapterAdRows?: import("@/features/ads").AdRowCell[][];
 }
