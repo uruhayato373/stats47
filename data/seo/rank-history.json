@@ -250,6 +250,11 @@
       "date": "2026-11-03",
       "file": "data/seo/rank-history/2026-11-03.json",
       "sha256": "4e3206e0a42f89626218aa9e3e522f22bb4d40ef0a471c4c01ca1ebe14c0ae75"
+    },
+    {
+      "date": "2026-11-04",
+      "file": "data/seo/rank-history/2026-11-04.json",
+      "sha256": "85fd3f80238d8b3f00a5b54c8960a1fd9ff280bce44fe9f14d3f66b22e0f6d50"
     }
   ]
 }

@@ -1,21 +1,30 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-03",
+  "date": "2026-11-04",
   "period": {
-    "periodStart": "2026-10-25",
-    "periodEnd": "2026-10-31",
+    "periodStart": "2026-10-26",
+    "periodEnd": "2026-11-01",
     "windowDays": 7
   },
-  "inputHash": "990804d31edfc0fda4be2563a58eecf7d1693cae5bcb103296d0424dbf9dd559",
+  "inputHash": "d85167de3231fc1efbb6c05912351c6d17b21863a0d84e847901c8d67c33ea32",
   "movements": [
+    {
+      "keyword": "高知 生活保護 多い",
+      "targetPath": "/blog/households-on-public-assistance-per-1000-prefecture-gap",
+      "before": 6,
+      "after": 87,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -81
+    },
     {
       "keyword": "苫小牧市 人口",
       "targetPath": "/areas/01000/cities/01213",
       "before": 74,
-      "after": 10.023809523809524,
+      "after": 10.018181818181818,
       "beforeImpressions": 1,
-      "impressions": 42,
-      "change": 63.976190476190474
+      "impressions": 55,
+      "change": 63.981818181818184
     },
     {
       "keyword": "保健師 年収",
@@ -27,22 +36,13 @@
       "change": -62
     },
     {
-      "keyword": "警察 官 年収 ランキング",
-      "targetPath": "/ranking/avg-salary-police-prefecture",
-      "before": 68,
-      "after": 7.1,
-      "beforeImpressions": 1,
-      "impressions": 10,
-      "change": 60.9
-    },
-    {
       "keyword": "尾鷲市 人口",
       "targetPath": "/areas/24000/cities/24209",
       "before": 64,
-      "after": 8.233333333333334,
+      "after": 8.135135135135135,
       "beforeImpressions": 1,
-      "impressions": 30,
-      "change": 55.766666666666666
+      "impressions": 37,
+      "change": 55.86486486486486
     },
     {
       "keyword": "人口動態統計",
@@ -54,6 +54,24 @@
       "change": 47
     },
     {
+      "keyword": "水戸 人流",
+      "targetPath": "/areas/08000/cities/08201",
+      "before": 58.5,
+      "after": 12,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": 46.5
+    },
+    {
+      "keyword": "フリーランス人口",
+      "targetPath": "/ranking/freelance-count",
+      "before": 18,
+      "after": 63,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -45
+    },
+    {
       "keyword": "高卒 初任 給 平均",
       "targetPath": "/ranking/starting-salary-highschool",
       "before": 22,
@@ -63,6 +81,15 @@
       "change": -43.5
     },
     {
+      "keyword": "徳島 人流",
+      "targetPath": "/areas/36000/cities/36201",
+      "before": 55,
+      "after": 12.5,
+      "beforeImpressions": 1,
+      "impressions": 6,
+      "change": 42.5
+    },
+    {
       "keyword": "岡山市 人工",
       "targetPath": "/areas/33000/cities/33100",
       "before": 52,
@@ -70,33 +97,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 42
-    },
-    {
-      "keyword": "愛西市人口",
-      "targetPath": "/areas/23000/cities/23232",
-      "before": 49.166666666666664,
-      "after": 9,
-      "beforeImpressions": 6,
-      "impressions": 2,
-      "change": 40.166666666666664
-    },
-    {
-      "keyword": "漁獲量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 14,
-      "after": 52,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -38
-    },
-    {
-      "keyword": "能代市 人口",
-      "targetPath": "/areas/05000/cities/05202",
-      "before": 48,
-      "after": 10.833333333333334,
-      "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 37.166666666666664
     }
   ],
   "verdicts": [
@@ -167,6 +167,11 @@
       "keyword": "中2男子 平均身長",
       "targetPath": "/blog/middle-school-height-east-west-puzzle",
       "proposalId": "39509458261-1"
+    },
+    {
+      "keyword": "漁港が多い県",
+      "targetPath": "/ranking/fishing-port-count-by-type",
+      "proposalId": "40167993253-1"
     }
   ]
 }
