@@ -255,6 +255,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   // 本編 (blog 章) は「第1章 …」と番号を振る。書き下ろしは「はじめに」「第0章 …」「終章」を catalog の題のまま使う
   // (2026-09-19 K-S1-04 m04 / K-S1-10 FB03 / K-S1-12 F03: 第0章と終章だけ番号があり本編に無い体系を統一)。
   let bodyChapterNo = 0;
+  const seenTables = new Set<string>();
   for (const ch of book.chapters) {
     idx += 1;
     const id = `chap${String(idx).padStart(3, "0")}`;
@@ -295,7 +296,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
         continue;
       }
       try {
-        const art = await fetchBlogArticle(slug);
+        const art = await fetchBlogArticle(slug, { fullTables: book.fullTables === true, seenTables });
         for (const img of art.images) {
           if (!imageSeen.has(img.fileName)) {
             imageSeen.add(img.fileName);
@@ -305,7 +306,8 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
             });
           }
         }
-        blogChars += countChars(art.body);
+        // 全県表はデータの表で、書き下ろしでもブログの転載でもないので字数に入れない (比率を表で薄めない)
+        blogChars += countChars(art.body) - countChars(art.fullTablesMarkdown);
         // 出典一覧には書籍の章題を出す (ブログの題は撤回済みの旧主張を含みうる: 2026-09-19 K-S1-04 m08)
         // 出典一覧の題は目次と同じ「第N章 …」で出す (2026-09-19 K-S1-01/02/04 G01)
         sources.push({ slug, title: displayTitle, published: publishedSlugs.has(slug) });

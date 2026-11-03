@@ -38,13 +38,14 @@ export interface KindleBookView {
 }
 
 /** 本文の HTML を管理画面で表示できる形にする。中身は自分たちの生成物だが、念のため実行されるものは落とす。 */
-export function sanitizeChapterHtml(body: string, bookId: string): string {
+export function sanitizeChapterHtml(body: string, bookId: string, version?: string | null): string {
+  const query = version ? `?version=${encodeURIComponent(version)}` : "";
   return body
     .replace(/<script\b[\s\S]*?<\/script>/gi, "")
     .replace(/<style\b[\s\S]*?<\/style>/gi, "")
     .replace(/\son[a-z]+="[^"]*"/gi, "")
     .replace(/(<img\b[^>]*\bsrc=")([^"]*)(")/gi, (_, open: string, src: string, close: string) =>
-      IMAGE_PATH.test(src) ? `${open}/kindle-book/${bookId}/${src}${close}` : `${open}${close}`,
+      IMAGE_PATH.test(src) ? `${open}/kindle-book/${bookId}/${src}${query}${close}` : `${open}${close}`,
     )
     .replace(/(<a\b[^>]*)>/gi, (_, open: string) =>
       /\btarget=/.test(open) ? `${open}>` : `${open} target="_blank" rel="noopener noreferrer">`,
@@ -68,8 +69,31 @@ export function listedEpub(id: string): { file: string; epubPath: string; asin: 
   return { file, epubPath, asin: typeof listing.asin === "string" ? listing.asin : null };
 }
 
-export function readKindleBook(id: string): KindleBookView | null {
+const VERSION = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
+
+/** 出品台帳の入稿版、または version を指定したときは手元の .local/kindle-books/<id>/<version>/book.epub (改訂の見比べ用)。 */
+export function bookEpub(id: string, version?: string | null): { file: string; epubPath: string; asin: string | null } | null {
   const listed = listedEpub(id);
+  if (!version) return listed;
+  if (!BOOK_ID.test(id) || !VERSION.test(version)) return null;
+  const file = path.join(localKindleBooksDir(), id, version, "book.epub");
+  if (!fs.existsSync(file)) return null;
+  return { file, epubPath: path.relative(projectRoot(), file), asin: listed?.asin ?? null };
+}
+
+/** 手元にある版の一覧 (新しい順)。 */
+export function localVersions(id: string): string[] {
+  if (!BOOK_ID.test(id)) return [];
+  const dir = path.join(localKindleBooksDir(), id);
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((name) => VERSION.test(name) && fs.existsSync(path.join(dir, name, "book.epub")))
+    .sort((a, b) => fs.statSync(path.join(dir, b)).mtimeMs - fs.statSync(path.join(dir, a)).mtimeMs);
+}
+
+export function readKindleBook(id: string, version?: string | null): KindleBookView | null {
+  const listed = bookEpub(id, version);
   if (!listed) return null;
   const book = parseEpub(fs.readFileSync(listed.file));
   return {
@@ -78,13 +102,13 @@ export function readKindleBook(id: string): KindleBookView | null {
     asin: listed.asin,
     epubPath: listed.epubPath,
     modified: book.modified,
-    chapters: book.chapters.map(({ body, ...chapter }) => ({ ...chapter, html: sanitizeChapterHtml(body, id) })),
+    chapters: book.chapters.map(({ body, ...chapter }) => ({ ...chapter, html: sanitizeChapterHtml(body, id, version) })),
   };
 }
 
 /** 図 1 枚だけを読む (章の HTML は組み立てない)。 */
-export function readKindleImage(id: string, relative: string): Buffer | null {
-  const listed = listedEpub(id);
+export function readKindleImage(id: string, relative: string, version?: string | null): Buffer | null {
+  const listed = bookEpub(id, version);
   if (!listed || !IMAGE_PATH.test(relative)) return null;
   const zip = readZip(fs.readFileSync(listed.file));
   return zip.get(path.posix.join(path.posix.dirname(epubBase(zip)), relative))?.() ?? null;

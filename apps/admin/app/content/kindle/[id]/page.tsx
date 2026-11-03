@@ -5,7 +5,7 @@ import { BookOpenIcon, ImageIcon, LinkIcon, TypeIcon } from "lucide-react";
 import { DataGrid, StatCard } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
-import { BOOK_ID, readKindleBook } from "@/lib/server/kindle-epub";
+import { BOOK_ID, localVersions, readKindleBook } from "@/lib/server/kindle-epub";
 
 export const dynamic = "force-dynamic";
 
@@ -23,10 +23,18 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return { title: `${id} の中身 — stats47 admin` };
 }
 
-export default async function KindleBookPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function KindleBookPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ version?: string }>;
+}) {
   const { id } = await params;
+  const { version } = await searchParams;
   if (!BOOK_ID.test(id)) notFound();
-  const book = readKindleBook(id);
+  const book = readKindleBook(id, version);
+  const versions = localVersions(id);
   if (!book) notFound();
 
   const total = (key: "chars" | "figures" | "figuresWithoutText" | "fullTables" | "siteLinks" | "siteLinksWithUtm") =>
@@ -46,7 +54,21 @@ export default async function KindleBookPage({ params }: { params: Promise<{ id:
           <Link href="/content/kindle" className="text-primary underline">Kindle運用へ戻る</Link>
         </p>
         <p className="text-xs text-muted-foreground">
-          出品台帳が指す入稿版を読んでいます。KDP で販売中の版と同じかは、KDP 本棚の版と照合して確かめてください。
+          {version
+            ? `手元の版 ${version} を読んでいます (未入稿。改訂の見比べ用)。`
+            : "出品台帳が指す入稿版を読んでいます。KDP で販売中の版と同じかは、KDP 本棚の版と照合して確かめてください。"}
+        </p>
+        <p className="flex flex-wrap gap-x-3 text-xs">
+          <Link href={`/content/kindle/${book.id}`} className={version ? "text-primary underline" : "font-semibold"}>入稿版</Link>
+          {versions.slice(0, 6).map((name) => (
+            <Link
+              key={name}
+              href={`/content/kindle/${book.id}?version=${encodeURIComponent(name)}`}
+              className={version === name ? "font-semibold" : "text-primary underline"}
+            >
+              {name}
+            </Link>
+          ))}
         </p>
       </PageHeading>
 

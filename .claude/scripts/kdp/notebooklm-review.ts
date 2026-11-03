@@ -17,6 +17,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { KDP_LISTINGS } from "../../../config/paths.mjs";
 import { parseEpub } from "../../../packages/product-factory/src/channels/kindle/epub-inspect";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -39,7 +40,7 @@ function nlm(args: string[]): string {
 }
 
 function bookMarkdown(id: string): { markdown: string; sha12: string } {
-  const listings = JSON.parse(readFileSync(join(ROOT, "config/kdp-listings.json"), "utf8")).listings as Record<string, { epubPath?: string }>;
+  const listings = JSON.parse(readFileSync(join(ROOT, KDP_LISTINGS), "utf8")).listings as Record<string, { epubPath?: string }>;
   const epubPath = listings[id]?.epubPath;
   if (!epubPath) throw new Error(`${id}: epubPath が出品台帳に無い`);
   const buffer = readFileSync(join(ROOT, epubPath));

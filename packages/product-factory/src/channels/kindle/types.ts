@@ -184,6 +184,8 @@ export interface KindleBook {
   readonly author: string;
   /** 章立て (先頭は通例 fresh の「はじめに」、末尾は fresh の「おわりに/横断分析」)。 */
   readonly chapters: readonly BookChapter[];
+  /** ブログ章の末尾に全 47 都道府県の値の表を付けるか (図と同じデータから作る。full-tables.ts。KINDLE-QUALITY-LOOP-01) */
+  readonly fullTables?: boolean;
   /** 販売価格 (円)。KDP 電子は ¥250-1,250 が印税 70% 帯。 */
   readonly priceYen: 0 | 500 | 800 | 1000;
   /** 書き下ろし部分の宣言 (30% ルールの根拠・validator が非空を要求)。 */

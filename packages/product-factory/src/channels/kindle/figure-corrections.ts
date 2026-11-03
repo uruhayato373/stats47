@@ -54,6 +54,22 @@ export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly Editori
   "pollution-complaints-regional-map/complaints-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
   "pollution-complaints-regional-map/complaints-map": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
   "waste-management-recycling-gap/recycling-tilemap": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-10 F-B-01] 年度" }],
+  // ── 2026-11-03 KINDLE-QUALITY-LOOP-01: 600px 幅の図の評価で、図だけでは指標・年・単位が分からなかった図 ──
+  "mackerel-expenditure-ranking/mackerel-expenditure-ranking": [
+    { before: 'class="svg-title">都道府県別ランキング<', after: 'class="svg-title">さば消費支出額（2024年・円）<', reason: "[K-S1-02 図の評価] 題が『都道府県別ランキング』だけで指標・年・単位が無い" },
+  ],
+  "inbound-by-nationality-regional-preference/taiwan-guest-map": [
+    { before: ">都道府県マップ<", after: ">台湾人宿泊者の全国シェア（2024年・%）<", reason: "[K-S1-07 図の評価] 題が『都道府県マップ』だけで指標・年が無い" },
+  ],
+  "inbound-by-nationality-regional-preference/usa-guests-ranking": [
+    { before: ">米国人宿泊者数　上位10・下位10<", after: ">米国人延べ宿泊者数（2024年・人泊）　上位10・下位10<", reason: "[K-S1-07 図の評価] 年と単位が図に無い" },
+  ],
+  "inbound-by-nationality-regional-preference/nationality-composition-top15": [
+    { before: ">国籍別 外国人宿泊者構成（上位15県）<", after: ">国籍別 外国人延べ宿泊者数（2024年・人泊・上位15県）<", reason: "[K-S1-07 図の評価] 年と単位が図に無い" },
+  ],
+  "overseas-travel-gap/income-vs-travel-scatter": [
+    { before: ">海外旅行の年間行動者率 と 課税対象所得 の関係<", after: ">海外旅行の年間行動者率（2001年）と 課税対象所得（2024年）<", reason: "[K-S1-07 図の評価] 2 つの指標の年が 23 年離れていることが図に無い (本文は 2001 年と 2024 年)" },
+  ],
   "earthquake-insurance-prefecture-gap/insurance-damage-scatter": [
     { before: ">地震保険料 × 災害被害額<", after: ">火災・地震保険料支出 × 災害被害額<", reason: "[K-S1-10 N20] 指標は火災・地震保険料の消費支出額" },
     { ...NENDO("2023", ">災害被害額（1人当たり・円・2023年）<"), reason: "[K-S1-10 N20] 災害被害額 (社会・人口統計体系) は年度。横軸の家計調査 2024年 は暦年のまま" },

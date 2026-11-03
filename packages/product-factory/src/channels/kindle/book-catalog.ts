@@ -102,6 +102,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
     //   kakei-income-class / budget-structure / savings-debt は K-S1-01 側。
     id: "K-S1-02",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01 の改訂。機械の検査と NotebookLM の通読で一致した改訂案)
+    fullTables: true,
     title: "食卓の支出と購入数量 — 家計調査の地域差を読む",
     concept: "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
@@ -261,6 +263,8 @@ const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-07",
     series: "S1-issues",
+    // 章末に全 47 都道府県の表を付ける (2026-11-03 KINDLE-QUALITY-LOOP-01 の改訂。機械の検査と NotebookLM の通読で一致した改訂案)
+    fullTables: true,
     title: "観光とインバウンドの地図 — 宿泊・国籍・回復",
     concept: "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。",
     // 共通事業方針「判断の問い」5 つ + STRUCTURE.md のタイトル 5 型 / 本文 9 型 (2026-09-19)。
