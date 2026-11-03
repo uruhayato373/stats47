@@ -11,7 +11,8 @@ import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
-  NativeAffiliateRow,
+  AdRow,
+  composeAdRows,
   OperatorProfileCard,
   RailAdSlot,
 } from '@/features/ads';
@@ -21,7 +22,7 @@ import { listLatestArticles } from '@/features/blog/server';
 import { PortalBlogCard, PortalUseCaseGrid } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
-import { ADSENSE_DISPLAY_ENABLED, RAIL_RECT } from '@/lib/google-adsense';
+import { ADSENSE_DISPLAY_ENABLED, CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT } from '@/lib/google-adsense';
 
 import { DEFAULT_OGP_IMAGE_PATH, SITE_ALTERNATE_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_ORIGIN } from '@/config/site';
 
@@ -111,6 +112,13 @@ export default async function HomePage() {
   const prefectures = fetchPrefectures();
   // トップは読者の意図が決まらないので、共通の案件 (楽天カード・TOSSY) を出す (2026-11-03。旧: economy 軸で FP 相談等が出ていた)
   const homeNativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
+  // 広告の段 (2026-11-03 オーナー決定): 「知りたいことから探す」の後と「都道府県から探す」の後。本文 (右レールの横で約 810px)
+  // では 2 枠、モバイルは先頭の 1 枠で上から AdSense → PR。右レールの AdSense (RAIL_RECT) とは別のユニット
+  const [homeRow1, homeRow2] = composeAdRows(
+    [['adsense', 'affiliate'], ['affiliate', 'adsense']],
+    [HUB_INCONTENT, CONTENT_FOOTER],
+    homeNativeBanners,
+  );
   // サイト全体のカテゴリ一覧はサイドバー (AppSidebar) が持つので、ここでは重複させない。
   // 右レールは AdSense と運営者プロフィール (2026-10-30。旧: AdSense・PR・縦長バナーと広告だけが続き、プロフィールは本文の最後にあった。
   // 固定の PR (SidebarPromoBanner) はランキングの指標が労働のときだけ出る部品で、ここでは描かれていなかったので外した)
@@ -177,14 +185,9 @@ export default async function HomePage() {
           </HorizontalCardCarouselFrame>
 
           {/* PR の列は本文の最後に置かない。右レールが本文の下に回る幅で、レール先頭の AdSense と隣り合うため (2026-11-03) */}
-          {homeNativeBanners.length > 0 && (
+          {homeRow1.length > 0 && (
             <section>
-              <NativeAffiliateRow
-                banners={homeNativeBanners}
-                position="home-native"
-                trackingCategory="home"
-                variant="three-up"
-              />
+              <AdRow cells={homeRow1} position="home-row-1" trackingCategory="home" />
             </section>
           )}
 
@@ -200,6 +203,12 @@ export default async function HomePage() {
               surface="home"
             />
           </SectionCard>
+
+          {homeRow2.length > 0 && (
+            <section>
+              <AdRow cells={homeRow2} position="home-row-2" trackingCategory="home" />
+            </section>
+          )}
         </PageSections>
 
       </PageShell>

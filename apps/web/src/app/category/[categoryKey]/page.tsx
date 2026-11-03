@@ -28,9 +28,9 @@ import { HorizontalCardCarousel, SectionCard } from '@/components/surface';
 import { HorizontalCardCarouselFrame } from '@/components/surface/HorizontalCardCarousel';
 
 import {
-  FooterAdSlot,
-  InContentAdSlot,
-  NativeAffiliateRow,
+  AdRow,
+  composeAdRows,
+  isLandscapeBanner,
   RailAdSlot,
 } from '@/features/ads';
 import { CATEGORY_PAGE_AFFILIATE_POLICY } from '@/features/ads/constants/affiliate-category';
@@ -54,8 +54,10 @@ import {
 
 import {
   ADSENSE_DISPLAY_ENABLED,
+  CONTENT_FOOTER,
   HUB_INCONTENT,
   RAIL_RECT,
+  THEMES_CONTENT,
 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -173,6 +175,13 @@ export default async function CategoryPage({ params }: PageProps) {
     resolveAffiliateBannersByVertical(affiliateVertical, 8).catch(() => []),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  // 広告の段 (2026-11-03 オーナー決定): 新着ブログの後・全ランキングの後・ページの最後。本文 (右レールの横で約 810px) では
+  // 2 枠、モバイルは先頭の 1 枠で上から AdSense → PR → AdSense。旧: 本文の AdSense とページ末の AdSense はデスクトップだけだった
+  const [categoryRow1, categoryRow2, categoryRow3] = composeAdRows(
+    [['adsense', 'affiliate'], ['affiliate', 'adsense'], ['adsense', 'affiliate']],
+    [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER],
+    nativeBanners.filter(isLandscapeBanner),
+  );
 
   const topicLabelByKey = new Map(categoryTopics.map((topic) => [topic.key, topic.label]));
   // テーブル用データ
@@ -356,7 +365,7 @@ export default async function CategoryPage({ params }: PageProps) {
           新着ブログの後・全ランキングの前に置き、後ろの PR の列と隣り合わせにしない (2026-10-30)。
           無効のときは何も描かないので、格子の帯が余らない */}
       {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
+      {categoryRow1.length > 0 && <AdRow cells={categoryRow1} position="category-row-1" trackingCategory={`category-${categoryKey}`} />}
 
       <PageSections className="mt-4">
         {/* 全件テーブル */}
@@ -370,14 +379,10 @@ export default async function CategoryPage({ params }: PageProps) {
         </SectionCard>
       </PageSections>
 
-      {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
-      {nativeBanners.length > 0 && (
+      {/* 広告の段 (PR が先頭。モバイルは PR) */}
+      {categoryRow2.length > 0 && (
         <section className="mt-4">
-          <NativeAffiliateRow
-            banners={nativeBanners}
-            position="category-native"
-            trackingCategory={`category-${categoryKey}`}
-          />
+          <AdRow cells={categoryRow2} position="category-row-2" trackingCategory={`category-${categoryKey}`} />
         </section>
       )}
 
@@ -400,8 +405,12 @@ export default async function CategoryPage({ params }: PageProps) {
         </SectionCard>
       </PageSections>
 
-      {/* コンテンツ末尾の全幅フッター広告 */}
-      <FooterAdSlot className="mt-4" />
+      {/* ページ末の広告の段 */}
+      {categoryRow3.length > 0 && (
+        <div className="mt-4">
+          <AdRow cells={categoryRow3} position="category-row-3" trackingCategory={`category-${categoryKey}`} />
+        </div>
+      )}
     </PageShell>
   );
 }
