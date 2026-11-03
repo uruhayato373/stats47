@@ -16,8 +16,10 @@ import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader, SectionIndexLink } from '@/components/section';
 import type { PageComponent } from '@/components/stat-charts';
-import { StatTileGrid } from '@/components/surface';
+import { MetricRowTable, StatTileGrid } from '@/components/surface';
 
+import { metricSourceGroups } from '../lib/metric-source-groups';
+import { buildMetricTableRows } from '../lib/metric-table-rows';
 import { buildSectionAnswer } from '../lib/section-answer';
 import {
   NATIONAL_REGION_LABEL,
@@ -33,7 +35,6 @@ import {
   type SingleMetricGroup,
 } from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
-import { MetricTable } from './MetricTable';
 import { SingleMetricCard } from './SingleMetricCard';
 import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
@@ -335,16 +336,27 @@ export function ThemeMetricsDashboard({
    * sectionTitle: 包む章の見出し。切替パネルの見出しが章の見出しと同じ文言なら、
    * 同じ語を 2 段重ねないようパネル側の見出しを省く (章の見出しが region の名前になる)。
    */
+  const renderTablePanel = (panel: Panel, sectionTitle?: string) => {
+    const { extraHeaders, rows } = buildMetricTableRows(panel.metrics, tabLabels, selectedPrefectureCode !== null);
+    if (rows.length === 0) return null;
+    const years = new Set(rows.map((row) => row.year));
+    return (
+      <ChartPanel
+        key={panel.key}
+        id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
+        title={panel.title === sectionTitle ? undefined : panel.title}
+        // 年がそろう表は年を見出しの下に 1 回だけ書く (行ごとの年は出したまま)
+        description={years.size === 1 ? [...years][0] : undefined}
+        action={<SourcesSheet trigger="icon" groups={metricSourceGroups(panel.metrics, tabLabels)} />}
+        contentClassName="p-0!"
+      >
+        <MetricRowTable extraHeaders={extraHeaders} rows={rows} />
+      </ChartPanel>
+    );
+  };
   const renderPanel = (panel: Panel, summaryOnly = false, sectionTitle?: string, annotation?: string) => panel.view === 'table' ? (
-    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)
-    <MetricTable
-      key={panel.key}
-      id={`theme-${themeConfig.themeKey}-panel-${panel.key}`}
-      title={panel.title === sectionTitle ? undefined : panel.title}
-      metrics={panel.metrics}
-      tabLabels={tabLabels}
-      selectedPrefectureCode={selectedPrefectureCode}
-    />
+    // 項目の多いグループは、この地域の 1 行ずつの表 (view "table"。2026-11-03)。枠は共通の ChartPanel、表は共通の MetricRowTable
+    renderTablePanel(panel, sectionTitle)
   ) : isSingleMetricGroup(panel.metrics) ? (
     <SingleMetricCard
       key={panel.key}

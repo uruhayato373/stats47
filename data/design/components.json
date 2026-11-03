@@ -314,6 +314,47 @@
         "panel-parts-only-in-panel-components",
         "no-nested-card-surfaces"
       ]
+    },
+    {
+      "id": "metric-row-table",
+      "name": "地域の指標の表",
+      "role": "1 つの地域の指標を 1 行ずつ「指標 (年)・値・呼び出し側の列 (順位・全国との差など)」で並べる。枠は持たず、呼び出し側が ChartPanel などに入れる",
+      "implementation": {
+        "package": "@/components/surface",
+        "export": "MetricRowTable",
+        "source": "apps/web/src/components/surface/MetricRowTable.tsx",
+        "propsType": "MetricRowTableProps"
+      },
+      "slots": [
+        {
+          "prop": "extraHeaders",
+          "required": false,
+          "what": "3 列目以降の見出し (指標・値の後ろ。行の cells と同じ数・同じ順)"
+        },
+        {
+          "prop": "rows",
+          "required": true,
+          "what": "行 (指標名・リンク・年・整形した値・単位・3 列目以降のセル)"
+        }
+      ],
+      "spec": {
+        "columns": "指標 (年を下に小さく)・値 (単位を小さく) のあとに呼び出し側の列。2 列目以降は右寄せの数値",
+        "classOnce": "class は表に 1 回だけ書く (行の多いページの重さの予算)",
+        "rank": "順位は文字のまま書く (RankBadge にしない)",
+        "notForComparison": "47 都道府県・市区町村どうしを並べて比べる表には使わない (地域どうしの比較はランキングのページ)"
+      },
+      "useWhen": [
+        "1 つの地域の指標を表で並べる所 (市区町村のデータブック・テーマの品目の多いグループ)"
+      ],
+      "avoidWhen": [
+        {
+          "when": "指標が 4 件以下で 1 つずつ値と推移を見せる",
+          "use": "stat-tile-grid"
+        }
+      ],
+      "checks": [
+        "no-nested-card-surfaces"
+      ]
     }
   ]
 }

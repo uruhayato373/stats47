@@ -38,9 +38,10 @@ vi.mock('../SingleMetricCard', () => ({
     <div data-testid="single-card" data-keys={metric.metricKey} />
   ),
 }));
-vi.mock('../MetricTable', () => ({
-  MetricTable: ({ metrics }: { metrics: { metricKey: string }[] }) => (
-    <div data-testid="table-card" data-keys={metrics.map((m) => m.metricKey).join(',')} />
+vi.mock('@/components/surface', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/components/surface')>()),
+  MetricRowTable: ({ rows }: { rows: { key: string }[] }) => (
+    <div data-testid="table-card" data-keys={rows.map((r) => r.key).join(',')} />
   ),
 }));
 vi.mock('../ThemeDbChartRenderer', () => ({
@@ -131,7 +132,7 @@ describe.each(ALL_THEMES.map((theme) => [theme.themeKey, theme] as const))(
       expect(rendered).toHaveLength(groups.length);
       rendered.forEach((el, i) => {
         const group = groups[i];
-        // view "table" のグループは 1 枚の表 (MetricTable)。件数によらない (2026-11-03)
+        // view "table" のグループは 1 枚の表 (共通の MetricRowTable)。件数によらない (2026-11-03)
         const expectedKind =
           group.view === 'table' ? 'table-card' : group.rankingKeys.length === 1 ? 'single-card' : 'switcher-panel';
         expect(el.getAttribute('data-testid')).toBe(expectedKind);
