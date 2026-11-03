@@ -2459,6 +2459,10 @@
           "kind": "area"
         },
         {
+          "pageId": "blog:average-age-of-first-marriage-wife-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fertility-rate-prefecture-gap",
           "kind": "blog"
         },
@@ -2944,6 +2948,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:average-height-primary-school-fifth-grade-male-vs-other",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:prefectural-height-male-female-gap",
           "kind": "blog"
         },
@@ -2986,6 +2994,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:average-length-of-stay-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:average-length-of-stay",
           "kind": "ranking"
@@ -6617,6 +6629,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:avg-salary-police-prefecture-vs-community-sports-facility",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:avg-salary-police-prefecture",
           "kind": "ranking"
         },
@@ -6901,6 +6917,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:bacon-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:bacon-consumption-expenditure",
           "kind": "ranking"

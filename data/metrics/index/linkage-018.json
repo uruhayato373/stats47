@@ -1708,6 +1708,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:onion-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:onion-consumption-quantity",
           "kind": "ranking"
         },
@@ -4621,6 +4625,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-fresh-fish-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-fresh-fish-consumption-quantity",
           "kind": "ranking"
         }
@@ -4694,6 +4702,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:other-fresh-fruit-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:other-fresh-fruit-consumption-quantity",
           "kind": "ranking"
@@ -5140,6 +5152,10 @@
       "consumers": [
         {
           "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:other-japanese-sweets-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -5819,6 +5835,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:other-meat-consumption-quantity-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:other-meat-consumption-quantity",

@@ -2709,10 +2709,6 @@
       ],
       "consumers": [
         {
-          "pageId": "blog:population-density-urbanization",
-          "kind": "blog"
-        },
-        {
           "pageId": "municipality-ranking:population-density-habitable",
           "kind": "municipality-ranking"
         },
@@ -3123,6 +3119,10 @@
         {
           "pageId": "area-theme:47000:population-dynamics",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:population-density-urbanization",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:living-housing",

@@ -5108,6 +5108,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:vaccination-recipients-disease-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:vaccination-recipients-disease",
           "kind": "ranking"
         }
@@ -5185,6 +5189,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:vacuum-cleaner-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:vacuum-cleaner-consumption-quantity",
           "kind": "ranking"
@@ -6330,6 +6338,10 @@
         },
         {
           "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:vinegar-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -7784,6 +7796,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:washing-machine-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:washing-machine-consumption-quantity",
           "kind": "ranking"

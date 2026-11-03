@@ -369,6 +369,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:average-height-primary-school-fifth-grade-male-vs-other",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
           "kind": "ranking"
         }
@@ -405,6 +409,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:other-processed-meat-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:other-processed-meat-consumption-expenditure",
           "kind": "ranking"
@@ -1328,6 +1336,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-stationery-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-stationery-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1702,6 +1714,10 @@
       "consumers": [
         {
           "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:other-vegetable-pickles-consumption-expenditure-prefecture",
           "kind": "blog"
         },
         {
@@ -2191,6 +2207,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:outpatient-rate-per-1000-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:outpatient-rate-per-1000",
           "kind": "ranking"
@@ -4291,6 +4311,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:passport-issuance-prefecture-gap",
           "kind": "blog"
         },
@@ -5311,6 +5335,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:pc-ownership-multi-person-households-per-1000-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:pc-ownership-multi-person-households-per-1000",
           "kind": "ranking"
         }
@@ -5365,6 +5393,10 @@
         },
         {
           "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {

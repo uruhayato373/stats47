@@ -207,6 +207,14 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:food-manufacturing-establishments-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:food-manufacturing-establishments-vs-regional-transport-co2",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:food-manufacturing-establishments",
           "kind": "ranking"
         },
@@ -752,6 +760,14 @@
         {
           "pageId": "area:47000",
           "kind": "area"
+        },
+        {
+          "pageId": "blog:food-self-sufficiency-rate-calorie-vs-national-assessment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:food-self-sufficiency-rate-calorie",
@@ -3205,6 +3221,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:foreign-resident-population-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:international-cooperation-volunteer-map",
           "kind": "blog"
         },
@@ -3427,6 +3447,10 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:foreign-worker-count-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:foreign-worker-count",
@@ -6010,6 +6034,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-fruit-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-fruit-consumption-quantity",
           "kind": "ranking"
         },
@@ -6265,6 +6293,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-seafood-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-seafood-consumption-quantity",
           "kind": "ranking"
         },
@@ -6352,6 +6384,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:fresh-shiitake-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
@@ -7159,6 +7195,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fresh-vegetables-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-vegetables-consumption-quantity",
           "kind": "ranking"
         },
@@ -7538,6 +7578,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fried-tofu-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fried-tofu-consumption-expenditure",
           "kind": "ranking"
         }
@@ -7761,6 +7805,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:frozen-food-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:frozen-food-consumption-expenditure",
@@ -8707,6 +8755,10 @@
         {
           "pageId": "area-theme:47000:local-finance",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:furusato-fundraising-cost-prefecture-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:furusato-fundraising-cost-prefecture",
@@ -10625,6 +10677,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:game-console-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:game-console-consumption-expenditure",
           "kind": "ranking"
         }
@@ -10698,6 +10754,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:game-software-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:game-software-consumption-expenditure",
           "kind": "ranking"
@@ -10967,6 +11027,10 @@
         {
           "pageId": "area-theme:47000:waste-recycling",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:garbage-final-disposal-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "blog:recycling-rate-gap",
@@ -11981,6 +12045,10 @@
       "consumers": [
         {
           "pageId": "blog:gasoline-consumption-quantity-vs-densely-inhabited-district",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:gasoline-consumption-quantity-vs-public-assistance",
           "kind": "blog"
         },
         {

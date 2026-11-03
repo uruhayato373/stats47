@@ -647,6 +647,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:blanket-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:blanket-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1913,6 +1917,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:bread-city-ranking-kyoto-quiz",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:bread-consumption-expenditure-vs-final-education-university",
           "kind": "blog"
         },
@@ -2173,6 +2181,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:bread-city-ranking-kyoto-quiz",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:bread-consumption-quantity",
@@ -3683,6 +3695,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:burdock-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
@@ -6406,6 +6422,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:cabbage-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
@@ -8764,6 +8784,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:carrot-consumption-quantity-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "blog:okinawa-food-culture",

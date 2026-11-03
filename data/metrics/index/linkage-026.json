@@ -7956,6 +7956,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:sleep-avg-time-female-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:daily-time-use",
           "kind": "japan-theme"
         },
@@ -8184,6 +8188,10 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:sleep-avg-time-male-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "japan-theme:daily-time-use",
@@ -10225,6 +10233,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:solar-power-housing-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:solar-power-housing",
           "kind": "municipality-ranking"
         },
@@ -10352,6 +10364,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "blog:sole-proprietor-sales-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:sole-proprietor-sales",
           "kind": "ranking"
@@ -11245,6 +11261,14 @@
         {
           "pageId": "area-theme:47000:health-checkups",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:specific-health-checkup-participation-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:specific-health-checkup-participation-rate-vs-taxpayer",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:specific-health-checkup-participation-rate",

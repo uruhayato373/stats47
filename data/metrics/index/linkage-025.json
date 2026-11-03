@@ -239,6 +239,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:road-total-length-vs-core-agricultural-workers",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:roads",
           "kind": "japan-theme"
         },
@@ -4928,6 +4932,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:sashimi-platter-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
@@ -5480,6 +5488,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:sausage-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:sausage-consumption-quantity",
           "kind": "ranking"
         }
@@ -5551,6 +5563,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:savory-bread-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:savory-bread-consumption-expenditure",
           "kind": "ranking"

@@ -475,6 +475,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:manufacturing-shipment-amount-vs-manufacturing",
+          "kind": "blog"
+        },
+        {
           "pageId": "japan-theme:manufacturing",
           "kind": "japan-theme"
         },
@@ -2052,6 +2056,14 @@
         },
         {
           "pageId": "blog:manufacturing-productivity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-shipment-amount-vs-manufacturing",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:manufacturing-shipment-amount-vs-regional-industry-co2",
           "kind": "blog"
         },
         {
@@ -9243,6 +9255,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:mens-clothing-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:womens-clothing-expenditure-ranking",
           "kind": "blog"
         },
@@ -10136,6 +10152,10 @@
         {
           "pageId": "area-theme:47000:health-checkups",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:metabolic-syndrome-prevalence-among-checkup-recipients",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:metabolic-syndrome-prevalence-among-checkup-recipients",

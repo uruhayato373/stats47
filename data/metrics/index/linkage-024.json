@@ -1244,6 +1244,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:regional-co2-emissions-estimate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:regional-co2-emissions-estimate",
           "kind": "ranking"
         },
@@ -2116,6 +2120,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:manufacturing-shipment-amount-vs-regional-industry-co2",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:regional-industry-co2-emissions-estimate",
           "kind": "ranking"
         },
@@ -2768,6 +2776,10 @@
         {
           "pageId": "area-theme:47000:regional-energy",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:food-manufacturing-establishments-vs-regional-transport-co2",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:regional-transport-co2-emissions-estimate",
@@ -3726,6 +3738,10 @@
         },
         {
           "pageId": "blog:cc-estat-10-wage-box-plot",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:regular-cash-salary-male-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -9359,6 +9375,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:rice-spending-quantity-gap-2025",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:white-bread-price-up-quantity-up",
           "kind": "blog"
         },
@@ -9619,6 +9639,10 @@
         },
         {
           "pageId": "blog:rice-consumption-quantity-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:rice-spending-quantity-gap-2025",
           "kind": "blog"
         },
         {
@@ -10098,6 +10122,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:road-bridge-diagnosed-count-prefecture-gap",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:road-bridge-diagnosed-count",
           "kind": "ranking"
