@@ -1,0 +1,86 @@
+name: Infra history publish
+
+# 交通網の変遷 (高速道路 N06・鉄道 N05・空港 N08) と高速道路の接合部 (IC・JCT) を
+# 台帳の公式 ZIP から CI で作り直し、明示した網の prefix だけを R2 へ反映する (INFRA-HISTORY-R2-PUBLISH-01)。
+# - 原典 ZIP は台帳 (packages/gis/src/infra-history/networks.ts) の公式 URL から取り、bytes と SHA-256 で照合する。
+#   原典は R2 に置かない (N05・N06 の時系列は非商用。.claude/rules/gis-data.md)
+# - 生成は保存則 (県の合計 + 未帰属 = 全国) が通らなければ止まる
+# - 反映は push-exact-r2-assets.ts の網ごとの prefix + 拡張子だけ。ksj-publication-guard が
+#   台帳で公開可 (isInfraNetworkPublishable) の網だけを通す。SHA が一致する object は送らない
+# - 起動は 2 通り。新しい workflow は main に入るまで手で起動できないので、develop へ依頼の JSON
+#   (data/infra-history-publish-requests.json) を push すると動く。apply=false は dry-run で反映の計画を
+#   出すだけで R2 を書かない。dry-run を見てオーナーが承認したら apply=true を push する (requestedAt を毎回変える)
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'data/infra-history-publish-requests.json'
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'dry-run の後に同じ生成物を R2 へ反映する'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Resolve apply
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "apply=${{ inputs.apply }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "apply=$(node -e "process.stdout.write(String(require('./data/infra-history-publish-requests.json').apply === true))")" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Build infra history (official ZIPs, SHA check, conservation)
+        run: node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all
+      - name: Build expressway joints
+        run: node --import tsx packages/gis/src/infra-history/scripts/build-expressway-joints.ts
+      - name: Dry-run exact publish per network
+        run: |
+          for network in expressway railway airport; do
+            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+              --prefix "app/geo/history/${network}" --extension json,topojson --dry-run
+          done
+      - name: Publish exact per network
+        if: steps.mode.outputs.apply == 'true'
+        run: |
+          for network in expressway railway airport; do
+            npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+              --prefix "app/geo/history/${network}" --extension json,topojson
+          done
+      - name: Verify public HTTP for each network
+        if: steps.mode.outputs.apply == 'true'
+        run: |
+          for network in expressway railway airport; do
+            for key in summary.json manifest.json national.topojson; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" "${R2_PUBLIC_FETCH_URL}/app/geo/history/${network}/${key}")
+              echo "${network}/${key}: ${code}"
+              [ "$code" = 200 ] || exit 1
+            done
+          done
