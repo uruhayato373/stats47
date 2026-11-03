@@ -494,7 +494,7 @@ export const DATASETS = [
   d("improvement.budgets", ".claude/config/budgets/{name}/budgets{name}", "config", "site", "agent-config", "計測値の警告閾値"),
   d("gsc.snapshots", "data/gsc/snapshots/{week}/{**}", "series", "site", "data", "GSC の週次生 CSV。長期の需要推移に使うため削除しない (2026-10-29 オーナー判断)"),
   d("ga4.snapshots", "data/ga4/snapshots/{week}/{**}", "series", "site", "data", "GA4 の週次生 CSV", { retain: "analytics-ga4" }),
-  d("ga4.admin-audits", "data/google-admin/audits/{week}.json", "series", "site", "data", "GA4 Admin の週次監査の記録 (custom dimension・キーイベント。前の週との差分は計測の記録に出る)"),
+  d("ga4.admin-audits", "data/google-admin/audits/{week}.json", "series", "site", "data", "GA4 Admin の週次監査の記録 (custom dimension・キーイベント。前の週との差分は計測の記録に出る。履歴なので削除しない)"),
   d("adsense.snapshots", "data/adsense/snapshots/{week}/{**}", "series", "affiliate", "data", "AdSense の週次生 CSV", { retain: "analytics-adsense" }),
   d("cloudflare.cost-snapshots", "data/cloudflare/{name}-snapshots/{name}", "series", "ops", "data", "Cloudflare の月次・週次コストの snapshot"),
   d("psi.metric-snapshots", "data/psi/metric-snapshots/{date}/{name}", "series", "site", "data", "性能指標の snapshot"),
