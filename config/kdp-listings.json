@@ -72,12 +72,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:20:45.930Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:37:36.793Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:10:19.520Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:37:36.793Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:00:21.908Z",
+          "title": "年収が高い県は、暮らしも豊かなのか",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:09:35.692Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:10:19.520Z",
+          "draftId": "A2F38IFN8TM1T8"
         }
       },
       "editionNumber": 2,
@@ -393,12 +407,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:27:40.490Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:25:26.060Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:19:09.344Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:25:26.060Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:12:18.522Z",
+          "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
+          "editionNumber": 1
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:18:17.086Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:19:09.344Z",
+          "draftId": "A25RYVT5IC2UMM"
         }
       }
     },
@@ -472,12 +500,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-19T23:36:09.618Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:36:01.513Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:28:14.155Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:36:01.513Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:21:13.308Z",
+          "title": "健康と医療の地図 — 寿命・自殺・介護2040",
+          "editionNumber": 1
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:27:29.574Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:28:14.155Z",
+          "draftId": "A3NKJO61F4PFTI"
         }
       }
     },
@@ -551,12 +593,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:21:28.328Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:25:38.935Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:36:17.978Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:25:38.935Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:30:15.589Z",
+          "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:35:33.150Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:36:17.978Z",
+          "draftId": "ABTY3P3T9JVF8"
         }
       },
       "editionNumber": 2,
@@ -797,12 +853,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:21:49.139Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:25:51.557Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:43:55.600Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:25:51.557Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:38:15.123Z",
+          "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:43:11.089Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:43:55.600Z",
+          "draftId": "A3HT6UMNDH08OC"
         }
       },
       "editionNumber": 2,
@@ -1117,12 +1187,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:22:30.277Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:36:12.760Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T10:51:28.034Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:36:12.760Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T10:45:57.228Z",
+          "title": "産業と地域経済の地図 — 製造・中小・地価",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T10:50:44.251Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T10:51:28.034Z",
+          "draftId": "A1CY4CGC4RA9EJ"
         }
       },
       "editionNumber": 2,
@@ -1270,8 +1354,8 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:22:51.852Z",
-      "publicationStage": "details_filled",
-      "publicationStageUpdatedAt": "2026-11-03T09:36:27.213Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:41:52.952Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.059Z",
@@ -1281,6 +1365,15 @@
           "at": "2026-11-03T09:36:27.213Z",
           "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
           "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:41:07.106Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:41:52.952Z",
+          "draftId": "A1GNQCILOBWHIY"
         }
       },
       "editionNumber": 2,
@@ -1428,12 +1521,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:23:12.790Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:11:15.359Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:48:34.511Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.359Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:43:53.928Z",
+          "title": "文化・スポーツ・余暇の地図",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:47:51.475Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:48:34.511Z",
+          "draftId": "AZ47QB1EPQ5SA"
         }
       },
       "editionNumber": 2,
@@ -1581,12 +1688,26 @@
       "kdpStatus": "live",
       "kdpStatusLabel": "販売中",
       "kdpStatusCheckedAt": "2026-09-27T10:23:33.405Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-03T09:11:15.664Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-03T09:58:19.810Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-03T09:11:15.664Z",
           "mode": "update"
+        },
+        "details_filled": {
+          "at": "2026-11-03T09:50:30.154Z",
+          "title": "デジタル生活の地図 — 通信・PC・テレワーク",
+          "editionNumber": 2
+        },
+        "files_processed": {
+          "at": "2026-11-03T09:57:35.402Z",
+          "manuscriptUploaded": true,
+          "coverUploaded": true
+        },
+        "verified": {
+          "at": "2026-11-03T09:58:19.810Z",
+          "draftId": "A23MSYRRHKWKGB"
         }
       },
       "editionNumber": 2,
