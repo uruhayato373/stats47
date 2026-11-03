@@ -343,6 +343,25 @@ async function captureOne(
   }
 }
 
+/** 開発サーバーが応答するまで待つ (重いページの読み込みで落ちて立ち直る間を待つ。2026-11-03 に一括の撮影が 63 件中 2 件で止まった) */
+const SERVER_WAIT_MS = 180_000;
+async function waitForServer(baseUrl: string): Promise<void> {
+  const deadline = Date.now() + SERVER_WAIT_MS;
+  for (;;) {
+    try {
+      const res = await fetch(baseUrl, { signal: AbortSignal.timeout(60_000) });
+      if (res.ok) return;
+    } catch {
+      // 応答なし: 待って試し直す
+    }
+    if (Date.now() > deadline) throw new Error(`開発サーバーが ${SERVER_WAIT_MS / 1000} 秒応答しない: ${baseUrl}`);
+    await new Promise((resolve) => setTimeout(resolve, 3_000));
+  }
+}
+
+/** 接続の失敗・時間切れ (サーバーが落ちた・詰まった) なら、応答を待って 1 回だけ撮り直す */
+const SERVER_TROUBLE = /ERR_CONNECTION|ECONNREFUSED|ERR_EMPTY_RESPONSE|Timeout .*exceeded|socket hang up/i;
+
 async function main() {
   const opts = parseArgs();
   const ledger = JSON.parse(readFileSync(PLACEMENTS_PATH, "utf8")) as PlacementsLedger;
@@ -360,6 +379,7 @@ async function main() {
   const shots: AdLayoutShot[] = [];
   try {
     for (const pageType of pageTypes) {
+      await waitForServer(opts.baseUrl);
       const { label, path } = PAGE_URLS[pageType];
       const url = new URL(encodeURI(path), opts.baseUrl).href;
       for (const viewport of opts.viewports) {
@@ -374,7 +394,12 @@ async function main() {
         const base = { pageType, label, url: path, viewport: viewport.id, width: viewport.width };
         try {
           const page = await context.newPage();
-          const result = await captureOne(page, url, pageType, viewport, outDir, ledger);
+          const result = await captureOne(page, url, pageType, viewport, outDir, ledger).catch(async (e: Error) => {
+            if (!SERVER_TROUBLE.test(e.message)) throw e;
+            console.error(`${pageType}-${viewport.width}: サーバーの応答待ちで撮り直す — ${e.message.split("\n")[0]}`);
+            await waitForServer(opts.baseUrl);
+            return captureOne(page, url, pageType, viewport, outDir, ledger);
+          });
           shots.push({ ...base, ...result, capturedAt: new Date().toISOString(), error: null });
           console.log(`${pageType}-${viewport.width}: 枠 ${result.ads.length} (${result.imageHeight}px${result.truncated ? "・上限で切った" : ""})`);
         } catch (e) {
