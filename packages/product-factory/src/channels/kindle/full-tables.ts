@@ -14,6 +14,8 @@ import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const HOUSEHOLD_SURVEY_KEY = /-consumption-(?:quantity|expenditure)$/;
+/** 表を分ける行数。スマホの Kindle アプリ相当 (390×700) で 1 ページに約 14 行なので、見出し行込みで 1 ページに収まる 12 にする (表の途中で改ページしない) */
+export const TABLE_CHUNK_ROWS = 12;
 
 export interface FullTable {
   readonly label: string;
@@ -41,12 +43,20 @@ export function fullTableMarkdown(table: FullTable): string {
   }
   if (table.rows.length < 47) notes.push(`値のある ${table.rows.length} 都道府県だけを載せています。欠測を 0 や最下位として扱いません。`);
   const fmt = (value: number) => value.toLocaleString("ja-JP", { maximumFractionDigits: 20 });
-  return [
-    `### 全47都道府県の値：${table.label}（${table.year}年${unit}）`,
-    notes.join(""),
-    `| 順位 | 都道府県 | 値${table.unit ? `（${table.unit}）` : ""} |\n| ---: | --- | ---: |\n` +
-      ranked(table.rows).map((row) => `| ${row.rank} | ${row.name} | ${fmt(row.value)} |`).join("\n"),
-  ].join("\n\n");
+  // 注記は表の下に置く。見出しと表の間に段落があると、見出しの「直後で改ページしない」が表まで届かず、
+  // 見出しと注記だけが前のページに残る (2026-11-03 ページ分割の撮影で 6 インチ相当の 3 か所)。
+  // 表は 12 行ずつに分け、2 つ目からは「（つづき・17〜32位）」の小見出しを付ける。Kindle は表の見出し行を
+  // 次のページで繰り返さないので、1 つの長い表だと 2 ページ目以降は何の表か・単位が何か分からない (同日の評価)。
+  const header = `| 順位 | 都道府県 | 値${table.unit ? `（${table.unit}）` : ""} |\n| ---: | --- | ---: |\n`;
+  const rows = ranked(table.rows);
+  const chunks: string[] = [];
+  for (let start = 0; start < rows.length; start += TABLE_CHUNK_ROWS) {
+    const part = rows.slice(start, start + TABLE_CHUNK_ROWS);
+    // つづきの小見出しは見出し (h5) にする。段落だと「直後で改ページしない」が効かず、ページ末に取り残される
+    if (start > 0) chunks.push(`#### ${table.label}（${table.year}年${unit}）のつづき・${start + 1}〜${start + part.length}番目`);
+    chunks.push(header + part.map((row) => `| ${row.rank} | ${row.name} | ${fmt(row.value)} |`).join("\n"));
+  }
+  return [`### 全47都道府県の値：${table.label}（${table.year}年${unit}）`, ...chunks, notes.join("")].join("\n\n");
 }
 
 /** 図の元データ (data/<name>.json) を表の形にする。47 県の値がそろわないものは表にしない。 */

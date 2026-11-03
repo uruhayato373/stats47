@@ -83,7 +83,11 @@ export function chapterMetrics(body: string) {
     figuresWithoutText: figures.filter((m) => m[1]?.toLowerCase() !== "<p").length,
     rankingDatabookFigures: sources.filter((source) => source === "ranking-databook").length,
     tables: tables.length,
-    fullTables: tables.filter((rows) => rows >= FULL_TABLE_ROWS).length,
+    // 全県表は 12 行ずつに分けて載せる (full-tables.ts) ので、「全47都道府県の値」の見出しの数でも数える
+    fullTables: Math.max(
+      tables.filter((rows) => rows >= FULL_TABLE_ROWS).length,
+      (body.match(/<h[2-4]\b[^>]*>全47都道府県の値/g) ?? []).length,
+    ),
     siteLinks: links.length,
     siteLinksWithUtm: links.filter((href) => /[?&]utm_source=/.test(href)).length,
   };

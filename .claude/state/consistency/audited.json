@@ -1,9 +1,10 @@
 {
-  "hash": "4513b90176a179d5d7b0856c96b1889fd76ba5899f64875b4e911373a8765bd8",
-  "audited_at": "2026-11-03T06:38:54",
+  "hash": "6a2a8bd863352eb3dd74f0076806837b6dfa4911d1c852f1b01c8c6a2ccbdb8d",
+  "audited_at": "2026-11-03T06:56:39",
   "files": [
     ".agents/skills/product/build-kindle-book/SKILL.md",
-    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
+    ".claude/scripts/ads/capture-ad-layout.ts",
+    ".claude/scripts/kdp/capture-pages.mjs",
     ".claude/scripts/kdp/capture-tables.mjs",
     ".claude/skills/product/build-kindle-book/SKILL.md"
   ]

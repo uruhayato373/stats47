@@ -164,7 +164,7 @@ describe("buildEpub — 組版 CSS", () => {
   it("見出しの孤立と図のページ跨ぎを止める", async () => {
     const { zip } = await build(baseInput());
     const css = await text(zip, "style.css");
-    expect(css).toMatch(/h1,h2,h3,h4\{[^}]*page-break-after:avoid/);
+    expect(css).toMatch(/h1,h2,h3,h4,h5\{[^}]*page-break-after:avoid/);
     expect(css).toMatch(/figure\{[^}]*page-break-inside:avoid/);
     // 図が縦にページを超えないよう高さも制限する。
     expect(css).toMatch(/figure img\{[^}]*max-height:/);
