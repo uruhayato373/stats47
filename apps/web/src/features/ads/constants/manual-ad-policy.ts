@@ -52,3 +52,11 @@
  * 変更するときは両方を同時に見ること。
  */
 export const MANUAL_AD_DESKTOP_ONLY_CLASS = "hidden md:block";
+
+/**
+ * 右レールの AdSense のコンテナに付けるクラス。右レールが本文の横にあるとき (Shell のコンテナ 988px 以上) だけ描画する
+ * (2026-11-03 オーナー決定)。本文の下に回ったとき (モバイル・タブレット) はページの最後に積まれて見られないため。
+ * 2026-W43 の実測で右レールの 5 ユニットは表示の約 40%・収益の約 16%、1,000 表示あたり ¥6〜10 (本文は ¥29〜45)。
+ * display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない。境界は PageShell / ArticleShell の右レールと同じ
+ */
+export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden @min-[988px]/shell:block";

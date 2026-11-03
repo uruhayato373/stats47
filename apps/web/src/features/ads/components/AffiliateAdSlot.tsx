@@ -8,6 +8,7 @@ import {
 
 import { CATEGORY_AFFILIATE_MAP, type AffiliateVertical } from "../constants/affiliate-category";
 import { isAffiliateDestinationExcluded, type AffiliateDestination } from "../constants/affiliate-delivery-policy";
+import { RAIL_AD_BESIDE_BODY_ONLY_CLASS } from "../constants/manual-ad-policy";
 import {
   resolveAffiliateBannersByVertical,
   resolveAffiliateTextAdsByVertical,
@@ -45,6 +46,8 @@ interface AffiliateAdSlotProps {
   /** GA4 link_position。未指定時は既存の ranking/sidebar ラベルを維持する。 */
   trackingPosition?: string;
   excludeAds?: readonly AffiliateDestination[];
+  /** PR の在庫が無いときに AdSense で埋めるか (既定 true)。ランキングの右レールは AdSense を 2 枠までにするので false */
+  adsenseFallback?: boolean;
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -74,6 +77,7 @@ export async function AffiliateAdSlot({
   textLimit = 2,
   trackingPosition,
   excludeAds = [],
+  adsenseFallback = true,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory =
@@ -156,14 +160,15 @@ export async function AffiliateAdSlot({
   }
 
   // 3. AdSense フォールバック
-  if (!ADSENSE_DISPLAY_ENABLED) return null;
+  if (!ADSENSE_DISPLAY_ENABLED || !adsenseFallback) return null;
 
   const adSlot =
     position === "footer" ? RANKING_PAGE_FOOTER : SIDEBAR_AFFILIATE_FALLBACK;
 
   return (
     // カードで囲まない (2026-10-31)。右レールは余白 0 で 300px の幅を残し、ページ末は本文の広告のセルと同じ余白
-    <AdCell label="広告" className={position === "footer" ? undefined : "p-0"}>
+    // 右レールの AdSense は右レールが本文の横にあるときだけ出す (本文の下に回ると見られない。2026-11-03)
+    <AdCell label="広告" className={position === "footer" ? undefined : `p-0 ${RAIL_AD_BESIDE_BODY_ONLY_CLASS}`}>
       <AdSenseAdWrapper
         format={adSlot.format}
         slotId={adSlot.slotId}

@@ -84,6 +84,9 @@ export function RankingPageSidebarSection({
       // 右レールの PR は固定のバナーと合わせて 2 枚まで (2026-10-29。広告の枠の台帳の「PR のバナー」1 枠にまとめた)
       bannerLimit={reservedPromo ? 1 : 2}
       excludeAds={reservedPromo ? [...excludeAffiliateAds, reservedPromo] : excludeAffiliateAds}
+      // 右レールの AdSense は上段と表の横の 2 枠まで。PR の在庫が無くても AdSense で埋めない
+      // (2026-11-03 オーナー決定。代わりの AdSense は 2026-W43 に 906 表示・¥6・1,000 表示あたり ¥7)
+      adsenseFallback={false}
     />
   );
 
