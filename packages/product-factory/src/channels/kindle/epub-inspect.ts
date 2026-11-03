@@ -51,8 +51,18 @@ export function decodeEntities(text: string): string {
     .replace(/&amp;/g, "&");
 }
 
+/** タグを外す。外した結果に新しいタグができる入れ子 (`<<b>p>` など) も残さないよう、変わらなくなるまで繰り返す */
+function stripTags(html: string): string {
+  let current = html;
+  for (;;) {
+    const next = current.replace(/<[^>]+>/g, "");
+    if (next === current) return next;
+    current = next;
+  }
+}
+
 function textOf(html: string): string {
-  return decodeEntities(html.replace(/<[^>]+>/g, "")).replace(/\s+/g, "");
+  return decodeEntities(stripTags(html)).replace(/\s+/g, "");
 }
 
 /** 全県表とみなす行数 (見出し 1 行 + 47 県)。 */
@@ -140,7 +150,7 @@ export function parseEpub(buffer: Buffer) {
     const xhtml = read(path.posix.join(base, item.href));
     const body = xhtml.match(/<body\b[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? "";
     const heading = xhtml.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? "";
-    const title = decodeEntities(heading.replace(/<[^>]+>/g, "")).replace(/\s+/g, " ").trim() || item.href;
+    const title = decodeEntities(stripTags(heading)).replace(/\s+/g, " ").trim() || item.href;
     chapters.push({ id, href: item.href, title, body, ...chapterMetrics(body) });
   }
   return {

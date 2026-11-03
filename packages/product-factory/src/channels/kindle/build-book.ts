@@ -134,7 +134,7 @@ ${sub}
  * (`config/inbound-utm.mjs`)。本文の章にはリンクを置かない (md-to-xhtml が外す) ので、本からサイトへ戻る導線はここだけ。
  */
 function siteLink(url: string, bookId: string, content: "sources" | "latest"): string {
-  return `<a href="${escapeText(kindleInboundUrl(url, bookId, content))}">${escapeText(url)}</a>`;
+  return `<a href="${escapeAttr(kindleInboundUrl(url, bookId, content))}">${escapeText(url)}</a>`;
 }
 
 function sourcesPage(bookId: string, sources: readonly { slug: string; title: string; published: boolean }[]): string {
@@ -165,6 +165,11 @@ ${items}
 
 function escapeText(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** 属性値 ("...") に入れる文字列。escapeText に加えて二重引用符も実体参照にする */
+function escapeAttr(s: string): string {
+  return escapeText(s).replace(/"/g, "&quot;");
 }
 
 /** fresh 章の freshText から先頭見出し行 (# ...) を除く (章タイトルと重複するため)。 */

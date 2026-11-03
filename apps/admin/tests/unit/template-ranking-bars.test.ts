@@ -65,7 +65,7 @@ describe('ranking bar basic form', () => {
     const marks = (svg: string) => [...svg.matchAll(/data-bar-value="true" x="([\d.]+)" y="[\d.]+" width="([\d.]+)"/g)].map((m) => m.slice(1).join());
     expect(marks(dark)).toEqual(marks(light));
     const value = toHex(resolveMetricColor(RANKING_SAMPLE_METRIC.visualization)!);
-    expect(dark).not.toMatch(new RegExp(`fill="${value}">36\.0`));
+    expect(dark).not.toMatch(new RegExp(`fill="${value}">36\\.0`));
   });
   it('still supports an explicit zero baseline without omission marks', () => {
     const svg = renderRankingBars(fixture(), {

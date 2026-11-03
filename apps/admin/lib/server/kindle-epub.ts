@@ -37,13 +37,28 @@ export interface KindleBookView {
   readonly chapters: readonly KindleChapter[];
 }
 
+/** 実行されるもの: script / style の要素と開き・閉じタグの残り、イベント属性 (引用符の種類を問わない) */
+const EXECUTABLE_PATTERNS = [
+  /<script\b[\s\S]*?<\/script\s*>/gi,
+  /<style\b[\s\S]*?<\/style\s*>/gi,
+  /<\/?(?:script|style)\b[^>]*>/gi,
+  /\son[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
+];
+
+/** 1 回の置換で消した結果に新しい一致ができる入れ子 (`<scr<script>ipt>` など) も残さないよう、変わらなくなるまで繰り返す */
+function stripExecutable(html: string): string {
+  let current = html;
+  for (;;) {
+    const next = EXECUTABLE_PATTERNS.reduce((text, pattern) => text.replace(pattern, ""), current);
+    if (next === current) return next;
+    current = next;
+  }
+}
+
 /** 本文の HTML を管理画面で表示できる形にする。中身は自分たちの生成物だが、念のため実行されるものは落とす。 */
 export function sanitizeChapterHtml(body: string, bookId: string, version?: string | null): string {
   const query = version ? `?version=${encodeURIComponent(version)}` : "";
-  return body
-    .replace(/<script\b[\s\S]*?<\/script>/gi, "")
-    .replace(/<style\b[\s\S]*?<\/style>/gi, "")
-    .replace(/\son[a-z]+="[^"]*"/gi, "")
+  return stripExecutable(body)
     .replace(/(<img\b[^>]*\bsrc=")([^"]*)(")/gi, (_, open: string, src: string, close: string) =>
       IMAGE_PATH.test(src) ? `${open}/kindle-book/${bookId}/${src}${query}${close}` : `${open}${close}`,
     )
