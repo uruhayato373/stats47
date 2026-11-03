@@ -46,6 +46,7 @@
     "products:kindle:kdp-listings": "tsx src/channels/kindle/export-kdp-listings.ts",
     "products:kindle:kdp-promote": "tsx src/channels/kindle/promote-kdp-listing.ts",
     "products:kindle:weekly": "tsx src/channels/kindle/kdp-weekly-cli.ts",
+    "products:kindle:quality": "tsx src/channels/kindle/quality-cli.ts",
     "products:sales": "tsx src/sales/cli.ts",
     "test": "vitest",
     "test:run": "vitest run",

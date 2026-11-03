@@ -1,0 +1,2754 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T05:04:27.804Z",
+  "baselineBookId": "K-S1-02",
+  "summary": {
+    "books": 12,
+    "measured": 12,
+    "epubMissing": [],
+    "flagsByCode": {
+      "long-chapter-without-figure": 37,
+      "data-chapter-without-full-table": 63,
+      "figure-without-text": 15,
+      "no-site-link": 12
+    },
+    "baseline": {
+      "id": "K-S1-02",
+      "figuresPer10kChars": 5,
+      "figuresWithoutText": 2,
+      "fullTables": 0
+    }
+  },
+  "books": [
+    {
+      "id": "K-S1-01",
+      "status": "measured",
+      "title": "年収が高い県は、暮らしも豊かなのか",
+      "epubPath": ".local/kindle-books/K-S1-01/v4-20260920-imagegen/book.epub",
+      "epubSha256": "6ad624043b34b4c70c56d8300c8fec20d73ba0e3caf2814c5a939d1cb350a617",
+      "modified": "2026-09-19T15:00:54Z",
+      "chars": 44809,
+      "figures": 34,
+      "figuresPer10kChars": 7.6,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに — 年収の地図と、暮らしの地図は違う",
+          "value": 3689
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 家計データの読み方 — 名目と実質、比率と実額",
+          "value": 4827
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 県民所得と家計調査の所得を分けて読む",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 電気・都市ガス・灯油の支出と所得指標",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 1人当たり県民所得の格差を読む",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 1人当たり県民所得の格差を読む",
+          "value": 5
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 貯蓄残高 — 平均と世帯構成を読む",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 貯蓄残高 — 平均と世帯構成を読む",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 エンゲル係数 — 食費と消費支出の比率",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap008",
+          "chapterTitle": "第6章 世帯支出の構造を県で比べる",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap009",
+          "chapterTitle": "第7章 交通・通信費の構成比と通信契約数",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap010",
+          "chapterTitle": "第8章 地域財政の支出 — 家計とは別の会計を読む",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap011",
+          "chapterTitle": "第9章 紅茶の支出・購入数量と所得の比較",
+          "value": 4
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap012",
+          "chapterTitle": "終章 — 「安い県」でも「豊かな県」でもなく",
+          "value": 5127
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap013",
+          "chapterTitle": "出典と再現について",
+          "value": 3331
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "sources",
+          "chapterTitle": "出典と免責",
+          "value": 1024
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "年収が高い県は、暮らしも豊かなのか",
+          "chars": 265,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに — 年収の地図と、暮らしの地図は違う",
+          "chars": 3689,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 家計データの読み方 — 名目と実質、比率と実額",
+          "chars": 4827,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 県民所得と家計調査の所得を分けて読む",
+          "chars": 3575,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 電気・都市ガス・灯油の支出と所得指標",
+          "chars": 3686,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 1人当たり県民所得の格差を読む",
+          "chars": 2292,
+          "figures": 5,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 貯蓄残高 — 平均と世帯構成を読む",
+          "chars": 1852,
+          "figures": 3,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 エンゲル係数 — 食費と消費支出の比率",
+          "chars": 3666,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "第6章 世帯支出の構造を県で比べる",
+          "chars": 2183,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "第7章 交通・通信費の構成比と通信契約数",
+          "chars": 2802,
+          "figures": 5,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "第8章 地域財政の支出 — 家計とは別の会計を読む",
+          "chars": 2608,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "第9章 紅茶の支出・購入数量と所得の比較",
+          "chars": 3882,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "終章 — 「安い県」でも「豊かな県」でもなく",
+          "chars": 5127,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "出典と再現について",
+          "chars": 3331,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 1024,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-02",
+      "status": "measured",
+      "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+      "epubPath": ".local/kindle-books/K-S1-02/v4-20260920-imagegen/book.epub",
+      "epubSha256": "fb8c8579d40dc86c743a3a30ff40bf30e95205905a1b2e885effe1691d3c5ed0",
+      "modified": "2026-09-19T15:00:59Z",
+      "chars": 22077,
+      "figures": 11,
+      "figuresPer10kChars": 5,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 1363
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 2522
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 麺類への支出を地域で比べる",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 麺類への支出を地域で比べる",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 味噌の購入数量を読む",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 砂糖への支出と購入数量",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 かに支出の日本一",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 さばの食卓 — 支出額の地域差",
+          "value": 2
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 3281
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+          "chars": 234,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 1363,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 2522,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 麺類への支出を地域で比べる",
+          "chars": 2539,
+          "figures": 3,
+          "figuresWithoutText": 2,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 味噌の購入数量を読む",
+          "chars": 3045,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 砂糖への支出と購入数量",
+          "chars": 2543,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 かに支出の日本一",
+          "chars": 2230,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 さばの食卓 — 支出額の地域差",
+          "chars": 2438,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 3281,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 681,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-03",
+      "status": "measured",
+      "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
+      "epubPath": ".local/kindle-books/K-S1-03/v4-20260920-imagegen/book.epub",
+      "epubSha256": "e188b2d3ee3513168902f11a2c76866e022c85be3c0cc4a0f9d6cdf7b772513d",
+      "modified": "2026-09-19T15:01:06Z",
+      "chars": 24665,
+      "figures": 18,
+      "figuresPer10kChars": 7.3,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 3013
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4455
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 年齢別の未婚者割合を読む",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 年齢別の未婚者割合を読む",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 単身高齢世帯の増加",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 世帯構造の変容",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 東京の将来人口パラドックス",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 東京への人口移動集中",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 東京への人口移動集中",
+          "value": 3
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 3233
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
+          "chars": 204,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 3013,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4455,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 年齢別の未婚者割合を読む",
+          "chars": 2293,
+          "figures": 5,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 単身高齢世帯の増加",
+          "chars": 2492,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 世帯構造の変容",
+          "chars": 2403,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 東京の将来人口パラドックス",
+          "chars": 2394,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 1,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 東京への人口移動集中",
+          "chars": 2269,
+          "figures": 3,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 3233,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 476,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 672,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-04",
+      "status": "measured",
+      "title": "健康と医療の地図 — 寿命・自殺・介護2040",
+      "epubPath": ".local/kindle-books/K-S1-04/v4-20260920-imagegen/book.epub",
+      "epubSha256": "22d7e4285761aedf2a9edc5366c93d9848640b0ce99e635a35f7246f69a292f0",
+      "modified": "2026-09-19T15:01:13Z",
+      "chars": 24390,
+      "figures": 21,
+      "figuresPer10kChars": 8.6,
+      "figuresWithoutText": 1,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2332
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 3416
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 健康寿命の構造",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 健康寿命の構造",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 自殺率と高齢化の連関",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 2040年の介護職員必要数を読む",
+          "value": 6
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 病床利用率の地図",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 化学工業の集計と医療産業の区別",
+          "value": 4
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2594
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "健康と医療の地図 — 寿命・自殺・介護2040",
+          "chars": 249,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2332,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 3416,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 健康寿命の構造",
+          "chars": 2391,
+          "figures": 5,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 自殺率と高齢化の連関",
+          "chars": 2392,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 2040年の介護職員必要数を読む",
+          "chars": 3212,
+          "figures": 6,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 病床利用率の地図",
+          "chars": 2730,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 化学工業の集計と医療産業の区別",
+          "chars": 3172,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2594,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 476,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 665,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-05",
+      "status": "measured",
+      "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+      "epubPath": ".local/kindle-books/K-S1-05/v4-20260920-imagegen/book.epub",
+      "epubSha256": "1daffb366e1f4cd85f2ef23c954d12687b9f99d612c4efbd021ed6a3575b47cf",
+      "modified": "2026-09-19T15:01:19Z",
+      "chars": 22365,
+      "figures": 14,
+      "figuresPer10kChars": 6.3,
+      "figuresWithoutText": 0,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 1414
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 3192
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 子ども1人当たり教育費",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 教育費格差",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 授業料支出のランキング",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 大学進学の収容力",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 子育て関連7指標の合成ランキングとその限界",
+          "value": 3
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2258
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+          "chars": 238,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 1414,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 3192,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 子ども1人当たり教育費",
+          "chars": 2292,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 教育費格差",
+          "chars": 1491,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 授業料支出のランキング",
+          "chars": 2415,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 大学進学の収容力",
+          "chars": 2330,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 子育て関連7指標の合成ランキングとその限界",
+          "chars": 4874,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2258,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 660,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-06",
+      "status": "measured",
+      "title": "自治体財政の地図 — 財政力・借金・将来負担",
+      "epubPath": ".local/kindle-books/K-S1-06/v4-20260920-imagegen/book.epub",
+      "epubSha256": "8e5d7c519f06d36505f683d4eaef06610bb3cdd28999c441dece4edc74815b7d",
+      "modified": "2026-09-19T15:01:23Z",
+      "chars": 25860,
+      "figures": 14,
+      "figuresPer10kChars": 5.4,
+      "figuresWithoutText": 0,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2129
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4062
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 財政力指数の格差",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 財政健全度の50年",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 地方税収の格差",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 地方債務の負担",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 将来負担比率の両極",
+          "value": 2
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2276
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "自治体財政の地図 — 財政力・借金・将来負担",
+          "chars": 244,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2129,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4062,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 財政力指数の格差",
+          "chars": 2970,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 財政健全度の50年",
+          "chars": 2841,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 地方税収の格差",
+          "chars": 2278,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 地方債務の負担",
+          "chars": 3347,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 将来負担比率の両極",
+          "chars": 3878,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2276,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 634,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-07",
+      "status": "measured",
+      "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+      "epubPath": ".local/kindle-books/K-S1-07/v4-20260920-imagegen/book.epub",
+      "epubSha256": "4c0c6716483aa4ef5ba2d50dbb8de5d90ac9abaf027c83b393803fac23432ee1",
+      "modified": "2026-09-19T15:01:29Z",
+      "chars": 24069,
+      "figures": 14,
+      "figuresPer10kChars": 5.8,
+      "figuresWithoutText": 7,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2400
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4175
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 宿泊の地域格差",
+          "value": 1
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 国籍別の宿泊先を比較する",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 国籍別の宿泊先を比較する",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 宿泊の集中",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 宿泊の集中",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 宿泊客のインバウンド回復",
+          "value": 4
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 海外旅行の格差",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 海外旅行の格差",
+          "value": 3
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2739
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+          "chars": 234,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 910,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2400,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4175,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 宿泊の地域格差",
+          "chars": 2065,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 国籍別の宿泊先を比較する",
+          "chars": 2793,
+          "figures": 3,
+          "figuresWithoutText": 3,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 宿泊の集中",
+          "chars": 2677,
+          "figures": 3,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 宿泊客のインバウンド回復",
+          "chars": 2711,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 海外旅行の格差",
+          "chars": 2259,
+          "figures": 3,
+          "figuresWithoutText": 3,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2739,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 666,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-08",
+      "status": "measured",
+      "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+      "epubPath": ".local/kindle-books/K-S1-08/v4-20260920-imagegen/book.epub",
+      "epubSha256": "2892ebb370aa16879f301f4d2bd172afdca4f6aab339e4d6da478afa3f243382",
+      "modified": "2026-09-19T15:01:33Z",
+      "chars": 23249,
+      "figures": 13,
+      "figuresPer10kChars": 5.6,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 1114
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 3419
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 エネルギー消費構造の変化",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 エネルギー消費構造の変化",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 再生可能エネルギーの地域差",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 電力需要の格差",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 ガス・電気インフラ",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 ガソリン車社会の地図",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 ガソリン車社会の地図",
+          "value": 4
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2512
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+          "chars": 246,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 1114,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 3419,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 エネルギー消費構造の変化",
+          "chars": 2768,
+          "figures": 2,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 再生可能エネルギーの地域差",
+          "chars": 2326,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 電力需要の格差",
+          "chars": 2770,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 ガス・電気インフラ",
+          "chars": 3300,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 ガソリン車社会の地図",
+          "chars": 2933,
+          "figures": 4,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2512,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 660,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-09",
+      "status": "measured",
+      "title": "産業と地域経済の地図 — 製造・中小・地価",
+      "epubPath": ".local/kindle-books/K-S1-09/v4-20260920-imagegen/book.epub",
+      "epubSha256": "0da5ac125d3504bc3d82edf8c22cb98bbf11b7db93affb65dd14ed7361a5c616",
+      "modified": "2026-09-19T15:01:39Z",
+      "chars": 23704,
+      "figures": 17,
+      "figuresPer10kChars": 7.2,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 1022
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4414
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 愛知の製造業支配",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 製造業の生産性",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 中小企業の地図",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 工業用水と製造業",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 工業用水と製造業",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 商業地地価の推移",
+          "value": 4
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2335
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "産業と地域経済の地図 — 製造・中小・地価",
+          "chars": 229,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 1022,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4414,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 愛知の製造業支配",
+          "chars": 2807,
+          "figures": 5,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 製造業の生産性",
+          "chars": 2613,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 中小企業の地図",
+          "chars": 2792,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 工業用水と製造業",
+          "chars": 3718,
+          "figures": 4,
+          "figuresWithoutText": 2,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 商業地地価の推移",
+          "chars": 1926,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2335,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 647,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-10",
+      "status": "measured",
+      "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
+      "epubPath": ".local/kindle-books/K-S1-10/v4-20260920-imagegen/book.epub",
+      "epubSha256": "e282c0a4c44da7b90950507a93e950ba814ccb661903b410586d55d98c4dceeb",
+      "modified": "2026-09-19T15:01:45Z",
+      "chars": 22523,
+      "figures": 19,
+      "figuresPer10kChars": 8.4,
+      "figuresWithoutText": 1,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4406
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 犯罪率の地域差",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 労働災害の地図",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 公害苦情の地図",
+          "value": 4
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 廃棄物とリサイクルの格差",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 廃棄物とリサイクルの格差",
+          "value": 3
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 火災・地震保険料支出を読む",
+          "value": 3
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2331
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
+          "chars": 234,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 977,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4406,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 犯罪率の地域差",
+          "chars": 3078,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 労働災害の地図",
+          "chars": 3279,
+          "figures": 5,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 公害苦情の地図",
+          "chars": 2364,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 廃棄物とリサイクルの格差",
+          "chars": 1780,
+          "figures": 3,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 火災・地震保険料支出を読む",
+          "chars": 2212,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2331,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 661,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-11",
+      "status": "measured",
+      "title": "文化・スポーツ・余暇の地図",
+      "epubPath": ".local/kindle-books/K-S1-11/v4-20260920-imagegen/book.epub",
+      "epubSha256": "bf7758d6fb071929a5b4f1684fdd468d2ca38d9498c7b832355c7132ad623b44",
+      "modified": "2026-09-19T15:01:50Z",
+      "chars": 22971,
+      "figures": 15,
+      "figuresPer10kChars": 6.5,
+      "figuresWithoutText": 2,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 4730
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 図書館・博物館の文化資本",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 図書館・博物館の文化資本",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 スポーツ施設の地域格差",
+          "value": 3
+        },
+        {
+          "code": "figure-without-text",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 スポーツ参加の地図",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 スポーツ参加の地図",
+          "value": 1
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 スポーツと都市のパラドックス",
+          "value": 5
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 映画館支出",
+          "value": 2
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 2220
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "文化・スポーツ・余暇の地図",
+          "chars": 218,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 995,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 4730,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 図書館・博物館の文化資本",
+          "chars": 3022,
+          "figures": 4,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 スポーツ施設の地域格差",
+          "chars": 2465,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 スポーツ参加の地図",
+          "chars": 2616,
+          "figures": 1,
+          "figuresWithoutText": 1,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 スポーツと都市のパラドックス",
+          "chars": 2821,
+          "figures": 5,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 映画館支出",
+          "chars": 2054,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 2220,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 629,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S1-12",
+      "status": "measured",
+      "title": "デジタル生活の地図 — 通信・PC・テレワーク",
+      "epubPath": ".local/kindle-books/K-S1-12/v4-20260920-imagegen/book.epub",
+      "epubSha256": "7f0dd1a3894057279d1316e714665217614d578f2ceb7b31f949c60ff0b265c2",
+      "modified": "2026-09-19T15:01:54Z",
+      "chars": 17984,
+      "figures": 11,
+      "figuresPer10kChars": 6.1,
+      "figuresWithoutText": 0,
+      "fullTables": 0,
+      "siteLinks": 0,
+      "siteLinksWithUtm": 0,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 1010
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第0章 データの読み方",
+          "value": 1911
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap003",
+          "chapterTitle": "第1章 テレビ・ラジオ・新聞・雑誌の時間の男女差",
+          "value": 4
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap004",
+          "chapterTitle": "第2章 人口を超える携帯契約",
+          "value": 2
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap005",
+          "chapterTitle": "第3章 パソコン支出",
+          "value": 2
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap006",
+          "chapterTitle": "第4章 テレワーク格差 — 東京6倍",
+          "value": 1776
+        },
+        {
+          "code": "data-chapter-without-full-table",
+          "chapterId": "chap007",
+          "chapterTitle": "第5章 コンビニ密度の地図",
+          "value": 3
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "終章",
+          "value": 3976
+        },
+        {
+          "code": "no-site-link",
+          "value": 0
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "デジタル生活の地図 — 通信・PC・テレワーク",
+          "chars": 243,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 761,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 1010,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第0章 データの読み方",
+          "chars": 1911,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第1章 テレビ・ラジオ・新聞・雑誌の時間の男女差",
+          "chars": 1789,
+          "figures": 4,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第2章 人口を超える携帯契約",
+          "chars": 1797,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第3章 パソコン支出",
+          "chars": 1875,
+          "figures": 2,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第4章 テレワーク格差 — 東京6倍",
+          "chars": 1776,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第5章 コンビニ密度の地図",
+          "chars": 1735,
+          "figures": 3,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "終章",
+          "chars": 3976,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 671,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    }
+  ]
+}

@@ -29,7 +29,7 @@ export default async function KindleBookPage({ params }: { params: Promise<{ id:
   const book = readKindleBook(id);
   if (!book) notFound();
 
-  const total = (key: "chars" | "figures" | "figuresWithoutText" | "siteLinks" | "siteLinksWithUtm") =>
+  const total = (key: "chars" | "figures" | "figuresWithoutText" | "fullTables" | "siteLinks" | "siteLinksWithUtm") =>
     book.chapters.reduce((sum, chapter) => sum + chapter[key], 0);
   const chars = total("chars");
   const figures = total("figures");
@@ -69,7 +69,7 @@ export default async function KindleBookPage({ params }: { params: Promise<{ id:
           label="サイトへのリンク"
           icon={<LinkIcon />}
           value={total("siteLinks")}
-          sub={`UTM 付き ${total("siteLinksWithUtm")}`}
+          sub={`UTM 付き ${total("siteLinksWithUtm")} · 全県表 ${total("fullTables")}`}
         />
       </Grid>
 
@@ -80,6 +80,7 @@ export default async function KindleBookPage({ params }: { params: Promise<{ id:
             { id: "chars", header: "文字", sortable: true, nowrap: true },
             { id: "figures", header: "図", sortable: true, nowrap: true },
             { id: "without", header: "説明の無い図", sortable: true, nowrap: true },
+            { id: "tables", header: "表 (全県)", nowrap: true },
             { id: "links", header: "サイトへのリンク", nowrap: true },
           ]}
           rows={book.chapters.map((chapter) => ({
@@ -89,6 +90,7 @@ export default async function KindleBookPage({ params }: { params: Promise<{ id:
               chapter.chars.toLocaleString("ja-JP"),
               chapter.figures,
               chapter.figuresWithoutText,
+              chapter.tables ? `${chapter.tables} (${chapter.fullTables})` : "—",
               chapter.siteLinks ? `${chapter.siteLinks} (UTM ${chapter.siteLinksWithUtm})` : "—",
             ],
           }))}

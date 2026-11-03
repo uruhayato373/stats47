@@ -2,7 +2,9 @@ import { deflateRawSync } from "node:zlib";
 
 import { describe, expect, it } from "vitest";
 
-import { chapterMetrics, parseEpub, readZip, sanitizeChapterHtml } from "@/lib/server/kindle-epub";
+import { sanitizeChapterHtml } from "@/lib/server/kindle-epub";
+
+import { chapterMetrics, parseEpub, readZip } from "../../../../packages/product-factory/src/channels/kindle/epub-inspect";
 
 /** テスト用の最小 ZIP (local header + central directory + EOCD)。deflate を true にした項目は圧縮する。 */
 function zip(files: readonly { name: string; text: string; deflate?: boolean }[]): Buffer {
@@ -72,14 +74,14 @@ describe("kindle-epub", () => {
   });
 
   it("spine の順に本文の章だけを読み、表紙と目次は除く", () => {
-    const book = parseEpub(sampleEpub(), "K-S1-02");
+    const book = parseEpub(sampleEpub());
     expect(book.title).toBe("食卓の本");
     expect(book.modified).toBe("2026-09-19T15:00:59Z");
     expect(book.chapters.map((chapter) => chapter.title)).toEqual(["第1章 かに"]);
   });
 
   it("図の数・直後に説明の無い図・サイトへのリンクと UTM の有無を数える", () => {
-    expect(chapterMetrics(CHAPTER)).toMatchObject({ figures: 2, figuresWithoutText: 1, siteLinks: 2, siteLinksWithUtm: 1 });
+    expect(chapterMetrics(CHAPTER)).toMatchObject({ figures: 2, figuresWithoutText: 1, siteLinks: 2, siteLinksWithUtm: 1, tables: 0, fullTables: 0, rankingDatabookFigures: 0 });
   });
 
   it("script を落とし、図は管理画面のルートへ向け直し、許していない場所の画像は表示しない", () => {
