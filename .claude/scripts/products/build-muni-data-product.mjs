@@ -7,6 +7,8 @@
  * 実行: node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric manufacturing-shipment-amount
  *   --skip-geo         境界を作らない (前回の geo-report.json があれば README に使う)
  *   --simplify 5%      境界の頂点を残す割合
+ *   --symbols-only     e-Stat の記号と統計表の情報だけを取って止まる。リポジトリが公開なので、CI はこれだけを回し、
+ *                      販売物を作らない (.github/workflows/muni-data-symbols.yml)。Mac は取り込んだ結果を読む
  * 検算に未説明の差があれば exit 1。ESTAT_APP_ID か NEXT_PUBLIC_ESTAT_APP_ID があれば空欄の記号を取り直す。
  * 呼び出し元: オーナー / 対話セッション (定期実行はない)。
  */
@@ -43,6 +45,7 @@ const { values: args } = parseArgs({
     metric: { type: 'string' },
     'skip-geo': { type: 'boolean', default: false },
     simplify: { type: 'string', default: '5%' },
+    'symbols-only': { type: 'boolean', default: false },
   },
 });
 const spec = MUNI_PRODUCT_SPECS[args.metric];
@@ -61,6 +64,7 @@ async function fetchJson(url) {
 async function fetchEstatSymbols(appId) {
   const values = [];
   let notes = null;
+  let table = null;
   let startPosition = 1;
   while (startPosition) {
     const query = new URLSearchParams({ appId, statsDataId: spec.estat.statsDataId, cdCat01: spec.estat.cdCat01, metaGetFlg: 'N', limit: '100000', startPosition: String(startPosition) });
@@ -70,9 +74,10 @@ async function fetchEstatSymbols(appId) {
     const statistical = data.STATISTICAL_DATA;
     values.push(...[statistical.DATA_INF.VALUE].flat());
     notes ??= statistical.DATA_INF.NOTE;
+    table ??= statistical.TABLE_INF;
     startPosition = statistical.RESULT_INF.NEXT_KEY ?? 0;
   }
-  return parseEstatValues({ values, notes, yearOf: extractYearCode });
+  return { ...parseEstatValues({ values, notes, yearOf: extractYearCode }), table };
 }
 
 function run(command, commandArgs) {
@@ -196,11 +201,32 @@ const [cities, prefs] = await Promise.all([
 ]);
 
 const appId = process.env.ESTAT_APP_ID || process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
-const estat = appId ? await fetchEstatSymbols(appId) : null;
-const estatCheck = estat && {
-  symbols: estat.symbols.size,
-  differs: cities.rows.filter((r) => r.value != null && estat.numbers.get(`${r.areaCode}|${r.yearCode}`) !== r.value).length,
-};
+const symbolsPath = join(cacheDir, `estat-symbols-${args.metric}.json`);
+if (args['symbols-only'] && !appId) throw new Error('--symbols-only は e-Stat の appId が要る');
+let estat = null;
+let estatCheck = null;
+if (appId) {
+  estat = await fetchEstatSymbols(appId);
+  const differs = cities.rows.filter((r) => r.value != null && estat.numbers.get(`${r.areaCode}|${r.yearCode}`) !== r.value);
+  estatCheck = { symbols: estat.symbols.size, differs: differs.length };
+  mkdirSync(cacheDir, { recursive: true });
+  writeFileSync(symbolsPath, `${JSON.stringify({
+    metric: args.metric,
+    statsDataId: spec.estat.statsDataId,
+    table: estat.table,
+    symbols: [...estat.symbols],
+    differs: differs.slice(0, 500).map((r) => ({ key: `${r.areaCode}|${r.yearCode}`, r2: r.value, estat: estat.numbers.get(`${r.areaCode}|${r.yearCode}`) ?? null })),
+    differCount: differs.length,
+  }, null, 1)}\n`);
+  if (args['symbols-only']) {
+    console.log(`[muni-data] e-Stat 記号 ${estatCheck.symbols} / R2 との差 ${estatCheck.differs} / 統計表 ${JSON.stringify(estat.table?.TITLE ?? null)}`);
+    process.exit(0);
+  }
+} else if (existsSync(symbolsPath)) {
+  const saved = JSON.parse(readFileSync(symbolsPath, 'utf8'));
+  estat = { symbols: new Map(saved.symbols) };
+  estatCheck = { symbols: estat.symbols.size, differs: saved.differCount };
+}
 const symbols = estat?.symbols ?? null;
 
 const rows = buildRows({ cityRows: cities.rows, areas: municipalities, spec, symbols });

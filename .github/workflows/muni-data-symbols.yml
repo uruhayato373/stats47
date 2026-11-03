@@ -1,0 +1,53 @@
+name: 🧾 Muni data symbols (e-Stat)
+
+# 市区町村データ商品の e-Stat の記号 (秘匿・該当なし) と統計表の情報だけを取る。
+# 販売物 (CSV・GeoJSON) はここで作らない。リポジトリが公開なので artifact を誰でも取れるため。
+# 取り込み: gh run download <run> -n estat-symbols -D .local/muni-data-products/_cache のあと、
+# Mac で build-muni-data-product.mjs を appId なしで回す。
+
+on:
+  workflow_dispatch:
+    inputs:
+      metric:
+        description: "指標キー (muni-data-product-specs.mjs に定義があるもの)"
+        required: false
+        default: "manufacturing-shipment-amount"
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/muni-data-symbols.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  symbols:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 📦 Install
+        run: npm ci
+
+      - name: 🧾 Fetch e-Stat symbols
+        env:
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+          METRIC: ${{ inputs.metric || 'manufacturing-shipment-amount' }}
+        run: node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric "$METRIC" --symbols-only
+
+      - name: 📤 Upload symbols
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: estat-symbols
+          path: .local/muni-data-products/_cache/estat-symbols-*.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
