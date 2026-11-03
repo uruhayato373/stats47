@@ -1,24 +1,17 @@
 'use client';
-import 'leaflet/dist/leaflet.css';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { Button } from '@stats47/components/atoms/ui/button';
 import { circleMarker } from 'leaflet';
-import {
-  GeoJSON,
-  MapContainer,
-  TileLayer,
-  useMap,
-  useMapEvents,
-} from 'react-leaflet';
+import { GeoJSON, useMapEvents } from 'react-leaflet';
+
+import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
 
 import { fetchGeoLandslideSourceAction } from '../actions';
 import {
   buildGeoLandslideMapModel,
   LANDSLIDE_CLASS_LABELS,
 } from '../lib/build-geo-landslide-map-model';
-import { createGeoCanvasRenderer } from '../lib/create-geo-canvas-renderer';
-import { GEO_BASEMAP } from '../lib/geo-basemap';
 import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
 import type {
@@ -63,22 +56,6 @@ function SourceViewport({bounds,generatedAt}:{bounds:readonly [number,number,num
     <SourceStatus>{status}</SourceStatus>
   </>;
 }
-function Fit({
-  center,
-  bounds,
-  extent,
-}: {
-  center: [number, number];
-  bounds: [[number, number], [number, number]];
-  extent: boolean;
-}) {
-  const map = useMap();
-  useEffect(() => {
-    if (extent) map.fitBounds(bounds, { padding: [16, 16], maxZoom: 11 });
-    else map.setView(center, 10);
-  }, [map, center, bounds, extent]);
-  return null;
-}
 export function GeoLandslideLeafletMap({
   detail,
   view,
@@ -88,10 +65,12 @@ export function GeoLandslideLeafletMap({
   view: 'population' | 'overlap' | 'facilities';
   manifest: GeoAnalysisEvidenceManifest;
 }) {
-  const renderer = useState(() => createGeoCanvasRenderer())[0],
-    model = useMemo(() => buildGeoLandslideMapModel(detail), [detail]);
-  const [extent, setExtent] = useState(false),
-    [source, setSource] = useState(false);
+  const model = useMemo(() => buildGeoLandslideMapModel(detail), [detail]);
+  const focus = useMemo(
+    () => ({ center: model.center, zoom: 10, label: '人口最多メッシュ周辺' }),
+    [model]
+  );
+  const [source, setSource] = useState(false);
   const facilities = useMemo<FeatureCollection>(
     () => ({
       type: 'FeatureCollection',
@@ -109,22 +88,11 @@ export function GeoLandslideLeafletMap({
     [detail]
   );
   return (
-    <div>
-      <div className="mb-2 flex flex-wrap gap-2">
-        <Button
-          size="sm"
-          variant={extent ? 'outline' : 'default'}
-          onClick={() => setExtent(false)}
-        >
-          人口最多メッシュ周辺
-        </Button>
-        <Button
-          size="sm"
-          variant={extent ? 'default' : 'outline'}
-          onClick={() => setExtent(true)}
-        >
-          離島を含む全県
-        </Button>
+    <LeafletMapFrame
+      ariaLabel={`${detail.areaName}の指定区域面と人口・公共施設`}
+      bounds={model.bounds}
+      focus={focus}
+      toolbar={
         <Button
           size="sm"
           variant="outline"
@@ -133,71 +101,53 @@ export function GeoLandslideLeafletMap({
         >
           区域面の境界{source ? 'を隠す' : 'を表示'}
         </Button>
-      </div>
-      <MapContainer
-        renderer={renderer}
-        preferCanvas
-        center={model.center}
-        zoom={10}
-        zoomAnimation={false}
-        minZoom={GEO_BASEMAP.minZoom}
-        maxZoom={GEO_BASEMAP.maxZoom}
-        scrollWheelZoom={false}
-        className="isolate h-[480px] rounded-card lg:h-[620px]"
-        aria-label={`${detail.areaName}の指定区域面と人口・公共施設`}
-      >
-        <TileLayer
-          url={GEO_BASEMAP.url}
-          attribution={GEO_BASEMAP.attribution}
-        />
+      }
+    >
+      <GeoJSON
+        key={`${detail.areaCode}-${view}`}
+        data={model.collection}
+        style={(f) => ({
+          color: GEO_MAP_COLORS.outline,
+          weight: 0.2,
+          fillOpacity: 0.6,
+          fillColor:
+            view === 'population'
+              ? Number(f?.properties?.population2020) >= 1000
+                ? GEO_MAP_COLORS.designationPopulation.high
+                : Number(f?.properties?.population2020) >= 100
+                  ? GEO_MAP_COLORS.designationPopulation.medium
+                  : GEO_MAP_COLORS.designationPopulation.low
+              : GEO_MAP_COLORS.designationClass[
+                  Number(f?.properties?.centerClass)
+                ],
+        })}
+        onEachFeature={(f, l) => {
+          const p = f.properties,
+            n = document.createElement('span');
+          n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 4 })}人｜${LANDSLIDE_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜境界と交差する格子' : ''}`;
+          l.bindTooltip(n, { sticky: true });
+          l.bindPopup(n.cloneNode(true) as HTMLElement);
+        }}
+      />
+      {view === 'facilities' ? (
         <GeoJSON
-          key={`${detail.areaCode}-${view}`}
-          data={model.collection}
-          style={(f) => ({
-            color: GEO_MAP_COLORS.outline,
-            weight: 0.2,
-            fillOpacity: 0.6,
-            fillColor:
-              view === 'population'
-                ? Number(f?.properties?.population2020) >= 1000
-                  ? GEO_MAP_COLORS.designationPopulation.high
-                  : Number(f?.properties?.population2020) >= 100
-                    ? GEO_MAP_COLORS.designationPopulation.medium
-                    : GEO_MAP_COLORS.designationPopulation.low
-                : GEO_MAP_COLORS.designationClass[
-                    Number(f?.properties?.centerClass)
-                  ],
-          })}
+          key={`facilities-${detail.areaCode}`}
+          data={facilities}
+          pointToLayer={(f, ll) =>
+            circleMarker(ll, {
+              radius: 4,
+              color: Number(f.properties?.mask) ? GEO_MAP_COLORS.designationFacility.inside : GEO_MAP_COLORS.designationFacility.outside,
+              fillOpacity: 0.8,
+            })
+          }
           onEachFeature={(f, l) => {
-            const p = f.properties,
-              n = document.createElement('span');
-            n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 4 })}人｜${LANDSLIDE_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜境界と交差する格子' : ''}`;
-            l.bindTooltip(n, { sticky: true });
-            l.bindPopup(n.cloneNode(true) as HTMLElement);
+            const n = document.createElement('span');
+            n.textContent = `${f.properties?.name}｜${f.properties?.kind}｜${Number(f.properties?.mask) ? '原典地点が指定区域面内' : '原典地点が入力面外（安全を示さない）'}`;
+            l.bindTooltip(n);
           }}
         />
-        {view === 'facilities' ? (
-          <GeoJSON
-            key={`facilities-${detail.areaCode}`}
-            data={facilities}
-            pointToLayer={(f, ll) =>
-              circleMarker(ll, {
-                renderer,
-                radius: 4,
-                color: Number(f.properties?.mask) ? GEO_MAP_COLORS.designationFacility.inside : GEO_MAP_COLORS.designationFacility.outside,
-                fillOpacity: 0.8,
-              })
-            }
-            onEachFeature={(f, l) => {
-              const n = document.createElement('span');
-              n.textContent = `${f.properties?.name}｜${f.properties?.kind}｜${Number(f.properties?.mask) ? '原典地点が指定区域面内' : '原典地点が入力面外（安全を示さない）'}`;
-              l.bindTooltip(n);
-            }}
-          />
-        ) : null}
-        {source ? <Source manifest={manifest} /> : null}
-        <Fit center={model.center} bounds={model.bounds} extent={extent} />
-      </MapContainer>
-    </div>
+      ) : null}
+      {source ? <Source manifest={manifest} /> : null}
+    </LeafletMapFrame>
   );
 }

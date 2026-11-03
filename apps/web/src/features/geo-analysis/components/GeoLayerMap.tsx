@@ -1,12 +1,12 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
 import { useMemo } from 'react';
 
 import L, { type LatLngBoundsExpression } from 'leaflet';
-import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
+import { GeoJSON } from 'react-leaflet';
 
-import { GEO_BASEMAP } from '../lib/geo-basemap';
+import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
+
 import { populationLayerColor, type GeoLayerData } from '../lib/geo-layer-data';
 import { GEO_MAP_COLORS } from '../lib/geo-map.palette';
 
@@ -58,39 +58,31 @@ export function GeoLayerMap({
             }));
     return { type: 'FeatureCollection', features };
   }, [data, year]);
-  const coordinates = collection.features.map((f) =>
-    f.geometry.type === 'Point'
-      ? f.geometry.coordinates
-      : f.geometry.coordinates[0][0]
-  );
-  // The median avoids centering Tokyo/Kagoshima in the sea because of distant islands.
-  const median = (values: number[]) =>
-    [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
-  const center: [number, number] = [
-    median(coordinates.map((p) => p[1])),
-    median(coordinates.map((p) => p[0])),
-  ];
-  const bounds: LatLngBoundsExpression = L.geoJSON(collection).getBounds();
+  const { focus, bounds } = useMemo(() => {
+    const coordinates = collection.features.map((f) =>
+      f.geometry.type === 'Point'
+        ? f.geometry.coordinates
+        : f.geometry.coordinates[0][0]
+    );
+    // The median avoids centering Tokyo/Kagoshima in the sea because of distant islands.
+    const median = (values: number[]) =>
+      [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
+    const center: [number, number] = [
+      median(coordinates.map((p) => p[1])),
+      median(coordinates.map((p) => p[0])),
+    ];
+    const extent: LatLngBoundsExpression = L.geoJSON(collection).getBounds();
+    return { focus: { center, zoom: 9, label: '周辺' }, bounds: extent };
+  }, [collection]);
   return (
-    <MapContainer
-      key={`${data.areaCode}-${year}-${fullExtent}`}
-      center={center}
-      zoom={9}
-      bounds={fullExtent ? bounds : undefined}
-      boundsOptions={{ padding: [20, 20], maxZoom: 11 }}
-      zoomAnimation={false}
-      scrollWheelZoom={false}
-      preferCanvas
-      className="h-[360px] w-full sm:h-[480px] lg:h-[560px]"
-      aria-label={`${data.areaName}の単体GIS地図`}
+    <LeafletMapFrame
+      ariaLabel={`${data.areaName}の単体GIS地図`}
+      bounds={bounds}
+      focus={focus}
+      whole={fullExtent}
     >
-      <TileLayer
-        url={GEO_BASEMAP.url}
-        attribution={GEO_BASEMAP.attribution}
-        minZoom={GEO_BASEMAP.minZoom}
-        maxZoom={GEO_BASEMAP.maxZoom}
-      />
       <GeoJSON
+        key={`${data.areaCode}-${year}`}
         data={collection}
         style={(feature) =>
           data.kind !== 'population'
@@ -129,6 +121,6 @@ export function GeoLayerMap({
           });
         }}
       />
-    </MapContainer>
+    </LeafletMapFrame>
   );
 }

@@ -24,6 +24,7 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
+import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
@@ -35,7 +36,6 @@ import {
 
 
 import { fetchGeoDetailAction } from '../actions';
-import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '../lib/geo-basemap';
 import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,

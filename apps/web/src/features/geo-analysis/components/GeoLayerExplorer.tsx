@@ -18,10 +18,10 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 
 import Link from '@/components/atoms/SiteLink';
 import { ChartLegend } from '@/components/charts/ChartLegend';
+import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
 import { SurfaceCard, ValueTable, type ValueTableColumn, type ValueTableRow } from '@/components/surface';
 
 import { fetchGeoLayerAction } from '../actions';
-import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '../lib/geo-basemap';
 import { GEO_CROSS_ANALYSIS_CONFIGS } from '../lib/geo-cross-analysis';
 import { populationLayerColor, type GeoLayerData } from '../lib/geo-layer-data';
 

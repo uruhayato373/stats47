@@ -1,7 +1,7 @@
 import { Canvas } from 'leaflet';
 import { describe, expect, it, vi } from 'vitest';
 
-import { createGeoCanvasRenderer } from '../create-geo-canvas-renderer';
+import { createGeoCanvasRenderer } from '../leaflet-canvas-renderer';
 
 type CanvasRedraw = Canvas & { _redraw: () => void };
 

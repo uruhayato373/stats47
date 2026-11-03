@@ -58,6 +58,20 @@ const rules = [
       ].includes(relativePath),
   },
   {
+    // Leaflet の地図は共通の枠 LeafletMapFrame (背景タイル・canvas・高さ・表示範囲の合わせ方) で描く (2026-11-03)。
+    // 各地図が MapContainer を直接組むと、高さ・ホイールでの拡大・背景タイルが地図ごとにずれる
+    id: 'leaflet-maps-use-shared-frame',
+    message:
+      'Draw Leaflet maps with LeafletMapFrame (@/components/charts/LeafletMapFrame) and pass only the layers. Do not assemble MapContainer/TileLayer directly.',
+    pattern: /\bMapContainer\b/,
+    allow: (relativePath) =>
+      [
+        'src/components/charts/LeafletMapFrame.tsx',
+        // 出典の地図: 全世界の範囲を狭い画面に収める独自の合わせ方 (fitGeoSourceBounds) と、指で押せる 44px の拡大ボタンを持つ
+        'src/features/geo-analysis/components/GeoSourceMap.tsx',
+      ].includes(relativePath),
+  },
+  {
     // 内訳の図 (構成比・ドーナツ) は共通の BreakdownDonut (共通の D3 のドーナツ + ChartLegend の一覧) で描く (2026-11-01)。
     // ページや部品の中で D3 の円を手書きすると、同じ種類の図が 2 通りの見た目になる
     id: 'no-inline-d3-pie',
