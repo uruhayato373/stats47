@@ -1,8 +1,10 @@
 {
-  "hash": "b41a91daaa578f1d1a5ac40cca4c2b4b35e652cb78f3ecbcf5c3184d5eb47045",
-  "audited_at": "2026-11-02T03:19:46",
+  "hash": "0a1e3642b27b464ac55b4264a8219e6852237db0d8629a8b50874f8c94781665",
+  "audited_at": "2026-11-03T06:19:25",
   "files": [
-    ".claude/scripts/blog/fetch-kakei-city-average.mjs",
-    ".claude/skills/estat/references/household-expenditure-survey.md"
+    ".agents/skills/product/build-kindle-book/SKILL.md",
+    ".claude/scripts/kdp/capture-figures.mjs",
+    ".claude/scripts/kdp/notebooklm-review.ts",
+    ".claude/skills/product/build-kindle-book/SKILL.md"
   ]
 }

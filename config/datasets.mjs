@@ -341,6 +341,7 @@ export const DATASETS = [
   d("kindle.archives", "data/products/kindle-archives.json", "ledger", "product", "data", "KDP へ送った版の暗号化保全の台帳", { schema: "config/schema/kindle.archives.schema.json" }),
   d("products.publication-receipts", "data/products/{name}-{date}.json", "evidence", "product", "data", "商品の公開・準備の受領記録"),
   d("kdp.weekly-publication", "data/products/kdp-weekly-publication.json", "state", "product", "data", "KDP 週次公開の判定"),
+  d("kindle.figure-reviews", "data/products/kindle-figure-reviews.json", "state", "product", "data", "既刊 Kindle の図の評価 (図の sha256 ごと。同じ図を二度評価しない。KINDLE-QUALITY-LOOP-01)"),
   d("kindle.quality", "data/products/kindle-quality.json", "state", "product", "data", "既刊 Kindle の中身の機械の検査 (章ごとの図・全県表・リンクと印。KINDLE-QUALITY-LOOP-01)"),
   d("products.status", "data/products/{name}-status.json", "state", "product", "data", "商品・書籍・note の生成と販売準備の状態"),
   d("kindle.verification", "data/products/kindle-{name}-verification.json", "evidence", "product", "data", "Kindle 版ごとの検証記録"),
