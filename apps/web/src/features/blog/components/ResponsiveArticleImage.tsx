@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { isResponsiveRankingChart, resolveMobileChartSource } from "../lib/responsive-chart";
+import { isResponsiveRankingChart, resolveDarkChartSource, resolveMobileChartSource } from "../lib/responsive-chart";
 
 import { MEDIA_QUERIES } from "@/constants/breakpoints";
 
@@ -14,35 +14,48 @@ interface ResponsiveArticleImageProps {
 }
 
 /**
- * ブログ本文画像。ランキングと積み上げ棒のSVGだけPC横長／mobile版をpictureで切り替える。
- * 未移行の公開記事にmobile assetがまだ無い場合はonErrorでdesktopへ戻し、画像切れを起こさない。
- * ランキングのmobile版は2:3の縦長固定なので枠を2:3にする。積み上げ棒は高さが項目数で変わるので画像の比率に任せる。
+ * ブログ本文画像。ランキングと積み上げ棒のSVGはスマホで `-mobile.svg` に切り替え、ランキングと地図は
+ * サイトの暗い表示のとき `-dark.svg` に切り替える。どちらも無い記事は読み込み失敗で元の画像へ戻し、画像切れを起こさない。
+ * ランキングと地図は 4:5 の型の画像、積み上げ棒は項目数で高さが変わるので、比率は画像に任せる。
  */
 export function ResponsiveArticleImage({ src, alt }: ResponsiveArticleImageProps) {
   const [mobileFailed, setMobileFailed] = useState(false);
+  const [darkFailed, setDarkFailed] = useState(false);
   const mobileSrc = mobileFailed ? null : resolveMobileChartSource(src);
+  const darkSrc = darkFailed ? null : resolveDarkChartSource(src);
   const isRankingChart = isResponsiveRankingChart(src);
-  const isFixedPortrait = mobileSrc !== null && isRankingChart;
+  const size = darkSrc || isRankingChart ? { width: 1080, height: 1350 } : { width: 800, height: 450 };
+  const imageProps = {
+    alt,
+    ...size,
+    sizes: `${MEDIA_QUERIES.belowSm} 100vw, 672px`,
+    decoding: "async" as const,
+    loading: "lazy" as const,
+    unoptimized: true,
+  };
 
   return (
-    <picture className={isFixedPortrait ? "block max-sm:aspect-2/3" : "block"}>
-      {mobileSrc && <source media={MEDIA_QUERIES.belowSm} srcSet={mobileSrc} />}
-      <Image
-        src={src}
-        alt={alt}
-        width={isRankingChart ? 960 : 800}
-        height={isRankingChart ? 404 : 450}
-        className={isFixedPortrait
-          ? "h-auto w-full rounded-lg max-sm:h-full max-sm:object-contain"
-          : "h-auto w-full rounded-lg"}
-        sizes={`${MEDIA_QUERIES.belowSm} 100vw, 672px`}
-        decoding="async"
-        loading="lazy"
-        unoptimized
-        onError={() => {
-          if (mobileSrc) setMobileFailed(true);
-        }}
-      />
-    </picture>
+    <>
+      <picture className={darkSrc ? "block dark:hidden" : "block"}>
+        {mobileSrc && <source media={MEDIA_QUERIES.belowSm} srcSet={mobileSrc} />}
+        <Image
+          src={src}
+          className="h-auto w-full rounded-lg"
+          {...imageProps}
+          onError={() => {
+            if (mobileSrc) setMobileFailed(true);
+          }}
+        />
+      </picture>
+      {darkSrc && (
+        // display:none の間は lazy の画像を読まないので、明るい表示では暗い版を取りに行かない
+        <Image
+          src={darkSrc}
+          className="hidden h-auto w-full rounded-lg dark:block"
+          {...imageProps}
+          onError={() => setDarkFailed(true)}
+        />
+      )}
+    </>
   );
 }

@@ -8,7 +8,9 @@ import {
   rankingInputFromStats,
   rankingBarAxis,
 } from '@/lib/template-ranking-data';
-import { rankingRows, renderRankingBars } from '@/lib/template-ranking-bars';
+import { RANKING_BAR_PLOT, rankingRows, renderRankingBars } from '@/lib/template-ranking-bars';
+
+const PLOT = RANKING_BAR_PLOT.right - RANKING_BAR_PLOT.left;
 import { resolveStatisticalSamples } from '@/lib/server/template-statistical-samples';
 import { buildRankingItemFromMetric } from '../../../../packages/ranking/src/builders/build-ranking-item-from-metric';
 import { parseRankingItemSnapshot } from '../../../../packages/ranking/src/repositories/schemas/ranking-item.schemas';
@@ -139,13 +141,13 @@ describe('shared ranking/image presentation contract', () => {
           image
         )?.[1]
       );
-    expect(firstWidth(svg)).toBeCloseTo((536 * 36) / 37);
+    expect(firstWidth(svg)).toBeCloseTo((PLOT * 36) / 37);
     expect(svg).toContain('data-domain-max="37"');
     const expanded = renderRankingBars(input, {
       ...policy,
       barDomain: { mode: 'fixed', min: -10, max: 50 },
     });
-    expect(firstWidth(expanded)).toBeCloseTo((536 * 36) / 60);
+    expect(firstWidth(expanded)).toBeCloseTo((PLOT * 36) / 60);
     expect(expanded).toContain('data-domain-max="50"');
     expect(expanded).toContain('data-domain-min="-10"');
     expect(() =>
@@ -158,7 +160,7 @@ describe('shared ranking/image presentation contract', () => {
       ...policy,
       barDomain: { mode: 'fixed', min: 30, max: 37 },
     });
-    expect(firstWidth(cropped)).toBeCloseTo((536 * 6) / 7);
+    expect(firstWidth(cropped)).toBeCloseTo((PLOT * 6) / 7);
     expect(cropped).toContain('範囲：30.0–37.0');
     expect(RANKING_SAMPLE_METRIC.visualization.barDomain).toEqual({
       mode: 'extent',

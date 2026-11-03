@@ -50,6 +50,7 @@ import {
   lintScatterParity,
   lintScatterQuality,
   lintTileGridQuality,
+  lintDarkPair,
 } from '../lib/svg-lint.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -497,6 +498,10 @@ for (const base of svgRefs) {
     : null;
   const result = lintResponsiveBarPair(`${base}.svg`, desktopSvg, mobileSvg);
   responsiveChartErrors.push(...result.errors);
+  // 型の画像 (ランキング・地図) は暗い表示用の -dark.svg と 1 組
+  const darkPath = path.join(dataDir, `${base}-dark.svg`);
+  const darkSvg = fs.existsSync(darkPath) ? fs.readFileSync(darkPath, 'utf8') : null;
+  responsiveChartErrors.push(...lintDarkPair(`${base}.svg`, desktopSvg, darkSvg).errors);
 }
 checks.responsiveChartErrors = responsiveChartErrors.length;
 if (responsiveChartErrors.length > 0) {

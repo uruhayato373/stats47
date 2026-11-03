@@ -5,6 +5,7 @@ import { renderAll47TileSvg } from '../../../remotion/src/features/data-cards/al
 import { resolveTileScale } from '../../../remotion/src/features/data-cards/tile-scale';
 import { resolveChoroplethScale } from '../../../../packages/visualization/src/server';
 import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
+import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 const names = ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'];
 // Synthetic values test code-to-prefecture mapping; live data stays in the SHA-verified R2 snapshot.
 const fixture = () => ({
@@ -71,5 +72,14 @@ describe('compact tile-map basic form (4:5 images)', () => {
     const png = await sharp(Buffer.from(svg)).png().toBuffer();
     expect(await sharp(png).metadata()).toMatchObject({ width: 1080, height: 1350, format: 'png' });
     await expect(renderRankingTileMap({ ...input, data: input.data.slice(0, 46) })).rejects.toThrow();
+  });
+  it('draws the dark theme with the same tiles, outlined tiles and swatches on grey paper', async () => {
+    const input = fixture();
+    const light = await renderRankingTileMap(input), dark = await renderRankingTileMap(input, CHART_THEMES.dark);
+    const fills = (svg: string) => [...svg.matchAll(/data-area="(\d+)" data-value="[^"]+"><rect [^>]*fill="([^"]+)"/g)].map((m) => m[1] + m[2]);
+    expect(fills(dark)).toEqual(fills(light));
+    expect(dark.match(new RegExp(`stroke="${CHART_THEMES.dark.outline}"`, 'g'))!.length).toBeGreaterThanOrEqual(47 + 5);
+    expect(dark).toContain(`<rect width="1080" height="1350" fill="${CHART_THEMES.dark.paper}"/>`);
+    expect(light).not.toContain('stroke=');
   });
 });

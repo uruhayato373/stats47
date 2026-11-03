@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isResponsiveRankingChart, resolveMobileChartSource } from "./responsive-chart";
+import { isResponsiveRankingChart, resolveDarkChartSource, resolveMobileChartSource } from "./responsive-chart";
 
 describe("resolveMobileChartSource", () => {
   it("maps canonical ranking SVGs to their mobile editorial variant", () => {
@@ -28,9 +28,25 @@ describe("resolveMobileChartSource", () => {
     expect(resolveMobileChartSource("data/industry-composition-mobile.svg")).toBeNull();
   });
 
-  it("treats only ranking cards as fixed 2:3 portraits", () => {
+  it("treats only ranking cards as ranking charts", () => {
     expect(isResponsiveRankingChart("data/golf-ranking.svg")).toBe(true);
     expect(isResponsiveRankingChart("data/tax-breakdown.svg")).toBe(false);
     expect(isResponsiveRankingChart("data/golf-ranking-mobile.svg")).toBe(false);
+  });
+});
+
+describe("resolveDarkChartSource", () => {
+  it("maps ranking and map SVGs to their dark variant", () => {
+    expect(resolveDarkChartSource("data/golf-ranking.svg")).toBe("data/golf-ranking-dark.svg");
+    expect(resolveDarkChartSource("data/sales-prefecture-rankings.svg?v=2")).toBe("data/sales-prefecture-rankings-dark.svg?v=2");
+    expect(resolveDarkChartSource("data/sales-map.svg")).toBe("data/sales-map-dark.svg");
+    expect(resolveDarkChartSource("data/sales-tile-grid.svg")).toBe("data/sales-tile-grid-dark.svg");
+  });
+
+  it("leaves other charts and variants alone", () => {
+    expect(resolveDarkChartSource("data/x-scatter.svg")).toBeNull();
+    expect(resolveDarkChartSource("data/tax-breakdown.svg")).toBeNull();
+    expect(resolveDarkChartSource("data/golf-ranking-dark.svg")).toBeNull();
+    expect(resolveDarkChartSource("data/golf-ranking-mobile.svg")).toBeNull();
   });
 });

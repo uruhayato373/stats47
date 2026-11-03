@@ -59,6 +59,11 @@ import {
 } from '../../../packages/svg-builder/src/charts/index.ts';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { metricHueOf, toShortColorScheme } from '../../../packages/types/src/color-scheme';
+// The shared 4:5 image types (bars / tile map), light and dark, same as note・X・Instagram.
+import { renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking-bars';
+import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
+import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
+import { rankingChartFromArticleData } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -793,7 +798,7 @@ function writeChartSourceIfMissing(
  * the metric's authored scheme: maps shade with the scheme, bars use its single hue. A colour set in
  * the data json (scheme / palette) still wins; charts without a metric keep the generator defaults.
  */
-function metricVisualizationOf(baseName: string, parsed: unknown) {
+function metricConfigOf(baseName: string, parsed: unknown) {
   const p = (parsed && !Array.isArray(parsed) ? parsed : {}) as Record<string, unknown>;
   let key = (p.rankingKey ?? (p.rankings as Record<string, unknown> | undefined)?.rankingKey) as string | undefined;
   const manifestPath = path.join(DATA_DIR, `${baseName}.source.json`);
@@ -801,7 +806,39 @@ function metricVisualizationOf(baseName: string, parsed: unknown) {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
     key = (manifest.kind === 'ranking' ? manifest.rankingKey : manifest.kind === 'metric' ? manifest.metricKey : undefined) as string | undefined;
   }
-  return key ? getMetricConfig(key)?.visualization : undefined;
+  return key ? getMetricConfig(key) : undefined;
+}
+function metricVisualizationOf(baseName: string, parsed: unknown) {
+  return metricConfigOf(baseName, parsed)?.visualization;
+}
+
+/**
+ * Ranking bars and tile maps with all 47 prefectures are drawn as the shared image types: `<name>.svg`
+ * (light) and `<name>-dark.svg` (shown on the site's dark theme). The ranking's `-mobile.svg` and
+ * `-ig.svg` are the same 4:5 image, so the article's mobile switch and Instagram keep their file names.
+ * Returns null when the data cannot give the types (not all 47), and the svg-builder chart is used.
+ */
+function writeTypeChart(baseName: string, type: string, parsed: unknown, provenance: string): string | null {
+  if (type !== 'bar' && type !== 'tile-grid') return null;
+  const chart = rankingChartFromArticleData(parsed, {
+    metric: metricConfigOf(baseName, parsed),
+    prefCodeOf,
+    prefNameOf: (code) => prefNameOf(code),
+  });
+  if ('skip' in chart) {
+    warn(`${baseName}: 型の画像にしない (${chart.skip})。svg-builder の図を使う`);
+    return null;
+  }
+  const render = type === 'bar' ? renderRankingBarsChart : renderTileMapChart;
+  const light = render(chart, CHART_THEMES.light), dark = render(chart, CHART_THEMES.dark);
+  const write = (suffix: string, svg: string) => fs.writeFileSync(path.join(DATA_DIR, `${baseName}${suffix}.svg`), provenance + svg, 'utf8');
+  write('-dark', dark);
+  if (type === 'bar') {
+    write('-mobile', light);
+    write('-ig', light);
+  }
+  log(`  [gen] ${baseName}-dark.svg${type === 'bar' ? ' / -mobile.svg / -ig.svg' : ''}  (型の画像 4:5)`);
+  return light;
 }
 function withMetricColors(parsed: any, type: string, visualization: ReturnType<typeof metricVisualizationOf>) {
   if (!visualization) return parsed;
@@ -824,7 +861,11 @@ for (const { file, type, parsed } of jsonMeta) {
   const svgPath = path.join(DATA_DIR, `${baseName}.svg`);
   let svg;
   const colored = withMetricColors(parsed, type ?? "", metricVisualizationOf(baseName, parsed));
-  if (type === 'bar') {
+  const provenance = buildProvenanceLine(file, new Date());
+  const typeSvg = type ? writeTypeChart(baseName, type, parsed, provenance) : null;
+  if (typeSvg) {
+    svg = typeSvg;
+  } else if (type === 'bar') {
     svg = genBarChartSvg(colored);
   } else if (type === 'tile-grid') {
     svg = genTileGridMapSvg(colored);
@@ -857,7 +898,6 @@ for (const { file, type, parsed } of jsonMeta) {
   // chart 系のチェッカーは「provenance 付き SVG = generator 経由で data から作られた」と信頼可能。
   // 相関 scatter 等 file 名に "--" を含むものは buildProvenanceLine が XML 安全化する
   // (生 "--" を XML コメントに入れると <img> 描画で broken image になる)。
-  const provenance = buildProvenanceLine(file, new Date());
   fs.writeFileSync(svgPath, provenance + svg, 'utf8');
   // 徹底ルール (§1.7): SVG を書いたら必ず source.json もセット出力 (1画像=1設定ファイル)。
   writeChartSourceIfMissing(
@@ -873,7 +913,7 @@ for (const { file, type, parsed } of jsonMeta) {
   // - <name>.svg: PC / X 用の横長 columns
   // - <name>-mobile.svg: ブログ mobile / note 本文用の可読性優先レイアウト
   // - <name>-ig.svg: Instagram 専用 4:5。記事 markdown には埋め込まない
-  if (type === 'bar') {
+  if (type === 'bar' && !typeSvg) {
     const mobileSvg = genBarChartSvg(parsed, 'mobile');
     fs.writeFileSync(
       path.join(DATA_DIR, `${baseName}-mobile.svg`),

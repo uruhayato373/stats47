@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderDistributionMap } from '@/lib/template-distribution-map';
+import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
 
 // Synthetic values check code-to-shape colouring; live data stays in the SHA-verified R2 snapshot.
@@ -48,5 +49,13 @@ describe('geographic distribution map basic form', () => {
     const png = await sharp(Buffer.from(svg)).png().toBuffer();
     expect(await sharp(png).metadata()).toMatchObject({ width: 1080, height: 1350, format: 'png' });
     await expect(renderDistributionMap({ ...input, data: input.data.slice(0, 46) })).rejects.toThrow();
+  });
+  it('draws the dark theme with light grey prefecture borders on grey paper, same fills', async () => {
+    const light = await renderDistributionMap(fixture()), dark = await renderDistributionMap(fixture(), CHART_THEMES.dark);
+    const fills = (svg: string) => [...svg.matchAll(/data-pref="(\d+)" data-value="[^"]+" d="[^"]+" fill="([^"]+)"/g)].map((m) => m[1] + m[2]);
+    expect(fills(dark)).toEqual(fills(light));
+    expect(dark).toContain(`stroke="${CHART_THEMES.dark.mapBorder}" stroke-width="1.6"`);
+    expect(dark).not.toContain('stroke="#FFFFFF"');
+    expect(dark).toContain(`fill="${CHART_THEMES.dark.paper}"`);
   });
 });

@@ -14,6 +14,26 @@ paths:
 > **背景**: 記事ごとにインライン生成スクリプトが散在し、色・スタイル・ファイル命名が統一されていなかった（2026-06整理）。
 > `chart-author` agent が管理するカタログが唯一の参照源。
 
+## 0. ランキングと地図は共通の型の画像 (2026-11-03 オーナー決定)
+
+**47 都道府県がそろうランキング棒 (`*-ranking.json` 系) とタイルマップ (`*-map.json` 系) は、svg-builder ではなく
+note・X・Instagram と同じ 4:5 の型の画像で描く。** 下の §2〜§6 のうち bar / tile-grid の寸法・配色・透過背景の
+規定は、型にできなかった図 (47 県がそろわない・指標名か年が無い) にだけ適用する。
+
+| 項目 | 型の画像の契約 |
+|---|---|
+| 描画 | `apps/admin/lib/template-ranking-bars.ts` (`renderRankingBarsChart`) / `template-ranking-tile-map.ts` (`renderTileMapChart`)。入力は `RankingChart` (`.claude/scripts/blog/lib/type-chart-input.ts` が記事の data JSON と指標定義から作る) |
+| 寸法 | 1080×1350 (4:5)。PC もスマホも同じ画像。`-mobile.svg` と `-ig.svg` は明るい版と同じ中身 (記事の切り替えと Instagram のファイル名を保つため) |
+| 棒グラフの形 | 上位5県・下位5県のカード。色の帯の見出し・丸い順位・1行おきの色・名前の下の細い棒・右の値と単位。色は指標の色 1 色 (`resolveMetricColor`)、下位は同じ色の薄い版 |
+| 地図の形 | 管理画面のタイルマップの型。左上に上位3県、右下に区分ごとの凡例 (色・範囲・県の数)。区分は指標の `classification` |
+| 暗い表示 | `<name>-dark.svg` を必ず 1 組で出す。地色 #262626、県境・タイル・凡例の色見本・棒の行に #8A8A8A の線。色の組は `apps/remotion/src/features/data-cards/chart-theme.ts` (`CHART_THEMES`) が正典 |
+| 切り替え | サイトの暗い表示は class 方式で `<img>` の中から見えないので、記事の画像部品 (`ResponsiveArticleImage`) が 2 枚を置いて CSS (`dark:`) で切り替える。`-dark.svg` が無ければ明るい版に戻る |
+| 印 | root `<svg>` に `data-image-template` (bar / tile-map) と `data-theme` (light / dark) |
+| 検査 | `lintImageTypeSvg` (1080×1350・data-theme) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査は型の画像を対象外にする |
+| 年 | data JSON の `subtitle` が「2022年度」なら年度で、そうでなければ `year` に「年」を付けて出す |
+
+型の画像の見た目を変えるときは、管理画面の型 (`/ops/image-templates`) で見本を確かめてから変える。ブログ専用の版を作らない。
+
 ---
 
 ## 1. アーキテクチャ概要（2層構造）

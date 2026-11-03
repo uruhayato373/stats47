@@ -86,8 +86,9 @@ describe('representative statistics for image template basics', () => {
     expect(html).not.toContain('地域A');
   });
   it('keeps missing images explicit without filling them with fictional data', () => {
+    // A topic-based household sample: its images come from the article, never drawn here.
     const definition = STATISTICAL_SAMPLES.find(
-      (s) => s.templateId === 'radar'
+      (s) => s.id === 'household-nagoya'
     )!;
     const html = renderToStaticMarkup(
       createElement(TemplateStatisticalPreview, {

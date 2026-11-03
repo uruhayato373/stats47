@@ -62,9 +62,11 @@ export function lintSvgContent(content, filename) {
   const errors = [];
   const warnings = [];
   const c = content.trim();
+  // Tile maps are theme-independent; the shared image types carry their own light/dark pair.
   const isThemeIndependent =
-    filename !== undefined &&
-    classifyChartTypeFromName(filename) === 'tile-grid';
+    imageTemplateOf(c) !== null ||
+    (filename !== undefined &&
+      classifyChartTypeFromName(filename) === 'tile-grid');
   // 先頭の HTML コメント (svg-builder/CLI が付与する <!-- data-source... --> provenance) を
   // 除いた本体で開始タグを判定する。
   const body = c.replace(/^(?:<!--[\s\S]*?-->\s*)+/, '');
@@ -183,6 +185,46 @@ const SIZE_ENFORCED = new Set([
   'stacked-bar',
 ]);
 
+// ---------- 共通の型の画像 (2026-11-03) ----------
+// ランキングと47県地図は、note・X・Instagram と同じ 4:5 の型の画像 (apps/admin/lib/template-*.ts) で描く。
+// 生成器が root <svg> に data-image-template と data-theme を付け、明るい版 <name>.svg と
+// 暗い版 <name>-dark.svg を 1 組で出す。旧 svg-builder の寸法・透過背景の不変量はこの画像には当てはめない。
+export const IMAGE_TYPE_CANVAS = { w: 1080, h: 1350 };
+
+/** 型の画像なら型 id (bar / tile-map / choropleth)、そうでなければ null。 */
+export function imageTemplateOf(svg) {
+  return /<svg[^>]*data-image-template="([^"]+)"/.exec(String(svg))?.[1] ?? null;
+}
+const imageThemeOf = (svg) => /<svg[^>]*data-theme="([^"]+)"/.exec(String(svg))?.[1] ?? null;
+
+/** 型の画像のキャンバスとテーマの印。 */
+export function lintImageTypeSvg(filename, svg) {
+  const errors = [];
+  const vb = String(svg).match(/viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
+  const w = vb ? Math.round(parseFloat(vb[1])) : null, h = vb ? Math.round(parseFloat(vb[2])) : null;
+  if (w !== IMAGE_TYPE_CANVAS.w || h !== IMAGE_TYPE_CANVAS.h)
+    errors.push(`型の画像のキャンバスが ${w}×${h} — 正規は ${IMAGE_TYPE_CANVAS.w}×${IMAGE_TYPE_CANVAS.h} (${path_base(filename)})`);
+  if (!['light', 'dark'].includes(imageThemeOf(svg) ?? ''))
+    errors.push(`型の画像に data-theme (light/dark) が無い (${path_base(filename)})`);
+  return { errors, warnings: [] };
+}
+
+/**
+ * 型の画像の明るい版には、同じ型の暗い版 <name>-dark.svg が要る。サイトの暗い表示は class 方式で
+ * <img> の中の SVG から見えないため、記事の画像部品が 2 枚を CSS で切り替える (ResponsiveArticleImage)。
+ */
+export function lintDarkPair(filename, lightSvg, darkSvg) {
+  const errors = [];
+  const template = imageTemplateOf(lightSvg);
+  if (!template || /-dark\.svg$/i.test(filename)) return { errors, warnings: [] };
+  const darkName = path_base(filename).replace(/\.svg$/i, '-dark.svg');
+  if (typeof darkSvg !== 'string' || darkSvg.length === 0)
+    errors.push(`暗い表示用の SVG が無い: ${darkName}。generate-article-charts で明るい版と一緒に作り直す`);
+  else if (imageTemplateOf(darkSvg) !== template || imageThemeOf(darkSvg) !== 'dark')
+    errors.push(`${darkName} が ${template} の暗い版になっていない (data-image-template / data-theme を確認)`);
+  return { errors, warnings: [] };
+}
+
 /** SVG ファイル名 → chartType (generate-article-charts の classifyChartType と同等の suffix 判定) */
 export function classifyChartTypeFromName(filename) {
   const f = String(filename)
@@ -255,6 +297,7 @@ export function lintResponsiveBarPair(filename, desktopContent, mobileContent) {
  * @returns {{ errors: string[], warnings: string[] }}
  */
 export function lintSvgSize(filename, content) {
+  if (imageTemplateOf(content)) return lintImageTypeSvg(filename, content);
   const errors = [];
   const warnings = [];
   const ct = classifyChartTypeFromName(filename);
@@ -606,6 +649,8 @@ function svgPlainText(svgContent) {
 export function lintChoroplethLegend(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
+  // 型の画像は凡例を区分ごとの一覧 (色・範囲・県の数) で描く。意味的ラベルを焼かない。
+  if (imageTemplateOf(svgContent)) return { errors, warnings };
   const ct =
     jsonData?.chartType === 'tile-grid'
       ? 'tile-grid'
@@ -664,6 +709,8 @@ export const TILE_GRID_CANVAS = { w: 720, h: 720 };
 export function lintTileGridQuality(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
+  // 型の画像は 720×720・透過の旧タイルマップとは別の契約 (lintImageTypeSvg / lintDarkPair)。
+  if (imageTemplateOf(svgContent)) return { errors, warnings };
   const ct =
     jsonData?.chartType === 'tile-grid'
       ? 'tile-grid'

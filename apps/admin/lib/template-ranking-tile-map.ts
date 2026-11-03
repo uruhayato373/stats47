@@ -1,28 +1,25 @@
 import { renderAll47TileSvg } from '../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
+import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { rankingRows } from './template-ranking-bars';
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
+import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
 
 export const RANKING_TILE_MAP_SAMPLE_ID = 'maximum-temperature-tile-map';
+
+export async function renderRankingTileMap(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
+  return renderTileMapChart(sampleRankingChart({ data: rankingRows(raw) }), theme);
+}
 
 /**
  * 4:5 images use one tile renderer (all47-svg.ts) and one colour resolver (tile-scale.ts), shared
  * with the X/Threads card and the Instagram map carousel.
  */
-export async function renderRankingTileMap(raw: unknown) {
-  const rows = rankingRows(raw);
-  const label = rankingSampleLabels();
-  const scale = resolveTileScale(RANKING_SAMPLE_METRIC.visualization, rows.map((row) => row.value), RANKING_SAMPLE_METRIC.display);
+export function renderTileMapChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
+  const rows = assertRankingRows(chart.rows);
+  const scale = resolveTileScale(chart.presentation, rows.map((row) => row.value), chart.display);
   if (!scale) throw Error('タイルマップの配色を解決できません。');
   return renderAll47TileSvg(
     rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value })),
-    {
-      title: RANKING_SAMPLE_METRIC.title,
-      year: `${RANKING_SAMPLE_YEAR}年`,
-      unit: label.unit,
-      source: label.source,
-      note: label.subtitle || undefined,
-      scale,
-    }
+    { title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, theme }
   );
 }

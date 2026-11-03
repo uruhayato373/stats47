@@ -7,6 +7,8 @@ import {
   type MetricPresentation,
 } from '../../../packages/types/src/metric-presentation';
 import { niceTicks } from '../../../packages/svg-builder/src/shared/axis';
+import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
+import type { TileValueDisplay } from '../../remotion/src/features/data-cards/tile-scale';
 
 /** A fixed real-data example; article associations are managed as usage, not input. */
 export const RANKING_SAMPLE_METRIC = maximumTemperature;
@@ -62,4 +64,51 @@ export function rankingBarAxis(values: number[], presentation: MetricPresentatio
   const ticks = [min, ...niceTicks(min, max, 4).filter((value) => value > min + gap && value < max - gap), max];
   const baseline = Math.max(min, Math.min(max, 0));
   return { min, max, ticks, policy, baseline, truncated: baseline !== 0 };
+}
+
+/** One prefecture of a complete ranking: value as stored (before display conversion). */
+export interface RankingChartRow { rank: number; area_code: string; area_name: string; value: number }
+/**
+ * Everything a ranking type (bars, tile map, real-shape map) draws: the metric's labels and colour
+ * policy plus all 47 prefectures. Built from the fixed sample here and from article data for the blog.
+ */
+export interface RankingChart {
+  /** Metric name without 「ランキング」. */
+  title: string;
+  /** As shown, e.g. 「2024年」「2022年度」. */
+  yearLabel: string;
+  unit: string;
+  source: string;
+  note?: string;
+  presentation: MetricPresentation;
+  display?: TileValueDisplay;
+  rows: RankingChartRow[];
+  formatValue: (value: number) => string;
+}
+
+/** 47 prefectures, each once, ranks consistent with values (ties share a rank); sorted by rank. */
+export function assertRankingRows(rows: RankingChartRow[]) {
+  const sorted = [...rows].sort((a, b) => a.rank - b.rank || b.value - a.value);
+  const codes = new Set(rows.map((r) => r.area_code));
+  if (rows.length !== 47 || codes.size !== 47 ||
+      rows.some((r) => !/^\d{2}000$/.test(r.area_code) || Number(r.area_code.slice(0, 2)) < 1 || Number(r.area_code.slice(0, 2)) > 47 || !Number.isFinite(r.value)) ||
+      sorted.some((r, i) => r.rank !== sorted.findIndex((other) => other.value === r.value) + 1 || (i > 0 && r.value > sorted[i - 1].value)))
+    throw new Error('47都道府県の順位と値の順序を確認してください。');
+  return sorted;
+}
+
+/** Dataset-precision formatter (33 and 33.8 read 33.0 and 33.8) for charts without a display policy. */
+export function datasetFormatter(values: number[]) {
+  const precision = resolveValuePrecision(values);
+  return (value: number) => formatValueWithPrecision(value, precision);
+}
+
+/** The fixed real-data sample as a chart, optionally with another bar/colour policy. */
+export function sampleRankingChart(raw: { data: RankingChartRow[] }, presentation: MetricPresentation = RANKING_SAMPLE_METRIC.visualization): RankingChart {
+  const label = rankingSampleLabels();
+  return {
+    title: RANKING_SAMPLE_METRIC.title, yearLabel: `${RANKING_SAMPLE_YEAR}年`, unit: label.unit, source: label.source,
+    note: label.subtitle || undefined, presentation, display: RANKING_SAMPLE_METRIC.display,
+    rows: assertRankingRows(raw.data), formatValue: label.formatValue,
+  };
 }
