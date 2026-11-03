@@ -101,7 +101,7 @@ tags: []
   - ランキングページに 1 行の案内を置き、EXP-007 を running にする [S] — `MUNI-DATA-PRODUCT-SALE-01` (→ W48)
   - 製造品出荷額の 2 指標が R2 で同じ値になっている件を正す [S] — `MUNI-DATA-DEDUP-01` (→ W46。商品の出典の表 ID を確定させるため)
 - **依存・ブロッカー**: note の有料記事の公開と価格はオーナーの承認。e-Stat API で空の値の記号を取り直すには appId が要る。note の売上の計測 (`AUTH-CREDENTIAL-REGISTER-01`) が戻らないと、販売数を判定できない。
-- **真実源リンク**: `backlog.md#MUNI-DATA-PRODUCT-BUILD-01`、`backlog.md#MUNI-DATA-PRODUCT-SALE-01`、`backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`backlog.md#MUNI-DATA-DEDUP-01`
+- **真実源リンク**: `backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`backlog.md#MUNI-DATA-PRODUCT-SALE-01`、`backlog.md#MUNI-DATA-PRODUCT-PILOT-01`、`backlog.md#MUNI-DATA-DEDUP-01`
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
