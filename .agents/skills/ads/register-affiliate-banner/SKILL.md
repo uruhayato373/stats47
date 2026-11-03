@@ -115,6 +115,9 @@ npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-a
 ### Step 6: 反映 (ユーザー判断)
 commit → **develop への push で `publish-affiliate-ads.yml` が自動発火** (workflow_dispatch ではない)。
 outward-facing なので push はユーザーに確認。反映後、対象 vertical のページ (ranking/theme/blog) で表示を目視。
+意図の決まらないページ・調査ハブ・テーマ・トップで使う共通の案件 (`features/ads/constants/generic-affiliate.ts` の
+`GENERIC_HIGH_VALUE_PROGRAM_REFS`) に足すかは、収益化戦略 §3.2 の「共通」(対象者が広く、気軽に始められる) で決める。
+足すと本文の広告の段 (`AdRow`) の PR の枠に入る。
 → 次の `propose` へループ。
 
 ---

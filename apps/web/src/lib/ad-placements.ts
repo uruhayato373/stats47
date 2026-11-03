@@ -26,6 +26,8 @@ export interface AdSlotType {
   box: AdSlotBox;
   /** この枠を描く部品の名前 */
   component: string;
+  /** 表示する画面幅 */
+  devices: ReadonlyArray<'desktop' | 'mobile'>;
 }
 
 export interface AdPagePlacement {
