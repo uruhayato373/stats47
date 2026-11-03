@@ -115,9 +115,11 @@ jobs:
           echo "対象 slug 数: $(echo "$SLUGS" | wc -w)"
 
       - name: 🎨 Regenerate SVGs via svg-builder
+        id: regen
         if: ${{ github.event.inputs.mode == 'all' }}
         run: |
           : > .local/generated-blog-svg-keys.txt
+          : > .local/regen-failed-slugs.txt
           OK=0; SKIP=0; FAIL=0
           for SLUG in ${{ steps.targets.outputs.list }}; do
             DIR=".local/r2/app/blog/$SLUG/data"
@@ -132,6 +134,7 @@ jobs:
                 | sed 's#^\.local/r2/##' >> .local/generated-blog-svg-keys.txt
             else
               FAIL=$((FAIL+1)); echo "  ⚠️ regen failed: $SLUG"
+              echo "$SLUG" >> .local/regen-failed-slugs.txt
               tail -n 30 ".local/regen-$SLUG.log"
               ls -la "$DIR"
             fi
@@ -139,9 +142,11 @@ jobs:
           sort -u -o .local/generated-blog-svg-keys.txt .local/generated-blog-svg-keys.txt
           echo "再生成: ok=$OK skip=$SKIP(no json) fail=$FAIL"
           echo "exact publish候補: $(wc -l < .local/generated-blog-svg-keys.txt)"
+          # 失敗した記事は R2 の今の図のまま残し、ほかの記事のギャラリーと反映は続ける。
+          # 最後の step で失敗として止める (2026-11-03: 出典の無い散布図を持つ 3 記事で 763 記事の確認まで止まっていた)
+          echo "failed=$FAIL" >> "$GITHUB_OUTPUT"
           if [ "$FAIL" -gt 0 ]; then
-            echo "::error::SVG再生成に${FAIL}件失敗しました"
-            exit 1
+            echo "::warning::SVG再生成に${FAIL}件失敗しました (その記事の図は今の公開版のまま)"
           fi
 
       - name: ⬜ Regenerate canonical scatter catalog
@@ -311,3 +316,12 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
             echo "- ⚠️ dry-run のため R2 へは push していません" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -s .local/regen-failed-slugs.txt ]; then
+            echo "- ❌ 描き直せなかった記事 (今の図のまま): $(paste -sd' ' .local/regen-failed-slugs.txt)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: ❌ Fail if any article could not be regenerated
+        if: ${{ steps.regen.outputs.failed != '' && steps.regen.outputs.failed != '0' }}
+        run: |
+          echo "::error::SVG再生成に${{ steps.regen.outputs.failed }}件失敗しました: $(paste -sd' ' .local/regen-failed-slugs.txt)"
+          exit 1
