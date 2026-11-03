@@ -196,6 +196,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GEO-STAT-BOX-STATTILE-01] Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npm run design-system:check -w apps/web] [起票:2026-11-03] [領域:サイト]
+
+2026-11-03 の表の棚卸しで見つかった。`apps/web/src/features/geo-analysis/components/GeoSpatialEvidenceExplorer.tsx` (393 行付近の SurfaceCard の手組み) と
+`apps/web/src/app/geo/data/[analysisSlug]/[prefCode]/page.tsx` (176 行付近の `dl` の `border p-3`) が、1 つの値を大きく見せる箱を自前で組んでいる。
+規約 (ui-components.md「大きな数値は StatTile か STAT_VALUE_CLASS」) から外れている。
+次: 2 か所を StatTile + StatTileGrid に置き換え、値・単位・補足の並びを数値タイルの台帳 (stat-tile) にそろえる。
+完了条件: 2 か所に手組みの数値の箱が残らず、Geo の該当ページを localhost で見て値が同じ。geo-analysis の vitest が通る。
+
 ### [THEME-R2-FETCH-FANOUT-01] 指標の多いテーマの読み込みで R2 の取得がときどき落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:サイト]
 
